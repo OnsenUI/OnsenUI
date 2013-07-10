@@ -12,5 +12,7 @@ angular.module('myApp.controllers', []).
 
  function Ctrl3($scope) {
  	 $scope.title = 'Lorem Ipsum';
+ 	 $scope.source = 'original.html';
   	$scope.text = 'Neque porro quisquam est qui dolorem ipsum quia dolor...';
 }
+

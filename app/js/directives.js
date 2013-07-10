@@ -47,32 +47,37 @@ directive('appVersion', ['version',
 	return {
 		restrict: 'E',
 		// This HTML will replace the zippy directive.
-		replace: true,
+		replace: false,
 		transclude: true,
-		scope: {
-			title: '@navigationTitle'
-		},
+		
 		templateUrl: 'templates/navigation.html',
 		// The linking function will add behavior to the template
 		link: function(scope, element, attrs) {
 			// Title element
+			var childSources = [];
 			var title = angular.element(element.children()[0]),
 				// Opened / closed state
 				opened = true;
 
+				scope.$watch(attrs.childSource, function(value) {			        
+			        childSources.push(value);
+			        console.log('sources,', childSources);
+			    });
+
+
 			// Clicking on title should open/close the zippy
-			title.bind('click', toggle);
+			// title.bind('click', toggle);
 
-			// Toggle the closed/opened state
+			// // Toggle the closed/opened state
 
-			function toggle() {
-				opened = !opened;
-				element.removeClass(opened ? 'closed' : 'opened');
-				element.addClass(opened ? 'opened' : 'closed');
-			}
+			// function toggle() {
+			// 	opened = !opened;
+			// 	element.removeClass(opened ? 'closed' : 'opened');
+			// 	element.addClass(opened ? 'opened' : 'closed');
+			// }
 
-			// initialize the zippy
-			toggle();
+			// // initialize the zippy
+			// toggle();
 		}
 	}
 });

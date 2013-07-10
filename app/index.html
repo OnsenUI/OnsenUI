@@ -14,30 +14,16 @@
   <link rel="stylesheet" href="css/main.css">     
         
 </head>
-<body>
+<body>    
 
+<div ng-controller="Ctrl3">
+  <ul style="position: absolute; z-index: 100;">
+    <input type="text" name="input" ng-model="source">
+    <li>{{source}}</li>
+  </ul>
+  <monaca-navigation child-source="source"></monaca-navigation>
 
-<div id="navigation" class="topcoat-navigation-bar">
-    <div class="topcoat-navigation-bar__item left quarter">
-        <span ng-click="subPage='partials/subpage2.htm'" id="left-button" class="topcoat-icon-button--quiet">
-          <span id="left-button-icon" class="topcoat-icon topcoat-icon--back"></span>
-        </span>
-    </div> 
-    <div id="center" class="topcoat-navigation-bar__item center half">
-        <span ng-click="subPage='partials/subpage3.htm'" id="title" class="topcoat-navigation-bar__title">Talks</span>        
-    </div> 
-    <div class="topcoat-navigation-bar__item right quarter">
-        <span ng-click="subPage='partials/subpage2.htm'" id="right-button" class="topcoat-icon-button--quiet">
-          <span id="right-button-icon" class="topcoat-icon"></span>
-        </span>
-    </div>
-</div>        
-
-
-<ng-include id="content-region" class="content" src="subPage" ng-animate=" {enter: 'animate-enter', leave: 'animate-leave'} "></ng-include>
-
-
-
+</div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
@@ -47,7 +33,7 @@
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
-   <!-- <script src="js/directives.js"></script>
-  // <script src="js/navigation/directive.js"></script> -->
+   <script src="js/directives.js"></script>
+  <!-- // <script src="js/navigation/directive.js"></script> -->
 </body>
 </html>
