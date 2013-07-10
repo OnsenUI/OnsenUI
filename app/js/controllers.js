@@ -9,3 +9,8 @@ angular.module('myApp.controllers', []).
   .controller('MyCtrl2', [function() {
 
   }]);
+
+ function Ctrl3($scope) {
+ 	 $scope.title = 'Lorem Ipsum';
+  	$scope.text = 'Neque porro quisquam est qui dolorem ipsum quia dolor...';
+}

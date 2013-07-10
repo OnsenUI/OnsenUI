@@ -1,0 +1,125 @@
+.topcoat-icon--back {
+    background: url("../img/back.svg") no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}
+
+.topcoat-icon--cancel {
+    background: url("../img/cancel.svg") no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}
+
+.topcoat-icon--down {
+    background: url("../img/down.svg") no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}
+
+
+/*
+ 6.1 Structural - Well
+
+ Use this class to create a well that contains elements you want seperated from everything else.
+
+     <section class="dark-well">
+		<h2>Alex Trebek</h2>
+		<p>Watch "Jeopardy!", Alex Trebek's fun TV quiz game.</p>
+		<a href="#" class="dark-cta dark-button" role="button">Daily Double!</a>
+		<a href="#" class="dark-button" role="button">Unfriend</a>
+	</section>
+
+	<section class="light-well">
+		<h2>Alex Trebek</h2>
+		<p>Watch "Jeopardy!", Alex Trebek's fun TV quiz game.</p>
+		<a href="#" class="light-cta light-button" role="button">Daily Double!</a>
+		<a href="#" class="light-button" role="button">Unfriend</a>
+	</section>
+*/
+.dark-well,
+.light-well {
+	box-sizing: border-box;
+	overflow: hidden;
+	width: 100%;
+	padding: 15px;
+	margin-bottom: 10px;
+}
+
+	.dark-well h1,
+	.light-well h1 {
+		font-size: 1.5625rem;
+	}
+
+	.dark-well h1 {
+		color: #fff;
+	}
+
+	.light-well h1 {
+		color: #000;
+	}
+
+.dark-well {
+  	background-color: #404141;
+	color: #c6c8c8;
+}
+
+.light-well {
+	background-color: #fff;
+	color: #444;
+}
+
+.dark-container {
+  background-color: #3A3F42;
+  border-bottom: none;
+}
+
+.dark-list {
+  border-top: 1px solid #2f3234;
+  border-bottom: 1px solid #5e6061;
+  color: #c6c8c8;
+}
+  .dark-list > li {
+    /* Editable padding variable */
+    padding: 20px;
+    border-top: 1px solid #5e6061;
+    border-bottom: 1px solid #2f3234;
+  }
+
+
+/*
+  Topcoat loading spinner
+  ---------------------------------
+
+  div
+
+*/
+.topcoat-spinner {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  margin: 5px;
+  background: url("../img/spinner.png") no-repeat;
+  -webkit-animation: spinner 1s infinite linear;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2),only screen and (min-resolution: 192dpi) {
+  .spinner {
+    background: url("../img/spinner2x.png") no-repeat;
+    background-size: 36px;
+  }
+}
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+
+  50% {
+    -webkit-transform: rotate(180deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}

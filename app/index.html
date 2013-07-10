@@ -2,18 +2,42 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>My AngularJS App</title>
   <link rel="stylesheet" href="css/app.css"/>
+  <link rel="stylesheet" href="css/topcoat-mobile-light.css"> 
+  <link rel="stylesheet" href="css/topcoat-mobile-light-more.css"> 
+  <link rel="stylesheet" href="css/sliding_menu.css">   
+  <link rel="stylesheet" href="css/navigation_controller.css">
+  <link rel="stylesheet" href="css/page_slider.css">
+  <link rel="stylesheet" href="css/shake.css">        
+  <link rel="stylesheet" href="css/main.css">     
+        
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
 
-  <div ng-view></div>
 
-  <div>Angular seed app: v<span app-version></span></div>
+<div id="navigation" class="topcoat-navigation-bar">
+    <div class="topcoat-navigation-bar__item left quarter">
+        <span ng-click="subPage='partials/subpage2.htm'" id="left-button" class="topcoat-icon-button--quiet">
+          <span id="left-button-icon" class="topcoat-icon topcoat-icon--back"></span>
+        </span>
+    </div> 
+    <div id="center" class="topcoat-navigation-bar__item center half">
+        <span ng-click="subPage='partials/subpage3.htm'" id="title" class="topcoat-navigation-bar__title">Talks</span>        
+    </div> 
+    <div class="topcoat-navigation-bar__item right quarter">
+        <span ng-click="subPage='partials/subpage2.htm'" id="right-button" class="topcoat-icon-button--quiet">
+          <span id="right-button-icon" class="topcoat-icon"></span>
+        </span>
+    </div>
+</div>        
+
+
+<ng-include id="content-region" class="content" src="subPage" ng-animate=" {enter: 'animate-enter', leave: 'animate-leave'} "></ng-include>
+
+
+
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
@@ -23,6 +47,7 @@
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>
+   <!-- <script src="js/directives.js"></script>
+  // <script src="js/navigation/directive.js"></script> -->
 </body>
 </html>

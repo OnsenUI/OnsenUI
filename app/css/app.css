@@ -28,3 +28,67 @@
   content: "";
   padding: 0;
 }
+
+.zippy {
+  border: 1px solid black;
+  display: inline-block;
+  width: 250px;
+}
+.zippy.opened > .title:before { content: '▼ '; }
+.zippy.opened > .body { display: block; }
+.zippy.closed > .title:before { content: '► '; }
+.zippy.closed > .body { display: none; }
+.zippy > .title {
+  background-color: black;
+  color: white;
+  padding: .1em .3em;
+  cursor: pointer;
+}
+.zippy > .body {
+  padding: .1em .3em;
+}
+
+.red{
+  background-color: darkred;
+}
+
+.blue{
+  background-color: blue;
+}
+
+
+.animate-enter {
+  -webkit-transition: 0.25s; /* Chrome */
+  transition: 0.25s;
+  /*opacity: 0;*/
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+
+}
+ 
+.animate-enter.animate-enter-active {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  /*opacity: 1;*/
+}
+
+.animate-leave{
+  -webkit-transition: 0.25s; /* Chrome */
+  transition: 0.25s;
+  -webkit-transform: translate3d(0, 0, 0);  
+  /*opacity: 1;*/
+}
+
+.animate-leave.animate-leave-active{
+  -webkit-transform: translate3d(-100%, 0, 0);  
+  /*opacity: 1;*/
+}
+
+
+.closed {
+  background-color: gray;
+}
+
+.opened {
+  background-color: lightgray;
+}
