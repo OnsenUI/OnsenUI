@@ -27,6 +27,13 @@ directive('appVersion', ['version',
 				childSources.push(value);
 				console.log('sources,', childSources);
 			});
+
+			scope.leftButtonClicked = function(){
+				childSources.pop();
+				var previousSource = childSources.pop();
+				scope.source = previousSource;
+				console.log('back!');
+			}
 		}
 	}
 });
