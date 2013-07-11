@@ -3,14 +3,7 @@
 /* Directives */
 
 
-angular.module('myApp.directives', []).
-directive('appVersion', ['version',
-	function(version) {
-		return function(scope, elm, attrs) {
-			elm.text(version);
-		};
-	}
-])
+angular.module('myApp.directives', [])
 	.directive('monacaNavigation', function() {
 	return {
 		restrict: 'E',
@@ -27,14 +20,12 @@ directive('appVersion', ['version',
 				if(value){
 					childSources.push(value);					
 				}				
-				console.log('sources,', childSources);	
 			});
 
 			scope.leftButtonClicked = function(){
 				childSources.pop();
 				var previousSource = childSources.pop();
-				scope.source = previousSource;
-				console.log('back!');
+				scope.source = previousSource;				
 			}
 		}
 	}
