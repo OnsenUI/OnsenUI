@@ -24,8 +24,10 @@ directive('appVersion', ['version',
 			var childSources = [];
 			var title = angular.element(element.children()[0]);
 			scope.$watch(attrs.childSource, function(value) {
-				childSources.push(value);
-				console.log('sources,', childSources);
+				if(value){
+					childSources.push(value);					
+				}				
+				console.log('sources,', childSources);	
 			});
 
 			scope.leftButtonClicked = function(){
