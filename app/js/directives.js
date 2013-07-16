@@ -8,11 +8,9 @@ angular.module('myApp.directives', [])
 			replace: false,
 			transclude: true,
 			scope: {
-				childSource: '=childSource',
+				childSource: '@childSource',
 				title: '@title'
-			},
-			controller: function($scope) {                  
-        	},
+			},			
 			templateUrl: 'templates/navigation.html',
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
