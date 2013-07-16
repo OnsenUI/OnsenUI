@@ -16,9 +16,6 @@ angular.module('myApp.directives', [])
 			templateUrl: 'templates/navigation.html',
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
-				// setTimeout(function(){
-				// 	scope.source = '/app/1.htm';
-				// }, 2000);
 				var childSources = [];
 				var isBack = false;
 
@@ -78,7 +75,7 @@ angular.module('myApp.directives', [])
 					if(childSources.length < 2){
 						return;
 					}
-					
+
 					isBack = true;
 					count = 0;
 					childSources.pop();
