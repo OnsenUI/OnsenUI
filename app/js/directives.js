@@ -7,11 +7,18 @@ angular.module('myApp.directives', [])
 			restrict: 'E',
 			replace: false,
 			transclude: true,
-
+			scope: {
+				childSource: '=childSource',
+				title: '@title'
+			},
+			controller: function($scope) {                  
+        	},
 			templateUrl: 'templates/navigation.html',
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
-
+				// setTimeout(function(){
+				// 	scope.source = '/app/1.htm';
+				// }, 2000);
 				var childSources = [];
 				var isBack = false;
 
@@ -24,17 +31,19 @@ angular.module('myApp.directives', [])
 				// element[0].addEventListener('transitionend', transitionEndCallback, false);        // mozilla					
 
 				var title = angular.element(element.children()[0]);
-				scope.$watch(attrs.childSource, function(value) {
+				scope.$watch('childSource', function(value) {
 					if (value) {
+						console.log('pushing source to childSources');
+						scope.child = value;
 						childSources.push(value);
+						console.log('childSources', childSources);
 						var attrs = element.attrs;
-						console.log('element', element);
-						console.log('attrs', attrs);
-						console.log('pushing source to childSources & reseting to forward');
+						
 					}
 				});
 
-
+				//TODO: find a better way to check when the animation is ended.
+				// Tried webkitTransitionEnd event but it wont get called if we dont stop the break point in debug.
 				var count = 0;
 				var countAnimation = function() {
 					count++;
@@ -66,11 +75,15 @@ angular.module('myApp.directives', [])
 
 				scope.leftButtonClicked = function() {
 					console.log('left button clicked');
+					if(childSources.length < 2){
+						return;
+					}
+					
 					isBack = true;
 					count = 0;
 					childSources.pop();
 					var previousSource = childSources.pop();
-					scope.source = previousSource;
+					scope.childSource = previousSource;
 				}
 			}
 		}

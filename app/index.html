@@ -14,13 +14,13 @@
   <link rel="stylesheet" href="css/main.css">     
         
 </head>
-<body>    
+<body ng-controller="MyController">    
 
 
   <ul style="position: absolute; z-index: 100;">
     <input type="text" name="input" ng-model="source">    
   </ul>
-  <monaca-navigation child-source="source"></monaca-navigation>
+  <monaca-navigation title="Hello" child-source="source"></monaca-navigation>
 
 
 
