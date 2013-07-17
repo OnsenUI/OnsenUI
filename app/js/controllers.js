@@ -24,6 +24,10 @@ function MyController($scope){
 		{
 			title: 'Item 2',
 			source: '/app/2.htm'
+		},
+		{
+			title: 'Detail',
+			source: '/app/templates/detail.html'
 		}
 	];
 
@@ -38,5 +42,21 @@ function MyController($scope){
 			$scope.navigationItem = navigationItems[index];
 		}
 	});
+
+	$scope.$on('change', function() {
+		console.log('received change');
+		if($scope.navigationItemIndex === 0){
+			$scope.navigationItemIndex = 2;
+		}else{
+			$scope.navigationItemIndex = 0;
+		}
+	});
+}
+
+function ListController($scope){
+	$scope.change = function(){
+		console.log('emitting change');
+		$scope.$emit('change');
+	}
 }
 

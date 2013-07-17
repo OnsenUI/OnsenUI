@@ -1,0 +1,1 @@
+angular.module('monaca.directives', []); // [] -> create new module
