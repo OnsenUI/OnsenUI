@@ -1,7 +1,7 @@
 'use strict';
 
 /* Directives */
-var directives = angular.module('monaca.directives', []); // [] -> create new module
+var directives = angular.module('monaca.directives');
 
 directives.directive('monacaNavigation', function() {
 		return {
@@ -9,8 +9,7 @@ directives.directive('monacaNavigation', function() {
 			replace: false,
 			transclude: true,
 			scope: {
-				childSource: '@childSource',
-				title: '@title'
+				navigationItem: '='				
 			},			
 			templateUrl: 'templates/navigation.html',
 			// The linking function will add behavior to the template
@@ -23,18 +22,11 @@ directives.directive('monacaNavigation', function() {
 					isBack = false;
 				}
 
-				var content_region = element.find("#content-region");
-				// element[0].addEventListener('transitionend', transitionEndCallback, false);        // mozilla					
-
 				var title = angular.element(element.children()[0]);
-				scope.$watch('childSource', function(value) {
-					if (value) {
-						console.log('pushing source to childSources');
-						scope.child = value;
-						childSources.push(value);
+				scope.$watch('navigationItem', function(newNavigationItem) {
+					if (newNavigationItem) {						
+						childSources.push(newNavigationItem);
 						console.log('childSources', childSources);
-						var attrs = element.attrs;
-						
 					}
 				});
 
@@ -77,9 +69,10 @@ directives.directive('monacaNavigation', function() {
 
 					isBack = true;
 					count = 0;
-					childSources.pop();
-					var previousSource = childSources.pop();
-					scope.childSource = previousSource;
+					childSources.pop();					
+					var previousNavigationItem = childSources.pop();
+					console.log('previous nav ', previousNavigationItem);
+					scope.navigationItem = previousNavigationItem;
 				}
 			}
 		}

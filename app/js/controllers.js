@@ -31,32 +31,19 @@ function MyController($scope){
 		}
 	];
 
-	$scope.navigationItemIndex = 0;
 	$scope.navigationItem = navigationItems[0];
-
-
-	$scope.title = "Inital title from MyController";
-	$scope.source = "/app/1.htm"
-	$scope.$watch('navigationItemIndex', function(index){
-		if(index){
-			$scope.navigationItem = navigationItems[index];
-		}
-	});
-
-	$scope.$on('change', function() {
-		console.log('received change');
-		if($scope.navigationItemIndex === 0){
-			$scope.navigationItemIndex = 2;
-		}else{
-			$scope.navigationItemIndex = 0;
-		}
+	
+	$scope.$on('change', function(event, index) {
+		console.log('received change', index);
+		$scope.navigationItem = navigationItems[index];
+		console.log('navigationItem', $scope.navigationItem);
 	});
 }
 
 function ListController($scope){
-	$scope.change = function(){
-		console.log('emitting change');
-		$scope.$emit('change');
+	$scope.change = function(index){
+		console.log('emitting change', index);
+		$scope.$emit('change', index);
 	}
 }
 

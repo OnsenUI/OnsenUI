@@ -17,10 +17,8 @@
 <body ng-controller="MyController">    
 
 
-  <ul style="position: absolute; z-index: 100;">
-    <input type="text" name="input" ng-model="navigationItemIndex">    
-  </ul>
-  <monaca-navigation title="{{navigationItem.title}}" child-source="{{navigationItem.source}}"></monaca-navigation>
+  
+  <monaca-navigation navigation-item="navigationItem"></monaca-navigation>
 
 
 

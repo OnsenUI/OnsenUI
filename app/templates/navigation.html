@@ -6,7 +6,7 @@
 	        </span>
 	    </div> 
 	    <div id="center" class="topcoat-navigation-bar__item center half">
-	        <span ng-click="subPage='partials/subpage3.htm'" id="title" class="topcoat-navigation-bar__title">{{title}}</span>        
+	        <span ng-click="subPage='partials/subpage3.htm'" id="title" class="topcoat-navigation-bar__title">{{navigationItem.title}}</span>        
 	    </div> 
 	    <div class="topcoat-navigation-bar__item right quarter">
 	        <span ng-click="subPage='partials/subpage2.htm'" id="right-button" class="topcoat-icon-button--quiet">
@@ -14,5 +14,5 @@
 	        </span>
 	    </div>
 	</div>    
-	<ng-include id="content-region" class="content" src="child" ng-animate="getAnimation()"></ng-include>
+	<ng-include id="content-region" class="content" src="navigationItem.source" ng-animate="getAnimation()"></ng-include>
 </div>
