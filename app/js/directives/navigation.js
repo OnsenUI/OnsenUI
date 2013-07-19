@@ -16,6 +16,7 @@ directives.directive('monacaNavigation', function() {
 		link: function(scope, element, attrs) {
 			var childSources = [];
 			var isBack = false;
+			scope.canGoBack = false;
 
 			scope.transitionEndCallback = function() {
 				console.log('animation ended');
@@ -26,7 +27,7 @@ directives.directive('monacaNavigation', function() {
 			scope.$watch('navigationItem', function(newNavigationItem) {
 				if (newNavigationItem) {
 					childSources.push(newNavigationItem);
-					console.log('childSources', childSources);
+					evaluateCanGoBack();
 				}
 			});
 
@@ -73,6 +74,14 @@ directives.directive('monacaNavigation', function() {
 				var previousNavigationItem = childSources.pop();
 				console.log('previous nav ', previousNavigationItem);
 				scope.navigationItem = previousNavigationItem;
+			}
+
+			function evaluateCanGoBack(){
+				if (childSources.length < 2) {
+					scope.canGoBack = false;
+				}else{
+					scope.canGoBack = true;
+				}
 			}
 		}
 	}
