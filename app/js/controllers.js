@@ -21,8 +21,7 @@ function MyController($scope) {
 function TalksController($scope, talkData) {
 	$scope.talks = talkData.talks;
 
-	$scope.showDetail = function(index) {
-		console.log('emitting change', index);
+	$scope.showDetail = function(index) {		
 		var selectedTalk = $scope.talks[index];
 		$scope.$emit('showDetail', selectedTalk);		
 		talkData.selectedTalk = selectedTalk;
