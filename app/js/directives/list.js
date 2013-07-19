@@ -8,7 +8,18 @@ directives.directive('monacaList', function() {
 		replace: false,
 		transclude: true,
 		scope: {
+			monacaItems: "=",
+			triggerItemClicked: "&itemClick"
 		},
-		templateUrl: 'templates/list.html'
+		templateUrl: 'templates/list.html',
+		link: function(scope, element, attrs) {
+			console.log('items');
+
+			scope.itemClick = function(index){
+				scope.triggerItemClicked({
+					index: index
+				});
+			}			
+		}
 	};
 });

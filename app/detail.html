@@ -1,0 +1,51 @@
+
+	<div id="pager" class="page content-padding" ng-controller="DetailController">
+		<div id="scroller">
+			<h3 class="center">{{talk.title}}</h3>
+
+			<div>
+				<table class="full">
+					<tr>
+						<td>
+							<div style="float:left;width:50%;" class="left">
+								<span>{{talk.track}}</span>
+								<div>{{talk.room}}</div>
+							</div>
+							<div style="float:right;width:50%;" class="right">
+								<div id="add-to-schedule-btn" class="topcoat-button--cta">Attend</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="separator space-top"></div>
+
+			<p>{{talk.desc}}</p>
+
+			<div class="separator"></div>
+
+			<section class="space-top">
+
+				<table ng-repeat="speaker in talk.speakers" class="full">
+					<tr>
+						<td class="span20 align-top">
+							<div class="left">
+								<div class="speaker-photo" style="background-image: url('img/avatar.png')"></div>
+							</div>
+						</td>
+						<td class="span80">
+							<div class="left space-left">
+								<div class="bold">{{speaker.name}}</div>
+								<p>{{speaker.info}}</p>
+							</div>
+						</td>
+					</tr>
+				</table>
+
+			</section>
+
+			<div style="min-height: 10px; height: 20px;"></div>
+		</div>
+	</div>
+
