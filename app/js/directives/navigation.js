@@ -9,7 +9,8 @@ directives.directive('monacaNavigation', function() {
 		replace: false,
 		transclude: true,
 		scope: {
-			navigationItem: '='
+			title: '@',
+			page: '@'
 		},
 		templateUrl: 'templates/navigation.html',
 		// The linking function will add behavior to the template
@@ -19,14 +20,19 @@ directives.directive('monacaNavigation', function() {
 			scope.canGoBack = false;
 
 			scope.transitionEndCallback = function() {
-				console.log('animation ended');
 				isBack = false;
 			}
 
 			var title = angular.element(element.children()[0]);
-			scope.$watch('navigationItem', function(newNavigationItem) {
-				if (newNavigationItem) {
-					childSources.push(newNavigationItem);
+			scope.$watch('page', function(newPage) {
+				if (newPage) {
+					var newNavigationItem = {
+						title: scope.title,
+						source: newPage
+					}
+					scope.navigationItem = newNavigationItem;	
+					
+					childSources.push(newNavigationItem);					
 					evaluateCanGoBack();
 				}
 			});
@@ -74,7 +80,9 @@ directives.directive('monacaNavigation', function() {
 				var previousNavigationItem = childSources.pop();
 				console.log('previous nav ', previousNavigationItem);
 				scope.navigationItem = previousNavigationItem;
-			}
+				scope.title = scope.navigationItem.title;
+				scope.page = scope.navigationItem.source;
+			}			
 
 			function evaluateCanGoBack(){
 				if (childSources.length < 2) {

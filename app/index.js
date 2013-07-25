@@ -1,19 +1,17 @@
 'use strict';
 
-/* Controllers */
-
 function MyController($scope) {
-	var navigationItems = [{
+	$scope.navigationItems = [{
 		title: 'Talks',
-		source: '/app/talks_list.html'
+		page: '/app/talks_list.html'
 	}, {
 		title: 'Detail',
-		source: '/app/talk_detail.html'
+		page: '/app/talk_detail.html'
 	}];
 
-	$scope.navigationItem = navigationItems[0];
+	$scope.navigationItem = $scope.navigationItems[0];
 
 	$scope.$on('showDetail', function(event, selectedTalk) {
-		$scope.navigationItem = navigationItems[1];		
+		$scope.navigationItem = $scope.navigationItems[1];		
 	});
 }
