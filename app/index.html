@@ -12,17 +12,16 @@
   <link rel="stylesheet" href="css/main.css">     
         
 </head>
+
 <body ng-controller="MyController">    
 
-  <monaca-navigation title="{{navigationItem.title}}" page="{{navigationItem.page}}"></monaca-navigation>
+  <monaca-navigation title="navigationItem.title" page="navigationItem.page"></monaca-navigation>
 
   
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-  -->
+
   <script src="lib/fastclick.js"></script>  
-  <script src="lib/jquery.js"></script>
   <script src="js/setup_click.js"></script>
+  <script src="lib/jquery.js"></script>  
   <script src="lib/angular/angular.js"></script>
   <script src="js/app.js"></script>
   <script src="index.js"></script>
@@ -31,7 +30,6 @@
   <script src="js/services.js"></script>
   <script src="js/directives/module.js"></script>
   <script src="js/directives/navigation.js"></script>
-  <script src="js/directives/list.js"></script>
-  
+  <script src="js/directives/list.js"></script>  
 </body>
 </html>

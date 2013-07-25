@@ -7,10 +7,10 @@ directives.directive('monacaNavigation', function() {
 	return {
 		restrict: 'E',
 		replace: false,
-		transclude: true,
+		transclude: false,
 		scope: {
-			title: '@',
-			page: '@'
+			title: '=',
+			page: '='
 		},
 		templateUrl: 'templates/navigation.html',
 		// The linking function will add behavior to the template
@@ -78,10 +78,9 @@ directives.directive('monacaNavigation', function() {
 				count = 0;
 				childSources.pop();
 				var previousNavigationItem = childSources.pop();
-				console.log('previous nav ', previousNavigationItem);
-				scope.navigationItem = previousNavigationItem;
-				scope.title = scope.navigationItem.title;
-				scope.page = scope.navigationItem.source;
+				// scope.navigationItem = previousNavigationItem;
+				scope.title = previousNavigationItem.title;
+				scope.page = previousNavigationItem.source;
 			}			
 
 			function evaluateCanGoBack(){

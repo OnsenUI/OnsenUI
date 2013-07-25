@@ -1,7 +1,7 @@
 'use strict';
 
 function MyController($scope) {
-	$scope.navigationItems = [{
+	var navigationItems = [{
 		title: 'Talks',
 		page: '/app/talks_list.html'
 	}, {
@@ -9,9 +9,9 @@ function MyController($scope) {
 		page: '/app/talk_detail.html'
 	}];
 
-	$scope.navigationItem = $scope.navigationItems[0];
+	$scope.navigationItem = angular.copy(navigationItems[0]);
 
-	$scope.$on('showDetail', function(event, selectedTalk) {
-		$scope.navigationItem = $scope.navigationItems[1];		
+	$scope.$on('showDetail', function(event, selectedTalk) {		
+		$scope.navigationItem = angular.copy(navigationItems[1]);
 	});
 }
