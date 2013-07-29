@@ -255,4 +255,32 @@ angular.module('myApp.services', [])
 	};
 
 	return service;
+})
+
+
+.factory('slotData', function() {  
+	var slots = [
+		{
+			"talk_id": "",
+			"title": "Slot 1",			
+			"time_slot_id": "06",						
+		},
+		{
+			"talk_id": "",
+			"title": "Slot 2",			
+			"time_slot_id": "07",						
+		},
+		{
+			"talk_id": "",
+			"title": "Slot 3",			
+			"time_slot_id": "08",						
+		}, 
+
+	];
+
+	var service = {
+		slots: slots
+	};
+
+	return service;
 });

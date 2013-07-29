@@ -118,6 +118,57 @@
 }
 
 
+/* MODAL */
+
+.animate-modal-enter {
+  -webkit-transition: 0.25s; /* Chrome */
+  transition: 0.25s;
+  /*opacity: 0;*/
+  -webkit-transform: translate3d(0, 100%, 0);
+}
+
+.animate-modal-enter.animate-modal-enter-active {
+  -webkit-transform: translate3d(0, 0, 0);
+  /*opacity: 1;*/
+}
+
+.animate-modal-leave{
+  -webkit-transition: 0.25s; /* Chrome */
+  transition: 0.25s;
+  -webkit-transform: translate3d(0, 0, 0);  
+  /*opacity: 1;*/
+}
+
+.animate-modal-leave.animate-modal-leave-active{
+  -webkit-transform: translate3d(0, 0, 0);  
+  /*opacity: 1;*/
+}
+
+.animate-modal-enter-reverse {
+  -webkit-transition: 1.25s; /* Chrome */
+  transition: 1.25s;
+  /*opacity: 0;*/
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+.animate-modal-enter-reverse.animate-modal-enter-reverse-active{
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+.animate-modal-leave-reverse{
+  -webkit-transition: .25s; /* Chrome */
+  transition: .25s;
+  -webkit-transform: translate3d(0, 0, 0);  
+  /*opacity: 1;*/
+}
+
+.animate-modal-leave-reverse.animate-modal-leave-reverse-active{
+  -webkit-transform: translate3d(0, 100%, 0);   
+  /*opacity: 1;*/
+}
+
+
+
 .closed {
   background-color: gray;
 }

@@ -7,6 +7,14 @@ body {
   /*  background-color: #153A5F;*/
 }
 
+.monaca-container {
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+}
+
 .cloud-bg-color {
     background-color: #C0DEED;
 }

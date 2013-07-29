@@ -3,19 +3,18 @@
 /* Directives */
 var directives = angular.module('monaca.directives');
 
-directives.directive('monacaNavigation', function() {
+directives.directive('monacaScreen', function() {
 	return {
 		restrict: 'E',
 		replace: false,
 		transclude: false,
-		scope: {
-			title: '=',
+		scope: {			
 			page: '='
 		},
-		templateUrl: 'templates/navigation.html',
+		templateUrl: 'templates/screen.html',
 		// The linking function will add behavior to the template
 		link: function(scope, element, attrs) {
-			var childSources = [];
+			var screenItems = [];
 			var isBack = false;
 			scope.canGoBack = false;
 
@@ -26,15 +25,33 @@ directives.directive('monacaNavigation', function() {
 			var title = angular.element(element.children()[0]);
 			scope.$watch('page', function(newPage) {
 				if (newPage) {
-					var newNavigationItem = {
-						title: scope.title,
+					var newScreenItem = {						
 						source: newPage
 					}
-					scope.navigationItem = newNavigationItem;	
+					scope.screenItem = newScreenItem;	
 					
-					childSources.push(newNavigationItem);					
-					evaluateCanGoBack();
+					screenItems.push(newScreenItem);					
+					// evaluateCanGoBack();
 				}
+			});
+
+			scope.dismissViewController = function() {
+				console.log('dismissViewController called');
+				if (screenItems.length < 2) {
+					return;
+				}
+
+				isBack = true;
+				count = 0;
+				screenItems.pop();
+				var previousScreenItem = screenItems.pop();
+				// scope.navigationItem = previousScreenItem;
+				scope.title = previousScreenItem.title;
+				scope.page = previousScreenItem.source;
+			}	
+
+			scope.$on('dismissViewController', function(event) {
+				scope.dismissViewController();
 			});
 
 			//TODO: find a better way to check when the animation is ended.
@@ -54,46 +71,19 @@ directives.directive('monacaNavigation', function() {
 				if (isBack) {
 					console.log('animation backward');
 					animation = {
-						enter: 'animate-enter-reverse',
-						leave: 'animate-leave-reverse'
+						enter: 'animate-modal-enter-reverse',
+						leave: 'animate-modal-leave-reverse'
 					};
 				} else {
 					console.log('animation forward');
 					animation = {
-						enter: 'animate-enter',
-						leave: 'animate-leave'
+						enter: 'animate-modal-enter',
+						leave: 'animate-modal-leave'
 					};
 				}
 				countAnimation();
 				return animation;
-			}
-
-			scope.leftButtonClicked = function() {
-				console.log('left button clicked');
-				if (childSources.length < 2) {
-					return;
-				}
-
-				isBack = true;
-				count = 0;
-				childSources.pop();
-				var previousNavigationItem = childSources.pop();
-				// scope.navigationItem = previousNavigationItem;
-				scope.title = previousNavigationItem.title;
-				scope.page = previousNavigationItem.source;
-			}	
-
-			scope.rightButtonClicked = function() {
-				scope.$emit('dismissViewController');
-			}		
-
-			function evaluateCanGoBack(){
-				if (childSources.length < 2) {
-					scope.canGoBack = false;
-				}else{
-					scope.canGoBack = true;
-				}
-			}
+			}				
 		}
 	}
 });

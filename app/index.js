@@ -1,17 +1,13 @@
 'use strict';
 
-function MyController($scope) {
-	var navigationItems = [{
-		title: 'Talks',
-		page: '/app/talks_list.html'
-	}, {
-		title: 'Detail',
-		page: '/app/talk_detail.html'
-	}];
+function ScreenController($scope) {
+	
+	$scope.screenItem = {
+		page: '/app/schedule_navigation.html'
+	}
 
-	$scope.navigationItem = angular.copy(navigationItems[0]);
-
-	$scope.$on('showDetail', function(event, selectedTalk) {		
-		$scope.navigationItem = angular.copy(navigationItems[1]);
+	$scope.$on('presentViewController', function(event, viewPage, selectedTalk) {
+		$scope.screenItem.page = angular.copy(viewPage);
 	});
+	
 }
