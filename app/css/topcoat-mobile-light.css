@@ -769,6 +769,72 @@ limitations under the License.
 */
 
 /*
+
+
+Use this class to create a dialog element. Make sure to apply ".topcoat-overlay-bg" an empty div on the page as well,
+so that the dialog is resting on a dark, transparent background
+
+	<div class="topcoat-overlay-bg"></div>
+	<aside class="topcoat-overlay">
+		<h1>Are eagles nice ?</h1>
+		<div class="topcoat-overlay-buttons">
+			<button role="button" class="topcoat-button">No</button>
+			<button role="button" class="topcoat-button--cta">Yes</button>
+		</div>
+	</aside>
+
+*/
+.topcoat-overlay {
+  width: 50%;
+  height: auto;
+  overflow: hidden;
+  position: absolute;
+  z-index: 10;
+  margin: 20%;
+  padding: var-overlay-padding;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  background-color: var-bg-color;
+  border: 1px solid #a5a8a8;
+  text-align: center;
+}
+.topcoat-overlay h1 {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d3d7d7;
+}
+.topcoat-overlay-bg {
+  position: absolute;
+  z-index: 5;
+  background-color: var-overlay-bg-color;
+  width: 100%;
+  height: 100%;
+  -webkit-box-shadow: var-bg-box-shadow;
+  box-shadow: var-bg-box-shadow;
+}
+.topcoat-overlay-buttons {
+  margin-top: 20px;
+}
+.topcoat-overlay-buttons .topcoat-button,
+.topcoat-overlay-buttons .topcoat-button--cta {
+  margin: 5px;
+}
+
+/*
+Copyright 2012 Adobe Systems Inc.;
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+/*
  Search Input
  ------------
 
@@ -939,4 +1005,67 @@ limitations under the License.
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
+}
+
+/*
+Copyright 2012 Adobe Systems Inc.;
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+/*
+ TopCoat Textarea
+ ------------------------
+
+    <textarea class="topcoat-textarea" rows="6" cols="36" placeholder="Textarea"></textarea>
+
+ */
+.topcoat-textarea,
+.topcoat-textarea--large {
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 1.25rem;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  margin: var-margin;
+  font: var-font;
+  font-weight: 200;
+  line-height: 3rem;
+  resize: none;
+  outline: none;
+  border: 1px solid #a5a8a8;
+  background-color: #e5e9e8;
+  -webkit-box-shadow: inset 0 1px #fff;
+  box-shadow: inset 0 1px #fff;
+  color: #454545;
+}
+.topcoat-textarea:focus,
+.topcoat-textarea--large:focus {
+  background-color: var-background--focus;
+  color: #000;
+}
+/*
+Topcoat Large Textarea
+ ------------------------
+
+	<textarea class="topcoat-textarea--large" rows="6" cols="36" placeholder="Textarea"></textarea>
+
+*/
+.topcoat-textarea--large {
+  font: var-font--large;
+  font-weight: 200;
+  line-height: 4rem;
 }
