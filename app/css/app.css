@@ -120,17 +120,17 @@
 }
 
 .animate-modal-enter-reverse {
-  -webkit-transition: .25s; /* Chrome */  
+  -webkit-transition: .25s ease all .001s;
   -webkit-transform: translate3d(0, 0, 0);
-  z-index: 0;
+  z-index: 10;  
 }
 
 .animate-modal-enter-reverse.animate-modal-enter-reverse-active{
-  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);  
 }
 
 .animate-modal-leave-reverse{
-  -webkit-transition: .25s; /* Chrome */  
+  -webkit-transition: .25s ease all .001s;
   -webkit-transform: translate3d(0, 0, 0);    
   z-index: 1000;
 }
