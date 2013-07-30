@@ -51,6 +51,7 @@ directives.directive('monacaScreen', function() {
 			}	
 
 			scope.$on('dismissViewController', function(event) {
+				console.log("received dismiss");
 				scope.dismissViewController();
 			});
 
@@ -59,7 +60,6 @@ directives.directive('monacaScreen', function() {
 			var count = 0;
 			var countAnimation = function() {
 				count++;
-				console.log("count " + count);
 				if (count === 2) {
 					count = 0;
 					scope.transitionEndCallback();
@@ -69,13 +69,11 @@ directives.directive('monacaScreen', function() {
 			scope.getAnimation = function() {
 				var animation;
 				if (isBack) {
-					console.log('animation backward');
 					animation = {
 						enter: 'animate-modal-enter-reverse',
 						leave: 'animate-modal-leave-reverse'
 					};
 				} else {
-					console.log('animation forward');
 					animation = {
 						enter: 'animate-modal-enter',
 						leave: 'animate-modal-leave'

@@ -42,7 +42,7 @@ directives.directive('monacaNavigation', function() {
 			var count = 0;
 			var countAnimation = function() {
 				count++;
-				console.log("count " + count);
+				// console.log("count " + count);
 				if (count === 2) {
 					count = 0;
 					scope.transitionEndCallback();
@@ -52,13 +52,11 @@ directives.directive('monacaNavigation', function() {
 			scope.getAnimation = function() {
 				var animation;
 				if (isBack) {
-					console.log('animation backward');
 					animation = {
 						enter: 'animate-enter-reverse',
 						leave: 'animate-leave-reverse'
 					};
 				} else {
-					console.log('animation forward');
 					animation = {
 						enter: 'animate-enter',
 						leave: 'animate-leave'
@@ -84,6 +82,7 @@ directives.directive('monacaNavigation', function() {
 			}	
 
 			scope.rightButtonClicked = function() {
+				console.log("sending dimissViewController");
 				scope.$emit('dismissViewController');
 			}		
 

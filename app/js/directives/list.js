@@ -13,7 +13,6 @@ directives.directive('monacaList', function() {
 		},
 		templateUrl: 'templates/list.html',
 		link: function(scope, element, attrs) {
-			console.log('items');
 
 			scope.itemClick = function(index){
 				scope.triggerItemClicked({
