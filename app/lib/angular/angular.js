@@ -3247,7 +3247,7 @@ function $AnimationProvider($provide) {
  *
  */
 
-var $AnimatorProvider = function() {
+var $AnimatorProvider = function() {  
   var NG_ANIMATE_CONTROLLER = '$ngAnimateController';
   var rootAnimateController = {running:true};
 
@@ -3356,7 +3356,7 @@ var $AnimatorProvider = function() {
         }
         return animator;
   
-        function animateActionFactory(type, beforeFn, afterFn) {
+        function animateActionFactory(type, beforeFn, afterFn) {          
           return function(element, parent, after) {
             var ngAnimateValue = scope.$eval(attrs.ngAnimate);
             var className = ngAnimateValue
@@ -3377,7 +3377,9 @@ var $AnimatorProvider = function() {
                 parent = after ? after.parent() : element.parent();
               }
               if ((!$sniffer.transitions && !polyfillSetup && !polyfillStart) ||
-                  (parent.inheritedData(NG_ANIMATE_CONTROLLER) || noop).running) {
+                  (parent.inheritedData(NG_ANIMATE_CONTROLLER) || noop).running) { 
+                  // alert('no animation! transitions:' + $sniffer.transitions + ', polifillSetup:' + polyfillSetup + ', polifillSstart:' + polyfillStart);               
+
                 beforeFn(element, parent, after);
                 afterFn(element, parent, after);
                 return;
@@ -3409,7 +3411,8 @@ var $AnimatorProvider = function() {
               return total;
             }
 
-            function beginAnimation() {
+            function beginAnimation() {              
+              // alert('begin animation');
               element.addClass(activeClassName);
               if (polyfillStart) {
                 polyfillStart(element, done, memento);
@@ -3421,6 +3424,7 @@ var $AnimatorProvider = function() {
                 //but some still use vendor-prefixed styles 
                 var vendorAnimationProp = $sniffer.vendorPrefix + 'Animation';
                 var vendorTransitionProp = $sniffer.vendorPrefix + 'Transition';
+                // alert('vendorTransitionProp:' + vendorTransitionProp);
 
                 var durationKey = 'Duration',
                     delayKey = 'Delay',
@@ -3455,6 +3459,8 @@ var $AnimatorProvider = function() {
                     duration = Math.max(parsedDelay + (iterations * parsedDuration), duration);
                   }
                 });
+                // alert('duration: ' + duration);
+                // duration = 0.25;
                 $window.setTimeout(done, duration * 1000);
               } else {
                 done();
@@ -9261,7 +9267,19 @@ function $SnifferProvider() {
       }
       transitions = !!(('transition' in bodyStyle) || (vendorPrefix + 'Transition' in bodyStyle));
       animations  = !!(('animation' in bodyStyle) || (vendorPrefix + 'Animation' in bodyStyle));
+
+      // if (android && (!transitions||!animations)) {
+        // alert('android!');
+      //   transitions = isString(document.body.style.webkitTransition);
+      //   animations = isString(document.body.style.webkitAnimation);
+      // }
+      transitions = true;
+      animations = false;
     }
+
+    vendorPrefix = "webkit";
+    transitions = true;
+    animations = true;
 
 
     return {
