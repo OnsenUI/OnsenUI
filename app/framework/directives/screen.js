@@ -9,9 +9,9 @@ directives.directive('monacaScreen', function() {
 		replace: false,
 		transclude: false,
 		scope: {			
-			page: '='
+			page: '@'
 		},
-		templateUrl: 'templates/screen.html',
+		templateUrl: 'framework/templates/screen.html',
 		// The linking function will add behavior to the template
 		link: function(scope, element, attrs) {
 			var screenItems = [];
@@ -45,14 +45,16 @@ directives.directive('monacaScreen', function() {
 				count = 0;
 				screenItems.pop();
 				var previousScreenItem = screenItems.pop();
-				// scope.navigationItem = previousScreenItem;
-				scope.title = previousScreenItem.title;
 				scope.page = previousScreenItem.source;
 			}	
 
 			scope.$on('dismissViewController', function(event) {
 				console.log("received dismiss");
 				scope.dismissViewController();
+			});
+
+			scope.$on('presentViewController', function(event, viewPage) {
+				scope.page = angular.copy(viewPage);
 			});
 
 			//TODO: find a better way to check when the animation is ended.

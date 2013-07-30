@@ -11,7 +11,7 @@ directives.directive('monacaList', function() {
 			monacaItems: "=",
 			triggerItemClicked: "&itemClick"
 		},
-		templateUrl: 'templates/list.html',
+		templateUrl: 'framework/templates/list.html',
 		link: function(scope, element, attrs) {
 
 			scope.itemClick = function(index){

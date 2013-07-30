@@ -1,17 +1,21 @@
 'use strict';
 
 function SelectTalkNavigationController($scope) {
-	var navigationItems = [{
+	var selectTalkNavigationItem = {
 		title: 'Select Talk',
-		page: '/app/talks_list.html'
-	}, {
+		page: 'talks_list.html'
+	};
+
+	var detailNavigationItem = {
 		title: 'Detail',
-		page: '/app/talk_detail.html'
-	}];
+		page: 'talk_detail.html'
+	};
 
-	$scope.navigationItem = angular.copy(navigationItems[0]);
+	// initial navigation item
+	$scope.navigationItem = angular.copy(selectTalkNavigationItem);
 
+	// transition to detail navigation item
 	$scope.$on('showDetail', function(event, selectedTalk) {		
-		$scope.navigationItem = angular.copy(navigationItems[1]);
+		$scope.navigationItem = angular.copy(detailNavigationItem);
 	});
 }

@@ -10,9 +10,10 @@ directives.directive('monacaNavigation', function() {
 		transclude: false,
 		scope: {
 			title: '=',
-			page: '='
+			page: '=',
+			rightButtonIcon: '@'
 		},
-		templateUrl: 'templates/navigation.html',
+		templateUrl: 'framework/templates/navigation.html',
 		// The linking function will add behavior to the template
 		link: function(scope, element, attrs) {
 			var childSources = [];
