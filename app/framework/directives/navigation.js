@@ -9,9 +9,10 @@ directives.directive('monacaNavigation', function() {
 		replace: false,
 		transclude: false,
 		scope: {
-			title: '=',
-			page: '=',
-			rightButtonIcon: '@'
+			title: '@',
+			page: '@',
+			rightButtonIcon: '@',
+			onRightButtonClick: '&'
 		},
 		templateUrl: 'framework/templates/navigation.html',
 		// The linking function will add behavior to the template
@@ -69,6 +70,15 @@ directives.directive('monacaNavigation', function() {
 
 			scope.leftButtonClicked = function() {
 				console.log('left button clicked');
+				scope.popPage();
+			}	
+
+			scope.rightButtonClicked = function() {
+				console.log("NC right button clicked");
+				scope.onRightButtonClick();
+			}		
+
+			scope.popPage = function(){
 				if (childSources.length < 2) {
 					return;
 				}
@@ -77,15 +87,30 @@ directives.directive('monacaNavigation', function() {
 				count = 0;
 				childSources.pop();
 				var previousNavigationItem = childSources.pop();
-				// scope.navigationItem = previousNavigationItem;
 				scope.title = previousNavigationItem.title;
 				scope.page = previousNavigationItem.source;
-			}	
+			}
 
-			scope.rightButtonClicked = function() {
-				console.log("sending dimissViewController");
-				scope.$emit('dismissViewController');
-			}		
+			scope.pushPage = function(page){
+				console.log('pushPage called. page: ' + page);
+				scope.page = page;
+			}
+
+			scope.presentPage = function(page){
+				console.log('NC:present called. page: ' + page);
+				// scope.page = page;
+				callParent(scope, 'presentPage', page);
+			}
+
+			function callParent(scope, functionName, param){
+				if(scope.$parent.hasOwnProperty(functionName)){
+					console.log('has own property!!');
+					scope.$parent[functionName](param);
+				}else{
+					console.log('no own property');
+					callParent(scope.$parent, functionName, param);
+				}
+			}
 
 			function evaluateCanGoBack(){
 				if (childSources.length < 2) {

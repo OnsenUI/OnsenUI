@@ -35,8 +35,12 @@ directives.directive('monacaScreen', function() {
 				}
 			});
 
-			scope.dismissViewController = function() {
-				console.log('dismissViewController called');
+			scope.presentPage = function(page){
+				console.log('present page called, page:' + page);
+				scope.page = page;
+			}
+
+			scope.dismissPage = function(){
 				if (screenItems.length < 2) {
 					return;
 				}
@@ -46,16 +50,7 @@ directives.directive('monacaScreen', function() {
 				screenItems.pop();
 				var previousScreenItem = screenItems.pop();
 				scope.page = previousScreenItem.source;
-			}	
-
-			scope.$on('dismissViewController', function(event) {
-				console.log("received dismiss");
-				scope.dismissViewController();
-			});
-
-			scope.$on('presentViewController', function(event, viewPage) {
-				scope.page = angular.copy(viewPage);
-			});
+			}			
 
 			//TODO: find a better way to check when the animation is ended.
 			// Tried webkitTransitionEnd event but it wont get called if we dont stop the break point in debug.

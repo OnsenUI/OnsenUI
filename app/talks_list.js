@@ -5,7 +5,7 @@ function TalksController($scope, talkData) {
 
 	$scope.showDetail = function(index) {		
 		var selectedTalk = $scope.talks[index];
-		$scope.$emit('showDetail', selectedTalk);		
 		talkData.selectedTalk = selectedTalk;
+		$scope.pushPage('talk_detail.html');
 	}
 }
