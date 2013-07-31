@@ -96,18 +96,14 @@ directives.directive('monacaNavigation', function() {
 				scope.page = page;
 			}
 
-			scope.presentPage = function(page){
-				console.log('NC:present called. page: ' + page);
-				// scope.page = page;
+			scope.presentPage = function(page){							
 				callParent(scope, 'presentPage', page);
 			}
 
 			function callParent(scope, functionName, param){
-				if(scope.$parent.hasOwnProperty(functionName)){
-					console.log('has own property!!');
+				if(scope.$parent.hasOwnProperty(functionName)){					
 					scope.$parent[functionName](param);
-				}else{
-					console.log('no own property');
+				}else{					
 					callParent(scope.$parent, functionName, param);
 				}
 			}
