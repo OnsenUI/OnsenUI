@@ -1,12 +1,6 @@
 'use strict';
 
-/* Services */
-
-
-// Demonstrate how to register services
-// In this case it is a simple value service.
 angular.module('myApp.services', [])
-.value('version', '0.1')
 .factory('talkData', function() {  
 	var talks = [
 		{
@@ -258,28 +252,25 @@ angular.module('myApp.services', [])
 })
 
 
-.factory('slotData', function() {  
-	var slots = [
+.factory('talkSlotData', function() {  
+	var talkSlots = [
 		{
 			"talk_id": "",
-			"title": "Slot 1",			
-			"time_slot_id": "06",						
+			"title": "Slot 1"
 		},
 		{
 			"talk_id": "",
-			"title": "Slot 2",			
-			"time_slot_id": "07",						
+			"title": "Slot 2"
 		},
 		{
 			"talk_id": "",
-			"title": "Slot 3",			
-			"time_slot_id": "08",						
+			"title": "Slot 3"							
 		}, 
 
 	];
 
 	var service = {
-		slots: slots
+		talkSlots: talkSlots
 	};
 
 	return service;

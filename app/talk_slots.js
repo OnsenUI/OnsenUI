@@ -1,5 +1,5 @@
 'use strict';
 
-function TalkSlotsController($scope, slotData) {
-	$scope.slots = slotData.slots;	
+function TalkSlotsController($scope, talkSlotData) {
+	$scope.talkSlots = talkSlotData.talkSlots;	
 }
