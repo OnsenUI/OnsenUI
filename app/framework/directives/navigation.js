@@ -91,8 +91,9 @@ directives.directive('monacaNavigation', function() {
 				scope.page = previousNavigationItem.source;
 			}
 
-			scope.pushPage = function(page){
+			scope.pushPage = function(page, title){
 				console.log('pushPage called. page: ' + page);
+				scope.title = title;
 				scope.page = page;
 			}
 
