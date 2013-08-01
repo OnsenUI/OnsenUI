@@ -11,6 +11,7 @@ directives.directive('monacaNavigation', function() {
 		scope: {
 			title: '@',
 			page: '@',
+			initialLeftButtonIcon: '@leftButtonIcon',
 			rightButtonIcon: '@',
 			onRightButtonClick: '&'
 		},
@@ -19,6 +20,7 @@ directives.directive('monacaNavigation', function() {
 		link: function(scope, element, attrs) {
 			var childSources = [];
 			var isBack = false;
+			var iconPrefix = 'topcoat-icon topcoat-icon--';
 			scope.canGoBack = false;
 
 			scope.transitionEndCallback = function() {
@@ -38,6 +40,14 @@ directives.directive('monacaNavigation', function() {
 					evaluateCanGoBack();
 				}
 			});
+
+			function evaluateLeftButtonIcon(){
+				if(scope.canGoBack){
+					scope.leftButtonIcon = iconPrefix + 'back';
+				}else{
+					scope.leftButtonIcon = iconPrefix + scope.initialLeftButtonIcon;
+				}
+			}
 
 			//TODO: find a better way to check when the animation is ended.
 			// Tried webkitTransitionEnd event but it wont get called if we dont stop the break point in debug.
@@ -110,11 +120,12 @@ directives.directive('monacaNavigation', function() {
 			}
 
 			function evaluateCanGoBack(){
-				if (childSources.length < 2) {
+				if (childSources.length < 2) {					
 					scope.canGoBack = false;
 				}else{
 					scope.canGoBack = true;
 				}
+				evaluateLeftButtonIcon();
 			}
 		}
 	}
