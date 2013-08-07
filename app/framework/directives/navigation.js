@@ -117,6 +117,10 @@ directives.directive('monacaNavigation', function() {
 				scope.page = page;
 			}
 
+			//TODO: this hack is for monaca-screen scope.
+			// it is strange that calling prensentPage() from child scope
+			// doesn't propagate to monaca-screen scope.
+			// -> find a way to not use callParent().
 			scope.presentPage = function(page){										
 				callParent(scope, 'presentPage', page);
 			}
