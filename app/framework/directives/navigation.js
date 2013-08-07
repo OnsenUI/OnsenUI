@@ -121,6 +121,9 @@ directives.directive('monacaNavigation', function() {
 			// it is strange that calling prensentPage() from child scope
 			// doesn't propagate to monaca-screen scope.
 			// -> find a way to not use callParent().
+
+			// since our directive use scope:{...} it will not inherite prototypically. -> that why we need to use callParent();
+			// https://github.com/angular/angular.js/wiki/Understanding-Scopes
 			scope.presentPage = function(page){										
 				callParent(scope, 'presentPage', page);
 			}
