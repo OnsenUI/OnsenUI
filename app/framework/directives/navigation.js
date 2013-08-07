@@ -13,6 +13,7 @@ directives.directive('monacaNavigation', function() {
 			page: '@',
 			initialLeftButtonIcon: '@leftButtonIcon',
 			rightButtonIcon: '@',
+			onLeftButtonClick: '&',
 			onRightButtonClick: '&'
 		},
 		templateUrl: 'framework/templates/navigation.html',
@@ -79,14 +80,23 @@ directives.directive('monacaNavigation', function() {
 			}
 
 			scope.leftButtonClicked = function() {
-				console.log('left button clicked');
-				scope.popPage();
+				console.log('left button clicked canPop: ' + canPopPage());
+				if(canPopPage()){
+					scope.popPage();	
+				}else{
+					scope.onLeftButtonClick();
+				}
+				
 			}	
 
 			scope.rightButtonClicked = function() {
 				console.log("NC right button clicked");
 				scope.onRightButtonClick();
-			}		
+			}	
+
+			function canPopPage(){
+				return childSources.length > 1;
+			}	
 
 			scope.popPage = function(){
 				if (childSources.length < 2) {
@@ -107,11 +117,27 @@ directives.directive('monacaNavigation', function() {
 				scope.page = page;
 			}
 
-			scope.presentPage = function(page){							
+			scope.presentPage = function(page){										
 				callParent(scope, 'presentPage', page);
 			}
 
+			scope.openMenu = function(){
+				callParent(scope, 'openMenu');
+			}
+
+			scope.closeMenu = function(){
+				callParent(scope, 'closeMenu');
+			}
+
+			scope.toggleMenu = function(){
+				callParent(scope, 'toggleMenu');
+			}
+
 			function callParent(scope, functionName, param){
+				if(!scope.$parent){
+					return;
+				}
+
 				if(scope.$parent.hasOwnProperty(functionName)){					
 					scope.$parent[functionName](param);
 				}else{					

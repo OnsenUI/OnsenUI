@@ -12,9 +12,10 @@ directives.directive('monacaScroller', function() {
 			setTimeout(function(){
 				var wrapper = element.find('.scroller-wrapper').get(0);				
 				var iScroll = new IScroll(wrapper, {
-					momentum: true,
-					bounceLock: true,
-					bounce: true
+					momentum: true,					
+					bounce: true,
+					hScrollbar: false,
+					vScrollbar: false				
 				});
 			}, 0);
 			
