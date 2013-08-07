@@ -128,6 +128,10 @@ directives.directive('monacaNavigation', function() {
 				callParent(scope, 'presentPage', page);
 			}
 
+			scope.dismissPage = function(){
+				callParent(scope, 'dismissPage');
+			}
+
 			scope.openMenu = function(){
 				callParent(scope, 'openMenu');
 			}
