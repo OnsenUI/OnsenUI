@@ -1,5 +1,6 @@
-
-	<monaca-scroller class="page" ng-controller="DetailController">
+<div class="page" ng-controller="DetailController">	
+	<!-- Cant use ng-controller in monaca-scroller, Android 2.3 refuses to link the controller -->
+	<monaca-scroller>
 		<div class="content-padding">
 			<h3 class="center">{{talk.title}}</h3>
 			<div>
@@ -46,4 +47,4 @@
 			<div style="min-height: 10px; height: 20px;"></div>
 		</div>
 	</monaca-scroller>
-
+</div>
