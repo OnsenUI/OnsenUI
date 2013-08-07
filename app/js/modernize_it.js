@@ -16,5 +16,5 @@ yepnope({
 
 yepnope({
 	test: Modernizr.overflowtouch,
-	nope: ['js/vendor/iscroll-lite.js']
+	nope: ['lib/iscroll-lite.js']
 });

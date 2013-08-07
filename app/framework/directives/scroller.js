@@ -9,7 +9,15 @@ directives.directive('monacaScroller', function() {
 		transclude: true,
 		templateUrl: 'framework/templates/scroller.html',
 		link: function(scope, element, attrs) {
-
+			setTimeout(function(){
+				var wrapper = element.find('.scroller-wrapper').get(0);				
+				var iScroll = new IScroll(wrapper, {
+					momentum: true,
+					bounceLock: true,
+					bounce: true
+				});
+			}, 0);
+			
 		}
 	};
 });
