@@ -196,13 +196,13 @@ body {
     padding:0;
 }*/
 
-.scroller {
+/*.scroller {
     -webkit-transform: translate(0px, -108px) scale(1) translateZ(0px);
     -webkit-transform-origin-x: 0px;
     -webkit-transform-origin-y: 0px;
     -webkit-transition-duration: 0ms;
     -webkit-transition-property: -webkit
-}
+}*/
 
 #logo{
     background-image: url('../image/logo.png');
