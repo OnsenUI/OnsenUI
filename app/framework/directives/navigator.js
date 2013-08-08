@@ -3,7 +3,7 @@
 /* Directives */
 var directives = angular.module('monaca.directives');
 
-directives.directive('monacaNavigation', function() {
+directives.directive('monacaNavigator', function() {
 	return {
 		restrict: 'E',
 		replace: false,
@@ -16,7 +16,7 @@ directives.directive('monacaNavigation', function() {
 			onLeftButtonClick: '&',
 			onRightButtonClick: '&'
 		},
-		templateUrl: 'framework/templates/navigation.html',
+		templateUrl: 'framework/templates/navigator.html',
 		// The linking function will add behavior to the template
 		link: function(scope, element, attrs) {
 			var childSources = [];
@@ -118,7 +118,7 @@ directives.directive('monacaNavigation', function() {
 			}
 
 			//TODO: this hack is for monaca-screen scope.
-			// it is strange that calling prensentPage() from child scope
+			// since we are creating isolate scope, calling prensentPage() from child scope
 			// doesn't propagate to monaca-screen scope.
 			// -> find a way to not use callParent().
 
