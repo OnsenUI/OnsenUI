@@ -23,6 +23,7 @@ directives.directive('monacaNavigator', function() {
 			var isBack = false;
 			var iconPrefix = 'topcoat-icon topcoat-icon--';
 			scope.canGoBack = false;
+			scope.monaca = {};
 
 			scope.transitionEndCallback = function() {
 				isBack = false;
@@ -35,17 +36,17 @@ directives.directive('monacaNavigator', function() {
 						title: scope.title,
 						source: newPage
 					}
-					scope.navigationItem = newNavigationItem;	
-					
-					childSources.push(newNavigationItem);					
+					scope.navigationItem = newNavigationItem;
+
+					childSources.push(newNavigationItem);
 					evaluateCanGoBack();
 				}
 			});
 
-			function evaluateLeftButtonIcon(){
-				if(scope.canGoBack){
+			function evaluateLeftButtonIcon() {
+				if (scope.canGoBack) {
 					scope.leftButtonIcon = iconPrefix + 'back';
-				}else{
+				} else {
 					scope.leftButtonIcon = iconPrefix + scope.initialLeftButtonIcon;
 				}
 			}
@@ -81,24 +82,24 @@ directives.directive('monacaNavigator', function() {
 
 			scope.leftButtonClicked = function() {
 				console.log('left button clicked canPop: ' + canPopPage());
-				if(canPopPage()){
-					scope.popPage();	
-				}else{
+				if (canPopPage()) {
+					scope.monaca.popPage();
+				} else {
 					scope.onLeftButtonClick();
 				}
-				
-			}	
+
+			}
 
 			scope.rightButtonClicked = function() {
 				console.log("NC right button clicked");
 				scope.onRightButtonClick();
-			}	
+			}
 
-			function canPopPage(){
+			function canPopPage() {
 				return childSources.length > 1;
-			}	
+			}
 
-			scope.popPage = function(){
+			scope.monaca.popPage = function() {
 				if (childSources.length < 2) {
 					return;
 				}
@@ -111,7 +112,7 @@ directives.directive('monacaNavigator', function() {
 				scope.page = previousNavigationItem.source;
 			}
 
-			scope.pushPage = function(page, title){
+			scope.monaca.pushPage = function(page, title) {
 				console.log('pushPage called. page: ' + page);
 				scope.title = title;
 				scope.page = page;
@@ -124,42 +125,69 @@ directives.directive('monacaNavigator', function() {
 
 			// since our directive use scope:{...} it will not inherite prototypically. -> that why we need to use callParent();
 			// https://github.com/angular/angular.js/wiki/Understanding-Scopes
-			scope.presentPage = function(page){										
-				callParent(scope, 'presentPage', page);
+			scope.monaca.presentPage = function(page) {
+				console.log('NC present page');
+				callParent(scope, 'monaca.presentPage', page);
 			}
 
-			scope.dismissPage = function(){
-				callParent(scope, 'dismissPage');
+			scope.monaca.dismissPage = function() {
+				callParent(scope, 'monaca.dismissPage');
 			}
 
-			scope.openMenu = function(){
-				callParent(scope, 'openMenu');
+			scope.monaca.openMenu = function() {
+				callParent(scope, 'monaca.openMenu');
 			}
 
-			scope.closeMenu = function(){
-				callParent(scope, 'closeMenu');
+			scope.monaca.closeMenu = function() {
+				callParent(scope, 'monaca.closeMenu');
 			}
 
-			scope.toggleMenu = function(){
-				callParent(scope, 'toggleMenu');
+			scope.monaca.toggleMenu = function() {
+				callParent(scope, 'monaca.toggleMenu');
 			}
 
-			function callParent(scope, functionName, param){
-				if(!scope.$parent){
+			// TODO: support params overloading.
+			// http://ejohn.org/apps/learn/#89 ?
+			function callParent(scope, functionName, param) {
+				if (!scope.$parent) {
 					return;
 				}
 
-				if(scope.$parent.hasOwnProperty(functionName)){					
-					scope.$parent[functionName](param);
-				}else{					
+				var parentFunction = stringToFunction(scope.$parent, functionName);
+				if(parentFunction){					
+					parentFunction.call(scope, param);
+				}else{
 					callParent(scope.$parent, functionName, param);
 				}
+
+				// var code = 'scope.' + functionName;
+				// if (eval(code)) {
+				// 	eval(code + '();');
+				// } else {
+				// 	callParent(scope.$parent, functionName, param);
+				// }
+
 			}
 
-			function evaluateCanGoBack(){
-				if (childSources.length < 2) {					
+			function stringToFunction(root, str) {
+				var arr = str.split(".");
+
+				var fn = root;
+				for (var i = 0, len = arr.length; i < len; i++) {
+					fn = fn[arr[i]];
+				}
+
+				if (typeof fn !== "function") {
+					return false;
+				}
+
+				return fn;
+			};
+
+			function evaluateCanGoBack() {
+				if (childSources.length < 2) {
 					scope.canGoBack = false;
-				}else{
+				} else {
 					scope.canGoBack = true;
 				}
 				evaluateLeftButtonIcon();

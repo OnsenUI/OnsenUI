@@ -16,19 +16,20 @@ directives.directive('monacaSlidingMenu', function() {
 			scope.pages = {
 				behind: scope.behindPage,
 				above: scope.abovePage
-			};	
+			};
+			scope.monaca = {};	
 
 			scope.status = "close";		
 
-			scope.openMenu = function(){				
+			scope.monaca.openMenu = function(){				
 				scope.status = 'open';
 			}
 
-			scope.closeMenu = function(){
+			scope.monaca.closeMenu = function(){
 				scope.status = 'close';
 			}
 
-			scope.toggleMenu = function(){
+			scope.monaca.toggleMenu = function(){
 				var newStatus = scope.status == 'close' ?
 				'open' : 'close';
 

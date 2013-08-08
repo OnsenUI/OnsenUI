@@ -17,6 +17,7 @@ directives.directive('monacaScreen', function() {
 			var screenItems = [];
 			var isBack = false;
 			scope.canGoBack = false;
+			scope.monaca = {};
 
 			scope.transitionEndCallback = function() {
 				isBack = false;
@@ -35,12 +36,12 @@ directives.directive('monacaScreen', function() {
 				}
 			});
 
-			scope.presentPage = function(page){
+			scope.monaca.presentPage = function(page){
 				console.log('present page called, page:' + page);
 				scope.page = page;
 			}
 
-			scope.dismissPage = function(){
+			scope.monaca.dismissPage = function(){
 				if (screenItems.length < 2) {
 					return;
 				}
