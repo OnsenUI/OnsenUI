@@ -8,7 +8,7 @@
 			restrict: 'E',
 			replace: false,
 			transclude: true,
-			templateUrl: 'framework/templates/scroller.html',
+			templateUrl: 'maccha/app/framework/templates/scroller.html',
 			link: function(scope, element, attrs) {
 				setTimeout(function() {
 					var wrapper = element.find('.scroller-wrapper').get(0);

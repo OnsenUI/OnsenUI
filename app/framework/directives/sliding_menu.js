@@ -12,7 +12,7 @@
 				behindPage: '@',
 				abovePage: '@'
 			},
-			templateUrl: 'framework/templates/sliding_menu.html',
+			templateUrl: 'maccha/app/framework/templates/sliding_menu.html',
 			link: function(scope, element, attrs) {
 				scope.pages = {
 					behind: scope.behindPage,

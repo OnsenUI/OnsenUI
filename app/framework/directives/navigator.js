@@ -16,7 +16,7 @@
 				onLeftButtonClick: '&',
 				onRightButtonClick: '&'
 			},
-			templateUrl: 'framework/templates/navigator.html',
+			templateUrl: 'maccha/app/framework/templates/navigator.html',
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
 				var childSources = [];

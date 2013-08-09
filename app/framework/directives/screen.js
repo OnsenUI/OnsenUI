@@ -11,7 +11,7 @@
 			scope: {
 				page: '@'
 			},
-			templateUrl: 'framework/templates/screen.html',
+			templateUrl: 'maccha/app/framework/templates/screen.html',
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
 				var screenItems = [];
