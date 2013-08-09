@@ -14,11 +14,11 @@
 			},
 			templateUrl: 'maccha/app/framework/templates/tab_bar_item.html',
 			link: function(scope, element, attrs, monacaTabbarController) {
-				
+				scope.isChecked = false;
 				monacaTabbarController.addTabItem(scope);
 
 				scope.toggle = function toggle() {
-					console.log('toggle()');						
+					scope.isChecked = true;					
 					monacaTabbarController.gotSelected(scope);
 				}
 

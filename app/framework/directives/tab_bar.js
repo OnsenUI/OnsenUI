@@ -18,11 +18,11 @@
 
 				this.gotSelected = function(selectedTabItem) {
 					$scope.selectedTabItem.source = selectedTabItem.page;
-					// angular.forEach(tabItems, function(tabItem) {
-					// 	if (selectedTabItem != tabItem) {
-					// 		tabItem.showMe = false;
-					// 	}
-					// });
+					angular.forEach(tabItems, function(tabItem) {
+						if (selectedTabItem != tabItem) {
+							tabItem.isChecked = false;
+						}
+					});
 				}
 
 				this.addTabItem = function(tabItem) {

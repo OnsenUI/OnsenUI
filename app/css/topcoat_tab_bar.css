@@ -23,8 +23,7 @@
 
 label {
   position: relative;
-  width: 2rem;
-  height: 2rem;
+  
 }
 
 .title {
@@ -34,7 +33,7 @@ label {
 .topcoat-tab-bar {
   display: table;
   table-layout: fixed;
-  white-space: no-wrap;
+  white-space: nowrap;
   font-size: 0;
 }
 
