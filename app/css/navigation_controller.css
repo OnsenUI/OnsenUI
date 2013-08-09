@@ -17,16 +17,6 @@
     overflow: auto;
 }
 
-.scroller-wrapper {
-    -webkit-overflow-scrolling: touch;
-    overflow: auto;
-}
-
-.scroller {
-    
-    min-height: 105%;
-}
-
 .animation {
 	position: absolute;
 	left: 0;

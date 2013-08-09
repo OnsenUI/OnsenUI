@@ -1,0 +1,8 @@
+.scroller-wrapper {
+    -webkit-overflow-scrolling: touch;
+    overflow: auto;
+}
+
+.scroller {    
+    min-height: 105%;
+}
