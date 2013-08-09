@@ -1,0 +1,39 @@
+/* MODAL */
+
+.modal-enter {
+  -webkit-transition: .25s ease all .001s; /* Chrome */  
+  -webkit-transform: translate3d(0, 100%, 0);    
+}
+
+.modal-enter.modal-enter-active {
+  -webkit-transform: translate3d(0, 0, 0);  
+}
+
+.modal-leave{
+  -webkit-transition: .251s; /* Chrome */    
+  -webkit-transform: translate3d(0, 0, 0);   
+}
+
+.modal-leave.modal-leave-active{
+  -webkit-transform: translate3d(0, 0, 0);  
+}
+
+.unmodal-enter {
+  -webkit-transition: .25s ease all .001s;
+  -webkit-transform: translate3d(0, 0, 0);
+  z-index: 10;  
+}
+
+.unmodal-enter.unmodal-enter-active{
+  -webkit-transform: translate3d(0, 0, 0);  
+}
+
+.unmodal-leave{
+  -webkit-transition: .25s ease all .001s;
+  -webkit-transform: translate3d(0, 0, 0);    
+  z-index: 1000;
+}
+
+.unmodal-leave.unmodal-leave-active{
+  -webkit-transform: translate3d(0, 100%, 0);   
+}

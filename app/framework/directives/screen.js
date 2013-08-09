@@ -68,13 +68,13 @@ directives.directive('monacaScreen', function() {
 				var animation;
 				if (isBack) {
 					animation = {
-						enter: 'animate-modal-enter-reverse',
-						leave: 'animate-modal-leave-reverse'
+						enter: 'unmodal-enter',
+						leave: 'unmodal-leave'
 					};
 				} else {
 					animation = {
-						enter: 'animate-modal-enter',
-						leave: 'animate-modal-leave'
+						enter: 'modal-enter',
+						leave: 'modal-leave'
 					};
 				}
 				countAnimation();

@@ -67,13 +67,13 @@ directives.directive('monacaNavigator', function() {
 				var animation;
 				if (isBack) {
 					animation = {
-						enter: 'animate-enter-reverse',
-						leave: 'animate-leave-reverse'
+						enter: 'slide-right-enter',
+						leave: 'slide-right-leave'
 					};
 				} else {
 					animation = {
-						enter: 'animate-enter',
-						leave: 'animate-leave'
+						enter: 'slide-left-enter',
+						leave: 'slide-left-leave'
 					};
 				}
 				countAnimation();
