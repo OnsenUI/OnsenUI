@@ -11,7 +11,7 @@
 			templateUrl: 'maccha/app/framework/templates/scroller.html',
 			link: function(scope, element, attrs) {
 				setTimeout(function() {
-					var wrapper = element.find('.scroller-wrapper').get(0);
+					var wrapper = element[0].querySelector('.scroller-wrapper');
 					var iScroll = new IScroll(wrapper, {
 						momentum: true,
 						bounce: true,
