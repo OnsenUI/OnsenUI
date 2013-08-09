@@ -15,38 +15,6 @@ body {
     bottom:0;
 }
 
-.cloud-bg-color {
-    background-color: #C0DEED;
-}
-
-.error-content {
-    height: 100px;
-}
-
-#animating-background {
-    background: #8EC1DA url(../image/bg-clouds.png) repeat-y scroll left top;    
-    height:180px; 
-}
-
-#signup-error-message {
-    display: none;
-    width: 80%;
-    margin: 0 auto;
-    color: red;
-    border: 1px solid gray;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-#signup-btn-submit {
-    background-color: #E77A46;
-}
-
-#signup-down-btn-container {
-    position: absolute;
-    width: 100%;
-    bottom: 50px;
-}
 
 .speaker-photo-container {
     width: 20%;    
@@ -117,33 +85,8 @@ body {
     display: none;
 }
 
-#login-btn{
-    height: 50px;
-    padding: 5px;
-    line-height: 2rem;
-}
-
 .no-border-top {
     border-top: none;
-}
-
-.login_content {
-    margin-top: 40%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.signup-container {
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.signup-content {
-    position: absolute;
-    bottom: 50px;
-    width: 100%;
-    text-align: center;
 }
 
 .margin-center {
@@ -188,40 +131,11 @@ body {
 }
 
 
-
-/*.content_body {        
-    -webkit-tap-highlight-color:rgba(0,0,0,0);
-    width:100%;
-    /*min-height: 105%;
-    padding:0;
-}*/
-
-/*.scroller {
-    -webkit-transform: translate(0px, -108px) scale(1) translateZ(0px);
-    -webkit-transform-origin-x: 0px;
-    -webkit-transform-origin-y: 0px;
-    -webkit-transition-duration: 0ms;
-    -webkit-transition-property: -webkit
-}*/
-
-#logo{
-    background-image: url('../image/logo.png');
-    background-position : center;
-    background-size : 100px 200px;
-    background-repeat : no-repeat;
-    width: 100%;
-    height: 200px;
-}
-
 .block {
     display: block;
     margin: 0;
 }
 
-#login-button {
-    text-align: center;
-    margin-top: 10px;
-}
 
 .item-center {
     margin-left:auto;
@@ -249,24 +163,8 @@ body {
     font-size: 18px;
 }
 
-.company-name: {
-    font-size: 14px;
-}
-
 .speaker-role: {
     font-size: 14px;
-}
-
-.company-logo {
-    width: 80px;
-    height: 80px;
-    margin: 1px 10px 1px 1px;
-    float: left;
-}
-
-.company-logo-with-checkbox {
-    width: 80px;
-    height: 80px;
 }
 
 .item-title {    

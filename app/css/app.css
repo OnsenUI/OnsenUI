@@ -1,9 +1,3 @@
-/* app css stylesheet */
-
-.background-color{
-  background-color: white;
-}
-
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -31,33 +25,6 @@
 .menu > li:nth-child(1):before {
   content: "";
   padding: 0;
-}
-
-.zippy {
-  border: 1px solid black;
-  display: inline-block;
-  width: 250px;
-}
-.zippy.opened > .title:before { content: '▼ '; }
-.zippy.opened > .body { display: block; }
-.zippy.closed > .title:before { content: '► '; }
-.zippy.closed > .body { display: none; }
-.zippy > .title {
-  background-color: black;
-  color: white;
-  padding: .1em .3em;
-  cursor: pointer;
-}
-.zippy > .body {
-  padding: .1em .3em;
-}
-
-.red{
-  background-color: darkred;
-}
-
-.blue{
-  background-color: blue;
 }
 
 
