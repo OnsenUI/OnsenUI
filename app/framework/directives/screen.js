@@ -16,25 +16,41 @@
 			link: function(scope, element, attrs) {
 				var screenItems = [];
 				var isBack = false;
+				var isFirstRun = true;
 				scope.canGoBack = false;
 				scope.monaca = {};
 
-				scope.transitionEndCallback = function() {
-					isBack = false;
-				}
-
-				var title = angular.element(element.children()[0]);
 				scope.$watch('page', function(newPage) {
 					if (newPage) {
+						prepareAnimation();
 						var newScreenItem = {
 							source: newPage
 						}
 						scope.screenItem = newScreenItem;
 
-						screenItems.push(newScreenItem);
-						// evaluateCanGoBack();
+						screenItems.push(newScreenItem);						
 					}
 				});
+
+				function prepareAnimation(){
+					if(isFirstRun){
+						scope.animation = null;
+						isFirstRun = false;
+					}else{
+						if(isBack){
+							scope.animation = {
+								enter: 'unmodal-enter',
+								leave: 'unmodal-leave'
+							};							
+							isBack = false;
+						}else{
+							scope.animation = {
+								enter: 'modal-enter',
+								leave: 'modal-leave'
+							};
+						}
+					}
+				}
 
 				scope.monaca.presentPage = function(page) {
 					console.log('present page called, page:' + page);
@@ -47,39 +63,10 @@
 					}
 
 					isBack = true;
-					count = 0;
 					screenItems.pop();
 					var previousScreenItem = screenItems.pop();
 					scope.page = previousScreenItem.source;
-				}
-
-				//TODO: find a better way to check when the animation is ended.
-				// Tried webkitTransitionEnd event but it wont get called if we dont stop the break point in debug.
-				var count = 0;
-				var countAnimation = function() {
-					count++;
-					if (count === 2) {
-						count = 0;
-						scope.transitionEndCallback();
-					}
-				}
-
-				scope.getAnimation = function() {
-					var animation;
-					if (isBack) {
-						animation = {
-							enter: 'unmodal-enter',
-							leave: 'unmodal-leave'
-						};
-					} else {
-						animation = {
-							enter: 'modal-enter',
-							leave: 'modal-leave'
-						};
-					}
-					countAnimation();
-					return animation;
-				}
+				}				
 			}
 		}
 	});

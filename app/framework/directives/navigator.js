@@ -20,18 +20,15 @@
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
 				var childSources = [];
+				var isFirstRun = true;
 				var isBack = false;
 				var iconPrefix = 'topcoat-icon topcoat-icon--';
 				scope.canGoBack = false;
-				scope.monaca = {};
+				scope.monaca = {};				
 
-				scope.transitionEndCallback = function() {
-					isBack = false;
-				}
-
-				var title = angular.element(element.children()[0]);
 				scope.$watch('page', function(newPage) {
-					if (newPage) {
+					if (newPage) {	
+						prepareAnimation();					
 						var newNavigationItem = {
 							title: scope.title,
 							source: newPage
@@ -43,6 +40,27 @@
 					}
 				});
 
+				function prepareAnimation(){
+					if(isFirstRun){
+						scope.animation = null;
+						isFirstRun = false;
+					}else{
+						if(isBack){
+							scope.animation = {
+								enter: 'slide-right-enter',
+								leave: 'slide-right-leave'
+							};							
+							isBack = false;
+						}else{
+							scope.animation = {
+								enter: 'slide-left-enter',
+								leave: 'slide-left-leave'
+							};
+						}
+						
+					}
+				}
+
 				function evaluateLeftButtonIcon() {
 					if (scope.canGoBack) {
 						scope.leftButtonIcon = iconPrefix + 'back';
@@ -50,35 +68,7 @@
 						scope.leftButtonIcon = iconPrefix + scope.initialLeftButtonIcon;
 					}
 				}
-
-				//TODO: find a better way to check when the animation is ended.
-				// Tried webkitTransitionEnd event but it wont get called if we dont stop the break point in debug.
-				var count = 0;
-				var countAnimation = function() {
-					count++;
-					// console.log("count " + count);
-					if (count === 2) {
-						count = 0;
-						scope.transitionEndCallback();
-					}
-				}
-
-				scope.getAnimation = function() {
-					var animation;
-					if (isBack) {
-						animation = {
-							enter: 'slide-right-enter',
-							leave: 'slide-right-leave'
-						};
-					} else {
-						animation = {
-							enter: 'slide-left-enter',
-							leave: 'slide-left-leave'
-						};
-					}
-					countAnimation();
-					return animation;
-				}
+				
 
 				scope.leftButtonClicked = function() {
 					console.log('left button clicked canPop: ' + canPopPage());
@@ -105,7 +95,6 @@
 					}
 
 					isBack = true;
-					count = 0;
 					childSources.pop();
 					var previousNavigationItem = childSources.pop();
 					scope.title = previousNavigationItem.title;
