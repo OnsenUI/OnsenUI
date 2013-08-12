@@ -45,7 +45,7 @@
 						});
 
 						iScroll.on('scrollStart', function(e) {
-							// console.log('scroll start');
+							console.log('scroll start');
 							// console.log('scrollerHeight:' + iScroll.maxScrollY + ', distantY: ' + iScroll.y);
 
 							var scrolled = iScroll.y - offset;
@@ -58,7 +58,7 @@
 						});
 
 						iScroll.on('scrollEnd', function(e) {
-							// console.log('scroll end');
+							console.log('scroll end');
 							var scrolled = iScroll.y - offset;
 							// console.log('scrollerHeight:' + iScroll.maxScrollY + ', distantY: ' + iScroll.y + ', scrolled:' + scrolled);
 							if (scrolled < iScroll.maxScrollY) {

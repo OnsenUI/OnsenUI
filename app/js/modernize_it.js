@@ -6,15 +6,15 @@ Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function
 
 yepnope({
 	test: Modernizr.svg,
-	nope: ['maccha/app/css/topcoat-mobile-light-polyfill.css']
+	nope: ['lib/maccha/app/css/topcoat-mobile-light-polyfill.css']
 });
 
 yepnope({
 	test: Modernizr.overflowtouch,
-	nope: ['maccha/app/css/sliding_menu_polyfill.css']
+	nope: ['lib/maccha/app/css/sliding_menu_polyfill.css']
 });
 
 yepnope({
 	test: Modernizr.overflowtouch,
-	nope: ['maccha/app/lib/iscroll-lite.js']
+	nope: ['lib/maccha/app/lib/iscroll-lite.js']
 });
