@@ -3,7 +3,7 @@
 (function() {
 	var directives = angular.module('monaca.directives'); // no [] -> referencing existing module
 
-	directives.directive('monacaTabbar', function(MONACA_CONSTANTS) {
+	directives.directive('monacaTabbar', function(MONACA_CONSTANTS, $timeout) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -16,17 +16,11 @@
 
 				var tabItems = [];
 
-				this.gotSelected = function(selectedTabItem) {
-					$scope.selectedTabItem.source = selectedTabItem.page;
-					angular.forEach(tabItems, function(tabItem) {
-						if (selectedTabItem != tabItem) {
-							tabItem.isChecked = false;
-						}
-					});
+				this.gotSelected = function(selectedTabItem) {					
+					$scope.selectedTabItem.source = selectedTabItem.page;					
 				}
 
-				this.addTabItem = function(tabItem) {
-					console.log('addTabItem()');
+				this.addTabItem = function(tabItem) {					
 					tabItems.push(tabItem);
 				}
 			}

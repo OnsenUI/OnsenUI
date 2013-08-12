@@ -10,16 +10,22 @@
 			transclude: true,
 			require: '^?monacaTabbar',
 			scope: {
-				page: '@'
+				page: '@',
+				active: '@'
 			},
 			templateUrl: MONACA_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.html',
 			link: function(scope, element, attrs, monacaTabbarController) {
-				scope.isChecked = false;
 				monacaTabbarController.addTabItem(scope);
 
-				scope.toggle = function toggle() {
-					scope.isChecked = true;					
+				scope.setActive = function() {
+					console.log('setActive');
 					monacaTabbarController.gotSelected(scope);
+				}
+
+				if (scope.active) {
+					var radioButton = element.find('input:radio');
+					radioButton.attr('checked', true);
+					scope.setActive();
 				}
 
 			}
