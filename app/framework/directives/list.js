@@ -2,7 +2,7 @@
 
 var directives = angular.module('monaca.directives'); // no [] -> referencing existing module
 
-directives.directive('monacaList', function() {
+directives.directive('monacaList', function(MONACA_CONSTANTS) {
 	return {
 		restrict: 'E',
 		replace: false,
@@ -11,7 +11,7 @@ directives.directive('monacaList', function() {
 			monacaItems: "=",
 			triggerItemClicked: "&itemClick"
 		},
-		templateUrl: 'maccha/app/framework/templates/list.html',
+		templateUrl: MONACA_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list.html',
 		link: function(scope, element, attrs) {
 
 			scope.itemClick = function(index){

@@ -3,7 +3,7 @@
 (function() {
 	var directives = angular.module('monaca.directives');
 
-	directives.directive('monacaScreen', function() {
+	directives.directive('monacaScreen', function(MONACA_CONSTANTS) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -11,7 +11,7 @@
 			scope: {
 				page: '@'
 			},
-			templateUrl: 'maccha/app/framework/templates/screen.html',
+			templateUrl: MONACA_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/screen.html',
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
 				var screenItems = [];

@@ -3,7 +3,7 @@
 (function() {
 	var directives = angular.module('monaca.directives');
 
-	directives.directive('monacaNavigator', function() {
+	directives.directive('monacaNavigator', function(MONACA_CONSTANTS) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -16,7 +16,7 @@
 				onLeftButtonClick: '&',
 				onRightButtonClick: '&'
 			},
-			templateUrl: 'maccha/app/framework/templates/navigator.html',
+			templateUrl: MONACA_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.html',
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
 				var childSources = [];

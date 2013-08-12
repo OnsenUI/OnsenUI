@@ -3,7 +3,7 @@
 (function() {
 	var directives = angular.module('monaca.directives'); // no [] -> referencing existing module
 
-	directives.directive('monacaSlidingMenu', function() {
+	directives.directive('monacaSlidingMenu', function(MONACA_CONSTANTS) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -12,7 +12,7 @@
 				behindPage: '@',
 				abovePage: '@'
 			},
-			templateUrl: 'maccha/app/framework/templates/sliding_menu.html',
+			templateUrl: MONACA_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.html',
 			link: function(scope, element, attrs) {
 				scope.pages = {
 					behind: scope.behindPage,

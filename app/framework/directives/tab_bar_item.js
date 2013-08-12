@@ -3,7 +3,7 @@
 (function() {
 	var directives = angular.module('monaca.directives'); // no [] -> referencing existing module
 
-	directives.directive('monacaTabbarItem', function() {
+	directives.directive('monacaTabbarItem', function(MONACA_CONSTANTS) {
 		return {
 			restrict: 'E',
 			replace: true,
@@ -12,7 +12,7 @@
 			scope: {
 				page: '@'
 			},
-			templateUrl: 'maccha/app/framework/templates/tab_bar_item.html',
+			templateUrl: MONACA_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.html',
 			link: function(scope, element, attrs, monacaTabbarController) {
 				scope.isChecked = false;
 				monacaTabbarController.addTabItem(scope);
