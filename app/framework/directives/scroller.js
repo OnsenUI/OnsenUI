@@ -10,7 +10,7 @@
 			transclude: true,
 			scope: {
 				onScrolled: '&',
-				infinitScrollEnable: '@'
+				infinitScrollEnable: '='
 			},
 			templateUrl: MONACA_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/scroller.html',
 			link: function(scope, element, attrs) {
