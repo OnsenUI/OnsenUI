@@ -33,8 +33,24 @@
 				scope.monaca.toggleMenu = function() {
 					var newStatus = scope.status == 'close' ?
 						'open' : 'close';
-
+						
 					scope.status = newStatus;
+				}
+
+				scope.monaca.setAbovePage = function(page){					
+					if(page){
+						scope.pages.above = page;
+					}else{
+						throw new Error('cannot set undefined page');
+					}
+				}
+
+				scope.monaca.setBehindPage = function(page){					
+					if(page){
+						scope.pages.behind = page;
+					}else{
+						throw new Error('cannot set undefined page');
+					}
 				}
 			}
 		};
