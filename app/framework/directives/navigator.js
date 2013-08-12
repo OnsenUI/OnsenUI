@@ -148,14 +148,7 @@
 						parentFunction.call(scope, param);
 					} else {
 						callParent(scope.$parent, functionName, param);
-					}
-
-					// var code = 'scope.' + functionName;
-					// if (eval(code)) {
-					// 	eval(code + '();');
-					// } else {
-					// 	callParent(scope.$parent, functionName, param);
-					// }
+					}					
 
 				}
 
