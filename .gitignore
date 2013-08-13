@@ -1,2 +1,4 @@
 logs/*
 !.gitkeep
+build
+node_modules
