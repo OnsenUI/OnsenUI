@@ -5,6 +5,17 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    clean: {
+      dist: {
+        files: [{
+          dot: true,
+          src: [
+            '.tmp',
+            'build'
+          ]
+        }]
+      }      
+    },
     cssmin: {
       add_banner: {
         options: {
@@ -42,35 +53,47 @@ module.exports = function(grunt) {
     // Put files not handled in other tasks here
     copy: {
       dist: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: 'app',
-          dest: 'build',
-          src: [
-            'img/{,*/}*.{gif,webp,svg}',
-            'font/*'            
-          ]
-        }, 
-        {
-          expand: true,   
-          cwd: 'app/css/polyfill',       
-          dest: 'build/css/polyfill/',
-          src: [
-            '*.css'
-          ]
-        }]
+        files: [
+          //images and font
+          { 
+            expand: true,
+            dot: true,
+            cwd: 'app',
+            dest: 'build',
+            src: [
+              'img/{,*/}*.{gif,webp,svg,png}',
+              'font/*'            
+            ]
+          },
+          // css polyfills 
+          {
+            expand: true,   
+            cwd: 'app/css/polyfill',       
+            dest: 'build/css/polyfill/',
+            src: [
+              '*.css'
+            ]
+          },
+          // directive templates
+          {
+            expand: true,   
+            cwd: 'app/templates/',       
+            dest: 'build/templates/',
+            src: [
+              '*.html'
+            ]
+          }
+        ]
       }
     }
   });
 
-  // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
-
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify', 'cssmin', 'copy']);
+  grunt.registerTask('default', ['clean', 'uglify', 'cssmin', 'copy']);
 
 };
