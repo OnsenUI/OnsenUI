@@ -1,0 +1,15 @@
+.topcoat-icon--menu-stack {
+  background: url("../../img/hamburger_dark.png") no-repeat !important;  
+}
+
+.topcoat-icon--back {
+    background: url("../../img/back.png") no-repeat !important;
+}
+
+.topcoat-icon--cancel {
+    background: url("../../img/cancel.png") no-repeat !important;    
+}
+
+.topcoat-icon--down {
+    background: url("../../img/down.png") no-repeat !important;    
+}

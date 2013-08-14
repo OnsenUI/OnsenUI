@@ -11,34 +11,3 @@
     /*overflow-y: auto;*/
     background-color: #E5E9E8;    
 }
-
-#pager {    
-    -webkit-overflow-scrolling: touch;
-    overflow: auto;
-}
-
-.animation {
-	position: absolute;
-	left: 0;
-	width: 100%;
-}
-
-.animation.left {
-    -webkit-transform: translate3d(-100%, 0, 0);
-    transform: translate3d(-100%, 0, 0);
-}
-
-.animation.center {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-}
-
-.animation.right {
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
-}
-
-.animation.transition {
-    -webkit-transition-duration: .25s;
-    transition-duration: .25s;
-}
