@@ -15,17 +15,18 @@
 			templateUrl: MONACA_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/scroller.html',
 			link: function(scope, element, attrs) {
 				// inifinte scroll
-				var scrollerWrapper = element.find('.scroller-wrapper');
+				var scrollerWrapper = element[0].querySelector('.scroller-wrapper');
 				var offset = parseInt(attrs.threshold) || 0;
-				var e = scrollerWrapper[0];
+				var e = scrollerWrapper;
 
-				scrollerWrapper.bind('scroll', function() {
+				scrollerWrapper.addEventListener('scroll', function() {
+					// console.log('onScroll');
 					if (scope.infinitScrollEnable) {
 						var scrollTopAndOffsetHeight = e.scrollTop + e.offsetHeight;
 						var scrollHeightMinusOffset = e.scrollHeight - offset;
 						// console.log('scrollTopAndOffsetHeight: ' + scrollTopAndOffsetHeight + ', scrollHeightMinusOffset: ' + scrollHeightMinusOffset);
 						if (scrollTopAndOffsetHeight >= scrollHeightMinusOffset) {
-							console.log('we are there!');
+							// console.log('we are there!');
 							scope.onScrolled();
 						} else {
 							// console.log('not yet there!');
@@ -68,7 +69,6 @@
 						});
 					}, 0);
 				}
-
 			}
 		};
 	});

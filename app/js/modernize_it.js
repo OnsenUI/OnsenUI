@@ -6,15 +6,10 @@ Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function
 
 yepnope({
 	test: Modernizr.svg,
-	nope: ['lib/maccha/build/css/polyfill/topcoat-mobile-light-polyfill.css']
+	nope: ['maccha/css/polyfill/topcoat-mobile-light-polyfill.css']
 });
 
 yepnope({
 	test: Modernizr.overflowtouch,
-	nope: ['lib/maccha/build/css/polyfill/sliding_menu_polyfill.css']
-});
-
-yepnope({
-	test: Modernizr.overflowtouch,
-	nope: ['lib/maccha/app/lib/iscroll-lite.js']
+	nope: ['maccha/css/polyfill/sliding_menu_polyfill.css']
 });
