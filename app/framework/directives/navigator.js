@@ -107,6 +107,11 @@
 					scope.page = page;
 				}
 
+				scope.monaca.resetToPage = function(page, title){
+					childSources = [];
+					scope.monaca.pushPage(page, title);
+				}
+
 				//TODO: this hack is for monaca-screen scope.
 				// since we are creating isolate scope, calling prensentPage() from child scope
 				// doesn't propagate to monaca-screen scope.
