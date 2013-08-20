@@ -19,6 +19,13 @@
     background-size: cover;
 }
 
+.topcoat-icon--plus {
+    background: url("../img/plus.svg") no-repeat; /* TODO: there is a bug with original plus.svg. it is now replaced with plus.svg from google svg editor*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}
+
 
 /*
  6.1 Structural - Well
