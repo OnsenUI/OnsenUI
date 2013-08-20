@@ -5,7 +5,7 @@ var directives = angular.module('monaca.directives'); // no [] -> referencing ex
 directives.directive('monacaListItem', function(MONACA_CONSTANTS) {
 	return {
 		restrict: 'E',
-		replace: false,
+		replace: true,
 		transclude: true,
 		templateUrl: MONACA_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list_item.html'
 	};
