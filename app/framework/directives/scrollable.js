@@ -18,13 +18,13 @@
 				}
 
 				scrollWrapper = element[0];
-				var offset = parseInt(attrs.threshold) || 0;
+				var offset = parseInt(attrs.threshold) || 1;
 
 				scrollWrapper.addEventListener('scroll', function() {
 					if (scope.infinitScrollEnable) {
 						var scrollTopAndOffsetHeight = scrollWrapper.scrollTop + scrollWrapper.offsetHeight;
 						var scrollHeightMinusOffset = scrollWrapper.scrollHeight - offset;
-						
+
 						if (scrollTopAndOffsetHeight >= scrollHeightMinusOffset) {
 							scope.onScrolled();
 						}						
