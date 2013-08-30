@@ -18,12 +18,11 @@
 				monacaTabbarController.addTabItem(scope);
 
 				scope.setActive = function() {
-					console.log('setActive');
 					monacaTabbarController.gotSelected(scope);
 				}
 
 				if (scope.active) {
-					var radioButton = element.find('input:radio');
+					var radioButton = element.find('input');
 					radioButton.attr('checked', true);
 					scope.setActive();
 				}
