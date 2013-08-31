@@ -52,6 +52,45 @@
 						throw new Error('cannot set undefined page');
 					}
 				}
+
+				// hack for isolated scope that shield monaca-screen scope
+				scope.monaca.presentPage = function(page) {
+					console.log('NC present page');
+					callParent(scope, 'monaca.presentPage', page);
+				}
+
+				scope.monaca.dismissPage = function() {
+					callParent(scope, 'monaca.dismissPage');
+				}
+
+				function callParent(scope, functionName, param) {
+					if (!scope.$parent) {
+						return;
+					}
+
+					var parentFunction = stringToFunction(scope.$parent, functionName);
+					if (parentFunction) {
+						parentFunction.call(scope, param);
+					} else {
+						callParent(scope.$parent, functionName, param);
+					}					
+
+				}
+
+				function stringToFunction(root, str) {
+					var arr = str.split(".");
+
+					var fn = root;
+					for (var i = 0, len = arr.length; i < len; i++) {
+						fn = fn[arr[i]];
+					}
+
+					if (typeof fn !== "function") {
+						return false;
+					}
+
+					return fn;
+				};
 			}
 		};
 	});
