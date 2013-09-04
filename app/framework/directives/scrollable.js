@@ -1,9 +1,9 @@
 'use strict';
 
 (function() {
-	var directives = angular.module('monaca.directives'); // no [] -> referencing existing module
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('monacaScrollable', function(MONACA_CONSTANTS, $timeout) {
+	directives.directive('onsScrollable', function(ONSEN_CONSTANTS, $timeout) {
 		return {
 			restrict: 'A',
 			replace: false,
@@ -18,13 +18,13 @@
 				}
 
 				scrollWrapper = element[0];
-				var offset = parseInt(attrs.threshold) || 1;
+				var offset = parseInt(attrs.threshold) || 0;
 
 				scrollWrapper.addEventListener('scroll', function() {
 					if (scope.infinitScrollEnable) {
 						var scrollTopAndOffsetHeight = scrollWrapper.scrollTop + scrollWrapper.offsetHeight;
 						var scrollHeightMinusOffset = scrollWrapper.scrollHeight - offset;
-
+						
 						if (scrollTopAndOffsetHeight >= scrollHeightMinusOffset) {
 							scope.onScrolled();
 						}						

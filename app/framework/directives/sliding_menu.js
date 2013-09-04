@@ -1,9 +1,9 @@
 'use strict';
 
 (function() {
-	var directives = angular.module('monaca.directives'); // no [] -> referencing existing module
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('monacaSlidingMenu', function(MONACA_CONSTANTS) {
+	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -12,32 +12,33 @@
 				behindPage: '@',
 				abovePage: '@'
 			},
-			templateUrl: MONACA_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.html',
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.html',
 			link: function(scope, element, attrs) {
 				scope.pages = {
 					behind: scope.behindPage,
 					above: scope.abovePage
 				};
-				scope.monaca = {};
+				scope.ons = scope.ons || {};
+				scope.ons.slidingMenu = scope.ons.slidingMenu || {};
 
 				scope.status = "close";
 
-				scope.monaca.openMenu = function() {
+				scope.ons.slidingMenu.openMenu = function() {
 					scope.status = 'open';
 				}
 
-				scope.monaca.closeMenu = function() {
+				scope.ons.slidingMenu.closeMenu = function() {
 					scope.status = 'close';
 				}
 
-				scope.monaca.toggleMenu = function() {
+				scope.ons.slidingMenu.toggleMenu = function() {
 					var newStatus = scope.status == 'close' ?
 						'open' : 'close';
 						
 					scope.status = newStatus;
 				}
 
-				scope.monaca.setAbovePage = function(page){					
+				scope.ons.slidingMenu.setAbovePage = function(page){					
 					if(page){
 						scope.pages.above = page;
 					}else{
@@ -45,7 +46,7 @@
 					}
 				}
 
-				scope.monaca.setBehindPage = function(page){					
+				scope.ons.slidingMenu.setBehindPage = function(page){					
 					if(page){
 						scope.pages.behind = page;
 					}else{
@@ -53,14 +54,14 @@
 					}
 				}
 
-				// hack for isolated scope that shield monaca-screen scope
-				scope.monaca.presentPage = function(page) {
+				scope.ons.screen = scope.ons.screen || {};
+				scope.ons.screen.presentPage = function(page) {
 					console.log('NC present page');
-					callParent(scope, 'monaca.presentPage', page);
+					callParent(scope, 'ons.screen.presentPage', page);
 				}
 
-				scope.monaca.dismissPage = function() {
-					callParent(scope, 'monaca.dismissPage');
+				scope.ons.screen.dismissPage = function() {
+					callParent(scope, 'ons.screen.dismissPage');
 				}
 
 				function callParent(scope, functionName, param) {

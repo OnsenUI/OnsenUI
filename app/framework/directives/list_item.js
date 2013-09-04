@@ -1,12 +1,12 @@
 'use strict';
 
-var directives = angular.module('monaca.directives'); // no [] -> referencing existing module
+var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-directives.directive('monacaListItem', function(MONACA_CONSTANTS) {
+directives.directive('onsListItem', function(ONSEN_CONSTANTS) {
 	return {
 		restrict: 'E',
 		replace: true,
 		transclude: true,
-		templateUrl: MONACA_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list_item.html'
+		templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list_item.html'
 	};
 });

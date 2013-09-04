@@ -1,19 +1,19 @@
 'use strict';
 
 (function() {
-	var directives = angular.module('monaca.directives'); // no [] -> referencing existing module
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('monacaTabbarItem', function(MONACA_CONSTANTS) {
+	directives.directive('onsTabbarItem', function(ONSEN_CONSTANTS) {
 		return {
 			restrict: 'E',
 			replace: true,
 			transclude: true,
-			require: '^?monacaTabbar',
+			require: '^?onsTabbar',
 			scope: {
 				page: '@',
 				active: '@'
 			},
-			templateUrl: MONACA_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.html',
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.html',
 			link: function(scope, element, attrs, monacaTabbarController) {
 				monacaTabbarController.addTabItem(scope);
 

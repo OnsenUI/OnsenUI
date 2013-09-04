@@ -1,9 +1,9 @@
 'use strict';
 
 (function() {
-	var directives = angular.module('monaca.directives'); // no [] -> referencing existing module
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('monacaScroller', function(MONACA_CONSTANTS, $timeout) {
+	directives.directive('onsScroller', function(ONSEN_CONSTANTS, $timeout) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -12,7 +12,7 @@
 				onScrolled: '&',
 				infinitScrollEnable: '='
 			},
-			templateUrl: MONACA_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/scroller.html'			
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/scroller.html'			
 		};
 	});
 })();

@@ -1,9 +1,9 @@
 'use strict';
 
 (function() {
-	var directives = angular.module('monaca.directives');
+	var directives = angular.module('onsen.directives');
 
-	directives.directive('monacaNavigator', function(MONACA_CONSTANTS) {
+	directives.directive('onsNavigator', function(ONSEN_CONSTANTS) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -16,7 +16,7 @@
 				onLeftButtonClick: '&',
 				onRightButtonClick: '&'
 			},
-			templateUrl: MONACA_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.html',
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.html',
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
 				var childSources = [];
@@ -24,7 +24,8 @@
 				var isBack = false;
 				var iconPrefix = 'topcoat-icon topcoat-icon--';
 				scope.canGoBack = false;
-				scope.monaca = {};				
+				scope.ons = scope.ons || {};
+				scope.ons.navigator = scope.ons.navigator || {};
 
 				scope.$watch('page', function(newPage) {
 					if (newPage) {	
@@ -73,7 +74,7 @@
 				scope.leftButtonClicked = function() {
 					console.log('left button clicked canPop: ' + canPopPage());
 					if (canPopPage()) {
-						scope.monaca.popPage();
+						scope.ons.navigator.popPage();
 					} else {
 						scope.onLeftButtonClick();
 					}
@@ -89,7 +90,7 @@
 					return childSources.length > 1;
 				}
 
-				scope.monaca.popPage = function() {
+				scope.ons.navigator.popPage = function() {
 					if (childSources.length < 2) {
 						return;
 					}
@@ -101,15 +102,10 @@
 					scope.page = previousNavigationItem.source;
 				}
 
-				scope.monaca.pushPage = function(page, title) {
+				scope.ons.navigator.pushPage = function(page, title) {
 					console.log('pushPage called. page: ' + page);
 					scope.title = title;
 					scope.page = page;
-				}
-
-				scope.monaca.resetToPage = function(page, title){
-					childSources = [];
-					scope.monaca.pushPage(page, title);
 				}
 
 				//TODO: this hack is for monaca-screen scope.
@@ -119,25 +115,27 @@
 
 				// since our directive use scope:{...} it will not inherite prototypically. -> that why we need to use callParent();
 				// https://github.com/angular/angular.js/wiki/Understanding-Scopes
-				scope.monaca.presentPage = function(page) {
+				scope.ons.screen = scope.ons.screen || {};
+				scope.ons.screen.presentPage = function(page) {
 					console.log('NC present page');
-					callParent(scope, 'monaca.presentPage', page);
+					callParent(scope, 'ons.screen.presentPage', page);
 				}
 
-				scope.monaca.dismissPage = function() {
-					callParent(scope, 'monaca.dismissPage');
+				scope.ons.screen.dismissPage = function() {
+					callParent(scope, 'ons.screen.dismissPage');
 				}
 
-				scope.monaca.openMenu = function() {
-					callParent(scope, 'monaca.openMenu');
+				scope.ons.slidingMenu = scope.ons.slidingMenu || {};
+				scope.ons.slidingMenu.openMenu = function() {
+					callParent(scope, 'ons.slidingMenu.openMenu');
 				}
 
-				scope.monaca.closeMenu = function() {
-					callParent(scope, 'monaca.closeMenu');
+				scope.ons.slidingMenu.closeMenu = function() {
+					callParent(scope, 'ons.slidingMenu.closeMenu');
 				}
 
-				scope.monaca.toggleMenu = function() {
-					callParent(scope, 'monaca.toggleMenu');
+				scope.ons.slidingMenu.toggleMenu = function() {
+					callParent(scope, 'ons.slidingMenu.toggleMenu');
 				}
 
 				// TODO: support params overloading.
