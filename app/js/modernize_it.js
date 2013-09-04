@@ -6,10 +6,10 @@ Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function
 
 yepnope({
 	test: Modernizr.svg,
-	nope: ['maccha/css/polyfill/topcoat-mobile-light-polyfill.css']
+	nope: ['onsenui/css/polyfill/topcoat-mobile-light-polyfill.css']
 });
 
 yepnope({
 	test: Modernizr.overflowtouch,
-	nope: ['maccha/css/polyfill/sliding_menu_polyfill.css']
+	nope: ['onsenui/css/polyfill/sliding_menu_polyfill.css']
 });
