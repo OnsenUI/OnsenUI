@@ -79,7 +79,7 @@ module.exports = function(grunt) {
             cwd: 'app/templates/',       
             dest: 'build/templates/',
             src: [
-              '*.html'
+              '*.*'
             ]
           }
         ]
