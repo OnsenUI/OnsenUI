@@ -114,15 +114,15 @@
               "img/search_light.svg",
               "img/spinner.png",
               "img/spinner2x.png",
-              "templates/button.html",
-              "templates/list.html",
-              "templates/list_item.html",
-              "templates/navigator.html",
-              "templates/screen.html",
-              "templates/scroller.html",
-              "templates/sliding_menu.html",
-              "templates/tab_bar.html",
-              "templates/tab_bar_item.html"
+              "templates/button.tpl",
+              "templates/list.tpl",
+              "templates/list_item.tpl",
+              "templates/navigator.tpl",
+              "templates/screen.tpl",
+              "templates/scroller.tpl",
+              "templates/sliding_menu.tpl",
+              "templates/tab_bar.tpl",
+              "templates/tab_bar_item.tpl"
             ]
           }
         },
@@ -193,15 +193,15 @@
               "img/search_light.svg",
               "img/spinner.png",
               "img/spinner2x.png",
-              "templates/button.html",
-              "templates/list.html",
-              "templates/list_item.html",
-              "templates/navigator.html",
-              "templates/screen.html",
-              "templates/scroller.html",
-              "templates/sliding_menu.html",
-              "templates/tab_bar.html",
-              "templates/tab_bar_item.html"
+              "templates/button.tpl",
+              "templates/list.tpl",
+              "templates/list_item.tpl",
+              "templates/navigator.tpl",
+              "templates/screen.tpl",
+              "templates/scroller.tpl",
+              "templates/sliding_menu.tpl",
+              "templates/tab_bar.tpl",
+              "templates/tab_bar_item.tpl"
             ]
           }
         },
@@ -272,15 +272,15 @@
               "img/search_light.svg",
               "img/spinner.png",
               "img/spinner2x.png",
-              "templates/button.html",
-              "templates/list.html",
-              "templates/list_item.html",
-              "templates/navigator.html",
-              "templates/screen.html",
-              "templates/scroller.html",
-              "templates/sliding_menu.html",
-              "templates/tab_bar.html",
-              "templates/tab_bar_item.html"
+              "templates/button.tpl",
+              "templates/list.tpl",
+              "templates/list_item.tpl",
+              "templates/navigator.tpl",
+              "templates/screen.tpl",
+              "templates/scroller.tpl",
+              "templates/sliding_menu.tpl",
+              "templates/tab_bar.tpl",
+              "templates/tab_bar_item.tpl"
             ]
           }
         }
