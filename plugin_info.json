@@ -2,15 +2,15 @@
   "OnsenUI" : {
     "displayName" : "Onsen UI",
     "description" : {
-      "ja" : "",
+      "ja" : "温泉UIはシンプルで快適な操作性を提供するHTML5 UIフレームワークです。",
       "en" : "HTML5 UI framework designed to be Simple, Fast and Powerful"
     },
     "websiteUrl"  : {
-      "ja" : "http://docs.monaca.mobi/en/onsen/",
+      "ja" : "http://docs.monaca.mobi/ja/onsen/",
       "en" : "http://docs.monaca.mobi/en/onsen/"
     },
     "documentUrl" : {
-      "ja" : "http://docs.monaca.mobi/en/onsen/",
+      "ja" : "http://docs.monaca.mobi/ja/onsen/",
       "en" : "http://docs.monaca.mobi/en/onsen/"
     },
     "type" : ["javascript"],
