@@ -42,7 +42,6 @@ module.exports = function(grunt) {
           'app/framework/directives/module.js',
           'app/framework/directives/*.js',          
           'app/lib/*.js',          
-          '!app/lib/modernizr.custom.js',
           'app/js/*.js',
           '!app/js/app.js'
         ],
