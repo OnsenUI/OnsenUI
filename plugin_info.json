@@ -14,7 +14,7 @@
       "en" : "http://docs.monaca.mobi/en/onsen/"
     },
     "type" : ["javascript"],
-    "platform" : ["android", "ios", "winrt"],
+    "platform" : ["android", "ios", "winrt", "web"],
     "frameworkDependent" : false,
     "require" : null,
     "forms" : {
@@ -27,21 +27,21 @@
         "android" : {
           "default" : {
             "mandatory" : {
-              "onsen.min.js.js" : "onsen.min.js",              
+              "onsen.min.js.js" : "onsen.min.js"
             }
           }
         },
         "ios" : {
           "default" : {
             "mandatory" : {
-              "onsen.min.js.js" : "onsen.min.js",              
+              "onsen.min.js.js" : "onsen.min.js"
             }
           }
         },
         "winrt" : {
           "default" : {
             "mandatory" : {
-              "onsen.min.js.js" : "onsen.min.js",              
+              "onsen.min.js.js" : "onsen.min.js"
             }
           }
         }
@@ -286,5 +286,5 @@
         }
       }
     }
-  },
+  }
 }
