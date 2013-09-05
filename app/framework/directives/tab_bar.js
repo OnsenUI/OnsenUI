@@ -1,6 +1,5 @@
-'use strict';
-
 (function() {
+	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
 	directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout) {

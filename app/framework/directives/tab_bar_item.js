@@ -1,6 +1,5 @@
-'use strict';
-
 (function() {
+	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
 	directives.directive('onsTabbarItem', function(ONSEN_CONSTANTS) {
@@ -19,7 +18,7 @@
 
 				scope.setActive = function() {
 					monacaTabbarController.gotSelected(scope);
-				}
+				};
 
 				if (scope.active) {
 					var radioButton = element.find('input');

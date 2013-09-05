@@ -1,6 +1,5 @@
-'use strict';
-
 (function() {
+	'use strict';
 	var directives = angular.module('onsen.directives');
 
 	directives.directive('onsNavigator', function(ONSEN_CONSTANTS) {
