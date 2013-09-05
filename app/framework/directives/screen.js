@@ -11,7 +11,7 @@
 			scope: {
 				page: '@'
 			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/screen.html',
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/screen.tpl',
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
 				var screenItems = [];

@@ -12,7 +12,7 @@
 				onScrolled: '&',
 				infinitScrollEnable: '='
 			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/scroller.html'			
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/scroller.tpl'			
 		};
 	});
 })();

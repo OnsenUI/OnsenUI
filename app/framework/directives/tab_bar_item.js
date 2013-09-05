@@ -13,7 +13,7 @@
 				page: '@',
 				active: '@'
 			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.html',
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
 			link: function(scope, element, attrs, monacaTabbarController) {
 				monacaTabbarController.addTabItem(scope);
 

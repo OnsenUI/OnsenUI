@@ -7,6 +7,6 @@ directives.directive('onsList', function(ONSEN_CONSTANTS, $timeout) {
 		restrict: 'E',
 		replace: false,
 		transclude: true,
-		templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list.html'
+		templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list.tpl'
 	};
 });

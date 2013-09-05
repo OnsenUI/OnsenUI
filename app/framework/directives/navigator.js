@@ -16,7 +16,7 @@
 				onLeftButtonClick: '&',
 				onRightButtonClick: '&'
 			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.html',
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.tpl',
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
 				var childSources = [];

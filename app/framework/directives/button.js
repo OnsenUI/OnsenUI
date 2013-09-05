@@ -7,6 +7,6 @@ directives.directive('onsButton', function(ONSEN_CONSTANTS) {
 		restrict: 'E',
 		replace: true,		
 		transclude: true,
-		templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/button.html'
+		templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/button.tpl'
 	};
 });

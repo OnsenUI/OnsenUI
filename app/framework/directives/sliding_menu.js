@@ -12,7 +12,7 @@
 				behindPage: '@',
 				abovePage: '@'
 			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.html',
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
 				scope.pages = {
 					behind: scope.behindPage,

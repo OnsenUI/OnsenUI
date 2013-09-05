@@ -8,7 +8,7 @@
 			restrict: 'E',
 			replace: false,
 			transclude: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.html',
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
 			controller: function($scope) {
 				$scope.selectedTabItem = {
 					source: ''
