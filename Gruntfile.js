@@ -61,7 +61,7 @@ module.exports = function(grunt) {
             dest: 'build',
             src: [
               'img/{,*/}*.{gif,webp,svg,png}',
-              'font/*'            
+              'font/*',                       
             ]
           },
           // css polyfills 
@@ -80,6 +80,14 @@ module.exports = function(grunt) {
             dest: 'build/templates/',
             src: [
               '*.*'
+            ]
+          },
+          // plugin_info.json
+          {
+            expand: false,                 
+            dest: 'build/plugin_info.json',
+            src: [
+              'plugin_info.json'
             ]
           }
         ]
