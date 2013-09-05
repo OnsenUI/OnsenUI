@@ -30,14 +30,13 @@ module.exports = function(grunt) {
           ]
         }
       }
-    },      
-    uglify: {
+    },
+    concat: {
       options: {
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-                '<%= grunt.template.today("yyyy-mm-dd") %> */\n',
-        mangle: false
+                '<%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
-      build: {
+      dist: {
         src: [
           'app/lib/angular/angular.js',
           'app/framework/directives/module.js',
@@ -49,7 +48,7 @@ module.exports = function(grunt) {
         ],
         dest: 'build/<%= pkg.name %>.min.js'
       }
-    },
+    },     
     // Put files not handled in other tasks here
     copy: {
       dist: {
@@ -88,12 +87,12 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-concat');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'uglify', 'cssmin', 'copy']);
+  grunt.registerTask('default', ['clean', 'concat', 'cssmin', 'copy']);
 
 };
