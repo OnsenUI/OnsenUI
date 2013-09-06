@@ -3,7 +3,7 @@
 
 	directiveModules.factory('ONSEN_CONSTANTS', function() {
 		var CONSTANTS = {
-			DIRECTIVE_TEMPLATE_URL: "plugins/onsenui/templates"
+			DIRECTIVE_TEMPLATE_URL: "lib/maccha/app/templates"
 		};
 
 		return CONSTANTS;

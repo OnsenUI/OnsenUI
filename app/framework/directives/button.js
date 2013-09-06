@@ -7,7 +7,46 @@
 			restrict: 'E',
 			replace: true,
 			transclude: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/button.tpl'
+			scope: {
+				isSpinning: '@',
+				animation: '@',
+				type: '@',
+				disabled: '@',
+				ngClick: '&'
+			},
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
+			link: function(scope, element, attrs){
+				var effectButton = element.find('button');
+				var TYPE_PREFIX = "topcoat-button--";
+				scope.item = {};
+
+				// if animation is not specified -> default is slide-left
+				if(scope.animation === undefined || scope.animation === ""){
+					scope.item.animation = "slide-left";
+				}
+		
+				scope.$watch('disabled', function(disabled){
+					if(disabled === "true"){
+						effectButton.addClass('is-disabled');
+					}else{
+						effectButton.removeClass('is-disabled');
+					}
+				});
+
+				scope.$watch('animation', function(newAnimation){
+					if(newAnimation){
+						scope.item.animation = newAnimation;
+					}
+				});
+
+				scope.$watch('isSpinning', function(newIsSpinning){
+					if(newIsSpinning === "true"){
+						effectButton.attr('data-loading', true);
+					}else{
+						effectButton.removeAttr('data-loading');
+					}
+				});
+			}
 		};
 	});
 })();
