@@ -8,7 +8,7 @@
 			replace: true,
 			transclude: true,
 			scope: {
-				isSpinning: '@',
+				shouldSpin: '@',
 				animation: '@',
 				type: '@',
 				disabled: '@',
@@ -39,8 +39,8 @@
 					}
 				});
 
-				scope.$watch('isSpinning', function(newIsSpinning){
-					if(newIsSpinning === "true"){
+				scope.$watch('shouldSpin', function(shouldSpin){
+					if(shouldSpin === "true"){
 						effectButton.attr('data-loading', true);
 					}else{
 						effectButton.removeAttr('data-loading');
