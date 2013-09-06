@@ -9,7 +9,13 @@ Creator
 Mentor
 - Hiroshi Shikata
 
+###
+Masahiro Tanaka
+
 Logo
 - Mao Takahashi
+
+Project Name
+- Khourn Khemry
 
 
