@@ -1,14 +1,18 @@
 .transition {
     -webkit-transition-duration: .25s;
+    -moz-transition-duration: .25s;
+    transition-duration: .25s;
 }
 
 .open{
     -webkit-transform: translate3d(70%, 0, 0);
+    -moz-transform: translate3d(70%, 0, 0);
     transform: translate3d(70%, 0, 0);
 }
 
 .close{
     -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
 }
 
