@@ -1,0 +1,110 @@
+.zoom-show {
+  -webkit-transition: .25s ease all .001s; /* Chrome */
+  opacity: 0;
+  -webkit-transform: scale(0.6);
+}
+
+.zoom-show.zoom-show-active {
+  opacity: 1;
+  -webkit-transform: scale(1.0);
+}
+
+.zoom-hide {
+  -webkit-transition: .25s ease all .001s; /* Chrome */
+  opacity: 1;
+  -webkit-transform: scale(1.0);
+}
+
+.zoom-hide.zoom-hide-active {
+  opacity: 0;
+  -webkit-transform: scale(0.2);
+}
+
+.zoom-enter {
+  -webkit-transition: .25s ease all .001s; /* Chrome */
+  opacity: 0;
+  -webkit-transform: scale(0.6);
+}
+
+.zoom-enter.zoom-enter-active {
+  opacity: 1;
+  -webkit-transform: scale(1.0);
+}
+
+.zoom-leave {
+  -webkit-transition: .25s ease all .001s; /* Chrome */
+  opacity: 1;
+  -webkit-transform: scale(1.0);
+}
+
+.zoom-leave.zoom-leave-active {
+  opacity: 0;
+  -webkit-transform: scale(0.2);
+}
+
+
+.zoom-big-show {
+  -webkit-transition: .25s ease all .001s; /* Chrome */
+  opacity: 0;
+  -webkit-transform: scale(0.2);
+}
+
+.zoom-big-show.zoom-big-show-active {
+  opacity: 1;
+  -webkit-transform: scale(1.0);
+}
+
+.zoom-big-hide {
+  -webkit-transition: .25s ease all .001s; /* Chrome */
+  opacity: 1;
+  -webkit-transform: scale(1.0);
+}
+
+.zoom-big-hide.zoom-big-hide-active {
+  opacity: 0.1;
+  -webkit-transform: scale(0.6);
+}
+
+
+
+.reveal-show {
+  -webkit-transition: .5s ease-out all .005s; /* Chrome */
+  max-height: 0;
+}
+
+.reveal-show.reveal-show-active {
+  max-height: 500px;
+}
+
+.reveal-hide {
+  -webkit-transition: .3s ease-out all .001s; /* Chrome */
+  max-height: 500px;
+}
+
+.reveal-hide.reveal-hide-active {
+  max-height: 0;
+}
+
+
+
+.slide-enter {
+  -webkit-transition: .25s ease all .001s; /* Chrome */
+  line-height: 0;
+  -webkit-transform: scale(0.6);
+}
+
+.slide-enter.slide-enter-active {
+  line-height: 100%;
+  -webkit-transform: scale(1.0);
+}
+
+.slide-leave {
+  -webkit-transition: .25s ease all .001s; /* Chrome */
+  line-height: 100%;
+  -webkit-transform: scale(1.0);
+}
+
+.slide-leave.slide-leave-active {
+  line-height: 0;
+  -webkit-transform: scale(0.2);
+}
