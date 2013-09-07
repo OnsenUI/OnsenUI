@@ -11,7 +11,7 @@
 				// inifinte scroll
 
 				var scrollWrapper;
-				if(!element.hasClass('scroller-wrapper')){
+				if (!element.hasClass('scroller-wrapper')) {
 					console.error('missing .scroller-wrapper class for monaca-scrollable');
 					return;
 				}
@@ -23,37 +23,38 @@
 					if (scope.infinitScrollEnable) {
 						var scrollTopAndOffsetHeight = scrollWrapper.scrollTop + scrollWrapper.offsetHeight;
 						var scrollHeightMinusOffset = scrollWrapper.scrollHeight - offset;
-						
+
 						if (scrollTopAndOffsetHeight >= scrollHeightMinusOffset) {
 							scope.onScrolled();
-						}						
+						}
 					}
 				});
 
 				// IScroll for Android
 				if (!Modernizr.overflowtouch) {
-					$timeout(function() {						
+					$timeout(function() {
 						var iScroll = new IScroll(scrollWrapper, {
 							momentum: true,
 							bounce: true,
 							hScrollbar: false,
-							vScrollbar: false
+							vScrollbar: false,
+							preventDefault: false
 						});
 
 						iScroll.on('scrollStart', function(e) {
 							var scrolled = iScroll.y - offset;
-							if (scrolled < iScroll.maxScrollY) {								
+							if (scrolled < iScroll.maxScrollY) {
 								// TODO: find a better way to know when content is upated so we can refresh
 								iScroll.refresh();
 							}
-							
+
 						});
 
 						iScroll.on('scrollEnd', function(e) {
 							var scrolled = iScroll.y - offset;
 							if (scrolled < iScroll.maxScrollY) {
 								// console.log('we are there!');
-								scope.onScrolled();								
+								scope.onScrolled();
 							}
 						});
 					}, 0);
