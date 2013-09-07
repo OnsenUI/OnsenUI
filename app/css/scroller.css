@@ -1,6 +1,6 @@
 .scroller-wrapper {
     -webkit-overflow-scrolling: touch;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .scroller {    
