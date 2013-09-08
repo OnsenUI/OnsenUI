@@ -1,4 +1,4 @@
-<div class="scroller-wrapper page" monaca-scrollable>
+<div class="scroller-wrapper page" ons-scrollable>
 	<div class="scroller">
 		<div ng-transclude>
 			
