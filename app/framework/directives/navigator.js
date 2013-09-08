@@ -105,7 +105,12 @@
 					console.log('pushPage called. page: ' + page);
 					scope.title = title;
 					scope.page = page;
-				}
+				};
+
+				scope.ons.navigator.resetToPage = function(page, title){
+					childSources = [];
+					scope.ons.navigator.pushPage(page, title);
+				};
 
 				//TODO: this hack is for monaca-screen scope.
 				// since we are creating isolate scope, calling prensentPage() from child scope
@@ -118,11 +123,11 @@
 				scope.ons.screen.presentPage = function(page) {
 					console.log('NC present page');
 					callParent(scope, 'ons.screen.presentPage', page);
-				}
+				};
 
 				scope.ons.screen.dismissPage = function() {
 					callParent(scope, 'ons.screen.dismissPage');
-				}
+				};
 
 				scope.ons.slidingMenu = scope.ons.slidingMenu || {};
 				scope.ons.slidingMenu.openMenu = function() {
