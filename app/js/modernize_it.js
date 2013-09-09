@@ -15,4 +15,5 @@
 		test: Modernizr.overflowtouch,
 		nope: ['onsenui/css/polyfill/sliding_menu_polyfill.css']
 	});
+
 })();
