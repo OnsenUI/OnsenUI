@@ -8,6 +8,9 @@
 			restrict: 'E',
 			replace: false,
 			transclude: true,
+			scope:{
+				theme: '@'
+			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list.tpl'
 		};
 	});

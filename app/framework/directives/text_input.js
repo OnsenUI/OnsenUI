@@ -7,7 +7,7 @@
 		return {
 			restrict: 'E',
 			replace: true,
-			transclude: true,
+			transclude: false,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl'
 		};
 	});
