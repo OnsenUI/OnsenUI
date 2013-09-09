@@ -16,6 +16,8 @@
 					return;
 				}
 
+				
+
 				scrollWrapper = element[0];
 				var offset = parseInt(attrs.threshold) || 0;
 
@@ -43,7 +45,8 @@
 
 						iScroll.on('scrollStart', function(e) {
 							var scrolled = iScroll.y - offset;
-							if (scrolled < iScroll.maxScrollY) {
+							console.log('scrolled: ' + scrolled + ', max-scroll:' + iScroll.maxScrollY, + ', max-scroll + 40:' + (iScroll.maxScrollY + 40));
+							if (scrolled < (iScroll.maxScrollY + 40) ) {
 								// TODO: find a better way to know when content is upated so we can refresh
 								iScroll.refresh();
 							}
