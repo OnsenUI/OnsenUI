@@ -1,3 +1,7 @@
+.sliding-menu {
+    overflow: hidden;
+}
+
 .transition {
     -webkit-transition-duration: .25s;
     -moz-transition-duration: .25s;

@@ -7,8 +7,22 @@
     right: 0;    
 }
 
+.absolute {
+	position: absolute;
+}
+
 .relative {
 	position: relative;
 }
 
+.full-width {
+	width: 100%;
+}
 
+.full-height {
+	height: 100%;
+}
+
+
+
+* { -webkit-tap-highlight-color: rgba(0,0,0,0);} 

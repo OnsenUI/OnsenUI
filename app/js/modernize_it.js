@@ -8,12 +8,12 @@
 
 	yepnope({
 		test: Modernizr.svg,
-		nope: ['onsenui/css/polyfill/topcoat-mobile-light-polyfill.css']
+		nope: ['plugins/onsenui/css/polyfill/topcoat-mobile-light-polyfill.css']
 	});
 
 	yepnope({
 		test: Modernizr.overflowtouch,
-		nope: ['onsenui/css/polyfill/sliding_menu_polyfill.css']
+		nope: ['plugins/onsenui/css/polyfill/sliding_menu_polyfill.css']
 	});
 
 })();
