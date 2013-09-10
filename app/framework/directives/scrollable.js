@@ -12,7 +12,7 @@
 
 				var scrollWrapper;
 				if (!element.hasClass('scroller-wrapper')) {
-					console.error('missing .scroller-wrapper class for monaca-scrollable');
+					console.error('missing .scroller-wrapper class for ons-scrollable');
 					return;
 				}
 
@@ -44,13 +44,11 @@
 						});
 
 						iScroll.on('scrollStart', function(e) {
-							var scrolled = iScroll.y - offset;
-							console.log('scrolled: ' + scrolled + ', max-scroll:' + iScroll.maxScrollY, + ', max-scroll + 40:' + (iScroll.maxScrollY + 40));
+							var scrolled = iScroll.y - offset;							
 							if (scrolled < (iScroll.maxScrollY + 40) ) {
 								// TODO: find a better way to know when content is upated so we can refresh
 								iScroll.refresh();
 							}
-
 						});
 
 						iScroll.on('scrollEnd', function(e) {
