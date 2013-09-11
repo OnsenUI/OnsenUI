@@ -20,6 +20,9 @@ Creator
 - Kruy Vanna
 
 Mentor  
+- Masahiro Tanaka
+
+Mentor  
 - Hiroshi Shikata
 
 Logo Designer  
@@ -27,6 +30,7 @@ Logo Designer
 
 Project Name  
 - Khourn Khemry
+
 
 [Onsen UI docs]:doc.monaca.mobi/onsen/en
 [Monaca Forum]:http://monaca.mobi/forum
