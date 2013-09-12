@@ -31,7 +31,7 @@ Logo Designer
 Project Name  
 - Khourn Khemry
 
-[Onsen UI ドキュメント]:doc.monaca.mobi/onsen/ja
+[Onsen UI ドキュメント]:http://docs.monaca.mobi/onsen/docs/ja/
 [Monacaフォーラム]:http://monaca.mobi/forum
-[Onsen UI Getting Started Page]:doc.monaca.mobi/onsen/getting_started/ja/
+[Onsen UI Getting Started Page]:http://docs.monaca.mobi/onsen/getting_started/ja/
 [Monaca]:http://monaca.mobi

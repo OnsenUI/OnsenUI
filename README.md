@@ -32,7 +32,7 @@ Project Name
 - Khourn Khemry
 
 
-[Onsen UI docs]:doc.monaca.mobi/onsen/en
+[Onsen UI docs]:http://docs.monaca.mobi/onsen/docs/en/
 [Monaca Forum]:http://monaca.mobi/forum
-[Onsen UI Getting Started Page]:doc.monaca.mobi/onsen/getting_started/en/
+[Onsen UI Getting Started Page]:http://docs.monaca.mobi/onsen/getting_started/en/
 [Monaca]:http://monaca.mobi
