@@ -32,7 +32,7 @@ See the [Onsen UI Getting Started Page].
 
         grunt
 
-The files will be built and copied into **build** and **demo/lib/onsen/** folder.
+The files will be built and copied into **build**, **demo/lib/onsen/**, and **app/lib/onsen/** folder.
 
 ## Running Demo
 
