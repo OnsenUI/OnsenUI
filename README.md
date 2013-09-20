@@ -7,6 +7,10 @@ Onsen UI make building application simple by basing on the concept of Web Compon
 
 Onsen UI is built on top of [AngularJs](http://angularjs.org/) and [Topcoat](topcoat.io)
 
+## Demo
+
+Click [Here](http://docs.monaca.mobi/onsen/) to see OnsenUI in action!
+
 ## Getting Started Using Monaca
 See the [Onsen UI Getting Started Page].
 
