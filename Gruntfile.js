@@ -50,12 +50,11 @@ module.exports = function(grunt) {
     },     
     // Put files not handled in other tasks here
     copy: {
-      dist: {
+      build: {
         files: [
           //images and font
           { 
             expand: true,
-            dot: true,
             cwd: 'app',
             dest: 'build',
             src: [
@@ -88,9 +87,21 @@ module.exports = function(grunt) {
             src: [
               'plugin_info.json'
             ]
+          }         
+        ]
+      },
+      demo: {
+        files: [          
+          {
+            expand: true,
+            cwd: 'build',              
+            dest: 'demo/lib/onsen/',
+            src: [
+              '**'
+            ]
           }
         ]
-      }
+      } 
     }
   });
 
@@ -100,6 +111,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'concat', 'cssmin', 'copy']);
+  grunt.registerTask('default', ['clean', 'concat', 'cssmin', 'copy:build', 'copy:demo']);
 
 };
