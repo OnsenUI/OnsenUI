@@ -11,7 +11,8 @@ module.exports = function(grunt) {
           dot: true,
           src: [
             '.tmp',
-            'build'
+            'build',
+            'demo/lib/onsen/'
           ]
         }]
       }      
@@ -24,9 +25,9 @@ module.exports = function(grunt) {
         },
         files: {
           'build/css/<%= pkg.name %>.css': [
-            'app/css/topcoat-mobile-light.css',
-            'app/css/*.css',
-            '!app/css/polyfill/*.css'
+            'framework/css/topcoat-mobile-light.css',
+            'framework/css/*.css',
+            '!framework/css/polyfill/*.css'
           ]
         }
       }
@@ -38,14 +39,13 @@ module.exports = function(grunt) {
       },
       dist: {
         src: [
-          'app/lib/angular/angular.js',
-          'app/framework/directives/module.js',
-          'app/framework/directives/*.js',          
-          'app/lib/*.js',          
-          'app/js/*.js',
-          '!app/js/app.js'
+          'framework/lib/angular/angular.js',
+          'framework/directives/module.js',
+          'framework/directives/*.js',          
+          'framework/lib/*.js',          
+          'framework/js/*.js'          
         ],
-        dest: 'build/<%= pkg.name %>.min.js'
+        dest: 'build/<%= pkg.name %>.js'
       }
     },     
     // Put files not handled in other tasks here
@@ -55,7 +55,7 @@ module.exports = function(grunt) {
           //images and font
           { 
             expand: true,
-            cwd: 'app',
+            cwd: 'framework',
             dest: 'build',
             src: [
               'img/{,*/}*.{gif,webp,svg,png}',
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
           // css polyfills 
           {
             expand: true,   
-            cwd: 'app/css/polyfill',       
+            cwd: 'framework/css/polyfill',       
             dest: 'build/css/polyfill/',
             src: [
               '*.css'
@@ -74,7 +74,7 @@ module.exports = function(grunt) {
           // directive templates
           {
             expand: true,   
-            cwd: 'app/templates/',       
+            cwd: 'framework/templates/',       
             dest: 'build/templates/',
             src: [
               '*.*'
@@ -101,6 +101,18 @@ module.exports = function(grunt) {
             ]
           }
         ]
+      },
+      app: {
+        files: [          
+          {
+            expand: true,
+            cwd: 'build',              
+            dest: 'app/lib/onsen/',
+            src: [
+              '**'
+            ]
+          }
+        ]
       } 
     }
   });
@@ -111,6 +123,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'concat', 'cssmin', 'copy:build', 'copy:demo']);
+  grunt.registerTask('default', ['clean', 'concat', 'cssmin', 'copy:build', 'copy:demo', 'copy:app']);
 
 };

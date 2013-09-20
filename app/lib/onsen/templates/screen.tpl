@@ -1,0 +1,1 @@
+<ng-include class="screen" src="screenItem.source" ng-animate="animation"></ng-include>

@@ -1,4 +1,4 @@
 (function(){
 	'use strict';
-	angular.module('myApp', ['myApp.services', 'onsen.directives']);
+	angular.module('myApp', ['onsen.directives']);
 })();

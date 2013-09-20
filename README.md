@@ -1,9 +1,11 @@
 Onsen UI
 ===
 Onsen UI is an HTML5 UI framework for building modern mobile application.  
-Onsen UI make building application simple using one concept every web developer already know, the tag.  
+Onsen UI make building application simple by basing on the concept of Web Component. Application can be build using **html tags** web developers already know.
 
-You can easily make more mobile app when used in combination with [Monaca].
+[Monaca IDE](http://monaca.mobi) fully supports OnsenUI plugin.
+
+Onsen UI is built on top of [AngularJs](http://angularjs.org/) and [Topcoat](topcoat.io)
 
 ## Getting Started Using Monaca
 See the [Onsen UI Getting Started Page].
