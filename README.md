@@ -5,8 +5,36 @@ Onsen UI make building application simple using one concept every web developer 
 
 You can easily make more mobile app when used in combination with [Monaca].
 
-## Getting Started
+## Getting Started Using Monaca
 See the [Onsen UI Getting Started Page].
+
+## How to build
+
+* Open the terminal from OnsenUI directory
+
+        cd OnsenUI
+
+* Install dependencies using [npm](http://nodejs.org/download/)
+
+        npm install
+
+* Install grunt-cli (globally)
+        
+        [sudo] npm install -g grunt-cli
+
+* Type grunt to start building
+
+        grunt
+
+The files will be built and copied into **build** and **demo/lib/onsen/** folder.
+
+## Running Demo
+
+* Run script
+
+        scripts/web-server.js
+
+* Then navigate your browser to [http://localhost:8000/demo/](http://localhost:8000/demo/)
 
 ## Documentation
 See the current [Onsen UI docs].
