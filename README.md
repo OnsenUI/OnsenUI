@@ -38,6 +38,10 @@ The files will be built and copied into **build** and **demo/lib/onsen/** folder
 
 * Then navigate your browser to [http://localhost:8000/demo/](http://localhost:8000/demo/)
 
+## Developing your app
+
+[Monaca IDE](http://monaca.mobi) makes it super easy to create OnsenUI project, but if you want to use other IDE, we provide a template in **app** folder for you to get started.
+
 ## Documentation
 See the current [Onsen UI docs].
 
