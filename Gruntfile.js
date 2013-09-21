@@ -24,10 +24,8 @@ module.exports = function(grunt) {
                 '<%= grunt.template.today("yyyy-mm-dd") %> */'
         },
         files: {
-          'build/css/<%= pkg.name %>.css': [
-            'framework/css/topcoat-mobile-light.css',
-            'framework/css/*.css',
-            '!framework/css/polyfill/*.css'
+          'build/css/<%= pkg.name %>.css': [            
+            'framework/css/*.css'            
           ]
         }
       }
