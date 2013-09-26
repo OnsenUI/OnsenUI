@@ -32,18 +32,16 @@ limitations under the License.
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
 			link: function(scope, element, attrs, monacaTabbarController) {
-				var radioButton = element.find('input');
+				var radioButton = element[0].querySelector('input');
 
 				monacaTabbarController.addTabItem(scope);
 
 				scope.setActive = function() {					
-					radioButton.attr('checked', true);
-
+					radioButton.checked = true;
 					monacaTabbarController.gotSelected(scope);
 				};
 
 				if (scope.active) {					
-					radioButton.attr('checked', true);
 					scope.setActive();
 				}
 
