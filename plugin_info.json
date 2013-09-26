@@ -20,7 +20,22 @@
     "forms" : {
       "mandatory": [
         "onsenui.js"
-      ]
+      ],
+
+      "theme":{
+        "type": "selectOne",
+        "required": "true",
+        "files": [
+          {
+            "displayName": "Topcoat Mobile Light",
+            "id": "topcoat-mobile-light.css"
+          },
+          {
+            "displayName": "Topcoat Mobile Dark",
+            "id": "topcoat-mobile-dark.css"
+          }
+        ]
+      }
     },
     "files" : {
       "javascript" : {
@@ -127,7 +142,11 @@
               "templates/tab_bar_item.tpl",
               "templates/text_area.tpl",
               "templates/text_input.tpl"
-            ]
+            ],
+            "theme": {
+              "topcoat-mobile-light.css": "css/topcoat-mobile-light.css",
+              "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css"
+            }
           }
         },
         "ios" : {
@@ -210,7 +229,11 @@
               "templates/tab_bar_item.tpl",
               "templates/text_area.tpl",
               "templates/text_input.tpl"
-            ]
+            ],
+            "theme": {
+              "topcoat-mobile-light.css": "css/topcoat-mobile-light.css",
+              "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css"
+            }
           }
         },
         "winrt" : {
@@ -293,7 +316,11 @@
               "templates/tab_bar_item.tpl",
               "templates/text_area.tpl",
               "templates/text_input.tpl"
-            ]
+            ],
+            "theme": {
+              "topcoat-mobile-light.css": "css/topcoat-mobile-light.css",
+              "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css"
+            }
           }
         }
       }
