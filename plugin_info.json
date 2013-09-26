@@ -27,21 +27,21 @@
         "android" : {
           "default" : {
             "mandatory" : {
-              "onsen.min.js.js" : "onsen.min.js"
+              "onsen.js" : "onsen.js"
             }
           }
         },
         "ios" : {
           "default" : {
             "mandatory" : {
-              "onsen.min.js.js" : "onsen.min.js"
+              "onsen.js" : "onsen.js"
             }
           }
         },
         "winrt" : {
           "default" : {
             "mandatory" : {
-              "onsen.min.js.js" : "onsen.min.js"
+              "onsen.js" : "onsen.js"
             }
           }
         }
