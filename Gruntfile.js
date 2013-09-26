@@ -60,6 +60,15 @@ module.exports = function(grunt) {
               'font/*',                       
             ]
           },
+          // topcoat css
+          {
+            expand: true,   
+            cwd: 'framework/css/topcoat/css',       
+            dest: 'build/css/',
+            src: [
+              '*.css'
+            ]
+          },
           // css polyfills 
           {
             expand: true,   
