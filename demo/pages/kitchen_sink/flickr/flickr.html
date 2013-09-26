@@ -1,17 +1,19 @@
-<div ng-controller="FlickrController">
-	<ons-list>
-		<ons-list-item class="center">							
-				<ons-button type="cta" should-spin="{{isFetching}}" ng-click="fetchPhotos()">Fetch Photos</ons-button>
-		</ons-list-item>
+<div class="page">
+	<div ng-controller="FlickrController">
+		<ons-list>
+			<ons-list-item class="center">							
+					<ons-button type="cta" should-spin="{{isFetching}}" ng-click="fetchPhotos()">Fetch Photos</ons-button>
+			</ons-list-item>
 
-		<ons-list-item ng-animate="'zoom'" ng-show="failed">
-			<i class="icon-exclamation-sign"></i> Oops! looks like Flickr is down.
-		</ons-list-item>
+			<ons-list-item ng-animate="'zoom'" ng-show="failed">
+				<i class="icon-exclamation-sign"></i> Oops! looks like Flickr is down.
+			</ons-list-item>
 
-		<ons-list-item ng-repeat="item in feeds.items">
-			<img width="100%" ng-src="{{item.media.m}}">
-		</ons-list-item>
+			<ons-list-item ng-repeat="item in feeds.items">
+				<img width="100%" ng-src="{{item.media.m}}">
+			</ons-list-item>
 
-	</ons-list>
+		</ons-list>
 
+	</div>
 </div>
