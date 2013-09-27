@@ -38,7 +38,7 @@ limitations under the License.
 				
 
 				scrollWrapper = element[0];
-				var offset = parseInt(attrs.threshold) || 0;
+				var offset = parseInt(attrs.threshold) || 10;
 
 				scrollWrapper.addEventListener('scroll', function() {
 					if (scope.infinitScrollEnable) {
