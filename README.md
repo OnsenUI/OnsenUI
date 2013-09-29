@@ -1,9 +1,9 @@
 Onsen UI
 ===
-Onsen UI is an HTML5 UI framework for building modern mobile application.  
-Onsen UI make building application simple by basing on the concept of Web Component. Application can be build using **html tags** web developers already know. It is built on top of heroic [AngularJs](http://angularjs.org/) and performance craving [Topcoat](topcoat.io)
+Onsen UI is an HTML5 UI framework for building modern mobile application.
+Onsen UI make building application simple by basing on the concept of Web Component. Application can be build using **html tags** web developers already know. It is built on top of heroic [AngularJs](http://angularjs.org/) and performance craving [Topcoat](http://topcoat.io/)
 
-[Monaca IDE](http://monaca.mobi) fully supports OnsenUI plugin.
+[Monaca IDE] fully supports OnsenUI plugin.
 
 ## Demo
 
@@ -23,7 +23,7 @@ See the [Onsen UI Getting Started Page].
         npm install
 
 * Install grunt-cli (globally)
-        
+
         [sudo] npm install -g grunt-cli
 
 * Type grunt to start building
@@ -42,7 +42,7 @@ The files will be built and copied into **build**, **demo/lib/onsen/**, and **ap
 
 ## Developing your app
 
-[Monaca IDE](http://monaca.mobi) makes it super easy to create OnsenUI project, but if you want to use other IDEs, we provide a template in **app** folder for you to get started.
+[Monaca IDE] makes it super easy to create OnsenUI project, but if you want to use other IDEs, we provide a template in **app** folder for you to get started.
 
 * Running the app by running the script
 
@@ -58,23 +58,23 @@ Ask a question using the "Onsen-UI" tag in [Monaca Forum].
 
 ## Contributors
 
-Creator  
+Creator
 - Kruy Vanna
 
-Mentor  
+Mentor
 - Masahiro Tanaka
 
-Mentor  
+Mentor
 - Hiroshi Shikata
 
-Logo Designer  
+Logo Designer
 - Mao Takahashi
 
-Project Name  
+Project Name
 - Khourn Khemry
 
 
 [Onsen UI docs]:http://docs.monaca.mobi/onsen/docs/en/
 [Monaca Forum]:http://monaca.mobi/forum
 [Onsen UI Getting Started Page]:http://docs.monaca.mobi/onsen/getting_started/en/
-[Monaca]:http://monaca.mobi
+[Monaca IDE]:http://monaca.mobi/
