@@ -45,9 +45,9 @@ limitations under the License.
 		
 				scope.$watch('disabled', function(disabled){
 					if(disabled === "true"){
-						effectButton.addClass('is-disabled');
+						effectButton.attr('disabled', true);
 					}else{
-						effectButton.removeClass('is-disabled');
+						effectButton.attr('disabled', false);
 					}
 				});
 
