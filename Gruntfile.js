@@ -114,14 +114,32 @@ module.exports = function(grunt) {
           }
         ]
       } 
-    }
+    },
+    watch: {
+      scripts: {
+        files: [
+          'framework/directives/*.js',
+          'framework/js/*.js',
+          'framework/lib/*.js',
+          'framework/css/*.css',
+          'framework/css/polyfill/*.css',
+          'framework/css/topcoat/css/*.css',
+          'framework/templates/*.tpl',
+        ],
+        tasks: ['default'],
+        options: {
+          
+        },
+      },
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'concat', 'copy:build', 'copy:demo', 'copy:app']);
+  grunt.registerTask('default', ['clean', 'concat', 'copy:build', 'copy:demo', 'copy:app', 'watch']);
 
 };
