@@ -38,6 +38,8 @@ limitations under the License.
 				var TYPE_PREFIX = "topcoat-button--";
 				scope.item = {};
 
+				element.bind('click', scope.ngClick);
+
 				// if animation is not specified -> default is slide-left
 				if(scope.animation === undefined || scope.animation === ""){
 					scope.item.animation = "slide-left";
