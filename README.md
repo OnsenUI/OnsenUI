@@ -14,6 +14,10 @@ See the [Onsen UI Getting Started Page].
 
 ## How to build
 
+* Clone with submodule
+
+        git clone https://github.com/monaca/OnsenUI.git --recursive
+
 * Open the terminal from OnsenUI directory
 
         cd OnsenUI
