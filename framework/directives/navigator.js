@@ -29,6 +29,7 @@ limitations under the License.
 			scope: {
 				title: '@',
 				page: '@',
+				hideToolbar: '@',
 				initialLeftButtonIcon: '@leftButtonIcon',
 				rightButtonIcon: '@',
 				onLeftButtonClick: '&',
