@@ -41,7 +41,6 @@ limitations under the License.
 				var childSources = [];
 				var isFirstRun = true;
 				var isBack = false;
-				var iconPrefix = 'topcoat-icon topcoat-icon--';
 				scope.canGoBack = false;
 				scope.ons = scope.ons || {};
 				scope.ons.navigator = scope.ons.navigator || {};
@@ -83,9 +82,9 @@ limitations under the License.
 
 				function evaluateLeftButtonIcon() {
 					if (scope.canGoBack) {
-						scope.leftButtonIcon = iconPrefix + 'back';
+						scope.leftButtonIcon = "icon-angle-left";
 					} else {
-						scope.leftButtonIcon = iconPrefix + scope.initialLeftButtonIcon;
+						scope.leftButtonIcon = scope.initialLeftButtonIcon;
 					}
 				}
 				
