@@ -132,6 +132,10 @@ limitations under the License.
 					scope.ons.navigator.pushPage(page, title);
 				};
 
+				scope.ons.navigator.setToolbarVisibility = function(shouldShow){
+					scope.hideToolbar = !shouldShow;
+				};
+
 				//TODO: this hack is for monaca-screen scope.
 				// since we are creating isolate scope, calling prensentPage() from child scope
 				// doesn't propagate to monaca-screen scope.
