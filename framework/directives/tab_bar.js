@@ -25,11 +25,22 @@ limitations under the License.
 			restrict: 'E',
 			replace: false,
 			transclude: true,
+			scope: {
+				hideTabbar: '@'
+			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
 			controller: function($scope) {
 				$scope.selectedTabItem = {
 					source: ''
 				};
+
+				$scope.$watch('hideTabbar', function(hide){
+					if(hide){
+						$scope.tabbarHeight = 0;
+					}else{
+						$scope.tabbarHeight = "3rem";
+					}
+				})
 
 				var tabItems = [];
 
@@ -39,6 +50,12 @@ limitations under the License.
 
 				this.addTabItem = function(tabItem) {					
 					tabItems.push(tabItem);
+				}
+
+				$scope.ons = $scope.ons || {};
+				$scope.ons.tabbar = {};
+				$scope.ons.tabbar.setTabbarVisibility = function(visible){
+					$scope.hideTabbar = !visible;
 				}
 			}
 		};

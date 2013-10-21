@@ -144,7 +144,6 @@ limitations under the License.
 				// https://github.com/angular/angular.js/wiki/Understanding-Scopes
 				scope.ons.screen = scope.ons.screen || {};
 				scope.ons.screen.presentPage = function(page) {
-					console.log('NC present page');
 					callParent(scope, 'ons.screen.presentPage', page);
 				};
 
@@ -163,6 +162,11 @@ limitations under the License.
 
 				scope.ons.slidingMenu.toggleMenu = function() {
 					callParent(scope, 'ons.slidingMenu.toggleMenu');
+				}
+
+				scope.ons.tabbar = scope.ons.tabbar || {};
+				scope.ons.tabbar.setTabbarVisibility = function(visibility){
+					callParent(scope, 'ons.tabbar.setTabbarVisibility', visibility);
 				}
 
 				// TODO: support params overloading.
