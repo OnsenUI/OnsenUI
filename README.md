@@ -16,15 +16,11 @@ See the [Onsen UI Getting Started Page].
 
 ## How to build
 
-<<<<<<< HEAD
 * Clone with submodule
 
         git clone https://github.com/monaca/OnsenUI.git --recursive
 
 * Open the terminal from OnsenUI directory
-=======
-* Open the terminal from Onsen UI directory
->>>>>>> 2c7bc412a48d898cc867e1d2cead7d76300e7f98
 
         cd OnsenUI
 
@@ -75,29 +71,7 @@ See the current [Onsen UI docs].
 
 Ask a question using the "Onsen-UI" tag in [Monaca Forum].
 
-## Contributors
-
-Creator
-- Kruy Vanna
-
-Mentor
-- Masahiro Tanaka
-
-Mentor
-- Hiroshi Shikata
-
-Logo Designer
-- Mao Takahashi
-
-Project Name
-- Khourn Khemry
-
-
 [Onsen UI docs]:http://docs.monaca.mobi/onsen/docs/en/
 [Monaca Forum]:http://monaca.mobi/forum
 [Onsen UI Getting Started Page]:http://docs.monaca.mobi/onsen/getting_started/en/
-<<<<<<< HEAD
-[Monaca]:http://monaca.mobi
-=======
 [Monaca IDE]:http://monaca.mobi/
->>>>>>> 2c7bc412a48d898cc867e1d2cead7d76300e7f98
