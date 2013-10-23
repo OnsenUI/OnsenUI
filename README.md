@@ -14,6 +14,10 @@ See the [Onsen UI Getting Started Page].
 
 ## How to build
 
+* Clone with submodule
+
+        git clone https://github.com/monaca/OnsenUI.git --recursive
+
 * Open the terminal from OnsenUI directory
 
         cd OnsenUI
@@ -52,6 +56,13 @@ The files will be built and copied into **build**, **demo/lib/onsen/**, and **ap
 
 ## Documentation
 See the current [Onsen UI docs].
+
+## Contributing
+
+* Fill out the CLA [here](https://docs.google.com/forms/d/13e_me1JPJeG9PUJdnLxv2jEk5QPmFkZZft7Flm-gXSA/viewform)
+* Fork the repo
+* Commit your changes
+* Make a [pull request](https://help.github.com/articles/using-pull-requests)
 
 ## Getting support
 Ask a question using the "Onsen-UI" tag in [Monaca Forum].
