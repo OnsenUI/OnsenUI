@@ -44,7 +44,7 @@ The files will be built and copied into **build**, **demo/lib/onsen/**, and **ap
 
         scripts/web-server.js
 
-* Then navigate your browser to [http://localhost:8000/demo/](http://localhost:8000/demo/)
+* Then navigate your browser to [http://localhost:8000/demo/](http://localhost:8000/demo/index.html)
 
 ## Developing your app
 
@@ -54,7 +54,7 @@ The files will be built and copied into **build**, **demo/lib/onsen/**, and **ap
 
         scripts/web-server.js
 
-* Then navigate your browser to [http://localhost:8000/app/](http://localhost:8000/app/)
+* Then navigate your browser to [http://localhost:8000/app/](http://localhost:8000/app/index.html)
 
 ## Documentation
 
