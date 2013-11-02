@@ -29,6 +29,7 @@ limitations under the License.
 			scope: {
 				title: '@',
 				page: '@',
+				hideToolbar: '@',
 				initialLeftButtonIcon: '@leftButtonIcon',
 				rightButtonIcon: '@',
 				onLeftButtonClick: '&',
@@ -40,7 +41,6 @@ limitations under the License.
 				var childSources = [];
 				var isFirstRun = true;
 				var isBack = false;
-				var iconPrefix = 'topcoat-icon topcoat-icon--';
 				scope.canGoBack = false;
 				scope.ons = scope.ons || {};
 				scope.ons.navigator = scope.ons.navigator || {};
@@ -82,9 +82,9 @@ limitations under the License.
 
 				function evaluateLeftButtonIcon() {
 					if (scope.canGoBack) {
-						scope.leftButtonIcon = iconPrefix + 'back';
+						scope.leftButtonIcon = "icon-angle-left";
 					} else {
-						scope.leftButtonIcon = iconPrefix + scope.initialLeftButtonIcon;
+						scope.leftButtonIcon = scope.initialLeftButtonIcon;
 					}
 				}
 				
@@ -131,6 +131,10 @@ limitations under the License.
 					scope.ons.navigator.pushPage(page, title);
 				};
 
+				scope.ons.navigator.setToolbarVisibility = function(shouldShow){
+					scope.hideToolbar = !shouldShow;
+				};
+
 				//TODO: this hack is for monaca-screen scope.
 				// since we are creating isolate scope, calling prensentPage() from child scope
 				// doesn't propagate to monaca-screen scope.
@@ -140,7 +144,6 @@ limitations under the License.
 				// https://github.com/angular/angular.js/wiki/Understanding-Scopes
 				scope.ons.screen = scope.ons.screen || {};
 				scope.ons.screen.presentPage = function(page) {
-					console.log('NC present page');
 					callParent(scope, 'ons.screen.presentPage', page);
 				};
 
@@ -159,6 +162,11 @@ limitations under the License.
 
 				scope.ons.slidingMenu.toggleMenu = function() {
 					callParent(scope, 'ons.slidingMenu.toggleMenu');
+				}
+
+				scope.ons.tabbar = scope.ons.tabbar || {};
+				scope.ons.tabbar.setTabbarVisibility = function(visibility){
+					callParent(scope, 'ons.tabbar.setTabbarVisibility', visibility);
 				}
 
 				// TODO: support params overloading.

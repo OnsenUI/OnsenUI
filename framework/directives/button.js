@@ -38,6 +38,8 @@ limitations under the License.
 				var TYPE_PREFIX = "topcoat-button--";
 				scope.item = {};
 
+				element.bind('click', scope.ngClick);
+
 				// if animation is not specified -> default is slide-left
 				if(scope.animation === undefined || scope.animation === ""){
 					scope.item.animation = "slide-left";
@@ -45,9 +47,9 @@ limitations under the License.
 		
 				scope.$watch('disabled', function(disabled){
 					if(disabled === "true"){
-						effectButton.addClass('is-disabled');
+						effectButton.attr('disabled', true);
 					}else{
-						effectButton.removeClass('is-disabled');
+						effectButton.attr('disabled', false);
 					}
 				});
 

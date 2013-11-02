@@ -33,7 +33,16 @@
           {
             "displayName": "Topcoat Mobile Dark",
             "id": "topcoat-mobile-dark.css"
+          },
+          {
+            "displayName": "Onsen Red",
+            "id": "topcoat-mobile-onsen-red.css"
+          },
+          {
+            "displayName": "Onsen Lightblue",
+            "id": "topcoat-mobile-onsen-lightblue.css"
           }
+
         ]
       }
     },
@@ -145,7 +154,9 @@
             ],
             "theme": {
               "topcoat-mobile-light.css": "css/topcoat-mobile-light.css",
-              "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css"
+              "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css",
+              "topcoat-mobile-onsen-red.css": "css/topcoat-mobile-onsen-red.css",
+              "topcoat-mobile-onsen-lightblue.css": "css/topcoat-mobile-onsen-lightblue.css"
             }
           }
         },
@@ -232,7 +243,9 @@
             ],
             "theme": {
               "topcoat-mobile-light.css": "css/topcoat-mobile-light.css",
-              "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css"
+              "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css",
+              "topcoat-mobile-onsen-red.css": "css/topcoat-mobile-onsen-red.css",
+              "topcoat-mobile-onsen-lightblue.css": "css/topcoat-mobile-onsen-lightblue.css"
             }
           }
         },
@@ -319,7 +332,9 @@
             ],
             "theme": {
               "topcoat-mobile-light.css": "css/topcoat-mobile-light.css",
-              "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css"
+              "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css",
+              "topcoat-mobile-onsen-red.css": "css/topcoat-mobile-onsen-red.css",
+              "topcoat-mobile-onsen-lightblue.css": "css/topcoat-mobile-onsen-lightblue.css"              
             }
           }
         }

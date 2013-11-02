@@ -16,26 +16,13 @@ module.exports = function(grunt) {
           ]
         }]
       }      
-    },
-    cssmin: {
-      add_banner: {
-        options: {
-          banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-                '<%= grunt.template.today("yyyy-mm-dd") %> */'
-        },
-        files: {
-          'build/css/<%= pkg.name %>.css': [            
-            'framework/css/*.css'            
-          ]
-        }
-      }
-    },
+    },      
     concat: {
       options: {
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
                 '<%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
-      dist: {
+      js: {
         src: [
           'framework/lib/angular/angular.js',
           'framework/directives/module.js',
@@ -44,6 +31,12 @@ module.exports = function(grunt) {
           'framework/js/*.js'          
         ],
         dest: 'build/<%= pkg.name %>.js'
+      },
+      css: {
+        src: [
+          'framework/css/*.css'          
+        ],
+        dest: 'build/css/<%= pkg.name %>.css'
       }
     },     
     // Put files not handled in other tasks here
@@ -121,15 +114,32 @@ module.exports = function(grunt) {
           }
         ]
       } 
-    }
+    },
+    watch: {
+      scripts: {
+        files: [
+          'framework/directives/*.js',
+          'framework/js/*.js',
+          'framework/lib/*.js',
+          'framework/css/*.css',
+          'framework/css/polyfill/*.css',
+          'framework/css/topcoat/css/*.css',
+          'framework/templates/*.tpl',
+        ],
+        tasks: ['default'],
+        options: {
+          
+        },
+      },
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'concat', 'cssmin', 'copy:build', 'copy:demo', 'copy:app']);
+  grunt.registerTask('default', ['clean', 'concat', 'copy:build', 'copy:demo', 'copy:app', 'watch']);
 
 };

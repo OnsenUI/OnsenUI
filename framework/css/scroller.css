@@ -24,3 +24,8 @@ limitations under the License.
 .scroller {    
     min-height: 105%;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+ 
