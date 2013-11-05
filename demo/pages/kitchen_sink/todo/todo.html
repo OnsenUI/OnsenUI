@@ -1,19 +1,17 @@
 <ons-list ng-controller="TodosController">	
 	<ons-list-item class="no-wrap" ng-controller="TodosController">
 		<form novalidate name="todoForm" class="css-form" ng-submit="addTodo(newTodoText); newTodoText=''; ">
-			<ons-text-input name="todoText" required class="width70 todo-input" ng-model="newTodoText" placeholder="What to do?"></ons-text-input>
+			<ons-text-input name="todoText" class="width70" ng-model="newTodoText" placeholder="What to do?"></ons-text-input>			
 			<ons-button class="inline-block todo-add-button" disabled="{{ newTodoText === '' || newTodoText === undefined }}">Add</ons-button>
 		</form>					
 	</ons-list-item>	
 	<div>
-		<div ng-repeat="todo in todos" ng-animate="'zoom'">
-			<ons-list-item class="no-wrap">
-				<h3 class="width76 inline-block margin7">{{todo.text}}</h3>
-				<span class="topcoat-icon-button--quiet" ng-click="removeTodo($index)">
-					<span class="topcoat-icon topcoat-icon--cancel"></span>
+			<ons-list-item class="no-wrap" ng-repeat="todo in todos" ng-animate="'zoom'">
+				<h5 class="float-left inline-block margin7">{{todo.text}}</h5>
+				<span class="topcoat-icon-button--quiet float-right" ng-click="removeTodo($index)">
+					<i class="fa fa-times"></i>
 				</span>
 			</ons-list-item>	
-		</div>
 	</div>
 	
 </ons-list>
