@@ -82,7 +82,7 @@ limitations under the License.
 
 				function evaluateLeftButtonIcon() {
 					if (scope.canGoBack) {
-						scope.leftButtonIcon = "icon-angle-left";
+						scope.leftButtonIcon = "fa fa-angle-left";
 					} else {
 						scope.leftButtonIcon = scope.initialLeftButtonIcon;
 					}
