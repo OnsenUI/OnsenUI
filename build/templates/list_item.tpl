@@ -1,3 +1,3 @@
-<li class="topcoat-list__item" ng-transclude>
+<li class="topcoat-list__item">
 		    		
 </li>

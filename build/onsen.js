@@ -1,4 +1,4 @@
-/*! onsen - v0.1.0 - 2013-09-28 */
+/*! onsen - v0.1.0 - 2013-11-05 */
 /**
  * @license AngularJS v1.1.5
  * (c) 2010-2012 Google, Inc. http://angularjs.org
@@ -16917,7 +16917,7 @@ limitations under the License.
 	directiveModules.factory('ONSEN_CONSTANTS', function() {
 		var CONSTANTS = {
 			// DIRECTIVE_TEMPLATE_URL: "plugins/onsenui/templates" // production
-			DIRECTIVE_TEMPLATE_URL: "assets/lib/onsen/build/templates" // test
+			DIRECTIVE_TEMPLATE_URL: "lib/onsen/templates" // test
 		};
 
 		return CONSTANTS;
@@ -16960,9 +16960,11 @@ limitations under the License.
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
 			link: function(scope, element, attrs){
-				var effectButton = element.find('button');
+				var effectButton = element;
 				var TYPE_PREFIX = "topcoat-button--";
 				scope.item = {};
+
+				element.bind('click', scope.ngClick);
 
 				// if animation is not specified -> default is slide-left
 				if(scope.animation === undefined || scope.animation === ""){
@@ -16971,9 +16973,9 @@ limitations under the License.
 		
 				scope.$watch('disabled', function(disabled){
 					if(disabled === "true"){
-						effectButton.addClass('is-disabled');
+						effectButton.attr('disabled', true);
 					}else{
-						effectButton.removeClass('is-disabled');
+						effectButton.attr('disabled', false);
 					}
 				});
 
@@ -17050,7 +17052,7 @@ limitations under the License.
 */
 
 
-(function(){
+(function() {
 	'use strict';
 
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
@@ -17060,7 +17062,15 @@ limitations under the License.
 			restrict: 'E',
 			replace: true,
 			transclude: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list_item.tpl'
+			priority: 10,
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list_item.tpl',
+			compile: function(elem, attrs, transcludeFn) {
+				return function(scope, element, attrs) {
+					transcludeFn(scope, function(clone) {
+						element.append(clone);
+					});
+				};
+			}
 		};
 	});
 })();
@@ -17095,6 +17105,7 @@ limitations under the License.
 			scope: {
 				title: '@',
 				page: '@',
+				hideToolbar: '@',
 				initialLeftButtonIcon: '@leftButtonIcon',
 				rightButtonIcon: '@',
 				onLeftButtonClick: '&',
@@ -17106,7 +17117,6 @@ limitations under the License.
 				var childSources = [];
 				var isFirstRun = true;
 				var isBack = false;
-				var iconPrefix = 'topcoat-icon topcoat-icon--';
 				scope.canGoBack = false;
 				scope.ons = scope.ons || {};
 				scope.ons.navigator = scope.ons.navigator || {};
@@ -17148,9 +17158,9 @@ limitations under the License.
 
 				function evaluateLeftButtonIcon() {
 					if (scope.canGoBack) {
-						scope.leftButtonIcon = iconPrefix + 'back';
+						scope.leftButtonIcon = "fa fa-angle-left";
 					} else {
-						scope.leftButtonIcon = iconPrefix + scope.initialLeftButtonIcon;
+						scope.leftButtonIcon = scope.initialLeftButtonIcon;
 					}
 				}
 				
@@ -17197,6 +17207,10 @@ limitations under the License.
 					scope.ons.navigator.pushPage(page, title);
 				};
 
+				scope.ons.navigator.setToolbarVisibility = function(shouldShow){
+					scope.hideToolbar = !shouldShow;
+				};
+
 				//TODO: this hack is for monaca-screen scope.
 				// since we are creating isolate scope, calling prensentPage() from child scope
 				// doesn't propagate to monaca-screen scope.
@@ -17206,7 +17220,6 @@ limitations under the License.
 				// https://github.com/angular/angular.js/wiki/Understanding-Scopes
 				scope.ons.screen = scope.ons.screen || {};
 				scope.ons.screen.presentPage = function(page) {
-					console.log('NC present page');
 					callParent(scope, 'ons.screen.presentPage', page);
 				};
 
@@ -17225,6 +17238,11 @@ limitations under the License.
 
 				scope.ons.slidingMenu.toggleMenu = function() {
 					callParent(scope, 'ons.slidingMenu.toggleMenu');
+				}
+
+				scope.ons.tabbar = scope.ons.tabbar || {};
+				scope.ons.tabbar.setTabbarVisibility = function(visibility){
+					callParent(scope, 'ons.tabbar.setTabbarVisibility', visibility);
 				}
 
 				// TODO: support params overloading.
@@ -17693,11 +17711,22 @@ limitations under the License.
 			restrict: 'E',
 			replace: false,
 			transclude: true,
+			scope: {
+				hideTabbar: '@'
+			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
 			controller: function($scope) {
 				$scope.selectedTabItem = {
 					source: ''
 				};
+
+				$scope.$watch('hideTabbar', function(hide){
+					if(hide){
+						$scope.tabbarHeight = 0;
+					}else{
+						$scope.tabbarHeight = "3rem";
+					}
+				})
 
 				var tabItems = [];
 
@@ -17707,6 +17736,12 @@ limitations under the License.
 
 				this.addTabItem = function(tabItem) {					
 					tabItems.push(tabItem);
+				}
+
+				$scope.ons = $scope.ons || {};
+				$scope.ons.tabbar = {};
+				$scope.ons.tabbar.setTabbarVisibility = function(visible){
+					$scope.hideTabbar = !visible;
 				}
 			}
 		};

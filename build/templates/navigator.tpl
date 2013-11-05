@@ -1,8 +1,8 @@
-<div>	
-	<div class="topcoat-navigation-bar">
+<div class="max">	
+	<div ng-hide="hideToolbar" class="topcoat-navigation-bar">
 	    <div class="topcoat-navigation-bar__item left quarter">
 	        <span ng-click="leftButtonClicked();" class="topcoat-icon-button--quiet">
-	          <span ng-class="leftButtonIcon"></span>
+	        	<i class="icon-2x" ng-class="leftButtonIcon"></i>
 	        </span>
 	    </div> 
 	    <div class="topcoat-navigation-bar__item center half">
@@ -10,9 +10,12 @@
 	    </div> 
 	    <div class="topcoat-navigation-bar__item right quarter">
 	        <span ng-click="rightButtonClicked();" class="topcoat-icon-button--quiet">
-	          <span class="topcoat-icon topcoat-icon--{{rightButtonIcon}}"></span>
+	          <i class="icon-2x" ng-class="rightButtonIcon"></i>
 	        </span>
 	    </div>
+	</div>	
+	<div class="relative max debug">
+		<ng-include class="content" src="navigationItem.source" ng-animate="animation"></ng-include>
 	</div>    
-	<ng-include class="content" src="navigationItem.source" ng-animate="animation"></ng-include>
+	
 </div>
