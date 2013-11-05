@@ -24,14 +24,14 @@ limitations under the License.
 	directives.directive('onsListItem', function(ONSEN_CONSTANTS) {
 		return {
 			restrict: 'E',
-			replace: false,
+			replace: true,
 			transclude: true,
 			priority: 10,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list_item.tpl',
 			compile: function(elem, attrs, transcludeFn) {
 				return function(scope, element, attrs) {
 					transcludeFn(scope, function(clone) {
-						element.find('li').append(clone);
+						element.append(clone);
 					});
 				};
 			}
