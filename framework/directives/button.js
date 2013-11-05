@@ -34,7 +34,7 @@ limitations under the License.
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
 			link: function(scope, element, attrs){
-				var effectButton = element.find('button');
+				var effectButton = element;
 				var TYPE_PREFIX = "topcoat-button--";
 				scope.item = {};
 
