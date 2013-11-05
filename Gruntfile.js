@@ -62,6 +62,15 @@ module.exports = function(grunt) {
               '*.css'
             ]
           },
+          // font_awesome
+          {
+            expand: true,   
+            cwd: 'framework/css/font_awesome',       
+            dest: 'build/css/font_awesome',
+            src: [
+              '*/*'
+            ]
+          },
           // css polyfills 
           {
             expand: true,   
