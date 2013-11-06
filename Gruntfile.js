@@ -11,7 +11,7 @@ module.exports = function(grunt) {
           dot: true,
           src: [
             '.tmp',
-            'build',
+            'build/dev',
             'demo/lib/onsen/'
           ]
         }]
