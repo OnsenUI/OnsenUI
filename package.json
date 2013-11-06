@@ -1,6 +1,6 @@
 {
-  "name": "onsen",
-  "version": "0.1.0",
+  "name": "onsen_ui",
+  "version": "0.6.0",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.6.0",

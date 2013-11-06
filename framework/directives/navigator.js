@@ -76,13 +76,12 @@ limitations under the License.
 								leave: 'slide-left-leave'
 							};
 						}
-						
 					}
 				}
 
 				function evaluateLeftButtonIcon() {
 					if (scope.canGoBack) {
-						scope.leftButtonIcon = "fa fa-angle-left";
+						scope.leftButtonIcon = "fa fa-2x fa-angle-left";
 					} else {
 						scope.leftButtonIcon = scope.initialLeftButtonIcon;
 					}

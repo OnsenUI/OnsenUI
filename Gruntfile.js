@@ -30,34 +30,24 @@ module.exports = function(grunt) {
           'framework/lib/*.js',          
           'framework/js/*.js'          
         ],
-        dest: 'build/<%= pkg.name %>.js'
+        dest: 'build/dev/<%= pkg.name %>.js'
       },
       css: {
         src: [
           'framework/css/*.css'          
         ],
-        dest: 'build/css/<%= pkg.name %>.css'
+        dest: 'build/dev/css/<%= pkg.name %>.css'
       }
     },     
     // Put files not handled in other tasks here
     copy: {
       build: {
-        files: [
-          //images and font
-          { 
-            expand: true,
-            cwd: 'framework',
-            dest: 'build',
-            src: [
-              'img/{,*/}*.{gif,webp,svg,png}',
-              'font/*',                       
-            ]
-          },
+        files: [          
           // topcoat css
           {
             expand: true,   
             cwd: 'framework/css/topcoat/css',       
-            dest: 'build/css/',
+            dest: 'build/dev/css/',
             src: [
               '*.css'
             ]
@@ -66,7 +56,7 @@ module.exports = function(grunt) {
           {
             expand: true,   
             cwd: 'framework/css/font_awesome',       
-            dest: 'build/css/font_awesome',
+            dest: 'build/dev/css/font_awesome',
             src: [
               '*/*'
             ]
@@ -75,7 +65,7 @@ module.exports = function(grunt) {
           {
             expand: true,   
             cwd: 'framework/css/polyfill',       
-            dest: 'build/css/polyfill/',
+            dest: 'build/dev/css/polyfill/',
             src: [
               '*.css'
             ]
@@ -84,7 +74,7 @@ module.exports = function(grunt) {
           {
             expand: true,   
             cwd: 'framework/templates/',       
-            dest: 'build/templates/',
+            dest: 'build/dev/templates/',
             src: [
               '*.*'
             ]
@@ -103,7 +93,7 @@ module.exports = function(grunt) {
         files: [          
           {
             expand: true,
-            cwd: 'build',              
+            cwd: 'build/dev/',              
             dest: 'demo/lib/onsen/',
             src: [
               '**'
@@ -115,7 +105,7 @@ module.exports = function(grunt) {
         files: [          
           {
             expand: true,
-            cwd: 'build',              
+            cwd: 'build/dev',              
             dest: 'app/lib/onsen/',
             src: [
               '**'

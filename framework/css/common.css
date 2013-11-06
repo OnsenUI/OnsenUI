@@ -25,6 +25,9 @@ body {
     height: 100%;
 }
 
+.middle {
+    vertical-align: middle;
+}
 
 .page {
     position: absolute;
@@ -33,7 +36,6 @@ body {
     bottom: 0;
     left: 0;
     right: 0;    
-    background-color: white;
 }
 
 .absolute {
