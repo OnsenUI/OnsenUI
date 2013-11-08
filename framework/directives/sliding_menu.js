@@ -73,7 +73,6 @@ limitations under the License.
 
 				scope.ons.screen = scope.ons.screen || {};
 				scope.ons.screen.presentPage = function(page) {
-					console.log('NC present page');
 					callParent(scope, 'ons.screen.presentPage', page);
 				}
 

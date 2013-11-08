@@ -72,7 +72,6 @@ limitations under the License.
 				}
 
 				scope.ons.screen.presentPage = function(page) {
-					console.log('present page called, page:' + page);
 					scope.page = page;
 				}
 

@@ -89,7 +89,6 @@ limitations under the License.
 				
 
 				scope.leftButtonClicked = function() {
-					console.log('left button clicked canPop: ' + canPopPage());
 					if (canPopPage()) {
 						scope.ons.navigator.popPage();
 					} else {
@@ -99,7 +98,6 @@ limitations under the License.
 				}
 
 				scope.rightButtonClicked = function() {
-					console.log("NC right button clicked");
 					scope.onRightButtonClick();
 				}
 
@@ -120,7 +118,6 @@ limitations under the License.
 				}
 
 				scope.ons.navigator.pushPage = function(page, title) {
-					console.log('pushPage called. page: ' + page);
 					scope.title = title;
 					scope.page = page;
 				};
