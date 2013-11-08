@@ -210,8 +210,6 @@
 .topcoat-button--large--cta:focus,
 .topcoat-button-bar__button:focus,
 .topcoat-button-bar__button--large:focus {
-  border: none;
-  box-shadow: none;
   outline: 0;
 }
 
@@ -272,7 +270,7 @@
   box-shadow: none;
   color: #fff;
   font-weight: 500;
-  text-shadow: 0 -1px rgba(0,0,0,0.36);
+  text-shadow: none;
 }
 
 .topcoat-button--cta:hover,
@@ -671,8 +669,6 @@
 .topcoat-button--large--quiet:focus,
 .topcoat-button--cta:focus,
 .topcoat-button--large--cta:focus {
-  border: none;
-  box-shadow: none;
   outline: 0;
 }
 
@@ -809,7 +805,7 @@
   box-shadow: none;
   color: #fff;
   font-weight: 500;
-  text-shadow: 0 -1px rgba(0,0,0,0.36);
+  text-shadow: none;
 }
 
 .topcoat-button--cta:hover,
@@ -1277,8 +1273,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 .topcoat-icon-button--large:focus,
 .topcoat-icon-button--large--quiet:focus,
 .topcoat-icon-button--large--quiet:hover:focus {
-  border: none;
-  box-shadow: none;
   outline: 0;
 }
 
@@ -2768,10 +2762,10 @@ input[type="search"]::-webkit-search-cancel-button {
   border: 1px solid #25b5c2;
   border: none;
   background-color: #fff;
-  background-color: #f5f0e8;
+  background-color: #faf7f3;
   box-shadow: var-box-shadow--text-input;
   color: #c6c8c8;
-  padding: 0 0 0 2rem;
+  padding: 0 0 0 2.2rem;
   border-radius: 0;
   border-radius: 4px;
   background-image: url("../img/search.svg");

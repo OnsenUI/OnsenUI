@@ -52,6 +52,16 @@ module.exports = function(grunt) {
               '*.css'
             ]
           },
+          {
+            expand: true,   
+            cwd: 'framework/img',       
+            dest: 'build/dev/img/',
+            src: [
+              '*.*'
+            ]
+          },
+          // images
+
           // font_awesome
           {
             expand: true,   

@@ -97,6 +97,7 @@
           "default" : {
             "mandatory" : [
               "0.6.0/css/onsen_ui.css",
+              "0.6.0/img/search.svg",
               "0.6.0/css/font_awesome/css/font-awesome.min.css",
               "0.6.0/css/font_awesome/fonts/FontAwesome.otf",
               "0.6.0/css/font_awesome/fonts/fontawesome-webfont.eot",
@@ -135,6 +136,7 @@
           "default" : {
             "mandatory" : [
               "0.6.0/css/onsen_ui.css",
+              "0.6.0/img/search.svg",
               "0.6.0/css/font_awesome/css/font-awesome.min.css",
               "0.6.0/css/font_awesome/fonts/FontAwesome.otf",
               "0.6.0/css/font_awesome/fonts/fontawesome-webfont.eot",
@@ -173,6 +175,7 @@
           "default" : {
             "mandatory" : [
               "0.6.0/css/onsen_ui.css",
+              "0.6.0/img/search.svg",
               "0.6.0/css/font_awesome/css/font-awesome.min.css",
               "0.6.0/css/font_awesome/fonts/FontAwesome.otf",
               "0.6.0/css/font_awesome/fonts/fontawesome-webfont.eot",
