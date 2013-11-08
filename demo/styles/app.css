@@ -7,6 +7,10 @@ body {
   /*  background-color: #153A5F;*/
 }
 
+.dark-container {
+    background-color: #454646;
+}
+
 .monaca-container {
     position: absolute;
     top:0;

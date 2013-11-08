@@ -53,31 +53,31 @@ limitations under the License.
 
 				// IScroll for Android
 				if (!Modernizr.overflowtouch) {
-					$timeout(function() {
-						var iScroll = new IScroll(scrollWrapper, {
-							momentum: true,
-							bounce: true,
-							hScrollbar: false,
-							vScrollbar: false,
-							preventDefault: false
-						});
+					// $timeout(function() {
+					// 	var iScroll = new IScroll(scrollWrapper, {
+					// 		momentum: true,
+					// 		bounce: true,
+					// 		hScrollbar: false,
+					// 		vScrollbar: false,
+					// 		preventDefault: false
+					// 	});
 
-						iScroll.on('scrollStart', function(e) {
-							var scrolled = iScroll.y - offset;							
-							if (scrolled < (iScroll.maxScrollY + 40) ) {
-								// TODO: find a better way to know when content is upated so we can refresh
-								iScroll.refresh();
-							}
-						});
+					// 	iScroll.on('scrollStart', function(e) {
+					// 		var scrolled = iScroll.y - offset;							
+					// 		if (scrolled < (iScroll.maxScrollY + 40) ) {
+					// 			// TODO: find a better way to know when content is upated so we can refresh
+					// 			iScroll.refresh();
+					// 		}
+					// 	});
 
-						iScroll.on('scrollEnd', function(e) {
-							var scrolled = iScroll.y - offset;
-							if (scrolled < iScroll.maxScrollY) {
-								// console.log('we are there!');
-								scope.onScrolled();
-							}
-						});
-					}, 500);
+					// 	iScroll.on('scrollEnd', function(e) {
+					// 		var scrolled = iScroll.y - offset;
+					// 		if (scrolled < iScroll.maxScrollY) {
+					// 			// console.log('we are there!');
+					// 			scope.onScrolled();
+					// 		}
+					// 	});
+					// }, 500);
 				}
 			}
 		};
