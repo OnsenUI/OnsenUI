@@ -1,4 +1,4 @@
-/*! onsen_ui - v0.6.0 - 2013-11-08 */
+/*! onsen_ui - v0.6.0 - 2013-11-11 */
 /**
  * @license AngularJS v1.1.5
  * (c) 2010-2012 Google, Inc. http://angularjs.org
