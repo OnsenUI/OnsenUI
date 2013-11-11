@@ -12,49 +12,48 @@ module.exports = function(grunt) {
           src: [
             '.tmp',
             'build/dev',
-            'demo/lib/onsen/'
+            'demo/lib/onsen/',
+            'app/lib/onsen/'
           ]
         }]
-      }      
-    },      
+      }
+    },
     concat: {
       options: {
-        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-                '<%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       js: {
         src: [
           'framework/lib/angular/angular.js',
           'framework/directives/module.js',
-          'framework/directives/*.js',          
-          'framework/lib/*.js',          
-          'framework/js/*.js'          
+          'framework/directives/*.js',
+          'framework/lib/*.js',
+          'framework/js/*.js'
         ],
         dest: 'build/dev/<%= pkg.name %>.js'
       },
       css: {
         src: [
-          'framework/css/*.css'          
+          'framework/css/*.css'
         ],
         dest: 'build/dev/css/<%= pkg.name %>.css'
       }
-    },     
+    },
     // Put files not handled in other tasks here
     copy: {
       build: {
-        files: [          
+        files: [
           // topcoat css
           {
-            expand: true,   
-            cwd: 'framework/css/topcoat/css',       
+            expand: true,
+            cwd: 'framework/css/topcoat/css',
             dest: 'build/dev/css/',
             src: [
               '*.css'
             ]
-          },
-          {
-            expand: true,   
-            cwd: 'framework/img',       
+          }, {
+            expand: true,
+            cwd: 'framework/img',
             dest: 'build/dev/img/',
             src: [
               '*.*'
@@ -64,8 +63,8 @@ module.exports = function(grunt) {
 
           // font_awesome
           {
-            expand: true,   
-            cwd: 'framework/css/font_awesome',       
+            expand: true,
+            cwd: 'framework/css/font_awesome',
             dest: 'build/dev/css/font_awesome',
             src: [
               '*/*'
@@ -73,8 +72,8 @@ module.exports = function(grunt) {
           },
           // css polyfills 
           {
-            expand: true,   
-            cwd: 'framework/css/polyfill',       
+            expand: true,
+            cwd: 'framework/css/polyfill',
             dest: 'build/dev/css/polyfill/',
             src: [
               '*.css'
@@ -82,8 +81,8 @@ module.exports = function(grunt) {
           },
           // directive templates
           {
-            expand: true,   
-            cwd: 'framework/templates/',       
+            expand: true,
+            cwd: 'framework/templates/',
             dest: 'build/dev/templates/',
             src: [
               '*.*'
@@ -91,38 +90,34 @@ module.exports = function(grunt) {
           },
           // plugin_info.json
           {
-            expand: false,                 
+            expand: false,
             dest: 'build/plugin_info.json',
             src: [
               'plugin_info.json'
             ]
-          }         
+          }
         ]
       },
       demo: {
-        files: [          
-          {
-            expand: true,
-            cwd: 'build/dev/',              
-            dest: 'demo/lib/onsen/',
-            src: [
-              '**'
-            ]
-          }
-        ]
+        files: [{
+          expand: true,
+          cwd: 'build/dev/',
+          dest: 'demo/lib/onsen/',
+          src: [
+            '**'
+          ]
+        }]
       },
       app: {
-        files: [          
-          {
-            expand: true,
-            cwd: 'build/dev',              
-            dest: 'app/lib/onsen/',
-            src: [
-              '**'
-            ]
-          }
-        ]
-      } 
+        files: [{
+          expand: true,
+          cwd: 'build/dev',
+          dest: 'app/lib/onsen/',
+          src: [
+            '**'
+          ]
+        }]
+      }
     },
     watch: {
       scripts: {
@@ -137,7 +132,7 @@ module.exports = function(grunt) {
         ],
         tasks: ['default'],
         options: {
-          
+
         },
       },
     },
