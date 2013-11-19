@@ -1,6 +1,3 @@
 logs/*
 !.gitkeep
 node_modules
-app/lib/onsen
-demo/lib/jquery.js
-demo/lib/onsen

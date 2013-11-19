@@ -1,0 +1,1 @@
+<ng-include class="screen max absolute" src="screenItem.source" ng-animate="animation"></ng-include>
