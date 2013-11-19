@@ -34,6 +34,7 @@ module.exports = function(grunt) {
       },
       css: {
         src: [
+          'framework/css/common.css',
           'framework/css/*.css'
         ],
         dest: 'build/dev/css/<%= pkg.name %>.css'
