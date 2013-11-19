@@ -40,6 +40,10 @@ body {
     right: 0;    
 }
 
+.no-active:active {
+    background-color: transparent;
+}
+
 .absolute {
 	position: absolute;
 }
