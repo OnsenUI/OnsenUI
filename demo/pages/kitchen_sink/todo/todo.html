@@ -1,5 +1,5 @@
 <ons-list ng-controller="TodosController">	
-	<ons-list-item class="no-wrap" ng-controller="TodosController">
+	<ons-list-item class="no-wrap no-active" ng-controller="TodosController">
 		<form novalidate name="todoForm" class="css-form" ng-submit="addTodo(newTodoText); newTodoText=''; ">
 			<ons-text-input name="todoText" class="width70" ng-model="newTodoText" placeholder="What to do?"></ons-text-input>			
 			<ons-button class="inline-block todo-add-button" disabled="{{ newTodoText === '' || newTodoText === undefined }}">Add</ons-button>
