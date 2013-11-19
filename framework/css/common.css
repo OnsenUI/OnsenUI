@@ -41,7 +41,7 @@ body {
 }
 
 .no-active:active {
-    background-color: transparent;
+    background-color: transparent !important;
 }
 
 .absolute {
