@@ -1,4 +1,4 @@
-/*! onsen_ui - v0.6.0 - 2013-11-19 */
+/*! onsen_ui - v0.6.0 - 2013-11-21 */
 /**
  * @license AngularJS v1.1.5
  * (c) 2010-2012 Google, Inc. http://angularjs.org
@@ -17704,24 +17704,23 @@ limitations under the License.
 		return {
 			restrict: 'E',
 			replace: false,
-			transclude: true,
-			scope: {
-				hideTabbar: '@'
-			},
+			transclude: true,			
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
-			controller: function($scope) {
+			controller: function($scope, $attrs) {
 				$scope.selectedTabItem = {
 					source: ''
 				};
 
-				$scope.$watch('hideTabbar', function(hide){
+				$attrs.$observe('hideTabbar', function(hide){
+					$scope.hideTabbar = hide;
+
 					if(hide){
 						$scope.tabbarHeight = 0;
 					}else{
 						$scope.tabbarHeight = "3rem";
 					}
-				})
-
+				});
+			
 				var tabItems = [];
 
 				this.gotSelected = function(selectedTabItem) {					

@@ -24,24 +24,23 @@ limitations under the License.
 		return {
 			restrict: 'E',
 			replace: false,
-			transclude: true,
-			scope: {
-				hideTabbar: '@'
-			},
+			transclude: true,			
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
-			controller: function($scope) {
+			controller: function($scope, $attrs) {
 				$scope.selectedTabItem = {
 					source: ''
 				};
 
-				$scope.$watch('hideTabbar', function(hide){
+				$attrs.$observe('hideTabbar', function(hide){
+					$scope.hideTabbar = hide;
+
 					if(hide){
 						$scope.tabbarHeight = 0;
 					}else{
 						$scope.tabbarHeight = "3rem";
 					}
-				})
-
+				});
+			
 				var tabItems = [];
 
 				this.gotSelected = function(selectedTabItem) {					

@@ -14,6 +14,7 @@
       "en" : "http://docs.monaca.mobi/onsen/"
     },
     "type" : ["javascript"],
+    "category" : ["html5"],
     "platform" : ["android", "ios", "winrt", "web"],
     "frameworkDependent" : false,
     "require" : null,

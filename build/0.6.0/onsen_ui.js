@@ -1,4 +1,4 @@
-/*! onsen_ui - v0.6.0 - 2013-11-08 */
+/*! onsen_ui - v0.6.0 - 2013-11-19 */
 /**
  * @license AngularJS v1.1.5
  * (c) 2010-2012 Google, Inc. http://angularjs.org
@@ -17165,7 +17165,6 @@ limitations under the License.
 				
 
 				scope.leftButtonClicked = function() {
-					console.log('left button clicked canPop: ' + canPopPage());
 					if (canPopPage()) {
 						scope.ons.navigator.popPage();
 					} else {
@@ -17175,7 +17174,6 @@ limitations under the License.
 				}
 
 				scope.rightButtonClicked = function() {
-					console.log("NC right button clicked");
 					scope.onRightButtonClick();
 				}
 
@@ -17196,7 +17194,6 @@ limitations under the License.
 				}
 
 				scope.ons.navigator.pushPage = function(page, title) {
-					console.log('pushPage called. page: ' + page);
 					scope.title = title;
 					scope.page = page;
 				};
@@ -17362,7 +17359,6 @@ limitations under the License.
 				}
 
 				scope.ons.screen.presentPage = function(page) {
-					console.log('present page called, page:' + page);
 					scope.page = page;
 				}
 
@@ -17643,7 +17639,6 @@ limitations under the License.
 
 				scope.ons.screen = scope.ons.screen || {};
 				scope.ons.screen.presentPage = function(page) {
-					console.log('NC present page');
 					callParent(scope, 'ons.screen.presentPage', page);
 				}
 
