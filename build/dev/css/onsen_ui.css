@@ -1,4 +1,4 @@
-/*! onsen_ui - v0.6.0 - 2013-11-21 */
+/*! onsen_ui - v0.6.0 - 2013-11-22 */
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
@@ -70,14 +70,12 @@ body {
     display: block;
 }
 
-
 * { 
     -webkit-tap-highlight-color: rgba(0,0,0,0);
-    -webkit-user-select: none;
 } 
 
-input {
-    -webkit-user-select: text;
+.no-select {
+    -webkit-user-select: none;
 }
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA

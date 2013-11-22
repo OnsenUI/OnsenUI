@@ -69,12 +69,10 @@ body {
     display: block;
 }
 
-
 * { 
     -webkit-tap-highlight-color: rgba(0,0,0,0);
-    -webkit-user-select: none;
 } 
 
-input {
-    -webkit-user-select: text;
+.no-select {
+    -webkit-user-select: none;
 }

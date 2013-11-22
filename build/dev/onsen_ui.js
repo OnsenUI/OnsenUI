@@ -1,4 +1,4 @@
-/*! onsen_ui - v0.6.0 - 2013-11-21 */
+/*! onsen_ui - v0.6.0 - 2013-11-22 */
 /**
  * @license AngularJS v1.1.5
  * (c) 2010-2012 Google, Inc. http://angularjs.org
@@ -16916,8 +16916,8 @@ limitations under the License.
 
 	directiveModules.factory('ONSEN_CONSTANTS', function() {
 		var CONSTANTS = {
-			// DIRECTIVE_TEMPLATE_URL: "plugins/onsenui/0.6.0/templates" // production
-			DIRECTIVE_TEMPLATE_URL: "lib/onsen/templates" // test
+			DIRECTIVE_TEMPLATE_URL: "plugins/onsenui/0.6.0/templates" // production
+			// DIRECTIVE_TEMPLATE_URL: "lib/onsen/templates" // test
 		};
 
 		return CONSTANTS;
