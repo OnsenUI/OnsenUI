@@ -16916,8 +16916,8 @@ limitations under the License.
 
 	directiveModules.factory('ONSEN_CONSTANTS', function() {
 		var CONSTANTS = {
-			DIRECTIVE_TEMPLATE_URL: "plugins/onsenui/0.6.0/templates" // production
-			// DIRECTIVE_TEMPLATE_URL: "lib/onsen/templates" // test
+			// DIRECTIVE_TEMPLATE_URL: "plugins/onsenui/0.6.0/templates" // production
+			DIRECTIVE_TEMPLATE_URL: "lib/onsen/templates" // test
 		};
 
 		return CONSTANTS;
