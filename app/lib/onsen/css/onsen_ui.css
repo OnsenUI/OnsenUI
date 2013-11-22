@@ -754,12 +754,13 @@ limitations under the License.
 
 
 .scroller-wrapper {
-    -webkit-overflow-scrolling: touch;
-    overflow: auto;
+	overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;   
 }
 
 .scroller {    
     min-height: 105%;
+    padding-bottom: 50px;
 }
 
 ::-webkit-scrollbar {
