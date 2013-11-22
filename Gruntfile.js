@@ -60,7 +60,15 @@ module.exports = function(grunt) {
               '*.*'
             ]
           },
-          // images
+          // fonts
+           {
+            expand: true,
+            cwd: 'framework/css/topcoat/font/',
+            dest: 'build/dev/font/',
+            src: [
+              '*.otf'
+            ]
+          },
 
           // font_awesome
           {
