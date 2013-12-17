@@ -30,7 +30,7 @@ limitations under the License.
 				abovePage: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
-			link: function(scope, element, attrs) {
+			link: function(scope, element, attrs) {				
 
 				var Swiper = Class.extend({
 					init: function(element){
@@ -40,14 +40,21 @@ limitations under the License.
 						this.previousX = 0;
 						this.MAX = this.abovePage.clientWidth * 0.7;
 						this.startX = 0;
+						this.status = 
 
 						this.bindEvents();
 					},
 
 					bindEvents: function(){
-						this.abovePage.addEventListener('touchmove', this.onMove.bind(this));
-						this.abovePage.addEventListener('touchstart', this.onStart.bind(this));
-						this.abovePage.addEventListener('touchend', this.onEnd.bind(this));
+						// touch
+						this.abovePage.addEventListener('touchstart', this.onTouchStart.bind(this));
+						this.abovePage.addEventListener('touchmove', this.onTouchMove.bind(this));						
+						this.abovePage.addEventListener('touchend', this.onTouchEnd.bind(this));
+
+						// mouse
+						this.abovePage.addEventListener('mousedown', this.onMouseDown.bind(this));						
+						this.abovePage.addEventListener('mouseup', this.onMouseUp.bind(this));
+						this.abovePage.addEventListener('mouseleave', this.onMouseLeave.bind(this));
 						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));        
 					},
 
@@ -74,10 +81,20 @@ limitations under the License.
 						this.currentX = x;
 					},
 
-					onMove: function(evt){
-						var touches = evt.changedTouches;
+					onMouseMove: function(event){
+						var x = event.clientX;
+						this.onMove(x);
+					},
+
+					onTouchMove: function(event){
+						var touches = event.changedTouches;
 						var currentTouch = touches[0];
-						var distant = currentTouch.pageX - this.previousX;
+						var x = currentTouch.pageX;
+						this.onMove(x);
+					},
+
+					onMove: function(x){						
+						var distant = x - this.previousX;
 						var toBeTranslate = this.startX + distant;
 						if(toBeTranslate < 0){
 							return;
@@ -86,13 +103,38 @@ limitations under the License.
 						this.translate(toBeTranslate);
 					},
 
-					onStart: function(evt){
-						var touches = evt.changedTouches;
-						var currentTouch = touches[0];
-						this.previousX = currentTouch.pageX;
+					onMouseDown: function(event){
+						var x = event.clientX;
+						this.boundMouseMove = this.onMouseMove.bind(this);
+						this.abovePage.addEventListener('mousemove', this.boundMouseMove);
+						this.setStart(x);
 					},
 
-					onEnd: function(evt){
+					onTouchStart: function(event){
+						var touches = event.changedTouches;
+						var x = touches[0].pageX;
+						this.setStart(x);
+					},
+
+					setStart: function(x){						
+						this.previousX = x;
+					},
+
+					onMouseUp: function(event){
+						console.log('mouse up');
+						this.onEnd();
+						this.abovePage.removeEventListener('mousemove', this.boundMouseMove);
+					},
+
+					onMouseLeave: function(){
+						this.onMouseUp();
+					},
+
+					onTouchEnd: function(event){
+						this.onEnd();
+					},
+
+					onEnd: function(){
 						if( this.currentX > this.MAX/2 ){
 							this.open();
 						}else{
