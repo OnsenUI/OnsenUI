@@ -31,6 +31,78 @@ limitations under the License.
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
+
+				var Swiper = Class.extend({
+					init: function(element){
+						console.log('init');
+						this.abovePage = element[0].querySelector('.above');
+						this.$abovePage = angular.element(this.abovePage);
+						this.previousX = 0;
+						this.MAX = this.abovePage.clientWidth * 0.7;
+						this.startX = 0;
+
+						this.bindEvents();
+					},
+
+					bindEvents: function(){
+						this.abovePage.addEventListener('touchmove', this.onMove.bind(this));
+						this.abovePage.addEventListener('touchstart', this.onStart.bind(this));
+						this.abovePage.addEventListener('touchend', this.onEnd.bind(this));
+						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));        
+					},
+
+					onTransitionEnd: function(){
+						this.$abovePage.removeClass('transition');
+					},
+
+					close: function(){
+						this.$abovePage.addClass('transition');
+						this.translate(0);
+						this.startX = 0;
+						console.log('close');
+					},
+
+					open: function(){
+						console.log('close');
+						this.$abovePage.addClass('transition');
+						this.translate(this.MAX);
+						this.startX = this.MAX;
+					},
+
+					translate: function(x){
+						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
+						this.currentX = x;
+					},
+
+					onMove: function(evt){
+						var touches = evt.changedTouches;
+						var currentTouch = touches[0];
+						var distant = currentTouch.pageX - this.previousX;
+						var toBeTranslate = this.startX + distant;
+						if(toBeTranslate < 0){
+							return;
+						}
+						console.log(this.startX, distant);
+						this.translate(toBeTranslate);
+					},
+
+					onStart: function(evt){
+						var touches = evt.changedTouches;
+						var currentTouch = touches[0];
+						this.previousX = currentTouch.pageX;
+					},
+
+					onEnd: function(evt){
+						if( this.currentX > this.MAX/2 ){
+							this.open();
+						}else{
+							this.close();
+						}
+					}
+				});
+
+				var swiper = new Swiper(element);
+
 				scope.pages = {
 					behind: scope.behindPage,
 					above: scope.abovePage

@@ -1,4 +1,4 @@
-angular.module('templates-main', ['templates/button.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
+angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/button.tpl",
@@ -8,6 +8,17 @@ angular.module("templates/button.tpl", []).run(["$templateCache", function($temp
     "</button>\n" +
     "\n" +
     "");
+}]);
+
+angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/checkbox.tpl",
+    "<label class=\"topcoat-checkbox\">\n" +
+    "  <input type=\"checkbox\">\n" +
+    "  <div class=\"topcoat-checkbox__checkmark\"></div>\n" +
+    "  <span ng-transclude>\n" +
+    "  	\n" +
+    "  </span>\n" +
+    "</label>");
 }]);
 
 angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {
@@ -88,7 +99,7 @@ angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function
     "	<ng-include ng-cloak src=\"pages.behind\" class=\"behind full-screen\">\n" +
     "	</ng-include>\n" +
     "\n" +
-    "	<ng-include src=\"pages.above\" ng-class=\"status\" class=\"above full-screen transition\">\n" +
+    "	<ng-include src=\"pages.above\" ng-class=\"status\" class=\"above full-screen\">\n" +
     "	</ng-include>\n" +
     "</div>");
 }]);
