@@ -17,12 +17,12 @@ limitations under the License.
 
 
 (function(){
-	var directiveModules = angular.module('onsen.directives', []); // [] -> create new module
+	var directiveModules = angular.module('onsen.directives', ['templates-main']); // [] -> create new module
 
 	directiveModules.factory('ONSEN_CONSTANTS', function() {
 		var CONSTANTS = {
 			// DIRECTIVE_TEMPLATE_URL: "plugins/onsenui/0.6.0/templates" // production
-			DIRECTIVE_TEMPLATE_URL: "lib/onsen/templates" // test
+			DIRECTIVE_TEMPLATE_URL: "templates" // test
 		};
 
 		return CONSTANTS;

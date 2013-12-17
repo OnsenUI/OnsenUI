@@ -18,13 +18,24 @@ module.exports = function(grunt) {
         }]
       }
     },
+    html2js: {
+      options: {
+        base: 'framework'
+        // custom options, see below    
+      },
+      main: {
+        src: ['framework/templates/*.tpl'],
+        dest: 'framework/directives/templates.js'
+      },
+    },
     concat: {
       options: {
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       js: {
-        src: [
+        src: [          
           'framework/lib/angular/angular.js',
+          'framework/directives/templates.js',
           'framework/directives/module.js',
           'framework/directives/*.js',
           'framework/lib/*.js',
@@ -89,14 +100,14 @@ module.exports = function(grunt) {
             ]
           },
           // directive templates
-          {
-            expand: true,
-            cwd: 'framework/templates/',
-            dest: 'build/dev/templates/',
-            src: [
-              '*.*'
-            ]
-          },
+          // {
+          //   expand: true,
+          //   cwd: 'framework/templates/',
+          //   dest: 'build/dev/templates/',
+          //   src: [
+          //     '*.*'
+          //   ]
+          // },
           // plugin_info.json
           {
             expand: false,
@@ -151,8 +162,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-html2js');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'concat', 'copy:build', 'copy:demo', 'copy:app']);
+  grunt.registerTask('default', ['clean', 'html2js', 'concat', 'copy:build', 'copy:demo', 'copy:app']);
 
 };
