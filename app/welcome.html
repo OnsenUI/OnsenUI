@@ -1,8 +1,16 @@
 <div class="page center">
-	<p>Hooray!</p>	
-	<p>You have</p>
-	<h1>Onsen UI</h1>
-	<p>installed</p>
-	<h5>Happy coding!</h5>
-	<ons-button type="cta" ng-click="ons.navigator.pushPage('more.html', 'More!')">Tell me more!</ons-button>	
+	<ons-checkbox ng-model="myModel">
+		Done?
+		<p>{{myModel}}</p>
+	</ons-checkbox>
+
+	<p>{{myModel}}</p>
+	<input type="text" name="" ng-model="myModel" placeholder="">
+
+	<p></p>
+	<label class="topcoat-checkbox">
+	  <input type="checkbox">
+	  <div class="topcoat-checkbox__checkmark"></div>
+	  Default
+	</label>
 </div>

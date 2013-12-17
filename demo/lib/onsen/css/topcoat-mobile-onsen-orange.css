@@ -1090,6 +1090,7 @@ input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after {
   border: 1px solid #b3b3b3;
   border-radius: 3px;
   box-shadow: none;
+  left: 0;
 }
 
 .topcoat-checkbox__checkmark {
@@ -1120,6 +1121,7 @@ input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before {
 }
 
 input[type="checkbox"]:active + .topcoat-checkbox__checkmark:before {
+  border: 1px solid #de6a08;
   border: 1px solid #de6a08;
   background-color: #de6a08;
   background-color: transparent;

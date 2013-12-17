@@ -16893,7 +16893,7 @@ var styleDirective = valueFn({
 
 })(window, document);
 angular.element(document).find('head').append('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{display:none;}ng\\:form{display:block;}</style>');
-angular.module('templates-main', ['templates/button.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
+angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/button.tpl",
@@ -16903,6 +16903,17 @@ angular.module("templates/button.tpl", []).run(["$templateCache", function($temp
     "</button>\n" +
     "\n" +
     "");
+}]);
+
+angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/checkbox.tpl",
+    "<label class=\"topcoat-checkbox\">\n" +
+    "  <input type=\"checkbox\">\n" +
+    "  <div class=\"topcoat-checkbox__checkmark\"></div>\n" +
+    "  <span ng-transclude>\n" +
+    "  	\n" +
+    "  </span>\n" +
+    "</label>");
 }]);
 
 angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {
@@ -16983,7 +16994,7 @@ angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function
     "	<ng-include ng-cloak src=\"pages.behind\" class=\"behind full-screen\">\n" +
     "	</ng-include>\n" +
     "\n" +
-    "	<ng-include src=\"pages.above\" ng-class=\"status\" class=\"above full-screen transition\">\n" +
+    "	<ng-include src=\"pages.above\" ng-class=\"status\" class=\"above full-screen\">\n" +
     "	</ng-include>\n" +
     "</div>");
 }]);
@@ -17121,6 +17132,66 @@ limitations under the License.
 		};
 	});
 })();
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function(){
+	'use strict';
+
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+	directives.directive('onsCheckbox', function(ONSEN_CONSTANTS) {
+		return {
+			require: '?ngModel',
+			restrict: 'E',
+			replace: true,
+			transclude: true,
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
+			link: function($scope, element, attrs, ngModel){
+				var checkbox = element.find('input');
+				var checked = false;
+				attrs.$observe('disabled', function(disabled){
+					if(disabled === undefined){
+						checkbox.attr('disabled', false);						
+					}else{
+						checkbox.attr('disabled', true);
+					}
+				});
+
+				if(ngModel){					
+					ngModel.$render = function() {
+						checked = ( ngModel.$viewValue == "true" );
+						checkbox.attr('checked', checked);
+					};
+
+					checkbox.bind('change', function(){
+						$scope.$apply(function(){
+							ngModel.$setViewValue(checkbox[0].checked);
+						});						
+					});
+				}
+				
+			}
+		};
+	});
+})();
+
 
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
@@ -17410,6 +17481,7 @@ limitations under the License.
 		}
 	});
 })();
+
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
@@ -17722,6 +17794,78 @@ limitations under the License.
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
+
+				var Swiper = Class.extend({
+					init: function(element){
+						console.log('init');
+						this.abovePage = element[0].querySelector('.above');
+						this.$abovePage = angular.element(this.abovePage);
+						this.previousX = 0;
+						this.MAX = this.abovePage.clientWidth * 0.7;
+						this.startX = 0;
+
+						this.bindEvents();
+					},
+
+					bindEvents: function(){
+						this.abovePage.addEventListener('touchmove', this.onMove.bind(this));
+						this.abovePage.addEventListener('touchstart', this.onStart.bind(this));
+						this.abovePage.addEventListener('touchend', this.onEnd.bind(this));
+						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));        
+					},
+
+					onTransitionEnd: function(){
+						this.$abovePage.removeClass('transition');
+					},
+
+					close: function(){
+						this.$abovePage.addClass('transition');
+						this.translate(0);
+						this.startX = 0;
+						console.log('close');
+					},
+
+					open: function(){
+						console.log('close');
+						this.$abovePage.addClass('transition');
+						this.translate(this.MAX);
+						this.startX = this.MAX;
+					},
+
+					translate: function(x){
+						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
+						this.currentX = x;
+					},
+
+					onMove: function(evt){
+						var touches = evt.changedTouches;
+						var currentTouch = touches[0];
+						var distant = currentTouch.pageX - this.previousX;
+						var toBeTranslate = this.startX + distant;
+						if(toBeTranslate < 0){
+							return;
+						}
+						console.log(this.startX, distant);
+						this.translate(toBeTranslate);
+					},
+
+					onStart: function(evt){
+						var touches = evt.changedTouches;
+						var currentTouch = touches[0];
+						this.previousX = currentTouch.pageX;
+					},
+
+					onEnd: function(evt){
+						if( this.currentX > this.MAX/2 ){
+							this.open();
+						}else{
+							this.close();
+						}
+					}
+				});
+
+				var swiper = new Swiper(element);
+
 				scope.pages = {
 					behind: scope.behindPage,
 					above: scope.abovePage
@@ -17984,6 +18128,70 @@ limitations under the License.
 })();
 
 
+/* Simple JavaScript Inheritance
+ * By John Resig http://ejohn.org/
+ * MIT Licensed.
+ */
+// Inspired by base2 and Prototype
+(function(){
+  var initializing = false, fnTest = /xyz/.test(function(){xyz;}) ? /\b_super\b/ : /.*/;
+ 
+  // The base Class implementation (does nothing)
+  this.Class = function(){};
+ 
+  // Create a new Class that inherits from this class
+  Class.extend = function(prop) {
+    var _super = this.prototype;
+   
+    // Instantiate a base class (but only create the instance,
+    // don't run the init constructor)
+    initializing = true;
+    var prototype = new this();
+    initializing = false;
+   
+    // Copy the properties over onto the new prototype
+    for (var name in prop) {
+      // Check if we're overwriting an existing function
+      prototype[name] = typeof prop[name] == "function" &&
+        typeof _super[name] == "function" && fnTest.test(prop[name]) ?
+        (function(name, fn){
+          return function() {
+            var tmp = this._super;
+           
+            // Add a new ._super() method that is the same method
+            // but on the super-class
+            this._super = _super[name];
+           
+            // The method only need to be bound temporarily, so we
+            // remove it when we're done executing
+            var ret = fn.apply(this, arguments);        
+            this._super = tmp;
+           
+            return ret;
+          };
+        })(name, prop[name]) :
+        prop[name];
+    }
+   
+    // The dummy class constructor
+    function Class() {
+      // All construction is actually done in the init method
+      if ( !initializing && this.init )
+        this.init.apply(this, arguments);
+    }
+   
+    // Populate our constructed prototype object
+    Class.prototype = prototype;
+   
+    // Enforce the constructor to be what we expect
+    Class.prototype.constructor = Class;
+ 
+    // And make this class extendable
+    Class.extend = arguments.callee;
+   
+    return Class;
+  };
+})();
 /**
  * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
  *
