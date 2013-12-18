@@ -26,7 +26,6 @@ limitations under the License.
 			restrict: 'E',
 			replace: true,
 			transclude: true,
-			priority: 10,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list_item.tpl',
 			compile: function(elem, attrs, transcludeFn) {
 				return function(scope, element, attrs) {

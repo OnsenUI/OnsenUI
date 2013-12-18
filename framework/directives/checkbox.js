@@ -26,7 +26,7 @@ limitations under the License.
 			require: '?ngModel',
 			restrict: 'E',
 			replace: true,
-			transclude: true,
+			transclude: false,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
 			link: function($scope, element, attrs, ngModel){
 				var checkbox = element.find('input');
@@ -51,7 +51,6 @@ limitations under the License.
 						});						
 					});
 				}
-				
 			}
 		};
 	});

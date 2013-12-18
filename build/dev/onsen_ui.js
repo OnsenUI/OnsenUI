@@ -16893,7 +16893,7 @@ var styleDirective = valueFn({
 
 })(window, document);
 angular.element(document).find('head').append('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{display:none;}ng\\:form{display:block;}</style>');
-angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
+angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/radio_button.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/button.tpl",
@@ -16959,6 +16959,14 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "	</div>    \n" +
     "	\n" +
     "</div>");
+}]);
+
+angular.module("templates/radio_button.tpl", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/radio_button.tpl",
+    "<label class=\"topcoat-radio-button\">\n" +
+    "	<span ng-transclude></span>\n" +
+    "  <div class=\"topcoat-radio-button__checkmark\"></div>\n" +
+    "</label>");
 }]);
 
 angular.module("templates/screen.tpl", []).run(["$templateCache", function($templateCache) {
@@ -17161,7 +17169,7 @@ limitations under the License.
 			require: '?ngModel',
 			restrict: 'E',
 			replace: true,
-			transclude: true,
+			transclude: false,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
 			link: function($scope, element, attrs, ngModel){
 				var checkbox = element.find('input');
@@ -17186,7 +17194,6 @@ limitations under the License.
 						});						
 					});
 				}
-				
 			}
 		};
 	});
@@ -17258,7 +17265,6 @@ limitations under the License.
 			restrict: 'E',
 			replace: true,
 			transclude: true,
-			priority: 10,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list_item.tpl',
 			compile: function(elem, attrs, transcludeFn) {
 				return function(scope, element, attrs) {
@@ -17481,6 +17487,107 @@ limitations under the License.
 		}
 	});
 })();
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function() {
+	'use strict';
+
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+	directives.directive('onsRadioButton', function(ONSEN_CONSTANTS) {
+		return {
+			restrict: 'A',
+			replace: false,
+			transclude: true,
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/radio_button.tpl',
+			compile: function(elem, attrs) {
+				console.log('hello');
+				return function(scope, element, attrs) {
+					console.log('hi');
+				};
+			}
+		};
+	});
+})();
+
+// /*
+// Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+
+//    http://www.apache.org/licenses/LICENSE-2.0
+
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// */
+
+
+// (function(){
+// 	'use strict';
+
+// 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+// 	directives.directive('onsRadioButton', function(ONSEN_CONSTANTS) {
+// 		return {
+// 			require: '?ngModel',
+// 			restrict: 'A',
+// 			replace: false,
+// 			scope: {
+// 				name: '@'
+// 			},
+// 			transclude: true,
+// 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/radio_button.tpl',
+// 			link: function($scope, element, attrs, ngModel){
+// 				var radioButton = element.find('input');
+// 				var checked = false;
+// 				attrs.$observe('disabled', function(disabled){
+// 					if(disabled === undefined){
+// 						radioButton.attr('disabled', false);						
+// 					}else{
+// 						radioButton.attr('disabled', true);
+// 					}
+// 				});
+
+// 				if(ngModel){					
+// 					ngModel.$render = function() {
+// 						checked = ( ngModel.$viewValue == "true" );
+// 						radioButton.attr('checked', checked);
+// 					};
+
+// 					radioButton.bind('change', function(){
+// 						$scope.$apply(function(){
+// 							ngModel.$setViewValue(radioButton[0].checked);
+// 						});						
+// 					});
+// 				}
+				
+// 			}
+// 		};
+// 	});
+// })();
+
 
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
@@ -17797,13 +17904,13 @@ limitations under the License.
 
 				var Swiper = Class.extend({
 					init: function(element){
-						console.log('init');
+						this.VERTICAL_THRESHOLD = 20;
+						this.HORIZONTAL_THRESHOLD = 20;
 						this.abovePage = element[0].querySelector('.above');
 						this.$abovePage = angular.element(this.abovePage);
 						this.previousX = 0;
 						this.MAX = this.abovePage.clientWidth * 0.7;
-						this.startX = 0;
-						this.status = 
+						this.startX = 0;						
 
 						this.bindEvents();
 					},
@@ -17829,11 +17936,9 @@ limitations under the License.
 						this.$abovePage.addClass('transition');
 						this.translate(0);
 						this.startX = 0;
-						console.log('close');
 					},
 
 					open: function(){
-						console.log('close');
 						this.$abovePage.addClass('transition');
 						this.translate(this.MAX);
 						this.startX = this.MAX;
@@ -17854,41 +17959,56 @@ limitations under the License.
 
 					onMouseMove: function(event){
 						var x = event.clientX;
-						this.onMove(x);
+						var y = event.clientY;
+						this.onMove(x, y);
 					},
 
 					onTouchMove: function(event){
 						var touches = event.changedTouches;
 						var currentTouch = touches[0];
 						var x = currentTouch.pageX;
-						this.onMove(x);
+						var y = currentTouch.pageY;
+						this.onMove(x, y);
 					},
 
-					onMove: function(x){
+					onMove: function(x, y){
+						var verticalDistant = Math.abs(this.previousY - y);
+						if(verticalDistant > this.VERTICAL_THRESHOLD && !this.horizontalSwipeMode){
+							return;
+						}
+
 						var distant = x - this.previousX;
+						if(Math.abs(distant) > this.HORIZONTAL_THRESHOLD){
+							this.horizontalSwipeMode = true;
+						}
 						var toBeTranslate = this.startX + distant;
-						if(toBeTranslate < 0){
+						console.log(toBeTranslate);
+						if(toBeTranslate < 20){
 							return;
 						}
 						console.log(this.startX, distant);
 						this.translate(toBeTranslate);
 					},
 
-					onMouseDown: function(event){
-						var x = event.clientX;
+					onMouseDown: function(event){						
 						this.boundMouseMove = this.onMouseMove.bind(this);
 						this.abovePage.addEventListener('mousemove', this.boundMouseMove);
-						this.setStart(x);
+						var x = event.clientX;
+						var y = event.clientY;
+						this.setStart(x, y);
 					},
 
 					onTouchStart: function(event){
 						var touches = event.changedTouches;
 						var x = touches[0].pageX;
-						this.setStart(x);
+						var y = touches[0].pageY;
+						this.setStart(x, y);
 					},
 
-					setStart: function(x){						
+					setStart: function(x, y){						
 						this.previousX = x;
+						this.previousY = y;
+						this.horizontalSwipeMode = false;
 					},
 
 					onMouseUp: function(event){

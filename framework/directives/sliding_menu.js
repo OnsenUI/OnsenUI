@@ -34,13 +34,13 @@ limitations under the License.
 
 				var Swiper = Class.extend({
 					init: function(element){
-						console.log('init');
+						this.VERTICAL_THRESHOLD = 20;
+						this.HORIZONTAL_THRESHOLD = 20;
 						this.abovePage = element[0].querySelector('.above');
 						this.$abovePage = angular.element(this.abovePage);
 						this.previousX = 0;
 						this.MAX = this.abovePage.clientWidth * 0.7;
-						this.startX = 0;
-						this.status = 
+						this.startX = 0;						
 
 						this.bindEvents();
 					},
@@ -66,11 +66,9 @@ limitations under the License.
 						this.$abovePage.addClass('transition');
 						this.translate(0);
 						this.startX = 0;
-						console.log('close');
 					},
 
 					open: function(){
-						console.log('close');
 						this.$abovePage.addClass('transition');
 						this.translate(this.MAX);
 						this.startX = this.MAX;
@@ -91,41 +89,56 @@ limitations under the License.
 
 					onMouseMove: function(event){
 						var x = event.clientX;
-						this.onMove(x);
+						var y = event.clientY;
+						this.onMove(x, y);
 					},
 
 					onTouchMove: function(event){
 						var touches = event.changedTouches;
 						var currentTouch = touches[0];
 						var x = currentTouch.pageX;
-						this.onMove(x);
+						var y = currentTouch.pageY;
+						this.onMove(x, y);
 					},
 
-					onMove: function(x){
+					onMove: function(x, y){
+						var verticalDistant = Math.abs(this.previousY - y);
+						if(verticalDistant > this.VERTICAL_THRESHOLD && !this.horizontalSwipeMode){
+							return;
+						}
+
 						var distant = x - this.previousX;
+						if(Math.abs(distant) > this.HORIZONTAL_THRESHOLD){
+							this.horizontalSwipeMode = true;
+						}
 						var toBeTranslate = this.startX + distant;
-						if(toBeTranslate < 0){
+						console.log(toBeTranslate);
+						if(toBeTranslate < 20){
 							return;
 						}
 						console.log(this.startX, distant);
 						this.translate(toBeTranslate);
 					},
 
-					onMouseDown: function(event){
-						var x = event.clientX;
+					onMouseDown: function(event){						
 						this.boundMouseMove = this.onMouseMove.bind(this);
 						this.abovePage.addEventListener('mousemove', this.boundMouseMove);
-						this.setStart(x);
+						var x = event.clientX;
+						var y = event.clientY;
+						this.setStart(x, y);
 					},
 
 					onTouchStart: function(event){
 						var touches = event.changedTouches;
 						var x = touches[0].pageX;
-						this.setStart(x);
+						var y = touches[0].pageY;
+						this.setStart(x, y);
 					},
 
-					setStart: function(x){						
+					setStart: function(x, y){						
 						this.previousX = x;
+						this.previousY = y;
+						this.horizontalSwipeMode = false;
 					},
 
 					onMouseUp: function(event){

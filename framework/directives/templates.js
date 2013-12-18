@@ -1,4 +1,4 @@
-angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
+angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/radio_button.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/button.tpl",
@@ -64,6 +64,14 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "	</div>    \n" +
     "	\n" +
     "</div>");
+}]);
+
+angular.module("templates/radio_button.tpl", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/radio_button.tpl",
+    "<label class=\"topcoat-radio-button\">\n" +
+    "	<span ng-transclude></span>\n" +
+    "  <div class=\"topcoat-radio-button__checkmark\"></div>\n" +
+    "</label>");
 }]);
 
 angular.module("templates/screen.tpl", []).run(["$templateCache", function($templateCache) {
