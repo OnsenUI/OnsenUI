@@ -26,6 +26,10 @@
           {
             "displayName": "Onsen UI (Developer Preview 2)",
             "id": "onsen_ui_0.6.0.js"
+          },
+          {
+            "displayName": "Onsen UI (Developer Preview 3)",
+            "id": "onsen_ui_0.7.0.js"
           }
         ]
       },
@@ -74,21 +78,24 @@
         "android" : {
           "default" : {          
             "Onsen UI": {              
-              "onsen_ui_0.6.0.js": "0.6.0/onsen_ui.js"
+              "onsen_ui_0.6.0.js": "0.6.0/onsen_ui.js",
+              "onsen_ui_0.7.0.js": "0.7.0/onsen_ui.js"
             }
           }
         },
         "ios" : {
           "default" : {          
             "Onsen UI": {
-              "onsen_ui_0.6.0.js": "0.6.0/onsen_ui.js"
+              "onsen_ui_0.6.0.js": "0.6.0/onsen_ui.js",
+              "onsen_ui_0.7.0.js": "0.7.0/onsen_ui.js"
             }
           }
         },
         "winrt" : {
           "default" : {          
             "Onsen UI": {
-              "onsen_ui_0.6.0.js": "0.6.0/onsen_ui.js"
+              "onsen_ui_0.6.0.js": "0.6.0/onsen_ui.js",
+              "onsen_ui_0.7.0.js": "0.7.0/onsen_ui.js"
             }
           }
         }
@@ -123,7 +130,33 @@
               "0.6.0/css/font_awesome/fonts/fontawesome-webfont.svg",
               "0.6.0/css/font_awesome/fonts/fontawesome-webfont.ttf",
               "0.6.0/css/font_awesome/fonts/fontawesome-webfont.woff",
-              "0.6.0/css/polyfill/sliding_menu_polyfill.css"              
+              "0.6.0/css/polyfill/sliding_menu_polyfill.css",
+              "0.7.0/css/onsen_ui.css",
+              "0.7.0/img/search.svg",
+              "0.7.0/font/SourceCodePro-Bold.otf",
+              "0.7.0/font/SourceCodePro-ExtraLight.otf",
+              "0.7.0/font/SourceCodePro-Light.otf",
+              "0.7.0/font/SourceCodePro-Regular.otf",
+              "0.7.0/font/SourceCodePro-Semibold.otf",
+              "0.7.0/font/SourceSansPro-Black.otf",
+              "0.7.0/font/SourceSansPro-BlackIt.otf",
+              "0.7.0/font/SourceSansPro-Bold.otf",
+              "0.7.0/font/SourceSansPro-BoldIt.otf",
+              "0.7.0/font/SourceSansPro-ExtraLight.otf",
+              "0.7.0/font/SourceSansPro-ExtraLightIt.otf",
+              "0.7.0/font/SourceSansPro-It.otf",
+              "0.7.0/font/SourceSansPro-Light.otf",
+              "0.7.0/font/SourceSansPro-LightIt.otf",
+              "0.7.0/font/SourceSansPro-Regular.otf",
+              "0.7.0/font/SourceSansPro-Semibold.otf",
+              "0.7.0/font/SourceSansPro-SemiboldIt.otf",
+              "0.7.0/css/font_awesome/css/font-awesome.min.css",
+              "0.7.0/css/font_awesome/fonts/FontAwesome.otf",
+              "0.7.0/css/font_awesome/fonts/fontawesome-webfont.eot",
+              "0.7.0/css/font_awesome/fonts/fontawesome-webfont.svg",
+              "0.7.0/css/font_awesome/fonts/fontawesome-webfont.ttf",
+              "0.7.0/css/font_awesome/fonts/fontawesome-webfont.woff",
+              "0.7.0/css/polyfill/sliding_menu_polyfill.css"              
             ],
             "theme": {
               "0.6.0_topcoat-mobile-light.css": "0.6.0/css/topcoat-mobile-light.css",
@@ -165,7 +198,33 @@
               "0.6.0/css/font_awesome/fonts/fontawesome-webfont.svg",
               "0.6.0/css/font_awesome/fonts/fontawesome-webfont.ttf",
               "0.6.0/css/font_awesome/fonts/fontawesome-webfont.woff",
-              "0.6.0/css/polyfill/sliding_menu_polyfill.css"
+              "0.6.0/css/polyfill/sliding_menu_polyfill.css",
+              "0.7.0/css/onsen_ui.css",
+              "0.7.0/img/search.svg",
+              "0.7.0/font/SourceCodePro-Bold.otf",
+              "0.7.0/font/SourceCodePro-ExtraLight.otf",
+              "0.7.0/font/SourceCodePro-Light.otf",
+              "0.7.0/font/SourceCodePro-Regular.otf",
+              "0.7.0/font/SourceCodePro-Semibold.otf",
+              "0.7.0/font/SourceSansPro-Black.otf",
+              "0.7.0/font/SourceSansPro-BlackIt.otf",
+              "0.7.0/font/SourceSansPro-Bold.otf",
+              "0.7.0/font/SourceSansPro-BoldIt.otf",
+              "0.7.0/font/SourceSansPro-ExtraLight.otf",
+              "0.7.0/font/SourceSansPro-ExtraLightIt.otf",
+              "0.7.0/font/SourceSansPro-It.otf",
+              "0.7.0/font/SourceSansPro-Light.otf",
+              "0.7.0/font/SourceSansPro-LightIt.otf",
+              "0.7.0/font/SourceSansPro-Regular.otf",
+              "0.7.0/font/SourceSansPro-Semibold.otf",
+              "0.7.0/font/SourceSansPro-SemiboldIt.otf",
+              "0.7.0/css/font_awesome/css/font-awesome.min.css",
+              "0.7.0/css/font_awesome/fonts/FontAwesome.otf",
+              "0.7.0/css/font_awesome/fonts/fontawesome-webfont.eot",
+              "0.7.0/css/font_awesome/fonts/fontawesome-webfont.svg",
+              "0.7.0/css/font_awesome/fonts/fontawesome-webfont.ttf",
+              "0.7.0/css/font_awesome/fonts/fontawesome-webfont.woff",
+              "0.7.0/css/polyfill/sliding_menu_polyfill.css"
             ],
             "theme": {
               "0.6.0_topcoat-mobile-light.css": "0.6.0/css/topcoat-mobile-light.css",
@@ -207,7 +266,33 @@
               "0.6.0/css/font_awesome/fonts/fontawesome-webfont.svg",
               "0.6.0/css/font_awesome/fonts/fontawesome-webfont.ttf",
               "0.6.0/css/font_awesome/fonts/fontawesome-webfont.woff",
-              "0.6.0/css/polyfill/sliding_menu_polyfill.css"
+              "0.6.0/css/polyfill/sliding_menu_polyfill.css",
+              "0.7.0/css/onsen_ui.css",
+              "0.7.0/img/search.svg",
+              "0.7.0/font/SourceCodePro-Bold.otf",
+              "0.7.0/font/SourceCodePro-ExtraLight.otf",
+              "0.7.0/font/SourceCodePro-Light.otf",
+              "0.7.0/font/SourceCodePro-Regular.otf",
+              "0.7.0/font/SourceCodePro-Semibold.otf",
+              "0.7.0/font/SourceSansPro-Black.otf",
+              "0.7.0/font/SourceSansPro-BlackIt.otf",
+              "0.7.0/font/SourceSansPro-Bold.otf",
+              "0.7.0/font/SourceSansPro-BoldIt.otf",
+              "0.7.0/font/SourceSansPro-ExtraLight.otf",
+              "0.7.0/font/SourceSansPro-ExtraLightIt.otf",
+              "0.7.0/font/SourceSansPro-It.otf",
+              "0.7.0/font/SourceSansPro-Light.otf",
+              "0.7.0/font/SourceSansPro-LightIt.otf",
+              "0.7.0/font/SourceSansPro-Regular.otf",
+              "0.7.0/font/SourceSansPro-Semibold.otf",
+              "0.7.0/font/SourceSansPro-SemiboldIt.otf",
+              "0.7.0/css/font_awesome/css/font-awesome.min.css",
+              "0.7.0/css/font_awesome/fonts/FontAwesome.otf",
+              "0.7.0/css/font_awesome/fonts/fontawesome-webfont.eot",
+              "0.7.0/css/font_awesome/fonts/fontawesome-webfont.svg",
+              "0.7.0/css/font_awesome/fonts/fontawesome-webfont.ttf",
+              "0.7.0/css/font_awesome/fonts/fontawesome-webfont.woff",
+              "0.7.0/css/polyfill/sliding_menu_polyfill.css"
             ],
             "theme": {
               "0.6.0_topcoat-mobile-light.css": "0.6.0/css/topcoat-mobile-light.css",
