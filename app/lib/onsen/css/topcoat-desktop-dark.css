@@ -2097,6 +2097,7 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   color: #c6c8c8;
   color: var-color--radio-button;
   line-height: 1.063rem;
+  text-align: left;
 }
 
 .topcoat-radio-button__checkmark:before {

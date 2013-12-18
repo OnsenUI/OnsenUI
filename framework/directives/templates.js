@@ -13,7 +13,7 @@ angular.module("templates/button.tpl", []).run(["$templateCache", function($temp
 angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/checkbox.tpl",
     "<label class=\"topcoat-checkbox\">\n" +
-    "  <input type=\"checkbox\">\n" +
+    "  <input type=\"checkbox\" ng-model=\"ngModel\" ng-true-value=\"{{ngTrueValue || true}}\" ng-false-value=\"{{ngFalseValue || false}}\">\n" +
     "  <div class=\"topcoat-checkbox__checkmark\"></div>\n" +
     "  <span ng-transclude>\n" +
     "  	\n" +
@@ -69,8 +69,10 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
 angular.module("templates/radio_button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/radio_button.tpl",
     "<label class=\"topcoat-radio-button\">\n" +
-    "	<span ng-transclude></span>\n" +
-    "  <div class=\"topcoat-radio-button__checkmark\"></div>\n" +
+    "	{{leftLabel}}\n" +
+    "	<input type=\"radio\" name=\"{{name}}\" ng-model=\"ngModel\" value=\"{{value}}\">\n" +
+    "	<div class=\"topcoat-radio-button__checkmark\"></div>\n" +
+    "	{{rightLabel}}\n" +
     "</label>");
 }]);
 

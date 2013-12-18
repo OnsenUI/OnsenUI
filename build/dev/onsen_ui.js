@@ -16908,7 +16908,7 @@ angular.module("templates/button.tpl", []).run(["$templateCache", function($temp
 angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/checkbox.tpl",
     "<label class=\"topcoat-checkbox\">\n" +
-    "  <input type=\"checkbox\">\n" +
+    "  <input type=\"checkbox\" ng-model=\"ngModel\" ng-true-value=\"{{ngTrueValue || true}}\" ng-false-value=\"{{ngFalseValue || false}}\">\n" +
     "  <div class=\"topcoat-checkbox__checkmark\"></div>\n" +
     "  <span ng-transclude>\n" +
     "  	\n" +
@@ -16964,8 +16964,10 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
 angular.module("templates/radio_button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/radio_button.tpl",
     "<label class=\"topcoat-radio-button\">\n" +
-    "	<span ng-transclude></span>\n" +
-    "  <div class=\"topcoat-radio-button__checkmark\"></div>\n" +
+    "	{{leftLabel}}\n" +
+    "	<input type=\"radio\" name=\"{{name}}\" ng-model=\"ngModel\" value=\"{{value}}\">\n" +
+    "	<div class=\"topcoat-radio-button__checkmark\"></div>\n" +
+    "	{{rightLabel}}\n" +
     "</label>");
 }]);
 
@@ -17169,6 +17171,11 @@ limitations under the License.
 			require: '?ngModel',
 			restrict: 'E',
 			replace: true,
+			scope: {
+				ngModel: '=',
+				ngTrueValue: '@',
+				ngFalseValue: '@'
+			},
 			transclude: false,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
 			link: function($scope, element, attrs, ngModel){
@@ -17487,106 +17494,38 @@ limitations under the License.
 		}
 	});
 })();
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
-(function() {
+(function(){
 	'use strict';
 
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
 	directives.directive('onsRadioButton', function(ONSEN_CONSTANTS) {
 		return {
-			restrict: 'A',
+			restrict: 'E',
 			replace: false,
+			scope: {
+				value: '@',
+				ngModel: '=',
+				leftLabel: '@',
+				rightLabel: '@',
+				name: '@'
+			},
 			transclude: true,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/radio_button.tpl',
-			compile: function(elem, attrs) {
-				console.log('hello');
-				return function(scope, element, attrs) {
-					console.log('hi');
-				};
+			link: function($scope, element, attrs){
+				var radioButton = element.find('input');
+				var checked = false;
+				attrs.$observe('disabled', function(disabled){
+					if(disabled === undefined){
+						radioButton.attr('disabled', false);						
+					}else{
+						radioButton.attr('disabled', true);
+					}
+				});				
 			}
 		};
 	});
 })();
-
-// /*
-// Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-
-//    http://www.apache.org/licenses/LICENSE-2.0
-
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-// */
-
-
-// (function(){
-// 	'use strict';
-
-// 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-// 	directives.directive('onsRadioButton', function(ONSEN_CONSTANTS) {
-// 		return {
-// 			require: '?ngModel',
-// 			restrict: 'A',
-// 			replace: false,
-// 			scope: {
-// 				name: '@'
-// 			},
-// 			transclude: true,
-// 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/radio_button.tpl',
-// 			link: function($scope, element, attrs, ngModel){
-// 				var radioButton = element.find('input');
-// 				var checked = false;
-// 				attrs.$observe('disabled', function(disabled){
-// 					if(disabled === undefined){
-// 						radioButton.attr('disabled', false);						
-// 					}else{
-// 						radioButton.attr('disabled', true);
-// 					}
-// 				});
-
-// 				if(ngModel){					
-// 					ngModel.$render = function() {
-// 						checked = ( ngModel.$viewValue == "true" );
-// 						radioButton.attr('checked', checked);
-// 					};
-
-// 					radioButton.bind('change', function(){
-// 						$scope.$apply(function(){
-// 							ngModel.$setViewValue(radioButton[0].checked);
-// 						});						
-// 					});
-// 				}
-				
-// 			}
-// 		};
-// 	});
-// })();
 
 
 /*
