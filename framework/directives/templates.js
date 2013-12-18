@@ -99,7 +99,7 @@ angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function
     "	<ng-include ng-cloak src=\"pages.behind\" class=\"behind full-screen\">\n" +
     "	</ng-include>\n" +
     "\n" +
-    "	<ng-include src=\"pages.above\" ng-class=\"status\" class=\"above full-screen\">\n" +
+    "	<ng-include src=\"pages.above\" class=\"above full-screen\">\n" +
     "	</ng-include>\n" +
     "</div>");
 }]);

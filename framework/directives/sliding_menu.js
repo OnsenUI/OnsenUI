@@ -76,6 +76,14 @@ limitations under the License.
 						this.startX = this.MAX;
 					},
 
+					toggle: function(){
+						if(this.startX === 0){
+							this.open();
+						}else{
+							this.close();
+						}
+					},
+
 					translate: function(x){
 						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
 						this.currentX = x;
@@ -93,7 +101,7 @@ limitations under the License.
 						this.onMove(x);
 					},
 
-					onMove: function(x){						
+					onMove: function(x){
 						var distant = x - this.previousX;
 						var toBeTranslate = this.startX + distant;
 						if(toBeTranslate < 0){
@@ -152,21 +160,16 @@ limitations under the License.
 				scope.ons = scope.ons || {};
 				scope.ons.slidingMenu = scope.ons.slidingMenu || {};
 
-				scope.status = "close";
-
 				scope.ons.slidingMenu.openMenu = function() {
-					scope.status = 'open';
+					swiper.open();
 				}
 
 				scope.ons.slidingMenu.closeMenu = function() {
-					scope.status = 'close';
+					swiper.close();
 				}
 
 				scope.ons.slidingMenu.toggleMenu = function() {
-					var newStatus = scope.status == 'close' ?
-						'open' : 'close';
-						
-					scope.status = newStatus;
+					swiper.toggle();
 				}
 
 				scope.ons.slidingMenu.setAbovePage = function(page){					
