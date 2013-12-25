@@ -137,6 +137,46 @@ module.exports = function(grunt) {
             '**'
           ]
         }]
+      },
+      minimum_template: {
+        files: [{
+          expand: true,
+          cwd: 'build/dev',
+          dest: 'project_templates/minimum/lib/onsen/',
+          src: [
+            '**'
+          ]
+        }]
+      },
+      sliding_menu_template: {
+        files: [{
+          expand: true,
+          cwd: 'build/dev',
+          dest: 'project_templates/sliding_menu/lib/onsen/',
+          src: [
+            '**'
+          ]
+        }]
+      },
+      tab_bar_template: {
+        files: [{
+          expand: true,
+          cwd: 'build/dev',
+          dest: 'project_templates/tab_bar/lib/onsen/',
+          src: [
+            '**'
+          ]
+        }]
+      },
+      master_detail_template: {
+        files: [{
+          expand: true,
+          cwd: 'build/dev',
+          dest: 'project_templates/master_detail/lib/onsen/',
+          src: [
+            '**'
+          ]
+        }]
       }
     },
     watch: {
@@ -165,6 +205,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-html2js');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'html2js', 'concat', 'copy:build', 'copy:demo', 'copy:app']);
+  grunt.registerTask('default', ['clean', 'html2js', 'concat', 'copy:build', 'copy:demo', 'copy:app', 'copy:minimum_template', 'copy:sliding_menu_template', 'copy:tab_bar_template', 'copy:master_detail_template']);
 
 };

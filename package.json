@@ -1,6 +1,8 @@
 {
-  "name": "onsen_ui",
-  "version": "0.6.0",
+  "name": "onsenui",
+  "version": "0.7.0",
+  "private": false,
+  "author": "@kruyvanna",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.6.0",
