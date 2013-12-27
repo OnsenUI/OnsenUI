@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Checkbox | Onsen UI</title>  
+  <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="lib/onsen/css/onsen_ui.css">
+  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-blue.css">  
+
+  <style type="text/css">
+  section {
+    border-bottom: solid 1px gray;
+  }
+  </style>
+  
+</head>
+
+<body>    
+  
+  <div class="center">
+    <section>
+      <h2>Agree?</h2> 
+      <ons-checkbox ng-model="agree">
+      </ons-checkbox>
+      <h3>{{agree}}</h3>  
+    </section>
+
+    <section>
+      <h2>YES or NO?</h2>
+      <ons-checkbox ng-model="answer" ng-true-value="YES" ng-false-value="NO">
+      </ons-checkbox>
+      <h3>{{answer}}</h3>  
+    </section>
+    
+  </div>
+</body>
+  
+  <script src="lib/onsen/onsen_ui.js"></script>     
+  
+  <script src="js/app.js"></script>  
+</html>

@@ -1,0 +1,32 @@
+<div class="center">
+	<ons-scroller>
+		<section class="space-top padding-bottom70">
+			<select class="topcoat-text-input" ng-model="animationName" ng-init=" animationName = 'slide-left' ">
+				<option>slide-left</option>
+				<option>slide-right</option>
+				<option>slide-up</option>
+				<option>slide-down</option>
+				<option>expand-left</option>
+				<option>expand-right</option>
+				<option>expand-up</option>
+				<option>expand-down</option>
+				<option>zoom-in</option>
+				<option>zoom-out</option>
+			</select>
+			<p></p>
+
+			<ons-button animation="{{animationName}}" should-spin="{{spin1}}" ng-click="spin1 = !spin1">Default</ons-button>
+			<p></p>
+			<ons-button animation="{{animationName}}" type="large" should-spin="{{spin2}}" ng-click="spin2 = !spin2">large</ons-button>
+			<p></p>
+			<ons-button animation="{{animationName}}" type="quiet" should-spin="{{spin3}}" ng-click="spin3 = !spin3">quiet</ons-button>
+			<p></p>
+			<ons-button animation="{{animationName}}" type="large--quiet" should-spin="{{spin4}}" ng-click="spin4 = !spin4">large--quiet</ons-button>
+			<p></p>
+			<ons-button animation="{{animationName}}" type="cta" should-spin="{{spin5}}" ng-click="spin5 = !spin5">cta</ons-button>
+			<p></p>
+			<ons-button animation="{{animationName}}" type="large--cta" should-spin="{{spin6}}" ng-click="spin6 = !spin6">large--cta</ons-button>
+
+		</section>
+	</ons-scroller>
+</div>
