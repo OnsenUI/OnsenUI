@@ -43,8 +43,8 @@ angular.module("templates/list_item.tpl", []).run(["$templateCache", function($t
 
 angular.module("templates/navigator.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/navigator.tpl",
-    "<div class=\"max\">	\n" +
-    "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select\">\n" +
+    "<div class=\"navigator-container\">	\n" +
+    "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar\">\n" +
     "	    <div class=\"topcoat-navigation-bar__item left quarter\">\n" +
     "	        <span ng-click=\"leftButtonClicked();\" class=\"topcoat-icon-button--quiet\" ng-hide=\"leftButtonIcon === '' || leftButtonIcon === undefined\" style=\"vertical-align: middle\">\n" +
     "	        	<i class=\"icon-2x\" ng-class=\"leftButtonIcon\"></i>\n" +
@@ -59,7 +59,7 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "	        </span>\n" +
     "	    </div>\n" +
     "	</div>	\n" +
-    "	<div class=\"relative max debug\">\n" +
+    "	<div class=\"relative max navigator-content\">\n" +
     "		<ng-include class=\"content\" src=\"navigationItem.source\" ng-animate=\"animation\"></ng-include>\n" +
     "	</div>    \n" +
     "	\n" +
