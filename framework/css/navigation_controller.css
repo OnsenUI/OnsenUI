@@ -21,6 +21,21 @@ ons-navigator {
 	display: block;
 }
 
+.navigator-container {
+    display: -webkit-flex;
+    -webkit-flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.navigator-toolbar {
+    flex: 0 0 auto;
+}
+
+.navigator-content {
+    flex: 1 0 auto;
+}
+
 .topcoat-navigation-bar {    
     border-bottom: 1px solid lightgray;;
 }
