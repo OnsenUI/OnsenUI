@@ -78,7 +78,8 @@ angular.module("templates/radio_button.tpl", []).run(["$templateCache", function
 
 angular.module("templates/screen.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/screen.tpl",
-    "<ng-include class=\"screen max absolute\" src=\"screenItem.source\" ng-animate=\"animation\"></ng-include>");
+    "<div class=\"screen\">\n" +
+    "</div>");
 }]);
 
 angular.module("templates/scroller.tpl", []).run(["$templateCache", function($templateCache) {

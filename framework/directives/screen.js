@@ -29,7 +29,7 @@ limitations under the License.
 			scope: {
 				page: '@'
 			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/screen.tpl',
+			
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
 				var screenItems = [];
@@ -45,10 +45,20 @@ limitations under the License.
 						}
 					},
 
-					animateIn: function(pager) {
-						pager.attr("class", "screen unmodal");
-						element[0].offsetWidth;
-						pager.attr("class", "screen transition center");
+					animateInBehindPage: function(){
+						var behindPage = screenItems[screenItems.length - 1];
+						behindPage.attr('class', 'screen-page transition modal-behind');
+					},
+
+					animateInCurrentPage: function(pager) {
+						pager.attr("class", "screen-page unmodal");
+						element[0].offsetWidth;						
+						pager.attr("class", "screen-page transition center");
+					},
+
+					animateOutBehindPage: function(){
+						var behindPage = screenItems[screenItems.length - 1];
+						behindPage.attr('class', 'screen-page transition');
 					},
 
 					isEmpty: function() {
@@ -62,14 +72,15 @@ limitations under the License.
 								method: "GET"
 							}).success(function(data, status, headers, config) {
 								var page = angular.element('<div></div>');
-								page.addClass('page');
+								page.addClass('screen-page');
 								var templateHTML = angular.element(data);
 								page.append(templateHTML);
 								var pager = $compile(page)(scope);
 								element.append(pager);
 
-								if (!this.isEmpty()) {
-									this.animateIn(pager);
+								if (!this.isEmpty()) {									
+									this.animateInBehindPage();
+									this.animateInCurrentPage(pager);
 								}
 
 								screenItems.push(pager);
@@ -80,11 +91,12 @@ limitations under the License.
 
 						scope.ons.screen.dismissPage = function() {
 							var currentPage = screenItems.pop();
-							currentPage.attr("class", "screen transition unmodal");
+							this.animateOutBehindPage();
+							currentPage.attr("class", "screen-page transition unmodal");
 							currentPage[0].addEventListener('webkitTransitionEnd', function transitionEnded(e) {
 								currentPage.remove();
-								currentPage[0].removeEventListner(transitionEnded);
-							});
+								currentPage[0].removeEventListener(transitionEnded);
+							});							
 						}.bind(this);
 					}
 				});
