@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-01-06 */
+/*! onsenui - v0.7.0 - 2014-01-07 */
 /**
  * @license AngularJS v1.1.5
  * (c) 2010-2012 Google, Inc. http://angularjs.org
@@ -17551,7 +17551,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.directive('onsScreen', function(ONSEN_CONSTANTS) {
+	directives.directive('onsScreen', function(ONSEN_CONSTANTS, $http, $compile) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -17563,58 +17563,63 @@ limitations under the License.
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
 				var screenItems = [];
-				var isBack = false;
-				var isFirstRun = true;
-				scope.canGoBack = false;
 				scope.ons = scope.ons || {};
 				scope.ons.screen = scope.ons.screen || {};
 
-				scope.$watch('page', function(newPage) {
-					if (newPage) {
-						prepareAnimation();
-						var newScreenItem = {
-							source: newPage
-						}
-						scope.screenItem = newScreenItem;
+				var Screen = Class.extend({
+					init: function() {
+						this.attachMethods();
 
-						screenItems.push(newScreenItem);						
+						if (scope.page) {
+							scope.ons.screen.presentPage(scope.page);
+						}
+					},
+
+					animateIn: function(pager) {
+						pager.attr("class", "screen unmodal");
+						element[0].offsetWidth;
+						pager.attr("class", "screen transition center");
+					},
+
+					isEmpty: function() {
+						return screenItems.length < 1;
+					},
+
+					attachMethods: function() {
+						scope.ons.screen.presentPage = function(page) {
+							$http({
+								url: page,
+								method: "GET"
+							}).success(function(data, status, headers, config) {
+								var page = angular.element('<div></div>');
+								page.addClass('page');
+								var templateHTML = angular.element(data);
+								page.append(templateHTML);
+								var pager = $compile(page)(scope);
+								element.append(pager);
+
+								if (!this.isEmpty()) {
+									this.animateIn(pager);
+								}
+
+								screenItems.push(pager);
+							}.bind(this)).error(function(data, status, headers, config) {
+								console.log('error', data, status);
+							});
+						}.bind(this);
+
+						scope.ons.screen.dismissPage = function() {
+							var currentPage = screenItems.pop();
+							currentPage.attr("class", "screen transition unmodal");
+							currentPage[0].addEventListener('webkitTransitionEnd', function transitionEnded(e) {
+								currentPage.remove();
+								currentPage[0].removeEventListner(transitionEnded);
+							});
+						}.bind(this);
 					}
 				});
 
-				function prepareAnimation(){
-					if(isFirstRun){
-						scope.animation = null;
-						isFirstRun = false;
-					}else{
-						if(isBack){
-							scope.animation = {
-								enter: 'unmodal-enter',
-								leave: 'unmodal-leave'
-							};							
-							isBack = false;
-						}else{
-							scope.animation = {
-								enter: 'modal-enter',
-								leave: 'modal-leave'
-							};
-						}
-					}
-				}
-
-				scope.ons.screen.presentPage = function(page) {
-					scope.page = page;
-				}
-
-				scope.ons.screen.dismissPage = function() {
-					if (screenItems.length < 2) {
-						return;
-					}
-
-					isBack = true;
-					screenItems.pop();
-					var previousScreenItem = screenItems.pop();
-					scope.page = previousScreenItem.source;
-				}				
+				screen = new Screen();
 			}
 		}
 	});
