@@ -81,8 +81,9 @@ limitations under the License.
 						scope.ons.screen.dismissPage = function() {
 							var currentPage = screenItems.pop();
 							currentPage.attr("class", "screen transition unmodal");
-							currentPage.one('webkitTransitionEnd', function(e) {
+							currentPage[0].addEventListener('webkitTransitionEnd', function transitionEnded(e) {
 								currentPage.remove();
+								currentPage[0].removeEventListner(transitionEnded);
 							});
 						}.bind(this);
 					}
