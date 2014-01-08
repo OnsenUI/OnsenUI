@@ -6,7 +6,11 @@
     "Kruy Vanna <kruyvanna@gmail.com>"
   ],
   "description": "Web Component inspired HTML5 UI framework for building modern mobile application",
-  "main": "build/dev/onsenui.js",
+  "main": [
+    "build/js/onsenui.js",
+    "build/css/onsenui.css",
+    "build/css/topcoat-mobile-onsen-blue.css"
+  ],
   "keywords": [
     "onsenui",
     "angular",
