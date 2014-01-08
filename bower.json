@@ -7,9 +7,20 @@
   ],
   "description": "Web Component inspired HTML5 UI framework for building modern mobile application",
   "main": [
-    "build/js/onsenui.js",
-    "build/css/onsenui.css",
-    "build/css/topcoat-mobile-onsen-blue.css"
+    "build/js/onsenui.js"    
+  ],
+  "styles": [
+    "build/css/onsenui.css"
+  ],
+  "themes": [
+    "build/css/topcoat-mobile-onsen-blue.css",
+    "build/css/topcoat-mobile-onsen-green.css",
+    "build/css/topcoat-mobile-onsen-orange.css",
+    "build/css/topcoat-mobile-onsen-pink.css",
+    "build/css/topcoat-mobile-onsen-purple.css",
+    "build/css/topcoat-mobile-onsen-yellow.css",
+    "build/css/topcoat-mobile-light.css",
+    "build/css/topcoat-mobile-dark.css"
   ],
   "keywords": [
     "onsenui",
