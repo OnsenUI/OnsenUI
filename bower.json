@@ -1,0 +1,34 @@
+{
+  "name": "OnsenUI",
+  "version": "0.6.0",
+  "homepage": "http://onsenui.io",
+  "authors": [
+    "Kruy Vanna <kruyvanna@gmail.com>"
+  ],
+  "description": "Web Component inspired HTML5 UI framework for building modern mobile application",
+  "main": "build/dev/onsenui.js",
+  "keywords": [
+    "onsenui",
+    "angular",
+    "html5",
+    "cordova",
+    "phonegap",
+    "web",
+    "component",
+    "monaca"
+  ],
+  "dependencies": {
+    "angular-unstable": "1.1.5"
+  },
+  "license": "Apache License, Version 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "component_demo",
+    "config",
+    "framework",
+    "project_templates",
+    "scripts",
+    "test"    
+  ]
+}
