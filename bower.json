@@ -29,6 +29,8 @@
     "framework",
     "project_templates",
     "scripts",
-    "test"    
+    "test",
+    "Gruntfile.js",
+    "plugin_info.json"
   ]
 }
