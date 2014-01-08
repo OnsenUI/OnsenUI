@@ -12,7 +12,11 @@ module.exports = function(grunt) {
           src: [
             '.tmp',
             'build',
-            'component_demo/lib/onsen/'            
+            'component_demo/lib/onsen/',
+            'project_templates/minimum/app/lib/onsen/',
+            'project_templates/sliding_menu/app/lib/onsen/',
+            'project_templates/tab_bar/app/lib/onsen/',
+            'project_templates/master_detail/app/lib/onsen/'
           ]
         }]
       }
