@@ -163,6 +163,56 @@ module.exports = function(grunt) {
         }]
       }
     },
+    compress: {
+      master_detail: {
+        options: {
+          archive: 'project_templates/master_detail.zip'
+        },
+        files: [      
+          {
+            expand: true,
+            cwd: 'project_templates/master_detail/',
+            src: ['**']            
+          }
+        ]
+      },
+      minimum: {
+        options: {
+          archive: 'project_templates/minimum.zip'
+        },
+        files: [      
+          {
+            expand: true,
+            cwd: 'project_templates/minimum/',
+            src: ['**']            
+          }
+        ]
+      },
+      sliding_menu: {
+        options: {
+          archive: 'project_templates/sliding_menu.zip'
+        },
+        files: [      
+          {
+            expand: true,
+            cwd: 'project_templates/sliding_menu/',
+            src: ['**']            
+          }
+        ]
+      },
+      tab_bar: {
+        options: {
+          archive: 'project_templates/tab_bar.zip'
+        },
+        files: [      
+          {
+            expand: true,
+            cwd: 'project_templates/tab_bar/',
+            src: ['**']            
+          }
+        ]
+      }
+    },
     watch: {
       scripts: {
         files: [
@@ -187,8 +237,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-contrib-compress');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'html2js', 'concat', 'copy:build', 'copy:demo', 'copy:minimum_template', 'copy:sliding_menu_template', 'copy:tab_bar_template', 'copy:master_detail_template']);
+  grunt.registerTask('default', ['clean', 'html2js', 'concat', 'copy:build', 'copy:demo', 'copy:minimum_template', 'copy:sliding_menu_template', 'copy:tab_bar_template', 'copy:master_detail_template', 'compress']);
 
 };
