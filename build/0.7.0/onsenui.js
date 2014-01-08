@@ -1,4 +1,4 @@
-/*! onsen_ui - v0.6.0 - 2013-12-18 */
+/*! onsenui - v0.7.0 - 2014-01-08 */
 /**
  * @license AngularJS v1.1.5
  * (c) 2010-2012 Google, Inc. http://angularjs.org
@@ -16938,8 +16938,8 @@ angular.module("templates/list_item.tpl", []).run(["$templateCache", function($t
 
 angular.module("templates/navigator.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/navigator.tpl",
-    "<div class=\"max\">	\n" +
-    "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select\">\n" +
+    "<div class=\"navigator-container\">	\n" +
+    "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar\">\n" +
     "	    <div class=\"topcoat-navigation-bar__item left quarter\">\n" +
     "	        <span ng-click=\"leftButtonClicked();\" class=\"topcoat-icon-button--quiet\" ng-hide=\"leftButtonIcon === '' || leftButtonIcon === undefined\" style=\"vertical-align: middle\">\n" +
     "	        	<i class=\"icon-2x\" ng-class=\"leftButtonIcon\"></i>\n" +
@@ -16954,7 +16954,7 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "	        </span>\n" +
     "	    </div>\n" +
     "	</div>	\n" +
-    "	<div class=\"relative max debug\">\n" +
+    "	<div class=\"relative max navigator-content\">\n" +
     "		<ng-include class=\"content\" src=\"navigationItem.source\" ng-animate=\"animation\"></ng-include>\n" +
     "	</div>    \n" +
     "	\n" +
@@ -16973,7 +16973,8 @@ angular.module("templates/radio_button.tpl", []).run(["$templateCache", function
 
 angular.module("templates/screen.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/screen.tpl",
-    "<ng-include class=\"screen max absolute\" src=\"screenItem.source\" ng-animate=\"animation\"></ng-include>");
+    "<div class=\"screen\">\n" +
+    "</div>");
 }]);
 
 angular.module("templates/scroller.tpl", []).run(["$templateCache", function($templateCache) {
@@ -17551,7 +17552,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.directive('onsScreen', function(ONSEN_CONSTANTS) {
+	directives.directive('onsScreen', function(ONSEN_CONSTANTS, $http, $compile) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -17559,62 +17560,79 @@ limitations under the License.
 			scope: {
 				page: '@'
 			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/screen.tpl',
+			
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
 				var screenItems = [];
-				var isBack = false;
-				var isFirstRun = true;
-				scope.canGoBack = false;
 				scope.ons = scope.ons || {};
 				scope.ons.screen = scope.ons.screen || {};
 
-				scope.$watch('page', function(newPage) {
-					if (newPage) {
-						prepareAnimation();
-						var newScreenItem = {
-							source: newPage
-						}
-						scope.screenItem = newScreenItem;
+				var Screen = Class.extend({
+					init: function() {
+						this.attachMethods();
 
-						screenItems.push(newScreenItem);						
+						if (scope.page) {
+							scope.ons.screen.presentPage(scope.page);
+						}
+					},
+
+					animateInBehindPage: function(){
+						var behindPage = screenItems[screenItems.length - 1];
+						behindPage.attr('class', 'screen-page transition modal-behind');
+					},
+
+					animateInCurrentPage: function(pager) {
+						pager.attr("class", "screen-page unmodal");
+						element[0].offsetWidth;						
+						pager.attr("class", "screen-page transition center");
+					},
+
+					animateOutBehindPage: function(){
+						var behindPage = screenItems[screenItems.length - 1];
+						behindPage.attr('class', 'screen-page transition');
+					},
+
+					isEmpty: function() {
+						return screenItems.length < 1;
+					},
+
+					attachMethods: function() {
+						scope.ons.screen.presentPage = function(page) {
+							$http({
+								url: page,
+								method: "GET"
+							}).success(function(data, status, headers, config) {
+								var page = angular.element('<div></div>');
+								page.addClass('screen-page');
+								var templateHTML = angular.element(data);
+								page.append(templateHTML);
+								var pager = $compile(page)(scope);
+								element.append(pager);
+
+								if (!this.isEmpty()) {									
+									this.animateInBehindPage();
+									this.animateInCurrentPage(pager);
+								}
+
+								screenItems.push(pager);
+							}.bind(this)).error(function(data, status, headers, config) {
+								console.log('error', data, status);
+							});
+						}.bind(this);
+
+						scope.ons.screen.dismissPage = function() {
+							var currentPage = screenItems.pop();
+							this.animateOutBehindPage();
+							currentPage.attr("class", "screen-page transition unmodal");
+							currentPage[0].addEventListener('webkitTransitionEnd', function transitionEnded(e) {
+								currentPage.remove();
+								currentPage[0].removeEventListener(transitionEnded);
+							});							
+						}.bind(this);
 					}
 				});
 
-				function prepareAnimation(){
-					if(isFirstRun){
-						scope.animation = null;
-						isFirstRun = false;
-					}else{
-						if(isBack){
-							scope.animation = {
-								enter: 'unmodal-enter',
-								leave: 'unmodal-leave'
-							};							
-							isBack = false;
-						}else{
-							scope.animation = {
-								enter: 'modal-enter',
-								leave: 'modal-leave'
-							};
-						}
-					}
-				}
-
-				scope.ons.screen.presentPage = function(page) {
-					scope.page = page;
-				}
-
-				scope.ons.screen.dismissPage = function() {
-					if (screenItems.length < 2) {
-						return;
-					}
-
-					isBack = true;
-					screenItems.pop();
-					var previousScreenItem = screenItems.pop();
-					scope.page = previousScreenItem.source;
-				}				
+				screen = new Screen();
 			}
 		}
 	});
