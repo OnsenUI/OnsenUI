@@ -1,5 +1,5 @@
-/*! onsenui - v0.7.0 - 2014-01-08 */
-angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/radio_button.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
+/*! onsenui - v0.7.0 - 2014-01-09 */
+angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/button.tpl",
@@ -20,6 +20,11 @@ angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($te
     "  	\n" +
     "  </span>\n" +
     "</label>");
+}]);
+
+angular.module("templates/column.tpl", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/column.tpl",
+    "<div class=\"col col-{{align}} col-{{size}} col-{{offset}}\" ng-transclude></div>");
 }]);
 
 angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {
@@ -75,6 +80,11 @@ angular.module("templates/radio_button.tpl", []).run(["$templateCache", function
     "	<div class=\"topcoat-radio-button__checkmark\"></div>\n" +
     "	{{rightLabel}}\n" +
     "</label>");
+}]);
+
+angular.module("templates/row.tpl", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/row.tpl",
+    "<div class=\"row row-{{align}} small-row--{{sizeSmall}} row--{{sizeDefault}} large-row--{{sizeLarge}}\" ng-transclude></div>");
 }]);
 
 angular.module("templates/screen.tpl", []).run(["$templateCache", function($templateCache) {
@@ -308,6 +318,60 @@ limitations under the License.
 						});						
 					});
 				}
+			}
+		};
+	});
+})();
+
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function(){
+	'use strict';
+
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+	directives.directive('onsCol', function(ONSEN_CONSTANTS, $timeout) {
+		return {
+			restrict: 'E',
+			replace: true,
+			transclude: true,
+			scope: true,			
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/column.tpl',
+			controller: function($scope, $attrs){
+				$attrs.$observe('align', function(align){
+					if(align){
+						$scope.align = align;
+					}					
+				});
+
+				$attrs.$observe('size', function(size){
+					if(size){
+						$scope.size = size;
+					}					
+				});
+
+				$attrs.$observe('offset', function(offset){
+					if(offset){
+						$scope.offset = offset;	
+					}
+				});				
 			}
 		};
 	});
@@ -629,6 +693,66 @@ limitations under the License.
 						radioButton.attr('disabled', true);
 					}
 				});				
+			}
+		};
+	});
+})();
+
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function(){
+	'use strict';
+
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+	directives.directive('onsRow', function(ONSEN_CONSTANTS, $timeout) {
+		return {
+			restrict: 'E',
+			replace: true,
+			transclude: true,
+			scope: true,			
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/row.tpl',
+			controller: function($scope, $attrs){
+				$attrs.$observe('align', function(align){
+					if(align){
+						$scope.align = align;
+					}					
+				});
+
+				$attrs.$observe('sizeSmall', function(sizeSmall){
+					if(sizeSmall){
+						$scope.sizeSmall = sizeSmall;	
+					}
+				});
+
+				$attrs.$observe('sizeDefault', function(sizeDefault){
+					if(sizeDefault){
+						$scope.sizeDefault = sizeDefault;	
+					}
+				});
+
+				$attrs.$observe('sizeLarge', function(sizeLarge){
+					if(sizeLarge){
+						$scope.sizeLarge = sizeLarge;	
+					}
+				});
 			}
 		};
 	});
