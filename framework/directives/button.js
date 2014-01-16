@@ -35,9 +35,7 @@ limitations under the License.
 			link: function(scope, element, attrs){
 				var effectButton = element;
 				var TYPE_PREFIX = "topcoat-button--";
-				scope.item = {};
-
-				
+				scope.item = {};				
 
 				// if animation is not specified -> default is slide-left
 				if(scope.animation === undefined || scope.animation === ""){

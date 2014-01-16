@@ -15,61 +15,54 @@ limitations under the License.
 
 */
 
-
-.slide-left-enter {
-  -webkit-transition: 0.25s ease all .001s;  
-  -webkit-transform: translate3d(100%, 0, 0);
-  -moz-transition: 0.25s ease all .001s;  
-  -moz-transform: translate3d(100%, 0, 0);
+.onsen_navigator-page {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-.slide-left-enter.slide-left-enter-active {
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
+.onsen_navigator-page.left {
+    transform: translate3d(-25%, 0, 0);
+    box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
 }
 
-.slide-left-leave{
-  -webkit-transition: 0.251s ease all .001s;
-  -webkit-transform: translate3d(0, 0, 0);  
-  -moz-transition: 0.251s ease all .001s;
-  -moz-transform: translate3d(0, 0, 0);  
-  transition: 0.251s ease all .001s;
-  transform: translate3d(0, 0, 0);  
+.onsen_navigator-page.center {
+    transform: translate3d(0, 0, 0);
+    box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.02);
+    opacity: 1;
 }
 
-.slide-left-leave.slide-left-leave-active{
-  -webkit-transform: translate3d(-100%, 0, 0);    
-  -moz-transform: translate3d(-100%, 0, 0);   
-  transform: translate3d(-100%, 0, 0);    
+.onsen_navigator-page.right {
+    transform: translate3d(100%, 0, 0);
+    box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
 }
 
-.slide-right-enter {
-  -webkit-transition: 0.25s ease all .001s;
-  -webkit-transform: translate3d(-100%, 0, 0);
-  -moz-transition: 0.25s ease all .001s;
-  -moz-transform: translate3d(-100%, 0, 0);
-  transition: 0.25s ease all .001s;
-  transform: translate3d(-100%, 0, 0);
+.onsen_navigator-page.transition {
+    transition-duration: 400ms;
+    animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.slide-right-enter.slide-right-enter-active{
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-}
- 
-
-.slide-right-leave{
-  -webkit-transition: 0.25s ease all .001s;
-  -webkit-transform: translate3d(0, 0, 0);  
-  -moz-transition: 0.25s ease all .001s;
-  -moz-transform: translate3d(0, 0, 0);  
-  transition: 0.25s ease all .001s;
-  transform: translate3d(0, 0, 0);  
+.onsen_navigator-title.animate-right {
+  -webkit-transform: translateX(100%); opacity: 0;
 }
 
-.slide-right-leave.slide-right-leave-active{  
-  -webkit-transform: translate3d(100%, 0, 0);  
-  -moz-transform: translate3d(100%, 0, 0);  
-  transform: translate3d(100%, 0, 0);  
+.onsen_navigator-title.animate-center {
+  -webkit-transform: translateX(0); opacity: 1;
+}
+
+.onsen_navigator-title.animate-left {
+  -webkit-transform: translateX(-85%); opacity: 0;
+}
+
+.onsen_navigator-title {
+  position: absolute !important;
+}
+
+/* TODO: */
+.onsen_navigator-title.transition {
+  transition-duration: 400ms;
+  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
