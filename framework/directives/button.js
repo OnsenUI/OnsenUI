@@ -29,8 +29,7 @@ limitations under the License.
 				shouldSpin: '@',
 				animation: '@',
 				type: '@',
-				disabled: '@',
-				ngClick: '&'
+				disabled: '@'				
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
 			link: function(scope, element, attrs){
@@ -38,7 +37,7 @@ limitations under the License.
 				var TYPE_PREFIX = "topcoat-button--";
 				scope.item = {};
 
-				element.bind('click', scope.ngClick);
+				
 
 				// if animation is not specified -> default is slide-left
 				if(scope.animation === undefined || scope.animation === ""){
