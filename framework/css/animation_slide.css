@@ -57,7 +57,7 @@ limitations under the License.
   -webkit-transform: translateX(-85%); opacity: 0;
 }
 
-.onsen_navigator-title {
+.topcoat-navigation-bar__item {
   position: absolute !important;
 }
 
@@ -65,4 +65,18 @@ limitations under the License.
 .onsen_navigator-title.transition {
   transition-duration: 400ms;
   animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+}
+
+
+.onsen_navigator-button.out {
+  opacity: 0;
+}
+
+.onsen_navigator-button.in {
+  opacity: 1;
+}
+
+.onsen_navigator-button.transition {
+  transition-duration: 400ms;
+  animation-timing-function: cubic-bezier(.6, .1, .3, 1);
 }

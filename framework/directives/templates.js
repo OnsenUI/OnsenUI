@@ -50,6 +50,7 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
   $templateCache.put("templates/navigator.tpl",
     "<div class=\"navigator-container\">	\n" +
     "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar\">	    \n" +
+    "		\n" +
     "	</div>	\n" +
     "	<div class=\"relative max navigator-content\">\n" +
     "		\n" +
