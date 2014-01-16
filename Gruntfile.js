@@ -60,7 +60,7 @@ module.exports = function(grunt) {
           // angularjs
           {         
           expand: true,
-            cwd: 'framework/lib/angular-unstable',
+            cwd: 'framework/lib/angular',
             dest: 'build/js/angular',
             src: [
               '*.js'
