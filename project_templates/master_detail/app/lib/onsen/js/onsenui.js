@@ -51,10 +51,10 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
   $templateCache.put("templates/navigator.tpl",
     "<div class=\"navigator-container\">	\n" +
     "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar\">	    \n" +
-    "		<div class=\"topcoat-navigation-bar__item onsen_navigator__left-arrow transition hide\">\n" +
-    "			<i class=\"fa fa-angle-left fa-2x onsen_navigation-bar-height\"></i>\n" +
+    "		<div class=\"topcoat-navigation-bar__item onsen_navigatioon-bar__background onsen_navigator__left-arrow transition hide\">\n" +
+    "			<i class=\"fa fa-angle-left fa-lg\"></i>\n" +
     "		</div>		\n" +
-    "			\n" +
+    "					\n" +
     "	</div>	\n" +
     "	<div class=\"relative max navigator-content\">\n" +
     "		\n" +
@@ -575,6 +575,60 @@ limitations under the License.
 						outTitleElement.addClass('transition animate-left');
 					},
 
+					animateRightButtonIn: function(inNavigatorItem, outNavigatorItem){
+						if(inNavigatorItem.rightButtonElement || inNavigatorItem.options.rightButtonIcon){
+							var rightButton;
+							if(inNavigatorItem.rightButtonElement){
+								rightButton = inNavigatorItem.rightButtonElement;
+							}else{
+								rightButton = angular.element('<div></div>');
+								rightButton.addClass('onsen_navigator__right-button topcoat-navigation-bar__item transition hide');
+								var icon = angular.element('<i></i>');
+								icon.addClass(inNavigatorItem.options.rightButtonIcon + ' onsen_navigation-bar-height');
+								rightButton.append(icon);
+								inNavigatorItem.rightButtonElement = rightButton;
+							}
+
+							toolbar.append(rightButton);
+							toolbar[0].offsetWidth;
+							rightButton.removeClass('hide');
+							rightButton.addClass('show');								
+						
+						}
+
+						if(outNavigatorItem && outNavigatorItem.rightButtonElement){
+							var rightButton = outNavigatorItem.rightButtonElement;
+							rightButton.removeClass('show');
+							rightButton.addClass('hide');
+							rightButton.bind('webkitTransitionEnd', function transitionEnded(e) {
+								rightButton.remove();
+								rightButton.unbind(transitionEnded);
+							});
+						}
+						
+					},
+
+					animateRightButtonOut: function(inNavigatorItem, outNavigatorItem){
+						if(outNavigatorItem.rightButtonElement){
+							var outRightButton = outNavigatorItem.rightButtonElement;
+							toolbar[0].offsetWidth;
+							outRightButton.removeClass('show');
+							outRightButton.addClass('hide');
+							outRightButton.bind('webkitTransitionEnd', function transitionEnded(e) {
+								outRightButton.remove();
+								outRightButton.unbind(transitionEnded);
+							});
+						}
+						if(inNavigatorItem.rightButtonElement){
+							var rightButton = inNavigatorItem.rightButtonElement;
+							toolbar.append(rightButton);
+							toolbar[0].offsetWidth;
+							rightButton.removeClass('hide');
+							rightButton.addClass('show');
+						}
+
+					},
+
 					showBackButton: function(inNavigatorItem, outNavigatorItem) {											
 						toolbar[0].offsetWidth;
 						leftArrow.removeClass('hide');			
@@ -660,6 +714,7 @@ limitations under the License.
 									}
 									this.animateBackLabelIn(navigatorItem, previousNavigatorItem);
 									this.showBackButton(navigatorItem, previousNavigatorItem);
+									this.animateRightButtonIn(navigatorItem, previousNavigatorItem);
 								} else {
 									// var leftButtonElement = angular.element('<div></div>');
 									// leftButtonElement.addClass('topcoat-navigation-bar__item left quarter');
@@ -676,8 +731,8 @@ limitations under the License.
 									}
 									toolbar.append(titleElement);
 									navigatorItem.titleElement = titleElement;
-								}
-
+									this.animateRightButtonIn(navigatorItem, null);
+								}								
 
 								navigatorItems.push(navigatorItem);
 							}.bind(this)).error(function(data, status, headers, config) {
@@ -702,6 +757,8 @@ limitations under the License.
 							if(navigatorItems.length < 2){
 								this.hideBackButton();
 							}
+
+							this.animateRightButtonOut(previousNavigatorItem, currentNavigatorItem);
 						}.bind(this);
 					}
 				});

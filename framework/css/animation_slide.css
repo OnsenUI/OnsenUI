@@ -101,12 +101,33 @@ limitations under the License.
   opacity: 1;
 }
 
-.onsen_navigator__left-arrow {
-  background-color: #25B2C2;
+.onsen_navigatioon-bar__background {
+  background-color: #25B2C2 !important;
+}
+
+.onsen_navigator__left-arrow {  
   height: 2.5rem;
   left: 0;
   width: 20px;
   text-align: right;
+}
+
+.onsen_navigator__right-button {
+  position: absolute;
+  right: 10px;
+}
+
+.onsen_navigator__right-button.hide {
+  opacity: 0;
+}
+
+.onsen_navigator__right-button.opacity {
+  opacity: 1;
+}
+
+.onsen_navigator__right-button.transition {
+  transition-duration: 400ms;
+  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
 .onsen_navigator__left-arrow.transition{
