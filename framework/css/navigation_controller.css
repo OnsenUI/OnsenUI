@@ -36,6 +36,11 @@ ons-navigator {
     flex: 1 0 auto;
 }
 
+
+.onsen_navigation-bar-height {
+    line-height: 2.5rem;
+}
+
 .topcoat-navigation-bar {    
     border-bottom: 1px solid lightgray;;
 }
