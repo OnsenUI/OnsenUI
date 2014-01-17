@@ -293,7 +293,7 @@ limitations under the License.
 
 */
 
-.onsen_navigator-page {
+.onsen_navigator-pager {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -301,27 +301,49 @@ limitations under the License.
   right: 0;
 }
 
-.onsen_navigator-page.left {
-    -webkit-transform: translate3d(-25%, 0, 0);
-    transform: translate3d(-25%, 0, 0);
-    /*box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);*/
-    opacity: 0.9;
+.onsen_navigator-black-mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
 }
 
-.onsen_navigator-page.center {
+.onsen_navigator-pager.left {
+    -webkit-transform: translate3d(-25%, 0, 0);
+    transform: translate3d(-25%, 0, 0);    
+    /*box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);*/    
+}
+
+.onsen_navigator-pager.left .page {
+  opacity: 0.9;
+}
+
+.onsen_navigator-pager.center {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     /*box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.02);*/
-    opacity: 1;
 }
 
-.onsen_navigator-page.right {
+.onsen_navigator-pager.center .page {
+  opacity: 1;
+}
+
+.onsen_navigator-pager.right {
     -webkit-transform: translate3d(100%, 0, 0);
     transform: translate3d(100%, 0, 0);
     /*box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);*/
 }
 
-.onsen_navigator-page.transition {
+.onsen_navigator-pager.transition {
+    -webkit-transition-duration: 400ms;
+    transition-duration: 400ms;
+    -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+    animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+}
+
+.onsen_navigator-pager .page {
     -webkit-transition-duration: 400ms;
     transition-duration: 400ms;
     -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
@@ -329,8 +351,8 @@ limitations under the License.
 }
 
 .onsen_navigator-title {
-    width: 100%;
-    left: 0;
+    width: 60%;
+    left: 20%;
 }
 
 .onsen_navigator-title.animate-right {
@@ -361,15 +383,15 @@ limitations under the License.
 }
 
 
-.onsen_navigator-button.hide {
+.onsen_navigator__left-arrow.hide {
   opacity: 0;
 }
 
-.onsen_navigator-button.show {
+.onsen_navigator__left-arrow.show {
   opacity: 1;
 }
 
-#back-button {
+.onsen_navigator__left-arrow {
   background-color: #25B2C2;
   height: 2.5rem;
   left: 0;
@@ -377,12 +399,13 @@ limitations under the License.
   text-align: right;
 }
 
-.onsen_navigator-button {
+.onsen_navigator__left-arrow.transition{
   -webkit-transition-duration: 400ms;
   transition-duration: 400ms;
-  -webkit-animation-timing-function: cubic-bezier(.6, .1, .3, 1);
-  animation-timing-function: cubic-bezier(.6, .1, .3, 1);
+  -webkit-animation-timing-function: cubic-bezier(.99,.01,.99,.01);
+  animation-timing-function: cubic-bezier(.99,.01,.99,.01);
 }
+
 
 .onsen_navigator-back-label {
     font-weight: lighter !important;

@@ -51,7 +51,7 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
   $templateCache.put("templates/navigator.tpl",
     "<div class=\"navigator-container\">	\n" +
     "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar\">	    \n" +
-    "		<div id=\"back-button\" class=\"topcoat-navigation-bar__item onsen_navigator-button transition hide\">\n" +
+    "		<div class=\"topcoat-navigation-bar__item onsen_navigator__left-arrow transition hide\">\n" +
     "			<i class=\"fa fa-angle-left fa-2x onsen_navigation-bar-height\"></i>\n" +
     "		</div>		\n" +
     "			\n" +
@@ -487,12 +487,12 @@ limitations under the License.
 				scope.ons.navigator = scope.ons.navigator || {};
 				var container = angular.element(element[0].querySelector('.navigator-content'))
 				var toolbar = angular.element(element[0].querySelector('.topcoat-navigation-bar'));
-				var leftArrow = angular.element(toolbar[0].querySelector('#back-button'));				
+				var leftArrow = angular.element(toolbar[0].querySelector('.onsen_navigator__left-arrow'));				
 
 				var Navigator = Class.extend({
 					init: function() {
 						this.attachMethods();
-
+						leftArrow.bind('click', this.onBackButtonClicked.bind(this));
 						if (scope.page) {
 							var options = {
 								title: scope.title,
@@ -509,6 +509,7 @@ limitations under the License.
 						var title = outNavigatorItem.options.title;
 						var inBackLabel = angular.element('<div></div>');
 						inBackLabel.addClass('topcoat-navigation-bar__item onsen_navigator-back-label right');
+						inBackLabel.bind('click', this.onBackButtonClicked.bind(this));
 						inNavigatorItem.backLabel = inBackLabel;
 						toolbar.prepend(inBackLabel);
 						inBackLabel.text(title);
@@ -529,6 +530,11 @@ limitations under the License.
 						
 					},
 
+					onBackButtonClicked: function(){
+						console.log('back clicked');
+						scope.ons.navigator.popPage();
+					},
+
 					animateBackLabelOut: function(inNavigatorItem, outNavigatorItem){
 						var outLabel = outNavigatorItem.backLabel;
 						var inLabel = inNavigatorItem.backLabel;						
@@ -546,6 +552,7 @@ limitations under the License.
 						if(inLabel){
 							inLabel.removeClass('left');
 							inLabel.addClass('center');
+							inLabel.bind('click', this.onBackButtonClicked.bind(this));
 						}
 						
 					},
@@ -596,24 +603,24 @@ limitations under the License.
 					},
 
 					animatePageIn: function(inPage, outPage) {
-						inPage.attr("class", "onsen_navigator-page right");
+						inPage.attr("class", "onsen_navigator-pager right");
 						element[0].offsetWidth;
-						inPage.attr("class", "onsen_navigator-page transition center");
-						outPage.attr("class", "onsen_navigator-page transition left");
+						inPage.attr("class", "onsen_navigator-pager transition center");
+						outPage.attr("class", "onsen_navigator-pager transition left");
 					},
 
 					animatePageOut: function(currentPage, previousPage) {
 						// previousPage = $compile(previousPage)(scope);								
-						previousPage.attr("class", "onsen_navigator-page left");
+						previousPage.attr("class", "onsen_navigator-pager left");
 						element[0].offsetWidth;
-						previousPage.attr("class", "onsen_navigator-page transition center");
+						previousPage.attr("class", "onsen_navigator-pager transition center");
 
 						currentPage.bind('webkitTransitionEnd', function transitionEnded(e) {
 							currentPage.remove();
 							currentPage.unbind(transitionEnded);
 						});
 
-						currentPage.attr("class", "onsen_navigator-page transition right");
+						currentPage.attr("class", "onsen_navigator-pager transition right");
 					},
 
 					isEmpty: function() {
@@ -629,7 +636,11 @@ limitations under the License.
 								method: "GET"
 							}).success(function(data, status, headers, config) {
 								var page = angular.element('<div></div>');
-								page.addClass('onsen_navigator-page');
+								page.addClass('onsen_navigator-pager');								
+								var blackMask = angular.element('<div></div>');
+								blackMask.addClass('onsen_navigator-black-mask');
+								page.append(blackMask);
+
 								var templateHTML = angular.element(data);
 								page.append(templateHTML);
 								var pager = $compile(page)(scope);
@@ -676,6 +687,9 @@ limitations under the License.
 
 						scope.ons.navigator.popPage = function() {
 							console.log('pop');
+							if(navigatorItems.length < 2){
+								return;
+							}
 							var currentNavigatorItem = navigatorItems.pop();
 							var previousNavigatorItem = navigatorItems[navigatorItems.length - 1];
 
@@ -684,10 +698,10 @@ limitations under the License.
 							this.animatePageOut(currentPage, previousPage);
 
 							this.animateTitleOut(currentNavigatorItem, previousNavigatorItem);
-							this.animateBackLabelOut(previousNavigatorItem, currentNavigatorItem);
+							this.animateBackLabelOut(previousNavigatorItem, currentNavigatorItem);														
 							if(navigatorItems.length < 2){
 								this.hideBackButton();
-							}							
+							}
 						}.bind(this);
 					}
 				});

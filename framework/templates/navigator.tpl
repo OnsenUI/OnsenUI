@@ -1,6 +1,6 @@
 <div class="navigator-container">	
 	<div ng-hide="hideToolbar" class="topcoat-navigation-bar no-select navigator-toolbar">	    
-		<div id="back-button" class="topcoat-navigation-bar__item onsen_navigator-button transition hide">
+		<div class="topcoat-navigation-bar__item onsen_navigator__left-arrow transition hide">
 			<i class="fa fa-angle-left fa-2x onsen_navigation-bar-height"></i>
 		</div>		
 			

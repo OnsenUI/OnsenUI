@@ -50,7 +50,7 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
   $templateCache.put("templates/navigator.tpl",
     "<div class=\"navigator-container\">	\n" +
     "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar\">	    \n" +
-    "		<div id=\"back-button\" class=\"topcoat-navigation-bar__item onsen_navigator-button transition hide\">\n" +
+    "		<div class=\"topcoat-navigation-bar__item onsen_navigator__left-arrow transition hide\">\n" +
     "			<i class=\"fa fa-angle-left fa-2x onsen_navigation-bar-height\"></i>\n" +
     "		</div>		\n" +
     "			\n" +
