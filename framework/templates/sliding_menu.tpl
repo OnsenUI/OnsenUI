@@ -1,7 +1,12 @@
 <div class="sliding-menu full-screen">
-	<ng-include ng-cloak src="pages.behind" class="behind full-screen">
-	</ng-include>
+	<div class="behind full-screen">
+		<ng-include ng-cloak src="pages.behind">
+		</ng-include>
+	</div>
 
-	<ng-include src="pages.above" class="above full-screen">
-	</ng-include>
+	<div class="above full-screen">
+		<ng-include src="pages.above">
+		</ng-include>
+	</div>
+	
 </div>
