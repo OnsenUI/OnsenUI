@@ -53,6 +53,23 @@ module.exports = function(grunt) {
         dest: 'build/css/<%= pkg.name %>.css'
       }
     },
+    autoprefixer: {
+      dist: {
+          options: {
+              
+               // * Add target browsers here
+               // * https://github.com/ai/autoprefixer#browsers
+               // * 
+               browsers: ["last 2 version", "Android 4", "iOS 7"]
+               
+          },
+          files: [{
+              src: 'build/css/<%= pkg.name %>.css',
+              dest: 'build/css/<%= pkg.name %>.css'
+          }
+          ]
+      }
+    },
     // Put files not handled in other tasks here
     copy: {
       build: {
@@ -60,7 +77,7 @@ module.exports = function(grunt) {
           // angularjs
           {         
           expand: true,
-            cwd: 'framework/lib/angular-unstable',
+            cwd: 'framework/lib/angular',
             dest: 'build/js/angular',
             src: [
               '*.js'
@@ -238,8 +255,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.loadNpmTasks('grunt-autoprefixer');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'html2js', 'concat', 'copy:build', 'copy:demo', 'copy:minimum_template', 'copy:sliding_menu_template', 'copy:tab_bar_template', 'copy:master_detail_template', 'compress']);
+  grunt.registerTask('default', ['clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:demo', 'copy:minimum_template', 'copy:sliding_menu_template', 'copy:tab_bar_template', 'copy:master_detail_template', 'compress']);
 
 };

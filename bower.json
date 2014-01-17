@@ -7,7 +7,7 @@
   ],
   "description": "Web Component inspired HTML5 UI framework for building modern mobile application",
   "main": [
-    "build/js/onsenui.js"    
+    "build/js/onsenui.js"
   ],
   "styles": [
     "build/css/onsenui.css"
@@ -33,7 +33,7 @@
     "monaca"
   ],
   "dependencies": {
-    "angular-unstable": "1.1.5"
+    "angular": "~1.2.7"
   },
   "license": "Apache License, Version 2.0",
   "ignore": [

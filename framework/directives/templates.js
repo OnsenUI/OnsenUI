@@ -49,23 +49,14 @@ angular.module("templates/list_item.tpl", []).run(["$templateCache", function($t
 angular.module("templates/navigator.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/navigator.tpl",
     "<div class=\"navigator-container\">	\n" +
-    "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar\">\n" +
-    "	    <div class=\"topcoat-navigation-bar__item left quarter\">\n" +
-    "	        <span ng-click=\"leftButtonClicked();\" class=\"topcoat-icon-button--quiet\" ng-hide=\"leftButtonIcon === '' || leftButtonIcon === undefined\" style=\"vertical-align: middle\">\n" +
-    "	        	<i class=\"icon-2x\" ng-class=\"leftButtonIcon\"></i>\n" +
-    "	        </span>\n" +
-    "	    </div> \n" +
-    "	    <div class=\"topcoat-navigation-bar__item center half\">\n" +
-    "	        <span class=\"topcoat-navigation-bar__title\">{{navigationItem.title}}</span>        \n" +
-    "	    </div> \n" +
-    "	    <div class=\"topcoat-navigation-bar__item right quarter\">\n" +
-    "	        <span ng-click=\"rightButtonClicked();\" class=\"topcoat-icon-button--quiet\" ng-hide=\"rightButtonIcon === '' || rightButtonIcon === undefined\" style=\"vertical-align: middle\">\n" +
-    "	          <i class=\"icon-2x\" ng-class=\"rightButtonIcon\"></i>\n" +
-    "	        </span>\n" +
-    "	    </div>\n" +
+    "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar\">	    \n" +
+    "		<div class=\"topcoat-navigation-bar__item onsen_navigatioon-bar__background onsen_navigator__left-arrow transition hide\">\n" +
+    "			<i class=\"fa fa-angle-left fa-lg\"></i>\n" +
+    "		</div>		\n" +
+    "					\n" +
     "	</div>	\n" +
     "	<div class=\"relative max navigator-content\">\n" +
-    "		<ng-include class=\"content\" src=\"navigationItem.source\" ng-animate=\"animation\"></ng-include>\n" +
+    "		\n" +
     "	</div>    \n" +
     "	\n" +
     "</div>");

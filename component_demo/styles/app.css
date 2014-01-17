@@ -33,15 +33,15 @@ body {
 }
 
 .bg-orange {
-    background-color: lightsalmon;
+    background-color: lightsalmon !important;
 }
 
 .bg-gray {
-    background-color: lightgray;
+    background-color: lightgray !important;
 }
 
 .bg-green {
-    background-color: lightseagreen;
+    background-color: lightseagreen !important;
 }
 
 .space-top {
