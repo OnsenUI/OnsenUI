@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-01-17 */
+/*! onsenui - v0.7.0 - 2014-01-20 */
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
@@ -382,12 +382,20 @@ limitations under the License.
   animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
+.onsen_navigator__left-button-container.transition{
+  -webkit-transition-duration: 400ms;
+  transition-duration: 400ms;
+  -webkit-animation-timing-function: cubic-bezier(.99,.01,.99,.01);
+  animation-timing-function: cubic-bezier(.99,.01,.99,.01);
+}
 
-.onsen_navigator__left-arrow.hide {
+
+
+.onsen_navigator__left-button-container.hide {
   opacity: 0;
 }
 
-.onsen_navigator__left-arrow.show {
+.onsen_navigator__left-button-container.show {
   opacity: 1;
 }
 
@@ -395,7 +403,7 @@ limitations under the License.
   background-color: #25B2C2 !important;
 }
 
-.onsen_navigator__left-arrow {  
+.onsen_navigator__left-button-container {  
   height: 2.5rem;
   left: 0;
   width: 20px;
@@ -422,13 +430,6 @@ limitations under the License.
   animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.onsen_navigator__left-arrow.transition{
-  -webkit-transition-duration: 400ms;
-  transition-duration: 400ms;
-  -webkit-animation-timing-function: cubic-bezier(.99,.01,.99,.01);
-  animation-timing-function: cubic-bezier(.99,.01,.99,.01);
-}
-
 
 .onsen_navigator-back-label {
     font-weight: lighter !important;
@@ -443,6 +444,8 @@ limitations under the License.
     transition-duration: 400ms;
     -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
     animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+    -webkit-transition-property: -webkit-transform, opacity;
+    transition-property: transform, opacity;
 }
 
 .onsen_navigator-back-label.right {

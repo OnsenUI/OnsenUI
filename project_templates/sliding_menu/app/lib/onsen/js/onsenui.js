@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-01-17 */
+/*! onsenui - v0.7.0 - 2014-01-20 */
 angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
@@ -51,8 +51,10 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
   $templateCache.put("templates/navigator.tpl",
     "<div class=\"navigator-container\">	\n" +
     "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar\">	    \n" +
-    "		<div class=\"topcoat-navigation-bar__item onsen_navigatioon-bar__background onsen_navigator__left-arrow transition hide\">\n" +
-    "			<i class=\"fa fa-angle-left fa-lg\"></i>\n" +
+    "		<div class=\"topcoat-navigation-bar__item onsen_navigatioon-bar__background onsen_navigator__left-button-container transition hide\">\n" +
+    "			<span id=\"left-section\" class=\"topcoat-icon-button--quiet\">\n" +
+    "				<i class=\"fa fa-angle-left fa-2x onsen_navigation-bar-height\"></i>\n" +
+    "			</span>			\n" +
     "		</div>		\n" +
     "					\n" +
     "	</div>	\n" +
@@ -109,11 +111,16 @@ angular.module("templates/select.tpl", []).run(["$templateCache", function($temp
 angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/sliding_menu.tpl",
     "<div class=\"sliding-menu full-screen\">\n" +
-    "	<ng-include ng-cloak src=\"pages.behind\" class=\"behind full-screen\">\n" +
-    "	</ng-include>\n" +
+    "	<div class=\"behind full-screen\">\n" +
+    "		<ng-include ng-cloak src=\"pages.behind\">\n" +
+    "		</ng-include>\n" +
+    "	</div>\n" +
     "\n" +
-    "	<ng-include src=\"pages.above\" class=\"above full-screen\">\n" +
-    "	</ng-include>\n" +
+    "	<div class=\"above full-screen\">\n" +
+    "		<ng-include src=\"pages.above\">\n" +
+    "		</ng-include>\n" +
+    "	</div>\n" +
+    "	\n" +
     "</div>");
 }]);
 
@@ -465,7 +472,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.directive('onsNavigator', function(ONSEN_CONSTANTS, $http, $compile) {
+	directives.directive('onsNavigator', function(ONSEN_CONSTANTS, $http, $compile, $parse) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -476,23 +483,29 @@ limitations under the License.
 				hideToolbar: '@',
 				initialLeftButtonIcon: '@leftButtonIcon',
 				rightButtonIcon: '@',
-				onLeftButtonClick: '&',
-				onRightButtonClick: '&'
+				onLeftButtonClick: '@',
+				onRightButtonClick: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.tpl',
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
+				var leftButtonClick = attrs.onLeftButtonClick;
+				var rightButtonClick = attrs.onRightButtonClick;
 				var navigatorItems = [];
 				scope.ons = scope.ons || {};
 				scope.ons.navigator = scope.ons.navigator || {};
 				var container = angular.element(element[0].querySelector('.navigator-content'))
 				var toolbar = angular.element(element[0].querySelector('.topcoat-navigation-bar'));
-				var leftArrow = angular.element(toolbar[0].querySelector('.onsen_navigator__left-arrow'));				
+				var leftSection = angular.element(toolbar[0].querySelector('#left-section'));
+				var leftButtonContainer = angular.element(toolbar[0].querySelector('.onsen_navigator__left-button-container'));				
+				var leftArrow = angular.element(leftButtonContainer[0].querySelector('i'));				
+
+				var leftButtonClickFn = $parse(scope.onLeftButtonClick);
 
 				var Navigator = Class.extend({
 					init: function() {
-						this.attachMethods();
-						leftArrow.bind('click', this.onBackButtonClicked.bind(this));
+						this.attachMethods();						
+						leftSection.bind('click', this.onBackButtonClicked.bind(this));
 						if (scope.page) {
 							var options = {
 								title: scope.title,
@@ -516,7 +529,7 @@ limitations under the License.
 
 						toolbar[0].offsetWidth;	
 						inBackLabel.removeClass('right');										
-						inBackLabel.addClass('transition center');
+						inBackLabel.addClass('transition center topcoat-icon-button--quiet');
 
 						var outLabel = outNavigatorItem.backLabel;
 						if(outLabel){
@@ -530,9 +543,25 @@ limitations under the License.
 						
 					},
 
+					getCurrentNavigatorItem: function(){
+						return navigatorItems[navigatorItems.length - 1];
+					},
+
 					onBackButtonClicked: function(){
 						console.log('back clicked');
-						scope.ons.navigator.popPage();
+						var onLeftButtonClick = this.getCurrentNavigatorItem().options.onLeftButtonClick;
+						if(onLeftButtonClick){
+							var onLeftButtonClickFn = $parse(onLeftButtonClick);
+							if(onLeftButtonClick.indexOf('ons.navigator.') >= 0 ){								
+								onLeftButtonClickFn(scope);
+							}else{
+								onLeftButtonClickFn(scope.$parent);
+							}
+						}else{
+							if (this.canPopPage()) {
+								scope.ons.navigator.popPage();
+							}
+						}						 
 					},
 
 					animateBackLabelOut: function(inNavigatorItem, outNavigatorItem){
@@ -554,11 +583,10 @@ limitations under the License.
 							inLabel.addClass('center');
 							inLabel.bind('click', this.onBackButtonClicked.bind(this));
 						}
-						
 					},
 
 					animateTitleIn: function(inNavigatorItem, outNavigatorItem) {
-						var inTitle = inNavigatorItem.options.title;
+						var inTitle = inNavigatorItem.options.title || '';
 						var inTitleElement = angular.element('<span>' + inTitle + '</span>')
 						inTitleElement.attr('class', 'topcoat-navigation-bar__item onsen_navigator-title center transition animate-right');
 						var outTitleElement = outNavigatorItem.titleElement;
@@ -626,18 +654,42 @@ limitations under the License.
 							rightButton.removeClass('hide');
 							rightButton.addClass('show');
 						}
-
 					},
 
-					showBackButton: function(inNavigatorItem, outNavigatorItem) {											
+					setLeftButton: function(navigatorItem){
+						var leftButtonIcon = navigatorItem.options.leftButtonIcon;
+						if(leftButtonIcon){
+							this.setBackButtonIcon(leftButtonIcon);
+							this.showBackButton();
+						}else{
+							// no icon
+							if(this.canPopPage()){
+								this.setBackButtonIconAsLeftArrow();
+							}else{
+								// no icon and is root page
+								this.hideBackButton();
+								this.showBackButton();
+							}
+						}
+					},
+
+					setBackButtonIconAsLeftArrow: function(){
+						leftArrow.attr('class', 'fa fa-angle-left fa-2x onsen_navigation-bar-height');
+					},
+
+					setBackButtonIcon: function(iconClass){
+						leftArrow.attr('class', iconClass + ' onsen_navigation-bar-height');
+					},
+
+					showBackButton: function(inNavigatorItem, outNavigatorItem) {						
 						toolbar[0].offsetWidth;
-						leftArrow.removeClass('hide');			
-						leftArrow.addClass('transition show');						
+						leftButtonContainer.removeClass('hide');			
+						leftButtonContainer.addClass('transition show');						
 					},
 
 					hideBackButton: function(){
-						leftArrow.removeClass('show');	
-						leftArrow.addClass('hide');	
+						leftButtonContainer.removeClass('show');	
+						leftButtonContainer.addClass('hide');	
 					},
 
 					animateTitleOut: function(currentNavigatorItem, previousNavigatorItem) {
@@ -681,6 +733,10 @@ limitations under the License.
 						return navigatorItems.length < 1;
 					},
 
+					canPopPage: function(){
+						return navigatorItems.length > 1;
+					},
+
 
 					attachMethods: function() {
 						scope.ons.navigator.pushPage = function(page, options) {
@@ -702,28 +758,21 @@ limitations under the License.
 
 								var navigatorItem = {
 									page: pager,
-									options: options
+									options: options || {}
 								};
 
 								if (!this.isEmpty()) {
 									var previousNavigatorItem = navigatorItems[navigatorItems.length - 1];
 									var previousPage = previousNavigatorItem.page;
-									this.animatePageIn(pager, previousPage);
-									if (options.title) {
-										this.animateTitleIn(navigatorItem, previousNavigatorItem);
-									}
+									this.animatePageIn(pager, previousPage);									
+									this.animateTitleIn(navigatorItem, previousNavigatorItem);
+									
 									this.animateBackLabelIn(navigatorItem, previousNavigatorItem);
+									this.setBackButtonIconAsLeftArrow();
 									this.showBackButton(navigatorItem, previousNavigatorItem);
-									this.animateRightButtonIn(navigatorItem, previousNavigatorItem);
-								} else {
-									// var leftButtonElement = angular.element('<div></div>');
-									// leftButtonElement.addClass('topcoat-navigation-bar__item left quarter');
-									// if (options.leftButtonIcon) {
-									// 	leftButtonElement.addClass(options.leftButtonIcon);
-									// }
-									// toolbar.append(leftButtonElement);
-									// navigatorItem.leftButtonElement = leftButtonElement;
-
+									this.animateRightButtonIn(navigatorItem, previousNavigatorItem);									
+								} else {								
+									// root page
 									var titleElement = angular.element('<div></div>');
 									titleElement.addClass('topcoat-navigation-bar__item onsen_navigator-title center animate-center');
 									if (options.title) {
@@ -732,9 +781,15 @@ limitations under the License.
 									toolbar.append(titleElement);
 									navigatorItem.titleElement = titleElement;
 									this.animateRightButtonIn(navigatorItem, null);
-								}								
 
+									// // backButton icon
+									// if(options.leftButtonIcon){
+									// 	this.setBackButtonIcon(options.leftButtonIcon);
+									// 	this.showBackButton();
+									// }									
+								}								
 								navigatorItems.push(navigatorItem);
+								this.setLeftButton(navigatorItem);
 							}.bind(this)).error(function(data, status, headers, config) {
 								console.error('error', data, status);
 							});
@@ -754,11 +809,22 @@ limitations under the License.
 
 							this.animateTitleOut(currentNavigatorItem, previousNavigatorItem);
 							this.animateBackLabelOut(previousNavigatorItem, currentNavigatorItem);														
-							if(navigatorItems.length < 2){
-								this.hideBackButton();
-							}
+							// if(navigatorItems.length < 2){								
+							// 	if(previousNavigatorItem.options.leftButtonIcon){
+							// 		this.setBackButtonIcon(previousNavigatorItem.options.leftButtonIcon);
+							// 		this.showBackButton();
+							// 	}else{
+							// 		this.hideBackButton();
+							// 	}
+							// }
+
+							this.setLeftButton(previousNavigatorItem);
 
 							this.animateRightButtonOut(previousNavigatorItem, currentNavigatorItem);
+						}.bind(this);
+
+						scope.leftButtonClicked = function(){
+							this.onBackButtonClicked();
 						}.bind(this);
 					}
 				});
@@ -1361,6 +1427,7 @@ limitations under the License.
 					init: function(element){
 						this.VERTICAL_THRESHOLD = 20;
 						this.HORIZONTAL_THRESHOLD = 20;
+						this.behindPage = element[0].querySelector('.behind');
 						this.abovePage = element[0].querySelector('.above');
 						this.$abovePage = angular.element(this.abovePage);
 						this.previousX = 0;
@@ -1409,6 +1476,9 @@ limitations under the License.
 
 					translate: function(x){
 						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
+						var behind = x / this.MAX * 10;
+						console.log('behind', behind);
+						this.behindPage.style.webkitTransform = 'translate3d(' + behind + '%, 0, 0)';
 						this.currentX = x;
 					},
 

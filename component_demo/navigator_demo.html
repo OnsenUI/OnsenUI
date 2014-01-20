@@ -15,8 +15,18 @@
 </head>
 
 <body>    
+  <div ng-controller="NavigatorController" class="page">
+    <ons-navigator left-button-icon="fa fa-bars" on-left-button-click="ons.navigator.pushPage('pages/navigator/page1.html')" page="pages/navigator/page1.html" title="Page 1"></ons-navigator>  
+  </div>
   
-  <ons-navigator page="pages/navigator/page1.html" title="Page 1"></ons-navigator>
+  <script>
+
+    function NavigatorController($scope){
+      $scope.shout = function(){
+        alert('wow!');
+      } 
+    }
+  </script>
  
 </body>
 </html>

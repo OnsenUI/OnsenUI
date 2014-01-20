@@ -92,12 +92,18 @@ limitations under the License.
   animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
+.onsen_navigator__left-button-container.transition{
+  transition-duration: 400ms;
+  animation-timing-function: cubic-bezier(.99,.01,.99,.01);
+}
 
-.onsen_navigator__left-arrow.hide {
+
+
+.onsen_navigator__left-button-container.hide {
   opacity: 0;
 }
 
-.onsen_navigator__left-arrow.show {
+.onsen_navigator__left-button-container.show {
   opacity: 1;
 }
 
@@ -105,7 +111,7 @@ limitations under the License.
   background-color: #25B2C2 !important;
 }
 
-.onsen_navigator__left-arrow {  
+.onsen_navigator__left-button-container {  
   height: 2.5rem;
   left: 0;
   width: 20px;
@@ -130,11 +136,6 @@ limitations under the License.
   animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.onsen_navigator__left-arrow.transition{
-  transition-duration: 400ms;
-  animation-timing-function: cubic-bezier(.99,.01,.99,.01);
-}
-
 
 .onsen_navigator-back-label {
     font-weight: lighter !important;
@@ -147,6 +148,7 @@ limitations under the License.
 .onsen_navigator-back-label.transition {
     transition-duration: 400ms;
     animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+    transition-property: transform, opacity;
 }
 
 .onsen_navigator-back-label.right {

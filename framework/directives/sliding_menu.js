@@ -36,6 +36,7 @@ limitations under the License.
 					init: function(element){
 						this.VERTICAL_THRESHOLD = 20;
 						this.HORIZONTAL_THRESHOLD = 20;
+						this.behindPage = element[0].querySelector('.behind');
 						this.abovePage = element[0].querySelector('.above');
 						this.$abovePage = angular.element(this.abovePage);
 						this.previousX = 0;
@@ -84,6 +85,9 @@ limitations under the License.
 
 					translate: function(x){
 						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
+						var behind = x / this.MAX * 10;
+						console.log('behind', behind);
+						this.behindPage.style.webkitTransform = 'translate3d(' + behind + '%, 0, 0)';
 						this.currentX = x;
 					},
 
