@@ -5,7 +5,7 @@
 				<i class="fa fa-angle-left fa-2x onsen_navigation-bar-height"></i>
 			</span>			
 		</div>		
-					
+		<div class="onsen_navigator__right-button topcoat-navigation-bar__item"></div>
 	</div>	
 	<div class="relative max navigator-content">
 		

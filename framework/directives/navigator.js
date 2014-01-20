@@ -49,6 +49,8 @@ limitations under the License.
 				var leftButtonContainer = angular.element(toolbar[0].querySelector('.onsen_navigator__left-button-container'));				
 				var leftArrow = angular.element(leftButtonContainer[0].querySelector('i'));				
 
+				var rightSection = angular.element(toolbar[0].querySelector('.onsen_navigator__right-button'));
+
 				var leftButtonClickFn = $parse(scope.onLeftButtonClick);
 
 				var Navigator = Class.extend({
@@ -153,30 +155,26 @@ limitations under the License.
 					},
 
 					animateRightButtonIn: function(inNavigatorItem, outNavigatorItem){
-						if(inNavigatorItem.rightButtonElement || inNavigatorItem.options.rightButtonIcon){
-							var rightButton;
-							if(inNavigatorItem.rightButtonElement){
-								rightButton = inNavigatorItem.rightButtonElement;
-							}else{
-								rightButton = angular.element('<div></div>');
-								rightButton.addClass('onsen_navigator__right-button topcoat-navigation-bar__item transition hide');
-								var icon = angular.element('<i></i>');
-								icon.addClass(inNavigatorItem.options.rightButtonIcon + ' onsen_navigation-bar-height');
-								rightButton.append(icon);
-								inNavigatorItem.rightButtonElement = rightButton;
+						if(inNavigatorItem.rightButtonIconElement || inNavigatorItem.options.rightButtonIcon){
+							var rightButtonIconElement;
+							if(inNavigatorItem.rightButtonIconElement){
+								rightButtonIconElement = inNavigatorItem.rightButtonIconElement;
+							}else{								
+								rightButtonIconElement = angular.element('<i></i>');
+								rightButtonIconElement.addClass(inNavigatorItem.options.rightButtonIcon + ' onsen_navigation-bar-height onsen_fade');
+								rightSection.append(rightButtonIconElement);
+								inNavigatorItem.rightButtonIconElement = rightButtonIconElement;
 							}
-
-							toolbar.append(rightButton);
-							toolbar[0].offsetWidth;
-							rightButton.removeClass('hide');
-							rightButton.addClass('show');								
-						
+							
+							rightSection[0].offsetWidth;
+							rightButtonIconElement.removeClass('hide');
+							rightButtonIconElement.addClass('transition show');								
 						}
 
-						if(outNavigatorItem && outNavigatorItem.rightButtonElement){
-							var rightButton = outNavigatorItem.rightButtonElement;
+						if(outNavigatorItem && outNavigatorItem.rightButtonIconElement){
+							var rightButton = outNavigatorItem.rightButtonIconElement;
 							rightButton.removeClass('show');
-							rightButton.addClass('hide');
+							rightButton.addClass('transition hide');
 							rightButton.bind('webkitTransitionEnd', function transitionEnded(e) {
 								rightButton.remove();
 								rightButton.unbind(transitionEnded);
@@ -186,22 +184,22 @@ limitations under the License.
 					},
 
 					animateRightButtonOut: function(inNavigatorItem, outNavigatorItem){
-						if(outNavigatorItem.rightButtonElement){
-							var outRightButton = outNavigatorItem.rightButtonElement;
+						if(outNavigatorItem.rightButtonIconElement){
+							var outRightButton = outNavigatorItem.rightButtonIconElement;
 							toolbar[0].offsetWidth;
 							outRightButton.removeClass('show');
-							outRightButton.addClass('hide');
+							outRightButton.addClass('transition hide');
 							outRightButton.bind('webkitTransitionEnd', function transitionEnded(e) {
 								outRightButton.remove();
 								outRightButton.unbind(transitionEnded);
 							});
 						}
-						if(inNavigatorItem.rightButtonElement){
-							var rightButton = inNavigatorItem.rightButtonElement;
-							toolbar.append(rightButton);
-							toolbar[0].offsetWidth;
+						if(inNavigatorItem.rightButtonIconElement){
+							var rightButton = inNavigatorItem.rightButtonIconElement;
+							rightSection.append(rightButton);
+							rightSection[0].offsetWidth;
 							rightButton.removeClass('hide');
-							rightButton.addClass('show');
+							rightButton.addClass('transition show');
 						}
 					},
 

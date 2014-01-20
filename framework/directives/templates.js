@@ -55,7 +55,7 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "				<i class=\"fa fa-angle-left fa-2x onsen_navigation-bar-height\"></i>\n" +
     "			</span>			\n" +
     "		</div>		\n" +
-    "					\n" +
+    "		<div class=\"onsen_navigator__right-button topcoat-navigation-bar__item\"></div>\n" +
     "	</div>	\n" +
     "	<div class=\"relative max navigator-content\">\n" +
     "		\n" +

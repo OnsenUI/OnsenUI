@@ -118,22 +118,28 @@ limitations under the License.
   text-align: right;
 }
 
-.onsen_navigator__right-button {
+.onsen_fade {
   position: absolute;
-  right: 10px;
+  top: 0;
+  right: 0;
 }
 
-.onsen_navigator__right-button.hide {
-  opacity: 0;
+.onsen_fade.transition{
+  transition-duration: 400ms;
+  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.onsen_navigator__right-button.opacity {
+.onsen_fade.show {
   opacity: 1;
 }
 
-.onsen_navigator__right-button.transition {
-  transition-duration: 400ms;
-  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+.onsen_fade.hide {
+  opacity: 0;
+}
+
+.onsen_navigator__right-button {
+  position: absolute;
+  right: 10px;
 }
 
 
