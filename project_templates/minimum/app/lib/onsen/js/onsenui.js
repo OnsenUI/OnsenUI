@@ -507,7 +507,7 @@ limitations under the License.
 				var Navigator = Class.extend({
 					init: function() {
 						this.attachMethods();						
-						leftSection.bind('click', this.onBackButtonClicked.bind(this));
+						leftSection.bind('click', this.onLeftButtonClicked.bind(this));
 						rightSection.bind('click', this.onRightButtonClicked.bind(this));
 						if (scope.page) {
 							var options = {
@@ -525,7 +525,7 @@ limitations under the License.
 						var title = outNavigatorItem.options.title;
 						var inBackLabel = angular.element('<div></div>');
 						inBackLabel.addClass('topcoat-navigation-bar__item onsen_navigator-back-label right');
-						inBackLabel.bind('click', this.onBackButtonClicked.bind(this));
+						inBackLabel.bind('click', this.onLeftButtonClicked.bind(this));
 						inNavigatorItem.backLabel = inBackLabel;
 						toolbar.prepend(inBackLabel);
 						inBackLabel.text(title);
@@ -550,7 +550,7 @@ limitations under the License.
 						return navigatorItems[navigatorItems.length - 1];
 					},
 
-					onBackButtonClicked: function(){
+					onLeftButtonClicked: function(){
 						console.log('back clicked');
 						var onLeftButtonClick = this.getCurrentNavigatorItem().options.onLeftButtonClick;
 						if(onLeftButtonClick){
@@ -596,7 +596,7 @@ limitations under the License.
 						if(inLabel){
 							inLabel.removeClass('left');
 							inLabel.addClass('center');
-							inLabel.bind('click', this.onBackButtonClicked.bind(this));
+							inLabel.bind('click', this.onLeftButtonClicked.bind(this));
 						}
 					},
 
@@ -835,7 +835,7 @@ limitations under the License.
 						}.bind(this);
 
 						scope.leftButtonClicked = function(){
-							this.onBackButtonClicked();
+							this.onLeftButtonClicked();
 						}.bind(this);
 					}
 				});
