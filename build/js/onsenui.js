@@ -50,13 +50,13 @@ angular.module("templates/list_item.tpl", []).run(["$templateCache", function($t
 angular.module("templates/navigator.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/navigator.tpl",
     "<div class=\"navigator-container\">	\n" +
-    "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar\">	    \n" +
+    "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar relative\">	    \n" +
     "		<div class=\"topcoat-navigation-bar__item onsen_navigatioon-bar__background onsen_navigator__left-button-container transition hide\">\n" +
     "			<span id=\"left-section\" class=\"topcoat-icon-button--quiet\">\n" +
     "				<i class=\"fa fa-angle-left fa-2x onsen_navigation-bar-height\"></i>\n" +
     "			</span>			\n" +
     "		</div>		\n" +
-    "		<div class=\"onsen_navigator__right-button topcoat-navigation-bar__item\"></div>\n" +
+    "		<div class=\"onsen_navigator__right-button topcoat-navigation-bar__item topcoat-icon-button--quiet\"></div>\n" +
     "	</div>	\n" +
     "	<div class=\"relative max navigator-content\">\n" +
     "		\n" +
@@ -508,6 +508,7 @@ limitations under the License.
 					init: function() {
 						this.attachMethods();						
 						leftSection.bind('click', this.onBackButtonClicked.bind(this));
+						rightSection.bind('click', this.onRightButtonClicked.bind(this));
 						if (scope.page) {
 							var options = {
 								title: scope.title,
@@ -564,6 +565,18 @@ limitations under the License.
 								scope.ons.navigator.popPage();
 							}
 						}						 
+					},
+
+					onRightButtonClicked: function(){
+						var onRightButtonClick = this.getCurrentNavigatorItem().options.onRightButtonClick;
+						if(onRightButtonClick){
+							var onRightButtonClickFunction = $parse(onRightButtonClick);
+							if(onRightButtonClick.indexOf('ons.navigator.') >= 0 ){								
+								onRightButtonClickFunction(scope);
+							}else{
+								onRightButtonClickFunction(scope.$parent);
+							}
+						}
 					},
 
 					animateBackLabelOut: function(inNavigatorItem, outNavigatorItem){

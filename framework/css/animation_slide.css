@@ -127,6 +127,7 @@ limitations under the License.
 .onsen_fade.transition{
   transition-duration: 400ms;
   animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  transition-property: opacity;
 }
 
 .onsen_fade.show {
@@ -140,6 +141,9 @@ limitations under the License.
 .onsen_navigator__right-button {
   position: absolute;
   right: 10px;
+  top: 0;
+  width: 10%;
+  bottom: 0;
 }
 
 

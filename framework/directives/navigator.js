@@ -57,6 +57,7 @@ limitations under the License.
 					init: function() {
 						this.attachMethods();						
 						leftSection.bind('click', this.onBackButtonClicked.bind(this));
+						rightSection.bind('click', this.onRightButtonClicked.bind(this));
 						if (scope.page) {
 							var options = {
 								title: scope.title,
@@ -113,6 +114,18 @@ limitations under the License.
 								scope.ons.navigator.popPage();
 							}
 						}						 
+					},
+
+					onRightButtonClicked: function(){
+						var onRightButtonClick = this.getCurrentNavigatorItem().options.onRightButtonClick;
+						if(onRightButtonClick){
+							var onRightButtonClickFunction = $parse(onRightButtonClick);
+							if(onRightButtonClick.indexOf('ons.navigator.') >= 0 ){								
+								onRightButtonClickFunction(scope);
+							}else{
+								onRightButtonClickFunction(scope.$parent);
+							}
+						}
 					},
 
 					animateBackLabelOut: function(inNavigatorItem, outNavigatorItem){
