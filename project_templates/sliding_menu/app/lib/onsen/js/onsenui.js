@@ -527,6 +527,10 @@ limitations under the License.
 						inBackLabel.addClass('topcoat-navigation-bar__item onsen_navigator-back-label right');
 						inBackLabel.bind('click', this.onLeftButtonClicked.bind(this));
 						inNavigatorItem.backLabel = inBackLabel;
+						if(inNavigatorItem.options.leftButtonIcon){
+							// no back label if user specify icon
+							inBackLabel[0].style.display = 'none';
+						}
 						toolbar.prepend(inBackLabel);
 						inBackLabel.text(title);
 
@@ -543,7 +547,27 @@ limitations under the License.
 							outLabel.removeClass('center');
 							outLabel.addClass('left');	
 						}
-						
+					},
+
+					animateBackLabelOut: function(inNavigatorItem, outNavigatorItem){
+						var outLabel = outNavigatorItem.backLabel;
+						var inLabel = inNavigatorItem.backLabel;						
+						toolbar.prepend(inLabel);
+
+						outLabel.bind('webkitTransitionEnd', function transitionEnded(e) {
+							outLabel.remove();
+							outLabel.unbind(transitionEnded);
+						});
+
+						toolbar[0].offsetWidth;
+						outLabel.removeClass('transition center');						
+						outLabel.addClass('transition right');
+
+						if(inLabel){
+							inLabel.removeClass('left');
+							inLabel.addClass('center');
+							inLabel.bind('click', this.onLeftButtonClicked.bind(this));
+						}
 					},
 
 					getCurrentNavigatorItem: function(){
@@ -576,27 +600,6 @@ limitations under the License.
 							}else{
 								onRightButtonClickFunction(scope.$parent);
 							}
-						}
-					},
-
-					animateBackLabelOut: function(inNavigatorItem, outNavigatorItem){
-						var outLabel = outNavigatorItem.backLabel;
-						var inLabel = inNavigatorItem.backLabel;						
-						toolbar.prepend(inLabel);
-
-						outLabel.bind('webkitTransitionEnd', function transitionEnded(e) {
-							outLabel.remove();
-							outLabel.unbind(transitionEnded);
-						});
-
-						toolbar[0].offsetWidth;
-						outLabel.removeClass('transition center');						
-						outLabel.addClass('transition right');
-
-						if(inLabel){
-							inLabel.removeClass('left');
-							inLabel.addClass('center');
-							inLabel.bind('click', this.onLeftButtonClicked.bind(this));
 						}
 					},
 
