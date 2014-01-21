@@ -1,5 +1,5 @@
 /*! onsenui - v0.7.0 - 2014-01-21 */
-angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/orientation.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
+angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/orientation.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/button.tpl",
@@ -25,6 +25,11 @@ angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($te
 angular.module("templates/column.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/column.tpl",
     "<div class=\"col col-{{align}} col-{{size}} col-{{offset}}\" ng-transclude></div>");
+}]);
+
+angular.module("templates/icon.tpl", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/icon.tpl",
+    "<i class=\"fa fa-{{icon}} fa-{{size}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}\"></i>");
 }]);
 
 angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {
@@ -374,6 +379,45 @@ limitations under the License.
 						$scope.offset = offset;	
 					}
 				});				
+			}
+		};
+	});
+})();
+
+
+(function(){
+	'use strict';
+
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+	directives.directive('onsIcon', function(ONSEN_CONSTANTS) {
+		return {
+			restrict: 'E',
+			replace: true,			
+			transclude: false,
+			scope: {
+				icon: '@',
+				size: '@',
+				rotate: '@',
+				flip: '@'
+			},
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/icon.tpl',
+			link: function($scope, element, attrs){
+				attrs.$observe('spin', function(spin){
+					if(spin === "true"){
+						$scope.spin = 'spin';
+					}else{
+						$scope.spin = '';
+					}
+				});	
+
+				attrs.$observe('fixedWidth', function(fixedWidth){
+					if(fixedWidth === "true"){
+						$scope.fixedWidth = 'fw';
+					}else{
+						$scope.fixedWidth = '';						
+					}
+				});
 			}
 		};
 	});

@@ -1,4 +1,4 @@
-angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/orientation.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
+angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/orientation.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/button.tpl",
@@ -24,6 +24,11 @@ angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($te
 angular.module("templates/column.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/column.tpl",
     "<div class=\"col col-{{align}} col-{{size}} col-{{offset}}\" ng-transclude></div>");
+}]);
+
+angular.module("templates/icon.tpl", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/icon.tpl",
+    "<i class=\"fa fa-{{icon}} fa-{{size}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}\"></i>");
 }]);
 
 angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {
