@@ -121,8 +121,9 @@ limitations under the License.
 						
 
 						if(inLabel){
-							inLabel.removeClass('left');
-							inLabel.addClass('center');
+							toolbar[0].offsetWidth;
+							inLabel.removeClass('left');							
+							inLabel.addClass('transition center');
 							inLabel.bind('click', this.onLeftButtonClicked.bind(this));
 						}
 					},

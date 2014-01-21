@@ -28,7 +28,7 @@ angular.module("templates/column.tpl", []).run(["$templateCache", function($temp
 
 angular.module("templates/icon.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/icon.tpl",
-    "<i class=\"fa fa-{{icon}} fa-{{size}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}\"></i>");
+    "<i class=\"fa fa-{{icon}} fa-{{size}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}} fa-{{inverse}}\"></i>");
 }]);
 
 angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {

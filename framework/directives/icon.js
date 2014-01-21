@@ -12,7 +12,8 @@
 				icon: '@',
 				size: '@',
 				rotate: '@',
-				flip: '@'
+				flip: '@',
+				inverse: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/icon.tpl',
 			link: function($scope, element, attrs){
@@ -29,6 +30,14 @@
 						$scope.fixedWidth = 'fw';
 					}else{
 						$scope.fixedWidth = '';						
+					}
+				});
+
+				attrs.$observe('inverse', function(inverse){
+					if(inverse === "true"){
+						$scope.inverse = 'inverse';
+					}else{
+						$scope.inverse = '';						
 					}
 				});
 			}

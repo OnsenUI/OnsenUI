@@ -29,7 +29,7 @@ angular.module("templates/column.tpl", []).run(["$templateCache", function($temp
 
 angular.module("templates/icon.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/icon.tpl",
-    "<i class=\"fa fa-{{icon}} fa-{{size}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}\"></i>");
+    "<i class=\"fa fa-{{icon}} fa-{{size}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}} fa-{{inverse}}\"></i>");
 }]);
 
 angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {
@@ -399,7 +399,8 @@ limitations under the License.
 				icon: '@',
 				size: '@',
 				rotate: '@',
-				flip: '@'
+				flip: '@',
+				inverse: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/icon.tpl',
 			link: function($scope, element, attrs){
@@ -416,6 +417,14 @@ limitations under the License.
 						$scope.fixedWidth = 'fw';
 					}else{
 						$scope.fixedWidth = '';						
+					}
+				});
+
+				attrs.$observe('inverse', function(inverse){
+					if(inverse === "true"){
+						$scope.inverse = 'inverse';
+					}else{
+						$scope.inverse = '';						
 					}
 				});
 			}
@@ -623,8 +632,9 @@ limitations under the License.
 						
 
 						if(inLabel){
-							inLabel.removeClass('left');
-							inLabel.addClass('center');
+							toolbar[0].offsetWidth;
+							inLabel.removeClass('left');							
+							inLabel.addClass('transition center');
 							inLabel.bind('click', this.onLeftButtonClicked.bind(this));
 						}
 					},
