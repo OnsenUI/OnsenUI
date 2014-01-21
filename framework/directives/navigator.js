@@ -90,6 +90,7 @@ limitations under the License.
 						var outLabel = outNavigatorItem.backLabel;
 						if(outLabel){
 							outLabel.bind('webkitTransitionEnd', function transitionEnded(e) {
+								console.log('removing ', outLabel);
 								outLabel.remove();
 								outLabel.unbind(transitionEnded);
 							});
@@ -103,14 +104,21 @@ limitations under the License.
 						var inLabel = inNavigatorItem.backLabel;						
 						toolbar.prepend(inLabel);
 
-						outLabel.bind('webkitTransitionEnd', function transitionEnded(e) {
+						if(outNavigatorItem.options.leftButtonIcon){
+							// no back label if user specify icon
 							outLabel.remove();
-							outLabel.unbind(transitionEnded);
-						});
+						}else{
+							outLabel.bind('webkitTransitionEnd', function transitionEnded(e) {
+								console.log('remove');
+								outLabel.remove();
+								outLabel.unbind(transitionEnded);
+							});
 
-						toolbar[0].offsetWidth;
-						outLabel.removeClass('transition center');						
-						outLabel.addClass('transition right');
+							toolbar[0].offsetWidth;
+							outLabel.removeClass('transition center');						
+							outLabel.addClass('transition right');	
+						}
+						
 
 						if(inLabel){
 							inLabel.removeClass('left');

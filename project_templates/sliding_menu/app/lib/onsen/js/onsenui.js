@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-01-20 */
+/*! onsenui - v0.7.0 - 2014-01-21 */
 angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
@@ -541,6 +541,7 @@ limitations under the License.
 						var outLabel = outNavigatorItem.backLabel;
 						if(outLabel){
 							outLabel.bind('webkitTransitionEnd', function transitionEnded(e) {
+								console.log('removing ', outLabel);
 								outLabel.remove();
 								outLabel.unbind(transitionEnded);
 							});
@@ -554,14 +555,21 @@ limitations under the License.
 						var inLabel = inNavigatorItem.backLabel;						
 						toolbar.prepend(inLabel);
 
-						outLabel.bind('webkitTransitionEnd', function transitionEnded(e) {
+						if(outNavigatorItem.options.leftButtonIcon){
+							// no back label if user specify icon
 							outLabel.remove();
-							outLabel.unbind(transitionEnded);
-						});
+						}else{
+							outLabel.bind('webkitTransitionEnd', function transitionEnded(e) {
+								console.log('remove');
+								outLabel.remove();
+								outLabel.unbind(transitionEnded);
+							});
 
-						toolbar[0].offsetWidth;
-						outLabel.removeClass('transition center');						
-						outLabel.addClass('transition right');
+							toolbar[0].offsetWidth;
+							outLabel.removeClass('transition center');						
+							outLabel.addClass('transition right');	
+						}
+						
 
 						if(inLabel){
 							inLabel.removeClass('left');
