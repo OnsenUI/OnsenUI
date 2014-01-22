@@ -1,4 +1,4 @@
-angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/orientation.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
+angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/button.tpl",
@@ -29,6 +29,13 @@ angular.module("templates/column.tpl", []).run(["$templateCache", function($temp
 angular.module("templates/icon.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/icon.tpl",
     "<i class=\"fa fa-{{icon}} fa-{{size}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}} fa-{{inverse}}\"></i>");
+}]);
+
+angular.module("templates/if_orientation.tpl", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/if_orientation.tpl",
+    "<div ng-show=\"orientation == userOrientation\" ng-transclude>\n" +
+    "	\n" +
+    "</div>");
 }]);
 
 angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {
@@ -65,13 +72,6 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "	<div class=\"relative max navigator-content\">\n" +
     "		\n" +
     "	</div>    \n" +
-    "	\n" +
-    "</div>");
-}]);
-
-angular.module("templates/orientation.tpl", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("templates/orientation.tpl",
-    "<div ng-show=\"orientation == userOrientation\" ng-transclude>\n" +
     "	\n" +
     "</div>");
 }]);
