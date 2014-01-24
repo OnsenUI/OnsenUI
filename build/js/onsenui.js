@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-01-22 */
+/*! onsenui - v0.7.0 - 2014-01-24 */
 angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
@@ -6,9 +6,7 @@ angular.module("templates/button.tpl", []).run(["$templateCache", function($temp
     "<button ng-class=\"'topcoat-button--{{type}}'\" class=\"{{item.animation}} effeckt-button topcoat-button no-select\">\n" +
     "	<span class=\"label\" ng-transclude></span>\n" +
     "	<span class=\"spinner\"></span>\n" +
-    "</button>\n" +
-    "\n" +
-    "");
+    "</button>");
 }]);
 
 angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($templateCache) {
@@ -34,8 +32,11 @@ angular.module("templates/icon.tpl", []).run(["$templateCache", function($templa
 
 angular.module("templates/if_orientation.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/if_orientation.tpl",
-    "<div ng-show=\"orientation == userOrientation\" ng-transclude>\n" +
+    "<div>\n" +
+    "	{{orientation}}:{{userOrientation}}\n" +
+    "	<div ng-show=\"orientation == userOrientation\" ng-transclude>\n" +
     "	\n" +
+    "</div>\n" +
     "</div>");
 }]);
 
@@ -438,7 +439,50 @@ limitations under the License.
 
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsOrientation', function(ONSEN_CONSTANTS) {
+	directives.directive('onsIfOrientation', function(ONSEN_CONSTANTS) {
+		return {
+			restrict: 'A',
+			replace: false,			
+			transclude: true,
+			scope: true,
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_orientation.tpl',
+			link: function($scope, element, attrs){
+
+				function getLandscapeOrPortraitFromInteger(orientation){
+					if(orientation == 90 || orientation == -90){
+						return 'landscape';
+					}
+
+					if(orientation == 0 || orientation == 180){
+						return 'portrait';
+					}
+				}
+
+				$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
+
+				window.addEventListener("orientationchange", function() {
+					$scope.$apply(function(){
+						$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
+					});
+				}, false);
+
+				attrs.$observe('onsIfOrientation', function(userOrientation){
+					if(userOrientation){
+						$scope.userOrientation = userOrientation;
+					}
+				});				
+			}
+		};
+	});
+})();
+
+
+(function(){
+	'use strict';
+
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+	directives.directive('onsIfPlatform', function(ONSEN_CONSTANTS) {
 		return {
 			restrict: 'A',
 			replace: false,			

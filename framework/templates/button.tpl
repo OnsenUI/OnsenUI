@@ -2,4 +2,3 @@
 	<span class="label" ng-transclude></span>
 	<span class="spinner"></span>
 </button>
-

@@ -5,9 +5,7 @@ angular.module("templates/button.tpl", []).run(["$templateCache", function($temp
     "<button ng-class=\"'topcoat-button--{{type}}'\" class=\"{{item.animation}} effeckt-button topcoat-button no-select\">\n" +
     "	<span class=\"label\" ng-transclude></span>\n" +
     "	<span class=\"spinner\"></span>\n" +
-    "</button>\n" +
-    "\n" +
-    "");
+    "</button>");
 }]);
 
 angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($templateCache) {
@@ -33,8 +31,11 @@ angular.module("templates/icon.tpl", []).run(["$templateCache", function($templa
 
 angular.module("templates/if_orientation.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/if_orientation.tpl",
-    "<div ng-show=\"orientation == userOrientation\" ng-transclude>\n" +
+    "<div>\n" +
+    "	{{orientation}}:{{userOrientation}}\n" +
+    "	<div ng-show=\"orientation == userOrientation\" ng-transclude>\n" +
     "	\n" +
+    "</div>\n" +
     "</div>");
 }]);
 
