@@ -29,20 +29,15 @@ limitations under the License.
 }
 
 .transition {
-    -webkit-transition-duration: .25s;
-    -moz-transition-duration: .25s;
-    transition-duration: .25s;
+    transition-duration: 400ms;
+    animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.open{
-    -webkit-transform: translate3d(70%, 0, 0);
-    -moz-transform: translate3d(70%, 0, 0);
+.open{    
     transform: translate3d(70%, 0, 0);
 }
 
-.close{
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
+.close{    
     transform: translate3d(0, 0, 0);
 }
 

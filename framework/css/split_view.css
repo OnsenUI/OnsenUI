@@ -15,42 +15,6 @@ limitations under the License.
 
 */
 
-.onsen_sliding-menu-black-mask {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: black;
-}
-
-.sliding-menu {
-    overflow: hidden;
-}
-
-.transition {
-    -webkit-transition-duration: .25s;
-    -moz-transition-duration: .25s;
-    transition-duration: .25s;
-}
-
-.open{
-    -webkit-transform: translate3d(70%, 0, 0);
-    -moz-transform: translate3d(70%, 0, 0);
-    transform: translate3d(70%, 0, 0);
-}
-
-.close{
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-}
-
-.menu {
-    z-index: -1;
-    background-color : gray;
-}
-
 .secondary {
     transform: translate3d(-10%, 0, 0);
 }
@@ -58,15 +22,3 @@ limitations under the License.
 .main {
     
 }
-
-.full-screen {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    /*height: 100%;*/
-}
-
-
-
