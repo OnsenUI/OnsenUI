@@ -1081,6 +1081,10 @@ limitations under the License.
 
 */
 
+ons-navigator-toolbar {
+    display: none;
+}
+
 ons-navigator {
 	width: 100%;
 	height: 100%;

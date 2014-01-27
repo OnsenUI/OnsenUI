@@ -15,45 +15,19 @@ limitations under the License.
 
 */
 
-ons-navigator-toolbar {
-    display: none;
-}
 
-ons-navigator {
-	width: 100%;
-	height: 100%;
-	display: block;
-}
+(function(){
+	'use strict';
 
-.navigator-container {
-    display: -webkit-flex;
-    -webkit-flex-direction: column;
-    width: 100%;
-    height: 100%;
-}
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-.navigator-toolbar {
-    flex: 0 0 auto;
-}
+	directives.directive('onsNavigatorToolbar', function(ONSEN_CONSTANTS, $timeout) {
+		return {
+			restrict: 'E',
+			replace: false,
+			transclude: false,
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator_toolbar.tpl'
+		};
+	});
+})();
 
-.navigator-content {
-    flex: 1 0 auto;
-}
-
-
-.onsen_navigation-bar-height {
-    line-height: 2.5rem;
-}
-
-.topcoat-navigation-bar {    
-    border-bottom: 1px solid lightgray;;
-}
-
-.content {    
-    position: absolute;
-    top: 0;
-    bottom: 0;        
-    left:0;
-    right: 0;
-    overflow: hidden;
-}
