@@ -85,6 +85,7 @@ limitations under the License.
 					setSize: function(){
 						var behindSize = 100 - scope.mainPageWidth;
 						this.behindPage.style.width = behindSize + '%';
+						this.behindPage.style.opacity = 1;
 						this.abovePage.style.width = scope.mainPageWidth + '%';
 						var translate = behindSize * this.windowWidth / 100;
 						console.log('translate', translate);
@@ -156,6 +157,9 @@ limitations under the License.
 					},
 
 					close: function() {
+						if(!shouldCollapse){
+							return;
+						}
 						this.startX = 0;
 						if (this.currentX !== 0) {
 							this.$abovePage.addClass('transition');
@@ -165,6 +169,9 @@ limitations under the License.
 					},
 
 					open: function() {
+						if(!shouldCollapse){
+							return;
+						}
 						this.startX = this.MAX;
 						if (this.currentX != this.MAX) {
 							this.$abovePage.addClass('transition');
