@@ -1,6 +1,3 @@
-<div>
-	{{orientation}}:{{userOrientation}}
-	<div ng-show="orientation == userOrientation" ng-transclude>
-	
-</div>
+<div ng-show="orientation == userOrientation" ng-transclude>
+
 </div>

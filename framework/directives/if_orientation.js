@@ -13,6 +13,11 @@
 			link: function($scope, element, attrs){
 
 				function getLandscapeOrPortraitFromInteger(orientation){
+					if(orientation === undefined ){
+						console.log('not orientation');
+						return window.screen.width > window.screen.height ? 'landscape' : 'portrait';
+					}
+
 					if(orientation == 90 || orientation == -90){
 						return 'landscape';
 					}
@@ -25,6 +30,7 @@
 				$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
 
 				window.addEventListener("orientationchange", function() {
+					console.log('orientation changed' + window.orientation);
 					$scope.$apply(function(){
 						$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
 					});

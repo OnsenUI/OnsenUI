@@ -1,4 +1,4 @@
-angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
+angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/button.tpl",
@@ -31,12 +31,18 @@ angular.module("templates/icon.tpl", []).run(["$templateCache", function($templa
 
 angular.module("templates/if_orientation.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/if_orientation.tpl",
-    "<div>\n" +
-    "	{{orientation}}:{{userOrientation}}\n" +
-    "	<div ng-show=\"orientation == userOrientation\" ng-transclude>\n" +
-    "	\n" +
+    "<div ng-show=\"orientation == userOrientation\" ng-transclude>\n" +
+    "\n" +
     "</div>\n" +
-    "</div>");
+    "");
+}]);
+
+angular.module("templates/if_platform.tpl", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/if_platform.tpl",
+    "<div ng-show=\"platform == userPlatform\" ng-transclude>\n" +
+    "\n" +
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {

@@ -44,7 +44,7 @@ limitations under the License.
 }
 
 .behind {
-    
+    transform: translate3d(-10%, 0, 0);
 }
 
 .above {

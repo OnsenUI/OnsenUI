@@ -1,5 +1,5 @@
-/*! onsenui - v0.7.0 - 2014-01-24 */
-angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
+/*! onsenui - v0.7.0 - 2014-01-27 */
+angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/button.tpl",
@@ -32,12 +32,18 @@ angular.module("templates/icon.tpl", []).run(["$templateCache", function($templa
 
 angular.module("templates/if_orientation.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/if_orientation.tpl",
-    "<div>\n" +
-    "	{{orientation}}:{{userOrientation}}\n" +
-    "	<div ng-show=\"orientation == userOrientation\" ng-transclude>\n" +
-    "	\n" +
+    "<div ng-show=\"orientation == userOrientation\" ng-transclude>\n" +
+    "\n" +
     "</div>\n" +
-    "</div>");
+    "");
+}]);
+
+angular.module("templates/if_platform.tpl", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/if_platform.tpl",
+    "<div ng-show=\"platform == userPlatform\" ng-transclude>\n" +
+    "\n" +
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {
@@ -439,38 +445,34 @@ limitations under the License.
 
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsIfOrientation', function(ONSEN_CONSTANTS) {
+	directives.directive('onsIfPlatform', function(ONSEN_CONSTANTS) {
 		return {
 			restrict: 'A',
 			replace: false,			
 			transclude: true,
 			scope: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_orientation.tpl',
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_platform.tpl',
 			link: function($scope, element, attrs){
 
-				function getLandscapeOrPortraitFromInteger(orientation){
-					if(orientation == 90 || orientation == -90){
-						return 'landscape';
-					}
-
-					if(orientation == 0 || orientation == 180){
-						return 'portrait';
-					}
+				function onDeviceReady(){
+					$scope.$apply(function(){
+						$scope.platform = window.device.platform;
+					});
 				}
 
-				$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
+				document.addEventListener("deviceready", onDeviceReady, false);				
 
-				window.addEventListener("orientationchange", function() {
-					$scope.$apply(function(){
-						$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
-					});
-				}, false);
-
-				attrs.$observe('onsIfOrientation', function(userOrientation){
-					if(userOrientation){
-						$scope.userOrientation = userOrientation;
+				attrs.$observe('onsIfPlatform', function(userPlatform){
+					if(userPlatform){
+						$scope.userPlatform = userPlatform;
 					}
 				});				
+
+				setTimeout(function(){
+					$scope.$apply(function(){
+						$scope.platform = window.device.platform;
+					});
+				}, 1000);
 			}
 		};
 	});
@@ -482,16 +484,21 @@ limitations under the License.
 
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsIfPlatform', function(ONSEN_CONSTANTS) {
+	directives.directive('onsIfOrientation', function(ONSEN_CONSTANTS) {
 		return {
 			restrict: 'A',
 			replace: false,			
 			transclude: true,
 			scope: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/orientation.tpl',
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_orientation.tpl',
 			link: function($scope, element, attrs){
 
 				function getLandscapeOrPortraitFromInteger(orientation){
+					if(orientation === undefined ){
+						console.log('not orientation');
+						return window.screen.width > window.screen.height ? 'landscape' : 'portrait';
+					}
+
 					if(orientation == 90 || orientation == -90){
 						return 'landscape';
 					}
@@ -504,12 +511,13 @@ limitations under the License.
 				$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
 
 				window.addEventListener("orientationchange", function() {
+					console.log('orientation changed' + window.orientation);
 					$scope.$apply(function(){
 						$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
 					});
 				}, false);
 
-				attrs.$observe('onsOrientation', function(userOrientation){
+				attrs.$observe('onsIfOrientation', function(userOrientation){
 					if(userOrientation){
 						$scope.userOrientation = userOrientation;
 					}
@@ -882,6 +890,10 @@ limitations under the License.
 						inPage.attr("class", "onsen_navigator-pager right");
 						element[0].offsetWidth;
 						inPage.attr("class", "onsen_navigator-pager transition center");
+						// outPage.bind('webkitTransitionEnd', function transitionEnded(e) {
+						// 	outPage.remove();
+						// 	outPage.unbind(transitionEnded);
+						// });
 						outPage.attr("class", "onsen_navigator-pager transition left");
 					},
 
@@ -1591,141 +1603,99 @@ limitations under the License.
 				abovePage: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
-			link: function(scope, element, attrs) {				
+			link: function(scope, element, attrs) {
 
 				var Swiper = Class.extend({
-					init: function(element){
+					init: function(element) {
+						this.$el = element;
+						this.el = element[0];
 						this.VERTICAL_THRESHOLD = 20;
 						this.HORIZONTAL_THRESHOLD = 20;
 						this.behindPage = element[0].querySelector('.behind');
+						this.$behindPage = angular.element(this.behindPage);
 						this.abovePage = element[0].querySelector('.above');
 						this.$abovePage = angular.element(this.abovePage);
 						this.previousX = 0;
 						this.MAX = this.abovePage.clientWidth * 0.7;
-						this.startX = 0;						
+						this.currentX = 0;
+						this.startX = 0;
 
 						this.bindEvents();
 					},
 
-					bindEvents: function(){
-						// touch
-						this.abovePage.addEventListener('touchstart', this.onTouchStart.bind(this));
-						this.abovePage.addEventListener('touchmove', this.onTouchMove.bind(this));						
-						this.abovePage.addEventListener('touchend', this.onTouchEnd.bind(this));
-
-						// mouse
-						this.abovePage.addEventListener('mousedown', this.onMouseDown.bind(this));						
-						this.abovePage.addEventListener('mouseup', this.onMouseUp.bind(this));
-						this.abovePage.addEventListener('mouseleave', this.onMouseLeave.bind(this));
-						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));        
+					bindEvents: function() {
+						this.hammertime = new Hammer(this.el);
+						this.hammertime.on("dragleft dragright swipeleft swiperight release", this.handleEvent.bind(this));
+						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));
 					},
 
-					onTransitionEnd: function(){
+					handleEvent: function(ev) {
+						switch (ev.type) {
+
+							case 'dragleft':
+							case 'dragright':
+								var deltaX = ev.gesture.deltaX;
+								this.currentX = this.startX + deltaX;
+								if (this.currentX >= 0) {
+									this.translate(this.currentX);
+								}
+								break;
+
+							case 'swipeleft':
+								this.close();
+								break;
+
+							case 'swiperight':
+								this.open();
+								break;
+
+							case 'release':
+								if (this.currentX > this.MAX / 2) {
+									this.open();
+								} else {
+									this.close();
+								}
+								break;
+						}
+					},
+
+					onTransitionEnd: function() {
+						console.log('transition ended');
 						this.$abovePage.removeClass('transition');
+						this.$behindPage.removeClass('transition');
 					},
 
-					close: function(){
-						this.$abovePage.addClass('transition');
-						this.translate(0);
+					close: function() {
 						this.startX = 0;
+						if (this.currentX !== 0) {
+							this.$abovePage.addClass('transition');
+							this.$behindPage.addClass('transition');
+							this.translate(0);
+						}
 					},
 
-					open: function(){
-						this.$abovePage.addClass('transition');
-						this.translate(this.MAX);
+					open: function() {
 						this.startX = this.MAX;
+						if (this.currentX != this.MAX) {
+							this.$abovePage.addClass('transition');
+							this.$behindPage.addClass('transition');
+							this.translate(this.MAX);
+						}
 					},
 
-					toggle: function(){
-						if(this.startX === 0){
+					toggle: function() {
+						if (this.startX === 0) {
 							this.open();
-						}else{
+						} else {
 							this.close();
 						}
 					},
 
-					translate: function(x){
+					translate: function(x) {
 						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
-						var behind = x / this.MAX * 10;
-						console.log('behind', behind);
+						var behind = (x - this.MAX) / this.MAX * 10;
 						this.behindPage.style.webkitTransform = 'translate3d(' + behind + '%, 0, 0)';
 						this.currentX = x;
-					},
-
-					onMouseMove: function(event){
-						var x = event.clientX;
-						var y = event.clientY;
-						this.onMove(x, y);
-					},
-
-					onTouchMove: function(event){
-						var touches = event.changedTouches;
-						var currentTouch = touches[0];
-						var x = currentTouch.pageX;
-						var y = currentTouch.pageY;
-						this.onMove(x, y);
-					},
-
-					onMove: function(x, y){
-						var verticalDistant = Math.abs(this.previousY - y);
-						if(verticalDistant > this.VERTICAL_THRESHOLD && !this.horizontalSwipeMode){
-							return;
-						}
-
-						var distant = x - this.previousX;
-						if(Math.abs(distant) > this.HORIZONTAL_THRESHOLD){
-							this.horizontalSwipeMode = true;
-						}
-						var toBeTranslate = this.startX + distant;
-						console.log(toBeTranslate);
-						if(toBeTranslate < 20){
-							return;
-						}
-						console.log(this.startX, distant);
-						this.translate(toBeTranslate);
-					},
-
-					onMouseDown: function(event){						
-						this.boundMouseMove = this.onMouseMove.bind(this);
-						this.abovePage.addEventListener('mousemove', this.boundMouseMove);
-						var x = event.clientX;
-						var y = event.clientY;
-						this.setStart(x, y);
-					},
-
-					onTouchStart: function(event){
-						var touches = event.changedTouches;
-						var x = touches[0].pageX;
-						var y = touches[0].pageY;
-						this.setStart(x, y);
-					},
-
-					setStart: function(x, y){						
-						this.previousX = x;
-						this.previousY = y;
-						this.horizontalSwipeMode = false;
-					},
-
-					onMouseUp: function(event){
-						console.log('mouse up');
-						this.onEnd();
-						this.abovePage.removeEventListener('mousemove', this.boundMouseMove);
-					},
-
-					onMouseLeave: function(){
-						this.onMouseUp();
-					},
-
-					onTouchEnd: function(event){
-						this.onEnd();
-					},
-
-					onEnd: function(){
-						if( this.currentX > this.MAX/2 ){
-							this.open();
-						}else{
-							this.close();
-						}
 					}
 				});
 
@@ -1740,40 +1710,40 @@ limitations under the License.
 
 				scope.ons.slidingMenu.openMenu = function() {
 					swiper.open();
-				}
+				};
 
 				scope.ons.slidingMenu.closeMenu = function() {
 					swiper.close();
-				}
+				};
 
 				scope.ons.slidingMenu.toggleMenu = function() {
 					swiper.toggle();
-				}
+				};
 
-				scope.ons.slidingMenu.setAbovePage = function(page){					
-					if(page){
+				scope.ons.slidingMenu.setAbovePage = function(page) {
+					if (page) {
 						scope.pages.above = page;
-					}else{
+					} else {
 						throw new Error('cannot set undefined page');
 					}
-				}
+				};
 
-				scope.ons.slidingMenu.setBehindPage = function(page){					
-					if(page){
+				scope.ons.slidingMenu.setBehindPage = function(page) {
+					if (page) {
 						scope.pages.behind = page;
-					}else{
+					} else {
 						throw new Error('cannot set undefined page');
 					}
-				}
+				};
 
 				scope.ons.screen = scope.ons.screen || {};
 				scope.ons.screen.presentPage = function(page) {
 					callParent(scope, 'ons.screen.presentPage', page);
-				}
+				};
 
 				scope.ons.screen.dismissPage = function() {
 					callParent(scope, 'ons.screen.dismissPage');
-				}
+				};
 
 				function callParent(scope, functionName, param) {
 					if (!scope.$parent) {
@@ -1785,7 +1755,7 @@ limitations under the License.
 						parentFunction.call(scope, param);
 					} else {
 						callParent(scope.$parent, functionName, param);
-					}					
+					}
 
 				}
 
@@ -1802,7 +1772,7 @@ limitations under the License.
 					}
 
 					return fn;
-				};
+				}
 			}
 		};
 	});
@@ -2052,767 +2022,1384 @@ limitations under the License.
     return Class;
   };
 })();
-/**
- * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
+/*! Hammer.JS - v1.0.6 - 2014-01-02
+ * http://eightmedia.github.com/hammer.js
  *
- * @version 0.6.9
- * @codingstandard ftlabs-jsv2
- * @copyright The Financial Times Limited [All Rights Reserved]
- * @license MIT License (see LICENSE.txt)
- */
+ * Copyright (c) 2014 Jorik Tangelder <j.tangelder@gmail.com>;
+ * Licensed under the MIT license */
 
-/*jslint browser:true, node:true*/
-/*global define, Event, Node*/
-
+(function(window, undefined) {
+  'use strict';
 
 /**
- * Instantiate fast-clicking listeners on the specificed layer.
- *
+ * Hammer
+ * use this to create instances
+ * @param   {HTMLElement}   element
+ * @param   {Object}        options
+ * @returns {Hammer.Instance}
  * @constructor
- * @param {Element} layer The layer to listen on
  */
-function FastClick(layer) {
-	'use strict';
-	var oldOnClick, self = this;
+var Hammer = function(element, options) {
+  return new Hammer.Instance(element, options || {});
+};
 
+// default settings
+Hammer.defaults = {
+  // add styles and attributes to the element to prevent the browser from doing
+  // its native behavior. this doesnt prevent the scrolling, but cancels
+  // the contextmenu, tap highlighting etc
+  // set to false to disable this
+  stop_browser_behavior: {
+    // this also triggers onselectstart=false for IE
+    userSelect       : 'none',
+    // this makes the element blocking in IE10 >, you could experiment with the value
+    // see for more options this issue; https://github.com/EightMedia/hammer.js/issues/241
+    touchAction      : 'none',
+    touchCallout     : 'none',
+    contentZooming   : 'none',
+    userDrag         : 'none',
+    tapHighlightColor: 'rgba(0,0,0,0)'
+  }
 
-	/**
-	 * Whether a click is currently being tracked.
-	 *
-	 * @type boolean
-	 */
-	this.trackingClick = false;
+  //
+  // more settings are defined per gesture at gestures.js
+  //
+};
 
+// detect touchevents
+Hammer.HAS_POINTEREVENTS = window.navigator.pointerEnabled || window.navigator.msPointerEnabled;
+Hammer.HAS_TOUCHEVENTS = ('ontouchstart' in window);
 
-	/**
-	 * Timestamp for when when click tracking started.
-	 *
-	 * @type number
-	 */
-	this.trackingClickStart = 0;
+// dont use mouseevents on mobile devices
+Hammer.MOBILE_REGEX = /mobile|tablet|ip(ad|hone|od)|android|silk/i;
+Hammer.NO_MOUSEEVENTS = Hammer.HAS_TOUCHEVENTS && window.navigator.userAgent.match(Hammer.MOBILE_REGEX);
 
+// eventtypes per touchevent (start, move, end)
+// are filled by Hammer.event.determineEventTypes on setup
+Hammer.EVENT_TYPES = {};
 
-	/**
-	 * The element being tracked for a click.
-	 *
-	 * @type EventTarget
-	 */
-	this.targetElement = null;
+// direction defines
+Hammer.DIRECTION_DOWN = 'down';
+Hammer.DIRECTION_LEFT = 'left';
+Hammer.DIRECTION_UP = 'up';
+Hammer.DIRECTION_RIGHT = 'right';
 
+// pointer type
+Hammer.POINTER_MOUSE = 'mouse';
+Hammer.POINTER_TOUCH = 'touch';
+Hammer.POINTER_PEN = 'pen';
 
-	/**
-	 * X-coordinate of touch start event.
-	 *
-	 * @type number
-	 */
-	this.touchStartX = 0;
+// touch event defines
+Hammer.EVENT_START = 'start';
+Hammer.EVENT_MOVE = 'move';
+Hammer.EVENT_END = 'end';
 
+// hammer document where the base events are added at
+Hammer.DOCUMENT = window.document;
 
-	/**
-	 * Y-coordinate of touch start event.
-	 *
-	 * @type number
-	 */
-	this.touchStartY = 0;
+// plugins and gestures namespaces
+Hammer.plugins = Hammer.plugins || {};
+Hammer.gestures = Hammer.gestures || {};
 
+// if the window events are set...
+Hammer.READY = false;
 
-	/**
-	 * ID of the last touch, retrieved from Touch.identifier.
-	 *
-	 * @type number
-	 */
-	this.lastTouchIdentifier = 0;
+/**
+ * setup events to detect gestures on the document
+ */
+function setup() {
+  if(Hammer.READY) {
+    return;
+  }
 
+  // find what eventtypes we add listeners to
+  Hammer.event.determineEventTypes();
 
-	/**
-	 * Touchmove boundary, beyond which a click will be cancelled.
-	 *
-	 * @type number
-	 */
-	this.touchBoundary = 10;
+  // Register all gestures inside Hammer.gestures
+  Hammer.utils.each(Hammer.gestures, function(gesture){
+    Hammer.detection.register(gesture);
+  });
 
+  // Add touch events on the document
+  Hammer.event.onTouch(Hammer.DOCUMENT, Hammer.EVENT_MOVE, Hammer.detection.detect);
+  Hammer.event.onTouch(Hammer.DOCUMENT, Hammer.EVENT_END, Hammer.detection.detect);
 
-	/**
-	 * The FastClick layer.
-	 *
-	 * @type Element
-	 */
-	this.layer = layer;
-
-	if (!layer || !layer.nodeType) {
-		throw new TypeError('Layer must be a document node');
-	}
-
-	/** @type function() */
-	this.onClick = function() { return FastClick.prototype.onClick.apply(self, arguments); };
-
-	/** @type function() */
-	this.onMouse = function() { return FastClick.prototype.onMouse.apply(self, arguments); };
-
-	/** @type function() */
-	this.onTouchStart = function() { return FastClick.prototype.onTouchStart.apply(self, arguments); };
-
-	/** @type function() */
-	this.onTouchMove = function() { return FastClick.prototype.onTouchMove.apply(self, arguments); };
-
-	/** @type function() */
-	this.onTouchEnd = function() { return FastClick.prototype.onTouchEnd.apply(self, arguments); };
-
-	/** @type function() */
-	this.onTouchCancel = function() { return FastClick.prototype.onTouchCancel.apply(self, arguments); };
-
-	if (FastClick.notNeeded(layer)) {
-		return;
-	}
-
-	// Set up event handlers as required
-	if (this.deviceIsAndroid) {
-		layer.addEventListener('mouseover', this.onMouse, true);
-		layer.addEventListener('mousedown', this.onMouse, true);
-		layer.addEventListener('mouseup', this.onMouse, true);
-	}
-
-	layer.addEventListener('click', this.onClick, true);
-	layer.addEventListener('touchstart', this.onTouchStart, false);
-	layer.addEventListener('touchmove', this.onTouchMove, false);
-	layer.addEventListener('touchend', this.onTouchEnd, false);
-	layer.addEventListener('touchcancel', this.onTouchCancel, false);
-
-	// Hack is required for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
-	// which is how FastClick normally stops click events bubbling to callbacks registered on the FastClick
-	// layer when they are cancelled.
-	if (!Event.prototype.stopImmediatePropagation) {
-		layer.removeEventListener = function(type, callback, capture) {
-			var rmv = Node.prototype.removeEventListener;
-			if (type === 'click') {
-				rmv.call(layer, type, callback.hijacked || callback, capture);
-			} else {
-				rmv.call(layer, type, callback, capture);
-			}
-		};
-
-		layer.addEventListener = function(type, callback, capture) {
-			var adv = Node.prototype.addEventListener;
-			if (type === 'click') {
-				adv.call(layer, type, callback.hijacked || (callback.hijacked = function(event) {
-					if (!event.propagationStopped) {
-						callback(event);
-					}
-				}), capture);
-			} else {
-				adv.call(layer, type, callback, capture);
-			}
-		};
-	}
-
-	// If a handler is already declared in the element's onclick attribute, it will be fired before
-	// FastClick's onClick handler. Fix this by pulling out the user-defined handler function and
-	// adding it as listener.
-	if (typeof layer.onclick === 'function') {
-
-		// Android browser on at least 3.2 requires a new reference to the function in layer.onclick
-		// - the old one won't work if passed to addEventListener directly.
-		oldOnClick = layer.onclick;
-		layer.addEventListener('click', function(event) {
-			oldOnClick(event);
-		}, false);
-		layer.onclick = null;
-	}
+  // Hammer is ready...!
+  Hammer.READY = true;
 }
 
-
-/**
- * Android requires exceptions.
- *
- * @type boolean
- */
-FastClick.prototype.deviceIsAndroid = navigator.userAgent.indexOf('Android') > 0;
-
-
-/**
- * iOS requires exceptions.
- *
- * @type boolean
- */
-FastClick.prototype.deviceIsIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
-
-
-/**
- * iOS 4 requires an exception for select elements.
- *
- * @type boolean
- */
-FastClick.prototype.deviceIsIOS4 = FastClick.prototype.deviceIsIOS && (/OS 4_\d(_\d)?/).test(navigator.userAgent);
+Hammer.utils = {
+  /**
+   * extend method,
+   * also used for cloning when dest is an empty object
+   * @param   {Object}    dest
+   * @param   {Object}    src
+   * @parm  {Boolean}  merge    do a merge
+   * @returns {Object}    dest
+   */
+  extend: function extend(dest, src, merge) {
+    for(var key in src) {
+      if(dest[key] !== undefined && merge) {
+        continue;
+      }
+      dest[key] = src[key];
+    }
+    return dest;
+  },
 
 
-/**
- * iOS 6.0(+?) requires the target element to be manually derived
- *
- * @type boolean
- */
-FastClick.prototype.deviceIsIOSWithBadTarget = FastClick.prototype.deviceIsIOS && (/OS ([6-9]|\d{2})_\d/).test(navigator.userAgent);
+  /**
+   * for each
+   * @param obj
+   * @param iterator
+   */
+  each: function(obj, iterator, context) {
+    var i, length;
+    // native forEach on arrays
+    if ('forEach' in obj) {
+      obj.forEach(iterator, context);
+    }
+    // arrays
+    else if(obj.length !== undefined) {
+      for (i = 0, length = obj.length; i < length; i++) {
+        if (iterator.call(context, obj[i], i, obj) === false) {
+          return;
+        }
+      }
+    }
+    // objects
+    else {
+      for (i in obj) {
+        if (obj.hasOwnProperty(i) && iterator.call(context, obj[i], i, obj) === false) {
+          return;
+        }
+      }
+    }
+  },
+
+  /**
+   * find if a node is in the given parent
+   * used for event delegation tricks
+   * @param   {HTMLElement}   node
+   * @param   {HTMLElement}   parent
+   * @returns {boolean}       has_parent
+   */
+  hasParent: function(node, parent) {
+    while(node) {
+      if(node == parent) {
+        return true;
+      }
+      node = node.parentNode;
+    }
+    return false;
+  },
 
 
-/**
- * Determine whether a given element requires a native click.
- *
- * @param {EventTarget|Element} target Target DOM element
- * @returns {boolean} Returns true if the element needs a native click
- */
-FastClick.prototype.needsClick = function(target) {
-	'use strict';
-	switch (target.nodeName.toLowerCase()) {
+  /**
+   * get the center of all the touches
+   * @param   {Array}     touches
+   * @returns {Object}    center
+   */
+  getCenter: function getCenter(touches) {
+    var valuesX = [], valuesY = [];
 
-	// Don't send a synthetic click to disabled inputs (issue #62)
-	case 'button':
-	case 'select':
-	case 'textarea':
-		if (target.disabled) {
-			return true;
-		}
+    Hammer.utils.each(touches, function(touch) {
+      // I prefer clientX because it ignore the scrolling position
+      valuesX.push(typeof touch.clientX !== 'undefined' ? touch.clientX : touch.pageX );
+      valuesY.push(typeof touch.clientY !== 'undefined' ? touch.clientY : touch.pageY );
+    });
 
-		break;
-	case 'input':
+    return {
+      pageX: ((Math.min.apply(Math, valuesX) + Math.max.apply(Math, valuesX)) / 2),
+      pageY: ((Math.min.apply(Math, valuesY) + Math.max.apply(Math, valuesY)) / 2)
+    };
+  },
 
-		// File inputs need real clicks on iOS 6 due to a browser bug (issue #68)
-		if ((this.deviceIsIOS && target.type === 'file') || target.disabled) {
-			return true;
-		}
 
-		break;
-	case 'label':
-	case 'video':
-		return true;
-	}
+  /**
+   * calculate the velocity between two points
+   * @param   {Number}    delta_time
+   * @param   {Number}    delta_x
+   * @param   {Number}    delta_y
+   * @returns {Object}    velocity
+   */
+  getVelocity: function getVelocity(delta_time, delta_x, delta_y) {
+    return {
+      x: Math.abs(delta_x / delta_time) || 0,
+      y: Math.abs(delta_y / delta_time) || 0
+    };
+  },
 
-	return (/\bneedsclick\b/).test(target.className);
+
+  /**
+   * calculate the angle between two coordinates
+   * @param   {Touch}     touch1
+   * @param   {Touch}     touch2
+   * @returns {Number}    angle
+   */
+  getAngle: function getAngle(touch1, touch2) {
+    var y = touch2.pageY - touch1.pageY,
+      x = touch2.pageX - touch1.pageX;
+    return Math.atan2(y, x) * 180 / Math.PI;
+  },
+
+
+  /**
+   * angle to direction define
+   * @param   {Touch}     touch1
+   * @param   {Touch}     touch2
+   * @returns {String}    direction constant, like Hammer.DIRECTION_LEFT
+   */
+  getDirection: function getDirection(touch1, touch2) {
+    var x = Math.abs(touch1.pageX - touch2.pageX),
+      y = Math.abs(touch1.pageY - touch2.pageY);
+
+    if(x >= y) {
+      return touch1.pageX - touch2.pageX > 0 ? Hammer.DIRECTION_LEFT : Hammer.DIRECTION_RIGHT;
+    }
+    else {
+      return touch1.pageY - touch2.pageY > 0 ? Hammer.DIRECTION_UP : Hammer.DIRECTION_DOWN;
+    }
+  },
+
+
+  /**
+   * calculate the distance between two touches
+   * @param   {Touch}     touch1
+   * @param   {Touch}     touch2
+   * @returns {Number}    distance
+   */
+  getDistance: function getDistance(touch1, touch2) {
+    var x = touch2.pageX - touch1.pageX,
+      y = touch2.pageY - touch1.pageY;
+    return Math.sqrt((x * x) + (y * y));
+  },
+
+
+  /**
+   * calculate the scale factor between two touchLists (fingers)
+   * no scale is 1, and goes down to 0 when pinched together, and bigger when pinched out
+   * @param   {Array}     start
+   * @param   {Array}     end
+   * @returns {Number}    scale
+   */
+  getScale: function getScale(start, end) {
+    // need two fingers...
+    if(start.length >= 2 && end.length >= 2) {
+      return this.getDistance(end[0], end[1]) /
+        this.getDistance(start[0], start[1]);
+    }
+    return 1;
+  },
+
+
+  /**
+   * calculate the rotation degrees between two touchLists (fingers)
+   * @param   {Array}     start
+   * @param   {Array}     end
+   * @returns {Number}    rotation
+   */
+  getRotation: function getRotation(start, end) {
+    // need two fingers
+    if(start.length >= 2 && end.length >= 2) {
+      return this.getAngle(end[1], end[0]) -
+        this.getAngle(start[1], start[0]);
+    }
+    return 0;
+  },
+
+
+  /**
+   * boolean if the direction is vertical
+   * @param    {String}    direction
+   * @returns  {Boolean}   is_vertical
+   */
+  isVertical: function isVertical(direction) {
+    return (direction == Hammer.DIRECTION_UP || direction == Hammer.DIRECTION_DOWN);
+  },
+
+
+  /**
+   * stop browser default behavior with css props
+   * @param   {HtmlElement}   element
+   * @param   {Object}        css_props
+   */
+  stopDefaultBrowserBehavior: function stopDefaultBrowserBehavior(element, css_props) {
+    if(!css_props || !element || !element.style) {
+      return;
+    }
+
+    // with css properties for modern browsers
+    Hammer.utils.each(['webkit', 'khtml', 'moz', 'Moz', 'ms', 'o', ''], function(vendor) {
+      Hammer.utils.each(css_props, function(prop) {
+          // vender prefix at the property
+          if(vendor) {
+            prop = vendor + prop.substring(0, 1).toUpperCase() + prop.substring(1);
+          }
+          // set the style
+          if(prop in element.style) {
+            element.style[prop] = prop;
+          }
+      });
+    });
+
+    // also the disable onselectstart
+    if(css_props.userSelect == 'none') {
+      element.onselectstart = function() {
+        return false;
+      };
+    }
+
+    // and disable ondragstart
+    if(css_props.userDrag == 'none') {
+      element.ondragstart = function() {
+        return false;
+      };
+    }
+  }
 };
 
 
 /**
- * Determine whether a given element requires a call to focus to simulate click into element.
- *
- * @param {EventTarget|Element} target Target DOM element
- * @returns {boolean} Returns true if the element requires a call to focus to simulate native click.
+ * create new hammer instance
+ * all methods should return the instance itself, so it is chainable.
+ * @param   {HTMLElement}       element
+ * @param   {Object}            [options={}]
+ * @returns {Hammer.Instance}
+ * @constructor
  */
-FastClick.prototype.needsFocus = function(target) {
-	'use strict';
-	switch (target.nodeName.toLowerCase()) {
-	case 'textarea':
-	case 'select':
-		return true;
-	case 'input':
-		switch (target.type) {
-		case 'button':
-		case 'checkbox':
-		case 'file':
-		case 'image':
-		case 'radio':
-		case 'submit':
-			return false;
-		}
+Hammer.Instance = function(element, options) {
+  var self = this;
 
-		// No point in attempting to focus disabled inputs
-		return !target.disabled && !target.readOnly;
-	default:
-		return (/\bneedsfocus\b/).test(target.className);
-	}
+  // setup HammerJS window events and register all gestures
+  // this also sets up the default options
+  setup();
+
+  this.element = element;
+
+  // start/stop detection option
+  this.enabled = true;
+
+  // merge options
+  this.options = Hammer.utils.extend(
+    Hammer.utils.extend({}, Hammer.defaults),
+    options || {});
+
+  // add some css to the element to prevent the browser from doing its native behavoir
+  if(this.options.stop_browser_behavior) {
+    Hammer.utils.stopDefaultBrowserBehavior(this.element, this.options.stop_browser_behavior);
+  }
+
+  // start detection on touchstart
+  Hammer.event.onTouch(element, Hammer.EVENT_START, function(ev) {
+    if(self.enabled) {
+      Hammer.detection.startDetect(self, ev);
+    }
+  });
+
+  // return instance
+  return this;
+};
+
+
+Hammer.Instance.prototype = {
+  /**
+   * bind events to the instance
+   * @param   {String}      gesture
+   * @param   {Function}    handler
+   * @returns {Hammer.Instance}
+   */
+  on: function onEvent(gesture, handler) {
+    var gestures = gesture.split(' ');
+    Hammer.utils.each(gestures, function(gesture) {
+      this.element.addEventListener(gesture, handler, false);
+    }, this);
+    return this;
+  },
+
+
+  /**
+   * unbind events to the instance
+   * @param   {String}      gesture
+   * @param   {Function}    handler
+   * @returns {Hammer.Instance}
+   */
+  off: function offEvent(gesture, handler) {
+    var gestures = gesture.split(' ');
+    Hammer.utils.each(gestures, function(gesture) {
+      this.element.removeEventListener(gesture, handler, false);
+    }, this);
+    return this;
+  },
+
+
+  /**
+   * trigger gesture event
+   * @param   {String}      gesture
+   * @param   {Object}      [eventData]
+   * @returns {Hammer.Instance}
+   */
+  trigger: function triggerEvent(gesture, eventData) {
+    // optional
+    if(!eventData) {
+      eventData = {};
+    }
+
+    // create DOM event
+    var event = Hammer.DOCUMENT.createEvent('Event');
+    event.initEvent(gesture, true, true);
+    event.gesture = eventData;
+
+    // trigger on the target if it is in the instance element,
+    // this is for event delegation tricks
+    var element = this.element;
+    if(Hammer.utils.hasParent(eventData.target, element)) {
+      element = eventData.target;
+    }
+
+    element.dispatchEvent(event);
+    return this;
+  },
+
+
+  /**
+   * enable of disable hammer.js detection
+   * @param   {Boolean}   state
+   * @returns {Hammer.Instance}
+   */
+  enable: function enable(state) {
+    this.enabled = state;
+    return this;
+  }
 };
 
 
 /**
- * Send a click event to the specified element.
- *
- * @param {EventTarget|Element} targetElement
- * @param {Event} event
+ * this holds the last move event,
+ * used to fix empty touchend issue
+ * see the onTouch event for an explanation
+ * @type {Object}
  */
-FastClick.prototype.sendClick = function(targetElement, event) {
-	'use strict';
-	var clickEvent, touch;
+var last_move_event = null;
 
-	// On some Android devices activeElement needs to be blurred otherwise the synthetic click will have no effect (#24)
-	if (document.activeElement && document.activeElement !== targetElement) {
-		document.activeElement.blur();
-	}
 
-	touch = event.changedTouches[0];
+/**
+ * when the mouse is hold down, this is true
+ * @type {Boolean}
+ */
+var enable_detect = false;
 
-	// Synthesise a click event, with an extra attribute so it can be tracked
-	clickEvent = document.createEvent('MouseEvents');
-	clickEvent.initMouseEvent('click', true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
-	clickEvent.forwardedTouchEvent = true;
-	targetElement.dispatchEvent(clickEvent);
+
+/**
+ * when touch events have been fired, this is true
+ * @type {Boolean}
+ */
+var touch_triggered = false;
+
+
+Hammer.event = {
+  /**
+   * simple addEventListener
+   * @param   {HTMLElement}   element
+   * @param   {String}        type
+   * @param   {Function}      handler
+   */
+  bindDom: function(element, type, handler) {
+    var types = type.split(' ');
+    Hammer.utils.each(types, function(type){
+      element.addEventListener(type, handler, false);
+    });
+  },
+
+
+  /**
+   * touch events with mouse fallback
+   * @param   {HTMLElement}   element
+   * @param   {String}        eventType        like Hammer.EVENT_MOVE
+   * @param   {Function}      handler
+   */
+  onTouch: function onTouch(element, eventType, handler) {
+    var self = this;
+
+    this.bindDom(element, Hammer.EVENT_TYPES[eventType], function bindDomOnTouch(ev) {
+      var sourceEventType = ev.type.toLowerCase();
+
+      // onmouseup, but when touchend has been fired we do nothing.
+      // this is for touchdevices which also fire a mouseup on touchend
+      if(sourceEventType.match(/mouse/) && touch_triggered) {
+        return;
+      }
+
+      // mousebutton must be down or a touch event
+      else if(sourceEventType.match(/touch/) ||   // touch events are always on screen
+        sourceEventType.match(/pointerdown/) || // pointerevents touch
+        (sourceEventType.match(/mouse/) && ev.which === 1)   // mouse is pressed
+        ) {
+        enable_detect = true;
+      }
+
+      // mouse isn't pressed
+      else if(sourceEventType.match(/mouse/) && !ev.which) {
+        enable_detect = false;
+      }
+
+
+      // we are in a touch event, set the touch triggered bool to true,
+      // this for the conflicts that may occur on ios and android
+      if(sourceEventType.match(/touch|pointer/)) {
+        touch_triggered = true;
+      }
+
+      // count the total touches on the screen
+      var count_touches = 0;
+
+      // when touch has been triggered in this detection session
+      // and we are now handling a mouse event, we stop that to prevent conflicts
+      if(enable_detect) {
+        // update pointerevent
+        if(Hammer.HAS_POINTEREVENTS && eventType != Hammer.EVENT_END) {
+          count_touches = Hammer.PointerEvent.updatePointer(eventType, ev);
+        }
+        // touch
+        else if(sourceEventType.match(/touch/)) {
+          count_touches = ev.touches.length;
+        }
+        // mouse
+        else if(!touch_triggered) {
+          count_touches = sourceEventType.match(/up/) ? 0 : 1;
+        }
+
+        // if we are in a end event, but when we remove one touch and
+        // we still have enough, set eventType to move
+        if(count_touches > 0 && eventType == Hammer.EVENT_END) {
+          eventType = Hammer.EVENT_MOVE;
+        }
+        // no touches, force the end event
+        else if(!count_touches) {
+          eventType = Hammer.EVENT_END;
+        }
+
+        // store the last move event
+        if(count_touches || last_move_event === null) {
+          last_move_event = ev;
+        }
+
+        // trigger the handler
+        handler.call(Hammer.detection, self.collectEventData(element, eventType, self.getTouchList(last_move_event, eventType), ev));
+
+        // remove pointerevent from list
+        if(Hammer.HAS_POINTEREVENTS && eventType == Hammer.EVENT_END) {
+          count_touches = Hammer.PointerEvent.updatePointer(eventType, ev);
+        }
+      }
+
+      // on the end we reset everything
+      if(!count_touches) {
+        last_move_event = null;
+        enable_detect = false;
+        touch_triggered = false;
+        Hammer.PointerEvent.reset();
+      }
+    });
+  },
+
+
+  /**
+   * we have different events for each device/browser
+   * determine what we need and set them in the Hammer.EVENT_TYPES constant
+   */
+  determineEventTypes: function determineEventTypes() {
+    // determine the eventtype we want to set
+    var types;
+
+    // pointerEvents magic
+    if(Hammer.HAS_POINTEREVENTS) {
+      types = Hammer.PointerEvent.getEvents();
+    }
+    // on Android, iOS, blackberry, windows mobile we dont want any mouseevents
+    else if(Hammer.NO_MOUSEEVENTS) {
+      types = [
+        'touchstart',
+        'touchmove',
+        'touchend touchcancel'];
+    }
+    // for non pointer events browsers and mixed browsers,
+    // like chrome on windows8 touch laptop
+    else {
+      types = [
+        'touchstart mousedown',
+        'touchmove mousemove',
+        'touchend touchcancel mouseup'];
+    }
+
+    Hammer.EVENT_TYPES[Hammer.EVENT_START] = types[0];
+    Hammer.EVENT_TYPES[Hammer.EVENT_MOVE] = types[1];
+    Hammer.EVENT_TYPES[Hammer.EVENT_END] = types[2];
+  },
+
+
+  /**
+   * create touchlist depending on the event
+   * @param   {Object}    ev
+   * @param   {String}    eventType   used by the fakemultitouch plugin
+   */
+  getTouchList: function getTouchList(ev/*, eventType*/) {
+    // get the fake pointerEvent touchlist
+    if(Hammer.HAS_POINTEREVENTS) {
+      return Hammer.PointerEvent.getTouchList();
+    }
+    // get the touchlist
+    else if(ev.touches) {
+      return ev.touches;
+    }
+    // make fake touchlist from mouse position
+    else {
+      ev.identifier = 1;
+      return [ev];
+    }
+  },
+
+
+  /**
+   * collect event data for Hammer js
+   * @param   {HTMLElement}   element
+   * @param   {String}        eventType        like Hammer.EVENT_MOVE
+   * @param   {Object}        eventData
+   */
+  collectEventData: function collectEventData(element, eventType, touches, ev) {
+    // find out pointerType
+    var pointerType = Hammer.POINTER_TOUCH;
+    if(ev.type.match(/mouse/) || Hammer.PointerEvent.matchType(Hammer.POINTER_MOUSE, ev)) {
+      pointerType = Hammer.POINTER_MOUSE;
+    }
+
+    return {
+      center     : Hammer.utils.getCenter(touches),
+      timeStamp  : new Date().getTime(),
+      target     : ev.target,
+      touches    : touches,
+      eventType  : eventType,
+      pointerType: pointerType,
+      srcEvent   : ev,
+
+      /**
+       * prevent the browser default actions
+       * mostly used to disable scrolling of the browser
+       */
+      preventDefault: function() {
+        if(this.srcEvent.preventManipulation) {
+          this.srcEvent.preventManipulation();
+        }
+
+        if(this.srcEvent.preventDefault) {
+          this.srcEvent.preventDefault();
+        }
+      },
+
+      /**
+       * stop bubbling the event up to its parents
+       */
+      stopPropagation: function() {
+        this.srcEvent.stopPropagation();
+      },
+
+      /**
+       * immediately stop gesture detection
+       * might be useful after a swipe was detected
+       * @return {*}
+       */
+      stopDetect: function() {
+        return Hammer.detection.stopDetect();
+      }
+    };
+  }
+};
+
+Hammer.PointerEvent = {
+  /**
+   * holds all pointers
+   * @type {Object}
+   */
+  pointers: {},
+
+  /**
+   * get a list of pointers
+   * @returns {Array}     touchlist
+   */
+  getTouchList: function() {
+    var self = this;
+    var touchlist = [];
+
+    // we can use forEach since pointerEvents only is in IE10
+    Hammer.utils.each(self.pointers, function(pointer){
+      touchlist.push(pointer);
+    });
+    
+    return touchlist;
+  },
+
+  /**
+   * update the position of a pointer
+   * @param   {String}   type             Hammer.EVENT_END
+   * @param   {Object}   pointerEvent
+   */
+  updatePointer: function(type, pointerEvent) {
+    if(type == Hammer.EVENT_END) {
+      this.pointers = {};
+    }
+    else {
+      pointerEvent.identifier = pointerEvent.pointerId;
+      this.pointers[pointerEvent.pointerId] = pointerEvent;
+    }
+
+    return Object.keys(this.pointers).length;
+  },
+
+  /**
+   * check if ev matches pointertype
+   * @param   {String}        pointerType     Hammer.POINTER_MOUSE
+   * @param   {PointerEvent}  ev
+   */
+  matchType: function(pointerType, ev) {
+    if(!ev.pointerType) {
+      return false;
+    }
+
+    var pt = ev.pointerType,
+      types = {};
+    types[Hammer.POINTER_MOUSE] = (pt === ev.MSPOINTER_TYPE_MOUSE || pt === Hammer.POINTER_MOUSE);
+    types[Hammer.POINTER_TOUCH] = (pt === ev.MSPOINTER_TYPE_TOUCH || pt === Hammer.POINTER_TOUCH);
+    types[Hammer.POINTER_PEN] = (pt === ev.MSPOINTER_TYPE_PEN || pt === Hammer.POINTER_PEN);
+    return types[pointerType];
+  },
+
+
+  /**
+   * get events
+   */
+  getEvents: function() {
+    return [
+      'pointerdown MSPointerDown',
+      'pointermove MSPointerMove',
+      'pointerup pointercancel MSPointerUp MSPointerCancel'
+    ];
+  },
+
+  /**
+   * reset the list
+   */
+  reset: function() {
+    this.pointers = {};
+  }
+};
+
+
+Hammer.detection = {
+  // contains all registred Hammer.gestures in the correct order
+  gestures: [],
+
+  // data of the current Hammer.gesture detection session
+  current : null,
+
+  // the previous Hammer.gesture session data
+  // is a full clone of the previous gesture.current object
+  previous: null,
+
+  // when this becomes true, no gestures are fired
+  stopped : false,
+
+
+  /**
+   * start Hammer.gesture detection
+   * @param   {Hammer.Instance}   inst
+   * @param   {Object}            eventData
+   */
+  startDetect: function startDetect(inst, eventData) {
+    // already busy with a Hammer.gesture detection on an element
+    if(this.current) {
+      return;
+    }
+
+    this.stopped = false;
+
+    this.current = {
+      inst      : inst, // reference to HammerInstance we're working for
+      startEvent: Hammer.utils.extend({}, eventData), // start eventData for distances, timing etc
+      lastEvent : false, // last eventData
+      name      : '' // current gesture we're in/detected, can be 'tap', 'hold' etc
+    };
+
+    this.detect(eventData);
+  },
+
+
+  /**
+   * Hammer.gesture detection
+   * @param   {Object}    eventData
+   */
+  detect: function detect(eventData) {
+    if(!this.current || this.stopped) {
+      return;
+    }
+
+    // extend event data with calculations about scale, distance etc
+    eventData = this.extendEventData(eventData);
+
+    // instance options
+    var inst_options = this.current.inst.options;
+
+    // call Hammer.gesture handlers
+    Hammer.utils.each(this.gestures, function(gesture) {
+      // only when the instance options have enabled this gesture
+      if(!this.stopped && inst_options[gesture.name] !== false) {
+        // if a handler returns false, we stop with the detection
+        if(gesture.handler.call(gesture, eventData, this.current.inst) === false) {
+          this.stopDetect();
+          return false;
+        }
+      }
+    }, this);
+
+    // store as previous event event
+    if(this.current) {
+      this.current.lastEvent = eventData;
+    }
+
+    // endevent, but not the last touch, so dont stop
+    if(eventData.eventType == Hammer.EVENT_END && !eventData.touches.length - 1) {
+      this.stopDetect();
+    }
+
+    return eventData;
+  },
+
+
+  /**
+   * clear the Hammer.gesture vars
+   * this is called on endDetect, but can also be used when a final Hammer.gesture has been detected
+   * to stop other Hammer.gestures from being fired
+   */
+  stopDetect: function stopDetect() {
+    // clone current data to the store as the previous gesture
+    // used for the double tap gesture, since this is an other gesture detect session
+    this.previous = Hammer.utils.extend({}, this.current);
+
+    // reset the current
+    this.current = null;
+
+    // stopped!
+    this.stopped = true;
+  },
+
+
+  /**
+   * extend eventData for Hammer.gestures
+   * @param   {Object}   ev
+   * @returns {Object}   ev
+   */
+  extendEventData: function extendEventData(ev) {
+    var startEv = this.current.startEvent;
+
+    // if the touches change, set the new touches over the startEvent touches
+    // this because touchevents don't have all the touches on touchstart, or the
+    // user must place his fingers at the EXACT same time on the screen, which is not realistic
+    // but, sometimes it happens that both fingers are touching at the EXACT same time
+    if(startEv && (ev.touches.length != startEv.touches.length || ev.touches === startEv.touches)) {
+      // extend 1 level deep to get the touchlist with the touch objects
+      startEv.touches = [];
+      Hammer.utils.each(ev.touches, function(touch) {
+        startEv.touches.push(Hammer.utils.extend({}, touch));
+      });
+    }
+
+    var delta_time = ev.timeStamp - startEv.timeStamp
+      , delta_x = ev.center.pageX - startEv.center.pageX
+      , delta_y = ev.center.pageY - startEv.center.pageY
+      , velocity = Hammer.utils.getVelocity(delta_time, delta_x, delta_y)
+      , interimAngle
+      , interimDirection;
+
+    // end events (e.g. dragend) don't have useful values for interimDirection & interimAngle
+    // because the previous event has exactly the same coordinates
+    // so for end events, take the previous values of interimDirection & interimAngle
+    // instead of recalculating them and getting a spurious '0'
+    if(ev.eventType === 'end') {
+      interimAngle = this.current.lastEvent && this.current.lastEvent.interimAngle;
+      interimDirection = this.current.lastEvent && this.current.lastEvent.interimDirection;
+    }
+    else {
+      interimAngle = this.current.lastEvent && Hammer.utils.getAngle(this.current.lastEvent.center, ev.center);
+      interimDirection = this.current.lastEvent && Hammer.utils.getDirection(this.current.lastEvent.center, ev.center);
+    }
+
+    Hammer.utils.extend(ev, {
+      deltaTime: delta_time,
+
+      deltaX: delta_x,
+      deltaY: delta_y,
+
+      velocityX: velocity.x,
+      velocityY: velocity.y,
+
+      distance: Hammer.utils.getDistance(startEv.center, ev.center),
+
+      angle: Hammer.utils.getAngle(startEv.center, ev.center),
+      interimAngle: interimAngle,
+
+      direction: Hammer.utils.getDirection(startEv.center, ev.center),
+      interimDirection: interimDirection,
+
+      scale: Hammer.utils.getScale(startEv.touches, ev.touches),
+      rotation: Hammer.utils.getRotation(startEv.touches, ev.touches),
+
+      startEvent: startEv
+    });
+
+    return ev;
+  },
+
+
+  /**
+   * register new gesture
+   * @param   {Object}    gesture object, see gestures.js for documentation
+   * @returns {Array}     gestures
+   */
+  register: function register(gesture) {
+    // add an enable gesture options if there is no given
+    var options = gesture.defaults || {};
+    if(options[gesture.name] === undefined) {
+      options[gesture.name] = true;
+    }
+
+    // extend Hammer default options with the Hammer.gesture options
+    Hammer.utils.extend(Hammer.defaults, options, true);
+
+    // set its index
+    gesture.index = gesture.index || 1000;
+
+    // add Hammer.gesture to the list
+    this.gestures.push(gesture);
+
+    // sort the list by index
+    this.gestures.sort(function(a, b) {
+      if(a.index < b.index) { return -1; }
+      if(a.index > b.index) { return 1; }
+      return 0;
+    });
+
+    return this.gestures;
+  }
 };
 
 
 /**
- * @param {EventTarget|Element} targetElement
+ * Drag
+ * Move with x fingers (default 1) around on the page. Blocking the scrolling when
+ * moving left and right is a good practice. When all the drag events are blocking
+ * you disable scrolling on that area.
+ * @events  drag, drapleft, dragright, dragup, dragdown
  */
-FastClick.prototype.focus = function(targetElement) {
-	'use strict';
-	var length;
+Hammer.gestures.Drag = {
+  name     : 'drag',
+  index    : 50,
+  defaults : {
+    drag_min_distance            : 10,
+    
+    // Set correct_for_drag_min_distance to true to make the starting point of the drag
+    // be calculated from where the drag was triggered, not from where the touch started.
+    // Useful to avoid a jerk-starting drag, which can make fine-adjustments
+    // through dragging difficult, and be visually unappealing.
+    correct_for_drag_min_distance: true,
+    
+    // set 0 for unlimited, but this can conflict with transform
+    drag_max_touches             : 1,
+    
+    // prevent default browser behavior when dragging occurs
+    // be careful with it, it makes the element a blocking element
+    // when you are using the drag gesture, it is a good practice to set this true
+    drag_block_horizontal        : false,
+    drag_block_vertical          : false,
+    
+    // drag_lock_to_axis keeps the drag gesture on the axis that it started on,
+    // It disallows vertical directions if the initial direction was horizontal, and vice versa.
+    drag_lock_to_axis            : false,
+    
+    // drag lock only kicks in when distance > drag_lock_min_distance
+    // This way, locking occurs only when the distance has become large enough to reliably determine the direction
+    drag_lock_min_distance       : 25
+  },
+  
+  triggered: false,
+  handler  : function dragGesture(ev, inst) {
+    // current gesture isnt drag, but dragged is true
+    // this means an other gesture is busy. now call dragend
+    if(Hammer.detection.current.name != this.name && this.triggered) {
+      inst.trigger(this.name + 'end', ev);
+      this.triggered = false;
+      return;
+    }
 
-	if (this.deviceIsIOS && targetElement.setSelectionRange) {
-		length = targetElement.value.length;
-		targetElement.setSelectionRange(length, length);
-	} else {
-		targetElement.focus();
-	}
+    // max touches
+    if(inst.options.drag_max_touches > 0 &&
+      ev.touches.length > inst.options.drag_max_touches) {
+      return;
+    }
+
+    switch(ev.eventType) {
+      case Hammer.EVENT_START:
+        this.triggered = false;
+        break;
+
+      case Hammer.EVENT_MOVE:
+        // when the distance we moved is too small we skip this gesture
+        // or we can be already in dragging
+        if(ev.distance < inst.options.drag_min_distance &&
+          Hammer.detection.current.name != this.name) {
+          return;
+        }
+
+        // we are dragging!
+        if(Hammer.detection.current.name != this.name) {
+          Hammer.detection.current.name = this.name;
+          if(inst.options.correct_for_drag_min_distance && ev.distance > 0) {
+            // When a drag is triggered, set the event center to drag_min_distance pixels from the original event center.
+            // Without this correction, the dragged distance would jumpstart at drag_min_distance pixels instead of at 0.
+            // It might be useful to save the original start point somewhere
+            var factor = Math.abs(inst.options.drag_min_distance / ev.distance);
+            Hammer.detection.current.startEvent.center.pageX += ev.deltaX * factor;
+            Hammer.detection.current.startEvent.center.pageY += ev.deltaY * factor;
+
+            // recalculate event data using new start point
+            ev = Hammer.detection.extendEventData(ev);
+          }
+        }
+
+        // lock drag to axis?
+        if(Hammer.detection.current.lastEvent.drag_locked_to_axis || (inst.options.drag_lock_to_axis && inst.options.drag_lock_min_distance <= ev.distance)) {
+          ev.drag_locked_to_axis = true;
+        }
+        var last_direction = Hammer.detection.current.lastEvent.direction;
+        if(ev.drag_locked_to_axis && last_direction !== ev.direction) {
+          // keep direction on the axis that the drag gesture started on
+          if(Hammer.utils.isVertical(last_direction)) {
+            ev.direction = (ev.deltaY < 0) ? Hammer.DIRECTION_UP : Hammer.DIRECTION_DOWN;
+          }
+          else {
+            ev.direction = (ev.deltaX < 0) ? Hammer.DIRECTION_LEFT : Hammer.DIRECTION_RIGHT;
+          }
+        }
+
+        // first time, trigger dragstart event
+        if(!this.triggered) {
+          inst.trigger(this.name + 'start', ev);
+          this.triggered = true;
+        }
+
+        // trigger normal event
+        inst.trigger(this.name, ev);
+
+        // direction event, like dragdown
+        inst.trigger(this.name + ev.direction, ev);
+
+        // block the browser events
+        if((inst.options.drag_block_vertical && Hammer.utils.isVertical(ev.direction)) ||
+          (inst.options.drag_block_horizontal && !Hammer.utils.isVertical(ev.direction))) {
+          ev.preventDefault();
+        }
+        break;
+
+      case Hammer.EVENT_END:
+        // trigger dragend
+        if(this.triggered) {
+          inst.trigger(this.name + 'end', ev);
+        }
+
+        this.triggered = false;
+        break;
+    }
+  }
 };
-
 
 /**
- * Check whether the given target element is a child of a scrollable layer and if so, set a flag on it.
- *
- * @param {EventTarget|Element} targetElement
+ * Hold
+ * Touch stays at the same place for x time
+ * @events  hold
  */
-FastClick.prototype.updateScrollParent = function(targetElement) {
-	'use strict';
-	var scrollParent, parentElement;
+Hammer.gestures.Hold = {
+  name    : 'hold',
+  index   : 10,
+  defaults: {
+    hold_timeout  : 500,
+    hold_threshold: 1
+  },
+  timer   : null,
+  handler : function holdGesture(ev, inst) {
+    switch(ev.eventType) {
+      case Hammer.EVENT_START:
+        // clear any running timers
+        clearTimeout(this.timer);
 
-	scrollParent = targetElement.fastClickScrollParent;
+        // set the gesture so we can check in the timeout if it still is
+        Hammer.detection.current.name = this.name;
 
-	// Attempt to discover whether the target element is contained within a scrollable layer. Re-check if the
-	// target element was moved to another parent.
-	if (!scrollParent || !scrollParent.contains(targetElement)) {
-		parentElement = targetElement;
-		do {
-			if (parentElement.scrollHeight > parentElement.offsetHeight) {
-				scrollParent = parentElement;
-				targetElement.fastClickScrollParent = parentElement;
-				break;
-			}
+        // set timer and if after the timeout it still is hold,
+        // we trigger the hold event
+        this.timer = setTimeout(function() {
+          if(Hammer.detection.current.name == 'hold') {
+            inst.trigger('hold', ev);
+          }
+        }, inst.options.hold_timeout);
+        break;
 
-			parentElement = parentElement.parentElement;
-		} while (parentElement);
-	}
+      // when you move or end we clear the timer
+      case Hammer.EVENT_MOVE:
+        if(ev.distance > inst.options.hold_threshold) {
+          clearTimeout(this.timer);
+        }
+        break;
 
-	// Always update the scroll top tracker if possible.
-	if (scrollParent) {
-		scrollParent.fastClickLastScrollTop = scrollParent.scrollTop;
-	}
+      case Hammer.EVENT_END:
+        clearTimeout(this.timer);
+        break;
+    }
+  }
 };
-
 
 /**
- * @param {EventTarget} targetElement
- * @returns {Element|EventTarget}
+ * Release
+ * Called as last, tells the user has released the screen
+ * @events  release
  */
-FastClick.prototype.getTargetElementFromEventTarget = function(eventTarget) {
-	'use strict';
-
-	// On some older browsers (notably Safari on iOS 4.1 - see issue #56) the event target may be a text node.
-	if (eventTarget.nodeType === Node.TEXT_NODE) {
-		return eventTarget.parentNode;
-	}
-
-	return eventTarget;
+Hammer.gestures.Release = {
+  name   : 'release',
+  index  : Infinity,
+  handler: function releaseGesture(ev, inst) {
+    if(ev.eventType == Hammer.EVENT_END) {
+      inst.trigger(this.name, ev);
+    }
+  }
 };
-
 
 /**
- * On touch start, record the position and scroll offset.
- *
- * @param {Event} event
- * @returns {boolean}
+ * Swipe
+ * triggers swipe events when the end velocity is above the threshold
+ * @events  swipe, swipeleft, swiperight, swipeup, swipedown
  */
-FastClick.prototype.onTouchStart = function(event) {
-	'use strict';
-	var targetElement, touch, selection;
+Hammer.gestures.Swipe = {
+  name    : 'swipe',
+  index   : 40,
+  defaults: {
+    // set 0 for unlimited, but this can conflict with transform
+    swipe_min_touches: 1,
+    swipe_max_touches: 1,
+    swipe_velocity   : 0.7
+  },
+  handler : function swipeGesture(ev, inst) {
+    if(ev.eventType == Hammer.EVENT_END) {
+      // max touches
+      if(inst.options.swipe_max_touches > 0 &&
+        ev.touches.length < inst.options.swipe_min_touches &&
+        ev.touches.length > inst.options.swipe_max_touches) {
+        return;
+      }
 
-	// Ignore multiple touches, otherwise pinch-to-zoom is prevented if both fingers are on the FastClick element (issue #111).
-	if (event.targetTouches.length > 1) {
-		return true;
-	}
-
-	targetElement = this.getTargetElementFromEventTarget(event.target);
-	touch = event.targetTouches[0];
-
-	if (this.deviceIsIOS) {
-
-		// Only trusted events will deselect text on iOS (issue #49)
-		selection = window.getSelection();
-		if (selection.rangeCount && !selection.isCollapsed) {
-			return true;
-		}
-
-		if (!this.deviceIsIOS4) {
-
-			// Weird things happen on iOS when an alert or confirm dialog is opened from a click event callback (issue #23):
-			// when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
-			// with the same identifier as the touch event that previously triggered the click that triggered the alert.
-			// Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
-			// immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
-			if (touch.identifier === this.lastTouchIdentifier) {
-				event.preventDefault();
-				return false;
-			}
-
-			this.lastTouchIdentifier = touch.identifier;
-
-			// If the target element is a child of a scrollable layer (using -webkit-overflow-scrolling: touch) and:
-			// 1) the user does a fling scroll on the scrollable layer
-			// 2) the user stops the fling scroll with another tap
-			// then the event.target of the last 'touchend' event will be the element that was under the user's finger
-			// when the fling scroll was started, causing FastClick to send a click event to that layer - unless a check
-			// is made to ensure that a parent layer was not scrolled before sending a synthetic click (issue #42).
-			this.updateScrollParent(targetElement);
-		}
-	}
-
-	this.trackingClick = true;
-	this.trackingClickStart = event.timeStamp;
-	this.targetElement = targetElement;
-
-	this.touchStartX = touch.pageX;
-	this.touchStartY = touch.pageY;
-
-	// Prevent phantom clicks on fast double-tap (issue #36)
-	if ((event.timeStamp - this.lastClickTime) < 200) {
-		event.preventDefault();
-	}
-
-	return true;
+      // when the distance we moved is too small we skip this gesture
+      // or we can be already in dragging
+      if(ev.velocityX > inst.options.swipe_velocity ||
+        ev.velocityY > inst.options.swipe_velocity) {
+        // trigger swipe events
+        inst.trigger(this.name, ev);
+        inst.trigger(this.name + ev.direction, ev);
+      }
+    }
+  }
 };
-
 
 /**
- * Based on a touchmove event object, check whether the touch has moved past a boundary since it started.
- *
- * @param {Event} event
- * @returns {boolean}
+ * Tap/DoubleTap
+ * Quick touch at a place or double at the same place
+ * @events  tap, doubletap
  */
-FastClick.prototype.touchHasMoved = function(event) {
-	'use strict';
-	var touch = event.changedTouches[0], boundary = this.touchBoundary;
+Hammer.gestures.Tap = {
+  name    : 'tap',
+  index   : 100,
+  defaults: {
+    tap_max_touchtime : 250,
+    tap_max_distance  : 10,
+    tap_always        : true,
+    doubletap_distance: 20,
+    doubletap_interval: 300
+  },
+  handler : function tapGesture(ev, inst) {
+    if(ev.eventType == Hammer.EVENT_END && ev.srcEvent.type != 'touchcancel') {
+      // previous gesture, for the double tap since these are two different gesture detections
+      var prev = Hammer.detection.previous,
+        did_doubletap = false;
 
-	if (Math.abs(touch.pageX - this.touchStartX) > boundary || Math.abs(touch.pageY - this.touchStartY) > boundary) {
-		return true;
-	}
+      // when the touchtime is higher then the max touch time
+      // or when the moving distance is too much
+      if(ev.deltaTime > inst.options.tap_max_touchtime ||
+        ev.distance > inst.options.tap_max_distance) {
+        return;
+      }
 
-	return false;
+      // check if double tap
+      if(prev && prev.name == 'tap' &&
+        (ev.timeStamp - prev.lastEvent.timeStamp) < inst.options.doubletap_interval &&
+        ev.distance < inst.options.doubletap_distance) {
+        inst.trigger('doubletap', ev);
+        did_doubletap = true;
+      }
+
+      // do a single tap
+      if(!did_doubletap || inst.options.tap_always) {
+        Hammer.detection.current.name = 'tap';
+        inst.trigger(Hammer.detection.current.name, ev);
+      }
+    }
+  }
 };
-
 
 /**
- * Update the last position.
- *
- * @param {Event} event
- * @returns {boolean}
+ * Touch
+ * Called as first, tells the user has touched the screen
+ * @events  touch
  */
-FastClick.prototype.onTouchMove = function(event) {
-	'use strict';
-	if (!this.trackingClick) {
-		return true;
-	}
+Hammer.gestures.Touch = {
+  name    : 'touch',
+  index   : -Infinity,
+  defaults: {
+    // call preventDefault at touchstart, and makes the element blocking by
+    // disabling the scrolling of the page, but it improves gestures like
+    // transforming and dragging.
+    // be careful with using this, it can be very annoying for users to be stuck
+    // on the page
+    prevent_default    : false,
 
-	// If the touch has moved, cancel the click tracking
-	if (this.targetElement !== this.getTargetElementFromEventTarget(event.target) || this.touchHasMoved(event)) {
-		this.trackingClick = false;
-		this.targetElement = null;
-	}
+    // disable mouse events, so only touch (or pen!) input triggers events
+    prevent_mouseevents: false
+  },
+  handler : function touchGesture(ev, inst) {
+    if(inst.options.prevent_mouseevents && ev.pointerType == Hammer.POINTER_MOUSE) {
+      ev.stopDetect();
+      return;
+    }
 
-	return true;
+    if(inst.options.prevent_default) {
+      ev.preventDefault();
+    }
+
+    if(ev.eventType == Hammer.EVENT_START) {
+      inst.trigger(this.name, ev);
+    }
+  }
 };
-
 
 /**
- * Attempt to find the labelled control for the given label element.
- *
- * @param {EventTarget|HTMLLabelElement} labelElement
- * @returns {Element|null}
+ * Transform
+ * User want to scale or rotate with 2 fingers
+ * @events  transform, pinch, pinchin, pinchout, rotate
  */
-FastClick.prototype.findControl = function(labelElement) {
-	'use strict';
+Hammer.gestures.Transform = {
+  name     : 'transform',
+  index    : 45,
+  defaults : {
+    // factor, no scale is 1, zoomin is to 0 and zoomout until higher then 1
+    transform_min_scale   : 0.01,
+    // rotation in degrees
+    transform_min_rotation: 1,
+    // prevent default browser behavior when two touches are on the screen
+    // but it makes the element a blocking element
+    // when you are using the transform gesture, it is a good practice to set this true
+    transform_always_block: false
+  },
+  triggered: false,
+  handler  : function transformGesture(ev, inst) {
+    // current gesture isnt drag, but dragged is true
+    // this means an other gesture is busy. now call dragend
+    if(Hammer.detection.current.name != this.name && this.triggered) {
+      inst.trigger(this.name + 'end', ev);
+      this.triggered = false;
+      return;
+    }
 
-	// Fast path for newer browsers supporting the HTML5 control attribute
-	if (labelElement.control !== undefined) {
-		return labelElement.control;
-	}
+    // atleast multitouch
+    if(ev.touches.length < 2) {
+      return;
+    }
 
-	// All browsers under test that support touch events also support the HTML5 htmlFor attribute
-	if (labelElement.htmlFor) {
-		return document.getElementById(labelElement.htmlFor);
-	}
+    // prevent default when two fingers are on the screen
+    if(inst.options.transform_always_block) {
+      ev.preventDefault();
+    }
 
-	// If no for attribute exists, attempt to retrieve the first labellable descendant element
-	// the list of which is defined here: http://www.w3.org/TR/html5/forms.html#category-label
-	return labelElement.querySelector('button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea');
+    switch(ev.eventType) {
+      case Hammer.EVENT_START:
+        this.triggered = false;
+        break;
+
+      case Hammer.EVENT_MOVE:
+        var scale_threshold = Math.abs(1 - ev.scale);
+        var rotation_threshold = Math.abs(ev.rotation);
+
+        // when the distance we moved is too small we skip this gesture
+        // or we can be already in dragging
+        if(scale_threshold < inst.options.transform_min_scale &&
+          rotation_threshold < inst.options.transform_min_rotation) {
+          return;
+        }
+
+        // we are transforming!
+        Hammer.detection.current.name = this.name;
+
+        // first time, trigger dragstart event
+        if(!this.triggered) {
+          inst.trigger(this.name + 'start', ev);
+          this.triggered = true;
+        }
+
+        inst.trigger(this.name, ev); // basic transform event
+
+        // trigger rotate event
+        if(rotation_threshold > inst.options.transform_min_rotation) {
+          inst.trigger('rotate', ev);
+        }
+
+        // trigger pinch event
+        if(scale_threshold > inst.options.transform_min_scale) {
+          inst.trigger('pinch', ev);
+          inst.trigger('pinch' + ((ev.scale < 1) ? 'in' : 'out'), ev);
+        }
+        break;
+
+      case Hammer.EVENT_END:
+        // trigger dragend
+        if(this.triggered) {
+          inst.trigger(this.name + 'end', ev);
+        }
+
+        this.triggered = false;
+        break;
+    }
+  }
 };
 
-
-/**
- * On touch end, determine whether to send a click event at once.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onTouchEnd = function(event) {
-	'use strict';
-	var forElement, trackingClickStart, targetTagName, scrollParent, touch, targetElement = this.targetElement;
-
-	if (!this.trackingClick) {
-		return true;
-	}
-
-	// Prevent phantom clicks on fast double-tap (issue #36)
-	if ((event.timeStamp - this.lastClickTime) < 200) {
-		this.cancelNextClick = true;
-		return true;
-	}
-
-	this.lastClickTime = event.timeStamp;
-
-	trackingClickStart = this.trackingClickStart;
-	this.trackingClick = false;
-	this.trackingClickStart = 0;
-
-	// On some iOS devices, the targetElement supplied with the event is invalid if the layer
-	// is performing a transition or scroll, and has to be re-detected manually. Note that
-	// for this to function correctly, it must be called *after* the event target is checked!
-	// See issue #57; also filed as rdar://13048589 .
-	if (this.deviceIsIOSWithBadTarget) {
-		touch = event.changedTouches[0];
-
-		// In certain cases arguments of elementFromPoint can be negative, so prevent setting targetElement to null
-		targetElement = document.elementFromPoint(touch.pageX - window.pageXOffset, touch.pageY - window.pageYOffset) || targetElement;
-		targetElement.fastClickScrollParent = this.targetElement.fastClickScrollParent;
-	}
-
-	targetTagName = targetElement.tagName.toLowerCase();
-	if (targetTagName === 'label') {
-		forElement = this.findControl(targetElement);
-		if (forElement) {
-			this.focus(targetElement);
-			if (this.deviceIsAndroid) {
-				return false;
-			}
-
-			targetElement = forElement;
-		}
-	} else if (this.needsFocus(targetElement)) {
-
-		// Case 1: If the touch started a while ago (best guess is 100ms based on tests for issue #36) then focus will be triggered anyway. Return early and unset the target element reference so that the subsequent click will be allowed through.
-		// Case 2: Without this exception for input elements tapped when the document is contained in an iframe, then any inputted text won't be visible even though the value attribute is updated as the user types (issue #37).
-		if ((event.timeStamp - trackingClickStart) > 100 || (this.deviceIsIOS && window.top !== window && targetTagName === 'input')) {
-			this.targetElement = null;
-			return false;
-		}
-
-		this.focus(targetElement);
-
-		// Select elements need the event to go through on iOS 4, otherwise the selector menu won't open.
-		if (!this.deviceIsIOS4 || targetTagName !== 'select') {
-			this.targetElement = null;
-			event.preventDefault();
-		}
-
-		return false;
-	}
-
-	if (this.deviceIsIOS && !this.deviceIsIOS4) {
-
-		// Don't send a synthetic click event if the target element is contained within a parent layer that was scrolled
-		// and this tap is being used to stop the scrolling (usually initiated by a fling - issue #42).
-		scrollParent = targetElement.fastClickScrollParent;
-		if (scrollParent && scrollParent.fastClickLastScrollTop !== scrollParent.scrollTop) {
-			return true;
-		}
-	}
-
-	// Prevent the actual click from going though - unless the target node is marked as requiring
-	// real clicks or if it is in the whitelist in which case only non-programmatic clicks are permitted.
-	if (!this.needsClick(targetElement)) {
-		event.preventDefault();
-		this.sendClick(targetElement, event);
-	}
-
-	return false;
-};
-
-
-/**
- * On touch cancel, stop tracking the click.
- *
- * @returns {void}
- */
-FastClick.prototype.onTouchCancel = function() {
-	'use strict';
-	this.trackingClick = false;
-	this.targetElement = null;
-};
-
-
-/**
- * Determine mouse events which should be permitted.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onMouse = function(event) {
-	'use strict';
-
-	// If a target element was never set (because a touch event was never fired) allow the event
-	if (!this.targetElement) {
-		return true;
-	}
-
-	if (event.forwardedTouchEvent) {
-		return true;
-	}
-
-	// Programmatically generated events targeting a specific element should be permitted
-	if (!event.cancelable) {
-		return true;
-	}
-
-	// Derive and check the target element to see whether the mouse event needs to be permitted;
-	// unless explicitly enabled, prevent non-touch click events from triggering actions,
-	// to prevent ghost/doubleclicks.
-	if (!this.needsClick(this.targetElement) || this.cancelNextClick) {
-
-		// Prevent any user-added listeners declared on FastClick element from being fired.
-		if (event.stopImmediatePropagation) {
-			event.stopImmediatePropagation();
-		} else {
-
-			// Part of the hack for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
-			event.propagationStopped = true;
-		}
-
-		// Cancel the event
-		event.stopPropagation();
-		event.preventDefault();
-
-		return false;
-	}
-
-	// If the mouse event is permitted, return true for the action to go through.
-	return true;
-};
-
-
-/**
- * On actual clicks, determine whether this is a touch-generated click, a click action occurring
- * naturally after a delay after a touch (which needs to be cancelled to avoid duplication), or
- * an actual click which should be permitted.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onClick = function(event) {
-	'use strict';
-	var permitted;
-
-	// It's possible for another FastClick-like library delivered with third-party code to fire a click event before FastClick does (issue #44). In that case, set the click-tracking flag back to false and return early. This will cause onTouchEnd to return early.
-	if (this.trackingClick) {
-		this.targetElement = null;
-		this.trackingClick = false;
-		return true;
-	}
-
-	// Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
-	if (event.target.type === 'submit' && event.detail === 0) {
-		return true;
-	}
-
-	permitted = this.onMouse(event);
-
-	// Only unset targetElement if the click is not permitted. This will ensure that the check for !targetElement in onMouse fails and the browser's click doesn't go through.
-	if (!permitted) {
-		this.targetElement = null;
-	}
-
-	// If clicks are permitted, return true for the action to go through.
-	return permitted;
-};
-
-
-/**
- * Remove all FastClick's event listeners.
- *
- * @returns {void}
- */
-FastClick.prototype.destroy = function() {
-	'use strict';
-	var layer = this.layer;
-
-	if (this.deviceIsAndroid) {
-		layer.removeEventListener('mouseover', this.onMouse, true);
-		layer.removeEventListener('mousedown', this.onMouse, true);
-		layer.removeEventListener('mouseup', this.onMouse, true);
-	}
-
-	layer.removeEventListener('click', this.onClick, true);
-	layer.removeEventListener('touchstart', this.onTouchStart, false);
-	layer.removeEventListener('touchmove', this.onTouchMove, false);
-	layer.removeEventListener('touchend', this.onTouchEnd, false);
-	layer.removeEventListener('touchcancel', this.onTouchCancel, false);
-};
-
-
-/**
- * Check whether FastClick is needed.
- *
- * @param {Element} layer The layer to listen on
- */
-FastClick.notNeeded = function(layer) {
-	'use strict';
-	var metaViewport;
-
-	// Devices that don't support touch don't need FastClick
-	if (typeof window.ontouchstart === 'undefined') {
-		return true;
-	}
-
-	if ((/Chrome\/[0-9]+/).test(navigator.userAgent)) {
-
-		// Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
-		if (FastClick.prototype.deviceIsAndroid) {
-			metaViewport = document.querySelector('meta[name=viewport]');
-			if (metaViewport && metaViewport.content.indexOf('user-scalable=no') !== -1) {
-				return true;
-			}
-
-		// Chrome desktop doesn't need FastClick (issue #15)
-		} else {
-			return true;
-		}
-	}
-
-	// IE10 with -ms-touch-action: none, which disables double-tap-to-zoom (issue #97)
-	if (layer.style.msTouchAction === 'none') {
-		return true;
-	}
-
-	return false;
-};
-
-
-/**
- * Factory method for creating a FastClick object
- *
- * @param {Element} layer The layer to listen on
- */
-FastClick.attach = function(layer) {
-	'use strict';
-	return new FastClick(layer);
-};
-
-
-if (typeof define !== 'undefined' && define.amd) {
-
-	// AMD. Register as an anonymous module.
-	define(function() {
-		'use strict';
-		return FastClick;
-	});
-} else if (typeof module !== 'undefined' && module.exports) {
-	module.exports = FastClick.attach;
-	module.exports.FastClick = FastClick;
-} else {
-	window.FastClick = FastClick;
-}
+  // Based off Lo-Dash's excellent UMD wrapper (slightly modified) - https://github.com/bestiejs/lodash/blob/master/lodash.js#L5515-L5543
+  // some AMD build optimizers, like r.js, check for specific condition patterns like the following:
+  if(typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
+    // define as an anonymous module
+    define(function() {
+      return Hammer;
+    });
+    // check for `exports` after `define` in case a build optimizer adds an `exports` object
+  }
+  else if(typeof module === 'object' && typeof module.exports === 'object') {
+    module.exports = Hammer;
+  }
+  else {
+    window.Hammer = Hammer;
+  }
+})(this);
 /*! iScroll v5.0.6 ~ (c) 2008-2013 Matteo Spinelli ~ http://cubiq.org/license */
 var IScroll = (function (window, document, Math) {
 var rAF = window.requestAnimationFrame	||
@@ -4210,12 +4797,3 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
 	});
 
 })();
-window.addEventListener('load', function() {
-	new FastClick(document.body);
-
-	setTimeout(function() {
-		// Hide the address bar!
-		window.scrollTo(0, 1);
-	}, 0);
-
-}, false);

@@ -284,6 +284,10 @@ limitations under the License.
 						inPage.attr("class", "onsen_navigator-pager right");
 						element[0].offsetWidth;
 						inPage.attr("class", "onsen_navigator-pager transition center");
+						// outPage.bind('webkitTransitionEnd', function transitionEnded(e) {
+						// 	outPage.remove();
+						// 	outPage.unbind(transitionEnded);
+						// });
 						outPage.attr("class", "onsen_navigator-pager transition left");
 					},
 
