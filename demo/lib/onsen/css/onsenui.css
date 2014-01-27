@@ -1314,7 +1314,16 @@ limitations under the License.
 
 */
 
+.onsen_tab-bar__label {
+	line-height: 1rem;
+	margin-top: -16px;
+	font-size: small;
+}
 
+.onsen_tab-bar__label.big {
+	margin-top: 0;
+	font-size: large;
+}
 
 
 .footer {

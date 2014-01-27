@@ -28,7 +28,9 @@ limitations under the License.
 			require: '^?onsTabbar',
 			scope: {
 				page: '@',
-				active: '@'
+				active: '@',
+				icon: '@',
+				label: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
 			link: function(scope, element, attrs, monacaTabbarController) {
