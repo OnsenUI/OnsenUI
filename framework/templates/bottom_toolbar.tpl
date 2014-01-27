@@ -1,0 +1,1 @@
+<div class="onsen_bottom-toolbar" ng-transclude></div>

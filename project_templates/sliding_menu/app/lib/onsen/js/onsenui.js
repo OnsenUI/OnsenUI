@@ -1,5 +1,10 @@
 /*! onsenui - v0.7.0 - 2014-01-27 */
-angular.module('templates-main', ['templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
+angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
+
+angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/bottom_toolbar.tpl",
+    "<div class=\"onsen_bottom-toolbar\" ng-transclude></div>");
+}]);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/button.tpl",
@@ -84,6 +89,11 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "</div>");
 }]);
 
+angular.module("templates/page.tpl", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/page.tpl",
+    "<div class=\"page\" ng-transclude></div>");
+}]);
+
 angular.module("templates/radio_button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/radio_button.tpl",
     "<label class=\"topcoat-radio-button\">\n" +
@@ -130,6 +140,7 @@ angular.module("templates/select.tpl", []).run(["$templateCache", function($temp
 angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/sliding_menu.tpl",
     "<div class=\"sliding-menu full-screen\">\n" +
+    "	<div class=\"onsen_sliding-menu-black-mask\"></div>\n" +
     "	<div class=\"behind full-screen\">\n" +
     "		<ng-include ng-cloak src=\"pages.behind\">\n" +
     "		</ng-include>\n" +
@@ -203,6 +214,40 @@ limitations under the License.
 		return CONSTANTS;
 	});
 })();
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function(){
+	'use strict';
+
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+	directives.directive('onsBottomToolbar', function(ONSEN_CONSTANTS, $timeout) {
+		return {
+			restrict: 'E',
+			replace: true,
+			transclude: true,
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/bottom_toolbar.tpl'
+		};
+	});
+})();
+
 
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
@@ -445,45 +490,6 @@ limitations under the License.
 
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsIfPlatform', function(ONSEN_CONSTANTS) {
-		return {
-			restrict: 'A',
-			replace: false,			
-			transclude: true,
-			scope: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_platform.tpl',
-			link: function($scope, element, attrs){
-
-				function onDeviceReady(){
-					$scope.$apply(function(){
-						$scope.platform = window.device.platform;
-					});
-				}
-
-				document.addEventListener("deviceready", onDeviceReady, false);				
-
-				attrs.$observe('onsIfPlatform', function(userPlatform){
-					if(userPlatform){
-						$scope.userPlatform = userPlatform;
-					}
-				});				
-
-				setTimeout(function(){
-					$scope.$apply(function(){
-						$scope.platform = window.device.platform;
-					});
-				}, 1000);
-			}
-		};
-	});
-})();
-
-
-(function(){
-	'use strict';
-
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
 	directives.directive('onsIfOrientation', function(ONSEN_CONSTANTS) {
 		return {
 			restrict: 'A',
@@ -522,6 +528,45 @@ limitations under the License.
 						$scope.userOrientation = userOrientation;
 					}
 				});				
+			}
+		};
+	});
+})();
+
+
+(function(){
+	'use strict';
+
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+	directives.directive('onsIfPlatform', function(ONSEN_CONSTANTS) {
+		return {
+			restrict: 'A',
+			replace: false,			
+			transclude: true,
+			scope: true,
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_platform.tpl',
+			link: function($scope, element, attrs){
+
+				function onDeviceReady(){
+					$scope.$apply(function(){
+						$scope.platform = window.device.platform;
+					});
+				}
+
+				document.addEventListener("deviceready", onDeviceReady, false);				
+
+				attrs.$observe('onsIfPlatform', function(userPlatform){
+					if(userPlatform){
+						$scope.userPlatform = userPlatform;
+					}
+				});				
+
+				setTimeout(function(){
+					$scope.$apply(function(){
+						$scope.platform = window.device.platform;
+					});
+				}, 1000);
 			}
 		};
 	});
@@ -1180,6 +1225,40 @@ limitations under the License.
 		}
 	});
 })();
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function(){
+	'use strict';
+
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+	directives.directive('onsPage', function(ONSEN_CONSTANTS, $timeout) {
+		return {
+			restrict: 'E',
+			replace: true,
+			transclude: true,
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/page.tpl'
+		};
+	});
+})();
+
+
 (function(){
 	'use strict';
 
@@ -1694,7 +1773,9 @@ limitations under the License.
 					translate: function(x) {
 						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
 						var behind = (x - this.MAX) / this.MAX * 10;
+						var opacity = 1 + behind / 100;
 						this.behindPage.style.webkitTransform = 'translate3d(' + behind + '%, 0, 0)';
+						this.behindPage.style.opacity = opacity;
 						this.currentX = x;
 					}
 				});
