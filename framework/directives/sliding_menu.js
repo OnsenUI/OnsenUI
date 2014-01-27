@@ -121,7 +121,9 @@ limitations under the License.
 					translate: function(x) {
 						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
 						var behind = (x - this.MAX) / this.MAX * 10;
+						var opacity = 1 + behind / 100;
 						this.behindPage.style.webkitTransform = 'translate3d(' + behind + '%, 0, 0)';
+						this.behindPage.style.opacity = opacity;
 						this.currentX = x;
 					}
 				});
