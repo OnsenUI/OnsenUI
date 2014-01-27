@@ -1,9 +1,9 @@
 /*! onsenui - v0.7.0 - 2014-01-27 */
-angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
+angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/bottom_toolbar.tpl",
-    "<div class=\"onsen_bottom-toolbar\" ng-transclude></div>");
+    "<div class=\"onsen_bottom-toolbar topcoat-navigation-bar\" ng-transclude></div>");
 }]);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
@@ -152,6 +152,23 @@ angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function
     "	</div>\n" +
     "\n" +
     "	<div class=\"above full-screen\">\n" +
+    "		<ng-include src=\"pages.above\">\n" +
+    "		</ng-include>\n" +
+    "	</div>\n" +
+    "	\n" +
+    "</div>");
+}]);
+
+angular.module("templates/split_view.tpl", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("templates/split_view.tpl",
+    "<div class=\"sliding-menu full-screen\">\n" +
+    "	<div class=\"onsen_sliding-menu-black-mask\"></div>\n" +
+    "	<div class=\"secondary full-screen\">\n" +
+    "		<ng-include ng-cloak src=\"pages.behind\">\n" +
+    "		</ng-include>\n" +
+    "	</div>\n" +
+    "\n" +
+    "	<div class=\"main full-screen\">\n" +
     "		<ng-include src=\"pages.above\">\n" +
     "		</ng-include>\n" +
     "	</div>\n" +
@@ -1851,6 +1868,283 @@ limitations under the License.
 				scope.pages = {
 					behind: scope.behindPage,
 					above: scope.abovePage
+				};
+				scope.ons = scope.ons || {};
+				scope.ons.slidingMenu = scope.ons.slidingMenu || {};
+
+				scope.ons.slidingMenu.openMenu = function() {
+					swiper.open();
+				};
+
+				scope.ons.slidingMenu.closeMenu = function() {
+					swiper.close();
+				};
+
+				scope.ons.slidingMenu.toggleMenu = function() {
+					swiper.toggle();
+				};
+
+				scope.ons.slidingMenu.setAbovePage = function(page) {
+					if (page) {
+						scope.pages.above = page;
+					} else {
+						throw new Error('cannot set undefined page');
+					}
+				};
+
+				scope.ons.slidingMenu.setBehindPage = function(page) {
+					if (page) {
+						scope.pages.behind = page;
+					} else {
+						throw new Error('cannot set undefined page');
+					}
+				};
+
+				scope.ons.screen = scope.ons.screen || {};
+				scope.ons.screen.presentPage = function(page) {
+					callParent(scope, 'ons.screen.presentPage', page);
+				};
+
+				scope.ons.screen.dismissPage = function() {
+					callParent(scope, 'ons.screen.dismissPage');
+				};
+
+				function callParent(scope, functionName, param) {
+					if (!scope.$parent) {
+						return;
+					}
+
+					var parentFunction = stringToFunction(scope.$parent, functionName);
+					if (parentFunction) {
+						parentFunction.call(scope, param);
+					} else {
+						callParent(scope.$parent, functionName, param);
+					}
+
+				}
+
+				function stringToFunction(root, str) {
+					var arr = str.split(".");
+
+					var fn = root;
+					for (var i = 0, len = arr.length; i < len; i++) {
+						fn = fn[arr[i]];
+					}
+
+					if (typeof fn !== "function") {
+						return false;
+					}
+
+					return fn;
+				}
+			}
+		};
+	});
+})();
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function() {
+	'use strict';
+	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+	directives.directive('onsSplitView', function(ONSEN_CONSTANTS) {
+		return {
+			restrict: 'E',
+			replace: false,
+			transclude: false,
+			scope: {
+				secondaryPage: '@',
+				mainPage: '@',
+				collapseWidth: '@',
+				mainPageWidth: '@'
+			},
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
+			link: function(scope, element, attrs) {
+
+				var Swiper = Class.extend({
+					init: function(element) {
+						this.$el = element;
+						this.el = element[0];
+						this.VERTICAL_THRESHOLD = 20;
+						this.HORIZONTAL_THRESHOLD = 20;
+						this.behindPage = element[0].querySelector('.secondary');
+						this.$behindPage = angular.element(this.behindPage);
+						this.abovePage = element[0].querySelector('.main');
+						this.$abovePage = angular.element(this.abovePage);
+						this.previousX = 0;
+						this.MAX = this.abovePage.clientWidth * 0.7;
+						this.currentX = 0;
+						this.startX = 0;
+
+						this.hammertime = new Hammer(this.el);
+						this.boundHammerEvent = this.handleEvent.bind(this);
+						this.bindEvents();						
+
+						window.addEventListener('resize', this.onResize.bind(this));
+						setTimeout(this.checkWindowSize.bind(this), 0);
+						
+					},
+
+					onResize: function(){
+						console.log('on resize');
+						this.checkWindowSize();
+					},
+
+					checkWindowSize: function(){
+						this.windowWidth = window.innerWidth;						
+						console.log('window', this.windowWidth, scope.collapseWidth);
+						if(this.windowWidth < scope.collapseWidth){
+							scope.$apply(function(){
+								scope.shouldCollapse = true;								
+								console.log('should collpase');
+								this.onShouldCollapseChanged();
+							}.bind(this));				
+						}else{
+							scope.$apply(function(){
+								scope.shouldCollapse = false;
+								console.log('should not collapse');
+								this.onShouldCollapseChanged();
+							}.bind(this));				
+						}		
+						this.MAX = this.abovePage.clientWidth * 0.7;				
+					},
+
+					setSize: function(){
+						var behindSize = 100 - scope.mainPageWidth;
+						this.behindPage.style.width = behindSize + '%';
+						this.abovePage.style.width = scope.mainPageWidth + '%';
+						var translate = behindSize * this.windowWidth / 100;
+						console.log('translate', translate);
+						this.translate2( translate );
+					},
+
+					onShouldCollapseChanged: function(){
+						if(scope.shouldCollapse){
+							// this.close();
+							this.behindPage.style.width = '100%';
+							this.abovePage.style.width =  '100%';
+							this.activateHammer();
+							this.close();
+						}else{
+							this.setSize();							
+							this.deactivateHammer();
+							// this.open();
+						}
+					},
+
+					activateHammer: function(){
+						console.log('activate hammer');
+						this.hammertime.on("dragleft dragright swipeleft swiperight release", this.boundHammerEvent);
+					},
+
+					deactivateHammer: function(){
+						console.log('deactivate hammer');
+						this.hammertime.off("dragleft dragright swipeleft swiperight release", this.boundHammerEvent);
+					},
+
+					bindEvents: function() {
+						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));
+					},
+
+					handleEvent: function(ev) {
+						switch (ev.type) {
+
+							case 'dragleft':
+							case 'dragright':
+								var deltaX = ev.gesture.deltaX;
+								this.currentX = this.startX + deltaX;
+								if (this.currentX >= 0) {
+									this.translate(this.currentX);
+								}
+								break;
+
+							case 'swipeleft':
+								this.close();
+								break;
+
+							case 'swiperight':
+								this.open();
+								break;
+
+							case 'release':
+								if (this.currentX > this.MAX / 2) {
+									this.open();
+								} else {
+									this.close();
+								}
+								break;
+						}
+					},
+
+					onTransitionEnd: function() {
+						console.log('transition ended');
+						this.$abovePage.removeClass('transition');
+						this.$behindPage.removeClass('transition');
+					},
+
+					close: function() {
+						this.startX = 0;
+						if (this.currentX !== 0) {
+							this.$abovePage.addClass('transition');
+							this.$behindPage.addClass('transition');
+							this.translate(0);
+						}
+					},
+
+					open: function() {
+						this.startX = this.MAX;
+						if (this.currentX != this.MAX) {
+							this.$abovePage.addClass('transition');
+							this.$behindPage.addClass('transition');
+							this.translate(this.MAX);
+						}
+					},
+
+					toggle: function() {
+						if (this.startX === 0) {
+							this.open();
+						} else {
+							this.close();
+						}
+					},
+
+					translate: function(x) {
+						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
+						var behind = (x - this.MAX) / this.MAX * 10;
+						var opacity = 1 + behind / 100;
+						this.behindPage.style.webkitTransform = 'translate3d(' + behind + '%, 0, 0)';
+						this.behindPage.style.opacity = opacity;
+						this.currentX = x;
+					},
+
+					translate2: function(x) {
+						this.behindPage.style.webkitTransform = 'translate3d(0, 0, 0)';
+						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';						
+						this.currentX = x;
+					}
+				});
+
+				var swiper = new Swiper(element);
+
+				scope.pages = {
+					behind: scope.secondaryPage,
+					above: scope.mainPage
 				};
 				scope.ons = scope.ons || {};
 				scope.ons.slidingMenu = scope.ons.slidingMenu || {};
