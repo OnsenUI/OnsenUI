@@ -1986,11 +1986,13 @@ limitations under the License.
 			scope: {
 				secondaryPage: '@',
 				mainPage: '@',
-				collapseWidth: '@',
+				collapse: '@',
 				mainPageWidth: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
 			link: function(scope, element, attrs) {
+				var SPLIT_MODE = 0;
+				var COLLAPSE_MODE = 1;
 
 				var Swiper = Class.extend({
 					init: function(element) {
@@ -2006,70 +2008,110 @@ limitations under the License.
 						this.MAX = this.abovePage.clientWidth * 0.7;
 						this.currentX = 0;
 						this.startX = 0;
+						this.mode = SPLIT_MODE;
 
 						this.hammertime = new Hammer(this.el);
 						this.boundHammerEvent = this.handleEvent.bind(this);
-						this.bindEvents();						
+						this.bindEvents();
 
+						window.addEventListener("orientationchange", this.onOrientationChange.bind(this));
 						window.addEventListener('resize', this.onResize.bind(this));
-						setTimeout(this.checkWindowSize.bind(this), 0);
 						
+						this.considerChangingCollapse();
 					},
 
-					onResize: function(){
-						console.log('on resize');
-						this.checkWindowSize();
+					onOrientationChange: function(){
+						console.log('on orientation change');
+						this.considerChangingCollapse();
 					},
 
-					checkWindowSize: function(){
-						this.windowWidth = window.innerWidth;						
-						console.log('window', this.windowWidth, scope.collapseWidth);
-						if(this.windowWidth < scope.collapseWidth){
-							scope.$apply(function(){
-								scope.shouldCollapse = true;								
-								console.log('should collpase');
-								this.onShouldCollapseChanged();
-							}.bind(this));				
-						}else{
-							scope.$apply(function(){
-								scope.shouldCollapse = false;
-								console.log('should not collapse');
-								this.onShouldCollapseChanged();
-							}.bind(this));				
-						}		
-						this.MAX = this.abovePage.clientWidth * 0.7;				
+					onResize: function() {												
+						this.considerChangingCollapse();
+						this.MAX = this.abovePage.clientWidth * 0.7;
 					},
 
-					setSize: function(){
+					considerChangingCollapse: function(){
+						if (this.shouldCollapse()) {
+							this.activateCollapseMode();
+						} else {
+							this.deactivateCollapseMode();
+						}
+					},
+
+					shouldCollapse: function() {
+						var orientation = window.orientation;
+
+						switch (scope.collapse) {
+							case undefined:
+							case "none":
+								return false;
+
+							case "portrait":
+								if (orientation == 180 || orientation == 0) {
+									return true;
+								} else {
+									return false;
+								}
+								break;
+
+							case "landscape":
+								if (orientation == 90 || orientation == -90) {								
+									return true;
+								} else {
+									return false;
+								}
+								break;
+							
+							default:
+								// by width
+								if (isNumber(scope.collapse)) {									
+									console.log('window', window.innerWidth, scope.collapse);
+									if (window.innerWidth < scope.collapse) {
+										return true;
+									} else {
+										return false;
+									}
+								} else {
+									// other cases
+									return false;
+								}
+								break;
+						}
+
+					},
+
+					setSize: function() {
 						var behindSize = 100 - scope.mainPageWidth;
 						this.behindPage.style.width = behindSize + '%';
 						this.behindPage.style.opacity = 1;
 						this.abovePage.style.width = scope.mainPageWidth + '%';
-						var translate = behindSize * this.windowWidth / 100;
+						var translate = behindSize * window.innerWidth / 100;
 						console.log('translate', translate);
-						this.translate2( translate );
+						this.translate2(translate);
 					},
 
-					onShouldCollapseChanged: function(){
-						if(scope.shouldCollapse){
-							// this.close();
-							this.behindPage.style.width = '100%';
-							this.abovePage.style.width =  '100%';
-							this.activateHammer();
-							this.close();
-						}else{
-							this.setSize();							
-							this.deactivateHammer();
-							// this.open();
-						}
+					activateCollapseMode: function() {
+						console.log('activate collapse mode');
+						this.behindPage.style.width = '100%';
+						this.abovePage.style.width = '100%';						
+						this.mode = COLLAPSE_MODE;
+						this.activateHammer();
+						this.translate(0);						
 					},
 
-					activateHammer: function(){
+					deactivateCollapseMode: function() {
+						console.log('deactivate collapse mode');
+						this.setSize();
+						this.deactivateHammer();
+						this.mode = SPLIT_MODE;
+					},
+
+					activateHammer: function() {
 						console.log('activate hammer');
 						this.hammertime.on("dragleft dragright swipeleft swiperight release", this.boundHammerEvent);
 					},
 
-					deactivateHammer: function(){
+					deactivateHammer: function() {
 						console.log('deactivate hammer');
 						this.hammertime.off("dragleft dragright swipeleft swiperight release", this.boundHammerEvent);
 					},
@@ -2115,7 +2157,7 @@ limitations under the License.
 					},
 
 					close: function() {
-						if(!shouldCollapse){
+						if (this.mode === SPLIT_MODE) {
 							return;
 						}
 						this.startX = 0;
@@ -2127,7 +2169,7 @@ limitations under the License.
 					},
 
 					open: function() {
-						if(!shouldCollapse){
+						if (this.mode === SPLIT_MODE) {
 							return;
 						}
 						this.startX = this.MAX;
@@ -2157,10 +2199,14 @@ limitations under the License.
 
 					translate2: function(x) {
 						this.behindPage.style.webkitTransform = 'translate3d(0, 0, 0)';
-						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';						
+						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
 						this.currentX = x;
 					}
 				});
+
+				function isNumber(n) {
+					return !isNaN(parseFloat(n)) && isFinite(n);
+				}
 
 				var swiper = new Swiper(element);
 
