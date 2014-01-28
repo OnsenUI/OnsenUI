@@ -26,8 +26,24 @@ ons-navigator {
 }
 
 .navigator-container {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
     display: -webkit-flex;
-    -webkit-flex-direction: column;
+    display: flex;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    flex-direction: column;    
+    -webkit-box-pack: start;
+    -moz-box-pack: start;    
+    justify-content: flex-start;
+    -webkit-align-content: flex-start;
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
+    -webkit-box-align: stretch;    
+    align-items: stretch;
     width: 100%;
     height: 100%;
 }
@@ -37,8 +53,14 @@ ons-navigator {
 }
 
 .navigator-content {
+    -webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;    
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;    
     flex: 1 0 auto;
-    overflow: hidden;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
 }
 
 
