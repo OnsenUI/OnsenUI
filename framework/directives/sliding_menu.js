@@ -51,12 +51,14 @@ limitations under the License.
 					},
 
 					bindEvents: function() {
-						this.hammertime = new Hammer(this.el);
+						this.hammertime = new Hammer(this.el, {prevent_default: true});  // prevent default fix for android 4.4
 						this.hammertime.on("dragleft dragright swipeleft swiperight release", this.handleEvent.bind(this));
 						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));
 					},
 
+
 					handleEvent: function(ev) {
+						console.log(ev.type);
 						switch (ev.type) {
 
 							case 'dragleft':
