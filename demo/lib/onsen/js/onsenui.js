@@ -560,7 +560,7 @@ limitations under the License.
 })();
 
 
-(function(){
+(function() {
 	'use strict';
 
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
@@ -568,37 +568,42 @@ limitations under the License.
 	directives.directive('onsIfPlatform', function(ONSEN_CONSTANTS) {
 		return {
 			restrict: 'A',
-			replace: false,			
+			replace: false,
 			transclude: true,
 			scope: true,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_platform.tpl',
-			link: function($scope, element, attrs){
+			link: function($scope, element, attrs) {
 
-				function onDeviceReady(){
-					$scope.$apply(function(){
-						$scope.platform = window.device.platform;
-					});
+				var platform;
+				if (navigator.userAgent.match(/Android/i)) {
+					platform = "android";
 				}
 
-				document.addEventListener("deviceready", onDeviceReady, false);				
 
-				attrs.$observe('onsIfPlatform', function(userPlatform){
-					if(userPlatform){
-						$scope.userPlatform = userPlatform;
+				if (navigator.userAgent.match(/BlackBerry/i)) {
+					platform = "blackberry";
+				}
+
+				if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+					platform = "ios";
+				}
+
+				if (navigator.userAgent.match(/IEMobile/i)) {
+					platform = "window";
+				}
+
+				$scope.platform = platform;				
+
+
+				attrs.$observe('onsIfPlatform', function(userPlatform) {
+					if (userPlatform) {
+						$scope.userPlatform = userPlatform.toLowerCase();
 					}
 				});				
-
-				setTimeout(function(){
-					$scope.$apply(function(){
-						$scope.platform = window.device.platform;
-					});
-				}, 1000);
 			}
 		};
 	});
 })();
-
-
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
