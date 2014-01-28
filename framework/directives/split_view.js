@@ -263,21 +263,21 @@ limitations under the License.
 					above: scope.mainPage
 				};
 				scope.ons = scope.ons || {};
-				scope.ons.slidingMenu = scope.ons.slidingMenu || {};
+				scope.ons.splitView = scope.ons.splitView || {};
 
-				scope.ons.slidingMenu.openMenu = function() {
+				scope.ons.splitView.open = function() {
 					swiper.open();
 				};
 
-				scope.ons.slidingMenu.closeMenu = function() {
+				scope.ons.splitView.close = function() {
 					swiper.close();
 				};
 
-				scope.ons.slidingMenu.toggleMenu = function() {
+				scope.ons.splitView.toggle = function() {
 					swiper.toggle();
 				};
 
-				scope.ons.slidingMenu.setAbovePage = function(page) {
+				scope.ons.splitView.setMainPage = function(page) {
 					if (page) {
 						scope.pages.above = page;
 					} else {
@@ -285,7 +285,7 @@ limitations under the License.
 					}
 				};
 
-				scope.ons.slidingMenu.setBehindPage = function(page) {
+				scope.ons.splitView.setSecondaryPage = function(page) {
 					if (page) {
 						scope.pages.behind = page;
 					} else {
