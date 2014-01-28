@@ -1083,8 +1083,26 @@ ons-navigator {
 }
 
 .navigator-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: -webkit-flex;
+    display: flex;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
     -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;    
+    -webkit-box-pack: start;    
+    -webkit-justify-content: flex-start;    
+    -ms-flex-pack: start;    
+    justify-content: flex-start;
+    -webkit-align-content: flex-start;
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
+    -webkit-box-align: stretch;    
+    -webkit-align-items: stretch;    
+    -ms-flex-align: stretch;    
+    align-items: stretch;
     width: 100%;
     height: 100%;
 }
@@ -1097,11 +1115,15 @@ ons-navigator {
 }
 
 .navigator-content {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 0 auto;
-    -ms-flex: 1 0 auto;
+    -webkit-box-ordinal-group: 1;
+    -moz-box-ordinal-group: 1;    
+    -webkit-box-flex: 1;    
+    -webkit-flex: 1 0 auto;    
+    -ms-flex: 1 0 auto;    
     flex: 1 0 auto;
-    overflow: hidden;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
 }
 
 
@@ -1285,7 +1307,7 @@ limitations under the License.
 }
 
 .above {
-    box-shadow: 0 0 20px 4px #000;
+    box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 .full-screen {

@@ -144,17 +144,16 @@ angular.module("templates/select.tpl", []).run(["$templateCache", function($temp
 angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/sliding_menu.tpl",
     "<div class=\"sliding-menu full-screen\">\n" +
-    "	<div class=\"onsen_sliding-menu-black-mask\"></div>\n" +
+    "	<div ng-cloak class=\"onsen_sliding-menu-black-mask\"></div>\n" +
     "	<div class=\"behind full-screen\">\n" +
-    "		<ng-include ng-cloak src=\"pages.behind\">\n" +
+    "		<ng-include class=\"full-screen\" ng-cloak src=\"pages.behind\">\n" +
     "		</ng-include>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"above full-screen\">\n" +
-    "		<ng-include src=\"pages.above\">\n" +
+    "		<ng-include class=\"full-screen\" src=\"pages.above\">\n" +
     "		</ng-include>\n" +
     "	</div>\n" +
-    "	\n" +
     "</div>");
 }]);
 
