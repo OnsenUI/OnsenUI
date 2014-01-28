@@ -1348,6 +1348,10 @@ limitations under the License.
     
 }
 
+.onsen_split-view__shadow {
+	box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+}
+
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 

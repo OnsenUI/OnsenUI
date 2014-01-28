@@ -52,7 +52,7 @@ limitations under the License.
 						this.startX = 0;
 						this.mode = SPLIT_MODE;
 
-						this.hammertime = new Hammer(this.el);
+						this.hammertime = new Hammer(this.el, {prevent_default: true});  // prevent default fix for android 4.4
 						this.boundHammerEvent = this.handleEvent.bind(this);
 						this.bindEvents();
 
@@ -63,11 +63,10 @@ limitations under the License.
 					},
 
 					onOrientationChange: function(){
-						console.log('on orientation change');
 						this.considerChangingCollapse();
 					},
 
-					onResize: function() {												
+					onResize: function() {				
 						this.considerChangingCollapse();
 						this.MAX = this.abovePage.clientWidth * 0.7;
 					},
@@ -138,7 +137,11 @@ limitations under the License.
 						this.abovePage.style.width = '100%';						
 						this.mode = COLLAPSE_MODE;
 						this.activateHammer();
-						this.translate(0);						
+						this.translate(0);	
+
+						if(Modernizr.boxshadow){
+							this.$abovePage.addClass('onsen_split-view__shadow');
+						}					
 					},
 
 					deactivateCollapseMode: function() {
@@ -146,6 +149,9 @@ limitations under the License.
 						this.setSize();
 						this.deactivateHammer();
 						this.mode = SPLIT_MODE;
+						if(Modernizr.boxshadow){
+							this.$abovePage.removeClass('onsen_split-view__shadow');
+						}	
 					},
 
 					activateHammer: function() {
@@ -162,7 +168,7 @@ limitations under the License.
 						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));
 					},
 
-					handleEvent: function(ev) {
+					handleEvent: function(ev) {						
 						switch (ev.type) {
 
 							case 'dragleft':
