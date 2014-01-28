@@ -68,6 +68,22 @@ limitations under the License.
 							}
 							scope.ons.navigator.pushPage(scope.page, options);
 						}
+						this.checkiOS7();
+					},
+
+					checkiOS7: function(){
+						if(window.device && window.device.platform){
+							if(window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7){
+								this.adjustForiOS7();
+							}
+						}else{
+							document.addEventListener("deviceready", this.checkiOS7.bind(this), false);
+						}
+					},
+
+					adjustForiOS7 : function(){
+             			toolbar[0].style.height = toolbar[0].clientHeight + 20 + 'px';
+              			toolbar[0].style.paddingTop = '20px';
 					},
 
 					animateBackLabelIn: function(inNavigatorItem, outNavigatorItem){

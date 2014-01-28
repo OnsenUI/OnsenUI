@@ -81,7 +81,7 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "		</div>		\n" +
     "		<div class=\"onsen_navigator__right-button topcoat-navigation-bar__item topcoat-icon-button--quiet\"></div>\n" +
     "	</div>	\n" +
-    "	<div class=\"relative max navigator-content\">\n" +
+    "	<div class=\"relative navigator-content\">\n" +
     "		\n" +
     "	</div>    \n" +
     "	\n" +

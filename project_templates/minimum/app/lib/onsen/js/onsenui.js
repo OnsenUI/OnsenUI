@@ -82,7 +82,7 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "		</div>		\n" +
     "		<div class=\"onsen_navigator__right-button topcoat-navigation-bar__item topcoat-icon-button--quiet\"></div>\n" +
     "	</div>	\n" +
-    "	<div class=\"relative max navigator-content\">\n" +
+    "	<div class=\"relative navigator-content\">\n" +
     "		\n" +
     "	</div>    \n" +
     "	\n" +
@@ -746,6 +746,22 @@ limitations under the License.
 							}
 							scope.ons.navigator.pushPage(scope.page, options);
 						}
+						this.checkiOS7();
+					},
+
+					checkiOS7: function(){
+						if(window.device && window.device.platform){
+							if(window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7){
+								this.adjustForiOS7();
+							}
+						}else{
+							document.addEventListener("deviceready", this.checkiOS7.bind(this), false);
+						}
+					},
+
+					adjustForiOS7 : function(){
+             			toolbar[0].style.height = toolbar[0].clientHeight + 20 + 'px';
+              			toolbar[0].style.paddingTop = '20px';
 					},
 
 					animateBackLabelIn: function(inNavigatorItem, outNavigatorItem){

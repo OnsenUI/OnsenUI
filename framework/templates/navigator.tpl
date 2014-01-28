@@ -7,7 +7,7 @@
 		</div>		
 		<div class="onsen_navigator__right-button topcoat-navigation-bar__item topcoat-icon-button--quiet"></div>
 	</div>	
-	<div class="relative max navigator-content">
+	<div class="relative navigator-content">
 		
 	</div>    
 	
