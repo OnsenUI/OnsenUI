@@ -74,6 +74,11 @@ limitations under the License.
 							}).success(function(data, status, headers, config) {
 								var page = angular.element('<div></div>');
 								page.addClass('screen-page');
+
+								var blackMask = angular.element('<div></div>');
+								blackMask.addClass('onsen_navigator-black-mask');
+								page.append(blackMask);
+
 								var templateHTML = angular.element(data);
 								page.append(templateHTML);
 								var pager = $compile(page)(scope);

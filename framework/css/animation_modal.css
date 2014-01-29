@@ -38,11 +38,18 @@ ons-screen {
 }
 
 .screen-page.center {
-    transform: translate3d(0, 0, 0);    
+    transform: translate3d(0, 0, 0);   
+    box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.1);
 }
 
+
 .screen-page.unmodal {
-    transform: translate3d(0, 100%, 0) !important;
+    transform: translate3d(0, 100%, 0) !important;    
+    box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.2);    
+}
+
+.screen-page.unmodal .page {
+    opacity: 1;
 }
 
 .screen-page.transition {
@@ -52,6 +59,9 @@ ons-screen {
 
 .screen-page.modal-behind {    
     transform-style: preserve-3d;  
-    transform: translate3d(0, 0, 0);
-    transform-origin: 100% 100%;
+    transform: translate3d(0, -10%, 0);    
+}
+
+.screen-page.modal-behind .page{
+  opacity: 0.9;
 }

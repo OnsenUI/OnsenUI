@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-01-28 */
+/*! onsenui - v0.7.0 - 2014-01-29 */
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
@@ -244,12 +244,19 @@ ons-screen {
 
 .screen-page.center {
     -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);    
+    transform: translate3d(0, 0, 0);   
+    box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.1);
 }
+
 
 .screen-page.unmodal {
     -webkit-transform: translate3d(0, 100%, 0) !important;
-    transform: translate3d(0, 100%, 0) !important;
+    transform: translate3d(0, 100%, 0) !important;    
+    box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.2);    
+}
+
+.screen-page.unmodal .page {
+    opacity: 1;
 }
 
 .screen-page.transition {
@@ -262,10 +269,12 @@ ons-screen {
 .screen-page.modal-behind {    
     -webkit-transform-style: preserve-3d;    
     transform-style: preserve-3d;  
-    -webkit-transform: translate3d(0, 0, 0);  
-    transform: translate3d(0, 0, 0);
-    -webkit-transform-origin: 100% 100%;
-    transform-origin: 100% 100%;
+    -webkit-transform: translate3d(0, -10%, 0);  
+    transform: translate3d(0, -10%, 0);    
+}
+
+.screen-page.modal-behind .page{
+  opacity: 0.9;
 }
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
