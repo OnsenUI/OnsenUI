@@ -12,8 +12,7 @@
 				icon: '@',
 				size: '@',
 				rotate: '@',
-				flip: '@',
-				inverse: '@'
+				flip: '@'				
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/icon.tpl',
 			link: function($scope, element, attrs){
