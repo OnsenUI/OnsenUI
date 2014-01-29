@@ -58,20 +58,20 @@ limitations under the License.
 
 						window.addEventListener("orientationchange", this.onOrientationChange.bind(this));
 						window.addEventListener('resize', this.onResize.bind(this));
-						
+
 						this.considerChangingCollapse();
 					},
 
-					onOrientationChange: function(){
+					onOrientationChange: function() {
 						this.considerChangingCollapse();
 					},
 
-					onResize: function() {				
+					onResize: function() {
 						this.considerChangingCollapse();
 						this.MAX = this.abovePage.clientWidth * 0.7;
 					},
 
-					considerChangingCollapse: function(){
+					considerChangingCollapse: function() {
 						if (this.shouldCollapse()) {
 							this.activateCollapseMode();
 						} else {
@@ -96,25 +96,41 @@ limitations under the License.
 								break;
 
 							case "landscape":
-								if (orientation == 90 || orientation == -90) {								
+								if (orientation == 90 || orientation == -90) {
 									return true;
 								} else {
 									return false;
 								}
 								break;
-							
+
 							default:
 								// by width
-								if (isNumber(scope.collapse)) {									
-									if (window.innerWidth < scope.collapse) {
-										return true;
-									} else {
-										return false;
-									}
-								} else {
-									// other cases
+								if (scope.collapse === undefined) {
 									return false;
+								} else {
+									var widthToken;
+									if (scope.collapse.indexOf('width') >= 0) {
+										var tokens = scope.collapse.split(' ');
+										widthToken = tokens[tokens.length - 1];
+									}else{
+										widthToken = scope.collapse;
+									}
+
+									if (widthToken.indexOf('px') > 0) {
+										widthToken = widthToken.substr(0, widthToken.length - 2);
+									}
+
+									if (isNumber(widthToken)) {
+										if (window.innerWidth < widthToken) {
+											return true;
+										} else {
+											return false;
+										}
+									}
+
+									return false;									
 								}
+
 								break;
 						}
 
@@ -131,23 +147,23 @@ limitations under the License.
 
 					activateCollapseMode: function() {
 						this.behindPage.style.width = '100%';
-						this.abovePage.style.width = '100%';						
+						this.abovePage.style.width = '100%';
 						this.mode = COLLAPSE_MODE;
 						this.activateHammer();
-						this.translate(0);	
+						this.translate(0);
 
-						if(Modernizr.boxshadow){
+						if (Modernizr.boxshadow) {
 							this.$abovePage.addClass('onsen_split-view__shadow');
-						}					
+						}
 					},
 
 					deactivateCollapseMode: function() {
 						this.setSize();
 						this.deactivateHammer();
 						this.mode = SPLIT_MODE;
-						if(Modernizr.boxshadow){
+						if (Modernizr.boxshadow) {
 							this.$abovePage.removeClass('onsen_split-view__shadow');
-						}	
+						}
 					},
 
 					activateHammer: function() {
@@ -162,12 +178,12 @@ limitations under the License.
 						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));
 					},
 
-					handleEvent: function(ev) {						
+					handleEvent: function(ev) {
 						switch (ev.type) {
 
 							case 'dragleft':
 							case 'dragright':
-								ev.gesture.preventDefault();	
+								ev.gesture.preventDefault();
 								var deltaX = ev.gesture.deltaX;
 								this.currentX = this.startX + deltaX;
 								if (this.currentX >= 0) {
@@ -176,7 +192,7 @@ limitations under the License.
 								break;
 
 							case 'swipeleft':
-								ev.gesture.preventDefault();	
+								ev.gesture.preventDefault();
 								this.close();
 								break;
 
