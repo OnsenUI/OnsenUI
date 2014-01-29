@@ -1,1 +1,1 @@
-<div class="row row-{{align}} small-row--{{sizeSmall}} row--{{sizeDefault}} large-row--{{sizeLarge}}" ng-transclude></div>
+<div class="row row-{{align}}" ng-transclude></div>

@@ -110,7 +110,7 @@ angular.module("templates/radio_button.tpl", []).run(["$templateCache", function
 
 angular.module("templates/row.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/row.tpl",
-    "<div class=\"row row-{{align}} small-row--{{sizeSmall}} row--{{sizeDefault}} large-row--{{sizeLarge}}\" ng-transclude></div>");
+    "<div class=\"row row-{{align}}\" ng-transclude></div>");
 }]);
 
 angular.module("templates/screen.tpl", []).run(["$templateCache", function($templateCache) {

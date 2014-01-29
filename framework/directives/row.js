@@ -33,25 +33,7 @@ limitations under the License.
 					if(align){
 						$scope.align = align;
 					}					
-				});
-
-				$attrs.$observe('sizeSmall', function(sizeSmall){
-					if(sizeSmall){
-						$scope.sizeSmall = sizeSmall;	
-					}
-				});
-
-				$attrs.$observe('sizeDefault', function(sizeDefault){
-					if(sizeDefault){
-						$scope.sizeDefault = sizeDefault;	
-					}
-				});
-
-				$attrs.$observe('sizeLarge', function(sizeLarge){
-					if(sizeLarge){
-						$scope.sizeLarge = sizeLarge;	
-					}
-				});
+				});				
 			}
 		};
 	});

@@ -111,7 +111,7 @@ angular.module("templates/radio_button.tpl", []).run(["$templateCache", function
 
 angular.module("templates/row.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/row.tpl",
-    "<div class=\"row row-{{align}} small-row--{{sizeSmall}} row--{{sizeDefault}} large-row--{{sizeLarge}}\" ng-transclude></div>");
+    "<div class=\"row row-{{align}}\" ng-transclude></div>");
 }]);
 
 angular.module("templates/screen.tpl", []).run(["$templateCache", function($templateCache) {
@@ -1338,25 +1338,7 @@ limitations under the License.
 					if(align){
 						$scope.align = align;
 					}					
-				});
-
-				$attrs.$observe('sizeSmall', function(sizeSmall){
-					if(sizeSmall){
-						$scope.sizeSmall = sizeSmall;	
-					}
-				});
-
-				$attrs.$observe('sizeDefault', function(sizeDefault){
-					if(sizeDefault){
-						$scope.sizeDefault = sizeDefault;	
-					}
-				});
-
-				$attrs.$observe('sizeLarge', function(sizeLarge){
-					if(sizeLarge){
-						$scope.sizeLarge = sizeLarge;	
-					}
-				});
+				});				
 			}
 		};
 	});
