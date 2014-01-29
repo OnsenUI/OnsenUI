@@ -1696,7 +1696,7 @@ limitations under the License.
 					},
 
 					bindEvents: function() {
-						this.hammertime = new Hammer(this.el, {prevent_default: true});  // prevent default fix for android 4.4
+						this.hammertime = new Hammer(this.el);
 						this.hammertime.on("dragleft dragright swipeleft swiperight release", this.handleEvent.bind(this));
 						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));
 					},
@@ -1705,9 +1705,10 @@ limitations under the License.
 					handleEvent: function(ev) {
 						console.log(ev.type);
 						switch (ev.type) {
-
+						
 							case 'dragleft':
-							case 'dragright':
+							case 'dragright':	
+								ev.gesture.preventDefault();							
 								var deltaX = ev.gesture.deltaX;
 								this.currentX = this.startX + deltaX;
 								if (this.currentX >= 0) {
@@ -1716,10 +1717,12 @@ limitations under the License.
 								break;
 
 							case 'swipeleft':
+								ev.gesture.preventDefault();	
 								this.close();
 								break;
 
 							case 'swiperight':
+								ev.gesture.preventDefault();	
 								this.open();
 								break;
 
@@ -1907,7 +1910,7 @@ limitations under the License.
 						this.startX = 0;
 						this.mode = SPLIT_MODE;
 
-						this.hammertime = new Hammer(this.el, {prevent_default: true});  // prevent default fix for android 4.4
+						this.hammertime = new Hammer(this.el);
 						this.boundHammerEvent = this.handleEvent.bind(this);
 						this.bindEvents();
 
@@ -2028,6 +2031,7 @@ limitations under the License.
 
 							case 'dragleft':
 							case 'dragright':
+								ev.gesture.preventDefault();	
 								var deltaX = ev.gesture.deltaX;
 								this.currentX = this.startX + deltaX;
 								if (this.currentX >= 0) {
@@ -2036,10 +2040,12 @@ limitations under the License.
 								break;
 
 							case 'swipeleft':
+								ev.gesture.preventDefault();	
 								this.close();
 								break;
 
 							case 'swiperight':
+								ev.gesture.preventDefault();
 								this.open();
 								break;
 
