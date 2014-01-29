@@ -106,7 +106,7 @@ limitations under the License.
 					}
 				});
 
-				screen = new Screen();
+				var screen = new Screen();
 			}
 		}
 	});
