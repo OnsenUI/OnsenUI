@@ -216,6 +216,10 @@
   color: #79b5fd;
 }
 
+.topcoat-button__spinner {
+  border: 3px solid #157DFB;
+}
+
 .topcoat-button:active,
 .topcoat-button--large:active,
 .topcoat-button-bar__button:active,

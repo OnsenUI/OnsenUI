@@ -181,6 +181,11 @@
   border-radius: 4px;
 }
 
+.topcoat-button__spinner {
+  border: 3px solid #c6c8c8;
+  border: 3px solid #fff;
+}
+
 .topcoat-button:hover,
 .topcoat-button--quiet:hover,
 .topcoat-button--large:hover,
@@ -645,6 +650,11 @@
   border: 1px solid #6fba2c;
   border: none;
   border-radius: 4px;
+}
+
+.topcoat-button__spinner {
+  border: 3px solid #c6c8c8;
+  border: 3px solid #fff;
 }
 
 .topcoat-button:hover,
