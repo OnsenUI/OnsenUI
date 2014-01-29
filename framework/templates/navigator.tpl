@@ -1,21 +1,14 @@
-<div class="max">	
-	<div ng-hide="hideToolbar" class="topcoat-navigation-bar no-select">
-	    <div class="topcoat-navigation-bar__item left quarter">
-	        <span ng-click="leftButtonClicked();" class="topcoat-icon-button--quiet" ng-hide="leftButtonIcon === '' || leftButtonIcon === undefined" style="vertical-align: middle">
-	        	<i class="icon-2x" ng-class="leftButtonIcon"></i>
-	        </span>
-	    </div> 
-	    <div class="topcoat-navigation-bar__item center half">
-	        <span class="topcoat-navigation-bar__title">{{navigationItem.title}}</span>        
-	    </div> 
-	    <div class="topcoat-navigation-bar__item right quarter">
-	        <span ng-click="rightButtonClicked();" class="topcoat-icon-button--quiet" ng-hide="rightButtonIcon === '' || rightButtonIcon === undefined" style="vertical-align: middle">
-	          <i class="icon-2x" ng-class="rightButtonIcon"></i>
-	        </span>
-	    </div>
+<div class="navigator-container">	
+	<div ng-hide="hideToolbar" class="topcoat-navigation-bar no-select navigator-toolbar relative">	    
+		<div class="topcoat-navigation-bar__item topcoat-navigation-bar__bg onsen_navigator__left-button-container transition hide">
+			<span id="left-section" class="topcoat-icon-button--quiet">
+				<i class="fa fa-angle-left fa-2x onsen_navigation-bar-height"></i>
+			</span>			
+		</div>		
+		<div class="onsen_navigator__right-button topcoat-navigation-bar__item topcoat-icon-button--quiet"></div>
 	</div>	
-	<div class="relative max debug">
-		<ng-include class="content" src="navigationItem.source" ng-animate="animation"></ng-include>
+	<div class="relative navigator-content">
+		
 	</div>    
 	
 </div>

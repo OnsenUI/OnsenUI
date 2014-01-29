@@ -18,61 +18,55 @@ limitations under the License.
 
 /* MODAL */
 
-.modal-enter {
-  -webkit-transition: .25s ease all .001s;
-  -webkit-transform: translate3d(0, 100%, 0);   
-  -moz-transition: .25s ease all .001s;
-  -moz-transform: translate3d(0, 100%, 0);   
+ons-screen {
+  display: block;
+  width: 100%;
+  height: 100%;
+  perspective: 600px;
+  position: relative;  
+  overflow: hidden;    
 }
 
-.modal-enter.modal-enter-active {
-  -webkit-transform: translate3d(0, 0, 0);  
-  -moz-transform: translate3d(0, 0, 0);  
+.screen-page {
+  transform-style: preserve-3d;        
+  transform-origin: 100% 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.modal-leave{
-  -webkit-transition: .25s ease all .001s;
-  -webkit-transform: translate3d(0, 0, 0);   
-  -moz-transition: .25s ease all .001s;
-  -moz-transform: translate3d(0, 0, 0);
-  transition: .25s ease all .001s;
-  transform: translate3d(0, 0, 0);   
+.screen-page.center {
+    transform: translate3d(0, 0, 0);   
+    box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.1);
 }
 
-.modal-leave.modal-leave-active{
-  -webkit-transform: translate3d(0, 0, 0);  
-  -moz-transform: translate3d(0, 0, 0);  
-  transform: translate3d(0, 0, 0);  
+
+.screen-page.unmodal {
+    transform: translate3d(0, 100%, 0) !important;    
+    box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.2);    
 }
 
-.unmodal-enter {
-  -webkit-transition: .25s ease all .001s;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transition: .25s ease all .001s;
-  -moz-transform: translate3d(0, 0, 0);
-  transition: .25s ease all .001s;
-  transform: translate3d(0, 0, 0);
-  z-index: 10;  
+.screen-page.transition .page{
+  transition-duration: 400ms;
+  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.unmodal-enter.unmodal-enter-active{
-  -webkit-transform: translate3d(0, 0, 0);  
-  -moz-transform: translate3d(0, 0, 0);  
-  transform: translate3d(0, 0, 0);  
+.screen-page.unmodal .page {
+    opacity: 1;
 }
 
-.unmodal-leave{
-  -webkit-transition: .25s ease all .001s;
-  -webkit-transform: translate3d(0, 0, 0);    
-  -moz-transition: .25s ease all .001s;
-  -moz-transform: translate3d(0, 0, 0);    
-  transition: .25s ease all .001s;
-  transform: translate3d(0, 0, 0);    
-  z-index: 1000;
+.screen-page.transition {
+    transition-duration: 400ms;
+    animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.unmodal-leave.unmodal-leave-active{
-  -webkit-transform: translate3d(0, 100%, 0);   
-  -moz-transform: translate3d(0, 100%, 0);   
-  transform: translate3d(0, 100%, 0);   
+.screen-page.modal-behind {    
+    transform-style: preserve-3d;  
+    transform: translate3d(0, -10%, 0);    
+}
+
+.screen-page.modal-behind .page{
+  opacity: 0.9;
 }

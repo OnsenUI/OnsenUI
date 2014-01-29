@@ -1,0 +1,1 @@
+<div class="row row-{{align}}" ng-transclude></div>

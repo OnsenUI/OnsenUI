@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Navigator | Onsen UI</title>  
+  <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">  
+
+  <script src="lib/cordova.js"></script>    
+  <script src="lib/onsen/js/angular/angular.js"></script>    
+  <script src="lib/onsen/js/angular/angular-touch.js"></script>    
+  <script src="lib/onsen/js/onsenui.js"></script>    
+  <script src="js/app.js"></script>  
+  
+</head>
+
+<body class="center">    
+  <div ons-if-platform="Android">
+    <h1>Show me only if run in Android.</h1>
+
+  </div>
+
+  <div ons-if-platform="iOS">
+    <h1>Show me only if run in iOS.</h1>
+  </div>
+
+  <div ons-if-platform="BlackBerry">
+    <h1>Show me only if run in BlackBerry.</h1>
+  </div>
+
+  <div ons-if-platform="chrome">
+    <h1>Show me only if run in Chrome.</h1>
+  </div>
+
+  <div ons-if-platform="safari">
+    <h1>Show me only if run in Safari.</h1>
+  </div>
+
+  <div ons-if-platform="firefox">
+    <h1>Show me only if run in Firefox.</h1>
+  </div>
+
+  <div ons-if-platform="Opera">
+    <h1>Show me only if run in Opera.</h1>
+  </div>
+ 
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Navigator | Onsen UI</title>  
+  <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">  
+
+  <script src="plugins/plugin-loader.js"></script>    
+  <script src="lib/onsen/js/angular/angular.js"></script>    
+  <script src="lib/onsen/js/angular/angular-touch.js"></script>    
+  <script src="lib/onsen/js/onsenui.js"></script>    
+  <script src="js/app.js"></script>  
+
+  <script src="pages/tabbar_inside_navigator/navigator_controller.js"></script>  
+  <script src="pages/tabbar_inside_navigator/page1.js"></script>  
+  <script src="pages/tabbar_inside_navigator/page2.js"></script>  
+  <script src="pages/tabbar_inside_navigator/page3.js"></script>  
+  
+</head>
+
+<body ng-controller="NavigatorController">    
+    <ons-navigator 
+      title="{{title.value}}"
+      page="pages/tabbar_inside_navigator/tabbar.html">
+    </ons-navigator>  
+</body>
+</html>

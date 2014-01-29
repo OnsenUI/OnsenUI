@@ -1,6 +1,8 @@
 {
-  "name": "onsen_ui",
-  "version": "0.6.0",
+  "name": "onsenui",
+  "version": "0.7.0",
+  "private": false,
+  "author": "@kruyvanna",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.6.0",
@@ -9,6 +11,8 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-watch": "~0.5.3",
-    "grunt-html2js": "~0.2.3"
+    "grunt-html2js": "~0.2.3",
+    "grunt-contrib-compress": "~0.5.3",
+    "grunt-autoprefixer": "*"
   }
 }

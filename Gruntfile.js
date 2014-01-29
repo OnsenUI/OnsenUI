@@ -11,9 +11,12 @@ module.exports = function(grunt) {
           dot: true,
           src: [
             '.tmp',
-            'build/dev',
+            'build',
             'demo/lib/onsen/',
-            'app/lib/onsen/'
+            'project_templates/minimum/app/lib/onsen/',
+            'project_templates/sliding_menu/app/lib/onsen/',
+            'project_templates/tab_bar/app/lib/onsen/',
+            'project_templates/master_detail/app/lib/onsen/'
           ]
         }]
       }
@@ -33,40 +36,65 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       js: {
-        src: [          
-          'framework/lib/angular/angular.js',
+        src: [                    
           'framework/directives/templates.js',
           'framework/directives/module.js',
           'framework/directives/*.js',
           'framework/lib/*.js',
           'framework/js/*.js'
         ],
-        dest: 'build/dev/<%= pkg.name %>.js'
+        dest: 'build/js/<%= pkg.name %>.js'
       },
       css: {
         src: [
           'framework/css/common.css',
           'framework/css/*.css'
         ],
-        dest: 'build/dev/css/<%= pkg.name %>.css'
+        dest: 'build/css/<%= pkg.name %>.css'
+      }
+    },
+    autoprefixer: {
+      dist: {
+          options: {
+              
+               // * Add target browsers here
+               // * https://github.com/ai/autoprefixer#browsers
+               // * 
+               browsers: ["last 2 version", "Android 4", "iOS 7"]
+               
+          },
+          files: [{
+              src: 'build/css/<%= pkg.name %>.css',
+              dest: 'build/css/<%= pkg.name %>.css'
+          }
+          ]
       }
     },
     // Put files not handled in other tasks here
     copy: {
       build: {
         files: [
+          // angularjs
+          {         
+          expand: true,
+            cwd: 'framework/lib/angular',
+            dest: 'build/js/angular',
+            src: [
+              '*.*'
+            ]               
+          },
           // topcoat css
           {
             expand: true,
             cwd: 'framework/css/topcoat/css',
-            dest: 'build/dev/css/',
+            dest: 'build/css/',
             src: [
               '*.css'
             ]
           }, {
             expand: true,
             cwd: 'framework/img',
-            dest: 'build/dev/img/',
+            dest: 'build/img/',
             src: [
               '*.*'
             ]
@@ -75,7 +103,7 @@ module.exports = function(grunt) {
            {
             expand: true,
             cwd: 'framework/css/topcoat/font/',
-            dest: 'build/dev/font/',
+            dest: 'build/font/',
             src: [
               '*.otf'
             ]
@@ -85,7 +113,7 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: 'framework/css/font_awesome',
-            dest: 'build/dev/css/font_awesome',
+            dest: 'build/css/font_awesome',
             src: [
               '*/*'
             ]
@@ -94,49 +122,112 @@ module.exports = function(grunt) {
           {
             expand: true,
             cwd: 'framework/css/polyfill',
-            dest: 'build/dev/css/polyfill/',
+            dest: 'build/css/polyfill/',
             src: [
               '*.css'
             ]
-          },
-          // directive templates
-          // {
-          //   expand: true,
-          //   cwd: 'framework/templates/',
-          //   dest: 'build/dev/templates/',
-          //   src: [
-          //     '*.*'
-          //   ]
-          // },
-          // plugin_info.json
-          {
-            expand: false,
-            dest: 'build/plugin_info.json',
-            src: [
-              'plugin_info.json'
-            ]
-          }
+          }          
         ]
       },
       demo: {
         files: [{
           expand: true,
-          cwd: 'build/dev/',
+          cwd: 'build/',
           dest: 'demo/lib/onsen/',
           src: [
             '**'
           ]
         }]
       },
-      app: {
+      minimum_template: {
         files: [{
           expand: true,
-          cwd: 'build/dev',
-          dest: 'app/lib/onsen/',
+          cwd: 'build',
+          dest: 'project_templates/minimum/app/lib/onsen/',
           src: [
             '**'
           ]
         }]
+      },
+      sliding_menu_template: {
+        files: [{
+          expand: true,
+          cwd: 'build',
+          dest: 'project_templates/sliding_menu/app/lib/onsen/',
+          src: [
+            '**'
+          ]
+        }]
+      },
+      tab_bar_template: {
+        files: [{
+          expand: true,
+          cwd: 'build',
+          dest: 'project_templates/tab_bar/app/lib/onsen/',
+          src: [
+            '**'
+          ]
+        }]
+      },
+      master_detail_template: {
+        files: [{
+          expand: true,
+          cwd: 'build',
+          dest: 'project_templates/master_detail/app/lib/onsen/',
+          src: [
+            '**'
+          ]
+        }]
+      }
+    },
+    compress: {
+      master_detail: {
+        options: {
+          archive: 'project_templates/master_detail.zip'
+        },
+        files: [      
+          {
+            expand: true,
+            cwd: 'project_templates/master_detail/',
+            src: ['**']            
+          }
+        ]
+      },
+      minimum: {
+        options: {
+          archive: 'project_templates/minimum.zip'
+        },
+        files: [      
+          {
+            expand: true,
+            cwd: 'project_templates/minimum/',
+            src: ['**']            
+          }
+        ]
+      },
+      sliding_menu: {
+        options: {
+          archive: 'project_templates/sliding_menu.zip'
+        },
+        files: [      
+          {
+            expand: true,
+            cwd: 'project_templates/sliding_menu/',
+            src: ['**']            
+          }
+        ]
+      },
+      tab_bar: {
+        options: {
+          archive: 'project_templates/tab_bar.zip'
+        },
+        files: [      
+          {
+            expand: true,
+            cwd: 'project_templates/tab_bar/',
+            src: ['**']            
+          }
+        ]
       }
     },
     watch: {
@@ -163,8 +254,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.loadNpmTasks('grunt-autoprefixer');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'html2js', 'concat', 'copy:build', 'copy:demo', 'copy:app']);
+  grunt.registerTask('default', ['clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:demo', 'copy:minimum_template', 'copy:sliding_menu_template', 'copy:tab_bar_template', 'copy:master_detail_template', 'compress']);
 
 };

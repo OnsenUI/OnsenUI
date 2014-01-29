@@ -1,0 +1,20 @@
+<ons-page>
+	<ul class="fa-ul">
+
+		<ons-list-item 
+			ng-click="ons.splitView.toggle();
+				ons.splitView.setMainPage('pages/split_view_landscape/page1.html');">
+			<i class="fa-li fa fa-home fa-lg" style="top: 25%"></i>
+			Page 1
+		</ons-list-item>
+
+		<ons-list-item 
+			ng-click="ons.splitView.toggle(); 
+				ons.splitView.setMainPage('pages/split_view_landscape/page2.html');">
+			<i class="fa-li fa fa-gear fa-lg" style="top: 25%"></i>
+			Page 2
+		</ons-list-item>
+
+	</ul>
+
+</ons-page>

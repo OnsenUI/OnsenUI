@@ -21,7 +21,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.directive('onsScreen', function(ONSEN_CONSTANTS) {
+	directives.directive('onsScreen', function(ONSEN_CONSTANTS, $http, $compile) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -29,62 +29,88 @@ limitations under the License.
 			scope: {
 				page: '@'
 			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/screen.tpl',
+			
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
 				var screenItems = [];
-				var isBack = false;
-				var isFirstRun = true;
-				scope.canGoBack = false;
 				scope.ons = scope.ons || {};
 				scope.ons.screen = scope.ons.screen || {};
 
-				scope.$watch('page', function(newPage) {
-					if (newPage) {
-						prepareAnimation();
-						var newScreenItem = {
-							source: newPage
-						}
-						scope.screenItem = newScreenItem;
+				var Screen = Class.extend({
+					init: function() {
+						this.attachMethods();
 
-						screenItems.push(newScreenItem);						
+						if (scope.page) {
+							scope.ons.screen.presentPage(scope.page);
+						}
+					},
+
+					animateInBehindPage: function(){
+						var behindPage = screenItems[screenItems.length - 1];
+						behindPage.attr('class', 'screen-page transition modal-behind');
+					},
+
+					animateInCurrentPage: function(pager) {
+						pager.attr("class", "screen-page unmodal");
+						element[0].offsetWidth;						
+						pager.attr("class", "screen-page transition center");
+					},
+
+					animateOutBehindPage: function(){
+						var behindPage = screenItems[screenItems.length - 1];
+						behindPage.attr('class', 'screen-page transition');
+					},
+
+					isEmpty: function() {
+						return screenItems.length < 1;
+					},
+
+					attachMethods: function() {
+						scope.ons.screen.presentPage = function(page) {
+							$http({
+								url: page,
+								method: "GET"
+							}).success(function(data, status, headers, config) {
+								var page = angular.element('<div></div>');
+								page.addClass('screen-page');
+
+								var blackMask = angular.element('<div></div>');
+								blackMask.addClass('onsen_navigator-black-mask');
+								page.append(blackMask);
+
+								var templateHTML = angular.element(data);
+								page.append(templateHTML);
+								var pager = $compile(page)(scope);
+								element.append(pager);
+
+								if (!this.isEmpty()) {									
+									this.animateInBehindPage();
+									this.animateInCurrentPage(pager);
+								}
+
+								screenItems.push(pager);
+							}.bind(this)).error(function(data, status, headers, config) {
+								console.log('error', data, status);
+							});
+						}.bind(this);
+
+						scope.ons.screen.dismissPage = function() {
+							if(screenItems.length < 2){
+								// cant dismiss anymore
+								return;
+							}
+							var currentPage = screenItems.pop();
+							this.animateOutBehindPage();
+							currentPage.attr("class", "screen-page transition unmodal");
+							currentPage[0].addEventListener('webkitTransitionEnd', function transitionEnded(e) {
+								currentPage.remove();
+								currentPage[0].removeEventListener(transitionEnded);
+							});							
+						}.bind(this);
 					}
 				});
 
-				function prepareAnimation(){
-					if(isFirstRun){
-						scope.animation = null;
-						isFirstRun = false;
-					}else{
-						if(isBack){
-							scope.animation = {
-								enter: 'unmodal-enter',
-								leave: 'unmodal-leave'
-							};							
-							isBack = false;
-						}else{
-							scope.animation = {
-								enter: 'modal-enter',
-								leave: 'modal-leave'
-							};
-						}
-					}
-				}
-
-				scope.ons.screen.presentPage = function(page) {
-					scope.page = page;
-				}
-
-				scope.ons.screen.dismissPage = function() {
-					if (screenItems.length < 2) {
-						return;
-					}
-
-					isBack = true;
-					screenItems.pop();
-					var previousScreenItem = screenItems.pop();
-					scope.page = previousScreenItem.source;
-				}				
+				var screen = new Screen();
 			}
 		}
 	});

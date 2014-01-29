@@ -26,10 +26,15 @@ limitations under the License.
 			require: '?ngModel',
 			restrict: 'E',
 			replace: true,
+			scope: {
+				ngModel: '=',
+				ngTrueValue: '@',
+				ngFalseValue: '@'
+			},
 			transclude: true,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
 			link: function($scope, element, attrs, ngModel){
-				var checkbox = element.find('input');
+				var checkbox = element.find('input');				
 				var checked = false;
 				attrs.$observe('disabled', function(disabled){
 					if(disabled === undefined){
@@ -40,8 +45,8 @@ limitations under the License.
 				});
 
 				if(ngModel){					
-					ngModel.$render = function() {
-						checked = ( ngModel.$viewValue == "true" );
+					ngModel.$render = function() {						
+						checked = ( ngModel.$viewValue == 'true' || ngModel.$viewValue == $scope.ngTrueValue );
 						checkbox.attr('checked', checked);
 					};
 
@@ -51,7 +56,6 @@ limitations under the License.
 						});						
 					});
 				}
-				
 			}
 		};
 	});

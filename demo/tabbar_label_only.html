@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Tabbar 2 Demo | Onsen UI</title>  
+  <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">  
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+  
+  <script src="lib/jquery.js"></script>  
+  <script src="lib/onsen/js/angular/angular.js"></script>    
+  <script src="lib/onsen/js/angular/angular-touch.js"></script>    
+  <script src="lib/onsen/js/onsenui.js"></script>    
+  <script src="js/app.js"></script>  
+  <script src="pages/kitchen_sink/flickr/flickr.js"></script> 
+
+</head>
+
+
+<body>    
+  
+  <ons-tabbar>
+    <ons-tabbar-item 
+      label="Facebook"
+      page="pages/tabbar/page1.html">      
+    </ons-tabbar-item> 
+    <ons-tabbar-item 
+      label="Flickr"
+      active="true" 
+      page="pages/kitchen_sink/flickr/flickr.html"></ons-tabbar-item> 
+    <ons-tabbar-item 
+      label="Twitter"
+      page="pages/tabbar/page3.html"></ons-tabbar-item> 
+  </ons-tabbar>
+ 
+</body>
+</html>

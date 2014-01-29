@@ -26,7 +26,9 @@ limitations under the License.
 			replace: false,
 			transclude: true,			
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
-			controller: function($scope, $attrs) {
+			controller: function($scope, $element, $attrs) {
+				var footer = $element[0].querySelector('.footer');
+
 				$scope.selectedTabItem = {
 					source: ''
 				};
@@ -36,8 +38,8 @@ limitations under the License.
 
 					if(hide){
 						$scope.tabbarHeight = 0;
-					}else{
-						$scope.tabbarHeight = "3rem";
+					}else{					
+						$scope.tabbarHeight = footer.clientHeight + 'px';
 					}
 				});
 			

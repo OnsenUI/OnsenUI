@@ -27,17 +27,12 @@ body {
     height: 100%;
 }
 
-.middle {
-    vertical-align: middle;
+.align-center {
+    align: center;
 }
 
-.page {
-    position: absolute;
-    transform: translate3d(0, 0, 0);    
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;    
+.middle {
+    vertical-align: middle;
 }
 
 .no-active:active {
@@ -71,8 +66,9 @@ body {
 
 * { 
     -webkit-tap-highlight-color: rgba(0,0,0,0);
+    user-select: none;
 } 
 
-.no-select {
-    -webkit-user-select: none;
+input {
+    user-select: initial;
 }
