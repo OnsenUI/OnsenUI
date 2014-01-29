@@ -1255,10 +1255,11 @@ limitations under the License.
 .secondary {
     -webkit-transform: translate3d(-10%, 0, 0);
     transform: translate3d(-10%, 0, 0);
+    overflow: hidden;
 }
 
 .main {
-    
+    overflow: hidden;
 }
 
 .onsen_split-view__shadow {
