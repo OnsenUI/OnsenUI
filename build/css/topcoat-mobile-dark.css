@@ -1891,6 +1891,11 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   border-bottom: var-border-bottom--navigation-bar;
 }
 
+.topcoat-navigation-bar__bg {
+  background: #595b5b;
+  background: var-navigation-bar-background-color;
+}
+
 .topcoat-navigation-bar__item {
   margin: 0;
   line-height: 4.375rem;
