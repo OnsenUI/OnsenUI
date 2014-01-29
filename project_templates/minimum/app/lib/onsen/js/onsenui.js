@@ -1458,6 +1458,10 @@ limitations under the License.
 						}.bind(this);
 
 						scope.ons.screen.dismissPage = function() {
+							if(screenItems.length < 2){
+								// cant dismiss anymore
+								return;
+							}
 							var currentPage = screenItems.pop();
 							this.animateOutBehindPage();
 							currentPage.attr("class", "screen-page transition unmodal");
