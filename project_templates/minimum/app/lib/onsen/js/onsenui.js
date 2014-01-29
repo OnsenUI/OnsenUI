@@ -1960,6 +1960,9 @@ limitations under the License.
 
 					shouldCollapse: function() {
 						var orientation = window.orientation;
+						if(orientation === undefined ){
+							orientation = window.innerWidth > window.innerHeight ? 90 : 0;
+						}
 
 						switch (scope.collapse) {
 							case undefined:
