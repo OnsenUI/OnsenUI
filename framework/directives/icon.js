@@ -30,15 +30,7 @@
 					}else{
 						$scope.fixedWidth = '';						
 					}
-				});
-
-				attrs.$observe('inverse', function(inverse){
-					if(inverse === "true"){
-						$scope.inverse = 'inverse';
-					}else{
-						$scope.inverse = '';						
-					}
-				});
+				});				
 			}
 		};
 	});
