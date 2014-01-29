@@ -17,7 +17,7 @@
   top: 50%;
   margin-top: -13px;
   opacity: 0;
-  border: 3px solid #fff;
+  /*border: 3px solid #fff; specified in topcoat theme. .topcoat-button__spinner*/
   border-bottom: 0;
   border-radius: 40px 40px 0 0;
   -webkit-transform-origin: bottom center;

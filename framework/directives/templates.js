@@ -9,7 +9,7 @@ angular.module("templates/button.tpl", []).run(["$templateCache", function($temp
   $templateCache.put("templates/button.tpl",
     "<button ng-class=\"'topcoat-button--{{type}}'\" class=\"{{item.animation}} effeckt-button topcoat-button no-select\">\n" +
     "	<span class=\"label\" ng-transclude></span>\n" +
-    "	<span class=\"spinner\"></span>\n" +
+    "	<span class=\"spinner topcoat-button__spinner\"></span>\n" +
     "</button>");
 }]);
 
