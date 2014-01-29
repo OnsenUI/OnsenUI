@@ -1,3 +1,9 @@
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /**
 *
 * Copyright 2012 Adobe Systems Inc.;
@@ -51,23 +57,11 @@
   pointer-events: none;
 }
 
-/**
-*
-* Copyright 2012 Adobe Systems Inc.;
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-*/
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -86,6 +80,36 @@
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -189,6 +213,7 @@
 .topcoat-button-bar__button--large:hover {
   background-color: var-background-color--hover;
   background-color: transparent;
+  color: #79b5fd;
 }
 
 .topcoat-button:active,
@@ -199,7 +224,7 @@
   background-color: #157dfb;
   background-color: transparent;
   box-shadow: none;
-  color: #60a7fc;
+  color: #79b5fd;
 }
 
 .topcoat-button:focus,
@@ -210,6 +235,8 @@
 .topcoat-button--large--cta:focus,
 .topcoat-button-bar__button:focus,
 .topcoat-button-bar__button--large:focus {
+  border: none;
+  box-shadow: none;
   outline: 0;
 }
 
@@ -233,7 +260,7 @@
 .topcoat-button--quiet:active,
 .topcoat-button--large--quiet:active {
   color: #c6c8c8;
-  color: #60a7fc;
+  color: #79b5fd;
   text-shadow: 0 1px none;
   background-color: #157dfb;
   background-color: transparent;
@@ -360,6 +387,12 @@
 
 .topcoat-button-bar {
   margin: var-button-bar-margin;
+  border: 0px solid #157dfb;
+}
+
+.topcoat-button-bar__item {
+  border-top: 1px solid #157dfb;
+  border-bottom: 1px solid #157dfb;
 }
 
 .topcoat-button-bar > .topcoat-button-bar__item:first-child {
@@ -374,21 +407,22 @@
 
 .topcoat-button-bar__item:first-child > .topcoat-button-bar__button,
 .topcoat-button-bar__item:first-child > .topcoat-button-bar__button--large {
+  border-left: 1px solid #157dfb;
   border-right: none;
-  border-right: none;
+  border-right: 1px solid #157dfb;
 }
 
 .topcoat-button-bar__item:last-child > .topcoat-button-bar__button,
 .topcoat-button-bar__item:last-child > .topcoat-button-bar__button--large {
   border-left: none;
-  border-right: 1px solid #157dfb;
+  border-right: var-border-right--button-bar__button__last;
 }
 
 .topcoat-button-bar__button {
   border-radius: inherit;
   background-color: #f2f2f2;
-  color: var-color--button-bar--button;
-  border: 1px solid #157dfb;
+  color: #157dfb;
+  border: 0px solid #157dfb;
   border-right: 1px solid #157dfb;
 }
 
@@ -396,8 +430,9 @@
 .topcoat-button-bar__button--large:active,
 :checked + .topcoat-button-bar__button {
   background-color: #157dfb !important;
-  color: #fff;
-  border: 1px solid #157dfb;
+  color: #79b5fd;
+  border: 0px solid #157dfb;
+  border-right: 1px solid #157dfb;
 }
 
 .topcoat-button-bar__button:hover {
@@ -408,6 +443,7 @@
 .topcoat-button-bar__button:focus,
 .topcoat-button-bar__button--large:focus {
   z-index: 1;
+  z-index: 0;
 }
 
 /* topdoc
@@ -441,14 +477,20 @@
 .topcoat-button-bar__button--large {
   border-radius: inherit;
   background-color: #f2f2f2;
-  color: var-color--button-bar--button;
-  border: 1px solid #157dfb;
+  color: #157dfb;
+  border: 0px solid #157dfb;
   border-right: 1px solid #157dfb;
 }
 
 .topcoat-button-bar__button--large:hover {
   background-color: #157dfb;
   color: #fff;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /**
@@ -505,23 +547,11 @@
   pointer-events: none;
 }
 
-/**
-*
-* Copyright 2012 Adobe Systems Inc.;
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-*/
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -540,6 +570,36 @@
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -655,6 +715,7 @@
 .topcoat-button--large--quiet:hover {
   background-color: var-background-color--hover;
   background-color: transparent;
+  color: #79b5fd;
 }
 
 .topcoat-button:active,
@@ -662,7 +723,7 @@
   background-color: #157dfb;
   background-color: transparent;
   box-shadow: none;
-  color: #60a7fc;
+  color: #79b5fd;
 }
 
 .topcoat-button:focus,
@@ -671,6 +732,8 @@
 .topcoat-button--large--quiet:focus,
 .topcoat-button--cta:focus,
 .topcoat-button--large--cta:focus {
+  border: none;
+  box-shadow: none;
   outline: 0;
 }
 
@@ -713,7 +776,7 @@
 .topcoat-button--quiet:active,
 .topcoat-button--large--quiet:active {
   color: #c6c8c8;
-  color: #60a7fc;
+  color: #79b5fd;
   text-shadow: 0 1px none;
   background-color: #157dfb;
   background-color: transparent;
@@ -848,6 +911,12 @@
   padding: 0 1.25rem;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /**
 *
 * Copyright 2012 Adobe Systems Inc.;
@@ -920,23 +989,11 @@ input[type="checkbox"] {
   background-clip: padding-box;
 }
 
-/**
-*
-* Copyright 2012 Adobe Systems Inc.;
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*
-*/
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -955,6 +1012,36 @@ input[type="checkbox"] {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -1079,6 +1166,10 @@ input[type="checkbox"]:checked {
   background: #157dfb;
 }
 
+input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before {
+  background: #157dfb;
+}
+
 input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after {
   opacity: 1;
 }
@@ -1093,7 +1184,7 @@ input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after {
   background: var-background-color;
   background: #fff;
   border: 1px solid #157dfb;
-  border: var-border--checkbox;
+  border: 1px solid #157dfb;
   border-radius: 1rem;
   box-shadow: none;
   left: 0;
@@ -1111,7 +1202,7 @@ input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after {
   width: 12px;
   height: 6px;
   background: transparent;
-  border: 3px solid #157dfb;
+  border: 3px solid #fff;
   border-width: 4px;
   border-top: none;
   border-right: none;
@@ -1123,15 +1214,16 @@ input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after {
 
 input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before {
   border: none;
+  border: 1px solid #157dfb;
   box-shadow: none, none;
 }
 
 input[type="checkbox"]:active + .topcoat-checkbox__checkmark:before {
   border: 1px solid #157dfb;
-  border: 1px solid #c8c7cc;
+  border: 1px solid #157dfb;
   background-color: #157dfb;
   background-color: #fff;
-  border: 1px solid #c8c7cc;
+  border: 1px solid #157dfb;
   box-shadow: none;
 }
 
@@ -1139,6 +1231,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   border: 1px solid #157dfb;
   background: var-background-color;
   box-shadow: none;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /**
@@ -1158,6 +1256,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -1281,6 +1385,8 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 .topcoat-icon-button--large:focus,
 .topcoat-icon-button--large--quiet:focus,
 .topcoat-icon-button--large--quiet:hover:focus {
+  border: none;
+  box-shadow: none;
   outline: 0;
 }
 
@@ -1420,6 +1526,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   top: -2px;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /**
 *
 * Copyright 2012 Adobe Systems Inc.;
@@ -1437,6 +1549,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -1476,6 +1594,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   pointer-events: none;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /**
 *
 * Copyright 2012 Adobe Systems Inc.;
@@ -1493,6 +1617,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -1543,6 +1673,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   padding: 0;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /**
 *
 * Copyright 2012 Adobe Systems Inc.;
@@ -1560,6 +1696,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -1640,15 +1782,15 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 .topcoat-list {
   border-top: none;
   border-bottom: none;
-  background-color: #e7e7e7;
+  background-color: #f0eff4;
 }
 
 .topcoat-list__header {
   padding: 4px 0.7rem;
   font-size: 0.9em;
   font-weight: 400;
-  background-color: #e7e7e7;
-  color: #000;
+  background-color: #f0eff4;
+  color: #1f1f21;
   text-shadow: none;
   border-top: none;
   border-bottom: none;
@@ -1658,14 +1800,15 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   border-top: none;
   color: #c6c8c8;
   padding: 0;
+  background-color: #fff;
 }
 
 .topcoat-list__item {
-  padding: 0.7rem;
-  margin: 0;
+  padding: 0.7rem 0.7rem 0.7rem 0;
+  margin: 0 0 0 0.5rem;
   border-top: none;
   border-bottom: 1px solid #c8c7cc;
-  color: #000;
+  color: #1f1f21;
   background-color: #fff;
 }
 
@@ -1674,11 +1817,27 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 }
 
 .topcoat-list__item:first-child {
+  padding-left: 0.7rem;
+  margin: 0;
   border-top: 1px solid #c8c7cc;
+  border-bottom: none;
 }
 
 .topcoat-list__item:last-child {
+  padding-left: 0.7rem;
+  margin: 0;
+  border-top: none;
   border-bottom: 1px solid #c8c7cc;
+}
+
+.topcoat-list__item:nth-child(2) {
+  border-top: 1px solid #c8c7cc;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /**
@@ -1699,6 +1858,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 *
 */
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /**
 *
 * Copyright 2012 Adobe Systems Inc.;
@@ -1716,6 +1881,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -1782,6 +1953,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   overflow: hidden;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /**
 *
 * Copyright 2012 Adobe Systems Inc.;
@@ -1799,6 +1976,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -1887,12 +2070,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 
 .topcoat-navigation-bar {
   height: 3.375rem;
-  height: 2.5rem;
+  height: 44px;
   padding-left: 1rem;
   padding-right: 1rem;
   background: var-background-color;
   background: #f8f8f8;
-  color: #000;
+  color: #1f1f21;
   box-shadow: none;
   border-bottom: 1px solid #c8c7cc;
 }
@@ -1907,7 +2090,13 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 .topcoat-navigation-bar__title {
   font-size: 1.3rem;
   font-weight: 400;
-  color: #000;
+  color: #1f1f21;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /*
@@ -1924,6 +2113,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -1967,6 +2162,12 @@ limitations under the License.
   text-decoration: none;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /*
 Copyright 2012 Adobe Systems Inc.;
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -1981,6 +2182,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -2046,6 +2253,12 @@ limitations under the License.
   color: #fff;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /**
 *
 * Copyright 2012 Adobe Systems Inc.;
@@ -2063,6 +2276,12 @@ limitations under the License.
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -2104,6 +2323,12 @@ limitations under the License.
   background-color: #fff;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /**
 *
 * Copyright 2012 Adobe Systems Inc.;
@@ -2121,6 +2346,12 @@ limitations under the License.
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -2203,6 +2434,12 @@ input[type="radio"] {
   pointer-events: none;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /**
 *
 * Copyright 2012 Adobe Systems Inc.;
@@ -2220,6 +2457,12 @@ input[type="radio"] {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -2353,11 +2596,11 @@ input[type="radio"]:disabled + .topcoat-radio-button__checkmark {
 */
 
 input[type="radio"] {
-  height: 1.875rem;
-  width: 1.875rem;
+  height: 1.5rem;
+  width: 1.5rem;
   margin-top: 0;
-  margin-right: -1.875rem;
-  margin-bottom: -1.875rem;
+  margin-right: -1.5rem;
+  margin-bottom: -1.5rem;
   margin-left: 0;
 }
 
@@ -2368,13 +2611,13 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
 .topcoat-radio-button {
   color: #c6c8c8;
   color: #157dfb;
-  line-height: 1.875rem;
+  line-height: 1.5rem;
   text-align: left;
 }
 
 .topcoat-radio-button__checkmark:before {
-  width: 1.875rem;
-  height: 1.875rem;
+  width: 1.5rem;
+  height: 1.5rem;
   background: var-background-color;
   background: #fff;
   border: 1px solid #157dfb;
@@ -2384,26 +2627,27 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
 
 .topcoat-radio-button__checkmark {
   position: relative;
-  width: 1.875rem;
-  height: 1.875rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .topcoat-radio-button__checkmark:after {
   opacity: 0;
-  width: 0.875rem;
-  height: 0.875rem;
+  width: 0.9rem;
+  height: 0.9rem;
   background: #157dfb;
   border: 1px solid #157dfb;
   box-shadow: 0 1px rgba(255,255,255,0.5);
   -webkit-transform: none;
   -ms-transform: none;
   transform: none;
-  top: 7px;
-  left: 7px;
+  top: 0.25rem;
+  left: 0.25rem;
 }
 
 input[type="radio"]:focus + .topcoat-radio-button__checkmark:before {
   border: none;
+  border: 1px solid #157dfb;
   box-shadow: none, none;
 }
 
@@ -2421,6 +2665,12 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   box-shadow: none;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /*
 Copyright 2012 Adobe Systems Inc.;
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -2435,6 +2685,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /*
 Copyright 2012 Adobe Systems Inc.;
@@ -2481,6 +2737,12 @@ limitations under the License.
   pointer-events: none;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /*
 Copyright 2012 Adobe Systems Inc.;
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -2495,6 +2757,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /*
 Copyright 2012 Adobe Systems Inc.;
@@ -2587,8 +2855,8 @@ limitations under the License.
 
 .topcoat-range::-webkit-slider-thumb {
   height: 2rem;
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 1.8rem;
+  width: 1.8rem;
   background-color: var-background-color;
   background-color: #fff;
   border: 1px solid #157dfb;
@@ -2600,7 +2868,7 @@ limitations under the License.
 
 .topcoat-range::-moz-range-thumb {
   height: 2rem;
-  width: 1.5rem;
+  width: 1.8rem;
   background-color: var-background-color;
   border: 1px solid #157dfb;
   border: 1px solid #c8c7cc;
@@ -2611,12 +2879,20 @@ limitations under the License.
 
 .topcoat-range:focus::-webkit-slider-thumb {
   border: none;
+  border: 1px solid #c8c7cc;
   box-shadow: none;
 }
 
 .topcoat-range:focus::-moz-range-thumb {
   border: none;
+  border: 1px solid #c8c7cc;
   box-shadow: none;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /**
@@ -2636,6 +2912,12 @@ limitations under the License.
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -2680,6 +2962,12 @@ input[type="search"]::-webkit-search-cancel-button {
   pointer-events: none;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /**
 *
 * Copyright 2012 Adobe Systems Inc.;
@@ -2697,6 +2985,12 @@ input[type="search"]::-webkit-search-cancel-button {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -2769,16 +3063,18 @@ input[type="search"]::-webkit-search-cancel-button {
   height: 2rem;
   font-size: 16px;
   border: 1px solid #157dfb;
-  border: none;
+  border: 1px solid #c8c7cc;
   background-color: #fff;
   background-color: #fff;
   box-shadow: var-box-shadow--text-input;
   color: #c6c8c8;
-  padding: 0 0 0 2.2rem;
+  color: #a3a3a6;
+  padding: 0 0 0 1.8rem;
   border-radius: 0;
   border-radius: 4px;
   background-image: url("../img/search.svg");
   background-position: 1rem center;
+  background-position: 0.5rem center;
   background-repeat: no-repeat;
   background-size: 16px;
 }
@@ -2787,9 +3083,10 @@ input[type="search"]::-webkit-search-cancel-button {
 .topcoat-search-input--large:focus {
   background-color: #fff;
   background-color: #fff;
-  color: #000;
+  color: #1f1f21;
+  color: #6f6f74;
   border: none;
-  border: none;
+  border: 1px solid #c8c7cc;
   box-shadow: var-box-shadow--text-input, none;
 }
 
@@ -2798,6 +3095,7 @@ input[type="search"]::-webkit-search-cancel-button {
 .topcoat-search-input--large::-webkit-search-cancel-button,
 .topcoat-search-input--large::-webkit-search-decoration {
   margin-right: 5px;
+  margin-right: 8px;
 }
 
 .topcoat-search-input:focus::-webkit-input-placeholder,
@@ -2806,15 +3104,15 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .topcoat-search-input:disabled::-webkit-input-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-search-input:disabled::-moz-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-search-input:disabled:-ms-input-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 /* topdoc
@@ -2849,19 +3147,25 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .topcoat-search-input--large:disabled {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-search-input--large:disabled::-webkit-input-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-search-input--large:disabled::-moz-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-search-input--large:disabled:-ms-input-placeholder {
-  color: #000;
+  color: #1f1f21;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /**
@@ -2881,6 +3185,12 @@ input[type="search"]::-webkit-search-cancel-button {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -2907,6 +3217,7 @@ input[type="search"]::-webkit-search-cancel-button {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background-clip: padding-box;
+  z-index: 1;
 }
 
 .switch__input {
@@ -2956,6 +3267,12 @@ input[type="search"]::-webkit-search-cancel-button {
   pointer-events: none;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /**
 *
 * Copyright 2012 Adobe Systems Inc.;
@@ -2973,6 +3290,12 @@ input[type="search"]::-webkit-search-cancel-button {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -3000,6 +3323,7 @@ input[type="search"]::-webkit-search-cancel-button {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background-clip: padding-box;
+  z-index: 1;
 }
 
 .switch__input,
@@ -3094,32 +3418,35 @@ input[type="search"]::-webkit-search-cancel-button {
   border: 1px solid #157dfb;
   border: none;
   overflow: hidden;
-  width: 4rem;
+  width: 3.2rem;
+  height: 2rem;
 }
 
 .topcoat-switch__toggle:before,
 .topcoat-switch__toggle:after {
   top: -1px;
-  width: 4rem;
+  width: 3.5rem;
+  border: 0px solid #c8c7cc;
+  margin: -0.12rem 0 0 0;
 }
 
 .topcoat-switch__toggle:before {
   content: '';
-  color: #0083e8;
+  color: #4cd964;
   background-color: #4cd964;
   right: -0.08rem;
   padding-left: 1.5rem;
-  height: 1.5rem;
-  top: 3px;
+  height: 2rem;
+  top: 0;
   border-radius: 15px;
 }
 
 .topcoat-switch__toggle {
   line-height: 2rem;
-  line-height: 2rem;
+  line-height: 1.8rem;
   height: 2rem;
-  height: 2rem;
-  width: 2rem;
+  height: 1.9rem;
+  width: 1.9rem;
   border-radius: 4px;
   border-radius: 50%;
   color: #c6c8c8;
@@ -3128,12 +3455,12 @@ input[type="search"]::-webkit-search-cancel-button {
   background-color: #fff;
   border: 1px solid #157dfb;
   border: 1px solid #c8c7cc;
-  margin-left: -1.27rem;
+  margin-left: -1.2rem;
   margin-bottom: 0;
-  margin-top: 0;
+  margin-top: 0.06rem;
   box-shadow: none;
-  -webkit-transition: margin-left 0.05s ease-in-out;
-  transition: margin-left 0.05s ease-in-out;
+  -webkit-transition: margin-left 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
+  transition: margin-left 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
 }
 
 .topcoat-switch__toggle:after {
@@ -3141,13 +3468,14 @@ input[type="search"]::-webkit-search-cancel-button {
   background-color: #c8c7cc;
   left: -0.06rem;
   padding-left: 2rem;
-  height: 1.5rem;
-  top: 3px;
+  height: 2rem;
+  top: 0;
   border-radius: 15px;
 }
 
 .topcoat-switch__input:checked + .topcoat-switch__toggle {
-  margin-left: 0.75rem;
+  margin-left: -0.05rem;
+  background-color: var-background-color--switch__toggle--checked;
 }
 
 .topcoat-switch__input:active + .topcoat-switch__toggle {
@@ -3157,12 +3485,39 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .topcoat-switch__input:focus + .topcoat-switch__toggle {
   border: none;
+  border: 1px solid #c8c7cc;
   box-shadow: none;
 }
 
 .topcoat-switch__input:disabled + .topcoat-switch__toggle:after,
 .topcoat-switch__input:disabled + .topcoat-switch__toggle:before {
   background: transparent;
+}
+
+.topcoat-switch__input:checked + .topcoat-switch__toggle:after,
+.topcoat-switch__input:checked + .topcoat-switch__toggle:before {
+  background-color: #4cd964;
+  -webkit-transition: background-color 0.7s cubic-bezier(0.5, 1.6, 0.5, 1);
+  transition: background-color 0.7s cubic-bezier(0.5, 1.6, 0.5, 1);
+}
+
+.topcoat-switch__input + .topcoat-switch__toggle:after,
+.topcoat-switch__input + .topcoat-switch__toggle:before {
+  background-color: #c8c7cc;
+  -webkit-transition: background-color 0.7s cubic-bezier(0.5, 1.3, 0.5, 1);
+  transition: background-color 0.7s cubic-bezier(0.5, 1.3, 0.5, 1);
+}
+
+.topcoat-switch__input:checked + .topcoat-switch__toggle:after,
+box-shadow var-box-shadow--switch__label--after--checked,
+.topcoat-switch__input + .topcoat-switch__toggle:after {
+  box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /**
@@ -3182,6 +3537,12 @@ input[type="search"]::-webkit-search-cancel-button {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -3323,7 +3684,7 @@ input[type="search"]::-webkit-search-cancel-button {
   line-height: 44px;
   letter-spacing: 1px;
   color: #c6c8c8;
-  color: #157dfb;
+  color: #6f6f74;
   text-shadow: 0 1px none;
   vertical-align: top;
   background-color: var-background-color;
@@ -3336,7 +3697,7 @@ input[type="search"]::-webkit-search-cancel-button {
 .topcoat-tab-bar__button:active,
 .topcoat-tab-bar__button--large:active,
 :checked + .topcoat-tab-bar__button {
-  color: #338efc;
+  color: #157dfb;
   background-color: transparent;
   box-shadow: none;
 }
@@ -3344,9 +3705,16 @@ input[type="search"]::-webkit-search-cancel-button {
 .topcoat-tab-bar__button:focus,
 .topcoat-tab-bar__button--large:focus {
   z-index: 1;
+  border-top: var-border-top--tab-bar--focus;
   box-shadow: none, none;
   box-shadow: none;
   outline: 0;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /**
@@ -3366,6 +3734,12 @@ input[type="search"]::-webkit-search-cancel-button {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -3443,29 +3817,30 @@ input[type="search"]::-webkit-search-cancel-button {
   background-color: #fff;
   box-shadow: var-box-shadow--text-input;
   color: #c6c8c8;
-  color: #e7e7e7;
+  color: #a3a3a6;
   vertical-align: top;
 }
 
 .topcoat-text-input:focus,
 .topcoat-text-input--large:focus {
   background-color: #fff;
-  color: #000;
+  color: #1f1f21;
+  color: #6f6f74;
   border: none;
   border: 1px solid #c8c7cc;
   box-shadow: var-box-shadow--text-input, none;
 }
 
 .topcoat-text-input:disabled::-webkit-input-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-text-input:disabled::-moz-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-text-input:disabled:-ms-input-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-text-input:invalid {
@@ -3503,24 +3878,30 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .topcoat-text-input--large:disabled {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-text-input--large:disabled::-webkit-input-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-text-input--large:disabled::-moz-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-text-input--large:disabled:-ms-input-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-text-input--large:invalid {
   border: 1px solid #f00;
   color: #f00;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /**
@@ -3540,6 +3921,12 @@ input[type="search"]::-webkit-search-cancel-button {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -3580,6 +3967,12 @@ input[type="search"]::-webkit-search-cancel-button {
   pointer-events: none;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /**
 *
 * Copyright 2012 Adobe Systems Inc.;
@@ -3597,6 +3990,12 @@ input[type="search"]::-webkit-search-cancel-button {
 * limitations under the License.
 *
 */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /**
 *
@@ -3672,29 +4071,29 @@ input[type="search"]::-webkit-search-cancel-button {
   background-color: #fff;
   box-shadow: var-box-shadow--text-input;
   color: #c6c8c8;
-  color: #000;
+  color: #a3a3a6;
   letter-spacing: 1px;
 }
 
 .topcoat-textarea:focus,
 .topcoat-textarea--large:focus {
   background-color: #fff;
-  color: #000;
+  color: #1f1f21;
   border: none;
   border: 1px solid #c8c7cc;
   box-shadow: var-box-shadow--text-input, none;
 }
 
 .topcoat-textarea:disabled::-webkit-input-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-textarea:disabled::-moz-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-textarea:disabled:-ms-input-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 /* topdoc
@@ -3722,19 +4121,25 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 .topcoat-textarea--large:disabled {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-textarea--large:disabled::-webkit-input-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-textarea--large:disabled::-moz-placeholder {
-  color: #000;
+  color: #1f1f21;
 }
 
 .topcoat-textarea--large:disabled:-ms-input-placeholder {
-  color: #000;
+  color: #1f1f21;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 @font-face {
@@ -3754,6 +4159,12 @@ input[type="search"]::-webkit-search-cancel-button {
   font-weight: 600;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -3768,9 +4179,21 @@ body {
   outline-style: none;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 .topcoat-icon--menu-stack {
   background: url("../img/hamburger_dark.svg") no-repeat;
   background-size: cover;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .quarter {
@@ -3797,6 +4220,12 @@ body {
   width: 100%;
 }
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 .left {
   text-align: left;
 }
@@ -3807,6 +4236,12 @@ body {
 
 .right {
   text-align: right;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .reset-ui {
@@ -3830,6 +4265,96 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* This file should include color and image variables corresponding to the dark theme */
@@ -3868,6 +4393,12 @@ body {
 
 /* Switch */
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* Icon Button */
 
 /* Navigation bar */
@@ -3887,6 +4418,12 @@ body {
 /* Search Input */
 
 /* Switch */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /* This file should include color and image variables corresponding to the light theme */
 
@@ -3930,6 +4467,12 @@ Everything below this line should be calculated using the variables above. This 
 
 /* Switch */
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* Containers */
 
 /* Icon Button */
@@ -3952,7 +4495,19 @@ Everything below this line should be calculated using the variables above. This 
 
 /* Switch */
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* This file should include color and image variables corresponding to the onsen theme */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /* --------- colors --------- */
 
@@ -4002,55 +4557,11 @@ Everything below this line should be calculated using the variables above. This 
 
 /* Search-Input */
 
-/* This file should include color and image variables corresponding to the onsen theme */
-
-/* --------- colors --------- */
-
-/* ---------- darken ---------- */
-
-/* ---------- lighten ---------- */
-
-/* ---------- alphas ---------- */
-
-/* Page */
-
-/* Call To Action */
-
-/*Icon-Button*/
-
-/* Icons */
-
-/* Navigation Bar */
-
-/* Text Input */
-
-/* Text Area */
-
-/* List */
-
-/* Overlay */
-
-/* Progress bar */
-
-/* Checkbox */
-
-/* Range input */
-
-/* Radio Button */
-
-/* Tab bar */
-
-/* Switch */
-
-/* Bar button */
-
-/* Button */
-
-/* Button Quiet*/
-
-/* Notification */
-
-/* Search-Input */
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /* This file should include color and image variables corresponding to the onsen theme */
 
@@ -4102,7 +4613,75 @@ Everything below this line should be calculated using the variables above. This 
 
 /* Search-Input */
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* This file should include color and image variables corresponding to the onsen theme */
+
+/* --------- colors --------- */
+
+/* ---------- darken ---------- */
+
+/* ---------- lighten ---------- */
+
+/* ---------- alphas ---------- */
+
+/* Page */
+
+/* Call To Action */
+
+/*Icon-Button*/
+
+/* Icons */
+
+/* Navigation Bar */
+
+/* Text Input */
+
+/* Text Area */
+
+/* List */
+
+/* Overlay */
+
+/* Progress bar */
+
+/* Checkbox */
+
+/* Range input */
+
+/* Radio Button */
+
+/* Tab bar */
+
+/* Switch */
+
+/* Bar button */
+
+/* Button */
+
+/* Button Quiet*/
+
+/* Notification */
+
+/* Search-Input */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* This file should include color and image variables corresponding to the onsen theme */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /* --------- colors --------- */
 
@@ -4152,55 +4731,11 @@ Everything below this line should be calculated using the variables above. This 
 
 /* Search-Input */
 
-/* This file should include color and image variables corresponding to the onsen theme */
-
-/* --------- colors --------- */
-
-/* ---------- darken ---------- */
-
-/* ---------- lighten ---------- */
-
-/* ---------- alphas ---------- */
-
-/* Page */
-
-/* Call To Action */
-
-/*Icon-Button*/
-
-/* Icons */
-
-/* Navigation Bar */
-
-/* Text Input */
-
-/* Text Area */
-
-/* List */
-
-/* Overlay */
-
-/* Progress bar */
-
-/* Checkbox */
-
-/* Range input */
-
-/* Radio Button */
-
-/* Tab bar */
-
-/* Switch */
-
-/* Bar button */
-
-/* Button */
-
-/* Button Quiet*/
-
-/* Notification */
-
-/* Search-Input */
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /* This file should include color and image variables corresponding to the onsen theme */
 
@@ -4252,55 +4787,11 @@ Everything below this line should be calculated using the variables above. This 
 
 /* Search-Input */
 
-/* This file should include color and image variables corresponding to the onsen theme */
-
-/* --------- colors --------- */
-
-/* ---------- darken ---------- */
-
-/* ---------- lighten ---------- */
-
-/* ---------- alphas ---------- */
-
-/* Page */
-
-/* Call To Action */
-
-/*Icon-Button*/
-
-/* Icons */
-
-/* Navigation Bar */
-
-/* Text Input */
-
-/* Text Area */
-
-/* List */
-
-/* Overlay */
-
-/* Progress bar */
-
-/* Checkbox */
-
-/* Range input */
-
-/* Radio Button */
-
-/* Tab bar */
-
-/* Switch */
-
-/* Bar button */
-
-/* Button */
-
-/* Button Quiet*/
-
-/* Notification */
-
-/* Search-Input */
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /* This file should include color and image variables corresponding to the onsen theme */
 
@@ -4351,6 +4842,124 @@ Everything below this line should be calculated using the variables above. This 
 /* Notification */
 
 /* Search-Input */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* This file should include color and image variables corresponding to the onsen theme */
+
+/* --------- colors --------- */
+
+/* ---------- darken ---------- */
+
+/* ---------- lighten ---------- */
+
+/* ---------- alphas ---------- */
+
+/* Page */
+
+/* Call To Action */
+
+/*Icon-Button*/
+
+/* Icons */
+
+/* Navigation Bar */
+
+/* Text Input */
+
+/* Text Area */
+
+/* List */
+
+/* Overlay */
+
+/* Progress bar */
+
+/* Checkbox */
+
+/* Range input */
+
+/* Radio Button */
+
+/* Tab bar */
+
+/* Switch */
+
+/* Bar button */
+
+/* Button */
+
+/* Button Quiet*/
+
+/* Notification */
+
+/* Search-Input */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* This file should include color and image variables corresponding to the onsen theme */
+
+/* --------- colors --------- */
+
+/* ---------- darken ---------- */
+
+/* ---------- lighten ---------- */
+
+/* ---------- alphas ---------- */
+
+/* Page */
+
+/* Call To Action */
+
+/*Icon-Button*/
+
+/* Icons */
+
+/* Navigation Bar */
+
+/* Text Input */
+
+/* Text Area */
+
+/* List */
+
+/* Overlay */
+
+/* Progress bar */
+
+/* Checkbox */
+
+/* Range input */
+
+/* Radio Button */
+
+/* Tab bar */
+
+/* Switch */
+
+/* Bar button */
+
+/* Button */
+
+/* Button Quiet*/
+
+/* Notification */
+
+/* Search-Input */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
 
 /* Containers */
 
@@ -4382,6 +4991,12 @@ Everything below this line should be calculated using the variables above. This 
 
 /* Tab-bar */
 
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* Call To Action */
 
 /* Text Input */
@@ -4401,3 +5016,9 @@ Everything below this line should be calculated using the variables above. This 
 /* Notification */
 
 /* Search */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-overflow-scrolling: touch;
+}
