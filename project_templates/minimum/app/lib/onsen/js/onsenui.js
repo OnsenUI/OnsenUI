@@ -75,7 +75,7 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
   $templateCache.put("templates/navigator.tpl",
     "<div class=\"navigator-container\">	\n" +
     "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar relative\">	    \n" +
-    "		<div class=\"topcoat-navigation-bar__item onsen_navigatioon-bar__background onsen_navigator__left-button-container transition hide\">\n" +
+    "		<div class=\"topcoat-navigation-bar__item topcoat-navigation-bar__bg onsen_navigator__left-button-container transition hide\">\n" +
     "			<span id=\"left-section\" class=\"topcoat-icon-button--quiet\">\n" +
     "				<i class=\"fa fa-angle-left fa-2x onsen_navigation-bar-height\"></i>\n" +
     "			</span>			\n" +
@@ -816,7 +816,6 @@ limitations under the License.
 						var outLabel = outNavigatorItem.backLabel;
 						if (outLabel) {
 							outLabel.bind('webkitTransitionEnd', function transitionEnded(e) {
-								console.log('removing ', outLabel);
 								outLabel.remove();
 								outLabel.unbind(transitionEnded);
 							});
@@ -835,7 +834,6 @@ limitations under the License.
 							outLabel.remove();
 						} else {
 							outLabel.bind('webkitTransitionEnd', function transitionEnded(e) {
-								console.log('remove');
 								outLabel.remove();
 								outLabel.unbind(transitionEnded);
 							});
@@ -859,7 +857,6 @@ limitations under the License.
 					},
 
 					onLeftButtonClicked: function() {
-						console.log('back clicked');
 						var onLeftButtonClick = this.getCurrentNavigatorItem().options.onLeftButtonClick;
 						if (onLeftButtonClick) {
 							var onLeftButtonClickFn = $parse(onLeftButtonClick);
@@ -1038,7 +1035,6 @@ limitations under the License.
 
 					attachMethods: function() {
 						scope.ons.navigator.pushPage = function(page, options) {
-							console.log('push ', page);
 							$http({
 								url: page,
 								method: "GET"
@@ -1110,7 +1106,6 @@ limitations under the License.
 						}.bind(this);
 
 						scope.ons.navigator.popPage = function() {
-							console.log('pop');
 							if (navigatorItems.length < 2) {
 								return;
 							}
@@ -1438,7 +1433,6 @@ limitations under the License.
 
 					attachMethods: function() {
 						scope.ons.screen.presentPage = function(page) {
-							console.log('present page');
 							$http({
 								url: page,
 								method: "GET"
@@ -1731,7 +1725,6 @@ limitations under the License.
 
 
 					handleEvent: function(ev) {
-						console.log(ev.type);
 						switch (ev.type) {
 						
 							case 'dragleft':
@@ -1765,7 +1758,6 @@ limitations under the License.
 					},
 
 					onTransitionEnd: function() {
-						console.log('transition ended');
 						this.$abovePage.removeClass('transition');
 						this.$behindPage.removeClass('transition');
 					},
@@ -1992,7 +1984,6 @@ limitations under the License.
 							default:
 								// by width
 								if (isNumber(scope.collapse)) {									
-									console.log('window', window.innerWidth, scope.collapse);
 									if (window.innerWidth < scope.collapse) {
 										return true;
 									} else {
@@ -2013,12 +2004,10 @@ limitations under the License.
 						this.behindPage.style.opacity = 1;
 						this.abovePage.style.width = scope.mainPageWidth + '%';
 						var translate = behindSize * window.innerWidth / 100;
-						console.log('translate', translate);
 						this.translate2(translate);
 					},
 
 					activateCollapseMode: function() {
-						console.log('activate collapse mode');
 						this.behindPage.style.width = '100%';
 						this.abovePage.style.width = '100%';						
 						this.mode = COLLAPSE_MODE;
@@ -2031,7 +2020,6 @@ limitations under the License.
 					},
 
 					deactivateCollapseMode: function() {
-						console.log('deactivate collapse mode');
 						this.setSize();
 						this.deactivateHammer();
 						this.mode = SPLIT_MODE;
@@ -2041,12 +2029,10 @@ limitations under the License.
 					},
 
 					activateHammer: function() {
-						console.log('activate hammer');
 						this.hammertime.on("dragleft dragright swipeleft swiperight release", this.boundHammerEvent);
 					},
 
 					deactivateHammer: function() {
-						console.log('deactivate hammer');
 						this.hammertime.off("dragleft dragright swipeleft swiperight release", this.boundHammerEvent);
 					},
 
@@ -2088,7 +2074,6 @@ limitations under the License.
 					},
 
 					onTransitionEnd: function() {
-						console.log('transition ended');
 						this.$abovePage.removeClass('transition');
 						this.$behindPage.removeClass('transition');
 					},

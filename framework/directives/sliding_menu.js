@@ -58,7 +58,6 @@ limitations under the License.
 
 
 					handleEvent: function(ev) {
-						console.log(ev.type);
 						switch (ev.type) {
 						
 							case 'dragleft':
@@ -92,7 +91,6 @@ limitations under the License.
 					},
 
 					onTransitionEnd: function() {
-						console.log('transition ended');
 						this.$abovePage.removeClass('transition');
 						this.$behindPage.removeClass('transition');
 					},

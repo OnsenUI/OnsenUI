@@ -67,7 +67,6 @@ limitations under the License.
 
 					attachMethods: function() {
 						scope.ons.screen.presentPage = function(page) {
-							console.log('present page');
 							$http({
 								url: page,
 								method: "GET"

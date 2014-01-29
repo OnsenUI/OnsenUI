@@ -106,7 +106,6 @@ limitations under the License.
 							default:
 								// by width
 								if (isNumber(scope.collapse)) {									
-									console.log('window', window.innerWidth, scope.collapse);
 									if (window.innerWidth < scope.collapse) {
 										return true;
 									} else {
@@ -127,12 +126,10 @@ limitations under the License.
 						this.behindPage.style.opacity = 1;
 						this.abovePage.style.width = scope.mainPageWidth + '%';
 						var translate = behindSize * window.innerWidth / 100;
-						console.log('translate', translate);
 						this.translate2(translate);
 					},
 
 					activateCollapseMode: function() {
-						console.log('activate collapse mode');
 						this.behindPage.style.width = '100%';
 						this.abovePage.style.width = '100%';						
 						this.mode = COLLAPSE_MODE;
@@ -145,7 +142,6 @@ limitations under the License.
 					},
 
 					deactivateCollapseMode: function() {
-						console.log('deactivate collapse mode');
 						this.setSize();
 						this.deactivateHammer();
 						this.mode = SPLIT_MODE;
@@ -155,12 +151,10 @@ limitations under the License.
 					},
 
 					activateHammer: function() {
-						console.log('activate hammer');
 						this.hammertime.on("dragleft dragright swipeleft swiperight release", this.boundHammerEvent);
 					},
 
 					deactivateHammer: function() {
-						console.log('deactivate hammer');
 						this.hammertime.off("dragleft dragright swipeleft swiperight release", this.boundHammerEvent);
 					},
 
@@ -202,7 +196,6 @@ limitations under the License.
 					},
 
 					onTransitionEnd: function() {
-						console.log('transition ended');
 						this.$abovePage.removeClass('transition');
 						this.$behindPage.removeClass('transition');
 					},

@@ -106,7 +106,6 @@ limitations under the License.
 						var outLabel = outNavigatorItem.backLabel;
 						if (outLabel) {
 							outLabel.bind('webkitTransitionEnd', function transitionEnded(e) {
-								console.log('removing ', outLabel);
 								outLabel.remove();
 								outLabel.unbind(transitionEnded);
 							});
@@ -125,7 +124,6 @@ limitations under the License.
 							outLabel.remove();
 						} else {
 							outLabel.bind('webkitTransitionEnd', function transitionEnded(e) {
-								console.log('remove');
 								outLabel.remove();
 								outLabel.unbind(transitionEnded);
 							});
@@ -149,7 +147,6 @@ limitations under the License.
 					},
 
 					onLeftButtonClicked: function() {
-						console.log('back clicked');
 						var onLeftButtonClick = this.getCurrentNavigatorItem().options.onLeftButtonClick;
 						if (onLeftButtonClick) {
 							var onLeftButtonClickFn = $parse(onLeftButtonClick);
@@ -328,7 +325,6 @@ limitations under the License.
 
 					attachMethods: function() {
 						scope.ons.navigator.pushPage = function(page, options) {
-							console.log('push ', page);
 							$http({
 								url: page,
 								method: "GET"
@@ -400,7 +396,6 @@ limitations under the License.
 						}.bind(this);
 
 						scope.ons.navigator.popPage = function() {
-							console.log('pop');
 							if (navigatorItems.length < 2) {
 								return;
 							}
