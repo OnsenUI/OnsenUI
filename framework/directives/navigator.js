@@ -324,6 +324,26 @@ limitations under the License.
 
 
 					attachMethods: function() {
+						scope.ons.navigator.resetToPage = function(page, options){
+							var navigatorItem;							
+							for (var i = 0; i < navigatorItems.length; i++) {
+								navigatorItem = navigatorItems[i];
+								if(navigatorItem.backLabel){
+									navigatorItem.backLabel.remove();
+								}
+								if(navigatorItem.titleElement){
+									navigatorItem.titleElement.remove();
+								}
+								if(navigatorItem.rightButtonIconElement){
+									navigatorItem.rightButtonIconElement.remove();
+								}								
+							};
+							
+							container.empty();
+							navigatorItems = [];
+							scope.ons.navigator.pushPage(page, options);
+						}.bind(this);
+
 						scope.ons.navigator.pushPage = function(page, options) {
 							$http({
 								url: page,
