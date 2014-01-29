@@ -495,15 +495,7 @@ limitations under the License.
 					}else{
 						$scope.fixedWidth = '';						
 					}
-				});
-
-				attrs.$observe('inverse', function(inverse){
-					if(inverse === "true"){
-						$scope.inverse = 'inverse';
-					}else{
-						$scope.inverse = '';						
-					}
-				});
+				});				
 			}
 		};
 	});
@@ -526,8 +518,7 @@ limitations under the License.
 
 				function getLandscapeOrPortraitFromInteger(orientation){
 					if(orientation === undefined ){
-						console.log('not orientation');
-						return window.screen.width > window.screen.height ? 'landscape' : 'portrait';
+						return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
 					}
 
 					if(orientation == 90 || orientation == -90){
@@ -542,7 +533,12 @@ limitations under the License.
 				$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
 
 				window.addEventListener("orientationchange", function() {
-					console.log('orientation changed' + window.orientation);
+					$scope.$apply(function(){
+						$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
+					});
+				}, false);
+
+				window.addEventListener("resize", function() {
 					$scope.$apply(function(){
 						$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
 					});
