@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-01-29 */
+/*! onsenui - v0.7.0 - 2014-01-30 */
 angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
@@ -378,10 +378,10 @@ limitations under the License.
 				ngTrueValue: '@',
 				ngFalseValue: '@'
 			},
-			transclude: false,
+			transclude: true,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
 			link: function($scope, element, attrs, ngModel){
-				var checkbox = element.find('input');
+				var checkbox = element.find('input');				
 				var checked = false;
 				attrs.$observe('disabled', function(disabled){
 					if(disabled === undefined){
@@ -392,8 +392,8 @@ limitations under the License.
 				});
 
 				if(ngModel){					
-					ngModel.$render = function() {
-						checked = ( ngModel.$viewValue == "true" );
+					ngModel.$render = function() {						
+						checked = ( ngModel.$viewValue == 'true' || ngModel.$viewValue == $scope.ngTrueValue );
 						checkbox.attr('checked', checked);
 					};
 

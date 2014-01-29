@@ -6,7 +6,7 @@
   <title>Checkbox | Onsen UI</title>  
   <link rel="stylesheet" href="styles/app.css"/>
   <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
-  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-blue.css">  
+  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">  
 
   <script src="lib/onsen/js/angular/angular.js"></script> 
   <script src="lib/onsen/js/angular/angular-touch.js"></script>       
@@ -24,16 +24,16 @@
 <body>    
   
   <div class="center">
-    <section>
-      <h2>Agree?</h2> 
+    <section>      
       <ons-checkbox ng-model="agree">
+        True or False?
       </ons-checkbox>
       <h3>{{agree}}</h3>  
     </section>
 
-    <section>
-      <h2>YES or NO?</h2>
+    <section>      
       <ons-checkbox ng-model="answer" ng-true-value="YES" ng-false-value="NO">
+        Yes or No?
       </ons-checkbox>
       <h3>{{answer}}</h3>  
     </section>
