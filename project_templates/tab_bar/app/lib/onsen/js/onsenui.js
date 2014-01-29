@@ -53,7 +53,7 @@ angular.module("templates/if_platform.tpl", []).run(["$templateCache", function(
 
 angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/list.tpl",
-    "<div class=\"scroller-wrapper page\" ons-scrollable>\n" +
+    "<div class=\"scroller-wrapper full-screen\" ons-scrollable>\n" +
     "	<div class=\"scroller\">\n" +
     "		<div class=\"topcoat-list__container\" ng-class=\"theme + '-container'\">\n" +
     "			<ul class=\"topcoat-list\" ng-class=\"theme + '-list'\" ng-transclude>\n" +
@@ -122,7 +122,7 @@ angular.module("templates/screen.tpl", []).run(["$templateCache", function($temp
 
 angular.module("templates/scroller.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/scroller.tpl",
-    "<div class=\"scroller-wrapper page\" ons-scrollable>\n" +
+    "<div class=\"scroller-wrapper full-screen\" ons-scrollable>\n" +
     "	<div class=\"scroller\">\n" +
     "		<div ng-transclude>\n" +
     "			\n" +
@@ -574,11 +574,39 @@ limitations under the License.
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_platform.tpl',
 			link: function($scope, element, attrs) {
 
-				var platform;
+				var platform;				
+
+				var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+				    // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
+				var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
+				var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+				    // At least Safari 3+: "[object HTMLElementConstructor]"
+				var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
+				var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
+
+				if(isOpera){
+					platform = "opera";
+				}
+
+				if(isFirefox){
+					platform = "firefox";
+				}
+
+				if(isSafari){
+					platform = "safari";
+				}
+
+				if(isChrome){
+					platform = "chrome";
+				}
+
+				if(isIE){
+					platform = "ie";
+				}
+
 				if (navigator.userAgent.match(/Android/i)) {
 					platform = "android";
 				}
-
 
 				if (navigator.userAgent.match(/BlackBerry/i)) {
 					platform = "blackberry";

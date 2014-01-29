@@ -80,7 +80,7 @@ module.exports = function(grunt) {
             cwd: 'framework/lib/angular',
             dest: 'build/js/angular',
             src: [
-              '*.js'
+              '*.*'
             ]               
           },
           // topcoat css
