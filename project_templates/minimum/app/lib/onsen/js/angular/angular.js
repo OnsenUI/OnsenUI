@@ -1,3 +1,7 @@
+<<<<<<< Updated upstream:project_templates/minimum/app/lib/onsen/js/angular/angular.js
+=======
+/*! onsen_ui - v0.6.0 - 2014-01-30 */
+>>>>>>> Stashed changes:build/dev/onsen_ui.js
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
