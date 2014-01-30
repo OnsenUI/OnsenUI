@@ -1038,8 +1038,7 @@ limitations under the License.
 						inPage.attr("class", "onsen_navigator-pager right");
 
 						var that = this;
-						inPage.bind('webkitTransitionEnd', function transitionEnded(e) {
-							console.log('webkit transition ended');							
+						inPage.bind('webkitTransitionEnd', function transitionEnded(e) {							
 							that.onTransitionEnded();
 						});
 						
@@ -1049,14 +1048,12 @@ limitations under the License.
 					},
 
 					animatePageOut: function(currentPage, previousPage) {
-						console.log('animate page out');						
 						previousPage.attr("class", "onsen_navigator-pager left");
 						element[0].offsetWidth;
 						previousPage.attr("class", "onsen_navigator-pager transition center");
 
 						var that = this;
 						currentPage.bind('webkitTransitionEnd', function transitionEnded(e) {
-							console.log('webkit transition ended');
 							currentPage.remove();
 							currentPage.unbind(transitionEnded);
 							that.onTransitionEnded();
