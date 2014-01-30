@@ -781,6 +781,12 @@ limitations under the License.
 							scope.ons.navigator.pushPage(scope.page, options);
 						}
 						this.checkiOS7();
+
+						attrs.$observe('title', function(title){
+							if(title){
+								this.setTitle(title);
+							}
+						}.bind(this));	
 					},
 
 					onTransitionEnded: function(){
@@ -896,6 +902,17 @@ limitations under the License.
 								onRightButtonClickFunction(scope.$parent);
 							}
 						}
+					},
+
+					setTitle: function(title){ // no animation
+						if(this.isEmpty()){
+							return;
+						}
+						var currentNavigatorItem = navigatorItems[navigatorItems.length - 1];
+						currentNavigatorItem.options.title = title;
+						if(currentNavigatorItem.titleElement){
+							currentNavigatorItem.titleElement.text(title);
+						}						
 					},
 
 					animateTitleIn: function(inNavigatorItem, outNavigatorItem) {
