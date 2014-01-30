@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-01-30 */
+/*! onsenui - v0.7.0 - 2014-01-31 */
 angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
@@ -1607,16 +1607,19 @@ limitations under the License.
 				scrollWrapper = element[0];
 				var offset = parseInt(attrs.threshold) || 10;
 
-				scrollWrapper.addEventListener('scroll', function() {
-					if (scope.infinitScrollEnable) {
-						var scrollTopAndOffsetHeight = scrollWrapper.scrollTop + scrollWrapper.offsetHeight;
-						var scrollHeightMinusOffset = scrollWrapper.scrollHeight - offset;
+				if(scope.onScrolled){
+					scrollWrapper.addEventListener('scroll', function() {
+						if (scope.infinitScrollEnable) {
+							var scrollTopAndOffsetHeight = scrollWrapper.scrollTop + scrollWrapper.offsetHeight;
+							var scrollHeightMinusOffset = scrollWrapper.scrollHeight - offset;
 
-						if (scrollTopAndOffsetHeight >= scrollHeightMinusOffset) {
-							scope.onScrolled();
+							if (scrollTopAndOffsetHeight >= scrollHeightMinusOffset) {
+								scope.onScrolled();
+							}
 						}
-					}
-				});
+					});	
+				}
+				
 
 				// IScroll for Android
 				if (!Modernizr.csstransforms3d) {
@@ -1637,13 +1640,16 @@ limitations under the License.
 							}
 						});
 
-						iScroll.on('scrollEnd', function(e) {
-							var scrolled = iScroll.y - offset;
-							if (scrolled < iScroll.maxScrollY) {
-								// console.log('we are there!');
-								scope.onScrolled();
-							}
-						});
+						if(scope.onScrolled){
+							iScroll.on('scrollEnd', function(e) {
+								var scrolled = iScroll.y - offset;
+								if (scrolled < iScroll.maxScrollY) {
+									// console.log('we are there!');
+									scope.onScrolled();
+								}
+							});	
+						}
+						
 					}, 500);
 				}
 			}
@@ -2106,7 +2112,7 @@ limitations under the License.
 					},
 
 					setSize: function() {
-						var behindSize = 100 - scope.mainPageWidth;
+						var behindSize = 100 - scope.mainPageWidth.replace('%', '');
 						this.behindPage.style.width = behindSize + '%';
 						this.behindPage.style.opacity = 1;
 						this.abovePage.style.width = scope.mainPageWidth + '%';
