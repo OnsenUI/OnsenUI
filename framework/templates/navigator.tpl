@@ -5,7 +5,11 @@
 				<i class="fa fa-angle-left fa-2x onsen_navigation-bar-height"></i>
 			</span>			
 		</div>		
-		<div class="onsen_navigator__right-button topcoat-navigation-bar__item topcoat-icon-button--quiet"></div>
+		<div class="onsen_navigator__right-button topcoat-navigation-bar__item">
+			<span id="right-section-icon" class="topcoat-icon-button--quiet">
+			</span>
+
+		</div>
 	</div>	
 	<div class="relative navigator-content">
 		

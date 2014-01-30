@@ -79,7 +79,11 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "				<i class=\"fa fa-angle-left fa-2x onsen_navigation-bar-height\"></i>\n" +
     "			</span>			\n" +
     "		</div>		\n" +
-    "		<div class=\"onsen_navigator__right-button topcoat-navigation-bar__item topcoat-icon-button--quiet\"></div>\n" +
+    "		<div class=\"onsen_navigator__right-button topcoat-navigation-bar__item\">\n" +
+    "			<span id=\"right-section-icon\" class=\"topcoat-icon-button--quiet\">\n" +
+    "			</span>\n" +
+    "\n" +
+    "		</div>\n" +
     "	</div>	\n" +
     "	<div class=\"relative navigator-content\">\n" +
     "		\n" +

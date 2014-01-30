@@ -138,8 +138,7 @@ limitations under the License.
 .onsen_navigator__right-button {
   position: absolute;
   right: 10px;
-  top: 0;
-  width: 10%;
+  width: 13%;
   bottom: 0;
 }
 

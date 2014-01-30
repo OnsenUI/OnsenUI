@@ -51,6 +51,7 @@ limitations under the License.
 				var leftArrow = angular.element(leftButtonContainer[0].querySelector('i'));
 
 				var rightSection = angular.element(toolbar[0].querySelector('.onsen_navigator__right-button'));
+				var rightSectionIcon = angular.element(rightSection[0].querySelector('#right-section-icon'));				
 
 				var leftButtonClickFn = $parse(scope.onLeftButtonClick);
 
@@ -214,7 +215,7 @@ limitations under the License.
 							} else {
 								rightButtonIconElement = angular.element('<i></i>');
 								rightButtonIconElement.addClass(inNavigatorItem.options.rightButtonIcon + ' onsen_navigation-bar-height onsen_fade');
-								rightSection.append(rightButtonIconElement);
+								rightSectionIcon.append(rightButtonIconElement);
 								inNavigatorItem.rightButtonIconElement = rightButtonIconElement;
 							}
 
@@ -248,7 +249,7 @@ limitations under the License.
 						}
 						if (inNavigatorItem.rightButtonIconElement) {
 							var rightButton = inNavigatorItem.rightButtonIconElement;
-							rightSection.append(rightButton);
+							rightSectionIcon.append(rightButton);
 							rightSection[0].offsetWidth;
 							rightButton.removeClass('hide');
 							rightButton.addClass('transition show');
