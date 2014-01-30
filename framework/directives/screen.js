@@ -38,11 +38,16 @@ limitations under the License.
 
 				var Screen = Class.extend({
 					init: function() {
+						this.isReady = true;
 						this.attachMethods();
 
 						if (scope.page) {
 							scope.ons.screen.presentPage(scope.page);
 						}
+					},
+
+					onTransitionEnded: function(){
+						this.isReady = true;
 					},
 
 					animateInBehindPage: function(){
@@ -52,6 +57,11 @@ limitations under the License.
 
 					animateInCurrentPage: function(pager) {
 						pager.attr("class", "screen-page unmodal");
+						var that = this;
+						pager.bind('webkitTransitionEnd', function transitionEnded() {
+							that.onTransitionEnded();
+							// pager.unbind(transitionEnded);
+						});
 						element[0].offsetWidth;						
 						pager.attr("class", "screen-page transition center");
 					},
@@ -67,6 +77,13 @@ limitations under the License.
 
 					attachMethods: function() {
 						scope.ons.screen.presentPage = function(page) {
+							if(!this.isReady){
+								console.log('not ready -> ignore');
+								return;
+							}else{
+								this.isReady = false;
+							}
+
 							$http({
 								url: page,
 								method: "GET"
@@ -86,6 +103,8 @@ limitations under the License.
 								if (!this.isEmpty()) {									
 									this.animateInBehindPage();
 									this.animateInCurrentPage(pager);
+								}else{
+									this.isReady = true;
 								}
 
 								screenItems.push(pager);
@@ -95,16 +114,19 @@ limitations under the License.
 						}.bind(this);
 
 						scope.ons.screen.dismissPage = function() {
-							if(screenItems.length < 2){
+							if(screenItems.length < 2 || !this.isReady){
 								// cant dismiss anymore
 								return;
 							}
+							this.isReady = false;
+
 							var currentPage = screenItems.pop();
 							this.animateOutBehindPage();
 							currentPage.attr("class", "screen-page transition unmodal");
-							currentPage[0].addEventListener('webkitTransitionEnd', function transitionEnded(e) {
+							var that = this;
+							currentPage.bind('webkitTransitionEnd', function transitionEnded() {
 								currentPage.remove();
-								currentPage[0].removeEventListener(transitionEnded);
+								that.isReady = true;
 							});							
 						}.bind(this);
 					}
