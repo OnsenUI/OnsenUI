@@ -40,16 +40,19 @@ limitations under the License.
 				scrollWrapper = element[0];
 				var offset = parseInt(attrs.threshold) || 10;
 
-				scrollWrapper.addEventListener('scroll', function() {
-					if (scope.infinitScrollEnable) {
-						var scrollTopAndOffsetHeight = scrollWrapper.scrollTop + scrollWrapper.offsetHeight;
-						var scrollHeightMinusOffset = scrollWrapper.scrollHeight - offset;
+				if(scope.onScrolled){
+					scrollWrapper.addEventListener('scroll', function() {
+						if (scope.infinitScrollEnable) {
+							var scrollTopAndOffsetHeight = scrollWrapper.scrollTop + scrollWrapper.offsetHeight;
+							var scrollHeightMinusOffset = scrollWrapper.scrollHeight - offset;
 
-						if (scrollTopAndOffsetHeight >= scrollHeightMinusOffset) {
-							scope.onScrolled();
+							if (scrollTopAndOffsetHeight >= scrollHeightMinusOffset) {
+								scope.onScrolled();
+							}
 						}
-					}
-				});
+					});	
+				}
+				
 
 				// IScroll for Android
 				if (!Modernizr.csstransforms3d) {
@@ -70,13 +73,16 @@ limitations under the License.
 							}
 						});
 
-						iScroll.on('scrollEnd', function(e) {
-							var scrolled = iScroll.y - offset;
-							if (scrolled < iScroll.maxScrollY) {
-								// console.log('we are there!');
-								scope.onScrolled();
-							}
-						});
+						if(scope.onScrolled){
+							iScroll.on('scrollEnd', function(e) {
+								var scrolled = iScroll.y - offset;
+								if (scrolled < iScroll.maxScrollY) {
+									// console.log('we are there!');
+									scope.onScrolled();
+								}
+							});	
+						}
+						
 					}, 500);
 				}
 			}
