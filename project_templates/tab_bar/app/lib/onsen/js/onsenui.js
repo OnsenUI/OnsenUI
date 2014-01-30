@@ -80,7 +80,11 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "				<i class=\"fa fa-angle-left fa-2x onsen_navigation-bar-height\"></i>\n" +
     "			</span>			\n" +
     "		</div>		\n" +
-    "		<div class=\"onsen_navigator__right-button topcoat-navigation-bar__item topcoat-icon-button--quiet\"></div>\n" +
+    "		<div class=\"onsen_navigator__right-button topcoat-navigation-bar__item\">\n" +
+    "			<span id=\"right-section-icon\" class=\"topcoat-icon-button--quiet\">\n" +
+    "			</span>\n" +
+    "\n" +
+    "		</div>\n" +
     "	</div>	\n" +
     "	<div class=\"relative navigator-content\">\n" +
     "		\n" +
@@ -743,6 +747,7 @@ limitations under the License.
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.tpl',
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
+				
 				var leftButtonClick = attrs.onLeftButtonClick;
 				var rightButtonClick = attrs.onRightButtonClick;
 				var navigatorItems = [];
@@ -755,11 +760,13 @@ limitations under the License.
 				var leftArrow = angular.element(leftButtonContainer[0].querySelector('i'));
 
 				var rightSection = angular.element(toolbar[0].querySelector('.onsen_navigator__right-button'));
+				var rightSectionIcon = angular.element(rightSection[0].querySelector('#right-section-icon'));				
 
 				var leftButtonClickFn = $parse(scope.onLeftButtonClick);
 
 				var Navigator = Class.extend({
 					init: function() {
+						this.setReady(true);
 						this.attachMethods();
 						leftSection.bind('click', this.onLeftButtonClicked.bind(this));
 						rightSection.bind('click', this.onRightButtonClicked.bind(this));
@@ -774,6 +781,18 @@ limitations under the License.
 							scope.ons.navigator.pushPage(scope.page, options);
 						}
 						this.checkiOS7();
+					},
+
+					onTransitionEnded: function(){
+						this.setReady(true);
+					},
+
+					setReady: function(ready){
+						this.ready = ready;
+					},
+
+					isReady: function(){
+						return this.ready;
 					},
 
 					checkiOS7: function() {
@@ -905,7 +924,7 @@ limitations under the License.
 							} else {
 								rightButtonIconElement = angular.element('<i></i>');
 								rightButtonIconElement.addClass(inNavigatorItem.options.rightButtonIcon + ' onsen_navigation-bar-height onsen_fade');
-								rightSection.append(rightButtonIconElement);
+								rightSectionIcon.append(rightButtonIconElement);
 								inNavigatorItem.rightButtonIconElement = rightButtonIconElement;
 							}
 
@@ -939,7 +958,7 @@ limitations under the License.
 						}
 						if (inNavigatorItem.rightButtonIconElement) {
 							var rightButton = inNavigatorItem.rightButtonIconElement;
-							rightSection.append(rightButton);
+							rightSectionIcon.append(rightButton);
 							rightSection[0].offsetWidth;
 							rightButton.removeClass('hide');
 							rightButton.addClass('transition show');
@@ -1000,20 +1019,30 @@ limitations under the License.
 
 					animatePageIn: function(inPage, outPage) {
 						inPage.attr("class", "onsen_navigator-pager right");
+
+						var that = this;
+						inPage.bind('webkitTransitionEnd', function transitionEnded(e) {
+							console.log('webkit transition ended');							
+							that.onTransitionEnded();
+						});
+						
 						element[0].offsetWidth;
 						inPage.attr("class", "onsen_navigator-pager transition center");
 						outPage.attr("class", "onsen_navigator-pager transition left");
 					},
 
 					animatePageOut: function(currentPage, previousPage) {
-						// previousPage = $compile(previousPage)(scope);								
+						console.log('animate page out');						
 						previousPage.attr("class", "onsen_navigator-pager left");
 						element[0].offsetWidth;
 						previousPage.attr("class", "onsen_navigator-pager transition center");
 
+						var that = this;
 						currentPage.bind('webkitTransitionEnd', function transitionEnded(e) {
+							console.log('webkit transition ended');
 							currentPage.remove();
 							currentPage.unbind(transitionEnded);
+							that.onTransitionEnded();
 						});
 
 						currentPage.attr("class", "onsen_navigator-pager transition right");
@@ -1030,6 +1059,9 @@ limitations under the License.
 
 					attachMethods: function() {
 						scope.ons.navigator.resetToPage = function(page, options){
+							if(!this.isReady()){
+								return;
+							}
 							var navigatorItem;							
 							for (var i = 0; i < navigatorItems.length; i++) {
 								navigatorItem = navigatorItems[i];
@@ -1050,6 +1082,13 @@ limitations under the License.
 						}.bind(this);
 
 						scope.ons.navigator.pushPage = function(page, options) {
+							if(!this.isReady()){
+								console.log('not ready => ignore');
+								return;
+							}
+
+							this.setReady(false);
+
 							$http({
 								url: page,
 								method: "GET"
@@ -1110,7 +1149,7 @@ limitations under the License.
 									toolbar.append(titleElement);
 									navigatorItem.titleElement = titleElement;
 									this.animateRightButtonIn(navigatorItem, null);
-
+									this.setReady(true);
 								}
 								navigatorItems.push(navigatorItem);
 								this.setLeftButton(navigatorItem);
@@ -1121,9 +1160,11 @@ limitations under the License.
 						}.bind(this);
 
 						scope.ons.navigator.popPage = function() {
-							if (navigatorItems.length < 2) {
+							if (navigatorItems.length < 2 || !this.isReady()) {
 								return;
 							}
+							this.setReady(false);
+
 							var currentNavigatorItem = navigatorItems.pop();
 							var previousNavigatorItem = navigatorItems[navigatorItems.length - 1];
 
@@ -1401,11 +1442,16 @@ limitations under the License.
 
 				var Screen = Class.extend({
 					init: function() {
+						this.isReady = true;
 						this.attachMethods();
 
 						if (scope.page) {
 							scope.ons.screen.presentPage(scope.page);
 						}
+					},
+
+					onTransitionEnded: function(){
+						this.isReady = true;
 					},
 
 					animateInBehindPage: function(){
@@ -1415,6 +1461,11 @@ limitations under the License.
 
 					animateInCurrentPage: function(pager) {
 						pager.attr("class", "screen-page unmodal");
+						var that = this;
+						pager.bind('webkitTransitionEnd', function transitionEnded() {
+							that.onTransitionEnded();
+							// pager.unbind(transitionEnded);
+						});
 						element[0].offsetWidth;						
 						pager.attr("class", "screen-page transition center");
 					},
@@ -1430,6 +1481,13 @@ limitations under the License.
 
 					attachMethods: function() {
 						scope.ons.screen.presentPage = function(page) {
+							if(!this.isReady){
+								console.log('not ready -> ignore');
+								return;
+							}else{
+								this.isReady = false;
+							}
+
 							$http({
 								url: page,
 								method: "GET"
@@ -1449,6 +1507,8 @@ limitations under the License.
 								if (!this.isEmpty()) {									
 									this.animateInBehindPage();
 									this.animateInCurrentPage(pager);
+								}else{
+									this.isReady = true;
 								}
 
 								screenItems.push(pager);
@@ -1458,16 +1518,19 @@ limitations under the License.
 						}.bind(this);
 
 						scope.ons.screen.dismissPage = function() {
-							if(screenItems.length < 2){
+							if(screenItems.length < 2 || !this.isReady){
 								// cant dismiss anymore
 								return;
 							}
+							this.isReady = false;
+
 							var currentPage = screenItems.pop();
 							this.animateOutBehindPage();
 							currentPage.attr("class", "screen-page transition unmodal");
-							currentPage[0].addEventListener('webkitTransitionEnd', function transitionEnded(e) {
+							var that = this;
+							currentPage.bind('webkitTransitionEnd', function transitionEnded() {
 								currentPage.remove();
-								currentPage[0].removeEventListener(transitionEnded);
+								that.isReady = true;
 							});							
 						}.bind(this);
 					}
