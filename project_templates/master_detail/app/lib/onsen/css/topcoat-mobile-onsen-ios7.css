@@ -1432,6 +1432,7 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   background: transparent;
   border: 1px solid transparent;
   box-shadow: none;
+  background-color: transparent;
   border: none;
   color: #157dfb;
 }
@@ -1447,10 +1448,10 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 .topcoat-icon-button--quiet:active,
 .topcoat-icon-button--large--quiet:active {
   color: #c6c8c8;
-  color: #157dfb;
+  color: #79b5fd;
   text-shadow: 0 1px none;
   background-color: #157dfb;
-  background-color: #fff;
+  background-color: transparent;
   border: 1px solid #157dfb;
   border: none;
   box-shadow: none;
@@ -4094,6 +4095,7 @@ box-shadow var-box-shadow--switch__label--after--checked,
 .topcoat-textarea--large:focus {
   background-color: #fff;
   color: #1f1f21;
+  color: #6f6f74;
   border: none;
   border: 1px solid #c8c7cc;
   box-shadow: var-box-shadow--text-input, none;
