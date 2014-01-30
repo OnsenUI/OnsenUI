@@ -213,11 +213,7 @@
 .topcoat-button-bar__button--large:hover {
   background-color: var-background-color--hover;
   background-color: transparent;
-  color: #79b5fd;
-}
-
-.topcoat-button__spinner {
-  border: 3px solid #157DFB;
+  color: #157dfb;
 }
 
 .topcoat-button:active,
@@ -245,10 +241,15 @@
 }
 
 .topcoat-button--quiet {
-  color: #157dfb;
   background: transparent;
   border: 1px solid transparent;
   box-shadow: none;
+  color: #157dfb;
+  border: none;
+}
+
+.topcoat-button--quiet:disabled {
+  border: none;
 }
 
 .topcoat-button--quiet:hover,
@@ -311,6 +312,7 @@
 
 .topcoat-button--cta:active,
 .topcoat-button--large--cta:active {
+  color: #79b5fd;
   background-color: transparent;
   box-shadow: none;
 }
@@ -419,7 +421,7 @@
 .topcoat-button-bar__item:last-child > .topcoat-button-bar__button,
 .topcoat-button-bar__item:last-child > .topcoat-button-bar__button--large {
   border-left: none;
-  border-right: var-border-right--button-bar__button__last;
+  border-right: 1px solid #157dfb;
 }
 
 .topcoat-button-bar__button {
@@ -433,9 +435,10 @@
 .topcoat-button-bar__button:active,
 .topcoat-button-bar__button--large:active,
 :checked + .topcoat-button-bar__button {
-  background-color: #157dfb !important;
-  color: #79b5fd;
+  background-color: #b5d6fe !important;
+  color: #fff;
   border: 0px solid #157dfb;
+  border-right: 1px solid #157dfb;
   border-right: 1px solid #157dfb;
 }
 
@@ -447,7 +450,8 @@
 .topcoat-button-bar__button:focus,
 .topcoat-button-bar__button--large:focus {
   z-index: 1;
-  z-index: 0;
+  z-index: var-border-right--button-bar__button--z-index;
+  border-right: 1px solid #157dfb;
 }
 
 /* topdoc
@@ -719,7 +723,7 @@
 .topcoat-button--large--quiet:hover {
   background-color: var-background-color--hover;
   background-color: transparent;
-  color: #79b5fd;
+  color: #157dfb;
 }
 
 .topcoat-button:active,
@@ -761,10 +765,15 @@
 */
 
 .topcoat-button--quiet {
-  color: #157dfb;
   background: transparent;
   border: 1px solid transparent;
   box-shadow: none;
+  color: #157dfb;
+  border: none;
+}
+
+.topcoat-button--quiet:disabled {
+  border: none;
 }
 
 .topcoat-button--quiet:hover,
@@ -884,6 +893,7 @@
 
 .topcoat-button--cta:active,
 .topcoat-button--large--cta:active {
+  color: #79b5fd;
   background-color: transparent;
   box-shadow: none;
 }
@@ -1808,8 +1818,8 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 }
 
 .topcoat-list__item {
-  padding: 0.7rem 0.7rem 0.7rem 0;
-  margin: 0 0 0 0.5rem;
+  padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+  margin: 0 0 0 0;
   border-top: none;
   border-bottom: 1px solid #c8c7cc;
   color: #1f1f21;
@@ -3501,15 +3511,15 @@ input[type="search"]::-webkit-search-cancel-button {
 .topcoat-switch__input:checked + .topcoat-switch__toggle:after,
 .topcoat-switch__input:checked + .topcoat-switch__toggle:before {
   background-color: #4cd964;
-  -webkit-transition: background-color 0.7s cubic-bezier(0.5, 1.6, 0.5, 1);
-  transition: background-color 0.7s cubic-bezier(0.5, 1.6, 0.5, 1);
+  -webkit-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
+  transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
 }
 
 .topcoat-switch__input + .topcoat-switch__toggle:after,
 .topcoat-switch__input + .topcoat-switch__toggle:before {
   background-color: #c8c7cc;
-  -webkit-transition: background-color 0.7s cubic-bezier(0.5, 1.3, 0.5, 1);
-  transition: background-color 0.7s cubic-bezier(0.5, 1.3, 0.5, 1);
+  -webkit-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
+  transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
 }
 
 .topcoat-switch__input:checked + .topcoat-switch__toggle:after,
@@ -3675,7 +3685,7 @@ box-shadow var-box-shadow--switch__label--after--checked,
 */
 
 .topcoat-tab-bar {
-  height: 44px;
+  height: 49px;
   background-color: #f8f8f8;
   border-top: 1px solid #c8c7cc;
 }
@@ -3683,9 +3693,9 @@ box-shadow var-box-shadow--switch__label--after--checked,
 .topcoat-tab-bar__button {
   padding: 0 1.25rem;
   height: 2rem;
-  height: 44px;
+  height: 49px;
   line-height: 2rem;
-  line-height: 44px;
+  line-height: 49px;
   letter-spacing: 1px;
   color: #c6c8c8;
   color: #6f6f74;
@@ -3704,6 +3714,7 @@ box-shadow var-box-shadow--switch__label--after--checked,
   color: #157dfb;
   background-color: transparent;
   box-shadow: none;
+  border-top: var-border-top--tab-bar--active;
 }
 
 .topcoat-tab-bar__button:focus,
@@ -4698,6 +4709,8 @@ Everything below this line should be calculated using the variables above. This 
 /* Page */
 
 /* Call To Action */
+
+/* Button */
 
 /*Icon-Button*/
 
