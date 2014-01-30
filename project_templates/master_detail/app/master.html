@@ -1,7 +1,9 @@
-<div class="page center" ng-controller="MasterController">
-    <ons-list>
-        <ons-list-item ng-repeat="item in items" ng-click="showDetail($index)">
-            {{item.title}}
-        </ons-list-item>
-    </ons-list>
-</div>
+<ons-page class="center">
+	<div ng-controller="MasterController">
+		<ons-list>
+        	<ons-list-item ng-repeat="item in items" ng-click="showDetail($index)">
+	            {{item.title}}
+	        </ons-list-item>
+	    </ons-list>
+	</div>    
+</ons-page>
