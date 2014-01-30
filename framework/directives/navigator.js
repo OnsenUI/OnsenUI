@@ -392,11 +392,16 @@ limitations under the License.
 								return;
 							}
 
+							var that = this;
+
 							this.setReady(false);
 
 							$http({
 								url: page,
 								method: "GET"
+							}).error(function(e){
+								that.onTransitionEnded();
+								console.error(e);
 							}).success(function(data, status, headers, config) {
 								var page = angular.element('<div></div>');
 								page.addClass('onsen_navigator-pager');

@@ -1101,11 +1101,16 @@ limitations under the License.
 								return;
 							}
 
+							var that = this;
+
 							this.setReady(false);
 
 							$http({
 								url: page,
 								method: "GET"
+							}).error(function(e){
+								that.onTransitionEnded();
+								console.error(e);
 							}).success(function(data, status, headers, config) {
 								var page = angular.element('<div></div>');
 								page.addClass('onsen_navigator-pager');
@@ -1502,9 +1507,14 @@ limitations under the License.
 								this.isReady = false;
 							}
 
+							var that = this;
+
 							$http({
 								url: page,
 								method: "GET"
+							}).error(function(e){
+								that.onTransitionEnded();
+								console.error(e);
 							}).success(function(data, status, headers, config) {
 								var page = angular.element('<div></div>');
 								page.addClass('screen-page');
