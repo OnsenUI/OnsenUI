@@ -76,3 +76,7 @@ input {
 textarea {
     user-select: initial;   
 }
+
+select {
+    user-select: initial;   
+}
