@@ -79,6 +79,14 @@ input {
     -ms-user-select: initial;
     user-select: initial;
 }
+
+textarea {
+    -webkit-user-select: initial;
+    -moz-user-select: initial;
+    -ms-user-select: initial;
+    user-select: initial;   
+}
+
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 

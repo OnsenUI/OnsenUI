@@ -72,3 +72,7 @@ body {
 input {
     user-select: initial;
 }
+
+textarea {
+    user-select: initial;   
+}
