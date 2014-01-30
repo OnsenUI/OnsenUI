@@ -1,0 +1,232 @@
+{
+  "OnsenUI_1.0" : {
+    "displayName" : "Onsen UI 1.0",
+    "description" : {
+      "ja" : "Onsen UIはシンプルで快適な操作性を提供するHTML5 UIフレームワークです。",
+      "en" : "HTML5 UI framework designed to be Simple, Fast and Powerful"
+    },
+    "websiteUrl"  : {
+      "ja" : "http://docs.monaca.mobi/onsen/",
+      "en" : "http://docs.monaca.mobi/onsen/"
+    },
+    "documentUrl" : {
+      "ja" : "http://docs.monaca.mobi/onsen/",
+      "en" : "http://docs.monaca.mobi/onsen/"
+    },
+    "type" : ["javascript"],
+    "category" : ["html5"],
+    "platform" : ["android", "ios", "winrt", "web"],
+    "frameworkDependent" : false,
+    "require" : null,
+    "forms" : {
+      "mandatory": [
+        "js/onsenui.js"
+      ],
+      "theme":{
+        "type": "selectOne",
+        "required": "true",
+        "files": [                    
+          {
+            "displayName": "Onsen iOS 7 Theme",
+            "id": "topcoat-mobile-onsen-ios7.css"
+          },
+          {
+            "displayName": "Onsen Android Theme",
+            "id": "topcoat-mobile-onsen-android.css"
+          },
+          {
+            "displayName": "Onsen Blue Theme",
+            "id": "topcoat-mobile-onsen-blue.css"
+          },
+          {
+            "displayName": "Onsen Orange Theme",
+            "id": "topcoat-mobile-onsen-orange.css"
+          },
+          {
+            "displayName": "Onsen Pink Theme",
+            "id": "topcoat-mobile-onsen-pink.css"
+          },
+          {
+            "displayName": "Onsen Purple Theme",
+            "id": "topcoat-mobile-onsen-purple.css"
+          },
+          {
+            "displayName": "Onsen Yellow Theme",
+            "id": "topcoat-mobile-onsen-yellow.css"
+          },
+          {
+            "displayName": "Onsen Green Theme",
+            "id": "topcoat-mobile-onsen-green.css"
+          },
+          {
+            "displayName": "Topcoat Mobile Light Theme",
+            "id": "topcoat-mobile-light.css"
+          },
+          {
+            "displayName": "Topcoat Mobile Dark Theme",
+            "id": "topcoat-mobile-dark.css"
+          }
+        ]
+      }
+    },
+    "files" : {
+      "javascript": {
+        "android": {
+          "mandatory": ["js/onsenui.js"]
+        },
+        "ios": {
+          "mandatory": ["js/onsenui.js"]
+        },
+        "winrt": {
+          "mandatory": ["js/onsenui.js"]
+        }
+      },
+      "css" : {
+        "android" : {
+          "default" : {
+            "mandatory" : [
+              "img/search.svg",
+              "css/onsenui.css",
+              "js/angular/angular.js",
+              "js/angular/angular-touch.js",
+              "js/angular/angular-csp.css",
+              "font/SourceCodePro-Black.otf",
+              "font/SourceCodePro-Bold.otf",
+              "font/SourceCodePro-ExtraLight.otf",
+              "font/SourceCodePro-Light.otf",
+              "font/SourceCodePro-Regular.otf",
+              "font/SourceCodePro-Semibold.otf",
+              "font/SourceSansPro-Black.otf",
+              "font/SourceSansPro-BlackIt.otf",
+              "font/SourceSansPro-Bold.otf",
+              "font/SourceSansPro-BoldIt.otf",
+              "font/SourceSansPro-ExtraLight.otf",
+              "font/SourceSansPro-ExtraLightIt.otf",
+              "font/SourceSansPro-It.otf",
+              "font/SourceSansPro-Light.otf",
+              "font/SourceSansPro-LightIt.otf",
+              "font/SourceSansPro-Regular.otf",
+              "font/SourceSansPro-Semibold.otf",
+              "font/SourceSansPro-SemiboldIt.otf",
+              "css/font_awesome/css/font-awesome.min.css",
+              "css/font_awesome/fonts/FontAwesome.otf",
+              "css/font_awesome/fonts/fontawesome-webfont.eot",
+              "css/font_awesome/fonts/fontawesome-webfont.svg",
+              "css/font_awesome/fonts/fontawesome-webfont.ttf",
+              "css/font_awesome/fonts/fontawesome-webfont.woff",
+              "css/polyfill/sliding_menu_polyfill.css"              
+            ],
+            "theme": {
+              "topcoat-mobile-onsen-ios7.css": "css/topcoat-mobile-onsen-ios7.css",
+              "topcoat-mobile-onsen-android.css": "css/topcoat-mobile-onsen-android.css",
+              "topcoat-mobile-light.css": "css/topcoat-mobile-light.css",
+              "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css",
+              "topcoat-mobile-onsen-blue.css": "css/topcoat-mobile-onsen-blue.css",
+              "topcoat-mobile-onsen-orange.css": "css/topcoat-mobile-onsen-orange.css",
+              "topcoat-mobile-onsen-pink.css": "css/topcoat-mobile-onsen-pink.css",
+              "topcoat-mobile-onsen-purple.css": "css/topcoat-mobile-onsen-purple.css",
+              "topcoat-mobile-onsen-yellow.css": "css/topcoat-mobile-onsen-yellow.css",
+              "topcoat-mobile-onsen-green.css": "css/topcoat-mobile-onsen-green.css"
+            }
+          }
+        },        
+        "ios" : {
+          "default" : {
+            "mandatory" : [
+              "img/search.svg",
+              "css/onsenui.css",
+              "js/angular/angular.js",
+              "js/angular/angular-touch.js",
+              "js/angular/angular-csp.css",
+              "font/SourceCodePro-Black.otf",
+              "font/SourceCodePro-Bold.otf",
+              "font/SourceCodePro-ExtraLight.otf",
+              "font/SourceCodePro-Light.otf",
+              "font/SourceCodePro-Regular.otf",
+              "font/SourceCodePro-Semibold.otf",
+              "font/SourceSansPro-Black.otf",
+              "font/SourceSansPro-BlackIt.otf",
+              "font/SourceSansPro-Bold.otf",
+              "font/SourceSansPro-BoldIt.otf",
+              "font/SourceSansPro-ExtraLight.otf",
+              "font/SourceSansPro-ExtraLightIt.otf",
+              "font/SourceSansPro-It.otf",
+              "font/SourceSansPro-Light.otf",
+              "font/SourceSansPro-LightIt.otf",
+              "font/SourceSansPro-Regular.otf",
+              "font/SourceSansPro-Semibold.otf",
+              "font/SourceSansPro-SemiboldIt.otf",
+              "css/font_awesome/css/font-awesome.min.css",
+              "css/font_awesome/fonts/FontAwesome.otf",
+              "css/font_awesome/fonts/fontawesome-webfont.eot",
+              "css/font_awesome/fonts/fontawesome-webfont.svg",
+              "css/font_awesome/fonts/fontawesome-webfont.ttf",
+              "css/font_awesome/fonts/fontawesome-webfont.woff",
+              "css/polyfill/sliding_menu_polyfill.css"              
+            ],
+            "theme": {
+              "topcoat-mobile-onsen-ios7.css": "css/topcoat-mobile-onsen-ios7.css",
+              "topcoat-mobile-onsen-android.css": "css/topcoat-mobile-onsen-android.css",
+              "topcoat-mobile-light.css": "css/topcoat-mobile-light.css",
+              "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css",
+              "topcoat-mobile-onsen-blue.css": "css/topcoat-mobile-onsen-blue.css",
+              "topcoat-mobile-onsen-orange.css": "css/topcoat-mobile-onsen-orange.css",
+              "topcoat-mobile-onsen-pink.css": "css/topcoat-mobile-onsen-pink.css",
+              "topcoat-mobile-onsen-purple.css": "css/topcoat-mobile-onsen-purple.css",
+              "topcoat-mobile-onsen-yellow.css": "css/topcoat-mobile-onsen-yellow.css",
+              "topcoat-mobile-onsen-green.css": "css/topcoat-mobile-onsen-green.css"
+            }
+          }
+        },
+        "winrt" : {
+          "default" : {
+            "mandatory" : [
+              "img/search.svg",
+              "css/onsenui.css",
+              "js/angular/angular.js",
+              "js/angular/angular-touch.js",
+              "js/angular/angular-csp.css",
+              "font/SourceCodePro-Black.otf",
+              "font/SourceCodePro-Bold.otf",
+              "font/SourceCodePro-ExtraLight.otf",
+              "font/SourceCodePro-Light.otf",
+              "font/SourceCodePro-Regular.otf",
+              "font/SourceCodePro-Semibold.otf",
+              "font/SourceSansPro-Black.otf",
+              "font/SourceSansPro-BlackIt.otf",
+              "font/SourceSansPro-Bold.otf",
+              "font/SourceSansPro-BoldIt.otf",
+              "font/SourceSansPro-ExtraLight.otf",
+              "font/SourceSansPro-ExtraLightIt.otf",
+              "font/SourceSansPro-It.otf",
+              "font/SourceSansPro-Light.otf",
+              "font/SourceSansPro-LightIt.otf",
+              "font/SourceSansPro-Regular.otf",
+              "font/SourceSansPro-Semibold.otf",
+              "font/SourceSansPro-SemiboldIt.otf",
+              "css/font_awesome/css/font-awesome.min.css",
+              "css/font_awesome/fonts/FontAwesome.otf",
+              "css/font_awesome/fonts/fontawesome-webfont.eot",
+              "css/font_awesome/fonts/fontawesome-webfont.svg",
+              "css/font_awesome/fonts/fontawesome-webfont.ttf",
+              "css/font_awesome/fonts/fontawesome-webfont.woff",
+              "css/polyfill/sliding_menu_polyfill.css"              
+            ],
+            "theme": {
+              "topcoat-mobile-onsen-ios7.css": "css/topcoat-mobile-onsen-ios7.css",
+              "topcoat-mobile-onsen-android.css": "css/topcoat-mobile-onsen-android.css",
+              "topcoat-mobile-light.css": "css/topcoat-mobile-light.css",
+              "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css",
+              "topcoat-mobile-onsen-blue.css": "css/topcoat-mobile-onsen-blue.css",
+              "topcoat-mobile-onsen-orange.css": "css/topcoat-mobile-onsen-orange.css",
+              "topcoat-mobile-onsen-pink.css": "css/topcoat-mobile-onsen-pink.css",
+              "topcoat-mobile-onsen-purple.css": "css/topcoat-mobile-onsen-purple.css",
+              "topcoat-mobile-onsen-yellow.css": "css/topcoat-mobile-onsen-yellow.css",
+              "topcoat-mobile-onsen-green.css": "css/topcoat-mobile-onsen-green.css"
+            }
+          }
+        }
+      }
+    }
+  }
+}

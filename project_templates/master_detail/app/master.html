@@ -2,7 +2,17 @@
 	<div ng-controller="MasterController">
 		<ons-list>
         	<ons-list-item ng-repeat="item in items" ng-click="showDetail($index)">
-	            {{item.title}}
+        		<ons-row>
+        			<ons-col size="10">	
+        				<ons-icon 
+			            	icon="{{item.icon}}"
+			            	fixed-width="true">
+			        	</ons-icon>
+        			</ons-col>
+        			<ons-col class="left">
+        				{{item.title}}
+        			</ons-col>
+        		</ons-row>	           	            
 	        </ons-list-item>
 	    </ons-list>
 	</div>    

@@ -178,6 +178,13 @@ module.exports = function(grunt) {
             '**'
           ]
         }]
+      },
+      plugin_info: {
+        files: [{
+          expand: true,
+          dest: 'build/',
+          src: 'plugin_info.json'
+        }]
       }
     },
     compress: {
@@ -258,6 +265,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-autoprefixer');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:demo', 'copy:minimum_template', 'copy:sliding_menu_template', 'copy:tab_bar_template', 'copy:master_detail_template', 'compress']);
+  grunt.registerTask('default', ['clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:demo', 'copy:minimum_template', 'copy:sliding_menu_template', 'copy:tab_bar_template', 'copy:master_detail_template', 'copy:plugin_info', 'compress']);
 
 };

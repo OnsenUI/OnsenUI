@@ -5,15 +5,18 @@ myApp.factory('Data', function(){
     
     data.items = [
         { 
-            title: 'Item 1',
+            title: 'Item 1 Title',
+            icon: 'comments-o',
             description: 'Item 1 Description'
         },
         { 
-            title: 'Item 2',
+            title: 'Another Item Title',
+            icon: 'desktop',
             description: 'Item 2 Description'
         },
         { 
-            title: 'Item 3',
+            title: 'Yet Anoter Item Title',
+            icon: 'heart-o',
             description: 'Item 3 Description'
         }
     ]; 
