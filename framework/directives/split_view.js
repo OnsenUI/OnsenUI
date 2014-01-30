@@ -140,7 +140,7 @@ limitations under the License.
 					},
 
 					setSize: function() {
-						var behindSize = 100 - scope.mainPageWidth;
+						var behindSize = 100 - scope.mainPageWidth.replace('%', '');
 						this.behindPage.style.width = behindSize + '%';
 						this.behindPage.style.opacity = 1;
 						this.abovePage.style.width = scope.mainPageWidth + '%';
