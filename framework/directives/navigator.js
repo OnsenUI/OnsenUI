@@ -38,7 +38,7 @@ limitations under the License.
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.tpl',
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
-				
+
 				var leftButtonClick = attrs.onLeftButtonClick;
 				var rightButtonClick = attrs.onRightButtonClick;
 				var navigatorItems = [];
@@ -52,9 +52,9 @@ limitations under the License.
 				var leftArrow = angular.element(leftButtonContainer[0].querySelector('i'));
 
 				var rightSection = angular.element(toolbarContent[0].querySelector('.onsen_navigator__right-button'));
-				var rightSectionIcon = angular.element(rightSection[0].querySelector('#right-section-icon'));				
+				var rightSectionIcon = angular.element(rightSection[0].querySelector('#right-section-icon'));
 
-				var leftButtonClickFn = $parse(scope.onLeftButtonClick);				
+				var leftButtonClickFn = $parse(scope.onLeftButtonClick);
 
 				var Navigator = Class.extend({
 					init: function() {
@@ -76,33 +76,33 @@ limitations under the License.
 						}
 						this.checkiOS7();
 
-						attrs.$observe('title', function(title){
-							if(title){
+						attrs.$observe('title', function(title) {
+							if (title) {
 								this.setTitle(title);
 							}
-						}.bind(this));	
+						}.bind(this));
 					},
 
-					attachFastClickEvent: function(el){
-						if(el && layer.nodeType){ 
-							FastClick.attach(el);	
+					attachFastClickEvent: function(el) {
+						if (el && el.nodeType) {
+							FastClick.attach(el);
 						}
-						
+
 					},
 
-					onTransitionEnded: function(){
+					onTransitionEnded: function() {
 						this.setReady(true);
 					},
 
-					setReady: function(ready){
+					setReady: function(ready) {
 						this.ready = ready;
 					},
 
-					isReady: function(){
+					isReady: function() {
 						return this.ready;
 					},
 
-					checkiOS7: function() {						
+					checkiOS7: function() {
 						if (window.device && window.device.platform) {
 							if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
 								this.adjustForiOS7();
@@ -208,15 +208,15 @@ limitations under the License.
 						}
 					},
 
-					setTitle: function(title){ // no animation
-						if(this.isEmpty()){
+					setTitle: function(title) { // no animation
+						if (this.isEmpty()) {
 							return;
 						}
 						var currentNavigatorItem = navigatorItems[navigatorItems.length - 1];
 						currentNavigatorItem.options.title = title;
-						if(currentNavigatorItem.titleElement){
+						if (currentNavigatorItem.titleElement) {
 							currentNavigatorItem.titleElement.text(title);
-						}						
+						}
 					},
 
 					animateTitleIn: function(inNavigatorItem, outNavigatorItem) {
@@ -342,10 +342,10 @@ limitations under the License.
 						inPage.attr("class", "onsen_navigator-pager right");
 
 						var that = this;
-						inPage.bind('webkitTransitionEnd', function transitionEnded(e) {							
+						inPage.bind('webkitTransitionEnd', function transitionEnded(e) {
 							that.onTransitionEnded();
 						});
-						
+
 						element[0].offsetWidth;
 						inPage.attr("class", "onsen_navigator-pager transition center");
 						outPage.attr("class", "onsen_navigator-pager transition left");
@@ -376,31 +376,31 @@ limitations under the License.
 
 
 					attachMethods: function() {
-						scope.ons.navigator.resetToPage = function(page, options){
-							if(!this.isReady()){
+						scope.ons.navigator.resetToPage = function(page, options) {
+							if (!this.isReady()) {
 								return;
 							}
-							var navigatorItem;							
+							var navigatorItem;
 							for (var i = 0; i < navigatorItems.length; i++) {
 								navigatorItem = navigatorItems[i];
-								if(navigatorItem.backLabel){
+								if (navigatorItem.backLabel) {
 									navigatorItem.backLabel.remove();
 								}
-								if(navigatorItem.titleElement){
+								if (navigatorItem.titleElement) {
 									navigatorItem.titleElement.remove();
 								}
-								if(navigatorItem.rightButtonIconElement){
+								if (navigatorItem.rightButtonIconElement) {
 									navigatorItem.rightButtonIconElement.remove();
-								}								
+								}
 							};
-							
+
 							container.empty();
 							navigatorItems = [];
 							scope.ons.navigator.pushPage(page, options);
 						}.bind(this);
 
 						scope.ons.navigator.pushPage = function(page, options) {
-							if(!this.isReady()){
+							if (!this.isReady()) {
 								console.log('not ready => ignore');
 								return;
 							}
@@ -412,7 +412,7 @@ limitations under the License.
 							$http({
 								url: page,
 								method: "GET"
-							}).error(function(e){
+							}).error(function(e) {
 								that.onTransitionEnded();
 								console.error(e);
 							}).success(function(data, status, headers, config) {
