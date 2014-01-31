@@ -59,7 +59,9 @@ limitations under the License.
 					init: function() {
 						this.setReady(true);
 						this.attachMethods();
+						new FastClick(leftSection[0]);
 						leftSection.bind('click', this.onLeftButtonClicked.bind(this));
+						new FastClick(rightSection[0]);
 						rightSection.bind('click', this.onRightButtonClicked.bind(this));
 						if (scope.page) {
 							var options = {
@@ -111,6 +113,7 @@ limitations under the License.
 						var title = outNavigatorItem.options.title;
 						var inBackLabel = angular.element('<div></div>');
 						inBackLabel.addClass('onsen_navigator-back-label onsen_navigator-item topcoat-navigation-bar__line-height right');
+						new FastClick(inBackLabel[0]);
 						inBackLabel.bind('click', this.onLeftButtonClicked.bind(this));
 						inNavigatorItem.backLabel = inBackLabel;
 						if (inNavigatorItem.options.leftButtonIcon) {
@@ -159,6 +162,7 @@ limitations under the License.
 							toolbar[0].offsetWidth;
 							inLabel.removeClass('left');
 							inLabel.addClass('transition center');
+							new FastClick(inLabel[0]);
 							inLabel.bind('click', this.onLeftButtonClicked.bind(this));
 						}
 					},
