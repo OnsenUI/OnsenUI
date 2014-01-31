@@ -765,7 +765,9 @@ limitations under the License.
 					init: function() {
 						this.setReady(true);
 						this.attachMethods();
+						new FastClick(leftSection[0]);
 						leftSection.bind('click', this.onLeftButtonClicked.bind(this));
+						new FastClick(rightSection[0]);
 						rightSection.bind('click', this.onRightButtonClicked.bind(this));
 						if (scope.page) {
 							var options = {
@@ -817,6 +819,7 @@ limitations under the License.
 						var title = outNavigatorItem.options.title;
 						var inBackLabel = angular.element('<div></div>');
 						inBackLabel.addClass('onsen_navigator-back-label onsen_navigator-item topcoat-navigation-bar__line-height right');
+						new FastClick(inBackLabel[0]);
 						inBackLabel.bind('click', this.onLeftButtonClicked.bind(this));
 						inNavigatorItem.backLabel = inBackLabel;
 						if (inNavigatorItem.options.leftButtonIcon) {
@@ -865,6 +868,7 @@ limitations under the License.
 							toolbar[0].offsetWidth;
 							inLabel.removeClass('left');
 							inLabel.addClass('transition center');
+							new FastClick(inLabel[0]);
 							inLabel.bind('click', this.onLeftButtonClicked.bind(this));
 						}
 					},
@@ -1471,7 +1475,7 @@ limitations under the License.
 					},
 
 					animateInBehindPage: function() {
-						var behindPage = screenItems[screenItems.length - 2];
+						var behindPage = screenItems[screenItems.length - 2];						
 						behindPage.attr('class', 'screen-page transition modal-behind');
 					},
 
@@ -1499,6 +1503,11 @@ limitations under the License.
 						return screenItems.length < 1;
 					},
 
+					onPageAdded: function(page){
+						var blackMask = angular.element(page[0].querySelector('.onsen_screen-black-mask'));
+						blackMask.removeClass('hide');
+					},
+
 					attachMethods: function() {
 						scope.ons.screen.presentPage = function(page) {
 							if (!this.isReady) {
@@ -1521,11 +1530,15 @@ limitations under the License.
 								page.addClass('screen-page');
 
 								var blackMask = angular.element('<div></div>');
-								blackMask.addClass('onsen_navigator-black-mask');
+								blackMask.addClass('onsen_screen-black-mask hide');
 								page.append(blackMask);
 
+								var pageContainer = angular.element('<div></div>');
+								pageContainer.addClass('screen-page__container');
+								page.append(pageContainer);
+
 								var templateHTML = angular.element(data);
-								page.append(templateHTML);
+								pageContainer.append(templateHTML);
 								var pager = $compile(page)(scope);
 								element.append(pager);
 
@@ -1536,6 +1549,9 @@ limitations under the License.
 								}
 
 								screenItems.push(pager);
+								setTimeout(function(){
+									this.onPageAdded(pager);
+								}.bind(this), 200);
 							}.bind(this)).error(function(data, status, headers, config) {
 								console.log('error', data, status);
 							});
@@ -1806,6 +1822,7 @@ limitations under the License.
 						this.$behindPage = angular.element(this.behindPage);
 						this.abovePage = element[0].querySelector('.above');
 						this.$abovePage = angular.element(this.abovePage);
+						this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
 						this.previousX = 0;
 						this.MAX = this.abovePage.clientWidth * 0.7;
 						this.currentX = 0;
@@ -1817,6 +1834,11 @@ limitations under the License.
 						if(scope.abovePage){
 							scope.ons.slidingMenu.setAbovePage(scope.abovePage);
 						}
+
+						window.setTimeout(function(){
+							this.behindPage.style.opacity = 1;
+							this.blackMask.style.opacity = 1;
+						}.bind(this), 100);
 					},
 
 					bindEvents: function() {
@@ -2064,13 +2086,16 @@ limitations under the License.
 
 						window.addEventListener("orientationchange", this.onOrientationChange.bind(this));
 						window.addEventListener('resize', this.onResize.bind(this));
-
-						this.considerChangingCollapse();
+						
 						this.attachMethods();
 
 						if(scope.mainPage){
 							scope.ons.splitView.setMainPage(scope.mainPage);
 						}
+
+						window.setTimeout(function(){
+							this.considerChangingCollapse();							
+						}.bind(this), 100);
 					},
 
 					attachMethods: function(){
@@ -2193,7 +2218,7 @@ limitations under the License.
 					},
 
 					activateCollapseMode: function() {
-						this.behindPage.style.width = '100%';
+						this.behindPage.style.width = '120%';
 						this.abovePage.style.width = '100%';
 						this.mode = COLLAPSE_MODE;
 						this.activateHammer();
@@ -6193,12 +6218,3 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
 	});
 
 })();
-window.addEventListener('load', function() {
-	new FastClick(document.body);
-
-	setTimeout(function() {
-		// Hide the address bar!
-		window.scrollTo(0, 1);
-	}, 0);
-
-}, false);
