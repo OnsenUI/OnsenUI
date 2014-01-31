@@ -3872,6 +3872,7 @@ body {
   padding: 0;
   background: #fff;
   color: #000;
+  color: var-color--body;
   font: 16px "Source Sans", helvetica, arial, sans-serif;
   font-weight: 400;
 }
