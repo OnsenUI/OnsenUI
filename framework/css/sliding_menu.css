@@ -48,6 +48,7 @@ limitations under the License.
 }
 
 .behind {
+    opacity: 0; /* initially hidden */
     transform: translate3d(-10%, 0, 0);
     width: 120% !important;
 }

@@ -68,6 +68,10 @@ limitations under the License.
 						if(scope.mainPage){
 							scope.ons.splitView.setMainPage(scope.mainPage);
 						}
+
+						window.setTimeout(function(){
+							this.behindPage.style.opacity = 1;							
+						}.bind(this), 0);
 					},
 
 					attachMethods: function(){
@@ -190,7 +194,7 @@ limitations under the License.
 					},
 
 					activateCollapseMode: function() {
-						this.behindPage.style.width = '100%';
+						this.behindPage.style.width = '120%';
 						this.abovePage.style.width = '100%';
 						this.mode = COLLAPSE_MODE;
 						this.activateHammer();

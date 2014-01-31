@@ -59,6 +59,7 @@ limitations under the License.
 						}
 
 						window.setTimeout(function(){
+							this.behindPage.style.opacity = 1;
 							this.blackMask.style.opacity = 1;
 						}.bind(this), 100);
 					},
