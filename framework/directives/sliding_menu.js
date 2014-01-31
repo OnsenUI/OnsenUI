@@ -31,6 +31,7 @@ limitations under the License.
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
+				var MAIN_PAGE_RATIO = 0.9;
 
 				scope.ons = scope.ons || {};
 				scope.ons.slidingMenu = scope.ons.slidingMenu || {};
@@ -47,7 +48,7 @@ limitations under the License.
 						this.$abovePage = angular.element(this.abovePage);
 						this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
 						this.previousX = 0;
-						this.MAX = this.abovePage.clientWidth * 0.7;
+						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
 						this.currentX = 0;
 						this.startX = 0;
 

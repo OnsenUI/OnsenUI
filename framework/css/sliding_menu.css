@@ -35,7 +35,7 @@ limitations under the License.
 }
 
 .open{    
-    transform: translate3d(70%, 0, 0);
+    transform: translate3d(92%, 0, 0);
 }
 
 .close{    
@@ -50,7 +50,7 @@ limitations under the License.
 .behind {
     opacity: 0; /* initially hidden */
     transform: translate3d(-10%, 0, 0);
-    width: 120% !important;
+    width: 100% !important;
 }
 
 .above {
