@@ -77,11 +77,11 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar relative\">	 \n" +
     "		<div class=\"navigator-toolbar__content relative\">\n" +
     "			<div class=\"onsen_navigator-item topcoat-navigation-bar__bg onsen_navigator__left-button-container transition hide\">\n" +
-    "				<span id=\"left-section\" class=\"topcoat-icon-button--quiet fastclick\">\n" +
+    "				<span id=\"left-section\" class=\"topcoat-icon-button--quiet\">\n" +
     "					<i class=\"fa fa-angle-left fa-2x topcoat-navigation-bar__line-height\"></i>\n" +
     "				</span>			\n" +
     "			</div>		\n" +
-    "			<div class=\"onsen_navigator__right-button onsen_navigator-item fastclick\">\n" +
+    "			<div class=\"onsen_navigator__right-button onsen_navigator-item\">\n" +
     "				<span id=\"right-section-icon\" class=\"topcoat-icon-button--quiet\">\n" +
     "				</span>\n" +
     "\n" +
@@ -762,7 +762,7 @@ limitations under the License.
 				var rightSection = angular.element(toolbarContent[0].querySelector('.onsen_navigator__right-button'));
 				var rightSectionIcon = angular.element(rightSection[0].querySelector('#right-section-icon'));				
 
-				var leftButtonClickFn = $parse(scope.onLeftButtonClick);
+				var leftButtonClickFn = $parse(scope.onLeftButtonClick);				
 
 				var Navigator = Class.extend({
 					init: function() {
@@ -792,10 +792,7 @@ limitations under the License.
 					},
 
 					attachFastClickEvent: function(el){
-						var event = new Event('click');
-						el.addEventListener('touchend', function(){
-							el.dispatchEvent(event);
-						});
+						FastClick.attach(el);						
 					},
 
 					onTransitionEnded: function(){
@@ -810,14 +807,17 @@ limitations under the License.
 						return this.ready;
 					},
 
-					checkiOS7: function() {
-						// if (window.device && window.device.platform) {
-						// 	if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
+					checkiOS7: function() {						
+						console.log('check ios 7');
+						if (window.device && window.device.platform) {
+							console.log('check ios 7 ' + window.device.platform + ', ' + window.device.version + ', ' + parseFloat(window.device.version));
+							if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
+								console.log('adjust');
 								this.adjustForiOS7();
-						// 	}
-						// } else {
-						// 	document.addEventListener("deviceready", this.checkiOS7.bind(this), false);
-						// }
+							}
+						} else {
+							document.addEventListener("deviceready", this.checkiOS7.bind(this), false);
+						}
 					},
 
 					adjustForiOS7: function() {
@@ -888,6 +888,7 @@ limitations under the License.
 					},
 
 					onLeftButtonClicked: function() {
+						console.log('left button clicked');
 						var onLeftButtonClick = this.getCurrentNavigatorItem().options.onLeftButtonClick;
 						if (onLeftButtonClick) {
 							var onLeftButtonClickFn = $parse(onLeftButtonClick);
@@ -1131,7 +1132,7 @@ limitations under the License.
 
 								var templateHTML = angular.element(data);
 
-								var navigatorToolbar = templateHTML[0].querySelector('ons-navigator-toolbarContent');
+								var navigatorToolbar = templateHTML[0].querySelector('ons-navigator-toolbar');
 								if (navigatorToolbar) {
 									if (options === undefined) {
 										options = {};
@@ -1245,6 +1246,35 @@ limitations under the License.
 
 				scope.ons.slidingMenu.toggleMenu = function() {
 					callParent(scope, 'ons.slidingMenu.toggleMenu');
+				}
+
+				scope.ons.slidingMenu.setBehindPage = function(page) {
+					callParent(scope, 'ons.slidingMenu.setBehindPage', page);
+				}
+
+				scope.ons.slidingMenu.setAbovePage = function(page) {
+					callParent(scope, 'ons.slidingMenu.setAbovePage', page);
+				}
+
+				scope.ons.splitView = scope.ons.splitView || {};
+				scope.ons.splitView.open = function() {
+					callParent(scope, 'ons.splitView.open');
+				}
+
+				scope.ons.splitView.close = function() {
+					callParent(scope, 'ons.splitView.close');
+				}
+
+				scope.ons.splitView.toggle = function() {
+					callParent(scope, 'ons.splitView.toggle');
+				}
+
+				scope.ons.splitView.setMainPage = function(page) {
+					callParent(scope, 'ons.splitView.setMainPage', page);
+				}
+
+				scope.ons.splitView.setSecondaryPage = function(page) {
+					callParent(scope, 'ons.splitView.setSecondaryPage', page);
 				}
 
 				scope.ons.tabbar = scope.ons.tabbar || {};
@@ -1818,6 +1848,7 @@ limitations under the License.
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
+				var MAIN_PAGE_RATIO = 0.9;
 
 				scope.ons = scope.ons || {};
 				scope.ons.slidingMenu = scope.ons.slidingMenu || {};
@@ -1834,7 +1865,7 @@ limitations under the License.
 						this.$abovePage = angular.element(this.abovePage);
 						this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
 						this.previousX = 0;
-						this.MAX = this.abovePage.clientWidth * 0.7;
+						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
 						this.currentX = 0;
 						this.startX = 0;
 
@@ -2070,6 +2101,7 @@ limitations under the License.
 			link: function(scope, element, attrs) {
 				var SPLIT_MODE = 0;
 				var COLLAPSE_MODE = 1;
+				var MAIN_PAGE_RATIO = 0.9;
 
 				scope.ons = scope.ons || {};
 				scope.ons.splitView = scope.ons.splitView || {};
@@ -2085,7 +2117,7 @@ limitations under the License.
 						this.abovePage = element[0].querySelector('.main');
 						this.$abovePage = angular.element(this.abovePage);
 						this.previousX = 0;
-						this.MAX = this.abovePage.clientWidth * 0.7;
+						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
 						this.currentX = 0;
 						this.startX = 0;
 						this.mode = SPLIT_MODE;
@@ -2147,7 +2179,7 @@ limitations under the License.
 
 					onResize: function() {
 						this.considerChangingCollapse();
-						this.MAX = this.abovePage.clientWidth * 0.7;
+						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
 					},
 
 					considerChangingCollapse: function() {
@@ -2228,7 +2260,7 @@ limitations under the License.
 					},
 
 					activateCollapseMode: function() {
-						this.behindPage.style.width = '120%';
+						this.behindPage.style.width =  '100%';
 						this.abovePage.style.width = '100%';
 						this.mode = COLLAPSE_MODE;
 						this.activateHammer();
@@ -2671,7 +2703,7 @@ limitations under the License.
 /**
  * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
  *
- * @version 0.6.9
+ * @version 0.6.11
  * @codingstandard ftlabs-jsv2
  * @copyright The Financial Times Limited [All Rights Reserved]
  * @license MIT License (see LICENSE.txt)
@@ -2915,8 +2947,9 @@ FastClick.prototype.needsFocus = function(target) {
 	'use strict';
 	switch (target.nodeName.toLowerCase()) {
 	case 'textarea':
-	case 'select':
 		return true;
+	case 'select':
+		return !this.deviceIsAndroid;
 	case 'input':
 		switch (target.type) {
 		case 'button':
@@ -2955,9 +2988,20 @@ FastClick.prototype.sendClick = function(targetElement, event) {
 
 	// Synthesise a click event, with an extra attribute so it can be tracked
 	clickEvent = document.createEvent('MouseEvents');
-	clickEvent.initMouseEvent('click', true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
+	clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
 	clickEvent.forwardedTouchEvent = true;
 	targetElement.dispatchEvent(clickEvent);
+};
+
+FastClick.prototype.determineEventType = function(targetElement) {
+	'use strict';
+
+	//Issue #159: Android Chrome Select Box does not open with a synthetic click event
+	if (this.deviceIsAndroid && targetElement.tagName.toLowerCase() === 'select') {
+		return 'mousedown';
+	}
+
+	return 'click';
 };
 
 
@@ -2968,7 +3012,8 @@ FastClick.prototype.focus = function(targetElement) {
 	'use strict';
 	var length;
 
-	if (this.deviceIsIOS && targetElement.setSelectionRange) {
+	// Issue #160: on iOS 7, some input elements (e.g. date datetime) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just check the type instead. Filed as Apple bug #15122724.
+	if (this.deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time') {
 		length = targetElement.value.length;
 		targetElement.setSelectionRange(length, length);
 	} else {
@@ -3177,6 +3222,9 @@ FastClick.prototype.onTouchEnd = function(event) {
 		return true;
 	}
 
+	// Reset to prevent wrong click cancel on input (issue #156).
+	this.cancelNextClick = false;
+
 	this.lastClickTime = event.timeStamp;
 
 	trackingClickStart = this.trackingClickStart;
@@ -3375,19 +3423,30 @@ FastClick.prototype.destroy = function() {
 FastClick.notNeeded = function(layer) {
 	'use strict';
 	var metaViewport;
+	var chromeVersion;
 
 	// Devices that don't support touch don't need FastClick
 	if (typeof window.ontouchstart === 'undefined') {
 		return true;
 	}
 
-	if ((/Chrome\/[0-9]+/).test(navigator.userAgent)) {
+	// Chrome version - zero for other browsers
+	chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
 
-		// Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
+	if (chromeVersion) {
+
 		if (FastClick.prototype.deviceIsAndroid) {
 			metaViewport = document.querySelector('meta[name=viewport]');
-			if (metaViewport && metaViewport.content.indexOf('user-scalable=no') !== -1) {
-				return true;
+			
+			if (metaViewport) {
+				// Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
+				if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
+					return true;
+				}
+				// Chrome 32 and above with width=device-width or less don't need FastClick
+				if (chromeVersion > 31 && window.innerWidth <= window.screen.width) {
+					return true;
+				}
 			}
 
 		// Chrome desktop doesn't need FastClick (issue #15)

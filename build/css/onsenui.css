@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-01-31 */
+/*! onsenui - v0.7.0 - 2014-02-01 */
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
@@ -342,6 +342,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
+
+.navigator-toolbar__content {
+  width: 100%;
+  height: 100%;
+}
 
 .onsen_navigator-pager {
   position: absolute;
@@ -1086,7 +1091,9 @@ ons-navigator {
 }
 
 .topcoat-navigation-bar {    
-    border-bottom: 1px solid lightgray;;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
 }
 
 #right-section-icon {
@@ -1233,8 +1240,8 @@ limitations under the License.
 }
 
 .open{    
-    -webkit-transform: translate3d(70%, 0, 0);    
-    transform: translate3d(70%, 0, 0);
+    -webkit-transform: translate3d(92%, 0, 0);    
+    transform: translate3d(92%, 0, 0);
 }
 
 .close{    
@@ -1251,7 +1258,7 @@ limitations under the License.
     opacity: 0; /* initially hidden */
     -webkit-transform: translate3d(-10%, 0, 0); /* initially hidden */
     transform: translate3d(-10%, 0, 0);
-    width: 120% !important;
+    width: 100% !important;
 }
 
 .above {
@@ -1289,7 +1296,7 @@ limitations under the License.
 
 .secondary {
 	opacity: 0;
-	width: 120%;
+	width: 100%;
     -webkit-transform: translate3d(-10%, 0, 0);
     transform: translate3d(-10%, 0, 0);
     overflow: hidden;

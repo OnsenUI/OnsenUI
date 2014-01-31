@@ -66,7 +66,9 @@ ons-navigator {
 }
 
 .topcoat-navigation-bar {    
-    border-bottom: 1px solid lightgray;;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
 }
 
 #right-section-icon {
