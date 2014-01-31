@@ -499,7 +499,8 @@ limitations under the License.
     width: 25%;
     left: 0;
     text-align: left !important;
-    margin-left: 15px !important;
+    margin-left: 25px !important;
+    padding-left: 0 !important;
 }
 
 .onsen_navigator-back-label.transition {

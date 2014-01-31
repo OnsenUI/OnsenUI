@@ -84,7 +84,10 @@ limitations under the License.
 					},
 
 					attachFastClickEvent: function(el){
-						FastClick.attach(el);						
+						if(el && layer.nodeType){ 
+							FastClick.attach(el);	
+						}
+						
 					},
 
 					onTransitionEnded: function(){
@@ -100,11 +103,8 @@ limitations under the License.
 					},
 
 					checkiOS7: function() {						
-						console.log('check ios 7');
 						if (window.device && window.device.platform) {
-							console.log('check ios 7 ' + window.device.platform + ', ' + window.device.version + ', ' + parseFloat(window.device.version));
 							if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
-								console.log('adjust');
 								this.adjustForiOS7();
 							}
 						} else {
