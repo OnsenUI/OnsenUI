@@ -61,8 +61,7 @@ limitations under the License.
 
 						window.addEventListener("orientationchange", this.onOrientationChange.bind(this));
 						window.addEventListener('resize', this.onResize.bind(this));
-
-						this.considerChangingCollapse();
+						
 						this.attachMethods();
 
 						if(scope.mainPage){
@@ -70,8 +69,8 @@ limitations under the License.
 						}
 
 						window.setTimeout(function(){
-							this.behindPage.style.opacity = 1;							
-						}.bind(this), 0);
+							this.considerChangingCollapse();							
+						}.bind(this), 100);
 					},
 
 					attachMethods: function(){
