@@ -45,6 +45,7 @@ limitations under the License.
 						this.$behindPage = angular.element(this.behindPage);
 						this.abovePage = element[0].querySelector('.above');
 						this.$abovePage = angular.element(this.abovePage);
+						this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
 						this.previousX = 0;
 						this.MAX = this.abovePage.clientWidth * 0.7;
 						this.currentX = 0;
@@ -56,6 +57,10 @@ limitations under the License.
 						if(scope.abovePage){
 							scope.ons.slidingMenu.setAbovePage(scope.abovePage);
 						}
+
+						window.setTimeout(function(){
+							this.blackMask.style.opacity = 1;
+						}.bind(this), 100);
 					},
 
 					bindEvents: function() {
