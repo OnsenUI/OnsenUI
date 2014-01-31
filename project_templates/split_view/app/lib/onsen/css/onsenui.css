@@ -398,8 +398,10 @@ limitations under the License.
   transform: translateX(-36%); opacity: 0;
 }
 
-.topcoat-navigation-bar__item {
+.onsen_navigator-item {
   position: absolute !important;
+  top: 0;
+  bottom: 1px;
 }
 
 /* TODO: */
@@ -428,8 +430,7 @@ limitations under the License.
 }
 
 
-.onsen_navigator__left-button-container {  
-  height: 2.5rem;
+.onsen_navigator__left-button-container {   
   left: 0;
   width: 20px;
   text-align: right;
@@ -471,7 +472,7 @@ limitations under the License.
     width: 25%;
     left: 0;
     text-align: left !important;
-    margin-left: 22px !important;
+    margin-left: 15px !important;
 }
 
 .onsen_navigator-back-label.transition {
@@ -1062,18 +1063,17 @@ ons-navigator {
     overflow: hidden;
 }
 
-
-.onsen_navigation-bar-height {
-    line-height: 2.5rem;
-}
-
 .topcoat-navigation-bar {    
     border-bottom: 1px solid lightgray;;
 }
 
 #right-section-icon {
-    min-height: 40px;
+    height: 100%;
     display: block;
+}
+
+#left-section {
+    height: 100%;
 }
 .page {
     position: absolute;
@@ -1227,6 +1227,7 @@ limitations under the License.
 .behind {
     -webkit-transform: translate3d(-10%, 0, 0);
     transform: translate3d(-10%, 0, 0);
+    width: 120% !important;
 }
 
 .above {
