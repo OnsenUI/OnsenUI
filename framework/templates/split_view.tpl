@@ -6,8 +6,7 @@
 	</div>
 
 	<div class="main full-screen">
-		<ng-include src="pages.above">
-		</ng-include>
+		
 	</div>
 	
 </div>

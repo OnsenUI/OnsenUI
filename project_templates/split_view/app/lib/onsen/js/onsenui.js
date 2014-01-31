@@ -172,8 +172,7 @@ angular.module("templates/split_view.tpl", []).run(["$templateCache", function($
     "	</div>\n" +
     "\n" +
     "	<div class=\"main full-screen\">\n" +
-    "		<ng-include src=\"pages.above\">\n" +
-    "		</ng-include>\n" +
+    "		\n" +
     "	</div>\n" +
     "	\n" +
     "</div>");
@@ -1992,7 +1991,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsSplitView', function(ONSEN_CONSTANTS) {
+	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -2007,6 +2006,9 @@ limitations under the License.
 			link: function(scope, element, attrs) {
 				var SPLIT_MODE = 0;
 				var COLLAPSE_MODE = 1;
+
+				scope.ons = scope.ons || {};
+				scope.ons.splitView = scope.ons.splitView || {};
 
 				var Swiper = Class.extend({
 					init: function(element) {
@@ -2032,6 +2034,44 @@ limitations under the License.
 						window.addEventListener('resize', this.onResize.bind(this));
 
 						this.considerChangingCollapse();
+						this.attachMethods();
+
+						if(scope.mainPage){
+							scope.ons.splitView.setMainPage(scope.mainPage);
+						}
+					},
+
+					attachMethods: function(){
+						scope.ons.splitView.setMainPage = function(page) {
+							if (page) {
+								$http({
+									url: page,
+									method: "GET"
+								}).error(function(e){
+									console.error(e);
+								}).success(function(data, status, headers, config) {
+									var templateHTML = angular.element(data);
+									var page = angular.element('<div></div>');
+									page.addClass('page');
+									page[0].style.opacity = 0;
+									var pageContent = $compile(templateHTML)(scope);
+									page.append(pageContent);
+									this.$abovePage.append(page);
+
+									// prevent black flash
+									setTimeout(function(){
+										page[0].style.opacity = 1;
+										if(this.currentPage){
+											this.currentPage.remove();
+										}
+										this.currentPage = page;
+									}.bind(this), 0);
+
+								}.bind(this));
+							} else {
+								throw new Error('cannot set undefined page');
+							}
+						}.bind(this);
 					},
 
 					onOrientationChange: function() {
@@ -2116,7 +2156,7 @@ limitations under the License.
 						this.behindPage.style.width = behindSize + '%';
 						this.behindPage.style.opacity = 1;
 						this.abovePage.style.width = scope.mainPageWidth + '%';
-						var translate = behindSize * window.innerWidth / 100;
+						var translate = Math.floor(behindSize * window.innerWidth / 100);
 						this.translate2(translate);
 					},
 
@@ -2246,8 +2286,7 @@ limitations under the License.
 				var swiper = new Swiper(element);
 
 				scope.pages = {
-					behind: scope.secondaryPage,
-					above: scope.mainPage
+					behind: scope.secondaryPage					
 				};
 				scope.ons = scope.ons || {};
 				scope.ons.splitView = scope.ons.splitView || {};
@@ -2264,13 +2303,7 @@ limitations under the License.
 					swiper.toggle();
 				};
 
-				scope.ons.splitView.setMainPage = function(page) {
-					if (page) {
-						scope.pages.above = page;
-					} else {
-						throw new Error('cannot set undefined page');
-					}
-				};
+
 
 				scope.ons.splitView.setSecondaryPage = function(page) {
 					if (page) {

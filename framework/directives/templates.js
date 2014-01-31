@@ -171,8 +171,7 @@ angular.module("templates/split_view.tpl", []).run(["$templateCache", function($
     "	</div>\n" +
     "\n" +
     "	<div class=\"main full-screen\">\n" +
-    "		<ng-include src=\"pages.above\">\n" +
-    "		</ng-include>\n" +
+    "		\n" +
     "	</div>\n" +
     "	\n" +
     "</div>");
