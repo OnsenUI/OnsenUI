@@ -35,6 +35,7 @@ limitations under the License.
 			link: function(scope, element, attrs) {
 				var SPLIT_MODE = 0;
 				var COLLAPSE_MODE = 1;
+				var MAIN_PAGE_RATIO = 0.9;
 
 				scope.ons = scope.ons || {};
 				scope.ons.splitView = scope.ons.splitView || {};
@@ -50,7 +51,7 @@ limitations under the License.
 						this.abovePage = element[0].querySelector('.main');
 						this.$abovePage = angular.element(this.abovePage);
 						this.previousX = 0;
-						this.MAX = this.abovePage.clientWidth * 0.7;
+						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
 						this.currentX = 0;
 						this.startX = 0;
 						this.mode = SPLIT_MODE;
@@ -112,7 +113,7 @@ limitations under the License.
 
 					onResize: function() {
 						this.considerChangingCollapse();
-						this.MAX = this.abovePage.clientWidth * 0.7;
+						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
 					},
 
 					considerChangingCollapse: function() {
@@ -193,7 +194,7 @@ limitations under the License.
 					},
 
 					activateCollapseMode: function() {
-						this.behindPage.style.width = '120%';
+						this.behindPage.style.width =  '100%';
 						this.abovePage.style.width = '100%';
 						this.mode = COLLAPSE_MODE;
 						this.activateHammer();
