@@ -65,16 +65,15 @@ ons-navigator {
     overflow: hidden;
 }
 
-
-.onsen_navigation-bar-height {
-    line-height: 2.5rem;
-}
-
 .topcoat-navigation-bar {    
     border-bottom: 1px solid lightgray;;
 }
 
 #right-section-icon {
-    min-height: 40px;
+    height: 100%;
     display: block;
+}
+
+#left-section {
+    height: 100%;
 }

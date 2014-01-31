@@ -29,7 +29,7 @@ limitations under the License.
 			scope: {
 				page: '@'
 			},
-			
+
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
 				var screenItems = [];
@@ -46,15 +46,13 @@ limitations under the License.
 						}
 					},
 
-					onTransitionEnded: function(){
+					onTransitionEnded: function() {
 						this.isReady = true;
 					},
 
-					animateInBehindPage: function(){
-						var behindPage = screenItems[screenItems.length - 1];
-						setTimeout(function(){
-							behindPage.attr('class', 'screen-page transition modal-behind');
-						}.bind(this), 0);						
+					animateInBehindPage: function() {
+						var behindPage = screenItems[screenItems.length - 2];
+						behindPage.attr('class', 'screen-page transition modal-behind');
 					},
 
 					animateInCurrentPage: function(pager) {
@@ -65,13 +63,14 @@ limitations under the License.
 							// pager.unbind(transitionEnded);
 						});
 						element[0].offsetWidth;
-						setTimeout(function(){
-							pager.attr("class", "screen-page transition center");	
-						}.bind(this), 0);						
-						
+						setTimeout(function() {
+							pager.attr("class", "screen-page transition center");
+							this.animateInBehindPage();
+						}.bind(this), 0);
+
 					},
 
-					animateOutBehindPage: function(){
+					animateOutBehindPage: function() {
 						var behindPage = screenItems[screenItems.length - 1];
 						behindPage.attr('class', 'screen-page transition');
 					},
@@ -82,10 +81,10 @@ limitations under the License.
 
 					attachMethods: function() {
 						scope.ons.screen.presentPage = function(page) {
-							if(!this.isReady){
+							if (!this.isReady) {
 								console.log('not ready -> ignore');
 								return;
-							}else{
+							} else {
 								this.isReady = false;
 							}
 
@@ -94,7 +93,7 @@ limitations under the License.
 							$http({
 								url: page,
 								method: "GET"
-							}).error(function(e){
+							}).error(function(e) {
 								that.onTransitionEnded();
 								console.error(e);
 							}).success(function(data, status, headers, config) {
@@ -110,10 +109,9 @@ limitations under the License.
 								var pager = $compile(page)(scope);
 								element.append(pager);
 
-								if (!this.isEmpty()) {	
-									this.animateInBehindPage();
-									this.animateInCurrentPage(pager);	
-								}else{
+								if (!this.isEmpty()) {
+									this.animateInCurrentPage(pager);
+								} else {
 									this.isReady = true;
 								}
 
@@ -124,7 +122,7 @@ limitations under the License.
 						}.bind(this);
 
 						scope.ons.screen.dismissPage = function() {
-							if(screenItems.length < 2 || !this.isReady){
+							if (screenItems.length < 2 || !this.isReady) {
 								// cant dismiss anymore
 								return;
 							}
@@ -137,7 +135,7 @@ limitations under the License.
 							currentPage.bind('webkitTransitionEnd', function transitionEnded() {
 								currentPage.remove();
 								that.isReady = true;
-							});							
+							});
 						}.bind(this);
 					}
 				});

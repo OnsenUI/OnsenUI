@@ -189,15 +189,7 @@ limitations under the License.
 
 				scope.ons.slidingMenu.toggleMenu = function() {
 					swiper.toggle();
-				};
-
-				scope.ons.slidingMenu.setAbovePage = function(page) {
-					if (page) {
-						scope.pages.above = page;
-					} else {
-						throw new Error('cannot set undefined page');
-					}
-				};
+				};				
 
 				scope.ons.slidingMenu.setBehindPage = function(page) {
 					if (page) {

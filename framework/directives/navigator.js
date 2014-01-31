@@ -110,7 +110,7 @@ limitations under the License.
 					animateBackLabelIn: function(inNavigatorItem, outNavigatorItem) {
 						var title = outNavigatorItem.options.title;
 						var inBackLabel = angular.element('<div></div>');
-						inBackLabel.addClass('topcoat-navigation-bar__item onsen_navigator-back-label right');
+						inBackLabel.addClass('onsen_navigator-back-label onsen_navigator-item topcoat-navigation-bar__line-height right');
 						inBackLabel.bind('click', this.onLeftButtonClicked.bind(this));
 						inNavigatorItem.backLabel = inBackLabel;
 						if (inNavigatorItem.options.leftButtonIcon) {
@@ -209,7 +209,7 @@ limitations under the License.
 					animateTitleIn: function(inNavigatorItem, outNavigatorItem) {
 						var inTitle = inNavigatorItem.options.title || '';
 						var inTitleElement = angular.element('<span>' + inTitle + '</span>');
-						inTitleElement.attr('class', 'topcoat-navigation-bar__item onsen_navigator-title center transition animate-right');
+						inTitleElement.attr('class', 'onsen_navigator-item onsen_navigator-title topcoat-navigation-bar__line-height center transition animate-right');
 						var outTitleElement = outNavigatorItem.titleElement;
 						outTitleElement.after(inTitleElement);
 						outTitleElement.bind('webkitTransitionEnd', function transitionEnded(e) {
@@ -231,7 +231,7 @@ limitations under the License.
 								rightButtonIconElement = inNavigatorItem.rightButtonIconElement;
 							} else {
 								rightButtonIconElement = angular.element('<i></i>');
-								rightButtonIconElement.addClass(inNavigatorItem.options.rightButtonIcon + ' onsen_navigation-bar-height onsen_fade');
+								rightButtonIconElement.addClass(inNavigatorItem.options.rightButtonIcon + ' topcoat-navigation-bar__line-height onsen_fade');
 								rightSectionIcon.append(rightButtonIconElement);
 								inNavigatorItem.rightButtonIconElement = rightButtonIconElement;
 							}
@@ -291,11 +291,11 @@ limitations under the License.
 					},
 
 					setBackButtonIconAsLeftArrow: function() {
-						leftArrow.attr('class', 'fa fa-angle-left fa-2x onsen_navigation-bar-height');
+						leftArrow.attr('class', 'fa fa-angle-left fa-2x topcoat-navigation-bar__line-height');
 					},
 
 					setBackButtonIcon: function(iconClass) {
-						leftArrow.attr('class', iconClass + ' onsen_navigation-bar-height');
+						leftArrow.attr('class', iconClass + ' topcoat-navigation-bar__line-height');
 					},
 
 					showBackButton: function() {
@@ -452,7 +452,7 @@ limitations under the License.
 								} else {
 									// root page
 									var titleElement = angular.element('<div></div>');
-									titleElement.addClass('topcoat-navigation-bar__item onsen_navigator-title center animate-center');
+									titleElement.addClass('onsen_navigator-item onsen_navigator-title topcoat-navigation-bar__line-height center animate-center');
 									if (options.title) {
 										titleElement.text(options.title);
 									}
