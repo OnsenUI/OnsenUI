@@ -46,23 +46,24 @@ limitations under the License.
 				scope.ons.navigator = scope.ons.navigator || {};
 				var container = angular.element(element[0].querySelector('.navigator-content'));
 				var toolbar = angular.element(element[0].querySelector('.topcoat-navigation-bar'));
-				var leftSection = angular.element(toolbar[0].querySelector('#left-section'));
-				var leftButtonContainer = angular.element(toolbar[0].querySelector('.onsen_navigator__left-button-container'));
+				var toolbarContent = angular.element(element[0].querySelector('.navigator-toolbar__content'));
+				var leftSection = angular.element(toolbarContent[0].querySelector('#left-section'));
+				var leftButtonContainer = angular.element(toolbarContent[0].querySelector('.onsen_navigator__left-button-container'));
 				var leftArrow = angular.element(leftButtonContainer[0].querySelector('i'));
 
-				var rightSection = angular.element(toolbar[0].querySelector('.onsen_navigator__right-button'));
+				var rightSection = angular.element(toolbarContent[0].querySelector('.onsen_navigator__right-button'));
 				var rightSectionIcon = angular.element(rightSection[0].querySelector('#right-section-icon'));				
 
-				var leftButtonClickFn = $parse(scope.onLeftButtonClick);
+				var leftButtonClickFn = $parse(scope.onLeftButtonClick);				
 
 				var Navigator = Class.extend({
 					init: function() {
 						this.setReady(true);
 						this.attachMethods();
-						new FastClick(leftSection[0]);
 						leftSection.bind('click', this.onLeftButtonClicked.bind(this));
-						new FastClick(rightSection[0]);
+						this.attachFastClickEvent(leftSection[0]);
 						rightSection.bind('click', this.onRightButtonClicked.bind(this));
+						this.attachFastClickEvent(rightSection[0]);
 						if (scope.page) {
 							var options = {
 								title: scope.title,
@@ -82,6 +83,10 @@ limitations under the License.
 						}.bind(this));	
 					},
 
+					attachFastClickEvent: function(el){
+						FastClick.attach(el);						
+					},
+
 					onTransitionEnded: function(){
 						this.setReady(true);
 					},
@@ -94,9 +99,12 @@ limitations under the License.
 						return this.ready;
 					},
 
-					checkiOS7: function() {
+					checkiOS7: function() {						
+						console.log('check ios 7');
 						if (window.device && window.device.platform) {
+							console.log('check ios 7 ' + window.device.platform + ', ' + window.device.version + ', ' + parseFloat(window.device.version));
 							if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
+								console.log('adjust');
 								this.adjustForiOS7();
 							}
 						} else {
@@ -105,7 +113,7 @@ limitations under the License.
 					},
 
 					adjustForiOS7: function() {
-						toolbar[0].style.height = toolbar[0].clientHeight + 20 + 'px';
+						toolbar[0].style.height = toolbarContent[0].clientHeight + 20 + 'px';
 						toolbar[0].style.paddingTop = '20px';
 					},
 
@@ -113,17 +121,17 @@ limitations under the License.
 						var title = outNavigatorItem.options.title;
 						var inBackLabel = angular.element('<div></div>');
 						inBackLabel.addClass('onsen_navigator-back-label onsen_navigator-item topcoat-navigation-bar__line-height right');
-						new FastClick(inBackLabel[0]);
 						inBackLabel.bind('click', this.onLeftButtonClicked.bind(this));
+						this.attachFastClickEvent(inBackLabel[0]);
 						inNavigatorItem.backLabel = inBackLabel;
 						if (inNavigatorItem.options.leftButtonIcon) {
 							// no back label if user specify icon
 							inBackLabel[0].style.display = 'none';
 						}
-						toolbar.prepend(inBackLabel);
+						toolbarContent.prepend(inBackLabel);
 						inBackLabel.text(title);
 
-						toolbar[0].offsetWidth;
+						toolbarContent[0].offsetWidth;
 						inBackLabel.removeClass('right');
 						inBackLabel.addClass('transition center topcoat-icon-button--quiet');
 
@@ -141,7 +149,7 @@ limitations under the License.
 					animateBackLabelOut: function(inNavigatorItem, outNavigatorItem) {
 						var outLabel = outNavigatorItem.backLabel;
 						var inLabel = inNavigatorItem.backLabel;
-						toolbar.prepend(inLabel);
+						toolbarContent.prepend(inLabel);
 
 						if (outNavigatorItem.options.leftButtonIcon) {
 							// no back label if user specify icon
@@ -152,18 +160,18 @@ limitations under the License.
 								outLabel.unbind(transitionEnded);
 							});
 
-							toolbar[0].offsetWidth;
+							toolbarContent[0].offsetWidth;
 							outLabel.removeClass('transition center');
 							outLabel.addClass('transition right');
 						}
 
 
 						if (inLabel) {
-							toolbar[0].offsetWidth;
+							toolbarContent[0].offsetWidth;
 							inLabel.removeClass('left');
 							inLabel.addClass('transition center');
-							new FastClick(inLabel[0]);
 							inLabel.bind('click', this.onLeftButtonClicked.bind(this));
+							this.attachFastClickEvent(inLabel[0]);
 						}
 					},
 
@@ -172,6 +180,7 @@ limitations under the License.
 					},
 
 					onLeftButtonClicked: function() {
+						console.log('left button clicked');
 						var onLeftButtonClick = this.getCurrentNavigatorItem().options.onLeftButtonClick;
 						if (onLeftButtonClick) {
 							var onLeftButtonClickFn = $parse(onLeftButtonClick);
@@ -260,7 +269,7 @@ limitations under the License.
 					animateRightButtonOut: function(inNavigatorItem, outNavigatorItem) {
 						if (outNavigatorItem.rightButtonIconElement) {
 							var outRightButton = outNavigatorItem.rightButtonIconElement;
-							toolbar[0].offsetWidth;
+							toolbarContent[0].offsetWidth;
 							outRightButton.removeClass('show');
 							outRightButton.addClass('transition hide');
 							outRightButton.bind('webkitTransitionEnd', function transitionEnded(e) {
@@ -303,7 +312,7 @@ limitations under the License.
 					},
 
 					showBackButton: function() {
-						toolbar[0].offsetWidth;
+						toolbarContent[0].offsetWidth;
 						leftButtonContainer.removeClass('hide');
 						leftButtonContainer.addClass('transition show');
 					},
@@ -460,7 +469,7 @@ limitations under the License.
 									if (options.title) {
 										titleElement.text(options.title);
 									}
-									toolbar.append(titleElement);
+									toolbarContent.append(titleElement);
 									navigatorItem.titleElement = titleElement;
 									this.animateRightButtonIn(navigatorItem, null);
 									this.setReady(true);
@@ -529,6 +538,35 @@ limitations under the License.
 
 				scope.ons.slidingMenu.toggleMenu = function() {
 					callParent(scope, 'ons.slidingMenu.toggleMenu');
+				}
+
+				scope.ons.slidingMenu.setBehindPage = function(page) {
+					callParent(scope, 'ons.slidingMenu.setBehindPage', page);
+				}
+
+				scope.ons.slidingMenu.setAbovePage = function(page) {
+					callParent(scope, 'ons.slidingMenu.setAbovePage', page);
+				}
+
+				scope.ons.splitView = scope.ons.splitView || {};
+				scope.ons.splitView.open = function() {
+					callParent(scope, 'ons.splitView.open');
+				}
+
+				scope.ons.splitView.close = function() {
+					callParent(scope, 'ons.splitView.close');
+				}
+
+				scope.ons.splitView.toggle = function() {
+					callParent(scope, 'ons.splitView.toggle');
+				}
+
+				scope.ons.splitView.setMainPage = function(page) {
+					callParent(scope, 'ons.splitView.setMainPage', page);
+				}
+
+				scope.ons.splitView.setSecondaryPage = function(page) {
+					callParent(scope, 'ons.splitView.setSecondaryPage', page);
 				}
 
 				scope.ons.tabbar = scope.ons.tabbar || {};
