@@ -51,7 +51,7 @@ limitations under the License.
 					},
 
 					animateInBehindPage: function() {
-						var behindPage = screenItems[screenItems.length - 2];
+						var behindPage = screenItems[screenItems.length - 2];						
 						behindPage.attr('class', 'screen-page transition modal-behind');
 					},
 
@@ -79,6 +79,11 @@ limitations under the License.
 						return screenItems.length < 1;
 					},
 
+					onPageAdded: function(page){
+						var blackMask = angular.element(page[0].querySelector('.onsen_screen-black-mask'));
+						blackMask.removeClass('hide');
+					},
+
 					attachMethods: function() {
 						scope.ons.screen.presentPage = function(page) {
 							if (!this.isReady) {
@@ -101,11 +106,15 @@ limitations under the License.
 								page.addClass('screen-page');
 
 								var blackMask = angular.element('<div></div>');
-								blackMask.addClass('onsen_navigator-black-mask');
+								blackMask.addClass('onsen_screen-black-mask hide');
 								page.append(blackMask);
 
+								var pageContainer = angular.element('<div></div>');
+								pageContainer.addClass('screen-page__container');
+								page.append(pageContainer);
+
 								var templateHTML = angular.element(data);
-								page.append(templateHTML);
+								pageContainer.append(templateHTML);
 								var pager = $compile(page)(scope);
 								element.append(pager);
 
@@ -116,6 +125,9 @@ limitations under the License.
 								}
 
 								screenItems.push(pager);
+								setTimeout(function(){
+									this.onPageAdded(pager);
+								}.bind(this), 200);
 							}.bind(this)).error(function(data, status, headers, config) {
 								console.log('error', data, status);
 							});
