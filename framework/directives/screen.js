@@ -52,7 +52,9 @@ limitations under the License.
 
 					animateInBehindPage: function(){
 						var behindPage = screenItems[screenItems.length - 1];
-						behindPage.attr('class', 'screen-page transition modal-behind');
+						setTimeout(function(){
+							behindPage.attr('class', 'screen-page transition modal-behind');
+						}.bind(this), 0);						
 					},
 
 					animateInCurrentPage: function(pager) {
@@ -62,8 +64,11 @@ limitations under the License.
 							that.onTransitionEnded();
 							// pager.unbind(transitionEnded);
 						});
-						element[0].offsetWidth;						
-						pager.attr("class", "screen-page transition center");
+						element[0].offsetWidth;
+						setTimeout(function(){
+							pager.attr("class", "screen-page transition center");	
+						}.bind(this), 0);						
+						
 					},
 
 					animateOutBehindPage: function(){
@@ -105,9 +110,9 @@ limitations under the License.
 								var pager = $compile(page)(scope);
 								element.append(pager);
 
-								if (!this.isEmpty()) {									
+								if (!this.isEmpty()) {	
 									this.animateInBehindPage();
-									this.animateInCurrentPage(pager);
+									this.animateInCurrentPage(pager);	
 								}else{
 									this.isReady = true;
 								}
