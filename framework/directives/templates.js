@@ -154,9 +154,7 @@ angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function
     "		</ng-include>\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"above full-screen\">\n" +
-    "		<ng-include class=\"full-screen\" src=\"pages.above\">\n" +
-    "		</ng-include>\n" +
+    "	<div class=\"above full-screen\">		\n" +
     "	</div>\n" +
     "</div>");
 }]);

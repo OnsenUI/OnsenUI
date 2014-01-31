@@ -20,7 +20,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS) {
+	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -31,6 +31,9 @@ limitations under the License.
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
+
+				scope.ons = scope.ons || {};
+				scope.ons.slidingMenu = scope.ons.slidingMenu || {};
 
 				var Swiper = Class.extend({
 					init: function(element) {
@@ -47,13 +50,51 @@ limitations under the License.
 						this.currentX = 0;
 						this.startX = 0;
 
+						this.attachMethods();						
 						this.bindEvents();
+
+						if(scope.abovePage){
+							scope.ons.slidingMenu.setAbovePage(scope.abovePage);
+						}
 					},
 
 					bindEvents: function() {
 						this.hammertime = new Hammer(this.el);
 						this.hammertime.on("dragleft dragright swipeleft swiperight release", this.handleEvent.bind(this));
 						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));
+					},
+
+					attachMethods: function(){
+						scope.ons.slidingMenu.setAbovePage = function(page) {
+							if (page) {
+								$http({
+									url: page,
+									method: "GET"
+								}).error(function(e){
+									console.error(e);
+								}).success(function(data, status, headers, config) {
+									var templateHTML = angular.element(data);
+									var page = angular.element('<div></div>');
+									page.addClass('page');
+									page[0].style.opacity = 0;
+									var pageContent = $compile(templateHTML)(scope);
+									page.append(pageContent);
+									this.$abovePage.append(page);
+
+									// prevent black flash
+									setTimeout(function(){
+										page[0].style.opacity = 1;
+										if(this.currentPage){
+											this.currentPage.remove();
+										}
+										this.currentPage = page;
+									}.bind(this), 0);
+
+								}.bind(this));
+							} else {
+								throw new Error('cannot set undefined page');
+							}
+						}.bind(this);
 					},
 
 
@@ -134,11 +175,9 @@ limitations under the License.
 				var swiper = new Swiper(element);
 
 				scope.pages = {
-					behind: scope.behindPage,
-					above: scope.abovePage
+					behind: scope.behindPage				
 				};
-				scope.ons = scope.ons || {};
-				scope.ons.slidingMenu = scope.ons.slidingMenu || {};
+				
 
 				scope.ons.slidingMenu.openMenu = function() {
 					swiper.open();

@@ -317,8 +317,6 @@ limitations under the License.
 				scope.pages = {
 					behind: scope.secondaryPage					
 				};
-				scope.ons = scope.ons || {};
-				scope.ons.splitView = scope.ons.splitView || {};
 
 				scope.ons.splitView.open = function() {
 					swiper.open();
