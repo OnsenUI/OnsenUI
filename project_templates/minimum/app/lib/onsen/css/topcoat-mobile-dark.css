@@ -1961,8 +1961,8 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 }
 
 .topcoat-navigation-bar__line-height {
-  line-height: 4.375rem;
-  line-height: var-height--navigation-bar;
+  line-height: 4.375rem !important;
+  line-height: var-height--navigation-bar !important;
 }
 
 .topcoat-navigation-bar__bg {

@@ -405,9 +405,12 @@ limitations under the License.
     animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.onsen_navigator-title {
-    width: 60%;
-    left: 20%;
+.onsen_navigator-title {    
+  width: 44%;
+  left: 28%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .onsen_navigator-title.animate-right {

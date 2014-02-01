@@ -118,7 +118,7 @@
             ],
             "theme": {
               "topcoat-mobile-onsen-ios7.css": "css/topcoat-mobile-onsen-ios7.css",
-              "topcoat-mobile-onsen-android.css": "css/topcoat-mobile-onsen-android.css",
+              "topcoat-mobile-onsen-android.css": "css/topcoat-mobile-onsen-android4_4.css",
               "topcoat-mobile-light.css": "css/topcoat-mobile-light.css",
               "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css",
               "topcoat-mobile-onsen-blue.css": "css/topcoat-mobile-onsen-blue.css",
@@ -166,7 +166,7 @@
             ],
             "theme": {
               "topcoat-mobile-onsen-ios7.css": "css/topcoat-mobile-onsen-ios7.css",
-              "topcoat-mobile-onsen-android.css": "css/topcoat-mobile-onsen-android.css",
+              "topcoat-mobile-onsen-android.css": "css/topcoat-mobile-onsen-android4_4.css",
               "topcoat-mobile-light.css": "css/topcoat-mobile-light.css",
               "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css",
               "topcoat-mobile-onsen-blue.css": "css/topcoat-mobile-onsen-blue.css",
@@ -214,7 +214,7 @@
             ],
             "theme": {
               "topcoat-mobile-onsen-ios7.css": "css/topcoat-mobile-onsen-ios7.css",
-              "topcoat-mobile-onsen-android.css": "css/topcoat-mobile-onsen-android.css",
+              "topcoat-mobile-onsen-android.css": "css/topcoat-mobile-onsen-android4_4.css",
               "topcoat-mobile-light.css": "css/topcoat-mobile-light.css",
               "topcoat-mobile-dark.css": "css/topcoat-mobile-dark.css",
               "topcoat-mobile-onsen-blue.css": "css/topcoat-mobile-onsen-blue.css",
