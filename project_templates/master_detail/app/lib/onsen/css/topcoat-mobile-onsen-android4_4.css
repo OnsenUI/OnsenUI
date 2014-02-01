@@ -2487,7 +2487,7 @@ input[type="radio"]:focus + .topcoat-radio-button__checkmark:before {
 
 input[type="radio"]:active + .topcoat-radio-button__checkmark:before {
   border: 1px solid #09c;
-  border: 1px #09c;
+  border: 1px solid #09c;
   background-color: #09c;
   background-color: transparent;
   box-shadow: none;
@@ -3419,7 +3419,7 @@ box-shadow var-box-shadow--switch__label--after--checked,
 */
 
 .topcoat-tab-bar {
-  height: 2rem;
+  height: 49px;
   background-color: #222;
   border-top: 3px solid #3a3d40;
 }
@@ -3427,9 +3427,9 @@ box-shadow var-box-shadow--switch__label--after--checked,
 .topcoat-tab-bar__button {
   padding: 0 1.25rem;
   height: 2rem;
-  height: 2rem;
+  height: 49px;
   line-height: 2rem;
-  line-height: 2rem;
+  line-height: 49px;
   letter-spacing: 1px;
   color: #f3f3f3;
   color: #c0c0c0;
