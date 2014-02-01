@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-02-01 */
+/*! onsenui - v0.7.0 - 2014-02-02 */
 angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
@@ -1130,7 +1130,7 @@ limitations under the License.
 								blackMask.addClass('onsen_navigator-black-mask');
 								page.append(blackMask);
 
-								var templateHTML = angular.element(data);
+								var templateHTML = angular.element(data.trim());
 
 								var navigatorToolbar = templateHTML[0].querySelector('ons-navigator-toolbar');
 								if (navigatorToolbar) {
@@ -1577,7 +1577,7 @@ limitations under the License.
 								pageContainer.addClass('screen-page__container');
 								page.append(pageContainer);
 
-								var templateHTML = angular.element(data);
+								var templateHTML = angular.element(data.trim());
 								pageContainer.append(templateHTML);
 								var pager = $compile(page)(scope);
 								element.append(pager);
@@ -1897,7 +1897,7 @@ limitations under the License.
 								}).error(function(e){
 									console.error(e);
 								}).success(function(data, status, headers, config) {
-									var templateHTML = angular.element(data);
+									var templateHTML = angular.element(data.trim());
 									var page = angular.element('<div></div>');
 									page.addClass('page');
 									page[0].style.opacity = 0;
@@ -2149,7 +2149,7 @@ limitations under the License.
 								}).error(function(e){
 									console.error(e);
 								}).success(function(data, status, headers, config) {
-									var templateHTML = angular.element(data);
+									var templateHTML = angular.element(data.trim());
 									var page = angular.element('<div></div>');
 									page.addClass('page');
 									page[0].style.opacity = 0;

@@ -113,7 +113,7 @@ limitations under the License.
 								pageContainer.addClass('screen-page__container');
 								page.append(pageContainer);
 
-								var templateHTML = angular.element(data);
+								var templateHTML = angular.element(data.trim());
 								pageContainer.append(templateHTML);
 								var pager = $compile(page)(scope);
 								element.append(pager);

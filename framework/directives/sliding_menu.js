@@ -80,7 +80,7 @@ limitations under the License.
 								}).error(function(e){
 									console.error(e);
 								}).success(function(data, status, headers, config) {
-									var templateHTML = angular.element(data);
+									var templateHTML = angular.element(data.trim());
 									var page = angular.element('<div></div>');
 									page.addClass('page');
 									page[0].style.opacity = 0;

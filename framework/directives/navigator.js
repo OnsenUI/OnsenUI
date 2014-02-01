@@ -422,7 +422,7 @@ limitations under the License.
 								blackMask.addClass('onsen_navigator-black-mask');
 								page.append(blackMask);
 
-								var templateHTML = angular.element(data);
+								var templateHTML = angular.element(data.trim());
 
 								var navigatorToolbar = templateHTML[0].querySelector('ons-navigator-toolbar');
 								if (navigatorToolbar) {
