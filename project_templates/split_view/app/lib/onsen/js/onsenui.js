@@ -153,7 +153,7 @@ angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function
     "<div class=\"sliding-menu full-screen\">\n" +
     "	<div ng-cloak class=\"onsen_sliding-menu-black-mask\"></div>\n" +
     "	<div class=\"behind full-screen\">\n" +
-    "		<ng-include class=\"full-screen\" ng-cloak src=\"pages.behind\">\n" +
+    "		<ng-include class=\"full-screen\" class=\"page\" ng-cloak src=\"pages.behind\">\n" +
     "		</ng-include>\n" +
     "	</div>\n" +
     "\n" +
@@ -167,7 +167,7 @@ angular.module("templates/split_view.tpl", []).run(["$templateCache", function($
     "<div class=\"sliding-menu full-screen\">\n" +
     "	<div class=\"onsen_sliding-menu-black-mask\"></div>\n" +
     "	<div class=\"secondary full-screen\">\n" +
-    "		<ng-include ng-cloak src=\"pages.behind\">\n" +
+    "		<ng-include ng-cloak src=\"pages.behind\" class=\"page\">\n" +
     "		</ng-include>\n" +
     "	</div>\n" +
     "\n" +
@@ -768,7 +768,11 @@ limitations under the License.
 					init: function() {
 						this.setReady(true);
 						this.attachMethods();
-						leftSection.bind('click', this.onLeftButtonClicked.bind(this));
+
+						leftButtonContainer.bind('touchend', function(){   // fix android 2.3 click event not fired some times when used with sliding menu
+						});
+
+						leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));
 						this.attachFastClickEvent(leftSection[0]);
 						rightSection.bind('click', this.onRightButtonClicked.bind(this));
 						this.attachFastClickEvent(rightSection[0]);
@@ -6278,12 +6282,6 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
 		Modernizr.addTest(
 			'overflowtouch',
 			window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
-	});
-
-	yepnope({
-		test: Modernizr.overflowtouch,
-		// nope: ['lib/onsen/css/polyfill/sliding_menu_polyfill.css']
-		nope: ['plugins/onsenui/0.6.0/css/polyfill/sliding_menu_polyfill.css']
 	});
 
 })();
