@@ -13,7 +13,7 @@
 			</div>
 		</div>	
 	</div>
-	<div class="relative navigator-content">
+	<div class="relative navigator-content topcoat-page__bg">
 		
 	</div>    
 	

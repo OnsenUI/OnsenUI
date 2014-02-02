@@ -87,7 +87,7 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "			</div>\n" +
     "		</div>	\n" +
     "	</div>\n" +
-    "	<div class=\"relative navigator-content\">\n" +
+    "	<div class=\"relative navigator-content topcoat-page__bg\">\n" +
     "		\n" +
     "	</div>    \n" +
     "	\n" +

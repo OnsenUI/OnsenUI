@@ -2173,11 +2173,11 @@ limitations under the License.
     - checkbox
 */
 
-body {
+.page {
   background-color: #f5f0e8;
 }
 
-.page {
+.topcoat-page__bg {
   background-color: #f5f0e8;
 }
 
