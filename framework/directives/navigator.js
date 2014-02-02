@@ -60,7 +60,11 @@ limitations under the License.
 					init: function() {
 						this.setReady(true);
 						this.attachMethods();
-						leftSection.bind('click', this.onLeftButtonClicked.bind(this));
+
+						leftButtonContainer.bind('touchend', function(){   // fix android 2.3 click event not fired some times when used with sliding menu
+						});
+
+						leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));
 						this.attachFastClickEvent(leftSection[0]);
 						rightSection.bind('click', this.onRightButtonClicked.bind(this));
 						this.attachFastClickEvent(rightSection[0]);
