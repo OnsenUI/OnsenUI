@@ -127,7 +127,7 @@ angular.module("templates/screen.tpl", []).run(["$templateCache", function($temp
 
 angular.module("templates/scroller.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/scroller.tpl",
-    "<div class=\"scroller-wrapper full-screen\" ons-scrollable>\n" +
+    "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
     "	<div class=\"scroller\">\n" +
     "		<div ng-transclude>\n" +
     "			\n" +
