@@ -8,7 +8,18 @@ Onsen UI makes building applications simple basing on the concept of Web Compone
 
 ## Demo
 
-Click [Here](http://docs.monaca.mobi/onsen/) to see Onsen UI in action!
+Click [Here](http://onsenui.github.io/demo/) to see Onsen UI in action!
+
+## What's Included
+
+* [AngularJS](angularjs.org): for directives
+* [Topcoat](topcoat.io): for fast UI css
+* [HammerJS](http://eightmedia.github.io/hammer.js/): for touch, swipe handling
+* [Font Awesome](http://fontawesome.io/): for icons
+
+## Getting Started Using Templates
+
+See [getting started](http://onsenui.io/getting_started/) page.
 
 ## Getting Started Using Monaca
 
