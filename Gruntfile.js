@@ -15,7 +15,10 @@ module.exports = function(grunt) {
             'demo/lib/onsen/',
             'project_templates/minimum/app/lib/onsen/',
             'project_templates/sliding_menu/app/lib/onsen/',
+            'project_templates/sliding_menu_navigator/app/lib/onsen/',
             'project_templates/tab_bar/app/lib/onsen/',
+            'project_templates/split_view/app/lib/onsen/',
+            'project_templates/split_view_navigator/app/lib/onsen/',
             'project_templates/master_detail/app/lib/onsen/'
           ]
         }]
@@ -44,6 +47,19 @@ module.exports = function(grunt) {
           'framework/js/*.js'
         ],
         dest: 'build/js/<%= pkg.name %>.js'
+      },
+      js_all: {
+        src: [
+          'framework/lib/angular/angular.js',
+          'framework/lib/angular/angular-touch.js',
+          'framework/directives/templates.js',
+          'framework/directives/templates.js',
+          'framework/directives/module.js',
+          'framework/directives/*.js',
+          'framework/lib/*.js',
+          'framework/js/*.js'
+        ],
+        dest: 'build/js/<%= pkg.name %>_all.js'
       },
       css: {
         src: [
@@ -316,6 +332,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-autoprefixer');
 
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:demo', 'copy:minimum_template', 'copy:sliding_menu_template', 'copy:sliding_menu_navigator_template', 'copy:tab_bar_template', 'copy:split_view_template', 'copy:split_view_navigator_template', 'copy:master_detail_template', 'copy:plugin_info', 'compress']);
+  grunt.registerTask('default', ['clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:demo', 'copy:minimum_template', 'copy:sliding_menu_template', 'copy:sliding_menu_navigator_template', 'copy:tab_bar_template', 'copy:split_view_template', 'copy:split_view_navigator_template', 'copy:master_detail_template', 'copy:plugin_info']);
 
 };
