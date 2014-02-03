@@ -7,6 +7,10 @@ body {
   /*  background-color: #153A5F;*/
 }
 
+.iso7-no-active:active {
+    background-color: #fff !important;
+}
+
 .dark-container {
     background-color: #454646;
 }

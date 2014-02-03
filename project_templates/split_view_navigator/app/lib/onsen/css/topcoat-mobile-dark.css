@@ -1722,7 +1722,7 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   background-color: var-background-color--list-item;
 }
 
-.topcoat-list__item:active {
+.topcoat-list__item_active:active {
   background-color: var-background-color--list-item--active;
 }
 
@@ -2178,6 +2178,10 @@ body {
 }
 
 .page {
+  background-color: #4b4d4e;
+}
+
+.topcoat-page__bg {
   background-color: #4b4d4e;
 }
 

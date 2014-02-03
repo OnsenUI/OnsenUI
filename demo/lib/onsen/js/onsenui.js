@@ -55,8 +55,8 @@ angular.module("templates/list.tpl", []).run(["$templateCache", function($templa
   $templateCache.put("templates/list.tpl",
     "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
     "	<div class=\"scroller\">\n" +
-    "		<div class=\"topcoat-list__container\" ng-class=\"theme + '-container'\">\n" +
-    "			<ul class=\"topcoat-list\" ng-class=\"theme + '-list'\" ng-transclude>\n" +
+    "		<div class=\"topcoat-list__container\">\n" +
+    "			<ul class=\"topcoat-list\" ng-transclude>\n" +
     "\n" +
     "			</ul>\n" +
     "		</div>\n" +
@@ -440,27 +440,12 @@ limitations under the License.
 			restrict: 'E',
 			replace: true,
 			transclude: true,
-			scope: true,			
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/column.tpl',
-			controller: function($scope, $attrs){
-				$attrs.$observe('align', function(align){
-					if(align){
-						$scope.align = align;
-					}					
-				});
-
-				$attrs.$observe('size', function(size){
-					if(size){
-						$scope.size = size;
-					}					
-				});
-
-				$attrs.$observe('offset', function(offset){
-					if(offset){
-						$scope.offset = offset;	
-					}
-				});				
-			}
+			scope: {
+				align: '@',
+				size: '@',
+				offst: '@'
+			},			
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/column.tpl'
 		};
 	});
 })();
@@ -657,10 +642,7 @@ limitations under the License.
 		return {
 			restrict: 'E',
 			replace: false,
-			transclude: true,
-			scope:{
-				theme: '@'
-			},
+			transclude: true,			
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list.tpl'
 		};
 	});
@@ -1452,15 +1434,10 @@ limitations under the License.
 			restrict: 'E',
 			replace: true,
 			transclude: true,
-			scope: true,			
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/row.tpl',
-			controller: function($scope, $attrs){
-				$attrs.$observe('align', function(align){
-					if(align){
-						$scope.align = align;
-					}					
-				});				
-			}
+			scope: {
+				align: '@'
+			},			
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/row.tpl'
 		};
 	});
 })();

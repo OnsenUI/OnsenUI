@@ -20,7 +20,7 @@
     "require" : null,
     "forms" : {
       "mandatory": [
-        "js/onsenui.js"
+        "js/onsenui_all.js"
       ],
       "theme":{
         "type": "selectOne",
@@ -72,13 +72,13 @@
     "files" : {
       "javascript": {
         "android": {
-          "mandatory": ["js/onsenui.js"]
+          "mandatory": ["js/onsenui_all.js"]
         },
         "ios": {
-          "mandatory": ["js/onsenui.js"]
+          "mandatory": ["js/onsenui_all.js"]
         },
         "winrt": {
-          "mandatory": ["js/onsenui.js"]
+          "mandatory": ["js/onsenui_all.js"]
         }
       },
       "css" : {

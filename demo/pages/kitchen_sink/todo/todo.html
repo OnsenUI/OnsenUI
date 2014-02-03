@@ -1,17 +1,34 @@
-<ons-list ng-controller="TodosController">	
-	<ons-list-item class="no-wrap no-active" ng-controller="TodosController">
-		<form novalidate name="todoForm" class="css-form" ng-submit="addTodo(newTodoText); newTodoText=''; ">
-			<ons-text-input name="todoText" class="width70" ng-model="newTodoText" placeholder="What to do?"></ons-text-input>			
-			<ons-button class="inline-block todo-add-button" disabled="{{ newTodoText === '' || newTodoText === undefined }}">Add</ons-button>
-		</form>					
-	</ons-list-item>	
-	<div>
-			<ons-list-item class="no-wrap" ng-repeat="todo in todos" ng-animate="'zoom'">
-				<h5 class="float-left inline-block margin7">{{todo.text}}</h5>
-				<span class="topcoat-icon-button--quiet float-right" ng-click="removeTodo($index)">
+<ons-page>
+<div ng-controller="TodosController">
+
+	<ons-list>	
+		<ons-list-item class="no-wrap iso7-no-active">
+			<form novalidate name="todoForm" class="css-form" ng-submit="addTodo(newTodo.text); newTodo.text=''; ">
+				<ons-row>
+					<ons-col>
+						<ons-text-input name="todoText" class="full" ng-model="newTodo.text" placeholder="What to do?"></ons-text-input>
+					</ons-col>
+					<ons-col size="20">
+						<ons-button class="inline-block todo-add-button">Add</ons-button>
+					</ons-col>
+				</ons-row>
+			</form>				
+		</ons-list-item>			
+		<ons-list-item class="no-wrap iso7-no-active zoom" ng-repeat="todo in todos">
+			<ons-row>
+				<ons-col align="center" class="left">
+					{{todo.text}}
+				</ons-col>
+				<ons-col size="20" class="center">
+					<span class="topcoat-icon-button--quiet" ng-click="removeTodo($index)">
 					<i class="fa fa-times"></i>
 				</span>
-			</ons-list-item>	
-	</div>
+				</ons-col>
+			</ons-row>
+			
+			
+		</ons-list-item>	
 	
-</ons-list>
+	</ons-list>
+</div>
+</ons-page>

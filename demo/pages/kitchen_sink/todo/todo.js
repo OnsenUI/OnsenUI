@@ -1,5 +1,8 @@
 function TodosController($scope) {
 	$scope.todos = [];
+	$scope.newTodo = {
+		text: ''
+	};
 
 	$scope.addTodo = function(todoText) {
 		var todo = {
