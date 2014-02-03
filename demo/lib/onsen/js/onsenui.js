@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-02-02 */
+/*! onsenui - v0.7.0 - 2014-02-03 */
 angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
@@ -53,7 +53,7 @@ angular.module("templates/if_platform.tpl", []).run(["$templateCache", function(
 
 angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/list.tpl",
-    "<div class=\"scroller-wrapper full-screen\" ons-scrollable>\n" +
+    "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
     "	<div class=\"scroller\">\n" +
     "		<div class=\"topcoat-list__container\" ng-class=\"theme + '-container'\">\n" +
     "			<ul class=\"topcoat-list\" ng-class=\"theme + '-list'\" ng-transclude>\n" +
@@ -128,7 +128,7 @@ angular.module("templates/screen.tpl", []).run(["$templateCache", function($temp
 
 angular.module("templates/scroller.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/scroller.tpl",
-    "<div class=\"scroller-wrapper full-screen\" ons-scrollable>\n" +
+    "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
     "	<div class=\"scroller\">\n" +
     "		<div ng-transclude>\n" +
     "			\n" +
@@ -2259,7 +2259,7 @@ limitations under the License.
 						this.behindPage.style.width = behindSize + '%';
 						this.behindPage.style.opacity = 1;
 						this.abovePage.style.width = scope.mainPageWidth + '%';
-						var translate = Math.floor(behindSize * window.innerWidth / 100);
+						var translate = this.behindPage.clientWidth;
 						this.translate2(translate);
 					},
 
