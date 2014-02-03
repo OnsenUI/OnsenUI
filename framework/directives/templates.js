@@ -52,7 +52,7 @@ angular.module("templates/if_platform.tpl", []).run(["$templateCache", function(
 
 angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/list.tpl",
-    "<div class=\"scroller-wrapper full-screen\" ons-scrollable>\n" +
+    "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
     "	<div class=\"scroller\">\n" +
     "		<div class=\"topcoat-list__container\" ng-class=\"theme + '-container'\">\n" +
     "			<ul class=\"topcoat-list\" ng-class=\"theme + '-list'\" ng-transclude>\n" +

@@ -189,7 +189,7 @@ limitations under the License.
 						this.behindPage.style.width = behindSize + '%';
 						this.behindPage.style.opacity = 1;
 						this.abovePage.style.width = scope.mainPageWidth + '%';
-						var translate = Math.floor(behindSize * window.innerWidth / 100);
+						var translate = this.behindPage.clientWidth;
 						this.translate2(translate);
 					},
 
