@@ -54,8 +54,8 @@ angular.module("templates/list.tpl", []).run(["$templateCache", function($templa
   $templateCache.put("templates/list.tpl",
     "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
     "	<div class=\"scroller\">\n" +
-    "		<div class=\"topcoat-list__container\" ng-class=\"theme + '-container'\">\n" +
-    "			<ul class=\"topcoat-list\" ng-class=\"theme + '-list'\" ng-transclude>\n" +
+    "		<div class=\"topcoat-list__container\">\n" +
+    "			<ul class=\"topcoat-list\" ng-transclude>\n" +
     "\n" +
     "			</ul>\n" +
     "		</div>\n" +

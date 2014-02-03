@@ -25,10 +25,7 @@ limitations under the License.
 		return {
 			restrict: 'E',
 			replace: false,
-			transclude: true,
-			scope:{
-				theme: '@'
-			},
+			transclude: true,			
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list.tpl'
 		};
 	});

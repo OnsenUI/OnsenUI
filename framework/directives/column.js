@@ -26,27 +26,12 @@ limitations under the License.
 			restrict: 'E',
 			replace: true,
 			transclude: true,
-			scope: true,			
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/column.tpl',
-			controller: function($scope, $attrs){
-				$attrs.$observe('align', function(align){
-					if(align){
-						$scope.align = align;
-					}					
-				});
-
-				$attrs.$observe('size', function(size){
-					if(size){
-						$scope.size = size;
-					}					
-				});
-
-				$attrs.$observe('offset', function(offset){
-					if(offset){
-						$scope.offset = offset;	
-					}
-				});				
-			}
+			scope: {
+				align: '@',
+				size: '@',
+				offst: '@'
+			},			
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/column.tpl'
 		};
 	});
 })();
