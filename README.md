@@ -1,6 +1,6 @@
 # Onsen UI
 
-Onsen UI is an HTML5 UI framework for building modern mobile applications.
+Onsen UI is a Custom Elements-Based HTML5 UI Framework for BuildingYour Mobile Front End.
 
 Onsen UI makes building applications simple basing on the concept of Web Components. Applications can be build using **HTML tags** web developers already know. It is built on top of heroic [AngularJS](http://angularjs.org/) and performance craving [Topcoat](http://topcoat.io/).
 
