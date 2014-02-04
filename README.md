@@ -80,7 +80,10 @@ See the current [Onsen UI docs].
 
 ## Getting support
 
-Ask a question using the "Onsen-UI" tag in [Monaca Forum].
+If anything about Onsen UI is unclear, please ask a question on <a href="http://stackoverflow.com" target="_blank">Stackoverflow</a>, and tag it "onsenui".  An Onsen UI support engineer will answer it.
+	
+If you have any requests or comments regarding the development of Onsen UI, please feel free to direct them to the Twitter account (<a href="http://twitter.com/Onsen_UI" target="_blank">@Onsen_UI</a>).
+
 
 [Onsen UI docs]:http://docs.monaca.mobi/onsen/docs/en/
 [Monaca Forum]:http://monaca.mobi/forum
