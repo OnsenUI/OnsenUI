@@ -72,31 +72,37 @@ limitations under the License.
 					},
 
 					attachMethods: function(){
-						scope.ons.slidingMenu.setAbovePage = function(page) {
-							if (page) {
+						scope.ons.slidingMenu.setAbovePage = function(pageUrl) {
+							if(this.currentPageUrl === pageUrl){
+								// same page -> ignore
+								return;
+							}
+
+							if (pageUrl) {
 								$http({
-									url: page,
+									url: pageUrl,
 									method: "GET"
 								}).error(function(e){
 									console.error(e);
 								}).success(function(data, status, headers, config) {
 									var templateHTML = angular.element(data.trim());
-									var page = angular.element('<div></div>');
-									page.addClass('page');
-									page[0].style.opacity = 0;
+									var pageElement = angular.element('<div></div>');
+									pageElement.addClass('page');
+									pageElement[0].style.opacity = 0;
 									var pageContent = $compile(templateHTML)(scope);
-									page.append(pageContent);
-									this.$abovePage.append(page);
+									pageElement.append(pageContent);
+									this.$abovePage.append(pageElement);
 
 									// prevent black flash
 									setTimeout(function(){
-										page[0].style.opacity = 1;
-										if(this.currentPage){
-											this.currentPage.remove();
+										pageElement[0].style.opacity = 1;
+										if(this.currentPageElement){
+											this.currentPageElement.remove();
 										}
-										this.currentPage = page;
+										this.currentPageElement = pageElement;
 									}.bind(this), 0);
 
+									this.currentPageUrl = pageUrl;
 								}.bind(this));
 							} else {
 								throw new Error('cannot set undefined page');

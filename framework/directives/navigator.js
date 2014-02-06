@@ -249,7 +249,7 @@ limitations under the License.
 							} else {
 								rightButtonIconElement = angular.element('<i></i>');
 								rightButtonIconElement.addClass(inNavigatorItem.options.rightButtonIcon + ' topcoat-navigation-bar__line-height onsen_fade');
-								rightSectionIcon.append(rightButtonIconElement);
+								angular.element(toolbar[0].querySelector('#right-section-icon')).append(rightButtonIconElement); // fix bug on ios. strange that we cant use rightSectionIcon.append() here
 								inNavigatorItem.rightButtonIconElement = rightButtonIconElement;
 							}
 
