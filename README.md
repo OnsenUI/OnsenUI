@@ -59,13 +59,8 @@ The files will be built and copied into **build**, **demo/lib/onsen/**, and **ap
 
 ## Developing your app
 
-[Monaca IDE] makes it super easy to create Onsen UI project, but if you want to use other IDEs, we provide a template in **app** folder for you to get started.
+[Monaca IDE] makes it super easy to create Onsen UI project, but if you want to use other IDEs, we provide project templates for you in the project_tempates folder. You will see the instruction on how to run the project there.
 
-* Running the app by running the script
-
-        scripts/web-server.js
-
-* Then navigate your browser to [http://localhost:8000/app/index.html](http://localhost:8000/app/index.html)
 
 ## Documentation
 
