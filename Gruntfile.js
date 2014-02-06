@@ -263,6 +263,16 @@ module.exports = function(grunt) {
           src: ['**']
         }]
       },
+      onsen_ui: {
+        options: {
+          archive: 'project_templates/onsen_ui.zip'
+        },
+        files: [{
+          expand: true,
+          cwd: 'project_templates/sliding_menu/',
+          src: ['**']
+        }]
+      },
       sliding_menu_navigator: {
         options: {
           archive: 'project_templates/sliding_menu_navigator.zip'
