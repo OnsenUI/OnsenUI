@@ -12,6 +12,7 @@ module.exports = function(grunt) {
           src: [
             '.tmp',
             'build',
+            'app/lib/onsen/',
             'demo/lib/onsen/',
             'project_templates/minimum/app/lib/onsen/',
             'project_templates/sliding_menu/app/lib/onsen/',
@@ -143,6 +144,16 @@ module.exports = function(grunt) {
             ]
           }
         ]
+      },
+      app: {
+        files: [{
+          expand: true,
+          cwd: 'build/',
+          dest: 'app/lib/onsen/',
+          src: [
+            '**'
+          ]
+        }]
       },
       demo: {
         files: [{
@@ -369,7 +380,7 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', [
-    'clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:demo', 
+    'clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:app', 'copy:demo', 
     'copy:minimum_template', 'copy:sliding_menu_template', 
     'copy:sliding_menu_navigator_template', 'copy:tab_bar_template', 
     'copy:split_view_template', 'copy:split_view_navigator_template', 

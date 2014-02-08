@@ -306,3 +306,15 @@ a {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
+
+
+/* Your CSS content here */
+
+.page-padding {
+    padding: 10px;
+}
+
+.topcoat-button--large--cta:active {
+    background-color:#000000; 
+    color:#FFFFFF; 
+}
