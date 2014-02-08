@@ -6,6 +6,15 @@ Onsen UI makes building applications simple basing on the concept of Web Compone
 
 [Monaca IDE] fully supports Onsen UI plugin.
 
+## Browser Support
+
+Onsen UI is tested with the following browsers and mobile OS.
+
+ * Android2.3.4+
+ * iOS6+
+ * Google Chrome
+ * Safari
+
 ## Demo
 
 Click [Here](http://onsenui.github.io/demo/) to see Onsen UI in action!
@@ -59,17 +68,20 @@ The files will be built and copied into **build**, **demo/lib/onsen/**, and **ap
 
 ## Developing your app
 
-[Monaca IDE] makes it super easy to create Onsen UI project, but if you want to use other IDEs, we provide a template in **app** folder for you to get started.
+[Monaca IDE] makes it super easy to create Onsen UI project, but if you want to use other IDEs, we provide project templates for you in the project_tempates folder. You will see the instruction on how to run the project there.
 
-* Running the app by running the script
-
-        scripts/web-server.js
-
-* Then navigate your browser to [http://localhost:8000/app/index.html](http://localhost:8000/app/index.html)
 
 ## Documentation
 
 See the current [Onsen UI docs].
+
+## Developing Onsen UI
+
+Run grunt task to develop Onsen UI itself with livereload.
+
+        grunt serve
+
+Access [http://localhost:9000/demo/index.html](http://localhost:9000/demo/index.html) and your code changes will be reloaded.
 
 ## Contributing
 
