@@ -26,7 +26,13 @@ limitations under the License.
 			restrict: 'E',
 			replace: true,
 			transclude: false,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl'
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
+			link: function($scope, element, attr){
+				attr.$observe('disabled', function(disabled){
+					var isDisabled = $scope.$eval(disabled);
+					element.attr('disabled', isDisabled);
+				});
+			}
 		};
 	});
 })();
