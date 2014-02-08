@@ -1,6 +1,6 @@
 {
   "name": "OnsenUI",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "homepage": "http://onsenui.io",
   "authors": [
     "Kruy Vanna <kruyvanna@gmail.com>"
@@ -19,6 +19,8 @@
     "build/css/topcoat-mobile-onsen-pink.css",
     "build/css/topcoat-mobile-onsen-purple.css",
     "build/css/topcoat-mobile-onsen-yellow.css",
+    "build/css/topcoat-mobile-onsen-ios7.css",
+    "build/css/topcoat-mobile-onsen-android4_4.css",
     "build/css/topcoat-mobile-light.css",
     "build/css/topcoat-mobile-dark.css"
   ],
