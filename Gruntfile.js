@@ -305,6 +305,16 @@ module.exports = function(grunt) {
       }
     },
     watch: {
+      demos: {
+        files: [
+          'demo/*',
+          'demo/**/*'
+        ],
+        tasks: [],
+        options: {
+          livereload: true
+        },
+      },
       scripts: {
         files: [
           'framework/directives/*.js',
@@ -317,21 +327,43 @@ module.exports = function(grunt) {
         ],
         tasks: ['default'],
         options: {
-
+          livereload: true
         },
       },
     },
+    connect: {
+      options: {
+        port: 8000,
+        hostname: 'localhost',
+        livereload: true,
+        base: '.'
+      },
+      livereload: {
+        options: {
+          port: 9000
+        }
+      }
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-autoprefixer');
 
+  grunt.registerTask('serve', ['connect', 'watch']);
+
   // Default task(s).
-  grunt.registerTask('default', ['clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:demo', 'copy:minimum_template', 'copy:sliding_menu_template', 'copy:sliding_menu_navigator_template', 'copy:tab_bar_template', 'copy:split_view_template', 'copy:split_view_navigator_template', 'copy:master_detail_template', 'copy:plugin_info']);
+  grunt.registerTask('default', [
+    'clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:demo', 
+    'copy:minimum_template', 'copy:sliding_menu_template', 
+    'copy:sliding_menu_navigator_template', 'copy:tab_bar_template', 
+    'copy:split_view_template', 'copy:split_view_navigator_template', 
+    'copy:master_detail_template', 'copy:plugin_info'
+  ]);
 
 };
