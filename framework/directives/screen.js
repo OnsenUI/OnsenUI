@@ -25,16 +25,15 @@ limitations under the License.
 		return {
 			restrict: 'E',
 			replace: false,
-			transclude: false,
+			transclude: true,
 			scope: {
 				page: '@'
 			},
-
-			// The linking function will add behavior to the template
+			
 			link: function(scope, element, attrs) {
 				var screenItems = [];
-				scope.ons = scope.ons || {};
-				scope.ons.screen = scope.ons.screen || {};
+				scope.$parent.ons = scope.$parent.ons || {};
+				scope.$parent.ons.screen = scope.$parent.ons.screen || {};
 
 				var Screen = Class.extend({
 					init: function() {
@@ -42,8 +41,15 @@ limitations under the License.
 						this.attachMethods();
 
 						if (scope.page) {
-							scope.ons.screen.presentPage(scope.page);
+							scope.$parent.ons.screen.presentPage(scope.page);
 						}
+
+						attrs.$observe('page', function(page) {
+							console.log('page changed', page);
+							if (page) {
+								this.resetToPage(page);
+							}
+						}.bind(this));
 					},
 
 					onTransitionEnded: function() {
@@ -51,7 +57,7 @@ limitations under the License.
 					},
 
 					animateInBehindPage: function() {
-						var behindPage = screenItems[screenItems.length - 2];						
+						var behindPage = screenItems[screenItems.length - 2].pageElement;						
 						behindPage.attr('class', 'screen-page transition modal-behind');
 					},
 
@@ -71,7 +77,7 @@ limitations under the License.
 					},
 
 					animateOutBehindPage: function() {
-						var behindPage = screenItems[screenItems.length - 1];
+						var behindPage = screenItems[screenItems.length - 1].pageElement;
 						behindPage.attr('class', 'screen-page transition');
 					},
 
@@ -84,8 +90,15 @@ limitations under the License.
 						blackMask.removeClass('hide');
 					},
 
+					resetToPage: function(pageUrl){
+						scope.$parent.ons.screen.presentPage(pageUrl);
+						for (var i = 0; i < screenItems.length - 1; i++) {
+							screenItems[i].pageElement.remove();
+						};										
+					},
+
 					attachMethods: function() {
-						scope.ons.screen.presentPage = function(page) {
+						scope.$parent.ons.screen.presentPage = function(page) {
 							if (!this.isReady) {
 								console.log('not ready -> ignore');
 								return;
@@ -102,57 +115,75 @@ limitations under the License.
 								that.onTransitionEnded();
 								console.error(e);
 							}).success(function(data, status, headers, config) {
-								var page = angular.element('<div></div>');
-								page.addClass('screen-page');
+								var pageEl = angular.element('<div></div>');
+								pageEl.addClass('screen-page');
 
 								var blackMask = angular.element('<div></div>');
 								blackMask.addClass('onsen_screen-black-mask hide');
-								page.append(blackMask);
+								pageEl.append(blackMask);
 
 								var pageContainer = angular.element('<div></div>');
 								pageContainer.addClass('screen-page__container');
-								page.append(pageContainer);
+								pageEl.append(pageContainer);
 
 								var templateHTML = angular.element(data.trim());
 								pageContainer.append(templateHTML);
-								var pager = $compile(page)(scope);
-								element.append(pager);
+								var compiledPage = $compile(pageEl)(scope.$parent);
+								element.append(compiledPage);
 
 								if (!this.isEmpty()) {
-									this.animateInCurrentPage(pager);
+									this.animateInCurrentPage(compiledPage);
 								} else {
 									this.isReady = true;
 								}
 
-								screenItems.push(pager);
+								var screenItem = {
+									pageUrl: page,
+									pageElement: compiledPage
+								}								
+
+								screenItems.push(screenItem);
 								setTimeout(function(){
-									this.onPageAdded(pager);
+									this.onPageAdded(compiledPage);
 								}.bind(this), 200);
 							}.bind(this)).error(function(data, status, headers, config) {
 								console.log('error', data, status);
 							});
 						}.bind(this);
 
-						scope.ons.screen.dismissPage = function() {
+						scope.$parent.ons.screen.resetToPage = function(page){
+							this.resetToPage(page);
+						},
+
+						scope.$parent.ons.screen.dismissPage = function() {
 							if (screenItems.length < 2 || !this.isReady) {
 								// cant dismiss anymore
 								return;
 							}
 							this.isReady = false;
 
-							var currentPage = screenItems.pop();
+							var screenItem = screenItems.pop();
+							var currentPage = screenItem.pageElement;
 							this.animateOutBehindPage();
 							currentPage.attr("class", "screen-page transition unmodal");
 							var that = this;
 							currentPage.bind('webkitTransitionEnd', function transitionEnded() {
 								currentPage.remove();
 								that.isReady = true;
+								scope.$apply(function(){
+									attrs.page = screenItems[screenItems.length - 1].pageUrl;
+									console.log('page is now ', attrs.page);
+								});
+								
+								
 							});
 						}.bind(this);
 					}
 				});
 
 				var screen = new Screen();
+
+
 			}
 		}
 	});

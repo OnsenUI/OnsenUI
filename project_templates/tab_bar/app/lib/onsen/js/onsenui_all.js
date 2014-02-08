@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.0 - 2014-02-07 */
+/*! onsenui - v1.0.0 - 2014-02-08 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -23805,7 +23805,13 @@ limitations under the License.
 			restrict: 'E',
 			replace: true,
 			transclude: false,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl'
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
+			link: function($scope, element, attr){
+				attr.$observe('disabled', function(disabled){
+					var isDisabled = $scope.$eval(disabled);
+					element.attr('disabled', isDisabled);
+				});
+			}
 		};
 	});
 })();
