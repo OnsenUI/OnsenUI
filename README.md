@@ -6,6 +6,15 @@ Onsen UI makes building applications simple basing on the concept of Web Compone
 
 [Monaca IDE] fully supports Onsen UI plugin.
 
+## Browser Support
+
+Onsen UI is tested with the following browsers and mobile OS.
+
+ * Android2.3.4+
+ * iOS6+
+ * Google Chrome
+ * Safari
+
 ## Demo
 
 Click [Here](http://onsenui.github.io/demo/) to see Onsen UI in action!
