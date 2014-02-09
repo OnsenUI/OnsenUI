@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.0 - 2014-02-08 */
+/*! onsenui - v1.0.0 - 2014-02-10 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -23013,7 +23013,8 @@ limitations under the License.
 			transclude: false,
 			scope: {
 				behindPage: '@',
-				abovePage: '@'
+				abovePage: '@',
+				maxWidth: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
@@ -23035,6 +23036,10 @@ limitations under the License.
 						this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
 						this.previousX = 0;
 						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
+						if (scope.maxWidth && this.MAX > parseInt(scope.maxWidth)){
+							this.MAX = parseInt(scope.maxWidth);
+						}
+     						
 						this.currentX = 0;
 						this.startX = 0;
 
