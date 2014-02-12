@@ -34,8 +34,8 @@ limitations under the License.
 			link: function(scope, element, attrs) {
 				var MAIN_PAGE_RATIO = 0.9;
 
-				scope.ons = scope.ons || {};
-				scope.ons.slidingMenu = scope.ons.slidingMenu || {};
+				scope.$parent.ons = scope.$parent.ons || {};
+				scope.$parent.ons.slidingMenu = scope.$parent.ons.slidingMenu || {};
 
 				var Swiper = Class.extend({
 					init: function(element) {
@@ -61,7 +61,7 @@ limitations under the License.
 						this.bindEvents();
 
 						if(scope.abovePage){
-							scope.ons.slidingMenu.setAbovePage(scope.abovePage);
+							scope.$parent.ons.slidingMenu.setAbovePage(scope.abovePage);
 						}
 
 						window.setTimeout(function(){
@@ -77,7 +77,7 @@ limitations under the License.
 					},
 
 					attachMethods: function(){
-						scope.ons.slidingMenu.setAbovePage = function(pageUrl) {
+						scope.$parent.ons.slidingMenu.setAbovePage = function(pageUrl) {
 							if(this.currentPageUrl === pageUrl){
 								// same page -> ignore
 								return;
@@ -94,7 +94,7 @@ limitations under the License.
 									var pageElement = angular.element('<div></div>');
 									pageElement.addClass('page');
 									pageElement[0].style.opacity = 0;
-									var pageContent = $compile(templateHTML)(scope);
+									var pageContent = $compile(templateHTML)(scope.$parent);
 									pageElement.append(pageContent);
 									this.$abovePage.append(pageElement);
 
@@ -197,19 +197,19 @@ limitations under the License.
 				};
 				
 
-				scope.ons.slidingMenu.openMenu = function() {
+				scope.$parent.ons.slidingMenu.openMenu = function() {
 					swiper.open();
 				};
 
-				scope.ons.slidingMenu.closeMenu = function() {
+				scope.$parent.ons.slidingMenu.closeMenu = function() {
 					swiper.close();
 				};
 
-				scope.ons.slidingMenu.toggleMenu = function() {
+				scope.$parent.ons.slidingMenu.toggleMenu = function() {
 					swiper.toggle();
 				};				
 
-				scope.ons.slidingMenu.setBehindPage = function(page) {
+				scope.$parent.ons.slidingMenu.setBehindPage = function(page) {
 					if (page) {
 						scope.pages.behind = page;
 					} else {
@@ -217,12 +217,12 @@ limitations under the License.
 					}
 				};
 
-				scope.ons.screen = scope.ons.screen || {};
-				scope.ons.screen.presentPage = function(page) {
+				scope.$parent.ons.screen = scope.$parent.ons.screen || {};
+				scope.$parent.ons.screen.presentPage = function(page) {
 					callParent(scope, 'ons.screen.presentPage', page);
 				};
 
-				scope.ons.screen.dismissPage = function() {
+				scope.$parent.ons.screen.dismissPage = function() {
 					callParent(scope, 'ons.screen.dismissPage');
 				};
 
