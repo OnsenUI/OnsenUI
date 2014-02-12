@@ -27,7 +27,8 @@ limitations under the License.
 			transclude: false,
 			scope: {
 				behindPage: '@',
-				abovePage: '@'
+				abovePage: '@',
+				maxWidth: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
@@ -49,6 +50,10 @@ limitations under the License.
 						this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
 						this.previousX = 0;
 						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
+						if (scope.maxWidth && this.MAX > parseInt(scope.maxWidth)){
+							this.MAX = parseInt(scope.maxWidth);
+						}
+     						
 						this.currentX = 0;
 						this.startX = 0;
 
