@@ -45,7 +45,6 @@ limitations under the License.
 						}
 
 						attrs.$observe('page', function(page) {
-							console.log('page changed', page);
 							if (page) {
 								this.resetToPage(page);
 							}
