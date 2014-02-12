@@ -87,7 +87,7 @@ limitations under the License.
 									var page = angular.element('<div></div>');
 									page.addClass('page');
 									page[0].style.opacity = 0;
-									var pageContent = $compile(templateHTML)(scope);
+									var pageContent = $compile(templateHTML)(scope.$parent);
 									page.append(pageContent);
 									this.$abovePage.append(page);
 
