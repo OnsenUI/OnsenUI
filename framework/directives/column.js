@@ -31,7 +31,14 @@ limitations under the License.
 				size: '@',
 				offst: '@'
 			},			
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/column.tpl'
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/column.tpl',
+			compile: function(elt, attr, transclude) {				
+				return function(scope, elt, attr) {
+					transclude(scope.$parent, function(clone) {						
+						elt.append(clone);
+					});
+				};
+			}
 		};
 	});
 })();

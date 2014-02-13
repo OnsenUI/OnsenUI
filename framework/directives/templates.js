@@ -26,7 +26,7 @@ angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($te
 
 angular.module("templates/column.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/column.tpl",
-    "<div class=\"col col-{{align}} col-{{size}} col-{{offset}}\" ng-transclude></div>");
+    "<div class=\"col col-{{align}} col-{{size}} col-{{offset}}\"></div>");
 }]);
 
 angular.module("templates/icon.tpl", []).run(["$templateCache", function($templateCache) {
@@ -101,7 +101,7 @@ angular.module("templates/navigator_toolbar.tpl", []).run(["$templateCache", fun
 
 angular.module("templates/page.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/page.tpl",
-    "<div class=\"page\" ng-transclude></div>");
+    "<div class=\"page\"></div>");
 }]);
 
 angular.module("templates/radio_button.tpl", []).run(["$templateCache", function($templateCache) {
@@ -116,7 +116,7 @@ angular.module("templates/radio_button.tpl", []).run(["$templateCache", function
 
 angular.module("templates/row.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/row.tpl",
-    "<div class=\"row row-{{align}}\" ng-transclude></div>");
+    "<div class=\"row row-{{align}}\"></div>");
 }]);
 
 angular.module("templates/screen.tpl", []).run(["$templateCache", function($templateCache) {

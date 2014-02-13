@@ -1,1 +1,1 @@
-<div class="page" ng-transclude></div>
+<div class="page"></div>
