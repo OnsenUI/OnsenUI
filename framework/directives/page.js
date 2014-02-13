@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 
-(function(){
+(function() {
 	'use strict';
 
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
@@ -26,8 +26,14 @@ limitations under the License.
 			restrict: 'E',
 			replace: true,
 			transclude: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/page.tpl'
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/page.tpl',
+			compile: function(elt, attr, transclude) {				
+				return function(scope, elt, attr) {
+					transclude(scope, function(clone) {						
+						elt.append(clone);
+					});
+				};
+			}
 		};
 	});
 })();
-
