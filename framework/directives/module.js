@@ -16,13 +16,35 @@ limitations under the License.
 */
 
 
-(function(){
+(function() {
 	var directiveModules = angular.module('onsen.directives', ['templates-main']); // [] -> create new module
+
+	directiveModules.run(function($rootScope) {
+		$rootScope.ons = $rootScope.ons || {};
+		$rootScope.ons.$get = function(id) {
+			return angular.element(document.getElementById(id)).isolateScope();
+		};
+
+		// Find first ancestor of el with tagName
+		// or undefined if not found
+		$rootScope.ons.upTo = function(el, tagName) {
+			tagName = tagName.toLowerCase();
+
+			do {
+				el = el.parentNode;
+				if (el.tagName.toLowerCase() == tagName) {
+					return el;
+				}
+			} while (el.parentNode)
+
+			return null;
+		};
+
+	});
 
 	directiveModules.factory('ONSEN_CONSTANTS', function() {
 		var CONSTANTS = {
-			// DIRECTIVE_TEMPLATE_URL: "plugins/onsenui/0.6.0/templates" // production
-			DIRECTIVE_TEMPLATE_URL: "templates" // test
+			DIRECTIVE_TEMPLATE_URL: "templates"
 		};
 
 		return CONSTANTS;

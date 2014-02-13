@@ -4,21 +4,9 @@
 	</ons-navigator-toolbar>
 
 	<h1>Page 1</h1>
-	<ons-button ng-click="ons.navigator.pushPage('page2.html');">
-		Push Page 2
+	<ons-button ng-click="ons.splitView.setMainPage('page2.html')">
+		set Main to page1
 	</ons-button>
 
-<div ng-controller="MyController">
-	<ons-text-input
-            disabled="false"
-            placeholder="xxxx-xxxx-xxxx-xxxx">        
-    </ons-text-input>	
-
-    <ons-button ng-click="toggle()">
-    	Toggle
-    </ons-button>
-
-    Loading:{{isLoading}}
-</div>
 	
 </ons-page>

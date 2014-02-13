@@ -20,7 +20,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile) {
+	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuFactory) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -33,9 +33,6 @@ limitations under the License.
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
 				var MAIN_PAGE_RATIO = 0.9;
-
-				scope.$parent.ons = scope.$parent.ons || {};
-				scope.$parent.ons.slidingMenu = scope.$parent.ons.slidingMenu || {};
 
 				var Swiper = Class.extend({
 					init: function(element) {
@@ -50,21 +47,25 @@ limitations under the License.
 						this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
 						this.previousX = 0;
 						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
-						if (scope.maxWidth && this.MAX > parseInt(scope.maxWidth)){
+						if (scope.maxWidth && this.MAX > parseInt(scope.maxWidth, 10)) {
 							this.MAX = parseInt(scope.maxWidth);
 						}
-     						
+
 						this.currentX = 0;
 						this.startX = 0;
 
-						this.attachMethods();						
+						this.attachMethods();
 						this.bindEvents();
 
-						if(scope.abovePage){
-							scope.$parent.ons.slidingMenu.setAbovePage(scope.abovePage);
+						if (scope.abovePage) {
+							scope.setAbovePage(scope.abovePage);
 						}
 
-						window.setTimeout(function(){
+						if (scope.behindPage) {
+							scope.setBehindPage(scope.behindPage);
+						}
+
+						window.setTimeout(function() {
 							this.behindPage.style.opacity = 1;
 							this.blackMask.style.opacity = 1;
 						}.bind(this), 100);
@@ -76,9 +77,30 @@ limitations under the License.
 						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));
 					},
 
-					attachMethods: function(){
-						scope.$parent.ons.slidingMenu.setAbovePage = function(pageUrl) {
-							if(this.currentPageUrl === pageUrl){
+					attachMethods: function() {
+						scope.setBehindPage = function(page) {
+							if (page) {
+								$http({
+									url: page,
+									method: "GET"
+								}).error(function(e) {
+									console.error(e);
+								}).success(function(data, status, headers, config) {
+									var templateHTML = angular.element(data.trim());
+									var page = angular.element('<div></div>');
+									page.addClass('page');
+									var pageContent = $compile(templateHTML)(scope.$parent);
+									page.append(pageContent);
+									this.$behindPage.append(page);
+
+								}.bind(this));
+							} else {
+								throw new Error('cannot set undefined page');
+							}
+						}.bind(this);
+
+						scope.setAbovePage = function(pageUrl) {
+							if (this.currentPageUrl === pageUrl) {
 								// same page -> ignore
 								return;
 							}
@@ -87,7 +109,7 @@ limitations under the License.
 								$http({
 									url: pageUrl,
 									method: "GET"
-								}).error(function(e){
+								}).error(function(e) {
 									console.error(e);
 								}).success(function(data, status, headers, config) {
 									var templateHTML = angular.element(data.trim());
@@ -99,9 +121,9 @@ limitations under the License.
 									this.$abovePage.append(pageElement);
 
 									// prevent black flash
-									setTimeout(function(){
+									setTimeout(function() {
 										pageElement[0].style.opacity = 1;
-										if(this.currentPageElement){
+										if (this.currentPageElement) {
 											this.currentPageElement.remove();
 										}
 										this.currentPageElement = pageElement;
@@ -118,10 +140,10 @@ limitations under the License.
 
 					handleEvent: function(ev) {
 						switch (ev.type) {
-						
+
 							case 'dragleft':
-							case 'dragright':	
-								ev.gesture.preventDefault();							
+							case 'dragright':
+								ev.gesture.preventDefault();
 								var deltaX = ev.gesture.deltaX;
 								this.currentX = this.startX + deltaX;
 								if (this.currentX >= 0) {
@@ -130,12 +152,12 @@ limitations under the License.
 								break;
 
 							case 'swipeleft':
-								ev.gesture.preventDefault();	
+								ev.gesture.preventDefault();
 								this.close();
 								break;
 
 							case 'swiperight':
-								ev.gesture.preventDefault();	
+								ev.gesture.preventDefault();
 								this.open();
 								break;
 
@@ -192,68 +214,21 @@ limitations under the License.
 
 				var swiper = new Swiper(element);
 
-				scope.pages = {
-					behind: scope.behindPage				
-				};
-				
 
-				scope.$parent.ons.slidingMenu.openMenu = function() {
+				scope.openMenu = function() {
 					swiper.open();
 				};
 
-				scope.$parent.ons.slidingMenu.closeMenu = function() {
+				scope.closeMenu = function() {
 					swiper.close();
 				};
 
-				scope.$parent.ons.slidingMenu.toggleMenu = function() {
+				scope.toggleMenu = function() {
 					swiper.toggle();
-				};				
-
-				scope.$parent.ons.slidingMenu.setBehindPage = function(page) {
-					if (page) {
-						scope.pages.behind = page;
-					} else {
-						throw new Error('cannot set undefined page');
-					}
 				};
 
-				scope.$parent.ons.screen = scope.$parent.ons.screen || {};
-				scope.$parent.ons.screen.presentPage = function(page) {
-					callParent(scope, 'ons.screen.presentPage', page);
-				};
 
-				scope.$parent.ons.screen.dismissPage = function() {
-					callParent(scope, 'ons.screen.dismissPage');
-				};
-
-				function callParent(scope, functionName, param) {
-					if (!scope.$parent) {
-						return;
-					}
-
-					var parentFunction = stringToFunction(scope.$parent, functionName);
-					if (parentFunction) {
-						parentFunction.call(scope, param);
-					} else {
-						callParent(scope.$parent, functionName, param);
-					}
-
-				}
-
-				function stringToFunction(root, str) {
-					var arr = str.split(".");
-
-					var fn = root;
-					for (var i = 0, len = arr.length; i < len; i++) {
-						fn = fn[arr[i]];
-					}
-
-					if (typeof fn !== "function") {
-						return false;
-					}
-
-					return fn;
-				}
+				SlidingMenuFactory.addSlidingMenu(scope);
 			}
 		};
 	});

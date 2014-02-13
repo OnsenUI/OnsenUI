@@ -152,8 +152,6 @@ angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function
     "<div class=\"sliding-menu full-screen\">\n" +
     "	<div ng-cloak class=\"onsen_sliding-menu-black-mask\"></div>\n" +
     "	<div class=\"behind full-screen\">\n" +
-    "		<ng-include class=\"full-screen\" class=\"page\" ng-cloak src=\"pages.behind\">\n" +
-    "		</ng-include>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"above full-screen\">		\n" +
@@ -165,13 +163,10 @@ angular.module("templates/split_view.tpl", []).run(["$templateCache", function($
   $templateCache.put("templates/split_view.tpl",
     "<div class=\"sliding-menu full-screen\">\n" +
     "	<div class=\"onsen_sliding-menu-black-mask\"></div>\n" +
-    "	<div class=\"secondary full-screen\">\n" +
-    "		<ng-include ng-cloak src=\"pages.behind\" class=\"page\">\n" +
-    "		</ng-include>\n" +
+    "	<div class=\"secondary full-screen\">		\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"main full-screen\">\n" +
-    "		\n" +
+    "	<div class=\"main full-screen\">		\n" +
     "	</div>\n" +
     "	\n" +
     "</div>");

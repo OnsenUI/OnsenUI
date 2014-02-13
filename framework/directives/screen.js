@@ -21,7 +21,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.directive('onsScreen', function(ONSEN_CONSTANTS, $http, $compile) {
+	directives.directive('onsScreen', function(ONSEN_CONSTANTS, $http, $compile, ScreenFactory) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -31,9 +31,7 @@ limitations under the License.
 			},
 			
 			link: function(scope, element, attrs) {
-				var screenItems = [];
-				scope.$parent.ons = scope.$parent.ons || {};
-				scope.$parent.ons.screen = scope.$parent.ons.screen || {};
+				var screenItems = [];				
 
 				var Screen = Class.extend({
 					init: function() {
@@ -41,7 +39,7 @@ limitations under the License.
 						this.attachMethods();
 
 						if (scope.page) {
-							scope.$parent.ons.screen.presentPage(scope.page);
+							scope.presentPage(scope.page);
 						}
 
 						attrs.$observe('page', function(page) {
@@ -89,100 +87,99 @@ limitations under the License.
 						blackMask.removeClass('hide');
 					},
 
-					resetToPage: function(pageUrl){
-						scope.$parent.ons.screen.presentPage(pageUrl);
+					presentPage: function(page){
+						if (!this.isReady) {
+							console.log('not ready -> ignore');
+							return;
+						} else {
+							this.isReady = false;
+						}
+
+						var that = this;
+
+						$http({
+							url: page,
+							method: "GET"
+						}).error(function(e) {
+							that.onTransitionEnded();
+							console.error(e);
+						}).success(function(data, status, headers, config) {
+							var pageEl = angular.element('<div></div>');
+							pageEl.addClass('screen-page');
+
+							var blackMask = angular.element('<div></div>');
+							blackMask.addClass('onsen_screen-black-mask hide');
+							pageEl.append(blackMask);
+
+							var pageContainer = angular.element('<div></div>');
+							pageContainer.addClass('screen-page__container');
+							pageEl.append(pageContainer);
+
+							var templateHTML = angular.element(data.trim());
+							pageContainer.append(templateHTML);
+							var compiledPage = $compile(pageEl)(scope.$parent);
+							element.append(compiledPage);
+
+							if (!this.isEmpty()) {
+								this.animateInCurrentPage(compiledPage);
+							} else {
+								this.isReady = true;
+							}
+
+							var screenItem = {
+								pageUrl: page,
+								pageElement: compiledPage
+							}								
+
+							screenItems.push(screenItem);
+							setTimeout(function(){
+								this.onPageAdded(compiledPage);
+							}.bind(this), 200);
+						}.bind(this)).error(function(data, status, headers, config) {
+							console.log('error', data, status);
+						});
+					},
+
+					dismissPage: function(){
+						if (screenItems.length < 2 || !this.isReady) {
+							// cant dismiss anymore
+							return;
+						}
+						this.isReady = false;
+
+						var screenItem = screenItems.pop();
+						var currentPage = screenItem.pageElement;
+						this.animateOutBehindPage();
+						currentPage.attr("class", "screen-page transition unmodal");
+						var that = this;
+						currentPage.bind('webkitTransitionEnd', function transitionEnded() {
+							currentPage.remove();
+							that.isReady = true;
+							scope.$apply(function(){
+								attrs.page = screenItems[screenItems.length - 1].pageUrl;
+								console.log('page is now ', attrs.page);
+							});
+						});
+					},
+
+					resetToPage: function(page){
+						scope.presentPage(page);
 						for (var i = 0; i < screenItems.length - 1; i++) {
 							screenItems[i].pageElement.remove();
-						};										
+						}
 					},
 
 					attachMethods: function() {
-						scope.$parent.ons.screen.presentPage = function(page) {
-							if (!this.isReady) {
-								console.log('not ready -> ignore');
-								return;
-							} else {
-								this.isReady = false;
-							}
+						scope.presentPage = this.presentPage.bind(this);
 
-							var that = this;
+						scope.resetToPage = this.resetToPage.bind(this);
 
-							$http({
-								url: page,
-								method: "GET"
-							}).error(function(e) {
-								that.onTransitionEnded();
-								console.error(e);
-							}).success(function(data, status, headers, config) {
-								var pageEl = angular.element('<div></div>');
-								pageEl.addClass('screen-page');
-
-								var blackMask = angular.element('<div></div>');
-								blackMask.addClass('onsen_screen-black-mask hide');
-								pageEl.append(blackMask);
-
-								var pageContainer = angular.element('<div></div>');
-								pageContainer.addClass('screen-page__container');
-								pageEl.append(pageContainer);
-
-								var templateHTML = angular.element(data.trim());
-								pageContainer.append(templateHTML);
-								var compiledPage = $compile(pageEl)(scope.$parent);
-								element.append(compiledPage);
-
-								if (!this.isEmpty()) {
-									this.animateInCurrentPage(compiledPage);
-								} else {
-									this.isReady = true;
-								}
-
-								var screenItem = {
-									pageUrl: page,
-									pageElement: compiledPage
-								}								
-
-								screenItems.push(screenItem);
-								setTimeout(function(){
-									this.onPageAdded(compiledPage);
-								}.bind(this), 200);
-							}.bind(this)).error(function(data, status, headers, config) {
-								console.log('error', data, status);
-							});
-						}.bind(this);
-
-						scope.$parent.ons.screen.resetToPage = function(page){
-							this.resetToPage(page);
-						},
-
-						scope.$parent.ons.screen.dismissPage = function() {
-							if (screenItems.length < 2 || !this.isReady) {
-								// cant dismiss anymore
-								return;
-							}
-							this.isReady = false;
-
-							var screenItem = screenItems.pop();
-							var currentPage = screenItem.pageElement;
-							this.animateOutBehindPage();
-							currentPage.attr("class", "screen-page transition unmodal");
-							var that = this;
-							currentPage.bind('webkitTransitionEnd', function transitionEnded() {
-								currentPage.remove();
-								that.isReady = true;
-								scope.$apply(function(){
-									attrs.page = screenItems[screenItems.length - 1].pageUrl;
-									console.log('page is now ', attrs.page);
-								});
-								
-								
-							});
-						}.bind(this);
+						scope.dismissPage = this.dismissPage.bind(this);
 					}
 				});
 
 				var screen = new Screen();
-
-
+				ScreenFactory.addScreen(scope);
 			}
 		}
 	});
