@@ -37,8 +37,8 @@ limitations under the License.
 				var COLLAPSE_MODE = 1;
 				var MAIN_PAGE_RATIO = 0.9;
 
-				scope.ons = scope.ons || {};
-				scope.ons.splitView = scope.ons.splitView || {};
+				scope.$parent.ons = scope.$parent.ons || {};
+				scope.$parent.ons.splitView = scope.$parent.ons.splitView || {};
 
 				var Swiper = Class.extend({
 					init: function(element) {
@@ -66,7 +66,11 @@ limitations under the License.
 						this.attachMethods();
 
 						if(scope.mainPage){
-							scope.ons.splitView.setMainPage(scope.mainPage);
+							scope.$parent.ons.splitView.setMainPage(scope.mainPage);
+						}
+
+						if(scope.secondaryPage){
+							scope.$parent.ons.splitView.setSecondaryPage(scope.secondaryPage);
 						}
 
 						window.setTimeout(function(){
@@ -75,7 +79,28 @@ limitations under the License.
 					},
 
 					attachMethods: function(){
-						scope.ons.splitView.setMainPage = function(page) {
+						scope.$parent.ons.splitView.setSecondaryPage = function(page) {
+							if (page) {
+								$http({
+									url: page,
+									method: "GET"
+								}).error(function(e){
+									console.error(e);
+								}).success(function(data, status, headers, config) {
+									var templateHTML = angular.element(data.trim());
+									var page = angular.element('<div></div>');
+									page.addClass('page');									
+									var pageContent = $compile(templateHTML)(scope.$parent);
+									page.append(pageContent);
+									this.$behindPage.append(page);									
+
+								}.bind(this));
+							} else {
+								throw new Error('cannot set undefined page');
+							}
+						}.bind(this);
+
+						scope.$parent.ons.splitView.setMainPage = function(page) {
 							if (page) {
 								$http({
 									url: page,
@@ -322,21 +347,21 @@ limitations under the License.
 					behind: scope.secondaryPage					
 				};
 
-				scope.ons.splitView.open = function() {
+				scope.$parent.ons.splitView.open = function() {
 					swiper.open();
 				};
 
-				scope.ons.splitView.close = function() {
+				scope.$parent.ons.splitView.close = function() {
 					swiper.close();
 				};
 
-				scope.ons.splitView.toggle = function() {
+				scope.$parent.ons.splitView.toggle = function() {
 					swiper.toggle();
 				};
 
 
 
-				scope.ons.splitView.setSecondaryPage = function(page) {
+				scope.$parent.ons.splitView.setSecondaryPage = function(page) {
 					if (page) {
 						scope.pages.behind = page;
 					} else {
@@ -344,43 +369,43 @@ limitations under the License.
 					}
 				};
 
-				scope.ons.screen = scope.ons.screen || {};
-				scope.ons.screen.presentPage = function(page) {
-					callParent(scope, 'ons.screen.presentPage', page);
-				};
+				// scope.$parent.ons.screen = scope.$parent.ons.screen || {};
+				// scope.$parent.ons.screen.presentPage = function(page) {
+				// 	callParent(scope, 'ons.screen.presentPage', page);
+				// };
 
-				scope.ons.screen.dismissPage = function() {
-					callParent(scope, 'ons.screen.dismissPage');
-				};
+				// scope.$parent.ons.screen.dismissPage = function() {
+				// 	callParent(scope, 'ons.screen.dismissPage');
+				// };
 
-				function callParent(scope, functionName, param) {
-					if (!scope.$parent) {
-						return;
-					}
+				// function callParent(scope, functionName, param) {
+				// 	if (!scope.$parent) {
+				// 		return;
+				// 	}
 
-					var parentFunction = stringToFunction(scope.$parent, functionName);
-					if (parentFunction) {
-						parentFunction.call(scope, param);
-					} else {
-						callParent(scope.$parent, functionName, param);
-					}
+				// 	var parentFunction = stringToFunction(scope.$parent, functionName);
+				// 	if (parentFunction) {
+				// 		parentFunction.call(scope, param);
+				// 	} else {
+				// 		callParent(scope.$parent, functionName, param);
+				// 	}
 
-				}
+				// }
 
-				function stringToFunction(root, str) {
-					var arr = str.split(".");
+				// function stringToFunction(root, str) {
+				// 	var arr = str.split(".");
 
-					var fn = root;
-					for (var i = 0, len = arr.length; i < len; i++) {
-						fn = fn[arr[i]];
-					}
+				// 	var fn = root;
+				// 	for (var i = 0, len = arr.length; i < len; i++) {
+				// 		fn = fn[arr[i]];
+				// 	}
 
-					if (typeof fn !== "function") {
-						return false;
-					}
+				// 	if (typeof fn !== "function") {
+				// 		return false;
+				// 	}
 
-					return fn;
-				}
+				// 	return fn;
+				// }
 			}
 		};
 	});
