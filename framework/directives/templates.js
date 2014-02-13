@@ -152,8 +152,6 @@ angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function
     "<div class=\"sliding-menu full-screen\">\n" +
     "	<div ng-cloak class=\"onsen_sliding-menu-black-mask\"></div>\n" +
     "	<div class=\"behind full-screen\">\n" +
-    "		<ng-include class=\"full-screen\" class=\"page\" ng-cloak src=\"pages.behind\">\n" +
-    "		</ng-include>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"above full-screen\">		\n" +
