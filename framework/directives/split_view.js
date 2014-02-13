@@ -20,7 +20,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile) {
+	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewFactory) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -35,10 +35,7 @@ limitations under the License.
 			link: function(scope, element, attrs) {
 				var SPLIT_MODE = 0;
 				var COLLAPSE_MODE = 1;
-				var MAIN_PAGE_RATIO = 0.9;
-
-				scope.$parent.ons = scope.$parent.ons || {};
-				scope.$parent.ons.splitView = scope.$parent.ons.splitView || {};
+				var MAIN_PAGE_RATIO = 0.9;			
 
 				var Swiper = Class.extend({
 					init: function(element) {
@@ -66,11 +63,11 @@ limitations under the License.
 						this.attachMethods();
 
 						if(scope.mainPage){
-							scope.$parent.ons.splitView.setMainPage(scope.mainPage);
+							scope.setMainPage(scope.mainPage);
 						}
 
 						if(scope.secondaryPage){
-							scope.$parent.ons.splitView.setSecondaryPage(scope.secondaryPage);
+							scope.setSecondaryPage(scope.secondaryPage);
 						}
 
 						window.setTimeout(function(){
@@ -79,7 +76,7 @@ limitations under the License.
 					},
 
 					attachMethods: function(){
-						scope.$parent.ons.splitView.setSecondaryPage = function(page) {
+						scope.setSecondaryPage = function(page) {
 							if (page) {
 								$http({
 									url: page,
@@ -100,7 +97,7 @@ limitations under the License.
 							}
 						}.bind(this);
 
-						scope.$parent.ons.splitView.setMainPage = function(page) {
+						scope.setMainPage = function(page) {
 							if (page) {
 								$http({
 									url: page,
@@ -347,65 +344,27 @@ limitations under the License.
 					behind: scope.secondaryPage					
 				};
 
-				scope.$parent.ons.splitView.open = function() {
+				scope.open = function() {
 					swiper.open();
 				};
 
-				scope.$parent.ons.splitView.close = function() {
+				scope.close = function() {
 					swiper.close();
 				};
 
-				scope.$parent.ons.splitView.toggle = function() {
+				scope.toggle = function() {
 					swiper.toggle();
 				};
 
-
-
-				scope.$parent.ons.splitView.setSecondaryPage = function(page) {
+				scope.setSecondaryPage = function(page) {
 					if (page) {
 						scope.pages.behind = page;
 					} else {
 						throw new Error('cannot set undefined page');
 					}
-				};
+				};	
 
-				// scope.$parent.ons.screen = scope.$parent.ons.screen || {};
-				// scope.$parent.ons.screen.presentPage = function(page) {
-				// 	callParent(scope, 'ons.screen.presentPage', page);
-				// };
-
-				// scope.$parent.ons.screen.dismissPage = function() {
-				// 	callParent(scope, 'ons.screen.dismissPage');
-				// };
-
-				// function callParent(scope, functionName, param) {
-				// 	if (!scope.$parent) {
-				// 		return;
-				// 	}
-
-				// 	var parentFunction = stringToFunction(scope.$parent, functionName);
-				// 	if (parentFunction) {
-				// 		parentFunction.call(scope, param);
-				// 	} else {
-				// 		callParent(scope.$parent, functionName, param);
-				// 	}
-
-				// }
-
-				// function stringToFunction(root, str) {
-				// 	var arr = str.split(".");
-
-				// 	var fn = root;
-				// 	for (var i = 0, len = arr.length; i < len; i++) {
-				// 		fn = fn[arr[i]];
-				// 	}
-
-				// 	if (typeof fn !== "function") {
-				// 		return false;
-				// 	}
-
-				// 	return fn;
-				// }
+				SplitViewFactory.addSplitView(scope);			
 			}
 		};
 	});
