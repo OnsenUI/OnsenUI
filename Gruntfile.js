@@ -326,6 +326,16 @@ module.exports = function(grunt) {
       }
     },
     watch: {
+      app: {
+        files: [
+          'app/*',
+          'app/**/*'
+        ],
+        tasks: [],
+        options: {
+          livereload: true
+        },
+      },
       demos: {
         files: [
           'demo/*',
@@ -377,6 +387,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-autoprefixer');
 
   grunt.registerTask('serve', ['connect', 'watch']);
+  grunt.registerTask('serve:app', ['connect', 'watch:app']);
 
   // Default task(s).
   grunt.registerTask('default', [
