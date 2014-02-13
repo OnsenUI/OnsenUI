@@ -15,15 +15,15 @@
 
 			_findClosestScreen: function($event) {
 				// finding the right navigator
-				var navigator;
+				var screen;
 				if ($event) {
-					var navigatorElement = $rootScope.ons.upTo($event.target, 'ons-screen');
-					navigator = angular.element(navigatorElement).isolateScope();
+					var screenElement = $rootScope.ons.upTo($event.target, 'ons-screen');
+					screen = angular.element(screenElement).isolateScope();
 				} else {
-					navigator = this.screens[this.screens.length - 1];
+					screen = this.screens[this.screens.length - 1];
 				}
 
-				return navigator;
+				return screen;
 			},
 
 			_checkExistence: function() {
