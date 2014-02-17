@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.0 - 2014-02-13 */
+/*! onsenui - v1.0.0 - 2014-02-17 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -23068,7 +23068,7 @@ limitations under the License.
 			scope: {
 				behindPage: '@',
 				abovePage: '@',
-				maxWidth: '@'
+				maxSlideDistance: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
@@ -23086,10 +23086,10 @@ limitations under the License.
 						this.$abovePage = angular.element(this.abovePage);
 						this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
 						this.previousX = 0;
-						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
-						if (scope.maxWidth && this.MAX > parseInt(scope.maxWidth, 10)) {
-							this.MAX = parseInt(scope.maxWidth);
-						}
+						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;						
+
+						scope.$watch('maxSlideDistance', this.onMaxSlideDistanceChanged.bind(this));
+						window.addEventListener("resize", this.onWindowResize.bind(this));
 
 						this.currentX = 0;
 						this.startX = 0;
@@ -23109,6 +23109,20 @@ limitations under the License.
 							this.behindPage.style.opacity = 1;
 							this.blackMask.style.opacity = 1;
 						}.bind(this), 100);
+					},
+
+					onWindowResize: function(){
+						this.recalculateMAX();
+					},
+
+					onMaxSlideDistanceChanged: function(){						
+						this.recalculateMAX();
+					},
+
+					recalculateMAX: function(){
+						if (scope.maxSlideDistance && this.MAX > parseInt(scope.maxSlideDistance, 10)) {
+							this.MAX = parseInt(scope.maxSlideDistance);
+						}
 					},
 
 					bindEvents: function() {
@@ -23805,14 +23819,17 @@ limitations under the License.
 				};
 
 				$attrs.$observe('hideTabbar', function(hide){
-					$scope.hideTabbar = hide;
+					$scope.hideTabbar = hide;					
+					onTabbarVisibilityChanged();
+				});
 
-					if(hide){
+				function onTabbarVisibilityChanged(){
+					if($scope.hideTabbar){
 						$scope.tabbarHeight = 0;
 					}else{					
 						$scope.tabbarHeight = footer.clientHeight + 'px';
 					}
-				});
+				}
 			
 				var tabItems = [];
 
@@ -23828,6 +23845,7 @@ limitations under the License.
 				$scope.ons.tabbar = {};
 				$scope.ons.tabbar.setTabbarVisibility = function(visible){
 					$scope.hideTabbar = !visible;
+					onTabbarVisibilityChanged();
 				}
 			}
 		};
