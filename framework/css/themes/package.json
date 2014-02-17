@@ -1,0 +1,32 @@
+{
+  "name": "onsen-themes",
+  "version": "0.0.1",
+  "description": "Onsen UI's themes",
+  "main": "Gruntfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-jade": "~0.10.0",
+    "grunt-contrib-watch": "~0.1.4",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-exec": "~0.4.2",
+    "grunt-contrib-cssmin": "~0.5.0",
+    "grunt-contrib-stylus": "~0.6.0",
+    "grunt-contrib-htmlmin": "~0.1.3",
+    "prompt": "*",
+    "csv": "*",
+    "topdoc-theme": "~0.2.7",
+    "grunt-topdoc": "~0.1.3",
+    "grunt-autoprefixer": "~0.2.20130806"
+  },
+  "scripts": {
+    "test": "grunt test",
+    "prepublish": "grunt"
+  },
+  "license": {
+    "type": "Apache",
+    "url": "https://github.com/topcoat/topcoat/blob/master/LICENSE"
+  },
+  "keywords": []
+}

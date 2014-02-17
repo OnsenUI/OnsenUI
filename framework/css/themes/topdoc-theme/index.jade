@@ -1,0 +1,186 @@
+- var tint = 'light';
+- if(document.source.indexOf('android') > 0){
+- 	tint = 'dark';
+- }
+!!! 5
+html
+	head
+		meta(charset = 'utf-8')
+		meta('http-equiv' = 'X-UA-Compatible', content = 'IE=edge,chrome=1')
+		title=project.title
+		meta(name="viewport", content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0")
+		link(rel = 'stylesheet', type = 'text/css', href = 'fonts/stylesheet.css')
+		link(rel = 'stylesheet', type = 'text/css', href = document.relativeSource)
+		link(rel = 'stylesheet', type = 'text/css', href = 'css/main.css')
+		link(rel = 'stylesheet', type = 'text/css', href = 'css/brackets.css')
+		link(href="http://netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.css", rel="stylesheet")
+		//if lt IE 9
+			script(src = '//html5shiv.googlecode.com/svn/trunk/html5.js')
+	body(class=tint)
+		#wrapper
+			.max-width
+				#sideNav
+					nav.site: ul
+						li: a(href=templateData.homeURL) Home
+						-if(templateData.siteNav)
+							- each siteNavItem, i in templateData.siteNav
+								- if(i == 0)
+									li.selected: a(href=siteNavItem.url)=siteNavItem.text
+								- else
+									li: a(href=siteNavItem.url)=siteNavItem.text
+					div.combo
+						select.docNav
+							- each item in nav
+								- if(item.url == document.url)
+									option(value=item.url, selected="selected")=item.title
+								- else
+									option(value=item.url)=item.title
+					#pageNav: ul
+						- each component in document.components
+							li: a(href='#'+component.slug)=component.name
+			#site
+				header#main-header
+					.max-width
+						hgroup
+							h1: a(href=templateData.homeURL)=project.title
+							p=templateData.subtitle
+						nav
+							ul
+								-if(templateData.siteNav)
+									- each siteNavItem, i in templateData.siteNav
+										- if(i == 0)
+											li.selected: a(href=siteNavItem.url)=siteNavItem.text
+										- else
+											li: a(href=siteNavItem.url)=siteNavItem.text
+								- if(templateData.download)
+									li: a#download-btn(href=templateData.download.url, onclick="_gaq.push(['_trackEvent', 'download', 'click',,, false]);")=templateData.download.label
+						a#slide-menu-button.topcoat-icon-button--large--quiet
+							span.topcoat-icon--large.topcoat-icon--menu-stack
+				#content.max-width
+					article.component
+						div.showcase(style="width:320px; float:left; margin-right: 50px; margin-bottom: 50px")
+							div(class="topcoat-navigation-bar")
+								div(class="topcoat-navigation-bar__item left quarter")
+									span(class="topcoat-icon-button--quiet", style="vertical-align: middle")
+										i.fa.fa-lg.fa-bars
+								div(class="topcoat-navigation-bar__item center half")
+									span(class="topcoat-navigation-bar__title") Title
+								div(class="topcoat-navigation-bar__item right quarter")
+									span(class="topcoat-icon-button--quiet", style="vertical-align: middle")
+										i.fa.fa-lg.fa-angle-right
+							div.topcoat-list
+								h3.topcoat-list__header Category
+								ul.topcoat-list__container
+									li.topcoat-list__item Item
+									li.topcoat-list__item Item
+								h3.topcoat-list__header Category
+								ul.topcoat-list__container
+									li.topcoat-list__item Item
+									li.topcoat-list__item Item
+									li.topcoat-list__item Item
+								h3.topcoat-list__header Category
+								ul.topcoat-list__container
+									li.topcoat-list__item Item
+									li.topcoat-list__item Item
+									li.topcoat-list__item Item
+									li.topcoat-list__item Item
+							div.topcoat-tab-bar.full
+								label.topcoat-tab-bar__item
+									input(type="radio", name="tab-bar")
+									button.topcoat-tab-bar__button.full One
+								label.topcoat-tab-bar__item
+									input(type="radio", name="tab-bar")
+									button.topcoat-tab-bar__button.full Two
+								label.topcoat-tab-bar__item
+									input(type="radio", name="tab-bar")
+									button.topcoat-tab-bar__button.full Three
+						div.showcase(style="width:320px; float:left; margin-right: 50px; margin-bottom: 50px")
+							div(class="topcoat-navigation-bar")
+								div(class="topcoat-navigation-bar__item left quarter")
+									span(class="topcoat-icon-button--quiet", style="vertical-align: middle")
+										i.fa.fa-lg.fa-bars
+								div(class="topcoat-navigation-bar__item center half")
+									span(class="topcoat-navigation-bar__title") Title
+								div(class="topcoat-navigation-bar__item right quarter")
+									span(class="topcoat-icon-button--quiet", style="vertical-align: middle")
+										i.fa.fa-lg.fa-angle-right
+							div.topcoat-list
+								h3.topcoat-list__header
+									input.topcoat-search-input.full(placeholder="Search")
+								h3.topcoat-list__header
+									input(type="text", class="topcoat-text-input full", placeholder="text", value="")
+								ul.topcoat-list__container
+									li.topcoat-list__item
+										span Notification
+										span.topcoat-notification(style="float: right") 1
+									li.topcoat-list__item
+										span Radio Button
+										span(style="float: right")
+											label.topcoat-radio-button
+												input(type="radio", name="topcoat")
+												div.topcoat-radio-button__checkmark
+											label.topcoat-radio-button OR
+												input(type="radio", name="topcoat")
+												div.topcoat-radio-button__checkmark
+									li.topcoat-list__item	
+										span Checkbox
+										span(style="float: right")
+											label.topcoat-checkbox
+												input(type="checkbox")
+												div.topcoat-checkbox__checkmark											  											
+									li.topcoat-list__item	
+										span Switch
+										span(style="float: right")
+											label.topcoat-switch
+												input(type="checkbox", class="topcoat-switch__input")
+												div.topcoat-switch__toggle										
+									li.topcoat-list__item	
+										span Range
+										span(style="float: right")
+											input(type="range", class="topcoat-range")
+								h3.topcoat-list__header Button									
+								ul.topcoat-list__container
+									li.topcoat-list__item
+										button.topcoat-button Button
+										button.topcoat-button--cta Button cta
+								h3.topcoat-list__header Quiet Button
+								ul.topcoat-list__container
+									li.topcoat-list__item
+										button.topcoat-button--quiet Button									
+							div.topcoat-tab-bar.full
+								label.topcoat-tab-bar__item
+									input(type="radio", name="tab-bar")
+									button.topcoat-tab-bar__button.full One
+								label.topcoat-tab-bar__item
+									input(type="radio", name="tab-bar")
+									button.topcoat-tab-bar__button.full Two
+								label.topcoat-tab-bar__item
+									input(type="radio", name="tab-bar")
+									button.topcoat-tab-bar__button.full Three
+						div(style="clear: both")
+					- each component in document.components
+						article.component(id=component.slug)
+							header
+								h2=component.name
+							section.component!=component.markup
+							- if(component.examples)
+								section.examples
+									h4 Examples
+									ul
+										- each example_url, example_text in component.examples
+											li: a(href = example_url)!= example_text
+							footer
+								div.showcode
+									a(href="#") Show code snippets
+								section.code
+									div
+										h3 HTML
+										pre.html
+											code(data-language="html")=component.markup
+									div
+										h3 CSS
+										pre.css
+											code(data-language="css")=component.css
+				footer
+		script(src="js/rainbow-custom.min.js")
+		script(src='js/main.js')

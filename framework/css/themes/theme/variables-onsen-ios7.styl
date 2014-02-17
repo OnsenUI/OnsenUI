@@ -1,0 +1,292 @@
+/* This file should include color and image variables corresponding to the onsen theme */
+
+/* --------- colors --------- */
+var-buttons = #157DFB
+var-text-black = #1F1F21
+var-borders = #C8C7CC
+var-text-grey = #6F6F74
+var-titlebar-background = #F8F8F8
+var-view-background = #fff
+
+var-list-background-color = var-view-background
+var-list-header-background-color = #f0eff4
+var-switch-color = #4CD964
+
+var-list-text-color = var-text-black
+
+
+var-tab-bar-background-color = var-titlebar-background
+var-tab-bar-border-color = var-borders
+
+var-key-color = #25b5c2
+var-secondary-color = var-list-background-color
+var-auxilary-color = #b3b3b3
+var-notification-color = #fff
+var-cta-background-color = #4a9cd2
+var-list-item-active-color = #b6dedd
+var-text-input-color = #b3b3b3
+var-search-input-background-color--focus = #e7e3e0
+
+/* ---------- darken ---------- */
+var-dark    = 5
+var-darker  = 5.5
+var-darkest = 25.9
+
+/* ---------- lighten ---------- */
+var-light    = 6
+var-lighter  = 20//15
+var-lightest = 32//24
+
+/* ---------- alphas ---------- */
+var-alpha--high = 0.5
+var-alpha--med  = 0.23
+var-alpha--low  = 0.1
+
+
+var-thumb-size = 1.8rem
+// var-background-color = var-secondary-color
+var-background--body = var-secondary-color
+var-background-color--down = var-buttons
+// var-background-color--hover = transparent
+var-border = 1px solid var-buttons
+var-box-shadow = none
+var-box-shadow--down = none
+// var-color = var-key-color
+var-text-shadow = 0 1px none
+var-color-invalid = #f00
+var-border--invalid = 1px solid #f00
+// var-background-color--input = #d3d7d7
+var-round-border = 50%
+var-width--range__thumb = 1.25rem
+var-border-radius = 4px
+var-border-radius--large = 0
+
+/* Page */
+var-background-color--page = var-view-background
+
+/* Call To Action */
+var-color--cta = var-buttons
+var-color--cta--down = lighten(var-buttons, var-lighter)
+var-background-color--cta = transparent
+var-background-color--cta--down = transparent //lighten(var-cta-background-color, var-lighter) //#77bfee
+var-background-color--cta--hover = transparent //lighten(var-cta-background-color, var-light) //#54ACE5
+var-border--cta = none
+var-box-shadow--cta = none
+var-box-shadow--cta--down = none
+
+/*Icon-Button*/
+var-color--icon-button--quiet = var-buttons
+var-color--icon-button--quiet--active = lighten(var-buttons, var-lighter)
+var-background-color__icon-button--quiet = transparent
+var-background-color--icon-button-quiet--down = transparent
+var-background-color__icon-button = var-view-background
+var-border--icon-button = none
+var-border--icon-button--quiet = none
+var-border--icon-button--quite--hover = none
+var-border--icon-button--quite--active = none
+
+/* Icons */
+var-menu-stack-icon = url("../img/hamburger_dark.svg")
+
+/* Navigation Bar */
+var-height--navigation-bar = 44px
+var-color--navigation-bar = var-text-black
+var-navigation-bar-background-color = var-titlebar-background
+var-border-bottom--navigation-bar = 1px solid var-borders
+var-box-shadow--navigation-bar = none
+
+/* Text Input !*/
+var-color--text-input = lighten(var-text-grey, var-lighter)
+var-color--text-input--focus = var-text-grey
+var-color--placeholder = lighten(var-text-grey, var-lighter)
+var-color--focus = var-text-black
+var-border--text-input = 1px solid var-borders
+var-border--text-input--focus = 1px solid var-borders
+var-background-color--text-input = var-view-background
+var-background-color--text-input--focus = var-view-background
+
+/* Text Area !*/
+var-color--textarea = lighten(var-text-grey, var-lighter)
+var-color--textarea--focus = var-text-grey
+var-border--textarea = 1px solid var-borders
+var-border--focus--textarea = 1px solid var-borders
+
+/* List !*/
+var-margin--list-item = 0 0 0 0
+var-padding--list-item = 0.7rem 0.7rem 0.7rem 0.7rem
+var-padding-left--list-item--first = 0.7rem
+var-padding-left--list-item--last = 0.7rem
+var-margin--list-item--first = 0
+var-margin--list-item--last = 0
+var-border-top--list-container = none
+var-border-top--list = none
+var-border-bottom--list = none
+var-border-top--list-item--2 = 1px solid var-borders
+var-border-bottom--list-item--first = none
+var-border-top--list-item--last = none
+var-border-top--list-item--first = 1px solid var-borders
+var-border-top--list-item = none
+var-border-bottom--list-item = 1px solid var-borders
+var-border-bottom--list-item--last = 1px solid var-borders
+var-border-top--list-header = none
+var-border-bottom--list-header = none
+var-text-shadow--list-header = none
+var-color--list-item = var-list-text-color
+var-color--list-header = var-list-text-color
+var-background-color--list-header = var-list-header-background-color
+var-background-color--list-item = var-view-background
+var-background-color--list-item--active = #BDBEC2
+var-background-color--list = var-list-header-background-color
+var-background-color--list-container = var-view-background
+
+/* Overlay !!!*/
+var-modal-bg-color = #e5e9e8
+var-overlay__header-border = 1px solid #d3d7d7
+
+/* Progress bar !!!*/
+var-bar-bg-color = var-view-background
+var-progress-bg-color = var-buttons //#e0f0fa
+
+/* Checkbox */
+var-width--checkmark__tail = 12px
+var-border-width--checkmark = 4px
+var-top--checkmark = 5px
+var-left--checkmark = 3px
+var-size--checkbox = 1.5rem
+var-size--checkmark = 1.0rem
+var-border--checkbox = 1px solid var-buttons
+var-border--checkbox--active = 1px solid var-buttons
+var-border--checkbox--focus = 1px solid var-buttons
+var-border--checkmark = 3px solid var-view-background
+var-border-radius--checkbox = 1.0rem
+var-background-color--checkmark = var-view-background
+var-background-color--down--checkbox =  var-view-background
+var-background-color-checked--checkbox = var-buttons
+var-background-color--before--checkbox = var-buttons
+
+/* Range input */
+var-border--range = none
+var-background-color--range = var-buttons
+var-background-color--range__thumb = var-view-background
+var-range-border = 1px solid var-borders
+var-border--range__thumb--focus = 1px solid var-borders
+var-height--range__track = 0.15rem
+var-range-background = var-background-color--down
+var-range__slider-border = 1px solid rgba(0, 0, 0, .36)
+var-range__slider-background = url("../img/light-grips.png") center center no-repeat #e5e9e8
+var-range__slider-bg-size    = 7px 18px
+var-range__slider-box-shadow = inset 0 1px 0 rgba(255, 255, 255, .12);
+var-width--range__thumb  = var-thumb-size
+
+/* Radio Button */
+var-position--radio-button--checked = 0.25rem  //6px
+var-size--radio-button = 1.5rem //1.875rem
+var-size--radio-button--checked = 0.9rem //0.875rem
+var-color--radio-button = var-buttons
+var-border--radio-button = 1px solid var-buttons
+var-border--radio-button--before = 1px solid var-buttons
+var-border--radio-button--active = 1px solid var-buttons
+var-border--radio-button--focus = 1px solid var-buttons
+var-background--radio-button--before = var-view-background
+var-background--radio-button = var-buttons
+var-background-color--down--radio-button = transparent
+var-box-shadow--radio-button = 0 1px rgba(255,255,255,0.50)
+
+/* Tab bar */
+var-height--tab-bar = 49px
+var-line-height--tab-bar__button = 49px
+var-border-top--tab-bar = 1px solid var-tab-bar-border-color
+var-background-color--tab-bar = var-tab-bar-background-color
+var-border--tab-bar__button = none
+var-color--tab-bar__button = var-text-grey
+var-color--tab-bar--active = var-buttons
+var-background-color--tab-bar__button = transparent
+var-background-color--tab-bar--active = transparent
+var-box-shadow--tab-bar--active = none
+var-box-shadow--tab-bar__button--focus = none
+
+/* Switch */
+var-border--switch__label = 0px solid var-borders
+var-height--switch = 2rem
+var-width--switch = 3.2rem
+var-width--switch__label = 3.5rem
+var-width--switch__toggle = 3rem
+var-top--switch__label--left = 0
+var-top--switch__label--right = 0
+var-color--switch__label--left = #4CD964
+var-height--switch__label--left = 2rem
+var-height--switch__label--right = 2rem
+var-height--switch__toggle = 1.9rem //var-thumb-size
+var-width--switch__toggle = 1.9rem //var-thumb-size
+var-line-height--switch__toggle = var-thumb-size //2rem
+var-background-color--switch__label--left = var-switch-color
+var-background-color--switch__label--right = var-borders
+var-background-color--switch__toggle = var-view-background
+var-border--switch__toggle = 1px solid var-borders
+var-border--switch__toggle--focus = 1px solid var-borders
+var-switch--border-radius = 30px
+var-border-radius--switch__toggle = 50%
+var-margin-left--switch__toggle = -1.20rem
+var-margin-bottom--switch__toggle = 0
+var-margin-top--switch__toggle = 0.06rem
+var-margin-left--switch__toggle--checked = -0.05rem
+var-margin--switch__label = -0.12rem 0 0 0
+var-background-color--switch__label--checked = #4CD964
+var-background-color--switch__label = var-borders
+var-transition--switch__label = background-color 0.5s cubic-bezier(0.5,1.3,0.5,1)
+var-transition--switch__label--checked = background-color 0.5s cubic-bezier(0.5,1.6,0.5,1)
+var-transition--switch__toggle = margin-left 0.35s cubic-bezier(0.5,1.6,0.5,1)
+var-box-shadow--switch__label--after--checked = inset 0 0 0 0px rgba(0,0,0,0.4);
+var-box-shadow--switch__label--after = inset 0 0 0 0px rgba(0,0,0,0.4);
+
+/* Bar button */
+var-border-top--button-bar__button = 1px solid var-buttons
+var-border-bottom--button-bar__button = 1px solid var-buttons
+var-border--button-bar = 0px solid var-buttons
+var-border--button-bar__button = 0px solid var-buttons
+var-border--button-bar__button--active = 0px solid var-buttons
+var-border-right--button-bar__button = 1px solid var-buttons
+var-border-right--button-bar__button--active = 1px solid var-buttons
+var-border-right--button-bar__button--focus = 1px solid var-buttons
+var-border-left--button-bar__button__first = 1px solid var-buttons
+var-border-right--button-bar__button__first = 1px solid var-buttons
+var-border-right--button-bar__button__last = 1px solid var-buttons
+var-background-color--button-bar = darken(var-view-background, var-dark)
+var-background-color--button-bar--button--active = lighten(var-buttons, var-lightest) !important
+var-background-color--button-bar--button--hover = var-buttons //lighten(var-buttons, var-light)
+var-color--button-bar--button = var-buttons
+var-color--button-bar__button--active = lighten(var-view-background, var-lighter)
+var-color--button-bar__button--hover = var-view-background
+//var-border-right--button-bar__button--z-index = inherit
+
+/* Button */
+var-background-color__button = transparent
+var-background-color--hover__button = transparent
+var-background-color--down__button = transparent
+var-color__button = var-buttons
+var-color--button--hover = var-buttons//lighten(var-buttons, var-lighter)
+var-color--button--active = lighten(var-buttons, var-lighter)
+var-border--button = none
+
+/* Button Quiet*/
+var-quiet-button-color = var-buttons
+var-background-color--quiet-active = transparent
+var-background-color--quiet-hover = transparent
+var-color--active__button--quiet = lighten(var-buttons, var-lighter)
+var-border--hover__button--quiet = none
+var-border--active__button--quiet = none
+var-border__button--quiet = none
+/* Notification */
+var-notification-border-radius = 50%
+
+/* Search-Input */
+var-color--search-input = lighten(var-text-grey, var-lighter)
+var-color--search-input--focus = var-text-grey
+var-margin-right--search-decoration = 8px
+var-background-color--search-input = var-view-background //lighten(var-secondary-color, 3)
+var-background-color--search-input--focus = var-view-background //var-search-input-background-color--focus
+var-search-input--border-radius = 4px
+var-background-position--search-input = 0.5rem center
+var-border--search-input = 1px solid var-borders
+var-border--search-input--focus = 1px solid var-borders
+var-padding--search-input = 0 0 0 1.8rem
