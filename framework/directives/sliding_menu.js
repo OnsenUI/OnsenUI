@@ -28,7 +28,9 @@ limitations under the License.
 			scope: {
 				behindPage: '@',
 				abovePage: '@',
-				maxSlideDistance: '@'
+				maxSlideDistance: '@',
+				swipable: '@',
+				swipeTargetWidth: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
@@ -49,10 +51,14 @@ limitations under the License.
 						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;						
 
 						scope.$watch('maxSlideDistance', this.onMaxSlideDistanceChanged.bind(this));
+						scope.$watch('swipable', this.onSwipableChanged.bind(this));
+						scope.$watch('swipeTargetWidth', this.onSwipeTargetWidthChanged.bind(this));
 						window.addEventListener("resize", this.onWindowResize.bind(this));
 
 						this.currentX = 0;
 						this.startX = 0;
+
+						this.boundHandleEvent = this.handleEvent.bind(this);
 
 						this.attachMethods();
 						this.bindEvents();
@@ -71,6 +77,29 @@ limitations under the License.
 						}.bind(this), 100);
 					},
 
+					onSwipableChanged: function(swipable){
+						if(swipable == "" || swipable == undefined){
+							swipable = true;
+						}else{
+							swipable = (swipable == "true");
+						}
+
+						if(swipable){
+							this.activateHammer();
+						}else{
+							this.deactivateHammer();
+						}
+					},
+
+					onSwipeTargetWidthChanged: function(targetWidth){
+						var width = parseInt(targetWidth);
+						if(width < 0){
+							this.swipeTargetWidth = this.abovePage.clientWidth;
+						}else{
+							this.swipeTargetWidth = width;
+						}
+					},
+
 					onWindowResize: function(){
 						this.recalculateMAX();
 					},
@@ -85,9 +114,16 @@ limitations under the License.
 						}
 					},
 
+					activateHammer: function(){
+						this.hammertime.on("touch dragleft dragright swipeleft swiperight release", this.boundHandleEvent);
+					},
+
+					deactivateHammer: function(){
+						this.hammertime.off("touch dragleft dragright swipeleft swiperight release", this.boundHandleEvent);
+					},
+
 					bindEvents: function() {
-						this.hammertime = new Hammer(this.el);
-						this.hammertime.on("dragleft dragright swipeleft swiperight release", this.handleEvent.bind(this));
+						this.hammertime = new Hammer(this.el);						
 						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));
 					},
 
@@ -152,8 +188,14 @@ limitations under the License.
 					},
 
 
-					handleEvent: function(ev) {
+					handleEvent: function(ev) {						
 						switch (ev.type) {
+
+							case 'touch':
+								if(ev.gesture.center.pageX > this.swipeTargetWidth){
+									ev.gesture.stopDetect();
+								}
+								break;
 
 							case 'dragleft':
 							case 'dragright':
