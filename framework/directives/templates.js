@@ -177,7 +177,7 @@ angular.module("templates/tab_bar.tpl", []).run(["$templateCache", function($tem
     "  <ng-include src=\"selectedTabItem.source\" style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content\">\n" +
     "    \n" +
     "  </ng-include>\n" +
-    "  <div ng-hide=\"hideTabbar\" class=\"topcoat-tab-bar full footer\" ng-transclude>         \n" +
+    "  <div ng-hide=\"hideTabs\" class=\"topcoat-tab-bar full footer\" ng-transclude>         \n" +
     "  </div>\n" +
     "\n" +
     "");

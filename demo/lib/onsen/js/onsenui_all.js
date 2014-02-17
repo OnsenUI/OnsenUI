@@ -21335,7 +21335,7 @@ angular.module("templates/tab_bar.tpl", []).run(["$templateCache", function($tem
     "  <ng-include src=\"selectedTabItem.source\" style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content\">\n" +
     "    \n" +
     "  </ng-include>\n" +
-    "  <div ng-hide=\"hideTabbar\" class=\"topcoat-tab-bar full footer\" ng-transclude>         \n" +
+    "  <div ng-hide=\"hideTabs\" class=\"topcoat-tab-bar full footer\" ng-transclude>         \n" +
     "  </div>\n" +
     "\n" +
     "");
@@ -23818,13 +23818,13 @@ limitations under the License.
 					source: ''
 				};
 
-				$attrs.$observe('hideTabbar', function(hide){
-					$scope.hideTabbar = hide;					
+				$attrs.$observe('hideTabs', function(hide){
+					$scope.hideTabs = hide;					
 					onTabbarVisibilityChanged();
 				});
 
 				function onTabbarVisibilityChanged(){
-					if($scope.hideTabbar){
+					if($scope.hideTabs){
 						$scope.tabbarHeight = 0;
 					}else{					
 						$scope.tabbarHeight = footer.clientHeight + 'px';
@@ -23844,7 +23844,7 @@ limitations under the License.
 				$scope.ons = $scope.ons || {};
 				$scope.ons.tabbar = {};
 				$scope.ons.tabbar.setTabbarVisibility = function(visible){
-					$scope.hideTabbar = !visible;
+					$scope.hideTabs = !visible;
 					onTabbarVisibilityChanged();
 				}
 			}
