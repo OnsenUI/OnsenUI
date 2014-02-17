@@ -34,14 +34,17 @@ limitations under the License.
 				};
 
 				$attrs.$observe('hideTabbar', function(hide){
-					$scope.hideTabbar = hide;
+					$scope.hideTabbar = hide;					
+					onTabbarVisibilityChanged();
+				});
 
-					if(hide){
+				function onTabbarVisibilityChanged(){
+					if($scope.hideTabbar){
 						$scope.tabbarHeight = 0;
 					}else{					
 						$scope.tabbarHeight = footer.clientHeight + 'px';
 					}
-				});
+				}
 			
 				var tabItems = [];
 
@@ -57,6 +60,7 @@ limitations under the License.
 				$scope.ons.tabbar = {};
 				$scope.ons.tabbar.setTabbarVisibility = function(visible){
 					$scope.hideTabbar = !visible;
+					onTabbarVisibilityChanged();
 				}
 			}
 		};
