@@ -98,10 +98,10 @@ module.exports = function(grunt) {
               '*.*'
             ]
           },
-          // topcoat css
+          // themes css
           {
             expand: true,
-            cwd: 'framework/css/topcoat/css',
+            cwd: 'framework/css/themes/css',
             dest: 'build/css/',
             src: [
               '*.css'
@@ -117,7 +117,7 @@ module.exports = function(grunt) {
           // fonts
           {
             expand: true,
-            cwd: 'framework/css/topcoat/font/',
+            cwd: 'framework/css/themes/font/',
             dest: 'build/font/',
             src: [
               '*.otf'
@@ -322,7 +322,7 @@ module.exports = function(grunt) {
           'framework/lib/*.js',
           'framework/css/*.css',
           'framework/css/polyfill/*.css',
-          'framework/css/topcoat/css/*.css',
+          'framework/css/themes/css/*.css',
           'framework/templates/*.tpl',
         ],
         tasks: ['default'],
