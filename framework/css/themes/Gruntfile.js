@@ -29,11 +29,9 @@ module.exports = function(grunt) {
         stylus: {
             options: {
                 paths: 
-                    grunt.file.expand(__dirname + '/components/*/').filter(function(path) {
-                        return path.indexOf(__dirname + '/components/utils/') === -1;
-                    })
-                    .concat(grunt.file.expand(__dirname + '/components/utils/mixins/'))
-                    .concat(grunt.file.expand(__dirname + '/theme')),
+                    grunt.file.expand(__dirname + '/components/*/')
+                    .concat(grunt.file.expand(__dirname + '/theme/'))
+                    .concat(grunt.file.expand(__dirname + '/components/utils/mixins/')),
                 compress: false
             },
 
@@ -43,7 +41,7 @@ module.exports = function(grunt) {
                 },
 
                 files: [{
-                    src: 'components/**/*.styl',
+                    src: ['components/**/*.styl'],
                     dest: 'css/topcoat-mobile-onsen-ios7.css'
                 }]
             },
@@ -142,5 +140,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-autoprefixer');
 
     grunt.registerTask('default', ['build']);
-    grunt.registerTask('build', ['clean', 'stylus', 'topdoc', 'autoprefixer', 'cssmin']);
+    grunt.registerTask('build', ['clean', 'stylus', 'autoprefixer', 'cssmin', 'topdoc']);
 };

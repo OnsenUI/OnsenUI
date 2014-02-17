@@ -9,11 +9,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 body.light {
-  background: #f4f4f4;
+  background: #fff;
 }
 body.dark {
   color: #F0F1F1;
-  background: #4A4D4E;
+  background: #333;
 }
 body.light {
   color: #181919;
@@ -203,10 +203,10 @@ article.component {
   padding-right: 10px;
 }
 body.light #content header h2 {
-  background: #F4F4F4;
+  background: #fff;
 }
 body.dark #content header h2 {
-  background: #4A4D4E;
+  background: #333;
 }
 #content header{
   position: relative;
