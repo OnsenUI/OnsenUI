@@ -22000,7 +22000,7 @@ limitations under the License.
 					animateBackLabelIn: function(inNavigatorItem, outNavigatorItem) {
 						var title = outNavigatorItem.options.title;
 						var inBackLabel = angular.element('<div></div>');
-						inBackLabel.addClass('onsen_navigator-back-label onsen_navigator-item topcoat-navigation-bar__line-height right');
+						inBackLabel.addClass('onsen_navigator-back-label onsen_navigator-item topcoat-navigation-bar__line-height navigate_right');
 						inBackLabel.bind('click', this.onLeftButtonClicked.bind(this));
 						this.attachFastClickEvent(inBackLabel[0]);
 						inNavigatorItem.backLabel = inBackLabel;
@@ -22012,8 +22012,8 @@ limitations under the License.
 						inBackLabel.text(title);
 
 						toolbarContent[0].offsetWidth;
-						inBackLabel.removeClass('right');
-						inBackLabel.addClass('transition center topcoat-icon-button--quiet');
+						inBackLabel.removeClass('navigate_right');
+						inBackLabel.addClass('transition navigate_center topcoat-icon-button--quiet');
 
 						var outLabel = outNavigatorItem.backLabel;
 						if (outLabel) {
@@ -22021,8 +22021,8 @@ limitations under the License.
 								outLabel.remove();
 								outLabel.unbind(transitionEnded);
 							});
-							outLabel.removeClass('center');
-							outLabel.addClass('left');
+							outLabel.removeClass('navigate_center');
+							outLabel.addClass('navigate_left');
 						}
 					},
 
@@ -22041,15 +22041,15 @@ limitations under the License.
 							});
 
 							toolbarContent[0].offsetWidth;
-							outLabel.removeClass('transition center');
-							outLabel.addClass('transition right');
+							outLabel.removeClass('transition navigate_center');
+							outLabel.addClass('transition navigate_right');
 						}
 
 
 						if (inLabel) {
 							toolbarContent[0].offsetWidth;
-							inLabel.removeClass('left');
-							inLabel.addClass('transition center');
+							inLabel.removeClass('navigate_left');
+							inLabel.addClass('transition navigate_center');
 							inLabel.bind('click', this.onLeftButtonClicked.bind(this));
 							this.attachFastClickEvent(inLabel[0]);
 						}
@@ -22211,7 +22211,7 @@ limitations under the License.
 					},
 
 					animatePageIn: function(inPage, outPage) {
-						inPage.attr("class", "onsen_navigator-pager right");
+						inPage.attr("class", "onsen_navigator-pager navigate_right");
 
 						var that = this;
 						inPage.bind('webkitTransitionEnd', function transitionEnded(e) {
@@ -22219,14 +22219,14 @@ limitations under the License.
 						});
 
 						element[0].offsetWidth;
-						inPage.attr("class", "onsen_navigator-pager transition center");
-						outPage.attr("class", "onsen_navigator-pager transition left");
+						inPage.attr("class", "onsen_navigator-pager transition navigator_center");
+						outPage.attr("class", "onsen_navigator-pager transition navigate_left");
 					},
 
 					animatePageOut: function(currentPage, previousPage) {
-						previousPage.attr("class", "onsen_navigator-pager left");
+						previousPage.attr("class", "onsen_navigator-pager navigate_left");
 						element[0].offsetWidth;
-						previousPage.attr("class", "onsen_navigator-pager transition center");
+						previousPage.attr("class", "onsen_navigator-pager transition navigator_center");
 
 						var that = this;
 						currentPage.bind('webkitTransitionEnd', function transitionEnded(e) {
@@ -22235,7 +22235,7 @@ limitations under the License.
 							that.onTransitionEnded();
 						});
 
-						currentPage.attr("class", "onsen_navigator-pager transition right");
+						currentPage.attr("class", "onsen_navigator-pager transition navigate_right");
 					},
 
 					isEmpty: function() {
@@ -22664,7 +22664,7 @@ limitations under the License.
 						});
 						element[0].offsetWidth;
 						setTimeout(function() {
-							pager.attr("class", "screen-page transition center");
+							pager.attr("class", "screen-page transition screen_center");
 							this.animateInBehindPage();
 						}.bind(this), 0);
 

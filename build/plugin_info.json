@@ -1,6 +1,6 @@
 {
-  "OnsenUI_dev" : {
-    "displayName" : "Onsen UI DEV",
+  "OnsenUI_1.0" : {
+    "displayName" : "Onsen UI 1.0",
     "description" : {
       "ja" : "Onsen UIはシンプルで快適な操作性を提供するHTML5 UIフレームワークです。",
       "en" : "HTML5 UI framework designed to be Simple, Fast and Powerful"
