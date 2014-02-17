@@ -58,7 +58,7 @@ ons-screen {
   opacity: 0;  
 }
 
-.screen-page.center {
+.screen-page.screen_center {
     transform: translate3d(0, 0, 0);   
     box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.1);
 }

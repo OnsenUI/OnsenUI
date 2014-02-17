@@ -67,7 +67,7 @@ limitations under the License.
 						});
 						element[0].offsetWidth;
 						setTimeout(function() {
-							pager.attr("class", "screen-page transition center");
+							pager.attr("class", "screen-page transition screen_center");
 							this.animateInBehindPage();
 						}.bind(this), 0);
 
