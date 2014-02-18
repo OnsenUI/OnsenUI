@@ -192,9 +192,12 @@ limitations under the License.
 						switch (ev.type) {
 
 							case 'touch':
-								if(ev.gesture.center.pageX > this.swipeTargetWidth){
-									ev.gesture.stopDetect();
+								if(this.isClosed()){
+									if(!this.isInsideSwipeTargetArea(ev.gesture.center.pageX)){
+										ev.gesture.stopDetect();
+									}	
 								}
+								
 								break;
 
 							case 'dragleft':
@@ -227,9 +230,17 @@ limitations under the License.
 						}
 					},
 
+					isInsideSwipeTargetArea: function(x){
+						return x < this.swipeTargetWidth;
+					},
+
 					onTransitionEnd: function() {
 						this.$abovePage.removeClass('transition');
 						this.$behindPage.removeClass('transition');
+					},
+
+					isClosed: function(){
+						return this.startX == 0;
 					},
 
 					close: function() {
