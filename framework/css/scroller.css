@@ -23,7 +23,6 @@ limitations under the License.
 
 .scroller {    
     min-height: 105%;
-    padding-bottom: 50px;
 }
 
 ::-webkit-scrollbar {
