@@ -505,4 +505,7 @@ select.docNav {
 }
 
 
+.page {
+	position: static !important;
+}
 
