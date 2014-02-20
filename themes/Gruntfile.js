@@ -24,7 +24,7 @@ module.exports = function(grunt) {
     'use strict';
 
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+        pkg: grunt.file.readJSON('../package.json'),
 
         stylus: {
             options: {
@@ -139,7 +139,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-autoprefixer');
-    grunt.file.setBase('./themes');
+    grunt.file.setBase(__dirname);
 
     grunt.registerTask('default', ['build']);
     grunt.registerTask('build', ['clean', 'stylus', 'autoprefixer', 'cssmin', 'topdoc']);
