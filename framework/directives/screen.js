@@ -84,12 +84,11 @@ limitations under the License.
 
 					onPageAdded: function(page){
 						var blackMask = angular.element(page[0].querySelector('.onsen_screen-black-mask'));
-						blackMask.removeClass('hide');
+						// blackMask.removeClass('hide');
 					},
 
 					presentPage: function(page){
 						if (!this.isReady) {
-							console.log('not ready -> ignore');
 							return;
 						} else {
 							this.isReady = false;
@@ -134,7 +133,7 @@ limitations under the License.
 							screenItems.push(screenItem);
 							setTimeout(function(){
 								this.onPageAdded(compiledPage);
-							}.bind(this), 200);
+							}.bind(this), 400);
 						}.bind(this)).error(function(data, status, headers, config) {
 							console.log('error', data, status);
 						});
@@ -156,8 +155,7 @@ limitations under the License.
 							currentPage.remove();
 							that.isReady = true;
 							scope.$apply(function(){
-								attrs.page = screenItems[screenItems.length - 1].pageUrl;
-								console.log('page is now ', attrs.page);
+								attrs.page = screenItems[screenItems.length - 1].pageUrl;								
 							});
 						});
 					},
