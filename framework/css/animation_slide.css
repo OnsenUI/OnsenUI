@@ -107,8 +107,6 @@ limitations under the License.
   animation-timing-function: cubic-bezier(.99,.01,.99,.01);
 }
 
-
-
 .onsen_navigator__left-button-container.hide {
   opacity: 0;
 }
