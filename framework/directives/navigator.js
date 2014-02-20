@@ -340,34 +340,29 @@ limitations under the License.
 					},
 
 					animatePageIn: function(inPage, outPage) {
-						setTimeout(function(){							
-							var that = this;
-							inPage.bind('webkitTransitionEnd', function transitionEnded(e) {
-								that.onTransitionEnded();
-							});
+						var that = this;
+						inPage.bind('webkitTransitionEnd', function transitionEnded(e) {
+							that.onTransitionEnded();
+						});
 
-							element[0].offsetWidth;
-							inPage.attr("class", "onsen_navigator-pager transition navigator_center");
-							outPage.attr("class", "onsen_navigator-pager transition navigate_left");
-						}.bind(this), 0);						
+						element[0].offsetWidth;
+						inPage.attr("class", "onsen_navigator-pager transition navigator_center");
+						outPage.attr("class", "onsen_navigator-pager transition navigate_left");
 					},
 
 					animatePageOut: function(currentPage, previousPage) {
-						setTimeout(function(){
-							previousPage.attr("class", "onsen_navigator-pager navigate_left");
-							element[0].offsetWidth;
-							previousPage.attr("class", "onsen_navigator-pager transition navigator_center");
+						previousPage.attr("class", "onsen_navigator-pager navigate_left");
+						element[0].offsetWidth;
+						previousPage.attr("class", "onsen_navigator-pager transition navigator_center");
 
-							var that = this;
-							currentPage.bind('webkitTransitionEnd', function transitionEnded(e) {
-								currentPage.remove();
-								currentPage.unbind(transitionEnded);
-								that.onTransitionEnded();
-							});
+						var that = this;
+						currentPage.bind('webkitTransitionEnd', function transitionEnded(e) {
+							currentPage.remove();
+							currentPage.unbind(transitionEnded);
+							that.onTransitionEnded();
+						});
 
-							currentPage.attr("class", "onsen_navigator-pager transition navigate_right");
-						}.bind(this), 0);	
-						
+						currentPage.attr("class", "onsen_navigator-pager transition navigate_right");
 					},
 
 					isEmpty: function() {
@@ -444,7 +439,7 @@ limitations under the License.
 								options.onRightButtonClick = options.onRightButtonClick || onRightButtonClick;
 
 								$navigatorToolbar.remove();
-							}
+							}							
 
 							page.append(templateHTML);
 							var pager = $compile(page)(scope.$parent);
@@ -459,11 +454,15 @@ limitations under the License.
 								var previousNavigatorItem = navigatorItems[navigatorItems.length - 1];
 								var previousPage = previousNavigatorItem.page;
 								pager.addClass('navigate_right');
-								this.animatePageIn(pager, previousPage);
-								this.animateTitleIn(navigatorItem, previousNavigatorItem);
+								
+								setTimeout(function(){
+									this.animatePageIn(pager, previousPage);
+									this.animateTitleIn(navigatorItem, previousNavigatorItem);
 
-								this.animateBackLabelIn(navigatorItem, previousNavigatorItem);
-								this.animateRightButtonIn(navigatorItem, previousNavigatorItem);
+									this.animateBackLabelIn(navigatorItem, previousNavigatorItem);
+									this.animateRightButtonIn(navigatorItem, previousNavigatorItem);
+								}.bind(this), 0);
+								
 							} else {
 								// root page
 								var titleElement = angular.element('<div></div>');
