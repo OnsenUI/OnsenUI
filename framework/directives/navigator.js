@@ -190,7 +190,6 @@ limitations under the License.
 					},
 
 					onLeftButtonClicked: function() {
-						console.log('left button clicked');
 						var onLeftButtonClick = this.getCurrentNavigatorItem().options.onLeftButtonClick;
 						if (onLeftButtonClick) {
 							var onLeftButtonClickFn = $parse(onLeftButtonClick);							
@@ -401,7 +400,6 @@ limitations under the License.
 
 					pushPage: function(page, options) {
 						if (!this.isReady()) {
-							console.log('not ready => ignore');
 							return;
 						}
 
