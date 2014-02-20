@@ -49,7 +49,12 @@ limitations under the License.
 				var tabItems = [];
 
 				this.gotSelected = function(selectedTabItem) {					
-					$scope.selectedTabItem.source = selectedTabItem.page;					
+					$scope.selectedTabItem.source = selectedTabItem.page;
+					for (var i = 0; i < tabItems.length; i++) {
+						if(tabItems[i] != selectedTabItem){
+							tabItems[i].setInactive();
+						}
+					};
 				}
 
 				this.addTabItem = function(tabItem) {					

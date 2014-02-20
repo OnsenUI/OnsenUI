@@ -188,7 +188,7 @@ angular.module("templates/tab_bar_item.tpl", []).run(["$templateCache", function
     "<label class=\"topcoat-tab-bar__item no-select\">\n" +
     "	<input type=\"radio\" name=\"tab-bar\">\n" +
     "	<button class=\"topcoat-tab-bar__button full\" ng-click=\"setActive()\">\n" +
-    "		<i ng-show=\"icon != undefined\" class=\"fa fa-2x fa-{{icon}} {{icon}}\"></i>\n" +
+    "		<i ng-show=\"icon != undefined\" class=\"fa fa-2x fa-{{tabIcon}} {{tabIcon}}\"></i>\n" +
     "		<div class=\"onsen_tab-bar__label\" ng-class=\"{ big: icon === undefined }\">\n" +
     "			{{label}}\n" +
     "		</div>\n" +

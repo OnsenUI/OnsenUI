@@ -30,6 +30,7 @@ limitations under the License.
 				page: '@',
 				active: '@',
 				icon: '@',
+				activeIcon: '@',
 				label: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
@@ -37,11 +38,19 @@ limitations under the License.
 				var radioButton = element[0].querySelector('input');
 
 				monacaTabbarController.addTabItem(scope);
+				scope.tabIcon = scope.icon;
 
 				scope.setActive = function() {					
 					radioButton.checked = true;
 					monacaTabbarController.gotSelected(scope);
+					if(scope.activeIcon){
+						scope.tabIcon = scope.activeIcon;
+					}
 				};
+
+				scope.setInactive = function(){
+					scope.tabIcon = scope.icon;
+				}
 
 				if (scope.active) {					
 					scope.setActive();
