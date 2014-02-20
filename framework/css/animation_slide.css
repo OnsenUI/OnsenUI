@@ -42,7 +42,7 @@ limitations under the License.
     /*box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);*/    
 }
 
-.onsen_navigator-pager.navigate_left .page {
+.onsen_navigator-pager.navigate_left .navigator-page {
   opacity: 0.9;
 }
 
@@ -51,7 +51,7 @@ limitations under the License.
     /*box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.02);*/
 }
 
-.onsen_navigator-pager.navigator_center .page {
+.onsen_navigator-pager.navigator_center .navigator-page {
   opacity: 1;
 }
 
@@ -65,7 +65,7 @@ limitations under the License.
     animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.onsen_navigator-pager .page {
+.onsen_navigator-pager .navigator-page {
     transition-duration: 400ms;
     animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }

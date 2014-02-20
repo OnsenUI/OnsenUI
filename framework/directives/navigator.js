@@ -419,6 +419,7 @@ limitations under the License.
 							page.append(blackMask);
 
 							var templateHTML = angular.element(data.trim());
+							templateHTML.addClass('navigator-page');
 
 							var navigatorToolbar = templateHTML[0].querySelector('ons-navigator-toolbar');
 							if (navigatorToolbar) {
@@ -454,6 +455,7 @@ limitations under the License.
 								var previousNavigatorItem = navigatorItems[navigatorItems.length - 1];
 								var previousPage = previousNavigatorItem.page;
 								pager.addClass('navigate_right');
+								// pager[0].style.opacity = 0;
 								
 								setTimeout(function(){
 									this.animatePageIn(pager, previousPage);
