@@ -101,7 +101,7 @@ module.exports = function(grunt) {
           // themes css
           {
             expand: true,
-            cwd: 'framework/css/themes/css',
+            cwd: 'themes/css',
             dest: 'build/css/',
             src: [
               '*.css'
@@ -112,15 +112,6 @@ module.exports = function(grunt) {
             dest: 'build/img/',
             src: [
               '*.*'
-            ]
-          },
-          // fonts
-          {
-            expand: true,
-            cwd: 'framework/css/themes/font/',
-            dest: 'build/font/',
-            src: [
-              '*.otf'
             ]
           },
 
@@ -322,7 +313,7 @@ module.exports = function(grunt) {
           'framework/lib/*.js',
           'framework/css/*.css',
           'framework/css/polyfill/*.css',
-          'framework/css/themes/css/*.css',
+          'themes/css/*.css',
           'framework/templates/*.tpl',
         ],
         tasks: ['default'],
