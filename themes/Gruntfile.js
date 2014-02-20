@@ -129,6 +129,7 @@ module.exports = function(grunt) {
     });
 
     // These plugins provide necessary tasks.
+    grunt.file.setBase('../');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-stylus');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -138,6 +139,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.file.setBase('./themes');
 
     grunt.registerTask('default', ['build']);
     grunt.registerTask('build', ['clean', 'stylus', 'autoprefixer', 'cssmin', 'topdoc']);
