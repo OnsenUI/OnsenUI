@@ -28,44 +28,54 @@ module.exports = function(grunt) {
 
         stylus: {
             options: {
-                paths: 
-                    grunt.file.expand(__dirname + '/components/*/')
-                    .concat(grunt.file.expand(__dirname + '/theme/'))
-                    .concat(grunt.file.expand(__dirname + '/components/utils/mixins/')),
                 compress: false
             },
 
-            mobile_onsen_ios7: {
-                options: {
-                    import: ['theme-topcoat-mobile-onsen-ios7', 'utils']
-                },
-
-                files: [{
-                    src: ['components/**/*.styl'],
-                    dest: 'css/topcoat-mobile-onsen-ios7.css'
-                }]
+            'ios7-theme-module': {
+                files: [
+                    {
+                        src: 'theme-modules/ios7/theme-topcoat-mobile-onsen-ios7.styl',
+                        dest: 'css/topcoat-mobile-onsen-ios7.css'
+                    }
+                ]
             },
 
-            mobile_onsen_android4_4: {
-                options: {
-                    import: ['theme-topcoat-mobile-onsen-android4_4', 'utils']
-                },
-
-                files: [{
-                    src: 'components/**/*.styl',
-                    dest: 'css/topcoat-mobile-onsen-android4_4.css'
-                }]
+            'android4_4-theme-module': {
+                files: [
+                    {
+                        src: 'theme-modules/android4_4/theme-topcoat-mobile-onsen-android4_4.styl',
+                        dest: 'css/topcoat-mobile-onsen-android4_4.css'
+                    }
+                ]
             },
 
-            mobile_onsen_blue: {
-                options: {
-                    import: ['theme-topcoat-mobile-onsen-blue', 'utils']
-                },
-
-                files: [{
-                    src: 'components/**/*.styl',
-                    dest: 'css/topcoat-mobile-onsen-blue.css'
-                }]
+            'onsen-theme-module': {
+                files: [
+                    {
+                        src: 'theme-modules/onsen/theme-topcoat-mobile-onsen-blue.styl',
+                        dest: 'css/topcoat-mobile-onsen-blue.css'
+                    },
+                    {
+                        src: 'theme-modules/onsen/theme-topcoat-mobile-onsen-green.styl',
+                        dest: 'css/topcoat-mobile-onsen-green.css'
+                    },
+                    {
+                        src: 'theme-modules/onsen/theme-topcoat-mobile-onsen-orange.styl',
+                        dest: 'css/topcoat-mobile-onsen-orange.css'
+                    },
+                    {
+                        src: 'theme-modules/onsen/theme-topcoat-mobile-onsen-pink.styl',
+                        dest: 'css/topcoat-mobile-onsen-pink.css'
+                    },
+                    {
+                        src: 'theme-modules/onsen/theme-topcoat-mobile-onsen-purple.styl',
+                        dest: 'css/topcoat-mobile-onsen-purple.css'
+                    },
+                    {
+                        src: 'theme-modules/onsen/theme-topcoat-mobile-onsen-yellow.styl',
+                        dest: 'css/topcoat-mobile-onsen-yellow.css'
+                    }
+                ]
             }
 
         },
@@ -75,7 +85,7 @@ module.exports = function(grunt) {
                 options: {
                     source: 'css',
                     destination: 'demo',
-                    template: 'topdoc-theme/',
+                    template: 'topdoc-template/',
                     templateData: {
                         "title": "Onsen UI Themes",
                         "subtitle": "",
@@ -142,5 +152,10 @@ module.exports = function(grunt) {
     grunt.file.setBase(__dirname);
 
     grunt.registerTask('default', ['build']);
+
     grunt.registerTask('build', ['clean', 'stylus', 'autoprefixer', 'cssmin', 'topdoc']);
+
+    grunt.registerTask('gen-onsen-themes', ['stylus:onsen-theme-module', 'cssmin']);
+    grunt.registerTask('gen-ios7-themes', ['stylus:ios7-theme-module', 'cssmin']);
+    grunt.registerTask('gen-android4_4-themes', ['stylus:android4_4-theme-module', 'cssmin']);
 };
