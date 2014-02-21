@@ -10,7 +10,9 @@
 				$rootScope.ons.slidingMenu = {};
 				$rootScope.ons.slidingMenu.setAbovePage = this.setAbovePage.bind(this);
 				$rootScope.ons.slidingMenu.setBehindPage = this.setBehindPage.bind(this);
-				$rootScope.ons.slidingMenu.toggleMenu = this.toggleMenu.bind(this);				
+				$rootScope.ons.slidingMenu.toggleMenu = this.toggleMenu.bind(this);
+				$rootScope.ons.slidingMenu.openMenu = this.openMenu.bind(this);
+				$rootScope.ons.slidingMenu.closeMenu = this.closeMenu.bind(this);
 			},
 
 			_findClosestSlidingMenu: function($event) {				
@@ -54,6 +56,20 @@
 
 				var slidingMenu = this._findClosestSlidingMenu($event);
 				slidingMenu.toggleMenu();
+			},
+
+			openMenu: function($event) {
+				this._checkExistence();
+
+				var slidingMenu = this._findClosestSlidingMenu($event);
+				slidingMenu.openMenu();
+			},
+
+			closeMenu: function($event) {
+				this._checkExistence();
+
+				var slidingMenu = this._findClosestSlidingMenu($event);
+				slidingMenu.closeMenu();
 			}
 		});
 
