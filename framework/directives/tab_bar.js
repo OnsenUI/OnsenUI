@@ -20,53 +20,81 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout) {
+	directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout, $http, $compile) {
 		return {
 			restrict: 'E',
 			replace: false,
-			transclude: true,			
+			transclude: true,
+			scope: {
+				hide: '@'
+			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
 			controller: function($scope, $element, $attrs) {
+				var container = angular.element($element[0].querySelector('.tab-bar-content'));
 				var footer = $element[0].querySelector('.footer');
+
+				this.tabbarId = Date.now();
 
 				$scope.selectedTabItem = {
 					source: ''
 				};
 
-				$attrs.$observe('hideTabs', function(hide){
-					$scope.hideTabs = hide;					
+				$attrs.$observe('hideTabs', function(hide) {
+					$scope.hideTabs = hide;
 					onTabbarVisibilityChanged();
 				});
 
-				function onTabbarVisibilityChanged(){
-					if($scope.hideTabs){
+				function onTabbarVisibilityChanged() {
+					if ($scope.hideTabs) {
 						$scope.tabbarHeight = 0;
-					}else{					
+					} else {
 						$scope.tabbarHeight = footer.clientHeight + 'px';
 					}
 				}
-			
+
 				var tabItems = [];
 
-				this.gotSelected = function(selectedTabItem) {					
-					$scope.selectedTabItem.source = selectedTabItem.page;
+				this.gotSelected = function(selectedTabItem) {
+					if (selectedTabItem.page) {
+						setPage(selectedTabItem.page);
+					}
+
 					for (var i = 0; i < tabItems.length; i++) {
-						if(tabItems[i] != selectedTabItem){
+						if (tabItems[i] != selectedTabItem) {
 							tabItems[i].setInactive();
 						}
-					};
+					}
+				};
+
+				function setPage(page) {
+					if (page) {
+						$http({
+							url: page,
+							method: "GET"
+						}).error(function(e) {
+							console.error(e);
+						}).success(function(data, status, headers, config) {
+							var templateHTML = angular.element(data.trim());
+							var pageContent = $compile(templateHTML)($scope.$parent);
+							container.append(pageContent);
+						}.bind(this));
+					} else {
+						throw new Error('cannot set undefined page');
+					}
 				}
 
-				this.addTabItem = function(tabItem) {					
+				this.addTabItem = function(tabItem) {
+					console.log('addTabItem ', tabItem.page);
 					tabItems.push(tabItem);
-				}
+					console.log('tabs now:', tabItems);
+				};
 
 				$scope.ons = $scope.ons || {};
 				$scope.ons.tabbar = {};
-				$scope.ons.tabbar.setTabbarVisibility = function(visible){
+				$scope.ons.tabbar.setTabbarVisibility = function(visible) {
 					$scope.hideTabs = !visible;
 					onTabbarVisibilityChanged();
-				}
+				};
 			}
 		};
 	});

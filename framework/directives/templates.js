@@ -174,9 +174,9 @@ angular.module("templates/split_view.tpl", []).run(["$templateCache", function($
 
 angular.module("templates/tab_bar.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/tab_bar.tpl",
-    "  <ng-include src=\"selectedTabItem.source\" style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content\">\n" +
+    "  <div style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content\">\n" +
     "    \n" +
-    "  </ng-include>\n" +
+    "  </div>\n" +
     "  <div ng-hide=\"hideTabs\" class=\"topcoat-tab-bar full footer\" ng-transclude>         \n" +
     "  </div>\n" +
     "\n" +
@@ -186,7 +186,7 @@ angular.module("templates/tab_bar.tpl", []).run(["$templateCache", function($tem
 angular.module("templates/tab_bar_item.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/tab_bar_item.tpl",
     "<label class=\"topcoat-tab-bar__item no-select\">\n" +
-    "	<input type=\"radio\" name=\"tab-bar\">\n" +
+    "	<input type=\"radio\" name=\"tab-bar-{{tabbarId}}\">\n" +
     "	<button class=\"topcoat-tab-bar__button full\" ng-click=\"setActive()\">\n" +
     "		<i ng-show=\"icon != undefined\" class=\"fa fa-2x fa-{{tabIcon}} {{tabIcon}}\"></i>\n" +
     "		<div class=\"onsen_tab-bar__label\" ng-class=\"{ big: icon === undefined }\">\n" +

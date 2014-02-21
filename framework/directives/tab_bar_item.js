@@ -25,7 +25,7 @@ limitations under the License.
 			restrict: 'E',
 			replace: true,
 			transclude: true,
-			require: '^?onsTabbar',
+			require: '^onsTabbar',
 			scope: {
 				page: '@',
 				active: '@',
@@ -34,25 +34,28 @@ limitations under the License.
 				label: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
-			link: function(scope, element, attrs, monacaTabbarController) {
+			link: function(scope, element, attrs, tabbarController) {
 				var radioButton = element[0].querySelector('input');
 
-				monacaTabbarController.addTabItem(scope);
+				scope.tabbarId = tabbarController.tabbarId;
+
+				tabbarController.addTabItem(scope);
 				scope.tabIcon = scope.icon;
 
-				scope.setActive = function() {					
+				scope.setActive = function() {
 					radioButton.checked = true;
-					monacaTabbarController.gotSelected(scope);
-					if(scope.activeIcon){
+					tabbarController.gotSelected(scope);
+					if (scope.activeIcon) {
 						scope.tabIcon = scope.activeIcon;
 					}
 				};
 
-				scope.setInactive = function(){
+				scope.setInactive = function() {
+					console.log('set inactive ' + scope.page);
 					scope.tabIcon = scope.icon;
-				}
+				};
 
-				if (scope.active) {					
+				if (scope.active) {
 					scope.setActive();
 				}
 
