@@ -22,6 +22,7 @@ limitations under the License.
 	directiveModules.run(function($rootScope) {
 		$rootScope.ons = $rootScope.ons || {};
 		$rootScope.ons.$get = function(id) {
+			id = id.replace('#', '');
 			return angular.element(document.getElementById(id)).isolateScope();
 		};
 
