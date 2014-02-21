@@ -21,7 +21,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.directive('onsScreen', function(ONSEN_CONSTANTS, $http, $compile, ScreenFactory) {
+	directives.directive('onsScreen', function(ONSEN_CONSTANTS, $http, $compile, ScreenStack) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -40,14 +40,14 @@ limitations under the License.
 
 						if (scope.page) {
 							scope.presentPage(scope.page);
-						}
+						}						
 
 						attrs.$observe('page', function(page) {
 							if (page) {
 								this.resetToPage(page);
 							}
 						}.bind(this));
-					},
+					},					
 
 					onTransitionEnded: function() {
 						this.isReady = true;
@@ -177,7 +177,11 @@ limitations under the License.
 				});
 
 				var screen = new Screen();
-				ScreenFactory.addScreen(scope);
+				ScreenStack.addScreen(scope);
+				scope.$on('destroy', function(){
+					console.log('destroyed');
+					ScreenStack.removeScreen(scope);
+				});
 			}
 		}
 	});

@@ -1,8 +1,8 @@
 (function() {
 	var directiveModules = angular.module('onsen.directives');
 
-	directiveModules.factory('NavigatorFactory', function($rootScope) {
-		var NavigatorFactory = Class.extend({
+	directiveModules.factory('NavigatorStack', function($rootScope) {
+		var NavigatorStack = Class.extend({
 			navigators: [],
 
 			init: function() {
@@ -58,6 +58,6 @@
 			}
 		});
 
-		return new NavigatorFactory();
+		return new NavigatorStack();
 	});
 })();

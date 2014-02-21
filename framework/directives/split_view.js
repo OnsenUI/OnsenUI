@@ -20,7 +20,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewFactory) {
+	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewStack) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -364,7 +364,7 @@ limitations under the License.
 					}
 				};	
 
-				SplitViewFactory.addSplitView(scope);			
+				SplitViewStack.addSplitView(scope);			
 			}
 		};
 	});

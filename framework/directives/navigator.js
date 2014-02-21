@@ -21,7 +21,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.directive('onsNavigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorFactory) {
+	directives.directive('onsNavigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -357,6 +357,10 @@ limitations under the License.
 
 						var that = this;
 						currentPage.bind('webkitTransitionEnd', function transitionEnded(e) {
+							var currentPageScope = currentPage.scope();
+							if(currentPageScope){
+								currentPageScope.$destroy();
+							}
 							currentPage.remove();
 							currentPage.unbind(transitionEnded);
 							that.onTransitionEnded();
@@ -455,7 +459,6 @@ limitations under the License.
 								var previousNavigatorItem = navigatorItems[navigatorItems.length - 1];
 								var previousPage = previousNavigatorItem.page;
 								pager.addClass('navigate_right');
-								// pager[0].style.opacity = 0;
 								
 								setTimeout(function(){
 									this.animatePageIn(pager, previousPage);
@@ -508,7 +511,7 @@ limitations under the License.
 
 				var navigator = new Navigator();
 
-				NavigatorFactory.addNavigator(scope);				
+				NavigatorStack.addNavigator(scope);				
 			}
 
 		}

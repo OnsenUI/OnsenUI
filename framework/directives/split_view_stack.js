@@ -1,8 +1,8 @@
 (function() {
 	var directiveModules = angular.module('onsen.directives');
 
-	directiveModules.factory('SplitViewFactory', function($rootScope) {
-		var SplitViewFactory = Class.extend({
+	directiveModules.factory('SplitViewStack', function($rootScope) {
+		var SplitViewStack = Class.extend({
 			splitViews: [],
 
 			init: function() {
@@ -58,6 +58,6 @@
 			}
 		});
 
-		return new SplitViewFactory();
+		return new SplitViewStack();
 	});
 })();

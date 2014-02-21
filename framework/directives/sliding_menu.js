@@ -20,7 +20,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuFactory) {
+	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuStack) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -295,7 +295,7 @@ limitations under the License.
 				};
 
 
-				SlidingMenuFactory.addSlidingMenu(scope);
+				SlidingMenuStack.addSlidingMenu(scope);
 			}
 		};
 	});

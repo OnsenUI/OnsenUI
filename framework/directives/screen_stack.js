@@ -1,8 +1,8 @@
 (function() {
 	var directiveModules = angular.module('onsen.directives');
 
-	directiveModules.factory('ScreenFactory', function($rootScope) {
-		var ScreenFactory = Class.extend({
+	directiveModules.factory('ScreenStack', function($rootScope) {
+		var ScreenStack = Class.extend({
 			screens: [],
 
 			init: function() {
@@ -36,6 +36,14 @@
 				this.screens.push(screen);
 			},
 
+			removeScreen: function(screen){
+				for (var i = 0; i < screens.length; i++) {
+					if(screens[i] == screen){
+						screens.splice(i, 1);
+					}
+				};
+			},
+
 			presentPage: function(page, $event) {
 				this._checkExistence();
 
@@ -58,6 +66,6 @@
 			}
 		});
 
-		return new ScreenFactory();
+		return new ScreenStack();
 	});
 })();

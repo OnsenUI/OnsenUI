@@ -51,7 +51,6 @@ limitations under the License.
 				};
 
 				scope.setInactive = function() {
-					console.log('set inactive ' + scope.page);
 					scope.tabIcon = scope.icon;
 				};
 

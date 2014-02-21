@@ -84,9 +84,7 @@ limitations under the License.
 				}
 
 				this.addTabItem = function(tabItem) {
-					console.log('addTabItem ', tabItem.page);
 					tabItems.push(tabItem);
-					console.log('tabs now:', tabItems);
 				};
 
 				$scope.ons = $scope.ons || {};

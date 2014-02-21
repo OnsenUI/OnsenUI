@@ -1,8 +1,8 @@
 (function() {
 	var directiveModules = angular.module('onsen.directives');
 
-	directiveModules.factory('SlidingMenuFactory', function($rootScope) {
-		var SlidingMenuFactory = Class.extend({
+	directiveModules.factory('SlidingMenuStack', function($rootScope) {
+		var SlidingMenuStack = Class.extend({
 			slidingMenus: [],
 
 			init: function() {
@@ -73,6 +73,6 @@
 			}
 		});
 
-		return new SlidingMenuFactory();
+		return new SlidingMenuStack();
 	});
 })();
