@@ -447,12 +447,14 @@ limitations under the License.
 							}							
 
 							page.append(templateHTML);
-							var pager = $compile(page)(scope.$parent);
+							var pageScope = scope.$parent.$new();
+							var pager = $compile(page)(pageScope);
 							container.append(pager);
 
 							var navigatorItem = {
 								page: pager,
-								options: options || {}
+								options: options || {},
+								pageScope: pageScope
 							};
 
 							if (!this.isEmpty()) {
@@ -506,12 +508,16 @@ limitations under the License.
 
 						this.setLeftButton(previousNavigatorItem);
 						this.animateRightButtonOut(previousNavigatorItem, currentNavigatorItem);
+						currentNavigatorItem.pageScope.$destroy();
 					}					
 				});
 
 				var navigator = new Navigator();
 
 				NavigatorStack.addNavigator(scope);				
+				scope.$on('$destroy', function(){
+					NavigatorStack.removeNavigator(scope);
+				});
 			}
 
 		}

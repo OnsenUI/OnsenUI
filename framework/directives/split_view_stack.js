@@ -36,6 +36,14 @@
 				this.splitViews.push(splitView);
 			},
 
+			removeSplitView: function(splitView){
+				for (var i = 0; i < this.splitViews.length; i++) {
+					if(this.splitViews[i] == splitView){
+						this.splitViews.splice(i, 1);
+					}
+				};
+			},
+
 			setMainPage: function(page, $event) {
 				this._checkExistence();
 

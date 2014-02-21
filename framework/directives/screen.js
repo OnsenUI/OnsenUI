@@ -116,7 +116,8 @@ limitations under the License.
 
 							var templateHTML = angular.element(data.trim());
 							pageContainer.append(templateHTML);
-							var compiledPage = $compile(pageEl)(scope.$parent);
+							var pageScope = scope.$parent.$new();
+							var compiledPage = $compile(pageEl)(pageScope);
 							element.append(compiledPage);
 
 							if (!this.isEmpty()) {
@@ -127,7 +128,8 @@ limitations under the License.
 
 							var screenItem = {
 								pageUrl: page,
-								pageElement: compiledPage
+								pageElement: compiledPage,
+								pageScope: pageScope
 							}								
 
 							screenItems.push(screenItem);
@@ -154,9 +156,7 @@ limitations under the License.
 						currentPage.bind('webkitTransitionEnd', function transitionEnded() {
 							currentPage.remove();
 							that.isReady = true;
-							scope.$apply(function(){
-								attrs.page = screenItems[screenItems.length - 1].pageUrl;								
-							});
+							screenItem.pageScope.$destroy();
 						});
 					},
 
@@ -178,8 +178,7 @@ limitations under the License.
 
 				var screen = new Screen();
 				ScreenStack.addScreen(scope);
-				scope.$on('destroy', function(){
-					console.log('destroyed');
+				scope.$on('$destroy', function(){
 					ScreenStack.removeScreen(scope);
 				});
 			}

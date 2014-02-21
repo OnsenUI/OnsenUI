@@ -75,8 +75,17 @@ limitations under the License.
 							console.error(e);
 						}).success(function(data, status, headers, config) {
 							var templateHTML = angular.element(data.trim());
-							var pageContent = $compile(templateHTML)($scope.$parent);
+							var pageScope = $scope.$parent.$new();
+							var pageContent = $compile(templateHTML)(pageScope);
 							container.append(pageContent);
+
+							if(this.currentPageElement){
+								this.currentPageElement.remove();
+								this.currentPageScope.$destroy();
+							}
+
+							this.currentPageElement = pageContent;
+							this.currentPageScope = pageScope;
 						}.bind(this));
 					} else {
 						throw new Error('cannot set undefined page');

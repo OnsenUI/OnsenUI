@@ -86,10 +86,20 @@ limitations under the License.
 								}).success(function(data, status, headers, config) {
 									var templateHTML = angular.element(data.trim());
 									var page = angular.element('<div></div>');
-									page.addClass('page');									
-									var pageContent = $compile(templateHTML)(scope.$parent);
+									page.addClass('page');		
+									var pageScope = scope.$parent.$new();
+									var pageContent = $compile(templateHTML)(pageScope);
 									page.append(pageContent);
-									this.$behindPage.append(page);									
+									this.$behindPage.append(page);	
+
+
+									if(this.currentBehindPageElement){
+										this.currentBehindPageElement.remove();
+										this.currentBehindPageScope.$destroy();
+									}
+
+									this.currentBehindPageElement = page;
+									this.currentBehindPageScope = pageScope;
 
 								}.bind(this));
 							} else {
@@ -109,7 +119,8 @@ limitations under the License.
 									var page = angular.element('<div></div>');
 									page.addClass('page');
 									page[0].style.opacity = 0;
-									var pageContent = $compile(templateHTML)(scope.$parent);
+									var pageScope = scope.$parent.$new();
+									var pageContent = $compile(templateHTML)(pageScope);
 									page.append(pageContent);
 									this.$abovePage.append(page);
 
@@ -118,8 +129,10 @@ limitations under the License.
 										page[0].style.opacity = 1;
 										if(this.currentPage){
 											this.currentPage.remove();
+											this.currentPageScope.$destroy();
 										}
 										this.currentPage = page;
+										this.currentPageScope = pageScope;
 									}.bind(this), 0);
 
 								}.bind(this));
@@ -364,7 +377,10 @@ limitations under the License.
 					}
 				};	
 
-				SplitViewStack.addSplitView(scope);			
+				SplitViewStack.addSplitView(scope);		
+				scope.$on('$destroy', function(){
+					SplitViewStack.removeSplitView(scope);
+				});	
 			}
 		};
 	});

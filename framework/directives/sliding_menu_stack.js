@@ -37,6 +37,14 @@
 				this.slidingMenus.push(slidingMenu);
 			},
 
+			removeSlidingMenu: function(slidingMenu){
+				for (var i = 0; i < this.slidingMenus.length; i++) {
+					if(this.slidingMenus[i] == slidingMenu){
+						this.slidingMenus.splice(i, 1);
+					}
+				};
+			},
+
 			setAbovePage: function(page, $event) {
 				this._checkExistence();
 

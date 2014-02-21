@@ -36,6 +36,14 @@
 				this.navigators.push(navigator);
 			},
 
+			removeNavigator: function(navigator){
+				for (var i = 0; i < this.navigators.length; i++) {
+					if(this.navigators[i] == navigator){
+						this.navigators.splice(i, 1);
+					}
+				};
+			},
+
 			pushPage: function(page, options, $event) {
 				this._checkExistence();
 

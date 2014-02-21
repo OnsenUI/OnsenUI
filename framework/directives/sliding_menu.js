@@ -139,9 +139,18 @@ limitations under the License.
 									var templateHTML = angular.element(data.trim());
 									var page = angular.element('<div></div>');
 									page.addClass('page');
-									var pageContent = $compile(templateHTML)(scope.$parent);
+									var pageScope = scope.$parent.$new();
+									var pageContent = $compile(templateHTML)(pageScope);
 									page.append(pageContent);
 									this.$behindPage.append(page);
+
+									if(this.currentBehindPageScope){
+										this.currentBehindPageScope.$destroy();
+										this.currentBehindPageElement.remove();
+									}
+
+									this.currentBehindPageElement = page;
+									this.currentBehindPageScope = pageScope;
 
 								}.bind(this));
 							} else {
@@ -166,7 +175,8 @@ limitations under the License.
 									var pageElement = angular.element('<div></div>');
 									pageElement.addClass('page');
 									pageElement[0].style.opacity = 0;
-									var pageContent = $compile(templateHTML)(scope.$parent);
+									var pageScope = scope.$parent.$new();
+									var pageContent = $compile(templateHTML)(pageScope);
 									pageElement.append(pageContent);
 									this.$abovePage.append(pageElement);
 
@@ -175,8 +185,10 @@ limitations under the License.
 										pageElement[0].style.opacity = 1;
 										if (this.currentPageElement) {
 											this.currentPageElement.remove();
+											this.currentPageScope.$destroy();
 										}
 										this.currentPageElement = pageElement;
+										this.currentPageScope = pageScope;
 									}.bind(this), 0);
 
 									this.currentPageUrl = pageUrl;
@@ -296,6 +308,9 @@ limitations under the License.
 
 
 				SlidingMenuStack.addSlidingMenu(scope);
+				scope.$on('$destroy', function(){
+					SlidingMenuStack.removeSlidingMenu(scope);
+				});
 			}
 		};
 	});

@@ -37,9 +37,9 @@
 			},
 
 			removeScreen: function(screen){
-				for (var i = 0; i < screens.length; i++) {
-					if(screens[i] == screen){
-						screens.splice(i, 1);
+				for (var i = 0; i < this.screens.length; i++) {
+					if(this.screens[i] == screen){
+						this.screens.splice(i, 1);
 					}
 				};
 			},
