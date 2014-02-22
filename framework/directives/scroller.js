@@ -29,7 +29,15 @@ limitations under the License.
 				onScrolled: '&',
 				infinitScrollEnable: '='
 			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/scroller.tpl'			
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/scroller.tpl',
+			compile: function(elem, attrs, transcludeFn) {
+				return function(scope, element, attrs) {
+					var scroller = angular.element(element[0].querySelector('.scroller'));
+					transcludeFn(scope.$parent, function(clone) {
+						scroller.append(clone);
+					});
+				};
+			}
 		};
 	});
 })();

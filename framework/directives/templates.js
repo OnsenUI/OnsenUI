@@ -129,9 +129,7 @@ angular.module("templates/scroller.tpl", []).run(["$templateCache", function($te
   $templateCache.put("templates/scroller.tpl",
     "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
     "	<div class=\"scroller\">\n" +
-    "		<div ng-transclude>\n" +
-    "			\n" +
-    "		</div>		\n" +
+    "		\n" +
     "	</div>\n" +
     "</div>");
 }]);
