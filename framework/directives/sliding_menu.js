@@ -35,6 +35,14 @@ limitations under the License.
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
 				var MAIN_PAGE_RATIO = 0.9;
+				var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
+				var BROWSER_TRANSFORMS = [
+					"webkitTransform",
+					"mozTransform",
+					"msTransform",
+					"oTransform",
+					"transform"
+				];
 
 				var Swiper = Class.extend({
 					init: function(element) {
@@ -124,7 +132,7 @@ limitations under the License.
 
 					bindEvents: function() {
 						this.hammertime = new Hammer(this.el);						
-						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));
+						this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
 					},
 
 					attachMethods: function() {
@@ -282,10 +290,19 @@ limitations under the License.
 					},
 
 					translate: function(x) {
-						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
+						var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
+						
 						var behind = (x - this.MAX) / this.MAX * 10;
 						var opacity = 1 + behind / 100;
-						this.behindPage.style.webkitTransform = 'translate3d(' + behind + '%, 0, 0)';
+						var behindTransform = 'translate3d(' + behind + '%, 0, 0)';
+
+						var property;
+						for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
+							property = BROWSER_TRANSFORMS[i];
+							this.abovePage.style[property] = aboveTransform;
+							this.behindPage.style[property] = behindTransform;
+						};
+						
 						this.behindPage.style.opacity = opacity;
 						this.currentX = x;
 					}

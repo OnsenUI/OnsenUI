@@ -39,6 +39,8 @@ limitations under the License.
 			// The linking function will add behavior to the template
 			link: function(scope, element, attrs) {
 
+				var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
+
 				var leftButtonClick = attrs.onLeftButtonClick;
 				var rightButtonClick = attrs.onRightButtonClick;
 				var navigatorItems = [];
@@ -147,7 +149,7 @@ limitations under the License.
 
 						var outLabel = outNavigatorItem.backLabel;
 						if (outLabel) {
-							outLabel.bind('webkitTransitionEnd', function transitionEnded(e) {
+							outLabel.bind(TRANSITION_END, function transitionEnded(e) {
 								outLabel.remove();
 								outLabel.unbind(transitionEnded);
 							});
@@ -165,7 +167,7 @@ limitations under the License.
 							// no back label if user specify icon
 							outLabel.remove();
 						} else {
-							outLabel.bind('webkitTransitionEnd', function transitionEnded(e) {
+							outLabel.bind(TRANSITION_END, function transitionEnded(e) {
 								outLabel.remove();
 								outLabel.unbind(transitionEnded);
 							});
@@ -226,7 +228,7 @@ limitations under the License.
 						inTitleElement.attr('class', 'onsen_navigator-item onsen_navigator-title topcoat-navigation-bar__line-height center transition animate-right');
 						var outTitleElement = outNavigatorItem.titleElement;
 						outTitleElement.after(inTitleElement);
-						outTitleElement.bind('webkitTransitionEnd', function transitionEnded(e) {
+						outTitleElement.bind(TRANSITION_END, function transitionEnded(e) {
 							outTitleElement.remove();
 							outTitleElement.unbind(transitionEnded);
 						});
@@ -259,7 +261,7 @@ limitations under the License.
 							var rightButton = outNavigatorItem.rightButtonIconElement;
 							rightButton.removeClass('show');
 							rightButton.addClass('transition hide');
-							rightButton.bind('webkitTransitionEnd', function transitionEnded(e) {
+							rightButton.bind(TRANSITION_END, function transitionEnded(e) {
 								rightButton.remove();
 								rightButton.unbind(transitionEnded);
 							});
@@ -273,7 +275,7 @@ limitations under the License.
 							toolbarContent[0].offsetWidth;
 							outRightButton.removeClass('show');
 							outRightButton.addClass('transition hide');
-							outRightButton.bind('webkitTransitionEnd', function transitionEnded(e) {
+							outRightButton.bind(TRANSITION_END, function transitionEnded(e) {
 								outRightButton.remove();
 								outRightButton.unbind(transitionEnded);
 							});
@@ -329,7 +331,7 @@ limitations under the License.
 						var outTitleElement = currentNavigatorItem.titleElement;
 						outTitleElement.after(inTitleElement);
 						element[0].offsetWidth;
-						outTitleElement.bind('webkitTransitionEnd', function transitionEnded(e) {
+						outTitleElement.bind(TRANSITION_END, function transitionEnded(e) {
 							outTitleElement.remove();
 							outTitleElement.unbind(transitionEnded);
 						});
@@ -341,7 +343,7 @@ limitations under the License.
 
 					animatePageIn: function(inPage, outPage) {
 						var that = this;
-						inPage.bind('webkitTransitionEnd', function transitionEnded(e) {
+						inPage.bind(TRANSITION_END, function transitionEnded(e) {
 							that.onTransitionEnded();
 						});
 
@@ -356,7 +358,7 @@ limitations under the License.
 						previousPage.attr("class", "onsen_navigator-pager transition navigator_center");
 
 						var that = this;
-						currentPage.bind('webkitTransitionEnd', function transitionEnded(e) {
+						currentPage.bind(TRANSITION_END, function transitionEnded(e) {
 							var currentPageScope = currentPage.scope();
 							if(currentPageScope){
 								currentPageScope.$destroy();
@@ -401,6 +403,9 @@ limitations under the License.
 					},
 
 					pushPage: function(page, options) {
+						if(options && typeof options != "object"){
+							throw new Error('options must be an objected. You supplied ' + options);
+						}
 						if (!this.isReady()) {
 							return;
 						}

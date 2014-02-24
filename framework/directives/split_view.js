@@ -37,6 +37,15 @@ limitations under the License.
 				var COLLAPSE_MODE = 1;
 				var MAIN_PAGE_RATIO = 0.9;			
 
+				var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
+				var BROWSER_TRANSFORMS = [
+					"webkitTransform",
+					"mozTransform",
+					"msTransform",
+					"oTransform",
+					"transform"
+				];
+
 				var Swiper = Class.extend({
 					init: function(element) {
 						this.$el = element;
@@ -225,7 +234,7 @@ limitations under the License.
 						this.behindPage.style.opacity = 1;
 						this.abovePage.style.width = scope.mainPageWidth + '%';
 						var translate = this.behindPage.clientWidth;
-						this.translate2(translate);
+						this.translate(translate);
 					},
 
 					activateCollapseMode: function() {
@@ -258,7 +267,7 @@ limitations under the License.
 					},
 
 					bindEvents: function() {
-						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));
+						this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
 					},
 
 					handleEvent: function(ev) {
@@ -332,17 +341,20 @@ limitations under the License.
 					},
 
 					translate: function(x) {
-						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
+						var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
+						
 						var behind = (x - this.MAX) / this.MAX * 10;
 						var opacity = 1 + behind / 100;
-						this.behindPage.style.webkitTransform = 'translate3d(' + behind + '%, 0, 0)';
-						this.behindPage.style.opacity = opacity;
-						this.currentX = x;
-					},
+						var behindTransform = 'translate3d(' + behind + '%, 0, 0)';
 
-					translate2: function(x) {
-						this.behindPage.style.webkitTransform = 'translate3d(0, 0, 0)';
-						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
+						var property;
+						for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
+							property = BROWSER_TRANSFORMS[i];
+							this.abovePage.style[property] = aboveTransform;
+							this.behindPage.style[property] = behindTransform;
+						};
+						
+						this.behindPage.style.opacity = opacity;
 						this.currentX = x;
 					}
 				});

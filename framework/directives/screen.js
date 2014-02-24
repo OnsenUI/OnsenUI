@@ -31,6 +31,8 @@ limitations under the License.
 			},
 			
 			link: function(scope, element, attrs) {
+				var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
+
 				var screenItems = [];				
 
 				var Screen = Class.extend({
@@ -61,9 +63,8 @@ limitations under the License.
 					animateInCurrentPage: function(pager) {
 						pager.attr("class", "screen-page unmodal");
 						var that = this;
-						pager.bind('webkitTransitionEnd', function transitionEnded() {
-							that.onTransitionEnded();
-							// pager.unbind(transitionEnded);
+						pager.bind(TRANSITION_END, function transitionEnded() {
+							that.onTransitionEnded();							
 						});
 						element[0].offsetWidth;
 						setTimeout(function() {
@@ -153,7 +154,7 @@ limitations under the License.
 						this.animateOutBehindPage();
 						currentPage.attr("class", "screen-page transition unmodal");
 						var that = this;
-						currentPage.bind('webkitTransitionEnd', function transitionEnded() {
+						currentPage.bind(TRANSITION_END, function transitionEnded() {
 							currentPage.remove();
 							that.isReady = true;
 							screenItem.pageScope.$destroy();
