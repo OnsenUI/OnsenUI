@@ -76,12 +76,12 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar relative\">	 \n" +
     "		<div class=\"navigator-toolbar__content relative\">\n" +
     "			<div class=\"onsen_navigator-item topcoat-navigation-bar__bg onsen_navigator__left-button-container transition hide\">\n" +
-    "				<span id=\"left-section\" class=\"topcoat-icon-button--quiet\">\n" +
+    "				<span class=\"topcoat-icon-button--quiet left-section\">\n" +
     "					<i class=\"fa fa-angle-left fa-2x topcoat-navigation-bar__line-height\"></i>\n" +
     "				</span>			\n" +
     "			</div>		\n" +
     "			<div class=\"onsen_navigator__right-button onsen_navigator-item\">\n" +
-    "				<span id=\"right-section-icon\" class=\"topcoat-icon-button--quiet\">\n" +
+    "				<span class=\"topcoat-icon-button--quiet right-section-icon\">\n" +
     "				</span>\n" +
     "\n" +
     "			</div>\n" +

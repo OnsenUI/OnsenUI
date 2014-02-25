@@ -48,12 +48,12 @@ limitations under the License.
 				var container = angular.element(element[0].querySelector('.navigator-content'));
 				var toolbar = angular.element(element[0].querySelector('.topcoat-navigation-bar'));
 				var toolbarContent = angular.element(element[0].querySelector('.navigator-toolbar__content'));
-				var leftSection = angular.element(toolbarContent[0].querySelector('#left-section'));
+				var leftSection = angular.element(toolbarContent[0].querySelector('.left-section'));
 				var leftButtonContainer = angular.element(toolbarContent[0].querySelector('.onsen_navigator__left-button-container'));
 				var leftArrow = angular.element(leftButtonContainer[0].querySelector('i'));
 
 				var rightSection = angular.element(toolbarContent[0].querySelector('.onsen_navigator__right-button'));
-				var rightSectionIcon = angular.element(rightSection[0].querySelector('#right-section-icon'));
+				var rightSectionIcon = angular.element(rightSection[0].querySelector('.right-section-icon'));
 
 				var leftButtonClickFn = $parse(scope.onLeftButtonClick);
 
@@ -248,7 +248,7 @@ limitations under the License.
 							} else {
 								rightButtonIconElement = angular.element('<i></i>');
 								rightButtonIconElement.addClass(inNavigatorItem.options.rightButtonIcon + ' topcoat-navigation-bar__line-height onsen_fade');
-								angular.element(toolbar[0].querySelector('#right-section-icon')).append(rightButtonIconElement); // fix bug on ios. strange that we cant use rightSectionIcon.append() here
+								rightSectionIcon.append(rightButtonIconElement); // fix bug on ios. strange that we cant use rightSectionIcon.append() here
 								inNavigatorItem.rightButtonIconElement = rightButtonIconElement;
 							}
 

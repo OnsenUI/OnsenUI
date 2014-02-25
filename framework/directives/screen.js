@@ -27,7 +27,7 @@ limitations under the License.
 			replace: false,
 			transclude: true,
 			scope: {
-				page: '@'
+				page: '='
 			},
 			
 			link: function(scope, element, attrs) {

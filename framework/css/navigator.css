@@ -71,11 +71,11 @@ ons-navigator {
 
 }
 
-#right-section-icon {
+.right-section-icon {
     height: 100%;
-    display: block;
+    display: block !important;
 }
 
-#left-section {
+.left-section {
     height: 100%;
 }
