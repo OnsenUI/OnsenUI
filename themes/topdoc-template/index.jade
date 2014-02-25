@@ -59,12 +59,12 @@ html
 					article.component
 						div.showcase(style="width:320px; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;")
 							div(class="topcoat-navigation-bar")
-								div(class="topcoat-navigation-bar__item left quarter")
+								div(class="topcoat-navigation-bar__item left quarter", style="float:left")
 									span(class="topcoat-icon-button--quiet", style="vertical-align: middle")
 										i.fa.fa-lg.fa-bars
-								div(class="topcoat-navigation-bar__item center half")
+								div(class="topcoat-navigation-bar__item center half", style="float:left")
 									span(class="topcoat-navigation-bar__title") Title
-								div(class="topcoat-navigation-bar__item right quarter")
+								div(class="topcoat-navigation-bar__item right quarter", style="float:left")
 									span(class="topcoat-icon-button--quiet", style="vertical-align: middle")
 										i.fa.fa-lg.fa-angle-right.fa-2x
 							div.topcoat-list
@@ -96,12 +96,12 @@ html
 									button.topcoat-tab-bar__button.full Three
 						div.showcase(style="width:320px; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;")
 							div(class="topcoat-navigation-bar")
-								div(class="topcoat-navigation-bar__item left quarter")
+								div(class="topcoat-navigation-bar__item left quarter", style="float:left")
 									span(class="topcoat-icon-button--quiet", style="vertical-align: middle")
 										i.fa.fa-lg.fa-bars
-								div(class="topcoat-navigation-bar__item center half")
+								div(class="topcoat-navigation-bar__item center half", style="float:left")
 									span(class="topcoat-navigation-bar__title") Title
-								div(class="topcoat-navigation-bar__item right quarter")
+								div(class="topcoat-navigation-bar__item right quarter", style="float:left")
 									span(class="topcoat-icon-button--quiet", style="vertical-align: middle")
 										i.fa.fa-lg.fa-angle-right.fa-2x
 							div.topcoat-list
@@ -131,13 +131,13 @@ html
 									li.topcoat-list__item	
 										span Switch
 										div(style="float: right")
-											label.topcoat-switch
+											label.topcoat-switch(style="z-index: 1; margin-top: -5px")
 												input.topcoat-switch__input(type="checkbox")
 												div.topcoat-switch__toggle
 									li.topcoat-list__item	
 										span Range
 										span(style="float: right")
-											input(type="range", class="topcoat-range")
+											input(type="range", class="topcoat-range", style="margin-top: 10px;")
 								h3.topcoat-list__header Button									
 								ul.topcoat-list__container
 									li.topcoat-list__item
@@ -159,6 +159,9 @@ html
 									input(type="radio", name="tab-bar")
 									button.topcoat-tab-bar__button.full Three
 						div(style="clear: both")
+
+						p: a(href = document.relativeSource)=document.relativeSource
+
 					- each component in document.components
 						article.component(id=component.slug)
 							header
