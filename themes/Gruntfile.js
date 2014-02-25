@@ -132,8 +132,35 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            files: ['components/**/*.styl'],
-            tasks: ['compile']
+            options: {
+                livereload: true
+            },
+
+            'ios7-themes': {
+                files: ['theme-modules/**/*.styl'],
+                tasks: ['gen-ios7-themes']
+            },
+
+            'android4_4-themes': {
+                files: ['theme-modules/**/*.styl'],
+                tasks: ['gen-android4_4-themes']
+            },
+
+            'onsen-themes': {
+                files: ['theme-modules/**/*.styl'],
+                tasks: ['gen-onsen-themes']
+            }
+        },
+
+        connect: {
+            options: {
+                hostname: '0.0.0.0',
+                livereload: true,
+                base: '../'
+            },
+            livereload: {
+                options: { port: 9999 }
+            }
         }
 
     });
@@ -147,6 +174,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-topdoc');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.file.setBase(__dirname);
@@ -155,7 +183,15 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build', ['clean', 'stylus', 'autoprefixer', 'cssmin', 'topdoc']);
 
-    grunt.registerTask('gen-onsen-themes', ['stylus:onsen-theme-module', 'cssmin']);
-    grunt.registerTask('gen-ios7-themes', ['stylus:ios7-theme-module', 'cssmin']);
-    grunt.registerTask('gen-android4_4-themes', ['stylus:android4_4-theme-module', 'cssmin']);
+    grunt.registerTask('gen-onsen-themes', ['stylus:onsen-theme-module', 'autoprefixer']);
+    grunt.registerTask('gen-ios7-themes', ['stylus:ios7-theme-module', 'autoprefixer']);
+    grunt.registerTask('gen-android4_4-themes', ['stylus:android4_4-theme-module', 'autoprefixer']);
+
+    grunt.registerTask('serve-message', function() {
+        grunt.log.writeln('Open http://0.0.0.0:9999/themes/demo/');
+    });
+    grunt.registerTask('serve-onsen-themes', ['connect', 'serve-message', 'watch:onsen-themes']);
+    grunt.registerTask('serve-ios7-themes', ['connect', 'serve-message', 'watch:ios7-themes']);
+    grunt.registerTask('serve-android4_4-themes', ['connect', 'serve-message', 'watch:android4_4-themes']);
+
 };

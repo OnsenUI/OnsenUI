@@ -24,6 +24,7 @@
     "csv": "*",
     "topdoc-theme": "~0.2.7",
     "grunt-topdoc": "~0.1.3",
-    "grunt-autoprefixer": "~0.2.20130806"
+    "grunt-autoprefixer": "~0.2.20130806",
+    "grunt-contrib-connect": "*"
   }
 }
