@@ -1,3 +1,7 @@
+section.code, section.code * {
+  -webkit-user-select: auto !important;    
+}
+
 html,body{
   margin:0;
   padding:0;
