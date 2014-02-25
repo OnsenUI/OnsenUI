@@ -15,7 +15,7 @@
 * limitations under the License.
 *
 */
-@import button
+@require button
 /*! topdoc
   name: Button
   description: A simple button
@@ -289,7 +289,7 @@
 }
 
 .topcoat-button--large--cta:hover {
-  @extend .topcoat-button--cta:hover
+    @extend .topcoat-button--cta:hover
 }
 
 .topcoat-button--large--cta:focus {
@@ -303,7 +303,6 @@
 .topcoat-button--large--cta:disabled {
   @extend .topcoat-button:disabled
 }
-
 
 .topcoat-button__spinner {
     border: 3px solid var-color;
