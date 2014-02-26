@@ -46,7 +46,7 @@
 					platform = "android";
 				}
 
-				if (navigator.userAgent.match(/BlackBerry/i)) {
+				if ((navigator.userAgent.match(/BlackBerry/i)) || (navigator.userAgent.match(/RIM Tablet OS/i)) || (navigator.userAgent.match(/BB10/i))) {
 					platform = "blackberry";
 				}
 
