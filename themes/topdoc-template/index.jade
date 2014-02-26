@@ -57,15 +57,17 @@ html
 							span.topcoat-icon--large.topcoat-icon--menu-stack
 				#content.max-width
 					article.component
-						div.showcase(style="width:320px; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;")
+
+						// screen1
+						div.showcase(style="width: 320px; height: 640px; position: relative; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;")
 							div(class="topcoat-navigation-bar")
 								div(class="topcoat-navigation-bar__item left quarter", style="float:left")
-									span(class="topcoat-icon-button--quiet", style="vertical-align: middle")
+									span(class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height")
 										i.fa.fa-lg.fa-bars
 								div(class="topcoat-navigation-bar__item center half", style="float:left")
 									span(class="topcoat-navigation-bar__title") Title
 								div(class="topcoat-navigation-bar__item right quarter", style="float:left")
-									span(class="topcoat-icon-button--quiet", style="vertical-align: middle")
+									span(class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height")
 										i.fa.fa-lg.fa-angle-right.fa-2x
 							div.topcoat-list
 								h3.topcoat-list__header Category
@@ -84,7 +86,7 @@ html
 									li.topcoat-list__item Item
 									li.topcoat-list__item Item
 							br
-							div.topcoat-tab-bar.full
+							div.topcoat-tab-bar.full(style="position: absolute; bottom: 0px; left: 0px; right: 0px;")
 								label.topcoat-tab-bar__item
 									input(type="radio", name="tab-bar")
 									button.topcoat-tab-bar__button.full One
@@ -94,15 +96,18 @@ html
 								label.topcoat-tab-bar__item
 									input(type="radio", name="tab-bar")
 									button.topcoat-tab-bar__button.full Three
-						div.showcase(style="width:320px; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;")
+						// screen1 end
+
+						// screen2
+						div.showcase(style="width: 320px; height: 640px; position: relative; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;")
 							div(class="topcoat-navigation-bar")
 								div(class="topcoat-navigation-bar__item left quarter", style="float:left")
-									span(class="topcoat-icon-button--quiet", style="vertical-align: middle")
+									span(class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height")
 										i.fa.fa-lg.fa-bars
 								div(class="topcoat-navigation-bar__item center half", style="float:left")
 									span(class="topcoat-navigation-bar__title") Title
 								div(class="topcoat-navigation-bar__item right quarter", style="float:left")
-									span(class="topcoat-icon-button--quiet", style="vertical-align: middle")
+									span(class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height")
 										i.fa.fa-lg.fa-angle-right.fa-2x
 							div.topcoat-list
 								h3.topcoat-list__header
@@ -148,7 +153,7 @@ html
 									li.topcoat-list__item
 										button.topcoat-button--quiet Button									
 							br
-							div.topcoat-tab-bar.full
+							div.topcoat-tab-bar.full(style="position: absolute; bottom: 0px; left: 0px; right: 0px;")
 								label.topcoat-tab-bar__item
 									input(type="radio", name="tab-bar")
 									button.topcoat-tab-bar__button.full One
@@ -158,6 +163,8 @@ html
 								label.topcoat-tab-bar__item
 									input(type="radio", name="tab-bar")
 									button.topcoat-tab-bar__button.full Three
+						// screen2 end
+
 						div(style="clear: both")
 
 						p: a(href = document.relativeSource)=document.relativeSource
