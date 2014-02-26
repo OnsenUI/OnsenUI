@@ -22,6 +22,7 @@
   modifiers:
     :disabled: Disabled state
   markup:
+    <p>Button Bar</p>
     <div class="topcoat-button-bar">
       <div class="topcoat-button-bar__item">
         <button class="topcoat-button-bar__button">One</button>
@@ -33,14 +34,19 @@
         <button class="topcoat-button-bar__button">Three</button>
       </div>
     </div>
-  ags:
-    - desktop
-    - light
-    - dark
-    - mobile
-    - button
-    - group
-    - bar
+
+    <p>Large Button Bar</p>
+    <div class="topcoat-button-bar">
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button--large">One</button>
+      </div>
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button--large">Two</button>
+      </div>
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button--large">Three</button>
+      </div>
+    </div>
 */
 
 @require topcoat-button
@@ -122,33 +128,7 @@
   z-index: var-border-right--button-bar__button--z-index
   border-right: var-border-right--button-bar__button--focus;
 }
-/*! topdoc
-  name: Large Button Bar
-  description: A button bar, only larger
-  modifiers:
-    :disabled: Disabled state
-  markup:
-    <div class="topcoat-button-bar">
-      <div class="topcoat-button-bar__item">
-        <button class="topcoat-button-bar__button--large">One</button>
-      </div>
-      <div class="topcoat-button-bar__item">
-        <button class="topcoat-button-bar__button--large">Two</button>
-      </div>
-      <div class="topcoat-button-bar__item">
-        <button class="topcoat-button-bar__button--large">Three</button>
-      </div>
-    </div>
-  tags:
-    - desktop
-    - light
-    - dark
-    - mobile
-    - button
-    - group
-    - bar
-    - large
-*/
+
 .topcoat-button-bar__button--large {
   @extend .topcoat-button--large
   border-radius: inherit;

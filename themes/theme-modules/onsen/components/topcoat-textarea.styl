@@ -22,17 +22,15 @@
   modifiers:
     :disabled: Disabled state
   markup:
+    <p>Textarea</p>
     <textarea class="topcoat-textarea" rows="6" cols="36" placeholder="Textarea"></textarea>
     <br>
-    <br>
     <textarea class="topcoat-textarea" rows="6" cols="36" placeholder="Textarea" disabled></textarea>
-  tags:
-    - desktop
-    - light
-    - mobile
-    - form
-    - input
-    - textarea
+
+    <p>Large Textarea</p>
+    <textarea class="topcoat-textarea--large" rows="6" cols="36" placeholder="Textarea"></textarea>
+    <br>
+    <textarea class="topcoat-textarea--large" rows="6" cols="36" placeholder="Textarea" disabled></textarea>
 */
 
 @require '../../common/textarea'
@@ -71,26 +69,6 @@
 
 .topcoat-textarea:disabled:-ms-input-placeholder
   color var-color--focus
-
-
-/*! topdoc
-  name: Large Textarea
-  description: A whole area, just for text; now available in large.
-  modifiers:
-    :disabled: Disabled state
-  markup:
-    <textarea class="topcoat-textarea--large" rows="6" cols="36" placeholder="Textarea"></textarea>
-    <br>
-    <br>
-    <textarea class="topcoat-textarea--large" rows="6" cols="36" placeholder="Textarea" disabled></textarea>
-  tags:
-    - desktop
-    - light
-    - mobile
-    - form
-    - input
-    - textarea
-*/
 
 .topcoat-textarea--large
   @extends .topcoat-textarea

@@ -15,6 +15,7 @@
 * limitations under the License.
 *
 */
+
 /*! topdoc
   name: Button
   description: A simple button
@@ -24,14 +25,31 @@
     :hover: Hover state
     :focus: Focused
   markup:
+    <p>Button</p>
     <button class="topcoat-button">Button</button>
     <button class="topcoat-button" disabled>Button</button>
-  tags:
-    - desktop
-    - light
-    - mobile
-    - button
+
+    <p>Quiet Button</p>
+    <button class="topcoat-button--quiet">Button</button>
+    <button class="topcoat-button--quiet" disabled>Button</button>
+
+    <p>Large Button</p>
+    <button class="topcoat-button--large" >Button</button>
+    <button class="topcoat-button--large" disabled>Button</button>
+
+    <p>Large Quiet Button</p>
+    <button class="topcoat-button--large--quiet" >Button</button>
+    <button class="topcoat-button--large--quiet" disabled>Button</button>
+
+    <p>Call To Action Button</p>
+    <button class="topcoat-button--cta" >Button</button>
+    <button class="topcoat-button--cta" disabled>Button</button>
+
+    <p>Large Call To Action Button</p>
+    <button class="topcoat-button--large--cta" >Button</button>
+    <button class="topcoat-button--large--cta" disabled>Button</button>
 */
+
 @require '../../common/button'
 
 .topcoat-button {
@@ -75,24 +93,6 @@
   @extend .button--disabled
 }
 
-/*! topdoc
-  name: Quiet Button
-  description: A simple, yet quiet button
-  modifiers:
-    :active: Quiet button active state
-    :disabled: Disabled state
-    :hover: Hover state
-    :focus: Focused
-  markup:
-    <button class="topcoat-button--quiet">Button</button>
-    <button class="topcoat-button--quiet" disabled>Button</button>
-  tags:
-    - desktop
-    - light
-    - mobile
-    - button
-    - quiet
-*/
 .topcoat-button--quiet {
     @extend .topcoat-button
     button--quiet()
@@ -130,24 +130,6 @@
     box-shadow: var-box-shadow--down;
 }
 
-/*! topdoc
-  name: Large Button
-  description: A big ol button
-  modifiers:
-    :active: Active state
-    :disabled: Disabled state
-    :hover: Hover state
-    :focus: Focused
-  markup:
-    <button class="topcoat-button--large" >Button</button>
-    <button class="topcoat-button--large" disabled>Button</button>
-  tags:
-    - desktop
-    - light
-    - mobile
-    - button
-    - large
-*/
 .topcoat-button--large {
     @extend .topcoat-button
     font-size: var-font-size--large;
@@ -172,25 +154,6 @@
   @extend .topcoat-button:focus
 }
 
-/*! topdoc
-  name: Large Quiet Button
-  description: A large, yet quiet button
-  modifiers:
-    :active: Active state
-    :disabled: Disabled state
-    :hover: Hover state
-    :focus: Focused
-  markup:
-    <button class="topcoat-button--large--quiet" >Button</button>
-    <button class="topcoat-button--large--quiet" disabled>Button</button>
-  tags:
-    - desktop
-    - light
-    - mobile
-    - button
-    - large
-    - quiet
-*/
 .topcoat-button--large--quiet {
     @extend .topcoat-button--large
     color: var-quiet-button-color;
@@ -214,24 +177,6 @@
   @extend .topcoat-button:focus
 }
 
-/*! topdoc
-  name: Call To Action Button
-  description: A CALL TO ARMS, er, ACTION!
-  modifiers:
-    :active: Active state
-    :disabled: Disabled state
-    :hover: Hover state
-    :focus: Focused
-  markup:
-    <button class="topcoat-button--cta" >Button</button>
-    <button class="topcoat-button--cta" disabled>Button</button>
-  tags:
-    - desktop
-    - light
-    - mobile
-    - button
-    - call to action
-*/
 .topcoat-button--cta {
   @extend .topcoat-button
   border: var-border--cta;
@@ -260,25 +205,6 @@
   @extend .topcoat-button:disabled
 }
 
-/*! topdoc
-  name: Large Call To Action Button
-  description: Like call to action, but bigger
-  modifiers:
-    :active: Active state
-    :disabled: Disabled state
-    :hover: Hover state
-    :focus: Focused
-  markup:
-    <button class="topcoat-button--large--cta" >Button</button>
-    <button class="topcoat-button--large--cta" disabled>Button</button>
-  tags:
-    - desktop
-    - light
-    - mobile
-    - button
-    - large
-    - call to action
-*/
 .topcoat-button--large--cta {
     @extend .topcoat-button--cta
     font-size: var-font-size--large;

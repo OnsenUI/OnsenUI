@@ -22,16 +22,13 @@
   modifiers:
     :disabled: Disabled state
   markup:
+    <p>Search Input</p>
     <input type="search" value="" placeholder="search" class="topcoat-search-input">
     <input type="search" value="" placeholder="search" class="topcoat-search-input" disabled>
-  tags:
-    - desktop
-    - light
-    - mobile
-    - text
-    - input
-    - search
-    - form
+
+    <p>Large Search Input</p>
+    <input type="search" value="" placeholder="search" class="topcoat-search-input--large">
+    <input type="search" value="" placeholder="search" class="topcoat-search-input--large" disabled>
 */
 
 @require '../../common/search-input'
@@ -88,25 +85,6 @@
 
 .topcoat-search-input:disabled:-ms-input-placeholder
   color var-color--focus
-
-/*! topdoc
-  name: Large Search Input
-  description: A large text input designed for searching.
-  modifiers:
-    :disabled: Disabled state
-  markup:
-    <input type="search" value="" placeholder="search" class="topcoat-search-input--large">
-    <input type="search" value="" placeholder="search" class="topcoat-search-input--large" disabled>
-  tags:
-    - desktop
-    - light
-    - mobile
-    - text
-    - input
-    - search
-    - form
-    - large
-*/
 
 .topcoat-search-input--large
   @extend .topcoat-search-input

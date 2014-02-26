@@ -24,18 +24,37 @@
     :hover: Hover state
     :focus: Focused
   markup:
+    <p>Icon Button</p>
     <button class="topcoat-icon-button">
       <span class="topcoat-icon" style="background-color:#A5A7A7;"></span>
     </button>
     <button class="topcoat-icon-button" disabled>
       <span class="topcoat-icon" style="background-color:#A5A7A7;"></span>
     </button>
-  tags:
-    - desktop
-    - light
-    - mobile
-    - button
-    - icon
+
+    <p>Quiet Icon Button</p>
+    <button class="topcoat-icon-button--quiet">
+      <span class="topcoat-icon" style="background-color:#A5A7A7;"></span>
+    </button>
+    <button class="topcoat-icon-button--quiet" disabled>
+      <span class="topcoat-icon" style="background-color:#A5A7A7;"></span>
+    </button>
+
+    <p>Large Icon Button</p>
+    <button class="topcoat-icon-button--large">
+      <span class="topcoat-icon--large" style="background-color:#A5A7A7;"></span>
+    </button>
+    <button class="topcoat-icon-button--large" disabled>
+      <span class="topcoat-icon--large" style="background-color:#A5A7A7;"></span>
+    </button>
+
+    <p>Large Quiet Icon Button</p>
+    <button class="topcoat-icon-button--large--quiet">
+      <span class="topcoat-icon--large" style="background-color:#A5A7A7;"></span>
+    </button>
+    <button class="topcoat-icon-button--large--quiet" disabled>
+      <span class="topcoat-icon--large" style="background-color:#A5A7A7;"></span>
+    </button>
 */
 @require '../../common/button'
 
@@ -71,30 +90,6 @@
   box-shadow var-box-shadow--focus
   outline 0
 
-
-/*! topdoc
-  name: Quiet Icon Button
-  description: Like quiet button, but it has an icon.
-  modifiers:
-    :active: Active state
-    :disabled: Disabled state
-    :hover: Hover state
-    :focus: Focused
-  markup:
-    <button class="topcoat-icon-button--quiet">
-      <span class="topcoat-icon" style="background-color:#A5A7A7;"></span>
-    </button>
-    <button class="topcoat-icon-button--quiet" disabled>
-      <span class="topcoat-icon" style="background-color:#A5A7A7;"></span>
-    </button>
-  tags:
-    - desktop
-    - light
-    - mobile
-    - button
-    - icon
-    - quiet
-*/
 .topcoat-icon-button--quiet
     @extend .topcoat-icon-button
     button--quiet()
@@ -130,29 +125,6 @@
 .topcoat-icon-button--quiet:hover:focus
   @extend .topcoat-icon-button:focus
 
-/*! topdoc
-  name: Large Icon Button
-  description: Like large button, but it has an icon.
-  modifiers:
-    :active: Active state
-    :disabled: Disabled state
-    :hover: Hover state
-    :focus: Focused
-  markup:
-    <button class="topcoat-icon-button--large">
-      <span class="topcoat-icon--large" style="background-color:#A5A7A7;"></span>
-    </button>
-    <button class="topcoat-icon-button--large" disabled>
-      <span class="topcoat-icon--large" style="background-color:#A5A7A7;"></span>
-    </button>
-  tags:
-    - desktop
-    - light
-    - mobile
-    - button
-    - icon
-    - large
-*/
 .topcoat-icon-button--large
     @extend .topcoat-icon-button
     width var-height--large
@@ -171,30 +143,6 @@
 
 .topcoat-icon-button--large:focus
   @extend .topcoat-icon-button:focus
-
-/*! topdoc
-  name: Large Quiet Icon Button
-  description: Like large button, but it has an icon and this one is quiet.
-  modifiers:
-    :active: Active state
-    :disabled: Disabled state
-    :hover: Hover state
-  markup:
-    <button class="topcoat-icon-button--large--quiet">
-      <span class="topcoat-icon--large" style="background-color:#A5A7A7;"></span>
-    </button>
-    <button class="topcoat-icon-button--large--quiet" disabled>
-      <span class="topcoat-icon--large" style="background-color:#A5A7A7;"></span>
-    </button>
-  tags:
-    - desktop
-    - light
-    - mobile
-    - button
-    - icon
-    - large
-    - quiet
-*/
 
 .topcoat-icon-button--large--quiet
     @extend .topcoat-icon-button--large

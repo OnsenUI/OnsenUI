@@ -24,6 +24,7 @@
     :focus: Focused
     :invalid: Hover state
   markup:
+    <p>Text Input</p>
     <input type="text" class="topcoat-text-input" placeholder="text" value="">
     <br>
     <br>
@@ -31,11 +32,15 @@
     <br>
     <br>
     <input type="text" class="topcoat-text-input" placeholder="text" value="fail" pattern="not-fail">
-  tags:
-    - desktop
-    - mobile
-    - text
-    - input
+
+    <p>Large Text Input</p>
+    <input type="text" class="topcoat-text-input--large" value="" placeholder="text">
+    <br>
+    <br>
+    <input type="text" class="topcoat-text-input--large" value="" placeholder="text" disabled>
+    <br>
+    <br>
+    <input type="text" class="topcoat-text-input--large" placeholder="text" value="fail" pattern="not-fail">
 */
 
 @require '../../common/input'
@@ -79,29 +84,6 @@
   border var-border--invalid
   color var-color-invalid
 
-/*! topdoc
-  name: Large Text Input
-  description: A bigger input, still for text.
-  modifiers:
-    :disabled: Disabled state
-    :focus: Focused
-    :invalid: Hover state
-  markup:
-    <input type="text" class="topcoat-text-input--large" value="" placeholder="text">
-    <br>
-    <br>
-    <input type="text" class="topcoat-text-input--large" value="" placeholder="text" disabled>
-    <br>
-    <br>
-    <input type="text" class="topcoat-text-input--large" placeholder="text" value="fail" pattern="not-fail">
-  tags:
-    - desktop
-    - light
-    - mobile
-    - form
-    - input
-    - large
-*/
 .topcoat-text-input--large
   @extend .topcoat-text-input
   line-height var-height--large
