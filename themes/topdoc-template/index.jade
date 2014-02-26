@@ -15,7 +15,13 @@ html
 		link(rel = 'stylesheet', type = 'text/css', href = 'css/main.css')
 		link(rel = 'stylesheet', type = 'text/css', href = 'css/brackets.css')
 		link(href="http://netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.css", rel="stylesheet")
-	body(class=tint)
+
+		script(type='text/javascript', src='../../build/js/angular/angular.js')
+		script(type='text/javascript', src='../../build/js/angular/angular-touch.js')
+		script(type='text/javascript', src='../../build/js/onsenui.js')
+		script(type="text/javascript").
+			var app = angular.module('app', ['onsen.directives', 'ngTouch']);
+	body(class=tint, ng-app='app')
 		#wrapper
 			.max-width
 				#sideNav
@@ -68,7 +74,7 @@ html
 									span(class="topcoat-navigation-bar__title topcoat-navigation-bar__line-height") NavigationBar
 								div(class="topcoat-navigation-bar__item right quarter", style="float:left")
 									span(class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height")
-										span label
+										span Label
 										i.fa.fa-lg.fa-angle-right.fa-2x
 							div.topcoat-list
 								h3.topcoat-list__header Category
