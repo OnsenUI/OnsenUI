@@ -39,23 +39,8 @@
     <button class="topcoat-icon-button--quiet" disabled>
       <span class="topcoat-icon" style="background-color:#A5A7A7;"></span>
     </button>
-
-    <p>Large Icon Button</p>
-    <button class="topcoat-icon-button--large">
-      <span class="topcoat-icon--large" style="background-color:#A5A7A7;"></span>
-    </button>
-    <button class="topcoat-icon-button--large" disabled>
-      <span class="topcoat-icon--large" style="background-color:#A5A7A7;"></span>
-    </button>
-
-    <p>Large Quiet Icon Button</p>
-    <button class="topcoat-icon-button--large--quiet">
-      <span class="topcoat-icon--large" style="background-color:#A5A7A7;"></span>
-    </button>
-    <button class="topcoat-icon-button--large--quiet" disabled>
-      <span class="topcoat-icon--large" style="background-color:#A5A7A7;"></span>
-    </button>
 */
+
 @require '../../common/button'
 
 .topcoat-icon-button
@@ -123,44 +108,6 @@
   @extend .topcoat-icon-button:focus
 
 .topcoat-icon-button--quiet:hover:focus
-  @extend .topcoat-icon-button:focus
-
-.topcoat-icon-button--large
-    @extend .topcoat-icon-button
-    width var-height--large
-    height var-height--large
-    line-height var-height--large
-
-.topcoat-icon-button--large:hover
-  @extend .topcoat-icon-button:hover
-
-.topcoat-icon-button--large:active
-    background-color var-background-color--down
-    box-shadow var-box-shadow--down
-
-.topcoat-icon-button--large:disabled
-    @extend .topcoat-icon-button:disabled
-
-.topcoat-icon-button--large:focus
-  @extend .topcoat-icon-button:focus
-
-.topcoat-icon-button--large--quiet
-    @extend .topcoat-icon-button--large
-    button--quiet()
-
-.topcoat-icon-button--large--quiet:hover
-  @extend .topcoat-icon-button--quiet:hover
-
-.topcoat-icon-button--large--quiet:active
-    @extend .topcoat-icon-button--quiet:active
-
-.topcoat-icon-button--large--quiet:disabled
-  @extend .topcoat-icon-button:disabled
-
-.topcoat-icon-button--large--quiet:focus
-  @extend .topcoat-icon-button:focus
-
-.topcoat-icon-button--large--quiet:hover:focus
   @extend .topcoat-icon-button:focus
 
 .topcoat-icon
