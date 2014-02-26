@@ -97,24 +97,15 @@ module.exports = function(grunt) {
         },
 
         autoprefixer: {
-            dist: {
-                options: {
-                },
-                files: [
-                {
-                    src: 'css/topcoat-mobile-onsen-blue.css',
-                    dest: 'css/topcoat-mobile-onsen-blue.css'
-                },
-                {
-                    src: 'css/topcoat-mobile-onsen-ios7.css',
-                    dest: 'css/topcoat-mobile-onsen-ios7.css'
-                },
-                  {
-                    src: 'css/topcoat-mobile-onsen-android4_4.css',
-                    dest: 'css/topcoat-mobile-onsen-android4_4.css'
-                }]
+            options: {
+                browsers: ['> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2']
+            },
+            multiple_files: {
+                expand: true,
+                flatten: true,
+                src: ['css/*.css', '!css/*.min.css'],
+                dest: 'css'
             }
-
         },
 
         cssmin: {
