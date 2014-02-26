@@ -73,12 +73,10 @@ pre {
   text-align: center;
 }
 #main-header hgroup h1 {
-  font-size: 40px;
+  font-size: 30px;
   margin: 5px 0 0;
-  letter-spacing: -.065em;
-  line-height: 1.1em;
 }
-#main-header hgroup a {
+#main-header hgroup a, a {
   color: #464646;
   text-decoration: none;
 }
@@ -236,11 +234,11 @@ body.dark #content header:before {
 .showcode {
   margin: 10px 0;
 }
-.showcode a, section.examples a {
+.showcode a, section.examples a, a {
   color: #288edf;
   text-decoration: none;
 }
-.showcode a:hover, section.examples a:hover {
+.showcode a:hover, section.examples a:hover, a:hover {
   text-decoration: underline;
 }
 section.examples ul {
@@ -288,25 +286,6 @@ section.examples li {
   border-bottom: 1px solid #58595A;
 }
 
-select.docNav {
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  background: #595B5B;
-  background-image: none;
-  box-shadow: 0 0 0 1px #303233;
-  border: none;
-  border-top: 2px solid #666767;
-  color: #FFF;
-  text-shadow: 0 -1px 0 #000;
-  overflow: hidden;
-  font-size: 14px;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 20px;
-  -webkit-appearance: none;
-  -moz-appearance: button;
-}
 @media screen and (min-width: 650px) {
   #site.open {
     transform: translate3d(0, 0, 0);
@@ -383,24 +362,6 @@ select.docNav {
   }
   body.light #pageNav li {
     border-bottom: 1px solid #E0E0E0;
-  }
-  select.docNav {
-    background: #595B5B;
-    box-shadow: 0 0 0 1px #303233;
-    border: none;
-    border-top: 2px solid #666767;
-    color: #FFF;
-    text-shadow: 0 -1px 0 #000;
-    padding: 3px 20px 4px 8px;
-    -webkit-appearance: none;
-  }
-  body.light select.docNav {
-    box-shadow: 0 0 0 1px #949696;
-    background: #DDE1E1;
-    border-top: 1px solid #FFF;
-    color: #454545;
-    text-shadow: 0 -1px 0 #FFF;
-    width: 192px;
   }
 }
 @media screen and (min-width: 880px) {
