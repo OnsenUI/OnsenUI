@@ -22,15 +22,9 @@
   modifiers:
     :disabled: Disabled state
   markup:
-    <p>Textarea</p>
     <textarea class="topcoat-textarea" rows="6" cols="36" placeholder="Textarea"></textarea>
     <br>
     <textarea class="topcoat-textarea" rows="6" cols="36" placeholder="Textarea" disabled></textarea>
-
-    <p>Large Textarea</p>
-    <textarea class="topcoat-textarea--large" rows="6" cols="36" placeholder="Textarea"></textarea>
-    <br>
-    <textarea class="topcoat-textarea--large" rows="6" cols="36" placeholder="Textarea" disabled></textarea>
 */
 
 @require '../../common/textarea'
@@ -68,25 +62,4 @@
   color var-color--focus
 
 .topcoat-textarea:disabled:-ms-input-placeholder
-  color var-color--focus
-
-.topcoat-textarea--large
-  @extends .topcoat-textarea
-  font-size var-font-size--textarea--large
-  line-height var-line-height--large
-
-.topcoat-textarea--large:focus
-  @extend .topcoat-textarea:focus
-
-.topcoat-textarea--large:disabled
-  @extend .textarea:disabled
-  color var-color--focus
-
-.topcoat-textarea--large:disabled::-webkit-input-placeholder
-  color var-color--focus
-
-.topcoat-textarea--large:disabled::-moz-placeholder
-  color var-color--focus
-
-.topcoat-textarea--large:disabled:-ms-input-placeholder
   color var-color--focus

@@ -22,13 +22,8 @@
   modifiers:
     :disabled: Disabled state
   markup:
-    <p>Search Input</p>
     <input type="search" value="" placeholder="search" class="topcoat-search-input">
     <input type="search" value="" placeholder="search" class="topcoat-search-input" disabled>
-
-    <p>Large Search Input</p>
-    <input type="search" value="" placeholder="search" class="topcoat-search-input--large">
-    <input type="search" value="" placeholder="search" class="topcoat-search-input--large" disabled>
 */
 
 @require '../../common/search-input'
@@ -64,9 +59,7 @@
   box-shadow var-box-shadow--text-input, var-box-shadow--focus
 
 .topcoat-search-input::-webkit-search-cancel-button,
-.topcoat-search-input::-webkit-search-decoration,
-.topcoat-search-input--large::-webkit-search-cancel-button,
-.topcoat-search-input--large::-webkit-search-decoration
+.topcoat-search-input::-webkit-search-decoration
   margin-right 5px
   margin-right var-margin-right--search-decoration
 
@@ -84,33 +77,5 @@
   color var-color--focus
 
 .topcoat-search-input:disabled:-ms-input-placeholder
-  color var-color--focus
-
-.topcoat-search-input--large
-  @extend .topcoat-search-input
-  line-height var-height--large
-  height var-height--large
-  font-size var-font-size--large
-  font-weight var-font-weight
-  padding var-padding--search-input--large
-  border-radius var-border-radius--huge
-  border-radius var-search-input--border-radius
-  background-position 18px center
-  background-size var-font-size--large
-
-.topcoat-search-input--large:focus
-  @extend .topcoat-search-input:focus
-
-.topcoat-search-input--large:disabled
-  @extend .search-input:disabled
-  color var-color--focus
-
-.topcoat-search-input--large:disabled::-webkit-input-placeholder
-  color var-color--focus
-
-.topcoat-search-input--large:disabled::-moz-placeholder
-  color var-color--focus
-
-.topcoat-search-input--large:disabled:-ms-input-placeholder
   color var-color--focus
 

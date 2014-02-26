@@ -22,7 +22,6 @@
   modifiers:
     :disabled: Disabled state
   markup:
-    <p>Button Bar</p>
     <div class="topcoat-button-bar">
       <div class="topcoat-button-bar__item">
         <button class="topcoat-button-bar__button">One</button>
@@ -32,19 +31,6 @@
       </div>
       <div class="topcoat-button-bar__item">
         <button class="topcoat-button-bar__button">Three</button>
-      </div>
-    </div>
-
-    <p>Large Button Bar</p>
-    <div class="topcoat-button-bar">
-      <div class="topcoat-button-bar__item">
-        <button class="topcoat-button-bar__button--large">One</button>
-      </div>
-      <div class="topcoat-button-bar__item">
-        <button class="topcoat-button-bar__button--large">Two</button>
-      </div>
-      <div class="topcoat-button-bar__item">
-        <button class="topcoat-button-bar__button--large">Three</button>
       </div>
     </div>
 */
@@ -78,15 +64,13 @@
   @extend .button-bar__item > input
 }
 
-.topcoat-button-bar__item:first-child > .topcoat-button-bar__button,
-.topcoat-button-bar__item:first-child > .topcoat-button-bar__button--large {
+.topcoat-button-bar__item:first-child > .topcoat-button-bar__button {
   border-left: var-border-left--button-bar__button__first;
   border-right: none;
   border-right: var-border-right--button-bar__button__first;
 }
 
-.topcoat-button-bar__item:last-child > .topcoat-button-bar__button,
-.topcoat-button-bar__item:last-child > .topcoat-button-bar__button--large {
+.topcoat-button-bar__item:last-child > .topcoat-button-bar__button {
   border-left: none;
   border-right: var-border-right--button-bar__button__last;
 }
@@ -101,7 +85,6 @@
 }
 
 .topcoat-button-bar__button:active,
-.topcoat-button-bar__button--large:active,
 :checked + .topcoat-button-bar__button {
   @extend .topcoat-button:active
   background-color: var-background-color--button-bar--button--active
@@ -121,29 +104,10 @@
   color: var-color--button-bar__button--hover
 }
 
-.topcoat-button-bar__button:focus,
-.topcoat-button-bar__button--large:focus {
+.topcoat-button-bar__button:focus {
   @extend .topcoat-button:focus
   z-index: 1;
   z-index: var-border-right--button-bar__button--z-index
   border-right: var-border-right--button-bar__button--focus;
 }
 
-.topcoat-button-bar__button--large {
-  @extend .topcoat-button--large
-  border-radius: inherit;
-  background-color: var-background-color--button-bar;
-  color: var-color--button-bar--button;
-  border: var-border--button-bar__button;
-  border-right: var-border-right--button-bar__button;
-}
-
-.topcoat-button-bar__button--large:disabled {
-  @extend .topcoat-button:disabled
-}
-
-.topcoat-button-bar__button--large:hover {
-  @extend .topcoat-button:hover
-  background-color: var-background-color--button-bar--button--hover
-  color: var-color--button-bar__button--hover
-}

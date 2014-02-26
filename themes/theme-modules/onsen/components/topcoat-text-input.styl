@@ -24,7 +24,6 @@
     :focus: Focused
     :invalid: Hover state
   markup:
-    <p>Text Input</p>
     <input type="text" class="topcoat-text-input" placeholder="text" value="">
     <br>
     <br>
@@ -32,15 +31,6 @@
     <br>
     <br>
     <input type="text" class="topcoat-text-input" placeholder="text" value="fail" pattern="not-fail">
-
-    <p>Large Text Input</p>
-    <input type="text" class="topcoat-text-input--large" value="" placeholder="text">
-    <br>
-    <br>
-    <input type="text" class="topcoat-text-input--large" value="" placeholder="text" disabled>
-    <br>
-    <br>
-    <input type="text" class="topcoat-text-input--large" placeholder="text" value="fail" pattern="not-fail">
 */
 
 @require '../../common/input'
@@ -84,27 +74,3 @@
   border var-border--invalid
   color var-color-invalid
 
-.topcoat-text-input--large
-  @extend .topcoat-text-input
-  line-height var-height--large
-  font-size var-font-size--large
-
-.topcoat-text-input--large:focus
-  @extend .topcoat-text-input:focus
-
-.topcoat-text-input--large:disabled
-  @extend .input:disabled
-  color var-color--focus
-
-.topcoat-text-input--large:disabled::-webkit-input-placeholder
-  color var-color--focus
-
-.topcoat-text-input--large:disabled::-moz-placeholder
-  color var-color--focus
-
-.topcoat-text-input--large:disabled:-ms-input-placeholder
-  color var-color--focus
-
-.topcoat-text-input--large:invalid
-  border var-border--invalid
-  color var-color-invalid
