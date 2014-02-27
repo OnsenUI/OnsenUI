@@ -1,8 +1,5 @@
 /* This file should include color and image variables corresponding to the onsen theme */
 
-//すいっち色　0983ac
-//すいっちはいけい　2d2d2d
-
 /* --------- colors --------- */
 var-color--body = #F3F3F3;
 var-holo-dark-background-color-bar  = #222222 //tab navi
@@ -45,7 +42,7 @@ var-color = var-holo-dark-view-color
 var-color--focus = var-holo-dark-view-color
 var-placeholder-color--input = var-holo-dark-view-color
 
-var-thumb-size = 1.5rem
+var-thumb-size = 24px
 
 /* ---------- darken ---------- */
 var-dark    = 5
@@ -77,7 +74,7 @@ var-color-invalid = #f00
 var-border--invalid = 1px solid #f00
 // var-background-color--input = #d3d7d7
 var-round-border = 50%
-var-width--range__thumb = 2rem
+var-width--range__thumb = 32px
 var-border-radius = 4px
 var-border-radius--large = 0
 
@@ -89,7 +86,7 @@ var-color--cta = var-holo-dark-view-color
 var-color--cta--down = lighten(var-holo-dark-view-color, var-lighter)
 var-background-color--cta = var-holo-dark-disable-color
 var-background-color--cta--down = lighten(var-holo-dark-disable-color, var-lighter)
-var-background-color--cta--hover = var-holo-dark-disable-color//lighten(var-holo-dark-disable-color, var-lighter)
+var-background-color--cta--hover = var-holo-dark-disable-color
 var-border--cta = none
 var-box-shadow--cta = none
 var-box-shadow--cta--down = none
@@ -109,7 +106,7 @@ var-border--icon-button--quite--active = none
 var-menu-stack-icon = url("../img/hamburger_dark.svg")
 
 /* Navigation Bar */
-//var-height--navigation-bar = 44px
+var-height--navigation-bar = 44px
 var-color--navigation-bar = var-text-white
 var-navigation-bar-background-color = var-titlebar-background
 var-border-bottom--navigation-bar = 1px solid var-borders
@@ -159,15 +156,15 @@ var-bar-bg-color = var-background-color--down
 var-progress-bg-color = #e0f0fa
 
 /* Checkbox */
-var-top--checkmark = -0.08rem
-var-left--checkmark = 0.15rem
-var-width--checkmark__tail = 0.85rem
-var-size--checkbox = 1.1rem
+var-top--checkmark = -1px
+var-left--checkmark = 2px
+var-width--checkmark__tail = 14px
+var-size--checkbox = 18px
 var-border-width--checkmark = 4px
 var-border--checkbox = 1px solid var-holo-dark-box-border
 var-border--checkbox--focus = 1px solid var-holo-dark-box-border
 var-border--checkbox--active = 1px solid var-holo-dark-box-border
-var-border--checkmark = 0.01rem solid var-key-color
+var-border--checkmark = 1px solid var-key-color
 var-background-color--checkmark = transparent
 var-background-color--down--checkbox = transparent
 var-border-radius--checkbox = none
@@ -175,9 +172,9 @@ var-border-radius--checkbox = none
 /* Range input */
 var-border--range = none
 var-background-color--range = var-buttons
-var-background-color--range__thumb = rgba(var-buttons, 0.8)//var-view-background
+var-background-color--range__thumb = rgba(var-buttons, 0.8)
 var-range-border = 0px solid var-borders
-var-height--range__track = 0.15rem
+var-height--range__track = 2px
 var-range-background = var-background-color--down
 var-range__slider-border = 0px solid rgba(0, 0, 0, .36)
 var-range__slider-background = url("../img/light-grips.png") center center no-repeat #e5e9e8
@@ -186,9 +183,9 @@ var-range__slider-box-shadow = inset 0 1px 0 rgba(255, 255, 255, .12);
 var-width--range__thumb  = var-thumb-size
 
 /* Radio Button */
-var-position--radio-button--checked = 0.25rem
-var-size--radio-button = 1.2rem
-var-size--radio-button--checked = 0.6rem
+var-position--radio-button--checked = 4px
+var-size--radio-button = 20px
+var-size--radio-button--checked = 10px
 var-color--radio-button = var-borders
 var-border--radio-button = 1px solid var-key-color
 var-border--radio-button--before = 1px solid var-holo-dark-box-border
@@ -212,31 +209,31 @@ var-color--tab-bar--active = var-holo-dark-view-color
 var-background-color--tab-bar__button = transparent
 var-box-shadow--tab-bar--active = none
 var-box-shadow--tab-bar__button--focus = none
-var-padding = 0 1.25rem
+var-padding = 0 20px
 
 /* Switch !*/
-var-top--switch__label--left = -0.05rem
-var-top--switch__label--right = -0.05rem
-var-height--switch = 1rem
-var-height--switch__label--left = 1rem
-var-height--switch__label--right = 1rem
-var-height--switch__toggle = 0.9rem //var-thumb-size
-var-width--switch__toggle = 1.9rem //var-thumb-size
-var-width--switch = 4rem
-var-color--switch__label--left = #39372e//0083e8
-var-background-color--switch__label--left = var-borders //var-switch-color
+var-top--switch__label--left = 1px
+var-top--switch__label--right = -1px
+var-height--switch = 16px
+var-height--switch__label--left = 16px
+var-height--switch__label--right = 16px
+var-height--switch__toggle = 14px
+var-width--switch__toggle = 30px
+var-width--switch = 64px
+var-color--switch__label--left = #39372e
+var-background-color--switch__label--left = var-borders
 var-background-color--switch__label--right = var-borders
-var-background-color--switch__toggle = var-holo-dark-disable-color//#6F6F74
+var-background-color--switch__toggle = var-holo-dark-disable-color
 var-background-color--switch__toggle--checked = #0983ac
 var-border--switch__toggle = 0px solid var-borders
 var-switch--border-radius = 30px
-var-line-height--switch__toggle = 2rem
+var-line-height--switch__toggle = 32px
 var-border-radius--switch__toggle = 0
-var-margin-left--switch__toggle = -1.2rem
-var-margin-left--switch__toggle--checked = 0.8rem
+var-margin-left--switch__toggle = -19px
+var-margin-left--switch__toggle--checked = 13px
 var-margin-bottom--switch__toggle = 0
-var-margin-top--switch__toggle = 0.05rem
-var-margin--switch__label = -0.0rem 0 0 0
+var-margin-top--switch__toggle = 1px
+var-margin--switch__label = 0 0 0 0
 var-border-radius--switch__toggle = 0
 var-switch--border-radius = 0
 var-border-radius--switch__label--left = 0
@@ -256,17 +253,17 @@ var-border-right--button-bar__button__first = 1px solid var-holo-dark-box-border
 var-border-right--button-bar__button__last = 1px solid var-holo-dark-box-border
 var-background-color--button-bar = darken(var-view-background, var-dark)
 var-background-color--button-bar--button--active = lighten(var-holo-dark-key-color, var-lighter) !important
-var-background-color--button-bar--button--hover = var-holo-dark-key-color //lighten(var-buttons, var-light)
+var-background-color--button-bar--button--hover = var-holo-dark-key-color
 var-color--button-bar__button = var-buttons
 var-color--button-bar__button--active = lighten(var-view-background, var-lighter)
 var-color--button-bar__button--hover = var-view-background
 
 /* Button */
 var-background-color__button = var-holo-dark-disable-color
-var-background-color--hover__button = var-holo-dark-disable-color//lighten(var-holo-dark-disable-color, var-lighter)
+var-background-color--hover__button = var-holo-dark-disable-color
 var-background-color--down__button = lighten(var-holo-dark-disable-color, var-lighter)
 var-color__button = var-holo-dark-view-color
-var-color--button--hover = var-holo-dark-view-color//lighten(var-buttons, var-lighter)
+var-color--button--hover = var-holo-dark-view-color
 var-color--button--active = lighten(var-holo-dark-view-color, var-lighter)
 
 var-border--button = none
@@ -283,10 +280,10 @@ var-border__button--quiet = none
 var-notification-border-radius = 50%
 
 /* Search-Input */
-var-background-color--search-input = var-holo-view-background-color //lighten(var-secondary-color, 3)
-var-background-color--search-input--focus = var-holo-view-background-color //var-search-input-background-color--focus
+var-background-color--search-input = var-holo-view-background-color
+var-background-color--search-input--focus = var-holo-view-background-color
 var-search-input--border-radius = 4px
 var-color--search-input = darken(var-holo-dark-view-color, var-darker)
 var-color--search-input--focus = var-holo-dark-view-color
-var-border--search-input = 1px solid var-holo-dark-box-border//none
-var-border--search-input--focus = 1px solid var-holo-dark-box-border//none
+var-border--search-input = 1px solid var-holo-dark-box-border
+var-border--search-input--focus = 1px solid var-holo-dark-box-border
