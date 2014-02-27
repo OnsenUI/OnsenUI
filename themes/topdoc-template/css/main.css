@@ -63,10 +63,10 @@ pre {
 #main-header {
   color: #373435;
   background: #fff;
-  height: 98px;
+  height: 80px;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 10px 20px;
+  padding: 20px 0 0 0;
   position: relative;
 }
 #main-header hgroup {
@@ -74,7 +74,7 @@ pre {
 }
 #main-header hgroup h1 {
   font-size: 30px;
-  margin: 5px 0 0;
+  margin: 0 0 0 14px;
 }
 #main-header hgroup a, a {
   color: #464646;
@@ -171,7 +171,7 @@ pre {
   width: 100%;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 10px 20px 20px 20px;
 }
 /* Code */
 #content section.code {
@@ -322,18 +322,12 @@ section.examples li {
     text-align: left;
     position: absolute;
     display: inline-block;
-    top: 24px;
-  }
-  #main-header hgroup h1 {
-    font-size: 60px;
-  }
-  #main-header hgroup p {
-    font-size: 15px;
+    top: 12px;
   }
   #main-header {
     color: #373435;
     background: #fff;
-    height: 148px;
+    height: 80px;
   }
   #content {
     padding-left: 240px;
@@ -352,7 +346,7 @@ section.examples li {
   }
   #sideNav .combo {
     border-bottom: none;
-    padding: 36px 0;
+    padding: 0px 0;
   }
   #sideNav li a {
     padding: 12px 0 0 10px;
@@ -382,7 +376,7 @@ section.examples li {
   }
   section.code div {
     display: inline-block;
-    width: 48%;
+    width: 100%;
     vertical-align: top;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
