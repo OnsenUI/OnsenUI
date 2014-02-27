@@ -28,7 +28,6 @@ h1 {
 }
 #wrapper {
   width: 100%;
-  overflow-x: hidden;
   background: inherit;
   position: relative;
 }

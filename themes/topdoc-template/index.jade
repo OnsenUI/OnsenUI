@@ -20,7 +20,7 @@ html
 		script(type='text/javascript', src='../../build/js/angular/angular-touch.js')
 		script(type='text/javascript', src='../../build/js/onsenui.js')
 		script(type="text/javascript").
-			var app = angular.module('app', ['onsen.directives', 'ngTouch']);
+			var app = angular.module('app', ['ngTouch', 'onsen.directives']);
 	body(class=tint, ng-app='app')
 		#wrapper
 			.max-width
