@@ -65,7 +65,8 @@ html
 				#content.max-width
 					article.component
 
-						p: a(href = document.relativeSource)='<link rel="stylesheet" type="text/css" href="' + document.relativeSource + '">'
+						header
+							h2=document.title.replace(/Topcoat Mobile/, '') + ' Theme'
 
 						// screen1
 						div.showcase(style="width: 320px; height: 640px; position: relative; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;")
@@ -176,6 +177,16 @@ html
 						// screen2 end
 
 						div(style="clear: both")
+
+						header
+							h2 Using this theme
+
+							section.code(style='display: block')
+								= '<link rel="stylesheet" type="text/css" href="'
+								a(href = document.relativeSource)=document.relativeSource
+								= '">'
+
+						br
 
 					- each component in document.components
 						article.component(id=component.slug)
