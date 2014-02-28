@@ -132,7 +132,7 @@ limitations under the License.
 					animateBackLabelIn: function(inNavigatorItem, outNavigatorItem) {
 						var title = outNavigatorItem.options.title;
 						var inBackLabel = angular.element('<div></div>');
-						inBackLabel.addClass('onsen_navigator-back-label onsen_navigator-item topcoat-navigation-bar__line-height navigate_right');
+						inBackLabel.addClass('onsen_navigator-back-label onsen_navigator-item topcoat-navigation-bar__line-height topcoat-icon-button--quiet navigate_right');
 						inBackLabel.bind('click', this.onLeftButtonClicked.bind(this));
 						this.attachFastClickEvent(inBackLabel[0]);
 						inNavigatorItem.backLabel = inBackLabel;
@@ -144,8 +144,11 @@ limitations under the License.
 						inBackLabel.text(title);
 
 						toolbarContent[0].offsetWidth;
-						inBackLabel.removeClass('navigate_right');
-						inBackLabel.addClass('transition navigate_center topcoat-icon-button--quiet');
+						setTimeout(function(){
+							inBackLabel.removeClass('navigate_right');
+							inBackLabel.addClass('transition navigate_center');
+						}, 10);
+						
 
 						var outLabel = outNavigatorItem.backLabel;
 						if (outLabel) {
@@ -233,11 +236,12 @@ limitations under the License.
 							outTitleElement.unbind(transitionEnded);
 						});
 						inNavigatorItem.titleElement = inTitleElement;
-						element[0].offsetWidth;
-						inTitleElement.removeClass('animate-right');
-						inTitleElement.addClass('animate-center');
-						outTitleElement.removeClass('animate-center');
-						outTitleElement.addClass('transition animate-left');
+						setTimeout(function(){
+							inTitleElement.removeClass('animate-right');
+							inTitleElement.addClass('animate-center');
+							outTitleElement.removeClass('animate-center');
+							outTitleElement.addClass('transition animate-left');
+						}, 10);
 					},
 
 					animateRightButtonIn: function(inNavigatorItem, outNavigatorItem) {
@@ -253,8 +257,10 @@ limitations under the License.
 							}
 
 							rightSection[0].offsetWidth;
-							rightButtonIconElement.removeClass('hide');
-							rightButtonIconElement.addClass('transition show');
+							setTimeout(function(){
+								rightButtonIconElement.removeClass('hide');
+								rightButtonIconElement.addClass('transition show');
+							}, 10);							
 						}
 
 						if (outNavigatorItem && outNavigatorItem.rightButtonIconElement) {
@@ -316,8 +322,11 @@ limitations under the License.
 
 					showBackButton: function() {
 						toolbarContent[0].offsetWidth;
-						leftButtonContainer.removeClass('hide');
-						leftButtonContainer.addClass('transition show');
+						setTimeout(function(){
+							leftButtonContainer.removeClass('hide');
+							leftButtonContainer.addClass('transition show');
+						}, 200);
+						
 					},
 
 					hideBackButton: function() {
@@ -347,9 +356,12 @@ limitations under the License.
 							that.onTransitionEnded();
 						});
 
-						element[0].offsetWidth;
-						inPage.attr("class", "onsen_navigator-pager transition navigator_center");
-						outPage.attr("class", "onsen_navigator-pager transition navigate_left");
+						// wait 10ms fo reflow
+						setTimeout(function(){
+							inPage.attr("class", "onsen_navigator-pager transition navigator_center");
+							outPage.attr("class", "onsen_navigator-pager transition navigate_left");
+						}, 10);
+						
 					},
 
 					animatePageOut: function(currentPage, previousPage) {
