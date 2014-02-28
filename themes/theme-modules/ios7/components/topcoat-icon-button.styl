@@ -20,9 +20,7 @@
 @require '../../common/button'
 
 .topcoat-icon-button
-    @extend .button
     padding var-padding--icon-button
-    line-height var-height
     letter-spacing var-letter-spacing
     color var-color
     text-shadow var-text-shadow
@@ -35,21 +33,15 @@
     border-radius var-border-radius
     border-radius var-icon-button-border-radius
 
-.topcoat-icon-button:hover
-  background-color var-background-color--hover
-  background-color var-background-color--icon-button-quiet--hover  
-
 .topcoat-icon-button:active
-    background-color var-background-color--down
-    box-shadow var-box-shadow--down
+    background-color gray
+
 
 .topcoat-icon-button:disabled
-    @extend .button--disabled
+    disabled()
 
 .topcoat-icon-button:focus
-  border var-border--focus
-  box-shadow var-box-shadow--focus
-  outline 0
+    outline 0
 
 .topcoat-icon-button--quiet
     @extend .topcoat-icon-button
@@ -57,14 +49,6 @@
     background-color var-background-color__icon-button--quiet
     border var-border--icon-button--quiet
     color var-color--icon-button--quiet
-
-.topcoat-icon-button--quiet:hover
-  @extend .topcoat-icon-button:hover
-  text-shadow: var-text-shadow;
-  border: var-border;
-  border: var-border--icon-button--quite--hover
-  box-shadow: var-box-shadow;
-  box-shadow: var-box-shadow--icon-button-quiet--hover;
 
 .topcoat-icon-button--quiet:active
     color var-color
@@ -81,22 +65,22 @@
     @extend .topcoat-icon-button:disabled
 
 .topcoat-icon-button--quiet:focus
-  @extend .topcoat-icon-button:focus
+    @extend .topcoat-icon-button:focus
 
 .topcoat-icon-button--quiet:hover:focus
-  @extend .topcoat-icon-button:focus
+    @extend .topcoat-icon-button:focus
 
 .topcoat-icon
-  inline-block()
-  overflow var-overflow
-  width var-size--icon
-  height var-size--icon
-  vertical-align middle
-  top var-icon-top
+    inline-block()
+    overflow var-overflow
+    width var-size--icon
+    height var-size--icon
+    vertical-align middle
+    top var-icon-top
 
 .topcoat-icon--large
-  @extend .topcoat-icon
-  width var-size--icon--large
-  height var-size--icon--large
-  top var-icon-top--large
+    @extend .topcoat-icon
+    width var-size--icon--large
+    height var-size--icon--large
+    top var-icon-top--large
 

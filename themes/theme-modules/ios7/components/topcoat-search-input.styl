@@ -22,9 +22,9 @@
 
 .topcoat-search-input
   @extend .search-input
-  line-height var-height
-  height var-height
-  font-size var-font-size
+  line-height var-line-height--search-input
+  height var-height--search-input
+  font-size var-font-size--search-input
   border var-border
   border var-border--search-input
   background-color var-background-color--text-input
@@ -40,6 +40,8 @@
   background-position var-background-position--search-input
   background-repeat no-repeat
   background-size var-font-size
+  display block
+  width 100%
 
 .topcoat-search-input:focus
   background-color var-background-color--text-input--focus
@@ -52,7 +54,7 @@
 
 .topcoat-search-input::-webkit-search-cancel-button,
 .topcoat-search-input::-webkit-search-decoration
-  margin-right 5px
+  margin-right 0px
   margin-right var-margin-right--search-decoration
 
 .topcoat-search-input:focus::-webkit-input-placeholder,
