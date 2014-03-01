@@ -22,8 +22,12 @@
 .topcoat-list
   @extend .list
   border-top var-border-top--list-container
-  border-bottom var-border-bottom--list
+  border-bottom var-border-bottom--list-container
   background-color var-background-color--list
+
+.topcoat-list--noborder
+  border-top none
+  border-bottom none
 
 .topcoat-list__header
   @extend .list__header
@@ -35,6 +39,8 @@
   text-shadow var-text-shadow--list-header
   border-top var-border-top--list-header
   border-bottom var-border-bottom--list-header
+  min-height var-min-height--list-header
+  line-height @min-height
 
 .topcoat-list__container
   @extend .list__container
@@ -51,9 +57,22 @@
   border-bottom var-border-bottom--list-item
   color var-color--list-item
   background-color var-background-color--list-item
+  min-height var-min-height--list-item
+  position relative
+
+.topcoat-list__item__line-height
+  line-height var-min-height--list-item
 
 .topcoat-list__item_active:active
   background-color var-background-color--list-item--active
+  transition none
+
+.topcoat-list__item--tappable
+  transition background-color 0.2s linear
+
+.topcoat-list__item--tappable:active
+  background-color var-background-color--list-item--active
+  transition none
 
 .topcoat-list__item:first-child
   padding-left var-padding-left--list-item--first

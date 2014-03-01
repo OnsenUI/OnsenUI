@@ -1,12 +1,12 @@
 /* This file should include color and image variables corresponding to the onsen theme */
 
-var-font-weight = 200
+var-font-weight = 400
 var-font-weight--large = 500
+var-letter-spacing = 0
 
 /* Theme variables: Color */
 
-var-theme-ios7-blue = #157DFB
-var-theme-ios7-blue = #457CFD
+var-theme-ios7-blue = #007AFF
 var-theme-ios7-text-black = #1F1F21
 var-theme-ios7-border = #ddd
 
@@ -47,18 +47,14 @@ var-alpha--low  = 0.1
 
 
 var-thumb-size = 29px
-// var-background-color = var-secondary-color
 var-background--body = var-secondary-color
 var-background-color--down = var-theme-ios7-blue
-// var-background-color--hover = transparent
 var-border = 1px solid var-theme-ios7-blue
 var-box-shadow = none
 var-box-shadow--down = none
-// var-color = var-key-color
 var-text-shadow = 0 1px none
 var-color-invalid = #f00
 var-border--invalid = 1px solid #f00
-// var-background-color--input = #d3d7d7
 var-round-border = 30px
 var-width--range__thumb = 20px
 var-border-radius = 4px
@@ -86,17 +82,14 @@ var-border__button--quiet = none
 var-border--cta = none
 var-box-shadow--cta = none
 var-box-shadow--cta--down = none
-
 var-background-color--cta = #4CDA64
 var-background-color--cta--hover = var-background-color--cta
 var-background-color--cta--down = lighten(var-background-color--cta, 10)
 var-color--cta = white
 var-color--cta--down = white
 
-
-
 /* Page */
-var-background-color--page = #f9f9f9 //var-view-background
+var-background-color--page = #EFEFF4 
 
 /* Icon-Button */
 var-color--icon-button--quiet = var-theme-ios7-blue
@@ -119,47 +112,56 @@ var-navigation-bar-background-color = var-titlebar-background
 var-border-bottom--navigation-bar = 1px solid var-theme-ios7-border
 var-box-shadow--navigation-bar = none
 
-/* Text Input !*/
-var-color--text-input = lighten(var-text-grey, var-lighter)
+/* Text Input */
+var-color--text-input = var-theme-ios7-text-black
 var-color--text-input--focus = var-text-grey
 var-color--placeholder = lighten(var-text-grey, var-lighter)
 var-color--focus = var-theme-ios7-text-black
 var-border--text-input = 1px solid var-theme-ios7-border
-var-border--text-input--focus = 1px solid var-theme-ios7-border
+var-border-color--text-input = var-theme-ios7-border
 var-background-color--text-input = var-view-background
 var-background-color--text-input--focus = var-view-background
+var-font-size--text-input = 15px
+var-line-height--text-input = 31px
+var-padding--text-input = 5px 5px 5px 5px
+var-height--text-input = 31px
 
-/* Text Area !*/
-var-color--textarea = var-text-grey
-var-color--textarea--focus = var-text-grey
-var-border--textarea = none
-var-border--focus--textarea = none
+/* Text Area */
+var-color--textarea = var-theme-ios7-text-black
+var-border--textarea = 1px solid var-theme-ios7-border
+var-border-color--textarea = var-theme-ios7-border
+var-padding--textarea = 5px 5px 5px 5px
+var-box-shadow--textarea = none
 
-/* List !*/
+/* List */
 var-margin--list-item = 0 0 0 0
-var-padding--list-item = 11px 11px 11px 11px
-var-padding-left--list-item--first = 11px
-var-padding-left--list-item--last = 11px
+var-padding--list-item = 0 0 0 10px
+var-padding--list-header = 0 0 0 10px
+var-padding-left--list-item--first = 10px
+var-padding-left--list-item--last = 10px
 var-margin--list-item--first = 0
 var-margin--list-item--last = 0
-var-border-top--list-container = none
+var-min-height--list-item = 44px
+var-min-height--list-header = 24px
+var-border-top--list-container = 1px solid var-theme-ios7-border
 var-border-top--list = none
-var-border-bottom--list = none
+var-border-bottom--list-container = 1px solid var-theme-ios7-border
 var-border-top--list-item--2 = 1px solid var-theme-ios7-border
 var-border-bottom--list-item--first = none
 var-border-top--list-item--last = none
-var-border-top--list-item--first = 1px solid var-theme-ios7-border
+var-border-top--list-item--first = none
 var-border-top--list-item = none
 var-border-bottom--list-item = 1px solid var-theme-ios7-border
-var-border-bottom--list-item--last = 1px solid var-theme-ios7-border
+var-border-bottom--list-item--last = none
 var-border-top--list-header = none
 var-border-bottom--list-header = none
 var-text-shadow--list-header = none
 var-color--list-item = var-list-text-color
 var-color--list-header = var-list-text-color
+var-font-weight--list-header = var-font-weight--large
 var-background-color--list-header = var-list-header-background-color
 var-background-color--list-item = var-view-background
-var-background-color--list-item--active = #BDBEC2
+var-background-color--list-item--active = #D9D9D9
 var-background-color--list = var-list-header-background-color
 var-background-color--list-container = var-view-background
 
@@ -224,7 +226,7 @@ var-line-height--tab-bar__button = 49px
 var-border-top--tab-bar = 1px solid var-tab-bar-border-color
 var-background-color--tab-bar = var-tab-bar-background-color
 var-border--tab-bar__button = none
-var-color--tab-bar__button = var-text-grey
+var-color--tab-bar__button = #888
 var-color--tab-bar--active = var-theme-ios7-blue
 var-background-color--tab-bar__button = transparent
 var-background-color--tab-bar--active = transparent
@@ -309,7 +311,6 @@ var-border--search-input = 1px solid var-theme-ios7-border
 var-border--search-input--focus = 1px solid var-theme-ios7-border
 var-padding--search-input = 5px 0 5px 28px
 var-height--search-input = 31px
-var-line-height--search-input = 23px
 var-line-height--search-input = 31px
 var-font-size--search-input = 15px
 

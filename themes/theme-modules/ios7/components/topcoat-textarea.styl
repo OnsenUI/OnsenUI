@@ -25,22 +25,12 @@
   font-size var-font-size--textarea
   font-weight var-font-weight
   border-radius var-border-radius
-  line-height var-line-height
-  border var-border
   border var-border--textarea
   background-color var-background-color--text-input
-  box-shadow var-box-shadow--text-input
-  color var-color
   color var-color--textarea
   letter-spacing var-letter-spacing
-
-.topcoat-textarea:focus
-  background-color var-background-color--text-input--focus
-  color var-color--focus
-  color var-color--textarea--focus
-  border var-border--focus
-  border var-border--focus--textarea
-  box-shadow var-box-shadow--text-input, var-box-shadow--focus
+  box-shadow var-box-shadow--textarea
+  -webkit-appearance: none;
 
 .topcoat-textarea:disabled
   @extend .textarea:disabled
@@ -53,3 +43,20 @@
 
 .topcoat-textarea:disabled:-ms-input-placeholder
   color var-color--focus
+
+.topcoat-textarea--transparent
+  @extend .topcoat-textarea
+  border none
+  box-shadow none
+
+.topcoat-textarea--transparent:disabled
+  @extend .topcoat-textarea:disabled
+
+.topcoat-textarea--transparent:disabled::-webkit-input-placeholder
+  @extend .topcoat-textarea:disabled::-webkit-input-placeholder
+
+.topcoat-textarea--transparent:disabled::-moz-placeholder
+  @extend .topcoat-textarea:disabled::-moz-placeholder
+
+.topcoat-textarea--transparent:disabled:-ms-input-placeholder
+  @extend .topcoat-textarea:disabled:-ms-input-placeholder
