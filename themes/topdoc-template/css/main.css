@@ -472,3 +472,7 @@ section.examples li {
     pointer-events:none;
   }
 }
+
+.page {
+  position: relative !important;
+}
