@@ -4,18 +4,74 @@
   modifiers:
     :disabled: Disabled state
   markup:
+    <p>Tabbar(label)</p>
     <div class="topcoat-tab-bar">
       <label class="topcoat-tab-bar__item">
-        <input type="radio" name="tab-bar">
-        <button class="topcoat-tab-bar__button">One</button>
+        <input type="radio" name="tab-bar-a" checked="checked">
+        <button class="topcoat-tab-bar__button">
+          <div class="onsen_tab-bar__label">One</div>
+        </button>
       </label>
       <label class="topcoat-tab-bar__item">
-        <input type="radio" name="tab-bar">
-        <button class="topcoat-tab-bar__button">Two</button>
+        <input type="radio" name="tab-bar-a">
+        <button class="topcoat-tab-bar__button">
+          <div class="onsen_tab-bar__label">Two</div>
+        </button>
       </label>
       <label class="topcoat-tab-bar__item">
-        <input type="radio" name="tab-bar">
-        <button class="topcoat-tab-bar__button">Three</button>
+        <input type="radio" name="tab-bar-a">
+        <button class="topcoat-tab-bar__button">
+          <div class="onsen_tab-bar__label">Three</div>
+        </button>
       </label>
+    </div>
+    <br>
+
+    <p>Tabbar(icon+label)</p>
+    <div class="topcoat-tab-bar">
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-home"></i>
+          <div class="onsen_tab-bar__label">Home</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b" checked="checked">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-comment"></i>
+          <div class="onsen_tab-bar__label">Comment</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-gear"></i>
+          <div class="onsen_tab-bar__label">Settings</div>
+        </button>
+      </label> 
+    </div>
+    <br>
+
+    <p>Tabbar(icon)</p>
+    <div class="topcoat-tab-bar">
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-home"></i>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-comment"></i>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-c" checked="checked">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-gear"></i>
+        </button>
+      </label> 
     </div>
 */
