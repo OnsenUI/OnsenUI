@@ -171,6 +171,15 @@ pre {
   box-sizing: border-box;
   padding: 10px 20px 20px 20px;
 }
+#content section.component > div.markup > p {
+  font-size: 12px;
+  color: #999;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 2px 4px;
+  width: auto;
+  display: table;
+}
 /* Code */
 #content section.code {
   margin-top: 16px;
@@ -184,6 +193,7 @@ pre {
   -webkit-border-radius: 1px;
   border-radius: 1px;
   font-weight: 400;
+  display: none;
 }
 article.component {
   padding: 0 0 10px;
@@ -462,9 +472,3 @@ section.examples li {
     pointer-events:none;
   }
 }
-
-
-.page {
-	position: static !important;
-}
-

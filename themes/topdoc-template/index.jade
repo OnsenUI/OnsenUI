@@ -69,7 +69,7 @@ html
 							h2=document.title.replace(/Topcoat Mobile/, '') + ' Theme'
 
 						// screen1
-						div.showcase(style="width: 320px; height: 540px; position: relative; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;")
+						div.showcase.page(style="width: 320px; height: 540px; position: relative; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;")
 							div(class="topcoat-navigation-bar")
 								div(class="topcoat-navigation-bar__item left quarter", style="float:left")
 									span(class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height")
@@ -104,16 +104,14 @@ html
 						// screen1 end
 
 						// screen2
-						div.showcase(style="width: 320px; height: 540px; position: relative; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;")
+						div.showcase.page(style="width: 320px; height: 540px; position: relative; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;")
 							div(class="topcoat-navigation-bar")
 								div(class="topcoat-navigation-bar__item left quarter", style="float:left")
-									span(class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height")
-										i.fa.fa-lg.fa-bars
+									span(class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height") Label
 								div(class="topcoat-navigation-bar__item center half", style="float:left")
 									span(class="topcoat-navigation-bar__title topcoat-navigation-bar__line-height") NavigationBar
 								div(class="topcoat-navigation-bar__item right quarter", style="float:left")
-									span(class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height")
-										i.fa.fa-lg.fa-angle-right.fa-2x
+									span(class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height", style="font-weight:500") Done
 							div.topcoat-list
 								h3.topcoat-list__header 
 								ul.topcoat-list__container
@@ -185,22 +183,19 @@ html
 							header
 								h2=component.name
 							section.component
-								div(style="width: 320px; position: relative;")!=component.markup
+								div.markup(style="width: 320px; position: relative;")!=component.markup
 							- if(component.examples)
 								section.examples
 									h4 Examples
 									ul
 										- each example_url, example_text in component.examples
 											li: a(href = example_url)!= example_text
-							footer
+							footer.showcode
+								a(href="#") Show code snippets
 								section.code
 									div
 										pre.html
 											code(data-language="html")=component.markup
-									//div
-										h3 CSS
-										pre.css
-											code(data-language="css")=component.css
 				footer
 		script(src="js/rainbow-custom.min.js")
 		script(src='js/main.js')
