@@ -19,11 +19,11 @@
 @import '../../common/topdoc-checkbox'
 @require '../../common/checkbox'
 
-.topcoat-checkbox__checkmark
+.topcoat-checkbox > .topcoat-checkbox__checkmark
   @extend .checkbox
   height var-size--checkbox
 
-input[type="checkbox"]
+.topcoat-checkbox > input[type="checkbox"]
   height var-size--checkbox
   width var-size--checkbox
   margin-top 0
@@ -31,20 +31,20 @@ input[type="checkbox"]
   margin-bottom -@height
   margin-left 0
 
-input[type="checkbox"]:checked
+.topcoat-checkbox > input[type="checkbox"]:checked
   background var-background-color-checked--checkbox
 
-input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before
+.topcoat-checkbox > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before
   background var-background-color--before--checkbox
   
-input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after
+.topcoat-bheckbox > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after
   opacity 1
 
 .topcoat-checkbox
   @extend .checkbox__label
   line-height var-size--checkbox
 
-.topcoat-checkbox__checkmark:before
+.topcoat-checkbox > .topcoat-checkbox__checkmark:before
   @extend .checkbox:before
   width var-size--checkbox
   height var-size--checkbox
@@ -56,16 +56,15 @@ input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after
   box-shadow var-box-shadow
   left: 0
 
-.topcoat-checkbox__checkmark
+.topcoat-checkbox > .topcoat-checkbox__checkmark
   @extend .checkbox
   width var-size--checkbox
   height var-size--checkbox
 
-.topcoat-checkbox__checkmark:after
+.topcoat-checkbox > .topcoat-checkbox__checkmark:after
   @extend .checkbox:after
   top var-top--checkmark
   left var-left--checkmark
-  opacity 0
   width var-width--checkmark__tail
   height var-height--checkmark__foot
   background transparent
@@ -76,36 +75,36 @@ input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after
   border-radius var-border-radius--checkmark
   transform var-transform--checkmark
 
-input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before
+.topcoat-checkbox > input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before
   border var-border--focus
   border var-border--checkbox--focus
   box-shadow var-box-shadow--cta, var-box-shadow--focus
 
-input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark
+.topcoat-checkbox > input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark
   @extend .checkbox--disabled
 
-input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before
+.topcoat-checkbox > input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before
   border var-border
   background var-background-color
   box-shadow var-box-shadow
 
 /* No border checkbox */
 
-.topcoat-checkbox--noborder__checkmark
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark
   @extend .checkbox
   height var-size--checkbox
 
-input[type="checkbox"]:checked + .topcoat-checkbox--noborder__checkmark:before
+.topcoat-checkbox--noborder > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before
   background transparent
-  
-input[type="checkbox"]:checked + .topcoat-checkbox--noborder__checkmark:after
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after
   opacity 1
 
 .topcoat-checkbox--noborder
   @extend .checkbox__label
   line-height var-size--checkbox
 
-.topcoat-checkbox--noborder__checkmark:before
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:before
   @extend .checkbox:before
   width var-size--checkbox
   height var-size--checkbox
@@ -115,12 +114,12 @@ input[type="checkbox"]:checked + .topcoat-checkbox--noborder__checkmark:after
   border-radius var-border-radius--checkbox
   left 0
 
-.topcoat-checkbox--noborder__checkmark
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark
   @extend .checkbox
   width var-size--checkbox
   height var-size--checkbox
 
-.topcoat-checkbox--noborder__checkmark:after
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:after
   @extend .checkbox:after
   top var-top--checkmark
   left var-left--checkmark
@@ -135,13 +134,13 @@ input[type="checkbox"]:checked + .topcoat-checkbox--noborder__checkmark:after
   border-radius var-border-radius--checkmark
   transform var-transform--checkmark
 
-input[type="checkbox"]:focus + .topcoat-checkbox--noborder__checkmark:before
+.topcoat-checkbox--noborder > input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before
   box-shadow var-box-shadow--cta, var-box-shadow--focus
 
-input[type="checkbox"]:disabled + .topcoat-checkbox--noborder__checkmark
+.topcoat-checkbox--noborder > input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark
   @extend .checkbox--disabled
 
-input[type="checkbox"]:disabled:active + .topcoat-checkbox--noborder__checkmark:before
+.topcoat-checkbox--noborder > input[type="checkbox"]:disabled:active + .topcoat-checkbox--noborder__checkmark:before
   background var-background-color
   box-shadow var-box-shadow
 
