@@ -39,9 +39,7 @@
 }
 
 .topcoat-button:hover {
-    background-color var-background-color--hover
-    background-color var-background-color--hover__button
-    color: var-color--button--hover;
+    transition: none
 }
 
 .topcoat-button:active {
@@ -77,12 +75,6 @@
 
 .topcoat-button--quiet:hover {
     @extend .topcoat-button:hover
-    text-shadow: var-text-shadow;
-    border: var-border;
-    border: var-border--hover__button--quiet;
-    color: var-quiet-button-color;
-    background-color: var-background-color--quiet-hover;
-    box-shadow: var-box-shadow;
 }
 
 .topcoat-button--quiet:focus {
@@ -143,6 +135,7 @@
     @extend .button--disabled
 }
 .topcoat-button--large--quiet:hover {
+    @extend .topcoat-button:hover
 }
 
 .topcoat-button--large--quiet:focus {
@@ -160,7 +153,7 @@
 }
 
 .topcoat-button--cta:hover {
-  background-color var-background-color--cta--hover
+  @extend .topcoat-button:hover
 }
 
 .topcoat-button--cta:focus {
@@ -189,7 +182,7 @@
 }
 
 .topcoat-button--large--cta:hover {
-    @extend .topcoat-button--cta:hover
+    @extend .topcoat-button:hover
 }
 
 .topcoat-button--large--cta:focus {
