@@ -1,0 +1,208 @@
+- var tint = 'light';
+- if(document.source.indexOf('android') > 0){
+- 	tint = 'dark';
+- }
+!!! 5
+html
+	head
+		meta(charset = 'utf-8')
+		meta('http-equiv' = 'X-UA-Compatible', content = 'IE=edge,chrome=1')
+		title Onsen UI Themes
+		meta(name="viewport", content="user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0, target-densitydpi=medium-dpi")
+
+		link(rel = 'stylesheet', type = 'text/css', href = '../../build/css/onsenui.css')
+		link(rel = 'stylesheet', type = 'text/css', href = document.relativeSource)
+		link(rel = 'stylesheet', type = 'text/css', href = 'css/main.css')
+		link(rel = 'stylesheet', type = 'text/css', href = 'css/brackets.css')
+		link(href="http://netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.css", rel="stylesheet")
+
+		script(type='text/javascript', src='../../build/js/angular/angular.js')
+		script(type='text/javascript', src='../../build/js/angular/angular-touch.js')
+		script(type='text/javascript', src='../../build/js/onsenui.js')
+		script(type="text/javascript").
+			var app = angular.module('app', ['ngTouch', 'onsen.directives']);
+
+	body(class=tint, ng-app='app', ontouchstart='')
+		#wrapper
+			.max-width
+				#sideNav
+					nav.site: ul
+						li: a(href=templateData.homeURL) Home
+						-if(templateData.siteNav)
+							- each siteNavItem, i in templateData.siteNav
+								- if(i == 0)
+									li.selected: a(href=siteNavItem.url)=siteNavItem.text
+								- else
+									li: a(href=siteNavItem.url)=siteNavItem.text
+					div.combo
+						select.docNav
+							- each item in nav
+								- item.title = item.title.replace(/Topcoat Mobile/, '')
+								- if(item.url == document.url)
+									option(value=item.url, selected="selected")=item.title
+								- else
+									option(value=item.url)=item.title
+					#pageNav: ul
+						- each component in document.components
+							li: a(href='#'+component.slug)=component.name
+			#site
+				header#main-header
+					.max-width
+						hgroup
+							h1 Onsen UI Themes
+							p=templateData.subtitle
+						nav
+							ul
+								-if(templateData.siteNav)
+									- each siteNavItem, i in templateData.siteNav
+										- if(i == 0)
+											li.selected: a(href=siteNavItem.url)=siteNavItem.text
+										- else
+											li: a(href=siteNavItem.url)=siteNavItem.text
+								- if(templateData.download)
+									li: a#download-btn(href=templateData.download.url, onclick="_gaq.push(['_trackEvent', 'download', 'click',,, false]);")=templateData.download.label
+						a#slide-menu-button.topcoat-icon-button--large--quiet
+							span.topcoat-icon--large.topcoat-icon--menu-stack
+				#content.max-width
+					article.component
+
+						header
+							h2=document.title.replace(/Topcoat Mobile/, '') + ' Theme'
+
+						// screen1
+						div.showcase.page(style="width: 320px; height: 540px; position: relative; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;")
+							div(class="topcoat-navigation-bar")
+								div(class="topcoat-navigation-bar__item left quarter", style="float:left")
+									span(class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height")
+										i.fa.fa-lg.fa-bars
+								div(class="topcoat-navigation-bar__item center half", style="float:left")
+									span(class="topcoat-navigation-bar__title topcoat-navigation-bar__line-height") NavigationBar
+								div(class="topcoat-navigation-bar__item right quarter", style="float:left")
+									span(class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height")
+										span Label
+										i.fa.fa-lg.fa-angle-right.fa-2x
+							div.topcoat-list--noborder
+								h3.topcoat-list__header Category
+								ul.topcoat-list__container
+									li.topcoat-list__item.topcoat-list__item__line-height Item
+									li.topcoat-list__item.topcoat-list__item__line-height Item
+								h3.topcoat-list__header Category
+								ul.topcoat-list__container
+									li.topcoat-list__item.topcoat-list__item__line-height Item
+									li.topcoat-list__item.topcoat-list__item__line-height Item
+									li.topcoat-list__item.topcoat-list__item__line-height Item
+							br
+							div.topcoat-tab-bar(style="position: absolute; bottom: 0px; left: 0px; right: 0px;")
+								label.topcoat-tab-bar__item
+									input(type="radio", name="tab-bar-screen1", checked="checked")
+									button.topcoat-tab-bar__button
+										i(class="fa fa-2x fa-play fa-rotate-270")
+										div.onsen_tab-bar__label One
+								label.topcoat-tab-bar__item
+									input(type="radio", name="tab-bar-screen1")
+									button.topcoat-tab-bar__button
+										i(class="fa fa-2x fa-circle")
+										div.onsen_tab-bar__label Two
+								label.topcoat-tab-bar__item
+									input(type="radio", name="tab-bar-screen1")
+									button.topcoat-tab-bar__button
+										i(class="fa fa-2x fa-stop")
+										div.onsen_tab-bar__label Three
+						// screen1 end
+
+						// screen2
+						div.showcase.page(style="width: 320px; height: 540px; position: relative; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;")
+							div(class="topcoat-navigation-bar")
+								div(class="topcoat-navigation-bar__item left quarter", style="float:left")
+									span(class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height") Label
+								div(class="topcoat-navigation-bar__item center half", style="float:left")
+									span(class="topcoat-navigation-bar__title topcoat-navigation-bar__line-height") NavigationBar
+								div(class="topcoat-navigation-bar__item right quarter", style="float:left")
+									span(class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height", style="font-weight:500") Done
+							br
+							div.topcoat-list
+								ul.topcoat-list__container
+									li.topcoat-list__item.topcoat-list__item__line-height
+										span Notification
+										span.topcoat-notification(style="position: absolute; right: 8px; bottom: 8px") 20
+									li.topcoat-list__item.topcoat-list__item__line-height
+										span Radio Button
+										div(style="position: absolute; right: 8px; top: 8px;")
+											label.topcoat-radio-button
+												input(type="radio", name="topcoat")
+												div.topcoat-radio-button__checkmark
+											label.topcoat-radio-button OR
+												input(type="radio", name="topcoat")
+												div.topcoat-radio-button__checkmark
+									li.topcoat-list__item.topcoat-list__item__line-height
+										span Checkbox
+										div(style="position: absolute; right: 8px; top: 8px;")
+											label.topcoat-checkbox
+												input(type="checkbox")
+												div.topcoat-checkbox__checkmark											  											
+									li.topcoat-list__item.topcoat-list__item__line-height
+										span Switch
+										div(style="position: absolute; right: 8px; top: 8px;")
+											label.topcoat-switch(style="z-index: 0;")
+												input.topcoat-switch__input(type="checkbox")
+												div.topcoat-switch__toggle
+									li.topcoat-list__item.topcoat-list__item__line-height
+										span Range
+										div(style="position: absolute; right: 8px; top: 8px;")
+											input(type="range", class="topcoat-range")
+								h3.topcoat-list__header Button									
+								ul.topcoat-list__container
+									li.topcoat-list__item(style="padding-top: 8px; padding-bottom: 8px")
+										button.topcoat-button Button
+										button.topcoat-button--cta Button cta
+								h3.topcoat-list__header Quiet Button
+								ul.topcoat-list__container
+									li.topcoat-list__item
+										button.topcoat-button--large--quiet Button									
+							br
+							div.topcoat-tab-bar.full(style="position: absolute; bottom: 0px; left: 0px; right: 0px;")
+								label.topcoat-tab-bar__item
+									input(type="radio", name="tab-bar-screen2")
+									button.topcoat-tab-bar__button.full One
+								label.topcoat-tab-bar__item
+									input(type="radio", name="tab-bar-screen2")
+									button.topcoat-tab-bar__button.full Two
+								label.topcoat-tab-bar__item
+									input(type="radio", name="tab-bar-screen2", checked="checked")
+									button.topcoat-tab-bar__button.full Three
+						// screen2 end
+
+						div(style="clear: both")
+
+						header
+							h2 Using this theme
+
+							section.code(style="display:block; color: #333")
+								= '<link rel="stylesheet" type="text/css" href="'
+								a(href = document.relativeSource)=document.relativeSource
+								= '">'
+
+						br
+
+
+					- each component in document.components
+						article.component(id=component.slug)
+							header
+								h2=component.name
+							section.component
+								div.markup(style="width: 320px; position: relative;")!=component.markup
+							- if(component.examples)
+								section.examples
+									h4 Examples
+									ul
+										- each example_url, example_text in component.examples
+											li: a(href = example_url)!= example_text
+							footer.showcode
+								a(href="#") Show code snippets
+								section.code
+									div
+										pre.html
+											code(data-language="html")=component.markup
+				footer
+		script(src="js/rainbow-custom.min.js")
+		script(src='js/main.js')
