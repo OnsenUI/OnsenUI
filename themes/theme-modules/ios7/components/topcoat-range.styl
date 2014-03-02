@@ -21,13 +21,19 @@ limitations under the License.
   border-radius var-border-radius
   border var-border
   border var-border--range
-  background-color var-background-color--input
-  background-color var-background-color--range
   height var-height--range__track
   border-radius var-border-radius--large
   border-radius var-border-radius--range
 
+  background-image linear-gradient(var-background-color--range, var-background-color--range)
+  background-position center
+  background-size 100% 2px
+  background-repeat no-repeat
+  overflow hidden
+  height 32px
+
 .topcoat-range::-moz-range-track
+  position relative
   border-radius var-border-radius
   border var-border
   background-color var-background-color--input
@@ -38,6 +44,7 @@ limitations under the License.
 
 .topcoat-range::-webkit-slider-thumb
   @extend .range__thumb--webkit
+  position relative
   height var-height
   height var-width--range__thumb
   width var-width--range__thumb
@@ -49,8 +56,26 @@ limitations under the License.
   border-radius var-round-border
   box-shadow var-box-shadow
 
+.topcoat-range::-webkit-slider-thumb:before
+  position absolute
+  top 12px
+  right 0px
+  left -320px
+  width 320px
+  height 2px
+  background-color var-background-color--range-background
+  content ''
+
+.topcoat-range::-webkit-slider-thumb:after
+  position absolute
+  top -12px
+  left -12px
+  padding 25px
+  content ''
+
 .topcoat-range::-moz-range-thumb
   @extend .range__thumb
+  position relative
   height var-height
   width var-width--range__thumb
   background-color var-background-color
@@ -59,16 +84,6 @@ limitations under the License.
   border-radius var-border-radius
   border-radius var-round-border
   box-shadow var-box-shadow
-
-.topcoat-range:focus::-webkit-slider-thumb
-  border var-border--focus
-  border var-border--range__thumb--focus
-  box-shadow var-box-shadow--focus
-
-.topcoat-range:focus::-moz-range-thumb
-  border var-border--focus
-  border var-border--range__thumb--focus
-  box-shadow var-box-shadow--focus
 
 .topcoat-range:disabled
   @extend .range:disabled

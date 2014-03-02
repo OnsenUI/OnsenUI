@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-02-05 */
+/*! onsenui - v0.7.0 - 2014-03-03 */
 angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
@@ -939,8 +939,7 @@ limitations under the License.
 							} else {
 								rightButtonIconElement = angular.element('<i></i>');
 								rightButtonIconElement.addClass(inNavigatorItem.options.rightButtonIcon + ' topcoat-navigation-bar__line-height onsen_fade');
-								// rightSectionIcon.append(rightButtonIconElement);
-								angular.element(toolbar[0].querySelector('#right-section-icon')).append(rightButtonIconElement);
+								angular.element(toolbar[0].querySelector('#right-section-icon')).append(rightButtonIconElement); // fix bug on ios. strange that we cant use rightSectionIcon.append() here
 								inNavigatorItem.rightButtonIconElement = rightButtonIconElement;
 							}
 

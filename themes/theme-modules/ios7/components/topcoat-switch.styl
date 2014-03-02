@@ -23,12 +23,12 @@
   @extend .switch
   font-size var-font-size
   padding 0 20px
-  border-radius var-switch--border-radius
   border var-border
   border var-border--switch
   overflow hidden
   width var-width--switch
   height var-height--switch
+  border-radius var-switch--border-radius
 
 .topcoat-switch__input
   @extend .switch__input
@@ -58,7 +58,6 @@
   height var-line-height
   height var-height--switch__toggle
   width var-width--switch__toggle
-  border-radius var-border-radius
   border-radius var-border-radius--switch__toggle
   color var-color
   text-shadow var-text-shadow
@@ -66,11 +65,11 @@
   background-color var-background-color--switch__toggle
   border var-border
   border var-border--switch__toggle
-  margin-left var-margin-left--switch__toggle
   margin-bottom var-margin-bottom--switch__toggle
   margin-top var-margin-top--switch__toggle
   box-shadow var-box-shadow
   transition var-transition--switch__toggle
+  margin-left var-margin-left--switch__toggle
 
 .topcoat-switch__toggle:after
   @extend .switch__toggle:after
@@ -112,7 +111,8 @@
   transition var-transition--switch__label
 
 
-.topcoat-switch__input:checked + .topcoat-switch__toggle:after,
+.topcoat-switch__input:checked + .topcoat-switch__toggle:after
   box-shadow var-box-shadow--switch__label--after--checked
+
 .topcoat-switch__input + .topcoat-switch__toggle:after
   box-shadow var-box-shadow--switch__label--after

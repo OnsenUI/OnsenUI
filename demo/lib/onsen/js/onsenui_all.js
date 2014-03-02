@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-02-05 */
+/*! onsenui - v0.7.0 - 2014-03-03 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -22096,8 +22096,7 @@ limitations under the License.
 							} else {
 								rightButtonIconElement = angular.element('<i></i>');
 								rightButtonIconElement.addClass(inNavigatorItem.options.rightButtonIcon + ' topcoat-navigation-bar__line-height onsen_fade');
-								// rightSectionIcon.append(rightButtonIconElement);
-								angular.element(toolbar[0].querySelector('#right-section-icon')).append(rightButtonIconElement);
+								angular.element(toolbar[0].querySelector('#right-section-icon')).append(rightButtonIconElement); // fix bug on ios. strange that we cant use rightSectionIcon.append() here
 								inNavigatorItem.rightButtonIconElement = rightButtonIconElement;
 							}
 

@@ -174,11 +174,9 @@ pre {
 #content section.component > div.markup > p {
   font-size: 12px;
   color: #999;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  padding: 2px 4px;
-  width: auto;
-  display: table;
+}
+#content section.component > div.markup > p:after {
+  content: ':';
 }
 /* Code */
 #content section.code {
