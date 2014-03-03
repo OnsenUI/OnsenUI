@@ -12,6 +12,23 @@
   <script src="lib/onsen/js/angular/angular-touch.js"></script>        
   <script src="lib/onsen/js/onsenui.js"></script>    
   <script src="js/app.js"></script>  
+
+  <style type="text/css" media="screen">
+  
+    .icon-alarm {
+      background-image: url(images/icons/alarm.png);
+      width: 30px;
+      height: 30px;
+      background-size: cover;
+    }
+
+    .icon-alarm-active {
+      background-image: url(images/icons/alarm_active.png);
+      width: 30px;
+      height: 30px;
+      background-size: cover;
+    }
+  </style>
   
 </head>
 
@@ -19,19 +36,16 @@
   
   <ons-tabbar>
     <ons-tabbar-item 
-      icon="home"
-      active-icon="twitter"
-      label="Home"
+      icon="icon-alarm"
+      active-icon="icon-alarm-active"
+      label="Alarm 1"
       page="pages/tabbar/page1.html"
       active="true"></ons-tabbar-item> 
-    <ons-tabbar-item 
-      icon="comment"
-      label="Comments"      
-      page="pages/tabbar/page2.html"></ons-tabbar-item> 
-    <ons-tabbar-item 
-      icon="gear"
-      label="Settings"
-      page="pages/tabbar/page3.html"></ons-tabbar-item> 
+    <ons-tabbar-item       
+      icon="icon-alarm"
+      active-icon="icon-alarm-active"
+      label="Alarm 2"
+      page="pages/tabbar/page2.html"></ons-tabbar-item>     
   </ons-tabbar>
  
 </body>
