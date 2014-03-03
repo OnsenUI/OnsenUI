@@ -2037,7 +2037,7 @@ limitations under the License.
 
 					onSwipeTargetWidthChanged: function(targetWidth){
 						if(typeof targetWidth == 'string'){
-							targetWith = targetWidth.replace('px');
+							targetWidth = targetWidth.replace('px');
 						}
 						var width = parseInt(targetWidth);
 						if(width < 0 || !targetWidth){
