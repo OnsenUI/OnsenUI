@@ -56,7 +56,7 @@ limitations under the License.
 
 				this.gotSelected = function(selectedTabItem) {
 					if (selectedTabItem.page) {
-						setPage(selectedTabItem.page);
+						this.setPage(selectedTabItem.page);
 					}
 
 					for (var i = 0; i < tabItems.length; i++) {
@@ -66,7 +66,7 @@ limitations under the License.
 					}
 				};
 
-				function setPage(page) {
+				this.setPage = function(page) {
 					if (page) {
 						$http({
 							url: page,

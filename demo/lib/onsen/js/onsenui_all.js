@@ -22699,11 +22699,10 @@ limitations under the License.
 						pager.bind(TRANSITION_END, function transitionEnded() {
 							that.onTransitionEnded();							
 						});
-						element[0].offsetWidth;
 						setTimeout(function() {
 							pager.attr("class", "screen-page transition screen_center");
 							this.animateInBehindPage();
-						}.bind(this), 0);
+						}.bind(this), 10);
 
 					},
 
@@ -22718,7 +22717,7 @@ limitations under the License.
 
 					onPageAdded: function(page){
 						var blackMask = angular.element(page[0].querySelector('.onsen_screen-black-mask'));
-						// blackMask.removeClass('hide');
+						blackMask.removeClass('hide');
 					},
 
 					presentPage: function(page){
@@ -23194,6 +23193,9 @@ limitations under the License.
 					},
 
 					onSwipeTargetWidthChanged: function(targetWidth){
+						if(typeof targetWidth == 'string'){
+							targetWidth = targetWidth.replace('px', '');
+						}
 						var width = parseInt(targetWidth);
 						if(width < 0 || !targetWidth){
 							this.swipeTargetWidth = this.abovePage.clientWidth;
@@ -23211,6 +23213,9 @@ limitations under the License.
 					},
 
 					recalculateMAX: function(){
+						if(typeof scope.maxSlideDistance == 'string'){
+							scope.maxSlideDistance = scope.maxSlideDistance.replace('px', '');	
+						}
 						if (scope.maxSlideDistance && this.MAX > parseInt(scope.maxSlideDistance, 10)) {
 							this.MAX = parseInt(scope.maxSlideDistance);
 						}
@@ -23387,6 +23392,9 @@ limitations under the License.
 						var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
 						
 						var behind = (x - this.MAX) / this.MAX * 10;
+						if(behind > 0){
+							behind = 0;
+						}
 						var opacity = 1 + behind / 100;
 						var behindTransform = 'translate3d(' + behind + '%, 0, 0)';
 
@@ -23742,13 +23750,16 @@ limitations under the License.
 
 					},
 
-					setSize: function() {
+					setSize: function() {						
+						if(!scope.mainPageWidth){
+							scope.mainPageWidth = "70";
+						}
 						var behindSize = 100 - scope.mainPageWidth.replace('%', '');
 						this.behindPage.style.width = behindSize + '%';
 						this.behindPage.style.opacity = 1;
 						this.abovePage.style.width = scope.mainPageWidth + '%';
 						var translate = this.behindPage.clientWidth;
-						this.translate(translate);
+						this.translateAboveOnly(translate);
 					},
 
 					activateCollapseMode: function() {
@@ -23869,6 +23880,20 @@ limitations under the License.
 						};
 						
 						this.behindPage.style.opacity = opacity;
+						this.currentX = x;
+					},
+
+					translateAboveOnly: function(x) {
+						var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
+						var behindTransform = 'translate3d(0, 0, 0)';
+
+						var property;
+						for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
+							property = BROWSER_TRANSFORMS[i];
+							this.abovePage.style[property] = aboveTransform;
+							this.behindPage.style[property] = behindTransform;
+						};
+												
 						this.currentX = x;
 					}
 				});
@@ -24040,7 +24065,7 @@ limitations under the License.
 
 				this.gotSelected = function(selectedTabItem) {
 					if (selectedTabItem.page) {
-						setPage(selectedTabItem.page);
+						this.setPage(selectedTabItem.page);
 					}
 
 					for (var i = 0; i < tabItems.length; i++) {
@@ -24050,7 +24075,7 @@ limitations under the License.
 					}
 				};
 
-				function setPage(page) {
+				this.setPage = function(page) {
 					if (page) {
 						$http({
 							url: page,
@@ -27879,3 +27904,12 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
 	});
 
 })();
+window.addEventListener('load', function() {
+	new FastClick(document.body);
+
+	setTimeout(function() {
+		// Hide the address bar!
+		window.scrollTo(0, 1);
+	}, 0);
+
+}, false);

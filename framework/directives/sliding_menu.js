@@ -100,6 +100,9 @@ limitations under the License.
 					},
 
 					onSwipeTargetWidthChanged: function(targetWidth){
+						if(typeof targetWidth == 'string'){
+							targetWidth = targetWidth.replace('px', '');
+						}
 						var width = parseInt(targetWidth);
 						if(width < 0 || !targetWidth){
 							this.swipeTargetWidth = this.abovePage.clientWidth;
@@ -117,6 +120,9 @@ limitations under the License.
 					},
 
 					recalculateMAX: function(){
+						if(typeof scope.maxSlideDistance == 'string'){
+							scope.maxSlideDistance = scope.maxSlideDistance.replace('px', '');	
+						}
 						if (scope.maxSlideDistance && this.MAX > parseInt(scope.maxSlideDistance, 10)) {
 							this.MAX = parseInt(scope.maxSlideDistance);
 						}
@@ -293,6 +299,9 @@ limitations under the License.
 						var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
 						
 						var behind = (x - this.MAX) / this.MAX * 10;
+						if(behind > 0){
+							behind = 0;
+						}
 						var opacity = 1 + behind / 100;
 						var behindTransform = 'translate3d(' + behind + '%, 0, 0)';
 

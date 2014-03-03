@@ -66,11 +66,10 @@ limitations under the License.
 						pager.bind(TRANSITION_END, function transitionEnded() {
 							that.onTransitionEnded();							
 						});
-						element[0].offsetWidth;
 						setTimeout(function() {
 							pager.attr("class", "screen-page transition screen_center");
 							this.animateInBehindPage();
-						}.bind(this), 0);
+						}.bind(this), 10);
 
 					},
 
@@ -85,7 +84,7 @@ limitations under the License.
 
 					onPageAdded: function(page){
 						var blackMask = angular.element(page[0].querySelector('.onsen_screen-black-mask'));
-						// blackMask.removeClass('hide');
+						blackMask.removeClass('hide');
 					},
 
 					presentPage: function(page){
