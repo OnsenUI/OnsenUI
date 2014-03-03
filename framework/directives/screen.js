@@ -61,11 +61,12 @@ limitations under the License.
 					},
 
 					animateInCurrentPage: function(pager) {
-						pager.attr("class", "screen-page unmodal");
+						pager.attr("class", "screen-page transition unmodal");
 						var that = this;
 						pager.bind(TRANSITION_END, function transitionEnded() {
 							that.onTransitionEnded();							
 						});
+						element[0].offsetWidth;
 						setTimeout(function() {
 							pager.attr("class", "screen-page transition screen_center");
 							this.animateInBehindPage();
