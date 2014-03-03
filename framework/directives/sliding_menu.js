@@ -299,6 +299,9 @@ limitations under the License.
 						var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
 						
 						var behind = (x - this.MAX) / this.MAX * 10;
+						if(behind > 0){
+							behind = 0;
+						}
 						var opacity = 1 + behind / 100;
 						var behindTransform = 'translate3d(' + behind + '%, 0, 0)';
 
