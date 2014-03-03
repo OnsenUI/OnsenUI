@@ -84,7 +84,7 @@ limitations under the License.
 
 					onPageAdded: function(page){
 						var blackMask = angular.element(page[0].querySelector('.onsen_screen-black-mask'));
-						// blackMask.removeClass('hide');
+						blackMask.removeClass('hide');
 					},
 
 					presentPage: function(page){
