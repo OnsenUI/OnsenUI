@@ -100,12 +100,14 @@ limitations under the License.
 					},
 
 					onSwipeTargetWidthChanged: function(targetWidth){
-						var width = parseInt(targetWidth);
-						if(width < 0 || !targetWidth){
-							this.swipeTargetWidth = this.abovePage.clientWidth;
-						}else{
-							this.swipeTargetWidth = width;
-						}
+						if(targetWidth){
+							var width = parseInt(targetWidth.replace('px'));
+							if(width < 0 || !targetWidth){
+								this.swipeTargetWidth = this.abovePage.clientWidth;
+							}else{
+								this.swipeTargetWidth = width;
+							}
+						}						
 					},
 
 					onWindowResize: function(){
