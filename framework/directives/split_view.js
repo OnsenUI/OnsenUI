@@ -228,13 +228,16 @@ limitations under the License.
 
 					},
 
-					setSize: function() {
+					setSize: function() {						
+						if(!scope.mainPageWidth){
+							scope.mainPageWidth = "70";
+						}
 						var behindSize = 100 - scope.mainPageWidth.replace('%', '');
 						this.behindPage.style.width = behindSize + '%';
 						this.behindPage.style.opacity = 1;
 						this.abovePage.style.width = scope.mainPageWidth + '%';
 						var translate = this.behindPage.clientWidth;
-						this.translate(translate);
+						this.translateAboveOnly(translate);
 					},
 
 					activateCollapseMode: function() {
@@ -355,6 +358,20 @@ limitations under the License.
 						};
 						
 						this.behindPage.style.opacity = opacity;
+						this.currentX = x;
+					},
+
+					translateAboveOnly: function(x) {
+						var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
+						var behindTransform = 'translate3d(0, 0, 0)';
+
+						var property;
+						for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
+							property = BROWSER_TRANSFORMS[i];
+							this.abovePage.style[property] = aboveTransform;
+							this.behindPage.style[property] = behindTransform;
+						};
+												
 						this.currentX = x;
 					}
 				});
