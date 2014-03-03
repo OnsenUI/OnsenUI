@@ -19,18 +19,17 @@ limitations under the License.
 .topcoat-range
   @extend .range
   border-radius var-border-radius
-  border var-border
   border var-border--range
   height var-height--range__track
   border-radius var-border-radius--large
   border-radius var-border-radius--range
 
   background-image linear-gradient(var-background-color--range, var-background-color--range)
-  background-position center
+  background-position left center
   background-size 100% 2px
   background-repeat no-repeat
   overflow hidden
-  height 32px
+  height 31px
 
 .topcoat-range::-moz-range-track
   position relative
@@ -41,11 +40,13 @@ limitations under the License.
   height var-height--range__track
   border-radius var-border-radius--large
   border-radius var-border-radius--none
+  top 0
+  margin 0
+  padding 0
 
 .topcoat-range::-webkit-slider-thumb
   @extend .range__thumb--webkit
   position relative
-  height var-height
   height var-width--range__thumb
   width var-width--range__thumb
   background-color var-background-color
@@ -55,28 +56,14 @@ limitations under the License.
   border-radius var-border-radius
   border-radius var-round-border
   box-shadow var-box-shadow
-
-.topcoat-range::-webkit-slider-thumb:before
-  position absolute
-  top 12px
-  right 0px
-  left -320px
-  width 320px
-  height 2px
-  background-color var-background-color--range-background
-  content ''
-
-.topcoat-range::-webkit-slider-thumb:after
-  position absolute
-  top -12px
-  left -12px
-  padding 25px
-  content ''
+  top 0
+  margin 0
+  padding 0
 
 .topcoat-range::-moz-range-thumb
   @extend .range__thumb
   position relative
-  height var-height
+  height var-width--range__thumb
   width var-width--range__thumb
   background-color var-background-color
   border var-border
@@ -84,6 +71,20 @@ limitations under the License.
   border-radius var-border-radius
   border-radius var-round-border
   box-shadow var-box-shadow
+  margin 0
+  padding 0
+
+.topcoat-range::-webkit-slider-thumb:before
+  position absolute
+  top 13px
+  right 0px
+  left -320px
+  width 320px
+  height 2px
+  background-color var-background-color--range-background
+  content ''
+  margin 0
+  padding 0
 
 .topcoat-range:disabled
   @extend .range:disabled
