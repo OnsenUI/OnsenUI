@@ -19,4 +19,10 @@
 		ng-click="ons.$get('#navigator2').popPage()">
 		Pop
 	</ons-button>
+
+	<h3>Using $event</h3>
+	<ons-button 
+		ng-click="ons.navigator.popPage($event)">
+		Pop Page
+	</ons-button>
 </ons-page>
