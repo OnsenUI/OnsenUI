@@ -101,7 +101,7 @@ limitations under the License.
 
 					onSwipeTargetWidthChanged: function(targetWidth){
 						if(typeof targetWidth == 'string'){
-							targetWidth = targetWidth.replace('px');
+							targetWidth = targetWidth.replace('px', '');
 						}
 						var width = parseInt(targetWidth);
 						if(width < 0 || !targetWidth){
@@ -120,6 +120,9 @@ limitations under the License.
 					},
 
 					recalculateMAX: function(){
+						if(typeof scope.maxSlideDistance == 'string'){
+							scope.maxSlideDistance = scope.maxSlideDistance.replace('px', '');	
+						}
 						if (scope.maxSlideDistance && this.MAX > parseInt(scope.maxSlideDistance, 10)) {
 							this.MAX = parseInt(scope.maxSlideDistance);
 						}
