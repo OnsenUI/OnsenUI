@@ -206,32 +206,11 @@ article.component {
   font-weight: 300;
   margin: 10px 0 25px;
   font-size: 20px;
-  position: relative;
-  display: inline-block;
+  display: block-block;
   padding-right: 10px;
-}
-body.light #content header h2 {
-  background: #fff;
-}
-body.dark #content header h2 {
-  background: #333;
 }
 #content header{
   position: relative;
-}
-#content header:before {
-  content: '';
-  width: 100%;
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 23px;
-}
-body.light #content header:before {
-  border-bottom: 1px solid #E0E0E0;
-}
-body.dark #content header:before {
-  border-bottom: 1px solid #58595A;
 }
 #content pre {
   padding: 0;
