@@ -124,7 +124,16 @@ module.exports = function(grunt) {
 
         watch: {
             options: {
-                livereload: true
+                livereload: 35779
+            },
+
+            'all': {
+                files: [
+                    '../demo/*',
+                    '../demo/**/*',
+                    '../framework/*',
+                    '../framework/**/*'
+                ]
             },
 
             'ios7-themes': {
@@ -142,20 +151,21 @@ module.exports = function(grunt) {
                 tasks: ['gen-onsen-themes', 'topdoc']
             },
 
-            'all': {
+            'all-themes': {
                 files: ['theme-modules/**/*.styl', 'topdoc-template/*', 'topdoc-template/**/*', 'theme-modules/common/*.styl'],
                 tasks: ['build']
             }
         },
 
         connect: {
-            options: {
-                hostname: '0.0.0.0',
-                livereload: true,
-                base: '../'
-            },
-            livereload: {
-                options: { port: 9999 }
+            server: {
+                options : {
+                    hostname: '0.0.0.0',
+                    livereload: true,
+                    base: '../',
+                    port: 9999,
+                    open: true
+                }
             }
         }
 
