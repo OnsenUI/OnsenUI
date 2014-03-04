@@ -196,6 +196,6 @@ module.exports = function(grunt) {
     grunt.registerTask('serve-onsen-themes', ['connect', 'serve-message', 'watch:onsen-themes']);
     grunt.registerTask('serve-ios7-themes', ['connect', 'serve-message', 'watch:ios7-themes']);
     grunt.registerTask('serve-android4_4-themes', ['connect', 'serve-message', 'watch:android4_4-themes']);
-    grunt.registerTask('serve', ['build', 'connect', 'serve-message', 'watch:all']);
+    grunt.registerTask('serve', ['build', 'connect', 'serve-message', 'watch']);
 
 };
