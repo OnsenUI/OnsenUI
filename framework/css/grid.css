@@ -14,7 +14,6 @@
   display: -moz-flex;
   display: -ms-flexbox;
   display: flex;
-  /*padding: 5px;*/
   flex-wrap: wrap;
   width: 100%; }
 
@@ -30,7 +29,6 @@
   -ms-flex: 1;
   flex: 1;
   display: block;
-  padding: 5px;
   width: 100%; }
 
 /* Vertically Align Columns */
@@ -189,17 +187,17 @@
   max-width: 90%; }
 
 
-.row--fit>.col {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -moz-box-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
+.row--fit > .col {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
-.row--100>.col {
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 0 100%;
-    -moz-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
+.row--100 > .col {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 100%;
+  -moz-box-flex: 0;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
 }
