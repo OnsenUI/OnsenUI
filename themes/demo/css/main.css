@@ -55,7 +55,7 @@ h1 {
   -webkit-transform: translate3d(250px, 0, 0);
 }
 pre {
-  font-family: source-code-pro, sans-serif;
+  font-family: menlo, sans-serif;
   font-size: 12px;
 }
 /* Main Header */
@@ -171,19 +171,27 @@ pre {
   box-sizing: border-box;
   padding: 10px 20px 20px 20px;
 }
+#content section.component > div.markup > p {
+  font-size: 12px;
+  color: #999;
+}
+#content section.component > div.markup > p:after {
+  content: ':';
+}
 /* Code */
 #content section.code {
-  display: none;
+  margin-top: 16px;
   background: #FFF;
   border: 1px solid #E0E0E0;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 15px;
-  font-size: 12px;
+  padding: 4px 12px;
+  font-size: 13px;
   -moz-border-radius: 1px;
   -webkit-border-radius: 1px;
   border-radius: 1px;
   font-weight: 400;
+  display: none;
 }
 article.component {
   padding: 0 0 10px;
@@ -198,32 +206,11 @@ article.component {
   font-weight: 300;
   margin: 10px 0 25px;
   font-size: 20px;
-  position: relative;
-  display: inline-block;
+  display: block-block;
   padding-right: 10px;
-}
-body.light #content header h2 {
-  background: #fff;
-}
-body.dark #content header h2 {
-  background: #333;
 }
 #content header{
   position: relative;
-}
-#content header:before {
-  content: '';
-  width: 100%;
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 23px;
-}
-body.light #content header:before {
-  border-bottom: 1px solid #E0E0E0;
-}
-body.dark #content header:before {
-  border-bottom: 1px solid #58595A;
 }
 #content pre {
   padding: 0;
@@ -346,14 +333,21 @@ section.examples li {
     border-bottom: none;
     padding: 0px 0;
   }
+  #sideNav li {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
   #sideNav li a {
-    padding: 12px 0 0 10px;
+    padding: 8px 0 0 0px;
+    height: auto;
+    margin: 0;
+    display: block;
   }
   body.light #sideNav li a {
     color: #797B7B;
   }
   body.light #pageNav li {
-    border-bottom: 1px solid #E0E0E0;
   }
 }
 @media screen and (min-width: 880px) {
@@ -362,9 +356,10 @@ section.examples li {
   }
   #sideNav li a {
     display: block;
-    height: 60px;
-    padding: 22px 0 0 10px;
     text-decoration: none;
+  }
+  #sideNav li a:hover {
+    text-decoration: underline;
   }
   #content header h2 {
     font-size: 28px;
@@ -378,12 +373,6 @@ section.examples li {
     vertical-align: top;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-  }
-  section.code div:first-child {
-    padding-right: 5px;
-  }
-  section.code div:last-child {
-    padding-left: 5px;
   }
   .max-width {
     max-width: 1180px;
@@ -461,8 +450,6 @@ section.examples li {
   }
 }
 
-
 .page {
-	position: static !important;
+  position: relative !important;
 }
-

@@ -2,7 +2,7 @@ window.onload = function(){
 	var showCodeDivs = document.getElementsByClassName('showcode');
 	for (var i = showCodeDivs.length - 1; i >= 0; i--) {
 		showCodeDivs[i].firstChild.onclick = function(e) {
-			var element = e.target.parentNode.nextSibling.nextSibling;
+			var element = e.target.nextSibling.nextSibling;
 			var style = window.getComputedStyle(element);
 			if(style.getPropertyValue('display') == 'none'){
 				e.target.innerHTML = 'Hide code snippets';

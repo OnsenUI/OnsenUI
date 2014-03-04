@@ -1521,7 +1521,6 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
 .topcoat-range {
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  border: 1px solid #1284ff;
   border: none;
   height: 2px;
   border-radius: 0;
@@ -1530,12 +1529,12 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   background-image: -moz-linear-gradient(#1284ff, #1284ff);
   background-image: -o-linear-gradient(#1284ff, #1284ff);
   background-image: linear-gradient(#1284ff, #1284ff);
-  background-position: center;
+  background-position: left center;
   -webkit-background-size: 100% 2px;
   background-size: 100% 2px;
   background-repeat: no-repeat;
   overflow: hidden;
-  height: 32px;
+  height: 31px;
 }
 
 .topcoat-range::-moz-range-track {
@@ -1548,11 +1547,13 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   height: 2px;
   border-radius: 0;
   border-radius: none;
+  top: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .topcoat-range::-webkit-slider-thumb {
   position: relative;
-  height: 36px;
   height: 29px;
   width: 29px;
   background-color: transparent;
@@ -1564,30 +1565,14 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   border-radius: 30px;
   -webkit-box-shadow: none;
   box-shadow: none;
-}
-
-.topcoat-range::-webkit-slider-thumb:before {
-  position: absolute;
-  top: 12px;
-  right: 0px;
-  left: -320px;
-  width: 320px;
-  height: 2px;
-  background-color: #ccc;
-  content: '';
-}
-
-.topcoat-range::-webkit-slider-thumb:after {
-  position: absolute;
-  top: -12px;
-  left: -12px;
-  padding: 25px;
-  content: '';
+  top: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .topcoat-range::-moz-range-thumb {
   position: relative;
-  height: 36px;
+  height: 29px;
   width: 29px;
   background-color: transparent;
   border: 1px solid #1284ff;
@@ -1597,6 +1582,21 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   border-radius: 30px;
   -webkit-box-shadow: none;
   box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+
+.topcoat-range::-webkit-slider-thumb:before {
+  position: absolute;
+  top: 13px;
+  right: 0px;
+  left: -320px;
+  width: 320px;
+  height: 2px;
+  background-color: #ccc;
+  content: '';
+  margin: 0;
+  padding: 0;
 }
 
 /* topdoc
@@ -1605,15 +1605,11 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   modifiers:
     :disabled: Disabled state
   markup:
-    <div style="padding:7px 6px;">
-      <input type="search" value="" placeholder="Search" class="topcoat-search-input">
-    </div>
-    <div style="padding:7px 6px;">
-      <input type="search" value="" placeholder="Search" class="topcoat-search-input" disabled>
-    </div>
-    <div style="padding:7px 6px; background-color:#C9C9CE">
-      <input type="search" value="" placeholder="Search" class="topcoat-search-input">
-    </div>
+    <input type="search" value="" placeholder="Search" class="topcoat-search-input">
+
+    <br>
+
+    <input type="search" value="" placeholder="Search" class="topcoat-search-input" disabled>
 */
 
 .search-input,
@@ -1988,7 +1984,7 @@ input[type="search"]::-webkit-search-cancel-button {
       <label class="topcoat-tab-bar__item">
         <input type="radio" name="tab-bar-bb" checked="checked">
         <button class="topcoat-tab-bar__button">
-          <i class="fa fa-2x fa-square"></i>
+          <i class="fa fa-2x fa-stop"></i>
           <div class="onsen_tab-bar__label">Three</div>
         </button>
       </label> 
@@ -2032,7 +2028,7 @@ input[type="search"]::-webkit-search-cancel-button {
       <label class="topcoat-tab-bar__item">
         <input type="radio" name="tab-bar-c">
         <button class="topcoat-tab-bar__button">
-          <i class="fa fa-2x fa-bookmark"></i>
+          <i class="fa fa-2x fa-play fa-rotate-270"></i>
         </button>
       </label> 
       <label class="topcoat-tab-bar__item">
@@ -2142,22 +2138,22 @@ input[type="search"]::-webkit-search-cancel-button {
     <input type="text" class="topcoat-text-input" placeholder="text" value="fail" pattern="not-fail">
 
     <p>Text Input(transparent)</p>
-    <input type="text" class="topcoat-text-input--transparent" placeholder="text" value="">
+    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="">
     <br>
     <br>
-    <input type="text" class="topcoat-text-input--transparent" placeholder="text" value="" disabled>
+    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="" disabled>
     <br>
     <br>
-    <input type="text" class="topcoat-text-input--transparent" placeholder="text" value="fail" pattern="not-fail">
+    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="fail" pattern="not-fail">
 
     <p>Text Input(underbar)</p>
-    <input type="text" class="topcoat-text-input--underbar" placeholder="text" value="">
+    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="">
     <br>
     <br>
-    <input type="text" class="topcoat-text-input--underbar" placeholder="text" value="" disabled>
+    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="" disabled>
     <br>
     <br>
-    <input type="text" class="topcoat-text-input--underbar" placeholder="text" value="fail" pattern="not-fail">
+    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="fail" pattern="not-fail">
 */
 
 .input,

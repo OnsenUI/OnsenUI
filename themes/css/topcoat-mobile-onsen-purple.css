@@ -98,7 +98,6 @@
   modifiers:
     :active: Active state
     :disabled: Disabled state
-    :hover: Hover state
     :focus: Focused
   markup:
     <p>Button</p>
@@ -110,11 +109,11 @@
     <button class="topcoat-button--quiet" disabled>Button</button>
 
     <p>Large Button</p>
-    <button class="topcoat-button--large" >Button</button>
+    <button class="topcoat-button--large" >Button</button><br>
     <button class="topcoat-button--large" disabled>Button</button>
 
     <p>Large Quiet Button</p>
-    <button class="topcoat-button--large--quiet" >Button</button>
+    <button class="topcoat-button--large--quiet" >Button</button><br>
     <button class="topcoat-button--large--quiet" disabled>Button</button>
 
     <p>Call To Action Button</p>
@@ -122,7 +121,7 @@
     <button class="topcoat-button--cta" disabled>Button</button>
 
     <p>Large Call To Action Button</p>
-    <button class="topcoat-button--large--cta" >Button</button>
+    <button class="topcoat-button--large--cta" >Button</button><br>
     <button class="topcoat-button--large--cta" disabled>Button</button>
 */
 
@@ -283,8 +282,8 @@
 
 .topcoat-button--large,
 .topcoat-button--large--quiet {
-  font-size: 24px;
-  font-weight: 200;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 54px;
   padding: 0 20px;
 }
@@ -327,8 +326,8 @@
 }
 
 .topcoat-button--large--cta {
-  font-size: 24px;
-  font-weight: 200;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 54px;
   padding: 0 20px;
 }
@@ -344,8 +343,22 @@
   modifiers:
     :disabled: Disabled state
   markup:
-    <div class="topcoat-button-bar">
+    <div class="topcoat-button-bar" style="width:280px">
       <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button">One</button>
+      </div>
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button">Two</button>
+      </div>
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button">Three</button>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="topcoat-button-bar" style="width:280px">
+      <div class="topcoat-button-bar__item active">
         <button class="topcoat-button-bar__button">One</button>
       </div>
       <div class="topcoat-button-bar__item">
@@ -470,23 +483,22 @@
   modifiers:
     :active: Active state
     :disabled: Disabled state
-    :hover: Hover state
     :focus: Focused
   markup:
     <p>Icon Button</p>
     <button class="topcoat-icon-button">
-      <i class="fa fa-2x fa-bell" style="color:#aaa"></i>
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
     <button class="topcoat-icon-button" disabled>
-      <i class="fa fa-2x fa-bell" style="color:#aaa"></i>
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
 
     <p>Quiet Icon Button</p>
     <button class="topcoat-icon-button--quiet">
-      <i class="fa fa-2x fa-bell" style="color:#aaa"></i>
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
     <button class="topcoat-icon-button--quiet" disabled>
-      <i class="fa fa-2x fa-bell" style="color:#aaa"></i>
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
 */
 
@@ -587,15 +599,40 @@
     :focus: Focus state
     :disabled: Disabled state
   markup:
+    <p>Checkbox</p>
     <label class="topcoat-checkbox">
       <input type="checkbox">
       <div class="topcoat-checkbox__checkmark"></div>
-      Default
+      OFF
     </label>
-    <br>
-    <br>
+    <br><br>
+    <label class="topcoat-checkbox">
+      <input type="checkbox" checked="checked">
+      <div class="topcoat-checkbox__checkmark"></div>
+      ON
+    </label>
+    <br><br>
     <label class="topcoat-checkbox">
       <input type="checkbox" disabled>
+      <div class="topcoat-checkbox__checkmark"></div>
+      Disabled
+    </label>
+
+    <p>Checkbox(noborder)</p>
+    <label class="topcoat-checkbox--noborder">
+      <input type="checkbox">
+      <div class="topcoat-checkbox__checkmark"></div>
+      OFF
+    </label>
+    <br><br>
+    <label class="topcoat-checkbox--noborder">
+      <input type="checkbox" checked="checked">
+      <div class="topcoat-checkbox__checkmark"></div>
+      ON
+    </label>
+    <br><br>
+    <label class="topcoat-checkbox--noborder">
+      <input type="checkbox" disabled checked="checked">
       <div class="topcoat-checkbox__checkmark"></div>
       Disabled
     </label>
@@ -761,19 +798,77 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   name: List
   description: Topcoat default list skin
   markup:
-    <div class="topcoat-list">
+    <p>List</p>
+    <div class="page">
+      <br>
+      <div class="topcoat-list">
+        <ul class="topcoat-list__container">
+          <li class="topcoat-list__item">
+            <span class="topcoat-list__item__line-height">Item</span>
+          </li>
+          <li class="topcoat-list__item">
+            <span class="topcoat-list__item__line-height">Item</span>
+          </li>
+        </ul>
+      </div>
+      <br>
+    </div>
+    <br>
+    <p>List(noborder)</p>
+    <div class="page">
+      <br>
+      <div class="topcoat-list topcoat-list--noborder">
+        <ul class="topcoat-list__container">
+          <li class="topcoat-list__item">
+            <span class="topcoat-list__item__line-height">Item</span>
+          </li>
+          <li class="topcoat-list__item">
+            <span class="topcoat-list__item__line-height">Item</span>
+          </li>
+          <li class="topcoat-list__item">
+            <span class="topcoat-list__item__line-height">Item</span>
+          </li>
+        </ul>
+      </div>
+      <br>
+    </div>
+    <br>
+    <p>Category Header</p>
+    <div class="topcoat-list topcoat-list--noborder">
       <h3 class="topcoat-list__header">Category</h3>
       <ul class="topcoat-list__container">
-        <li class="topcoat-list__item">
+        <li class="topcoat-list__item topcoat-list__item__line-height">
           Item
         </li>
-        <li class="topcoat-list__item">
-          Item
-        </li>
-        <li class="topcoat-list__item">
+        <li class="topcoat-list__item topcoat-list__item__line-height">
           Item
         </li>
       </ul>
+      <h3 class="topcoat-list__header">Category</h3>
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          Item
+        </li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          Item
+        </li>
+      </ul>
+    </div>
+    <br>
+    <p>Tappable</p>
+    <div class="page">
+      <br>
+      <div class="topcoat-list topcoat-list">
+        <ul class="topcoat-list__container">
+          <li class="topcoat-list__item topcoat-list__item--tappable">
+            <span class="topcoat-list__item__line-height">Tappable Item</span>
+          </li>
+          <li class="topcoat-list__item topcoat-list__item--tappable">
+            <span class="topcoat-list__item__line-height">Tappable Item</span>
+          </li>
+        </ul>
+      </div>
+      <br>
     </div>
 */
 
@@ -810,6 +905,7 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 .topcoat-list__item {
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 .topcoat-list {
@@ -873,8 +969,14 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   markup:
     <div class="topcoat-navigation-bar">
         <div class="topcoat-navigation-bar__item center full">
-            <h1 class="topcoat-navigation-bar__title">Header</h1>
+            <h1 class="topcoat-navigation-bar__title">Navigation Bar</h1>
         </div>
+    </div>
+
+    <br><br><br>
+
+    <div class="topcoat-navigation-bar topcoat-navigation-bar--bottom">
+        <div class="topcoat-navigation-bar__line-height" style="text-align:center">Bottom Toolbar</div>
     </div>
 */
 
@@ -963,8 +1065,8 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 }
 
 .topcoat-navigation-bar__title {
-  font-size: 24px;
-  font-weight: 200;
+  font-size: 16px;
+  font-weight: 500;
   color: #fff;
 }
 
@@ -973,6 +1075,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   description: Notification badge
   markup:
     <span class="topcoat-notification">1</span>
+    <br><br>
+    <span class="topcoat-notification">10</span>
+    <br><br>
+    <span class="topcoat-notification">999</span>
+    <br><br>
+    <span class="topcoat-notification">9999</span>
 */
 
 .notification,
@@ -1017,7 +1125,7 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   description: Default skin for Onsen UI Page
   modifiers:    
   markup:
-    <div class="page">
+    <div class="page" style="height:200px">
     </div>
 */
 
@@ -1229,7 +1337,6 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   modifiers:
     :active: Active state
     :disabled: Disabled state
-    :hover: Hover state
     :focus: Focused
   markup:
     <input type="range" class="topcoat-range">
@@ -1279,7 +1386,7 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   border: none;
   background-color: transparent;
   background-color: #a64a97;
-  height: 0.3rem;
+  height: 5px;
   border-radius: 0;
   border-radius: 3px;
 }
@@ -1290,15 +1397,15 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   border: 1px solid #a64a97;
   background-color: transparent;
   background-color: #a64a97;
-  height: 0.3rem;
+  height: 5px;
   border-radius: 0;
   border-radius: none;
 }
 
 .topcoat-range::-webkit-slider-thumb {
   height: 36px;
-  height: 1rem;
-  width: 1rem;
+  height: 16px;
+  width: 16px;
   background-color: transparent;
   background-color: #fff;
   border: 1px solid #a64a97;
@@ -1312,7 +1419,7 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
 
 .topcoat-range::-moz-range-thumb {
   height: 36px;
-  width: 1rem;
+  width: 16px;
   background-color: transparent;
   border: 1px solid #a64a97;
   border: 1px solid #8a8a8a;
@@ -1343,8 +1450,11 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   modifiers:
     :disabled: Disabled state
   markup:
-    <input type="search" value="" placeholder="search" class="topcoat-search-input">
-    <input type="search" value="" placeholder="search" class="topcoat-search-input" disabled>
+    <input type="search" value="" placeholder="Search" class="topcoat-search-input">
+
+    <br>
+
+    <input type="search" value="" placeholder="Search" class="topcoat-search-input" disabled>
 */
 
 .search-input,
@@ -1561,9 +1671,9 @@ input[type="search"]::-webkit-search-cancel-button {
 
 .topcoat-switch__toggle {
   line-height: 36px;
-  line-height: 2rem;
+  line-height: 32px;
   height: 36px;
-  height: 2rem;
+  height: 32px;
   width: 32px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -1574,7 +1684,7 @@ input[type="search"]::-webkit-search-cancel-button {
   background-color: #fff;
   border: 1px solid #a64a97;
   border: 1px solid #b3b3b3;
-  margin-left: -1.27rem;
+  margin-left: -20px;
   margin-bottom: 0;
   margin-top: 0;
   -webkit-box-shadow: none;
@@ -1650,19 +1760,125 @@ box-shadow var-box-shadow--switch__label--after--checked,
   modifiers:
     :disabled: Disabled state
   markup:
+    <p>Tabbar(label)</p>
     <div class="topcoat-tab-bar">
       <label class="topcoat-tab-bar__item">
-        <input type="radio" name="tab-bar">
-        <button class="topcoat-tab-bar__button">One</button>
+        <input type="radio" name="tab-bar-a" checked="checked">
+        <button class="topcoat-tab-bar__button">
+          <div class="onsen_tab-bar__label">One</div>
+        </button>
       </label>
       <label class="topcoat-tab-bar__item">
-        <input type="radio" name="tab-bar">
-        <button class="topcoat-tab-bar__button">Two</button>
+        <input type="radio" name="tab-bar-a">
+        <button class="topcoat-tab-bar__button">
+          <div class="onsen_tab-bar__label">Two</div>
+        </button>
       </label>
       <label class="topcoat-tab-bar__item">
-        <input type="radio" name="tab-bar">
-        <button class="topcoat-tab-bar__button">Three</button>
+        <input type="radio" name="tab-bar-a">
+        <button class="topcoat-tab-bar__button">
+          <div class="onsen_tab-bar__label">Three</div>
+        </button>
       </label>
+    </div>
+    <br>
+
+    <p>Tabbar(icon+label)</p>
+    <div class="topcoat-tab-bar">
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b" checked="checked">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-comment"></i>
+          <div class="onsen_tab-bar__label">Comments</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-video-camera"></i>
+          <div class="onsen_tab-bar__label">Videos</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-gear"></i>
+          <div class="onsen_tab-bar__label">Settings</div>
+        </button>
+      </label> 
+    </div>
+    <br>
+    <div class="topcoat-tab-bar">
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-bb">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-folder"></i>
+          <div class="onsen_tab-bar__label">One</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-bb">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-heart"></i>
+          <div class="onsen_tab-bar__label">Two</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-bb" checked="checked">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-stop"></i>
+          <div class="onsen_tab-bar__label">Three</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-bb">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-circle"></i>
+          <div class="onsen_tab-bar__label">Four</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-bb">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-cloud"></i>
+          <div class="onsen_tab-bar__label">Five</div>
+        </button>
+      </label> 
+    </div>
+    <br>
+
+    <p>Tabbar(icon)</p>
+    <div class="topcoat-tab-bar">
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-star"></i>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-comment"></i>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-circle"></i>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-play fa-rotate-270"></i>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-c" checked="checked">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-gear"></i>
+        </button>
+      </label> 
     </div>
 */
 
@@ -1719,6 +1935,7 @@ box-shadow var-box-shadow--switch__label--after--checked,
     :focus: Focused
     :invalid: Hover state
   markup:
+    <p>Text Input(border)</p>
     <input type="text" class="topcoat-text-input" placeholder="text" value="">
     <br>
     <br>
@@ -1726,6 +1943,24 @@ box-shadow var-box-shadow--switch__label--after--checked,
     <br>
     <br>
     <input type="text" class="topcoat-text-input" placeholder="text" value="fail" pattern="not-fail">
+
+    <p>Text Input(transparent)</p>
+    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="">
+    <br>
+    <br>
+    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="" disabled>
+    <br>
+    <br>
+    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="fail" pattern="not-fail">
+
+    <p>Text Input(underbar)</p>
+    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="">
+    <br>
+    <br>
+    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="" disabled>
+    <br>
+    <br>
+    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="fail" pattern="not-fail">
 */
 
 .input,
@@ -1802,9 +2037,15 @@ box-shadow var-box-shadow--switch__label--after--checked,
   modifiers:
     :disabled: Disabled state
   markup:
-    <textarea class="topcoat-textarea" rows="6" cols="36" placeholder="Textarea"></textarea>
+    <p>Textarea(border)</p>
+    <textarea class="topcoat-textarea" rows="3" placeholder="Textarea"></textarea>
     <br>
-    <textarea class="topcoat-textarea" rows="6" cols="36" placeholder="Textarea" disabled></textarea>
+    <textarea class="topcoat-textarea" rows="3" placeholder="Textarea" disabled></textarea>
+    <br>
+    <p>Textarea(transparent)</p>
+    <textarea class="topcoat-textarea--transparent" rows="3" placeholder="Textarea"></textarea>
+    <br>
+    <textarea class="topcoat-textarea--transparent" rows="3" placeholder="Textarea" disabled></textarea>
 */
 
 .textarea,
@@ -1834,7 +2075,7 @@ box-shadow var-box-shadow--switch__label--after--checked,
 
 .topcoat-textarea {
   padding: 32px;
-  font-size: 40px;
+  font-size: 16px;
   font-weight: 200;
   -webkit-border-radius: 4px;
   border-radius: 4px;

@@ -1339,13 +1339,8 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
     :disabled: Disabled state
     :focus: Focused
   markup:
-    <p>Range</p>
     <input type="range" class="topcoat-range">
     <input type="range" class="topcoat-range" disabled>
-    <br>
-    <p>Mini Range</p>
-    <input type="range" class="topcoat-range--mini">
-    <input type="range" class="topcoat-range--mini" disabled>
 */
 
 .range,
@@ -1455,15 +1450,11 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   modifiers:
     :disabled: Disabled state
   markup:
-    <div style="padding:7px 6px;">
-      <input type="search" value="" placeholder="Search" class="topcoat-search-input">
-    </div>
-    <div style="padding:7px 6px;">
-      <input type="search" value="" placeholder="Search" class="topcoat-search-input" disabled>
-    </div>
-    <div style="padding:7px 6px; background-color:#C9C9CE">
-      <input type="search" value="" placeholder="Search" class="topcoat-search-input">
-    </div>
+    <input type="search" value="" placeholder="Search" class="topcoat-search-input">
+
+    <br>
+
+    <input type="search" value="" placeholder="Search" class="topcoat-search-input" disabled>
 */
 
 .search-input,
@@ -1835,7 +1826,7 @@ box-shadow var-box-shadow--switch__label--after--checked,
       <label class="topcoat-tab-bar__item">
         <input type="radio" name="tab-bar-bb" checked="checked">
         <button class="topcoat-tab-bar__button">
-          <i class="fa fa-2x fa-square"></i>
+          <i class="fa fa-2x fa-stop"></i>
           <div class="onsen_tab-bar__label">Three</div>
         </button>
       </label> 
@@ -1879,7 +1870,7 @@ box-shadow var-box-shadow--switch__label--after--checked,
       <label class="topcoat-tab-bar__item">
         <input type="radio" name="tab-bar-c">
         <button class="topcoat-tab-bar__button">
-          <i class="fa fa-2x fa-bookmark"></i>
+          <i class="fa fa-2x fa-play fa-rotate-270"></i>
         </button>
       </label> 
       <label class="topcoat-tab-bar__item">
@@ -1954,22 +1945,22 @@ box-shadow var-box-shadow--switch__label--after--checked,
     <input type="text" class="topcoat-text-input" placeholder="text" value="fail" pattern="not-fail">
 
     <p>Text Input(transparent)</p>
-    <input type="text" class="topcoat-text-input--transparent" placeholder="text" value="">
+    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="">
     <br>
     <br>
-    <input type="text" class="topcoat-text-input--transparent" placeholder="text" value="" disabled>
+    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="" disabled>
     <br>
     <br>
-    <input type="text" class="topcoat-text-input--transparent" placeholder="text" value="fail" pattern="not-fail">
+    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="fail" pattern="not-fail">
 
     <p>Text Input(underbar)</p>
-    <input type="text" class="topcoat-text-input--underbar" placeholder="text" value="">
+    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="">
     <br>
     <br>
-    <input type="text" class="topcoat-text-input--underbar" placeholder="text" value="" disabled>
+    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="" disabled>
     <br>
     <br>
-    <input type="text" class="topcoat-text-input--underbar" placeholder="text" value="fail" pattern="not-fail">
+    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="fail" pattern="not-fail">
 */
 
 .input,
