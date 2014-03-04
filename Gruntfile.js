@@ -77,7 +77,7 @@ module.exports = function(grunt) {
           // * Add target browsers here
           // * https://github.com/ai/autoprefixer#browsers
           // * 
-          browsers: ["last 2 version", "Android 4", "iOS 7"]
+          browsers: ['> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6']
 
         },
         files: [{
@@ -99,10 +99,10 @@ module.exports = function(grunt) {
               '*.*'
             ]
           },
-          // topcoat css
+          // themes css
           {
             expand: true,
-            cwd: 'framework/css/topcoat/css',
+            cwd: 'themes/css',
             dest: 'build/css/',
             src: [
               '*.css'
@@ -113,15 +113,6 @@ module.exports = function(grunt) {
             dest: 'build/img/',
             src: [
               '*.*'
-            ]
-          },
-          // fonts
-          {
-            expand: true,
-            cwd: 'framework/css/topcoat/font/',
-            dest: 'build/font/',
-            src: [
-              '*.otf'
             ]
           },
 
@@ -353,7 +344,7 @@ module.exports = function(grunt) {
           'framework/lib/*.js',
           'framework/css/*.css',
           'framework/css/polyfill/*.css',
-          'framework/css/topcoat/css/*.css',
+          'themes/css/*.css',
           'framework/templates/*.tpl',
         ],
         tasks: ['default'],

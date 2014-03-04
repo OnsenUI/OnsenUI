@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.0 - 2014-02-17 */
+/*! onsenui - v1.0.0 - 2014-03-04 */
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
@@ -26,6 +26,9 @@ html {
 body {
     width: 100%;
     height: 100%;
+    position: fixed;    
+    margin: 0;
+    padding: 0;
 }
 
 .align-center {
@@ -71,6 +74,9 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 } 
 
 input {
@@ -93,134 +99,7 @@ select {
     -ms-user-select: initial;
     user-select: initial;   
 }
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
-.zoom-show {
-  -webkit-transition: .25s ease all .001s; /* Chrome */
-  opacity: 0;
-  -webkit-transform: scale(0.6);
-}
-
-.zoom-show.zoom-show-active {
-  opacity: 1;
-  -webkit-transform: scale(1.0);
-}
-
-.zoom-hide {
-  -webkit-transition: .25s ease all .001s; /* Chrome */
-  opacity: 1;
-  -webkit-transform: scale(1.0);
-}
-
-.zoom-hide.zoom-hide-active {
-  opacity: 0;
-  -webkit-transform: scale(0.2);
-}
-
-.zoom-enter {
-  -webkit-transition: .25s ease all .001s; /* Chrome */
-  opacity: 0;
-  -webkit-transform: scale(0.6);
-}
-
-.zoom-enter.zoom-enter-active {
-  opacity: 1;
-  -webkit-transform: scale(1.0);
-}
-
-.zoom-leave {
-  -webkit-transition: .25s ease all .001s; /* Chrome */
-  opacity: 1;
-  -webkit-transform: scale(1.0);
-}
-
-.zoom-leave.zoom-leave-active {
-  opacity: 0;
-  -webkit-transform: scale(0.2);
-}
-
-
-.zoom-big-show {
-  -webkit-transition: .25s ease all .001s; /* Chrome */
-  opacity: 0;
-  -webkit-transform: scale(0.2);
-}
-
-.zoom-big-show.zoom-big-show-active {
-  opacity: 1;
-  -webkit-transform: scale(1.0);
-}
-
-.zoom-big-hide {
-  -webkit-transition: .25s ease all .001s; /* Chrome */
-  opacity: 1;
-  -webkit-transform: scale(1.0);
-}
-
-.zoom-big-hide.zoom-big-hide-active {
-  opacity: 0.1;
-  -webkit-transform: scale(0.6);
-}
-
-
-
-.reveal-show {
-  -webkit-transition: .5s ease-out all .005s; /* Chrome */
-  max-height: 0;
-}
-
-.reveal-show.reveal-show-active {
-  max-height: 500px;
-}
-
-.reveal-hide {
-  -webkit-transition: .3s ease-out all .001s; /* Chrome */
-  max-height: 500px;
-}
-
-.reveal-hide.reveal-hide-active {
-  max-height: 0;
-}
-
-
-
-.slide-enter {
-  -webkit-transition: .25s ease all .001s; /* Chrome */
-  line-height: 0;
-  -webkit-transform: scale(0.6);
-}
-
-.slide-enter.slide-enter-active {
-  line-height: 100%;
-  -webkit-transform: scale(1.0);
-}
-
-.slide-leave {
-  -webkit-transition: .25s ease all .001s; /* Chrome */
-  line-height: 100%;
-  -webkit-transform: scale(1.0);
-}
-
-.slide-leave.slide-leave-active {
-  line-height: 0;
-  -webkit-transform: scale(0.2);
-}
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
@@ -246,6 +125,9 @@ ons-screen {
   width: 100%;
   height: 100%;
   -webkit-perspective: 600px;
+  -moz-perspective: 600px;
+  -ms-perspective: 600px;
+  -o-perspective: 600px;
   perspective: 600px;
   position: relative;  
   overflow: hidden;    
@@ -253,8 +135,14 @@ ons-screen {
 
 .screen-page {
   -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
   transform-style: preserve-3d;        
   -webkit-transform-origin: 100% 100%;        
+  -moz-transform-origin: 100% 100%;        
+  -ms-transform-origin: 100% 100%;        
+  -o-transform-origin: 100% 100%;        
   transform-origin: 100% 100%;
   position: absolute;
   top: 0;
@@ -286,21 +174,33 @@ ons-screen {
 
 .screen-page.screen_center {
     -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);   
+    -webkit-box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.1);   
     box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.1);
 }
 
 
 .screen-page.unmodal {
     -webkit-transform: translate3d(0, 100%, 0) !important;
+    -moz-transform: translate3d(0, 100%, 0) !important;
+    -ms-transform: translate3d(0, 100%, 0) !important;
+    -o-transform: translate3d(0, 100%, 0) !important;
     transform: translate3d(0, 100%, 0) !important;    
+    -webkit-box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.2);    
     box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.2);    
 }
 
 .screen-page.transition .screen-page__container{
   -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
   transition-duration: 400ms;
   -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
   animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
@@ -311,15 +211,25 @@ ons-screen {
 
 .screen-page.transition {
     -webkit-transition-duration: 400ms;
+    -moz-transition-duration: 400ms;
+    -o-transition-duration: 400ms;
     transition-duration: 400ms;
     -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+    -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+    -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
     animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
 .screen-page.modal-behind {    
     -webkit-transform-style: preserve-3d;    
+    -moz-transform-style: preserve-3d;    
+    -ms-transform-style: preserve-3d;    
+    -o-transform-style: preserve-3d;    
     transform-style: preserve-3d;  
     -webkit-transform: translate3d(0, -10%, 0);  
+    -moz-transform: translate3d(0, -10%, 0);  
+    -ms-transform: translate3d(0, -10%, 0);  
+    -o-transform: translate3d(0, -10%, 0);  
     transform: translate3d(0, -10%, 0);    
 }
 
@@ -367,41 +277,58 @@ limitations under the License.
 
 .onsen_navigator-pager.navigate_left {
     -webkit-transform: translate3d(-25%, 0, 0);
+    -moz-transform: translate3d(-25%, 0, 0);
+    -ms-transform: translate3d(-25%, 0, 0);
+    -o-transform: translate3d(-25%, 0, 0);
     transform: translate3d(-25%, 0, 0);    
     /*box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);*/    
 }
 
-.onsen_navigator-pager.navigate_left .page {
+.onsen_navigator-pager.navigate_left .navigator-page {
   opacity: 0.9;
 }
 
 .onsen_navigator-pager.navigator_center {
     -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     /*box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.02);*/
 }
 
-.onsen_navigator-pager.navigator_center .page {
+.onsen_navigator-pager.navigator_center .navigator-page {
   opacity: 1;
 }
 
 .onsen_navigator-pager.navigate_right {
     -webkit-transform: translate3d(100%, 0, 0);
+    -moz-transform: translate3d(100%, 0, 0);
+    -ms-transform: translate3d(100%, 0, 0);
+    -o-transform: translate3d(100%, 0, 0);
     transform: translate3d(100%, 0, 0);
     /*box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);*/
 }
 
 .onsen_navigator-pager.transition {
     -webkit-transition-duration: 400ms;
+    -moz-transition-duration: 400ms;
+    -o-transition-duration: 400ms;
     transition-duration: 400ms;
     -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+    -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+    -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
     animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.onsen_navigator-pager .page {
+.onsen_navigator-pager .navigator-page {
     -webkit-transition-duration: 400ms;
+    -moz-transition-duration: 400ms;
+    -o-transition-duration: 400ms;
     transition-duration: 400ms;
     -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+    -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+    -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
     animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
@@ -415,16 +342,25 @@ limitations under the License.
 
 .onsen_navigator-title.animate-right {
   -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -o-transform: translateX(100%);
   transform: translateX(100%); opacity: 0;
 }
 
 .onsen_navigator-title.animate-center {
   -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
   transform: translateX(0); opacity: 1;
 }
 
 .onsen_navigator-title.animate-left {
   -webkit-transform: translateX(-36%);
+  -moz-transform: translateX(-36%);
+  -ms-transform: translateX(-36%);
+  -o-transform: translateX(-36%);
   transform: translateX(-36%); opacity: 0;
 }
 
@@ -437,19 +373,25 @@ limitations under the License.
 /* TODO: */
 .onsen_navigator-title.transition {
   -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
   transition-duration: 400ms;
   -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
   animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
 .onsen_navigator__left-button-container.transition{
   -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
   transition-duration: 400ms;
   -webkit-animation-timing-function: cubic-bezier(.99,.01,.99,.01);
+  -moz-animation-timing-function: cubic-bezier(.99,.01,.99,.01);
+  -o-animation-timing-function: cubic-bezier(.99,.01,.99,.01);
   animation-timing-function: cubic-bezier(.99,.01,.99,.01);
 }
-
-
 
 .onsen_navigator__left-button-container.hide {
   opacity: 0;
@@ -474,10 +416,16 @@ limitations under the License.
 
 .onsen_fade.transition{
   -webkit-transition-duration: 400ms;
+  -moz-transition-duration: 400ms;
+  -o-transition-duration: 400ms;
   transition-duration: 400ms;
   -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
   animation-timing-function: cubic-bezier(.1, .7, .1, 1);
   -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
   transition-property: opacity;
 }
 
@@ -498,7 +446,6 @@ limitations under the License.
 
 
 .onsen_navigator-back-label {
-    font-weight: lighter !important;
     width: 25%;
     left: 0;
     text-align: left !important;
@@ -508,27 +455,43 @@ limitations under the License.
 
 .onsen_navigator-back-label.transition {
     -webkit-transition-duration: 400ms;
+    -moz-transition-duration: 400ms;
+    -o-transition-duration: 400ms;
     transition-duration: 400ms;
     -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+    -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+    -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
     animation-timing-function: cubic-bezier(.1, .7, .1, 1);
     -webkit-transition-property: -webkit-transform, opacity;
+    -moz-transition-property: -moz-transform, opacity;
+    -o-transition-property: -o-transform, opacity;
     transition-property: transform, opacity;
 }
 
 .onsen_navigator-back-label.navigate_right {
     -webkit-transform: translateX(120%);
+    -moz-transform: translateX(120%);
+    -ms-transform: translateX(120%);
+    -o-transform: translateX(120%);
     transform: translateX(120%); opacity: 0;
 }
 
 .onsen_navigator-back-label.navigator_center {
     -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
     transform: translateX(0); opacity: 1;
 }
 
 .onsen_navigator-back-label.navigate_left {
     -webkit-transform: translateX(-60%);
+    -moz-transform: translateX(-60%);
+    -ms-transform: translateX(-60%);
+    -o-transform: translateX(-60%);
     transform: translateX(-60%); opacity: 0;
 }
+
 .effeckt-button {
   position: relative;
   font-family: inherit;
@@ -550,6 +513,7 @@ limitations under the License.
   opacity: 0;
   /*border: 3px solid #fff; specified in topcoat theme. .topcoat-button__spinner*/
   border-bottom: 0;
+  -webkit-border-radius: 40px 40px 0 0;
   border-radius: 40px 40px 0 0;
   -webkit-transform-origin: bottom center;
   background: transparent;
@@ -557,6 +521,8 @@ limitations under the License.
 
 .effeckt-button[data-loading] .spinner {
   -webkit-animation: spinner .8s infinite linear;
+  -o-animation: spinner .8s infinite linear;
+  -moz-animation: spinner .8s infinite linear;
   animation: spinner .8s infinite linear;
 }
 
@@ -577,19 +543,71 @@ limitations under the License.
   }
 }
 
-@keyframes spinner {
+@-o-keyframes spinner {
+  0% {
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  50% {
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes spinner {
   0% {
     -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
     transform: rotate(0deg);
   }
 
   50% {
     -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
     transform: rotate(180deg);
   }
 
   100% {
     -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  50% {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -598,10 +616,16 @@ limitations under the License.
 .effeckt-button .spinner,
 .effeckt-button .label {
   -webkit-transition-property: padding, opacity, left, right, top, bottom, margin;
+  -moz-transition-property: padding, opacity, left, right, top, bottom, margin;
+  -o-transition-property: padding, opacity, left, right, top, bottom, margin;
   transition-property: padding, opacity, left, right, top, bottom, margin;
   -webkit-transition-duration: 500ms;
+  -moz-transition-duration: 500ms;
+  -o-transition-duration: 500ms;
   transition-duration: 500ms;
   -webkit-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -moz-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  -o-transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);  
 }
 
@@ -612,6 +636,8 @@ limitations under the License.
 .effeckt-button.zoom-out .spinner,
 .effeckt-button.zoom-out .label {
   -webkit-transition: 500ms ease all;
+  -o-transition: 500ms ease all;
+  -moz-transition: 500ms ease all;
   transition: 500ms ease all;
 }
 
@@ -780,6 +806,9 @@ limitations under the License.
   left: 50%;
   margin-left: -16px;
   -webkit-transform: scale(2.5);
+  -ms-transform: scale(2.5);
+  -o-transform: scale(2.5);
+  -moz-transform: scale(2.5);
   transform: scale(2.5);
 }
 
@@ -791,12 +820,18 @@ limitations under the License.
 .effeckt-button.zoom-out[data-loading] .label {
   opacity: 0;
   -webkit-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  -moz-transform: scale(0.5);
   transform: scale(0.5);
 }
 
 .effeckt-button.zoom-out[data-loading] .spinner {
   opacity: 1;
   -webkit-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  -moz-transform: none;
   transform: none;
 }
 
@@ -808,6 +843,9 @@ limitations under the License.
   left: 50%;
   margin-left: -16px;
   -webkit-transform: scale(0.2);
+  -ms-transform: scale(0.2);
+  -o-transform: scale(0.2);
+  -moz-transform: scale(0.2);
   transform: scale(0.2);
 }
 
@@ -819,12 +857,18 @@ limitations under the License.
 .effeckt-button.zoom-in[data-loading] .label {
   opacity: 0;
   -webkit-transform: scale(2.2);
+  -ms-transform: scale(2.2);
+  -o-transform: scale(2.2);
+  -moz-transform: scale(2.2);
   transform: scale(2.2);
 }
 
 .effeckt-button.zoom-in[data-loading] .spinner {
   opacity: 1;
   -webkit-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  -moz-transform: none;
   transform: none;
 }
 
@@ -840,6 +884,7 @@ limitations under the License.
 .row {
   display: -webkit-box;
   display: -webkit-flex;
+  display: -moz-box;
   display: -moz-flex;
   display: -ms-flexbox;
   display: flex;
@@ -858,6 +903,7 @@ limitations under the License.
 .col {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
+  -moz-box-flex: 1;
   -moz-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -872,6 +918,7 @@ limitations under the License.
   -ms-flex-align: start;
   -webkit-align-items: flex-start;
   -moz-align-items: flex-start;
+  -moz-box-align: start;
   align-items: flex-start; }
 
 .row-bottom {
@@ -879,6 +926,7 @@ limitations under the License.
   -ms-flex-align: end;
   -webkit-align-items: flex-end;
   -moz-align-items: flex-end;
+  -moz-box-align: end;
   align-items: flex-end; }
 
 .row-center {
@@ -886,21 +934,25 @@ limitations under the License.
   -ms-flex-align: center;
   -webkit-align-items: center;
   -moz-align-items: center;
+  -moz-box-align: center;
   align-items: center; }
 
 /* .col-* vertically aligns an individual .col */
 .col-top {
   -webkit-align-self: flex-start;
+  -moz-align-self: flex-start;
   -ms-flex-item-align: start;
   align-self: flex-start; }
 
 .col-bottom {
   -webkit-align-self: flex-end;
+  -moz-align-self: flex-end;
   -ms-flex-item-align: end;
   align-self: flex-end; }
 
 .col-center {
   -webkit-align-self: center;
+  -moz-align-self: center;
   -ms-flex-item-align: center;
   align-self: center; }
 
@@ -939,6 +991,7 @@ limitations under the License.
 .col-10 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 10%;
+  -moz-box-flex: 0;
   -moz-flex: 0 0 10%;
   -ms-flex: 0 0 10%;
   flex: 0 0 10%;
@@ -947,6 +1000,7 @@ limitations under the License.
 .col-20 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 20%;
+  -moz-box-flex: 0;
   -moz-flex: 0 0 20%;
   -ms-flex: 0 0 20%;
   flex: 0 0 20%;
@@ -955,6 +1009,7 @@ limitations under the License.
 .col-25 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 25%;
+  -moz-box-flex: 0;
   -moz-flex: 0 0 25%;
   -ms-flex: 0 0 25%;
   flex: 0 0 25%;
@@ -963,6 +1018,7 @@ limitations under the License.
 .col-33, .col-34 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 33.3333%;
+  -moz-box-flex: 0;
   -moz-flex: 0 0 33.3333%;
   -ms-flex: 0 0 33.3333%;
   flex: 0 0 33.3333%;
@@ -971,6 +1027,7 @@ limitations under the License.
 .col-50 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 50%;
+  -moz-box-flex: 0;
   -moz-flex: 0 0 50%;
   -ms-flex: 0 0 50%;
   flex: 0 0 50%;
@@ -979,6 +1036,7 @@ limitations under the License.
 .col-66, .col-67 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 66.6666%;
+  -moz-box-flex: 0;
   -moz-flex: 0 0 66.6666%;
   -ms-flex: 0 0 66.6666%;
   flex: 0 0 66.6666%;
@@ -987,6 +1045,7 @@ limitations under the License.
 .col-75 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 75%;
+  -moz-box-flex: 0;
   -moz-flex: 0 0 75%;
   -ms-flex: 0 0 75%;
   flex: 0 0 75%;
@@ -995,6 +1054,7 @@ limitations under the License.
 .col-80 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 80%;
+  -moz-box-flex: 0;
   -moz-flex: 0 0 80%;
   -ms-flex: 0 0 80%;
   flex: 0 0 80%;
@@ -1003,6 +1063,7 @@ limitations under the License.
 .col-90 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 90%;
+  -moz-box-flex: 0;
   -moz-flex: 0 0 90%;
   -ms-flex: 0 0 90%;
   flex: 0 0 90%;
@@ -1012,12 +1073,14 @@ limitations under the License.
 .row--fit>.col {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
+    -moz-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
 }
 .row--100>.col {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 100%;
+    -moz-box-flex: 0;
     -ms-flex: 0 0 100%;
     flex: 0 0 100%;
 }
@@ -1050,15 +1113,19 @@ ons-navigator {
 
 .navigator-container {
     display: -webkit-box;
+    display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
     -webkit-box-direction: normal;
+    -moz-box-direction: normal;
     -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;    
-    -webkit-box-pack: start;    
+    -webkit-box-pack: start;
+    -moz-box-pack: start;    
     -webkit-justify-content: flex-start;    
     -ms-flex-pack: start;    
     justify-content: flex-start;
@@ -1067,6 +1134,7 @@ ons-navigator {
     align-content: flex-start;
     -webkit-box-align: stretch;    
     -webkit-align-items: stretch;    
+    -moz-box-align: stretch;    
     -ms-flex-align: stretch;    
     align-items: stretch;
     width: 100%;
@@ -1077,6 +1145,7 @@ ons-navigator {
 .navigator-toolbar {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 auto;
+    -moz-box-flex: 0;
     -ms-flex: 0 0 auto;
     flex: 0 0 auto;
 }
@@ -1084,7 +1153,8 @@ ons-navigator {
 .navigator-content {
     -webkit-box-ordinal-group: 1;
     -moz-box-ordinal-group: 1;    
-    -webkit-box-flex: 1;    
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;    
     -webkit-flex: 1 0 auto;    
     -ms-flex: 1 0 auto;    
     flex: 1 0 auto;
@@ -1100,12 +1170,12 @@ ons-navigator {
 
 }
 
-#right-section-icon {
+.right-section-icon {
     height: 100%;
-    display: block;
+    display: block !important;
 }
 
-#left-section {
+.left-section {
     height: 100%;
 }
 .page {
@@ -1148,7 +1218,6 @@ limitations under the License.
 
 .scroller {    
     min-height: 105%;
-    padding-bottom: 50px;
 }
 
 ::-webkit-scrollbar {
@@ -1173,10 +1242,40 @@ limitations under the License.
 */
 
 
+@-o-keyframes shake{ 
+    0% { -o-transform: translate(3px, 0); transform: translate(3px, 0); }
+    50% { -o-transform: translate(-3px, 0); transform: translate(-3px, 0); }
+    100% { -o-transform: translate(0, 0); transform: translate(0, 0); }
+}
+ 
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
 @keyframes shake{ 
-    0% { -webkit-transform: translate(3px, 0); transform: translate(3px, 0); }
-    50% { -webkit-transform: translate(-3px, 0); transform: translate(-3px, 0); }
-    100% { -webkit-transform: translate(0, 0); transform: translate(0, 0); }
+    0% { -webkit-transform: translate(3px, 0); -moz-transform: translate(3px, 0); -ms-transform: translate(3px, 0); -o-transform: translate(3px, 0); transform: translate(3px, 0); }
+    50% { -webkit-transform: translate(-3px, 0); -moz-transform: translate(-3px, 0); -ms-transform: translate(-3px, 0); -o-transform: translate(-3px, 0); transform: translate(-3px, 0); }
+    100% { -webkit-transform: translate(0, 0); -moz-transform: translate(0, 0); -ms-transform: translate(0, 0); -o-transform: translate(0, 0); transform: translate(0, 0); }
+}
+ 
+@-moz-keyframes shake{ 
+    0% { -moz-transform: translate(3px, 0); }
+    50% { -moz-transform: translate(-3px, 0); }
+    100% { -moz-transform: translate(0, 0); }
 }
  
 @-webkit-keyframes shake {
@@ -1187,12 +1286,20 @@ limitations under the License.
  
 .shake {
     -webkit-animation-name: shake;
+    -moz-animation-name: shake;
+    -o-animation-name: shake;
     animation-name: shake; 
     -webkit-animation-duration: 150ms; 
+    -moz-animation-duration: 150ms; 
+    -o-animation-duration: 150ms; 
     animation-duration: 150ms; 
     -webkit-animation-iteration-count: 2; 
+    -moz-animation-iteration-count: 2; 
+    -o-animation-iteration-count: 2; 
     animation-iteration-count: 2; 
     -webkit-animation-timing-function: linear; 
+    -moz-animation-timing-function: linear; 
+    -o-animation-timing-function: linear; 
     animation-timing-function: linear;
  
     -moz-animation-name: shake; 
@@ -1238,18 +1345,28 @@ limitations under the License.
 
 .transition {
     -webkit-transition-duration: 400ms;
+    -moz-transition-duration: 400ms;
+    -o-transition-duration: 400ms;
     transition-duration: 400ms;
     -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+    -moz-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+    -o-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
     animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
 .open{    
     -webkit-transform: translate3d(92%, 0, 0);    
+    -moz-transform: translate3d(92%, 0, 0);    
+    -ms-transform: translate3d(92%, 0, 0);    
+    -o-transform: translate3d(92%, 0, 0);    
     transform: translate3d(92%, 0, 0);
 }
 
 .close{    
     -webkit-transform: translate3d(0, 0, 0);    
+    -moz-transform: translate3d(0, 0, 0);    
+    -ms-transform: translate3d(0, 0, 0);    
+    -o-transform: translate3d(0, 0, 0);    
     transform: translate3d(0, 0, 0);
 }
 
@@ -1261,11 +1378,15 @@ limitations under the License.
 .behind {
     opacity: 0; /* initially hidden */
     -webkit-transform: translate3d(-10%, 0, 0); /* initially hidden */
+    -moz-transform: translate3d(-10%, 0, 0); /* initially hidden */
+    -ms-transform: translate3d(-10%, 0, 0); /* initially hidden */
+    -o-transform: translate3d(-10%, 0, 0); /* initially hidden */
     transform: translate3d(-10%, 0, 0);
     width: 100% !important;
 }
 
 .above {
+    -webkit-box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
     box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
 }
 
@@ -1302,6 +1423,9 @@ limitations under the License.
 	opacity: 0;
 	width: 100%;
     -webkit-transform: translate3d(-10%, 0, 0);
+    -moz-transform: translate3d(-10%, 0, 0);
+    -ms-transform: translate3d(-10%, 0, 0);
+    -o-transform: translate3d(-10%, 0, 0);
     transform: translate3d(-10%, 0, 0);
     overflow: hidden;
 }
@@ -1311,6 +1435,7 @@ limitations under the License.
 }
 
 .onsen_split-view__shadow {
+	-webkit-box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
 	box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
 }
 

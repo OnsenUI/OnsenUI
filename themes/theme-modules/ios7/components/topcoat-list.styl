@@ -1,0 +1,90 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+@import '../../common/topdoc-list'
+@require '../../common/list'
+
+.topcoat-list
+  @extend .list
+  border-top var-border-top--list-container
+  border-bottom var-border-bottom--list-container
+  background-color var-background-color--list
+
+.topcoat-list--noborder
+  border-top none
+  border-bottom none
+
+.topcoat-list__header
+  @extend .list__header
+  padding var-padding--list-header
+  font-size var-font-size--list-header
+  font-weight var-font-weight--list-header
+  background-color var-background-color--list-header
+  color var-color--list-header
+  text-shadow var-text-shadow--list-header
+  border-top var-border-top--list-header
+  border-bottom var-border-bottom--list-header
+  min-height var-min-height--list-header
+  line-height @min-height
+
+.topcoat-list__container
+  @extend .list__container
+  border-top var-border-top--list
+  color var-color
+  padding var-padding--list-container
+  background-color var-background-color--list-container
+
+.topcoat-list__item
+  @extend .list__item
+  padding var-padding--list-item
+  margin var-margin--list-item
+  border-top var-border-top--list-item
+  border-bottom var-border-bottom--list-item
+  color var-color--list-item
+  background-color var-background-color--list-item
+  min-height var-min-height--list-item
+  position relative
+
+.topcoat-list__item__line-height
+  line-height var-min-height--list-item
+
+.topcoat-list__item_active:active
+  background-color var-background-color--list-item--active
+  transition none
+
+.topcoat-list__item--tappable
+  transition background-color 0.2s linear
+
+.topcoat-list__item--tappable:active
+  background-color var-background-color--list-item--active
+  transition none
+
+.topcoat-list__item:first-child
+  padding-left var-padding-left--list-item--first
+  margin var-margin--list-item--first
+  border-top var-border-top--list-item--first
+  border-bottom var-border-bottom--list-item--first
+
+.topcoat-list__item:last-child
+  padding-left var-padding-left--list-item--last
+  margin var-margin--list-item--last
+  border-top var-border-top--list-item--last
+  border-bottom var-border-bottom--list-item--last
+
+.topcoat-list__item:nth-child(2)
+  border-top var-border-top--list-item--2

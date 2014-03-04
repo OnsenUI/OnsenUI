@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.0 - 2014-03-03 */
+/*! onsenui - v1.0.0 - 2014-03-04 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -21770,7 +21770,7 @@ limitations under the License.
 					platform = "android";
 				}
 
-				if (navigator.userAgent.match(/BlackBerry/i)) {
+				if ((navigator.userAgent.match(/BlackBerry/i)) || (navigator.userAgent.match(/RIM Tablet OS/i)) || (navigator.userAgent.match(/BB10/i))) {
 					platform = "blackberry";
 				}
 
@@ -22694,11 +22694,12 @@ limitations under the License.
 					},
 
 					animateInCurrentPage: function(pager) {
-						pager.attr("class", "screen-page unmodal");
+						pager.attr("class", "screen-page transition unmodal");
 						var that = this;
 						pager.bind(TRANSITION_END, function transitionEnded() {
 							that.onTransitionEnded();							
 						});
+						element[0].offsetWidth;
 						setTimeout(function() {
 							pager.attr("class", "screen-page transition screen_center");
 							this.animateInBehindPage();

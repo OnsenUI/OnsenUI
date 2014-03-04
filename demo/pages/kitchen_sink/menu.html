@@ -1,16 +1,20 @@
 <ons-page>
-	<ul class="fa-ul">
 
-		<ons-list-item 
+	<ul class="topcoat-list">
+
+		<ons-list-item
+			class="topcoat-list__item--tappable topcoat-list__item__line-height" 
 			ng-click="ons.slidingMenu.toggleMenu(); ons.slidingMenu.setAbovePage('pages/kitchen_sink/flickr/navigator.html')">			
-			<i class="fa fa-li fa-flickr fa-lg" style="top: 25%"></i> <strong>Flickr</strong>			
+			<i class="fa fa-flickr fa-lg" style="color: #666"></i>
+			&nbsp; Flickr
 		</ons-list-item>
 
 		<ons-list-item 
+			class="topcoat-list__item--tappable topcoat-list__item__line-height"
 			ng-click="ons.slidingMenu.toggleMenu(); ons.slidingMenu.setAbovePage('pages/kitchen_sink/todo/navigator.html')">			
-			<i class="fa fa-li fa-check-square" style="top: 25%"></i> <strong>Todos</strong>
+			<i class="fa fa-check-square fa-lg" style="color: #666"></i>
+			&nbsp; Todos
 		</ons-list-item>
 
 	</ul>
-
 </ons-page>

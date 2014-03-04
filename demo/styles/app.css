@@ -285,8 +285,11 @@ body {
     height: 50px !important;
 }
 
-.todo-add-button{
-    margin-top: 5px;
+.todo-add-button {
+    height: 32px;
+    line-height: 32px !important;
+    padding-top: 0;
+    margin-top: 1px;
 }
 
 a {
