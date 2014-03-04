@@ -26,10 +26,12 @@
   height: var-height--tab-bar;
   background-color var-background-color--tab-bar
   border-top var-border-top--tab-bar
+  width 100%
 }
 
 .topcoat-tab-bar__item {
   @extend .button-bar__item
+  width 100%
 }
 
 .topcoat-tab-bar__item > input {
@@ -39,9 +41,7 @@
 .topcoat-tab-bar__button {
   @extend .button
   padding: var-padding;
-  height: var-line-height;
   height: var-line-height--tab-bar__button
-  line-height: var-line-height;
   line-height: var-line-height--tab-bar__button
   letter-spacing: var-letter-spacing;
   color: var-color;
@@ -51,8 +51,8 @@
   background-color: var-background-color;
   background-color: var-background-color--tab-bar__button;
   box-shadow var-box-shadow
-  border-top: var-border;
   border-top: var-border--tab-bar__button;
+  width 100%
 }
 
 .topcoat-tab-bar__button:active,
@@ -71,7 +71,6 @@
 .topcoat-tab-bar__button:focus,
 .topcoat-tab-bar__button--large:focus {
   z-index: 1;
-  border-top: var-border-top--tab-bar--focus;
   box-shadow var-box-shadow--cta, var-box-shadow--focus
   box-shadow var-box-shadow--tab-bar__button--focus
   outline 0
