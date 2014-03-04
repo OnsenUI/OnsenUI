@@ -20,65 +20,65 @@
 @require '../../common/button'
 
 .topcoat-icon-button
-    padding var-padding--icon-button
-    letter-spacing var-letter-spacing
-    color var-color
-    text-shadow var-text-shadow
-    vertical-align baseline
-    background-color var-background-color
-    background-color var-background-color__icon-button
-    box-shadow var-box-shadow
-    border var-border
-    border var-border--icon-button
-    border-radius var-border-radius
-    border-radius var-icon-button-border-radius
-    font-weight var-font-weight
+  padding var-padding--icon-button
+  letter-spacing var-letter-spacing
+  color var-color
+  text-shadow var-text-shadow
+  vertical-align baseline
+  background-color var-background-color
+  background-color var-background-color__icon-button
+  box-shadow var-box-shadow
+  border var-border
+  border var-border--icon-button
+  border-radius var-border-radius
+  border-radius var-icon-button-border-radius
+  font-weight var-font-weight
 
 .topcoat-icon-button:active
-    background-color gray
+  background-color gray
 
 
 .topcoat-icon-button:disabled
-    disabled()
+  disabled()
 
 .topcoat-icon-button:focus
-    outline 0
+  outline 0
 
 .topcoat-icon-button--quiet
-    @extend .topcoat-icon-button
-    button--quiet()
-    background-color var-background-color__icon-button--quiet
-    border var-border--icon-button--quiet
-    color var-color--icon-button--quiet
+  @extend .topcoat-icon-button
+  button--quiet()
+  background-color var-background-color__icon-button--quiet
+  border var-border--icon-button--quiet
+  color var-color--icon-button--quiet
 
 .topcoat-icon-button--quiet:active
-    color var-color
-    color var-color--icon-button--quiet--active
-    text-shadow var-text-shadow
-    background-color var-background-color--down
-    background-color var-background-color--icon-button-quiet--down
-    border var-border
-    border var-border--icon-button--quite--active
-    box-shadow var-box-shadow--down
-    box-shadow: var-box-shadow--icon-button-quiet--down;
+  color var-color
+  color var-color--icon-button--quiet--active
+  text-shadow var-text-shadow
+  background-color var-background-color--down
+  background-color var-background-color--icon-button-quiet--down
+  border var-border
+  border var-border--icon-button--quite--active
+  box-shadow var-box-shadow--down
+  box-shadow var-box-shadow--icon-button-quiet--down
 
 .topcoat-icon-button--quiet:disabled
-    @extend .topcoat-icon-button:disabled
+  @extend .topcoat-icon-button:disabled
 
 .topcoat-icon-button--quiet:focus
-    @extend .topcoat-icon-button:focus
+  @extend .topcoat-icon-button:focus
 
 .topcoat-icon
-    inline-block()
-    overflow var-overflow
-    width var-size--icon
-    height var-size--icon
-    vertical-align middle
-    top var-icon-top
+  inline-block()
+  overflow var-overflow
+  width var-size--icon
+  height var-size--icon
+  vertical-align middle
+  top var-icon-top
 
 .topcoat-icon--large
-    @extend .topcoat-icon
-    width var-size--icon--large
-    height var-size--icon--large
-    top var-icon-top--large
+  @extend .topcoat-icon
+  width var-size--icon--large
+  height var-size--icon--large
+  top var-icon-top--large
 

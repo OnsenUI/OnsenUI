@@ -20,31 +20,31 @@
 @require '../../common/button'
 
 .topcoat-icon-button
-    @extend .button
-    padding var-padding--icon-button
-    line-height var-height
-    letter-spacing var-letter-spacing
-    color var-color
-    text-shadow var-text-shadow
-    vertical-align baseline
-    background-color var-background-color
-    background-color var-background-color__icon-button
-    box-shadow var-box-shadow
-    border var-border
-    border var-border--icon-button
-    border-radius var-border-radius
-    border-radius var-icon-button-border-radius
+  @extend .button
+  padding var-padding--icon-button
+  line-height var-height
+  letter-spacing var-letter-spacing
+  color var-color
+  text-shadow var-text-shadow
+  vertical-align baseline
+  background-color var-background-color
+  background-color var-background-color__icon-button
+  box-shadow var-box-shadow
+  border var-border
+  border var-border--icon-button
+  border-radius var-border-radius
+  border-radius var-icon-button-border-radius
 
 .topcoat-icon-button:hover
   background-color var-background-color--hover
   background-color var-background-color--icon-button-quiet--hover  
 
 .topcoat-icon-button:active
-    background-color var-background-color--down
-    box-shadow var-box-shadow--down
+  background-color var-background-color--down
+  box-shadow var-box-shadow--down
 
 .topcoat-icon-button:disabled
-    @extend .button--disabled
+  @extend .button--disabled
 
 .topcoat-icon-button:focus
   border var-border--focus
@@ -52,33 +52,33 @@
   outline 0
 
 .topcoat-icon-button--quiet
-    @extend .topcoat-icon-button
-    button--quiet()
-    background-color var-background-color__icon-button--quiet
-    border var-border--icon-button--quiet
-    color var-color--icon-button--quiet
+  @extend .topcoat-icon-button
+  button--quiet()
+  background-color var-background-color__icon-button--quiet
+  border var-border--icon-button--quiet
+  color var-color--icon-button--quiet
 
 .topcoat-icon-button--quiet:hover
   @extend .topcoat-icon-button:hover
-  text-shadow: var-text-shadow;
-  border: var-border;
-  border: var-border--icon-button--quite--hover
-  box-shadow: var-box-shadow;
-  box-shadow: var-box-shadow--icon-button-quiet--hover;
+  text-shadow var-text-shadow
+  border var-border
+  border var-border--icon-button--quite--hover
+  box-shadow var-box-shadow
+  box-shadow var-box-shadow--icon-button-quiet--hover
 
 .topcoat-icon-button--quiet:active
-    color var-color
-    color var-color--icon-button--quiet--active
-    text-shadow var-text-shadow
-    background-color var-background-color--down
-    background-color var-background-color--icon-button-quiet--down
-    border var-border
-    border var-border--icon-button--quite--active
-    box-shadow var-box-shadow--down
-    box-shadow: var-box-shadow--icon-button-quiet--down;
+  color var-color
+  color var-color--icon-button--quiet--active
+  text-shadow var-text-shadow
+  background-color var-background-color--down
+  background-color var-background-color--icon-button-quiet--down
+  border var-border
+  border var-border--icon-button--quite--active
+  box-shadow var-box-shadow--down
+  box-shadow var-box-shadow--icon-button-quiet--down
 
 .topcoat-icon-button--quiet:disabled
-    @extend .topcoat-icon-button:disabled
+  @extend .topcoat-icon-button:disabled
 
 .topcoat-icon-button--quiet:focus
   @extend .topcoat-icon-button:focus
