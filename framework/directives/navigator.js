@@ -228,7 +228,7 @@ limitations under the License.
 					animateTitleIn: function(inNavigatorItem, outNavigatorItem) {
 						var inTitle = inNavigatorItem.options.title || '';
 						var inTitleElement = angular.element('<span>' + inTitle + '</span>');
-						inTitleElement.attr('class', 'onsen_navigator-item onsen_navigator-title topcoat-navigation-bar__line-height center transition animate-right');
+						inTitleElement.attr('class', 'onsen_navigator-item onsen_navigator-title topcoat-navigation-bar__title topcoat-navigation-bar__line-height center transition animate-right');
 						var outTitleElement = outNavigatorItem.titleElement;
 						outTitleElement.after(inTitleElement);
 						outTitleElement.bind(TRANSITION_END, function transitionEnded(e) {
@@ -490,7 +490,7 @@ limitations under the License.
 							} else {
 								// root page
 								var titleElement = angular.element('<div></div>');
-								titleElement.addClass('onsen_navigator-item onsen_navigator-title topcoat-navigation-bar__line-height center animate-center');
+								titleElement.addClass('onsen_navigator-item onsen_navigator-title topcoat-navigation-bar__title topcoat-navigation-bar__line-height center animate-center');
 								if (options.title) {
 									titleElement.text(options.title);
 								}
