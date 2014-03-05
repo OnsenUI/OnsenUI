@@ -1,3 +1,1 @@
-'use strict';
-
-angular.module('myApp', [ 'ngTouch', 'onsen.directives']);
+angular.module('myApp', [ 'onsen.directives']);
