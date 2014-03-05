@@ -24,8 +24,8 @@ limitations under the License.
 	directives.directive('onsBottomToolbar', function(ONSEN_CONSTANTS, $timeout) {
 		return {
 			restrict: 'E',
-			replace: true,
 			transclude: true,
+			replace: true,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/bottom_toolbar.tpl'
 		};
 	});

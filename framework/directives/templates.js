@@ -2,7 +2,8 @@ angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/but
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/bottom_toolbar.tpl",
-    "<div class=\"onsen_bottom-toolbar topcoat-navigation-bar\" ng-transclude></div>");
+    "<div class=\"onsen_bottom-toolbar topcoat-navigation-bar topcoat-navigation-bar--bottom\" ng-transclude></div>\n" +
+    "");
 }]);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
