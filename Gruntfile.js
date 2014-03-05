@@ -371,7 +371,7 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', [
-    'clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:app', 'copy:demo', 
+    'clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:app', 
     'copy:minimum_template', 'copy:sliding_menu_template', 
     'copy:sliding_menu_navigator_template', 'copy:tab_bar_template', 
     'copy:split_view_template', 'copy:split_view_navigator_template', 
