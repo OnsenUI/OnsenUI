@@ -1,0 +1,52 @@
+<ons-page class="center">
+	<ons-scroller>
+		<div class="page-padding">
+			<h2>Split View</h2>
+		
+			<p>Rotate the device to landscape/portrait see the views split/collapse.</p>	
+			<p>Or resize the window so that the width is larger than the height (landscape)/smaller than the height (portrait).</p>	
+			
+			<ons-row>
+				<ons-col>
+				</ons-col>
+
+				<ons-col size="20">
+					<ons-icon
+						icon="mobile"
+						size="5x">		
+					</ons-icon>
+				</ons-col>
+				
+				<ons-col 
+					size="20"
+					align="center">
+					<ons-icon				
+						icon="arrows-h"
+						size="2x">		
+					</ons-icon>	
+				</ons-col>
+				
+				<ons-col
+					size="20">
+					<ons-icon
+						icon="mobile"
+						size="5x"
+						rotate="90">		
+					</ons-icon>	
+				</ons-col>
+				
+				<ons-col>
+				</ons-col>
+			</ons-row>
+			
+			<p>When in portrait, swipe right to reveal the secondary page.</p>
+			<img src="images/ico_swipe_right_s.png" alt="">
+
+			<h2>Navigator</h2>
+			<ons-button ng-click="ons.$get('mainNavigator').pushPage('pages/screen_split_view_navigator/page3.html')">Push Page 3 by get</ons-button>
+
+			<ons-button ng-click="ons.navigator.pushPage('pages/screen_split_view_navigator/page3.html', {}, $event)">Push Page 3 by ons.navigator.pushPage</ons-button>
+
+		</div>		
+	</ons-scroller>	
+</ons-page>
