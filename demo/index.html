@@ -12,10 +12,42 @@
   <script src="lib/onsen/js/angular/angular-touch.js"></script>    
   <script src="lib/onsen/js/onsenui.js"></script>    
   <script src="js/app.js"></script>  
+  <script>
+  var module = angular.module('myApp', ['onsen.directives', 'ngTouch']); 
+  module.controller('DemoListController', function($scope, $window) {
+      $scope.demoList = [
+          {href : 'kitchen_sink.html', name : 'Kitchen Sink'},
+          {href : 'page_demo.html', name : 'Page'},
+          {href : 'screen_demo.html', name : 'Screen'},
+          {href : 'navigator_demo.html', name : 'Navigator'},
+          {href : 'navigator_with_navigator_toolbar.html', name : 'Navigator with Navigator Toolbar'},
+          {href : 'bottom_toolbar_demo.html', name : 'Bottom Toolbar'},
+          {href : 'sliding_menu_demo.html', name : 'Sliding Menu'},
+          {href : 'split_view_demo_width.html', name : 'Split View Width'},
+          {href : 'tabbar_demo.html', name : 'Tabbar (Icon with Label)'},
+          {href : 'list_demo.html', name : 'List'},
+          {href : 'scroller_demo.html', name : 'Scroller'},
+          {href : 'button_demo.html', name : 'Button'},
+          {href : 'radio_button_demo.html', name : 'Radio Button'},
+          {href : 'checkbox_demo.html', name : 'Checkbox'},
+          {href : 'search_input_demo.html', name : 'Search Input'},
+          {href : 'select_demo.html', name : 'Select'},
+          {href : 'text_area_demo.html', name : 'Text Area'},
+          {href : 'text_input_demo.html', name : 'Text Input'},
+          {href : 'if_orientation_demo.html', name : 'Orientation'},
+          {href : 'if_platform_demo.html', name : 'Platform'},
+          {href : 'icon_demo.html', name : 'Icons'},
+          {href : 'grid_demo.html', name : 'Grid'}
+      ];
+      $scope.go = function(demo) {
+        $window.location.href = demo.href;
+      };
+  });
+  </script>  
   
 </head>
 
-<body>    
+<body ng-controller="DemoListController">    
   
   <ons-navigator title="Demo time!" page="demo_list.html"></ons-navigator>
  

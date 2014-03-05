@@ -1,92 +1,11 @@
 <ons-page>
   <ons-list>
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="kitchen_sink.html">Kitchen Sink</a>
-    </ons-list-item>   
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="page_demo.html">Page</a>      
+    <ons-list-item class="topcoat-list__item--tappable" ng-repeat="demo in demoList">
+      <div class="topcoat-list__item__line-height" ng-click="go(demo)">
+        {{demo.name}}
+      </div>
     </ons-list-item>
 
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="screen_demo.html">Screen</a>      
-    </ons-list-item>
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="navigator_demo.html">Navigator</a>      
-    </ons-list-item>
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="navigator_with_navigator_toolbar.html">Navigator with Navigator Toolbar</a>      
-    </ons-list-item>
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="bottom_toolbar_demo.html">Bottom Toolbar</a>      
-    </ons-list-item>    
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="sliding_menu_demo.html">Sliding Menu</a>      
-    </ons-list-item> 
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="split_view_demo_width.html">Split View Width</a>      
-    </ons-list-item> 
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="tabbar_demo.html">Tabbar (Icon with Label)</a>      
-    </ons-list-item>
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="list_demo.html">List</a>      
-    </ons-list-item>
-    
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="scroller_demo.html">Scroller</a>      
-    </ons-list-item>
-    
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="button_demo.html">Button</a>      
-    </ons-list-item>
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-        <a href="radio_button_demo.html">Radio Button</a>
-    </ons-list-item>
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-        <a href="checkbox_demo.html">Checkbox</a>
-    </ons-list-item>
-    
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="search_input_demo.html">Search Input</a>      
-    </ons-list-item>
-    
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="select_demo.html">Select</a>      
-    </ons-list-item>
-    
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="text_area_demo.html">Text Area</a>      
-    </ons-list-item>
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="text_input_demo.html">Text Input</a>      
-    </ons-list-item>
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="if_orientation_demo.html">Orientation</a>      
-    </ons-list-item>
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="if_platform_demo.html">Platform</a>      
-    </ons-list-item>
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="icon_demo.html">Icons</a>      
-    </ons-list-item>
-
-    <ons-list-item class="topcoat-list__item--tappable topcoat-list__item__line-height">
-      <a href="grid_demo.html">Grid</a>      
-    </ons-list-item>
     
   </ons-list>
 </ons-page>
