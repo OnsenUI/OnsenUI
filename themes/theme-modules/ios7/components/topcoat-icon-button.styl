@@ -22,21 +22,20 @@
 .topcoat-icon-button
   padding var-padding--icon-button
   letter-spacing var-letter-spacing
-  color var-color
+  color var-color--icon-button
   text-shadow var-text-shadow
   vertical-align baseline
   background-color var-background-color
-  background-color var-background-color__icon-button
+  background-color var-background-color--icon-button
   box-shadow var-box-shadow
-  border var-border
   border var-border--icon-button
   border-radius var-border-radius
   border-radius var-icon-button-border-radius
   font-weight var-font-weight
+  font-size var-font-size
 
 .topcoat-icon-button:active
-  background-color gray
-
+  background-color var-background-color--icon-button--active
 
 .topcoat-icon-button:disabled
   disabled()
@@ -47,7 +46,7 @@
 .topcoat-icon-button--quiet
   @extend .topcoat-icon-button
   button--quiet()
-  background-color var-background-color__icon-button--quiet
+  background-color var-background-color--icon-button--quiet
   border var-border--icon-button--quiet
   color var-color--icon-button--quiet
 
