@@ -13,7 +13,6 @@ module.exports = function(grunt) {
             '.tmp',
             'build',
             'app/lib/onsen/',
-            'demo/lib/onsen/',
             'project_templates/minimum/app/lib/onsen/',
             'project_templates/sliding_menu/app/lib/onsen/',
             'project_templates/sliding_menu_navigator/app/lib/onsen/',
@@ -141,16 +140,6 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'build/',
           dest: 'app/lib/onsen/',
-          src: [
-            '**'
-          ]
-        }]
-      },
-      demo: {
-        files: [{
-          expand: true,
-          cwd: 'build/',
-          dest: 'demo/lib/onsen/',
           src: [
             '**'
           ]
