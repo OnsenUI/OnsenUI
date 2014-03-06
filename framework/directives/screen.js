@@ -110,8 +110,7 @@ limitations under the License.
 
 				this.element.append(compiledPage);
 
-				var isAnimate = (this.attrs.page && this.screenItems.length > 1)
-					|| (!this.attrs.page && this.screenItems.length >= 1);
+				var isAnimate = this.screenItems.length >= 1;
 				if (isAnimate) {
 					this.animateInCurrentPage(compiledPage);
 				} else {
@@ -206,12 +205,14 @@ limitations under the License.
 			compile: function(element, attrs, transclude) {
 				return function(scope, element, attrs) {
 					var screen = new Screen(scope, element, attrs);
-					transclude(scope.$parent, function(clone) {
-						var wrapper = angular.element('<div></div>');
-						wrapper.attr('class', 'page');
-						wrapper.append(clone);
-						screen._presentPageDOM('', wrapper);
-					});
+					if (!attrs.page) {
+						transclude(scope.$parent, function(clone) {
+							var wrapper = angular.element('<div></div>');
+							wrapper.attr('class', 'page');
+							wrapper.append(clone);
+							screen._presentPageDOM('', wrapper);
+						});
+					}
 					ScreenStack.addScreen(scope);
 					scope.$on('$destroy', function(){
 						ScreenStack.removeScreen(scope);

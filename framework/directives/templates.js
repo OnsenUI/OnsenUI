@@ -122,8 +122,7 @@ angular.module("templates/row.tpl", []).run(["$templateCache", function($templat
 angular.module("templates/screen.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/screen.tpl",
     "<div class=\"screen\">\n" +
-    "</div>\n" +
-    "");
+    "</div>");
 }]);
 
 angular.module("templates/scroller.tpl", []).run(["$templateCache", function($templateCache) {
