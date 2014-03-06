@@ -42,6 +42,20 @@ limitations under the License.
 		};
 
 		$rootScope.console = $window.console;
+		$rootScope.alert = $window.alert;
+	});
+
+	directiveModules.service('requestAnimationFrame', function() {
+		var fn = window.webkitRequestAnimationFrame || 
+			window.mozRequestAnimationFrame || 
+			window.oRequestAnimationFrame || 
+			window.msRequestAnimationFrame ||
+			window.requestAnimationFrame ||
+			function(callback) {
+				return window.setTimeout(callback, 70);
+			};
+
+		return fn;
 	});
 
 	directiveModules.factory('ONSEN_CONSTANTS', function() {

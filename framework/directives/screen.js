@@ -15,13 +15,11 @@ limitations under the License.
 
 */
 
-
-
 (function() {
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.service('Screen', function(ONSEN_CONSTANTS, $http, $compile, ScreenStack) {
+	directives.service('Screen', function(ONSEN_CONSTANTS, $http, $compile, ScreenStack, requestAnimationFrame) {
 		var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 
 		var Screen = Class.extend({
@@ -49,19 +47,21 @@ limitations under the License.
 				var behindPage = this.screenItems[this.screenItems.length - 2].pageElement;
 				try {
 					behindPage.attr('class', 'screen-page transition modal-behind');
-				} catch(e) {}
+				} catch(e) {
+					console.log(e);
+				}
 			},
 
 			animateInCurrentPage: function(pager) {
 				pager.attr("class", "screen-page unmodal");
 				var that = this;
 				pager.bind(TRANSITION_END, function transitionEnded() {
-					that.onTransitionEnded();							
+					that.onTransitionEnded();
 				});
-				setTimeout(function() {
-					pager.attr("class", "screen-page transition screen_center");
-					this.animateInBehindPage();
-				}.bind(this), 10);
+				requestAnimationFrame(function() {
+					pager.attr("class", "screen-page transition screen-center");
+					that.animateInBehindPage();
+				});
 			},
 
 			animateOutBehindPage: function() {
@@ -80,7 +80,7 @@ limitations under the License.
 
 			/**
 			 * @param {String} pageUrl
-			 * @param {DOMElement} element
+			 * @param {DOMElement} element This element is must be ons-page element.
 			 */
 			presentPageDOM: function(pageUrl, element) {
 				var pageEl = angular.element('<div></div>');
