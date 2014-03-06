@@ -309,21 +309,22 @@ module.exports = function(grunt) {
       app: {
         files: [
           'app/*',
-          'app/**/*'
+          'app/**/*',
+          'demo/*',
+          'demo/**/*',
+          'test/manual-testcases/*',
+          'test/manual-testcases/**/*',
         ],
         tasks: [],
         options: {
-          livereload: false
+          livereload: 35730
         },
       },
-      demos: {
-        files: [
-          'demo/*',
-          'demo/**/*'
-        ],
-        tasks: [],
+      templates: {
+        files: 'framework/templates/*.tpl',
+        tasks: ['html2js'],
         options: {
-          livereload: false
+          livereload: 35730
         },
       },
       scripts: {
@@ -333,12 +334,11 @@ module.exports = function(grunt) {
           'framework/lib/*.js',
           'framework/css/*.css',
           'framework/css/polyfill/*.css',
-          'themes/css/*.css',
-          'framework/templates/*.tpl',
+          'themes/css/*.css'
         ],
         tasks: ['default'],
         options: {
-          livereload: false
+          livereload: 35730
         },
       },
     },
