@@ -45,6 +45,12 @@ limitations under the License.
 		$rootScope.alert = $window.alert;
 	});
 
+	directiveModules.service('debugLog', function() {
+		return window.ONSEN_DEBUG ? function() {
+			console.log.apply(window.console, arguments);
+		} : function() { };
+	});
+
 	directiveModules.service('requestAnimationFrame', function() {
 		var fn = window.webkitRequestAnimationFrame || 
 			window.mozRequestAnimationFrame || 

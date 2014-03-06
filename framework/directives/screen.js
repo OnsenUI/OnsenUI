@@ -19,8 +19,9 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.service('Screen', function(ONSEN_CONSTANTS, $http, $compile, ScreenStack, requestAnimationFrame) {
+	directives.service('Screen', function(ONSEN_CONSTANTS, $http, $compile, ScreenStack, requestAnimationFrame, debugLog) {
 		var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
+		var TRANSITION_START = "webkitAnimationStart animationStart msAnimationStart oAnimationStart";
 
 		var Screen = Class.extend({
 			init: function(scope, element, attrs) {
@@ -40,6 +41,7 @@ limitations under the License.
 			},
 
 			onTransitionEnded: function() {
+				debugLog('onTransitionEnded: isReady = true');
 				this.isReady = true;
 			},
 
@@ -55,6 +57,9 @@ limitations under the License.
 			animateInCurrentPage: function(pager) {
 				pager.attr("class", "screen-page unmodal");
 				var that = this;
+				pager.bind(TRANSITION_START, function transitionEnded() {
+					that.isReady = false;
+				});
 				pager.bind(TRANSITION_END, function transitionEnded() {
 					that.onTransitionEnded();
 				});
@@ -82,7 +87,7 @@ limitations under the License.
 			 * @param {String} pageUrl
 			 * @param {DOMElement} element This element is must be ons-page element.
 			 */
-			presentPageDOM: function(pageUrl, element) {
+			_presentPageDOM: function(pageUrl, element) {
 				var pageEl = angular.element('<div></div>');
 				pageEl.addClass('screen-page');
 
@@ -107,6 +112,7 @@ limitations under the License.
 				if (isAnimate) {
 					this.animateInCurrentPage(compiledPage);
 				} else {
+					debugLog('_presentPageDOM: isReady = true');
 					this.isReady = true;
 				}
 
@@ -117,7 +123,7 @@ limitations under the License.
 				};
 
 				this.screenItems.push(screenItem);
-				setTimeout(function(){
+				setTimeout(function() {
 					this.onPageAdded(compiledPage);
 				}.bind(this), 400);
 			},
@@ -125,8 +131,6 @@ limitations under the License.
 			presentPage: function(page){
 				if (!this.isReady) {
 					return;
-				} else {
-					this.isReady = false;
 				}
 
 				var that = this;
@@ -138,7 +142,7 @@ limitations under the License.
 					that.onTransitionEnded();
 					console.error(e);
 				}).success(function(data, status, headers, config) {
-					that.presentPageDOM(page, angular.element(data.trim())[0]);
+					that._presentPageDOM(page, angular.element(data.trim())[0]);
 				}.bind(this)).error(function(data, status, headers, config) {
 					console.log('error', data, status);
 				});
@@ -146,19 +150,24 @@ limitations under the License.
 
 			dismissPage: function(){
 				if (this.screenItems.length < 2 || !this.isReady) {
-					// cant dismiss anymore
+					debugLog('Can\'t dismiss anymore');
+					debugLog(this.screenItems);
 					return;
 				}
-				this.isReady = false;
 
 				var screenItem = this.screenItems.pop();
 				var currentPage = screenItem.pageElement;
 				this.animateOutBehindPage();
 				currentPage.attr("class", "screen-page transition unmodal");
 				var that = this;
+
+				currentPage.bind(TRANSITION_START, function transitionEnded() {
+					that.isReady = false;
+				});
 				currentPage.bind(TRANSITION_END, function transitionEnded() {
 					currentPage.remove();
 					that.isReady = true;
+					debugLog('dismissPage() transtion end: isReady = true');
 					screenItem.pageScope.$destroy();
 				});
 			},
@@ -197,7 +206,7 @@ limitations under the License.
 						var wrapper = angular.element('<div></div>');
 						wrapper.attr('class', 'page');
 						wrapper.append(clone);
-						screen.presentPageDOM('', wrapper);
+						screen._presentPageDOM('', wrapper);
 					});
 					ScreenStack.addScreen(scope);
 					scope.$on('$destroy', function(){
