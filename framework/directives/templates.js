@@ -73,26 +73,25 @@ angular.module("templates/list_item.tpl", []).run(["$templateCache", function($t
 
 angular.module("templates/navigator.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/navigator.tpl",
-    "<div class=\"navigator-container\">	\n" +
+    "<div class=\"navigator-container\">\n" +
     "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar relative\">	 \n" +
     "		<div class=\"navigator-toolbar__content relative\">\n" +
     "			<div class=\"onsen_navigator-item topcoat-navigation-bar__bg onsen_navigator__left-button-container transition hide\">\n" +
     "				<span class=\"topcoat-icon-button--quiet left-section\">\n" +
     "					<i class=\"fa fa-angle-left fa-2x topcoat-navigation-bar__line-height\"></i>\n" +
-    "				</span>			\n" +
-    "			</div>		\n" +
+    "				</span>\n" +
+    "			</div>\n" +
     "			<div class=\"onsen_navigator__right-button onsen_navigator-item\">\n" +
     "				<span class=\"topcoat-icon-button--quiet right-section-icon\">\n" +
     "				</span>\n" +
-    "\n" +
     "			</div>\n" +
-    "		</div>	\n" +
+    "		</div>\n" +
     "	</div>\n" +
+    "\n" +
     "	<div class=\"relative navigator-content topcoat-page__bg\">\n" +
-    "		\n" +
     "	</div>    \n" +
-    "	\n" +
-    "</div>");
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("templates/navigator_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
