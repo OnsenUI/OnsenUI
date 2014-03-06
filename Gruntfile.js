@@ -313,7 +313,7 @@ module.exports = function(grunt) {
         ],
         tasks: [],
         options: {
-          livereload: true
+          livereload: false
         },
       },
       demos: {
@@ -323,7 +323,7 @@ module.exports = function(grunt) {
         ],
         tasks: [],
         options: {
-          livereload: true
+          livereload: false
         },
       },
       scripts: {
@@ -338,20 +338,17 @@ module.exports = function(grunt) {
         ],
         tasks: ['default'],
         options: {
-          livereload: true
+          livereload: false
         },
       },
     },
     connect: {
-      options: {
-        port: 8000,
-        hostname: 'localhost',
-        livereload: true,
-        base: '.'
-      },
-      livereload: {
+      serve: {
         options: {
-          port: 9000
+          port: 8000,
+          hostname: 'localhost',
+          livereload: 35730,
+          base: '.'
         }
       }
     }
