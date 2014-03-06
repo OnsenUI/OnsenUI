@@ -1,0 +1,28 @@
+<ons-page>
+
+  <ul class="topcoat-list">
+
+    <ons-list-item
+      class="topcoat-list__item--tappable topcoat-list__item__line-height" 
+      ng-click="
+        ons.slidingMenu.toggleMenu(); 
+        ons.slidingMenu.setAbovePage('flickr.html');
+      ">
+
+      <i class="fa fa-flickr fa-lg" style="color: #666"></i>
+      &nbsp; Flickr
+    </ons-list-item>
+
+    <ons-list-item 
+      class="topcoat-list__item--tappable topcoat-list__item__line-height"
+      ng-click="
+        ons.slidingMenu.toggleMenu();
+        ons.slidingMenu.setAbovePage('todo.html');
+      ">
+
+      <i class="fa fa-check-square fa-lg" style="color: #666"></i>
+      &nbsp; Todos
+    </ons-list-item>
+
+  </ul>
+</ons-page>

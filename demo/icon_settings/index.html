@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Navigator | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/topcoat-mobile-onsen-ios7.css">
+
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular/angular-touch.js"></script>
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../app.js"></script>
+  <style type="text/css">
+    h2 {
+      border-bottom: 1px solid #ddd;
+      font-size: 16px;
+      height: 40px;
+      line-height: 40px;
+      font-weight: 300;
+    }
+  </style>
+</head>
+
+<body>
+  <ons-navigator
+    title="Icon Settings">
+    <ons-scroller>
+      <ons-list-item>
+        <ons-row>
+          <ons-col class="topcoat-list__item__line-height"><i class="fa fa-plane" style="font-size: 22px; line-height: 44px;"></i> Airplane Mode</ons-col>
+          <ons-col style="text-align: right; padding-right: 8px; padding-top: 11px;"><ons-radio-button></ons-radio-button></ons-col>
+        </ons-row>
+      </ons-list-item>
+
+    </ons-scroller>
+  </ons-navigator>
+
+</body>
+</html>

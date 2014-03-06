@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Radio Button | Onsen UI</title>  
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/topcoat-mobile-onsen-ios7.css">  
+
+  <script src="../../build/js/angular/angular.js"></script>  
+  <script src="../../build/js/angular/angular-touch.js"></script>      
+  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../app.js"></script>  
+  
+</head>
+
+<body>    
+  
+  <div class="center">
+    <h2>Choose Level</h2>
+    <ons-radio-button ng-model="level" value="Easy" right-label="Easy" name="level-group"></ons-radio-button>
+
+    <ons-radio-button ng-model="level" value="Medium" right-label="Medium" name="level-group"></ons-radio-button>
+    
+    <ons-radio-button ng-model="level" value="Hard" right-label="Hard" name="level-group"></ons-radio-button>
+    
+    <h3>{{level}}</h3>
+  </div>
+  
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Navigator | Onsen UI</title>  
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/topcoat-mobile-onsen-ios7.css">  
+
+  <script src="../../build/js/angular/angular.js"></script>    
+  <script src="../../build/js/angular/angular-touch.js"></script>    
+  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../app.js"></script>  
+  
+</head>
+
+<body>    
+
+  <ons-navigator title="Page 1">
+    <ons-page class="center">
+      <h1>Page 1</h1>
+      <ons-button ng-click="ons.navigator.pushPage('page2.html', { title: 'Page 2' })">Push Page 2</ons-button>
+
+      <h1>Pop</h1>
+      <ons-button ng-click="ons.navigator.popPage()">Pop Page
+      </ons-button>
+    </ons-page>
+  
+  </ons-navigator>   
+</body>
+</html>

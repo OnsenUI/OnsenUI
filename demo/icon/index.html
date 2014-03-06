@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Navigator | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/topcoat-mobile-onsen-ios7.css">
+
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular/angular-touch.js"></script>
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../app.js"></script>
+  <style type="text/css">
+    h2 {
+      border-bottom: 1px solid #ddd;
+      font-size: 16px;
+      height: 40px;
+      line-height: 40px;
+      font-weight: 300;
+    }
+  </style>
+</head>
+
+<body>
+  <ons-navigator title="Icon">
+    <ons-scroller>
+      <section style="padding-left: 20px">
+
+        <h2>Icon</h2>
+        <ons-icon icon="bars"></ons-icon>
+
+        <h2>Size</h2>
+        
+        <div>
+          <ons-icon icon="bars" size="lg"></ons-icon> lg  <br/>
+          <ons-icon icon="bars" size="2x"></ons-icon> 2x  <br/>
+          <ons-icon icon="bars" size="3x"></ons-icon> 3x  <br/>
+          <ons-icon icon="bars" size="4x"></ons-icon> 4x  <br/>
+          <ons-icon icon="bars" size="5x"></ons-icon> 5x  <br/>
+        </div>
+        
+
+        <h2>Spin</h2>
+        <ons-icon icon="spinner" spin="true"></ons-icon> <br/>
+        <ons-icon icon="refresh" spin="true"></ons-icon>
+
+        <h2>Fixed width</h2>
+        <p>For use with list so that the icons align vertically</p>
+        <h4>Wihtout fixed width</h4>
+        <div>
+          <ul style="text-align: left; list-style: none; padding: 0;">
+            <li>
+              <ons-icon size="lg" icon="book" ></ons-icon>
+              Library
+            </li>
+            <li>
+              <ons-icon size="lg" icon="pencil" ></ons-icon>
+              Applications
+            </li>
+            <li>
+              <ons-icon size="lg" icon="cogs" ></ons-icon>
+              Settings
+            </li>
+          </ul>
+        </div>
+
+        <h4>With fixed width</h4>
+        <div>
+          <ul style="text-align: left; list-style: none; padding: 0;">
+            <li>
+              <ons-icon size="lg" icon="book" fixed-width="true"></ons-icon>
+              Library
+            </li>
+            <li>
+              <ons-icon size="lg" icon="pencil" fixed-width="true"></ons-icon>
+              Applications
+            </li>
+            <li>
+              <ons-icon size="lg" icon="cogs" fixed-width="true"></ons-icon>
+              Settings
+            </li>
+          </ul>
+        </div>
+
+        
+
+        <h2>Rotate</h2>
+        <div>
+          
+            <div>
+              <ons-icon icon="shield"></ons-icon>
+              Normal
+            </div>
+            <div>
+              <ons-icon icon="shield" rotate="90"></ons-icon>
+              Rotate 90
+            </div>
+            <div>
+              <ons-icon icon="shield" rotate="180"></ons-icon>
+              Rotate 180
+            </div>
+            <div>
+              <ons-icon icon="shield" rotate="270"></ons-icon>
+              Rotate 270
+            </div>
+          
+        </div>
+
+        <h2>Flip</h2>
+        <div>        
+            <div>
+              <ons-icon icon="shield"></ons-icon>
+              Normal
+            </div>
+            <div>
+              <ons-icon icon="shield" flip="horizontal"></ons-icon>
+              Flip Horizontal
+            </div>
+            <div>
+              <ons-icon icon="shield" flip="vertical"></ons-icon>
+              Flip Vertical
+            </div>
+          
+        </div>
+
+        <h2>Color</h2>
+        <ons-icon icon="trash-o" style="color: #E74C3C"></ons-icon> <br/>
+        <ons-icon icon="thumbs-up" style="color: #3498DB"></ons-icon> <br/>
+        <ons-icon icon="heart" style="color: #E74C3C"></ons-icon> <br/>
+        <ons-icon icon="star" style="color: #F39C12"></ons-icon> <br/>
+
+      </section>
+    </ons-scroller>
+  </ons-navigator>
+
+</body>
+</html>

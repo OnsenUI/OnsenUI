@@ -1,0 +1,19 @@
+<ons-navigator left-button-icon="fa fa-bars" on-left-button-click="ons.slidingMenu.toggleMenu();" title="Flickr" />
+  <div ng-controller="FlickrController">
+    <ons-list>
+
+      <ons-list-item class="center no-active">
+        <ons-button type="cta" should-spin="{{isFetching}}" ng-click="fetchPhotos()" style="margin: 6px 0">Fetch Photos</ons-button>
+      </ons-list-item>
+
+      <ons-list-item ng-animate="'zoom'" ng-show="failed">
+        <i class="icon-exclamation-sign"></i> Oops! looks like Flickr is down.
+      </ons-list-item>
+
+      <ons-list-item ng-repeat="item in feeds.items">
+        <img width="100%" ng-src="{{item.media.m}}">
+      </ons-list-item>
+
+    </ons-list>
+  </div>
+</ons-navigator>
