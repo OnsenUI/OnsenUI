@@ -19,7 +19,7 @@ limitations under the License.
 (function() {
 	var directiveModules = angular.module('onsen.directives', ['templates-main']); // [] -> create new module
 
-	directiveModules.run(function($rootScope) {
+	directiveModules.run(function($rootScope, $window) {
 		$rootScope.ons = $rootScope.ons || {};
 		$rootScope.ons.$get = function(id) {
 			id = id.replace('#', '');
@@ -41,6 +41,7 @@ limitations under the License.
 			return null;
 		};
 
+		$rootScope.console = $window.console;
 	});
 
 	directiveModules.factory('ONSEN_CONSTANTS', function() {

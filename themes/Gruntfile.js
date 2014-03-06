@@ -127,15 +127,6 @@ module.exports = function(grunt) {
                 livereload: true
             },
 
-            'all': {
-                files: [
-                    '../demo/*',
-                    '../demo/**/*',
-                    '../framework/*',
-                    '../framework/**/*'
-                ]
-            },
-
             'ios7-themes': {
                 files: ['theme-modules/**/*.styl', 'topdoc-template/*', 'topdoc-template/**/*', 'theme-modules/common/*.styl'],
                 tasks: ['gen-ios7-themes', 'topdoc']
