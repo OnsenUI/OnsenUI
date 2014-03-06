@@ -58,7 +58,7 @@ limitations under the License.
 			window.msRequestAnimationFrame ||
 			window.requestAnimationFrame ||
 			function(callback) {
-				return window.setTimeout(callback, 70);
+				return window.setTimeout(callback, 1000 / 60); // 60fps
 			};
 
 		return fn;

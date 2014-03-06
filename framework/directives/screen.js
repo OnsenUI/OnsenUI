@@ -63,10 +63,13 @@ limitations under the License.
 				pager.bind(TRANSITION_END, function transitionEnded() {
 					that.onTransitionEnded();
 				});
-				requestAnimationFrame(function() {
-					pager.attr("class", "screen-page transition screen-center");
-					that.animateInBehindPage();
-				});
+
+				setTimeout(function() {
+					requestAnimationFrame(function() {
+						pager.attr("class", "screen-page transition screen-center");
+						that.animateInBehindPage();
+					});
+				}, 10);
 			},
 
 			animateOutBehindPage: function() {
@@ -123,6 +126,7 @@ limitations under the License.
 				};
 
 				this.screenItems.push(screenItem);
+
 				setTimeout(function() {
 					this.onPageAdded(compiledPage);
 				}.bind(this), 400);
