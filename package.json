@@ -1,8 +1,15 @@
 {
   "name": "onsenui",
-  "version": "1.0.0",
+  "version": "1.0.1-dev",
   "private": false,
   "author": "@kruyvanna",
+  "contributors": [
+    {
+      "name": "Mitsunori KUBOTA",
+      "email": "anatoo.jp@gmail.com",
+      "url": "http://anatoo.jp"
+    }
+  ],
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.6.0",
