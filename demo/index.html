@@ -5,19 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Demo Index | Onsen UI</title>  
   <link rel="stylesheet" href="styles/app.css"/>
-  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
-  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">  
+  <link rel="stylesheet" href="../build/css/onsenui.css">  
+  <link rel="stylesheet" href="../build/css/topcoat-mobile-onsen-ios7.css">  
 
-  <script src="lib/onsen/js/angular/angular.js"></script>    
-  <script src="lib/onsen/js/angular/angular-touch.js"></script>    
-  <script src="lib/onsen/js/onsenui.js"></script>    
-  <script src="js/app.js"></script>  
+  <script src="../build/js/angular/angular.js"></script>    
+  <script src="../build/js/angular/angular-touch.js"></script>    
+  <script src="../build/js/onsenui.js"></script>    
+  <script src="app.js"></script>  
+  <script>
+  var module = angular.module('myApp', ['onsen.directives', 'ngTouch']); 
+  module.controller('DemoListController', function($scope, $window) {
+      $scope.demoList = [
+          {href : 'bottom_toolbar/', name : 'Bottom Toolbar'},
+          {href : 'button/', name : 'Button'},
+          {href : 'checkbox/', name : 'Checkbox'},
+          {href : 'grid/', name : 'Grid'},
+          {href : 'icon/', name : 'Icons'},
+          {href : 'icon_settings/', name : 'Icon Settings'},
+          {href : 'if_orientation/', name : 'Orientation'},
+          {href : 'if_platform/', name : 'Platform'},
+          {href : 'kitchen_sink/', name : 'Kitchen Sink'},
+          {href : 'list/', name : 'List'},
+          {href : 'navigator/', name : 'Navigator'},
+          {href : 'navigator_inside_tabbar/', name : 'Navigator inside Tabbar'},
+          {href : 'navigator_reset/', name : 'Navigator Reset'},
+          {href : 'navigator_with_navigator_toolbar/', name : 'Navigator with Navigator Toolbar'},
+          {href : 'ons_get/', name : 'ons_get'},
+          {href : 'page/', name : 'page'},
+          {href : 'radio_button/', name : 'Radio Button'},
+          {href : 'screen/', name : 'Screen'},
+          {href : 'screen_split_view/', name : 'Screen and Split View'},
+          {href : 'screen_split_view_navigator/', name : 'Screen and Split View and Navigator'},
+          {href : 'scroller/', name : 'Scroller'},
+          {href : 'search_input/', name : 'Search Input'},
+          {href : 'select/', name : 'Select'},
+          {href : 'sliding_menu/', name : 'Sliding Menu'},
+          {href : 'sliding_menu_max_slide_distance/', name : 'Sliding Menu with Max Slide Distance'},
+          {href : 'split_view/', name : 'Split View'},
+          {href : 'tabbar/', name : 'Tabbar (Icon with Label)'},
+          {href : 'text_input/', name : 'Text Input'},
+          {href : 'textarea/', name : 'Text Area'}
+      ];
+      $scope.go = function(demo) {
+        $window.location.href = demo.href;
+      };
+  });
+  </script>  
   
 </head>
 
-<body>    
+<body ng-controller="DemoListController">    
   
-  <ons-navigator title="Demo time!" page="demo_list.html"></ons-navigator>
+  <ons-navigator title="Demo time!">
+    <ons-page>
+      <ons-list>
+        <ons-list-item class="topcoat-list__item--tappable" ng-repeat="demo in demoList">
+          <div class="topcoat-list__item__line-height" ng-click="go(demo)">
+            {{demo.name}}
+          </div>
+        </ons-list-item>
+
+        
+      </ons-list>
+    </ons-page>
+  </ons-navigator>
  
 </body>
 </html>

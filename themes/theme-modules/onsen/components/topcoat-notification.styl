@@ -21,10 +21,10 @@
 
 .topcoat-notification
   @extend .notification
-  padding: var-notification-padding;
-  width: var-notification-width;
-  height: var-notification-height;
-  border-radius: var-notification-border-radius;
-  background-color: var-notification-bg-color;
-  color: var-notification-color;
+  padding var-notification-padding
+  min-width var-notification-width
+  height var-notification-height
+  border-radius @height
+  background-color var-notification-bg-color
+  color var-notification-color
 

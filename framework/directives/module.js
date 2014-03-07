@@ -19,7 +19,7 @@ limitations under the License.
 (function() {
 	var directiveModules = angular.module('onsen.directives', ['templates-main']); // [] -> create new module
 
-	directiveModules.run(function($rootScope) {
+	directiveModules.run(function($rootScope, $window) {
 		$rootScope.ons = $rootScope.ons || {};
 		$rootScope.ons.$get = function(id) {
 			id = id.replace('#', '');
@@ -41,6 +41,27 @@ limitations under the License.
 			return null;
 		};
 
+		$rootScope.console = $window.console;
+		$rootScope.alert = $window.alert;
+	});
+
+	directiveModules.service('debugLog', function() {
+		return window.ONSEN_DEBUG ? function() {
+			console.log.apply(window.console, arguments);
+		} : function() { };
+	});
+
+	directiveModules.service('requestAnimationFrame', function() {
+		var fn = window.webkitRequestAnimationFrame || 
+			window.mozRequestAnimationFrame || 
+			window.oRequestAnimationFrame || 
+			window.msRequestAnimationFrame ||
+			window.requestAnimationFrame ||
+			function(callback) {
+				return window.setTimeout(callback, 1000 / 60); // 60fps
+			};
+
+		return fn;
 	});
 
 	directiveModules.factory('ONSEN_CONSTANTS', function() {

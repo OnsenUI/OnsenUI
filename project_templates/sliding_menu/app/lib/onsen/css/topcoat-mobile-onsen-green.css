@@ -25,12 +25,6 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.topcoat-icon--menu-stack {
-  background: url("../img/hamburger_dark.svg") no-repeat;
-  -webkit-background-size: cover;
-  background-size: cover;
-}
-
 .quarter {
   width: 25%;
 }
@@ -343,7 +337,7 @@
   modifiers:
     :disabled: Disabled state
   markup:
-    <div class="topcoat-button-bar" style="width:280px">
+    <div class="topcoat-button-bar" style="width:240px">
       <div class="topcoat-button-bar__item">
         <button class="topcoat-button-bar__button">One</button>
       </div>
@@ -407,7 +401,7 @@
   border-radius: inherit;
 }
 
-.button-bar__item:disabled {
+.button-bar__itemdisabled {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
@@ -906,6 +900,7 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   margin: 0;
   padding: 0;
   position: relative;
+  list-style: none;
 }
 
 .topcoat-list {
@@ -1036,7 +1031,7 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 
 .topcoat-navigation-bar {
   height: 54px;
-  height: 40px;
+  height: 44px;
   padding-left: 16px;
   padding-right: 16px;
   background: transparent;
@@ -1049,7 +1044,7 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 
 .topcoat-navigation-bar__line-height {
   line-height: 54px !important;
-  line-height: 40px !important;
+  line-height: 44px !important;
 }
 
 .topcoat-navigation-bar__bg {
@@ -1060,7 +1055,7 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 .topcoat-navigation-bar__item {
   margin: 0;
   line-height: 54px;
-  line-height: 40px;
+  line-height: 44px;
   vertical-align: top;
 }
 
@@ -1068,6 +1063,11 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   font-size: 16px;
   font-weight: 500;
   color: #fff;
+}
+
+.topcoat-navigation-bar--bottom {
+  border-bottom: none;
+  border-top: 1px solid #8b8b8b;
 }
 
 /* topdoc
@@ -1112,10 +1112,10 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
 
 .topcoat-notification {
   padding: 0 6px 0;
-  width: 19px;
+  min-width: 19px;
   height: 19px;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
+  -webkit-border-radius: 19px;
+  border-radius: 19px;
   background-color: #ec514e;
   color: #fff;
 }
@@ -1886,6 +1886,7 @@ box-shadow var-box-shadow--switch__label--after--checked,
   height: var-height--tab-bar;
   background-color: #eae5e3;
   border-top: 1px solid #b5b0aa;
+  width: 100%;
 }
 
 .topcoat-tab-bar__button {
@@ -1905,6 +1906,7 @@ box-shadow var-box-shadow--switch__label--after--checked,
   box-shadow: none;
   border-top: 1px solid #6fba2c;
   border-top: none;
+  width: 100%;
 }
 
 .topcoat-tab-bar__button:active,

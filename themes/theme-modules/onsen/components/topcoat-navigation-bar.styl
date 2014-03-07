@@ -21,8 +21,8 @@
 
 .topcoat-navigation-bar
   @extend .navigation-bar
-  height: var-height--large
-  height: var-height--navigation-bar
+  height var-height--large
+  height var-height--navigation-bar
   padding-left var-padding--navigation-bar
   padding-right var-padding--navigation-bar
   background var-background-color
@@ -33,8 +33,8 @@
 
 
 .topcoat-navigation-bar__line-height
-  line-height: var-height--large !important
-  line-height: var-height--navigation-bar !important
+  line-height var-height--large !important
+  line-height var-height--navigation-bar !important
 
 .topcoat-navigation-bar__bg 
   background var-background-color
@@ -53,3 +53,6 @@
   font-weight var-font-weight--large
   color var-color--navigation-bar
 
+.topcoat-navigation-bar--bottom
+  border-bottom none
+  border-top var-border-bottom--navigation-bar

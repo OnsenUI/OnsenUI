@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=yes">
+  <title>Screen Demo | Onsen UI</title>  
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/topcoat-mobile-onsen-ios7.css">  
+
+  <script src="../../build/js/angular/angular.js"></script>  
+  <script src="../../build/js/angular/angular-touch.js"></script>      
+  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../app.js"></script>  
+  
+</head>
+
+<body>    
+  
+  <ons-screen>
+    <ons-page class="center">
+        <h1>Page 1</h1>
+        <ons-button ng-click="ons.screen.presentPage('page2.html')">Present Page 2</ons-button>
+    </ons-page>
+  </ons-screen>
+ 
+</body>
+</html>

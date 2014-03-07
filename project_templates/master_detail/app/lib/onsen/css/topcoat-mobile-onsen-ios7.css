@@ -25,12 +25,6 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.topcoat-icon--menu-stack {
-  background: url("../img/hamburger_dark.svg") no-repeat;
-  -webkit-background-size: cover;
-  background-size: cover;
-}
-
 .quarter {
   width: 25%;
 }
@@ -327,8 +321,8 @@
 }
 
 .topcoat-button--cta:active,
+color var-color--cta--down,
 .topcoat-button--large--cta:active {
-  color: #fff;
   background-color: #76e389;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -365,7 +359,7 @@
   modifiers:
     :disabled: Disabled state
   markup:
-    <div class="topcoat-button-bar" style="width:280px">
+    <div class="topcoat-button-bar" style="width:240px">
       <div class="topcoat-button-bar__item">
         <button class="topcoat-button-bar__button">One</button>
       </div>
@@ -429,7 +423,7 @@
   border-radius: inherit;
 }
 
-.button-bar__item:disabled {
+.button-bar__itemdisabled {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
@@ -556,23 +550,23 @@
 .topcoat-icon-button--quiet {
   padding: 4px 10px;
   letter-spacing: 0;
-  color: #c6c8c8;
+  color: #1284ff;
   text-shadow: 0 1px none;
   vertical-align: baseline;
   background-color: transparent;
-  background-color: #fff;
+  background-color: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
   border: 1px solid #1284ff;
-  border: none;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   border-radius: 3px;
   font-weight: 400;
+  font-size: 16px;
 }
 
 .topcoat-icon-button:active {
-  background-color: #808080;
+  background-color: #b5d9ff;
 }
 
 .topcoat-icon-button:disabled,
@@ -1000,6 +994,7 @@ input[type="checkbox"] {
   margin: 0;
   padding: 0;
   position: relative;
+  list-style: none;
 }
 
 .topcoat-list {
@@ -1161,7 +1156,6 @@ input[type="checkbox"] {
 }
 
 .topcoat-navigation-bar {
-  height: 36px;
   height: 44px;
   padding-left: 0;
   padding-right: 0;
@@ -2089,6 +2083,10 @@ input[type="search"]::-webkit-search-cancel-button {
   line-height: 49px;
   margin: 0;
   pading: 0;
+}
+
+.topcoat-tab-bar__button {
+  color: #888;
 }
 
 .topcoat-tab-bar__button:active,

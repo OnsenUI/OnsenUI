@@ -1,0 +1,28 @@
+<ons-page class="center">
+	<style type="text/css" media="screen">
+		h3 {
+			margin-top: 40px;
+			margin-bottom: 10px;
+		}
+	</style>
+
+	<h4>Page 2</h4>
+
+	<h3>Navigator 1</h3>
+	<ons-button 
+		ng-click="ons.$get('#navigator1').popPage()">
+		Pop
+	</ons-button>
+
+	<h3>Navigator 2</h3>
+	<ons-button 
+		ng-click="ons.$get('#navigator2').popPage()">
+		Pop
+	</ons-button>
+
+	<h3>Using $event</h3>
+	<ons-button 
+		ng-click="ons.navigator.popPage($event)">
+		Pop Page
+	</ons-button>
+</ons-page>

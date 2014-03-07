@@ -90,6 +90,12 @@ pre {
 #main-header nav {
   display: none;
 }
+
+.topcoat-icon--menu-stack {
+  background: url("../../img/hamburger_dark.svg") no-repeat;
+  background-size: cover;
+}
+
 #slide-menu-button {
   position: absolute;
   top: 20px;

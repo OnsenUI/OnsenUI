@@ -17,12 +17,8 @@ limitations under the License.
 
 
 .scroller-wrapper {
-	overflow-y: scroll;
+    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;   
-}
-
-.scroller {    
-    min-height: 105%;
 }
 
 ::-webkit-scrollbar {

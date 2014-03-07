@@ -13,7 +13,6 @@ module.exports = function(grunt) {
             '.tmp',
             'build',
             'app/lib/onsen/',
-            'demo/lib/onsen/',
             'project_templates/minimum/app/lib/onsen/',
             'project_templates/sliding_menu/app/lib/onsen/',
             'project_templates/sliding_menu_navigator/app/lib/onsen/',
@@ -141,16 +140,6 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'build/',
           dest: 'app/lib/onsen/',
-          src: [
-            '**'
-          ]
-        }]
-      },
-      demo: {
-        files: [{
-          expand: true,
-          cwd: 'build/',
-          dest: 'demo/lib/onsen/',
           src: [
             '**'
           ]
@@ -320,21 +309,22 @@ module.exports = function(grunt) {
       app: {
         files: [
           'app/*',
-          'app/**/*'
+          'app/**/*',
+          'demo/*',
+          'demo/**/*',
+          'test/manual-testcases/*',
+          'test/manual-testcases/**/*',
         ],
         tasks: [],
         options: {
-          livereload: true
+          livereload: 35730
         },
       },
-      demos: {
-        files: [
-          'demo/*',
-          'demo/**/*'
-        ],
-        tasks: [],
+      templates: {
+        files: 'framework/templates/*.tpl',
+        tasks: ['html2js'],
         options: {
-          livereload: true
+          livereload: 35730
         },
       },
       scripts: {
@@ -344,25 +334,21 @@ module.exports = function(grunt) {
           'framework/lib/*.js',
           'framework/css/*.css',
           'framework/css/polyfill/*.css',
-          'themes/css/*.css',
-          'framework/templates/*.tpl',
+          'themes/css/*.css'
         ],
         tasks: ['default'],
         options: {
-          livereload: true
+          livereload: 35730
         },
       },
     },
     connect: {
-      options: {
-        port: 8000,
-        hostname: 'localhost',
-        livereload: true,
-        base: '.'
-      },
-      livereload: {
+      serve: {
         options: {
-          port: 9000
+          port: 8000,
+          hostname: '0.0.0.0',
+          livereload: 35730,
+          base: '.'
         }
       }
     }
@@ -382,7 +368,7 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', [
-    'clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:app', 'copy:demo', 
+    'clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:app', 
     'copy:minimum_template', 'copy:sliding_menu_template', 
     'copy:sliding_menu_navigator_template', 'copy:tab_bar_template', 
     'copy:split_view_template', 'copy:split_view_navigator_template', 

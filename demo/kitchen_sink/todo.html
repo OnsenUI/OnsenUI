@@ -1,0 +1,34 @@
+<ons-navigator left-button-icon="fa fa-bars" on-left-button-click="ons.slidingMenu.toggleMenu();" title="Todos">
+  <div ng-controller="TodosController">
+
+    <ons-list>
+      <ons-list-item class="no-wrap iso7-no-active">
+        <form novalidate name="todoForm" class="css-form" ng-submit="addTodo(newTodo.text); newTodo.text=''; ">
+          <ons-row style="padding-top: 4px">
+            <ons-col>
+              <ons-text-input name="todoText" class="full" ng-model="newTodo.text" placeholder="What to do?" style="margin-top: 2px;"></ons-text-input>
+            </ons-col>
+            <ons-col size="20" style="padding-left: 4px">
+              <ons-button class="inline-block todo-add-button">Add</ons-button>
+            </ons-col>
+          </ons-row>
+        </form>
+      </ons-list-item>
+
+      <ons-list-item class="no-wrap iso7-no-active zoom" ng-repeat="todo in todos">
+        <ons-row>
+          <ons-col align="center" class="left topcoat-list__item__line-height">
+            {{todo.text}}
+          </ons-col>
+          <ons-col size="20"  class="topcoat-list__item__line-height center">
+            <span class="topcoat-icon-button--quiet" ng-click="removeTodo($index)">
+              <i class="fa fa-times" style="font-size: 24px"></i>
+            </span>
+          </ons-col>
+        </ons-row>
+      </ons-list-item>  
+    
+    </ons-list>
+  </div>
+
+</ons-navigator>
