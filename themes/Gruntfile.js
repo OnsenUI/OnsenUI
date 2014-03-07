@@ -81,17 +81,12 @@ module.exports = function(grunt) {
         },
 
         topdoc: {
-            usageguides: {
+            testcases: {
                 options: {
                     source: 'css',
-                    destination: 'demo',
-                    template: 'topdoc-template/',
-                    templateData: {
-                        "title": "Onsen UI Themes",
-                        "subtitle": "",
-                        "homeURL": "#",
-                        "siteNav": []
-                    }
+                    destination: 'testcases',
+                    template: 'testcases-topdoc-template/',
+                    templateData: {}
                 }
             }
         },
@@ -128,23 +123,28 @@ module.exports = function(grunt) {
             },
 
             'ios7-themes': {
-                files: ['theme-modules/**/*.styl', 'topdoc-template/*', 'topdoc-template/**/*', 'theme-modules/common/*.styl'],
+                files: ['theme-modules/**/*.styl', 'demo-topdoc-template/**/*', 'testcases-topdoc-template/**/*', 'theme-modules/common/*.styl'],
                 tasks: ['gen-ios7-themes', 'topdoc']
             },
 
             'android4_4-themes': {
-                files: ['theme-modules/**/*.styl', 'topdoc-template/*', 'topdoc-template/**/*', 'theme-modules/common/*.styl'],
+                files: ['theme-modules/**/*.styl', 'demo-topdoc-template/**/*', 'testcases-topdoc-template/**/*', 'theme-modules/common/*.styl'],
                 tasks: ['gen-android4_4-themes', 'topdoc']
             },
 
             'onsen-themes': {
-                files: ['theme-modules/**/*.styl', 'topdoc-template/*', 'topdoc-template/**/*', 'theme-modules/common/*.styl'],
+                files: ['theme-modules/**/*.styl', 'demo-topdoc-template/**/*', 'testcases-topdoc-template/**/*', 'theme-modules/common/*.styl'],
                 tasks: ['gen-onsen-themes', 'topdoc']
             },
 
             'all-themes': {
-                files: ['theme-modules/**/*.styl', 'topdoc-template/*', 'topdoc-template/**/*', 'theme-modules/common/*.styl'],
+                files: ['theme-modules/**/*.styl', 'demo-topdoc-template/**/*', 'testcases-topdoc-template/**/*', 'theme-modules/common/*.styl'],
                 tasks: ['build']
+            },
+
+            'topdoc': {
+                files: ['demo-topdoc-template/**/*', 'testcases-topdoc-template/**/*'],
+                tasks: ['topdoc']
             }
         },
 
@@ -187,6 +187,7 @@ module.exports = function(grunt) {
     grunt.registerTask('serve-onsen-themes', ['connect', 'serve-message', 'watch:onsen-themes']);
     grunt.registerTask('serve-ios7-themes', ['connect', 'serve-message', 'watch:ios7-themes']);
     grunt.registerTask('serve-android4_4-themes', ['connect', 'serve-message', 'watch:android4_4-themes']);
+    grunt.registerTask('serve-topdoc', ['connect', 'serve-message', 'watch:topdoc']);
     grunt.registerTask('serve', ['build', 'connect', 'serve-message', 'watch']);
 
 };
