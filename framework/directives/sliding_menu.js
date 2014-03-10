@@ -46,6 +46,7 @@ limitations under the License.
 
 				var Swiper = Class.extend({
 					init: function(element) {
+						this.isReady = false;
 						this.$el = element;
 						this.el = element[0];
 						this.VERTICAL_THRESHOLD = 20;
@@ -80,9 +81,10 @@ limitations under the License.
 						}
 
 						window.setTimeout(function() {
+							this.isReady = true;
 							this.behindPage.style.opacity = 1;
 							this.blackMask.style.opacity = 1;
-						}.bind(this), 100);
+						}.bind(this), 400);
 					},
 
 					onSwipableChanged: function(swipable){
@@ -311,8 +313,9 @@ limitations under the License.
 							this.abovePage.style[property] = aboveTransform;
 							this.behindPage.style[property] = behindTransform;
 						};
-						
-						this.behindPage.style.opacity = opacity;
+						if(this.isReady){
+							this.behindPage.style.opacity = opacity;
+						}						
 						this.currentX = x;
 					}
 				});
