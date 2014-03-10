@@ -2,11 +2,12 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>My App</title>  
-  <link rel="stylesheet" href="styles/app.css"/>
+  
   <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
   <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">  
+  <link rel="stylesheet" href="styles/app.css"/>
 
   <script src="lib/onsen/js/angular/angular.js"></script>    
   <script src="lib/onsen/js/onsenui.js"></script>    
@@ -18,8 +19,31 @@
 </head>
 
 <body>    
-  
-  <ons-screen page="home_navigator.html"></ons-screen>
- 
+  <ons-screen>
+    <ons-navigator title="Page 1">
+      <ons-page class="center">
+        <div ng-controller="MasterController">
+          <ons-list>
+                <ons-list-item
+                  class="topcoat-list__item--tappable topcoat-list__item__line-height" 
+                  ng-repeat="item in items" 
+                  ng-click="showDetail($index)">
+                  <ons-row>
+                    <ons-col size="10"> 
+                      <ons-icon 
+                          icon="{{item.icon}}"
+                          fixed-width="true">
+                      </ons-icon>
+                    </ons-col>
+                    <ons-col class="left">
+                      {{item.title}}
+                    </ons-col>
+                  </ons-row>                          
+                </ons-list-item>
+            </ons-list>
+        </div>    
+      </ons-page>
+    </ons-navigator>
+  </ons-screen>
 </body>  
 </html>

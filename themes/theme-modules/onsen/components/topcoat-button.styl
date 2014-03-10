@@ -1,0 +1,176 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+@import '../../common/topdoc-button'
+@require '../../common/button'
+
+.topcoat-button 
+  @extend .button
+  padding var-padding
+  font-size var-font-size
+  line-height var-line-height
+  letter-spacing var-letter-spacing
+  color var-color
+  color var-color__button
+  text-shadow var-text-shadow
+  vertical-align var-vertical-align
+  background-color var-background-color
+  background-color var-background-color__button
+  box-shadow var-box-shadow
+  border var-border
+  border var-border--button
+  border-radius var-border-radius
+
+.topcoat-button:hover 
+  background-color var-background-color--hover
+  background-color var-background-color--hover__button
+  color var-color--button--hover
+
+.topcoat-button:active 
+  background-color var-background-color--down
+  background-color var-background-color--down__button
+  box-shadow var-box-shadow--down
+  color var-color--button--active
+
+.topcoat-button:focus 
+  border var-border--focus
+  box-shadow var-box-shadow--focus
+  outline 0
+
+.topcoat-button:disabled 
+  @extend .button--disabled
+
+.topcoat-button--quiet 
+  @extend .topcoat-button
+  button--quiet()
+  background var-quiet-button-background
+  color var-quiet-button-color
+  border var-border__button--quiet
+
+.topcoat-button--quiet:disabled 
+  @extend .topcoat-button:disabled
+  border var-border__button--quiet
+
+.topcoat-button--quiet:hover 
+  @extend .topcoat-button:hover
+  text-shadow var-text-shadow
+  border var-border
+  border var-border--hover__button--quiet
+  background-color var-background-color--quiet-hover
+  box-shadow var-box-shadow
+
+.topcoat-button--quiet:focus 
+  @extend .topcoat-button:focus
+
+.topcoat-button--quiet:active 
+  color var-color
+  color var-color--active__button--quiet
+  text-shadow var-text-shadow
+  background-color var-background-color--down
+  background-color var-background-color--quiet-active
+  border var-border
+  border var-border--active__button--quiet
+  box-shadow var-box-shadow--down
+
+.topcoat-button--large 
+  @extend .topcoat-button
+  font-size var-font-size--large
+  font-weight var-font-weight--large
+  line-height var-line-height--large
+  padding var-padding--large
+  width 100%
+  display block
+
+.topcoat-button--large:active 
+  @extend .topcoat-button:active
+
+.topcoat-button--large:disabled 
+  @extend .topcoat-button:disabled
+
+.topcoat-button--large:hover 
+  @extend .topcoat-button:hover
+
+.topcoat-button--large:focus 
+  @extend .topcoat-button:focus
+
+.topcoat-button--large--quiet 
+  @extend .topcoat-button--large
+  color var-quiet-button-color
+  button--quiet()
+  color var-quiet-button-color
+
+.topcoat-button--large--quiet:active 
+  @extend .topcoat-button--quiet:active
+  color var-color--quiet-active
+
+.topcoat-button--large--quiet:disabled 
+  @extend .button--disabled
+.topcoat-button--large--quiet:hover 
+  @extend .topcoat-button--quiet:hover
+
+.topcoat-button--large--quiet:focus 
+  @extend .topcoat-button:focus
+
+.topcoat-button--cta 
+  @extend .topcoat-button
+  border var-border--cta
+  background-color var-background-color--cta
+  box-shadow var-box-shadow--cta
+  color var-color--cta
+  font-weight var-font-weight--cta
+  text-shadow var-text-shadow--cta
+
+.topcoat-button--cta:hover 
+  background-color var-background-color--cta--hover
+
+.topcoat-button--cta:focus 
+  @extend .topcoat-button:focus
+
+.topcoat-button--cta:active 
+  color var-color--cta--down
+  background-color var-background-color--cta--down
+  box-shadow var-box-shadow--cta--down
+
+.topcoat-button--cta:disabled 
+  @extend .topcoat-button:disabled
+
+.topcoat-button--large--cta 
+  @extend .topcoat-button--cta
+  font-size var-font-size--large
+  font-weight var-font-weight--large
+  line-height var-line-height--large
+  padding var-padding--large
+  width 100%
+  display block
+
+.topcoat-button--large--cta:hover 
+  @extend .topcoat-button--cta:hover
+
+.topcoat-button--large--cta:focus 
+  @extend .topcoat-button:focus
+
+.topcoat-button--large--cta:active 
+  @extend .topcoat-button--cta:active
+
+.topcoat-button--large--cta:disabled 
+  @extend .topcoat-button:disabled
+
+.topcoat-button__spinner 
+  border 3px solid var-color
+  border 3px solid var-color__button
+

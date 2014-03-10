@@ -2,7 +2,8 @@ angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/but
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/bottom_toolbar.tpl",
-    "<div class=\"onsen_bottom-toolbar topcoat-navigation-bar\" ng-transclude></div>");
+    "<div class=\"onsen_bottom-toolbar topcoat-navigation-bar topcoat-navigation-bar--bottom\" ng-transclude></div>\n" +
+    "");
 }]);
 
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
@@ -26,7 +27,7 @@ angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($te
 
 angular.module("templates/column.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/column.tpl",
-    "<div class=\"col col-{{align}} col-{{size}} col-{{offset}}\" ng-transclude></div>");
+    "<div class=\"col col-{{align}} col-{{size}} col-{{offset}}\"></div>");
 }]);
 
 angular.module("templates/icon.tpl", []).run(["$templateCache", function($templateCache) {
@@ -72,26 +73,25 @@ angular.module("templates/list_item.tpl", []).run(["$templateCache", function($t
 
 angular.module("templates/navigator.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/navigator.tpl",
-    "<div class=\"navigator-container\">	\n" +
+    "<div class=\"navigator-container\">\n" +
     "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar relative\">	 \n" +
     "		<div class=\"navigator-toolbar__content relative\">\n" +
     "			<div class=\"onsen_navigator-item topcoat-navigation-bar__bg onsen_navigator__left-button-container transition hide\">\n" +
-    "				<span id=\"left-section\" class=\"topcoat-icon-button--quiet\">\n" +
+    "				<span class=\"topcoat-icon-button--quiet left-section\">\n" +
     "					<i class=\"fa fa-angle-left fa-2x topcoat-navigation-bar__line-height\"></i>\n" +
-    "				</span>			\n" +
-    "			</div>		\n" +
-    "			<div class=\"onsen_navigator__right-button onsen_navigator-item\">\n" +
-    "				<span id=\"right-section-icon\" class=\"topcoat-icon-button--quiet\">\n" +
     "				</span>\n" +
-    "\n" +
     "			</div>\n" +
-    "		</div>	\n" +
+    "			<div class=\"onsen_navigator__right-button onsen_navigator-item\">\n" +
+    "				<span class=\"topcoat-icon-button--quiet right-section-icon\">\n" +
+    "				</span>\n" +
+    "			</div>\n" +
+    "		</div>\n" +
     "	</div>\n" +
+    "\n" +
     "	<div class=\"relative navigator-content topcoat-page__bg\">\n" +
-    "		\n" +
     "	</div>    \n" +
-    "	\n" +
-    "</div>");
+    "</div>\n" +
+    "");
 }]);
 
 angular.module("templates/navigator_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
@@ -101,7 +101,7 @@ angular.module("templates/navigator_toolbar.tpl", []).run(["$templateCache", fun
 
 angular.module("templates/page.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/page.tpl",
-    "<div class=\"page\" ng-transclude></div>");
+    "<div class=\"page\"></div>");
 }]);
 
 angular.module("templates/radio_button.tpl", []).run(["$templateCache", function($templateCache) {
@@ -116,7 +116,7 @@ angular.module("templates/radio_button.tpl", []).run(["$templateCache", function
 
 angular.module("templates/row.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/row.tpl",
-    "<div class=\"row row-{{align}}\" ng-transclude></div>");
+    "<div class=\"row row-{{align}}\"></div>");
 }]);
 
 angular.module("templates/screen.tpl", []).run(["$templateCache", function($templateCache) {
@@ -129,9 +129,7 @@ angular.module("templates/scroller.tpl", []).run(["$templateCache", function($te
   $templateCache.put("templates/scroller.tpl",
     "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
     "	<div class=\"scroller\">\n" +
-    "		<div ng-transclude>\n" +
-    "			\n" +
-    "		</div>		\n" +
+    "		\n" +
     "	</div>\n" +
     "</div>");
 }]);
@@ -152,8 +150,6 @@ angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function
     "<div class=\"sliding-menu full-screen\">\n" +
     "	<div ng-cloak class=\"onsen_sliding-menu-black-mask\"></div>\n" +
     "	<div class=\"behind full-screen\">\n" +
-    "		<ng-include class=\"full-screen\" class=\"page\" ng-cloak src=\"pages.behind\">\n" +
-    "		</ng-include>\n" +
     "	</div>\n" +
     "\n" +
     "	<div class=\"above full-screen\">		\n" +
@@ -165,13 +161,10 @@ angular.module("templates/split_view.tpl", []).run(["$templateCache", function($
   $templateCache.put("templates/split_view.tpl",
     "<div class=\"sliding-menu full-screen\">\n" +
     "	<div class=\"onsen_sliding-menu-black-mask\"></div>\n" +
-    "	<div class=\"secondary full-screen\">\n" +
-    "		<ng-include ng-cloak src=\"pages.behind\" class=\"page\">\n" +
-    "		</ng-include>\n" +
+    "	<div class=\"secondary full-screen\">		\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"main full-screen\">\n" +
-    "		\n" +
+    "	<div class=\"main full-screen\">		\n" +
     "	</div>\n" +
     "	\n" +
     "</div>");
@@ -179,10 +172,10 @@ angular.module("templates/split_view.tpl", []).run(["$templateCache", function($
 
 angular.module("templates/tab_bar.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/tab_bar.tpl",
-    "  <ng-include src=\"selectedTabItem.source\" style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content\">\n" +
+    "  <div style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content\">\n" +
     "    \n" +
-    "  </ng-include>\n" +
-    "  <div ng-hide=\"hideTabbar\" class=\"topcoat-tab-bar full footer\" ng-transclude>         \n" +
+    "  </div>\n" +
+    "  <div ng-hide=\"hideTabs\" class=\"topcoat-tab-bar full footer\" ng-transclude>         \n" +
     "  </div>\n" +
     "\n" +
     "");
@@ -191,9 +184,9 @@ angular.module("templates/tab_bar.tpl", []).run(["$templateCache", function($tem
 angular.module("templates/tab_bar_item.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/tab_bar_item.tpl",
     "<label class=\"topcoat-tab-bar__item no-select\">\n" +
-    "	<input type=\"radio\" name=\"tab-bar\">\n" +
+    "	<input type=\"radio\" name=\"tab-bar-{{tabbarId}}\">\n" +
     "	<button class=\"topcoat-tab-bar__button full\" ng-click=\"setActive()\">\n" +
-    "		<i ng-show=\"icon != undefined\" class=\"fa fa-2x fa-{{icon}} {{icon}}\"></i>\n" +
+    "		<i ng-show=\"icon != undefined\" class=\"fa fa-2x fa-{{tabIcon}} {{tabIcon}}\"></i>\n" +
     "		<div class=\"onsen_tab-bar__label\" ng-class=\"{ big: icon === undefined }\">\n" +
     "			{{label}}\n" +
     "		</div>\n" +

@@ -1,0 +1,87 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+@import '../../common/topdoc-radio-button'
+@require '../../common/radio-button'
+
+input[type="radio"]
+  height var-size--radio-button
+  width var-size--radio-button
+  margin-top 0
+  margin-right -@width
+  margin-bottom -@height
+  margin-left 0
+
+input[type="radio"]:checked + .topcoat-radio-button__checkmark:after
+  opacity 1
+
+.topcoat-radio-button
+  @extend .radio-button__label
+  color var-color
+  color var-color--radio-button
+  line-height var-size--radio-button
+  text-align left
+
+.topcoat-radio-button__checkmark:before
+  @extend .radio-button:before
+  width var-size--radio-button
+  height var-size--radio-button
+  background var-background-color
+  background var-background--radio-button--before
+  border var-border
+  border var-border--radio-button--before
+  box-shadow var-box-shadow
+
+.topcoat-radio-button__checkmark
+  @extend .radio-button
+  position relative
+  width var-size--radio-button
+  height var-size--radio-button
+
+.topcoat-radio-button__checkmark:after
+  @extend .radio-button:after
+  opacity 0
+  width var-size--radio-button--checked
+  height var-size--radio-button--checked
+  background var-background--radio-button
+  border var-border--radio-button
+  box-shadow var-box-shadow--radio-button
+  transform none
+  top var-position--radio-button--checked
+  left var-position--radio-button--checked
+
+input[type="radio"]:focus + .topcoat-radio-button__checkmark:before
+  border var-border--focus
+  border var-border--radio-button--focus
+  box-shadow var-box-shadow--cta, var-box-shadow--focus
+
+input[type="radio"]:active + .topcoat-radio-button__checkmark:before
+  border var-border
+  border var-border--radio-button--active
+  background-color var-background-color--down
+  background-color var-background-color--down--radio-button 
+  box-shadow var-box-shadow--down
+
+input[type="radio"]:disabled + .topcoat-radio-button__checkmark
+  @extend .radio-button--disabled
+
+input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before
+  border var-border
+  background var-background-color
+  box-shadow var-box-shadow
+

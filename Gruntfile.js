@@ -12,7 +12,7 @@ module.exports = function(grunt) {
           src: [
             '.tmp',
             'build',
-            'demo/lib/onsen/',
+            'app/lib/onsen/',
             'project_templates/minimum/app/lib/onsen/',
             'project_templates/sliding_menu/app/lib/onsen/',
             'project_templates/sliding_menu_navigator/app/lib/onsen/',
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
           // * Add target browsers here
           // * https://github.com/ai/autoprefixer#browsers
           // * 
-          browsers: ["last 2 version", "Android 4", "iOS 7"]
+          browsers: ['> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6']
 
         },
         files: [{
@@ -98,10 +98,10 @@ module.exports = function(grunt) {
               '*.*'
             ]
           },
-          // topcoat css
+          // themes css
           {
             expand: true,
-            cwd: 'framework/css/topcoat/css',
+            cwd: 'themes/css',
             dest: 'build/css/',
             src: [
               '*.css'
@@ -112,15 +112,6 @@ module.exports = function(grunt) {
             dest: 'build/img/',
             src: [
               '*.*'
-            ]
-          },
-          // fonts
-          {
-            expand: true,
-            cwd: 'framework/css/topcoat/font/',
-            dest: 'build/font/',
-            src: [
-              '*.otf'
             ]
           },
 
@@ -144,11 +135,11 @@ module.exports = function(grunt) {
           }
         ]
       },
-      demo: {
+      app: {
         files: [{
           expand: true,
           cwd: 'build/',
-          dest: 'demo/lib/onsen/',
+          dest: 'app/lib/onsen/',
           src: [
             '**'
           ]
@@ -315,14 +306,25 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      demos: {
+      app: {
         files: [
+          'app/*',
+          'app/**/*',
           'demo/*',
-          'demo/**/*'
+          'demo/**/*',
+          'test/manual-testcases/*',
+          'test/manual-testcases/**/*',
         ],
         tasks: [],
         options: {
-          livereload: true
+          livereload: 35730
+        },
+      },
+      templates: {
+        files: 'framework/templates/*.tpl',
+        tasks: ['html2js'],
+        options: {
+          livereload: 35730
         },
       },
       scripts: {
@@ -332,25 +334,21 @@ module.exports = function(grunt) {
           'framework/lib/*.js',
           'framework/css/*.css',
           'framework/css/polyfill/*.css',
-          'framework/css/topcoat/css/*.css',
-          'framework/templates/*.tpl',
+          'themes/css/*.css'
         ],
         tasks: ['default'],
         options: {
-          livereload: true
+          livereload: 35730
         },
       },
     },
     connect: {
-      options: {
-        port: 8000,
-        hostname: 'localhost',
-        livereload: true,
-        base: '.'
-      },
-      livereload: {
+      serve: {
         options: {
-          port: 9000
+          port: 8000,
+          hostname: '0.0.0.0',
+          livereload: 35730,
+          base: '.'
         }
       }
     }
@@ -366,10 +364,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-autoprefixer');
 
   grunt.registerTask('serve', ['connect', 'watch']);
+  grunt.registerTask('serve:app', ['connect', 'watch:app']);
 
   // Default task(s).
   grunt.registerTask('default', [
-    'clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:demo', 
+    'clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:app', 
     'copy:minimum_template', 'copy:sliding_menu_template', 
     'copy:sliding_menu_navigator_template', 'copy:tab_bar_template', 
     'copy:split_view_template', 'copy:split_view_navigator_template', 

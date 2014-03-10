@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Text Input Demo</title>  
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/topcoat-mobile-onsen-ios7.css">  
+
+  <script src="../../build/js/angular/angular.js"></script> 
+  <script src="../../build/js/angular/angular-touch.js"></script>       
+  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../app.js"></script>  
+  
+</head>
+
+<body>    
+
+  <ons-navigator title="Text Input">
+    <ons-page style="padding : 8px">
+      <ons-text-input ng-model="text" placeholder="Type here" style="display: block; width: 100%"></ons-text-input>
+      <ons-button type="cta-large" style="display: block; width: 100%; margin-top: 8px;">Submit</ons-button>
+    </ons-page>
+  </ons-navigator>
+ 
+</body>
+</html>

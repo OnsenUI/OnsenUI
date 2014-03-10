@@ -1,0 +1,94 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+@import '../../common/topdoc-text-input'
+@require '../../common/input'
+
+.topcoat-text-input
+  @extend .input
+  line-height var-line-height
+  font-size var-font-size
+  letter-spacing var-letter-spacing
+  padding var-padding--text-input
+  border var-border
+  border var-border--text-input
+  border-radius var-border-radius
+  background-color var-background-color--text-input
+  box-shadow var-box-shadow--text-input
+  color var-color
+  color var-color--text-input
+  vertical-align var-vertical-align
+
+.topcoat-text-input:focus
+  background-color var-background-color--text-input--focus
+  color var-color--focus
+  color var-color--text-input--focus
+  border var-border--focus
+  border var-border--text-input--focus
+  box-shadow var-box-shadow--text-input, var-box-shadow--focus
+
+.topcoat-text-input:disabled
+  @extend .input:disabled
+
+.topcoat-text-input:disabled::-webkit-input-placeholder
+  color var-color--focus
+
+.topcoat-text-input:disabled::-moz-placeholder
+  color var-color--focus
+
+.topcoat-text-input:disabled:-ms-input-placeholder
+  color var-color--focus
+
+.topcoat-text-input:invalid
+  border var-border--invalid
+  color var-color-invalid
+
+
+// transparent
+
+.topcoat-text-input--transparent
+  @extend .topcoat-text-input
+  border none
+  background transparent
+  padding-left 0
+  padding-right 0
+
+.topcoat-text-input:focus
+  @extend .topcoat-text-input:focus
+  border none
+  background transparent
+
+.topcoat-text-input:disabled
+  @extend .topcoat-text-input:disabled
+  border none
+  background transparent
+
+.topcoat-text-input:disabled::-webkit-input-placeholder
+  @extend .topcoat-text-input:disabled::-webkit-input-placeholder
+
+.topcoat-text-input:disabled::-moz-placeholder
+  @extend .topcoat-text-input:disabled::-moz-placeholder
+
+.topcoat-text-input:disabled:-ms-input-placeholder
+  @extend .topcoat-text-input:disabled:-ms-input-placeholder
+
+.topcoat-text-input:invalid
+  @extend .topcoat-text-input:invalid
+  border none
+  background transparent
+

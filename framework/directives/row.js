@@ -29,7 +29,14 @@ limitations under the License.
 			scope: {
 				align: '@'
 			},			
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/row.tpl'
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/row.tpl',
+			compile: function(elt, attr, transclude) {				
+				return function(scope, elt, attr) {
+					transclude(scope.$parent, function(clone) {						
+						elt.append(clone);
+					});
+				};
+			}
 		};
 	});
 })();

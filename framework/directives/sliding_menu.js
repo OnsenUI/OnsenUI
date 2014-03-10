@@ -20,24 +20,33 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile) {
+	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuStack) {
 		return {
 			restrict: 'E',
 			replace: false,
 			transclude: false,
 			scope: {
 				behindPage: '@',
-				abovePage: '@'
+				abovePage: '@',
+				maxSlideDistance: '@',
+				swipable: '@',
+				swipeTargetWidth: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
 				var MAIN_PAGE_RATIO = 0.9;
-
-				scope.ons = scope.ons || {};
-				scope.ons.slidingMenu = scope.ons.slidingMenu || {};
+				var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
+				var BROWSER_TRANSFORMS = [
+					"webkitTransform",
+					"mozTransform",
+					"msTransform",
+					"oTransform",
+					"transform"
+				];
 
 				var Swiper = Class.extend({
 					init: function(element) {
+						this.isReady = false;
 						this.$el = element;
 						this.el = element[0];
 						this.VERTICAL_THRESHOLD = 20;
@@ -48,55 +57,157 @@ limitations under the License.
 						this.$abovePage = angular.element(this.abovePage);
 						this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
 						this.previousX = 0;
-						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
+						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;						
+
+						scope.$watch('maxSlideDistance', this.onMaxSlideDistanceChanged.bind(this));
+						scope.$watch('swipable', this.onSwipableChanged.bind(this));
+						scope.$watch('swipeTargetWidth', this.onSwipeTargetWidthChanged.bind(this));
+						window.addEventListener("resize", this.onWindowResize.bind(this));
+
 						this.currentX = 0;
 						this.startX = 0;
 
-						this.attachMethods();						
+						this.boundHandleEvent = this.handleEvent.bind(this);
+
+						this.attachMethods();
 						this.bindEvents();
 
-						if(scope.abovePage){
-							scope.ons.slidingMenu.setAbovePage(scope.abovePage);
+						if (scope.abovePage) {
+							scope.setAbovePage(scope.abovePage);
 						}
 
-						window.setTimeout(function(){
+						if (scope.behindPage) {
+							scope.setBehindPage(scope.behindPage);
+						}
+
+						window.setTimeout(function() {
+							this.isReady = true;
 							this.behindPage.style.opacity = 1;
 							this.blackMask.style.opacity = 1;
-						}.bind(this), 100);
+						}.bind(this), 400);
+					},
+
+					onSwipableChanged: function(swipable){
+						if(swipable == "" || swipable == undefined){
+							swipable = true;
+						}else{
+							swipable = (swipable == "true");
+						}
+
+						if(swipable){
+							this.activateHammer();
+						}else{
+							this.deactivateHammer();
+						}
+					},
+
+					onSwipeTargetWidthChanged: function(targetWidth){
+						if(typeof targetWidth == 'string'){
+							targetWidth = targetWidth.replace('px', '');
+						}
+						var width = parseInt(targetWidth);
+						if(width < 0 || !targetWidth){
+							this.swipeTargetWidth = this.abovePage.clientWidth;
+						}else{
+							this.swipeTargetWidth = width;
+						}
+					},
+
+					onWindowResize: function(){
+						this.recalculateMAX();
+					},
+
+					onMaxSlideDistanceChanged: function(){						
+						this.recalculateMAX();
+					},
+
+					recalculateMAX: function(){
+						if(typeof scope.maxSlideDistance == 'string'){
+							scope.maxSlideDistance = scope.maxSlideDistance.replace('px', '');	
+						}
+						if (scope.maxSlideDistance && this.MAX > parseInt(scope.maxSlideDistance, 10)) {
+							this.MAX = parseInt(scope.maxSlideDistance);
+						}
+					},
+
+					activateHammer: function(){
+						this.hammertime.on("touch dragleft dragright swipeleft swiperight release", this.boundHandleEvent);
+					},
+
+					deactivateHammer: function(){
+						this.hammertime.off("touch dragleft dragright swipeleft swiperight release", this.boundHandleEvent);
 					},
 
 					bindEvents: function() {
-						this.hammertime = new Hammer(this.el);
-						this.hammertime.on("dragleft dragright swipeleft swiperight release", this.handleEvent.bind(this));
-						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));
+						this.hammertime = new Hammer(this.el);						
+						this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
 					},
 
-					attachMethods: function(){
-						scope.ons.slidingMenu.setAbovePage = function(page) {
+					attachMethods: function() {
+						scope.setBehindPage = function(page) {
 							if (page) {
 								$http({
 									url: page,
 									method: "GET"
-								}).error(function(e){
+								}).error(function(e) {
 									console.error(e);
 								}).success(function(data, status, headers, config) {
 									var templateHTML = angular.element(data.trim());
 									var page = angular.element('<div></div>');
 									page.addClass('page');
-									page[0].style.opacity = 0;
-									var pageContent = $compile(templateHTML)(scope);
+									var pageScope = scope.$parent.$new();
+									var pageContent = $compile(templateHTML)(pageScope);
 									page.append(pageContent);
-									this.$abovePage.append(page);
+									this.$behindPage.append(page);
+
+									if(this.currentBehindPageScope){
+										this.currentBehindPageScope.$destroy();
+										this.currentBehindPageElement.remove();
+									}
+
+									this.currentBehindPageElement = page;
+									this.currentBehindPageScope = pageScope;
+
+								}.bind(this));
+							} else {
+								throw new Error('cannot set undefined page');
+							}
+						}.bind(this);
+
+						scope.setAbovePage = function(pageUrl) {
+							if (this.currentPageUrl === pageUrl) {
+								// same page -> ignore
+								return;
+							}
+
+							if (pageUrl) {
+								$http({
+									url: pageUrl,
+									method: "GET"
+								}).error(function(e) {
+									console.error(e);
+								}).success(function(data, status, headers, config) {
+									var templateHTML = angular.element(data.trim());
+									var pageElement = angular.element('<div></div>');
+									pageElement.addClass('page');
+									pageElement[0].style.opacity = 0;
+									var pageScope = scope.$parent.$new();
+									var pageContent = $compile(templateHTML)(pageScope);
+									pageElement.append(pageContent);
+									this.$abovePage.append(pageElement);
 
 									// prevent black flash
-									setTimeout(function(){
-										page[0].style.opacity = 1;
-										if(this.currentPage){
-											this.currentPage.remove();
+									setTimeout(function() {
+										pageElement[0].style.opacity = 1;
+										if (this.currentPageElement) {
+											this.currentPageElement.remove();
+											this.currentPageScope.$destroy();
 										}
-										this.currentPage = page;
+										this.currentPageElement = pageElement;
+										this.currentPageScope = pageScope;
 									}.bind(this), 0);
 
+									this.currentPageUrl = pageUrl;
 								}.bind(this));
 							} else {
 								throw new Error('cannot set undefined page');
@@ -105,12 +216,21 @@ limitations under the License.
 					},
 
 
-					handleEvent: function(ev) {
+					handleEvent: function(ev) {						
 						switch (ev.type) {
-						
+
+							case 'touch':
+								if(this.isClosed()){
+									if(!this.isInsideSwipeTargetArea(ev.gesture.center.pageX)){
+										ev.gesture.stopDetect();
+									}	
+								}
+								
+								break;
+
 							case 'dragleft':
-							case 'dragright':	
-								ev.gesture.preventDefault();							
+							case 'dragright':
+								ev.gesture.preventDefault();
 								var deltaX = ev.gesture.deltaX;
 								this.currentX = this.startX + deltaX;
 								if (this.currentX >= 0) {
@@ -119,12 +239,12 @@ limitations under the License.
 								break;
 
 							case 'swipeleft':
-								ev.gesture.preventDefault();	
+								ev.gesture.preventDefault();
 								this.close();
 								break;
 
 							case 'swiperight':
-								ev.gesture.preventDefault();	
+								ev.gesture.preventDefault();
 								this.open();
 								break;
 
@@ -138,9 +258,17 @@ limitations under the License.
 						}
 					},
 
+					isInsideSwipeTargetArea: function(x){
+						return x < this.swipeTargetWidth;
+					},
+
 					onTransitionEnd: function() {
 						this.$abovePage.removeClass('transition');
 						this.$behindPage.removeClass('transition');
+					},
+
+					isClosed: function(){
+						return this.startX == 0;
 					},
 
 					close: function() {
@@ -170,79 +298,48 @@ limitations under the License.
 					},
 
 					translate: function(x) {
-						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
+						var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
+						
 						var behind = (x - this.MAX) / this.MAX * 10;
+						if(behind > 0){
+							behind = 0;
+						}
 						var opacity = 1 + behind / 100;
-						this.behindPage.style.webkitTransform = 'translate3d(' + behind + '%, 0, 0)';
-						this.behindPage.style.opacity = opacity;
+						var behindTransform = 'translate3d(' + behind + '%, 0, 0)';
+
+						var property;
+						for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
+							property = BROWSER_TRANSFORMS[i];
+							this.abovePage.style[property] = aboveTransform;
+							this.behindPage.style[property] = behindTransform;
+						};
+						if(this.isReady){
+							this.behindPage.style.opacity = opacity;
+						}						
 						this.currentX = x;
 					}
 				});
 
 				var swiper = new Swiper(element);
 
-				scope.pages = {
-					behind: scope.behindPage				
-				};
-				
 
-				scope.ons.slidingMenu.openMenu = function() {
+				scope.openMenu = function() {
 					swiper.open();
 				};
 
-				scope.ons.slidingMenu.closeMenu = function() {
+				scope.closeMenu = function() {
 					swiper.close();
 				};
 
-				scope.ons.slidingMenu.toggleMenu = function() {
+				scope.toggleMenu = function() {
 					swiper.toggle();
-				};				
-
-				scope.ons.slidingMenu.setBehindPage = function(page) {
-					if (page) {
-						scope.pages.behind = page;
-					} else {
-						throw new Error('cannot set undefined page');
-					}
 				};
 
-				scope.ons.screen = scope.ons.screen || {};
-				scope.ons.screen.presentPage = function(page) {
-					callParent(scope, 'ons.screen.presentPage', page);
-				};
 
-				scope.ons.screen.dismissPage = function() {
-					callParent(scope, 'ons.screen.dismissPage');
-				};
-
-				function callParent(scope, functionName, param) {
-					if (!scope.$parent) {
-						return;
-					}
-
-					var parentFunction = stringToFunction(scope.$parent, functionName);
-					if (parentFunction) {
-						parentFunction.call(scope, param);
-					} else {
-						callParent(scope.$parent, functionName, param);
-					}
-
-				}
-
-				function stringToFunction(root, str) {
-					var arr = str.split(".");
-
-					var fn = root;
-					for (var i = 0, len = arr.length; i < len; i++) {
-						fn = fn[arr[i]];
-					}
-
-					if (typeof fn !== "function") {
-						return false;
-					}
-
-					return fn;
-				}
+				SlidingMenuStack.addSlidingMenu(scope);
+				scope.$on('$destroy', function(){
+					SlidingMenuStack.removeSlidingMenu(scope);
+				});
 			}
 		};
 	});

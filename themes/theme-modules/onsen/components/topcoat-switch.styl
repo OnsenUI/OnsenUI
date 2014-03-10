@@ -1,0 +1,121 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+@import '../../common/topdoc-switch'
+@require '../../common/switch'
+
+.topcoat-switch
+  @extend .switch
+  font-size var-font-size
+  padding var-padding
+  border-radius var-border-radius
+  border-radius var-switch--border-radius
+  border var-border
+  border var-border--switch
+  overflow hidden
+  width var-width--switch
+  height var-height--switch
+  z-index 0
+
+.topcoat-switch__input
+  @extend .switch__input
+
+.topcoat-switch__toggle:before,
+.topcoat-switch__toggle:after
+  top -1px
+  width var-width--switch__label
+  border var-border--switch__label
+  margin var-margin--switch__label
+
+.topcoat-switch__toggle:before
+  @extend .switch__toggle:before
+  content var-content--switch__label--left
+  color var-color--switch__label--left
+  background-color var-background-color--switch__label--left
+  right var-right--switch__label--left
+  padding-left var-padding-left--switch__label--left
+  height var-height--switch__label--left
+  top var-top--switch__label--left
+  border-radius var-border-radius--switch__label--left
+
+.topcoat-switch__toggle
+  @extend .switch__toggle
+  line-height var-line-height
+  line-height var-line-height--switch__toggle
+  height var-line-height
+  height var-height--switch__toggle
+  width var-width--switch__toggle
+  border-radius var-border-radius
+  border-radius var-border-radius--switch__toggle
+  color var-color
+  text-shadow var-text-shadow
+  background-color var-background-color
+  background-color var-background-color--switch__toggle
+  border var-border
+  border var-border--switch__toggle
+  margin-left var-margin-left--switch__toggle
+  margin-bottom var-margin-bottom--switch__toggle
+  margin-top var-margin-top--switch__toggle
+  box-shadow var-box-shadow
+  transition var-transition--switch__toggle
+
+.topcoat-switch__toggle:after
+  @extend .switch__toggle:after
+  content var-content--switch__label--right
+  background-color var-background-color--switch__label--right
+  left var-left--switch__label--right
+  padding-left var-padding-left--switch__label--right  
+  height var-height--switch__label--right
+  top var-top--switch__label--right
+  border-radius var-border-radius--switch__label--right
+
+.topcoat-switch__input:checked + .topcoat-switch__toggle
+  margin-left var-margin-left--switch__toggle--checked
+  background-color var-background-color--switch__toggle--checked
+
+.topcoat-switch__input:active + .topcoat-switch__toggle
+  border var-border
+  box-shadow var-box-shadow
+
+.topcoat-switch__input:focus + .topcoat-switch__toggle
+  border var-border--focus
+  border var-border--switch__toggle--focus
+  box-shadow var-box-shadow--focus
+
+.topcoat-switch__input:disabled + .topcoat-switch__toggle
+  @extend .switch--disabled
+
+.topcoat-switch__input:disabled + .topcoat-switch__toggle:after,
+.topcoat-switch__input:disabled + .topcoat-switch__toggle:before
+  background transparent
+
+.topcoat-switch__input:checked + .topcoat-switch__toggle:after,
+.topcoat-switch__input:checked + .topcoat-switch__toggle:before
+  background-color var-background-color--switch__label--checked
+  transition var-transition--switch__label--checked
+
+.topcoat-switch__input + .topcoat-switch__toggle:after,
+.topcoat-switch__input + .topcoat-switch__toggle:before
+  background-color var-background-color--switch__label
+  transition var-transition--switch__label
+
+
+.topcoat-switch__input:checked + .topcoat-switch__toggle:after,
+  box-shadow var-box-shadow--switch__label--after--checked
+.topcoat-switch__input + .topcoat-switch__toggle:after
+  box-shadow var-box-shadow--switch__label--after

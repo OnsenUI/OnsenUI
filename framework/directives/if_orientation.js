@@ -6,22 +6,22 @@
 	directives.directive('onsIfOrientation', function(ONSEN_CONSTANTS) {
 		return {
 			restrict: 'A',
-			replace: false,			
+			replace: false,
 			transclude: true,
 			scope: true,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_orientation.tpl',
-			link: function($scope, element, attrs){
+			link: function($scope, element, attrs) {
 
 				function getLandscapeOrPortraitFromInteger(orientation){
-					if(orientation === undefined ){
+					if (orientation === undefined ) {
 						return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
 					}
 
-					if(orientation == 90 || orientation == -90){
+					if (orientation == 90 || orientation == -90) {
 						return 'landscape';
 					}
 
-					if(orientation == 0 || orientation == 180){
+					if (orientation == 0 || orientation == 180) {
 						return 'portrait';
 					}
 				}
@@ -44,7 +44,7 @@
 					if(userOrientation){
 						$scope.userOrientation = userOrientation;
 					}
-				});				
+				});
 			}
 		};
 	});

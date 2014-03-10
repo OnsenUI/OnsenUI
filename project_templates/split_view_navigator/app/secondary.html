@@ -1,21 +1,21 @@
-<ons-page style="padding: 10px">
+<ons-page style="background-color: white">
 
-	<ul class="fa-ul">
+	<ul class="topcoat-list">
 
-		<ons-list-item 
-			class="topcoat-list__item_active"
+		<ons-list-item
+			class="topcoat-list__item--tappable topcoat-list__item__line-height" 
 			ng-click="ons.splitView.toggle();
 				ons.splitView.setMainPage('main_navigator.html');">
-			<i class="fa-li fa fa-home fa-lg" style="top: 25%"></i>
-			Navigator
+			<i class="fa fa-home fa-lg" style="color: #666"></i>
+			&nbsp; Page 1
 		</ons-list-item>
 
 		<ons-list-item 
-			class="topcoat-list__item_active"
+			class="topcoat-list__item--tappable topcoat-list__item__line-height"
 			ng-click="ons.splitView.toggle();
 				ons.splitView.setMainPage('page2.html');">
-			<i class="fa-li fa fa-gear fa-lg" style="top: 25%"></i>
-			Page 2
+			<i class="fa fa-gear fa-lg" style="color: #666"></i>
+			&nbsp; Page 2
 		</ons-list-item>
 
 	</ul>

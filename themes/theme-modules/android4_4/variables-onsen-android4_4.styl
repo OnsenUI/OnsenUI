@@ -1,0 +1,291 @@
+/* This file should include color and image variables corresponding to the onsen theme */
+
+/* --------- colors --------- */
+var-color--body = #F3F3F3
+var-holo-dark-background-color-bar  = #222222 //tab navi
+var-holo-dark-border-color-bar  = #222222 //tab navi border
+var-holo-view-background-color  = #050607 //#050607～252a30 //background
+var-holo-dark-view-color  = #f3f3f3 //forground
+var-holo-dark-list-border = #3a3d40 //list border
+var-holo-dark-box-border = #535353 //box border
+var-holo-dark-key-color = #0099cc //key color
+var-holo-dark-disable-color = #535353//disable color
+var-holo-dark-background-color-swich-bar = #2d2d2d //bg for switch bar
+
+var-titlebar = var-holo-dark-view-color
+var-buttons = var-holo-dark-key-color
+var-text-black = #000
+var-text-white = var-holo-dark-view-color
+var-borders = var-holo-dark-list-border
+var-text-grey = #6F6F74
+var-titlebar-background = var-holo-dark-background-color-bar
+var-view-background = var-holo-view-background-color
+
+var-list-background-color = var-view-background
+var-list-header-background-color = var-view-background
+var-switch-color = var-holo-dark-key-color
+
+var-list-text-color = var-text-white
+
+var-key-color = var-holo-dark-key-color
+var-secondary-color = var-list-background-color
+var-auxilary-color = #b3b3b3
+var-notification-color = #fff
+var-cta-background-color = #4a9cd2
+var-list-item-active-color = #b6dedd
+var-text-input-color = #b3b3b3
+var-tab-bar-background-color = #eae5e3
+var-tab-bar-border-color = #b5b0aa
+var-search-input-background-color--focus = #e7e3e0
+
+var-color = var-holo-dark-view-color
+var-color--focus = var-holo-dark-view-color
+var-placeholder-color--input = var-holo-dark-view-color
+
+var-thumb-size = 24px
+
+/* ---------- darken ---------- */
+var-dark    = 5
+var-darker  = 20//5.5
+var-darkest = 25.9
+
+/* ---------- lighten ---------- */
+var-light    = 6
+var-lighter  = 20//15
+var-lightest = 24
+
+/* ---------- alphas ---------- */
+var-alpha--high = 0.5
+var-alpha--med  = 0.23
+var-alpha--low  = 0.1
+
+
+
+// var-background-color = var-secondary-color
+var-background--body = var-secondary-color
+var-background-color--down = var-buttons
+// var-background-color--hover = transparent
+var-border = 1px solid var-buttons
+var-box-shadow = none
+var-box-shadow--down = none
+// var-color = var-key-color
+var-text-shadow = 0 1px none
+var-color-invalid = #f00
+var-border--invalid = 1px solid #f00
+// var-background-color--input = #d3d7d7
+var-round-border = 50%
+var-width--range__thumb = 32px
+var-border-radius = 4px
+var-border-radius--large = 0
+
+/* Page */
+var-background-color--page = var-view-background
+
+/* Call To Action */
+var-color--cta = var-holo-dark-view-color
+var-color--cta--down = lighten(var-holo-dark-view-color, var-lighter)
+var-background-color--cta = var-holo-dark-disable-color
+var-background-color--cta--down = lighten(var-holo-dark-disable-color, var-lighter)
+var-background-color--cta--hover = var-holo-dark-disable-color
+var-border--cta = none
+var-box-shadow--cta = none
+var-box-shadow--cta--down = none
+
+/*Icon-Button*/
+var-color--icon-button--quiet = var-buttons
+var-color--icon-button--quiet--active = lighten(var-buttons, var-lighter)
+var-background-color__icon-button--quiet = transparent
+var-background-color--icon-button-quiet--down = transparent
+var-background-color__icon-button = var-view-background
+var-border--icon-button = none
+var-border--icon-button--quiet = none
+var-border--icon-button--quite--hover = none
+var-border--icon-button--quite--active = none
+
+/* Icons */
+var-menu-stack-icon = url("../img/hamburger_dark.svg")
+
+/* Navigation Bar */
+var-height--navigation-bar = 44px
+var-color--navigation-bar = var-text-white
+var-navigation-bar-background-color = var-titlebar-background
+var-border-bottom--navigation-bar = 1px solid var-borders
+var-box-shadow--navigation-bar = none
+
+/* Text Input !*/
+var-color--text-input = darken(var-holo-dark-view-color, var-darker)
+var-color--text-input--focus = var-holo-dark-view-color
+var-color--placeholder = darken(var-holo-dark-view-color, var-darker)
+var-color--focus = var-text-black
+var-border--text-input = 1px solid var-borders
+var-border--text-input--focus = 1px solid var-borders
+var-background-color--text-input = var-view-background
+var-background-color--text-input--focus = var-view-background
+var-padding--text-input = 4px 4px 4px 4px
+
+/* Text Area !*/
+var-color--textarea = darken(var-holo-dark-view-color, var-darker)
+var-color--textarea--focus = var-holo-dark-view-color
+var-border--textarea = 1px solid var-borders
+var-border--focus--textarea = 1px solid var-borders
+var-padding--textarea = 4px 4px 4px 4px
+
+/* List !*/
+var-margin--list-item = 0
+var-border-top--list-container = none
+var-border-top--list = none
+var-border-bottom--list = none
+var-border-top--list-item--first = none
+var-border-top--list-item = none
+var-border-bottom--list-item = 1px solid var-borders
+var-border-bottom--list-item--last = none
+var-border-top--list-header = none
+var-border-bottom--list-header = 2px solid var-borders
+var-text-shadow--list-header = none
+var-color--list-item = var-list-text-color
+var-color--list-header = var-list-text-color
+var-background-color--list-header = var-list-header-background-color
+var-background-color--list-item = var-view-background
+var-background-color--list-item--active = #BDBEC2
+var-background-color--list = var-list-header-background-color
+
+/* Overlay !!!*/
+var-modal-bg-color = #e5e9e8
+var-overlay__header-border = 1px solid #d3d7d7
+
+/* Progress bar !!!*/
+var-bar-bg-color = var-background-color--down
+var-progress-bg-color = #e0f0fa
+
+/* Checkbox */
+var-top--checkmark = -1px
+var-left--checkmark = 2px
+var-width--checkmark__tail = 14px
+var-size--checkbox = 18px
+var-border-width--checkmark = 4px
+var-border--checkbox = 1px solid var-holo-dark-box-border
+var-border--checkbox--focus = 1px solid var-holo-dark-box-border
+var-border--checkbox--active = 1px solid var-holo-dark-box-border
+var-border--checkmark = 1px solid var-key-color
+var-background-color--checkmark = transparent
+var-background-color--down--checkbox = transparent
+var-border-radius--checkbox = none
+
+/* Range input */
+var-border--range = none
+var-background-color--range = var-buttons
+var-background-color--range__thumb = rgba(var-buttons, 0.8)
+var-range-border = 0px solid var-borders
+var-height--range__track = 2px
+var-range-background = var-background-color--down
+var-range__slider-border = 0px solid rgba(0, 0, 0, .36)
+var-range__slider-background = url("../img/light-grips.png") center center no-repeat #e5e9e8
+var-range__slider-bg-size    = 7px 18px
+var-range__slider-box-shadow = inset 0 1px 0 rgba(255, 255, 255, .12)
+var-width--range__thumb  = var-thumb-size
+
+/* Radio Button */
+var-position--radio-button--checked = 4px
+var-size--radio-button = 20px
+var-size--radio-button--checked = 10px
+var-color--radio-button = var-borders
+var-border--radio-button = 1px solid var-key-color
+var-border--radio-button--before = 1px solid var-holo-dark-box-border
+var-border--radio-button--active = 1px solid var-key-color
+var-border--radio-button--focus = 1px solid var-holo-dark-box-border
+var-background--radio-button--before = transparent
+var-background--radio-button = var-key-color
+var-background-color--down--radio-button = transparent
+var-box-shadow--radio-button = 0 1px rgba(255,255,255,0.50)
+
+/* Tab bar */
+var-height--tab-bar = 49px
+var-line-height--tab-bar__button = 49px
+var-border-top--tab-bar = 0px solid var-borders
+var-border-top--tab-bar--active = 3px solid var-key-color
+var-background-color--tab-bar = var-titlebar-background
+var-background-color--tab-bar--active = lighten(var-titlebar-background, var-lighter)
+var-border--tab-bar__button = 3px solid var-borders
+var-color--tab-bar__button = darken(var-holo-dark-view-color, var-darker)
+var-color--tab-bar--active = var-holo-dark-view-color
+var-background-color--tab-bar__button = transparent
+var-box-shadow--tab-bar--active = none
+var-box-shadow--tab-bar__button--focus = none
+var-padding = 0 20px
+
+/* Switch !*/
+var-top--switch__label--left = 1px
+var-top--switch__label--right = -1px
+var-height--switch = 16px
+var-height--switch__label--left = 16px
+var-height--switch__label--right = 16px
+var-height--switch__toggle = 14px
+var-width--switch__toggle = 30px
+var-width--switch = 64px
+var-color--switch__label--left = #39372e
+var-background-color--switch__label--left = var-borders
+var-background-color--switch__label--right = var-borders
+var-background-color--switch__toggle = var-holo-dark-disable-color
+var-background-color--switch__toggle--checked = #0983ac
+var-border--switch__toggle = 0px solid var-borders
+var-switch--border-radius = 30px
+var-line-height--switch__toggle = 32px
+var-border-radius--switch__toggle = 0
+var-margin-left--switch__toggle = -19px
+var-margin-left--switch__toggle--checked = 13px
+var-margin-bottom--switch__toggle = 0
+var-margin-top--switch__toggle = 1px
+var-margin--switch__label = 0 0 0 0
+var-border-radius--switch__toggle = 0
+var-switch--border-radius = 0
+var-border-radius--switch__label--left = 0
+var-border-radius--switch__label--right = 0
+
+/* Bar button */
+var-border-top--button-bar__button = 1px solid var-holo-dark-box-border
+var-border-bottom--button-bar__button = 1px solid var-holo-dark-box-border
+var-border--button-bar = 0px solid var-holo-dark-box-border
+var-border--button-bar__button = 0px solid var-holo-dark-box-border
+var-border--button-bar__button--active = 0px solid var-holo-dark-box-border
+var-border-right--button-bar__button = 1px solid var-holo-dark-box-border
+var-border-right--button-bar__button--active = 1px solid var-holo-dark-box-border
+var-border-right--button-bar__button--focus = 1px solid var-holo-dark-box-border
+var-border-left--button-bar__button__first = 1px solid var-holo-dark-box-border
+var-border-right--button-bar__button__first = 1px solid var-holo-dark-box-border
+var-border-right--button-bar__button__last = 1px solid var-holo-dark-box-border
+var-background-color--button-bar = darken(var-view-background, var-dark)
+var-background-color--button-bar--button--active = lighten(var-holo-dark-key-color, var-lighter) !important
+var-background-color--button-bar--button--hover = var-holo-dark-key-color
+var-color--button-bar__button = var-buttons
+var-color--button-bar__button--active = lighten(var-view-background, var-lighter)
+var-color--button-bar__button--hover = var-view-background
+
+/* Button */
+var-background-color__button = var-holo-dark-disable-color
+var-background-color--hover__button = var-holo-dark-disable-color
+var-background-color--down__button = lighten(var-holo-dark-disable-color, var-lighter)
+var-color__button = var-holo-dark-view-color
+var-color--button--hover = var-holo-dark-view-color
+var-color--button--active = lighten(var-holo-dark-view-color, var-lighter)
+
+var-border--button = none
+
+/* Button Quiet*/
+var-background-color--quiet-active = transparent
+var-background-color--quiet-hover = transparent
+var-quiet-button-color = darken(var-holo-dark-view-color, var-darker)
+var-color--active__button--quiet =  var-holo-dark-view-color
+var-border--hover__button--quiet = none
+var-border--active__button--quiet = none
+var-border__button--quiet = none
+/* Notification */
+var-notification-border-radius = 50%
+
+/* Search-Input */
+var-background-color--search-input = var-holo-view-background-color
+var-background-color--search-input--focus = var-holo-view-background-color
+var-search-input--border-radius = 4px
+var-color--search-input = darken(var-holo-dark-view-color, var-darker)
+var-color--search-input--focus = var-holo-dark-view-color
+var-border--search-input = 1px solid var-holo-dark-box-border
+var-border--search-input--focus = 1px solid var-holo-dark-box-border

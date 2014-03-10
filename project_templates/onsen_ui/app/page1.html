@@ -1,12 +1,5 @@
 <ons-page class="center">
 	<h1>Page 1</h1>
-	<ons-button 
-		ng-click="ons.slidingMenu.toggleMenu()">
-		Toggle Menu
-	</ons-button>
-	
-	<p>Click "Toggle Menu" to close/open menu,</p>
-	<p>You can also swipe the page left/right.</p>
-	
-	<img src="images/ico_swipe_right_s.png" alt="">
+
+	<ons-button type="cta" ng-click="ons.navigator.pushPage('page2.html')">Push Page 2</ons-button>	
 </ons-page>

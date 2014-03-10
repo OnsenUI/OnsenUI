@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Checkbox | Onsen UI</title>  
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/topcoat-mobile-onsen-ios7.css">  
+
+  <script src="../../build/js/angular/angular.js"></script> 
+  <script src="../../build/js/angular/angular-touch.js"></script>       
+  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../app.js"></script>  
+
+  <style type="text/css">
+  section {
+    border-bottom: solid 1px #ccc;
+  }
+  </style>
+  
+</head>
+
+<body>    
+  
+  <ons-page style="padding: 0px;">
+
+    <section style="padding: 10px;">      
+      <ons-checkbox ng-model="agree">
+        True or False?
+      </ons-checkbox>
+      <span>{{agree}}</span>  
+    </section>
+
+    <section style="padding: 10px;">      
+      <ons-checkbox ng-model="answer" ng-true-value="YES" ng-false-value="NO">
+        Yes or No?
+      </ons-checkbox>
+      <span>{{answer}}</span>  
+    </section>
+    
+  </ons-page>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Text Area Demo | Onsen UI</title>  
+  <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">  
+
+  <script src="lib/onsen/js/angular/angular.js"></script>   
+  <script src="lib/onsen/js/angular/angular-touch.js"></script>     
+  <script src="lib/onsen/js/onsenui.js"></script>    
+  <script src="js/app.js"></script>  
+  
+</head>
+
+<body>    
+  <div class="page center">
+    <ons-text-area style="width:100%;height:40%;"
+    rows="6" cols="36" 
+    ng-model="text" 
+    placeholder="Type here">
+    </ons-text-area>  
+
+    <ons-text-area style="width:100%;height:40%;"
+    rows="6" 
+    cols="36" 
+    placeholder="Type here" 
+    disabled="true">
+    </ons-text-area>
+  </div>
+ 
+</body>
+</html>

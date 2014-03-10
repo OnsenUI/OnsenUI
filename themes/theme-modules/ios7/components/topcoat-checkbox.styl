@@ -1,0 +1,148 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+@import '../../common/topdoc-checkbox'
+@require '../../common/checkbox'
+
+.topcoat-checkbox > .topcoat-checkbox__checkmark
+  @extend .checkbox
+  height var-size--checkbox
+
+.topcoat-checkbox > input[type="checkbox"]
+  height var-size--checkbox
+  width var-size--checkbox
+  margin-top 0
+  margin-right -@width
+  margin-bottom -@height
+  margin-left 0
+
+.topcoat-checkbox > input[type="checkbox"]:checked
+  background var-background-color-checked--checkbox
+
+.topcoat-checkbox > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before
+  background var-background-color--before--checkbox
+  
+.topcoat-bheckbox > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after
+  opacity 1
+
+.topcoat-checkbox
+  @extend .checkbox__label
+  line-height var-size--checkbox
+  margin 10px 0
+
+.topcoat-checkbox > .topcoat-checkbox__checkmark:before
+  @extend .checkbox:before
+  width var-size--checkbox
+  height var-size--checkbox
+  background var-background-color
+  background var-background-color--checkmark
+  border var-border
+  border var-border--checkbox
+  border-radius var-border-radius--checkbox
+  box-shadow var-box-shadow
+  left 0
+
+.topcoat-checkbox > .topcoat-checkbox__checkmark
+  @extend .checkbox
+  width var-size--checkbox
+  height var-size--checkbox
+
+.topcoat-checkbox > .topcoat-checkbox__checkmark:after
+  @extend .checkbox:after
+  top var-top--checkmark
+  left var-left--checkmark
+  width var-width--checkmark__tail
+  height var-height--checkmark__foot
+  background transparent
+  border var-border--checkmark
+  border-width var-border-width--checkmark
+  border-top none
+  border-right none
+  border-radius var-border-radius--checkmark
+  transform var-transform--checkmark
+
+.topcoat-checkbox > input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before
+  border var-border--focus
+  border var-border--checkbox--focus
+  box-shadow var-box-shadow--cta, var-box-shadow--focus
+
+.topcoat-checkbox > input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark
+  @extend .checkbox--disabled
+
+.topcoat-checkbox > input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before
+  border var-border
+  background var-background-color
+  box-shadow var-box-shadow
+
+/* No border checkbox */
+
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark
+  @extend .checkbox
+  height var-size--checkbox
+  background transparent
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before
+  background transparent
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after
+  opacity 1
+
+.topcoat-checkbox--noborder
+  @extend .checkbox__label
+  line-height var-size--checkbox
+  margin 10px 0
+
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:before
+  @extend .checkbox:before
+  width var-size--checkbox
+  height var-size--checkbox
+  background transparent
+  border none
+  border-radius var-border-radius--checkbox
+  left 0
+
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark
+  @extend .checkbox
+  width var-size--checkbox
+  height var-size--checkbox
+
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:after
+  @extend .checkbox:after
+  top var-top--checkmark
+  left var-left--checkmark
+  opacity 0
+  width var-width--checkmark__tail
+  height var-height--checkmark__foot
+  background transparent
+  border var-border--checkmark--noborder
+  border-width var-border-width--checkmark
+  border-top none
+  border-right none
+  border-radius var-border-radius--checkmark
+  transform var-transform--checkmark
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before
+  box-shadow var-box-shadow--cta, var-box-shadow--focus
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark
+  @extend .checkbox--disabled
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:disabled:active + .topcoat-checkbox--noborder__checkmark:before
+  background var-background-color
+  box-shadow var-box-shadow
+

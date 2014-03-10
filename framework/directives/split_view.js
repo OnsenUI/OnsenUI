@@ -20,7 +20,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile) {
+	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewStack) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -35,10 +35,16 @@ limitations under the License.
 			link: function(scope, element, attrs) {
 				var SPLIT_MODE = 0;
 				var COLLAPSE_MODE = 1;
-				var MAIN_PAGE_RATIO = 0.9;
+				var MAIN_PAGE_RATIO = 0.9;			
 
-				scope.ons = scope.ons || {};
-				scope.ons.splitView = scope.ons.splitView || {};
+				var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
+				var BROWSER_TRANSFORMS = [
+					"webkitTransform",
+					"mozTransform",
+					"msTransform",
+					"oTransform",
+					"transform"
+				];
 
 				var Swiper = Class.extend({
 					init: function(element) {
@@ -66,7 +72,11 @@ limitations under the License.
 						this.attachMethods();
 
 						if(scope.mainPage){
-							scope.ons.splitView.setMainPage(scope.mainPage);
+							scope.setMainPage(scope.mainPage);
+						}
+
+						if(scope.secondaryPage){
+							scope.setSecondaryPage(scope.secondaryPage);
 						}
 
 						window.setTimeout(function(){
@@ -75,7 +85,38 @@ limitations under the License.
 					},
 
 					attachMethods: function(){
-						scope.ons.splitView.setMainPage = function(page) {
+						scope.setSecondaryPage = function(page) {
+							if (page) {
+								$http({
+									url: page,
+									method: "GET"
+								}).error(function(e){
+									console.error(e);
+								}).success(function(data, status, headers, config) {
+									var templateHTML = angular.element(data.trim());
+									var page = angular.element('<div></div>');
+									page.addClass('page');		
+									var pageScope = scope.$parent.$new();
+									var pageContent = $compile(templateHTML)(pageScope);
+									page.append(pageContent);
+									this.$behindPage.append(page);	
+
+
+									if(this.currentBehindPageElement){
+										this.currentBehindPageElement.remove();
+										this.currentBehindPageScope.$destroy();
+									}
+
+									this.currentBehindPageElement = page;
+									this.currentBehindPageScope = pageScope;
+
+								}.bind(this));
+							} else {
+								throw new Error('cannot set undefined page');
+							}
+						}.bind(this);
+
+						scope.setMainPage = function(page) {
 							if (page) {
 								$http({
 									url: page,
@@ -87,7 +128,8 @@ limitations under the License.
 									var page = angular.element('<div></div>');
 									page.addClass('page');
 									page[0].style.opacity = 0;
-									var pageContent = $compile(templateHTML)(scope);
+									var pageScope = scope.$parent.$new();
+									var pageContent = $compile(templateHTML)(pageScope);
 									page.append(pageContent);
 									this.$abovePage.append(page);
 
@@ -96,8 +138,10 @@ limitations under the License.
 										page[0].style.opacity = 1;
 										if(this.currentPage){
 											this.currentPage.remove();
+											this.currentPageScope.$destroy();
 										}
 										this.currentPage = page;
+										this.currentPageScope = pageScope;
 									}.bind(this), 0);
 
 								}.bind(this));
@@ -184,13 +228,16 @@ limitations under the License.
 
 					},
 
-					setSize: function() {
+					setSize: function() {						
+						if(!scope.mainPageWidth){
+							scope.mainPageWidth = "70";
+						}
 						var behindSize = 100 - scope.mainPageWidth.replace('%', '');
 						this.behindPage.style.width = behindSize + '%';
 						this.behindPage.style.opacity = 1;
 						this.abovePage.style.width = scope.mainPageWidth + '%';
 						var translate = this.behindPage.clientWidth;
-						this.translate2(translate);
+						this.translateAboveOnly(translate);
 					},
 
 					activateCollapseMode: function() {
@@ -223,7 +270,7 @@ limitations under the License.
 					},
 
 					bindEvents: function() {
-						this.$abovePage.bind('webkitTransitionEnd', this.onTransitionEnd.bind(this));
+						this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
 					},
 
 					handleEvent: function(ev) {
@@ -297,17 +344,34 @@ limitations under the License.
 					},
 
 					translate: function(x) {
-						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
+						var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
+						
 						var behind = (x - this.MAX) / this.MAX * 10;
 						var opacity = 1 + behind / 100;
-						this.behindPage.style.webkitTransform = 'translate3d(' + behind + '%, 0, 0)';
+						var behindTransform = 'translate3d(' + behind + '%, 0, 0)';
+
+						var property;
+						for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
+							property = BROWSER_TRANSFORMS[i];
+							this.abovePage.style[property] = aboveTransform;
+							this.behindPage.style[property] = behindTransform;
+						};
+						
 						this.behindPage.style.opacity = opacity;
 						this.currentX = x;
 					},
 
-					translate2: function(x) {
-						this.behindPage.style.webkitTransform = 'translate3d(0, 0, 0)';
-						this.abovePage.style.webkitTransform = 'translate3d(' + x + 'px, 0, 0)';
+					translateAboveOnly: function(x) {
+						var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
+						var behindTransform = 'translate3d(0, 0, 0)';
+
+						var property;
+						for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
+							property = BROWSER_TRANSFORMS[i];
+							this.abovePage.style[property] = aboveTransform;
+							this.behindPage.style[property] = behindTransform;
+						};
+												
 						this.currentX = x;
 					}
 				});
@@ -322,65 +386,30 @@ limitations under the License.
 					behind: scope.secondaryPage					
 				};
 
-				scope.ons.splitView.open = function() {
+				scope.open = function() {
 					swiper.open();
 				};
 
-				scope.ons.splitView.close = function() {
+				scope.close = function() {
 					swiper.close();
 				};
 
-				scope.ons.splitView.toggle = function() {
+				scope.toggle = function() {
 					swiper.toggle();
 				};
 
-
-
-				scope.ons.splitView.setSecondaryPage = function(page) {
+				scope.setSecondaryPage = function(page) {
 					if (page) {
 						scope.pages.behind = page;
 					} else {
 						throw new Error('cannot set undefined page');
 					}
-				};
+				};	
 
-				scope.ons.screen = scope.ons.screen || {};
-				scope.ons.screen.presentPage = function(page) {
-					callParent(scope, 'ons.screen.presentPage', page);
-				};
-
-				scope.ons.screen.dismissPage = function() {
-					callParent(scope, 'ons.screen.dismissPage');
-				};
-
-				function callParent(scope, functionName, param) {
-					if (!scope.$parent) {
-						return;
-					}
-
-					var parentFunction = stringToFunction(scope.$parent, functionName);
-					if (parentFunction) {
-						parentFunction.call(scope, param);
-					} else {
-						callParent(scope.$parent, functionName, param);
-					}
-
-				}
-
-				function stringToFunction(root, str) {
-					var arr = str.split(".");
-
-					var fn = root;
-					for (var i = 0, len = arr.length; i < len; i++) {
-						fn = fn[arr[i]];
-					}
-
-					if (typeof fn !== "function") {
-						return false;
-					}
-
-					return fn;
-				}
+				SplitViewStack.addSplitView(scope);		
+				scope.$on('$destroy', function(){
+					SplitViewStack.removeSplitView(scope);
+				});	
 			}
 		};
 	});

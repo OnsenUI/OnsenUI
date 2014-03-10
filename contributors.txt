@@ -16,3 +16,4 @@ Project Name
 # Github accounts of the people who signed the OnsenUI CLA (https://docs.google.com/forms/d/13e_me1JPJeG9PUJdnLxv2jEk5QPmFkZZft7Flm-gXSA/viewform).
 # CLA needs to be signed before accepting pull requests.
 @idealhack
+@dzeims

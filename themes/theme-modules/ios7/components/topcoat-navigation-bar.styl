@@ -1,0 +1,60 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+@import '../../common/topdoc-navigation-bar'
+@require '../../common/navigation-bar'
+
+.topcoat-navigation-bar
+  @extend .navigation-bar
+  height var-height--navigation-bar
+  padding-left var-padding--navigation-bar
+  padding-right var-padding--navigation-bar
+  background var-background-color
+  background var-navigation-bar-background-color
+  color var-color--navigation-bar
+  box-shadow var-box-shadow--navigation-bar
+  border-bottom var-border-bottom--navigation-bar
+  font-weight var-font-weight
+
+.topcoat-navigation-bar--bottom 
+  border-bottom none
+  border-top var-border-bottom--navigation-bar
+
+.topcoat-navigation-bar__line-height
+  line-height var-height--large !important
+  line-height var-height--navigation-bar !important
+  padding-bottom 0
+  padding-top 0
+
+.topcoat-navigation-bar__bg 
+  background var-background-color
+  background var-navigation-bar-background-color
+
+.topcoat-navigation-bar__item
+  @extend .navigation-bar__item
+  margin var-margin
+  line-height var-line-height--large
+  line-height var-line-height--navigation-bar--item
+  vertical-align top
+
+.topcoat-navigation-bar__title
+  @extend .navigation-bar__title
+  font-size var-font-size--large
+  font-weight var-font-weight--large
+  color var-color--navigation-bar
+

@@ -10,7 +10,7 @@
   cursor: default;
 }
 
-.effeckt-button .spinner {
+.effeckt-button > .spinner {
   position: absolute;
   width: 20px;
   height: 10px;
@@ -24,7 +24,7 @@
   background: transparent;
 }
 
-.effeckt-button[data-loading] .spinner {
+.effeckt-button[data-loading] > .spinner {
   -webkit-animation: spinner .8s infinite linear;
   -o-animation: spinner .8s infinite linear;
   animation: spinner .8s infinite linear;
@@ -88,25 +88,25 @@
 }
 
 .effeckt-button,
-.effeckt-button .spinner,
-.effeckt-button .label {
+.effeckt-button > .spinner,
+.effeckt-button > .label {
   transition-property: padding, opacity, left, right, top, bottom, margin;
   transition-duration: 500ms;
   transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);  
 }
 
 .effeckt-button.zoom-in,
-.effeckt-button.zoom-in .spinner,
-.effeckt-button.zoom-in .label,
+.effeckt-button.zoom-in > .spinner,
+.effeckt-button.zoom-in > .label,
 .effeckt-button.zoom-out,
-.effeckt-button.zoom-out .spinner,
-.effeckt-button.zoom-out .label {
+.effeckt-button.zoom-out > .spinner,
+.effeckt-button.zoom-out > .label {
   -webkit-transition: 500ms ease all;
   -o-transition: 500ms ease all;
   transition: 500ms ease all;
 }
 
-.effeckt-button.expand-right .spinner {
+.effeckt-button.expand-right > .spinner {
   right: 16px;
 }
 
@@ -114,11 +114,11 @@
   padding-right: 64px;
 }
 
-.effeckt-button.expand-right[data-loading] .spinner {
+.effeckt-button.expand-right[data-loading] > .spinner {
   opacity: 1;
 }
 
-.effeckt-button.expand-left .spinner {
+.effeckt-button.expand-left > .spinner {
   left: 16px;
 }
 
@@ -126,7 +126,7 @@
   padding-left: 64px;
 }
 
-.effeckt-button.expand-left[data-loading] .spinner {
+.effeckt-button.expand-left[data-loading] > .spinner {
   opacity: 1;
 }
 
@@ -134,7 +134,7 @@
   overflow: hidden;
 }
 
-.effeckt-button.expand-up .spinner {
+.effeckt-button.expand-up > .spinner {
   top: 32px;
   left: 50%;
   margin-left: -16px;
@@ -144,7 +144,7 @@
   padding-top: 64px;
 }
 
-.effeckt-button.expand-up[data-loading] .spinner {
+.effeckt-button.expand-up[data-loading] > .spinner {
   opacity: 1;
   top: 16px;
   margin-top: 0;
@@ -154,7 +154,7 @@
   overflow: hidden;
 }
 
-.effeckt-button.expand-down .spinner {
+.effeckt-button.expand-down > .spinner {
   left: 50%;
   top: 100%;
   margin-left: -16px;
@@ -165,7 +165,7 @@
   padding-bottom: 64px;
 }
 
-.effeckt-button.expand-down[data-loading] .spinner {
+.effeckt-button.expand-down[data-loading] > .spinner {
   opacity: 1;
 }
 
@@ -173,21 +173,21 @@
   overflow: hidden;
 }
 
-.effeckt-button.slide-left .label {
+.effeckt-button.slide-left > .label {
   position: relative;
 }
 
-.effeckt-button.slide-left .spinner {
+.effeckt-button.slide-left > .spinner {
   left: 100%;
   margin-left: -16px;
 }
 
-.effeckt-button.slide-left[data-loading] .label {
+.effeckt-button.slide-left[data-loading] > .label {
   opacity: 0;
   left: -100%;
 }
 
-.effeckt-button.slide-left[data-loading] .spinner {
+.effeckt-button.slide-left[data-loading] > .spinner {
   opacity: 1;
   left: 50%;
 }
@@ -196,21 +196,21 @@
   overflow: hidden;
 }
 
-.effeckt-button.slide-right .label {
+.effeckt-button.slide-right > .label {
   position: relative;
 }
 
-.effeckt-button.slide-right .spinner {
+.effeckt-button.slide-right > .spinner {
   right: 100%;
   margin-left: -16px;
 }
 
-.effeckt-button.slide-right[data-loading] .label {
+.effeckt-button.slide-right[data-loading] > .label {
   opacity: 0;
   left: 100%;
 }
 
-.effeckt-button.slide-right[data-loading] .spinner {
+.effeckt-button.slide-right[data-loading] > .spinner {
   opacity: 1;
   left: 50%;
 }
@@ -219,22 +219,22 @@
   overflow: hidden;
 }
 
-.effeckt-button.slide-up .label {
+.effeckt-button.slide-up > .label {
   position: relative;
 }
 
-.effeckt-button.slide-up .spinner {
+.effeckt-button.slide-up > .spinner {
   left: 50%;
   margin-left: -16px;
   margin-top: 1em;
 }
 
-.effeckt-button.slide-up[data-loading] .label {
+.effeckt-button.slide-up[data-loading] > .label {
   opacity: 0;
   top: -1em;
 }
 
-.effeckt-button.slide-up[data-loading] .spinner {
+.effeckt-button.slide-up[data-loading] > .spinner {
   opacity: 1;
   margin-top: -16px;
 }
@@ -243,22 +243,22 @@
   overflow: hidden;
 }
 
-.effeckt-button.slide-down .label {
+.effeckt-button.slide-down > .label {
   position: relative;
 }
 
-.effeckt-button.slide-down .spinner {
+.effeckt-button.slide-down > .spinner {
   left: 50%;
   margin-left: -16px;
   margin-top: -32px;
 }
 
-.effeckt-button.slide-down[data-loading] .label {
+.effeckt-button.slide-down[data-loading] > .label {
   opacity: 0;
   top: 1em;
 }
 
-.effeckt-button.slide-down[data-loading] .spinner {
+.effeckt-button.slide-down[data-loading] > .spinner {
   opacity: 1;
   margin-top: -16px;
 }
@@ -267,7 +267,7 @@
   overflow: hidden;
 }
 
-.effeckt-button.zoom-out .spinner {
+.effeckt-button.zoom-out > .spinner {
   left: 50%;
   margin-left: -16px;
   -webkit-transform: scale(2.5);
@@ -276,12 +276,12 @@
   transform: scale(2.5);
 }
 
-.effeckt-button.zoom-out .label {
+.effeckt-button.zoom-out > .label {
   position: relative;
   display: inline-block;
 }
 
-.effeckt-button.zoom-out[data-loading] .label {
+.effeckt-button.zoom-out[data-loading] > .label {
   opacity: 0;
   -webkit-transform: scale(0.5);
   -ms-transform: scale(0.5);
@@ -289,7 +289,7 @@
   transform: scale(0.5);
 }
 
-.effeckt-button.zoom-out[data-loading] .spinner {
+.effeckt-button.zoom-out[data-loading] > .spinner {
   opacity: 1;
   -webkit-transform: none;
   -ms-transform: none;
@@ -301,7 +301,7 @@
   overflow: hidden;
 }
 
-.effeckt-button.zoom-in .spinner {
+.effeckt-button.zoom-in > .spinner {
   left: 50%;
   margin-left: -16px;
   -webkit-transform: scale(0.2);
@@ -310,12 +310,12 @@
   transform: scale(0.2);
 }
 
-.effeckt-button.zoom-in .label {
+.effeckt-button.zoom-in > .label {
   position: relative;
   display: inline-block;
 }
 
-.effeckt-button.zoom-in[data-loading] .label {
+.effeckt-button.zoom-in[data-loading] > .label {
   opacity: 0;
   -webkit-transform: scale(2.2);
   -ms-transform: scale(2.2);
@@ -323,7 +323,7 @@
   transform: scale(2.2);
 }
 
-.effeckt-button.zoom-in[data-loading] .spinner {
+.effeckt-button.zoom-in[data-loading] > .spinner {
   opacity: 1;
   -webkit-transform: none;
   -ms-transform: none;

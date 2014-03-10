@@ -1,0 +1,74 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+
+@import '../../common/topdoc-tab-bar'
+@require '../../common/button'
+@require '../../common/button-bar'
+
+.topcoat-tab-bar 
+  @extend .button-bar
+  height var-height--tab-bar
+  background-color var-background-color--tab-bar
+  border-top var-border-top--tab-bar
+  width 100%
+
+.topcoat-tab-bar__item 
+  @extend .button-bar__item
+
+.topcoat-tab-bar__item > input 
+  @extend .button-bar__item > input
+
+.topcoat-tab-bar__button 
+  @extend .button
+  padding var-padding
+  height var-line-height
+  height var-line-height--tab-bar__button
+  line-height var-line-height
+  line-height var-line-height--tab-bar__button
+  letter-spacing var-letter-spacing
+  color var-color
+  color var-color--tab-bar__button
+  text-shadow var-text-shadow
+  vertical-align var-vertical-align
+  background-color var-background-color
+  background-color var-background-color--tab-bar__button
+  box-shadow var-box-shadow
+  border-top var-border
+  border-top var-border--tab-bar__button
+  width 100%
+
+.topcoat-tab-bar__button:active,
+.topcoat-tab-bar__button--large:active,
+:checked + .topcoat-tab-bar__button 
+  color var-color--tab-bar--active
+  background-color var-background-color--tab-bar--active
+  box-shadow var-box-shadow--tab-bar--active
+  border-top var-border-top--tab-bar--active
+
+.topcoat-tab-bar__button:disabled 
+  @extend .button--disabled
+
+.topcoat-tab-bar__button:focus,
+.topcoat-tab-bar__button--large:focus 
+  z-index 1
+  border-top var-border-top--tab-bar--focus
+  box-shadow var-box-shadow--cta, var-box-shadow--focus
+  box-shadow var-box-shadow--tab-bar__button--focus
+  outline 0
+

@@ -1,0 +1,76 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+@import '../../common/topdoc-radio-button'
+@require '../../common/radio-button'
+
+input[type="radio"]
+  height var-size--radio-button
+  width var-size--radio-button
+  margin-top 0
+  margin-right -@width
+  margin-bottom -@height
+  margin-left 0
+
+input[type="radio"]:active
+  outline 0
+
+input[type="radio"]:checked + .topcoat-radio-button__checkmark:after
+  opacity 1
+
+.topcoat-radio-button
+  @extend .radio-button__label
+  color var-color
+  color var-color--radio-button
+  line-height var-size--radio-button
+  text-align left
+  margin 10px 0
+
+.topcoat-radio-button__checkmark:before
+  @extend .radio-button:before
+  width var-size--checkbox
+  height var-size--checkbox
+  background transparent
+  border none
+  border-radius var-border-radius--checkbox
+  left 0
+
+.topcoat-radio-button__checkmark
+  @extend .radio-button
+  position relative
+  width var-size--radio-button
+  height var-size--radio-button
+
+.topcoat-radio-button__checkmark:after
+  @extend .radio-button:after
+  top var-top--checkmark
+  left var-left--checkmark
+  opacity 0
+  width var-width--checkmark__tail
+  height var-height--checkmark__foot
+  background transparent
+  border var-border--checkmark--noborder
+  border-width var-border-width--checkmark
+  border-top none
+  border-right none
+  border-radius var-border-radius--checkmark
+  transform var-transform--checkmark
+
+input[type="radio"]:disabled + .topcoat-radio-button__checkmark
+  @extend .radio-button--disabled
+

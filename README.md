@@ -85,7 +85,7 @@ Access [http://localhost:9000/demo/index.html](http://localhost:9000/demo/index.
 
 ## Contributing
 
-* Fill out the CLA [here](https://docs.google.com/forms/d/13e_me1JPJeG9PUJdnLxv2jEk5QPmFkZZft7Flm-gXSA/viewform)
+* Fill out the CLA [here](https://docs.google.com/forms/d/1ldg4_QReI2hC12HvF1OuDhW1QromvXat6kA4Uhdsw2M/viewform)
 * Fork the repo
 * Commit your changes
 * Make a [pull request](https://help.github.com/articles/using-pull-requests)

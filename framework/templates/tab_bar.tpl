@@ -1,6 +1,6 @@
-  <ng-include src="selectedTabItem.source" style="margin-bottom: {{tabbarHeight}}" class="tab-bar-content">
+  <div style="margin-bottom: {{tabbarHeight}}" class="tab-bar-content">
     
-  </ng-include>
-  <div ng-hide="hideTabbar" class="topcoat-tab-bar full footer" ng-transclude>         
+  </div>
+  <div ng-hide="hideTabs" class="topcoat-tab-bar full footer" ng-transclude>         
   </div>
 

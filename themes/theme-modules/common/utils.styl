@@ -1,0 +1,67 @@
+// Reset
+
+reset-base()
+  padding 0
+  margin 0
+  font inherit
+  color inherit
+  background transparent
+  border none
+
+reset-list()
+  padding 0
+  margin 0
+  list-style-type none
+
+reset-quiet()
+  background transparent
+  border 1px solid transparent
+  box-shadow none
+
+reset-input()
+  reset-base()
+  reset-box-model()
+  vertical-align top
+  outline none
+
+hide-input()
+  position absolute
+  overflow hidden
+  padding 0
+  border 0
+  opacity 0.001
+  z-index 1
+  vertical-align top
+  outline none
+
+reset-cursor()
+  cursor default
+  user-select none
+
+reset-box-model()
+  box-sizing border-box
+  background-clip padding-box
+
+reset-overflow()
+  white-space nowrap
+  overflow hidden
+
+reset-container()
+  reset-box-model()
+  reset-overflow()
+  word-spacing 0
+
+inline-block()
+  position relative
+  display inline-block
+  vertical-align top
+
+ellipsis()
+  text-overflow ellipsis
+  reset-overflow()
+
+disabled()
+  opacity 0.3
+  cursor default
+  pointer-events none
+

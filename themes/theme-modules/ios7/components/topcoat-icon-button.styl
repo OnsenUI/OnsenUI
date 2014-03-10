@@ -1,0 +1,83 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+@import '../../common/topdoc-icon-button'
+@require '../../common/button'
+
+.topcoat-icon-button
+  padding var-padding--icon-button
+  letter-spacing var-letter-spacing
+  color var-color--icon-button
+  text-shadow var-text-shadow
+  vertical-align baseline
+  background-color var-background-color
+  background-color var-background-color--icon-button
+  box-shadow var-box-shadow
+  border var-border--icon-button
+  border-radius var-border-radius
+  border-radius var-icon-button-border-radius
+  font-weight var-font-weight
+  font-size var-font-size
+
+.topcoat-icon-button:active
+  background-color var-background-color--icon-button--active
+
+.topcoat-icon-button:disabled
+  disabled()
+
+.topcoat-icon-button:focus
+  outline 0
+
+.topcoat-icon-button--quiet
+  @extend .topcoat-icon-button
+  button--quiet()
+  background-color var-background-color--icon-button--quiet
+  border var-border--icon-button--quiet
+  color var-color--icon-button--quiet
+
+.topcoat-icon-button--quiet:active
+  color var-color
+  color var-color--icon-button--quiet--active
+  text-shadow var-text-shadow
+  background-color var-background-color--down
+  background-color var-background-color--icon-button-quiet--down
+  border var-border
+  border var-border--icon-button--quite--active
+  box-shadow var-box-shadow--down
+  box-shadow var-box-shadow--icon-button-quiet--down
+
+.topcoat-icon-button--quiet:disabled
+  @extend .topcoat-icon-button:disabled
+
+.topcoat-icon-button--quiet:focus
+  @extend .topcoat-icon-button:focus
+
+.topcoat-icon
+  inline-block()
+  overflow var-overflow
+  width var-size--icon
+  height var-size--icon
+  vertical-align middle
+  top var-icon-top
+
+.topcoat-icon--large
+  @extend .topcoat-icon
+  width var-size--icon--large
+  height var-size--icon--large
+  top var-icon-top--large
+

@@ -1,0 +1,31 @@
+<ons-page class="center">
+	<style type="text/css" media="screen">
+		h3 {
+			margin-top: 40px;
+			margin-bottom: 10px;
+		}
+	</style>
+
+	<h4>Page 1</h4>
+
+
+	<h3>Navigator 1</h3>
+	<ons-button 
+		ng-click="ons.$get('#navigator1').pushPage('pages/ons_get/page2.html', { title: 'Page 2' })">
+		Push Page 2
+	</ons-button>
+
+
+	<h3>Navigator 2</h3>
+	<ons-button 
+		ng-click="ons.$get('#navigator2').pushPage('pages/ons_get/page2.html', { title: 'Page 2' })">
+		Push Page 2
+	</ons-button>
+
+
+	<h3>Using $event</h3>
+	<ons-button 
+		ng-click="ons.navigator.pushPage('pages/ons_get/page2.html', { title: 'Page 2' }, $event)">
+		Push Page 2
+	</ons-button>
+</ons-page>
