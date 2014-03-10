@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Navigator | Onsen UI</title>  
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/topcoat-mobile-onsen-ios7.css">  
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+  <script src="../../build/js/angular/angular.js"></script>    
+  <script src="../../build/js/angular/angular-touch.js"></script>    
+  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../app.js"></script>  
+
+  <style>
+    .topcoat-list__item {
+      padding-right: 8px;
+    }
+
+    div.label { 
+      font-size: 15px;
+      color: #4B4B4B;
+      padding: 4px 0 4px 8px;
+    }
+  </style>
+  
+</head>
+
+<body class="topcoat-page__bg">    
+  <div class="topcoat-navigation-bar">
+    <div style="float:left" class="topcoat-navigation-bar__item left quarter"><span class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height"><i class="fa fa-lg fa-bars"></i></span></div>
+    <div style="float:left" class="topcoat-navigation-bar__item center half"><span class="topcoat-navigation-bar__title topcoat-navigation-bar__line-height">NavigationBar</span></div>
+    <div style="float:left" class="topcoat-navigation-bar__item right quarter"><span class="topcoat-icon-button--quiet topcoat-navigation-bar__line-height"><span>Label</span> <i class="fa fa-lg fa-angle-right fa-2x"></i></span></div>
+  </div>
+
+  <div class="label">Segment</div>
+
+  <div class="topcoat-list" style="margin-top: -1px">
+    <ul class="topcoat-list__container">
+      <!-- switch -->
+      <li class="topcoat-list__item">
+        <div style="padding: 8px 0 0 0">
+          <div class="topcoat-button-bar" style="width:100%">
+            <div class="topcoat-button-bar__item active">
+              <button class="topcoat-button-bar__button">One</button>
+            </div>
+            <div class="topcoat-button-bar__item">
+              <button class="topcoat-button-bar__button">Two</button>
+            </div>
+            <div class="topcoat-button-bar__item">
+              <button class="topcoat-button-bar__button">Three</button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="label">Search Bar</div>
+  <div style="padding: 0 4px 4px 4px">
+    <input type="search" value="" placeholder="Search" class="topcoat-search-input">
+  </div>
+
+  <div class="topcoat-list">
+    <ul class="topcoat-list__container">
+      <!-- switch -->
+      <li class="topcoat-list__item">
+        <label class="topcoat-switch" style="float: right">
+          <input type="checkbox" class="topcoat-switch__input">
+          <div class="topcoat-switch__toggle"></div>
+        </label>
+        <span class="topcoat-list__item__line-height">Switch</span>
+      </li>
+      <!-- checkbox -->
+      <li class="topcoat-list__item">
+        <label class="topcoat-radio-button" style="float:right; margin-right:8px;">
+          <input type="radio" name="example" checked="checked"><div class="topcoat-radio-button__checkmark"></div>
+        </label>
+        <span class="topcoat-list__item__line-height">Checkbox</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="label">Range</div>
+  <div class="topcoat-list">
+    <ul class="topcoat-list__container">
+      <!-- range -->
+      <li class="topcoat-list__item">
+        <div style="padding-right: 8px; padding-top: 6px; text-align: center;">
+          <i class="fa fa-adjust fa-2x" style="color: #ddd; font-size: 24px; line-height: 34px; margin-right: 6px"></i>
+          <input type="range" class="topcoat-range" style="width: 230px">
+          <i class="fa fa-adjust fa-2x" style="color: #666; font-size: 24px; line-height: 34px; margin-left: 4px;"></i>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="label">Form</div>
+  <div style="padding:4px">
+    <input type="text" class="topcoat-text-input" style="width:100%; margin-bottom:4px" placeholder="Text"></textarea><br>
+    <textarea class="topcoat-textarea" style="width:100%; height:60px; margin-bottom:4px" placeholder="Textarea"></textarea><br>
+    <button class="topcoat-button--large">Button</button>
+  </div>
+
+</body>
+</html>
