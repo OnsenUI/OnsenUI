@@ -93,28 +93,66 @@
     :active: Active state
     :disabled: Disabled state
     :focus: Focused
-  markup:
-    <p>Button</p>
+  markup: 
     <button class="topcoat-button">Button</button>
     <button class="topcoat-button" disabled>Button</button>
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Button</h1>
+        </div>
+    </div>
+    <div style="padding:8px">
+        <button class="topcoat-button">Button</button>
+        <button class="topcoat-button--cta">Button</button>
+        <button class="topcoat-button--quiet">Button</button>
 
-    <p>Quiet Button</p>
-    <button class="topcoat-button--quiet">Button</button>
-    <button class="topcoat-button--quiet" disabled>Button</button>
+        <br>
+        <br>
 
-    <p>Large Button</p>
-    <button class="topcoat-button--large" >Button</button><br>
-    <button class="topcoat-button--large" disabled>Button</button>
+        <div style="padding:4px 0px">
+            <button class="topcoat-button--large">Button</button>
+        </div>
+        <div style="padding:4px 0px">
+            <button class="topcoat-button--large--cta">Button</button>
+        </div>
+        <div style="padding:4px 0px">
+            <button class="topcoat-button--large--quiet">Button</button>
+        </div>
+    </div>
+*/
 
-    <p>Large Quiet Button</p>
-    <button class="topcoat-button--large--quiet" >Button</button><br>
-    <button class="topcoat-button--large--quiet" disabled>Button</button>
-
-    <p>Call To Action Button</p>
+/* topdoc
+  name: Button:Call To Action Button
+  markup:
     <button class="topcoat-button--cta" >Button</button>
     <button class="topcoat-button--cta" disabled>Button</button>
+*/
 
-    <p>Large Call To Action Button</p>
+/* topdoc
+  name: Button:Quiet Button
+  markup:
+    <button class="topcoat-button--quiet">Button</button>
+    <button class="topcoat-button--quiet" disabled>Button</button>
+*/
+
+/* topdoc
+  name: Button:Large Button
+  markup:
+    <button class="topcoat-button--large" >Button</button><br>
+    <button class="topcoat-button--large" disabled>Button</button>
+*/
+
+/* topdoc
+  name: Button:Large Quiet Button
+  markup:
+    <button class="topcoat-button--large--quiet">Button</button>
+    <button class="topcoat-button--large--quiet" disabled>Button</button>
+*/
+
+/* topdoc
+  name: Button:Large Call To Action Button
+  markup:
     <button class="topcoat-button--large--cta" >Button</button><br>
     <button class="topcoat-button--large--cta" disabled>Button</button>
 */
@@ -359,7 +397,7 @@ color var-color--cta--down,
   modifiers:
     :disabled: Disabled state
   markup:
-    <div class="topcoat-button-bar" style="width:240px">
+    <div class="topcoat-button-bar" style="width:280px">
       <div class="topcoat-button-bar__item">
         <button class="topcoat-button-bar__button">One</button>
       </div>
@@ -382,6 +420,52 @@ color var-color--cta--down,
       </div>
       <div class="topcoat-button-bar__item">
         <button class="topcoat-button-bar__button">Three</button>
+      </div>
+    </div>
+
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Button Bar</h1>
+        </div>
+    </div>
+    <div style="padding:8px">
+      <div class="topcoat-button-bar" style="width:100%">
+        <div class="topcoat-button-bar__item active">
+          <button class="topcoat-button-bar__button">One</button>
+        </div>
+        <div class="topcoat-button-bar__item">
+          <button class="topcoat-button-bar__button">Two</button>
+        </div>
+        <div class="topcoat-button-bar__item">
+          <button class="topcoat-button-bar__button">Three</button>
+        </div>
+      </div>
+    </div>
+    <div style="padding:8px">
+      <div class="topcoat-button-bar" style="width:100%">
+        <div class="topcoat-button-bar__item">
+          <button class="topcoat-button-bar__button">One</button>
+        </div>
+        <div class="topcoat-button-bar__item active">
+          <button class="topcoat-button-bar__button">Two</button>
+        </div>
+        <div class="topcoat-button-bar__item">
+          <button class="topcoat-button-bar__button">Three</button>
+        </div>
+      </div>
+    </div>
+    <div style="padding:8px">
+      <div class="topcoat-button-bar" style="width:100%">
+        <div class="topcoat-button-bar__item">
+          <button class="topcoat-button-bar__button">One</button>
+        </div>
+        <div class="topcoat-button-bar__item">
+          <button class="topcoat-button-bar__button">Two</button>
+        </div>
+        <div class="topcoat-button-bar__item active">
+          <button class="topcoat-button-bar__button">Three</button>
+        </div>
       </div>
     </div>
 */
@@ -430,7 +514,7 @@ color var-color--cta--down,
 }
 
 .topcoat-button-bar {
-  margin: inherit;
+  margin: 0;
   border: 0px solid #1284ff;
 }
 
@@ -629,44 +713,85 @@ color var-color--cta--down,
     :focus: Focus state
     :disabled: Disabled state
   markup:
-    <p>Checkbox</p>
     <label class="topcoat-checkbox">
       <input type="checkbox">
       <div class="topcoat-checkbox__checkmark"></div>
       OFF
     </label>
-    <br><br>
+    <br>
     <label class="topcoat-checkbox">
       <input type="checkbox" checked="checked">
       <div class="topcoat-checkbox__checkmark"></div>
       ON
     </label>
-    <br><br>
+    <br>
     <label class="topcoat-checkbox">
       <input type="checkbox" disabled>
       <div class="topcoat-checkbox__checkmark"></div>
       Disabled
     </label>
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Checkbox</h1>
+        </div>
+    </div>
+    <br>
+    <div class="topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          <label class="topcoat-checkbox">
+            <input type="checkbox" checked="checked">
+            <div class="topcoat-checkbox__checkmark"></div>
+            ON
+          </label>
+        </li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          <label class="topcoat-checkbox">
+            <input type="checkbox">
+            <div class="topcoat-checkbox__checkmark"></div>
+            OFF
+          </label>
+        </li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          <label class="topcoat-checkbox--noborder">
+            <input type="checkbox" checked="checked">
+            <div class="topcoat-checkbox__checkmark"></div>
+            ON
+          </label>
+        </li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          <label class="topcoat-checkbox--noborder">
+            <input type="checkbox">
+            <div class="topcoat-checkbox__checkmark"></div>
+            OFF
+          </label>
+        </li>
+      </ul>
+    </div>
+*/
 
-    <p>Checkbox(noborder)</p>
+/* topdoc
+  name: Checkbox:Noborder Checkbox
+  markup:
     <label class="topcoat-checkbox--noborder">
       <input type="checkbox">
       <div class="topcoat-checkbox__checkmark"></div>
       OFF
     </label>
-    <br><br>
+    <br>
     <label class="topcoat-checkbox--noborder">
       <input type="checkbox" checked="checked">
       <div class="topcoat-checkbox__checkmark"></div>
       ON
     </label>
-    <br><br>
+    <br>
     <label class="topcoat-checkbox--noborder">
       <input type="checkbox" disabled checked="checked">
       <div class="topcoat-checkbox__checkmark"></div>
       Disabled
     </label>
-*/
+ */
 
 input[type="checkbox"] {
   position: absolute;
@@ -765,6 +890,7 @@ input[type="checkbox"] {
 
 .topcoat-checkbox {
   line-height: 24px;
+  margin: 10px 0;
 }
 
 .topcoat-checkbox > .topcoat-checkbox__checkmark:before {
@@ -821,6 +947,7 @@ input[type="checkbox"] {
 
 .topcoat-checkbox--noborder > .topcoat-checkbox__checkmark {
   height: 24px;
+  background: transparent;
 }
 
 .topcoat-checkbox--noborder > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before {
@@ -833,13 +960,13 @@ input[type="checkbox"] {
 
 .topcoat-checkbox--noborder {
   line-height: 24px;
+  margin: 10px 0;
 }
 
 .topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:before {
   width: 24px;
   height: 24px;
   background: transparent;
-  background: #fff;
   border: none;
   -webkit-border-radius: 16px;
   border-radius: 16px;
@@ -886,7 +1013,6 @@ input[type="checkbox"] {
   name: List
   description: Topcoat default list skin
   markup:
-    <p>List</p>
     <div class="page">
       <br>
       <div class="topcoat-list">
@@ -901,8 +1027,43 @@ input[type="checkbox"] {
       </div>
       <br>
     </div>
+
+  showcase:
+    <div class="topcoat-navigation-bar">
+      <div class="topcoat-navigation-bar__item center full">
+          <h1 class="topcoat-navigation-bar__title">List</h1>
+      </div>
+    </div>
     <br>
-    <p>List(noborder)</p>
+    <div class="topcoat-list">
+      <h3 class="topcoat-list__header">Category</h3>
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item">
+          <span class="topcoat-list__item__line-height">Item</span>
+        </li>
+        <li class="topcoat-list__item">
+          <span class="topcoat-list__item__line-height">Item</span>
+        </li>
+        <li class="topcoat-list__item">
+          <span class="topcoat-list__item__line-height">Item</span>
+        </li>
+      </ul>
+
+      <h3 class="topcoat-list__header">Category</h3>
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item topcoat-list__item--tappable">
+          <span class="topcoat-list__item__line-height">Tappable Item</span>
+        </li>
+        <li class="topcoat-list__item topcoat-list__item--tappable">
+          <span class="topcoat-list__item__line-height">Tappable Item</span>
+        </li>
+      </ul>
+    </div>
+*/
+
+/* topdoc
+  name: List:Noborder List
+  markup:
     <div class="page">
       <br>
       <div class="topcoat-list topcoat-list--noborder">
@@ -920,8 +1081,11 @@ input[type="checkbox"] {
       </div>
       <br>
     </div>
-    <br>
-    <p>Category Header</p>
+ */
+
+/* topdoc
+  name: List:Category Header
+  markup:
     <div class="topcoat-list topcoat-list--noborder">
       <h3 class="topcoat-list__header">Category</h3>
       <ul class="topcoat-list__container">
@@ -942,8 +1106,11 @@ input[type="checkbox"] {
         </li>
       </ul>
     </div>
-    <br>
-    <p>Tappable</p>
+ */
+
+/* topdoc
+  name: List:Tappable List Item
+  markup:
     <div class="page">
       <br>
       <div class="topcoat-list topcoat-list">
@@ -958,7 +1125,7 @@ input[type="checkbox"] {
       </div>
       <br>
     </div>
-*/
+ */
 
 .list,
 .topcoat-list {
@@ -1099,7 +1266,26 @@ input[type="checkbox"] {
     <div class="topcoat-navigation-bar topcoat-navigation-bar--bottom">
         <div class="topcoat-navigation-bar__line-height" style="text-align:center">Bottom Toolbar</div>
     </div>
+
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Navigation Bar</h1>
+        </div>
+    </div>
+
+    <div class="topcoat-navigation-bar topcoat-navigation-bar--bottom" style="position:absolute;left:0px;right:0px;bottom:0px">
+        <div class="topcoat-navigation-bar__line-height" style="text-align:center">Bottom Toolbar</div>
+    </div>
 */
+
+/* topdoc
+  name: Navigation Bar:Bottom Bar
+  markup:
+    <div class="topcoat-navigation-bar topcoat-navigation-bar--bottom">
+        <div class="topcoat-navigation-bar__line-height" style="text-align:center">Bottom Toolbar</div>
+    </div>
+ */
 
 .navigation-bar,
 .topcoat-navigation-bar {
@@ -1262,12 +1448,10 @@ input[type="checkbox"] {
     </div>
 */
 
-body {
-  background-color: #efeff4;
-}
-
 .page {
   background-color: #efeff4;
+  font-weight: 400;
+  color: #1f1f21;
 }
 
 .topcoat-page__bg {
@@ -1279,35 +1463,51 @@ body {
   description: A button that can play music, but usually just plays ads.
   modifiers:
   markup:
-    <!-- NO LABEL -->
+    <label class="topcoat-radio-button">
+      <input type="radio" name="topcoat" checked="checked">
+      <div class="topcoat-radio-button__checkmark"></div>
+      Label
+    </label>
+    <br>
     <label class="topcoat-radio-button">
       <input type="radio" name="topcoat">
       <div class="topcoat-radio-button__checkmark"></div>
+      Label
     </label>
     <br>
-    <br>
-    <!-- LEFT LABEL -->
-    <label class="topcoat-radio-button">
-      Left label
-      <input type="radio" name="topcoat">
-      <div class="topcoat-radio-button__checkmark"></div>
-    </label>
-    <br>
-    <br>
-    <!-- RIGHT LABEL -->
     <label class="topcoat-radio-button">
       <input type="radio" name="topcoat">
       <div class="topcoat-radio-button__checkmark"></div>
-      Right label
+      Label
     </label>
+
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Radio Button</h1>
+        </div>
+    </div>
     <br>
-    <br>
-    <!-- DISABLED -->
-    <label class="topcoat-radio-button">
-      <input type="radio" name="topcoat" Disabled>
-      <div class="topcoat-radio-button__checkmark"></div>
-      Disabled
-    </label>
+    <div class="topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item">
+          <label class="topcoat-radio-button" style="float:right; margin-right:8px;">
+            <input type="radio" name="example" checked="checked">
+            <div class="topcoat-radio-button__checkmark"></div>
+          </label>
+          <span class="topcoat-list__item__line-height">Label</span>
+        </li>
+
+        <li class="topcoat-list__item">
+          <label class="topcoat-radio-button" style="float:right; margin-right:8px;">
+            <input type="radio" name="example">
+            <div class="topcoat-radio-button__checkmark"></div>
+          </label>
+          <span class="topcoat-list__item__line-height">Label</span>
+        </li>
+      </ul>
+    </div>
+
 */
 
 input[type="radio"] {
@@ -1396,26 +1596,30 @@ input[type="radio"] {
   margin-left: 0;
 }
 
+input[type="radio"]:active {
+  outline: 0;
+}
+
 input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   opacity: 1;
 }
 
 .topcoat-radio-button {
   color: #c6c8c8;
-  color: #1284ff;
+  color: #1f1f21;
   line-height: 24px;
   text-align: left;
+  margin: 10px 0;
 }
 
 .topcoat-radio-button__checkmark:before {
   width: 24px;
   height: 24px;
   background: transparent;
-  background: #fff;
-  border: 1px solid #1284ff;
-  border: 1px solid #1284ff;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  border: none;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  left: 0;
 }
 
 .topcoat-radio-button__checkmark {
@@ -1425,43 +1629,23 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
 }
 
 .topcoat-radio-button__checkmark:after {
-  opacity: 0;
-  width: 14px;
-  height: 14px;
-  background: #1284ff;
-  border: 1px solid #1284ff;
-  -webkit-box-shadow: 0 1px rgba(255,255,255,0.5);
-  box-shadow: 0 1px rgba(255,255,255,0.5);
-  -webkit-transform: none;
-  -moz-transform: none;
-  -ms-transform: none;
-  -o-transform: none;
-  transform: none;
-  top: 4px;
+  top: 5px;
   left: 4px;
-}
-
-input[type="radio"]:focus + .topcoat-radio-button__checkmark:before {
-  border: none;
-  border: 1px solid #1284ff;
-  -webkit-box-shadow: none, none;
-  box-shadow: none, none;
-}
-
-input[type="radio"]:active + .topcoat-radio-button__checkmark:before {
-  border: 1px solid #1284ff;
-  border: 1px solid #1284ff;
-  background-color: #1284ff;
-  background-color: transparent;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-
-input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
-  border: 1px solid #1284ff;
+  opacity: 0;
+  width: 12px;
+  height: 6px;
   background: transparent;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  border: 3px solid #1284ff;
+  border-width: 3px;
+  border-top: none;
+  border-right: none;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 
 /* topdoc
@@ -1474,6 +1658,28 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   markup:
     <input type="range" class="topcoat-range">
     <input type="range" class="topcoat-range" disabled>
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Range</h1>
+        </div>
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="topcoat-range" style="width:100%" value="0">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="topcoat-range" style="width:100%" value="30">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="topcoat-range" style="width:100%" value="60">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="topcoat-range" style="width:100%" value="90">
+    </div>
 */
 
 .range,
@@ -1519,10 +1725,10 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   height: 2px;
   border-radius: 0;
   border-radius: 3px;
-  background-image: -webkit-linear-gradient(#1284ff, #1284ff);
-  background-image: -moz-linear-gradient(#1284ff, #1284ff);
-  background-image: -o-linear-gradient(#1284ff, #1284ff);
-  background-image: linear-gradient(#1284ff, #1284ff);
+  background-image: -webkit-linear-gradient(#ccc, #ccc);
+  background-image: -moz-linear-gradient(#ccc, #ccc);
+  background-image: -o-linear-gradient(#ccc, #ccc);
+  background-image: linear-gradient(#ccc, #ccc);
   background-position: left center;
   -webkit-background-size: 100% 2px;
   background-size: 100% 2px;
@@ -1535,9 +1741,9 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   position: relative;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  border: 1px solid #1284ff;
+  border: none;
   background-color: transparent;
-  background-color: #1284ff;
+  background-color: #ccc;
   height: 2px;
   border-radius: 0;
   border-radius: none;
@@ -1584,10 +1790,10 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   position: absolute;
   top: 13px;
   right: 0px;
-  left: -320px;
-  width: 320px;
+  left: -1024px;
+  width: 1024px;
   height: 2px;
-  background-color: #ccc;
+  background-color: #1284ff;
   content: '';
   margin: 0;
   padding: 0;
@@ -1600,10 +1806,25 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
     :disabled: Disabled state
   markup:
     <input type="search" value="" placeholder="Search" class="topcoat-search-input">
-
     <br>
-
     <input type="search" value="" placeholder="Search" class="topcoat-search-input" disabled>
+  showcase:
+    <div class="topcoat-navigation-bar">
+      <div class="topcoat-navigation-bar__item center full">
+        <h1 class="topcoat-navigation-bar__title">Search Input</h1>
+      </div>
+    </div>
+    <div style="padding:4px">
+    <input type="search" value="" placeholder="Search" class="topcoat-search-input">
+    </div>
+    <div class="topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item topcoat-list__item__line-height">Label</li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">Label</li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">Label</li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">Label</li>
+      </ul>
+    </div>
 */
 
 .search-input,
@@ -1706,18 +1927,41 @@ input[type="search"]::-webkit-search-cancel-button {
       <input type="checkbox" class="topcoat-switch__input">
       <div class="topcoat-switch__toggle"></div>
     </label>
-    <br>
-    <br>
     <label class="topcoat-switch">
       <input type="checkbox" class="topcoat-switch__input" checked>
       <div class="topcoat-switch__toggle"></div>
     </label>
-    <br>
-    <br>
     <label class="topcoat-switch">
       <input type="checkbox" class="topcoat-switch__input" disabled>
       <div class="topcoat-switch__toggle"></div>
     </label>
+
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Switch</h1>
+        </div>
+    </div>
+    <br>
+    <div class="topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item">
+          <label class="topcoat-switch" style="float:right;margin-right:8px">
+            <input type="checkbox" class="topcoat-switch__input">
+            <div class="topcoat-switch__toggle"></div>
+          </label>
+          <span class="topcoat-list__item__line-height">Label</span>
+        </li>
+
+        <li class="topcoat-list__item">
+          <label class="topcoat-switch" style="float:right;margin-right:8px">
+            <input type="checkbox" class="topcoat-switch__input" checked>
+            <div class="topcoat-switch__toggle"></div>
+          </label>
+          <span class="topcoat-list__item__line-height">Label</span>
+        </li>
+      </ul>
+    </div>
 */
 
 .switch,
@@ -1798,6 +2042,8 @@ input[type="search"]::-webkit-search-cancel-button {
   height: 32px;
   -webkit-border-radius: 30px;
   border-radius: 30px;
+  z-index: 1;
+  margin: 6px 0;
 }
 
 .topcoat-switch__toggle:before,
@@ -1912,7 +2158,6 @@ input[type="search"]::-webkit-search-cancel-button {
   modifiers:
     :disabled: Disabled state
   markup:
-    <p>Tabbar(label)</p>
     <div class="topcoat-tab-bar">
       <label class="topcoat-tab-bar__item">
         <input type="radio" name="tab-bar-a" checked="checked">
@@ -1933,34 +2178,14 @@ input[type="search"]::-webkit-search-cancel-button {
         </button>
       </label>
     </div>
-    <br>
 
-    <p>Tabbar(icon+label)</p>
-    <div class="topcoat-tab-bar">
-      <label class="topcoat-tab-bar__item">
-        <input type="radio" name="tab-bar-b" checked="checked">
-        <button class="topcoat-tab-bar__button">
-          <i class="fa fa-2x fa-comment"></i>
-          <div class="onsen_tab-bar__label">Comments</div>
-        </button>
-      </label> 
-      <label class="topcoat-tab-bar__item">
-        <input type="radio" name="tab-bar-b">
-        <button class="topcoat-tab-bar__button">
-          <i class="fa fa-2x fa-video-camera"></i>
-          <div class="onsen_tab-bar__label">Videos</div>
-        </button>
-      </label> 
-      <label class="topcoat-tab-bar__item">
-        <input type="radio" name="tab-bar-b">
-        <button class="topcoat-tab-bar__button">
-          <i class="fa fa-2x fa-gear"></i>
-          <div class="onsen_tab-bar__label">Settings</div>
-        </button>
-      </label> 
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Tab Bar</h1>
+        </div>
     </div>
-    <br>
-    <div class="topcoat-tab-bar">
+    <div class="topcoat-tab-bar" style="position:absolute;left:0px;right:0px;bottom:0px">
       <label class="topcoat-tab-bar__item">
         <input type="radio" name="tab-bar-bb">
         <button class="topcoat-tab-bar__button">
@@ -1997,9 +2222,39 @@ input[type="search"]::-webkit-search-cancel-button {
         </button>
       </label> 
     </div>
-    <br>
+*/
 
-    <p>Tabbar(icon)</p>
+/* topdoc
+  name: Tab Bar:Icon + Label Tab Item
+  markup:
+    <div class="topcoat-tab-bar">
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b" checked="checked">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-comment"></i>
+          <div class="onsen_tab-bar__label">Comments</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-video-camera"></i>
+          <div class="onsen_tab-bar__label">Videos</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-gear"></i>
+          <div class="onsen_tab-bar__label">Settings</div>
+        </button>
+      </label> 
+    </div>
+ */
+
+/* topdoc
+  name: Tab Bar:Icon Only Tab Item
+  markup:
     <div class="topcoat-tab-bar">
       <label class="topcoat-tab-bar__item">
         <input type="radio" name="tab-bar-c">
@@ -2032,7 +2287,7 @@ input[type="search"]::-webkit-search-cancel-button {
         </button>
       </label> 
     </div>
-*/
+ */
 
 .topcoat-tab-bar {
   height: 49px;
@@ -2119,39 +2374,53 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 
 /* topdoc
-  name: Text input
-  description: Topdoc text input
+  name: Text Input
   modifiers:
     :disabled: Disabled state
     :focus: Focused
     :invalid: Hover state
   markup:
-    <p>Text Input(border)</p>
     <input type="text" class="topcoat-text-input" placeholder="text" value="">
     <br>
-    <br>
     <input type="text" class="topcoat-text-input" placeholder="text" value="" disabled>
+  showcase:
+    <div class="topcoat-navigation-bar">
+      <div class="topcoat-navigation-bar__item center full">
+        <h1 class="topcoat-navigation-bar__title">Text Input</h1>
+      </div>
+    </div>
     <br>
-    <br>
-    <input type="text" class="topcoat-text-input" placeholder="text" value="fail" pattern="not-fail">
+    <div style="padding:8px">
+      <input type="text" class="topcoat-text-input" placeholder="text" style="width:100%">
+      <button class="topcoat-button--large" style="margin-top:8px">submit</button>
+    </div>
+    <br><br>
+    <div class="topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item">
+          <input type="text" class="topcoat-text-input--transparent" placeholder="text" style="width:100%;margin-top:4px">
+        </li>
+      </ul>
+    </div>
+    <div style="padding:8px">
+      <button class="topcoat-button--large">submit</button>
+    </div>
+*/
 
-    <p>Text Input(transparent)</p>
+/* topdoc
+  name: Text Input:Transparent Text Input
+  markup:
     <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="">
     <br>
-    <br>
     <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="" disabled>
-    <br>
-    <br>
-    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="fail" pattern="not-fail">
+*/
 
-    <p>Text Input(underbar)</p>
+/* topdoc
+  name: Text Input:Underbar Text Input
+  markup:
     <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="">
     <br>
-    <br>
     <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="" disabled>
-    <br>
-    <br>
-    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="fail" pattern="not-fail">
 */
 
 .input,
@@ -2185,7 +2454,6 @@ input[type="search"]::-webkit-search-cancel-button {
 .topcoat-text-input,
 .topcoat-text-input--transparent,
 .topcoat-text-input--underbar {
-  font-size: 16px;
   letter-spacing: 0;
   border: 1px solid #ddd;
   -webkit-border-radius: 4px;
@@ -2230,6 +2498,8 @@ input[type="search"]::-webkit-search-cancel-button {
 .topcoat-text-input--transparent {
   border: none;
   background-color: transparent;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .topcoat-text-input--transparent:disabled {
@@ -2298,12 +2568,38 @@ input[type="search"]::-webkit-search-cancel-button {
   modifiers:
     :disabled: Disabled state
   markup:
-    <p>Textarea(border)</p>
     <textarea class="topcoat-textarea" rows="3" placeholder="Textarea"></textarea>
     <br>
     <textarea class="topcoat-textarea" rows="3" placeholder="Textarea" disabled></textarea>
-    <br>
-    <p>Textarea(transparent)</p>
+
+  showcase:
+    <div class="topcoat-navigation-bar">
+      <div class="topcoat-navigation-bar__item center full">
+        <h1 class="topcoat-navigation-bar__title">Textarea</h1>
+      </div>
+    </div>
+    <div style="padding:8px">
+      <textarea class="topcoat-textarea" style="width:100%; height:80px; margin-bottom:8px" placeholder="Textarea"></textarea><br>
+      <button class="topcoat-button--large">Submit</button>
+    </div>
+
+    <br><br><br><br>
+
+    <div class="topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item">
+          <textarea class="topcoat-textarea--transparent" style="width:100%; height:80px; margin-bottom:4px" placeholder="Textarea"></textarea>
+        </li>
+      </ul>
+    </div>
+    <div style="padding:8px">
+      <button class="topcoat-button--large">Submit</button>
+    </div>
+*/
+
+/* topdoc
+  name: Textarea:Transparent Textarea
+  markup:
     <textarea class="topcoat-textarea--transparent" rows="3" placeholder="Textarea"></textarea>
     <br>
     <textarea class="topcoat-textarea--transparent" rows="3" placeholder="Textarea" disabled></textarea>
@@ -2339,7 +2635,7 @@ input[type="search"]::-webkit-search-cancel-button {
 .topcoat-textarea,
 .topcoat-textarea--transparent {
   padding: 5px 5px 5px 5px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -2371,4 +2667,6 @@ input[type="search"]::-webkit-search-cancel-button {
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+  padding-left: 0;
+  padding-right: 0;
 }

@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.0 - 2014-03-07 */
+/*! onsenui - v1.0.1 - 2014-03-11 */
 angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
@@ -854,7 +854,6 @@ limitations under the License.
 				this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));
 				this.attachFastClickEvent(this.leftSection[0]);
 				this.rightSection.bind('click', this.onRightButtonClicked.bind(this));
-				this.attachFastClickEvent(this.rightSection[0]);
 				if (scope.page) {
 					var options = {
 						title: scope.title,
@@ -903,7 +902,7 @@ limitations under the License.
 			checkiOS7: function() {
 				if (window.device && window.device.platform) {
 					if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
-						this.adjustForiOS7();
+						setTimeout( this.adjustForiOS7.bind(this), 0);
 					}
 				} else {
 					document.addEventListener("deviceready", this.checkiOS7.bind(this), false);
@@ -911,7 +910,7 @@ limitations under the License.
 			},
 
 			adjustForiOS7: function() {
-				this.toolbar[0].style.height = this.toolbarContent[0].clientHeight + 20 + 'px';
+				this.toolbar[0].style.height = this.toolbar[0].clientHeight + 20 + 'px';
 				this.toolbar[0].style.paddingTop = '20px';
 			},
 
@@ -2138,6 +2137,7 @@ limitations under the License.
 
 				var Swiper = Class.extend({
 					init: function(element) {
+						this.isReady = false;
 						this.$el = element;
 						this.el = element[0];
 						this.VERTICAL_THRESHOLD = 20;
@@ -2172,9 +2172,10 @@ limitations under the License.
 						}
 
 						window.setTimeout(function() {
+							this.isReady = true;
 							this.behindPage.style.opacity = 1;
 							this.blackMask.style.opacity = 1;
-						}.bind(this), 100);
+						}.bind(this), 400);
 					},
 
 					onSwipableChanged: function(swipable){
@@ -2403,8 +2404,9 @@ limitations under the License.
 							this.abovePage.style[property] = aboveTransform;
 							this.behindPage.style[property] = behindTransform;
 						};
-						
-						this.behindPage.style.opacity = opacity;
+						if(this.isReady){
+							this.behindPage.style.opacity = opacity;
+						}						
 						this.currentX = x;
 					}
 				});

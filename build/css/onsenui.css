@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.0 - 2014-03-04 */
+/*! onsenui - v1.0.1 - 2014-03-11 */
 
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
@@ -18,6 +18,13 @@ limitations under the License.
 */
 
 @import url("font_awesome/css/font-awesome.min.css");
+
+[ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+[data-ng-cloak] {
+  display: none !important;
+}
 
 html {
   width: 100%;
@@ -124,11 +131,11 @@ ons-screen {
   display: block;
   width: 100%;
   height: 100%;
-  -webkit-perspective: 600px;
-  -moz-perspective: 600px;
-  -ms-perspective: 600px;
-  -o-perspective: 600px;
-  perspective: 600px;
+  -webkit-perspective: 10px;
+  -moz-perspective: 10px;
+  -ms-perspective: 10px;
+  -o-perspective: 10px;
+  perspective: 10px;
   position: relative;
   overflow: hidden;
 }
@@ -172,7 +179,7 @@ ons-screen {
   opacity: 0;
 }
 
-.screen-page.screen_center {
+.screen-page.screen-center {
   -webkit-transform: translate3d(0, 0, 0);
   -moz-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
@@ -192,7 +199,7 @@ ons-screen {
   box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.2);
 }
 
-.screen-page.transition .screen-page__container {
+.screen-page.transition > .screen-page__container {
   -webkit-transition-duration: 400ms;
   -moz-transition-duration: 400ms;
   -o-transition-duration: 400ms;
@@ -203,7 +210,7 @@ ons-screen {
   animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.screen-page.unmodal .screen-page__container {
+.screen-page.unmodal > .screen-page__container {
   opacity: 1;
 }
 
@@ -231,7 +238,7 @@ ons-screen {
   transform: translate3d(0, -10%, 0);
 }
 
-.screen-page.modal-behind .screen-page__container {
+.screen-page.modal-behind > .screen-page__container {
   opacity: 0.9;
 }
 
@@ -441,9 +448,15 @@ limitations under the License.
 
 .onsen_navigator__right-button {
   position: absolute;
-  right: 10px;
+  padding-right: 10px;
+  right: 0;
   width: 13%;
   bottom: 0;
+}
+
+.right-section-icon {
+  position: relative;
+  width: 100%;
 }
 
 .onsen_navigator-back-label {
@@ -509,7 +522,7 @@ limitations under the License.
   cursor: default;
 }
 
-.effeckt-button .spinner {
+.effeckt-button > .spinner {
   position: absolute;
   width: 20px;
   height: 10px;
@@ -524,7 +537,7 @@ limitations under the License.
   background: transparent;
 }
 
-.effeckt-button[data-loading] .spinner {
+.effeckt-button[data-loading] > .spinner {
   -webkit-animation: spinner .8s infinite linear;
   -o-animation: spinner .8s infinite linear;
   -moz-animation: spinner .8s infinite linear;
@@ -618,8 +631,8 @@ limitations under the License.
 }
 
 .effeckt-button,
-.effeckt-button .spinner,
-.effeckt-button .label {
+.effeckt-button > .spinner,
+.effeckt-button > .label {
   -webkit-transition-property: padding, opacity, left, right, top, bottom, margin;
   -moz-transition-property: padding, opacity, left, right, top, bottom, margin;
   -o-transition-property: padding, opacity, left, right, top, bottom, margin;
@@ -635,18 +648,18 @@ limitations under the License.
 }
 
 .effeckt-button.zoom-in,
-.effeckt-button.zoom-in .spinner,
-.effeckt-button.zoom-in .label,
+.effeckt-button.zoom-in > .spinner,
+.effeckt-button.zoom-in > .label,
 .effeckt-button.zoom-out,
-.effeckt-button.zoom-out .spinner,
-.effeckt-button.zoom-out .label {
+.effeckt-button.zoom-out > .spinner,
+.effeckt-button.zoom-out > .label {
   -webkit-transition: 500ms ease all;
   -o-transition: 500ms ease all;
   -moz-transition: 500ms ease all;
   transition: 500ms ease all;
 }
 
-.effeckt-button.expand-right .spinner {
+.effeckt-button.expand-right > .spinner {
   right: 16px;
 }
 
@@ -654,11 +667,11 @@ limitations under the License.
   padding-right: 64px;
 }
 
-.effeckt-button.expand-right[data-loading] .spinner {
+.effeckt-button.expand-right[data-loading] > .spinner {
   opacity: 1;
 }
 
-.effeckt-button.expand-left .spinner {
+.effeckt-button.expand-left > .spinner {
   left: 16px;
 }
 
@@ -666,7 +679,7 @@ limitations under the License.
   padding-left: 64px;
 }
 
-.effeckt-button.expand-left[data-loading] .spinner {
+.effeckt-button.expand-left[data-loading] > .spinner {
   opacity: 1;
 }
 
@@ -674,7 +687,7 @@ limitations under the License.
   overflow: hidden;
 }
 
-.effeckt-button.expand-up .spinner {
+.effeckt-button.expand-up > .spinner {
   top: 32px;
   left: 50%;
   margin-left: -16px;
@@ -684,7 +697,7 @@ limitations under the License.
   padding-top: 64px;
 }
 
-.effeckt-button.expand-up[data-loading] .spinner {
+.effeckt-button.expand-up[data-loading] > .spinner {
   opacity: 1;
   top: 16px;
   margin-top: 0;
@@ -694,7 +707,7 @@ limitations under the License.
   overflow: hidden;
 }
 
-.effeckt-button.expand-down .spinner {
+.effeckt-button.expand-down > .spinner {
   left: 50%;
   top: 100%;
   margin-left: -16px;
@@ -705,7 +718,7 @@ limitations under the License.
   padding-bottom: 64px;
 }
 
-.effeckt-button.expand-down[data-loading] .spinner {
+.effeckt-button.expand-down[data-loading] > .spinner {
   opacity: 1;
 }
 
@@ -713,21 +726,21 @@ limitations under the License.
   overflow: hidden;
 }
 
-.effeckt-button.slide-left .label {
+.effeckt-button.slide-left > .label {
   position: relative;
 }
 
-.effeckt-button.slide-left .spinner {
+.effeckt-button.slide-left > .spinner {
   left: 100%;
   margin-left: -16px;
 }
 
-.effeckt-button.slide-left[data-loading] .label {
+.effeckt-button.slide-left[data-loading] > .label {
   opacity: 0;
   left: -100%;
 }
 
-.effeckt-button.slide-left[data-loading] .spinner {
+.effeckt-button.slide-left[data-loading] > .spinner {
   opacity: 1;
   left: 50%;
 }
@@ -736,21 +749,21 @@ limitations under the License.
   overflow: hidden;
 }
 
-.effeckt-button.slide-right .label {
+.effeckt-button.slide-right > .label {
   position: relative;
 }
 
-.effeckt-button.slide-right .spinner {
+.effeckt-button.slide-right > .spinner {
   right: 100%;
   margin-left: -16px;
 }
 
-.effeckt-button.slide-right[data-loading] .label {
+.effeckt-button.slide-right[data-loading] > .label {
   opacity: 0;
   left: 100%;
 }
 
-.effeckt-button.slide-right[data-loading] .spinner {
+.effeckt-button.slide-right[data-loading] > .spinner {
   opacity: 1;
   left: 50%;
 }
@@ -759,22 +772,22 @@ limitations under the License.
   overflow: hidden;
 }
 
-.effeckt-button.slide-up .label {
+.effeckt-button.slide-up > .label {
   position: relative;
 }
 
-.effeckt-button.slide-up .spinner {
+.effeckt-button.slide-up > .spinner {
   left: 50%;
   margin-left: -16px;
   margin-top: 1em;
 }
 
-.effeckt-button.slide-up[data-loading] .label {
+.effeckt-button.slide-up[data-loading] > .label {
   opacity: 0;
   top: -1em;
 }
 
-.effeckt-button.slide-up[data-loading] .spinner {
+.effeckt-button.slide-up[data-loading] > .spinner {
   opacity: 1;
   margin-top: -16px;
 }
@@ -783,22 +796,22 @@ limitations under the License.
   overflow: hidden;
 }
 
-.effeckt-button.slide-down .label {
+.effeckt-button.slide-down > .label {
   position: relative;
 }
 
-.effeckt-button.slide-down .spinner {
+.effeckt-button.slide-down > .spinner {
   left: 50%;
   margin-left: -16px;
   margin-top: -32px;
 }
 
-.effeckt-button.slide-down[data-loading] .label {
+.effeckt-button.slide-down[data-loading] > .label {
   opacity: 0;
   top: 1em;
 }
 
-.effeckt-button.slide-down[data-loading] .spinner {
+.effeckt-button.slide-down[data-loading] > .spinner {
   opacity: 1;
   margin-top: -16px;
 }
@@ -807,7 +820,7 @@ limitations under the License.
   overflow: hidden;
 }
 
-.effeckt-button.zoom-out .spinner {
+.effeckt-button.zoom-out > .spinner {
   left: 50%;
   margin-left: -16px;
   -webkit-transform: scale(2.5);
@@ -817,12 +830,12 @@ limitations under the License.
   transform: scale(2.5);
 }
 
-.effeckt-button.zoom-out .label {
+.effeckt-button.zoom-out > .label {
   position: relative;
   display: inline-block;
 }
 
-.effeckt-button.zoom-out[data-loading] .label {
+.effeckt-button.zoom-out[data-loading] > .label {
   opacity: 0;
   -webkit-transform: scale(0.5);
   -ms-transform: scale(0.5);
@@ -831,7 +844,7 @@ limitations under the License.
   transform: scale(0.5);
 }
 
-.effeckt-button.zoom-out[data-loading] .spinner {
+.effeckt-button.zoom-out[data-loading] > .spinner {
   opacity: 1;
   -webkit-transform: none;
   -ms-transform: none;
@@ -844,7 +857,7 @@ limitations under the License.
   overflow: hidden;
 }
 
-.effeckt-button.zoom-in .spinner {
+.effeckt-button.zoom-in > .spinner {
   left: 50%;
   margin-left: -16px;
   -webkit-transform: scale(0.2);
@@ -854,12 +867,12 @@ limitations under the License.
   transform: scale(0.2);
 }
 
-.effeckt-button.zoom-in .label {
+.effeckt-button.zoom-in > .label {
   position: relative;
   display: inline-block;
 }
 
-.effeckt-button.zoom-in[data-loading] .label {
+.effeckt-button.zoom-in[data-loading] > .label {
   opacity: 0;
   -webkit-transform: scale(2.2);
   -ms-transform: scale(2.2);
@@ -868,7 +881,7 @@ limitations under the License.
   transform: scale(2.2);
 }
 
-.effeckt-button.zoom-in[data-loading] .spinner {
+.effeckt-button.zoom-in[data-loading] > .spinner {
   opacity: 1;
   -webkit-transform: none;
   -ms-transform: none;
@@ -1258,119 +1271,8 @@ limitations under the License.
   -webkit-overflow-scrolling: touch;
 }
 
-.scroller {
-  min-height: 105%;
-}
-
 ::-webkit-scrollbar {
   display: none;
-}
-
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-@keyframes shake {
-  0% {
-    -webkit-transform: translate(3px, 0);
-    -moz-transform: translate(3px, 0);
-    -ms-transform: translate(3px, 0);
-    -o-transform: translate(3px, 0);
-    transform: translate(3px, 0);
-  }
-
-  50% {
-    -webkit-transform: translate(-3px, 0);
-    -moz-transform: translate(-3px, 0);
-    -ms-transform: translate(-3px, 0);
-    -o-transform: translate(-3px, 0);
-    transform: translate(-3px, 0);
-  }
-
-  100% {
-    -webkit-transform: translate(0, 0);
-    -moz-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    -o-transform: translate(0, 0);
-    transform: translate(0, 0);
-  }
-}
-
-@-moz-keyframes shake {
-  0% {
-    -moz-transform: translate(3px, 0);
-  }
-
-  50% {
-    -moz-transform: translate(-3px, 0);
-  }
-
-  100% {
-    -moz-transform: translate(0, 0);
-  }
-}
-
-@-o-keyframes shake {
-  0% {
-    -o-transform: translate(3px, 0);
-    transform: translate(3px, 0);
-  }
-
-  50% {
-    -o-transform: translate(-3px, 0);
-    transform: translate(-3px, 0);
-  }
-
-  100% {
-    -o-transform: translate(0, 0);
-    transform: translate(0, 0);
-  }
-}
-
-@-webkit-keyframes shake {
-  0% {
-    -webkit-transform: translate(3px, 0);
-  }
-
-  50% {
-    -webkit-transform: translate(-3px, 0);
-  }
-
-  100% {
-    -webkit-transform: translate(0, 0);
-  }
-}
-
-.shake {
-  -o-animation-name: shake;
-  animation-name: shake;
-  -o-animation-duration: 150ms;
-  animation-duration: 150ms;
-  -o-animation-iteration-count: 2;
-  animation-iteration-count: 2;
-  -o-animation-timing-function: linear;
-  animation-timing-function: linear;
-  -moz-animation-name: shake;
-  -moz-animation-duration: 150ms;
-  -moz-animation-iteration-count: 2;
-  -moz-animation-timing-function: linear;
-  -webkit-animation-name: shake;
-  -webkit-animation-duration: 150ms;
-  -webkit-animation-iteration-count: 2;
-  -webkit-animation-timing-function: linear;
 }
 
 /*
@@ -1450,6 +1352,11 @@ limitations under the License.
 .above {
   -webkit-box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
   box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 .full-screen {
