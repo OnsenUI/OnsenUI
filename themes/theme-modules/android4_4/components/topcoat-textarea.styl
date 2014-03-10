@@ -21,7 +21,7 @@
 
 .topcoat-textarea
   @extend .textarea
-  padding var-padding--container
+  padding var-padding--textarea
   font-size var-font-size--textarea
   font-weight var-font-weight
   border-radius var-border-radius
@@ -53,3 +53,31 @@
 
 .topcoat-textarea:disabled:-ms-input-placeholder
   color var-color--focus
+
+// transparent
+
+.topcoat-textarea--transparent
+  @extend .topcoat-textarea
+  border none
+  background transparent
+  padding-left 0
+  padding-right 0
+
+.topcoat-textarea--transparent:focus
+  @extend .topcoat-textarea:focus
+  border none
+  background transparent
+
+.topcoat-textarea--transparent:disabled
+  @extend .topcoat-textarea:disabled
+  border none
+  background transparent
+
+.topcoat-textarea:disabled::-webkit-input-placeholder
+  @extend .topcoat-textarea:disabled::-webkit-input-placeholder
+
+.topcoat-textarea:disabled::-moz-placeholder
+  @extend .topcoat-textarea:disabled::-moz-placeholder
+
+.topcoat-textarea:disabled:-ms-input-placeholder
+  @extend .topcoat-textarea:disabled:-ms-input-placeholder

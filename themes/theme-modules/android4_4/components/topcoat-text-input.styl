@@ -21,10 +21,10 @@
 
 .topcoat-text-input
   @extend .input
-  line-height var-height
+  line-height var-line-height
   font-size var-font-size
   letter-spacing var-letter-spacing
-  padding var-padding
+  padding var-padding--text-input
   border var-border
   border var-border--text-input
   border-radius var-border-radius
@@ -57,4 +57,37 @@
 .topcoat-text-input:invalid
   border var-border--invalid
   color var-color-invalid
+
+// transparent
+
+.topcoat-text-input--transparent
+  @extend .topcoat-text-input
+  border none
+  background transparent
+  padding-left 0
+  padding-right 0
+
+.topcoat-text-input:focus
+  @extend .topcoat-text-input:focus
+  border none
+  background transparent
+
+.topcoat-text-input:disabled
+  @extend .topcoat-text-input:disabled
+  border none
+  background transparent
+
+.topcoat-text-input:disabled::-webkit-input-placeholder
+  @extend .topcoat-text-input:disabled::-webkit-input-placeholder
+
+.topcoat-text-input:disabled::-moz-placeholder
+  @extend .topcoat-text-input:disabled::-moz-placeholder
+
+.topcoat-text-input:disabled:-ms-input-placeholder
+  @extend .topcoat-text-input:disabled:-ms-input-placeholder
+
+.topcoat-text-input:invalid
+  @extend .topcoat-text-input:invalid
+  border none
+  background transparent
 
