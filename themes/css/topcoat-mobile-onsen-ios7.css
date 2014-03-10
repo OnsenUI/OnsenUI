@@ -123,6 +123,13 @@
 */
 
 /* topdoc
+  name: Button:Call To Action Button
+  markup:
+    <button class="topcoat-button--cta" >Button</button>
+    <button class="topcoat-button--cta" disabled>Button</button>
+*/
+
+/* topdoc
   name: Button:Quiet Button
   markup:
     <button class="topcoat-button--quiet">Button</button>
@@ -141,13 +148,6 @@
   markup:
     <button class="topcoat-button--large--quiet">Button</button>
     <button class="topcoat-button--large--quiet" disabled>Button</button>
-*/
-
-/* topdoc
-  name: Button:Call To Action Button
-  markup:
-    <button class="topcoat-button--cta" >Button</button>
-    <button class="topcoat-button--cta" disabled>Button</button>
 */
 
 /* topdoc
@@ -1491,7 +1491,7 @@ input[type="checkbox"] {
     <div class="topcoat-list">
       <ul class="topcoat-list__container">
         <li class="topcoat-list__item">
-          <label class="topcoat-radio-button" style="float:right">
+          <label class="topcoat-radio-button" style="float:right; margin-right:8px;">
             <input type="radio" name="example" checked="checked">
             <div class="topcoat-radio-button__checkmark"></div>
           </label>
@@ -1499,7 +1499,7 @@ input[type="checkbox"] {
         </li>
 
         <li class="topcoat-list__item">
-          <label class="topcoat-radio-button" style="float:right">
+          <label class="topcoat-radio-button" style="float:right; margin-right:8px;">
             <input type="radio" name="example">
             <div class="topcoat-radio-button__checkmark"></div>
           </label>
