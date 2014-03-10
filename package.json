@@ -1,6 +1,6 @@
 {
   "name": "onsenui",
-  "version": "1.0.1-dev",
+  "version": "1.0.1",
   "private": false,
   "author": "@kruyvanna",
   "contributors": [
@@ -8,6 +8,10 @@
       "name": "Mitsunori KUBOTA",
       "email": "anatoo.jp@gmail.com",
       "url": "http://anatoo.jp"
+    },
+    {
+      "name": "Ataru Otoh",
+      "email": "ataru@asial.co.jp"
     }
   ],
   "devDependencies": {

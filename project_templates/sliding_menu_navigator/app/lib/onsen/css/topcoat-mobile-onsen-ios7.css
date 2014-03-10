@@ -1725,10 +1725,10 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   height: 2px;
   border-radius: 0;
   border-radius: 3px;
-  background-image: -webkit-linear-gradient(#1284ff, #1284ff);
-  background-image: -moz-linear-gradient(#1284ff, #1284ff);
-  background-image: -o-linear-gradient(#1284ff, #1284ff);
-  background-image: linear-gradient(#1284ff, #1284ff);
+  background-image: -webkit-linear-gradient(#ccc, #ccc);
+  background-image: -moz-linear-gradient(#ccc, #ccc);
+  background-image: -o-linear-gradient(#ccc, #ccc);
+  background-image: linear-gradient(#ccc, #ccc);
   background-position: left center;
   -webkit-background-size: 100% 2px;
   background-size: 100% 2px;
@@ -1741,9 +1741,9 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   position: relative;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  border: 1px solid #1284ff;
+  border: none;
   background-color: transparent;
-  background-color: #1284ff;
+  background-color: #ccc;
   height: 2px;
   border-radius: 0;
   border-radius: none;
@@ -1790,10 +1790,10 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   position: absolute;
   top: 13px;
   right: 0px;
-  left: -320px;
-  width: 320px;
+  left: -1024px;
+  width: 1024px;
   height: 2px;
-  background-color: #ccc;
+  background-color: #1284ff;
   content: '';
   margin: 0;
   padding: 0;
@@ -2587,9 +2587,6 @@ input[type="search"]::-webkit-search-cancel-button {
 
     <div class="topcoat-list">
       <ul class="topcoat-list__container">
-        <li class="topcoat-list__item">
-          <input type="text" class="topcoat-text-input--transparent" style="width:100%; margin-bottom:4px" placeholder="Text">
-        </li>
         <li class="topcoat-list__item">
           <textarea class="topcoat-textarea--transparent" style="width:100%; height:80px; margin-bottom:4px" placeholder="Textarea"></textarea>
         </li>

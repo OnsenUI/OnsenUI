@@ -2368,9 +2368,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
     <div class="topcoat-list">
       <ul class="topcoat-list__container">
         <li class="topcoat-list__item">
-          <input type="text" class="topcoat-text-input--transparent" style="width:100%; margin-bottom:4px" placeholder="Text">
-        </li>
-        <li class="topcoat-list__item">
           <textarea class="topcoat-textarea--transparent" style="width:100%; height:80px; margin-bottom:4px" placeholder="Textarea"></textarea>
         </li>
       </ul>

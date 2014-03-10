@@ -24,7 +24,7 @@ limitations under the License.
   border-radius var-border-radius--large
   border-radius var-border-radius--range
 
-  background-image linear-gradient(var-background-color--range, var-background-color--range)
+  background-image linear-gradient(var-background-color--range-background, var-background-color--range-background)
   background-position left center
   background-size 100% 2px
   background-repeat no-repeat
@@ -34,9 +34,9 @@ limitations under the License.
 .topcoat-range::-moz-range-track
   position relative
   border-radius var-border-radius
-  border var-border
+  border none
   background-color var-background-color--input
-  background-color var-background-color--range
+  background-color var-background-color--range-background
   height var-height--range__track
   border-radius var-border-radius--large
   border-radius var-border-radius--none
@@ -78,10 +78,10 @@ limitations under the License.
   position absolute
   top 13px
   right 0px
-  left -320px
-  width 320px
+  left -1024px
+  width 1024px
   height 2px
-  background-color var-background-color--range-background
+  background-color var-background-color--range
   content ''
   margin 0
   padding 0
