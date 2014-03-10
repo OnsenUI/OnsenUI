@@ -188,6 +188,6 @@ module.exports = function(grunt) {
     grunt.registerTask('serve-ios7-themes', ['connect', 'serve-message', 'watch:ios7-themes']);
     grunt.registerTask('serve-android4_4-themes', ['connect', 'serve-message', 'watch:android4_4-themes']);
     grunt.registerTask('serve-topdoc', ['connect', 'serve-message', 'watch:topdoc']);
-    grunt.registerTask('serve', ['build', 'connect', 'serve-message', 'watch']);
+    grunt.registerTask('serve', ['build', 'connect', 'serve-message', 'watch:all-themes']);
 
 };
