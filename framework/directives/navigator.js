@@ -120,7 +120,6 @@ limitations under the License.
 				this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));
 				this.attachFastClickEvent(this.leftSection[0]);
 				this.rightSection.bind('click', this.onRightButtonClicked.bind(this));
-				this.attachFastClickEvent(this.rightSection[0]);
 				if (scope.page) {
 					var options = {
 						title: scope.title,
