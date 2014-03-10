@@ -169,7 +169,7 @@ limitations under the License.
 			checkiOS7: function() {
 				if (window.device && window.device.platform) {
 					if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
-						this.adjustForiOS7();
+						setTimeout( this.adjustForiOS7.bind(this), 0);
 					}
 				} else {
 					document.addEventListener("deviceready", this.checkiOS7.bind(this), false);
