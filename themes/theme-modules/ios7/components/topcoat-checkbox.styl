@@ -93,6 +93,7 @@
 .topcoat-checkbox--noborder > .topcoat-checkbox__checkmark
   @extend .checkbox
   height var-size--checkbox
+  background transparent
 
 .topcoat-checkbox--noborder > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before
   background transparent
@@ -108,8 +109,7 @@
   @extend .checkbox:before
   width var-size--checkbox
   height var-size--checkbox
-  background var-background-color
-  background var-background-color--checkmark
+  background transparent
   border none
   border-radius var-border-radius--checkbox
   left 0
