@@ -260,7 +260,7 @@ module.exports = function(grunt) {
         },
         files: [{
           expand: true,
-          cwd: 'project_templates/sliding_menu/',
+          cwd: 'project_templates/minimum/',
           src: ['**']
         }]
       },
