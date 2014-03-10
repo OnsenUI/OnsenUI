@@ -42,11 +42,21 @@
           <div id="pageNav">
             <ul>
               <li><a href="#button">Button</a></li>
+              <li><a href="#buttonquiet-button">Button:Quiet Button</a></li>
+              <li><a href="#buttonlarge-button">Button:Large Button</a></li>
+              <li><a href="#buttonlarge-quiet button">Button:Large Quiet Button</a></li>
+              <li><a href="#buttoncall-to action button">Button:Call To Action Button</a></li>
+              <li><a href="#buttonlarge-call to action button">Button:Large Call To Action Button</a></li>
               <li><a href="#button-bar">Button Bar</a></li>
               <li><a href="#icon-button">Icon Button</a></li>
               <li><a href="#checkbox">Checkbox</a></li>
+              <li><a href="#checkboxnoborder-checkbox">Checkbox:Noborder Checkbox</a></li>
               <li><a href="#list">List</a></li>
+              <li><a href="#listnoborder-list">List:Noborder List</a></li>
+              <li><a href="#listcategory-header">List:Category Header</a></li>
+              <li><a href="#listtappable-list item">List:Tappable List Item</a></li>
               <li><a href="#navigation-bar">Navigation Bar</a></li>
+              <li><a href="#navigation-barbottom bar">Navigation Bar:Bottom Bar</a></li>
               <li><a href="#notification">Notification</a></li>
               <li><a href="#page">Page</a></li>
               <li><a href="#radio-button">Radio Button</a></li>
@@ -54,8 +64,13 @@
               <li><a href="#search-input">Search Input</a></li>
               <li><a href="#switch">Switch</a></li>
               <li><a href="#tab-bar">Tab Bar</a></li>
-              <li><a href="#text-input">Text input</a></li>
+              <li><a href="#tab-baricon + label tab item">Tab Bar:Icon + Label Tab Item</a></li>
+              <li><a href="#tab-baricon only tab item">Tab Bar:Icon Only Tab Item</a></li>
+              <li><a href="#text-input">Text Input</a></li>
+              <li><a href="#text-inputtransparent text input">Text Input:Transparent Text Input</a></li>
+              <li><a href="#text-inputunderbar text input">Text Input:Underbar Text Input</a></li>
               <li><a href="#textarea">Textarea</a></li>
+              <li><a href="#textareatransparent-textarea">Textarea:Transparent Textarea</a></li>
             </ul>
           </div>
         </div>
@@ -206,12 +221,87 @@
               <h2>Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><p>Button</p><button class="topcoat-button">Button</button><button class="topcoat-button" disabled>Button</button><p>Quiet Button</p><button class="topcoat-button--quiet">Button</button><button class="topcoat-button--quiet" disabled>Button</button><p>Large Button</p><button class="topcoat-button--large" >Button</button><br><button class="topcoat-button--large" disabled>Button</button><p>Large Quiet Button</p><button class="topcoat-button--large--quiet" >Button</button><br><button class="topcoat-button--large--quiet" disabled>Button</button><p>Call To Action Button</p><button class="topcoat-button--cta" >Button</button><button class="topcoat-button--cta" disabled>Button</button><p>Large Call To Action Button</p><button class="topcoat-button--large--cta" >Button</button><br><button class="topcoat-button--large--cta" disabled>Button</button></div>
+              <div style="width: 320px; position: relative;" class="markup"><button class="topcoat-button">Button</button>    <button class="topcoat-button" disabled>Button</button></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;p&gt;Button&lt;/p&gt;&lt;button class=&quot;topcoat-button&quot;&gt;Button&lt;/button&gt;&lt;button class=&quot;topcoat-button&quot; disabled&gt;Button&lt;/button&gt;&lt;p&gt;Quiet Button&lt;/p&gt;&lt;button class=&quot;topcoat-button--quiet&quot;&gt;Button&lt;/button&gt;&lt;button class=&quot;topcoat-button--quiet&quot; disabled&gt;Button&lt;/button&gt;&lt;p&gt;Large Button&lt;/p&gt;&lt;button class=&quot;topcoat-button--large&quot; &gt;Button&lt;/button&gt;&lt;br&gt;&lt;button class=&quot;topcoat-button--large&quot; disabled&gt;Button&lt;/button&gt;&lt;p&gt;Large Quiet Button&lt;/p&gt;&lt;button class=&quot;topcoat-button--large--quiet&quot; &gt;Button&lt;/button&gt;&lt;br&gt;&lt;button class=&quot;topcoat-button--large--quiet&quot; disabled&gt;Button&lt;/button&gt;&lt;p&gt;Call To Action Button&lt;/p&gt;&lt;button class=&quot;topcoat-button--cta&quot; &gt;Button&lt;/button&gt;&lt;button class=&quot;topcoat-button--cta&quot; disabled&gt;Button&lt;/button&gt;&lt;p&gt;Large Call To Action Button&lt;/p&gt;&lt;button class=&quot;topcoat-button--large--cta&quot; &gt;Button&lt;/button&gt;&lt;br&gt;&lt;button class=&quot;topcoat-button--large--cta&quot; disabled&gt;Button&lt;/button&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;button class=&quot;topcoat-button&quot;&gt;Button&lt;/button&gt;    &lt;button class=&quot;topcoat-button&quot; disabled&gt;Button&lt;/button&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="buttonquiet-button" class="component">
+            <header>
+              <h2>Button:Quiet Button</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><button class="topcoat-button--quiet">Button</button><button class="topcoat-button--quiet" disabled>Button</button></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;button class=&quot;topcoat-button--quiet&quot;&gt;Button&lt;/button&gt;&lt;button class=&quot;topcoat-button--quiet&quot; disabled&gt;Button&lt;/button&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="buttonlarge-button" class="component">
+            <header>
+              <h2>Button:Large Button</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><button class="topcoat-button--large" >Button</button><br><button class="topcoat-button--large" disabled>Button</button></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;button class=&quot;topcoat-button--large&quot; &gt;Button&lt;/button&gt;&lt;br&gt;&lt;button class=&quot;topcoat-button--large&quot; disabled&gt;Button&lt;/button&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="buttonlarge-quiet button" class="component">
+            <header>
+              <h2>Button:Large Quiet Button</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><button class="topcoat-button--large--quiet">Button</button><button class="topcoat-button--large--quiet" disabled>Button</button></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;button class=&quot;topcoat-button--large--quiet&quot;&gt;Button&lt;/button&gt;&lt;button class=&quot;topcoat-button--large--quiet&quot; disabled&gt;Button&lt;/button&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="buttoncall-to action button" class="component">
+            <header>
+              <h2>Button:Call To Action Button</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><button class="topcoat-button--cta" >Button</button><button class="topcoat-button--cta" disabled>Button</button></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;button class=&quot;topcoat-button--cta&quot; &gt;Button&lt;/button&gt;&lt;button class=&quot;topcoat-button--cta&quot; disabled&gt;Button&lt;/button&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="buttonlarge-call to action button" class="component">
+            <header>
+              <h2>Button:Large Call To Action Button</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><button class="topcoat-button--large--cta" >Button</button><br><button class="topcoat-button--large--cta" disabled>Button</button></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;button class=&quot;topcoat-button--large--cta&quot; &gt;Button&lt;/button&gt;&lt;br&gt;&lt;button class=&quot;topcoat-button--large--cta&quot; disabled&gt;Button&lt;/button&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -221,12 +311,12 @@
               <h2>Button Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><div class="topcoat-button-bar" style="width:240px">  <div class="topcoat-button-bar__item">    <button class="topcoat-button-bar__button">One</button>  </div>  <div class="topcoat-button-bar__item">    <button class="topcoat-button-bar__button">Two</button>  </div>  <div class="topcoat-button-bar__item">    <button class="topcoat-button-bar__button">Three</button>  </div></div><br><div class="topcoat-button-bar" style="width:280px">  <div class="topcoat-button-bar__item active">    <button class="topcoat-button-bar__button">One</button>  </div>  <div class="topcoat-button-bar__item">    <button class="topcoat-button-bar__button">Two</button>  </div>  <div class="topcoat-button-bar__item">    <button class="topcoat-button-bar__button">Three</button>  </div></div></div>
+              <div style="width: 320px; position: relative;" class="markup"><div class="topcoat-button-bar" style="width:280px">  <div class="topcoat-button-bar__item">    <button class="topcoat-button-bar__button">One</button>  </div>  <div class="topcoat-button-bar__item">    <button class="topcoat-button-bar__button">Two</button>  </div>  <div class="topcoat-button-bar__item">    <button class="topcoat-button-bar__button">Three</button>  </div></div><br><div class="topcoat-button-bar" style="width:280px">  <div class="topcoat-button-bar__item active">    <button class="topcoat-button-bar__button">One</button>  </div>  <div class="topcoat-button-bar__item">    <button class="topcoat-button-bar__button">Two</button>  </div>  <div class="topcoat-button-bar__item">    <button class="topcoat-button-bar__button">Three</button>  </div></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;topcoat-button-bar&quot; style=&quot;width:240px&quot;&gt;  &lt;div class=&quot;topcoat-button-bar__item&quot;&gt;    &lt;button class=&quot;topcoat-button-bar__button&quot;&gt;One&lt;/button&gt;  &lt;/div&gt;  &lt;div class=&quot;topcoat-button-bar__item&quot;&gt;    &lt;button class=&quot;topcoat-button-bar__button&quot;&gt;Two&lt;/button&gt;  &lt;/div&gt;  &lt;div class=&quot;topcoat-button-bar__item&quot;&gt;    &lt;button class=&quot;topcoat-button-bar__button&quot;&gt;Three&lt;/button&gt;  &lt;/div&gt;&lt;/div&gt;&lt;br&gt;&lt;div class=&quot;topcoat-button-bar&quot; style=&quot;width:280px&quot;&gt;  &lt;div class=&quot;topcoat-button-bar__item active&quot;&gt;    &lt;button class=&quot;topcoat-button-bar__button&quot;&gt;One&lt;/button&gt;  &lt;/div&gt;  &lt;div class=&quot;topcoat-button-bar__item&quot;&gt;    &lt;button class=&quot;topcoat-button-bar__button&quot;&gt;Two&lt;/button&gt;  &lt;/div&gt;  &lt;div class=&quot;topcoat-button-bar__item&quot;&gt;    &lt;button class=&quot;topcoat-button-bar__button&quot;&gt;Three&lt;/button&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;topcoat-button-bar&quot; style=&quot;width:280px&quot;&gt;  &lt;div class=&quot;topcoat-button-bar__item&quot;&gt;    &lt;button class=&quot;topcoat-button-bar__button&quot;&gt;One&lt;/button&gt;  &lt;/div&gt;  &lt;div class=&quot;topcoat-button-bar__item&quot;&gt;    &lt;button class=&quot;topcoat-button-bar__button&quot;&gt;Two&lt;/button&gt;  &lt;/div&gt;  &lt;div class=&quot;topcoat-button-bar__item&quot;&gt;    &lt;button class=&quot;topcoat-button-bar__button&quot;&gt;Three&lt;/button&gt;  &lt;/div&gt;&lt;/div&gt;&lt;br&gt;&lt;div class=&quot;topcoat-button-bar&quot; style=&quot;width:280px&quot;&gt;  &lt;div class=&quot;topcoat-button-bar__item active&quot;&gt;    &lt;button class=&quot;topcoat-button-bar__button&quot;&gt;One&lt;/button&gt;  &lt;/div&gt;  &lt;div class=&quot;topcoat-button-bar__item&quot;&gt;    &lt;button class=&quot;topcoat-button-bar__button&quot;&gt;Two&lt;/button&gt;  &lt;/div&gt;  &lt;div class=&quot;topcoat-button-bar__item&quot;&gt;    &lt;button class=&quot;topcoat-button-bar__button&quot;&gt;Three&lt;/button&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -251,12 +341,27 @@
               <h2>Checkbox</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><p>Checkbox</p><label class="topcoat-checkbox">  <input type="checkbox">  <div class="topcoat-checkbox__checkmark"></div>  OFF</label><br><br><label class="topcoat-checkbox">  <input type="checkbox" checked="checked">  <div class="topcoat-checkbox__checkmark"></div>  ON</label><br><br><label class="topcoat-checkbox">  <input type="checkbox" disabled>  <div class="topcoat-checkbox__checkmark"></div>  Disabled</label><p>Checkbox(noborder)</p><label class="topcoat-checkbox--noborder">  <input type="checkbox">  <div class="topcoat-checkbox__checkmark"></div>  OFF</label><br><br><label class="topcoat-checkbox--noborder">  <input type="checkbox" checked="checked">  <div class="topcoat-checkbox__checkmark"></div>  ON</label><br><br><label class="topcoat-checkbox--noborder">  <input type="checkbox" disabled checked="checked">  <div class="topcoat-checkbox__checkmark"></div>  Disabled</label></div>
+              <div style="width: 320px; position: relative;" class="markup"><label class="topcoat-checkbox">  <input type="checkbox">  <div class="topcoat-checkbox__checkmark"></div>  OFF</label><br><label class="topcoat-checkbox">  <input type="checkbox" checked="checked">  <div class="topcoat-checkbox__checkmark"></div>  ON</label><br><label class="topcoat-checkbox">  <input type="checkbox" disabled>  <div class="topcoat-checkbox__checkmark"></div>  Disabled</label></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;p&gt;Checkbox&lt;/p&gt;&lt;label class=&quot;topcoat-checkbox&quot;&gt;  &lt;input type=&quot;checkbox&quot;&gt;  &lt;div class=&quot;topcoat-checkbox__checkmark&quot;&gt;&lt;/div&gt;  OFF&lt;/label&gt;&lt;br&gt;&lt;br&gt;&lt;label class=&quot;topcoat-checkbox&quot;&gt;  &lt;input type=&quot;checkbox&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;topcoat-checkbox__checkmark&quot;&gt;&lt;/div&gt;  ON&lt;/label&gt;&lt;br&gt;&lt;br&gt;&lt;label class=&quot;topcoat-checkbox&quot;&gt;  &lt;input type=&quot;checkbox&quot; disabled&gt;  &lt;div class=&quot;topcoat-checkbox__checkmark&quot;&gt;&lt;/div&gt;  Disabled&lt;/label&gt;&lt;p&gt;Checkbox(noborder)&lt;/p&gt;&lt;label class=&quot;topcoat-checkbox--noborder&quot;&gt;  &lt;input type=&quot;checkbox&quot;&gt;  &lt;div class=&quot;topcoat-checkbox__checkmark&quot;&gt;&lt;/div&gt;  OFF&lt;/label&gt;&lt;br&gt;&lt;br&gt;&lt;label class=&quot;topcoat-checkbox--noborder&quot;&gt;  &lt;input type=&quot;checkbox&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;topcoat-checkbox__checkmark&quot;&gt;&lt;/div&gt;  ON&lt;/label&gt;&lt;br&gt;&lt;br&gt;&lt;label class=&quot;topcoat-checkbox--noborder&quot;&gt;  &lt;input type=&quot;checkbox&quot; disabled checked=&quot;checked&quot;&gt;  &lt;div class=&quot;topcoat-checkbox__checkmark&quot;&gt;&lt;/div&gt;  Disabled&lt;/label&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;label class=&quot;topcoat-checkbox&quot;&gt;  &lt;input type=&quot;checkbox&quot;&gt;  &lt;div class=&quot;topcoat-checkbox__checkmark&quot;&gt;&lt;/div&gt;  OFF&lt;/label&gt;&lt;br&gt;&lt;label class=&quot;topcoat-checkbox&quot;&gt;  &lt;input type=&quot;checkbox&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;topcoat-checkbox__checkmark&quot;&gt;&lt;/div&gt;  ON&lt;/label&gt;&lt;br&gt;&lt;label class=&quot;topcoat-checkbox&quot;&gt;  &lt;input type=&quot;checkbox&quot; disabled&gt;  &lt;div class=&quot;topcoat-checkbox__checkmark&quot;&gt;&lt;/div&gt;  Disabled&lt;/label&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="checkboxnoborder-checkbox" class="component">
+            <header>
+              <h2>Checkbox:Noborder Checkbox</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><label class="topcoat-checkbox--noborder">  <input type="checkbox">  <div class="topcoat-checkbox__checkmark"></div>  OFF</label><br><label class="topcoat-checkbox--noborder">  <input type="checkbox" checked="checked">  <div class="topcoat-checkbox__checkmark"></div>  ON</label><br><label class="topcoat-checkbox--noborder">  <input type="checkbox" disabled checked="checked">  <div class="topcoat-checkbox__checkmark"></div>  Disabled</label></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;label class=&quot;topcoat-checkbox--noborder&quot;&gt;  &lt;input type=&quot;checkbox&quot;&gt;  &lt;div class=&quot;topcoat-checkbox__checkmark&quot;&gt;&lt;/div&gt;  OFF&lt;/label&gt;&lt;br&gt;&lt;label class=&quot;topcoat-checkbox--noborder&quot;&gt;  &lt;input type=&quot;checkbox&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;topcoat-checkbox__checkmark&quot;&gt;&lt;/div&gt;  ON&lt;/label&gt;&lt;br&gt;&lt;label class=&quot;topcoat-checkbox--noborder&quot;&gt;  &lt;input type=&quot;checkbox&quot; disabled checked=&quot;checked&quot;&gt;  &lt;div class=&quot;topcoat-checkbox__checkmark&quot;&gt;&lt;/div&gt;  Disabled&lt;/label&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -266,12 +371,57 @@
               <h2>List</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><p>List</p><div class="page">  <br>  <div class="topcoat-list">    <ul class="topcoat-list__container">      <li class="topcoat-list__item">        <span class="topcoat-list__item__line-height">Item</span>      </li>      <li class="topcoat-list__item">        <span class="topcoat-list__item__line-height">Item</span>      </li>    </ul>  </div>  <br></div><br><p>List(noborder)</p><div class="page">  <br>  <div class="topcoat-list topcoat-list--noborder">    <ul class="topcoat-list__container">      <li class="topcoat-list__item">        <span class="topcoat-list__item__line-height">Item</span>      </li>      <li class="topcoat-list__item">        <span class="topcoat-list__item__line-height">Item</span>      </li>      <li class="topcoat-list__item">        <span class="topcoat-list__item__line-height">Item</span>      </li>    </ul>  </div>  <br></div><br><p>Category Header</p><div class="topcoat-list topcoat-list--noborder">  <h3 class="topcoat-list__header">Category</h3>  <ul class="topcoat-list__container">    <li class="topcoat-list__item topcoat-list__item__line-height">      Item    </li>    <li class="topcoat-list__item topcoat-list__item__line-height">      Item    </li>  </ul>  <h3 class="topcoat-list__header">Category</h3>  <ul class="topcoat-list__container">    <li class="topcoat-list__item topcoat-list__item__line-height">      Item    </li>    <li class="topcoat-list__item topcoat-list__item__line-height">      Item    </li>  </ul></div><br><p>Tappable</p><div class="page">  <br>  <div class="topcoat-list topcoat-list">    <ul class="topcoat-list__container">      <li class="topcoat-list__item topcoat-list__item--tappable">        <span class="topcoat-list__item__line-height">Tappable Item</span>      </li>      <li class="topcoat-list__item topcoat-list__item--tappable">        <span class="topcoat-list__item__line-height">Tappable Item</span>      </li>    </ul>  </div>  <br></div></div>
+              <div style="width: 320px; position: relative;" class="markup"><div class="page">  <br>  <div class="topcoat-list">    <ul class="topcoat-list__container">      <li class="topcoat-list__item">        <span class="topcoat-list__item__line-height">Item</span>      </li>      <li class="topcoat-list__item">        <span class="topcoat-list__item__line-height">Item</span>      </li>    </ul>  </div>  <br></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;p&gt;List&lt;/p&gt;&lt;div class=&quot;page&quot;&gt;  &lt;br&gt;  &lt;div class=&quot;topcoat-list&quot;&gt;    &lt;ul class=&quot;topcoat-list__container&quot;&gt;      &lt;li class=&quot;topcoat-list__item&quot;&gt;        &lt;span class=&quot;topcoat-list__item__line-height&quot;&gt;Item&lt;/span&gt;      &lt;/li&gt;      &lt;li class=&quot;topcoat-list__item&quot;&gt;        &lt;span class=&quot;topcoat-list__item__line-height&quot;&gt;Item&lt;/span&gt;      &lt;/li&gt;    &lt;/ul&gt;  &lt;/div&gt;  &lt;br&gt;&lt;/div&gt;&lt;br&gt;&lt;p&gt;List(noborder)&lt;/p&gt;&lt;div class=&quot;page&quot;&gt;  &lt;br&gt;  &lt;div class=&quot;topcoat-list topcoat-list--noborder&quot;&gt;    &lt;ul class=&quot;topcoat-list__container&quot;&gt;      &lt;li class=&quot;topcoat-list__item&quot;&gt;        &lt;span class=&quot;topcoat-list__item__line-height&quot;&gt;Item&lt;/span&gt;      &lt;/li&gt;      &lt;li class=&quot;topcoat-list__item&quot;&gt;        &lt;span class=&quot;topcoat-list__item__line-height&quot;&gt;Item&lt;/span&gt;      &lt;/li&gt;      &lt;li class=&quot;topcoat-list__item&quot;&gt;        &lt;span class=&quot;topcoat-list__item__line-height&quot;&gt;Item&lt;/span&gt;      &lt;/li&gt;    &lt;/ul&gt;  &lt;/div&gt;  &lt;br&gt;&lt;/div&gt;&lt;br&gt;&lt;p&gt;Category Header&lt;/p&gt;&lt;div class=&quot;topcoat-list topcoat-list--noborder&quot;&gt;  &lt;h3 class=&quot;topcoat-list__header&quot;&gt;Category&lt;/h3&gt;  &lt;ul class=&quot;topcoat-list__container&quot;&gt;    &lt;li class=&quot;topcoat-list__item topcoat-list__item__line-height&quot;&gt;      Item    &lt;/li&gt;    &lt;li class=&quot;topcoat-list__item topcoat-list__item__line-height&quot;&gt;      Item    &lt;/li&gt;  &lt;/ul&gt;  &lt;h3 class=&quot;topcoat-list__header&quot;&gt;Category&lt;/h3&gt;  &lt;ul class=&quot;topcoat-list__container&quot;&gt;    &lt;li class=&quot;topcoat-list__item topcoat-list__item__line-height&quot;&gt;      Item    &lt;/li&gt;    &lt;li class=&quot;topcoat-list__item topcoat-list__item__line-height&quot;&gt;      Item    &lt;/li&gt;  &lt;/ul&gt;&lt;/div&gt;&lt;br&gt;&lt;p&gt;Tappable&lt;/p&gt;&lt;div class=&quot;page&quot;&gt;  &lt;br&gt;  &lt;div class=&quot;topcoat-list topcoat-list&quot;&gt;    &lt;ul class=&quot;topcoat-list__container&quot;&gt;      &lt;li class=&quot;topcoat-list__item topcoat-list__item--tappable&quot;&gt;        &lt;span class=&quot;topcoat-list__item__line-height&quot;&gt;Tappable Item&lt;/span&gt;      &lt;/li&gt;      &lt;li class=&quot;topcoat-list__item topcoat-list__item--tappable&quot;&gt;        &lt;span class=&quot;topcoat-list__item__line-height&quot;&gt;Tappable Item&lt;/span&gt;      &lt;/li&gt;    &lt;/ul&gt;  &lt;/div&gt;  &lt;br&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;page&quot;&gt;  &lt;br&gt;  &lt;div class=&quot;topcoat-list&quot;&gt;    &lt;ul class=&quot;topcoat-list__container&quot;&gt;      &lt;li class=&quot;topcoat-list__item&quot;&gt;        &lt;span class=&quot;topcoat-list__item__line-height&quot;&gt;Item&lt;/span&gt;      &lt;/li&gt;      &lt;li class=&quot;topcoat-list__item&quot;&gt;        &lt;span class=&quot;topcoat-list__item__line-height&quot;&gt;Item&lt;/span&gt;      &lt;/li&gt;    &lt;/ul&gt;  &lt;/div&gt;  &lt;br&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="listnoborder-list" class="component">
+            <header>
+              <h2>List:Noborder List</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><div class="page">  <br>  <div class="topcoat-list topcoat-list--noborder">    <ul class="topcoat-list__container">      <li class="topcoat-list__item">        <span class="topcoat-list__item__line-height">Item</span>      </li>      <li class="topcoat-list__item">        <span class="topcoat-list__item__line-height">Item</span>      </li>      <li class="topcoat-list__item">        <span class="topcoat-list__item__line-height">Item</span>      </li>    </ul>  </div>  <br></div></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;page&quot;&gt;  &lt;br&gt;  &lt;div class=&quot;topcoat-list topcoat-list--noborder&quot;&gt;    &lt;ul class=&quot;topcoat-list__container&quot;&gt;      &lt;li class=&quot;topcoat-list__item&quot;&gt;        &lt;span class=&quot;topcoat-list__item__line-height&quot;&gt;Item&lt;/span&gt;      &lt;/li&gt;      &lt;li class=&quot;topcoat-list__item&quot;&gt;        &lt;span class=&quot;topcoat-list__item__line-height&quot;&gt;Item&lt;/span&gt;      &lt;/li&gt;      &lt;li class=&quot;topcoat-list__item&quot;&gt;        &lt;span class=&quot;topcoat-list__item__line-height&quot;&gt;Item&lt;/span&gt;      &lt;/li&gt;    &lt;/ul&gt;  &lt;/div&gt;  &lt;br&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="listcategory-header" class="component">
+            <header>
+              <h2>List:Category Header</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><div class="topcoat-list topcoat-list--noborder">  <h3 class="topcoat-list__header">Category</h3>  <ul class="topcoat-list__container">    <li class="topcoat-list__item topcoat-list__item__line-height">      Item    </li>    <li class="topcoat-list__item topcoat-list__item__line-height">      Item    </li>  </ul>  <h3 class="topcoat-list__header">Category</h3>  <ul class="topcoat-list__container">    <li class="topcoat-list__item topcoat-list__item__line-height">      Item    </li>    <li class="topcoat-list__item topcoat-list__item__line-height">      Item    </li>  </ul></div></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;topcoat-list topcoat-list--noborder&quot;&gt;  &lt;h3 class=&quot;topcoat-list__header&quot;&gt;Category&lt;/h3&gt;  &lt;ul class=&quot;topcoat-list__container&quot;&gt;    &lt;li class=&quot;topcoat-list__item topcoat-list__item__line-height&quot;&gt;      Item    &lt;/li&gt;    &lt;li class=&quot;topcoat-list__item topcoat-list__item__line-height&quot;&gt;      Item    &lt;/li&gt;  &lt;/ul&gt;  &lt;h3 class=&quot;topcoat-list__header&quot;&gt;Category&lt;/h3&gt;  &lt;ul class=&quot;topcoat-list__container&quot;&gt;    &lt;li class=&quot;topcoat-list__item topcoat-list__item__line-height&quot;&gt;      Item    &lt;/li&gt;    &lt;li class=&quot;topcoat-list__item topcoat-list__item__line-height&quot;&gt;      Item    &lt;/li&gt;  &lt;/ul&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="listtappable-list item" class="component">
+            <header>
+              <h2>List:Tappable List Item</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><div class="page">  <br>  <div class="topcoat-list topcoat-list">    <ul class="topcoat-list__container">      <li class="topcoat-list__item topcoat-list__item--tappable">        <span class="topcoat-list__item__line-height">Tappable Item</span>      </li>      <li class="topcoat-list__item topcoat-list__item--tappable">        <span class="topcoat-list__item__line-height">Tappable Item</span>      </li>    </ul>  </div>  <br></div></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;page&quot;&gt;  &lt;br&gt;  &lt;div class=&quot;topcoat-list topcoat-list&quot;&gt;    &lt;ul class=&quot;topcoat-list__container&quot;&gt;      &lt;li class=&quot;topcoat-list__item topcoat-list__item--tappable&quot;&gt;        &lt;span class=&quot;topcoat-list__item__line-height&quot;&gt;Tappable Item&lt;/span&gt;      &lt;/li&gt;      &lt;li class=&quot;topcoat-list__item topcoat-list__item--tappable&quot;&gt;        &lt;span class=&quot;topcoat-list__item__line-height&quot;&gt;Tappable Item&lt;/span&gt;      &lt;/li&gt;    &lt;/ul&gt;  &lt;/div&gt;  &lt;br&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -287,6 +437,21 @@
               <section class="code">
                 <div>
                   <pre class="html"><code data-language="html">&lt;div class=&quot;topcoat-navigation-bar&quot;&gt;    &lt;div class=&quot;topcoat-navigation-bar__item center full&quot;&gt;        &lt;h1 class=&quot;topcoat-navigation-bar__title&quot;&gt;Navigation Bar&lt;/h1&gt;    &lt;/div&gt;&lt;/div&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;div class=&quot;topcoat-navigation-bar topcoat-navigation-bar--bottom&quot;&gt;    &lt;div class=&quot;topcoat-navigation-bar__line-height&quot; style=&quot;text-align:center&quot;&gt;Bottom Toolbar&lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="navigation-barbottom bar" class="component">
+            <header>
+              <h2>Navigation Bar:Bottom Bar</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><div class="topcoat-navigation-bar topcoat-navigation-bar--bottom">    <div class="topcoat-navigation-bar__line-height" style="text-align:center">Bottom Toolbar</div></div></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;topcoat-navigation-bar topcoat-navigation-bar--bottom&quot;&gt;    &lt;div class=&quot;topcoat-navigation-bar__line-height&quot; style=&quot;text-align:center&quot;&gt;Bottom Toolbar&lt;/div&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -326,12 +491,12 @@
               <h2>Radio Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><!-- NO LABEL --><label class="topcoat-radio-button">  <input type="radio" name="topcoat">  <div class="topcoat-radio-button__checkmark"></div></label><br><br><!-- LEFT LABEL --><label class="topcoat-radio-button">  Left label  <input type="radio" name="topcoat">  <div class="topcoat-radio-button__checkmark"></div></label><br><br><!-- RIGHT LABEL --><label class="topcoat-radio-button">  <input type="radio" name="topcoat">  <div class="topcoat-radio-button__checkmark"></div>  Right label</label><br><br><!-- DISABLED --><label class="topcoat-radio-button">  <input type="radio" name="topcoat" Disabled>  <div class="topcoat-radio-button__checkmark"></div>  Disabled</label></div>
+              <div style="width: 320px; position: relative;" class="markup"><label class="topcoat-radio-button">  <input type="radio" name="topcoat" checked="checked">  <div class="topcoat-radio-button__checkmark"></div>  Label</label><br><label class="topcoat-radio-button">  <input type="radio" name="topcoat">  <div class="topcoat-radio-button__checkmark"></div>  Label</label><br><label class="topcoat-radio-button">  <input type="radio" name="topcoat">  <div class="topcoat-radio-button__checkmark"></div>  Label</label></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;!-- NO LABEL --&gt;&lt;label class=&quot;topcoat-radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;topcoat&quot;&gt;  &lt;div class=&quot;topcoat-radio-button__checkmark&quot;&gt;&lt;/div&gt;&lt;/label&gt;&lt;br&gt;&lt;br&gt;&lt;!-- LEFT LABEL --&gt;&lt;label class=&quot;topcoat-radio-button&quot;&gt;  Left label  &lt;input type=&quot;radio&quot; name=&quot;topcoat&quot;&gt;  &lt;div class=&quot;topcoat-radio-button__checkmark&quot;&gt;&lt;/div&gt;&lt;/label&gt;&lt;br&gt;&lt;br&gt;&lt;!-- RIGHT LABEL --&gt;&lt;label class=&quot;topcoat-radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;topcoat&quot;&gt;  &lt;div class=&quot;topcoat-radio-button__checkmark&quot;&gt;&lt;/div&gt;  Right label&lt;/label&gt;&lt;br&gt;&lt;br&gt;&lt;!-- DISABLED --&gt;&lt;label class=&quot;topcoat-radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;topcoat&quot; Disabled&gt;  &lt;div class=&quot;topcoat-radio-button__checkmark&quot;&gt;&lt;/div&gt;  Disabled&lt;/label&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;label class=&quot;topcoat-radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;topcoat&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;topcoat-radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;&lt;br&gt;&lt;label class=&quot;topcoat-radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;topcoat&quot;&gt;  &lt;div class=&quot;topcoat-radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;&lt;br&gt;&lt;label class=&quot;topcoat-radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;topcoat&quot;&gt;  &lt;div class=&quot;topcoat-radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -356,12 +521,12 @@
               <h2>Search Input</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><input type="search" value="" placeholder="Search" class="topcoat-search-input"><br><input type="search" value="" placeholder="Search" class="topcoat-search-input" disabled></div>
+              <div style="width: 320px; position: relative;" class="markup"><input type="search" value="" placeholder="Search" class="topcoat-search-input"><br><input type="search" value="" placeholder="Search" class="topcoat-search-input" disabled></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;input type=&quot;search&quot; value=&quot;&quot; placeholder=&quot;Search&quot; class=&quot;topcoat-search-input&quot;&gt;&lt;br&gt;&lt;input type=&quot;search&quot; value=&quot;&quot; placeholder=&quot;Search&quot; class=&quot;topcoat-search-input&quot; disabled&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;input type=&quot;search&quot; value=&quot;&quot; placeholder=&quot;Search&quot; class=&quot;topcoat-search-input&quot;&gt;&lt;br&gt;&lt;input type=&quot;search&quot; value=&quot;&quot; placeholder=&quot;Search&quot; class=&quot;topcoat-search-input&quot; disabled&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -371,12 +536,12 @@
               <h2>Switch</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><label class="topcoat-switch">  <input type="checkbox" class="topcoat-switch__input">  <div class="topcoat-switch__toggle"></div></label><br><br><label class="topcoat-switch">  <input type="checkbox" class="topcoat-switch__input" checked>  <div class="topcoat-switch__toggle"></div></label><br><br><label class="topcoat-switch">  <input type="checkbox" class="topcoat-switch__input" disabled>  <div class="topcoat-switch__toggle"></div></label></div>
+              <div style="width: 320px; position: relative;" class="markup"><label class="topcoat-switch">  <input type="checkbox" class="topcoat-switch__input">  <div class="topcoat-switch__toggle"></div></label><label class="topcoat-switch">  <input type="checkbox" class="topcoat-switch__input" checked>  <div class="topcoat-switch__toggle"></div></label><label class="topcoat-switch">  <input type="checkbox" class="topcoat-switch__input" disabled>  <div class="topcoat-switch__toggle"></div></label></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;label class=&quot;topcoat-switch&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;topcoat-switch__input&quot;&gt;  &lt;div class=&quot;topcoat-switch__toggle&quot;&gt;&lt;/div&gt;&lt;/label&gt;&lt;br&gt;&lt;br&gt;&lt;label class=&quot;topcoat-switch&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;topcoat-switch__input&quot; checked&gt;  &lt;div class=&quot;topcoat-switch__toggle&quot;&gt;&lt;/div&gt;&lt;/label&gt;&lt;br&gt;&lt;br&gt;&lt;label class=&quot;topcoat-switch&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;topcoat-switch__input&quot; disabled&gt;  &lt;div class=&quot;topcoat-switch__toggle&quot;&gt;&lt;/div&gt;&lt;/label&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;label class=&quot;topcoat-switch&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;topcoat-switch__input&quot;&gt;  &lt;div class=&quot;topcoat-switch__toggle&quot;&gt;&lt;/div&gt;&lt;/label&gt;&lt;label class=&quot;topcoat-switch&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;topcoat-switch__input&quot; checked&gt;  &lt;div class=&quot;topcoat-switch__toggle&quot;&gt;&lt;/div&gt;&lt;/label&gt;&lt;label class=&quot;topcoat-switch&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;topcoat-switch__input&quot; disabled&gt;  &lt;div class=&quot;topcoat-switch__toggle&quot;&gt;&lt;/div&gt;&lt;/label&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -386,27 +551,87 @@
               <h2>Tab Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><p>Tabbar(label)</p><div class="topcoat-tab-bar">  <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-a" checked="checked">    <button class="topcoat-tab-bar__button">      <div class="onsen_tab-bar__label">One</div>    </button>  </label>  <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-a">    <button class="topcoat-tab-bar__button">      <div class="onsen_tab-bar__label">Two</div>    </button>  </label>  <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-a">    <button class="topcoat-tab-bar__button">      <div class="onsen_tab-bar__label">Three</div>    </button>  </label></div><br><p>Tabbar(icon+label)</p><div class="topcoat-tab-bar">  <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-b" checked="checked">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-comment"></i>      <div class="onsen_tab-bar__label">Comments</div>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-video-camera"></i>      <div class="onsen_tab-bar__label">Videos</div>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-gear"></i>      <div class="onsen_tab-bar__label">Settings</div>    </button>  </label> </div><br><div class="topcoat-tab-bar">  <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-bb">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-folder"></i>      <div class="onsen_tab-bar__label">One</div>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-bb">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-heart"></i>      <div class="onsen_tab-bar__label">Two</div>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-bb" checked="checked">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-stop"></i>      <div class="onsen_tab-bar__label">Three</div>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-bb">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-circle"></i>      <div class="onsen_tab-bar__label">Four</div>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-bb">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-cloud"></i>      <div class="onsen_tab-bar__label">Five</div>    </button>  </label> </div><br><p>Tabbar(icon)</p><div class="topcoat-tab-bar">  <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-c">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-star"></i>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-c">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-comment"></i>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-c">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-circle"></i>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-c">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-play fa-rotate-270"></i>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-c" checked="checked">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-gear"></i>    </button>  </label> </div></div>
+              <div style="width: 320px; position: relative;" class="markup"><div class="topcoat-tab-bar">  <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-a" checked="checked">    <button class="topcoat-tab-bar__button">      <div class="onsen_tab-bar__label">One</div>    </button>  </label>  <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-a">    <button class="topcoat-tab-bar__button">      <div class="onsen_tab-bar__label">Two</div>    </button>  </label>  <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-a">    <button class="topcoat-tab-bar__button">      <div class="onsen_tab-bar__label">Three</div>    </button>  </label></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;p&gt;Tabbar(label)&lt;/p&gt;&lt;div class=&quot;topcoat-tab-bar&quot;&gt;  &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;One&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Two&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Three&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;&lt;br&gt;&lt;p&gt;Tabbar(icon+label)&lt;/p&gt;&lt;div class=&quot;topcoat-tab-bar&quot;&gt;  &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-comment&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Comments&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-video-camera&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Videos&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-gear&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Settings&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt; &lt;/div&gt;&lt;br&gt;&lt;div class=&quot;topcoat-tab-bar&quot;&gt;  &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-bb&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-folder&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;One&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-bb&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-heart&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Two&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-bb&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-stop&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Three&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-bb&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-circle&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Four&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-bb&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-cloud&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Five&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt; &lt;/div&gt;&lt;br&gt;&lt;p&gt;Tabbar(icon)&lt;/p&gt;&lt;div class=&quot;topcoat-tab-bar&quot;&gt;  &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-star&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-comment&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-circle&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-play fa-rotate-270&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-gear&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt; &lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;topcoat-tab-bar&quot;&gt;  &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;One&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Two&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Three&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="tab-baricon + label tab item" class="component">
+            <header>
+              <h2>Tab Bar:Icon + Label Tab Item</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><div class="topcoat-tab-bar">  <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-b" checked="checked">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-comment"></i>      <div class="onsen_tab-bar__label">Comments</div>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-video-camera"></i>      <div class="onsen_tab-bar__label">Videos</div>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-gear"></i>      <div class="onsen_tab-bar__label">Settings</div>    </button>  </label> </div></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;topcoat-tab-bar&quot;&gt;  &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-comment&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Comments&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-video-camera&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Videos&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-gear&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Settings&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt; &lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="tab-baricon only tab item" class="component">
+            <header>
+              <h2>Tab Bar:Icon Only Tab Item</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><div class="topcoat-tab-bar">  <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-c">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-star"></i>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-c">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-comment"></i>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-c">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-circle"></i>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-c">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-play fa-rotate-270"></i>    </button>  </label>   <label class="topcoat-tab-bar__item">    <input type="radio" name="tab-bar-c" checked="checked">    <button class="topcoat-tab-bar__button">      <i class="fa fa-2x fa-gear"></i>    </button>  </label> </div></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;topcoat-tab-bar&quot;&gt;  &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-star&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-comment&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-circle&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-play fa-rotate-270&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;   &lt;label class=&quot;topcoat-tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;topcoat-tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-2x fa-gear&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt; &lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
           </article>
           <article id="text-input" class="component">
             <header>
-              <h2>Text input</h2>
+              <h2>Text Input</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><p>Text Input(border)</p><input type="text" class="topcoat-text-input" placeholder="text" value=""><br><br><input type="text" class="topcoat-text-input" placeholder="text" value="" disabled><br><br><input type="text" class="topcoat-text-input" placeholder="text" value="fail" pattern="not-fail"><p>Text Input(transparent)</p><input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value=""><br><br><input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="" disabled><br><br><input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="fail" pattern="not-fail"><p>Text Input(underbar)</p><input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value=""><br><br><input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="" disabled><br><br><input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="fail" pattern="not-fail"></div>
+              <div style="width: 320px; position: relative;" class="markup"><input type="text" class="topcoat-text-input" placeholder="text" value=""><br><input type="text" class="topcoat-text-input" placeholder="text" value="" disabled></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;p&gt;Text Input(border)&lt;/p&gt;&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input&quot; placeholder=&quot;text&quot; value=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input&quot; placeholder=&quot;text&quot; value=&quot;&quot; disabled&gt;&lt;br&gt;&lt;br&gt;&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input&quot; placeholder=&quot;text&quot; value=&quot;fail&quot; pattern=&quot;not-fail&quot;&gt;&lt;p&gt;Text Input(transparent)&lt;/p&gt;&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input topcoat-text-input--transparent&quot; placeholder=&quot;text&quot; value=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input topcoat-text-input--transparent&quot; placeholder=&quot;text&quot; value=&quot;&quot; disabled&gt;&lt;br&gt;&lt;br&gt;&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input topcoat-text-input--transparent&quot; placeholder=&quot;text&quot; value=&quot;fail&quot; pattern=&quot;not-fail&quot;&gt;&lt;p&gt;Text Input(underbar)&lt;/p&gt;&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input topcoat-text-input--underbar&quot; placeholder=&quot;text&quot; value=&quot;&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input topcoat-text-input--underbar&quot; placeholder=&quot;text&quot; value=&quot;&quot; disabled&gt;&lt;br&gt;&lt;br&gt;&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input topcoat-text-input--underbar&quot; placeholder=&quot;text&quot; value=&quot;fail&quot; pattern=&quot;not-fail&quot;&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input&quot; placeholder=&quot;text&quot; value=&quot;&quot;&gt;&lt;br&gt;&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input&quot; placeholder=&quot;text&quot; value=&quot;&quot; disabled&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="text-inputtransparent text input" class="component">
+            <header>
+              <h2>Text Input:Transparent Text Input</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value=""><br><input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="" disabled></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input topcoat-text-input--transparent&quot; placeholder=&quot;text&quot; value=&quot;&quot;&gt;&lt;br&gt;&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input topcoat-text-input--transparent&quot; placeholder=&quot;text&quot; value=&quot;&quot; disabled&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="text-inputunderbar text input" class="component">
+            <header>
+              <h2>Text Input:Underbar Text Input</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value=""><br><input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="" disabled></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input topcoat-text-input--underbar&quot; placeholder=&quot;text&quot; value=&quot;&quot;&gt;&lt;br&gt;&lt;input type=&quot;text&quot; class=&quot;topcoat-text-input topcoat-text-input--underbar&quot; placeholder=&quot;text&quot; value=&quot;&quot; disabled&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -416,12 +641,27 @@
               <h2>Textarea</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><p>Textarea(border)</p><textarea class="topcoat-textarea" rows="3" placeholder="Textarea"></textarea><br><textarea class="topcoat-textarea" rows="3" placeholder="Textarea" disabled></textarea><br><p>Textarea(transparent)</p><textarea class="topcoat-textarea--transparent" rows="3" placeholder="Textarea"></textarea><br><textarea class="topcoat-textarea--transparent" rows="3" placeholder="Textarea" disabled></textarea></div>
+              <div style="width: 320px; position: relative;" class="markup"><textarea class="topcoat-textarea" rows="3" placeholder="Textarea"></textarea><br><textarea class="topcoat-textarea" rows="3" placeholder="Textarea" disabled></textarea></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;p&gt;Textarea(border)&lt;/p&gt;&lt;textarea class=&quot;topcoat-textarea&quot; rows=&quot;3&quot; placeholder=&quot;Textarea&quot;&gt;&lt;/textarea&gt;&lt;br&gt;&lt;textarea class=&quot;topcoat-textarea&quot; rows=&quot;3&quot; placeholder=&quot;Textarea&quot; disabled&gt;&lt;/textarea&gt;&lt;br&gt;&lt;p&gt;Textarea(transparent)&lt;/p&gt;&lt;textarea class=&quot;topcoat-textarea--transparent&quot; rows=&quot;3&quot; placeholder=&quot;Textarea&quot;&gt;&lt;/textarea&gt;&lt;br&gt;&lt;textarea class=&quot;topcoat-textarea--transparent&quot; rows=&quot;3&quot; placeholder=&quot;Textarea&quot; disabled&gt;&lt;/textarea&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;textarea class=&quot;topcoat-textarea&quot; rows=&quot;3&quot; placeholder=&quot;Textarea&quot;&gt;&lt;/textarea&gt;&lt;br&gt;&lt;textarea class=&quot;topcoat-textarea&quot; rows=&quot;3&quot; placeholder=&quot;Textarea&quot; disabled&gt;&lt;/textarea&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="textareatransparent-textarea" class="component">
+            <header>
+              <h2>Textarea:Transparent Textarea</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative;" class="markup"><textarea class="topcoat-textarea--transparent" rows="3" placeholder="Textarea"></textarea><br><textarea class="topcoat-textarea--transparent" rows="3" placeholder="Textarea" disabled></textarea></div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;textarea class=&quot;topcoat-textarea--transparent&quot; rows=&quot;3&quot; placeholder=&quot;Textarea&quot;&gt;&lt;/textarea&gt;&lt;br&gt;&lt;textarea class=&quot;topcoat-textarea--transparent&quot; rows=&quot;3&quot; placeholder=&quot;Textarea&quot; disabled&gt;&lt;/textarea&gt;</code></pre>
                 </div>
               </section>
             </footer>

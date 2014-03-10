@@ -27,6 +27,9 @@ input[type="radio"]
   margin-bottom -@height
   margin-left 0
 
+input[type="radio"]:active
+  outline 0
+
 input[type="radio"]:checked + .topcoat-radio-button__checkmark:after
   opacity 1
 
@@ -36,16 +39,16 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after
   color var-color--radio-button
   line-height var-size--radio-button
   text-align left
+  margin 10px 0
 
 .topcoat-radio-button__checkmark:before
   @extend .radio-button:before
-  width var-size--radio-button
-  height var-size--radio-button
-  background var-background-color
-  background var-background--radio-button--before
-  border var-border
-  border var-border--radio-button--before
-  box-shadow var-box-shadow
+  width var-size--checkbox
+  height var-size--checkbox
+  background transparent
+  border none
+  border-radius var-border-radius--checkbox
+  left 0
 
 .topcoat-radio-button__checkmark
   @extend .radio-button
@@ -55,33 +58,19 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after
 
 .topcoat-radio-button__checkmark:after
   @extend .radio-button:after
+  top var-top--checkmark
+  left var-left--checkmark
   opacity 0
-  width var-size--radio-button--checked
-  height var-size--radio-button--checked
-  background var-background--radio-button
-  border var-border--radio-button
-  box-shadow var-box-shadow--radio-button
-  transform none
-  top var-position--radio-button--checked
-  left var-position--radio-button--checked
-
-input[type="radio"]:focus + .topcoat-radio-button__checkmark:before
-  border var-border--focus
-  border var-border--radio-button--focus
-  box-shadow var-box-shadow--cta, var-box-shadow--focus
-
-input[type="radio"]:active + .topcoat-radio-button__checkmark:before
-  border var-border
-  border var-border--radio-button--active
-  background-color var-background-color--down
-  background-color var-background-color--down--radio-button 
-  box-shadow var-box-shadow--down
+  width var-width--checkmark__tail
+  height var-height--checkmark__foot
+  background transparent
+  border var-border--checkmark--noborder
+  border-width var-border-width--checkmark
+  border-top none
+  border-right none
+  border-radius var-border-radius--checkmark
+  transform var-transform--checkmark
 
 input[type="radio"]:disabled + .topcoat-radio-button__checkmark
   @extend .radio-button--disabled
-
-input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before
-  border var-border
-  background var-background-color
-  box-shadow var-box-shadow
 

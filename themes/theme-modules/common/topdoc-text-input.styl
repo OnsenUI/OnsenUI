@@ -1,35 +1,49 @@
 /*! topdoc
-  name: Text input
-  description: Topdoc text input
+  name: Text Input
   modifiers:
     :disabled: Disabled state
     :focus: Focused
     :invalid: Hover state
   markup:
-    <p>Text Input(border)</p>
     <input type="text" class="topcoat-text-input" placeholder="text" value="">
     <br>
-    <br>
     <input type="text" class="topcoat-text-input" placeholder="text" value="" disabled>
+  showcase:
+    <div class="topcoat-navigation-bar">
+      <div class="topcoat-navigation-bar__item center full">
+        <h1 class="topcoat-navigation-bar__title">Text Input</h1>
+      </div>
+    </div>
     <br>
-    <br>
-    <input type="text" class="topcoat-text-input" placeholder="text" value="fail" pattern="not-fail">
+    <div style="padding:8px">
+      <input type="text" class="topcoat-text-input" placeholder="text" style="width:100%">
+      <button class="topcoat-button--large" style="margin-top:8px">submit</button>
+    </div>
+    <br><br>
+    <div class="topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item">
+          <input type="text" class="topcoat-text-input--transparent" placeholder="text" style="width:100%;margin-top:4px">
+        </li>
+      </ul>
+    </div>
+    <div style="padding:8px">
+      <button class="topcoat-button--large">submit</button>
+    </div>
+*/
 
-    <p>Text Input(transparent)</p>
+/*! topdoc
+  name: Text Input:Transparent Text Input
+  markup:
     <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="">
     <br>
-    <br>
     <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="" disabled>
-    <br>
-    <br>
-    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="fail" pattern="not-fail">
+*/
 
-    <p>Text Input(underbar)</p>
+/*! topdoc
+  name: Text Input:Underbar Text Input
+  markup:
     <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="">
     <br>
-    <br>
     <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="" disabled>
-    <br>
-    <br>
-    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="fail" pattern="not-fail">
 */

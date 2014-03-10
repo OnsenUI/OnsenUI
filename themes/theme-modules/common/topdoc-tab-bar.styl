@@ -4,7 +4,6 @@
   modifiers:
     :disabled: Disabled state
   markup:
-    <p>Tabbar(label)</p>
     <div class="topcoat-tab-bar">
       <label class="topcoat-tab-bar__item">
         <input type="radio" name="tab-bar-a" checked="checked">
@@ -25,34 +24,14 @@
         </button>
       </label>
     </div>
-    <br>
 
-    <p>Tabbar(icon+label)</p>
-    <div class="topcoat-tab-bar">
-      <label class="topcoat-tab-bar__item">
-        <input type="radio" name="tab-bar-b" checked="checked">
-        <button class="topcoat-tab-bar__button">
-          <i class="fa fa-2x fa-comment"></i>
-          <div class="onsen_tab-bar__label">Comments</div>
-        </button>
-      </label> 
-      <label class="topcoat-tab-bar__item">
-        <input type="radio" name="tab-bar-b">
-        <button class="topcoat-tab-bar__button">
-          <i class="fa fa-2x fa-video-camera"></i>
-          <div class="onsen_tab-bar__label">Videos</div>
-        </button>
-      </label> 
-      <label class="topcoat-tab-bar__item">
-        <input type="radio" name="tab-bar-b">
-        <button class="topcoat-tab-bar__button">
-          <i class="fa fa-2x fa-gear"></i>
-          <div class="onsen_tab-bar__label">Settings</div>
-        </button>
-      </label> 
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Tab Bar</h1>
+        </div>
     </div>
-    <br>
-    <div class="topcoat-tab-bar">
+    <div class="topcoat-tab-bar" style="position:absolute;left:0px;right:0px;bottom:0px">
       <label class="topcoat-tab-bar__item">
         <input type="radio" name="tab-bar-bb">
         <button class="topcoat-tab-bar__button">
@@ -89,9 +68,39 @@
         </button>
       </label> 
     </div>
-    <br>
+*/
 
-    <p>Tabbar(icon)</p>
+/*! topdoc
+  name: Tab Bar:Icon + Label Tab Item
+  markup:
+    <div class="topcoat-tab-bar">
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b" checked="checked">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-comment"></i>
+          <div class="onsen_tab-bar__label">Comments</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-video-camera"></i>
+          <div class="onsen_tab-bar__label">Videos</div>
+        </button>
+      </label> 
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="topcoat-tab-bar__button">
+          <i class="fa fa-2x fa-gear"></i>
+          <div class="onsen_tab-bar__label">Settings</div>
+        </button>
+      </label> 
+    </div>
+ */
+
+/*! topdoc
+  name: Tab Bar:Icon Only Tab Item
+  markup:
     <div class="topcoat-tab-bar">
       <label class="topcoat-tab-bar__item">
         <input type="radio" name="tab-bar-c">
@@ -124,4 +133,4 @@
         </button>
       </label> 
     </div>
-*/
+ */
