@@ -177,7 +177,7 @@ limitations under the License.
 			},
 
 			adjustForiOS7: function() {
-				this.toolbar[0].style.height = this.toolbarContent[0].clientHeight + 20 + 'px';
+				this.toolbar[0].style.height = this.toolbar[0].clientHeight + 20 + 'px';
 				this.toolbar[0].style.paddingTop = '20px';
 			},
 
