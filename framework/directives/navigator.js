@@ -475,9 +475,28 @@ limitations under the License.
 				
 				var navigatorPage = angular.element('<div></div>');				
 				navigatorPage.addClass('navigator-page page');
-				navigatorPage.append(pageContent);
+				navigatorPage.append(pageContent);									
 
-				var navigatorToolbar = navigatorPage[0].querySelector('ons-navigator-toolbar');
+				page.append(navigatorPage);
+				return page;
+			},
+
+			compilePageEl: function(pageEl, pageScope){
+				var compiledPage = $compile(pageEl)(pageScope);
+				return compiledPage;
+			},
+
+			createPageScope: function(){
+				var pageScope = this.scope.$parent.$new();
+				return pageScope;
+			},
+
+			_pushPageDOM: function(page, pageContent, compiledPage, pageScope, options) {
+
+				var pager = compiledPage;
+				this.container.append(pager);				
+
+				var navigatorToolbar = pageContent.querySelector('ons-navigator-toolbar');
 				if (navigatorToolbar) {
 					if (options === undefined) {
 						options = {};
@@ -496,26 +515,7 @@ limitations under the License.
 					options.onRightButtonClick = options.onRightButtonClick || onRightButtonClick;
 
 					$navigatorToolbar.remove();
-				}							
-
-				page.append(navigatorPage);
-				return page;
-			},
-
-			compilePageEl: function(pageEl, pageScope){
-				var compiledPage = $compile(pageEl)(pageScope);
-				return compiledPage;
-			},
-
-			createPageScope: function(){
-				var pageScope = this.scope.$parent.$new();
-				return pageScope;
-			},
-
-			_pushPageDOM: function(page, compiledPage, pageScope, options) {
-
-				var pager = compiledPage;
-				this.container.append(pager);
+				}		
 
 				var navigatorItem = {
 					page: pager,
@@ -572,11 +572,13 @@ limitations under the License.
 					that.onTransitionEnded();
 					console.error(e);
 				}).success(function(data, status, headers, config) {
-					var pageContent = angular.element(data.trim());
+					var div = document.createElement('div');
+					div.innerHTML = data; 
+					var pageContent = angular.element(div.cloneNode(true));
 					var pageEl = this.generatePageEl(pageContent, options);
 					var pageScope = this.createPageScope();
 					var compiledPage = this.compilePageEl(pageEl, pageScope);
-					this._pushPageDOM(page, compiledPage, pageScope, options);
+					this._pushPageDOM(page, div, compiledPage, pageScope, options);
 				}.bind(this)).error(function(data, status, headers, config) {
 					console.error('error', data, status);
 				});
@@ -611,7 +613,7 @@ limitations under the License.
 		return {
 			restrict: 'E',
 			replace: false,
-			transclude: true,
+			transclude: true,			
 			scope: {
 				title: '@',
 				page: '@',
@@ -637,7 +639,7 @@ limitations under the License.
 						transclude(pageScope, function(compiledPageContent) {
 							var options = {};
 							var compiledPage = navigator.generatePageEl(angular.element(compiledPageContent), options);
-							navigator._pushPageDOM('', compiledPage, pageScope, options);
+							navigator._pushPageDOM('', compiledPageContent[0], compiledPage, pageScope, options);
 						});
 					}
 
