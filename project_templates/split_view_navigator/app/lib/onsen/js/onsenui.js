@@ -1230,26 +1230,29 @@ limitations under the License.
 				var pager = compiledPage;
 				this.container.append(pager);				
 
-				var navigatorToolbar = pageContent.querySelector('ons-navigator-toolbar');
-				if (navigatorToolbar) {
-					if (options === undefined) {
-						options = {};
-					}
+				if(pageContent.querySelector){
+					var navigatorToolbar = pageContent.querySelector('ons-navigator-toolbar');
+					if (navigatorToolbar) {
+						if (options === undefined) {
+							options = {};
+						}
 
-					var $navigatorToolbar = angular.element(navigatorToolbar);
-					var title = $navigatorToolbar.attr('title');
-					var leftButtonIcon = $navigatorToolbar.attr('left-button-icon');
-					var rightButtonIcon = $navigatorToolbar.attr('right-button-icon');
-					var onLeftButtonClick = $navigatorToolbar.attr('on-left-button-click');
-					var onRightButtonClick = $navigatorToolbar.attr('on-right-button-click');
-					options.title = options.title || title;
-					options.leftButtonIcon = options.leftButtonIcon || leftButtonIcon;
-					options.rightButtonIcon = options.rightButtonIcon || rightButtonIcon;
-					options.onLeftButtonClick = options.onLeftButtonClick || onLeftButtonClick;
-					options.onRightButtonClick = options.onRightButtonClick || onRightButtonClick;
+						var $navigatorToolbar = angular.element(navigatorToolbar);
+						var title = $navigatorToolbar.attr('title');
+						var leftButtonIcon = $navigatorToolbar.attr('left-button-icon');
+						var rightButtonIcon = $navigatorToolbar.attr('right-button-icon');
+						var onLeftButtonClick = $navigatorToolbar.attr('on-left-button-click');
+						var onRightButtonClick = $navigatorToolbar.attr('on-right-button-click');
+						options.title = options.title || title;
+						options.leftButtonIcon = options.leftButtonIcon || leftButtonIcon;
+						options.rightButtonIcon = options.rightButtonIcon || rightButtonIcon;
+						options.onLeftButtonClick = options.onLeftButtonClick || onLeftButtonClick;
+						options.onRightButtonClick = options.onRightButtonClick || onRightButtonClick;
 
-					$navigatorToolbar.remove();
-				}		
+						$navigatorToolbar.remove();
+					}	
+				}
+					
 
 				var navigatorItem = {
 					page: pager,
