@@ -86,11 +86,7 @@ limitations under the License.
 				blackMask.removeClass('hide');
 			},
 
-			/**
-			 * @param {String} pageUrl
-			 * @param {DOMElement} element This element is must be ons-page element.
-			 */
-			_presentPageDOM: function(pageUrl, element) {
+			generatePageEl: function(pageContent){
 				var pageEl = angular.element('<div></div>');
 				pageEl.addClass('screen-page');
 
@@ -102,12 +98,26 @@ limitations under the License.
 				pageContainer.addClass('screen-page__container');
 				pageEl.append(pageContainer);
 
-				var templateHTML = angular.element(element);
-				pageContainer.append(templateHTML);
+				pageContainer.append(pageContent);
+				return pageEl;
+			},
 
-				var pageScope = this.scope.$parent.$new();
+			compilePageEl: function(pageEl, pageScope){
 				var compiledPage = $compile(pageEl)(pageScope);
+				return compiledPage;
+			},
 
+			createPageScope: function(){
+				var pageScope = this.scope.$parent.$new();
+				return pageScope;
+			},
+
+			/**
+			 * @param {String} pageUrl
+			 * @param {DOMElement} element This element is must be ons-page element.
+			 */
+			_presentPageDOM: function(pageUrl, compiledPage, pageScope) {
+				
 				this.element.append(compiledPage);
 
 				var isAnimate = this.screenItems.length >= 1;
@@ -145,7 +155,12 @@ limitations under the License.
 					that.onTransitionEnded();
 					console.error(e);
 				}).success(function(data, status, headers, config) {
-					that._presentPageDOM(page, angular.element(data.trim())[0]);
+					var pageContent = angular.element(data.trim());
+					var pageEl = this.generatePageEl(pageContent);
+					var pageScope = this.createPageScope();
+					var compiledPage = this.compilePageEl(pageEl, pageScope);
+
+					that._presentPageDOM(page, compiledPage, pageScope);
 				}.bind(this)).error(function(data, status, headers, config) {
 					console.log('error', data, status);
 				});
@@ -206,11 +221,12 @@ limitations under the License.
 				return function(scope, element, attrs) {
 					var screen = new Screen(scope, element, attrs);
 					if (!attrs.page) {
-						transclude(scope.$parent, function(clone) {
-							var wrapper = angular.element('<div></div>');
-							wrapper.attr('class', 'page');
-							wrapper.append(clone);
-							screen._presentPageDOM('', wrapper);
+						
+						var pageScope = screen.createPageScope();
+				
+						transclude(pageScope, function(pageContent) {
+							var pageEl = screen.generatePageEl(pageContent);
+							screen._presentPageDOM('', pageEl, pageScope);
 						});
 					}
 					ScreenStack.addScreen(scope);
