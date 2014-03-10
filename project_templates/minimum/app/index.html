@@ -17,7 +17,19 @@
 
 <body>    
   
-  <ons-screen page="home_navigator.html"></ons-screen>
+  <ons-screen>
+    <ons-navigator>
+
+        <ons-navigator-toolbar title="Page 1">          
+        </ons-navigator-toolbar>
+
+        <div class="center">
+          <h1>Page 1</h1>
+          <ons-button ng-click="ons.navigator.pushPage('page2.html')">Push Page 2</ons-button> 
+        </div>
+
+    </ons-navigator>
+  </ons-screen>
  
 </body>
 </html>
