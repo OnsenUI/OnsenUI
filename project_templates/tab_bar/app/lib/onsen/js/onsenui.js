@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.1 - 2014-03-11 */
+/*! onsenui - v1.0.1 - 2014-03-12 */
 angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
@@ -1359,31 +1359,37 @@ limitations under the License.
 				rightButtonIcon: '@',
 				onLeftButtonClick: '@',
 				onRightButtonClick: '@'
-			},
+			},			
 
 			compile: function(element, attrs, transclude) {
-
 				var path = ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.tpl';
 				element.append(angular.element($templateCache.get(path))[0]);
 
-				return function (scope, element, attrs) {
-					var navigator = new Navigator(scope, element, attrs);
+				return{
+					pre: function preLink(scope, iElement, iAttrs, controller){	
+						// Without templateUrl, we must manually link the scope
+						$compile(iElement.children())(scope);
+					},
 
-					if (!attrs.page) {
+					post: function postLink(scope, iElement, attrs, controller){
+						var navigator = new Navigator(scope, iElement, attrs);
 
-						var pageScope = navigator.createPageScope();				
-										
-						transclude(pageScope, function(compiledPageContent) {
-							var options = {};
-							var compiledPage = navigator.generatePageEl(angular.element(compiledPageContent), options);
-							navigator._pushPageDOM('', compiledPageContent[0], compiledPage, pageScope, options);
+						if (!attrs.page) {
+
+							var pageScope = navigator.createPageScope();				
+											
+							transclude(pageScope, function(compiledPageContent) {
+								var options = {};
+								var compiledPage = navigator.generatePageEl(angular.element(compiledPageContent), options);
+								navigator._pushPageDOM('', compiledPageContent[0], compiledPage, pageScope, options);
+							});
+						}
+
+						NavigatorStack.addNavigator(scope);
+						scope.$on('$destroy', function(){
+							NavigatorStack.removeNavigator(scope);
 						});
 					}
-
-					NavigatorStack.addNavigator(scope);
-					scope.$on('$destroy', function(){
-						NavigatorStack.removeNavigator(scope);
-					});
 				};
 			}
 

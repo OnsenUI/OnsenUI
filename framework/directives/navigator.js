@@ -625,31 +625,37 @@ limitations under the License.
 				rightButtonIcon: '@',
 				onLeftButtonClick: '@',
 				onRightButtonClick: '@'
-			},
+			},			
 
 			compile: function(element, attrs, transclude) {
-
 				var path = ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.tpl';
 				element.append(angular.element($templateCache.get(path))[0]);
 
-				return function (scope, element, attrs) {
-					var navigator = new Navigator(scope, element, attrs);
+				return{
+					pre: function preLink(scope, iElement, iAttrs, controller){	
+						// Without templateUrl, we must manually link the scope
+						$compile(iElement.children())(scope);
+					},
 
-					if (!attrs.page) {
+					post: function postLink(scope, iElement, attrs, controller){
+						var navigator = new Navigator(scope, iElement, attrs);
 
-						var pageScope = navigator.createPageScope();				
-										
-						transclude(pageScope, function(compiledPageContent) {
-							var options = {};
-							var compiledPage = navigator.generatePageEl(angular.element(compiledPageContent), options);
-							navigator._pushPageDOM('', compiledPageContent[0], compiledPage, pageScope, options);
+						if (!attrs.page) {
+
+							var pageScope = navigator.createPageScope();				
+											
+							transclude(pageScope, function(compiledPageContent) {
+								var options = {};
+								var compiledPage = navigator.generatePageEl(angular.element(compiledPageContent), options);
+								navigator._pushPageDOM('', compiledPageContent[0], compiledPage, pageScope, options);
+							});
+						}
+
+						NavigatorStack.addNavigator(scope);
+						scope.$on('$destroy', function(){
+							NavigatorStack.removeNavigator(scope);
 						});
 					}
-
-					NavigatorStack.addNavigator(scope);
-					scope.$on('$destroy', function(){
-						NavigatorStack.removeNavigator(scope);
-					});
 				};
 			}
 
