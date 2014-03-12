@@ -10,8 +10,8 @@
       "en" : "http://onsenui.io/"
     },
     "documentUrl" : {
-      "ja" : "http://docs.monaca.mobi/onsenui/",
-      "en" : "http://docs.monaca.mobi/onsenui/"
+      "ja" : "http://docs.monaca.mobi/ja/onsenui/",
+      "en" : "http://docs.monaca.mobi/en/onsenui/"
     },
     "type" : ["javascript"],
     "category" : ["html5"],
