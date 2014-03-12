@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.2 - 2014-03-12 */
+/*! onsenui - v1.0.3 - 2014-03-12 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -22536,7 +22536,13 @@ limitations under the License.
 							var pageScope = navigator.createPageScope();				
 											
 							transclude(pageScope, function(compiledPageContent) {
-								var options = {};
+								var options = {
+									title: scope.title,
+									leftButtonIcon: scope.initialLeftButtonIcon,
+									rightButtonIcon: scope.rightButtonIcon,
+									onLeftButtonClick: scope.onLeftButtonClick,
+									onRightButtonClick: scope.onRightButtonClick
+								};
 								var compiledPage = navigator.generatePageEl(angular.element(compiledPageContent), options);
 								navigator._pushPageDOM('', compiledPageContent[0], compiledPage, pageScope, options);
 							});
