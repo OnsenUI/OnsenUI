@@ -1,1 +1,1 @@
-<input type="text" class="topcoat-text-input">
+<input class="topcoat-text-input">

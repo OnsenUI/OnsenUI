@@ -32,13 +32,6 @@ limitations under the License.
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
 			link: function($scope, element, attr){
 
-				$scope.$watch(function(){
-					return $scope.disabled;
-				}, function(disabled){					
-				// attr.$observe('disabled', function(disabled){
-					var isDisabled = $scope.$eval(disabled);
-					element.attr('disabled', isDisabled);
-				});
 			}
 		};
 	});
