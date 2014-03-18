@@ -161,7 +161,11 @@ limitations under the License.
     left: 0;
     text-align: left !important;
     margin-left: 25px !important;
-    padding-left: 0 !important;
+    padding-left: 0 !important;    
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-decoration: none;
 }
 
 .onsen_navigator-back-label.transition {
