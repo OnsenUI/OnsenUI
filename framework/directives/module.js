@@ -17,7 +17,9 @@ limitations under the License.
 
 
 (function() {
-	var directiveModules = angular.module('onsen.directives', ['templates-main']); // [] -> create new module
+	var directiveModules = angular.module('onsen.directives', ['onsen.services', 'templates-main']);
+	angular.module('onsen', ['onsen.directives']); // facade
+
 
 	directiveModules.run(function($rootScope, $window) {
 		$rootScope.ons = $rootScope.ons || {};
@@ -32,6 +34,9 @@ limitations under the License.
 			tagName = tagName.toLowerCase();
 
 			do {
+				if (!el) {
+					return null;
+				}
 				el = el.parentNode;
 				if (el.tagName.toLowerCase() == tagName) {
 					return el;

@@ -205,7 +205,7 @@ limitations under the License.
 		return Screen;
 	});
 
-	directives.directive('onsScreen', function(ONSEN_CONSTANTS, $http, $compile, Screen, ScreenStack) {
+	directives.directive('onsScreen', function(ONSEN_CONSTANTS, $http, $compile, Screen, ScreenStack, OnsenUtil) {
 
 		return {
 			restrict: 'E',
@@ -218,6 +218,8 @@ limitations under the License.
 			compile: function(element, attrs, transclude) {
 				return function(scope, element, attrs) {
 					var screen = new Screen(scope, element, attrs);
+					OnsenUtil.declareVarAttribute(attrs, screen);
+
 					if (!attrs.page) {
 						
 						var pageScope = screen.createPageScope();

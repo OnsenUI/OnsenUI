@@ -20,7 +20,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewStack) {
+	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewStack, OnsenUtil) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -35,7 +35,7 @@ limitations under the License.
 			link: function(scope, element, attrs) {
 				var SPLIT_MODE = 0;
 				var COLLAPSE_MODE = 1;
-				var MAIN_PAGE_RATIO = 0.9;			
+				var MAIN_PAGE_RATIO = 0.9;
 
 				var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 				var BROWSER_TRANSFORMS = [
@@ -85,7 +85,7 @@ limitations under the License.
 					},
 
 					attachMethods: function(){
-						scope.setSecondaryPage = function(page) {
+						this.setSecondaryPage = scope.setSecondaryPage = function(page) {
 							if (page) {
 								$http({
 									url: page,
@@ -116,7 +116,7 @@ limitations under the License.
 							}
 						}.bind(this);
 
-						scope.setMainPage = function(page) {
+						this.setMainPage = scope.setMainPage = function(page) {
 							if (page) {
 								$http({
 									url: page,
@@ -381,35 +381,35 @@ limitations under the License.
 				}
 
 				var swiper = new Swiper(element);
+				var splitView = {
+					open: function() {
+						return swiper.open();
+					}, 
 
-				scope.pages = {
-					behind: scope.secondaryPage					
-				};
+					close: function() {
+						return swiper.close();
+					},
 
-				scope.open = function() {
-					swiper.open();
-				};
+					setMainPage : function() {
+						return swiper.setMainPage.apply(swiper, arguments);
+					}, 
 
-				scope.close = function() {
-					swiper.close();
-				};
+					setSecondaryPage: function() {
+						return swiper.setSecondaryPage.apply(swiper, arguments);
+					},
 
-				scope.toggle = function() {
-					swiper.toggle();
-				};
-
-				scope.setSecondaryPage = function(page) {
-					if (page) {
-						scope.pages.behind = page;
-					} else {
-						throw new Error('cannot set undefined page');
+					toggle: function() {
+						return swiper.toggle();
 					}
-				};	
+				};
+				OnsenUtil.declareVarAttribute(attrs, splitView);
 
-				SplitViewStack.addSplitView(scope);		
+				angular.extend(scope, splitView);
+				SplitViewStack.addSplitView(scope);
+
 				scope.$on('$destroy', function(){
 					SplitViewStack.removeSplitView(scope);
-				});	
+				});
 			}
 		};
 	});

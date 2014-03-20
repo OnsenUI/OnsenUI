@@ -18,9 +18,9 @@ limitations under the License.
 
 (function() {
 	'use strict';
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+	var directives = angular.module('onsen.directives');
 
-	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuStack) {
+	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuStack, OnsenUtil) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -34,6 +34,7 @@ limitations under the License.
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
+
 				var MAIN_PAGE_RATIO = 0.9;
 				var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 				var BROWSER_TRANSFORMS = [
@@ -327,20 +328,19 @@ limitations under the License.
 				});
 
 				var swiper = new Swiper(element);
-
-
-				scope.openMenu = function() {
-					swiper.open();
+				var slidingMenuView = {
+					openMenu: function() {
+						swiper.open();
+					},
+					closeMenu: function() {
+						swiper.close();
+					},
+					toggleMenu: function() {
+						swiper.toggle();
+					}
 				};
-
-				scope.closeMenu = function() {
-					swiper.close();
-				};
-
-				scope.toggleMenu = function() {
-					swiper.toggle();
-				};
-
+				OnsenUtil.declareVarAttribute(attrs, slidingMenuView);
+				angular.extend(scope, slidingMenuView);
 
 				SlidingMenuStack.addSlidingMenu(scope);
 				scope.$on('$destroy', function(){

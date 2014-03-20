@@ -612,7 +612,7 @@ limitations under the License.
 		return Navigator;
 	});
 
-	directives.directive('onsNavigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, Navigator, $templateCache) {
+	directives.directive('onsNavigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, Navigator, OnsenUtil, $templateCache) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -639,11 +639,11 @@ limitations under the License.
 
 					post: function postLink(scope, iElement, attrs, controller){
 						var navigator = new Navigator(scope, iElement, attrs);
+						OnsenUtil.declareVarAttribute(attrs, navigator);
 
 						if (!attrs.page) {
+							var pageScope = navigator.createPageScope();
 
-							var pageScope = navigator.createPageScope();				
-											
 							transclude(pageScope, function(compiledPageContent) {
 								var options = {
 									title: scope.title,

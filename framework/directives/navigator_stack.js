@@ -16,10 +16,13 @@
 			_findNavigator: function($event) {
 				// finding the right navigator
 				var navigator;
+
 				if ($event) {
 					var navigatorElement = $rootScope.ons.upTo($event.target, 'ons-navigator');
 					navigator = angular.element(navigatorElement).isolateScope();
-				} else {
+				}
+                  
+				if (!navigator) {
 					navigator = this.navigators[this.navigators.length - 1];
 				}
 
