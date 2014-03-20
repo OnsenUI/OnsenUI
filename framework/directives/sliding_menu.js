@@ -151,7 +151,7 @@ limitations under the License.
 					},
 
 					attachMethods: function() {
-						scope.setBehindPage = function(page) {
+						this.setBehindPage = scope.setBehindPage = function(page) {
 							if (page) {
 								$http({
 									url: page,
@@ -181,7 +181,7 @@ limitations under the License.
 							}
 						}.bind(this);
 
-						scope.setAbovePage = function(pageUrl) {
+						this.setAbovePage = scope.setAbovePage = function(pageUrl) {
 							if (this.currentPageUrl === pageUrl) {
 								// same page -> ignore
 								return;
@@ -330,13 +330,19 @@ limitations under the License.
 				var swiper = new Swiper(element);
 				var slidingMenuView = {
 					openMenu: function() {
-						swiper.open();
+						return swiper.open();
 					},
 					closeMenu: function() {
-						swiper.close();
+						return swiper.close();
 					},
 					toggleMenu: function() {
-						swiper.toggle();
+						return swiper.toggle();
+					},
+					setAbovePage: function() {
+						return swiper.setAbovePage.apply(swiper, arguments);
+					},
+					setBehindPage: function() {
+						return swiper.setBehindPage.apply(swiper, arguments);
 					}
 				};
 				OnsenUtil.declareVarAttribute(attrs, slidingMenuView);
