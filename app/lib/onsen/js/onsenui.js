@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.3 - 2014-03-12 */
+/*! onsenui - v1.0.3 - 2014-03-20 */
 angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
@@ -203,7 +203,7 @@ angular.module("templates/text_area.tpl", []).run(["$templateCache", function($t
 
 angular.module("templates/text_input.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/text_input.tpl",
-    "<input type=\"text\" class=\"topcoat-text-input\">");
+    "<input class=\"topcoat-text-input\">");
 }]);
 
 /*
@@ -225,7 +225,9 @@ limitations under the License.
 
 
 (function() {
-	var directiveModules = angular.module('onsen.directives', ['templates-main']); // [] -> create new module
+	var directiveModules = angular.module('onsen.directives', ['onsen.services', 'templates-main']);
+	angular.module('onsen', ['onsen.directives']); // facade
+
 
 	directiveModules.run(function($rootScope, $window) {
 		$rootScope.ons = $rootScope.ons || {};
@@ -240,6 +242,9 @@ limitations under the License.
 			tagName = tagName.toLowerCase();
 
 			do {
+				if (!el) {
+					return null;
+				}
 				el = el.parentNode;
 				if (el.tagName.toLowerCase() == tagName) {
 					return el;
@@ -753,7 +758,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, requestAnimationFrame) {
+	directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, requestAnimationFrame, PredefinedPageCache) {
 		var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 
 		var Navigator = Class.extend({
@@ -1304,7 +1309,8 @@ limitations under the License.
 
 				$http({
 					url: page,
-					method: 'GET'
+					method: 'GET',
+					cache: PredefinedPageCache
 				}).error(function(e) {
 					that.onTransitionEnded();
 					console.error(e);
@@ -1346,7 +1352,7 @@ limitations under the License.
 		return Navigator;
 	});
 
-	directives.directive('onsNavigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, Navigator, $templateCache) {
+	directives.directive('onsNavigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, Navigator, OnsenUtil, $templateCache) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -1373,11 +1379,11 @@ limitations under the License.
 
 					post: function postLink(scope, iElement, attrs, controller){
 						var navigator = new Navigator(scope, iElement, attrs);
+						OnsenUtil.declareVarAttribute(attrs, navigator);
 
 						if (!attrs.page) {
+							var pageScope = navigator.createPageScope();
 
-							var pageScope = navigator.createPageScope();				
-											
 							transclude(pageScope, function(compiledPageContent) {
 								var options = {
 									title: scope.title,
@@ -1421,10 +1427,13 @@ limitations under the License.
 			_findNavigator: function($event) {
 				// finding the right navigator
 				var navigator;
+
 				if ($event) {
 					var navigatorElement = $rootScope.ons.upTo($event.target, 'ons-navigator');
 					navigator = angular.element(navigatorElement).isolateScope();
-				} else {
+				}
+                  
+				if (!navigator) {
 					navigator = this.navigators[this.navigators.length - 1];
 				}
 
@@ -1474,6 +1483,7 @@ limitations under the License.
 		return new NavigatorStack();
 	});
 })();
+
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
@@ -1537,9 +1547,9 @@ limitations under the License.
 			replace: true,
 			transclude: true,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/page.tpl',
-			compile: function(elt, attr, transclude) {				
+			compile: function(elt, attr, transclude) {
 				return function(scope, elt, attr) {
-					transclude(scope, function(clone) {						
+					transclude(scope, function(clone) {
 						elt.append(clone);
 					});
 				};
@@ -1547,6 +1557,7 @@ limitations under the License.
 		};
 	});
 })();
+
 (function(){
 	'use strict';
 
@@ -1646,7 +1657,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.service('Screen', function(ONSEN_CONSTANTS, $http, $compile, ScreenStack, requestAnimationFrame, debugLog) {
+	directives.service('Screen', function(ONSEN_CONSTANTS, $http, $compile, ScreenStack, requestAnimationFrame, debugLog, PredefinedPageCache) {
 		var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 		var TRANSITION_START = "webkitAnimationStart animationStart msAnimationStart oAnimationStart";
 
@@ -1660,11 +1671,9 @@ limitations under the License.
 				this.isReady = true;
 				this.attachMethods();
 
-				this.attrs.$observe('page', function(page) {
-					if (page) {
-					this.resetToPage(page);
-					}
-				}.bind(this));
+				if(scope.page){
+					this.resetToPage(scope.page);
+				}				
 			},
 
 			onTransitionEnded: function() {
@@ -1777,7 +1786,8 @@ limitations under the License.
 
 				$http({
 					url: page,
-					method: "GET"
+					method: "GET",
+					cache: PredefinedPageCache
 				}).error(function(e) {
 					that.onTransitionEnded();
 					console.error(e);
@@ -1834,19 +1844,21 @@ limitations under the License.
 		return Screen;
 	});
 
-	directives.directive('onsScreen', function(ONSEN_CONSTANTS, $http, $compile, Screen, ScreenStack) {
+	directives.directive('onsScreen', function(ONSEN_CONSTANTS, $http, $compile, Screen, ScreenStack, OnsenUtil) {
 
 		return {
 			restrict: 'E',
 			replace: false,
 			transclude: true,
 			scope: {
-				page: '='
+				page: '@'
 			},
 
 			compile: function(element, attrs, transclude) {
 				return function(scope, element, attrs) {
 					var screen = new Screen(scope, element, attrs);
+					OnsenUtil.declareVarAttribute(attrs, screen);
+
 					if (!attrs.page) {
 						
 						var pageScope = screen.createPageScope();
@@ -2160,9 +2172,9 @@ limitations under the License.
 
 (function() {
 	'use strict';
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+	var directives = angular.module('onsen.directives');
 
-	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuStack) {
+	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuStack, OnsenUtil, PredefinedPageCache) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -2176,6 +2188,7 @@ limitations under the License.
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
 			link: function(scope, element, attrs) {
+
 				var MAIN_PAGE_RATIO = 0.9;
 				var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 				var BROWSER_TRANSFORMS = [
@@ -2264,11 +2277,17 @@ limitations under the License.
 					},
 
 					recalculateMAX: function(){
-						if(typeof scope.maxSlideDistance == 'string'){
-							scope.maxSlideDistance = scope.maxSlideDistance.replace('px', '');	
+						var maxDistance = scope.maxSlideDistance;
+						if(typeof maxDistance == 'string'){
+							if(maxDistance.indexOf('px') > 0){
+								maxDistance = maxDistance.replace('px', '');
+							}else if(maxDistance.indexOf('%') > 0){
+								maxDistance = maxDistance.replace('%', '');
+								maxDistance = parseFloat(maxDistance) / 100 * this.abovePage.clientWidth;
+							}							
 						}
-						if (scope.maxSlideDistance && this.MAX > parseInt(scope.maxSlideDistance, 10)) {
-							this.MAX = parseInt(scope.maxSlideDistance);
+						if (maxDistance) {
+							this.MAX = parseInt(maxDistance, 10);
 						}
 					},
 
@@ -2286,11 +2305,12 @@ limitations under the License.
 					},
 
 					attachMethods: function() {
-						scope.setBehindPage = function(page) {
+						this.setBehindPage = scope.setBehindPage = function(page) {
 							if (page) {
 								$http({
 									url: page,
-									method: "GET"
+									method: "GET",
+									cache: PredefinedPageCache
 								}).error(function(e) {
 									console.error(e);
 								}).success(function(data, status, headers, config) {
@@ -2316,7 +2336,7 @@ limitations under the License.
 							}
 						}.bind(this);
 
-						scope.setAbovePage = function(pageUrl) {
+						this.setAbovePage = scope.setAbovePage = function(pageUrl) {
 							if (this.currentPageUrl === pageUrl) {
 								// same page -> ignore
 								return;
@@ -2325,7 +2345,8 @@ limitations under the License.
 							if (pageUrl) {
 								$http({
 									url: pageUrl,
-									method: "GET"
+									method: "GET",
+									cache: PredefinedPageCache
 								}).error(function(e) {
 									console.error(e);
 								}).success(function(data, status, headers, config) {
@@ -2463,20 +2484,25 @@ limitations under the License.
 				});
 
 				var swiper = new Swiper(element);
-
-
-				scope.openMenu = function() {
-					swiper.open();
+				var slidingMenuView = {
+					openMenu: function() {
+						return swiper.open();
+					},
+					closeMenu: function() {
+						return swiper.close();
+					},
+					toggleMenu: function() {
+						return swiper.toggle();
+					},
+					setAbovePage: function() {
+						return swiper.setAbovePage.apply(swiper, arguments);
+					},
+					setBehindPage: function() {
+						return swiper.setBehindPage.apply(swiper, arguments);
+					}
 				};
-
-				scope.closeMenu = function() {
-					swiper.close();
-				};
-
-				scope.toggleMenu = function() {
-					swiper.toggle();
-				};
-
+				OnsenUtil.declareVarAttribute(attrs, slidingMenuView);
+				angular.extend(scope, slidingMenuView);
 
 				SlidingMenuStack.addSlidingMenu(scope);
 				scope.$on('$destroy', function(){
@@ -2486,6 +2512,7 @@ limitations under the License.
 		};
 	});
 })();
+
 (function() {
 	var directiveModules = angular.module('onsen.directives');
 
@@ -2572,6 +2599,7 @@ limitations under the License.
 		return new SlidingMenuStack();
 	});
 })();
+
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
@@ -2594,7 +2622,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewStack) {
+	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewStack, OnsenUtil, PredefinedPageCache) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -2609,7 +2637,7 @@ limitations under the License.
 			link: function(scope, element, attrs) {
 				var SPLIT_MODE = 0;
 				var COLLAPSE_MODE = 1;
-				var MAIN_PAGE_RATIO = 0.9;			
+				var MAIN_PAGE_RATIO = 0.9;
 
 				var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 				var BROWSER_TRANSFORMS = [
@@ -2659,11 +2687,12 @@ limitations under the License.
 					},
 
 					attachMethods: function(){
-						scope.setSecondaryPage = function(page) {
+						this.setSecondaryPage = scope.setSecondaryPage = function(page) {
 							if (page) {
 								$http({
 									url: page,
-									method: "GET"
+									method: "GET",
+									cache: PredefinedPageCache
 								}).error(function(e){
 									console.error(e);
 								}).success(function(data, status, headers, config) {
@@ -2690,11 +2719,12 @@ limitations under the License.
 							}
 						}.bind(this);
 
-						scope.setMainPage = function(page) {
+						this.setMainPage = scope.setMainPage = function(page) {
 							if (page) {
 								$http({
 									url: page,
-									method: "GET"
+									method: "GET",
+									cache: PredefinedPageCache
 								}).error(function(e){
 									console.error(e);
 								}).success(function(data, status, headers, config) {
@@ -2955,39 +2985,40 @@ limitations under the License.
 				}
 
 				var swiper = new Swiper(element);
+				var splitView = {
+					open: function() {
+						return swiper.open();
+					}, 
 
-				scope.pages = {
-					behind: scope.secondaryPage					
-				};
+					close: function() {
+						return swiper.close();
+					},
 
-				scope.open = function() {
-					swiper.open();
-				};
+					setMainPage : function() {
+						return swiper.setMainPage.apply(swiper, arguments);
+					}, 
 
-				scope.close = function() {
-					swiper.close();
-				};
+					setSecondaryPage: function() {
+						return swiper.setSecondaryPage.apply(swiper, arguments);
+					},
 
-				scope.toggle = function() {
-					swiper.toggle();
-				};
-
-				scope.setSecondaryPage = function(page) {
-					if (page) {
-						scope.pages.behind = page;
-					} else {
-						throw new Error('cannot set undefined page');
+					toggle: function() {
+						return swiper.toggle();
 					}
-				};	
+				};
+				OnsenUtil.declareVarAttribute(attrs, splitView);
 
-				SplitViewStack.addSplitView(scope);		
+				angular.extend(scope, splitView);
+				SplitViewStack.addSplitView(scope);
+
 				scope.$on('$destroy', function(){
 					SplitViewStack.removeSplitView(scope);
-				});	
+				});
 			}
 		};
 	});
 })();
+
 (function() {
 	var directiveModules = angular.module('onsen.directives');
 
@@ -3081,7 +3112,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout, $http, $compile) {
+    directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout, $http, $compile, PredefinedPageCache) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -3131,7 +3162,8 @@ limitations under the License.
 					if (page) {
 						$http({
 							url: page,
-							method: "GET"
+							method: "GET",
+							cache: PredefinedPageCache
 						}).error(function(e) {
 							console.error(e);
 						}).success(function(data, status, headers, config) {
@@ -3167,6 +3199,7 @@ limitations under the License.
 		};
 	});
 })();
+
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
@@ -3293,19 +3326,98 @@ limitations under the License.
 			restrict: 'E',
 			replace: true,
 			transclude: false,
-			scope: {
+			scope: {				
 				disabled: '='
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
 			link: function($scope, element, attr){
-				$scope.$watch(function(){
-					return $scope.disabled;
-				}, function(disabled){					
-				// attr.$observe('disabled', function(disabled){
-					var isDisabled = $scope.$eval(disabled);
-					element.attr('disabled', isDisabled);
-				});
+
 			}
+		};
+	});
+})();
+
+
+(function(){
+	'use strict';
+
+	angular.module('onsen.services', []);
+})();
+
+(function(){
+	'use strict';
+
+	var module = angular.module('onsen.services');
+
+	module.service('PredefinedPageCache', function($cacheFactory, $document) {
+		var cache = $cacheFactory('$onsenPredefinedPageCache');
+
+		var templates = $document[0].querySelectorAll('script[type="text/template"]');
+
+		for (var i = 0; i < templates.length; i++) {
+			var template = angular.element(templates[i]);
+			var id = template.attr('id');
+			if (typeof id === 'string') {
+				cache.put(id, template.text());
+			}
+		}
+
+		return cache;
+	});
+})();
+
+
+(function(){
+	'use strict';
+
+	var module = angular.module('onsen.services');
+
+	module.service('OnsenUtil', function($rootScope, $window) {
+		return {
+			/**
+			 * Define a variable to JavaScript global scope and AngularJS scope as 'var' attribute name.
+			 *
+			 * @param {Object} attrs
+			 * @param object
+			 */
+			declareVarAttribute: function(attrs, object) {
+				if (typeof attrs['var'] === 'string') {
+					this._defineVar(attrs['var'], object);
+				}
+			},
+
+			/**
+			 * Define a variable to JavaScript global scope and AngularJS scope.
+			 *
+			 * Util.defineVar('foo', 'foo');
+			 * // => window.foo and $scope.foo is now 'foo'
+			 *
+			 * Util.defineVar('foo.bar', 'foo.bar');
+			 * // => window.foo.bar and $scope.foo.bar is now 'foo.bar'
+			 *
+			 * @param {String} name
+			 * @param object
+			 */
+			_defineVar: function(name, object) {
+				var names = name.split(/\./);
+
+				set($window, names, object);
+				set($rootScope, names, object);
+
+				function set(container, names, object) {
+					var name;
+					for (var i = 0; i < names.length - 1; i++) {
+						name = names[i];
+						if (container[name] === undefined || container[name] === null) {
+							container[name] = {};
+						}
+						container = container[name];
+					}
+
+					container[names[names.length - 1]] = object;
+				}
+			}
+
 		};
 	});
 })();

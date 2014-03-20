@@ -1,5 +1,5 @@
 (function(){
-	var myApp = angular.module('myApp', ['ngTouch', 'onsen.directives']);	
+	var myApp = angular.module('myApp', ['onsen']);
 
 	myApp.controller('MyController', function($scope){
 		$scope.isLoading = true;
