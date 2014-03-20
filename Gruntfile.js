@@ -43,6 +43,8 @@ module.exports = function(grunt) {
           'framework/directives/templates.js',
           'framework/directives/module.js',
           'framework/directives/*.js',
+          'framework/services/module.js',
+          'framework/services/*.js',
           'framework/lib/*.js',
           'framework/js/*.js'
         ],
@@ -56,6 +58,8 @@ module.exports = function(grunt) {
           'framework/directives/templates.js',
           'framework/directives/module.js',
           'framework/directives/*.js',
+          'framework/services/module.js',
+          'framework/services/*.js',
           'framework/lib/*.js',
           'framework/js/*.js'
         ],
@@ -330,6 +334,7 @@ module.exports = function(grunt) {
       scripts: {
         files: [
           'framework/directives/*.js',
+          'framework/services/*.js',
           'framework/js/*.js',
           'framework/lib/*.js',
           'framework/css/*.css',
