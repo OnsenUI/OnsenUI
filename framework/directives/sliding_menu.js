@@ -20,7 +20,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuStack, OnsenUtil) {
+	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuStack, OnsenUtil, PredefinedPageCache) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -155,7 +155,8 @@ limitations under the License.
 							if (page) {
 								$http({
 									url: page,
-									method: "GET"
+									method: "GET",
+									cache: PredefinedPageCache
 								}).error(function(e) {
 									console.error(e);
 								}).success(function(data, status, headers, config) {
@@ -190,7 +191,8 @@ limitations under the License.
 							if (pageUrl) {
 								$http({
 									url: pageUrl,
-									method: "GET"
+									method: "GET",
+									cache: PredefinedPageCache
 								}).error(function(e) {
 									console.error(e);
 								}).success(function(data, status, headers, config) {

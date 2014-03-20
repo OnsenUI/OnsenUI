@@ -19,7 +19,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.service('Screen', function(ONSEN_CONSTANTS, $http, $compile, ScreenStack, requestAnimationFrame, debugLog) {
+	directives.service('Screen', function(ONSEN_CONSTANTS, $http, $compile, ScreenStack, requestAnimationFrame, debugLog, PredefinedPageCache) {
 		var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 		var TRANSITION_START = "webkitAnimationStart animationStart msAnimationStart oAnimationStart";
 
@@ -148,7 +148,8 @@ limitations under the License.
 
 				$http({
 					url: page,
-					method: "GET"
+					method: "GET",
+					cache: PredefinedPageCache
 				}).error(function(e) {
 					that.onTransitionEnded();
 					console.error(e);

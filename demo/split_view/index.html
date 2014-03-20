@@ -25,6 +25,32 @@
       collapse="width 650px">
     </ons-split-view>
   </ons-screen>
+
+  <script type="text/template" id="secondary.html">
+    <ons-page style="background-color: white">
+      <ul class="topcoat-list">
+
+        <ons-list-item
+          class="topcoat-list__item--tappable topcoat-list__item__line-height" 
+          onclick="
+            app.splitView.toggle();
+            app.splitView.setMainPage('page1.html');">
+          <i class="fa fa-home fa-lg" style="color: #666"></i>
+          &nbsp; Page 1
+        </ons-list-item>
+
+        <ons-list-item 
+          class="topcoat-list__item--tappable topcoat-list__item__line-height"
+          onclick="
+            app.splitView.toggle();
+            app.splitView.setMainPage('page2.html');">
+          <i class="fa fa-gear fa-lg" style="color: #666"></i>
+          &nbsp; Page 2
+        </ons-list-item>
+
+      </ul>
+    </ons-page>
+  </script>
  
 </body>
 </html>

@@ -20,7 +20,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout, $http, $compile) {
+    directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout, $http, $compile, PredefinedPageCache) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -70,7 +70,8 @@ limitations under the License.
 					if (page) {
 						$http({
 							url: page,
-							method: "GET"
+							method: "GET",
+							cache: PredefinedPageCache
 						}).error(function(e) {
 							console.error(e);
 						}).success(function(data, status, headers, config) {

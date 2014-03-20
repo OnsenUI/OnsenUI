@@ -19,7 +19,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, requestAnimationFrame) {
+	directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, requestAnimationFrame, PredefinedPageCache) {
 		var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 
 		var Navigator = Class.extend({
@@ -570,7 +570,8 @@ limitations under the License.
 
 				$http({
 					url: page,
-					method: 'GET'
+					method: 'GET',
+					cache: PredefinedPageCache
 				}).error(function(e) {
 					that.onTransitionEnded();
 					console.error(e);
