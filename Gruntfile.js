@@ -341,7 +341,7 @@ module.exports = function(grunt) {
           'framework/css/polyfill/*.css',
           'themes/css/*.css'
         ],
-        tasks: ['default'],
+        tasks: ['prepare'],
         options: {
           livereload: 35730
         },
@@ -371,13 +371,31 @@ module.exports = function(grunt) {
   grunt.registerTask('serve', ['connect', 'watch']);
   grunt.registerTask('serve:app', ['connect', 'watch:app']);
 
-  // Default task(s).
-  grunt.registerTask('default', [
-    'clean', 'html2js', 'concat', 'autoprefixer', 'copy:build', 'copy:app', 
-    'copy:minimum_template', 'copy:sliding_menu_template', 
-    'copy:sliding_menu_navigator_template', 'copy:tab_bar_template', 
-    'copy:split_view_template', 'copy:split_view_navigator_template', 
-    'copy:master_detail_template', 'copy:plugin_info'
+  grunt.registerTask('prepare', [
+    'concat',
+    'autoprefixer',
+    'copy:build',
+    'copy:app'
   ]);
+
+  grunt.registerTask('prepare-templates', [
+    'copy:minimum_template',
+    'copy:sliding_menu_template', 
+    'copy:sliding_menu_navigator_template',
+    'copy:tab_bar_template', 
+    'copy:split_view_template',
+    'copy:split_view_navigator_template', 
+    'copy:master_detail_template'
+  ]);
+
+  grunt.registerTask('build', [
+    'clean',
+    'html2js',
+    'prepare',
+    'prepare-templates',
+    'copy:plugin_info'
+  ]);
+
+  grunt.registerTask('default', ['build']);
 
 };
