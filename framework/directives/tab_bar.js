@@ -24,9 +24,10 @@ limitations under the License.
 		return {
 			restrict: 'E',
 			replace: false,
-			transclude: true,
+			transclude: true,			
 			scope: {
-				hide: '@'
+				hide: '@',
+				onActiveTabChanged: '&'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
 			controller: function($scope, $element, $attrs) {
@@ -62,6 +63,11 @@ limitations under the License.
 					for (var i = 0; i < tabItems.length; i++) {
 						if (tabItems[i] != selectedTabItem) {
 							tabItems[i].setInactive();
+						}else{
+							$scope.onActiveTabChanged({
+								$index: i,
+								$tabItem: selectedTabItem
+							});
 						}
 					}
 				};
