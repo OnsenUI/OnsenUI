@@ -85,7 +85,6 @@ limitations under the License.
 				var listener = $scope.$watch(function() {
 					clearTimeout(to);
 					to = setTimeout(function () {
-						console.log('initialised');
 						listener();
 						if (!isReady) {
 							$rootScope.$broadcast('$ons-ready');
