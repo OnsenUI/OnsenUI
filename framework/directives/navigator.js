@@ -165,13 +165,20 @@ limitations under the License.
 				return this.ready;
 			},
 
-			checkiOS7: function() {
+			checkiOS7: function() {				
 				if (window.device && window.device.platform) {
 					if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
 						setTimeout( this.adjustForiOS7.bind(this), 0);
 					}
 				} else {
-					document.addEventListener("deviceready", this.checkiOS7.bind(this), false);
+					var self = this;
+					document.addEventListener("deviceready", function(){
+						if(window.device && window.device.platform){
+							self.checkiOS7();
+						}else{
+							// cordova not suppoorted
+						}
+					}, false);
 				}
 			},
 
