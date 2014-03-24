@@ -20,7 +20,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout, $http, $compile) {
+	directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout, $http, $compile, TabbarStack) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -45,6 +45,13 @@ limitations under the License.
 					onTabbarVisibilityChanged();
 				});
 
+				function triggerActiveTabChanged(index, tabItem){
+					$scope.onActiveTabChanged({
+						$index: index,
+						$tabItem: tabItem
+					});
+				}				
+
 				function onTabbarVisibilityChanged() {
 					if ($scope.hideTabs) {
 						$scope.tabbarHeight = 0;
@@ -64,10 +71,7 @@ limitations under the License.
 						if (tabItems[i] != selectedTabItem) {
 							tabItems[i].setInactive();
 						}else{
-							$scope.onActiveTabChanged({
-								$index: i,
-								$tabItem: selectedTabItem
-							});
+							triggerActiveTabChanged(i, selectedTabItem);
 						}
 					}
 				};
@@ -104,10 +108,21 @@ limitations under the License.
 
 				$scope.ons = $scope.ons || {};
 				$scope.ons.tabbar = {};
-				$scope.ons.tabbar.setTabbarVisibility = function(visible) {
+				$scope.setTabbarVisibility = function(visible) {
 					$scope.hideTabs = !visible;
 					onTabbarVisibilityChanged();
 				};
+
+				$scope.setActiveTab = function(index){
+					if(index < 0 || index >= tabItems.length){
+						throw new Error('Cannot set tab with index ' + index + '. We have ' + tabItems.length + ' tabs.');
+					}
+
+					var tabItem = tabItems[index];
+					tabItem.setActive();
+				}
+
+				TabbarStack.add($scope);
 			}
 		};
 	});
