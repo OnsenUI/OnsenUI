@@ -1,9 +1,11 @@
 (function(){
 	'use strict';
 
+	// JS Global facade for Onsen UI.
+
 	// for initialization hook.
 	if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
-		document.write('<ons-dummy-for-init/>');
+		document.write('<ons-dummy-for-init></ons-dummy-for-init>');
 	} else {
 		var dom = document.createElement('ons-dummy-for-init');
 		document.body.appendChild(dom);
