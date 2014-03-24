@@ -19,19 +19,19 @@ limitations under the License.
 (function(){
 	'use strict';
 
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+	var directives = angular.module('onsen.directives');
 
-	directives.directive('onsTextInput', function(ONSEN_CONSTANTS, $timeout) {
+	directives.directive('onsTextInput', function(ONSEN_CONSTANTS, OnsenUtil) {
 		return {
 			restrict: 'E',
 			replace: true,
 			transclude: false,
-			scope: {				
+			scope: {
 				disabled: '='
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
-			link: function($scope, element, attr){
-
+			link: function($scope, element, attrs) {
+				element.addClass(OnsenUtil.generateModifierTemplater(attrs)('topcoat-text-input--*'));
 			}
 		};
 	});

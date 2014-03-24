@@ -21,7 +21,7 @@ limitations under the License.
 
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsCheckbox', function(ONSEN_CONSTANTS) {
+	directives.directive('onsCheckbox', function(ONSEN_CONSTANTS, OnsenUtil) {
 		return {
 			require: '?ngModel',
 			restrict: 'E',
@@ -33,19 +33,21 @@ limitations under the License.
 			},
 			transclude: true,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
-			link: function($scope, element, attrs, ngModel){
-				var checkbox = element.find('input');				
+			link: function($scope, element, attrs, ngModel) {
+				var checkbox = element.find('input');
 				var checked = false;
-				attrs.$observe('disabled', function(disabled){
-					if(disabled === undefined){
-						checkbox.attr('disabled', false);						
-					}else{
+				attrs.$observe('disabled', function(disabled) {
+					if (disabled === undefined) {
+						checkbox.attr('disabled', false);
+					} else {
 						checkbox.attr('disabled', true);
 					}
 				});
 
-				if(ngModel){					
-					ngModel.$render = function() {						
+				$scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+
+				if (ngModel) {
+					ngModel.$render = function() {
 						checked = ( ngModel.$viewValue == 'true' || ngModel.$viewValue == $scope.ngTrueValue );
 						checkbox.attr('checked', checked);
 					};

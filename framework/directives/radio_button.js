@@ -3,7 +3,7 @@
 
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsRadioButton', function(ONSEN_CONSTANTS) {
+	directives.directive('onsRadioButton', function(ONSEN_CONSTANTS, OnsenUtil) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -19,6 +19,9 @@
 			link: function($scope, element, attrs){
 				var radioButton = element.find('input');
 				var checked = false;
+
+				$scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+
 				attrs.$observe('disabled', function(disabled){
 					if(disabled === undefined){
 						radioButton.attr('disabled', false);						

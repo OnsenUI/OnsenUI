@@ -19,7 +19,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, requestAnimationFrame, PredefinedPageCache) {
+	directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, requestAnimationFrame, PredefinedPageCache, OnsenUtil) {
 		var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 
 		var Navigator = Class.extend({
@@ -89,6 +89,11 @@ limitations under the License.
 			scope: undefined,
 
 			/**
+			 * @property {Function}
+			 */
+			modifierTemplater: undefined,
+
+			/**
 			 * @param {Object} scope
 			 * @param {Object} element
 			 * @param {Object} attrs
@@ -97,6 +102,8 @@ limitations under the License.
 				this.scope = scope;
 				this.element = element;
 				this.attrs = attrs;
+
+				this.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
 
 				this.navigatorItems = [];
 
@@ -183,7 +190,12 @@ limitations under the License.
 			animateBackLabelIn: function(inNavigatorItem, outNavigatorItem) {
 				var title = outNavigatorItem.options.title;
 				var inBackLabel = angular.element('<div></div>');
-				inBackLabel.addClass('onsen_navigator-back-label onsen_navigator-item topcoat-navigation-bar__line-height topcoat-icon-button--quiet navigate_right');
+				inBackLabel.addClass(
+					'onsen_navigator-back-label onsen_navigator-item ' +
+					'topcoat-navigation-bar__line-height topcoat-icon-button--quiet ' +
+					'navigate_right ' +
+					this.modifierTemplater('topcoat-navigation-bar--*__line-height')
+				);
 				inBackLabel.bind('click', this.onLeftButtonClicked.bind(this));
 				this.attachFastClickEvent(inBackLabel[0]);
 				inNavigatorItem.backLabel = inBackLabel;
@@ -279,7 +291,13 @@ limitations under the License.
 			animateTitleIn: function(inNavigatorItem, outNavigatorItem) {
 				var inTitle = inNavigatorItem.options.title || '';
 				var inTitleElement = angular.element('<span>' + inTitle + '</span>');
-				inTitleElement.attr('class', 'onsen_navigator-item onsen_navigator-title topcoat-navigation-bar__title topcoat-navigation-bar__line-height center transition animate-right');
+				inTitleElement.attr('class', 
+					'onsen_navigator-item onsen_navigator-title ' +
+					'topcoat-navigation-bar__title topcoat-navigation-bar__line-height ' +
+					'center transition animate-right ' +
+					this.modifierTemplater('topcoat-navigation-bar--*_title') + ' ' +
+					this.modifierTemplater('topcoat-navigation-bar--*_line-height')
+				);
 				var outTitleElement = outNavigatorItem.titleElement;
 				outTitleElement.after(inTitleElement);
 				outTitleElement.bind(TRANSITION_END, function transitionEnded(e) {
@@ -302,7 +320,11 @@ limitations under the License.
 						rightButtonIconElement = inNavigatorItem.rightButtonIconElement;
 					} else {
 						rightButtonIconElement = angular.element('<i></i>');
-						rightButtonIconElement.addClass(inNavigatorItem.options.rightButtonIcon + ' topcoat-navigation-bar__line-height onsen_fade');
+						rightButtonIconElement.addClass(
+							inNavigatorItem.options.rightButtonIcon +
+							' topcoat-navigation-bar__line-height onsen_fade ' +
+							this.modifierTemplater('topcoat-navigation-bar--*__line-height')
+						);
 						this.rightSectionIcon.append(rightButtonIconElement); // fix bug on ios. strange that we cant use rightSectionIcon.append() here
 						inNavigatorItem.rightButtonIconElement = rightButtonIconElement;
 					}
@@ -364,11 +386,18 @@ limitations under the License.
 			},
 
 			setBackButtonIconAsLeftArrow: function() {
-				this.leftArrow.attr('class', 'fa fa-angle-left fa-2x topcoat-navigation-bar__line-height');
+				this.leftArrow.attr('class', 
+					'fa fa-angle-left fa-2x topcoat-navigation-bar__line-height ' +
+					this.modifierTemplater('topcoat-navigation-bar--*__line-height')
+				);
 			},
 
 			setBackButtonIcon: function(iconClass) {
-				this.leftArrow.attr('class', iconClass + ' topcoat-navigation-bar__line-height');
+				this.leftArrow.attr('class',
+					iconClass +
+					' topcoat-navigation-bar__line-height ' +
+					this.modifierTemplater('topcoat-navigation-bar--*__line-height')
+				);
 			},
 
 			showBackButton: function() {
@@ -542,7 +571,13 @@ limitations under the License.
 				} else {
 					// root page
 					var titleElement = angular.element('<div></div>');
-					titleElement.addClass('onsen_navigator-item onsen_navigator-title topcoat-navigation-bar__title topcoat-navigation-bar__line-height center animate-center');
+					titleElement.addClass(
+						'onsen_navigator-item onsen_navigator-title ' +
+						'topcoat-navigation-bar__title topcoat-navigation-bar__line-height ' +
+						'center animate-center ' + 
+						this.modifierTemplater('topcoat-navigation-bar--*__title') + ' ' +
+						this.modifierTemplater('topcoat-navigation-bar--*__line-height')
+					);
 					if (options.title) {
 						titleElement.text(options.title);
 					}
@@ -631,10 +666,12 @@ limitations under the License.
 			compile: function(element, attrs, transclude) {
 				var path = ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.tpl';
 				element.append(angular.element($templateCache.get(path))[0]);
+				var modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
 
-				return{
+				return {
 					pre: function preLink(scope, iElement, iAttrs, controller){	
 						// Without templateUrl, we must manually link the scope
+						scope.modifierTemplater = modifierTemplater;
 						$compile(iElement.children())(scope);
 					},
 

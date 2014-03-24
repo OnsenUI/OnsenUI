@@ -18,9 +18,9 @@ limitations under the License.
 
 (function() {
 	'use strict';
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+	var directives = angular.module('onsen.directives');
 
-    directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout, $http, $compile, PredefinedPageCache) {
+	directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout, $http, $compile, PredefinedPageCache, OnsenUtil) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -30,6 +30,8 @@ limitations under the License.
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
 			controller: function($scope, $element, $attrs) {
+				this.modifierTemplater = $scope.modifierTemplater = OnsenUtil.generateModifierTemplater($attrs);
+
 				var container = angular.element($element[0].querySelector('.tab-bar-content'));
 				var footer = $element[0].querySelector('.footer');
 

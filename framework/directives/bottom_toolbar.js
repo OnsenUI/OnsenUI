@@ -26,7 +26,11 @@ limitations under the License.
 			restrict: 'E',
 			transclude: true,
 			replace: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/bottom_toolbar.tpl'
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/bottom_toolbar.tpl',
+			link: function(scope, element, attrs) {
+				// modifier
+				scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+			}
 		};
 	});
 })();

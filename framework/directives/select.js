@@ -21,12 +21,17 @@ limitations under the License.
 
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsSelect', function(ONSEN_CONSTANTS, $timeout) {
+	directives.directive('onsSelect', function(ONSEN_CONSTANTS, OnsenUtil) {
 		return {
 			restrict: 'E',
 			replace: true,
 			transclude: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/select.tpl'
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/select.tpl',
+			link: function(scope, element, attrs) {
+
+				scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+
+			}
 		};
 	});
 })();

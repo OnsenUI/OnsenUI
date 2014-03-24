@@ -19,20 +19,16 @@ limitations under the License.
 (function() {
 	'use strict';
 
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+	var directives = angular.module('onsen.directives');
 
-	directives.directive('onsPage', function(ONSEN_CONSTANTS, $timeout) {
+	directives.directive('onsPage', function(ONSEN_CONSTANTS, OnsenUtil) {
 		return {
 			restrict: 'E',
 			replace: true,
 			transclude: true,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/page.tpl',
-			compile: function(elt, attr, transclude) {				
-				return function(scope, elt, attr) {
-					transclude(scope, function(clone) {						
-						elt.append(clone);
-					});
-				};
+			link: function(scope, elt, attrs) {
+				scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
 			}
 		};
 	});

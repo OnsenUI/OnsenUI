@@ -6,6 +6,26 @@
 	module.service('OnsenUtil', function($rootScope, $window) {
 		return {
 			/**
+			 * Create modifier templater function. The modifier templater generate css classes binded modifier name.
+			 *
+			 * @param {Object} attrs
+			 * @return {Function} 
+			 */
+			generateModifierTemplater: function(attrs) {
+				var modifiers = attrs && typeof attrs.modifier === 'string' ? attrs.modifier.trim().split(/ +/) : [];
+
+				/**
+				 * @return {String} template eg. 'ons-button--*', 'ons-button--*__item'
+				 * @return {String}
+				 */
+				return function(template) {
+					return modifiers.map(function(modifier) {
+						return template.replace('*', modifier);
+					}).join(' ');
+				};
+			},
+
+			/**
 			 * Define a variable to JavaScript global scope and AngularJS scope as 'var' attribute name.
 			 *
 			 * @param {Object} attrs
@@ -20,11 +40,11 @@
 			/**
 			 * Define a variable to JavaScript global scope and AngularJS scope.
 			 *
-			 * Util.defineVar('foo', 'foo');
-			 * // => window.foo and $scope.foo is now 'foo'
+			 * Util.defineVar('foo', 'foo-value');
+			 * // => window.foo and $scope.foo is now 'foo-value'
 			 *
-			 * Util.defineVar('foo.bar', 'foo.bar');
-			 * // => window.foo.bar and $scope.foo.bar is now 'foo.bar'
+			 * Util.defineVar('foo.bar', 'foo-bar-value');
+			 * // => window.foo.bar and $scope.foo.bar is now 'foo-bar-value'
 			 *
 			 * @param {String} name
 			 * @param object

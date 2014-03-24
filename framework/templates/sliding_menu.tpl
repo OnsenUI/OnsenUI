@@ -3,6 +3,6 @@
 	<div class="behind full-screen">
 	</div>
 
-	<div class="above full-screen">		
+	<div class="above full-screen">
 	</div>
 </div>

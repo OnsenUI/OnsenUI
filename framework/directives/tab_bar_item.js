@@ -18,9 +18,9 @@ limitations under the License.
 
 (function() {
 	'use strict';
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+	var directives = angular.module('onsen.directives');
 
-	directives.directive('onsTabbarItem', function(ONSEN_CONSTANTS) {
+	directives.directive('onsTabbarItem', function(ONSEN_CONSTANTS, OnsenUtil) {
 		return {
 			restrict: 'E',
 			replace: true,
@@ -36,6 +36,9 @@ limitations under the License.
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
 			link: function(scope, element, attrs, tabbarController) {
 				var radioButton = element[0].querySelector('input');
+
+				scope.tabbarModifierTemplater = tabbarController.modifierTemplater;
+				scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
 
 				scope.tabbarId = tabbarController.tabbarId;
 

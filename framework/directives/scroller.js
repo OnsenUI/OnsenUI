@@ -30,13 +30,7 @@ limitations under the License.
 				infinitScrollEnable: '='
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/scroller.tpl',
-			compile: function(elem, attrs, transcludeFn) {
-				return function(scope, element, attrs) {
-					var scroller = angular.element(element[0].querySelector('.scroller'));
-					transcludeFn(scope.$parent, function(clone) {
-						scroller.append(clone);
-					});
-				};
+			link: function(scope, element, attrs) {
 			}
 		};
 	});
