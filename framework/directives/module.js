@@ -20,9 +20,8 @@ limitations under the License.
 	var directiveModules = angular.module('onsen.directives', ['onsen.services', 'templates-main']);
 	angular.module('onsen', ['onsen.directives']); // facade
 
-
 	directiveModules.run(function($rootScope, $window) {
-		$rootScope.ons = $rootScope.ons || {};
+		$rootScope.ons = window.ons;
 		$rootScope.ons.$get = function(id) {
 			id = id.replace('#', '');
 			return angular.element(document.getElementById(id)).isolateScope();
@@ -75,5 +74,25 @@ limitations under the License.
 		};
 
 		return CONSTANTS;
+	});
+
+	directiveModules.directive('onsDummyForInit', function($rootScope) {
+		var isReady = false;
+		return {
+			restrict: 'E',
+			link: function($scope) {
+				var to;
+				var listener = $scope.$watch(function() {
+					clearTimeout(to);
+					to = setTimeout(function () {
+						console.log('initialised');
+						listener();
+						if (!isReady) {
+							$rootScope.$broadcast('$ons-ready');
+						}
+					}, 50);
+				});
+			}
+		};
 	});
 })();
