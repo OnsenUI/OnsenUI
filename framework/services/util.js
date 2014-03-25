@@ -5,6 +5,7 @@
 
 	module.service('OnsenUtil', function($rootScope, $window) {
 		return {
+
 			/**
 			 * Create modifier templater function. The modifier templater generate css classes binded modifier name.
 			 *

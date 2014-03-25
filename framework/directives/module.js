@@ -80,17 +80,16 @@ limitations under the License.
 		var isReady = false;
 		return {
 			restrict: 'E',
-			link: function($scope) {
-				var to;
-				var listener = $scope.$watch(function() {
-					clearTimeout(to);
-					to = setTimeout(function () {
-						listener();
-						if (!isReady) {
-							$rootScope.$broadcast('$ons-ready');
-						}
-					}, 50);
-				});
+
+			link: {
+				pre: function() {
+				},
+				post: function() {
+					if (!isReady) {
+						$rootScope.$broadcast('$ons-ready');
+						isReady = true;
+					}
+				}
 			}
 		};
 	});

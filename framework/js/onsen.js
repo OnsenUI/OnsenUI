@@ -1,8 +1,6 @@
 (function(){
 	'use strict';
 
-	// JS Global facade for Onsen UI.
-
 	// for initialization hook.
 	if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
 		document.write('<ons-dummy-for-init></ons-dummy-for-init>');
@@ -20,6 +18,7 @@
 		});
 	});
 
+	// JS Global facade for Onsen UI.
 	var ons = window.ons = {
 		/**
 		 * @return {Boolean}
@@ -32,8 +31,12 @@
 		 * @param {HTMLElement} dom
 		 */
 		compile : function(dom) {
+			if (!ons.$compile) {
+				throw new Error('ons.$compile() is not ready. Wait for initialization.');
+			}
+
 			if (!(dom instanceof HTMLElement)) {
-				throw new Error('First argument must be instance of HTMLElement.');
+				throw new Error('First argument must be an instance of HTMLElement.');
 			}
 			var scope = angular.element(dom).scope();
 			if (!scope) {

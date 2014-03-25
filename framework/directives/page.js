@@ -21,14 +21,40 @@ limitations under the License.
 
 	var directives = angular.module('onsen.directives');
 
+	function firePageInitEvent(pageContainer) {
+		var event = document.createEvent('HTMLEvents');
+
+		event.initEvent('pageinit', true, true);
+		findPageDOM().dispatchEvent(event);
+
+		function findPageDOM() {
+			if (angular.element(pageContainer).hasClass('topcoat-page')) {
+				return pageContainer;
+			}
+
+			var result = pageContainer.querySelector('.topcoat-page');
+
+			if (!result) {
+				throw new Error('An element of "topcoat-page" class is not found.');
+			}
+
+			return result;
+		}
+	}
+
 	directives.directive('onsPage', function(ONSEN_CONSTANTS, OnsenUtil) {
 		return {
 			restrict: 'E',
 			replace: true,
 			transclude: true,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/page.tpl',
-			link: function(scope, elt, attrs) {
-				scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+			link: {
+				pre: function(scope, element, attrs) {
+					scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+				},
+				post: function(scope, element, attrs) {
+					firePageInitEvent(element[0]);
+				}
 			}
 		};
 	});

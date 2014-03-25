@@ -523,9 +523,9 @@ limitations under the License.
 			_pushPageDOM: function(page, pageContent, compiledPage, pageScope, options) {
 
 				var pager = compiledPage;
-				this.container.append(pager);				
+				this.container.append(pager);
 
-				if(pageContent.querySelector){
+				if (pageContent.querySelector) {
 					var navigatorToolbar = pageContent.querySelector('ons-navigator-toolbar');
 					if (navigatorToolbar) {
 						if (options === undefined) {
@@ -545,9 +545,8 @@ limitations under the License.
 						options.onRightButtonClick = options.onRightButtonClick || onRightButtonClick;
 
 						$navigatorToolbar.remove();
-					}	
+					}
 				}
-					
 
 				var navigatorItem = {
 					page: pager,
@@ -588,7 +587,6 @@ limitations under the License.
 				}
 				this.navigatorItems.push(navigatorItem);
 				this.setLeftButton(navigatorItem);
-
 			},
 
 			pushPage: function(page, options) {
