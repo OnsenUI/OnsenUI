@@ -21,6 +21,24 @@
 	// JS Global facade for Onsen UI.
 	var ons = window.ons = {
 		/**
+		 * Bootstrap this document as a Onsen UI application.
+		 *
+		 * If you want use your AngularJS module, use "ng-app" directive and "angular.module()" manually.
+		 */
+		bootstrap : function() {
+			var doc = window.document;
+			if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
+				doc.addEventListener('DOMContentLoaded', function() {
+					angular.bootstrap(doc.documentElement, ['onsen']);
+				}, false);
+			} else if (doc.documentElement) {
+				angular.bootstrap(doc.documentElement, ['onsen']);
+			} else {
+				throw new Error('Invalid state');
+			}
+		},
+
+		/**
 		 * @return {Boolean}
 		 */
 		isReady : function() {
