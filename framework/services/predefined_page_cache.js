@@ -6,7 +6,7 @@
 	module.service('PredefinedPageCache', function($cacheFactory, $document) {
 		var cache = $cacheFactory('$onsenPredefinedPageCache');
 
-		var templates = $document[0].querySelectorAll('script[type="text/template"]');
+		var templates = $document[0].querySelectorAll('script[type="text/ons-template"]');
 
 		for (var i = 0; i < templates.length; i++) {
 			var template = angular.element(templates[i]);
