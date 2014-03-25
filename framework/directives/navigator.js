@@ -117,8 +117,7 @@ limitations under the License.
 				// fix android 2.3 click event not fired some times when used with sliding menu
 				this.leftButtonContainer.bind('touchend', function() { });
 
-				this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));
-				this.attachFastClickEvent(this.leftSection[0]);
+				this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));				
 				this.rightSection.bind('click', this.onRightButtonClicked.bind(this));
 				if (scope.page) {
 					var options = {
