@@ -216,7 +216,10 @@ limitations under the License.
 					},
 
 
-					handleEvent: function(ev) {						
+					handleEvent: function(ev) {
+						if (this.isInsideIgnoredElement(ev.target))
+                            ev.gesture.stopDetect();
+
 						switch (ev.type) {
 
 							case 'touch':
@@ -256,6 +259,10 @@ limitations under the License.
 								}
 								break;
 						}
+					},
+
+					isInsideIgnoredElement: function(el) {
+					    return ($(el).attr("sliding-menu-ignore") == "true" || $(el).parents("[sliding-menu-ignore=true]").length > 0);
 					},
 
 					isInsideSwipeTargetArea: function(x){
