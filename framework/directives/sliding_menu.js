@@ -218,7 +218,7 @@ limitations under the License.
 
 					handleEvent: function(ev) {
 						if (this.isInsideIgnoredElement(ev.target))
-                            ev.gesture.stopDetect();
+							ev.gesture.stopDetect();
 
 						switch (ev.type) {
 
