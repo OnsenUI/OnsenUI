@@ -313,7 +313,8 @@ module.exports = function(grunt) {
           'demo/*',
           'demo/**/*',
           'test/manual-testcases/*',
-          'test/manual-testcases/**/*',
+    // The line below causes infinite loop. So I commented out the line below. Ataru
+    //    'test/manual-testcases/**/*',
         ],
         tasks: [],
         options: {
