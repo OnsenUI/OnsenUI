@@ -1,4 +1,4 @@
-var app = angular.module('myApp', [ 'ngTouch','onsen.directives']);
+var app = angular.module('myApp', [ 'onsen.directives']);
 
 
 app.controller('inheritCtrl', function($scope){

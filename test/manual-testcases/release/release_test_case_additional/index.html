@@ -3,14 +3,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
+    <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">    
+    <link rel="stylesheet" href="styles/app.css"/>    
+    <script src="http://code.jquery.com/jquery-2.0.2.js"></script>
+    <script src="lib/onsen/js/angular/angular.js"></script>    
+    <script src="lib/onsen/js/onsenui.js"></script>    
+    <script src="js/app.js"></script> 
+
     
-    <!-- monaca plugin loader -->
+    <!-- monaca plugin loader 
+    <script src="http://code.jquery.com/jquery-2.0.2.js"></script>    
     <script src="plugins/plugin-loader.js"></script>    
     <link rel="stylesheet" href="plugins/plugin-loader.css">
     <link rel="stylesheet" href="plugins/onsenui_1.0/css/onsenui.css">
-    
-    <!-- Your CSS -->
     <link rel="stylesheet" href="styles/app.css">
+    -->
+
      <script src="js/app.js"></script>  
 </head>
 <body>    
@@ -21,6 +31,9 @@
         ng-click="ons.navigator.pushPage('page1.html', {title: 'PAGE1'})">
         Push Page 2
       </ons-button>
+      
+      <button class="topcoat-button"><a href="../index.html">Back to Base Test</a></button> 
+
     </ons-page>
   </ons-navigator>  
 </body>
