@@ -267,8 +267,13 @@ limitations under the License.
 						}
 					},
 
-					isInsideIgnoredElement: function(el) {
-					    return ($(el).attr("sliding-menu-ignore") == "true" || $(el).parents("[sliding-menu-ignore=true]").length > 0);
+					isInsideIgnoredElement: function (el) {
+					    do {
+					        if (el.getAttribute && el.getAttribute("sliding-menu-ignore"))
+					            return true;
+					        el = el.parentNode;
+					    } while (el);
+					    return false;
 					},
 
 					isInsideSwipeTargetArea: function(x){
