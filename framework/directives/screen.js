@@ -93,7 +93,7 @@ limitations under the License.
 				pageEl.append(blackMask);
 
 				var pageContainer = angular.element('<div></div>');
-				pageContainer.addClass('screen-page__container');
+				pageContainer.addClass('screen-page__container ons-screen-inner');
 				pageEl.append(pageContainer);
 
 				pageContainer.append(pageContent);

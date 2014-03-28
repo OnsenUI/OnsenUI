@@ -502,9 +502,9 @@ limitations under the License.
 				blackMask.addClass('onsen_navigator-black-mask');
 				page.append(blackMask);
 				
-				var navigatorPage = angular.element('<div></div>');				
-				navigatorPage.addClass('navigator-page page');
-				navigatorPage.append(pageContent);									
+				var navigatorPage = angular.element('<div></div>');
+				navigatorPage.addClass('navigator-page page ons-navigator-inner');
+				navigatorPage.append(pageContent);
 
 				page.append(navigatorPage);
 				return page;

@@ -1,3 +1,3 @@
-<div ng-show="platform == userPlatform" ng-transclude>
+<div class="ons-if-platform-inner" ng-show="platform == userPlatform" ng-transclude>
 
 </div>

@@ -1,1 +1,1 @@
-<div class="row row-{{align}}"></div>
+<div class="row row-{{align}} ons-row-inner"></div>
