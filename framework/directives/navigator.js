@@ -144,6 +144,8 @@ limitations under the License.
 				this.scope.pushPage = this.pushPage.bind(this);
 				this.scope.popPage = this.popPage.bind(this);
 				this.scope.resetToPage = this.resetToPage.bind(this);
+				this.scope.getCurrentNavigatorItem = this.getCurrentNavigatorItem.bind(this);
+				this.scope.pages = this.navigatorItems;
 			},
 
 			attachFastClickEvent: function(el) {
@@ -566,6 +568,9 @@ limitations under the License.
 				if (options && typeof options != "object") {
 					throw new Error('options must be an objected. You supplied ' + options);
 				}
+				options = options || {};
+				options["page"] = page;
+
 				if (!this.isReady()) {
 					return;
 				}
