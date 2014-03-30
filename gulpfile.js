@@ -1,20 +1,24 @@
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var html2js = require('gulp-html2js');
 var concat = require('gulp-concat');
 var clean = require('gulp-clean');
 var autoprefix = require('gulp-autoprefixer');
 var zip = require('gulp-zip');
 var header = require('gulp-header');
-var eventstream = require('event-stream');
-var runSequence = require('gulp-run-sequence');
+var merge = require('event-stream').merge;
+var runSequence = require('run-sequence');
+var dateformat = require("dateformat");
 var pkg = require('./package.json');
+var livereload = require('gulp-livereload');
+var connect = require('gulp-connect');
 
 ////////////////////////////////////////
 // html2js
 ////////////////////////////////////////
 gulp.task('html2js', function() {
     return gulp.src('framework/templates/*.tpl')
-        .pipe(html2js())
+        .pipe(html2js({base: __dirname + '/framework', outputModuleName: 'templates-main', useStrict: true}))
         .pipe(concat('templates.js'))
         .pipe(gulp.dest('framework/directives/'));
 });
@@ -41,7 +45,7 @@ gulp.task('clean', function() {
 // prepare
 ////////////////////////////////////////
 gulp.task('prepare', ['html2js'], function() {
-    return eventstream.concat(
+    return merge(
 
         // plugin info(monaca)
         gulp.src('plugin_info.json')
@@ -58,7 +62,7 @@ gulp.task('prepare', ['html2js'], function() {
             'framework/js/*.js'
         ])
             .pipe(concat('onsenui.js'))
-            .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - yyyy-mm-dd */\n', {pkg: pkg}))
+            .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
             .pipe(gulp.dest('build/js/')),
 
         // onsenui_all.js
@@ -73,7 +77,7 @@ gulp.task('prepare', ['html2js'], function() {
             'framework/js/*.js'
         ])
             .pipe(concat('onsenui_all.js'))
-            .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - yyyy-mm-dd */\n', {pkg: pkg}))
+            .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
             .pipe(gulp.dest('build/js/')),
 
         // onsenui.css
@@ -83,7 +87,7 @@ gulp.task('prepare', ['html2js'], function() {
         ])
             .pipe(concat('onsenui.css'))
             .pipe(autoprefix('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6'))
-            .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - yyyy-mm-dd */\n', {pkg: pkg}))
+            .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
             .pipe(gulp.dest('build/css/')),
 
         // angular.js copy
@@ -110,9 +114,9 @@ gulp.task('prepare', ['html2js'], function() {
 });
 
 ////////////////////////////////////////
-// copy
+// prepare-project-templates
 ////////////////////////////////////////
-gulp.task('copy', ['prepare'], function() {
+gulp.task('prepare-project-templates', function() {
     // projects template
     return gulp.src(['build/**', '!build/plugin_info.json'])
         .pipe(gulp.dest('app/lib/onsen'))
@@ -128,7 +132,7 @@ gulp.task('copy', ['prepare'], function() {
 ////////////////////////////////////////
 // compress
 ////////////////////////////////////////
-gulp.task('compress', ['copy'], function() {
+gulp.task('compress-project-templates', function() {
     var names = [
         'minimum',
         'master_detail',
@@ -150,24 +154,47 @@ gulp.task('compress', ['copy'], function() {
         return stream.pipe(gulp.dest('project_templates/'));
     });
 
-    return eventstream.concat.apply(eventstream, streams);
+    return merge.apply(null, streams);
 });
 
 ////////////////////////////////////////
 // build
 ////////////////////////////////////////
 gulp.task('build', function() {
-    return runSequence('clean', 'copy');
+    return runSequence('clean', 'prepare', 'prepare-project-templates', 'compress-project-templates');
 });
 
 ////////////////////////////////////////
 // default
 ////////////////////////////////////////
-gulp.task('default', ['copy']);
+gulp.task('default', function() {
+    return runSequence('prepare');
+});
 
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', function() {
-    gulp.watch('framework/**', {debounceDelay: 800}, ['copy']);
+gulp.task('serve', ['prepare', 'connect'], function() {
+    gulp.watch(['framework/templates/*.tpl'], ['html2js']);
+
+    gulp.watch([
+        'framework/*/*',
+        'demo/*/*',
+        'demo/*',
+        'test/manual-testcases/*',
+        'test/manual-testcases/*/*'
+    ], ['prepare']).on('change', function(changedFile) {
+        gulp.src([
+            changedFile.path
+        ]).pipe(connect.reload());
+    });
 });
+
+////////////////////////////////////////
+// connect
+////////////////////////////////////////
+gulp.task('connect', connect.server({
+    root: [__dirname + '/'],
+    port: 8000,
+    livereload: true
+}));
