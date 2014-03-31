@@ -13,8 +13,7 @@
 				$rootScope.ons.splitView.toggle = this.toggle.bind(this);				
 			},
 
-			_findClosestSplitView: function($event) {
-				// finding the right navigator
+			_findClosestSplitView: function($event) {				
 				var splitView;
 				if ($event) {
 					var splitViewElement = $rootScope.ons.upTo($event.target, 'ons-split-view');
@@ -28,7 +27,7 @@
 
 			_checkExistence: function() {
 				if (this.splitViews.length == 0) {
-					throw new Error('oops!! no navigator registerred');
+					throw new Error('oops!! no split-view registerred');
 				}
 			},
 
