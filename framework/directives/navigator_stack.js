@@ -11,6 +11,8 @@
 				$rootScope.ons.navigator.pushPage = this.pushPage.bind(this);
 				$rootScope.ons.navigator.popPage = this.popPage.bind(this);
 				$rootScope.ons.navigator.resetToPage = this.resetToPage.bind(this);
+				$rootScope.ons.navigator.getCurrentPage = this.getCurrentPage.bind(this);
+				$rootScope.ons.navigator.getPages = this.getPages.bind(this);
 			},
 
 			_findNavigator: function($event) {
@@ -63,6 +65,20 @@
 
 				var navigator = this._findNavigator($event);
 				navigator.popPage();
+			},
+
+			getCurrentPage: function() {
+			    this._checkExistence();
+
+			    var navigator = this._findNavigator();
+			    return navigator.getCurrentNavigatorItem();
+			},
+
+			getPages: function() {
+			    this._checkExistence();
+
+			    var navigator = this._findNavigator();
+			    return navigator.pages;
 			}
 		});
 
