@@ -49,6 +49,7 @@
     "gulp-livereload": "~1.2.0",
     "gulp-util": "~2.2.14",
     "gulp-connect": "~1.0.10",
-    "gulp": "^3.6.0"
+    "gulp": "^3.6.0",
+    "gulp-rename": "^1.2.0"
   }
 }

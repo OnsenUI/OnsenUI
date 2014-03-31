@@ -12,6 +12,7 @@ var dateformat = require("dateformat");
 var pkg = require('./package.json');
 var livereload = require('gulp-livereload');
 var connect = require('gulp-connect');
+var rename = require('gulp-rename');
 
 ////////////////////////////////////////
 // html2js
@@ -132,7 +133,7 @@ gulp.task('prepare-project-templates', function() {
 ////////////////////////////////////////
 // compress
 ////////////////////////////////////////
-gulp.task('compress-project-templates', function() {
+gulp.task('compress-project-templates', function(done) {
     var names = [
         'minimum',
         'master_detail',
@@ -144,17 +145,33 @@ gulp.task('compress-project-templates', function() {
     ];
 
     var streams = names.map(function(name) {
-        var stream = gulp.src('project_templates/' + name + '/**')
-            .pipe(zip(name + '.zip'));
+        // '**/*' cause error???
+        var src = [
+            name + '/*',
+            name + '/*/*',
+            name + '/*/*/*',
+            name + '/*/*/*/*',
+            name + '/*/*/*/*/*',
+            name + '/*/*/*/*/*/*',
+        ];
+        var stream = gulp.src(src, {cwd : __dirname + '/project_templates'})
+            .pipe(zip(name + '.zip'))
+            .pipe(gulp.dest('./project_templates/'));
 
-        if (name == 'minimum') {
-            stream = stream.pipe(zip('onsen_ui.zip'));
+        if (name === 'minimum') {
+            stream.on('end', function() {
+            });
         }
 
-        return stream.pipe(gulp.dest('project_templates/'));
+        return stream;
     });
 
-    return merge.apply(null, streams);
+    merge.apply(null, streams).on('end', function() {
+        return gulp.src(__dirname + '/project_templates/minimum.zip')
+            .pipe(rename('onsen_ui.zip'))
+            .pipe(gulp.dest('./project_templates/'))
+            .on('end', done);
+    });
 });
 
 ////////////////////////////////////////
