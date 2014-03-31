@@ -13,6 +13,8 @@ var pkg = require('./package.json');
 var livereload = require('gulp-livereload');
 var connect = require('gulp-connect');
 var rename = require('gulp-rename');
+var stylus = require('gulp-stylus');
+var cssminify = require('gulp-minify-css');
 
 ////////////////////////////////////////
 // html2js
@@ -215,3 +217,43 @@ gulp.task('connect', connect.server({
     port: 8000,
     livereload: true
 }));
+
+////////////////////////////////////////
+// theme-build
+////////////////////////////////////////
+
+
+////////////////////////////////////////
+// theme-clean
+////////////////////////////////////////
+
+
+////////////////////////////////////////
+// build-theme
+////////////////////////////////////////
+gulp.task('build-theme', function() {
+    return gulp.src('themes/theme-modules/*/theme-*.styl')
+        .pipe(stylus())
+        .pipe(rename(function(path) {
+            path.dirname = '.';
+            path.basename = path.basename.replace(/^theme-/, '');
+        }))
+        .pipe(autoprefix('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2'))
+        .pipe(gulp.dest('themes/css/'))
+        .pipe(cssminify())
+        .pipe(rename(function(path) {
+            path.ext = '.min.css';
+        }))
+        .pipe(gulp.dest('themes/css/'));
+});
+
+////////////////////////////////////////
+// build-topdoc
+////////////////////////////////////////
+gulp.task('build-topdoc', function() {
+    /*
+    return gulp.src(['themes/css/*.css', '!themes/css/*.min.css'])
+        .pipe(stylus())
+        .pipe(gulp.dest('themes/testcases/'));
+    */
+});
