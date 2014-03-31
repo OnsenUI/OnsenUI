@@ -46,6 +46,7 @@ limitations under the License.
 				scope.tabIcon = scope.icon;
 
 				scope.setActive = function() {
+					element.addClass('active');
 					radioButton.checked = true;
 					tabbarController.gotSelected(scope);
 					if (scope.activeIcon) {
@@ -54,6 +55,7 @@ limitations under the License.
 				};
 
 				scope.setInactive = function() {
+					element.removeClass('active');
 					scope.tabIcon = scope.icon;
 				};
 
