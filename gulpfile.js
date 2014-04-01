@@ -181,7 +181,14 @@ gulp.task('compress-project-templates', function(done) {
 // build
 ////////////////////////////////////////
 gulp.task('build', function() {
-    return runSequence('clean', 'prepare', 'prepare-project-templates', 'compress-project-templates');
+    return runSequence(
+        'clean',
+        'build-theme',
+        'build-topdoc',
+        'prepare',
+        'prepare-project-templates',
+        'compress-project-templates'
+    );
 });
 
 ////////////////////////////////////////
@@ -204,10 +211,29 @@ gulp.task('serve', ['prepare', 'connect'], function() {
         'test/manual-testcases/*',
         'test/manual-testcases/*/*'
     ], ['prepare']).on('change', function(changedFile) {
-        gulp.src([
-            changedFile.path
-        ]).pipe(connect.reload());
+        gulp.src(changedFile.path).pipe(connect.reload());
     });
+
+    // for livereload
+    gulp.watch([
+        'themes/css/*.css',
+        'themes/testcases/*'
+    ]).on('change', function(changedFile) {
+        gulp.src(changedFile.path).pipe(connect.reload());
+    });
+
+    // for theme 
+    gulp.watch([
+        'themes/theme-modules/*/*',
+        'themes/theme-modules/*/*.styl',
+        'themes/theme-modules/*/*/*.styl'
+    ], ['build-theme']);
+
+    // for theme topdoc
+    gulp.watch([
+        'themes/testcases-topdoc-template/*',
+        'themes/testcases-topdoc-template/*/*'
+    ], ['build-topdoc']);
 });
 
 ////////////////////////////////////////
