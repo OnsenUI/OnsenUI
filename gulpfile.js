@@ -15,6 +15,7 @@ var connect = require('gulp-connect');
 var rename = require('gulp-rename');
 var stylus = require('gulp-stylus');
 var cssminify = require('gulp-minify-css');
+var shell = require('gulp-shell');
 
 ////////////////////////////////////////
 // html2js
@@ -219,16 +220,6 @@ gulp.task('connect', connect.server({
 }));
 
 ////////////////////////////////////////
-// theme-build
-////////////////////////////////////////
-
-
-////////////////////////////////////////
-// theme-clean
-////////////////////////////////////////
-
-
-////////////////////////////////////////
 // build-theme
 ////////////////////////////////////////
 gulp.task('build-theme', function(done) {
@@ -254,10 +245,6 @@ gulp.task('build-theme', function(done) {
 ////////////////////////////////////////
 // build-topdoc
 ////////////////////////////////////////
-gulp.task('build-topdoc', function() {
-    /*
-    return gulp.src(['themes/css/*.css', '!themes/css/*.min.css'])
-        .pipe(stylus())
-        .pipe(gulp.dest('themes/testcases/'));
-    */
-});
+gulp.task('build-topdoc', shell.task([
+    './node_modules/.bin/topdoc --source themes/css --destination themes/testcases --template themes/testcases-topdoc-template'
+]));
