@@ -36,9 +36,9 @@ See the [Onsen UI Getting Started Page].
 
 ## How to build
 
-* Clone with submodule
+* Clone this repository
 
-        git clone https://github.com/monaca/OnsenUI.git --recursive
+        git clone https://github.com/monaca/OnsenUI.git
 
 * Open the terminal from OnsenUI directory
 
@@ -50,11 +50,11 @@ See the [Onsen UI Getting Started Page].
 
 * Install grunt-cli (globally)
 
-        [sudo] npm install -g grunt-cli
+        [sudo] npm install -g gulp
 
 * Type grunt to start building
 
-        grunt
+        gulp build
 
 The files will be built and copied into **build**, **demo/lib/onsen/**, and **app/lib/onsen/** folder.
 
@@ -79,9 +79,9 @@ See the current [Onsen UI docs].
 
 Run grunt task to develop Onsen UI itself with livereload.
 
-        grunt serve
+        gulp serve
 
-Access [http://localhost:9000/demo/index.html](http://localhost:9000/demo/index.html) and your code changes will be reloaded.
+Access [http://0.0.0.0:8000/demo/index.html](http://0.0.0.0:8000/demo/index.html) and your code changes will be reloaded.
 
 ## Contributing
 
