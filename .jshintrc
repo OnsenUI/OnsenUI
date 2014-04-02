@@ -39,6 +39,7 @@
     "nonew"         : true,     // Prohibit use of constructors for side-effects.    
     "regexp"        : true,     // Prohibit `.` and `[^...]` in regular expressions.    
     "trailing"      : true,     // Prohibit trailing whitespaces.
+    "expr"          : true,    // Tolerate `ExpressionStatement` as Programs.
     
     // == Relaxing Options ================================================
     //
@@ -56,8 +57,7 @@
     "eqnull"        : false,    // Tolerate use of `== null`.
     "es5"           : false,    // Allow EcmaScript 5 syntax.
     "esnext"        : false,    // Allow ES.next specific features such as `const` and `let`.
-    "evil"          : false,    // Tolerate use of `eval`.
-    "expr"          : false,    // Tolerate `ExpressionStatement` as Programs.
+    "evil"          : false,    // Tolerate use of `eval`.    
     "funcscope"     : false,    // Tolerate declarations of variables inside of control structures while accessing them later from the outside.
     "globalstrict"  : false,    // Allow global "use strict" (also enables 'strict').
     "iterator"      : false,    // Allow usage of __iterator__ property.
