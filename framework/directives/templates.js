@@ -159,7 +159,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/page.tpl",
-    "<div class=\"page topcoat-page {{modifierTemplater('topcoat-page--*')}} ons-page-inner\" ng-transclude></div>\n" +
+    "<div class=\"topcoat-page {{modifierTemplater('topcoat-page--*')}} ons-page-inner\" ng-transclude></div>\n" +
     "");
 }]);
 })();
@@ -197,7 +197,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/scroller.tpl",
-    "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
+    "<div class=\"scroller-wrapper full-screen topcoat-page\" ons-scrollable>\n" +
     "  <div class=\"scroller ons-scroller-inner\" ng-transclude>\n" +
     "      \n" +
     "  </div>\n" +

@@ -96,7 +96,7 @@ limitations under the License.
                 }).success(function(data, status, headers, config) {
                   var templateHTML = angular.element(data.trim());
                   var page = angular.element('<div></div>');
-                  page.addClass('page');		
+                  page.addClass('topcoat-page');
                   var pageScope = scope.$parent.$new();
                   var pageContent = $compile(templateHTML)(pageScope);
                   page.append(pageContent);
@@ -128,7 +128,7 @@ limitations under the License.
                 }).success(function(data, status, headers, config) {
                   var templateHTML = angular.element(data.trim());
                   var page = angular.element('<div></div>');
-                  page.addClass('page');
+                  page.addClass('topcoat-page');
                   page[0].style.opacity = 0;
                   var pageScope = scope.$parent.$new();
                   var pageContent = $compile(templateHTML)(pageScope);
