@@ -48,11 +48,11 @@ See the [Onsen UI Getting Started Page].
 
         npm install
 
-* Install grunt-cli (globally)
+* Install gulp (globally)
 
         [sudo] npm install -g gulp
 
-* Type grunt to start building
+* Type gulp to start building
 
         gulp build
 
@@ -68,8 +68,7 @@ The files will be built and copied into **build**, **demo/lib/onsen/**, and **ap
 
 ## Developing your app
 
-[Monaca IDE] makes it super easy to create Onsen UI project, but if you want to use other IDEs, we provide project templates for you in the project_tempates folder. You will see the instruction on how to run the project there.
-
+[Monaca IDE] makes it super easy to create Onsen UI project, but if you want to use other IDEs, we provide project templates for you in the `project_tempates` folder. You will see the instruction on how to run the project there.
 
 ## Documentation
 
@@ -77,7 +76,7 @@ See the current [Onsen UI docs].
 
 ## Developing Onsen UI
 
-Run grunt task to develop Onsen UI itself with livereload.
+Run gulp task to develop Onsen UI itself with livereload.
 
         gulp serve
 
