@@ -13,49 +13,49 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-*/
+ */
 
 
 /* MODAL */
 
 ons-screen {
-  display: block;
-  width: 100%;
-  height: 100%;
-  perspective: 10px;
-  position: relative;  
-  overflow: hidden;    
+    display: block;
+    width: 100%;
+    height: 100%;
+    perspective: 10px;
+    position: relative;  
+    overflow: hidden;    
 }
 
 .screen-page {
-  transform-style: preserve-3d;        
-  transform-origin: 100% 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+    transform-style: preserve-3d;        
+    transform-origin: 100% 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .screen-page__container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .onsen_screen-black-mask {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;  
-  background-color: black;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;  
+    background-color: black;
 }
 
 .onsen_screen-black-mask.hide {
-  opacity: 0;  
+    opacity: 0;  
 }
 
 .screen-page.screen-center {
@@ -88,5 +88,5 @@ ons-screen {
 }
 
 .screen-page.modal-behind > .screen-page__container {
-  opacity: 0.9;
+    opacity: 0.9;
 }

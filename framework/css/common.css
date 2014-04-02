@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-*/
+ */
 
 @import url("font_awesome/css/font-awesome.min.css");
 
@@ -47,19 +47,19 @@ body {
 }
 
 .absolute {
-	position: absolute;
+    position: absolute;
 }
 
 .relative {
-	position: relative;
+    position: relative;
 }
 
 .full-width {
-	width: 100%;
+    width: 100%;
 }
 
 .full-height {
-	height: 100%;
+    height: 100%;
 }
 
 .max {

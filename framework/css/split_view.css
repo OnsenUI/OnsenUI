@@ -16,8 +16,8 @@ limitations under the License.
 */
 
 .secondary {
-	opacity: 0;
-	width: 100%;
+    opacity: 0;
+    width: 100%;
     transform: translate3d(-10%, 0, 0);
     overflow: hidden;
 }
@@ -27,5 +27,5 @@ limitations under the License.
 }
 
 .onsen_split-view__shadow {
-	box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+    box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
 }
