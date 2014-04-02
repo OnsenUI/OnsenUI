@@ -1,98 +1,98 @@
 .effeckt-button {
-    position: relative;
-    font-family: inherit;
-    cursor: pointer;
-    -webkit-appearance: none;
-    -webkit-font-smoothing: antialiased;
+  position: relative;
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 .effeckt-button[data-loading] {
-    cursor: default;
+  cursor: default;
 }
 
 .effeckt-button > .spinner {
-    position: absolute;
-    width: 20px;
-    height: 10px;
-    top: 50%;
-    margin-top: -13px;
-    opacity: 0;
-    /*border: 3px solid #fff; specified in topcoat theme. .topcoat-button__spinner*/
-    border-bottom: 0;
-    border-radius: 40px 40px 0 0;
-    -webkit-transform-origin: bottom center;
-    background: transparent;
+  position: absolute;
+  width: 20px;
+  height: 10px;
+  top: 50%;
+  margin-top: -13px;
+  opacity: 0;
+  /*border: 3px solid #fff; specified in topcoat theme. .topcoat-button__spinner*/
+  border-bottom: 0;
+  border-radius: 40px 40px 0 0;
+  -webkit-transform-origin: bottom center;
+  background: transparent;
 }
 
 .effeckt-button[data-loading] > .spinner {
-    -webkit-animation: spinner .8s infinite linear;
-    -o-animation: spinner .8s infinite linear;
-    animation: spinner .8s infinite linear;
+  -webkit-animation: spinner .8s infinite linear;
+  -o-animation: spinner .8s infinite linear;
+  animation: spinner .8s infinite linear;
 }
 
 @-webkit-keyframes spinner {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
   }
 
   50% {
-      -webkit-transform: rotate(180deg);
-      transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
   }
 
   100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 @-o-keyframes spinner {
-    0% {
-        -o-transform: rotate(0deg);
-        transform: rotate(0deg);
+  0% {
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
   }
 
   50% {
-      -o-transform: rotate(180deg);
-      transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
   }
 
   100% {
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 @keyframes spinner {
-    0% {
-        -webkit-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        -o-transform: rotate(0deg);
-        transform: rotate(0deg);
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
   }
 
   50% {
-      -webkit-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
-      -o-transform: rotate(180deg);
-      transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
   }
 
   100% {
-      -webkit-transform: rotate(360deg);
-      -ms-transform: rotate(360deg);
-      -o-transform: rotate(360deg);
-      transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 .effeckt-button,
 .effeckt-button > .spinner,
 .effeckt-button > .label {
-    transition-property: padding, opacity, left, right, top, bottom, margin;
-    transition-duration: 500ms;
-    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);  
+  transition-property: padding, opacity, left, right, top, bottom, margin;
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);  
 }
 
 .effeckt-button.zoom-in,
@@ -101,232 +101,232 @@
 .effeckt-button.zoom-out,
 .effeckt-button.zoom-out > .spinner,
 .effeckt-button.zoom-out > .label {
-    -webkit-transition: 500ms ease all;
-    -o-transition: 500ms ease all;
-    transition: 500ms ease all;
+  -webkit-transition: 500ms ease all;
+  -o-transition: 500ms ease all;
+  transition: 500ms ease all;
 }
 
 .effeckt-button.expand-right > .spinner {
-    right: 16px;
+  right: 16px;
 }
 
 .effeckt-button.expand-right[data-loading] {
-    padding-right: 64px;
+  padding-right: 64px;
 }
 
 .effeckt-button.expand-right[data-loading] > .spinner {
-    opacity: 1;
+  opacity: 1;
 }
 
 .effeckt-button.expand-left > .spinner {
-    left: 16px;
+  left: 16px;
 }
 
 .effeckt-button.expand-left[data-loading] {
-    padding-left: 64px;
+  padding-left: 64px;
 }
 
 .effeckt-button.expand-left[data-loading] > .spinner {
-    opacity: 1;
+  opacity: 1;
 }
 
 .effeckt-button.expand-up {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .effeckt-button.expand-up > .spinner {
-    top: 32px;
-    left: 50%;
-    margin-left: -16px;
+  top: 32px;
+  left: 50%;
+  margin-left: -16px;
 }
 
 .effeckt-button.expand-up[data-loading] {
-    padding-top: 64px;
+  padding-top: 64px;
 }
 
 .effeckt-button.expand-up[data-loading] > .spinner {
-    opacity: 1;
-    top: 16px;
-    margin-top: 0;
+  opacity: 1;
+  top: 16px;
+  margin-top: 0;
 }
 
 .effeckt-button.expand-down {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .effeckt-button.expand-down > .spinner {
-    left: 50%;
-    top: 100%;
-    margin-left: -16px;
-    margin-top: -48px;
+  left: 50%;
+  top: 100%;
+  margin-left: -16px;
+  margin-top: -48px;
 }
 
 .effeckt-button.expand-down[data-loading] {
-    padding-bottom: 64px;
+  padding-bottom: 64px;
 }
 
 .effeckt-button.expand-down[data-loading] > .spinner {
-    opacity: 1;
+  opacity: 1;
 }
 
 .effeckt-button.slide-left {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .effeckt-button.slide-left > .label {
-    position: relative;
+  position: relative;
 }
 
 .effeckt-button.slide-left > .spinner {
-    left: 100%;
-    margin-left: -16px;
+  left: 100%;
+  margin-left: -16px;
 }
 
 .effeckt-button.slide-left[data-loading] > .label {
-    opacity: 0;
-    left: -100%;
+  opacity: 0;
+  left: -100%;
 }
 
 .effeckt-button.slide-left[data-loading] > .spinner {
-    opacity: 1;
-    left: 50%;
+  opacity: 1;
+  left: 50%;
 }
 
 .effeckt-button.slide-right {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .effeckt-button.slide-right > .label {
-    position: relative;
+  position: relative;
 }
 
 .effeckt-button.slide-right > .spinner {
-    right: 100%;
-    margin-left: -16px;
+  right: 100%;
+  margin-left: -16px;
 }
 
 .effeckt-button.slide-right[data-loading] > .label {
-    opacity: 0;
-    left: 100%;
+  opacity: 0;
+  left: 100%;
 }
 
 .effeckt-button.slide-right[data-loading] > .spinner {
-    opacity: 1;
-    left: 50%;
+  opacity: 1;
+  left: 50%;
 }
 
 .effeckt-button.slide-up {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .effeckt-button.slide-up > .label {
-    position: relative;
+  position: relative;
 }
 
 .effeckt-button.slide-up > .spinner {
-    left: 50%;
-    margin-left: -16px;
-    margin-top: 1em;
+  left: 50%;
+  margin-left: -16px;
+  margin-top: 1em;
 }
 
 .effeckt-button.slide-up[data-loading] > .label {
-    opacity: 0;
-    top: -1em;
+  opacity: 0;
+  top: -1em;
 }
 
 .effeckt-button.slide-up[data-loading] > .spinner {
-    opacity: 1;
-    margin-top: -16px;
+  opacity: 1;
+  margin-top: -16px;
 }
 
 .effeckt-button.slide-down {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .effeckt-button.slide-down > .label {
-    position: relative;
+  position: relative;
 }
 
 .effeckt-button.slide-down > .spinner {
-    left: 50%;
-    margin-left: -16px;
-    margin-top: -32px;
+  left: 50%;
+  margin-left: -16px;
+  margin-top: -32px;
 }
 
 .effeckt-button.slide-down[data-loading] > .label {
-    opacity: 0;
-    top: 1em;
+  opacity: 0;
+  top: 1em;
 }
 
 .effeckt-button.slide-down[data-loading] > .spinner {
-    opacity: 1;
-    margin-top: -16px;
+  opacity: 1;
+  margin-top: -16px;
 }
 
 .effeckt-button.zoom-out {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .effeckt-button.zoom-out > .spinner {
-    left: 50%;
-    margin-left: -16px;
-    -webkit-transform: scale(2.5);
-    -ms-transform: scale(2.5);
-    -o-transform: scale(2.5);
-    transform: scale(2.5);
+  left: 50%;
+  margin-left: -16px;
+  -webkit-transform: scale(2.5);
+  -ms-transform: scale(2.5);
+  -o-transform: scale(2.5);
+  transform: scale(2.5);
 }
 
 .effeckt-button.zoom-out > .label {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .effeckt-button.zoom-out[data-loading] > .label {
-    opacity: 0;
-    -webkit-transform: scale(0.5);
-    -ms-transform: scale(0.5);
-    -o-transform: scale(0.5);
-    transform: scale(0.5);
+  opacity: 0;
+  -webkit-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  -o-transform: scale(0.5);
+  transform: scale(0.5);
 }
 
 .effeckt-button.zoom-out[data-loading] > .spinner {
-    opacity: 1;
-    -webkit-transform: none;
-    -ms-transform: none;
-    -o-transform: none;
-    transform: none;
+  opacity: 1;
+  -webkit-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  transform: none;
 }
 
 .effeckt-button.zoom-in {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .effeckt-button.zoom-in > .spinner {
-    left: 50%;
-    margin-left: -16px;
-    -webkit-transform: scale(0.2);
-    -ms-transform: scale(0.2);
-    -o-transform: scale(0.2);
-    transform: scale(0.2);
+  left: 50%;
+  margin-left: -16px;
+  -webkit-transform: scale(0.2);
+  -ms-transform: scale(0.2);
+  -o-transform: scale(0.2);
+  transform: scale(0.2);
 }
 
 .effeckt-button.zoom-in > .label {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .effeckt-button.zoom-in[data-loading] > .label {
-    opacity: 0;
-    -webkit-transform: scale(2.2);
-    -ms-transform: scale(2.2);
-    -o-transform: scale(2.2);
-    transform: scale(2.2);
+  opacity: 0;
+  -webkit-transform: scale(2.2);
+  -ms-transform: scale(2.2);
+  -o-transform: scale(2.2);
+  transform: scale(2.2);
 }
 
 .effeckt-button.zoom-in[data-loading] > .spinner {
-    opacity: 1;
-    -webkit-transform: none;
-    -ms-transform: none;
-    -o-transform: none;
-    transform: none;
+  opacity: 1;
+  -webkit-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
+  transform: none;
 }

@@ -17,11 +17,11 @@ limitations under the License.
 
 
 .scroller-wrapper {
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;   
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;   
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
  

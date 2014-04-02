@@ -16,55 +16,55 @@ limitations under the License.
 */
 
 .onsen_sliding-menu-black-mask {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    background-color: black;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  background-color: black;
 }
 
 .sliding-menu {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .transition {
-    transition-duration: 400ms;
-    animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  transition-duration: 400ms;
+  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.open{    
-    transform: translate3d(92%, 0, 0);
+.open {
+  transform: translate3d(92%, 0, 0);
 }
 
 .close{    
-    transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 .menu {
-    z-index: -1;
-    background-color : gray;
+  z-index: -1;
+  background-color : gray;
 }
 
 .behind {
-    opacity: 0; /* initially hidden */
-    transform: translate3d(-10%, 0, 0);
-    width: 100% !important;
+  opacity: 0; /* initially hidden */
+  transform: translate3d(-10%, 0, 0);
+  width: 100% !important;
 }
 
 .above {
-    box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
-    transform: translate3d(0, 0, 0);
+  box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+  transform: translate3d(0, 0, 0);
 }
 
 .full-screen {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    /*height: 100%;*/
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  /*height: 100%;*/
 }
 
 

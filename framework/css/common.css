@@ -18,73 +18,73 @@ limitations under the License.
 @import url("font_awesome/css/font-awesome.min.css");
 
 [ng-cloak], [x-ng-cloak], .ng-cloak, [data-ng-cloak] {
-    display: none !important;
+  display: none !important;
 }
 
 html {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 body {
-    width: 100%;
-    height: 100%;
-    position: fixed;    
-    margin: 0;
-    padding: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;    
+  margin: 0;
+  padding: 0;
 }
 
 .align-center {
-    align: center;
+  align: center;
 }
 
 .middle {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 .no-active:active {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
 .absolute {
-    position: absolute;
+  position: absolute;
 }
 
 .relative {
-    position: relative;
+  position: relative;
 }
 
 .full-width {
-    width: 100%;
+  width: 100%;
 }
 
 .full-height {
-    height: 100%;
+  height: 100%;
 }
 
 .max {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .block {
-    display: block;
+  display: block;
 }
 
 * { 
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    user-select: none;
-    box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  user-select: none;
+  box-sizing: border-box;
 } 
 
 input {
-    user-select: initial;
+  user-select: initial;
 }
 
 textarea {
-    user-select: initial;   
+  user-select: initial;   
 }
 
 select {
-    user-select: initial;   
+  user-select: initial;   
 }

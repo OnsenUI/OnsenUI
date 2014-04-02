@@ -16,66 +16,66 @@ limitations under the License.
  */
 
 ons-navigator-toolbar {
-    display: none;
+  display: none;
 }
 
 ons-navigator {
-    width: 100%;
-    height: 100%;
-    display: block;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .navigator-container {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-direction: normal;
-    -moz-box-direction: normal;
-    -webkit-box-orient: vertical;
-    -moz-box-orient: vertical;
-    flex-direction: column;    
-    -webkit-box-pack: start;
-    -moz-box-pack: start;    
-    justify-content: flex-start;
-    -webkit-align-content: flex-start;
-    -ms-flex-line-pack: start;
-    align-content: flex-start;
-    -webkit-box-align: stretch;    
-    align-items: stretch;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  flex-direction: column;    
+  -webkit-box-pack: start;
+  -moz-box-pack: start;    
+  justify-content: flex-start;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-box-align: stretch;    
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .navigator-toolbar {
-    flex: 0 0 auto;
+  flex: 0 0 auto;
 }
 
 .navigator-content {
-    -webkit-box-ordinal-group: 1;
-    -moz-box-ordinal-group: 1;    
-    -webkit-box-flex: 1;
-    -moz-box-flex: 1;    
-    flex: 1 0 auto;
-    -webkit-align-self: auto;
-    -ms-flex-item-align: auto;
-    align-self: auto;
-    overflow: hidden;
+  -webkit-box-ordinal-group: 1;
+  -moz-box-ordinal-group: 1;    
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;    
+  flex: 1 0 auto;
+  -webkit-align-self: auto;
+  -ms-flex-item-align: auto;
+  align-self: auto;
+  overflow: hidden;
 }
 
 .topcoat-navigation-bar {    
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 
 }
 
 .right-section-icon {
-    height: 100%;
-    display: block !important;
+  height: 100%;
+  display: block !important;
 }
 
 .left-section {
-    height: 100%;
+  height: 100%;
 }
