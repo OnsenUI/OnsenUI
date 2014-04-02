@@ -1,80 +1,127 @@
-/*! onsenui - v1.0.3 - 2014-03-25 */
-angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
-
-angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
+/*! onsenui - v1.0.3 - 2014-04-02 */
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/bottom_toolbar.tpl",
-    "<div class=\"onsen_bottom-toolbar topcoat-navigation-bar topcoat-navigation-bar--bottom {{modifierTemplater('topcoat-navigation-bar--*')}}\" ng-transclude></div>\n" +
+    "<div class=\"onsen_bottom-toolbar topcoat-navigation-bar topcoat-navigation-bar--bottom ons-bottom-toolbar-inner {{modifierTemplater('topcoat-navigation-bar--*')}}\" ng-transclude></div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/button.tpl",
     "<button class=\"{{item.animation}} topcoat-button--{{onsType}} effeckt-button topcoat-button no-select {{modifierTemplater('topcoat--button--*')}}\">\n" +
-    "	<span class=\"label\" ng-transclude></span>\n" +
+    "	<span class=\"label ons-button-inner\" ng-transclude></span>\n" +
     "	<span class=\"spinner topcoat-button__spinner {{modifierTemplater('topcoat-button--*__spinner')}}\"></span>\n" +
     "</button>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/checkbox.tpl",
     "<label class=\"topcoat-checkbox\" class=\"{{modifierTemplater('topcoat-checkbox--*')}}\">\n" +
     "  <input type=\"checkbox\" ng-model=\"ngModel\" ng-true-value=\"{{ngTrueValue || true}}\" ng-false-value=\"{{ngFalseValue || false}}\">\n" +
     "  <div class=\"topcoat-checkbox__checkmark {{modifierTemplater('topcoat-checkbox--*__checkmark')}}\"></div>\n" +
-    "  <span ng-transclude>\n" +
+    "  <span class=\"ons-checkbox-inner\" ng-transclude>\n" +
     "  	\n" +
     "  </span>\n" +
     "</label>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/column.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/column.tpl",
-    "<div class=\"col col-{{align}} col-{{size}} col-{{offset}}\"></div>");
+    "<div class=\"col col-{{align}} col-{{size}} col-{{offset}} ons-col-inner\"></div>\n" +
+    "");
 }]);
+})();
 
-angular.module("templates/icon.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/icon.tpl",
     "<i class=\"fa fa-{{icon}} fa-{{size}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}\"></i>");
 }]);
+})();
 
-angular.module("templates/if_orientation.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/if_orientation.tpl",
-    "<div ng-show=\"orientation == userOrientation\" ng-transclude>\n" +
+    "<div ng-show=\"orientation == userOrientation\" class=\"ons-if-orientation-inner\" ng-transclude>\n" +
     "\n" +
     "</div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/if_platform.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/if_platform.tpl",
-    "<div ng-show=\"platform == userPlatform\" ng-transclude>\n" +
+    "<div class=\"ons-if-platform-inner\" ng-show=\"platform == userPlatform\" ng-transclude>\n" +
     "\n" +
     "</div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/list.tpl",
     "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
     "	<div class=\"scroller\">\n" +
     "		<div class=\"topcoat-list {{modifierTemplater('topcoat-list--*')}}\">\n" +
-    "			<ul class=\"topcoat-list__container {{modifierTemplater('topcoat-list--*__container')}}\" ng-transclude>\n" +
+    "			<ul class=\"topcoat-list__container {{modifierTemplater('topcoat-list--*__container')}} ons-list-inner\" ng-transclude>\n" +
     "			</ul>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/list_item.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/list_item.tpl",
-    "<li class=\"topcoat-list__item {{modifierTemplater('topcoat-list__item--*')}}\">\n" +
-    "</li>\n" +
+    "<li class=\"topcoat-list__item {{modifierTemplater('topcoat-list__item--*')}} ons-list-item-inner\"></li>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/navigator.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/navigator.tpl",
     "<div class=\"navigator-container\">\n" +
     "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar relative {{modifierTemplater('topcoat-navigation-bar--*')}}\">\n" +
@@ -96,19 +143,34 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "</div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/navigator_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/navigator_toolbar.tpl",
     "<div class=\"onse_navigator-toolbar\"></div>");
 }]);
+})();
 
-angular.module("templates/page.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/page.tpl",
-    "<div class=\"page topcoat-page {{modifierTemplater('topcoat-page--*')}}\" ng-transclude></div>\n" +
+    "<div class=\"page topcoat-page {{modifierTemplater('topcoat-page--*')}} ons-page-inner\" ng-transclude></div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/radio_button.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/radio_button.tpl",
     "<label class=\"topcoat-radio-button {{modifierTemplater('topcoat-radio-button--*')}}\">\n" +
     "	{{leftLabel}}\n" +
@@ -118,68 +180,97 @@ angular.module("templates/radio_button.tpl", []).run(["$templateCache", function
     "</label>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/row.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/row.tpl",
-    "<div class=\"row row-{{align}}\"></div>");
+    "<div class=\"row row-{{align}} ons-row-inner\"></div>\n" +
+    "");
 }]);
+})();
 
-angular.module("templates/scroller.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/scroller.tpl",
     "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
-    "	<div class=\"scroller\" ng-transclude>\n" +
+    "	<div class=\"scroller ons-scroller-inner\" ng-transclude>\n" +
     "		\n" +
     "	</div>\n" +
     "</div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/search_input.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/search_input.tpl",
     "<input type=\"search\" class=\"topcoat-search-input\">\n" +
     "");
 }]);
+})();
 
-angular.module("templates/select.tpl", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("templates/select.tpl",
-    "<select class=\"topcoat-text-input {{modifierTemplater('topcoat-text-input--*')}}\" ng-transclude>\n" +
-    "</select>\n" +
-    "");
-}]);
-
-angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/sliding_menu.tpl",
     "<div class=\"sliding-menu full-screen\">\n" +
     "	<div ng-cloak class=\"onsen_sliding-menu-black-mask\"></div>\n" +
-    "	<div class=\"behind full-screen\">\n" +
+    "	<div class=\"behind full-screen ons-sliding-menu-inner\">\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"above full-screen\">\n" +
+    "	<div class=\"above full-screen ons-sliding-menu-inner\">\n" +
     "	</div>\n" +
     "</div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/split_view.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/split_view.tpl",
     "<div class=\"sliding-menu full-screen\">\n" +
     "	<div class=\"onsen_sliding-menu-black-mask\"></div>\n" +
-    "	<div class=\"secondary full-screen\"></div>\n" +
+    "	<div class=\"secondary full-screen ons-split-view-inner\"></div>\n" +
     "\n" +
-    "	<div class=\"main full-screen\"></div>\n" +
+    "	<div class=\"main full-screen ons-split-view-inner\"></div>\n" +
     "</div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/tab_bar.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/tab_bar.tpl",
-    "<div style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content\"></div>\n" +
+    "<div style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content ons-tabbar-inner\"></div>\n" +
     "\n" +
-    "<div ng-hide=\"hideTabs\" class=\"topcoat-tab-bar full footer {{modifierTemplater('topcoat-tab-bar--*')}}\" ng-transclude></div>\n" +
+    "<div ng-hide=\"hideTabs\" class=\"topcoat-tab-bar full footer {{modifierTemplater('topcoat-tab-bar--*')}} ons-tabbar-inner\" ng-transclude></div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/tab_bar_item.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/tab_bar_item.tpl",
     "<label class=\"topcoat-tab-bar__item no-select {{tabbarModifierTemplater('topcoat-tab-bar--*__item')}} {{modifierTemplater('topcoat-tab-bar__item--*')}}\">\n" +
     "	<input type=\"radio\" name=\"tab-bar-{{tabbarId}}\">\n" +
@@ -192,20 +283,31 @@ angular.module("templates/tab_bar_item.tpl", []).run(["$templateCache", function
     "</label>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/text_area.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/text_area.tpl",
     "<textarea class=\"topcoat-textarea\"></textarea>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/text_input.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/text_input.tpl",
     "<input class=\"topcoat-text-input\">");
 }]);
+})();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -302,7 +404,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -340,7 +442,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -412,7 +514,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -478,7 +580,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -688,7 +790,7 @@ limitations under the License.
 	});
 })();
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -725,7 +827,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -767,7 +869,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -892,8 +994,7 @@ limitations under the License.
 				// fix android 2.3 click event not fired some times when used with sliding menu
 				this.leftButtonContainer.bind('touchend', function() { });
 
-				this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));
-				this.attachFastClickEvent(this.leftSection[0]);
+				this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));				
 				this.rightSection.bind('click', this.onRightButtonClicked.bind(this));
 				if (scope.page) {
 					var options = {
@@ -940,13 +1041,20 @@ limitations under the License.
 				return this.ready;
 			},
 
-			checkiOS7: function() {
+			checkiOS7: function() {				
 				if (window.device && window.device.platform) {
 					if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
 						setTimeout( this.adjustForiOS7.bind(this), 0);
 					}
 				} else {
-					document.addEventListener("deviceready", this.checkiOS7.bind(this), false);
+					var self = this;
+					document.addEventListener("deviceready", function(){
+						if(window.device && window.device.platform){
+							self.checkiOS7();
+						}else{
+							// cordova not suppoorted
+						}
+					}, false);
 				}
 			},
 
@@ -1270,9 +1378,9 @@ limitations under the License.
 				blackMask.addClass('onsen_navigator-black-mask');
 				page.append(blackMask);
 				
-				var navigatorPage = angular.element('<div></div>');				
-				navigatorPage.addClass('navigator-page page');
-				navigatorPage.append(pageContent);									
+				var navigatorPage = angular.element('<div></div>');
+				navigatorPage.addClass('navigator-page page ons-navigator-inner');
+				navigatorPage.append(pageContent);
 
 				page.append(navigatorPage);
 				return page;
@@ -1549,7 +1657,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -1583,7 +1691,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -1682,7 +1790,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -1726,7 +1834,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -1820,7 +1928,7 @@ limitations under the License.
 				pageEl.append(blackMask);
 
 				var pageContainer = angular.element('<div></div>');
-				pageContainer.addClass('screen-page__container');
+				pageContainer.addClass('screen-page__container ons-screen-inner');
 				pageEl.append(pageContainer);
 
 				pageContainer.append(pageContent);
@@ -2040,7 +2148,7 @@ limitations under the License.
 	});
 })();
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -2130,8 +2238,9 @@ limitations under the License.
 		};
 	});
 })();
+
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -2169,7 +2278,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -2206,46 +2315,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
-(function(){
-	'use strict';
-
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsSelect', function(ONSEN_CONSTANTS, OnsenUtil) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/select.tpl',
-			link: function(scope, element, attrs) {
-
-				scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
-
-			}
-		};
-	});
-})();
-
-
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -2304,7 +2374,7 @@ limitations under the License.
 						this.$abovePage = angular.element(this.abovePage);
 						this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
 						this.previousX = 0;
-						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;						
+						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
 
 						scope.$watch('maxSlideDistance', this.onMaxSlideDistanceChanged.bind(this));
 						scope.$watch('swipable', this.onSwipableChanged.bind(this));
@@ -2636,7 +2706,7 @@ limitations under the License.
 
 			_checkExistence: function() {
 				if (this.slidingMenus.length == 0) {
-					throw new Error('oops!! no navigator registerred');
+					throw new Error('oops!! no sliding-menu registerred');
 				}
 			},
 
@@ -2693,7 +2763,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -3126,8 +3196,7 @@ limitations under the License.
 				$rootScope.ons.splitView.toggle = this.toggle.bind(this);				
 			},
 
-			_findClosestSplitView: function($event) {
-				// finding the right navigator
+			_findClosestSplitView: function($event) {				
 				var splitView;
 				if ($event) {
 					var splitViewElement = $rootScope.ons.upTo($event.target, 'ons-split-view');
@@ -3141,7 +3210,7 @@ limitations under the License.
 
 			_checkExistence: function() {
 				if (this.splitViews.length == 0) {
-					throw new Error('oops!! no navigator registerred');
+					throw new Error('oops!! no split-view registerred');
 				}
 			},
 
@@ -3183,7 +3252,7 @@ limitations under the License.
 	});
 })();
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -3208,9 +3277,10 @@ limitations under the License.
 		return {
 			restrict: 'E',
 			replace: false,
-			transclude: true,
+			transclude: true,			
 			scope: {
-				hide: '@'
+				hide: '@',
+				onActiveTabChanged: '&'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
 			controller: function($scope, $element, $attrs) {
@@ -3230,6 +3300,13 @@ limitations under the License.
 					onTabbarVisibilityChanged();
 				});
 
+				function triggerActiveTabChanged(index, tabItem){
+					$scope.onActiveTabChanged({
+						$index: index,
+						$tabItem: tabItem
+					});
+				}				
+
 				function onTabbarVisibilityChanged() {
 					if ($scope.hideTabs) {
 						$scope.tabbarHeight = 0;
@@ -3248,6 +3325,8 @@ limitations under the License.
 					for (var i = 0; i < tabItems.length; i++) {
 						if (tabItems[i] != selectedTabItem) {
 							tabItems[i].setInactive();
+						}else{
+							triggerActiveTabChanged(i, selectedTabItem);
 						}
 					}
 				};
@@ -3285,17 +3364,28 @@ limitations under the License.
 
 				$scope.ons = $scope.ons || {};
 				$scope.ons.tabbar = {};
-				$scope.ons.tabbar.setTabbarVisibility = function(visible) {
+				$scope.setTabbarVisibility = function(visible) {
 					$scope.hideTabs = !visible;
 					onTabbarVisibilityChanged();
 				};
+
+				$scope.setActiveTab = function(index){
+					if(index < 0 || index >= tabItems.length){
+						throw new Error('Cannot set tab with index ' + index + '. We have ' + tabItems.length + ' tabs.');
+					}
+
+					var tabItem = tabItems[index];
+					tabItem.setActive();
+				}
+
+				TabbarStack.add($scope);
 			}
 		};
 	});
 })();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -3342,6 +3432,7 @@ limitations under the License.
 				scope.tabIcon = scope.icon;
 
 				scope.setActive = function() {
+					element.addClass('active');
 					radioButton.checked = true;
 					tabbarController.gotSelected(scope);
 					if (scope.activeIcon) {
@@ -3350,6 +3441,7 @@ limitations under the License.
 				};
 
 				scope.setInactive = function() {
+					element.removeClass('active');
 					scope.tabIcon = scope.icon;
 				};
 
@@ -3362,8 +3454,63 @@ limitations under the License.
 	});
 })();
 
+(function() {
+	var directiveModules = angular.module('onsen.directives');
+
+	directiveModules.factory('TabbarStack', function($rootScope) {
+		var TabbarStack = Class.extend({
+			tabbars: [],
+
+			init: function() {
+				$rootScope.ons = $rootScope.ons || {};
+				$rootScope.ons.tabbar = {};				
+				$rootScope.ons.tabbar.setActiveTab = this.setActiveTab.bind(this);								
+			},
+
+			_findClosestTabbar: function($event) {
+				
+				var tabbar;
+				if ($event) {
+					var tabbarElement = $rootScope.ons.upTo($event.target, 'ons-tabbar');
+					tabbar = angular.element(tabbarElement).isolateScope();
+				} else {
+					tabbar = this.tabbars[this.tabbars.length - 1];
+				}
+
+				return tabbar;
+			},
+
+			_checkExistence: function() {
+				if (this.tabbars.length == 0) {
+					throw new Error('oops!! no tabbar registerred');
+				}
+			},
+
+			add: function(tabbar) {
+				this.tabbars.push(tabbar);
+			},
+
+			remove: function(tabbar){
+				for (var i = 0; i < this.tabbars.length; i++) {
+					if(this.tabbars[i] == tabbar){
+						this.tabbars.splice(i, 1);
+					}
+				};
+			},
+
+			setActiveTab: function(index, $event){
+				this._checkExistence();
+
+				var tabbar = this._findClosestTabbar($event);
+				tabbar.setActiveTab(index);
+			}	
+		});
+
+		return new TabbarStack();
+	});
+})();
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -3401,7 +3548,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -3454,7 +3601,7 @@ limitations under the License.
 	module.service('PredefinedPageCache', function($cacheFactory, $document) {
 		var cache = $cacheFactory('$onsenPredefinedPageCache');
 
-		var templates = $document[0].querySelectorAll('script[type="text/template"]');
+		var templates = $document[0].querySelectorAll('script[type="text/ons-template"]');
 
 		for (var i = 0; i < templates.length; i++) {
 			var template = angular.element(templates[i]);
@@ -7167,6 +7314,71 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
         };
 }());
 (function() {
+    function Viewport() {
+
+        this.PRE_IOS7_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
+        this.IOS7_VIEWPORT = "width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no";
+        this.DEFAULT_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
+        
+        this.ensureViewportElement();
+        this.platform = {};
+        this.platform.name = this.getPlatformName();
+        this.platform.version = this.getPlatformVersion();
+
+        return this;
+    };
+
+    Viewport.prototype.ensureViewportElement = function(){
+        this.viewportElement = document.querySelector('meta[name=viewport]');
+        if(!this.viewportElement){
+            this.viewportElement = document.createElement('meta');
+            this.viewportElement.name = "viewport";
+            document.head.appendChild(this.viewportElement);
+        }        
+    },
+
+    Viewport.prototype.setup = function() {
+        if (!this.viewportElement) {
+            return;
+        }
+
+        if (this.viewportElement.getAttribute('data-no-adjust') == "true") {
+            return;
+        }
+
+        if (this.platform.name == 'ios') {
+            if (this.platform.version >= 7) {
+                this.viewportElement.setAttribute('content', this.IOS7_VIEWPORT);
+            } else {
+                this.viewportElement.setAttribute('content', this.PRE_IOS7_VIEWPORT);
+            }
+        } else {
+            this.viewportElement.setAttribute('content', this.DEFAULT_VIEWPORT);
+        }
+    };
+
+    Viewport.prototype.getPlatformName = function() {
+        if (navigator.userAgent.match(/Android/i)) {
+            return "android";
+        }
+
+        if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+            return "ios";
+        }
+
+        // unknown
+        return undefined;
+    };
+
+    Viewport.prototype.getPlatformVersion = function() {
+        var start = window.navigator.userAgent.indexOf('OS ');
+        return window.Number(window.navigator.userAgent.substr(start + 3, 3).replace('_', '.'));
+    };
+
+    window.Viewport = Viewport;
+})();
+
+(function() {
 	'use strict';
 	Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function(elem, rule) {
 		Modernizr.addTest(
@@ -7197,6 +7409,24 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
 
 	// JS Global facade for Onsen UI.
 	var ons = window.ons = {
+		/**
+		 * Bootstrap this document as a Onsen UI application.
+		 *
+		 * If you want use your AngularJS module, use "ng-app" directive and "angular.module()" manually.
+		 */
+		bootstrap : function() {
+			var doc = window.document;
+			if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
+				doc.addEventListener('DOMContentLoaded', function() {
+					angular.bootstrap(doc.documentElement, ['onsen']);
+				}, false);
+			} else if (doc.documentElement) {
+				angular.bootstrap(doc.documentElement, ['onsen']);
+			} else {
+				throw new Error('Invalid state');
+			}
+		},
+
 		/**
 		 * @return {Boolean}
 		 */
@@ -7241,3 +7471,5 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
 window.addEventListener('load', function() {
     FastClick.attach(document.body);
 }, false);
+
+new Viewport().setup();

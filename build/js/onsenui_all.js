@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.3 - 2014-03-25 */
+/*! onsenui - v1.0.3 - 2014-04-02 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -20593,645 +20593,129 @@ var styleDirective = valueFn({
 })(window, document);
 
 !angular.$$csp() && angular.element(document).find('head').prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\\:form{display:block;}</style>');
-/**
- * @license AngularJS v1.2.10
- * (c) 2010-2014 Google, Inc. http://angularjs.org
- * License: MIT
- */
-(function(window, angular, undefined) {'use strict';
-
-/**
- * @ngdoc overview
- * @name ngTouch
- * @description
- *
- * # ngTouch
- *
- * The `ngTouch` module provides touch events and other helpers for touch-enabled devices.
- * The implementation is based on jQuery Mobile touch event handling 
- * ([jquerymobile.com](http://jquerymobile.com/)).
- *
- * {@installModule touch}
- *
- * See {@link ngTouch.$swipe `$swipe`} for usage.
- *
- * <div doc-module-components="ngTouch"></div>
- *
- */
-
-// define ngTouch module
-/* global -ngTouch */
-var ngTouch = angular.module('ngTouch', []);
-
-/* global ngTouch: false */
-
-    /**
-     * @ngdoc object
-     * @name ngTouch.$swipe
-     *
-     * @description
-     * The `$swipe` service is a service that abstracts the messier details of hold-and-drag swipe
-     * behavior, to make implementing swipe-related directives more convenient.
-     *
-     * Requires the {@link ngTouch `ngTouch`} module to be installed.
-     *
-     * `$swipe` is used by the `ngSwipeLeft` and `ngSwipeRight` directives in `ngTouch`, and by
-     * `ngCarousel` in a separate component.
-     *
-     * # Usage
-     * The `$swipe` service is an object with a single method: `bind`. `bind` takes an element
-     * which is to be watched for swipes, and an object with four handler functions. See the
-     * documentation for `bind` below.
-     */
-
-ngTouch.factory('$swipe', [function() {
-  // The total distance in any direction before we make the call on swipe vs. scroll.
-  var MOVE_BUFFER_RADIUS = 10;
-
-  function getCoordinates(event) {
-    var touches = event.touches && event.touches.length ? event.touches : [event];
-    var e = (event.changedTouches && event.changedTouches[0]) ||
-        (event.originalEvent && event.originalEvent.changedTouches &&
-            event.originalEvent.changedTouches[0]) ||
-        touches[0].originalEvent || touches[0];
-
-    return {
-      x: e.clientX,
-      y: e.clientY
-    };
-  }
-
-  return {
-    /**
-     * @ngdoc method
-     * @name ngTouch.$swipe#bind
-     * @methodOf ngTouch.$swipe
-     *
-     * @description
-     * The main method of `$swipe`. It takes an element to be watched for swipe motions, and an
-     * object containing event handlers.
-     *
-     * The four events are `start`, `move`, `end`, and `cancel`. `start`, `move`, and `end`
-     * receive as a parameter a coordinates object of the form `{ x: 150, y: 310 }`.
-     *
-     * `start` is called on either `mousedown` or `touchstart`. After this event, `$swipe` is
-     * watching for `touchmove` or `mousemove` events. These events are ignored until the total
-     * distance moved in either dimension exceeds a small threshold.
-     *
-     * Once this threshold is exceeded, either the horizontal or vertical delta is greater.
-     * - If the horizontal distance is greater, this is a swipe and `move` and `end` events follow.
-     * - If the vertical distance is greater, this is a scroll, and we let the browser take over.
-     *   A `cancel` event is sent.
-     *
-     * `move` is called on `mousemove` and `touchmove` after the above logic has determined that
-     * a swipe is in progress.
-     *
-     * `end` is called when a swipe is successfully completed with a `touchend` or `mouseup`.
-     *
-     * `cancel` is called either on a `touchcancel` from the browser, or when we begin scrolling
-     * as described above.
-     *
-     */
-    bind: function(element, eventHandlers) {
-      // Absolute total movement, used to control swipe vs. scroll.
-      var totalX, totalY;
-      // Coordinates of the start position.
-      var startCoords;
-      // Last event's position.
-      var lastPos;
-      // Whether a swipe is active.
-      var active = false;
-
-      element.on('touchstart mousedown', function(event) {
-        startCoords = getCoordinates(event);
-        active = true;
-        totalX = 0;
-        totalY = 0;
-        lastPos = startCoords;
-        eventHandlers['start'] && eventHandlers['start'](startCoords, event);
-      });
-
-      element.on('touchcancel', function(event) {
-        active = false;
-        eventHandlers['cancel'] && eventHandlers['cancel'](event);
-      });
-
-      element.on('touchmove mousemove', function(event) {
-        if (!active) return;
-
-        // Android will send a touchcancel if it thinks we're starting to scroll.
-        // So when the total distance (+ or - or both) exceeds 10px in either direction,
-        // we either:
-        // - On totalX > totalY, we send preventDefault() and treat this as a swipe.
-        // - On totalY > totalX, we let the browser handle it as a scroll.
-
-        if (!startCoords) return;
-        var coords = getCoordinates(event);
-
-        totalX += Math.abs(coords.x - lastPos.x);
-        totalY += Math.abs(coords.y - lastPos.y);
-
-        lastPos = coords;
-
-        if (totalX < MOVE_BUFFER_RADIUS && totalY < MOVE_BUFFER_RADIUS) {
-          return;
-        }
-
-        // One of totalX or totalY has exceeded the buffer, so decide on swipe vs. scroll.
-        if (totalY > totalX) {
-          // Allow native scrolling to take over.
-          active = false;
-          eventHandlers['cancel'] && eventHandlers['cancel'](event);
-          return;
-        } else {
-          // Prevent the browser from scrolling.
-          event.preventDefault();
-          eventHandlers['move'] && eventHandlers['move'](coords, event);
-        }
-      });
-
-      element.on('touchend mouseup', function(event) {
-        if (!active) return;
-        active = false;
-        eventHandlers['end'] && eventHandlers['end'](getCoordinates(event), event);
-      });
-    }
-  };
-}]);
-
-/* global ngTouch: false */
-
-/**
- * @ngdoc directive
- * @name ngTouch.directive:ngClick
- *
- * @description
- * A more powerful replacement for the default ngClick designed to be used on touchscreen
- * devices. Most mobile browsers wait about 300ms after a tap-and-release before sending
- * the click event. This version handles them immediately, and then prevents the
- * following click event from propagating.
- *
- * Requires the {@link ngTouch `ngTouch`} module to be installed.
- *
- * This directive can fall back to using an ordinary click event, and so works on desktop
- * browsers as well as mobile.
- *
- * This directive also sets the CSS class `ng-click-active` while the element is being held
- * down (by a mouse click or touch) so you can restyle the depressed element if you wish.
- *
- * @element ANY
- * @param {expression} ngClick {@link guide/expression Expression} to evaluate
- * upon tap. (Event object is available as `$event`)
- *
- * @example
-    <doc:example>
-      <doc:source>
-        <button ng-click="count = count + 1" ng-init="count=0">
-          Increment
-        </button>
-        count: {{ count }}
-      </doc:source>
-    </doc:example>
- */
-
-ngTouch.config(['$provide', function($provide) {
-  $provide.decorator('ngClickDirective', ['$delegate', function($delegate) {
-    // drop the default ngClick directive
-    $delegate.shift();
-    return $delegate;
-  }]);
-}]);
-
-ngTouch.directive('ngClick', ['$parse', '$timeout', '$rootElement',
-    function($parse, $timeout, $rootElement) {
-  var TAP_DURATION = 750; // Shorter than 750ms is a tap, longer is a taphold or drag.
-  var MOVE_TOLERANCE = 12; // 12px seems to work in most mobile browsers.
-  var PREVENT_DURATION = 2500; // 2.5 seconds maximum from preventGhostClick call to click
-  var CLICKBUSTER_THRESHOLD = 25; // 25 pixels in any dimension is the limit for busting clicks.
-
-  var ACTIVE_CLASS_NAME = 'ng-click-active';
-  var lastPreventedTime;
-  var touchCoordinates;
-
-
-  // TAP EVENTS AND GHOST CLICKS
-  //
-  // Why tap events?
-  // Mobile browsers detect a tap, then wait a moment (usually ~300ms) to see if you're
-  // double-tapping, and then fire a click event.
-  //
-  // This delay sucks and makes mobile apps feel unresponsive.
-  // So we detect touchstart, touchmove, touchcancel and touchend ourselves and determine when
-  // the user has tapped on something.
-  //
-  // What happens when the browser then generates a click event?
-  // The browser, of course, also detects the tap and fires a click after a delay. This results in
-  // tapping/clicking twice. So we do "clickbusting" to prevent it.
-  //
-  // How does it work?
-  // We attach global touchstart and click handlers, that run during the capture (early) phase.
-  // So the sequence for a tap is:
-  // - global touchstart: Sets an "allowable region" at the point touched.
-  // - element's touchstart: Starts a touch
-  // (- touchmove or touchcancel ends the touch, no click follows)
-  // - element's touchend: Determines if the tap is valid (didn't move too far away, didn't hold
-  //   too long) and fires the user's tap handler. The touchend also calls preventGhostClick().
-  // - preventGhostClick() removes the allowable region the global touchstart created.
-  // - The browser generates a click event.
-  // - The global click handler catches the click, and checks whether it was in an allowable region.
-  //     - If preventGhostClick was called, the region will have been removed, the click is busted.
-  //     - If the region is still there, the click proceeds normally. Therefore clicks on links and
-  //       other elements without ngTap on them work normally.
-  //
-  // This is an ugly, terrible hack!
-  // Yeah, tell me about it. The alternatives are using the slow click events, or making our users
-  // deal with the ghost clicks, so I consider this the least of evils. Fortunately Angular
-  // encapsulates this ugly logic away from the user.
-  //
-  // Why not just put click handlers on the element?
-  // We do that too, just to be sure. The problem is that the tap event might have caused the DOM
-  // to change, so that the click fires in the same position but something else is there now. So
-  // the handlers are global and care only about coordinates and not elements.
-
-  // Checks if the coordinates are close enough to be within the region.
-  function hit(x1, y1, x2, y2) {
-    return Math.abs(x1 - x2) < CLICKBUSTER_THRESHOLD && Math.abs(y1 - y2) < CLICKBUSTER_THRESHOLD;
-  }
-
-  // Checks a list of allowable regions against a click location.
-  // Returns true if the click should be allowed.
-  // Splices out the allowable region from the list after it has been used.
-  function checkAllowableRegions(touchCoordinates, x, y) {
-    for (var i = 0; i < touchCoordinates.length; i += 2) {
-      if (hit(touchCoordinates[i], touchCoordinates[i+1], x, y)) {
-        touchCoordinates.splice(i, i + 2);
-        return true; // allowable region
-      }
-    }
-    return false; // No allowable region; bust it.
-  }
-
-  // Global click handler that prevents the click if it's in a bustable zone and preventGhostClick
-  // was called recently.
-  function onClick(event) {
-    if (Date.now() - lastPreventedTime > PREVENT_DURATION) {
-      return; // Too old.
-    }
-
-    var touches = event.touches && event.touches.length ? event.touches : [event];
-    var x = touches[0].clientX;
-    var y = touches[0].clientY;
-    // Work around desktop Webkit quirk where clicking a label will fire two clicks (on the label
-    // and on the input element). Depending on the exact browser, this second click we don't want
-    // to bust has either (0,0) or negative coordinates.
-    if (x < 1 && y < 1) {
-      return; // offscreen
-    }
-
-    // Look for an allowable region containing this click.
-    // If we find one, that means it was created by touchstart and not removed by
-    // preventGhostClick, so we don't bust it.
-    if (checkAllowableRegions(touchCoordinates, x, y)) {
-      return;
-    }
-
-    // If we didn't find an allowable region, bust the click.
-    event.stopPropagation();
-    event.preventDefault();
-
-    // Blur focused form elements
-    event.target && event.target.blur();
-  }
-
-
-  // Global touchstart handler that creates an allowable region for a click event.
-  // This allowable region can be removed by preventGhostClick if we want to bust it.
-  function onTouchStart(event) {
-    var touches = event.touches && event.touches.length ? event.touches : [event];
-    var x = touches[0].clientX;
-    var y = touches[0].clientY;
-    touchCoordinates.push(x, y);
-
-    $timeout(function() {
-      // Remove the allowable region.
-      for (var i = 0; i < touchCoordinates.length; i += 2) {
-        if (touchCoordinates[i] == x && touchCoordinates[i+1] == y) {
-          touchCoordinates.splice(i, i + 2);
-          return;
-        }
-      }
-    }, PREVENT_DURATION, false);
-  }
-
-  // On the first call, attaches some event handlers. Then whenever it gets called, it creates a
-  // zone around the touchstart where clicks will get busted.
-  function preventGhostClick(x, y) {
-    if (!touchCoordinates) {
-      $rootElement[0].addEventListener('click', onClick, true);
-      $rootElement[0].addEventListener('touchstart', onTouchStart, true);
-      touchCoordinates = [];
-    }
-
-    lastPreventedTime = Date.now();
-
-    checkAllowableRegions(touchCoordinates, x, y);
-  }
-
-  // Actual linking function.
-  return function(scope, element, attr) {
-    var clickHandler = $parse(attr.ngClick),
-        tapping = false,
-        tapElement,  // Used to blur the element after a tap.
-        startTime,   // Used to check if the tap was held too long.
-        touchStartX,
-        touchStartY;
-
-    function resetState() {
-      tapping = false;
-      element.removeClass(ACTIVE_CLASS_NAME);
-    }
-
-    element.on('touchstart', function(event) {
-      tapping = true;
-      tapElement = event.target ? event.target : event.srcElement; // IE uses srcElement.
-      // Hack for Safari, which can target text nodes instead of containers.
-      if(tapElement.nodeType == 3) {
-        tapElement = tapElement.parentNode;
-      }
-
-      element.addClass(ACTIVE_CLASS_NAME);
-
-      startTime = Date.now();
-
-      var touches = event.touches && event.touches.length ? event.touches : [event];
-      var e = touches[0].originalEvent || touches[0];
-      touchStartX = e.clientX;
-      touchStartY = e.clientY;
-    });
-
-    element.on('touchmove', function(event) {
-      resetState();
-    });
-
-    element.on('touchcancel', function(event) {
-      resetState();
-    });
-
-    element.on('touchend', function(event) {
-      var diff = Date.now() - startTime;
-
-      var touches = (event.changedTouches && event.changedTouches.length) ? event.changedTouches :
-          ((event.touches && event.touches.length) ? event.touches : [event]);
-      var e = touches[0].originalEvent || touches[0];
-      var x = e.clientX;
-      var y = e.clientY;
-      var dist = Math.sqrt( Math.pow(x - touchStartX, 2) + Math.pow(y - touchStartY, 2) );
-
-      if (tapping && diff < TAP_DURATION && dist < MOVE_TOLERANCE) {
-        // Call preventGhostClick so the clickbuster will catch the corresponding click.
-        preventGhostClick(x, y);
-
-        // Blur the focused element (the button, probably) before firing the callback.
-        // This doesn't work perfectly on Android Chrome, but seems to work elsewhere.
-        // I couldn't get anything to work reliably on Android Chrome.
-        if (tapElement) {
-          tapElement.blur();
-        }
-
-        if (!angular.isDefined(attr.disabled) || attr.disabled === false) {
-          element.triggerHandler('click', [event]);
-        }
-      }
-
-      resetState();
-    });
-
-    // Hack for iOS Safari's benefit. It goes searching for onclick handlers and is liable to click
-    // something else nearby.
-    element.onclick = function(event) { };
-
-    // Actual click handler.
-    // There are three different kinds of clicks, only two of which reach this point.
-    // - On desktop browsers without touch events, their clicks will always come here.
-    // - On mobile browsers, the simulated "fast" click will call this.
-    // - But the browser's follow-up slow click will be "busted" before it reaches this handler.
-    // Therefore it's safe to use this directive on both mobile and desktop.
-    element.on('click', function(event, touchend) {
-      scope.$apply(function() {
-        clickHandler(scope, {$event: (touchend || event)});
-      });
-    });
-
-    element.on('mousedown', function(event) {
-      element.addClass(ACTIVE_CLASS_NAME);
-    });
-
-    element.on('mousemove mouseup', function(event) {
-      element.removeClass(ACTIVE_CLASS_NAME);
-    });
-
-  };
-}]);
-
-/* global ngTouch: false */
-
-/**
- * @ngdoc directive
- * @name ngTouch.directive:ngSwipeLeft
- *
- * @description
- * Specify custom behavior when an element is swiped to the left on a touchscreen device.
- * A leftward swipe is a quick, right-to-left slide of the finger.
- * Though ngSwipeLeft is designed for touch-based devices, it will work with a mouse click and drag
- * too.
- *
- * Requires the {@link ngTouch `ngTouch`} module to be installed.
- *
- * @element ANY
- * @param {expression} ngSwipeLeft {@link guide/expression Expression} to evaluate
- * upon left swipe. (Event object is available as `$event`)
- *
- * @example
-    <doc:example>
-      <doc:source>
-        <div ng-show="!showActions" ng-swipe-left="showActions = true">
-          Some list content, like an email in the inbox
-        </div>
-        <div ng-show="showActions" ng-swipe-right="showActions = false">
-          <button ng-click="reply()">Reply</button>
-          <button ng-click="delete()">Delete</button>
-        </div>
-      </doc:source>
-    </doc:example>
- */
-
-/**
- * @ngdoc directive
- * @name ngTouch.directive:ngSwipeRight
- *
- * @description
- * Specify custom behavior when an element is swiped to the right on a touchscreen device.
- * A rightward swipe is a quick, left-to-right slide of the finger.
- * Though ngSwipeRight is designed for touch-based devices, it will work with a mouse click and drag
- * too.
- *
- * Requires the {@link ngTouch `ngTouch`} module to be installed.
- *
- * @element ANY
- * @param {expression} ngSwipeRight {@link guide/expression Expression} to evaluate
- * upon right swipe. (Event object is available as `$event`)
- *
- * @example
-    <doc:example>
-      <doc:source>
-        <div ng-show="!showActions" ng-swipe-left="showActions = true">
-          Some list content, like an email in the inbox
-        </div>
-        <div ng-show="showActions" ng-swipe-right="showActions = false">
-          <button ng-click="reply()">Reply</button>
-          <button ng-click="delete()">Delete</button>
-        </div>
-      </doc:source>
-    </doc:example>
- */
-
-function makeSwipeDirective(directiveName, direction, eventName) {
-  ngTouch.directive(directiveName, ['$parse', '$swipe', function($parse, $swipe) {
-    // The maximum vertical delta for a swipe should be less than 75px.
-    var MAX_VERTICAL_DISTANCE = 75;
-    // Vertical distance should not be more than a fraction of the horizontal distance.
-    var MAX_VERTICAL_RATIO = 0.3;
-    // At least a 30px lateral motion is necessary for a swipe.
-    var MIN_HORIZONTAL_DISTANCE = 30;
-
-    return function(scope, element, attr) {
-      var swipeHandler = $parse(attr[directiveName]);
-
-      var startCoords, valid;
-
-      function validSwipe(coords) {
-        // Check that it's within the coordinates.
-        // Absolute vertical distance must be within tolerances.
-        // Horizontal distance, we take the current X - the starting X.
-        // This is negative for leftward swipes and positive for rightward swipes.
-        // After multiplying by the direction (-1 for left, +1 for right), legal swipes
-        // (ie. same direction as the directive wants) will have a positive delta and
-        // illegal ones a negative delta.
-        // Therefore this delta must be positive, and larger than the minimum.
-        if (!startCoords) return false;
-        var deltaY = Math.abs(coords.y - startCoords.y);
-        var deltaX = (coords.x - startCoords.x) * direction;
-        return valid && // Short circuit for already-invalidated swipes.
-            deltaY < MAX_VERTICAL_DISTANCE &&
-            deltaX > 0 &&
-            deltaX > MIN_HORIZONTAL_DISTANCE &&
-            deltaY / deltaX < MAX_VERTICAL_RATIO;
-      }
-
-      $swipe.bind(element, {
-        'start': function(coords, event) {
-          startCoords = coords;
-          valid = true;
-        },
-        'cancel': function(event) {
-          valid = false;
-        },
-        'end': function(coords, event) {
-          if (validSwipe(coords)) {
-            scope.$apply(function() {
-              element.triggerHandler(eventName);
-              swipeHandler(scope, {$event: event});
-            });
-          }
-        }
-      });
-    };
-  }]);
-}
-
-// Left is negative X-coordinate, right is positive.
-makeSwipeDirective('ngSwipeLeft', -1, 'swipeleft');
-makeSwipeDirective('ngSwipeRight', 1, 'swiperight');
-
-
-
-})(window, window.angular);
-angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
-
-angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/bottom_toolbar.tpl",
-    "<div class=\"onsen_bottom-toolbar topcoat-navigation-bar topcoat-navigation-bar--bottom {{modifierTemplater('topcoat-navigation-bar--*')}}\" ng-transclude></div>\n" +
+    "<div class=\"onsen_bottom-toolbar topcoat-navigation-bar topcoat-navigation-bar--bottom ons-bottom-toolbar-inner {{modifierTemplater('topcoat-navigation-bar--*')}}\" ng-transclude></div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/button.tpl",
     "<button class=\"{{item.animation}} topcoat-button--{{onsType}} effeckt-button topcoat-button no-select {{modifierTemplater('topcoat--button--*')}}\">\n" +
-    "	<span class=\"label\" ng-transclude></span>\n" +
+    "	<span class=\"label ons-button-inner\" ng-transclude></span>\n" +
     "	<span class=\"spinner topcoat-button__spinner {{modifierTemplater('topcoat-button--*__spinner')}}\"></span>\n" +
     "</button>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/checkbox.tpl",
     "<label class=\"topcoat-checkbox\" class=\"{{modifierTemplater('topcoat-checkbox--*')}}\">\n" +
     "  <input type=\"checkbox\" ng-model=\"ngModel\" ng-true-value=\"{{ngTrueValue || true}}\" ng-false-value=\"{{ngFalseValue || false}}\">\n" +
     "  <div class=\"topcoat-checkbox__checkmark {{modifierTemplater('topcoat-checkbox--*__checkmark')}}\"></div>\n" +
-    "  <span ng-transclude>\n" +
+    "  <span class=\"ons-checkbox-inner\" ng-transclude>\n" +
     "  	\n" +
     "  </span>\n" +
     "</label>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/column.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/column.tpl",
-    "<div class=\"col col-{{align}} col-{{size}} col-{{offset}}\"></div>");
+    "<div class=\"col col-{{align}} col-{{size}} col-{{offset}} ons-col-inner\"></div>\n" +
+    "");
 }]);
+})();
 
-angular.module("templates/icon.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/icon.tpl",
     "<i class=\"fa fa-{{icon}} fa-{{size}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}\"></i>");
 }]);
+})();
 
-angular.module("templates/if_orientation.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/if_orientation.tpl",
-    "<div ng-show=\"orientation == userOrientation\" ng-transclude>\n" +
+    "<div ng-show=\"orientation == userOrientation\" class=\"ons-if-orientation-inner\" ng-transclude>\n" +
     "\n" +
     "</div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/if_platform.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/if_platform.tpl",
-    "<div ng-show=\"platform == userPlatform\" ng-transclude>\n" +
+    "<div class=\"ons-if-platform-inner\" ng-show=\"platform == userPlatform\" ng-transclude>\n" +
     "\n" +
     "</div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/list.tpl",
     "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
     "	<div class=\"scroller\">\n" +
     "		<div class=\"topcoat-list {{modifierTemplater('topcoat-list--*')}}\">\n" +
-    "			<ul class=\"topcoat-list__container {{modifierTemplater('topcoat-list--*__container')}}\" ng-transclude>\n" +
+    "			<ul class=\"topcoat-list__container {{modifierTemplater('topcoat-list--*__container')}} ons-list-inner\" ng-transclude>\n" +
     "			</ul>\n" +
     "		</div>\n" +
     "	</div>\n" +
     "</div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/list_item.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/list_item.tpl",
-    "<li class=\"topcoat-list__item {{modifierTemplater('topcoat-list__item--*')}}\">\n" +
-    "</li>\n" +
+    "<li class=\"topcoat-list__item {{modifierTemplater('topcoat-list__item--*')}} ons-list-item-inner\"></li>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/navigator.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/navigator.tpl",
     "<div class=\"navigator-container\">\n" +
     "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar relative {{modifierTemplater('topcoat-navigation-bar--*')}}\">\n" +
@@ -21253,19 +20737,34 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "</div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/navigator_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/navigator_toolbar.tpl",
     "<div class=\"onse_navigator-toolbar\"></div>");
 }]);
+})();
 
-angular.module("templates/page.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/page.tpl",
-    "<div class=\"page topcoat-page {{modifierTemplater('topcoat-page--*')}}\" ng-transclude></div>\n" +
+    "<div class=\"page topcoat-page {{modifierTemplater('topcoat-page--*')}} ons-page-inner\" ng-transclude></div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/radio_button.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/radio_button.tpl",
     "<label class=\"topcoat-radio-button {{modifierTemplater('topcoat-radio-button--*')}}\">\n" +
     "	{{leftLabel}}\n" +
@@ -21275,68 +20774,97 @@ angular.module("templates/radio_button.tpl", []).run(["$templateCache", function
     "</label>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/row.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/row.tpl",
-    "<div class=\"row row-{{align}}\"></div>");
+    "<div class=\"row row-{{align}} ons-row-inner\"></div>\n" +
+    "");
 }]);
+})();
 
-angular.module("templates/scroller.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/scroller.tpl",
     "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
-    "	<div class=\"scroller\" ng-transclude>\n" +
+    "	<div class=\"scroller ons-scroller-inner\" ng-transclude>\n" +
     "		\n" +
     "	</div>\n" +
     "</div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/search_input.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/search_input.tpl",
     "<input type=\"search\" class=\"topcoat-search-input\">\n" +
     "");
 }]);
+})();
 
-angular.module("templates/select.tpl", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("templates/select.tpl",
-    "<select class=\"topcoat-text-input {{modifierTemplater('topcoat-text-input--*')}}\" ng-transclude>\n" +
-    "</select>\n" +
-    "");
-}]);
-
-angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/sliding_menu.tpl",
     "<div class=\"sliding-menu full-screen\">\n" +
     "	<div ng-cloak class=\"onsen_sliding-menu-black-mask\"></div>\n" +
-    "	<div class=\"behind full-screen\">\n" +
+    "	<div class=\"behind full-screen ons-sliding-menu-inner\">\n" +
     "	</div>\n" +
     "\n" +
-    "	<div class=\"above full-screen\">\n" +
+    "	<div class=\"above full-screen ons-sliding-menu-inner\">\n" +
     "	</div>\n" +
     "</div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/split_view.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/split_view.tpl",
     "<div class=\"sliding-menu full-screen\">\n" +
     "	<div class=\"onsen_sliding-menu-black-mask\"></div>\n" +
-    "	<div class=\"secondary full-screen\"></div>\n" +
+    "	<div class=\"secondary full-screen ons-split-view-inner\"></div>\n" +
     "\n" +
-    "	<div class=\"main full-screen\"></div>\n" +
+    "	<div class=\"main full-screen ons-split-view-inner\"></div>\n" +
     "</div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/tab_bar.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/tab_bar.tpl",
-    "<div style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content\"></div>\n" +
+    "<div style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content ons-tabbar-inner\"></div>\n" +
     "\n" +
-    "<div ng-hide=\"hideTabs\" class=\"topcoat-tab-bar full footer {{modifierTemplater('topcoat-tab-bar--*')}}\" ng-transclude></div>\n" +
+    "<div ng-hide=\"hideTabs\" class=\"topcoat-tab-bar full footer {{modifierTemplater('topcoat-tab-bar--*')}} ons-tabbar-inner\" ng-transclude></div>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/tab_bar_item.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/tab_bar_item.tpl",
     "<label class=\"topcoat-tab-bar__item no-select {{tabbarModifierTemplater('topcoat-tab-bar--*__item')}} {{modifierTemplater('topcoat-tab-bar__item--*')}}\">\n" +
     "	<input type=\"radio\" name=\"tab-bar-{{tabbarId}}\">\n" +
@@ -21349,20 +20877,31 @@ angular.module("templates/tab_bar_item.tpl", []).run(["$templateCache", function
     "</label>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/text_area.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/text_area.tpl",
     "<textarea class=\"topcoat-textarea\"></textarea>\n" +
     "");
 }]);
+})();
 
-angular.module("templates/text_input.tpl", []).run(["$templateCache", function($templateCache) {
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/text_input.tpl",
     "<input class=\"topcoat-text-input\">");
 }]);
+})();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21459,7 +20998,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21497,7 +21036,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21569,7 +21108,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21635,7 +21174,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21845,7 +21384,7 @@ limitations under the License.
 	});
 })();
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21882,7 +21421,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21924,7 +21463,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -22049,8 +21588,7 @@ limitations under the License.
 				// fix android 2.3 click event not fired some times when used with sliding menu
 				this.leftButtonContainer.bind('touchend', function() { });
 
-				this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));
-				this.attachFastClickEvent(this.leftSection[0]);
+				this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));				
 				this.rightSection.bind('click', this.onRightButtonClicked.bind(this));
 				if (scope.page) {
 					var options = {
@@ -22097,13 +21635,20 @@ limitations under the License.
 				return this.ready;
 			},
 
-			checkiOS7: function() {
+			checkiOS7: function() {				
 				if (window.device && window.device.platform) {
 					if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
 						setTimeout( this.adjustForiOS7.bind(this), 0);
 					}
 				} else {
-					document.addEventListener("deviceready", this.checkiOS7.bind(this), false);
+					var self = this;
+					document.addEventListener("deviceready", function(){
+						if(window.device && window.device.platform){
+							self.checkiOS7();
+						}else{
+							// cordova not suppoorted
+						}
+					}, false);
 				}
 			},
 
@@ -22427,9 +21972,9 @@ limitations under the License.
 				blackMask.addClass('onsen_navigator-black-mask');
 				page.append(blackMask);
 				
-				var navigatorPage = angular.element('<div></div>');				
-				navigatorPage.addClass('navigator-page page');
-				navigatorPage.append(pageContent);									
+				var navigatorPage = angular.element('<div></div>');
+				navigatorPage.addClass('navigator-page page ons-navigator-inner');
+				navigatorPage.append(pageContent);
 
 				page.append(navigatorPage);
 				return page;
@@ -22706,7 +22251,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -22740,7 +22285,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -22839,7 +22384,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -22883,7 +22428,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -22977,7 +22522,7 @@ limitations under the License.
 				pageEl.append(blackMask);
 
 				var pageContainer = angular.element('<div></div>');
-				pageContainer.addClass('screen-page__container');
+				pageContainer.addClass('screen-page__container ons-screen-inner');
 				pageEl.append(pageContainer);
 
 				pageContainer.append(pageContent);
@@ -23197,7 +22742,7 @@ limitations under the License.
 	});
 })();
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -23287,8 +22832,9 @@ limitations under the License.
 		};
 	});
 })();
+
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -23326,7 +22872,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -23363,46 +22909,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
-(function(){
-	'use strict';
-
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsSelect', function(ONSEN_CONSTANTS, OnsenUtil) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/select.tpl',
-			link: function(scope, element, attrs) {
-
-				scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
-
-			}
-		};
-	});
-})();
-
-
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -23461,7 +22968,7 @@ limitations under the License.
 						this.$abovePage = angular.element(this.abovePage);
 						this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
 						this.previousX = 0;
-						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;						
+						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
 
 						scope.$watch('maxSlideDistance', this.onMaxSlideDistanceChanged.bind(this));
 						scope.$watch('swipable', this.onSwipableChanged.bind(this));
@@ -23793,7 +23300,7 @@ limitations under the License.
 
 			_checkExistence: function() {
 				if (this.slidingMenus.length == 0) {
-					throw new Error('oops!! no navigator registerred');
+					throw new Error('oops!! no sliding-menu registerred');
 				}
 			},
 
@@ -23850,7 +23357,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24283,8 +23790,7 @@ limitations under the License.
 				$rootScope.ons.splitView.toggle = this.toggle.bind(this);				
 			},
 
-			_findClosestSplitView: function($event) {
-				// finding the right navigator
+			_findClosestSplitView: function($event) {				
 				var splitView;
 				if ($event) {
 					var splitViewElement = $rootScope.ons.upTo($event.target, 'ons-split-view');
@@ -24298,7 +23804,7 @@ limitations under the License.
 
 			_checkExistence: function() {
 				if (this.splitViews.length == 0) {
-					throw new Error('oops!! no navigator registerred');
+					throw new Error('oops!! no split-view registerred');
 				}
 			},
 
@@ -24340,7 +23846,7 @@ limitations under the License.
 	});
 })();
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24365,9 +23871,10 @@ limitations under the License.
 		return {
 			restrict: 'E',
 			replace: false,
-			transclude: true,
+			transclude: true,			
 			scope: {
-				hide: '@'
+				hide: '@',
+				onActiveTabChanged: '&'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
 			controller: function($scope, $element, $attrs) {
@@ -24387,6 +23894,13 @@ limitations under the License.
 					onTabbarVisibilityChanged();
 				});
 
+				function triggerActiveTabChanged(index, tabItem){
+					$scope.onActiveTabChanged({
+						$index: index,
+						$tabItem: tabItem
+					});
+				}				
+
 				function onTabbarVisibilityChanged() {
 					if ($scope.hideTabs) {
 						$scope.tabbarHeight = 0;
@@ -24405,6 +23919,8 @@ limitations under the License.
 					for (var i = 0; i < tabItems.length; i++) {
 						if (tabItems[i] != selectedTabItem) {
 							tabItems[i].setInactive();
+						}else{
+							triggerActiveTabChanged(i, selectedTabItem);
 						}
 					}
 				};
@@ -24442,17 +23958,28 @@ limitations under the License.
 
 				$scope.ons = $scope.ons || {};
 				$scope.ons.tabbar = {};
-				$scope.ons.tabbar.setTabbarVisibility = function(visible) {
+				$scope.setTabbarVisibility = function(visible) {
 					$scope.hideTabs = !visible;
 					onTabbarVisibilityChanged();
 				};
+
+				$scope.setActiveTab = function(index){
+					if(index < 0 || index >= tabItems.length){
+						throw new Error('Cannot set tab with index ' + index + '. We have ' + tabItems.length + ' tabs.');
+					}
+
+					var tabItem = tabItems[index];
+					tabItem.setActive();
+				}
+
+				TabbarStack.add($scope);
 			}
 		};
 	});
 })();
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24499,6 +24026,7 @@ limitations under the License.
 				scope.tabIcon = scope.icon;
 
 				scope.setActive = function() {
+					element.addClass('active');
 					radioButton.checked = true;
 					tabbarController.gotSelected(scope);
 					if (scope.activeIcon) {
@@ -24507,6 +24035,7 @@ limitations under the License.
 				};
 
 				scope.setInactive = function() {
+					element.removeClass('active');
 					scope.tabIcon = scope.icon;
 				};
 
@@ -24519,8 +24048,63 @@ limitations under the License.
 	});
 })();
 
+(function() {
+	var directiveModules = angular.module('onsen.directives');
+
+	directiveModules.factory('TabbarStack', function($rootScope) {
+		var TabbarStack = Class.extend({
+			tabbars: [],
+
+			init: function() {
+				$rootScope.ons = $rootScope.ons || {};
+				$rootScope.ons.tabbar = {};				
+				$rootScope.ons.tabbar.setActiveTab = this.setActiveTab.bind(this);								
+			},
+
+			_findClosestTabbar: function($event) {
+				
+				var tabbar;
+				if ($event) {
+					var tabbarElement = $rootScope.ons.upTo($event.target, 'ons-tabbar');
+					tabbar = angular.element(tabbarElement).isolateScope();
+				} else {
+					tabbar = this.tabbars[this.tabbars.length - 1];
+				}
+
+				return tabbar;
+			},
+
+			_checkExistence: function() {
+				if (this.tabbars.length == 0) {
+					throw new Error('oops!! no tabbar registerred');
+				}
+			},
+
+			add: function(tabbar) {
+				this.tabbars.push(tabbar);
+			},
+
+			remove: function(tabbar){
+				for (var i = 0; i < this.tabbars.length; i++) {
+					if(this.tabbars[i] == tabbar){
+						this.tabbars.splice(i, 1);
+					}
+				};
+			},
+
+			setActiveTab: function(index, $event){
+				this._checkExistence();
+
+				var tabbar = this._findClosestTabbar($event);
+				tabbar.setActiveTab(index);
+			}	
+		});
+
+		return new TabbarStack();
+	});
+})();
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24558,7 +24142,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -24611,7 +24195,7 @@ limitations under the License.
 	module.service('PredefinedPageCache', function($cacheFactory, $document) {
 		var cache = $cacheFactory('$onsenPredefinedPageCache');
 
-		var templates = $document[0].querySelectorAll('script[type="text/template"]');
+		var templates = $document[0].querySelectorAll('script[type="text/ons-template"]');
 
 		for (var i = 0; i < templates.length; i++) {
 			var template = angular.element(templates[i]);
@@ -28324,6 +27908,71 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
         };
 }());
 (function() {
+    function Viewport() {
+
+        this.PRE_IOS7_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
+        this.IOS7_VIEWPORT = "width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no";
+        this.DEFAULT_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
+        
+        this.ensureViewportElement();
+        this.platform = {};
+        this.platform.name = this.getPlatformName();
+        this.platform.version = this.getPlatformVersion();
+
+        return this;
+    };
+
+    Viewport.prototype.ensureViewportElement = function(){
+        this.viewportElement = document.querySelector('meta[name=viewport]');
+        if(!this.viewportElement){
+            this.viewportElement = document.createElement('meta');
+            this.viewportElement.name = "viewport";
+            document.head.appendChild(this.viewportElement);
+        }        
+    },
+
+    Viewport.prototype.setup = function() {
+        if (!this.viewportElement) {
+            return;
+        }
+
+        if (this.viewportElement.getAttribute('data-no-adjust') == "true") {
+            return;
+        }
+
+        if (this.platform.name == 'ios') {
+            if (this.platform.version >= 7) {
+                this.viewportElement.setAttribute('content', this.IOS7_VIEWPORT);
+            } else {
+                this.viewportElement.setAttribute('content', this.PRE_IOS7_VIEWPORT);
+            }
+        } else {
+            this.viewportElement.setAttribute('content', this.DEFAULT_VIEWPORT);
+        }
+    };
+
+    Viewport.prototype.getPlatformName = function() {
+        if (navigator.userAgent.match(/Android/i)) {
+            return "android";
+        }
+
+        if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+            return "ios";
+        }
+
+        // unknown
+        return undefined;
+    };
+
+    Viewport.prototype.getPlatformVersion = function() {
+        var start = window.navigator.userAgent.indexOf('OS ');
+        return window.Number(window.navigator.userAgent.substr(start + 3, 3).replace('_', '.'));
+    };
+
+    window.Viewport = Viewport;
+})();
+
+(function() {
 	'use strict';
 	Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function(elem, rule) {
 		Modernizr.addTest(
@@ -28354,6 +28003,24 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
 
 	// JS Global facade for Onsen UI.
 	var ons = window.ons = {
+		/**
+		 * Bootstrap this document as a Onsen UI application.
+		 *
+		 * If you want use your AngularJS module, use "ng-app" directive and "angular.module()" manually.
+		 */
+		bootstrap : function() {
+			var doc = window.document;
+			if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
+				doc.addEventListener('DOMContentLoaded', function() {
+					angular.bootstrap(doc.documentElement, ['onsen']);
+				}, false);
+			} else if (doc.documentElement) {
+				angular.bootstrap(doc.documentElement, ['onsen']);
+			} else {
+				throw new Error('Invalid state');
+			}
+		},
+
 		/**
 		 * @return {Boolean}
 		 */
@@ -28398,3 +28065,5 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
 window.addEventListener('load', function() {
     FastClick.attach(document.body);
 }, false);
+
+new Viewport().setup();
