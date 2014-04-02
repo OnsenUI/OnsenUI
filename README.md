@@ -78,7 +78,7 @@ See the current [Onsen UI docs].
 
 Run gulp task to develop Onsen UI itself with livereload.
 
-        gulp serve
+    gulp serve
 
 Access [http://0.0.0.0:8000/demo/index.html](http://0.0.0.0:8000/demo/index.html) and your code changes will be reloaded.
 
