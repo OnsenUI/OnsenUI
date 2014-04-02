@@ -40,7 +40,7 @@ limitations under the License.
         if (el.tagName.toLowerCase() == tagName) {
           return el;
         }
-      } while (el.parentNode)
+      } while (el.parentNode);
 
         return null;
     };

@@ -21,7 +21,7 @@
             return 'landscape';
           }
 
-          if (orientation == 0 || orientation == 180) {
+          if (orientation === 0 || orientation == 180) {
             return 'portrait';
           }
         }

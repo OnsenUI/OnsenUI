@@ -103,7 +103,7 @@ limitations under the License.
           } else {
             throw new Error('cannot set undefined page');
           }
-        }
+        };
 
         this.addTabItem = function(tabItem) {
           tabItems.push(tabItem);
@@ -123,7 +123,7 @@ limitations under the License.
 
           var tabItem = tabItems[index];
           tabItem.setActive();
-        }
+        };
 
         TabbarStack.add($scope);
       }

@@ -181,8 +181,6 @@ limitations under the License.
           document.addEventListener("deviceready", function(){
             if(window.device && window.device.platform){
               self.checkiOS7();
-            }else{
-              // cordova not suppoorted
             }
           }, false);
         }
@@ -494,7 +492,7 @@ limitations under the License.
           if (navigatorItem.rightButtonIconElement) {
             navigatorItem.rightButtonIconElement.remove();
           }
-        };
+        }
 
         this.container.empty();
         this.navigatorItems = [];
@@ -707,6 +705,6 @@ limitations under the License.
         };
       }
 
-    }
+    };
   });
 })();

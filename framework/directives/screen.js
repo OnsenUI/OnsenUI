@@ -234,9 +234,9 @@ limitations under the License.
           scope.$on('$destroy', function(){
             ScreenStack.removeScreen(scope);
           });
-        }
+        };
 
       }
-    }
+    };
   });
 })();

@@ -53,9 +53,6 @@
       _defineVar: function(name, object) {
         var names = name.split(/\./);
 
-        set($window, names, object);
-        set($rootScope, names, object);
-
         function set(container, names, object) {
           var name;
           for (var i = 0; i < names.length - 1; i++) {
@@ -68,6 +65,9 @@
 
           container[names[names.length - 1]] = object;
         }
+
+        set($window, names, object);
+        set($rootScope, names, object);        
       }
 
     };

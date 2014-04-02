@@ -182,7 +182,7 @@ limitations under the License.
               return false;
 
             case "portrait":
-              if (orientation == 180 || orientation == 0) {
+              if (orientation === 180 || orientation === 0) {
                 return true;
               } else {
                 return false;
@@ -190,7 +190,7 @@ limitations under the License.
               break;
 
             case "landscape":
-              if (orientation == 90 || orientation == -90) {
+              if (orientation === 90 || orientation === -90) {
                 return true;
               } else {
                 return false;
@@ -357,7 +357,7 @@ limitations under the License.
               property = BROWSER_TRANSFORMS[i];
               this.abovePage.style[property] = aboveTransform;
               this.behindPage.style[property] = behindTransform;
-            };
+            }
 
             this.behindPage.style.opacity = opacity;
             this.currentX = x;
@@ -372,7 +372,7 @@ limitations under the License.
               property = BROWSER_TRANSFORMS[i];
               this.abovePage.style[property] = aboveTransform;
               this.behindPage.style[property] = behindTransform;
-            };
+            }
 
             this.currentX = x;
           }
