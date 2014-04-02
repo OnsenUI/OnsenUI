@@ -509,7 +509,7 @@ limitations under the License.
         page.append(blackMask);
 
         var navigatorPage = angular.element('<div></div>');
-        navigatorPage.addClass('navigator-page page ons-navigator-inner');
+        navigatorPage.addClass('navigator-page topcoat-page ons-navigator-inner');
         navigatorPage.append(pageContent);
 
         page.append(navigatorPage);
@@ -646,7 +646,7 @@ limitations under the License.
         this.setLeftButton(previousNavigatorItem);
         this.animateRightButtonOut(previousNavigatorItem, currentNavigatorItem);
         currentNavigatorItem.pageScope.$destroy();
-      }					
+      }
     });
 
     return Navigator;
@@ -656,7 +656,7 @@ limitations under the License.
     return {
       restrict: 'E',
       replace: false,
-      transclude: true,			
+      transclude: true,
       scope: {
         title: '@',
         page: '@',
@@ -665,7 +665,7 @@ limitations under the License.
         rightButtonIcon: '@',
         onLeftButtonClick: '@',
         onRightButtonClick: '@'
-      },			
+      },
 
       compile: function(element, attrs, transclude) {
         var path = ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.tpl';
