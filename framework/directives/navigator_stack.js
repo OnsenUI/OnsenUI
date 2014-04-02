@@ -30,7 +30,7 @@
       },
 
       _checkExistence: function() {
-        if (this.navigators.length == 0) {
+        if (this.navigators.length === 0) {
           throw new Error('oops!! no navigator registerred');
         }
       },
@@ -44,7 +44,7 @@
           if(this.navigators[i] == navigator){
             this.navigators.splice(i, 1);
           }
-        };
+        }
       },
 
       pushPage: function(page, options, $event) {

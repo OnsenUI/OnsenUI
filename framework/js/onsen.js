@@ -1,3 +1,5 @@
+/* jshint evil:true */
+
 (function(){
   'use strict';
 

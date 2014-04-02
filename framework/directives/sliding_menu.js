@@ -89,7 +89,7 @@ limitations under the License.
           },
 
           onSwipableChanged: function(swipable){
-            if(swipable == "" || swipable == undefined){
+            if(swipable === "" || swipable === undefined){
               swipable = true;
             }else{
               swipable = (swipable == "true");
@@ -277,7 +277,7 @@ limitations under the License.
           },
 
           isClosed: function(){
-            return this.startX == 0;
+            return this.startX === 0;
           },
 
           close: function() {
@@ -321,7 +321,7 @@ limitations under the License.
               property = BROWSER_TRANSFORMS[i];
               this.abovePage.style[property] = aboveTransform;
               this.behindPage.style[property] = behindTransform;
-            };
+            }
             if(this.isReady){
               this.behindPage.style.opacity = opacity;
             }						

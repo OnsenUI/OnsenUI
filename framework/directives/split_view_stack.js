@@ -26,7 +26,7 @@
       },
 
       _checkExistence: function() {
-        if (this.splitViews.length == 0) {
+        if (this.splitViews.length === 0) {
           throw new Error('oops!! no split-view registerred');
         }
       },
@@ -40,7 +40,7 @@
           if(this.splitViews[i] == splitView){
             this.splitViews.splice(i, 1);
           }
-        };
+        }
       },
 
       setMainPage: function(page, $event) {

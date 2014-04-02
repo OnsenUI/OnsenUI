@@ -22,11 +22,6 @@ limitations under the License.
   var directives = angular.module('onsen.directives');
 
   function firePageInitEvent(pageContainer) {
-    var event = document.createEvent('HTMLEvents');
-
-    event.initEvent('pageinit', true, true);
-    findPageDOM().dispatchEvent(event);
-
     function findPageDOM() {
       if (angular.element(pageContainer).hasClass('topcoat-page')) {
         return pageContainer;
@@ -40,6 +35,10 @@ limitations under the License.
 
       return result;
     }
+    
+    var event = document.createEvent('HTMLEvents');    
+    event.initEvent('pageinit', true, true);
+    findPageDOM().dispatchEvent(event);    
   }
 
   directives.directive('onsPage', function(ONSEN_CONSTANTS, OnsenUtil) {

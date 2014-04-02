@@ -16,6 +16,8 @@ var rename = require('gulp-rename');
 var stylus = require('gulp-stylus');
 var cssminify = require('gulp-minify-css');
 var shell = require('gulp-shell');
+var jshint = require('gulp-jshint');
+
 
 ////////////////////////////////////////
 // html2js
@@ -55,6 +57,18 @@ gulp.task('prepare', ['html2js'], function() {
         gulp.src('plugin_info.json')
             .pipe(gulp.dest('build/')),
 
+        // jshint
+        gulp.src([
+            'framework/directives/templates.js',
+            'framework/directives/module.js',
+            'framework/directives/*.js',
+            'framework/services/module.js',
+            'framework/services/*.js',            
+            'framework/js/*.js'
+        ])
+            .pipe(jshint())
+            .pipe(jshint.reporter('jshint-stylish')),
+
         // onsenui.js
         gulp.src([
             'framework/directives/templates.js',
@@ -64,8 +78,8 @@ gulp.task('prepare', ['html2js'], function() {
             'framework/services/*.js',
             'framework/lib/*.js',
             'framework/js/*.js'
-        ])
-            .pipe(concat('onsenui.js'))
+        ])            
+            .pipe(concat('onsenui.js'))            
             .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
             .pipe(gulp.dest('build/js/')),
 

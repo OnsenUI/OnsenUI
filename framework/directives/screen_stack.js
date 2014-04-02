@@ -27,7 +27,7 @@
       },
 
       _checkExistence: function() {
-        if (this.screens.length == 0) {
+        if (this.screens.length === 0) {
           throw new Error('oops!! no navigator registerred');
         }
       },
@@ -41,7 +41,7 @@
           if(this.screens[i] == screen){
             this.screens.splice(i, 1);
           }
-        };
+        }
       },
 
       presentPage: function(page, $event) {

@@ -28,7 +28,7 @@
       },
 
       _checkExistence: function() {
-        if (this.slidingMenus.length == 0) {
+        if (this.slidingMenus.length === 0) {
           throw new Error('oops!! no sliding-menu registerred');
         }
       },
@@ -42,7 +42,7 @@
           if(this.slidingMenus[i] == slidingMenu){
             this.slidingMenus.splice(i, 1);
           }
-        };
+        }
       },
 
       setAbovePage: function(page, $event) {

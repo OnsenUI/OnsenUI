@@ -25,7 +25,7 @@
       },
 
       _checkExistence: function() {
-        if (this.tabbars.length == 0) {
+        if (this.tabbars.length === 0) {
           throw new Error('oops!! no tabbar registerred');
         }
       },
@@ -39,7 +39,7 @@
           if(this.tabbars[i] == tabbar){
             this.tabbars.splice(i, 1);
           }
-        };
+        }
       },
 
       setActiveTab: function(index, $event){
