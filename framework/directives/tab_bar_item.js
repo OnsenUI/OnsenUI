@@ -17,53 +17,53 @@ limitations under the License.
 
 
 (function() {
-	'use strict';
-	var directives = angular.module('onsen.directives');
+  'use strict';
+  var directives = angular.module('onsen.directives');
 
-	directives.directive('onsTabbarItem', function(ONSEN_CONSTANTS, OnsenUtil) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			require: '^onsTabbar',
-			scope: {
-				page: '@',
-				active: '@',
-				icon: '@',
-				activeIcon: '@',
-				label: '@'
-			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
-			link: function(scope, element, attrs, tabbarController) {
-				var radioButton = element[0].querySelector('input');
+  directives.directive('onsTabbarItem', function(ONSEN_CONSTANTS, OnsenUtil) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: true,
+      require: '^onsTabbar',
+      scope: {
+        page: '@',
+        active: '@',
+        icon: '@',
+        activeIcon: '@',
+        label: '@'
+      },
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
+      link: function(scope, element, attrs, tabbarController) {
+        var radioButton = element[0].querySelector('input');
 
-				scope.tabbarModifierTemplater = tabbarController.modifierTemplater;
-				scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+        scope.tabbarModifierTemplater = tabbarController.modifierTemplater;
+        scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
 
-				scope.tabbarId = tabbarController.tabbarId;
+        scope.tabbarId = tabbarController.tabbarId;
 
-				tabbarController.addTabItem(scope);
-				scope.tabIcon = scope.icon;
+        tabbarController.addTabItem(scope);
+        scope.tabIcon = scope.icon;
 
-				scope.setActive = function() {
-					element.addClass('active');
-					radioButton.checked = true;
-					tabbarController.gotSelected(scope);
-					if (scope.activeIcon) {
-						scope.tabIcon = scope.activeIcon;
-					}
-				};
+        scope.setActive = function() {
+          element.addClass('active');
+          radioButton.checked = true;
+          tabbarController.gotSelected(scope);
+          if (scope.activeIcon) {
+            scope.tabIcon = scope.activeIcon;
+          }
+        };
 
-				scope.setInactive = function() {
-					element.removeClass('active');
-					scope.tabIcon = scope.icon;
-				};
+        scope.setInactive = function() {
+          element.removeClass('active');
+          scope.tabIcon = scope.icon;
+        };
 
-				if (scope.active) {
-					scope.setActive();
-				}
+        if (scope.active) {
+          scope.setActive();
+        }
 
-			}
-		};
-	});
+      }
+    };
+  });
 })();

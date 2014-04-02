@@ -17,80 +17,80 @@ limitations under the License.
 
 
 (function() {
-	var directiveModules = angular.module('onsen.directives', ['onsen.services', 'templates-main']);
-	angular.module('onsen', ['onsen.directives']); // facade
+  var directiveModules = angular.module('onsen.directives', ['onsen.services', 'templates-main']);
+  angular.module('onsen', ['onsen.directives']); // facade
 
-	directiveModules.run(function($rootScope, $window) {
-		$rootScope.ons = window.ons;
-		$rootScope.ons.$get = function(id) {
-			id = id.replace('#', '');
-			return angular.element(document.getElementById(id)).isolateScope();
-		};
+  directiveModules.run(function($rootScope, $window) {
+    $rootScope.ons = window.ons;
+    $rootScope.ons.$get = function(id) {
+      id = id.replace('#', '');
+      return angular.element(document.getElementById(id)).isolateScope();
+    };
 
-		// Find first ancestor of el with tagName
-		// or undefined if not found
-		$rootScope.ons.upTo = function(el, tagName) {
-			tagName = tagName.toLowerCase();
+    // Find first ancestor of el with tagName
+    // or undefined if not found
+    $rootScope.ons.upTo = function(el, tagName) {
+      tagName = tagName.toLowerCase();
 
-			do {
-				if (!el) {
-					return null;
-				}
-				el = el.parentNode;
-				if (el.tagName.toLowerCase() == tagName) {
-					return el;
-				}
-			} while (el.parentNode)
+      do {
+        if (!el) {
+          return null;
+        }
+        el = el.parentNode;
+        if (el.tagName.toLowerCase() == tagName) {
+          return el;
+        }
+      } while (el.parentNode)
 
-			return null;
-		};
+        return null;
+    };
 
-		$rootScope.console = $window.console;
-		$rootScope.alert = $window.alert;
-	});
+    $rootScope.console = $window.console;
+    $rootScope.alert = $window.alert;
+  });
 
-	directiveModules.service('debugLog', function() {
-		return window.ONSEN_DEBUG ? function() {
-			console.log.apply(window.console, arguments);
-		} : function() { };
-	});
+  directiveModules.service('debugLog', function() {
+    return window.ONSEN_DEBUG ? function() {
+      console.log.apply(window.console, arguments);
+    } : function() { };
+  });
 
-	directiveModules.service('requestAnimationFrame', function() {
-		var fn = window.webkitRequestAnimationFrame || 
-			window.mozRequestAnimationFrame || 
-			window.oRequestAnimationFrame || 
-			window.msRequestAnimationFrame ||
-			window.requestAnimationFrame ||
-			function(callback) {
-				return window.setTimeout(callback, 1000 / 60); // 60fps
-			};
+  directiveModules.service('requestAnimationFrame', function() {
+    var fn = window.webkitRequestAnimationFrame || 
+             window.mozRequestAnimationFrame || 
+             window.oRequestAnimationFrame || 
+             window.msRequestAnimationFrame ||
+             window.requestAnimationFrame ||
+    function(callback) {
+      return window.setTimeout(callback, 1000 / 60); // 60fps
+    };
 
-		return fn;
-	});
+    return fn;
+  });
 
-	directiveModules.factory('ONSEN_CONSTANTS', function() {
-		var CONSTANTS = {
-			DIRECTIVE_TEMPLATE_URL: "templates"
-		};
+  directiveModules.factory('ONSEN_CONSTANTS', function() {
+    var CONSTANTS = {
+      DIRECTIVE_TEMPLATE_URL: "templates"
+    };
 
-		return CONSTANTS;
-	});
+    return CONSTANTS;
+  });
 
-	directiveModules.directive('onsDummyForInit', function($rootScope) {
-		var isReady = false;
-		return {
-			restrict: 'E',
+  directiveModules.directive('onsDummyForInit', function($rootScope) {
+    var isReady = false;
+    return {
+      restrict: 'E',
 
-			link: {
-				pre: function() {
-				},
-				post: function() {
-					if (!isReady) {
-						$rootScope.$broadcast('$ons-ready');
-						isReady = true;
-					}
-				}
-			}
-		};
-	});
+      link: {
+        pre: function() {
+        },
+        post: function() {
+          if (!isReady) {
+            $rootScope.$broadcast('$ons-ready');
+            isReady = true;
+          }
+        }
+      }
+    };
+  });
 })();

@@ -17,23 +17,23 @@ limitations under the License.
 
 
 (function(){
-	'use strict';
+  'use strict';
 
-	var directives = angular.module('onsen.directives');
+  var directives = angular.module('onsen.directives');
 
-	directives.directive('onsTextInput', function(ONSEN_CONSTANTS, OnsenUtil) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: false,
-			scope: {
-				disabled: '='
-			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
-			link: function($scope, element, attrs) {
-				element.addClass(OnsenUtil.generateModifierTemplater(attrs)('topcoat-text-input--*'));
-			}
-		};
-	});
+  directives.directive('onsTextInput', function(ONSEN_CONSTANTS, OnsenUtil) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: false,
+      scope: {
+        disabled: '='
+      },
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
+      link: function($scope, element, attrs) {
+        element.addClass(OnsenUtil.generateModifierTemplater(attrs)('topcoat-text-input--*'));
+      }
+    };
+  });
 })();
 

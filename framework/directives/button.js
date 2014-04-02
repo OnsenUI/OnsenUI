@@ -17,55 +17,55 @@ limitations under the License.
 
 
 (function(){
-	'use strict';
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  'use strict';
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsButton', function(ONSEN_CONSTANTS, OnsenUtil) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			scope: {
-				shouldSpin: '@',
-				animation: '@',
-				onsType: '@',
-				disabled: '@'
-			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
-			link: function(scope, element, attrs){
-				var effectButton = element;
-				var TYPE_PREFIX = "topcoat-button--";
-				scope.item = {};
+  directives.directive('onsButton', function(ONSEN_CONSTANTS, OnsenUtil) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: true,
+      scope: {
+        shouldSpin: '@',
+        animation: '@',
+        onsType: '@',
+        disabled: '@'
+      },
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
+      link: function(scope, element, attrs){
+        var effectButton = element;
+        var TYPE_PREFIX = "topcoat-button--";
+        scope.item = {};
 
-				scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+        scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
 
-				// if animation is not specified -> default is slide-left
-				if(scope.animation === undefined || scope.animation === ""){
-					scope.item.animation = "slide-left";
-				}
-		
-				scope.$watch('disabled', function(disabled){
-					if(disabled === "true"){
-						effectButton.attr('disabled', true);
-					}else{
-						effectButton.attr('disabled', false);
-					}
-				});
+        // if animation is not specified -> default is slide-left
+        if(scope.animation === undefined || scope.animation === ""){
+          scope.item.animation = "slide-left";
+        }
 
-				scope.$watch('animation', function(newAnimation){
-					if(newAnimation){
-						scope.item.animation = newAnimation;
-					}
-				});
+        scope.$watch('disabled', function(disabled){
+          if(disabled === "true"){
+            effectButton.attr('disabled', true);
+          }else{
+            effectButton.attr('disabled', false);
+          }
+        });
 
-				scope.$watch('shouldSpin', function(shouldSpin){
-					if(shouldSpin === "true"){
-						effectButton.attr('data-loading', true);
-					}else{
-						effectButton.removeAttr('data-loading');
-					}
-				});
-			}
-		};
-	});
+        scope.$watch('animation', function(newAnimation){
+          if(newAnimation){
+            scope.item.animation = newAnimation;
+          }
+        });
+
+        scope.$watch('shouldSpin', function(shouldSpin){
+          if(shouldSpin === "true"){
+            effectButton.attr('data-loading', true);
+          }else{
+            effectButton.removeAttr('data-loading');
+          }
+        });
+      }
+    };
+  });
 })();

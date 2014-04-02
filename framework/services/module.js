@@ -1,5 +1,5 @@
 (function(){
-	'use strict';
+  'use strict';
 
-	angular.module('onsen.services', []);
+  angular.module('onsen.services', []);
 })();

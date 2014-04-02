@@ -1,74 +1,74 @@
 (function() {
-	var directiveModules = angular.module('onsen.directives');
+  var directiveModules = angular.module('onsen.directives');
 
-	directiveModules.factory('NavigatorStack', function($rootScope) {
-		var NavigatorStack = Class.extend({
-			navigators: [],
+  directiveModules.factory('NavigatorStack', function($rootScope) {
+    var NavigatorStack = Class.extend({
+      navigators: [],
 
-			init: function() {
-				$rootScope.ons = $rootScope.ons || {};
-				$rootScope.ons.navigator = {};
-				$rootScope.ons.navigator.pushPage = this.pushPage.bind(this);
-				$rootScope.ons.navigator.popPage = this.popPage.bind(this);
-				$rootScope.ons.navigator.resetToPage = this.resetToPage.bind(this);
-			},
+      init: function() {
+        $rootScope.ons = $rootScope.ons || {};
+        $rootScope.ons.navigator = {};
+        $rootScope.ons.navigator.pushPage = this.pushPage.bind(this);
+        $rootScope.ons.navigator.popPage = this.popPage.bind(this);
+        $rootScope.ons.navigator.resetToPage = this.resetToPage.bind(this);
+      },
 
-			_findNavigator: function($event) {
-				// finding the right navigator
-				var navigator;
+      _findNavigator: function($event) {
+        // finding the right navigator
+        var navigator;
 
-				if ($event) {
-					var navigatorElement = $rootScope.ons.upTo($event.target, 'ons-navigator');
-					navigator = angular.element(navigatorElement).isolateScope();
-				}
-                  
-				if (!navigator) {
-					navigator = this.navigators[this.navigators.length - 1];
-				}
+        if ($event) {
+          var navigatorElement = $rootScope.ons.upTo($event.target, 'ons-navigator');
+          navigator = angular.element(navigatorElement).isolateScope();
+        }
 
-				return navigator;
-			},
+        if (!navigator) {
+          navigator = this.navigators[this.navigators.length - 1];
+        }
 
-			_checkExistence: function() {
-				if (this.navigators.length == 0) {
-					throw new Error('oops!! no navigator registerred');
-				}
-			},
+        return navigator;
+      },
 
-			addNavigator: function(navigator) {
-				this.navigators.push(navigator);
-			},
+      _checkExistence: function() {
+        if (this.navigators.length == 0) {
+          throw new Error('oops!! no navigator registerred');
+        }
+      },
 
-			removeNavigator: function(navigator){
-				for (var i = 0; i < this.navigators.length; i++) {
-					if(this.navigators[i] == navigator){
-						this.navigators.splice(i, 1);
-					}
-				};
-			},
+      addNavigator: function(navigator) {
+        this.navigators.push(navigator);
+      },
 
-			pushPage: function(page, options, $event) {
-				this._checkExistence();
+      removeNavigator: function(navigator){
+        for (var i = 0; i < this.navigators.length; i++) {
+          if(this.navigators[i] == navigator){
+            this.navigators.splice(i, 1);
+          }
+        };
+      },
 
-				var navigator = this._findNavigator($event);
-				navigator.pushPage(page, options);
-			},
+      pushPage: function(page, options, $event) {
+        this._checkExistence();
 
-			resetToPage: function(page, options, $event) {
-				this._checkExistence();
+        var navigator = this._findNavigator($event);
+        navigator.pushPage(page, options);
+      },
 
-				var navigator = this._findNavigator($event);
-				navigator.resetToPage(page, options);
-			},
+      resetToPage: function(page, options, $event) {
+        this._checkExistence();
 
-			popPage: function($event) {
-				this._checkExistence();
+        var navigator = this._findNavigator($event);
+        navigator.resetToPage(page, options);
+      },
 
-				var navigator = this._findNavigator($event);
-				navigator.popPage();
-			}
-		});
+      popPage: function($event) {
+        this._checkExistence();
 
-		return new NavigatorStack();
-	});
+        var navigator = this._findNavigator($event);
+        navigator.popPage();
+      }
+    });
+
+    return new NavigatorStack();
+  });
 })();

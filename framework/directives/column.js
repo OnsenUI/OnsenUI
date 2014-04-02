@@ -17,29 +17,29 @@ limitations under the License.
 
 
 (function(){
-	'use strict';
+  'use strict';
 
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsCol', function(ONSEN_CONSTANTS, $timeout) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			scope: {
-				align: '@',
-				size: '@',
-				offst: '@'
-			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/column.tpl',
-			compile: function(elt, attr, transclude) {				
-				return function(scope, elt, attr) {
-					transclude(scope.$parent, function(clone) {						
-						elt.append(clone);
-					});
-				};
-			}
-		};
-	});
+  directives.directive('onsCol', function(ONSEN_CONSTANTS, $timeout) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: true,
+      scope: {
+        align: '@',
+        size: '@',
+        offst: '@'
+      },
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/column.tpl',
+      compile: function(elt, attr, transclude) {				
+        return function(scope, elt, attr) {
+          transclude(scope.$parent, function(clone) {						
+            elt.append(clone);
+          });
+        };
+      }
+    };
+  });
 })();
 

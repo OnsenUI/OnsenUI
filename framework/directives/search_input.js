@@ -17,20 +17,20 @@ limitations under the License.
 
 
 (function(){
-	'use strict';
+  'use strict';
 
-	var directives = angular.module('onsen.directives');
+  var directives = angular.module('onsen.directives');
 
-	directives.directive('onsSearchInput', function(ONSEN_CONSTANTS, OnsenUtil) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: false,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/search_input.tpl',
-			link: function(scope, element, attrs) {
-				element.addClass(OnsenUtil.generateModifierTemplater(attrs)('topcoat-search-input--*'));
-			}
-		};
-	});
+  directives.directive('onsSearchInput', function(ONSEN_CONSTANTS, OnsenUtil) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: false,
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/search_input.tpl',
+      link: function(scope, element, attrs) {
+        element.addClass(OnsenUtil.generateModifierTemplater(attrs)('topcoat-search-input--*'));
+      }
+    };
+  });
 })();
 

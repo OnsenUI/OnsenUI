@@ -17,25 +17,25 @@ limitations under the License.
 
 
 (function() {
-	'use strict';
+  'use strict';
 
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsListItem', function(ONSEN_CONSTANTS, OnsenUtil) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list_item.tpl',
-			compile: function(elem, attrs, transcludeFn) {
-				var templater = OnsenUtil.generateModifierTemplater(attrs);
-				return function(scope, element, attrs) {
-					scope.modifierTemplater = templater;
-					transcludeFn(scope, function(clone) {
-						element.append(clone);
-					});
-				};
-			}
-		};
-	});
+  directives.directive('onsListItem', function(ONSEN_CONSTANTS, OnsenUtil) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: true,
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list_item.tpl',
+      compile: function(elem, attrs, transcludeFn) {
+        var templater = OnsenUtil.generateModifierTemplater(attrs);
+        return function(scope, element, attrs) {
+          scope.modifierTemplater = templater;
+          transcludeFn(scope, function(clone) {
+            element.append(clone);
+          });
+        };
+      }
+    };
+  });
 })();
