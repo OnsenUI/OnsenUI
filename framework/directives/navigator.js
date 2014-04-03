@@ -579,6 +579,8 @@ limitations under the License.
 
 				this.setReady(false);
 
+
+
                 if ($templateCache.get(page) != undefined) {
                     var div = document.createElement('div');
                     div.innerHTML = $templateCache.get(page);
