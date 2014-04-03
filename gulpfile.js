@@ -113,7 +113,7 @@ gulp.task('prepare', ['html2js'], function() {
             .pipe(gulp.dest('build/js/angular/')),
 
         // images copy
-        gulp.src('framework/img/*.*')
+        gulp.src(['framework/img/*.*', 'themes/img/*.*'])
             .pipe(gulp.dest('build/img/')),
 
         // theme css copy
