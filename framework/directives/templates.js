@@ -121,22 +121,22 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/navigator.tpl",
-    "<div class=\"navigator-container\">\n" +
-    "  <div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar relative {{modifierTemplater('topcoat-navigation-bar--*')}}\">\n" +
-    "    <div class=\"navigator-toolbar__content relative {{modifierTemplater('topcoat-navigation-bar--*__content')}}\">\n" +
-    "      <div class=\"onsen_navigator-item topcoat-navigation-bar__bg onsen_navigator__left-button-container transition hide {{modifierTemplater('topcoat-navigation-bar--*__bg')}}\">\n" +
-    "        <span class=\"topcoat-icon-button--quiet left-section\">\n" +
+    "<div class=\"ons-navigator\">\n" +
+    "  <div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar ons-navigator__toolbar {{modifierTemplater('topcoat-navigation-bar--*')}}\">\n" +
+    "    <div class=\"ons-navigator__toolbar-content {{modifierTemplater('topcoat-navigation-bar--*__content')}}\">\n" +
+    "      <div class=\"ons-navigator__item topcoat-navigation-bar__bg ons-navigator__left-button-container ons-navigator__left-button-container--transition ons-navigator__left-button-container--hidden {{modifierTemplater('topcoat-navigation-bar--*__bg')}}\">\n" +
+    "        <span class=\"topcoat-icon-button--quiet ons-navigator__left-section\">\n" +
     "          <i class=\"fa fa-angle-left fa-2x topcoat-navigation-bar__line-height {{modifierTemplater('topcoat-navigation-bar--*__line-height')}}\"></i>\n" +
     "        </span>\n" +
     "      </div>\n" +
-    "      <div class=\"onsen_navigator__right-button onsen_navigator-item\">\n" +
-    "        <span class=\"topcoat-icon-button--quiet right-section-icon\">\n" +
+    "      <div class=\"ons-navigator__right-button ons-navigator__item\">\n" +
+    "        <span class=\"topcoat-icon-button--quiet ons-navigator__right-section-icon\">\n" +
     "        </span>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "\n" +
-    "  <div class=\"relative navigator-content topcoat-page__bg\">\n" +
+    "  <div class=\"ons-navigator__content topcoat-page__bg\">\n" +
     "  </div>    \n" +
     "</div>\n" +
     "");

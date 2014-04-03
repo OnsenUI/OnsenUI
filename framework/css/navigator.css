@@ -25,7 +25,7 @@ ons-navigator {
   display: block;
 }
 
-.navigator-container {
+.ons-navigator {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -49,11 +49,11 @@ ons-navigator {
   overflow: hidden;
 }
 
-.navigator-toolbar {
+.ons-navigator__toolbar {
   flex: 0 0 auto;
 }
 
-.navigator-content {
+.ons-navigator__content {
   -webkit-box-ordinal-group: 1;
   -moz-box-ordinal-group: 1;    
   -webkit-box-flex: 1;
@@ -71,11 +71,11 @@ ons-navigator {
 
 }
 
-.right-section-icon {
+.ons-navigator__right-section-icon {
   height: 100%;
   display: block !important;
 }
 
-.left-section {
+.ons-navigator__left-section {
   height: 100%;
 }

@@ -107,15 +107,15 @@ limitations under the License.
 
         this.navigatorItems = [];
 
-        this.container = angular.element(element[0].querySelector('.navigator-content'));
+        this.container = angular.element(element[0].querySelector('.ons-navigator__content'));
         this.toolbar = angular.element(element[0].querySelector('.topcoat-navigation-bar'));
-        this.toolbarContent = angular.element(element[0].querySelector('.navigator-toolbar__content'));
-        this.leftSection = angular.element(this.toolbarContent[0].querySelector('.left-section'));
-        this.leftButtonContainer = angular.element(this.toolbarContent[0].querySelector('.onsen_navigator__left-button-container'));
+        this.toolbarContent = angular.element(element[0].querySelector('.ons-navigator__toolbar-content'));
+        this.leftSection = angular.element(this.toolbarContent[0].querySelector('.ons-navigator__left-section'));
+        this.leftButtonContainer = angular.element(this.toolbarContent[0].querySelector('.ons-navigator__left-button-container'));
         this.leftArrow = angular.element(this.leftButtonContainer[0].querySelector('i'));
 
-        this.rightSection = angular.element(this.toolbarContent[0].querySelector('.onsen_navigator__right-button'));
-        this.rightSectionIcon = angular.element(this.rightSection[0].querySelector('.right-section-icon'));
+        this.rightSection = angular.element(this.toolbarContent[0].querySelector('.ons-navigator__right-button'));
+        this.rightSectionIcon = angular.element(this.rightSection[0].querySelector('.ons-navigator__right-section-icon'));
 
         this.leftButtonClickFn = $parse(scope.onLeftButtonClick);
 
@@ -124,7 +124,7 @@ limitations under the License.
         // fix android 2.3 click event not fired some times when used with sliding menu
         this.leftButtonContainer.bind('touchend', function() { });
 
-        this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));				
+        this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));
         this.rightSection.bind('click', this.onRightButtonClicked.bind(this));
         if (scope.page) {
           var options = {
@@ -171,14 +171,14 @@ limitations under the License.
         return this.ready;
       },
 
-      checkiOS7: function() {				
+      checkiOS7: function() {
         if (window.device && window.device.platform) {
           if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
             setTimeout( this.adjustForiOS7.bind(this), 0);
           }
         } else {
           var self = this;
-          document.addEventListener("deviceready", function(){
+          document.addEventListener("deviceready", function() {
             if(window.device && window.device.platform){
               self.checkiOS7();
             }
@@ -195,9 +195,9 @@ limitations under the License.
         var title = outNavigatorItem.options.title;
         var inBackLabel = angular.element('<div></div>');
         inBackLabel.addClass(
-          'onsen_navigator-back-label onsen_navigator-item ' +
+          'ons-navigator__back-label ons-navigator__item ' +
           'topcoat-navigation-bar__line-height topcoat-icon-button--quiet ' +
-          'navigate_right ' +
+          'ons-navigator__back-label--navigate-right ' +
           this.modifierTemplater('topcoat-navigation-bar--*__line-height')
         );
         inBackLabel.bind('click', this.onLeftButtonClicked.bind(this));
@@ -212,8 +212,8 @@ limitations under the License.
 
         this.toolbarContent[0].offsetWidth;
         setTimeout(function(){
-          inBackLabel.removeClass('navigate_right');
-          inBackLabel.addClass('transition navigate_center');
+          inBackLabel.removeClass('ons-navigator__back-label--navigate-right');
+          inBackLabel.addClass('ons-navigator__back-label--transition ons-navigator__back-label--navigate-center');
         }, 10);
 
 
@@ -223,8 +223,8 @@ limitations under the License.
             outLabel.remove();
             outLabel.unbind(transitionEnded);
           });
-          outLabel.removeClass('navigate_center');
-          outLabel.addClass('navigate_left');
+          outLabel.removeClass('ons-navigator__back-label--navigate-center');
+          outLabel.addClass('ons-navigator__back-label--navigate-left');
         }
       },
 
@@ -243,15 +243,15 @@ limitations under the License.
           });
 
           this.toolbarContent[0].offsetWidth;
-          outLabel.removeClass('transition navigate_center');
-          outLabel.addClass('transition navigate_right');
+          outLabel.removeClass('ons-navigator__back-label--transition ons-navigator__back-label--navigate-center');
+          outLabel.addClass('ons-navigator__back-label--transition ons-navigator__back-label--navigate-right');
         }
 
 
         if (inLabel) {
           this.toolbarContent[0].offsetWidth;
-          inLabel.removeClass('navigate_left');
-          inLabel.addClass('transition navigate_center');
+          inLabel.removeClass('ons-navigator__back-label--navigate-left');
+          inLabel.addClass('ons-navigator__back-label--transition ons-navigator__back-label--navigate-center');
           inLabel.bind('click', this.onLeftButtonClicked.bind(this));
           this.attachFastClickEvent(inLabel[0]);
         }
@@ -296,9 +296,9 @@ limitations under the License.
         var inTitle = inNavigatorItem.options.title || '';
         var inTitleElement = angular.element('<span>' + inTitle + '</span>');
         inTitleElement.attr('class', 
-          'onsen_navigator-item onsen_navigator-title ' +
+          'ons-navigator__item ons-navigator__title ' +
           'topcoat-navigation-bar__title topcoat-navigation-bar__line-height ' +
-          'center transition animate-right ' +
+          'center ons-navigator__title--transition ons-navigator__title--animate-right ' +
           this.modifierTemplater('topcoat-navigation-bar--*_title') + ' ' +
           this.modifierTemplater('topcoat-navigation-bar--*_line-height')
         );
@@ -310,10 +310,10 @@ limitations under the License.
         });
         inNavigatorItem.titleElement = inTitleElement;
         setTimeout(function(){
-          inTitleElement.removeClass('animate-right');
-          inTitleElement.addClass('animate-center');
-          outTitleElement.removeClass('animate-center');
-          outTitleElement.addClass('transition animate-left');
+          inTitleElement.removeClass('ons-navigator__title--animate-right');
+          inTitleElement.addClass('ons-navigator__title--animate-center');
+          outTitleElement.removeClass('ons-navigator__title--animate-center');
+          outTitleElement.addClass('ons-navigator__title--transition ons-navigator__title--animate-left');
         }, 10);
       },
 
@@ -326,7 +326,7 @@ limitations under the License.
             rightButtonIconElement = angular.element('<i></i>');
             rightButtonIconElement.addClass(
               inNavigatorItem.options.rightButtonIcon +
-              ' topcoat-navigation-bar__line-height onsen_fade ' +
+              ' topcoat-navigation-bar__line-height ons-navigator--fade ' +
               this.modifierTemplater('topcoat-navigation-bar--*__line-height')
             );
             this.rightSectionIcon.append(rightButtonIconElement); // fix bug on ios. strange that we cant use rightSectionIcon.append() here
@@ -335,15 +335,15 @@ limitations under the License.
 
           this.rightSection[0].offsetWidth;
           setTimeout(function(){
-            rightButtonIconElement.removeClass('hide');
-            rightButtonIconElement.addClass('transition show');
-          }, 10);							
+            rightButtonIconElement.removeClass('ons-navigator__right-button-container--hidden');
+            rightButtonIconElement.addClass('ons-navigator__right-button-container--transition ons-navigator__right-button-container--visible');
+          }, 10);
         }
 
         if (outNavigatorItem && outNavigatorItem.rightButtonIconElement) {
           var rightButton = outNavigatorItem.rightButtonIconElement;
-          rightButton.removeClass('show');
-          rightButton.addClass('transition hide');
+          rightButton.removeClass('ons-navigator__right-button-container--visible');
+          rightButton.addClass('ons-navigator__right-button-container--transition ons-navigator__right-button-container--hidden');
           rightButton.bind(TRANSITION_END, function transitionEnded(e) {
             rightButton.remove();
             rightButton.unbind(transitionEnded);
@@ -356,8 +356,8 @@ limitations under the License.
         if (outNavigatorItem.rightButtonIconElement) {
           var outRightButton = outNavigatorItem.rightButtonIconElement;
           this.toolbarContent[0].offsetWidth;
-          outRightButton.removeClass('show');
-          outRightButton.addClass('transition hide');
+          outRightButton.removeClass('ons-navigator__right-button--visible');
+          outRightButton.addClass('ons-navigator__right-button--transition ons-navigator__right-button--hidden');
           outRightButton.bind(TRANSITION_END, function transitionEnded(e) {
             outRightButton.remove();
             outRightButton.unbind(transitionEnded);
@@ -367,8 +367,8 @@ limitations under the License.
           var rightButton = inNavigatorItem.rightButtonIconElement;
           this.rightSectionIcon.append(rightButton);
           this.rightSection[0].offsetWidth;
-          rightButton.removeClass('hide');
-          rightButton.addClass('transition show');
+          rightButton.removeClass('ons-navigator__right-button--hidden');
+          rightButton.addClass('ons-navigator__right-button--transition ons-navigator__right-button--visible');
         }
       },
 
@@ -408,15 +408,15 @@ limitations under the License.
         this.toolbarContent[0].offsetWidth;
         var that = this;
         setTimeout(function(){
-          that.leftButtonContainer.removeClass('hide');
-          that.leftButtonContainer.addClass('transition show');
+          that.leftButtonContainer.removeClass('ons-navigator__left-button-container--hidden');
+          that.leftButtonContainer.addClass('ons-navigator__left-button-container--transition ons-navigator__left-button-container--visible');
         }, 200);
 
       },
 
       hideBackButton: function() {
-        this.leftButtonContainer.removeClass('show');
-        this.leftButtonContainer.addClass('hide');
+        this.leftButtonContainer.removeClass('ons-navigator__left-button-container--visible');
+        this.leftButtonContainer.addClass('ons-navigator__left-button-container--hidden');
       },
 
       animateTitleOut: function(currentNavigatorItem, previousNavigatorItem) {
@@ -429,10 +429,10 @@ limitations under the License.
           outTitleElement.remove();
           outTitleElement.unbind(transitionEnded);
         });
-        outTitleElement.removeClass('animate-center');
-        outTitleElement.addClass('transition animate-right');
-        inTitleElement.removeClass('animate-left');
-        inTitleElement.addClass('animate-center');
+        outTitleElement.removeClass('ons-navigator__title--animate-center');
+        outTitleElement.addClass('ons-navigator__title--transition ons-navigator__title--animate-right');
+        inTitleElement.removeClass('ons-navigator__title--animate-left');
+        inTitleElement.addClass('ons-navigator__title--animate-center');
       },
 
       animatePageIn: function(inPage, outPage) {
@@ -443,16 +443,16 @@ limitations under the License.
 
         // wait 10ms fo reflow
         setTimeout(function(){
-          inPage.attr("class", "onsen_navigator-pager transition navigator_center");
-          outPage.attr("class", "onsen_navigator-pager transition navigate_left");
+          inPage.attr("class", "ons-navigator__pager ons-navigator__pager--transition ons-navigator__pager--navigate-center");
+          outPage.attr("class", "ons-navigator__pager ons-navigator__pager--transition ons-navigator__pager--navigate-left");
         }, 10);
 
       },
 
       animatePageOut: function(currentPage, previousPage) {
-        previousPage.attr("class", "onsen_navigator-pager navigate_left");
+        previousPage.attr("class", "ons-navigator__pager ons-navigator__pager--navigate-left");
         this.element[0].offsetWidth;
-        previousPage.attr("class", "onsen_navigator-pager transition navigator_center");
+        previousPage.attr("class", "ons-navigator__pager ons-navigator__pager--transition ons-navigator__pager--navigator-center");
 
         var that = this;
         currentPage.bind(TRANSITION_END, function transitionEnded(e) {
@@ -465,7 +465,7 @@ limitations under the License.
           that.onTransitionEnded();
         });
 
-        currentPage.attr("class", "onsen_navigator-pager transition navigate_right");
+        currentPage.attr("class", "ons-navigator__pager ons-navigator__pager--transition ons-navigator__pager--navigate-right");
       },
 
       isEmpty: function() {
@@ -501,13 +501,13 @@ limitations under the License.
 
       generatePageEl: function(pageContent, options){
         var page = angular.element('<div></div>');
-        page.addClass('onsen_navigator-pager');
+        page.addClass('ons-navigator__pager');
         var blackMask = angular.element('<div></div>');
-        blackMask.addClass('onsen_navigator-black-mask');
+        blackMask.addClass('ons-navigator__black-mask');
         page.append(blackMask);
 
         var navigatorPage = angular.element('<div></div>');
-        navigatorPage.addClass('navigator-page topcoat-page ons-navigator-inner');
+        navigatorPage.addClass('ons-navigator__page topcoat-page ons-navigator-inner');
         navigatorPage.append(pageContent);
 
         page.append(navigatorPage);
@@ -561,9 +561,9 @@ limitations under the License.
         if (!this.isEmpty()) {
           var previousNavigatorItem = this.navigatorItems[this.navigatorItems.length - 1];
           var previousPage = previousNavigatorItem.page;
-          pager.addClass('navigate_right');
+          pager.addClass('ons-navigator__pager--navigate-right');
 
-          setTimeout(function(){
+          setTimeout(function() {
             this.animatePageIn(pager, previousPage);
             this.animateTitleIn(navigatorItem, previousNavigatorItem);
 
@@ -575,9 +575,9 @@ limitations under the License.
           // root page
           var titleElement = angular.element('<div></div>');
           titleElement.addClass(
-            'onsen_navigator-item onsen_navigator-title ' +
+            'ons-navigator__item ons-navigator__title ' +
             'topcoat-navigation-bar__title topcoat-navigation-bar__line-height ' +
-            'center animate-center ' + 
+            'center ons-navigator__title--animate-center ' + 
             this.modifierTemplater('topcoat-navigation-bar--*__title') + ' ' +
             this.modifierTemplater('topcoat-navigation-bar--*__line-height')
           );
