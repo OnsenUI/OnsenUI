@@ -58,7 +58,7 @@
           platform = "window";
         }
 
-        $scope.platform = platform;				
+        $scope.platform = platform;
 
 
         attrs.$observe('onsIfPlatform', function(userPlatform) {

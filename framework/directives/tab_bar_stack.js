@@ -7,8 +7,8 @@
 
       init: function() {
         $rootScope.ons = $rootScope.ons || {};
-        $rootScope.ons.tabbar = {};				
-        $rootScope.ons.tabbar.setActiveTab = this.setActiveTab.bind(this);								
+        $rootScope.ons.tabbar = {};
+        $rootScope.ons.tabbar.setActiveTab = this.setActiveTab.bind(this);
       },
 
       _findClosestTabbar: function($event) {
@@ -47,7 +47,7 @@
 
         var tabbar = this._findClosestTabbar($event);
         tabbar.setActiveTab(index);
-      }	
+      }
     });
 
     return new TabbarStack();

@@ -15,7 +15,7 @@
         $rootScope.ons.slidingMenu.closeMenu = this.closeMenu.bind(this);
       },
 
-      _findClosestSlidingMenu: function($event) {				
+      _findClosestSlidingMenu: function($event) {
         var slidingMenu;
         if ($event) {
           var slidingMenuElement = $rootScope.ons.upTo($event.target, 'ons-sliding-menu');

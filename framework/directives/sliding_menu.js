@@ -118,7 +118,7 @@ limitations under the License.
             this.recalculateMAX();
           },
 
-          onMaxSlideDistanceChanged: function(){						
+          onMaxSlideDistanceChanged: function(){
             this.recalculateMAX();
           },
 
@@ -130,7 +130,7 @@ limitations under the License.
               }else if(maxDistance.indexOf('%') > 0){
                 maxDistance = maxDistance.replace('%', '');
                 maxDistance = parseFloat(maxDistance) / 100 * this.abovePage.clientWidth;
-              }							
+              }
             }
             if (maxDistance) {
               this.MAX = parseInt(maxDistance, 10);
@@ -146,7 +146,7 @@ limitations under the License.
           },
 
           bindEvents: function() {
-            this.hammertime = new Hammer(this.el);						
+            this.hammertime = new Hammer(this.el);
             this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
           },
 
@@ -225,14 +225,14 @@ limitations under the License.
           },
 
 
-          handleEvent: function(ev) {						
+          handleEvent: function(ev) {
             switch (ev.type) {
 
             case 'touch':
               if(this.isClosed()){
                 if(!this.isInsideSwipeTargetArea(ev.gesture.center.pageX)){
                   ev.gesture.stopDetect();
-                }	
+                }
               }
 
               break;
@@ -324,7 +324,7 @@ limitations under the License.
             }
             if(this.isReady){
               this.behindPage.style.opacity = opacity;
-            }						
+            }
             this.currentX = x;
           }
         });

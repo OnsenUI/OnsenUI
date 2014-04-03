@@ -55,7 +55,7 @@ limitations under the License.
           checkbox.bind('change', function(){
             $scope.$apply(function(){
               ngModel.$setViewValue(checkbox[0].checked);
-            });						
+            });
           });
         }
       }

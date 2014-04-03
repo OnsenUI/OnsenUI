@@ -264,7 +264,7 @@ limitations under the License.
       onLeftButtonClicked: function() {
         var onLeftButtonClick = this.getCurrentNavigatorItem().options.onLeftButtonClick;
         if (onLeftButtonClick) {
-          var onLeftButtonClickFn = $parse(onLeftButtonClick);							
+          var onLeftButtonClickFn = $parse(onLeftButtonClick);
           onLeftButtonClickFn(this.scope.$parent);
         } else {
           if (this.canPopPage()) {
@@ -671,7 +671,7 @@ limitations under the License.
         var modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
 
         return {
-          pre: function preLink(scope, iElement, iAttrs, controller){	
+          pre: function preLink(scope, iElement, iAttrs, controller){
             // Without templateUrl, we must manually link the scope
             scope.modifierTemplater = modifierTemplater;
             $compile(iElement.children())(scope);

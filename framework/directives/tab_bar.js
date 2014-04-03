@@ -24,7 +24,7 @@ limitations under the License.
     return {
       restrict: 'E',
       replace: false,
-      transclude: true,			
+      transclude: true,
       scope: {
         hide: '@',
         onActiveTabChanged: '&'
@@ -52,7 +52,7 @@ limitations under the License.
             $index: index,
             $tabItem: tabItem
           });
-        }				
+        }
 
         function onTabbarVisibilityChanged() {
           if ($scope.hideTabs) {

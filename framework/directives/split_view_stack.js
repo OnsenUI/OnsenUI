@@ -10,10 +10,10 @@
         $rootScope.ons.splitView = {};
         $rootScope.ons.splitView.setMainPage = this.setMainPage.bind(this);
         $rootScope.ons.splitView.setSecondaryPage = this.setSecondaryPage.bind(this);
-        $rootScope.ons.splitView.toggle = this.toggle.bind(this);				
+        $rootScope.ons.splitView.toggle = this.toggle.bind(this);
       },
 
-      _findClosestSplitView: function($event) {				
+      _findClosestSplitView: function($event) {
         var splitView;
         if ($event) {
           var splitViewElement = $rootScope.ons.upTo($event.target, 'ons-split-view');

@@ -80,7 +80,7 @@ limitations under the License.
             }
 
             window.setTimeout(function(){
-              this.considerChangingCollapse();							
+              this.considerChangingCollapse();
             }.bind(this), 100);
           },
 
@@ -100,7 +100,7 @@ limitations under the License.
                   var pageScope = scope.$parent.$new();
                   var pageContent = $compile(templateHTML)(pageScope);
                   page.append(pageContent);
-                  this.$behindPage.append(page);	
+                  this.$behindPage.append(page);
 
 
                   if(this.currentBehindPageElement){
@@ -222,7 +222,7 @@ limitations under the License.
                   }
                 }
 
-                return false;									
+                return false;
               }
 
               break;
@@ -230,7 +230,7 @@ limitations under the License.
 
           },
 
-          setSize: function() {						
+          setSize: function() {
             if(!scope.mainPageWidth){
               scope.mainPageWidth = "70";
             }
