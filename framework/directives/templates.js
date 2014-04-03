@@ -92,8 +92,8 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/list.tpl",
-    "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
-    "  <div class=\"scroller\">\n" +
+    "<div class=\"ons-scroller full-screen topcoat-page\" ons-scrollable>\n" +
+    "  <div class=\"ons-scroller__content ons-scroller-inner\">\n" +
     "    <div class=\"topcoat-list {{modifierTemplater('topcoat-list--*')}}\">\n" +
     "      <ul class=\"topcoat-list__container {{modifierTemplater('topcoat-list--*__container')}} ons-list-inner\" ng-transclude>\n" +
     "      </ul>\n" +
@@ -208,9 +208,8 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/scroller.tpl",
-    "<div class=\"scroller-wrapper full-screen topcoat-page\" ons-scrollable>\n" +
-    "  <div class=\"scroller ons-scroller-inner\" ng-transclude>\n" +
-    "      \n" +
+    "<div class=\"ons-scroller full-screen topcoat-page\" ons-scrollable>\n" +
+    "  <div class=\"ons-scroller__content ons-scroller-inner\" ng-transclude>\n" +
     "  </div>\n" +
     "</div>\n" +
     "");

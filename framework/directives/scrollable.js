@@ -22,23 +22,21 @@ limitations under the License.
   directives.directive('onsScrollable', function(ONSEN_CONSTANTS, $timeout) {
     return {
       restrict: 'A',
-      replace: false,
+      replace: true,
       transclude: false,
       link: function(scope, element, attrs) {
         // inifinte scroll
 
         var scrollWrapper;
-        if (!element.hasClass('scroller-wrapper')) {
-          console.error('missing .scroller-wrapper class for ons-scrollable');
+        if (!element.hasClass('ons-scroller')) {
+          console.error('missing .ons-scroller class for ons-scrollable');
           return;
         }
-
-
 
         scrollWrapper = element[0];
         var offset = parseInt(attrs.threshold) || 10;
 
-        if(scope.onScrolled){
+        if (scope.onScrolled) {
           scrollWrapper.addEventListener('scroll', function() {
             if (scope.infinitScrollEnable) {
               var scrollTopAndOffsetHeight = scrollWrapper.scrollTop + scrollWrapper.offsetHeight;
@@ -48,7 +46,7 @@ limitations under the License.
                 scope.onScrolled();
               }
             }
-          });	
+          });
         }
 
 
@@ -64,21 +62,21 @@ limitations under the License.
             });
 
             iScroll.on('scrollStart', function(e) {
-              var scrolled = iScroll.y - offset;							
-              if (scrolled < (iScroll.maxScrollY + 40) ) {
+              var scrolled = iScroll.y - offset;
+              if (scrolled < (iScroll.maxScrollY + 40)) {
                 // TODO: find a better way to know when content is upated so we can refresh
                 iScroll.refresh();
               }
             });
 
-            if(scope.onScrolled){
+            if (scope.onScrolled) {
               iScroll.on('scrollEnd', function(e) {
                 var scrolled = iScroll.y - offset;
                 if (scrolled < iScroll.maxScrollY) {
                   // console.log('we are there!');
                   scope.onScrolled();
                 }
-              });	
+              });
             }
 
           }, 500);

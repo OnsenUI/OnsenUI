@@ -16,12 +16,13 @@ limitations under the License.
 */
 
 
-.scroller-wrapper {
+.ons-scroller {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;   
 }
 
-::-webkit-scrollbar {
+.ons-scroller::-webkit-scrollbar,
+.ons-scroller > .ons-scroller__content::-webkit-scrollbar {
   display: none;
 }
  

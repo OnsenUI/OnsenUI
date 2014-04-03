@@ -23,7 +23,7 @@ limitations under the License.
   directives.directive('onsScroller', function(ONSEN_CONSTANTS, $timeout) {
     return {
       restrict: 'E',
-      replace: false,
+      replace: true,
       transclude: true,
       scope: {
         onScrolled: '&',
