@@ -10,8 +10,8 @@ angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", functi
 angular.module("templates/button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/button.tpl",
     "<button ng-class=\"'topcoat-button--{{type}}'\" class=\"{{item.animation}} effeckt-button topcoat-button no-select\">\n" +
-    "	<span class=\"label\" ng-transclude></span>\n" +
-    "	<span class=\"spinner topcoat-button__spinner\"></span>\n" +
+    "  <span class=\"label\" ng-transclude></span>\n" +
+    "  <span class=\"spinner topcoat-button__spinner\"></span>\n" +
     "</button>");
 }]);
 
@@ -21,7 +21,7 @@ angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($te
     "  <input type=\"checkbox\" ng-model=\"ngModel\" ng-true-value=\"{{ngTrueValue || true}}\" ng-false-value=\"{{ngFalseValue || false}}\">\n" +
     "  <div class=\"topcoat-checkbox__checkmark\"></div>\n" +
     "  <span ng-transclude>\n" +
-    "  	\n" +
+    "    \n" +
     "  </span>\n" +
     "</label>");
 }]);
@@ -55,42 +55,42 @@ angular.module("templates/if_platform.tpl", []).run(["$templateCache", function(
 angular.module("templates/list.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/list.tpl",
     "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
-    "	<div class=\"scroller\">\n" +
-    "		<div class=\"topcoat-list__container\">\n" +
-    "			<ul class=\"topcoat-list\" ng-transclude>\n" +
+    "  <div class=\"scroller\">\n" +
+    "    <div class=\"topcoat-list__container\">\n" +
+    "      <ul class=\"topcoat-list\" ng-transclude>\n" +
     "\n" +
-    "			</ul>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
+    "      </ul>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
     "</div>");
 }]);
 
 angular.module("templates/list_item.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/list_item.tpl",
     "<li class=\"topcoat-list__item\">\n" +
-    "		    		\n" +
+    "            \n" +
     "</li>");
 }]);
 
 angular.module("templates/navigator.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/navigator.tpl",
     "<div class=\"navigator-container\">\n" +
-    "	<div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar relative\">	 \n" +
-    "		<div class=\"navigator-toolbar__content relative\">\n" +
-    "			<div class=\"onsen_navigator-item topcoat-navigation-bar__bg onsen_navigator__left-button-container transition hide\">\n" +
-    "				<span class=\"topcoat-icon-button--quiet left-section\">\n" +
-    "					<i class=\"fa fa-angle-left fa-2x topcoat-navigation-bar__line-height\"></i>\n" +
-    "				</span>\n" +
-    "			</div>\n" +
-    "			<div class=\"onsen_navigator__right-button onsen_navigator-item\">\n" +
-    "				<span class=\"topcoat-icon-button--quiet right-section-icon\">\n" +
-    "				</span>\n" +
-    "			</div>\n" +
-    "		</div>\n" +
-    "	</div>\n" +
+    "  <div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar relative\">   \n" +
+    "    <div class=\"navigator-toolbar__content relative\">\n" +
+    "      <div class=\"onsen_navigator-item topcoat-navigation-bar__bg onsen_navigator__left-button-container transition hide\">\n" +
+    "        <span class=\"topcoat-icon-button--quiet left-section\">\n" +
+    "          <i class=\"fa fa-angle-left fa-2x topcoat-navigation-bar__line-height\"></i>\n" +
+    "        </span>\n" +
+    "      </div>\n" +
+    "      <div class=\"onsen_navigator__right-button onsen_navigator-item\">\n" +
+    "        <span class=\"topcoat-icon-button--quiet right-section-icon\">\n" +
+    "        </span>\n" +
+    "      </div>\n" +
+    "    </div>\n" +
+    "  </div>\n" +
     "\n" +
-    "	<div class=\"relative navigator-content topcoat-page__bg\">\n" +
-    "	</div>    \n" +
+    "  <div class=\"relative navigator-content topcoat-page__bg\">\n" +
+    "  </div>    \n" +
     "</div>\n" +
     "");
 }]);
@@ -108,10 +108,10 @@ angular.module("templates/page.tpl", []).run(["$templateCache", function($templa
 angular.module("templates/radio_button.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/radio_button.tpl",
     "<label class=\"topcoat-radio-button\">\n" +
-    "	{{leftLabel}}\n" +
-    "	<input type=\"radio\" name=\"{{name}}\" ng-model=\"ngModel\" value=\"{{value}}\">\n" +
-    "	<div class=\"topcoat-radio-button__checkmark\"></div>\n" +
-    "	{{rightLabel}}\n" +
+    "  {{leftLabel}}\n" +
+    "  <input type=\"radio\" name=\"{{name}}\" ng-model=\"ngModel\" value=\"{{value}}\">\n" +
+    "  <div class=\"topcoat-radio-button__checkmark\"></div>\n" +
+    "  {{rightLabel}}\n" +
     "</label>");
 }]);
 
@@ -129,9 +129,9 @@ angular.module("templates/screen.tpl", []).run(["$templateCache", function($temp
 angular.module("templates/scroller.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/scroller.tpl",
     "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
-    "	<div class=\"scroller\">\n" +
-    "		\n" +
-    "	</div>\n" +
+    "  <div class=\"scroller\">\n" +
+    "    \n" +
+    "  </div>\n" +
     "</div>");
 }]);
 
@@ -149,25 +149,25 @@ angular.module("templates/select.tpl", []).run(["$templateCache", function($temp
 angular.module("templates/sliding_menu.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/sliding_menu.tpl",
     "<div class=\"sliding-menu full-screen\">\n" +
-    "	<div ng-cloak class=\"onsen_sliding-menu-black-mask\"></div>\n" +
-    "	<div class=\"behind full-screen\">\n" +
-    "	</div>\n" +
+    "  <div ng-cloak class=\"onsen_sliding-menu-black-mask\"></div>\n" +
+    "  <div class=\"behind full-screen\">\n" +
+    "  </div>\n" +
     "\n" +
-    "	<div class=\"above full-screen\">		\n" +
-    "	</div>\n" +
+    "  <div class=\"above full-screen\">    \n" +
+    "  </div>\n" +
     "</div>");
 }]);
 
 angular.module("templates/split_view.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/split_view.tpl",
     "<div class=\"sliding-menu full-screen\">\n" +
-    "	<div class=\"onsen_sliding-menu-black-mask\"></div>\n" +
-    "	<div class=\"secondary full-screen\">		\n" +
-    "	</div>\n" +
+    "  <div class=\"onsen_sliding-menu-black-mask\"></div>\n" +
+    "  <div class=\"secondary full-screen\">    \n" +
+    "  </div>\n" +
     "\n" +
-    "	<div class=\"main full-screen\">		\n" +
-    "	</div>\n" +
-    "	\n" +
+    "  <div class=\"main full-screen\">    \n" +
+    "  </div>\n" +
+    "  \n" +
     "</div>");
 }]);
 
@@ -185,13 +185,13 @@ angular.module("templates/tab_bar.tpl", []).run(["$templateCache", function($tem
 angular.module("templates/tab_bar_item.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/tab_bar_item.tpl",
     "<label class=\"topcoat-tab-bar__item no-select\">\n" +
-    "	<input type=\"radio\" name=\"tab-bar-{{tabbarId}}\">\n" +
-    "	<button class=\"topcoat-tab-bar__button full\" ng-click=\"setActive()\">\n" +
-    "		<i ng-show=\"icon != undefined\" class=\"fa fa-2x fa-{{tabIcon}} {{tabIcon}}\"></i>\n" +
-    "		<div class=\"onsen_tab-bar__label\" ng-class=\"{ big: icon === undefined }\">\n" +
-    "			{{label}}\n" +
-    "		</div>\n" +
-    "	</button>\n" +
+    "  <input type=\"radio\" name=\"tab-bar-{{tabbarId}}\">\n" +
+    "  <button class=\"topcoat-tab-bar__button full\" ng-click=\"setActive()\">\n" +
+    "    <i ng-show=\"icon != undefined\" class=\"fa fa-2x fa-{{tabIcon}} {{tabIcon}}\"></i>\n" +
+    "    <div class=\"onsen_tab-bar__label\" ng-class=\"{ big: icon === undefined }\">\n" +
+    "      {{label}}\n" +
+    "    </div>\n" +
+    "  </button>\n" +
     "</label>\n" +
     "");
 }]);
@@ -225,60 +225,60 @@ limitations under the License.
 
 
 (function() {
-	var directiveModules = angular.module('onsen.directives', ['templates-main']); // [] -> create new module
+  var directiveModules = angular.module('onsen.directives', ['templates-main']); // [] -> create new module
 
-	directiveModules.run(function($rootScope, $window) {
-		$rootScope.ons = $rootScope.ons || {};
-		$rootScope.ons.$get = function(id) {
-			id = id.replace('#', '');
-			return angular.element(document.getElementById(id)).isolateScope();
-		};
+  directiveModules.run(function($rootScope, $window) {
+    $rootScope.ons = $rootScope.ons || {};
+    $rootScope.ons.$get = function(id) {
+      id = id.replace('#', '');
+      return angular.element(document.getElementById(id)).isolateScope();
+    };
 
-		// Find first ancestor of el with tagName
-		// or undefined if not found
-		$rootScope.ons.upTo = function(el, tagName) {
-			tagName = tagName.toLowerCase();
+    // Find first ancestor of el with tagName
+    // or undefined if not found
+    $rootScope.ons.upTo = function(el, tagName) {
+      tagName = tagName.toLowerCase();
 
-			do {
-				el = el.parentNode;
-				if (el.tagName.toLowerCase() == tagName) {
-					return el;
-				}
-			} while (el.parentNode)
+      do {
+        el = el.parentNode;
+        if (el.tagName.toLowerCase() == tagName) {
+          return el;
+        }
+      } while (el.parentNode)
 
-			return null;
-		};
+      return null;
+    };
 
-		$rootScope.console = $window.console;
-		$rootScope.alert = $window.alert;
-	});
+    $rootScope.console = $window.console;
+    $rootScope.alert = $window.alert;
+  });
 
-	directiveModules.service('debugLog', function() {
-		return window.ONSEN_DEBUG ? function() {
-			console.log.apply(window.console, arguments);
-		} : function() { };
-	});
+  directiveModules.service('debugLog', function() {
+    return window.ONSEN_DEBUG ? function() {
+      console.log.apply(window.console, arguments);
+    } : function() { };
+  });
 
-	directiveModules.service('requestAnimationFrame', function() {
-		var fn = window.webkitRequestAnimationFrame || 
-			window.mozRequestAnimationFrame || 
-			window.oRequestAnimationFrame || 
-			window.msRequestAnimationFrame ||
-			window.requestAnimationFrame ||
-			function(callback) {
-				return window.setTimeout(callback, 1000 / 60); // 60fps
-			};
+  directiveModules.service('requestAnimationFrame', function() {
+    var fn = window.webkitRequestAnimationFrame || 
+      window.mozRequestAnimationFrame || 
+      window.oRequestAnimationFrame || 
+      window.msRequestAnimationFrame ||
+      window.requestAnimationFrame ||
+      function(callback) {
+        return window.setTimeout(callback, 1000 / 60); // 60fps
+      };
 
-		return fn;
-	});
+    return fn;
+  });
 
-	directiveModules.factory('ONSEN_CONSTANTS', function() {
-		var CONSTANTS = {
-			DIRECTIVE_TEMPLATE_URL: "templates"
-		};
+  directiveModules.factory('ONSEN_CONSTANTS', function() {
+    var CONSTANTS = {
+      DIRECTIVE_TEMPLATE_URL: "templates"
+    };
 
-		return CONSTANTS;
-	});
+    return CONSTANTS;
+  });
 })();
 
 /*
@@ -300,152 +300,18 @@ limitations under the License.
 
 
 (function(){
-	'use strict';
+  'use strict';
 
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsBottomToolbar', function(ONSEN_CONSTANTS, $timeout) {
-		return {
-			restrict: 'E',
-			transclude: true,
-			replace: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/bottom_toolbar.tpl'
-		};
-	});
-})();
-
-
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
-(function(){
-	'use strict';
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsButton', function(ONSEN_CONSTANTS) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			scope: {
-				shouldSpin: '@',
-				animation: '@',
-				type: '@',
-				disabled: '@'				
-			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
-			link: function(scope, element, attrs){
-				var effectButton = element;
-				var TYPE_PREFIX = "topcoat-button--";
-				scope.item = {};				
-
-				// if animation is not specified -> default is slide-left
-				if(scope.animation === undefined || scope.animation === ""){
-					scope.item.animation = "slide-left";
-				}
-		
-				scope.$watch('disabled', function(disabled){
-					if(disabled === "true"){
-						effectButton.attr('disabled', true);
-					}else{
-						effectButton.attr('disabled', false);
-					}
-				});
-
-				scope.$watch('animation', function(newAnimation){
-					if(newAnimation){
-						scope.item.animation = newAnimation;
-					}
-				});
-
-				scope.$watch('shouldSpin', function(shouldSpin){
-					if(shouldSpin === "true"){
-						effectButton.attr('data-loading', true);
-					}else{
-						effectButton.removeAttr('data-loading');
-					}
-				});
-			}
-		};
-	});
-})();
-
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
-(function(){
-	'use strict';
-
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsCheckbox', function(ONSEN_CONSTANTS) {
-		return {
-			require: '?ngModel',
-			restrict: 'E',
-			replace: true,
-			scope: {
-				ngModel: '=',
-				ngTrueValue: '@',
-				ngFalseValue: '@'
-			},
-			transclude: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
-			link: function($scope, element, attrs, ngModel){
-				var checkbox = element.find('input');				
-				var checked = false;
-				attrs.$observe('disabled', function(disabled){
-					if(disabled === undefined){
-						checkbox.attr('disabled', false);						
-					}else{
-						checkbox.attr('disabled', true);
-					}
-				});
-
-				if(ngModel){					
-					ngModel.$render = function() {						
-						checked = ( ngModel.$viewValue == 'true' || ngModel.$viewValue == $scope.ngTrueValue );
-						checkbox.attr('checked', checked);
-					};
-
-					checkbox.bind('change', function(){
-						$scope.$apply(function(){
-							ngModel.$setViewValue(checkbox[0].checked);
-						});						
-					});
-				}
-			}
-		};
-	});
+  directives.directive('onsBottomToolbar', function(ONSEN_CONSTANTS, $timeout) {
+    return {
+      restrict: 'E',
+      transclude: true,
+      replace: true,
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/bottom_toolbar.tpl'
+    };
+  });
 })();
 
 
@@ -468,197 +334,57 @@ limitations under the License.
 
 
 (function(){
-	'use strict';
+  'use strict';
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  directives.directive('onsButton', function(ONSEN_CONSTANTS) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: true,
+      scope: {
+        shouldSpin: '@',
+        animation: '@',
+        type: '@',
+        disabled: '@'        
+      },
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
+      link: function(scope, element, attrs){
+        var effectButton = element;
+        var TYPE_PREFIX = "topcoat-button--";
+        scope.item = {};        
 
-	directives.directive('onsCol', function(ONSEN_CONSTANTS, $timeout) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			scope: {
-				align: '@',
-				size: '@',
-				offst: '@'
-			},			
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/column.tpl',
-			compile: function(elt, attr, transclude) {				
-				return function(scope, elt, attr) {
-					transclude(scope.$parent, function(clone) {						
-						elt.append(clone);
-					});
-				};
-			}
-		};
-	});
+        // if animation is not specified -> default is slide-left
+        if(scope.animation === undefined || scope.animation === ""){
+          scope.item.animation = "slide-left";
+        }
+    
+        scope.$watch('disabled', function(disabled){
+          if(disabled === "true"){
+            effectButton.attr('disabled', true);
+          }else{
+            effectButton.attr('disabled', false);
+          }
+        });
+
+        scope.$watch('animation', function(newAnimation){
+          if(newAnimation){
+            scope.item.animation = newAnimation;
+          }
+        });
+
+        scope.$watch('shouldSpin', function(shouldSpin){
+          if(shouldSpin === "true"){
+            effectButton.attr('data-loading', true);
+          }else{
+            effectButton.removeAttr('data-loading');
+          }
+        });
+      }
+    };
+  });
 })();
 
-
-(function(){
-	'use strict';
-
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsIcon', function(ONSEN_CONSTANTS) {
-		return {
-			restrict: 'E',
-			replace: true,			
-			transclude: false,
-			scope: {
-				icon: '@',
-				size: '@',
-				rotate: '@',
-				flip: '@'				
-			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/icon.tpl',
-			link: function($scope, element, attrs){
-				attrs.$observe('spin', function(spin){
-					if(spin === "true"){
-						$scope.spin = 'spin';
-					}else{
-						$scope.spin = '';
-					}
-				});	
-
-				attrs.$observe('fixedWidth', function(fixedWidth){
-					if(fixedWidth === "true"){
-						$scope.fixedWidth = 'fw';
-					}else{
-						$scope.fixedWidth = '';						
-					}
-				});				
-			}
-		};
-	});
-})();
-
-
-(function(){
-	'use strict';
-
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsIfOrientation', function(ONSEN_CONSTANTS) {
-		return {
-			restrict: 'A',
-			replace: false,
-			transclude: true,
-			scope: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_orientation.tpl',
-			link: function($scope, element, attrs) {
-
-				function getLandscapeOrPortraitFromInteger(orientation){
-					if (orientation === undefined ) {
-						return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
-					}
-
-					if (orientation == 90 || orientation == -90) {
-						return 'landscape';
-					}
-
-					if (orientation == 0 || orientation == 180) {
-						return 'portrait';
-					}
-				}
-
-				$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
-
-				window.addEventListener("orientationchange", function() {
-					$scope.$apply(function(){
-						$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
-					});
-				}, false);
-
-				window.addEventListener("resize", function() {
-					$scope.$apply(function(){
-						$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
-					});
-				}, false);
-
-				attrs.$observe('onsIfOrientation', function(userOrientation){
-					if(userOrientation){
-						$scope.userOrientation = userOrientation;
-					}
-				});
-			}
-		};
-	});
-})();
-
-
-(function() {
-	'use strict';
-
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsIfPlatform', function(ONSEN_CONSTANTS) {
-		return {
-			restrict: 'A',
-			replace: false,
-			transclude: true,
-			scope: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_platform.tpl',
-			link: function($scope, element, attrs) {
-
-				var platform;				
-
-				var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-				    // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
-				var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
-				var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-				    // At least Safari 3+: "[object HTMLElementConstructor]"
-				var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
-				var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
-
-				if(isOpera){
-					platform = "opera";
-				}
-
-				if(isFirefox){
-					platform = "firefox";
-				}
-
-				if(isSafari){
-					platform = "safari";
-				}
-
-				if(isChrome){
-					platform = "chrome";
-				}
-
-				if(isIE){
-					platform = "ie";
-				}
-
-				if (navigator.userAgent.match(/Android/i)) {
-					platform = "android";
-				}
-
-				if ((navigator.userAgent.match(/BlackBerry/i)) || (navigator.userAgent.match(/RIM Tablet OS/i)) || (navigator.userAgent.match(/BB10/i))) {
-					platform = "blackberry";
-				}
-
-				if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-					platform = "ios";
-				}
-
-				if (navigator.userAgent.match(/IEMobile/i)) {
-					platform = "window";
-				}
-
-				$scope.platform = platform;				
-
-
-				attrs.$observe('onsIfPlatform', function(userPlatform) {
-					if (userPlatform) {
-						$scope.userPlatform = userPlatform.toLowerCase();
-					}
-				});				
-			}
-		};
-	});
-})();
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
@@ -678,906 +404,48 @@ limitations under the License.
 
 
 (function(){
-	'use strict';
-
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsList', function(ONSEN_CONSTANTS, $timeout) {
-		return {
-			restrict: 'E',
-			replace: false,
-			transclude: true,			
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list.tpl'
-		};
-	});
-})();
-
-
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
-(function() {
-	'use strict';
-
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsListItem', function(ONSEN_CONSTANTS) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list_item.tpl',
-			compile: function(elem, attrs, transcludeFn) {
-				return function(scope, element, attrs) {
-					transcludeFn(scope, function(clone) {
-						element.append(clone);
-					});
-				};
-			}
-		};
-	});
-})();
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-(function() {
-	'use strict';
-	var directives = angular.module('onsen.directives');
-
-	directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, requestAnimationFrame) {
-		var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
-
-		var Navigator = Class.extend({
-			/**
-			 * @property {Array}
-			 */
-			navigatorItems: undefined,
-
-			/**
-			 * @property {DOMElement}
-			 */
-			container: undefined,
-
-			/**
-			 * @property {DOMElement}
-			 */
-			toolbar: undefined,
-
-			/**
-			 * @property {DOMElement}
-			 */
-			toolbarContent: undefined,
-
-			/**
-			 * @property {DOMElement}
-			 */
-			leftSection: undefined,
-
-			/**
-			 * @property {DOMElement}
-			 */
-			leftButtonContainer: undefined,
-
-			/**
-			 * @property {DOMElement}
-			 */
-			leftArrow: undefined,
-
-			/**
-			 * @property {DOMElement}
-			 */
-			rightSection: undefined,
-
-			/**
-			 * @property {DOMElement}
-			 */
-			rightSectionIcon: undefined,
-
-			/**
-			 * @property {Function}
-			 */
-			leftButtonClickFn: undefined,
-
-			/**
-			 * @property {DOMElement}
-			 */
-			element: undefined,
-
-			/**
-			 * @property {Object}
-			 */
-			attrs: undefined,
-
-			/**
-			 * @property {Object}
-			 */
-			scope: undefined,
-
-			/**
-			 * @param {Object} scope
-			 * @param {Object} element
-			 * @param {Object} attrs
-			 */
-			init: function(scope, element, attrs) {
-				this.scope = scope;
-				this.element = element;
-				this.attrs = attrs;
-
-				this.navigatorItems = [];
-
-				this.container = angular.element(element[0].querySelector('.navigator-content'));
-				this.toolbar = angular.element(element[0].querySelector('.topcoat-navigation-bar'));
-				this.toolbarContent = angular.element(element[0].querySelector('.navigator-toolbar__content'));
-				this.leftSection = angular.element(this.toolbarContent[0].querySelector('.left-section'));
-				this.leftButtonContainer = angular.element(this.toolbarContent[0].querySelector('.onsen_navigator__left-button-container'));
-				this.leftArrow = angular.element(this.leftButtonContainer[0].querySelector('i'));
-
-				this.rightSection = angular.element(this.toolbarContent[0].querySelector('.onsen_navigator__right-button'));
-				this.rightSectionIcon = angular.element(this.rightSection[0].querySelector('.right-section-icon'));
-
-				this.leftButtonClickFn = $parse(scope.onLeftButtonClick);
-
-				this.setReady(true);
-
-				// fix android 2.3 click event not fired some times when used with sliding menu
-				this.leftButtonContainer.bind('touchend', function() { });
-
-				this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));
-				this.attachFastClickEvent(this.leftSection[0]);
-				this.rightSection.bind('click', this.onRightButtonClicked.bind(this));
-				if (scope.page) {
-					var options = {
-						title: scope.title,
-						leftButtonIcon: scope.initialLeftButtonIcon,
-						rightButtonIcon: scope.rightButtonIcon,
-						onLeftButtonClick: scope.onLeftButtonClick,
-						onRightButtonClick: scope.onRightButtonClick
-					};
-					this.pushPage(scope.page, options);
-				}
-				this.checkiOS7();
-
-				attrs.$observe('title', function(title) {
-					if (title) {
-						this.setTitle(title);
-					}
-				}.bind(this));
-
-				this.attachScopeMethods();
-			},
-
-			attachScopeMethods: function(){
-				this.scope.pushPage = this.pushPage.bind(this);
-				this.scope.popPage = this.popPage.bind(this);
-				this.scope.resetToPage = this.resetToPage.bind(this);
-			},
-
-			attachFastClickEvent: function(el) {
-				if (el && el.nodeType) {
-					FastClick.attach(el);
-				}
-			},
-
-			onTransitionEnded: function() {
-				this.setReady(true);
-			},
-
-			setReady: function(ready) {
-				this.ready = ready;
-			},
-
-			isReady: function() {
-				return this.ready;
-			},
-
-			checkiOS7: function() {
-				if (window.device && window.device.platform) {
-					if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
-						setTimeout( this.adjustForiOS7.bind(this), 0);
-					}
-				} else {
-					document.addEventListener("deviceready", this.checkiOS7.bind(this), false);
-				}
-			},
-
-			adjustForiOS7: function() {
-				this.toolbar[0].style.height = this.toolbar[0].clientHeight + 20 + 'px';
-				this.toolbar[0].style.paddingTop = '20px';
-			},
-
-			animateBackLabelIn: function(inNavigatorItem, outNavigatorItem) {
-				var title = outNavigatorItem.options.title;
-				var inBackLabel = angular.element('<div></div>');
-				inBackLabel.addClass('onsen_navigator-back-label onsen_navigator-item topcoat-navigation-bar__line-height topcoat-icon-button--quiet navigate_right');
-				inBackLabel.bind('click', this.onLeftButtonClicked.bind(this));
-				this.attachFastClickEvent(inBackLabel[0]);
-				inNavigatorItem.backLabel = inBackLabel;
-				if (inNavigatorItem.options.leftButtonIcon) {
-					// no back label if user specify icon
-					inBackLabel[0].style.display = 'none';
-				}
-				this.toolbarContent.prepend(inBackLabel);
-				inBackLabel.text(title);
-
-				this.toolbarContent[0].offsetWidth;
-				setTimeout(function(){
-					inBackLabel.removeClass('navigate_right');
-					inBackLabel.addClass('transition navigate_center');
-				}, 10);
-				
-
-				var outLabel = outNavigatorItem.backLabel;
-				if (outLabel) {
-					outLabel.bind(TRANSITION_END, function transitionEnded(e) {
-						outLabel.remove();
-						outLabel.unbind(transitionEnded);
-					});
-					outLabel.removeClass('navigate_center');
-					outLabel.addClass('navigate_left');
-				}
-			},
-
-			animateBackLabelOut: function(inNavigatorItem, outNavigatorItem) {
-				var outLabel = outNavigatorItem.backLabel;
-				var inLabel = inNavigatorItem.backLabel;
-				this.toolbarContent.prepend(inLabel);
-
-				if (outNavigatorItem.options.leftButtonIcon) {
-					// no back label if user specify icon
-					outLabel.remove();
-				} else {
-					outLabel.bind(TRANSITION_END, function transitionEnded(e) {
-						outLabel.remove();
-						outLabel.unbind(transitionEnded);
-					});
-
-					this.toolbarContent[0].offsetWidth;
-					outLabel.removeClass('transition navigate_center');
-					outLabel.addClass('transition navigate_right');
-				}
-
-
-				if (inLabel) {
-					this.toolbarContent[0].offsetWidth;
-					inLabel.removeClass('navigate_left');
-					inLabel.addClass('transition navigate_center');
-					inLabel.bind('click', this.onLeftButtonClicked.bind(this));
-					this.attachFastClickEvent(inLabel[0]);
-				}
-			},
-
-			getCurrentNavigatorItem: function() {
-				return this.navigatorItems[this.navigatorItems.length - 1];
-			},
-
-			onLeftButtonClicked: function() {
-				var onLeftButtonClick = this.getCurrentNavigatorItem().options.onLeftButtonClick;
-				if (onLeftButtonClick) {
-					var onLeftButtonClickFn = $parse(onLeftButtonClick);							
-					onLeftButtonClickFn(this.scope.$parent);
-				} else {
-					if (this.canPopPage()) {
-						this.popPage();
-					}
-				}
-			},
-
-			onRightButtonClicked: function() {
-				var onRightButtonClick = this.getCurrentNavigatorItem().options.onRightButtonClick;
-				if (onRightButtonClick) {
-					var onRightButtonClickFn = $parse(onRightButtonClick);
-					onRightButtonClickFn(this.scope.$parent);
-				}
-			},
-
-			setTitle: function(title) { // no animation
-				if (this.isEmpty()) {
-					return;
-				}
-				var currentNavigatorItem = this.navigatorItems[this.navigatorItems.length - 1];
-				currentNavigatorItem.options.title = title;
-				if (currentNavigatorItem.titleElement) {
-					currentNavigatorItem.titleElement.text(title);
-				}
-			},
-
-			animateTitleIn: function(inNavigatorItem, outNavigatorItem) {
-				var inTitle = inNavigatorItem.options.title || '';
-				var inTitleElement = angular.element('<span>' + inTitle + '</span>');
-				inTitleElement.attr('class', 'onsen_navigator-item onsen_navigator-title topcoat-navigation-bar__title topcoat-navigation-bar__line-height center transition animate-right');
-				var outTitleElement = outNavigatorItem.titleElement;
-				outTitleElement.after(inTitleElement);
-				outTitleElement.bind(TRANSITION_END, function transitionEnded(e) {
-					outTitleElement.remove();
-					outTitleElement.unbind(transitionEnded);
-				});
-				inNavigatorItem.titleElement = inTitleElement;
-				setTimeout(function(){
-					inTitleElement.removeClass('animate-right');
-					inTitleElement.addClass('animate-center');
-					outTitleElement.removeClass('animate-center');
-					outTitleElement.addClass('transition animate-left');
-				}, 10);
-			},
-
-			animateRightButtonIn: function(inNavigatorItem, outNavigatorItem) {
-				if (inNavigatorItem.rightButtonIconElement || inNavigatorItem.options.rightButtonIcon) {
-					var rightButtonIconElement;
-					if (inNavigatorItem.rightButtonIconElement) {
-						rightButtonIconElement = inNavigatorItem.rightButtonIconElement;
-					} else {
-						rightButtonIconElement = angular.element('<i></i>');
-						rightButtonIconElement.addClass(inNavigatorItem.options.rightButtonIcon + ' topcoat-navigation-bar__line-height onsen_fade');
-						this.rightSectionIcon.append(rightButtonIconElement); // fix bug on ios. strange that we cant use rightSectionIcon.append() here
-						inNavigatorItem.rightButtonIconElement = rightButtonIconElement;
-					}
-
-					this.rightSection[0].offsetWidth;
-					setTimeout(function(){
-						rightButtonIconElement.removeClass('hide');
-						rightButtonIconElement.addClass('transition show');
-					}, 10);							
-				}
-
-				if (outNavigatorItem && outNavigatorItem.rightButtonIconElement) {
-					var rightButton = outNavigatorItem.rightButtonIconElement;
-					rightButton.removeClass('show');
-					rightButton.addClass('transition hide');
-					rightButton.bind(TRANSITION_END, function transitionEnded(e) {
-						rightButton.remove();
-						rightButton.unbind(transitionEnded);
-					});
-				}
-
-			},
-
-			animateRightButtonOut: function(inNavigatorItem, outNavigatorItem) {
-				if (outNavigatorItem.rightButtonIconElement) {
-					var outRightButton = outNavigatorItem.rightButtonIconElement;
-					this.toolbarContent[0].offsetWidth;
-					outRightButton.removeClass('show');
-					outRightButton.addClass('transition hide');
-					outRightButton.bind(TRANSITION_END, function transitionEnded(e) {
-						outRightButton.remove();
-						outRightButton.unbind(transitionEnded);
-					});
-				}
-				if (inNavigatorItem.rightButtonIconElement) {
-					var rightButton = inNavigatorItem.rightButtonIconElement;
-					this.rightSectionIcon.append(rightButton);
-					this.rightSection[0].offsetWidth;
-					rightButton.removeClass('hide');
-					rightButton.addClass('transition show');
-				}
-			},
-
-			setLeftButton: function(navigatorItem) {
-				var leftButtonIcon = navigatorItem.options.leftButtonIcon;
-				if (leftButtonIcon) {
-					this.setBackButtonIcon(leftButtonIcon);
-					this.showBackButton();
-				} else {
-					// no icon
-					if (this.canPopPage()) {
-						this.showBackButton();
-						this.setBackButtonIconAsLeftArrow();
-					} else {
-						// no icon and is root page
-						this.hideBackButton();
-					}
-				}
-			},
-
-			setBackButtonIconAsLeftArrow: function() {
-				this.leftArrow.attr('class', 'fa fa-angle-left fa-2x topcoat-navigation-bar__line-height');
-			},
-
-			setBackButtonIcon: function(iconClass) {
-				this.leftArrow.attr('class', iconClass + ' topcoat-navigation-bar__line-height');
-			},
-
-			showBackButton: function() {
-				this.toolbarContent[0].offsetWidth;
-				var that = this;
-				setTimeout(function(){
-					that.leftButtonContainer.removeClass('hide');
-					that.leftButtonContainer.addClass('transition show');
-				}, 200);
-				
-			},
-
-			hideBackButton: function() {
-				this.leftButtonContainer.removeClass('show');
-				this.leftButtonContainer.addClass('hide');
-			},
-
-			animateTitleOut: function(currentNavigatorItem, previousNavigatorItem) {
-
-				var inTitleElement = previousNavigatorItem.titleElement;
-				var outTitleElement = currentNavigatorItem.titleElement;
-				outTitleElement.after(inTitleElement);
-				this.element[0].offsetWidth;
-				outTitleElement.bind(TRANSITION_END, function transitionEnded(e) {
-					outTitleElement.remove();
-					outTitleElement.unbind(transitionEnded);
-				});
-				outTitleElement.removeClass('animate-center');
-				outTitleElement.addClass('transition animate-right');
-				inTitleElement.removeClass('animate-left');
-				inTitleElement.addClass('animate-center');
-			},
-
-			animatePageIn: function(inPage, outPage) {
-				var that = this;
-				inPage.bind(TRANSITION_END, function transitionEnded(e) {
-					that.onTransitionEnded();
-				});
-
-				// wait 10ms fo reflow
-				setTimeout(function(){
-					inPage.attr("class", "onsen_navigator-pager transition navigator_center");
-					outPage.attr("class", "onsen_navigator-pager transition navigate_left");
-				}, 10);
-				
-			},
-
-			animatePageOut: function(currentPage, previousPage) {
-				previousPage.attr("class", "onsen_navigator-pager navigate_left");
-				this.element[0].offsetWidth;
-				previousPage.attr("class", "onsen_navigator-pager transition navigator_center");
-
-				var that = this;
-				currentPage.bind(TRANSITION_END, function transitionEnded(e) {
-					var currentPageScope = currentPage.scope();
-					if(currentPageScope){
-						currentPageScope.$destroy();
-					}
-					currentPage.remove();
-					currentPage.unbind(transitionEnded);
-					that.onTransitionEnded();
-				});
-
-				currentPage.attr("class", "onsen_navigator-pager transition navigate_right");
-			},
-
-			isEmpty: function() {
-				return this.navigatorItems.length < 1;
-			},
-
-			canPopPage: function() {
-				return this.navigatorItems.length > 1;
-			},
-			
-			resetToPage: function(page, options) {
-				if (!this.isReady()) {
-					return;
-				}
-				var navigatorItem;
-				for (var i = 0; i < this.navigatorItems.length; i++) {
-					navigatorItem = this.navigatorItems[i];
-					if (navigatorItem.backLabel) {
-						navigatorItem.backLabel.remove();
-					}
-					if (navigatorItem.titleElement) {
-						navigatorItem.titleElement.remove();
-					}
-					if (navigatorItem.rightButtonIconElement) {
-						navigatorItem.rightButtonIconElement.remove();
-					}
-				};
-
-				this.container.empty();
-				this.navigatorItems = [];
-				this.pushPage(page, options);
-			},
-
-			generatePageEl: function(pageContent, options){
-				var page = angular.element('<div></div>');
-				page.addClass('onsen_navigator-pager');
-				var blackMask = angular.element('<div></div>');
-				blackMask.addClass('onsen_navigator-black-mask');
-				page.append(blackMask);
-				
-				var navigatorPage = angular.element('<div></div>');				
-				navigatorPage.addClass('navigator-page page');
-				navigatorPage.append(pageContent);									
-
-				page.append(navigatorPage);
-				return page;
-			},
-
-			compilePageEl: function(pageEl, pageScope){
-				var compiledPage = $compile(pageEl)(pageScope);
-				return compiledPage;
-			},
-
-			createPageScope: function(){
-				var pageScope = this.scope.$parent.$new();
-				return pageScope;
-			},
-
-			_pushPageDOM: function(page, pageContent, compiledPage, pageScope, options) {
-
-				var pager = compiledPage;
-				this.container.append(pager);				
-
-				if(pageContent.querySelector){
-					var navigatorToolbar = pageContent.querySelector('ons-navigator-toolbar');
-					if (navigatorToolbar) {
-						if (options === undefined) {
-							options = {};
-						}
-
-						var $navigatorToolbar = angular.element(navigatorToolbar);
-						var title = $navigatorToolbar.attr('title');
-						var leftButtonIcon = $navigatorToolbar.attr('left-button-icon');
-						var rightButtonIcon = $navigatorToolbar.attr('right-button-icon');
-						var onLeftButtonClick = $navigatorToolbar.attr('on-left-button-click');
-						var onRightButtonClick = $navigatorToolbar.attr('on-right-button-click');
-						options.title = options.title || title;
-						options.leftButtonIcon = options.leftButtonIcon || leftButtonIcon;
-						options.rightButtonIcon = options.rightButtonIcon || rightButtonIcon;
-						options.onLeftButtonClick = options.onLeftButtonClick || onLeftButtonClick;
-						options.onRightButtonClick = options.onRightButtonClick || onRightButtonClick;
-
-						$navigatorToolbar.remove();
-					}	
-				}
-					
-
-				var navigatorItem = {
-					page: pager,
-					options: options || {},
-					pageScope: pageScope
-				};
-
-				if (!this.isEmpty()) {
-					var previousNavigatorItem = this.navigatorItems[this.navigatorItems.length - 1];
-					var previousPage = previousNavigatorItem.page;
-					pager.addClass('navigate_right');
-					
-					setTimeout(function(){
-						this.animatePageIn(pager, previousPage);
-						this.animateTitleIn(navigatorItem, previousNavigatorItem);
-
-						this.animateBackLabelIn(navigatorItem, previousNavigatorItem);
-						this.animateRightButtonIn(navigatorItem, previousNavigatorItem);
-					}.bind(this), 0);
-					
-				} else {
-					// root page
-					var titleElement = angular.element('<div></div>');
-					titleElement.addClass('onsen_navigator-item onsen_navigator-title topcoat-navigation-bar__title topcoat-navigation-bar__line-height center animate-center');
-					if (options.title) {
-						titleElement.text(options.title);
-					}
-					this.toolbarContent.append(titleElement);
-					navigatorItem.titleElement = titleElement;
-					this.animateRightButtonIn(navigatorItem, null);
-					this.setReady(true);
-				}
-				this.navigatorItems.push(navigatorItem);
-				this.setLeftButton(navigatorItem);
-
-			},
-
-			pushPage: function(page, options) {
-				if (options && typeof options != "object") {
-					throw new Error('options must be an objected. You supplied ' + options);
-				}
-				if (!this.isReady()) {
-					return;
-				}
-
-				var that = this;
-
-				this.setReady(false);
-
-				$http({
-					url: page,
-					method: 'GET'
-				}).error(function(e) {
-					that.onTransitionEnded();
-					console.error(e);
-				}).success(function(data, status, headers, config) {
-					var div = document.createElement('div');
-					div.innerHTML = data; 
-					var pageContent = angular.element(div.cloneNode(true));
-					var pageEl = this.generatePageEl(pageContent, options);
-					var pageScope = this.createPageScope();
-					var compiledPage = this.compilePageEl(pageEl, pageScope);
-					this._pushPageDOM(page, div, compiledPage, pageScope, options);
-				}.bind(this)).error(function(data, status, headers, config) {
-					console.error('error', data, status);
-				});
-			},
-
-			popPage: function() {
-				if (this.navigatorItems.length < 2 || !this.isReady()) {
-					return;
-				}
-				this.setReady(false);
-
-				var currentNavigatorItem = this.navigatorItems.pop();
-				var previousNavigatorItem = this.navigatorItems[this.navigatorItems.length - 1];
-
-				var currentPage = currentNavigatorItem.page;
-				var previousPage = previousNavigatorItem.page;
-				this.animatePageOut(currentPage, previousPage);
-
-				this.animateTitleOut(currentNavigatorItem, previousNavigatorItem);
-				this.animateBackLabelOut(previousNavigatorItem, currentNavigatorItem);
-
-				this.setLeftButton(previousNavigatorItem);
-				this.animateRightButtonOut(previousNavigatorItem, currentNavigatorItem);
-				currentNavigatorItem.pageScope.$destroy();
-			}					
-		});
-
-		return Navigator;
-	});
-
-	directives.directive('onsNavigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, Navigator, $templateCache) {
-		return {
-			restrict: 'E',
-			replace: false,
-			transclude: true,			
-			scope: {
-				title: '@',
-				page: '@',
-				hideToolbar: '@',
-				initialLeftButtonIcon: '@leftButtonIcon',
-				rightButtonIcon: '@',
-				onLeftButtonClick: '@',
-				onRightButtonClick: '@'
-			},			
-
-			compile: function(element, attrs, transclude) {
-				var path = ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.tpl';
-				element.append(angular.element($templateCache.get(path))[0]);
-
-				return{
-					pre: function preLink(scope, iElement, iAttrs, controller){	
-						// Without templateUrl, we must manually link the scope
-						$compile(iElement.children())(scope);
-					},
-
-					post: function postLink(scope, iElement, attrs, controller){
-						var navigator = new Navigator(scope, iElement, attrs);
-
-						if (!attrs.page) {
-
-							var pageScope = navigator.createPageScope();				
-											
-							transclude(pageScope, function(compiledPageContent) {
-								var options = {
-									title: scope.title,
-									leftButtonIcon: scope.initialLeftButtonIcon,
-									rightButtonIcon: scope.rightButtonIcon,
-									onLeftButtonClick: scope.onLeftButtonClick,
-									onRightButtonClick: scope.onRightButtonClick
-								};
-								var compiledPage = navigator.generatePageEl(angular.element(compiledPageContent), options);
-								navigator._pushPageDOM('', compiledPageContent[0], compiledPage, pageScope, options);
-							});
-						}
-
-						NavigatorStack.addNavigator(scope);
-						scope.$on('$destroy', function(){
-							NavigatorStack.removeNavigator(scope);
-						});
-					}
-				};
-			}
-
-		}
-	});
-})();
-
-(function() {
-	var directiveModules = angular.module('onsen.directives');
-
-	directiveModules.factory('NavigatorStack', function($rootScope) {
-		var NavigatorStack = Class.extend({
-			navigators: [],
-
-			init: function() {
-				$rootScope.ons = $rootScope.ons || {};
-				$rootScope.ons.navigator = {};
-				$rootScope.ons.navigator.pushPage = this.pushPage.bind(this);
-				$rootScope.ons.navigator.popPage = this.popPage.bind(this);
-				$rootScope.ons.navigator.resetToPage = this.resetToPage.bind(this);
-			},
-
-			_findNavigator: function($event) {
-				// finding the right navigator
-				var navigator;
-				if ($event) {
-					var navigatorElement = $rootScope.ons.upTo($event.target, 'ons-navigator');
-					navigator = angular.element(navigatorElement).isolateScope();
-				} else {
-					navigator = this.navigators[this.navigators.length - 1];
-				}
-
-				return navigator;
-			},
-
-			_checkExistence: function() {
-				if (this.navigators.length == 0) {
-					throw new Error('oops!! no navigator registerred');
-				}
-			},
-
-			addNavigator: function(navigator) {
-				this.navigators.push(navigator);
-			},
-
-			removeNavigator: function(navigator){
-				for (var i = 0; i < this.navigators.length; i++) {
-					if(this.navigators[i] == navigator){
-						this.navigators.splice(i, 1);
-					}
-				};
-			},
-
-			pushPage: function(page, options, $event) {
-				this._checkExistence();
-
-				var navigator = this._findNavigator($event);
-				navigator.pushPage(page, options);
-			},
-
-			resetToPage: function(page, options, $event) {
-				this._checkExistence();
-
-				var navigator = this._findNavigator($event);
-				navigator.resetToPage(page, options);
-			},
-
-			popPage: function($event) {
-				this._checkExistence();
-
-				var navigator = this._findNavigator($event);
-				navigator.popPage();
-			}
-		});
-
-		return new NavigatorStack();
-	});
-})();
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
-(function(){
-	'use strict';
-
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsNavigatorToolbar', function(ONSEN_CONSTANTS, $timeout) {
-		return {
-			restrict: 'E',
-			replace: false,
-			transclude: false,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator_toolbar.tpl'
-		};
-	});
-})();
-
-
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
-(function() {
-	'use strict';
-
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsPage', function(ONSEN_CONSTANTS, $timeout) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/page.tpl',
-			compile: function(elt, attr, transclude) {				
-				return function(scope, elt, attr) {
-					transclude(scope, function(clone) {						
-						elt.append(clone);
-					});
-				};
-			}
-		};
-	});
-})();
-(function(){
-	'use strict';
-
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsRadioButton', function(ONSEN_CONSTANTS) {
-		return {
-			restrict: 'E',
-			replace: false,
-			scope: {
-				value: '@',
-				ngModel: '=',
-				leftLabel: '@',
-				rightLabel: '@',
-				name: '@'
-			},
-			transclude: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/radio_button.tpl',
-			link: function($scope, element, attrs){
-				var radioButton = element.find('input');
-				var checked = false;
-				attrs.$observe('disabled', function(disabled){
-					if(disabled === undefined){
-						radioButton.attr('disabled', false);						
-					}else{
-						radioButton.attr('disabled', true);
-					}
-				});				
-			}
-		};
-	});
+  'use strict';
+
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+  directives.directive('onsCheckbox', function(ONSEN_CONSTANTS) {
+    return {
+      require: '?ngModel',
+      restrict: 'E',
+      replace: true,
+      scope: {
+        ngModel: '=',
+        ngTrueValue: '@',
+        ngFalseValue: '@'
+      },
+      transclude: true,
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
+      link: function($scope, element, attrs, ngModel){
+        var checkbox = element.find('input');        
+        var checked = false;
+        attrs.$observe('disabled', function(disabled){
+          if(disabled === undefined){
+            checkbox.attr('disabled', false);            
+          }else{
+            checkbox.attr('disabled', true);
+          }
+        });
+
+        if(ngModel){          
+          ngModel.$render = function() {            
+            checked = ( ngModel.$viewValue == 'true' || ngModel.$viewValue == $scope.ngTrueValue );
+            checkbox.attr('checked', checked);
+          };
+
+          checkbox.bind('change', function(){
+            $scope.$apply(function(){
+              ngModel.$setViewValue(checkbox[0].checked);
+            });            
+          });
+        }
+      }
+    };
+  });
 })();
 
 
@@ -1600,477 +468,196 @@ limitations under the License.
 
 
 (function(){
-	'use strict';
+  'use strict';
 
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsRow', function(ONSEN_CONSTANTS, $timeout) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			scope: {
-				align: '@'
-			},			
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/row.tpl',
-			compile: function(elt, attr, transclude) {				
-				return function(scope, elt, attr) {
-					transclude(scope.$parent, function(clone) {						
-						elt.append(clone);
-					});
-				};
-			}
-		};
-	});
+  directives.directive('onsCol', function(ONSEN_CONSTANTS, $timeout) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: true,
+      scope: {
+        align: '@',
+        size: '@',
+        offst: '@'
+      },      
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/column.tpl',
+      compile: function(elt, attr, transclude) {        
+        return function(scope, elt, attr) {
+          transclude(scope.$parent, function(clone) {            
+            elt.append(clone);
+          });
+        };
+      }
+    };
+  });
 })();
 
 
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+(function(){
+  'use strict';
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-   http://www.apache.org/licenses/LICENSE-2.0
+  directives.directive('onsIcon', function(ONSEN_CONSTANTS) {
+    return {
+      restrict: 'E',
+      replace: true,      
+      transclude: false,
+      scope: {
+        icon: '@',
+        size: '@',
+        rotate: '@',
+        flip: '@'        
+      },
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/icon.tpl',
+      link: function($scope, element, attrs){
+        attrs.$observe('spin', function(spin){
+          if(spin === "true"){
+            $scope.spin = 'spin';
+          }else{
+            $scope.spin = '';
+          }
+        });  
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-(function() {
-	'use strict';
-	var directives = angular.module('onsen.directives');
-
-	directives.service('Screen', function(ONSEN_CONSTANTS, $http, $compile, ScreenStack, requestAnimationFrame, debugLog) {
-		var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
-		var TRANSITION_START = "webkitAnimationStart animationStart msAnimationStart oAnimationStart";
-
-		var Screen = Class.extend({
-			init: function(scope, element, attrs) {
-				this.screenItems = [];
-				this.scope = scope;
-				this.element = element;
-				this.attrs = attrs;
-
-				this.isReady = true;
-				this.attachMethods();
-
-				this.attrs.$observe('page', function(page) {
-					if (page) {
-					this.resetToPage(page);
-					}
-				}.bind(this));
-			},
-
-			onTransitionEnded: function() {
-				debugLog('onTransitionEnded: isReady = true');
-				this.isReady = true;
-			},
-
-			animateInBehindPage: function() {
-				var behindPage = this.screenItems[this.screenItems.length - 2].pageElement;
-				try {
-					behindPage.attr('class', 'screen-page transition modal-behind');
-				} catch(e) {
-					console.log(e);
-				}
-			},
-
-			animateInCurrentPage: function(pager) {
-				pager.attr("class", "screen-page unmodal");
-				var that = this;
-				pager.bind(TRANSITION_START, function transitionEnded() {
-					that.isReady = false;
-				});
-				pager.bind(TRANSITION_END, function transitionEnded() {
-					that.onTransitionEnded();
-				});
-
-				setTimeout(function() {
-					requestAnimationFrame(function() {
-						pager.attr("class", "screen-page transition screen-center");
-						that.animateInBehindPage();
-					});
-				}, 10);
-			},
-
-			animateOutBehindPage: function() {
-				var behindPage = this.screenItems[this.screenItems.length - 1].pageElement;
-				behindPage.attr('class', 'screen-page transition');
-			},
-
-			isEmpty: function() {
-				return this.screenItems.length < 1;
-			},
-
-			onPageAdded: function(page) {
-				var blackMask = angular.element(page[0].querySelector('.onsen_screen-black-mask'));
-				blackMask.removeClass('hide');
-			},
-
-			generatePageEl: function(pageContent){
-				var pageEl = angular.element('<div></div>');
-				pageEl.addClass('screen-page');
-
-				var blackMask = angular.element('<div></div>');
-				blackMask.addClass('onsen_screen-black-mask hide');
-				pageEl.append(blackMask);
-
-				var pageContainer = angular.element('<div></div>');
-				pageContainer.addClass('screen-page__container');
-				pageEl.append(pageContainer);
-
-				pageContainer.append(pageContent);
-				return pageEl;
-			},
-
-			compilePageEl: function(pageEl, pageScope){
-				var compiledPage = $compile(pageEl)(pageScope);
-				return compiledPage;
-			},
-
-			createPageScope: function(){
-				var pageScope = this.scope.$parent.$new();
-				return pageScope;
-			},
-
-			/**
-			 * @param {String} pageUrl
-			 * @param {DOMElement} element This element is must be ons-page element.
-			 */
-			_presentPageDOM: function(pageUrl, compiledPage, pageScope) {
-				
-				this.element.append(compiledPage);
-
-				var isAnimate = this.screenItems.length >= 1;
-				if (isAnimate) {
-					this.animateInCurrentPage(compiledPage);
-				} else {
-					debugLog('_presentPageDOM: isReady = true');
-					this.isReady = true;
-				}
-
-				var screenItem = {
-					pageUrl: pageUrl,
-					pageElement: compiledPage,
-					pageScope: pageScope
-				};
-
-				this.screenItems.push(screenItem);
-
-				setTimeout(function() {
-					this.onPageAdded(compiledPage);
-				}.bind(this), 400);
-			},
-
-			presentPage: function(page){
-				if (!this.isReady) {
-					return;
-				}
-
-				var that = this;
-
-				$http({
-					url: page,
-					method: "GET"
-				}).error(function(e) {
-					that.onTransitionEnded();
-					console.error(e);
-				}).success(function(data, status, headers, config) {
-					var pageContent = angular.element(data.trim());
-					var pageEl = this.generatePageEl(pageContent);
-					var pageScope = this.createPageScope();
-					var compiledPage = this.compilePageEl(pageEl, pageScope);
-
-					that._presentPageDOM(page, compiledPage, pageScope);
-				}.bind(this)).error(function(data, status, headers, config) {
-					console.log('error', data, status);
-				});
-			},
-
-			dismissPage: function(){
-				if (this.screenItems.length < 2 || !this.isReady) {
-					debugLog('Can\'t dismiss anymore');
-					debugLog(this.screenItems);
-					return;
-				}
-
-				var screenItem = this.screenItems.pop();
-				var currentPage = screenItem.pageElement;
-				this.animateOutBehindPage();
-				currentPage.attr("class", "screen-page transition unmodal");
-				var that = this;
-
-				currentPage.bind(TRANSITION_START, function transitionEnded() {
-					that.isReady = false;
-				});
-				currentPage.bind(TRANSITION_END, function transitionEnded() {
-					currentPage.remove();
-					that.isReady = true;
-					debugLog('dismissPage() transtion end: isReady = true');
-					screenItem.pageScope.$destroy();
-				});
-			},
-
-			resetToPage: function(page){
-				this.scope.presentPage(page);
-				for (var i = 0; i < this.screenItems.length - 1; i++) {
-					this.screenItems[i].pageElement.remove();
-				}
-			},
-
-			attachMethods: function() {
-				this.scope.presentPage = this.presentPage.bind(this);
-				this.scope.resetToPage = this.resetToPage.bind(this);
-				this.scope.dismissPage = this.dismissPage.bind(this);
-			}
-		});
-
-		return Screen;
-	});
-
-	directives.directive('onsScreen', function(ONSEN_CONSTANTS, $http, $compile, Screen, ScreenStack) {
-
-		return {
-			restrict: 'E',
-			replace: false,
-			transclude: true,
-			scope: {
-				page: '='
-			},
-
-			compile: function(element, attrs, transclude) {
-				return function(scope, element, attrs) {
-					var screen = new Screen(scope, element, attrs);
-					if (!attrs.page) {
-						
-						var pageScope = screen.createPageScope();
-				
-						transclude(pageScope, function(pageContent) {
-							var pageEl = screen.generatePageEl(pageContent);
-							screen._presentPageDOM('', pageEl, pageScope);
-						});
-					}
-					ScreenStack.addScreen(scope);
-					scope.$on('$destroy', function(){
-						ScreenStack.removeScreen(scope);
-					});
-				}
-				
-			}
-		}
-	});
+        attrs.$observe('fixedWidth', function(fixedWidth){
+          if(fixedWidth === "true"){
+            $scope.fixedWidth = 'fw';
+          }else{
+            $scope.fixedWidth = '';            
+          }
+        });        
+      }
+    };
+  });
 })();
 
-(function() {
-	var directiveModules = angular.module('onsen.directives');
 
-	directiveModules.factory('ScreenStack', function($rootScope) {
-		var ScreenStack = Class.extend({
-			screens: [],
+(function(){
+  'use strict';
 
-			init: function() {
-				$rootScope.ons = $rootScope.ons || {};
-				$rootScope.ons.screen = {};
-				$rootScope.ons.screen.presentPage = this.presentPage.bind(this);
-				$rootScope.ons.screen.dismissPage = this.dismissPage.bind(this);
-				$rootScope.ons.screen.resetToPage = this.resetToPage.bind(this);
-			},
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-			_findClosestScreen: function($event) {
-				// finding the right navigator
-				var screen;
-				if ($event) {
-					var screenElement = $rootScope.ons.upTo($event.target, 'ons-screen');
-					screen = angular.element(screenElement).isolateScope();
-				} else {
-					screen = this.screens[this.screens.length - 1];
-				}
+  directives.directive('onsIfOrientation', function(ONSEN_CONSTANTS) {
+    return {
+      restrict: 'A',
+      replace: false,
+      transclude: true,
+      scope: true,
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_orientation.tpl',
+      link: function($scope, element, attrs) {
 
-				return screen;
-			},
+        function getLandscapeOrPortraitFromInteger(orientation){
+          if (orientation === undefined ) {
+            return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+          }
 
-			_checkExistence: function() {
-				if (this.screens.length == 0) {
-					throw new Error('oops!! no navigator registerred');
-				}
-			},
+          if (orientation == 90 || orientation == -90) {
+            return 'landscape';
+          }
 
-			addScreen: function(screen) {
-				this.screens.push(screen);
-			},
+          if (orientation == 0 || orientation == 180) {
+            return 'portrait';
+          }
+        }
 
-			removeScreen: function(screen){
-				for (var i = 0; i < this.screens.length; i++) {
-					if(this.screens[i] == screen){
-						this.screens.splice(i, 1);
-					}
-				};
-			},
+        $scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
 
-			presentPage: function(page, $event) {
-				this._checkExistence();
+        window.addEventListener("orientationchange", function() {
+          $scope.$apply(function(){
+            $scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
+          });
+        }, false);
 
-				var screen = this._findClosestScreen($event);
-				screen.presentPage(page);
-			},
+        window.addEventListener("resize", function() {
+          $scope.$apply(function(){
+            $scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
+          });
+        }, false);
 
-			resetToPage: function(page, $event) {
-				this._checkExistence();
-
-				var screen = this._findClosestScreen($event);
-				screen.resetToPage(page);
-			},
-
-			dismissPage: function($event) {
-				this._checkExistence();
-
-				var screen = this._findClosestScreen($event);
-				screen.dismissPage();
-			}
-		});
-
-		return new ScreenStack();
-	});
+        attrs.$observe('onsIfOrientation', function(userOrientation){
+          if(userOrientation){
+            $scope.userOrientation = userOrientation;
+          }
+        });
+      }
+    };
+  });
 })();
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 
 
 (function() {
-	'use strict';
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  'use strict';
 
-	directives.directive('onsScrollable', function(ONSEN_CONSTANTS, $timeout) {
-		return {
-			restrict: 'A',
-			replace: false,
-			transclude: false,
-			link: function(scope, element, attrs) {
-				// inifinte scroll
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-				var scrollWrapper;
-				if (!element.hasClass('scroller-wrapper')) {
-					console.error('missing .scroller-wrapper class for ons-scrollable');
-					return;
-				}
+  directives.directive('onsIfPlatform', function(ONSEN_CONSTANTS) {
+    return {
+      restrict: 'A',
+      replace: false,
+      transclude: true,
+      scope: true,
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_platform.tpl',
+      link: function($scope, element, attrs) {
 
-				
+        var platform;        
 
-				scrollWrapper = element[0];
-				var offset = parseInt(attrs.threshold) || 10;
+        var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+            // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
+        var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
+        var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+            // At least Safari 3+: "[object HTMLElementConstructor]"
+        var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
+        var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
 
-				if(scope.onScrolled){
-					scrollWrapper.addEventListener('scroll', function() {
-						if (scope.infinitScrollEnable) {
-							var scrollTopAndOffsetHeight = scrollWrapper.scrollTop + scrollWrapper.offsetHeight;
-							var scrollHeightMinusOffset = scrollWrapper.scrollHeight - offset;
+        if(isOpera){
+          platform = "opera";
+        }
 
-							if (scrollTopAndOffsetHeight >= scrollHeightMinusOffset) {
-								scope.onScrolled();
-							}
-						}
-					});	
-				}
-				
+        if(isFirefox){
+          platform = "firefox";
+        }
 
-				// IScroll for Android
-				if (!Modernizr.csstransforms3d) {
-					$timeout(function() {
-						var iScroll = new IScroll(scrollWrapper, {
-							momentum: true,
-							bounce: true,
-							hScrollbar: false,
-							vScrollbar: false,
-							preventDefault: false
-						});
+        if(isSafari){
+          platform = "safari";
+        }
 
-						iScroll.on('scrollStart', function(e) {
-							var scrolled = iScroll.y - offset;							
-							if (scrolled < (iScroll.maxScrollY + 40) ) {
-								// TODO: find a better way to know when content is upated so we can refresh
-								iScroll.refresh();
-							}
-						});
+        if(isChrome){
+          platform = "chrome";
+        }
 
-						if(scope.onScrolled){
-							iScroll.on('scrollEnd', function(e) {
-								var scrolled = iScroll.y - offset;
-								if (scrolled < iScroll.maxScrollY) {
-									// console.log('we are there!');
-									scope.onScrolled();
-								}
-							});	
-						}
-						
-					}, 500);
-				}
-			}
-		};
-	});
-})();
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+        if(isIE){
+          platform = "ie";
+        }
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+        if (navigator.userAgent.match(/Android/i)) {
+          platform = "android";
+        }
 
-   http://www.apache.org/licenses/LICENSE-2.0
+        if ((navigator.userAgent.match(/BlackBerry/i)) || (navigator.userAgent.match(/RIM Tablet OS/i)) || (navigator.userAgent.match(/BB10/i))) {
+          platform = "blackberry";
+        }
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+        if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+          platform = "ios";
+        }
 
-*/
+        if (navigator.userAgent.match(/IEMobile/i)) {
+          platform = "window";
+        }
+
+        $scope.platform = platform;        
 
 
-(function() {
-	'use strict';
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsScroller', function(ONSEN_CONSTANTS, $timeout) {
-		return {
-			restrict: 'E',
-			replace: false,
-			transclude: true,
-			scope: {
-				onScrolled: '&',
-				infinitScrollEnable: '='
-			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/scroller.tpl',
-			compile: function(elem, attrs, transcludeFn) {
-				return function(scope, element, attrs) {
-					var scroller = angular.element(element[0].querySelector('.scroller'));
-					transcludeFn(scope.$parent, function(clone) {
-						scroller.append(clone);
-					});
-				};
-			}
-		};
-	});
+        attrs.$observe('onsIfPlatform', function(userPlatform) {
+          if (userPlatform) {
+            $scope.userPlatform = userPlatform.toLowerCase();
+          }
+        });        
+      }
+    };
+  });
 })();
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
@@ -2091,52 +678,18 @@ limitations under the License.
 
 
 (function(){
-	'use strict';
+  'use strict';
 
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsSearchInput', function(ONSEN_CONSTANTS, $timeout) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: false,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/search_input.tpl'
-		};
-	});
-})();
-
-
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
-(function(){
-	'use strict';
-
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsSelect', function(ONSEN_CONSTANTS, $timeout) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/select.tpl'
-		};
-	});
+  directives.directive('onsList', function(ONSEN_CONSTANTS, $timeout) {
+    return {
+      restrict: 'E',
+      replace: false,
+      transclude: true,      
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list.tpl'
+    };
+  });
 })();
 
 
@@ -2159,418 +712,25 @@ limitations under the License.
 
 
 (function() {
-	'use strict';
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuStack) {
-		return {
-			restrict: 'E',
-			replace: false,
-			transclude: false,
-			scope: {
-				behindPage: '@',
-				abovePage: '@',
-				maxSlideDistance: '@',
-				swipable: '@',
-				swipeTargetWidth: '@'
-			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
-			link: function(scope, element, attrs) {
-				var MAIN_PAGE_RATIO = 0.9;
-				var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
-				var BROWSER_TRANSFORMS = [
-					"webkitTransform",
-					"mozTransform",
-					"msTransform",
-					"oTransform",
-					"transform"
-				];
-
-				var Swiper = Class.extend({
-					init: function(element) {
-						this.isReady = false;
-						this.$el = element;
-						this.el = element[0];
-						this.VERTICAL_THRESHOLD = 20;
-						this.HORIZONTAL_THRESHOLD = 20;
-						this.behindPage = element[0].querySelector('.behind');
-						this.$behindPage = angular.element(this.behindPage);
-						this.abovePage = element[0].querySelector('.above');
-						this.$abovePage = angular.element(this.abovePage);
-						this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
-						this.previousX = 0;
-						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;						
-
-						scope.$watch('maxSlideDistance', this.onMaxSlideDistanceChanged.bind(this));
-						scope.$watch('swipable', this.onSwipableChanged.bind(this));
-						scope.$watch('swipeTargetWidth', this.onSwipeTargetWidthChanged.bind(this));
-						window.addEventListener("resize", this.onWindowResize.bind(this));
-
-						this.currentX = 0;
-						this.startX = 0;
-
-						this.boundHandleEvent = this.handleEvent.bind(this);
-
-						this.attachMethods();
-						this.bindEvents();
-
-						if (scope.abovePage) {
-							scope.setAbovePage(scope.abovePage);
-						}
-
-						if (scope.behindPage) {
-							scope.setBehindPage(scope.behindPage);
-						}
-
-						window.setTimeout(function() {
-							this.isReady = true;
-							this.behindPage.style.opacity = 1;
-							this.blackMask.style.opacity = 1;
-						}.bind(this), 400);
-					},
-
-					onSwipableChanged: function(swipable){
-						if(swipable == "" || swipable == undefined){
-							swipable = true;
-						}else{
-							swipable = (swipable == "true");
-						}
-
-						if(swipable){
-							this.activateHammer();
-						}else{
-							this.deactivateHammer();
-						}
-					},
-
-					onSwipeTargetWidthChanged: function(targetWidth){
-						if(typeof targetWidth == 'string'){
-							targetWidth = targetWidth.replace('px', '');
-						}
-						var width = parseInt(targetWidth);
-						if(width < 0 || !targetWidth){
-							this.swipeTargetWidth = this.abovePage.clientWidth;
-						}else{
-							this.swipeTargetWidth = width;
-						}
-					},
-
-					onWindowResize: function(){
-						this.recalculateMAX();
-					},
-
-					onMaxSlideDistanceChanged: function(){						
-						this.recalculateMAX();
-					},
-
-					recalculateMAX: function(){
-						if(typeof scope.maxSlideDistance == 'string'){
-							scope.maxSlideDistance = scope.maxSlideDistance.replace('px', '');	
-						}
-						if (scope.maxSlideDistance && this.MAX > parseInt(scope.maxSlideDistance, 10)) {
-							this.MAX = parseInt(scope.maxSlideDistance);
-						}
-					},
-
-					activateHammer: function(){
-						this.hammertime.on("touch dragleft dragright swipeleft swiperight release", this.boundHandleEvent);
-					},
-
-					deactivateHammer: function(){
-						this.hammertime.off("touch dragleft dragright swipeleft swiperight release", this.boundHandleEvent);
-					},
-
-					bindEvents: function() {
-						this.hammertime = new Hammer(this.el);						
-						this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
-					},
-
-					attachMethods: function() {
-						scope.setBehindPage = function(page) {
-							if (page) {
-								$http({
-									url: page,
-									method: "GET"
-								}).error(function(e) {
-									console.error(e);
-								}).success(function(data, status, headers, config) {
-									var templateHTML = angular.element(data.trim());
-									var page = angular.element('<div></div>');
-									page.addClass('page');
-									var pageScope = scope.$parent.$new();
-									var pageContent = $compile(templateHTML)(pageScope);
-									page.append(pageContent);
-									this.$behindPage.append(page);
-
-									if(this.currentBehindPageScope){
-										this.currentBehindPageScope.$destroy();
-										this.currentBehindPageElement.remove();
-									}
-
-									this.currentBehindPageElement = page;
-									this.currentBehindPageScope = pageScope;
-
-								}.bind(this));
-							} else {
-								throw new Error('cannot set undefined page');
-							}
-						}.bind(this);
-
-						scope.setAbovePage = function(pageUrl) {
-							if (this.currentPageUrl === pageUrl) {
-								// same page -> ignore
-								return;
-							}
-
-							if (pageUrl) {
-								$http({
-									url: pageUrl,
-									method: "GET"
-								}).error(function(e) {
-									console.error(e);
-								}).success(function(data, status, headers, config) {
-									var templateHTML = angular.element(data.trim());
-									var pageElement = angular.element('<div></div>');
-									pageElement.addClass('page');
-									pageElement[0].style.opacity = 0;
-									var pageScope = scope.$parent.$new();
-									var pageContent = $compile(templateHTML)(pageScope);
-									pageElement.append(pageContent);
-									this.$abovePage.append(pageElement);
-
-									// prevent black flash
-									setTimeout(function() {
-										pageElement[0].style.opacity = 1;
-										if (this.currentPageElement) {
-											this.currentPageElement.remove();
-											this.currentPageScope.$destroy();
-										}
-										this.currentPageElement = pageElement;
-										this.currentPageScope = pageScope;
-									}.bind(this), 0);
-
-									this.currentPageUrl = pageUrl;
-								}.bind(this));
-							} else {
-								throw new Error('cannot set undefined page');
-							}
-						}.bind(this);
-					},
-
-
-					handleEvent: function(ev) {						
-						switch (ev.type) {
-
-							case 'touch':
-								if(this.isClosed()){
-									if(!this.isInsideSwipeTargetArea(ev.gesture.center.pageX)){
-										ev.gesture.stopDetect();
-									}	
-								}
-								
-								break;
-
-							case 'dragleft':
-							case 'dragright':
-								ev.gesture.preventDefault();
-								var deltaX = ev.gesture.deltaX;
-								this.currentX = this.startX + deltaX;
-								if (this.currentX >= 0) {
-									this.translate(this.currentX);
-								}
-								break;
-
-							case 'swipeleft':
-								ev.gesture.preventDefault();
-								this.close();
-								break;
-
-							case 'swiperight':
-								ev.gesture.preventDefault();
-								this.open();
-								break;
-
-							case 'release':
-								if (this.currentX > this.MAX / 2) {
-									this.open();
-								} else {
-									this.close();
-								}
-								break;
-						}
-					},
-
-					isInsideSwipeTargetArea: function(x){
-						return x < this.swipeTargetWidth;
-					},
-
-					onTransitionEnd: function() {
-						this.$abovePage.removeClass('transition');
-						this.$behindPage.removeClass('transition');
-					},
-
-					isClosed: function(){
-						return this.startX == 0;
-					},
-
-					close: function() {
-						this.startX = 0;
-						if (this.currentX !== 0) {
-							this.$abovePage.addClass('transition');
-							this.$behindPage.addClass('transition');
-							this.translate(0);
-						}
-					},
-
-					open: function() {
-						this.startX = this.MAX;
-						if (this.currentX != this.MAX) {
-							this.$abovePage.addClass('transition');
-							this.$behindPage.addClass('transition');
-							this.translate(this.MAX);
-						}
-					},
-
-					toggle: function() {
-						if (this.startX === 0) {
-							this.open();
-						} else {
-							this.close();
-						}
-					},
-
-					translate: function(x) {
-						var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
-						
-						var behind = (x - this.MAX) / this.MAX * 10;
-						if(behind > 0){
-							behind = 0;
-						}
-						var opacity = 1 + behind / 100;
-						var behindTransform = 'translate3d(' + behind + '%, 0, 0)';
-
-						var property;
-						for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
-							property = BROWSER_TRANSFORMS[i];
-							this.abovePage.style[property] = aboveTransform;
-							this.behindPage.style[property] = behindTransform;
-						};
-						if(this.isReady){
-							this.behindPage.style.opacity = opacity;
-						}						
-						this.currentX = x;
-					}
-				});
-
-				var swiper = new Swiper(element);
-
-
-				scope.openMenu = function() {
-					swiper.open();
-				};
-
-				scope.closeMenu = function() {
-					swiper.close();
-				};
-
-				scope.toggleMenu = function() {
-					swiper.toggle();
-				};
-
-
-				SlidingMenuStack.addSlidingMenu(scope);
-				scope.$on('$destroy', function(){
-					SlidingMenuStack.removeSlidingMenu(scope);
-				});
-			}
-		};
-	});
-})();
-(function() {
-	var directiveModules = angular.module('onsen.directives');
-
-	directiveModules.factory('SlidingMenuStack', function($rootScope) {
-		var SlidingMenuStack = Class.extend({
-			slidingMenus: [],
-
-			init: function() {
-				$rootScope.ons = $rootScope.ons || {};
-				$rootScope.ons.slidingMenu = {};
-				$rootScope.ons.slidingMenu.setAbovePage = this.setAbovePage.bind(this);
-				$rootScope.ons.slidingMenu.setBehindPage = this.setBehindPage.bind(this);
-				$rootScope.ons.slidingMenu.toggleMenu = this.toggleMenu.bind(this);
-				$rootScope.ons.slidingMenu.openMenu = this.openMenu.bind(this);
-				$rootScope.ons.slidingMenu.closeMenu = this.closeMenu.bind(this);
-			},
-
-			_findClosestSlidingMenu: function($event) {				
-				var slidingMenu;
-				if ($event) {
-					var slidingMenuElement = $rootScope.ons.upTo($event.target, 'ons-sliding-menu');
-					slidingMenu = angular.element(slidingMenuElement).isolateScope();
-				} else {
-					slidingMenu = this.slidingMenus[this.slidingMenus.length - 1];
-				}
-
-				return slidingMenu;
-			},
-
-			_checkExistence: function() {
-				if (this.slidingMenus.length == 0) {
-					throw new Error('oops!! no navigator registerred');
-				}
-			},
-
-			addSlidingMenu: function(slidingMenu) {
-				this.slidingMenus.push(slidingMenu);
-			},
-
-			removeSlidingMenu: function(slidingMenu){
-				for (var i = 0; i < this.slidingMenus.length; i++) {
-					if(this.slidingMenus[i] == slidingMenu){
-						this.slidingMenus.splice(i, 1);
-					}
-				};
-			},
-
-			setAbovePage: function(page, $event) {
-				this._checkExistence();
-
-				var slidingMenu = this._findClosestSlidingMenu($event);
-				slidingMenu.setAbovePage(page);
-			},
-
-			setBehindPage: function(page, $event) {
-				this._checkExistence();
-
-				var slidingMenu = this._findClosestSlidingMenu($event);
-				slidingMenu.setBehindPage(page);
-			},
-
-			toggleMenu: function($event) {
-				this._checkExistence();
-
-				var slidingMenu = this._findClosestSlidingMenu($event);
-				slidingMenu.toggleMenu();
-			},
-
-			openMenu: function($event) {
-				this._checkExistence();
-
-				var slidingMenu = this._findClosestSlidingMenu($event);
-				slidingMenu.openMenu();
-			},
-
-			closeMenu: function($event) {
-				this._checkExistence();
-
-				var slidingMenu = this._findClosestSlidingMenu($event);
-				slidingMenu.closeMenu();
-			}
-		});
-
-		return new SlidingMenuStack();
-	});
+  'use strict';
+
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+  directives.directive('onsListItem', function(ONSEN_CONSTANTS) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: true,
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/list_item.tpl',
+      compile: function(elem, attrs, transcludeFn) {
+        return function(scope, element, attrs) {
+          transcludeFn(scope, function(clone) {
+            element.append(clone);
+          });
+        };
+      }
+    };
+  });
 })();
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
@@ -2589,647 +749,730 @@ limitations under the License.
 
 */
 
-
 (function() {
-	'use strict';
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  'use strict';
+  var directives = angular.module('onsen.directives');
 
-	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewStack) {
-		return {
-			restrict: 'E',
-			replace: false,
-			transclude: false,
-			scope: {
-				secondaryPage: '@',
-				mainPage: '@',
-				collapse: '@',
-				mainPageWidth: '@'
-			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
-			link: function(scope, element, attrs) {
-				var SPLIT_MODE = 0;
-				var COLLAPSE_MODE = 1;
-				var MAIN_PAGE_RATIO = 0.9;			
+  directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, requestAnimationFrame) {
+    var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 
-				var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
-				var BROWSER_TRANSFORMS = [
-					"webkitTransform",
-					"mozTransform",
-					"msTransform",
-					"oTransform",
-					"transform"
-				];
+    var Navigator = Class.extend({
+      /**
+       * @property {Array}
+       */
+      navigatorItems: undefined,
 
-				var Swiper = Class.extend({
-					init: function(element) {
-						this.$el = element;
-						this.el = element[0];
-						this.VERTICAL_THRESHOLD = 20;
-						this.HORIZONTAL_THRESHOLD = 20;
-						this.behindPage = element[0].querySelector('.secondary');
-						this.$behindPage = angular.element(this.behindPage);
-						this.abovePage = element[0].querySelector('.main');
-						this.$abovePage = angular.element(this.abovePage);
-						this.previousX = 0;
-						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
-						this.currentX = 0;
-						this.startX = 0;
-						this.mode = SPLIT_MODE;
+      /**
+       * @property {DOMElement}
+       */
+      container: undefined,
 
-						this.hammertime = new Hammer(this.el);
-						this.boundHammerEvent = this.handleEvent.bind(this);
-						this.bindEvents();
+      /**
+       * @property {DOMElement}
+       */
+      toolbar: undefined,
 
-						window.addEventListener("orientationchange", this.onOrientationChange.bind(this));
-						window.addEventListener('resize', this.onResize.bind(this));
-						
-						this.attachMethods();
+      /**
+       * @property {DOMElement}
+       */
+      toolbarContent: undefined,
 
-						if(scope.mainPage){
-							scope.setMainPage(scope.mainPage);
-						}
+      /**
+       * @property {DOMElement}
+       */
+      leftSection: undefined,
 
-						if(scope.secondaryPage){
-							scope.setSecondaryPage(scope.secondaryPage);
-						}
+      /**
+       * @property {DOMElement}
+       */
+      leftButtonContainer: undefined,
 
-						window.setTimeout(function(){
-							this.considerChangingCollapse();							
-						}.bind(this), 100);
-					},
+      /**
+       * @property {DOMElement}
+       */
+      leftArrow: undefined,
 
-					attachMethods: function(){
-						scope.setSecondaryPage = function(page) {
-							if (page) {
-								$http({
-									url: page,
-									method: "GET"
-								}).error(function(e){
-									console.error(e);
-								}).success(function(data, status, headers, config) {
-									var templateHTML = angular.element(data.trim());
-									var page = angular.element('<div></div>');
-									page.addClass('page');		
-									var pageScope = scope.$parent.$new();
-									var pageContent = $compile(templateHTML)(pageScope);
-									page.append(pageContent);
-									this.$behindPage.append(page);	
+      /**
+       * @property {DOMElement}
+       */
+      rightSection: undefined,
+
+      /**
+       * @property {DOMElement}
+       */
+      rightSectionIcon: undefined,
+
+      /**
+       * @property {Function}
+       */
+      leftButtonClickFn: undefined,
+
+      /**
+       * @property {DOMElement}
+       */
+      element: undefined,
+
+      /**
+       * @property {Object}
+       */
+      attrs: undefined,
+
+      /**
+       * @property {Object}
+       */
+      scope: undefined,
+
+      /**
+       * @param {Object} scope
+       * @param {Object} element
+       * @param {Object} attrs
+       */
+      init: function(scope, element, attrs) {
+        this.scope = scope;
+        this.element = element;
+        this.attrs = attrs;
+
+        this.navigatorItems = [];
+
+        this.container = angular.element(element[0].querySelector('.navigator-content'));
+        this.toolbar = angular.element(element[0].querySelector('.topcoat-navigation-bar'));
+        this.toolbarContent = angular.element(element[0].querySelector('.navigator-toolbar__content'));
+        this.leftSection = angular.element(this.toolbarContent[0].querySelector('.left-section'));
+        this.leftButtonContainer = angular.element(this.toolbarContent[0].querySelector('.onsen_navigator__left-button-container'));
+        this.leftArrow = angular.element(this.leftButtonContainer[0].querySelector('i'));
+
+        this.rightSection = angular.element(this.toolbarContent[0].querySelector('.onsen_navigator__right-button'));
+        this.rightSectionIcon = angular.element(this.rightSection[0].querySelector('.right-section-icon'));
+
+        this.leftButtonClickFn = $parse(scope.onLeftButtonClick);
+
+        this.setReady(true);
+
+        // fix android 2.3 click event not fired some times when used with sliding menu
+        this.leftButtonContainer.bind('touchend', function() { });
+
+        this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));
+        this.attachFastClickEvent(this.leftSection[0]);
+        this.rightSection.bind('click', this.onRightButtonClicked.bind(this));
+        if (scope.page) {
+          var options = {
+            title: scope.title,
+            leftButtonIcon: scope.initialLeftButtonIcon,
+            rightButtonIcon: scope.rightButtonIcon,
+            onLeftButtonClick: scope.onLeftButtonClick,
+            onRightButtonClick: scope.onRightButtonClick
+          };
+          this.pushPage(scope.page, options);
+        }
+        this.checkiOS7();
+
+        attrs.$observe('title', function(title) {
+          if (title) {
+            this.setTitle(title);
+          }
+        }.bind(this));
+
+        this.attachScopeMethods();
+      },
+
+      attachScopeMethods: function(){
+        this.scope.pushPage = this.pushPage.bind(this);
+        this.scope.popPage = this.popPage.bind(this);
+        this.scope.resetToPage = this.resetToPage.bind(this);
+      },
+
+      attachFastClickEvent: function(el) {
+        if (el && el.nodeType) {
+          FastClick.attach(el);
+        }
+      },
+
+      onTransitionEnded: function() {
+        this.setReady(true);
+      },
+
+      setReady: function(ready) {
+        this.ready = ready;
+      },
+
+      isReady: function() {
+        return this.ready;
+      },
+
+      checkiOS7: function() {
+        if (window.device && window.device.platform) {
+          if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
+            setTimeout( this.adjustForiOS7.bind(this), 0);
+          }
+        } else {
+          document.addEventListener("deviceready", this.checkiOS7.bind(this), false);
+        }
+      },
+
+      adjustForiOS7: function() {
+        this.toolbar[0].style.height = this.toolbar[0].clientHeight + 20 + 'px';
+        this.toolbar[0].style.paddingTop = '20px';
+      },
+
+      animateBackLabelIn: function(inNavigatorItem, outNavigatorItem) {
+        var title = outNavigatorItem.options.title;
+        var inBackLabel = angular.element('<div></div>');
+        inBackLabel.addClass('onsen_navigator-back-label onsen_navigator-item topcoat-navigation-bar__line-height topcoat-icon-button--quiet navigate_right');
+        inBackLabel.bind('click', this.onLeftButtonClicked.bind(this));
+        this.attachFastClickEvent(inBackLabel[0]);
+        inNavigatorItem.backLabel = inBackLabel;
+        if (inNavigatorItem.options.leftButtonIcon) {
+          // no back label if user specify icon
+          inBackLabel[0].style.display = 'none';
+        }
+        this.toolbarContent.prepend(inBackLabel);
+        inBackLabel.text(title);
+
+        this.toolbarContent[0].offsetWidth;
+        setTimeout(function(){
+          inBackLabel.removeClass('navigate_right');
+          inBackLabel.addClass('transition navigate_center');
+        }, 10);
+        
+
+        var outLabel = outNavigatorItem.backLabel;
+        if (outLabel) {
+          outLabel.bind(TRANSITION_END, function transitionEnded(e) {
+            outLabel.remove();
+            outLabel.unbind(transitionEnded);
+          });
+          outLabel.removeClass('navigate_center');
+          outLabel.addClass('navigate_left');
+        }
+      },
+
+      animateBackLabelOut: function(inNavigatorItem, outNavigatorItem) {
+        var outLabel = outNavigatorItem.backLabel;
+        var inLabel = inNavigatorItem.backLabel;
+        this.toolbarContent.prepend(inLabel);
+
+        if (outNavigatorItem.options.leftButtonIcon) {
+          // no back label if user specify icon
+          outLabel.remove();
+        } else {
+          outLabel.bind(TRANSITION_END, function transitionEnded(e) {
+            outLabel.remove();
+            outLabel.unbind(transitionEnded);
+          });
+
+          this.toolbarContent[0].offsetWidth;
+          outLabel.removeClass('transition navigate_center');
+          outLabel.addClass('transition navigate_right');
+        }
 
 
-									if(this.currentBehindPageElement){
-										this.currentBehindPageElement.remove();
-										this.currentBehindPageScope.$destroy();
-									}
+        if (inLabel) {
+          this.toolbarContent[0].offsetWidth;
+          inLabel.removeClass('navigate_left');
+          inLabel.addClass('transition navigate_center');
+          inLabel.bind('click', this.onLeftButtonClicked.bind(this));
+          this.attachFastClickEvent(inLabel[0]);
+        }
+      },
 
-									this.currentBehindPageElement = page;
-									this.currentBehindPageScope = pageScope;
+      getCurrentNavigatorItem: function() {
+        return this.navigatorItems[this.navigatorItems.length - 1];
+      },
 
-								}.bind(this));
-							} else {
-								throw new Error('cannot set undefined page');
-							}
-						}.bind(this);
+      onLeftButtonClicked: function() {
+        var onLeftButtonClick = this.getCurrentNavigatorItem().options.onLeftButtonClick;
+        if (onLeftButtonClick) {
+          var onLeftButtonClickFn = $parse(onLeftButtonClick);              
+          onLeftButtonClickFn(this.scope.$parent);
+        } else {
+          if (this.canPopPage()) {
+            this.popPage();
+          }
+        }
+      },
 
-						scope.setMainPage = function(page) {
-							if (page) {
-								$http({
-									url: page,
-									method: "GET"
-								}).error(function(e){
-									console.error(e);
-								}).success(function(data, status, headers, config) {
-									var templateHTML = angular.element(data.trim());
-									var page = angular.element('<div></div>');
-									page.addClass('page');
-									page[0].style.opacity = 0;
-									var pageScope = scope.$parent.$new();
-									var pageContent = $compile(templateHTML)(pageScope);
-									page.append(pageContent);
-									this.$abovePage.append(page);
+      onRightButtonClicked: function() {
+        var onRightButtonClick = this.getCurrentNavigatorItem().options.onRightButtonClick;
+        if (onRightButtonClick) {
+          var onRightButtonClickFn = $parse(onRightButtonClick);
+          onRightButtonClickFn(this.scope.$parent);
+        }
+      },
 
-									// prevent black flash
-									setTimeout(function(){
-										page[0].style.opacity = 1;
-										if(this.currentPage){
-											this.currentPage.remove();
-											this.currentPageScope.$destroy();
-										}
-										this.currentPage = page;
-										this.currentPageScope = pageScope;
-									}.bind(this), 0);
+      setTitle: function(title) { // no animation
+        if (this.isEmpty()) {
+          return;
+        }
+        var currentNavigatorItem = this.navigatorItems[this.navigatorItems.length - 1];
+        currentNavigatorItem.options.title = title;
+        if (currentNavigatorItem.titleElement) {
+          currentNavigatorItem.titleElement.text(title);
+        }
+      },
 
-								}.bind(this));
-							} else {
-								throw new Error('cannot set undefined page');
-							}
-						}.bind(this);
-					},
+      animateTitleIn: function(inNavigatorItem, outNavigatorItem) {
+        var inTitle = inNavigatorItem.options.title || '';
+        var inTitleElement = angular.element('<span>' + inTitle + '</span>');
+        inTitleElement.attr('class', 'onsen_navigator-item onsen_navigator-title topcoat-navigation-bar__title topcoat-navigation-bar__line-height center transition animate-right');
+        var outTitleElement = outNavigatorItem.titleElement;
+        outTitleElement.after(inTitleElement);
+        outTitleElement.bind(TRANSITION_END, function transitionEnded(e) {
+          outTitleElement.remove();
+          outTitleElement.unbind(transitionEnded);
+        });
+        inNavigatorItem.titleElement = inTitleElement;
+        setTimeout(function(){
+          inTitleElement.removeClass('animate-right');
+          inTitleElement.addClass('animate-center');
+          outTitleElement.removeClass('animate-center');
+          outTitleElement.addClass('transition animate-left');
+        }, 10);
+      },
 
-					onOrientationChange: function() {
-						this.considerChangingCollapse();
-					},
+      animateRightButtonIn: function(inNavigatorItem, outNavigatorItem) {
+        if (inNavigatorItem.rightButtonIconElement || inNavigatorItem.options.rightButtonIcon) {
+          var rightButtonIconElement;
+          if (inNavigatorItem.rightButtonIconElement) {
+            rightButtonIconElement = inNavigatorItem.rightButtonIconElement;
+          } else {
+            rightButtonIconElement = angular.element('<i></i>');
+            rightButtonIconElement.addClass(inNavigatorItem.options.rightButtonIcon + ' topcoat-navigation-bar__line-height onsen_fade');
+            this.rightSectionIcon.append(rightButtonIconElement); // fix bug on ios. strange that we cant use rightSectionIcon.append() here
+            inNavigatorItem.rightButtonIconElement = rightButtonIconElement;
+          }
 
-					onResize: function() {
-						this.considerChangingCollapse();
-						this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
-					},
+          this.rightSection[0].offsetWidth;
+          setTimeout(function(){
+            rightButtonIconElement.removeClass('hide');
+            rightButtonIconElement.addClass('transition show');
+          }, 10);              
+        }
 
-					considerChangingCollapse: function() {
-						if (this.shouldCollapse()) {
-							this.activateCollapseMode();
-						} else {
-							this.deactivateCollapseMode();
-						}
-					},
+        if (outNavigatorItem && outNavigatorItem.rightButtonIconElement) {
+          var rightButton = outNavigatorItem.rightButtonIconElement;
+          rightButton.removeClass('show');
+          rightButton.addClass('transition hide');
+          rightButton.bind(TRANSITION_END, function transitionEnded(e) {
+            rightButton.remove();
+            rightButton.unbind(transitionEnded);
+          });
+        }
 
-					shouldCollapse: function() {
-						var orientation = window.orientation;
-						if(orientation === undefined ){
-							orientation = window.innerWidth > window.innerHeight ? 90 : 0;
-						}
+      },
 
-						switch (scope.collapse) {
-							case undefined:
-							case "none":
-								return false;
+      animateRightButtonOut: function(inNavigatorItem, outNavigatorItem) {
+        if (outNavigatorItem.rightButtonIconElement) {
+          var outRightButton = outNavigatorItem.rightButtonIconElement;
+          this.toolbarContent[0].offsetWidth;
+          outRightButton.removeClass('show');
+          outRightButton.addClass('transition hide');
+          outRightButton.bind(TRANSITION_END, function transitionEnded(e) {
+            outRightButton.remove();
+            outRightButton.unbind(transitionEnded);
+          });
+        }
+        if (inNavigatorItem.rightButtonIconElement) {
+          var rightButton = inNavigatorItem.rightButtonIconElement;
+          this.rightSectionIcon.append(rightButton);
+          this.rightSection[0].offsetWidth;
+          rightButton.removeClass('hide');
+          rightButton.addClass('transition show');
+        }
+      },
 
-							case "portrait":
-								if (orientation == 180 || orientation == 0) {
-									return true;
-								} else {
-									return false;
-								}
-								break;
+      setLeftButton: function(navigatorItem) {
+        var leftButtonIcon = navigatorItem.options.leftButtonIcon;
+        if (leftButtonIcon) {
+          this.setBackButtonIcon(leftButtonIcon);
+          this.showBackButton();
+        } else {
+          // no icon
+          if (this.canPopPage()) {
+            this.showBackButton();
+            this.setBackButtonIconAsLeftArrow();
+          } else {
+            // no icon and is root page
+            this.hideBackButton();
+          }
+        }
+      },
 
-							case "landscape":
-								if (orientation == 90 || orientation == -90) {
-									return true;
-								} else {
-									return false;
-								}
-								break;
+      setBackButtonIconAsLeftArrow: function() {
+        this.leftArrow.attr('class', 'fa fa-angle-left fa-2x topcoat-navigation-bar__line-height');
+      },
 
-							default:
-								// by width
-								if (scope.collapse === undefined) {
-									return false;
-								} else {
-									var widthToken;
-									if (scope.collapse.indexOf('width') >= 0) {
-										var tokens = scope.collapse.split(' ');
-										widthToken = tokens[tokens.length - 1];
-									}else{
-										widthToken = scope.collapse;
-									}
+      setBackButtonIcon: function(iconClass) {
+        this.leftArrow.attr('class', iconClass + ' topcoat-navigation-bar__line-height');
+      },
 
-									if (widthToken.indexOf('px') > 0) {
-										widthToken = widthToken.substr(0, widthToken.length - 2);
-									}
+      showBackButton: function() {
+        this.toolbarContent[0].offsetWidth;
+        var that = this;
+        setTimeout(function(){
+          that.leftButtonContainer.removeClass('hide');
+          that.leftButtonContainer.addClass('transition show');
+        }, 200);
+        
+      },
 
-									if (isNumber(widthToken)) {
-										if (window.innerWidth < widthToken) {
-											return true;
-										} else {
-											return false;
-										}
-									}
+      hideBackButton: function() {
+        this.leftButtonContainer.removeClass('show');
+        this.leftButtonContainer.addClass('hide');
+      },
 
-									return false;									
-								}
+      animateTitleOut: function(currentNavigatorItem, previousNavigatorItem) {
 
-								break;
-						}
+        var inTitleElement = previousNavigatorItem.titleElement;
+        var outTitleElement = currentNavigatorItem.titleElement;
+        outTitleElement.after(inTitleElement);
+        this.element[0].offsetWidth;
+        outTitleElement.bind(TRANSITION_END, function transitionEnded(e) {
+          outTitleElement.remove();
+          outTitleElement.unbind(transitionEnded);
+        });
+        outTitleElement.removeClass('animate-center');
+        outTitleElement.addClass('transition animate-right');
+        inTitleElement.removeClass('animate-left');
+        inTitleElement.addClass('animate-center');
+      },
 
-					},
+      animatePageIn: function(inPage, outPage) {
+        var that = this;
+        inPage.bind(TRANSITION_END, function transitionEnded(e) {
+          that.onTransitionEnded();
+        });
 
-					setSize: function() {						
-						if(!scope.mainPageWidth){
-							scope.mainPageWidth = "70";
-						}
-						var behindSize = 100 - scope.mainPageWidth.replace('%', '');
-						this.behindPage.style.width = behindSize + '%';
-						this.behindPage.style.opacity = 1;
-						this.abovePage.style.width = scope.mainPageWidth + '%';
-						var translate = this.behindPage.clientWidth;
-						this.translateAboveOnly(translate);
-					},
+        // wait 10ms fo reflow
+        setTimeout(function(){
+          inPage.attr("class", "onsen_navigator-pager transition navigator_center");
+          outPage.attr("class", "onsen_navigator-pager transition navigate_left");
+        }, 10);
+        
+      },
 
-					activateCollapseMode: function() {
-						this.behindPage.style.width =  '100%';
-						this.abovePage.style.width = '100%';
-						this.mode = COLLAPSE_MODE;
-						this.activateHammer();
-						this.translate(0);
+      animatePageOut: function(currentPage, previousPage) {
+        previousPage.attr("class", "onsen_navigator-pager navigate_left");
+        this.element[0].offsetWidth;
+        previousPage.attr("class", "onsen_navigator-pager transition navigator_center");
 
-						if (Modernizr.boxshadow) {
-							this.$abovePage.addClass('onsen_split-view__shadow');
-						}
-					},
+        var that = this;
+        currentPage.bind(TRANSITION_END, function transitionEnded(e) {
+          var currentPageScope = currentPage.scope();
+          if(currentPageScope){
+            currentPageScope.$destroy();
+          }
+          currentPage.remove();
+          currentPage.unbind(transitionEnded);
+          that.onTransitionEnded();
+        });
 
-					deactivateCollapseMode: function() {
-						this.setSize();
-						this.deactivateHammer();
-						this.mode = SPLIT_MODE;
-						if (Modernizr.boxshadow) {
-							this.$abovePage.removeClass('onsen_split-view__shadow');
-						}
-					},
+        currentPage.attr("class", "onsen_navigator-pager transition navigate_right");
+      },
 
-					activateHammer: function() {
-						this.hammertime.on("dragleft dragright swipeleft swiperight release", this.boundHammerEvent);
-					},
+      isEmpty: function() {
+        return this.navigatorItems.length < 1;
+      },
 
-					deactivateHammer: function() {
-						this.hammertime.off("dragleft dragright swipeleft swiperight release", this.boundHammerEvent);
-					},
+      canPopPage: function() {
+        return this.navigatorItems.length > 1;
+      },
+      
+      resetToPage: function(page, options) {
+        if (!this.isReady()) {
+          return;
+        }
+        var navigatorItem;
+        for (var i = 0; i < this.navigatorItems.length; i++) {
+          navigatorItem = this.navigatorItems[i];
+          if (navigatorItem.backLabel) {
+            navigatorItem.backLabel.remove();
+          }
+          if (navigatorItem.titleElement) {
+            navigatorItem.titleElement.remove();
+          }
+          if (navigatorItem.rightButtonIconElement) {
+            navigatorItem.rightButtonIconElement.remove();
+          }
+        };
 
-					bindEvents: function() {
-						this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
-					},
+        this.container.empty();
+        this.navigatorItems = [];
+        this.pushPage(page, options);
+      },
 
-					handleEvent: function(ev) {
-						switch (ev.type) {
+      generatePageEl: function(pageContent, options){
+        var page = angular.element('<div></div>');
+        page.addClass('onsen_navigator-pager');
+        var blackMask = angular.element('<div></div>');
+        blackMask.addClass('onsen_navigator-black-mask');
+        page.append(blackMask);
+        
+        var navigatorPage = angular.element('<div></div>');        
+        navigatorPage.addClass('navigator-page page');
+        navigatorPage.append(pageContent);                  
 
-							case 'dragleft':
-							case 'dragright':
-								ev.gesture.preventDefault();
-								var deltaX = ev.gesture.deltaX;
-								this.currentX = this.startX + deltaX;
-								if (this.currentX >= 0) {
-									this.translate(this.currentX);
-								}
-								break;
+        page.append(navigatorPage);
+        return page;
+      },
 
-							case 'swipeleft':
-								ev.gesture.preventDefault();
-								this.close();
-								break;
+      compilePageEl: function(pageEl, pageScope){
+        var compiledPage = $compile(pageEl)(pageScope);
+        return compiledPage;
+      },
 
-							case 'swiperight':
-								ev.gesture.preventDefault();
-								this.open();
-								break;
+      createPageScope: function(){
+        var pageScope = this.scope.$parent.$new();
+        return pageScope;
+      },
 
-							case 'release':
-								if (this.currentX > this.MAX / 2) {
-									this.open();
-								} else {
-									this.close();
-								}
-								break;
-						}
-					},
+      _pushPageDOM: function(page, pageContent, compiledPage, pageScope, options) {
 
-					onTransitionEnd: function() {
-						this.$abovePage.removeClass('transition');
-						this.$behindPage.removeClass('transition');
-					},
+        var pager = compiledPage;
+        this.container.append(pager);        
 
-					close: function() {
-						if (this.mode === SPLIT_MODE) {
-							return;
-						}
-						this.startX = 0;
-						if (this.currentX !== 0) {
-							this.$abovePage.addClass('transition');
-							this.$behindPage.addClass('transition');
-							this.translate(0);
-						}
-					},
+        if(pageContent.querySelector){
+          var navigatorToolbar = pageContent.querySelector('ons-navigator-toolbar');
+          if (navigatorToolbar) {
+            if (options === undefined) {
+              options = {};
+            }
 
-					open: function() {
-						if (this.mode === SPLIT_MODE) {
-							return;
-						}
-						this.startX = this.MAX;
-						if (this.currentX != this.MAX) {
-							this.$abovePage.addClass('transition');
-							this.$behindPage.addClass('transition');
-							this.translate(this.MAX);
-						}
-					},
+            var $navigatorToolbar = angular.element(navigatorToolbar);
+            var title = $navigatorToolbar.attr('title');
+            var leftButtonIcon = $navigatorToolbar.attr('left-button-icon');
+            var rightButtonIcon = $navigatorToolbar.attr('right-button-icon');
+            var onLeftButtonClick = $navigatorToolbar.attr('on-left-button-click');
+            var onRightButtonClick = $navigatorToolbar.attr('on-right-button-click');
+            options.title = options.title || title;
+            options.leftButtonIcon = options.leftButtonIcon || leftButtonIcon;
+            options.rightButtonIcon = options.rightButtonIcon || rightButtonIcon;
+            options.onLeftButtonClick = options.onLeftButtonClick || onLeftButtonClick;
+            options.onRightButtonClick = options.onRightButtonClick || onRightButtonClick;
 
-					toggle: function() {
-						if (this.startX === 0) {
-							this.open();
-						} else {
-							this.close();
-						}
-					},
+            $navigatorToolbar.remove();
+          }  
+        }
+          
 
-					translate: function(x) {
-						var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
-						
-						var behind = (x - this.MAX) / this.MAX * 10;
-						var opacity = 1 + behind / 100;
-						var behindTransform = 'translate3d(' + behind + '%, 0, 0)';
+        var navigatorItem = {
+          page: pager,
+          options: options || {},
+          pageScope: pageScope
+        };
 
-						var property;
-						for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
-							property = BROWSER_TRANSFORMS[i];
-							this.abovePage.style[property] = aboveTransform;
-							this.behindPage.style[property] = behindTransform;
-						};
-						
-						this.behindPage.style.opacity = opacity;
-						this.currentX = x;
-					},
+        if (!this.isEmpty()) {
+          var previousNavigatorItem = this.navigatorItems[this.navigatorItems.length - 1];
+          var previousPage = previousNavigatorItem.page;
+          pager.addClass('navigate_right');
+          
+          setTimeout(function(){
+            this.animatePageIn(pager, previousPage);
+            this.animateTitleIn(navigatorItem, previousNavigatorItem);
 
-					translateAboveOnly: function(x) {
-						var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
-						var behindTransform = 'translate3d(0, 0, 0)';
+            this.animateBackLabelIn(navigatorItem, previousNavigatorItem);
+            this.animateRightButtonIn(navigatorItem, previousNavigatorItem);
+          }.bind(this), 0);
+          
+        } else {
+          // root page
+          var titleElement = angular.element('<div></div>');
+          titleElement.addClass('onsen_navigator-item onsen_navigator-title topcoat-navigation-bar__title topcoat-navigation-bar__line-height center animate-center');
+          if (options.title) {
+            titleElement.text(options.title);
+          }
+          this.toolbarContent.append(titleElement);
+          navigatorItem.titleElement = titleElement;
+          this.animateRightButtonIn(navigatorItem, null);
+          this.setReady(true);
+        }
+        this.navigatorItems.push(navigatorItem);
+        this.setLeftButton(navigatorItem);
 
-						var property;
-						for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
-							property = BROWSER_TRANSFORMS[i];
-							this.abovePage.style[property] = aboveTransform;
-							this.behindPage.style[property] = behindTransform;
-						};
-												
-						this.currentX = x;
-					}
-				});
+      },
 
-				function isNumber(n) {
-					return !isNaN(parseFloat(n)) && isFinite(n);
-				}
+      pushPage: function(page, options) {
+        if (options && typeof options != "object") {
+          throw new Error('options must be an objected. You supplied ' + options);
+        }
+        if (!this.isReady()) {
+          return;
+        }
 
-				var swiper = new Swiper(element);
+        var that = this;
 
-				scope.pages = {
-					behind: scope.secondaryPage					
-				};
+        this.setReady(false);
 
-				scope.open = function() {
-					swiper.open();
-				};
+        $http({
+          url: page,
+          method: 'GET'
+        }).error(function(e) {
+          that.onTransitionEnded();
+          console.error(e);
+        }).success(function(data, status, headers, config) {
+          var div = document.createElement('div');
+          div.innerHTML = data; 
+          var pageContent = angular.element(div.cloneNode(true));
+          var pageEl = this.generatePageEl(pageContent, options);
+          var pageScope = this.createPageScope();
+          var compiledPage = this.compilePageEl(pageEl, pageScope);
+          this._pushPageDOM(page, div, compiledPage, pageScope, options);
+        }.bind(this)).error(function(data, status, headers, config) {
+          console.error('error', data, status);
+        });
+      },
 
-				scope.close = function() {
-					swiper.close();
-				};
+      popPage: function() {
+        if (this.navigatorItems.length < 2 || !this.isReady()) {
+          return;
+        }
+        this.setReady(false);
 
-				scope.toggle = function() {
-					swiper.toggle();
-				};
+        var currentNavigatorItem = this.navigatorItems.pop();
+        var previousNavigatorItem = this.navigatorItems[this.navigatorItems.length - 1];
 
-				scope.setSecondaryPage = function(page) {
-					if (page) {
-						scope.pages.behind = page;
-					} else {
-						throw new Error('cannot set undefined page');
-					}
-				};	
+        var currentPage = currentNavigatorItem.page;
+        var previousPage = previousNavigatorItem.page;
+        this.animatePageOut(currentPage, previousPage);
 
-				SplitViewStack.addSplitView(scope);		
-				scope.$on('$destroy', function(){
-					SplitViewStack.removeSplitView(scope);
-				});	
-			}
-		};
-	});
+        this.animateTitleOut(currentNavigatorItem, previousNavigatorItem);
+        this.animateBackLabelOut(previousNavigatorItem, currentNavigatorItem);
+
+        this.setLeftButton(previousNavigatorItem);
+        this.animateRightButtonOut(previousNavigatorItem, currentNavigatorItem);
+        currentNavigatorItem.pageScope.$destroy();
+      }          
+    });
+
+    return Navigator;
+  });
+
+  directives.directive('onsNavigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, Navigator, $templateCache) {
+    return {
+      restrict: 'E',
+      replace: false,
+      transclude: true,      
+      scope: {
+        title: '@',
+        page: '@',
+        hideToolbar: '@',
+        initialLeftButtonIcon: '@leftButtonIcon',
+        rightButtonIcon: '@',
+        onLeftButtonClick: '@',
+        onRightButtonClick: '@'
+      },      
+
+      compile: function(element, attrs, transclude) {
+        var path = ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.tpl';
+        element.append(angular.element($templateCache.get(path))[0]);
+
+        return{
+          pre: function preLink(scope, iElement, iAttrs, controller){  
+            // Without templateUrl, we must manually link the scope
+            $compile(iElement.children())(scope);
+          },
+
+          post: function postLink(scope, iElement, attrs, controller){
+            var navigator = new Navigator(scope, iElement, attrs);
+
+            if (!attrs.page) {
+
+              var pageScope = navigator.createPageScope();        
+                      
+              transclude(pageScope, function(compiledPageContent) {
+                var options = {
+                  title: scope.title,
+                  leftButtonIcon: scope.initialLeftButtonIcon,
+                  rightButtonIcon: scope.rightButtonIcon,
+                  onLeftButtonClick: scope.onLeftButtonClick,
+                  onRightButtonClick: scope.onRightButtonClick
+                };
+                var compiledPage = navigator.generatePageEl(angular.element(compiledPageContent), options);
+                navigator._pushPageDOM('', compiledPageContent[0], compiledPage, pageScope, options);
+              });
+            }
+
+            NavigatorStack.addNavigator(scope);
+            scope.$on('$destroy', function(){
+              NavigatorStack.removeNavigator(scope);
+            });
+          }
+        };
+      }
+
+    }
+  });
 })();
-(function() {
-	var directiveModules = angular.module('onsen.directives');
-
-	directiveModules.factory('SplitViewStack', function($rootScope) {
-		var SplitViewStack = Class.extend({
-			splitViews: [],
-
-			init: function() {
-				$rootScope.ons = $rootScope.ons || {};
-				$rootScope.ons.splitView = {};
-				$rootScope.ons.splitView.setMainPage = this.setMainPage.bind(this);
-				$rootScope.ons.splitView.setSecondaryPage = this.setSecondaryPage.bind(this);
-				$rootScope.ons.splitView.toggle = this.toggle.bind(this);				
-			},
-
-			_findClosestSplitView: function($event) {
-				// finding the right navigator
-				var splitView;
-				if ($event) {
-					var splitViewElement = $rootScope.ons.upTo($event.target, 'ons-split-view');
-					splitView = angular.element(splitViewElement).isolateScope();
-				} else {
-					splitView = this.splitViews[this.splitViews.length - 1];
-				}
-
-				return splitView;
-			},
-
-			_checkExistence: function() {
-				if (this.splitViews.length == 0) {
-					throw new Error('oops!! no navigator registerred');
-				}
-			},
-
-			addSplitView: function(splitView) {
-				this.splitViews.push(splitView);
-			},
-
-			removeSplitView: function(splitView){
-				for (var i = 0; i < this.splitViews.length; i++) {
-					if(this.splitViews[i] == splitView){
-						this.splitViews.splice(i, 1);
-					}
-				};
-			},
-
-			setMainPage: function(page, $event) {
-				this._checkExistence();
-
-				var splitview = this._findClosestSplitView($event);
-				splitview.setMainPage(page);
-			},
-
-			setSecondaryPage: function(page, $event) {
-				this._checkExistence();
-
-				var splitview = this._findClosestSplitView($event);
-				splitview.setSecondaryPage(page);
-			},
-
-			toggle: function($event) {
-				this._checkExistence();
-
-				var splitView = this._findClosestSplitView($event);
-				splitView.toggle();
-			}
-		});
-
-		return new SplitViewStack();
-	});
-})();
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 
 (function() {
-	'use strict';
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var directiveModules = angular.module('onsen.directives');
 
-	directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout, $http, $compile) {
-		return {
-			restrict: 'E',
-			replace: false,
-			transclude: true,
-			scope: {
-				hide: '@'
-			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
-			controller: function($scope, $element, $attrs) {
-				var container = angular.element($element[0].querySelector('.tab-bar-content'));
-				var footer = $element[0].querySelector('.footer');
+  directiveModules.factory('NavigatorStack', function($rootScope) {
+    var NavigatorStack = Class.extend({
+      navigators: [],
 
-				this.tabbarId = Date.now();
+      init: function() {
+        $rootScope.ons = $rootScope.ons || {};
+        $rootScope.ons.navigator = {};
+        $rootScope.ons.navigator.pushPage = this.pushPage.bind(this);
+        $rootScope.ons.navigator.popPage = this.popPage.bind(this);
+        $rootScope.ons.navigator.resetToPage = this.resetToPage.bind(this);
+      },
 
-				$scope.selectedTabItem = {
-					source: ''
-				};
+      _findNavigator: function($event) {
+        // finding the right navigator
+        var navigator;
+        if ($event) {
+          var navigatorElement = $rootScope.ons.upTo($event.target, 'ons-navigator');
+          navigator = angular.element(navigatorElement).isolateScope();
+        } else {
+          navigator = this.navigators[this.navigators.length - 1];
+        }
 
-				$attrs.$observe('hideTabs', function(hide) {
-					$scope.hideTabs = hide;
-					onTabbarVisibilityChanged();
-				});
+        return navigator;
+      },
 
-				function onTabbarVisibilityChanged() {
-					if ($scope.hideTabs) {
-						$scope.tabbarHeight = 0;
-					} else {
-						$scope.tabbarHeight = footer.clientHeight + 'px';
-					}
-				}
+      _checkExistence: function() {
+        if (this.navigators.length == 0) {
+          throw new Error('oops!! no navigator registerred');
+        }
+      },
 
-				var tabItems = [];
+      addNavigator: function(navigator) {
+        this.navigators.push(navigator);
+      },
 
-				this.gotSelected = function(selectedTabItem) {
-					if (selectedTabItem.page) {
-						this.setPage(selectedTabItem.page);
-					}
+      removeNavigator: function(navigator){
+        for (var i = 0; i < this.navigators.length; i++) {
+          if(this.navigators[i] == navigator){
+            this.navigators.splice(i, 1);
+          }
+        };
+      },
 
-					for (var i = 0; i < tabItems.length; i++) {
-						if (tabItems[i] != selectedTabItem) {
-							tabItems[i].setInactive();
-						}
-					}
-				};
+      pushPage: function(page, options, $event) {
+        this._checkExistence();
 
-				this.setPage = function(page) {
-					if (page) {
-						$http({
-							url: page,
-							method: "GET"
-						}).error(function(e) {
-							console.error(e);
-						}).success(function(data, status, headers, config) {
-							var templateHTML = angular.element(data.trim());
-							var pageScope = $scope.$parent.$new();
-							var pageContent = $compile(templateHTML)(pageScope);
-							container.append(pageContent);
+        var navigator = this._findNavigator($event);
+        navigator.pushPage(page, options);
+      },
 
-							if(this.currentPageElement){
-								this.currentPageElement.remove();
-								this.currentPageScope.$destroy();
-							}
+      resetToPage: function(page, options, $event) {
+        this._checkExistence();
 
-							this.currentPageElement = pageContent;
-							this.currentPageScope = pageScope;
-						}.bind(this));
-					} else {
-						throw new Error('cannot set undefined page');
-					}
-				}
+        var navigator = this._findNavigator($event);
+        navigator.resetToPage(page, options);
+      },
 
-				this.addTabItem = function(tabItem) {
-					tabItems.push(tabItem);
-				};
+      popPage: function($event) {
+        this._checkExistence();
 
-				$scope.ons = $scope.ons || {};
-				$scope.ons.tabbar = {};
-				$scope.ons.tabbar.setTabbarVisibility = function(visible) {
-					$scope.hideTabs = !visible;
-					onTabbarVisibilityChanged();
-				};
-			}
-		};
-	});
-})();
-/*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+        var navigator = this._findNavigator($event);
+        navigator.popPage();
+      }
+    });
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
-(function() {
-	'use strict';
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
-
-	directives.directive('onsTabbarItem', function(ONSEN_CONSTANTS) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			require: '^onsTabbar',
-			scope: {
-				page: '@',
-				active: '@',
-				icon: '@',
-				activeIcon: '@',
-				label: '@'
-			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
-			link: function(scope, element, attrs, tabbarController) {
-				var radioButton = element[0].querySelector('input');
-
-				scope.tabbarId = tabbarController.tabbarId;
-
-				tabbarController.addTabItem(scope);
-				scope.tabIcon = scope.icon;
-
-				scope.setActive = function() {
-					radioButton.checked = true;
-					tabbarController.gotSelected(scope);
-					if (scope.activeIcon) {
-						scope.tabIcon = scope.activeIcon;
-					}
-				};
-
-				scope.setInactive = function() {
-					scope.tabIcon = scope.icon;
-				};
-
-				if (scope.active) {
-					scope.setActive();
-				}
-
-			}
-		};
-	});
+    return new NavigatorStack();
+  });
 })();
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
@@ -3250,18 +1493,91 @@ limitations under the License.
 
 
 (function(){
-	'use strict';
+  'use strict';
 
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsTextArea', function(ONSEN_CONSTANTS, $timeout) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_area.tpl'
-		};
-	});
+  directives.directive('onsNavigatorToolbar', function(ONSEN_CONSTANTS, $timeout) {
+    return {
+      restrict: 'E',
+      replace: false,
+      transclude: false,
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator_toolbar.tpl'
+    };
+  });
+})();
+
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function() {
+  'use strict';
+
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+  directives.directive('onsPage', function(ONSEN_CONSTANTS, $timeout) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: true,
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/page.tpl',
+      compile: function(elt, attr, transclude) {        
+        return function(scope, elt, attr) {
+          transclude(scope, function(clone) {            
+            elt.append(clone);
+          });
+        };
+      }
+    };
+  });
+})();
+(function(){
+  'use strict';
+
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+  directives.directive('onsRadioButton', function(ONSEN_CONSTANTS) {
+    return {
+      restrict: 'E',
+      replace: false,
+      scope: {
+        value: '@',
+        ngModel: '=',
+        leftLabel: '@',
+        rightLabel: '@',
+        name: '@'
+      },
+      transclude: true,
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/radio_button.tpl',
+      link: function($scope, element, attrs){
+        var radioButton = element.find('input');
+        var checked = false;
+        attrs.$observe('disabled', function(disabled){
+          if(disabled === undefined){
+            radioButton.attr('disabled', false);            
+          }else{
+            radioButton.attr('disabled', true);
+          }
+        });        
+      }
+    };
+  });
 })();
 
 
@@ -3284,30 +1600,1714 @@ limitations under the License.
 
 
 (function(){
-	'use strict';
+  'use strict';
 
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsTextInput', function(ONSEN_CONSTANTS, $timeout) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: false,
-			scope: {
-				disabled: '='
-			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
-			link: function($scope, element, attr){
-				$scope.$watch(function(){
-					return $scope.disabled;
-				}, function(disabled){					
-				// attr.$observe('disabled', function(disabled){
-					var isDisabled = $scope.$eval(disabled);
-					element.attr('disabled', isDisabled);
-				});
-			}
-		};
-	});
+  directives.directive('onsRow', function(ONSEN_CONSTANTS, $timeout) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: true,
+      scope: {
+        align: '@'
+      },      
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/row.tpl',
+      compile: function(elt, attr, transclude) {        
+        return function(scope, elt, attr) {
+          transclude(scope.$parent, function(clone) {            
+            elt.append(clone);
+          });
+        };
+      }
+    };
+  });
+})();
+
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function() {
+  'use strict';
+  var directives = angular.module('onsen.directives');
+
+  directives.service('Screen', function(ONSEN_CONSTANTS, $http, $compile, ScreenStack, requestAnimationFrame, debugLog) {
+    var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
+    var TRANSITION_START = "webkitAnimationStart animationStart msAnimationStart oAnimationStart";
+
+    var Screen = Class.extend({
+      init: function(scope, element, attrs) {
+        this.screenItems = [];
+        this.scope = scope;
+        this.element = element;
+        this.attrs = attrs;
+
+        this.isReady = true;
+        this.attachMethods();
+
+        this.attrs.$observe('page', function(page) {
+          if (page) {
+          this.resetToPage(page);
+          }
+        }.bind(this));
+      },
+
+      onTransitionEnded: function() {
+        debugLog('onTransitionEnded: isReady = true');
+        this.isReady = true;
+      },
+
+      animateInBehindPage: function() {
+        var behindPage = this.screenItems[this.screenItems.length - 2].pageElement;
+        try {
+          behindPage.attr('class', 'screen-page transition modal-behind');
+        } catch(e) {
+          console.log(e);
+        }
+      },
+
+      animateInCurrentPage: function(pager) {
+        pager.attr("class", "screen-page unmodal");
+        var that = this;
+        pager.bind(TRANSITION_START, function transitionEnded() {
+          that.isReady = false;
+        });
+        pager.bind(TRANSITION_END, function transitionEnded() {
+          that.onTransitionEnded();
+        });
+
+        setTimeout(function() {
+          requestAnimationFrame(function() {
+            pager.attr("class", "screen-page transition screen-center");
+            that.animateInBehindPage();
+          });
+        }, 10);
+      },
+
+      animateOutBehindPage: function() {
+        var behindPage = this.screenItems[this.screenItems.length - 1].pageElement;
+        behindPage.attr('class', 'screen-page transition');
+      },
+
+      isEmpty: function() {
+        return this.screenItems.length < 1;
+      },
+
+      onPageAdded: function(page) {
+        var blackMask = angular.element(page[0].querySelector('.onsen_screen-black-mask'));
+        blackMask.removeClass('hide');
+      },
+
+      generatePageEl: function(pageContent){
+        var pageEl = angular.element('<div></div>');
+        pageEl.addClass('screen-page');
+
+        var blackMask = angular.element('<div></div>');
+        blackMask.addClass('onsen_screen-black-mask hide');
+        pageEl.append(blackMask);
+
+        var pageContainer = angular.element('<div></div>');
+        pageContainer.addClass('screen-page__container');
+        pageEl.append(pageContainer);
+
+        pageContainer.append(pageContent);
+        return pageEl;
+      },
+
+      compilePageEl: function(pageEl, pageScope){
+        var compiledPage = $compile(pageEl)(pageScope);
+        return compiledPage;
+      },
+
+      createPageScope: function(){
+        var pageScope = this.scope.$parent.$new();
+        return pageScope;
+      },
+
+      /**
+       * @param {String} pageUrl
+       * @param {DOMElement} element This element is must be ons-page element.
+       */
+      _presentPageDOM: function(pageUrl, compiledPage, pageScope) {
+        
+        this.element.append(compiledPage);
+
+        var isAnimate = this.screenItems.length >= 1;
+        if (isAnimate) {
+          this.animateInCurrentPage(compiledPage);
+        } else {
+          debugLog('_presentPageDOM: isReady = true');
+          this.isReady = true;
+        }
+
+        var screenItem = {
+          pageUrl: pageUrl,
+          pageElement: compiledPage,
+          pageScope: pageScope
+        };
+
+        this.screenItems.push(screenItem);
+
+        setTimeout(function() {
+          this.onPageAdded(compiledPage);
+        }.bind(this), 400);
+      },
+
+      presentPage: function(page){
+        if (!this.isReady) {
+          return;
+        }
+
+        var that = this;
+
+        $http({
+          url: page,
+          method: "GET"
+        }).error(function(e) {
+          that.onTransitionEnded();
+          console.error(e);
+        }).success(function(data, status, headers, config) {
+          var pageContent = angular.element(data.trim());
+          var pageEl = this.generatePageEl(pageContent);
+          var pageScope = this.createPageScope();
+          var compiledPage = this.compilePageEl(pageEl, pageScope);
+
+          that._presentPageDOM(page, compiledPage, pageScope);
+        }.bind(this)).error(function(data, status, headers, config) {
+          console.log('error', data, status);
+        });
+      },
+
+      dismissPage: function(){
+        if (this.screenItems.length < 2 || !this.isReady) {
+          debugLog('Can\'t dismiss anymore');
+          debugLog(this.screenItems);
+          return;
+        }
+
+        var screenItem = this.screenItems.pop();
+        var currentPage = screenItem.pageElement;
+        this.animateOutBehindPage();
+        currentPage.attr("class", "screen-page transition unmodal");
+        var that = this;
+
+        currentPage.bind(TRANSITION_START, function transitionEnded() {
+          that.isReady = false;
+        });
+        currentPage.bind(TRANSITION_END, function transitionEnded() {
+          currentPage.remove();
+          that.isReady = true;
+          debugLog('dismissPage() transtion end: isReady = true');
+          screenItem.pageScope.$destroy();
+        });
+      },
+
+      resetToPage: function(page){
+        this.scope.presentPage(page);
+        for (var i = 0; i < this.screenItems.length - 1; i++) {
+          this.screenItems[i].pageElement.remove();
+        }
+      },
+
+      attachMethods: function() {
+        this.scope.presentPage = this.presentPage.bind(this);
+        this.scope.resetToPage = this.resetToPage.bind(this);
+        this.scope.dismissPage = this.dismissPage.bind(this);
+      }
+    });
+
+    return Screen;
+  });
+
+  directives.directive('onsScreen', function(ONSEN_CONSTANTS, $http, $compile, Screen, ScreenStack) {
+
+    return {
+      restrict: 'E',
+      replace: false,
+      transclude: true,
+      scope: {
+        page: '='
+      },
+
+      compile: function(element, attrs, transclude) {
+        return function(scope, element, attrs) {
+          var screen = new Screen(scope, element, attrs);
+          if (!attrs.page) {
+            
+            var pageScope = screen.createPageScope();
+        
+            transclude(pageScope, function(pageContent) {
+              var pageEl = screen.generatePageEl(pageContent);
+              screen._presentPageDOM('', pageEl, pageScope);
+            });
+          }
+          ScreenStack.addScreen(scope);
+          scope.$on('$destroy', function(){
+            ScreenStack.removeScreen(scope);
+          });
+        }
+        
+      }
+    }
+  });
+})();
+
+(function() {
+  var directiveModules = angular.module('onsen.directives');
+
+  directiveModules.factory('ScreenStack', function($rootScope) {
+    var ScreenStack = Class.extend({
+      screens: [],
+
+      init: function() {
+        $rootScope.ons = $rootScope.ons || {};
+        $rootScope.ons.screen = {};
+        $rootScope.ons.screen.presentPage = this.presentPage.bind(this);
+        $rootScope.ons.screen.dismissPage = this.dismissPage.bind(this);
+        $rootScope.ons.screen.resetToPage = this.resetToPage.bind(this);
+      },
+
+      _findClosestScreen: function($event) {
+        // finding the right navigator
+        var screen;
+        if ($event) {
+          var screenElement = $rootScope.ons.upTo($event.target, 'ons-screen');
+          screen = angular.element(screenElement).isolateScope();
+        } else {
+          screen = this.screens[this.screens.length - 1];
+        }
+
+        return screen;
+      },
+
+      _checkExistence: function() {
+        if (this.screens.length == 0) {
+          throw new Error('oops!! no navigator registerred');
+        }
+      },
+
+      addScreen: function(screen) {
+        this.screens.push(screen);
+      },
+
+      removeScreen: function(screen){
+        for (var i = 0; i < this.screens.length; i++) {
+          if(this.screens[i] == screen){
+            this.screens.splice(i, 1);
+          }
+        };
+      },
+
+      presentPage: function(page, $event) {
+        this._checkExistence();
+
+        var screen = this._findClosestScreen($event);
+        screen.presentPage(page);
+      },
+
+      resetToPage: function(page, $event) {
+        this._checkExistence();
+
+        var screen = this._findClosestScreen($event);
+        screen.resetToPage(page);
+      },
+
+      dismissPage: function($event) {
+        this._checkExistence();
+
+        var screen = this._findClosestScreen($event);
+        screen.dismissPage();
+      }
+    });
+
+    return new ScreenStack();
+  });
+})();
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+
+(function() {
+  'use strict';
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+  directives.directive('onsScrollable', function(ONSEN_CONSTANTS, $timeout) {
+    return {
+      restrict: 'A',
+      replace: false,
+      transclude: false,
+      link: function(scope, element, attrs) {
+        // inifinte scroll
+
+        var scrollWrapper;
+        if (!element.hasClass('scroller-wrapper')) {
+          console.error('missing .scroller-wrapper class for ons-scrollable');
+          return;
+        }
+
+        
+
+        scrollWrapper = element[0];
+        var offset = parseInt(attrs.threshold) || 10;
+
+        if(scope.onScrolled){
+          scrollWrapper.addEventListener('scroll', function() {
+            if (scope.infinitScrollEnable) {
+              var scrollTopAndOffsetHeight = scrollWrapper.scrollTop + scrollWrapper.offsetHeight;
+              var scrollHeightMinusOffset = scrollWrapper.scrollHeight - offset;
+
+              if (scrollTopAndOffsetHeight >= scrollHeightMinusOffset) {
+                scope.onScrolled();
+              }
+            }
+          });  
+        }
+        
+
+        // IScroll for Android
+        if (!Modernizr.csstransforms3d) {
+          $timeout(function() {
+            var iScroll = new IScroll(scrollWrapper, {
+              momentum: true,
+              bounce: true,
+              hScrollbar: false,
+              vScrollbar: false,
+              preventDefault: false
+            });
+
+            iScroll.on('scrollStart', function(e) {
+              var scrolled = iScroll.y - offset;              
+              if (scrolled < (iScroll.maxScrollY + 40) ) {
+                // TODO: find a better way to know when content is upated so we can refresh
+                iScroll.refresh();
+              }
+            });
+
+            if(scope.onScrolled){
+              iScroll.on('scrollEnd', function(e) {
+                var scrolled = iScroll.y - offset;
+                if (scrolled < iScroll.maxScrollY) {
+                  // console.log('we are there!');
+                  scope.onScrolled();
+                }
+              });  
+            }
+            
+          }, 500);
+        }
+      }
+    };
+  });
+})();
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function() {
+  'use strict';
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+  directives.directive('onsScroller', function(ONSEN_CONSTANTS, $timeout) {
+    return {
+      restrict: 'E',
+      replace: false,
+      transclude: true,
+      scope: {
+        onScrolled: '&',
+        infinitScrollEnable: '='
+      },
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/scroller.tpl',
+      compile: function(elem, attrs, transcludeFn) {
+        return function(scope, element, attrs) {
+          var scroller = angular.element(element[0].querySelector('.scroller'));
+          transcludeFn(scope.$parent, function(clone) {
+            scroller.append(clone);
+          });
+        };
+      }
+    };
+  });
+})();
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function(){
+  'use strict';
+
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+  directives.directive('onsSearchInput', function(ONSEN_CONSTANTS, $timeout) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: false,
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/search_input.tpl'
+    };
+  });
+})();
+
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function(){
+  'use strict';
+
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+  directives.directive('onsSelect', function(ONSEN_CONSTANTS, $timeout) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: true,
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/select.tpl'
+    };
+  });
+})();
+
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function() {
+  'use strict';
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+  directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuStack) {
+    return {
+      restrict: 'E',
+      replace: false,
+      transclude: false,
+      scope: {
+        behindPage: '@',
+        abovePage: '@',
+        maxSlideDistance: '@',
+        swipable: '@',
+        swipeTargetWidth: '@'
+      },
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
+      link: function(scope, element, attrs) {
+        var MAIN_PAGE_RATIO = 0.9;
+        var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
+        var BROWSER_TRANSFORMS = [
+          "webkitTransform",
+          "mozTransform",
+          "msTransform",
+          "oTransform",
+          "transform"
+        ];
+
+        var Swiper = Class.extend({
+          init: function(element) {
+            this.isReady = false;
+            this.$el = element;
+            this.el = element[0];
+            this.VERTICAL_THRESHOLD = 20;
+            this.HORIZONTAL_THRESHOLD = 20;
+            this.behindPage = element[0].querySelector('.behind');
+            this.$behindPage = angular.element(this.behindPage);
+            this.abovePage = element[0].querySelector('.above');
+            this.$abovePage = angular.element(this.abovePage);
+            this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
+            this.previousX = 0;
+            this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;            
+
+            scope.$watch('maxSlideDistance', this.onMaxSlideDistanceChanged.bind(this));
+            scope.$watch('swipable', this.onSwipableChanged.bind(this));
+            scope.$watch('swipeTargetWidth', this.onSwipeTargetWidthChanged.bind(this));
+            window.addEventListener("resize", this.onWindowResize.bind(this));
+
+            this.currentX = 0;
+            this.startX = 0;
+
+            this.boundHandleEvent = this.handleEvent.bind(this);
+
+            this.attachMethods();
+            this.bindEvents();
+
+            if (scope.abovePage) {
+              scope.setAbovePage(scope.abovePage);
+            }
+
+            if (scope.behindPage) {
+              scope.setBehindPage(scope.behindPage);
+            }
+
+            window.setTimeout(function() {
+              this.isReady = true;
+              this.behindPage.style.opacity = 1;
+              this.blackMask.style.opacity = 1;
+            }.bind(this), 400);
+          },
+
+          onSwipableChanged: function(swipable){
+            if(swipable == "" || swipable == undefined){
+              swipable = true;
+            }else{
+              swipable = (swipable == "true");
+            }
+
+            if(swipable){
+              this.activateHammer();
+            }else{
+              this.deactivateHammer();
+            }
+          },
+
+          onSwipeTargetWidthChanged: function(targetWidth){
+            if(typeof targetWidth == 'string'){
+              targetWidth = targetWidth.replace('px', '');
+            }
+            var width = parseInt(targetWidth);
+            if(width < 0 || !targetWidth){
+              this.swipeTargetWidth = this.abovePage.clientWidth;
+            }else{
+              this.swipeTargetWidth = width;
+            }
+          },
+
+          onWindowResize: function(){
+            this.recalculateMAX();
+          },
+
+          onMaxSlideDistanceChanged: function(){            
+            this.recalculateMAX();
+          },
+
+          recalculateMAX: function(){
+            if(typeof scope.maxSlideDistance == 'string'){
+              scope.maxSlideDistance = scope.maxSlideDistance.replace('px', '');  
+            }
+            if (scope.maxSlideDistance && this.MAX > parseInt(scope.maxSlideDistance, 10)) {
+              this.MAX = parseInt(scope.maxSlideDistance);
+            }
+          },
+
+          activateHammer: function(){
+            this.hammertime.on("touch dragleft dragright swipeleft swiperight release", this.boundHandleEvent);
+          },
+
+          deactivateHammer: function(){
+            this.hammertime.off("touch dragleft dragright swipeleft swiperight release", this.boundHandleEvent);
+          },
+
+          bindEvents: function() {
+            this.hammertime = new Hammer(this.el);            
+            this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
+          },
+
+          attachMethods: function() {
+            scope.setBehindPage = function(page) {
+              if (page) {
+                $http({
+                  url: page,
+                  method: "GET"
+                }).error(function(e) {
+                  console.error(e);
+                }).success(function(data, status, headers, config) {
+                  var templateHTML = angular.element(data.trim());
+                  var page = angular.element('<div></div>');
+                  page.addClass('page');
+                  var pageScope = scope.$parent.$new();
+                  var pageContent = $compile(templateHTML)(pageScope);
+                  page.append(pageContent);
+                  this.$behindPage.append(page);
+
+                  if(this.currentBehindPageScope){
+                    this.currentBehindPageScope.$destroy();
+                    this.currentBehindPageElement.remove();
+                  }
+
+                  this.currentBehindPageElement = page;
+                  this.currentBehindPageScope = pageScope;
+
+                }.bind(this));
+              } else {
+                throw new Error('cannot set undefined page');
+              }
+            }.bind(this);
+
+            scope.setAbovePage = function(pageUrl) {
+              if (this.currentPageUrl === pageUrl) {
+                // same page -> ignore
+                return;
+              }
+
+              if (pageUrl) {
+                $http({
+                  url: pageUrl,
+                  method: "GET"
+                }).error(function(e) {
+                  console.error(e);
+                }).success(function(data, status, headers, config) {
+                  var templateHTML = angular.element(data.trim());
+                  var pageElement = angular.element('<div></div>');
+                  pageElement.addClass('page');
+                  pageElement[0].style.opacity = 0;
+                  var pageScope = scope.$parent.$new();
+                  var pageContent = $compile(templateHTML)(pageScope);
+                  pageElement.append(pageContent);
+                  this.$abovePage.append(pageElement);
+
+                  // prevent black flash
+                  setTimeout(function() {
+                    pageElement[0].style.opacity = 1;
+                    if (this.currentPageElement) {
+                      this.currentPageElement.remove();
+                      this.currentPageScope.$destroy();
+                    }
+                    this.currentPageElement = pageElement;
+                    this.currentPageScope = pageScope;
+                  }.bind(this), 0);
+
+                  this.currentPageUrl = pageUrl;
+                }.bind(this));
+              } else {
+                throw new Error('cannot set undefined page');
+              }
+            }.bind(this);
+          },
+
+
+          handleEvent: function(ev) {            
+            switch (ev.type) {
+
+              case 'touch':
+                if(this.isClosed()){
+                  if(!this.isInsideSwipeTargetArea(ev.gesture.center.pageX)){
+                    ev.gesture.stopDetect();
+                  }  
+                }
+                
+                break;
+
+              case 'dragleft':
+              case 'dragright':
+                ev.gesture.preventDefault();
+                var deltaX = ev.gesture.deltaX;
+                this.currentX = this.startX + deltaX;
+                if (this.currentX >= 0) {
+                  this.translate(this.currentX);
+                }
+                break;
+
+              case 'swipeleft':
+                ev.gesture.preventDefault();
+                this.close();
+                break;
+
+              case 'swiperight':
+                ev.gesture.preventDefault();
+                this.open();
+                break;
+
+              case 'release':
+                if (this.currentX > this.MAX / 2) {
+                  this.open();
+                } else {
+                  this.close();
+                }
+                break;
+            }
+          },
+
+          isInsideSwipeTargetArea: function(x){
+            return x < this.swipeTargetWidth;
+          },
+
+          onTransitionEnd: function() {
+            this.$abovePage.removeClass('transition');
+            this.$behindPage.removeClass('transition');
+          },
+
+          isClosed: function(){
+            return this.startX == 0;
+          },
+
+          close: function() {
+            this.startX = 0;
+            if (this.currentX !== 0) {
+              this.$abovePage.addClass('transition');
+              this.$behindPage.addClass('transition');
+              this.translate(0);
+            }
+          },
+
+          open: function() {
+            this.startX = this.MAX;
+            if (this.currentX != this.MAX) {
+              this.$abovePage.addClass('transition');
+              this.$behindPage.addClass('transition');
+              this.translate(this.MAX);
+            }
+          },
+
+          toggle: function() {
+            if (this.startX === 0) {
+              this.open();
+            } else {
+              this.close();
+            }
+          },
+
+          translate: function(x) {
+            var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
+            
+            var behind = (x - this.MAX) / this.MAX * 10;
+            if(behind > 0){
+              behind = 0;
+            }
+            var opacity = 1 + behind / 100;
+            var behindTransform = 'translate3d(' + behind + '%, 0, 0)';
+
+            var property;
+            for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
+              property = BROWSER_TRANSFORMS[i];
+              this.abovePage.style[property] = aboveTransform;
+              this.behindPage.style[property] = behindTransform;
+            };
+            if(this.isReady){
+              this.behindPage.style.opacity = opacity;
+            }            
+            this.currentX = x;
+          }
+        });
+
+        var swiper = new Swiper(element);
+
+
+        scope.openMenu = function() {
+          swiper.open();
+        };
+
+        scope.closeMenu = function() {
+          swiper.close();
+        };
+
+        scope.toggleMenu = function() {
+          swiper.toggle();
+        };
+
+
+        SlidingMenuStack.addSlidingMenu(scope);
+        scope.$on('$destroy', function(){
+          SlidingMenuStack.removeSlidingMenu(scope);
+        });
+      }
+    };
+  });
+})();
+(function() {
+  var directiveModules = angular.module('onsen.directives');
+
+  directiveModules.factory('SlidingMenuStack', function($rootScope) {
+    var SlidingMenuStack = Class.extend({
+      slidingMenus: [],
+
+      init: function() {
+        $rootScope.ons = $rootScope.ons || {};
+        $rootScope.ons.slidingMenu = {};
+        $rootScope.ons.slidingMenu.setAbovePage = this.setAbovePage.bind(this);
+        $rootScope.ons.slidingMenu.setBehindPage = this.setBehindPage.bind(this);
+        $rootScope.ons.slidingMenu.toggleMenu = this.toggleMenu.bind(this);
+        $rootScope.ons.slidingMenu.openMenu = this.openMenu.bind(this);
+        $rootScope.ons.slidingMenu.closeMenu = this.closeMenu.bind(this);
+      },
+
+      _findClosestSlidingMenu: function($event) {        
+        var slidingMenu;
+        if ($event) {
+          var slidingMenuElement = $rootScope.ons.upTo($event.target, 'ons-sliding-menu');
+          slidingMenu = angular.element(slidingMenuElement).isolateScope();
+        } else {
+          slidingMenu = this.slidingMenus[this.slidingMenus.length - 1];
+        }
+
+        return slidingMenu;
+      },
+
+      _checkExistence: function() {
+        if (this.slidingMenus.length == 0) {
+          throw new Error('oops!! no navigator registerred');
+        }
+      },
+
+      addSlidingMenu: function(slidingMenu) {
+        this.slidingMenus.push(slidingMenu);
+      },
+
+      removeSlidingMenu: function(slidingMenu){
+        for (var i = 0; i < this.slidingMenus.length; i++) {
+          if(this.slidingMenus[i] == slidingMenu){
+            this.slidingMenus.splice(i, 1);
+          }
+        };
+      },
+
+      setAbovePage: function(page, $event) {
+        this._checkExistence();
+
+        var slidingMenu = this._findClosestSlidingMenu($event);
+        slidingMenu.setAbovePage(page);
+      },
+
+      setBehindPage: function(page, $event) {
+        this._checkExistence();
+
+        var slidingMenu = this._findClosestSlidingMenu($event);
+        slidingMenu.setBehindPage(page);
+      },
+
+      toggleMenu: function($event) {
+        this._checkExistence();
+
+        var slidingMenu = this._findClosestSlidingMenu($event);
+        slidingMenu.toggleMenu();
+      },
+
+      openMenu: function($event) {
+        this._checkExistence();
+
+        var slidingMenu = this._findClosestSlidingMenu($event);
+        slidingMenu.openMenu();
+      },
+
+      closeMenu: function($event) {
+        this._checkExistence();
+
+        var slidingMenu = this._findClosestSlidingMenu($event);
+        slidingMenu.closeMenu();
+      }
+    });
+
+    return new SlidingMenuStack();
+  });
+})();
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function() {
+  'use strict';
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+  directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewStack) {
+    return {
+      restrict: 'E',
+      replace: false,
+      transclude: false,
+      scope: {
+        secondaryPage: '@',
+        mainPage: '@',
+        collapse: '@',
+        mainPageWidth: '@'
+      },
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
+      link: function(scope, element, attrs) {
+        var SPLIT_MODE = 0;
+        var COLLAPSE_MODE = 1;
+        var MAIN_PAGE_RATIO = 0.9;      
+
+        var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
+        var BROWSER_TRANSFORMS = [
+          "webkitTransform",
+          "mozTransform",
+          "msTransform",
+          "oTransform",
+          "transform"
+        ];
+
+        var Swiper = Class.extend({
+          init: function(element) {
+            this.$el = element;
+            this.el = element[0];
+            this.VERTICAL_THRESHOLD = 20;
+            this.HORIZONTAL_THRESHOLD = 20;
+            this.behindPage = element[0].querySelector('.secondary');
+            this.$behindPage = angular.element(this.behindPage);
+            this.abovePage = element[0].querySelector('.main');
+            this.$abovePage = angular.element(this.abovePage);
+            this.previousX = 0;
+            this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
+            this.currentX = 0;
+            this.startX = 0;
+            this.mode = SPLIT_MODE;
+
+            this.hammertime = new Hammer(this.el);
+            this.boundHammerEvent = this.handleEvent.bind(this);
+            this.bindEvents();
+
+            window.addEventListener("orientationchange", this.onOrientationChange.bind(this));
+            window.addEventListener('resize', this.onResize.bind(this));
+            
+            this.attachMethods();
+
+            if(scope.mainPage){
+              scope.setMainPage(scope.mainPage);
+            }
+
+            if(scope.secondaryPage){
+              scope.setSecondaryPage(scope.secondaryPage);
+            }
+
+            window.setTimeout(function(){
+              this.considerChangingCollapse();              
+            }.bind(this), 100);
+          },
+
+          attachMethods: function(){
+            scope.setSecondaryPage = function(page) {
+              if (page) {
+                $http({
+                  url: page,
+                  method: "GET"
+                }).error(function(e){
+                  console.error(e);
+                }).success(function(data, status, headers, config) {
+                  var templateHTML = angular.element(data.trim());
+                  var page = angular.element('<div></div>');
+                  page.addClass('page');    
+                  var pageScope = scope.$parent.$new();
+                  var pageContent = $compile(templateHTML)(pageScope);
+                  page.append(pageContent);
+                  this.$behindPage.append(page);  
+
+
+                  if(this.currentBehindPageElement){
+                    this.currentBehindPageElement.remove();
+                    this.currentBehindPageScope.$destroy();
+                  }
+
+                  this.currentBehindPageElement = page;
+                  this.currentBehindPageScope = pageScope;
+
+                }.bind(this));
+              } else {
+                throw new Error('cannot set undefined page');
+              }
+            }.bind(this);
+
+            scope.setMainPage = function(page) {
+              if (page) {
+                $http({
+                  url: page,
+                  method: "GET"
+                }).error(function(e){
+                  console.error(e);
+                }).success(function(data, status, headers, config) {
+                  var templateHTML = angular.element(data.trim());
+                  var page = angular.element('<div></div>');
+                  page.addClass('page');
+                  page[0].style.opacity = 0;
+                  var pageScope = scope.$parent.$new();
+                  var pageContent = $compile(templateHTML)(pageScope);
+                  page.append(pageContent);
+                  this.$abovePage.append(page);
+
+                  // prevent black flash
+                  setTimeout(function(){
+                    page[0].style.opacity = 1;
+                    if(this.currentPage){
+                      this.currentPage.remove();
+                      this.currentPageScope.$destroy();
+                    }
+                    this.currentPage = page;
+                    this.currentPageScope = pageScope;
+                  }.bind(this), 0);
+
+                }.bind(this));
+              } else {
+                throw new Error('cannot set undefined page');
+              }
+            }.bind(this);
+          },
+
+          onOrientationChange: function() {
+            this.considerChangingCollapse();
+          },
+
+          onResize: function() {
+            this.considerChangingCollapse();
+            this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
+          },
+
+          considerChangingCollapse: function() {
+            if (this.shouldCollapse()) {
+              this.activateCollapseMode();
+            } else {
+              this.deactivateCollapseMode();
+            }
+          },
+
+          shouldCollapse: function() {
+            var orientation = window.orientation;
+            if(orientation === undefined ){
+              orientation = window.innerWidth > window.innerHeight ? 90 : 0;
+            }
+
+            switch (scope.collapse) {
+              case undefined:
+              case "none":
+                return false;
+
+              case "portrait":
+                if (orientation == 180 || orientation == 0) {
+                  return true;
+                } else {
+                  return false;
+                }
+                break;
+
+              case "landscape":
+                if (orientation == 90 || orientation == -90) {
+                  return true;
+                } else {
+                  return false;
+                }
+                break;
+
+              default:
+                // by width
+                if (scope.collapse === undefined) {
+                  return false;
+                } else {
+                  var widthToken;
+                  if (scope.collapse.indexOf('width') >= 0) {
+                    var tokens = scope.collapse.split(' ');
+                    widthToken = tokens[tokens.length - 1];
+                  }else{
+                    widthToken = scope.collapse;
+                  }
+
+                  if (widthToken.indexOf('px') > 0) {
+                    widthToken = widthToken.substr(0, widthToken.length - 2);
+                  }
+
+                  if (isNumber(widthToken)) {
+                    if (window.innerWidth < widthToken) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  }
+
+                  return false;                  
+                }
+
+                break;
+            }
+
+          },
+
+          setSize: function() {            
+            if(!scope.mainPageWidth){
+              scope.mainPageWidth = "70";
+            }
+            var behindSize = 100 - scope.mainPageWidth.replace('%', '');
+            this.behindPage.style.width = behindSize + '%';
+            this.behindPage.style.opacity = 1;
+            this.abovePage.style.width = scope.mainPageWidth + '%';
+            var translate = this.behindPage.clientWidth;
+            this.translateAboveOnly(translate);
+          },
+
+          activateCollapseMode: function() {
+            this.behindPage.style.width =  '100%';
+            this.abovePage.style.width = '100%';
+            this.mode = COLLAPSE_MODE;
+            this.activateHammer();
+            this.translate(0);
+
+            if (Modernizr.boxshadow) {
+              this.$abovePage.addClass('onsen_split-view__shadow');
+            }
+          },
+
+          deactivateCollapseMode: function() {
+            this.setSize();
+            this.deactivateHammer();
+            this.mode = SPLIT_MODE;
+            if (Modernizr.boxshadow) {
+              this.$abovePage.removeClass('onsen_split-view__shadow');
+            }
+          },
+
+          activateHammer: function() {
+            this.hammertime.on("dragleft dragright swipeleft swiperight release", this.boundHammerEvent);
+          },
+
+          deactivateHammer: function() {
+            this.hammertime.off("dragleft dragright swipeleft swiperight release", this.boundHammerEvent);
+          },
+
+          bindEvents: function() {
+            this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
+          },
+
+          handleEvent: function(ev) {
+            switch (ev.type) {
+
+              case 'dragleft':
+              case 'dragright':
+                ev.gesture.preventDefault();
+                var deltaX = ev.gesture.deltaX;
+                this.currentX = this.startX + deltaX;
+                if (this.currentX >= 0) {
+                  this.translate(this.currentX);
+                }
+                break;
+
+              case 'swipeleft':
+                ev.gesture.preventDefault();
+                this.close();
+                break;
+
+              case 'swiperight':
+                ev.gesture.preventDefault();
+                this.open();
+                break;
+
+              case 'release':
+                if (this.currentX > this.MAX / 2) {
+                  this.open();
+                } else {
+                  this.close();
+                }
+                break;
+            }
+          },
+
+          onTransitionEnd: function() {
+            this.$abovePage.removeClass('transition');
+            this.$behindPage.removeClass('transition');
+          },
+
+          close: function() {
+            if (this.mode === SPLIT_MODE) {
+              return;
+            }
+            this.startX = 0;
+            if (this.currentX !== 0) {
+              this.$abovePage.addClass('transition');
+              this.$behindPage.addClass('transition');
+              this.translate(0);
+            }
+          },
+
+          open: function() {
+            if (this.mode === SPLIT_MODE) {
+              return;
+            }
+            this.startX = this.MAX;
+            if (this.currentX != this.MAX) {
+              this.$abovePage.addClass('transition');
+              this.$behindPage.addClass('transition');
+              this.translate(this.MAX);
+            }
+          },
+
+          toggle: function() {
+            if (this.startX === 0) {
+              this.open();
+            } else {
+              this.close();
+            }
+          },
+
+          translate: function(x) {
+            var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
+            
+            var behind = (x - this.MAX) / this.MAX * 10;
+            var opacity = 1 + behind / 100;
+            var behindTransform = 'translate3d(' + behind + '%, 0, 0)';
+
+            var property;
+            for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
+              property = BROWSER_TRANSFORMS[i];
+              this.abovePage.style[property] = aboveTransform;
+              this.behindPage.style[property] = behindTransform;
+            };
+            
+            this.behindPage.style.opacity = opacity;
+            this.currentX = x;
+          },
+
+          translateAboveOnly: function(x) {
+            var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
+            var behindTransform = 'translate3d(0, 0, 0)';
+
+            var property;
+            for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
+              property = BROWSER_TRANSFORMS[i];
+              this.abovePage.style[property] = aboveTransform;
+              this.behindPage.style[property] = behindTransform;
+            };
+                        
+            this.currentX = x;
+          }
+        });
+
+        function isNumber(n) {
+          return !isNaN(parseFloat(n)) && isFinite(n);
+        }
+
+        var swiper = new Swiper(element);
+
+        scope.pages = {
+          behind: scope.secondaryPage          
+        };
+
+        scope.open = function() {
+          swiper.open();
+        };
+
+        scope.close = function() {
+          swiper.close();
+        };
+
+        scope.toggle = function() {
+          swiper.toggle();
+        };
+
+        scope.setSecondaryPage = function(page) {
+          if (page) {
+            scope.pages.behind = page;
+          } else {
+            throw new Error('cannot set undefined page');
+          }
+        };  
+
+        SplitViewStack.addSplitView(scope);    
+        scope.$on('$destroy', function(){
+          SplitViewStack.removeSplitView(scope);
+        });  
+      }
+    };
+  });
+})();
+(function() {
+  var directiveModules = angular.module('onsen.directives');
+
+  directiveModules.factory('SplitViewStack', function($rootScope) {
+    var SplitViewStack = Class.extend({
+      splitViews: [],
+
+      init: function() {
+        $rootScope.ons = $rootScope.ons || {};
+        $rootScope.ons.splitView = {};
+        $rootScope.ons.splitView.setMainPage = this.setMainPage.bind(this);
+        $rootScope.ons.splitView.setSecondaryPage = this.setSecondaryPage.bind(this);
+        $rootScope.ons.splitView.toggle = this.toggle.bind(this);        
+      },
+
+      _findClosestSplitView: function($event) {
+        // finding the right navigator
+        var splitView;
+        if ($event) {
+          var splitViewElement = $rootScope.ons.upTo($event.target, 'ons-split-view');
+          splitView = angular.element(splitViewElement).isolateScope();
+        } else {
+          splitView = this.splitViews[this.splitViews.length - 1];
+        }
+
+        return splitView;
+      },
+
+      _checkExistence: function() {
+        if (this.splitViews.length == 0) {
+          throw new Error('oops!! no navigator registerred');
+        }
+      },
+
+      addSplitView: function(splitView) {
+        this.splitViews.push(splitView);
+      },
+
+      removeSplitView: function(splitView){
+        for (var i = 0; i < this.splitViews.length; i++) {
+          if(this.splitViews[i] == splitView){
+            this.splitViews.splice(i, 1);
+          }
+        };
+      },
+
+      setMainPage: function(page, $event) {
+        this._checkExistence();
+
+        var splitview = this._findClosestSplitView($event);
+        splitview.setMainPage(page);
+      },
+
+      setSecondaryPage: function(page, $event) {
+        this._checkExistence();
+
+        var splitview = this._findClosestSplitView($event);
+        splitview.setSecondaryPage(page);
+      },
+
+      toggle: function($event) {
+        this._checkExistence();
+
+        var splitView = this._findClosestSplitView($event);
+        splitView.toggle();
+      }
+    });
+
+    return new SplitViewStack();
+  });
+})();
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function() {
+  'use strict';
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+  directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout, $http, $compile) {
+    return {
+      restrict: 'E',
+      replace: false,
+      transclude: true,
+      scope: {
+        hide: '@'
+      },
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
+      controller: function($scope, $element, $attrs) {
+        var container = angular.element($element[0].querySelector('.tab-bar-content'));
+        var footer = $element[0].querySelector('.footer');
+
+        this.tabbarId = Date.now();
+
+        $scope.selectedTabItem = {
+          source: ''
+        };
+
+        $attrs.$observe('hideTabs', function(hide) {
+          $scope.hideTabs = hide;
+          onTabbarVisibilityChanged();
+        });
+
+        function onTabbarVisibilityChanged() {
+          if ($scope.hideTabs) {
+            $scope.tabbarHeight = 0;
+          } else {
+            $scope.tabbarHeight = footer.clientHeight + 'px';
+          }
+        }
+
+        var tabItems = [];
+
+        this.gotSelected = function(selectedTabItem) {
+          if (selectedTabItem.page) {
+            this.setPage(selectedTabItem.page);
+          }
+
+          for (var i = 0; i < tabItems.length; i++) {
+            if (tabItems[i] != selectedTabItem) {
+              tabItems[i].setInactive();
+            }
+          }
+        };
+
+        this.setPage = function(page) {
+          if (page) {
+            $http({
+              url: page,
+              method: "GET"
+            }).error(function(e) {
+              console.error(e);
+            }).success(function(data, status, headers, config) {
+              var templateHTML = angular.element(data.trim());
+              var pageScope = $scope.$parent.$new();
+              var pageContent = $compile(templateHTML)(pageScope);
+              container.append(pageContent);
+
+              if(this.currentPageElement){
+                this.currentPageElement.remove();
+                this.currentPageScope.$destroy();
+              }
+
+              this.currentPageElement = pageContent;
+              this.currentPageScope = pageScope;
+            }.bind(this));
+          } else {
+            throw new Error('cannot set undefined page');
+          }
+        }
+
+        this.addTabItem = function(tabItem) {
+          tabItems.push(tabItem);
+        };
+
+        $scope.ons = $scope.ons || {};
+        $scope.ons.tabbar = {};
+        $scope.ons.tabbar.setTabbarVisibility = function(visible) {
+          $scope.hideTabs = !visible;
+          onTabbarVisibilityChanged();
+        };
+      }
+    };
+  });
+})();
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function() {
+  'use strict';
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+  directives.directive('onsTabbarItem', function(ONSEN_CONSTANTS) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: true,
+      require: '^onsTabbar',
+      scope: {
+        page: '@',
+        active: '@',
+        icon: '@',
+        activeIcon: '@',
+        label: '@'
+      },
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
+      link: function(scope, element, attrs, tabbarController) {
+        var radioButton = element[0].querySelector('input');
+
+        scope.tabbarId = tabbarController.tabbarId;
+
+        tabbarController.addTabItem(scope);
+        scope.tabIcon = scope.icon;
+
+        scope.setActive = function() {
+          radioButton.checked = true;
+          tabbarController.gotSelected(scope);
+          if (scope.activeIcon) {
+            scope.tabIcon = scope.activeIcon;
+          }
+        };
+
+        scope.setInactive = function() {
+          scope.tabIcon = scope.icon;
+        };
+
+        if (scope.active) {
+          scope.setActive();
+        }
+
+      }
+    };
+  });
+})();
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function(){
+  'use strict';
+
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+  directives.directive('onsTextArea', function(ONSEN_CONSTANTS, $timeout) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: true,
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_area.tpl'
+    };
+  });
+})();
+
+
+/*
+Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+(function(){
+  'use strict';
+
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+
+  directives.directive('onsTextInput', function(ONSEN_CONSTANTS, $timeout) {
+    return {
+      restrict: 'E',
+      replace: true,
+      transclude: false,
+      scope: {
+        disabled: '='
+      },
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
+      link: function($scope, element, attr){
+        $scope.$watch(function(){
+          return $scope.disabled;
+        }, function(disabled){          
+        // attr.$observe('disabled', function(disabled){
+          var isDisabled = $scope.$eval(disabled);
+          element.attr('disabled', isDisabled);
+        });
+      }
+    };
+  });
 })();
 
 
@@ -3395,135 +3395,135 @@ limitations under the License.
  * @param {Element} layer The layer to listen on
  */
 function FastClick(layer) {
-	'use strict';
-	var oldOnClick;
+  'use strict';
+  var oldOnClick;
 
 
-	/**
-	 * Whether a click is currently being tracked.
-	 *
-	 * @type boolean
-	 */
-	this.trackingClick = false;
+  /**
+   * Whether a click is currently being tracked.
+   *
+   * @type boolean
+   */
+  this.trackingClick = false;
 
 
-	/**
-	 * Timestamp for when when click tracking started.
-	 *
-	 * @type number
-	 */
-	this.trackingClickStart = 0;
+  /**
+   * Timestamp for when when click tracking started.
+   *
+   * @type number
+   */
+  this.trackingClickStart = 0;
 
 
-	/**
-	 * The element being tracked for a click.
-	 *
-	 * @type EventTarget
-	 */
-	this.targetElement = null;
+  /**
+   * The element being tracked for a click.
+   *
+   * @type EventTarget
+   */
+  this.targetElement = null;
 
 
-	/**
-	 * X-coordinate of touch start event.
-	 *
-	 * @type number
-	 */
-	this.touchStartX = 0;
+  /**
+   * X-coordinate of touch start event.
+   *
+   * @type number
+   */
+  this.touchStartX = 0;
 
 
-	/**
-	 * Y-coordinate of touch start event.
-	 *
-	 * @type number
-	 */
-	this.touchStartY = 0;
+  /**
+   * Y-coordinate of touch start event.
+   *
+   * @type number
+   */
+  this.touchStartY = 0;
 
 
-	/**
-	 * ID of the last touch, retrieved from Touch.identifier.
-	 *
-	 * @type number
-	 */
-	this.lastTouchIdentifier = 0;
+  /**
+   * ID of the last touch, retrieved from Touch.identifier.
+   *
+   * @type number
+   */
+  this.lastTouchIdentifier = 0;
 
 
-	/**
-	 * Touchmove boundary, beyond which a click will be cancelled.
-	 *
-	 * @type number
-	 */
-	this.touchBoundary = 10;
+  /**
+   * Touchmove boundary, beyond which a click will be cancelled.
+   *
+   * @type number
+   */
+  this.touchBoundary = 10;
 
 
-	/**
-	 * The FastClick layer.
-	 *
-	 * @type Element
-	 */
-	this.layer = layer;
+  /**
+   * The FastClick layer.
+   *
+   * @type Element
+   */
+  this.layer = layer;
 
-	if (FastClick.notNeeded(layer)) {
-		return;
-	}
+  if (FastClick.notNeeded(layer)) {
+    return;
+  }
 
-	// Some old versions of Android don't have Function.prototype.bind
-	function bind(method, context) {
-		return function() { return method.apply(context, arguments); };
-	}
+  // Some old versions of Android don't have Function.prototype.bind
+  function bind(method, context) {
+    return function() { return method.apply(context, arguments); };
+  }
 
-	// Set up event handlers as required
-	if (deviceIsAndroid) {
-		layer.addEventListener('mouseover', bind(this.onMouse, this), true);
-		layer.addEventListener('mousedown', bind(this.onMouse, this), true);
-		layer.addEventListener('mouseup', bind(this.onMouse, this), true);
-	}
+  // Set up event handlers as required
+  if (deviceIsAndroid) {
+    layer.addEventListener('mouseover', bind(this.onMouse, this), true);
+    layer.addEventListener('mousedown', bind(this.onMouse, this), true);
+    layer.addEventListener('mouseup', bind(this.onMouse, this), true);
+  }
 
-	layer.addEventListener('click', bind(this.onClick, this), true);
-	layer.addEventListener('touchstart', bind(this.onTouchStart, this), false);
-	layer.addEventListener('touchmove', bind(this.onTouchMove, this), false);
-	layer.addEventListener('touchend', bind(this.onTouchEnd, this), false);
-	layer.addEventListener('touchcancel', bind(this.onTouchCancel, this), false);
+  layer.addEventListener('click', bind(this.onClick, this), true);
+  layer.addEventListener('touchstart', bind(this.onTouchStart, this), false);
+  layer.addEventListener('touchmove', bind(this.onTouchMove, this), false);
+  layer.addEventListener('touchend', bind(this.onTouchEnd, this), false);
+  layer.addEventListener('touchcancel', bind(this.onTouchCancel, this), false);
 
-	// Hack is required for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
-	// which is how FastClick normally stops click events bubbling to callbacks registered on the FastClick
-	// layer when they are cancelled.
-	if (!Event.prototype.stopImmediatePropagation) {
-		layer.removeEventListener = function(type, callback, capture) {
-			var rmv = Node.prototype.removeEventListener;
-			if (type === 'click') {
-				rmv.call(layer, type, callback.hijacked || callback, capture);
-			} else {
-				rmv.call(layer, type, callback, capture);
-			}
-		};
+  // Hack is required for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
+  // which is how FastClick normally stops click events bubbling to callbacks registered on the FastClick
+  // layer when they are cancelled.
+  if (!Event.prototype.stopImmediatePropagation) {
+    layer.removeEventListener = function(type, callback, capture) {
+      var rmv = Node.prototype.removeEventListener;
+      if (type === 'click') {
+        rmv.call(layer, type, callback.hijacked || callback, capture);
+      } else {
+        rmv.call(layer, type, callback, capture);
+      }
+    };
 
-		layer.addEventListener = function(type, callback, capture) {
-			var adv = Node.prototype.addEventListener;
-			if (type === 'click') {
-				adv.call(layer, type, callback.hijacked || (callback.hijacked = function(event) {
-					if (!event.propagationStopped) {
-						callback(event);
-					}
-				}), capture);
-			} else {
-				adv.call(layer, type, callback, capture);
-			}
-		};
-	}
+    layer.addEventListener = function(type, callback, capture) {
+      var adv = Node.prototype.addEventListener;
+      if (type === 'click') {
+        adv.call(layer, type, callback.hijacked || (callback.hijacked = function(event) {
+          if (!event.propagationStopped) {
+            callback(event);
+          }
+        }), capture);
+      } else {
+        adv.call(layer, type, callback, capture);
+      }
+    };
+  }
 
-	// If a handler is already declared in the element's onclick attribute, it will be fired before
-	// FastClick's onClick handler. Fix this by pulling out the user-defined handler function and
-	// adding it as listener.
-	if (typeof layer.onclick === 'function') {
+  // If a handler is already declared in the element's onclick attribute, it will be fired before
+  // FastClick's onClick handler. Fix this by pulling out the user-defined handler function and
+  // adding it as listener.
+  if (typeof layer.onclick === 'function') {
 
-		// Android browser on at least 3.2 requires a new reference to the function in layer.onclick
-		// - the old one won't work if passed to addEventListener directly.
-		oldOnClick = layer.onclick;
-		layer.addEventListener('click', function(event) {
-			oldOnClick(event);
-		}, false);
-		layer.onclick = null;
-	}
+    // Android browser on at least 3.2 requires a new reference to the function in layer.onclick
+    // - the old one won't work if passed to addEventListener directly.
+    oldOnClick = layer.onclick;
+    layer.addEventListener('click', function(event) {
+      oldOnClick(event);
+    }, false);
+    layer.onclick = null;
+  }
 }
 
 
@@ -3566,32 +3566,32 @@ var deviceIsIOSWithBadTarget = deviceIsIOS && (/OS ([6-9]|\d{2})_\d/).test(navig
  * @returns {boolean} Returns true if the element needs a native click
  */
 FastClick.prototype.needsClick = function(target) {
-	'use strict';
-	switch (target.nodeName.toLowerCase()) {
+  'use strict';
+  switch (target.nodeName.toLowerCase()) {
 
-	// Don't send a synthetic click to disabled inputs (issue #62)
-	case 'button':
-	case 'select':
-	case 'textarea':
-		if (target.disabled) {
-			return true;
-		}
+  // Don't send a synthetic click to disabled inputs (issue #62)
+  case 'button':
+  case 'select':
+  case 'textarea':
+    if (target.disabled) {
+      return true;
+    }
 
-		break;
-	case 'input':
+    break;
+  case 'input':
 
-		// File inputs need real clicks on iOS 6 due to a browser bug (issue #68)
-		if ((deviceIsIOS && target.type === 'file') || target.disabled) {
-			return true;
-		}
+    // File inputs need real clicks on iOS 6 due to a browser bug (issue #68)
+    if ((deviceIsIOS && target.type === 'file') || target.disabled) {
+      return true;
+    }
 
-		break;
-	case 'label':
-	case 'video':
-		return true;
-	}
+    break;
+  case 'label':
+  case 'video':
+    return true;
+  }
 
-	return (/\bneedsclick\b/).test(target.className);
+  return (/\bneedsclick\b/).test(target.className);
 };
 
 
@@ -3602,28 +3602,28 @@ FastClick.prototype.needsClick = function(target) {
  * @returns {boolean} Returns true if the element requires a call to focus to simulate native click.
  */
 FastClick.prototype.needsFocus = function(target) {
-	'use strict';
-	switch (target.nodeName.toLowerCase()) {
-	case 'textarea':
-		return true;
-	case 'select':
-		return !deviceIsAndroid;
-	case 'input':
-		switch (target.type) {
-		case 'button':
-		case 'checkbox':
-		case 'file':
-		case 'image':
-		case 'radio':
-		case 'submit':
-			return false;
-		}
+  'use strict';
+  switch (target.nodeName.toLowerCase()) {
+  case 'textarea':
+    return true;
+  case 'select':
+    return !deviceIsAndroid;
+  case 'input':
+    switch (target.type) {
+    case 'button':
+    case 'checkbox':
+    case 'file':
+    case 'image':
+    case 'radio':
+    case 'submit':
+      return false;
+    }
 
-		// No point in attempting to focus disabled inputs
-		return !target.disabled && !target.readOnly;
-	default:
-		return (/\bneedsfocus\b/).test(target.className);
-	}
+    // No point in attempting to focus disabled inputs
+    return !target.disabled && !target.readOnly;
+  default:
+    return (/\bneedsfocus\b/).test(target.className);
+  }
 };
 
 
@@ -3634,32 +3634,32 @@ FastClick.prototype.needsFocus = function(target) {
  * @param {Event} event
  */
 FastClick.prototype.sendClick = function(targetElement, event) {
-	'use strict';
-	var clickEvent, touch;
+  'use strict';
+  var clickEvent, touch;
 
-	// On some Android devices activeElement needs to be blurred otherwise the synthetic click will have no effect (#24)
-	if (document.activeElement && document.activeElement !== targetElement) {
-		document.activeElement.blur();
-	}
+  // On some Android devices activeElement needs to be blurred otherwise the synthetic click will have no effect (#24)
+  if (document.activeElement && document.activeElement !== targetElement) {
+    document.activeElement.blur();
+  }
 
-	touch = event.changedTouches[0];
+  touch = event.changedTouches[0];
 
-	// Synthesise a click event, with an extra attribute so it can be tracked
-	clickEvent = document.createEvent('MouseEvents');
-	clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
-	clickEvent.forwardedTouchEvent = true;
-	targetElement.dispatchEvent(clickEvent);
+  // Synthesise a click event, with an extra attribute so it can be tracked
+  clickEvent = document.createEvent('MouseEvents');
+  clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
+  clickEvent.forwardedTouchEvent = true;
+  targetElement.dispatchEvent(clickEvent);
 };
 
 FastClick.prototype.determineEventType = function(targetElement) {
-	'use strict';
+  'use strict';
 
-	//Issue #159: Android Chrome Select Box does not open with a synthetic click event
-	if (deviceIsAndroid && targetElement.tagName.toLowerCase() === 'select') {
-		return 'mousedown';
-	}
+  //Issue #159: Android Chrome Select Box does not open with a synthetic click event
+  if (deviceIsAndroid && targetElement.tagName.toLowerCase() === 'select') {
+    return 'mousedown';
+  }
 
-	return 'click';
+  return 'click';
 };
 
 
@@ -3667,16 +3667,16 @@ FastClick.prototype.determineEventType = function(targetElement) {
  * @param {EventTarget|Element} targetElement
  */
 FastClick.prototype.focus = function(targetElement) {
-	'use strict';
-	var length;
+  'use strict';
+  var length;
 
-	// Issue #160: on iOS 7, some input elements (e.g. date datetime) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just check the type instead. Filed as Apple bug #15122724.
-	if (deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time') {
-		length = targetElement.value.length;
-		targetElement.setSelectionRange(length, length);
-	} else {
-		targetElement.focus();
-	}
+  // Issue #160: on iOS 7, some input elements (e.g. date datetime) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just check the type instead. Filed as Apple bug #15122724.
+  if (deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time') {
+    length = targetElement.value.length;
+    targetElement.setSelectionRange(length, length);
+  } else {
+    targetElement.focus();
+  }
 };
 
 
@@ -3686,30 +3686,30 @@ FastClick.prototype.focus = function(targetElement) {
  * @param {EventTarget|Element} targetElement
  */
 FastClick.prototype.updateScrollParent = function(targetElement) {
-	'use strict';
-	var scrollParent, parentElement;
+  'use strict';
+  var scrollParent, parentElement;
 
-	scrollParent = targetElement.fastClickScrollParent;
+  scrollParent = targetElement.fastClickScrollParent;
 
-	// Attempt to discover whether the target element is contained within a scrollable layer. Re-check if the
-	// target element was moved to another parent.
-	if (!scrollParent || !scrollParent.contains(targetElement)) {
-		parentElement = targetElement;
-		do {
-			if (parentElement.scrollHeight > parentElement.offsetHeight) {
-				scrollParent = parentElement;
-				targetElement.fastClickScrollParent = parentElement;
-				break;
-			}
+  // Attempt to discover whether the target element is contained within a scrollable layer. Re-check if the
+  // target element was moved to another parent.
+  if (!scrollParent || !scrollParent.contains(targetElement)) {
+    parentElement = targetElement;
+    do {
+      if (parentElement.scrollHeight > parentElement.offsetHeight) {
+        scrollParent = parentElement;
+        targetElement.fastClickScrollParent = parentElement;
+        break;
+      }
 
-			parentElement = parentElement.parentElement;
-		} while (parentElement);
-	}
+      parentElement = parentElement.parentElement;
+    } while (parentElement);
+  }
 
-	// Always update the scroll top tracker if possible.
-	if (scrollParent) {
-		scrollParent.fastClickLastScrollTop = scrollParent.scrollTop;
-	}
+  // Always update the scroll top tracker if possible.
+  if (scrollParent) {
+    scrollParent.fastClickLastScrollTop = scrollParent.scrollTop;
+  }
 };
 
 
@@ -3718,14 +3718,14 @@ FastClick.prototype.updateScrollParent = function(targetElement) {
  * @returns {Element|EventTarget}
  */
 FastClick.prototype.getTargetElementFromEventTarget = function(eventTarget) {
-	'use strict';
+  'use strict';
 
-	// On some older browsers (notably Safari on iOS 4.1 - see issue #56) the event target may be a text node.
-	if (eventTarget.nodeType === Node.TEXT_NODE) {
-		return eventTarget.parentNode;
-	}
+  // On some older browsers (notably Safari on iOS 4.1 - see issue #56) the event target may be a text node.
+  if (eventTarget.nodeType === Node.TEXT_NODE) {
+    return eventTarget.parentNode;
+  }
 
-	return eventTarget;
+  return eventTarget;
 };
 
 
@@ -3736,62 +3736,62 @@ FastClick.prototype.getTargetElementFromEventTarget = function(eventTarget) {
  * @returns {boolean}
  */
 FastClick.prototype.onTouchStart = function(event) {
-	'use strict';
-	var targetElement, touch, selection;
+  'use strict';
+  var targetElement, touch, selection;
 
-	// Ignore multiple touches, otherwise pinch-to-zoom is prevented if both fingers are on the FastClick element (issue #111).
-	if (event.targetTouches.length > 1) {
-		return true;
-	}
+  // Ignore multiple touches, otherwise pinch-to-zoom is prevented if both fingers are on the FastClick element (issue #111).
+  if (event.targetTouches.length > 1) {
+    return true;
+  }
 
-	targetElement = this.getTargetElementFromEventTarget(event.target);
-	touch = event.targetTouches[0];
+  targetElement = this.getTargetElementFromEventTarget(event.target);
+  touch = event.targetTouches[0];
 
-	if (deviceIsIOS) {
+  if (deviceIsIOS) {
 
-		// Only trusted events will deselect text on iOS (issue #49)
-		selection = window.getSelection();
-		if (selection.rangeCount && !selection.isCollapsed) {
-			return true;
-		}
+    // Only trusted events will deselect text on iOS (issue #49)
+    selection = window.getSelection();
+    if (selection.rangeCount && !selection.isCollapsed) {
+      return true;
+    }
 
-		if (!deviceIsIOS4) {
+    if (!deviceIsIOS4) {
 
-			// Weird things happen on iOS when an alert or confirm dialog is opened from a click event callback (issue #23):
-			// when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
-			// with the same identifier as the touch event that previously triggered the click that triggered the alert.
-			// Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
-			// immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
-			if (touch.identifier === this.lastTouchIdentifier) {
-				event.preventDefault();
-				return false;
-			}
+      // Weird things happen on iOS when an alert or confirm dialog is opened from a click event callback (issue #23):
+      // when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
+      // with the same identifier as the touch event that previously triggered the click that triggered the alert.
+      // Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
+      // immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
+      if (touch.identifier === this.lastTouchIdentifier) {
+        event.preventDefault();
+        return false;
+      }
 
-			this.lastTouchIdentifier = touch.identifier;
+      this.lastTouchIdentifier = touch.identifier;
 
-			// If the target element is a child of a scrollable layer (using -webkit-overflow-scrolling: touch) and:
-			// 1) the user does a fling scroll on the scrollable layer
-			// 2) the user stops the fling scroll with another tap
-			// then the event.target of the last 'touchend' event will be the element that was under the user's finger
-			// when the fling scroll was started, causing FastClick to send a click event to that layer - unless a check
-			// is made to ensure that a parent layer was not scrolled before sending a synthetic click (issue #42).
-			this.updateScrollParent(targetElement);
-		}
-	}
+      // If the target element is a child of a scrollable layer (using -webkit-overflow-scrolling: touch) and:
+      // 1) the user does a fling scroll on the scrollable layer
+      // 2) the user stops the fling scroll with another tap
+      // then the event.target of the last 'touchend' event will be the element that was under the user's finger
+      // when the fling scroll was started, causing FastClick to send a click event to that layer - unless a check
+      // is made to ensure that a parent layer was not scrolled before sending a synthetic click (issue #42).
+      this.updateScrollParent(targetElement);
+    }
+  }
 
-	this.trackingClick = true;
-	this.trackingClickStart = event.timeStamp;
-	this.targetElement = targetElement;
+  this.trackingClick = true;
+  this.trackingClickStart = event.timeStamp;
+  this.targetElement = targetElement;
 
-	this.touchStartX = touch.pageX;
-	this.touchStartY = touch.pageY;
+  this.touchStartX = touch.pageX;
+  this.touchStartY = touch.pageY;
 
-	// Prevent phantom clicks on fast double-tap (issue #36)
-	if ((event.timeStamp - this.lastClickTime) < 200) {
-		event.preventDefault();
-	}
+  // Prevent phantom clicks on fast double-tap (issue #36)
+  if ((event.timeStamp - this.lastClickTime) < 200) {
+    event.preventDefault();
+  }
 
-	return true;
+  return true;
 };
 
 
@@ -3802,14 +3802,14 @@ FastClick.prototype.onTouchStart = function(event) {
  * @returns {boolean}
  */
 FastClick.prototype.touchHasMoved = function(event) {
-	'use strict';
-	var touch = event.changedTouches[0], boundary = this.touchBoundary;
+  'use strict';
+  var touch = event.changedTouches[0], boundary = this.touchBoundary;
 
-	if (Math.abs(touch.pageX - this.touchStartX) > boundary || Math.abs(touch.pageY - this.touchStartY) > boundary) {
-		return true;
-	}
+  if (Math.abs(touch.pageX - this.touchStartX) > boundary || Math.abs(touch.pageY - this.touchStartY) > boundary) {
+    return true;
+  }
 
-	return false;
+  return false;
 };
 
 
@@ -3820,18 +3820,18 @@ FastClick.prototype.touchHasMoved = function(event) {
  * @returns {boolean}
  */
 FastClick.prototype.onTouchMove = function(event) {
-	'use strict';
-	if (!this.trackingClick) {
-		return true;
-	}
+  'use strict';
+  if (!this.trackingClick) {
+    return true;
+  }
 
-	// If the touch has moved, cancel the click tracking
-	if (this.targetElement !== this.getTargetElementFromEventTarget(event.target) || this.touchHasMoved(event)) {
-		this.trackingClick = false;
-		this.targetElement = null;
-	}
+  // If the touch has moved, cancel the click tracking
+  if (this.targetElement !== this.getTargetElementFromEventTarget(event.target) || this.touchHasMoved(event)) {
+    this.trackingClick = false;
+    this.targetElement = null;
+  }
 
-	return true;
+  return true;
 };
 
 
@@ -3842,21 +3842,21 @@ FastClick.prototype.onTouchMove = function(event) {
  * @returns {Element|null}
  */
 FastClick.prototype.findControl = function(labelElement) {
-	'use strict';
+  'use strict';
 
-	// Fast path for newer browsers supporting the HTML5 control attribute
-	if (labelElement.control !== undefined) {
-		return labelElement.control;
-	}
+  // Fast path for newer browsers supporting the HTML5 control attribute
+  if (labelElement.control !== undefined) {
+    return labelElement.control;
+  }
 
-	// All browsers under test that support touch events also support the HTML5 htmlFor attribute
-	if (labelElement.htmlFor) {
-		return document.getElementById(labelElement.htmlFor);
-	}
+  // All browsers under test that support touch events also support the HTML5 htmlFor attribute
+  if (labelElement.htmlFor) {
+    return document.getElementById(labelElement.htmlFor);
+  }
 
-	// If no for attribute exists, attempt to retrieve the first labellable descendant element
-	// the list of which is defined here: http://www.w3.org/TR/html5/forms.html#category-label
-	return labelElement.querySelector('button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea');
+  // If no for attribute exists, attempt to retrieve the first labellable descendant element
+  // the list of which is defined here: http://www.w3.org/TR/html5/forms.html#category-label
+  return labelElement.querySelector('button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea');
 };
 
 
@@ -3867,90 +3867,90 @@ FastClick.prototype.findControl = function(labelElement) {
  * @returns {boolean}
  */
 FastClick.prototype.onTouchEnd = function(event) {
-	'use strict';
-	var forElement, trackingClickStart, targetTagName, scrollParent, touch, targetElement = this.targetElement;
+  'use strict';
+  var forElement, trackingClickStart, targetTagName, scrollParent, touch, targetElement = this.targetElement;
 
-	if (!this.trackingClick) {
-		return true;
-	}
+  if (!this.trackingClick) {
+    return true;
+  }
 
-	// Prevent phantom clicks on fast double-tap (issue #36)
-	if ((event.timeStamp - this.lastClickTime) < 200) {
-		this.cancelNextClick = true;
-		return true;
-	}
+  // Prevent phantom clicks on fast double-tap (issue #36)
+  if ((event.timeStamp - this.lastClickTime) < 200) {
+    this.cancelNextClick = true;
+    return true;
+  }
 
-	// Reset to prevent wrong click cancel on input (issue #156).
-	this.cancelNextClick = false;
+  // Reset to prevent wrong click cancel on input (issue #156).
+  this.cancelNextClick = false;
 
-	this.lastClickTime = event.timeStamp;
+  this.lastClickTime = event.timeStamp;
 
-	trackingClickStart = this.trackingClickStart;
-	this.trackingClick = false;
-	this.trackingClickStart = 0;
+  trackingClickStart = this.trackingClickStart;
+  this.trackingClick = false;
+  this.trackingClickStart = 0;
 
-	// On some iOS devices, the targetElement supplied with the event is invalid if the layer
-	// is performing a transition or scroll, and has to be re-detected manually. Note that
-	// for this to function correctly, it must be called *after* the event target is checked!
-	// See issue #57; also filed as rdar://13048589 .
-	if (deviceIsIOSWithBadTarget) {
-		touch = event.changedTouches[0];
+  // On some iOS devices, the targetElement supplied with the event is invalid if the layer
+  // is performing a transition or scroll, and has to be re-detected manually. Note that
+  // for this to function correctly, it must be called *after* the event target is checked!
+  // See issue #57; also filed as rdar://13048589 .
+  if (deviceIsIOSWithBadTarget) {
+    touch = event.changedTouches[0];
 
-		// In certain cases arguments of elementFromPoint can be negative, so prevent setting targetElement to null
-		targetElement = document.elementFromPoint(touch.pageX - window.pageXOffset, touch.pageY - window.pageYOffset) || targetElement;
-		targetElement.fastClickScrollParent = this.targetElement.fastClickScrollParent;
-	}
+    // In certain cases arguments of elementFromPoint can be negative, so prevent setting targetElement to null
+    targetElement = document.elementFromPoint(touch.pageX - window.pageXOffset, touch.pageY - window.pageYOffset) || targetElement;
+    targetElement.fastClickScrollParent = this.targetElement.fastClickScrollParent;
+  }
 
-	targetTagName = targetElement.tagName.toLowerCase();
-	if (targetTagName === 'label') {
-		forElement = this.findControl(targetElement);
-		if (forElement) {
-			this.focus(targetElement);
-			if (deviceIsAndroid) {
-				return false;
-			}
+  targetTagName = targetElement.tagName.toLowerCase();
+  if (targetTagName === 'label') {
+    forElement = this.findControl(targetElement);
+    if (forElement) {
+      this.focus(targetElement);
+      if (deviceIsAndroid) {
+        return false;
+      }
 
-			targetElement = forElement;
-		}
-	} else if (this.needsFocus(targetElement)) {
+      targetElement = forElement;
+    }
+  } else if (this.needsFocus(targetElement)) {
 
-		// Case 1: If the touch started a while ago (best guess is 100ms based on tests for issue #36) then focus will be triggered anyway. Return early and unset the target element reference so that the subsequent click will be allowed through.
-		// Case 2: Without this exception for input elements tapped when the document is contained in an iframe, then any inputted text won't be visible even though the value attribute is updated as the user types (issue #37).
-		if ((event.timeStamp - trackingClickStart) > 100 || (deviceIsIOS && window.top !== window && targetTagName === 'input')) {
-			this.targetElement = null;
-			return false;
-		}
+    // Case 1: If the touch started a while ago (best guess is 100ms based on tests for issue #36) then focus will be triggered anyway. Return early and unset the target element reference so that the subsequent click will be allowed through.
+    // Case 2: Without this exception for input elements tapped when the document is contained in an iframe, then any inputted text won't be visible even though the value attribute is updated as the user types (issue #37).
+    if ((event.timeStamp - trackingClickStart) > 100 || (deviceIsIOS && window.top !== window && targetTagName === 'input')) {
+      this.targetElement = null;
+      return false;
+    }
 
-		this.focus(targetElement);
-		this.sendClick(targetElement, event);
+    this.focus(targetElement);
+    this.sendClick(targetElement, event);
 
-		// Select elements need the event to go through on iOS 4, otherwise the selector menu won't open.
-		if (!deviceIsIOS4 || targetTagName !== 'select') {
-			this.targetElement = null;
-			event.preventDefault();
-		}
+    // Select elements need the event to go through on iOS 4, otherwise the selector menu won't open.
+    if (!deviceIsIOS4 || targetTagName !== 'select') {
+      this.targetElement = null;
+      event.preventDefault();
+    }
 
-		return false;
-	}
+    return false;
+  }
 
-	if (deviceIsIOS && !deviceIsIOS4) {
+  if (deviceIsIOS && !deviceIsIOS4) {
 
-		// Don't send a synthetic click event if the target element is contained within a parent layer that was scrolled
-		// and this tap is being used to stop the scrolling (usually initiated by a fling - issue #42).
-		scrollParent = targetElement.fastClickScrollParent;
-		if (scrollParent && scrollParent.fastClickLastScrollTop !== scrollParent.scrollTop) {
-			return true;
-		}
-	}
+    // Don't send a synthetic click event if the target element is contained within a parent layer that was scrolled
+    // and this tap is being used to stop the scrolling (usually initiated by a fling - issue #42).
+    scrollParent = targetElement.fastClickScrollParent;
+    if (scrollParent && scrollParent.fastClickLastScrollTop !== scrollParent.scrollTop) {
+      return true;
+    }
+  }
 
-	// Prevent the actual click from going though - unless the target node is marked as requiring
-	// real clicks or if it is in the whitelist in which case only non-programmatic clicks are permitted.
-	if (!this.needsClick(targetElement)) {
-		event.preventDefault();
-		this.sendClick(targetElement, event);
-	}
+  // Prevent the actual click from going though - unless the target node is marked as requiring
+  // real clicks or if it is in the whitelist in which case only non-programmatic clicks are permitted.
+  if (!this.needsClick(targetElement)) {
+    event.preventDefault();
+    this.sendClick(targetElement, event);
+  }
 
-	return false;
+  return false;
 };
 
 
@@ -3960,9 +3960,9 @@ FastClick.prototype.onTouchEnd = function(event) {
  * @returns {void}
  */
 FastClick.prototype.onTouchCancel = function() {
-	'use strict';
-	this.trackingClick = false;
-	this.targetElement = null;
+  'use strict';
+  this.trackingClick = false;
+  this.targetElement = null;
 };
 
 
@@ -3973,45 +3973,45 @@ FastClick.prototype.onTouchCancel = function() {
  * @returns {boolean}
  */
 FastClick.prototype.onMouse = function(event) {
-	'use strict';
+  'use strict';
 
-	// If a target element was never set (because a touch event was never fired) allow the event
-	if (!this.targetElement) {
-		return true;
-	}
+  // If a target element was never set (because a touch event was never fired) allow the event
+  if (!this.targetElement) {
+    return true;
+  }
 
-	if (event.forwardedTouchEvent) {
-		return true;
-	}
+  if (event.forwardedTouchEvent) {
+    return true;
+  }
 
-	// Programmatically generated events targeting a specific element should be permitted
-	if (!event.cancelable) {
-		return true;
-	}
+  // Programmatically generated events targeting a specific element should be permitted
+  if (!event.cancelable) {
+    return true;
+  }
 
-	// Derive and check the target element to see whether the mouse event needs to be permitted;
-	// unless explicitly enabled, prevent non-touch click events from triggering actions,
-	// to prevent ghost/doubleclicks.
-	if (!this.needsClick(this.targetElement) || this.cancelNextClick) {
+  // Derive and check the target element to see whether the mouse event needs to be permitted;
+  // unless explicitly enabled, prevent non-touch click events from triggering actions,
+  // to prevent ghost/doubleclicks.
+  if (!this.needsClick(this.targetElement) || this.cancelNextClick) {
 
-		// Prevent any user-added listeners declared on FastClick element from being fired.
-		if (event.stopImmediatePropagation) {
-			event.stopImmediatePropagation();
-		} else {
+    // Prevent any user-added listeners declared on FastClick element from being fired.
+    if (event.stopImmediatePropagation) {
+      event.stopImmediatePropagation();
+    } else {
 
-			// Part of the hack for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
-			event.propagationStopped = true;
-		}
+      // Part of the hack for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
+      event.propagationStopped = true;
+    }
 
-		// Cancel the event
-		event.stopPropagation();
-		event.preventDefault();
+    // Cancel the event
+    event.stopPropagation();
+    event.preventDefault();
 
-		return false;
-	}
+    return false;
+  }
 
-	// If the mouse event is permitted, return true for the action to go through.
-	return true;
+  // If the mouse event is permitted, return true for the action to go through.
+  return true;
 };
 
 
@@ -4024,30 +4024,30 @@ FastClick.prototype.onMouse = function(event) {
  * @returns {boolean}
  */
 FastClick.prototype.onClick = function(event) {
-	'use strict';
-	var permitted;
+  'use strict';
+  var permitted;
 
-	// It's possible for another FastClick-like library delivered with third-party code to fire a click event before FastClick does (issue #44). In that case, set the click-tracking flag back to false and return early. This will cause onTouchEnd to return early.
-	if (this.trackingClick) {
-		this.targetElement = null;
-		this.trackingClick = false;
-		return true;
-	}
+  // It's possible for another FastClick-like library delivered with third-party code to fire a click event before FastClick does (issue #44). In that case, set the click-tracking flag back to false and return early. This will cause onTouchEnd to return early.
+  if (this.trackingClick) {
+    this.targetElement = null;
+    this.trackingClick = false;
+    return true;
+  }
 
-	// Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
-	if (event.target.type === 'submit' && event.detail === 0) {
-		return true;
-	}
+  // Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
+  if (event.target.type === 'submit' && event.detail === 0) {
+    return true;
+  }
 
-	permitted = this.onMouse(event);
+  permitted = this.onMouse(event);
 
-	// Only unset targetElement if the click is not permitted. This will ensure that the check for !targetElement in onMouse fails and the browser's click doesn't go through.
-	if (!permitted) {
-		this.targetElement = null;
-	}
+  // Only unset targetElement if the click is not permitted. This will ensure that the check for !targetElement in onMouse fails and the browser's click doesn't go through.
+  if (!permitted) {
+    this.targetElement = null;
+  }
 
-	// If clicks are permitted, return true for the action to go through.
-	return permitted;
+  // If clicks are permitted, return true for the action to go through.
+  return permitted;
 };
 
 
@@ -4057,20 +4057,20 @@ FastClick.prototype.onClick = function(event) {
  * @returns {void}
  */
 FastClick.prototype.destroy = function() {
-	'use strict';
-	var layer = this.layer;
+  'use strict';
+  var layer = this.layer;
 
-	if (deviceIsAndroid) {
-		layer.removeEventListener('mouseover', this.onMouse, true);
-		layer.removeEventListener('mousedown', this.onMouse, true);
-		layer.removeEventListener('mouseup', this.onMouse, true);
-	}
+  if (deviceIsAndroid) {
+    layer.removeEventListener('mouseover', this.onMouse, true);
+    layer.removeEventListener('mousedown', this.onMouse, true);
+    layer.removeEventListener('mouseup', this.onMouse, true);
+  }
 
-	layer.removeEventListener('click', this.onClick, true);
-	layer.removeEventListener('touchstart', this.onTouchStart, false);
-	layer.removeEventListener('touchmove', this.onTouchMove, false);
-	layer.removeEventListener('touchend', this.onTouchEnd, false);
-	layer.removeEventListener('touchcancel', this.onTouchCancel, false);
+  layer.removeEventListener('click', this.onClick, true);
+  layer.removeEventListener('touchstart', this.onTouchStart, false);
+  layer.removeEventListener('touchmove', this.onTouchMove, false);
+  layer.removeEventListener('touchend', this.onTouchEnd, false);
+  layer.removeEventListener('touchcancel', this.onTouchCancel, false);
 };
 
 
@@ -4080,46 +4080,46 @@ FastClick.prototype.destroy = function() {
  * @param {Element} layer The layer to listen on
  */
 FastClick.notNeeded = function(layer) {
-	'use strict';
-	var metaViewport;
-	var chromeVersion;
+  'use strict';
+  var metaViewport;
+  var chromeVersion;
 
-	// Devices that don't support touch don't need FastClick
-	if (typeof window.ontouchstart === 'undefined') {
-		return true;
-	}
+  // Devices that don't support touch don't need FastClick
+  if (typeof window.ontouchstart === 'undefined') {
+    return true;
+  }
 
-	// Chrome version - zero for other browsers
-	chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
+  // Chrome version - zero for other browsers
+  chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
 
-	if (chromeVersion) {
+  if (chromeVersion) {
 
-		if (deviceIsAndroid) {
-			metaViewport = document.querySelector('meta[name=viewport]');
+    if (deviceIsAndroid) {
+      metaViewport = document.querySelector('meta[name=viewport]');
 
-			if (metaViewport) {
-				// Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
-				if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
-					return true;
-				}
-				// Chrome 32 and above with width=device-width or less don't need FastClick
-				if (chromeVersion > 31 && window.innerWidth <= window.screen.width) {
-					return true;
-				}
-			}
+      if (metaViewport) {
+        // Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
+        if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
+          return true;
+        }
+        // Chrome 32 and above with width=device-width or less don't need FastClick
+        if (chromeVersion > 31 && window.innerWidth <= window.screen.width) {
+          return true;
+        }
+      }
 
-		// Chrome desktop doesn't need FastClick (issue #15)
-		} else {
-			return true;
-		}
-	}
+    // Chrome desktop doesn't need FastClick (issue #15)
+    } else {
+      return true;
+    }
+  }
 
-	// IE10 with -ms-touch-action: none, which disables double-tap-to-zoom (issue #97)
-	if (layer.style.msTouchAction === 'none') {
-		return true;
-	}
+  // IE10 with -ms-touch-action: none, which disables double-tap-to-zoom (issue #97)
+  if (layer.style.msTouchAction === 'none') {
+    return true;
+  }
 
-	return false;
+  return false;
 };
 
 
@@ -4129,23 +4129,23 @@ FastClick.notNeeded = function(layer) {
  * @param {Element} layer The layer to listen on
  */
 FastClick.attach = function(layer) {
-	'use strict';
-	return new FastClick(layer);
+  'use strict';
+  return new FastClick(layer);
 };
 
 
 if (typeof define !== 'undefined' && define.amd) {
 
-	// AMD. Register as an anonymous module.
-	define(function() {
-		'use strict';
-		return FastClick;
-	});
+  // AMD. Register as an anonymous module.
+  define(function() {
+    'use strict';
+    return FastClick;
+  });
 } else if (typeof module !== 'undefined' && module.exports) {
-	module.exports = FastClick.attach;
-	module.exports.FastClick = FastClick;
+  module.exports = FastClick.attach;
+  module.exports.FastClick = FastClick;
 } else {
-	window.FastClick = FastClick;
+  window.FastClick = FastClick;
 }
 /*! Hammer.JS - v1.0.6 - 2014-01-02
  * http://eightmedia.github.com/hammer.js
@@ -5527,898 +5527,898 @@ Hammer.gestures.Transform = {
 })(this);
 /*! iScroll v5.0.6 ~ (c) 2008-2013 Matteo Spinelli ~ http://cubiq.org/license */
 var IScroll = (function (window, document, Math) {
-var rAF = window.requestAnimationFrame	||
-	window.webkitRequestAnimationFrame	||
-	window.mozRequestAnimationFrame		||
-	window.oRequestAnimationFrame		||
-	window.msRequestAnimationFrame		||
-	function (callback) { window.setTimeout(callback, 1000 / 60); };
+var rAF = window.requestAnimationFrame  ||
+  window.webkitRequestAnimationFrame  ||
+  window.mozRequestAnimationFrame    ||
+  window.oRequestAnimationFrame    ||
+  window.msRequestAnimationFrame    ||
+  function (callback) { window.setTimeout(callback, 1000 / 60); };
 
 var utils = (function () {
-	var me = {};
+  var me = {};
 
-	var _elementStyle = document.createElement('div').style;
-	var _vendor = (function () {
-		var vendors = ['t', 'webkitT', 'MozT', 'msT', 'OT'],
-			transform,
-			i = 0,
-			l = vendors.length;
+  var _elementStyle = document.createElement('div').style;
+  var _vendor = (function () {
+    var vendors = ['t', 'webkitT', 'MozT', 'msT', 'OT'],
+      transform,
+      i = 0,
+      l = vendors.length;
 
-		for ( ; i < l; i++ ) {
-			transform = vendors[i] + 'ransform';
-			if ( transform in _elementStyle ) return vendors[i].substr(0, vendors[i].length-1);
-		}
+    for ( ; i < l; i++ ) {
+      transform = vendors[i] + 'ransform';
+      if ( transform in _elementStyle ) return vendors[i].substr(0, vendors[i].length-1);
+    }
 
-		return false;
-	})();
+    return false;
+  })();
 
-	function _prefixStyle (style) {
-		if ( _vendor === false ) return false;
-		if ( _vendor === '' ) return style;
-		return _vendor + style.charAt(0).toUpperCase() + style.substr(1);
-	}
+  function _prefixStyle (style) {
+    if ( _vendor === false ) return false;
+    if ( _vendor === '' ) return style;
+    return _vendor + style.charAt(0).toUpperCase() + style.substr(1);
+  }
 
-	me.getTime = Date.now || function getTime () { return new Date().getTime(); };
+  me.getTime = Date.now || function getTime () { return new Date().getTime(); };
 
-	me.extend = function (target, obj) {
-		for ( var i in obj ) {
-			target[i] = obj[i];
-		}
-	};
+  me.extend = function (target, obj) {
+    for ( var i in obj ) {
+      target[i] = obj[i];
+    }
+  };
 
-	me.addEvent = function (el, type, fn, capture) {
-		el.addEventListener(type, fn, !!capture);
-	};
+  me.addEvent = function (el, type, fn, capture) {
+    el.addEventListener(type, fn, !!capture);
+  };
 
-	me.removeEvent = function (el, type, fn, capture) {
-		el.removeEventListener(type, fn, !!capture);
-	};
+  me.removeEvent = function (el, type, fn, capture) {
+    el.removeEventListener(type, fn, !!capture);
+  };
 
-	me.momentum = function (current, start, time, lowerMargin, wrapperSize) {
-		var distance = current - start,
-			speed = Math.abs(distance) / time,
-			destination,
-			duration,
-			deceleration = 0.0006;
+  me.momentum = function (current, start, time, lowerMargin, wrapperSize) {
+    var distance = current - start,
+      speed = Math.abs(distance) / time,
+      destination,
+      duration,
+      deceleration = 0.0006;
 
-		destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
-		duration = speed / deceleration;
+    destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
+    duration = speed / deceleration;
 
-		if ( destination < lowerMargin ) {
-			destination = wrapperSize ? lowerMargin - ( wrapperSize / 2.5 * ( speed / 8 ) ) : lowerMargin;
-			distance = Math.abs(destination - current);
-			duration = distance / speed;
-		} else if ( destination > 0 ) {
-			destination = wrapperSize ? wrapperSize / 2.5 * ( speed / 8 ) : 0;
-			distance = Math.abs(current) + destination;
-			duration = distance / speed;
-		}
+    if ( destination < lowerMargin ) {
+      destination = wrapperSize ? lowerMargin - ( wrapperSize / 2.5 * ( speed / 8 ) ) : lowerMargin;
+      distance = Math.abs(destination - current);
+      duration = distance / speed;
+    } else if ( destination > 0 ) {
+      destination = wrapperSize ? wrapperSize / 2.5 * ( speed / 8 ) : 0;
+      distance = Math.abs(current) + destination;
+      duration = distance / speed;
+    }
 
-		return {
-			destination: Math.round(destination),
-			duration: duration
-		};
-	};
+    return {
+      destination: Math.round(destination),
+      duration: duration
+    };
+  };
 
-	var _transform = _prefixStyle('transform');
+  var _transform = _prefixStyle('transform');
 
-	me.extend(me, {
-		hasTransform: _transform !== false,
-		hasPerspective: _prefixStyle('perspective') in _elementStyle,
-		hasTouch: 'ontouchstart' in window,
-		hasPointer: navigator.msPointerEnabled,
-		hasTransition: _prefixStyle('transition') in _elementStyle
-	});
+  me.extend(me, {
+    hasTransform: _transform !== false,
+    hasPerspective: _prefixStyle('perspective') in _elementStyle,
+    hasTouch: 'ontouchstart' in window,
+    hasPointer: navigator.msPointerEnabled,
+    hasTransition: _prefixStyle('transition') in _elementStyle
+  });
 
-	me.isAndroidBrowser = /Android/.test(window.navigator.appVersion) && /Version\/\d/.test(window.navigator.appVersion);
+  me.isAndroidBrowser = /Android/.test(window.navigator.appVersion) && /Version\/\d/.test(window.navigator.appVersion);
 
-	me.extend(me.style = {}, {
-		transform: _transform,
-		transitionTimingFunction: _prefixStyle('transitionTimingFunction'),
-		transitionDuration: _prefixStyle('transitionDuration'),
-		transformOrigin: _prefixStyle('transformOrigin')
-	});
+  me.extend(me.style = {}, {
+    transform: _transform,
+    transitionTimingFunction: _prefixStyle('transitionTimingFunction'),
+    transitionDuration: _prefixStyle('transitionDuration'),
+    transformOrigin: _prefixStyle('transformOrigin')
+  });
 
-	me.hasClass = function (e, c) {
-		var re = new RegExp("(^|\\s)" + c + "(\\s|$)");
-		return re.test(e.className);
-	};
+  me.hasClass = function (e, c) {
+    var re = new RegExp("(^|\\s)" + c + "(\\s|$)");
+    return re.test(e.className);
+  };
 
-	me.addClass = function (e, c) {
-		if ( me.hasClass(e, c) ) {
-			return;
-		}
+  me.addClass = function (e, c) {
+    if ( me.hasClass(e, c) ) {
+      return;
+    }
 
-		var newclass = e.className.split(' ');
-		newclass.push(c);
-		e.className = newclass.join(' ');
-	};
+    var newclass = e.className.split(' ');
+    newclass.push(c);
+    e.className = newclass.join(' ');
+  };
 
-	me.removeClass = function (e, c) {
-		if ( !me.hasClass(e, c) ) {
-			return;
-		}
+  me.removeClass = function (e, c) {
+    if ( !me.hasClass(e, c) ) {
+      return;
+    }
 
-		var re = new RegExp("(^|\\s)" + c + "(\\s|$)", 'g');
-		e.className = e.className.replace(re, ' ');
-	};
+    var re = new RegExp("(^|\\s)" + c + "(\\s|$)", 'g');
+    e.className = e.className.replace(re, ' ');
+  };
 
-	me.offset = function (el) {
-		var left = -el.offsetLeft,
-			top = -el.offsetTop;
+  me.offset = function (el) {
+    var left = -el.offsetLeft,
+      top = -el.offsetTop;
 
-		// jshint -W084
-		while (el = el.offsetParent) {
-			left -= el.offsetLeft;
-			top -= el.offsetTop;
-		}
-		// jshint +W084
+    // jshint -W084
+    while (el = el.offsetParent) {
+      left -= el.offsetLeft;
+      top -= el.offsetTop;
+    }
+    // jshint +W084
 
-		return {
-			left: left,
-			top: top
-		};
-	};
+    return {
+      left: left,
+      top: top
+    };
+  };
 
-	me.preventDefaultException = function (el, exceptions) {
-		for ( var i in exceptions ) {
-			if ( exceptions[i].test(el[i]) ) {
-				return true;
-			}
-		}
+  me.preventDefaultException = function (el, exceptions) {
+    for ( var i in exceptions ) {
+      if ( exceptions[i].test(el[i]) ) {
+        return true;
+      }
+    }
 
-		return false;
-	};
+    return false;
+  };
 
-	me.extend(me.eventType = {}, {
-		touchstart: 1,
-		touchmove: 1,
-		touchend: 1,
+  me.extend(me.eventType = {}, {
+    touchstart: 1,
+    touchmove: 1,
+    touchend: 1,
 
-		mousedown: 2,
-		mousemove: 2,
-		mouseup: 2,
+    mousedown: 2,
+    mousemove: 2,
+    mouseup: 2,
 
-		MSPointerDown: 3,
-		MSPointerMove: 3,
-		MSPointerUp: 3
-	});
+    MSPointerDown: 3,
+    MSPointerMove: 3,
+    MSPointerUp: 3
+  });
 
-	me.extend(me.ease = {}, {
-		quadratic: {
-			style: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-			fn: function (k) {
-				return k * ( 2 - k );
-			}
-		},
-		circular: {
-			style: 'cubic-bezier(0.1, 0.57, 0.1, 1)',	// Not properly "circular" but this looks better, it should be (0.075, 0.82, 0.165, 1)
-			fn: function (k) {
-				return Math.sqrt( 1 - ( --k * k ) );
-			}
-		},
-		back: {
-			style: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-			fn: function (k) {
-				var b = 4;
-				return ( k = k - 1 ) * k * ( ( b + 1 ) * k + b ) + 1;
-			}
-		},
-		bounce: {
-			style: '',
-			fn: function (k) {
-				if ( ( k /= 1 ) < ( 1 / 2.75 ) ) {
-					return 7.5625 * k * k;
-				} else if ( k < ( 2 / 2.75 ) ) {
-					return 7.5625 * ( k -= ( 1.5 / 2.75 ) ) * k + 0.75;
-				} else if ( k < ( 2.5 / 2.75 ) ) {
-					return 7.5625 * ( k -= ( 2.25 / 2.75 ) ) * k + 0.9375;
-				} else {
-					return 7.5625 * ( k -= ( 2.625 / 2.75 ) ) * k + 0.984375;
-				}
-			}
-		},
-		elastic: {
-			style: '',
-			fn: function (k) {
-				var f = 0.22,
-					e = 0.4;
+  me.extend(me.ease = {}, {
+    quadratic: {
+      style: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      fn: function (k) {
+        return k * ( 2 - k );
+      }
+    },
+    circular: {
+      style: 'cubic-bezier(0.1, 0.57, 0.1, 1)',  // Not properly "circular" but this looks better, it should be (0.075, 0.82, 0.165, 1)
+      fn: function (k) {
+        return Math.sqrt( 1 - ( --k * k ) );
+      }
+    },
+    back: {
+      style: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      fn: function (k) {
+        var b = 4;
+        return ( k = k - 1 ) * k * ( ( b + 1 ) * k + b ) + 1;
+      }
+    },
+    bounce: {
+      style: '',
+      fn: function (k) {
+        if ( ( k /= 1 ) < ( 1 / 2.75 ) ) {
+          return 7.5625 * k * k;
+        } else if ( k < ( 2 / 2.75 ) ) {
+          return 7.5625 * ( k -= ( 1.5 / 2.75 ) ) * k + 0.75;
+        } else if ( k < ( 2.5 / 2.75 ) ) {
+          return 7.5625 * ( k -= ( 2.25 / 2.75 ) ) * k + 0.9375;
+        } else {
+          return 7.5625 * ( k -= ( 2.625 / 2.75 ) ) * k + 0.984375;
+        }
+      }
+    },
+    elastic: {
+      style: '',
+      fn: function (k) {
+        var f = 0.22,
+          e = 0.4;
 
-				if ( k === 0 ) { return 0; }
-				if ( k == 1 ) { return 1; }
+        if ( k === 0 ) { return 0; }
+        if ( k == 1 ) { return 1; }
 
-				return ( e * Math.pow( 2, - 10 * k ) * Math.sin( ( k - f / 4 ) * ( 2 * Math.PI ) / f ) + 1 );
-			}
-		}
-	});
+        return ( e * Math.pow( 2, - 10 * k ) * Math.sin( ( k - f / 4 ) * ( 2 * Math.PI ) / f ) + 1 );
+      }
+    }
+  });
 
-	me.tap = function (e, eventName) {
-		var ev = document.createEvent('Event');
-		ev.initEvent(eventName, true, true);
-		ev.pageX = e.pageX;
-		ev.pageY = e.pageY;
-		e.target.dispatchEvent(ev);
-	};
+  me.tap = function (e, eventName) {
+    var ev = document.createEvent('Event');
+    ev.initEvent(eventName, true, true);
+    ev.pageX = e.pageX;
+    ev.pageY = e.pageY;
+    e.target.dispatchEvent(ev);
+  };
 
-	me.click = function (e) {
-		var target = e.target,
-			ev;
+  me.click = function (e) {
+    var target = e.target,
+      ev;
 
-		if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA') {
-			ev = document.createEvent('MouseEvents');
-			ev.initMouseEvent('click', true, true, e.view, 1,
-				target.screenX, target.screenY, target.clientX, target.clientY,
-				e.ctrlKey, e.altKey, e.shiftKey, e.metaKey,
-				0, null);
+    if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA') {
+      ev = document.createEvent('MouseEvents');
+      ev.initMouseEvent('click', true, true, e.view, 1,
+        target.screenX, target.screenY, target.clientX, target.clientY,
+        e.ctrlKey, e.altKey, e.shiftKey, e.metaKey,
+        0, null);
 
-			ev._constructed = true;
-			target.dispatchEvent(ev);
-		}
-	};
+      ev._constructed = true;
+      target.dispatchEvent(ev);
+    }
+  };
 
-	return me;
+  return me;
 })();
 
 function IScroll (el, options) {
-	this.wrapper = typeof el == 'string' ? document.querySelector(el) : el;
-	this.scroller = this.wrapper.children[0];
-	this.scrollerStyle = this.scroller.style;		// cache style for better performance
+  this.wrapper = typeof el == 'string' ? document.querySelector(el) : el;
+  this.scroller = this.wrapper.children[0];
+  this.scrollerStyle = this.scroller.style;    // cache style for better performance
 
-	this.options = {
+  this.options = {
 
 // INSERT POINT: OPTIONS 
 
-		startX: 0,
-		startY: 0,
-		scrollY: true,
-		directionLockThreshold: 5,
-		momentum: true,
+    startX: 0,
+    startY: 0,
+    scrollY: true,
+    directionLockThreshold: 5,
+    momentum: true,
 
-		bounce: true,
-		bounceTime: 600,
-		bounceEasing: '',
+    bounce: true,
+    bounceTime: 600,
+    bounceEasing: '',
 
-		preventDefault: true,
-		preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/ },
+    preventDefault: true,
+    preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/ },
 
-		HWCompositing: true,
-		useTransition: true,
-		useTransform: true
-	};
+    HWCompositing: true,
+    useTransition: true,
+    useTransform: true
+  };
 
-	for ( var i in options ) {
-		this.options[i] = options[i];
-	}
+  for ( var i in options ) {
+    this.options[i] = options[i];
+  }
 
-	// Normalize options
-	this.translateZ = this.options.HWCompositing && utils.hasPerspective ? ' translateZ(0)' : '';
+  // Normalize options
+  this.translateZ = this.options.HWCompositing && utils.hasPerspective ? ' translateZ(0)' : '';
 
-	this.options.useTransition = utils.hasTransition && this.options.useTransition;
-	this.options.useTransform = utils.hasTransform && this.options.useTransform;
+  this.options.useTransition = utils.hasTransition && this.options.useTransition;
+  this.options.useTransform = utils.hasTransform && this.options.useTransform;
 
-	this.options.eventPassthrough = this.options.eventPassthrough === true ? 'vertical' : this.options.eventPassthrough;
-	this.options.preventDefault = !this.options.eventPassthrough && this.options.preventDefault;
+  this.options.eventPassthrough = this.options.eventPassthrough === true ? 'vertical' : this.options.eventPassthrough;
+  this.options.preventDefault = !this.options.eventPassthrough && this.options.preventDefault;
 
-	// If you want eventPassthrough I have to lock one of the axes
-	this.options.scrollY = this.options.eventPassthrough == 'vertical' ? false : this.options.scrollY;
-	this.options.scrollX = this.options.eventPassthrough == 'horizontal' ? false : this.options.scrollX;
+  // If you want eventPassthrough I have to lock one of the axes
+  this.options.scrollY = this.options.eventPassthrough == 'vertical' ? false : this.options.scrollY;
+  this.options.scrollX = this.options.eventPassthrough == 'horizontal' ? false : this.options.scrollX;
 
-	// With eventPassthrough we also need lockDirection mechanism
-	this.options.freeScroll = this.options.freeScroll && !this.options.eventPassthrough;
-	this.options.directionLockThreshold = this.options.eventPassthrough ? 0 : this.options.directionLockThreshold;
+  // With eventPassthrough we also need lockDirection mechanism
+  this.options.freeScroll = this.options.freeScroll && !this.options.eventPassthrough;
+  this.options.directionLockThreshold = this.options.eventPassthrough ? 0 : this.options.directionLockThreshold;
 
-	this.options.bounceEasing = typeof this.options.bounceEasing == 'string' ? utils.ease[this.options.bounceEasing] || utils.ease.circular : this.options.bounceEasing;
+  this.options.bounceEasing = typeof this.options.bounceEasing == 'string' ? utils.ease[this.options.bounceEasing] || utils.ease.circular : this.options.bounceEasing;
 
-	this.options.resizePolling = this.options.resizePolling === undefined ? 60 : this.options.resizePolling;
+  this.options.resizePolling = this.options.resizePolling === undefined ? 60 : this.options.resizePolling;
 
-	if ( this.options.tap === true ) {
-		this.options.tap = 'tap';
-	}
+  if ( this.options.tap === true ) {
+    this.options.tap = 'tap';
+  }
 
 // INSERT POINT: NORMALIZATION
 
-	// Some defaults	
-	this.x = 0;
-	this.y = 0;
-	this.directionX = 0;
-	this.directionY = 0;
-	this._events = {};
+  // Some defaults  
+  this.x = 0;
+  this.y = 0;
+  this.directionX = 0;
+  this.directionY = 0;
+  this._events = {};
 
 // INSERT POINT: DEFAULTS
 
-	this._init();
-	this.refresh();
+  this._init();
+  this.refresh();
 
-	this.scrollTo(this.options.startX, this.options.startY);
-	this.enable();
+  this.scrollTo(this.options.startX, this.options.startY);
+  this.enable();
 }
 
 IScroll.prototype = {
-	version: '5.0.6',
+  version: '5.0.6',
 
-	_init: function () {
-		this._initEvents();
+  _init: function () {
+    this._initEvents();
 
 // INSERT POINT: _init
 
-	},
+  },
 
-	destroy: function () {
-		this._initEvents(true);
+  destroy: function () {
+    this._initEvents(true);
 
-		this._execEvent('destroy');
-	},
+    this._execEvent('destroy');
+  },
 
-	_transitionEnd: function (e) {
-		if ( e.target != this.scroller ) {
-			return;
-		}
+  _transitionEnd: function (e) {
+    if ( e.target != this.scroller ) {
+      return;
+    }
 
-		this._transitionTime(0);
-		if ( !this.resetPosition(this.options.bounceTime) ) {
-			this._execEvent('scrollEnd');
-		}
-	},
+    this._transitionTime(0);
+    if ( !this.resetPosition(this.options.bounceTime) ) {
+      this._execEvent('scrollEnd');
+    }
+  },
 
-	_start: function (e) {
-		// React to left mouse button only
-		if ( utils.eventType[e.type] != 1 ) {
-			if ( e.button !== 0 ) {
-				return;
-			}
-		}
+  _start: function (e) {
+    // React to left mouse button only
+    if ( utils.eventType[e.type] != 1 ) {
+      if ( e.button !== 0 ) {
+        return;
+      }
+    }
 
-		if ( !this.enabled || (this.initiated && utils.eventType[e.type] !== this.initiated) ) {
-			return;
-		}
+    if ( !this.enabled || (this.initiated && utils.eventType[e.type] !== this.initiated) ) {
+      return;
+    }
 
-		if ( this.options.preventDefault && !utils.isAndroidBrowser && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
-			e.preventDefault();		// This seems to break default Android browser
-		}
+    if ( this.options.preventDefault && !utils.isAndroidBrowser && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
+      e.preventDefault();    // This seems to break default Android browser
+    }
 
-		var point = e.touches ? e.touches[0] : e,
-			pos;
+    var point = e.touches ? e.touches[0] : e,
+      pos;
 
-		this.initiated	= utils.eventType[e.type];
-		this.moved		= false;
-		this.distX		= 0;
-		this.distY		= 0;
-		this.directionX = 0;
-		this.directionY = 0;
-		this.directionLocked = 0;
+    this.initiated  = utils.eventType[e.type];
+    this.moved    = false;
+    this.distX    = 0;
+    this.distY    = 0;
+    this.directionX = 0;
+    this.directionY = 0;
+    this.directionLocked = 0;
 
-		this._transitionTime();
+    this._transitionTime();
 
-		this.isAnimating = false;
-		this.startTime = utils.getTime();
+    this.isAnimating = false;
+    this.startTime = utils.getTime();
 
-		if ( this.options.useTransition && this.isInTransition ) {
-			pos = this.getComputedPosition();
+    if ( this.options.useTransition && this.isInTransition ) {
+      pos = this.getComputedPosition();
 
-			this._translate(Math.round(pos.x), Math.round(pos.y));
-			this._execEvent('scrollEnd');
-			this.isInTransition = false;
-		}
+      this._translate(Math.round(pos.x), Math.round(pos.y));
+      this._execEvent('scrollEnd');
+      this.isInTransition = false;
+    }
 
-		this.startX    = this.x;
-		this.startY    = this.y;
-		this.absStartX = this.x;
-		this.absStartY = this.y;
-		this.pointX    = point.pageX;
-		this.pointY    = point.pageY;
+    this.startX    = this.x;
+    this.startY    = this.y;
+    this.absStartX = this.x;
+    this.absStartY = this.y;
+    this.pointX    = point.pageX;
+    this.pointY    = point.pageY;
 
-		this._execEvent('beforeScrollStart');
-	},
+    this._execEvent('beforeScrollStart');
+  },
 
-	_move: function (e) {
-		if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
-			return;
-		}
+  _move: function (e) {
+    if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
+      return;
+    }
 
-		if ( this.options.preventDefault ) {	// increases performance on Android? TODO: check!
-			e.preventDefault();
-		}
+    if ( this.options.preventDefault ) {  // increases performance on Android? TODO: check!
+      e.preventDefault();
+    }
 
-		var point		= e.touches ? e.touches[0] : e,
-			deltaX		= point.pageX - this.pointX,
-			deltaY		= point.pageY - this.pointY,
-			timestamp	= utils.getTime(),
-			newX, newY,
-			absDistX, absDistY;
+    var point    = e.touches ? e.touches[0] : e,
+      deltaX    = point.pageX - this.pointX,
+      deltaY    = point.pageY - this.pointY,
+      timestamp  = utils.getTime(),
+      newX, newY,
+      absDistX, absDistY;
 
-		this.pointX		= point.pageX;
-		this.pointY		= point.pageY;
+    this.pointX    = point.pageX;
+    this.pointY    = point.pageY;
 
-		this.distX		+= deltaX;
-		this.distY		+= deltaY;
-		absDistX		= Math.abs(this.distX);
-		absDistY		= Math.abs(this.distY);
+    this.distX    += deltaX;
+    this.distY    += deltaY;
+    absDistX    = Math.abs(this.distX);
+    absDistY    = Math.abs(this.distY);
 
-		// We need to move at least 10 pixels for the scrolling to initiate
-		if ( timestamp - this.endTime > 300 && (absDistX < 10 && absDistY < 10) ) {
-			return;
-		}
+    // We need to move at least 10 pixels for the scrolling to initiate
+    if ( timestamp - this.endTime > 300 && (absDistX < 10 && absDistY < 10) ) {
+      return;
+    }
 
-		// If you are scrolling in one direction lock the other
-		if ( !this.directionLocked && !this.options.freeScroll ) {
-			if ( absDistX > absDistY + this.options.directionLockThreshold ) {
-				this.directionLocked = 'h';		// lock horizontally
-			} else if ( absDistY >= absDistX + this.options.directionLockThreshold ) {
-				this.directionLocked = 'v';		// lock vertically
-			} else {
-				this.directionLocked = 'n';		// no lock
-			}
-		}
+    // If you are scrolling in one direction lock the other
+    if ( !this.directionLocked && !this.options.freeScroll ) {
+      if ( absDistX > absDistY + this.options.directionLockThreshold ) {
+        this.directionLocked = 'h';    // lock horizontally
+      } else if ( absDistY >= absDistX + this.options.directionLockThreshold ) {
+        this.directionLocked = 'v';    // lock vertically
+      } else {
+        this.directionLocked = 'n';    // no lock
+      }
+    }
 
-		if ( this.directionLocked == 'h' ) {
-			if ( this.options.eventPassthrough == 'vertical' ) {
-				e.preventDefault();
-			} else if ( this.options.eventPassthrough == 'horizontal' ) {
-				this.initiated = false;
-				return;
-			}
+    if ( this.directionLocked == 'h' ) {
+      if ( this.options.eventPassthrough == 'vertical' ) {
+        e.preventDefault();
+      } else if ( this.options.eventPassthrough == 'horizontal' ) {
+        this.initiated = false;
+        return;
+      }
 
-			deltaY = 0;
-		} else if ( this.directionLocked == 'v' ) {
-			if ( this.options.eventPassthrough == 'horizontal' ) {
-				e.preventDefault();
-			} else if ( this.options.eventPassthrough == 'vertical' ) {
-				this.initiated = false;
-				return;
-			}
+      deltaY = 0;
+    } else if ( this.directionLocked == 'v' ) {
+      if ( this.options.eventPassthrough == 'horizontal' ) {
+        e.preventDefault();
+      } else if ( this.options.eventPassthrough == 'vertical' ) {
+        this.initiated = false;
+        return;
+      }
 
-			deltaX = 0;
-		}
+      deltaX = 0;
+    }
 
-		deltaX = this.hasHorizontalScroll ? deltaX : 0;
-		deltaY = this.hasVerticalScroll ? deltaY : 0;
+    deltaX = this.hasHorizontalScroll ? deltaX : 0;
+    deltaY = this.hasVerticalScroll ? deltaY : 0;
 
-		newX = this.x + deltaX;
-		newY = this.y + deltaY;
+    newX = this.x + deltaX;
+    newY = this.y + deltaY;
 
-		// Slow down if outside of the boundaries
-		if ( newX > 0 || newX < this.maxScrollX ) {
-			newX = this.options.bounce ? this.x + deltaX / 3 : newX > 0 ? 0 : this.maxScrollX;
-		}
-		if ( newY > 0 || newY < this.maxScrollY ) {
-			newY = this.options.bounce ? this.y + deltaY / 3 : newY > 0 ? 0 : this.maxScrollY;
-		}
+    // Slow down if outside of the boundaries
+    if ( newX > 0 || newX < this.maxScrollX ) {
+      newX = this.options.bounce ? this.x + deltaX / 3 : newX > 0 ? 0 : this.maxScrollX;
+    }
+    if ( newY > 0 || newY < this.maxScrollY ) {
+      newY = this.options.bounce ? this.y + deltaY / 3 : newY > 0 ? 0 : this.maxScrollY;
+    }
 
-		this.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
-		this.directionY = deltaY > 0 ? -1 : deltaY < 0 ? 1 : 0;
+    this.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
+    this.directionY = deltaY > 0 ? -1 : deltaY < 0 ? 1 : 0;
 
-		if ( !this.moved ) {
-			this._execEvent('scrollStart');
-		}
+    if ( !this.moved ) {
+      this._execEvent('scrollStart');
+    }
 
-		this.moved = true;
+    this.moved = true;
 
-		this._translate(newX, newY);
+    this._translate(newX, newY);
 
 /* REPLACE START: _move */
 
-		if ( timestamp - this.startTime > 300 ) {
-			this.startTime = timestamp;
-			this.startX = this.x;
-			this.startY = this.y;
-		}
+    if ( timestamp - this.startTime > 300 ) {
+      this.startTime = timestamp;
+      this.startX = this.x;
+      this.startY = this.y;
+    }
 
 /* REPLACE END: _move */
 
-	},
+  },
 
-	_end: function (e) {
-		if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
-			return;
-		}
+  _end: function (e) {
+    if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
+      return;
+    }
 
-		if ( this.options.preventDefault && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
-			e.preventDefault();
-		}
+    if ( this.options.preventDefault && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
+      e.preventDefault();
+    }
 
-		var point = e.changedTouches ? e.changedTouches[0] : e,
-			momentumX,
-			momentumY,
-			duration = utils.getTime() - this.startTime,
-			newX = Math.round(this.x),
-			newY = Math.round(this.y),
-			distanceX = Math.abs(newX - this.startX),
-			distanceY = Math.abs(newY - this.startY),
-			time = 0,
-			easing = '';
+    var point = e.changedTouches ? e.changedTouches[0] : e,
+      momentumX,
+      momentumY,
+      duration = utils.getTime() - this.startTime,
+      newX = Math.round(this.x),
+      newY = Math.round(this.y),
+      distanceX = Math.abs(newX - this.startX),
+      distanceY = Math.abs(newY - this.startY),
+      time = 0,
+      easing = '';
 
-		this.scrollTo(newX, newY);	// ensures that the last position is rounded
+    this.scrollTo(newX, newY);  // ensures that the last position is rounded
 
-		this.isInTransition = 0;
-		this.initiated = 0;
-		this.endTime = utils.getTime();
+    this.isInTransition = 0;
+    this.initiated = 0;
+    this.endTime = utils.getTime();
 
-		// reset if we are outside of the boundaries
-		if ( this.resetPosition(this.options.bounceTime) ) {
-			return;
-		}
+    // reset if we are outside of the boundaries
+    if ( this.resetPosition(this.options.bounceTime) ) {
+      return;
+    }
 
-		// we scrolled less than 10 pixels
-		if ( !this.moved ) {
-			if ( this.options.tap ) {
-				utils.tap(e, this.options.tap);
-			}
+    // we scrolled less than 10 pixels
+    if ( !this.moved ) {
+      if ( this.options.tap ) {
+        utils.tap(e, this.options.tap);
+      }
 
-			if ( this.options.click ) {
-				utils.click(e);
-			}
+      if ( this.options.click ) {
+        utils.click(e);
+      }
 
-			return;
-		}
+      return;
+    }
 
-		if ( this._events.flick && duration < 200 && distanceX < 100 && distanceY < 100 ) {
-			this._execEvent('flick');
-			return;
-		}
+    if ( this._events.flick && duration < 200 && distanceX < 100 && distanceY < 100 ) {
+      this._execEvent('flick');
+      return;
+    }
 
-		// start momentum animation if needed
-		if ( this.options.momentum && duration < 300 ) {
-			momentumX = this.hasHorizontalScroll ? utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0) : { destination: newX, duration: 0 };
-			momentumY = this.hasVerticalScroll ? utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0) : { destination: newY, duration: 0 };
-			newX = momentumX.destination;
-			newY = momentumY.destination;
-			time = Math.max(momentumX.duration, momentumY.duration);
-			this.isInTransition = 1;
-		}
+    // start momentum animation if needed
+    if ( this.options.momentum && duration < 300 ) {
+      momentumX = this.hasHorizontalScroll ? utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0) : { destination: newX, duration: 0 };
+      momentumY = this.hasVerticalScroll ? utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0) : { destination: newY, duration: 0 };
+      newX = momentumX.destination;
+      newY = momentumY.destination;
+      time = Math.max(momentumX.duration, momentumY.duration);
+      this.isInTransition = 1;
+    }
 
 // INSERT POINT: _end
 
-		if ( newX != this.x || newY != this.y ) {
-			// change easing function when scroller goes out of the boundaries
-			if ( newX > 0 || newX < this.maxScrollX || newY > 0 || newY < this.maxScrollY ) {
-				easing = utils.ease.quadratic;
-			}
+    if ( newX != this.x || newY != this.y ) {
+      // change easing function when scroller goes out of the boundaries
+      if ( newX > 0 || newX < this.maxScrollX || newY > 0 || newY < this.maxScrollY ) {
+        easing = utils.ease.quadratic;
+      }
 
-			this.scrollTo(newX, newY, time, easing);
-			return;
-		}
+      this.scrollTo(newX, newY, time, easing);
+      return;
+    }
 
-		this._execEvent('scrollEnd');
-	},
+    this._execEvent('scrollEnd');
+  },
 
-	_resize: function () {
-		var that = this;
+  _resize: function () {
+    var that = this;
 
-		clearTimeout(this.resizeTimeout);
+    clearTimeout(this.resizeTimeout);
 
-		this.resizeTimeout = setTimeout(function () {
-			that.refresh();
-		}, this.options.resizePolling);
-	},
+    this.resizeTimeout = setTimeout(function () {
+      that.refresh();
+    }, this.options.resizePolling);
+  },
 
-	resetPosition: function (time) {
-		var x = this.x,
-			y = this.y;
+  resetPosition: function (time) {
+    var x = this.x,
+      y = this.y;
 
-		time = time || 0;
+    time = time || 0;
 
-		if ( !this.hasHorizontalScroll || this.x > 0 ) {
-			x = 0;
-		} else if ( this.x < this.maxScrollX ) {
-			x = this.maxScrollX;
-		}
+    if ( !this.hasHorizontalScroll || this.x > 0 ) {
+      x = 0;
+    } else if ( this.x < this.maxScrollX ) {
+      x = this.maxScrollX;
+    }
 
-		if ( !this.hasVerticalScroll || this.y > 0 ) {
-			y = 0;
-		} else if ( this.y < this.maxScrollY ) {
-			y = this.maxScrollY;
-		}
+    if ( !this.hasVerticalScroll || this.y > 0 ) {
+      y = 0;
+    } else if ( this.y < this.maxScrollY ) {
+      y = this.maxScrollY;
+    }
 
-		if ( x == this.x && y == this.y ) {
-			return false;
-		}
+    if ( x == this.x && y == this.y ) {
+      return false;
+    }
 
-		this.scrollTo(x, y, time, this.options.bounceEasing);
+    this.scrollTo(x, y, time, this.options.bounceEasing);
 
-		return true;
-	},
+    return true;
+  },
 
-	disable: function () {
-		this.enabled = false;
-	},
+  disable: function () {
+    this.enabled = false;
+  },
 
-	enable: function () {
-		this.enabled = true;
-	},
+  enable: function () {
+    this.enabled = true;
+  },
 
-	refresh: function () {
-		var rf = this.wrapper.offsetHeight;		// Force reflow
+  refresh: function () {
+    var rf = this.wrapper.offsetHeight;    // Force reflow
 
-		this.wrapperWidth	= this.wrapper.clientWidth;
-		this.wrapperHeight	= this.wrapper.clientHeight;
+    this.wrapperWidth  = this.wrapper.clientWidth;
+    this.wrapperHeight  = this.wrapper.clientHeight;
 
 /* REPLACE START: refresh */
 
-		this.scrollerWidth	= this.scroller.offsetWidth;
-		this.scrollerHeight	= this.scroller.offsetHeight;
+    this.scrollerWidth  = this.scroller.offsetWidth;
+    this.scrollerHeight  = this.scroller.offsetHeight;
 
 /* REPLACE END: refresh */
 
-		this.maxScrollX		= this.wrapperWidth - this.scrollerWidth;
-		this.maxScrollY		= this.wrapperHeight - this.scrollerHeight;
+    this.maxScrollX    = this.wrapperWidth - this.scrollerWidth;
+    this.maxScrollY    = this.wrapperHeight - this.scrollerHeight;
 
-		this.hasHorizontalScroll	= this.options.scrollX && this.maxScrollX < 0;
-		this.hasVerticalScroll		= this.options.scrollY && this.maxScrollY < 0;
+    this.hasHorizontalScroll  = this.options.scrollX && this.maxScrollX < 0;
+    this.hasVerticalScroll    = this.options.scrollY && this.maxScrollY < 0;
 
-		if ( !this.hasHorizontalScroll ) {
-			this.maxScrollX = 0;
-			this.scrollerWidth = this.wrapperWidth;
-		}
+    if ( !this.hasHorizontalScroll ) {
+      this.maxScrollX = 0;
+      this.scrollerWidth = this.wrapperWidth;
+    }
 
-		if ( !this.hasVerticalScroll ) {
-			this.maxScrollY = 0;
-			this.scrollerHeight = this.wrapperHeight;
-		}
+    if ( !this.hasVerticalScroll ) {
+      this.maxScrollY = 0;
+      this.scrollerHeight = this.wrapperHeight;
+    }
 
-		this.endTime = 0;
-		this.directionX = 0;
-		this.directionY = 0;
+    this.endTime = 0;
+    this.directionX = 0;
+    this.directionY = 0;
 
-		this.wrapperOffset = utils.offset(this.wrapper);
+    this.wrapperOffset = utils.offset(this.wrapper);
 
-		this._execEvent('refresh');
+    this._execEvent('refresh');
 
-		this.resetPosition();
+    this.resetPosition();
 
 // INSERT POINT: _refresh
 
-	},
+  },
 
-	on: function (type, fn) {
-		if ( !this._events[type] ) {
-			this._events[type] = [];
-		}
+  on: function (type, fn) {
+    if ( !this._events[type] ) {
+      this._events[type] = [];
+    }
 
-		this._events[type].push(fn);
-	},
+    this._events[type].push(fn);
+  },
 
-	_execEvent: function (type) {
-		if ( !this._events[type] ) {
-			return;
-		}
+  _execEvent: function (type) {
+    if ( !this._events[type] ) {
+      return;
+    }
 
-		var i = 0,
-			l = this._events[type].length;
+    var i = 0,
+      l = this._events[type].length;
 
-		if ( !l ) {
-			return;
-		}
+    if ( !l ) {
+      return;
+    }
 
-		for ( ; i < l; i++ ) {
-			this._events[type][i].call(this);
-		}
-	},
+    for ( ; i < l; i++ ) {
+      this._events[type][i].call(this);
+    }
+  },
 
-	scrollBy: function (x, y, time, easing) {
-		x = this.x + x;
-		y = this.y + y;
-		time = time || 0;
+  scrollBy: function (x, y, time, easing) {
+    x = this.x + x;
+    y = this.y + y;
+    time = time || 0;
 
-		this.scrollTo(x, y, time, easing);
-	},
+    this.scrollTo(x, y, time, easing);
+  },
 
-	scrollTo: function (x, y, time, easing) {
-		easing = easing || utils.ease.circular;
+  scrollTo: function (x, y, time, easing) {
+    easing = easing || utils.ease.circular;
 
-		if ( !time || (this.options.useTransition && easing.style) ) {
-			this._transitionTimingFunction(easing.style);
-			this._transitionTime(time);
-			this._translate(x, y);
-		} else {
-			this._animate(x, y, time, easing.fn);
-		}
-	},
+    if ( !time || (this.options.useTransition && easing.style) ) {
+      this._transitionTimingFunction(easing.style);
+      this._transitionTime(time);
+      this._translate(x, y);
+    } else {
+      this._animate(x, y, time, easing.fn);
+    }
+  },
 
-	scrollToElement: function (el, time, offsetX, offsetY, easing) {
-		el = el.nodeType ? el : this.scroller.querySelector(el);
+  scrollToElement: function (el, time, offsetX, offsetY, easing) {
+    el = el.nodeType ? el : this.scroller.querySelector(el);
 
-		if ( !el ) {
-			return;
-		}
+    if ( !el ) {
+      return;
+    }
 
-		var pos = utils.offset(el);
+    var pos = utils.offset(el);
 
-		pos.left -= this.wrapperOffset.left;
-		pos.top  -= this.wrapperOffset.top;
+    pos.left -= this.wrapperOffset.left;
+    pos.top  -= this.wrapperOffset.top;
 
-		// if offsetX/Y are true we center the element to the screen
-		if ( offsetX === true ) {
-			offsetX = Math.round(el.offsetWidth / 2 - this.wrapper.offsetWidth / 2);
-		}
-		if ( offsetY === true ) {
-			offsetY = Math.round(el.offsetHeight / 2 - this.wrapper.offsetHeight / 2);
-		}
+    // if offsetX/Y are true we center the element to the screen
+    if ( offsetX === true ) {
+      offsetX = Math.round(el.offsetWidth / 2 - this.wrapper.offsetWidth / 2);
+    }
+    if ( offsetY === true ) {
+      offsetY = Math.round(el.offsetHeight / 2 - this.wrapper.offsetHeight / 2);
+    }
 
-		pos.left -= offsetX || 0;
-		pos.top  -= offsetY || 0;
+    pos.left -= offsetX || 0;
+    pos.top  -= offsetY || 0;
 
-		pos.left = pos.left > 0 ? 0 : pos.left < this.maxScrollX ? this.maxScrollX : pos.left;
-		pos.top  = pos.top  > 0 ? 0 : pos.top  < this.maxScrollY ? this.maxScrollY : pos.top;
+    pos.left = pos.left > 0 ? 0 : pos.left < this.maxScrollX ? this.maxScrollX : pos.left;
+    pos.top  = pos.top  > 0 ? 0 : pos.top  < this.maxScrollY ? this.maxScrollY : pos.top;
 
-		time = time === undefined || time === null || time === 'auto' ? Math.max(Math.abs(this.x-pos.left), Math.abs(this.y-pos.top)) : time;
+    time = time === undefined || time === null || time === 'auto' ? Math.max(Math.abs(this.x-pos.left), Math.abs(this.y-pos.top)) : time;
 
-		this.scrollTo(pos.left, pos.top, time, easing);
-	},
+    this.scrollTo(pos.left, pos.top, time, easing);
+  },
 
-	_transitionTime: function (time) {
-		time = time || 0;
-		this.scrollerStyle[utils.style.transitionDuration] = time + 'ms';
+  _transitionTime: function (time) {
+    time = time || 0;
+    this.scrollerStyle[utils.style.transitionDuration] = time + 'ms';
 
 // INSERT POINT: _transitionTime
 
-	},
+  },
 
-	_transitionTimingFunction: function (easing) {
-		this.scrollerStyle[utils.style.transitionTimingFunction] = easing;
+  _transitionTimingFunction: function (easing) {
+    this.scrollerStyle[utils.style.transitionTimingFunction] = easing;
 
 // INSERT POINT: _transitionTimingFunction
 
-	},
+  },
 
-	_translate: function (x, y) {
-		if ( this.options.useTransform ) {
+  _translate: function (x, y) {
+    if ( this.options.useTransform ) {
 
 /* REPLACE START: _translate */
 
-			this.scrollerStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.translateZ;
+      this.scrollerStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.translateZ;
 
 /* REPLACE END: _translate */
 
-		} else {
-			x = Math.round(x);
-			y = Math.round(y);
-			this.scrollerStyle.left = x + 'px';
-			this.scrollerStyle.top = y + 'px';
-		}
+    } else {
+      x = Math.round(x);
+      y = Math.round(y);
+      this.scrollerStyle.left = x + 'px';
+      this.scrollerStyle.top = y + 'px';
+    }
 
-		this.x = x;
-		this.y = y;
+    this.x = x;
+    this.y = y;
 
 // INSERT POINT: _translate
 
-	},
+  },
 
-	_initEvents: function (remove) {
-		var eventType = remove ? utils.removeEvent : utils.addEvent,
-			target = this.options.bindToWrapper ? this.wrapper : window;
+  _initEvents: function (remove) {
+    var eventType = remove ? utils.removeEvent : utils.addEvent,
+      target = this.options.bindToWrapper ? this.wrapper : window;
 
-		eventType(window, 'orientationchange', this);
-		eventType(window, 'resize', this);
+    eventType(window, 'orientationchange', this);
+    eventType(window, 'resize', this);
 
-		if ( this.options.click ) {
-			eventType(this.wrapper, 'click', this, true);
-		}
+    if ( this.options.click ) {
+      eventType(this.wrapper, 'click', this, true);
+    }
 
-		if ( !this.options.disableMouse ) {
-			eventType(this.wrapper, 'mousedown', this);
-			eventType(target, 'mousemove', this);
-			eventType(target, 'mousecancel', this);
-			eventType(target, 'mouseup', this);
-		}
+    if ( !this.options.disableMouse ) {
+      eventType(this.wrapper, 'mousedown', this);
+      eventType(target, 'mousemove', this);
+      eventType(target, 'mousecancel', this);
+      eventType(target, 'mouseup', this);
+    }
 
-		if ( utils.hasPointer && !this.options.disablePointer ) {
-			eventType(this.wrapper, 'MSPointerDown', this);
-			eventType(target, 'MSPointerMove', this);
-			eventType(target, 'MSPointerCancel', this);
-			eventType(target, 'MSPointerUp', this);
-		}
+    if ( utils.hasPointer && !this.options.disablePointer ) {
+      eventType(this.wrapper, 'MSPointerDown', this);
+      eventType(target, 'MSPointerMove', this);
+      eventType(target, 'MSPointerCancel', this);
+      eventType(target, 'MSPointerUp', this);
+    }
 
-		if ( utils.hasTouch && !this.options.disableTouch ) {
-			eventType(this.wrapper, 'touchstart', this);
-			eventType(target, 'touchmove', this);
-			eventType(target, 'touchcancel', this);
-			eventType(target, 'touchend', this);
-		}
+    if ( utils.hasTouch && !this.options.disableTouch ) {
+      eventType(this.wrapper, 'touchstart', this);
+      eventType(target, 'touchmove', this);
+      eventType(target, 'touchcancel', this);
+      eventType(target, 'touchend', this);
+    }
 
-		eventType(this.scroller, 'transitionend', this);
-		eventType(this.scroller, 'webkitTransitionEnd', this);
-		eventType(this.scroller, 'oTransitionEnd', this);
-		eventType(this.scroller, 'MSTransitionEnd', this);
-	},
+    eventType(this.scroller, 'transitionend', this);
+    eventType(this.scroller, 'webkitTransitionEnd', this);
+    eventType(this.scroller, 'oTransitionEnd', this);
+    eventType(this.scroller, 'MSTransitionEnd', this);
+  },
 
-	getComputedPosition: function () {
-		var matrix = window.getComputedStyle(this.scroller, null),
-			x, y;
+  getComputedPosition: function () {
+    var matrix = window.getComputedStyle(this.scroller, null),
+      x, y;
 
-		if ( this.options.useTransform ) {
-			matrix = matrix[utils.style.transform].split(')')[0].split(', ');
-			x = +(matrix[12] || matrix[4]);
-			y = +(matrix[13] || matrix[5]);
-		} else {
-			x = +matrix.left.replace(/[^-\d]/g, '');
-			y = +matrix.top.replace(/[^-\d]/g, '');
-		}
+    if ( this.options.useTransform ) {
+      matrix = matrix[utils.style.transform].split(')')[0].split(', ');
+      x = +(matrix[12] || matrix[4]);
+      y = +(matrix[13] || matrix[5]);
+    } else {
+      x = +matrix.left.replace(/[^-\d]/g, '');
+      y = +matrix.top.replace(/[^-\d]/g, '');
+    }
 
-		return { x: x, y: y };
-	},
+    return { x: x, y: y };
+  },
 
-	_animate: function (destX, destY, duration, easingFn) {
-		var that = this,
-			startX = this.x,
-			startY = this.y,
-			startTime = utils.getTime(),
-			destTime = startTime + duration;
+  _animate: function (destX, destY, duration, easingFn) {
+    var that = this,
+      startX = this.x,
+      startY = this.y,
+      startTime = utils.getTime(),
+      destTime = startTime + duration;
 
-		function step () {
-			var now = utils.getTime(),
-				newX, newY,
-				easing;
+    function step () {
+      var now = utils.getTime(),
+        newX, newY,
+        easing;
 
-			if ( now >= destTime ) {
-				that.isAnimating = false;
-				that._translate(destX, destY);
+      if ( now >= destTime ) {
+        that.isAnimating = false;
+        that._translate(destX, destY);
 
-				if ( !that.resetPosition(that.options.bounceTime) ) {
-					that._execEvent('scrollEnd');
-				}
+        if ( !that.resetPosition(that.options.bounceTime) ) {
+          that._execEvent('scrollEnd');
+        }
 
-				return;
-			}
+        return;
+      }
 
-			now = ( now - startTime ) / duration;
-			easing = easingFn(now);
-			newX = ( destX - startX ) * easing + startX;
-			newY = ( destY - startY ) * easing + startY;
-			that._translate(newX, newY);
+      now = ( now - startTime ) / duration;
+      easing = easingFn(now);
+      newX = ( destX - startX ) * easing + startX;
+      newY = ( destY - startY ) * easing + startY;
+      that._translate(newX, newY);
 
-			if ( that.isAnimating ) {
-				rAF(step);
-			}
-		}
+      if ( that.isAnimating ) {
+        rAF(step);
+      }
+    }
 
-		this.isAnimating = true;
-		step();
-	},
-	handleEvent: function (e) {
-		switch ( e.type ) {
-			case 'touchstart':
-			case 'MSPointerDown':
-			case 'mousedown':
-				this._start(e);
-				break;
-			case 'touchmove':
-			case 'MSPointerMove':
-			case 'mousemove':
-				this._move(e);
-				break;
-			case 'touchend':
-			case 'MSPointerUp':
-			case 'mouseup':
-			case 'touchcancel':
-			case 'MSPointerCancel':
-			case 'mousecancel':
-				this._end(e);
-				break;
-			case 'orientationchange':
-			case 'resize':
-				this._resize();
-				break;
-			case 'transitionend':
-			case 'webkitTransitionEnd':
-			case 'oTransitionEnd':
-			case 'MSTransitionEnd':
-				this._transitionEnd(e);
-				break;
-			case 'DOMMouseScroll':
-			case 'mousewheel':
-				this._wheel(e);
-				break;
-			case 'keydown':
-				this._key(e);
-				break;
-			case 'click':
-				if ( !e._constructed ) {
-					e.preventDefault();
-					e.stopPropagation();
-				}
-				break;
-		}
-	}
+    this.isAnimating = true;
+    step();
+  },
+  handleEvent: function (e) {
+    switch ( e.type ) {
+      case 'touchstart':
+      case 'MSPointerDown':
+      case 'mousedown':
+        this._start(e);
+        break;
+      case 'touchmove':
+      case 'MSPointerMove':
+      case 'mousemove':
+        this._move(e);
+        break;
+      case 'touchend':
+      case 'MSPointerUp':
+      case 'mouseup':
+      case 'touchcancel':
+      case 'MSPointerCancel':
+      case 'mousecancel':
+        this._end(e);
+        break;
+      case 'orientationchange':
+      case 'resize':
+        this._resize();
+        break;
+      case 'transitionend':
+      case 'webkitTransitionEnd':
+      case 'oTransitionEnd':
+      case 'MSTransitionEnd':
+        this._transitionEnd(e);
+        break;
+      case 'DOMMouseScroll':
+      case 'mousewheel':
+        this._wheel(e);
+        break;
+      case 'keydown':
+        this._key(e);
+        break;
+      case 'click':
+        if ( !e._constructed ) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        break;
+    }
+  }
 };
 IScroll.ease = utils.ease;
 
@@ -6932,12 +6932,12 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
         };
 }());
 (function() {
-	'use strict';
-	Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function(elem, rule) {
-		Modernizr.addTest(
-			'overflowtouch',
-			window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
-	});
+  'use strict';
+  Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function(elem, rule) {
+    Modernizr.addTest(
+      'overflowtouch',
+      window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
+  });
 
 })();
 window.addEventListener('load', function() {
