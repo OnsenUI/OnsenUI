@@ -587,6 +587,7 @@ limitations under the License.
 					console.error(e);
 				}).success(function(data, status, headers, config) {
 					var div = document.createElement('div');
+					div.className = 'full-width full-height';
 					div.innerHTML = data; 
 					var pageContent = angular.element(div.cloneNode(true));
 					var pageEl = this.generatePageEl(pageContent, options);
