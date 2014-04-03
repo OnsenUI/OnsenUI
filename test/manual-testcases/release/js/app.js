@@ -2,10 +2,23 @@ var app = angular.module('myApp', ['onsen.directives']);
 
 app.controller('inheritCtrl', function ($scope) {
 
+    $scope.data = [];
 
     $scope.test = function () {
         alert('inherited');
     };
+
+    $scope.ngAlert = function(arg){
+        alert(arg);
+    }
+
+
+    $scope.pushObject = function(arg){
+        for(var i in arg){
+
+
+        }
+    }
 
     $scope.pushTestPage = function (mainDirectory, subDirectory, id, page) {
 

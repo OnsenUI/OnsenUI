@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.3 - 2014-04-02 */
+/*! onsenui - v1.0.3 - 2014-04-03 */
 angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
@@ -878,6 +878,8 @@ limitations under the License.
 				this.scope.pushPage = this.pushPage.bind(this);
 				this.scope.popPage = this.popPage.bind(this);
 				this.scope.resetToPage = this.resetToPage.bind(this);
+				this.scope.getCurrentNavigatorItem = this.getCurrentNavigatorItem.bind(this);
+				this.scope.pages = this.navigatorItems;
 			},
 
 			attachFastClickEvent: function(el) {
@@ -1300,6 +1302,9 @@ limitations under the License.
 				if (options && typeof options != "object") {
 					throw new Error('options must be an objected. You supplied ' + options);
 				}
+				options = options || {};
+				options["page"] = page;
+
 				if (!this.isReady()) {
 					return;
 				}
@@ -1422,6 +1427,8 @@ limitations under the License.
 				$rootScope.ons.navigator.pushPage = this.pushPage.bind(this);
 				$rootScope.ons.navigator.popPage = this.popPage.bind(this);
 				$rootScope.ons.navigator.resetToPage = this.resetToPage.bind(this);
+				$rootScope.ons.navigator.getCurrentPage = this.getCurrentPage.bind(this);
+				$rootScope.ons.navigator.getPages = this.getPages.bind(this);
 			},
 
 			_findNavigator: function($event) {
@@ -1474,6 +1481,20 @@ limitations under the License.
 
 				var navigator = this._findNavigator($event);
 				navigator.popPage();
+			},
+
+			getCurrentPage: function() {
+			    this._checkExistence();
+
+			    var navigator = this._findNavigator();
+			    return navigator.getCurrentNavigatorItem();
+			},
+
+			getPages: function() {
+			    this._checkExistence();
+
+			    var navigator = this._findNavigator();
+			    return navigator.pages;
 			}
 		});
 
@@ -2368,7 +2389,10 @@ limitations under the License.
 					},
 
 
-					handleEvent: function(ev) {						
+					handleEvent: function(ev) {
+						if (this.isInsideIgnoredElement(ev.target))
+							ev.gesture.stopDetect();
+
 						switch (ev.type) {
 
 							case 'touch':
@@ -2408,6 +2432,15 @@ limitations under the License.
 								}
 								break;
 						}
+					},
+
+					isInsideIgnoredElement: function (el) {
+					    do {
+					        if (el.getAttribute && el.getAttribute("sliding-menu-ignore"))
+					            return true;
+					        el = el.parentNode;
+					    } while (el);
+					    return false;
 					},
 
 					isInsideSwipeTargetArea: function(x){
@@ -3141,7 +3174,6 @@ limitations under the License.
 						if (tabItems[i] != selectedTabItem) {
 							tabItems[i].setInactive();
 						}else{
-
 							triggerActiveTabChanged(i, selectedTabItem);
 						}
 					}

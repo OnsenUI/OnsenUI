@@ -1,0 +1,18 @@
+<ons-page class="center">
+    
+
+    <br/><br/>
+    <ons-button ng-click="ons.navigator.pushPage(
+    	'navigator/navigator5/second.html', 
+    	{
+    		title: 'hoge',
+    		leftButtonIcon: 'fa fa-check',
+    		rightButtonIcon : 'fa fa-check',	
+            onLeftButtonClick: 'test()',
+    		onRightButtonClick: 'test()',
+    		foo: 'barbarbar'
+    	})"
+    >pushPageWithData</ons-button><br/><br/>
+    <ons-button ng-click="ngAlert(ons.navigator.getPages().length)">getPage Stack</ons-button><br/><br/>
+
+</ons-page>

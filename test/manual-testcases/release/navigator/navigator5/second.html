@@ -1,0 +1,11 @@
+<ons-page class="center">
+    
+    <ons-button ng-click="ngAlert(ons.navigator.getCurrentPage().options.foo)">Get the value passed from previous page</ons-button><br/><br/>
+
+    <ons-button ng-click="ngAlert(ons.navigator.getCurrentPage().options.page)">Get the Current Page</ons-button><br/><br/>
+
+    <ons-button ng-click="ngAlert(ons.navigator.getPages().length)">getPage Stack</ons-button><br/><br/>
+
+    <ons-button ng-click="ons.navigator.popPage()">Back</ons-button><br/><br/>
+    
+</ons-page
