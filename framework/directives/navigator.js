@@ -579,7 +579,6 @@ limitations under the License.
 
 				this.setReady(false);
 
-                // Modify to use templates and cache
                 if ($templateCache.get(page) != undefined) {
                     var div = document.createElement('div');
                     div.innerHTML = $templateCache.get(page);
@@ -598,7 +597,7 @@ limitations under the License.
                     }).success(function(data, status, headers, config) {
                             var div = document.createElement('div');
                             div.innerHTML = data;
-                            // put html on angularjs template cache
+
                             $templateCache.put(page,data);
                             var pageContent = angular.element(div.cloneNode(true));
                             var pageEl = this.generatePageEl(pageContent, options);
