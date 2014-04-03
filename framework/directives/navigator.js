@@ -19,7 +19,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, requestAnimationFrame) {
+	directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, requestAnimationFrame,$templateCache) {
 		var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 
 		var Navigator = Class.extend({
@@ -578,24 +578,36 @@ limitations under the License.
 				var that = this;
 
 				this.setReady(false);
+                // template caching
+                if ($templateCache.get(page) != undefined) {
+                    var div = document.createElement('div');
+                    div.innerHTML = $templateCache.get(page);
+                    var pageContent = angular.element(div.cloneNode(true));
+                    var pageEl = this.generatePageEl(pageContent, options);
+                    var pageScope = this.createPageScope();
+                    var compiledPage = this.compilePageEl(pageEl, pageScope);
+                    this._pushPageDOM(page, div, compiledPage, pageScope, options);
+                } else {
+                    $http({
+                        url: page,
+                        method: 'GET'
+                    }).error(function(e) {
+                        that.onTransitionEnded();
+                        console.error(e);
+                    }).success(function(data, status, headers, config) {
+                            var div = document.createElement('div');
+                            div.innerHTML = data;
 
-				$http({
-					url: page,
-					method: 'GET'
-				}).error(function(e) {
-					that.onTransitionEnded();
-					console.error(e);
-				}).success(function(data, status, headers, config) {
-					var div = document.createElement('div');
-					div.innerHTML = data; 
-					var pageContent = angular.element(div.cloneNode(true));
-					var pageEl = this.generatePageEl(pageContent, options);
-					var pageScope = this.createPageScope();
-					var compiledPage = this.compilePageEl(pageEl, pageScope);
-					this._pushPageDOM(page, div, compiledPage, pageScope, options);
-				}.bind(this)).error(function(data, status, headers, config) {
-					console.error('error', data, status);
-				});
+                            $templateCache.put(page,data);
+                            var pageContent = angular.element(div.cloneNode(true));
+                            var pageEl = this.generatePageEl(pageContent, options);
+                            var pageScope = this.createPageScope();
+                            var compiledPage = this.compilePageEl(pageEl, pageScope);
+                            this._pushPageDOM(page, div, compiledPage, pageScope, options);
+                        }.bind(this)).error(function(data, status, headers, config) {
+                        console.error('error', data, status);
+                    });
+                }
 			},
 
 			popPage: function() {
