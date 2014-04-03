@@ -579,23 +579,36 @@ limitations under the License.
 
 				this.setReady(false);
 
-				$http({
-					url: page,
-					method: 'GET'
-				}).error(function(e) {
-					that.onTransitionEnded();
-					console.error(e);
-				}).success(function(data, status, headers, config) {
-					var div = document.createElement('div');
-					div.innerHTML = data; 
-					var pageContent = angular.element(div.cloneNode(true));
-					var pageEl = this.generatePageEl(pageContent, options);
-					var pageScope = this.createPageScope();
-					var compiledPage = this.compilePageEl(pageEl, pageScope);
-					this._pushPageDOM(page, div, compiledPage, pageScope, options);
-				}.bind(this)).error(function(data, status, headers, config) {
-					console.error('error', data, status);
-				});
+                // Modify to use templates and cache
+                if ($templateCache.get(page) != undefined) {
+                    var div = document.createElement('div');
+                    div.innerHTML = $templateCache.get(page);
+                    var pageContent = angular.element(div.cloneNode(true));
+                    var pageEl = this.generatePageEl(pageContent, options);
+                    var pageScope = this.createPageScope();
+                    var compiledPage = this.compilePageEl(pageEl, pageScope);
+                    this._pushPageDOM(page, div, compiledPage, pageScope, options);
+                } else {
+                    $http({
+                        url: page,
+                        method: 'GET'
+                    }).error(function(e) {
+                        that.onTransitionEnded();
+                        console.error(e);
+                    }).success(function(data, status, headers, config) {
+                            var div = document.createElement('div');
+                            div.innerHTML = data;
+                            // put html on angularjs template cache
+                            $templateCache.put(page,data);
+                            var pageContent = angular.element(div.cloneNode(true));
+                            var pageEl = this.generatePageEl(pageContent, options);
+                            var pageScope = this.createPageScope();
+                            var compiledPage = this.compilePageEl(pageEl, pageScope);
+                            this._pushPageDOM(page, div, compiledPage, pageScope, options);
+                        }.bind(this)).error(function(data, status, headers, config) {
+                        console.error('error', data, status);
+                    });
+                }
 			},
 
 			popPage: function() {
