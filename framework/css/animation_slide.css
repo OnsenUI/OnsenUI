@@ -78,7 +78,7 @@ limitations under the License.
   animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.ons-navigator__pager > .ons-navigator__page {
+.ons-navigator__pager--transition > .ons-navigator__page {
   transition-duration: 400ms;
   animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
