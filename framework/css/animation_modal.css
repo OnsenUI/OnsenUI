@@ -15,10 +15,9 @@ limitations under the License.
 
  */
 
-
 /* MODAL */
 
-ons-screen {
+.ons-screen {
   display: block;
   width: 100%;
   height: 100%;
@@ -27,7 +26,7 @@ ons-screen {
   overflow: hidden;    
 }
 
-.screen-page {
+.ons-screen__page-container {
   transform-style: preserve-3d;        
   transform-origin: 100% 100%;
   position: absolute;
@@ -37,7 +36,27 @@ ons-screen {
   height: 100%;
 }
 
-.screen-page__container {
+.ons-screen__page-container--screen-center {
+  transform: translate3d(0, 0, 0);   
+  box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.1);
+}
+
+.ons-screen__page-container--unmodal {
+  transform: translate3d(0, 100%, 0) !important;    
+  box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.2);
+}
+
+.ons-screen__page-container--transition {
+  transition-duration: 400ms;
+  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+}
+
+.ons-screen__page-container--modal-behind {    
+  transform-style: preserve-3d;  
+  transform: translate3d(0, -10%, 0);    
+}
+
+.ons-screen__page {
   position: absolute;
   top: 0;
   left: 0;
@@ -45,7 +64,7 @@ ons-screen {
   bottom: 0;
 }
 
-.onsen_screen-black-mask {
+.ons-screen__black-mask {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -54,39 +73,19 @@ ons-screen {
   background-color: black;
 }
 
-.onsen_screen-black-mask.hide {
+.ons-screen__black-mask--hidden {
   opacity: 0;  
 }
 
-.screen-page.screen-center {
-  transform: translate3d(0, 0, 0);   
-  box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.1);
-}
-
-.screen-page.unmodal {
-  transform: translate3d(0, 100%, 0) !important;    
-  box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.2);
-}
-
-.screen-page.transition > .screen-page__container {
+.ons-screen__page-container--transition > .ons-screen__page {
   transition-duration: 400ms;
   animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.screen-page.unmodal > .screen-page__container {
+.ons-screen__page-container--unmodal > .ons-screen__page {
   opacity: 1;
 }
 
-.screen-page.transition {
-  transition-duration: 400ms;
-  animation-timing-function: cubic-bezier(.1, .7, .1, 1);
-}
-
-.screen-page.modal-behind {    
-  transform-style: preserve-3d;  
-  transform: translate3d(0, -10%, 0);    
-}
-
-.screen-page.modal-behind > .screen-page__container {
+.ons-screen__page-container--modal-behind > .ons-screen__page {
   opacity: 0.9;
 }

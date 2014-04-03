@@ -196,6 +196,17 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
+  $templateCache.put("templates/screen.tpl",
+    "<div class=\"ons-screen\" ng-transclude></div>\n" +
+    "");
+}]);
+})();
+
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/scroller.tpl",
     "<div class=\"scroller-wrapper full-screen topcoat-page\" ons-scrollable>\n" +
     "  <div class=\"scroller ons-scroller-inner\" ng-transclude>\n" +

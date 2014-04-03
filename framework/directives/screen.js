@@ -33,7 +33,7 @@ limitations under the License.
         this.isReady = true;
         this.attachMethods();
 
-        if(scope.page){
+        if (scope.page) {
           this.resetToPage(scope.page);
         }
       },
@@ -46,14 +46,14 @@ limitations under the License.
       animateInBehindPage: function() {
         var behindPage = this.screenItems[this.screenItems.length - 2].pageElement;
         try {
-          behindPage.attr('class', 'screen-page transition modal-behind');
+          behindPage.attr('class', 'ons-screen__page-container ons-screen__page-container--transition ons-screen__page-container--modal-behind');
         } catch(e) {
           console.log(e);
         }
       },
 
       animateInCurrentPage: function(pager) {
-        pager.attr("class", "screen-page unmodal");
+        pager.attr("class", "ons-screen__page-container ons-screen__page-container--unmodal");
         var that = this;
         pager.bind(TRANSITION_START, function transitionEnded() {
           that.isReady = false;
@@ -64,7 +64,7 @@ limitations under the License.
 
         setTimeout(function() {
           requestAnimationFrame(function() {
-            pager.attr("class", "screen-page transition screen-center");
+            pager.attr("class", "ons-screen__page-container ons-screen__page-container--transition ons-screen__page-container--screen-center");
             that.animateInBehindPage();
           });
         }, 10);
@@ -72,7 +72,7 @@ limitations under the License.
 
       animateOutBehindPage: function() {
         var behindPage = this.screenItems[this.screenItems.length - 1].pageElement;
-        behindPage.attr('class', 'screen-page transition');
+        behindPage.attr('class', 'ons-screen__page-container ons-screen__page-container--transition');
       },
 
       isEmpty: function() {
@@ -80,20 +80,20 @@ limitations under the License.
       },
 
       onPageAdded: function(page) {
-        var blackMask = angular.element(page[0].querySelector('.onsen_screen-black-mask'));
-        blackMask.removeClass('hide');
+        var blackMask = angular.element(page[0].querySelector('.ons-screen__black-mask'));
+        blackMask.removeClass('ons-screen__black-mask--hidden');
       },
 
       generatePageEl: function(pageContent){
         var pageEl = angular.element('<div></div>');
-        pageEl.addClass('screen-page');
+        pageEl.addClass('onsne-screen__page-container');
 
         var blackMask = angular.element('<div></div>');
-        blackMask.addClass('onsen_screen-black-mask hide');
+        blackMask.addClass('ons-screen__black-mask ons-screen__black-mask--hidden');
         pageEl.append(blackMask);
 
         var pageContainer = angular.element('<div></div>');
-        pageContainer.addClass('screen-page__container ons-screen-inner');
+        pageContainer.addClass('ons-screen__page ons-screen-inner');
         pageEl.append(pageContainer);
 
         pageContainer.append(pageContent);
@@ -175,7 +175,7 @@ limitations under the License.
         var screenItem = this.screenItems.pop();
         var currentPage = screenItem.pageElement;
         this.animateOutBehindPage();
-        currentPage.attr("class", "screen-page transition unmodal");
+        currentPage.attr("class", "ons-screen__page-container ons-screen__page-container--transition ons-screen__page-container--unmodal");
         var that = this;
 
         currentPage.bind(TRANSITION_START, function transitionEnded() {
@@ -210,11 +210,13 @@ limitations under the License.
 
     return {
       restrict: 'E',
-      replace: false,
+      replace: true,
       transclude: true,
       scope: {
         page: '@'
       },
+
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/screen.tpl',
 
       compile: function(element, attrs, transclude) {
         return function(scope, element, attrs) {
@@ -222,7 +224,6 @@ limitations under the License.
           OnsenUtil.declareVarAttribute(attrs, screen);
 
           if (!attrs.page) {
-
             var pageScope = screen.createPageScope();
 
             transclude(pageScope, function(pageContent) {
