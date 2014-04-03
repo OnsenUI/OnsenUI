@@ -17,3 +17,4 @@ Project Name
 # CLA needs to be signed before accepting pull requests.
 @idealhack
 @dzeims
+@ataruohto0121
