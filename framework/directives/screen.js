@@ -33,11 +33,9 @@ limitations under the License.
 				this.isReady = true;
 				this.attachMethods();
 
-				this.attrs.$observe('page', function(page) {
-					if (page) {
-					this.resetToPage(page);
-					}
-				}.bind(this));
+				if(scope.page){
+					this.resetToPage(scope.page);
+				}				
 			},
 
 			onTransitionEnded: function() {
@@ -214,7 +212,7 @@ limitations under the License.
 			replace: false,
 			transclude: true,
 			scope: {
-				page: '='
+				page: '@'
 			},
 
 			compile: function(element, attrs, transclude) {
