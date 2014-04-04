@@ -117,8 +117,7 @@ limitations under the License.
 				// fix android 2.3 click event not fired some times when used with sliding menu
 				this.leftButtonContainer.bind('touchend', function() { });
 
-				this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));
-				this.attachFastClickEvent(this.leftSection[0]);
+				this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));				
 				this.rightSection.bind('click', this.onRightButtonClicked.bind(this));
 				if (scope.page) {
 					var options = {
@@ -145,6 +144,8 @@ limitations under the License.
 				this.scope.pushPage = this.pushPage.bind(this);
 				this.scope.popPage = this.popPage.bind(this);
 				this.scope.resetToPage = this.resetToPage.bind(this);
+				this.scope.getCurrentNavigatorItem = this.getCurrentNavigatorItem.bind(this);
+				this.scope.pages = this.navigatorItems;
 			},
 
 			attachFastClickEvent: function(el) {
@@ -165,13 +166,20 @@ limitations under the License.
 				return this.ready;
 			},
 
-			checkiOS7: function() {
+			checkiOS7: function() {				
 				if (window.device && window.device.platform) {
 					if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
 						setTimeout( this.adjustForiOS7.bind(this), 0);
 					}
 				} else {
-					document.addEventListener("deviceready", this.checkiOS7.bind(this), false);
+					var self = this;
+					document.addEventListener("deviceready", function(){
+						if(window.device && window.device.platform){
+							self.checkiOS7();
+						}else{
+							// cordova not suppoorted
+						}
+					}, false);
 				}
 			},
 
@@ -560,6 +568,9 @@ limitations under the License.
 				if (options && typeof options != "object") {
 					throw new Error('options must be an objected. You supplied ' + options);
 				}
+				options = options || {};
+				options["page"] = page;
+
 				if (!this.isReady()) {
 					return;
 				}
@@ -576,6 +587,7 @@ limitations under the License.
 					console.error(e);
 				}).success(function(data, status, headers, config) {
 					var div = document.createElement('div');
+					div.className = 'full-width full-height';
 					div.innerHTML = data; 
 					var pageContent = angular.element(div.cloneNode(true));
 					var pageEl = this.generatePageEl(pageContent, options);

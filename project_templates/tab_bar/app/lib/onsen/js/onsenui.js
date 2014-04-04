@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.3 - 2014-03-12 */
+/*! onsenui - v1.0.3 - 2014-04-04 */
 angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
@@ -203,7 +203,7 @@ angular.module("templates/text_area.tpl", []).run(["$templateCache", function($t
 
 angular.module("templates/text_input.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/text_input.tpl",
-    "<input type=\"text\" class=\"topcoat-text-input\">");
+    "<input class=\"topcoat-text-input\">");
 }]);
 
 /*
@@ -851,8 +851,7 @@ limitations under the License.
 				// fix android 2.3 click event not fired some times when used with sliding menu
 				this.leftButtonContainer.bind('touchend', function() { });
 
-				this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));
-				this.attachFastClickEvent(this.leftSection[0]);
+				this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));				
 				this.rightSection.bind('click', this.onRightButtonClicked.bind(this));
 				if (scope.page) {
 					var options = {
@@ -879,6 +878,8 @@ limitations under the License.
 				this.scope.pushPage = this.pushPage.bind(this);
 				this.scope.popPage = this.popPage.bind(this);
 				this.scope.resetToPage = this.resetToPage.bind(this);
+				this.scope.getCurrentNavigatorItem = this.getCurrentNavigatorItem.bind(this);
+				this.scope.pages = this.navigatorItems;
 			},
 
 			attachFastClickEvent: function(el) {
@@ -899,13 +900,20 @@ limitations under the License.
 				return this.ready;
 			},
 
-			checkiOS7: function() {
+			checkiOS7: function() {				
 				if (window.device && window.device.platform) {
 					if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
 						setTimeout( this.adjustForiOS7.bind(this), 0);
 					}
 				} else {
-					document.addEventListener("deviceready", this.checkiOS7.bind(this), false);
+					var self = this;
+					document.addEventListener("deviceready", function(){
+						if(window.device && window.device.platform){
+							self.checkiOS7();
+						}else{
+							// cordova not suppoorted
+						}
+					}, false);
 				}
 			},
 
@@ -1294,6 +1302,9 @@ limitations under the License.
 				if (options && typeof options != "object") {
 					throw new Error('options must be an objected. You supplied ' + options);
 				}
+				options = options || {};
+				options["page"] = page;
+
 				if (!this.isReady()) {
 					return;
 				}
@@ -1310,6 +1321,7 @@ limitations under the License.
 					console.error(e);
 				}).success(function(data, status, headers, config) {
 					var div = document.createElement('div');
+					div.className = 'full-width full-height';
 					div.innerHTML = data; 
 					var pageContent = angular.element(div.cloneNode(true));
 					var pageEl = this.generatePageEl(pageContent, options);
@@ -1416,6 +1428,8 @@ limitations under the License.
 				$rootScope.ons.navigator.pushPage = this.pushPage.bind(this);
 				$rootScope.ons.navigator.popPage = this.popPage.bind(this);
 				$rootScope.ons.navigator.resetToPage = this.resetToPage.bind(this);
+				$rootScope.ons.navigator.getCurrentPage = this.getCurrentPage.bind(this);
+				$rootScope.ons.navigator.getPages = this.getPages.bind(this);
 			},
 
 			_findNavigator: function($event) {
@@ -1468,6 +1482,20 @@ limitations under the License.
 
 				var navigator = this._findNavigator($event);
 				navigator.popPage();
+			},
+
+			getCurrentPage: function() {
+			    this._checkExistence();
+
+			    var navigator = this._findNavigator();
+			    return navigator.getCurrentNavigatorItem();
+			},
+
+			getPages: function() {
+			    this._checkExistence();
+
+			    var navigator = this._findNavigator();
+			    return navigator.pages;
 			}
 		});
 
@@ -1660,11 +1688,9 @@ limitations under the License.
 				this.isReady = true;
 				this.attachMethods();
 
-				this.attrs.$observe('page', function(page) {
-					if (page) {
-					this.resetToPage(page);
-					}
-				}.bind(this));
+				if(scope.page){
+					this.resetToPage(scope.page);
+				}				
 			},
 
 			onTransitionEnded: function() {
@@ -1841,7 +1867,7 @@ limitations under the License.
 			replace: false,
 			transclude: true,
 			scope: {
-				page: '='
+				page: '@'
 			},
 
 			compile: function(element, attrs, transclude) {
@@ -2264,11 +2290,17 @@ limitations under the License.
 					},
 
 					recalculateMAX: function(){
-						if(typeof scope.maxSlideDistance == 'string'){
-							scope.maxSlideDistance = scope.maxSlideDistance.replace('px', '');	
+						var maxDistance = scope.maxSlideDistance;
+						if(typeof maxDistance == 'string'){
+							if(maxDistance.indexOf('px') > 0){
+								maxDistance = maxDistance.replace('px', '');
+							}else if(maxDistance.indexOf('%') > 0){
+								maxDistance = maxDistance.replace('%', '');
+								maxDistance = parseFloat(maxDistance) / 100 * this.abovePage.clientWidth;
+							}							
 						}
-						if (scope.maxSlideDistance && this.MAX > parseInt(scope.maxSlideDistance, 10)) {
-							this.MAX = parseInt(scope.maxSlideDistance);
+						if (maxDistance) {
+							this.MAX = parseInt(maxDistance, 10);
 						}
 					},
 
@@ -2358,7 +2390,10 @@ limitations under the License.
 					},
 
 
-					handleEvent: function(ev) {						
+					handleEvent: function(ev) {
+						if (this.isInsideIgnoredElement(ev.target))
+							ev.gesture.stopDetect();
+
 						switch (ev.type) {
 
 							case 'touch':
@@ -2398,6 +2433,15 @@ limitations under the License.
 								}
 								break;
 						}
+					},
+
+					isInsideIgnoredElement: function (el) {
+					    do {
+					        if (el.getAttribute && el.getAttribute("sliding-menu-ignore"))
+					            return true;
+					        el = el.parentNode;
+					    } while (el);
+					    return false;
 					},
 
 					isInsideSwipeTargetArea: function(x){
@@ -2517,7 +2561,7 @@ limitations under the License.
 
 			_checkExistence: function() {
 				if (this.slidingMenus.length == 0) {
-					throw new Error('oops!! no navigator registerred');
+					throw new Error('oops!! no sliding-menu registerred');
 				}
 			},
 
@@ -3003,8 +3047,7 @@ limitations under the License.
 				$rootScope.ons.splitView.toggle = this.toggle.bind(this);				
 			},
 
-			_findClosestSplitView: function($event) {
-				// finding the right navigator
+			_findClosestSplitView: function($event) {				
 				var splitView;
 				if ($event) {
 					var splitViewElement = $rootScope.ons.upTo($event.target, 'ons-split-view');
@@ -3018,7 +3061,7 @@ limitations under the License.
 
 			_checkExistence: function() {
 				if (this.splitViews.length == 0) {
-					throw new Error('oops!! no navigator registerred');
+					throw new Error('oops!! no split-view registerred');
 				}
 			},
 
@@ -3081,13 +3124,14 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout, $http, $compile) {
+	directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout, $http, $compile, TabbarStack) {
 		return {
 			restrict: 'E',
 			replace: false,
-			transclude: true,
+			transclude: true,			
 			scope: {
-				hide: '@'
+				hide: '@',
+				onActiveTabChanged: '&'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
 			controller: function($scope, $element, $attrs) {
@@ -3104,6 +3148,13 @@ limitations under the License.
 					$scope.hideTabs = hide;
 					onTabbarVisibilityChanged();
 				});
+
+				function triggerActiveTabChanged(index, tabItem){
+					$scope.onActiveTabChanged({
+						$index: index,
+						$tabItem: tabItem
+					});
+				}				
 
 				function onTabbarVisibilityChanged() {
 					if ($scope.hideTabs) {
@@ -3123,6 +3174,8 @@ limitations under the License.
 					for (var i = 0; i < tabItems.length; i++) {
 						if (tabItems[i] != selectedTabItem) {
 							tabItems[i].setInactive();
+						}else{
+							triggerActiveTabChanged(i, selectedTabItem);
 						}
 					}
 				};
@@ -3159,10 +3212,21 @@ limitations under the License.
 
 				$scope.ons = $scope.ons || {};
 				$scope.ons.tabbar = {};
-				$scope.ons.tabbar.setTabbarVisibility = function(visible) {
+				$scope.setTabbarVisibility = function(visible) {
 					$scope.hideTabs = !visible;
 					onTabbarVisibilityChanged();
 				};
+
+				$scope.setActiveTab = function(index){
+					if(index < 0 || index >= tabItems.length){
+						throw new Error('Cannot set tab with index ' + index + '. We have ' + tabItems.length + ' tabs.');
+					}
+
+					var tabItem = tabItems[index];
+					tabItem.setActive();
+				}
+
+				TabbarStack.add($scope);
 			}
 		};
 	});
@@ -3212,6 +3276,7 @@ limitations under the License.
 				scope.tabIcon = scope.icon;
 
 				scope.setActive = function() {
+					element.addClass('active');
 					radioButton.checked = true;
 					tabbarController.gotSelected(scope);
 					if (scope.activeIcon) {
@@ -3220,6 +3285,7 @@ limitations under the License.
 				};
 
 				scope.setInactive = function() {
+					element.removeClass('active');
 					scope.tabIcon = scope.icon;
 				};
 
@@ -3229,6 +3295,61 @@ limitations under the License.
 
 			}
 		};
+	});
+})();
+(function() {
+	var directiveModules = angular.module('onsen.directives');
+
+	directiveModules.factory('TabbarStack', function($rootScope) {
+		var TabbarStack = Class.extend({
+			tabbars: [],
+
+			init: function() {
+				$rootScope.ons = $rootScope.ons || {};
+				$rootScope.ons.tabbar = {};				
+				$rootScope.ons.tabbar.setActiveTab = this.setActiveTab.bind(this);								
+			},
+
+			_findClosestTabbar: function($event) {
+				
+				var tabbar;
+				if ($event) {
+					var tabbarElement = $rootScope.ons.upTo($event.target, 'ons-tabbar');
+					tabbar = angular.element(tabbarElement).isolateScope();
+				} else {
+					tabbar = this.tabbars[this.tabbars.length - 1];
+				}
+
+				return tabbar;
+			},
+
+			_checkExistence: function() {
+				if (this.tabbars.length == 0) {
+					throw new Error('oops!! no tabbar registerred');
+				}
+			},
+
+			add: function(tabbar) {
+				this.tabbars.push(tabbar);
+			},
+
+			remove: function(tabbar){
+				for (var i = 0; i < this.tabbars.length; i++) {
+					if(this.tabbars[i] == tabbar){
+						this.tabbars.splice(i, 1);
+					}
+				};
+			},
+
+			setActiveTab: function(index, $event){
+				this._checkExistence();
+
+				var tabbar = this._findClosestTabbar($event);
+				tabbar.setActiveTab(index);
+			}	
+		});
+
+		return new TabbarStack();
 	});
 })();
 /*
@@ -3293,18 +3414,12 @@ limitations under the License.
 			restrict: 'E',
 			replace: true,
 			transclude: false,
-			scope: {
+			scope: {				
 				disabled: '='
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
 			link: function($scope, element, attr){
-				$scope.$watch(function(){
-					return $scope.disabled;
-				}, function(disabled){					
-				// attr.$observe('disabled', function(disabled){
-					var isDisabled = $scope.$eval(disabled);
-					element.attr('disabled', isDisabled);
-				});
+
 			}
 		};
 	});
@@ -6932,6 +7047,71 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
         };
 }());
 (function() {
+    function Viewport() {
+
+        this.PRE_IOS7_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
+        this.IOS7_VIEWPORT = "width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no";
+        this.DEFAULT_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
+        
+        this.ensureViewportElement();
+        this.platform = {};
+        this.platform.name = this.getPlatformName();
+        this.platform.version = this.getPlatformVersion();
+
+        return this;
+    };
+
+    Viewport.prototype.ensureViewportElement = function(){
+        this.viewportElement = document.querySelector('meta[name=viewport]');
+        if(!this.viewportElement){
+            this.viewportElement = document.createElement('meta');
+            this.viewportElement.name = "viewport";
+            document.head.appendChild(this.viewportElement);
+        }        
+    },
+
+    Viewport.prototype.setup = function() {
+        if (!this.viewportElement) {
+            return;
+        }
+
+        if (this.viewportElement.getAttribute('data-no-adjust') == "true") {
+            return;
+        }
+
+        if (this.platform.name == 'ios') {
+            if (this.platform.version >= 7) {
+                this.viewportElement.setAttribute('content', this.IOS7_VIEWPORT);
+            } else {
+                this.viewportElement.setAttribute('content', this.PRE_IOS7_VIEWPORT);
+            }
+        } else {
+            this.viewportElement.setAttribute('content', this.DEFAULT_VIEWPORT);
+        }
+    };
+
+    Viewport.prototype.getPlatformName = function() {
+        if (navigator.userAgent.match(/Android/i)) {
+            return "android";
+        }
+
+        if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+            return "ios";
+        }
+
+        // unknown
+        return undefined;
+    };
+
+    Viewport.prototype.getPlatformVersion = function() {
+        var start = window.navigator.userAgent.indexOf('OS ');
+        return window.Number(window.navigator.userAgent.substr(start + 3, 3).replace('_', '.'));
+    };
+
+    window.Viewport = Viewport;
+})();
+
+(function() {
 	'use strict';
 	Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function(elem, rule) {
 		Modernizr.addTest(
@@ -6943,3 +7123,5 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
 window.addEventListener('load', function() {
     FastClick.attach(document.body);
 }, false);
+
+new Viewport().setup();

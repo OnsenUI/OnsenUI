@@ -122,11 +122,17 @@ limitations under the License.
 					},
 
 					recalculateMAX: function(){
-						if(typeof scope.maxSlideDistance == 'string'){
-							scope.maxSlideDistance = scope.maxSlideDistance.replace('px', '');	
+						var maxDistance = scope.maxSlideDistance;
+						if(typeof maxDistance == 'string'){
+							if(maxDistance.indexOf('px') > 0){
+								maxDistance = maxDistance.replace('px', '');
+							}else if(maxDistance.indexOf('%') > 0){
+								maxDistance = maxDistance.replace('%', '');
+								maxDistance = parseFloat(maxDistance) / 100 * this.abovePage.clientWidth;
+							}							
 						}
-						if (scope.maxSlideDistance && this.MAX > parseInt(scope.maxSlideDistance, 10)) {
-							this.MAX = parseInt(scope.maxSlideDistance);
+						if (maxDistance) {
+							this.MAX = parseInt(maxDistance, 10);
 						}
 					},
 
@@ -216,7 +222,10 @@ limitations under the License.
 					},
 
 
-					handleEvent: function(ev) {						
+					handleEvent: function(ev) {
+						if (this.isInsideIgnoredElement(ev.target))
+							ev.gesture.stopDetect();
+
 						switch (ev.type) {
 
 							case 'touch':
@@ -256,6 +265,15 @@ limitations under the License.
 								}
 								break;
 						}
+					},
+
+					isInsideIgnoredElement: function (el) {
+					    do {
+					        if (el.getAttribute && el.getAttribute("sliding-menu-ignore"))
+					            return true;
+					        el = el.parentNode;
+					    } while (el);
+					    return false;
 					},
 
 					isInsideSwipeTargetArea: function(x){

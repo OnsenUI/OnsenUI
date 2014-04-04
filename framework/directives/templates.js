@@ -202,5 +202,5 @@ angular.module("templates/text_area.tpl", []).run(["$templateCache", function($t
 
 angular.module("templates/text_input.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/text_input.tpl",
-    "<input type=\"text\" class=\"topcoat-text-input\">");
+    "<input class=\"topcoat-text-input\">");
 }]);

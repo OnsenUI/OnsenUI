@@ -1,6 +1,6 @@
 {
-  "OnsenUI_1.0.1" : {
-    "displayName" : "Onsen UI 1.0.3",
+  "OnsenUI_dev" : {
+    "displayName" : "Onsen UI DEV",
     "description" : {
       "ja" : "Onsen UIはシンプルで快適な操作性を提供するHTML5 UIフレームワークです。",
       "en" : "HTML5 UI framework designed to be Simple, Fast and Powerful"
@@ -10,8 +10,8 @@
       "en" : "http://onsenui.io/"
     },
     "documentUrl" : {
-      "ja" : "http://docs.monaca.mobi/onsenui/",
-      "en" : "http://docs.monaca.mobi/onsenui/"
+      "ja" : "http://docs.monaca.mobi/ja/onsenui/",
+      "en" : "http://docs.monaca.mobi/en/onsenui/"
     },
     "type" : ["javascript"],
     "category" : ["html5"],

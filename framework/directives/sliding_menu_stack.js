@@ -29,7 +29,7 @@
 
 			_checkExistence: function() {
 				if (this.slidingMenus.length == 0) {
-					throw new Error('oops!! no navigator registerred');
+					throw new Error('oops!! no sliding-menu registerred');
 				}
 			},
 
