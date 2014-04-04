@@ -2040,6 +2040,7 @@ input[type="search"]::-webkit-search-cancel-button {
   -webkit-border-radius: 30px;
   border-radius: 30px;
   z-index: 1;
+  text-align: left;
 }
 
 .topcoat-switch__input {
