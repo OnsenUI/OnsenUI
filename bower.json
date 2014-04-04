@@ -1,6 +1,6 @@
 {
   "name": "OnsenUI",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "homepage": "http://onsenui.io",
   "authors": [
     "Kruy Vanna <kruyvanna@gmail.com>",
@@ -34,11 +34,15 @@
     "monaca"
   ],
   "dependencies": {
-    "angular": "~1.2.7"
+    "angular": "~1.2.10"
   },
   "license": "Apache License, Version 2.0",
   "ignore": [
     "**/.*",
+    "app",
+    "demo",
+    "package.json",
+    "themes",
     "node_modules",
     "component_demo",
     "config",
@@ -47,6 +51,7 @@
     "scripts",
     "test",
     "Gruntfile.js",
-    "plugin_info.json"
+    "plugin_info.json",
+    "build/js/angular"
   ]
 }
