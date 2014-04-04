@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.3 - 2014-03-12 */
+/*! onsenui - v1.0.3 - 2014-04-04 */
 
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
@@ -465,6 +465,10 @@ limitations under the License.
   text-align: left !important;
   margin-left: 25px !important;
   padding-left: 0 !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
 }
 
 .onsen_navigator-back-label.transition {
