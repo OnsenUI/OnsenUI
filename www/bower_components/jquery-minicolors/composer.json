@@ -1,0 +1,20 @@
+{
+  "name": "abeautifulsite/jquery-minicolors",
+  "type": "component",
+  "description": "jQuery MiniColors Plugin",
+  "homepage": "http://www.abeautifulsite.net/",
+  "license": "MIT",
+  "extra": {
+    "component": {
+      "scripts": [
+        "jquery.minicolors.js"
+      ],
+      "files": [
+        "jquery.minicolors.js",
+        "jquery.minicolors.min.js",
+        "jquery.minicolors.css",
+        "jquery.minicolors.png"
+      ]
+    }
+  }
+}

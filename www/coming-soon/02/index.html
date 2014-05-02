@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Onsen UI</title>
+    <link rel=stylesheet href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700">
+    <link rel=stylesheet href="http://fonts.googleapis.com/css?family=Helvetica+Neue:300,700">
+    <link rel=stylesheet href="http://fonts.googleapis.com/css?family=Marck+Script">
+    <link rel="stylesheet" href="vendors/html5-boilerplate/css/normalize.css">
+    <link rel="stylesheet" href="vendors/html5-boilerplate/css/main.css">
+    <link rel="stylesheet" href="vendors/twitter/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="vendors/jquery/jquery.js"></script>
+    <script src="vendors/twitter/dist/js/bootstrap.js"></script>
+    <script>
+    $(function(){
+      var check = function(email){
+        if( email !== undefined && email.match(/.+@.+/) ){
+          return true;
+        }
+        alert("Registration failed");
+        return false;
+      };
+      var post = function(email){
+        $.post( "https://monaca.mobi/ja/api/email/e458bcbcc4", { email: email })
+          .done(function(data) {
+            var ret = JSON.parse(data);
+            if(ret.status !== undefined && ret.status==="success"){
+              $('#email1').val("");
+              $('#email2').val("");
+              $('#thanksModal').modal();
+              ga('send', 'event', 'form', 'reg', '01', 1);
+            }else{
+              alert("Failed to register your email address.");
+            }
+          });
+      };
+      $("#form1").submit(function(){
+        var email = $('#email1').val();
+        if(check(email)){
+          post(email);
+        }
+        return false;
+      });
+      $("#form2").submit(function(){
+        var email = $('#email2').val();
+        if(check(email)){
+          post(email);
+        }
+        return false;
+      });
+    });
+    </script>
+    <script type="text/javascript">
+    setTimeout(function(){var a=document.createElement("script");
+    var b=document.getElementsByTagName("script")[0];
+    a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0022/7441.js?"+Math.floor(new Date().getTime()/3600000);
+    a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    </script>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-526750-31');
+    ga('send', 'pageview');
+
+    </script>
+        <style>
+  .modal-header {
+      border-bottom: none;
+  }
+  .modal-title {
+      font-family: 'Open Sans Condensed', sans-serif;
+      font-size: 40px;
+      font-weight: 700;
+      text-align: center;
+      color: #555;
+      margin: 40px 0 0;
+  }
+  .modal-body {
+      text-align: center;
+      font-family: 'Open Sans Condensed', sans-serif;
+      font-size: 18px;
+      color: #999;
+  }
+  .modal-body p {
+      font-size: 20px;
+      margin-bottom: 5px;
+  }
+  .modal-body p:last-child {
+      font-size: 22px;
+      font-weight: 700;
+  }
+  .modal-dialog .share-buttons {
+      width: 300px;
+      margin: 25px 0 20px 150px;
+      text-align: center;
+  }
+  .modal-footer {
+      border-top: none;
+      text-align: center;
+      margin-top: 0;
+      padding: 0 20px 50px;
+  }
+  .modal-footer .btn-primary {
+      padding: 10px 40px;
+  }
+  </style>
+</head>
+<body>
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0];
+	if (d.getElementById(id)) return;
+	js = d.createElement(s); js.id = id;
+	js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&appId=820035751343224&version=v2.0";
+	fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<div class="wrapper">
+
+    <div class="ribbon-coming-soon">
+        <a target="_blank" href="//onsenui.io"><img src="images/ribbon_coming_soon_red.png" alt="Coming soon!"></a>
+    </div>
+
+    <header class="header">
+        <div class="key-visual">
+            <div class="key-visual-contents">
+                <div class="kv-logo"><img src="images/logo.png" alt=""></div>
+                <div class="kv-title">Start Your Engines!</div>
+                <div class="kv-description">Onsen UI is the mobile development <br> starting line</div>
+                <div class="kv-mag-message">WANT TO GET IN ON Onsen UI EARLY?</div>
+                <div class="kv-mag-form clearfix">
+                    <form id="form1" action="">
+                        <div class="kv-mag-form-email">
+                            <input type="email" id="email1" name="email1" placeholder="ADDRESS" style="font-size: 19px;">
+                        </div>
+                        <div class="kv-mag-form-button">
+                            <input type="submit" id="submit1" name="submit1" value="GET EARLY ACCESS" style="font-size: 19px;">
+                        </div>
+                    </form>
+                </div>
+                <div class="kv-mag-sns share-buttons">
+                      <!-- twitter button -->
+                      <div class="share-button">
+                      <a target="_blank" href="https://twitter.com/share" class="twitter-share-button" data-url="http://components.onsenui.io" data-via="Onsen_UI" data-hashtags="onsenui" data-lang="en" >Tweet</a>
+                      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                      </div>
+                      <!-- facebook share button -->
+                      <div class="share-button">
+                          <div class="fb-like" data-href="https://components.onsenui.io" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+                      </div>
+                      <!-- github share button -->
+                      <div class="share-button">
+                      <iframe src="http://ghbtns.com/github-btn.html?user=OnsenUI&repo=OnsenUI&type=watch&count=true"  allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+                      </div>
+               </div>
+                <div class="kv-graphic" id="kvGraphic">
+                    <img src="images/keyvisual_js.png" alt="">
+                    <img src="images/keyvisual_components.png" alt="">
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="contents">
+
+        <section class="section-margin">
+
+            <div class="twitter-screen-name">
+                    <span class="headline">
+                        <a class="twitter-follower" target="_blank" href="https://twitter.com/Onsen_UI" style="color: rgba(85, 85, 85, 100);">
+                            <img src="images/ico_twitter_blue_74px.png" alt="ラリーバード">
+                            Follow @<span class="font-color-strong">Onsen_UI</span>
+                        </a>
+                    </span>
+            </div>
+            <div class="twitter-message">
+                Get the latest news via Twitter.
+            </div>
+
+        </section>
+
+        <hr style="width: 900px; margin: 0 auto;">
+
+        <section class="section-margin">
+
+            <div class="about-onsenui">
+
+                <div class="about-onsenui-message">
+                    <h2 class="headline">WHAT IS <span class="font-color-strong">Onsen UI?</span></h2>
+                    <p style="margin-top: 40px" class="about-onsenui-text">
+                        Onsen UI is a web components UI framework optimized for PhoneGap/Cordova hybrid app development.
+                    </p>
+                    <p style="margin-top: 40px" class="about-onsenui-text">
+                        With the next version of Onsen UI, development utilizing our Onsen CSS Components will be possible, and on top of that you will also be able to integrate important JS frameworks like jQuery and Backbone.js.
+                    </p>
+                    <p style="margin-top: 40px" class="about-onsenui-text">
+                        With Onsen UI, developers can freely and easily make beautiful hybrid app UIs - like native apps.
+                    </p>
+                    <p style="margin-top: 40px" class="about-onsenui-text-detail">
+                        <a href="http://onsenui.io" target="_blank" style="color: rgba(255, 26, 51, 100);">Go to the Onsen UI website</a>
+                    </p>
+                </div>
+
+                <div class="parts-iphone">
+                    <div class="display-items" id="displayItems">
+                        <img src="images/iphone/android_list_view.png">
+                        <img src="images/iphone/facebook.png">
+                        <img src="images/iphone/facebook_card.png">
+                        <img src="images/iphone/grid.png">
+                        <img src="images/iphone/icon_list_menu.png">
+                        <img src="images/iphone/image_view.png">
+                        <img src="images/iphone/login.png">
+                        <img src="images/iphone/register.png">
+                        <img src="images/iphone/search_shop.png">
+                        <img src="images/iphone/spinner.png">
+                        <img src="images/iphone/twitter.png">
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="section-margin">
+
+            <div class="mag-onsenui">
+
+                <div class="mag-onsenui-message">
+                    <h2 class="headline">WANT TO GET IN ON <span class="font-color-strong">Onsen UI</span> EARLY?</h2>
+                </div>
+
+                <div class="mag-form clearfix">
+                    <form id="form2" action="">
+                        <div class="mag-form-email">
+                            <input type="email" id="email2" name="email2" placeholder="ADDRESS">
+                        </div>
+                        <div class="mag-form-button">
+                            <input type="submit" id="submit2" name="submit2" value="GET EARLY ACCESS">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="twitter-and-github">
+                    <div class="twitter-tweet-count">
+                        <img src="images/ico_twitter_50px.png" class="default-image">
+                        <img src="images/ico_twitter_hover_50px.png" class="hover-image" style="display: none">
+                        <a class="twitter-follower" target="_blank" href="https://twitter.com/Onsen_UI" style="color:#555555;">
+                            <span style="font-weight: 700"></span> FOLLOWS
+                        </a>
+                    </div>
+                    <div class="github-star-count">
+                        <img src="images/ico_github_50px.png" class="default-image">
+                        <img src="images/ico_github_hover_50px.png" class="hover-image" style="display: none">
+                        <a class="github-star" target="_blank" href="https://github.com/OnsenUI/OnsenUI/stargazers" style="color:#555555;">
+                            <span style="font-weight: 700"></span> STARS
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        <section class="section-margin">
+            <address>Copyright @ Asial Corporation. All rights reserved.</address>
+        </section>
+    </footer>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="thanksModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Thank You for Signing Up!</h4>
+            </div>
+            <div class="modal-body">
+                <p>We'll send the latest Onsen UI information to your registered email address.</p>
+                <p>Share Onsen UI with Your Friends!</p>
+                <div class="share-buttons">
+                    <!-- twitter button -->
+                    <div class="share-button">
+                    <a target="_blank" href="https://twitter.com/share" class="twitter-share-button" data-url="http://components.onsenui.io" data-via="Onsen_UI" data-hashtags="onsenui" data-lang="en" >Tweet</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                    </div>
+                    <!-- facebook share button -->
+                    <div class="share-button">
+                        <div class="fb-like" data-href="https://components.onsenui.io" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>                      </div>
+                    <!-- github share button -->
+                    <div class="share-button">
+                    <iframe src="http://ghbtns.com/github-btn.html?user=OnsenUI&repo=OnsenUI&type=watch&count=true"  allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+                    </div>
+                </div>
+                <p>
+                    <a target="_blank" href="http://onsenui.io" style="color: rgba(255, 26, 51, 100);">Go to the Onsen UI website</a>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(function() {
+	$.getJSON('https://api.github.com/repos/OnsenUI/OnsenUI?callback=?').success(function(data) {
+		if(data && data.data.watchers) {
+			$('div.github-star-count a.github-star span').text(data.data.watchers);
+		}
+	}).error(function() {
+		$('div.github-star-count img').remove();
+		$('div.github-star-count a.github-star').remove();
+	});
+
+	$.getJSON('https://cdn.api.twitter.com/1/users/show.json?screen_name=Onsen_UI&callback=?').success(function(data) {
+		if(data && data.followers_count) {
+			$('div.twitter-tweet-count > a.twitter-follower > span').text(data.followers_count);
+		}
+	}).error(function() {
+		$('div.twitter-tweet-count  img').remove();
+		$('div.twitter-tweet-count  a.twitter-follower').remove();
+	});
+});
+</script>
+<script>
+    $(function ()
+    {
+        /**
+         * Key visual
+         */
+        (function ()
+        {
+            var interval = 7600; // ミリ秒
+            var startIndex = 0; // アニメーション開始時の画像のインデックス
+
+            /**
+             * 次のインデックスか0を返す
+             */
+            var currentIndex = startIndex;
+            /**
+             * アニメーション実行
+             */
+            var imageCount = $('#kvGraphic img').length;
+            var animateItems = function ()
+            {
+                currentIndex++;
+                if (currentIndex > imageCount - 1) {
+                    currentIndex = 0;
+                }
+                $('#kvGraphic img').fadeOut(200);
+                $($('#kvGraphic img').get(currentIndex)).fadeIn(400);
+            }
+
+            // 初期化
+            animateItems();
+
+            setInterval(function ()
+            {
+                animateItems();
+            }, interval);
+
+        })();
+
+
+        /**
+         * iphone
+         */
+        (function ()
+        {
+            var interval = 5800; // ミリ秒
+            var startIndex = 0; // アニメーション開始時の画像のインデックス
+
+            /**
+             * 次のインデックスか0を返す
+             */
+            var currentIndex = startIndex;
+            /**
+             * アニメーション実行
+             */
+            var imageCount = $('#displayItems img').length;
+            var animateItems = function ()
+            {
+                currentIndex++;
+                if (currentIndex > imageCount - 1) {
+                    currentIndex = 0;
+                }
+                $('#displayItems img').fadeOut(300);
+                $($('#displayItems img').get(currentIndex)).fadeIn(500);
+            }
+
+            // 初期化
+            animateItems();
+
+            setInterval(function ()
+            {
+                animateItems();
+            }, interval);
+
+        })();
+
+        /**
+         * 逕ｻ蜒上→繝・く繧ｹ繝医・繝帙ヰ繝ｼ
+         */
+        (function ()
+        {
+            $('.twitter-tweet-count, .github-star-count').hover(function (e)
+            {
+                var $target = $(e.currentTarget);
+                $target.find('img').hide();
+                $target.find('img.hover-image').show();
+                $target.find('a').css('color', 'rgba(255, 26, 51, 100)');
+            }, function (e)
+            {
+                var $target = $(e.currentTarget);
+                $target.find('img').hide();
+                $target.find('img.default-image').show();
+                $target.find('a').css('color', '#555555');
+                
+            });
+        })();
+
+        /**
+         * Modal
+         */
+        //$('#thanksModal').modal();
+    })
+</script>
+</body>
+</html>

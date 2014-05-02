@@ -1,0 +1,23 @@
+<div class="dialog-container uninitialized welcome-dialog-container" ng-show="welcomeDialog.isShown">
+  <div class="dialog welcome-dialog" ng-show="welcomeDialog.isShown">
+    <img src="images/close.png" class="close" ng-click="welcomeDialog.hide()">
+
+    <h2 translate>T_WELCOME_TITLE</h2>
+
+    <div class="welcome-text" translate>T_WELCOME_DESC</div>
+    <img src="images/guide-screenshot.png">
+
+    <footer style="margin-top: 10px;">
+      <button class="site-button right-button" style="background-color: #3d4957; color: #fff;" ng-click="welcomeDialog.hide(); guide.start();"><strong>OK</strong></button>
+      <button class="site-button" ng-click="welcomeDialog.hide()" translate>T_NO_THANKS</button>
+    </footer>
+  </div>
+</div>
+
+<div class="guide-mask uninitialized no-animate" ng-show="welcomeDialog.isShown" ng-click="welcomeDialog.hide()"></div>
+
+<script>
+  $(function() {
+    $('.uninitialized').removeClass('uninitialized');
+  });
+</script>

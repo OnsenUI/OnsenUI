@@ -1,0 +1,46 @@
+div.float-left {
+    float: left;
+}
+
+.text-centering {
+    text-align: center;
+}
+
+.font-weight-500 {
+    font-weight: 500;
+}
+
+.main-image-wrapper {
+    text-align: center;
+    opacity: 0.2;
+    height: 180px;
+    margin: 30px 0;
+}
+
+.main-image {
+    font-size: 150px;
+    line-height: 200px;
+}
+
+input[type=email], input[type=password] {
+    display: block;
+    width: 80%;
+    height: 48px;
+    margin: 0 auto;
+    font-size: 19px;
+    outline: none;
+    line-height: 48px;
+}
+
+.login-button {
+    display: block;
+    width: 80%;
+    margin: 0 auto 0 auto;
+    font-size: 18px;
+}
+
+.forgot-password {
+    display: block;
+    margin: 8px auto 0 auto;
+    font-size: 14px;
+}

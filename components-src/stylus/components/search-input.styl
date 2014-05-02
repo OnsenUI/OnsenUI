@@ -1,0 +1,77 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+/*! topdoc
+  name: Search Input
+  class: search-input
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <input type="search" value="" placeholder="Search" class="search-input">
+*/
+
+search-input()
+  reset-input()
+  reset-font()
+  -webkit-appearance none
+
+input[type="search"].search-input::-webkit-search-cancel-button
+  -webkit-appearance none
+  display none
+
+search-input--disabled()
+  disabled()
+
+.search-input
+  search-input()
+  height var-height--search-input
+  font-size var-font-size--search-input
+  border var-border--search-input
+  background-color var-background-color--search-input
+  box-shadow var-box-shadow--text-input
+  color var-color--search-input
+  padding var-padding--search-input
+  border-radius var-search-input--border-radius
+  background-image var-background-image--search-input
+  background-position var-background-position--search-input
+  background-repeat no-repeat
+  background-size var-font-size
+  font-weight var-font-weight
+  display block
+  width 100%
+  vertical-align middle
+
+.search-input:focus
+  background-color var-background-color--search-input--focus
+  color var-color--search-input--focus
+  border var-border--search-input--focus
+  box-shadow var-box-shadow--text-input, var-box-shadow--focus
+
+.search-input::-webkit-search-cancel-button,
+.search-input::-webkit-search-decoration
+  margin-right var-margin-right--search-decoration
+
+.search-input:focus::-webkit-input-placeholder,
+.search-input:focus::-webkit-input-placeholder
+  color var-placeholder-color--input
+
+.search-input:disabled
+  search-input--disabled()
+

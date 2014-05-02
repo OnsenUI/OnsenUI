@@ -1,0 +1,122 @@
+-webkit-scrollbar {
+    display: none;
+}
+
+.float-left {
+    float: left;
+}
+
+.menu-segment .fa {
+    font-size: 14px;
+}
+
+.padding-little {
+    padding: 8px;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.badge-notification {
+    position: absolute;
+    top: 0px;
+    left: 225px;
+}
+
+.scroll-area {
+    height: 440px;
+    overflow-y: scroll;
+}
+
+.list-container {
+    margin: 10px 10px 10px 10px;
+}
+
+.list-item-adjust {
+    line-height: 14px;
+    min-height: 14px;
+    font-size: 12px;
+    border-bottom: 10px solid #f0eff4;
+}
+
+.list-item-info {
+    padding: 10px 0px 0px 0px;
+}
+
+.list-item-info:after {
+    content: ".";
+    display: block;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.list-item-info-icon {
+    float: left;
+    width: 15%;
+}
+
+.list-item-info-icon img {
+    float: left;
+    width: 40px;
+    height: 40px;
+}
+
+.list-item-info-main {
+    float: left;
+    width: 75%;
+    margin: 0px 5px;
+}
+
+.list-item-info-main .text {
+    line-height: 16px;
+    min-height: 16px;
+}
+
+.lucent {
+    opacity: 0.4;
+}
+
+.fb-check {
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    line-height: 26px;
+    opacity: 0.4;
+}
+
+.content-text {
+    padding: 0px 0px 0px 0px;
+}
+
+.content-text img {
+    margin: 0px -15px;
+}
+
+.content-controller {
+    width: 100%;
+}
+
+.content-controller-button-leftbar {
+    border-left: solid 1px #ddd;
+}
+
+.navigation-bar-icon {
+    padding: 0px 3px;
+}
+
+.tabbar-fullsize {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.button-bar-item {
+    display: inline-block;
+    margin: 0 auto;
+    border: none;
+    font-size: 14px;
+}

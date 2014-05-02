@@ -1,0 +1,221 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+/*! topdoc
+  name: Icon Tab Bar
+  class: tab-bar
+  use: Tab Bar
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <div class="tab-bar">
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a" checked="checked">
+        <button class="tab-bar__button">
+          <i class="fa fa-stop"></i>
+          <div class="onsen_tab-bar__label">One</div>
+        </button>
+      </label>
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a">
+        <button class="tab-bar__button">
+          <i class="fa fa-circle"></i>
+          <div class="onsen_tab-bar__label">Two</div>
+        </button>
+      </label>
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a">
+        <button class="tab-bar__button">
+          <i class="fa fa-play fa-rotate-270"></i>
+          <div class="onsen_tab-bar__label">Three</div>
+        </button>
+      </label>
+    </div>
+*/
+
+/*! topdoc
+  name: Tab Bar
+  class: tab-bar
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <div class="tab-bar">
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-c" checked="checked">
+        <button class="tab-bar__button">
+          <div class="onsen_tab-bar__label">One</div>
+        </button>
+      </label>
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="tab-bar__button">
+          <div class="onsen_tab-bar__label">Two</div>
+        </button>
+      </label>
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-c">
+        <button class="tab-bar__button">
+          <div class="onsen_tab-bar__label">Three</div>
+        </button>
+      </label>
+    </div>
+*/
+
+.tab-bar
+  reset-font()
+  display table
+  position absolute
+  bottom 0px
+  left 0px
+  right 0px
+  table-layout fixed
+  white-space nowrap
+  margin 0
+  padding 0
+  height var-height--tab-bar
+  background-color var-background-color--tab-bar
+  border-top var-border-top--tab-bar
+  width 100%
+
+.tab-bar__item
+  reset-font()
+  hide-input-parent()
+  display table-cell
+  width auto
+  border-radius 0
+
+.tab-bar__item > input
+  hide-input()
+
+.tab-bar__button
+  inline-block()
+  reset-font()
+  reset-box-model()
+  reset-base()
+  reset-cursor()
+  ellipsis()
+  text-decoration none
+  padding 0
+  height var-line-height--tab-bar__button
+  line-height var-line-height--tab-bar__button
+  letter-spacing var-letter-spacing
+  color var-color--tab-bar__button
+  text-shadow var-text-shadow
+  vertical-align var-vertical-align
+  background-color var-background-color
+  background-color var-background-color--tab-bar__button
+  box-shadow var-box-shadow
+  border-top var-border
+  border-top var-border--tab-bar__button
+  width 100%
+  font-weight var-font-weight
+
+
+.tab-bar__button > i
+  font-size 24px
+  padding 0
+  margin 0
+  line-height 32px
+  display block
+
+.onsen_tab-bar__label
+  reset-font()
+
+.tab-bar__button > i + .onsen_tab-bar__label
+  font-size 10px
+  line-height 1
+  margin 0
+  font-weight var-font-weight
+
+.tab-bar__button > .onsen_tab-bar__label:first-child
+  font-size 16px
+  line-height var-line-height--tab-bar__button
+  margin 0
+  padding 0
+
+.tab-bar__button
+  color var-color--tab-bar__button
+
+.tab-bar__button:active,
+.tab-bar__button--large:active,
+:checked + .tab-bar__button
+  color var-color--tab-bar--active
+  background-color var-background-color--tab-bar--active
+  box-shadow var-box-shadow--tab-bar--active
+  border-top var-border-top--tab-bar--active
+
+.tab-bar__button:active > i,
+.tab-bar__button--large:active > i,
+:checked + .tab-bar__button > i
+  color var-color--tab-bar--active
+
+.tab-bar__button:disabled
+  disabled()
+
+.tab-bar__button:focus,
+.tab-bar__button--large:focus
+  z-index 1
+  border-top var-border-top--tab-bar--focus
+  box-shadow var-box-shadow--cta, var-box-shadow--focus
+  box-shadow var-box-shadow--tab-bar__button--focus
+  outline 0
+
+/*! topdoc
+  name: Icon Only Tab Bar
+  use: Tab Bar
+  class: tab-bar
+  hint: .tab-bar .fa
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <div class="tab-bar">
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-b" checked="checked">
+        <button class="tab-bar__button">
+          <i class="fa fa-stop"></i>
+        </button>
+      </label>
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="tab-bar__button">
+          <i class="fa fa-circle"></i>
+        </button>
+      </label>
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="tab-bar__button">
+          <i class="fa fa-play fa-rotate-270"></i>
+        </button>
+      </label>
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="tab-bar__button">
+          <i class="fa fa-comment"></i>
+        </button>
+      </label>
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-b">
+        <button class="tab-bar__button">
+          <i class="fa fa-cloud"></i>
+        </button>
+      </label>
+    </div>
+*/
+

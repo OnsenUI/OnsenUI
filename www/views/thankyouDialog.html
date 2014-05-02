@@ -1,0 +1,41 @@
+<div class="dialog-mask uninitialized" ng-show="thankyouDialog.isShown" ng-click="thankyouDialog.hide()"></div>
+<div class="dialog-container thankyou-dialog-container" ng-show="thankyouDialog.isShown">
+  <div class="dialog thankyou-dialog" ng-show="thankyouDialog.isShown">
+    <img src="images/close.png" class="close" ng-click="thankyouDialog.hide()">
+
+    <h2>
+      <span translate>T_DOWNLOAD_TITLE</span>
+      <iframe id="download-iframe" width="1" height="1" style="opacity: 0.01"></iframe>
+    </h2>
+
+    <div class="downloading">
+      <p translate>T_DOWNLOADING</p>
+    </div>
+
+    <div class="side-image-container">
+      <img src="/images/onsenui-logo.png">
+    </div>
+
+    <h3 translate>T_SUBSCRIBE_NEWSLETTER_DESC</h3>
+
+    <p translate>
+      T_DOWNLOAD_DESC
+    </p>
+
+    <div class="highlight-content" style="text-align: center" ng-show="thankyouDialog.emailSent">Thank You!</div>
+
+    <div class="highlight-content" ng-hide="thankyouDialog.emailSent" style="ng-click">
+      <form novalidate ng-submit="thankyouDialog.sendEmail()">
+        <input type="email" class="site" name="EMAIL" ng-model="thankyouDialog.email" placeholder="your@email.address" style="width: 240px;">
+        <button class="site-button" ng-click="thankyouDialog.sendEmail()" translate>T_SEND</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $(function() {
+    $('.uninitialized').removeClass('uninitialized');
+  });
+</script>

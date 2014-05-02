@@ -1,0 +1,22 @@
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+.page
+  reset-font()
+  background-color var-background-color--page
+  position absolute
+  top 0px
+  left 0px
+  right 0px
+  bottom 0px
+  overflow hidden
+
+.page *
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+.page ::-webkit-scrollbar
+  display none
+

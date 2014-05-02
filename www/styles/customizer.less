@@ -1,0 +1,200 @@
+
+div#customizer-panel {
+  position: absolute;
+  top: 82px;
+  right: 0px;
+  bottom: 0px;
+  width: 300px;
+  border-left: 1px solid #ddd;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 8px 12px;
+  color: white;
+  background-color: #474849;
+  background-image: linear-gradient(#474849, #424244);
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  ::-webkit-scrollbar-track {
+    display: none;
+  }
+  ::-webkit-scrollbar-thumb {
+    display: none;
+  }
+
+  > header {
+    height: 50px;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.07);
+    margin: -8px -12px;
+    box-sizing: border-box;
+    padding-left: 12px;
+
+    > h2 {
+      color: white;
+      font-size: 18px;
+      line-height: 50px;
+    }
+  }
+
+
+  > section {
+    position: absolute;
+    left: 0px;
+    top: 50px;
+    bottom: 0px;
+    right: 0px;
+    padding: 8px 12px;
+    overflow: auto;
+    background-clip: border-box;
+  }
+
+  > section > div.customizer-section {
+    > h3 {
+      font-size: 15px;
+      color: #999;
+      margin: 18px 0 8px 0;
+      font-size: 14px;
+      color: #fff;
+      text-shadow: 0px 1px 0px black;
+      opacity: 0.4;
+      font-weight: 500;
+    }
+
+    &:first-child > h3 {
+      margin-top: 0;
+    }
+
+    > ul.customize-item-list {
+      border-top: 1px solid rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      background-color: rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.04);
+      margin: 0 -12px;
+      padding: 0;
+
+      > li {
+        margin: 0 0 0 12px;
+        padding: 0 20px 0 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        list-style: none;
+        height: 44px;
+        box-sizing: border-box;
+        line-height: 44px;
+        color: white;
+        font-size: 16px;
+
+        &:first-child {
+          border-top: 0px;
+        }
+
+        &:last-child {
+          border-bottom: 0px;
+        }
+
+        > div.color-picker-container {
+          user-select: none;
+          float: right;
+          width: 23px;
+          height: 23px;
+          margin-top: 11px;
+          display: inline-block;
+          background-image: url(../images/color-picker-background.png);
+          cursor: pointer;
+          &:active {
+            opacity: 0.8;
+          }
+
+          > div.color-picker {
+            width: 23px;
+            height: 23px;
+            background-image: url(../images/color-picker-input.png);
+          }
+        }
+      }
+    }
+
+    > ul.color-scheme-switcher {
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      background-color: rgba(255, 255, 255, 0.05);
+      box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.05);
+      box-sizing: border-box;
+      border-radius: 4px;
+      height: 32px;
+      width: 273px;
+      padding: 0;
+      margin: 0;
+      display: table;
+      table-layout: fixed;
+      user-select: none;
+
+      > li {
+        margin: 0;
+        padding: 0;
+        display: table-cell;
+        border-left: 1px solid rgba(0, 0, 0, 0.4);
+        box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.05);
+        list-style: none;
+        flex-grow: 1;
+        box-sizing: border-box;
+        line-height: 32px;
+        height: 32px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.2s linear;
+
+        &:first-child {
+          border-width: 0px;
+          border-radius: 3px 0px 0px 3px;
+        }
+
+        &:last-child {
+          border-radius: 0px 3px 3px 0px;
+        }
+
+        &.current {
+          background-color: rgba(0, 0, 0, 0.3);
+          cursor: auto;
+          transition: none;
+        }
+
+        &:active {
+          opacity: 0.7;
+          background-color: rgba(0, 0, 0, 0.3);
+          transition: none;
+        }
+
+        > img {
+          vertical-align: middle;
+          margin-bottom: 4px;
+        }
+
+        > .color-scheme-icon {
+          width: 25px;
+          height: 18px;
+          border: 2px solid white;
+          display: inline-block;
+          box-sizing: border-box;
+          font-size: 0px;
+          margin-top: 9px;
+          transition: 0.2s linear border-color;
+          border-radius: 1px;
+
+          > div {
+            display: block;
+            float: left;
+            line-height: 7px;
+            width: 7px;
+            height: 7px;
+            transition: 0.2s linear background-color;
+          }
+        }
+
+      }
+
+    }
+  }
+}
