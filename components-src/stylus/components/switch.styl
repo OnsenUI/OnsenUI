@@ -16,7 +16,25 @@
 *
 */
 
+
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+
+var-switch-background-color := #ddd
+var-background-color--switch__label--checked := #4CD964 // background color active
+var-switch-thumb-background-color := #fff
+var-swtich-thumb-border-color := #ddd
+var-swtich-thumb-border-color-active := #4CD964
+
+var-transition--switch__label = background-color 0.5s cubic-bezier(0.5,1.3,0.5,1)
+var-transition--switch__label--checked = background-color 0.5s cubic-bezier(0.5,1.6,0.5,1)
+var-height--switch = 32px
+var-width--switch = 51px
+var-switch--border-radius = 30px
+var-transition--switch__toggle = all 0.35s cubic-bezier(0.5,1.6,0.5,1)
+var-box-shadow--switch__label--before--checked = inset 0 0 0 0px rgba(0,0,0,0.4)
+var-box-shadow--switch__label--before = inset 0 0 0 0px rgba(0,0,0,0.1)
 
 /*! topdoc
   name: Switch
@@ -72,8 +90,7 @@ switch--disabled()
   switch()
   font-size var-font-size
   padding 0 20px
-  border var-border
-  border var-border--switch
+  border none
   overflow visible
   width var-width--switch
   height var-height--switch
