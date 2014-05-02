@@ -18,6 +18,22 @@
 
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
+// internal variables
+var-background-color__button := #1284ff
+var-color__button := white
+var-background-color--cta := #4CDA64
+var-quiet-button-color := #1284ff
+
+var-text-shadow--cta = none
+var-color--button--active = var-color__button
+var-background-color--down__button = var-background-color__button
+var-background-color--quiet-active = transparent
+var-box-shadow--cta = none
+var-box-shadow--cta--down = none
+var-background-color--cta--down = var-background-color--cta
+var-color--cta = white
+var-color--cta--down = white
+
 /*! topdoc
   name: Button
   class: button
@@ -63,11 +79,10 @@ button()
   font-weight var-font-weight
 
 button--focus()
-  box-shadow var-box-shadow--focus
+  box-shadow none
   outline 0
 
 button--active()
-  background-color var-background-color--down
   background-color var-background-color--down__button
   box-shadow var-box-shadow--down
   color var-color--button--active
