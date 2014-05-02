@@ -18,6 +18,31 @@
 
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
+// internal variables
+var-buttonbar-color := #1284ff
+var-color--button-bar__button--active := white
+
+var-button-bar-margin = 0
+var-border-right--button-bar = none
+var-border-right--button-bar__button--z-index = 1
+var-border-top--button-bar__button = 1px solid var-buttonbar-color
+var-border-bottom--button-bar__button = 1px solid var-buttonbar-color
+var-border--button-bar = 0px solid var-buttonbar-color
+var-border--button-bar__button = 0px solid var-buttonbar-color
+var-border--button-bar__button--active = 0px solid var-buttonbar-color
+var-border-right--button-bar__button = 1px solid var-buttonbar-color
+var-border-right--button-bar__button--active = 1px solid var-buttonbar-color
+var-border-right--button-bar__button--focus = 1px solid var-buttonbar-color
+var-border-left--button-bar__button__first = 1px solid var-buttonbar-color
+var-border-right--button-bar__button__first = 1px solid var-buttonbar-color
+var-border-right--button-bar__button__last = 1px solid var-buttonbar-color
+var-background-color--button-bar = transparent
+var-background-color--button-bar--button--active = mylighten(var-buttonbar-color)
+var-background-color--button-bar--button--hover = white
+var-background-color--button-bar--button--on-state = var-buttonbar-color
+var-color--button-bar--button = var-buttonbar-color
+var-color--button-bar__button--hover = var-buttonbar-color
+
 /*! topdoc
   name: Button Bar
   class: button-bar
