@@ -22,8 +22,6 @@ var-background-color--icon-button := rgba(0, 0, 0, 0)
 var-icon-button-border-color := #1284ff
 
 var-icon-button-border-radius = 3px
-var-size--icon = var-height * 0.54 // 25px
-var-size--icon--large = var-height--large * 0.571428571
 var-padding--icon-button = 4px 10px
 var-icon-top = 0
 var-icon-top--large = 0px
@@ -99,18 +97,3 @@ var-color--icon-button--quiet--active = var-color--icon-button--quiet
 
 .icon-button--quiet:focus
   @extend .icon-button:focus
-
-.icon
-  inline-block()
-  overflow hidden
-  width var-size--icon
-  height var-size--icon
-  vertical-align middle
-  top var-icon-top
-
-.icon--large
-  @extend .icon
-  width var-size--icon--large
-  height var-size--icon--large
-  top var-icon-top--large
-
