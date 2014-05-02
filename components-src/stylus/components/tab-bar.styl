@@ -29,22 +29,24 @@
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-a" checked="checked">
         <button class="tab-bar__button">
-          <i class="fa fa-stop"></i>
-          <div class="onsen_tab-bar__label">One</div>
+          <i class="tab-bar__icon fa fa-stop"></i>
+          <div class="tab-bar__label">One</div>
         </button>
       </label>
+
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-a">
         <button class="tab-bar__button">
-          <i class="fa fa-circle"></i>
-          <div class="onsen_tab-bar__label">Two</div>
+          <i class="tab-bar__icon fa fa-circle"></i>
+          <div class="tab-bar__label">Two</div>
         </button>
       </label>
+
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-a">
         <button class="tab-bar__button">
-          <i class="fa fa-play fa-rotate-270"></i>
-          <div class="onsen_tab-bar__label">Three</div>
+          <i class="tab-bar__icon fa fa-play fa-rotate-270"></i>
+          <div class="tab-bar__label">Three</div>
         </button>
       </label>
     </div>
@@ -60,19 +62,21 @@
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-c" checked="checked">
         <button class="tab-bar__button">
-          <div class="onsen_tab-bar__label">One</div>
+          <div class="tab-bar__label">One</div>
         </button>
       </label>
+
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-c">
         <button class="tab-bar__button">
-          <div class="onsen_tab-bar__label">Two</div>
+          <div class="tab-bar__label">Two</div>
         </button>
       </label>
+
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-c">
         <button class="tab-bar__button">
-          <div class="onsen_tab-bar__label">Three</div>
+          <div class="tab-bar__label">Three</div>
         </button>
       </label>
     </div>
@@ -81,11 +85,11 @@
 .tab-bar
   reset-font()
   display table
+  table-layout fixed
   position absolute
   bottom 0px
   left 0px
   right 0px
-  table-layout fixed
   white-space nowrap
   margin 0
   padding 0
@@ -127,24 +131,24 @@
   width 100%
   font-weight var-font-weight
 
-
-.tab-bar__button > i
+.tab-bar__button > .tab-bar__icon
   font-size 24px
   padding 0
   margin 0
   line-height 32px
   display block
+  height 32px
 
-.onsen_tab-bar__label
+.tab-bar__label
   reset-font()
 
-.tab-bar__button > i + .onsen_tab-bar__label
+.tab-bar__icon + .tab-bar__label
   font-size 10px
   line-height 1
   margin 0
   font-weight var-font-weight
 
-.tab-bar__button > .onsen_tab-bar__label:first-child
+.tab-bar__label:first-child
   font-size 16px
   line-height var-line-height--tab-bar__button
   margin 0
@@ -154,23 +158,20 @@
   color var-color--tab-bar__button
 
 .tab-bar__button:active,
-.tab-bar__button--large:active,
 :checked + .tab-bar__button
   color var-color--tab-bar--active
   background-color var-background-color--tab-bar--active
   box-shadow var-box-shadow--tab-bar--active
   border-top var-border-top--tab-bar--active
 
-.tab-bar__button:active > i,
-.tab-bar__button--large:active > i,
-:checked + .tab-bar__button > i
+.tab-bar__button:active > .tab-bar__icon,
+:checked + .tab-bar__button > .tab-bar__icon
   color var-color--tab-bar--active
 
 .tab-bar__button:disabled
   disabled()
 
-.tab-bar__button:focus,
-.tab-bar__button--large:focus
+.tab-bar__button:focus
   z-index 1
   border-top var-border-top--tab-bar--focus
   box-shadow var-box-shadow--cta, var-box-shadow--focus
@@ -189,31 +190,35 @@
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-b" checked="checked">
         <button class="tab-bar__button">
-          <i class="fa fa-stop"></i>
+          <i class="tab-bar__icon fa fa-stop"></i>
         </button>
       </label>
+
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-b">
         <button class="tab-bar__button">
-          <i class="fa fa-circle"></i>
+          <i class="tab-bar__icon fa fa-circle"></i>
         </button>
       </label>
+
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-b">
         <button class="tab-bar__button">
-          <i class="fa fa-play fa-rotate-270"></i>
+          <i class="tab-bar__icon fa fa-play fa-rotate-270"></i>
         </button>
       </label>
+
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-b">
         <button class="tab-bar__button">
-          <i class="fa fa-comment"></i>
+          <i class="tab-bar__icon fa fa-comment"></i>
         </button>
       </label>
+
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-b">
         <button class="tab-bar__button">
-          <i class="fa fa-cloud"></i>
+          <i class="tab-bar__icon fa fa-cloud"></i>
         </button>
       </label>
     </div>
