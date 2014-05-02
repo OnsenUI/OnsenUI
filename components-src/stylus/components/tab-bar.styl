@@ -18,6 +18,23 @@
 
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
+// internal variables
+var-background-color--tab-bar := #f8f8f8
+var-background-color--tab-bar__button := #f8f8f8
+var-background-color--tab-bar--active := #f8f8f8
+var-tab-bar-border-color := #ddd
+var-color--tab-bar__button := #888
+var-color--tab-bar--active := #1284ff
+
+var-border-top--tab-bar--active = none
+var-border-top--tab-bar--focus = none
+var-height--tab-bar = 49px
+var-line-height--tab-bar__button = 49px
+var-border--tab-bar__button = none
+var-box-shadow--tab-bar--active = none
+var-box-shadow--tab-bar__button--focus = none
+var-border-top--tab-bar = 1px solid var-tab-bar-border-color
+
 /*! topdoc
   name: Icon Tab Bar
   class: tab-bar
@@ -123,10 +140,8 @@
   color var-color--tab-bar__button
   text-shadow var-text-shadow
   vertical-align var-vertical-align
-  background-color var-background-color
   background-color var-background-color--tab-bar__button
   box-shadow var-box-shadow
-  border-top var-border
   border-top var-border--tab-bar__button
   width 100%
   font-weight var-font-weight
@@ -174,7 +189,6 @@
 .tab-bar__button:focus
   z-index 1
   border-top var-border-top--tab-bar--focus
-  box-shadow var-box-shadow--cta, var-box-shadow--focus
   box-shadow var-box-shadow--tab-bar__button--focus
   outline 0
 
