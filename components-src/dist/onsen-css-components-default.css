@@ -9,23 +9,16 @@ body {
   margin: 0;
   padding: 0;
 }
-input {
-  -webkit-user-select: initial;
-  -moz-user-select: initial;
-  -ms-user-select: initial;
-  user-select: initial;
+*:not(input,
+textarea,
+select) {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
-textarea {
-  -webkit-user-select: initial;
-  -moz-user-select: initial;
-  -ms-user-select: initial;
-  user-select: initial;
-}
-select {
-  -webkit-user-select: initial;
-  -moz-user-select: initial;
-  -ms-user-select: initial;
-  user-select: initial;
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 .page {
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
@@ -39,13 +32,6 @@ select {
   right: 0px;
   bottom: 0px;
   overflow: hidden;
-}
-.page * {
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 .page ::-webkit-scrollbar {
   display: none;
@@ -83,7 +69,6 @@ select {
   overflow: hidden;
   font-size: 16px;
   padding: 0 20px;
-  border: 1px solid #1284ff;
   border: none;
   overflow: visible;
   width: 51px;
@@ -154,13 +139,9 @@ select {
   border-color: #4cd964;
 }
 .switch__input:active + .switch__toggle {
-  -webkit-box-shadow: none;
-  box-shadow: none;
   border: none;
 }
 .switch__input:focus + .switch__toggle {
-  -webkit-box-shadow: none;
-  box-shadow: none;
   border: none;
 }
 .switch__input:disabled + .switch__toggle {
@@ -262,13 +243,11 @@ select {
 }
 .range::-moz-range-track {
   position: relative;
-  border-radius: 4px;
   border: none;
-  background-color: transparent;
   background-color: #ccc;
   height: 2px;
-  border-radius: 0;
-  border-radius: none;
+  border-radius: 30px;
+  box-shadow: none;
   top: 0;
   margin: 0;
   padding: 0;
@@ -294,9 +273,8 @@ select {
   position: relative;
   height: 29px;
   width: 29px;
-  background-color: transparent;
+  background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 4px;
   border-radius: 30px;
   box-shadow: none;
   margin: 0;
@@ -385,7 +363,6 @@ select {
   padding-top: 0;
 }
 .navigation-bar__bg {
-  background: transparent;
   background: #f8f8f8;
 }
 .navigation-bar__item,
@@ -406,7 +383,7 @@ select {
   color: inherit;
   background: transparent;
   border: none;
-  line-height: 40px;
+  line-height: 1;
   vertical-align: top;
   float: left;
 }
@@ -584,7 +561,7 @@ select {
   letter-spacing: 0;
   color: #fff;
   text-shadow: 0 1px none;
-  vertical-align: top;
+  vertical-align: middle;
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -604,7 +581,6 @@ select {
   transition: none;
 }
 .button:active {
-  background-color: #1284ff;
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -667,7 +643,7 @@ select {
   letter-spacing: 0;
   color: #fff;
   text-shadow: 0 1px none;
-  vertical-align: top;
+  vertical-align: middle;
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -705,7 +681,6 @@ select {
   outline: 0;
 }
 .button--quiet:active {
-  color: #1284ff;
   text-shadow: 0 1px none;
   background-color: transparent;
   border: none;
@@ -758,7 +733,7 @@ select {
   letter-spacing: 0;
   color: #fff;
   text-shadow: 0 1px none;
-  vertical-align: top;
+  vertical-align: middle;
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -778,7 +753,6 @@ select {
   width: 100%;
 }
 .button--large:active {
-  background-color: #1284ff;
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -850,7 +824,7 @@ select {
   letter-spacing: 0;
   color: #fff;
   text-shadow: 0 1px none;
-  vertical-align: top;
+  vertical-align: middle;
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -875,7 +849,6 @@ select {
   color: #1284ff;
 }
 .button--large--quiet:active {
-  color: #1284ff;
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
@@ -938,7 +911,7 @@ select {
   letter-spacing: 0;
   color: #fff;
   text-shadow: 0 1px none;
-  vertical-align: top;
+  vertical-align: middle;
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -1025,7 +998,7 @@ select {
   letter-spacing: 0;
   color: #fff;
   text-shadow: 0 1px none;
-  vertical-align: top;
+  vertical-align: middle;
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -1325,7 +1298,7 @@ select {
   margin: 0;
   padding: 0;
   height: 49px;
-  background-color: transparent;
+  background-color: #f8f8f8;
   border-top: 1px solid #ddd;
   width: 100%;
 }
@@ -1393,11 +1366,9 @@ select {
   color: #888;
   text-shadow: 0 1px none;
   vertical-align: top;
-  background-color: transparent;
   background-color: #f8f8f8;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border-top: 1px solid #1284ff;
   border-top: none;
   width: 100%;
   font-weight: 400;
@@ -1451,8 +1422,6 @@ select {
 .tab-bar__button:focus {
   z-index: 1;
   border-top: none;
-  -webkit-box-shadow: none, none;
-  box-shadow: none, none;
   -webkit-box-shadow: none;
   box-shadow: none;
   outline: 0;
@@ -1506,9 +1475,7 @@ select {
   name: Notification
   markup:
     <span class="notification">1</span>
-
     <span class="notification">10</span>
-
     <span class="notification">999</span>
 */
 .notification {
@@ -1629,22 +1596,6 @@ select {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.icon,
-.icon--large {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  overflow: hidden;
-  width: 19.44px;
-  height: 19.44px;
-  vertical-align: middle;
-  top: 0;
-}
-.icon--large {
-  width: 20.571428556px;
-  height: 20.571428556px;
-  top: 0px;
-}
 /* topdoc
   name: Checkbox
   class: checkbox
@@ -1748,7 +1699,6 @@ select {
   width: 24px;
   height: 24px;
   background: transparent;
-  background: transparent;
   border: 1px solid #1284ff;
   -webkit-border-radius: 16px;
   border-radius: 16px;
@@ -1801,8 +1751,8 @@ select {
   opacity: 0;
 }
 .checkbox > input[type="checkbox"]:focus + .checkbox__checkmark:before {
-  -webkit-box-shadow: none, none;
-  box-shadow: none, none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .checkbox > input[type="checkbox"]:disabled + .checkbox__checkmark {
   opacity: 0.3;
@@ -1810,7 +1760,6 @@ select {
   pointer-events: none;
 }
 .checkbox > input[type="checkbox"]:disabled:active + .checkbox__checkmark:before {
-  border: 1px solid #1284ff;
   background: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -1948,8 +1897,8 @@ select {
 }
 .checkbox--noborder > input[type="checkbox"]:focus + .checkbox__checkmark:before {
   border: none;
-  -webkit-box-shadow: none, none;
-  box-shadow: none, none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .checkbox--noborder > input[type="checkbox"]:disabled + .checkbox__checkmark {
   opacity: 0.3;
@@ -2023,7 +1972,6 @@ select {
   list-style-type: none;
   text-align: left;
   border-top: none;
-  color: #c6c8c8;
   padding: 0;
   background-color: #fff;
 }
@@ -2176,6 +2124,9 @@ select {
   border-top: none;
   border-bottom: none;
 }
+.list__item--tappable:nth-child(2) {
+  border-top: 1px solid #ddd;
+}
 /* topdoc
   name: Radio Button
   class: radio-button
@@ -2239,7 +2190,6 @@ select {
   user-select: none;
   position: relative;
   overflow: hidden;
-  color: #1f1f21;
   line-height: 24px;
   text-align: left;
   margin: 10px 0;
@@ -2380,8 +2330,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-color: #fff;
   color: #1f1f21;
   border: 1px solid #ddd;
-  -webkit-box-shadow: none, none;
-  box-shadow: none, none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .search-input::-webkit-search-cancel-button,
 .search-input::-webkit-search-decoration {
