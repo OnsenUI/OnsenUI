@@ -27,9 +27,9 @@ button {
   bottom: 0px;
   z-index: 200;
   background-color: #333;
-  background: linear-gradient(to bottom, #000000 0%, #444444 100%);
-  opacity: 0.9;
+  background: linear-gradient(to bottom, #111111 0%, #222222 100%);
   transition: 0.1s linear opacity;
+  opacity: 1;
 }
 #loading #loading-message {
   text-align: center;
