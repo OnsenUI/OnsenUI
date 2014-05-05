@@ -301,13 +301,15 @@ module.controller('AppController',
       $scope.$apply();
       window.localStorage.setItem('isAccessed', 1);
     } else {
-      $scope.showNewsletterPopup();
+      if (!window.IS_DEV) { 
+        $scope.showNewsletterPopup();
+      }
     }
   }, 1000);
 
   $scope.showNewsletterPopup = function() {
     var isEntered = window.localStorage.getItem('isEntered');
-    if (!isEntered) {
+    if (!isEntered && !window.IS_DEV) { 
       setTimeout(function() {
         $scope.newsletterPopup.show();
         $scope.$apply();
