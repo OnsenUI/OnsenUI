@@ -32,6 +32,7 @@ select) {
   right: 0px;
   bottom: 0px;
   overflow: hidden;
+  font-size: 16px;
 }
 .page ::-webkit-scrollbar {
   display: none;
