@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Onsen UI Themes</title>
+    <title>Testcases for Onsen CSS Components</title>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale = 1.0,maximum-scale = 1.0, target-densitydpi=medium-dpi">
-    <link rel="stylesheet" type="text/css" href="../../build/css/onsenui.css">
-    <link rel="stylesheet" type="text/css" href="../dist/onsen-css-components-default.css">
+    <link rel="stylesheet" type="text/css" href="../onsen-css-components-default.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/brackets.css">
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.css" rel="stylesheet">
@@ -75,7 +74,7 @@
         <header id="main-header">
           <div class="max-width">
             <hgroup>
-              <h1>Onsen UI Themes</h1>
+              <h1>Testcases for Onsen CSS Components</h1>
               <p></p>
             </hgroup>
             <nav>
@@ -86,138 +85,14 @@
         </header>
         <div id="content" class="max-width">
           <article class="component">
-            <header>
-              <h2>Onsen Css Components Default Theme</h2>
-            </header>
-            <!-- screen1-->
-            <div style="width: 320px; height: 540px; position: relative; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;" class="showcase page">
-              <div class="navigation-bar">
-                <div style="float:left" class="navigation-bar__item left quarter"><span class="icon-button--quiet navigation-bar__line-height"><i class="fa fa-lg fa-bars"></i></span></div>
-                <div style="float:left" class="navigation-bar__item center half"><span class="navigation-bar__title navigation-bar__line-height">NavigationBar</span></div>
-                <div style="float:left" class="navigation-bar__item right quarter"><span class="icon-button--quiet navigation-bar__line-height"><span>Label</span><i class="fa fa-lg fa-angle-right fa-2x"></i></span></div>
-              </div>
-              <div class="list--noborder">
-                <h3 class="list__header">Category</h3>
-                <ul class="list__container">
-                  <li class="list__item list__item__line-height">Item</li>
-                  <li class="list__item list__item__line-height">Item</li>
-                </ul>
-                <h3 class="list__header">Category</h3>
-                <ul class="list__container">
-                  <li class="list__item list__item__line-height">Item</li>
-                  <li class="list__item list__item__line-height">Item</li>
-                  <li class="list__item list__item__line-height">Item</li>
-                </ul>
-              </div><br>
-              <div style="position: absolute; bottom: 0px; left: 0px; right: 0px;" class="tab-bar">
-                <label class="tab-bar__item">
-                  <input type="radio" name="tab-bar-screen1" checked="checked">
-                  <button class="tab-bar__button"><i class="fa fa-2x fa-play fa-rotate-270"></i>
-                    <div class="onsen_tab-bar__label">One</div>
-                  </button>
-                </label>
-                <label class="tab-bar__item">
-                  <input type="radio" name="tab-bar-screen1">
-                  <button class="tab-bar__button"><i class="fa fa-2x fa-circle"></i>
-                    <div class="onsen_tab-bar__label">Two</div>
-                  </button>
-                </label>
-                <label class="tab-bar__item">
-                  <input type="radio" name="tab-bar-screen1">
-                  <button class="tab-bar__button"><i class="fa fa-2x fa-stop"></i>
-                    <div class="onsen_tab-bar__label">Three</div>
-                  </button>
-                </label>
-              </div>
-            </div>
-            <!-- screen1 end-->
-            <!-- screen2-->
-            <div style="width: 320px; height: 540px; position: relative; float:left; margin-right: 50px; margin-bottom: 50px; border: 1px solid #ccc;" class="showcase page">
-              <div class="navigation-bar">
-                <div style="float:left" class="navigation-bar__item left quarter"><span class="icon-button--quiet navigation-bar__line-height">Label</span></div>
-                <div style="float:left" class="navigation-bar__item center half"><span class="navigation-bar__title navigation-bar__line-height">NavigationBar</span></div>
-                <div style="float:left" class="navigation-bar__item right quarter"><span style="font-weight:500" class="icon-button--quiet navigation-bar__line-height">Done</span></div>
-              </div><br>
-              <div class="list">
-                <ul class="list__container">
-                  <li class="list__item list__item__line-height"><span>Notification</span><span style="position: absolute; right: 8px; bottom: 8px" class="notification">20</span></li>
-                  <li class="list__item list__item__line-height"><span>Radio Button</span>
-                    <div style="position: absolute; right: 8px; top: 8px;">
-                      <label class="radio-button">
-                        <input type="radio" name="topcoat">
-                        <div class="radio-button__checkmark"></div>
-                      </label>
-                      <label class="radio-button">OR
-                        <input type="radio" name="topcoat">
-                        <div class="radio-button__checkmark"></div>
-                      </label>
-                    </div>
-                  </li>
-                  <li class="list__item list__item__line-height"><span>Checkbox</span>
-                    <div style="position: absolute; right: 8px; top: 8px;">
-                      <label class="checkbox">
-                        <input type="checkbox">
-                        <div class="checkbox__checkmark"></div>
-                      </label>
-                    </div>
-                  </li>
-                  <li class="list__item list__item__line-height"><span>Switch</span>
-                    <div style="position: absolute; right: 8px; top: 8px;">
-                      <label style="z-index: 0;" class="switch">
-                        <input type="checkbox" class="switch__input">
-                        <div class="switch__toggle"></div>
-                      </label>
-                    </div>
-                  </li>
-                  <li class="list__item list__item__line-height"><span>Range</span>
-                    <div style="position: absolute; right: 8px; top: 8px;">
-                      <input type="range" class="range">
-                    </div>
-                  </li>
-                </ul>
-                <h3 class="list__header">Button</h3>
-                <ul class="list__container">
-                  <li style="padding-top: 8px; padding-bottom: 8px" class="list__item">
-                    <button class="button">Button</button>
-                    <button class="button--cta">Button cta</button>
-                  </li>
-                </ul>
-                <h3 class="list__header">Quiet Button</h3>
-                <ul class="list__container">
-                  <li class="list__item">
-                    <button class="button--large--quiet">Button</button>
-                  </li>
-                </ul>
-              </div><br>
-              <div style="position: absolute; bottom: 0px; left: 0px; right: 0px;" class="tab-bar full">
-                <label class="tab-bar__item">
-                  <input type="radio" name="tab-bar-screen2">
-                  <button class="tab-bar__button full">One</button>
-                </label>
-                <label class="tab-bar__item">
-                  <input type="radio" name="tab-bar-screen2">
-                  <button class="tab-bar__button full">Two</button>
-                </label>
-                <label class="tab-bar__item">
-                  <input type="radio" name="tab-bar-screen2" checked="checked">
-                  <button class="tab-bar__button full">Three</button>
-                </label>
-              </div>
-            </div>
-            <!-- screen2 end-->
             <div style="clear: both"></div>
-            <header>
-              <h2>Using this theme</h2>
-              <section style="display:block; color: #333" class="code">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;<a href="../dist/onsen-css-components-default.css">../dist/onsen-css-components-default.css</a>&quot;&gt;
-              </section>
-            </header><br>
           </article>
           <article id="switch" class="component">
             <header>
               <h2>Switch</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><label class="switch">  <input type="checkbox" class="switch__input">  <div class="switch__toggle"></div></label><label class="switch">  <input type="checkbox" class="switch__input" checked>  <div class="switch__toggle"></div></label><label class="switch">  <input type="checkbox" class="switch__input" disabled>  <div class="switch__toggle"></div></label></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><label class="switch">  <input type="checkbox" class="switch__input">  <div class="switch__toggle"></div></label><label class="switch">  <input type="checkbox" class="switch__input" checked>  <div class="switch__toggle"></div></label><label class="switch">  <input type="checkbox" class="switch__input" disabled>  <div class="switch__toggle"></div></label></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -232,7 +107,7 @@
               <h2>Range</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><input type="range" class="range"><input type="range" class="range" disabled></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><input type="range" class="range"><input type="range" class="range" disabled></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -247,7 +122,7 @@
               <h2>Navigation Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><div class="navigation-bar">  <div class="navigation-bar__center">    <h1 class="navigation-bar__title">Navigation Bar</h1>  </div></div></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><div class="navigation-bar">  <div class="navigation-bar__center">    <h1 class="navigation-bar__title">Navigation Bar</h1>  </div></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -262,7 +137,7 @@
               <h2>Navigation Bar Item</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><div class="navigation-bar">  <div class="navigation-bar__left">    <span class="icon-button--quiet navigation-bar__line-height">      <i class="fa fa-bars" style="font-size:20px"></i>    </span>  </div>  <div class="navigation-bar__center">    <h1 class="navigation-bar__title">Navigation Bar</h1>  </div>  <div class="navigation-bar__right">    <span class="icon-button--quiet navigation-bar__line-height">Label</span>  </div></div></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><div class="navigation-bar">  <div class="navigation-bar__left">    <span class="icon-button--quiet navigation-bar__line-height">      <i class="fa fa-bars" style="font-size:20px"></i>    </span>  </div>  <div class="navigation-bar__center">    <h1 class="navigation-bar__title">Navigation Bar</h1>  </div>  <div class="navigation-bar__right">    <span class="icon-button--quiet navigation-bar__line-height">Label</span>  </div></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -277,7 +152,7 @@
               <h2>Bottom Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><div class="bottom-bar">  <div class="bottom-bar__line-height" style="text-align:center">Bottom Toolbar</div></div></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><div class="bottom-bar">  <div class="bottom-bar__line-height" style="text-align:center">Bottom Toolbar</div></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -292,7 +167,7 @@
               <h2>Navigation Bar with Segment</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><div class="navigation-bar">  <div class="navigation-bar__center">    <div class="button-bar" style="width:200px;margin:7px 50px;">      <div class="button-bar__item">        <input type="radio" name="navi-segment-a" checked>        <div class="button-bar__button">One</div>      </div>      <div class="button-bar__item">        <input type="radio" name="navi-segment-a">        <div class="button-bar__button">Two</div>      </div>    </div>  </div></div></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><div class="navigation-bar">  <div class="navigation-bar__center">    <div class="button-bar" style="width:200px;margin:7px 50px;">      <div class="button-bar__item">        <input type="radio" name="navi-segment-a" checked>        <div class="button-bar__button">One</div>      </div>      <div class="button-bar__item">        <input type="radio" name="navi-segment-a">        <div class="button-bar__button">Two</div>      </div>    </div>  </div></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -307,7 +182,7 @@
               <h2>Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><button class="button">Button</button><button class="button" disabled>Button</button></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><button class="button">Button</button><button class="button" disabled>Button</button></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -322,7 +197,7 @@
               <h2>Quiet Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><button class="button--quiet">Button</button><button class="button--quiet" disabled>Button</button></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><button class="button--quiet">Button</button><button class="button--quiet" disabled>Button</button></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -337,7 +212,7 @@
               <h2>Large Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><button class="button--large">Button</button></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><button class="button--large">Button</button></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -352,7 +227,7 @@
               <h2>Large Quiet Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><button class="button--large--quiet">Button</button></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><button class="button--large--quiet">Button</button></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -367,7 +242,7 @@
               <h2>Call To Action Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><button class="button--cta">Button</button><button class="button--cta" disabled>Button</button></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><button class="button--cta">Button</button><button class="button--cta" disabled>Button</button></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -382,7 +257,7 @@
               <h2>Large Call To Action Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><button class="button--large--cta" >Button</button></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><button class="button--large--cta" >Button</button></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -397,7 +272,7 @@
               <h2>Button Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><div class="button-bar" style="width:280px;margin:0 auto;">  <div class="button-bar__item">    <button class="button-bar__button">One</button>  </div>  <div class="button-bar__item">    <button class="button-bar__button">Two</button>  </div>  <div class="button-bar__item">    <button class="button-bar__button">Three</button>  </div></div></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><div class="button-bar" style="width:280px;margin:0 auto;">  <div class="button-bar__item">    <button class="button-bar__button">One</button>  </div>  <div class="button-bar__item">    <button class="button-bar__button">Two</button>  </div>  <div class="button-bar__item">    <button class="button-bar__button">Three</button>  </div></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -412,7 +287,7 @@
               <h2>Segment</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><div class="button-bar" style="width:280px;margin:0 auto;">  <div class="button-bar__item">    <input type="radio" name="segment-a" checked>    <button class="button-bar__button">One</button>  </div>  <div class="button-bar__item">    <input type="radio" name="segment-a">    <button class="button-bar__button">Two</button>  </div>  <div class="button-bar__item">    <input type="radio" name="segment-a">    <button class="button-bar__button">Three</button>  </div></div></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><div class="button-bar" style="width:280px;margin:0 auto;">  <div class="button-bar__item">    <input type="radio" name="segment-a" checked>    <button class="button-bar__button">One</button>  </div>  <div class="button-bar__item">    <input type="radio" name="segment-a">    <button class="button-bar__button">Two</button>  </div>  <div class="button-bar__item">    <input type="radio" name="segment-a">    <button class="button-bar__button">Three</button>  </div></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -427,12 +302,12 @@
               <h2>Icon Tab Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><div class="tab-bar">  <label class="tab-bar__item">    <input type="radio" name="tab-bar-a" checked="checked">    <button class="tab-bar__button">      <i class="fa fa-stop"></i>      <div class="onsen_tab-bar__label">One</div>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-a">    <button class="tab-bar__button">      <i class="fa fa-circle"></i>      <div class="onsen_tab-bar__label">Two</div>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-a">    <button class="tab-bar__button">      <i class="fa fa-play fa-rotate-270"></i>      <div class="onsen_tab-bar__label">Three</div>    </button>  </label></div></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><div class="tab-bar">  <label class="tab-bar__item">    <input type="radio" name="tab-bar-a" checked="checked">    <button class="tab-bar__button">      <i class="tab-bar__icon fa fa-stop"></i>      <div class="tab-bar__label">One</div>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-a">    <button class="tab-bar__button">      <i class="tab-bar__icon fa fa-circle"></i>      <div class="tab-bar__label">Two</div>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-a">    <button class="tab-bar__button">      <i class="tab-bar__icon fa fa-play fa-rotate-270"></i>      <div class="tab-bar__label">Three</div>    </button>  </label></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;tab-bar&quot;&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-stop&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;One&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-circle&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Two&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-play fa-rotate-270&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Three&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;tab-bar&quot;&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon fa fa-stop&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;tab-bar__label&quot;&gt;One&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon fa fa-circle&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;tab-bar__label&quot;&gt;Two&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon fa fa-play fa-rotate-270&quot;&gt;&lt;/i&gt;      &lt;div class=&quot;tab-bar__label&quot;&gt;Three&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -442,12 +317,12 @@
               <h2>Tab Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><div class="tab-bar">  <label class="tab-bar__item">    <input type="radio" name="tab-bar-c" checked="checked">    <button class="tab-bar__button">      <div class="onsen_tab-bar__label">One</div>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-c">    <button class="tab-bar__button">      <div class="onsen_tab-bar__label">Two</div>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-c">    <button class="tab-bar__button">      <div class="onsen_tab-bar__label">Three</div>    </button>  </label></div></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><div class="tab-bar">  <label class="tab-bar__item">    <input type="radio" name="tab-bar-c" checked="checked">    <button class="tab-bar__button">      <div class="tab-bar__label">One</div>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-c">    <button class="tab-bar__button">      <div class="tab-bar__label">Two</div>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-c">    <button class="tab-bar__button">      <div class="tab-bar__label">Three</div>    </button>  </label></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;tab-bar&quot;&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;One&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Two&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;div class=&quot;onsen_tab-bar__label&quot;&gt;Three&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;tab-bar&quot;&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;div class=&quot;tab-bar__label&quot;&gt;One&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;div class=&quot;tab-bar__label&quot;&gt;Two&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-c&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;div class=&quot;tab-bar__label&quot;&gt;Three&lt;/div&gt;    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -457,12 +332,12 @@
               <h2>Icon Only Tab Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><div class="tab-bar">  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b" checked="checked">    <button class="tab-bar__button">      <i class="fa fa-stop"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="fa fa-circle"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="fa fa-play fa-rotate-270"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="fa fa-comment"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="fa fa-cloud"></i>    </button>  </label></div></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><div class="tab-bar">  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b" checked="checked">    <button class="tab-bar__button">      <i class="tab-bar__icon fa fa-stop"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="tab-bar__icon fa fa-circle"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="tab-bar__icon fa fa-play fa-rotate-270"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="tab-bar__icon fa fa-comment"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="tab-bar__icon fa fa-cloud"></i>    </button>  </label></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;tab-bar&quot;&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-stop&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-circle&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-play fa-rotate-270&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-comment&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;fa fa-cloud&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;tab-bar&quot;&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon fa fa-stop&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon fa fa-circle&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon fa fa-play fa-rotate-270&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon fa fa-comment&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon fa fa-cloud&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -472,12 +347,12 @@
               <h2>Notification</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><span class="notification">1</span><span class="notification">10</span><span class="notification">999</span></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><span class="notification">1</span><span class="notification">10</span><span class="notification">999</span></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;span class=&quot;notification&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;notification&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;notification&quot;&gt;999&lt;/span&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;span class=&quot;notification&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;notification&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;notification&quot;&gt;999&lt;/span&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -487,7 +362,7 @@
               <h2>Icon Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><button class="icon-button">  <i class="fa fa-bell" style="font-size:17px"></i> Label</button><button class="icon-button--quiet">  <i class="fa fa-bell" style="font-size:17px"></i> Label</button></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><button class="icon-button">  <i class="fa fa-bell" style="font-size:17px"></i> Label</button><button class="icon-button--quiet">  <i class="fa fa-bell" style="font-size:17px"></i> Label</button></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -502,7 +377,7 @@
               <h2>Checkbox</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><label class="checkbox">  <input type="checkbox">  <div class="checkbox__checkmark"></div>  OFF</label><label class="checkbox">  <input type="checkbox" checked="checked">  <div class="checkbox__checkmark"></div>  ON</label><label class="checkbox">  <input type="checkbox" disabled>  <div class="checkbox__checkmark"></div>  Disabled</label></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><label class="checkbox">  <input type="checkbox">  <div class="checkbox__checkmark"></div>  OFF</label><label class="checkbox">  <input type="checkbox" checked="checked">  <div class="checkbox__checkmark"></div>  ON</label><label class="checkbox">  <input type="checkbox" disabled>  <div class="checkbox__checkmark"></div>  Disabled</label></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -517,7 +392,7 @@
               <h2>No border Checkbox</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><label class="checkbox--noborder">  <input type="checkbox">  <div class="checkbox__checkmark"></div>  OFF</label><label class="checkbox--noborder">  <input type="checkbox" checked="checked">  <div class="checkbox__checkmark"></div>  ON</label><label class="checkbox--noborder">  <input type="checkbox" disabled checked="checked">  <div class="checkbox__checkmark"></div>  Disabled</label></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><label class="checkbox--noborder">  <input type="checkbox">  <div class="checkbox__checkmark"></div>  OFF</label><label class="checkbox--noborder">  <input type="checkbox" checked="checked">  <div class="checkbox__checkmark"></div>  ON</label><label class="checkbox--noborder">  <input type="checkbox" disabled checked="checked">  <div class="checkbox__checkmark"></div>  Disabled</label></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -532,7 +407,7 @@
               <h2>List</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><div class="list">  <ul class="list__container">    <li class="list__item">      <span class="list__item__line-height">Item</span>    </li>    <li class="list__item">      <span class="list__item__line-height">Item</span>    </li>  </ul></div></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><div class="list">  <ul class="list__container">    <li class="list__item">      <span class="list__item__line-height">Item</span>    </li>    <li class="list__item">      <span class="list__item__line-height">Item</span>    </li>  </ul></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -547,7 +422,7 @@
               <h2>Noborder List</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><div class="list--noborder">  <ul class="list__container">    <li class="list__item">      <span class="list__item__line-height">Item</span>    </li>    <li class="list__item">      <span class="list__item__line-height">Item</span>    </li>  </ul></div></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><div class="list--noborder">  <ul class="list__container">    <li class="list__item">      <span class="list__item__line-height">Item</span>    </li>    <li class="list__item">      <span class="list__item__line-height">Item</span>    </li>  </ul></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -562,7 +437,7 @@
               <h2>Category List Header</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><div class="list">  <h3 class="list__header">Category</h3>  <ul class="list__container">    <li class="list__item list__item__line-height">      Item    </li>  </ul></div></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><div class="list">  <h3 class="list__header">Category</h3>  <ul class="list__container">    <li class="list__item list__item__line-height">      Item    </li>  </ul></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -577,12 +452,12 @@
               <h2>Tappable List</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><div class="list">  <ul class="list__container">    <li class="list__item list__item--tappable">      <span class="list__item__line-height">Tappable Item</span>    </li>  </ul></div></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><div class="list">  <ul class="list__container">    <li class="list__item--tappable">      <span class="list__item__line-height">Tappable Item</span>    </li>  </ul></div></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;list&quot;&gt;  &lt;ul class=&quot;list__container&quot;&gt;    &lt;li class=&quot;list__item list__item--tappable&quot;&gt;      &lt;span class=&quot;list__item__line-height&quot;&gt;Tappable Item&lt;/span&gt;    &lt;/li&gt;  &lt;/ul&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;list&quot;&gt;  &lt;ul class=&quot;list__container&quot;&gt;    &lt;li class=&quot;list__item--tappable&quot;&gt;      &lt;span class=&quot;list__item__line-height&quot;&gt;Tappable Item&lt;/span&gt;    &lt;/li&gt;  &lt;/ul&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -592,7 +467,7 @@
               <h2>Radio Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><label class="radio-button">  <input type="radio" name="r" checked="checked">  <div class="radio-button__checkmark"></div>  Label</label><label class="radio-button">  <input type="radio" name="r">  <div class="radio-button__checkmark"></div>  Label</label><label class="radio-button">  <input type="radio" name="r">  <div class="radio-button__checkmark"></div>  Label</label></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><label class="radio-button">  <input type="radio" name="r" checked="checked">  <div class="radio-button__checkmark"></div>  Label</label><label class="radio-button">  <input type="radio" name="r">  <div class="radio-button__checkmark"></div>  Label</label><label class="radio-button">  <input type="radio" name="r">  <div class="radio-button__checkmark"></div>  Label</label></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -607,7 +482,7 @@
               <h2>Search Input</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><input type="search" value="" placeholder="Search" class="search-input"></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><input type="search" value="" placeholder="Search" class="search-input"></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -622,7 +497,7 @@
               <h2>Text Input</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><input type="text" class="text-input" placeholder="text" value=""><br><input type="text" class="text-input" placeholder="text" value="" disabled></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><input type="text" class="text-input" placeholder="text" value=""><br><input type="text" class="text-input" placeholder="text" value="" disabled></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -637,7 +512,7 @@
               <h2>Transparent Text Input</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><input type="text" class="text-input--transparent" placeholder="text" value=""><br><input type="text" class="text-input--transparent" placeholder="text" value="" disabled></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><input type="text" class="text-input--transparent" placeholder="text" value=""><br><input type="text" class="text-input--transparent" placeholder="text" value="" disabled></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -652,7 +527,7 @@
               <h2>Underbar Text Input</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><input type="text" class="text-input--underbar" placeholder="text" value=""><br><input type="text" class="text-input--underbar" placeholder="text" value="" disabled></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><input type="text" class="text-input--underbar" placeholder="text" value=""><br><input type="text" class="text-input--underbar" placeholder="text" value="" disabled></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -667,7 +542,7 @@
               <h2>Textarea</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><textarea class="textarea" rows="3" placeholder="Textarea"></textarea></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><textarea class="textarea" rows="3" placeholder="Textarea"></textarea></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
@@ -682,7 +557,7 @@
               <h2>Textarea Transparent</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative;" class="markup"><textarea class="textarea--transparent" rows="3" placeholder="Textarea"></textarea></div>
+              <div style="width: 320px; position: relative; min-height: 80px;" class="markup"><textarea class="textarea--transparent" rows="3" placeholder="Textarea"></textarea></div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">

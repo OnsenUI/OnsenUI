@@ -18,6 +18,28 @@
 
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
+// internal variables
+var-background-color__button := #1284ff
+var-color__button := white
+var-background-color--cta := #4CDA64
+var-quiet-button-color := #1284ff
+
+var-text-shadow--cta = none
+var-border__button--quiet = none
+var-quiet-button-background = transparent
+var-color--button--active = var-color__button
+var-background-color--down__button = var-background-color__button
+var-background-color--quiet-active = transparent
+var-box-shadow--cta = none
+var-box-shadow--cta--down = none
+var-background-color--cta--down = var-background-color--cta
+var-color--cta = white
+var-color--cta--down = white
+var-padding--button--large = 4px 20px
+var-padding--button = 4px 20px
+var-line-height--button = 36px
+var-line-height--button--large = 36px
+
 /*! topdoc
   name: Button
   class: button
@@ -48,13 +70,13 @@ button()
   ellipsis()
   height auto
   text-decoration none
-  padding var-padding
+  padding var-padding--button
   font-size var-font-size
-  line-height var-line-height
+  line-height var-line-height--button
   letter-spacing var-letter-spacing
   color var-color__button
   text-shadow var-text-shadow
-  vertical-align var-vertical-align
+  vertical-align middle
   background-color var-background-color__button
   box-shadow var-box-shadow
   border none
@@ -63,11 +85,10 @@ button()
   font-weight var-font-weight
 
 button--focus()
-  box-shadow var-box-shadow--focus
+  box-shadow none
   outline 0
 
 button--active()
-  background-color var-background-color--down
   background-color var-background-color--down__button
   box-shadow var-box-shadow--down
   color var-color--button--active
@@ -115,7 +136,6 @@ button--active()
   button--focus()
 
 .button--quiet:active
-  color var-color--active__button--quiet
   text-shadow var-text-shadow
   background-color var-background-color--quiet-active
   border none
@@ -134,8 +154,8 @@ button--active()
   button()
   font-size var-font-size--large
   font-weight var-font-weight--large
-  line-height var-line-height--large
-  padding var-padding--large
+  line-height var-line-height--button--large
+  padding var-padding--button--large
   display block
   width 100%
 
@@ -163,15 +183,14 @@ button--active()
   button()
   font-size var-font-size--large
   font-weight var-font-weight--large
-  line-height var-line-height--large
-  padding var-padding--large
+  line-height var-line-height--button--large
+  padding var-padding--button--large
   display block
   width 100%
   button--quiet()
   color var-quiet-button-color
 
 .button--large--quiet:active
-  color var-color--active__button--quiet
   transition none
   opacity 0.6
 
@@ -233,8 +252,8 @@ button--active()
   text-shadow var-text-shadow--cta
   font-size var-font-size--large
   font-weight var-font-weight--large
-  line-height var-line-height--large
-  padding var-padding--large
+  line-height var-line-height--button--large
+  padding var-padding--button--large
   width 100%
   display block
 

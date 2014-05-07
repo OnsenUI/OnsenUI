@@ -1,5 +1,8 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
+// internal variables
+var-background-color--page := #EFEFF4
+
 .page
   reset-font()
   background-color var-background-color--page
@@ -9,13 +12,8 @@
   right 0px
   bottom 0px
   overflow hidden
-
-.page *
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  font-size var-font-size
+  color var-text-color
 
 .page ::-webkit-scrollbar
   display none

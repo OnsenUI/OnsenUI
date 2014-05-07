@@ -55,6 +55,7 @@
     font-size: 48px;
     text-align: center;
     opacity: 0.6;
+    border-top: 0px !important;
 }
 
 .grid-menu-item:first-child {

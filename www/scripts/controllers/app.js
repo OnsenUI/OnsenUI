@@ -64,18 +64,10 @@ module.controller('AppController',
     $scope.colorCustomizer.setColors(colors);
   }
 
-  $scope.setColorScheme = function(colorScheme){
+  $scope.setColorScheme = function(colorScheme) {
     setColors(colorScheme.getColors());
     ga('send', 'event', 'color', 'setColorScheme', colorScheme.text);
-  }
-
-  var urlSearch = $location.search();
-  if ($.isEmptyObject(urlSearch)) {
-    setColors(schemeSwitcher.current.colors);
-  }else{
-    setColors(urlSearch);
-  }
-
+  };
 
   $scope.colorSchemeSwitcher = schemeSwitcher;
 
@@ -301,13 +293,15 @@ module.controller('AppController',
       $scope.$apply();
       window.localStorage.setItem('isAccessed', 1);
     } else {
-      $scope.showNewsletterPopup();
+      if (!window.IS_DEV) { 
+        $scope.showNewsletterPopup();
+      }
     }
   }, 1000);
 
   $scope.showNewsletterPopup = function() {
     var isEntered = window.localStorage.getItem('isEntered');
-    if (!isEntered) {
+    if (!isEntered && !window.IS_DEV) { 
       setTimeout(function() {
         $scope.newsletterPopup.show();
         $scope.$apply();
@@ -336,4 +330,11 @@ module.controller('AppController',
     }
   }
 
+  var urlSearch = $location.search();
+  if (schemeSwitcher.current.isAcceptableColors(urlSearch)) {
+    setColors(urlSearch);
+    schemeSwitcher.current.setColors(urlSearch);
+  } else {
+    setColors(schemeSwitcher.current.colors);
+  }
 });

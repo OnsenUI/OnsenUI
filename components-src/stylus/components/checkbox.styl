@@ -18,6 +18,33 @@
 
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
+// internal variables
+var-background-color-checked--checkbox := #1284ff
+var-checkbox-border-color := #1284ff
+var-checkbox-border-color-active := var-checkbox-border-color
+var-checkmark-color := #fff
+
+var-height--checkmark__foot = 6px
+var-transform--checkmark = rotate(-45deg)
+var-background-color--checkmark = transparent
+var-border--checkbox = 1px solid var-checkbox-border-color
+var-border--checkbox--active = 1px solid var-checkbox-border-color-active
+var-border--checkbox--focus = 1px solid var-checkbox-border-color-active
+var-background-color--down--checkbox = var-background-color--checkmark
+var-background-color--before--checkbox = var-background-color-checked--checkbox
+var-border--checkmark = 3px solid var-checkmark-color
+var-border--checkmark--active = 3px solid var-checkmark-color
+var-width--checkmark__tail = 12px
+var-border-width--checkmark = 3px
+var-top--checkmark = 5px
+var-left--checkmark = 4px
+var-size--checkbox = 24px
+var-size--checkmark = 16px
+var-border--checkmark--noborder = 3px solid var-checkbox-border-color
+var-border-radius--checkbox = 16px
+var-border-radius--checkmark = 0px
+
+
 /*! topdoc
   name: Checkbox
   class: checkbox
@@ -95,7 +122,6 @@ checkbox--after()
   reset-box-model()
   width var-size--checkbox
   height var-size--checkbox
-  background var-background-color
   background var-background-color--checkmark
   border var-border--checkbox
   border-radius var-border-radius--checkbox
@@ -124,14 +150,13 @@ checkbox--after()
   opacity 0
 
 .checkbox > input[type="checkbox"]:focus + .checkbox__checkmark:before
-  box-shadow var-box-shadow--cta, var-box-shadow--focus
+  box-shadow var-box-shadow--cta
 
 .checkbox > input[type="checkbox"]:disabled + .checkbox__checkmark
   checkbox--disabled()
 
 .checkbox > input[type="checkbox"]:disabled:active + .checkbox__checkmark:before
-  border var-border
-  background var-background-color
+  background transparent
   box-shadow var-box-shadow
 
 /*! topdoc
@@ -216,12 +241,12 @@ checkbox--after()
 
 .checkbox--noborder > input[type="checkbox"]:focus + .checkbox__checkmark:before
   border none
-  box-shadow var-box-shadow--cta, var-box-shadow--focus
+  box-shadow var-box-shadow--cta
 
 .checkbox--noborder > input[type="checkbox"]:disabled + .checkbox__checkmark
   disabled()
 
 .checkbox--noborder > input[type="checkbox"]:disabled:active + .checkbox--noborder__checkmark:before
-  background var-background-color
+  background transparent
   box-shadow var-box-shadow
   border none

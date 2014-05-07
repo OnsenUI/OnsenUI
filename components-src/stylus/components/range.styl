@@ -15,6 +15,17 @@ limitations under the License.
 
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
+// internal variables
+var-range-track-background-color := #ccc
+var-range-track-background-color-active := #1284ff
+var-range-thumb-background-color := #fff
+var-range-thumb-border-color := #ddd
+var-border-radius--range := 3px
+var-range-thumb-border := 1px solid var-range-thumb-border-color
+var-border--range := none
+var-height--range__track := 2px
+var-width--range__thumb  := var-thumb-size
+
 /*! topdoc
   name: Range
   class: range
@@ -79,13 +90,11 @@ range--disabled()
 
 .range::-moz-range-track
   position relative
-  border-radius var-border-radius
   border none
-  background-color var-background-color--input
   background-color var-range-track-background-color
   height var-height--range__track
-  border-radius var-border-radius--large
-  border-radius var-border-radius--none
+  border-radius var-round-border
+  box-shadow none
   top 0
   margin 0
   padding 0
@@ -98,7 +107,7 @@ range--disabled()
   background-color var-range-thumb-background-color
   border var-range-thumb-border
   border-radius var-round-border
-  box-shadow var-box-shadow
+  box-shadow none
   top 0
   margin 0
   padding 0
@@ -108,11 +117,10 @@ range--disabled()
   position relative
   height var-width--range__thumb
   width var-width--range__thumb
-  background-color var-background-color
+  background-color var-range-thumb-background-color
   border var-range-thumb-border
-  border-radius var-border-radius
   border-radius var-round-border
-  box-shadow var-box-shadow
+  box-shadow none
   margin 0
   padding 0
 

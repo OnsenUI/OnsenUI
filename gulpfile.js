@@ -38,7 +38,7 @@ gulp.task('html2js', function() {
 // build
 ////////////////////////////////////////
 gulp.task('build', function(done) {
-  runSequence(['html2js', 'css', 'build-css-components'], 'jshint', done);
+  runSequence(['html2js', 'css'], 'build-css-topdoc', 'jshint', done);
 });
 
 ////////////////////////////////////////
@@ -168,5 +168,5 @@ gulp.task('build-css-components', function() {
 // build-css-topdoc
 ////////////////////////////////////////
 gulp.task('build-css-topdoc', ['build-css-components'], $.shell.task([
-    './node_modules/.bin/topdoc --source ./components-src/dist --destination ./components-src/testcases --template ./components-src/testcases-topdoc-template'
+    './node_modules/.bin/topdoc --source ./components-src/dist --destination ./www/testcases --template ./components-src/testcases-topdoc-template'
 ]));

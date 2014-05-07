@@ -18,6 +18,14 @@
 
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
+// internal variables
+var-radio-button-background-active := rgba(0, 0, 0, 0)
+var-radio-button-indicator-color := #1284ff
+
+var-radio-button-background = transparent
+var-radio-button-border = 3px solid var-radio-button-indicator-color
+var-size--radio-button = 24px
+
 /*! topdoc
   name: Radio Button
   class: radio-button
@@ -88,7 +96,6 @@ radio-button--disabled()
 .radio-button
   radio-button__label()
   hide-input-parent()
-  color var-color--radio-button
   line-height var-size--radio-button
   text-align left
   margin 10px 0
