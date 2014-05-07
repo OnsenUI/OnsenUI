@@ -226,6 +226,7 @@ div#content-container {
 }
 .tooltip {
   width: auto;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   height: 28px;
   line-height: 28px;
@@ -266,6 +267,7 @@ div#content-container {
   border: 1px solid #ff1a33;
   z-index: 2001;
   display: none;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -304,6 +306,7 @@ div#content-container > header {
   height: 82px;
   background-color: white;
   padding: 16px 23px 0 23px;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   min-width: 1200px;
 }
@@ -382,6 +385,7 @@ div#customizer-panel {
   bottom: 0px;
   width: 300px;
   border-left: 1px solid #ddd;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0;
   padding: 8px 12px;
@@ -404,6 +408,7 @@ div#customizer-panel > header {
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.07);
   margin: -8px -12px;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding-left: 12px;
 }
@@ -450,6 +455,7 @@ div#customizer-panel > section > div.customizer-section > ul.customize-item-list
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   list-style: none;
   height: 44px;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   line-height: 44px;
   color: white;
@@ -486,6 +492,7 @@ div#customizer-panel > section > div.customizer-section > ul.color-scheme-switch
   border: 1px solid rgba(0, 0, 0, 0.4);
   background-color: rgba(255, 255, 255, 0.05);
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.05);
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   border-radius: 4px;
   height: 32px;
@@ -508,6 +515,7 @@ div#customizer-panel > section > div.customizer-section > ul.color-scheme-switch
   list-style: none;
   -webkit-flex-grow: 1;
   flex-grow: 1;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   line-height: 32px;
   height: 32px;
@@ -541,6 +549,7 @@ div#customizer-panel > section > div.customizer-section > ul.color-scheme-switch
   height: 18px;
   border: 2px solid white;
   display: inline-block;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 0px;
   margin-top: 9px;
@@ -566,6 +575,7 @@ div#main-panel > ul#main-panel-tabbar {
   margin: 0;
   padding: 0 0 0 23px;
   height: 50px;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 0px;
   background-color: #474849;
@@ -575,6 +585,7 @@ div#main-panel > ul#main-panel-tabbar {
 }
 div#main-panel > ul#main-panel-tabbar > li {
   list-style: none;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0;
   padding: 0 16px;
@@ -612,6 +623,7 @@ div#main-panel > #main-panel-view {
   bottom: 0px;
   left: 0px;
   background-color: #343536;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
@@ -620,6 +632,7 @@ div#main-panel > footer {
   bottom: 0px;
   right: 20px;
   height: 30px;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   border-top: 2px solid #ffffff;
   box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.08) inset;
@@ -658,6 +671,7 @@ div#overview-container {
   left: 0px;
   right: 0px;
   bottom: 0px;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 div#overview-container > ul#overview {
@@ -698,6 +712,7 @@ div#overview-container > ul#overview > li > div.pattern > div.inspector-mask.ins
 }
 div#overview-container > ul#overview > li > div.pattern > iframe {
   position: relative;
+  -moz-box-sizing: padding-box;
   box-sizing: padding-box;
   width: 320px;
   height: 568px;
@@ -721,6 +736,7 @@ div#components-container {
   left: 0px;
   right: 0px;
   bottom: 0px;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 div#components-container > ul#components {
@@ -820,6 +836,7 @@ div.dialog-container > div.dialog {
   background-color: white;
   box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.2);
   height: 100%;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 16px;
   background-clip: padding-box;
@@ -954,6 +971,7 @@ div.html-dialog-container > div.html-dialog > div.css-container .CodeMirror {
   height: 100%;
 }
 div.html-dialog-container > div.html-dialog > div.html-container {
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
@@ -1018,6 +1036,7 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
   right: 0px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 div.component-dialog-container > div.component-dialog > div.component-dialog-content > div.preview-container {
@@ -1045,6 +1064,7 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
   height: 100%;
 }
 div.component-dialog-container > div.component-dialog > div.component-dialog-content > div.html-container {
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   height: 150px;
   position: absolute;
@@ -1068,6 +1088,7 @@ div.component-dialog-container > div.component-dialog > div.component-dialog-con
   right: 0px;
   left: 0px;
   bottom: 0px;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 div.component-dialog-container > div.component-dialog > div.component-dialog-content > div.css-container .CodeMirror {
@@ -1107,6 +1128,7 @@ div.color-picker-popup-mask {
 div.color-picker-popup {
   width: 220px;
   height: 215px;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 12px;
   position: absolute;
@@ -1307,6 +1329,7 @@ div.popup-container > div.popup {
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.2);
   height: 100%;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 14px 12px 8px 12px;
   background-clip: padding-box;
@@ -1426,6 +1449,7 @@ div.popup div.highlight-content input[type=email].site {
   padding: 0 5px;
   height: 40px;
   font-size: 20px;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
   line-height: 40px;
   font-weight: 300;
@@ -1437,5 +1461,6 @@ div.popup div.highlight-content button.site-button {
   height: 40px;
   font-size: 20px;
   line-height: 40px;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }

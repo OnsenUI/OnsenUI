@@ -33,6 +33,7 @@ select) {
   bottom: 0px;
   overflow: hidden;
   font-size: 16px;
+  color: #1f1f21;
 }
 .page ::-webkit-scrollbar {
   display: none;
