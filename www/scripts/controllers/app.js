@@ -331,11 +331,10 @@ module.controller('AppController',
   }
 
   var urlSearch = $location.search();
-  if ($.isEmptyObject(urlSearch)) {
-    setColors(schemeSwitcher.current.colors);
-  } else {
+  if (schemeSwitcher.current.isAcceptableColors(urlSearch)) {
     setColors(urlSearch);
     schemeSwitcher.current.setColors(urlSearch);
+  } else {
+    setColors(schemeSwitcher.current.colors);
   }
-
 });
