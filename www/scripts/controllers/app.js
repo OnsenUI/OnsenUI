@@ -64,18 +64,10 @@ module.controller('AppController',
     $scope.colorCustomizer.setColors(colors);
   }
 
-  $scope.setColorScheme = function(colorScheme){
+  $scope.setColorScheme = function(colorScheme) {
     setColors(colorScheme.getColors());
     ga('send', 'event', 'color', 'setColorScheme', colorScheme.text);
-  }
-
-  var urlSearch = $location.search();
-  if ($.isEmptyObject(urlSearch)) {
-    setColors(schemeSwitcher.current.colors);
-  }else{
-    setColors(urlSearch);
-  }
-
+  };
 
   $scope.colorSchemeSwitcher = schemeSwitcher;
 
@@ -336,6 +328,14 @@ module.controller('AppController',
         }
       });
     }
+  }
+
+  var urlSearch = $location.search();
+  if ($.isEmptyObject(urlSearch)) {
+    setColors(schemeSwitcher.current.colors);
+  } else {
+    setColors(urlSearch);
+    schemeSwitcher.current.setColors(urlSearch);
   }
 
 });

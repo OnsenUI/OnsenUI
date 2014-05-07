@@ -12,8 +12,15 @@ angular.module('app').factory('ColorScheme', function($rootScope) {
       angular.extend(this, options);
     },
 
-    setColor: function(variable, color){
+    setColor: function(variable, color) {
       this.colors[variable] = color;
+      $rootScope.$broadcast('colors:changed', this.colors);
+    },
+
+    setColors: function(colors) {
+      for (var name in colors) {
+        this.colors[name] = colors[name];
+      }
       $rootScope.$broadcast('colors:changed', this.colors);
     },
 

@@ -24,6 +24,8 @@ angular.module('app').factory('ColorCustomizer', function() {
         }
       }
     }
+
+    console.log('no such color: ' + name);
   };
 
   return ColorCustomizer;
