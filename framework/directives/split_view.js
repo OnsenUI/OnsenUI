@@ -21,7 +21,10 @@ limitations under the License.
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
 	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewStack) {
-		return {
+
+        var ON_PAGE_READY = "onPageReady";
+
+        return {
 			restrict: 'E',
 			replace: false,
 			transclude: false,
@@ -309,7 +312,8 @@ limitations under the License.
 					onTransitionEnd: function() {
 						this.$abovePage.removeClass('transition');
 						this.$behindPage.removeClass('transition');
-					},
+                        scope.$root.$broadcast(ON_PAGE_READY);//make sure children can do something before the parent.
+                    },
 
 					close: function() {
 						if (this.mode === SPLIT_MODE) {
