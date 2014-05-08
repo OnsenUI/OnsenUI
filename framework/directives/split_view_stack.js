@@ -11,6 +11,8 @@
 				$rootScope.ons.splitView.setMainPage = this.setMainPage.bind(this);
 				$rootScope.ons.splitView.setSecondaryPage = this.setSecondaryPage.bind(this);
 				$rootScope.ons.splitView.toggle = this.toggle.bind(this);				
+				$rootScope.ons.splitView.open = this.open.bind(this);
+				$rootScope.ons.splitView.close = this.close.bind(this);
 			},
 
 			_findClosestSplitView: function($event) {				
@@ -62,7 +64,21 @@
 
 				var splitView = this._findClosestSplitView($event);
 				splitView.toggle();
-			}
+			},
+
+            open: function($event) {
+                this._checkExistence();
+
+                var splitView = this._findClosestSplitView($event);
+                splitView.open();
+            },
+
+            close: function($event) {
+                this._checkExistence();
+
+                var splitView = this._findClosestSplitView($event);
+                splitView.close();
+            }
 		});
 
 		return new SplitViewStack();
