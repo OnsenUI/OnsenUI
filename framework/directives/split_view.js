@@ -21,7 +21,10 @@ limitations under the License.
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
 	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewStack) {
-		return {
+
+        var ON_PAGE_READY = "onPageReady";
+
+        return {
 			restrict: 'E',
 			replace: false,
 			transclude: false,
@@ -29,6 +32,7 @@ limitations under the License.
 				secondaryPage: '@',
 				mainPage: '@',
 				collapse: '@',
+                swipable: '@',
 				mainPageWidth: '@'
 			},
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
@@ -62,11 +66,13 @@ limitations under the License.
 						this.startX = 0;
 						this.mode = SPLIT_MODE;
 
-						this.hammertime = new Hammer(this.el);
+                        this.hammertime = new Hammer(this.el);
 						this.boundHammerEvent = this.handleEvent.bind(this);
 						this.bindEvents();
 
-						window.addEventListener("orientationchange", this.onOrientationChange.bind(this));
+                        scope.$watch('swipable', this.onSwipableChanged.bind(this));
+
+                        window.addEventListener("orientationchange", this.onOrientationChange.bind(this));
 						window.addEventListener('resize', this.onResize.bind(this));
 						
 						this.attachMethods();
@@ -228,7 +234,7 @@ limitations under the License.
 
 					},
 
-					setSize: function() {						
+					setSize: function() {
 						if(!scope.mainPageWidth){
 							scope.mainPageWidth = "70";
 						}
@@ -244,7 +250,7 @@ limitations under the License.
 						this.behindPage.style.width =  '100%';
 						this.abovePage.style.width = '100%';
 						this.mode = COLLAPSE_MODE;
-						this.activateHammer();
+                        this.onSwipableChanged(scope.swipable);
 						this.translate(0);
 
 						if (Modernizr.boxshadow) {
@@ -272,6 +278,21 @@ limitations under the License.
 					bindEvents: function() {
 						this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
 					},
+
+
+                    onSwipableChanged: function(swipable){
+                        if(swipable == "" || swipable == undefined){
+                            swipable = true;
+                        }else{
+                            swipable = (swipable == "true");
+                        }
+
+                        if(swipable){
+                            this.activateHammer();
+                        }else{
+                            this.deactivateHammer();
+                        }
+                    },
 
 					handleEvent: function(ev) {
 						switch (ev.type) {
@@ -309,7 +330,8 @@ limitations under the License.
 					onTransitionEnd: function() {
 						this.$abovePage.removeClass('transition');
 						this.$behindPage.removeClass('transition');
-					},
+                        scope.$root.$broadcast(ON_PAGE_READY);//make sure children can do something before the parent.
+                    },
 
 					close: function() {
 						if (this.mode === SPLIT_MODE) {
