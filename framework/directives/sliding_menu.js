@@ -20,7 +20,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuStack) {
+	directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $templateCache, $compile, SlidingMenuStack) {
 		return {
 			restrict: 'E',
 			replace: false,
@@ -149,32 +149,63 @@ limitations under the License.
 						this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
 					},
 
+                    appendAbovePage: function (templateHTML) {
+                        var pageElement = angular.element('<div></div>');
+                        pageElement.addClass('page');
+                        pageElement[0].style.opacity = 0;
+                        var pageScope = scope.$parent.$new();
+                        var pageContent = $compile(templateHTML)(pageScope);
+                        pageElement.append(pageContent);
+                        this.$abovePage.append(pageElement);
+
+                        // prevent black flash
+                        setTimeout(function() {
+                            pageElement[0].style.opacity = 1;
+                            if (this.currentPageElement) {
+                                this.currentPageElement.remove();
+                                this.currentPageScope.$destroy();
+                            }
+                            this.currentPageElement = pageElement;
+                            this.currentPageScope = pageScope;
+                        }.bind(this), 0);
+
+                        this.currentPageUrl = pageUrl;
+                    },
+
+                    appendBehindPage: function (templateHTML) {
+                        var page = angular.element('<div></div>');
+                        page.addClass('page');
+                        var pageScope = scope.$parent.$new();
+                        var pageContent = $compile(templateHTML)(pageScope);
+                        page.append(pageContent);
+                        this.$behindPage.append(page);
+
+                        if(this.currentBehindPageScope){
+                            this.currentBehindPageScope.$destroy();
+                            this.currentBehindPageElement.remove();
+                        }
+
+                        this.currentBehindPageElement = page;
+                        this.currentBehindPageScope = pageScope;
+                    },
+
 					attachMethods: function() {
 						scope.setBehindPage = function(page) {
 							if (page) {
-								$http({
-									url: page,
-									method: "GET"
-								}).error(function(e) {
-									console.error(e);
-								}).success(function(data, status, headers, config) {
-									var templateHTML = angular.element(data.trim());
-									var page = angular.element('<div></div>');
-									page.addClass('page');
-									var pageScope = scope.$parent.$new();
-									var pageContent = $compile(templateHTML)(pageScope);
-									page.append(pageContent);
-									this.$behindPage.append(page);
-
-									if(this.currentBehindPageScope){
-										this.currentBehindPageScope.$destroy();
-										this.currentBehindPageElement.remove();
-									}
-
-									this.currentBehindPageElement = page;
-									this.currentBehindPageScope = pageScope;
-
-								}.bind(this));
+                                var templateHTML = $templateCache(page);
+                                if(templateHTML) {
+                                    this.appendBehindPage(templateHTML);
+                                } else {
+                                    $http({
+                                        url: page,
+                                        method: "GET"
+                                    }).error(function(e) {
+                                        console.error(e);
+                                    }).success(function(data, status, headers, config) {
+                                        templateHTML = angular.element(data.trim());
+                                        this.appendBehindPage(templateHTML);
+                                    }.bind(this));
+                                }
 							} else {
 								throw new Error('cannot set undefined page');
 							}
@@ -187,34 +218,20 @@ limitations under the License.
 							}
 
 							if (pageUrl) {
-								$http({
-									url: pageUrl,
-									method: "GET"
-								}).error(function(e) {
-									console.error(e);
-								}).success(function(data, status, headers, config) {
-									var templateHTML = angular.element(data.trim());
-									var pageElement = angular.element('<div></div>');
-									pageElement.addClass('page');
-									pageElement[0].style.opacity = 0;
-									var pageScope = scope.$parent.$new();
-									var pageContent = $compile(templateHTML)(pageScope);
-									pageElement.append(pageContent);
-									this.$abovePage.append(pageElement);
-
-									// prevent black flash
-									setTimeout(function() {
-										pageElement[0].style.opacity = 1;
-										if (this.currentPageElement) {
-											this.currentPageElement.remove();
-											this.currentPageScope.$destroy();
-										}
-										this.currentPageElement = pageElement;
-										this.currentPageScope = pageScope;
-									}.bind(this), 0);
-
-									this.currentPageUrl = pageUrl;
-								}.bind(this));
+                                var templateHtml = $templateCache(page);
+                                if(templateHTML) {
+                                    this.appendAbovePage(templateHTML);
+                                } else {
+                                    $http({
+                                        url: pageUrl,
+                                        method: "GET"
+                                    }).error(function(e) {
+                                        console.error(e);
+                                    }).success(function(data, status, headers, config) {
+                                        templateHTML = angular.element(data.trim());
+                                        this.appendAbovePage(templateHTML);
+                                    }.bind(this));
+                                }
 							} else {
 								throw new Error('cannot set undefined page');
 							}
