@@ -22455,7 +22455,7 @@ limitations under the License.
 
 			},
 
-            appendPage: function(templateHTML) {
+            appendPage: function(templateHTML, options) {
                 var div = document.createElement('div');
                 div.className = 'full-width full-height';
                 div.innerHTML = templateHTML;
@@ -22463,7 +22463,7 @@ limitations under the License.
                 var pageEl = this.generatePageEl(pageContent, options);
                 var pageScope = this.createPageScope();
                 var compiledPage = this.compilePageEl(pageEl, pageScope);
-                this._pushPageDOM(page, div, compiledPage, pageScope, options);
+                this._pushPageDOM(options.page, div, compiledPage, pageScope, options);
             },
 
 			pushPage: function(page, options) {
@@ -22483,7 +22483,7 @@ limitations under the License.
 				this.setReady(false);
 
                 if(templateHTML) {
-                    this.appendPage(templateHTML);
+                    this.appendPage(templateHTML, options);
                 } else {
                     $http({
                         url: page,
@@ -22492,7 +22492,7 @@ limitations under the License.
                         that.onTransitionEnded();
                         console.error(e);
                     }).success(function(templateHTML, status, headers, config) {
-                        this.appendPage(templateHTML);
+                        this.appendPage(templateHTML, options);
                     }.bind(this)).error(function(data, status, headers, config) {
                         console.error('error', data, status);
                     });

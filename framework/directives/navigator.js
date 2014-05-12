@@ -572,7 +572,7 @@ limitations under the License.
                 var pageEl = this.generatePageEl(pageContent, options);
                 var pageScope = this.createPageScope();
                 var compiledPage = this.compilePageEl(pageEl, pageScope);
-                this._pushPageDOM(page, div, compiledPage, pageScope, options);
+                this._pushPageDOM(options.page, div, compiledPage, pageScope, options);
             },
 
 			pushPage: function(page, options) {
