@@ -20,7 +20,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewStack) {
+	directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, $templateCache, SplitViewStack) {
 
         var ON_PAGE_READY = "onPageReady";
 
@@ -39,7 +39,7 @@ limitations under the License.
 			link: function(scope, element, attrs) {
 				var SPLIT_MODE = 0;
 				var COLLAPSE_MODE = 1;
-				var MAIN_PAGE_RATIO = 0.9;			
+				var MAIN_PAGE_RATIO = 0.9;
 
 				var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 				var BROWSER_TRANSFORMS = [
@@ -74,7 +74,7 @@ limitations under the License.
 
                         window.addEventListener("orientationchange", this.onOrientationChange.bind(this));
 						window.addEventListener('resize', this.onResize.bind(this));
-						
+
 						this.attachMethods();
 
 						if(scope.mainPage){
@@ -86,37 +86,66 @@ limitations under the License.
 						}
 
 						window.setTimeout(function(){
-							this.considerChangingCollapse();							
+							this.considerChangingCollapse();
 						}.bind(this), 100);
 					},
+
+                    appendSecondPage: function (templateHTML) {
+                        var page = angular.element('<div></div>');
+                        page.addClass('page');
+                        var pageScope = scope.$parent.$new();
+                        var pageContent = $compile(templateHTML)(pageScope);
+                        page.append(pageContent);
+                        this.$behindPage.append(page);
+
+
+                        if (this.currentBehindPageElement) {
+                            this.currentBehindPageElement.remove();
+                            this.currentBehindPageScope.$destroy();
+                        }
+
+                        this.currentBehindPageElement = page;
+                        this.currentBehindPageScope = pageScope;
+                    },
+
+                    appendMainPage: function(templateHTML) {
+                        var page = angular.element('<div></div>');
+                        page.addClass('page');
+                        page[0].style.opacity = 0;
+                        var pageScope = scope.$parent.$new();
+                        var pageContent = $compile(templateHTML)(pageScope);
+                        page.append(pageContent);
+                        this.$abovePage.append(page);
+
+                        // prevent black flash
+                        setTimeout(function(){
+                            page[0].style.opacity = 1;
+                            if(this.currentPage){
+                                this.currentPage.remove();
+                                this.currentPageScope.$destroy();
+                            }
+                            this.currentPage = page;
+                            this.currentPageScope = pageScope;
+                        }.bind(this), 0);
+                    },
 
 					attachMethods: function(){
 						scope.setSecondaryPage = function(page) {
 							if (page) {
-								$http({
-									url: page,
-									method: "GET"
-								}).error(function(e){
-									console.error(e);
-								}).success(function(data, status, headers, config) {
-									var templateHTML = angular.element(data.trim());
-									var page = angular.element('<div></div>');
-									page.addClass('page');		
-									var pageScope = scope.$parent.$new();
-									var pageContent = $compile(templateHTML)(pageScope);
-									page.append(pageContent);
-									this.$behindPage.append(page);	
-
-
-									if(this.currentBehindPageElement){
-										this.currentBehindPageElement.remove();
-										this.currentBehindPageScope.$destroy();
-									}
-
-									this.currentBehindPageElement = page;
-									this.currentBehindPageScope = pageScope;
-
-								}.bind(this));
+                                var templateHTML = $templateCache.get(page)
+                                if(templateHTML) {
+                                    this.appendSecondPage(templateHTML);
+                                } else {
+                                    $http({
+                                        url: page,
+                                        method: "GET"
+                                    }).error(function(e){
+                                        console.error(e);
+                                    }).success(function(data, status, headers, config) {
+                                        templateHTML = angular.element(data.trim());
+                                        this.appendSecondPage(templateHTML);
+                                    }.bind(this));
+                                }
 							} else {
 								throw new Error('cannot set undefined page');
 							}
@@ -124,33 +153,20 @@ limitations under the License.
 
 						scope.setMainPage = function(page) {
 							if (page) {
-								$http({
-									url: page,
-									method: "GET"
-								}).error(function(e){
-									console.error(e);
-								}).success(function(data, status, headers, config) {
-									var templateHTML = angular.element(data.trim());
-									var page = angular.element('<div></div>');
-									page.addClass('page');
-									page[0].style.opacity = 0;
-									var pageScope = scope.$parent.$new();
-									var pageContent = $compile(templateHTML)(pageScope);
-									page.append(pageContent);
-									this.$abovePage.append(page);
-
-									// prevent black flash
-									setTimeout(function(){
-										page[0].style.opacity = 1;
-										if(this.currentPage){
-											this.currentPage.remove();
-											this.currentPageScope.$destroy();
-										}
-										this.currentPage = page;
-										this.currentPageScope = pageScope;
-									}.bind(this), 0);
-
-								}.bind(this));
+                                var templateHTML = $templateCache.get(page);
+                                if(templateHTML) {
+                                    this.appendMainPage(templateHTML);
+                                } else {
+                                    $http({
+                                        url: page,
+                                        method: "GET"
+                                    }).error(function(e){
+                                        console.error(e);
+                                    }).success(function(data, status, headers, config) {
+                                        templateHTML = angular.element(data.trim());
+                                        this.appendMainPage(templateHTML);
+                                    }.bind(this));
+                                }
 							} else {
 								throw new Error('cannot set undefined page');
 							}
@@ -226,7 +242,7 @@ limitations under the License.
 										}
 									}
 
-									return false;									
+									return false;
 								}
 
 								break;
@@ -367,7 +383,7 @@ limitations under the License.
 
 					translate: function(x) {
 						var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
-						
+
 						var behind = (x - this.MAX) / this.MAX * 10;
 						var opacity = 1 + behind / 100;
 						var behindTransform = 'translate3d(' + behind + '%, 0, 0)';
@@ -378,7 +394,7 @@ limitations under the License.
 							this.abovePage.style[property] = aboveTransform;
 							this.behindPage.style[property] = behindTransform;
 						};
-						
+
 						this.behindPage.style.opacity = opacity;
 						this.currentX = x;
 					},
@@ -393,7 +409,7 @@ limitations under the License.
 							this.abovePage.style[property] = aboveTransform;
 							this.behindPage.style[property] = behindTransform;
 						};
-												
+
 						this.currentX = x;
 					}
 				});
@@ -405,7 +421,7 @@ limitations under the License.
 				var swiper = new Swiper(element);
 
 				scope.pages = {
-					behind: scope.secondaryPage					
+					behind: scope.secondaryPage
 				};
 
 				scope.open = function() {
@@ -426,12 +442,12 @@ limitations under the License.
 					} else {
 						throw new Error('cannot set undefined page');
 					}
-				};	
+				};
 
-				SplitViewStack.addSplitView(scope);		
+				SplitViewStack.addSplitView(scope);
 				scope.$on('$destroy', function(){
 					SplitViewStack.removeSplitView(scope);
-				});	
+				});
 			}
 		};
 	});

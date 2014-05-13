@@ -19,7 +19,7 @@ limitations under the License.
 	'use strict';
 	var directives = angular.module('onsen.directives');
 
-	directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, requestAnimationFrame) {
+	directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $templateCache, $compile, $parse, NavigatorStack, requestAnimationFrame) {
 		var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 
 		var Navigator = Class.extend({
@@ -564,6 +564,17 @@ limitations under the License.
 
 			},
 
+            appendPage: function(templateHTML, options) {
+                var div = document.createElement('div');
+                div.className = 'full-width full-height';
+                div.innerHTML = templateHTML;
+                var pageContent = angular.element(div.cloneNode(true));
+                var pageEl = this.generatePageEl(pageContent, options);
+                var pageScope = this.createPageScope();
+                var compiledPage = this.compilePageEl(pageEl, pageScope);
+                this._pushPageDOM(options.page, div, compiledPage, pageScope, options);
+            },
+
 			pushPage: function(page, options) {
 				if (options && typeof options != "object") {
 					throw new Error('options must be an objected. You supplied ' + options);
@@ -575,28 +586,27 @@ limitations under the License.
 					return;
 				}
 
-				var that = this;
+				var that = this,
+                    templateHTML = $templateCache.get(page);
 
 				this.setReady(false);
 
-				$http({
-					url: page,
-					method: 'GET'
-				}).error(function(e) {
-					that.onTransitionEnded();
-					console.error(e);
-				}).success(function(data, status, headers, config) {
-					var div = document.createElement('div');
-					div.className = 'full-width full-height';
-					div.innerHTML = data; 
-					var pageContent = angular.element(div.cloneNode(true));
-					var pageEl = this.generatePageEl(pageContent, options);
-					var pageScope = this.createPageScope();
-					var compiledPage = this.compilePageEl(pageEl, pageScope);
-					this._pushPageDOM(page, div, compiledPage, pageScope, options);
-				}.bind(this)).error(function(data, status, headers, config) {
-					console.error('error', data, status);
-				});
+                if(templateHTML) {
+                    this.appendPage(templateHTML, options);
+                } else {
+                    $http({
+                        url: page,
+                        method: 'GET'
+                    }).error(function(e) {
+                        that.onTransitionEnded();
+                        console.error(e);
+                    }).success(function(templateHTML, status, headers, config) {
+                        this.appendPage(templateHTML, options);
+                    }.bind(this)).error(function(data, status, headers, config) {
+                        console.error('error', data, status);
+                    });
+                }
+
 			},
 
 			popPage: function() {
