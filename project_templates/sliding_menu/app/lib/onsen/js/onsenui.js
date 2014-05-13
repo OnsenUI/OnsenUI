@@ -2503,7 +2503,7 @@ limitations under the License.
             this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
           },
 
-          appendAbovePage: function(templateHTML) {
+          appendAbovePage: function(pageUrl, templateHTML) {
             var pageElement = angular.element('<div></div>');
             pageElement.addClass('page');
             pageElement[0].style.opacity = 0;
@@ -2546,7 +2546,7 @@ limitations under the License.
           attachMethods: function() {
             scope.setBehindPage = function(page) {
               if (page) {
-                var templateHTML = $templateCache(page);
+                var templateHTML = $templateCache.get(page);
                 if (templateHTML) {
                   this.appendBehindPage(templateHTML);
                 } else {
@@ -2573,9 +2573,9 @@ limitations under the License.
               }
 
               if (pageUrl) {
-                var templateHtml = $templateCache(page);
+                var templateHTML = $templateCache.get(pageUrl);
                 if (templateHTML) {
-                  this.appendAbovePage(templateHTML);
+                  this.appendAbovePage(pageUrl, templateHTML);
                 } else {
                   $http({
                       url: pageUrl,
@@ -2585,7 +2585,7 @@ limitations under the License.
                       console.error(e);
                     }).success(function(data, status, headers, config) {
                     templateHTML = angular.element(data.trim());
-                    this.appendAbovePage(templateHTML);
+                    this.appendAbovePage(pageUrl, templateHTML);
                   }.bind(this));
                 }
               } else {
