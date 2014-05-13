@@ -17,7 +17,7 @@ Onsen UI is tested with the following browsers and mobile OS.
 
 ## Demo
 
-Click [Here](http://onsenui.github.io/demo/) to see Onsen UI in action!
+Click [Here](http://onsenui.io/guide/components.html) to see Onsen UI in action!
 
 ## What's Included
 
@@ -87,7 +87,7 @@ Access [http://0.0.0.0:8000/demo/index.html](http://0.0.0.0:8000/demo/index.html
 * Fill out the CLA [here](https://docs.google.com/forms/d/1ldg4_QReI2hC12HvF1OuDhW1QromvXat6kA4Uhdsw2M/viewform)
 * Fork the repo
 * Commit your changes
-* Make a [pull request](https://help.github.com/articles/using-pull-requests)
+* Make a [pull request](https://help.github.com/articles/using-pull-requests) to **dev** branch.
 
 ## Getting support
 

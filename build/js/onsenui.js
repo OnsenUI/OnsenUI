@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.3 - 2014-04-02 */
+/*! onsenui - v1.0.4 - 2014-05-13 */
 (function(module) {
 try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
@@ -93,8 +93,8 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/list.tpl",
-    "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
-    "  <div class=\"scroller\">\n" +
+    "<div class=\"ons-scroller full-screen topcoat-page\" ons-scrollable>\n" +
+    "  <div class=\"ons-scroller__content ons-scroller-inner\">\n" +
     "    <div class=\"topcoat-list {{modifierTemplater('topcoat-list--*')}}\">\n" +
     "      <ul class=\"topcoat-list__container {{modifierTemplater('topcoat-list--*__container')}} ons-list-inner\" ng-transclude>\n" +
     "      </ul>\n" +
@@ -122,22 +122,22 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/navigator.tpl",
-    "<div class=\"navigator-container\">\n" +
-    "  <div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar no-select navigator-toolbar relative {{modifierTemplater('topcoat-navigation-bar--*')}}\">\n" +
-    "    <div class=\"navigator-toolbar__content relative {{modifierTemplater('topcoat-navigation-bar--*__content')}}\">\n" +
-    "      <div class=\"onsen_navigator-item topcoat-navigation-bar__bg onsen_navigator__left-button-container transition hide {{modifierTemplater('topcoat-navigation-bar--*__bg')}}\">\n" +
-    "        <span class=\"topcoat-icon-button--quiet left-section\">\n" +
+    "<div class=\"ons-navigator\">\n" +
+    "  <div ng-hide=\"hideToolbar\" class=\"topcoat-navigation-bar ons-navigator__toolbar {{modifierTemplater('topcoat-navigation-bar--*')}}\">\n" +
+    "    <div class=\"ons-navigator__toolbar-content {{modifierTemplater('topcoat-navigation-bar--*__content')}}\">\n" +
+    "      <div class=\"ons-navigator__item topcoat-navigation-bar__bg ons-navigator__left-button-container ons-navigator__left-button-container--transition ons-navigator__left-button-container--hidden {{modifierTemplater('topcoat-navigation-bar--*__bg')}}\">\n" +
+    "        <span class=\"topcoat-icon-button--quiet ons-navigator__left-section\">\n" +
     "          <i class=\"fa fa-angle-left fa-2x topcoat-navigation-bar__line-height {{modifierTemplater('topcoat-navigation-bar--*__line-height')}}\"></i>\n" +
     "        </span>\n" +
     "      </div>\n" +
-    "      <div class=\"onsen_navigator__right-button onsen_navigator-item\">\n" +
-    "        <span class=\"topcoat-icon-button--quiet right-section-icon\">\n" +
+    "      <div class=\"ons-navigator__right-button ons-navigator__item\">\n" +
+    "        <span class=\"topcoat-icon-button--quiet ons-navigator__right-section-icon\">\n" +
     "        </span>\n" +
     "      </div>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "\n" +
-    "  <div class=\"relative navigator-content topcoat-page__bg\">\n" +
+    "  <div class=\"ons-navigator__content topcoat-page__bg\">\n" +
     "  </div>    \n" +
     "</div>\n" +
     "");
@@ -160,7 +160,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/page.tpl",
-    "<div class=\"page topcoat-page {{modifierTemplater('topcoat-page--*')}} ons-page-inner\" ng-transclude></div>\n" +
+    "<div class=\"topcoat-page {{modifierTemplater('topcoat-page--*')}} ons-page-inner\" ng-transclude></div>\n" +
     "");
 }]);
 })();
@@ -197,10 +197,20 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
+  $templateCache.put("templates/screen.tpl",
+    "<div class=\"ons-screen\" ng-transclude></div>\n" +
+    "");
+}]);
+})();
+
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/scroller.tpl",
-    "<div class=\"scroller-wrapper full-screen page\" ons-scrollable>\n" +
-    "  <div class=\"scroller ons-scroller-inner\" ng-transclude>\n" +
-    "      \n" +
+    "<div class=\"ons-scroller full-screen topcoat-page\" ons-scrollable>\n" +
+    "  <div class=\"ons-scroller__content ons-scroller-inner\" ng-transclude>\n" +
     "  </div>\n" +
     "</div>\n" +
     "");
@@ -569,7 +579,7 @@ limitations under the License.
           checkbox.bind('change', function(){
             $scope.$apply(function(){
               ngModel.$setViewValue(checkbox[0].checked);
-            });						
+            });
           });
         }
       }
@@ -612,9 +622,9 @@ limitations under the License.
         offst: '@'
       },
       templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/column.tpl',
-      compile: function(elt, attr, transclude) {				
+      compile: function(elt, attr, transclude) {
         return function(scope, elt, attr) {
-          transclude(scope.$parent, function(clone) {						
+          transclude(scope.$parent, function(clone) {
             elt.append(clone);
           });
         };
@@ -632,13 +642,13 @@ limitations under the License.
   directives.directive('onsIcon', function(ONSEN_CONSTANTS) {
     return {
       restrict: 'E',
-      replace: true,			
+      replace: true,
       transclude: false,
       scope: {
         icon: '@',
         size: '@',
         rotate: '@',
-        flip: '@'				
+        flip: '@'
       },
       templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/icon.tpl',
       link: function($scope, element, attrs){
@@ -648,15 +658,15 @@ limitations under the License.
           }else{
             $scope.spin = '';
           }
-        });	
+        });
 
         attrs.$observe('fixedWidth', function(fixedWidth){
           if(fixedWidth === "true"){
             $scope.fixedWidth = 'fw';
           }else{
-            $scope.fixedWidth = '';						
+            $scope.fixedWidth = '';
           }
-        });				
+        });
       }
     };
   });
@@ -776,7 +786,7 @@ limitations under the License.
           platform = "window";
         }
 
-        $scope.platform = platform;				
+        $scope.platform = platform;
 
 
         attrs.$observe('onsIfPlatform', function(userPlatform) {
@@ -889,7 +899,7 @@ limitations under the License.
   'use strict';
   var directives = angular.module('onsen.directives');
 
-  directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, requestAnimationFrame, PredefinedPageCache, OnsenUtil) {
+  directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $templateCache, $compile, $parse, NavigatorStack, requestAnimationFrame, PredefinedPageCache, OnsenUtil) {
     var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 
     var Navigator = Class.extend({
@@ -963,7 +973,7 @@ limitations under the License.
        */
       modifierTemplater: undefined,
 
-      /**
+      /*
        * @param {Object} scope
        * @param {Object} element
        * @param {Object} attrs
@@ -977,24 +987,24 @@ limitations under the License.
 
         this.navigatorItems = [];
 
-        this.container = angular.element(element[0].querySelector('.navigator-content'));
+        this.container = angular.element(element[0].querySelector('.ons-navigator__content'));
         this.toolbar = angular.element(element[0].querySelector('.topcoat-navigation-bar'));
-        this.toolbarContent = angular.element(element[0].querySelector('.navigator-toolbar__content'));
-        this.leftSection = angular.element(this.toolbarContent[0].querySelector('.left-section'));
-        this.leftButtonContainer = angular.element(this.toolbarContent[0].querySelector('.onsen_navigator__left-button-container'));
+        this.toolbarContent = angular.element(element[0].querySelector('.ons-navigator__toolbar-content'));
+        this.leftSection = angular.element(this.toolbarContent[0].querySelector('.ons-navigator__left-section'));
+        this.leftButtonContainer = angular.element(this.toolbarContent[0].querySelector('.ons-navigator__left-button-container'));
         this.leftArrow = angular.element(this.leftButtonContainer[0].querySelector('i'));
 
-        this.rightSection = angular.element(this.toolbarContent[0].querySelector('.onsen_navigator__right-button'));
-        this.rightSectionIcon = angular.element(this.rightSection[0].querySelector('.right-section-icon'));
+        this.rightSection = angular.element(this.toolbarContent[0].querySelector('.ons-navigator__right-button'));
+        this.rightSectionIcon = angular.element(this.rightSection[0].querySelector('.ons-navigator__right-section-icon'));
 
         this.leftButtonClickFn = $parse(scope.onLeftButtonClick);
 
         this.setReady(true);
 
         // fix android 2.3 click event not fired some times when used with sliding menu
-        this.leftButtonContainer.bind('touchend', function() { });
+        this.leftButtonContainer.bind('touchend', function() {});
 
-        this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));				
+        this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));
         this.rightSection.bind('click', this.onRightButtonClicked.bind(this));
         if (scope.page) {
           var options = {
@@ -1017,10 +1027,12 @@ limitations under the License.
         this.attachScopeMethods();
       },
 
-      attachScopeMethods: function(){
+      attachScopeMethods: function() {
         this.scope.pushPage = this.pushPage.bind(this);
         this.scope.popPage = this.popPage.bind(this);
         this.scope.resetToPage = this.resetToPage.bind(this);
+        this.scope.getCurrentNavigatorItem = this.getCurrentNavigatorItem.bind(this);
+        this.scope.pages = this.navigatorItems;
       },
 
       attachFastClickEvent: function(el) {
@@ -1041,14 +1053,14 @@ limitations under the License.
         return this.ready;
       },
 
-      checkiOS7: function() {				
+      checkiOS7: function() {
         if (window.device && window.device.platform) {
           if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
-            setTimeout( this.adjustForiOS7.bind(this), 0);
+            setTimeout(this.adjustForiOS7.bind(this), 0);
           }
         } else {
           var self = this;
-          document.addEventListener("deviceready", function(){
+          document.addEventListener("deviceready", function() {
             if(window.device && window.device.platform){
               self.checkiOS7();
             }
@@ -1065,9 +1077,9 @@ limitations under the License.
         var title = outNavigatorItem.options.title;
         var inBackLabel = angular.element('<div></div>');
         inBackLabel.addClass(
-          'onsen_navigator-back-label onsen_navigator-item ' +
+          'ons-navigator__back-label ons-navigator__item ' +
           'topcoat-navigation-bar__line-height topcoat-icon-button--quiet ' +
-          'navigate_right ' +
+          'ons-navigator__back-label--navigate-right ' +
           this.modifierTemplater('topcoat-navigation-bar--*__line-height')
         );
         inBackLabel.bind('click', this.onLeftButtonClicked.bind(this));
@@ -1081,9 +1093,10 @@ limitations under the License.
         inBackLabel.text(title);
 
         this.toolbarContent[0].offsetWidth;
+
         setTimeout(function(){
-          inBackLabel.removeClass('navigate_right');
-          inBackLabel.addClass('transition navigate_center');
+          inBackLabel.removeClass('ons-navigator__back-label--navigate-right');
+          inBackLabel.addClass('ons-navigator__back-label--transition ons-navigator__back-label--navigate-center');
         }, 10);
 
 
@@ -1093,8 +1106,8 @@ limitations under the License.
             outLabel.remove();
             outLabel.unbind(transitionEnded);
           });
-          outLabel.removeClass('navigate_center');
-          outLabel.addClass('navigate_left');
+          outLabel.removeClass('ons-navigator__back-label--navigate-center');
+          outLabel.addClass('ons-navigator__back-label--navigate-left');
         }
       },
 
@@ -1113,15 +1126,15 @@ limitations under the License.
           });
 
           this.toolbarContent[0].offsetWidth;
-          outLabel.removeClass('transition navigate_center');
-          outLabel.addClass('transition navigate_right');
+          outLabel.removeClass('ons-navigator__back-label--transition ons-navigator__back-label--navigate-center');
+          outLabel.addClass('ons-navigator__back-label--transition ons-navigator__back-label--navigate-right');
         }
 
 
         if (inLabel) {
           this.toolbarContent[0].offsetWidth;
-          inLabel.removeClass('navigate_left');
-          inLabel.addClass('transition navigate_center');
+          inLabel.removeClass('ons-navigator__back-label--navigate-left');
+          inLabel.addClass('ons-navigator__back-label--transition ons-navigator__back-label--navigate-center');
           inLabel.bind('click', this.onLeftButtonClicked.bind(this));
           this.attachFastClickEvent(inLabel[0]);
         }
@@ -1134,7 +1147,7 @@ limitations under the License.
       onLeftButtonClicked: function() {
         var onLeftButtonClick = this.getCurrentNavigatorItem().options.onLeftButtonClick;
         if (onLeftButtonClick) {
-          var onLeftButtonClickFn = $parse(onLeftButtonClick);							
+          var onLeftButtonClickFn = $parse(onLeftButtonClick);
           onLeftButtonClickFn(this.scope.$parent);
         } else {
           if (this.canPopPage()) {
@@ -1166,9 +1179,9 @@ limitations under the License.
         var inTitle = inNavigatorItem.options.title || '';
         var inTitleElement = angular.element('<span>' + inTitle + '</span>');
         inTitleElement.attr('class', 
-          'onsen_navigator-item onsen_navigator-title ' +
+          'ons-navigator__item ons-navigator__title ' +
           'topcoat-navigation-bar__title topcoat-navigation-bar__line-height ' +
-          'center transition animate-right ' +
+          'center ons-navigator__title--transition ons-navigator__title--animate-right ' +
           this.modifierTemplater('topcoat-navigation-bar--*_title') + ' ' +
           this.modifierTemplater('topcoat-navigation-bar--*_line-height')
         );
@@ -1180,10 +1193,10 @@ limitations under the License.
         });
         inNavigatorItem.titleElement = inTitleElement;
         setTimeout(function(){
-          inTitleElement.removeClass('animate-right');
-          inTitleElement.addClass('animate-center');
-          outTitleElement.removeClass('animate-center');
-          outTitleElement.addClass('transition animate-left');
+          inTitleElement.removeClass('ons-navigator__title--animate-right');
+          inTitleElement.addClass('ons-navigator__title--animate-center');
+          outTitleElement.removeClass('ons-navigator__title--animate-center');
+          outTitleElement.addClass('ons-navigator__title--transition ons-navigator__title--animate-left');
         }, 10);
       },
 
@@ -1196,7 +1209,7 @@ limitations under the License.
             rightButtonIconElement = angular.element('<i></i>');
             rightButtonIconElement.addClass(
               inNavigatorItem.options.rightButtonIcon +
-              ' topcoat-navigation-bar__line-height onsen_fade ' +
+              ' topcoat-navigation-bar__line-height ons-navigator--fade ' +
               this.modifierTemplater('topcoat-navigation-bar--*__line-height')
             );
             this.rightSectionIcon.append(rightButtonIconElement); // fix bug on ios. strange that we cant use rightSectionIcon.append() here
@@ -1205,15 +1218,15 @@ limitations under the License.
 
           this.rightSection[0].offsetWidth;
           setTimeout(function(){
-            rightButtonIconElement.removeClass('hide');
-            rightButtonIconElement.addClass('transition show');
-          }, 10);							
+            rightButtonIconElement.removeClass('ons-navigator__right-button-container--hidden');
+            rightButtonIconElement.addClass('ons-navigator__right-button-container--transition ons-navigator__right-button-container--visible');
+          }, 10);
         }
 
         if (outNavigatorItem && outNavigatorItem.rightButtonIconElement) {
           var rightButton = outNavigatorItem.rightButtonIconElement;
-          rightButton.removeClass('show');
-          rightButton.addClass('transition hide');
+          rightButton.removeClass('ons-navigator__right-button-container--visible');
+          rightButton.addClass('ons-navigator__right-button-container--transition ons-navigator__right-button-container--hidden');
           rightButton.bind(TRANSITION_END, function transitionEnded(e) {
             rightButton.remove();
             rightButton.unbind(transitionEnded);
@@ -1226,8 +1239,8 @@ limitations under the License.
         if (outNavigatorItem.rightButtonIconElement) {
           var outRightButton = outNavigatorItem.rightButtonIconElement;
           this.toolbarContent[0].offsetWidth;
-          outRightButton.removeClass('show');
-          outRightButton.addClass('transition hide');
+          outRightButton.removeClass('ons-navigator__right-button--visible');
+          outRightButton.addClass('ons-navigator__right-button--transition ons-navigator__right-button--hidden');
           outRightButton.bind(TRANSITION_END, function transitionEnded(e) {
             outRightButton.remove();
             outRightButton.unbind(transitionEnded);
@@ -1237,8 +1250,8 @@ limitations under the License.
           var rightButton = inNavigatorItem.rightButtonIconElement;
           this.rightSectionIcon.append(rightButton);
           this.rightSection[0].offsetWidth;
-          rightButton.removeClass('hide');
-          rightButton.addClass('transition show');
+          rightButton.removeClass('ons-navigator__right-button--hidden');
+          rightButton.addClass('ons-navigator__right-button--transition ons-navigator__right-button--visible');
         }
       },
 
@@ -1278,15 +1291,15 @@ limitations under the License.
         this.toolbarContent[0].offsetWidth;
         var that = this;
         setTimeout(function(){
-          that.leftButtonContainer.removeClass('hide');
-          that.leftButtonContainer.addClass('transition show');
+          that.leftButtonContainer.removeClass('ons-navigator__left-button-container--hidden');
+          that.leftButtonContainer.addClass('ons-navigator__left-button-container--transition ons-navigator__left-button-container--visible');
         }, 200);
 
       },
 
       hideBackButton: function() {
-        this.leftButtonContainer.removeClass('show');
-        this.leftButtonContainer.addClass('hide');
+        this.leftButtonContainer.removeClass('ons-navigator__left-button-container--visible');
+        this.leftButtonContainer.addClass('ons-navigator__left-button-container--hidden');
       },
 
       animateTitleOut: function(currentNavigatorItem, previousNavigatorItem) {
@@ -1299,10 +1312,10 @@ limitations under the License.
           outTitleElement.remove();
           outTitleElement.unbind(transitionEnded);
         });
-        outTitleElement.removeClass('animate-center');
-        outTitleElement.addClass('transition animate-right');
-        inTitleElement.removeClass('animate-left');
-        inTitleElement.addClass('animate-center');
+        outTitleElement.removeClass('ons-navigator__title--animate-center');
+        outTitleElement.addClass('ons-navigator__title--transition ons-navigator__title--animate-right');
+        inTitleElement.removeClass('ons-navigator__title--animate-left');
+        inTitleElement.addClass('ons-navigator__title--animate-center');
       },
 
       animatePageIn: function(inPage, outPage) {
@@ -1313,16 +1326,16 @@ limitations under the License.
 
         // wait 10ms fo reflow
         setTimeout(function(){
-          inPage.attr("class", "onsen_navigator-pager transition navigator_center");
-          outPage.attr("class", "onsen_navigator-pager transition navigate_left");
+          inPage.attr("class", "ons-navigator__pager ons-navigator__pager--transition ons-navigator__pager--navigate-center");
+          outPage.attr("class", "ons-navigator__pager ons-navigator__pager--transition ons-navigator__pager--navigate-left");
         }, 10);
 
       },
 
       animatePageOut: function(currentPage, previousPage) {
-        previousPage.attr("class", "onsen_navigator-pager navigate_left");
+        previousPage.attr("class", "ons-navigator__pager ons-navigator__pager--navigate-left");
         this.element[0].offsetWidth;
-        previousPage.attr("class", "onsen_navigator-pager transition navigator_center");
+        previousPage.attr("class", "ons-navigator__pager ons-navigator__pager--transition ons-navigator__pager--navigator-center");
 
         var that = this;
         currentPage.bind(TRANSITION_END, function transitionEnded(e) {
@@ -1335,7 +1348,7 @@ limitations under the License.
           that.onTransitionEnded();
         });
 
-        currentPage.attr("class", "onsen_navigator-pager transition navigate_right");
+        currentPage.attr("class", "ons-navigator__pager ons-navigator__pager--transition ons-navigator__pager--navigate-right");
       },
 
       isEmpty: function() {
@@ -1371,13 +1384,13 @@ limitations under the License.
 
       generatePageEl: function(pageContent, options){
         var page = angular.element('<div></div>');
-        page.addClass('onsen_navigator-pager');
+        page.addClass('ons-navigator__pager');
         var blackMask = angular.element('<div></div>');
-        blackMask.addClass('onsen_navigator-black-mask');
+        blackMask.addClass('ons-navigator__black-mask');
         page.append(blackMask);
 
         var navigatorPage = angular.element('<div></div>');
-        navigatorPage.addClass('navigator-page page ons-navigator-inner');
+        navigatorPage.addClass('ons-navigator__page topcoat-page ons-navigator-inner');
         navigatorPage.append(pageContent);
 
         page.append(navigatorPage);
@@ -1431,9 +1444,9 @@ limitations under the License.
         if (!this.isEmpty()) {
           var previousNavigatorItem = this.navigatorItems[this.navigatorItems.length - 1];
           var previousPage = previousNavigatorItem.page;
-          pager.addClass('navigate_right');
+          pager.addClass('ons-navigator__pager--navigate-right');
 
-          setTimeout(function(){
+          setTimeout(function() {
             this.animatePageIn(pager, previousPage);
             this.animateTitleIn(navigatorItem, previousNavigatorItem);
 
@@ -1444,13 +1457,15 @@ limitations under the License.
         } else {
           // root page
           var titleElement = angular.element('<div></div>');
+
           titleElement.addClass(
-            'onsen_navigator-item onsen_navigator-title ' +
+            'ons-navigator__item ons-navigator__title ' +
             'topcoat-navigation-bar__title topcoat-navigation-bar__line-height ' +
-            'center animate-center ' + 
+            'center ons-navigator__title--animate-center ' + 
             this.modifierTemplater('topcoat-navigation-bar--*__title') + ' ' +
             this.modifierTemplater('topcoat-navigation-bar--*__line-height')
           );
+
           if (options.title) {
             titleElement.text(options.title);
           }
@@ -1463,36 +1478,49 @@ limitations under the License.
         this.setLeftButton(navigatorItem);
       },
 
+      appendPage: function(templateHTML, options) {
+        var div = document.createElement('div');
+        div.className = 'full-width full-height';
+        div.innerHTML = templateHTML;
+        var pageContent = angular.element(div.cloneNode(true));
+        var pageEl = this.generatePageEl(pageContent, options);
+        var pageScope = this.createPageScope();
+        var compiledPage = this.compilePageEl(pageEl, pageScope);
+        this._pushPageDOM(options.page, div, compiledPage, pageScope, options);
+      },
+
       pushPage: function(page, options) {
         if (options && typeof options != "object") {
           throw new Error('options must be an objected. You supplied ' + options);
         }
+        options = options || {};
+        options.page = page;
+
         if (!this.isReady()) {
           return;
         }
 
-        var that = this;
+        var that = this,
+          templateHTML = $templateCache.get(page);
 
         this.setReady(false);
 
-        $http({
-          url: page,
-          method: 'GET',
-          cache: PredefinedPageCache
-        }).error(function(e) {
-          that.onTransitionEnded();
-          console.error(e);
-        }).success(function(data, status, headers, config) {
-          var div = document.createElement('div');
-          div.innerHTML = data; 
-          var pageContent = angular.element(div.cloneNode(true));
-          var pageEl = this.generatePageEl(pageContent, options);
-          var pageScope = this.createPageScope();
-          var compiledPage = this.compilePageEl(pageEl, pageScope);
-          this._pushPageDOM(page, div, compiledPage, pageScope, options);
-        }.bind(this)).error(function(data, status, headers, config) {
-          console.error('error', data, status);
-        });
+        if (templateHTML) {
+          this.appendPage(templateHTML, options);
+        } else {
+          $http({
+              url: page,
+              method: 'GET',
+              cache: PredefinedPageCache
+            }).error(function(e) {
+              that.onTransitionEnded();
+              console.error(e);
+            }).success(function(templateHTML, status, headers, config) {
+              this.appendPage(templateHTML, options);
+            }.bind(this)).error(function(data, status, headers, config) {
+            console.error('error', data, status);
+          });
+        }
       },
 
       popPage: function() {
@@ -1514,7 +1542,7 @@ limitations under the License.
         this.setLeftButton(previousNavigatorItem);
         this.animateRightButtonOut(previousNavigatorItem, currentNavigatorItem);
         currentNavigatorItem.pageScope.$destroy();
-      }					
+      }
     });
 
     return Navigator;
@@ -1524,7 +1552,7 @@ limitations under the License.
     return {
       restrict: 'E',
       replace: false,
-      transclude: true,			
+      transclude: true,
       scope: {
         title: '@',
         page: '@',
@@ -1533,7 +1561,7 @@ limitations under the License.
         rightButtonIcon: '@',
         onLeftButtonClick: '@',
         onRightButtonClick: '@'
-      },			
+      },
 
       compile: function(element, attrs, transclude) {
         var path = ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/navigator.tpl';
@@ -1541,7 +1569,7 @@ limitations under the License.
         var modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
 
         return {
-          pre: function preLink(scope, iElement, iAttrs, controller){	
+          pre: function preLink(scope, iElement, iAttrs, controller){
             // Without templateUrl, we must manually link the scope
             scope.modifierTemplater = modifierTemplater;
             $compile(iElement.children())(scope);
@@ -1574,7 +1602,6 @@ limitations under the License.
           }
         };
       }
-
     };
   });
 })();
@@ -1592,6 +1619,8 @@ limitations under the License.
         $rootScope.ons.navigator.pushPage = this.pushPage.bind(this);
         $rootScope.ons.navigator.popPage = this.popPage.bind(this);
         $rootScope.ons.navigator.resetToPage = this.resetToPage.bind(this);
+        $rootScope.ons.navigator.getCurrentPage = this.getCurrentPage.bind(this);
+        $rootScope.ons.navigator.getPages = this.getPages.bind(this);
       },
 
       _findNavigator: function($event) {
@@ -1647,6 +1676,20 @@ limitations under the License.
 
         var navigator = this._findNavigator($event);
         navigator.popPage();
+      },
+
+      getCurrentPage: function() {
+        this._checkExistence();
+
+        var navigator = this._findNavigator();
+        return navigator.getCurrentNavigatorItem();
+      },
+
+      getPages: function() {
+        this._checkExistence();
+
+        var navigator = this._findNavigator();
+        return navigator.pages;
       }
     });
 
@@ -1816,11 +1859,11 @@ limitations under the License.
       transclude: true,
       scope: {
         align: '@'
-      },			
+      },
       templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/row.tpl',
-      compile: function(elt, attr, transclude) {				
+      compile: function(elt, attr, transclude) {
         return function(scope, elt, attr) {
-          transclude(scope.$parent, function(clone) {						
+          transclude(scope.$parent, function(clone) {
             elt.append(clone);
           });
         };
@@ -1865,7 +1908,7 @@ limitations under the License.
         this.isReady = true;
         this.attachMethods();
 
-        if(scope.page){
+        if (scope.page) {
           this.resetToPage(scope.page);
         }
       },
@@ -1878,14 +1921,14 @@ limitations under the License.
       animateInBehindPage: function() {
         var behindPage = this.screenItems[this.screenItems.length - 2].pageElement;
         try {
-          behindPage.attr('class', 'screen-page transition modal-behind');
+          behindPage.attr('class', 'ons-screen__page-container ons-screen__page-container--transition ons-screen__page-container--modal-behind');
         } catch(e) {
           console.log(e);
         }
       },
 
       animateInCurrentPage: function(pager) {
-        pager.attr("class", "screen-page unmodal");
+        pager.attr("class", "ons-screen__page-container ons-screen__page-container--unmodal");
         var that = this;
         pager.bind(TRANSITION_START, function transitionEnded() {
           that.isReady = false;
@@ -1896,7 +1939,7 @@ limitations under the License.
 
         setTimeout(function() {
           requestAnimationFrame(function() {
-            pager.attr("class", "screen-page transition screen-center");
+            pager.attr("class", "ons-screen__page-container ons-screen__page-container--transition ons-screen__page-container--screen-center");
             that.animateInBehindPage();
           });
         }, 10);
@@ -1904,7 +1947,7 @@ limitations under the License.
 
       animateOutBehindPage: function() {
         var behindPage = this.screenItems[this.screenItems.length - 1].pageElement;
-        behindPage.attr('class', 'screen-page transition');
+        behindPage.attr('class', 'ons-screen__page-container ons-screen__page-container--transition');
       },
 
       isEmpty: function() {
@@ -1912,20 +1955,20 @@ limitations under the License.
       },
 
       onPageAdded: function(page) {
-        var blackMask = angular.element(page[0].querySelector('.onsen_screen-black-mask'));
-        blackMask.removeClass('hide');
+        var blackMask = angular.element(page[0].querySelector('.ons-screen__black-mask'));
+        blackMask.removeClass('ons-screen__black-mask--hidden');
       },
 
       generatePageEl: function(pageContent){
         var pageEl = angular.element('<div></div>');
-        pageEl.addClass('screen-page');
+        pageEl.addClass('onsne-screen__page-container');
 
         var blackMask = angular.element('<div></div>');
-        blackMask.addClass('onsen_screen-black-mask hide');
+        blackMask.addClass('ons-screen__black-mask ons-screen__black-mask--hidden');
         pageEl.append(blackMask);
 
         var pageContainer = angular.element('<div></div>');
-        pageContainer.addClass('screen-page__container ons-screen-inner');
+        pageContainer.addClass('ons-screen__page ons-screen-inner');
         pageEl.append(pageContainer);
 
         pageContainer.append(pageContent);
@@ -2007,7 +2050,7 @@ limitations under the License.
         var screenItem = this.screenItems.pop();
         var currentPage = screenItem.pageElement;
         this.animateOutBehindPage();
-        currentPage.attr("class", "screen-page transition unmodal");
+        currentPage.attr("class", "ons-screen__page-container ons-screen__page-container--transition ons-screen__page-container--unmodal");
         var that = this;
 
         currentPage.bind(TRANSITION_START, function transitionEnded() {
@@ -2042,11 +2085,13 @@ limitations under the License.
 
     return {
       restrict: 'E',
-      replace: false,
+      replace: true,
       transclude: true,
       scope: {
         page: '@'
       },
+
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/screen.tpl',
 
       compile: function(element, attrs, transclude) {
         return function(scope, element, attrs) {
@@ -2054,7 +2099,6 @@ limitations under the License.
           OnsenUtil.declareVarAttribute(attrs, screen);
 
           if (!attrs.page) {
-
             var pageScope = screen.createPageScope();
 
             transclude(pageScope, function(pageContent) {
@@ -2169,23 +2213,21 @@ limitations under the License.
   directives.directive('onsScrollable', function(ONSEN_CONSTANTS, $timeout) {
     return {
       restrict: 'A',
-      replace: false,
+      replace: true,
       transclude: false,
       link: function(scope, element, attrs) {
         // inifinte scroll
 
         var scrollWrapper;
-        if (!element.hasClass('scroller-wrapper')) {
-          console.error('missing .scroller-wrapper class for ons-scrollable');
+        if (!element.hasClass('ons-scroller')) {
+          console.error('missing .ons-scroller class for ons-scrollable');
           return;
         }
-
-
 
         scrollWrapper = element[0];
         var offset = parseInt(attrs.threshold) || 10;
 
-        if(scope.onScrolled){
+        if (scope.onScrolled) {
           scrollWrapper.addEventListener('scroll', function() {
             if (scope.infinitScrollEnable) {
               var scrollTopAndOffsetHeight = scrollWrapper.scrollTop + scrollWrapper.offsetHeight;
@@ -2195,7 +2237,7 @@ limitations under the License.
                 scope.onScrolled();
               }
             }
-          });	
+          });
         }
 
 
@@ -2211,21 +2253,21 @@ limitations under the License.
             });
 
             iScroll.on('scrollStart', function(e) {
-              var scrolled = iScroll.y - offset;							
-              if (scrolled < (iScroll.maxScrollY + 40) ) {
+              var scrolled = iScroll.y - offset;
+              if (scrolled < (iScroll.maxScrollY + 40)) {
                 // TODO: find a better way to know when content is upated so we can refresh
                 iScroll.refresh();
               }
             });
 
-            if(scope.onScrolled){
+            if (scope.onScrolled) {
               iScroll.on('scrollEnd', function(e) {
                 var scrolled = iScroll.y - offset;
                 if (scrolled < iScroll.maxScrollY) {
                   // console.log('we are there!');
                   scope.onScrolled();
                 }
-              });	
+              });
             }
 
           }, 500);
@@ -2260,7 +2302,7 @@ limitations under the License.
   directives.directive('onsScroller', function(ONSEN_CONSTANTS, $timeout) {
     return {
       restrict: 'E',
-      replace: false,
+      replace: true,
       transclude: true,
       scope: {
         onScrolled: '&',
@@ -2332,7 +2374,7 @@ limitations under the License.
   'use strict';
   var directives = angular.module('onsen.directives');
 
-  directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuStack, OnsenUtil, PredefinedPageCache) {
+  directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $templateCache, $compile, SlidingMenuStack, OnsenUtil, PredefinedPageCache) {
     return {
       restrict: 'E',
       replace: false,
@@ -2346,7 +2388,6 @@ limitations under the License.
       },
       templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
       link: function(scope, element, attrs) {
-
         var MAIN_PAGE_RATIO = 0.9;
         var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
         var BROWSER_TRANSFORMS = [
@@ -2430,7 +2471,7 @@ limitations under the License.
             this.recalculateMAX();
           },
 
-          onMaxSlideDistanceChanged: function(){						
+          onMaxSlideDistanceChanged: function(){
             this.recalculateMAX();
           },
 
@@ -2442,7 +2483,7 @@ limitations under the License.
               }else if(maxDistance.indexOf('%') > 0){
                 maxDistance = maxDistance.replace('%', '');
                 maxDistance = parseFloat(maxDistance) / 100 * this.abovePage.clientWidth;
-              }							
+              }
             }
             if (maxDistance) {
               this.MAX = parseInt(maxDistance, 10);
@@ -2458,37 +2499,68 @@ limitations under the License.
           },
 
           bindEvents: function() {
-            this.hammertime = new Hammer(this.el);						
+            this.hammertime = new Hammer(this.el);
             this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
           },
 
+          appendAbovePage: function(templateHTML) {
+            var pageElement = angular.element('<div></div>');
+            pageElement.addClass('page');
+            pageElement[0].style.opacity = 0;
+            var pageScope = scope.$parent.$new();
+            var pageContent = $compile(templateHTML)(pageScope);
+            pageElement.append(pageContent);
+            this.$abovePage.append(pageElement);
+
+            // prevent black flash
+            setTimeout(function() {
+              pageElement[0].style.opacity = 1;
+              if (this.currentPageElement) {
+                this.currentPageElement.remove();
+                this.currentPageScope.$destroy();
+              }
+              this.currentPageElement = pageElement;
+              this.currentPageScope = pageScope;
+            }.bind(this), 0);
+
+            this.currentPageUrl = pageUrl;
+          },
+
+          appendBehindPage: function(templateHTML) {
+            var page = angular.element('<div></div>');
+            page.addClass('page');
+            var pageScope = scope.$parent.$new();
+            var pageContent = $compile(templateHTML)(pageScope);
+            page.append(pageContent);
+            this.$behindPage.append(page);
+
+            if (this.currentBehindPageScope) {
+              this.currentBehindPageScope.$destroy();
+              this.currentBehindPageElement.remove();
+            }
+
+            this.currentBehindPageElement = page;
+            this.currentBehindPageScope = pageScope;
+          },
+
           attachMethods: function() {
-            this.setBehindPage = scope.setBehindPage = function(page) {
+            scope.setBehindPage = function(page) {
               if (page) {
-                $http({
-                  url: page,
-                  method: "GET",
-                  cache: PredefinedPageCache
-                }).error(function(e) {
-                  console.error(e);
-                }).success(function(data, status, headers, config) {
-                  var templateHTML = angular.element(data.trim());
-                  var page = angular.element('<div></div>');
-                  page.addClass('page');
-                  var pageScope = scope.$parent.$new();
-                  var pageContent = $compile(templateHTML)(pageScope);
-                  page.append(pageContent);
-                  this.$behindPage.append(page);
-
-                  if(this.currentBehindPageScope){
-                    this.currentBehindPageScope.$destroy();
-                    this.currentBehindPageElement.remove();
-                  }
-
-                  this.currentBehindPageElement = page;
-                  this.currentBehindPageScope = pageScope;
-
-                }.bind(this));
+                var templateHTML = $templateCache(page);
+                if (templateHTML) {
+                  this.appendBehindPage(templateHTML);
+                } else {
+                  $http({
+                      url: page,
+                      method: "GET",
+                      cache: PredefinedPageCache
+                    }).error(function(e) {
+                      console.error(e);
+                    }).success(function(data, status, headers, config) {
+                    templateHTML = angular.element(data.trim());
+                    this.appendBehindPage(templateHTML);
+                  }.bind(this));
+                }
               } else {
                 throw new Error('cannot set undefined page');
               }
@@ -2501,85 +2573,84 @@ limitations under the License.
               }
 
               if (pageUrl) {
-                $http({
-                  url: pageUrl,
-                  method: "GET",
-                  cache: PredefinedPageCache
-                }).error(function(e) {
-                  console.error(e);
-                }).success(function(data, status, headers, config) {
-                  var templateHTML = angular.element(data.trim());
-                  var pageElement = angular.element('<div></div>');
-                  pageElement.addClass('page');
-                  pageElement[0].style.opacity = 0;
-                  var pageScope = scope.$parent.$new();
-                  var pageContent = $compile(templateHTML)(pageScope);
-                  pageElement.append(pageContent);
-                  this.$abovePage.append(pageElement);
-
-                  // prevent black flash
-                  setTimeout(function() {
-                    pageElement[0].style.opacity = 1;
-                    if (this.currentPageElement) {
-                      this.currentPageElement.remove();
-                      this.currentPageScope.$destroy();
-                    }
-                    this.currentPageElement = pageElement;
-                    this.currentPageScope = pageScope;
-                  }.bind(this), 0);
-
-                  this.currentPageUrl = pageUrl;
-                }.bind(this));
+                var templateHtml = $templateCache(page);
+                if (templateHTML) {
+                  this.appendAbovePage(templateHTML);
+                } else {
+                  $http({
+                      url: pageUrl,
+                      method: "GET",
+                      cache: PredefinedPageCache
+                    }).error(function(e) {
+                      console.error(e);
+                    }).success(function(data, status, headers, config) {
+                    templateHTML = angular.element(data.trim());
+                    this.appendAbovePage(templateHTML);
+                  }.bind(this));
+                }
               } else {
                 throw new Error('cannot set undefined page');
               }
             }.bind(this);
           },
 
+          handleEvent: function(ev) {
+            if (this.isInsideIgnoredElement(ev.target)){
+              ev.gesture.stopDetect();
+            }
 
-          handleEvent: function(ev) {						
             switch (ev.type) {
 
-            case 'touch':
-              if(this.isClosed()){
-                if(!this.isInsideSwipeTargetArea(ev.gesture.center.pageX)){
-                  ev.gesture.stopDetect();
-                }	
-              }
+              case 'touch':
+                if (this.isClosed()) {
+                  if (!this.isInsideSwipeTargetArea(ev.gesture.center.pageX)) {
+                    ev.gesture.stopDetect();
+                  }
+                }
 
-              break;
+                break;
 
-            case 'dragleft':
-            case 'dragright':
-              ev.gesture.preventDefault();
-              var deltaX = ev.gesture.deltaX;
-              this.currentX = this.startX + deltaX;
-              if (this.currentX >= 0) {
-                this.translate(this.currentX);
-              }
-              break;
+              case 'dragleft':
+              case 'dragright':
+                ev.gesture.preventDefault();
+                var deltaX = ev.gesture.deltaX;
+                this.currentX = this.startX + deltaX;
+                if (this.currentX >= 0) {
+                  this.translate(this.currentX);
+                }
+                break;
 
-            case 'swipeleft':
-              ev.gesture.preventDefault();
-              this.close();
-              break;
-
-            case 'swiperight':
-              ev.gesture.preventDefault();
-              this.open();
-              break;
-
-            case 'release':
-              if (this.currentX > this.MAX / 2) {
-                this.open();
-              } else {
+              case 'swipeleft':
+                ev.gesture.preventDefault();
                 this.close();
-              }
-              break;
+                break;
+
+              case 'swiperight':
+                ev.gesture.preventDefault();
+                this.open();
+                break;
+
+              case 'release':
+                if (this.currentX > this.MAX / 2) {
+                  this.open();
+                } else {
+                  this.close();
+                }
+                break;
             }
           },
 
-          isInsideSwipeTargetArea: function(x){
+          isInsideIgnoredElement: function(el) {
+            do {
+              if (el.getAttribute && el.getAttribute("sliding-menu-ignore")){
+              	return true;
+              }                
+              el = el.parentNode;
+            } while (el);
+            return false;
+          },
+
+          isInsideSwipeTargetArea: function(x) {
             return x < this.swipeTargetWidth;
           },
 
@@ -2588,7 +2659,7 @@ limitations under the License.
             this.$behindPage.removeClass('transition');
           },
 
-          isClosed: function(){
+          isClosed: function() {
             return this.startX === 0;
           },
 
@@ -2634,14 +2705,16 @@ limitations under the License.
               this.abovePage.style[property] = aboveTransform;
               this.behindPage.style[property] = behindTransform;
             }
+
             if(this.isReady){
               this.behindPage.style.opacity = opacity;
-            }						
+            }
             this.currentX = x;
           }
         });
 
         var swiper = new Swiper(element);
+
         var slidingMenuView = {
           openMenu: function() {
             return swiper.open();
@@ -2688,7 +2761,7 @@ limitations under the License.
         $rootScope.ons.slidingMenu.closeMenu = this.closeMenu.bind(this);
       },
 
-      _findClosestSlidingMenu: function($event) {				
+      _findClosestSlidingMenu: function($event) {
         var slidingMenu;
         if ($event) {
           var slidingMenuElement = $rootScope.ons.upTo($event.target, 'ons-sliding-menu');
@@ -2780,7 +2853,10 @@ limitations under the License.
   'use strict';
   var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-  directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewStack, OnsenUtil, PredefinedPageCache) {
+  directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, $templateCache, SplitViewStack, OnsenUtil, PredefinedPageCache) {
+
+    var ON_PAGE_READY = "onPageReady";
+
     return {
       restrict: 'E',
       replace: false,
@@ -2789,6 +2865,7 @@ limitations under the License.
         secondaryPage: '@',
         mainPage: '@',
         collapse: '@',
+        swipable: '@',
         mainPageWidth: '@'
       },
       templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
@@ -2826,87 +2903,105 @@ limitations under the License.
             this.boundHammerEvent = this.handleEvent.bind(this);
             this.bindEvents();
 
+            scope.$watch('swipable', this.onSwipableChanged.bind(this));
+
             window.addEventListener("orientationchange", this.onOrientationChange.bind(this));
             window.addEventListener('resize', this.onResize.bind(this));
 
             this.attachMethods();
 
-            if(scope.mainPage){
+            if (scope.mainPage) {
               scope.setMainPage(scope.mainPage);
             }
 
-            if(scope.secondaryPage){
+            if (scope.secondaryPage) {
               scope.setSecondaryPage(scope.secondaryPage);
             }
 
-            window.setTimeout(function(){
-              this.considerChangingCollapse();							
+            window.setTimeout(function() {
+              this.considerChangingCollapse();
             }.bind(this), 100);
           },
 
-          attachMethods: function(){
-            this.setSecondaryPage = scope.setSecondaryPage = function(page) {
+          appendSecondPage: function(templateHTML) {
+            var page = angular.element('<div></div>');
+            page.addClass('page');
+            var pageScope = scope.$parent.$new();
+            var pageContent = $compile(templateHTML)(pageScope);
+            page.append(pageContent);
+            this.$behindPage.append(page);
+
+
+            if (this.currentBehindPageElement) {
+              this.currentBehindPageElement.remove();
+              this.currentBehindPageScope.$destroy();
+            }
+
+            this.currentBehindPageElement = page;
+            this.currentBehindPageScope = pageScope;
+          },
+
+          appendMainPage: function(templateHTML) {
+            var page = angular.element('<div></div>');
+            page.addClass('page');
+            page[0].style.opacity = 0;
+            var pageScope = scope.$parent.$new();
+            var pageContent = $compile(templateHTML)(pageScope);
+            page.append(pageContent);
+            this.$abovePage.append(page);
+
+            // prevent black flash
+            setTimeout(function() {
+              page[0].style.opacity = 1;
+              if (this.currentPage) {
+                this.currentPage.remove();
+                this.currentPageScope.$destroy();
+              }
+              this.currentPage = page;
+              this.currentPageScope = pageScope;
+            }.bind(this), 0);
+          },
+
+          attachMethods: function() {
+            scope.setSecondaryPage = function(page) {
               if (page) {
-                $http({
-                  url: page,
-                  method: "GET",
-                  cache: PredefinedPageCache
-                }).error(function(e){
-                  console.error(e);
-                }).success(function(data, status, headers, config) {
-                  var templateHTML = angular.element(data.trim());
-                  var page = angular.element('<div></div>');
-                  page.addClass('page');		
-                  var pageScope = scope.$parent.$new();
-                  var pageContent = $compile(templateHTML)(pageScope);
-                  page.append(pageContent);
-                  this.$behindPage.append(page);	
-
-
-                  if(this.currentBehindPageElement){
-                    this.currentBehindPageElement.remove();
-                    this.currentBehindPageScope.$destroy();
-                  }
-
-                  this.currentBehindPageElement = page;
-                  this.currentBehindPageScope = pageScope;
-
-                }.bind(this));
+                var templateHTML = $templateCache.get(page);
+                if (templateHTML) {
+                  this.appendSecondPage(templateHTML);
+                } else {
+                  $http({
+                      url: page,
+                      method: "GET",
+                      cache: PredefinedPageCache
+                    }).error(function(e) {
+                      console.error(e);
+                    }).success(function(data, status, headers, config) {
+                    templateHTML = angular.element(data.trim());
+                    this.appendSecondPage(templateHTML);
+                  }.bind(this));
+                }
               } else {
                 throw new Error('cannot set undefined page');
               }
             }.bind(this);
 
-            this.setMainPage = scope.setMainPage = function(page) {
+            scope.setMainPage = function(page) {
               if (page) {
-                $http({
-                  url: page,
-                  method: "GET",
-                  cache: PredefinedPageCache
-                }).error(function(e){
-                  console.error(e);
-                }).success(function(data, status, headers, config) {
-                  var templateHTML = angular.element(data.trim());
-                  var page = angular.element('<div></div>');
-                  page.addClass('page');
-                  page[0].style.opacity = 0;
-                  var pageScope = scope.$parent.$new();
-                  var pageContent = $compile(templateHTML)(pageScope);
-                  page.append(pageContent);
-                  this.$abovePage.append(page);
-
-                  // prevent black flash
-                  setTimeout(function(){
-                    page[0].style.opacity = 1;
-                    if(this.currentPage){
-                      this.currentPage.remove();
-                      this.currentPageScope.$destroy();
-                    }
-                    this.currentPage = page;
-                    this.currentPageScope = pageScope;
-                  }.bind(this), 0);
-
-                }.bind(this));
+                var templateHTML = $templateCache.get(page);
+                if (templateHTML) {
+                  this.appendMainPage(templateHTML);
+                } else {
+                  $http({
+                      url: page,
+                      method: "GET",
+                      cache: PredefinedPageCache
+                    }).error(function(e) {
+                      console.error(e);
+                    }).success(function(data, status, headers, config) {
+                    templateHTML = angular.element(data.trim());
+                    this.appendMainPage(templateHTML);
+                  }.bind(this));
+                }
               } else {
                 throw new Error('cannot set undefined page');
               }
@@ -2932,65 +3027,66 @@ limitations under the License.
 
           shouldCollapse: function() {
             var orientation = window.orientation;
-            if(orientation === undefined ){
+
+            if (orientation === undefined) {
               orientation = window.innerWidth > window.innerHeight ? 90 : 0;
             }
 
             switch (scope.collapse) {
-            case undefined:
-            case "none":
-              return false;
-
-            case "portrait":
-              if (orientation === 180 || orientation === 0) {
-                return true;
-              } else {
+              case undefined:
+              case "none":
                 return false;
-              }
-              break;
 
-            case "landscape":
-              if (orientation === 90 || orientation === -90) {
-                return true;
-              } else {
-                return false;
-              }
-              break;
-
-            default:
-              // by width
-              if (scope.collapse === undefined) {
-                return false;
-              } else {
-                var widthToken;
-                if (scope.collapse.indexOf('width') >= 0) {
-                  var tokens = scope.collapse.split(' ');
-                  widthToken = tokens[tokens.length - 1];
-                }else{
-                  widthToken = scope.collapse;
+              case "portrait":
+                if (orientation === 180 || orientation === 0) {
+                  return true;
+                } else {
+                  return false;
                 }
+                break;
 
-                if (widthToken.indexOf('px') > 0) {
-                  widthToken = widthToken.substr(0, widthToken.length - 2);
+              case "landscape":
+                if (orientation == 90 || orientation == -90) {
+                  return true;
+                } else {
+                  return false;
                 }
+                break;
 
-                if (isNumber(widthToken)) {
-                  if (window.innerWidth < widthToken) {
-                    return true;
+              default:
+                // by width
+                if (scope.collapse === undefined) {
+                  return false;
+                } else {
+                  var widthToken;
+                  if (scope.collapse.indexOf('width') >= 0) {
+                    var tokens = scope.collapse.split(' ');
+                    widthToken = tokens[tokens.length - 1];
                   } else {
-                    return false;
+                    widthToken = scope.collapse;
                   }
+
+                  if (widthToken.indexOf('px') > 0) {
+                    widthToken = widthToken.substr(0, widthToken.length - 2);
+                  }
+
+                  if (isNumber(widthToken)) {
+                    if (window.innerWidth < widthToken) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  }
+
+                  return false;
                 }
 
-                return false;									
-              }
-
-              break;
+                break;
             }
 
           },
 
-          setSize: function() {						
+          setSize: function() {
             if(!scope.mainPageWidth){
               scope.mainPageWidth = "70";
             }
@@ -3003,10 +3099,10 @@ limitations under the License.
           },
 
           activateCollapseMode: function() {
-            this.behindPage.style.width =  '100%';
+            this.behindPage.style.width = '100%';
             this.abovePage.style.width = '100%';
             this.mode = COLLAPSE_MODE;
-            this.activateHammer();
+            this.onSwipableChanged(scope.swipable);
             this.translate(0);
 
             if (Modernizr.boxshadow) {
@@ -3035,42 +3131,57 @@ limitations under the License.
             this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
           },
 
+          onSwipableChanged: function(swipable) {
+            if (swipable === "" || swipable === undefined) {
+              swipable = true;
+            } else {
+              swipable = (swipable == "true");
+            }
+
+            if (swipable) {
+              this.activateHammer();
+            } else {
+              this.deactivateHammer();
+            }
+          },
+
           handleEvent: function(ev) {
             switch (ev.type) {
 
-            case 'dragleft':
-            case 'dragright':
-              ev.gesture.preventDefault();
-              var deltaX = ev.gesture.deltaX;
-              this.currentX = this.startX + deltaX;
-              if (this.currentX >= 0) {
-                this.translate(this.currentX);
-              }
-              break;
+              case 'dragleft':
+              case 'dragright':
+                ev.gesture.preventDefault();
+                var deltaX = ev.gesture.deltaX;
+                this.currentX = this.startX + deltaX;
+                if (this.currentX >= 0) {
+                  this.translate(this.currentX);
+                }
+                break;
 
-            case 'swipeleft':
-              ev.gesture.preventDefault();
-              this.close();
-              break;
-
-            case 'swiperight':
-              ev.gesture.preventDefault();
-              this.open();
-              break;
-
-            case 'release':
-              if (this.currentX > this.MAX / 2) {
-                this.open();
-              } else {
+              case 'swipeleft':
+                ev.gesture.preventDefault();
                 this.close();
-              }
-              break;
+                break;
+
+              case 'swiperight':
+                ev.gesture.preventDefault();
+                this.open();
+                break;
+
+              case 'release':
+                if (this.currentX > this.MAX / 2) {
+                  this.open();
+                } else {
+                  this.close();
+                }
+                break;
             }
           },
 
           onTransitionEnd: function() {
             this.$abovePage.removeClass('transition');
             this.$behindPage.removeClass('transition');
+            scope.$root.$broadcast(ON_PAGE_READY); //make sure children can do something before the parent.
           },
 
           close: function() {
@@ -3189,10 +3300,12 @@ limitations under the License.
         $rootScope.ons.splitView = {};
         $rootScope.ons.splitView.setMainPage = this.setMainPage.bind(this);
         $rootScope.ons.splitView.setSecondaryPage = this.setSecondaryPage.bind(this);
-        $rootScope.ons.splitView.toggle = this.toggle.bind(this);				
+        $rootScope.ons.splitView.toggle = this.toggle.bind(this);
+        $rootScope.ons.splitView.open = this.open.bind(this);
+        $rootScope.ons.splitView.close = this.close.bind(this);
       },
 
-      _findClosestSplitView: function($event) {				
+      _findClosestSplitView: function($event) {
         var splitView;
         if ($event) {
           var splitViewElement = $rootScope.ons.upTo($event.target, 'ons-split-view');
@@ -3241,6 +3354,20 @@ limitations under the License.
 
         var splitView = this._findClosestSplitView($event);
         splitView.toggle();
+      },
+
+      open: function($event) {
+        this._checkExistence();
+
+        var splitView = this._findClosestSplitView($event);
+        splitView.open();
+      },
+
+      close: function($event) {
+        this._checkExistence();
+
+        var splitView = this._findClosestSplitView($event);
+        splitView.close();
       }
     });
 
@@ -3274,7 +3401,7 @@ limitations under the License.
     return {
       restrict: 'E',
       replace: false,
-      transclude: true,			
+      transclude: true,
       scope: {
         hide: '@',
         onActiveTabChanged: '&'
@@ -3302,7 +3429,7 @@ limitations under the License.
             $index: index,
             $tabItem: tabItem
           });
-        }				
+        }
 
         function onTabbarVisibilityChanged() {
           if ($scope.hideTabs) {
@@ -3460,8 +3587,8 @@ limitations under the License.
 
       init: function() {
         $rootScope.ons = $rootScope.ons || {};
-        $rootScope.ons.tabbar = {};				
-        $rootScope.ons.tabbar.setActiveTab = this.setActiveTab.bind(this);								
+        $rootScope.ons.tabbar = {};
+        $rootScope.ons.tabbar.setActiveTab = this.setActiveTab.bind(this);
       },
 
       _findClosestTabbar: function($event) {
@@ -3500,7 +3627,7 @@ limitations under the License.
 
         var tabbar = this._findClosestTabbar($event);
         tabbar.setActiveTab(index);
-      }	
+      }
     });
 
     return new TabbarStack();
@@ -7377,14 +7504,15 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
 })();
 
 (function() {
-	'use strict';
-	Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function(elem, rule) {
-		Modernizr.addTest(
-			'overflowtouch',
-			window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
-	});
+  'use strict';
+  Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function(elem, rule) {
+    Modernizr.addTest(
+      'overflowtouch',
+      window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
+  });
 
 })();
+
 /* jshint evil:true */
 
 (function(){

@@ -15,52 +15,40 @@
 * limitations under the License.
 *
 */
-
 /*
 * This css is customized for Onsen UI Theming by Mitsunori KUBOTA<mitsunori@asial.co.jp>.
 */
-
 * {
   font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-
 .quarter {
   width: 25%;
 }
-
 .half {
   width: 50%;
 }
-
 .three-quarters {
   width: 75%;
 }
-
 .third {
   width: 33.333%;
 }
-
 .two-thirds {
   width: 66.666%;
 }
-
 .full {
   width: 100%;
 }
-
 .left {
   text-align: left;
 }
-
 .center {
   text-align: center;
 }
-
 .right {
   text-align: right;
 }
-
 .reset-ui {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -85,7 +73,6 @@
   white-space: nowrap;
   overflow: hidden;
 }
-
 /* topdoc
   name: Button
   description: A simple button
@@ -121,42 +108,36 @@
         </div>
     </div>
 */
-
 /* topdoc
   name: Button:Call To Action Button
   markup:
     <button class="topcoat-button--cta" >Button</button>
     <button class="topcoat-button--cta" disabled>Button</button>
 */
-
 /* topdoc
   name: Button:Quiet Button
   markup:
     <button class="topcoat-button--quiet">Button</button>
     <button class="topcoat-button--quiet" disabled>Button</button>
 */
-
 /* topdoc
   name: Button:Large Button
   markup:
     <button class="topcoat-button--large" >Button</button><br>
     <button class="topcoat-button--large" disabled>Button</button>
 */
-
 /* topdoc
   name: Button:Large Quiet Button
   markup:
     <button class="topcoat-button--large--quiet">Button</button>
     <button class="topcoat-button--large--quiet" disabled>Button</button>
 */
-
 /* topdoc
   name: Button:Large Call To Action Button
   markup:
     <button class="topcoat-button--large--cta" >Button</button><br>
     <button class="topcoat-button--large--cta" disabled>Button</button>
 */
-
 .button,
 .topcoat-button,
 .topcoat-button--quiet,
@@ -192,14 +173,12 @@
   overflow: hidden;
   text-decoration: none;
 }
-
 .button--quiet {
   background: transparent;
   border: 1px solid transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 .button--disabled,
 .topcoat-button:disabled,
 .topcoat-button--quiet:disabled,
@@ -215,7 +194,6 @@
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-button,
 .topcoat-button--quiet,
 .topcoat-button--large,
@@ -240,7 +218,6 @@
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-
 .topcoat-button:hover,
 .topcoat-button--quiet:hover,
 .topcoat-button--large:hover,
@@ -250,7 +227,6 @@
   background-color: #535353;
   color: #f3f3f3;
 }
-
 .topcoat-button:active,
 .topcoat-button--large:active,
 .topcoat-button-bar__button:active,
@@ -261,7 +237,6 @@
   box-shadow: none;
   color: #fff;
 }
-
 .topcoat-button:focus,
 .topcoat-button--quiet:focus,
 .topcoat-button--large:focus,
@@ -274,7 +249,6 @@
   box-shadow: none;
   outline: 0;
 }
-
 .topcoat-button--quiet {
   background: transparent;
   border: 1px solid transparent;
@@ -284,11 +258,9 @@
   color: #c0c0c0;
   border: none;
 }
-
 .topcoat-button--quiet:disabled {
   border: none;
 }
-
 .topcoat-button--quiet:hover,
 .topcoat-button--large--quiet:hover {
   text-shadow: 0 1px none;
@@ -298,7 +270,6 @@
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 .topcoat-button--quiet:active,
 .topcoat-button--large--quiet:active {
   color: #f3f3f3;
@@ -311,7 +282,6 @@
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 .topcoat-button--large,
 .topcoat-button--large--quiet {
   font-size: 16px;
@@ -321,7 +291,6 @@
   display: block;
   width: 100%;
 }
-
 .topcoat-button--large--quiet {
   color: #c0c0c0;
   background: transparent;
@@ -330,11 +299,9 @@
   box-shadow: none;
   color: #c0c0c0;
 }
-
 .topcoat-button--large--quiet:active {
   color: inherit;
 }
-
 .topcoat-button--cta,
 .topcoat-button--large--cta {
   border: none;
@@ -345,12 +312,10 @@
   font-weight: 500;
   text-shadow: none;
 }
-
 .topcoat-button--cta:hover,
 .topcoat-button--large--cta:hover {
   background-color: #535353;
 }
-
 .topcoat-button--cta:active,
 .topcoat-button--large--cta:active {
   color: #fff;
@@ -358,7 +323,6 @@
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 .topcoat-button--large--cta {
   font-size: 16px;
   font-weight: 500;
@@ -367,12 +331,10 @@
   display: block;
   width: 100%;
 }
-
 .topcoat-button__spinner {
   border: 3px solid #f3f3f3;
   border: 3px solid #f3f3f3;
 }
-
 /* topdoc
   name: Button Bar
   description: Component of grouped buttons
@@ -451,7 +413,6 @@
       </div>
     </div>
 */
-
 .button-bar,
 .topcoat-button-bar,
 .topcoat-tab-bar {
@@ -461,7 +422,6 @@
   margin: 0;
   padding: 0;
 }
-
 .button-bar__item,
 .topcoat-button-bar__item,
 .topcoat-tab-bar__item {
@@ -470,7 +430,6 @@
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-
 .button-bar__item > input,
 .topcoat-button-bar__item > input,
 .topcoat-tab-bar__item > input {
@@ -483,53 +442,44 @@
   vertical-align: top;
   outline: none;
 }
-
 .button-bar__button {
   -webkit-border-radius: inherit;
   border-radius: inherit;
 }
-
 .button-bar__itemdisabled {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-button-bar {
   margin: inherit;
   border: 0px solid #535353;
 }
-
 .topcoat-button-bar__item {
   border-top: 1px solid #535353;
   border-bottom: 1px solid #535353;
 }
-
 .topcoat-button-bar > .topcoat-button-bar__item:first-child {
   -webkit-border-top-left-radius: 4px;
   border-top-left-radius: 4px;
   -webkit-border-bottom-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-
 .topcoat-button-bar > .topcoat-button-bar__item:last-child {
   -webkit-border-top-right-radius: 4px;
   border-top-right-radius: 4px;
   -webkit-border-bottom-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-
 .topcoat-button-bar__item:first-child > .topcoat-button-bar__button {
   border-left: 1px solid #535353;
   border-right: none;
   border-right: 1px solid #535353;
 }
-
 .topcoat-button-bar__item:last-child > .topcoat-button-bar__button {
   border-left: none;
   border-right: 1px solid #535353;
 }
-
 .topcoat-button-bar__button {
   -webkit-border-radius: inherit;
   border-radius: inherit;
@@ -539,7 +489,6 @@
   border-right: 1px solid #535353;
   width: 100%;
 }
-
 .topcoat-button-bar__button:active,
 :checked + .topcoat-button-bar__button {
   background-color: #3cf !important;
@@ -548,18 +497,15 @@
   border-right: 1px solid #535353;
   border-right: 1px solid #535353;
 }
-
 .topcoat-button-bar__button:hover {
   background-color: #09c;
   color: #050607;
 }
-
 .topcoat-button-bar__button:focus {
   z-index: 1;
   z-index: 1;
   border-right: 1px solid #535353;
 }
-
 /* topdoc
   name: Icon Button
   description: Like button, but it has an icon.
@@ -584,7 +530,6 @@
       <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
 */
-
 .topcoat-icon-button,
 .topcoat-icon-button--quiet {
   padding: 0 9px;
@@ -603,19 +548,16 @@
   border-radius: 4px;
   border-radius: 3px;
 }
-
 .topcoat-icon-button:hover,
 .topcoat-icon-button--quiet:hover {
   background-color: transparent;
   background-color: transparent;
 }
-
 .topcoat-icon-button:active {
   background-color: #09c;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 .topcoat-icon-button:focus,
 .topcoat-icon-button--quiet:focus,
 .topcoat-icon-button--quiet:hover:focus {
@@ -624,7 +566,6 @@
   box-shadow: none;
   outline: 0;
 }
-
 .topcoat-icon-button--quiet {
   background: transparent;
   border: 1px solid transparent;
@@ -634,7 +575,6 @@
   border: none;
   color: #09c;
 }
-
 .topcoat-icon-button--quiet:hover {
   text-shadow: 0 1px none;
   border: 1px solid #09c;
@@ -643,7 +583,6 @@
   box-shadow: none;
   box-shadow: none;
 }
-
 .topcoat-icon-button--quiet:active {
   color: #f3f3f3;
   color: #3cf;
@@ -656,7 +595,6 @@
   box-shadow: none;
   box-shadow: none;
 }
-
 .topcoat-icon,
 .topcoat-icon--large {
   position: relative;
@@ -668,13 +606,11 @@
   vertical-align: middle;
   top: -1px;
 }
-
 .topcoat-icon--large {
   width: 30.857142834px;
   height: 30.857142834px;
   top: -2px;
 }
-
 /* topdoc
   name: Checkbox
   description: Default skin for Topcoat checkbox
@@ -739,7 +675,6 @@
       </ul>
     </div>
 */
-
 /* topdoc
   name: Checkbox:Noborder Checkbox
   markup:
@@ -761,7 +696,6 @@
       Disabled
     </label>
  */
-
 input[type="checkbox"] {
   position: absolute;
   overflow: hidden;
@@ -772,7 +706,6 @@ input[type="checkbox"] {
   vertical-align: top;
   outline: none;
 }
-
 .checkbox,
 .topcoat-checkbox__checkmark {
   -webkit-box-sizing: border-box;
@@ -789,7 +722,6 @@ input[type="checkbox"] {
   -ms-user-select: none;
   user-select: none;
 }
-
 .checkbox__label,
 .topcoat-checkbox {
   position: relative;
@@ -801,14 +733,12 @@ input[type="checkbox"] {
   -ms-user-select: none;
   user-select: none;
 }
-
 .checkbox--disabled,
 input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-
 .checkbox:before,
 .checkbox:after,
 .topcoat-checkbox__checkmark:before,
@@ -816,7 +746,6 @@ input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark {
   content: '';
   position: absolute;
 }
-
 .checkbox:before,
 .topcoat-checkbox__checkmark:before {
   -webkit-box-sizing: border-box;
@@ -825,11 +754,9 @@ input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
-
 .topcoat-checkbox__checkmark {
   height: 18px;
 }
-
 input[type="checkbox"] {
   height: 18px;
   width: 18px;
@@ -838,23 +765,18 @@ input[type="checkbox"] {
   margin-bottom: -18px;
   margin-left: 0;
 }
-
 input[type="checkbox"]:checked {
   background: var-background-color-checked--checkbox;
 }
-
 input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before {
   background: var-background-color--before--checkbox;
 }
-
 input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after {
   opacity: 1;
 }
-
 .topcoat-checkbox {
   line-height: 18px;
 }
-
 .topcoat-checkbox__checkmark:before {
   width: 18px;
   height: 18px;
@@ -868,12 +790,10 @@ input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after {
   box-shadow: none;
   left: 0;
 }
-
 .topcoat-checkbox__checkmark {
   width: 18px;
   height: 18px;
 }
-
 .topcoat-checkbox__checkmark:after {
   top: -1px;
   left: 2px;
@@ -893,14 +813,12 @@ input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after {
   -o-transform: rotate(-50deg);
   transform: rotate(-50deg);
 }
-
 input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before {
   border: none;
   border: 1px solid #535353;
   -webkit-box-shadow: none, none;
   box-shadow: none, none;
 }
-
 input[type="checkbox"]:active + .topcoat-checkbox__checkmark:before {
   border: 1px solid #09c;
   border: 1px solid #535353;
@@ -910,14 +828,12 @@ input[type="checkbox"]:active + .topcoat-checkbox__checkmark:before {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   border: 1px solid #09c;
   background: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 /* topdoc
   name: List
   description: Topcoat default list skin
@@ -969,7 +885,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
       </ul>
     </div>
 */
-
 /* topdoc
   name: List:Noborder List
   markup:
@@ -991,7 +906,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
       <br>
     </div>
  */
-
 /* topdoc
   name: List:Category Header
   markup:
@@ -1016,7 +930,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
       </ul>
     </div>
  */
-
 /* topdoc
   name: List:Tappable List Item
   markup:
@@ -1035,7 +948,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
       <br>
     </div>
  */
-
 .list,
 .topcoat-list {
   padding: 0;
@@ -1052,19 +964,16 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
-
 .list__header,
 .topcoat-list__header {
   margin: 0;
 }
-
 .list__container,
 .topcoat-list__container {
   padding: 0;
   margin: 0;
   list-style-type: none;
 }
-
 .list__item,
 .topcoat-list__item {
   margin: 0;
@@ -1072,13 +981,11 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   position: relative;
   list-style: none;
 }
-
 .topcoat-list {
   border-top: none;
   border-bottom: none;
   background-color: #050607;
 }
-
 .topcoat-list__header {
   padding: 4px 11px;
   font-size: 15px;
@@ -1089,14 +996,12 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   border-top: none;
   border-bottom: 2px solid #3a3d40;
 }
-
 .topcoat-list__container {
   border-top: none;
   color: #f3f3f3;
   padding: 0;
   background-color: var-background-color--list-container;
 }
-
 .topcoat-list__item {
   padding: 11px;
   margin: 0;
@@ -1105,29 +1010,24 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   color: #f3f3f3;
   background-color: #050607;
 }
-
 .topcoat-list__item_active:active {
   background-color: #bdbec2;
 }
-
 .topcoat-list__item:first-child {
   padding-left: var-padding-left--list-item--first;
   margin: var-margin--list-item--first;
   border-top: none;
   border-bottom: var-border-bottom--list-item--first;
 }
-
 .topcoat-list__item:last-child {
   padding-left: var-padding-left--list-item--last;
   margin: var-margin--list-item--last;
   border-top: var-border-top--list-item--last;
   border-bottom: none;
 }
-
 .topcoat-list__item:nth-child(2) {
   border-top: var-border-top--list-item--2;
 }
-
 /* topdoc
   name: Navigation Bar
   description: A place where navigation goes to drink
@@ -1155,7 +1055,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
         <div class="topcoat-navigation-bar__line-height" style="text-align:center">Bottom Toolbar</div>
     </div>
 */
-
 /* topdoc
   name: Navigation Bar:Bottom Bar
   markup:
@@ -1163,7 +1062,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
         <div class="topcoat-navigation-bar__line-height" style="text-align:center">Bottom Toolbar</div>
     </div>
  */
-
 .navigation-bar,
 .topcoat-navigation-bar {
   -webkit-box-sizing: border-box;
@@ -1186,7 +1084,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   -ms-user-select: none;
   user-select: none;
 }
-
 .navigation-bar__item,
 .topcoat-navigation-bar__item {
   -webkit-box-sizing: border-box;
@@ -1204,7 +1101,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   background: transparent;
   border: none;
 }
-
 .navigation-bar__title,
 .topcoat-navigation-bar__title {
   padding: 0;
@@ -1217,7 +1113,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   white-space: nowrap;
   overflow: hidden;
 }
-
 .topcoat-navigation-bar {
   height: 54px;
   height: 44px;
@@ -1230,30 +1125,25 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   box-shadow: none;
   border-bottom: 1px solid #3a3d40;
 }
-
 .topcoat-navigation-bar__line-height {
   line-height: 54px !important;
   line-height: 44px !important;
 }
-
 .topcoat-navigation-bar__bg {
   background: transparent;
   background: #222;
 }
-
 .topcoat-navigation-bar__item {
   margin: 0;
   line-height: 54px;
   line-height: 44px;
   vertical-align: top;
 }
-
 .topcoat-navigation-bar__title {
   font-size: 16px;
   font-weight: 500;
   color: #f3f3f3;
 }
-
 /* topdoc
   name: Notification
   description: Notification badge
@@ -1266,7 +1156,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
     <br><br>
     <span class="topcoat-notification">9999</span>
 */
-
 .notification,
 .topcoat-notification {
   position: relative;
@@ -1293,7 +1182,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   overflow: hidden;
   text-decoration: none;
 }
-
 .topcoat-notification {
   padding: 0 6px 0;
   min-width: 19px;
@@ -1304,7 +1192,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   color: #fff;
   text-align: center;
 }
-
 /* topdoc
   name: Page
   description: Default skin for Onsen UI Page
@@ -1313,17 +1200,14 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
     <div class="page" style="height:200px">
     </div>
 */
-
-.page {
+.topcoat-page {
   background-color: #050607;
   color: #f3f3f3;
   font-weight: 200;
 }
-
 .topcoat-page__bg {
   background-color: #050607;
 }
-
 /* topdoc
   name: Radio Button
   description: A button that can play music, but usually just plays ads.
@@ -1375,7 +1259,6 @@ input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
     </div>
 
 */
-
 input[type="radio"] {
   position: absolute;
   overflow: hidden;
@@ -1386,7 +1269,6 @@ input[type="radio"] {
   vertical-align: top;
   outline: none;
 }
-
 .radio-button,
 .topcoat-radio-button__checkmark {
   -webkit-box-sizing: border-box;
@@ -1403,7 +1285,6 @@ input[type="radio"] {
   -ms-user-select: none;
   user-select: none;
 }
-
 .radio-button__label,
 .topcoat-radio-button {
   position: relative;
@@ -1415,7 +1296,6 @@ input[type="radio"] {
   -ms-user-select: none;
   user-select: none;
 }
-
 .radio-button:before,
 .radio-button:after,
 .topcoat-radio-button__checkmark:before,
@@ -1425,7 +1305,6 @@ input[type="radio"] {
   -webkit-border-radius: 100%;
   border-radius: 100%;
 }
-
 .radio-button:after,
 .topcoat-radio-button__checkmark:after {
   top: 50%;
@@ -1436,7 +1315,6 @@ input[type="radio"] {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-
 .radio-button:before,
 .topcoat-radio-button__checkmark:before {
   -webkit-box-sizing: border-box;
@@ -1445,14 +1323,12 @@ input[type="radio"] {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
-
 .radio-button--disabled,
 input[type="radio"]:disabled + .topcoat-radio-button__checkmark {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-
 input[type="radio"] {
   height: 20px;
   width: 20px;
@@ -1461,18 +1337,15 @@ input[type="radio"] {
   margin-bottom: -20px;
   margin-left: 0;
 }
-
 input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   opacity: 1;
 }
-
 .topcoat-radio-button {
   color: #f3f3f3;
   color: #3a3d40;
   line-height: 20px;
   text-align: left;
 }
-
 .topcoat-radio-button__checkmark:before {
   width: 20px;
   height: 20px;
@@ -1483,13 +1356,11 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 .topcoat-radio-button__checkmark {
   position: relative;
   width: 20px;
   height: 20px;
 }
-
 .topcoat-radio-button__checkmark:after {
   opacity: 0;
   width: 10px;
@@ -1506,14 +1377,12 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   top: 4px;
   left: 4px;
 }
-
 input[type="radio"]:focus + .topcoat-radio-button__checkmark:before {
   border: none;
   border: 1px solid #535353;
   -webkit-box-shadow: none, none;
   box-shadow: none, none;
 }
-
 input[type="radio"]:active + .topcoat-radio-button__checkmark:before {
   border: 1px solid #09c;
   border: 1px solid #09c;
@@ -1522,14 +1391,12 @@ input[type="radio"]:active + .topcoat-radio-button__checkmark:before {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   border: 1px solid #09c;
   background: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 /* topdoc
   name: Range
   description: Range input
@@ -1563,7 +1430,6 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
       <input type="range" class="topcoat-range" style="width:100%" value="90">
     </div>
 */
-
 .range,
 .topcoat-range {
   padding: 0;
@@ -1581,25 +1447,21 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   outline: none;
   -webkit-appearance: none;
 }
-
 .range__thumb,
 .topcoat-range::-moz-range-thumb {
   cursor: pointer;
 }
-
 .range__thumb--webkit,
 .topcoat-range::-webkit-slider-thumb {
   cursor: pointer;
   -webkit-appearance: none;
 }
-
 .range:disabled,
 .topcoat-range:disabled {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-range {
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -1608,14 +1470,13 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   background-color: transparent;
   background-color: #09c;
   height: 2px;
+  -webkit-border-radius: 0;
   border-radius: 0;
   border-radius: 3px;
   margin-top: 12px;
   margin-bottom: 12px;
 }
-
 .topcoat-range::-moz-range-track {
-  -webkit-border-radius: 4px;
   border-radius: 4px;
   border: 1px solid #09c;
   background-color: transparent;
@@ -1624,7 +1485,6 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   border-radius: 0;
   border-radius: none;
 }
-
 .topcoat-range::-webkit-slider-thumb {
   height: 36px;
   height: 24px;
@@ -1639,34 +1499,27 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 .topcoat-range::-moz-range-thumb {
   height: 36px;
   width: 24px;
   background-color: transparent;
   border: 1px solid #09c;
   border: 0px solid #3a3d40;
-  -webkit-border-radius: 4px;
   border-radius: 4px;
   border-radius: 50%;
-  -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 .topcoat-range:focus::-webkit-slider-thumb {
   border: none;
   border: var-border--range__thumb--focus;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 .topcoat-range:focus::-moz-range-thumb {
   border: none;
   border: var-border--range__thumb--focus;
-  -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 /* topdoc
   name: Search Input
   description: A text input designed for searching.
@@ -1694,7 +1547,6 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
       </ul>
     </div>
 */
-
 .search-input,
 .topcoat-search-input {
   padding: 0;
@@ -1712,18 +1564,15 @@ input[type="radio"]:disabled:active + .topcoat-radio-button__checkmark:before {
   outline: none;
   -webkit-appearance: none;
 }
-
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
-
 .search-input:disabled,
 .topcoat-search-input:disabled {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-search-input {
   line-height: 36px;
   height: 36px;
@@ -1747,7 +1596,6 @@ input[type="search"]::-webkit-search-cancel-button {
   -webkit-background-size: 16px;
   background-size: 16px;
 }
-
 .topcoat-search-input:focus {
   background-color: #050607;
   background-color: #050607;
@@ -1758,29 +1606,23 @@ input[type="search"]::-webkit-search-cancel-button {
   -webkit-box-shadow: none, none;
   box-shadow: none, none;
 }
-
 .topcoat-search-input::-webkit-search-cancel-button,
 .topcoat-search-input::-webkit-search-decoration {
   margin-right: 5px;
   margin-right: var-margin-right--search-decoration;
 }
-
 .topcoat-search-input:focus::-webkit-input-placeholder {
   color: #f3f3f3;
 }
-
 .topcoat-search-input:disabled::-webkit-input-placeholder {
   color: #000;
 }
-
 .topcoat-search-input:disabled::-moz-placeholder {
   color: #000;
 }
-
 .topcoat-search-input:disabled:-ms-input-placeholder {
   color: #000;
 }
-
 /* topdoc
   name: Switch
   description: Default skin for Topcoat switch
@@ -1828,7 +1670,6 @@ input[type="search"]::-webkit-search-cancel-button {
       </ul>
     </div>
 */
-
 .switch,
 .topcoat-switch {
   position: relative;
@@ -1840,7 +1681,6 @@ input[type="search"]::-webkit-search-cancel-button {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
-
 .switch__input,
 .topcoat-switch__input {
   position: absolute;
@@ -1852,7 +1692,6 @@ input[type="search"]::-webkit-search-cancel-button {
   vertical-align: top;
   outline: none;
 }
-
 .switch__toggle,
 .topcoat-switch__toggle {
   position: relative;
@@ -1875,7 +1714,6 @@ input[type="search"]::-webkit-search-cancel-button {
   -ms-user-select: none;
   user-select: none;
 }
-
 .switch__toggle:before,
 .switch__toggle:after,
 .topcoat-switch__toggle:before,
@@ -1889,14 +1727,12 @@ input[type="search"]::-webkit-search-cancel-button {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
-
 .switch--disabled,
 .topcoat-switch__input:disabled + .topcoat-switch__toggle {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-switch {
   font-size: 16px;
   padding: 0 20px;
@@ -1909,8 +1745,8 @@ input[type="search"]::-webkit-search-cancel-button {
   width: 64px;
   height: 16px;
   z-index: 0;
+  text-align: left;
 }
-
 .topcoat-switch__toggle:before,
 .topcoat-switch__toggle:after {
   top: -1px;
@@ -1918,7 +1754,6 @@ input[type="search"]::-webkit-search-cancel-button {
   border: var-border--switch__label;
   margin: 0 0 0 0;
 }
-
 .topcoat-switch__toggle:before {
   content: '';
   color: #39372e;
@@ -1930,7 +1765,6 @@ input[type="search"]::-webkit-search-cancel-button {
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-
 .topcoat-switch__toggle {
   line-height: 36px;
   line-height: 32px;
@@ -1956,7 +1790,6 @@ input[type="search"]::-webkit-search-cancel-button {
   -o-transition: margin-left 0.05s ease-in-out;
   transition: margin-left 0.05s ease-in-out;
 }
-
 .topcoat-switch__toggle:after {
   content: '';
   background-color: #3a3d40;
@@ -1967,30 +1800,25 @@ input[type="search"]::-webkit-search-cancel-button {
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-
 .topcoat-switch__input:checked + .topcoat-switch__toggle {
   margin-left: 13px;
   background-color: #0983ac;
 }
-
 .topcoat-switch__input:active + .topcoat-switch__toggle {
   border: 1px solid #09c;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 .topcoat-switch__input:focus + .topcoat-switch__toggle {
   border: none;
   border: var-border--switch__toggle--focus;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 .topcoat-switch__input:disabled + .topcoat-switch__toggle:after,
 .topcoat-switch__input:disabled + .topcoat-switch__toggle:before {
   background: transparent;
 }
-
 .topcoat-switch__input:checked + .topcoat-switch__toggle:after,
 .topcoat-switch__input:checked + .topcoat-switch__toggle:before {
   background-color: var-background-color--switch__label--checked;
@@ -1999,7 +1827,6 @@ input[type="search"]::-webkit-search-cancel-button {
   -o-transition: var-transition--switch__label--checked;
   transition: var-transition--switch__label--checked;
 }
-
 .topcoat-switch__input + .topcoat-switch__toggle:after,
 .topcoat-switch__input + .topcoat-switch__toggle:before {
   background-color: var-background-color--switch__label;
@@ -2008,14 +1835,12 @@ input[type="search"]::-webkit-search-cancel-button {
   -o-transition: var-transition--switch__label;
   transition: var-transition--switch__label;
 }
-
 .topcoat-switch__input:checked + .topcoat-switch__toggle:after,
 box-shadow var-box-shadow--switch__label--after--checked,
 .topcoat-switch__input + .topcoat-switch__toggle:after {
   -webkit-box-shadow: var-box-shadow--switch__label--after;
   box-shadow: var-box-shadow--switch__label--after;
 }
-
 /* topdoc
   name: Tab Bar
   description: Component of tab buttons
@@ -2087,7 +1912,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
       </label> 
     </div>
 */
-
 /* topdoc
   name: Tab Bar:Icon + Label Tab Item
   markup:
@@ -2115,7 +1939,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
       </label> 
     </div>
  */
-
 /* topdoc
   name: Tab Bar:Icon Only Tab Item
   markup:
@@ -2152,18 +1975,15 @@ box-shadow var-box-shadow--switch__label--after--checked,
       </label> 
     </div>
  */
-
 .topcoat-tab-bar {
   height: 49px;
   background-color: #222;
   border-top: 0px solid #3a3d40;
   width: 100%;
 }
-
 .topcoat-tab-bar__item {
   width: 100%;
 }
-
 .topcoat-tab-bar__button {
   padding: 0 20px;
   height: 49px;
@@ -2180,7 +2000,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
   border-top: 3px solid #3a3d40;
   width: 100%;
 }
-
 .topcoat-tab-bar__button:active,
 .topcoat-tab-bar__button--large:active,
 :checked + .topcoat-tab-bar__button {
@@ -2190,7 +2009,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
   box-shadow: none;
   border-top: 3px solid #09c;
 }
-
 .topcoat-tab-bar__button:focus,
 .topcoat-tab-bar__button--large:focus {
   z-index: 1;
@@ -2199,7 +2017,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
   box-shadow: none;
   outline: 0;
 }
-
 /* topdoc
   name: Text Input
   modifiers:
@@ -2233,7 +2050,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
       <button class="topcoat-button--large">submit</button>
     </div>
 */
-
 /* topdoc
   name: Text Input:Transparent Text Input
   markup:
@@ -2241,7 +2057,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
     <br>
     <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="" disabled>
 */
-
 /* topdoc
   name: Text Input:Underbar Text Input
   markup:
@@ -2249,7 +2064,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
     <br>
     <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="" disabled>
 */
-
 .input,
 .topcoat-text-input,
 .topcoat-text-input--transparent {
@@ -2267,14 +2081,12 @@ box-shadow var-box-shadow--switch__label--after--checked,
   vertical-align: top;
   outline: none;
 }
-
 .input:disabled,
 .topcoat-text-input:disabled {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-text-input,
 .topcoat-text-input--transparent {
   line-height: 36px;
@@ -2292,7 +2104,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
   color: #c0c0c0;
   vertical-align: top;
 }
-
 .topcoat-text-input:focus {
   background-color: #050607;
   color: #000;
@@ -2302,46 +2113,37 @@ box-shadow var-box-shadow--switch__label--after--checked,
   -webkit-box-shadow: none, none;
   box-shadow: none, none;
 }
-
 .topcoat-text-input:disabled::-webkit-input-placeholder {
   color: #000;
 }
-
 .topcoat-text-input:disabled::-moz-placeholder {
   color: #000;
 }
-
 .topcoat-text-input:disabled:-ms-input-placeholder {
   color: #000;
 }
-
 .topcoat-text-input:invalid {
   border: 1px solid #f00;
   color: #f00;
 }
-
 .topcoat-text-input--transparent {
   border: none;
   background: transparent;
   padding-left: 0;
   padding-right: 0;
 }
-
 .topcoat-text-input:focus {
   border: none;
   background: transparent;
 }
-
 .topcoat-text-input:disabled {
   border: none;
   background: transparent;
 }
-
 .topcoat-text-input:invalid {
   border: none;
   background: transparent;
 }
-
 /* topdoc
   name: Textarea
   description: A whole area, just for text.
@@ -2376,7 +2178,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
       <button class="topcoat-button--large">Submit</button>
     </div>
 */
-
 /* topdoc
   name: Textarea:Transparent Textarea
   markup:
@@ -2384,7 +2185,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
     <br>
     <textarea class="topcoat-textarea--transparent" rows="3" placeholder="Textarea" disabled></textarea>
 */
-
 .textarea,
 .topcoat-textarea,
 .topcoat-textarea--transparent {
@@ -2403,7 +2203,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
   resize: none;
   outline: none;
 }
-
 .textarea:disabled,
 .topcoat-textarea:disabled,
 .topcoat-textarea--transparent:disabled {
@@ -2411,7 +2210,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-textarea,
 .topcoat-textarea--transparent {
   padding: 4px 4px 4px 4px;
@@ -2429,7 +2227,6 @@ box-shadow var-box-shadow--switch__label--after--checked,
   color: #c0c0c0;
   letter-spacing: 1px;
 }
-
 .topcoat-textarea:focus,
 .topcoat-textarea--transparent:focus {
   background-color: #050607;
@@ -2440,31 +2237,25 @@ box-shadow var-box-shadow--switch__label--after--checked,
   -webkit-box-shadow: none, none;
   box-shadow: none, none;
 }
-
 .topcoat-textarea:disabled::-webkit-input-placeholder {
   color: #000;
 }
-
 .topcoat-textarea:disabled::-moz-placeholder {
   color: #000;
 }
-
 .topcoat-textarea:disabled:-ms-input-placeholder {
   color: #000;
 }
-
 .topcoat-textarea--transparent {
   border: none;
   background: transparent;
   padding-left: 0;
   padding-right: 0;
 }
-
 .topcoat-textarea--transparent:focus {
   border: none;
   background: transparent;
 }
-
 .topcoat-textarea--transparent:disabled {
   border: none;
   background: transparent;

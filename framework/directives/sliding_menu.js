@@ -20,7 +20,7 @@ limitations under the License.
   'use strict';
   var directives = angular.module('onsen.directives');
 
-  directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $compile, SlidingMenuStack, OnsenUtil, PredefinedPageCache) {
+  directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $templateCache, $compile, SlidingMenuStack, OnsenUtil, PredefinedPageCache) {
     return {
       restrict: 'E',
       replace: false,
@@ -34,7 +34,6 @@ limitations under the License.
       },
       templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
       link: function(scope, element, attrs) {
-
         var MAIN_PAGE_RATIO = 0.9;
         var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
         var BROWSER_TRANSFORMS = [
@@ -150,33 +149,64 @@ limitations under the License.
             this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
           },
 
+          appendAbovePage: function(templateHTML) {
+            var pageElement = angular.element('<div></div>');
+            pageElement.addClass('page');
+            pageElement[0].style.opacity = 0;
+            var pageScope = scope.$parent.$new();
+            var pageContent = $compile(templateHTML)(pageScope);
+            pageElement.append(pageContent);
+            this.$abovePage.append(pageElement);
+
+            // prevent black flash
+            setTimeout(function() {
+              pageElement[0].style.opacity = 1;
+              if (this.currentPageElement) {
+                this.currentPageElement.remove();
+                this.currentPageScope.$destroy();
+              }
+              this.currentPageElement = pageElement;
+              this.currentPageScope = pageScope;
+            }.bind(this), 0);
+
+            this.currentPageUrl = pageUrl;
+          },
+
+          appendBehindPage: function(templateHTML) {
+            var page = angular.element('<div></div>');
+            page.addClass('page');
+            var pageScope = scope.$parent.$new();
+            var pageContent = $compile(templateHTML)(pageScope);
+            page.append(pageContent);
+            this.$behindPage.append(page);
+
+            if (this.currentBehindPageScope) {
+              this.currentBehindPageScope.$destroy();
+              this.currentBehindPageElement.remove();
+            }
+
+            this.currentBehindPageElement = page;
+            this.currentBehindPageScope = pageScope;
+          },
+
           attachMethods: function() {
-            this.setBehindPage = scope.setBehindPage = function(page) {
+            scope.setBehindPage = function(page) {
               if (page) {
-                $http({
-                  url: page,
-                  method: "GET",
-                  cache: PredefinedPageCache
-                }).error(function(e) {
-                  console.error(e);
-                }).success(function(data, status, headers, config) {
-                  var templateHTML = angular.element(data.trim());
-                  var page = angular.element('<div></div>');
-                  page.addClass('topcoat-page');
-                  var pageScope = scope.$parent.$new();
-                  var pageContent = $compile(templateHTML)(pageScope);
-                  page.append(pageContent);
-                  this.$behindPage.append(page);
-
-                  if(this.currentBehindPageScope){
-                    this.currentBehindPageScope.$destroy();
-                    this.currentBehindPageElement.remove();
-                  }
-
-                  this.currentBehindPageElement = page;
-                  this.currentBehindPageScope = pageScope;
-
-                }.bind(this));
+                var templateHTML = $templateCache(page);
+                if (templateHTML) {
+                  this.appendBehindPage(templateHTML);
+                } else {
+                  $http({
+                      url: page,
+                      method: "GET",
+                      cache: PredefinedPageCache
+                    }).error(function(e) {
+                      console.error(e);
+                    }).success(function(data, status, headers, config) {
+                    templateHTML = angular.element(data.trim());
+                    this.appendBehindPage(templateHTML);
+                  }.bind(this));
+                }
               } else {
                 throw new Error('cannot set undefined page');
               }
@@ -189,85 +219,84 @@ limitations under the License.
               }
 
               if (pageUrl) {
-                $http({
-                  url: pageUrl,
-                  method: "GET",
-                  cache: PredefinedPageCache
-                }).error(function(e) {
-                  console.error(e);
-                }).success(function(data, status, headers, config) {
-                  var templateHTML = angular.element(data.trim());
-                  var pageElement = angular.element('<div></div>');
-                  pageElement.addClass('topcoat-page');
-                  pageElement[0].style.opacity = 0;
-                  var pageScope = scope.$parent.$new();
-                  var pageContent = $compile(templateHTML)(pageScope);
-                  pageElement.append(pageContent);
-                  this.$abovePage.append(pageElement);
-
-                  // prevent black flash
-                  setTimeout(function() {
-                    pageElement[0].style.opacity = 1;
-                    if (this.currentPageElement) {
-                      this.currentPageElement.remove();
-                      this.currentPageScope.$destroy();
-                    }
-                    this.currentPageElement = pageElement;
-                    this.currentPageScope = pageScope;
-                  }.bind(this), 0);
-
-                  this.currentPageUrl = pageUrl;
-                }.bind(this));
+                var templateHtml = $templateCache(page);
+                if (templateHTML) {
+                  this.appendAbovePage(templateHTML);
+                } else {
+                  $http({
+                      url: pageUrl,
+                      method: "GET",
+                      cache: PredefinedPageCache
+                    }).error(function(e) {
+                      console.error(e);
+                    }).success(function(data, status, headers, config) {
+                    templateHTML = angular.element(data.trim());
+                    this.appendAbovePage(templateHTML);
+                  }.bind(this));
+                }
               } else {
                 throw new Error('cannot set undefined page');
               }
             }.bind(this);
           },
 
-
           handleEvent: function(ev) {
+            if (this.isInsideIgnoredElement(ev.target)){
+              ev.gesture.stopDetect();
+            }
+
             switch (ev.type) {
 
-            case 'touch':
-              if(this.isClosed()){
-                if(!this.isInsideSwipeTargetArea(ev.gesture.center.pageX)){
-                  ev.gesture.stopDetect();
+              case 'touch':
+                if (this.isClosed()) {
+                  if (!this.isInsideSwipeTargetArea(ev.gesture.center.pageX)) {
+                    ev.gesture.stopDetect();
+                  }
                 }
-              }
 
-              break;
+                break;
 
-            case 'dragleft':
-            case 'dragright':
-              ev.gesture.preventDefault();
-              var deltaX = ev.gesture.deltaX;
-              this.currentX = this.startX + deltaX;
-              if (this.currentX >= 0) {
-                this.translate(this.currentX);
-              }
-              break;
+              case 'dragleft':
+              case 'dragright':
+                ev.gesture.preventDefault();
+                var deltaX = ev.gesture.deltaX;
+                this.currentX = this.startX + deltaX;
+                if (this.currentX >= 0) {
+                  this.translate(this.currentX);
+                }
+                break;
 
-            case 'swipeleft':
-              ev.gesture.preventDefault();
-              this.close();
-              break;
-
-            case 'swiperight':
-              ev.gesture.preventDefault();
-              this.open();
-              break;
-
-            case 'release':
-              if (this.currentX > this.MAX / 2) {
-                this.open();
-              } else {
+              case 'swipeleft':
+                ev.gesture.preventDefault();
                 this.close();
-              }
-              break;
+                break;
+
+              case 'swiperight':
+                ev.gesture.preventDefault();
+                this.open();
+                break;
+
+              case 'release':
+                if (this.currentX > this.MAX / 2) {
+                  this.open();
+                } else {
+                  this.close();
+                }
+                break;
             }
           },
 
-          isInsideSwipeTargetArea: function(x){
+          isInsideIgnoredElement: function(el) {
+            do {
+              if (el.getAttribute && el.getAttribute("sliding-menu-ignore")){
+              	return true;
+              }                
+              el = el.parentNode;
+            } while (el);
+            return false;
+          },
+
+          isInsideSwipeTargetArea: function(x) {
             return x < this.swipeTargetWidth;
           },
 
@@ -276,7 +305,7 @@ limitations under the License.
             this.$behindPage.removeClass('transition');
           },
 
-          isClosed: function(){
+          isClosed: function() {
             return this.startX === 0;
           },
 
@@ -322,6 +351,7 @@ limitations under the License.
               this.abovePage.style[property] = aboveTransform;
               this.behindPage.style[property] = behindTransform;
             }
+
             if(this.isReady){
               this.behindPage.style.opacity = opacity;
             }
@@ -330,6 +360,7 @@ limitations under the License.
         });
 
         var swiper = new Swiper(element);
+
         var slidingMenuView = {
           openMenu: function() {
             return swiper.open();

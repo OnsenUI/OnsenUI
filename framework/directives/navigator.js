@@ -19,7 +19,7 @@ limitations under the License.
   'use strict';
   var directives = angular.module('onsen.directives');
 
-  directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, requestAnimationFrame, PredefinedPageCache, OnsenUtil) {
+  directives.service('Navigator', function(ONSEN_CONSTANTS, $http, $templateCache, $compile, $parse, NavigatorStack, requestAnimationFrame, PredefinedPageCache, OnsenUtil) {
     var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
 
     var Navigator = Class.extend({
@@ -93,7 +93,7 @@ limitations under the License.
        */
       modifierTemplater: undefined,
 
-      /**
+      /*
        * @param {Object} scope
        * @param {Object} element
        * @param {Object} attrs
@@ -122,7 +122,7 @@ limitations under the License.
         this.setReady(true);
 
         // fix android 2.3 click event not fired some times when used with sliding menu
-        this.leftButtonContainer.bind('touchend', function() { });
+        this.leftButtonContainer.bind('touchend', function() {});
 
         this.leftButtonContainer.bind('click', this.onLeftButtonClicked.bind(this));
         this.rightSection.bind('click', this.onRightButtonClicked.bind(this));
@@ -147,10 +147,12 @@ limitations under the License.
         this.attachScopeMethods();
       },
 
-      attachScopeMethods: function(){
+      attachScopeMethods: function() {
         this.scope.pushPage = this.pushPage.bind(this);
         this.scope.popPage = this.popPage.bind(this);
         this.scope.resetToPage = this.resetToPage.bind(this);
+        this.scope.getCurrentNavigatorItem = this.getCurrentNavigatorItem.bind(this);
+        this.scope.pages = this.navigatorItems;
       },
 
       attachFastClickEvent: function(el) {
@@ -174,7 +176,7 @@ limitations under the License.
       checkiOS7: function() {
         if (window.device && window.device.platform) {
           if (window.device.platform === 'iOS' && parseFloat(window.device.version) >= 7) {
-            setTimeout( this.adjustForiOS7.bind(this), 0);
+            setTimeout(this.adjustForiOS7.bind(this), 0);
           }
         } else {
           var self = this;
@@ -211,6 +213,7 @@ limitations under the License.
         inBackLabel.text(title);
 
         this.toolbarContent[0].offsetWidth;
+
         setTimeout(function(){
           inBackLabel.removeClass('ons-navigator__back-label--navigate-right');
           inBackLabel.addClass('ons-navigator__back-label--transition ons-navigator__back-label--navigate-center');
@@ -574,6 +577,7 @@ limitations under the License.
         } else {
           // root page
           var titleElement = angular.element('<div></div>');
+
           titleElement.addClass(
             'ons-navigator__item ons-navigator__title ' +
             'topcoat-navigation-bar__title topcoat-navigation-bar__line-height ' +
@@ -581,6 +585,7 @@ limitations under the License.
             this.modifierTemplater('topcoat-navigation-bar--*__title') + ' ' +
             this.modifierTemplater('topcoat-navigation-bar--*__line-height')
           );
+
           if (options.title) {
             titleElement.text(options.title);
           }
@@ -593,36 +598,49 @@ limitations under the License.
         this.setLeftButton(navigatorItem);
       },
 
+      appendPage: function(templateHTML, options) {
+        var div = document.createElement('div');
+        div.className = 'full-width full-height';
+        div.innerHTML = templateHTML;
+        var pageContent = angular.element(div.cloneNode(true));
+        var pageEl = this.generatePageEl(pageContent, options);
+        var pageScope = this.createPageScope();
+        var compiledPage = this.compilePageEl(pageEl, pageScope);
+        this._pushPageDOM(options.page, div, compiledPage, pageScope, options);
+      },
+
       pushPage: function(page, options) {
         if (options && typeof options != "object") {
           throw new Error('options must be an objected. You supplied ' + options);
         }
+        options = options || {};
+        options.page = page;
+
         if (!this.isReady()) {
           return;
         }
 
-        var that = this;
+        var that = this,
+          templateHTML = $templateCache.get(page);
 
         this.setReady(false);
 
-        $http({
-          url: page,
-          method: 'GET',
-          cache: PredefinedPageCache
-        }).error(function(e) {
-          that.onTransitionEnded();
-          console.error(e);
-        }).success(function(data, status, headers, config) {
-          var div = document.createElement('div');
-          div.innerHTML = data; 
-          var pageContent = angular.element(div.cloneNode(true));
-          var pageEl = this.generatePageEl(pageContent, options);
-          var pageScope = this.createPageScope();
-          var compiledPage = this.compilePageEl(pageEl, pageScope);
-          this._pushPageDOM(page, div, compiledPage, pageScope, options);
-        }.bind(this)).error(function(data, status, headers, config) {
-          console.error('error', data, status);
-        });
+        if (templateHTML) {
+          this.appendPage(templateHTML, options);
+        } else {
+          $http({
+              url: page,
+              method: 'GET',
+              cache: PredefinedPageCache
+            }).error(function(e) {
+              that.onTransitionEnded();
+              console.error(e);
+            }).success(function(templateHTML, status, headers, config) {
+              this.appendPage(templateHTML, options);
+            }.bind(this)).error(function(data, status, headers, config) {
+            console.error('error', data, status);
+          });
+        }
       },
 
       popPage: function() {
@@ -704,7 +722,6 @@ limitations under the License.
           }
         };
       }
-
     };
   });
 })();

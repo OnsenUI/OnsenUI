@@ -15,52 +15,40 @@
 * limitations under the License.
 *
 */
-
 /*
 * This css is customized for Onsen UI Theming by Mitsunori KUBOTA<mitsunori@asial.co.jp>.
 */
-
 * {
   font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-
 .quarter {
   width: 25%;
 }
-
 .half {
   width: 50%;
 }
-
 .three-quarters {
   width: 75%;
 }
-
 .third {
   width: 33.333%;
 }
-
 .two-thirds {
   width: 66.666%;
 }
-
 .full {
   width: 100%;
 }
-
 .left {
   text-align: left;
 }
-
 .center {
   text-align: center;
 }
-
 .right {
   text-align: right;
 }
-
 .reset-ui {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -85,7 +73,6 @@
   white-space: nowrap;
   overflow: hidden;
 }
-
 /* topdoc
   name: Button
   description: A simple button
@@ -121,42 +108,36 @@
         </div>
     </div>
 */
-
 /* topdoc
   name: Button:Call To Action Button
   markup:
     <button class="topcoat-button--cta" >Button</button>
     <button class="topcoat-button--cta" disabled>Button</button>
 */
-
 /* topdoc
   name: Button:Quiet Button
   markup:
     <button class="topcoat-button--quiet">Button</button>
     <button class="topcoat-button--quiet" disabled>Button</button>
 */
-
 /* topdoc
   name: Button:Large Button
   markup:
     <button class="topcoat-button--large" >Button</button><br>
     <button class="topcoat-button--large" disabled>Button</button>
 */
-
 /* topdoc
   name: Button:Large Quiet Button
   markup:
     <button class="topcoat-button--large--quiet">Button</button>
     <button class="topcoat-button--large--quiet" disabled>Button</button>
 */
-
 /* topdoc
   name: Button:Large Call To Action Button
   markup:
     <button class="topcoat-button--large--cta" >Button</button><br>
     <button class="topcoat-button--large--cta" disabled>Button</button>
 */
-
 .button,
 .topcoat-button,
 .topcoat-button--quiet,
@@ -190,14 +171,12 @@
   overflow: hidden;
   text-decoration: none;
 }
-
 .button--quiet {
   background: transparent;
   border: 1px solid transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 .button--disabled,
 .topcoat-button:disabled,
 .topcoat-button--quiet:disabled,
@@ -211,7 +190,6 @@
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-button,
 .topcoat-button--quiet,
 .topcoat-button--large,
@@ -241,7 +219,6 @@
   transition: background-color 0.2s linear, color 0.2s linear;
   font-weight: 400;
 }
-
 .topcoat-button:hover,
 .topcoat-button--quiet:hover,
 .topcoat-button--large:hover,
@@ -253,7 +230,6 @@
   -o-transition: none;
   transition: none;
 }
-
 .topcoat-button:active,
 .topcoat-button--large:active,
 .topcoat-button-bar__button:active,
@@ -268,7 +244,6 @@
   -o-transition: none;
   transition: none;
 }
-
 .topcoat-button:focus,
 .topcoat-button--quiet:focus,
 .topcoat-button--large:focus,
@@ -279,7 +254,6 @@
   box-shadow: none;
   outline: 0;
 }
-
 .topcoat-button--quiet {
   background: transparent;
   border: 1px solid transparent;
@@ -289,11 +263,9 @@
   color: #1284ff;
   border: none;
 }
-
 .topcoat-button--quiet:disabled {
   border: none;
 }
-
 .topcoat-button--quiet:active {
   color: #c6c8c8;
   color: #78b9ff;
@@ -309,7 +281,6 @@
   -o-transition: none;
   transition: none;
 }
-
 .topcoat-button--large,
 .topcoat-button--large--quiet {
   font-size: 16px;
@@ -319,14 +290,12 @@
   display: block;
   width: 100%;
 }
-
 .topcoat-button--large:active {
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
   transition: none;
 }
-
 .topcoat-button--large--quiet {
   background: transparent;
   border: 1px solid transparent;
@@ -334,7 +303,6 @@
   box-shadow: none;
   color: #1284ff;
 }
-
 .topcoat-button--large--quiet:active {
   color: #78b9ff;
   -webkit-transition: none;
@@ -342,11 +310,9 @@
   -o-transition: none;
   transition: none;
 }
-
 .topcoat-button--large--quiet:focus {
   outline: 0;
 }
-
 .topcoat-button--cta,
 .topcoat-button--large--cta {
   border: none;
@@ -357,7 +323,6 @@
   font-weight: var-font-weight--cta;
   text-shadow: none;
 }
-
 .topcoat-button--cta:active,
 color var-color--cta--down,
 .topcoat-button--large--cta:active {
@@ -369,7 +334,6 @@ color var-color--cta--down,
   -o-transition: none;
   transition: none;
 }
-
 .topcoat-button--large--cta {
   font-size: 16px;
   font-weight: 500;
@@ -378,19 +342,16 @@ color var-color--cta--down,
   width: 100%;
   display: block;
 }
-
 .topcoat-button--large--cta:active {
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
   transition: none;
 }
-
 .topcoat-button__spinner {
   border: 3px solid #c6c8c8;
   border: 3px solid #fff;
 }
-
 /* topdoc
   name: Button Bar
   description: Component of grouped buttons
@@ -469,7 +430,6 @@ color var-color--cta--down,
       </div>
     </div>
 */
-
 .button-bar,
 .topcoat-button-bar,
 .topcoat-tab-bar {
@@ -479,7 +439,6 @@ color var-color--cta--down,
   margin: 0;
   padding: 0;
 }
-
 .button-bar__item,
 .topcoat-button-bar__item,
 .topcoat-tab-bar__item {
@@ -488,7 +447,6 @@ color var-color--cta--down,
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-
 .button-bar__item > input,
 .topcoat-button-bar__item > input,
 .topcoat-tab-bar__item > input {
@@ -501,53 +459,44 @@ color var-color--cta--down,
   vertical-align: top;
   outline: none;
 }
-
 .button-bar__button {
   -webkit-border-radius: inherit;
   border-radius: inherit;
 }
-
 .button-bar__itemdisabled {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-button-bar {
   margin: 0;
   border: 0px solid #1284ff;
 }
-
 .topcoat-button-bar__item {
   border-top: 1px solid #1284ff;
   border-bottom: 1px solid #1284ff;
 }
-
 .topcoat-button-bar > .topcoat-button-bar__item:first-child {
   -webkit-border-top-left-radius: 4px;
   border-top-left-radius: 4px;
   -webkit-border-bottom-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-
 .topcoat-button-bar > .topcoat-button-bar__item:last-child {
   -webkit-border-top-right-radius: 4px;
   border-top-right-radius: 4px;
   -webkit-border-bottom-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-
 .topcoat-button-bar__item:first-child > .topcoat-button-bar__button {
   border-left: 1px solid #1284ff;
   border-right: none;
   border-right: 1px solid #1284ff;
 }
-
 .topcoat-button-bar__item:last-child > .topcoat-button-bar__button {
   border-left: none;
   border-right: 1px solid #1284ff;
 }
-
 .topcoat-button-bar__button {
   -webkit-border-radius: inherit;
   border-radius: inherit;
@@ -566,7 +515,6 @@ color var-color--cta--down,
   -o-transition: background-color 0.2s linear, color 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear;
 }
-
 .topcoat-button-bar__button:active,
 :checked + .topcoat-button-bar__button {
   background-color: #b5d9ff;
@@ -584,7 +532,6 @@ color var-color--cta--down,
   -o-transition: none;
   transition: none;
 }
-
 .topcoat-button-bar__item.active > .topcoat-button-bar__button {
   background-color: #1284ff;
   color: #fff;
@@ -593,18 +540,15 @@ color var-color--cta--down,
   -o-transition: none;
   transition: none;
 }
-
 .topcoat-button-bar__button:hover {
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
   transition: none;
 }
-
 .topcoat-button-bar__button:focus {
   outline: 0;
 }
-
 /* topdoc
   name: Icon Button
   description: Like button, but it has an icon.
@@ -629,7 +573,6 @@ color var-color--cta--down,
       <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
 */
-
 .topcoat-icon-button,
 .topcoat-icon-button--quiet {
   padding: 4px 10px;
@@ -648,23 +591,19 @@ color var-color--cta--down,
   font-weight: 400;
   font-size: 16px;
 }
-
 .topcoat-icon-button:active {
   background-color: #b5d9ff;
 }
-
 .topcoat-icon-button:disabled,
 .topcoat-icon-button--quiet:disabled {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-icon-button:focus,
 .topcoat-icon-button--quiet:focus {
   outline: 0;
 }
-
 .topcoat-icon-button--quiet {
   background: transparent;
   border: 1px solid transparent;
@@ -674,7 +613,6 @@ color var-color--cta--down,
   border: none;
   color: #1284ff;
 }
-
 .topcoat-icon-button--quiet:active {
   color: #c6c8c8;
   color: #78b9ff;
@@ -687,7 +625,6 @@ color var-color--cta--down,
   box-shadow: none;
   box-shadow: none;
 }
-
 .topcoat-icon,
 .topcoat-icon--large {
   position: relative;
@@ -699,13 +636,11 @@ color var-color--cta--down,
   vertical-align: middle;
   top: 0;
 }
-
 .topcoat-icon--large {
   width: 20.571428556px;
   height: 20.571428556px;
   top: 0px;
 }
-
 /* topdoc
   name: Checkbox
   description: Default skin for Topcoat checkbox
@@ -770,7 +705,6 @@ color var-color--cta--down,
       </ul>
     </div>
 */
-
 /* topdoc
   name: Checkbox:Noborder Checkbox
   markup:
@@ -792,7 +726,6 @@ color var-color--cta--down,
       Disabled
     </label>
  */
-
 input[type="checkbox"] {
   position: absolute;
   overflow: hidden;
@@ -803,7 +736,6 @@ input[type="checkbox"] {
   vertical-align: top;
   outline: none;
 }
-
 .checkbox,
 .topcoat-checkbox > .topcoat-checkbox__checkmark,
 .topcoat-checkbox--noborder > .topcoat-checkbox__checkmark {
@@ -821,7 +753,6 @@ input[type="checkbox"] {
   -ms-user-select: none;
   user-select: none;
 }
-
 .checkbox__label,
 .topcoat-checkbox,
 .topcoat-checkbox--noborder {
@@ -834,7 +765,6 @@ input[type="checkbox"] {
   -ms-user-select: none;
   user-select: none;
 }
-
 .checkbox--disabled,
 .topcoat-checkbox > input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark,
 .topcoat-checkbox--noborder > input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark {
@@ -842,7 +772,6 @@ input[type="checkbox"] {
   cursor: default;
   pointer-events: none;
 }
-
 .checkbox:before,
 .checkbox:after,
 .topcoat-checkbox > .topcoat-checkbox__checkmark:before,
@@ -852,7 +781,6 @@ input[type="checkbox"] {
   content: '';
   position: absolute;
 }
-
 .checkbox:before,
 .topcoat-checkbox > .topcoat-checkbox__checkmark:before,
 .topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:before {
@@ -862,11 +790,9 @@ input[type="checkbox"] {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
-
 .topcoat-checkbox > .topcoat-checkbox__checkmark {
   height: 24px;
 }
-
 .topcoat-checkbox > input[type="checkbox"] {
   height: 24px;
   width: 24px;
@@ -875,24 +801,19 @@ input[type="checkbox"] {
   margin-bottom: -24px;
   margin-left: 0;
 }
-
 .topcoat-checkbox > input[type="checkbox"]:checked {
   background: #1284ff;
 }
-
 .topcoat-checkbox > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before {
   background: #1284ff;
 }
-
 .topcoat-bheckbox > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after {
   opacity: 1;
 }
-
 .topcoat-checkbox {
   line-height: 24px;
   margin: 10px 0;
 }
-
 .topcoat-checkbox > .topcoat-checkbox__checkmark:before {
   width: 24px;
   height: 24px;
@@ -906,12 +827,10 @@ input[type="checkbox"] {
   box-shadow: none;
   left: 0;
 }
-
 .topcoat-checkbox > .topcoat-checkbox__checkmark {
   width: 24px;
   height: 24px;
 }
-
 .topcoat-checkbox > .topcoat-checkbox__checkmark:after {
   top: 5px;
   left: 4px;
@@ -930,39 +849,32 @@ input[type="checkbox"] {
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-
 .topcoat-checkbox > input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before {
   border: none;
   border: 1px solid #1284ff;
   -webkit-box-shadow: none, none;
   box-shadow: none, none;
 }
-
 .topcoat-checkbox > input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before {
   border: 1px solid #1284ff;
   background: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 .topcoat-checkbox--noborder > .topcoat-checkbox__checkmark {
   height: 24px;
   background: transparent;
 }
-
 .topcoat-checkbox--noborder > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before {
   background: transparent;
 }
-
 .topcoat-checkbox--noborder > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after {
   opacity: 1;
 }
-
 .topcoat-checkbox--noborder {
   line-height: 24px;
   margin: 10px 0;
 }
-
 .topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:before {
   width: 24px;
   height: 24px;
@@ -972,12 +884,10 @@ input[type="checkbox"] {
   border-radius: 16px;
   left: 0;
 }
-
 .topcoat-checkbox--noborder > .topcoat-checkbox__checkmark {
   width: 24px;
   height: 24px;
 }
-
 .topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:after {
   top: 5px;
   left: 4px;
@@ -997,18 +907,15 @@ input[type="checkbox"] {
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-
 .topcoat-checkbox--noborder > input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before {
   -webkit-box-shadow: none, none;
   box-shadow: none, none;
 }
-
 .topcoat-checkbox--noborder > input[type="checkbox"]:disabled:active + .topcoat-checkbox--noborder__checkmark:before {
   background: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-
 /* topdoc
   name: List
   description: Topcoat default list skin
@@ -1060,7 +967,6 @@ input[type="checkbox"] {
       </ul>
     </div>
 */
-
 /* topdoc
   name: List:Noborder List
   markup:
@@ -1082,7 +988,6 @@ input[type="checkbox"] {
       <br>
     </div>
  */
-
 /* topdoc
   name: List:Category Header
   markup:
@@ -1107,7 +1012,6 @@ input[type="checkbox"] {
       </ul>
     </div>
  */
-
 /* topdoc
   name: List:Tappable List Item
   markup:
@@ -1126,7 +1030,6 @@ input[type="checkbox"] {
       <br>
     </div>
  */
-
 .list,
 .topcoat-list {
   padding: 0;
@@ -1143,19 +1046,16 @@ input[type="checkbox"] {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
-
 .list__header,
 .topcoat-list__header {
   margin: 0;
 }
-
 .list__container,
 .topcoat-list__container {
   padding: 0;
   margin: 0;
   list-style-type: none;
 }
-
 .list__item,
 .topcoat-list__item {
   margin: 0;
@@ -1163,18 +1063,15 @@ input[type="checkbox"] {
   position: relative;
   list-style: none;
 }
-
 .topcoat-list {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   background-color: #f0eff4;
 }
-
 .topcoat-list--noborder {
   border-top: none;
   border-bottom: none;
 }
-
 .topcoat-list__header {
   padding: 0 0 0 10px;
   font-size: 15px;
@@ -1187,14 +1084,12 @@ input[type="checkbox"] {
   min-height: 24px;
   line-height: 24px;
 }
-
 .topcoat-list__container {
   border-top: none;
   color: #c6c8c8;
   padding: 0;
   background-color: #fff;
 }
-
 .topcoat-list__item {
   padding: 0 0 0 10px;
   margin: 0 0 0 0;
@@ -1205,11 +1100,9 @@ input[type="checkbox"] {
   min-height: 44px;
   position: relative;
 }
-
 .topcoat-list__item__line-height {
   line-height: 44px;
 }
-
 .topcoat-list__item_active:active {
   background-color: #d9d9d9;
   -webkit-transition: none;
@@ -1217,14 +1110,12 @@ input[type="checkbox"] {
   -o-transition: none;
   transition: none;
 }
-
 .topcoat-list__item--tappable {
   -webkit-transition: background-color 0.2s linear;
   -moz-transition: background-color 0.2s linear;
   -o-transition: background-color 0.2s linear;
   transition: background-color 0.2s linear;
 }
-
 .topcoat-list__item--tappable:active {
   background-color: #d9d9d9;
   -webkit-transition: none;
@@ -1232,25 +1123,21 @@ input[type="checkbox"] {
   -o-transition: none;
   transition: none;
 }
-
 .topcoat-list__item:first-child {
   padding-left: 10px;
   margin: 0;
   border-top: none;
   border-bottom: none;
 }
-
 .topcoat-list__item:last-child {
   padding-left: 10px;
   margin: 0;
   border-top: none;
   border-bottom: none;
 }
-
 .topcoat-list__item:nth-child(2) {
   border-top: 1px solid #ddd;
 }
-
 /* topdoc
   name: Navigation Bar
   description: A place where navigation goes to drink
@@ -1278,7 +1165,6 @@ input[type="checkbox"] {
         <div class="topcoat-navigation-bar__line-height" style="text-align:center">Bottom Toolbar</div>
     </div>
 */
-
 /* topdoc
   name: Navigation Bar:Bottom Bar
   markup:
@@ -1286,7 +1172,6 @@ input[type="checkbox"] {
         <div class="topcoat-navigation-bar__line-height" style="text-align:center">Bottom Toolbar</div>
     </div>
  */
-
 .navigation-bar,
 .topcoat-navigation-bar {
   -webkit-box-sizing: border-box;
@@ -1309,7 +1194,6 @@ input[type="checkbox"] {
   -ms-user-select: none;
   user-select: none;
 }
-
 .navigation-bar__item,
 .topcoat-navigation-bar__item {
   -webkit-box-sizing: border-box;
@@ -1327,7 +1211,6 @@ input[type="checkbox"] {
   background: transparent;
   border: none;
 }
-
 .navigation-bar__title,
 .topcoat-navigation-bar__title {
   padding: 0;
@@ -1340,7 +1223,6 @@ input[type="checkbox"] {
   white-space: nowrap;
   overflow: hidden;
 }
-
 .topcoat-navigation-bar {
   height: 44px;
   padding-left: 0;
@@ -1353,37 +1235,31 @@ input[type="checkbox"] {
   border-bottom: 1px solid #ddd;
   font-weight: 400;
 }
-
 .topcoat-navigation-bar--bottom {
   border-bottom: none;
   border-top: 1px solid #ddd;
 }
-
 .topcoat-navigation-bar__line-height {
   line-height: 36px !important;
   line-height: 44px !important;
   padding-bottom: 0;
   padding-top: 0;
 }
-
 .topcoat-navigation-bar__bg {
   background: transparent;
   background: #f8f8f8;
 }
-
 .topcoat-navigation-bar__item {
   margin: var-margin;
   line-height: 36px;
   line-height: 40px;
   vertical-align: top;
 }
-
 .topcoat-navigation-bar__title {
   font-size: 16px;
   font-weight: 500;
   color: #1f1f21;
 }
-
 /* topdoc
   name: Notification
   description: Notification badge
@@ -1396,7 +1272,6 @@ input[type="checkbox"] {
     <br><br>
     <span class="topcoat-notification">9999</span>
 */
-
 .notification,
 .topcoat-notification {
   position: relative;
@@ -1423,7 +1298,6 @@ input[type="checkbox"] {
   overflow: hidden;
   text-decoration: none;
 }
-
 .topcoat-notification {
   padding: 0 4px;
   width: auto;
@@ -1438,7 +1312,6 @@ input[type="checkbox"] {
   line-height: 19px;
   font-weight: 400;
 }
-
 /* topdoc
   name: Page
   description: Default skin for Onsen UI Page
@@ -1447,17 +1320,14 @@ input[type="checkbox"] {
     <div class="page" style="height:200px">
     </div>
 */
-
-.page {
+.topcoat-page {
   background-color: #efeff4;
   font-weight: 400;
   color: #1f1f21;
 }
-
 .topcoat-page__bg {
   background-color: #efeff4;
 }
-
 /* topdoc
   name: Radio Button
   description: A button that can play music, but usually just plays ads.
@@ -1509,7 +1379,6 @@ input[type="checkbox"] {
     </div>
 
 */
-
 input[type="radio"] {
   position: absolute;
   overflow: hidden;
@@ -1520,7 +1389,6 @@ input[type="radio"] {
   vertical-align: top;
   outline: none;
 }
-
 .radio-button,
 .topcoat-radio-button__checkmark {
   -webkit-box-sizing: border-box;
@@ -1537,7 +1405,6 @@ input[type="radio"] {
   -ms-user-select: none;
   user-select: none;
 }
-
 .radio-button__label,
 .topcoat-radio-button {
   position: relative;
@@ -1549,7 +1416,6 @@ input[type="radio"] {
   -ms-user-select: none;
   user-select: none;
 }
-
 .radio-button:before,
 .radio-button:after,
 .topcoat-radio-button__checkmark:before,
@@ -1559,7 +1425,6 @@ input[type="radio"] {
   -webkit-border-radius: 100%;
   border-radius: 100%;
 }
-
 .radio-button:after,
 .topcoat-radio-button__checkmark:after {
   top: 50%;
@@ -1570,7 +1435,6 @@ input[type="radio"] {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-
 .radio-button:before,
 .topcoat-radio-button__checkmark:before {
   -webkit-box-sizing: border-box;
@@ -1579,14 +1443,12 @@ input[type="radio"] {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
-
 .radio-button--disabled,
 input[type="radio"]:disabled + .topcoat-radio-button__checkmark {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-
 input[type="radio"] {
   height: 24px;
   width: 24px;
@@ -1595,15 +1457,12 @@ input[type="radio"] {
   margin-bottom: -24px;
   margin-left: 0;
 }
-
 input[type="radio"]:active {
   outline: 0;
 }
-
 input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   opacity: 1;
 }
-
 .topcoat-radio-button {
   color: #c6c8c8;
   color: #1f1f21;
@@ -1611,7 +1470,6 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   text-align: left;
   margin: 10px 0;
 }
-
 .topcoat-radio-button__checkmark:before {
   width: 24px;
   height: 24px;
@@ -1621,13 +1479,11 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   border-radius: 16px;
   left: 0;
 }
-
 .topcoat-radio-button__checkmark {
   position: relative;
   width: 24px;
   height: 24px;
 }
-
 .topcoat-radio-button__checkmark:after {
   top: 5px;
   left: 4px;
@@ -1647,7 +1503,6 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-
 /* topdoc
   name: Range
   description: Range input
@@ -1681,7 +1536,6 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
       <input type="range" class="topcoat-range" style="width:100%" value="90">
     </div>
 */
-
 .range,
 .topcoat-range {
   padding: 0;
@@ -1699,32 +1553,30 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   outline: none;
   -webkit-appearance: none;
 }
-
 .range__thumb,
 .topcoat-range::-moz-range-thumb {
   cursor: pointer;
 }
-
 .range__thumb--webkit,
 .topcoat-range::-webkit-slider-thumb {
   cursor: pointer;
   -webkit-appearance: none;
 }
-
 .range:disabled,
 .topcoat-range:disabled {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-range {
   -webkit-border-radius: 4px;
   border-radius: 4px;
   border: none;
   height: 2px;
+  -webkit-border-radius: 0;
   border-radius: 0;
   border-radius: 3px;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#ccc));
   background-image: -webkit-linear-gradient(#ccc, #ccc);
   background-image: -moz-linear-gradient(#ccc, #ccc);
   background-image: -o-linear-gradient(#ccc, #ccc);
@@ -1736,10 +1588,8 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   overflow: hidden;
   height: 31px;
 }
-
 .topcoat-range::-moz-range-track {
   position: relative;
-  -webkit-border-radius: 4px;
   border-radius: 4px;
   border: none;
   background-color: transparent;
@@ -1751,7 +1601,6 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   margin: 0;
   padding: 0;
 }
-
 .topcoat-range::-webkit-slider-thumb {
   position: relative;
   height: 29px;
@@ -1769,7 +1618,6 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   margin: 0;
   padding: 0;
 }
-
 .topcoat-range::-moz-range-thumb {
   position: relative;
   height: 29px;
@@ -1777,15 +1625,12 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   background-color: transparent;
   border: 1px solid #1284ff;
   border: 1px solid #ddd;
-  -webkit-border-radius: 4px;
   border-radius: 4px;
   border-radius: 30px;
-  -webkit-box-shadow: none;
   box-shadow: none;
   margin: 0;
   padding: 0;
 }
-
 .topcoat-range::-webkit-slider-thumb:before {
   position: absolute;
   top: 13px;
@@ -1798,7 +1643,6 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   margin: 0;
   padding: 0;
 }
-
 /* topdoc
   name: Search Input
   description: A text input designed for searching.
@@ -1826,7 +1670,6 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
       </ul>
     </div>
 */
-
 .search-input,
 .topcoat-search-input {
   padding: 0;
@@ -1844,18 +1687,15 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   outline: none;
   -webkit-appearance: none;
 }
-
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
-
 .search-input:disabled,
 .topcoat-search-input:disabled {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-search-input {
   height: 31px;
   font-size: 15px;
@@ -1882,7 +1722,6 @@ input[type="search"]::-webkit-search-cancel-button {
   width: 100%;
   vertical-align: middle;
 }
-
 .topcoat-search-input:focus {
   background-color: #fff;
   background-color: #fff;
@@ -1893,29 +1732,23 @@ input[type="search"]::-webkit-search-cancel-button {
   -webkit-box-shadow: none, none;
   box-shadow: none, none;
 }
-
 .topcoat-search-input::-webkit-search-cancel-button,
 .topcoat-search-input::-webkit-search-decoration {
   margin-right: 0px;
   margin-right: 0px;
 }
-
 .topcoat-search-input:focus::-webkit-input-placeholder {
   color: var-placeholder-color--input;
 }
-
 .topcoat-search-input:disabled::-webkit-input-placeholder {
   color: #1f1f21;
 }
-
 .topcoat-search-input:disabled::-moz-placeholder {
   color: #1f1f21;
 }
-
 .topcoat-search-input:disabled:-ms-input-placeholder {
   color: #1f1f21;
 }
-
 /* topdoc
   name: Switch
   description: Default skin for Topcoat switch
@@ -1963,7 +1796,6 @@ input[type="search"]::-webkit-search-cancel-button {
       </ul>
     </div>
 */
-
 .switch,
 .topcoat-switch {
   position: relative;
@@ -1975,7 +1807,6 @@ input[type="search"]::-webkit-search-cancel-button {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
-
 .switch__input,
 .topcoat-switch__input {
   position: absolute;
@@ -1987,9 +1818,7 @@ input[type="search"]::-webkit-search-cancel-button {
   vertical-align: top;
   outline: none;
 }
-
-.switch__toggle,
-.topcoat-switch__toggle {
+.switch__toggle {
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -2010,11 +1839,8 @@ input[type="search"]::-webkit-search-cancel-button {
   -ms-user-select: none;
   user-select: none;
 }
-
 .switch__toggle:before,
-.switch__toggle:after,
-.topcoat-switch__toggle:before,
-.topcoat-switch__toggle:after {
+.switch__toggle:after {
   content: '';
   position: absolute;
   z-index: -1;
@@ -2024,134 +1850,106 @@ input[type="search"]::-webkit-search-cancel-button {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
-
 .switch--disabled,
 .topcoat-switch__input:disabled + .topcoat-switch__toggle {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-switch {
   font-size: 16px;
   padding: 0 20px;
   border: 1px solid #1284ff;
   border: none;
-  overflow: hidden;
+  overflow: visible;
   width: 51px;
   height: 32px;
   -webkit-border-radius: 30px;
   border-radius: 30px;
   z-index: 1;
-  margin: 6px 0;
+  text-align: left;
 }
-
-.topcoat-switch__toggle:before,
-.topcoat-switch__toggle:after {
-  top: -1px;
-  width: 56px;
-  border: 0px solid #ddd;
-  margin: -2px 0 0 0;
+.topcoat-switch__input {
+  width: 51px;
+  height: 44px;
+  margin-top: -6px;
+  top: 0px;
+  left: 0px;
 }
-
 .topcoat-switch__toggle:before {
+  position: absolute;
   content: '';
-  color: #4cd964;
-  background-color: #4cd964;
-  right: -1px;
-  padding-left: 24px;
-  height: 32px;
-  top: 0;
-  -webkit-border-radius: 15px;
-  border-radius: 15px;
+  -webkit-border-radius: 28px;
+  border-radius: 28px;
+  height: 28px;
+  width: 28px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  left: 0;
+  top: 1px;
+  -webkit-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
+  -moz-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
+  -o-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
+  transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
 }
-
 .topcoat-switch__toggle {
-  line-height: 36px;
-  line-height: 29px;
-  height: 36px;
-  height: 30px;
-  width: 30px;
+  background-color: #ddd;
+  width: 50px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
   -webkit-border-radius: 30px;
   border-radius: 30px;
-  color: #c6c8c8;
-  text-shadow: 0 1px none;
-  background-color: transparent;
-  background-color: #fff;
-  border: 1px solid #1284ff;
-  border: 1px solid #ddd;
-  margin-bottom: 0;
-  margin-top: 1px;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  -webkit-transition: margin-left 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
-  -moz-transition: margin-left 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
-  -o-transition: margin-left 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
-  transition: margin-left 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
-  margin-left: -19px;
-}
-
-.topcoat-switch__toggle:after {
-  content: '';
-  background-color: #ddd;
-  left: -1px;
-  padding-left: 32px;
   height: 32px;
-  top: 0;
-  -webkit-border-radius: 15px;
-  border-radius: 15px;
 }
-
-.topcoat-switch__input:checked + .topcoat-switch__toggle {
-  margin-left: -1px;
-  background-color: #fff;
+.topcoat-switch__input + .topcoat-switch__toggle:before {
+  margin-left: 0px;
 }
-
+.topcoat-switch__input:checked + .topcoat-switch__toggle:before {
+  margin-left: 0px;
+}
 .topcoat-switch__input:active + .topcoat-switch__toggle {
   -webkit-box-shadow: none;
   box-shadow: none;
-}
-
-.topcoat-switch__input:focus + .topcoat-switch__toggle {
   border: none;
-  border: 1px solid #ddd;
+}
+.topcoat-switch__input:focus + .topcoat-switch__toggle {
   -webkit-box-shadow: none;
   box-shadow: none;
+  border: none;
 }
-
-.topcoat-switch__input:disabled + .topcoat-switch__toggle:after,
-.topcoat-switch__input:disabled + .topcoat-switch__toggle:before {
-  background: transparent;
-}
-
-.topcoat-switch__input:checked + .topcoat-switch__toggle:after,
-.topcoat-switch__input:checked + .topcoat-switch__toggle:before {
+.topcoat-switch__input:checked + .topcoat-switch__toggle {
   background-color: #4cd964;
+  -webkit-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+  box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
   -webkit-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
   -moz-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
   -o-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
   transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
 }
-
-.topcoat-switch__input + .topcoat-switch__toggle:after,
-.topcoat-switch__input + .topcoat-switch__toggle:before {
-  background-color: #ddd;
+.topcoat-switch__input:not(:checked) + .topcoat-switch__toggle {
+  -webkit-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.1);
+  box-shadow: inset 0 0 0 0px rgba(0,0,0,0.1);
   -webkit-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
   -moz-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
   -o-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
   transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
 }
-
-.topcoat-switch__input:checked + .topcoat-switch__toggle:after {
-  -webkit-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
-  box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+.topcoat-switch__input:checked + .topcoat-switch__toggle:before {
+  -webkit-transform: translate3d(19px, 0px, 0px);
+  -moz-transform: translate3d(19px, 0px, 0px);
+  -ms-transform: translate3d(19px, 0px, 0px);
+  -o-transform: translate3d(19px, 0px, 0px);
+  transform: translate3d(19px, 0px, 0px);
+  border-color: #4cd964;
 }
-
-.topcoat-switch__input + .topcoat-switch__toggle:after {
-  -webkit-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
-  box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+.topcoat-switch__input:not(:checked) + .topcoat-switch__toggle:before {
+  -webkit-transform: translate3d(1px, 0px, 0px);
+  -moz-transform: translate3d(1px, 0px, 0px);
+  -ms-transform: translate3d(1px, 0px, 0px);
+  -o-transform: translate3d(1px, 0px, 0px);
+  transform: translate3d(1px, 0px, 0px);
 }
-
 /* topdoc
   name: Tab Bar
   description: Component of tab buttons
@@ -2223,7 +2021,6 @@ input[type="search"]::-webkit-search-cancel-button {
       </label> 
     </div>
 */
-
 /* topdoc
   name: Tab Bar:Icon + Label Tab Item
   markup:
@@ -2251,7 +2048,6 @@ input[type="search"]::-webkit-search-cancel-button {
       </label> 
     </div>
  */
-
 /* topdoc
   name: Tab Bar:Icon Only Tab Item
   markup:
@@ -2288,14 +2084,12 @@ input[type="search"]::-webkit-search-cancel-button {
       </label> 
     </div>
  */
-
 .topcoat-tab-bar {
   height: 49px;
   background-color: #f8f8f8;
   border-top: 1px solid #ddd;
   width: 100%;
 }
-
 .topcoat-tab-bar__button {
   padding: 0;
   height: 49px;
@@ -2313,7 +2107,6 @@ input[type="search"]::-webkit-search-cancel-button {
   width: 100%;
   font-weight: 400;
 }
-
 .topcoat-tab-bar__button > i {
   font-size: 24px;
   padding: 0;
@@ -2321,29 +2114,25 @@ input[type="search"]::-webkit-search-cancel-button {
   line-height: 32px;
   display: block;
   -webkit-text-fill-color: transparent;
-  /* Will override color (regardless of order) */
+/* Will override color (regardless of order) */
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #888;
 }
-
 .topcoat-tab-bar__button > i + .onsen_tab-bar__label {
   font-size: 10px;
   line-height: 1;
   margin: 0;
   font-weight: 400;
 }
-
 .topcoat-tab-bar__button > .onsen_tab-bar__label:first-child {
   font-size: 16px;
   line-height: 49px;
   margin: 0;
   pading: 0;
 }
-
 .topcoat-tab-bar__button {
   color: #888;
 }
-
 .topcoat-tab-bar__button:active,
 .topcoat-tab-bar__button--large:active,
 :checked + .topcoat-tab-bar__button {
@@ -2353,7 +2142,6 @@ input[type="search"]::-webkit-search-cancel-button {
   box-shadow: none;
   border-top: none;
 }
-
 .topcoat-tab-bar__button:active > i,
 .topcoat-tab-bar__button--large:active > i,
 :checked + .topcoat-tab-bar__button > i {
@@ -2362,7 +2150,6 @@ input[type="search"]::-webkit-search-cancel-button {
   -webkit-text-stroke-width: 0px;
   -webkit-text-stroke-color: #1284ff;
 }
-
 .topcoat-tab-bar__button:focus,
 .topcoat-tab-bar__button--large:focus {
   z-index: 1;
@@ -2372,7 +2159,6 @@ input[type="search"]::-webkit-search-cancel-button {
   box-shadow: none;
   outline: 0;
 }
-
 /* topdoc
   name: Text Input
   modifiers:
@@ -2406,7 +2192,6 @@ input[type="search"]::-webkit-search-cancel-button {
       <button class="topcoat-button--large">submit</button>
     </div>
 */
-
 /* topdoc
   name: Text Input:Transparent Text Input
   markup:
@@ -2414,7 +2199,6 @@ input[type="search"]::-webkit-search-cancel-button {
     <br>
     <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="" disabled>
 */
-
 /* topdoc
   name: Text Input:Underbar Text Input
   markup:
@@ -2422,7 +2206,6 @@ input[type="search"]::-webkit-search-cancel-button {
     <br>
     <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="" disabled>
 */
-
 .input,
 .topcoat-text-input,
 .topcoat-text-input--transparent,
@@ -2441,7 +2224,6 @@ input[type="search"]::-webkit-search-cancel-button {
   vertical-align: top;
   outline: none;
 }
-
 .input:disabled,
 .topcoat-text-input:disabled,
 .topcoat-text-input--transparent:disabled,
@@ -2450,7 +2232,6 @@ input[type="search"]::-webkit-search-cancel-button {
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-text-input,
 .topcoat-text-input--transparent,
 .topcoat-text-input--underbar {
@@ -2469,64 +2250,53 @@ input[type="search"]::-webkit-search-cancel-button {
   vertical-align: middle;
   font-weight: 400;
 }
-
 .topcoat-text-input:disabled::-webkit-input-placeholder,
 .topcoat-text-input--transparent:disabled::-webkit-input-placeholder,
 .topcoat-text-input--underbar:disabled::-webkit-input-placeholder {
   color: #1f1f21;
 }
-
 .topcoat-text-input:disabled::-moz-placeholder,
 .topcoat-text-input--transparent:disabled::-moz-placeholder,
 .topcoat-text-input--underbar:disabled::-moz-placeholder {
   color: #1f1f21;
 }
-
 .topcoat-text-input:disabled:-ms-input-placeholder,
 .topcoat-text-input--transparent:disabled:-ms-input-placeholder,
 .topcoat-text-input--underbar:disabled:-ms-input-placeholder {
   color: #1f1f21;
 }
-
 .topcoat-text-input:invalid,
 .topcoat-text-input--transparent:invalid,
 .topcoat-text-input--underbar:invalid {
   border: 1px solid #f00;
   color: #f00;
 }
-
 .topcoat-text-input--transparent {
   border: none;
   background-color: transparent;
   padding-left: 0;
   padding-right: 0;
 }
-
 .topcoat-text-input--transparent:disabled {
   border: none;
   background-color: transparent;
 }
-
 .topcoat-text-input--transparent:disabled::-webkit-input-placeholder {
   border: none;
   background-color: transparent;
 }
-
 .topcoat-text-input--transparent:disabled::-moz-placeholder {
   border: none;
   background-color: transparent;
 }
-
 .topcoat-text-input--transparent:disabled:-ms-input-placeholder {
   border: none;
   background-color: transparent;
 }
-
 .topcoat-text-input--transparent:invalid {
   border: none;
   background-color: transparent;
 }
-
 .topcoat-text-input--underbar {
   border: none;
   background-color: transparent;
@@ -2534,34 +2304,28 @@ input[type="search"]::-webkit-search-cancel-button {
   -webkit-border-radius: 0px;
   border-radius: 0px;
 }
-
 .topcoat-text-input--underbar:disabled {
   border: none;
   background-color: transparent;
   border-bottom: 1px solid #ddd;
 }
-
 .topcoat-text-input--underbar:disabled::-webkit-input-placeholder {
   border: none;
   background-color: transparent;
 }
-
 .topcoat-text-input--underbar:disabled::-moz-placeholder {
   border: none;
   background-color: transparent;
 }
-
 .topcoat-text-input--underbar:disabled:-ms-input-placeholder {
   border: none;
   background-color: transparent;
 }
-
 .topcoat-text-input--underbar:invalid {
   border: none;
   background-color: transparent;
   border-bottom: 1px solid #f00;
 }
-
 /* topdoc
   name: Textarea
   description: A whole area, just for text.
@@ -2596,7 +2360,6 @@ input[type="search"]::-webkit-search-cancel-button {
       <button class="topcoat-button--large">Submit</button>
     </div>
 */
-
 /* topdoc
   name: Textarea:Transparent Textarea
   markup:
@@ -2604,7 +2367,6 @@ input[type="search"]::-webkit-search-cancel-button {
     <br>
     <textarea class="topcoat-textarea--transparent" rows="3" placeholder="Textarea" disabled></textarea>
 */
-
 .textarea,
 .topcoat-textarea,
 .topcoat-textarea--transparent {
@@ -2623,7 +2385,6 @@ input[type="search"]::-webkit-search-cancel-button {
   resize: none;
   outline: none;
 }
-
 .textarea:disabled,
 .topcoat-textarea:disabled,
 .topcoat-textarea--transparent:disabled {
@@ -2631,7 +2392,6 @@ input[type="search"]::-webkit-search-cancel-button {
   cursor: default;
   pointer-events: none;
 }
-
 .topcoat-textarea,
 .topcoat-textarea--transparent {
   padding: 5px 5px 5px 5px;
@@ -2647,22 +2407,18 @@ input[type="search"]::-webkit-search-cancel-button {
   box-shadow: none;
   -webkit-appearance: none;
 }
-
 .topcoat-textarea:disabled::-webkit-input-placeholder,
 .topcoat-textarea--transparent:disabled::-webkit-input-placeholder {
   color: #1f1f21;
 }
-
 .topcoat-textarea:disabled::-moz-placeholder,
 .topcoat-textarea--transparent:disabled::-moz-placeholder {
   color: #1f1f21;
 }
-
 .topcoat-textarea:disabled:-ms-input-placeholder,
 .topcoat-textarea--transparent:disabled:-ms-input-placeholder {
   color: #1f1f21;
 }
-
 .topcoat-textarea--transparent {
   border: none;
   -webkit-box-shadow: none;

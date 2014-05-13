@@ -26,3 +26,7 @@ limitations under the License.
   display: none;
 }
  
+
+ .scroller {
+ 	min-height: 100%;
+ }

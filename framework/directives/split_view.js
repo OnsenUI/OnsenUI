@@ -20,7 +20,10 @@ limitations under the License.
   'use strict';
   var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-  directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, SplitViewStack, OnsenUtil, PredefinedPageCache) {
+  directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, $templateCache, SplitViewStack, OnsenUtil, PredefinedPageCache) {
+
+    var ON_PAGE_READY = "onPageReady";
+
     return {
       restrict: 'E',
       replace: false,
@@ -29,6 +32,7 @@ limitations under the License.
         secondaryPage: '@',
         mainPage: '@',
         collapse: '@',
+        swipable: '@',
         mainPageWidth: '@'
       },
       templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
@@ -66,87 +70,105 @@ limitations under the License.
             this.boundHammerEvent = this.handleEvent.bind(this);
             this.bindEvents();
 
+            scope.$watch('swipable', this.onSwipableChanged.bind(this));
+
             window.addEventListener("orientationchange", this.onOrientationChange.bind(this));
             window.addEventListener('resize', this.onResize.bind(this));
 
             this.attachMethods();
 
-            if(scope.mainPage){
+            if (scope.mainPage) {
               scope.setMainPage(scope.mainPage);
             }
 
-            if(scope.secondaryPage){
+            if (scope.secondaryPage) {
               scope.setSecondaryPage(scope.secondaryPage);
             }
 
-            window.setTimeout(function(){
+            window.setTimeout(function() {
               this.considerChangingCollapse();
             }.bind(this), 100);
           },
 
-          attachMethods: function(){
-            this.setSecondaryPage = scope.setSecondaryPage = function(page) {
+          appendSecondPage: function(templateHTML) {
+            var page = angular.element('<div></div>');
+            page.addClass('page');
+            var pageScope = scope.$parent.$new();
+            var pageContent = $compile(templateHTML)(pageScope);
+            page.append(pageContent);
+            this.$behindPage.append(page);
+
+
+            if (this.currentBehindPageElement) {
+              this.currentBehindPageElement.remove();
+              this.currentBehindPageScope.$destroy();
+            }
+
+            this.currentBehindPageElement = page;
+            this.currentBehindPageScope = pageScope;
+          },
+
+          appendMainPage: function(templateHTML) {
+            var page = angular.element('<div></div>');
+            page.addClass('page');
+            page[0].style.opacity = 0;
+            var pageScope = scope.$parent.$new();
+            var pageContent = $compile(templateHTML)(pageScope);
+            page.append(pageContent);
+            this.$abovePage.append(page);
+
+            // prevent black flash
+            setTimeout(function() {
+              page[0].style.opacity = 1;
+              if (this.currentPage) {
+                this.currentPage.remove();
+                this.currentPageScope.$destroy();
+              }
+              this.currentPage = page;
+              this.currentPageScope = pageScope;
+            }.bind(this), 0);
+          },
+
+          attachMethods: function() {
+            scope.setSecondaryPage = function(page) {
               if (page) {
-                $http({
-                  url: page,
-                  method: "GET",
-                  cache: PredefinedPageCache
-                }).error(function(e){
-                  console.error(e);
-                }).success(function(data, status, headers, config) {
-                  var templateHTML = angular.element(data.trim());
-                  var page = angular.element('<div></div>');
-                  page.addClass('topcoat-page');
-                  var pageScope = scope.$parent.$new();
-                  var pageContent = $compile(templateHTML)(pageScope);
-                  page.append(pageContent);
-                  this.$behindPage.append(page);
-
-
-                  if(this.currentBehindPageElement){
-                    this.currentBehindPageElement.remove();
-                    this.currentBehindPageScope.$destroy();
-                  }
-
-                  this.currentBehindPageElement = page;
-                  this.currentBehindPageScope = pageScope;
-
-                }.bind(this));
+                var templateHTML = $templateCache.get(page);
+                if (templateHTML) {
+                  this.appendSecondPage(templateHTML);
+                } else {
+                  $http({
+                      url: page,
+                      method: "GET",
+                      cache: PredefinedPageCache
+                    }).error(function(e) {
+                      console.error(e);
+                    }).success(function(data, status, headers, config) {
+                    templateHTML = angular.element(data.trim());
+                    this.appendSecondPage(templateHTML);
+                  }.bind(this));
+                }
               } else {
                 throw new Error('cannot set undefined page');
               }
             }.bind(this);
 
-            this.setMainPage = scope.setMainPage = function(page) {
+            scope.setMainPage = function(page) {
               if (page) {
-                $http({
-                  url: page,
-                  method: "GET",
-                  cache: PredefinedPageCache
-                }).error(function(e){
-                  console.error(e);
-                }).success(function(data, status, headers, config) {
-                  var templateHTML = angular.element(data.trim());
-                  var page = angular.element('<div></div>');
-                  page.addClass('topcoat-page');
-                  page[0].style.opacity = 0;
-                  var pageScope = scope.$parent.$new();
-                  var pageContent = $compile(templateHTML)(pageScope);
-                  page.append(pageContent);
-                  this.$abovePage.append(page);
-
-                  // prevent black flash
-                  setTimeout(function(){
-                    page[0].style.opacity = 1;
-                    if(this.currentPage){
-                      this.currentPage.remove();
-                      this.currentPageScope.$destroy();
-                    }
-                    this.currentPage = page;
-                    this.currentPageScope = pageScope;
-                  }.bind(this), 0);
-
-                }.bind(this));
+                var templateHTML = $templateCache.get(page);
+                if (templateHTML) {
+                  this.appendMainPage(templateHTML);
+                } else {
+                  $http({
+                      url: page,
+                      method: "GET",
+                      cache: PredefinedPageCache
+                    }).error(function(e) {
+                      console.error(e);
+                    }).success(function(data, status, headers, config) {
+                    templateHTML = angular.element(data.trim());
+                    this.appendMainPage(templateHTML);
+                  }.bind(this));
+                }
               } else {
                 throw new Error('cannot set undefined page');
               }
@@ -172,60 +194,61 @@ limitations under the License.
 
           shouldCollapse: function() {
             var orientation = window.orientation;
-            if(orientation === undefined ){
+
+            if (orientation === undefined) {
               orientation = window.innerWidth > window.innerHeight ? 90 : 0;
             }
 
             switch (scope.collapse) {
-            case undefined:
-            case "none":
-              return false;
-
-            case "portrait":
-              if (orientation === 180 || orientation === 0) {
-                return true;
-              } else {
+              case undefined:
+              case "none":
                 return false;
-              }
-              break;
 
-            case "landscape":
-              if (orientation === 90 || orientation === -90) {
-                return true;
-              } else {
-                return false;
-              }
-              break;
-
-            default:
-              // by width
-              if (scope.collapse === undefined) {
-                return false;
-              } else {
-                var widthToken;
-                if (scope.collapse.indexOf('width') >= 0) {
-                  var tokens = scope.collapse.split(' ');
-                  widthToken = tokens[tokens.length - 1];
-                }else{
-                  widthToken = scope.collapse;
+              case "portrait":
+                if (orientation === 180 || orientation === 0) {
+                  return true;
+                } else {
+                  return false;
                 }
+                break;
 
-                if (widthToken.indexOf('px') > 0) {
-                  widthToken = widthToken.substr(0, widthToken.length - 2);
+              case "landscape":
+                if (orientation == 90 || orientation == -90) {
+                  return true;
+                } else {
+                  return false;
                 }
+                break;
 
-                if (isNumber(widthToken)) {
-                  if (window.innerWidth < widthToken) {
-                    return true;
+              default:
+                // by width
+                if (scope.collapse === undefined) {
+                  return false;
+                } else {
+                  var widthToken;
+                  if (scope.collapse.indexOf('width') >= 0) {
+                    var tokens = scope.collapse.split(' ');
+                    widthToken = tokens[tokens.length - 1];
                   } else {
-                    return false;
+                    widthToken = scope.collapse;
                   }
+
+                  if (widthToken.indexOf('px') > 0) {
+                    widthToken = widthToken.substr(0, widthToken.length - 2);
+                  }
+
+                  if (isNumber(widthToken)) {
+                    if (window.innerWidth < widthToken) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  }
+
+                  return false;
                 }
 
-                return false;
-              }
-
-              break;
+                break;
             }
 
           },
@@ -243,10 +266,10 @@ limitations under the License.
           },
 
           activateCollapseMode: function() {
-            this.behindPage.style.width =  '100%';
+            this.behindPage.style.width = '100%';
             this.abovePage.style.width = '100%';
             this.mode = COLLAPSE_MODE;
-            this.activateHammer();
+            this.onSwipableChanged(scope.swipable);
             this.translate(0);
 
             if (Modernizr.boxshadow) {
@@ -275,42 +298,57 @@ limitations under the License.
             this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
           },
 
+          onSwipableChanged: function(swipable) {
+            if (swipable === "" || swipable === undefined) {
+              swipable = true;
+            } else {
+              swipable = (swipable == "true");
+            }
+
+            if (swipable) {
+              this.activateHammer();
+            } else {
+              this.deactivateHammer();
+            }
+          },
+
           handleEvent: function(ev) {
             switch (ev.type) {
 
-            case 'dragleft':
-            case 'dragright':
-              ev.gesture.preventDefault();
-              var deltaX = ev.gesture.deltaX;
-              this.currentX = this.startX + deltaX;
-              if (this.currentX >= 0) {
-                this.translate(this.currentX);
-              }
-              break;
+              case 'dragleft':
+              case 'dragright':
+                ev.gesture.preventDefault();
+                var deltaX = ev.gesture.deltaX;
+                this.currentX = this.startX + deltaX;
+                if (this.currentX >= 0) {
+                  this.translate(this.currentX);
+                }
+                break;
 
-            case 'swipeleft':
-              ev.gesture.preventDefault();
-              this.close();
-              break;
-
-            case 'swiperight':
-              ev.gesture.preventDefault();
-              this.open();
-              break;
-
-            case 'release':
-              if (this.currentX > this.MAX / 2) {
-                this.open();
-              } else {
+              case 'swipeleft':
+                ev.gesture.preventDefault();
                 this.close();
-              }
-              break;
+                break;
+
+              case 'swiperight':
+                ev.gesture.preventDefault();
+                this.open();
+                break;
+
+              case 'release':
+                if (this.currentX > this.MAX / 2) {
+                  this.open();
+                } else {
+                  this.close();
+                }
+                break;
             }
           },
 
           onTransitionEnd: function() {
             this.$abovePage.removeClass('transition');
             this.$behindPage.removeClass('transition');
+            scope.$root.$broadcast(ON_PAGE_READY); //make sure children can do something before the parent.
           },
 
           close: function() {
