@@ -32,6 +32,13 @@ limitations under the License.
       templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
       link: function($scope, element, attrs) {
         element.addClass(OnsenUtil.generateModifierTemplater(attrs)('topcoat-text-input--*'));
+
+        $scope.$watch(function() {
+          return $scope.disabled;
+        }, function(disabled) {
+          var isDisabled = $scope.$eval(disabled);
+          element.attr('disabled', isDisabled);
+        });
       }
     };
   });
