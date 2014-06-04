@@ -24,9 +24,20 @@ var jshint = require('gulp-jshint');
 ////////////////////////////////////////
 gulp.task('html2js', function() {
   return gulp.src('framework/templates/*.tpl')
-  .pipe(html2js({base: __dirname + '/framework', outputModuleName: 'templates-main', useStrict: true}))
-  .pipe(concat('templates.js'))
-  .pipe(gulp.dest('framework/directives/'));
+    .pipe(html2js({base: __dirname + '/framework', outputModuleName: 'templates-main', useStrict: true}))
+    .pipe(concat('templates.js'))
+    .pipe(gulp.dest('framework/directives/'));
+});
+
+////////////////////////////////////////
+// jshint
+////////////////////////////////////////
+gulp.task('jshint', function() {
+  gulp.src([
+    'framework/*/*.js'
+  ])
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
 });
 
 ////////////////////////////////////////
@@ -50,27 +61,16 @@ gulp.task('clean', function() {
 ////////////////////////////////////////
 // prepare
 ////////////////////////////////////////
-gulp.task('prepare', ['html2js'], function() {
+gulp.task('prepare', ['html2js', 'jshint'], function() {
   return merge(
 
     // plugin info(monaca)
     gulp.src('plugin_info.json')
-    .pipe(gulp.dest('build/')),
-
-    // jshint
-    gulp.src([
-      'framework/directives/templates.js',
-      'framework/directives/module.js',
-      'framework/directives/*.js',
-      'framework/services/module.js',
-      'framework/services/*.js',            
-      'framework/js/*.js'
-    ])
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish')),
+      .pipe(gulp.dest('build/')),
 
     // onsenui.js
     gulp.src([
+      'framework/views/*.js',
       'framework/directives/templates.js',
       'framework/directives/module.js',
       'framework/directives/*.js',
@@ -79,13 +79,14 @@ gulp.task('prepare', ['html2js'], function() {
       'framework/lib/*.js',
       'framework/js/*.js'
     ])            
-    .pipe(concat('onsenui.js'))            
-    .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-    .pipe(gulp.dest('build/js/')),
+      .pipe(concat('onsenui.js'))            
+      .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+      .pipe(gulp.dest('build/js/')),
 
     // onsenui_all.js
     gulp.src([
       'framework/lib/angular/angular.js',
+      'framework/views/*.js',
       'framework/directives/templates.js',
       'framework/directives/module.js',
       'framework/directives/*.js',
@@ -94,39 +95,39 @@ gulp.task('prepare', ['html2js'], function() {
       'framework/lib/*.js',
       'framework/js/*.js'
     ])
-    .pipe(concat('onsenui_all.js'))
-    .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-    .pipe(gulp.dest('build/js/')),
+      .pipe(concat('onsenui_all.js'))
+      .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+      .pipe(gulp.dest('build/js/')),
 
     // onsenui.css
     gulp.src([
       'framework/css/common.css',
       'framework/css/*.css'
     ])
-    .pipe(concat('onsenui.css'))
-    .pipe(autoprefix('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6'))
-    .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-    .pipe(gulp.dest('build/css/')),
+      .pipe(concat('onsenui.css'))
+      .pipe(autoprefix('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6'))
+      .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+      .pipe(gulp.dest('build/css/')),
 
     // angular.js copy
     gulp.src('framework/lib/angular/*.*')
-    .pipe(gulp.dest('build/js/angular/')),
+      .pipe(gulp.dest('build/js/angular/')),
 
     // images copy
     gulp.src(['framework/img/*.*', 'themes/img/*.*'])
-    .pipe(gulp.dest('build/img/')),
+      .pipe(gulp.dest('build/img/')),
 
     // theme css copy
     gulp.src('themes/css/*.css')
-    .pipe(gulp.dest('build/css/')),
+      .pipe(gulp.dest('build/css/')),
 
     // font-awesome css copy
     gulp.src('framework/css/font_awesome/*/*')
-    .pipe(gulp.dest('build/css/font_awesome/')),
+      .pipe(gulp.dest('build/css/font_awesome/')),
 
     // css polyfills
     gulp.src('framework/css/polyfill/*.css')
-    .pipe(gulp.dest('build/css/polyfill/'))
+      .pipe(gulp.dest('build/css/polyfill/'))
   );
 
 });
@@ -137,14 +138,14 @@ gulp.task('prepare', ['html2js'], function() {
 gulp.task('prepare-project-templates', function() {
   // projects template
   return gulp.src(['build/**', '!build/plugin_info.json'])
-  .pipe(gulp.dest('app/lib/onsen'))
-  .pipe(gulp.dest('project_templates/minimum/app/lib/onsen/'))
-  .pipe(gulp.dest('project_templates/sliding_menu/app/lib/onsen/'))
-  .pipe(gulp.dest('project_templates/sliding_menu_navigator/app/lib/onsen/'))
-  .pipe(gulp.dest('project_templates/tab_bar/app/lib/onsen/'))
-  .pipe(gulp.dest('project_templates/split_view/app/lib/onsen/'))
-  .pipe(gulp.dest('project_templates/split_view_navigator/app/lib/onsen/'))
-  .pipe(gulp.dest('project_templates/master_detail/app/lib/onsen/'));
+    .pipe(gulp.dest('app/lib/onsen'))
+    .pipe(gulp.dest('project_templates/minimum/app/lib/onsen/'))
+    .pipe(gulp.dest('project_templates/sliding_menu/app/lib/onsen/'))
+    .pipe(gulp.dest('project_templates/sliding_menu_navigator/app/lib/onsen/'))
+    .pipe(gulp.dest('project_templates/tab_bar/app/lib/onsen/'))
+    .pipe(gulp.dest('project_templates/split_view/app/lib/onsen/'))
+    .pipe(gulp.dest('project_templates/split_view_navigator/app/lib/onsen/'))
+    .pipe(gulp.dest('project_templates/master_detail/app/lib/onsen/'));
 });
 
 ////////////////////////////////////////
