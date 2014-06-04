@@ -297,3 +297,14 @@ app.run(["$templateCache", function($templateCache) {
     "<input class=\"topcoat-text-input\">");
 }]);
 })();
+
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("templates/toolbar.tpl",
+    "<div class=\"onsen-toolbar topcoat-navigation-bar {{modifierTemplater('topcoat-navigation-bar--*')}}\" ng-transclude></div>\n" +
+    "");
+}]);
+})();

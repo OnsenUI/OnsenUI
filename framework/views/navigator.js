@@ -97,7 +97,8 @@ limitations under the License.
           div.innerHTML = templateHTML;
           var pageElement = angular.element(div);
 
-          var hasPage = div.childElementCount === 1 && div.childNodes[0].nodeName === 'ONS-PAGE';
+          var hasPage = div.childElementCount === 1
+            && div.childNodes[0].nodeName.toLowerCase() === 'ons-page';
           if (hasPage) {
             pageElement = angular.element(div.childNodes[0]);
           }

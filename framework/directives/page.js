@@ -50,6 +50,8 @@ limitations under the License.
       link: {
         pre: function(scope, element, attrs) {
           scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+
+
         },
         post: function(scope, element, attrs) {
           firePageInitEvent(element[0]);
