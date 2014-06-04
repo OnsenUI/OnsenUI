@@ -1,3 +1,20 @@
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var html2js = require('gulp-html2js');
@@ -61,7 +78,7 @@ gulp.task('clean', function() {
 ////////////////////////////////////////
 // prepare
 ////////////////////////////////////////
-gulp.task('prepare', ['html2js', 'jshint'], function() {
+gulp.task('prepare', ['html2js'], function() {
   return merge(
 
     // plugin info(monaca)
@@ -70,9 +87,9 @@ gulp.task('prepare', ['html2js', 'jshint'], function() {
 
     // onsenui.js
     gulp.src([
-      'framework/views/*.js',
       'framework/directives/templates.js',
       'framework/directives/module.js',
+      'framework/views/navigator.js',
       'framework/directives/*.js',
       'framework/services/module.js',
       'framework/services/*.js',
@@ -81,7 +98,8 @@ gulp.task('prepare', ['html2js', 'jshint'], function() {
     ])            
       .pipe(concat('onsenui.js'))            
       .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-      .pipe(gulp.dest('build/js/')),
+      .pipe(gulp.dest('build/js/'))
+      .pipe(gulp.dest('app/lib/onsen/js')),
 
     // onsenui_all.js
     gulp.src([
@@ -97,7 +115,8 @@ gulp.task('prepare', ['html2js', 'jshint'], function() {
     ])
       .pipe(concat('onsenui_all.js'))
       .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-      .pipe(gulp.dest('build/js/')),
+      .pipe(gulp.dest('build/js/'))
+      .pipe(gulp.dest('app/lib/onsen/js')),
 
     // onsenui.css
     gulp.src([
@@ -107,7 +126,8 @@ gulp.task('prepare', ['html2js', 'jshint'], function() {
       .pipe(concat('onsenui.css'))
       .pipe(autoprefix('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6'))
       .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-      .pipe(gulp.dest('build/css/')),
+      .pipe(gulp.dest('build/css/'))
+      .pipe(gulp.dest('app/lib/onsen/css')),
 
     // angular.js copy
     gulp.src('framework/lib/angular/*.*')
@@ -119,15 +139,18 @@ gulp.task('prepare', ['html2js', 'jshint'], function() {
 
     // theme css copy
     gulp.src('themes/css/*.css')
-      .pipe(gulp.dest('build/css/')),
+      .pipe(gulp.dest('build/css/'))
+      .pipe(gulp.dest('app/lib/onsen/css')),
 
     // font-awesome css copy
     gulp.src('framework/css/font_awesome/*/*')
-      .pipe(gulp.dest('build/css/font_awesome/')),
+      .pipe(gulp.dest('build/css/font_awesome/'))
+      .pipe(gulp.dest('app/lib/onsen/css')),
 
     // css polyfills
     gulp.src('framework/css/polyfill/*.css')
       .pipe(gulp.dest('build/css/polyfill/'))
+      .pipe(gulp.dest('app/lib/onsen/css'))
   );
 
 });
@@ -216,7 +239,7 @@ gulp.task('default', function() {
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['prepare', 'connect'], function() {
+gulp.task('serve', ['jshint', 'prepare', 'connect'], function() {
   gulp.watch(['framework/templates/*.tpl'], ['html2js']);
 
   gulp.watch([
@@ -225,14 +248,13 @@ gulp.task('serve', ['prepare', 'connect'], function() {
     'demo/*',
     'test/manual-testcases/*',
     'test/manual-testcases/*/*'
-  ], ['prepare']).on('change', function(changedFile) {
-    gulp.src(changedFile.path).pipe(connect.reload());
-  });
+  ], ['prepare']);
 
   // for livereload
   gulp.watch([
     'themes/css/*.css',
-    'themes/testcases/*'
+    'themes/testcases/*',
+    'app/lib/**/*'
   ]).on('change', function(changedFile) {
     gulp.src(changedFile.path).pipe(connect.reload());
   });
