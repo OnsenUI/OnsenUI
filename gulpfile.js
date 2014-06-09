@@ -28,13 +28,25 @@ var runSequence = require('run-sequence');
 var dateformat = require("dateformat");
 var pkg = require('./package.json');
 var livereload = require('gulp-livereload');
-var connect = require('gulp-connect');
 var rename = require('gulp-rename');
 var stylus = require('gulp-stylus');
 var cssminify = require('gulp-minify-css');
 var shell = require('gulp-shell');
 var jshint = require('gulp-jshint');
+var browserSync = require('browser-sync');
 
+////////////////////////////////////////
+// browser-sync
+////////////////////////////////////////
+gulp.task('browser-sync', function() {
+  browserSync.init(null, {
+    server: {
+      baseDir: './',
+      directory: true
+    },
+    ghostMode: false
+  });
+});
 
 ////////////////////////////////////////
 // html2js
@@ -239,7 +251,7 @@ gulp.task('default', function() {
 ////////////////////////////////////////
 // serve
 ////////////////////////////////////////
-gulp.task('serve', ['jshint', 'prepare', 'connect'], function() {
+gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   gulp.watch(['framework/templates/*.tpl'], ['html2js']);
 
   gulp.watch([
@@ -256,7 +268,7 @@ gulp.task('serve', ['jshint', 'prepare', 'connect'], function() {
     'themes/testcases/*',
     'app/lib/**/*'
   ]).on('change', function(changedFile) {
-    gulp.src(changedFile.path).pipe(connect.reload());
+    browserSync.reload();
   });
 
   // for theme 
@@ -272,15 +284,6 @@ gulp.task('serve', ['jshint', 'prepare', 'connect'], function() {
     'themes/testcases-topdoc-template/*/*'
   ], ['build-topdoc']);
 });
-
-////////////////////////////////////////
-// connect
-////////////////////////////////////////
-gulp.task('connect', connect.server({
-  root: [__dirname + '/'],
-  port: 8000,
-  livereload: true
-}));
 
 ////////////////////////////////////////
 // build-theme
