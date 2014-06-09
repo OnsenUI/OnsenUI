@@ -20,43 +20,60 @@ limitations under the License.
 
   var directives = angular.module('onsen.directives');
 
-  function ensureLeftContainer(element) {
+  function ensureLeftContainer(element, center) {
     var container = element[0].querySelector('.left');
+
     if (!container) {
       container = document.createElement('div');
+      container.setAttribute('class', 'left');
+      container.innerHTML = '&nbsp;';
+      element[0].insertBefore(container, center);
     }
-    var element = angular.element(container);
-    element.addClass('topcoat-navigation-bar__item left quarter');
-    element.css('float', 'left');
+
+    angular.element(container)
+      .addClass('topcoat-navigation-bar__item left quarter')
+      .css('float', 'left');
     return container;
   }
 
-  function ensureCenterContainer(element) {
+  function ensureCenterContainer(element, right) {
     var container = element[0].querySelector('.center');
+
     if (!container) {
       container = document.createElement('div');
+      container.setAttribute('class', 'center');
+      container.innerHTML = '&nbsp;';
+      element[0].insertBefore(container, right);
     }
-    var element = angular.element(container);
-    element.addClass('topcoat-navigation-bar__item center half topcoat-navigation-bar__title');
-    element.css('float', 'left');
+
+    angular.element(container)
+      .addClass('topcoat-navigation-bar__item center half topcoat-navigation-bar__title')
+      .css('float', 'left');
+
     return container;
   }
 
   function ensureRightContainer(element) {
     var container = element[0].querySelector('.right');
+
     if (!container) {
       container = document.createElement('div');
+      container.setAttribute('class', 'right');
+      container.innerHTML = '&nbsp;';
+      element[0].insertBefore(container, null);
     }
-    var element = angular.element(container);
-    element.addClass('topcoat-navigation-bar__item right quarter');
-    element.css('float', 'left');
+
+    angular.element(container)
+      .addClass('topcoat-navigation-bar__item right quarter')
+      .css('float', 'left');
+
     return container;
   }
 
   function ensureToolbarItemElements(element) {
-    var left = ensureLeftContainer(element);
-    var center = ensureCenterContainer(element);
     var right = ensureRightContainer(element);
+    var center = ensureCenterContainer(element, right);
+    var left = ensureLeftContainer(element, center);
   }
 
   /**
@@ -76,7 +93,7 @@ limitations under the License.
         },
 
         post: function(scope, element, attrs, controller) {
-          ensureToolbarItemElements(element);
+          ensureToolbarItemElements(angular.element(element[0].childNodes[0]));
         }
       }
     };
