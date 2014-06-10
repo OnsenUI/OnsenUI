@@ -55,23 +55,52 @@ window.animit = (function(){
     _started: false,
 
     /**
+     * @property {HTMLElement}
+     */
+    element: undefined,
+
+    /**
      * Start animation sequence with passed animations.
      *
-     * @param {Array|animit.Transition} transitions
      * @param {Function} callback
      */
-    play: function(transitions, callback) {
+    play: function(callback) {
+      if (typeof callback === 'function') {
+        this.transitionQueue.push(callback);
+      }
+
+      this.startAnimation();
+
+      return this;
+    },
+
+    /**
+     * Queue transition animations.
+     *
+     * @param {Array|animit.Transition} transitions
+     */
+    transit: function(transitions) {
       transitions = transitions instanceof animit.Transition ? [transitions] : transitions;
 
       var queue = this.transitionQueue;
       transitions.forEach(function(transition) {
+        transition = transition instanceof animit.Transition ? transition : new animit.Transition(transition);
         queue.push(transition);
       });
 
-      if (typeof callback === 'function') {
-        queue.push(callback);
-      }
-      this.startAnimation();
+      return this;
+    },
+
+    /**
+     * Clear element's style.
+     */
+    clearStyle: function() {
+      var self = this;
+      this.transitionQueue.push(function() {
+        self.element.setAttribute('style', '');
+      });
+
+      return this;
     },
 
     /**
@@ -82,6 +111,7 @@ window.animit = (function(){
         this._started = true;
         this._dequeueTransition();
       }
+      return this;
     },
 
     _dequeueTransition: function() {
@@ -135,10 +165,15 @@ window.animit = (function(){
     play: function(element, callback) {
 
       if (this.options.duration > 0) {
-        this._setTransitionEnd(element, callback);
+        if (Object.keys(this.options.css).length === 0) {
+          var self = this;
+          setTimeout(callback, this.options.duration);
+        } else  {
+          this._setTransitionEnd(element, callback);
 
-        element.style[animit.prefix + 'Transition'] = 'all ' + this.options.duration + 's ' + this.options.timing;
-        element.style.transition = 'all ' + this.options.duration + 's ' + this.options.timing;
+          element.style[animit.prefix + 'Transition'] = 'all ' + this.options.duration + 's ' + this.options.timing;
+          element.style.transition = 'all ' + this.options.duration + 's ' + this.options.timing;
+        }
       } else {
         element.style[animit.prefix + 'Transition'] = 'none';
         element.style.transition = 'none';
@@ -154,7 +189,7 @@ window.animit = (function(){
       });
 
       if (this.options.duration <= 0) {
-        callback();
+        setTimeout(callback, 1000 / 60);
       }
     },
 

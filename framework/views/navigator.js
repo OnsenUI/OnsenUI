@@ -18,6 +18,55 @@ limitations under the License.
 (function() {
   'use strict;';
 
+  var TransitionRepository = {
+    'slideLeft': {
+       pushEnter: [
+         {
+           css: {transform: 'translate3D(100%, 0px, 0px)'},
+           duration: 0
+         },
+         {
+           css: {transform: 'translate3D(0px, 0px, 0px)'},
+           duration: 0.4,
+           timing: 'cubic-bezier(.1, .7, .1, 1)'
+         }
+       ],
+       pushLeave: [
+         {
+           css: {transform: 'translate3D(0px, 0px, 0px)'},
+           duration: 0
+         },
+         {
+           css: {transform: 'translate3D(-25%, 0px, 0px)', opacity: 0.9},
+           duration: 0.4,
+           timing: 'cubic-bezier(.1, .7, .1, 1)'
+         }
+       ],
+       popEnter: [
+         {
+           css: {transform: 'translate3D(-25%, 0px, 0px)', opacity: 0.9},
+           duration: 0
+         },
+         {
+           css: {transform: 'translate3D(0px, 0px, 0px)', opacity: 1.0},
+           duration: 0.4,
+           timing: 'cubic-bezier(.1, .7, .1, 1)'
+         }
+       ],
+       popLeave: [
+         {
+           css: {transform: 'translate3D(0px, 0px, 0px)'},
+           duration: 0
+         },
+         {
+           css: {transform: 'translate3D(100%, 0px, 0px)'},
+           duration: 0.4,
+           timing: 'cubic-bezier(.1, .7, .1, 1)'
+         }
+       ]
+    }
+  };
+
   var directives = angular.module('onsen');
 
   directives.factory('Navigator', function($http, $parse, $templateCache, $compile, requestAnimationFrame, PredefinedPageCache, OnsenUtil) {
@@ -52,6 +101,31 @@ limitations under the License.
       },
 
       /**
+       * @param element jqLite Object
+       * @return jqLite Object
+       */
+      _normalizePageElement: function(element) {
+        var elements = [];
+
+        // remove element node.
+        for (var i = 0; i < element.length; i++) {
+          if (element[i].nodeType === 1) {
+            elements.push(element[i]);
+          }
+        }
+
+        if (elements.length === 1) {
+          var element = angular.element(elements[0]);
+          if (!element.hasClass('topcoat-page')) {
+            console.log(element);
+            //throw new Error('ons-navigator\'s page element must have "topcoat-page" class attribute.');
+          }
+          return element;
+        }
+        throw new Error('invalid state');
+      },
+
+      /**
        * Pushes the specified pageUrl into the page stack and
        * if options object is specified, apply the options.
        *
@@ -66,14 +140,14 @@ limitations under the License.
         }
 
         var templateHTML = $templateCache.get(page);
+        var that = this;
 
         if (templateHTML) {
           var pageScope = this._createPageScope();
           var pageElement = createPageElement(templateHTML, pageScope);
-
           this._pushPageDOM(page, pageElement, pageScope, options);
+
         } else {
-          var that = this;
 
           $http({
             url: page,
@@ -83,7 +157,6 @@ limitations under the License.
             .success(function(templateHTML, status, headers, config) {
               var pageScope = that._createPageScope();
               var pageElement = createPageElement(templateHTML, pageScope);
-
               that._pushPageDOM(page, pageElement, pageScope, options);
             })
             
@@ -92,7 +165,7 @@ limitations under the License.
             });
         }
 
-        function createPageElement(templateHTML, pageScope) {
+        function createPageElement(templateHTML, pageScope, done) {
           var div = document.createElement('div');
           div.innerHTML = templateHTML;
           var pageElement = angular.element(div);
@@ -103,9 +176,8 @@ limitations under the License.
             pageElement = angular.element(div.childNodes[0]);
           }
 
-          var pageElement = $compile(pageElement)(pageScope);
-
-          return pageElement;
+          var element = $compile(pageElement)(pageScope);
+          return element;
         }
       },
 
@@ -115,26 +187,47 @@ limitations under the License.
 
       /**
        * @param {String} page
-       * @param {Object} jqueryElement
+       * @param {Object} element
        * @param {Object} pageScope
        * @param {Object} options
        */
-      _pushPageDOM: function(page, jqueryElement, pageScope, options) {
+      _pushPageDOM: function(page, element, pageScope, options) {
+        element = this._normalizePageElement(element);
+
         this.pages.push({
           page: page,
-          element: jqueryElement,
+          element: element,
           pageScope: pageScope,
           options: options || {}
         });
-        angular.element(this.element).append(jqueryElement);
+        angular.element(this.element).append(element);
+
+        if (this.pages.length > 1) {
+          var prevPage = this.pages[this.pages.length - 2].element[0];
+          var page = element[0];
+
+          animit(page).transit(TransitionRepository.slideLeft.pushEnter).clearStyle().play();
+          animit(prevPage).transit(TransitionRepository.slideLeft.pushLeave).clearStyle().play();
+        }
       },
 
       /**
        * Pops current page from the page stack.
        */
       popPage: function() {
-        var page = this.pages.pop();
-        page.element.remove();
+        var deadPage = this.pages.pop();
+
+        if (this.pages.length === 0) {
+          deadPage.element.remove();
+        } else {
+          var prevPageElement = this.pages[this.pages.length - 1].element[0];
+          var deadPageElement = deadPage.element[0];
+
+          animit(prevPageElement).transit(TransitionRepository.slideLeft.popEnter).clearStyle().play();
+          animit(deadPageElement).transit(TransitionRepository.slideLeft.popLeave).clearStyle().play(function() {
+            deadPage.element.remove();
+          });
+        }
       },
 
       /**

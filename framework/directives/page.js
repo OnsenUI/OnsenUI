@@ -44,14 +44,10 @@ limitations under the License.
   directives.directive('onsPage', function(ONSEN_CONSTANTS, OnsenUtil) {
     return {
       restrict: 'E',
-      replace: true,
-      transclude: true,
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/page.tpl',
       link: {
         pre: function(scope, element, attrs) {
-          scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
-
-
+          var modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+          element.addClass('topcoat-page ' + modifierTemplater('topcoat-page--*') + ' ons-page-inner');
         },
         post: function(scope, element, attrs) {
           firePageInitEvent(element[0]);

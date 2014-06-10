@@ -142,17 +142,6 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/page.tpl",
-    "<div class=\"topcoat-page {{modifierTemplater('topcoat-page--*')}} ons-page-inner\" ng-transclude></div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("templates/radio_button.tpl",
     "<label class=\"topcoat-radio-button {{modifierTemplater('topcoat-radio-button--*')}}\">\n" +
     "  {{leftLabel}}\n" +
