@@ -44,6 +44,55 @@ limitations under the License.
   directives.directive('onsPage', function(ONSEN_CONSTANTS, OnsenUtil) {
     return {
       restrict: 'E',
+      transclude: true,
+      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/page.tpl',
+
+      controller: function($scope, $element, $attrs, $transclude) {
+        this.toolbarElement = undefined;
+
+        // Set toolbar element.
+        this.registerToolbar = function(element) {
+          if (this.toolbarElement) {
+            throw new Error('This page\'s toolbar is already registered.');
+          }
+          element.remove();
+          $element.prepend(element);
+          this.toolbarElement = element;
+        };
+
+        this.getContentElement = function() {
+          for (var i = 0; i < $element.length; i++) {
+            if ($element[i].querySelector) {
+              var content = $element[i].querySelector('.topcoat-page__content');
+              if (content) {
+                return content;
+              }
+            }
+          }
+          throw Error('fail to get ".topcoat-page__content" element.');
+        };
+
+        this.getToolbarElement = function() {
+          return this.toolbarElement[0].querySelector('.topcoat-navigation-bar');
+        };
+
+        this.getToolbarLeftItemsElement = function() {
+          return this.toolbarElement[0].querySelector('.left');
+        };
+
+        this.getToolbarCenterItemsElement = function() {
+          return this.toolbarElement[0].querySelector('.center');
+        };
+
+        this.getToolbarRightItemsElement = function() {
+          return this.toolbarElement[0].querySelector('.right');
+        };
+
+        $scope.$on('$destroy', function(){
+          this.toolbarElement = undefined;
+        }.bind(this));
+
+      },
       link: {
         pre: function(scope, element, attrs) {
           var modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);

@@ -33,6 +33,7 @@ limitations under the License.
     angular.element(container)
       .addClass('topcoat-navigation-bar__item left quarter')
       .css('float', 'left');
+
     return container;
   }
 
@@ -84,12 +85,15 @@ limitations under the License.
       restrict: 'E',
       replace: false,
       transclude: true,
+      require: '^onsPage',
       scope: false,
       templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/toolbar.tpl',
-
+      controller: function($element) {
+      },
       link: {
-        pre: function(scope, element, attrs, controller) {
+        pre: function(scope, element, attrs, pageController) {
           scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+          pageController.registerToolbar(element);
         },
 
         post: function(scope, element, attrs, controller) {

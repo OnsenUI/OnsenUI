@@ -33,16 +33,17 @@ window.animit = (function(){
   /**
    * @param {HTMLElement} element
    */
-  var animit = function(element) {
+  var Animit = function(element) {
     if (!(this instanceof animit)) {
-      return new animit(element);
+      return new Animit(element);
     }
 
     this.element = element;
     this.transitionQueue = [];
+    this.lastStyleAttribute = element.getAttribute('style');
   };
 
-  animit.prototype = {
+  Animit.prototype = {
 
     /**
      * @property {Array}
@@ -66,7 +67,10 @@ window.animit = (function(){
      */
     play: function(callback) {
       if (typeof callback === 'function') {
-        this.transitionQueue.push(callback);
+        this.transitionQueue.push(function(done) {
+          callback();
+          done();
+        });
       }
 
       this.startAnimation();
@@ -75,29 +79,53 @@ window.animit = (function(){
     },
 
     /**
+     * Queue transition animations or other function.
+     *
+     * @param {Object|Animit.Transition|Function} transition
+     */
+    queue: function(transition) {
+      var queue = this.transitionQueue;
+
+      if (transition instanceof Function || transition instanceof Animit.Transition) {
+        queue.push(transition);
+      } else {
+        queue.push(new Animit.Transition(transition));
+      }
+
+      return this;
+    },
+
+    /**
      * Queue transition animations.
      *
-     * @param {Array|animit.Transition} transitions
+     * @param {Float} seconds
      */
-    transit: function(transitions) {
-      transitions = transitions instanceof animit.Transition ? [transitions] : transitions;
-
-      var queue = this.transitionQueue;
-      transitions.forEach(function(transition) {
-        transition = transition instanceof animit.Transition ? transition : new animit.Transition(transition);
-        queue.push(transition);
+    wait: function(seconds) {
+      var self = this;
+      this.transitionQueue.push(function(done) {
+        setTimeout(done, 1000 * seconds);
       });
 
       return this;
     },
 
     /**
-     * Clear element's style.
+     * Reset element's style.
      */
-    clearStyle: function() {
+    resetStyle: function() {
       var self = this;
-      this.transitionQueue.push(function() {
-        self.element.setAttribute('style', '');
+      this.transitionQueue.push(function(done) {
+        // Clear transition animation settings.
+        self.element.style[Animit.prefix + 'Transition'] = 'none';
+        self.element.style.transition = 'none';
+
+        if (self.lastStyleAttribute) {
+          self.element.setAttribute('style', self.lastStyleAttribute);
+        } else {
+          self.element.setAttribute('style', '');
+          self.element.removeAttribute('style');
+        }
+        done();
       });
 
       return this;
@@ -119,25 +147,49 @@ window.animit = (function(){
         this._started = false;
       } else {
         var transition = this.transitionQueue.shift();
+        var self = this;
+        var done = function() {
+          self._dequeueTransition();
+        };
 
         if (typeof transition === 'function') {
-          transition();
-          this._dequeueTransition();
+          transition.apply(this, [done]);
         } else {
-          var self = this;
-          transition.play(this.element, function() {
-            self._dequeueTransition();
-          });
+          transition.play(this.element, done);
         }
       }
     }
 
   };
 
+  Animit.cssPropertyDict = (function() {
+    var styles = window.getComputedStyle(document.documentElement, '');
+    var dict = {};
+    var a = 'A'.charCodeAt(0);
+    var z = 'z'.charCodeAt(0);
+
+    for (var key in styles) {
+      if (styles.hasOwnProperty(key)) {
+        var char = key.charCodeAt(0);
+        if (a <= key.charCodeAt(0) && z >= key.charCodeAt(0)) {
+          if (key !== 'cssText' && key !== 'parentText' && key !== 'length') {
+            dict[key] = true;
+          }
+        }
+      }
+    }
+
+    return dict;
+  })();
+
+  Animit.hasCssProperty = function(name) {
+    return !!Animit.cssPropertyDict[name];
+  };
+
   /**
    * Vendor prefix for css property.
    */
-  animit.prefix = (function() {
+  Animit.prefix = (function() {
     var styles = window.getComputedStyle(document.documentElement, ''),
       pre = (Array.prototype.slice
         .call(styles)
@@ -147,6 +199,12 @@ window.animit = (function(){
     return pre;
   })();
 
+  Animit.runAll = function() {
+    for (var i = 0; i < arguments.length; i++) {
+      arguments[i].play();
+    }
+  };
+
 
   /**
    * @param {Object} options
@@ -154,29 +212,34 @@ window.animit = (function(){
    * @param {String} [options.timing]
    * @param {delay} [options.delay]
    */
-  animit.Transition = function(options) {
+  Animit.Transition = function(options) {
     this.options = options || {};
     this.options.duration = options.duration || 0;
     this.options.timing = options.timing || 'linear';
     this.options.css = options.css || {};
   };
 
-  animit.Transition.prototype = {
+  Animit.Transition.prototype = {
     play: function(element, callback) {
 
       if (this.options.duration > 0) {
         if (Object.keys(this.options.css).length === 0) {
-          var self = this;
-          setTimeout(callback, this.options.duration);
+          setTimeout(callback, this.options.duration * 1000);
         } else  {
           this._setTransitionEnd(element, callback);
 
-          element.style[animit.prefix + 'Transition'] = 'all ' + this.options.duration + 's ' + this.options.timing;
-          element.style.transition = 'all ' + this.options.duration + 's ' + this.options.timing;
+          if (this.options.css.opacity !== undefined && Object.keys(this.options.css).length === 1) {
+            // dirty fix for Android's bug.
+            element.style[Animit.prefix + 'Transition'] = 'opacity ' + this.options.duration + 's ' + this.options.timing;
+            element.style.transition = 'opacity ' + this.options.duration + 's ' + this.options.timing;
+          } else {
+            element.style[Animit.prefix + 'Transition'] = 'all ' + this.options.duration + 's ' + this.options.timing;
+            element.style.transition = 'all ' + this.options.duration + 's ' + this.options.timing;
+          }
         }
-      } else {
-        element.style[animit.prefix + 'Transition'] = 'none';
-        element.style.transition = 'none';
+      } else if (Object.keys(this.options.css).length > 0) {
+        element.style[Animit.prefix + 'Transition'] = 'all 0s linear';
+        element.style.transition = 'all 0s linear';
       }
 
       // style setting
@@ -184,7 +247,7 @@ window.animit = (function(){
       Object.keys(css).forEach(function(name) {
         var value = css[name];
         name = util.normalizeStyleName(name);
-        element.style[animit.prefix + util.capitalize(name)] = value;
+        element.style[Animit.prefix + util.capitalize(name)] = value;
         element.style[name] = value;
       });
 
@@ -232,10 +295,10 @@ window.animit = (function(){
      */
     transformPropValue: function(value) {
       return value.replace(/transform/, function(all) {
-        return '-' + animit.prefix + '-' + all;
+        return '-' + Animit.prefix + '-' + all;
       });
     }
   };
 
-  return animit;
+  return Animit;
 })();

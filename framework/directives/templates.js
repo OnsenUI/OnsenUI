@@ -142,6 +142,17 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
+  $templateCache.put("templates/page.tpl",
+    "<div class=\"topcoat-page__content\" ng-transclude></div>\n" +
+    "");
+}]);
+})();
+
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/radio_button.tpl",
     "<label class=\"topcoat-radio-button {{modifierTemplater('topcoat-radio-button--*')}}\">\n" +
     "  {{leftLabel}}\n" +
@@ -293,7 +304,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/toolbar.tpl",
-    "<div class=\"onsen-toolbar topcoat-navigation-bar {{modifierTemplater('topcoat-navigation-bar--*')}}\" ng-transclude></div>\n" +
+    "<div class=\"topcoat-navigation-bar {{modifierTemplater('topcoat-navigation-bar--*')}}\" style=\"position: relative; z-index: 10000;\" ng-transclude></div>\n" +
     "");
 }]);
 })();

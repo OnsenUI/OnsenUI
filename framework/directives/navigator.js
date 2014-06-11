@@ -26,33 +26,28 @@ limitations under the License.
       transclude: true,
       scope: {},
 
-      compile: function(element, attrs, transclude) {
-        return {
-          pre: function preLink(scope, iElement, iAttrs, controller) {
-          },
+      link: {
+        post: function(scope, iElement, attrs, controller, transclude) {
 
-          post: function postLink(scope, iElement, attrs, controller) {
-            var navigator = new Navigator({
-              scope: scope, 
-              element: iElement[0], 
-              attrs: attrs
-            });
+          var navigator = new Navigator({
+            scope: scope, 
+            element: iElement
+          });
 
-            OnsenUtil.declareVarAttribute(attrs, navigator);
+          OnsenUtil.declareVarAttribute(attrs, navigator);
 
-            if (!attrs.page) {
-              var pageScope = navigator._createPageScope();
-              transclude(pageScope, function(compiledPageContent) {
-                navigator._pushPageDOM('', compiledPageContent, pageScope, {});
-              });
-            }
+          var pageScope = navigator._createPageScope();
+          transclude(pageScope, function(compiledPage) {
+            setTimeout(function() {
+              navigator._pushPageDOM('', compiledPage, pageScope, {});
+            }, 1000 / 60);
+          });
 
-            NavigatorStack.addNavigator(navigator);
-            scope.$on('$destroy', function(){
-              NavigatorStack.removeNavigator(navigator);
-            });
-          }
-        };
+          NavigatorStack.addNavigator(navigator);
+          scope.$on('$destroy', function(){
+            NavigatorStack.removeNavigator(navigator);
+          });
+        }
       }
     };
   });
