@@ -19,9 +19,16 @@
 @import '../../common/topdoc-page'
 
 .topcoat-page
+  font-weight var-font-weight
+  color var-theme-ios7-text-black
+
+.topcoat-page__bg,
+.topcoat-page__content
   background-color var-background-color--page
   font-weight var-font-weight
   color var-theme-ios7-text-black
 
-.topcoat-page__bg
-  background-color var-background-color--page
+.topcoat-page__content
+  position absolute
+  width 100%
+  height 100%

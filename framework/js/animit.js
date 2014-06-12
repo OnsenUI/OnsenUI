@@ -17,7 +17,7 @@ limitations under the License.
 
 
 /**
- * Minimal animation library for managing css transition on mobile browser.
+ * Minimal animation library for managing css transition on mobile browsers.
  */
 window.animit = (function(){
   'use strict';
@@ -34,13 +34,21 @@ window.animit = (function(){
    * @param {HTMLElement} element
    */
   var Animit = function(element) {
-    if (!(this instanceof animit)) {
+    if (!(this instanceof Animit)) {
       return new Animit(element);
     }
 
     this.element = element;
     this.transitionQueue = [];
-    this.lastStyleAttribute = element.getAttribute('style');
+
+    if (!element.hasAttribute('data-animit-orig-style')) {
+      this.lastStyleAttribute = element.getAttribute('style');
+      if (this.lastStyleAttribute) {
+        element.setAttribute('data-animit-orig-style', this.lastStyleAttribute);
+      }
+    } else {
+      this.lastStyleAttribute = element.getAttribute('data-animit-orig-style');
+    }
   };
 
   Animit.prototype = {
@@ -111,10 +119,53 @@ window.animit = (function(){
 
     /**
      * Reset element's style.
+     *
+     * @param {Object} options
+     * @param {Float} options.duration
+     * @param {String} options.timing
      */
-    resetStyle: function() {
+    resetStyle: function(options) {
+      options = options || {};
       var self = this;
-      this.transitionQueue.push(function(done) {
+
+      if (options.transition && !options.duration) {
+        throw new Error('"options.duration" is required when "options.transition" is enabled.');
+      }
+
+      if (options.transition || (options.duration && options.duration > 0)) {
+        var transitionValue = options.transition || ('all ' + options.duration + 's ' + (options.timing || 'linear'));
+        var transitionStyle = 'transition: ' + transitionValue + '; -' + Animit.prefix + '-transition: ' + transitionValue + ';';
+
+        this.transitionQueue.push(function(done) {
+
+          self.element.style[Animit.prefix + 'Transition'] = transitionValue;
+          self.element.style.transition = transitionValue;
+
+          self.element.setAttribute(
+            'style',
+            (self.lastStyleAttribute ? self.lastStyleAttribute + '; ' : '') + transitionStyle
+          );
+
+          var onTransitionEnd = function() {
+            clearTimeout(timeoutId);
+            reset();
+            done();
+          };
+
+          util.addOnTransitionEnd(self.element, onTransitionEnd);
+          // fail safe
+          var timeoutId = setTimeout(onTransitionEnd, options.duration * 1000 * 1.1);
+        });
+      } else {
+        this.transitionQueue.push(function(done) {
+          reset();
+          done();
+        });
+      }
+
+      return this;
+
+      function reset() {
         // Clear transition animation settings.
         self.element.style[Animit.prefix + 'Transition'] = 'none';
         self.element.style.transition = 'none';
@@ -125,10 +176,7 @@ window.animit = (function(){
           self.element.setAttribute('style', '');
           self.element.removeAttribute('style');
         }
-        done();
-      });
-
-      return this;
+      }
     },
 
     /**
@@ -210,7 +258,6 @@ window.animit = (function(){
    * @param {Object} options
    * @param {Float} [options.duration]
    * @param {String} [options.timing]
-   * @param {delay} [options.delay]
    */
   Animit.Transition = function(options) {
     this.options = options || {};
@@ -226,16 +273,17 @@ window.animit = (function(){
         if (Object.keys(this.options.css).length === 0) {
           setTimeout(callback, this.options.duration * 1000);
         } else  {
-          this._setTransitionEnd(element, callback);
+          var onTransitionEnd = function() {
+            clearTimeout(timeoutId);
+            callback();
+          };
+          util.addOnTransitionEnd(element, callback);
 
-          if (this.options.css.opacity !== undefined && Object.keys(this.options.css).length === 1) {
-            // dirty fix for Android's bug.
-            element.style[Animit.prefix + 'Transition'] = 'opacity ' + this.options.duration + 's ' + this.options.timing;
-            element.style.transition = 'opacity ' + this.options.duration + 's ' + this.options.timing;
-          } else {
-            element.style[Animit.prefix + 'Transition'] = 'all ' + this.options.duration + 's ' + this.options.timing;
-            element.style.transition = 'all ' + this.options.duration + 's ' + this.options.timing;
-          }
+          // for fail safe
+          var timeoutId = setTimeout(onTransitionEnd, this.options.duration * 1000 * 1.1);
+
+          element.style[Animit.prefix + 'Transition'] = 'all ' + this.options.duration + 's ' + this.options.timing;
+          element.style.transition = 'all ' + this.options.duration + 's ' + this.options.timing;
         }
       } else if (Object.keys(this.options.css).length > 0) {
         element.style[Animit.prefix + 'Transition'] = 'all 0s linear';
@@ -254,22 +302,6 @@ window.animit = (function(){
       if (this.options.duration <= 0) {
         setTimeout(callback, 1000 / 60);
       }
-    },
-
-    _setTransitionEnd: function(element, callback) {
-      var done = false;
-      TRANSITION_END.forEach(function(transitionEnd) {
-        var f = function() {
-          TRANSITION_END.forEach(function(transitionEnd) {
-            element.removeEventListener(transitionEnd, f);
-          });
-          if (!done) {
-            done = true;
-            return callback.apply(null, arguments);
-          }
-        };
-        element.addEventListener(transitionEnd, f, false);
-      });
     }
   };
 
@@ -296,6 +328,31 @@ window.animit = (function(){
     transformPropValue: function(value) {
       return value.replace(/transform/, function(all) {
         return '-' + Animit.prefix + '-' + all;
+      });
+    },
+
+    /**
+     * Add an event handler on "transitionend" event.
+     */
+    addOnTransitionEnd: function(element, callback) {
+      var done = false;
+      var fn = function(event) {
+        if (element == event.target) {
+          event.stopPropagation();
+
+          TRANSITION_END.forEach(function(eventName) {
+            element.removeEventListener(eventName, fn);
+          });
+
+          if (!done) {
+            done = true;
+            return callback.apply(null, arguments);
+          }
+        }
+      };
+
+      TRANSITION_END.forEach(function(transitionEnd) {
+        element.addEventListener(transitionEnd, fn, false);
       });
     }
   };

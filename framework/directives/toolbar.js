@@ -30,6 +30,10 @@ limitations under the License.
       element[0].insertBefore(container, center);
     }
 
+    if (container.innerHTML.trim() === '') {
+      container.innerHTML = '&nbsp;';
+    }
+
     angular.element(container)
       .addClass('topcoat-navigation-bar__item left quarter')
       .css('float', 'left');
@@ -43,8 +47,11 @@ limitations under the License.
     if (!container) {
       container = document.createElement('div');
       container.setAttribute('class', 'center');
-      container.innerHTML = '&nbsp;';
       element[0].insertBefore(container, right);
+    }
+
+    if (container.innerHTML.trim() === '') {
+      container.innerHTML = '&nbsp;';
     }
 
     angular.element(container)
@@ -62,6 +69,10 @@ limitations under the License.
       container.setAttribute('class', 'right');
       container.innerHTML = '&nbsp;';
       element[0].insertBefore(container, null);
+    }
+
+    if (container.innerHTML.trim() === '') {
+      container.innerHTML = '&nbsp;';
     }
 
     angular.element(container)
@@ -93,10 +104,13 @@ limitations under the License.
       link: {
         pre: function(scope, element, attrs, pageController) {
           scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+
           pageController.registerToolbar(element);
         },
 
         post: function(scope, element, attrs, controller) {
+          scope.modifierTemplater = null;
+
           ensureToolbarItemElements(angular.element(element[0].childNodes[0]));
         }
       }

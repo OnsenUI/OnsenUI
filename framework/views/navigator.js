@@ -19,34 +19,121 @@ limitations under the License.
   'use strict;';
 
   /**
-   * Null animator. Do nothing.
+   * Door locking system.
+   *
+   * @param {Object} [options]
    */
-  var NullAnimator = {
-    push: function(enterPage, leavePage) {
+  var DoorLock = function(options) {
+    options = options || {};
+    this._lockList = [];
+    this._waitList = [];
+    this._log = options.log || function() {};
+  };
+
+  DoorLock.generateId = (function() {
+    var i = 0;
+    return function() {
+      return i++;
+    };
+  })();
+
+  DoorLock.prototype = {
+    /**
+     * Register a lock.
+     *
+     * @return {Function} Callback for unlocking.
+     */
+    lock: function() {
+      var self = this;
+      var unlock = function() {
+        self._unlock(unlock);
+      };
+      unlock.id = DoorLock.generateId();
+      this._lockList.push(unlock);
+      this._log('lock: ' + (unlock.id));
+
+      return unlock;
+    },
+
+    _unlock: function(fn) {
+      var index = this._lockList.indexOf(fn);
+      if (index === -1) {
+        throw new Error('This function is not registered in the lock list.');
+      }
+
+      this._lockList.splice(index, 1);
+      this._log('unlock: ' + fn.id);
+
+      this._tryToFreeWaitList();
+    },
+
+    _tryToFreeWaitList: function() {
+      while (!this.isLocked() && this._waitList.length > 0) {
+        this._waitList.shift()();
+      }
+    },
+
+    /**
+     * Register a callback for waiting unlocked door.
+     *
+     * @params {Function} callback Callback on unlocking the door completely.
+     */
+    waitUnlock: function(callback) {
+      if (!(callback instanceof Function)) {
+        throw new Error('The callback param must be a function.');
+      }
+
+      if (this.isLocked()) {
+        this._waitList.push(callback);
+      } else {
+        callback();
+      }
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isLocked: function() {
+      return this._lockList.length > 0;
+    }
+  };
+
+  /**
+   * Null animator do screen transition with no animations.
+   */
+  var NullAnimator = Class.extend({
+    push: function(enterPage, leavePage, callback) {
+      callback();
     },
 
     pop: function(enterPage, leavePage, callback) {
       callback();
     }
-  };
+  });
 
   /**
    * Simple slide animator for navigator transition.
    */
-  var SimpleSlideAnimator = {
-    push: function(enterPage, leavePage) {
+  var SimpleSlideAnimator = Class.extend({
+    push: function(enterPage, leavePage, callback) {
+      callback();
     },
 
     pop: function(enterPage, leavePage, callback) {
       callback();
     }
-  };
+  });
 
   /**
-   * iOS like slide animator for navigator transition.
+   * Slide animator for navigator transition like iOS's screen slide transition.
    */
-  var NavigatorSlideLeftAnimator = {
+  var NavigatorSlideLeftAnimator = Class.extend({
 
+    init: function() {
+      
+    },
+
+    /** Black mask */
     backgroundMask : angular.element(
       '<div style="position: absolute; width: 100%;' +
       'height: 100%; background-color: black;"></div>'
@@ -55,156 +142,228 @@ limitations under the License.
     /**
      * @param {Object} enterPage
      * @param {Object} leavePage
+     * @param {Function} callback
      */
-    push: function(enterPage, leavePage) {
+    push: function(enterPage, leavePage, callback) {
       var mask = this.backgroundMask.remove();
       leavePage.element[0].parentNode.insertBefore(mask[0], leavePage.element[0]);
 
-      animit.runAll(
+      var maskClear = animit(mask[0])
+        .wait(0.4)
+        .queue(function(done) {
+          mask.remove();
+          done();
+        });
 
-        animit(mask[0])
-          .wait(0.4)
-          .queue(function(done) {
-            mask.remove();
-            done();
-          }),
+      var bothPageHasToolbar =
+        enterPage.controller.hasToolbarElement() &&
+        leavePage.controller.hasToolbarElement();
 
-        animit(enterPage.controller.getContentElement())
-          .queue({
-            css: {
-              transform: 'translate3D(100%, 0px, 0px)',
-            },
-            duration: 0
-          })
-          .queue({
-            css: {
-              transform: 'translate3D(0px, 0px, 0px)',
-            },
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .resetStyle(),
+      var isToolbarNothing = 
+        !enterPage.controller.hasToolbarElement() &&
+        !leavePage.controller.hasToolbarElement();
 
-        animit(enterPage.controller.getToolbarElement())
-          .queue({
-            css: {
-              background: 'none',
-              backgroundColor: 'rgba(0, 0, 0, 0)',
-              borderColor: 'rgba(0, 0, 0, 0)'
-            },
-            duration: 0
-          })
-          .wait(0.6)
-          .resetStyle(),
+      if (bothPageHasToolbar) {
+        animit.runAll(
+
+          maskClear,
+
+          animit(enterPage.controller.getContentElement())
+            .queue({
+              css: {
+                transform: 'translate3D(100%, 0px, 0px)',
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(0px, 0px, 0px)',
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .resetStyle(),
+
+          animit(enterPage.controller.getToolbarElement())
+            .queue({
+              css: {
+                background: 'none',
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+                borderColor: 'rgba(0, 0, 0, 0)'
+              },
+              duration: 0
+            })
+            .wait(0.2)
+            .resetStyle({
+              duration: 0.2,
+              transition:
+                'background 0.2s linear, ' +
+                'background-color 0.2s linear, ' + 
+                'border-color 0.2s linear'
+            }),
 
 
-        animit(enterPage.controller.getToolbarCenterItemsElement())
-          .queue({
-            css: {
-              transform: 'translate3d(100%, 0, 0)',
-              opacity: 0
-            },
-            duration: 0
-          })
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
-            },
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .wait(0.2)
-          .resetStyle(),
+          animit(enterPage.controller.getToolbarCenterItemsElement())
+            .queue({
+              css: {
+                transform: 'translate3d(100%, 0, 0)',
+                opacity: 0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1.0
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.4)
+            .resetStyle(),
 
-        animit(enterPage.controller.getToolbarLeftItemsElement())
-          .queue({
-            css: {opacity: 0},
-            duration: 0
-          })
-          .queue({
-            css: {opacity: 1},
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .resetStyle(),
+          animit(enterPage.controller.getToolbarLeftItemsElement())
+            .queue({
+              css: {opacity: 0},
+              duration: 0
+            })
+            .queue({
+              css: {opacity: 1},
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.4)
+            .resetStyle(),
 
-        animit(enterPage.controller.getToolbarRightItemsElement())
-          .queue({
-            css: {opacity: 0},
-            duration: 0
-          })
-          .queue({
-            css: {opacity: 1},
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .resetStyle(),
+          animit(enterPage.controller.getToolbarRightItemsElement())
+            .queue({
+              css: {opacity: 0},
+              duration: 0
+            })
+            .queue({
+              css: {opacity: 1},
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.4)
+            .resetStyle(),
 
-        animit(leavePage.controller.getContentElement())
-          .queue({
-            css: {
-              transform: 'translate3D(0, 0, 0)',
-              opacity: 1.0
-            },
-            duration: 0
-          })
-          .queue({
-            css: {
-              transform: 'translate3D(-25%, 0px, 0px)',
-              opacity: 0.9
-            },
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .wait(0.2)
-          .resetStyle(),
+          animit(leavePage.controller.getContentElement())
+            .queue({
+              css: {
+                transform: 'translate3D(0, 0, 0)',
+                opacity: 1.0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(-25%, 0px, 0px)',
+                opacity: 0.9
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.2)
+            .resetStyle()
+            .queue(function(done) {
+              callback();
+              done();
+            }),
 
-        animit(leavePage.controller.getToolbarCenterItemsElement())
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
-            },
-            duration: 0
-          })
-          .queue({
-            css: {
-              transform: 'translate3d(-36%, 0, 0)',
-              opacity: 0,
-            },
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .wait(0.2)
-          .resetStyle(),
+          animit(leavePage.controller.getToolbarCenterItemsElement())
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1.0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3d(-36%, 0, 0)',
+                opacity: 0,
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.2)
+            .resetStyle(),
 
-        animit(leavePage.controller.getToolbarLeftItemsElement())
-          .queue({
-            css: {opacity: 1},
-            duration: 0
-          })
-          .queue({
-            css: {opacity: 0},
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .wait(0.2)
-          .resetStyle(),
+          animit(leavePage.controller.getToolbarLeftItemsElement())
+            .queue({
+              css: {opacity: 1},
+              duration: 0
+            })
+            .queue({
+              css: {opacity: 0},
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.2)
+            .resetStyle(),
 
-        animit(leavePage.controller.getToolbarRightItemsElement())
-          .queue({
-            css: {opacity: 1},
-            duration: 0
-          })
-          .queue({
-            css: {opacity: 0},
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .wait(0.2)
-          .resetStyle()
-      );
+          animit(leavePage.controller.getToolbarRightItemsElement())
+            .queue({
+              css: {opacity: 1},
+              duration: 0
+            })
+            .queue({
+              css: {opacity: 0},
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.2)
+            .resetStyle()
+        );
+
+      } else {
+
+        animit.runAll(
+
+          maskClear,
+
+          animit(enterPage.element[0])
+            .queue({
+              css: {
+                transform: 'translate3D(100%, 0px, 0px)',
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(0px, 0px, 0px)',
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .resetStyle(),
+
+          animit(leavePage.element[0])
+            .queue({
+              css: {
+                transform: 'translate3D(0, 0, 0)',
+                opacity: 1.0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(-25%, 0px, 0px)',
+                opacity: 0.9
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.2)
+            .resetStyle()
+            .queue(function(done) {
+              callback();
+              done();
+            })
+        );
+
+      }
     },
 
     /**
@@ -216,169 +375,223 @@ limitations under the License.
       var mask = this.backgroundMask.remove();
       enterPage.element[0].parentNode.insertBefore(mask[0], enterPage.element[0]);
 
-      animit.runAll(
+      var maskClear = animit(mask[0])
+        .wait(0.4)
+        .queue(function(done) {
+          mask.remove();
+          done();
+        });
 
-        animit(mask[0])
-          .wait(0.4)
-          .queue(function(done) {
-            mask.remove();
-            done();
-          }),
+      var bothPageHasToolbar =
+        enterPage.controller.hasToolbarElement() &&
+        leavePage.controller.hasToolbarElement();
 
-        animit(enterPage.controller.getContentElement())
-          .queue({
-            css: {
-              transform: 'translate3D(-25%, 0px, 0px)',
-              opacity: 0.9
-            },
-            duration: 0
-          })
-          .queue({
-            css: {
-              transform: 'translate3D(0px, 0px, 0px)',
-              opacity: 1.0
-            },
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .wait(0.4)
-          .resetStyle(),
+      var isToolbarNothing = 
+        !enterPage.controller.hasToolbarElement() &&
+        !leavePage.controller.hasToolbarElement();
 
-        animit(enterPage.controller.getToolbarCenterItemsElement())
-          .queue({
-            css: {
-              transform: 'translate3d(-36%, 0, 0)',
-              opacity: 0
-            },
-            duration: 0
-          })
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
-            },
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .resetStyle(),
+      if (bothPageHasToolbar || isToolbarNothing) {
 
-        animit(enterPage.controller.getToolbarLeftItemsElement())
-          .queue({
-            css: {opacity: 0},
-            duration: 0
-          })
-          .queue({
-            css: {opacity: 1},
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .resetStyle(),
+        animit.runAll(
 
-        animit(enterPage.controller.getToolbarRightItemsElement())
-          .queue({
-            css: {opacity: 0},
-            duration: 0
-          })
-          .queue({
-            css: {opacity: 1},
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .resetStyle(),
+          maskClear,
 
-        animit(leavePage.controller.getContentElement())
-          .queue({
-            css: {
-              transform: 'translate3D(0px, 0px, 0px)'
-            },
-            duration: 0
-          })
-          .queue({
-            css: {
-              transform: 'translate3D(100%, 0px, 0px)'
-            },
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .wait(0.2)
-          .queue(function(finish) {
-            done();
-            finish();
-          }),
+          animit(enterPage.controller.getContentElement())
+            .queue({
+              css: {
+                transform: 'translate3D(-25%, 0px, 0px)',
+                opacity: 0.9
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(0px, 0px, 0px)',
+                opacity: 1.0
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.4)
+            .resetStyle(),
 
-        animit(leavePage.controller.getToolbarElement())
-          .queue({
-            css: {
-              background: 'none',
-              backgroundColor: 'rgba(0, 0, 0, 0)',
-              borderColor: 'rgba(0, 0, 0, 0)'
-            },
-            duration: 0
-          })
-          .wait(0.4),
+          animit(enterPage.controller.getToolbarCenterItemsElement())
+            .queue({
+              css: {
+                transform: 'translate3d(-36%, 0, 0)',
+                opacity: 0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1.0
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .resetStyle(),
+
+          animit(enterPage.controller.getToolbarLeftItemsElement())
+            .queue({
+              css: {opacity: 0},
+              duration: 0
+            })
+            .queue({
+              css: {opacity: 1},
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .resetStyle(),
+
+          animit(enterPage.controller.getToolbarRightItemsElement())
+            .queue({
+              css: {opacity: 0},
+              duration: 0
+            })
+            .queue({
+              css: {opacity: 1},
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .resetStyle(),
+
+          animit(leavePage.controller.getContentElement())
+            .queue({
+              css: {
+                transform: 'translate3D(0px, 0px, 0px)'
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(100%, 0px, 0px)'
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.2)
+            .queue(function(finish) {
+              done();
+              finish();
+            }),
+
+          animit(leavePage.controller.getToolbarElement())
+            .queue({
+              css: {
+                background: 'none',
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+                borderColor: 'rgba(0, 0, 0, 0)'
+              },
+              duration: 0
+            })
+            .wait(0.4),
 
 
-        animit(leavePage.controller.getToolbarCenterItemsElement())
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1.0
-            },
-            duration: 0
-          })
-          .queue({
-            css: {
-              transform: 'translate3d(100%, 0, 0)',
-              opacity: 0,
-            },
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          }),
+          animit(leavePage.controller.getToolbarCenterItemsElement())
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1.0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3d(100%, 0, 0)',
+                opacity: 0,
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            }),
 
-        animit(leavePage.controller.getToolbarLeftItemsElement())
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1
-            },
-            duration: 0
-          })
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 0
-            },
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .wait(0.2)
-          .resetStyle(),
+          animit(leavePage.controller.getToolbarLeftItemsElement())
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 0
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            }),
 
-        animit(leavePage.controller.getToolbarRightItemsElement())
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 1
-            },
-            duration: 0
-          })
-          .queue({
-            css: {
-              transform: 'translate3d(0, 0, 0)',
-              opacity: 0
-            },
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .wait(0.2)
-          .resetStyle()
-      );
+          animit(leavePage.controller.getToolbarRightItemsElement())
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 0
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+        );
+      } else {
+
+        animit.runAll(
+
+          maskClear,
+
+          animit(enterPage.element[0])
+            .queue({
+              css: {
+                transform: 'translate3D(-25%, 0px, 0px)',
+                opacity: 0.9
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(0px, 0px, 0px)',
+                opacity: 1.0
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.4)
+            .resetStyle(),
+
+          animit(leavePage.element[0])
+            .queue({
+              css: {
+                transform: 'translate3D(0px, 0px, 0px)'
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(100%, 0px, 0px)'
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.2)
+            .queue(function(finish) {
+              done();
+              finish();
+            })
+        );
+      }
     }
-  };
+  });
 
   var directives = angular.module('onsen');
 
-  directives.factory('Navigator', function($http, $parse, $templateCache, $compile, requestAnimationFrame, PredefinedPageCache, OnsenUtil) {
+  directives.factory('Navigator', function($http, $parse, $templateCache, $compile, PredefinedPageCache) {
 
     /**
      * Manages the page navigation backed by page stack.
@@ -388,9 +601,9 @@ limitations under the License.
     var Navigator = Class.extend({
 
       /**
-       * @member {Array}
+       * @member jqLite Object
        */
-      element: undefined,
+      _element: undefined,
 
       /**
        * @member {Array}
@@ -400,18 +613,24 @@ limitations under the License.
       /**
        * @member {Object}
        */
-      scope: undefined,
+      _scope: undefined,
+
+      /**
+       * @member {DoorLock}
+       */
+      _doorLock: undefined,
 
       /**
        * @param {Object} options
-       * @param {HTMLElement} options.element jqLite Object to manage with navigator
+       * @param options.element jqLite Object to manage with navigator
        * @param options.scope Angular.js scope object
        */
       init: function(options) {
         options = options || options;
 
-        this.element = options.element || angular.element(window.document.body);
-        this.scope = options.scope || this.element.scope();
+        this._element = options.element || angular.element(window.document.body);
+        this._scope = options.scope || this._element.scope();
+        this._doorLock = new DoorLock();
         this.pages = [];
       },
 
@@ -439,38 +658,42 @@ limitations under the License.
       pushPage: function(page, options) {
         options = options || {};
 
-        if (options && typeof options != 'object') {
-          throw new Error('options must be an objected. You supplied ' + options);
-        }
+        var self = this;
+        this._doorLock.waitUnlock(function() {
+          var unlock = self._doorLock.lock();
 
-        var templateHTML = $templateCache.get(page);
-        var that = this;
+          if (options && typeof options != 'object') {
+            throw new Error('options must be an objected. You supplied ' + options);
+          }
 
-        if (templateHTML) {
-          var pageScope = this._createPageScope();
-          var pageElement = createPageElement(templateHTML, pageScope);
-          setTimeout(function() {
-            that._pushPageDOM(page, pageElement, pageScope, options);
-          }, 1000 / 60);
+          var templateHTML = $templateCache.get(page);
 
-        } else {
+          if (templateHTML) {
+            var pageScope = self._createPageScope();
+            var pageElement = createPageElement(templateHTML, pageScope);
+            setTimeout(function() {
+              self._pushPageDOM(page, pageElement, pageScope, options, unlock);
+            }, 1000 / 60);
 
-          $http({
-            url: page,
-            method: 'GET',
-            cache: PredefinedPageCache
-          })
-            .success(function(templateHTML, status, headers, config) {
-              var pageScope = that._createPageScope();
-              var pageElement = createPageElement(templateHTML, pageScope);
-              setTimeout(function() {
-                that._pushPageDOM(page, pageElement, pageScope, options);
-              }, 1000 / 60);
+          } else {
+
+            $http({
+              url: page,
+              method: 'GET',
+              cache: PredefinedPageCache
             })
-            .error(function(data, status, headers, config) {
-              console.error('error', data, status);
-            });
-        }
+              .success(function(templateHTML, status, headers, config) {
+                var pageScope = self._createPageScope();
+                var pageElement = createPageElement(templateHTML, pageScope);
+                setTimeout(function() {
+                  self._pushPageDOM(page, pageElement, pageScope, options, unlock);
+                }, 1000 / 60);
+              })
+              .error(function(data, status, headers, config) {
+                console.error('error', data, status);
+              });
+          }
+        });
 
         function createPageElement(templateHTML, pageScope, done) {
           var div = document.createElement('div');
@@ -481,6 +704,8 @@ limitations under the License.
             div.childNodes[0].nodeName.toLowerCase() === 'ons-page';
           if (hasPage) {
             pageElement = angular.element(div.childNodes[0]);
+          } else {
+            throw new Error('You can not supply no "ons-page" element to "ons-navigator".');
           }
 
           var element = $compile(pageElement)(pageScope);
@@ -489,7 +714,7 @@ limitations under the License.
       },
 
       _createPageScope: function() {
-         return this.scope.$parent.$new();
+         return this._scope.$parent.$new();
       },
 
       /**
@@ -497,8 +722,10 @@ limitations under the License.
        * @param {Object} element Compiled page element.
        * @param {Object} pageScope
        * @param {Object} options
+       * @param {Function} [unlock]
        */
-      _pushPageDOM: function(page, element, pageScope, options) {
+      _pushPageDOM: function(page, element, pageScope, options, unlock) {
+        unlock = unlock || function() {};
         element = this._normalizePageElement(element);
 
         var pageController = element.inheritedData('$onsPageController');
@@ -514,14 +741,19 @@ limitations under the License.
           options: options || {}
         });
 
+        if (this.pages.length > 2) {
+          this.pages[this.pages.length - 3].element.remove();
+        }
+
         if (this.pages.length > 1) {
           var leavePage = this.pages.slice(-2)[0];
           var enterPage = this.pages.slice(-1)[0];
 
-          NavigatorSlideLeftAnimator.push(enterPage, leavePage);
-          this.element.append(element);
+          new NavigatorSlideLeftAnimator().push(enterPage, leavePage, unlock);
+          this._element.append(element);
         } else {
-          this.element.append(element);
+          this._element.append(element);
+          unlock();
         }
       },
 
@@ -529,21 +761,28 @@ limitations under the License.
        * Pops current page from the page stack.
        */
       popPage: function() {
-        if (this.pages.length === 0) {
+        if (this.pages.length <= 1) {
           throw new Error('Navigator\'s page stack is empty.');
         }
 
-        var deadPage = this.pages.pop();
+        var self = this;
+        this._doorLock.waitUnlock(function() {
+          var unlock = self._doorLock.lock();
 
-        if (this.pages.length === 0) {
-          deadPage.element.remove();
-        } else {
-          var enterPage = this.pages.slice(-1)[0];
+          var leavePage = self.pages.pop();
+
+          if (self.pages[self.pages.length - 2]) {
+            angular.element(self._element)
+              .prepend(self.pages[self.pages.length - 2].element);
+          }
+
+          var enterPage = self.pages[self.pages.length -1];
           var callback = function() {
-            deadPage.element.remove();
+            leavePage.element.remove();
+            unlock();
           };
-          NavigatorSlideLeftAnimator.pop(enterPage, deadPage, callback);
-        }
+          new NavigatorSlideLeftAnimator().pop(enterPage, leavePage, callback);
+        });
       },
 
       /**

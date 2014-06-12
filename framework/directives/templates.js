@@ -3,6 +3,20 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
+  $templateCache.put("templates/back_button.tpl",
+    "<span class=\"topcoat-icon-button--quiet {{modifierTemplater('topcoat-icon-button--quiet--*')}}\" ng-click=\"ons.navigator.popPage()\" style=\"height: 44px; line-height: 0; padding: 0;\">\n" +
+    "  <i class=\"fa fa-angle-left\" style=\"line-height: 44px; font-size: 36px; float:left; padding-left: 8px; padding-right: 4px;\"></i>\n" +
+    "  <span style=\"vertical-align: middle; line-height: 44px; display: inline-block; height: 44px; float: left;\" class=\"back-button__label\"></span>\n" +
+    "</span>\n" +
+    "");
+}]);
+})();
+
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/bottom_toolbar.tpl",
     "<div class=\"onsen_bottom-toolbar topcoat-navigation-bar topcoat-navigation-bar--bottom ons-bottom-toolbar-inner {{modifierTemplater('topcoat-navigation-bar--*')}}\" ng-transclude></div>\n" +
     "");
@@ -124,16 +138,6 @@ app.run(["$templateCache", function($templateCache) {
     "<div class=\"ons-navigator\">\n" +
     "</div>\n" +
     "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/navigator_toolbar.tpl",
-    "<div class=\"onse_navigator-toolbar\"></div>");
 }]);
 })();
 
@@ -304,7 +308,18 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/toolbar.tpl",
-    "<div class=\"topcoat-navigation-bar {{modifierTemplater('topcoat-navigation-bar--*')}}\" style=\"position: relative; z-index: 10000;\" ng-transclude></div>\n" +
+    "<div class=\"topcoat-navigation-bar {{modifierTemplater('topcoat-navigation-bar--*')}}\" ng-transclude></div>\n" +
+    "");
+}]);
+})();
+
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("templates/toolbar_button.tpl",
+    "<span class=\"topcoat-icon-button--quiet {{modifierTemplater('topcoat-icon-button--quiet--*')}}\" ng-transclude></span>\n" +
     "");
 }]);
 })();
