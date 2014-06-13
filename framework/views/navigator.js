@@ -727,7 +727,9 @@ limitations under the License.
        *
        * @param {String} page
        * @param {Object} [options]
-       * @param {String|TransitionAnimator} [options.animation]
+       * @param {String} [options.animation]
+       * @param {TransitionAnimator} [options.animator]
+       * @param {Function} [options.onTransitionEnd]
        */
       pushPage: function(page, options) {
 
@@ -858,6 +860,9 @@ limitations under the License.
         var done = function() {
           unlock();
           self.emit('postPush', event);
+          if (typeof options.onTransitionEnd === 'function') {
+            options.onTransitionEnd();
+          }
         };
 
         this.pages.push(pageObject);
@@ -916,8 +921,12 @@ limitations under the License.
 
       /**
        * Pops current page from the page stack.
+       * @param {Object} [options]
+       * @param {Function} [options.onTransitionEnd]
        */
-      popPage: function() {
+      popPage: function(options) {
+        options = options || {};
+
         if (this.pages.length <= 1) {
           throw new Error('Navigator\'s page stack is empty.');
         }
@@ -937,15 +946,20 @@ limitations under the License.
           }
 
           var enterPage = self.pages[self.pages.length -1];
+
           var event = {
             leavePage: leavePage,
             enterPage: self.pages[self.pages.length - 1],
             navigator: self
           };
+
           var callback = function() {
             leavePage.element.remove();
             unlock();
             self.emit('postPop', event);
+            if (typeof options.onTransitionEnd === 'function') {
+              options.onTransitionEnd();
+            }
           };
           leavePage.options.animator.pop(enterPage, leavePage, callback);
         });
