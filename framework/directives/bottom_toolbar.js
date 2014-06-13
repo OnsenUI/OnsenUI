@@ -21,7 +21,7 @@ limitations under the License.
 
   var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-  directives.directive('onsBottomToolbar', function(ONSEN_CONSTANTS, $timeout) {
+  directives.directive('onsBottomToolbar', function(ONSEN_CONSTANTS, OnsenUtil) {
     return {
       restrict: 'E',
       transclude: true,

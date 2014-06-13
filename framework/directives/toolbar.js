@@ -107,16 +107,20 @@ limitations under the License.
         pre: function(scope, element, attrs, pageController, transclude) {
           var modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
 
-          var wrapper = angular.element(document.createElement('div'));
-          wrapper.addClass('topcoat-navigation-bar');
-          wrapper.addClass(modifierTemplater('topcoat-navigation-bar--*'));
+          element.addClass('topcoat-navigation-bar');
+          element.addClass(modifierTemplater('topcoat-navigation-bar--*'));
+          element.css({
+            'position': 'absolute',
+            'z-index': '10000',
+            'left': '0px',
+            'right': '0px'
+          });
 
-          element.append(wrapper);
           pageController.registerToolbar(element);
 
           transclude(scope, function(clonedElement) {
-            wrapper.append(clonedElement);
-            ensureToolbarItemElements(angular.element(wrapper[0]));
+            element.append(clonedElement);
+            ensureToolbarItemElements(angular.element(element[0]));
           });
         },
 

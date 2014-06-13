@@ -61,7 +61,6 @@ limitations under the License.
         element.remove();
         $element.prepend(element);
 
-        element.css({'position': 'relative', 'z-index': '10000'});
 
         this.toolbarElement = element;
         this.registeredToolbarElement = true;
@@ -93,7 +92,7 @@ limitations under the License.
        * @return {HTMLElement}
        */
       this.getToolbarElement = function() {
-        return this.toolbarElement[0].querySelector('.topcoat-navigation-bar') || this.nullElement;
+        return this.toolbarElement[0] || this.nullElement;
       };
 
       /**
