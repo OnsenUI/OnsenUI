@@ -857,19 +857,21 @@ limitations under the License.
           navigator: this
         };
 
+        this.pages.push(pageObject);
+
         var done = function() {
+          if (self.pages[self.pages.length - 2]) {
+            self.pages[self.pages.length - 2].element.css('display', 'none');
+          }
+
           unlock();
+
           self.emit('postPush', event);
+
           if (typeof options.onTransitionEnd === 'function') {
             options.onTransitionEnd();
           }
         };
-
-        this.pages.push(pageObject);
-
-        if (this.pages.length > 2) {
-          this.pages[this.pages.length - 3].element.css('display', 'none');
-        }
 
         if (this.pages.length > 1) {
           var leavePage = this.pages.slice(-2)[0];
@@ -941,8 +943,8 @@ limitations under the License.
 
           var leavePage = self.pages.pop();
 
-          if (self.pages[self.pages.length - 2]) {
-            self.pages[self.pages.length - 2].element.css('display', 'block');
+          if (self.pages[self.pages.length - 1]) {
+            self.pages[self.pages.length - 1].element.css('display', 'block');
           }
 
           var enterPage = self.pages[self.pages.length -1];
