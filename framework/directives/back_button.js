@@ -29,6 +29,9 @@ limitations under the License.
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
           scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+          scope.back = function() {
+            scope.ons.navigator.popPage();
+          };
 
           transclude(scope.$parent.$new(), function(clonedElement) {
             if (clonedElement.length === 0) {
