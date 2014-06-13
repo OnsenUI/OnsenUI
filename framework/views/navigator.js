@@ -873,11 +873,33 @@ limitations under the License.
       },
 
       /**
+       * @return {Boolean} Whether if event is canceled.
+       */
+      _emitPrePopEvent: function() {
+        var isCanceled = false;
+        var prePopEvent = {
+          navigator: this,
+          currentPage: this.getCurrentPage(),
+          cancel: function() {
+            isCanceled = true;
+          }
+        };
+
+        this.emit('prePop', prePopEvent);
+
+        return isCanceled;
+      },
+
+      /**
        * Pops current page from the page stack.
        */
       popPage: function() {
         if (this.pages.length <= 1) {
           throw new Error('Navigator\'s page stack is empty.');
+        }
+
+        if (this._emitPrePopEvent()) {
+          return;
         }
 
         var self = this;
@@ -930,7 +952,7 @@ limitations under the License.
        * @return {Object} 
        */
       getCurrentPage: function() {
-        return this.pages.last();
+        return this.pages[this.pages.length - 1];
       },
 
       /**
