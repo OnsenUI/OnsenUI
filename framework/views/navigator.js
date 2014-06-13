@@ -968,15 +968,27 @@ limitations under the License.
       /**
        * Clears page stack and add the specified pageUrl to the page stack.
        * If options object is specified, apply the options.
-       * the options object include all the attributes of this navigator
+       * the options object include all the attributes of this navigator.
        *
        * @param {String} page
        * @param {Object} [options]
        */
       resetToPage: function(page, options) {
-        while (this.pages.length > 0) {
-          this.pages.pop().element.remove();
+        options = options || {};
+
+        if (!options.animator && !options.animation) {
+          options.animation = 'none';
         }
+
+        var onTransitionEnd = options.onTransitionEnd || function() {};
+        var self = this;
+
+        options.onTransitionEnd = function() {
+          while (self.pages.length > 1) {
+            self.pages.shift().element.remove();
+          }
+          onTransitionEnd();
+        };
 
         this.pushPage(page, options);
       },
