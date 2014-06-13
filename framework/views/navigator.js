@@ -841,7 +841,7 @@ limitations under the License.
         });
 
         if (this.pages.length > 2) {
-          this.pages[this.pages.length - 3].element.remove();
+          this.pages[this.pages.length - 3].element.css('display', 'none');
         }
 
         if (this.pages.length > 1) {
@@ -871,8 +871,7 @@ limitations under the License.
           var leavePage = self.pages.pop();
 
           if (self.pages[self.pages.length - 2]) {
-            angular.element(self._element)
-              .prepend(self.pages[self.pages.length - 2].element);
+            self.pages[self.pages.length - 2].element.css('display', 'block');
           }
 
           var enterPage = self.pages[self.pages.length -1];
