@@ -832,13 +832,29 @@ limitations under the License.
           throw new Error('Fail to fetch $onsPageController.');
         }
 
-        this.pages.push({
+        var self = this;
+
+        var pageObject = {
           page: page,
+          name: page,
           element: element,
           pageScope: pageScope,
           controller: pageController,
           options: options
-        });
+        };
+
+        var event = {
+          enterPage: pageObject,
+          leagePage: this.pages[this.pages.length - 1],
+          navigator: this
+        };
+
+        var done = function() {
+          unlock();
+          self.emit('postPush', event);
+        };
+
+        this.pages.push(pageObject);
 
         if (this.pages.length > 2) {
           this.pages[this.pages.length - 3].element.css('display', 'none');
@@ -848,11 +864,11 @@ limitations under the License.
           var leavePage = this.pages.slice(-2)[0];
           var enterPage = this.pages.slice(-1)[0];
 
-          options.animator.push(enterPage, leavePage, unlock);
+          options.animator.push(enterPage, leavePage, done);
           this._element.append(element);
         } else {
           this._element.append(element);
-          unlock();
+          done();
         }
       },
 
@@ -875,9 +891,15 @@ limitations under the License.
           }
 
           var enterPage = self.pages[self.pages.length -1];
+          var event = {
+            leavePage: leavePage,
+            enterPage: self.pages[self.pages.length - 1],
+            navigator: self
+          };
           var callback = function() {
             leavePage.element.remove();
             unlock();
+            self.emit('postPop', event);
           };
           leavePage.options.animator.pop(enterPage, leavePage, callback);
         });
@@ -938,6 +960,8 @@ limitations under the License.
 
       this._transitionAnimatorDict[name] = animator;
     };
+
+    MicroEvent.mixin(Navigator);
 
     return Navigator;
   });

@@ -86,8 +86,12 @@ limitations under the License.
         },
         post: function() {
           if (!isReady) {
-            $rootScope.$broadcast('$ons-ready');
-            isReady = true;
+            setTimeout(function() { 
+              if (!isReady) {
+                $rootScope.$broadcast('$ons-ready');
+                isReady = true;
+              }
+            }, 1000 /60);
           }
         }
       }
