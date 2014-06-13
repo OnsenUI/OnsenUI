@@ -42,105 +42,115 @@ limitations under the License.
   }
 
   directives.directive('onsPage', function(ONSEN_CONSTANTS, OnsenUtil) {
+    function controller($scope, $element) {
+
+      this.registeredToolbarElement = false;
+
+      this.nullElement = window.document.createElement('div');
+
+      this.toolbarElement = angular.element(this.nullElement);
+
+      /**
+       * Register toolbar element to this page.
+       */
+      this.registerToolbar = function(element) {
+        if (this.registeredToolbarElement) {
+          throw new Error('This page\'s toolbar is already registered.');
+        }
+        
+        element.remove();
+        $element.prepend(element);
+
+        element.css({'position': 'relative', 'z-index': '10000'});
+
+        this.toolbarElement = element;
+        this.registeredToolbarElement = true;
+      };
+
+      /**
+       * @return {Boolean}
+       */
+      this.hasToolbarElement = function() {
+        return this.registeredToolbarElement;
+      };
+
+      /**
+       * @return {HTMLElement}
+       */
+      this.getContentElement = function() {
+        for (var i = 0; i < $element.length; i++) {
+          if ($element[i].querySelector) {
+            var content = $element[i].querySelector('.topcoat-page__content');
+            if (content) {
+              return content;
+            }
+          }
+        }
+        throw Error('fail to get ".topcoat-page__content" element.');
+      };
+
+      /**
+       * @return {HTMLElement}
+       */
+      this.getToolbarElement = function() {
+        return this.toolbarElement[0].querySelector('.topcoat-navigation-bar') || this.nullElement;
+      };
+
+      /**
+       * @return {HTMLElement}
+       */
+      this.getToolbarLeftItemsElement = function() {
+        return this.toolbarElement[0].querySelector('.left') || this.nullElement;
+      };
+
+      /**
+       * @return {HTMLElement}
+       */
+      this.getToolbarCenterItemsElement = function() {
+        return this.toolbarElement[0].querySelector('.center') || this.nullElement;
+      };
+
+      /**
+       * @return {HTMLElement}
+       */
+      this.getToolbarRightItemsElement = function() {
+        return this.toolbarElement[0].querySelector('.right') || this.nullElement;
+      };
+
+      /**
+       * @return {HTMLElement}
+       */
+      this.getToolbarBackButtonLabelElement = function() {
+        return this.toolbarElement[0].querySelector('ons-back-button .back-button__label') || this.nullElement;
+      };
+
+      $scope.$on('$destroy', function(){
+        this.toolbarElement = null;
+        this.nullElement = null;
+      }.bind(this));
+
+    }
+
     return {
       restrict: 'E',
       transclude: true,
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/page.tpl',
+      scope: true,
+      controller: controller,
 
-      controller: function($scope, $element) {
-
-        this.registeredToolbarElement = false;
-
-        this.nullElement = window.document.createElement('div');
-
-        this.toolbarElement = angular.element(this.nullElement);
-
-        /**
-         * Register toolbar element to this page.
-         */
-        this.registerToolbar = function(element) {
-          if (this.registeredToolbarElement) {
-            throw new Error('This page\'s toolbar is already registered.');
-          }
-          
-          element.remove();
-          $element.prepend(element);
-
-          element.css({'position': 'relative', 'z-index': '10000'});
-
-          this.toolbarElement = element;
-          this.registeredToolbarElement = true;
-        };
-
-        /**
-         * @return {Boolean}
-         */
-        this.hasToolbarElement = function() {
-          return this.registeredToolbarElement;
-        };
-
-        /**
-         * @return {HTMLElement}
-         */
-        this.getContentElement = function() {
-          for (var i = 0; i < $element.length; i++) {
-            if ($element[i].querySelector) {
-              var content = $element[i].querySelector('.topcoat-page__content');
-              if (content) {
-                return content;
-              }
-            }
-          }
-          throw Error('fail to get ".topcoat-page__content" element.');
-        };
-
-        /**
-         * @return {HTMLElement}
-         */
-        this.getToolbarElement = function() {
-          return this.toolbarElement[0].querySelector('.topcoat-navigation-bar') || this.nullElement;
-        };
-
-        /**
-         * @return {HTMLElement}
-         */
-        this.getToolbarLeftItemsElement = function() {
-          return this.toolbarElement[0].querySelector('.left') || this.nullElement;
-        };
-
-        /**
-         * @return {HTMLElement}
-         */
-        this.getToolbarCenterItemsElement = function() {
-          return this.toolbarElement[0].querySelector('.center') || this.nullElement;
-        };
-
-        /**
-         * @return {HTMLElement}
-         */
-        this.getToolbarRightItemsElement = function() {
-          return this.toolbarElement[0].querySelector('.right') || this.nullElement;
-        };
-
-        /**
-         * @return {HTMLElement}
-         */
-        this.getToolbarBackButtonLabelElement = function() {
-          return this.toolbarElement[0].querySelector('ons-back-button .back-button__label') || this.nullElement;
-        };
-
-        $scope.$on('$destroy', function(){
-          this.toolbarElement = null;
-          this.nullElement = null;
-        }.bind(this));
-
-      },
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclde.
 
       link: {
 
-        pre: function(scope, element, attrs) {
+        pre: function(scope, element, attrs, controller, transclude) {
           var modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
           element.addClass('topcoat-page ' + modifierTemplater('topcoat-page--*') + ' ons-page-inner');
+
+          transclude(scope, function(clonedElement) {
+            var wrapper = angular.element('<div class="topcoat-page__content"></div>');
+            element.append(wrapper);
+            wrapper.append(clonedElement);
+          });
         },
 
         post: function(scope, element, attrs) {

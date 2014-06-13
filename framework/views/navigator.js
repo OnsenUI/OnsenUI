@@ -820,7 +820,7 @@ limitations under the License.
 
 
       _createPageScope: function() {
-         return this._scope.$parent.$new();
+         return this._scope.$new();
       },
 
       /**

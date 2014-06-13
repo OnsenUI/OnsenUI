@@ -19,12 +19,14 @@ limitations under the License.
   'use strict';
   var directives = angular.module('onsen.directives');
 
-  directives.directive('onsNavigator', function(ONSEN_CONSTANTS, $http, $compile, $parse, NavigatorStack, Navigator, OnsenUtil, $templateCache) {
+  directives.directive('onsNavigator', function(ONSEN_CONSTANTS, $compile, NavigatorStack, Navigator, OnsenUtil) {
     return {
       restrict: 'E',
-      replace: false,
       transclude: true,
-      scope: {},
+      scope: true,
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclde.
 
       link: {
         post: function(scope, iElement, attrs, controller, transclude) {

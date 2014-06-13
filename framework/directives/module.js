@@ -80,6 +80,7 @@ limitations under the License.
     var isReady = false;
     return {
       restrict: 'E',
+      priority: Number.MAX_VALUE,
 
       link: {
         pre: function() {

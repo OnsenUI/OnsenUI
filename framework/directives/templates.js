@@ -134,17 +134,6 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/page.tpl",
-    "<div class=\"topcoat-page__content\" ng-transclude></div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("templates/radio_button.tpl",
     "<label class=\"topcoat-radio-button {{modifierTemplater('topcoat-radio-button--*')}}\">\n" +
     "  {{leftLabel}}\n" +
@@ -287,17 +276,6 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/text_input.tpl",
     "<input class=\"topcoat-text-input\">");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/toolbar.tpl",
-    "<div class=\"topcoat-navigation-bar {{modifierTemplater('topcoat-navigation-bar--*')}}\" ng-transclude></div>\n" +
-    "");
 }]);
 })();
 

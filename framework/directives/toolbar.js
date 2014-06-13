@@ -97,21 +97,31 @@ limitations under the License.
       replace: false,
       transclude: true,
       require: '^onsPage',
-      scope: false,
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/toolbar.tpl',
-      controller: function($element) {
-      },
-      link: {
-        pre: function(scope, element, attrs, pageController) {
-          scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
 
+      scope: true, 
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclde.
+      
+      link: {
+        pre: function(scope, element, attrs, pageController, transclude) {
+          var modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+
+          var wrapper = angular.element(document.createElement('div'));
+          wrapper.addClass('topcoat-navigation-bar');
+          wrapper.addClass(modifierTemplater('topcoat-navigation-bar--*'));
+
+          element.append(wrapper);
           pageController.registerToolbar(element);
+
+          transclude(scope, function(clonedElement) {
+            wrapper.append(clonedElement);
+            ensureToolbarItemElements(angular.element(wrapper[0]));
+          });
         },
 
         post: function(scope, element, attrs, controller) {
-          scope.modifierTemplater = null;
 
-          ensureToolbarItemElements(angular.element(element[0].childNodes[0]));
         }
       }
     };
