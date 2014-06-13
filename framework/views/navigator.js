@@ -730,12 +730,18 @@ limitations under the License.
        * @param {String|TransitionAnimator} [options.animation]
        */
       pushPage: function(page, options) {
+
         options = options || {};
-        options.animator = getAnimatorOption();
 
         if (options && typeof options != 'object') {
           throw new Error('options must be an objected. You supplied ' + options);
         }
+
+        if (this._emitPrePushEvent()) {
+          return;
+        }
+
+        options.animator = getAnimatorOption();
 
         var self = this;
         this._doorLock.waitUnlock(function() {
@@ -870,6 +876,24 @@ limitations under the License.
           this._element.append(element);
           done();
         }
+      },
+
+      /**
+       * @return {Boolean} Whether if event is canceled.
+       */
+      _emitPrePushEvent: function() {
+        var isCanceled = false;
+        var prePushEvent = {
+          navigator: this,
+          currentPage: this.getCurrentPage(),
+          cancel: function() {
+            isCanceled = true;
+          }
+        };
+
+        this.emit('prePush', prePushEvent);
+
+        return isCanceled;
       },
 
       /**
