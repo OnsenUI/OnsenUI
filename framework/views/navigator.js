@@ -98,10 +98,20 @@ limitations under the License.
     }
   };
 
+  var TransitionAnimator = Class.extend({
+    push: function(enterPage, leavePage, callback) {
+      callback();
+    },
+
+    pop: function(enterPage, leavePage, callback) {
+      callback();
+    }
+  });
+
   /**
    * Null animator do screen transition with no animations.
    */
-  var NullAnimator = Class.extend({
+  var NullAnimator = TransitionAnimator.extend({
     push: function(enterPage, leavePage, callback) {
       callback();
     },
@@ -114,7 +124,7 @@ limitations under the License.
   /**
    * Simple slide animator for navigator transition.
    */
-  var SimpleSlideAnimator = Class.extend({
+  var SimpleSlideAnimator = TransitionAnimator.extend({
     push: function(enterPage, leavePage, callback) {
       callback();
     },
@@ -127,7 +137,7 @@ limitations under the License.
   /**
    * Slide animator for navigator transition like iOS's screen slide transition.
    */
-  var NavigatorSlideLeftAnimator = Class.extend({
+  var NavigatorSlideLeftAnimator = TransitionAnimator.extend({
 
     init: function() {
       
@@ -654,17 +664,19 @@ limitations under the License.
        *
        * @param {String} page
        * @param {Object} [options]
+       * @param {String|TransitionAnimator} [options.animation]
        */
       pushPage: function(page, options) {
         options = options || {};
+        options.animator = getAnimatorOption();
+
+        if (options && typeof options != 'object') {
+          throw new Error('options must be an objected. You supplied ' + options);
+        }
 
         var self = this;
         this._doorLock.waitUnlock(function() {
           var unlock = self._doorLock.lock();
-
-          if (options && typeof options != 'object') {
-            throw new Error('options must be an objected. You supplied ' + options);
-          }
 
           var templateHTML = $templateCache.get(page);
 
@@ -711,7 +723,30 @@ limitations under the License.
           var element = $compile(pageElement)(pageScope);
           return element;
         }
+
+        function getAnimatorOption() {
+          var animator = null;
+
+          if (options.animator instanceof TransitionAnimator) {
+            return options.animator;
+          }
+
+          if (typeof options.animation === 'string') {
+            animator = Navigator._transitionAnimatorDict[options.animation];
+          }
+
+          if (!animator) {
+            animator = Navigator._transitionAnimatorDict['default'];
+          }
+
+          if (!(animator instanceof TransitionAnimator)) {
+            throw new Error('"animator" is not an instance of TransitionAnimator.');
+          }
+
+          return animator;
+        }
       },
+
 
       _createPageScope: function() {
          return this._scope.$parent.$new();
@@ -726,6 +761,7 @@ limitations under the License.
        */
       _pushPageDOM: function(page, element, pageScope, options, unlock) {
         unlock = unlock || function() {};
+        options = options || {};
         element = this._normalizePageElement(element);
 
         var pageController = element.inheritedData('$onsPageController');
@@ -738,7 +774,7 @@ limitations under the License.
           element: element,
           pageScope: pageScope,
           controller: pageController,
-          options: options || {}
+          options: options
         });
 
         if (this.pages.length > 2) {
@@ -749,7 +785,7 @@ limitations under the License.
           var leavePage = this.pages.slice(-2)[0];
           var enterPage = this.pages.slice(-1)[0];
 
-          new NavigatorSlideLeftAnimator().push(enterPage, leavePage, unlock);
+          options.animator.push(enterPage, leavePage, unlock);
           this._element.append(element);
         } else {
           this._element.append(element);
@@ -781,7 +817,7 @@ limitations under the License.
             leavePage.element.remove();
             unlock();
           };
-          new NavigatorSlideLeftAnimator().pop(enterPage, leavePage, callback);
+          leavePage.options.animator.pop(enterPage, leavePage, callback);
         });
       },
 
@@ -822,6 +858,24 @@ limitations under the License.
         return this.pages;
       }
     });
+
+    Navigator._transitionAnimatorDict = {
+      'default': new NavigatorSlideLeftAnimator(),
+      'none': new NullAnimator()
+    };
+    Navigator._transitionAnimatorDict.slideLeft = new NavigatorSlideLeftAnimator();
+
+    /**
+     * @param {String} name
+     * @param {TransitionAnimator} animator
+     */
+    Navigator.registerTransitionAnimator = function(name, animator) {
+      if (!(animator instanceof TransitionAnimator)) {
+        throw new Error('"animator" param must be an instance of TransitionAnimator');
+      }
+
+      this._transitionAnimatorDict[name] = animator;
+    };
 
     return Navigator;
   });
