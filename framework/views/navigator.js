@@ -111,15 +111,7 @@ limitations under the License.
   /**
    * Null animator do screen transition with no animations.
    */
-  var NullAnimator = TransitionAnimator.extend({
-    push: function(enterPage, leavePage, callback) {
-      callback();
-    },
-
-    pop: function(enterPage, leavePage, callback) {
-      callback();
-    }
-  });
+  var NullAnimator = TransitionAnimator.extend({});
 
   /**
    * Simple slide animator for navigator transition.
@@ -212,6 +204,24 @@ limitations under the License.
                 'border-color 0.2s linear'
             }),
 
+          animit(enterPage.controller.getToolbarBackButtonLabelElement())
+            .queue({
+              css: {
+                transform: 'translate3d(100%, 0, 0)',
+                opacity: 0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1.0
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.4)
+            .resetStyle(),
 
           animit(enterPage.controller.getToolbarCenterItemsElement())
             .queue({
@@ -280,6 +290,25 @@ limitations under the License.
               callback();
               done();
             }),
+
+          animit(leavePage.controller.getToolbarBackButtonLabelElement())
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1.0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3d(-100%, 0, 0)',
+                opacity: 0,
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.2)
+            .resetStyle(),
 
           animit(leavePage.controller.getToolbarCenterItemsElement())
             .queue({
@@ -425,6 +454,24 @@ limitations under the License.
             .wait(0.4)
             .resetStyle(),
 
+          animit(enterPage.controller.getToolbarBackButtonLabelElement())
+            .queue({
+              css: {
+                transform: 'translate3d(-100%, 0, 0)',
+                opacity: 0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1.0
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .resetStyle(),
+
           animit(enterPage.controller.getToolbarCenterItemsElement())
             .queue({
               css: {
@@ -498,6 +545,22 @@ limitations under the License.
             })
             .wait(0.4),
 
+          animit(leavePage.controller.getToolbarBackButtonLabelElement())
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1.0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3d(100%, 0, 0)',
+                opacity: 0,
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            }),
 
           animit(leavePage.controller.getToolbarCenterItemsElement())
             .queue({

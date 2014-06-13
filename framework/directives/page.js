@@ -122,6 +122,13 @@ limitations under the License.
           return this.toolbarElement[0].querySelector('.right') || this.nullElement;
         };
 
+        /**
+         * @return {HTMLElement}
+         */
+        this.getToolbarBackButtonLabelElement = function() {
+          return this.toolbarElement[0].querySelector('ons-back-button .back-button__label') || this.nullElement;
+        };
+
         $scope.$on('$destroy', function(){
           this.toolbarElement = null;
           this.nullElement = null;
