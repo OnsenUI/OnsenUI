@@ -22,34 +22,36 @@ limitations under the License.
   directives.directive('onsNavigator', function(ONSEN_CONSTANTS, $compile, NavigatorStack, Navigator, OnsenUtil) {
     return {
       restrict: 'E',
-      transclude: true,
-      scope: true,
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
+      transclude: true,
+      scope: true,
 
-      link: {
-        post: function(scope, iElement, attrs, controller, transclude) {
+      compile: function() {
 
-          var navigator = new Navigator({
-            scope: scope, 
-            element: iElement
-          });
+        return {
+          pre: function(scope, iElement, attrs, controller, transclude) {
+            var navigator = new Navigator({
+              scope: scope, 
+              element: iElement
+            });
 
-          OnsenUtil.declareVarAttribute(attrs, navigator);
+            OnsenUtil.declareVarAttribute(attrs, navigator);
 
-          var pageScope = navigator._createPageScope();
-          transclude(pageScope, function(compiledPage) {
-            setTimeout(function() {
-              navigator._pushPageDOM('', compiledPage, pageScope, {});
-            }, 1000 / 60);
-          });
+            var pageScope = navigator._createPageScope();
+            transclude(pageScope, function(compiledPage) {
+              setTimeout(function() {
+                navigator._pushPageDOM('', compiledPage, pageScope, {});
+              }, 1000 / 60);
+            });
 
-          NavigatorStack.addNavigator(navigator);
-          scope.$on('$destroy', function(){
-            NavigatorStack.removeNavigator(navigator);
-          });
-        }
+            NavigatorStack.addNavigator(navigator);
+            scope.$on('$destroy', function(){
+              NavigatorStack.removeNavigator(navigator);
+            });
+          }
+        };
       }
     };
   });

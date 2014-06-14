@@ -3,21 +3,26 @@
 (function(){
   'use strict';
 
-  // for initialization hook.
-  if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
-    document.write('<ons-dummy-for-init></ons-dummy-for-init>');
-  } else {
-    var dom = document.createElement('ons-dummy-for-init');
-    document.body.appendChild(dom);
-  }
-
-  angular.module('onsen.directives').run(function($compile, $rootScope) {
+  angular.module('onsen').run(function($compile, $rootScope) {
     ons.$compile = $compile;
     $rootScope.$on('$ons-ready', function() {
       ons.isReady = function() {
         return true;
       };
     });
+
+    // for initialization hook.
+    if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
+      angular.element(document.body).on('DOMContentLoaded', function() {
+        var dom = document.createElement('ons-dummy-for-init');
+        document.body.appendChild(dom);
+      });
+    } else if (document.body) {
+      var dom = document.createElement('ons-dummy-for-init');
+      document.body.appendChild(dom);
+    } else {
+      throw new Error('Invalid initialization state.');
+    }
   });
 
   // JS Global facade for Onsen UI.

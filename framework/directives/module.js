@@ -76,26 +76,4 @@ limitations under the License.
     return CONSTANTS;
   });
 
-  directiveModules.directive('onsDummyForInit', function($rootScope) {
-    var isReady = false;
-    return {
-      restrict: 'E',
-      priority: Number.MAX_VALUE,
-
-      link: {
-        pre: function() {
-        },
-        post: function() {
-          if (!isReady) {
-            setTimeout(function() { 
-              if (!isReady) {
-                $rootScope.$broadcast('$ons-ready');
-                isReady = true;
-              }
-            }, 1000 /60);
-          }
-        }
-      }
-    };
-  });
 })();
