@@ -19,7 +19,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.service('Screen', function($http, $compile, ScreenStack, requestAnimationFrame, debugLog, $onsen) {
+  module.service('Screen', function($http, $compile, ScreenStack, requestAnimationFrame, $onsen) {
     var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
     var TRANSITION_START = "webkitAnimationStart animationStart msAnimationStart oAnimationStart";
 
@@ -39,7 +39,6 @@ limitations under the License.
       },
 
       onTransitionEnded: function() {
-        debugLog('onTransitionEnded: isReady = true');
         this.isReady = true;
       },
 
@@ -122,7 +121,6 @@ limitations under the License.
         if (isAnimate) {
           this.animateInCurrentPage(compiledPage);
         } else {
-          debugLog('_presentPageDOM: isReady = true');
           this.isReady = true;
         }
 
@@ -167,8 +165,6 @@ limitations under the License.
 
       dismissPage: function(){
         if (this.screenItems.length < 2 || !this.isReady) {
-          debugLog('Can\'t dismiss anymore');
-          debugLog(this.screenItems);
           return;
         }
 
@@ -184,7 +180,6 @@ limitations under the License.
         currentPage.bind(TRANSITION_END, function transitionEnded() {
           currentPage.remove();
           that.isReady = true;
-          debugLog('dismissPage() transtion end: isReady = true');
           screenItem.pageScope.$destroy();
         });
       },
