@@ -18,9 +18,9 @@ limitations under the License.
 
 (function() {
   'use strict';
-  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var module = angular.module('onsen');
 
-  directives.directive('onsSplitView', function(ONSEN_CONSTANTS, $http, $compile, $templateCache, SplitViewStack, OnsenUtil, PredefinedPageCache) {
+  module.directive('onsSplitView', function($http, $compile, $templateCache, SplitViewStack, $onsen) {
 
     var ON_PAGE_READY = "onPageReady";
 
@@ -35,7 +35,7 @@ limitations under the License.
         swipable: '@',
         mainPageWidth: '@'
       },
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
       link: function(scope, element, attrs) {
         var SPLIT_MODE = 0;
         var COLLAPSE_MODE = 1;
@@ -139,7 +139,7 @@ limitations under the License.
                   $http({
                       url: page,
                       method: "GET",
-                      cache: PredefinedPageCache
+                      cache: $onsen.predefinedPageCache
                     }).error(function(e) {
                       console.error(e);
                     }).success(function(data, status, headers, config) {
@@ -161,7 +161,7 @@ limitations under the License.
                   $http({
                       url: page,
                       method: "GET",
-                      cache: PredefinedPageCache
+                      cache: $onsen.predefinedPageCache
                     }).error(function(e) {
                       console.error(e);
                     }).success(function(data, status, headers, config) {
@@ -442,7 +442,7 @@ limitations under the License.
             return swiper.toggle();
           }
         };
-        OnsenUtil.declareVarAttribute(attrs, splitView);
+        $onsen.declareVarAttribute(attrs, splitView);
 
         angular.extend(scope, splitView);
         SplitViewStack.addSplitView(scope);

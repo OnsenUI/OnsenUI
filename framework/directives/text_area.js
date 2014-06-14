@@ -19,16 +19,16 @@ limitations under the License.
 (function(){
   'use strict';
 
-  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var module = angular.module('onsen'); // no [] -> referencing existing module
 
-  directives.directive('onsTextArea', function(ONSEN_CONSTANTS, OnsenUtil) {
+  module.directive('onsTextArea', function($onsen) {
     return {
       restrict: 'E',
       replace: true,
       transclude: true,
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_area.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/text_area.tpl',
       link: function(scope, element, attrs) {
-        var classes = OnsenUtil.generateModifierTemplater(attrs)('topcoat-textarea--*');
+        var classes = $onsen.generateModifierTemplater(attrs)('topcoat-textarea--*');
         element.addClass(classes);
       }
     };

@@ -664,7 +664,7 @@ limitations under the License.
 
   var directives = angular.module('onsen');
 
-  directives.factory('Navigator', function($http, $parse, $templateCache, $compile, PredefinedPageCache) {
+  directives.factory('Navigator', function($http, $parse, $templateCache, $compile, $onsen) {
 
     /**
      * Manages the page navigation backed by page stack.
@@ -763,7 +763,7 @@ limitations under the License.
             $http({
               url: page,
               method: 'GET',
-              cache: PredefinedPageCache
+              cache: $onsen.predefinedPageCache
             })
               .success(function(templateHTML, status, headers, config) {
                 var pageScope = self._createPageScope();

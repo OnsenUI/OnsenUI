@@ -19,9 +19,9 @@ limitations under the License.
 (function(){
   'use strict';
 
-  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var module = angular.module('onsen');
 
-  directives.directive('onsRow', function(ONSEN_CONSTANTS, $timeout) {
+  module.directive('onsRow', function($onsen, $timeout) {
     return {
       restrict: 'E',
       replace: true,
@@ -29,7 +29,7 @@ limitations under the License.
       scope: {
         align: '@'
       },
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/row.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/row.tpl',
       compile: function(elt, attr, transclude) {
         return function(scope, elt, attr) {
           transclude(scope.$parent, function(clone) {

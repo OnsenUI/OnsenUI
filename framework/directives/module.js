@@ -17,10 +17,10 @@ limitations under the License.
 
 
 (function() {
-  var directiveModules = angular.module('onsen.directives', ['onsen.services', 'templates-main']);
-  angular.module('onsen', ['onsen.directives']); // facade
+  var module = angular.module('onsen', ['templates-main']);
+  angular.module('onsen.directives', ['onsen']); // for BC
 
-  directiveModules.run(function($rootScope, $window) {
+  module.run(function($rootScope, $window) {
     $rootScope.ons = window.ons;
     $rootScope.ons.$get = function(id) {
       id = id.replace('#', '');
@@ -49,13 +49,13 @@ limitations under the License.
     $rootScope.alert = $window.alert;
   });
 
-  directiveModules.service('debugLog', function() {
+  module.service('debugLog', function() {
     return window.ONSEN_DEBUG ? function() {
       console.log.apply(window.console, arguments);
     } : function() { };
   });
 
-  directiveModules.service('requestAnimationFrame', function() {
+  module.service('requestAnimationFrame', function() {
     var fn = window.webkitRequestAnimationFrame || 
              window.mozRequestAnimationFrame || 
              window.oRequestAnimationFrame || 
@@ -66,14 +66,6 @@ limitations under the License.
     };
 
     return fn;
-  });
-
-  directiveModules.factory('ONSEN_CONSTANTS', function() {
-    var CONSTANTS = {
-      DIRECTIVE_TEMPLATE_URL: "templates"
-    };
-
-    return CONSTANTS;
   });
 
 })();

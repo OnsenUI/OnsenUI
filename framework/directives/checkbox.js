@@ -19,9 +19,9 @@ limitations under the License.
 (function(){
   'use strict';
 
-  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var module = angular.module('onsen'); 
 
-  directives.directive('onsCheckbox', function(ONSEN_CONSTANTS, OnsenUtil) {
+  module.directive('onsCheckbox', function($onsen) {
     return {
       require: '?ngModel',
       restrict: 'E',
@@ -32,7 +32,7 @@ limitations under the License.
         ngFalseValue: '@'
       },
       transclude: true,
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
       link: function($scope, element, attrs, ngModel) {
         var checkbox = element.find('input');
         var checked = false;
@@ -44,7 +44,7 @@ limitations under the License.
           }
         });
 
-        $scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+        $scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
         if (ngModel) {
           ngModel.$render = function() {

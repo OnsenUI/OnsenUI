@@ -1,5 +1,5 @@
 (function() {
-  var directiveModules = angular.module('onsen.directives');
+  var directiveModules = angular.module('onsen');
 
   directiveModules.factory('NavigatorStack', function($rootScope) {
     var NavigatorStack = Class.extend({

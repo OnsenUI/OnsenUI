@@ -1,7 +1,7 @@
 (function() {
-  var directiveModules = angular.module('onsen.directives');
+  var module = angular.module('onsen');
 
-  directiveModules.factory('TabbarStack', function($rootScope) {
+  module.factory('TabbarStack', function($rootScope) {
     var TabbarStack = Class.extend({
       tabbars: [],
 

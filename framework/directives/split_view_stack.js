@@ -1,7 +1,7 @@
 (function() {
-  var directiveModules = angular.module('onsen.directives');
+  var module = angular.module('onsen');
 
-  directiveModules.factory('SplitViewStack', function($rootScope) {
+  module.factory('SplitViewStack', function($rootScope) {
     var SplitViewStack = Class.extend({
       splitViews: [],
 

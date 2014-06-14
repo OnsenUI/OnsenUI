@@ -1,9 +1,9 @@
 (function(){
   'use strict';
 
-  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var module = angular.module('onsen');
 
-  directives.directive('onsIcon', function(ONSEN_CONSTANTS) {
+  module.directive('onsIcon', function($onsen) {
     return {
       restrict: 'E',
       replace: true,
@@ -14,7 +14,7 @@
         rotate: '@',
         flip: '@'
       },
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/icon.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/icon.tpl',
       link: function($scope, element, attrs){
         attrs.$observe('spin', function(spin){
           if(spin === "true"){

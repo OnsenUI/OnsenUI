@@ -18,10 +18,29 @@ limitations under the License.
 (function(){
   'use strict';
 
-  var module = angular.module('onsen.services');
+  var module = angular.module('onsen');
 
-  module.service('OnsenUtil', function($rootScope, $window) {
+  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document) {
+
     return {
+
+      DIRECTIVE_TEMPLATE_URL: "templates",
+
+      predefinedPageCache: (function() {
+        var cache = $cacheFactory('$onsenPredefinedPageCache');
+
+        var templates = $document[0].querySelectorAll('script[type="text/ons-template"]');
+
+        for (var i = 0; i < templates.length; i++) {
+          var template = angular.element(templates[i]);
+          var id = template.attr('id');
+          if (typeof id === 'string') {
+            cache.put(id, template.text());
+          }
+        }
+
+        return cache;
+      })(),
 
       /**
        * Create modifier templater function. The modifier templater generate css classes binded modifier name.
@@ -86,8 +105,7 @@ limitations under the License.
         set($window, names, object);
         set($rootScope, names, object);        
       }
-
     };
+    
   });
 })();
-

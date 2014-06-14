@@ -18,9 +18,9 @@ limitations under the License.
 
 (function() {
   'use strict';
-  var directives = angular.module('onsen.directives');
+  var module = angular.module('onsen');
 
-  directives.directive('onsSlidingMenu', function(ONSEN_CONSTANTS, $http, $templateCache, $compile, SlidingMenuStack, OnsenUtil, PredefinedPageCache) {
+  module.directive('onsSlidingMenu', function($http, $templateCache, $compile, SlidingMenuStack, $onsen) {
     return {
       restrict: 'E',
       replace: false,
@@ -32,7 +32,7 @@ limitations under the License.
         swipable: '@',
         swipeTargetWidth: '@'
       },
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
       link: function(scope, element, attrs) {
         var MAIN_PAGE_RATIO = 0.9;
         var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
@@ -199,7 +199,7 @@ limitations under the License.
                   $http({
                       url: page,
                       method: "GET",
-                      cache: PredefinedPageCache
+                      cache: $onsen.predefinedPageCache
                     }).error(function(e) {
                       console.error(e);
                     }).success(function(data, status, headers, config) {
@@ -226,7 +226,7 @@ limitations under the License.
                   $http({
                       url: pageUrl,
                       method: "GET",
-                      cache: PredefinedPageCache
+                      cache: $onsen.predefinedPageCache
                     }).error(function(e) {
                       console.error(e);
                     }).success(function(data, status, headers, config) {
@@ -378,7 +378,7 @@ limitations under the License.
             return swiper.setBehindPage.apply(swiper, arguments);
           }
         };
-        OnsenUtil.declareVarAttribute(attrs, slidingMenuView);
+        $onsen.declareVarAttribute(attrs, slidingMenuView);
         angular.extend(scope, slidingMenuView);
 
         SlidingMenuStack.addSlidingMenu(scope);

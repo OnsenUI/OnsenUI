@@ -18,17 +18,17 @@ limitations under the License.
 
 (function(){
   'use strict';
-  var directives = angular.module('onsen'); // no [] -> referencing existing module
+  var module = angular.module('onsen');
 
-  directives.directive('onsBackButton', function(ONSEN_CONSTANTS, OnsenUtil) {
+  module.directive('onsBackButton', function($onsen) {
     return {
       restrict: 'E',
       replace: false,
       transclude: true,
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/back_button.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/back_button.tpl',
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
-          scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+          scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
           scope.back = function() {
             scope.ons.navigator.popPage();
           };

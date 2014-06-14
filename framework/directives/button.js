@@ -18,9 +18,9 @@ limitations under the License.
 
 (function(){
   'use strict';
-  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var module = angular.module('onsen');
 
-  directives.directive('onsButton', function(ONSEN_CONSTANTS, OnsenUtil) {
+  module.directive('onsButton', function($onsen) {
     return {
       restrict: 'E',
       replace: true,
@@ -31,13 +31,13 @@ limitations under the License.
         onsType: '@',
         disabled: '@'
       },
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs){
         var effectButton = element;
         var TYPE_PREFIX = "topcoat-button--";
         scope.item = {};
 
-        scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+        scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
         // if animation is not specified -> default is slide-left
         if(scope.animation === undefined || scope.animation === ""){

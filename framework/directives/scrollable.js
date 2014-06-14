@@ -17,9 +17,9 @@ limitations under the License.
 
 (function() {
   'use strict';
-  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var module = angular.module('onsen'); // no [] -> referencing existing module
 
-  directives.directive('onsScrollable', function(ONSEN_CONSTANTS, $timeout) {
+  module.directive('onsScrollable', function($onsen, $timeout) {
     return {
       restrict: 'A',
       replace: true,

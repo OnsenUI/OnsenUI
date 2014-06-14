@@ -1,7 +1,7 @@
 (function() {
-  var directiveModules = angular.module('onsen.directives');
+  var module = angular.module('onsen');
 
-  directiveModules.factory('SlidingMenuStack', function($rootScope) {
+  module.factory('SlidingMenuStack', function($rootScope) {
     var SlidingMenuStack = Class.extend({
       slidingMenus: [],
 

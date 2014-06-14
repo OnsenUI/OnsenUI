@@ -1,9 +1,9 @@
 (function(){
   'use strict';
 
-  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var module = angular.module('onsen'); // no [] -> referencing existing module
 
-  directives.directive('onsRadioButton', function(ONSEN_CONSTANTS, OnsenUtil) {
+  module.directive('onsRadioButton', function($onsen) {
     return {
       restrict: 'E',
       replace: false,
@@ -15,7 +15,7 @@
         name: '@'
       },
       transclude: true,
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/radio_button.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/radio_button.tpl',
       link: function($scope, element, attrs){
         var radioButton = element.find('input');
         var checked = false;

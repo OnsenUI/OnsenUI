@@ -18,9 +18,9 @@ limitations under the License.
 
 (function() {
   'use strict';
-  var directives = angular.module('onsen.directives');
+  var module = angular.module('onsen');
 
-  directives.directive('onsTabbar', function(ONSEN_CONSTANTS, $timeout, $http, $compile, PredefinedPageCache, OnsenUtil) {
+  module.directive('onsTabbar', function($timeout, $http, $compile, $onsen) {
     return {
       restrict: 'E',
       replace: false,
@@ -29,9 +29,9 @@ limitations under the License.
         hide: '@',
         onActiveTabChanged: '&'
       },
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
       controller: function($scope, $element, $attrs) {
-        this.modifierTemplater = $scope.modifierTemplater = OnsenUtil.generateModifierTemplater($attrs);
+        this.modifierTemplater = $scope.modifierTemplater = $onsen.generateModifierTemplater($attrs);
 
         var container = angular.element($element[0].querySelector('.tab-bar-content'));
         var footer = $element[0].querySelector('.footer');
@@ -83,7 +83,7 @@ limitations under the License.
             $http({
               url: page,
               method: "GET",
-              cache: PredefinedPageCache
+              cache: $onsen.predefinedPageCache
             }).error(function(e) {
               console.error(e);
             }).success(function(data, status, headers, config) {

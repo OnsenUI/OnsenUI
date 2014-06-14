@@ -19,9 +19,9 @@ limitations under the License.
 (function(){
   'use strict';
 
-  var directives = angular.module('onsen.directives');
+  var module = angular.module('onsen');
 
-  directives.directive('onsTextInput', function(ONSEN_CONSTANTS, OnsenUtil) {
+  module.directive('onsTextInput', function($onsen) {
     return {
       restrict: 'E',
       replace: true,
@@ -29,9 +29,9 @@ limitations under the License.
       scope: {
         disabled: '='
       },
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
       link: function($scope, element, attrs) {
-        element.addClass(OnsenUtil.generateModifierTemplater(attrs)('topcoat-text-input--*'));
+        element.addClass($onsen.generateModifierTemplater(attrs)('topcoat-text-input--*'));
 
         $scope.$watch(function() {
           return $scope.disabled;

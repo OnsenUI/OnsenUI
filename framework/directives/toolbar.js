@@ -18,7 +18,7 @@ limitations under the License.
 (function() {
   'use strict';
 
-  var directives = angular.module('onsen.directives');
+  var module = angular.module('onsen');
 
   function ensureLeftContainer(element, center) {
     var container = element[0].querySelector('.left');
@@ -91,7 +91,7 @@ limitations under the License.
   /**
    * Toolbar directive.
    */
-  directives.directive('onsToolbar', function(ONSEN_CONSTANTS, OnsenUtil) {
+  module.directive('onsToolbar', function($onsen) {
     return {
       restrict: 'E',
       replace: false,
@@ -105,7 +105,7 @@ limitations under the License.
       
       link: {
         pre: function(scope, element, attrs, pageController, transclude) {
-          var modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+          var modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
           element.addClass('topcoat-navigation-bar');
           element.addClass(modifierTemplater('topcoat-navigation-bar--*'));

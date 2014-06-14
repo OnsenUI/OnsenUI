@@ -18,16 +18,16 @@ limitations under the License.
 
 (function(){
   'use strict';
-  var directives = angular.module('onsen'); // no [] -> referencing existing module
+  var module = angular.module('onsen'); // no [] -> referencing existing module
 
-  directives.directive('onsToolbarButton', function(ONSEN_CONSTANTS, OnsenUtil) {
+  module.directive('onsToolbarButton', function($onsen) {
     return {
       restrict: 'E',
       transclude: true,
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
-          scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+          scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         }
       }
     };

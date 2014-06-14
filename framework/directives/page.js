@@ -19,7 +19,7 @@ limitations under the License.
 (function() {
   'use strict';
 
-  var directives = angular.module('onsen.directives');
+  var module = angular.module('onsen');
 
   function firePageInitEvent(pageContainer) {
     function findPageDOM() {
@@ -41,7 +41,7 @@ limitations under the License.
     findPageDOM().dispatchEvent(event);    
   }
 
-  directives.directive('onsPage', function(ONSEN_CONSTANTS, OnsenUtil) {
+  module.directive('onsPage', function($onsen) {
     function controller($scope, $element) {
 
       this.registeredToolbarElement = false;
@@ -142,7 +142,7 @@ limitations under the License.
       link: {
 
         pre: function(scope, element, attrs, controller, transclude) {
-          var modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+          var modifierTemplater = $onsen.generateModifierTemplater(attrs);
           element.addClass('topcoat-page ' + modifierTemplater('topcoat-page--*') + ' ons-page-inner');
 
           transclude(scope, function(clonedElement) {

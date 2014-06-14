@@ -1,15 +1,15 @@
 (function() {
   'use strict';
 
-  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var module = angular.module('onsen');
 
-  directives.directive('onsIfPlatform', function(ONSEN_CONSTANTS) {
+  module.directive('onsIfPlatform', function($onsen) {
     return {
       restrict: 'A',
       replace: false,
       transclude: true,
       scope: true,
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_platform.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/if_platform.tpl',
       link: function($scope, element, attrs) {
 
         var platform;

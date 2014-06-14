@@ -19,16 +19,16 @@ limitations under the License.
 (function(){
   'use strict';
 
-  var directives = angular.module('onsen.directives');
+  var module = angular.module('onsen');
 
-  directives.directive('onsSearchInput', function(ONSEN_CONSTANTS, OnsenUtil) {
+  module.directive('onsSearchInput', function($onsen) {
     return {
       restrict: 'E',
       replace: true,
       transclude: false,
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/search_input.tpl',
+      templateUrl: $onse.DIRECTIVE_TEMPLATE_URL + '/search_input.tpl',
       link: function(scope, element, attrs) {
-        element.addClass(OnsenUtil.generateModifierTemplater(attrs)('topcoat-search-input--*'));
+        element.addClass($onsen.generateModifierTemplater(attrs)('topcoat-search-input--*'));
       }
     };
   });

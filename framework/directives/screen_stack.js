@@ -1,7 +1,7 @@
 (function() {
-  var directiveModules = angular.module('onsen.directives');
+  var module = angular.module('onsen');
 
-  directiveModules.factory('ScreenStack', function($rootScope) {
+  module.factory('ScreenStack', function($rootScope) {
     var ScreenStack = Class.extend({
       screens: [],
 

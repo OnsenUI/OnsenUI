@@ -1,15 +1,15 @@
 (function(){
   'use strict';
 
-  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var module = angular.module('onsen');
 
-  directives.directive('onsIfOrientation', function(ONSEN_CONSTANTS) {
+  module.directive('onsIfOrientation', function($onsen) {
     return {
       restrict: 'A',
       replace: false,
       transclude: true,
       scope: true,
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/if_orientation.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/if_orientation.tpl',
       link: function($scope, element, attrs) {
 
         function getLandscapeOrPortraitFromInteger(orientation){

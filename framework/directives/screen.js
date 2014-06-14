@@ -17,9 +17,9 @@ limitations under the License.
 
 (function() {
   'use strict';
-  var directives = angular.module('onsen.directives');
+  var module = angular.module('onsen');
 
-  directives.service('Screen', function(ONSEN_CONSTANTS, $http, $compile, ScreenStack, requestAnimationFrame, debugLog, PredefinedPageCache) {
+  module.service('Screen', function($http, $compile, ScreenStack, requestAnimationFrame, debugLog, $onsen) {
     var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
     var TRANSITION_START = "webkitAnimationStart animationStart msAnimationStart oAnimationStart";
 
@@ -149,7 +149,7 @@ limitations under the License.
         $http({
           url: page,
           method: "GET",
-          cache: PredefinedPageCache
+          cache: $onsen.predefinedPageCache
         }).error(function(e) {
           that.onTransitionEnded();
           console.error(e);
@@ -206,7 +206,7 @@ limitations under the License.
     return Screen;
   });
 
-  directives.directive('onsScreen', function(ONSEN_CONSTANTS, $http, $compile, Screen, ScreenStack, OnsenUtil) {
+  module.directive('onsScreen', function($http, $compile, Screen, ScreenStack, $onsen) {
 
     return {
       restrict: 'E',
@@ -216,12 +216,12 @@ limitations under the License.
         page: '@'
       },
 
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/screen.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/screen.tpl',
 
       compile: function(element, attrs, transclude) {
         return function(scope, element, attrs) {
           var screen = new Screen(scope, element, attrs);
-          OnsenUtil.declareVarAttribute(attrs, screen);
+          $onsen.declareVarAttribute(attrs, screen);
 
           if (!attrs.page) {
             var pageScope = screen.createPageScope();

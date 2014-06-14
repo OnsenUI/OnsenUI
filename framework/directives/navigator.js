@@ -17,9 +17,9 @@ limitations under the License.
 
 (function() {
   'use strict';
-  var directives = angular.module('onsen.directives');
+  var module = angular.module('onsen');
 
-  directives.directive('onsNavigator', function(ONSEN_CONSTANTS, $compile, NavigatorStack, Navigator, OnsenUtil) {
+  module.directive('onsNavigator', function($compile, NavigatorStack, Navigator, $onsen) {
     return {
       restrict: 'E',
 
@@ -37,7 +37,7 @@ limitations under the License.
               element: iElement
             });
 
-            OnsenUtil.declareVarAttribute(attrs, navigator);
+            $onsen.declareVarAttribute(attrs, navigator);
 
             var pageScope = navigator._createPageScope();
             transclude(pageScope, function(compiledPage) {

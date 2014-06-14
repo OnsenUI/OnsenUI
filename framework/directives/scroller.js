@@ -18,9 +18,9 @@ limitations under the License.
 
 (function() {
   'use strict';
-  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  var module = angular.module('onsen'); // no [] -> referencing existing module
 
-  directives.directive('onsScroller', function(ONSEN_CONSTANTS, $timeout) {
+  module.directive('onsScroller', function($onsen, $timeout) {
     return {
       restrict: 'E',
       replace: true,
@@ -29,7 +29,7 @@ limitations under the License.
         onScrolled: '&',
         infinitScrollEnable: '='
       },
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/scroller.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/scroller.tpl',
       link: function(scope, element, attrs) {
       }
     };

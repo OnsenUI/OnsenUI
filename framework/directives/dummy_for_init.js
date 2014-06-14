@@ -19,7 +19,7 @@ limitations under the License.
 (function() {
   'use strict';
 
-  var module = angular.module('onsen.directives');
+  var module = angular.module('onsen');
 
   module.directive('onsDummyForInit', function($rootScope) {
     var isReady = false;

@@ -19,17 +19,17 @@ limitations under the License.
 (function(){
   'use strict';
 
-  var directives = angular.module('onsen.directives');
+  var module = angular.module('onsen');
 
-  directives.directive('onsBottomToolbar', function(ONSEN_CONSTANTS, OnsenUtil) {
+  module.directive('onsBottomToolbar', function($onsen) {
     return {
       restrict: 'E',
       transclude: true,
       replace: true,
-      templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/bottom_toolbar.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/bottom_toolbar.tpl',
       link: function(scope, element, attrs) {
         // modifier
-        scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+        scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
       }
     };
   });
