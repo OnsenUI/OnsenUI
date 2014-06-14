@@ -752,9 +752,7 @@ limitations under the License.
           $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
             var pageScope = self._createPageScope();
             var pageElement = createPageElement(templateHTML, pageScope);
-            setTimeout(function() {
-              self._pushPageDOM(page, pageElement, pageScope, options, unlock);
-            }, 1000 / 60);
+            self._pushPageDOM(page, pageElement, pageScope, options, unlock);
 
           }, function() {
             unlock();

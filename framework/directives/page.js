@@ -132,12 +132,12 @@ limitations under the License.
 
     return {
       restrict: 'E',
+      controller: controller,
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
       transclude: true,
       scope: true,
-      controller: controller,
 
       link: {
 

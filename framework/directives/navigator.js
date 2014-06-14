@@ -40,11 +40,8 @@ limitations under the License.
             $onsen.declareVarAttribute(attrs, navigator);
 
             var pageScope = navigator._createPageScope();
-            transclude(pageScope, function(compiledPage) {
-              setTimeout(function() {
-                navigator._pushPageDOM('', compiledPage, pageScope, {});
-              }, 1000 / 60);
-            });
+            var compiledPage = transclude(pageScope, function() { });
+            navigator._pushPageDOM('', compiledPage, pageScope, {});
 
             NavigatorStack.addNavigator(navigator);
             scope.$on('$destroy', function(){
