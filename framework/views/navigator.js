@@ -752,7 +752,10 @@ limitations under the License.
           $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
             var pageScope = self._createPageScope();
             var pageElement = createPageElement(templateHTML, pageScope);
-            self._pushPageDOM(page, pageElement, pageScope, options, unlock);
+
+            setImmediate(function() {
+              self._pushPageDOM(page, pageElement, pageScope, options, unlock);
+            });
 
           }, function() {
             unlock();
@@ -830,7 +833,16 @@ limitations under the License.
           element: element,
           pageScope: pageScope,
           controller: pageController,
-          options: options
+          options: options,
+          destroy: function() {
+            pageObject.element.remove();
+            pageObject.pageScope.$destroy();
+
+            pageObject.controller = null;
+            pageObject.element = null;
+            pageObject.pageScope = null;
+            pageObject.options = null;
+          }
         };
 
         var event = {
@@ -938,7 +950,7 @@ limitations under the License.
           };
 
           var callback = function() {
-            leavePage.element.remove();
+            leavePage.destroy();
             unlock();
             self.emit('postPop', event);
             if (typeof options.onTransitionEnd === 'function') {
@@ -969,7 +981,7 @@ limitations under the License.
 
         options.onTransitionEnd = function() {
           while (self.pages.length > 1) {
-            self.pages.shift().element.remove();
+            self.pages.shift().destroy();
           }
           onTransitionEnd();
         };
