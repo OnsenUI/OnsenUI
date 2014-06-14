@@ -19,7 +19,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.service('Screen', function($http, $compile, ScreenStack, requestAnimationFrame, $onsen) {
+  module.service('Screen', function($compile, ScreenStack, requestAnimationFrame, $onsen) {
     var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
     var TRANSITION_START = "webkitAnimationStart animationStart msAnimationStart oAnimationStart";
 
@@ -142,24 +142,18 @@ limitations under the License.
           return;
         }
 
-        var that = this;
+        var self = this;
 
-        $http({
-          url: page,
-          method: "GET",
-          cache: $onsen.predefinedPageCache
-        }).error(function(e) {
-          that.onTransitionEnded();
-          console.error(e);
-        }).success(function(data, status, headers, config) {
-          var pageContent = angular.element(data.trim());
-          var pageEl = this.generatePageEl(pageContent);
-          var pageScope = this.createPageScope();
-          var compiledPage = this.compilePageEl(pageEl, pageScope);
+        $onsen.getPageHTMLAsync(page).then(function(html) {
+          var pageContent = angular.element(html.trim());
+          var pageEl = self.generatePageEl(pageContent);
+          var pageScope = self.createPageScope();
+          var compiledPage = self.compilePageEl(pageEl, pageScope);
 
-          that._presentPageDOM(page, compiledPage, pageScope);
-        }.bind(this)).error(function(data, status, headers, config) {
-          console.log('error', data, status);
+          self._presentPageDOM(page, compiledPage, pageScope);
+        }, function() {
+          self.onTransitionEnded();
+          throw new Error('Page is not found: ' + page);
         });
       },
 
@@ -201,7 +195,7 @@ limitations under the License.
     return Screen;
   });
 
-  module.directive('onsScreen', function($http, $compile, Screen, ScreenStack, $onsen) {
+  module.directive('onsScreen', function($compile, Screen, ScreenStack, $onsen) {
 
     return {
       restrict: 'E',

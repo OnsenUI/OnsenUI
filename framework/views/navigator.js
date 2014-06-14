@@ -749,33 +749,17 @@ limitations under the License.
         this._doorLock.waitUnlock(function() {
           var unlock = self._doorLock.lock();
 
-          var templateHTML = $templateCache.get(page);
-
-          if (templateHTML) {
+          $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
             var pageScope = self._createPageScope();
             var pageElement = createPageElement(templateHTML, pageScope);
             setTimeout(function() {
               self._pushPageDOM(page, pageElement, pageScope, options, unlock);
             }, 1000 / 60);
 
-          } else {
-
-            $http({
-              url: page,
-              method: 'GET',
-              cache: $onsen.predefinedPageCache
-            })
-              .success(function(templateHTML, status, headers, config) {
-                var pageScope = self._createPageScope();
-                var pageElement = createPageElement(templateHTML, pageScope);
-                setTimeout(function() {
-                  self._pushPageDOM(page, pageElement, pageScope, options, unlock);
-                }, 1000 / 60);
-              })
-              .error(function(data, status, headers, config) {
-                console.error('error', data, status);
-              });
-          }
+          }, function() {
+            unlock();
+            throw new Error('Page is not found: ' + page);
+          });
         });
 
         function createPageElement(templateHTML, pageScope, done) {

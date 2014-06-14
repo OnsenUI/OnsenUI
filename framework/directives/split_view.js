@@ -20,7 +20,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsSplitView', function($http, $compile, $templateCache, SplitViewStack, $onsen) {
+  module.directive('onsSplitView', function($compile, $templateCache, SplitViewStack, $onsen) {
 
     var ON_PAGE_READY = "onPageReady";
 
@@ -130,49 +130,31 @@ limitations under the License.
           },
 
           attachMethods: function() {
+            var self = this;
+
             scope.setSecondaryPage = function(page) {
               if (page) {
-                var templateHTML = $templateCache.get(page);
-                if (templateHTML) {
-                  this.appendSecondPage(templateHTML);
-                } else {
-                  $http({
-                      url: page,
-                      method: "GET",
-                      cache: $onsen.predefinedPageCache
-                    }).error(function(e) {
-                      console.error(e);
-                    }).success(function(data, status, headers, config) {
-                    templateHTML = angular.element(data.trim());
-                    this.appendSecondPage(templateHTML);
-                  }.bind(this));
-                }
+                $onsen.getPageHTMLAsync(page).then(function(html) {
+                  self.appendSecondPage(angular.element(html.trim()));
+                }, function() {
+                  throw new Error('Page is not found: ' + page);
+                });
               } else {
                 throw new Error('cannot set undefined page');
               }
-            }.bind(this);
+            };
 
             scope.setMainPage = function(page) {
               if (page) {
-                var templateHTML = $templateCache.get(page);
-                if (templateHTML) {
-                  this.appendMainPage(templateHTML);
-                } else {
-                  $http({
-                      url: page,
-                      method: "GET",
-                      cache: $onsen.predefinedPageCache
-                    }).error(function(e) {
-                      console.error(e);
-                    }).success(function(data, status, headers, config) {
-                    templateHTML = angular.element(data.trim());
-                    this.appendMainPage(templateHTML);
-                  }.bind(this));
-                }
+                $onsen.getPageHTMLAsync(page).then(function(html) {
+                  self.appendMainPage(angular.element(html.trim()));
+                }, function() {
+                  throw new Error('Page is not found: ' + page);
+                });
               } else {
                 throw new Error('cannot set undefined page');
               }
-            }.bind(this);
+            };
           },
 
           onOrientationChange: function() {

@@ -20,7 +20,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsSlidingMenu', function($http, $templateCache, $compile, SlidingMenuStack, $onsen) {
+  module.directive('onsSlidingMenu', function($templateCache, $compile, SlidingMenuStack, $onsen) {
     return {
       restrict: 'E',
       replace: false,
@@ -190,27 +190,19 @@ limitations under the License.
           },
 
           attachMethods: function() {
+            var self = this;
+
             scope.setBehindPage = function(page) {
               if (page) {
-                var templateHTML = $templateCache.get(page);
-                if (templateHTML) {
-                  this.appendBehindPage(templateHTML);
-                } else {
-                  $http({
-                      url: page,
-                      method: "GET",
-                      cache: $onsen.predefinedPageCache
-                    }).error(function(e) {
-                      console.error(e);
-                    }).success(function(data, status, headers, config) {
-                    templateHTML = angular.element(data.trim());
-                    this.appendBehindPage(templateHTML);
-                  }.bind(this));
-                }
+                $onsen.getPageHTMLAsync(page).then(function(html) {
+                  self.appendBehindPage(angular.element(html.trim()));
+                }, function() {
+                  throw new Error('Page is not found: ' + page);
+                });
               } else {
                 throw new Error('cannot set undefined page');
               }
-            }.bind(this);
+            };
 
             this.setAbovePage = scope.setAbovePage = function(pageUrl) {
               if (this.currentPageUrl === pageUrl) {
@@ -219,21 +211,11 @@ limitations under the License.
               }
 
               if (pageUrl) {
-                var templateHTML = $templateCache.get(pageUrl);
-                if (templateHTML) {
-                  this.appendAbovePage(pageUrl, templateHTML);
-                } else {
-                  $http({
-                      url: pageUrl,
-                      method: "GET",
-                      cache: $onsen.predefinedPageCache
-                    }).error(function(e) {
-                      console.error(e);
-                    }).success(function(data, status, headers, config) {
-                    templateHTML = angular.element(data.trim());
-                    this.appendAbovePage(pageUrl, templateHTML);
-                  }.bind(this));
-                }
+                $onsen.getPageHTMLAsync(pageUrl).then(function(html) {
+                  self.appendAbovePage(pageUrl, angular.element(html.trim()));
+                }, function() {
+                  throw new Error('Page is not found: ' + page);
+                });
               } else {
                 throw new Error('cannot set undefined page');
               }

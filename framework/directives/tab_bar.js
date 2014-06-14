@@ -20,7 +20,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsTabbar', function($timeout, $http, $compile, $onsen) {
+  module.directive('onsTabbar', function($timeout, $compile, $onsen, TabbarStack) {
     return {
       restrict: 'E',
       replace: false,
@@ -79,27 +79,24 @@ limitations under the License.
         };
 
         this.setPage = function(page) {
+          var self = this;
           if (page) {
-            $http({
-              url: page,
-              method: "GET",
-              cache: $onsen.predefinedPageCache
-            }).error(function(e) {
-              console.error(e);
-            }).success(function(data, status, headers, config) {
-              var templateHTML = angular.element(data.trim());
+            $onsen.getPageHTMLAsync(page).then(function(html) {
+              var templateHTML = angular.element(html.trim());
               var pageScope = $scope.$parent.$new();
               var pageContent = $compile(templateHTML)(pageScope);
               container.append(pageContent);
 
-              if(this.currentPageElement){
-                this.currentPageElement.remove();
-                this.currentPageScope.$destroy();
+              if (self.currentPageElement) {
+                self.currentPageElement.remove();
+                self.currentPageScope.$destroy();
               }
 
-              this.currentPageElement = pageContent;
-              this.currentPageScope = pageScope;
-            }.bind(this));
+              self.currentPageElement = pageContent;
+              self.currentPageScope = pageScope;
+            }, function() {
+              throw new Error('Page is not found: ' + page);
+            });
           } else {
             throw new Error('cannot set undefined page');
           }
