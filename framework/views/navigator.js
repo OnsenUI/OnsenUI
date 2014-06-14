@@ -111,25 +111,252 @@ limitations under the License.
   /**
    * Null animator do screen transition with no animations.
    */
-  var NullAnimator = TransitionAnimator.extend({});
+  var NullTransitionAnimator = TransitionAnimator.extend({});
 
   /**
-   * Simple slide animator for navigator transition.
+   * Lift screen transition.
    */
-  var SimpleSlideAnimator = TransitionAnimator.extend({
+  var LiftTransitionAnimator = TransitionAnimator.extend({
+
+    /** Black mask */
+    backgroundMask : angular.element(
+      '<div style="position: absolute; width: 100%;' +
+      'height: 100%; background-color: black;"></div>'
+    ),
+
+    /**
+     * @param {Object} enterPage
+     * @param {Object} leavePage
+     * @param {Function} callback
+     */
     push: function(enterPage, leavePage, callback) {
-      callback();
+      var mask = this.backgroundMask.remove();
+      leavePage.element[0].parentNode.insertBefore(mask[0], leavePage.element[0]);
+
+      var maskClear = animit(mask[0])
+        .wait(0.4)
+        .queue(function(done) {
+          mask.remove();
+          done();
+        });
+
+      animit.runAll(
+
+        maskClear,
+
+        animit(enterPage.element[0])
+          .queue({
+            css: {
+              transform: 'translate3D(0, 100%, 0)',
+            },
+            duration: 0
+          })
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)',
+            },
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .resetStyle(),
+
+        animit(leavePage.element[0])
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)',
+              opacity: 1.0
+            },
+            duration: 0
+          })
+          .queue({
+            css: {
+              transform: 'translate3D(0, -10%, 0)',
+              opacity: 0.9
+            },
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .wait(0.2)
+          .resetStyle()
+          .queue(function(done) {
+            callback();
+            done();
+          })
+      );
+
     },
 
+    /**
+     * @param {Object} enterPage
+     * @param {Object} leavePage
+     * @param {Function} done
+     */
+    pop: function(enterPage, leavePage, done) {
+      var mask = this.backgroundMask.remove();
+      enterPage.element[0].parentNode.insertBefore(mask[0], enterPage.element[0]);
+
+      animit.runAll(
+
+        animit(mask[0])
+          .wait(0.4)
+          .queue(function(done) {
+            mask.remove();
+            done();
+          }),
+
+        animit(enterPage.element[0])
+          .queue({
+            css: {
+              transform: 'translate3D(0, -10%, 0)',
+              opacity: 0.9
+            },
+            duration: 0
+          })
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)',
+              opacity: 1.0
+            },
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .wait(0.4)
+          .resetStyle(),
+
+        animit(leavePage.element[0])
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)'
+            },
+            duration: 0
+          })
+          .queue({
+            css: {
+              transform: 'translate3D(0, 100%, 0)'
+            },
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .wait(0.2)
+          .queue(function(finish) {
+            done();
+            finish();
+          })
+      );
+    }
+  });
+
+  /**
+   * Fade-in screen transition.
+   */
+  var FadeInTransitionAnimator = TransitionAnimator.extend({
+
+    /**
+     * @param {Object} enterPage
+     * @param {Object} leavePage
+     * @param {Function} callback
+     */
+    push: function(enterPage, leavePage, callback) {
+
+      animit.runAll(
+
+        animit(enterPage.controller.getContentElement())
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)',
+              opacity: 0
+            },
+            duration: 0
+          })
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)',
+              opacity: 1
+            },
+            duration: 0.4,
+            timing: 'linear'
+          })
+          .resetStyle()
+          .queue(function(done) {
+            callback();
+            done();
+          }),
+
+        animit(enterPage.controller.getToolbarElement())
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)',
+              opacity: 0
+            },
+            duration: 0
+          })
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)',
+              opacity: 1
+            },
+            duration: 0.4,
+            timing: 'linear'
+          })
+          .resetStyle()
+      );
+
+    },
+
+    /**
+     * @param {Object} enterPage
+     * @param {Object} leavePage
+     * @param {Function} done
+     */
     pop: function(enterPage, leavePage, callback) {
-      callback();
+      animit.runAll(
+
+        animit(leavePage.controller.getContentElement())
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)',
+              opacity: 1
+            },
+            duration: 0
+          })
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)',
+              opacity: 0
+            },
+            duration: 0.4,
+            timing: 'linear'
+          })
+          .queue(function(done) {
+            callback();
+            done();
+          }),
+
+        animit(leavePage.controller.getToolbarElement())
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)',
+              opacity: 1
+            },
+            duration: 0
+          })
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)',
+              opacity: 0
+            },
+            duration: 0.4,
+            timing: 'linear'
+          })
+
+      );
     }
   });
 
   /**
    * Slide animator for navigator transition like iOS's screen slide transition.
    */
-  var NavigatorSlideLeftAnimator = TransitionAnimator.extend({
+  var SlideTransitionAnimator = TransitionAnimator.extend({
 
     init: function() {
       
@@ -1012,10 +1239,12 @@ limitations under the License.
     });
 
     Navigator._transitionAnimatorDict = {
-      'default': new NavigatorSlideLeftAnimator(),
-      'none': new NullAnimator()
+      'default': new SlideTransitionAnimator(),
+      'slide': new SlideTransitionAnimator(),
+      'lift': new LiftTransitionAnimator(),
+      'fadein': new FadeInTransitionAnimator(),
+      'none': new NullTransitionAnimator()
     };
-    Navigator._transitionAnimatorDict.slideLeft = new NavigatorSlideLeftAnimator();
 
     /**
      * @param {String} name
@@ -1030,6 +1259,8 @@ limitations under the License.
     };
 
     MicroEvent.mixin(Navigator);
+
+    Navigator.TransitionAnimator = TransitionAnimator;
 
     return Navigator;
   });
