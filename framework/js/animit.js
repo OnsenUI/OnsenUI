@@ -22,14 +22,6 @@ limitations under the License.
 window.animit = (function(){
   'use strict';
 
-  var TRANSITION_END = [
-    'webkitTransitionEnd',
-    'oTransitionEnd',
-    'mozTransitionEnd',
-    'msTransitionEnd',
-    'transitionend'
-  ];
-
   /**
    * @param {HTMLElement} element
    */
@@ -43,9 +35,7 @@ window.animit = (function(){
 
     if (!element.hasAttribute('data-animit-orig-style')) {
       this.lastStyleAttribute = element.getAttribute('style');
-      if (this.lastStyleAttribute) {
-        element.setAttribute('data-animit-orig-style', this.lastStyleAttribute);
-      }
+      element.setAttribute('data-animit-orig-style', this.lastStyleAttribute || '');
     } else {
       this.lastStyleAttribute = element.getAttribute('data-animit-orig-style');
     }
@@ -57,11 +47,6 @@ window.animit = (function(){
      * @property {Array}
      */
     transitionQueue: undefined,
-
-    /**
-     * @property {Boolean}
-     */
-    _started: false,
 
     /**
      * @property {HTMLElement}
@@ -94,10 +79,12 @@ window.animit = (function(){
     queue: function(transition) {
       var queue = this.transitionQueue;
 
-      if (transition instanceof Function || transition instanceof Animit.Transition) {
+      if (transition instanceof Function) {
         queue.push(transition);
+      } else if (transition instanceof Animit.Transition) {
+        queue.push(transition.build());
       } else {
-        queue.push(new Animit.Transition(transition));
+        queue.push(new Animit.Transition(transition).build());
       }
 
       return this;
@@ -138,23 +125,24 @@ window.animit = (function(){
 
         this.transitionQueue.push(function(done) {
 
-          self.element.style[Animit.prefix + 'Transition'] = transitionValue;
-          self.element.style.transition = transitionValue;
+          this.element.style[Animit.prefix + 'Transition'] = transitionValue;
+          this.element.style.transition = transitionValue;
 
-          self.element.setAttribute(
-            'style',
-            (self.lastStyleAttribute ? self.lastStyleAttribute + '; ' : '') + transitionStyle
-          );
+          var styleValue = (self.lastStyleAttribute ? self.lastStyleAttribute + '; ' : '') + transitionStyle;
+          this.element.setAttribute('style', styleValue);
 
-          var onTransitionEnd = function() {
+          var removeListeners = util.addOnTransitionEnd(this.element, function() {
             clearTimeout(timeoutId);
             reset();
             done();
-          };
+          });
 
-          util.addOnTransitionEnd(self.element, onTransitionEnd);
-          // fail safe
-          var timeoutId = setTimeout(onTransitionEnd, options.duration * 1000 * 1.1);
+          // for fail safe.
+          var timeoutId = setTimeout(function() {
+            removeListeners();
+            reset();
+            done();
+          }, options.duration * 1000 * 1.1);
         });
       } else {
         this.transitionQueue.push(function(done) {
@@ -183,28 +171,32 @@ window.animit = (function(){
      * Start animation sequence.
      */
     startAnimation: function() {
-      if (!this.started) {
-        this._started = true;
-        this._dequeueTransition();
-      }
+      this._dequeueTransition();
+
       return this;
     },
 
     _dequeueTransition: function() {
-      if (this.transitionQueue.length === 0) {
-        this._started = false;
-      } else {
-        var transition = this.transitionQueue.shift();
-        var self = this;
-        var done = function() {
-          self._dequeueTransition();
-        };
+      var transition = this.transitionQueue.shift();
+      if (this._currentTransition) {
+        throw new Error('Current transition exists.');
+      }
+      this._currentTransition = transition;
+      var self = this;
+      var called = false;
 
-        if (typeof transition === 'function') {
-          transition.apply(this, [done]);
+      var done = function() {
+        if (!called) {
+          called = true;
+          self._currentTransition = undefined;
+          self._dequeueTransition();
         } else {
-          transition.play(this.element, done);
+          throw new Error('Invalid state: This callback is called twice.');
         }
+      };
+
+      if (transition) {
+        transition.call(this, done);
       }
     }
 
@@ -247,7 +239,10 @@ window.animit = (function(){
     return pre;
   })();
 
-  Animit.runAll = function() {
+  /**
+   * @param {Animit} arguments
+   */
+  Animit.runAll = function(/* arguments... */) {
     for (var i = 0; i < arguments.length; i++) {
       arguments[i].play();
     }
@@ -267,41 +262,79 @@ window.animit = (function(){
   };
 
   Animit.Transition.prototype = {
-    play: function(element, callback) {
+    /**
+     * @param {HTMLElement} element
+     * @return {Function}
+     */
+    build: function() {
+
+      if (Object.keys(this.options.css).length === 0) {
+        throw new Error('options.css is required.');
+      }
+
+      var css = createActualCssProps(this.options.css);
 
       if (this.options.duration > 0) {
-        if (Object.keys(this.options.css).length === 0) {
-          setTimeout(callback, this.options.duration * 1000);
-        } else  {
-          var onTransitionEnd = function() {
+        var transitionValue = 'all ' + this.options.duration + 's ' + this.options.timing;
+        var timeout = this.options.duration * 1000 * 1.1;
+
+        return function(callback) {
+          var removeListeners = util.addOnTransitionEnd(this.element, function() {
             clearTimeout(timeoutId);
             callback();
-          };
-          util.addOnTransitionEnd(element, callback);
+          });
 
-          // for fail safe
-          var timeoutId = setTimeout(onTransitionEnd, this.options.duration * 1000 * 1.1);
+          var timeoutId = setTimeout(function() {
+            removeListeners();
+            callback();
+          }, timeout);
 
-          element.style[Animit.prefix + 'Transition'] = 'all ' + this.options.duration + 's ' + this.options.timing;
-          element.style.transition = 'all ' + this.options.duration + 's ' + this.options.timing;
-        }
-      } else if (Object.keys(this.options.css).length > 0) {
-        element.style[Animit.prefix + 'Transition'] = 'all 0s linear';
-        element.style.transition = 'all 0s linear';
+          var element = this.element;
+
+          element.style[Animit.prefix + 'Transition'] = transitionValue;
+          element.style.transition = transitionValue;
+
+          Object.keys(css).forEach(function(name) {
+            element.style[name] = css[name];
+          });
+        };
       }
-
-      // style setting
-      var css = this.options.css;
-      Object.keys(css).forEach(function(name) {
-        var value = css[name];
-        name = util.normalizeStyleName(name);
-        element.style[Animit.prefix + util.capitalize(name)] = value;
-        element.style[name] = value;
-      });
 
       if (this.options.duration <= 0) {
-        setTimeout(callback, 1000 / 60);
+        return function(callback) {
+          var element = this.element;
+          element.style[Animit.prefix + 'Transition'] = 'none';
+          element.transition = 'none';
+
+          Object.keys(css).forEach(function(name) {
+            element.style[name] = css[name];
+          });
+
+          setTimeout(callback, 1000 / 60);
+        };
       }
+
+      function createActualCssProps(css) {
+        var result = {};
+
+        Object.keys(css).forEach(function(name) {
+          var value = css[name];
+          name = util.normalizeStyleName(name);
+          var prefixed = Animit.prefix + util.capitalize(name);
+
+          if (Animit.cssPropertyDict[name]) {
+            result[name] = value;
+          } else if (Animit.cssPropertyDict[prefixed]) {
+            result[prefixed] = value;
+          } else {
+            result[prefixed] = value;
+            result[name] = value;
+          }
+        });
+
+        return result;
+      }
+
     }
   };
 
@@ -323,38 +356,39 @@ window.animit = (function(){
     },
 
     /**
-     * Add vendor prefix to transform style property value.
-     */
-    transformPropValue: function(value) {
-      return value.replace(/transform/, function(all) {
-        return '-' + Animit.prefix + '-' + all;
-      });
-    },
-
-    /**
      * Add an event handler on "transitionend" event.
      */
     addOnTransitionEnd: function(element, callback) {
-      var done = false;
       var fn = function(event) {
         if (element == event.target) {
           event.stopPropagation();
+          removeListeners();
 
-          TRANSITION_END.forEach(function(eventName) {
-            element.removeEventListener(eventName, fn);
-          });
-
-          if (!done) {
-            done = true;
-            return callback.apply(null, arguments);
-          }
+          callback();
         }
       };
 
-      TRANSITION_END.forEach(function(transitionEnd) {
-        element.addEventListener(transitionEnd, fn, false);
+      var removeListeners = function() {
+        util._transitionEndEvents.forEach(function(eventName) {
+          element.removeEventListener(eventName, fn);
+        });
+      };
+
+      util._transitionEndEvents.forEach(function(eventName) {
+        element.addEventListener(eventName, fn, false);
       });
-    }
+
+      return removeListeners;
+    },
+
+    _transitionEndEvents: (function() {
+      if (Animit.prefix === 'webkit' || Animit.prefix === 'o' || Animit.prefix === 'moz' || Animit.prefix === 'ms') {
+        return [Animit.prefix + 'TransitionEnd', 'transitionend'];
+      }
+
+      return ['transitionend'];
+    })()
+
   };
 
   return Animit;

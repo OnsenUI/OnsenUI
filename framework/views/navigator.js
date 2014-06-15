@@ -158,7 +158,12 @@ limitations under the License.
             duration: 0.4,
             timing: 'cubic-bezier(.1, .7, .1, 1)'
           })
-          .resetStyle(),
+          .resetStyle()
+          .wait(0.4)
+          .queue(function(done) {
+            callback();
+            done();
+          }),
 
         animit(leavePage.element[0])
           .queue({
@@ -176,12 +181,6 @@ limitations under the License.
             duration: 0.4,
             timing: 'cubic-bezier(.1, .7, .1, 1)'
           })
-          .wait(0.2)
-          .resetStyle()
-          .queue(function(done) {
-            callback();
-            done();
-          })
       );
 
     },
@@ -189,9 +188,9 @@ limitations under the License.
     /**
      * @param {Object} enterPage
      * @param {Object} leavePage
-     * @param {Function} done
+     * @param {Function} callback
      */
-    pop: function(enterPage, leavePage, done) {
+    pop: function(enterPage, leavePage, callback) {
       var mask = this.backgroundMask.remove();
       enterPage.element[0].parentNode.insertBefore(mask[0], enterPage.element[0]);
 
@@ -220,8 +219,12 @@ limitations under the License.
             duration: 0.4,
             timing: 'cubic-bezier(.1, .7, .1, 1)'
           })
+          .resetStyle()
           .wait(0.4)
-          .resetStyle(),
+          .queue(function(done) {
+            callback();
+            done();
+          }),
 
         animit(leavePage.element[0])
           .queue({
@@ -237,11 +240,7 @@ limitations under the License.
             duration: 0.4,
             timing: 'cubic-bezier(.1, .7, .1, 1)'
           })
-          .wait(0.2)
-          .queue(function(finish) {
-            done();
-            finish();
-          })
+          
       );
     }
   });
@@ -422,13 +421,13 @@ limitations under the License.
               },
               duration: 0
             })
-            .wait(0.2)
+            .wait(0.3)
             .resetStyle({
-              duration: 0.2,
+              duration: 0.1,
               transition:
-                'background 0.2s linear, ' +
-                'background-color 0.2s linear, ' + 
-                'border-color 0.2s linear'
+                'background 0.1s linear, ' +
+                'background-color 0.1s linear, ' + 
+                'border-color 0.1s linear'
             }),
 
           animit(enterPage.controller.getToolbarBackButtonLabelElement())
@@ -466,7 +465,6 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .wait(0.4)
             .resetStyle(),
 
           animit(enterPage.controller.getToolbarLeftItemsElement())
@@ -479,7 +477,6 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .wait(0.4)
             .resetStyle(),
 
           animit(enterPage.controller.getToolbarRightItemsElement())
@@ -492,7 +489,6 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .wait(0.4)
             .resetStyle(),
 
           animit(leavePage.controller.getContentElement())
@@ -511,7 +507,6 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .wait(0.2)
             .resetStyle()
             .queue(function(done) {
               callback();
@@ -534,7 +529,6 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .wait(0.2)
             .resetStyle(),
 
           animit(leavePage.controller.getToolbarCenterItemsElement())
@@ -553,7 +547,6 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .wait(0.2)
             .resetStyle(),
 
           animit(leavePage.controller.getToolbarLeftItemsElement())
@@ -566,7 +559,6 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .wait(0.2)
             .resetStyle(),
 
           animit(leavePage.controller.getToolbarRightItemsElement())
@@ -579,7 +571,6 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .wait(0.2)
             .resetStyle()
         );
 
@@ -621,7 +612,6 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .wait(0.2)
             .resetStyle()
             .queue(function(done) {
               callback();
@@ -678,7 +668,6 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .wait(0.4)
             .resetStyle(),
 
           animit(enterPage.controller.getToolbarBackButtonLabelElement())
@@ -755,7 +744,7 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .wait(0.2)
+            .wait(0)
             .queue(function(finish) {
               done();
               finish();
@@ -769,8 +758,7 @@ limitations under the License.
                 borderColor: 'rgba(0, 0, 0, 0)'
               },
               duration: 0
-            })
-            .wait(0.4),
+            }),
 
           animit(leavePage.controller.getToolbarBackButtonLabelElement())
             .queue({
@@ -862,7 +850,6 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .wait(0.4)
             .resetStyle(),
 
           animit(leavePage.element[0])
@@ -879,7 +866,6 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .wait(0.2)
             .queue(function(finish) {
               done();
               finish();
