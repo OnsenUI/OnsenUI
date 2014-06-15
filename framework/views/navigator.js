@@ -124,6 +124,7 @@ limitations under the License.
       'height: 100%; background-color: black;"></div>'
     ),
 
+
     /**
      * @param {Object} enterPage
      * @param {Object} leavePage
@@ -630,6 +631,9 @@ limitations under the License.
     pop: function(enterPage, leavePage, done) {
       var mask = this.backgroundMask.remove();
       enterPage.element[0].parentNode.insertBefore(mask[0], enterPage.element[0]);
+
+      var mask = this.backgroundMask;
+      mask.css('display', 'block');
 
       var maskClear = animit(mask[0])
         .wait(0.4)

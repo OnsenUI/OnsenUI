@@ -31,8 +31,8 @@ limitations under the License.
       link: {
         post: function(scope, element) {
           if (!isReady) {
-            $rootScope.$broadcast('$ons-ready');
             isReady = true;
+            $rootScope.$broadcast('$ons-ready');
           }
           element.remove();
         }

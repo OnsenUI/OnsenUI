@@ -3,7 +3,9 @@
 (function(){
   'use strict';
 
-  angular.module('onsen').run(function($compile, $rootScope) {
+  var module = angular.module('onsen');
+
+  module.run(function($compile, $rootScope) {
     ons.$compile = $compile;
     $rootScope.$on('$ons-ready', function() {
       ons.isReady = function() {
@@ -77,8 +79,12 @@
       if (ons.isReady()) {
         callback();
       } else {
-        angular.module('onsen.directives').run(function($rootScope) {
-          $rootScope.$on('$ons-ready', callback);
+        module.run(function($rootScope) {
+          if (ons.isReady()) {
+            callback();
+          } else {
+            $rootScope.$on('$ons-ready', callback);
+          }
         });
       }
     }
