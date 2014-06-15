@@ -24,23 +24,25 @@ limitations under the License.
       restrict: 'E',
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
-      transclude: true,
+      // Do not use isolated scope and template's ng-transclude.
+      transclude: false,
       scope: true,
 
-      compile: function() {
+      compile: function(element) {
+        var html = $onsen.normalizePageHTML(element.html());
+        element.contents().remove();
 
         return {
-          pre: function(scope, iElement, attrs, controller, transclude) {
+          pre: function(scope, element, attrs, controller, transclude) {
             var navigator = new Navigator({
               scope: scope, 
-              element: iElement
+              element: element
             });
 
             $onsen.declareVarAttribute(attrs, navigator);
 
             var pageScope = navigator._createPageScope();
-            var compiledPage = transclude(pageScope, function() { });
+            var compiledPage = $compile(angular.element(html))(pageScope);
             navigator._pushPageDOM('', compiledPage, pageScope, {});
 
             NavigatorStack.addNavigator(navigator);

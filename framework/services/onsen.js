@@ -60,7 +60,7 @@ limitations under the License.
           var deferred = $q.defer();
 
           var html = typeof cache === 'string' ? cache : cache[1];
-          deferred.resolve(normalize(html));
+          deferred.resolve(this.normalizePageHTML(html));
 
           return deferred.promise;
           
@@ -72,19 +72,26 @@ limitations under the License.
           }).then(function(response) {
             var html = response.data;
 
-            return normalize(html);
-          });
+            return this.normalizePageHTML(html);
+          }.bind(this));
         }
 
         function normalize(html) {
-          html = ('' + html).trim();
-
-          if (!html.match(/^<ons-page/)) {
-            html = '<ons-page>' + html + '</ons-page>';
-          }
-          
-          return html;
         }
+      },
+
+      /**
+       * @param {String} html
+       * @return {String}
+       */
+      normalizePageHTML: function(html) {
+        html = ('' + html).trim();
+
+        if (!html.match(/^<ons-page/)) {
+          html = '<ons-page>' + html + '</ons-page>';
+        }
+        
+        return html;
       },
 
       /**
