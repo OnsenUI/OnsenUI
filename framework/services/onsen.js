@@ -20,12 +20,19 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
+  /**
+   * Internal service class for framework implementation.
+   */
   module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q) {
 
     var $onsen = {
 
       DIRECTIVE_TEMPLATE_URL: "templates",
 
+      /**
+       * Cache for predefined template.
+       * eg. <script type="text/ons-template">...</script>
+       */
       predefinedPageCache: (function() {
         var cache = $cacheFactory('$onsenPredefinedPageCache');
 
@@ -52,7 +59,8 @@ limitations under the License.
         if (cache) {
           var deferred = $q.defer();
 
-          deferred.resolve(typeof cache === 'string' ? cache : cache[1]);
+          var html = typeof cache === 'string' ? cache : cache[1];
+          deferred.resolve(normalize(html));
 
           return deferred.promise;
           
@@ -62,8 +70,20 @@ limitations under the License.
             method: 'GET',
             cache: $onsen.predefinedPageCache
           }).then(function(response) {
-            return response.data;
+            var html = response.data;
+
+            return normalize(html);
           });
+        }
+
+        function normalize(html) {
+          html = ('' + html).trim();
+
+          if (!html.match(/^<ons-page/)) {
+            html = '<ons-page>' + html + '</ons-page>';
+          }
+          
+          return html;
         }
       },
 
