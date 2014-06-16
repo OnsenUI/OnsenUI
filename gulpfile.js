@@ -44,7 +44,8 @@ gulp.task('browser-sync', function() {
       baseDir: __dirname + '/',
       directory: true
     },
-    ghostMode: false
+    ghostMode: false,
+    debounce: 200
   });
 });
 
@@ -267,9 +268,11 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   gulp.watch([
     'themes/css/*.css',
     'themes/testcases/*',
-    'app/lib/**/*'
+    'app/**/*.{js,css,html}',
+    'project_templates/**/*.{js,css,html}'
   ]).on('change', function(changedFile) {
-    browserSync.reload();
+    gulp.src(changedFile.path)
+      .pipe(browserSync.reload({stream: true, once: true}));
   });
 
   // for theme 
