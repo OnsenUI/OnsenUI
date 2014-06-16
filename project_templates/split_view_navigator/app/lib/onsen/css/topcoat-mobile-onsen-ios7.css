@@ -1240,7 +1240,6 @@ input[type="checkbox"] {
   border-top: 1px solid #ddd;
 }
 .topcoat-navigation-bar__line-height {
-  line-height: 36px !important;
   line-height: 44px !important;
   padding-bottom: 0;
   padding-top: 0;
@@ -1251,8 +1250,7 @@ input[type="checkbox"] {
 }
 .topcoat-navigation-bar__item {
   margin: var-margin;
-  line-height: 36px;
-  line-height: 40px;
+  line-height: 44px;
   vertical-align: top;
 }
 .topcoat-navigation-bar__title {
@@ -1321,12 +1319,24 @@ input[type="checkbox"] {
     </div>
 */
 .topcoat-page {
+  font-weight: 400;
+  color: #1f1f21;
+}
+.topcoat-page__bg,
+.topcoat-page__content {
   background-color: #efeff4;
   font-weight: 400;
   color: #1f1f21;
 }
-.topcoat-page__bg {
-  background-color: #efeff4;
+.topcoat-page__content {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+.topcoat-navigation-bar + .topcoat-page__content {
+  padding-top: 44px;
 }
 /* topdoc
   name: Radio Button

@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.4 - 2014-05-13 */
+/*! onsenui - v1.1.0-dev - 2014-06-16 */
 /*
 Copyright 2013-2014 ASIAL CORPORATION
 
@@ -1208,7 +1208,6 @@ ons-navigator {
 .topcoat-navigation-bar {    
   padding-left: 0 !important;
   padding-right: 0 !important;
-
 }
 
 .ons-navigator__right-section-icon {
