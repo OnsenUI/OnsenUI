@@ -5409,7 +5409,7 @@ limitations under the License.
 
           unlock();
 
-          self.emit('postPush', event);
+          self.emit('post-push', event);
 
           if (typeof options.onTransitionEnd === 'function') {
             options.onTransitionEnd();
@@ -5441,7 +5441,7 @@ limitations under the License.
           }
         };
 
-        this.emit('prePush', prePushEvent);
+        this.emit('pre-push', prePushEvent);
 
         return isCanceled;
       },
@@ -5459,7 +5459,7 @@ limitations under the License.
           }
         };
 
-        this.emit('prePop', prePopEvent);
+        this.emit('pre-pop', prePopEvent);
 
         return isCanceled;
       },
@@ -5501,7 +5501,7 @@ limitations under the License.
           var callback = function() {
             leavePage.destroy();
             unlock();
-            self.emit('postPop', event);
+            self.emit('post-pop', event);
             if (typeof options.onTransitionEnd === 'function') {
               options.onTransitionEnd();
             }
