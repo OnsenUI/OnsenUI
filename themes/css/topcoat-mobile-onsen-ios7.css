@@ -1330,8 +1330,13 @@ input[type="checkbox"] {
 }
 .topcoat-page__content {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+.topcoat-navigation-bar + .topcoat-page__content {
+  padding-top: 44px;
 }
 /* topdoc
   name: Radio Button
