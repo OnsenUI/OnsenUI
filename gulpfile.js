@@ -41,7 +41,7 @@ var browserSync = require('browser-sync');
 gulp.task('browser-sync', function() {
   browserSync.init(null, {
     server: {
-      baseDir: './',
+      baseDir: __dirname + '/',
       directory: true
     },
     ghostMode: false
