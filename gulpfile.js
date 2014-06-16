@@ -63,7 +63,10 @@ gulp.task('html2js', function() {
 ////////////////////////////////////////
 gulp.task('jshint', function() {
   gulp.src([
-    'framework/*/*.js'
+    'framework/js/*.js',
+    'framework/directives/*.js',
+    'framework/services/*.js',
+    'framework/views/*.js'
   ])
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
@@ -99,13 +102,12 @@ gulp.task('prepare', ['html2js'], function() {
 
     // onsenui.js
     gulp.src([
+      'framework/lib/*.js',
       'framework/directives/templates.js',
       'framework/directives/module.js',
-      'framework/views/navigator.js',
+      'framework/views/*.js',
       'framework/directives/*.js',
-      'framework/services/module.js',
       'framework/services/*.js',
-      'framework/lib/*.js',
       'framework/js/*.js'
     ])            
       .pipe(concat('onsenui.js'))            
@@ -116,13 +118,12 @@ gulp.task('prepare', ['html2js'], function() {
     // onsenui_all.js
     gulp.src([
       'framework/lib/angular/angular.js',
-      'framework/views/*.js',
+      'framework/lib/*.js',
       'framework/directives/templates.js',
       'framework/directives/module.js',
+      'framework/views/*.js',
       'framework/directives/*.js',
-      'framework/services/module.js',
       'framework/services/*.js',
-      'framework/lib/*.js',
       'framework/js/*.js'
     ])
       .pipe(concat('onsenui_all.js'))
@@ -260,7 +261,7 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
     'demo/*',
     'test/manual-testcases/*',
     'test/manual-testcases/*/*'
-  ], ['prepare']);
+  ], ['prepare', 'jshint']);
 
   // for livereload
   gulp.watch([
@@ -276,7 +277,9 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
     'themes/theme-modules/*/*',
     'themes/theme-modules/*/*.styl',
     'themes/theme-modules/*/*/*.styl'
-  ], ['build-theme']);
+  ], function() {
+    runSequence('build-theme', 'prepare');
+  });
 
   // for theme topdoc
   gulp.watch([
