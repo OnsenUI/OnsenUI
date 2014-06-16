@@ -136,16 +136,15 @@ limitations under the License.
       /**
        * @return {Boolean}
        */
-      isIOS7Above: function() {
+      isIOS7Above: (function() {
         var ua = window.navigator.userAgent;
-        var result = ua.match(/(iPad|iPhone|iPod touch);.*?CPU.*?OS (\d+)_(\d+)/i);
+        var match = ua.match(/(iPad|iPhone|iPod touch);.*?CPU.*?OS (\d+)_(\d+)/i);
 
-        if (result) {
-          return parseFloat(result[2] + '.' + result[3]) >= 7;
-        }
-
-        return false;
-      },
+        var result = match ? parseFloat(match[2] + '.' + match[3]) >= 7 : false;
+        return function() {
+          return result;
+        };
+      }),
 
       /**
        * Define a variable to JavaScript global scope and AngularJS scope.
