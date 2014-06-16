@@ -102,6 +102,12 @@ limitations under the License.
       transclude: false,
 
       compile: function(element, attrs) {
+        if ($onsen.isWebView() && $onsen.isIOS7Above()) {
+          // Adjustments for iOS7
+          element.css('paddingTop', '20px');
+          element.css('height', '64px');
+        }
+
         var modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
         element.addClass('topcoat-navigation-bar');
@@ -110,7 +116,8 @@ limitations under the License.
           'position': 'absolute',
           'z-index': '10000',
           'left': '0px',
-          'right': '0px'
+          'right': '0px',
+          'top': '0px'
         });
         ensureToolbarItemElements(element);
 

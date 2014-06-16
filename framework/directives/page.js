@@ -61,6 +61,14 @@ limitations under the License.
         element.remove();
         $element.prepend(element);
 
+        if ($onsen.isWebView() && $onsen.isIOS7Above()) {
+          // Adjustments for IOS7
+          var wrapper = $element[0].querySelector('.topcoat-page__content');
+          angular.element(wrapper).css({
+            'top': '22px',
+            'paddingTop': null
+          });
+        }
 
         this.toolbarElement = element;
         this.registeredToolbarElement = true;
@@ -139,22 +147,34 @@ limitations under the License.
       transclude: true,
       scope: true,
 
-      link: {
-
-        pre: function(scope, element, attrs, controller, transclude) {
-          var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-          element.addClass('topcoat-page ' + modifierTemplater('topcoat-page--*') + ' ons-page-inner');
-
-          transclude(scope, function(clonedElement) {
-            var wrapper = angular.element('<div class="topcoat-page__content"></div>');
-            element.append(wrapper);
-            wrapper.append(clonedElement);
-          });
-        },
-
-        post: function(scope, element, attrs) {
-          firePageInitEvent(element[0]);
+      compile: function(element) {
+        if ($onsen.isWebView() && $onsen.isIOS7Above()) {
+          // Adjustments for IOS7
+          element.css('paddingTop', '20px');
         }
+
+        return {
+
+          pre: function(scope, element, attrs, controller, transclude) {
+            var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+            element.addClass('topcoat-page ' + modifierTemplater('topcoat-page--*') + ' ons-page-inner');
+
+            transclude(scope, function(clonedElement) {
+              var wrapper = angular.element('<div class="topcoat-page__content"></div>');
+              element.append(wrapper);
+
+              if ($onsen.isWebView() && $onsen.isIOS7Above()) {
+                // Adjustments for IOS7
+                wrapper.css('paddingTop', '22px');
+              }
+              wrapper.append(clonedElement);
+            });
+          },
+
+          post: function(scope, element, attrs) {
+            firePageInitEvent(element[0]);
+          }
+        };
       }
     };
   });

@@ -513,24 +513,6 @@ limitations under the License.
               done();
             }),
 
-          animit(leavePage.controller.getToolbarBackButtonLabelElement())
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0
-              },
-              duration: 0
-            })
-            .queue({
-              css: {
-                transform: 'translate3d(-100%, 0, 0)',
-                opacity: 0,
-              },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .resetStyle(),
-
           animit(leavePage.controller.getToolbarCenterItemsElement())
             .queue({
               css: {
@@ -571,7 +553,26 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
+            .resetStyle(),
+
+          animit(leavePage.controller.getToolbarBackButtonLabelElement())
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1.0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3d(-100%, 0, 0)',
+                opacity: 0,
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
             .resetStyle()
+
         );
 
       } else {

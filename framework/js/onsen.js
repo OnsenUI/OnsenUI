@@ -59,16 +59,18 @@
      */
     compile : function(dom) {
       if (!ons.$compile) {
-        throw new Error('ons.$compile() is not ready. Wait for initialization.');
+        throw new Error('ons.$compile() is not ready. Wait for initialization with ons.ready().');
       }
 
       if (!(dom instanceof HTMLElement)) {
         throw new Error('First argument must be an instance of HTMLElement.');
       }
+
       var scope = angular.element(dom).scope();
       if (!scope) {
         throw new Error('AngularJS Scope is null. Argument DOM element must be attached in DOM document.');
       }
+
       ons.$compile(dom)(scope);
     },
 
@@ -83,7 +85,10 @@
           if (ons.isReady()) {
             callback();
           } else {
-            $rootScope.$on('$ons-ready', callback);
+            var off = $rootScope.$on('$ons-ready', function() {
+              off();
+              callback();
+            });
           }
         });
       }

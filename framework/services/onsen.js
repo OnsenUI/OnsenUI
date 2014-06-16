@@ -127,6 +127,27 @@ limitations under the License.
       },
 
       /**
+       * @return {Boolean}
+       */
+      isWebView: function() {
+        return !!(window.cordova || window.phonegap || window.PhoneGap);
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      isIOS7Above: function() {
+        var ua = window.navigator.userAgent;
+        var result = ua.match(/(iPad|iPhone|iPod touch);.*?CPU.*?OS (\d+)_(\d+)/i);
+
+        if (result) {
+          return parseFloat(result[2] + '.' + result[3]) >= 7;
+        }
+
+        return false;
+      },
+
+      /**
        * Define a variable to JavaScript global scope and AngularJS scope.
        *
        * Util.defineVar('foo', 'foo-value');
