@@ -911,6 +911,11 @@ limitations under the License.
       _doorLock: undefined,
 
       /**
+       * @member {Boolean}
+       */
+      _profiling: false,
+
+      /**
        * @param {Object} options
        * @param options.element jqLite Object to manage with navigator
        * @param options.scope Angular.js scope object
@@ -949,6 +954,9 @@ limitations under the License.
        * @param {Function} [options.onTransitionEnd]
        */
       pushPage: function(page, options) {
+        if (this._profiling) {
+          console.time('pushPage');
+        }
 
         options = options || {};
 
@@ -965,17 +973,26 @@ limitations under the License.
         var self = this;
         this._doorLock.waitUnlock(function() {
           var unlock = self._doorLock.lock();
+          var done = function() {
+            unlock();
+            if (self._profiling) {
+              console.timeEnd('pushPage');
+            }
+          };
 
           $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
             var pageScope = self._createPageScope();
             var pageElement = createPageElement(templateHTML, pageScope);
 
             setImmediate(function() {
-              self._pushPageDOM(page, pageElement, pageScope, options, unlock);
+              self._pushPageDOM(page, pageElement, pageScope, options, done);
             });
 
           }, function() {
             unlock();
+            if (self._profiling) {
+              console.timeEnd('pushPage');
+            }
             throw new Error('Page is not found: ' + page);
           });
         });
@@ -1033,6 +1050,9 @@ limitations under the License.
        * @param {Function} [unlock]
        */
       _pushPageDOM: function(page, element, pageScope, options, unlock) {
+        if (this._profiling) {
+          console.time('pushPageDOM');
+        }
         unlock = unlock || function() {};
         options = options || {};
         element = this._normalizePageElement(element);
@@ -1073,6 +1093,10 @@ limitations under the License.
         var done = function() {
           if (self.pages[self.pages.length - 2]) {
             self.pages[self.pages.length - 2].element.css('display', 'none');
+          }
+
+          if (self._profiling) {
+            console.timeEnd('pushPageDOM');
           }
 
           unlock();
