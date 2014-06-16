@@ -20,14 +20,13 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  function ensureLeftContainer(element, center) {
+  function ensureLeftContainer(element) {
     var container = element[0].querySelector('.left');
 
     if (!container) {
       container = document.createElement('div');
       container.setAttribute('class', 'left');
       container.innerHTML = '&nbsp;';
-      element[0].insertBefore(container, center);
     }
 
     if (container.innerHTML.trim() === '') {
@@ -41,13 +40,12 @@ limitations under the License.
     return container;
   }
 
-  function ensureCenterContainer(element, right) {
+  function ensureCenterContainer(element) {
     var container = element[0].querySelector('.center');
 
     if (!container) {
       container = document.createElement('div');
       container.setAttribute('class', 'center');
-      element[0].insertBefore(container, right);
     }
 
     if (container.innerHTML.trim() === '') {
@@ -68,7 +66,6 @@ limitations under the License.
       container = document.createElement('div');
       container.setAttribute('class', 'right');
       container.innerHTML = '&nbsp;';
-      element[0].insertBefore(container, null);
     }
 
     if (container.innerHTML.trim() === '') {
@@ -83,9 +80,11 @@ limitations under the License.
   }
 
   function ensureToolbarItemElements(element) {
+    var left = ensureLeftContainer(element);
+    var center = ensureCenterContainer(element);
     var right = ensureRightContainer(element);
-    var center = ensureCenterContainer(element, right);
-    var left = ensureLeftContainer(element, center);
+    element.contents().remove();
+    element.append(angular.element([left, center, right]));
   }
 
   /**
@@ -95,38 +94,31 @@ limitations under the License.
     return {
       restrict: 'E',
       replace: false,
-      transclude: true,
       require: '^onsPage',
-
-      scope: true, 
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
-      
-      link: {
-        pre: function(scope, element, attrs, pageController, transclude) {
-          var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+      scope: true, 
+      transclude: false,
 
-          element.addClass('topcoat-navigation-bar');
-          element.addClass(modifierTemplater('topcoat-navigation-bar--*'));
-          element.css({
-            'position': 'absolute',
-            'z-index': '10000',
-            'left': '0px',
-            'right': '0px'
-          });
+      compile: function(element, attrs) {
+        var modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
-          pageController.registerToolbar(element);
+        element.addClass('topcoat-navigation-bar');
+        element.addClass(modifierTemplater('topcoat-navigation-bar--*'));
+        element.css({
+          'position': 'absolute',
+          'z-index': '10000',
+          'left': '0px',
+          'right': '0px'
+        });
+        ensureToolbarItemElements(element);
 
-          transclude(scope, function(clonedElement) {
-            element.append(clonedElement);
-            ensureToolbarItemElements(angular.element(element[0]));
-          });
-        },
-
-        post: function(scope, element, attrs, controller) {
-
-        }
+        return {
+          pre: function(scope, element, attrs, pageController) {
+            pageController.registerToolbar(element);
+          }
+        };
       }
     };
   });
