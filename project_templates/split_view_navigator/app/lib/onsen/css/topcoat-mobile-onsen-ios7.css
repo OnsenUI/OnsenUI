@@ -590,6 +590,7 @@ color var-color--cta--down,
   border-radius: 3px;
   font-weight: 400;
   font-size: 16px;
+  font-size: 18px;
 }
 .topcoat-icon-button:active {
   background-color: #b5d9ff;
@@ -1252,9 +1253,11 @@ input[type="checkbox"] {
   margin: var-margin;
   line-height: 44px;
   vertical-align: top;
+  font-size: 18px;
 }
 .topcoat-navigation-bar__title {
   font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   color: #1f1f21;
 }

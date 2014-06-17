@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.0-dev - 2014-06-16 */
+/*! onsenui - v1.1.0-dev - 2014-06-17 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -24574,7 +24574,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/button.tpl",
-    "<button class=\"{{item.animation}} topcoat-button--{{onsType}} effeckt-button topcoat-button no-select {{modifierTemplater('topcoat--button--*')}}\">\n" +
+    "<button class=\"{{item.animation}} topcoat-button--{{onsType}} effeckt-button topcoat-button no-select {{modifierTemplater('topcoat-button--*')}}\">\n" +
     "  <span class=\"label ons-button-inner\" ng-transclude></span>\n" +
     "  <span class=\"spinner topcoat-button__spinner {{modifierTemplater('topcoat-button--*__spinner')}}\"></span>\n" +
     "</button>\n" +
@@ -25027,7 +25027,6 @@ limitations under the License.
       'height: 100%; background-color: black;"></div>'
     ),
 
-
     /**
      * @param {Object} enterPage
      * @param {Object} leavePage
@@ -25417,24 +25416,6 @@ limitations under the License.
               done();
             }),
 
-          animit(leavePage.controller.getToolbarBackButtonLabelElement())
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0
-              },
-              duration: 0
-            })
-            .queue({
-              css: {
-                transform: 'translate3d(-100%, 0, 0)',
-                opacity: 0,
-              },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .resetStyle(),
-
           animit(leavePage.controller.getToolbarCenterItemsElement())
             .queue({
               css: {
@@ -25475,7 +25456,26 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
+            .resetStyle(),
+
+          animit(leavePage.controller.getToolbarBackButtonLabelElement())
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1.0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3d(-100%, 0, 0)',
+                opacity: 0,
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
             .resetStyle()
+
         );
 
       } else {
@@ -25534,9 +25534,6 @@ limitations under the License.
     pop: function(enterPage, leavePage, done) {
       var mask = this.backgroundMask.remove();
       enterPage.element[0].parentNode.insertBefore(mask[0], enterPage.element[0]);
-
-      var mask = this.backgroundMask;
-      mask.css('display', 'block');
 
       var maskClear = animit(mask[0])
         .wait(0.4)
@@ -26152,6 +26149,49 @@ limitations under the License.
        */
       getPages: function() {
         return this.pages;
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      canPopPage: function() {
+        return this.pages.length > 1;
+      },
+
+      /**
+       * Enable handler of  use Android's backbutton on this navigator.
+       */
+      enableAndroidBackButtonHandler: function() {
+        if (this._androidBackButtonHandler) {
+          this._androidBackButtonHandler = function(event) {
+            if (this.pages.length > 1) {
+              event.preventDefault();
+              this.popPage();
+            } else {
+              navigator.app.exitApp();
+            }
+          }.bind(this);
+          this._androidBackButtonHandler = fn;
+        }
+
+        var fn = this._androidBackButtonHandler;
+
+        var doc = window.document;
+
+        doc.addEventListener('backbutton', fn, false);
+        doc.addEventListener('deviceready', function() {
+          doc.removeEventListener('backbutton', fn);
+          doc.addEventListener('backbutton', fn, false);
+        }, false);
+      },
+
+      /**
+       * Disable handler of Android's backbutton event on this navigator.
+       */
+      disableAndroidBackButtonHandler: function() {
+        if (this._androidBackButtonHandler) {
+          doc.addEventListener('backbutton', this._androidBackButtonHandler, false);
+        }
       }
     });
 
@@ -26953,6 +26993,14 @@ limitations under the License.
         element.remove();
         $element.prepend(element);
 
+        if ($onsen.isWebView() && $onsen.isIOS7Above()) {
+          // Adjustments for IOS7
+          var wrapper = $element[0].querySelector('.topcoat-page__content');
+          angular.element(wrapper).css({
+            'top': '22px',
+            'paddingTop': null
+          });
+        }
 
         this.toolbarElement = element;
         this.registeredToolbarElement = true;
@@ -27031,22 +27079,34 @@ limitations under the License.
       transclude: true,
       scope: true,
 
-      link: {
-
-        pre: function(scope, element, attrs, controller, transclude) {
-          var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-          element.addClass('topcoat-page ' + modifierTemplater('topcoat-page--*') + ' ons-page-inner');
-
-          transclude(scope, function(clonedElement) {
-            var wrapper = angular.element('<div class="topcoat-page__content"></div>');
-            element.append(wrapper);
-            wrapper.append(clonedElement);
-          });
-        },
-
-        post: function(scope, element, attrs) {
-          firePageInitEvent(element[0]);
+      compile: function(element) {
+        if ($onsen.isWebView() && $onsen.isIOS7Above()) {
+          // Adjustments for IOS7
+          element.css('paddingTop', '20px');
         }
+
+        return {
+
+          pre: function(scope, element, attrs, controller, transclude) {
+            var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+            element.addClass('topcoat-page ' + modifierTemplater('topcoat-page--*') + ' ons-page-inner');
+
+            transclude(scope, function(clonedElement) {
+              var wrapper = angular.element('<div class="topcoat-page__content"></div>');
+              element.append(wrapper);
+
+              if ($onsen.isWebView() && $onsen.isIOS7Above()) {
+                // Adjustments for IOS7
+                wrapper.css('paddingTop', '20px');
+              }
+              wrapper.append(clonedElement);
+            });
+          },
+
+          post: function(scope, element, attrs) {
+            firePageInitEvent(element[0]);
+          }
+        };
       }
     };
   });
@@ -28951,14 +29011,13 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  function ensureLeftContainer(element, center) {
+  function ensureLeftContainer(element) {
     var container = element[0].querySelector('.left');
 
     if (!container) {
       container = document.createElement('div');
       container.setAttribute('class', 'left');
       container.innerHTML = '&nbsp;';
-      element[0].insertBefore(container, center);
     }
 
     if (container.innerHTML.trim() === '') {
@@ -28972,13 +29031,12 @@ limitations under the License.
     return container;
   }
 
-  function ensureCenterContainer(element, right) {
+  function ensureCenterContainer(element) {
     var container = element[0].querySelector('.center');
 
     if (!container) {
       container = document.createElement('div');
       container.setAttribute('class', 'center');
-      element[0].insertBefore(container, right);
     }
 
     if (container.innerHTML.trim() === '') {
@@ -28999,7 +29057,6 @@ limitations under the License.
       container = document.createElement('div');
       container.setAttribute('class', 'right');
       container.innerHTML = '&nbsp;';
-      element[0].insertBefore(container, null);
     }
 
     if (container.innerHTML.trim() === '') {
@@ -29014,9 +29071,11 @@ limitations under the License.
   }
 
   function ensureToolbarItemElements(element) {
+    var left = ensureLeftContainer(element);
+    var center = ensureCenterContainer(element);
     var right = ensureRightContainer(element);
-    var center = ensureCenterContainer(element, right);
-    var left = ensureLeftContainer(element, center);
+    element.contents().remove();
+    element.append(angular.element([left, center, right]));
   }
 
   /**
@@ -29026,38 +29085,39 @@ limitations under the License.
     return {
       restrict: 'E',
       replace: false,
-      transclude: true,
       require: '^onsPage',
-
-      scope: true, 
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
-      
-      link: {
-        pre: function(scope, element, attrs, pageController, transclude) {
-          var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+      scope: true, 
+      transclude: false,
 
-          element.addClass('topcoat-navigation-bar');
-          element.addClass(modifierTemplater('topcoat-navigation-bar--*'));
-          element.css({
-            'position': 'absolute',
-            'z-index': '10000',
-            'left': '0px',
-            'right': '0px'
-          });
+      compile: function(element, attrs) {
 
-          pageController.registerToolbar(element);
-
-          transclude(scope, function(clonedElement) {
-            element.append(clonedElement);
-            ensureToolbarItemElements(angular.element(element[0]));
-          });
-        },
-
-        post: function(scope, element, attrs, controller) {
-
+        if ($onsen.isWebView() && $onsen.isIOS7Above()) {
+          // Adjustments for iOS7
+          element.css('paddingTop', '20px');
+          element.css('height', '64px');
         }
+
+        var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+        element.addClass('topcoat-navigation-bar');
+        element.addClass(modifierTemplater('topcoat-navigation-bar--*'));
+        element.css({
+          'position': 'absolute',
+          'z-index': '10000',
+          'left': '0px',
+          'right': '0px',
+          'top': '0px'
+        });
+        ensureToolbarItemElements(element);
+
+        return {
+          pre: function(scope, element, attrs, pageController) {
+            pageController.registerToolbar(element);
+          }
+        };
       }
     };
   });
@@ -29227,6 +29287,27 @@ limitations under the License.
           this._defineVar(attrs['var'], object);
         }
       },
+
+      /**
+       * @return {Boolean}
+       */
+      isWebView: function() {
+        return !!(window.cordova || window.phonegap || window.PhoneGap);
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      isIOS7Above: (function() {
+        var ua = window.navigator.userAgent;
+        var match = ua.match(/(iPad|iPhone|iPod touch);.*CPU.*OS (\d+)_(\d+)/i);
+
+        var result = match ? parseFloat(match[2] + '.' + match[3]) >= 7 : false;
+
+        return function() {
+          return result;
+        };
+      })(),
 
       /**
        * Define a variable to JavaScript global scope and AngularJS scope.
@@ -29733,16 +29814,18 @@ window.animit = (function(){
      */
     compile : function(dom) {
       if (!ons.$compile) {
-        throw new Error('ons.$compile() is not ready. Wait for initialization.');
+        throw new Error('ons.$compile() is not ready. Wait for initialization with ons.ready().');
       }
 
       if (!(dom instanceof HTMLElement)) {
         throw new Error('First argument must be an instance of HTMLElement.');
       }
+
       var scope = angular.element(dom).scope();
       if (!scope) {
         throw new Error('AngularJS Scope is null. Argument DOM element must be attached in DOM document.');
       }
+
       ons.$compile(dom)(scope);
     },
 
@@ -29757,7 +29840,10 @@ window.animit = (function(){
           if (ons.isReady()) {
             callback();
           } else {
-            $rootScope.$on('$ons-ready', callback);
+            var off = $rootScope.$on('$ons-ready', function() {
+              off();
+              callback();
+            });
           }
         });
       }
