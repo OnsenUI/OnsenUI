@@ -5875,7 +5875,7 @@ limitations under the License.
 
   var module = angular.module('onsen'); // no [] -> referencing existing module
 
-  module.directive('onsCol', function($timeout) {
+  module.directive('onsCol', function($timeout, $onsen) {
     return {
       restrict: 'E',
       replace: true,
@@ -6229,9 +6229,13 @@ limitations under the License.
 
             $onsen.declareVarAttribute(attrs, navigator);
 
-            var pageScope = navigator._createPageScope();
-            var compiledPage = $compile(angular.element(html))(pageScope);
-            navigator._pushPageDOM('', compiledPage, pageScope, {});
+            if (attrs.page) {
+              navigator.pushPage(attrs.page, {});
+            } else {
+              var pageScope = navigator._createPageScope();
+              var compiledPage = $compile(angular.element(html))(pageScope);
+              navigator._pushPageDOM('', compiledPage, pageScope, {});
+            }
 
             NavigatorStack.addNavigator(navigator);
             scope.$on('$destroy', function(){
@@ -6539,7 +6543,7 @@ limitations under the License.
         var radioButton = element.find('input');
         var checked = false;
 
-        $scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+        $scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
         attrs.$observe('disabled', function(disabled){
           if(disabled === undefined){
@@ -7057,7 +7061,7 @@ limitations under the License.
       restrict: 'E',
       replace: true,
       transclude: false,
-      templateUrl: $onse.DIRECTIVE_TEMPLATE_URL + '/search_input.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/search_input.tpl',
       link: function(scope, element, attrs) {
         element.addClass($onsen.generateModifierTemplater(attrs)('topcoat-search-input--*'));
       }
@@ -7661,7 +7665,7 @@ limitations under the License.
           attachMethods: function() {
             var self = this;
 
-            scope.setSecondaryPage = function(page) {
+            this.setSecondaryPage = scope.setSecondaryPage = function(page) {
               if (page) {
                 $onsen.getPageHTMLAsync(page).then(function(html) {
                   self.appendSecondPage(angular.element(html.trim()));
@@ -7673,7 +7677,7 @@ limitations under the License.
               }
             };
 
-            scope.setMainPage = function(page) {
+            this.setMainPage = scope.setMainPage = function(page) {
               if (page) {
                 $onsen.getPageHTMLAsync(page).then(function(html) {
                   self.appendMainPage(angular.element(html.trim()));

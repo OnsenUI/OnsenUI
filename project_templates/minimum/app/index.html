@@ -21,12 +21,15 @@
 <body>    
   
   <ons-screen>
-    <ons-navigator title="Page 1">        
+    <ons-navigator>
+      <ons-toolbar>
+        <div class="center">Page 1</div>
+      </ons-toolbar>
 
-        <div class="center">
-          <h1>Page 1</h1>
-          <ons-button ng-click="ons.navigator.pushPage('page2.html')">Push Page 2</ons-button> 
-        </div>
+      <div class="center">
+        <h1>Page 1</h1>
+        <ons-button ng-click="ons.navigator.pushPage('page2.html')">Push Page 2</ons-button> 
+      </div>
 
     </ons-navigator>
   </ons-screen>

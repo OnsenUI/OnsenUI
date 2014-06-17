@@ -1,14 +1,18 @@
 <ons-page class="center">
-	<h1>Page 3</h1>
-	<ons-button 
-		ng-click="ons.$get('#main-navigator').popPage()">
-		Pop Page (if used pushPage)
-	</ons-button>
+  <ons-toolbar>
+    <div class="center">Page 2</div>
+  </ons-toolbar>
 
-	<p></p>
+  <h1>Page 3</h1>
+  <ons-button 
+    ng-click="mainNavigator.popPage()">
+    Pop Page (if used pushPage)
+  </ons-button>
 
-	<ons-button 
-		ng-click="ons.screen.dismissPage()">
-		Dismiss Page (if use presentPage)
-	</ons-button>
+  <p></p>
+
+  <ons-button 
+    ng-click="ons.screen.dismissPage()">
+    Dismiss Page (if use presentPage)
+  </ons-button>
 </ons-page>
