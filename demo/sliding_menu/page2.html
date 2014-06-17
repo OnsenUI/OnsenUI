@@ -1,8 +1,13 @@
-<ons-navigator title="Page 2"
-  left-button-icon="fa fa-lg fa-bars"
-  on-left-button-click="app.slidingMenu.toggleMenu()">
-  <ons-page class="center">
-    <h1>Page 2</h1>
-    <ons-button ng-click="app.slidingMenu.toggleMenu()">Toggle Menu</ons-button>
-  </ons-page>
-</ons-navigator>
+<ons-page class="center">
+
+  <ons-toolbar>
+    <div class="left">
+      <ons-toolbar-button ng-click="ons.slidingMenu.toggleMenu()"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
+    </div>
+    <div class="center">Page 2</div>
+  </ons-toolbar>
+
+  <h1>Page 2</h1>
+  <ons-button ng-click="app.slidingMenu.toggleMenu()">Toggle Menu</ons-button>
+
+</ons-page>

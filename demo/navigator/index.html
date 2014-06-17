@@ -17,6 +17,9 @@
 <body>    
   <ons-navigator title="Navigator" var="myNavigator">
     <ons-page class="center">
+      <ons-toolbar>
+        <div class="center">Icon</div>
+      </ons-toolbar>
       <br>
       <ons-button 
         onclick="myNavigator.pushPage('page1.html')">
@@ -28,6 +31,10 @@
 
   <script type="text/ons-template" id="page1.html">
     <ons-page class="center">
+      <ons-toolbar>
+        <div class="center">Page 2</div>
+      </ons-toolbar>
+
       <h1>Page 2</h1>
       <ons-button 
         onclick="myNavigator.pushPage('page1.html', {title: 'Page'})">

@@ -20,7 +20,7 @@
         var radioButton = element.find('input');
         var checked = false;
 
-        $scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+        $scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
         attrs.$observe('disabled', function(disabled){
           if(disabled === undefined){

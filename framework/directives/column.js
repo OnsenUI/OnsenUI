@@ -21,7 +21,7 @@ limitations under the License.
 
   var module = angular.module('onsen'); // no [] -> referencing existing module
 
-  module.directive('onsCol', function($timeout) {
+  module.directive('onsCol', function($timeout, $onsen) {
     return {
       restrict: 'E',
       replace: true,

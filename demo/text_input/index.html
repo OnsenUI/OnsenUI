@@ -16,10 +16,16 @@
 
 <body>    
 
-  <ons-navigator title="Text Input">
-    <ons-page style="padding : 8px">
-      <ons-text-input ng-model="text" placeholder="Type here" style="display: block; width: 100%"></ons-text-input>
-      <ons-button type="cta-large" style="display: block; width: 100%; margin-top: 8px;">Submit</ons-button>
+  <ons-navigator>
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Text Input</div>
+      </ons-toolbar>
+
+      <section style="padding: 8px">
+        <ons-text-input ng-model="text" placeholder="Type here" style="display: block; width: 100%"></ons-text-input>
+        <ons-button type="cta-large" style="display: block; width: 100%; margin-top: 8px;">Submit</ons-button>
+      </section>
     </ons-page>
   </ons-navigator>
  

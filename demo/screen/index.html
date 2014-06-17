@@ -17,8 +17,11 @@
 <body>    
   
   <ons-screen var="app.screen">
-    <ons-navigator title="Screen">
+    <ons-navigator>
       <ons-page class="center">
+        <ons-toolbar>
+          <div class="center">Screen</div>
+        </ons-toolbar>
         <h1>Page 1</h1>
         <ons-button ng-click="app.screen.presentPage('page2.html')">Present Page 2</ons-button>
       </ons-page>
@@ -29,8 +32,7 @@
     <ons-navigator title="Page 2">
       <ons-page class="center">
         <br>
-        <ons-button ng-click="app.screen.dismissPage()">Dismiss Page
-        </ons-button>
+        <ons-button ng-click="app.screen.dismissPage()">Dismiss Page</ons-button>
       </ons-page>
     </ons-navigator>
   </script>

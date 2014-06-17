@@ -28,18 +28,14 @@
           {href : 'navigator/', name : 'Navigator'},
           {href : 'navigator_inside_tabbar/', name : 'Navigator inside Tabbar'},
           {href : 'navigator_reset/', name : 'Navigator Reset'},
-          {href : 'navigator_with_navigator_toolbar/', name : 'Navigator with Navigator Toolbar'},
           {href : 'ons_get/', name : 'ons_get'},
           {href : 'page/', name : 'page'},
           {href : 'radio_button/', name : 'Radio Button'},
           {href : 'screen/', name : 'Screen'},
-          {href : 'screen_split_view/', name : 'Screen and Split View'},
-          {href : 'screen_split_view_navigator/', name : 'Screen and Split View and Navigator'},
           {href : 'scroller/', name : 'Scroller'},
           {href : 'search_input/', name : 'Search Input'},
           {href : 'select/', name : 'Select'},
           {href : 'sliding_menu/', name : 'Sliding Menu'},
-          {href : 'sliding_menu_max_slide_distance/', name : 'Sliding Menu with Max Slide Distance'},
           {href : 'split_view/', name : 'Split View'},
           {href : 'tabbar/', name : 'Tabbar (Icon with Label)'},
           {href : 'text_input/', name : 'Text Input'},
@@ -55,16 +51,17 @@
 
 <body ng-controller="DemoListController">    
   
-  <ons-navigator title="Demo time!">
+  <ons-navigator>
     <ons-page>
+      <ons-toolbar>
+        <div class="center">Demo</div>
+      </ons-toolbar>
       <ons-list>
         <ons-list-item class="topcoat-list__item--tappable" ng-repeat="demo in demoList">
           <div class="topcoat-list__item__line-height" ng-click="go(demo)">
             {{demo.name}}
           </div>
         </ons-list-item>
-
-        
       </ons-list>
     </ons-page>
   </ons-navigator>
