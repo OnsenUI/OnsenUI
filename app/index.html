@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <title>My App</title>  
@@ -13,24 +13,57 @@
   <script src="lib/onsen/js/angular/angular.js"></script>    
   <script src="lib/onsen/js/onsenui.js"></script>    
   <script src="js/app.js"></script>
-  
+  <script>
+    ons.bootstrap();
+    ons.ready(function() {
+      console.log("ons.ready");
+
+      navi.enableAndroidBackButtonHandler();
+
+      navi.on('postPop', function(event) {
+        console.log(event);
+      });
+
+      navi.on('postPush', function(event) {
+        console.log(event);
+      });
+    });
+
+    function AppCtrl($scope) {
+      $scope.pageTitle = 'Page1';
+    }
+  </script>
+
 </head>
+<body ng-controller="AppCtrl">
 
-<body>    
-  
-  <ons-screen>
-    <ons-navigator title="Title" var="app.navi">
-      <ons-page class="center">
-        <h1>Page 1</h1>
+  <ons-navigator ng-cloak var="navi">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left"></div>
+        <div class="center">{{pageTitle}}</div>
+        <div class="right"></div> 
+      </ons-toolbar>
 
-        <ons-button onclick="app.navi.pushPage('page.html')">Push Page</ons-button>
+      <ons-button onclick="navi.pushPage('page2.html')">Push Page</ons-button>
 
-        <!-- Angular.js style 
-          <ons-button ng-click="app.navi.pushPage('page2.html')">Push Page(js scope)</ons-button>
-        -->
-      </ons-page>
-    </ons-navigator>
-  </ons-screen>
+    </ons-page>
+  </ons-navigator>
+
+  <script type="text/ons-template" id="page2.html">
+    <ons-toolbar>
+      <div class="left"><ons-back-button></ons-back-button></div> 
+      <div class="center">Page2</div> 
+      <div class="right"></div>
+    </ons-toolbar>
+
+    <center>
+      <h1>Page 2</h1>
+
+      <ons-button onclick="navi.popPage()">Pop</ons-button>
+      <ons-button onclick="navi.pushPage('page2.html')">Push</ons-button>
+    </center>
+  </script>
  
 </body>
 </html>
