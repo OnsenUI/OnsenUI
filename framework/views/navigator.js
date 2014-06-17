@@ -1249,6 +1249,13 @@ limitations under the License.
       },
 
       /**
+       * @return {Boolean}
+       */
+      canPopPage: function() {
+        return this.pages.length > 1;
+      },
+
+      /**
        * Enable handler of  use Android's backbutton on this navigator.
        */
       enableAndroidBackButtonHandler: function() {
