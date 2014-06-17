@@ -1246,6 +1246,42 @@ limitations under the License.
        */
       getPages: function() {
         return this.pages;
+      },
+
+      /**
+       * Enable handler of  use Android's backbutton on this navigator.
+       */
+      enableAndroidBackButtonHandler: function() {
+        if (this._androidBackButtonHandler) {
+          this._androidBackButtonHandler = function(event) {
+            if (this.pages.length > 1) {
+              event.preventDefault();
+              this.popPage();
+            } else {
+              navigator.app.exitApp();
+            }
+          }.bind(this);
+          this._androidBackButtonHandler = fn;
+        }
+
+        var fn = this._androidBackButtonHandler;
+
+        var doc = window.document;
+
+        doc.addEventListener('backbutton', fn, false);
+        doc.addEventListener('deviceready', function() {
+          doc.removeEventListener('backbutton', fn);
+          doc.addEventListener('backbutton', fn, false);
+        }, false);
+      },
+
+      /**
+       * Disable handler of Android's backbutton event on this navigator.
+       */
+      disableAndroidBackButtonHandler: function() {
+        if (this._androidBackButtonHandler) {
+          doc.addEventListener('backbutton', this._androidBackButtonHandler, false);
+        }
       }
     });
 
