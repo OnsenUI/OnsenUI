@@ -165,7 +165,7 @@ limitations under the License.
 
               if ($onsen.isWebView() && $onsen.isIOS7Above()) {
                 // Adjustments for IOS7
-                wrapper.css('paddingTop', '22px');
+                wrapper.css('paddingTop', '20px');
               }
               wrapper.append(clonedElement);
             });

@@ -102,6 +102,7 @@ limitations under the License.
       transclude: false,
 
       compile: function(element, attrs) {
+
         if ($onsen.isWebView() && $onsen.isIOS7Above()) {
           // Adjustments for iOS7
           element.css('paddingTop', '20px');
