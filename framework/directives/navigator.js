@@ -41,9 +41,13 @@ limitations under the License.
 
             $onsen.declareVarAttribute(attrs, navigator);
 
-            var pageScope = navigator._createPageScope();
-            var compiledPage = $compile(angular.element(html))(pageScope);
-            navigator._pushPageDOM('', compiledPage, pageScope, {});
+            if (attrs.page) {
+              navigator.pushPage(attrs.page, {});
+            } else {
+              var pageScope = navigator._createPageScope();
+              var compiledPage = $compile(angular.element(html))(pageScope);
+              navigator._pushPageDOM('', compiledPage, pageScope, {});
+            }
 
             NavigatorStack.addNavigator(navigator);
             scope.$on('$destroy', function(){
