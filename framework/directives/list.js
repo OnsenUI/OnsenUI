@@ -1,21 +1,26 @@
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
+/**
+ * @ngdoc directive
+ * @id list
+ * @name ons-list
+ * @description
+ * The container for list-item. Similar to <ul> but styled for mobile.
+ * @example
+ * <pre>
+ * <ons-navigator title="List">
+ * <ons-list>
+ * <ons-list-item class="topcoat-list__item__line-height">Numbers</ons-list-item>
+ * <ons-list-item class="topcoat-list__item__line-height">One</ons-list-item>
+ * <ons-list-item class="topcoat-list__item__line-height">Two</ons-list-item>
+ * <ons-list-item class="topcoat-list__item__line-height">Three</ons-list-item>
+ * <ons-list-item class="topcoat-list__item__line-height">Four</ons-list-item>
+ * <ons-list-item class="topcoat-list__item__line-height">Five</ons-list-item>
+ * <ons-list-item class="topcoat-list__item__line-height">Six</ons-list-item>
+ * </ons-list>
+ * </ons-navigator>
+ * </pre>
+ * @demoURL
+ * OnsenUI/demo/list/
+ */
 (function(){
   'use strict';
 

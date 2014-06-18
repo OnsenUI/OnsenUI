@@ -34,6 +34,7 @@ var cssminify = require('gulp-minify-css');
 var shell = require('gulp-shell');
 var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync');
+var dgeni = require('dgeni');
 
 ////////////////////////////////////////
 // browser-sync
@@ -320,3 +321,12 @@ gulp.task('build-theme', function(done) {
 gulp.task('build-topdoc', shell.task([
   './node_modules/.bin/topdoc --source themes/css --destination themes/testcases --template themes/testcases-topdoc-template'
 ]));
+
+////////////////////////////////////////
+// build-doc
+////////////////////////////////////////
+gulp.task('build-doc', function() {
+  var generateDocs = dgeni.generator('docs/dgeni.conf.js')
+  generateDocs();
+});
+
