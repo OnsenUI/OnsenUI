@@ -1,7 +1,7 @@
 (function() {
   var module = angular.module('onsen');
 
-  module.factory('SplitViewStack', function($rootScope) {
+  module.factory('SplitViewStack', function($rootScope, $onsen) {
     var SplitViewStack = Class.extend({
       splitViews: [],
 
@@ -18,7 +18,7 @@
       _findClosestSplitView: function($event) {
         var splitView;
         if ($event) {
-          var splitViewElement = $rootScope.ons.upTo($event.target, 'ons-split-view');
+          var splitViewElement = $onsen.upTo($event.target, 'ons-split-view');
           splitView = angular.element(splitViewElement).isolateScope();
         } else {
           splitView = this.splitViews[this.splitViews.length - 1];
