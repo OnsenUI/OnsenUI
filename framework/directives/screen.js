@@ -1,20 +1,36 @@
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
+/**
+ * @ngdoc directive
+ * @id screen
+ * @name ons-screen
+ * @description
+ * The root element. This is usually put inside <body> tag.
+ * @param page The root page of this screen element
+ * @property presentPage(pageUrl) Presents a page
+ * @property dismissPage() Dismisses the page that was presented
+ * @example
+ * index.html
+ * <ons-screen>
+ *     <ons-navigator title="Screen">
+ *         <ons-page class="center">
+ *             <h1>Page 1</h1>
+ *             <ons-button
+ *                 ng-click="ons.screen.presentPage('page2.html')">
+ *                     Present Page 2
+ *             </ons-button>
+ *         </ons-page>
+ *     </ons-navigator>
+ * </ons-screen>
+ * page2.html
+ * <ons-page class="center">
+ *     <h1>Page 2</h1>
+ *     <ons-button
+ *         ng-click="ons.screen.dismissPage()">
+ *             Dismiss Page
+ *     </ons-button>
+ * </ons-page>
+ * @demoURL
+ * OnsenUI/demo/screen/
+ */
 (function() {
   'use strict';
   var module = angular.module('onsen');
