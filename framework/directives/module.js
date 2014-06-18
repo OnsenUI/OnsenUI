@@ -22,10 +22,6 @@ limitations under the License.
 
   module.run(function($rootScope, $window) {
     $rootScope.ons = window.ons;
-    $rootScope.ons.$get = function(id) {
-      id = id.replace('#', '');
-      return angular.element(document.getElementById(id)).isolateScope();
-    };
 
     // Find first ancestor of el with tagName
     // or undefined if not found
