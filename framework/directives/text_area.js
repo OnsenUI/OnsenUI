@@ -28,7 +28,7 @@ limitations under the License.
       transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/text_area.tpl',
       link: function(scope, element, attrs) {
-        var classes = $onsen.generateModifierTemplater(attrs)('topcoat-textarea--*');
+        var classes = $onsen.generateModifierTemplater(attrs)('textarea--*');
         element.addClass(classes);
       }
     };

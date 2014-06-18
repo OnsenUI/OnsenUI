@@ -1,4 +1,4 @@
-<button class="{{item.animation}} topcoat-button--{{onsType}} effeckt-button topcoat-button no-select {{modifierTemplater('topcoat-button--*')}}">
+<button class="{{item.animation}} button--{{onsType}} effeckt-button button no-select {{modifierTemplater('button--*')}}">
   <span class="label ons-button-inner" ng-transclude></span>
-  <span class="spinner topcoat-button__spinner {{modifierTemplater('topcoat-button--*__spinner')}}"></span>
+  <span class="spinner button__spinner {{modifierTemplater('button--*__spinner')}}"></span>
 </button>

@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.0-dev - 2014-06-17 */
+/*! onsenui - v1.1.0-dev - 2014-06-18 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -3954,7 +3954,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/back_button.tpl",
-    "<span class=\"topcoat-icon-button--quiet {{modifierTemplater('topcoat-icon-button--quiet--*')}}\" ng-click=\"back()\" style=\"height: 44px; line-height: 0; padding: 0;\">\n" +
+    "<span class=\"icon-button--quiet {{modifierTemplater('icon-button--quiet--*')}}\" ng-click=\"back()\" style=\"height: 44px; line-height: 0; padding: 0;\">\n" +
     "  <i class=\"fa fa-angle-left\" style=\"line-height: 44px; font-size: 36px; float:left; padding-left: 8px; padding-right: 4px;\"></i>\n" +
     "  <span style=\"vertical-align: middle; line-height: 44px; display: inline-block; height: 44px; float: left;\" class=\"back-button__label\"></span>\n" +
     "</span>\n" +
@@ -3968,7 +3968,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/bottom_toolbar.tpl",
-    "<div class=\"onsen_bottom-toolbar topcoat-navigation-bar topcoat-navigation-bar--bottom ons-bottom-toolbar-inner {{modifierTemplater('topcoat-navigation-bar--*')}}\" ng-transclude></div>\n" +
+    "<div class=\"bottom-bar ons-bottom-toolbar-inner {{modifierTemplater('bottom-bar--*')}}\" ng-transclude></div>\n" +
     "");
 }]);
 })();
@@ -3979,9 +3979,9 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/button.tpl",
-    "<button class=\"{{item.animation}} topcoat-button--{{onsType}} effeckt-button topcoat-button no-select {{modifierTemplater('topcoat-button--*')}}\">\n" +
+    "<button class=\"{{item.animation}} button--{{onsType}} effeckt-button button no-select {{modifierTemplater('button--*')}}\">\n" +
     "  <span class=\"label ons-button-inner\" ng-transclude></span>\n" +
-    "  <span class=\"spinner topcoat-button__spinner {{modifierTemplater('topcoat-button--*__spinner')}}\"></span>\n" +
+    "  <span class=\"spinner button__spinner {{modifierTemplater('button--*__spinner')}}\"></span>\n" +
     "</button>\n" +
     "");
 }]);
@@ -3993,9 +3993,9 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/checkbox.tpl",
-    "<label class=\"topcoat-checkbox\" class=\"{{modifierTemplater('topcoat-checkbox--*')}}\">\n" +
+    "<label class=\"checkbox\" class=\"{{modifierTemplater('checkbox--*')}}\">\n" +
     "  <input type=\"checkbox\" ng-model=\"ngModel\" ng-true-value=\"{{ngTrueValue || true}}\" ng-false-value=\"{{ngFalseValue || false}}\">\n" +
-    "  <div class=\"topcoat-checkbox__checkmark {{modifierTemplater('topcoat-checkbox--*__checkmark')}}\"></div>\n" +
+    "  <div class=\"checkbox__checkmark {{modifierTemplater('checkbox--*__checkmark')}}\"></div>\n" +
     "  <span class=\"ons-checkbox-inner\" ng-transclude>\n" +
     "  </span>\n" +
     "</label>\n" +
@@ -4056,10 +4056,10 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/list.tpl",
-    "<div class=\"ons-scroller full-screen topcoat-page\" ons-scrollable>\n" +
+    "<div class=\"ons-scroller full-screen page\" ons-scrollable>\n" +
     "  <div class=\"ons-scroller__content ons-scroller-inner\">\n" +
-    "    <div class=\"topcoat-list {{modifierTemplater('topcoat-list--*')}}\">\n" +
-    "      <ul class=\"topcoat-list__container {{modifierTemplater('topcoat-list--*__container')}} ons-list-inner\" ng-transclude>\n" +
+    "    <div class=\"list {{modifierTemplater('list--*')}}\">\n" +
+    "      <ul class=\"list__container {{modifierTemplater('list--*__container')}} ons-list-inner\" ng-transclude>\n" +
     "      </ul>\n" +
     "    </div>\n" +
     "  </div>\n" +
@@ -4074,7 +4074,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/list_item.tpl",
-    "<li class=\"topcoat-list__item {{modifierTemplater('topcoat-list__item--*')}} ons-list-item-inner\"></li>\n" +
+    "<li class=\"list__item {{modifierTemplater('list__item--*')}} ons-list-item-inner\"></li>\n" +
     "");
 }]);
 })();
@@ -4085,10 +4085,10 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/radio_button.tpl",
-    "<label class=\"topcoat-radio-button {{modifierTemplater('topcoat-radio-button--*')}}\">\n" +
+    "<label class=\"radio-button {{modifierTemplater('radio-button--*')}}\">\n" +
     "  {{leftLabel}}\n" +
     "  <input type=\"radio\" name=\"{{name}}\" ng-model=\"ngModel\" value=\"{{value}}\">\n" +
-    "  <div class=\"topcoat-radio-button__checkmark {{modifierTemplater('topcoat-radio-button--*')}}\"></div>\n" +
+    "  <div class=\"radio-button__checkmark {{modifierTemplater('radio-button--*')}}\"></div>\n" +
     "  {{rightLabel}}\n" +
     "</label>\n" +
     "");
@@ -4123,7 +4123,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/scroller.tpl",
-    "<div class=\"ons-scroller full-screen topcoat-page\" ons-scrollable>\n" +
+    "<div class=\"ons-scroller full-screen page\" ons-scrollable>\n" +
     "  <div class=\"ons-scroller__content ons-scroller-inner\" ng-transclude>\n" +
     "  </div>\n" +
     "</div>\n" +
@@ -4137,7 +4137,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/search_input.tpl",
-    "<input type=\"search\" class=\"topcoat-search-input\">\n" +
+    "<input type=\"search\" class=\"search-input\">\n" +
     "");
 }]);
 })();
@@ -4184,7 +4184,7 @@ app.run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/tab_bar.tpl",
     "<div style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content ons-tabbar-inner\"></div>\n" +
     "\n" +
-    "<div ng-hide=\"hideTabs\" class=\"topcoat-tab-bar full footer {{modifierTemplater('topcoat-tab-bar--*')}} ons-tabbar-inner\" ng-transclude></div>\n" +
+    "<div ng-hide=\"hideTabs\" class=\"tab-bar full footer {{modifierTemplater('tab-bar--*')}} ons-tabbar-inner\" ng-transclude></div>\n" +
     "");
 }]);
 })();
@@ -4195,9 +4195,9 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/tab_bar_item.tpl",
-    "<label class=\"topcoat-tab-bar__item no-select {{tabbarModifierTemplater('topcoat-tab-bar--*__item')}} {{modifierTemplater('topcoat-tab-bar__item--*')}}\">\n" +
+    "<label class=\"tab-bar__item no-select {{tabbarModifierTemplater('tab-bar--*__item')}} {{modifierTemplater('tab-bar__item--*')}}\">\n" +
     "  <input type=\"radio\" name=\"tab-bar-{{tabbarId}}\">\n" +
-    "  <button class=\"topcoat-tab-bar__button full {{tabbarModifierTemplater('topcoat-tab-bar--*__button')}} {{modifierTemplater('topcoat-tab-bar__button--*')}}\" ng-click=\"setActive()\">\n" +
+    "  <button class=\"tab-bar__button full {{tabbarModifierTemplater('tab-bar--*__button')}} {{modifierTemplater('tab-bar__button--*')}}\" ng-click=\"setActive()\">\n" +
     "    <i ng-show=\"icon != undefined\" class=\"fa fa-2x fa-{{tabIcon}} {{tabIcon}}\"></i>\n" +
     "    <div class=\"onsen_tab-bar__label\" ng-class=\"{ big: icon === undefined }\">\n" +
     "      {{label}}\n" +
@@ -4214,7 +4214,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/text_area.tpl",
-    "<textarea class=\"topcoat-textarea\"></textarea>\n" +
+    "<textarea class=\"textarea\"></textarea>\n" +
     "");
 }]);
 })();
@@ -4225,7 +4225,8 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/text_input.tpl",
-    "<input class=\"topcoat-text-input\">");
+    "<input class=\"text-input\">\n" +
+    "");
 }]);
 })();
 
@@ -4235,7 +4236,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/toolbar_button.tpl",
-    "<span class=\"topcoat-icon-button--quiet {{modifierTemplater('topcoat-icon-button--quiet--*')}}\" ng-transclude></span>\n" +
+    "<span class=\"icon-button--quiet {{modifierTemplater('icon-button--quiet--*')}} navigation-bar__line-height\" ng-transclude></span>\n" +
     "");
 }]);
 })();
@@ -4264,28 +4265,6 @@ limitations under the License.
 
   module.run(function($rootScope, $window) {
     $rootScope.ons = window.ons;
-    $rootScope.ons.$get = function(id) {
-      id = id.replace('#', '');
-      return angular.element(document.getElementById(id)).isolateScope();
-    };
-
-    // Find first ancestor of el with tagName
-    // or undefined if not found
-    $rootScope.ons.upTo = function(el, tagName) {
-      tagName = tagName.toLowerCase();
-
-      do {
-        if (!el) {
-          return null;
-        }
-        el = el.parentNode;
-        if (el.tagName.toLowerCase() == tagName) {
-          return el;
-        }
-      } while (el.parentNode);
-
-        return null;
-    };
 
     $rootScope.console = $window.console;
     $rootScope.alert = $window.alert;
@@ -5750,7 +5729,7 @@ limitations under the License.
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs){
         var effectButton = element;
-        var TYPE_PREFIX = "topcoat-button--";
+        var TYPE_PREFIX = "button--";
         scope.item = {};
 
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
@@ -5875,7 +5854,7 @@ limitations under the License.
 
   var module = angular.module('onsen'); // no [] -> referencing existing module
 
-  module.directive('onsCol', function($timeout) {
+  module.directive('onsCol', function($timeout, $onsen) {
     return {
       restrict: 'E',
       replace: true,
@@ -6229,9 +6208,13 @@ limitations under the License.
 
             $onsen.declareVarAttribute(attrs, navigator);
 
-            var pageScope = navigator._createPageScope();
-            var compiledPage = $compile(angular.element(html))(pageScope);
-            navigator._pushPageDOM('', compiledPage, pageScope, {});
+            if (attrs.page) {
+              navigator.pushPage(attrs.page, {});
+            } else {
+              var pageScope = navigator._createPageScope();
+              var compiledPage = $compile(angular.element(html))(pageScope);
+              navigator._pushPageDOM('', compiledPage, pageScope, {});
+            }
 
             NavigatorStack.addNavigator(navigator);
             scope.$on('$destroy', function(){
@@ -6247,7 +6230,7 @@ limitations under the License.
 (function() {
   var directiveModules = angular.module('onsen');
 
-  directiveModules.factory('NavigatorStack', function($rootScope) {
+  directiveModules.factory('NavigatorStack', function($rootScope, $onsen) {
     var NavigatorStack = Class.extend({
       navigators: [],
 
@@ -6266,7 +6249,7 @@ limitations under the License.
         var navigator;
 
         if ($event) {
-          var navigatorElement = $rootScope.ons.upTo($event.target, 'ons-navigator');
+          var navigatorElement = $onsen.upTo($event.target, 'ons-navigator');
           navigator = angular.element(navigatorElement).isolateScope();
         }
 
@@ -6360,14 +6343,14 @@ limitations under the License.
 
   function firePageInitEvent(pageContainer) {
     function findPageDOM() {
-      if (angular.element(pageContainer).hasClass('topcoat-page')) {
+      if (angular.element(pageContainer).hasClass('page')) {
         return pageContainer;
       }
 
-      var result = pageContainer.querySelector('.topcoat-page');
+      var result = pageContainer.querySelector('.page');
 
       if (!result) {
-        throw new Error('An element of "topcoat-page" class is not found.');
+        throw new Error('An element of "page" class is not found.');
       }
 
       return result;
@@ -6400,7 +6383,7 @@ limitations under the License.
 
         if ($onsen.isWebView() && $onsen.isIOS7Above()) {
           // Adjustments for IOS7
-          var wrapper = $element[0].querySelector('.topcoat-page__content');
+          var wrapper = $element[0].querySelector('.page__content');
           angular.element(wrapper).css({
             'top': '22px',
             'paddingTop': null
@@ -6424,13 +6407,13 @@ limitations under the License.
       this.getContentElement = function() {
         for (var i = 0; i < $element.length; i++) {
           if ($element[i].querySelector) {
-            var content = $element[i].querySelector('.topcoat-page__content');
+            var content = $element[i].querySelector('.page__content');
             if (content) {
               return content;
             }
           }
         }
-        throw Error('fail to get ".topcoat-page__content" element.');
+        throw Error('fail to get ".page__content" element.');
       };
 
       /**
@@ -6494,11 +6477,21 @@ limitations under the License.
 
           pre: function(scope, element, attrs, controller, transclude) {
             var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-            element.addClass('topcoat-page ' + modifierTemplater('topcoat-page--*') + ' ons-page-inner');
+            element.addClass('page ' + modifierTemplater('page--*') + ' ons-page-inner');
 
             transclude(scope, function(clonedElement) {
-              var wrapper = angular.element('<div class="topcoat-page__content"></div>');
+              var wrapper = angular.element('<div class="page__content"></div>');
+              wrapper.css({
+                position: 'absolute',
+                zIndex: 3,
+                top: '44px', // TODO 
+                left: '0px',
+                bottom: '0px',
+                right: '0px',
+                backgroundColor: '#efeff4'
+              });
               element.append(wrapper);
+              element.css({'backgroundColor': 'transparent'});
 
               if ($onsen.isWebView() && $onsen.isIOS7Above()) {
                 // Adjustments for IOS7
@@ -6539,7 +6532,7 @@ limitations under the License.
         var radioButton = element.find('input');
         var checked = false;
 
-        $scope.modifierTemplater = OnsenUtil.generateModifierTemplater(attrs);
+        $scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
         attrs.$observe('disabled', function(disabled){
           if(disabled === undefined){
@@ -6834,7 +6827,7 @@ limitations under the License.
 (function() {
   var module = angular.module('onsen');
 
-  module.factory('ScreenStack', function($rootScope) {
+  module.factory('ScreenStack', function($rootScope, $onsen) {
     var ScreenStack = Class.extend({
       screens: [],
 
@@ -6850,7 +6843,7 @@ limitations under the License.
         // finding the right navigator
         var screen;
         if ($event) {
-          var screenElement = $rootScope.ons.upTo($event.target, 'ons-screen');
+          var screenElement = $onsen.upTo($event.target, 'ons-screen');
           screen = angular.element(screenElement).isolateScope();
         } else {
           screen = this.screens[this.screens.length - 1];
@@ -7057,9 +7050,9 @@ limitations under the License.
       restrict: 'E',
       replace: true,
       transclude: false,
-      templateUrl: $onse.DIRECTIVE_TEMPLATE_URL + '/search_input.tpl',
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/search_input.tpl',
       link: function(scope, element, attrs) {
-        element.addClass($onsen.generateModifierTemplater(attrs)('topcoat-search-input--*'));
+        element.addClass($onsen.generateModifierTemplater(attrs)('search-input--*'));
       }
     };
   });
@@ -7219,7 +7212,7 @@ limitations under the License.
 
           appendAbovePage: function(pageUrl, templateHTML) {
             var pageElement = angular.element('<div></div>');
-            pageElement.addClass('topcoat-page');
+            pageElement.addClass('page');
             pageElement[0].style.opacity = 0;
             var pageScope = scope.$parent.$new();
             var pageContent = $compile(templateHTML)(pageScope);
@@ -7242,7 +7235,7 @@ limitations under the License.
 
           appendBehindPage: function(templateHTML) {
             var page = angular.element('<div></div>');
-            page.addClass('topcoat-page');
+            page.addClass('page');
             var pageScope = scope.$parent.$new();
             var pageContent = $compile(templateHTML)(pageScope);
             page.append(pageContent);
@@ -7443,7 +7436,7 @@ limitations under the License.
 (function() {
   var module = angular.module('onsen');
 
-  module.factory('SlidingMenuStack', function($rootScope) {
+  module.factory('SlidingMenuStack', function($rootScope, $onsen) {
     var SlidingMenuStack = Class.extend({
       slidingMenus: [],
 
@@ -7460,7 +7453,7 @@ limitations under the License.
       _findClosestSlidingMenu: function($event) {
         var slidingMenu;
         if ($event) {
-          var slidingMenuElement = $rootScope.ons.upTo($event.target, 'ons-sliding-menu');
+          var slidingMenuElement = $onsen.upTo($event.target, 'ons-sliding-menu');
           slidingMenu = angular.element(slidingMenuElement).isolateScope();
         } else {
           slidingMenu = this.slidingMenus[this.slidingMenus.length - 1];
@@ -7661,7 +7654,7 @@ limitations under the License.
           attachMethods: function() {
             var self = this;
 
-            scope.setSecondaryPage = function(page) {
+            this.setSecondaryPage = scope.setSecondaryPage = function(page) {
               if (page) {
                 $onsen.getPageHTMLAsync(page).then(function(html) {
                   self.appendSecondPage(angular.element(html.trim()));
@@ -7673,7 +7666,7 @@ limitations under the License.
               }
             };
 
-            scope.setMainPage = function(page) {
+            this.setMainPage = scope.setMainPage = function(page) {
               if (page) {
                 $onsen.getPageHTMLAsync(page).then(function(html) {
                   self.appendMainPage(angular.element(html.trim()));
@@ -7969,7 +7962,7 @@ limitations under the License.
 (function() {
   var module = angular.module('onsen');
 
-  module.factory('SplitViewStack', function($rootScope) {
+  module.factory('SplitViewStack', function($rootScope, $onsen) {
     var SplitViewStack = Class.extend({
       splitViews: [],
 
@@ -7986,7 +7979,7 @@ limitations under the License.
       _findClosestSplitView: function($event) {
         var splitView;
         if ($event) {
-          var splitViewElement = $rootScope.ons.upTo($event.target, 'ons-split-view');
+          var splitViewElement = $onsen.upTo($event.target, 'ons-split-view');
           splitView = angular.element(splitViewElement).isolateScope();
         } else {
           splitView = this.splitViews[this.splitViews.length - 1];
@@ -8256,7 +8249,7 @@ limitations under the License.
 (function() {
   var module = angular.module('onsen');
 
-  module.factory('TabbarStack', function($rootScope) {
+  module.factory('TabbarStack', function($rootScope, $onsen) {
     var TabbarStack = Class.extend({
       tabbars: [],
 
@@ -8270,7 +8263,7 @@ limitations under the License.
 
         var tabbar;
         if ($event) {
-          var tabbarElement = $rootScope.ons.upTo($event.target, 'ons-tabbar');
+          var tabbarElement = $onsen.upTo($event.target, 'ons-tabbar');
           tabbar = angular.element(tabbarElement).isolateScope();
         } else {
           tabbar = this.tabbars[this.tabbars.length - 1];
@@ -8339,7 +8332,7 @@ limitations under the License.
       transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/text_area.tpl',
       link: function(scope, element, attrs) {
-        var classes = $onsen.generateModifierTemplater(attrs)('topcoat-textarea--*');
+        var classes = $onsen.generateModifierTemplater(attrs)('textarea--*');
         element.addClass(classes);
       }
     };
@@ -8380,7 +8373,7 @@ limitations under the License.
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
       link: function($scope, element, attrs) {
-        element.addClass($onsen.generateModifierTemplater(attrs)('topcoat-text-input--*'));
+        element.addClass($onsen.generateModifierTemplater(attrs)('text-input--*'));
 
         $scope.$watch(function() {
           return $scope.disabled;
@@ -8429,9 +8422,7 @@ limitations under the License.
       container.innerHTML = '&nbsp;';
     }
 
-    angular.element(container)
-      .addClass('topcoat-navigation-bar__item left quarter')
-      .css('float', 'left');
+    angular.element(container).addClass('navigation-bar__left');
 
     return container;
   }
@@ -8449,8 +8440,7 @@ limitations under the License.
     }
 
     angular.element(container)
-      .addClass('topcoat-navigation-bar__item center half topcoat-navigation-bar__title')
-      .css('float', 'left');
+      .addClass('navigation-bar__title navigation-bar__center');
 
     return container;
   }
@@ -8468,9 +8458,7 @@ limitations under the License.
       container.innerHTML = '&nbsp;';
     }
 
-    angular.element(container)
-      .addClass('topcoat-navigation-bar__item right quarter')
-      .css('float', 'left');
+    angular.element(container).addClass('navigation-bar__right');
 
     return container;
   }
@@ -8507,8 +8495,8 @@ limitations under the License.
 
         var modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
-        element.addClass('topcoat-navigation-bar');
-        element.addClass(modifierTemplater('topcoat-navigation-bar--*'));
+        element.addClass('navigation-bar');
+        element.addClass(modifierTemplater('navigation-bar--*'));
         element.css({
           'position': 'absolute',
           'z-index': '10000',
@@ -8615,6 +8603,24 @@ limitations under the License.
 
         return cache;
       })(),
+
+      // Find first ancestor of el with tagName
+      // or undefined if not found
+      upTo : function(el, tagName) {
+        tagName = tagName.toLowerCase();
+
+        do {
+          if (!el) {
+            return null;
+          }
+          el = el.parentNode;
+          if (el.tagName.toLowerCase() == tagName) {
+            return el;
+          }
+        } while (el.parentNode);
+
+        return null;
+      },
 
       /**
        * @param {String} page

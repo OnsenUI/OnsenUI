@@ -1,1 +1,1 @@
-<input type="search" class="topcoat-search-input">
+<input type="search" class="search-input">

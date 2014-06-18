@@ -135,7 +135,6 @@ select) {
   margin-left: 0px;
   -webkit-transform: translate3d(19px, 0px, 0px);
   -moz-transform: translate3d(19px, 0px, 0px);
-  -ms-transform: translate3d(19px, 0px, 0px);
   -o-transform: translate3d(19px, 0px, 0px);
   transform: translate3d(19px, 0px, 0px);
   border-color: #4cd964;
@@ -171,7 +170,6 @@ select) {
 .switch__input:not(:checked) + .switch__toggle:before {
   -webkit-transform: translate3d(1px, 0px, 0px);
   -moz-transform: translate3d(1px, 0px, 0px);
-  -ms-transform: translate3d(1px, 0px, 0px);
   -o-transform: translate3d(1px, 0px, 0px);
   transform: translate3d(1px, 0px, 0px);
 }
@@ -418,7 +416,6 @@ select) {
   font-size: 16px;
   font-weight: 500;
   color: #1f1f21;
-  width: 100%;
 }
 /* topdoc
   name: Navigation Bar Item

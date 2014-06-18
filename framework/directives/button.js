@@ -34,7 +34,7 @@ limitations under the License.
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs){
         var effectButton = element;
-        var TYPE_PREFIX = "topcoat-button--";
+        var TYPE_PREFIX = "button--";
         scope.item = {};
 
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);

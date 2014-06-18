@@ -33,6 +33,7 @@ var stylus = require('gulp-stylus');
 var cssminify = require('gulp-minify-css');
 var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync');
+var cache = require('gulp-cached');
 
 ////////////////////////////////////////
 // browser-sync
@@ -68,6 +69,7 @@ gulp.task('jshint', function() {
     'framework/services/*.js',
     'framework/views/*.js'
   ])
+    .pipe(cache('js'))
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 });
@@ -130,6 +132,14 @@ gulp.task('prepare', ['html2js'], function() {
       .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/js/'))
       .pipe(gulp.dest('app/lib/onsen/js')),
+
+    // onsen-css-componets.css
+    gulp.src([
+      'css-components/components-src/dist/onsen-css-components-default.css',
+    ])
+      .pipe(rename({basename: 'onsen-css-components'}))
+      .pipe(gulp.dest('build/css/'))
+      .pipe(gulp.dest('app/lib/onsen/css')),
 
     // onsenui.css
     gulp.src([
@@ -252,7 +262,8 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   // for livereload
   gulp.watch([
     'app/**/*.{js,css,html}',
-    'project_templates/**/*.{js,css,html}'
+    'project_templates/**/*.{js,css,html}',
+    'css-components/components-src/dist/onsen-css-components-default.css'
   ]).on('change', function(changedFile) {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({stream: true, once: true}));

@@ -23,14 +23,14 @@ limitations under the License.
 
   function firePageInitEvent(pageContainer) {
     function findPageDOM() {
-      if (angular.element(pageContainer).hasClass('topcoat-page')) {
+      if (angular.element(pageContainer).hasClass('page')) {
         return pageContainer;
       }
 
-      var result = pageContainer.querySelector('.topcoat-page');
+      var result = pageContainer.querySelector('.page');
 
       if (!result) {
-        throw new Error('An element of "topcoat-page" class is not found.');
+        throw new Error('An element of "page" class is not found.');
       }
 
       return result;
@@ -63,7 +63,7 @@ limitations under the License.
 
         if ($onsen.isWebView() && $onsen.isIOS7Above()) {
           // Adjustments for IOS7
-          var wrapper = $element[0].querySelector('.topcoat-page__content');
+          var wrapper = $element[0].querySelector('.page__content');
           angular.element(wrapper).css({
             'top': '22px',
             'paddingTop': null
@@ -87,13 +87,13 @@ limitations under the License.
       this.getContentElement = function() {
         for (var i = 0; i < $element.length; i++) {
           if ($element[i].querySelector) {
-            var content = $element[i].querySelector('.topcoat-page__content');
+            var content = $element[i].querySelector('.page__content');
             if (content) {
               return content;
             }
           }
         }
-        throw Error('fail to get ".topcoat-page__content" element.');
+        throw Error('fail to get ".page__content" element.');
       };
 
       /**
@@ -157,11 +157,21 @@ limitations under the License.
 
           pre: function(scope, element, attrs, controller, transclude) {
             var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-            element.addClass('topcoat-page ' + modifierTemplater('topcoat-page--*') + ' ons-page-inner');
+            element.addClass('page ' + modifierTemplater('page--*') + ' ons-page-inner');
 
             transclude(scope, function(clonedElement) {
-              var wrapper = angular.element('<div class="topcoat-page__content"></div>');
+              var wrapper = angular.element('<div class="page__content"></div>');
+              wrapper.css({
+                position: 'absolute',
+                zIndex: 3,
+                top: '44px', // TODO 
+                left: '0px',
+                bottom: '0px',
+                right: '0px',
+                backgroundColor: '#efeff4'
+              });
               element.append(wrapper);
+              element.css({'backgroundColor': 'transparent'});
 
               if ($onsen.isWebView() && $onsen.isIOS7Above()) {
                 // Adjustments for IOS7

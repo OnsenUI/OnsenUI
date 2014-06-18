@@ -151,7 +151,7 @@ limitations under the License.
 
           appendAbovePage: function(pageUrl, templateHTML) {
             var pageElement = angular.element('<div></div>');
-            pageElement.addClass('topcoat-page');
+            pageElement.addClass('page');
             pageElement[0].style.opacity = 0;
             var pageScope = scope.$parent.$new();
             var pageContent = $compile(templateHTML)(pageScope);
@@ -174,7 +174,7 @@ limitations under the License.
 
           appendBehindPage: function(templateHTML) {
             var page = angular.element('<div></div>');
-            page.addClass('topcoat-page');
+            page.addClass('page');
             var pageScope = scope.$parent.$new();
             var pageContent = $compile(templateHTML)(pageScope);
             page.append(pageContent);

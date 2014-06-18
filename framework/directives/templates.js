@@ -4,7 +4,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/back_button.tpl",
-    "<span class=\"topcoat-icon-button--quiet {{modifierTemplater('topcoat-icon-button--quiet--*')}}\" ng-click=\"back()\" style=\"height: 44px; line-height: 0; padding: 0;\">\n" +
+    "<span class=\"icon-button--quiet {{modifierTemplater('icon-button--quiet--*')}}\" ng-click=\"back()\" style=\"height: 44px; line-height: 0; padding: 0;\">\n" +
     "  <i class=\"fa fa-angle-left\" style=\"line-height: 44px; font-size: 36px; float:left; padding-left: 8px; padding-right: 4px;\"></i>\n" +
     "  <span style=\"vertical-align: middle; line-height: 44px; display: inline-block; height: 44px; float: left;\" class=\"back-button__label\"></span>\n" +
     "</span>\n" +
@@ -18,7 +18,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/bottom_toolbar.tpl",
-    "<div class=\"onsen_bottom-toolbar topcoat-navigation-bar topcoat-navigation-bar--bottom ons-bottom-toolbar-inner {{modifierTemplater('topcoat-navigation-bar--*')}}\" ng-transclude></div>\n" +
+    "<div class=\"bottom-bar ons-bottom-toolbar-inner {{modifierTemplater('bottom-bar--*')}}\" ng-transclude></div>\n" +
     "");
 }]);
 })();
@@ -29,9 +29,9 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/button.tpl",
-    "<button class=\"{{item.animation}} topcoat-button--{{onsType}} effeckt-button topcoat-button no-select {{modifierTemplater('topcoat-button--*')}}\">\n" +
+    "<button class=\"{{item.animation}} button--{{onsType}} effeckt-button button no-select {{modifierTemplater('button--*')}}\">\n" +
     "  <span class=\"label ons-button-inner\" ng-transclude></span>\n" +
-    "  <span class=\"spinner topcoat-button__spinner {{modifierTemplater('topcoat-button--*__spinner')}}\"></span>\n" +
+    "  <span class=\"spinner button__spinner {{modifierTemplater('button--*__spinner')}}\"></span>\n" +
     "</button>\n" +
     "");
 }]);
@@ -43,9 +43,9 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/checkbox.tpl",
-    "<label class=\"topcoat-checkbox\" class=\"{{modifierTemplater('topcoat-checkbox--*')}}\">\n" +
+    "<label class=\"checkbox\" class=\"{{modifierTemplater('checkbox--*')}}\">\n" +
     "  <input type=\"checkbox\" ng-model=\"ngModel\" ng-true-value=\"{{ngTrueValue || true}}\" ng-false-value=\"{{ngFalseValue || false}}\">\n" +
-    "  <div class=\"topcoat-checkbox__checkmark {{modifierTemplater('topcoat-checkbox--*__checkmark')}}\"></div>\n" +
+    "  <div class=\"checkbox__checkmark {{modifierTemplater('checkbox--*__checkmark')}}\"></div>\n" +
     "  <span class=\"ons-checkbox-inner\" ng-transclude>\n" +
     "  </span>\n" +
     "</label>\n" +
@@ -106,10 +106,10 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/list.tpl",
-    "<div class=\"ons-scroller full-screen topcoat-page\" ons-scrollable>\n" +
+    "<div class=\"ons-scroller full-screen page\" ons-scrollable>\n" +
     "  <div class=\"ons-scroller__content ons-scroller-inner\">\n" +
-    "    <div class=\"topcoat-list {{modifierTemplater('topcoat-list--*')}}\">\n" +
-    "      <ul class=\"topcoat-list__container {{modifierTemplater('topcoat-list--*__container')}} ons-list-inner\" ng-transclude>\n" +
+    "    <div class=\"list {{modifierTemplater('list--*')}}\">\n" +
+    "      <ul class=\"list__container {{modifierTemplater('list--*__container')}} ons-list-inner\" ng-transclude>\n" +
     "      </ul>\n" +
     "    </div>\n" +
     "  </div>\n" +
@@ -124,7 +124,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/list_item.tpl",
-    "<li class=\"topcoat-list__item {{modifierTemplater('topcoat-list__item--*')}} ons-list-item-inner\"></li>\n" +
+    "<li class=\"list__item {{modifierTemplater('list__item--*')}} ons-list-item-inner\"></li>\n" +
     "");
 }]);
 })();
@@ -135,10 +135,10 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/radio_button.tpl",
-    "<label class=\"topcoat-radio-button {{modifierTemplater('topcoat-radio-button--*')}}\">\n" +
+    "<label class=\"radio-button {{modifierTemplater('radio-button--*')}}\">\n" +
     "  {{leftLabel}}\n" +
     "  <input type=\"radio\" name=\"{{name}}\" ng-model=\"ngModel\" value=\"{{value}}\">\n" +
-    "  <div class=\"topcoat-radio-button__checkmark {{modifierTemplater('topcoat-radio-button--*')}}\"></div>\n" +
+    "  <div class=\"radio-button__checkmark {{modifierTemplater('radio-button--*')}}\"></div>\n" +
     "  {{rightLabel}}\n" +
     "</label>\n" +
     "");
@@ -173,7 +173,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/scroller.tpl",
-    "<div class=\"ons-scroller full-screen topcoat-page\" ons-scrollable>\n" +
+    "<div class=\"ons-scroller full-screen page\" ons-scrollable>\n" +
     "  <div class=\"ons-scroller__content ons-scroller-inner\" ng-transclude>\n" +
     "  </div>\n" +
     "</div>\n" +
@@ -187,7 +187,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/search_input.tpl",
-    "<input type=\"search\" class=\"topcoat-search-input\">\n" +
+    "<input type=\"search\" class=\"search-input\">\n" +
     "");
 }]);
 })();
@@ -234,7 +234,7 @@ app.run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/tab_bar.tpl",
     "<div style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content ons-tabbar-inner\"></div>\n" +
     "\n" +
-    "<div ng-hide=\"hideTabs\" class=\"topcoat-tab-bar full footer {{modifierTemplater('topcoat-tab-bar--*')}} ons-tabbar-inner\" ng-transclude></div>\n" +
+    "<div ng-hide=\"hideTabs\" class=\"tab-bar full footer {{modifierTemplater('tab-bar--*')}} ons-tabbar-inner\" ng-transclude></div>\n" +
     "");
 }]);
 })();
@@ -245,9 +245,9 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/tab_bar_item.tpl",
-    "<label class=\"topcoat-tab-bar__item no-select {{tabbarModifierTemplater('topcoat-tab-bar--*__item')}} {{modifierTemplater('topcoat-tab-bar__item--*')}}\">\n" +
+    "<label class=\"tab-bar__item no-select {{tabbarModifierTemplater('tab-bar--*__item')}} {{modifierTemplater('tab-bar__item--*')}}\">\n" +
     "  <input type=\"radio\" name=\"tab-bar-{{tabbarId}}\">\n" +
-    "  <button class=\"topcoat-tab-bar__button full {{tabbarModifierTemplater('topcoat-tab-bar--*__button')}} {{modifierTemplater('topcoat-tab-bar__button--*')}}\" ng-click=\"setActive()\">\n" +
+    "  <button class=\"tab-bar__button full {{tabbarModifierTemplater('tab-bar--*__button')}} {{modifierTemplater('tab-bar__button--*')}}\" ng-click=\"setActive()\">\n" +
     "    <i ng-show=\"icon != undefined\" class=\"fa fa-2x fa-{{tabIcon}} {{tabIcon}}\"></i>\n" +
     "    <div class=\"onsen_tab-bar__label\" ng-class=\"{ big: icon === undefined }\">\n" +
     "      {{label}}\n" +
@@ -264,7 +264,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/text_area.tpl",
-    "<textarea class=\"topcoat-textarea\"></textarea>\n" +
+    "<textarea class=\"textarea\"></textarea>\n" +
     "");
 }]);
 })();
@@ -275,7 +275,8 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/text_input.tpl",
-    "<input class=\"topcoat-text-input\">");
+    "<input class=\"text-input\">\n" +
+    "");
 }]);
 })();
 
@@ -285,7 +286,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/toolbar_button.tpl",
-    "<span class=\"topcoat-icon-button--quiet {{modifierTemplater('topcoat-icon-button--quiet--*')}}\" ng-transclude></span>\n" +
+    "<span class=\"icon-button--quiet {{modifierTemplater('icon-button--quiet--*')}} navigation-bar__line-height\" ng-transclude></span>\n" +
     "");
 }]);
 })();

@@ -28,7 +28,7 @@ limitations under the License.
       transclude: false,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/search_input.tpl',
       link: function(scope, element, attrs) {
-        element.addClass($onsen.generateModifierTemplater(attrs)('topcoat-search-input--*'));
+        element.addClass($onsen.generateModifierTemplater(attrs)('search-input--*'));
       }
     };
   });
