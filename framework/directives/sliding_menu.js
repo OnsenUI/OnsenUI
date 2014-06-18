@@ -20,7 +20,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsSlidingMenu', function($templateCache, $compile, SlidingMenuStack, $onsen) {
+  module.directive('onsSlidingMenu', function($compile, SlidingMenuStack, $onsen) {
     return {
       restrict: 'E',
       replace: false,
@@ -51,11 +51,11 @@ limitations under the License.
             this.el = element[0];
             this.VERTICAL_THRESHOLD = 20;
             this.HORIZONTAL_THRESHOLD = 20;
-            this.behindPage = element[0].querySelector('.behind');
+            this.behindPage = element[0].querySelector('.onsen-sliding-menu__behind');
             this.$behindPage = angular.element(this.behindPage);
-            this.abovePage = element[0].querySelector('.above');
+            this.abovePage = element[0].querySelector('.onsen-sliding-menu__above');
             this.$abovePage = angular.element(this.abovePage);
-            this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
+            this.blackMask = element[0].querySelector('.onsen-sliding-menu__black-mask');
             this.previousX = 0;
             this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
 

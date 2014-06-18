@@ -15,7 +15,6 @@ limitations under the License.
 
 */
 
-
 .ons-scroller {
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;   
@@ -25,8 +24,7 @@ limitations under the License.
 .ons-scroller > .ons-scroller__content::-webkit-scrollbar {
   display: none;
 }
- 
 
- .scroller {
- 	min-height: 100%;
- }
+.scroller {
+  min-height: 100%;
+}

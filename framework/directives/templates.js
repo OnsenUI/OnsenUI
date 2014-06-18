@@ -198,13 +198,10 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/sliding_menu.tpl",
-    "<div class=\"sliding-menu full-screen\">\n" +
-    "  <div ng-cloak class=\"onsen_sliding-menu-black-mask\"></div>\n" +
-    "  <div class=\"behind full-screen ons-sliding-menu-inner\">\n" +
-    "  </div>\n" +
-    "\n" +
-    "  <div class=\"above full-screen ons-sliding-menu-inner\">\n" +
-    "  </div>\n" +
+    "<div class=\"onsen-sliding-menu\">\n" +
+    "  <div ng-cloak class=\"onsen-sliding-menu__black-mask\"></div>\n" +
+    "  <div class=\"onsen-sliding-menu__behind ons-sliding-menu-inner\"></div>\n" +
+    "  <div class=\"onsen-sliding-menu__above ons-sliding-menu-inner\"></div>\n" +
     "</div>\n" +
     "");
 }]);
@@ -216,11 +213,11 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/split_view.tpl",
-    "<div class=\"sliding-menu full-screen\">\n" +
-    "  <div class=\"onsen_sliding-menu-black-mask\"></div>\n" +
-    "  <div class=\"secondary full-screen ons-split-view-inner\"></div>\n" +
+    "<div class=\"onsen-sliding-menu\">\n" +
+    "  <div class=\"onsen-sliding-menu__black-mask\"></div>\n" +
+    "  <div class=\"onsen-split-view__secondary full-screen ons-split-view-inner\"></div>\n" +
     "\n" +
-    "  <div class=\"main full-screen ons-split-view-inner\"></div>\n" +
+    "  <div class=\"onsen-split-view__main full-screen ons-split-view-inner\"></div>\n" +
     "</div>\n" +
     "");
 }]);
@@ -232,9 +229,8 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/tab_bar.tpl",
-    "<div style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content ons-tabbar-inner\"></div>\n" +
-    "\n" +
-    "<div ng-hide=\"hideTabs\" class=\"tab-bar full footer {{modifierTemplater('tab-bar--*')}} ons-tabbar-inner\" ng-transclude></div>\n" +
+    "<div style=\"margin-bottom: {{tabbarHeight}}\" class=\"ons-tab-bar__content\"></div>\n" +
+    "<div ng-hide=\"hideTabs\" class=\"tab-bar ons-tab-bar__footer {{modifierTemplater('tab-bar--*')}} ons-tabbar-inner\" ng-transclude></div>\n" +
     "");
 }]);
 })();
@@ -246,12 +242,10 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/tab_bar_item.tpl",
     "<label class=\"tab-bar__item no-select {{tabbarModifierTemplater('tab-bar--*__item')}} {{modifierTemplater('tab-bar__item--*')}}\">\n" +
-    "  <input type=\"radio\" name=\"tab-bar-{{tabbarId}}\">\n" +
-    "  <button class=\"tab-bar__button full {{tabbarModifierTemplater('tab-bar--*__button')}} {{modifierTemplater('tab-bar__button--*')}}\" ng-click=\"setActive()\">\n" +
-    "    <i ng-show=\"icon != undefined\" class=\"fa fa-2x fa-{{tabIcon}} {{tabIcon}}\"></i>\n" +
-    "    <div class=\"onsen_tab-bar__label\" ng-class=\"{ big: icon === undefined }\">\n" +
-    "      {{label}}\n" +
-    "    </div>\n" +
+    "  <input type=\"radio\" name=\"tab-bar-{{tabbarId}}\" ng-click=\"setActive()\">\n" +
+    "  <button class=\"tab-bar__button {{tabbarModifierTemplater('tab-bar--*__button')}} {{modifierTemplater('tab-bar__button--*')}}\" ng-click=\"setActive()\">\n" +
+    "    <i ng-show=\"icon != undefined\" class=\"tab-bar__icon fa fa-2x fa-{{tabIcon}} {{tabIcon}}\"></i>\n" +
+    "    <div class=\"tab-bar__label\">{{label}}</div>\n" +
     "  </button>\n" +
     "</label>\n" +
     "");

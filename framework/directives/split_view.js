@@ -20,7 +20,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsSplitView', function($compile, $templateCache, SplitViewStack, $onsen) {
+  module.directive('onsSplitView', function($compile, SplitViewStack, $onsen) {
 
     var ON_PAGE_READY = "onPageReady";
 
@@ -56,9 +56,9 @@ limitations under the License.
             this.el = element[0];
             this.VERTICAL_THRESHOLD = 20;
             this.HORIZONTAL_THRESHOLD = 20;
-            this.behindPage = element[0].querySelector('.secondary');
+            this.behindPage = element[0].querySelector('.onsen-split-view__secondary');
             this.$behindPage = angular.element(this.behindPage);
-            this.abovePage = element[0].querySelector('.main');
+            this.abovePage = element[0].querySelector('.onsen-split-view__main');
             this.$abovePage = angular.element(this.abovePage);
             this.previousX = 0;
             this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
@@ -255,7 +255,7 @@ limitations under the License.
             this.translate(0);
 
             if (Modernizr.boxshadow) {
-              this.$abovePage.addClass('onsen_split-view__shadow');
+              this.$abovePage.addClass('onsen-split-view__shadow');
             }
           },
 
@@ -264,7 +264,7 @@ limitations under the License.
             this.deactivateHammer();
             this.mode = SPLIT_MODE;
             if (Modernizr.boxshadow) {
-              this.$abovePage.removeClass('onsen_split-view__shadow');
+              this.$abovePage.removeClass('onsen-split-view__shadow');
             }
           },
 

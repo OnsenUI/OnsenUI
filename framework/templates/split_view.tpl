@@ -1,6 +1,6 @@
-<div class="sliding-menu full-screen">
-  <div class="onsen_sliding-menu-black-mask"></div>
-  <div class="secondary full-screen ons-split-view-inner"></div>
+<div class="onsen-sliding-menu">
+  <div class="onsen-sliding-menu__black-mask"></div>
+  <div class="onsen-split-view__secondary full-screen ons-split-view-inner"></div>
 
-  <div class="main full-screen ons-split-view-inner"></div>
+  <div class="onsen-split-view__main full-screen ons-split-view-inner"></div>
 </div>
