@@ -132,7 +132,7 @@ limitations under the License.
           attachMethods: function() {
             var self = this;
 
-            scope.setSecondaryPage = function(page) {
+            this.setSecondaryPage = scope.setSecondaryPage = function(page) {
               if (page) {
                 $onsen.getPageHTMLAsync(page).then(function(html) {
                   self.appendSecondPage(angular.element(html.trim()));
@@ -144,7 +144,7 @@ limitations under the License.
               }
             };
 
-            scope.setMainPage = function(page) {
+            this.setMainPage = scope.setMainPage = function(page) {
               if (page) {
                 $onsen.getPageHTMLAsync(page).then(function(html) {
                   self.appendMainPage(angular.element(html.trim()));
