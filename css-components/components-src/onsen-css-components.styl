@@ -1,0 +1,3393 @@
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+// Default variables
+
+////////////////////////////////////////
+// Global
+////////////////////////////////////////
+var-background-color = #fff
+
+////////////////////////////////////////
+// Page
+////////////////////////////////////////
+var-background-color--page = #EFEFF4
+
+////////////////////////////////////////
+// Navigation bar
+////////////////////////////////////////
+var-navigation-bar-background-color = #F8F8F8
+var-color--navigation-bar = #1F1F21
+var-navigation-bar-separator-color = #ddd
+
+////////////////////////////////////////
+// Tab bar
+////////////////////////////////////////
+var-background-color--tab-bar__button = #F8F8F8; // Background color
+var-background-color--tab-bar--active = #F8F8F8; // Background color active
+var-tab-bar-border-color = #DDD; // Separator
+var-color--tab-bar__button = #888; // Text color
+var-color--tab-bar--active = #1284ff; // Text color active
+
+
+////////////////////////////////////////
+// List
+////////////////////////////////////////
+var-background-color--list = #F0EFF4
+var-background-color--list-container = #fff
+
+var-background-color--list-header = #f0eff4
+var-color--list-header = #1F1F21
+
+var-color--list-item = #1F1F21
+var-background-color--list-item = #fff
+var-background-color--list-item--active = #D9D9D9
+var-list-item-separator-color = #ddd
+
+////////////////////////////////////////
+// Checkbox, Radio button
+////////////////////////////////////////
+var-background-color-checked--checkbox = #1284ff; // background color active
+var-checkbox-border-color = #1284ff; // boder color
+var-checkbox-border-color-active = #1284ff; // boder color active
+var-checkmark-color = #fff; // indicator color
+
+////////////////////////////////////////
+// Radio Button
+////////////////////////////////////////
+var-radio-button-background-active = rgba(0, 0, 0, 0)
+var-radio-button-indicator-color = #1284ff
+
+////////////////////////////////////////
+// Switch
+////////////////////////////////////////
+var-switch-background-color = #ddd;
+var-background-color--switch__label--checked = #4CD964; // background color active
+
+var-switch-thumb-background-color = #fff
+
+var-swtich-thumb-border-color = #ddd
+var-swtich-thumb-border-color-active = #4CD964
+
+
+////////////////////////////////////////
+// Range
+////////////////////////////////////////
+var-range-track-background-color = #ccc
+var-range-track-background-color-active = #1284ff
+
+var-range-thumb-background-color = #fff
+var-range-thumb-border-color = #ddd
+
+
+////////////////////////////////////////
+// Notification
+////////////////////////////////////////
+var-notification-bg-color = #dc5236
+var-notification-color = white
+
+////////////////////////////////////////
+// Input
+////////////////////////////////////////
+var-input-bg-color = #fff
+var-input-border-color = #ddd
+var-input-text-color = #1F1F21
+var-input-placeholder-color = #ccc
+
+////////////////////////////////////////
+// var-input-invalid-bg-color = #fff
+////////////////////////////////////////
+var-input-invalid-border-colr = #f00
+var-input-invalid-text-color = #f00
+
+
+////////////////////////////////////////
+// Button
+////////////////////////////////////////
+var-background-color__button = #1284ff
+var-border--button-color = rgba(0, 0, 0, 0)
+var-color__button = white
+
+
+////////////////////////////////////////
+// Button Quiet
+////////////////////////////////////////
+var-quiet-button-color = #1284ff
+
+////////////////////////////////////////
+// Icon Button
+////////////////////////////////////////
+var-color--icon-button = #1284ff
+var-background-color--icon-button = rgba(0, 0, 0, 0)
+var-icon-button-border-color = #1284ff
+
+
+// variables-onsen.styl
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+////////////////////////////////////////
+// Basis 
+////////////////////////////////////////
+var-color = #c6c8c8
+var-background-color = transparent
+var-background-color--hover = transparent
+var-font-size = 16px
+var-font-size--large = var-font-size
+var-font-weight = 200
+var-font-weight--large = 500
+var-letter-spacing = 1px
+var-border-radius = 6px
+var-border-radius--large = 30px
+var-border-radius--huge = 40px
+var-padding = 4px 20px
+var-padding--large = var-padding
+var-height = 36px
+var-height--large = 36px
+var-line-height = var-height
+var-line-height--large = var-height
+var-vertical-align = top
+var-border-radius--none = none
+
+////////////////////////////////////////
+// Container
+////////////////////////////////////////
+var-padding--container = 32px
+
+////////////////////////////////////////
+// Button
+////////////////////////////////////////
+var-border--focus = none
+var-box-shadow--focus = none
+var-text-shadow--cta = none
+
+////////////////////////////////////////
+// Bar Button
+////////////////////////////////////////
+var-button-bar-margin = 0
+var-border-right--button-bar = none
+var-border-right--button-bar__button--z-index = 1
+
+////////////////////////////////////////
+// Button Quiet
+////////////////////////////////////////
+var-border__button--quiet = none
+var-quiet-button-background = transparent
+var-color--quiet-active = inherit
+
+////////////////////////////////////////
+// Icon Button
+////////////////////////////////////////
+var-icon-button-border-radius = 3px
+var-size--icon = var-height * 0.54 // 25px
+var-size--icon--large = var-height--large * 0.571428571
+var-padding--icon-button = 4px 10px
+var-icon-top = 0
+var-icon-top--large = 0px
+var-box-shadow--icon-button-quiet--hover = none
+var-box-shadow--icon-button-quiet--down = none
+var-background-color--icon-button-quiet--hover = transparent
+
+////////////////////////////////////////
+// Navigation Bar
+////////////////////////////////////////
+var-height--navigation-bar = 40px
+var-line-height--navigation-bar--item = 40px
+var-padding--navigation-bar = 16px
+var-border-bottom--navigation-bar = 1px solid #8B8B8B
+
+////////////////////////////////////////
+// List
+////////////////////////////////////////
+var-padding--list-container = 0
+var-padding--list-header = 4px 11px
+var-padding--list-item = 11px
+var-font-size--list-header = 15px
+var-font-weight--list-header = 400
+
+////////////////////////////////////////
+// Notification
+////////////////////////////////////////
+var-notification-width = 19px
+var-notification-height = 19px
+var-notification-padding = 0
+var-notification-bg-color = #f00
+
+////////////////////////////////////////
+// Input
+////////////////////////////////////////
+var-background-color--input = transparent
+var-box-shadow--text-input = none
+
+////////////////////////////////////////
+// Search Input
+////////////////////////////////////////
+var-search-icon = url("../img/search.svg")
+var-background-image--search-input = var-search-icon
+
+////////////////////////////////////////
+// Text Area
+////////////////////////////////////////
+var-font-size--textarea = var-font-size
+var-border--textarea = none
+var-padding--textarea = none
+
+////////////////////////////////////////
+// Checkbox
+////////////////////////////////////////
+var-size--checkbox = 32px
+var-border-radius--checkbox = 3px
+var-top--checkmark = 7px
+var-left--checkmark = 4px
+var-width--checkmark__tail = 18px
+var-height--checkmark__foot = 6px
+var-border-radius--checkmark = 0px
+var-border-width--checkmark = 6px
+var-transform--checkmark = rotate(-45deg)
+
+////////////////////////////////////////
+// Radio
+////////////////////////////////////////
+var-size--radio-button = 30px
+var-size--radio-button--checked = 14px
+var-position--radio-button--checked = 7px
+
+////////////////////////////////////////
+// Range 
+////////////////////////////////////////
+var-width--range__thumb  = 32px
+var-height--range__track = 16px
+var-border-radius--range = 3px
+
+////////////////////////////////////////
+// Search Input
+////////////////////////////////////////
+var-padding--search-input = 0 0 0 35px
+var-padding--search-input--large = 0 0 0 46px
+
+////////////////////////////////////////
+// Switch
+////////////////////////////////////////
+var-content--switch__label--left = ''
+var-content--switch__label--right = ''
+var-border--switch = none
+var-width--switch = 64px
+var-width--switch__label = 64px
+var-right--switch__label--left = -1px
+var-padding-left--switch__label--left = 24px
+var-width--switch__toggle = 32px
+var-margin-left--switch__toggle = -20px
+var-left--switch__label--right = -1px
+var-padding-left--switch__label--right = 32px
+var-margin-left--switch__toggle--checked = 12px
+var-height--switch__label--right = 24px
+var-top--switch__label--right = 3px
+var-border-radius--switch__label--right = 15px
+var-height--switch__label--left = 24px
+var-top--switch__label--left = 3px
+var-border-radius--switch__label--left = 15px
+var-box-shadow--switch__label--after--checked = none
+var-background-color--switch__toggle--checked = white
+
+////////////////////////////////////////
+// Tab-bar
+////////////////////////////////////////
+var-line-height--tab-bar__button = 48px
+var-border-top--tab-bar--active = none
+var-border-top--tab-bar--focus = none
+
+// variables-onsen-ios7.styl
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+// ---------- darken ---------- 
+var-dark    = 5
+var-darker  = 5.5
+var-darkest = 25.9
+
+// ---------- lighten ---------- 
+var-light    = 6
+var-lighter  = 20
+var-lightest = 32
+
+// ---------- alphas ---------- 
+var-alpha--high = 0.5
+var-alpha--med  = 0.23
+var-alpha--low  = 0.1
+
+
+// This file should include color and image variables corresponding to the onsen theme 
+
+var-font-weight = 400
+var-font-weight--large = 500
+var-letter-spacing = 0
+
+// Theme variables: Color 
+
+var-theme-ios7-blue = #1284ff
+var-theme-ios7-text-black = #1F1F21
+var-theme-ios7-border = #ddd
+
+////////////////////////////////////////
+// Colors
+////////////////////////////////////////
+
+var-text-grey = #6F6F74
+var-titlebar-background = #F8F8F8
+var-view-background = #fff
+var-list-background-color = var-view-background
+
+var-switch-color = #4CD964
+var-list-text-color = var-theme-ios7-text-black
+var-tab-bar-background-color = var-titlebar-background
+var-key-color = #25b5c2
+var-secondary-color = var-list-background-color
+var-auxilary-color = #b3b3b3
+var-notification-color = #fff
+var-cta-background-color = #4a9cd2
+var-list-item-active-color = #b6dedd
+var-text-input-color = #b3b3b3
+var-search-input-background-color--focus = #e7e3e0
+
+
+//////////////////// CUSTOMIZABLE THROUGH API //////////////////// 
+
+////////////////////////////////////////
+// Global 
+////////////////////////////////////////
+
+// var-background-color = #fff
+
+////////////////////////////////////////
+// Page 
+////////////////////////////////////////
+//var-background-color--page = #EFEFF4
+
+////////////////////////////////////////
+// Navigation bar 
+////////////////////////////////////////
+
+// var-navigation-bar-background-color = #F8F8F8
+// var-color--navigation-bar = #1F1F21
+//var-navigation-bar-separator-color = #ddd
+
+
+////////////////////////////////////////
+// Tab bar 
+////////////////////////////////////////
+
+// var-background-color--tab-bar__button = #F8F8F8; // Background color 
+// var-background-color--tab-bar--active = #F8F8F8; // Background color active 
+// var-tab-bar-border-color = #DDD; // Separator 
+// var-color--tab-bar__button = #888; // Text color 
+// var-color--tab-bar--active = #1284ff; // Text color active 
+
+
+////////////////////////////////////////
+// List 
+////////////////////////////////////////
+
+// var-background-color--list = #F0EFF4
+// var-background-color--list-container = #fff
+
+// var-background-color--list-header = #f0eff4
+// var-color--list-header = #1F1F21
+
+// var-color--list-item = #1F1F21
+// var-background-color--list-item = #fff
+// var-background-color--list-item--active = #D9D9D9
+// var-list-item-separator-color = #ddd
+
+////////////////////////////////////////
+// Checkbox, Radio button 
+////////////////////////////////////////
+
+// var-background-color-checked--checkbox = #1284ff; // background color active 
+// var-checkbox-border-color = #1284ff; // boder color 
+// var-checkbox-border-color-active = #1284ff; // boder color active 
+// var-checkmark-color = #fff; // indicator color 
+
+////////////////////////////////////////
+// Radio Button 
+////////////////////////////////////////
+
+// var-radio-button-background-active = transparent
+// var-radio-button-indicator-color = #1284ff
+
+////////////////////////////////////////
+// Switch 
+////////////////////////////////////////
+
+// var-switch-background-color = #ddd;
+// var-background-color--switch__label--checked = #4CD964; // background color active 
+
+// var-switch-thumb-background-color = #fff
+
+// var-swtich-thumb-border-color = #ddd
+// var-swtich-thumb-border-color-active = #4CD964
+
+
+////////////////////////////////////////
+// Range 
+////////////////////////////////////////
+
+// var-range-track-background-color = #ccc
+// var-range-track-background-color-active = #1284ff
+
+// var-range-thumb-background-color = #fff
+// var-range-thumb-border-color = #ddd
+
+
+////////////////////////////////////////
+// Notification 
+////////////////////////////////////////
+
+// var-notification-bg-color = #dc5236
+// var-notification-color = white
+
+////////////////////////////////////////
+// Input 
+////////////////////////////////////////
+
+// var-input-bg-color = #fff
+// var-input-border-color = #ddd
+// var-input-text-color = #1F1F21
+// var-input-placeholder-color = #ccc
+
+// var-input-invalid-bg-color = #fff
+// var-input-invalid-border-colr = #f00
+// var-input-invalid-text-color = #f00
+
+
+////////////////////////////////////////
+// Button 
+////////////////////////////////////////
+
+// var-background-color__button = #1284ff
+// var-border--button-color = transparent
+// var-color__button = white
+
+
+////////////////////////////////////////
+// Button Quiet
+////////////////////////////////////////
+
+// var-quiet-button-color = #1284ff
+
+// Icon Button 
+// var-color--icon-button = #1284ff
+// var-background-color--icon-button = transparent
+// var-icon-button-border-color = #1284ff
+
+//////////////////// END THROUGH API //////////////////// 
+
+
+var-thumb-size = 29px
+var-background--body = var-secondary-color
+var-background-color--down = var-theme-ios7-blue
+var-border = 1px solid var-theme-ios7-blue
+var-box-shadow = none
+var-box-shadow--down = none
+var-text-shadow = 0 1px none
+var-round-border = 30px
+var-border-radius = 4px
+var-border-radius--large = 0
+
+////////////////////////////////////////
+// Button 
+////////////////////////////////////////
+var-border--button = 1px solid var-border--button-color
+var-color--button--active = var-color__button
+var-color--button--hover = var-color__button
+var-background-color--hover__button = var-background-color__button
+var-background-color--down__button = lighten(var-background-color__button, 20)
+
+////////////////////////////////////////
+// Button Quiet 
+////////////////////////////////////////
+var-background-color--quiet-active = transparent
+var-background-color--quiet-hover = transparent
+var-color--active__button--quiet = lighten(var-theme-ios7-blue, var-lighter)
+var-border--hover__button--quiet = none
+var-border--active__button--quiet = none
+var-border__button--quiet = none
+
+////////////////////////////////////////
+// Call To Action 
+////////////////////////////////////////
+var-border--cta = none
+var-box-shadow--cta = none
+var-box-shadow--cta--down = none
+var-background-color--cta = #4CDA64
+var-background-color--cta--hover = var-background-color--cta
+var-background-color--cta--down = lighten(var-background-color--cta, 10)
+var-color--cta = white
+var-color--cta--down = white
+
+////////////////////////////////////////
+// Page 
+////////////////////////////////////////
+
+////////////////////////////////////////
+// Icon-Button 
+////////////////////////////////////////
+var-background-color--icon-button--active = lighten(var-background-color--icon-button, var-lightest)
+var-border--icon-button = 1px solid var-icon-button-border-color
+var-color--icon-button--quiet = var-color--icon-button
+var-color--icon-button--quiet--active = lighten(var-color--icon-button--quiet, var-lighter)
+
+
+var-background-color--icon-button--quiet = transparent
+var-background-color--icon-button-quiet--down = transparent
+var-border--icon-button--quiet = none
+var-border--icon-button--quite--hover = none
+var-border--icon-button--quite--active = none
+
+////////////////////////////////////////
+// Icons 
+////////////////////////////////////////
+var-menu-stack-icon = url("../img/hamburger_dark.svg")
+
+////////////////////////////////////////
+// Navigation Bar 
+////////////////////////////////////////
+var-height--navigation-bar = 44px
+var-box-shadow--navigation-bar = none
+var-padding--navigation-bar = 0
+var-padding--navigation-bar = 0
+var-border-bottom--navigation-bar = 1px solid var-navigation-bar-separator-color
+
+////////////////////////////////////////
+// Input 
+////////////////////////////////////////
+var-color-invalid = var-input-invalid-text-color
+var-border--invalid = 1px solid var-input-invalid-border-colr
+var-input-border = 1px solid var-input-border-color
+
+////////////////////////////////////////
+// Text Input 
+////////////////////////////////////////
+var-font-size--text-input = 15px
+var-line-height--text-input = 31px
+var-padding--text-input = 5px 5px 5px 5px
+var-height--text-input = 31px
+var-border-color--text-input = var-input-border-color
+
+////////////////////////////////////////
+// Text Area 
+////////////////////////////////////////
+var-color--textarea = var-input-text-color
+var-border--textarea = 1px solid var-input-border-color
+var-border-color--textarea = var-input-border-color
+
+var-padding--textarea = 5px 5px 5px 5px
+var-box-shadow--textarea = none
+
+////////////////////////////////////////
+// List 
+////////////////////////////////////////
+var-border-top--list-container = 1px solid var-list-item-separator-color
+var-border-bottom--list-container = 1px solid var-list-item-separator-color
+var-border-top--list-item--2 = 1px solid var-list-item-separator-color
+var-border-bottom--list-item = 1px solid var-list-item-separator-color
+
+var-margin--list-item = 0 0 0 0
+var-padding--list-item = 0 0 0 10px
+var-padding--list-header = 0 0 0 10px
+var-padding-left--list-item--first = 10px
+var-padding-left--list-item--last = 10px
+var-margin--list-item--first = 0
+var-margin--list-item--last = 0
+var-min-height--list-item = 44px
+var-min-height--list-header = 24px
+var-border-top--list = none
+var-border-bottom--list-item--first = none
+var-border-top--list-item--last = none
+var-border-top--list-item--first = none
+var-border-top--list-item = none
+var-border-bottom--list-item--last = none
+var-border-top--list-header = none
+var-border-bottom--list-header = none
+var-text-shadow--list-header = none
+var-font-weight--list-header = var-font-weight--large
+
+////////////////////////////////////////
+// Overlay 
+////////////////////////////////////////
+var-modal-bg-color = #e5e9e8
+var-overlay__header-border = 1px solid #d3d7d7
+
+////////////////////////////////////////
+// Progress bar 
+////////////////////////////////////////
+var-bar-bg-color = var-view-background
+var-progress-bg-color = var-theme-ios7-blue
+
+////////////////////////////////////////
+// Checkbox 
+////////////////////////////////////////
+var-background-color--checkmark = var-background-color;
+var-border--checkbox = 1px solid var-checkbox-border-color
+var-border--checkbox--active = 1px solid var-checkbox-border-color-active
+var-border--checkbox--focus = 1px solid var-checkbox-border-color-active
+var-background-color--down--checkbox = var-background-color--checkmark
+var-background-color--before--checkbox = var-background-color-checked--checkbox
+var-border--checkmark = 3px solid var-checkmark-color
+var-border--checkmark--active = 3px solid var-checkmark-color
+
+var-width--checkmark__tail = 12px
+var-border-width--checkmark = 3px
+var-top--checkmark = 5px
+var-left--checkmark = 4px
+var-size--checkbox = 24px
+var-size--checkmark = 16px
+var-border--checkmark--noborder = 3px solid var-theme-ios7-blue
+var-border-radius--checkbox = 16px
+var-border-radius--checkmark = 0px
+
+////////////////////////////////////////
+// Range input
+////////////////////////////////////////
+var-range-thumb-border = 1px solid var-range-thumb-border-color
+var-border--range__thumb--focus = 1px solid var-theme-ios7-border
+
+var-width--range__thumb = 20px
+var-border--range = none
+var-height--range__track = 2px
+var-range-background = var-background-color--down
+var-range__slider-border = 1px solid rgba(0, 0, 0, .36)
+var-range__slider-background = url("../img/light-grips.png") center center no-repeat #e5e9e8
+var-range__slider-bg-size    = 7px 18px
+var-range__slider-box-shadow = inset 0 1px 0 rgba(255, 255, 255, .12)
+var-width--range__thumb  = var-thumb-size
+
+////////////////////////////////////////
+// Radio Button
+////////////////////////////////////////
+var-radio-button-background = var-background-color
+var-radio-button-border = 3px solid var-radio-button-indicator-color
+var-background-color--down--radio-button = transparent
+
+var-position--radio-button--checked = 4px
+var-size--radio-button = 24px
+var-size--radio-button--checked = 14px
+var-color--radio-button = var-theme-ios7-text-black
+var-border--radio-button = 1px solid var-theme-ios7-blue
+var-border--radio-button--before = 1px solid var-theme-ios7-blue
+var-border--radio-button--active = 1px solid var-theme-ios7-blue
+var-border--radio-button--focus = 1px solid var-theme-ios7-blue
+var-box-shadow--radio-button = 0 1px rgba(255,255,255,0.50)
+
+////////////////////////////////////////
+// Tab-bar
+////////////////////////////////////////
+var-height--tab-bar = 49px
+var-line-height--tab-bar__button = 49px
+var-border--tab-bar__button = none
+var-box-shadow--tab-bar--active = none
+var-box-shadow--tab-bar__button--focus = none
+var-border-top--tab-bar = 1px solid var-tab-bar-border-color
+var-background-color--tab-bar = transparent;
+
+////////////////////////////////////////
+// Switch
+////////////////////////////////////////
+var-transition--switch__label = background-color 0.5s cubic-bezier(0.5,1.3,0.5,1)
+var-transition--switch__label--checked = background-color 0.5s cubic-bezier(0.5,1.6,0.5,1)
+
+var-height--switch = 32px
+var-width--switch = 51px
+var-switch--border-radius = 30px
+var-border-radius--switch__toggle = 30px
+var-transition--switch__toggle = all 0.35s cubic-bezier(0.5,1.6,0.5,1)
+var-box-shadow--switch__label--before--checked = inset 0 0 0 0px rgba(0,0,0,0.4)
+var-box-shadow--switch__label--before = inset 0 0 0 0px rgba(0,0,0,0.1)
+
+////////////////////////////////////////
+// Bar button
+////////////////////////////////////////
+var-border-top--button-bar__button = 1px solid var-theme-ios7-blue
+var-border-bottom--button-bar__button = 1px solid var-theme-ios7-blue
+var-border--button-bar = 0px solid var-theme-ios7-blue
+var-border--button-bar__button = 0px solid var-theme-ios7-blue
+var-border--button-bar__button--active = 0px solid var-theme-ios7-blue
+var-border-right--button-bar__button = 1px solid var-theme-ios7-blue
+var-border-right--button-bar__button--active = 1px solid var-theme-ios7-blue
+var-border-right--button-bar__button--focus = 1px solid var-theme-ios7-blue
+var-border-left--button-bar__button__first = 1px solid var-theme-ios7-blue
+var-border-right--button-bar__button__first = 1px solid var-theme-ios7-blue
+var-border-right--button-bar__button__last = 1px solid var-theme-ios7-blue
+var-background-color--button-bar = transparent
+var-background-color--button-bar--button--active = lighten(var-theme-ios7-blue, var-lightest)
+var-background-color--button-bar--button--hover = white
+var-background-color--button-bar--button--on-state = var-theme-ios7-blue
+var-color--button-bar--button = var-theme-ios7-blue
+var-color--button-bar__button--active = var-theme-ios7-blue
+var-color--button-bar__button--hover = var-theme-ios7-blue
+//var-border-right--button-bar__button--z-index = inherit
+
+////////////////////////////////////////
+// Notification
+////////////////////////////////////////
+var-notification-border-radius = 19px
+var-notification-width = auto
+var-notification-height = 19px
+var-min-width--notification = 19px
+var-notification-padding = 0 4px
+var-font-size--notification = 16px
+
+////////////////////////////////////////
+// Search Input
+////////////////////////////////////////
+var-background-color--search-input = var-input-bg-color
+var-background-color--search-input--focus = var-input-bg-color
+
+var-color--search-input = var-input-text-color
+var-color--search-input--focus = var-input-text-color
+var-border--search-input = 1px solid var-input-border-color
+var-border--search-input--focus = 1px solid var-input-border-color
+
+var-margin-right--search-decoration = 0px
+var-search-input--border-radius = 4px
+var-background-position--search-input = 8px center
+var-padding--search-input = 5px 0 5px 28px
+var-height--search-input = 31px
+var-line-height--search-input = 31px
+var-font-size--search-input = 15px
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+.full
+  width 100%
+
+.half
+  width 50%
+
+.quarter
+  width 25%
+
+.center
+  text-align center
+
+.right
+  text-align right
+
+reset-font()
+  font-family 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif
+  -webkit-font-smoothing antialiased
+
+reset-base()
+  padding 0
+  margin 0
+  font inherit
+  color inherit
+  background transparent
+  border none
+
+reset-list()
+  padding 0
+  margin 0
+  list-style-type none
+  text-align left
+
+reset-quiet()
+  background transparent
+  border 1px solid transparent
+  box-shadow none
+
+reset-input()
+  reset-base()
+  reset-box-model()
+  vertical-align top
+  outline none
+
+hide-input()
+  position absolute
+  overflow hidden
+  padding 0
+  border 0
+  opacity 0.001
+  z-index 1
+  vertical-align top
+  outline none
+
+reset-cursor()
+  cursor default
+  user-select none
+
+reset-box-model()
+  box-sizing border-box
+  background-clip padding-box
+
+reset-overflow()
+  white-space nowrap
+  overflow hidden
+
+reset-container()
+  reset-box-model()
+  reset-overflow()
+  word-spacing 0
+
+inline-block()
+  position relative
+  display inline-block
+  vertical-align top
+
+ellipsis()
+  text-overflow ellipsis
+  reset-overflow()
+
+disabled()
+  opacity 0.3
+  cursor default
+  pointer-events none
+
+reset-ui()
+  reset-box-model()
+  inline-block()
+  reset-base()
+  reset-cursor()
+  ellipsis()
+
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+.page
+  background-color var-background-color--page
+  position absolute
+  top 0px
+  left 0px
+  right 0px
+  bottom 0px
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.
+*
+* Licensed under the Apache License, Version 2.0 (the "License")
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+/*! topdoc
+  name: Button
+  description: A simple button
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="topcoat-button">Button</button>
+    <button class="topcoat-button" disabled>Button</button>
+*/
+
+.button
+  inline-block()
+  reset-box-model()
+  reset-base()
+  reset-font()
+  reset-cursor()
+  ellipsis()
+  height auto
+  text-decoration none
+
+.button--quiet
+  reset-quiet()
+
+button--quiet()
+  reset-quiet()
+
+.button--disabled
+  disabled()
+
+.topcoat-button
+  @extend .button
+  padding var-padding
+  font-size var-font-size
+  line-height var-line-height
+  letter-spacing var-letter-spacing
+  color var-color__button
+  text-shadow var-text-shadow
+  vertical-align var-vertical-align
+  background-color var-background-color__button
+  box-shadow var-box-shadow
+  border none
+  border-radius var-border-radius
+  transition background-color 0.2s linear, color 0.2s linear
+  font-weight var-font-weight
+
+
+.topcoat-button:hover
+  transition none
+
+
+.topcoat-button:active
+  background-color var-background-color--down
+  background-color var-background-color--down__button
+  box-shadow var-box-shadow--down
+  color var-color--button--active
+  transition none
+
+
+.topcoat-button:focus
+  box-shadow var-box-shadow--focus
+  outline 0
+
+
+.topcoat-button:disabled
+  @extend .button--disabled
+
+/*! topdoc
+  name: Quiet Button
+  markup:
+    <button class="topcoat-button--quiet">Button</button>
+    <button class="topcoat-button--quiet" disabled>Button</button>
+*/
+
+.button
+  inline-block()
+  reset-font()
+  reset-box-model()
+  reset-base()
+  reset-cursor()
+  ellipsis()
+  height auto
+  text-decoration none
+
+.button--quiet
+  reset-quiet()
+
+button--quiet()
+  reset-quiet()
+
+.button--disabled
+  disabled()
+
+
+.topcoat-button
+  @extend .button
+  padding var-padding
+  font-size var-font-size
+  line-height var-line-height
+  letter-spacing var-letter-spacing
+  color var-color__button
+  text-shadow var-text-shadow
+  vertical-align var-vertical-align
+  background-color var-background-color__button
+  box-shadow var-box-shadow
+  border none
+  border-radius var-border-radius
+  transition background-color 0.2s linear, color 0.2s linear
+  font-weight var-font-weight
+
+
+.topcoat-button:hover
+  transition none
+
+
+.topcoat-button:active
+  background-color var-background-color--down__button
+  box-shadow var-box-shadow--down
+  color var-color--button--active
+  transition none
+
+
+.topcoat-button:focus
+  box-shadow var-box-shadow--focus
+  outline 0
+
+
+.topcoat-button:disabled
+  @extend .button--disabled
+
+.topcoat-button--quiet
+  @extend .topcoat-button
+  button--quiet()
+  background var-quiet-button-background
+  color var-quiet-button-color
+  border none
+
+
+.topcoat-button--quiet:disabled
+  @extend .topcoat-button:disabled
+  border none
+
+
+.topcoat-button--quiet:hover
+  @extend .topcoat-button:hover
+
+
+.topcoat-button--quiet:focus
+  @extend .topcoat-button:focus
+
+
+.topcoat-button--quiet:active
+  color var-color--active__button--quiet
+  text-shadow var-text-shadow
+  background-color var-background-color--quiet-active
+  border none
+  box-shadow var-box-shadow--down
+  transition none
+
+/*! topdoc
+  name: Large Button
+  markup:
+    <button class="topcoat-button--large" >Button</button>
+*/
+
+.button
+  inline-block()
+  reset-font()
+  reset-box-model()
+  reset-base()
+  reset-cursor()
+  ellipsis()
+  height auto
+  text-decoration none
+
+.button--quiet
+  reset-quiet()
+
+button--quiet()
+  reset-quiet()
+
+.button--disabled
+  disabled()
+
+
+.topcoat-button
+  @extend .button
+  padding var-padding
+  font-size var-font-size
+  line-height var-line-height
+  letter-spacing var-letter-spacing
+  color var-color__button
+  text-shadow var-text-shadow
+  vertical-align var-vertical-align
+  background-color var-background-color__button
+  box-shadow var-box-shadow
+  border none
+  border-radius var-border-radius
+  transition background-color 0.2s linear, color 0.2s linear
+  font-weight var-font-weight
+
+
+.topcoat-button:hover
+  transition none
+
+
+.topcoat-button:active
+  background-color var-background-color--down__button
+  box-shadow var-box-shadow--down
+  color var-color--button--active
+  transition none
+
+
+.topcoat-button:focus
+  box-shadow var-box-shadow--focus
+  outline 0
+
+
+.topcoat-button:disabled
+  @extend .button--disabled
+
+.topcoat-button--large
+  @extend .topcoat-button
+  font-size var-font-size--large
+  font-weight var-font-weight--large
+  line-height var-line-height--large
+  padding var-padding--large
+  display block
+  width 100%
+
+
+.topcoat-button--large:active
+  @extend .topcoat-button:active
+  transition none
+
+
+.topcoat-button--large:disabled
+  @extend .topcoat-button:disabled
+
+
+.topcoat-button--large:hover
+  @extend .topcoat-button:hover
+
+
+.topcoat-button--large:focus
+  @extend .topcoat-button:focus
+
+/*! topdoc
+  name: Large Quiet Button
+  markup:
+    <button class="topcoat-button--large--quiet">Button</button>
+*/
+
+.button
+  inline-block()
+  reset-font()
+  reset-box-model()
+  reset-base()
+  reset-cursor()
+  ellipsis()
+  height auto
+  text-decoration none
+
+.button--quiet
+  reset-quiet()
+
+button--quiet()
+  reset-quiet()
+
+.button--disabled
+  disabled()
+
+
+.topcoat-button
+  @extend .button
+  padding var-padding
+  font-size var-font-size
+  line-height var-line-height
+  letter-spacing var-letter-spacing
+  color var-color__button
+  text-shadow var-text-shadow
+  vertical-align var-vertical-align
+  background-color var-background-color__button
+  box-shadow var-box-shadow
+  border none
+  border-radius var-border-radius
+  transition background-color 0.2s linear, color 0.2s linear
+  font-weight var-font-weight
+
+
+.topcoat-button:hover
+  transition none
+
+
+.topcoat-button:active
+  background-color var-background-color--down__button
+  box-shadow var-box-shadow--down
+  color var-color--button--active
+  transition none
+
+
+.topcoat-button:focus
+  box-shadow var-box-shadow--focus
+  outline 0
+
+
+.topcoat-button:disabled
+  @extend .button--disabled
+
+.topcoat-button--large--quiet
+  @extend .topcoat-button--large
+  button--quiet()
+  color var-quiet-button-color
+
+
+.topcoat-button--large--quiet:active
+  color var-color--active__button--quiet
+  transition none
+
+
+.topcoat-button--large--quiet:disabled
+  @extend .button--disabled
+
+.topcoat-button--large--quiet:hover
+  @extend .topcoat-button:hover
+
+
+.topcoat-button--large--quiet:focus
+  outline 0
+
+/*! topdoc
+  name: Call To Action Button
+  markup:
+    <button class="topcoat-button--cta" >Button</button>
+    <button class="topcoat-button--cta" disabled>Button</button>
+*/
+
+.button
+  inline-block()
+  reset-font()
+  reset-box-model()
+  reset-base()
+  reset-cursor()
+  ellipsis()
+  height auto
+  text-decoration none
+
+.button--quiet
+  reset-quiet()
+
+button--quiet()
+  reset-quiet()
+
+.button--disabled
+  disabled()
+
+
+.topcoat-button
+  @extend .button
+  padding var-padding
+  font-size var-font-size
+  line-height var-line-height
+  letter-spacing var-letter-spacing
+  color var-color__button
+  text-shadow var-text-shadow
+  vertical-align var-vertical-align
+  background-color var-background-color__button
+  box-shadow var-box-shadow
+  border none
+  border-radius var-border-radius
+  transition background-color 0.2s linear, color 0.2s linear
+  font-weight var-font-weight
+
+
+.topcoat-button:hover
+  transition none
+
+
+.topcoat-button:active
+  background-color var-background-color--down__button
+  box-shadow var-box-shadow--down
+  color var-color--button--active
+  transition none
+
+
+.topcoat-button:focus
+  box-shadow var-box-shadow--focus
+  outline 0
+
+
+.topcoat-button:disabled
+  @extend .button--disabled
+
+.topcoat-button--cta
+  @extend .topcoat-button
+  border none
+  background-color var-background-color--cta
+  box-shadow var-box-shadow--cta
+  color var-color--cta
+  font-weight var-font-weight--cta
+  text-shadow var-text-shadow--cta
+
+
+.topcoat-button--cta:hover
+  @extend .topcoat-button:hover
+
+
+.topcoat-button--cta:focus
+  @extend .topcoat-button:focus
+
+
+.topcoat-button--cta:active
+  color var-color--cta--down
+  background-color var-background-color--cta--down
+  box-shadow var-box-shadow--cta--down
+  transition none
+
+
+.topcoat-button--cta:disabled
+  @extend .topcoat-button:disabled
+
+
+/*! topdoc
+  name: Large Call To Action Button
+  markup:
+    <button class="topcoat-button--large--cta" >Button</button>
+*/
+
+.button
+  inline-block()
+  reset-font()
+  reset-box-model()
+  reset-base()
+  reset-cursor()
+  ellipsis()
+  height auto
+  text-decoration none
+
+.button--quiet
+  reset-quiet()
+
+button--quiet()
+  reset-quiet()
+
+.button--disabled
+  disabled()
+
+.topcoat-button
+  @extend .button
+  padding var-padding
+  font-size var-font-size
+  line-height var-line-height
+  letter-spacing var-letter-spacing
+  color var-color__button
+  text-shadow var-text-shadow
+  vertical-align var-vertical-align
+  background-color var-background-color__button
+  box-shadow var-box-shadow
+  border none
+  border-radius var-border-radius
+  transition background-color 0.2s linear, color 0.2s linear
+  font-weight var-font-weight
+
+
+.topcoat-button:hover
+  transition none
+
+.topcoat-button:active
+  background-color var-background-color--down__button
+  box-shadow var-box-shadow--down
+  color var-color--button--active
+  transition none
+
+
+.topcoat-button:focus
+  border none
+  box-shadow var-box-shadow--focus
+  outline 0
+
+.topcoat-button:disabled
+  @extend .button--disabled
+
+.topcoat-button--cta
+  @extend .topcoat-button
+  background-color var-background-color--cta
+  box-shadow var-box-shadow--cta
+  color var-color--cta
+  font-weight var-font-weight--cta
+  text-shadow var-text-shadow--cta
+
+.topcoat-button--large--cta
+  @extend .topcoat-button--cta
+  font-size var-font-size--large
+  font-weight var-font-weight--large
+  line-height var-line-height--large
+  padding var-padding--large
+  width 100%
+  display block
+
+.topcoat-button--cta:active
+  color var-color--cta--down
+  background-color var-background-color--cta--down
+  box-shadow var-box-shadow--cta--down
+  transition none
+
+.topcoat-button--large--cta:hover
+  @extend .topcoat-button:hover
+
+
+.topcoat-button--large--cta:focus
+  @extend .topcoat-button:focus
+
+
+.topcoat-button--large--cta:active
+  @extend .topcoat-button--cta:active
+  transition none
+
+.topcoat-button--large--cta:disabled
+  @extend .topcoat-button:disabled
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+/*! topdoc
+  name: Button Bar
+  description: Component of grouped buttons
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <div class="topcoat-button-bar" style="width:280px">
+      <div class="topcoat-button-bar__item active">
+        <button class="topcoat-button-bar__button">One</button>
+      </div>
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button">Two</button>
+      </div>
+      <div class="topcoat-button-bar__item">
+        <button class="topcoat-button-bar__button">Three</button>
+      </div>
+    </div>
+*/
+
+.button-bar
+  reset-font()
+  display table
+  table-layout fixed
+  white-space nowrap
+  margin 0
+  padding 0
+
+.button-bar__item
+  reset-font()
+  display table-cell
+  width auto
+  border-radius 0
+
+.button-bar__item > input
+  hide-input()
+
+.button-bar__button
+  reset-font()
+  border-radius inherit
+
+.button-bar__item:disabled
+  disabled()
+
+.topcoat-button-bar
+  @extend .button-bar
+  reset-font()
+  margin var-button-bar-margin
+  border var-border--button-bar
+
+
+.topcoat-button-bar__item
+  @extend .button-bar__item
+  border-top var-border-top--button-bar__button
+  border-bottom var-border-bottom--button-bar__button
+
+
+.topcoat-button-bar > .topcoat-button-bar__item:first-child
+  border-top-left-radius var-border-radius
+  border-bottom-left-radius var-border-radius
+
+
+.topcoat-button-bar > .topcoat-button-bar__item:last-child
+  border-top-right-radius var-border-radius
+  border-bottom-right-radius var-border-radius
+
+
+.topcoat-button-bar__item > input
+  @extend .button-bar__item > input
+
+
+.topcoat-button-bar__item:first-child > .topcoat-button-bar__button
+  border-left var-border-left--button-bar__button__first
+  border-right none
+  border-right var-border-right--button-bar__button__first
+
+
+.topcoat-button-bar__item:last-child > .topcoat-button-bar__button
+  border-left none
+  border-right var-border-right--button-bar__button__last
+
+
+.topcoat-button-bar__button
+  @extend .topcoat-button
+  reset-font()
+  border-radius inherit
+  background-color var-background-color--button-bar
+  color var-color--button-bar--button
+  border var-border--button-bar__button
+  border-right var-border-right--button-bar__button
+
+  font-weight var-font-weight
+  padding 0 8px
+  height 27px
+  line-height 27px
+  font-size 13px
+  width 100%
+  transition background-color 0.2s linear, color 0.2s linear
+
+
+.topcoat-button-bar__button:active,
+:checked + .topcoat-button-bar__button
+  @extend .topcoat-button:active
+  background-color var-background-color--button-bar--button--active
+  color var-color--button-bar__button--active
+  border var-border--button-bar__button
+  border-right var-border-right--button-bar__button
+  border-right var-border-right--button-bar__button--active
+
+  padding 0 8px
+  height 27px
+  line-height 27px
+  font-size 13px
+  width 100%
+  transition none
+
+
+.topcoat-button-bar__item.active > .topcoat-button-bar__button
+  background-color var-background-color--button-bar--button--on-state
+  color white
+  transition none
+
+
+.topcoat-button-bar__button:disabled
+  @extend .topcoat-button:disabled
+
+
+.topcoat-button-bar__button:hover
+  transition none
+
+
+.topcoat-button-bar__button:focus
+  outline 0
+
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+/*! topdoc
+  name: Switch
+  description: Default skin for Topcoat switch
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="topcoat-switch">
+      <input type="checkbox" class="topcoat-switch__input">
+      <div class="topcoat-switch__toggle"></div>
+    </label>
+    <label class="topcoat-switch">
+      <input type="checkbox" class="topcoat-switch__input" checked>
+      <div class="topcoat-switch__toggle"></div>
+    </label>
+    <label class="topcoat-switch">
+      <input type="checkbox" class="topcoat-switch__input" disabled>
+      <div class="topcoat-switch__toggle"></div>
+    </label>
+*/
+
+.switch
+  inline-block()
+  reset-box-model()
+
+.switch__input
+  hide-input()
+
+.switch__toggle
+  inline-block()
+  reset-box-model()
+  reset-base()
+  reset-cursor()
+
+.switch__toggle:before,
+.switch__toggle:after
+  content ''
+  position absolute
+  z-index -1
+  reset-box-model()
+
+.switch--disabled
+  disabled()
+
+.topcoat-switch
+  @extend .switch
+  font-size var-font-size
+  padding 0 20px
+  border var-border
+  border var-border--switch
+  overflow visible
+  width var-width--switch
+  height var-height--switch
+  border-radius var-switch--border-radius
+  z-index 1
+  text-align left
+
+.topcoat-switch__input
+  @extend .switch__input
+  width var-width--switch
+  height 44px
+  margin-top -((44px-(var-height--switch))/2px)
+  top 0px
+  left 0px
+
+// switch toggle circle
+.topcoat-switch__toggle:before
+  position absolute
+  content ''
+  border-radius 28px
+  height 28px
+  width 28px
+  background-color var-switch-thumb-background-color
+  border 1px solid var-swtich-thumb-border-color
+  left 0
+  top 1px
+  transition var-transition--switch__toggle
+
+// switch toggle background
+.topcoat-switch__toggle
+  background-color var-switch-background-color
+  width 50px
+  position absolute
+  top 0px
+  left 0px
+  border-radius 30px
+  height 32px
+
+.topcoat-switch__input + .topcoat-switch__toggle:before
+  margin-left 0px
+
+.topcoat-switch__input:checked + .topcoat-switch__toggle:before
+  margin-left 0px
+  transform translate3d(19px, 0px, 0px)
+  border-color var-swtich-thumb-border-color-active
+
+.topcoat-switch__input:active + .topcoat-switch__toggle
+  box-shadow var-box-shadow
+  border none
+
+.topcoat-switch__input:focus + .topcoat-switch__toggle
+  box-shadow var-box-shadow--focus
+  border none
+
+.topcoat-switch__input:disabled + .topcoat-switch__toggle
+  @extend .switch--disabled
+
+.topcoat-switch__input:checked + .topcoat-switch__toggle
+  background-color var-background-color--switch__label--checked
+  box-shadow var-box-shadow--switch__label--before--checked
+  transition var-transition--switch__label--checked
+
+.topcoat-switch__input:not(:checked) + .topcoat-switch__toggle
+  box-shadow var-box-shadow--switch__label--before
+  transition var-transition--switch__label
+
+.topcoat-switch__input:not(:checked) + .topcoat-switch__toggle:before
+  transform translate3d(1px, 0px, 0px)
+
+
+/*
+Copyright 2012 Adobe Systems Inc.;
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+/*! topdoc
+  name: Range
+  description: Range input
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <input type="range" class="topcoat-range">
+    <input type="range" class="topcoat-range" disabled>
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Range</h1>
+        </div>
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="topcoat-range" style="width:100%" value="0">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="topcoat-range" style="width:100%" value="30">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="topcoat-range" style="width:100%" value="60">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="topcoat-range" style="width:100%" value="90">
+    </div>
+*/
+.range
+  reset-input()
+  -webkit-appearance none
+
+.range__thumb
+  cursor pointer
+
+.range__thumb--webkit
+  cursor pointer
+  -webkit-appearance none
+
+.range:disabled
+  disabled()
+
+.topcoat-range
+  @extend .range
+  border-radius var-border-radius
+  border var-border--range
+  height var-height--range__track
+  border-radius var-border-radius--large
+  border-radius var-border-radius--range
+
+  background-image linear-gradient(var-range-track-background-color, var-range-track-background-color)
+  background-position left center
+  background-size 100% 2px
+  background-repeat no-repeat
+  overflow hidden
+  height 31px
+
+.topcoat-range::-moz-range-track
+  position relative
+  border-radius var-border-radius
+  border none
+  background-color var-background-color--input
+  background-color var-range-track-background-color
+  height var-height--range__track
+  border-radius var-border-radius--large
+  border-radius var-border-radius--none
+  top 0
+  margin 0
+  padding 0
+
+.topcoat-range::-webkit-slider-thumb
+  @extend .range__thumb--webkit
+  position relative
+  height var-width--range__thumb
+  width var-width--range__thumb
+  background-color var-range-thumb-background-color
+  border var-range-thumb-border
+  border-radius var-round-border
+  box-shadow var-box-shadow
+  top 0
+  margin 0
+  padding 0
+
+.topcoat-range::-moz-range-thumb
+  @extend .range__thumb
+  position relative
+  height var-width--range__thumb
+  width var-width--range__thumb
+  background-color var-background-color
+  border var-range-thumb-border
+  border-radius var-border-radius
+  border-radius var-round-border
+  box-shadow var-box-shadow
+  margin 0
+  padding 0
+
+.topcoat-range::-webkit-slider-thumb:before
+  position absolute
+  top 13px
+  right 0px
+  left -1024px
+  width 1024px
+  height 2px
+  background-color var-range-track-background-color-active
+  content ''
+  margin 0
+  padding 0
+
+.topcoat-range:disabled
+  @extend .range:disabled
+
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+/*! topdoc
+  name: Navigation Bar
+  description: A place where navigation goes to drink
+  markup:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Navigation Bar</h1>
+        </div>
+    </div>
+
+  showcase:
+    <div class="topcoat-navigation-bar">
+        <div class="topcoat-navigation-bar__item center full">
+            <h1 class="topcoat-navigation-bar__title">Navigation Bar</h1>
+        </div>
+    </div>
+*/
+
+// utils
+navigation-bar()
+  reset-font()
+  reset-container()
+  reset-base()
+  reset-cursor()
+
+navigation-bar__item()
+  reset-box-model()
+  inline-block()
+  reset-base()
+
+navigation-bar__title()
+  reset-base()
+  ellipsis()
+
+
+.navigation-bar
+  navigation-bar()
+
+.navigation-bar__item
+  navigation-bar__item()
+
+.navigation-bar__title
+  navigation-bar__title()
+
+
+.topcoat-navigation-bar
+  @extend .navigation-bar
+  height var-height--navigation-bar
+  padding-left var-padding--navigation-bar
+  padding-right var-padding--navigation-bar
+  background var-navigation-bar-background-color
+  color var-color--navigation-bar
+  box-shadow var-box-shadow--navigation-bar
+  border-bottom var-border-bottom--navigation-bar
+  font-weight var-font-weight
+
+.topcoat-navigation-bar--bottom
+  border-bottom none
+  border-top var-border-bottom--navigation-bar
+
+.topcoat-navigation-bar__line-height
+  line-height var-height--large !important
+  line-height var-height--navigation-bar !important
+  padding-bottom 0
+  padding-top 0
+
+.topcoat-navigation-bar__bg
+  background var-background-color
+  background var-navigation-bar-background-color
+
+.topcoat-navigation-bar__item
+  @extend .navigation-bar__item
+  margin var-margin
+  line-height var-line-height--large
+  line-height var-line-height--navigation-bar--item
+  vertical-align top
+
+.topcoat-navigation-bar__title
+  @extend .navigation-bar__title
+  font-size var-font-size--large
+  font-weight var-font-weight--large
+  color var-color--navigation-bar
+  width 100%
+
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+/*! topdoc
+  name: Tab Bar
+  description: Component of tab buttons
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <div class="topcoat-tab-bar">
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-a" checked="checked">
+        <button class="topcoat-tab-bar__button">
+          <div class="onsen_tab-bar__label">One</div>
+        </button>
+      </label>
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-a">
+        <button class="topcoat-tab-bar__button">
+          <div class="onsen_tab-bar__label">Two</div>
+        </button>
+      </label>
+      <label class="topcoat-tab-bar__item">
+        <input type="radio" name="tab-bar-a">
+        <button class="topcoat-tab-bar__button">
+          <div class="onsen_tab-bar__label">Three</div>
+        </button>
+      </label>
+    </div>
+*/
+
+.topcoat-tab-bar
+  reset-font()
+  display table
+  table-layout fixed
+  white-space nowrap
+  margin 0
+  padding 0
+  height var-height--tab-bar
+  background-color var-background-color--tab-bar
+  border-top var-border-top--tab-bar
+  width 100%
+
+.topcoat-tab-bar__item
+  reset-font()
+  display table-cell
+  width auto
+  border-radius 0
+
+.topcoat-tab-bar__item > input
+  hide-input()
+
+.topcoat-tab-bar__button
+  inline-block()
+  reset-font()
+  reset-box-model()
+  reset-base()
+  reset-cursor()
+  ellipsis()
+  text-decoration none
+  padding 0
+  height var-line-height--tab-bar__button
+  line-height var-line-height--tab-bar__button
+  letter-spacing var-letter-spacing
+  color var-color--tab-bar__button
+  text-shadow var-text-shadow
+  vertical-align var-vertical-align
+  background-color var-background-color
+  background-color var-background-color--tab-bar__button
+  box-shadow var-box-shadow
+  border-top var-border
+  border-top var-border--tab-bar__button
+  width 100%
+  font-weight var-font-weight
+
+
+.topcoat-tab-bar__button > i
+  font-size 24px
+  padding 0
+  margin 0
+  line-height 32px
+  display block
+  -webkit-text-fill-color transparent /* Will override color (regardless of order) */
+  -webkit-text-stroke-width 1px
+  -webkit-text-stroke-color var-color--tab-bar__button
+
+.topcoat-tab-bar__button > i + .onsen_tab-bar__label
+  font-size 10px
+  line-height 1
+  margin 0
+  font-weight var-font-weight
+
+.topcoat-tab-bar__button > .onsen_tab-bar__label:first-child
+  font-size 16px
+  line-height var-line-height--tab-bar__button
+  margin 0
+  pading 0
+
+.topcoat-tab-bar__button
+  color var-color--tab-bar__button
+
+.topcoat-tab-bar__button:active,
+.topcoat-tab-bar__button--large:active,
+:checked + .topcoat-tab-bar__button
+  color var-color--tab-bar--active
+  background-color var-background-color--tab-bar--active
+  box-shadow var-box-shadow--tab-bar--active
+  border-top var-border-top--tab-bar--active
+
+.topcoat-tab-bar__button:active > i,
+.topcoat-tab-bar__button--large:active > i,
+:checked + .topcoat-tab-bar__button > i
+  color var-color--tab-bar--active
+  -webkit-text-fill-color var-color--tab-bar--active
+  -webkit-text-stroke-width 0px
+  -webkit-text-stroke-color var-color--tab-bar--active
+
+.topcoat-tab-bar__button:disabled
+  disabled()
+
+.topcoat-tab-bar__button:focus,
+.topcoat-tab-bar__button--large:focus
+  z-index 1
+  border-top var-border-top--tab-bar--focus
+  box-shadow var-box-shadow--cta, var-box-shadow--focus
+  box-shadow var-box-shadow--tab-bar__button--focus
+  outline 0
+
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+/*! topdoc
+  name: Notification
+  description: Notification badge
+  markup:
+    <span class="topcoat-notification">1</span>
+
+    <span class="topcoat-notification">10</span>
+
+    <span class="topcoat-notification">999</span>
+*/
+
+.notification
+  inline-block()
+  reset-box-model()
+  reset-base()
+  reset-font()
+  reset-cursor()
+  ellipsis()
+  text-decoration none
+
+.topcoat-notification
+  @extend .notification
+  padding var-notification-padding
+  width var-notification-width
+  height var-notification-height
+  border-radius var-notification-border-radius
+  background-color var-notification-bg-color
+  color var-notification-color
+  text-align center
+  font-size var-font-size--notification
+  min-width var-min-width--notification
+  line-height @height
+  font-weight var-font-weight
+
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+/*! topdoc
+  name: Icon Button
+  description: Like button, but it has an icon.
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="topcoat-icon-button">
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
+    </button>
+    <button class="topcoat-icon-button" disabled>
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
+    </button>
+
+    <button class="topcoat-icon-button--quiet">
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
+    </button>
+    <button class="topcoat-icon-button--quiet" disabled>
+      <i class="fa fa-bell" style="font-size:17px"></i> Label
+    </button>
+*/
+
+.topcoat-icon-button
+  reset-font()
+  padding var-padding--icon-button
+  letter-spacing var-letter-spacing
+  color var-color--icon-button
+  text-shadow var-text-shadow
+  vertical-align baseline
+  background-color var-background-color
+  background-color var-background-color--icon-button
+  box-shadow var-box-shadow
+  border var-border--icon-button
+  border-radius var-border-radius
+  border-radius var-icon-button-border-radius
+  font-weight var-font-weight
+  font-size var-font-size
+
+.topcoat-icon-button:active
+  background-color var-background-color--icon-button--active
+
+.topcoat-icon-button:disabled
+  disabled()
+
+.topcoat-icon-button:focus
+  outline 0
+
+.topcoat-icon-button--quiet
+  @extend .topcoat-icon-button
+  button--quiet()
+  background-color var-background-color--icon-button--quiet
+  border var-border--icon-button--quiet
+  color var-color--icon-button--quiet
+
+.topcoat-icon-button--quiet:active
+  color var-color
+  color var-color--icon-button--quiet--active
+  text-shadow var-text-shadow
+  background-color var-background-color--down
+  background-color var-background-color--icon-button-quiet--down
+  border var-border
+  border var-border--icon-button--quite--active
+  box-shadow var-box-shadow--down
+  box-shadow var-box-shadow--icon-button-quiet--down
+
+.topcoat-icon-button--quiet:disabled
+  @extend .topcoat-icon-button:disabled
+
+.topcoat-icon-button--quiet:focus
+  @extend .topcoat-icon-button:focus
+
+.topcoat-icon
+  inline-block()
+  overflow var-overflow
+  width var-size--icon
+  height var-size--icon
+  vertical-align middle
+  top var-icon-top
+
+.topcoat-icon--large
+  @extend .topcoat-icon
+  width var-size--icon--large
+  height var-size--icon--large
+  top var-icon-top--large
+
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+/*! topdoc
+  name: Checkbox
+  description: Default skin for Topcoat checkbox
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="topcoat-checkbox">
+      <input type="checkbox">
+      <div class="topcoat-checkbox__checkmark"></div>
+      OFF
+    </label>
+
+    <label class="topcoat-checkbox">
+      <input type="checkbox" checked="checked">
+      <div class="topcoat-checkbox__checkmark"></div>
+      ON
+    </label>
+
+    <label class="topcoat-checkbox">
+      <input type="checkbox" disabled>
+      <div class="topcoat-checkbox__checkmark"></div>
+      Disabled
+    </label>
+*/
+
+input[type="checkbox"]
+  hide-input()
+
+.checkbox
+  reset-box-model()
+  inline-block()
+  reset-cursor()
+  reset-font()
+
+.checkbox__label
+  inline-block()
+  reset-cursor()
+
+.checkbox--disabled
+  disabled()
+
+.checkbox:before,
+.checkbox:after
+  content ''
+  position absolute
+
+.checkbox:before
+  reset-box-model()
+
+.topcoat-checkbox > .topcoat-checkbox__checkmark
+  @extend .checkbox
+  height var-size--checkbox
+
+.topcoat-checkbox > input[type="checkbox"]
+  height var-size--checkbox
+  width var-size--checkbox
+  margin-top 0
+  margin-right -@width
+  margin-bottom -@height
+  margin-left 0
+
+.topcoat-checkbox > input[type="checkbox"]:checked
+  background var-background-color-checked--checkbox
+
+.topcoat-checkbox > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before
+  background var-background-color--before--checkbox
+
+.topcoat-checkbox > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after
+  opacity 1
+
+.topcoat-checkbox
+  @extend .checkbox__label
+  line-height var-size--checkbox
+  margin 10px 0
+
+.topcoat-checkbox > .topcoat-checkbox__checkmark:before
+  @extend .checkbox:before
+  width var-size--checkbox
+  height var-size--checkbox
+  background var-background-color
+  background var-background-color--checkmark
+  border var-border
+  border var-border--checkbox
+  border-radius var-border-radius--checkbox
+  box-shadow var-box-shadow
+  left 0
+
+.topcoat-checkbox > .topcoat-checkbox__checkmark
+  @extend .checkbox
+  width var-size--checkbox
+  height var-size--checkbox
+
+.topcoat-checkbox > .topcoat-checkbox__checkmark:after
+  @extend .checkbox:after
+  top var-top--checkmark
+  left var-left--checkmark
+  width var-width--checkmark__tail
+  height var-height--checkmark__foot
+  background transparent
+  border var-border--checkmark
+  border-width var-border-width--checkmark
+  border-top none
+  border-right none
+  border-radius var-border-radius--checkmark
+  transform var-transform--checkmark
+
+.topcoat-checkbox > input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before
+  border var-border--focus
+  border var-border--checkbox--focus
+  box-shadow var-box-shadow--cta, var-box-shadow--focus
+
+.topcoat-checkbox > input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark
+  @extend .checkbox--disabled
+
+.topcoat-checkbox > input[type="checkbox"]:disabled:active + .topcoat-checkbox__checkmark:before
+  border var-border
+  background var-background-color
+  box-shadow var-box-shadow
+
+/* No border checkbox */
+/*! topdoc
+  name: No border Checkbox
+  markup:
+    <label class="topcoat-checkbox--noborder">
+      <input type="checkbox">
+      <div class="topcoat-checkbox__checkmark"></div>
+      OFF
+    </label>
+
+    <label class="topcoat-checkbox--noborder">
+      <input type="checkbox" checked="checked">
+      <div class="topcoat-checkbox__checkmark"></div>
+      ON
+    </label>
+
+    <label class="topcoat-checkbox--noborder">
+      <input type="checkbox" disabled checked="checked">
+      <div class="topcoat-checkbox__checkmark"></div>
+      Disabled
+    </label>
+ */
+
+input[type="checkbox"]
+  hide-input()
+
+.checkbox
+  reset-box-model()
+  inline-block()
+  reset-cursor()
+
+.checkbox__label
+  inline-block()
+  reset-cursor()
+
+.checkbox--disabled
+  disabled()
+
+.checkbox:before,
+.checkbox:after
+  content ''
+  position absolute
+
+.checkbox:before
+  reset-box-model()
+
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark
+  @extend .checkbox
+  height var-size--checkbox
+  background transparent
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:before
+  background transparent
+  border var-border--checkmark--active
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after
+  opacity 1
+
+.topcoat-checkbox--noborder
+  @extend .checkbox__label
+  line-height var-size--checkbox
+  margin 10px 0
+
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:before
+  @extend .checkbox:before
+  width var-size--checkbox
+  height var-size--checkbox
+  background transparent
+  border none
+  border-radius var-border-radius--checkbox
+  left 0
+
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark
+  @extend .checkbox
+  width var-size--checkbox
+  height var-size--checkbox
+
+.topcoat-checkbox--noborder > .topcoat-checkbox__checkmark:after
+  @extend .checkbox:after
+  top var-top--checkmark
+  left var-left--checkmark
+  opacity 0
+  width var-width--checkmark__tail
+  height var-height--checkmark__foot
+  background transparent
+  border var-border--checkmark--noborder
+  border-width var-border-width--checkmark
+  border-top none
+  border-right none
+  border-radius var-border-radius--checkmark
+  transform var-transform--checkmark
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before
+  box-shadow var-box-shadow--cta, var-box-shadow--focus
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:disabled + .topcoat-checkbox__checkmark
+  @extend .checkbox--disabled
+
+.topcoat-checkbox--noborder > input[type="checkbox"]:disabled:active + .topcoat-checkbox--noborder__checkmark:before
+  background var-background-color
+  box-shadow var-box-shadow
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+/*! topdoc
+  name: List
+  description: Topcoat default list skin
+  markup:
+    <div class="topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item">
+          <span class="topcoat-list__item__line-height">Item</span>
+        </li>
+        <li class="topcoat-list__item">
+          <span class="topcoat-list__item__line-height">Item</span>
+        </li>
+      </ul>
+    </div>
+*/
+
+.list
+  reset-base()
+  reset-cursor()
+  reset-font()
+  overflow auto
+  -webkit-overflow-scrolling touch
+
+.list__header
+  margin 0
+
+.list__container
+  reset-list()
+
+.list__item
+  margin 0
+  padding 0
+  position relative
+  list-style none
+
+.topcoat-list
+  @extend .list
+  border-top var-border-top--list-container
+  border-bottom var-border-bottom--list-container
+  background-color var-background-color--list
+
+.topcoat-list--noborder
+  border-top none
+  border-bottom none
+
+.topcoat-list__header
+  @extend .list__header
+  padding var-padding--list-header
+  font-size var-font-size--list-header
+  font-weight var-font-weight--list-header
+  background-color var-background-color--list-header
+  color var-color--list-header
+  text-shadow var-text-shadow--list-header
+  border-top var-border-top--list-header
+  border-bottom var-border-bottom--list-header
+  min-height var-min-height--list-header
+  line-height @min-height
+
+.topcoat-list__container
+  @extend .list__container
+  border-top var-border-top--list
+  color var-color
+  padding var-padding--list-container
+  background-color var-background-color--list-container
+
+.topcoat-list__item
+  @extend .list__item
+  padding var-padding--list-item
+  margin var-margin--list-item
+  border-top var-border-top--list-item
+  border-bottom var-border-bottom--list-item
+  color var-color--list-item
+  background-color var-background-color--list-item
+  min-height var-min-height--list-item
+  position relative
+
+.topcoat-list__item__line-height
+  line-height var-min-height--list-item
+
+.topcoat-list__item_active:active
+  background-color var-background-color--list-item--active
+  transition none
+
+.topcoat-list__item--tappable
+  transition background-color 0.2s linear
+
+.topcoat-list__item--tappable:active
+  background-color var-background-color--list-item--active
+  transition none
+
+.topcoat-list__item:first-child
+  padding-left var-padding-left--list-item--first
+  margin var-margin--list-item--first
+  border-top var-border-top--list-item--first
+  border-bottom var-border-bottom--list-item--first
+
+.topcoat-list__item:last-child
+  padding-left var-padding-left--list-item--last
+  margin var-margin--list-item--last
+  border-top var-border-top--list-item--last
+  border-bottom var-border-bottom--list-item--last
+
+.topcoat-list__item:nth-child(2)
+  border-top var-border-top--list-item--2
+
+/*! topdoc
+  name: Noborder List
+  markup:
+    <div class="topcoat-list topcoat-list--noborder">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item">
+          <span class="topcoat-list__item__line-height">Item</span>
+        </li>
+        <li class="topcoat-list__item">
+          <span class="topcoat-list__item__line-height">Item</span>
+        </li>
+        <li class="topcoat-list__item">
+          <span class="topcoat-list__item__line-height">Item</span>
+        </li>
+      </ul>
+    </div>
+ */
+
+.list
+  reset-base()
+  reset-cursor()
+  overflow auto
+  -webkit-overflow-scrolling touch
+
+.list__header
+  margin 0
+
+.list__container
+  reset-list()
+
+.list__item
+  margin 0
+  padding 0
+  position relative
+  list-style none
+
+.topcoat-list
+  @extend .list
+  border-top var-border-top--list-container
+  border-bottom var-border-bottom--list-container
+  background-color var-background-color--list
+
+.topcoat-list--noborder
+  border-top none
+  border-bottom none
+
+.topcoat-list__container
+  @extend .list__container
+  border-top var-border-top--list
+  color var-color
+  padding var-padding--list-container
+  background-color var-background-color--list-container
+
+.topcoat-list__item
+  @extend .list__item
+  padding var-padding--list-item
+  margin var-margin--list-item
+  border-top var-border-top--list-item
+  border-bottom var-border-bottom--list-item
+  color var-color--list-item
+  background-color var-background-color--list-item
+  min-height var-min-height--list-item
+  position relative
+
+.topcoat-list__item__line-height
+  line-height var-min-height--list-item
+
+.topcoat-list__item_active:active
+  background-color var-background-color--list-item--active
+  transition none
+
+.topcoat-list__item:first-child
+  padding-left var-padding-left--list-item--first
+  margin var-margin--list-item--first
+  border-top var-border-top--list-item--first
+  border-bottom var-border-bottom--list-item--first
+
+.topcoat-list__item:last-child
+  padding-left var-padding-left--list-item--last
+  margin var-margin--list-item--last
+  border-top var-border-top--list-item--last
+  border-bottom var-border-bottom--list-item--last
+
+.topcoat-list__item:nth-child(2)
+  border-top var-border-top--list-item--2
+
+/*! topdoc
+  name: Category Header List
+  markup:
+    <div class="topcoat-list topcoat-list--noborder">
+      <h3 class="topcoat-list__header">Category</h3>
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          Item
+        </li>
+        <li class="topcoat-list__item topcoat-list__item__line-height">
+          Item
+        </li>
+      </ul>
+    </div>
+ */
+
+.list
+  reset-base()
+  reset-cursor()
+  overflow auto
+  -webkit-overflow-scrolling touch
+
+.list__header
+  margin 0
+
+.list__container
+  reset-list()
+
+.list__item
+  margin 0
+  padding 0
+  position relative
+  list-style none
+
+.topcoat-list
+  @extend .list
+  border-top var-border-top--list-container
+  border-bottom var-border-bottom--list-container
+  background-color var-background-color--list
+
+.topcoat-list__header
+  @extend .list__header
+  padding var-padding--list-header
+  font-size var-font-size--list-header
+  font-weight var-font-weight--list-header
+  background-color var-background-color--list-header
+  color var-color--list-header
+  text-shadow var-text-shadow--list-header
+  border-top var-border-top--list-header
+  border-bottom var-border-bottom--list-header
+  min-height var-min-height--list-header
+  line-height @min-height
+
+.topcoat-list__container
+  @extend .list__container
+  border-top var-border-top--list
+  color var-color
+  padding var-padding--list-container
+  background-color var-background-color--list-container
+
+.topcoat-list__item
+  @extend .list__item
+  padding var-padding--list-item
+  margin var-margin--list-item
+  border-top var-border-top--list-item
+  border-bottom var-border-bottom--list-item
+  color var-color--list-item
+  background-color var-background-color--list-item
+  min-height var-min-height--list-item
+  position relative
+
+.topcoat-list__item__line-height
+  line-height var-min-height--list-item
+
+.topcoat-list__item_active:active
+  background-color var-background-color--list-item--active
+  transition none
+
+.topcoat-list__item:first-child
+  padding-left var-padding-left--list-item--first
+  margin var-margin--list-item--first
+  border-top var-border-top--list-item--first
+  border-bottom var-border-bottom--list-item--first
+
+.topcoat-list__item:last-child
+  padding-left var-padding-left--list-item--last
+  margin var-margin--list-item--last
+  border-top var-border-top--list-item--last
+  border-bottom var-border-bottom--list-item--last
+
+.topcoat-list__item:nth-child(2)
+  border-top var-border-top--list-item--2
+
+/*! topdoc
+  name: Tappable List
+  markup:
+    <div class="topcoat-list topcoat-list">
+      <ul class="topcoat-list__container">
+        <li class="topcoat-list__item topcoat-list__item--tappable">
+          <span class="topcoat-list__item__line-height">Tappable Item</span>
+        </li>
+        <li class="topcoat-list__item topcoat-list__item--tappable">
+          <span class="topcoat-list__item__line-height">Tappable Item</span>
+        </li>
+      </ul>
+    </div>
+ */
+
+.list
+  reset-base()
+  reset-cursor()
+  overflow auto
+  -webkit-overflow-scrolling touch
+
+.list__header
+  margin 0
+  text-align left
+
+.list__container
+  reset-list()
+
+.list__item
+  margin 0
+  padding 0
+  position relative
+  list-style none
+
+.topcoat-list
+  @extend .list
+  border-top var-border-top--list-container
+  border-bottom var-border-bottom--list-container
+  background-color var-background-color--list
+
+.topcoat-list__container
+  @extend .list__container
+  border-top var-border-top--list
+  color var-color
+  padding var-padding--list-container
+  background-color var-background-color--list-container
+
+.topcoat-list__item
+  @extend .list__item
+  padding var-padding--list-item
+  margin var-margin--list-item
+  border-top var-border-top--list-item
+  border-bottom var-border-bottom--list-item
+  color var-color--list-item
+  background-color var-background-color--list-item
+  min-height var-min-height--list-item
+  position relative
+
+.topcoat-list__item__line-height
+  line-height var-min-height--list-item
+
+.topcoat-list__item_active:active
+  background-color var-background-color--list-item--active
+  transition none
+
+.topcoat-list__item--tappable
+  transition background-color 0.2s linear
+
+.topcoat-list__item--tappable:active
+  background-color var-background-color--list-item--active
+  transition none
+
+.topcoat-list__item:first-child
+  padding-left var-padding-left--list-item--first
+  margin var-margin--list-item--first
+  border-top var-border-top--list-item--first
+  border-bottom var-border-bottom--list-item--first
+
+.topcoat-list__item:last-child
+  padding-left var-padding-left--list-item--last
+  margin var-margin--list-item--last
+  border-top var-border-top--list-item--last
+  border-bottom var-border-bottom--list-item--last
+
+.topcoat-list__item:nth-child(2)
+  border-top var-border-top--list-item--2
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+/*! topdoc
+  name: Radio Button
+  description: A button that can play music, but usually just plays ads.
+  modifiers:
+  markup:
+    <label class="topcoat-radio-button">
+      <input type="radio" name="topcoat" checked="checked">
+      <div class="topcoat-radio-button__checkmark"></div>
+      Label
+    </label>
+
+    <label class="topcoat-radio-button">
+      <input type="radio" name="topcoat">
+      <div class="topcoat-radio-button__checkmark"></div>
+      Label
+    </label>
+
+    <label class="topcoat-radio-button">
+      <input type="radio" name="topcoat">
+      <div class="topcoat-radio-button__checkmark"></div>
+      Label
+    </label>
+*/
+input[type="radio"]
+  hide-input()
+
+.radio-button
+  reset-box-model()
+  inline-block()
+  reset-cursor()
+  reset-font()
+
+.radio-button__label
+  inline-block()
+  reset-cursor()
+
+.radio-button:before,
+.radio-button:after
+  content ''
+  position absolute
+  border-radius 100%
+
+.radio-button:after
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+
+.radio-button:before
+  reset-box-model()
+
+.radio-button--disabled
+  disabled()
+
+input[type="radio"]
+  height var-size--radio-button
+  width var-size--radio-button
+  margin-top 0
+  margin-right -@width
+  margin-bottom -@height
+  margin-left 0
+
+input[type="radio"]:active
+  outline 0
+
+input[type="radio"]:checked + .topcoat-radio-button__checkmark:after
+  opacity 1
+
+.topcoat-radio-button
+  @extend .radio-button__label
+  color var-color
+  color var-color--radio-button
+  line-height var-size--radio-button
+  text-align left
+  margin 10px 0
+
+.topcoat-radio-button__checkmark:before
+  @extend .radio-button:before
+  width var-size--checkbox
+  height var-size--checkbox
+  background transparent
+  border none
+  border-radius var-border-radius--checkbox
+  left 0
+
+.topcoat-radio-button__checkmark
+  @extend .radio-button
+  position relative
+  width var-size--radio-button
+  height var-size--radio-button
+  background var-radio-button-background
+
+input[type="radio"]:checked + .topcoat-radio-button__checkmark
+  background var-radio-button-background-active
+
+.topcoat-radio-button__checkmark:after
+  @extend .radio-button:after
+  top var-top--checkmark
+  left var-left--checkmark
+  opacity 0
+  width var-width--checkmark__tail
+  height var-height--checkmark__foot
+  background transparent
+  border var-radio-button-border
+  border-width var-border-width--checkmark
+  border-top none
+  border-right none
+  border-radius var-border-radius--checkmark
+  transform var-transform--checkmark
+
+input[type="radio"]:disabled + .topcoat-radio-button__checkmark
+  @extend .radio-button--disabled
+
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+/*! topdoc
+  name: Search Input
+  description: A text input designed for searching.
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <input type="search" value="" placeholder="Search" class="topcoat-search-input">
+*/
+.search-input
+  reset-input()
+  reset-font()
+  -webkit-appearance none
+
+input[type="search"]::-webkit-search-cancel-button
+    -webkit-appearance none
+
+.search-input:disabled
+  disabled()
+
+.topcoat-search-input
+  @extend .search-input
+  height var-height--search-input
+  font-size var-font-size--search-input
+  border var-border
+  border var-border--search-input
+  background-color var-background-color--search-input
+  box-shadow var-box-shadow--text-input
+  color var-color
+  color var-color--search-input
+  padding var-padding--search-input
+  border-radius var-border-radius--large
+  border-radius var-search-input--border-radius
+  background-image var-background-image--search-input
+  background-position 16px center
+  background-position var-background-position--search-input
+  background-repeat no-repeat
+  background-size var-font-size
+  font-weight var-font-weight
+  display block
+  width 100%
+  vertical-align middle
+
+.topcoat-search-input:focus
+  background-color var-background-color--text-input--focus
+  background-color var-background-color--search-input--focus
+  color var-color--focus
+  color var-color--search-input--focus
+  border var-border--focus
+  border var-border--search-input--focus
+  box-shadow var-box-shadow--text-input, var-box-shadow--focus
+
+.topcoat-search-input::-webkit-search-cancel-button,
+.topcoat-search-input::-webkit-search-decoration
+  margin-right 0px
+  margin-right var-margin-right--search-decoration
+
+.topcoat-search-input:focus::-webkit-input-placeholder,
+.topcoat-search-input:focus::-webkit-input-placeholder
+  color var-placeholder-color--input
+
+.topcoat-search-input:disabled
+  @extend .search-input:disabled
+
+.topcoat-search-input:disabled::-webkit-input-placeholder
+  color var-color--focus
+
+.topcoat-search-input:disabled::-moz-placeholder
+  color var-color--focus
+
+.topcoat-search-input:disabled:-ms-input-placeholder
+  color var-color--focus
+
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+/*! topdoc
+  name: Text Input
+  modifiers:
+    :disabled: Disabled state
+    :focus: Focused
+    :invalid: Hover state
+  markup:
+    <input type="text" class="topcoat-text-input" placeholder="text" value="">
+    <br>
+    <input type="text" class="topcoat-text-input" placeholder="text" value="" disabled>
+*/
+
+.input
+  reset-input()
+  reset-font()
+
+.input:disabled
+  disabled()
+
+.topcoat-text-input
+  @extend .input
+  letter-spacing var-letter-spacing
+  border var-input-border
+  border-radius var-border-radius
+  background-color var-input-bg-color
+  box-shadow var-box-shadow--text-input
+  color var-input-text-color
+  padding 4px 8px
+  font-size var-font-size--text-input
+  height var-height--text-input
+  vertical-align middle
+  font-weight var-font-weight
+
+.topcoat-text-input::-webkit-input-placeholder
+  color var-input-placeholder-color
+
+.topcoat-text-input::-moz-placeholder
+  color var-input-placeholder-color
+
+.topcoat-text-input::-ms-input-placeholder
+  color var-input-placeholder-color
+
+.topcoat-text-input:disabled
+  @extend .input:disabled
+
+.topcoat-text-input:disabled::-webkit-input-placeholder
+  color var-input-placeholder-color
+
+.topcoat-text-input:disabled::-moz-placeholder
+  color var-input-placeholder-color
+
+.topcoat-text-input:disabled:-ms-input-placeholder
+  color var-input-placeholder-color
+
+.topcoat-text-input:invalid
+  border var-border--invalid
+  color var-color-invalid
+  background-color var-input-invalid-bg-color
+
+/*! topdoc
+  name: Transparent Text Input
+  markup:
+    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="">
+    <br>
+    <input type="text" class="topcoat-text-input topcoat-text-input--transparent" placeholder="text" value="" disabled>
+*/
+
+.input
+  reset-input()
+  reset-font()
+
+.input:disabled
+  disabled()
+
+.topcoat-text-input--transparent
+  @extend .topcoat-text-input
+  border none
+  background-color transparent
+  padding-left 0
+  padding-right 0
+
+.topcoat-text-input--transparent:disabled
+  @extend .topcoat-text-input:disabled
+  border none
+  background-color transparent
+
+.topcoat-text-input--transparent:disabled::-webkit-input-placeholder
+  @extend .topcoat-text-input:disabled::-webkit-input-placeholder
+  border none
+  background-color transparent
+
+.topcoat-text-input--transparent:disabled::-moz-placeholder
+  @extend .topcoat-text-input:disabled::-moz-placeholder
+  border none
+  background-color transparent
+
+.topcoat-text-input--transparent:disabled:-ms-input-placeholder
+  @extend .topcoat-text-input:disabled:-ms-input-placeholder
+  border none
+  background-color transparent
+
+.topcoat-text-input--transparent:invalid
+  @extend .topcoat-text-input:invalid
+  border none
+  background-color transparent
+
+/*! topdoc
+  name: Underbar Text Input
+  markup:
+    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="">
+    <br>
+    <input type="text" class="topcoat-text-input topcoat-text-input--underbar" placeholder="text" value="" disabled>
+*/
+
+.input
+  reset-input()
+  reset-font()
+
+.input:disabled
+  disabled()
+
+.topcoat-text-input--underbar
+  @extend .topcoat-text-input
+  border none
+  background-color transparent
+  border-bottom 1px solid var-border-color--text-input
+  border-radius 0px
+
+.topcoat-text-input--underbar:disabled
+  @extend .topcoat-text-input:disabled
+  border none
+  background-color transparent
+  border-bottom 1px solid var-border-color--text-input
+
+.topcoat-text-input--underbar:disabled::-webkit-input-placeholder
+  @extend .topcoat-text-input:disabled::-webkit-input-placeholder
+  border none
+  background-color transparent
+
+.topcoat-text-input--underbar:disabled::-moz-placeholder
+  @extend .topcoat-text-input:disabled::-moz-placeholder
+  border none
+  background-color transparent
+
+.topcoat-text-input--underbar:disabled:-ms-input-placeholder
+  @extend .topcoat-text-input:disabled:-ms-input-placeholder
+  border none
+  background-color transparent
+
+.topcoat-text-input--underbar:invalid
+  @extend .topcoat-text-input:invalid
+  border none
+  background-color transparent
+  border-bottom 1px solid var-color-invalid
+
+
+/**
+*
+* Copyright 2012 Adobe Systems Inc.;
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @import or @require for compiling stylus on client side.
+
+/*! topdoc
+  name: Textarea
+  description: A whole area, just for text.
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <textarea class="topcoat-textarea" rows="3" placeholder="Textarea"></textarea>
+  showcase:
+*/
+
+.textarea
+  reset-box-model()
+  reset-base()
+  reset-font()
+  vertical-align top
+  resize none
+  outline none
+
+.textarea:disabled
+  disabled()
+
+.textarea
+  reset-box-model()
+  reset-base()
+  vertical-align top
+  resize none
+  outline none
+
+.textarea:disabled
+  disabled()
+
+.topcoat-textarea
+  @extend .textarea
+  padding var-padding--textarea
+  font-size var-font-size--text-input
+  font-weight var-font-weight
+  border-radius var-border-radius
+  border var-border--textarea
+  background-color var-input-bg-color
+  color var-color--textarea
+  letter-spacing var-letter-spacing
+  box-shadow var-box-shadow--textarea
+  -webkit-appearance none
+
+.topcoat-textarea:disabled
+  @extend .textarea:disabled
+
+.topcoat-textarea:disabled::-webkit-input-placeholder
+  color var-color--focus
+
+.topcoat-textarea:disabled::-moz-placeholder
+  color var-color--focus
+
+.topcoat-textarea:disabled:-ms-input-placeholder
+  color var-color--focus
+
+/*! topdoc
+  name: Textarea Transparent
+  description: A whole area, just for text.
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <textarea class="topcoat-textarea--transparent" rows="3" placeholder="Textarea"></textarea>
+  showcase:
+*/
+
+.textarea
+  reset-box-model()
+  reset-base()
+  reset-font()
+  vertical-align top
+  resize none
+  outline none
+
+.textarea:disabled
+  disabled()
+
+.topcoat-textarea--transparent
+  @extend .topcoat-textarea
+  border none
+  box-shadow none
+  padding-left 0
+  padding-right 0
+
+.topcoat-textarea--transparent:disabled
+  @extend .topcoat-textarea:disabled
+
+.topcoat-textarea--transparent:disabled::-webkit-input-placeholder
+  @extend .topcoat-textarea:disabled::-webkit-input-placeholder
+
+.topcoat-textarea--transparent:disabled::-moz-placeholder
+  @extend .topcoat-textarea:disabled::-moz-placeholder
+
+.topcoat-textarea--transparent:disabled:-ms-input-placeholder
+  @extend .topcoat-textarea:disabled:-ms-input-placeholder

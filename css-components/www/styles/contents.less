@@ -1,0 +1,84 @@
+
+div#main-panel {
+  position: absolute;
+  top: 82px;
+  right: 299px;
+  bottom: 0px;
+  left: 0px;
+
+  > ul#main-panel-tabbar {
+    margin: 0;
+    padding: 0 0 0 23px;
+    height: 50px;
+    box-sizing: border-box;
+    font-size: 0px;
+    background-color: #474849;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+
+    > li {
+      list-style: none;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0 16px;
+      display: inline-block;
+      height: 48px;
+      line-height: 48px;
+      border-bottom: 4px solid transparent;
+      cursor: pointer;
+      user-select: none;
+      font-size: 19px;
+      color: #ccc;
+
+      &:hover {
+        color: white;
+        transition: border-color 0.1s linear;
+        border-bottom: 4px solid rgba(255, 255, 255, 0.3);
+      }
+
+      &.current, &.current:hover {
+        border-bottom: 4px solid white;
+        color: white;
+        cursor: auto;
+        font-weight: 300;
+      }
+
+      &:active {
+        opacity: 0.6;
+      }
+    }
+  }
+
+  > #main-panel-view {
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: #343536;
+    box-sizing: border-box;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
+  > footer {
+    position: absolute;
+    bottom: 0px;
+    right: 20px;
+    height: 30px;
+    box-sizing: border-box;
+    border-top: 2px solid rgba(255, 255, 255, 1);
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.08) inset;
+    background-color: #666;
+    padding: 0 12px;
+    z-index: 100;
+    > a {
+      text-decoration: none;
+      line-height: 30px;
+      font-size: 14px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

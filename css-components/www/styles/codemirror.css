@@ -1,0 +1,30 @@
+
+.CodeMirror {
+  background-color: transparent;
+  color: #333;
+  font-size: 14px;
+}
+
+.CodeMirror pre, .CodeMirror span {
+  font-family: 'Menlo Regular', Menlo, Consolas, monospace !important;
+  font-weight: 100 !important;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.CodeMirror-gutters {
+  background-color: white;
+  border: none;
+}
+
+.cm-tag {
+  color: #070087 !important;
+}
+
+.cm-attribute {
+  color: #79239F !important;
+}
+
+.cm-string {
+  color: #170 !important;
+}

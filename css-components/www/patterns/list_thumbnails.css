@@ -1,0 +1,78 @@
+::-webkit-scrollbar {
+    width: 0;
+}
+
+.float-left {
+    float: left;
+}
+
+.list-item-container {
+    line-height: 14px;
+    min-height: 14px;
+    font-size: 12px;
+}
+
+.list-item-main {
+    padding: 15px 0px 15px 5px;
+}
+
+.list-item-main:after {
+    content: ".";
+    display: block;
+    height: 0;
+    font-size: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.list-item-left {
+    width: 100px;
+    margin-right: -100px;
+    float: left;
+}
+
+.list-item-right {
+    width: 100%;
+    float: right;
+}
+
+.list-item-content {
+    margin-left: 100px;
+    margin-right: 30px;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+}
+
+.list-top {
+    margin-top: -1px;
+}
+
+.list-item-name {
+    font-weight: 500;
+    line-height: 16px;
+    min-height: 16px;
+}
+
+.list-item-text {
+    line-height: 14px;
+    min-height: 14px;
+}
+
+.list-item-action {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    margin-top: -10px;
+    font-size: 20px;
+    line-height: 26px;
+    opacity: 0.4;
+}
+
+.lucent {
+    opacity: 0.4;
+}

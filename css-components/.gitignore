@@ -1,0 +1,4 @@
+node_modules
+.tmp
+.DS_Store
+client/app.prod

@@ -1,0 +1,18 @@
+<div id="overview-inspecter-container">
+  <a ng-click="inspector.show()"><img src="images/inspect.png"></a> <a ng-click="inspector.show()" translate>T_FIND_COMPONENT</a>
+</div>
+
+<div id="overview-container">
+  <ul id="overview">
+    <li ng-repeat="pattern in patterns" ng-init="pattern.src = 'patterns/' + pattern.name + '.html'">
+    <h3>{{pattern.displayName}} <a ng-click="htmlDialog.show(pattern.src)" style="float:right" translate>T_SHOW_HTML</a></h3>
+      <div class="pattern" ng-class="{inspecting: inspector.isShown}">
+        <div class="inspector-mask" pattern-inspector ng-show="inspector.isShown" ng-class="{inspecting: inspector.isShown}">
+          <div class="inspector-highlight" ng-click="showComponentDialog()"><div class="label"></div></div>
+        </div>
+        <div class="pattern-mask" ng-hide="pattern.isLoaded"></div>
+        <iframe ng-src="{{pattern.src}}" ng-class="{inspecting: inspector.isShown}" pattern-iframe pattern-on-load="pattern.isLoaded = true"></iframe>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,374 @@
+body {
+    font-family: 'Helvetica Neue';
+}
+
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+input {
+    outline:0px none black;
+}
+.container {
+}
+
+.header {
+
+}
+
+.key-visual {
+    background-color: #333031;
+    height: 660px;
+    width: 100%;
+}
+
+.key-visual-contents {
+    margin: 0 auto;
+    position: relative;
+    width: 1100px;
+}
+
+.key-visual-contents .kv-bg {
+    background: url('../images/water_drop.png') no-repeat;
+    width: 730px;
+    height: 311px;
+
+    position: absolute;
+    left: 50%;
+    top: 73px;
+    margin-left: -365px;
+}
+
+.key-visual-contents .kv-logo {
+    position: absolute;
+    left: 80px;
+    top: 73px;
+}
+
+.key-visual-contents .kv-title {
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #cccccc;
+    font-size: 60px; /* Approximation due to font substitution */
+    font-weight: 700;
+    line-height: 1; /* Approximation due to font substitution */
+    height: 61px;
+
+    position: absolute;
+    left: 30px;
+    top: 306px;
+}
+
+.key-visual-contents .kv-description-icon {
+    position: absolute;
+    left: 270px;
+    top: 400px;
+}
+
+.key-visual-contents .kv-description {
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #666666;
+    font-size: 34px; /* Approximation due to font substitution */
+    font-weight: 700;
+    line-height: 1.176; /* Approximation due to font substitution */
+
+    position: absolute;
+    right: 220px;
+    top: 393px;
+}
+
+.key-visual-contents .kv-mag-form {
+    width: 620px;
+
+    position: absolute;
+    left: 50%;
+    top: 520px;
+    margin-left: -310px;
+}
+
+.key-visual-contents .kv-mag-form-email {
+    float: left;
+}
+
+.key-visual-contents .kv-mag-form-email input {
+    background-color: #e4dbc9;
+    border-radius: 3px;
+    border-color: rgba(255, 255, 255, 0);
+    color: #f9f9f9;
+    height: 67px;
+    line-height: 67px;
+    padding: 0 25px;
+    width: 360px;
+}
+
+.key-visual-contents .kv-mag-form-button {
+    float: right;
+}
+
+.key-visual-contents .kv-mag-form-button input {
+    background-color: transparent;
+    color: #e4dbc9;
+    border-color: #e4dbc9;
+    border-radius: 3px;
+    float: right;
+    height: 67px;
+    width: 240px;
+}
+
+.key-visual-contents .kv-mag-form-button input:hover {
+    background-color: rgba(255, 255, 255, .1);
+}
+
+.key-visual-contents .kv-mag-sns {
+    color: #f8f8f8;
+    width: 300px;
+
+    position: absolute;
+    left: 50%;
+    top: 615px;
+    margin-left: -150px;
+}
+
+.key-visual-contents .kv-graphic img {
+    display: none;
+    position: absolute;
+    right: -40px;
+    top: 0;
+}
+
+.section-margin {
+    margin: 40px 0 0;
+}
+
+.button::before,
+.button::after {
+    position: absolute;
+    z-index: -1;
+    display: block;
+    content: '';
+}
+
+.button,
+.button::before,
+.button::after {
+    box-sizing: border-box;
+    transition: all .3s;
+}
+
+.contents {
+}
+
+.contents .intro-twitter {
+    background: url('../images/water_line_upper.png') no-repeat 50% 0;
+    min-height: 416px;
+}
+
+.contents .twitter-screen-name {
+    text-align: center;
+}
+
+.contents .twitter-screen-name img {
+    vertical-align: -21px;
+}
+
+.contents .intro-twitter-section {
+    padding: 230px 0 0 345px;
+}
+
+.contents .twitter-message {
+    color: #017fbd;
+    font-family: 'Marck Script', cursive;
+    font-size: 34px;
+    margin: 5px 0 0 10px;
+    text-align: center;
+    letter-spacing: -0.08em;
+}
+
+.about-onsenui {
+    position: relative;
+    width: 900px;
+    margin: 0 auto;
+    min-height: 550px;
+}
+
+.about-onsenui .about-onsenui-message {
+    text-align: left;
+    width: 488px;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.about-onsenui .about-onsenui-text {
+    color: rgba(153, 153, 153, 100);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+.about-onsenui .about-onsenui-text-detail {
+    color: rgba(255, 26, 51, 100);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.about-onsenui .parts-iphone {
+    background: url('../images/device_iphone5c_382px.png') no-repeat;
+    height: 715px;
+    width: 382px;
+
+    position: absolute;
+    right: -40px;
+    top: 0;
+}
+
+.about-onsenui .parts-iphone .display-items img {
+    display: none;
+    height: 456px;
+    width: 258px;
+
+    position: absolute;
+    right: 62px;
+    top: 96px;
+}
+
+.font-color-strong {
+    color: rgba(255, 26, 51, 100);
+}
+
+.headline {
+    color: rgba(85, 85, 85, 100);
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 46px;
+    font-weight: 700;
+}
+
+.water-line-lower {
+    background: url('../images/water_line_lower.png');
+    height: 284px;
+    margin: 0 auto;
+    width: 185px;
+
+    position: absolute;
+    left: 50%;
+    top: -150px;
+    margin-left: -92px;
+}
+
+.mag-onsenui {
+    background-color: #333031;
+    margin: 280px auto 0;
+    padding: 160px 0 40px;
+    position: relative;
+}
+
+.mag-onsenui-message {
+    text-align: center;
+}
+
+.mag-onsenui .mag-form {
+    width: 660px;
+    margin: 40px auto;
+}
+
+.mag-onsenui .mag-form-email {
+    float: left;
+}
+
+.mag-onsenui .mag-form-email input {
+    background-color: transparent;
+    border-radius: 3px;
+    border-color: rgba(255, 255, 255, 0);
+    color: rgba(85, 85, 85, 100);
+    font-size: 24px;
+    height: 67px;
+    padding: 0 20px;
+    width: 400px;
+}
+
+.mag-onsenui .mag-form-button {
+    float: right;
+}
+
+.mag-onsenui .mag-form-button input {
+    background-color: rgba(255, 255, 255, 0);
+    border-color: #e4dbc9;
+    border-radius: 3px;
+    color: #e4dbc9;
+    font-size: 21px;
+    font-family: Helvetica;
+    font-weight: 400;
+    line-height: 1;
+    float: right;
+    height: 67px;
+    width: 240px;
+}
+
+.mag-onsenui .mag-form-button input:hover {
+    background-color: rgba(255, 255, 255, .1);
+}
+
+.twitter-and-github {
+    color: #555555;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 30px;
+    font-weight: 300;
+    height: 51px;
+    line-height: 51px;
+    margin: 60px 0 0;
+    text-align: center;
+}
+
+.twitter-and-github img {
+    vertical-align: -14px;
+}
+
+.twitter-and-github .twitter-tweet-count {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.twitter-and-github .twitter-tweet-count:hover {
+    color: #7c7c7c;
+}
+
+.twitter-and-github .github-star-count {
+    display: inline-block;
+}
+
+.twitter-and-github .github-star-count:hover {
+    color: #7c7c7c;
+}
+
+.copyright {
+    color: #777777;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 12px; /* Approximation due to font substitution */
+    font-weight: 700;
+    line-height: 1; /* Approximation due to font substitution */
+    margin-top: 60px;
+    text-align: center;
+}
+
+
+.ribbon-coming-soon {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* @todo twitter, facebook, github */
+.share-buttons {
+}
+.share-button {
+    height: 25;
+    float: left;
+}
+.share-buttons:after {
+  content: "";
+  clear: both;
+  display: block;
+}

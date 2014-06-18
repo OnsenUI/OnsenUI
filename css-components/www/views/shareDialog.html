@@ -1,0 +1,32 @@
+<div class="dialog-mask uninitialized" ng-show="shareDialog.isShown" ng-click="shareDialog.hide()"></div>
+<div class="dialog-container share-dialog-container" ng-show="shareDialog.isShown">
+  <div class="dialog share-dialog" ng-show="shareDialog.isShown">
+    <img src="images/close.png" class="close" ng-click="shareDialog.hide()">
+
+    <h2 translate>T_SHARE_TITLE</h2>
+
+    <div class="side-image-container"><img src="images/onsenui-logo.png"></div>
+
+    <p translate>T_SHARE_DESC</p>
+
+    <div class="highlight-content">
+
+      <div><input type="text" class="site" style="width: 350px; " value="{{shareDialog.shareURL}}"> <button class="site-button" id="url-share-button" translate>T_COPY</button></div>
+
+    </div>
+
+    <div style="margin-top: 8px; text-align: center; height: 32px;">
+      <span id="twitter-share-box" style="width: 90px; overflow: hidden; display: inline-block;"></span>
+      <span id="facebook-share-box" style="vertical-align: top; display: inline-block;"></span>
+      <span id="gplus-share-box" style="display: inline-block; margin-top: -1px; margin-left: 14px !important; vertical-align: top !important;"></span>
+    </div>
+
+    <footer translate>T_TEASING_LINK</footer>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    $('.uninitialized').removeClass('uninitialized');
+  });
+</script>
