@@ -367,6 +367,44 @@ limitations under the License.
       'height: 100%; background-color: black;"></div>'
     ),
 
+    _decompose: function(page) {
+      var elements = [];
+
+      var left = page.controller.getToolbarLeftItemsElement();
+      var right = page.controller.getToolbarRightItemsElement();
+
+      var other = []
+        .concat(left.children.length === 0 ? left : excludeBackButtonLabel(left.children))
+        .concat(right.children.length === 0 ? right : excludeBackButtonLabel(right.children));
+
+
+      var pageLabels = [
+        page.controller.getToolbarCenterItemsElement(),
+        page.controller.getToolbarBackButtonLabelElement()
+      ];
+
+      return {
+        pageLabels: pageLabels,
+        other: other,
+        content: page.controller.getContentElement(),
+        toolbar: page.controller.getToolbarElement()
+      };
+
+      function excludeBackButtonLabel(elements) {
+        var result = [];
+
+        for (var i = 0; i < elements.length; i++) {
+          if (elements[i].nodeName.toLowerCase() === 'ons-back-button') {
+            result.push(elements[i].querySelector('.ons-back-button__icon'));
+          } else {
+            result.push(elements[i]);
+          }
+        }
+
+        return result;
+      }
+    },
+
     /**
      * @param {Object} enterPage
      * @param {Object} leavePage
@@ -375,6 +413,9 @@ limitations under the License.
     push: function(enterPage, leavePage, callback) {
       var mask = this.backgroundMask.remove();
       leavePage.element[0].parentNode.insertBefore(mask[0], leavePage.element[0]);
+
+      var enterPageDecomposition = this._decompose(enterPage);
+      var leavePageDecomposition = this._decompose(leavePage);
 
       var delta = (function() {
         var rect = leavePage.element[0].getBoundingClientRect();
@@ -401,7 +442,7 @@ limitations under the License.
 
           maskClear,
 
-          animit(enterPage.controller.getContentElement())
+          animit(enterPageDecomposition.content)
             .queue({
               css: {
                 transform: 'translate3D(100%, 0px, 0px)',
@@ -417,7 +458,7 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(enterPage.controller.getToolbarElement())
+          animit(enterPageDecomposition.toolbar)
             .queue({
               css: {
                 background: 'none',
@@ -435,26 +476,7 @@ limitations under the License.
                 'border-color 0.1s linear'
             }),
 
-          animit(enterPage.controller.getToolbarBackButtonLabelElement())
-            .queue({
-              css: {
-                transform: 'translate3d(' + delta + 'px, 0, 0)',
-                opacity: 0
-              },
-              duration: 0
-            })
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0
-              },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .wait(0.4)
-            .resetStyle(),
-
-          animit(enterPage.controller.getToolbarCenterItemsElement())
+          animit(enterPageDecomposition.pageLabels)
             .queue({
               css: {
                 transform: 'translate3d(' + delta + 'px, 0, 0)',
@@ -472,7 +494,7 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(enterPage.controller.getToolbarLeftItemsElement())
+          animit(enterPageDecomposition.other)
             .queue({
               css: {opacity: 0},
               duration: 0
@@ -484,19 +506,7 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(enterPage.controller.getToolbarRightItemsElement())
-            .queue({
-              css: {opacity: 0},
-              duration: 0
-            })
-            .queue({
-              css: {opacity: 1},
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .resetStyle(),
-
-          animit(leavePage.controller.getContentElement())
+          animit(leavePageDecomposition.content)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -518,7 +528,7 @@ limitations under the License.
               done();
             }),
 
-          animit(leavePage.controller.getToolbarCenterItemsElement())
+          animit(leavePageDecomposition.pageLabels)
             .queue({
               css: {
                 transform: 'translate3d(0, 0, 0)',
@@ -536,43 +546,13 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(leavePage.controller.getToolbarLeftItemsElement())
+          animit(leavePageDecomposition.other)
             .queue({
               css: {opacity: 1},
               duration: 0
             })
             .queue({
               css: {opacity: 0},
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .resetStyle(),
-
-          animit(leavePage.controller.getToolbarRightItemsElement())
-            .queue({
-              css: {opacity: 1},
-              duration: 0
-            })
-            .queue({
-              css: {opacity: 0},
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .resetStyle(),
-
-          animit(leavePage.controller.getToolbarBackButtonLabelElement())
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0
-              },
-              duration: 0
-            })
-            .queue({
-              css: {
-                transform: 'translate3d(-' + delta + 'px, 0, 0)',
-                opacity: 0,
-              },
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
@@ -637,6 +617,9 @@ limitations under the License.
       var mask = this.backgroundMask.remove();
       enterPage.element[0].parentNode.insertBefore(mask[0], enterPage.element[0]);
 
+      var enterPageDecomposition = this._decompose(enterPage);
+      var leavePageDecomposition = this._decompose(leavePage);
+
       var delta = (function() {
         var rect = leavePage.element[0].getBoundingClientRect();
         return Math.round(((rect.right - rect.left) / 2) * 0.6);
@@ -663,7 +646,7 @@ limitations under the License.
 
           maskClear,
 
-          animit(enterPage.controller.getContentElement())
+          animit(enterPageDecomposition.content)
             .queue({
               css: {
                 transform: 'translate3D(-25%, 0px, 0px)',
@@ -681,7 +664,7 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(enterPage.controller.getToolbarBackButtonLabelElement())
+          animit(enterPageDecomposition.pageLabels)
             .queue({
               css: {
                 transform: 'translate3d(-' + delta + 'px, 0, 0)',
@@ -699,11 +682,11 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(enterPage.controller.getToolbarCenterItemsElement())
+          animit(enterPageDecomposition.toolbar)
             .queue({
               css: {
-                transform: 'translate3d(-' + delta + 'px, 0, 0)',
-                opacity: 0
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1.0
               },
               duration: 0
             })
@@ -717,7 +700,7 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(enterPage.controller.getToolbarLeftItemsElement())
+          animit(enterPageDecomposition.other)
             .queue({
               css: {opacity: 0},
               duration: 0
@@ -729,19 +712,7 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(enterPage.controller.getToolbarRightItemsElement())
-            .queue({
-              css: {opacity: 0},
-              duration: 0
-            })
-            .queue({
-              css: {opacity: 1},
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .resetStyle(),
-
-          animit(leavePage.controller.getContentElement())
+          animit(leavePageDecomposition.content)
             .queue({
               css: {
                 transform: 'translate3D(0px, 0px, 0px)'
@@ -761,7 +732,24 @@ limitations under the License.
               finish();
             }),
 
-          animit(leavePage.controller.getToolbarElement())
+          animit(leavePageDecomposition.other)
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 0,
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            }),
+
+          animit(leavePageDecomposition.toolbar)
             .queue({
               css: {
                 background: 'none',
@@ -771,7 +759,7 @@ limitations under the License.
               duration: 0
             }),
 
-          animit(leavePage.controller.getToolbarBackButtonLabelElement())
+          animit(leavePageDecomposition.pageLabels)
             .queue({
               css: {
                 transform: 'translate3d(0, 0, 0)',
@@ -783,57 +771,6 @@ limitations under the License.
               css: {
                 transform: 'translate3d(' + delta + 'px, 0, 0)',
                 opacity: 0,
-              },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            }),
-
-          animit(leavePage.controller.getToolbarCenterItemsElement())
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0
-              },
-              duration: 0
-            })
-            .queue({
-              css: {
-                transform: 'translate3d(' + delta + 'px, 0, 0)',
-                opacity: 0,
-              },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            }),
-
-          animit(leavePage.controller.getToolbarLeftItemsElement())
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1
-              },
-              duration: 0
-            })
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 0
-              },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            }),
-
-          animit(leavePage.controller.getToolbarRightItemsElement())
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1
-              },
-              duration: 0
-            })
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 0
               },
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
