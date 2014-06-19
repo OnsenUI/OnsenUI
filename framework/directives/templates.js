@@ -162,7 +162,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/screen.tpl",
-    "<div class=\"ons-screen\" ng-transclude></div>\n" +
+    "<div class=\"ons-screen\"></div>\n" +
     "");
 }]);
 })();

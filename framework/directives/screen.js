@@ -105,7 +105,7 @@ limitations under the License.
       },
 
       createPageScope: function(){
-        var pageScope = this.scope.$parent.$new();
+        var pageScope = this.scope.$new();
         return pageScope;
       },
 
@@ -199,15 +199,17 @@ limitations under the License.
 
     return {
       restrict: 'E',
-      replace: true,
-      transclude: true,
-      scope: {
-        page: '@'
-      },
+      replace: false,
 
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/screen.tpl',
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      transclude: false,
+      scope: true,
 
       compile: function(element, attrs, transclude) {
+        var html = element.html().trim();
+        element.contents().remove();
+
         return function(scope, element, attrs) {
           var screen = new Screen(scope, element, attrs);
           $onsen.declareVarAttribute(attrs, screen);
@@ -215,10 +217,9 @@ limitations under the License.
           if (!attrs.page) {
             var pageScope = screen.createPageScope();
 
-            transclude(pageScope, function(pageContent) {
-              var pageEl = screen.generatePageEl(pageContent);
-              screen._presentPageDOM('', pageEl, pageScope);
-            });
+            var compiled = $compile(angular.element(html))(pageScope);
+            var pageEl = screen.generatePageEl(compiled);
+            screen._presentPageDOM('', pageEl, pageScope);
           }
           ScreenStack.addScreen(scope);
           scope.$on('$destroy', function(){
