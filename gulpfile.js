@@ -255,15 +255,17 @@ gulp.task('default', function() {
 gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   gulp.watch(['framework/templates/*.tpl'], ['html2js']);
 
-  gulp.watch(['framework/*/*'], {
+  gulp.watch([
+    'framework/*/*',
+    'css-components/components-src/dist/onsen-css-components-default.css'
+  ], {
     debounceDelay: 400
   }, ['prepare', 'jshint']);
 
   // for livereload
   gulp.watch([
     'app/**/*.{js,css,html}',
-    'project_templates/**/*.{js,css,html}',
-    'css-components/components-src/dist/onsen-css-components-default.css'
+    'project_templates/**/*.{js,css,html}'
   ]).on('change', function(changedFile) {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({stream: true, once: true}));

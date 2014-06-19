@@ -35,8 +35,16 @@ select) {
   font-size: 16px;
   color: #1f1f21;
 }
-.page ::-webkit-scrollbar {
+.page::-webkit-scrollbar {
   display: none;
+}
+.page__content {
+  background-color: #efeff4;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
 }
 /* topdoc
   name: Switch

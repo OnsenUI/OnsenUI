@@ -59,15 +59,11 @@ limitations under the License.
         }
         
         element.remove();
-        $element.prepend(element);
-
-        if ($onsen.isWebView() && $onsen.isIOS7Above()) {
-          // Adjustments for IOS7
-          var wrapper = $element[0].querySelector('.page__content');
-          angular.element(wrapper).css({
-            'top': '22px',
-            'paddingTop': null
-          });
+        var statusFill = $element[0].querySelector('.page__statusbar-fill');
+        if (statusFill) {
+          angular.element(statusFill).after(element);
+        } else {
+          $element.prepend(element);
         }
 
         this.toolbarElement = element;
@@ -150,34 +146,22 @@ limitations under the License.
       compile: function(element) {
         if ($onsen.isWebView() && $onsen.isIOS7Above()) {
           // Adjustments for IOS7
-          element.css('paddingTop', '20px');
+          element.prepend(angular.element('<div class="page__statusbar-fill"></div>'));
         }
 
         return {
 
           pre: function(scope, element, attrs, controller, transclude) {
             var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-            element.addClass('page ' + modifierTemplater('page--*') + ' ons-page-inner');
+            element.addClass('page ' + modifierTemplater('page--*'));
 
             transclude(scope, function(clonedElement) {
-              var wrapper = angular.element('<div class="page__content"></div>');
-              wrapper.css({
-                position: 'absolute',
-                zIndex: 3,
-                top: '44px', // TODO 
-                left: '0px',
-                bottom: '0px',
-                right: '0px',
-                backgroundColor: '#efeff4'
-              });
-              element.append(wrapper);
-              element.css({'backgroundColor': 'transparent'});
+              var content = angular.element('<div class="page__content ons-page-inner"></div>');
+              content.addClass(modifierTemplater('page--*__content'));
+              content.css({zIndex: 0});
+              element.append(content);
 
-              if ($onsen.isWebView() && $onsen.isIOS7Above()) {
-                // Adjustments for IOS7
-                wrapper.css('paddingTop', '20px');
-              }
-              wrapper.append(clonedElement);
+              content.append(clonedElement);
             });
           },
 
