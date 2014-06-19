@@ -376,6 +376,11 @@ limitations under the License.
       var mask = this.backgroundMask.remove();
       leavePage.element[0].parentNode.insertBefore(mask[0], leavePage.element[0]);
 
+      var delta = (function() {
+        var rect = leavePage.element[0].getBoundingClientRect();
+        return Math.round(((rect.right - rect.left) / 2) * 0.6);
+      })();
+
       var maskClear = animit(mask[0])
         .wait(0.4)
         .queue(function(done) {
@@ -433,7 +438,7 @@ limitations under the License.
           animit(enterPage.controller.getToolbarBackButtonLabelElement())
             .queue({
               css: {
-                transform: 'translate3d(100%, 0, 0)',
+                transform: 'translate3d(' + delta + 'px, 0, 0)',
                 opacity: 0
               },
               duration: 0
@@ -452,7 +457,7 @@ limitations under the License.
           animit(enterPage.controller.getToolbarCenterItemsElement())
             .queue({
               css: {
-                transform: 'translate3d(100%, 0, 0)',
+                transform: 'translate3d(' + delta + 'px, 0, 0)',
                 opacity: 0
               },
               duration: 0
@@ -523,7 +528,7 @@ limitations under the License.
             })
             .queue({
               css: {
-                transform: 'translate3d(-36%, 0, 0)',
+                transform: 'translate3d(-' + delta + 'px, 0, 0)',
                 opacity: 0,
               },
               duration: 0.4,
@@ -565,7 +570,7 @@ limitations under the License.
             })
             .queue({
               css: {
-                transform: 'translate3d(-100%, 0, 0)',
+                transform: 'translate3d(-' + delta + 'px, 0, 0)',
                 opacity: 0,
               },
               duration: 0.4,
@@ -632,6 +637,11 @@ limitations under the License.
       var mask = this.backgroundMask.remove();
       enterPage.element[0].parentNode.insertBefore(mask[0], enterPage.element[0]);
 
+      var delta = (function() {
+        var rect = leavePage.element[0].getBoundingClientRect();
+        return Math.round(((rect.right - rect.left) / 2) * 0.6);
+      })();
+
       var maskClear = animit(mask[0])
         .wait(0.4)
         .queue(function(done) {
@@ -674,7 +684,7 @@ limitations under the License.
           animit(enterPage.controller.getToolbarBackButtonLabelElement())
             .queue({
               css: {
-                transform: 'translate3d(-100%, 0, 0)',
+                transform: 'translate3d(-' + delta + 'px, 0, 0)',
                 opacity: 0
               },
               duration: 0
@@ -692,7 +702,7 @@ limitations under the License.
           animit(enterPage.controller.getToolbarCenterItemsElement())
             .queue({
               css: {
-                transform: 'translate3d(-36%, 0, 0)',
+                transform: 'translate3d(-' + delta + 'px, 0, 0)',
                 opacity: 0
               },
               duration: 0
@@ -771,7 +781,7 @@ limitations under the License.
             })
             .queue({
               css: {
-                transform: 'translate3d(100%, 0, 0)',
+                transform: 'translate3d(' + delta + 'px, 0, 0)',
                 opacity: 0,
               },
               duration: 0.4,
@@ -788,7 +798,7 @@ limitations under the License.
             })
             .queue({
               css: {
-                transform: 'translate3d(100%, 0, 0)',
+                transform: 'translate3d(' + delta + 'px, 0, 0)',
                 opacity: 0,
               },
               duration: 0.4,
