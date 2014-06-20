@@ -48,29 +48,16 @@ navigation-bar()
 
 navigation-bar__item()
   reset-box-model()
-  inline-block()
-  reset-base()
-
-navigation-bar__title()
   reset-base()
   ellipsis()
 
-.full
-  width 100%
-
-.half
-  width 50%
-
-.quarter
-  width 25%
-
 .navigation-bar
   navigation-bar()
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 auto;
-  -moz-box-flex: 0;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
+  box-flex 0
+  flex 0 0 auto
+  align-items stretch
+  align-content stretch
+  display flex
   height var-height--navigation-bar
   padding-left var-padding--navigation-bar
   padding-right var-padding--navigation-bar
@@ -93,7 +80,7 @@ navigation-bar__title()
   navigation-bar__item()
   line-height 1
   vertical-align top
-  float left
+  flex-grow 1
 
 .navigation-bar__left
   @extend .navigation-bar__item
@@ -107,14 +94,17 @@ navigation-bar__title()
 
 .navigation-bar__center
   @extend .navigation-bar__item
-  width 50%
+  flex-grow 2
+  min-width 50%
   text-align center
+
+.navigation-bar__center:before
+  content ' '
 
 .navigation-bar__center:first-child:last-child
   width 100%
 
 .navigation-bar__title
-  navigation-bar__title()
   line-height var-height--navigation-bar
   font-size var-font-size--large
   font-weight var-font-weight--large
@@ -153,6 +143,7 @@ navigation-bar__title()
 */
 .bottom-bar
   navigation-bar()
+  display block
   height var-height--navigation-bar
   padding-left var-padding--navigation-bar
   padding-right var-padding--navigation-bar
