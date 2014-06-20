@@ -403,6 +403,7 @@ select) {
   -moz-box-flex: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
+  overflow: visible;
 }
 .navigation-bar__left {
   width: 25%;
@@ -420,9 +421,6 @@ select) {
   flex-grow: 2;
   min-width: 50%;
   text-align: center;
-}
-.navigation-bar__center:before {
-  content: ' ';
 }
 .navigation-bar__center:first-child:last-child {
   width: 100%;
