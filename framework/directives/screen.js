@@ -19,18 +19,147 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
+  var TransitionAnimator = Class.extend({
+    push: function(enterPage, leavePage, callback) {
+      callback();
+    }, 
+
+    pop: function(enterPage, leavePage, callback) {
+      callback();
+    }
+  });
+
+  var ModalTransitionAnimator = TransitionAnimator.extend({
+
+    /** Black mask */
+    backgroundMask : angular.element(
+      '<div style="position: absolute; width: 100%;' +
+      'height: 100%; background-color: black;"></div>'
+    ),
+
+    push: function(enterPage, leavePage, callback) {
+      var mask = this.backgroundMask.remove();
+      leavePage.pageElement[0].parentNode.insertBefore(mask[0], leavePage.pageElement[0]);
+
+      var maskClear = animit(mask[0])
+        .wait(0.4)
+        .queue(function(done) {
+          mask.remove();
+          done();
+        });
+
+      animit.runAll(
+        maskClear,
+        
+        animit(enterPage.pageElement[0])
+          .queue({
+            css: {
+              transform: 'translate3D(0, 100%, 0)'
+            },
+            duration: 0
+          })
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)'
+            },
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .resetStyle()
+          .wait(0.4)
+          .queue(function(done) {
+            callback();
+            done();
+          }),
+
+        animit(leavePage.pageElement[0])
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)',
+              opacity: 1.0
+            },
+            duration: 0
+          })
+          .queue({
+            css: {
+              transform: 'translate3D(0, -10%, 0)',
+              opacity: 0.9
+            },
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .resetStyle()
+      );
+    },
+
+    pop: function(enterPage, leavePage, callback) {
+
+      var mask = this.backgroundMask.remove();
+      enterPage.pageElement[0].parentNode.insertBefore(mask[0], enterPage.pageElement[0]);
+
+      animit.runAll(
+
+        animit(mask[0])
+          .wait(0.4)
+          .queue(function(done) {
+            mask.remove();
+            done();
+          }),
+
+        animit(enterPage.pageElement[0])
+          .queue({
+            css: {
+              transform: 'translate3D(0, -10%, 0)',
+              opacity: 0.9
+            },
+            duration: 0
+          })
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)',
+              opacity: 1.0
+            },
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .resetStyle()
+          .wait(0.4)
+          .queue(function(done) {
+            callback();
+            done();
+          }),
+
+        animit(leavePage.pageElement[0])
+          .queue({
+            css: {
+              transform: 'translate3D(0, 0, 0)'
+            },
+            duration: 0
+          })
+          .queue({
+            css: {
+              transform: 'translate3D(0, 100%, 0)'
+            },
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+      );
+    }
+  });
+
   module.service('Screen', function($compile, ScreenStack, requestAnimationFrame, $onsen) {
-    var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
-    var TRANSITION_START = "webkitAnimationStart animationStart msAnimationStart oAnimationStart";
+    var TRANSITION_END = 'webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd';
+    var TRANSITION_START = 'webkitAnimationStart animationStart msAnimationStart oAnimationStart';
 
     var Screen = Class.extend({
+
       init: function(scope, element, attrs) {
         this.screenItems = [];
         this.scope = scope;
         this.element = element;
         this.attrs = attrs;
 
-        this.isReady = true;
+        this._doorLock = new DoorLock();
         this.attachMethods();
 
         if (scope.page) {
@@ -38,65 +167,8 @@ limitations under the License.
         }
       },
 
-      onTransitionEnded: function() {
-        this.isReady = true;
-      },
-
-      animateInBehindPage: function() {
-        var behindPage = this.screenItems[this.screenItems.length - 2].pageElement;
-        try {
-          behindPage.attr('class', 'ons-screen__page-container ons-screen__page-container--transition ons-screen__page-container--modal-behind');
-        } catch(e) {
-          console.log(e);
-        }
-      },
-
-      animateInCurrentPage: function(pager) {
-        pager.attr("class", "ons-screen__page-container ons-screen__page-container--unmodal");
-        var that = this;
-        pager.bind(TRANSITION_START, function transitionEnded() {
-          that.isReady = false;
-        });
-        pager.bind(TRANSITION_END, function transitionEnded() {
-          that.onTransitionEnded();
-        });
-
-        setTimeout(function() {
-          requestAnimationFrame(function() {
-            pager.attr("class", "ons-screen__page-container ons-screen__page-container--transition ons-screen__page-container--screen-center");
-            that.animateInBehindPage();
-          });
-        }, 10);
-      },
-
-      animateOutBehindPage: function() {
-        var behindPage = this.screenItems[this.screenItems.length - 1].pageElement;
-        behindPage.attr('class', 'ons-screen__page-container ons-screen__page-container--transition');
-      },
-
       isEmpty: function() {
         return this.screenItems.length < 1;
-      },
-
-      onPageAdded: function(page) {
-        var blackMask = angular.element(page[0].querySelector('.ons-screen__black-mask'));
-        blackMask.removeClass('ons-screen__black-mask--hidden');
-      },
-
-      generatePageEl: function(pageContent){
-        var pageEl = angular.element('<div></div>');
-        pageEl.addClass('onsne-screen__page-container');
-
-        var blackMask = angular.element('<div></div>');
-        blackMask.addClass('ons-screen__black-mask ons-screen__black-mask--hidden');
-        pageEl.append(blackMask);
-
-        var pageContainer = angular.element('<div></div>');
-        pageContainer.addClass('ons-screen__page ons-screen-inner');
-        pageEl.append(pageContainer);
-
-        pageContainer.append(pageContent);
-        return pageEl;
       },
 
       compilePageEl: function(pageEl, pageScope){
@@ -112,76 +184,85 @@ limitations under the License.
       /**
        * @param {String} pageUrl
        * @param {DOMElement} element This element is must be ons-page element.
+       * @param {Object} pageScope
+       * @param {Function} [callback]
        */
-      _presentPageDOM: function(pageUrl, compiledPage, pageScope) {
-
-        this.element.append(compiledPage);
-
-        var isAnimate = this.screenItems.length >= 1;
-        if (isAnimate) {
-          this.animateInCurrentPage(compiledPage);
-        } else {
-          this.isReady = true;
-        }
+      _presentPageDOM: function(pageUrl, compiledPage, pageScope, callback) {
+        callback = callback || function() {};
 
         var screenItem = {
           pageUrl: pageUrl,
           pageElement: compiledPage,
-          pageScope: pageScope
+          pageScope: pageScope,
+          destroy: function() {
+            this.pageElement.remove();
+            this.pageScope.$destroy();
+          }
         };
 
         this.screenItems.push(screenItem);
 
-        setTimeout(function() {
-          this.onPageAdded(compiledPage);
-        }.bind(this), 400);
+        if (this.screenItems.length > 1) {
+
+          var enterPage = screenItem;
+          var leavePage = this.screenItems[this.screenItems.length - 2];
+
+          new ModalTransitionAnimator().push(enterPage, leavePage, function() {
+            leavePage.pageElement.css({display: 'none'});
+            callback();
+          });
+          this.element.append(compiledPage);
+        } else {
+          this.element.append(compiledPage);
+          callback();
+        }
       },
 
-      presentPage: function(page){
-        if (!this.isReady) {
-          return;
-        }
-
+      presentPage: function(page) {
         var self = this;
 
-        $onsen.getPageHTMLAsync(page).then(function(html) {
-          var pageContent = angular.element(html.trim());
-          var pageEl = self.generatePageEl(pageContent);
-          var pageScope = self.createPageScope();
-          var compiledPage = self.compilePageEl(pageEl, pageScope);
+        this._doorLock.waitUnlock(function() {
+          var unlock = self._doorLock.lock();
 
-          self._presentPageDOM(page, compiledPage, pageScope);
-        }, function() {
-          self.onTransitionEnded();
-          throw new Error('Page is not found: ' + page);
+          $onsen.getPageHTMLAsync(page).then(function(html) {
+            var pageContent = angular.element(html.trim());
+            var pageScope = self.createPageScope();
+            var compiledPage = self.compilePageEl(pageContent, pageScope);
+
+            self._presentPageDOM(page, compiledPage, pageScope, unlock);
+          }, function() {
+            unlock();
+            throw new Error('Page is not found: ' + page);
+          });
         });
       },
 
       dismissPage: function(){
-        if (this.screenItems.length < 2 || !this.isReady) {
+        if (this.screenItems.length < 2) {
           return;
         }
 
-        var screenItem = this.screenItems.pop();
-        var currentPage = screenItem.pageElement;
-        this.animateOutBehindPage();
-        currentPage.attr("class", "ons-screen__page-container ons-screen__page-container--transition ons-screen__page-container--unmodal");
-        var that = this;
+        var self = this;
+        this._doorLock.waitUnlock(function() {
+          var unlock = self._doorLock.lock();
 
-        currentPage.bind(TRANSITION_START, function transitionEnded() {
-          that.isReady = false;
-        });
-        currentPage.bind(TRANSITION_END, function transitionEnded() {
-          currentPage.remove();
-          that.isReady = true;
-          screenItem.pageScope.$destroy();
+          var leavePage = self.screenItems.pop();
+          var enterPage = self.screenItems[self.screenItems.length - 1];
+
+          enterPage.pageElement.css({display: 'block'});
+
+          new ModalTransitionAnimator().pop(enterPage, leavePage, function() {
+            leavePage.destroy();
+
+            unlock();
+          });
         });
       },
 
       resetToPage: function(page){
         this.scope.presentPage(page);
         for (var i = 0; i < this.screenItems.length - 1; i++) {
-          this.screenItems[i].pageElement.remove();
+          this.screenItems[i].destroy();
         }
       },
 
@@ -207,7 +288,7 @@ limitations under the License.
       scope: true,
 
       compile: function(element, attrs, transclude) {
-        var html = element.html().trim();
+        var html = $onsen.normalizePageHTML(element.html().trim());
         element.contents().remove();
 
         return function(scope, element, attrs) {
@@ -218,10 +299,11 @@ limitations under the License.
             var pageScope = screen.createPageScope();
 
             var compiled = $compile(angular.element(html))(pageScope);
-            var pageEl = screen.generatePageEl(compiled);
-            screen._presentPageDOM('', pageEl, pageScope);
+            screen._presentPageDOM('', compiled, pageScope);
           }
+
           ScreenStack.addScreen(scope);
+
           scope.$on('$destroy', function(){
             ScreenStack.removeScreen(scope);
           });

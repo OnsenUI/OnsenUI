@@ -148,6 +148,7 @@ limitations under the License.
        * @return {Boolean}
        */
       isWebView: function() {
+        //return true;
         return !!(window.cordova || window.phonegap || window.PhoneGap);
       },
 
@@ -161,6 +162,7 @@ limitations under the License.
         var result = match ? parseFloat(match[2] + '.' + match[3]) >= 7 : false;
 
         return function() {
+          //return true;
           return result;
         };
       })(),
