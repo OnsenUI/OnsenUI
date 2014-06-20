@@ -85,17 +85,37 @@ window.animit = (function(){
     /**
      * Queue transition animations or other function.
      *
+     * e.g. animit(elt).queue({color: 'red'})
+     * e.g. animit(elt).queue({color: 'red'}, {duration: 0.4})
+     * e.g. animit(elt).queue({css: {color: 'red'}, duration: 0.2})
+     *
      * @param {Object|Animit.Transition|Function} transition
+     * @param {Object} [options]
      */
-    queue: function(transition) {
+    queue: function(transition, options) {
       var queue = this.transitionQueue;
+
+      if (transition && options) {
+        options.css = transition;
+        transition = new Animit.Transition(options);
+      }
+
+      if (!(transition instanceof Function || transition instanceof Animit.Transition)) {
+        if (transition.css) {
+          transition = new Animit.Transition(transition);
+        } else {
+          transition = new Animit.Transition({
+            css: transition
+          });
+        }
+      }
 
       if (transition instanceof Function) {
         queue.push(transition);
       } else if (transition instanceof Animit.Transition) {
         queue.push(transition.build());
       } else {
-        queue.push(new Animit.Transition(transition).build());
+        throw new Error('Invalid arguments');
       }
 
       return this;
@@ -274,9 +294,9 @@ window.animit = (function(){
    */
   Animit.Transition = function(options) {
     this.options = options || {};
-    this.options.duration = options.duration || 0;
-    this.options.timing = options.timing || 'linear';
-    this.options.css = options.css || {};
+    this.options.duration = this.options.duration || 0;
+    this.options.timing = this.options.timing || 'linear';
+    this.options.css = this.options.css || {};
   };
 
   Animit.Transition.prototype = {
