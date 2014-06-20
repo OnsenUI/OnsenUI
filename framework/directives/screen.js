@@ -41,32 +41,26 @@ limitations under the License.
       var mask = this.backgroundMask.remove();
       leavePage.pageElement[0].parentNode.insertBefore(mask[0], leavePage.pageElement[0]);
 
-      var maskClear = animit(mask[0])
-        .wait(0.4)
-        .queue(function(done) {
-          mask.remove();
-          done();
-        });
-
       animit.runAll(
-        maskClear,
+
+        animit(mask[0])
+          .wait(0.4)
+          .queue(function(done) {
+            mask.remove();
+            done();
+          }),
         
         animit(enterPage.pageElement[0])
           .queue({
-            css: {
-              transform: 'translate3D(0, 100%, 0)'
-            },
-            duration: 0
+            transform: 'translate3D(0, 100%, 0)'
           })
           .queue({
-            css: {
-              transform: 'translate3D(0, 0, 0)'
-            },
+            transform: 'translate3D(0, 0, 0)'
+          }, {
             duration: 0.4,
             timing: 'cubic-bezier(.1, .7, .1, 1)'
           })
           .resetStyle()
-          .wait(0.4)
           .queue(function(done) {
             callback();
             done();
@@ -74,17 +68,13 @@ limitations under the License.
 
         animit(leavePage.pageElement[0])
           .queue({
-            css: {
-              transform: 'translate3D(0, 0, 0)',
-              opacity: 1.0
-            },
-            duration: 0
+            transform: 'translate3D(0, 0, 0)',
+            opacity: 1.0
           })
           .queue({
-            css: {
-              transform: 'translate3D(0, -10%, 0)',
-              opacity: 0.9
-            },
+            transform: 'translate3D(0, -10%, 0)',
+            opacity: 0.9
+          }, {
             duration: 0.4,
             timing: 'cubic-bezier(.1, .7, .1, 1)'
           })
@@ -108,22 +98,17 @@ limitations under the License.
 
         animit(enterPage.pageElement[0])
           .queue({
-            css: {
-              transform: 'translate3D(0, -10%, 0)',
-              opacity: 0.9
-            },
-            duration: 0
+            transform: 'translate3D(0, -10%, 0)',
+            opacity: 0.9
           })
           .queue({
-            css: {
-              transform: 'translate3D(0, 0, 0)',
-              opacity: 1.0
-            },
+            transform: 'translate3D(0, 0, 0)',
+            opacity: 1.0
+          }, {
             duration: 0.4,
             timing: 'cubic-bezier(.1, .7, .1, 1)'
           })
           .resetStyle()
-          .wait(0.4)
           .queue(function(done) {
             callback();
             done();
@@ -131,15 +116,11 @@ limitations under the License.
 
         animit(leavePage.pageElement[0])
           .queue({
-            css: {
-              transform: 'translate3D(0, 0, 0)'
-            },
-            duration: 0
+            transform: 'translate3D(0, 0, 0)'
           })
           .queue({
-            css: {
-              transform: 'translate3D(0, 100%, 0)'
-            },
+            transform: 'translate3D(0, 100%, 0)'
+          }, {
             duration: 0.4,
             timing: 'cubic-bezier(.1, .7, .1, 1)'
           })
@@ -253,7 +234,6 @@ limitations under the License.
 
           new ModalTransitionAnimator().pop(enterPage, leavePage, function() {
             leavePage.destroy();
-
             unlock();
           });
         });
