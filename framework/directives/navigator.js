@@ -3,10 +3,14 @@
  * @id navigator
  * @name ons-navigator
  * @description
- * Manages the page navigation backed by page stack.
- * @property pushPage(pageUrl, options) Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. the options object include all the attributes of this navigator but replace the hyphen '-' with camel-case letter. eg. pushPage('page2.html')
+ *  [en]Manages the page navigation backed by page stack.[/en]
+ *  [ja]ページスタックを用いてナビゲーションを管理する。[/ja]
+ * @param page First page to show when navigator is initialized
+ * @property pushPage(pageUrl, options)
+ *  [en]Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. the options object include all the attributes of this navigator but replace the hyphen '-' with camel-case letter. eg. pushPage('page2.html')[/en]
+ *  [ja]指定したpageUrlを新しいページスタックに追加します。[/ja]
  * @property popPage() Pops current page from the page stack
- * @property resetToPage(pageUrl, options) Clears page stack and add the specified pageUrl to the page stack. If options object is specified, apply the options. the options object include all the attributes of this navigator
+ * @property resetToPage(pageUrl,options) Clears page stack and add the specified pageUrl to the page stack. If options object is specified, apply the options. the options object include all the attributes of this navigator
  * @property getCurrentPage() Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method. eg. ons.navigator.getCurrentPage().options
  * @property getPages() Retrieve the entire page stages of the navigator.
  *
@@ -25,6 +29,10 @@
  * </ons-navigator>
  * @demoURL
  * OnsenUI/demo/screen/
+ */
+/**
+ * @lang ja
+ * @description
  */
 (function() {
   'use strict';

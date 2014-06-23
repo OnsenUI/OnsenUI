@@ -35,6 +35,7 @@ var shell = require('gulp-shell');
 var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync');
 var dgeni = require('dgeni');
+var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
 
 ////////////////////////////////////////
 // browser-sync
@@ -325,8 +326,21 @@ gulp.task('build-topdoc', shell.task([
 ////////////////////////////////////////
 // build-doc
 ////////////////////////////////////////
-gulp.task('build-doc', function() {
-  var generateDocs = dgeni.generator('docs/dgeni.conf.js')
-  generateDocs();
+gulp.task('build-doc-ja', function() {
+  njglobals.rootUrl = '/';
+  njglobals.lang = 'ja';
+  dgeni.generator('docs/dgeni.conf.js')();
 });
 
+gulp.task('build-doc-en', function() {
+  njglobals.rootUrl = '/';
+  njglobals.lang = 'en';
+  dgeni.generator('docs/dgeni.conf.js')();
+})
+
+gulp.task('build-doc', function() {
+  return runSequence(
+    "build-doc-ja",
+    "build-doc-en"
+  );
+});
