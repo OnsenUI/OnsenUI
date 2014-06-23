@@ -16,16 +16,39 @@
 
 <body>    
 
-  <ons-navigator>
-    <ons-toolbar>
-      <div class="center">Page 1</div>
-    </ons-toolbar>
+  <ons-tabbar>
+    <ons-tabbar-item
+      icon="home"
+      label="Page1"
+      active="true"
+      page="page1.html"
+    ></ons-tabbar-item>
 
-    <div style="text-align: center">
-      <h1>Page 1</h1>
-      <ons-button ng-click="ons.navigator.pushPage('new_page.html', { title: 'New Page' })">Push New Page</ons-button>
-    </div>
-  </ons-navigator>
+    <ons-tabbar-item
+      icon="gear"
+      label="Page2"
+      page="page2.html"
+    ></ons-tabbar-item>
+
+    <ons-tabbar-item
+      icon="star"
+      label="Page3"
+      page="page3.html"
+    ></ons-tabbar-item>
+  </ons-tabbar>
+
+  <script type="text/ons-template" id="page1.html">
+    <ons-navigator>
+      <ons-toolbar>
+        <div class="center">Page 1</div>
+      </ons-toolbar>
+
+      <div style="text-align: center">
+        <h1>Page 1</h1>
+        <ons-button ng-click="ons.navigator.pushPage('new_page.html', { title: 'New Page' })">Push New Page</ons-button>
+      </div>
+    </ons-navigator>
+  </script>
   
 </body>
 </html>
