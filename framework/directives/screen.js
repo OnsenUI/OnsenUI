@@ -181,6 +181,9 @@ limitations under the License.
           }
         };
 
+        // create stack context.
+        compiledPage.css('z-index', 0);
+
         this.screenItems.push(screenItem);
 
         if (this.screenItems.length > 1) {
