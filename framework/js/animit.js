@@ -355,6 +355,10 @@ window.animit = (function(){
             });
           });
 
+          elements.forEach(function(element) {
+            // force to update rendering
+            element.getBoundingClientRect();
+          });
 
           setTimeout(callback, 1000 / 60);
         };
