@@ -429,10 +429,10 @@ limitations under the License.
           var self = this;
           this._doorLock.waitUnlock(function() {
             var unlock = self._doorLock.lock();
+            self._currentX = 0;
 
             new SlidingMenuAnimator().close(self._abovePage, self._behindPage, {max: self._MAX}, function() {
               unlock();
-              self._currentX = 0;
             });
           });
         }
@@ -448,10 +448,10 @@ limitations under the License.
           var self = this;
           this._doorLock.waitUnlock(function() {
             var unlock = self._doorLock.lock();
+            self._currentX = self._MAX;
 
             new SlidingMenuAnimator().open(self._abovePage, self._behindPage, {max: self._MAX}, function() {
               unlock();
-              self._currentX = self._MAX;
             });
           });
         }
