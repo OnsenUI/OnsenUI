@@ -198,11 +198,9 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/sliding_menu.tpl",
-    "<div class=\"onsen-sliding-menu\">\n" +
-    "  <div ng-cloak class=\"onsen-sliding-menu__black-mask\"></div>\n" +
-    "  <div class=\"onsen-sliding-menu__behind ons-sliding-menu-inner\"></div>\n" +
-    "  <div class=\"onsen-sliding-menu__above ons-sliding-menu-inner\"></div>\n" +
-    "</div>\n" +
+    "<div ng-cloak class=\"onsen-sliding-menu__black-mask\"></div>\n" +
+    "<div class=\"onsen-sliding-menu__behind ons-sliding-menu-inner\"></div>\n" +
+    "<div class=\"onsen-sliding-menu__above ons-sliding-menu-inner\"></div>\n" +
     "");
 }]);
 })();
