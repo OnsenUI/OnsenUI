@@ -18,21 +18,26 @@
   
   <ons-screen var="app.screen">
     <ons-navigator>
-      <ons-page class="center">
+      <ons-page>
         <ons-toolbar>
           <div class="center">Screen</div>
         </ons-toolbar>
-        <h1>Page 1</h1>
-        <ons-button ng-click="app.screen.presentPage('page2.html')">Present Page 2</ons-button>
+
+        <div style="text-align: center">
+          <h1>Page 1</h1>
+          <ons-button ng-click="app.screen.presentPage('page2.html')">Present Page 2</ons-button>
+        </div>
       </ons-page>
     </ons-navigator>
   </ons-screen>
 
   <script type="text/ons-template" id="page2.html">
     <ons-navigator title="Page 2">
-      <ons-page class="center">
-        <br>
-        <ons-button ng-click="app.screen.dismissPage()">Dismiss Page</ons-button>
+      <ons-page>
+        <div style="text-align: center">
+          <br>
+          <ons-button ng-click="app.screen.dismissPage()">Dismiss Page</ons-button>
+        </div>
       </ons-page>
     </ons-navigator>
   </script>
