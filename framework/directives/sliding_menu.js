@@ -101,9 +101,8 @@ limitations under the License.
      * @param {jqLite} behindPage
      * @param {Object} options
      * @param {Number} options.x
-     * @param {Function} callback
      */
-    translate: function(abovePage, behindPage, options, callback) {
+    translate: function(abovePage, behindPage, options) {
       behindPage.css('display', 'block');
 
       var aboveTransform = this._generateAbovePageTransform(options.x);
@@ -116,8 +115,6 @@ limitations under the License.
       animit(behindPage[0])
         .queue(behindStyle)
         .play();
-
-      callback();
     },
 
     _generateAbovePageTransform: function(x) {
@@ -144,6 +141,17 @@ limitations under the License.
   module.factory('SlidingMenu', function($onsen, $compile) {
 
     var Swiper = Class.extend({
+      _scope: undefined,
+      _attrs: undefined,
+      _element: undefined,
+      _behindPage: undefined,
+      _abovePage: undefined,
+
+      _currentX: 0,
+      _startX: 0,
+
+      _doorLock: undefined,
+
       init: function(scope, element, attrs) {
         this._doorLock = new DoorLock();
 
@@ -154,7 +162,6 @@ limitations under the License.
         this._behindPage = angular.element(element[0].querySelector('.onsen-sliding-menu__behind'));
         this._abovePage = angular.element(element[0].querySelector('.onsen-sliding-menu__above'));
 
-        this._previousX = 0;
         this._MAX = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
 
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
@@ -163,11 +170,7 @@ limitations under the License.
 
         window.addEventListener('resize', this._onWindowResize.bind(this));
 
-        this._currentX = 0;
-        this._startX = 0;
-
         this._boundHandleEvent = this._handleEvent.bind(this);
-
         this._bindEvents();
 
         if (attrs.abovePage) {
@@ -423,9 +426,15 @@ limitations under the License.
         this._startX = 0;
 
         if (this._currentX !== 0) {
-          new SlidingMenuAnimator().close(this._abovePage, this._behindPage, {max: this._MAX}, function() { });
+          var self = this;
+          this._doorLock.waitUnlock(function() {
+            var unlock = self._doorLock.lock();
 
-          this._currentX = 0;
+            new SlidingMenuAnimator().close(self._abovePage, self._behindPage, {max: self._MAX}, function() {
+              unlock();
+              self._currentX = 0;
+            });
+          });
         }
       },
 
@@ -436,9 +445,15 @@ limitations under the License.
         this._startX = this._MAX;
 
         if (this._currentX != this._MAX) {
-          new SlidingMenuAnimator().open(this._abovePage, this._behindPage, {max: this._MAX}, function() { });
+          var self = this;
+          this._doorLock.waitUnlock(function() {
+            var unlock = self._doorLock.lock();
 
-          this._currentX = this._MAX;
+            new SlidingMenuAnimator().open(self._abovePage, self._behindPage, {max: self._MAX}, function() {
+              unlock();
+              self._currentX = self._MAX;
+            });
+          });
         }
       },
 
@@ -460,6 +475,9 @@ limitations under the License.
         this.toggle();
       },
 
+      /**
+       * @param {Number} x
+       */
       _translate: function(x) {
         this._currentX = x;
 
@@ -468,7 +486,7 @@ limitations under the License.
           max: this._MAX
         };
 
-        new SlidingMenuAnimator().translate(this._abovePage, this._behindPage, options, function() { });
+        new SlidingMenuAnimator().translate(this._abovePage, this._behindPage, options);
       }
     });
     return Swiper;
