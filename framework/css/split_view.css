@@ -20,15 +20,14 @@ limitations under the License.
   width: 100%;
   transform: translate3d(-10%, 0, 0);
   overflow: hidden;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
 }
 
 .onsen-split-view__main {
   overflow: hidden;
+}
+
+.onsen-split-view__secondary,
+.onsen-split-view__main {
   position: absolute;
   top: 0px;
   left: 0px;

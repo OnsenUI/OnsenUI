@@ -15,12 +15,6 @@ limitations under the License.
 
 */
 
-
-.menu {
-  z-index: -1;
-  background-color : gray;
-}
-
 .onsen-sliding-menu__black-mask, 
 .onsen-sliding-menu__behind,
 .onsen-sliding-menu__above {

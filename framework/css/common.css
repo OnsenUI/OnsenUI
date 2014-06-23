@@ -17,30 +17,15 @@ limitations under the License.
 
 @import url("font_awesome/css/font-awesome.min.css");
 
-ons-toolbar + .page__content {
-  top: 44px !important;
-}
-
 .page {
   background-color: transparent !important;
   background: transparent !important;
 }
 
-.page__statusbar-fill + ons-toolbar + .page__content {
-  top: 64px !important;
-}
-
 .page__statusbar-fill + .page__content {
-  top: 20px !important;
+  padding-top: 20px;
 }
 
-.page__content::before {
-  position: absolute;
-  width: 100%;
-  background-color: inherit;
-  background: inherit;
-  height: 20px;
-  top: -20px;
-  content: '';
+.page__statusbar-fill + ons-toolbar + .page__content {
+  padding-top: 64px;
 }
-
