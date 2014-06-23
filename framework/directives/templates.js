@@ -173,9 +173,8 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/scroller.tpl",
-    "<div class=\"ons-scroller page\" ons-scrollable>\n" +
-    "  <div class=\"ons-scroller__content ons-scroller-inner\" ng-transclude>\n" +
-    "  </div>\n" +
+    "<div class=\"ons-scroller\" ons-scrollable>\n" +
+    "  <div class=\"ons-scroller__content ons-scroller-inner\" ng-transclude></div>\n" +
     "</div>\n" +
     "");
 }]);
