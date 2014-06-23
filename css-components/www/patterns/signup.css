@@ -1,0 +1,36 @@
+.margin-little {
+    margin: 4px;
+}
+
+.width-full {
+    width: 100%;
+}
+
+.width-half {
+    width: 48%;
+}
+
+.lucent {
+    opacity: 0.4;
+}
+
+.note {
+    margin: 12px 8px;
+    font-size: 13px;
+}
+
+.vspc {
+    margin-top: 20px;
+}
+
+.formarea {
+    width: 90%;
+    margin: 50px auto 0px auto;
+}
+
+input[type=text],
+input[type=password] {
+    height: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

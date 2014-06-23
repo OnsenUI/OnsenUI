@@ -25,6 +25,8 @@ limitations under the License.
       replace: true,
       transclude: false,
       link: function(scope, element, attrs) {
+        element.css('overflow-y', 'scroll');
+
         // inifinte scroll
 
         var scrollWrapper;

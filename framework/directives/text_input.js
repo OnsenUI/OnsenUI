@@ -22,7 +22,7 @@
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
       link: function($scope, element, attrs) {
-        element.addClass($onsen.generateModifierTemplater(attrs)('topcoat-text-input--*'));
+        element.addClass($onsen.generateModifierTemplater(attrs)('text-input--*'));
 
         $scope.$watch(function() {
           return $scope.disabled;

@@ -6,7 +6,7 @@
   <title>Demo Index | Onsen UI</title>  
   <link rel="stylesheet" href="styles/app.css"/>
   <link rel="stylesheet" href="../build/css/onsenui.css">  
-  <link rel="stylesheet" href="../build/css/topcoat-mobile-onsen-ios7.css">  
+  <link rel="stylesheet" href="../build/css/onsen-css-components.css">  
 
   <script src="../build/js/angular/angular.js"></script>    
   <script src="../build/js/onsenui.js"></script>    
@@ -28,7 +28,6 @@
           {href : 'navigator/', name : 'Navigator'},
           {href : 'navigator_inside_tabbar/', name : 'Navigator inside Tabbar'},
           {href : 'navigator_reset/', name : 'Navigator Reset'},
-          {href : 'ons_get/', name : 'ons_get'},
           {href : 'page/', name : 'page'},
           {href : 'radio_button/', name : 'Radio Button'},
           {href : 'screen/', name : 'Screen'},
@@ -57,8 +56,8 @@
         <div class="center">Demo</div>
       </ons-toolbar>
       <ons-list>
-        <ons-list-item class="topcoat-list__item--tappable" ng-repeat="demo in demoList">
-          <div class="topcoat-list__item__line-height" ng-click="go(demo)">
+        <ons-list-item class="list__item--tappable" ng-repeat="demo in demoList">
+          <div class="list__item__line-height" ng-click="go(demo)">
             {{demo.name}}
           </div>
         </ons-list-item>

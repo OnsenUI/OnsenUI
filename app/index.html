@@ -6,9 +6,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <title>My App</title>  
+
   <link rel="stylesheet" href="styles/app.css"/>
   <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
-  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">  
+  <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">  
 
   <script src="lib/onsen/js/angular/angular.js"></script>    
   <script src="lib/onsen/js/onsenui.js"></script>    
@@ -42,11 +43,17 @@
       <ons-toolbar>
         <div class="left"></div>
         <div class="center">{{pageTitle}}</div>
-        <div class="right"></div> 
+        <div class="right"><ons-toolbar-button>hoge</ons-toolbar-button></div> 
       </ons-toolbar>
 
-      <ons-button onclick="navi.pushPage('page2.html')">Push Page</ons-button>
+      <div style="text-align: center">
+        <br>
+        <ons-button onclick="navi.pushPage('page2.html')">Push Page</ons-button>
+      </div>
 
+      <ons-bottom-toolbar>
+        <div class="bottom-bar__line-height" style="text-align: center;">Bottom toolbar</div>
+      </ons-bottom-toolbar>
     </ons-page>
   </ons-navigator>
 
@@ -57,12 +64,11 @@
       <div class="right"></div>
     </ons-toolbar>
 
-    <center>
-      <h1>Page 2</h1>
-
+    <div style="text-align: center">
+      <br>
       <ons-button onclick="navi.popPage()">Pop</ons-button>
       <ons-button onclick="navi.pushPage('page2.html')">Push</ons-button>
-    </center>
+    </div>
   </script>
  
 </body>

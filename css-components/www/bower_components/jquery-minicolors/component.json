@@ -1,0 +1,19 @@
+{
+    "name"         : "jquery-minicolors",
+    "version"      : "2.1.1",
+    "description"  : "jQuery MiniColors Plugin",
+    "homepage"     : "",
+    "main"         : [ "./jquery.minicolors.js", "./jquery.minicolors.css" ],
+    "dependencies" : {
+        "jquery" : ">= 1.7.x"
+    },
+    "keywords"     : [
+    ],
+    "author" : {
+        "name" : "Cory LaViska",
+        "web"  : "http://www.abeautifulsite.net/"
+    },
+    "license": [
+        "http://www.opensource.org/licenses/mit-license.php"
+    ]
+}

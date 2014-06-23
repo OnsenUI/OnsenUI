@@ -49,6 +49,24 @@ limitations under the License.
         return cache;
       })(),
 
+      // Find first ancestor of el with tagName
+      // or undefined if not found
+      upTo : function(el, tagName) {
+        tagName = tagName.toLowerCase();
+
+        do {
+          if (!el) {
+            return null;
+          }
+          el = el.parentNode;
+          if (el.tagName.toLowerCase() == tagName) {
+            return el;
+          }
+        } while (el.parentNode);
+
+        return null;
+      },
+
       /**
        * @param {String} page
        * @return {Promise}

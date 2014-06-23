@@ -20,14 +20,14 @@
 
   function firePageInitEvent(pageContainer) {
     function findPageDOM() {
-      if (angular.element(pageContainer).hasClass('topcoat-page')) {
+      if (angular.element(pageContainer).hasClass('page')) {
         return pageContainer;
       }
 
-      var result = pageContainer.querySelector('.topcoat-page');
+      var result = pageContainer.querySelector('.page');
 
       if (!result) {
-        throw new Error('An element of "topcoat-page" class is not found.');
+        throw new Error('An element of "page" class is not found.');
       }
 
       return result;
@@ -56,15 +56,11 @@
         }
         
         element.remove();
-        $element.prepend(element);
-
-        if ($onsen.isWebView() && $onsen.isIOS7Above()) {
-          // Adjustments for IOS7
-          var wrapper = $element[0].querySelector('.topcoat-page__content');
-          angular.element(wrapper).css({
-            'top': '22px',
-            'paddingTop': null
-          });
+        var statusFill = $element[0].querySelector('.page__statusbar-fill');
+        if (statusFill) {
+          angular.element(statusFill).after(element);
+        } else {
+          $element.prepend(element);
         }
 
         this.toolbarElement = element;
@@ -84,13 +80,13 @@
       this.getContentElement = function() {
         for (var i = 0; i < $element.length; i++) {
           if ($element[i].querySelector) {
-            var content = $element[i].querySelector('.topcoat-page__content');
+            var content = $element[i].querySelector('.page__content');
             if (content) {
               return content;
             }
           }
         }
-        throw Error('fail to get ".topcoat-page__content" element.');
+        throw Error('fail to get ".page__content" element.');
       };
 
       /**
@@ -147,24 +143,22 @@
       compile: function(element) {
         if ($onsen.isWebView() && $onsen.isIOS7Above()) {
           // Adjustments for IOS7
-          element.css('paddingTop', '20px');
+          element.prepend(angular.element('<div class="page__statusbar-fill"></div>'));
         }
 
         return {
 
           pre: function(scope, element, attrs, controller, transclude) {
             var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-            element.addClass('topcoat-page ' + modifierTemplater('topcoat-page--*') + ' ons-page-inner');
+            element.addClass('page ' + modifierTemplater('page--*'));
 
             transclude(scope, function(clonedElement) {
-              var wrapper = angular.element('<div class="topcoat-page__content"></div>');
-              element.append(wrapper);
+              var content = angular.element('<div class="page__content ons-page-inner"></div>');
+              content.addClass(modifierTemplater('page--*__content'));
+              content.css({zIndex: 0});
+              element.append(content);
 
-              if ($onsen.isWebView() && $onsen.isIOS7Above()) {
-                // Adjustments for IOS7
-                wrapper.css('paddingTop', '20px');
-              }
-              wrapper.append(clonedElement);
+              content.append(clonedElement);
             });
           },
 

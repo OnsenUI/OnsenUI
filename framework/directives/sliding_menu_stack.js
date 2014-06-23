@@ -1,7 +1,7 @@
 (function() {
   var module = angular.module('onsen');
 
-  module.factory('SlidingMenuStack', function($rootScope) {
+  module.factory('SlidingMenuStack', function($rootScope, $onsen) {
     var SlidingMenuStack = Class.extend({
       slidingMenus: [],
 
@@ -18,7 +18,7 @@
       _findClosestSlidingMenu: function($event) {
         var slidingMenu;
         if ($event) {
-          var slidingMenuElement = $rootScope.ons.upTo($event.target, 'ons-sliding-menu');
+          var slidingMenuElement = $onsen.upTo($event.target, 'ons-sliding-menu');
           slidingMenu = angular.element(slidingMenuElement).isolateScope();
         } else {
           slidingMenu = this.slidingMenus[this.slidingMenus.length - 1];

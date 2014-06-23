@@ -1,0 +1,35 @@
+div.float-left {
+    float: left;
+    text-align: center;
+}
+
+.margin-top-adjust {
+    margin-top: -1px;
+}
+
+.list-item-left {
+    display: inline-block;
+    width: 10%;
+    text-align: center;
+}
+
+.list-item-center {
+    display: inline-block;
+    width: 75%;
+    text-align: center;
+}
+
+.range-center {
+    width: 100%;
+    vertical-align: -10px;
+}
+
+.list-item-right {
+    display: inline-block;
+    width: 10%;
+    text-align: center;
+}
+
+.lower {
+    opacity: 0.4;
+}

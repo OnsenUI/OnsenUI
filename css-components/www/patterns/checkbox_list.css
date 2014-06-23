@@ -1,0 +1,21 @@
+.wrapper-label {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 12px 0 12px 0;
+}
+
+.margin-top-adjuster {
+    margin-top: -1px;
+}
+
+.checkbox-list-left-section {
+    display: inline-block;
+    width: 50%;
+}
+
+.checkbox-list-right-section {
+    display: inline-block;
+    text-align: center;
+    margin-left: 5px;
+}

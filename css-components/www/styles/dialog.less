@@ -1,0 +1,761 @@
+
+div.dialog-mask, div.inspector-background-mask {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 99;
+
+  // show-animation begin
+  &.ng-hide-remove {
+    opacity: 0;
+    transition: 0.2s linear all;
+    display: block !important;
+  }
+
+  // show-animation end
+  &.ng-hide-remove-active {
+    opacity: 1;
+  }
+
+  // hide-animation begin
+  &.ng-hide-add {
+    opacity: 1;
+    transition: 0.2s linear all;
+    display: block !important;
+  }
+
+  // hide-animation end
+  &.ng-hide-add-active {
+    opacity: 0;
+  }
+
+  &.uninitialized {
+    display: none;
+  }
+}
+
+div.inspector-background-mask {
+  z-index: 7;
+}
+
+div.dialog-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+
+  > div.dialog {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.2);
+    height: 100%;
+    box-sizing: border-box;
+    padding: 16px;
+    background-clip: padding-box;
+    color: #666;
+    border-radius: 6px;
+    font-size: 16px;
+
+    // show-animation begin
+    &.ng-hide-remove {
+      opacity: 0;
+      transition: 0.1s ease-in all;
+      transform: scale(0.9);
+      display: block !important;
+    }
+
+    // show-animation end
+    &.ng-hide-remove-active {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    > img.close {
+      float: right;
+      cursor: pointer;
+      margin: -3px -3px 0 0;
+      &:focus {
+        outline: 0;
+        margin: 0;
+        padding: 0;
+      }
+      &:active {
+        opacity: 0.6;
+      }
+    }
+
+    div.side-image-container {
+      float: left;
+      margin: 10px 20px 20px 10px;
+    }
+
+    > h2 {
+      font-size: 20px;
+      color: #333;
+      font-weight: 400;
+      padding-bottom: 8px;
+    }
+
+    > .dialog-content {
+
+    }
+
+    > footer {
+      line-height: 50px;
+      button {
+        line-height: 38px;
+        height: 38px;
+        padding: 0 18px;
+        font-size: 18px;
+      }
+      .right-button {
+        float: right;
+      }
+    }
+  }
+}
+
+div.welcome-dialog-container {
+  min-height: 480px;
+  width:560px;
+
+  > div.welcome-dialog {
+    > div.welcome-text {
+      background: url(../images/onsenui-welcome.png) left center no-repeat;
+      padding-left: 90px;
+
+      strong {
+        font-weight: 500;
+      }
+    }
+    footer {
+      height: 38px;
+      margin: 20px 0 0 0;
+      .right-button {
+        float: right;
+      }
+      .site-button:not(.right-button) {
+        float: left;
+      }
+    }
+  }
+}
+
+div.thankyou-dialog-container {
+  width: 600px;
+  min-height: 396px;
+
+  div.downloading {
+    text-align: center;
+    font-size: 14px;
+    color: #bbb;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0 20px 0;
+    margin: 0 0 20px 0;
+
+    > p {
+      font-size: 14px;
+      a, a:hover, a:active {
+        color: #bbb;
+        font-size: 14px;
+      }
+    }
+
+  }
+}
+
+div.share-dialog-container {
+  width: 600px;
+  min-height: 320px;
+}
+
+div.html-dialog-container {
+  width: auto;
+  height: auto;
+  top: 60px;
+  bottom: 60px;
+  width: 1200px;
+  max-height: 900px;
+  transform: translateX(-50%);
+
+  > div.html-dialog {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+
+    > div.css-container {
+      position: absolute;
+      border-left: 1px solid #ddd;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      width: 35%;
+      right: 0;
+      top: 50px;
+      bottom: 50px;
+
+      .codemirror-container {
+        height: 100%;
+      }
+
+      .CodeMirror {
+        height: 100%;
+      }
+    }
+
+    > div.html-container {
+      box-sizing: border-box;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      position: absolute;
+      top: 50px;
+      width: 65%;
+      left: 0px;
+      bottom: 50px;
+
+      .CodeMirror {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+        height: auto;
+      }
+    }
+
+    footer {
+      position: absolute;
+      bottom: 0px;
+      height: 50px;
+      left: 20px;
+      right: 20px;
+      line-height: 50px;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+div.component-dialog-container {
+  width: auto;
+  height: auto;
+  top: 60px;
+  bottom: 60px;
+  width: 1200px;
+  max-height: 900px;
+  transform: translateX(-50%);
+
+  &.uninitialized {
+    display: block !important;
+    > div {
+      display: block !important;
+    }
+  }
+
+  > div.component-dialog {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+
+    > footer {
+      position: absolute;
+      bottom: 0px;
+    }
+
+    > div.component-dialog-content {
+      margin: 0;
+      padding: 0;
+
+      position: absolute;
+      top: 50px;
+      bottom: 50px;
+      left: 0px;
+      right: 0px;
+
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      box-sizing: border-box;
+
+      > div.preview-container {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 320px;
+        height: 150px;
+
+        > h3 {
+          margin-left: 10px;
+        }
+
+        > div.preview {
+          height: 100%;
+          position: relative;
+          overflow: hidden;
+          position: absolute;
+          top: 0px;
+          right: 0px;
+          bottom: 0px;
+          left: 0px;
+
+          > iframe {
+            width: 320px;
+            height: 100%;
+          }
+        }
+      }
+
+      > div.html-container {
+        box-sizing: border-box;
+        height: 150px;
+        position: absolute;
+        border-left: 1px solid #DDD;
+        top: 0px;
+        left: 320px;
+        right: 0px;
+
+        .CodeMirror {
+          position: absolute;
+          top: 36px;
+          right: 0px;
+          left: 0px;
+          bottom: 0px;
+          height: auto;
+        }
+      }
+
+      > div.css-container {
+        border-top: 1px solid #ddd;
+        position: absolute;
+        top: 150px;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+        box-sizing: border-box;
+
+        .CodeMirror {
+          position: absolute;
+          top: 36px;
+          right: 0px;
+          left: 0px;
+          bottom: 0px;
+          height: auto;
+        }
+      }
+
+      h3 {
+        font-size: 18px;
+        font-weight: 200;
+        display: inline-block;
+        margin: 8px 0px 4px 16px;
+      }
+
+      .copy {
+        font-size: 16px;
+        float: right;
+        margin: 8px 8px 0 0;
+        color: #ff1a33;
+        font-weight: 200;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+    }
+
+  }
+}
+
+div.color-picker-popup-mask {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: transparent;
+  z-index: 99;
+}
+
+div.color-picker-popup {
+  width: 220px;
+  height: 215px;
+  box-sizing: border-box;
+  padding: 12px;
+  position: absolute;
+  top: 0px;
+  left: 300px;
+  z-index: 100;
+  text-align: right;
+  opacity: 1;
+  transform: translateY(0px);
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: white;
+  background-clip: padding-box;
+  border-radius: 6px;
+  margin: 10px 0 0 -200px;
+
+  &.flipped {
+    margin: -225px 0 0 -200px;
+
+    &:after {
+      bottom: -7px;
+      top: auto;
+      right: 14px;
+      background-color: white;
+      border-top: 1px solid rgba(0, 0, 0, 0.15);
+      border-left: 1px solid rgba(0, 0, 0, 0.15);
+      transform: rotate(-135deg);
+    }
+  }
+
+  &:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: -7px;
+    right: 14px;
+    background-color: white;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    border-left: 1px solid rgba(0, 0, 0, 0.15);
+    transform: rotate(45deg);
+  }
+
+  > img.close {
+    cursor: pointer;
+    float: left;
+    &:active {
+      opacity: 0.6;
+    }
+  }
+
+  > input[type=text] {
+    border: 1px solid #ddd;
+    font-size: 15px;
+    color: #333;
+    height: 26px;
+    line-height: 26px;
+    display: inline-block;
+    margin: 2px 0 5px 0;
+    width: 160px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  // show-animation begin
+  &.ng-hide-remove {
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: 0.05s linear all;
+    display: block !important;
+  }
+
+  // show-animation end
+  &.ng-hide-remove-active {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+div.popup-mask {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 90;
+
+  // show-animation begin
+  &.ng-hide-remove {
+    opacity: 0;
+    transition: 0.2s linear all;
+    display: block !important;
+  }
+
+  // show-animation end
+  &.ng-hide-remove-active {
+    opacity: 1;
+  }
+
+  // hide-animation begin
+  &.ng-hide-add {
+    opacity: 1;
+    transition: 0.2s linear all;
+    display: block !important;
+  }
+
+  // hide-animation end
+  &.ng-hide-add-active {
+    opacity: 0;
+  }
+
+  &.uninitialized {
+    display: none;
+  }
+}
+
+div.popup-container {
+  position: absolute;
+  width: 400px;
+  z-index: 90;
+
+  // default
+  &.right-top-position {
+    transform: translateY(-100%) translateX(-26px) translateY(-8px);
+    > div.popup:after {
+      transform: rotate(-45deg);
+      bottom: -7px;
+      left: 20px;
+    }
+  }
+
+  &.right-bottom-position {
+    transform: translateX(-26px) translateY(8px);
+    > div.popup:after {
+      transform: rotate(135deg);
+      top: -7px;
+      left: 20px;
+    }
+  }
+
+  &.left-top-position {
+    transform: translateY(-100%) translateX(26px) translateY(-8px);
+    > div.popup:after {
+      transform: rotate(-45deg);
+      bottom: -7px;
+      right: 20px;
+    }
+  }
+
+  &.left-bottom-position {
+    transform: translateX(26px) translateY(8px);
+    > div.popup:after {
+      transform: rotate(135deg);
+      top: -7px;
+      right: 20px;
+    }
+  }
+
+  &.newsletter-popup-container {
+    transform: translateY(-8px) translateX(26px);
+    z-index: 22;
+    right: 400px;
+    width: 600px;
+    bottom: 50px;
+
+    > div.popup {
+      z-index: 23;
+      padding: 0;
+
+      > img.close {
+        padding: 12px;
+      }
+
+      > h2 {
+        padding: 12px;
+      }
+
+      > div.message {
+        margin-top: 10px;
+        height: 120px;
+        padding-left: 230px;
+        background: url(../images/team.png) left bottom no-repeat;
+        margin-left: 0px;
+      }
+      > div.subscribe-form {
+        background-color: #eee;
+        margin: 0 0 12px 0;
+        padding: 12px;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+
+        button.site-button {
+          background-color: #3d4957;
+          color: #fff;
+          height: 40px;
+          font-size: 20px;
+          line-height: 40px;
+        }
+      }
+    }
+    > div.popup:after {
+      z-index: 22;
+      transform: rotate(-45deg);
+      bottom: -7px;
+      right: 20px;
+    }
+
+  }
+
+  > div.popup {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.2);
+    height: 100%;
+    box-sizing: border-box;
+    padding: 14px 12px 8px 12px;
+    background-clip: padding-box;
+    background-color: white;
+    color: #666;
+
+    padding: 16px;
+    border-radius: 6px;
+    font-size: 16px;
+
+    &:after {
+      background-clip: padding-box;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      border-left: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 0px 0px 0px 0px;
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background-color: white;
+    }
+
+    // show-animation begin
+    &.ng-hide-remove {
+      opacity: 0;
+      transition: 0.2s ease-in all;
+      transform: translateY(-5px);
+      display: block !important;
+    }
+
+    // show-animation end
+    &.ng-hide-remove-active {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+
+    > img.close {
+      float: right;
+      cursor: pointer;
+      margin: -3px -3px 0 0;
+      &:focus {
+        outline: 0;
+        margin: 0;
+        padding: 0;
+      }
+      &:active {
+        opacity: 0.6;
+      }
+    }
+
+    > h2 {
+      font-size: 20px;
+      color: #333;
+      font-weight: 400;
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 18px;
+      color: #333;
+      font-weight: 500;
+      padding-bottom: 8px;
+    }
+
+    > .popup-content {
+
+    }
+
+    > footer {
+      line-height: 50px;
+      button {
+        line-height: 38px;
+        height: 38px;
+        padding: 0 18px;
+        font-size: 18px;
+        float: right;
+      }
+      min-height: 38px;
+      .right-button {
+        float: right;
+      }
+    }
+  }
+}
+
+.guide-mask {
+  position: absolute;
+  z-index: 30;
+  top: 0px;
+  width: 6000px;
+  height: 6000px;
+  background-image: url(../images/mask.svg);
+
+  &.right-position {
+    transform: translateX(3000px) translateY(-3000px);
+    right: 0px;
+  }
+
+  &.left-position {
+    transform: translateX(-3000px) translateY(-3000px);
+    right: 0px;
+  }
+
+  &.uninitialized {
+    display: none;
+  }
+
+  &.last-guide-mask {
+    // hide-animation begin
+    &.ng-hide-add {
+      opacity: 1;
+      transition: 0.2s linear all;
+      display: block !important;
+    }
+
+    // hide-animation end
+    &.ng-hide-add-active {
+      opacity: 0;
+    }
+  }
+}
+
+div.dialog, div.popup {
+  div.highlight-content {
+    clear: both;
+    background-color: #eee;
+    margin: 12px 0;
+    padding: 12px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    margin: 0 -16px;
+
+    input[type=text].site,
+    input[type=email].site {
+      border: 2px solid #bbb;
+      padding: 0 5px;
+      height: 40px;
+      font-size: 20px;
+      box-sizing: border-box;
+      line-height: 40px;
+      font-weight: 300;
+    }
+
+    button.site-button {
+      background-color: #3d4957;
+      color: #fff;
+      height: 40px;
+      font-size: 20px;
+      line-height: 40px;
+      box-sizing: border-box;
+    }
+  }
+}
+

@@ -38,9 +38,7 @@
       container.innerHTML = '&nbsp;';
     }
 
-    angular.element(container)
-      .addClass('topcoat-navigation-bar__item left quarter')
-      .css('float', 'left');
+    angular.element(container).addClass('navigation-bar__left');
 
     return container;
   }
@@ -58,8 +56,7 @@
     }
 
     angular.element(container)
-      .addClass('topcoat-navigation-bar__item center half topcoat-navigation-bar__title')
-      .css('float', 'left');
+      .addClass('navigation-bar__title navigation-bar__center');
 
     return container;
   }
@@ -77,9 +74,7 @@
       container.innerHTML = '&nbsp;';
     }
 
-    angular.element(container)
-      .addClass('topcoat-navigation-bar__item right quarter')
-      .css('float', 'left');
+    angular.element(container).addClass('navigation-bar__right');
 
     return container;
   }
@@ -116,8 +111,8 @@
 
         var modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
-        element.addClass('topcoat-navigation-bar');
-        element.addClass(modifierTemplater('topcoat-navigation-bar--*'));
+        element.addClass('navigation-bar');
+        element.addClass(modifierTemplater('navigation-bar--*'));
         element.css({
           'position': 'absolute',
           'z-index': '10000',

@@ -1,7 +1,7 @@
 (function() {
   var module = angular.module('onsen');
 
-  module.factory('TabbarStack', function($rootScope) {
+  module.factory('TabbarStack', function($rootScope, $onsen) {
     var TabbarStack = Class.extend({
       tabbars: [],
 
@@ -15,7 +15,7 @@
 
         var tabbar;
         if ($event) {
-          var tabbarElement = $rootScope.ons.upTo($event.target, 'ons-tabbar');
+          var tabbarElement = $onsen.upTo($event.target, 'ons-tabbar');
           tabbar = angular.element(tabbarElement).isolateScope();
         } else {
           tabbar = this.tabbars[this.tabbars.length - 1];

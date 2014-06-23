@@ -317,7 +317,7 @@ a {
     padding: 10px;
 }
 
-.topcoat-button--large--cta:active {
+.button--large--cta:active {
     background-color:#000000; 
     color:#FFFFFF; 
 }

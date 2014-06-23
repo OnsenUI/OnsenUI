@@ -24,11 +24,11 @@
 
       <ons-list-item class="no-wrap iso7-no-active zoom" ng-repeat="todo in todos">
         <ons-row>
-          <ons-col align="center" class="left topcoat-list__item__line-height">
+          <ons-col align="center" class="left list__item__line-height">
             {{todo.text}}
           </ons-col>
-          <ons-col size="20"  class="topcoat-list__item__line-height center">
-            <span class="topcoat-icon-button--quiet" ng-click="removeTodo($index)">
+          <ons-col size="20"  class="list__item__line-height center">
+            <span class="icon-button--quiet" ng-click="removeTodo($index)">
               <i class="fa fa-times" style="font-size: 24px"></i>
             </span>
           </ons-col>

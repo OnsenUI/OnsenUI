@@ -1,1 +1,1 @@
-<textarea class="topcoat-textarea"></textarea>
+<textarea class="textarea"></textarea>

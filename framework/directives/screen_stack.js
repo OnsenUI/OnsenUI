@@ -1,7 +1,7 @@
 (function() {
   var module = angular.module('onsen');
 
-  module.factory('ScreenStack', function($rootScope) {
+  module.factory('ScreenStack', function($rootScope, $onsen) {
     var ScreenStack = Class.extend({
       screens: [],
 
@@ -17,7 +17,7 @@
         // finding the right navigator
         var screen;
         if ($event) {
-          var screenElement = $rootScope.ons.upTo($event.target, 'ons-screen');
+          var screenElement = $onsen.upTo($event.target, 'ons-screen');
           screen = angular.element(screenElement).isolateScope();
         } else {
           screen = this.screens[this.screens.length - 1];

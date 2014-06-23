@@ -1,0 +1,66 @@
+<div class="guide-mask right-position uninitialized" ng-show="guide.index == 1" style="right: 254px; top: 183px;"></div>0
+<div class="popup-container left-bottom-position" style="left: auto; right: 254px; top: 203px;" ng-show="guide.index == 1">
+  <div class="popup" ng-show="guide.index == 1">
+
+    <h2 translate>T_GUIDE1_TITLE</h2>
+
+    <p translate>T_GUIDE1_DESC</p>
+
+    <footer><button class="site-button right-button" ng-click="guide.next()"><strong translate>T_NEXT</strong></button></footer>
+  </div>
+</div>
+
+<div class="guide-mask right-position uninitialized" ng-show="guide.index == 2" style="right: 34px; top: 360px;"></div>
+<div class="popup-container left-bottom-position" style="right: 34px; top: 380px;" ng-show="guide.index == 2">
+  <div class="popup" ng-show="guide.index == 2">
+
+    <h2 translate>T_GUIDE2_TITLE</h2>
+
+    <p translate>T_GUIDE2_DESC</p>
+
+    <footer><button class="site-button right-button" ng-click="guide.next()"><strong translate>T_NEXT</strong></button></footer>
+  </div>
+</div>
+
+<div class="guide-mask left-position uninitialized" ng-show="guide.index == 3" style="left: 660px; top: 36px;"></div>
+<div class="popup-container right-bottom-position" style="left: 610px; top: 66px;"ng-show="guide.index == 3">
+  <div class="popup" ng-show="guide.index == 3">
+
+    <h2 translate>T_GUIDE3_TITLE</h2>
+
+    <p translate>T_GUIDE3_DESC</p>
+
+    <footer><button class="site-button right-button" ng-click="guide.next()"><strong translate>T_NEXT</strong></button></footer>
+  </div>
+</div>
+
+<div class="guide-mask right-position uninitialized" ng-show="guide.index == 4" style="right: 380px; top: 113px;"></div>
+<div class="popup-container left-bottom-position" style="right: 330px; top: 133px;" ng-show="guide.index == 4">
+  <div class="popup" ng-show="guide.index == 4">
+
+    <h2 translate>T_GUIDE4_TITLE</h2>
+
+    <p translate>T_GUIDE4_DESC</p>
+
+    <footer><button class="site-button right-button" ng-click="guide.next()"><strong translate>T_NEXT</strong></button></footer>
+  </div>
+</div>
+
+<div class="guide-mask left-position last-guide-mask uninitialized" ng-show="guide.index == 5" style="left: 195px; top: 113px;"></div>
+<div class="popup-container right-bottom-position" style="left: 195px; top: 133px;" ng-show="guide.index == 5">
+  <div class="popup" ng-show="guide.index == 5">
+
+    <h2 translate>T_GUIDE5_TITLE</h2>
+
+    <p translate>T_GUIDE5_DESC</p>
+
+    <footer><button class="site-button right-button" ng-click="guide.hide(); showNewsletterPopup();"><strong>OK</strong></button></footer>
+  </div>
+</div>
+
+
+<script>
+  $(function() {
+    $('.uninitialized').removeClass('uninitialized');
+  });
+</script>

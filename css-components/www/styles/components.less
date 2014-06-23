@@ -1,0 +1,67 @@
+
+div#components-container {
+  overflow: auto;
+  padding: 40px 10px 0px 10px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  box-sizing: border-box;
+
+  > ul#components {
+    margin: 0;
+    padding: 0;
+    width: auto;
+    font-size: 0px;
+
+    > li {
+      margin: 0 8px 34px 8px;
+      padding: 0;
+      list-style: none;
+      display: inline-block;
+      width: 320px;
+
+      > h3 {
+        font-size: 18px;
+        font-weight: 300;
+        color: white;
+      }
+
+      > div.component-preview {
+        margin-top: 3px;
+        height: 80px;
+        text-align: center;
+        vertical-align: middle;
+        position: relative;
+        overflow: hidden;
+        background-color: white;
+        cursor: pointer;
+        border-radius: 3px;
+        width: 320px;
+        position: relative;
+        cursor: pointer;
+
+        &:hover {
+          transition: opacity 0.1s linear;
+          opacity: 0.8;
+        }
+
+        > div.component-preview-mask {
+          position: absolute;
+          z-index: 2;
+          top: 0px;
+          right: 0px;
+          left: 0px;
+          bottom: 0px;
+        }
+
+        > iframe {
+          width: 320px;
+          height: 80px;
+        }
+      }
+    }
+  }
+}
+

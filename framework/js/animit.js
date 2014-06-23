@@ -30,15 +30,26 @@ window.animit = (function(){
       return new Animit(element);
     }
 
-    this.element = element;
-    this.transitionQueue = [];
-
-    if (!element.hasAttribute('data-animit-orig-style')) {
-      this.lastStyleAttribute = element.getAttribute('style');
-      element.setAttribute('data-animit-orig-style', this.lastStyleAttribute || '');
+    if (element instanceof HTMLElement) {
+      this.elements = [element]
+    } else if (Object.prototype.toString.call(element) === '[object Array]') {
+      this.elements = element;
     } else {
-      this.lastStyleAttribute = element.getAttribute('data-animit-orig-style');
+      throw new Error('First argument must be an array or an instance of HTMLElement.');
     }
+
+    this.transitionQueue = [];
+    this.lastStyleAttributeDict = [];
+
+    var self = this;
+    this.elements.forEach(function(element, index) {
+      if (!element.hasAttribute('data-animit-orig-style')) {
+        self.lastStyleAttributeDict[index] = element.getAttribute('style');
+        element.setAttribute('data-animit-orig-style', self.lastStyleAttributeDict[index] || '');
+      } else {
+        self.lastStyleAttributeDict[index] = element.getAttribute('data-animit-orig-style');
+      }
+    });
   };
 
   Animit.prototype = {
@@ -74,17 +85,37 @@ window.animit = (function(){
     /**
      * Queue transition animations or other function.
      *
+     * e.g. animit(elt).queue({color: 'red'})
+     * e.g. animit(elt).queue({color: 'red'}, {duration: 0.4})
+     * e.g. animit(elt).queue({css: {color: 'red'}, duration: 0.2})
+     *
      * @param {Object|Animit.Transition|Function} transition
+     * @param {Object} [options]
      */
-    queue: function(transition) {
+    queue: function(transition, options) {
       var queue = this.transitionQueue;
+
+      if (transition && options) {
+        options.css = transition;
+        transition = new Animit.Transition(options);
+      }
+
+      if (!(transition instanceof Function || transition instanceof Animit.Transition)) {
+        if (transition.css) {
+          transition = new Animit.Transition(transition);
+        } else {
+          transition = new Animit.Transition({
+            css: transition
+          });
+        }
+      }
 
       if (transition instanceof Function) {
         queue.push(transition);
       } else if (transition instanceof Animit.Transition) {
         queue.push(transition.build());
       } else {
-        queue.push(new Animit.Transition(transition).build());
+        throw new Error('Invalid arguments');
       }
 
       return this;
@@ -124,14 +155,19 @@ window.animit = (function(){
         var transitionStyle = 'transition: ' + transitionValue + '; -' + Animit.prefix + '-transition: ' + transitionValue + ';';
 
         this.transitionQueue.push(function(done) {
+          var elements = this.elements;
 
-          this.element.style[Animit.prefix + 'Transition'] = transitionValue;
-          this.element.style.transition = transitionValue;
+          // transition and style settings
+          elements.forEach(function(element, index) {
+            element.style[Animit.prefix + 'Transition'] = transitionValue;
+            element.style.transition = transitionValue;
 
-          var styleValue = (self.lastStyleAttribute ? self.lastStyleAttribute + '; ' : '') + transitionStyle;
-          this.element.setAttribute('style', styleValue);
+            var styleValue = (self.lastStyleAttributeDict[index] ? self.lastStyleAttributeDict[index] + '; ' : '') + transitionStyle;
+            element.setAttribute('style', styleValue);
+          });
 
-          var removeListeners = util.addOnTransitionEnd(this.element, function() {
+          // add "transitionend" event handler
+          var removeListeners = util.addOnTransitionEnd(elements[0], function() {
             clearTimeout(timeoutId);
             reset();
             done();
@@ -142,7 +178,7 @@ window.animit = (function(){
             removeListeners();
             reset();
             done();
-          }, options.duration * 1000 * 1.1);
+          }, options.duration * 1000 * (elements[0] ? 1.1 : 1));
         });
       } else {
         this.transitionQueue.push(function(done) {
@@ -155,15 +191,17 @@ window.animit = (function(){
 
       function reset() {
         // Clear transition animation settings.
-        self.element.style[Animit.prefix + 'Transition'] = 'none';
-        self.element.style.transition = 'none';
+        self.elements.forEach(function(element, index) {
+          element.style[Animit.prefix + 'Transition'] = 'none';
+          element.style.transition = 'none';
 
-        if (self.lastStyleAttribute) {
-          self.element.setAttribute('style', self.lastStyleAttribute);
-        } else {
-          self.element.setAttribute('style', '');
-          self.element.removeAttribute('style');
-        }
+          if (self.lastStyleAttributeDict[index]) {
+            element.setAttribute('style', self.lastStyleAttributeDict[index]);
+          } else {
+            element.setAttribute('style', '');
+            element.removeAttribute('style');
+          }
+        });
       }
     },
 
@@ -256,9 +294,9 @@ window.animit = (function(){
    */
   Animit.Transition = function(options) {
     this.options = options || {};
-    this.options.duration = options.duration || 0;
-    this.options.timing = options.timing || 'linear';
-    this.options.css = options.css || {};
+    this.options.duration = this.options.duration || 0;
+    this.options.timing = this.options.timing || 'linear';
+    this.options.css = this.options.css || {};
   };
 
   Animit.Transition.prototype = {
@@ -276,10 +314,13 @@ window.animit = (function(){
 
       if (this.options.duration > 0) {
         var transitionValue = 'all ' + this.options.duration + 's ' + this.options.timing;
-        var timeout = this.options.duration * 1000 * 1.1;
+        var self = this;
 
         return function(callback) {
-          var removeListeners = util.addOnTransitionEnd(this.element, function() {
+          var elements = this.elements;
+          var timeout = self.options.duration * 1000 * (elements[0] ? 1.1 : 1);
+
+          var removeListeners = util.addOnTransitionEnd(elements[0], function() {
             clearTimeout(timeoutId);
             callback();
           });
@@ -289,25 +330,34 @@ window.animit = (function(){
             callback();
           }, timeout);
 
-          var element = this.element;
+          elements.forEach(function(element, index) {
+            element.style[Animit.prefix + 'Transition'] = transitionValue;
+            element.style.transition = transitionValue;
 
-          element.style[Animit.prefix + 'Transition'] = transitionValue;
-          element.style.transition = transitionValue;
-
-          Object.keys(css).forEach(function(name) {
-            element.style[name] = css[name];
+            Object.keys(css).forEach(function(name) {
+              element.style[name] = css[name];
+            });
           });
+
         };
       }
 
       if (this.options.duration <= 0) {
         return function(callback) {
-          var element = this.element;
-          element.style[Animit.prefix + 'Transition'] = 'none';
-          element.transition = 'none';
+          var elements = this.elements;
 
-          Object.keys(css).forEach(function(name) {
-            element.style[name] = css[name];
+          elements.forEach(function(element, index) {
+            element.style[Animit.prefix + 'Transition'] = 'none';
+            element.transition = 'none';
+
+            Object.keys(css).forEach(function(name) {
+              element.style[name] = css[name];
+            });
+          });
+
+          elements.forEach(function(element) {
+            // force to update rendering
+            element.getBoundingClientRect();
           });
 
           setTimeout(callback, 1000 / 60);
@@ -359,6 +409,10 @@ window.animit = (function(){
      * Add an event handler on "transitionend" event.
      */
     addOnTransitionEnd: function(element, callback) {
+      if (!element) {
+        return function() {};
+      }
+
       var fn = function(event) {
         if (element == event.target) {
           event.stopPropagation();

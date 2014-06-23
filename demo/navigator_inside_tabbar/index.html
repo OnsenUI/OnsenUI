@@ -6,7 +6,7 @@
   <title>Navigator | Onsen UI</title>  
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
-  <link rel="stylesheet" href="../../build/css/topcoat-mobile-onsen-ios7.css">  
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
   <script src="../../build/js/angular/angular.js"></script>    
   <script src="../../build/js/onsenui.js"></script>    
@@ -16,14 +16,39 @@
 
 <body>    
 
-  <ons-navigator>
-    <ons-toolbar>
-      <div class="center">Page 1</div>
-    </ons-toolbar>
+  <ons-tabbar>
+    <ons-tabbar-item
+      icon="home"
+      label="Page1"
+      active="true"
+      page="page1.html"
+    ></ons-tabbar-item>
 
-    <h1>Page 1</h1>
-    <ons-button ng-click="ons.navigator.pushPage('new_page.html', { title: 'New Page' })">Push New Page</ons-button>
-  </ons-navigator>
+    <ons-tabbar-item
+      icon="gear"
+      label="Page2"
+      page="page2.html"
+    ></ons-tabbar-item>
+
+    <ons-tabbar-item
+      icon="star"
+      label="Page3"
+      page="page3.html"
+    ></ons-tabbar-item>
+  </ons-tabbar>
+
+  <script type="text/ons-template" id="page1.html">
+    <ons-navigator>
+      <ons-toolbar>
+        <div class="center">Page 1</div>
+      </ons-toolbar>
+
+      <div style="text-align: center">
+        <h1>Page 1</h1>
+        <ons-button ng-click="ons.navigator.pushPage('new_page.html', { title: 'New Page' })">Push New Page</ons-button>
+      </div>
+    </ons-navigator>
+  </script>
   
 </body>
 </html>

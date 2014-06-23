@@ -1,0 +1,288 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>Onsen CSS Components</title>
+    <meta name="description" content="Free CSS Generator for Mobile Apps. Made by Onsen UI Team.">
+    <meta name="viewport" content="width=1400,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+    <!-- build:css styles/minified.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="bower_components/jquery-minicolors/jquery.minicolors.css">
+    <link rel="stylesheet" href="vendor/codemirror-4.0/lib/codemirror.css">
+    <link rel="stylesheet" href="styles/codemirror.css">
+    <!-- endbuild -->
+
+    <link rel="stylesheet" href="patterns/lib/font_awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="onsen-css-components-default.css" id="generated-css-placeholder">
+
+  </head>
+  <body ng-controller="AppController">
+
+    <div id="loading"><div id="loading-message"><img src="images/loading.gif" width="24" height="24"> Loading...</div></div>
+
+    <div id="content-container" ng-cloak>
+
+      <header>
+        <div>
+          <img src="images/mark.png" class="logo-mark" width="34" height="34">
+          <h1><img src="images/logo.png" width="297" height="21"></h1>
+          <p>Free CSS Generator for Mobile Apps. Made by <a target="_blank" href="/coming-soon/01/index.html?link=subtitle" style="font-size: 13px">Onsen UI</a> Team.</p>
+        </div>
+
+        <div>
+          <button class="share-button" ng-click="showShareDialog()" translate>Share</button>
+          <button class="download-button" tooltip="Download Generated Package" ng-click="thankyouDialog.show()"><img src="images/download-icon.png" alt="" >&nbsp;<span translate>Download</span></button>
+        </div>
+
+        <div>
+          <a ng-click="welcomeDialog.show()" translate>Guide</a>
+          &nbsp;&nbsp;/&nbsp;&nbsp;
+          <span><a href="https://github.com/OnsenUI/onsen-css-components/wiki/Requesting-pattern-or-component" target="_blank">Request</a> new components</span>
+
+          <!-- social button -->
+          <div style="display: inline-block; vertical-align: middle;">
+            <!-- twitter -->
+            <iframe allowtransparency="true" frameborder="0" scrolling="no"
+                    src="https://platform.twitter.com/widgets/tweet_button.html?text=Checkout Onsen CSS Component! Beautiful CSS for your App"
+                    style="width:82px; height:20px;">
+            </iframe>
+
+            <!-- facebook -->
+            <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fcomponents.onsenui.io&amp;width=50&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21&amp;appId=248698408604378" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe>
+            <!-- google+ -->
+            <div class="g-plusone"></div>
+            <!-- Place this tag after the last +1 button tag. -->
+            <script type="text/javascript">
+              (function() {
+                window.___gcfg = {
+                  lang: 'en-US'
+                }
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/platform.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+              })();
+            </script>
+
+            <!-- github -->
+            <iframe src="http://ghbtns.com/github-btn.html?user=onsenui&repo=onsen-css-component&type=watch&count=true" height="22" width="85" frameborder="0" scrolling="0" style="width:85px; height: 22px; display: inline-block;" allowTransparency="true"></iframe>
+          </div>
+
+        </div>
+
+      </header>
+
+      <div id="customizer-panel">
+        <header>
+          <h2 translate>Customizer</h2>
+        </header>
+
+        <section>
+          <div class="customizer-section">
+            <h3 translate>Predefined Color Scheme</h3>
+            <ul class="color-scheme-switcher">
+              <li
+                ng-class="{current: scheme == colorSchemeSwitcher.current}"
+                ng-repeat="scheme in colorSchemeSwitcher.schemes"
+                ng-click="colorSchemeSwitcher.current = scheme; setColorScheme(scheme)">
+                <div class="color-scheme-icon" ng-style="{'border-color': scheme.getColor('background-color')}">
+                  <div ng-style="{'background-color': scheme.getColor('background-color')}"></div>
+                  <div ng-style="{'background-color': scheme.getColor('text-color')}"></div>
+                  <div ng-style="{'background-color': scheme.getColor('sub-text-color')}"></div>
+
+                  <div ng-style="{'background-color': scheme.getColor('highlight-color')}"></div>
+                  <div ng-style="{'background-color': scheme.getColor('second-highlight-color')}"></div>
+                  <div ng-style="{'background-color': scheme.getColor('border-color')}"></div>
+
+                </div>
+                <!-- <img ng-src="images/{{scheme.image}}" ng-attr="{alt : scheme.text}"> -->
+              </li>
+            </ul>
+          </div>
+
+          <div class="customizer-section" ng-repeat="group in colorCustomizer.itemGroups">
+            <h3>{{group.name|translate}}</h3>
+            <ul class="customize-item-list">
+              <li ng-repeat="item in group.items">{{item.displayName|translate}}
+                <div class="color-picker-container">
+                  <div class="color-picker" data-variable-name="{{item.name}}" style="background-color: {{item.value}}" ng-click="colorPicker.show($event);"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <div id="main-panel">
+        <ul id="main-panel-tabbar">
+          <li ng-class="{current : location.path() === '/'}" ng-click="location.path('/')" translate>Patterns</li>
+          <li ng-class="{current : location.path() === '/components'}" ng-click="location.path('/components')" translate>Components</li>
+        </ul>
+        <div id="main-panel-view">
+          <ng-view ></ng-view>
+        </div>
+        <footer>
+          <a ng-click="newsletterPopup.show()" translate>Keep Me Updated</a>
+        </footer>
+      </div>
+
+      <!-- for inspect mode -->
+      <div class="inspector-background-mask" ng-show="inspector.isShown" ng-click="inspector.isShown = false"></div>
+
+      <!-- color picker -->
+      <color-picker-popup target="colorPicker.target" show="colorPicker.isShown" on-color-changed="colorChanged($color)">
+      </color-picker-popup>
+
+      <!-- dialog -->
+      <div ng-include="'views/componentDialog.html'"></div>
+      <div ng-include="'views/htmlDialog.html'"></div>
+      <div ng-include="'views/thankyouDialog.html'"></div>
+      <div ng-include="'views/welcomeDialog.html'" ng-init="welcomeDialog = createDialog()"></div>
+      <div ng-include="'views/shareDialog.html'" ng-init="shareDialog = createDialog()"></div>
+
+      <!-- guide -->
+      <div ng-include="'views/guidePopup.html'"></div>
+
+      <!-- popup -->
+      <div ng-include="'views/newsletterPopup.html'"></div>
+    </div>
+
+    <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-526750-31');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js scripts/minified.js -->
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+    <!-- vendor lib -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="vendor/ZeroClipboard.min.js"></script>
+    <script src="vendor/woothee.js"></script>
+
+    <!-- color picker -->
+    <script src="bower_components/jquery-minicolors/jquery.minicolors.js"></script>
+
+    <!-- color parser and css parser -->
+    <script src="vendor/csscolorparser.js"></script>
+
+    <!-- angular -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+
+    <!-- codemirror -->
+    <script src="vendor/codemirror-4.0/lib/codemirror.js"></script>
+    <script src="vendor/codemirror-4.0/mode/css/css.js"></script>
+    <script src="vendor/codemirror-4.0/mode/xml/xml.js"></script>
+    <script src="vendor/codemirror-4.0/mode/htmlmixed/htmlmixed.js"></script>
+
+    <!-- i18n -->
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+
+    <!-- app code -->
+    <script src="scripts/app.js"></script>
+
+    <script src="scripts/template.generated.js"></script>
+    <script src="scripts/cssComponentParser.js"></script>
+
+    <script src="scripts/colorScheme.js"></script>
+    <script src="scripts/colorSchemeFactory.js"></script>
+    <script src="scripts/component.js"></script>
+    <script src="scripts/componentCollection.js"></script>
+    <script src="scripts/screenPattern.js"></script>
+    <script src="scripts/screenPatternCollection.js"></script>
+    <script src="scripts/generatedCSS.js"></script>
+    <script src="scripts/urlShortener.js"></script>
+    <script src="scripts/colors2URL.js"></script>
+    <script src="scripts/clipboardClients.js"></script>
+
+    <script src="scripts/directives/componentIframe.js"></script>
+    <script src="scripts/directives/componentElement.js"></script>
+    <script src="scripts/directives/colorPickerPopup.js"></script>
+    <script src="scripts/directives/tooltip.js"></script>
+    <script src="scripts/directives/patternIframe.js"></script>
+    <script src="scripts/directives/patternInspector.js"></script>
+
+    <script src="scripts/viewmodels/colorCustomizer.js"></script>
+    <script src="scripts/viewmodels/simpleColorCustomizer.js"></script>
+    <script src="scripts/viewmodels/dialog.js"></script>
+    <script src="scripts/viewmodels/componentDialog.js"></script>
+
+    <script src="scripts/controllers/app.js"></script>
+    <script src="scripts/controllers/components.js"></script>
+
+    <!-- endbuild -->
+
+    <script src="vendor/topdoc_parser.js"></script>
+    <script src="scripts/css.generated.js"></script>
+
+    <script>
+      window.IS_DEV = !location.host.match('onsenui.io');
+
+      $(function() {
+        var browser = woothee.parse(navigator.userAgent);
+        if (!(browser.name === 'Opera' || browser.name === 'Chrome' || browser.name === 'Safari' || browser.name === 'Firefox')) {
+          alert(
+            'Your browser is not supported by Onsen CSS Components.\n' +
+            'Please install the latest version of Google Chrome, Safari, Opera or Firefox.'
+          );
+        }
+      });
+
+      if (!IS_DEV) {
+        $(window).on('beforeunload', function() {
+          return 'Are you sure to leave or reload this page?';
+        });
+      }
+
+      $(function() {
+        $('.uninitialized').removeClass('uninitialized');
+
+        angular.bootstrap(document, ['app']);
+
+        setTimeout(function() {
+          var loading = $('#loading');
+          loading.addClass('hide');
+
+          setTimeout(function() {
+            loading.css('display', 'none');
+          }, 200);
+        }, 200);
+      });
+    </script>
+
+    <!-- Twitter -->
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+    <!-- facebook -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- heatmap -->
+    <script type="text/javascript">
+      setTimeout(function(){var a=document.createElement("script");
+        var b=document.getElementsByTagName("script")[0];
+        a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0022/7441.js?"+Math.floor(new Date().getTime()/3600000);
+        a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+    </script>
+
+  </body>
+</html>

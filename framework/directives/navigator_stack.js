@@ -1,7 +1,7 @@
 (function() {
   var directiveModules = angular.module('onsen');
 
-  directiveModules.factory('NavigatorStack', function($rootScope) {
+  directiveModules.factory('NavigatorStack', function($rootScope, $onsen) {
     var NavigatorStack = Class.extend({
       navigators: [],
 
@@ -20,7 +20,7 @@
         var navigator;
 
         if ($event) {
-          var navigatorElement = $rootScope.ons.upTo($event.target, 'ons-navigator');
+          var navigatorElement = $onsen.upTo($event.target, 'ons-navigator');
           navigator = angular.element(navigatorElement).isolateScope();
         }
 

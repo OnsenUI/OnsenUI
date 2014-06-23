@@ -1,0 +1,25 @@
+
+<div class="popup-container newsletter-popup-container left-top-position" ng-show="newsletterPopup.isShown">
+  <div class="popup" ng-show="newsletterPopup.isShown">
+    <img src="images/close.png" class="close" ng-click="newsletterPopup.hide()">
+
+    <h2 translate>T_SUBSCRIBE_NEWSLETTER_TITLE</h2>
+
+    <div class="message"><p translate>T_SUBSCRIBE_NEWSLETTER_DESC</p></div>
+
+    <div class="subscribe-form highlight-content" style="text-align: center" ng-show="newsletterPopup.emailSent">Thank You!</div>
+
+    <div class="subscribe-form highlight-content" ng-hide="newsletterPopup.emailSent">
+      <form name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate style="text-align: center" ng-submit="newsletterPopup.sendEmail()">
+        <input type="email" name="EMAIL" id="newsletter-email" placeholder="your@email.address" class="site" style="width: 300px;" ng-model="newsletterPopup.email">
+        <button class="site-button" type="submit" ng-click="newsletterPopup.sendEmail()" translate>T_SEND</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    $('.uninitialized').removeClass('uninitialized');
+  });
+</script>

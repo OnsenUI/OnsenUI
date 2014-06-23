@@ -79,7 +79,7 @@
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsSplitView', function($compile, $templateCache, SplitViewStack, $onsen) {
+  module.directive('onsSplitView', function($compile, SplitViewStack, $onsen) {
 
     var ON_PAGE_READY = "onPageReady";
 
@@ -115,9 +115,9 @@
             this.el = element[0];
             this.VERTICAL_THRESHOLD = 20;
             this.HORIZONTAL_THRESHOLD = 20;
-            this.behindPage = element[0].querySelector('.secondary');
+            this.behindPage = element[0].querySelector('.onsen-split-view__secondary');
             this.$behindPage = angular.element(this.behindPage);
-            this.abovePage = element[0].querySelector('.main');
+            this.abovePage = element[0].querySelector('.onsen-split-view__main');
             this.$abovePage = angular.element(this.abovePage);
             this.previousX = 0;
             this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
@@ -191,7 +191,7 @@
           attachMethods: function() {
             var self = this;
 
-            scope.setSecondaryPage = function(page) {
+            this.setSecondaryPage = scope.setSecondaryPage = function(page) {
               if (page) {
                 $onsen.getPageHTMLAsync(page).then(function(html) {
                   self.appendSecondPage(angular.element(html.trim()));
@@ -203,7 +203,7 @@
               }
             };
 
-            scope.setMainPage = function(page) {
+            this.setMainPage = scope.setMainPage = function(page) {
               if (page) {
                 $onsen.getPageHTMLAsync(page).then(function(html) {
                   self.appendMainPage(angular.element(html.trim()));
@@ -314,7 +314,7 @@
             this.translate(0);
 
             if (Modernizr.boxshadow) {
-              this.$abovePage.addClass('onsen_split-view__shadow');
+              this.$abovePage.addClass('onsen-split-view__shadow');
             }
           },
 
@@ -323,7 +323,7 @@
             this.deactivateHammer();
             this.mode = SPLIT_MODE;
             if (Modernizr.boxshadow) {
-              this.$abovePage.removeClass('onsen_split-view__shadow');
+              this.$abovePage.removeClass('onsen-split-view__shadow');
             }
           },
 

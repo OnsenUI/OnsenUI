@@ -1,0 +1,47 @@
+<div class="dialog-mask uninitialized" ng-show="componentDialog.isShown" ng-click="componentDialog.hide()"></div>
+<div class="dialog-container uninitialized component-dialog-container" ng-show="componentDialog.isShown">
+  <div class="dialog component-dialog" ng-show="componentDialog.isShown">
+    <img src="images/close.png" class="close" ng-click="componentDialog.hide()">
+
+    <h2>{{componentDialog.name}}{{"T_COMPONENT_SNIPPET"|translate}}</h2>
+
+    <div class="component-dialog-content">
+      <div class="preview-container">
+        <h3 translate>T_PREVIEW</h3>
+        <div class="preview">
+          <component-iframe html="componentDialog.html" css="componentDialog.css" prepend-css="componentDialog.prependCss"></component-iframe>
+        </div>
+      </div>
+
+      <div class="html-container">
+        <h3>HTML</h3><a id="html-copy" class="copy" translate>T_COPY</a>
+        <div class="codemirror-container" data-lang="html" data-name="htmlEditor"></div>
+      </div>
+
+      <div class="css-container">
+        <h3>CSS</h3><a id="css-copy" class="copy" translate>T_COPY</a>
+        <div class="codemirror-container" data-lang="css" data-name="cssEditor"></div>
+      </div>
+    </div>
+
+    <footer translate>T_TEASING_LINK</footer>
+  </div>
+</div>
+
+<script>
+  $(function() {
+    $('.codemirror-container').each(function() {
+      var mirror = CodeMirror(this, {
+        lineNumbers: true,
+        mode: 'text/' + $(this).data('lang'),
+        value: $(this).text().trim(),
+        lineWrapping: true
+      });
+
+      var name = $(this).data('name');
+      window[name] = mirror;
+    });
+
+    $('.uninitialized').removeClass('uninitialized');
+  });
+</script>

@@ -22,28 +22,6 @@ limitations under the License.
 
   module.run(function($rootScope, $window) {
     $rootScope.ons = window.ons;
-    $rootScope.ons.$get = function(id) {
-      id = id.replace('#', '');
-      return angular.element(document.getElementById(id)).isolateScope();
-    };
-
-    // Find first ancestor of el with tagName
-    // or undefined if not found
-    $rootScope.ons.upTo = function(el, tagName) {
-      tagName = tagName.toLowerCase();
-
-      do {
-        if (!el) {
-          return null;
-        }
-        el = el.parentNode;
-        if (el.tagName.toLowerCase() == tagName) {
-          return el;
-        }
-      } while (el.parentNode);
-
-        return null;
-    };
 
     $rootScope.console = $window.console;
     $rootScope.alert = $window.alert;

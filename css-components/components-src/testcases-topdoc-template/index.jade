@@ -1,0 +1,90 @@
+- var tint = 'light';
+- if(document.source.indexOf('android') > 0){
+- 	tint = 'dark';
+- }
+!!! 5
+html
+	head
+		meta(charset = 'utf-8')
+		meta('http-equiv' = 'X-UA-Compatible', content = 'IE=edge,chrome=1')
+		title Testcases for Onsen CSS Components
+		meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale = 1.0,maximum-scale = 1.0, target-densitydpi=medium-dpi")
+
+		link(rel = 'stylesheet', type = 'text/css', href = '../onsen-css-components-default.css')
+		link(rel = 'stylesheet', type = 'text/css', href = 'css/main.css')
+		link(rel = 'stylesheet', type = 'text/css', href = 'css/brackets.css')
+		link(href="http://netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.css", rel="stylesheet")
+
+		script(type='text/javascript', src='../../build/js/angular/angular.js')
+		script(type='text/javascript', src='../../build/js/angular/angular-touch.js')
+		script(type='text/javascript', src='../../build/js/onsenui.js')
+		script(type="text/javascript").
+			var app = angular.module('app', ['ngTouch', 'onsen.directives']);
+
+	body(class=tint, ng-app='app', ontouchstart='')
+		#wrapper
+			.max-width
+				#sideNav
+					nav.site: ul
+						li: a(href=templateData.homeURL) Home
+						-if(templateData.siteNav)
+							- each siteNavItem, i in templateData.siteNav
+								- if(i == 0)
+									li.selected: a(href=siteNavItem.url)=siteNavItem.text
+								- else
+									li: a(href=siteNavItem.url)=siteNavItem.text
+					div.combo
+						select.docNav
+							- each item in nav
+								- item.title = item.title.replace(/Topcoat Mobile/, '')
+								- if(item.url == document.url)
+									option(value=item.url, selected="selected")=item.title
+								- else
+									option(value=item.url)=item.title
+					#pageNav: ul
+						- each component in document.components
+							li: a(href='#'+component.slug)=component.name
+			#site
+				header#main-header
+					.max-width
+						hgroup
+							h1 Testcases for Onsen CSS Components
+							p=templateData.subtitle
+						nav
+							ul
+								-if(templateData.siteNav)
+									- each siteNavItem, i in templateData.siteNav
+										- if(i == 0)
+											li.selected: a(href=siteNavItem.url)=siteNavItem.text
+										- else
+											li: a(href=siteNavItem.url)=siteNavItem.text
+								- if(templateData.download)
+									li: a#download-btn(href=templateData.download.url, onclick="_gaq.push(['_trackEvent', 'download', 'click',,, false]);")=templateData.download.label
+						a#slide-menu-button.icon-button--large--quiet
+							span.icon--large.icon--menu-stack
+				#content.max-width
+					article.component
+
+						div(style="clear: both")
+
+					- each component in document.components
+						article.component(id=component.slug)
+							header
+								h2=component.name
+							section.component
+								div.markup(style="width: 320px; position: relative; min-height: 80px;")!=component.markup
+							- if(component.examples)
+								section.examples
+									h4 Examples
+									ul
+										- each example_url, example_text in component.examples
+											li: a(href = example_url)!= example_text
+							footer.showcode
+								a(href="#") Show code snippets
+								section.code
+									div
+										pre.html
+											code(data-language="html")=component.markup
+				footer
+		script(src="js/rainbow-custom.min.js")
+		script(src='js/main.js')

@@ -15,17 +15,26 @@ limitations under the License.
 
 */
 
-.secondary {
+.onsen-split-view__secondary {
   opacity: 0;
   width: 100%;
   transform: translate3d(-10%, 0, 0);
   overflow: hidden;
 }
 
-.main {
+.onsen-split-view__main {
   overflow: hidden;
 }
 
-.onsen_split-view__shadow {
+.onsen-split-view__secondary,
+.onsen-split-view__main {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.onsen-split-view__shadow {
   box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
 }

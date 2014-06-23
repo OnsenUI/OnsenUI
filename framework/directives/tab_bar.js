@@ -23,8 +23,8 @@
       controller: function($scope, $element, $attrs) {
         this.modifierTemplater = $scope.modifierTemplater = $onsen.generateModifierTemplater($attrs);
 
-        var container = angular.element($element[0].querySelector('.tab-bar-content'));
-        var footer = $element[0].querySelector('.footer');
+        var container = angular.element($element[0].querySelector('.ons-tab-bar__content'));
+        var footer = $element[0].querySelector('.ons-tab-bar__footer');
 
         this.tabbarId = Date.now();
 

@@ -17,74 +17,15 @@ limitations under the License.
 
 @import url("font_awesome/css/font-awesome.min.css");
 
-[ng-cloak], [x-ng-cloak], .ng-cloak, [data-ng-cloak] {
-  display: none !important;
-}
-
-html {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  width: 100%;
-  height: 100%;
-  position: fixed;    
-  margin: 0;
-  padding: 0;
-}
-
-.align-center {
-  align: center;
-}
-
-.middle {
-  vertical-align: middle;
-}
-
-.no-active:active {
+.page {
   background-color: transparent !important;
+  background: transparent !important;
 }
 
-.absolute {
-  position: absolute;
+.page__statusbar-fill + .page__content {
+  padding-top: 20px;
 }
 
-.relative {
-  position: relative;
-}
-
-.full-width {
-  width: 100%;
-}
-
-.full-height {
-  height: 100%;
-}
-
-.max {
-  width: 100%;
-  height: 100%;
-}
-
-.block {
-  display: block;
-}
-
-* { 
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-  user-select: none;
-  box-sizing: border-box;
-} 
-
-input {
-  user-select: initial;
-}
-
-textarea {
-  user-select: initial;   
-}
-
-select {
-  user-select: initial;   
+.page__statusbar-fill + ons-toolbar + .page__content {
+  padding-top: 64px;
 }

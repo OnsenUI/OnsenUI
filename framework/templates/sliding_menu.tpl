@@ -1,8 +1,3 @@
-<div class="sliding-menu full-screen">
-  <div ng-cloak class="onsen_sliding-menu-black-mask"></div>
-  <div class="behind full-screen ons-sliding-menu-inner">
-  </div>
-
-  <div class="above full-screen ons-sliding-menu-inner">
-  </div>
-</div>
+<div ng-cloak class="onsen-sliding-menu__black-mask"></div>
+<div class="onsen-sliding-menu__behind ons-sliding-menu-inner"></div>
+<div class="onsen-sliding-menu__above ons-sliding-menu-inner"></div>

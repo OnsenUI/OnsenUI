@@ -1,0 +1,13 @@
+.float-left {
+  float: left;
+}
+
+.margin-little {
+  margin: 4px;
+}
+
+i {
+  display: block;
+  width: 20px;
+}
+

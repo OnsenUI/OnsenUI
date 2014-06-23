@@ -1,1 +1,1 @@
-<li class="topcoat-list__item {{modifierTemplater('topcoat-list__item--*')}} ons-list-item-inner"></li>
+<li class="list__item {{modifierTemplater('list__item--*')}} ons-list-item-inner"></li>
