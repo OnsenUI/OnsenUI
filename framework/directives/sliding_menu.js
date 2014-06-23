@@ -390,6 +390,10 @@ limitations under the License.
         }
       },
 
+      /**
+       * @param {jqLite} element
+       * @return {Boolean}
+       */
       _isInsideIgnoredElement: function(element) {
         do {
           if (element.getAttribute && element.getAttribute('sliding-menu-ignore')) {
@@ -397,6 +401,7 @@ limitations under the License.
           }
           element = element.parentNode;
         } while (element);
+
         return false;
       },
 
@@ -412,33 +417,47 @@ limitations under the License.
       },
 
       /**
-       * Close behind page menu.
+       * Close sliding-menu page.
        */
       close: function() {
         this._startX = 0;
 
         if (this._currentX !== 0) {
           new SlidingMenuAnimator().close(this._abovePage, this._behindPage, {max: this._MAX}, function() { });
+
+          this._currentX = 0;
         }
       },
 
       /**
-       * Open behind page menu.
+       * Open sliding-menu page.
        */
       open: function() {
         this._startX = this._MAX;
 
         if (this._currentX != this._MAX) {
           new SlidingMenuAnimator().open(this._abovePage, this._behindPage, {max: this._MAX}, function() { });
+
+          this._currentX = this._MAX;
         }
       },
 
+      /**
+       * Toggle sliding-menu page.
+       */
       toggle: function() {
         if (this._startX === 0) {
           this.open();
         } else {
           this.close();
         }
+      },
+
+      /**
+       * Toggle sliding-menu page.
+       */
+      toggleMenu: function() {
+        this.toggle();
       },
 
       _translate: function(x) {
