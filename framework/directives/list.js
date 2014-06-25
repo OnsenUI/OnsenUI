@@ -26,9 +26,18 @@ limitations under the License.
       restrict: 'E',
       replace: false,
       transclude: true,
+      scope: false,
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/list.tpl',
-      link: function(scope, element, attrs) {
+      link: function(scope, element, attrs, controller, transclude) {
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+        transclude(scope, function(clonedElement) {
+          angular.element(element[0].querySelector('.list__container')).append(clonedElement);
+        });
       }
     };
   });

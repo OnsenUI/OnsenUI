@@ -109,7 +109,7 @@ app.run(["$templateCache", function($templateCache) {
     "<div class=\"ons-scroller full-screen page\" ons-scrollable>\n" +
     "  <div class=\"ons-scroller__content ons-scroller-inner\">\n" +
     "    <div class=\"list {{modifierTemplater('list--*')}}\">\n" +
-    "      <ul class=\"list__container {{modifierTemplater('list--*__container')}} ons-list-inner\" ng-transclude>\n" +
+    "      <ul class=\"list__container {{modifierTemplater('list--*__container')}} ons-list-inner\">\n" +
     "      </ul>\n" +
     "    </div>\n" +
     "  </div>\n" +
