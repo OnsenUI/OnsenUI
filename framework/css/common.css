@@ -17,6 +17,15 @@ limitations under the License.
 
 @import url("font_awesome/css/font-awesome.min.css");
 
+* {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+}
+
+input, textarea {
+  -webkit-user-select: auto;
+}
+
 .page {
   background-color: transparent !important;
   background: transparent !important;
