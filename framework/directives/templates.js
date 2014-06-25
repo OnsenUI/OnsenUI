@@ -17,17 +17,6 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/bottom_toolbar.tpl",
-    "<div class=\"bottom-bar ons-bottom-toolbar-inner {{modifierTemplater('bottom-bar--*')}}\" ng-transclude></div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("templates/button.tpl",
     "<button class=\"{{item.animation}} button--{{onsType}} effeckt-button button no-select {{modifierTemplater('button--*')}}\">\n" +
     "  <span class=\"label ons-button-inner\" ng-transclude></span>\n" +
@@ -106,13 +95,9 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/list.tpl",
-    "<div class=\"ons-scroller full-screen page\" ons-scrollable>\n" +
-    "  <div class=\"ons-scroller__content ons-scroller-inner\">\n" +
-    "    <div class=\"list {{modifierTemplater('list--*')}}\">\n" +
-    "      <ul class=\"list__container {{modifierTemplater('list--*__container')}} ons-list-inner\">\n" +
-    "      </ul>\n" +
-    "    </div>\n" +
-    "  </div>\n" +
+    "<div class=\"list {{modifierTemplater('list--*')}}\">\n" +
+    "  <ul class=\"list__container {{modifierTemplater('list--*__container')}} ons-list-inner\">\n" +
+    "  </ul>\n" +
     "</div>\n" +
     "");
 }]);

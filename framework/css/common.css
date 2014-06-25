@@ -22,10 +22,23 @@ limitations under the License.
   background: transparent !important;
 }
 
-.page__statusbar-fill + .page__content {
+.page__status-bar-fill + .page__content {
   padding-top: 20px;
 }
 
-.page__statusbar-fill + ons-toolbar + .page__content {
+.page__status-bar-fill + ons-toolbar + .page__content {
   padding-top: 64px;
+}
+
+.page__content {
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.page__bottom-bar-fill ~ .page__content {
+  padding-bottom: 44px;
+}
+
+.page__content::-webkit-scrollbar {
+  display: none;
 }

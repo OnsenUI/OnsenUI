@@ -25,11 +25,14 @@ limitations under the License.
       restrict: 'E',
       replace: true,
       transclude: true,
+
       scope: {
         onScrolled: '&',
         infinitScrollEnable: '='
       },
+
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/scroller.tpl',
+
       link: function(scope, element, attrs) {
       }
     };

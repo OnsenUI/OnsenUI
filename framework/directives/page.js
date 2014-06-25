@@ -45,13 +45,17 @@ limitations under the License.
     function controller($scope, $element) {
 
       this.registeredToolbarElement = false;
+      this.registeredBottomToolbarElement = false;
 
       this.nullElement = window.document.createElement('div');
 
       this.toolbarElement = angular.element(this.nullElement);
+      this.bottomToolbarElement = angular.element(this.nullElement);
 
       /**
        * Register toolbar element to this page.
+       *
+       * @param {jqLite} element
        */
       this.registerToolbar = function(element) {
         if (this.registeredToolbarElement) {
@@ -59,7 +63,7 @@ limitations under the License.
         }
         
         element.remove();
-        var statusFill = $element[0].querySelector('.page__statusbar-fill');
+        var statusFill = $element[0].querySelector('.page__status-bar-fill');
         if (statusFill) {
           angular.element(statusFill).after(element);
         } else {
@@ -71,10 +75,40 @@ limitations under the License.
       };
 
       /**
+       * Register toolbar element to this page.
+       *
+       * @param {jqLite} element
+       */
+      this.registerBottomToolbar = function(element) {
+        if (this.registeredBottomToolbarElement) {
+          throw new Error('This page\'s bottom-toolbar is already registered.');
+        }
+
+        element.remove();
+
+        this.bottomToolbarElement = element;
+        this.registeredBottomToolbarElement = true;
+
+        var fill = angular.element(document.createElement('div'));
+        fill.addClass('page__bottom-bar-fill');
+        fill.css({width: '0px', height: '0px'});
+
+        $element.prepend(fill);
+        $element.append(element);
+      };
+
+      /**
        * @return {Boolean}
        */
       this.hasToolbarElement = function() {
         return this.registeredToolbarElement;
+      };
+
+      /**
+       * @return {Boolean}
+       */
+      this.hasBottomToolbarElement = function() {
+        return this.registeredBottomToolbarElement;
       };
 
       /**
@@ -97,6 +131,13 @@ limitations under the License.
        */
       this.getToolbarElement = function() {
         return this.toolbarElement[0] || this.nullElement;
+      };
+
+      /**
+       * @return {HTMLElement}
+       */
+      this.getBottomToolbarElement = function() {
+        return this.bottomToolbarElement[0] || this.nullElement;
       };
 
       /**
@@ -130,6 +171,7 @@ limitations under the License.
       $scope.$on('$destroy', function(){
         this.toolbarElement = null;
         this.nullElement = null;
+        this.bottomToolbarElement = null;
       }.bind(this));
 
     }
@@ -146,7 +188,10 @@ limitations under the License.
       compile: function(element) {
         if ($onsen.isWebView() && $onsen.isIOS7Above()) {
           // Adjustments for IOS7
-          element.prepend(angular.element('<div class="page__statusbar-fill"></div>'));
+          var fill = angular.element(document.createElement('div'));
+          fill.addClass('page__status-bar-fill');
+          fill.css({width: '0px', height: '0px'});
+          element.prepend(fill);
         }
 
         return {

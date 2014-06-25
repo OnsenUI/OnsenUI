@@ -119,7 +119,9 @@ limitations under the License.
 
         return {
           pre: function(scope, element, attrs, pageController) {
-            pageController.registerToolbar(element);
+            if (pageController) {
+              pageController.registerToolbar(element);
+            }
           }
         };
       }

@@ -22,13 +22,12 @@ limitations under the License.
   module.directive('onsScrollable', function($onsen, $timeout) {
     return {
       restrict: 'A',
-      replace: true,
+      replace: false,
       transclude: false,
+
       link: function(scope, element, attrs) {
-        element.css('overflow-y', 'scroll');
 
         // inifinte scroll
-
         var scrollWrapper;
         if (!element.hasClass('ons-scroller')) {
           console.error('missing .ons-scroller class for ons-scrollable');

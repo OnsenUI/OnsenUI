@@ -284,7 +284,7 @@ limitations under the License.
     /** Black mask */
     backgroundMask : angular.element(
       '<div style="position: absolute; width: 100%;' +
-      'height: 100%; background-color: black;"></div>'
+      'height: 100%; background-color: rgba(0, 0, 0, 0.1); opacity: 0;"></div>'
     ),
 
     _decompose: function(page) {
@@ -307,7 +307,8 @@ limitations under the License.
         pageLabels: pageLabels,
         other: other,
         content: page.controller.getContentElement(),
-        toolbar: page.controller.getToolbarElement()
+        toolbar: page.controller.getToolbarElement(),
+        bottomToolbar: page.controller.getBottomToolbarElement()
       };
 
       function excludeBackButtonLabel(elements) {
@@ -332,7 +333,7 @@ limitations under the License.
      */
     push: function(enterPage, leavePage, callback) {
       var mask = this.backgroundMask.remove();
-      leavePage.element[0].parentNode.insertBefore(mask[0], leavePage.element[0]);
+      leavePage.element[0].parentNode.insertBefore(mask[0], leavePage.element[0].nextSibling);
 
       var enterPageDecomposition = this._decompose(enterPage);
       var leavePageDecomposition = this._decompose(leavePage);
@@ -343,7 +344,17 @@ limitations under the License.
       })();
 
       var maskClear = animit(mask[0])
-        .wait(0.4)
+        .queue({
+          opacity: 0,
+          transform: 'translate3d(0, 0, 0)'
+        })
+        .queue({
+          opacity: 1
+        }, {
+          duration: 0.4,
+          timing: 'cubic-bezier(.1, .7, .1, 1)'
+        })
+        .resetStyle()
         .queue(function(done) {
           mask.remove();
           done();
@@ -362,7 +373,7 @@ limitations under the License.
 
           maskClear,
 
-          animit(enterPageDecomposition.content)
+          animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar])
             .queue({
               css: {
                 transform: 'translate3D(100%, 0px, 0px)',
@@ -426,18 +437,16 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(leavePageDecomposition.content)
+          animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar])
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
-                opacity: 1.0
               },
               duration: 0
             })
             .queue({
               css: {
                 transform: 'translate3D(-25%, 0px, 0px)',
-                opacity: 0.9
               },
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
@@ -505,15 +514,13 @@ limitations under the License.
           animit(leavePage.element[0])
             .queue({
               css: {
-                transform: 'translate3D(0, 0, 0)',
-                opacity: 1.0
+                transform: 'translate3D(0, 0, 0)'
               },
               duration: 0
             })
             .queue({
               css: {
-                transform: 'translate3D(-25%, 0px, 0px)',
-                opacity: 0.9
+                transform: 'translate3D(-25%, 0px, 0px)'
               },
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
@@ -535,7 +542,7 @@ limitations under the License.
      */
     pop: function(enterPage, leavePage, done) {
       var mask = this.backgroundMask.remove();
-      enterPage.element[0].parentNode.insertBefore(mask[0], enterPage.element[0]);
+      enterPage.element[0].parentNode.insertBefore(mask[0], enterPage.element[0].nextSibling);
 
       var enterPageDecomposition = this._decompose(enterPage);
       var leavePageDecomposition = this._decompose(leavePage);
@@ -546,11 +553,22 @@ limitations under the License.
       })();
 
       var maskClear = animit(mask[0])
-        .wait(0.4)
+        .queue({
+          opacity: 1,
+          transform: 'translate3d(0, 0, 0)'
+        })
+        .queue({
+          opacity: 0
+        }, {
+          duration: 0.4,
+          timing: 'cubic-bezier(.1, .7, .1, 1)'
+        })
+        .resetStyle()
         .queue(function(done) {
           mask.remove();
           done();
         });
+
 
       var bothPageHasToolbar =
         enterPage.controller.hasToolbarElement() &&
@@ -561,12 +579,11 @@ limitations under the License.
         !leavePage.controller.hasToolbarElement();
 
       if (bothPageHasToolbar || isToolbarNothing) {
-
         animit.runAll(
 
           maskClear,
 
-          animit(enterPageDecomposition.content)
+          animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar])
             .queue({
               css: {
                 transform: 'translate3D(-25%, 0px, 0px)',
@@ -632,7 +649,7 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(leavePageDecomposition.content)
+          animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar])
             .queue({
               css: {
                 transform: 'translate3D(0px, 0px, 0px)'
