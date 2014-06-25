@@ -169,7 +169,6 @@ limitations under the License.
                             this.currentPageScope = pageScope;
                         }.bind(this), 0);
 
-                        this.currentPageUrl = pageUrl;
                     },
 
                     appendBehindPage: function (templateHTML) {
@@ -192,7 +191,7 @@ limitations under the License.
 					attachMethods: function() {
 						scope.setBehindPage = function(page) {
 							if (page) {
-                                var templateHTML = $templateCache(page);
+                                var templateHTML = $templateCache.get(page);
                                 if(templateHTML) {
                                     this.appendBehindPage(templateHTML);
                                 } else {
@@ -218,7 +217,7 @@ limitations under the License.
 							}
 
 							if (pageUrl) {
-                                var templateHtml = $templateCache(page);
+                                var templateHTML = $templateCache.get(pageUrl);
                                 if(templateHTML) {
                                     this.appendAbovePage(templateHTML);
                                 } else {
