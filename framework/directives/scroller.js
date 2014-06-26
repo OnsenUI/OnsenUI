@@ -40,7 +40,6 @@ limitations under the License.
           if (attrs.ngController) {
             throw new Error('"ons-scroller" can\'t accept "ng-controller" directive.');
           }
-          return;
 
           // inifinte scroll
           var scrollWrapper;
