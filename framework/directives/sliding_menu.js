@@ -23,6 +23,22 @@ limitations under the License.
   var SlidingMenuAnimator = Class.extend({
 
     /**
+     * @param {jqLite} element "ons-sliding-menu" element
+     */
+    setup: function(element) {
+      this._blackMask = angular.element('<div></div>');
+      this._blackMask.css({
+        backgroundColor: 'black',
+        top: '0px',
+        left: '0px',
+        right: '0px',
+        bottom: '0px',
+        position: 'absolute'
+      });
+      element.prepend(this._blackMask);
+    },
+
+    /**
      * @param {jqLite} abovePage
      * @param {jqLite} behindPage
      * @param {Object} options
@@ -37,25 +53,29 @@ limitations under the License.
       var aboveTransform = this._generateAbovePageTransform(max);
       var behindStyle = this._generateBehindPageStyle(abovePage, max);
 
-      animit(abovePage[0])
-        .queue({
-          transform: aboveTransform
-        }, {
-          duration: 0.4,
-          timing: 'cubic-bezier(.1, .7, .1, 1)'
-        })
-        .queue(function(done) {
-          callback();
-          done();
-        })
-        .play();
+      setTimeout(function() {
 
-      animit(behindPage[0])
-        .queue(behindStyle, {
-          duration: 0.4,
-          timing: 'cubic-bezier(.1, .7, .1, 1)'
-        })
-        .play();
+        animit(abovePage[0])
+          .queue({
+            transform: aboveTransform
+          }, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .queue(function(done) {
+            callback();
+            done();
+          })
+          .play();
+
+        animit(behindPage[0])
+          .queue(behindStyle, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .play();
+
+      }, 1000 / 60);
     },
 
     /**
@@ -70,30 +90,35 @@ limitations under the License.
       var aboveTransform = this._generateAbovePageTransform(0);
       var behindStyle = this._generateBehindPageStyle(abovePage, 0);
 
-      animit(abovePage[0])
-        .queue({
-          transform: aboveTransform
-        }, {
-          duration: 0.4,
-          timing: 'cubic-bezier(.1, .7, .1, 1)'
-        })
-        .resetStyle()
-        .queue(function(done) {
-          behindPage.css('display', 'none');
-          callback();
-          done();
-        })
-        .play();
+      setTimeout(function() {
 
-      animit(behindPage[0])
-        .queue(behindStyle, {
-          duration: 0.4,
-          timing: 'cubic-bezier(.1, .7, .1, 1)'
-        })
-        .queue(function(done) {
-          done();
-        })
-        .play();
+        animit(abovePage[0])
+          .queue({
+            transform: aboveTransform
+          }, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .queue({
+            transform: 'translate2d(0, 0)'
+          })
+          .queue(function(done) {
+            behindPage.css('display', 'none');
+            callback();
+            done();
+          })
+          .play();
+
+        animit(behindPage[0])
+          .queue(behindStyle, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .queue(function(done) {
+            done();
+          })
+          .play();
+      }, 1000 / 60);
     },
 
     /**
@@ -108,13 +133,17 @@ limitations under the License.
       var aboveTransform = this._generateAbovePageTransform(options.x);
       var behindStyle = this._generateBehindPageStyle(abovePage, options.x);
 
-      animit(abovePage[0])
-        .queue({transform: aboveTransform})
-        .play();
+      setTimeout(function() {
 
-      animit(behindPage[0])
-        .queue(behindStyle)
-        .play();
+        animit(abovePage[0])
+          .queue({transform: aboveTransform})
+          .play();
+
+        animit(behindPage[0])
+          .queue(behindStyle)
+          .play();
+
+      }, 1000 / 60);
     },
 
     _generateAbovePageTransform: function(x) {
@@ -187,7 +216,9 @@ limitations under the License.
           unlock();
 
           this._behindPage.css({opacity: 1});
-          angular.element(element[0].querySelector('.onsen-sliding-menu__black-mask')).css('display', 'block');
+
+          this._animator = new SlidingMenuAnimator();
+          this._animator.setup(this._element);
         }.bind(this), 400);
       },
 
@@ -431,7 +462,7 @@ limitations under the License.
             var unlock = self._doorLock.lock();
             self._currentX = 0;
 
-            new SlidingMenuAnimator().close(self._abovePage, self._behindPage, {max: self._MAX}, function() {
+            self._animator.close(self._abovePage, self._behindPage, {max: self._MAX}, function() {
               unlock();
             });
           });
@@ -450,7 +481,7 @@ limitations under the License.
             var unlock = self._doorLock.lock();
             self._currentX = self._MAX;
 
-            new SlidingMenuAnimator().open(self._abovePage, self._behindPage, {max: self._MAX}, function() {
+            self._animator.open(self._abovePage, self._behindPage, {max: self._MAX}, function() {
               unlock();
             });
           });
@@ -486,7 +517,7 @@ limitations under the License.
           max: this._MAX
         };
 
-        new SlidingMenuAnimator().translate(this._abovePage, this._behindPage, options);
+        this._animator.translate(this._abovePage, this._behindPage, options);
       }
     });
     return Swiper;

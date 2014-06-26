@@ -15,7 +15,6 @@ limitations under the License.
 
 */
 
-.onsen-sliding-menu__black-mask, 
 .onsen-sliding-menu__behind,
 .onsen-sliding-menu__above {
   position: absolute;
@@ -27,13 +26,10 @@ limitations under the License.
 
 .onsen-sliding-menu__above {
   box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  padding: 0;
 }
 
 .onsen-sliding-menu__behind {
   opacity: 0;
-}
-
-.onsen-sliding-menu__black-mask {
-  background-color: black;
-  display: none;
 }
