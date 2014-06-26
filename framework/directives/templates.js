@@ -192,12 +192,8 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/split_view.tpl",
-    "<div class=\"onsen-sliding-menu\">\n" +
-    "  <div class=\"onsen-sliding-menu__black-mask\"></div>\n" +
-    "  <div class=\"onsen-split-view__secondary full-screen ons-split-view-inner\"></div>\n" +
-    "\n" +
-    "  <div class=\"onsen-split-view__main full-screen ons-split-view-inner\"></div>\n" +
-    "</div>\n" +
+    "<div class=\"onsen-split-view__secondary full-screen ons-split-view-inner\"></div>\n" +
+    "<div class=\"onsen-split-view__main full-screen ons-split-view-inner\"></div>\n" +
     "");
 }]);
 })();

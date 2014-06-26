@@ -15,22 +15,20 @@
 
 <body>    
   
-  <ons-screen>
-    <ons-split-view 
-      var="app.splitView"
-      secondary-page="secondary.html" 
-      main-page="page1.html" 
-      main-page-width="40%" 
-      collapse="width 650px">
-    </ons-split-view>
-  </ons-screen>
+  <ons-split-view 
+    var="app.splitView"
+    secondary-page="secondary.html" 
+    main-page="page1.html" 
+    main-page-width="40%" 
+    collapse="width 650px">
+  </ons-split-view>
 
   <script type="text/ons-template" id="secondary.html">
     <ons-page style="background-color: white">
-      <ul class="list">
-
+      <ons-list>
         <ons-list-item
-          class="list__item--tappable list__item__line-height" 
+          modifier="tappable"
+          class="list__item__line-height" 
           onclick="
             app.splitView.toggle();
             app.splitView.setMainPage('page1.html');">
@@ -39,7 +37,8 @@
         </ons-list-item>
 
         <ons-list-item 
-          class="list__item--tappable list__item__line-height"
+          modifier="tappable"
+          class="list__item__line-height"
           onclick="
             app.splitView.toggle();
             app.splitView.setMainPage('page2.html');">
@@ -47,7 +46,7 @@
           &nbsp; Page 2
         </ons-list-item>
 
-      </ul>
+      </ons-list>
     </ons-page>
   </script>
  

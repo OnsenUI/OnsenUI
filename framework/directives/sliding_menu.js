@@ -22,10 +22,12 @@ limitations under the License.
 
   var SlidingMenuAnimator = Class.extend({
 
+    _blackMask: undefined,
+
     /**
-     * @param {jqLite} element "ons-sliding-menu" element
+     * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
      */
-    setup: function(element) {
+    activate: function(element) {
       this._blackMask = angular.element('<div></div>');
       this._blackMask.css({
         backgroundColor: 'black',
@@ -35,7 +37,17 @@ limitations under the License.
         bottom: '0px',
         position: 'absolute'
       });
+
       element.prepend(this._blackMask);
+    },
+
+    /**
+     * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
+     */
+    deactivate: function(element) {
+      if (this._blackMask) {
+        this._blackMask.remove();
+      }
     },
 
     /**
@@ -191,7 +203,7 @@ limitations under the License.
         this._behindPage = angular.element(element[0].querySelector('.onsen-sliding-menu__behind'));
         this._abovePage = angular.element(element[0].querySelector('.onsen-sliding-menu__above'));
 
-        this._MAX = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+        this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
 
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
         attrs.$observe('swipable', this._onSwipableChanged.bind(this));
@@ -218,7 +230,7 @@ limitations under the License.
           this._behindPage.css({opacity: 1});
 
           this._animator = new SlidingMenuAnimator();
-          this._animator.setup(this._element);
+          this._animator.activate(this._element);
         }.bind(this), 400);
       },
 
@@ -278,7 +290,7 @@ limitations under the License.
           }
         }
         if (maxDistance) {
-          this._MAX = parseInt(maxDistance, 10);
+          this._max = parseInt(maxDistance, 10);
         }
       },
 
@@ -398,6 +410,7 @@ limitations under the License.
           case 'dragright':
             event.gesture.preventDefault();
             var deltaX = event.gesture.deltaX;
+
             this._currentX = this._startX + deltaX;
             if (this._currentX >= 0) {
               this._translate(this._currentX);
@@ -415,7 +428,7 @@ limitations under the License.
             break;
 
           case 'release':
-            if (this._currentX > this._MAX / 2) {
+            if (this._currentX > this._max / 2) {
               this.open();
             } else {
               this.close();
@@ -462,7 +475,7 @@ limitations under the License.
             var unlock = self._doorLock.lock();
             self._currentX = 0;
 
-            self._animator.close(self._abovePage, self._behindPage, {max: self._MAX}, function() {
+            self._animator.close(self._abovePage, self._behindPage, {max: self._max}, function() {
               unlock();
             });
           });
@@ -473,15 +486,15 @@ limitations under the License.
        * Open sliding-menu page.
        */
       open: function() {
-        this._startX = this._MAX;
+        this._startX = this._max;
 
-        if (this._currentX != this._MAX) {
+        if (this._currentX != this._max) {
           var self = this;
           this._doorLock.waitUnlock(function() {
             var unlock = self._doorLock.lock();
-            self._currentX = self._MAX;
+            self._currentX = self._max;
 
-            self._animator.open(self._abovePage, self._behindPage, {max: self._MAX}, function() {
+            self._animator.open(self._abovePage, self._behindPage, {max: self._max}, function() {
               unlock();
             });
           });
@@ -514,12 +527,14 @@ limitations under the License.
 
         var options = {
           x: x,
-          max: this._MAX
+          max: this._max
         };
 
         this._animator.translate(this._abovePage, this._behindPage, options);
       }
     });
+    Swiper.SlidingMenuAnimator = SlidingMenuAnimator;
+
     return Swiper;
   });
 
