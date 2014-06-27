@@ -1,11 +1,11 @@
 /*
-Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
+   Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,50 +17,53 @@ limitations under the License.
 
 
 (function() {
-	'use strict';
-	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
+  'use strict';
+  var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsTabbarItem', function(ONSEN_CONSTANTS) {
-		return {
-			restrict: 'E',
-			replace: true,
-			transclude: true,
-			require: '^onsTabbar',
-			scope: {
-				page: '@',
-				active: '@',
-				icon: '@',
-				activeIcon: '@',
-				label: '@'
-			},
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
-			link: function(scope, element, attrs, tabbarController) {
-				var radioButton = element[0].querySelector('input');
+  directives.directive(
+    'onsTabbarItem', 
+    ['ONSEN_CONSTANTS',
+      function(ONSEN_CONSTANTS) {
+        return {
+          restrict: 'E',
+          replace: true,
+          transclude: true,
+          require: '^onsTabbar',
+          scope: {
+            page: '@',
+            active: '@',
+            icon: '@',
+            activeIcon: '@',
+            label: '@'
+          },
+          templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
+          link: function(scope, element, attrs, tabbarController) {
+            var radioButton = element[0].querySelector('input');
 
-				scope.tabbarId = tabbarController.tabbarId;
+            scope.tabbarId = tabbarController.tabbarId;
 
-				tabbarController.addTabItem(scope);
-				scope.tabIcon = scope.icon;
+            tabbarController.addTabItem(scope);
+            scope.tabIcon = scope.icon;
 
-				scope.setActive = function() {
-					element.addClass('active');
-					radioButton.checked = true;
-					tabbarController.gotSelected(scope);
-					if (scope.activeIcon) {
-						scope.tabIcon = scope.activeIcon;
-					}
-				};
+            scope.setActive = function() {
+              element.addClass('active');
+              radioButton.checked = true;
+              tabbarController.gotSelected(scope);
+              if (scope.activeIcon) {
+                scope.tabIcon = scope.activeIcon;
+              }
+            };
 
-				scope.setInactive = function() {
-					element.removeClass('active');
-					scope.tabIcon = scope.icon;
-				};
+            scope.setInactive = function() {
+              element.removeClass('active');
+              scope.tabIcon = scope.icon;
+            };
 
-				if (scope.active) {
-					scope.setActive();
-				}
+            if (scope.active) {
+              scope.setActive();
+            }
 
-			}
-		};
-	});
+          }
+        };
+      }]);
 })();

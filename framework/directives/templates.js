@@ -172,7 +172,7 @@ angular.module("templates/split_view.tpl", []).run(["$templateCache", function($
 
 angular.module("templates/tab_bar.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/tab_bar.tpl",
-    "  <div style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content\">\n" +
+    "<div style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content\">\n" +
     "    \n" +
     "  </div>\n" +
     "  <div ng-hide=\"hideTabs\" class=\"topcoat-tab-bar full footer\" ng-transclude>         \n" +

@@ -21,13 +21,13 @@ limitations under the License.
 
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsBottomToolbar', function(ONSEN_CONSTANTS, $timeout) {
+	directives.directive('onsBottomToolbar', ['ONSEN_CONSTANTS', '$timeout', function(ONSEN_CONSTANTS, $timeout) {
 		return {
 			restrict: 'E',
 			transclude: true,
 			replace: true,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/bottom_toolbar.tpl'
 		};
-	});
+	}]);
 })();
 

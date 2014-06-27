@@ -3,7 +3,7 @@
 
 	var directives = angular.module('onsen.directives'); // no [] -> referencing existing module
 
-	directives.directive('onsIfPlatform', function(ONSEN_CONSTANTS) {
+	directives.directive('onsIfPlatform', ['ONSEN_CONSTANTS', function(ONSEN_CONSTANTS) {
 		return {
 			restrict: 'A',
 			replace: false,
@@ -68,5 +68,5 @@
 				});				
 			}
 		};
-	});
+	}]);
 })();
