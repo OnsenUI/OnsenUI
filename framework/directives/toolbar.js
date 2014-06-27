@@ -4,19 +4,6 @@
  * @name ons-toolbar
  * @description
  * Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.
- * @example
- * <ons-navigator>
- *   <ons-page>
- *     <!-- Toolbar -->
- *     <ons-toolbar>
- *      <div class="left"></div>
- *      <div class="center">Title</div>
- *      <div class="right">
- *        <ons-button>Config</ons-button>
- *      </div>
- *     </ons-toolbar>
- *   </ons-page>
- * </ons-navigator>
  * @demoURL
  * OnsenUI/demo/screen/
  */

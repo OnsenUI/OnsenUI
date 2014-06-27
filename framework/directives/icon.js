@@ -9,7 +9,7 @@
  * @param rotate The degree to rotate the icon. Valid values are [90/180/270]
  * @param flip Flip the icon. Valid values are [horizontal/vertial]
  * @param fixed-width When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are [true/false]
- * @param spin Wether to spin the icon. Valid values are [true/false]
+ * @param spin Whether to spin the icon. Valid values are [true/false]
  */
 (function(){
   'use strict';

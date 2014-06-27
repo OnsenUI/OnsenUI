@@ -4,12 +4,6 @@
  * @name ons-page
  * @description
  * Should be used as root component of each page. The content inside page component is not scrollable. If you need scroll behavior, you can put inside this component.
- * @example
- * <ons-navigator title="Page">
- *     <ons-page class="center">
- *         <h1>Page Content</h1>
- *     </ons-page>
- * </ons-navigator>
  * @demoURL
  * OnsenUI/demo/page/
  */
