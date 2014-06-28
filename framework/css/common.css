@@ -35,6 +35,10 @@ input, textarea {
   padding-top: 20px;
 }
 
+ons-toolbar + .page__content {
+  padding-top: 44px;
+}
+
 .page__status-bar-fill + ons-toolbar + .page__content {
   padding-top: 64px;
 }

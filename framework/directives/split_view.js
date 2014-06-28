@@ -20,7 +20,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsSplitView', function($compile, SplitViewStack, SlidingMenu, $onsen) {
+  module.directive('onsSplitView', function($compile, SlidingMenu, $onsen) {
 
     var ON_PAGE_READY = 'onPageReady';
 
@@ -43,7 +43,7 @@ limitations under the License.
         var COLLAPSE_MODE = 1;
         var MAIN_PAGE_RATIO = 0.9;
 
-        var Swiper = Class.extend({
+        var SplitView = Class.extend({
 
           init: function(element) {
             element.addClass('onsen-sliding-menu');
@@ -405,16 +405,6 @@ limitations under the License.
             var behindTransform = 'none';
 
             this._abovePage.css('left', x + 'px');
-            /*
-            this._abovePage.css('transform', aboveTransform);
-            this._abovePage.css('webkitTransform', aboveTransform);
-            this._abovePage.css('-webkit-transform', aboveTransform);
-
-            this._behindPage.css('transform', behindTransform);
-            this._behindPage.css('webkitTransform', behindTransform);
-            this._behindPage.css('-webkit-transform', behindTransform);
-            */
-
             this._currentX = x;
           }
         });
@@ -423,12 +413,12 @@ limitations under the License.
           return !isNaN(parseFloat(n)) && isFinite(n);
         }
 
-        var swiper = new Swiper(element);
-        $onsen.declareVarAttribute(attrs, swiper);
+        var splitView = new SplitView(element);
+        $onsen.declareVarAttribute(attrs, splitView);
 
-        SplitViewStack.addSplitView(swiper);
+        $onsen.aliasStack.register('ons.splitView', splitView);
         scope.$on('$destroy', function() {
-          SplitViewStack.removeSplitView(swiper);
+          $onsen.aliasStack.unregister('ons.splitView', splitView);
         });
       }
     };

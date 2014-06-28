@@ -20,7 +20,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsTabbar', function($timeout, $compile, $onsen, TabbarStack) {
+  module.directive('onsTabbar', function($timeout, $compile, $onsen) {
     return {
       restrict: 'E',
       replace: false,
@@ -122,7 +122,10 @@ limitations under the License.
           tabItem.setActive();
         };
 
-        TabbarStack.add($scope);
+        $onsen.aliasStack.register('ons.tabbar', $scope);
+        $scope.$watch('$destroy', function() {
+          $onsen.aliasStack.unregister('ons.tabbar', $scope);
+        });
       }
     };
   });

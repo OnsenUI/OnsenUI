@@ -19,7 +19,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsNavigator', function($compile, NavigatorStack, Navigator, $onsen) {
+  module.directive('onsNavigator', function($compile, Navigator, $onsen) {
     return {
       restrict: 'E',
 
@@ -49,9 +49,10 @@ limitations under the License.
               navigator._pushPageDOM('', compiledPage, pageScope, {});
             }
 
-            NavigatorStack.addNavigator(navigator);
-            scope.$on('$destroy', function(){
-              NavigatorStack.removeNavigator(navigator);
+            $onsen.aliasStack.register('ons.navigator', navigator);
+
+            scope.$on('$destroy', function() {
+              $onsen.aliasStack.unregister('ons.navigator', navigator);
             });
           }
         };

@@ -259,7 +259,7 @@ limitations under the License.
     return Screen;
   });
 
-  module.directive('onsScreen', function($compile, Screen, ScreenStack, $onsen) {
+  module.directive('onsScreen', function($compile, Screen, $onsen) {
 
     return {
       restrict: 'E',
@@ -285,10 +285,10 @@ limitations under the License.
             screen._presentPageDOM('', compiled, pageScope);
           }
 
-          ScreenStack.addScreen(scope);
+          $onsen.aliasStack.register('ons.screen', screen);
 
           scope.$on('$destroy', function(){
-            ScreenStack.removeScreen(scope);
+            $onsen.aliasStack.register('ons.screen', screen);
           });
         };
 

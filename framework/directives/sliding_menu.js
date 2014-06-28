@@ -538,7 +538,7 @@ limitations under the License.
     return Swiper;
   });
 
-  module.directive('onsSlidingMenu', function($compile, SlidingMenu, SlidingMenuStack, $onsen) {
+  module.directive('onsSlidingMenu', function($compile, SlidingMenu, $onsen) {
     return {
       restrict: 'E',
       replace: false,
@@ -556,11 +556,12 @@ limitations under the License.
 
         var slidingMenu = new SlidingMenu(scope, element, attrs);
 
+        $onsen.aliasStack.register('ons.slidingMenu', slidingMenu);
+        console.log(scope.ons.slidingMenu);
         $onsen.declareVarAttribute(attrs, slidingMenu);
-        SlidingMenuStack.addSlidingMenu(slidingMenu);
 
         scope.$on('$destroy', function(){
-          SlidingMenuStack.removeSlidingMenu(swiper);
+          $onsen.aliasStack.unregister('ons.slidingMenu', slidingMenu);
         });
       }
     };

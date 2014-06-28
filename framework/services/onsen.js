@@ -25,9 +25,58 @@ limitations under the License.
    */
   module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q) {
 
+    /**
+     * Global object stack manager.
+     *
+     * e.g. "ons.screen", "ons.navigator"
+     */
+    var aliasStack = {
+      _stackDict : {},
+
+      /**
+       * @param {String} name
+       * @param {Object} object
+       */
+      register: function(name, object) {
+        this._getStack(name).push(object);
+        
+        $onsen._defineVar(name, object);
+      },
+
+      /**
+       * @param {String} name
+       * @param {Object} target
+       */
+      unregister: function(name, target) {
+        var stack = this._getStack(name);
+
+        var index = stack.indexOf(target);
+        if (index === -1) {
+          throw new Error('no such object: ' + target);
+        }
+        stack.splice(index, 1);
+
+        var obj = stack.length > 1 ? stack[stack.length - 1] : null;
+        $onsen._defineVar(name, obj);
+      },
+
+      /**
+       * @param {String} name
+       */
+      _getStack: function(name) {
+        if (!this._stackDict[name]) {
+          this._stackDict[name] = [];
+        }
+
+        return this._stackDict[name];
+      }
+    };
+
     var $onsen = {
 
       DIRECTIVE_TEMPLATE_URL: "templates",
+
+      aliasStack: aliasStack,
 
       /**
        * Cache for predefined template.
@@ -194,7 +243,7 @@ limitations under the License.
         }
 
         set($window, names, object);
-        set($rootScope, names, object);        
+        set($rootScope, names, object);
       }
     };
 
