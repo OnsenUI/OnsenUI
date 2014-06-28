@@ -557,10 +557,11 @@ limitations under the License.
         var slidingMenu = new SlidingMenu(scope, element, attrs);
 
         $onsen.aliasStack.register('ons.slidingMenu', slidingMenu);
-        console.log(scope.ons.slidingMenu);
         $onsen.declareVarAttribute(attrs, slidingMenu);
+        element.data('ons-sliding-menu', slidingMenu);
 
         scope.$on('$destroy', function(){
+          element.data('ons-sliding-menu', undefined);
           $onsen.aliasStack.unregister('ons.slidingMenu', slidingMenu);
         });
       }

@@ -123,7 +123,9 @@ limitations under the License.
         };
 
         $onsen.aliasStack.register('ons.tabbar', $scope);
+        element.data('ons-tabbar', $scope);
         $scope.$watch('$destroy', function() {
+          element.data('ons-tabbar', undefined);
           $onsen.aliasStack.unregister('ons.tabbar', $scope);
         });
       }

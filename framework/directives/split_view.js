@@ -416,8 +416,11 @@ limitations under the License.
         var splitView = new SplitView(element);
         $onsen.declareVarAttribute(attrs, splitView);
 
+        element.data('ons-split-view', splitView);
         $onsen.aliasStack.register('ons.splitView', splitView);
+
         scope.$on('$destroy', function() {
+          element.data('ons-split-view', undefined);
           $onsen.aliasStack.unregister('ons.splitView', splitView);
         });
       }

@@ -50,8 +50,10 @@ limitations under the License.
             }
 
             $onsen.aliasStack.register('ons.navigator', navigator);
+            element.data('ons-navigator', navigator);
 
             scope.$on('$destroy', function() {
+              element.data('ons-navigator', undefined);
               $onsen.aliasStack.unregister('ons.navigator', navigator);
             });
           }

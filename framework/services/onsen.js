@@ -98,8 +98,13 @@ limitations under the License.
         return cache;
       })(),
 
-      // Find first ancestor of el with tagName
-      // or undefined if not found
+      /**
+       * Find first ancestor of el with tagName
+       * or undefined if not found
+       *
+       * @param {jqLite} element
+       * @param {String} tagName
+       */
       upTo : function(el, tagName) {
         tagName = tagName.toLowerCase();
 
@@ -114,6 +119,14 @@ limitations under the License.
         } while (el.parentNode);
 
         return null;
+      },
+
+      /**
+       * @param {jqLite} element
+       * @param {String} name
+       */
+      findElementeObject: function(element, name) {
+        return element.inheritedData(name);
       },
 
       /**

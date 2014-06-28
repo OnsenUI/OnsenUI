@@ -48,6 +48,24 @@
     },
 
     /**
+     * @param {String} name
+     * @param {Object/jqLite/HTMLElement} dom $event object or jqLite object or HTMLElement object.
+     * @return {Object}
+     */
+    getDirectiveObject: function(name, dom) {
+      var element;
+      if (dom instanceof HTMLElement) {
+        element = angular.element(dom);
+      } else if (dom instanceof angular.element) {
+        element = dom;
+      } else if (dom.target) {
+        element = angular.element(dom.target);
+      }
+
+      return element.inheritedData(name);
+    },
+
+    /**
      * @return {Boolean}
      */
     isReady : function() {
