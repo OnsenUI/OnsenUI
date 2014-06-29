@@ -1,20 +1,39 @@
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
+/**
+ * @ngdoc directive
+ * @id navigator
+ * @name ons-navigator
+ * @description
+ *  [en]Manages the page navigation backed by page stack.[/en]
+ *  [ja]ページスタックを用いたページの切り替えを管理します。[/ja]
+ * @param page First page to show when navigator is initialized
+ * @property pushPage(pageUrl, options)
+ *  [en]Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. the options object include all the attributes of this navigator but replace the hyphen '-' with camel-case letter. eg. pushPage('page2.html')[/en]
+ *  [ja]指定したpageUrlを新しいページスタックに追加します。[/ja]
+ * @property popPage() Pops current page from the page stack
+ * @property resetToPage(pageUrl,options) Clears page stack and add the specified pageUrl to the page stack. If options object is specified, apply the options. the options object include all the attributes of this navigator
+ * @property getCurrentPage() Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method. eg. ons.navigator.getCurrentPage().options
+ * @property getPages() Retrieve the entire page stages of the navigator.
+ *
+ * @example
+ * <ons-navigator>
+ *   <ons-page>
+ *     <!-- Toolbar -->
+ *     <ons-toolbar>
+ *      <div class="left"></div>
+ *      <div class="center">Title</div>
+ *      <div class="right">
+ *        <ons-button>Config</ons-button>
+ *      </div>
+ *     </ons-toolbar>
+ *   </ons-page>
+ * </ons-navigator>
+ * @demoURL
+ * OnsenUI/demo/screen/
+ */
+/**
+ * @lang ja
+ * @description
+ */
 (function() {
   'use strict';
   var module = angular.module('onsen');

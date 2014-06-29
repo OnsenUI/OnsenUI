@@ -39,7 +39,8 @@ var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync');
 var cache = require('gulp-cached');
 var gulpIf = require('gulp-if');
-
+var dgeni = require('dgeni');
+var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
 
 ////////////////////////////////////////
 // browser-sync
@@ -281,3 +282,54 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   });
 });
 
+////////////////////////////////////////
+// build-theme
+////////////////////////////////////////
+gulp.task('build-theme', function(done) {
+  gulp.src('themes/theme-modules/*/theme-*.styl')
+  .pipe(stylus())
+  .pipe(rename(function(path) {
+    path.dirname = '.';
+    path.basename = path.basename.replace(/^theme-/, '');
+  }))
+  .pipe(autoprefix('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2'))
+  .pipe(gulp.dest('themes/css/'))
+  .on('end', function() {
+    gutil.log('minify start');
+    // minify
+    gulp.src(['themes/css/*.css', '!themes/css/*.min.css'])
+    .pipe(rename({extname: '.min.css'}))
+    .pipe(cssminify())
+    .pipe(gulp.dest('themes/css/'))
+    .on('end', done);
+  });
+});
+
+////////////////////////////////////////
+// build-topdoc
+////////////////////////////////////////
+gulp.task('build-topdoc', shell.task([
+  './node_modules/.bin/topdoc --source themes/css --destination themes/testcases --template themes/testcases-topdoc-template'
+]));
+
+////////////////////////////////////////
+// build-doc
+////////////////////////////////////////
+gulp.task('build-doc-ja', function() {
+  njglobals.rootUrl = '/';
+  njglobals.lang = 'ja';
+  dgeni.generator('docs/dgeni.conf.js')();
+});
+
+gulp.task('build-doc-en', function() {
+  njglobals.rootUrl = '/';
+  njglobals.lang = 'en';
+  dgeni.generator('docs/dgeni.conf.js')();
+})
+
+gulp.task('build-doc', function() {
+  return runSequence(
+    "build-doc-ja",
+    "build-doc-en"
+  );
+});

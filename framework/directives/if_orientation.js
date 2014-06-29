@@ -1,3 +1,11 @@
+/**
+ * @ngdoc directive
+ * @id if-orientation
+ * @name ons-if-orientation
+ * @description
+ * Conditionally display content depending on screen orientation. Valid values are [portrait/landscape]. Different from other components, this component is used as attribute in any element.
+ * @param ons-if-orientation Either portrait or landscape.
+ */
 (function(){
   'use strict';
 

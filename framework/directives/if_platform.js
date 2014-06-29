@@ -1,3 +1,11 @@
+/**
+ * @ngdoc directive
+ * @id if-platform
+ * @name ons-if-platform
+ * @description
+ * Conditionally display content depending on the platform/browser. Valid values are [ios/android/blackberry/chrome/safari/firefox/opera]. Different from other components, this component is used as attribute in any element.
+ * @param ons-if-platform Either opera, firefox, safari, chrome, ie, android, blackberry, ios or windows.
+ */
 (function() {
   'use strict';
 
@@ -55,7 +63,7 @@
         }
 
         if (navigator.userAgent.match(/IEMobile/i)) {
-          platform = "window";
+          platform = "windows";
         }
 
         $scope.platform = platform;

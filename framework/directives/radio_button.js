@@ -1,3 +1,16 @@
+/**
+ * @ngdoc directive
+ * @id radio_button
+ * @name ons-radio-button
+ * @description
+ * Radio button component
+ * @param ng-model The model to bind to
+ * @param value The value to be set to the model when this button is selected
+ * @param left-label The label to be shown on the left of the button
+ * @param right-label The label to be shown on the right of the button
+ * @param name The group name of this radio button
+ * @note Square box may be displayed for radio button in Android 2.3
+ */
 (function(){
   'use strict';
 
