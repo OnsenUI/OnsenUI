@@ -35,8 +35,16 @@ select) {
   font-size: 16px;
   color: #1f1f21;
 }
-.page ::-webkit-scrollbar {
+.page::-webkit-scrollbar {
   display: none;
+}
+.page__content {
+  background-color: #efeff4;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
 }
 /* topdoc
   name: Switch
@@ -307,15 +315,6 @@ select) {
       </div>
     </div>
 */
-.full {
-  width: 100%;
-}
-.half {
-  width: 50%;
-}
-.quarter {
-  width: 25%;
-}
 .navigation-bar {
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -341,11 +340,25 @@ select) {
   -ms-user-select: none;
   user-select: none;
   z-index: 2;
+  box-flex: 0;
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 auto;
   -moz-box-flex: 0;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  -moz-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
   height: 44px;
   padding-left: 0;
   padding-right: 0;
@@ -374,18 +387,23 @@ select) {
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
   padding: 0;
   margin: 0;
   font: inherit;
   color: inherit;
   background: transparent;
   border: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   line-height: 1;
   vertical-align: top;
-  float: left;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -moz-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  overflow: visible;
 }
 .navigation-bar__left {
   width: 25%;
@@ -396,22 +414,18 @@ select) {
   text-align: right;
 }
 .navigation-bar__center {
-  width: 50%;
+  -webkit-box-flex: 2;
+  -webkit-flex-grow: 2;
+  -moz-box-flex: 2;
+  -ms-flex-positive: 2;
+  flex-grow: 2;
+  min-width: 50%;
   text-align: center;
 }
 .navigation-bar__center:first-child:last-child {
   width: 100%;
 }
 .navigation-bar__title {
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
   line-height: 44px;
   font-size: 16px;
   font-weight: 500;
@@ -472,6 +486,7 @@ select) {
   -ms-user-select: none;
   user-select: none;
   z-index: 2;
+  display: block;
   height: 44px;
   padding-left: 0;
   padding-right: 0;

@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.0-dev - 2014-06-18 */
+/*! onsenui - v1.1.0-dev - 2014-06-29 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -24512,13 +24512,17 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
         }
 
         if (this.platform.name == 'ios') {
-            if (this.platform.version >= 7) {
+            if (this.platform.version >= 7 && isWebView()) {
                 this.viewportElement.setAttribute('content', this.IOS7_VIEWPORT);
             } else {
                 this.viewportElement.setAttribute('content', this.PRE_IOS7_VIEWPORT);
             }
         } else {
             this.viewportElement.setAttribute('content', this.DEFAULT_VIEWPORT);
+        }
+
+        function isWebView() {
+            return !!(window.cordova || window.phonegap || window.PhoneGap);
         }
     };
 
@@ -24549,21 +24553,10 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/back_button.tpl",
-    "<span class=\"icon-button--quiet {{modifierTemplater('icon-button--quiet--*')}}\" ng-click=\"back()\" style=\"height: 44px; line-height: 0; padding: 0;\">\n" +
-    "  <i class=\"fa fa-angle-left\" style=\"line-height: 44px; font-size: 36px; float:left; padding-left: 8px; padding-right: 4px;\"></i>\n" +
+    "<span class=\"icon-button--quiet {{modifierTemplater('icon-button--quiet--*')}}\" ng-click=\"$root.ons.getDirectiveObject('ons-navigator', $event).popPage()\" style=\"height: 44px; line-height: 0; padding: 0;\">\n" +
+    "  <i class=\"fa fa-angle-left ons-back-button__icon\" style=\"line-height: 44px; font-size: 36px; float:left; padding-left: 8px; padding-right: 4px;\"></i>\n" +
     "  <span style=\"vertical-align: middle; line-height: 44px; display: inline-block; height: 44px; float: left;\" class=\"back-button__label\"></span>\n" +
     "</span>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/bottom_toolbar.tpl",
-    "<div class=\"bottom-bar ons-bottom-toolbar-inner {{modifierTemplater('bottom-bar--*')}}\" ng-transclude></div>\n" +
     "");
 }]);
 })();
@@ -24651,13 +24644,9 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/list.tpl",
-    "<div class=\"ons-scroller full-screen page\" ons-scrollable>\n" +
-    "  <div class=\"ons-scroller__content ons-scroller-inner\">\n" +
-    "    <div class=\"list {{modifierTemplater('list--*')}}\">\n" +
-    "      <ul class=\"list__container {{modifierTemplater('list--*__container')}} ons-list-inner\" ng-transclude>\n" +
-    "      </ul>\n" +
-    "    </div>\n" +
-    "  </div>\n" +
+    "<div class=\"list {{modifierTemplater('list--*')}}\">\n" +
+    "  <ul class=\"list__container {{modifierTemplater('list--*__container')}} ons-list-inner\">\n" +
+    "  </ul>\n" +
     "</div>\n" +
     "");
 }]);
@@ -24707,7 +24696,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/screen.tpl",
-    "<div class=\"ons-screen\" ng-transclude></div>\n" +
+    "<div class=\"ons-screen\"></div>\n" +
     "");
 }]);
 })();
@@ -24718,10 +24707,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/scroller.tpl",
-    "<div class=\"ons-scroller full-screen page\" ons-scrollable>\n" +
-    "  <div class=\"ons-scroller__content ons-scroller-inner\" ng-transclude>\n" +
-    "  </div>\n" +
-    "</div>\n" +
+    "<div class=\"ons-scroller__content ons-scroller-inner\" ng-transclude></div>\n" +
     "");
 }]);
 })();
@@ -24743,14 +24729,8 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/sliding_menu.tpl",
-    "<div class=\"sliding-menu full-screen\">\n" +
-    "  <div ng-cloak class=\"onsen_sliding-menu-black-mask\"></div>\n" +
-    "  <div class=\"behind full-screen ons-sliding-menu-inner\">\n" +
-    "  </div>\n" +
-    "\n" +
-    "  <div class=\"above full-screen ons-sliding-menu-inner\">\n" +
-    "  </div>\n" +
-    "</div>\n" +
+    "<div class=\"onsen-sliding-menu__behind ons-sliding-menu-inner\"></div>\n" +
+    "<div class=\"onsen-sliding-menu__above ons-sliding-menu-inner\"></div>\n" +
     "");
 }]);
 })();
@@ -24761,12 +24741,8 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/split_view.tpl",
-    "<div class=\"sliding-menu full-screen\">\n" +
-    "  <div class=\"onsen_sliding-menu-black-mask\"></div>\n" +
-    "  <div class=\"secondary full-screen ons-split-view-inner\"></div>\n" +
-    "\n" +
-    "  <div class=\"main full-screen ons-split-view-inner\"></div>\n" +
-    "</div>\n" +
+    "<div class=\"onsen-split-view__secondary full-screen ons-split-view-inner\"></div>\n" +
+    "<div class=\"onsen-split-view__main full-screen ons-split-view-inner\"></div>\n" +
     "");
 }]);
 })();
@@ -24777,9 +24753,8 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/tab_bar.tpl",
-    "<div style=\"margin-bottom: {{tabbarHeight}}\" class=\"tab-bar-content ons-tabbar-inner\"></div>\n" +
-    "\n" +
-    "<div ng-hide=\"hideTabs\" class=\"tab-bar full footer {{modifierTemplater('tab-bar--*')}} ons-tabbar-inner\" ng-transclude></div>\n" +
+    "<div style=\"margin-bottom: {{tabbarHeight}}\" class=\"ons-tab-bar__content\"></div>\n" +
+    "<div ng-hide=\"hideTabs\" class=\"tab-bar ons-tab-bar__footer {{modifierTemplater('tab-bar--*')}} ons-tabbar-inner\" ng-transclude></div>\n" +
     "");
 }]);
 })();
@@ -24791,12 +24766,10 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/tab_bar_item.tpl",
     "<label class=\"tab-bar__item no-select {{tabbarModifierTemplater('tab-bar--*__item')}} {{modifierTemplater('tab-bar__item--*')}}\">\n" +
-    "  <input type=\"radio\" name=\"tab-bar-{{tabbarId}}\">\n" +
-    "  <button class=\"tab-bar__button full {{tabbarModifierTemplater('tab-bar--*__button')}} {{modifierTemplater('tab-bar__button--*')}}\" ng-click=\"setActive()\">\n" +
-    "    <i ng-show=\"icon != undefined\" class=\"fa fa-2x fa-{{tabIcon}} {{tabIcon}}\"></i>\n" +
-    "    <div class=\"onsen_tab-bar__label\" ng-class=\"{ big: icon === undefined }\">\n" +
-    "      {{label}}\n" +
-    "    </div>\n" +
+    "  <input type=\"radio\" name=\"tab-bar-{{tabbarId}}\" ng-click=\"setActive()\">\n" +
+    "  <button class=\"tab-bar__button {{tabbarModifierTemplater('tab-bar--*__button')}} {{modifierTemplater('tab-bar__button--*')}}\" ng-click=\"setActive()\">\n" +
+    "    <i ng-show=\"icon != undefined\" class=\"tab-bar__icon fa fa-2x fa-{{tabIcon}} {{tabIcon}}\"></i>\n" +
+    "    <div class=\"tab-bar__label\">{{label}}</div>\n" +
     "  </button>\n" +
     "</label>\n" +
     "");
@@ -24899,86 +24872,6 @@ limitations under the License.
 
 (function() {
   'use strict;';
-
-  /**
-   * Door locking system.
-   *
-   * @param {Object} [options]
-   */
-  var DoorLock = function(options) {
-    options = options || {};
-    this._lockList = [];
-    this._waitList = [];
-    this._log = options.log || function() {};
-  };
-
-  DoorLock.generateId = (function() {
-    var i = 0;
-    return function() {
-      return i++;
-    };
-  })();
-
-  DoorLock.prototype = {
-    /**
-     * Register a lock.
-     *
-     * @return {Function} Callback for unlocking.
-     */
-    lock: function() {
-      var self = this;
-      var unlock = function() {
-        self._unlock(unlock);
-      };
-      unlock.id = DoorLock.generateId();
-      this._lockList.push(unlock);
-      this._log('lock: ' + (unlock.id));
-
-      return unlock;
-    },
-
-    _unlock: function(fn) {
-      var index = this._lockList.indexOf(fn);
-      if (index === -1) {
-        throw new Error('This function is not registered in the lock list.');
-      }
-
-      this._lockList.splice(index, 1);
-      this._log('unlock: ' + fn.id);
-
-      this._tryToFreeWaitList();
-    },
-
-    _tryToFreeWaitList: function() {
-      while (!this.isLocked() && this._waitList.length > 0) {
-        this._waitList.shift()();
-      }
-    },
-
-    /**
-     * Register a callback for waiting unlocked door.
-     *
-     * @params {Function} callback Callback on unlocking the door completely.
-     */
-    waitUnlock: function(callback) {
-      if (!(callback instanceof Function)) {
-        throw new Error('The callback param must be a function.');
-      }
-
-      if (this.isLocked()) {
-        this._waitList.push(callback);
-      } else {
-        callback();
-      }
-    },
-
-    /**
-     * @return {Boolean}
-     */
-    isLocked: function() {
-      return this._lockList.length > 0;
-    }
-  };
 
   var TransitionAnimator = Class.extend({
     push: function(enterPage, leavePage, callback) {
@@ -25246,8 +25139,47 @@ limitations under the License.
     /** Black mask */
     backgroundMask : angular.element(
       '<div style="position: absolute; width: 100%;' +
-      'height: 100%; background-color: black;"></div>'
+      'height: 100%; background-color: rgba(0, 0, 0, 0.1); opacity: 0;"></div>'
     ),
+
+    _decompose: function(page) {
+      var elements = [];
+
+      var left = page.controller.getToolbarLeftItemsElement();
+      var right = page.controller.getToolbarRightItemsElement();
+
+      var other = []
+        .concat(left.children.length === 0 ? left : excludeBackButtonLabel(left.children))
+        .concat(right.children.length === 0 ? right : excludeBackButtonLabel(right.children));
+
+
+      var pageLabels = [
+        page.controller.getToolbarCenterItemsElement(),
+        page.controller.getToolbarBackButtonLabelElement()
+      ];
+
+      return {
+        pageLabels: pageLabels,
+        other: other,
+        content: page.controller.getContentElement(),
+        toolbar: page.controller.getToolbarElement(),
+        bottomToolbar: page.controller.getBottomToolbarElement()
+      };
+
+      function excludeBackButtonLabel(elements) {
+        var result = [];
+
+        for (var i = 0; i < elements.length; i++) {
+          if (elements[i].nodeName.toLowerCase() === 'ons-back-button') {
+            result.push(elements[i].querySelector('.ons-back-button__icon'));
+          } else {
+            result.push(elements[i]);
+          }
+        }
+
+        return result;
+      }
+    },
 
     /**
      * @param {Object} enterPage
@@ -25256,10 +25188,28 @@ limitations under the License.
      */
     push: function(enterPage, leavePage, callback) {
       var mask = this.backgroundMask.remove();
-      leavePage.element[0].parentNode.insertBefore(mask[0], leavePage.element[0]);
+      leavePage.element[0].parentNode.insertBefore(mask[0], leavePage.element[0].nextSibling);
+
+      var enterPageDecomposition = this._decompose(enterPage);
+      var leavePageDecomposition = this._decompose(leavePage);
+
+      var delta = (function() {
+        var rect = leavePage.element[0].getBoundingClientRect();
+        return Math.round(((rect.right - rect.left) / 2) * 0.6);
+      })();
 
       var maskClear = animit(mask[0])
-        .wait(0.4)
+        .queue({
+          opacity: 0,
+          transform: 'translate3d(0, 0, 0)'
+        })
+        .queue({
+          opacity: 1
+        }, {
+          duration: 0.4,
+          timing: 'cubic-bezier(.1, .7, .1, 1)'
+        })
+        .resetStyle()
         .queue(function(done) {
           mask.remove();
           done();
@@ -25278,7 +25228,7 @@ limitations under the License.
 
           maskClear,
 
-          animit(enterPage.controller.getContentElement())
+          animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar])
             .queue({
               css: {
                 transform: 'translate3D(100%, 0px, 0px)',
@@ -25294,7 +25244,7 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(enterPage.controller.getToolbarElement())
+          animit(enterPageDecomposition.toolbar)
             .queue({
               css: {
                 background: 'none',
@@ -25312,29 +25262,10 @@ limitations under the License.
                 'border-color 0.1s linear'
             }),
 
-          animit(enterPage.controller.getToolbarBackButtonLabelElement())
+          animit(enterPageDecomposition.pageLabels)
             .queue({
               css: {
-                transform: 'translate3d(100%, 0, 0)',
-                opacity: 0
-              },
-              duration: 0
-            })
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0
-              },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .wait(0.4)
-            .resetStyle(),
-
-          animit(enterPage.controller.getToolbarCenterItemsElement())
-            .queue({
-              css: {
-                transform: 'translate3d(100%, 0, 0)',
+                transform: 'translate3d(' + delta + 'px, 0, 0)',
                 opacity: 0
               },
               duration: 0
@@ -25349,7 +25280,7 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(enterPage.controller.getToolbarLeftItemsElement())
+          animit(enterPageDecomposition.other)
             .queue({
               css: {opacity: 0},
               duration: 0
@@ -25361,30 +25292,16 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(enterPage.controller.getToolbarRightItemsElement())
-            .queue({
-              css: {opacity: 0},
-              duration: 0
-            })
-            .queue({
-              css: {opacity: 1},
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .resetStyle(),
-
-          animit(leavePage.controller.getContentElement())
+          animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar])
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
-                opacity: 1.0
               },
               duration: 0
             })
             .queue({
               css: {
                 transform: 'translate3D(-25%, 0px, 0px)',
-                opacity: 0.9
               },
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
@@ -25395,7 +25312,7 @@ limitations under the License.
               done();
             }),
 
-          animit(leavePage.controller.getToolbarCenterItemsElement())
+          animit(leavePageDecomposition.pageLabels)
             .queue({
               css: {
                 transform: 'translate3d(0, 0, 0)',
@@ -25405,7 +25322,7 @@ limitations under the License.
             })
             .queue({
               css: {
-                transform: 'translate3d(-36%, 0, 0)',
+                transform: 'translate3d(-' + delta + 'px, 0, 0)',
                 opacity: 0,
               },
               duration: 0.4,
@@ -25413,43 +25330,13 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(leavePage.controller.getToolbarLeftItemsElement())
+          animit(leavePageDecomposition.other)
             .queue({
               css: {opacity: 1},
               duration: 0
             })
             .queue({
               css: {opacity: 0},
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .resetStyle(),
-
-          animit(leavePage.controller.getToolbarRightItemsElement())
-            .queue({
-              css: {opacity: 1},
-              duration: 0
-            })
-            .queue({
-              css: {opacity: 0},
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .resetStyle(),
-
-          animit(leavePage.controller.getToolbarBackButtonLabelElement())
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0
-              },
-              duration: 0
-            })
-            .queue({
-              css: {
-                transform: 'translate3d(-100%, 0, 0)',
-                opacity: 0,
-              },
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
@@ -25482,15 +25369,13 @@ limitations under the License.
           animit(leavePage.element[0])
             .queue({
               css: {
-                transform: 'translate3D(0, 0, 0)',
-                opacity: 1.0
+                transform: 'translate3D(0, 0, 0)'
               },
               duration: 0
             })
             .queue({
               css: {
-                transform: 'translate3D(-25%, 0px, 0px)',
-                opacity: 0.9
+                transform: 'translate3D(-25%, 0px, 0px)'
               },
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
@@ -25512,14 +25397,33 @@ limitations under the License.
      */
     pop: function(enterPage, leavePage, done) {
       var mask = this.backgroundMask.remove();
-      enterPage.element[0].parentNode.insertBefore(mask[0], enterPage.element[0]);
+      enterPage.element[0].parentNode.insertBefore(mask[0], enterPage.element[0].nextSibling);
+
+      var enterPageDecomposition = this._decompose(enterPage);
+      var leavePageDecomposition = this._decompose(leavePage);
+
+      var delta = (function() {
+        var rect = leavePage.element[0].getBoundingClientRect();
+        return Math.round(((rect.right - rect.left) / 2) * 0.6);
+      })();
 
       var maskClear = animit(mask[0])
-        .wait(0.4)
+        .queue({
+          opacity: 1,
+          transform: 'translate3d(0, 0, 0)'
+        })
+        .queue({
+          opacity: 0
+        }, {
+          duration: 0.4,
+          timing: 'cubic-bezier(.1, .7, .1, 1)'
+        })
+        .resetStyle()
         .queue(function(done) {
           mask.remove();
           done();
         });
+
 
       var bothPageHasToolbar =
         enterPage.controller.hasToolbarElement() &&
@@ -25530,12 +25434,11 @@ limitations under the License.
         !leavePage.controller.hasToolbarElement();
 
       if (bothPageHasToolbar || isToolbarNothing) {
-
         animit.runAll(
 
           maskClear,
 
-          animit(enterPage.controller.getContentElement())
+          animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar])
             .queue({
               css: {
                 transform: 'translate3D(-25%, 0px, 0px)',
@@ -25553,10 +25456,10 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(enterPage.controller.getToolbarBackButtonLabelElement())
+          animit(enterPageDecomposition.pageLabels)
             .queue({
               css: {
-                transform: 'translate3d(-100%, 0, 0)',
+                transform: 'translate3d(-' + delta + 'px, 0, 0)',
                 opacity: 0
               },
               duration: 0
@@ -25571,11 +25474,11 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(enterPage.controller.getToolbarCenterItemsElement())
+          animit(enterPageDecomposition.toolbar)
             .queue({
               css: {
-                transform: 'translate3d(-36%, 0, 0)',
-                opacity: 0
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1.0
               },
               duration: 0
             })
@@ -25589,7 +25492,7 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(enterPage.controller.getToolbarLeftItemsElement())
+          animit(enterPageDecomposition.other)
             .queue({
               css: {opacity: 0},
               duration: 0
@@ -25601,19 +25504,7 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(enterPage.controller.getToolbarRightItemsElement())
-            .queue({
-              css: {opacity: 0},
-              duration: 0
-            })
-            .queue({
-              css: {opacity: 1},
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .resetStyle(),
-
-          animit(leavePage.controller.getContentElement())
+          animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar])
             .queue({
               css: {
                 transform: 'translate3D(0px, 0px, 0px)'
@@ -25633,7 +25524,24 @@ limitations under the License.
               finish();
             }),
 
-          animit(leavePage.controller.getToolbarElement())
+          animit(leavePageDecomposition.other)
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 1
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3d(0, 0, 0)',
+                opacity: 0,
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            }),
+
+          animit(leavePageDecomposition.toolbar)
             .queue({
               css: {
                 background: 'none',
@@ -25643,7 +25551,7 @@ limitations under the License.
               duration: 0
             }),
 
-          animit(leavePage.controller.getToolbarBackButtonLabelElement())
+          animit(leavePageDecomposition.pageLabels)
             .queue({
               css: {
                 transform: 'translate3d(0, 0, 0)',
@@ -25653,59 +25561,8 @@ limitations under the License.
             })
             .queue({
               css: {
-                transform: 'translate3d(100%, 0, 0)',
+                transform: 'translate3d(' + delta + 'px, 0, 0)',
                 opacity: 0,
-              },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            }),
-
-          animit(leavePage.controller.getToolbarCenterItemsElement())
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1.0
-              },
-              duration: 0
-            })
-            .queue({
-              css: {
-                transform: 'translate3d(100%, 0, 0)',
-                opacity: 0,
-              },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            }),
-
-          animit(leavePage.controller.getToolbarLeftItemsElement())
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1
-              },
-              duration: 0
-            })
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 0
-              },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            }),
-
-          animit(leavePage.controller.getToolbarRightItemsElement())
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 1
-              },
-              duration: 0
-            })
-            .queue({
-              css: {
-                transform: 'translate3d(0, 0, 0)',
-                opacity: 0
               },
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
@@ -26150,7 +26007,6 @@ limitations under the License.
               navigator.app.exitApp();
             }
           }.bind(this);
-          this._androidBackButtonHandler = fn;
         }
 
         var fn = this._androidBackButtonHandler;
@@ -26224,25 +26080,23 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsBackButton', function($onsen) {
+  module.directive('onsBackButton', function($onsen, $compile) {
     return {
       restrict: 'E',
       replace: false,
-      transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/back_button.tpl',
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      transclude: true,
+      scope: true,
+
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-          scope.back = function() {
-            scope.ons.navigator.popPage();
-          };
 
-          transclude(scope.$parent.$new(), function(clonedElement) {
-            if (clonedElement.length === 0) {
-              angular.element(element[0].querySelector('.back-button__label')).text('Back');
-            } else {
-              element[0].querySelector('.back-button__label').appendChild(clonedElement[0]);
-            }
+          transclude(scope, function(clonedElement) {
+            element[0].querySelector('.back-button__label').appendChild(clonedElement[0]);
           });
         }
       }
@@ -26276,12 +26130,32 @@ limitations under the License.
   module.directive('onsBottomToolbar', function($onsen) {
     return {
       restrict: 'E',
-      transclude: true,
-      replace: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/bottom_toolbar.tpl',
-      link: function(scope, element, attrs) {
-        // modifier
-        scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+      replace: false,
+      require: '^onsPage',
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclde.
+      transclude: false,
+      scope: false,
+
+      compile: function(element, attrs) {
+
+        var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+        element.addClass('bottom-bar');
+        element.addClass(modifierTemplater('bottom-bar--*'));
+        element.css({'z-index': 0});
+
+        return {
+          pre: function(scope, element, attrs, pageController) {
+            // modifier
+            scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+            if (pageController) {
+              pageController.registerBottomToolbar(element);
+            }
+          }
+        };
       }
     };
   });
@@ -26709,9 +26583,18 @@ limitations under the License.
       restrict: 'E',
       replace: false,
       transclude: true,
+      scope: false,
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/list.tpl',
-      link: function(scope, element, attrs) {
+      link: function(scope, element, attrs, controller, transclude) {
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+        transclude(scope, function(clonedElement) {
+          angular.element(element[0].querySelector('.list__container')).append(clonedElement);
+        });
       }
     };
   });
@@ -26781,7 +26664,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsNavigator', function($compile, NavigatorStack, Navigator, $onsen) {
+  module.directive('onsNavigator', function($compile, Navigator, $onsen) {
     return {
       restrict: 'E',
 
@@ -26811,105 +26694,17 @@ limitations under the License.
               navigator._pushPageDOM('', compiledPage, pageScope, {});
             }
 
-            NavigatorStack.addNavigator(navigator);
-            scope.$on('$destroy', function(){
-              NavigatorStack.removeNavigator(navigator);
+            $onsen.aliasStack.register('ons.navigator', navigator);
+            element.data('ons-navigator', navigator);
+
+            scope.$on('$destroy', function() {
+              element.data('ons-navigator', undefined);
+              $onsen.aliasStack.unregister('ons.navigator', navigator);
             });
           }
         };
       }
     };
-  });
-})();
-
-(function() {
-  var directiveModules = angular.module('onsen');
-
-  directiveModules.factory('NavigatorStack', function($rootScope, $onsen) {
-    var NavigatorStack = Class.extend({
-      navigators: [],
-
-      init: function() {
-        $rootScope.ons = $rootScope.ons || {};
-        $rootScope.ons.navigator = {};
-        $rootScope.ons.navigator.pushPage = this.pushPage.bind(this);
-        $rootScope.ons.navigator.popPage = this.popPage.bind(this);
-        $rootScope.ons.navigator.resetToPage = this.resetToPage.bind(this);
-        $rootScope.ons.navigator.getCurrentPage = this.getCurrentPage.bind(this);
-        $rootScope.ons.navigator.getPages = this.getPages.bind(this);
-      },
-
-      _findNavigator: function($event) {
-        // finding the right navigator
-        var navigator;
-
-        if ($event) {
-          var navigatorElement = $onsen.upTo($event.target, 'ons-navigator');
-          navigator = angular.element(navigatorElement).isolateScope();
-        }
-
-        if (!navigator) {
-          navigator = this.navigators[this.navigators.length - 1];
-        }
-
-        return navigator;
-      },
-
-      _checkExistence: function() {
-        if (this.navigators.length === 0) {
-          throw new Error('oops!! no navigator registerred');
-        }
-      },
-
-      addNavigator: function(navigator) {
-        this.navigators.push(navigator);
-      },
-
-      removeNavigator: function(navigator){
-        for (var i = 0; i < this.navigators.length; i++) {
-          if(this.navigators[i] == navigator){
-            this.navigators.splice(i, 1);
-          }
-        }
-      },
-
-      pushPage: function(page, options, $event) {
-        this._checkExistence();
-
-        var navigator = this._findNavigator($event);
-        navigator.pushPage(page, options);
-      },
-
-      resetToPage: function(page, options, $event) {
-        this._checkExistence();
-
-        var navigator = this._findNavigator($event);
-        navigator.resetToPage(page, options);
-      },
-
-      popPage: function($event) {
-        this._checkExistence();
-
-        var navigator = this._findNavigator($event);
-        navigator.popPage();
-      },
-
-      getCurrentPage: function() {
-        this._checkExistence();
-
-        var navigator = this._findNavigator();
-        return navigator.getCurrentNavigatorItem();
-      },
-
-      getPages: function() {
-        this._checkExistence();
-
-        var navigator = this._findNavigator();
-        return navigator.pages;
-      }
-    });
-
-    return new NavigatorStack();
   });
 })();
 
@@ -26960,13 +26755,17 @@ limitations under the License.
     function controller($scope, $element) {
 
       this.registeredToolbarElement = false;
+      this.registeredBottomToolbarElement = false;
 
       this.nullElement = window.document.createElement('div');
 
       this.toolbarElement = angular.element(this.nullElement);
+      this.bottomToolbarElement = angular.element(this.nullElement);
 
       /**
        * Register toolbar element to this page.
+       *
+       * @param {jqLite} element
        */
       this.registerToolbar = function(element) {
         if (this.registeredToolbarElement) {
@@ -26974,15 +26773,11 @@ limitations under the License.
         }
         
         element.remove();
-        $element.prepend(element);
-
-        if ($onsen.isWebView() && $onsen.isIOS7Above()) {
-          // Adjustments for IOS7
-          var wrapper = $element[0].querySelector('.page__content');
-          angular.element(wrapper).css({
-            'top': '22px',
-            'paddingTop': null
-          });
+        var statusFill = $element[0].querySelector('.page__status-bar-fill');
+        if (statusFill) {
+          angular.element(statusFill).after(element);
+        } else {
+          $element.prepend(element);
         }
 
         this.toolbarElement = element;
@@ -26990,10 +26785,40 @@ limitations under the License.
       };
 
       /**
+       * Register toolbar element to this page.
+       *
+       * @param {jqLite} element
+       */
+      this.registerBottomToolbar = function(element) {
+        if (this.registeredBottomToolbarElement) {
+          throw new Error('This page\'s bottom-toolbar is already registered.');
+        }
+
+        element.remove();
+
+        this.bottomToolbarElement = element;
+        this.registeredBottomToolbarElement = true;
+
+        var fill = angular.element(document.createElement('div'));
+        fill.addClass('page__bottom-bar-fill');
+        fill.css({width: '0px', height: '0px'});
+
+        $element.prepend(fill);
+        $element.append(element);
+      };
+
+      /**
        * @return {Boolean}
        */
       this.hasToolbarElement = function() {
         return this.registeredToolbarElement;
+      };
+
+      /**
+       * @return {Boolean}
+       */
+      this.hasBottomToolbarElement = function() {
+        return this.registeredBottomToolbarElement;
       };
 
       /**
@@ -27016,6 +26841,13 @@ limitations under the License.
        */
       this.getToolbarElement = function() {
         return this.toolbarElement[0] || this.nullElement;
+      };
+
+      /**
+       * @return {HTMLElement}
+       */
+      this.getBottomToolbarElement = function() {
+        return this.bottomToolbarElement[0] || this.nullElement;
       };
 
       /**
@@ -27049,6 +26881,7 @@ limitations under the License.
       $scope.$on('$destroy', function(){
         this.toolbarElement = null;
         this.nullElement = null;
+        this.bottomToolbarElement = null;
       }.bind(this));
 
     }
@@ -27065,34 +26898,25 @@ limitations under the License.
       compile: function(element) {
         if ($onsen.isWebView() && $onsen.isIOS7Above()) {
           // Adjustments for IOS7
-          element.css('paddingTop', '20px');
+          var fill = angular.element(document.createElement('div'));
+          fill.addClass('page__status-bar-fill');
+          fill.css({width: '0px', height: '0px'});
+          element.prepend(fill);
         }
 
         return {
 
           pre: function(scope, element, attrs, controller, transclude) {
             var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-            element.addClass('page ' + modifierTemplater('page--*') + ' ons-page-inner');
+            element.addClass('page ' + modifierTemplater('page--*'));
 
             transclude(scope, function(clonedElement) {
-              var wrapper = angular.element('<div class="page__content"></div>');
-              wrapper.css({
-                position: 'absolute',
-                zIndex: 3,
-                top: '44px', // TODO 
-                left: '0px',
-                bottom: '0px',
-                right: '0px',
-                backgroundColor: '#efeff4'
-              });
-              element.append(wrapper);
-              element.css({'backgroundColor': 'transparent'});
+              var content = angular.element('<div class="page__content ons-page-inner"></div>');
+              content.addClass(modifierTemplater('page--*__content'));
+              content.css({zIndex: 0});
+              element.append(content);
 
-              if ($onsen.isWebView() && $onsen.isIOS7Above()) {
-                // Adjustments for IOS7
-                wrapper.css('paddingTop', '20px');
-              }
-              wrapper.append(clonedElement);
+              content.append(clonedElement);
             });
           },
 
@@ -27207,18 +27031,128 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
+  var TransitionAnimator = Class.extend({
+    push: function(enterPage, leavePage, callback) {
+      callback();
+    }, 
+
+    pop: function(enterPage, leavePage, callback) {
+      callback();
+    }
+  });
+
+  var ModalTransitionAnimator = TransitionAnimator.extend({
+
+    /** Black mask */
+    backgroundMask : angular.element(
+      '<div style="position: absolute; width: 100%;' +
+      'height: 100%; background-color: black;"></div>'
+    ),
+
+    push: function(enterPage, leavePage, callback) {
+      var mask = this.backgroundMask.remove();
+      leavePage.pageElement[0].parentNode.insertBefore(mask[0], leavePage.pageElement[0]);
+
+      animit.runAll(
+
+        animit(mask[0])
+          .wait(0.4)
+          .queue(function(done) {
+            mask.remove();
+            done();
+          }),
+        
+        animit(enterPage.pageElement[0])
+          .queue({
+            transform: 'translate3D(0, 100%, 0)'
+          })
+          .queue({
+            transform: 'translate3D(0, 0, 0)'
+          }, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .resetStyle()
+          .queue(function(done) {
+            callback();
+            done();
+          }),
+
+        animit(leavePage.pageElement[0])
+          .queue({
+            transform: 'translate3D(0, 0, 0)',
+            opacity: 1.0
+          })
+          .queue({
+            transform: 'translate3D(0, -10%, 0)',
+            opacity: 0.9
+          }, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .resetStyle()
+      );
+    },
+
+    pop: function(enterPage, leavePage, callback) {
+
+      var mask = this.backgroundMask.remove();
+      enterPage.pageElement[0].parentNode.insertBefore(mask[0], enterPage.pageElement[0]);
+
+      animit.runAll(
+
+        animit(mask[0])
+          .wait(0.4)
+          .queue(function(done) {
+            mask.remove();
+            done();
+          }),
+
+        animit(enterPage.pageElement[0])
+          .queue({
+            transform: 'translate3D(0, -10%, 0)',
+            opacity: 0.9
+          })
+          .queue({
+            transform: 'translate3D(0, 0, 0)',
+            opacity: 1.0
+          }, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .resetStyle()
+          .queue(function(done) {
+            callback();
+            done();
+          }),
+
+        animit(leavePage.pageElement[0])
+          .queue({
+            transform: 'translate3D(0, 0, 0)'
+          })
+          .queue({
+            transform: 'translate3D(0, 100%, 0)'
+          }, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+      );
+    }
+  });
+
   module.service('Screen', function($compile, ScreenStack, requestAnimationFrame, $onsen) {
-    var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
-    var TRANSITION_START = "webkitAnimationStart animationStart msAnimationStart oAnimationStart";
+    var TRANSITION_END = 'webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd';
+    var TRANSITION_START = 'webkitAnimationStart animationStart msAnimationStart oAnimationStart';
 
     var Screen = Class.extend({
+
       init: function(scope, element, attrs) {
         this.screenItems = [];
         this.scope = scope;
         this.element = element;
         this.attrs = attrs;
 
-        this.isReady = true;
+        this._doorLock = new DoorLock();
         this.attachMethods();
 
         if (scope.page) {
@@ -27226,65 +27160,8 @@ limitations under the License.
         }
       },
 
-      onTransitionEnded: function() {
-        this.isReady = true;
-      },
-
-      animateInBehindPage: function() {
-        var behindPage = this.screenItems[this.screenItems.length - 2].pageElement;
-        try {
-          behindPage.attr('class', 'ons-screen__page-container ons-screen__page-container--transition ons-screen__page-container--modal-behind');
-        } catch(e) {
-          console.log(e);
-        }
-      },
-
-      animateInCurrentPage: function(pager) {
-        pager.attr("class", "ons-screen__page-container ons-screen__page-container--unmodal");
-        var that = this;
-        pager.bind(TRANSITION_START, function transitionEnded() {
-          that.isReady = false;
-        });
-        pager.bind(TRANSITION_END, function transitionEnded() {
-          that.onTransitionEnded();
-        });
-
-        setTimeout(function() {
-          requestAnimationFrame(function() {
-            pager.attr("class", "ons-screen__page-container ons-screen__page-container--transition ons-screen__page-container--screen-center");
-            that.animateInBehindPage();
-          });
-        }, 10);
-      },
-
-      animateOutBehindPage: function() {
-        var behindPage = this.screenItems[this.screenItems.length - 1].pageElement;
-        behindPage.attr('class', 'ons-screen__page-container ons-screen__page-container--transition');
-      },
-
       isEmpty: function() {
         return this.screenItems.length < 1;
-      },
-
-      onPageAdded: function(page) {
-        var blackMask = angular.element(page[0].querySelector('.ons-screen__black-mask'));
-        blackMask.removeClass('ons-screen__black-mask--hidden');
-      },
-
-      generatePageEl: function(pageContent){
-        var pageEl = angular.element('<div></div>');
-        pageEl.addClass('onsne-screen__page-container');
-
-        var blackMask = angular.element('<div></div>');
-        blackMask.addClass('ons-screen__black-mask ons-screen__black-mask--hidden');
-        pageEl.append(blackMask);
-
-        var pageContainer = angular.element('<div></div>');
-        pageContainer.addClass('ons-screen__page ons-screen-inner');
-        pageEl.append(pageContainer);
-
-        pageContainer.append(pageContent);
-        return pageEl;
       },
 
       compilePageEl: function(pageEl, pageScope){
@@ -27293,83 +27170,94 @@ limitations under the License.
       },
 
       createPageScope: function(){
-        var pageScope = this.scope.$parent.$new();
+        var pageScope = this.scope.$new();
         return pageScope;
       },
 
       /**
        * @param {String} pageUrl
        * @param {DOMElement} element This element is must be ons-page element.
+       * @param {Object} pageScope
+       * @param {Function} [callback]
        */
-      _presentPageDOM: function(pageUrl, compiledPage, pageScope) {
-
-        this.element.append(compiledPage);
-
-        var isAnimate = this.screenItems.length >= 1;
-        if (isAnimate) {
-          this.animateInCurrentPage(compiledPage);
-        } else {
-          this.isReady = true;
-        }
+      _presentPageDOM: function(pageUrl, compiledPage, pageScope, callback) {
+        callback = callback || function() {};
 
         var screenItem = {
           pageUrl: pageUrl,
           pageElement: compiledPage,
-          pageScope: pageScope
+          pageScope: pageScope,
+          destroy: function() {
+            this.pageElement.remove();
+            this.pageScope.$destroy();
+          }
         };
+
+        // create stack context.
+        compiledPage.css('z-index', 0);
 
         this.screenItems.push(screenItem);
 
-        setTimeout(function() {
-          this.onPageAdded(compiledPage);
-        }.bind(this), 400);
+        if (this.screenItems.length > 1) {
+
+          var enterPage = screenItem;
+          var leavePage = this.screenItems[this.screenItems.length - 2];
+
+          new ModalTransitionAnimator().push(enterPage, leavePage, function() {
+            leavePage.pageElement.css({display: 'none'});
+            callback();
+          });
+          this.element.append(compiledPage);
+        } else {
+          this.element.append(compiledPage);
+          callback();
+        }
       },
 
-      presentPage: function(page){
-        if (!this.isReady) {
-          return;
-        }
-
+      presentPage: function(page) {
         var self = this;
 
-        $onsen.getPageHTMLAsync(page).then(function(html) {
-          var pageContent = angular.element(html.trim());
-          var pageEl = self.generatePageEl(pageContent);
-          var pageScope = self.createPageScope();
-          var compiledPage = self.compilePageEl(pageEl, pageScope);
+        this._doorLock.waitUnlock(function() {
+          var unlock = self._doorLock.lock();
 
-          self._presentPageDOM(page, compiledPage, pageScope);
-        }, function() {
-          self.onTransitionEnded();
-          throw new Error('Page is not found: ' + page);
+          $onsen.getPageHTMLAsync(page).then(function(html) {
+            var pageContent = angular.element(html.trim());
+            var pageScope = self.createPageScope();
+            var compiledPage = self.compilePageEl(pageContent, pageScope);
+
+            self._presentPageDOM(page, compiledPage, pageScope, unlock);
+          }, function() {
+            unlock();
+            throw new Error('Page is not found: ' + page);
+          });
         });
       },
 
       dismissPage: function(){
-        if (this.screenItems.length < 2 || !this.isReady) {
+        if (this.screenItems.length < 2) {
           return;
         }
 
-        var screenItem = this.screenItems.pop();
-        var currentPage = screenItem.pageElement;
-        this.animateOutBehindPage();
-        currentPage.attr("class", "ons-screen__page-container ons-screen__page-container--transition ons-screen__page-container--unmodal");
-        var that = this;
+        var self = this;
+        this._doorLock.waitUnlock(function() {
+          var unlock = self._doorLock.lock();
 
-        currentPage.bind(TRANSITION_START, function transitionEnded() {
-          that.isReady = false;
-        });
-        currentPage.bind(TRANSITION_END, function transitionEnded() {
-          currentPage.remove();
-          that.isReady = true;
-          screenItem.pageScope.$destroy();
+          var leavePage = self.screenItems.pop();
+          var enterPage = self.screenItems[self.screenItems.length - 1];
+
+          enterPage.pageElement.css({display: 'block'});
+
+          new ModalTransitionAnimator().pop(enterPage, leavePage, function() {
+            leavePage.destroy();
+            unlock();
+          });
         });
       },
 
       resetToPage: function(page){
         this.scope.presentPage(page);
         for (var i = 0; i < this.screenItems.length - 1; i++) {
-          this.screenItems[i].pageElement.remove();
+          this.screenItems[i].destroy();
         }
       },
 
@@ -27383,19 +27271,21 @@ limitations under the License.
     return Screen;
   });
 
-  module.directive('onsScreen', function($compile, Screen, ScreenStack, $onsen) {
+  module.directive('onsScreen', function($compile, Screen, $onsen) {
 
     return {
       restrict: 'E',
-      replace: true,
-      transclude: true,
-      scope: {
-        page: '@'
-      },
+      replace: false,
 
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/screen.tpl',
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      transclude: false,
+      scope: true,
 
       compile: function(element, attrs, transclude) {
+        var html = $onsen.normalizePageHTML(element.html().trim());
+        element.contents().remove();
+
         return function(scope, element, attrs) {
           var screen = new Screen(scope, element, attrs);
           $onsen.declareVarAttribute(attrs, screen);
@@ -27403,177 +27293,17 @@ limitations under the License.
           if (!attrs.page) {
             var pageScope = screen.createPageScope();
 
-            transclude(pageScope, function(pageContent) {
-              var pageEl = screen.generatePageEl(pageContent);
-              screen._presentPageDOM('', pageEl, pageScope);
-            });
+            var compiled = $compile(angular.element(html))(pageScope);
+            screen._presentPageDOM('', compiled, pageScope);
           }
-          ScreenStack.addScreen(scope);
+
+          $onsen.aliasStack.register('ons.screen', screen);
+
           scope.$on('$destroy', function(){
-            ScreenStack.removeScreen(scope);
+            $onsen.aliasStack.register('ons.screen', screen);
           });
         };
 
-      }
-    };
-  });
-})();
-
-(function() {
-  var module = angular.module('onsen');
-
-  module.factory('ScreenStack', function($rootScope, $onsen) {
-    var ScreenStack = Class.extend({
-      screens: [],
-
-      init: function() {
-        $rootScope.ons = $rootScope.ons || {};
-        $rootScope.ons.screen = {};
-        $rootScope.ons.screen.presentPage = this.presentPage.bind(this);
-        $rootScope.ons.screen.dismissPage = this.dismissPage.bind(this);
-        $rootScope.ons.screen.resetToPage = this.resetToPage.bind(this);
-      },
-
-      _findClosestScreen: function($event) {
-        // finding the right navigator
-        var screen;
-        if ($event) {
-          var screenElement = $onsen.upTo($event.target, 'ons-screen');
-          screen = angular.element(screenElement).isolateScope();
-        } else {
-          screen = this.screens[this.screens.length - 1];
-        }
-
-        return screen;
-      },
-
-      _checkExistence: function() {
-        if (this.screens.length === 0) {
-          throw new Error('oops!! no navigator registerred');
-        }
-      },
-
-      addScreen: function(screen) {
-        this.screens.push(screen);
-      },
-
-      removeScreen: function(screen){
-        for (var i = 0; i < this.screens.length; i++) {
-          if(this.screens[i] == screen){
-            this.screens.splice(i, 1);
-          }
-        }
-      },
-
-      presentPage: function(page, $event) {
-        this._checkExistence();
-
-        var screen = this._findClosestScreen($event);
-        screen.presentPage(page);
-      },
-
-      resetToPage: function(page, $event) {
-        this._checkExistence();
-
-        var screen = this._findClosestScreen($event);
-        screen.resetToPage(page);
-      },
-
-      dismissPage: function($event) {
-        this._checkExistence();
-
-        var screen = this._findClosestScreen($event);
-        screen.dismissPage();
-      }
-    });
-
-    return new ScreenStack();
-  });
-})();
-
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-(function() {
-  'use strict';
-  var module = angular.module('onsen'); // no [] -> referencing existing module
-
-  module.directive('onsScrollable', function($onsen, $timeout) {
-    return {
-      restrict: 'A',
-      replace: true,
-      transclude: false,
-      link: function(scope, element, attrs) {
-        // inifinte scroll
-
-        var scrollWrapper;
-        if (!element.hasClass('ons-scroller')) {
-          console.error('missing .ons-scroller class for ons-scrollable');
-          return;
-        }
-
-        scrollWrapper = element[0];
-        var offset = parseInt(attrs.threshold) || 10;
-
-        if (scope.onScrolled) {
-          scrollWrapper.addEventListener('scroll', function() {
-            if (scope.infinitScrollEnable) {
-              var scrollTopAndOffsetHeight = scrollWrapper.scrollTop + scrollWrapper.offsetHeight;
-              var scrollHeightMinusOffset = scrollWrapper.scrollHeight - offset;
-
-              if (scrollTopAndOffsetHeight >= scrollHeightMinusOffset) {
-                scope.onScrolled();
-              }
-            }
-          });
-        }
-
-
-        // IScroll for Android
-        if (!Modernizr.csstransforms3d) {
-          $timeout(function() {
-            var iScroll = new IScroll(scrollWrapper, {
-              momentum: true,
-              bounce: true,
-              hScrollbar: false,
-              vScrollbar: false,
-              preventDefault: false
-            });
-
-            iScroll.on('scrollStart', function(e) {
-              var scrolled = iScroll.y - offset;
-              if (scrolled < (iScroll.maxScrollY + 40)) {
-                // TODO: find a better way to know when content is upated so we can refresh
-                iScroll.refresh();
-              }
-            });
-
-            if (scope.onScrolled) {
-              iScroll.on('scrollEnd', function(e) {
-                var scrolled = iScroll.y - offset;
-                if (scrolled < iScroll.maxScrollY) {
-                  // console.log('we are there!');
-                  scope.onScrolled();
-                }
-              });
-            }
-
-          }, 500);
-        }
       }
     };
   });
@@ -27604,14 +27334,75 @@ limitations under the License.
   module.directive('onsScroller', function($onsen, $timeout) {
     return {
       restrict: 'E',
-      replace: true,
+      replace: false,
       transclude: true,
+
       scope: {
         onScrolled: '&',
         infinitScrollEnable: '='
       },
+
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/scroller.tpl',
-      link: function(scope, element, attrs) {
+
+      compile: function(element, attrs) {
+        element.addClass('ons-scroller');
+
+        return function(scope, element, attrs) {
+          if (attrs.ngController) {
+            throw new Error('"ons-scroller" can\'t accept "ng-controller" directive.');
+          }
+
+          // inifinte scroll
+          var scrollWrapper;
+
+          scrollWrapper = element[0];
+          var offset = parseInt(attrs.threshold) || 10;
+
+          if (scope.onScrolled) {
+            scrollWrapper.addEventListener('scroll', function() {
+              if (scope.infinitScrollEnable) {
+                var scrollTopAndOffsetHeight = scrollWrapper.scrollTop + scrollWrapper.offsetHeight;
+                var scrollHeightMinusOffset = scrollWrapper.scrollHeight - offset;
+
+                if (scrollTopAndOffsetHeight >= scrollHeightMinusOffset) {
+                  scope.onScrolled();
+                }
+              }
+            });
+          }
+
+          // IScroll for Android
+          if (!Modernizr.csstransforms3d) {
+            $timeout(function() {
+              var iScroll = new IScroll(scrollWrapper, {
+                momentum: true,
+                bounce: true,
+                hScrollbar: false,
+                vScrollbar: false,
+                preventDefault: false
+              });
+
+              iScroll.on('scrollStart', function(e) {
+                var scrolled = iScroll.y - offset;
+                if (scrolled < (iScroll.maxScrollY + 40)) {
+                  // TODO: find a better way to know when content is upated so we can refresh
+                  iScroll.refresh();
+                }
+              });
+
+              if (scope.onScrolled) {
+                iScroll.on('scrollEnd', function(e) {
+                  var scrolled = iScroll.y - offset;
+                  if (scrolled < iScroll.maxScrollY) {
+                    // console.log('we are there!');
+                    scope.onScrolled();
+                  }
+                });
+              }
+
+            }, 500);
+          }
+        };
       }
     };
   });
@@ -27676,442 +27467,552 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsSlidingMenu', function($templateCache, $compile, SlidingMenuStack, $onsen) {
-    return {
-      restrict: 'E',
-      replace: false,
-      transclude: false,
-      scope: {
-        behindPage: '@',
-        abovePage: '@',
-        maxSlideDistance: '@',
-        swipable: '@',
-        swipeTargetWidth: '@'
+  var SlidingMenuAnimator = Class.extend({
+
+    _blackMask: undefined,
+
+    /**
+     * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
+     */
+    activate: function(element) {
+      this._blackMask = angular.element('<div></div>');
+      this._blackMask.css({
+        backgroundColor: 'black',
+        top: '0px',
+        left: '0px',
+        right: '0px',
+        bottom: '0px',
+        position: 'absolute'
+      });
+
+      element.prepend(this._blackMask);
+    },
+
+    /**
+     * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
+     */
+    deactivate: function(element) {
+      if (this._blackMask) {
+        this._blackMask.remove();
+      }
+    },
+
+    /**
+     * @param {jqLite} abovePage
+     * @param {jqLite} behindPage
+     * @param {Object} options
+     * @param {Number} options.x
+     * @param {Function} callback
+     */
+    open: function(abovePage, behindPage, options, callback) {
+      behindPage.css('display', 'block');
+
+      var max = abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+
+      var aboveTransform = this._generateAbovePageTransform(max);
+      var behindStyle = this._generateBehindPageStyle(abovePage, max);
+
+      setTimeout(function() {
+
+        animit(abovePage[0])
+          .queue({
+            transform: aboveTransform
+          }, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .queue(function(done) {
+            callback();
+            done();
+          })
+          .play();
+
+        animit(behindPage[0])
+          .queue(behindStyle, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .play();
+
+      }, 1000 / 60);
+    },
+
+    /**
+     * @param {jqLite} abovePage
+     * @param {jqLite} behindPage
+     * @param {Object} options
+     * @param {Number} options.x
+     * @param {Function} callback
+     */
+    close: function(abovePage, behindPage, options, callback) {
+
+      var aboveTransform = this._generateAbovePageTransform(0);
+      var behindStyle = this._generateBehindPageStyle(abovePage, 0);
+
+      setTimeout(function() {
+
+        animit(abovePage[0])
+          .queue({
+            transform: aboveTransform
+          }, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .queue({
+            transform: 'translate2d(0, 0)'
+          })
+          .queue(function(done) {
+            behindPage.css('display', 'none');
+            callback();
+            done();
+          })
+          .play();
+
+        animit(behindPage[0])
+          .queue(behindStyle, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .queue(function(done) {
+            done();
+          })
+          .play();
+      }, 1000 / 60);
+    },
+
+    /**
+     * @param {jqLite} abovePage
+     * @param {jqLite} behindPage
+     * @param {Object} options
+     * @param {Number} options.x
+     */
+    translate: function(abovePage, behindPage, options) {
+      behindPage.css('display', 'block');
+
+      var aboveTransform = this._generateAbovePageTransform(options.x);
+      var behindStyle = this._generateBehindPageStyle(abovePage, options.x);
+
+      setTimeout(function() {
+
+        animit(abovePage[0])
+          .queue({transform: aboveTransform})
+          .play();
+
+        animit(behindPage[0])
+          .queue(behindStyle)
+          .play();
+
+      }, 1000 / 60);
+    },
+
+    _generateAbovePageTransform: function(x) {
+      var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
+
+      return aboveTransform;
+    },
+
+    _generateBehindPageStyle: function(abovePage, x) {
+      var max = abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+      var behindX = Math.min((x - max) / max * 10, 0);
+      var behindTransform = 'translate3d(' + behindX + '%, 0, 0)';
+      var opacity = 1 + behindX / 100;
+
+      return {
+        transform: behindTransform,
+        opacity: opacity
+      };
+    }
+  });
+
+  var MAIN_PAGE_RATIO = 0.9;
+
+  module.factory('SlidingMenu', function($onsen, $compile) {
+
+    var Swiper = Class.extend({
+      _scope: undefined,
+      _attrs: undefined,
+      _element: undefined,
+      _behindPage: undefined,
+      _abovePage: undefined,
+
+      _currentX: 0,
+      _startX: 0,
+
+      _doorLock: undefined,
+
+      init: function(scope, element, attrs) {
+        this._doorLock = new DoorLock();
+
+        this._scope = scope;
+        this._attrs = attrs;
+        this._element = element;
+
+        this._behindPage = angular.element(element[0].querySelector('.onsen-sliding-menu__behind'));
+        this._abovePage = angular.element(element[0].querySelector('.onsen-sliding-menu__above'));
+
+        this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+
+        attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
+        attrs.$observe('swipable', this._onSwipableChanged.bind(this));
+        attrs.$observe('swipeTargetWidth', this._onSwipeTargetWidthChanged.bind(this));
+
+        window.addEventListener('resize', this._onWindowResize.bind(this));
+
+        this._boundHandleEvent = this._handleEvent.bind(this);
+        this._bindEvents();
+
+        if (attrs.abovePage) {
+          this.setAbovePage(attrs.abovePage);
+        }
+
+        if (attrs.behindPage) {
+          this.setBehindPage(attrs.behindPage);
+        }
+
+        var unlock = this._doorLock.lock();
+
+        window.setTimeout(function() {
+          unlock();
+
+          this._behindPage.css({opacity: 1});
+
+          this._animator = new SlidingMenuAnimator();
+          this._animator.activate(this._element);
+        }.bind(this), 400);
       },
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
-      link: function(scope, element, attrs) {
-        var MAIN_PAGE_RATIO = 0.9;
-        var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
-        var BROWSER_TRANSFORMS = [
-          "webkitTransform",
-          "mozTransform",
-          "msTransform",
-          "oTransform",
-          "transform"
-        ];
 
-        var Swiper = Class.extend({
-          init: function(element) {
-            this.isReady = false;
-            this.$el = element;
-            this.el = element[0];
-            this.VERTICAL_THRESHOLD = 20;
-            this.HORIZONTAL_THRESHOLD = 20;
-            this.behindPage = element[0].querySelector('.behind');
-            this.$behindPage = angular.element(this.behindPage);
-            this.abovePage = element[0].querySelector('.above');
-            this.$abovePage = angular.element(this.abovePage);
-            this.blackMask = element[0].querySelector('.onsen_sliding-menu-black-mask');
-            this.previousX = 0;
-            this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
+      _onSwipableChanged: function(swipable) {
+        swipable = swipable === '' || swipable === undefined || swipable == 'true';
 
-            scope.$watch('maxSlideDistance', this.onMaxSlideDistanceChanged.bind(this));
-            scope.$watch('swipable', this.onSwipableChanged.bind(this));
-            scope.$watch('swipeTargetWidth', this.onSwipeTargetWidthChanged.bind(this));
-            window.addEventListener("resize", this.onWindowResize.bind(this));
+        this.setSwipable(swipable);
+      },
 
-            this.currentX = 0;
-            this.startX = 0;
+      /**
+       * @param {Boolean} enabled
+       */
+      setSwipable: function(enabled) {
+        if (enabled) {
+          this._activateHammer();
+        } else {
+          this._deactivateHammer();
+        }
+      },
 
-            this.boundHandleEvent = this.handleEvent.bind(this);
+      /**
+       * @param {Number} targetWidth
+       */
+      setSwipeTargetWidth: function(targetWidth) {
+        var width = parseInt(targetWidth, 10);
+        if (width < 0 || !targetWidth) {
+          this._swipeTargetWidth = this._abovePage[0].clientWidth;
+        } else {
+          this._swipeTargetWidth = width;
+        }
+      },
 
-            this.attachMethods();
-            this.bindEvents();
+      _onSwipeTargetWidthChanged: function(targetWidth) {
+        if (typeof targetWidth == 'string') {
+          targetWidth = targetWidth.replace('px', '');
+        }
 
-            if (scope.abovePage) {
-              scope.setAbovePage(scope.abovePage);
-            }
+        this.setSwipeTargetWidth(targetWidth);
+      },
 
-            if (scope.behindPage) {
-              scope.setBehindPage(scope.behindPage);
-            }
+      _onWindowResize: function() {
+        this._recalculateMAX();
+      },
 
-            window.setTimeout(function() {
-              this.isReady = true;
-              this.behindPage.style.opacity = 1;
-              this.blackMask.style.opacity = 1;
-            }.bind(this), 400);
-          },
+      _onMaxSlideDistanceChanged: function() {
+        this._recalculateMAX();
+      },
 
-          onSwipableChanged: function(swipable){
-            if(swipable === "" || swipable === undefined){
-              swipable = true;
-            }else{
-              swipable = (swipable == "true");
-            }
+      _recalculateMAX: function() {
+        var maxDistance = this._attrs.maxSlideDistance;
+        if (typeof maxDistance == 'string') {
+          if (maxDistance.indexOf('px') > 0) {
+            maxDistance = maxDistance.replace('px', '');
+          } else if (maxDistance.indexOf('%') > 0) {
+            maxDistance = maxDistance.replace('%', '');
+            maxDistance = parseFloat(maxDistance) / 100 * this._abovePage[0].clientWidth;
+          }
+        }
+        if (maxDistance) {
+          this._max = parseInt(maxDistance, 10);
+        }
+      },
 
-            if(swipable){
-              this.activateHammer();
-            }else{
-              this.deactivateHammer();
-            }
-          },
+      _activateHammer: function(){
+        this._hammertime.on('touch dragleft dragright swipeleft swiperight release', this._boundHandleEvent);
+      },
 
-          onSwipeTargetWidthChanged: function(targetWidth){
-            if(typeof targetWidth == 'string'){
-              targetWidth = targetWidth.replace('px', '');
-            }
-            var width = parseInt(targetWidth);
-            if(width < 0 || !targetWidth){
-              this.swipeTargetWidth = this.abovePage.clientWidth;
-            }else{
-              this.swipeTargetWidth = width;
-            }
-          },
+      _deactivateHammer: function(){
+        this._hammertime.off('touch dragleft dragright swipeleft swiperight release', this._boundHandleEvent);
+      },
 
-          onWindowResize: function(){
-            this.recalculateMAX();
-          },
+      _bindEvents: function() {
+        this._hammertime = new Hammer(this._element[0]);
+      },
 
-          onMaxSlideDistanceChanged: function(){
-            this.recalculateMAX();
-          },
+      _appendAbovePage: function(pageUrl, templateHTML) {
+        var pageScope = this._scope.$parent.$new();
+        var pageContent = $compile(templateHTML)(pageScope);
 
-          recalculateMAX: function(){
-            var maxDistance = scope.maxSlideDistance;
-            if(typeof maxDistance == 'string'){
-              if(maxDistance.indexOf('px') > 0){
-                maxDistance = maxDistance.replace('px', '');
-              }else if(maxDistance.indexOf('%') > 0){
-                maxDistance = maxDistance.replace('%', '');
-                maxDistance = parseFloat(maxDistance) / 100 * this.abovePage.clientWidth;
+        this._abovePage.append(pageContent);
+
+        // prevent black flash
+        setTimeout(function() {
+          pageContent.css({opacity: 1});
+
+          if (this._currentPageElement) {
+            this._currentPageElement.remove();
+            this._currentPageScope.$destroy();
+          }
+
+          this._currentPageElement = pageContent;
+          this._currentPageScope = pageScope;
+        }.bind(this), 0);
+
+        this._currentPageUrl = pageUrl;
+      },
+
+      /**
+       * @param {String}
+       */
+      _appendBehindPage: function(templateHTML) {
+        var pageScope = this._scope.$parent.$new();
+        var pageContent = $compile(templateHTML)(pageScope);
+
+        this._behindPage.append(pageContent);
+
+        if (this._currentBehindPageScope) {
+          this._currentBehindPageScope.$destroy();
+          this._currentBehindPageElement.remove();
+        }
+
+        this._currentBehindPageElement = pageContent;
+        this._currentBehindPageScope = pageScope;
+      },
+
+      /**
+       * @param {String} page
+       * @param {Function} callback
+       */
+      setBehindPage: function(page, callback) {
+        if (page) {
+          callback = callback || function() {};
+          var self = this;
+          $onsen.getPageHTMLAsync(page).then(function(html) {
+            self._appendBehindPage(angular.element(html));
+            callback();
+          }, function() {
+            throw new Error('Page is not found: ' + page);
+          });
+        } else {
+          throw new Error('cannot set undefined page');
+        }
+      },
+
+      /**
+       * @param {String} pageUrl
+       * @param {Function} callback
+       */
+      setAbovePage: function(pageUrl, callback) {
+        if (this.currentPageUrl === pageUrl) {
+          // same page -> ignore
+          return;
+        }
+
+        callback = callback || function() {};
+
+        if (pageUrl) {
+          var self = this;
+          $onsen.getPageHTMLAsync(pageUrl).then(function(html) {
+            self._appendAbovePage(pageUrl, html);
+            callback();
+          }, function() {
+            throw new Error('Page is not found: ' + page);
+          });
+        } else {
+          throw new Error('cannot set undefined page');
+        }
+      },
+
+      _handleEvent: function(event) {
+        if (this._isInsideIgnoredElement(event.target)){
+          event._gesture.stopDetect();
+        }
+
+        switch (event.type) {
+
+          case 'touch':
+            if (this.isClosed()) {
+              if (!this._isInsideSwipeTargetArea(event.gesture.center.pageX)) {
+                event.gesture.stopDetect();
               }
             }
-            if (maxDistance) {
-              this.MAX = parseInt(maxDistance, 10);
+
+            break;
+
+          case 'dragleft':
+          case 'dragright':
+            event.gesture.preventDefault();
+            var deltaX = event.gesture.deltaX;
+
+            this._currentX = this._startX + deltaX;
+            if (this._currentX >= 0) {
+              this._translate(this._currentX);
             }
-          },
+            break;
 
-          activateHammer: function(){
-            this.hammertime.on("touch dragleft dragright swipeleft swiperight release", this.boundHandleEvent);
-          },
+          case 'swipeleft':
+            event.gesture.preventDefault();
+            this.close();
+            break;
 
-          deactivateHammer: function(){
-            this.hammertime.off("touch dragleft dragright swipeleft swiperight release", this.boundHandleEvent);
-          },
+          case 'swiperight':
+            event.gesture.preventDefault();
+            this.open();
+            break;
 
-          bindEvents: function() {
-            this.hammertime = new Hammer(this.el);
-            this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
-          },
-
-          appendAbovePage: function(pageUrl, templateHTML) {
-            var pageElement = angular.element('<div></div>');
-            pageElement.addClass('page');
-            pageElement[0].style.opacity = 0;
-            var pageScope = scope.$parent.$new();
-            var pageContent = $compile(templateHTML)(pageScope);
-            pageElement.append(pageContent);
-            this.$abovePage.append(pageElement);
-
-            // prevent black flash
-            setTimeout(function() {
-              pageElement[0].style.opacity = 1;
-              if (this.currentPageElement) {
-                this.currentPageElement.remove();
-                this.currentPageScope.$destroy();
-              }
-              this.currentPageElement = pageElement;
-              this.currentPageScope = pageScope;
-            }.bind(this), 0);
-
-            this.currentPageUrl = pageUrl;
-          },
-
-          appendBehindPage: function(templateHTML) {
-            var page = angular.element('<div></div>');
-            page.addClass('page');
-            var pageScope = scope.$parent.$new();
-            var pageContent = $compile(templateHTML)(pageScope);
-            page.append(pageContent);
-            this.$behindPage.append(page);
-
-            if (this.currentBehindPageScope) {
-              this.currentBehindPageScope.$destroy();
-              this.currentBehindPageElement.remove();
-            }
-
-            this.currentBehindPageElement = page;
-            this.currentBehindPageScope = pageScope;
-          },
-
-          attachMethods: function() {
-            var self = this;
-
-            scope.setBehindPage = function(page) {
-              if (page) {
-                $onsen.getPageHTMLAsync(page).then(function(html) {
-                  self.appendBehindPage(angular.element(html.trim()));
-                }, function() {
-                  throw new Error('Page is not found: ' + page);
-                });
-              } else {
-                throw new Error('cannot set undefined page');
-              }
-            };
-
-            this.setAbovePage = scope.setAbovePage = function(pageUrl) {
-              if (this.currentPageUrl === pageUrl) {
-                // same page -> ignore
-                return;
-              }
-
-              if (pageUrl) {
-                $onsen.getPageHTMLAsync(pageUrl).then(function(html) {
-                  self.appendAbovePage(pageUrl, angular.element(html.trim()));
-                }, function() {
-                  throw new Error('Page is not found: ' + page);
-                });
-              } else {
-                throw new Error('cannot set undefined page');
-              }
-            }.bind(this);
-          },
-
-          handleEvent: function(ev) {
-            if (this.isInsideIgnoredElement(ev.target)){
-              ev.gesture.stopDetect();
-            }
-
-            switch (ev.type) {
-
-              case 'touch':
-                if (this.isClosed()) {
-                  if (!this.isInsideSwipeTargetArea(ev.gesture.center.pageX)) {
-                    ev.gesture.stopDetect();
-                  }
-                }
-
-                break;
-
-              case 'dragleft':
-              case 'dragright':
-                ev.gesture.preventDefault();
-                var deltaX = ev.gesture.deltaX;
-                this.currentX = this.startX + deltaX;
-                if (this.currentX >= 0) {
-                  this.translate(this.currentX);
-                }
-                break;
-
-              case 'swipeleft':
-                ev.gesture.preventDefault();
-                this.close();
-                break;
-
-              case 'swiperight':
-                ev.gesture.preventDefault();
-                this.open();
-                break;
-
-              case 'release':
-                if (this.currentX > this.MAX / 2) {
-                  this.open();
-                } else {
-                  this.close();
-                }
-                break;
-            }
-          },
-
-          isInsideIgnoredElement: function(el) {
-            do {
-              if (el.getAttribute && el.getAttribute("sliding-menu-ignore")){
-              	return true;
-              }                
-              el = el.parentNode;
-            } while (el);
-            return false;
-          },
-
-          isInsideSwipeTargetArea: function(x) {
-            return x < this.swipeTargetWidth;
-          },
-
-          onTransitionEnd: function() {
-            this.$abovePage.removeClass('transition');
-            this.$behindPage.removeClass('transition');
-          },
-
-          isClosed: function() {
-            return this.startX === 0;
-          },
-
-          close: function() {
-            this.startX = 0;
-            if (this.currentX !== 0) {
-              this.$abovePage.addClass('transition');
-              this.$behindPage.addClass('transition');
-              this.translate(0);
-            }
-          },
-
-          open: function() {
-            this.startX = this.MAX;
-            if (this.currentX != this.MAX) {
-              this.$abovePage.addClass('transition');
-              this.$behindPage.addClass('transition');
-              this.translate(this.MAX);
-            }
-          },
-
-          toggle: function() {
-            if (this.startX === 0) {
+          case 'release':
+            if (this._currentX > this._max / 2) {
               this.open();
             } else {
               this.close();
             }
-          },
+            break;
+        }
+      },
 
-          translate: function(x) {
-            var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
-
-            var behind = (x - this.MAX) / this.MAX * 10;
-            if(behind > 0){
-              behind = 0;
-            }
-            var opacity = 1 + behind / 100;
-            var behindTransform = 'translate3d(' + behind + '%, 0, 0)';
-
-            var property;
-            for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
-              property = BROWSER_TRANSFORMS[i];
-              this.abovePage.style[property] = aboveTransform;
-              this.behindPage.style[property] = behindTransform;
-            }
-
-            if(this.isReady){
-              this.behindPage.style.opacity = opacity;
-            }
-            this.currentX = x;
+      /**
+       * @param {jqLite} element
+       * @return {Boolean}
+       */
+      _isInsideIgnoredElement: function(element) {
+        do {
+          if (element.getAttribute && element.getAttribute('sliding-menu-ignore')) {
+            return true;
           }
-        });
+          element = element.parentNode;
+        } while (element);
 
-        var swiper = new Swiper(element);
+        return false;
+      },
 
-        var slidingMenuView = {
-          openMenu: function() {
-            return swiper.open();
-          },
-          closeMenu: function() {
-            return swiper.close();
-          },
-          toggleMenu: function() {
-            return swiper.toggle();
-          },
-          setAbovePage: function() {
-            return swiper.setAbovePage.apply(swiper, arguments);
-          },
-          setBehindPage: function() {
-            return swiper.setBehindPage.apply(swiper, arguments);
-          }
+      _isInsideSwipeTargetArea: function(x) {
+        return x < this._swipeTargetWidth;
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      isClosed: function() {
+        return this._startX === 0;
+      },
+
+      /**
+       * Close sliding-menu page.
+       */
+      close: function() {
+        this._startX = 0;
+
+        if (this._currentX !== 0) {
+          var self = this;
+          this._doorLock.waitUnlock(function() {
+            var unlock = self._doorLock.lock();
+            self._currentX = 0;
+
+            self._animator.close(self._abovePage, self._behindPage, {max: self._max}, function() {
+              unlock();
+            });
+          });
+        }
+      },
+
+      /**
+       * Open sliding-menu page.
+       */
+      open: function() {
+        this._startX = this._max;
+
+        if (this._currentX != this._max) {
+          var self = this;
+          this._doorLock.waitUnlock(function() {
+            var unlock = self._doorLock.lock();
+            self._currentX = self._max;
+
+            self._animator.open(self._abovePage, self._behindPage, {max: self._max}, function() {
+              unlock();
+            });
+          });
+        }
+      },
+
+      /**
+       * Toggle sliding-menu page.
+       */
+      toggle: function() {
+        if (this._startX === 0) {
+          this.open();
+        } else {
+          this.close();
+        }
+      },
+
+      /**
+       * Toggle sliding-menu page.
+       */
+      toggleMenu: function() {
+        this.toggle();
+      },
+
+      /**
+       * @param {Number} x
+       */
+      _translate: function(x) {
+        this._currentX = x;
+
+        var options = {
+          x: x,
+          max: this._max
         };
-        $onsen.declareVarAttribute(attrs, slidingMenuView);
-        angular.extend(scope, slidingMenuView);
 
-        SlidingMenuStack.addSlidingMenu(scope);
+        this._animator.translate(this._abovePage, this._behindPage, options);
+      }
+    });
+    Swiper.SlidingMenuAnimator = SlidingMenuAnimator;
+
+    return Swiper;
+  });
+
+  module.directive('onsSlidingMenu', function($compile, SlidingMenu, $onsen) {
+    return {
+      restrict: 'E',
+      replace: false,
+
+      transclude: false,
+      scope: true,
+
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
+
+      link: function(scope, element, attrs) {
+
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controlelr directive.');
+        }
+
+        var slidingMenu = new SlidingMenu(scope, element, attrs);
+
+        $onsen.aliasStack.register('ons.slidingMenu', slidingMenu);
+        $onsen.declareVarAttribute(attrs, slidingMenu);
+        element.data('ons-sliding-menu', slidingMenu);
+
         scope.$on('$destroy', function(){
-          SlidingMenuStack.removeSlidingMenu(scope);
+          element.data('ons-sliding-menu', undefined);
+          $onsen.aliasStack.unregister('ons.slidingMenu', slidingMenu);
         });
       }
     };
-  });
-})();
-
-(function() {
-  var module = angular.module('onsen');
-
-  module.factory('SlidingMenuStack', function($rootScope, $onsen) {
-    var SlidingMenuStack = Class.extend({
-      slidingMenus: [],
-
-      init: function() {
-        $rootScope.ons = $rootScope.ons || {};
-        $rootScope.ons.slidingMenu = {};
-        $rootScope.ons.slidingMenu.setAbovePage = this.setAbovePage.bind(this);
-        $rootScope.ons.slidingMenu.setBehindPage = this.setBehindPage.bind(this);
-        $rootScope.ons.slidingMenu.toggleMenu = this.toggleMenu.bind(this);
-        $rootScope.ons.slidingMenu.openMenu = this.openMenu.bind(this);
-        $rootScope.ons.slidingMenu.closeMenu = this.closeMenu.bind(this);
-      },
-
-      _findClosestSlidingMenu: function($event) {
-        var slidingMenu;
-        if ($event) {
-          var slidingMenuElement = $onsen.upTo($event.target, 'ons-sliding-menu');
-          slidingMenu = angular.element(slidingMenuElement).isolateScope();
-        } else {
-          slidingMenu = this.slidingMenus[this.slidingMenus.length - 1];
-        }
-
-        return slidingMenu;
-      },
-
-      _checkExistence: function() {
-        if (this.slidingMenus.length === 0) {
-          throw new Error('oops!! no sliding-menu registerred');
-        }
-      },
-
-      addSlidingMenu: function(slidingMenu) {
-        this.slidingMenus.push(slidingMenu);
-      },
-
-      removeSlidingMenu: function(slidingMenu){
-        for (var i = 0; i < this.slidingMenus.length; i++) {
-          if(this.slidingMenus[i] == slidingMenu){
-            this.slidingMenus.splice(i, 1);
-          }
-        }
-      },
-
-      setAbovePage: function(page, $event) {
-        this._checkExistence();
-
-        var slidingMenu = this._findClosestSlidingMenu($event);
-        slidingMenu.setAbovePage(page);
-      },
-
-      setBehindPage: function(page, $event) {
-        this._checkExistence();
-
-        var slidingMenu = this._findClosestSlidingMenu($event);
-        slidingMenu.setBehindPage(page);
-      },
-
-      toggleMenu: function($event) {
-        this._checkExistence();
-
-        var slidingMenu = this._findClosestSlidingMenu($event);
-        slidingMenu.toggleMenu();
-      },
-
-      openMenu: function($event) {
-        this._checkExistence();
-
-        var slidingMenu = this._findClosestSlidingMenu($event);
-        slidingMenu.openMenu();
-      },
-
-      closeMenu: function($event) {
-        this._checkExistence();
-
-        var slidingMenu = this._findClosestSlidingMenu($event);
-        slidingMenu.closeMenu();
-      }
-    });
-
-    return new SlidingMenuStack();
   });
 })();
 
@@ -28137,14 +28038,15 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsSplitView', function($compile, $templateCache, SplitViewStack, $onsen) {
+  module.directive('onsSplitView', function($compile, SlidingMenu, $onsen) {
 
-    var ON_PAGE_READY = "onPageReady";
+    var ON_PAGE_READY = 'onPageReady';
 
     return {
       restrict: 'E',
       replace: false,
       transclude: false,
+
       scope: {
         secondaryPage: '@',
         mainPage: '@',
@@ -28152,146 +28054,144 @@ limitations under the License.
         swipable: '@',
         mainPageWidth: '@'
       },
+
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
       link: function(scope, element, attrs) {
         var SPLIT_MODE = 0;
         var COLLAPSE_MODE = 1;
         var MAIN_PAGE_RATIO = 0.9;
 
-        var TRANSITION_END = "webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd";
-        var BROWSER_TRANSFORMS = [
-          "webkitTransform",
-          "mozTransform",
-          "msTransform",
-          "oTransform",
-          "transform"
-        ];
+        var SplitView = Class.extend({
 
-        var Swiper = Class.extend({
           init: function(element) {
-            this.$el = element;
-            this.el = element[0];
-            this.VERTICAL_THRESHOLD = 20;
-            this.HORIZONTAL_THRESHOLD = 20;
-            this.behindPage = element[0].querySelector('.secondary');
-            this.$behindPage = angular.element(this.behindPage);
-            this.abovePage = element[0].querySelector('.main');
-            this.$abovePage = angular.element(this.abovePage);
-            this.previousX = 0;
-            this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
-            this.currentX = 0;
-            this.startX = 0;
-            this.mode = SPLIT_MODE;
+            element.addClass('onsen-sliding-menu');
 
-            this.hammertime = new Hammer(this.el);
-            this.boundHammerEvent = this.handleEvent.bind(this);
-            this.bindEvents();
+            this._element = element;
+            this._abovePage = angular.element(element[0].querySelector('.onsen-split-view__main'));
+            this._behindPage = angular.element(element[0].querySelector('.onsen-split-view__secondary'));
 
-            scope.$watch('swipable', this.onSwipableChanged.bind(this));
+            this._previousX = 0;
+            this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+            this._currentX = 0;
+            this._startX = 0;
+            this._mode = SPLIT_MODE;
+            this._doorLock = new DoorLock();
 
-            window.addEventListener("orientationchange", this.onOrientationChange.bind(this));
-            window.addEventListener('resize', this.onResize.bind(this));
+            this._hammertime = new Hammer(this._element[0]);
+            this._boundHammerEvent = this._handleEvent.bind(this);
 
-            this.attachMethods();
+            scope.$watch('swipable', this._onSwipableChanged.bind(this));
+
+            window.addEventListener('orientationchange', this._onOrientationChange.bind(this));
+            window.addEventListener('resize', this._onResize.bind(this));
+
+            this._animator = new SlidingMenu.SlidingMenuAnimator();
 
             if (scope.mainPage) {
-              scope.setMainPage(scope.mainPage);
+              this.setMainPage(scope.mainPage);
             }
 
             if (scope.secondaryPage) {
-              scope.setSecondaryPage(scope.secondaryPage);
+              this.setSecondaryPage(scope.secondaryPage);
             }
 
-            window.setTimeout(function() {
-              this.considerChangingCollapse();
-            }.bind(this), 100);
+            var unlock = this._doorLock.lock();
+            setTimeout(function() {
+              this._considerChangingCollapse();
+              unlock();
+            }.bind(this), 1000 / 60);
           },
 
-          appendSecondPage: function(templateHTML) {
-            var page = angular.element('<div></div>');
-            page.addClass('page');
+          /**
+           * @param {String} templateHTML
+           */
+          _appendSecondPage: function(templateHTML) {
             var pageScope = scope.$parent.$new();
             var pageContent = $compile(templateHTML)(pageScope);
-            page.append(pageContent);
-            this.$behindPage.append(page);
 
+            this._behindPage.append(pageContent);
 
-            if (this.currentBehindPageElement) {
-              this.currentBehindPageElement.remove();
-              this.currentBehindPageScope.$destroy();
+            if (this._currentBehindPageElement) {
+              this._currentBehindPageElement.remove();
+              this._currentBehindPageScope.$destroy();
             }
 
-            this.currentBehindPageElement = page;
-            this.currentBehindPageScope = pageScope;
+            this._currentBehindPageElement = pageContent;
+            this._currentBehindPageScope = pageScope;
           },
 
-          appendMainPage: function(templateHTML) {
-            var page = angular.element('<div></div>');
-            page.addClass('page');
-            page[0].style.opacity = 0;
+          /**
+           * @param {String} templateHTML
+           */
+          _appendMainPage: function(templateHTML) {
             var pageScope = scope.$parent.$new();
             var pageContent = $compile(templateHTML)(pageScope);
-            page.append(pageContent);
-            this.$abovePage.append(page);
+            pageContent.css({opacity: 0});
+
+            this._abovePage.append(pageContent);
 
             // prevent black flash
             setTimeout(function() {
-              page[0].style.opacity = 1;
-              if (this.currentPage) {
-                this.currentPage.remove();
-                this.currentPageScope.$destroy();
+              pageContent.css({opacity: 1});
+
+              if (this._currentPage) {
+                this._currentPage.remove();
+                this._currentPageScope.$destroy();
               }
-              this.currentPage = page;
-              this.currentPageScope = pageScope;
+
+              this._currentPage = pageContent;
+              this._currentPageScope = pageScope;
             }.bind(this), 0);
           },
 
-          attachMethods: function() {
-            var self = this;
-
-            this.setSecondaryPage = scope.setSecondaryPage = function(page) {
-              if (page) {
-                $onsen.getPageHTMLAsync(page).then(function(html) {
-                  self.appendSecondPage(angular.element(html.trim()));
-                }, function() {
-                  throw new Error('Page is not found: ' + page);
-                });
-              } else {
-                throw new Error('cannot set undefined page');
-              }
-            };
-
-            this.setMainPage = scope.setMainPage = function(page) {
-              if (page) {
-                $onsen.getPageHTMLAsync(page).then(function(html) {
-                  self.appendMainPage(angular.element(html.trim()));
-                }, function() {
-                  throw new Error('Page is not found: ' + page);
-                });
-              } else {
-                throw new Error('cannot set undefined page');
-              }
-            };
-          },
-
-          onOrientationChange: function() {
-            this.considerChangingCollapse();
-          },
-
-          onResize: function() {
-            this.considerChangingCollapse();
-            this.MAX = this.abovePage.clientWidth * MAIN_PAGE_RATIO;
-          },
-
-          considerChangingCollapse: function() {
-            if (this.shouldCollapse()) {
-              this.activateCollapseMode();
+          /**
+           * @param {String} page
+           */
+          setSecondaryPage : function(page) {
+            if (page) {
+              $onsen.getPageHTMLAsync(page).then(function(html) {
+                this._appendSecondPage(angular.element(html.trim()));
+              }.bind(this), function() {
+                throw new Error('Page is not found: ' + page);
+              });
             } else {
-              this.deactivateCollapseMode();
+              throw new Error('cannot set undefined page');
             }
           },
 
-          shouldCollapse: function() {
+          /**
+           * @param {String} page
+           */
+          setMainPage : function(page) {
+            if (page) {
+              $onsen.getPageHTMLAsync(page).then(function(html) {
+                this._appendMainPage(angular.element(html.trim()));
+              }.bind(this), function() {
+                throw new Error('Page is not found: ' + page);
+              });
+            } else {
+              throw new Error('cannot set undefined page');
+            }
+          },
+
+          _onOrientationChange: function() {
+            this._considerChangingCollapse();
+          },
+
+          _onResize: function() {
+            this._considerChangingCollapse();
+            this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+          },
+
+          _considerChangingCollapse: function() {
+            if (this._shouldCollapse()) {
+              this._activateCollapseMode();
+            } else {
+              this._activateSplitMode();
+            }
+          },
+
+          _shouldCollapse: function() {
             var orientation = window.orientation;
 
             if (orientation === undefined) {
@@ -28300,142 +28200,139 @@ limitations under the License.
 
             switch (scope.collapse) {
               case undefined:
-              case "none":
+              case 'none':
                 return false;
 
-              case "portrait":
-                if (orientation === 180 || orientation === 0) {
-                  return true;
-                } else {
-                  return false;
-                }
+              case 'portrait':
+                return orientation === 180 || orientation === 0;
                 break;
 
-              case "landscape":
-                if (orientation == 90 || orientation == -90) {
-                  return true;
-                } else {
-                  return false;
-                }
+              case 'landscape':
+                return orientation == 90 || orientation == -90;
                 break;
 
               default:
                 // by width
                 if (scope.collapse === undefined) {
                   return false;
+                } 
+
+                var widthToken;
+                if (scope.collapse.indexOf('width') >= 0) {
+                  var tokens = scope.collapse.split(' ');
+                  widthToken = tokens[tokens.length - 1];
                 } else {
-                  var widthToken;
-                  if (scope.collapse.indexOf('width') >= 0) {
-                    var tokens = scope.collapse.split(' ');
-                    widthToken = tokens[tokens.length - 1];
-                  } else {
-                    widthToken = scope.collapse;
-                  }
-
-                  if (widthToken.indexOf('px') > 0) {
-                    widthToken = widthToken.substr(0, widthToken.length - 2);
-                  }
-
-                  if (isNumber(widthToken)) {
-                    if (window.innerWidth < widthToken) {
-                      return true;
-                    } else {
-                      return false;
-                    }
-                  }
-
-                  return false;
+                  widthToken = scope.collapse;
                 }
 
+                if (widthToken.indexOf('px') > 0) {
+                  widthToken = widthToken.substr(0, widthToken.length - 2);
+                }
+
+                return isNumber(widthToken) && window.innerWidth < widthToken;
                 break;
             }
-
           },
 
-          setSize: function() {
-            if(!scope.mainPageWidth){
-              scope.mainPageWidth = "70";
+          _setSize: function() {
+            if (!scope.mainPageWidth) {
+              scope.mainPageWidth = '70';
             }
+
             var behindSize = 100 - scope.mainPageWidth.replace('%', '');
-            this.behindPage.style.width = behindSize + '%';
-            this.behindPage.style.opacity = 1;
-            this.abovePage.style.width = scope.mainPageWidth + '%';
-            var translate = this.behindPage.clientWidth;
-            this.translateAboveOnly(translate);
+            this._behindPage.css({
+              width: behindSize + '%',
+              opacity: 1
+            });
+
+            this._abovePage.css({
+              width: scope.mainPageWidth + '%'
+            });
+
+            this._translateAboveOnly(this._behindPage[0].clientWidth);
           },
 
-          activateCollapseMode: function() {
-            this.behindPage.style.width = '100%';
-            this.abovePage.style.width = '100%';
-            this.mode = COLLAPSE_MODE;
-            this.onSwipableChanged(scope.swipable);
-            this.translate(0);
+          _activateCollapseMode: function() {
+            if (this._mode !== COLLAPSE_MODE) {
+              this._behindPage.removeAttr('style');
+              this._abovePage.removeAttr('style');
 
-            if (Modernizr.boxshadow) {
-              this.$abovePage.addClass('onsen_split-view__shadow');
+              this._mode = COLLAPSE_MODE;
+
+              this._onSwipableChanged(scope.swipable);
+              this._translate(0);
+
+              this._animator.activate(this._element);
+
+              if (Modernizr.boxshadow) {
+                this._abovePage.addClass('onsen-split-view__shadow');
+              }
             }
           },
 
-          deactivateCollapseMode: function() {
-            this.setSize();
-            this.deactivateHammer();
-            this.mode = SPLIT_MODE;
-            if (Modernizr.boxshadow) {
-              this.$abovePage.removeClass('onsen_split-view__shadow');
-            }
-          },
+          _activateSplitMode: function() {
+            if (this._mode !== SPLIT_MODE) {
+              this._animator.deactivate(this._element);
 
-          activateHammer: function() {
-            this.hammertime.on("dragleft dragright swipeleft swiperight release", this.boundHammerEvent);
-          },
+              this._behindPage.removeAttr('style');
+              this._abovePage.removeAttr('style');
 
-          deactivateHammer: function() {
-            this.hammertime.off("dragleft dragright swipeleft swiperight release", this.boundHammerEvent);
-          },
+              this._setSize();
+              this._deactivateHammer();
+              this._mode = SPLIT_MODE;
 
-          bindEvents: function() {
-            this.$abovePage.bind(TRANSITION_END, this.onTransitionEnd.bind(this));
-          },
-
-          onSwipableChanged: function(swipable) {
-            if (swipable === "" || swipable === undefined) {
-              swipable = true;
+              if (Modernizr.boxshadow) {
+                this._abovePage.removeClass('onsen-split-view__shadow');
+              }
             } else {
-              swipable = (swipable == "true");
+              this._setSize();
             }
+          },
+
+          _activateHammer: function() {
+            this._hammertime.on('dragleft dragright swipeleft swiperight release', this._boundHammerEvent);
+          },
+
+          _deactivateHammer: function() {
+            this._hammertime.off('dragleft dragright swipeleft swiperight release', this._boundHammerEvent);
+          },
+
+          _onSwipableChanged: function(swipable) {
+            swipable = swipable === '' || swipable === undefined || swipable == 'true';
 
             if (swipable) {
-              this.activateHammer();
+              this._activateHammer();
             } else {
-              this.deactivateHammer();
+              this._deactivateHammer();
             }
           },
 
-          handleEvent: function(ev) {
-            switch (ev.type) {
+          _handleEvent: function(event) {
+            switch (event.type) {
 
               case 'dragleft':
               case 'dragright':
-                ev.gesture.preventDefault();
-                var deltaX = ev.gesture.deltaX;
-                this.currentX = this.startX + deltaX;
-                if (this.currentX >= 0) {
-                  this.translate(this.currentX);
+                event.gesture.preventDefault();
+                var deltaX = event.gesture.deltaX;
+
+                this._currentX = this._startX + deltaX;
+                if (this._currentX >= 0) {
+                  this._translate(this._currentX);
                 }
                 break;
 
               case 'swipeleft':
-                ev.gesture.preventDefault();
+                event.gesture.preventDefault();
                 this.close();
                 break;
 
               case 'swiperight':
-                ev.gesture.preventDefault();
+                event.gesture.preventDefault();
                 this.open();
                 break;
 
               case 'release':
-                if (this.currentX > this.MAX / 2) {
+                if (this._currentX > this._max / 2) {
                   this.open();
                 } else {
                   this.close();
@@ -28444,74 +28341,89 @@ limitations under the License.
             }
           },
 
-          onTransitionEnd: function() {
-            this.$abovePage.removeClass('transition');
-            this.$behindPage.removeClass('transition');
+          _onTransitionEnd: function() {
             scope.$root.$broadcast(ON_PAGE_READY); //make sure children can do something before the parent.
           },
 
           close: function() {
-            if (this.mode === SPLIT_MODE) {
+            if (this._mode === SPLIT_MODE) {
               return;
-            }
-            this.startX = 0;
-            if (this.currentX !== 0) {
-              this.$abovePage.addClass('transition');
-              this.$behindPage.addClass('transition');
-              this.translate(0);
+            } else if (this._mode === COLLAPSE_MODE) {
+              this._startX = 0;
+
+              if (this._currentX !== 0) {
+                var self = this;
+                this._doorLock.waitUnlock(function() {
+                  var unlock = self._doorLock.lock();
+                  self._currentX = 0;
+
+                  self._animator.close(
+                    self._abovePage,
+                    self._behindPage,
+                    {max: self._max},
+                    function() {
+                      unlock();
+                      self._onTransitionEnd();
+                    }
+                  );
+                });
+              }
             }
           },
 
           open: function() {
-            if (this.mode === SPLIT_MODE) {
+            if (this._mode === SPLIT_MODE) {
               return;
-            }
-            this.startX = this.MAX;
-            if (this.currentX != this.MAX) {
-              this.$abovePage.addClass('transition');
-              this.$behindPage.addClass('transition');
-              this.translate(this.MAX);
+            } else if (this._mode === COLLAPSE_MODE) {
+              this._startX = this._max;
+
+              if (this._currentX != this._max) {
+                var self = this;
+                this._doorLock.waitUnlock(function() {
+                  var unlock = self._doorLock.lock();
+                  self._currentX = self._max;
+
+                  self._animator.open(
+                    self._abovePage, 
+                    self._behindPage, 
+                    {max: self._max},
+                    function() {
+                      unlock();
+                      self._onTransitionEnd();
+                    }
+                  );
+                });
+              }
             }
           },
 
           toggle: function() {
-            if (this.startX === 0) {
+            if (this._startX === 0) {
               this.open();
             } else {
               this.close();
             }
           },
 
-          translate: function(x) {
-            var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
+          _translate: function(x) {
+            if (this._mode === COLLAPSE_MODE) {
+              this._currentX = x;
 
-            var behind = (x - this.MAX) / this.MAX * 10;
-            var opacity = 1 + behind / 100;
-            var behindTransform = 'translate3d(' + behind + '%, 0, 0)';
+              var options = {
+                x: x,
+                max: this._max
+              };
 
-            var property;
-            for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
-              property = BROWSER_TRANSFORMS[i];
-              this.abovePage.style[property] = aboveTransform;
-              this.behindPage.style[property] = behindTransform;
+              this._animator.translate(this._abovePage, this._behindPage, options);
             }
-
-            this.behindPage.style.opacity = opacity;
-            this.currentX = x;
           },
 
-          translateAboveOnly: function(x) {
-            var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
-            var behindTransform = 'translate3d(0, 0, 0)';
+          _translateAboveOnly: function(x) {
+            var aboveTransform = 'translate2d(' + x + 'px, 0)';
+            var behindTransform = 'none';
 
-            var property;
-            for (var i = 0; i < BROWSER_TRANSFORMS.length; i++) {
-              property = BROWSER_TRANSFORMS[i];
-              this.abovePage.style[property] = aboveTransform;
-              this.behindPage.style[property] = behindTransform;
-            }
-
-            this.currentX = x;
+            this._abovePage.css('left', x + 'px');
+            this._currentX = x;
           }
         });
 
@@ -28519,125 +28431,18 @@ limitations under the License.
           return !isNaN(parseFloat(n)) && isFinite(n);
         }
 
-        var swiper = new Swiper(element);
-        var splitView = {
-          open: function() {
-            return swiper.open();
-          }, 
-
-          close: function() {
-            return swiper.close();
-          },
-
-          setMainPage : function() {
-            return swiper.setMainPage.apply(swiper, arguments);
-          }, 
-
-          setSecondaryPage: function() {
-            return swiper.setSecondaryPage.apply(swiper, arguments);
-          },
-
-          toggle: function() {
-            return swiper.toggle();
-          }
-        };
+        var splitView = new SplitView(element);
         $onsen.declareVarAttribute(attrs, splitView);
 
-        angular.extend(scope, splitView);
-        SplitViewStack.addSplitView(scope);
+        element.data('ons-split-view', splitView);
+        $onsen.aliasStack.register('ons.splitView', splitView);
 
-        scope.$on('$destroy', function(){
-          SplitViewStack.removeSplitView(scope);
+        scope.$on('$destroy', function() {
+          element.data('ons-split-view', undefined);
+          $onsen.aliasStack.unregister('ons.splitView', splitView);
         });
       }
     };
-  });
-})();
-
-(function() {
-  var module = angular.module('onsen');
-
-  module.factory('SplitViewStack', function($rootScope, $onsen) {
-    var SplitViewStack = Class.extend({
-      splitViews: [],
-
-      init: function() {
-        $rootScope.ons = $rootScope.ons || {};
-        $rootScope.ons.splitView = {};
-        $rootScope.ons.splitView.setMainPage = this.setMainPage.bind(this);
-        $rootScope.ons.splitView.setSecondaryPage = this.setSecondaryPage.bind(this);
-        $rootScope.ons.splitView.toggle = this.toggle.bind(this);
-        $rootScope.ons.splitView.open = this.open.bind(this);
-        $rootScope.ons.splitView.close = this.close.bind(this);
-      },
-
-      _findClosestSplitView: function($event) {
-        var splitView;
-        if ($event) {
-          var splitViewElement = $onsen.upTo($event.target, 'ons-split-view');
-          splitView = angular.element(splitViewElement).isolateScope();
-        } else {
-          splitView = this.splitViews[this.splitViews.length - 1];
-        }
-
-        return splitView;
-      },
-
-      _checkExistence: function() {
-        if (this.splitViews.length === 0) {
-          throw new Error('oops!! no split-view registerred');
-        }
-      },
-
-      addSplitView: function(splitView) {
-        this.splitViews.push(splitView);
-      },
-
-      removeSplitView: function(splitView){
-        for (var i = 0; i < this.splitViews.length; i++) {
-          if(this.splitViews[i] == splitView){
-            this.splitViews.splice(i, 1);
-          }
-        }
-      },
-
-      setMainPage: function(page, $event) {
-        this._checkExistence();
-
-        var splitview = this._findClosestSplitView($event);
-        splitview.setMainPage(page);
-      },
-
-      setSecondaryPage: function(page, $event) {
-        this._checkExistence();
-
-        var splitview = this._findClosestSplitView($event);
-        splitview.setSecondaryPage(page);
-      },
-
-      toggle: function($event) {
-        this._checkExistence();
-
-        var splitView = this._findClosestSplitView($event);
-        splitView.toggle();
-      },
-
-      open: function($event) {
-        this._checkExistence();
-
-        var splitView = this._findClosestSplitView($event);
-        splitView.open();
-      },
-
-      close: function($event) {
-        this._checkExistence();
-
-        var splitView = this._findClosestSplitView($event);
-        splitView.close();
-      }
-    });
-
-    return new SplitViewStack();
   });
 })();
 
@@ -28663,7 +28468,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsTabbar', function($timeout, $compile, $onsen, TabbarStack) {
+  module.directive('onsTabbar', function($timeout, $compile, $onsen) {
     return {
       restrict: 'E',
       replace: false,
@@ -28676,8 +28481,8 @@ limitations under the License.
       controller: function($scope, $element, $attrs) {
         this.modifierTemplater = $scope.modifierTemplater = $onsen.generateModifierTemplater($attrs);
 
-        var container = angular.element($element[0].querySelector('.tab-bar-content'));
-        var footer = $element[0].querySelector('.footer');
+        var container = angular.element($element[0].querySelector('.ons-tab-bar__content'));
+        var footer = $element[0].querySelector('.ons-tab-bar__footer');
 
         this.tabbarId = Date.now();
 
@@ -28765,7 +28570,12 @@ limitations under the License.
           tabItem.setActive();
         };
 
-        TabbarStack.add($scope);
+        $onsen.aliasStack.register('ons.tabbar', $scope);
+        element.data('ons-tabbar', $scope);
+        $scope.$watch('$destroy', function() {
+          element.data('ons-tabbar', undefined);
+          $onsen.aliasStack.unregister('ons.tabbar', $scope);
+        });
       }
     };
   });
@@ -28838,62 +28648,6 @@ limitations under the License.
 
       }
     };
-  });
-})();
-
-(function() {
-  var module = angular.module('onsen');
-
-  module.factory('TabbarStack', function($rootScope, $onsen) {
-    var TabbarStack = Class.extend({
-      tabbars: [],
-
-      init: function() {
-        $rootScope.ons = $rootScope.ons || {};
-        $rootScope.ons.tabbar = {};
-        $rootScope.ons.tabbar.setActiveTab = this.setActiveTab.bind(this);
-      },
-
-      _findClosestTabbar: function($event) {
-
-        var tabbar;
-        if ($event) {
-          var tabbarElement = $onsen.upTo($event.target, 'ons-tabbar');
-          tabbar = angular.element(tabbarElement).isolateScope();
-        } else {
-          tabbar = this.tabbars[this.tabbars.length - 1];
-        }
-
-        return tabbar;
-      },
-
-      _checkExistence: function() {
-        if (this.tabbars.length === 0) {
-          throw new Error('oops!! no tabbar registerred');
-        }
-      },
-
-      add: function(tabbar) {
-        this.tabbars.push(tabbar);
-      },
-
-      remove: function(tabbar){
-        for (var i = 0; i < this.tabbars.length; i++) {
-          if(this.tabbars[i] == tabbar){
-            this.tabbars.splice(i, 1);
-          }
-        }
-      },
-
-      setActiveTab: function(index, $event){
-        this._checkExistence();
-
-        var tabbar = this._findClosestTabbar($event);
-        tabbar.setActiveTab(index);
-      }
-    });
-
-    return new TabbarStack();
   });
 })();
 
@@ -29103,7 +28857,9 @@ limitations under the License.
 
         return {
           pre: function(scope, element, attrs, pageController) {
-            pageController.registerToolbar(element);
+            if (pageController) {
+              pageController.registerToolbar(element);
+            }
           }
         };
       }
@@ -29175,9 +28931,58 @@ limitations under the License.
    */
   module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q) {
 
+    /**
+     * Global object stack manager.
+     *
+     * e.g. "ons.screen", "ons.navigator"
+     */
+    var aliasStack = {
+      _stackDict : {},
+
+      /**
+       * @param {String} name
+       * @param {Object} object
+       */
+      register: function(name, object) {
+        this._getStack(name).push(object);
+        
+        $onsen._defineVar(name, object);
+      },
+
+      /**
+       * @param {String} name
+       * @param {Object} target
+       */
+      unregister: function(name, target) {
+        var stack = this._getStack(name);
+
+        var index = stack.indexOf(target);
+        if (index === -1) {
+          throw new Error('no such object: ' + target);
+        }
+        stack.splice(index, 1);
+
+        var obj = stack.length > 1 ? stack[stack.length - 1] : null;
+        $onsen._defineVar(name, obj);
+      },
+
+      /**
+       * @param {String} name
+       */
+      _getStack: function(name) {
+        if (!this._stackDict[name]) {
+          this._stackDict[name] = [];
+        }
+
+        return this._stackDict[name];
+      }
+    };
+
     var $onsen = {
 
       DIRECTIVE_TEMPLATE_URL: "templates",
+
+      aliasStack: aliasStack,
 
       /**
        * Cache for predefined template.
@@ -29199,8 +29004,13 @@ limitations under the License.
         return cache;
       })(),
 
-      // Find first ancestor of el with tagName
-      // or undefined if not found
+      /**
+       * Find first ancestor of el with tagName
+       * or undefined if not found
+       *
+       * @param {jqLite} element
+       * @param {String} tagName
+       */
       upTo : function(el, tagName) {
         tagName = tagName.toLowerCase();
 
@@ -29215,6 +29025,14 @@ limitations under the License.
         } while (el.parentNode);
 
         return null;
+      },
+
+      /**
+       * @param {jqLite} element
+       * @param {String} name
+       */
+      findElementeObject: function(element, name) {
+        return element.inheritedData(name);
       },
 
       /**
@@ -29344,7 +29162,7 @@ limitations under the License.
         }
 
         set($window, names, object);
-        set($rootScope, names, object);        
+        set($rootScope, names, object);
       }
     };
 
@@ -29385,15 +29203,26 @@ window.animit = (function(){
       return new Animit(element);
     }
 
-    this.element = element;
-    this.transitionQueue = [];
-
-    if (!element.hasAttribute('data-animit-orig-style')) {
-      this.lastStyleAttribute = element.getAttribute('style');
-      element.setAttribute('data-animit-orig-style', this.lastStyleAttribute || '');
+    if (element instanceof HTMLElement) {
+      this.elements = [element]
+    } else if (Object.prototype.toString.call(element) === '[object Array]') {
+      this.elements = element;
     } else {
-      this.lastStyleAttribute = element.getAttribute('data-animit-orig-style');
+      throw new Error('First argument must be an array or an instance of HTMLElement.');
     }
+
+    this.transitionQueue = [];
+    this.lastStyleAttributeDict = [];
+
+    var self = this;
+    this.elements.forEach(function(element, index) {
+      if (!element.hasAttribute('data-animit-orig-style')) {
+        self.lastStyleAttributeDict[index] = element.getAttribute('style');
+        element.setAttribute('data-animit-orig-style', self.lastStyleAttributeDict[index] || '');
+      } else {
+        self.lastStyleAttributeDict[index] = element.getAttribute('data-animit-orig-style');
+      }
+    });
   };
 
   Animit.prototype = {
@@ -29429,17 +29258,37 @@ window.animit = (function(){
     /**
      * Queue transition animations or other function.
      *
+     * e.g. animit(elt).queue({color: 'red'})
+     * e.g. animit(elt).queue({color: 'red'}, {duration: 0.4})
+     * e.g. animit(elt).queue({css: {color: 'red'}, duration: 0.2})
+     *
      * @param {Object|Animit.Transition|Function} transition
+     * @param {Object} [options]
      */
-    queue: function(transition) {
+    queue: function(transition, options) {
       var queue = this.transitionQueue;
+
+      if (transition && options) {
+        options.css = transition;
+        transition = new Animit.Transition(options);
+      }
+
+      if (!(transition instanceof Function || transition instanceof Animit.Transition)) {
+        if (transition.css) {
+          transition = new Animit.Transition(transition);
+        } else {
+          transition = new Animit.Transition({
+            css: transition
+          });
+        }
+      }
 
       if (transition instanceof Function) {
         queue.push(transition);
       } else if (transition instanceof Animit.Transition) {
         queue.push(transition.build());
       } else {
-        queue.push(new Animit.Transition(transition).build());
+        throw new Error('Invalid arguments');
       }
 
       return this;
@@ -29479,14 +29328,19 @@ window.animit = (function(){
         var transitionStyle = 'transition: ' + transitionValue + '; -' + Animit.prefix + '-transition: ' + transitionValue + ';';
 
         this.transitionQueue.push(function(done) {
+          var elements = this.elements;
 
-          this.element.style[Animit.prefix + 'Transition'] = transitionValue;
-          this.element.style.transition = transitionValue;
+          // transition and style settings
+          elements.forEach(function(element, index) {
+            element.style[Animit.prefix + 'Transition'] = transitionValue;
+            element.style.transition = transitionValue;
 
-          var styleValue = (self.lastStyleAttribute ? self.lastStyleAttribute + '; ' : '') + transitionStyle;
-          this.element.setAttribute('style', styleValue);
+            var styleValue = (self.lastStyleAttributeDict[index] ? self.lastStyleAttributeDict[index] + '; ' : '') + transitionStyle;
+            element.setAttribute('style', styleValue);
+          });
 
-          var removeListeners = util.addOnTransitionEnd(this.element, function() {
+          // add "transitionend" event handler
+          var removeListeners = util.addOnTransitionEnd(elements[0], function() {
             clearTimeout(timeoutId);
             reset();
             done();
@@ -29497,7 +29351,7 @@ window.animit = (function(){
             removeListeners();
             reset();
             done();
-          }, options.duration * 1000 * 1.1);
+          }, options.duration * 1000 * (elements[0] ? 1.1 : 1));
         });
       } else {
         this.transitionQueue.push(function(done) {
@@ -29510,15 +29364,17 @@ window.animit = (function(){
 
       function reset() {
         // Clear transition animation settings.
-        self.element.style[Animit.prefix + 'Transition'] = 'none';
-        self.element.style.transition = 'none';
+        self.elements.forEach(function(element, index) {
+          element.style[Animit.prefix + 'Transition'] = 'none';
+          element.style.transition = 'none';
 
-        if (self.lastStyleAttribute) {
-          self.element.setAttribute('style', self.lastStyleAttribute);
-        } else {
-          self.element.setAttribute('style', '');
-          self.element.removeAttribute('style');
-        }
+          if (self.lastStyleAttributeDict[index]) {
+            element.setAttribute('style', self.lastStyleAttributeDict[index]);
+          } else {
+            element.setAttribute('style', '');
+            element.removeAttribute('style');
+          }
+        });
       }
     },
 
@@ -29611,9 +29467,9 @@ window.animit = (function(){
    */
   Animit.Transition = function(options) {
     this.options = options || {};
-    this.options.duration = options.duration || 0;
-    this.options.timing = options.timing || 'linear';
-    this.options.css = options.css || {};
+    this.options.duration = this.options.duration || 0;
+    this.options.timing = this.options.timing || 'linear';
+    this.options.css = this.options.css || {};
   };
 
   Animit.Transition.prototype = {
@@ -29631,10 +29487,13 @@ window.animit = (function(){
 
       if (this.options.duration > 0) {
         var transitionValue = 'all ' + this.options.duration + 's ' + this.options.timing;
-        var timeout = this.options.duration * 1000 * 1.1;
+        var self = this;
 
         return function(callback) {
-          var removeListeners = util.addOnTransitionEnd(this.element, function() {
+          var elements = this.elements;
+          var timeout = self.options.duration * 1000 * (elements[0] ? 1.1 : 1);
+
+          var removeListeners = util.addOnTransitionEnd(elements[0], function() {
             clearTimeout(timeoutId);
             callback();
           });
@@ -29644,25 +29503,34 @@ window.animit = (function(){
             callback();
           }, timeout);
 
-          var element = this.element;
+          elements.forEach(function(element, index) {
+            element.style[Animit.prefix + 'Transition'] = transitionValue;
+            element.style.transition = transitionValue;
 
-          element.style[Animit.prefix + 'Transition'] = transitionValue;
-          element.style.transition = transitionValue;
-
-          Object.keys(css).forEach(function(name) {
-            element.style[name] = css[name];
+            Object.keys(css).forEach(function(name) {
+              element.style[name] = css[name];
+            });
           });
+
         };
       }
 
       if (this.options.duration <= 0) {
         return function(callback) {
-          var element = this.element;
-          element.style[Animit.prefix + 'Transition'] = 'none';
-          element.transition = 'none';
+          var elements = this.elements;
 
-          Object.keys(css).forEach(function(name) {
-            element.style[name] = css[name];
+          elements.forEach(function(element, index) {
+            element.style[Animit.prefix + 'Transition'] = 'none';
+            element.transition = 'none';
+
+            Object.keys(css).forEach(function(name) {
+              element.style[name] = css[name];
+            });
+          });
+
+          elements.forEach(function(element) {
+            // force to update rendering
+            element.getBoundingClientRect();
           });
 
           setTimeout(callback, 1000 / 60);
@@ -29714,6 +29582,10 @@ window.animit = (function(){
      * Add an event handler on "transitionend" event.
      */
     addOnTransitionEnd: function(element, callback) {
+      if (!element) {
+        return function() {};
+      }
+
       var fn = function(event) {
         if (element == event.target) {
           event.stopPropagation();
@@ -29747,6 +29619,110 @@ window.animit = (function(){
   };
 
   return Animit;
+})();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+window.DoorLock = (function() {
+  /**
+   * Door locking system.
+   *
+   * @param {Object} [options]
+   * @param {Function} [options.log]
+   */
+  var DoorLock = function(options) {
+    options = options || {};
+    this._lockList = [];
+    this._waitList = [];
+    this._log = options.log || function() {};
+  };
+
+  DoorLock.generateId = (function() {
+    var i = 0;
+    return function() {
+      return i++;
+    };
+  })();
+
+  DoorLock.prototype = {
+    /**
+     * Register a lock.
+     *
+     * @return {Function} Callback for unlocking.
+     */
+    lock: function() {
+      var self = this;
+      var unlock = function() {
+        self._unlock(unlock);
+      };
+      unlock.id = DoorLock.generateId();
+      this._lockList.push(unlock);
+      this._log('lock: ' + (unlock.id));
+
+      return unlock;
+    },
+
+    _unlock: function(fn) {
+      var index = this._lockList.indexOf(fn);
+      if (index === -1) {
+        throw new Error('This function is not registered in the lock list.');
+      }
+
+      this._lockList.splice(index, 1);
+      this._log('unlock: ' + fn.id);
+
+      this._tryToFreeWaitList();
+    },
+
+    _tryToFreeWaitList: function() {
+      while (!this.isLocked() && this._waitList.length > 0) {
+        this._waitList.shift()();
+      }
+    },
+
+    /**
+     * Register a callback for waiting unlocked door.
+     *
+     * @params {Function} callback Callback on unlocking the door completely.
+     */
+    waitUnlock: function(callback) {
+      if (!(callback instanceof Function)) {
+        throw new Error('The callback param must be a function.');
+      }
+
+      if (this.isLocked()) {
+        this._waitList.push(callback);
+      } else {
+        callback();
+      }
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isLocked: function() {
+      return this._lockList.length > 0;
+    }
+  };
+
+  return DoorLock;
+
 })();
 
 (function() {
@@ -29809,6 +29785,24 @@ window.animit = (function(){
     },
 
     /**
+     * @param {String} name
+     * @param {Object/jqLite/HTMLElement} dom $event object or jqLite object or HTMLElement object.
+     * @return {Object}
+     */
+    getDirectiveObject: function(name, dom) {
+      var element;
+      if (dom instanceof HTMLElement) {
+        element = angular.element(dom);
+      } else if (dom instanceof angular.element) {
+        element = dom;
+      } else if (dom.target) {
+        element = angular.element(dom.target);
+      }
+
+      return element.inheritedData(name);
+    },
+
+    /**
      * @return {Boolean}
      */
     isReady : function() {
@@ -29859,7 +29853,7 @@ window.animit = (function(){
 })();
 
 window.addEventListener('load', function() {
-    FastClick.attach(document.body);
+  FastClick.attach(document.body);
 }, false);
 
 new Viewport().setup();
