@@ -20,22 +20,23 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsBackButton', function($onsen) {
+  module.directive('onsBackButton', function($onsen, $compile) {
     return {
       restrict: 'E',
       replace: false,
-      transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/back_button.tpl',
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      transclude: true,
+      scope: true,
+
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
-          transclude(scope.$parent.$new(), function(clonedElement) {
-            if (clonedElement.length === 0) {
-              angular.element(element[0].querySelector('.back-button__label')).text('Back');
-            } else {
-              element[0].querySelector('.back-button__label').appendChild(clonedElement[0]);
-            }
+          transclude(scope, function(clonedElement) {
+            element[0].querySelector('.back-button__label').appendChild(clonedElement[0]);
           });
         }
       }
