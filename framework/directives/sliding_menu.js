@@ -235,7 +235,7 @@ limitations under the License.
       },
 
       _onSwipableChanged: function(swipable) {
-        swipable = swipable === '' || swipable === undefined || swipable == 'true' || swipable;
+        swipable = swipable === '' || swipable === undefined || swipable == 'true';
 
         this.setSwipable(swipable);
       },
