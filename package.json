@@ -40,9 +40,9 @@
     "prompt": "*",
     "run-sequence": "~0.3.6",
     "topdoc-theme": "~0.2.7",
-    "browser-sync": "^0.9.1",
     "gulp-cached": "0.0.3",
-    "gulp-if": "^1.2.1"
+    "gulp-if": "^1.2.1",
+    "canonical-path": "0.0.2"
   },
   "dependencies": {
     "gulp-shell": "^0.2.4",

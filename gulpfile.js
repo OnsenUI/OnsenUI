@@ -21,6 +21,7 @@ var CORDOVA_APP = false;
 
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var shell = require('gulp-shell');
 var html2js = require('gulp-html2js');
 var concat = require('gulp-concat');
 var clean = require('gulp-clean');
