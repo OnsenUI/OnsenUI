@@ -15,6 +15,10 @@ limitations under the License.
 
 */
 
+var CORDOVA_APP = false;
+
+////////////////////////////////////////
+
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var html2js = require('gulp-html2js');
@@ -34,6 +38,8 @@ var cssminify = require('gulp-minify-css');
 var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync');
 var cache = require('gulp-cached');
+var gulpIf = require('gulp-if');
+
 
 ////////////////////////////////////////
 // browser-sync
@@ -115,6 +121,7 @@ gulp.task('prepare', ['html2js'], function() {
       .pipe(concat('onsenui.js'))            
       .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/js/'))
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
       .pipe(gulp.dest('app/lib/onsen/js')),
 
     // onsenui_all.js
@@ -139,6 +146,7 @@ gulp.task('prepare', ['html2js'], function() {
     ])
       .pipe(rename({basename: 'onsen-css-components'}))
       .pipe(gulp.dest('build/css/'))
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
       .pipe(gulp.dest('app/lib/onsen/css')),
 
     // onsenui.css
@@ -150,6 +158,7 @@ gulp.task('prepare', ['html2js'], function() {
       .pipe(autoprefix('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6'))
       .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/css/'))
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
       .pipe(gulp.dest('app/lib/onsen/css')),
 
     // angular.js copy
