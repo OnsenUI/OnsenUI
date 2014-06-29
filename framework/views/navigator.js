@@ -1152,7 +1152,6 @@ limitations under the License.
               navigator.app.exitApp();
             }
           }.bind(this);
-          this._androidBackButtonHandler = fn;
         }
 
         var fn = this._androidBackButtonHandler;
