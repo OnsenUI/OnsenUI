@@ -38,7 +38,8 @@
     "gulp-jshint": "^1.6.1",
     "jshint-stylish": "~0.1.5",
     "browser-sync": "^0.9.1",
-    "gulp-cached": "0.0.3"
+    "gulp-cached": "0.0.3",
+    "gulp-if": "^1.2.1"
   },
   "dependencies": {
     "gulp-shell": "^0.2.4",
