@@ -38,7 +38,7 @@
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsNavigator', function($compile, Navigator, $onsen) {
+  module.directive('onsNavigator', function($compile, NavigatorView, $onsen) {
     return {
       restrict: 'E',
 
@@ -53,7 +53,7 @@
 
         return {
           pre: function(scope, element, attrs, controller, transclude) {
-            var navigator = new Navigator({
+            var navigator = new NavigatorView({
               scope: scope, 
               element: element
             });
