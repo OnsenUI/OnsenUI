@@ -209,6 +209,20 @@ limitations under the License.
       /**
        * @return {Boolean}
        */
+      isAndroid: function() {
+        return !!window.navigator.userAgent.match(/android/i);
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      isIOS: function() {
+        return !!window.navigator.userAgent.match(/(ipad|iphone|ipod touch)/i);
+      },
+
+      /**
+       * @return {Boolean}
+       */
       isWebView: function() {
         return !!(window.cordova || window.phonegap || window.PhoneGap);
       },
