@@ -68,6 +68,28 @@ limitations under the License.
         this._scope = options.scope || this._element.scope();
         this._doorLock = new DoorLock();
         this.pages = [];
+
+        var self = this;
+        this._backButtonHandler = $onsen.backButtonHandlerStack.push(function() {
+          self.popPage();
+          event.preventDefault();
+        });
+        this._refreshBackButtonHandler();
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
+      },
+
+      _refreshBackButtonHandler: function() {
+        this._backButtonHandler.setEnabled(this.pages.length > 1);
+      },
+
+      _destroy: function() {
+        this.pages.forEach(function(page) {
+          page.destroy();
+        });
+
+        this._backButtonHandler.remove();
+        this._backButtonHandler = null;
       },
 
       /**
@@ -220,6 +242,8 @@ limitations under the License.
             pageObject.element = null;
             pageObject.pageScope = null;
             pageObject.options = null;
+
+            self._refreshBackButtonHandler();
           }
         };
 
@@ -241,6 +265,7 @@ limitations under the License.
           }
 
           unlock();
+          self._backButtonHandler.setEnabled(true);
 
           self.emit('post-push', event);
 
@@ -335,6 +360,7 @@ limitations under the License.
           var callback = function() {
             leavePage.destroy();
             unlock();
+            self._refreshBackButtonHandler();
             self.emit('post-pop', event);
             if (typeof options.onTransitionEnd === 'function') {
               options.onTransitionEnd();
@@ -398,41 +424,6 @@ limitations under the License.
        */
       canPopPage: function() {
         return this.pages.length > 1;
-      },
-
-      /**
-       * Enable handler of  use Android's backbutton on this navigator.
-       */
-      enableAndroidBackButtonHandler: function() {
-        if (this._androidBackButtonHandler) {
-          this._androidBackButtonHandler = function(event) {
-            if (this.pages.length > 1) {
-              event.preventDefault();
-              this.popPage();
-            } else {
-              navigator.app.exitApp();
-            }
-          }.bind(this);
-        }
-
-        var fn = this._androidBackButtonHandler;
-
-        var doc = window.document;
-
-        doc.addEventListener('backbutton', fn, false);
-        doc.addEventListener('deviceready', function() {
-          doc.removeEventListener('backbutton', fn);
-          doc.addEventListener('backbutton', fn, false);
-        }, false);
-      },
-
-      /**
-       * Disable handler of Android's backbutton event on this navigator.
-       */
-      disableAndroidBackButtonHandler: function() {
-        if (this._androidBackButtonHandler) {
-          doc.addEventListener('backbutton', this._androidBackButtonHandler, false);
-        }
       }
     });
 

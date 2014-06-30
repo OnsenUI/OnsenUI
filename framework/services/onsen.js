@@ -23,7 +23,7 @@ limitations under the License.
   /**
    * Internal service class for framework implementation.
    */
-  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q) {
+  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, BackButtonHandlerStack) {
 
     /**
      * Global object stack manager.
@@ -77,6 +77,8 @@ limitations under the License.
       DIRECTIVE_TEMPLATE_URL: "templates",
 
       aliasStack: aliasStack,
+
+      backButtonHandlerStack: BackButtonHandlerStack,
 
       /**
        * Cache for predefined template.
