@@ -15,7 +15,13 @@ limitations under the License.
 
 */
 
-
+/**
+ * @ngdoc directive
+ * @id toolbar_button
+ * @name ons-toolbar-button
+ * @description
+ * Button component for toolbar.
+ */
 (function(){
   'use strict';
   var module = angular.module('onsen'); // no [] -> referencing existing module

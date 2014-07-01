@@ -16,6 +16,12 @@ limitations under the License.
 */
 
 
+/**
+ * @ngdoc directive
+ * @id back_button
+ * @name ons-back-button
+ * @description
+ */
 (function(){
   'use strict';
   var module = angular.module('onsen');
