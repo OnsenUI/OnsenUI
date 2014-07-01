@@ -97,7 +97,7 @@ gulp.task('serve', ['jshint', 'build', 'app-server'], function() {
 
   gulp.watch(['www/views/*.html'], ['html2js']);
 
-  gulp.watch(['components-src/stylus/**/*'], ['build-css-components']);
+  gulp.watch(['components-src/stylus/**/*'], ['build-css-topdoc']);
 
   var livereload = require('gulp-livereload')();
 
@@ -106,8 +106,11 @@ gulp.task('serve', ['jshint', 'build', 'app-server'], function() {
     'www/styles/*.css',
     'www/images/*',
     'www/views/*',
-    'www/*'
-  ], function(file) {
+    'www/*',
+    'www/testcases/*'
+  ], {
+    debounceDelay: 400
+  }, function(file) {
     livereload.changed(file.path);
   });
 
