@@ -53,11 +53,8 @@ navigation-bar__item()
 
 .navigation-bar
   navigation-bar()
-  box-flex 0
-  flex 0 0 auto
-  align-items stretch
-  align-content stretch
-  display flex
+  display table
+  table-layout fixed
   height var-height--navigation-bar
   padding-left var-padding--navigation-bar
   padding-right var-padding--navigation-bar
@@ -78,10 +75,12 @@ navigation-bar__item()
 
 .navigation-bar__item
   navigation-bar__item()
-  line-height 1
+  height var-height--navigation-bar
   vertical-align top
-  flex-grow 1
-  overflow visible
+  overflow hidden
+  display table-cell
+  vertical-align middle
+  float left
 
 .navigation-bar__left
   @extend .navigation-bar__item
@@ -95,7 +94,6 @@ navigation-bar__item()
 
 .navigation-bar__center
   @extend .navigation-bar__item
-  flex-grow 2
   min-width 50%
   text-align center
 
@@ -107,6 +105,8 @@ navigation-bar__item()
   font-size var-font-size--large
   font-weight var-font-weight--large
   color var-color--navigation-bar
+  margin 0
+  padding 0
 
 /*! topdoc
   name: Navigation Bar Item
@@ -121,7 +121,7 @@ navigation-bar__item()
       </div>
 
       <div class="navigation-bar__center">
-        <h1 class="navigation-bar__title">Navigation Bar</h1>
+        Navigation Bar
       </div>
 
       <div class="navigation-bar__right">
