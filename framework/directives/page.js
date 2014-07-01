@@ -35,6 +35,8 @@
   module.directive('onsPage', function($onsen) {
     function controller($scope, $element) {
 
+      /* jshint validthis:true */
+
       this.registeredToolbarElement = false;
       this.registeredBottomToolbarElement = false;
 

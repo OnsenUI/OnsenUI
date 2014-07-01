@@ -31,7 +31,7 @@ window.animit = (function(){
     }
 
     if (element instanceof HTMLElement) {
-      this.elements = [element]
+      this.elements = [element];
     } else if (Object.prototype.toString.call(element) === '[object Array]') {
       this.elements = element;
     } else {

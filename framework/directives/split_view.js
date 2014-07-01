@@ -246,11 +246,9 @@
 
               case 'portrait':
                 return orientation === 180 || orientation === 0;
-                break;
 
               case 'landscape':
                 return orientation == 90 || orientation == -90;
-                break;
 
               default:
                 // by width
@@ -271,7 +269,6 @@
                 }
 
                 return isNumber(widthToken) && window.innerWidth < widthToken;
-                break;
             }
           },
 
