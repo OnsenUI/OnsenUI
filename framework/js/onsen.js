@@ -5,7 +5,9 @@
 
   var module = angular.module('onsen');
 
-  module.run(function($compile, $rootScope) {
+  var onsenService = undefined;
+
+  module.run(function($compile, $rootScope, $onsen) {
     ons.$compile = $compile;
     $rootScope.$on('$ons-ready', function() {
       ons.isReady = function() {
@@ -25,10 +27,13 @@
     } else {
       throw new Error('Invalid initialization state.');
     }
+
+    onsenService = $onsen;
   });
 
   // JS Global facade for Onsen UI.
   var ons = window.ons = {
+
     /**
      * Bootstrap this document as a Onsen UI application.
      *
@@ -90,6 +95,21 @@
       }
 
       ons.$compile(dom)(scope);
+    },
+
+    /**
+     * @return {BackButtonHandlerStack}
+     */
+    getBackButtonHandlerStack: function() {
+      return this._getOnsenService().backButtonHandlerStack;
+    },
+
+    _getOnsenService: function() {
+      if (!onsenService) {
+        throw new Error('$onsen is not loaded, wait for ons.ready().');
+      }
+
+      return onsenService;
     },
 
     /**
