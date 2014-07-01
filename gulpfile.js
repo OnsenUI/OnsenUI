@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-var CORDOVA_APP = false;
+var CORDOVA_APP = true;
 
 ////////////////////////////////////////
 
@@ -142,7 +142,7 @@ gulp.task('prepare', ['html2js'], function() {
       .pipe(gulp.dest('build/js/'))
       .pipe(gulp.dest('app/lib/onsen/js')),
 
-    // onsen-css-componets.css
+    // onsen-css-components.css
     gulp.src([
       'css-components/components-src/dist/onsen-css-components-default.css',
     ])
@@ -176,7 +176,11 @@ gulp.task('prepare', ['html2js'], function() {
     // css polyfills
     gulp.src('framework/css/polyfill/*.css')
       .pipe(gulp.dest('build/css/polyfill/'))
-      .pipe(gulp.dest('app/lib/onsen/css'))
+      .pipe(gulp.dest('app/lib/onsen/css')),
+
+    // auto prepare
+    gulp.src('cordova-app/www/index.html')
+      .pipe(gulpIf(CORDOVA_APP, shell(['cd cordova-app; cordova prepare'])))
   );
 
 });
@@ -266,10 +270,16 @@ gulp.task('default', function() {
 gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   gulp.watch(['framework/templates/*.tpl'], ['html2js']);
 
-  gulp.watch([
+  var watched = [
     'framework/*/*',
     'css-components/components-src/dist/onsen-css-components-default.css'
-  ], {
+  ];
+
+  if (CORDOVA_APP) {
+    watched.push('cordova-app/www/*.html');
+  }
+
+  gulp.watch(watched, {
     debounceDelay: 400
   }, ['prepare', 'jshint']);
 
