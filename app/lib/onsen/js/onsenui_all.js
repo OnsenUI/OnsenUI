@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.4 - 2014-06-26 */
+/*! onsenui - v1.0.4 - 2014-07-01 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -22030,7 +22030,26 @@ limitations under the License.
 
             attrs.$observe('title', function(title) {
               if (title) {
-                this.setTitle(title);
+                if (title.contains('.html')) {
+                  var templateHTML = $templateCache.get(title);
+                  if(templateHTML) {
+                    this.appendTitle(templateHTML);
+                  } else {
+                    $http({
+                      url: title,
+                      method: 'GET'
+                    }).error(function(e) {
+                      that.onTransitionEnded();
+                      console.error(e);
+                    }).success(function(templateHTML, status, headers, config) {
+                      this.appendTitle(templateHTML);
+                    }.bind(this)).error(function(data, status, headers, config) {
+                      console.error('error', data, status);
+                    });
+                  }
+                } else {
+                  this.setTitle(title);
+                }
               }
             }.bind(this));
 
@@ -22099,7 +22118,6 @@ limitations under the License.
             this.toolbarContent.prepend(inBackLabel);
             inBackLabel.text(title);
 
-            this.toolbarContent[0].offsetWidth;
             setTimeout(function(){
               inBackLabel.removeClass('navigate_right');
               inBackLabel.addClass('transition navigate_center');
@@ -22131,14 +22149,12 @@ limitations under the License.
                 outLabel.unbind(transitionEnded);
               });
 
-              this.toolbarContent[0].offsetWidth;
               outLabel.removeClass('transition navigate_center');
               outLabel.addClass('transition navigate_right');
             }
 
 
             if (inLabel) {
-              this.toolbarContent[0].offsetWidth;
               inLabel.removeClass('navigate_left');
               inLabel.addClass('transition navigate_center');
               inLabel.bind('click', this.onLeftButtonClicked.bind(this));
@@ -22174,6 +22190,7 @@ limitations under the License.
             if (this.isEmpty()) {
               return;
             }
+
             var currentNavigatorItem = this.navigatorItems[this.navigatorItems.length - 1];
             currentNavigatorItem.options.title = title;
             if (currentNavigatorItem.titleElement) {
@@ -22212,7 +22229,6 @@ limitations under the License.
                 inNavigatorItem.rightButtonIconElement = rightButtonIconElement;
               }
 
-              this.rightSection[0].offsetWidth;
               setTimeout(function(){
                 rightButtonIconElement.removeClass('hide');
                 rightButtonIconElement.addClass('transition show');
@@ -22234,7 +22250,6 @@ limitations under the License.
           animateRightButtonOut: function(inNavigatorItem, outNavigatorItem) {
             if (outNavigatorItem.rightButtonIconElement) {
               var outRightButton = outNavigatorItem.rightButtonIconElement;
-              this.toolbarContent[0].offsetWidth;
               outRightButton.removeClass('show');
               outRightButton.addClass('transition hide');
               outRightButton.bind(TRANSITION_END, function transitionEnded(e) {
@@ -22245,7 +22260,6 @@ limitations under the License.
             if (inNavigatorItem.rightButtonIconElement) {
               var rightButton = inNavigatorItem.rightButtonIconElement;
               this.rightSectionIcon.append(rightButton);
-              this.rightSection[0].offsetWidth;
               rightButton.removeClass('hide');
               rightButton.addClass('transition show');
             }
@@ -22277,7 +22291,6 @@ limitations under the License.
           },
 
           showBackButton: function() {
-            this.toolbarContent[0].offsetWidth;
             var that = this;
             setTimeout(function(){
               that.leftButtonContainer.removeClass('hide');
@@ -22296,7 +22309,6 @@ limitations under the License.
             var inTitleElement = previousNavigatorItem.titleElement;
             var outTitleElement = currentNavigatorItem.titleElement;
             outTitleElement.after(inTitleElement);
-            this.element[0].offsetWidth;
             outTitleElement.bind(TRANSITION_END, function transitionEnded(e) {
               outTitleElement.remove();
               outTitleElement.unbind(transitionEnded);
@@ -22323,7 +22335,6 @@ limitations under the License.
 
           animatePageOut: function(currentPage, previousPage) {
             previousPage.attr("class", "onsen_navigator-pager navigate_left");
-            this.element[0].offsetWidth;
             previousPage.attr("class", "onsen_navigator-pager transition navigator_center");
 
             var that = this;
@@ -22459,6 +22470,17 @@ limitations under the License.
             this.navigatorItems.push(navigatorItem);
             this.setLeftButton(navigatorItem);
 
+          },
+
+          appendTitle: function(templateHTML) {
+            var currentNavigatorItem = this.navigatorItems[this.navigatorItems.length - 1];
+
+            if (currentNavigatorItem.titleElement) {
+              var titleScope = this.createPageScope();
+              var compiledTitleView = this.compilePageEl(templateHTML, titleScope);
+
+              currentNavigatorItem.titleElement.html(compiledTitleView);
+            }
           },
 
           appendPage: function(templateHTML, options) {
