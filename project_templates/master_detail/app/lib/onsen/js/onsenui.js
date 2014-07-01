@@ -873,10 +873,10 @@ limitations under the License.
 
             attrs.$observe('title', function(title) {
               if (title) {
-                if (title.contains('.html')) {
+                if (title.indexOf('.html') > -1) {
                   var templateHTML = $templateCache.get(title);
                   if(templateHTML) {
-                    this.appendTitle(templateHTML);
+                    this.setTitleView(templateHTML);
                   } else {
                     $http({
                       url: title,
@@ -885,7 +885,7 @@ limitations under the License.
                       that.onTransitionEnded();
                       console.error(e);
                     }).success(function(templateHTML, status, headers, config) {
-                      this.appendTitle(templateHTML);
+                      this.setTitleView(templateHTML);
                     }.bind(this)).error(function(data, status, headers, config) {
                       console.error('error', data, status);
                     });
@@ -1315,14 +1315,14 @@ limitations under the License.
 
           },
 
-          appendTitle: function(templateHTML) {
+          setTitleView: function(templateHTML) {
             var currentNavigatorItem = this.navigatorItems[this.navigatorItems.length - 1];
 
             if (currentNavigatorItem.titleElement) {
               var titleScope = this.createPageScope();
               var compiledTitleView = this.compilePageEl(templateHTML, titleScope);
 
-              currentNavigatorItem.titleElement.html(compiledTitleView);
+              currentNavigatorItem.titleElement.html(compiledTitleView.html());
             }
           },
 
