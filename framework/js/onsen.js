@@ -18,11 +18,19 @@ limitations under the License.
 (function(){
   'use strict';
 
-  var module = angular.module('onsen');
+  var module = angular.module('onsen', ['templates-main']);
+
+  // for BC
+  angular.module('onsen.directives', ['onsen']);
 
   var onsenService;
-
   module.run(function($compile, $rootScope, $onsen) {
+    onsenService = $onsen;
+
+    $rootScope.ons = window.ons;
+    $rootScope.console = window.console;
+    $rootScope.alert = window.alert;
+
     ons.$compile = $compile;
     $rootScope.$on('$ons-ready', function() {
       ons.isReady = function() {
@@ -43,7 +51,6 @@ limitations under the License.
       throw new Error('Invalid initialization state.');
     }
 
-    onsenService = $onsen;
   });
 
   // JS Global facade for Onsen UI.

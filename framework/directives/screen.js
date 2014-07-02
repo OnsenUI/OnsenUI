@@ -140,7 +140,7 @@ limitations under the License.
     }
   });
 
-  module.service('Screen', function($compile, requestAnimationFrame, $onsen) {
+  module.service('Screen', function($compile, $onsen) {
     var TRANSITION_END = 'webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd';
     var TRANSITION_START = 'webkitAnimationStart animationStart msAnimationStart oAnimationStart';
 
