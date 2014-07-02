@@ -22479,7 +22479,8 @@ limitations under the License.
               var titleScope = this.createPageScope();
               var compiledTitleView = this.compilePageEl(templateHTML, titleScope);
 
-              currentNavigatorItem.titleElement.html(compiledTitleView.html());
+              currentNavigatorItem.titleElement.empty();
+              currentNavigatorItem.titleElement.append(compiledTitleView);
             }
           },
 
