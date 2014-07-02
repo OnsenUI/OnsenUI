@@ -44,34 +44,34 @@ limitations under the License.
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs){
         var effectButton = element;
-        var TYPE_PREFIX = "button--";
+        var TYPE_PREFIX = 'button--';
         scope.item = {};
 
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
         // if animation is not specified -> default is slide-left
-        if(scope.animation === undefined || scope.animation === ""){
-          scope.item.animation = "slide-left";
+        if (scope.animation === undefined || scope.animation === '') {
+          scope.item.animation = 'slide-left';
         }
 
-        scope.$watch('disabled', function(disabled){
-          if(disabled === "true"){
+        scope.$watch('disabled', function(disabled) {
+          if (disabled === 'true') {
             effectButton.attr('disabled', true);
-          }else{
+          } else {
             effectButton.attr('disabled', false);
           }
         });
 
-        scope.$watch('animation', function(newAnimation){
-          if(newAnimation){
+        scope.$watch('animation', function(newAnimation) {
+          if (newAnimation) {
             scope.item.animation = newAnimation;
           }
         });
 
-        scope.$watch('shouldSpin', function(shouldSpin){
-          if(shouldSpin === "true"){
+        scope.$watch('shouldSpin', function(shouldSpin) {
+          if (shouldSpin === 'true') {
             effectButton.attr('data-loading', true);
-          }else{
+          } else {
             effectButton.removeAttr('data-loading');
           }
         });
