@@ -15,6 +15,15 @@ limitations under the License.
 
 */
 
+ons-split-view {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  overflow: hidden;
+}
+
 .onsen-split-view__secondary {
   opacity: 0;
   width: 100%;

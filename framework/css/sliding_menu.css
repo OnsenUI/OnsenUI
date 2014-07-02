@@ -15,6 +15,15 @@ limitations under the License.
 
 */
 
+ons-sliding-menu {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  overflow: hidden;
+}
+
 .onsen-sliding-menu__behind,
 .onsen-sliding-menu__above {
   position: absolute;
