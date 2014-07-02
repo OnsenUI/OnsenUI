@@ -12,16 +12,17 @@
 
 .effeckt-button > .spinner {
   position: absolute;
-  width: 20px;
-  height: 10px;
+  width: 26px;
+  height: 13px;
   top: 50%;
-  margin-top: -13px;
+  margin-top: -12px;
   opacity: 0;
-  /*border: 3px solid #fff; specified in topcoat theme. .topcoat-button__spinner*/
+  border: 3px solid white;
   border-bottom: 0;
   border-radius: 40px 40px 0 0;
   -webkit-transform-origin: bottom center;
   background: transparent;
+  box-sizing: border-box;
 }
 
 .effeckt-button[data-loading] > .spinner {
