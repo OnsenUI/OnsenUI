@@ -254,6 +254,7 @@ limitations under the License.
         };
 
         this.pages.push(pageObject);
+        this._refreshBackButtonHandler();
 
         var done = function() {
           if (self.pages[self.pages.length - 2]) {
@@ -265,7 +266,7 @@ limitations under the License.
           }
 
           unlock();
-          self._backButtonHandler.setEnabled(true);
+          self._refreshBackButtonHandler();
 
           self.emit('post-push', event);
 

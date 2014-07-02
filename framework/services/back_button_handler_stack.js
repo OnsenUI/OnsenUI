@@ -20,6 +20,36 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
+  var registerer = {
+    init: function() {
+      var self = this;
+    },
+
+    addListener: function(fn) {
+      if (this._deviceready) {
+        window.document.addEventListener('backbutton', fn, false);
+      } else {
+        window.document.addEventListener('deviceready', function() {
+          window.document.addEventListener('backbutton', fn, false);
+        });
+      }
+    },
+
+    removeListener: function(fn) {
+      if (this._deviceready) {
+        window.document.removeEventListener('backbutton', fn, false);
+      } else {
+        window.document.addEventListener('deviceready', function() {
+          window.document.removeEventListener('backbutton', fn, false);
+        });
+      }
+    }
+  };
+
+  window.document.addEventListener('deviceready', function() {
+    registerer._deviceready = true;
+  }, false);
+
   /**
    * 'backbutton' event handler manager.
    */
@@ -33,6 +63,20 @@ limitations under the License.
 
       init: function() {
         this._stack = [];
+
+        this._listener = function() {
+          return this._getTopAvailableListener().apply(null, arguments);
+        }.bind(this);
+
+        this.enable();
+      },
+
+      _refreshListener: function() {
+        if (this._enabled && this._getTopAvailableListener()) {
+          registerer.addListener(this._listener);
+        } else {
+          registerer.removeListener(this._listener);
+        }
       },
 
       /**
@@ -46,7 +90,7 @@ limitations under the License.
           listener: listener,
           setEnabled: function(enabled) {
             this._enabled = enabled;
-            self._refreshHandler();
+            self._refreshListener();
           },
           remove: function() {
             self.remove(this.listener);
@@ -69,16 +113,20 @@ limitations under the License.
        * Enabled "backbutton" event listeners on this stack.
        */
       enable: function() {
-        this._enabled = true;
-        this._refreshHandler();
+        if (!this._enabled) {
+          this._enabled = true;
+          this._refreshListener();
+        }
       },
 
       /**
        * Disabled "backbutton" event listeners on this stack.
        */
       disable: function() {
-        this._enabled = false;
-        this._refreshHandler();
+        if (this._enabled) {
+          this._enabled = false;
+          this._refreshListener();
+        }
       },
 
       /**
@@ -89,41 +137,9 @@ limitations under the License.
         var handler = this._createStackObject(listener);
 
         this._stack.push(handler);
-        this._refreshHandler();
+        this._refreshListener();
 
         return handler;
-      },
-
-      /**
-       * @param {Function} listener
-       */
-      _registerBackButtonEventListener: function(listener) {
-        var doc = window.document;
-        doc.addEventListener('backbutton', listener, false); 
-
-        // register again because registering "backbutton" event handler is available only after 'deviceready' fire.
-        doc.addEventListener('deviceready', function() {
-          doc.removeEventListener('backbutton', listener, false);
-          doc.addEventListener('backbutton', listener, false);
-        }, false);
-      },
-
-      _clearAllHandlers: function() {
-        this._stack.forEach(function(handler) {
-          window.document.removeEventListener('backbutton', handler.listener, false);
-        });
-      },
-
-      _refreshHandler: function() {
-        this._clearAllHandlers();
-
-        if (this._enabled) {
-          var listener = this._getTopAvailableListener();
-
-          if (listener) {
-            this._registerBackButtonEventListener(listener);
-          }
-        }
       },
 
       /**
@@ -131,20 +147,17 @@ limitations under the License.
        */
       remove: function(listener) {
         if (!(listener instanceof Function)) {
-          throw new Error('"handler" argument must be an instance of Function.');
+          throw new Error('"listener" argument must be an instance of Function.');
         }
 
         var index = this._stack.map(function(handler) {
           return handler.listener;
         }).indexOf(listener);
 
-        window.document.removeEventListener('backbutton', listener, false);
-
         if (index !== -1) {
           this._stack.splice(index, 1);
         }
-
-        this._refreshHandler();
+        this._refreshListener();
       }
     });
 
