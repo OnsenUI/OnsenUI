@@ -298,8 +298,10 @@ limitations under the License.
           }
 
           $onsen.aliasStack.register('ons.screen', screen);
+          element.data('ons-screen', screen);
 
           scope.$on('$destroy', function(){
+            element.data('ons-screen', undefined);
             $onsen.aliasStack.register('ons.screen', screen);
           });
         };
