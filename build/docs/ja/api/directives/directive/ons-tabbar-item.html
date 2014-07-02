@@ -1,0 +1,70 @@
+<div class="directive-container clearfix" id="module:directives.directive:ons-tabbar-item">
+<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
+  <h1 class="h1-separator">ons-tabbar-item</h1>
+
+  <section>
+    <p>Represents a tab inside tabbar. Each tabbar-item represents a page</p>
+  </section>
+
+  <span class="anchor" id="ons-tabbar-item-attributes"></span>
+  
+    <section ng-show="directive.attributes.length > 0">
+      <table>
+        <thead>
+          <tr><th colspan="2">Attributes</th></tr>
+        </thead>
+        <tbody>
+          
+          <span class="anchor" id="ons-tabbar-item-page"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">page</td>
+            <td>The page that this tabbar-item points to</td>
+          </tr>
+          
+          <span class="anchor" id="ons-tabbar-item-icon"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">icon</td>
+            <td>The icon of the tab. To use font-awesome icon, just set the icon name without &quot;fa-&quot; prefix. eg. to use &quot;fa-home&quot; icon, set it to &quot;home&quot;. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here</td>
+          </tr>
+          
+          <span class="anchor" id="ons-tabbar-item-active-icon"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">active-icon</td>
+            <td>The icon of the tab when active. To use font-awesome icon, just set the icon name without &quot;fa-&quot; prefix. eg. to use &quot;fa-home&quot; icon, set it to &quot;home&quot;. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here</td>
+          </tr>
+          
+          <span class="anchor" id="ons-tabbar-item-label"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">label</td>
+            <td>The label of the tab</td>
+          </tr>
+          
+          <span class="anchor" id="ons-tabbar-item-active"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">active</td>
+            <td>Set wether this tab should be active or not. Valid values are [true/false]</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+  
+  <span class="anchor" id="ons-tabbar-item-methods"></span>
+
+  
+  <section ng-show="!directive.methods || directive.methods.length === 0">
+    <p class="text-muted">
+      This tag has no method
+    </p>
+  </section>
+  
+
+  
+
+  
+
+</div>
+
+
+
+</div>

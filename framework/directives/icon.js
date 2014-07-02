@@ -28,19 +28,19 @@
         flip: '@'
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/icon.tpl',
-      link: function($scope, element, attrs){
-        attrs.$observe('spin', function(spin){
-          if(spin === "true"){
+      link: function($scope, element, attrs) {
+        attrs.$observe('spin', function(spin) {
+          if (spin === 'true') {
             $scope.spin = 'spin';
-          }else{
+          } else {
             $scope.spin = '';
           }
         });
 
         attrs.$observe('fixedWidth', function(fixedWidth){
-          if(fixedWidth === "true"){
+          if (fixedWidth === 'true') {
             $scope.fixedWidth = 'fw';
-          }else{
+          } else {
             $scope.fixedWidth = '';
           }
         });

@@ -1,0 +1,64 @@
+<div class="directive-container clearfix" id="module:directives.directive:ons-text-area">
+<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
+  <h1 class="h1-separator">ons-text-area</h1>
+
+  <section>
+    <p>Component for inputting text.</p>
+  </section>
+
+  <span class="anchor" id="ons-text-area-attributes"></span>
+  
+    <section ng-show="directive.attributes.length > 0">
+      <table>
+        <thead>
+          <tr><th colspan="2">Attributes</th></tr>
+        </thead>
+        <tbody>
+          
+          <span class="anchor" id="ons-text-area-rows"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">rows</td>
+            <td>The number of rows</td>
+          </tr>
+          
+          <span class="anchor" id="ons-text-area-cols"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">cols</td>
+            <td>The number of columns</td>
+          </tr>
+          
+          <span class="anchor" id="ons-text-area-placeholder"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">placeholder</td>
+            <td>The placeholder inside the text area.</td>
+          </tr>
+          
+          <span class="anchor" id="ons-text-area-disabled"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">disabled</td>
+            <td>Wether the input should be disabled.</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+  
+  <span class="anchor" id="ons-text-area-methods"></span>
+
+  
+  <section ng-show="!directive.methods || directive.methods.length === 0">
+    <p class="text-muted">
+      This tag has no method
+    </p>
+  </section>
+  
+
+  
+
+  
+
+</div>
+
+
+
+</div>

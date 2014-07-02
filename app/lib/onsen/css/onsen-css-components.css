@@ -340,25 +340,8 @@ select) {
   -ms-user-select: none;
   user-select: none;
   z-index: 2;
-  box-flex: 0;
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 auto;
-  -moz-box-flex: 0;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  -webkit-box-align: stretch;
-  -webkit-align-items: stretch;
-  -moz-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  -webkit-align-content: stretch;
-  -ms-flex-line-pack: stretch;
-  align-content: stretch;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: table;
+  table-layout: fixed;
   height: 44px;
   padding-left: 0;
   padding-right: 0;
@@ -396,14 +379,12 @@ select) {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  line-height: 1;
+  height: 44px;
   vertical-align: top;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -moz-box-flex: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  overflow: visible;
+  overflow: hidden;
+  display: table-cell;
+  vertical-align: middle;
+  float: left;
 }
 .navigation-bar__left {
   width: 25%;
@@ -414,11 +395,6 @@ select) {
   text-align: right;
 }
 .navigation-bar__center {
-  -webkit-box-flex: 2;
-  -webkit-flex-grow: 2;
-  -moz-box-flex: 2;
-  -ms-flex-positive: 2;
-  flex-grow: 2;
   min-width: 50%;
   text-align: center;
 }
@@ -430,6 +406,8 @@ select) {
   font-size: 16px;
   font-weight: 500;
   color: #1f1f21;
+  margin: 0;
+  padding: 0;
 }
 /* topdoc
   name: Navigation Bar Item
@@ -444,7 +422,7 @@ select) {
       </div>
 
       <div class="navigation-bar__center">
-        <h1 class="navigation-bar__title">Navigation Bar</h1>
+        Navigation Bar
       </div>
 
       <div class="navigation-bar__right">

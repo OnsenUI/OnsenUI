@@ -1,0 +1,62 @@
+<div class="directive-container clearfix" id="module:directives.directive:ons-col">
+<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
+  <h1 class="h1-separator">ons-col</h1>
+
+  <section>
+    <p>Use with &lt;ons-row&gt; to layout component.</p>
+  </section>
+
+  <span class="anchor" id="ons-col-attributes"></span>
+  
+    <section ng-show="directive.attributes.length > 0">
+      <table>
+        <thead>
+          <tr><th colspan="2">Attributes</th></tr>
+        </thead>
+        <tbody>
+          
+          <span class="anchor" id="ons-col-align"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">align</td>
+            <td>Vertical align the column. Valid values are [top/center/bottom].</td>
+          </tr>
+          
+          <span class="anchor" id="ons-col-size"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">size</td>
+            <td>The size of the column in percentage. Valid values are [10/20/25/33/67/75/80/90]</td>
+          </tr>
+          
+          <span class="anchor" id="ons-col-offset"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">offset</td>
+            <td>Offset the column. Valid values are [10/20/25/33/67/75/80/90]</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+  
+  <span class="anchor" id="ons-col-methods"></span>
+
+  
+  <section ng-show="!directive.methods || directive.methods.length === 0">
+    <p class="text-muted">
+      This tag has no method
+    </p>
+  </section>
+  
+
+  
+
+  
+  <section>
+    <p>Known issue: For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.</p>
+  </section>
+  
+
+</div>
+
+
+
+</div>

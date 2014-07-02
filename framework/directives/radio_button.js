@@ -14,7 +14,7 @@
 (function(){
   'use strict';
 
-  var module = angular.module('onsen'); // no [] -> referencing existing module
+  var module = angular.module('onsen');
 
   module.directive('onsRadioButton', function($onsen) {
     return {
@@ -29,16 +29,16 @@
       },
       transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/radio_button.tpl',
-      link: function($scope, element, attrs){
+      link: function($scope, element, attrs) {
         var radioButton = element.find('input');
         var checked = false;
 
         $scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
-        attrs.$observe('disabled', function(disabled){
-          if(disabled === undefined){
+        attrs.$observe('disabled', function(disabled) {
+          if (disabled === undefined) {
             radioButton.attr('disabled', false);
-          }else{
+          } else {
             radioButton.attr('disabled', true);
           }
         });

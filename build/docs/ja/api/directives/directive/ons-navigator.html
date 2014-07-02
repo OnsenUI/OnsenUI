@@ -1,0 +1,125 @@
+<div class="directive-container clearfix" id="module:directives.directive:ons-navigator">
+<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
+  <h1 class="h1-separator">ons-navigator</h1>
+
+  <section>
+    <p>Manages the page navigation backed by page stack.</p>
+  </section>
+
+  <span class="anchor" id="ons-navigator-attributes"></span>
+  
+    <section ng-show="directive.attributes.length > 0">
+      <table>
+        <thead>
+          <tr><th colspan="2">Attributes</th></tr>
+        </thead>
+        <tbody>
+          
+          <span class="anchor" id="ons-navigator-page"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">page</td>
+            <td>First page to show when navigator is initialized</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+  
+  <span class="anchor" id="ons-navigator-methods"></span>
+
+  
+  <section ng-show="directive.methods.length > 0" class="round-corner">
+    <table>
+      <thead>
+        <tr><th colspan="2">Methods</th></tr>
+      </thead>
+      <tbody>
+        
+        <span class="anchor" id="pushPage(pageUrl,-pushPage(pageUrl,"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>pushPage(pageUrl,</code></td>
+          <td>Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. the options object include all the attributes of this navigator but replace the hyphen &#39;-&#39; with camel-case letter. eg. pushPage(&#39;page2.html&#39;)</td>
+        </tr>
+        
+        <span class="anchor" id="popPage()-popPage()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>popPage()</code></td>
+          <td>Pops current page from the page stack</td>
+        </tr>
+        
+        <span class="anchor" id="resetToPage(pageUrl,options)-resetToPage(pageUrl,options)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>resetToPage(pageUrl,options)</code></td>
+          <td>Clears page stack and add the specified pageUrl to the page stack. If options object is specified, apply the options. the options object include all the attributes of this navigator</td>
+        </tr>
+        
+        <span class="anchor" id="getCurrentPage()-getCurrentPage()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>getCurrentPage()</code></td>
+          <td>Get current page&#39;s navigator item. Use this method to access options passed by pushPage() or resetToPage() method. eg. ons.navigator.getCurrentPage().options</td>
+        </tr>
+        
+        <span class="anchor" id="getPages()-getPages()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>getPages()</code></td>
+          <td>Retrieve the entire page stages of the navigator.
+</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+
+  
+  <section class="directive-example">
+    <h4>Example
+      
+      <a title="Open an example page in a new window" href="/OnsenUI/demo/screen/" target="_blank"><img src="/images/components/open_demo_icon.png" width="16" height="16"></a>
+      
+    </h4>
+
+    <ons-navigator>
+  <ons-page>
+    <!-- Toolbar -->
+    <ons-toolbar>
+     <div class="left"></div>
+     <div class="center">Title</div>
+     <div class="right">
+       <ons-button>Config</ons-button>
+     </div>
+    </ons-toolbar>
+  </ons-page>
+</ons-navigator>
+  </section>
+  
+
+  
+
+</div>
+
+
+    <div class="demo">
+      <div class="fit-iphone-frame">
+          <iframe
+              class="simulater-iframe"
+              data-src="/OnsenUI/demo/screen/"
+              width="320" height="570" style="background: -moz-linear-gradient(top, #fff 0%, #dddddd 100%);
+              background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#dddddd));
+              background: -webkit-linear-gradient(top, #fff 0%,#dddddd 100%);
+              background: -o-linear-gradient(top, #fff 0%,#dddddd 100%);
+              background: -ms-linear-gradient(top, #fff 0%,#dddddd 100%);
+              background: linear-gradient(to bottom, #fff 0%,#dddddd 100%);"></iframe>
+      </div>
+      <div style="position: absolute; top: 830px; left: 0px; text-align: center; width:400px">
+        <!--
+        <ul class="theme-switch-control segment-control">
+          <li class="current" data-theme-name="ios">iOS7</li>
+          <li data-theme-name="android">Android</li>
+        </ul>-->
+      </div>
+    </div>
+
+
+
+</div>

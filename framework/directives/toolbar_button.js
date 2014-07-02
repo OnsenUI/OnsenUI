@@ -24,7 +24,7 @@ limitations under the License.
  */
 (function(){
   'use strict';
-  var module = angular.module('onsen'); // no [] -> referencing existing module
+  var module = angular.module('onsen');
 
   module.directive('onsToolbarButton', function($onsen) {
     return {

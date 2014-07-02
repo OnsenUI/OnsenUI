@@ -1,0 +1,58 @@
+<div class="directive-container clearfix" id="module:directives.directive:ons-checkbox">
+<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
+  <h1 class="h1-separator">ons-checkbox</h1>
+
+  <section>
+    <p>Checkbox component.</p>
+  </section>
+
+  <span class="anchor" id="ons-checkbox-attributes"></span>
+  
+    <section ng-show="directive.attributes.length > 0">
+      <table>
+        <thead>
+          <tr><th colspan="2">Attributes</th></tr>
+        </thead>
+        <tbody>
+          
+          <span class="anchor" id="ons-checkbox-ng-model"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">ng-model</td>
+            <td>The model to bind to</td>
+          </tr>
+          
+          <span class="anchor" id="ons-checkbox-ng-true-value"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">ng-true-value</td>
+            <td>The value to be set to the model when this checkbox is checked</td>
+          </tr>
+          
+          <span class="anchor" id="ons-checkbox-ng-false-value"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">ng-false-value</td>
+            <td>The value to be set to the model when this checkbox is unchecked.</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+  
+  <span class="anchor" id="ons-checkbox-methods"></span>
+
+  
+  <section ng-show="!directive.methods || directive.methods.length === 0">
+    <p class="text-muted">
+      This tag has no method
+    </p>
+  </section>
+  
+
+  
+
+  
+
+</div>
+
+
+
+</div>

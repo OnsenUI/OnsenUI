@@ -49,6 +49,10 @@
       }
     },
 
+    openMenu: function() {
+      return this.open.apply(this, arguments);
+    },
+
     /**
      * @param {jqLite} abovePage
      * @param {jqLite} behindPage
@@ -87,6 +91,10 @@
           .play();
 
       }, 1000 / 60);
+    },
+
+    closeMenu: function() {
+      return this.close.apply(this, arguments);
     },
 
     /**
@@ -515,7 +523,7 @@
        * Toggle sliding-menu page.
        */
       toggleMenu: function() {
-        this.toggle();
+        return this.toggle.apply(this, arguments);
       },
 
       /**

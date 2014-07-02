@@ -123,7 +123,7 @@
     }
   });
 
-  module.service('Screen', function($compile, ScreenStack, requestAnimationFrame, $onsen) {
+  module.service('Screen', function($compile, requestAnimationFrame, $onsen) {
     var TRANSITION_END = 'webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd';
     var TRANSITION_START = 'webkitAnimationStart animationStart msAnimationStart oAnimationStart';
 

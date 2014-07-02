@@ -12,7 +12,7 @@
 (function(){
   'use strict';
 
-  var module = angular.module('onsen'); // no [] -> referencing existing module
+  var module = angular.module('onsen');
 
   module.directive('onsTextArea', function($onsen) {
     return {

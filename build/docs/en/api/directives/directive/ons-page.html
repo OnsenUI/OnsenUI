@@ -1,0 +1,57 @@
+<div class="directive-container clearfix" id="module:directives.directive:ons-page">
+<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
+  <h1 class="h1-separator">ons-page</h1>
+
+  <section>
+    <p>Should be used as root component of each page. The content inside page component is not scrollable. If you need scroll behavior, you can put inside this component.</p>
+  </section>
+
+  <span class="anchor" id="ons-page-attributes"></span>
+  
+  <section ng-show="!directive.attributes || directive.attributes.length === 0">
+    <p class="text-muted">
+      This tag has no attribute
+    </p>
+  </section>
+  
+  <span class="anchor" id="ons-page-methods"></span>
+
+  
+  <section ng-show="!directive.methods || directive.methods.length === 0">
+    <p class="text-muted">
+      This tag has no method
+    </p>
+  </section>
+  
+
+  
+
+  
+
+</div>
+
+
+    <div class="demo">
+      <div class="fit-iphone-frame">
+          <iframe
+              class="simulater-iframe"
+              data-src="/OnsenUI/demo/page/"
+              width="320" height="570" style="background: -moz-linear-gradient(top, #fff 0%, #dddddd 100%);
+              background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#dddddd));
+              background: -webkit-linear-gradient(top, #fff 0%,#dddddd 100%);
+              background: -o-linear-gradient(top, #fff 0%,#dddddd 100%);
+              background: -ms-linear-gradient(top, #fff 0%,#dddddd 100%);
+              background: linear-gradient(to bottom, #fff 0%,#dddddd 100%);"></iframe>
+      </div>
+      <div style="position: absolute; top: 830px; left: 0px; text-align: center; width:400px">
+        <!--
+        <ul class="theme-switch-control segment-control">
+          <li class="current" data-theme-name="ios">iOS7</li>
+          <li data-theme-name="android">Android</li>
+        </ul>-->
+      </div>
+    </div>
+
+
+
+</div>

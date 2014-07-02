@@ -1,0 +1,50 @@
+<div class="directive-container clearfix" id="module:directives.directive:ons-row">
+<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
+  <h1 class="h1-separator">ons-row</h1>
+
+  <section>
+    <p>Use &lt;ons-row&gt; and &lt;ons-col&gt; grid system to layout component. By default, all &lt;ons-col&gt; inside a &lt;ons-row&gt; will have the same width. You can specify any &lt;ons-col&gt; to have a specific width and let others take the remaining width in a &lt;ons-row&gt;. You can event vertical align each &lt;ons-col&gt; in a &lt;ons-row&gt;</p>
+  </section>
+
+  <span class="anchor" id="ons-row-attributes"></span>
+  
+    <section ng-show="directive.attributes.length > 0">
+      <table>
+        <thead>
+          <tr><th colspan="2">Attributes</th></tr>
+        </thead>
+        <tbody>
+          
+          <span class="anchor" id="ons-row-align"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">align</td>
+            <td>Short hand attribute for aligning all colum in a row. Valid values are [top/bottom/center].</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+  
+  <span class="anchor" id="ons-row-methods"></span>
+
+  
+  <section ng-show="!directive.methods || directive.methods.length === 0">
+    <p class="text-muted">
+      This tag has no method
+    </p>
+  </section>
+  
+
+  
+
+  
+  <section>
+    <p>Known issue: For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.</p>
+  </section>
+  
+
+</div>
+
+
+
+</div>

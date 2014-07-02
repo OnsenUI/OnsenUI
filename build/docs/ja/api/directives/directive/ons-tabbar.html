@@ -1,0 +1,46 @@
+<div class="directive-container clearfix" id="module:directives.directive:ons-tabbar">
+<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
+  <h1 class="h1-separator">ons-tabbar</h1>
+
+  <section>
+    <p>Used with tabbar-item to manage pages using tabs.</p>
+  </section>
+
+  <span class="anchor" id="ons-tabbar-attributes"></span>
+  
+    <section ng-show="directive.attributes.length > 0">
+      <table>
+        <thead>
+          <tr><th colspan="2">Attributes</th></tr>
+        </thead>
+        <tbody>
+          
+          <span class="anchor" id="ons-tabbar-hide-tabs"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">hide-tabs</td>
+            <td>Wether to hide the tabs. Valid values are [true/false] or angular binding. eg:</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+  
+  <span class="anchor" id="ons-tabbar-methods"></span>
+
+  
+  <section ng-show="!directive.methods || directive.methods.length === 0">
+    <p class="text-muted">
+      This tag has no method
+    </p>
+  </section>
+  
+
+  
+
+  
+
+</div>
+
+
+
+</div>
