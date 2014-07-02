@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-var CORDOVA_APP = true;
+var CORDOVA_APP = false;
 
 ////////////////////////////////////////
 
