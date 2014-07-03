@@ -1545,8 +1545,6 @@ select) {
   text-shadow: 0 1px none;
   vertical-align: baseline;
   background-color: rgba(0,0,0,0);
-  -webkit-box-shadow: none;
-  box-shadow: none;
   border: 1px solid #1284ff;
   -webkit-border-radius: 3px;
   border-radius: 3px;
@@ -1565,7 +1563,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
 }
 .icon-button:disabled,
 .icon-button--quiet:disabled {
@@ -1591,8 +1589,7 @@ select) {
   text-shadow: 0 1px none;
   background-color: transparent;
   border: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  opacity: 0.2;
 }
 /* topdoc
   name: Checkbox
