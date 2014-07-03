@@ -397,6 +397,7 @@ select) {
 .navigation-bar__center {
   min-width: 50%;
   text-align: center;
+  line-height: 44px;
 }
 .navigation-bar__center:first-child:last-child {
   width: 100%;
