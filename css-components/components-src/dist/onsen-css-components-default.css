@@ -1089,6 +1089,7 @@ select:focus {
   white-space: nowrap;
   margin: 0;
   padding: 0;
+  position: relative;
   margin: 0;
   border: none;
   width: 100%;
@@ -1106,6 +1107,8 @@ select:focus {
   position: relative;
   overflow: hidden;
   padding: 0;
+  position: relative;
+  overflow: hidden;
 }
 .button-bar__item > input {
   position: absolute;
