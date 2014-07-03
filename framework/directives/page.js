@@ -49,7 +49,7 @@ limitations under the License.
     findPageDOM().dispatchEvent(event);    
   }
 
-  module.directive('onsPage', function($onsen) {
+  module.directive('onsPage', function($onsen, $timeout) {
     function controller($scope, $element) {
 
       /* jshint validthis:true */
@@ -216,8 +216,35 @@ limitations under the License.
               content.css({zIndex: 0});
               element.append(content);
 
-              content.append(clonedElement);
+              if (Modernizr.csstransforms3d) {
+                content.append(clonedElement);
+              }  else {
+
+                var wrapper = angular.element('<div></div>');
+                content.append(wrapper);
+                wrapper.append(clonedElement);
+
+                // IScroll for Android2
+                var scroller = new IScroll(content[0], {
+                  momentum: true,
+                  bounce: true,
+                  hScrollbar: false,
+                  vScrollbar: false,
+                  preventDefault: false
+                });
+
+                var offset = 10;
+                scroller.on('scrollStart', function(e) {
+                  var scrolled = scroller.y - offset;
+                  if (scrolled < (scroller.maxScrollY + 40)) {
+                    // TODO: find a better way to know when content is upated so we can refresh
+                    scroller.refresh();
+                  }
+                });
+              }
             });
+
+
           },
 
           post: function(scope, element, attrs) {

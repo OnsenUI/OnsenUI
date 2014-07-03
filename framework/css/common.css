@@ -28,6 +28,10 @@ ons-split-view, ons-sliding-menu, ons-tabbar {
   -webkit-user-select: none;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 input, textarea {
   -webkit-user-select: auto;
 }
@@ -55,11 +59,9 @@ ons-toolbar + .page__content {
 }
 
 .page__bottom-bar-fill ~ .page__content {
-  padding-bottom: 44px;
+  margin-bottom: 44px;
 }
 
 .page__content::-webkit-scrollbar {
   display: none;
 }
-
-
