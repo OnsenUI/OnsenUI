@@ -10,6 +10,10 @@
     font-size: 14px;
 }
 
+.menu-segment .button-bar {
+    width: 100%;
+}
+
 .padding-little {
     padding: 8px;
 }
