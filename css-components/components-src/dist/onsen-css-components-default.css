@@ -1082,7 +1082,7 @@ select) {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   margin: 0;
-  border: 0px solid #1284ff;
+  border: none;
 }
 .button-bar__item {
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
@@ -1096,21 +1096,7 @@ select) {
   position: relative;
   position: relative;
   overflow: hidden;
-  border-top: 1px solid #1284ff;
-  border-bottom: 1px solid #1284ff;
   padding: 0;
-}
-.button-bar > .button-bar__item:first-child {
-  -webkit-border-top-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -webkit-border-bottom-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-.button-bar > .button-bar__item:last-child {
-  -webkit-border-top-right-radius: 4px;
-  border-top-right-radius: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  border-bottom-right-radius: 4px;
 }
 .button-bar__item > input {
   position: absolute;
@@ -1128,13 +1114,23 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .button-bar__item:first-child > .button-bar__button {
   border-left: 1px solid #1284ff;
   border-right: 1px solid #1284ff;
+  -webkit-border-top-left-radius: 4px;
+  border-top-left-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 .button-bar__item:last-child > .button-bar__button {
   border-right: 1px solid #1284ff;
+  -webkit-border-top-right-radius: 4px;
+  border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 .button-bar__button {
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
@@ -1146,6 +1142,8 @@ select) {
   background-color: transparent;
   color: #1284ff;
   border: 0px solid #1284ff;
+  border-top: 1px solid #1284ff;
+  border-bottom: 1px solid #1284ff;
   border-right: 1px solid #1284ff;
   font-weight: 400;
   padding: 0 8px;
@@ -1165,6 +1163,8 @@ select) {
 :active + .button-bar__button {
   background-color: rgba(18,132,255,0.2);
   border: 0px solid #1284ff;
+  border-top: 1px solid #1284ff;
+  border-bottom: 1px solid #1284ff;
   border-right: 1px solid #1284ff;
   height: 27px;
   line-height: 27px;
