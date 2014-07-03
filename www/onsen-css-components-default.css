@@ -20,6 +20,14 @@ select) {
 * {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
+input:active,
+input:focus,
+textarea:active,
+textarea:focus,
+select:active,
+select:focus {
+  outline: none;
+}
 .page {
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,7 +40,7 @@ select) {
   right: 0px;
   bottom: 0px;
   overflow: hidden;
-  font-size: 16px;
+  font-size: 18px;
   color: #1f1f21;
 }
 .page::-webkit-scrollbar {
@@ -77,7 +85,7 @@ select) {
   background-clip: padding-box;
   position: relative;
   overflow: hidden;
-  font-size: 16px;
+  font-size: 18px;
   padding: 0 20px;
   border: none;
   overflow: visible;
@@ -104,6 +112,8 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
   width: 51px;
   height: 44px;
   margin-top: -6px;
@@ -398,13 +408,15 @@ select) {
   min-width: 50%;
   text-align: center;
   line-height: 44px;
+  font-size: 18px;
+  font-weight: 500;
 }
 .navigation-bar__center:first-child:last-child {
   width: 100%;
 }
 .navigation-bar__title {
   line-height: 44px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   color: #1f1f21;
   margin: 0;
@@ -549,7 +561,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -631,7 +643,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -722,7 +734,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -739,7 +751,7 @@ select) {
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 36px;
   padding: 4px 20px;
@@ -813,7 +825,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -830,7 +842,7 @@ select) {
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 36px;
   padding: 4px 20px;
@@ -905,7 +917,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -992,7 +1004,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -1015,7 +1027,7 @@ select) {
   box-shadow: none;
   color: #fff;
   text-shadow: none;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 36px;
   padding: 4px 20px;
@@ -1329,6 +1341,8 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .tab-bar__button {
   position: relative;
@@ -1550,7 +1564,7 @@ select) {
   -webkit-border-radius: 3px;
   border-radius: 3px;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
   -webkit-transition: opacity 0.2s linear;
   -moz-transition: opacity 0.2s linear;
   -o-transition: opacity 0.2s linear;
@@ -1683,6 +1697,8 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
   height: 24px;
   width: 24px;
 }
@@ -1810,6 +1826,8 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .checkbox--noborder {
   position: relative;
@@ -2174,6 +2192,8 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
   height: 24px;
   width: 24px;
   margin-top: 0;
@@ -2327,8 +2347,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-image: url("data:image/svg+xml;utf8,<svg width='41px' height='40px' viewBox='0 0 41 40' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'><title>Slice 1</title><description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description><defs></defs><g id='Page 1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='search' fill='#C6C8C8'><path d='M0.504,16.338 C0.504,25.085 7.635,32.165 16.444,32.165 C25.24,32.165 32.382,25.085 32.382,16.338 C32.382,7.591 25.24,0.5 16.444,0.5 C7.635,0.5 0.504,7.591 0.504,16.338 L0.504,16.338 Z M5.555,16.338 C5.555,10.359 10.423,5.521 16.445,5.521 C22.455,5.521 27.333,10.36 27.333,16.338 C27.333,22.317 22.455,27.156 16.445,27.156 C10.423,27.156 5.555,22.316 5.555,16.338 L5.555,16.338 Z M27.666,30.861 L34.521,38.67 C35.625,39.772 36.338,39.781 37.46,38.67 L39.661,36.489 C40.743,35.408 40.811,34.711 39.661,33.568 L31.765,26.793 L27.666,30.861 L27.666,30.861 Z M27.666,30.861' id='Shape'></path></g></g></svg>");
   background-position: 8px center;
   background-repeat: no-repeat;
-  -webkit-background-size: 16px;
-  background-size: 16px;
+  -webkit-background-size: 18px;
+  background-size: 18px;
   font-weight: 400;
   display: block;
   width: 100%;
