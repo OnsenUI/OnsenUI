@@ -114,6 +114,7 @@ gulp.task('prepare', ['html2js'], function() {
     gulp.src([
       'framework/lib/*.js',
       'framework/directives/templates.js',
+      'framework/js/doorlock.js',
       'framework/js/onsen.js',
       'framework/views/*.js',
       'framework/directives/*.js',
@@ -131,6 +132,7 @@ gulp.task('prepare', ['html2js'], function() {
       'framework/lib/angular/angular.js',
       'framework/lib/*.js',
       'framework/directives/templates.js',
+      'framework/js/doorlock.js',
       'framework/js/onsen.js',
       'framework/views/*.js',
       'framework/directives/*.js',

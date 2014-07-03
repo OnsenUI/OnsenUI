@@ -20,6 +20,10 @@ limitations under the License.
 
   var module = angular.module('onsen', ['templates-main']);
 
+  var readyLock = new DoorLock();
+
+  var unlockOnsenUI = readyLock.lock();
+
   // for BC
   angular.module('onsen.directives', ['onsen']);
 
@@ -33,9 +37,7 @@ limitations under the License.
 
     ons.$compile = $compile;
     $rootScope.$on('$ons-ready', function() {
-      ons.isReady = function() {
-        return true;
-      };
+      unlockOnsenUI();
     });
 
     // for initialization hook.
@@ -50,11 +52,12 @@ limitations under the License.
     } else {
       throw new Error('Invalid initialization state.');
     }
-
   });
 
   // JS Global facade for Onsen UI.
   var ons = window.ons = {
+
+    _readyLock: readyLock,
 
     /**
      * Bootstrap this document as a Onsen UI application.
@@ -95,8 +98,8 @@ limitations under the License.
     /**
      * @return {Boolean}
      */
-    isReady : function() {
-      return false;
+    isReady: function() {
+      return !readyLock.isLocked();
     },
 
     /**
@@ -141,18 +144,31 @@ limitations under the License.
       if (ons.isReady()) {
         callback();
       } else {
-        module.run(function($rootScope) {
-          if (ons.isReady()) {
-            callback();
-          } else {
-            var off = $rootScope.$on('$ons-ready', function() {
-              off();
-              callback();
-            });
-          }
-        });
+        readyLock.waitUnlock(callback);
       }
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isWebView: function() {
+
+      if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
+        throw new Error('isWebView() method is available after dom contents loaded.');
+      }
+
+      return !!(window.cordova || window.phonegap || window.PhoneGap);
     }
   };
+
+
+  var unlockDeviceReady = readyLock.lock();
+  window.addEventListener('DOMContentLoaded', function() {
+    if (ons.isWebView()) {
+      window.document.addEventListener('deviceready', unlockDeviceReady, false);
+    } else {
+      unlockDeviceReady();
+    }
+  }, false);
 
 })();

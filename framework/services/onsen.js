@@ -226,7 +226,7 @@ limitations under the License.
        * @return {Boolean}
        */
       isWebView: function() {
-        return !!(window.cordova || window.phonegap || window.PhoneGap);
+        return window.ons.isWebView();
       },
 
       /**
