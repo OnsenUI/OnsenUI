@@ -362,6 +362,8 @@ select:focus {
   border-bottom: 1px solid #ddd;
   font-weight: 400;
   width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .navigation-bar__line-height {
   line-height: 44px;
@@ -394,18 +396,17 @@ select:focus {
   overflow: hidden;
   display: table-cell;
   vertical-align: middle;
-  float: left;
 }
 .navigation-bar__left {
-  width: 25%;
+  max-width: 50%;
   text-align: left;
 }
 .navigation-bar__right {
-  width: 25%;
+  max-width: 50%;
   text-align: right;
 }
 .navigation-bar__center {
-  min-width: 50%;
+  width: 60%;
   text-align: center;
   line-height: 44px;
   font-size: 17px;
@@ -421,6 +422,9 @@ select:focus {
   color: #1f1f21;
   margin: 0;
   padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 /* topdoc
   name: Navigation Bar Item

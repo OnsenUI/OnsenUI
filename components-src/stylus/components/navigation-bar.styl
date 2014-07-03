@@ -64,6 +64,8 @@ navigation-bar__item()
   border-bottom var-border-bottom--navigation-bar
   font-weight var-font-weight
   width 100%
+  white-space nowrap
+  overflow hidden
 
 .navigation-bar__line-height
   line-height var-height--navigation-bar
@@ -80,21 +82,20 @@ navigation-bar__item()
   overflow hidden
   display table-cell
   vertical-align middle
-  float left
 
 .navigation-bar__left
   @extend .navigation-bar__item
-  width 25%
+  max-width 50%
   text-align left
 
 .navigation-bar__right
   @extend .navigation-bar__item
-  width 25%
+  max-width 50%
   text-align right
 
 .navigation-bar__center
   @extend .navigation-bar__item
-  min-width 50%
+  width 60%
   text-align center
   line-height 44px
   font-size var-font-size--large
@@ -110,6 +111,7 @@ navigation-bar__item()
   color var-color--navigation-bar
   margin 0
   padding 0
+  ellipsis()
 
 /*! topdoc
   name: Navigation Bar Item
