@@ -218,13 +218,14 @@ list__item()
 /*! topdoc
   name: List Item with Chevron
   class: list__item--chevron
+  use: List
   markup:
     <div class="list">
       <ul class="list__container">
         <li class="list__item list__item--chevron">
           <span class="list__item__line-height">Tappable Item</span>
         </li>
-        <li class="list__item list__item--chevron" style="height:80px;">
+        <li class="list__item list__item--chevron">
           <span class="list__item__line-height">Tappable Item</span>
         </li>
       </ul>
@@ -233,6 +234,7 @@ list__item()
 
 .list__item--chevron
   transition background-color 0.2s linear
+  overflow hidden
 
 .list__item--chevron:active
   background-color var-background-color--list-item--active
@@ -247,6 +249,7 @@ list__item()
   top 50%
   color var-list-item-separator-color
   line-height 28px
+  height 28px
   transform translateY(-50%)
   font-size 28px
   font-family FontAwesome
