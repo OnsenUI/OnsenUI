@@ -39,6 +39,7 @@ var-padding--button--large = 4px 20px
 var-padding--button = 4px 20px
 var-line-height--button = 36px
 var-line-height--button--large = 36px
+var-active-button-opacity = 0.2
 
 /*! topdoc
   name: Button
@@ -93,7 +94,7 @@ button--active()
   box-shadow var-box-shadow--down
   color var-color--button--active
   transition none
-  opacity 0.6
+  opacity var-active-button-opacity
 
 .button
   button()
@@ -141,7 +142,8 @@ button--active()
   border none
   box-shadow var-box-shadow--down
   transition none
-  opacity 0.6
+  opacity var-active-button-opacity
+  color var-quiet-button-color
 
 /*! topdoc
   name: Large Button
@@ -192,7 +194,9 @@ button--active()
 
 .button--large--quiet:active
   transition none
-  opacity 0.6
+  opacity var-active-button-opacity
+  color var-quiet-button-color
+  button--quiet()
 
 .button--large--quiet:disabled
   button--disabled()
@@ -230,7 +234,7 @@ button--active()
   background-color var-background-color--cta--down
   box-shadow var-box-shadow--cta--down
   transition none
-  opacity 0.6
+  opacity var-active-button-opacity
 
 .button--cta:disabled
   button--disabled()
@@ -268,7 +272,7 @@ button--active()
   background-color var-background-color--cta--down
   box-shadow var-box-shadow--cta--down
   transition none
-  opacity 0.6
+  opacity var-active-button-opacity
 
 .button--large--cta:disabled
   button--disabled()
