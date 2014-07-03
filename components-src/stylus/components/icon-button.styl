@@ -74,6 +74,9 @@ var-color--icon-button--quiet = var-color--icon-button
 .icon-button:focus
   outline 0
 
+.icon-button:hover
+  transition none
+
 .icon-button--quiet
   @extend .icon-button
   button--quiet()
@@ -88,6 +91,9 @@ var-color--icon-button--quiet = var-color--icon-button
   background-color transparent
   border none
   opacity 0.2
+
+.icon-button--quiet:hover
+  transition none
 
 .icon-button--quiet:disabled
   @extend .icon-button:disabled

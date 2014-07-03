@@ -1575,6 +1575,12 @@ select) {
 .icon-button--quiet:focus {
   outline: 0;
 }
+.icon-button:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
 .icon-button--quiet {
   background: transparent;
   border: 1px solid transparent;
@@ -1590,6 +1596,12 @@ select) {
   background-color: transparent;
   border: none;
   opacity: 0.2;
+}
+.icon-button--quiet:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
 }
 /* topdoc
   name: Checkbox
