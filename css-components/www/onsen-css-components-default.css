@@ -1089,12 +1089,9 @@ select:focus {
   white-space: nowrap;
   margin: 0;
   padding: 0;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
   margin: 0;
   border: none;
+  width: 100%;
 }
 .button-bar__item {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
@@ -1186,7 +1183,6 @@ select:focus {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  padding: 0;
 }
 .button-bar__item.active > .button-bar__button,
 :checked + .button-bar__button {
@@ -2131,13 +2127,14 @@ select:focus {
 /* topdoc
   name: List Item with Chevron
   class: list__item--chevron
+  use: List
   markup:
     <div class="list">
       <ul class="list__container">
         <li class="list__item list__item--chevron">
           <span class="list__item__line-height">Tappable Item</span>
         </li>
-        <li class="list__item list__item--chevron" style="height:80px;">
+        <li class="list__item list__item--chevron">
           <span class="list__item__line-height">Tappable Item</span>
         </li>
       </ul>
@@ -2148,6 +2145,7 @@ select:focus {
   -moz-transition: background-color 0.2s linear;
   -o-transition: background-color 0.2s linear;
   transition: background-color 0.2s linear;
+  overflow: hidden;
 }
 .list__item--chevron:active {
   background-color: #d9d9d9;
@@ -2168,6 +2166,7 @@ select:focus {
   top: 50%;
   color: #ddd;
   line-height: 28px;
+  height: 28px;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
