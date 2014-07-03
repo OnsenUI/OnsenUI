@@ -30,10 +30,8 @@ var-list-item-separator-color := #ddd
 
 var-padding--list-container = 0
 var-font-size--list-header = 15px
-var-border-top--list-container = 1px solid var-list-item-separator-color
-var-border-bottom--list-container = 1px solid var-list-item-separator-color
-var-border-top--list-item--2 = 1px solid var-list-item-separator-color
-var-border-bottom--list-item = 1px solid var-list-item-separator-color
+var-list-border = 1px solid var-list-item-separator-color
+
 var-margin--list-item = 0 0 0 0
 var-padding--list-item = 0 0 0 10px
 var-padding--list-header = 0 0 0 10px
@@ -43,17 +41,16 @@ var-margin--list-item--first = 0
 var-margin--list-item--last = 0
 var-min-height--list-item = 44px
 var-min-height--list-header = 24px
-var-border-top--list = none
-var-border-bottom--list-item--first = none
-var-border-top--list-item--last = none
-var-border-top--list-item--first = none
-var-border-top--list-item = none
-var-border-bottom--list-item--last = none
-var-border-top--list-header = none
-var-border-bottom--list-header = none
 var-text-shadow--list-header = none
 var-font-weight--list-header = var-font-weight--large
 
+var-border-top--list-container = 1px solid var-list-item-separator-color
+var-border-bottom--list-container = 1px solid var-list-item-separator-color
+
+var-border-top--list-item--2 = 1px solid var-list-item-separator-color
+var-border-bottom--list-item = 1px solid var-list-item-separator-color
+
+var-border-top--list-item = none
 
 
 /*! topdoc
@@ -111,14 +108,13 @@ list__item()
   background-color var-background-color--list-header
   color var-color--list-header
   text-shadow var-text-shadow--list-header
-  border-top var-border-top--list-header
-  border-bottom var-border-bottom--list-header
+  border-top none
+  border-bottom none
   min-height var-min-height--list-header
   line-height @min-height
 
 .list__container
   list__container()
-  border-top var-border-top--list
   padding var-padding--list-container
   background-color var-background-color--list-container
 
@@ -126,12 +122,11 @@ list__item()
   list__item()
   padding var-padding--list-item
   margin var-margin--list-item
-  border-top var-border-top--list-item
-  border-bottom var-border-bottom--list-item
+  border-top none
+  border-bottom var-list-border
   color var-color--list-item
   background-color var-background-color--list-item
   min-height var-min-height--list-item
-  position relative
 
 .list__item__line-height
   line-height var-min-height--list-item
@@ -143,17 +138,17 @@ list__item()
 .list__item:first-child
   padding-left var-padding-left--list-item--first
   margin var-margin--list-item--first
-  border-top var-border-top--list-item--first
-  border-bottom var-border-bottom--list-item--first
+  border-top none
+  border-bottom var-list-border
 
 .list__item:last-child
   padding-left var-padding-left--list-item--last
   margin var-margin--list-item--last
-  border-top var-border-top--list-item--last
-  border-bottom var-border-bottom--list-item--last
+  border-bottom none
 
-.list__item:nth-child(2)
-  border-top var-border-top--list-item--2
+.list__item:first-child:last-child
+  border-top none
+  border-bottom none
 
 /*! topdoc
   name: Noborder List
@@ -174,8 +169,6 @@ list__item()
 
 .list--noborder
   list()
-  border-top var-border-top--list-container
-  border-bottom var-border-bottom--list-container
   background-color var-background-color--list
   border-top none
   border-bottom none
@@ -191,6 +184,9 @@ list__item()
         <li class="list__item list__item__line-height">
           Item
         </li>
+        <li class="list__item list__item__line-height">
+          Item
+        </li>
       </ul>
     </div>
  */
@@ -202,7 +198,7 @@ list__item()
   markup:
     <div class="list">
       <ul class="list__container">
-        <li class="list__item--tappable">
+        <li class="list__item list__item--tappable">
           <span class="list__item__line-height">Tappable Item</span>
         </li>
       </ul>
@@ -210,33 +206,51 @@ list__item()
  */
 
 .list__item--tappable
-  list__item()
-  padding var-padding--list-item
-  margin var-margin--list-item
-  border-top var-border-top--list-item
-  border-bottom var-border-bottom--list-item
-  color var-color--list-item
-  background-color var-background-color--list-item
-  min-height var-min-height--list-item
-  position relative
   transition background-color 0.2s linear
 
 .list__item--tappable:active
   background-color var-background-color--list-item--active
   transition none
 
-.list__item--tappable:first-child
-  padding-left var-padding-left--list-item--first
-  margin var-margin--list-item--first
-  border-top var-border-top--list-item--first
-  border-bottom var-border-bottom--list-item--first
+.list__item--tappable:hover
+  transition none
 
-.list__item--tappable:last-child
-  padding-left var-padding-left--list-item--last
-  margin var-margin--list-item--last
-  border-top var-border-top--list-item--last
-  border-bottom var-border-bottom--list-item--last
+/*! topdoc
+  name: List Item with Chevron
+  class: list__item--chevron
+  markup:
+    <div class="list">
+      <ul class="list__container">
+        <li class="list__item list__item--chevron">
+          <span class="list__item__line-height">Tappable Item</span>
+        </li>
+        <li class="list__item list__item--chevron" style="height:80px;">
+          <span class="list__item__line-height">Tappable Item</span>
+        </li>
+      </ul>
+    </div>
+ */
 
-.list__item--tappable:nth-child(2)
-  border-top var-border-top--list-item--2
+.list__item--chevron
+  transition background-color 0.2s linear
+
+.list__item--chevron:active
+  background-color var-background-color--list-item--active
+  transition none
+
+.list__item--chevron:hover
+  transition none
+
+.list__item--chevron:before
+  position absolute
+  right 16px
+  top 50%
+  color var-list-item-separator-color
+  line-height 28px
+  transform translateY(-50%)
+  font-size 28px
+  font-family FontAwesome
+  font-style normal
+  font-weight normal
+  content "\f105"
 
