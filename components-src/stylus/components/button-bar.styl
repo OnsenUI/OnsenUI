@@ -81,32 +81,28 @@ button-bar__item()
   button-bar()
   reset-font()
   margin var-button-bar-margin
-  border var-border--button-bar
+  border none
 
 .button-bar__item
   button-bar__item()
   hide-input-parent()
-  border-top var-border-top--button-bar__button
-  border-bottom var-border-bottom--button-bar__button
   padding 0
-
-.button-bar > .button-bar__item:first-child
-  border-top-left-radius var-border-radius
-  border-bottom-left-radius var-border-radius
-
-.button-bar > .button-bar__item:last-child
-  border-top-right-radius var-border-radius
-  border-bottom-right-radius var-border-radius
 
 .button-bar__item > input
   hide-input()
+  -webkit-appearance none
+  appearance none
 
 .button-bar__item:first-child > .button-bar__button
   border-left var-border-left--button-bar__button__first
   border-right var-border-right--button-bar__button__first
+  border-top-left-radius var-border-radius
+  border-bottom-left-radius var-border-radius
 
 .button-bar__item:last-child > .button-bar__button
   border-right var-border-right--button-bar__button__last
+  border-top-right-radius var-border-radius
+  border-bottom-right-radius var-border-radius
 
 .button-bar__button
   reset-font()
@@ -114,6 +110,8 @@ button-bar__item()
   background-color var-background-color--button-bar
   color var-color--button-bar--button
   border var-border--button-bar__button
+  border-top var-border-top--button-bar__button
+  border-bottom var-border-bottom--button-bar__button
   border-right var-border-right--button-bar__button
   font-weight var-font-weight
   padding 0 8px
@@ -128,7 +126,9 @@ button-bar__item()
 :active + .button-bar__button
   background-color var-background-color--button-bar--button--active
   border var-border--button-bar__button
-  border-right var-border-right--button-bar__button--active
+  border-top var-border-top--button-bar__button
+  border-bottom var-border-bottom--button-bar__button
+  border-right var-border-right--button-bar__button
   height 27px
   line-height 27px
   font-size 13px
@@ -136,21 +136,17 @@ button-bar__item()
   transition none
   padding 0
 
-
 .button-bar__item.active > .button-bar__button,
 :checked + .button-bar__button
   background-color var-background-color--button-bar--button--on-state
   color var-color--button-bar__button--active
   transition none
 
-
 .button-bar__button:disabled
   disabled()
 
-
 .button-bar__button:hover
   transition none
-
 
 .button-bar__button:focus
   outline 0
