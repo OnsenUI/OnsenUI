@@ -281,7 +281,6 @@ limitations under the License.
 
           options.animator.push(enterPage, leavePage, done);
           this._element.append(element);
-          element[0].clientHeight;
 
         } else {
           this._element.append(element);

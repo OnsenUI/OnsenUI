@@ -43,7 +43,7 @@ limitations under the License.
         leavePage.element[0].parentNode.insertBefore(mask[0], leavePage.element[0]);
 
         var maskClear = animit(mask[0])
-          .wait(0.4)
+          .wait(0.6)
           .queue(function(done) {
             mask.remove();
             done();
@@ -67,8 +67,8 @@ limitations under the License.
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
+            .wait(0.2)
             .resetStyle()
-            .wait(0.4)
             .queue(function(done) {
               callback();
               done();

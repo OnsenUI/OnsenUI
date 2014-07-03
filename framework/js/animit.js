@@ -178,7 +178,7 @@ window.animit = (function(){
             removeListeners();
             reset();
             done();
-          }, options.duration * 1000 * (elements[0] ? 1.1 : 1));
+          }, options.duration * 1000 * 1.4);
         });
       } else {
         this.transitionQueue.push(function(done) {
@@ -318,7 +318,7 @@ window.animit = (function(){
 
         return function(callback) {
           var elements = this.elements;
-          var timeout = self.options.duration * 1000 * (elements[0] ? 1.1 : 1);
+          var timeout = self.options.duration * 1000 * 1.4;
 
           var removeListeners = util.addOnTransitionEnd(elements[0], function() {
             clearTimeout(timeoutId);
