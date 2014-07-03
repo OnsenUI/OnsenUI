@@ -581,7 +581,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
 }
 .button:focus {
   -webkit-box-shadow: none;
@@ -682,7 +682,8 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
+  color: #1284ff;
 }
 /* topdoc
   name: Large Button
@@ -753,7 +754,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
@@ -845,7 +846,12 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
+  color: #1284ff;
+  background: transparent;
+  border: 1px solid transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .button--large--quiet:disabled {
   opacity: 0.3;
@@ -942,7 +948,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
 }
 .button--cta:disabled {
   opacity: 0.3;
@@ -1035,7 +1041,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
 }
 .button--large--cta:disabled {
   opacity: 0.3;
