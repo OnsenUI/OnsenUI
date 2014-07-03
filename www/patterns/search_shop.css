@@ -2,6 +2,10 @@
     float: left;
 }
 
+.full {
+    width: 100%;
+}
+
 .margin-little {
     margin: 8px;
 }

@@ -1099,7 +1099,6 @@ select:focus {
   position: relative;
   margin: 0;
   border: none;
-  width: 100%;
 }
 .button-bar__item {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
