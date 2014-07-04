@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.4 - 2014-06-26 */
+/*! onsenui - v1.0.4 - 2014-07-04 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -25543,19 +25543,8 @@ FastClick.attach = function(layer) {
 };
 
 
-if (typeof define !== 'undefined' && define.amd) {
+window.FastClick = FastClick;
 
-	// AMD. Register as an anonymous module.
-	define(function() {
-		'use strict';
-		return FastClick;
-	});
-} else if (typeof module !== 'undefined' && module.exports) {
-	module.exports = FastClick.attach;
-	module.exports.FastClick = FastClick;
-} else {
-	window.FastClick = FastClick;
-}
 /*! Hammer.JS - v1.0.6 - 2014-01-02
  * http://eightmedia.github.com/hammer.js
  *

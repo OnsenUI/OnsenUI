@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.4 - 2014-06-26 */
+/*! onsenui - v1.0.4 - 2014-07-04 */
 angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
@@ -4386,19 +4386,8 @@ FastClick.attach = function(layer) {
 };
 
 
-if (typeof define !== 'undefined' && define.amd) {
+window.FastClick = FastClick;
 
-	// AMD. Register as an anonymous module.
-	define(function() {
-		'use strict';
-		return FastClick;
-	});
-} else if (typeof module !== 'undefined' && module.exports) {
-	module.exports = FastClick.attach;
-	module.exports.FastClick = FastClick;
-} else {
-	window.FastClick = FastClick;
-}
 /*! Hammer.JS - v1.0.6 - 2014-01-02
  * http://eightmedia.github.com/hammer.js
  *
