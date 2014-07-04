@@ -62,6 +62,7 @@ limitations under the License.
         }
 
         var unlock = this._doorLock.lock();
+
         setTimeout(function() {
           this._considerChangingCollapse();
           unlock();
@@ -271,6 +272,10 @@ limitations under the License.
       },
 
       _handleEvent: function(event) {
+        if (this._doorLock.isLocked()) {
+          return;
+        }
+
         switch (event.type) {
 
           case 'dragleft':
