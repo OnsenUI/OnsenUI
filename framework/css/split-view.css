@@ -22,6 +22,7 @@ ons-split-view {
   top: 0px;
   bottom: 0px;
   overflow: hidden;
+  z-index: 0;
 }
 
 .onsen-split-view__secondary {
@@ -41,4 +42,5 @@ ons-split-view {
   left: 0px;
   bottom: 0px;
   right: 0px;
+  z-index: 0;
 }

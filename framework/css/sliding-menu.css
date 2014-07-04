@@ -22,6 +22,7 @@ ons-sliding-menu {
   top: 0px;
   bottom: 0px;
   overflow: hidden;
+  z-index: 0;
 }
 
 .onsen-sliding-menu__behind,
@@ -31,6 +32,7 @@ ons-sliding-menu {
   left: 0px;
   bottom: 0px;
   right: 0px;
+  z-index: 0;
 }
 
 .onsen-sliding-menu__above {

@@ -213,12 +213,12 @@ limitations under the License.
             transclude(scope, function(clonedElement) {
               var content = angular.element('<div class="page__content ons-page-inner"></div>');
               content.addClass(modifierTemplater('page--*__content'));
-              content.css({zIndex: 0});
               element.append(content);
 
               if (Modernizr.csstransforms3d) {
                 content.append(clonedElement);
               }  else {
+                content.css('overflow', 'visible');
 
                 var wrapper = angular.element('<div></div>');
                 content.append(wrapper);
