@@ -71,7 +71,7 @@ limitations under the License.
           this._behindPage.css({opacity: 1});
 
           this._animator = new DefaultSlidingMenuAnimator();
-          this._animator.activate(this._element);
+          this._animator.onAttached(this._element, this._abovePage, this._behindPage);
         }.bind(this), 400);
       },
 

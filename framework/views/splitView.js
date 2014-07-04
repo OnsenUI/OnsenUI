@@ -53,6 +53,8 @@ limitations under the License.
 
         this._animator = new DefaultSlidingMenuAnimator();
 
+        this._element.css('display', 'none');
+
         if (scope.mainPage) {
           this.setMainPage(scope.mainPage);
         }
@@ -63,10 +65,12 @@ limitations under the License.
 
         var unlock = this._doorLock.lock();
 
+        this._considerChangingCollapse();
+
         setTimeout(function() {
-          this._considerChangingCollapse();
+          this._element.css('display', 'block');
           unlock();
-        }.bind(this), 1000 / 60);
+        }.bind(this), 1000 / 60 * 2);
       },
 
       /**
@@ -93,22 +97,16 @@ limitations under the License.
       _appendMainPage: function(templateHTML) {
         var pageScope = this._scope.$parent.$new();
         var pageContent = $compile(templateHTML)(pageScope);
-        pageContent.css({opacity: 0});
 
         this._abovePage.append(pageContent);
 
-        // prevent black flash
-        setTimeout(function() {
-          pageContent.css({opacity: 1});
+        if (this._currentPage) {
+          this._currentPage.remove();
+          this._currentPageScope.$destroy();
+        }
 
-          if (this._currentPage) {
-            this._currentPage.remove();
-            this._currentPageScope.$destroy();
-          }
-
-          this._currentPage = pageContent;
-          this._currentPageScope = pageScope;
-        }.bind(this), 0);
+        this._currentPage = pageContent;
+        this._currentPageScope = pageScope;
       },
 
       /**
@@ -224,19 +222,22 @@ limitations under the License.
           this._mode = COLLAPSE_MODE;
 
           this._onSwipableChanged(this._scope.swipable);
+
+          this._animator.onAttached(
+            this._element, this._abovePage, this._behindPage
+          );
+
           this._translate(0);
-
-          this._animator.activate(this._element);
-
-          if (Modernizr.boxshadow) {
-            this._abovePage.addClass('onsen-split-view__shadow');
-          }
         }
       },
 
       _activateSplitMode: function() {
         if (this._mode !== SPLIT_MODE) {
-          this._animator.deactivate(this._element);
+          this._animator.onDetached(
+            this._element,
+            this._abovePage,
+            this._behindPage
+          );
 
           this._behindPage.removeAttr('style');
           this._abovePage.removeAttr('style');
@@ -244,10 +245,6 @@ limitations under the License.
           this._setSize();
           this._deactivateHammer();
           this._mode = SPLIT_MODE;
-
-          if (Modernizr.boxshadow) {
-            this._abovePage.removeClass('onsen-split-view__shadow');
-          }
         } else {
           this._setSize();
         }

@@ -42,7 +42,3 @@ ons-split-view {
   bottom: 0px;
   right: 0px;
 }
-
-.onsen-split-view__shadow {
-  box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
-}

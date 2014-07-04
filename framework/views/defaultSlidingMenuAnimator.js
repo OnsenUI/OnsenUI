@@ -30,8 +30,12 @@ limitations under the License.
 
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
+       * @param {jqLite} abovePage
+       * @param {jqLite} behindPage
        */
-      activate: function(element) {
+      onAttached: function(element, abovePage, behindPage) {
+        abovePage.css('box-shadow', '-10px 0 10px -5px rgba(0, 0, 0, 0.2)');
+
         this._blackMask = angular.element('<div></div>');
         this._blackMask.css({
           backgroundColor: 'black',
@@ -39,7 +43,8 @@ limitations under the License.
           left: '0px',
           right: '0px',
           bottom: '0px',
-          position: 'absolute'
+          position: 'absolute',
+          opacity: 0
         });
 
         element.prepend(this._blackMask);
@@ -47,11 +52,15 @@ limitations under the License.
 
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
+       * @param {jqLite} abovePage
+       * @param {jqLite} behindPage
        */
-      deactivate: function(element) {
+      onDetached: function(element, abovePage, behindPage) {
         if (this._blackMask) {
           this._blackMask.remove();
         }
+
+        abovePage.css('box-shadow', undefined);
       },
 
       /**
@@ -62,6 +71,8 @@ limitations under the License.
        * @param {Function} callback
        */
       open: function(abovePage, behindPage, options, callback) {
+        this._blackMask.css('opacity', 1);
+
         behindPage.css('display', 'block');
 
         var max = abovePage[0].clientWidth * MAIN_PAGE_RATIO;
@@ -102,6 +113,7 @@ limitations under the License.
        * @param {Function} callback
        */
       close: function(abovePage, behindPage, options, callback) {
+        this._blackMask.css({opacity: 1});
 
         var aboveTransform = this._generateAbovePageTransform(0);
         var behindStyle = this._generateBehindPageStyle(abovePage, 0);
@@ -144,6 +156,9 @@ limitations under the License.
        * @param {Number} options.x
        */
       translate: function(abovePage, behindPage, options) {
+        if (options.x > 0) {
+          this._blackMask.css({opacity: 1});
+        }
         behindPage.css('display', 'block');
 
         var aboveTransform = this._generateAbovePageTransform(options.x);

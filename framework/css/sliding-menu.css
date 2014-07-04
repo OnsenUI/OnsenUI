@@ -34,7 +34,6 @@ ons-sliding-menu {
 }
 
 .onsen-sliding-menu__above {
-  box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.1);
   margin: 0;
   padding: 0;
 }
