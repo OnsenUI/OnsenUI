@@ -19,24 +19,130 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
+  var SlidingMenuViewModel = Class.extend({
+
+    /**
+     * @member Number
+     */
+    _x: 0,
+
+    /**
+     * @member Number
+     */
+    _maxX: undefined,
+
+    /**
+     * @param {Object} options
+     * @param {Number} maxX
+     */
+    init: function(options) {
+      this._maxX = options.maxX;
+
+      if (!angular.isNumber(options.maxX)) {
+        throw new Error('options.maxX must be number');
+      }
+    },
+
+    /**
+     * @param {Number} maxX
+     */
+    setMaxX: function(maxX) {
+      this._maxX = maxX;
+    },
+
+    shouldOpen: function() {
+      return this._x >= this._maxX / 2;
+    },
+
+    openOrClose: function() {
+      if (this.shouldOpen()) {
+        this.open();
+      } else {
+        this.close();
+      }
+    },
+
+    close: function() {
+      if (!this.isClosed()) {
+        this._x = 0;
+        this.emit('close', {});
+      }
+    },
+
+    open: function() {
+      if (!this.isOpened()) {
+        this._x = this._maxX;
+        this.emit('open', {});
+      }
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isClosed: function() {
+      return this._x === 0;
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isOpened: function() {
+      return this._x === this._maxX;
+    },
+
+    /**
+     * @return {Number}
+     */
+    getX: function() {
+      return this._x;
+    },
+
+    /**
+     * @return {Number}
+     */
+    getMaxX: function() {
+      return this._maxX;
+    },
+
+    /**
+     * @param {Number} x
+     */
+    translate: function(x) {
+      this._x = Math.max(0, Math.min(this._maxX, x));
+
+      var options = {
+        x: this._x,
+        maxX: this._maxX
+      };
+
+      this.emit('translate', options);
+    },
+
+    toggle: function() {
+      if (this.isClosed()) {
+        this.open();
+      } else {
+        this.close();
+      }
+    }
+
+  });
+  MicroEvent.mixin(SlidingMenuViewModel);
+
   var MAIN_PAGE_RATIO = 0.9;
   module.factory('SlidingMenuView', function($onsen, DefaultSlidingMenuAnimator, $compile) {
 
     var SlidingMenuView = Class.extend({
       _scope: undefined,
       _attrs: undefined,
+
       _element: undefined,
       _behindPage: undefined,
       _abovePage: undefined,
 
-      _currentX: 0,
-      _startX: 0,
-
       _doorLock: undefined,
 
       init: function(scope, element, attrs) {
-        this._doorLock = new DoorLock();
-
         this._scope = scope;
         this._attrs = attrs;
         this._element = element;
@@ -44,7 +150,17 @@ limitations under the License.
         this._behindPage = angular.element(element[0].querySelector('.onsen-sliding-menu__behind'));
         this._abovePage = angular.element(element[0].querySelector('.onsen-sliding-menu__above'));
 
-        this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+        this._doorLock = new DoorLock();
+
+        var maxX = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+        this._logic = new SlidingMenuViewModel({maxX: maxX});
+        this._logic.on('translate', this._translate.bind(this));
+        this._logic.on('open', function() {
+          this._open();
+        }.bind(this));
+        this._logic.on('close', function() {
+          this._close();
+        }.bind(this));
 
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
         attrs.$observe('swipable', this._onSwipableChanged.bind(this));
@@ -122,6 +238,7 @@ limitations under the License.
 
       _recalculateMAX: function() {
         var maxDistance = this._attrs.maxSlideDistance;
+
         if (typeof maxDistance == 'string') {
           if (maxDistance.indexOf('px') > 0) {
             maxDistance = maxDistance.replace('px', '');
@@ -130,8 +247,9 @@ limitations under the License.
             maxDistance = parseFloat(maxDistance) / 100 * this._abovePage[0].clientWidth;
           }
         }
+
         if (maxDistance) {
-          this._max = parseInt(maxDistance, 10);
+          this._logic.setMaxX(parseInt(maxDistance, 10));
         }
       },
 
@@ -244,7 +362,7 @@ limitations under the License.
         switch (event.type) {
 
           case 'touch':
-            if (this.isClosed()) {
+            if (this._logic.isClosed()) {
               if (!this._isInsideSwipeTargetArea(event.gesture.center.pageX)) {
                 event.gesture.stopDetect();
               }
@@ -255,30 +373,38 @@ limitations under the License.
           case 'dragleft':
           case 'dragright':
             event.gesture.preventDefault();
-            var deltaX = event.gesture.deltaX;
 
-            this._currentX = this._startX + deltaX;
-            if (this._currentX >= 0) {
-              this._translate(this._currentX);
+            if (event.gesture.deltaX < 0 && this._logic.isClosed()) {
+              break;
             }
+
+            if (event.gesture.deltaX > 0 && this._logic.isOpened()) {
+              break;
+            }
+
+            var x = event.gesture.deltaX > 0
+              ? event.gesture.deltaX
+              : event.gesture.deltaX + this._logic.getMaxX() ;
+
+            this._logic.translate(x);
+
             break;
 
           case 'swipeleft':
             event.gesture.preventDefault();
-            this.close();
+            this._logic.close();
+
             break;
 
           case 'swiperight':
             event.gesture.preventDefault();
-            this.open();
+            this._logic.open();
+
             break;
 
           case 'release':
-            if (this._currentX > this._max / 2) {
-              this.open();
-            } else {
-              this.close();
-            }
+            this._logic.openOrClose();
+
             break;
         }
       },
@@ -302,34 +428,31 @@ limitations under the License.
         return x < this._swipeTargetWidth;
       },
 
-      /**
-       * @return {Boolean}
-       */
-      isClosed: function() {
-        return this._startX === 0;
-      },
-
       closeMenu: function() {
         return this.close.apply(this, arguments);
       },
 
       /**
        * Close sliding-menu page.
+       *
+       * @param {Function} callback
        */
-      close: function() {
-        this._startX = 0;
+      close: function(callback) {
+        callback = callback || function() {};
 
-        if (this._currentX !== 0) {
-          var self = this;
-          this._doorLock.waitUnlock(function() {
-            var unlock = self._doorLock.lock();
-            self._currentX = 0;
+        this._doorLock.waitUnlock(function() {
+          this._logic.close();
+        }.bind(this));
+      },
 
-            self._animator.close(self._abovePage, self._behindPage, {max: self._max}, function() {
-              unlock();
-            });
-          });
-        }
+      _close: function(callback) {
+        callback = callback || function() {};
+
+        var unlock = this._doorLock.lock();
+        this._animator.close(this._abovePage, this._behindPage, function() {
+          unlock();
+          callback();
+        });
       },
 
       openMenu: function() {
@@ -338,31 +461,35 @@ limitations under the License.
 
       /**
        * Open sliding-menu page.
+       *
+       * @param {Function} callback
        */
-      open: function() {
-        this._startX = this._max;
+      open: function(callback) {
+        callback = callback || function() {};
 
-        if (this._currentX != this._max) {
-          var self = this;
-          this._doorLock.waitUnlock(function() {
-            var unlock = self._doorLock.lock();
-            self._currentX = self._max;
+        this._doorLock.waitUnlock(function() {
+          this._logic.open();
+        }.bind(this));
+      },
 
-            self._animator.open(self._abovePage, self._behindPage, {max: self._max}, function() {
-              unlock();
-            });
-          });
-        }
+      _open: function(callback) {
+        callback = callback || function() {};
+        var unlock = this._doorLock.lock();
+        
+        this._animator.open(this._abovePage, this._behindPage, function() {
+          unlock();
+          callback();
+        });
       },
 
       /**
        * Toggle sliding-menu page.
        */
-      toggle: function() {
-        if (this._startX === 0) {
-          this.open();
+      toggle: function(callback) {
+        if (this._logic.isClosed()) {
+          this.open(callback);
         } else {
-          this.close();
+          this.close(callback);
         }
       },
 
@@ -374,17 +501,10 @@ limitations under the License.
       },
 
       /**
-       * @param {Number} x
+       * @param {Object} event
        */
-      _translate: function(x) {
-        this._currentX = x;
-
-        var options = {
-          x: x,
-          max: this._max
-        };
-
-        this._animator.translate(this._abovePage, this._behindPage, options);
+      _translate: function(event) {
+        this._animator.translate(this._abovePage, this._behindPage, event);
       }
     });
 

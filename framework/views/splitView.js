@@ -310,8 +310,11 @@ limitations under the License.
         this._scope.$root.$broadcast(ON_PAGE_READY); //make sure children can do something before the parent.
       },
 
-      close: function() {
+      close: function(callback) {
+        callback = callback || function() {};
+
         if (this._mode === SPLIT_MODE) {
+          callback();
           return;
         } else if (this._mode === COLLAPSE_MODE) {
           this._startX = 0;
@@ -325,10 +328,10 @@ limitations under the License.
               self._animator.close(
                 self._abovePage,
                 self._behindPage,
-                {max: self._max},
                 function() {
                   unlock();
                   self._onTransitionEnd();
+                  callback();
                 }
               );
             });
@@ -336,8 +339,11 @@ limitations under the License.
         }
       },
 
-      open: function() {
+      open: function(callback) {
+        callback = callback || function() {};
+
         if (this._mode === SPLIT_MODE) {
+          callback();
           return;
         } else if (this._mode === COLLAPSE_MODE) {
           this._startX = this._max;
@@ -351,10 +357,10 @@ limitations under the License.
               self._animator.open(
                 self._abovePage, 
                 self._behindPage, 
-                {max: self._max},
                 function() {
                   unlock();
                   self._onTransitionEnd();
+                  callback();
                 }
               );
             });
@@ -362,11 +368,11 @@ limitations under the License.
         }
       },
 
-      toggle: function() {
+      toggle: function(callback) {
         if (this._startX === 0) {
-          this.open();
+          this.open(callback);
         } else {
-          this.close();
+          this.close(callback);
         }
       },
 
@@ -376,7 +382,7 @@ limitations under the License.
 
           var options = {
             x: x,
-            max: this._max
+            maxX: this._max
           };
 
           this._animator.translate(this._abovePage, this._behindPage, options);

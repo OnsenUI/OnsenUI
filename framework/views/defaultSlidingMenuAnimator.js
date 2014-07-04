@@ -19,10 +19,11 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-
   module.factory('DefaultSlidingMenuAnimator', function() {
 
     var MAIN_PAGE_RATIO = 0.9;
+
+    var defaultMenuWidth = '90%';
 
     var DefaultSlidingMenuAnimator = Class.extend({
 
@@ -30,14 +31,18 @@ limitations under the License.
 
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
-       * @param {jqLite} abovePage
-       * @param {jqLite} behindPage
+       * @param {jqLite} mainPage
+       * @param {jqLite} menuPage
+       * @param {Object} options
+       * @param {String} options.width "width" style value
        */
-      onAttached: function(element, abovePage, behindPage) {
-        abovePage.css('box-shadow', '-10px 0 10px -5px rgba(0, 0, 0, 0.2)');
+      onAttached: function(element, mainPage, menuPage, options) {
+        options = options || {width: '90%'};
 
-        this._blackMask = angular.element('<div></div>');
-        this._blackMask.css({
+        mainPage.css('box-shadow', '-10px 0 10px -5px rgba(0, 0, 0, 0.2)');
+        menuPage.css('width', options.width);
+
+        this._blackMask = angular.element('<div></div>').css({
           backgroundColor: 'black',
           top: '0px',
           left: '0px',
@@ -48,41 +53,42 @@ limitations under the License.
         });
 
         element.prepend(this._blackMask);
+
+        // Dirty fix for broken rendering bug on android 4.x.
+        animit(mainPage[0]).queue({transform: 'translate3d(0, 0, 0)'}).play();
       },
 
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
-       * @param {jqLite} abovePage
-       * @param {jqLite} behindPage
+       * @param {jqLite} mainPage
+       * @param {jqLite} menuPage
        */
-      onDetached: function(element, abovePage, behindPage) {
+      onDetached: function(element, mainPage, menuPage) {
         if (this._blackMask) {
           this._blackMask.remove();
         }
 
-        abovePage.css('box-shadow', undefined);
+        mainPage.css('box-shadow', undefined);
       },
 
       /**
-       * @param {jqLite} abovePage
-       * @param {jqLite} behindPage
-       * @param {Object} options
-       * @param {Number} options.x
+       * @param {jqLite} mainPage
+       * @param {jqLite} menuPage
        * @param {Function} callback
        */
-      open: function(abovePage, behindPage, options, callback) {
+      open: function(mainPage, menuPage, callback) {
+
+        menuPage.css('display', 'block');
         this._blackMask.css('opacity', 1);
 
-        behindPage.css('display', 'block');
-
-        var max = abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+        var max = menuPage[0].clientWidth;
 
         var aboveTransform = this._generateAbovePageTransform(max);
-        var behindStyle = this._generateBehindPageStyle(abovePage, max);
+        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, max);
 
         setTimeout(function() {
 
-          animit(abovePage[0])
+          animit(mainPage[0])
             .queue({
               transform: aboveTransform
             }, {
@@ -95,7 +101,7 @@ limitations under the License.
             })
             .play();
 
-          animit(behindPage[0])
+          animit(menuPage[0])
             .queue(behindStyle, {
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
@@ -106,21 +112,19 @@ limitations under the License.
       },
 
       /**
-       * @param {jqLite} abovePage
-       * @param {jqLite} behindPage
-       * @param {Object} options
-       * @param {Number} options.x
+       * @param {jqLite} mainPage
+       * @param {jqLite} menuPage
        * @param {Function} callback
        */
-      close: function(abovePage, behindPage, options, callback) {
+      close: function(mainPage, menuPage, callback) {
         this._blackMask.css({opacity: 1});
 
         var aboveTransform = this._generateAbovePageTransform(0);
-        var behindStyle = this._generateBehindPageStyle(abovePage, 0);
+        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, 0);
 
         setTimeout(function() {
 
-          animit(abovePage[0])
+          animit(mainPage[0])
             .queue({
               transform: aboveTransform
             }, {
@@ -128,16 +132,16 @@ limitations under the License.
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .queue({
-              transform: 'translate2d(0, 0)'
+              transform: 'translate3d(0, 0, 0)'
             })
             .queue(function(done) {
-              behindPage.css('display', 'none');
+              menuPage.css('display', 'none');
               callback();
               done();
             })
             .play();
 
-          animit(behindPage[0])
+          animit(menuPage[0])
             .queue(behindStyle, {
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
@@ -146,35 +150,32 @@ limitations under the License.
               done();
             })
             .play();
+
         }, 1000 / 60);
       },
 
       /**
-       * @param {jqLite} abovePage
-       * @param {jqLite} behindPage
+       * @param {jqLite} mainPage
+       * @param {jqLite} menuPage
        * @param {Object} options
        * @param {Number} options.x
+       * @param {Number} options.maxX
        */
-      translate: function(abovePage, behindPage, options) {
-        if (options.x > 0) {
-          this._blackMask.css({opacity: 1});
-        }
-        behindPage.css('display', 'block');
+      translate: function(mainPage, menuPage, options) {
 
-        var aboveTransform = this._generateAbovePageTransform(options.x);
-        var behindStyle = this._generateBehindPageStyle(abovePage, options.x);
+        menuPage.css('display', 'block');
+        this._blackMask.css({opacity: 1});
 
-        setTimeout(function() {
+        var aboveTransform = this._generateAbovePageTransform(Math.min(options.maxX, options.x));
+        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, Math.min(options.maxX, options.x));
 
-          animit(abovePage[0])
-            .queue({transform: aboveTransform})
-            .play();
+        animit(mainPage[0])
+          .queue({transform: aboveTransform})
+          .play();
 
-          animit(behindPage[0])
-            .queue(behindStyle)
-            .play();
-
-        }, 1000 / 60);
+        animit(menuPage[0])
+          .queue(behindStyle)
+          .play();
       },
 
       _generateAbovePageTransform: function(x) {
@@ -183,8 +184,8 @@ limitations under the License.
         return aboveTransform;
       },
 
-      _generateBehindPageStyle: function(abovePage, x) {
-        var max = abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+      _generateBehindPageStyle: function(mainPage, behindPage, x) {
+        var max = behindPage[0].clientWidth;
         var behindX = Math.min((x - max) / max * 10, 0);
         var behindTransform = 'translate3d(' + behindX + '%, 0, 0)';
         var opacity = 1 + behindX / 100;
