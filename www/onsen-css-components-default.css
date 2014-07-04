@@ -39,7 +39,7 @@ select:focus {
   left: 0px;
   right: 0px;
   bottom: 0px;
-  overflow: hidden;
+  overflow: visible;
   font-size: 17px;
   color: #1f1f21;
 }
