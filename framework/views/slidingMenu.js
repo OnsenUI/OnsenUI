@@ -57,25 +57,33 @@ limitations under the License.
       return this._distance >= this._maxDistance / 2;
     },
 
-    openOrClose: function() {
+    openOrClose: function(callback) {
       if (this.shouldOpen()) {
-        this.open();
+        this.open(callback);
       } else {
-        this.close();
+        this.close(callback);
       }
     },
 
-    close: function() {
+    close: function(callback) {
+      callback = callback || function() {};
+
       if (!this.isClosed()) {
         this._distance = 0;
-        this.emit('close', {});
+        this.emit('close', {callback: callback});
+      } else {
+        callback();
       }
     },
 
-    open: function() {
+    open: function(callback) {
+      callback = callback || function() {};
+
       if (!this.isOpened()) {
         this._distance = this._maxDistance;
-        this.emit('open', {});
+        this.emit('open', {callback: callback});
+      } else {
+        callback();
       }
     },
 
@@ -133,7 +141,8 @@ limitations under the License.
   MicroEvent.mixin(SlidingMenuViewModel);
 
   var MAIN_PAGE_RATIO = 0.9;
-  module.factory('SlidingMenuView', function($onsen, DefaultSlidingMenuAnimator, $compile) {
+  module.factory('SlidingMenuView', function($onsen, $compile, SlidingMenuAnimator, DefaultSlidingMenuAnimator, 
+                                             PushSlidingMenuAnimator, OverlaySlidingMenuAnimator) {
 
     var SlidingMenuView = Class.extend({
       _scope: undefined,
@@ -162,11 +171,11 @@ limitations under the License.
         var maxDistance = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
         this._logic = new SlidingMenuViewModel({maxDistance: maxDistance});
         this._logic.on('translate', this._translate.bind(this));
-        this._logic.on('open', function() {
-          this._open();
+        this._logic.on('open', function(options) {
+          this._open(options.callback);
         }.bind(this));
-        this._logic.on('close', function() {
-          this._close();
+        this._logic.on('close', function(options) {
+          this._close(options.callback);
         }.bind(this));
 
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
@@ -193,14 +202,25 @@ limitations under the License.
 
           this._behindPage.css({opacity: 1});
 
-          this._animator = new DefaultSlidingMenuAnimator();
+          this._animator = this._getAnimatorOption();
           this._animator.onAttached(
             this._element,
             this._abovePage,
             this._behindPage,
             {isRight: this._isRightMenu}
           );
+
         }.bind(this), 400);
+      },
+
+      _getAnimatorOption: function() {
+        var animator = SlidingMenuView._animatorDict[this._attrs['type']];
+
+        if (!(animator instanceof SlidingMenuAnimator)) {
+          animator = SlidingMenuView._animatorDict['default'];
+        }
+
+        return animator;
       },
 
       _onSwipableChanged: function(swipable) {
@@ -313,15 +333,22 @@ limitations under the License.
 
       /**
        * @param {String} page
-       * @param {Function} callback
+       * @param {Object} options
+       * @param {Boolean} [options.closeMenu]
+       * @param {Boolean} [options.callback]
        */
-      setBehindPage: function(page, callback) {
+      setBehindPage: function(page, options) {
         if (page) {
-          callback = callback || function() {};
+          options = options || {};
+          options.callback = options.callback || function() {};
+
           var self = this;
           $onsen.getPageHTMLAsync(page).then(function(html) {
             self._appendBehindPage(angular.element(html));
-            callback();
+            if (options.closeMenu) {
+              self.close();
+            }
+            options.callback();
           }, function() {
             throw new Error('Page is not found: ' + page);
           });
@@ -332,21 +359,32 @@ limitations under the License.
 
       /**
        * @param {String} pageUrl
-       * @param {Function} callback
+       * @param {Object} options
+       * @param {Boolean} [options.closeMenu]
+       * @param {Boolean} [options.callback]
        */
-      setAbovePage: function(pageUrl, callback) {
+      setAbovePage: function(pageUrl, options) {
+
+        options = options || {};
+        options.callback = options.callback || function() {};
+
+        var done = function() {
+          if (options.closeMenu) {
+            this.close();
+          }
+          options.callback();
+        }.bind(this);
+
         if (this.currentPageUrl === pageUrl) {
-          // same page -> ignore
+          done();
           return;
         }
-
-        callback = callback || function() {};
 
         if (pageUrl) {
           var self = this;
           $onsen.getPageHTMLAsync(pageUrl).then(function(html) {
             self._appendAbovePage(pageUrl, html);
-            callback();
+            done();
           }, function() {
             throw new Error('Page is not found: ' + page);
           });
@@ -459,7 +497,7 @@ limitations under the License.
         callback = callback || function() {};
 
         this._doorLock.waitUnlock(function() {
-          this._logic.close();
+          this._logic.close(callback);
         }.bind(this));
       },
 
@@ -486,7 +524,7 @@ limitations under the License.
         callback = callback || function() {};
 
         this._doorLock.waitUnlock(function() {
-          this._logic.open();
+          this._logic.open(callback);
         }.bind(this));
       },
 
@@ -525,6 +563,26 @@ limitations under the License.
         this._animator.translate(this._abovePage, this._behindPage, event);
       }
     });
+
+    // Preset sliding menu animators.
+    SlidingMenuView._animatorDict = {
+      'default': new DefaultSlidingMenuAnimator(),
+      'overlay': new OverlaySlidingMenuAnimator(),
+      'reveal': new DefaultSlidingMenuAnimator(),
+      'push': new PushSlidingMenuAnimator()
+    };
+
+    /**
+     * @param {String} name
+     * @param {NavigatorTransitionAnimator} animator
+     */
+    SlidingMenuView.registerSlidingMenuAnimator = function(name, animator) {
+      if (!(animator instanceof SlidingMenuAnimator)) {
+        throw new Error('"animator" param must be an instance of SlidingMenuAnimator');
+      }
+
+      this._animatorDict[name] = animator;
+    };
 
     return SlidingMenuView;
   });

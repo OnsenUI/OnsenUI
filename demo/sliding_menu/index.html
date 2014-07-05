@@ -15,7 +15,7 @@
 
 <body>
 
-  <ons-sliding-menu var="app.slidingMenu" behind-page="menu.html" above-page="page1.html" side="right">
+  <ons-sliding-menu var="app.slidingMenu" behind-page="menu.html" above-page="page1.html" side="right" type="overlay">
   </ons-sliding-menu>
 
   <script type="text/ons-template" id="menu.html">
@@ -25,16 +25,14 @@
 
         <ons-list-item
           modifier="tappable" class="list__item__line-height" 
-          onclick="app.slidingMenu.toggleMenu(); 
-          app.slidingMenu.setAbovePage('page1.html')">
+          onclick="app.slidingMenu.setAbovePage('page1.html', {closeMenu: true})">
           <i class="fa fa-home fa-lg" style="color: #666"></i>
           &nbsp; Page 1
         </ons-list-item>
 
         <ons-list-item 
           modifier="tappable" class="list__item__line-height" 
-          onclick="app.slidingMenu.toggleMenu(); 
-          app.slidingMenu.setAbovePage('page2.html')">
+          onclick="app.slidingMenu.setAbovePage('page2.html', {closeMenu: true})">
           <i class="fa fa-gear fa-lg" style="color: #666"></i>
           &nbsp; Page 2
         </ons-list-item>

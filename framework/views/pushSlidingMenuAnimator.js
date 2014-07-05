@@ -19,11 +19,9 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('DefaultSlidingMenuAnimator', function(SlidingMenuAnimator) {
+  module.factory('PushSlidingMenuAnimator', function(SlidingMenuAnimator) {
 
-    var DefaultSlidingMenuAnimator = SlidingMenuAnimator.extend({
-
-      _blackMask: undefined,
+    var PushSlidingMenuAnimator = SlidingMenuAnimator.extend({
 
       _isRight: false,
 
@@ -41,7 +39,6 @@ limitations under the License.
 
         this._isRight = !!options.isRight;
 
-        mainPage.css('box-shadow', '0px 0 10px 0px rgba(0, 0, 0, 0.2)');
         menuPage.css({
           width: options.width,
           display: 'none'
@@ -49,30 +46,15 @@ limitations under the License.
 
         if (this._isRight) {
           menuPage.css({
-            right: '0px',
+            right: '-' + options.width,
             left: 'auto'
           });
         } else {
           menuPage.css({
             right: 'auto',
-            left: '0px'
+            left: '-' + options.width
           });
         }
-
-        this._blackMask = angular.element('<div></div>').css({
-          backgroundColor: 'black',
-          top: '0px',
-          left: '0px',
-          right: '0px',
-          bottom: '0px',
-          position: 'absolute',
-          display: 'none'
-        });
-
-        element.prepend(this._blackMask);
-
-        // Dirty fix for broken rendering bug on android 4.x.
-        animit(mainPage[0]).queue({transform: 'translate3d(0, 0, 0)'}).play();
       },
 
       /**
@@ -81,11 +63,6 @@ limitations under the License.
        * @param {jqLite} menuPage
        */
       onDetached: function(element, mainPage, menuPage) {
-        if (this._blackMask) {
-          this._blackMask.remove();
-          this._blackMask = null;
-        }
-
         mainPage.removeAttr('style');
         menuPage.removeAttr('style');
       },
@@ -98,7 +75,6 @@ limitations under the License.
       open: function(mainPage, menuPage, callback) {
 
         menuPage.css('display', 'block');
-        this._blackMask.css('display', 'block');
 
         var max = menuPage[0].clientWidth;
 
@@ -136,7 +112,6 @@ limitations under the License.
        * @param {Function} callback
        */
       close: function(mainPage, menuPage, callback) {
-        this._blackMask.css('display', 'none');
 
         var aboveTransform = this._generateAbovePageTransform(0);
         var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, 0);
@@ -183,7 +158,6 @@ limitations under the License.
       translate: function(mainPage, menuPage, options) {
 
         menuPage.css('display', 'block');
-        this._blackMask.css('display', 'block');
 
         var aboveTransform = this._generateAbovePageTransform(Math.min(options.maxDistance, options.distance));
         var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, Math.min(options.maxDistance, options.distance));
@@ -207,19 +181,16 @@ limitations under the License.
       _generateBehindPageStyle: function(mainPage, behindPage, distance) {
         var max = behindPage[0].clientWidth;
 
-        var behindDistance = Math.min((distance - max) / max * 10, 0);
-        var behindX = this._isRight ? -behindDistance : behindDistance;
-        var behindTransform = 'translate3d(' + behindX + '%, 0, 0)';
-        var opacity = 1 + behindDistance / 100;
+        var behindX = this._isRight ? -distance : distance;
+        var behindTransform = 'translate3d(' + behindX + 'px, 0, 0)';
 
         return {
-          transform: behindTransform,
-          opacity: opacity
+          transform: behindTransform
         };
       }
     });
 
-    return DefaultSlidingMenuAnimator;
+    return PushSlidingMenuAnimator;
   });
 
 })();
