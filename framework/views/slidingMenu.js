@@ -24,34 +24,37 @@ limitations under the License.
     /**
      * @member Number
      */
-    _x: 0,
+    _distance: 0,
 
     /**
      * @member Number
      */
-    _maxX: undefined,
+    _maxDistance: undefined,
 
     /**
      * @param {Object} options
-     * @param {Number} maxX
+     * @param {Number} maxDistance
      */
     init: function(options) {
-      this._maxX = options.maxX;
+      this._maxDistance = options.maxDistance;
 
-      if (!angular.isNumber(options.maxX)) {
-        throw new Error('options.maxX must be number');
+      if (!angular.isNumber(options.maxDistance)) {
+        throw new Error('options.maxDistance must be number');
       }
     },
 
     /**
-     * @param {Number} maxX
+     * @param {Number} maxDistance
      */
-    setMaxX: function(maxX) {
-      this._maxX = maxX;
+    setMaxDistance: function(maxDistance) {
+      this._maxDistance = maxDistance;
     },
 
+    /**
+     * @return {Boolean}
+     */
     shouldOpen: function() {
-      return this._x >= this._maxX / 2;
+      return this._distance >= this._maxDistance / 2;
     },
 
     openOrClose: function() {
@@ -64,14 +67,14 @@ limitations under the License.
 
     close: function() {
       if (!this.isClosed()) {
-        this._x = 0;
+        this._distance = 0;
         this.emit('close', {});
       }
     },
 
     open: function() {
       if (!this.isOpened()) {
-        this._x = this._maxX;
+        this._distance = this._maxDistance;
         this.emit('open', {});
       }
     },
@@ -80,39 +83,39 @@ limitations under the License.
      * @return {Boolean}
      */
     isClosed: function() {
-      return this._x === 0;
+      return this._distance === 0;
     },
 
     /**
      * @return {Boolean}
      */
     isOpened: function() {
-      return this._x === this._maxX;
+      return this._distance === this._maxDistance;
     },
 
     /**
      * @return {Number}
      */
     getX: function() {
-      return this._x;
+      return this._distance;
     },
 
     /**
      * @return {Number}
      */
-    getMaxX: function() {
-      return this._maxX;
+    getMaxDistance: function() {
+      return this._maxDistance;
     },
 
     /**
      * @param {Number} x
      */
     translate: function(x) {
-      this._x = Math.max(0, Math.min(this._maxX, x));
+      this._distance = Math.max(0, Math.min(this._maxDistance, x));
 
       var options = {
-        x: this._x,
-        maxX: this._maxX
+        distance: this._distance,
+        maxDistance: this._maxDistance
       };
 
       this.emit('translate', options);
@@ -142,6 +145,8 @@ limitations under the License.
 
       _doorLock: undefined,
 
+      _isRightMenu: false,
+
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._attrs = attrs;
@@ -152,8 +157,10 @@ limitations under the License.
 
         this._doorLock = new DoorLock();
 
-        var maxX = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
-        this._logic = new SlidingMenuViewModel({maxX: maxX});
+        this._isRightMenu = attrs.side === 'right';
+
+        var maxDistance = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+        this._logic = new SlidingMenuViewModel({maxDistance: maxDistance});
         this._logic.on('translate', this._translate.bind(this));
         this._logic.on('open', function() {
           this._open();
@@ -187,7 +194,12 @@ limitations under the License.
           this._behindPage.css({opacity: 1});
 
           this._animator = new DefaultSlidingMenuAnimator();
-          this._animator.onAttached(this._element, this._abovePage, this._behindPage);
+          this._animator.onAttached(
+            this._element,
+            this._abovePage,
+            this._behindPage,
+            {isRight: this._isRightMenu}
+          );
         }.bind(this), 400);
       },
 
@@ -249,7 +261,7 @@ limitations under the License.
         }
 
         if (maxDistance) {
-          this._logic.setMaxX(parseInt(maxDistance, 10));
+          this._logic.setMaxDistance(parseInt(maxDistance, 10));
         }
       },
 
@@ -271,19 +283,13 @@ limitations under the License.
 
         this._abovePage.append(pageContent);
 
-        // prevent black flash
-        setTimeout(function() {
-          pageContent.css({opacity: 1});
+        if (this._currentPageElement) {
+          this._currentPageElement.remove();
+          this._currentPageScope.$destroy();
+        }
 
-          if (this._currentPageElement) {
-            this._currentPageElement.remove();
-            this._currentPageScope.$destroy();
-          }
-
-          this._currentPageElement = pageContent;
-          this._currentPageScope = pageScope;
-        }.bind(this), 0);
-
+        this._currentPageElement = pageContent;
+        this._currentPageScope = pageScope;
         this._currentPageUrl = pageUrl;
       },
 
@@ -374,31 +380,43 @@ limitations under the License.
           case 'dragright':
             event.gesture.preventDefault();
 
-            if (event.gesture.deltaX < 0 && this._logic.isClosed()) {
+            var deltaDistance = this._isRightMenu ? -event.gesture.deltaX : event.gesture.deltaX;
+
+            if (deltaDistance < 0 && this._logic.isClosed()) {
               break;
             }
 
-            if (event.gesture.deltaX > 0 && this._logic.isOpened()) {
+            if (deltaDistance > 0 && this._logic.isOpened()) {
               break;
             }
 
-            var x = event.gesture.deltaX > 0
-              ? event.gesture.deltaX
-              : event.gesture.deltaX + this._logic.getMaxX() ;
+            var distance = deltaDistance > 0
+              ? deltaDistance
+              : deltaDistance + this._logic.getMaxDistance() ;
 
-            this._logic.translate(x);
+            this._logic.translate(distance);
 
             break;
 
           case 'swipeleft':
             event.gesture.preventDefault();
-            this._logic.close();
+
+            if (this._isRightMenu) {
+              this._logic.open();
+            } else {
+              this._logic.close();
+            }
 
             break;
 
           case 'swiperight':
             event.gesture.preventDefault();
-            this._logic.open();
+
+            if (this._isRightMenu) {
+              this._logic.close();
+            } else {
+              this._logic.open();
+            }
 
             break;
 
@@ -425,7 +443,7 @@ limitations under the License.
       },
 
       _isInsideSwipeTargetArea: function(x) {
-        return x < this._swipeTargetWidth;
+        return this._isRightMenu ? this._abovePage[0].clientWidth - x < this._swipeTargetWidth : x < this._swipeTargetWidth;
       },
 
       closeMenu: function() {

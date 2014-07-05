@@ -381,8 +381,8 @@ limitations under the License.
           this._currentX = x;
 
           var options = {
-            x: x,
-            maxX: this._max
+            distance: x,
+            maxDistance: this._max
           };
 
           this._animator.translate(this._abovePage, this._behindPage, options);

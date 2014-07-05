@@ -14,35 +14,34 @@
 </head>
 
 <body>
-  
-  <ons-sliding-menu var="app.slidingMenu" behind-page="menu.html" above-page="page1.html">
+
+  <ons-sliding-menu var="app.slidingMenu" behind-page="menu.html" above-page="page1.html" side="right">
   </ons-sliding-menu>
 
   <script type="text/ons-template" id="menu.html">
+    <ons-page style="background-color: white">
 
-      <ons-page style="background-color: white">
+      <ons-list>
 
-        <ul class="list">
+        <ons-list-item
+          modifier="tappable" class="list__item__line-height" 
+          onclick="app.slidingMenu.toggleMenu(); 
+          app.slidingMenu.setAbovePage('page1.html')">
+          <i class="fa fa-home fa-lg" style="color: #666"></i>
+          &nbsp; Page 1
+        </ons-list-item>
 
-          <ons-list-item
-            class="list__item--tappable list__item__line-height" 
-            onclick="app.slidingMenu.toggleMenu(); 
-            app.slidingMenu.setAbovePage('page1.html')">
-            <i class="fa fa-home fa-lg" style="color: #666"></i>
-            &nbsp; Page 1
-          </ons-list-item>
+        <ons-list-item 
+          modifier="tappable" class="list__item__line-height" 
+          onclick="app.slidingMenu.toggleMenu(); 
+          app.slidingMenu.setAbovePage('page2.html')">
+          <i class="fa fa-gear fa-lg" style="color: #666"></i>
+          &nbsp; Page 2
+        </ons-list-item>
 
-          <ons-list-item 
-            class="list__item--tappable list__item__line-height"
-            onclick="app.slidingMenu.toggleMenu(); 
-            app.slidingMenu.setAbovePage('page2.html')">
-            <i class="fa fa-gear fa-lg" style="color: #666"></i>
-            &nbsp; Page 2
-          </ons-list-item>
+      </ons-list>
 
-        </ul>
-
-      </ons-page>
+    </ons-page>
   </script>
  
 </body>

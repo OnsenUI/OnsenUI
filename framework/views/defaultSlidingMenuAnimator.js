@@ -21,13 +21,11 @@ limitations under the License.
 
   module.factory('DefaultSlidingMenuAnimator', function() {
 
-    var MAIN_PAGE_RATIO = 0.9;
-
-    var defaultMenuWidth = '90%';
-
     var DefaultSlidingMenuAnimator = Class.extend({
 
       _blackMask: undefined,
+
+      _isRight: false,
 
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
@@ -35,12 +33,28 @@ limitations under the License.
        * @param {jqLite} menuPage
        * @param {Object} options
        * @param {String} options.width "width" style value
+       * @param {Boolean} options.isRight
        */
       onAttached: function(element, mainPage, menuPage, options) {
-        options = options || {width: '90%'};
+        options = options || {};
+        options.width = options.width || '90%';
 
-        mainPage.css('box-shadow', '-10px 0 10px -5px rgba(0, 0, 0, 0.2)');
+        this._isRight = !!options.isRight;
+
+        mainPage.css('box-shadow', '0px 0 10px 0px rgba(0, 0, 0, 0.2)');
         menuPage.css('width', options.width);
+
+        if (this._isRight) {
+          menuPage.css({
+            right: '0px',
+            left: 'auto'
+          });
+        } else {
+          menuPage.css({
+            right: 'auto',
+            left: '0px'
+          });
+        }
 
         this._blackMask = angular.element('<div></div>').css({
           backgroundColor: 'black',
@@ -68,7 +82,8 @@ limitations under the License.
           this._blackMask.remove();
         }
 
-        mainPage.css('box-shadow', undefined);
+        mainPage.removeAttr('style');
+        menuPage.removeAttr('style');
       },
 
       /**
@@ -158,16 +173,16 @@ limitations under the License.
        * @param {jqLite} mainPage
        * @param {jqLite} menuPage
        * @param {Object} options
-       * @param {Number} options.x
-       * @param {Number} options.maxX
+       * @param {Number} options.distance
+       * @param {Number} options.maxDistance
        */
       translate: function(mainPage, menuPage, options) {
 
         menuPage.css('display', 'block');
         this._blackMask.css({opacity: 1});
 
-        var aboveTransform = this._generateAbovePageTransform(Math.min(options.maxX, options.x));
-        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, Math.min(options.maxX, options.x));
+        var aboveTransform = this._generateAbovePageTransform(Math.min(options.maxDistance, options.distance));
+        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, Math.min(options.maxDistance, options.distance));
 
         animit(mainPage[0])
           .queue({transform: aboveTransform})
@@ -178,17 +193,20 @@ limitations under the License.
           .play();
       },
 
-      _generateAbovePageTransform: function(x) {
+      _generateAbovePageTransform: function(distance) {
+        var x = this._isRight ? -distance : distance;
         var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
 
         return aboveTransform;
       },
 
-      _generateBehindPageStyle: function(mainPage, behindPage, x) {
+      _generateBehindPageStyle: function(mainPage, behindPage, distance) {
         var max = behindPage[0].clientWidth;
-        var behindX = Math.min((x - max) / max * 10, 0);
+
+        var behindDistance = Math.min((distance - max) / max * 10, 0);
+        var behindX = this._isRight ? -behindDistance : behindDistance;
         var behindTransform = 'translate3d(' + behindX + '%, 0, 0)';
-        var opacity = 1 + behindX / 100;
+        var opacity = 1 + behindDistance / 100;
 
         return {
           transform: behindTransform,
