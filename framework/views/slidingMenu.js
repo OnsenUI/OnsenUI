@@ -54,13 +54,20 @@ limitations under the License.
      * @return {Boolean}
      */
     shouldOpen: function() {
-      return this._distance >= this._maxDistance / 2;
+      return !this.isOpened() && this._distance >= this._maxDistance / 2;
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    shouldClose: function() {
+      return !this.isClosed() && this._distance < this._maxDistance / 2;
     },
 
     openOrClose: function(callback) {
       if (this.shouldOpen()) {
         this.open(callback);
-      } else {
+      } else if (this.shouldClose()) {
         this.close(callback);
       }
     },
@@ -136,7 +143,6 @@ limitations under the License.
         this.close();
       }
     }
-
   });
   MicroEvent.mixin(SlidingMenuViewModel);
 
@@ -440,9 +446,9 @@ limitations under the License.
             event.gesture.preventDefault();
 
             if (this._isRightMenu) {
-              this._logic.open();
+              this.open();
             } else {
-              this._logic.close();
+              this.close();
             }
 
             break;
@@ -451,15 +457,19 @@ limitations under the License.
             event.gesture.preventDefault();
 
             if (this._isRightMenu) {
-              this._logic.close();
+              this.close();
             } else {
-              this._logic.open();
+              this.open();
             }
 
             break;
 
           case 'release':
-            this._logic.openOrClose();
+            if (this._logic.shouldOpen()) {
+              this.open();
+            } else if (this._logic.shouldClose()) {
+              this.close();
+            }
 
             break;
         }
@@ -496,6 +506,8 @@ limitations under the License.
       close: function(callback) {
         callback = callback || function() {};
 
+        this.emit('pre-close');
+
         this._doorLock.waitUnlock(function() {
           this._logic.close(callback);
         }.bind(this));
@@ -507,8 +519,9 @@ limitations under the License.
         var unlock = this._doorLock.lock();
         this._animator.close(this._abovePage, this._behindPage, function() {
           unlock();
+          this.emit('post-close');
           callback();
-        });
+        }.bind(this));
       },
 
       openMenu: function() {
@@ -523,6 +536,8 @@ limitations under the License.
       open: function(callback) {
         callback = callback || function() {};
 
+        this.emit('pre-open');
+
         this._doorLock.waitUnlock(function() {
           this._logic.open(callback);
         }.bind(this));
@@ -534,8 +549,9 @@ limitations under the License.
         
         this._animator.open(this._abovePage, this._behindPage, function() {
           unlock();
+          this.emit('post-open');
           callback();
-        });
+        }.bind(this));
       },
 
       /**
@@ -583,6 +599,8 @@ limitations under the License.
 
       this._animatorDict[name] = animator;
     };
+
+    MicroEvent.mixin(SlidingMenuView);
 
     return SlidingMenuView;
   });
