@@ -22,7 +22,7 @@ limitations under the License.
 
   module.factory('NavigatorView', function($http, $parse, $templateCache, $compile, $onsen,
     SimpleSlideTransitionAnimator, NavigatorTransitionAnimator, LiftTransitionAnimator,
-    NullTransitionAnimator, IOSSlideTransitionAnimator, FadeInTransitionAnimator) {
+    NullTransitionAnimator, IOSSlideTransitionAnimator, FadeTransitionAnimator) {
 
     /**
      * Manages the page navigation backed by page stack.
@@ -435,7 +435,7 @@ limitations under the License.
       'default': $onsen.isAndroid() ? new SimpleSlideTransitionAnimator() : new IOSSlideTransitionAnimator(),
       'slide': $onsen.isAndroid() ? new SimpleSlideTransitionAnimator() : new IOSSlideTransitionAnimator(),
       'lift': new LiftTransitionAnimator(),
-      'fadein': new FadeInTransitionAnimator(),
+      'fade': new FadeTransitionAnimator(),
       'none': new NullTransitionAnimator()
     };
 

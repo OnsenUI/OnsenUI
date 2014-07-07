@@ -20,12 +20,12 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('FadeInTransitionAnimator', function(NavigatorTransitionAnimator) {
+  module.factory('FadeTransitionAnimator', function(NavigatorTransitionAnimator) {
 
     /**
      * Fade-in screen transition.
      */
-    var FadeInTransitionAnimator = NavigatorTransitionAnimator.extend({
+    var FadeTransitionAnimator = NavigatorTransitionAnimator.extend({
 
       /**
        * @param {Object} enterPage
@@ -129,7 +129,7 @@ limitations under the License.
       }
     });
 
-    return FadeInTransitionAnimator;
+    return FadeTransitionAnimator;
   });
 
 })();
