@@ -139,6 +139,10 @@ limitations under the License.
             } else {
               throw new Error('Cannot set undefined page');
             }
+          },
+
+          _destroy: function() {
+            this.emit('destroy', {tabbar: this});
           }
         };
         MicroEvent.mixin(tabbarView);
@@ -148,6 +152,7 @@ limitations under the License.
         $onsen.declareVarAttribute($attrs, tabbarView);
 
         $scope.$watch('$destroy', function() {
+          tabbarView._destroy();
           $element.data('ons-tabbar', undefined);
           $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
         });

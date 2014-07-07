@@ -71,6 +71,8 @@ limitations under the License.
           this._element.css('display', 'block');
           unlock();
         }.bind(this), 1000 / 60 * 2);
+
+        scope.$on('$destroy', this._destroy.bind(this));
       },
 
       /**
@@ -395,12 +397,21 @@ limitations under the License.
 
         this._abovePage.css('left', x + 'px');
         this._currentX = x;
+      },
+
+      _destroy: function() {
+        this.emit('destroy', {splitView: this});
+
+        this._element = null;
+        this._scope = null;
       }
     });
 
     function isNumber(n) {
       return !isNaN(parseFloat(n)) && isFinite(n);
     }
+
+    MicroEvent.mixin(SplitView);
 
     return SplitView;
 

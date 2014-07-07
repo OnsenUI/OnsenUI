@@ -167,11 +167,13 @@ limitations under the License.
       },
 
       _destroy: function() {
+        this.emit('destroy', {page: this});
         this._toolbarElement = null;
         this._nullElement = null;
         this._bottomToolbarElement = null;
       }
     });
+    MicroEvent.mixin(PageView);
 
     return PageView;
   });

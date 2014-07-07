@@ -217,6 +217,16 @@ limitations under the License.
           );
 
         }.bind(this), 400);
+
+        scope.$on('$destroy', this._destroy.bind(this));
+      },
+
+      _destroy: function() {
+        this.emit('destroy', {slidingMenu: this});
+
+        this._element = null;
+        this._scope = null;
+        this._attrs = null;
       },
 
       _getAnimatorOption: function() {
