@@ -25,6 +25,71 @@ limitations under the License.
    */
   module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, BackButtonHandlerStack) {
 
+    var unlockerDict = {
+      _unlockersDict: {},
+
+      _unlockedVarDict: {},
+
+      /**
+       * @param {String} name
+       * @param {Function} unlocker
+       */
+      _addVarLock: function (name, unlocker) {
+        if (!(unlocker instanceof Function)) {
+          throw new Error('unlocker argument must be an instance of Function.');
+        }
+
+        if (this._unlockersDict[name]) {
+          this._unlockersDict[name].push(unlocker);
+        } else {
+          this._unlockersDict[name] = [unlocker];
+        }
+      },
+
+      /**
+       * @param {String} varName
+       */
+      unlockVarName: function(varName) {
+        var unlockers = this._unlockersDict[varName];
+
+        if (unlockers) {
+          unlockers.forEach(function(unlock) {
+            unlock();
+          });
+        }
+        this._unlockedVarDict[varName] = true;
+      },
+
+      /**
+       * @param {Array} dependencies an array of var name
+       * @param {Function} callback
+       */
+      addCallback: function(dependencies, callback) {
+        if (!(callback instanceof Function)) {
+          throw new Error('callback argument must be an instance of Function.');
+        }
+
+        var doorLock = new DoorLock();
+        var self = this;
+
+        dependencies.forEach(function(varName) {
+
+          if (!self._unlockedVarDict[varName]) {
+            // wait for variable declaration
+            var unlock = doorLock.lock();
+            self._addVarLock(varName, unlock);
+          }
+
+        });
+
+        if (doorLock.isLocked()) {
+          doorLock.waitUnlock(callback);
+        } else {
+          callback();
+        }
+      }
+    };
+
     /**
      * Global object stack manager.
      *
@@ -123,6 +188,15 @@ limitations under the License.
         return null;
       },
 
+
+      /**
+       * @param {Array} dependencies
+       * @param {Function} callback
+       */
+      waitForVariables: function(dependencies, callback) {
+        unlockerDict.addCallback(dependencies, callback);
+      },
+
       /**
        * @param {jqLite} element
        * @param {String} name
@@ -204,7 +278,10 @@ limitations under the License.
        */
       declareVarAttribute: function(attrs, object) {
         if (typeof attrs['var'] === 'string') {
-          this._defineVar(attrs['var'], object);
+          var varName = attrs['var'];
+
+          this._defineVar(varName, object);
+          unlockerDict.unlockVarName(varName);
         }
       },
 

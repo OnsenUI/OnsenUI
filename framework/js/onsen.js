@@ -59,6 +59,8 @@ limitations under the License.
 
     _readyLock: readyLock,
 
+    _unlockersDict: {},
+
     /**
      * Bootstrap this document as a Onsen UI application.
      *
@@ -138,13 +140,24 @@ limitations under the License.
     },
 
     /**
+     * @param {Array} [dependencies]
      * @param {Function} callback
      */
-    ready : function(callback) {
-      if (ons.isReady()) {
-        callback();
-      } else {
-        readyLock.waitUnlock(callback);
+    ready : function(/* dependencies, */callback) {
+      if (callback instanceof Function) {
+        if (ons.isReady()) {
+          callback();
+        } else {
+          readyLock.waitUnlock(callback);
+        }
+      } else if (angular.isArray(callback) && arguments[1] instanceof Function) {
+        var dependencies = callback;
+        callback = arguments[1];
+
+        ons.ready(function() {
+          var $onsen = ons._getOnsenService();
+          $onsen.waitForVariables(dependencies, callback);
+        });
       }
     },
 
