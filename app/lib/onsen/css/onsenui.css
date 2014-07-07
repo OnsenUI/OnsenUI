@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-/*! onsenui - v1.1.0-dev - 2014-06-29 */
-=======
-/*! onsenui - v1.0.4 - 2014-06-26 */
-
->>>>>>> remotes/origin/master
+/*! onsenui - v1.1.0-dev - 2014-07-07 */
 /*
 Copyright 2013-2014 ASIAL CORPORATION
 
@@ -23,9 +18,28 @@ limitations under the License.
 
 @import url("font_awesome/css/font-awesome.min.css");
 
+/* cutsom elements */
+ons-page, ons-screen, ons-navigator,
+ons-split-view, ons-sliding-menu, ons-tabbar {
+  display: block;
+}
+
+ons-navigator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+}
+
 * {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 input, textarea {
@@ -52,10 +66,11 @@ ons-toolbar + .page__content {
 .page__content {
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
+  z-index: 0;
 }
 
 .page__bottom-bar-fill ~ .page__content {
-  padding-bottom: 44px;
+  margin-bottom: 44px;
 }
 
 .page__content::-webkit-scrollbar {
@@ -76,17 +91,20 @@ ons-toolbar + .page__content {
 
 .effeckt-button > .spinner {
   position: absolute;
-  width: 20px;
-  height: 10px;
+  width: 26px;
+  height: 13px;
   top: 50%;
-  margin-top: -13px;
+  margin-top: -12px;
   opacity: 0;
-  /*border: 3px solid #fff; specified in topcoat theme. .topcoat-button__spinner*/
+  border: 3px solid white;
   border-bottom: 0;
   -webkit-border-radius: 40px 40px 0 0;
   border-radius: 40px 40px 0 0;
   -webkit-transform-origin: bottom center;
   background: transparent;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .effeckt-button[data-loading] > .spinner {
@@ -696,6 +714,16 @@ limitations under the License.
 
 */
 
+ons-sliding-menu {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  overflow: hidden;
+  z-index: 0;
+}
+
 .onsen-sliding-menu__behind,
 .onsen-sliding-menu__above {
   position: absolute;
@@ -703,11 +731,10 @@ limitations under the License.
   left: 0px;
   bottom: 0px;
   right: 0px;
+  z-index: 0;
 }
 
 .onsen-sliding-menu__above {
-  -webkit-box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.1);
-  box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.1);
   margin: 0;
   padding: 0;
 }
@@ -715,6 +742,7 @@ limitations under the License.
 .onsen-sliding-menu__behind {
   opacity: 0;
 }
+
 
 /*
 Copyright 2013-2014 ASIAL CORPORATION
@@ -733,6 +761,16 @@ limitations under the License.
 
 */
 
+ons-split-view {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  overflow: hidden;
+  z-index: 0;
+}
+
 .onsen-split-view__secondary {
   opacity: 0;
   width: 100%;
@@ -750,11 +788,7 @@ limitations under the License.
   left: 0px;
   bottom: 0px;
   right: 0px;
-}
-
-.onsen-split-view__shadow {
-  -webkit-box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
-  box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+  z-index: 0;
 }
 
 /*
@@ -776,8 +810,8 @@ limitations under the License.
 
 .ons-tab-bar__footer {
   position: absolute;
-  bottom:0;
-  left:0;
+  bottom: 0;
+  left: 0;
 }
 
 .ons-tab-bar__content {

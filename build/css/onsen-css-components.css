@@ -20,8 +20,16 @@ select) {
 * {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
+input:active,
+input:focus,
+textarea:active,
+textarea:focus,
+select:active,
+select:focus {
+  outline: none;
+}
 .page {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -31,8 +39,8 @@ select) {
   left: 0px;
   right: 0px;
   bottom: 0px;
-  overflow: hidden;
-  font-size: 16px;
+  overflow: visible;
+  font-size: 17px;
   color: #1f1f21;
 }
 .page::-webkit-scrollbar {
@@ -45,6 +53,9 @@ select) {
   left: 0px;
   right: 0px;
   bottom: 0px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 /* topdoc
   name: Switch
@@ -77,7 +88,7 @@ select) {
   background-clip: padding-box;
   position: relative;
   overflow: hidden;
-  font-size: 16px;
+  font-size: 17px;
   padding: 0 20px;
   border: none;
   overflow: visible;
@@ -104,6 +115,8 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
   width: 51px;
   height: 44px;
   margin-top: -6px;
@@ -316,7 +329,7 @@ select) {
     </div>
 */
 .navigation-bar {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -352,6 +365,8 @@ select) {
   border-bottom: 1px solid #ddd;
   font-weight: 400;
   width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .navigation-bar__line-height {
   line-height: 44px;
@@ -384,30 +399,35 @@ select) {
   overflow: hidden;
   display: table-cell;
   vertical-align: middle;
-  float: left;
 }
 .navigation-bar__left {
-  width: 25%;
+  max-width: 50%;
   text-align: left;
 }
 .navigation-bar__right {
-  width: 25%;
+  max-width: 50%;
   text-align: right;
 }
 .navigation-bar__center {
-  min-width: 50%;
+  width: 45%;
   text-align: center;
+  line-height: 44px;
+  font-size: 17px;
+  font-weight: 500;
 }
 .navigation-bar__center:first-child:last-child {
   width: 100%;
 }
 .navigation-bar__title {
   line-height: 44px;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   color: #1f1f21;
   margin: 0;
   padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 /* topdoc
   name: Navigation Bar Item
@@ -440,7 +460,7 @@ select) {
     </div>
 */
 .bottom-bar {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -533,7 +553,7 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -548,7 +568,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -581,7 +601,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
 }
 .button:focus {
   -webkit-box-shadow: none;
@@ -615,7 +635,7 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -630,7 +650,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -682,7 +702,8 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
+  color: #1284ff;
 }
 /* topdoc
   name: Large Button
@@ -705,7 +726,7 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -720,7 +741,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -737,7 +758,7 @@ select) {
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   line-height: 36px;
   padding: 4px 20px;
@@ -753,7 +774,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
@@ -796,7 +817,7 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -811,7 +832,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -828,7 +849,7 @@ select) {
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   line-height: 36px;
   padding: 4px 20px;
@@ -845,7 +866,12 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
+  color: #1284ff;
+  background: transparent;
+  border: 1px solid transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .button--large--quiet:disabled {
   opacity: 0.3;
@@ -883,7 +909,7 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -898,7 +924,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -942,7 +968,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
 }
 .button--cta:disabled {
   opacity: 0.3;
@@ -970,7 +996,7 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -985,7 +1011,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -1008,7 +1034,7 @@ select) {
   box-shadow: none;
   color: #fff;
   text-shadow: none;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   line-height: 36px;
   padding: 4px 20px;
@@ -1035,7 +1061,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
 }
 .button--large--cta:disabled {
   opacity: 0.3;
@@ -1061,7 +1087,7 @@ select) {
     </div>
 */
 .button-bar {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1070,15 +1096,12 @@ select) {
   white-space: nowrap;
   margin: 0;
   padding: 0;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
+  position: relative;
   margin: 0;
-  border: 0px solid #1284ff;
+  border: none;
 }
 .button-bar__item {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1089,21 +1112,9 @@ select) {
   position: relative;
   position: relative;
   overflow: hidden;
-  border-top: 1px solid #1284ff;
-  border-bottom: 1px solid #1284ff;
   padding: 0;
-}
-.button-bar > .button-bar__item:first-child {
-  -webkit-border-top-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -webkit-border-bottom-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-.button-bar > .button-bar__item:last-child {
-  -webkit-border-top-right-radius: 4px;
-  border-top-right-radius: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  position: relative;
+  overflow: hidden;
 }
 .button-bar__item > input {
   position: absolute;
@@ -1121,16 +1132,26 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .button-bar__item:first-child > .button-bar__button {
   border-left: 1px solid #1284ff;
   border-right: 1px solid #1284ff;
+  -webkit-border-top-left-radius: 4px;
+  border-top-left-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 .button-bar__item:last-child > .button-bar__button {
   border-right: 1px solid #1284ff;
+  -webkit-border-top-right-radius: 4px;
+  border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 .button-bar__button {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1139,6 +1160,8 @@ select) {
   background-color: transparent;
   color: #1284ff;
   border: 0px solid #1284ff;
+  border-top: 1px solid #1284ff;
+  border-bottom: 1px solid #1284ff;
   border-right: 1px solid #1284ff;
   font-weight: 400;
   padding: 0 8px;
@@ -1158,6 +1181,8 @@ select) {
 :active + .button-bar__button {
   background-color: rgba(18,132,255,0.2);
   border: 0px solid #1284ff;
+  border-top: 1px solid #1284ff;
+  border-bottom: 1px solid #1284ff;
   border-right: 1px solid #1284ff;
   height: 27px;
   line-height: 27px;
@@ -1167,7 +1192,6 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  padding: 0;
 }
 .button-bar__item.active > .button-bar__button,
 :checked + .button-bar__button {
@@ -1276,7 +1300,7 @@ select) {
     </div>
 */
 .tab-bar {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1295,7 +1319,7 @@ select) {
   width: 100%;
 }
 .tab-bar__item {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1322,12 +1346,14 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .tab-bar__button {
   position: relative;
   display: inline-block;
   vertical-align: top;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1374,7 +1400,7 @@ select) {
   height: 32px;
 }
 .tab-bar__label {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1485,7 +1511,7 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1529,7 +1555,7 @@ select) {
 */
 .icon-button,
 .icon-button--quiet {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1539,13 +1565,11 @@ select) {
   text-shadow: 0 1px none;
   vertical-align: baseline;
   background-color: rgba(0,0,0,0);
-  -webkit-box-shadow: none;
-  box-shadow: none;
   border: 1px solid #1284ff;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 17px;
   -webkit-transition: opacity 0.2s linear;
   -moz-transition: opacity 0.2s linear;
   -o-transition: opacity 0.2s linear;
@@ -1559,7 +1583,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
 }
 .icon-button:disabled,
 .icon-button--quiet:disabled {
@@ -1570,6 +1594,12 @@ select) {
 .icon-button:focus,
 .icon-button--quiet:focus {
   outline: 0;
+}
+.icon-button:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
 }
 .icon-button--quiet {
   background: transparent;
@@ -1585,8 +1615,13 @@ select) {
   text-shadow: 0 1px none;
   background-color: transparent;
   border: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  opacity: 0.2;
+}
+.icon-button--quiet:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
 }
 /* topdoc
   name: Checkbox
@@ -1622,7 +1657,7 @@ select) {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1643,7 +1678,7 @@ select) {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1667,6 +1702,8 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
   height: 24px;
   width: 24px;
 }
@@ -1712,7 +1749,7 @@ select) {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1794,6 +1831,8 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .checkbox--noborder {
   position: relative;
@@ -1804,7 +1843,7 @@ select) {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1930,7 +1969,7 @@ select) {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1963,7 +2002,6 @@ select) {
   margin: 0;
   list-style-type: none;
   text-align: left;
-  border-top: none;
   padding: 0;
   background-color: #fff;
 }
@@ -1982,7 +2020,6 @@ select) {
   color: #1f1f21;
   background-color: #fff;
   min-height: 44px;
-  position: relative;
 }
 .list__item__line-height {
   line-height: 44px;
@@ -1998,16 +2035,16 @@ select) {
   padding-left: 10px;
   margin: 0;
   border-top: none;
-  border-bottom: none;
+  border-bottom: 1px solid #ddd;
 }
 .list__item:last-child {
   padding-left: 10px;
   margin: 0;
-  border-top: none;
   border-bottom: none;
 }
-.list__item:nth-child(2) {
-  border-top: 1px solid #ddd;
+.list__item:first-child:last-child {
+  border-top: none;
+  border-bottom: none;
 }
 /* topdoc
   name: Noborder List
@@ -2037,14 +2074,12 @@ select) {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
   background-color: #f0eff4;
   border-top: none;
   border-bottom: none;
@@ -2060,6 +2095,9 @@ select) {
         <li class="list__item list__item__line-height">
           Item
         </li>
+        <li class="list__item list__item__line-height">
+          Item
+        </li>
       </ul>
     </div>
  */
@@ -2070,28 +2108,13 @@ select) {
   markup:
     <div class="list">
       <ul class="list__container">
-        <li class="list__item--tappable">
+        <li class="list__item list__item--tappable">
           <span class="list__item__line-height">Tappable Item</span>
         </li>
       </ul>
     </div>
  */
 .list__item--tappable {
-  margin: 0;
-  padding: 0;
-  position: relative;
-  list-style: none;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0 0 0 10px;
-  margin: 0 0 0 0;
-  border-top: none;
-  border-bottom: 1px solid #ddd;
-  color: #1f1f21;
-  background-color: #fff;
-  min-height: 44px;
-  position: relative;
   -webkit-transition: background-color 0.2s linear;
   -moz-transition: background-color 0.2s linear;
   -o-transition: background-color 0.2s linear;
@@ -2104,20 +2127,65 @@ select) {
   -o-transition: none;
   transition: none;
 }
-.list__item--tappable:first-child {
-  padding-left: 10px;
-  margin: 0;
-  border-top: none;
-  border-bottom: none;
+.list__item--tappable:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
 }
-.list__item--tappable:last-child {
-  padding-left: 10px;
-  margin: 0;
-  border-top: none;
-  border-bottom: none;
+/* topdoc
+  name: List Item with Chevron
+  class: list__item--chevron
+  use: List
+  markup:
+    <div class="list">
+      <ul class="list__container">
+        <li class="list__item list__item--chevron">
+          <span class="list__item__line-height">Tappable Item</span>
+        </li>
+        <li class="list__item list__item--chevron">
+          <span class="list__item__line-height">Tappable Item</span>
+        </li>
+      </ul>
+    </div>
+ */
+.list__item--chevron {
+  -webkit-transition: background-color 0.2s linear;
+  -moz-transition: background-color 0.2s linear;
+  -o-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+  overflow: hidden;
 }
-.list__item--tappable:nth-child(2) {
-  border-top: 1px solid #ddd;
+.list__item--chevron:active {
+  background-color: #d9d9d9;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.list__item--chevron:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.list__item--chevron:before {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  color: #ddd;
+  line-height: 28px;
+  height: 28px;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-size: 28px;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  content: "\f105";
 }
 /* topdoc
   name: Radio Button
@@ -2158,6 +2226,8 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
   height: 24px;
   width: 24px;
   margin-top: 0;
@@ -2218,7 +2288,7 @@ select) {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2293,7 +2363,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2311,8 +2381,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-image: url("data:image/svg+xml;utf8,<svg width='41px' height='40px' viewBox='0 0 41 40' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'><title>Slice 1</title><description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description><defs></defs><g id='Page 1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='search' fill='#C6C8C8'><path d='M0.504,16.338 C0.504,25.085 7.635,32.165 16.444,32.165 C25.24,32.165 32.382,25.085 32.382,16.338 C32.382,7.591 25.24,0.5 16.444,0.5 C7.635,0.5 0.504,7.591 0.504,16.338 L0.504,16.338 Z M5.555,16.338 C5.555,10.359 10.423,5.521 16.445,5.521 C22.455,5.521 27.333,10.36 27.333,16.338 C27.333,22.317 22.455,27.156 16.445,27.156 C10.423,27.156 5.555,22.316 5.555,16.338 L5.555,16.338 Z M27.666,30.861 L34.521,38.67 C35.625,39.772 36.338,39.781 37.46,38.67 L39.661,36.489 C40.743,35.408 40.811,34.711 39.661,33.568 L31.765,26.793 L27.666,30.861 L27.666,30.861 Z M27.666,30.861' id='Shape'></path></g></g></svg>");
   background-position: 8px center;
   background-repeat: no-repeat;
-  -webkit-background-size: 16px;
-  background-size: 16px;
+  -webkit-background-size: 17px;
+  background-size: 17px;
   font-weight: 400;
   display: block;
   width: 100%;
@@ -2363,7 +2433,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2426,7 +2496,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2490,7 +2560,7 @@ webkit-input-placeholder() {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2556,7 +2626,7 @@ webkit-input-placeholder() {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2607,7 +2677,7 @@ webkit-input-placeholder() {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
