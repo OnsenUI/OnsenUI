@@ -39,6 +39,11 @@ limitations under the License.
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
       link: function($scope, element, attrs) {
+
+        if (attrs.ngContrller) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
+
         element.addClass($onsen.generateModifierTemplater(attrs)('text-input--*'));
 
         $scope.$watch(function() {

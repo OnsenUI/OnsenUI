@@ -36,6 +36,11 @@ limitations under the License.
       compile: function(elem, attrs, transcludeFn) {
         var templater = $onsen.generateModifierTemplater(attrs);
         return function(scope, element, attrs) {
+
+          if (attrs.ngController) {
+            throw new Error('This element can\'t accept ng-controller directive.');
+          }
+
           scope.modifierTemplater = templater;
           transcludeFn(scope, function(clone) {
             element.append(clone);

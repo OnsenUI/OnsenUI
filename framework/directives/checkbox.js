@@ -43,6 +43,11 @@ limitations under the License.
       transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
       link: function($scope, element, attrs, ngModel) {
+
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
+
         var checkbox = element.find('input');
         var checked = false;
         attrs.$observe('disabled', function(disabled) {

@@ -37,6 +37,10 @@ limitations under the License.
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/if_orientation.tpl',
       link: function($scope, element, attrs) {
 
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
+
         function getLandscapeOrPortraitFromInteger(orientation){
           if (orientation === undefined ) {
             return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';

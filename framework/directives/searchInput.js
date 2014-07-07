@@ -33,7 +33,12 @@ limitations under the License.
     return {
       restrict: 'E',
       replace: true,
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
       transclude: false,
+      scope: false,
+
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/search_input.tpl',
       link: function(scope, element, attrs) {
         element.addClass($onsen.generateModifierTemplater(attrs)('search-input--*'));

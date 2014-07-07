@@ -38,8 +38,13 @@ limitations under the License.
         align: '@'
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/row.tpl',
-      compile: function(elt, attr, transclude) {
-        return function(scope, elt, attr) {
+      compile: function(elt, attrs, transclude) {
+        return function(scope, elt, attrs) {
+
+          if (attrs.ngController) {
+            throw new Error('This element can\'t accept ng-controller directive.');
+          }
+
           transclude(scope.$parent, function(clone) {
             elt.append(clone);
           });

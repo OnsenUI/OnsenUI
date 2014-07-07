@@ -41,6 +41,8 @@ limitations under the License.
       restrict: 'E',
       replace: false,
 
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
       transclude: false,
       scope: true,
 
@@ -49,7 +51,7 @@ limitations under the License.
       link: function(scope, element, attrs) {
 
         if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controlelr directive.');
+          throw new Error('This element can\'t accept ng-controller directive.');
         }
 
         var slidingMenu = new SlidingMenuView(scope, element, attrs);

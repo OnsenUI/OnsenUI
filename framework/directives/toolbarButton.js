@@ -33,6 +33,11 @@ limitations under the License.
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
+
+          if (attrs.ngContrller) {
+            throw new Error('This element can\'t accept ng-controller directive.');
+          }
+
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         }
       }

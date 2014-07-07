@@ -47,6 +47,11 @@ limitations under the License.
       transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/radio_button.tpl',
       link: function($scope, element, attrs) {
+
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
+
         var radioButton = element.find('input');
         var checked = false;
 

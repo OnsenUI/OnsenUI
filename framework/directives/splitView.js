@@ -101,8 +101,8 @@ limitations under the License.
     return {
       restrict: 'E',
       replace: false,
-      transclude: false,
 
+      transclude: false,
       scope: {
         secondaryPage: '@',
         mainPage: '@',
@@ -113,6 +113,10 @@ limitations under the License.
 
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
       link: function(scope, element, attrs) {
+
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
 
         var splitView = new SplitView(scope, element, attrs);
         $onsen.declareVarAttribute(attrs, splitView);

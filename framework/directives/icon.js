@@ -46,6 +46,11 @@ limitations under the License.
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/icon.tpl',
       link: function($scope, element, attrs) {
+
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
+
         attrs.$observe('spin', function(spin) {
           if (spin === 'true') {
             $scope.spin = 'spin';

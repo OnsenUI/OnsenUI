@@ -37,6 +37,10 @@ limitations under the License.
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/if_platform.tpl',
       link: function($scope, element, attrs) {
 
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
+
         var platform;
 
         var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;

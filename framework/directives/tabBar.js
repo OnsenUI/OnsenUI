@@ -38,6 +38,11 @@ limitations under the License.
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
       controller: function($scope, $element, $attrs) {
+
+        if ($attrs.ngContrller) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
+
         this.modifierTemplater = $scope.modifierTemplater = $onsen.generateModifierTemplater($attrs);
 
         var container = angular.element($element[0].querySelector('.ons-tab-bar__content'));

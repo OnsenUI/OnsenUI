@@ -43,6 +43,10 @@ limitations under the License.
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs){
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
+
         var effectButton = element;
         var TYPE_PREFIX = 'button--';
         scope.item = {};

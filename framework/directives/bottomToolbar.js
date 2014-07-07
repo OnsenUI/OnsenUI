@@ -33,7 +33,6 @@ limitations under the License.
     return {
       restrict: 'E',
       replace: false,
-      require: '^onsPage',
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
@@ -49,12 +48,13 @@ limitations under the License.
         element.css({'z-index': 0});
 
         return {
-          pre: function(scope, element, attrs, pageController) {
+          pre: function(scope, element, attrs) {
             // modifier
             scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
-            if (pageController) {
-              pageController.registerBottomToolbar(element);
+            var pageView = element.inheritedData('ons-page');
+            if (pageView) {
+              pageView.registerBottomToolbar(element);
             }
           }
         };

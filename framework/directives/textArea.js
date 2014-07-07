@@ -38,6 +38,11 @@ limitations under the License.
       transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/text_area.tpl',
       link: function(scope, element, attrs) {
+
+        if (attrs.ngContrller) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
+
         var classes = $onsen.generateModifierTemplater(attrs)('textarea--*');
         element.addClass(classes);
       }
