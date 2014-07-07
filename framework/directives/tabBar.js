@@ -51,90 +51,105 @@ limitations under the License.
 
         $attrs.$observe('hideTabs', function(hide) {
           $scope.hideTabs = hide;
-          onTabbarVisibilityChanged();
+          tabbarView._onTabbarVisibilityChanged();
         });
 
-        function triggerActiveTabChanged(index, tabItem){
-          $scope.onActiveTabChanged({
-            $index: index,
-            $tabItem: tabItem
-          });
-        }
+        var tabbarView = {
+          _tabbarId: this.tabbarId,
 
-        function onTabbarVisibilityChanged() {
-          if ($scope.hideTabs) {
-            $scope.tabbarHeight = 0;
-          } else {
-            $scope.tabbarHeight = footer.clientHeight + 'px';
-          }
-        }
+          _tabItems: [],
 
-        var tabItems = [];
+          /**
+           * @param {Number} index
+           */
+          setActiveTab: function(index) {
+            var selectedTabItem = this._tabItems[index];
 
-        this.gotSelected = function(selectedTabItem) {
-          if (selectedTabItem.page) {
-            this.setPage(selectedTabItem.page);
-          }
+            if (!selectedTabItem) {
+              return;
+            }
 
-          for (var i = 0; i < tabItems.length; i++) {
-            if (tabItems[i] != selectedTabItem) {
-              tabItems[i].setInactive();
-            }else{
-              triggerActiveTabChanged(i, selectedTabItem);
+            this.emit('prechange', {index: index, tabItem: selectedTabItem});
+            
+            if (selectedTabItem.page) {
+              this._setPage(selectedTabItem.page);
+            }
+
+            for (var i = 0; i < this._tabItems.length; i++) {
+              if (this._tabItems[i] != selectedTabItem) {
+                this._tabItems[i].setInactive();
+              } else {
+                this._triggerActiveTabChanged(i, selectedTabItem);
+                this.emit('postchange', {index: i, tabItem: selectedTabItem});
+              }
+            }
+          },
+
+          _triggerActiveTabChanged: function(index, tabItem){
+            $scope.onActiveTabChanged({
+              $index: index,
+              $tabItem: tabItem
+            });
+          },
+
+          /**
+           * @param {Boolean} visible
+           */
+          setTabbarVisibility: function(visible) {
+            $scope.hideTabs = !visible;
+            this._onTabbarVisibilityChanged();
+          },
+
+          _onTabbarVisibilityChanged: function() {
+            if ($scope.hideTabs) {
+              $scope.tabbarHeight = 0;
+            } else {
+              $scope.tabbarHeight = footer.clientHeight + 'px';
+            }
+          },
+
+          /**
+           * @param {Object} tabItem
+           */
+          addTabItem : function(tabItem) {
+            this._tabItems.push(tabItem);
+          },
+
+          /**
+           * @param {String} page
+           */
+          _setPage: function(page) {
+            if (page) {
+              $onsen.getPageHTMLAsync(page).then(function(html) {
+                var templateHTML = angular.element(html.trim());
+                var pageScope = $scope.$parent.$new();
+                var pageContent = $compile(templateHTML)(pageScope);
+                container.append(pageContent);
+
+                if (this._currentPageElement) {
+                  this._currentPageElement.remove();
+                  this._currentPageScope.$destroy();
+                }
+
+                this._currentPageElement = pageContent;
+                this._currentPageScope = pageScope;
+              }.bind(this), function() {
+                throw new Error('Page is not found: ' + page);
+              });
+            } else {
+              throw new Error('Cannot set undefined page');
             }
           }
         };
+        MicroEvent.mixin(tabbarView);
 
-        this.setPage = function(page) {
-          var self = this;
-          if (page) {
-            $onsen.getPageHTMLAsync(page).then(function(html) {
-              var templateHTML = angular.element(html.trim());
-              var pageScope = $scope.$parent.$new();
-              var pageContent = $compile(templateHTML)(pageScope);
-              container.append(pageContent);
-
-              if (self.currentPageElement) {
-                self.currentPageElement.remove();
-                self.currentPageScope.$destroy();
-              }
-
-              self.currentPageElement = pageContent;
-              self.currentPageScope = pageScope;
-            }, function() {
-              throw new Error('Page is not found: ' + page);
-            });
-          } else {
-            throw new Error('cannot set undefined page');
-          }
-        };
-
-        this.addTabItem = function(tabItem) {
-          tabItems.push(tabItem);
-        };
-
-        $scope.ons = $scope.ons || {};
-        $scope.ons.tabbar = {};
-        $scope.setTabbarVisibility = function(visible) {
-          $scope.hideTabs = !visible;
-          onTabbarVisibilityChanged();
-        };
-
-        $scope.setActiveTab = function(index){
-          if(index < 0 || index >= tabItems.length){
-            throw new Error('Cannot set tab with index ' + index + '. We have ' + tabItems.length + ' tabs.');
-          }
-
-          var tabItem = tabItems[index];
-          tabItem.setActive();
-        };
-
-        $onsen.aliasStack.register('ons.tabbar', $scope);
-        $element.data('ons-tabbar', $scope);
+        $onsen.aliasStack.register('ons.tabbar', tabbarView);
+        $element.data('ons-tabbar', tabbarView);
+        $onsen.declareVarAttribute($attrs, tabbarView);
 
         $scope.$watch('$destroy', function() {
           $element.data('ons-tabbar', undefined);
-          $onsen.aliasStack.unregister('ons.tabbar', $scope);
+          $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
         });
       }
     };

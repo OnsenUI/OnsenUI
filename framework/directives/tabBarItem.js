@@ -36,7 +36,6 @@ limitations under the License.
       restrict: 'E',
       replace: true,
       transclude: true,
-      require: '^onsTabbar',
       scope: {
         page: '@',
         active: '@',
@@ -45,21 +44,29 @@ limitations under the License.
         label: '@'
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
-      link: function(scope, element, attrs, tabbarController) {
+      link: function(scope, element, attrs) {
         var radioButton = element[0].querySelector('input');
 
-        scope.tabbarModifierTemplater = tabbarController.modifierTemplater;
+        var tabbarView = element.inheritedData('ons-tabbar');
+
+        if (!tabbarView) {
+          throw new Error('ons-tabbar-item is must be child of ons-tabbar element.');
+        }
+
+        scope.tabbarModifierTemplater = tabbarView.modifierTemplater;
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
-        scope.tabbarId = tabbarController.tabbarId;
-
-        tabbarController.addTabItem(scope);
+        scope.tabbarId = tabbarView._tabbarId;
         scope.tabIcon = scope.icon;
 
+        tabbarView.addTabItem(scope);
+
         scope.setActive = function() {
+
+          tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
+
           element.addClass('active');
           radioButton.checked = true;
-          tabbarController.gotSelected(scope);
+
           if (scope.activeIcon) {
             scope.tabIcon = scope.activeIcon;
           }

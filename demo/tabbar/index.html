@@ -11,12 +11,25 @@
   <script src="../../build/js/angular/angular.js"></script>
   <script src="../../build/js/onsenui.js"></script>    
   <script src="../app.js"></script>  
+
+  <script>
+    ons.ready(function() {
+      tabbar.on('prechange', function() {
+        console.log('prechange');
+      });
+
+      tabbar.on('postchange', function() {
+        console.log('postchange');
+      });
+    });
+
+  </script>
   
 </head>
 
 <body>    
   
-  <ons-tabbar>
+  <ons-tabbar var="tabbar">
     <ons-tabbar-item 
       icon="home"
       label="Home"
