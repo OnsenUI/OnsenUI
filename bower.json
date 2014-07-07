@@ -1,6 +1,6 @@
 {
   "name": "OnsenUI",
-  "version": "1.0.4",
+  "version": "1.1-dev",
   "homepage": "http://onsenui.io",
   "authors": [
     "Kruy Vanna <kruyvanna@gmail.com>",
@@ -12,16 +12,7 @@
   ],
   "styles": [
     "build/css/onsenui.css"
-  ],
-  "themes": [
-    "build/css/topcoat-mobile-onsen-blue.css",
-    "build/css/topcoat-mobile-onsen-green.css",
-    "build/css/topcoat-mobile-onsen-orange.css",
-    "build/css/topcoat-mobile-onsen-pink.css",
-    "build/css/topcoat-mobile-onsen-purple.css",
-    "build/css/topcoat-mobile-onsen-yellow.css",
-    "build/css/topcoat-mobile-onsen-ios7.css",
-    "build/css/topcoat-mobile-onsen-android4_4.css"
+    "build/css/onsen-css-components.css"
   ],
   "keywords": [
     "onsenui",
@@ -44,11 +35,9 @@
     "package.json",
     "themes",
     "node_modules",
-    "component_demo",
     "config",
     "framework",
     "project_templates",
-    "scripts",
     "test",
     "Gruntfile.js",
     "plugin_info.json",
