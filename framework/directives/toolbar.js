@@ -83,12 +83,46 @@ limitations under the License.
     return container;
   }
 
+  /**
+   * @param {jqLite} element
+   * @return {Boolean}
+   */
+  function hasCenterClassElementOnly(element) {
+    var hasCenter = false;
+    var hasOther = false;
+    var child, children = element.contents();
+
+    for (var i = 0; i < children.length; i++) {
+      child = angular.element(children[i]);
+
+      if (child.hasClass('center')) {
+        hasCenter = true;
+        continue;
+      }
+
+      if (child.hasClass('left') || child.hasClass('right')) {
+        hasOther = true;
+        continue;
+      }
+
+    }
+
+    return hasCenter && !hasOther;
+  }
+
   function ensureToolbarItemElements(element) {
-    var left = ensureLeftContainer(element);
-    var center = ensureCenterContainer(element);
-    var right = ensureRightContainer(element);
-    element.contents().remove();
-    element.append(angular.element([left, center, right]));
+    if (hasCenterClassElementOnly(element)) {
+      var center = ensureCenterContainer(element);
+      element.contents().remove();
+      element.append(center);
+    } else {
+      var left = ensureLeftContainer(element);
+      var center = ensureCenterContainer(element);
+      var right = ensureRightContainer(element);
+
+      element.contents().remove();
+      element.append(angular.element([left, center, right]));
+    }
   }
 
   /**
