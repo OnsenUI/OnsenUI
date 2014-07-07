@@ -2020,8 +2020,10 @@ select:focus {
   color: #1f1f21;
   background-color: #fff;
   min-height: 44px;
+  line-height: 44px;
 }
-.list__item__line-height {
+.list__item__line-height,
+.list__item--line-height {
   line-height: 44px;
 }
 .list__item_active:active {
