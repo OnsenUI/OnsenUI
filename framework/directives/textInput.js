@@ -40,7 +40,7 @@ limitations under the License.
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
       link: function($scope, element, attrs) {
 
-        if (attrs.ngContrller) {
+        if (attrs.ngController) {
           throw new Error('This element can\'t accept ng-controller directive.');
         }
 

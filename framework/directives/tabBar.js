@@ -39,7 +39,7 @@ limitations under the License.
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
       controller: function($scope, $element, $attrs) {
 
-        if ($attrs.ngContrller) {
+        if ($attrs.ngController) {
           throw new Error('This element can\'t accept ng-controller directive.');
         }
 

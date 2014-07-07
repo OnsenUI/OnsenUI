@@ -34,7 +34,7 @@ limitations under the License.
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
 
-          if (attrs.ngContrller) {
+          if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
 
