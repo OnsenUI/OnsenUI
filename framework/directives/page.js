@@ -31,24 +31,35 @@ limitations under the License.
 
   module.directive('onsPage', function($onsen, $timeout, PageView) {
 
-    function firePageInitEvent(pageContainer) {
-      function findPageDOM() {
-        if (angular.element(pageContainer).hasClass('page')) {
-          return pageContainer;
+    function firePageInitEvent(element) {
+      function isAttached(element) {
+        if (document.documentElement === element) {
+          return true;
         }
-
-        var result = pageContainer.querySelector('.page');
-
-        if (!result) {
-          throw new Error('An element of "page" class is not found.');
-        }
-
-        return result;
+        return element.parentNode ? isAttached(element.parentNode) : false;
       }
-      
-      var event = document.createEvent('HTMLEvents');    
-      event.initEvent('pageinit', true, true);
-      findPageDOM().dispatchEvent(event);    
+
+      function fire() {
+        var event = document.createEvent('HTMLEvents');    
+        event.initEvent('pageinit', true, true);
+        element.dispatchEvent(event);    
+      }
+
+      // TODO: remove dirty fix
+      var i = 0;
+      var f = function() {
+        if (i++ < 5)  {
+          if (isAttached(element)) {
+            fire();
+          } else {
+            setImmediate(f);
+          }
+        } else {
+          throw new Error('Fail to fire "pageinit" event. Attach "ons-page" element to the document after initialization.');
+        }
+      };
+
+      f();
     }
 
     return {
