@@ -220,7 +220,7 @@ limitations under the License.
         options = options || {};
         element = this._normalizePageElement(element);
 
-        var pageController = element.inheritedData('$onsPageController');
+        var pageController = element.inheritedData('ons-page');
         if (!pageController) {
           throw new Error('Fail to fetch $onsPageController.');
         }

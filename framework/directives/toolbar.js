@@ -132,7 +132,6 @@ limitations under the License.
     return {
       restrict: 'E',
       replace: false,
-      require: '^onsPage',
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
@@ -161,9 +160,11 @@ limitations under the License.
         ensureToolbarItemElements(element);
 
         return {
-          pre: function(scope, element, attrs, pageController) {
-            if (pageController) {
-              pageController.registerToolbar(element);
+          pre: function(scope, element, attrs) {
+            var pageView = element.inheritedData('ons-page');
+
+            if (pageView) {
+              pageView.registerToolbar(element);
             }
           }
         };
