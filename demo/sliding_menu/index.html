@@ -11,6 +11,27 @@
   <script src="../../build/js/angular/angular.js"></script>    
   <script src="../../build/js/onsenui.js"></script>    
   <script src="../app.js"></script>  
+
+  <script>
+
+    ons.ready(function() {
+      app.slidingMenu.on('preopen', function() {
+        console.log('preopen');
+      });
+
+      app.slidingMenu.on('postopen', function() {
+        console.log('postopen');
+      });
+
+      app.slidingMenu.on('preclose', function() {
+        console.log('preclose');
+      });
+
+      app.slidingMenu.on('postclose', function() {
+        console.log('postclose');
+      });
+    });
+  </script>
 </head>
 
 <body>

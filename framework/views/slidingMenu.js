@@ -506,7 +506,7 @@ limitations under the License.
       close: function(callback) {
         callback = callback || function() {};
 
-        this.emit('pre-close');
+        this.emit('preclose');
 
         this._doorLock.waitUnlock(function() {
           this._logic.close(callback);
@@ -519,7 +519,7 @@ limitations under the License.
         var unlock = this._doorLock.lock();
         this._animator.close(this._abovePage, this._behindPage, function() {
           unlock();
-          this.emit('post-close');
+          this.emit('postclose');
           callback();
         }.bind(this));
       },
@@ -536,7 +536,7 @@ limitations under the License.
       open: function(callback) {
         callback = callback || function() {};
 
-        this.emit('pre-open');
+        this.emit('preopen');
 
         this._doorLock.waitUnlock(function() {
           this._logic.open(callback);
@@ -549,7 +549,7 @@ limitations under the License.
         
         this._animator.open(this._abovePage, this._behindPage, function() {
           unlock();
-          this.emit('post-open');
+          this.emit('postopen');
           callback();
         }.bind(this));
       },
