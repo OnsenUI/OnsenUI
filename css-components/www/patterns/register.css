@@ -26,7 +26,7 @@
 .fb-area {
     position: absolute;
     left: 5px;
-    top: 8px;
+    top: 4px;
 }
 
 .fb-icon {
@@ -37,7 +37,9 @@
 .fb-text {
     position: absolute;
     left: 40px;
-    bottom: 12px;
+    top: 0px;
+    bottom: 0px;
+    line-height: 44px;
 }
 
 .fb-button {
