@@ -46,8 +46,8 @@ limitations under the License.
         return function(scope, element, attrs) {
 
           attrs.$observe('align', function(align) {
-            element.removeClass('col-top col-center col-bottom');
             if (align === 'top' || align === 'left' || align === 'right') {
+              element.removeClass('col-top col-center col-bottom');
               element.addClass('col-' + align);
             }
           });

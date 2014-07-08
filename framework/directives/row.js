@@ -32,21 +32,23 @@ limitations under the License.
   module.directive('onsRow', function($onsen, $timeout) {
     return {
       restrict: 'E',
-      replace: true,
-      transclude: true,
-      scope: {
-        align: '@'
-      },
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/row.tpl',
-      compile: function(elt, attrs, transclude) {
-        return function(scope, elt, attrs) {
+      replace: false,
 
-          if (attrs.ngController) {
-            throw new Error('This element can\'t accept ng-controller directive.');
-          }
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      transclude: false,
+      scope: false,
 
-          transclude(scope.$parent, function(clone) {
-            elt.append(clone);
+      compile: function(element, attrs) {
+        element.addClass('row ons-row-inner');
+
+        return function(scope, element, attrs) {
+          attrs.$observe('align', function(align) {
+            align = ('' + align).trim();
+            if (align === 'top' || align === 'center' || align === 'bottom') {
+              element.removeClass('row-bottom row-center row-top');
+              element.addClass('row-' + align);
+            }
           });
         };
       }
