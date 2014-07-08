@@ -21,18 +21,12 @@ ons-split-view {
   right: 0px;
   top: 0px;
   bottom: 0px;
-  overflow: hidden;
   z-index: 0;
 }
 
 .onsen-split-view__secondary {
   opacity: 0;
   width: 100%;
-  overflow: hidden;
-}
-
-.onsen-split-view__main {
-  overflow: hidden;
 }
 
 .onsen-split-view__secondary,
