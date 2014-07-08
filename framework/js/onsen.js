@@ -52,6 +52,11 @@ limitations under the License.
     } else {
       throw new Error('Invalid initialization state.');
     }
+
+    if (document.body) {
+      angular.element(document.body).attr('ng-cloak', 'ng-cloak');
+    }
+
   });
 
   // JS Global facade for Onsen UI.
