@@ -36,17 +36,21 @@ limitations under the License.
      * @param {Number} maxDistance
      */
     init: function(options) {
-      this._maxDistance = options.maxDistance;
-
       if (!angular.isNumber(options.maxDistance)) {
         throw new Error('options.maxDistance must be number');
       }
+
+      this.setMaxDistance(options.maxDistance);
     },
 
     /**
      * @param {Number} maxDistance
      */
     setMaxDistance: function(maxDistance) {
+      if (maxDistance <= 0) {
+        throw new Error('maxDistance must be greater then zero.');
+      }
+
       this._maxDistance = maxDistance;
     },
 
@@ -174,8 +178,10 @@ limitations under the License.
 
         this._isRightMenu = attrs.side === 'right';
 
-        var maxDistance = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
-        this._logic = new SlidingMenuViewModel({maxDistance: maxDistance});
+        var width = this._abovePage[0].clientWidth;
+        var maxDistance = width * MAIN_PAGE_RATIO;
+
+        this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
         this._logic.on('translate', this._translate.bind(this));
         this._logic.on('open', function(options) {
           this._open(options.callback);
@@ -204,6 +210,9 @@ limitations under the License.
         var unlock = this._doorLock.lock();
 
         window.setTimeout(function() {
+          var maxDistance = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+          this._logic.setMaxDistance(maxDistance);
+
           unlock();
 
           this._behindPage.css({opacity: 1});
@@ -556,7 +565,7 @@ limitations under the License.
       _open: function(callback) {
         callback = callback || function() {};
         var unlock = this._doorLock.lock();
-        
+
         this._animator.open(this._abovePage, this._behindPage, function() {
           unlock();
           this.emit('postopen');
