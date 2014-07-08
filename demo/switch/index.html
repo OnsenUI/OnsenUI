@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Switch Demo | Onsen UI</title>  
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">  
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">  
+  <link rel="stylesheet" href="../../build/css/font_awesome/css/font-awesome.min.css">
+
+  <script src="../../build/js/angular/angular.js"></script>    
+  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../app.js"></script>  
+  
+</head>
+
+<body>    
+  
+  <ons-navigator>
+
+    <ons-toolbar>
+      <div class="center">Switch</div>
+    </ons-toolbar>
+
+    <ons-list>
+      <ons-list-item>Switch<ons-switch modifier="list-item"></ons-switch></ons-list-item>
+      <ons-list-item>Switch(checked)<ons-switch modifier="list-item" checked></ons-switch></ons-list-item>
+    </ons-list>
+
+    <br>
+
+    <ons-list>
+      <ons-list-item>Switch(disabled)<ons-switch modifier="list-item" disabled></ons-switch></ons-list-item>
+      <ons-list-item>Switch(disabled, checked)<ons-switch modifier="list-item" checked disabled></ons-switch></ons-list-item>
+    </ons-list>
+
+    <br>
+
+    <ons-list>
+      <ons-list-item>
+        Switch State: {{switchState}}
+        <ons-switch modifier="list-item" ng-model="switchState"></ons-switch>
+      </ons-list-item>
+    </ons-list>
+
+    <br>
+
+    <ons-list>
+      <ons-list-item style="height: 44px">
+        <div style="text-align: center; margin-top: 12px;"><ons-switch checked></ons-switch> <ons-switch></ons-switch></div>
+      </ons-list-item>
+    </ons-list>
+
+    <ons-bottom-toolbar style="text-align: center; padding-top: 6px;">
+      <ons-switch></ons-switch>
+    </ons-bottom-toolbar>
+
+  </ons-navigator>
+ 
+</body>
+</html>
