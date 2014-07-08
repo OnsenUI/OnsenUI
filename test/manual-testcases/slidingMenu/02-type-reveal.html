@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../build/js/angular/angular.js"></script>    
+    <script src="../../../build/js/onsenui.js"></script>    
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      ons.bootstrap();
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-sliding-menu above-page="page1.html" behind-page="menu.html" side="right" var="menu" type="reveal">
+    </ons-navigator>
+
+    <script type="text/ons-template" id="page1.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">Page 1</div>
+          <div class="right">
+            <ons-toolbar-button ng-click="menu.toggleMenu();"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+
+        <h1 style="text-align: center">Page1</h1>
+      </ons-page>
+    </script>
+
+
+    <script type="text/ons-template" id="page2.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">Page 2</div>
+          <div class="right">
+            <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+
+        <h1 style="text-align: center">Page2</h1>
+      </ons-page>
+    </script>
+
+    <script type="text/ons-template" id="menu.html">
+      <ons-list>
+        <ons-list-item modifier="chevron" ng-click="menu.setAbovePage('page1.html', {closeMenu: true})">
+          page1.html
+        </ons-list-item>
+        <ons-list-item modifier="chevron" ng-click="menu.setAbovePage('page2.html', {closeMenu: true})">
+          page1.html
+        </ons-list-item>
+      </ons-list>
+    </script>
+
+  </body>
+</html>
