@@ -57,19 +57,6 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/if_orientation.tpl",
-    "<div ng-show=\"orientation == userOrientation\" class=\"ons-if-orientation-inner\" ng-transclude>\n" +
-    "\n" +
-    "</div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("templates/if_platform.tpl",
     "<div class=\"ons-if-platform-inner\" ng-show=\"platform == userPlatform\" ng-transclude>\n" +
     "\n" +

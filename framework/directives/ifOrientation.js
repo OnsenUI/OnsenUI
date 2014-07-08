@@ -32,48 +32,49 @@ limitations under the License.
     return {
       restrict: 'A',
       replace: false,
-      transclude: true,
-      scope: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/if_orientation.tpl',
-      link: function($scope, element, attrs) {
 
-        if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controller directive.');
-        }
+      transclude: false,
+      scope: false,
 
-        function getLandscapeOrPortraitFromInteger(orientation){
-          if (orientation === undefined ) {
-            return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+      compile: function(element) {
+        element.css('display', 'none');
+
+        return function($scope, element, attrs) {
+          element.addClass('ons-if-orientation-inner');
+
+          window.addEventListener('orientationchange', update, false);
+          window.addEventListener('resize', update, false);
+          attrs.$observe('onsIfOrientation', update);
+
+          update();
+
+          function update() {
+            var userOrientation = attrs.onsIfOrientation;
+            var orientation = getLandscapeOrPortraitFromInteger(window.orientation);
+
+            if (userOrientation && (userOrientation === 'portrait' || userOrientation === 'landscape')) {
+              if (userOrientation === orientation) {
+                element.css('display', 'block');
+              } else {
+                element.css('display', 'none');
+              }
+            }
           }
 
-          if (orientation == 90 || orientation == -90) {
-            return 'landscape';
+          function getLandscapeOrPortraitFromInteger(orientation) {
+            if (orientation === undefined ) {
+              return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+            }
+
+            if (orientation == 90 || orientation == -90) {
+              return 'landscape';
+            }
+
+            if (orientation === 0 || orientation == 180) {
+              return 'portrait';
+            }
           }
-
-          if (orientation === 0 || orientation == 180) {
-            return 'portrait';
-          }
-        }
-
-        $scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
-
-        window.addEventListener("orientationchange", function() {
-          $scope.$apply(function(){
-            $scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
-          });
-        }, false);
-
-        window.addEventListener("resize", function() {
-          $scope.$apply(function(){
-            $scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
-          });
-        }, false);
-
-        attrs.$observe('onsIfOrientation', function(userOrientation){
-          if(userOrientation){
-            $scope.userOrientation = userOrientation;
-          }
-        });
+        };
       }
     };
   });
