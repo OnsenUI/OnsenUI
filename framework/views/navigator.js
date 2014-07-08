@@ -114,8 +114,7 @@ limitations under the License.
        *
        * @param {String} page
        * @param {Object} [options]
-       * @param {String} [options.animation]
-       * @param {NavigatorTransitionAnimator} [options.animator]
+       * @param {String/NavigatorTransitionAnimator} [options.animation]
        * @param {Function} [options.onTransitionEnd]
        */
       pushPage: function(page, options) {
@@ -182,8 +181,8 @@ limitations under the License.
         function getAnimatorOption() {
           var animator = null;
 
-          if (options.animator instanceof NavigatorTransitionAnimator) {
-            return options.animator;
+          if (options.animation instanceof NavigatorTransitionAnimator) {
+            return options.animation;
           }
 
           if (typeof options.animation === 'string') {
