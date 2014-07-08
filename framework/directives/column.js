@@ -22,8 +22,7 @@ limitations under the License.
  * @description
  * Use with <ons-row> to layout component.
  * @param align Vertical align the column. Valid values are [top/center/bottom].
- * @param size The size of the column in percentage. Valid values are [10/20/25/33/67/75/80/90]
- * @param offset Offset the column. Valid values are [10/20/25/33/67/75/80/90]
+ * @param size The width of the column. Valid values are css "width" value. eg. "10%", "50px"
  * @note For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.
  */
 (function(){
@@ -37,9 +36,7 @@ limitations under the License.
       replace: true,
       transclude: true,
       scope: {
-        align: '@',
-        size: '@',
-        offst: '@'
+        align: '@'
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/column.tpl',
       compile: function(elt, attrs, transclude) {
@@ -49,6 +46,21 @@ limitations under the License.
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
+
+          attrs.$observe('size', function(size) {
+            size = ('' + size).trim();
+            size = size.match(/^\d+$/) ? size + '%' : size;
+
+            scope.style = {
+              '-webkit-box-flex': '0',
+              '-webkit-flex': '0 0 ' + size,
+              '-moz-box-flex': '0',
+              '-moz-flex': '0 0 ' + size,
+              '-ms-flex': '0 0 ' + size,
+              'flex': '0 0 ' + size,
+              'max-width': size
+            };
+          });
 
           transclude(scope.$parent, function(clone) {
             elt.append(clone);
