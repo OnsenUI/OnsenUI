@@ -17,35 +17,30 @@ limitations under the License.
 
 /**
  * @ngdoc directive
- * @id list
- * @name ons-list
+ * @id list-header
+ * @name ons-list-header
  * @description
- * The container for list-item. Similar to <ul> but styled for mobile.
- * @demoURL
- * OnsenUI/demo/list/
+ * Header element for list items. Must be put inside ons-list tag.
  */
-(function(){
+(function() {
   'use strict';
 
   var module = angular.module('onsen');
 
-  module.directive('onsList', function($onsen) {
+  module.directive('onsListHeader', function($onsen) {
     return {
       restrict: 'E',
-      scope: false,
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclude.
       replace: false,
       transclude: false,
 
-      compile: function(element, attrs) {
+      compile: function(elem, attrs, transcludeFn) {
         var templater = $onsen.generateModifierTemplater(attrs);
-
-        element.addClass('list ons-list-inner');
-        element.addClass(templater('list--*'));
+        elem.addClass('list__header ons-list-header-inner');
+        elem.addClass(templater('list__header--*'));
       }
     };
   });
 })();
-

@@ -20,7 +20,7 @@ limitations under the License.
  * @id list-item
  * @name ons-list-item
  * @description
- * Works like <li> but styled for mobile. Must be put inside list tag.
+ * Works like <li> but styled for mobile. Must be put inside ons-list tag.
  */
 (function() {
   'use strict';
@@ -30,22 +30,16 @@ limitations under the License.
   module.directive('onsListItem', function($onsen) {
     return {
       restrict: 'E',
-      replace: true,
-      transclude: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/list_item.tpl',
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      replace: false,
+      transclude: false,
+
       compile: function(elem, attrs, transcludeFn) {
         var templater = $onsen.generateModifierTemplater(attrs);
-        return function(scope, element, attrs) {
-
-          if (attrs.ngController) {
-            throw new Error('This element can\'t accept ng-controller directive.');
-          }
-
-          scope.modifierTemplater = templater;
-          transcludeFn(scope, function(clone) {
-            element.append(clone);
-          });
-        };
+        elem.addClass('list__item ons-list-item-inner');
+        elem.addClass(templater('list__item--*'));
       }
     };
   });

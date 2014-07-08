@@ -57,31 +57,6 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/list.tpl",
-    "<div class=\"list {{modifierTemplater('list--*')}}\">\n" +
-    "  <ul class=\"list__container {{modifierTemplater('list--*__container')}} ons-list-inner\">\n" +
-    "  </ul>\n" +
-    "</div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/list_item.tpl",
-    "<li class=\"list__item {{modifierTemplater('list__item--*')}} ons-list-item-inner\"></li>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("templates/radio_button.tpl",
     "<label class=\"radio-button {{modifierTemplater('radio-button--*')}}\">\n" +
     "  {{leftLabel}}\n" +
