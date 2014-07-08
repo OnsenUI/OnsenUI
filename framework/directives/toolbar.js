@@ -111,13 +111,14 @@ limitations under the License.
   }
 
   function ensureToolbarItemElements(element) {
+    var center;
     if (hasCenterClassElementOnly(element)) {
-      var center = ensureCenterContainer(element);
+      center = ensureCenterContainer(element);
       element.contents().remove();
       element.append(center);
     } else {
+      center = ensureCenterContainer(element);
       var left = ensureLeftContainer(element);
-      var center = ensureCenterContainer(element);
       var right = ensureRightContainer(element);
 
       element.contents().remove();

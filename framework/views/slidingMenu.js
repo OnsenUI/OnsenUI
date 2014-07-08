@@ -239,7 +239,7 @@ limitations under the License.
       },
 
       _getAnimatorOption: function() {
-        var animator = SlidingMenuView._animatorDict[this._attrs['type']];
+        var animator = SlidingMenuView._animatorDict[this._attrs.type];
 
         if (!(animator instanceof SlidingMenuAnimator)) {
           animator = SlidingMenuView._animatorDict['default'];
@@ -453,9 +453,8 @@ limitations under the License.
               break;
             }
 
-            var distance = deltaDistance > 0
-              ? deltaDistance
-              : deltaDistance + this._logic.getMaxDistance() ;
+            var distance = deltaDistance > 0 ?
+              deltaDistance : deltaDistance + this._logic.getMaxDistance();
 
             this._logic.translate(distance);
 
