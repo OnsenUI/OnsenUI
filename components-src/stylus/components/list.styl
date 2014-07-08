@@ -19,8 +19,7 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
-var-background-color--list := #F0EFF4
-var-background-color--list-container := #fff
+var-background-color--list := #fff
 var-background-color--list-header := #f0eff4
 var-color--list-header := #1F1F21
 var-color--list-item := #1F1F21
@@ -28,7 +27,7 @@ var-background-color--list-item := #fff
 var-background-color--list-item--active := #D9D9D9
 var-list-item-separator-color := #ddd
 
-var-padding--list-container = 0
+var-padding--list = 0
 var-font-size--list-header = 15px
 var-list-border = 1px solid var-list-item-separator-color
 
@@ -44,8 +43,8 @@ var-min-height--list-header = 24px
 var-text-shadow--list-header = none
 var-font-weight--list-header = var-font-weight--large
 
-var-border-top--list-container = 1px solid var-list-item-separator-color
-var-border-bottom--list-container = 1px solid var-list-item-separator-color
+var-border-top--list = 1px solid var-list-item-separator-color
+var-border-bottom--list = 1px solid var-list-item-separator-color
 
 var-border-top--list-item--2 = 1px solid var-list-item-separator-color
 var-border-bottom--list-item = 1px solid var-list-item-separator-color
@@ -57,31 +56,32 @@ var-border-top--list-item = none
   name: List
   class: list
   markup:
-    <div class="list">
-      <ul class="list__container">
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+    </ul>
 */
 
 list()
   reset-base()
   reset-cursor()
   reset-font()
+  reset-list()
   overflow auto
+  display block
   -webkit-overflow-scrolling touch
 
 list__header()
   margin 0
+  padding 0
+  list-style none
   text-align left
-
-list__container()
-  reset-list()
+  display block
+  box-sizing border-box
 
 list__item()
   margin 0
@@ -89,12 +89,7 @@ list__item()
   position relative
   list-style none
   box-sizing border-box
-
-.list
-  list()
-  border-top var-border-top--list-container
-  border-bottom var-border-bottom--list-container
-  background-color var-background-color--list
+  display block
 
 .list--noborder
   border-top none
@@ -113,10 +108,14 @@ list__item()
   min-height var-min-height--list-header
   line-height @min-height
 
-.list__container
-  list__container()
-  padding var-padding--list-container
-  background-color var-background-color--list-container
+.list
+  list()
+  padding var-padding--list
+  background-color var-background-color--list
+  border-top var-border-top--list
+  border-bottom var-border-bottom--list
+  background-color var-background-color--list
+
 
 .list__item
   list__item()
@@ -157,20 +156,17 @@ list__item()
   class: list--noborder
   use: List
   markup:
-    <div class="list--noborder">
-      <ul class="list__container">
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list list--noborder">
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+    </ul>
  */
 
 .list--noborder
-  list()
   background-color var-background-color--list
   border-top none
   border-bottom none
@@ -180,17 +176,20 @@ list__item()
   class: list__header
   use: List
   markup:
-    <div class="list">
-      <h3 class="list__header">Category</h3>
-      <ul class="list__container">
-        <li class="list__item list__item__line-height">
-          Item
-        </li>
-        <li class="list__item list__item__line-height">
-          Item
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__header">
+        Header
+      </li>
+      <li class="list__item">
+        Item
+      </li>
+      <li class="list__header">
+        Header
+      </li>
+      <li class="list__item">
+        Item
+      </li>
+    </ul>
  */
 
 /*! topdoc
@@ -198,13 +197,11 @@ list__item()
   class: list__item--tappable
   use: List
   markup:
-    <div class="list">
-      <ul class="list__container">
-        <li class="list__item list__item--tappable">
-          <span class="list__item__line-height">Tappable Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        Tappable Item
+      </li>
+    </ul>
  */
 
 .list__item--tappable
@@ -222,16 +219,14 @@ list__item()
   class: list__item--chevron
   use: List
   markup:
-    <div class="list">
-      <ul class="list__container">
-        <li class="list__item list__item--chevron">
-          <span class="list__item__line-height">Tappable Item</span>
-        </li>
-        <li class="list__item list__item--chevron">
-          <span class="list__item__line-height">Tappable Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__item list__item--chevron">
+        Tappable Item
+      </li>
+      <li class="list__item list__item--chevron">
+        Tappable Item
+      </li>
+    </ul>
  */
 
 .list__item--chevron

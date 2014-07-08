@@ -1946,17 +1946,39 @@ select:focus {
   name: List
   class: list
   markup:
-    <div class="list">
-      <ul class="list__container">
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+    </ul>
 */
+.list--noborder {
+  border-top: none;
+  border-bottom: none;
+}
+.list__header {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  display: block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0 0 0 10px;
+  font-size: 15px;
+  font-weight: 500;
+  background-color: #f0eff4;
+  color: #1f1f21;
+  text-shadow: none;
+  border-top: none;
+  border-bottom: none;
+  min-height: 24px;
+  line-height: 24px;
+}
 .list {
   padding: 0;
   margin: 0;
@@ -1973,36 +1995,17 @@ select:focus {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #f0eff4;
-}
-.list--noborder {
-  border-top: none;
-  border-bottom: none;
-}
-.list__header {
-  margin: 0;
-  text-align: left;
-  padding: 0 0 0 10px;
-  font-size: 15px;
-  font-weight: 500;
-  background-color: #f0eff4;
-  color: #1f1f21;
-  text-shadow: none;
-  border-top: none;
-  border-bottom: none;
-  min-height: 24px;
-  line-height: 24px;
-}
-.list__container {
   padding: 0;
   margin: 0;
   list-style-type: none;
   text-align: left;
+  overflow: auto;
+  display: block;
+  -webkit-overflow-scrolling: touch;
   padding: 0;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   background-color: #fff;
 }
 .list__item {
@@ -2013,6 +2016,7 @@ select:focus {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  display: block;
   padding: 0 0 0 10px;
   margin: 0 0 0 0;
   border-top: none;
@@ -2053,36 +2057,17 @@ select:focus {
   class: list--noborder
   use: List
   markup:
-    <div class="list--noborder">
-      <ul class="list__container">
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list list--noborder">
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+    </ul>
  */
 .list--noborder {
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  background-color: #f0eff4;
+  background-color: #fff;
   border-top: none;
   border-bottom: none;
 }
@@ -2091,30 +2076,31 @@ select:focus {
   class: list__header
   use: List
   markup:
-    <div class="list">
-      <h3 class="list__header">Category</h3>
-      <ul class="list__container">
-        <li class="list__item list__item__line-height">
-          Item
-        </li>
-        <li class="list__item list__item__line-height">
-          Item
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__header">
+        Header
+      </li>
+      <li class="list__item">
+        Item
+      </li>
+      <li class="list__header">
+        Header
+      </li>
+      <li class="list__item">
+        Item
+      </li>
+    </ul>
  */
 /* topdoc
   name: Tappable List
   class: list__item--tappable
   use: List
   markup:
-    <div class="list">
-      <ul class="list__container">
-        <li class="list__item list__item--tappable">
-          <span class="list__item__line-height">Tappable Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        Tappable Item
+      </li>
+    </ul>
  */
 .list__item--tappable {
   -webkit-transition: background-color 0.2s linear;
@@ -2140,16 +2126,14 @@ select:focus {
   class: list__item--chevron
   use: List
   markup:
-    <div class="list">
-      <ul class="list__container">
-        <li class="list__item list__item--chevron">
-          <span class="list__item__line-height">Tappable Item</span>
-        </li>
-        <li class="list__item list__item--chevron">
-          <span class="list__item__line-height">Tappable Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__item list__item--chevron">
+        Tappable Item
+      </li>
+      <li class="list__item list__item--chevron">
+        Tappable Item
+      </li>
+    </ul>
  */
 .list__item--chevron {
   -webkit-transition: background-color 0.2s linear;
