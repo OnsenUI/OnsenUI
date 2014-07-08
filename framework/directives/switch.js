@@ -25,6 +25,7 @@ limitations under the License.
  * @param checked Wether the switch is checked.
  * @param ng-model
  * @param var Variable name to refer this element view.
+ * @param modifier Preset modifier is list-item.
  */
 (function(){
   'use strict';
