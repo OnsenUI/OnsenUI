@@ -215,6 +215,34 @@ list__item()
   transition none
 
 /*! topdoc
+  name: Switch in List Item
+  class: switch--list-item
+  use: Switch, List
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        Label
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input" checked>
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+      <li class="list__item">
+        Label
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input">
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+    </ul>
+*/
+
+.switch--list-item
+  float right
+  margin-top 6px
+  margin-right 10px
+
+/*! topdoc
   name: List Item with Chevron
   class: list__item--chevron
   use: List
