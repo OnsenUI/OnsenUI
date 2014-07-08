@@ -46,17 +46,6 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/column.tpl",
-    "<div class=\"col col-{{align}} ons-col-inner\" ng-style=\"style\"></div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("templates/icon.tpl",
     "<i class=\"fa fa-{{icon}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}\" ng-class=\"sizeClass\" ng-style=\"style\"></i>\n" +
     "");

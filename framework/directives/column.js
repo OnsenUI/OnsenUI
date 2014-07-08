@@ -33,25 +33,26 @@ limitations under the License.
   module.directive('onsCol', function($timeout, $onsen) {
     return {
       restrict: 'E',
-      replace: true,
-      transclude: true,
-      scope: {
-        align: '@'
-      },
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/column.tpl',
-      compile: function(elt, attrs, transclude) {
+      replace: false,
 
-        return function(scope, elt, attrs) {
+      transclude: false,
+      scope: false,
 
-          if (attrs.ngController) {
-            throw new Error('This element can\'t accept ng-controller directive.');
-          }
+      compile: function(element, attrs, transclude) {
+        element.addClass('col ons-col-inner');
+
+        return function(scope, element, attrs) {
+
+          attrs.$observe('align', function(align) {
+            element.removeClass('col-top col-center col-bottom');
+            element.addClass('col-' + align);
+          });
 
           attrs.$observe('size', function(size) {
             size = ('' + size).trim();
             size = size.match(/^\d+$/) ? size + '%' : size;
 
-            scope.style = {
+            element.css({
               '-webkit-box-flex': '0',
               '-webkit-flex': '0 0 ' + size,
               '-moz-box-flex': '0',
@@ -59,11 +60,7 @@ limitations under the License.
               '-ms-flex': '0 0 ' + size,
               'flex': '0 0 ' + size,
               'max-width': size
-            };
-          });
-
-          transclude(scope.$parent, function(clone) {
-            elt.append(clone);
+            });
           });
         };
       }
