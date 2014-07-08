@@ -22,7 +22,7 @@ limitations under the License.
  * @description
  * Use with <ons-row> to layout component.
  * @param align Vertical align the column. Valid values are [top/center/bottom].
- * @param size The width of the column. Valid values are css "width" value. eg. "10%", "50px"
+ * @param width The width of the column. Valid values are css "width" value. eg. "10%", "50px"
  * @note For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.
  */
 (function(){
@@ -35,6 +35,8 @@ limitations under the License.
       restrict: 'E',
       replace: false,
 
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
       transclude: false,
       scope: false,
 
@@ -45,23 +47,38 @@ limitations under the License.
 
           attrs.$observe('align', function(align) {
             element.removeClass('col-top col-center col-bottom');
-            element.addClass('col-' + align);
+            if (align === 'top' || align === 'left' || align === 'right') {
+              element.addClass('col-' + align);
+            }
           });
 
+          attrs.$observe('width', function(width) {
+            updateWidth(width);
+          });
+
+          // For BC
           attrs.$observe('size', function(size) {
-            size = ('' + size).trim();
-            size = size.match(/^\d+$/) ? size + '%' : size;
-
-            element.css({
-              '-webkit-box-flex': '0',
-              '-webkit-flex': '0 0 ' + size,
-              '-moz-box-flex': '0',
-              '-moz-flex': '0 0 ' + size,
-              '-ms-flex': '0 0 ' + size,
-              'flex': '0 0 ' + size,
-              'max-width': size
-            });
+            if (!attrs.width) {
+              updateWidth(size);
+            }
           });
+
+          function updateWidth(width) {
+            width = ('' + width).trim();
+            if (width.length > 0) {
+              width = width.match(/^\d+$/) ? width + '%' : width;
+
+              element.css({
+                '-webkit-box-flex': '0',
+                '-webkit-flex': '0 0 ' + width,
+                '-moz-box-flex': '0',
+                '-moz-flex': '0 0 ' + width,
+                '-ms-flex': '0 0 ' + width,
+                'flex': '0 0 ' + width,
+                'max-width': width
+              });
+            }
+          }
         };
       }
     };
