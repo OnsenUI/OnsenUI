@@ -32,69 +32,82 @@ limitations under the License.
     return {
       restrict: 'A',
       replace: false,
-      transclude: true,
-      scope: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/if_platform.tpl',
-      link: function($scope, element, attrs) {
 
-        if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controller directive.');
-        }
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      transclude: false,
+      scope: false,
 
-        var platform;
+      compile: function(element) {
+        element.addClass('ons-if-platform-inner');
+        element.css('display', 'none');
 
-        var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-        // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
-        var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
-        var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-        // At least Safari 3+: "[object HTMLElementConstructor]"
-        var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
-        var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
+        var platform = getPlatformString();
 
-        if(isOpera){
-          platform = "opera";
-        }
+        return function($scope, element, attrs) {
+          attrs.$observe('onsIfPlatform', function(userPlatform) {
+            if (userPlatform) {
+              update();
+            }
+          });
 
-        if(isFirefox){
-          platform = "firefox";
-        }
+          update();
 
-        if(isSafari){
-          platform = "safari";
-        }
-
-        if(isChrome){
-          platform = "chrome";
-        }
-
-        if(isIE){
-          platform = "ie";
-        }
-
-        if (navigator.userAgent.match(/Android/i)) {
-          platform = "android";
-        }
-
-        if ((navigator.userAgent.match(/BlackBerry/i)) || (navigator.userAgent.match(/RIM Tablet OS/i)) || (navigator.userAgent.match(/BB10/i))) {
-          platform = "blackberry";
-        }
-
-        if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-          platform = "ios";
-        }
-
-        if (navigator.userAgent.match(/IEMobile/i)) {
-          platform = "windows";
-        }
-
-        $scope.platform = platform;
-
-
-        attrs.$observe('onsIfPlatform', function(userPlatform) {
-          if (userPlatform) {
-            $scope.userPlatform = userPlatform.toLowerCase();
+          function update() {
+            if (attrs.onsIfPlatform.toLowerCase() === platform.toLowerCase()) {
+              element.css('display', 'block');
+            } else {
+              element.css('display', 'none');
+            }
           }
-        });
+        };
+
+        function getPlatformString() {
+          // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
+          var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+          if (isOpera) {
+            return 'opera';
+          }
+
+          var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
+          if (isFirefox) {
+            return 'firefox';
+          }
+
+          var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+          // At least Safari 3+: "[object HTMLElementConstructor]"
+          if (isSafari) {
+            return 'safari';
+          }
+
+          var isChrome = !!window.chrome && !isOpera; // Chrome 1+
+          if (isChrome) {
+            return 'chrome';
+          }
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
+          if (isIE) {
+            return 'ie';
+          }
+
+          if (navigator.userAgent.match(/Android/i)) {
+            return 'android';
+          }
+
+          if ((navigator.userAgent.match(/BlackBerry/i)) || (navigator.userAgent.match(/RIM Tablet OS/i)) || (navigator.userAgent.match(/BB10/i))) {
+            return 'blackberry';
+          }
+
+          if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+            return 'ios';
+          }
+
+          if (navigator.userAgent.match(/IEMobile/i)) {
+            return 'windows';
+          }
+
+          return 'unknown';
+        }
       }
     };
   });

@@ -33,6 +33,8 @@ limitations under the License.
       restrict: 'A',
       replace: false,
 
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
       transclude: false,
       scope: false,
 
@@ -49,7 +51,7 @@ limitations under the License.
           update();
 
           function update() {
-            var userOrientation = attrs.onsIfOrientation;
+            var userOrientation = ('' + attrs.onsIfOrientation).toLowerCase();
             var orientation = getLandscapeOrPortraitFromInteger(window.orientation);
 
             if (userOrientation && (userOrientation === 'portrait' || userOrientation === 'landscape')) {

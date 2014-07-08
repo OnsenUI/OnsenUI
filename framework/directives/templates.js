@@ -57,19 +57,6 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/if_platform.tpl",
-    "<div class=\"ons-if-platform-inner\" ng-show=\"platform == userPlatform\" ng-transclude>\n" +
-    "\n" +
-    "</div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("templates/list.tpl",
     "<div class=\"list {{modifierTemplater('list--*')}}\">\n" +
     "  <ul class=\"list__container {{modifierTemplater('list--*__container')}} ons-list-inner\">\n" +
