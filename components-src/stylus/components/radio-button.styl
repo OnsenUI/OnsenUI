@@ -80,18 +80,20 @@ radio-button--disabled()
 
 .radio-button > input[type="radio"]
   hide-input()
-  height var-size--radio-button
-  width var-size--radio-button
-  margin-top 0
-  margin-right -@width
-  margin-bottom -@height
-  margin-left 0
+  height 0px
+  width 0px
 
-.radio-button > input[type="radio"]:active
+.radio-button > input[type="radio"]:active,
+.radio-button > input[type="radio"]:focus
   outline 0
+  -webkit-tap-highlight-color rgba(0, 0, 0, 0)
 
 .radio-button > input[type="radio"]:checked + .radio-button__checkmark:after
   opacity 1
+
+.radio-button > input[type="radio"]:checked + .radio-button__checkmark:before
+  background transparent
+  border none
 
 .radio-button
   radio-button__label()
