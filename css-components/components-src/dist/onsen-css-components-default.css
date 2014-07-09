@@ -234,6 +234,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -241,6 +242,7 @@ select:focus {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
+  line-height: 1;
   -webkit-appearance: none;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -347,6 +349,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -391,6 +394,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -478,6 +482,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -553,6 +558,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -635,6 +641,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -726,6 +733,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -817,6 +825,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -909,6 +918,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -996,6 +1006,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1368,6 +1379,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -1511,6 +1523,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1986,6 +1999,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -2369,6 +2383,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2376,6 +2391,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
+  line-height: 1;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2439,6 +2455,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2446,6 +2463,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
+  line-height: 1;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2502,6 +2520,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2509,6 +2528,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
+  line-height: 1;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2566,6 +2586,7 @@ webkit-input-placeholder() {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2573,6 +2594,7 @@ webkit-input-placeholder() {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
+  line-height: 1;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2639,6 +2661,7 @@ webkit-input-placeholder() {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2690,6 +2713,7 @@ webkit-input-placeholder() {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
