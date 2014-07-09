@@ -200,12 +200,16 @@ limitations under the License.
         this._boundHandleEvent = this._handleEvent.bind(this);
         this._bindEvents();
 
-        if (attrs.abovePage) {
-          this.setAbovePage(attrs.abovePage);
+        if (attrs.mainPage) {
+          this.setMainPage(attrs.mainPage);
+        } else if (attrs.abovePage) {
+          this.setMainPage(attrs.abovePage);
         }
 
-        if (attrs.behindPage) {
-          this.setBehindPage(attrs.behindPage);
+        if (attrs.menuPage) {
+          this.setMenuPage(attrs.menuPage);
+        } else if (attrs.behindPage) {
+          this.setMenuPage(attrs.behindPage);
         }
 
         var unlock = this._doorLock.lock();
@@ -394,7 +398,7 @@ limitations under the License.
        * @param {Boolean} [options.closeMenu]
        * @param {Boolean} [options.callback]
        */
-      setBehindPage: function(page, options) {
+      setMenuPage: function(page, options) {
         if (page) {
           options = options || {};
           options.callback = options.callback || function() {};
@@ -414,14 +418,17 @@ limitations under the License.
         }
       },
 
+      setBehindPage: function() {
+        return this.setMenuPage.apply(this, arguments);
+      },
+
       /**
        * @param {String} pageUrl
        * @param {Object} options
        * @param {Boolean} [options.closeMenu]
        * @param {Boolean} [options.callback]
        */
-      setAbovePage: function(pageUrl, options) {
-
+      setMainPage: function(pageUrl, options) {
         options = options || {};
         options.callback = options.callback || function() {};
 
@@ -448,6 +455,10 @@ limitations under the License.
         } else {
           throw new Error('cannot set undefined page');
         }
+      },
+
+      setAbovePage: function(pageUrl, options) {
+        return this.setMainPage.apply(this, arguments);
       },
 
       _handleEvent: function(event) {

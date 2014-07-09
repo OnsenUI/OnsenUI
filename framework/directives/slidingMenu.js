@@ -25,10 +25,12 @@ limitations under the License.
  * @param above-page The url of the page to be set to the above layer
  * @param swipable Wether to enable swipe interaction
  * @param swipe-target-width The width of swipable area calculated from the left (in pixel). Eg. Use this to enable swipe only when the finger touch on the left edge.
- * @param max-slide-distance How far the above page will slide open. Can specify both in px and %
+ * @param max-slide-distance How far the above page will slide open. Can specify both in px and %. eg. 90%, 200px
  * @param var Variable name to refer this sliding menu.
- * @property setAbovePage(pageUrl) Show the page specified in pageUrl in the above layer.
- * @property setBehindPage(pageUrl) Show the page specified in pageUrl in the behind layer.
+ * @property setMainPage(pageUrl, [options]) Show the page specified in pageUrl in the main contents pane.
+ * @property setMenuPage(pageUrl, [options]) Show the page specified in pageUrl in the side menu pane.
+ * @property [Deprecated] setAbovePage(pageUrl) Show the page specified in pageUrl in the above layer.
+ * @property [Deprecated] setBehindPage(pageUrl) Show the page specified in pageUrl in the behind layer.
  * @property openMenu() Slide the above layer to reveal the layer behind.
  * @property closeMenu() Slide the above layer to hide the layer behind.
  * @property toggleMenu() Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.
