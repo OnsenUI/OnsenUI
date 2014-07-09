@@ -30,50 +30,48 @@ limitations under the License.
        * @param {String} options.width "width" style value
        * @param {Boolean} options.isRight
        */
-      onAttached: function(element, mainPage, menuPage, options) {
+      setup: function(element, mainPage, menuPage, options) {
       },
 
       /**
-       * @param {jqLite} menuPage
-       * @param {Number} width
        * @param {Object} options
-       * @param {Object} options.isRight
+       * @param {Boolean} options.isRight
+       * @param {Boolean} options.isOpened
+       * @param {String} options.width
        */
-      updateMenuPageWidth: function(menuPage, width, options) {
+      onResized: function(options) {
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        * @param {Function} callback
        */
-      open: function(mainPage, menuPage, callback) {
+      openMenu: function(callback) {
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        * @param {Function} callback
        */
-      close: function(mainPage, menuPage, callback) {
+      closeClose: function(callback) {
       },
 
       /**
-       * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        */
-      onDetached: function(element, mainPage, menuPage) {
+      destroy: function() {
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        * @param {Object} options
        * @param {Number} options.distance
        * @param {Number} options.maxDistance
        */
-      translate: function(mainPage, menuPage, options) {
+      translateMenu: function(mainPage, menuPage, options) {
+      },
+
+      /**
+       * @return {SlidingMenuAnimator}
+       */
+      copy: function() {
+        throw new Error('Override copy method.');
       }
     });
   });

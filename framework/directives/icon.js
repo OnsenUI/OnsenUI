@@ -25,7 +25,7 @@ limitations under the License.
  * @param size The sizes of the icon. Valid values are [lg/2x/3x/4x/5x] or css font-size value.
  * @param rotate The degree to rotate the icon. Valid values are [90/180/270]
  * @param flip Flip the icon. Valid values are [horizontal/vertial]
- * @param fixed-width When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are [true/false]
+ * @param fixed-width When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are [true/false]. Default is true.
  * @param spin Whether to spin the icon. Valid values are [true/false]
  */
 (function(){
@@ -76,11 +76,11 @@ limitations under the License.
           }
         });
 
-        attrs.$observe('fixedWidth', function(fixedWidth){
-          if (fixedWidth === 'true') {
-            $scope.fixedWidth = 'fw';
-          } else {
+        attrs.$observe('fixedWidth', function(fixedWidth) {
+          if (fixedWidth === 'false') {
             $scope.fixedWidth = '';
+          } else {
+            $scope.fixedWidth = 'fw';
           }
         });
       }

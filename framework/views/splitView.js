@@ -18,7 +18,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('SplitView', function($compile, DefaultSlidingMenuAnimator, $onsen) {
+  module.factory('SplitView', function($compile, RevealSlidingMenuAnimator, $onsen) {
     var SPLIT_MODE = 0;
     var COLLAPSE_MODE = 1;
     var MAIN_PAGE_RATIO = 0.9;
@@ -51,7 +51,7 @@ limitations under the License.
         window.addEventListener('orientationchange', this._onOrientationChange.bind(this));
         window.addEventListener('resize', this._onResize.bind(this));
 
-        this._animator = new DefaultSlidingMenuAnimator();
+        this._animator = new RevealSlidingMenuAnimator();
 
         this._element.css('display', 'none');
 
@@ -225,8 +225,11 @@ limitations under the License.
 
           this._onSwipableChanged(this._scope.swipable);
 
-          this._animator.onAttached(
-            this._element, this._abovePage, this._behindPage
+          this._animator.setup(
+            this._element,
+            this._abovePage,
+            this._behindPage,
+            {isRight: false, width: '90%'}
           );
 
           this._translate(0);
@@ -235,11 +238,7 @@ limitations under the License.
 
       _activateSplitMode: function() {
         if (this._mode !== SPLIT_MODE) {
-          this._animator.onDetached(
-            this._element,
-            this._abovePage,
-            this._behindPage
-          );
+          this._animator.destroy();
 
           this._behindPage.removeAttr('style');
           this._abovePage.removeAttr('style');
@@ -327,15 +326,11 @@ limitations under the License.
               var unlock = self._doorLock.lock();
               self._currentX = 0;
 
-              self._animator.close(
-                self._abovePage,
-                self._behindPage,
-                function() {
-                  unlock();
-                  self._onTransitionEnd();
-                  callback();
-                }
-              );
+              self._animator.closeMenu(function() {
+                unlock();
+                self._onTransitionEnd();
+                callback();
+              });
             });
           }
         }
@@ -356,15 +351,11 @@ limitations under the License.
               var unlock = self._doorLock.lock();
               self._currentX = self._max;
 
-              self._animator.open(
-                self._abovePage, 
-                self._behindPage, 
-                function() {
-                  unlock();
-                  self._onTransitionEnd();
-                  callback();
-                }
-              );
+              self._animator.openMenu(function() {
+                unlock();
+                self._onTransitionEnd();
+                callback();
+              });
             });
           }
         }
@@ -387,7 +378,7 @@ limitations under the License.
             maxDistance: this._max
           };
 
-          this._animator.translate(this._abovePage, this._behindPage, options);
+          this._animator.translateMenu(options);
         }
       },
 

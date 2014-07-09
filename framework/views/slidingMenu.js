@@ -51,6 +51,9 @@ limitations under the License.
         throw new Error('maxDistance must be greater then zero.');
       }
 
+      if (this.isOpened()) {
+        this._distance = maxDistance;
+      }
       this._maxDistance = maxDistance;
     },
 
@@ -151,7 +154,7 @@ limitations under the License.
   MicroEvent.mixin(SlidingMenuViewModel);
 
   var MAIN_PAGE_RATIO = 0.9;
-  module.factory('SlidingMenuView', function($onsen, $compile, SlidingMenuAnimator, DefaultSlidingMenuAnimator, 
+  module.factory('SlidingMenuView', function($onsen, $compile, SlidingMenuAnimator, RevealSlidingMenuAnimator, 
                                              PushSlidingMenuAnimator, OverlaySlidingMenuAnimator) {
 
     var SlidingMenuView = Class.extend({
@@ -216,7 +219,7 @@ limitations under the License.
           this._behindPage.css({opacity: 1});
 
           this._animator = this._getAnimatorOption();
-          this._animator.onAttached(
+          this._animator.setup(
             this._element,
             this._abovePage,
             this._behindPage,
@@ -232,11 +235,14 @@ limitations under the License.
       },
 
       _refreshBehindPageWidth: function() {
-        if ('maxSlideDistance' in this._attrs && this._animator) {
-          this._animator.updateMenuPageWidth(
-            this._behindPage,
-            this._attrs.maxSlideDistance,
-            {isRight: this._isRightMenu}
+        var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
+
+        if (('maxSlideDistance' in this._attrs) && this._animator) {
+          this._animator.onResized(
+            {
+              isOpened: this._logic.isOpened(),
+              width: width
+            }
           );
         }
       },
@@ -256,7 +262,7 @@ limitations under the License.
           animator = SlidingMenuView._animatorDict['default'];
         }
 
-        return animator;
+        return animator.copy();
       },
 
       _onSwipableChanged: function(swipable) {
@@ -451,7 +457,7 @@ limitations under the License.
         }
 
         if (this._isInsideIgnoredElement(event.target)){
-          event._gesture.stopDetect();
+          event.gesture.stopDetect();
         }
 
         switch (event.type) {
@@ -495,6 +501,7 @@ limitations under the License.
               this.close();
             }
 
+            event.gesture.stopDetect();
             break;
 
           case 'swiperight':
@@ -506,6 +513,7 @@ limitations under the License.
               this.open();
             }
 
+            event.gesture.stopDetect();
             break;
 
           case 'release':
@@ -561,7 +569,7 @@ limitations under the License.
         callback = callback || function() {};
 
         var unlock = this._doorLock.lock();
-        this._animator.close(this._abovePage, this._behindPage, function() {
+        this._animator.closeMenu(function() {
           unlock();
           this.emit('postclose');
           callback();
@@ -591,7 +599,7 @@ limitations under the License.
         callback = callback || function() {};
         var unlock = this._doorLock.lock();
 
-        this._animator.open(this._abovePage, this._behindPage, function() {
+        this._animator.openMenu(function() {
           unlock();
           this.emit('postopen');
           callback();
@@ -620,15 +628,15 @@ limitations under the License.
        * @param {Object} event
        */
       _translate: function(event) {
-        this._animator.translate(this._abovePage, this._behindPage, event);
+        this._animator.translateMenu(event);
       }
     });
 
     // Preset sliding menu animators.
     SlidingMenuView._animatorDict = {
-      'default': new DefaultSlidingMenuAnimator(),
+      'default': new RevealSlidingMenuAnimator(),
       'overlay': new OverlaySlidingMenuAnimator(),
-      'reveal': new DefaultSlidingMenuAnimator(),
+      'reveal': new RevealSlidingMenuAnimator(),
       'push': new PushSlidingMenuAnimator()
     };
 

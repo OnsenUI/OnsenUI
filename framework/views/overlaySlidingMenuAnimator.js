@@ -26,6 +26,10 @@ limitations under the License.
       _blackMask: undefined,
 
       _isRight: false,
+      _element: false,
+      _menuPage: false,
+      _mainPage: false,
+      _width: false,
 
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
@@ -35,11 +39,13 @@ limitations under the License.
        * @param {String} options.width "width" style value
        * @param {Boolean} options.isRight
        */
-      onAttached: function(element, mainPage, menuPage, options) {
+      setup: function(element, mainPage, menuPage, options) {
         options = options || {};
-        options.width = options.width || '90%';
-
+        this._width = options.width || '90%';
         this._isRight = !!options.isRight;
+        this._element = element;
+        this._mainPage = mainPage;
+        this._menuPage = menuPage;
 
         menuPage.css('box-shadow', '0px 0 10px 0px rgba(0, 0, 0, 0.2)');
         menuPage.css({
@@ -76,50 +82,61 @@ limitations under the License.
       },
 
       /**
-       * @param {jqLite} menuPage
-       * @param {Number} width
        * @param {Object} options
-       * @param {Boolean} options.isRight
+       * @param {String} options.width
        */
-      updateMenuPageWidth: function(menuPage, width, options) {
-        menuPage.css('width', width);
+      onResized: function(options) {
+        this._menuPage.css('width', options.width);
+
+        if (this._isRight) {
+          this._menuPage.css({
+            right: '-' + options.width,
+            left: 'auto'
+          });
+        } else {
+          this._menuPage.css({
+            right: 'auto',
+            left: '-' + options.width
+          });
+        }
+
+        if (options.isOpened) {
+          var max = this._menuPage[0].clientWidth;
+          var menuStyle = this._generateMenuPageStyle(max);
+          animit(this._menuPage[0]).queue(menuStyle).play();
+        }
       },
 
       /**
-       * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        */
-      onDetached: function(element, mainPage, menuPage) {
+      destroy: function() {
         if (this._blackMask) {
           this._blackMask.remove();
           this._blackMask = null;
         }
 
-        mainPage.removeAttr('style');
-        menuPage.removeAttr('style');
+        this._mainPage.removeAttr('style');
+        this._menuPage.removeAttr('style');
+
+        this._element = this._mainPage = this._menuPage = null;
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        * @param {Function} callback
        */
-      open: function(mainPage, menuPage, callback) {
+      openMenu: function(callback) {
 
-        menuPage.css('display', 'block');
+        this._menuPage.css('display', 'block');
         this._blackMask.css('display', 'block');
 
-        var max = menuPage[0].clientWidth;
-
-        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, max);
+        var max = this._menuPage[0].clientWidth;
+        var menuStyle = this._generateMenuPageStyle(max);
+        var mainPageStyle = this._generateMainPageStyle(max);
 
         setTimeout(function() {
 
-          animit(mainPage[0])
-            .queue({
-              opacity: 0.9
-            }, {
+          animit(this._mainPage[0])
+          .queue(mainPageStyle, {
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
@@ -129,80 +146,94 @@ limitations under the License.
             })
             .play();
 
-          animit(menuPage[0])
-            .queue(behindStyle, {
+          animit(this._menuPage[0])
+            .queue(menuStyle, {
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .play();
 
-        }, 1000 / 60);
+        }.bind(this), 1000 / 60);
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        * @param {Function} callback
        */
-      close: function(mainPage, menuPage, callback) {
+      closeMenu: function(callback) {
         this._blackMask.css({display: 'block'});
 
-        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, 0);
+        var menuPageStyle = this._generateMenuPageStyle(0);
+        var mainPageStyle = this._generateMainPageStyle(0);
 
         setTimeout(function() {
 
-          animit(mainPage[0])
-            .queue({
-              opacity: 1
-            }, {
+          animit(this._mainPage[0])
+            .queue(mainPageStyle, {
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .queue(function(done) {
-              menuPage.css('display', 'none');
+              this._menuPage.css('display', 'none');
               callback();
               done();
-            })
+            }.bind(this))
             .play();
 
-          animit(menuPage[0])
-            .queue(behindStyle, {
+          animit(this._menuPage[0])
+            .queue(menuPageStyle, {
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .play();
 
-        }, 1000 / 60);
+        }.bind(this), 1000 / 60);
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        * @param {Object} options
        * @param {Number} options.distance
        * @param {Number} options.maxDistance
        */
-      translate: function(mainPage, menuPage, options) {
+      translateMenu: function(options) {
 
-        menuPage.css('display', 'block');
+        this._menuPage.css('display', 'block');
         this._blackMask.css({display: 'block'});
 
-        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, Math.min(options.maxDistance, options.distance));
+        var menuPageStyle = this._generateMenuPageStyle(Math.min(options.maxDistance, options.distance));
+        var mainPageStyle = this._generateMainPageStyle(Math.min(options.maxDistance, options.distance));
 
-        animit(menuPage[0])
-          .queue(behindStyle)
+        animit(this._menuPage[0])
+          .queue(menuPageStyle)
+          .play();
+
+        animit(this._mainPage[0])
+          .queue(mainPageStyle)
           .play();
       },
 
-      _generateBehindPageStyle: function(mainPage, behindPage, distance) {
-        var max = behindPage[0].clientWidth;
+      _generateMenuPageStyle: function(distance) {
+        var max = this._menuPage[0].clientWidth;
 
-        var behindX = this._isRight ? -distance : distance;
-        var behindTransform = 'translate3d(' + behindX + 'px, 0, 0)';
+        var x = this._isRight ? -distance : distance;
+        var transform = 'translate3d(' + x + 'px, 0, 0)';
 
         return {
-          transform: behindTransform
+          transform: transform,
+          'box-shadow': distance == 0 ? 'none' : '0px 0 10px 0px rgba(0, 0, 0, 0.2)'
         };
+      },
+
+      _generateMainPageStyle: function(distance) {
+        var max = this._menuPage[0].clientWidth;
+        var opacity = 1 - (0.1 * distance / max);
+
+        return {
+          opacity: opacity
+        };
+      },
+
+      copy: function() {
+        return new OverlaySlidingMenuAnimator();
       }
     });
 
