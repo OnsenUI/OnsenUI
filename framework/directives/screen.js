@@ -22,6 +22,7 @@ limitations under the License.
  * @description
  * The root element. This is usually put inside <body> tag.
  * @param page The root page of this screen element
+ * @param var Variable name to refer this screen.
  * @property presentPage(pageUrl) Presents a page
  * @property dismissPage() Dismisses the page that was presented
  * @demoURL

@@ -21,6 +21,7 @@ limitations under the License.
  * @name ons-list
  * @description
  * The container for list-item. Similar to <ul> but styled for mobile.
+ * @param modifier
  * @demoURL
  * OnsenUI/demo/list/
  */

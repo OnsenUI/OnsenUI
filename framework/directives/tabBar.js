@@ -20,6 +20,7 @@ limitations under the License.
  * @id tabbar
  * @name ons-tabbar
  * @param hide-tabs Wether to hide the tabs. Valid values are [true/false] or angular binding. eg: {{ shouldHide }}
+ * @param var Variable name to refer this tabbar.
  * @description
  * Used with tabbar-item to manage pages using tabs.
  */

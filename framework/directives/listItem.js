@@ -19,6 +19,7 @@ limitations under the License.
  * @ngdoc directive
  * @id list-item
  * @name ons-list-item
+ * @param modifier
  * @description
  * Works like <li> but styled for mobile. Must be put inside ons-list tag.
  */

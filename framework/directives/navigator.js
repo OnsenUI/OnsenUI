@@ -23,6 +23,7 @@ limitations under the License.
  *  [en]Manages the page navigation backed by page stack.[/en]
  *  [ja]ページスタックを用いたページの切り替えを管理します。[/ja]
  * @param page First page to show when navigator is initialized
+ * @param var Variable name to refer this navigator.
  * @property pushPage(pageUrl, options)
  *  [en]Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. the options object include all the attributes of this navigator but replace the hyphen '-' with camel-case letter. eg. pushPage('page2.html')[/en]
  *  [ja]指定したpageUrlを新しいページスタックに追加します。[/ja]

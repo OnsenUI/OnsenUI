@@ -26,6 +26,7 @@ limitations under the License.
  * @param swipable Wether to enable swipe interaction
  * @param swipe-target-width The width of swipable area calculated from the left (in pixel). Eg. Use this to enable swipe only when the finger touch on the left edge.
  * @param max-slide-distance How far the above page will slide open. Can specify both in px and %
+ * @param var Variable name to refer this sliding menu.
  * @property setAbovePage(pageUrl) Show the page specified in pageUrl in the above layer.
  * @property setBehindPage(pageUrl) Show the page specified in pageUrl in the behind layer.
  * @property openMenu() Slide the above layer to reveal the layer behind.

@@ -23,9 +23,8 @@ limitations under the License.
  * Switch component.
  * @param disabled Wether the switch shoud be disabled.
  * @param checked Wether the switch is checked.
- * @param ng-model
- * @param var
- * @param modifier
+ * @param var Variable name to refer this switch.
+ * @param modifier Modifier name.
  */
 (function(){
   'use strict';

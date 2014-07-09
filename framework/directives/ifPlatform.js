@@ -21,7 +21,7 @@ limitations under the License.
  * @name ons-if-platform
  * @description
  * Conditionally display content depending on the platform/browser. Valid values are [ios/android/blackberry/chrome/safari/firefox/opera]. Different from other components, this component is used as attribute in any element.
- * @param ons-if-platform Either opera, firefox, safari, chrome, ie, android, blackberry, ios or windows.
+ * @param ons-if-platform Either "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".
  */
 (function() {
   'use strict';

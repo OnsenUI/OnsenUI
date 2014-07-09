@@ -19,6 +19,7 @@ limitations under the License.
  * @ngdoc directive
  * @id toolbar_button
  * @name ons-toolbar-button
+ * @param modifier Modifier name.
  * @description
  * Button component for toolbar.
  */

@@ -21,6 +21,7 @@ limitations under the License.
  * @name ons-toolbar
  * @description
  * Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.
+ * @param modifier Modifier name.
  * @demoURL
  * OnsenUI/demo/screen/
  */

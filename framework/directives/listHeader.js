@@ -19,6 +19,7 @@ limitations under the License.
  * @ngdoc directive
  * @id list-header
  * @name ons-list-header
+ * @param modifier
  * @description
  * Header element for list items. Must be put inside ons-list tag.
  */
