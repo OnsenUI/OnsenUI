@@ -24,57 +24,14 @@ limitations under the License.
  * @param disabled Wether the switch shoud be disabled.
  * @param checked Wether the switch is checked.
  * @param ng-model
- * @param var Variable name to refer this element view.
- * @param modifier Preset modifier is list-item.
+ * @param var
+ * @param modifier
  */
 (function(){
   'use strict';
   var module = angular.module('onsen');
 
-  var SwitchView = Class.extend({
-
-    init: function(element, scope, attrs) {
-      this._element = element;
-      this._checkbox = angular.element(element[0].querySelector('input[type=checkbox]'));
-      this._scope = scope;
-
-      attrs.$observe('disabled', function(disabled) {
-        if (!!element.attr('disabled')) {
-          this._checkbox.attr('disabled', 'disabled');
-        } else {
-          this._checkbox.removeAttr('disabled');
-        }
-      }.bind(this));
-
-      scope.$watch('model', function(model) {
-        this.emit('change', {switch: this, value: !!model});
-      }.bind(this));
-    },
-
-    /**
-     * @return {Boolean}
-     */
-    isChecked: function() {
-      return this._checkbox[0].checked;
-    },
-
-    /**
-     * @param {Boolean}
-     */
-    setChecked: function(isChecked) {
-      this._checkbox[0].checked = !!isChecked;
-    },
-
-    /**
-     * @return {HTMLElement}
-     */
-    getCheckboxElemenet: function() {
-      return this._checkbox[0];
-    }
-  });
-  MicroEvent.mixin(SwitchView);
-
-  module.directive('onsSwitch', function($onsen) {
+  module.directive('onsSwitch', function($onsen, SwitchView) {
     return {
       restrict: 'E',
       replace: false,
