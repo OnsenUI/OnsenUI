@@ -104,8 +104,8 @@ checkbox--after()
 
 .checkbox > input[type="checkbox"]
   hide-input()
-  height var-size--checkbox
-  width var-size--checkbox
+  height 0
+  width 0
 
 .checkbox > input[type="checkbox"]:checked
   background var-background-color-checked--checkbox
@@ -197,6 +197,11 @@ checkbox--after()
   reset-box-model()
   height var-size--checkbox
   background transparent
+
+.checkbox--noborder > input[type="checkbox"]
+  hide-input()
+  height 0
+  width 0
 
 .checkbox--noborder > input[type="checkbox"]:checked + .checkbox__checkmark:before
   background transparent

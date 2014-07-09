@@ -117,6 +117,7 @@ select:focus {
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
+  pointer-events: none;
   width: 51px;
   height: 44px;
   margin-top: -6px;
@@ -1145,6 +1146,7 @@ select:focus {
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
+  pointer-events: none;
 }
 .button-bar__item:first-child > .button-bar__button {
   border-left: 1px solid #1284ff;
@@ -1359,6 +1361,7 @@ select:focus {
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
+  pointer-events: none;
 }
 .tab-bar__button {
   position: relative;
@@ -1717,8 +1720,9 @@ select:focus {
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
-  height: 24px;
-  width: 24px;
+  pointer-events: none;
+  height: 0;
+  width: 0;
 }
 .checkbox > input[type="checkbox"]:checked {
   background: #1284ff;
@@ -1846,6 +1850,7 @@ select:focus {
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
+  pointer-events: none;
 }
 .checkbox--noborder {
   position: relative;
@@ -1881,6 +1886,28 @@ select:focus {
   background-clip: padding-box;
   height: 24px;
   background: transparent;
+}
+.checkbox--noborder > input[type="checkbox"] {
+  position: absolute;
+  overflow: hidden;
+  right: 0px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  pointer-events: none;
+  height: 0;
+  width: 0;
 }
 .checkbox--noborder > input[type="checkbox"]:checked + .checkbox__checkmark:before {
   background: transparent;
@@ -2255,18 +2282,21 @@ select:focus {
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
-  height: 24px;
-  width: 24px;
-  margin-top: 0;
-  margin-right: -24px;
-  margin-bottom: -24px;
-  margin-left: 0;
+  pointer-events: none;
+  height: 0px;
+  width: 0px;
 }
-.radio-button > input[type="radio"]:active {
+.radio-button > input[type="radio"]:active,
+.radio-button > input[type="radio"]:focus {
   outline: 0;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 .radio-button > input[type="radio"]:checked + .radio-button__checkmark:after {
   opacity: 1;
+}
+.radio-button > input[type="radio"]:checked + .radio-button__checkmark:before {
+  background: transparent;
+  border: none;
 }
 .radio-button {
   position: relative;
