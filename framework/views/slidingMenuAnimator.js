@@ -34,6 +34,15 @@ limitations under the License.
       },
 
       /**
+       * @param {jqLite} menuPage
+       * @param {Number} width
+       * @param {Object} options
+       * @param {Object} options.isRight
+       */
+      updateMenuPageWidth: function(menuPage, width, options) {
+      },
+
+      /**
        * @param {jqLite} mainPage
        * @param {jqLite} menuPage
        * @param {Function} callback

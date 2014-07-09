@@ -76,6 +76,16 @@ limitations under the License.
       },
 
       /**
+       * @param {jqLite} menuPage
+       * @param {Number} width
+       * @param {Object} options
+       * @param {Boolean} options.isRight
+       */
+      updateMenuPageWidth: function(menuPage, width, options) {
+        menuPage.css('width', width);
+      },
+
+      /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
        * @param {jqLite} mainPage
        * @param {jqLite} menuPage

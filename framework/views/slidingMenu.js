@@ -178,9 +178,7 @@ limitations under the License.
 
         this._isRightMenu = attrs.side === 'right';
 
-        var width = this._abovePage[0].clientWidth;
-        var maxDistance = width * MAIN_PAGE_RATIO;
-
+        var maxDistance = this._normalizeMaxSlideDistanceAttr();
         this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
         this._logic.on('translate', this._translate.bind(this));
         this._logic.on('open', function(options) {
@@ -210,7 +208,7 @@ limitations under the License.
         var unlock = this._doorLock.lock();
 
         window.setTimeout(function() {
-          var maxDistance = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+          var maxDistance = this._normalizeMaxSlideDistanceAttr();
           this._logic.setMaxDistance(maxDistance);
 
           unlock();
@@ -222,12 +220,25 @@ limitations under the License.
             this._element,
             this._abovePage,
             this._behindPage,
-            {isRight: this._isRightMenu}
+            {
+              isRight: this._isRightMenu,
+              width: this._attrs.maxSlideDistance
+            }
           );
 
         }.bind(this), 400);
 
         scope.$on('$destroy', this._destroy.bind(this));
+      },
+
+      _refreshBehindPageWidth: function() {
+        if ('maxSlideDistance' in this._attrs && this._animator) {
+          this._animator.updateMenuPageWidth(
+            this._behindPage,
+            this._attrs.maxSlideDistance,
+            {isRight: this._isRightMenu}
+          );
+        }
       },
 
       _destroy: function() {
@@ -287,23 +298,38 @@ limitations under the License.
 
       _onWindowResize: function() {
         this._recalculateMAX();
+        this._refreshBehindPageWidth();
       },
 
       _onMaxSlideDistanceChanged: function() {
         this._recalculateMAX();
+        this._refreshBehindPageWidth();
       },
 
-      _recalculateMAX: function() {
+      /**
+       * @return {Number}
+       */
+      _normalizeMaxSlideDistanceAttr: function() {
         var maxDistance = this._attrs.maxSlideDistance;
 
-        if (typeof maxDistance == 'string') {
-          if (maxDistance.indexOf('px') > 0) {
-            maxDistance = maxDistance.replace('px', '');
-          } else if (maxDistance.indexOf('%') > 0) {
+        if (!('maxSlideDistance' in this._attrs)) {
+          maxDistance = 0.9 * this._abovePage[0].clientWidth;
+        } else if (typeof maxDistance == 'string') {
+          if (maxDistance.indexOf('px', maxDistance.length - 2) !== -1) {
+            maxDistance = parseInt(maxDistance.replace('px', ''), 10);
+          } else if (maxDistance.indexOf('%', maxDistance.length - 1) > 0) {
             maxDistance = maxDistance.replace('%', '');
             maxDistance = parseFloat(maxDistance) / 100 * this._abovePage[0].clientWidth;
           }
+        } else {
+          throw new Error('invalid state');
         }
+
+        return maxDistance;
+      },
+
+      _recalculateMAX: function() {
+        var maxDistance = this._normalizeMaxSlideDistanceAttr();
 
         if (maxDistance) {
           this._logic.setMaxDistance(parseInt(maxDistance, 10));
