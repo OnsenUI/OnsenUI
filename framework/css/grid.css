@@ -15,14 +15,14 @@
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  line-height: 1;
   width: 100%;
   box-sizing: border-box;
 }
 
 .row + .row {
   margin-top: -5px;
-  padding-top: 0; }
+  padding-top: 0;
+}
 
 .col {
   -webkit-box-flex: 1;
@@ -33,7 +33,6 @@
   flex: 1;
   display: block;
   width: 100%;
-  line-height: 1;
   box-sizing: border-box;
 }
 

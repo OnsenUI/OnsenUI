@@ -44,12 +44,18 @@ limitations under the License.
 
         return function(scope, element, attrs) {
           attrs.$observe('align', function(align) {
-            align = ('' + align).trim();
+            update();
+          });
+
+          update();
+
+          function update() {
+            var align = ('' + attrs.align).trim();
             if (align === 'top' || align === 'center' || align === 'bottom') {
               element.removeClass('row-bottom row-center row-top');
               element.addClass('row-' + align);
             }
-          });
+          }
         };
       }
     };

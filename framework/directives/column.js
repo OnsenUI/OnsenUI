@@ -46,10 +46,7 @@ limitations under the License.
         return function(scope, element, attrs) {
 
           attrs.$observe('align', function(align) {
-            if (align === 'top' || align === 'left' || align === 'right') {
-              element.removeClass('col-top col-center col-bottom');
-              element.addClass('col-' + align);
-            }
+            updateAlign(align);
           });
 
           attrs.$observe('width', function(width) {
@@ -63,10 +60,30 @@ limitations under the License.
             }
           });
 
+          updateAlign(attrs.align);
+
+          if (attrs.size && !attrs.width) {
+            updateWidth(attrs.size);
+          } else {
+            updateWidth(attrs.width);
+          }
+
+          function updateAlign(align) {
+            if (align === 'top' || align === 'center' || align === 'bottom') {
+              element.removeClass('col-top col-center col-bottom');
+              element.addClass('col-' + align);
+            } else {
+              element.removeClass('col-top col-center col-bottom');
+            }
+          }
+
           function updateWidth(width) {
-            width = ('' + width).trim();
-            if (width.length > 0) {
+            if (typeof width  === 'string') {
+              width = ('' + width).trim();
+
               width = width.match(/^\d+$/) ? width + '%' : width;
+
+              console.log(width);
 
               element.css({
                 '-webkit-box-flex': '0',
@@ -77,6 +94,8 @@ limitations under the License.
                 'flex': '0 0 ' + width,
                 'max-width': width
               });
+            } else {
+              element.removeAttr('style');
             }
           }
         };
