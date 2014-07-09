@@ -9,22 +9,22 @@
   <div ng-controller="TodosController">
 
     <ons-list>
-      <ons-list-item class="no-wrap iso7-no-active">
-        <form novalidate name="todoForm" class="css-form" ng-submit="addTodo(newTodo.text); newTodo.text=''; ">
-          <ons-row style="padding-top: 4px">
+      <ons-list-item class="no-wrap ios7-no-active">
+        <form novalidate name="todoForm" ng-submit="addTodo(newTodo.text); newTodo.text=''; ">
+          <ons-row style="margin-top: 8px">
             <ons-col>
               <input type="text" class="text-input" name="todoText" ng-model="newTodo.text" placeholder="What to do?" style="width: 100%; margin-top: 2px;"></input>
             </ons-col>
-            <ons-col size="20" style="padding-left: 4px">
+            <ons-col width="80px" style="padding-left: 4px">
               <ons-button class="inline-block todo-add-button">Add</ons-button>
             </ons-col>
           </ons-row>
         </form>
       </ons-list-item>
 
-      <ons-list-item class="no-wrap iso7-no-active zoom" ng-repeat="todo in todos">
+      <ons-list-item class="no-wrap ios7-no-active" ng-repeat="todo in todos">
         <ons-row>
-          <ons-col align="center" class="list__item__line-height" style="text-align: left">
+          <ons-col class="list__item__line-height">
             {{todo.text}}
           </ons-col>
           <ons-col size="20"  class="list__item__line-height center">
