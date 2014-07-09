@@ -63,6 +63,13 @@ limitations under the License.
      */
     setChecked: function(isChecked) {
       this._checkbox[0].checked = !!isChecked;
+    },
+
+    /**
+     * @return {HTMLElement}
+     */
+    getCheckboxElemenet: function() {
+      return this._checkbox[0];
     }
   });
   MicroEvent.mixin(SwitchView);
