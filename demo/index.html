@@ -14,28 +14,31 @@
   <script>
   var module = angular.module('myApp', ['onsen.directives']); 
   module.controller('DemoListController', function($scope, $window) {
-      $scope.demoList = [
+      $scope.containerDemoList = [
           {href : 'bottom_toolbar/', name : 'Bottom Toolbar'},
-          {href : 'button/', name : 'Button'},
-          {href : 'checkbox/', name : 'Checkbox'},
           {href : 'grid/', name : 'Grid'},
-          {href : 'icon/', name : 'Icons'},
-          {href : 'icon_settings/', name : 'Icon Settings'},
           {href : 'if_orientation/', name : 'Orientation'},
           {href : 'if_platform/', name : 'Platform'},
-          {href : 'kitchen_sink/', name : 'Kitchen Sink'},
           {href : 'list/', name : 'List'},
           {href : 'navigator/', name : 'Navigator'},
           {href : 'navigator_inside_tabbar/', name : 'Navigator inside Tabbar'},
           {href : 'navigator_reset/', name : 'Navigator Reset'},
           {href : 'page/', name : 'page'},
-          {href : 'radio_button/', name : 'Radio Button'},
-          {href : 'screen/', name : 'Screen'},
-          {href : 'scroller/', name : 'Scroller'},
-          {href : 'search_input/', name : 'Search Input'},
           {href : 'sliding_menu/', name : 'Sliding Menu'},
           {href : 'split_view/', name : 'Split View'},
+          {href : 'screen/', name : 'Screen'},
           {href : 'tabbar/', name : 'Tabbar (Icon with Label)'},
+          {href : 'scroller/', name : 'Scroller'}
+      ];
+      $scope.inlineDemoList = [
+          {href : 'button/', name : 'Button'},
+          {href : 'checkbox/', name : 'Checkbox'},
+          {href : 'icon/', name : 'Icons'},
+          {href : 'icon_settings/', name : 'Icon Settings'},
+          {href : 'kitchen_sink/', name : 'Kitchen Sink'},
+          {href : 'radio_button/', name : 'Radio Button'},
+          {href : 'search_input/', name : 'Search Input'},
+          {href : 'switch', name : 'Switch'},
           {href : 'text_input/', name : 'Text Input'},
           {href : 'textarea/', name : 'Text Area'}
       ];
@@ -55,8 +58,15 @@
         <div class="center">Demo</div>
       </ons-toolbar>
       <ons-list>
-        <ons-list-item class="list__item--tappable" ng-repeat="demo in demoList">
-          <div class="list__item__line-height" ng-click="go(demo)">
+        <ons-list-header>Container Elements</ons-list-header>
+        <ons-list-item modifier="chevron" ng-repeat="demo in containerDemoList">
+          <div ng-click="go(demo)">
+            {{demo.name}}
+          </div>
+        </ons-list-item>
+        <ons-list-header>Inline Elements</ons-list-header>
+        <ons-list-item modifier="chevron" ng-repeat="demo in inlineDemoList">
+          <div ng-click="go(demo)">
             {{demo.name}}
           </div>
         </ons-list-item>
