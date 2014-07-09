@@ -133,7 +133,7 @@ limitations under the License.
      * @param {Number} x
      */
     translate: function(x) {
-      this._distance = Math.max(0, Math.min(this._maxDistance, x));
+      this._distance = Math.max(1, Math.min(this._maxDistance - 1, x));
 
       var options = {
         distance: this._distance,
@@ -486,7 +486,14 @@ limitations under the License.
           case 'dragright':
             event.gesture.preventDefault();
 
-            var deltaDistance = this._isRightMenu ? -event.gesture.deltaX : event.gesture.deltaX;
+            var deltaX = event.gesture.deltaX;
+            var deltaDistance = this._isRightMenu ? -deltaX : deltaX;
+
+            var startEvent = event.gesture.startEvent;
+
+            if (!('isOpened' in startEvent)) {
+              startEvent.isOpened = this._logic.isOpened();
+            }
 
             if (deltaDistance < 0 && this._logic.isClosed()) {
               break;
@@ -496,8 +503,8 @@ limitations under the License.
               break;
             }
 
-            var distance = deltaDistance > 0 ?
-              deltaDistance : deltaDistance + this._logic.getMaxDistance();
+            var distance = startEvent.isOpened ?
+              deltaDistance + this._logic.getMaxDistance() : deltaDistance;
 
             this._logic.translate(distance);
 
@@ -528,6 +535,8 @@ limitations under the License.
             break;
 
           case 'release':
+            this._lastDistance = null;
+
             if (this._logic.shouldOpen()) {
               this.open();
             } else if (this._logic.shouldClose()) {
