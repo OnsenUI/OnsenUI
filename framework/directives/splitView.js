@@ -24,13 +24,13 @@ limitations under the License.
  * @param secondary-page The url of the page on the left
  * @param main-page The url of the page on the right
  * @param main-page-width Main page's width percentage. The width of secondary page take the remaining percentage
- * @param collapse Specify the collapse behavior. Valid values are [portrait/landscape/width ##px]. "portrait" means the view will collapse when device is in portrait orien0ation. "landscape" means the view will collapse when device is in landscape orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px
+ * @param collapse [Deprecated] Specify the collapse behavior. Valid values are [portrait/landscape/width ##px]. "portrait" means the view will collapse when device is in portrait orien0ation. "landscape" means the view will collapse when device is in landscape orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px
  * @param var Variable name to refer this split view.
  * @property setMainPage(pageUrl) Show the page specified in pageUrl in the right section
  * @property setSecondaryPage(pageUrl) Show the page specified in pageUrl in the left section
- * @property open() Reveal the secondary page if the view is in collapse mode
- * @property close() hide the secondary page if the view is in collapse mode
- * @property toggle() Reveal the secondary page if it is currently hidden, otherwies, reveal it
+ * @property [Deprecated] open() Reveal the secondary page if the view is in collapse mode
+ * @property [Deprecated] close() hide the secondary page if the view is in collapse mode
+ * @property [Deprecated] toggle() Reveal the secondary page if it is currently hidden, otherwies, reveal it
  * @example
  * index.html
  * <pre>

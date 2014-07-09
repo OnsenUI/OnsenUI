@@ -66,6 +66,7 @@ limitations under the License.
         var unlock = this._doorLock.lock();
 
         this._considerChangingCollapse();
+        this._setSize();
 
         setTimeout(function() {
           this._element.css('display', 'block');
@@ -142,11 +143,21 @@ limitations under the License.
       },
 
       _onOrientationChange: function() {
-        this._considerChangingCollapse();
+        this._onResize();
       },
 
       _onResize: function() {
         this._considerChangingCollapse();
+
+        if (this._mode === COLLAPSE_MODE) {
+          this._animator.onResized(
+            {
+              isOpened: this._startX > 0,
+              width: '90%'
+            }
+          );
+        }
+
         this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
       },
 
@@ -199,21 +210,24 @@ limitations under the License.
       },
 
       _setSize: function() {
-        if (!this._scope.mainPageWidth) {
-          this._scope.mainPageWidth = '70';
+        if (this._mode === SPLIT_MODE) {
+          if (!this._scope.mainPageWidth) {
+            this._scope.mainPageWidth = '70';
+          }
+
+          var behindSize = 100 - this._scope.mainPageWidth.replace('%', '');
+          this._behindPage.css({
+            width: behindSize + '%',
+            opacity: 1
+          });
+
+          this._abovePage.css({
+            width: this._scope.mainPageWidth + '%'
+          });
+
+          this._abovePage.css('left', behindSize + '%');
+          this._currentX = this._behindPage[0].clientWidth;
         }
-
-        var behindSize = 100 - this._scope.mainPageWidth.replace('%', '');
-        this._behindPage.css({
-          width: behindSize + '%',
-          opacity: 1
-        });
-
-        this._abovePage.css({
-          width: this._scope.mainPageWidth + '%'
-        });
-
-        this._translateAboveOnly(this._behindPage[0].clientWidth);
       },
 
       _activateCollapseMode: function() {
@@ -380,14 +394,6 @@ limitations under the License.
 
           this._animator.translateMenu(options);
         }
-      },
-
-      _translateAboveOnly: function(x) {
-        var aboveTransform = 'translate2d(' + x + 'px, 0)';
-        var behindTransform = 'none';
-
-        this._abovePage.css('left', x + 'px');
-        this._currentX = x;
       },
 
       _destroy: function() {
