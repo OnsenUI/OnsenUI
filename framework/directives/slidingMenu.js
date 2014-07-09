@@ -32,6 +32,7 @@ limitations under the License.
  * @property openMenu() Slide the above layer to reveal the layer behind.
  * @property closeMenu() Slide the above layer to hide the layer behind.
  * @property toggleMenu() Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.
+ * @property on(eventName, listener) Added an event listener. Preset events are 'preopen', 'preclose', 'postopen' and 'postclose'.
  */
 (function() {
   'use strict';

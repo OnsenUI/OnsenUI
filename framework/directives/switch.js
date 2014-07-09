@@ -25,6 +25,10 @@ limitations under the License.
  * @param checked Wether the switch is checked.
  * @param var Variable name to refer this switch.
  * @param modifier Modifier name.
+ * @property isChecked()
+ * @property setChecked(isChecked)
+ * @property getCheckboxElement() Get inner input[type=checkbox] element.
+ * @property on(eventName, listener) Added an event listener. Preset event is 'chage'.
  */
 (function(){
   'use strict';

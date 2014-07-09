@@ -21,6 +21,7 @@ limitations under the License.
  * @name ons-tabbar
  * @param hide-tabs Wether to hide the tabs. Valid values are [true/false] or angular binding. eg: {{ shouldHide }}
  * @param var Variable name to refer this tabbar.
+ * @property on(eventName, listener) Added an event listener. Preset events are 'prechange' and 'postchange'.
  * @description
  * Used with tabbar-item to manage pages using tabs.
  */
