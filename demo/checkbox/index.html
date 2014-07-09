@@ -22,25 +22,31 @@
 
 <body>    
   
-  <ons-page style="padding: 0px;">
+  <ons-page>
     <ons-toolbar>
       <div class="center">Checkbox</div>
     </ons-toolbar>
 
-    <section style="padding: 10px;">      
-      <ons-checkbox ng-model="agree">
-        True or False?
-      </ons-checkbox>
-      <span>{{agree}}</span>  
-    </section>
+    <ons-list>      
+      <ons-list-header>Checkbox</ons-list-header>
+      <ons-list-item modifier="tappable">
+        <label class="checkbox" style="width: 100%; padding: 10px 0; margin: 0;">
+          <input type="checkbox" ng-model="a">
+          <div class="checkbox__checkmark"></div>
+          {{a ? 'YES' : 'NO'}}
+        </label>
+      </ons-list-item>
 
-    <section style="padding: 10px;">      
-      <ons-checkbox ng-model="answer" ng-true-value="YES" ng-false-value="NO">
-        Yes or No?
-      </ons-checkbox>
-      <span>{{answer}}</span>  
-    </section>
-    
+      <ons-list-header>No border Checkbox</ons-list-header>
+      <ons-list-item modifier="tappable">
+        <label class="checkbox checkbox--noborder" style="width: 100%; padding: 10px 0; margin: 0;">
+          <input type="checkbox" ng-model="b">
+          <div class="checkbox__checkmark"></div>
+          {{b ? 'YES' : 'NO'}}
+        </label>
+      </ons-list-item>
+    </ons-list>
+
   </ons-page>
 
 </body>

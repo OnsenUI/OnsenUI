@@ -30,40 +30,8 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/checkbox.tpl",
-    "<label class=\"checkbox\" class=\"{{modifierTemplater('checkbox--*')}}\">\n" +
-    "  <input type=\"checkbox\" ng-model=\"ngModel\" ng-true-value=\"{{ngTrueValue || true}}\" ng-false-value=\"{{ngFalseValue || false}}\">\n" +
-    "  <div class=\"checkbox__checkmark {{modifierTemplater('checkbox--*__checkmark')}}\"></div>\n" +
-    "  <span class=\"ons-checkbox-inner\" ng-transclude>\n" +
-    "  </span>\n" +
-    "</label>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("templates/icon.tpl",
     "<i class=\"fa fa-{{icon}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}\" ng-class=\"sizeClass\" ng-style=\"style\"></i>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/radio_button.tpl",
-    "<label class=\"radio-button {{modifierTemplater('radio-button--*')}}\">\n" +
-    "  {{leftLabel}}\n" +
-    "  <input type=\"radio\" name=\"{{name}}\" ng-model=\"ngModel\" value=\"{{value}}\">\n" +
-    "  <div class=\"radio-button__checkmark {{modifierTemplater('radio-button--*')}}\"></div>\n" +
-    "  {{rightLabel}}\n" +
-    "</label>\n" +
     "");
 }]);
 })();
@@ -97,17 +65,6 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/scroller.tpl",
     "<div class=\"ons-scroller__content ons-scroller-inner\" ng-transclude></div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/search_input.tpl",
-    "<input type=\"search\" class=\"search-input\">\n" +
     "");
 }]);
 })();
@@ -175,28 +132,6 @@ app.run(["$templateCache", function($templateCache) {
     "    <div class=\"tab-bar__label\">{{label}}</div>\n" +
     "  </button>\n" +
     "</label>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/text_area.tpl",
-    "<textarea class=\"textarea\"></textarea>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/text_input.tpl",
-    "<input class=\"text-input\">\n" +
     "");
 }]);
 })();

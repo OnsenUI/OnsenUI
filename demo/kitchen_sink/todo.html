@@ -13,7 +13,7 @@
         <form novalidate name="todoForm" class="css-form" ng-submit="addTodo(newTodo.text); newTodo.text=''; ">
           <ons-row style="padding-top: 4px">
             <ons-col>
-              <ons-text-input name="todoText" ng-model="newTodo.text" placeholder="What to do?" style="width: 100%; margin-top: 2px;"></ons-text-input>
+              <input type="text" class="text-input" name="todoText" ng-model="newTodo.text" placeholder="What to do?" style="width: 100%; margin-top: 2px;"></input>
             </ons-col>
             <ons-col size="20" style="padding-left: 4px">
               <ons-button class="inline-block todo-add-button">Add</ons-button>

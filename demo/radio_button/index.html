@@ -20,14 +20,35 @@
     <ons-toolbar><div class="center">Redio Button</div></ons-toolbar>
 
     <div style="text-align: center">
-      <h2>Choose Level</h2>
-      <ons-radio-button ng-model="level" value="Easy" right-label="Easy" name="level-group"></ons-radio-button>
+      <p>Choose Level</p>
 
-      <ons-radio-button ng-model="level" value="Medium" right-label="Medium" name="level-group"></ons-radio-button>
-      
-      <ons-radio-button ng-model="level" value="Hard" right-label="Hard" name="level-group"></ons-radio-button>
-      
-      <h3>{{level}}</h3>
+      <ons-list>
+        <ons-list-item modifier="tappable">
+          <label class="radio-button" style="width:100%; height: 24px; display: block; margin: 0; padding: 10px 0;">
+            <input type="radio" name="level" ng-model="selectedLevel" value="easy">
+            <div class="radio-button__checkmark"></div>
+            Easy
+          </label>
+        </ons-list-item>
+
+        <ons-list-item modifier="tappable">
+          <label class="radio-button" style="width:100%; display: block; margin: 0; padding: 10px 0;">
+            <input type="radio" name="level" ng-model="selectedLevel" value="medium">
+            <div class="radio-button__checkmark"></div>
+            Medium
+          </label>
+        </ons-list-item>
+          
+        <ons-list-item modifier="tappable">
+          <label class="radio-button" style="width:100%; display: block; margin: 0; padding: 10px 0;">
+            <input type="radio" name="level" ng-model="selectedLevel" value="hard">
+            <div class="radio-button__checkmark"></div>
+            Hard
+          </label>
+        </ons-list-item>
+      </ons-list>
+
+      <h3>{{selectedLevel}}</h3>
     </div>
   </ons-navigator>
   
