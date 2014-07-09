@@ -244,6 +244,11 @@ limitations under the License.
             pageObject.pageScope = null;
             pageObject.options = null;
 
+            var index = self.pages.indexOf(this);
+            if (index !== -1) {
+              self.pages.splice(index, 1);
+            }
+
             self._refreshBackButtonHandler();
           }
         };

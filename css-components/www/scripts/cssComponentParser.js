@@ -39,11 +39,6 @@ angular.module('app').factory('CssComponentParser', function(Component, $rootSco
 
       function resolve(component) {
         if (component.use) {
-          if (component.use === 'Segment, Navigation Bar') {
-            console.log('kita-');
-            console.log(component.use);
-          }
-
           var names = component.use.split(/, +/).map(function(name) {
             return name.trim();
           });
