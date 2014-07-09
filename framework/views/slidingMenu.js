@@ -229,7 +229,7 @@ limitations under the License.
             this._behindPage,
             {
               isRight: this._isRightMenu,
-              width: this._attrs.maxSlideDistance
+              width: this._attrs.maxSlideDistance || '90%'
             }
           );
 
