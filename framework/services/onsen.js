@@ -121,7 +121,7 @@ limitations under the License.
         }
         stack.splice(index, 1);
 
-        var obj = stack.length > 1 ? stack[stack.length - 1] : null;
+        var obj = stack.length > 0 ? stack[stack.length - 1] : null;
         $onsen._defineVar(name, obj);
       },
 
