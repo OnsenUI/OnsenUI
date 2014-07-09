@@ -39,6 +39,11 @@ angular.module('app').factory('CssComponentParser', function(Component, $rootSco
 
       function resolve(component) {
         if (component.use) {
+          if (component.use === 'Segment, Navigation Bar') {
+            console.log('kita-');
+            console.log(component.use);
+          }
+
           var names = component.use.split(/, +/).map(function(name) {
             return name.trim();
           });
@@ -62,7 +67,7 @@ angular.module('app').factory('CssComponentParser', function(Component, $rootSco
 
           component.css = orderedComponents.map(function(component) {
             return component.css;
-          }).join() + component.css;
+          }).join('') + component.css;
 
           component.use = undefined;
         }
