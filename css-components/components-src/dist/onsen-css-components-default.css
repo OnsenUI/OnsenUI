@@ -123,6 +123,21 @@ select:focus {
   top: 0px;
   left: 0px;
 }
+.switch__toggle {
+  background-color: #ddd;
+  width: 50px;
+  position: absolute;
+  z-index: 0;
+  top: 0px;
+  left: 0px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  height: 32px;
+  -webkit-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
+  -moz-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
+  -o-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
+  transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
+}
 .switch__toggle:before {
   position: absolute;
   content: '';
@@ -131,68 +146,45 @@ select:focus {
   height: 28px;
   width: 28px;
   background-color: #fff;
-  border: 1px solid #ddd;
-  left: 0;
-  top: 1px;
-  -webkit-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
-  -moz-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
-  -o-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
-  transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
+  border: none;
+  left: 2px;
+  top: 2px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  -webkit-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
+  -moz-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
+  -o-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
+  transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
 }
-.switch__toggle {
-  background-color: #ddd;
-  width: 50px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  -webkit-border-radius: 30px;
-  border-radius: 30px;
-  height: 32px;
+.switch__input:checked + .switch__toggle {
+  background-color: #4cd964;
 }
 .switch__input + .switch__toggle:before {
   margin-left: 0px;
 }
 .switch__input:checked + .switch__toggle:before {
   margin-left: 0px;
-  -webkit-transform: translate3d(19px, 0px, 0px);
-  -moz-transform: translate3d(19px, 0px, 0px);
-  -o-transform: translate3d(19px, 0px, 0px);
-  transform: translate3d(19px, 0px, 0px);
+  -webkit-transform: translateX(18px);
+  -moz-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  -o-transform: translateX(18px);
+  transform: translateX(18px);
   border-color: #4cd964;
 }
-.switch__input:active + .switch__toggle {
-  border: none;
-}
-.switch__input:focus + .switch__toggle {
-  border: none;
+.switch__input:not(:checked) + .switch__toggle:before {
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  -ms-transform: translateX(0px);
+  -o-transform: translateX(0px);
+  transform: translateX(0px);
 }
 .switch__input:disabled + .switch__toggle {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
-}
-.switch__input:checked + .switch__toggle {
-  background-color: #4cd964;
-  -webkit-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
-  box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
-  -webkit-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
-  -moz-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
-  -o-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
-  transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
-}
-.switch__input:not(:checked) + .switch__toggle {
-  -webkit-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.1);
-  box-shadow: inset 0 0 0 0px rgba(0,0,0,0.1);
-  -webkit-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
-  -moz-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
-  -o-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
-  transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
-}
-.switch__input:not(:checked) + .switch__toggle:before {
-  -webkit-transform: translate3d(1px, 0px, 0px);
-  -moz-transform: translate3d(1px, 0px, 0px);
-  -o-transform: translate3d(1px, 0px, 0px);
-  transform: translate3d(1px, 0px, 0px);
 }
 /* topdoc
   name: Range
