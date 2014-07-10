@@ -31,9 +31,8 @@ var-border--search-input--focus = 1px solid var-input-border-color
 var-margin-right--search-decoration = 0px
 var-search-input--border-radius = 4px
 var-background-position--search-input = 8px center
-var-padding--search-input = 5px 0 5px 28px
+var-padding--search-input = 8px 0 4px 28px
 var-height--search-input = 31px
-var-line-height--search-input = 31px
 var-font-size--search-input = 15px
 
 /*! topdoc
@@ -59,13 +58,14 @@ search-input--disabled()
 
 .search-input
   search-input()
+  box-sizing border-box
   height var-height--search-input
   font-size var-font-size--search-input
   border var-border--search-input
   background-color var-background-color--search-input
   box-shadow var-box-shadow--text-input
   color var-color--search-input
-  padding var-padding--search-input
+  padding 4px 0 0 28px
   border-radius var-search-input--border-radius
   background-image var-background-image--search-input
   background-position var-background-position--search-input
@@ -74,7 +74,6 @@ search-input--disabled()
   font-weight var-font-weight
   display block
   width 100%
-  vertical-align middle
 
 .search-input:focus
   background-color var-background-color--search-input--focus
@@ -86,9 +85,10 @@ search-input--disabled()
 .search-input::-webkit-search-decoration
   margin-right var-margin-right--search-decoration
 
-.search-input:focus::-webkit-input-placeholder,
-.search-input:focus::-webkit-input-placeholder
-  color var-placeholder-color--input
+.search-input::-webkit-input-placeholder,
+.search-input::-moz-placeholder,
+.search-input::-ms-input-placeholder
+  color var-input-placeholder-color
 
 .search-input:disabled
   search-input--disabled()
