@@ -193,7 +193,6 @@ limitations under the License.
 
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
         attrs.$observe('swipable', this._onSwipableChanged.bind(this));
-        attrs.$observe('swipeTargetWidth', this._onSwipeTargetWidthChanged.bind(this));
 
         window.addEventListener('resize', this._onWindowResize.bind(this));
 
@@ -284,26 +283,6 @@ limitations under the License.
         } else {
           this._deactivateHammer();
         }
-      },
-
-      /**
-       * @param {Number} targetWidth
-       */
-      setSwipeTargetWidth: function(targetWidth) {
-        var width = parseInt(targetWidth, 10);
-        if (width < 0 || !targetWidth) {
-          this._swipeTargetWidth = this._abovePage[0].clientWidth;
-        } else {
-          this._swipeTargetWidth = width;
-        }
-      },
-
-      _onSwipeTargetWidthChanged: function(targetWidth) {
-        if (typeof targetWidth == 'string') {
-          targetWidth = targetWidth.replace('px', '');
-        }
-
-        this.setSwipeTargetWidth(targetWidth);
       },
 
       _onWindowResize: function() {
@@ -475,7 +454,7 @@ limitations under the License.
 
           case 'touch':
             if (this._logic.isClosed()) {
-              if (!this._isInsideSwipeTargetArea(event.gesture.center.pageX)) {
+              if (!this._isInsideSwipeTargetArea(event)) {
                 event.gesture.stopDetect();
               }
             }
@@ -562,8 +541,30 @@ limitations under the License.
         return false;
       },
 
-      _isInsideSwipeTargetArea: function(x) {
-        return this._isRightMenu ? this._abovePage[0].clientWidth - x < this._swipeTargetWidth : x < this._swipeTargetWidth;
+      _isInsideSwipeTargetArea: function(event) {
+        var x = event.gesture.center.pageX;
+
+        if (!('_swipeTargetWidth' in event.gesture.startEvent)) {
+          event.gesture.startEvent._swipeTargetWidth = this._getSwipeTargetWidth();
+        }
+
+        var targetWidth = event.gesture.startEvent._swipeTargetWidth;
+        return this._isRightMenu ? this._abovePage[0].clientWidth - x < targetWidth : x < targetWidth;
+      },
+
+      _getSwipeTargetWidth: function() {
+        var targetWidth = this._attrs.swipeTargetWidth;
+
+        if (typeof targetWidth == 'string') {
+          targetWidth = targetWidth.replace('px', '');
+        }
+
+        var width = parseInt(targetWidth, 10);
+        if (width < 0 || !targetWidth) {
+          return this._abovePage[0].clientWidth;
+        } else {
+          return width;
+        }
       },
 
       closeMenu: function() {
