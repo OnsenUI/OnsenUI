@@ -94,9 +94,7 @@ select:focus {
   overflow: visible;
   width: 51px;
   height: 32px;
-  -webkit-border-radius: 30px;
-  border-radius: 30px;
-  z-index: 1;
+  z-index: 0;
   text-align: left;
 }
 .switch__input {
@@ -122,23 +120,39 @@ select:focus {
   margin-top: -6px;
   top: 0px;
   left: 0px;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
 .switch__toggle {
   background-color: #ddd;
-  width: 50px;
   position: absolute;
-  z-index: 0;
   top: 0px;
   left: 0px;
+  right: 0px;
+  bottom: 0px;
   -webkit-border-radius: 30px;
   border-radius: 30px;
-  height: 32px;
-  -webkit-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
-  -moz-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
-  -o-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
-  transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.35s;
+  -moz-transition-duration: 0.35s;
+  -o-transition-duration: 0.35s;
+  transition-duration: 0.35s;
+  -webkit-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -moz-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -o-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
 }
 .switch__toggle:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
   position: absolute;
   content: '';
   -webkit-border-radius: 28px;
@@ -146,33 +160,30 @@ select:focus {
   height: 28px;
   width: 28px;
   background-color: #fff;
-  border: none;
   left: 2px;
   top: 2px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  -webkit-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
-  -moz-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
-  -o-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
-  transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1) !important;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.35s;
+  -moz-transition-duration: 0.35s;
+  -o-transition-duration: 0.35s;
+  transition-duration: 0.35s;
+  -webkit-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -moz-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -o-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
 }
 .switch__input:checked + .switch__toggle {
   background-color: #4cd964;
 }
-.switch__input + .switch__toggle:before {
-  margin-left: 0px;
-}
 .switch__input:checked + .switch__toggle:before {
-  margin-left: 0px;
   -webkit-transform: translateX(18px);
   -moz-transform: translateX(18px);
   -ms-transform: translateX(18px);
   -o-transform: translateX(18px);
   transform: translateX(18px);
-  border-color: #4cd964;
 }
 .switch__input:not(:checked) + .switch__toggle:before {
   -webkit-transform: translateX(0px);
