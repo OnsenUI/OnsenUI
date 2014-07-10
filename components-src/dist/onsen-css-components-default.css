@@ -2420,6 +2420,9 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   -webkit-appearance: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   height: 31px;
   font-size: 15px;
   border: 1px solid #ddd;
@@ -2427,7 +2430,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
-  padding: 5px 0 5px 28px;
+  padding: 4px 0 0 28px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   background-image: url("data:image/svg+xml;utf8,<svg width='41px' height='40px' viewBox='0 0 41 40' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'><title>Slice 1</title><description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description><defs></defs><g id='Page 1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='search' fill='#C6C8C8'><path d='M0.504,16.338 C0.504,25.085 7.635,32.165 16.444,32.165 C25.24,32.165 32.382,25.085 32.382,16.338 C32.382,7.591 25.24,0.5 16.444,0.5 C7.635,0.5 0.504,7.591 0.504,16.338 L0.504,16.338 Z M5.555,16.338 C5.555,10.359 10.423,5.521 16.445,5.521 C22.455,5.521 27.333,10.36 27.333,16.338 C27.333,22.317 22.455,27.156 16.445,27.156 C10.423,27.156 5.555,22.316 5.555,16.338 L5.555,16.338 Z M27.666,30.861 L34.521,38.67 C35.625,39.772 36.338,39.781 37.46,38.67 L39.661,36.489 C40.743,35.408 40.811,34.711 39.661,33.568 L31.765,26.793 L27.666,30.861 L27.666,30.861 Z M27.666,30.861' id='Shape'></path></g></g></svg>");
@@ -2438,7 +2441,6 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-weight: 400;
   display: block;
   width: 100%;
-  vertical-align: middle;
 }
 .search-input:focus {
   background-color: #fff;
@@ -2451,7 +2453,9 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .search-input::-webkit-search-decoration {
   margin-right: 0px;
 }
-.search-input:focus::-webkit-input-placeholder {
+.search-input::-webkit-input-placeholder,
+.search-input::-moz-placeholder,
+.search-input::-ms-input-placeholder {
   color: #ccc;
 }
 .search-input:disabled {
@@ -2499,18 +2503,17 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
-  padding: 4px 8px;
+  padding: 4px 8px 0 8px;
+  margin: 0;
   font-size: 15px;
   height: 31px;
-  vertical-align: middle;
   font-weight: 400;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-.text-input::-webkit-input-placeholder {
-  color: #ccc;
-}
-.text-input::-moz-placeholder {
-  color: #ccc;
-}
+.text-input::-webkit-input-placeholder,
+.text-input::-moz-placeholder,
 .text-input::-ms-input-placeholder {
   color: #ccc;
 }
@@ -2564,11 +2567,14 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
-  padding: 4px 8px;
+  padding: 4px 8px 0 8px;
+  margin: 0;
   font-size: 15px;
   height: 31px;
-  vertical-align: middle;
   font-weight: 400;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   border: none;
   background-color: transparent;
   padding-left: 0;
@@ -2630,11 +2636,14 @@ webkit-input-placeholder() {
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
-  padding: 4px 8px;
+  padding: 4px 8px 0 8px;
+  margin: 0;
   font-size: 15px;
   height: 31px;
-  vertical-align: middle;
   font-weight: 400;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   border: none;
   background-color: transparent;
   border-bottom: 1px solid #ddd;
