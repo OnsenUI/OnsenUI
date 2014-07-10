@@ -219,7 +219,7 @@ limitations under the License.
 
         return {
           transform: transform,
-          'box-shadow': distance == 0 ? 'none' : '0px 0 10px 0px rgba(0, 0, 0, 0.2)'
+          'box-shadow': distance === 0 ? 'none' : '0px 0 10px 0px rgba(0, 0, 0, 0.2)'
         };
       },
 

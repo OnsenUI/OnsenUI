@@ -80,10 +80,7 @@ limitations under the License.
           function updateWidth(width) {
             if (typeof width  === 'string') {
               width = ('' + width).trim();
-
               width = width.match(/^\d+$/) ? width + '%' : width;
-
-              console.log(width);
 
               element.css({
                 '-webkit-box-flex': '0',
