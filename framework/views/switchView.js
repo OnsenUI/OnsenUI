@@ -42,7 +42,7 @@ limitations under the License.
         }.bind(this));
 
         scope.$watch('model', function(model) {
-          this.emit('change', {switch: this, value: !!model});
+          this.emit('change', {'switch': this, value: !!model});
         }.bind(this));
       },
 
