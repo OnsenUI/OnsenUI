@@ -1,13 +1,15 @@
 html {
-  width: 100%;
   height: 100%;
+  width: 100%;
 }
 body {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  margin: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
   padding: 0;
+  margin: 0;
 }
 *:not(input,
 textarea,
@@ -94,9 +96,7 @@ select:focus {
   overflow: visible;
   width: 51px;
   height: 32px;
-  -webkit-border-radius: 30px;
-  border-radius: 30px;
-  z-index: 1;
+  z-index: 0;
   text-align: left;
 }
 .switch__input {
@@ -122,8 +122,39 @@ select:focus {
   margin-top: -6px;
   top: 0px;
   left: 0px;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.switch__toggle {
+  background-color: #ddd;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.35s;
+  -moz-transition-duration: 0.35s;
+  -o-transition-duration: 0.35s;
+  transition-duration: 0.35s;
+  -webkit-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -moz-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -o-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
 }
 .switch__toggle:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
   position: absolute;
   content: '';
   -webkit-border-radius: 28px;
@@ -131,68 +162,42 @@ select:focus {
   height: 28px;
   width: 28px;
   background-color: #fff;
-  border: 1px solid #ddd;
-  left: 0;
-  top: 1px;
-  -webkit-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
-  -moz-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
-  -o-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
-  transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
+  left: 2px;
+  top: 2px;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.35s;
+  -moz-transition-duration: 0.35s;
+  -o-transition-duration: 0.35s;
+  transition-duration: 0.35s;
+  -webkit-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -moz-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -o-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
 }
-.switch__toggle {
-  background-color: #ddd;
-  width: 50px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  -webkit-border-radius: 30px;
-  border-radius: 30px;
-  height: 32px;
-}
-.switch__input + .switch__toggle:before {
-  margin-left: 0px;
+.switch__input:checked + .switch__toggle {
+  background-color: #4cd964;
 }
 .switch__input:checked + .switch__toggle:before {
-  margin-left: 0px;
-  -webkit-transform: translate3d(19px, 0px, 0px);
-  -moz-transform: translate3d(19px, 0px, 0px);
-  -o-transform: translate3d(19px, 0px, 0px);
-  transform: translate3d(19px, 0px, 0px);
-  border-color: #4cd964;
+  -webkit-transform: translateX(18px);
+  -moz-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  -o-transform: translateX(18px);
+  transform: translateX(18px);
 }
-.switch__input:active + .switch__toggle {
-  border: none;
-}
-.switch__input:focus + .switch__toggle {
-  border: none;
+.switch__input:not(:checked) + .switch__toggle:before {
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  -ms-transform: translateX(0px);
+  -o-transform: translateX(0px);
+  transform: translateX(0px);
 }
 .switch__input:disabled + .switch__toggle {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
-}
-.switch__input:checked + .switch__toggle {
-  background-color: #4cd964;
-  -webkit-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
-  box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
-  -webkit-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
-  -moz-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
-  -o-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
-  transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
-}
-.switch__input:not(:checked) + .switch__toggle {
-  -webkit-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.1);
-  box-shadow: inset 0 0 0 0px rgba(0,0,0,0.1);
-  -webkit-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
-  -moz-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
-  -o-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
-  transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
-}
-.switch__input:not(:checked) + .switch__toggle:before {
-  -webkit-transform: translate3d(1px, 0px, 0px);
-  -moz-transform: translate3d(1px, 0px, 0px);
-  -o-transform: translate3d(1px, 0px, 0px);
-  transform: translate3d(1px, 0px, 0px);
 }
 /* topdoc
   name: Range
@@ -234,6 +239,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -241,6 +247,7 @@ select:focus {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
+  line-height: 1;
   -webkit-appearance: none;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -347,6 +354,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -391,6 +399,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -478,6 +487,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -553,6 +563,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -635,6 +646,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -726,6 +738,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -817,6 +830,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -909,6 +923,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -996,6 +1011,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1368,6 +1384,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -1511,6 +1528,7 @@ select:focus {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1704,8 +1722,8 @@ select:focus {
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
-  height: 24px;
-  width: 24px;
+  height: 0;
+  width: 0;
 }
 .checkbox > input[type="checkbox"]:checked {
   background: #1284ff;
@@ -1869,6 +1887,27 @@ select:focus {
   height: 24px;
   background: transparent;
 }
+.checkbox--noborder > input[type="checkbox"] {
+  position: absolute;
+  overflow: hidden;
+  right: 0px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0;
+  width: 0;
+}
 .checkbox--noborder > input[type="checkbox"]:checked + .checkbox__checkmark:before {
   background: transparent;
   border: none;
@@ -1946,46 +1985,28 @@ select:focus {
   name: List
   class: list
   markup:
-    <div class="list">
-      <ul class="list__container">
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+    </ul>
 */
-.list {
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #f0eff4;
-}
 .list--noborder {
   border-top: none;
   border-bottom: none;
 }
 .list__header {
   margin: 0;
+  padding: 0;
+  list-style: none;
   text-align: left;
+  display: block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   padding: 0 0 0 10px;
   font-size: 15px;
   font-weight: 500;
@@ -1997,12 +2018,34 @@ select:focus {
   min-height: 24px;
   line-height: 24px;
 }
-.list__container {
+.list {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
   padding: 0;
   margin: 0;
   list-style-type: none;
   text-align: left;
+  overflow: auto;
+  display: block;
+  -webkit-overflow-scrolling: touch;
   padding: 0;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   background-color: #fff;
 }
 .list__item {
@@ -2013,6 +2056,7 @@ select:focus {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  display: block;
   padding: 0 0 0 10px;
   margin: 0 0 0 0;
   border-top: none;
@@ -2020,8 +2064,10 @@ select:focus {
   color: #1f1f21;
   background-color: #fff;
   min-height: 44px;
+  line-height: 44px;
 }
-.list__item__line-height {
+.list__item__line-height,
+.list__item--line-height {
   line-height: 44px;
 }
 .list__item_active:active {
@@ -2051,36 +2097,17 @@ select:focus {
   class: list--noborder
   use: List
   markup:
-    <div class="list--noborder">
-      <ul class="list__container">
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list list--noborder">
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+    </ul>
  */
 .list--noborder {
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  background-color: #f0eff4;
+  background-color: #fff;
   border-top: none;
   border-bottom: none;
 }
@@ -2089,30 +2116,31 @@ select:focus {
   class: list__header
   use: List
   markup:
-    <div class="list">
-      <h3 class="list__header">Category</h3>
-      <ul class="list__container">
-        <li class="list__item list__item__line-height">
-          Item
-        </li>
-        <li class="list__item list__item__line-height">
-          Item
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__header">
+        Header
+      </li>
+      <li class="list__item">
+        Item
+      </li>
+      <li class="list__header">
+        Header
+      </li>
+      <li class="list__item">
+        Item
+      </li>
+    </ul>
  */
 /* topdoc
   name: Tappable List
   class: list__item--tappable
   use: List
   markup:
-    <div class="list">
-      <ul class="list__container">
-        <li class="list__item list__item--tappable">
-          <span class="list__item__line-height">Tappable Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        Tappable Item
+      </li>
+    </ul>
  */
 .list__item--tappable {
   -webkit-transition: background-color 0.2s linear;
@@ -2134,20 +2162,45 @@ select:focus {
   transition: none;
 }
 /* topdoc
+  name: Switch in List Item
+  class: switch--list-item
+  use: Switch, List
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        Label
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input" checked>
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+      <li class="list__item">
+        Label
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input">
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+    </ul>
+*/
+.switch--list-item {
+  float: right;
+  margin-top: 6px;
+  margin-right: 10px;
+}
+/* topdoc
   name: List Item with Chevron
   class: list__item--chevron
   use: List
   markup:
-    <div class="list">
-      <ul class="list__container">
-        <li class="list__item list__item--chevron">
-          <span class="list__item__line-height">Tappable Item</span>
-        </li>
-        <li class="list__item list__item--chevron">
-          <span class="list__item__line-height">Tappable Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__item list__item--chevron">
+        Tappable Item
+      </li>
+      <li class="list__item list__item--chevron">
+        Tappable Item
+      </li>
+    </ul>
  */
 .list__item--chevron {
   -webkit-transition: background-color 0.2s linear;
@@ -2228,18 +2281,20 @@ select:focus {
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
-  height: 24px;
-  width: 24px;
-  margin-top: 0;
-  margin-right: -24px;
-  margin-bottom: -24px;
-  margin-left: 0;
+  height: 0px;
+  width: 0px;
 }
-.radio-button > input[type="radio"]:active {
+.radio-button > input[type="radio"]:active,
+.radio-button > input[type="radio"]:focus {
   outline: 0;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 .radio-button > input[type="radio"]:checked + .radio-button__checkmark:after {
   opacity: 1;
+}
+.radio-button > input[type="radio"]:checked + .radio-button__checkmark:before {
+  background: transparent;
+  border: none;
 }
 .radio-button {
   position: relative;
@@ -2356,6 +2411,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2363,11 +2419,15 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
+  line-height: 1;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   -webkit-appearance: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   height: 31px;
   font-size: 15px;
   border: 1px solid #ddd;
@@ -2375,7 +2435,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
-  padding: 5px 0 5px 28px;
+  padding: 4px 0 0 28px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   background-image: url("data:image/svg+xml;utf8,<svg width='41px' height='40px' viewBox='0 0 41 40' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'><title>Slice 1</title><description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description><defs></defs><g id='Page 1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='search' fill='#C6C8C8'><path d='M0.504,16.338 C0.504,25.085 7.635,32.165 16.444,32.165 C25.24,32.165 32.382,25.085 32.382,16.338 C32.382,7.591 25.24,0.5 16.444,0.5 C7.635,0.5 0.504,7.591 0.504,16.338 L0.504,16.338 Z M5.555,16.338 C5.555,10.359 10.423,5.521 16.445,5.521 C22.455,5.521 27.333,10.36 27.333,16.338 C27.333,22.317 22.455,27.156 16.445,27.156 C10.423,27.156 5.555,22.316 5.555,16.338 L5.555,16.338 Z M27.666,30.861 L34.521,38.67 C35.625,39.772 36.338,39.781 37.46,38.67 L39.661,36.489 C40.743,35.408 40.811,34.711 39.661,33.568 L31.765,26.793 L27.666,30.861 L27.666,30.861 Z M27.666,30.861' id='Shape'></path></g></g></svg>");
@@ -2386,7 +2446,6 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-weight: 400;
   display: block;
   width: 100%;
-  vertical-align: middle;
 }
 .search-input:focus {
   background-color: #fff;
@@ -2399,7 +2458,9 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .search-input::-webkit-search-decoration {
   margin-right: 0px;
 }
-.search-input:focus::-webkit-input-placeholder {
+.search-input::-webkit-input-placeholder,
+.search-input::-moz-placeholder,
+.search-input::-ms-input-placeholder {
   color: #ccc;
 }
 .search-input:disabled {
@@ -2426,6 +2487,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2433,6 +2495,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
+  line-height: 1;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2445,18 +2508,17 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
-  padding: 4px 8px;
+  padding: 4px 8px 0 8px;
+  margin: 0;
   font-size: 15px;
   height: 31px;
-  vertical-align: middle;
   font-weight: 400;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-.text-input::-webkit-input-placeholder {
-  color: #ccc;
-}
-.text-input::-moz-placeholder {
-  color: #ccc;
-}
+.text-input::-webkit-input-placeholder,
+.text-input::-moz-placeholder,
 .text-input::-ms-input-placeholder {
   color: #ccc;
 }
@@ -2489,6 +2551,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2496,6 +2559,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
+  line-height: 1;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2508,11 +2572,14 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
-  padding: 4px 8px;
+  padding: 4px 8px 0 8px;
+  margin: 0;
   font-size: 15px;
   height: 31px;
-  vertical-align: middle;
   font-weight: 400;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   border: none;
   background-color: transparent;
   padding-left: 0;
@@ -2553,6 +2620,7 @@ webkit-input-placeholder() {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2560,6 +2628,7 @@ webkit-input-placeholder() {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
+  line-height: 1;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2572,11 +2641,14 @@ webkit-input-placeholder() {
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
-  padding: 4px 8px;
+  padding: 4px 8px 0 8px;
+  margin: 0;
   font-size: 15px;
   height: 31px;
-  vertical-align: middle;
   font-weight: 400;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   border: none;
   background-color: transparent;
   border-bottom: 1px solid #ddd;
@@ -2626,6 +2698,7 @@ webkit-input-placeholder() {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2677,6 +2750,7 @@ webkit-input-placeholder() {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

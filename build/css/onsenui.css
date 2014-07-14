@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.0-dev - 2014-07-07 */
+/*! onsenui - v1.1.0-dev - 2014-07-14 */
 /*
 Copyright 2013-2014 ASIAL CORPORATION
 
@@ -36,6 +36,7 @@ ons-navigator {
 * {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
 }
 
 ::-webkit-scrollbar {
@@ -479,11 +480,16 @@ ons-toolbar + .page__content {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  width: 100%; }
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
 .row + .row {
   margin-top: -5px;
-  padding-top: 0; }
+  padding-top: 0;
+}
 
 .col {
   -webkit-box-flex: 1;
@@ -493,7 +499,11 @@ ons-toolbar + .page__content {
   -ms-flex: 1;
   flex: 1;
   display: block;
-  width: 100%; }
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
 /* Vertically Align Columns */
 /* .row-* vertically aligns every .col in the .row */
@@ -503,7 +513,8 @@ ons-toolbar + .page__content {
   -webkit-align-items: flex-start;
   -moz-align-items: flex-start;
   -moz-box-align: start;
-  align-items: flex-start; }
+  align-items: flex-start;
+}
 
 .row-bottom {
   -webkit-box-align: end;
@@ -511,7 +522,8 @@ ons-toolbar + .page__content {
   -webkit-align-items: flex-end;
   -moz-align-items: flex-end;
   -moz-box-align: end;
-  align-items: flex-end; }
+  align-items: flex-end;
+}
 
 .row-center {
   -webkit-box-align: center;
@@ -519,7 +531,8 @@ ons-toolbar + .page__content {
   -webkit-align-items: center;
   -moz-align-items: center;
   -moz-box-align: center;
-  align-items: center; }
+  align-items: center;
+}
 
 /* .col-* vertically aligns an individual .col */
 .col-top {
@@ -567,92 +580,6 @@ ons-toolbar + .page__content {
 
 .col-offset-90 {
   margin-left: 90%; }
-
-/* Explicit Column Percent Sizes */
-/* By default each grid column will evenly distribute */
-/* across the grid. However, you can specify individual */
-/* columns to take up a certain size of the available area */
-.col-10 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 10%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 10%;
-  -ms-flex: 0 0 10%;
-  flex: 0 0 10%;
-  max-width: 10%; }
-
-.col-20 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 20%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 20%;
-  -ms-flex: 0 0 20%;
-  flex: 0 0 20%;
-  max-width: 20%; }
-
-.col-25 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 25%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 25%;
-  -ms-flex: 0 0 25%;
-  flex: 0 0 25%;
-  max-width: 25%; }
-
-.col-33, .col-34 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 33.3333%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 33.3333%;
-  -ms-flex: 0 0 33.3333%;
-  flex: 0 0 33.3333%;
-  max-width: 33.3333%; }
-
-.col-50 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 50%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 50%;
-  -ms-flex: 0 0 50%;
-  flex: 0 0 50%;
-  max-width: 50%; }
-
-.col-66, .col-67 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 66.6666%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 66.6666%;
-  -ms-flex: 0 0 66.6666%;
-  flex: 0 0 66.6666%;
-  max-width: 66.6666%; }
-
-.col-75 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 75%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 75%;
-  -ms-flex: 0 0 75%;
-  flex: 0 0 75%;
-  max-width: 75%; }
-
-.col-80 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 80%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 80%;
-  -ms-flex: 0 0 80%;
-  flex: 0 0 80%;
-  max-width: 80%; }
-
-.col-90 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 90%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 90%;
-  -ms-flex: 0 0 90%;
-  flex: 0 0 90%;
-  max-width: 90%; }
-
 
 .row--fit > .col {
   -webkit-box-flex: 1;
@@ -767,18 +694,12 @@ ons-split-view {
   right: 0px;
   top: 0px;
   bottom: 0px;
-  overflow: hidden;
   z-index: 0;
 }
 
 .onsen-split-view__secondary {
   opacity: 0;
   width: 100%;
-  overflow: hidden;
-}
-
-.onsen-split-view__main {
-  overflow: hidden;
 }
 
 .onsen-split-view__secondary,

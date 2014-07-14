@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.0-dev - 2014-07-07 */
+/*! onsenui - v1.1.0-dev - 2014-07-14 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -3973,101 +3973,8 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/checkbox.tpl",
-    "<label class=\"checkbox\" class=\"{{modifierTemplater('checkbox--*')}}\">\n" +
-    "  <input type=\"checkbox\" ng-model=\"ngModel\" ng-true-value=\"{{ngTrueValue || true}}\" ng-false-value=\"{{ngFalseValue || false}}\">\n" +
-    "  <div class=\"checkbox__checkmark {{modifierTemplater('checkbox--*__checkmark')}}\"></div>\n" +
-    "  <span class=\"ons-checkbox-inner\" ng-transclude>\n" +
-    "  </span>\n" +
-    "</label>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/column.tpl",
-    "<div class=\"col col-{{align}} col-{{size}} col-{{offset}} ons-col-inner\"></div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("templates/icon.tpl",
-    "<i class=\"fa fa-{{icon}} fa-{{size}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}\"></i>");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/if_orientation.tpl",
-    "<div ng-show=\"orientation == userOrientation\" class=\"ons-if-orientation-inner\" ng-transclude>\n" +
-    "\n" +
-    "</div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/if_platform.tpl",
-    "<div class=\"ons-if-platform-inner\" ng-show=\"platform == userPlatform\" ng-transclude>\n" +
-    "\n" +
-    "</div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/list.tpl",
-    "<div class=\"list {{modifierTemplater('list--*')}}\">\n" +
-    "  <ul class=\"list__container {{modifierTemplater('list--*__container')}} ons-list-inner\">\n" +
-    "  </ul>\n" +
-    "</div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/list_item.tpl",
-    "<li class=\"list__item {{modifierTemplater('list__item--*')}} ons-list-item-inner\"></li>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/radio_button.tpl",
-    "<label class=\"radio-button {{modifierTemplater('radio-button--*')}}\">\n" +
-    "  {{leftLabel}}\n" +
-    "  <input type=\"radio\" name=\"{{name}}\" ng-model=\"ngModel\" value=\"{{value}}\">\n" +
-    "  <div class=\"radio-button__checkmark {{modifierTemplater('radio-button--*')}}\"></div>\n" +
-    "  {{rightLabel}}\n" +
-    "</label>\n" +
+    "<i class=\"fa fa-{{icon}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}\" ng-class=\"sizeClass\" ng-style=\"style\"></i>\n" +
     "");
 }]);
 })();
@@ -4110,17 +4017,6 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/search_input.tpl",
-    "<input type=\"search\" class=\"search-input\">\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("templates/sliding_menu.tpl",
     "<div class=\"onsen-sliding-menu__behind ons-sliding-menu-inner\"></div>\n" +
     "<div class=\"onsen-sliding-menu__above ons-sliding-menu-inner\"></div>\n" +
@@ -4136,6 +4032,20 @@ app.run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/split_view.tpl",
     "<div class=\"onsen-split-view__secondary full-screen ons-split-view-inner\"></div>\n" +
     "<div class=\"onsen-split-view__main full-screen ons-split-view-inner\"></div>\n" +
+    "");
+}]);
+})();
+
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("templates/switch.tpl",
+    "<label class=\"switch {{modifierTemplater('switch--*')}}\">\n" +
+    "  <input type=\"checkbox\" class=\"switch__input {{modifierTemplater('switch--*__input')}}\" ng-model=\"model\">\n" +
+    "  <div class=\"switch__toggle {{modifierTemplater('switch--*__toggle')}}\"></div>\n" +
+    "</label>\n" +
     "");
 }]);
 })();
@@ -4165,28 +4075,6 @@ app.run(["$templateCache", function($templateCache) {
     "    <div class=\"tab-bar__label\">{{label}}</div>\n" +
     "  </button>\n" +
     "</label>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/text_area.tpl",
-    "<textarea class=\"textarea\"></textarea>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
-  $templateCache.put("templates/text_input.tpl",
-    "<input class=\"text-input\">\n" +
     "");
 }]);
 })();
@@ -4360,12 +4248,19 @@ limitations under the License.
     } else {
       throw new Error('Invalid initialization state.');
     }
+
+    if (document.body) {
+      angular.element(document.body).attr('ng-cloak', 'ng-cloak');
+    }
+
   });
 
   // JS Global facade for Onsen UI.
   var ons = window.ons = {
 
     _readyLock: readyLock,
+
+    _unlockersDict: {},
 
     /**
      * Bootstrap this document as a Onsen UI application.
@@ -4446,13 +4341,24 @@ limitations under the License.
     },
 
     /**
+     * @param {Array} [dependencies]
      * @param {Function} callback
      */
-    ready : function(callback) {
-      if (ons.isReady()) {
-        callback();
-      } else {
-        readyLock.waitUnlock(callback);
+    ready : function(/* dependencies, */callback) {
+      if (callback instanceof Function) {
+        if (ons.isReady()) {
+          callback();
+        } else {
+          readyLock.waitUnlock(callback);
+        }
+      } else if (angular.isArray(callback) && arguments[1] instanceof Function) {
+        var dependencies = callback;
+        callback = arguments[1];
+
+        ons.ready(function() {
+          var $onsen = ons._getOnsenService();
+          $onsen.waitForVariables(dependencies, callback);
+        });
       }
     },
 
@@ -4499,242 +4405,16 @@ limitations under the License.
 */
 
 (function() {
-  'use strict';
-  var module = angular.module('onsen');
-
-  module.factory('DefaultSlidingMenuAnimator', function(SlidingMenuAnimator) {
-
-    var DefaultSlidingMenuAnimator = SlidingMenuAnimator.extend({
-
-      _blackMask: undefined,
-
-      _isRight: false,
-
-      /**
-       * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
-       * @param {Object} options
-       * @param {String} options.width "width" style value
-       * @param {Boolean} options.isRight
-       */
-      onAttached: function(element, mainPage, menuPage, options) {
-        options = options || {};
-        options.width = options.width || '90%';
-
-        this._isRight = !!options.isRight;
-
-        mainPage.css('box-shadow', '0px 0 10px 0px rgba(0, 0, 0, 0.2)');
-        menuPage.css({
-          width: options.width,
-          display: 'none'
-        });
-
-        if (this._isRight) {
-          menuPage.css({
-            right: '0px',
-            left: 'auto'
-          });
-        } else {
-          menuPage.css({
-            right: 'auto',
-            left: '0px'
-          });
-        }
-
-        this._blackMask = angular.element('<div></div>').css({
-          backgroundColor: 'black',
-          top: '0px',
-          left: '0px',
-          right: '0px',
-          bottom: '0px',
-          position: 'absolute',
-          display: 'none'
-        });
-
-        element.prepend(this._blackMask);
-
-        // Dirty fix for broken rendering bug on android 4.x.
-        animit(mainPage[0]).queue({transform: 'translate3d(0, 0, 0)'}).play();
-      },
-
-      /**
-       * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
-       */
-      onDetached: function(element, mainPage, menuPage) {
-        if (this._blackMask) {
-          this._blackMask.remove();
-          this._blackMask = null;
-        }
-
-        mainPage.removeAttr('style');
-        menuPage.removeAttr('style');
-      },
-
-      /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
-       * @param {Function} callback
-       */
-      open: function(mainPage, menuPage, callback) {
-
-        menuPage.css('display', 'block');
-        this._blackMask.css('display', 'block');
-
-        var max = menuPage[0].clientWidth;
-
-        var aboveTransform = this._generateAbovePageTransform(max);
-        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, max);
-
-        setTimeout(function() {
-
-          animit(mainPage[0])
-            .queue({
-              transform: aboveTransform
-            }, {
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .queue(function(done) {
-              callback();
-              done();
-            })
-            .play();
-
-          animit(menuPage[0])
-            .queue(behindStyle, {
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .play();
-
-        }, 1000 / 60);
-      },
-
-      /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
-       * @param {Function} callback
-       */
-      close: function(mainPage, menuPage, callback) {
-        this._blackMask.css('display', 'none');
-
-        var aboveTransform = this._generateAbovePageTransform(0);
-        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, 0);
-
-        setTimeout(function() {
-
-          animit(mainPage[0])
-            .queue({
-              transform: aboveTransform
-            }, {
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .queue({
-              transform: 'translate3d(0, 0, 0)'
-            })
-            .queue(function(done) {
-              menuPage.css('display', 'none');
-              callback();
-              done();
-            })
-            .play();
-
-          animit(menuPage[0])
-            .queue(behindStyle, {
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .queue(function(done) {
-              done();
-            })
-            .play();
-
-        }, 1000 / 60);
-      },
-
-      /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
-       * @param {Object} options
-       * @param {Number} options.distance
-       * @param {Number} options.maxDistance
-       */
-      translate: function(mainPage, menuPage, options) {
-
-        menuPage.css('display', 'block');
-        this._blackMask.css('display', 'block');
-
-        var aboveTransform = this._generateAbovePageTransform(Math.min(options.maxDistance, options.distance));
-        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, Math.min(options.maxDistance, options.distance));
-
-        animit(mainPage[0])
-          .queue({transform: aboveTransform})
-          .play();
-
-        animit(menuPage[0])
-          .queue(behindStyle)
-          .play();
-      },
-
-      _generateAbovePageTransform: function(distance) {
-        var x = this._isRight ? -distance : distance;
-        var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
-
-        return aboveTransform;
-      },
-
-      _generateBehindPageStyle: function(mainPage, behindPage, distance) {
-        var max = behindPage[0].clientWidth;
-
-        var behindDistance = Math.min((distance - max) / max * 10, 0);
-        var behindX = this._isRight ? -behindDistance : behindDistance;
-        var behindTransform = 'translate3d(' + behindX + '%, 0, 0)';
-        var opacity = 1 + behindDistance / 100;
-
-        return {
-          transform: behindTransform,
-          opacity: opacity
-        };
-      }
-    });
-
-    return DefaultSlidingMenuAnimator;
-  });
-
-})();
-
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-(function() {
   'use strict;';
 
   var module = angular.module('onsen');
 
-  module.factory('FadeInTransitionAnimator', function(NavigatorTransitionAnimator) {
+  module.factory('FadeTransitionAnimator', function(NavigatorTransitionAnimator) {
 
     /**
      * Fade-in screen transition.
      */
-    var FadeInTransitionAnimator = NavigatorTransitionAnimator.extend({
+    var FadeTransitionAnimator = NavigatorTransitionAnimator.extend({
 
       /**
        * @param {Object} enterPage
@@ -4838,7 +4518,7 @@ limitations under the License.
       }
     });
 
-    return FadeInTransitionAnimator;
+    return FadeTransitionAnimator;
   });
 
 })();
@@ -5545,7 +5225,7 @@ limitations under the License.
 
   module.factory('NavigatorView', function($http, $parse, $templateCache, $compile, $onsen,
     SimpleSlideTransitionAnimator, NavigatorTransitionAnimator, LiftTransitionAnimator,
-    NullTransitionAnimator, IOSSlideTransitionAnimator, FadeInTransitionAnimator) {
+    NullTransitionAnimator, IOSSlideTransitionAnimator, FadeTransitionAnimator) {
 
     /**
      * Manages the page navigation backed by page stack.
@@ -5607,6 +5287,8 @@ limitations under the License.
       },
 
       _destroy: function() {
+        this.emit('destroy', {navigator: this});
+
         this.pages.forEach(function(page) {
           page.destroy();
         });
@@ -5635,8 +5317,7 @@ limitations under the License.
        *
        * @param {String} page
        * @param {Object} [options]
-       * @param {String} [options.animation]
-       * @param {NavigatorTransitionAnimator} [options.animator]
+       * @param {String/NavigatorTransitionAnimator} [options.animation]
        * @param {Function} [options.onTransitionEnd]
        */
       pushPage: function(page, options) {
@@ -5703,8 +5384,8 @@ limitations under the License.
         function getAnimatorOption() {
           var animator = null;
 
-          if (options.animator instanceof NavigatorTransitionAnimator) {
-            return options.animator;
+          if (options.animation instanceof NavigatorTransitionAnimator) {
+            return options.animation;
           }
 
           if (typeof options.animation === 'string') {
@@ -5766,6 +5447,11 @@ limitations under the License.
             pageObject.pageScope = null;
             pageObject.options = null;
 
+            var index = self.pages.indexOf(this);
+            if (index !== -1) {
+              self.pages.splice(index, 1);
+            }
+
             self._refreshBackButtonHandler();
           }
         };
@@ -5791,7 +5477,7 @@ limitations under the License.
           unlock();
           self._refreshBackButtonHandler();
 
-          self.emit('post-push', event);
+          self.emit('postpush', event);
 
           if (typeof options.onTransitionEnd === 'function') {
             options.onTransitionEnd();
@@ -5824,7 +5510,7 @@ limitations under the License.
           }
         };
 
-        this.emit('pre-push', prePushEvent);
+        this.emit('prepush', prePushEvent);
 
         return isCanceled;
       },
@@ -5842,7 +5528,7 @@ limitations under the License.
           }
         };
 
-        this.emit('pre-pop', prePopEvent);
+        this.emit('prepop', prePopEvent);
 
         return isCanceled;
       },
@@ -5885,7 +5571,7 @@ limitations under the License.
             leavePage.destroy();
             unlock();
             self._refreshBackButtonHandler();
-            self.emit('post-pop', event);
+            self.emit('postpop', event);
             if (typeof options.onTransitionEnd === 'function') {
               options.onTransitionEnd();
             }
@@ -5956,7 +5642,7 @@ limitations under the License.
       'default': $onsen.isAndroid() ? new SimpleSlideTransitionAnimator() : new IOSSlideTransitionAnimator(),
       'slide': $onsen.isAndroid() ? new SimpleSlideTransitionAnimator() : new IOSSlideTransitionAnimator(),
       'lift': new LiftTransitionAnimator(),
-      'fadein': new FadeInTransitionAnimator(),
+      'fade': new FadeTransitionAnimator(),
       'none': new NullTransitionAnimator()
     };
 
@@ -6076,6 +5762,10 @@ limitations under the License.
       _blackMask: undefined,
 
       _isRight: false,
+      _element: false,
+      _menuPage: false,
+      _mainPage: false,
+      _width: false,
 
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
@@ -6085,11 +5775,13 @@ limitations under the License.
        * @param {String} options.width "width" style value
        * @param {Boolean} options.isRight
        */
-      onAttached: function(element, mainPage, menuPage, options) {
+      setup: function(element, mainPage, menuPage, options) {
         options = options || {};
-        options.width = options.width || '90%';
-
+        this._width = options.width || '90%';
         this._isRight = !!options.isRight;
+        this._element = element;
+        this._mainPage = mainPage;
+        this._menuPage = menuPage;
 
         menuPage.css('box-shadow', '0px 0 10px 0px rgba(0, 0, 0, 0.2)');
         menuPage.css({
@@ -6126,40 +5818,61 @@ limitations under the License.
       },
 
       /**
-       * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
+       * @param {Object} options
+       * @param {String} options.width
        */
-      onDetached: function(element, mainPage, menuPage) {
+      onResized: function(options) {
+        this._menuPage.css('width', options.width);
+
+        if (this._isRight) {
+          this._menuPage.css({
+            right: '-' + options.width,
+            left: 'auto'
+          });
+        } else {
+          this._menuPage.css({
+            right: 'auto',
+            left: '-' + options.width
+          });
+        }
+
+        if (options.isOpened) {
+          var max = this._menuPage[0].clientWidth;
+          var menuStyle = this._generateMenuPageStyle(max);
+          animit(this._menuPage[0]).queue(menuStyle).play();
+        }
+      },
+
+      /**
+       */
+      destroy: function() {
         if (this._blackMask) {
           this._blackMask.remove();
           this._blackMask = null;
         }
 
-        mainPage.removeAttr('style');
-        menuPage.removeAttr('style');
+        this._mainPage.removeAttr('style');
+        this._menuPage.removeAttr('style');
+
+        this._element = this._mainPage = this._menuPage = null;
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        * @param {Function} callback
        */
-      open: function(mainPage, menuPage, callback) {
+      openMenu: function(callback) {
 
-        menuPage.css('display', 'block');
+        this._menuPage.css('display', 'block');
         this._blackMask.css('display', 'block');
 
-        var max = menuPage[0].clientWidth;
-
-        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, max);
+        var max = this._menuPage[0].clientWidth;
+        var menuStyle = this._generateMenuPageStyle(max);
+        var mainPageStyle = this._generateMainPageStyle(max);
 
         setTimeout(function() {
 
-          animit(mainPage[0])
-            .queue({
-              opacity: 0.9
-            }, {
+          animit(this._mainPage[0])
+          .queue(mainPageStyle, {
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
@@ -6169,80 +5882,94 @@ limitations under the License.
             })
             .play();
 
-          animit(menuPage[0])
-            .queue(behindStyle, {
+          animit(this._menuPage[0])
+            .queue(menuStyle, {
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .play();
 
-        }, 1000 / 60);
+        }.bind(this), 1000 / 60);
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        * @param {Function} callback
        */
-      close: function(mainPage, menuPage, callback) {
+      closeMenu: function(callback) {
         this._blackMask.css({display: 'block'});
 
-        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, 0);
+        var menuPageStyle = this._generateMenuPageStyle(0);
+        var mainPageStyle = this._generateMainPageStyle(0);
 
         setTimeout(function() {
 
-          animit(mainPage[0])
-            .queue({
-              opacity: 1
-            }, {
+          animit(this._mainPage[0])
+            .queue(mainPageStyle, {
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .queue(function(done) {
-              menuPage.css('display', 'none');
+              this._menuPage.css('display', 'none');
               callback();
               done();
-            })
+            }.bind(this))
             .play();
 
-          animit(menuPage[0])
-            .queue(behindStyle, {
+          animit(this._menuPage[0])
+            .queue(menuPageStyle, {
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .play();
 
-        }, 1000 / 60);
+        }.bind(this), 1000 / 60);
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        * @param {Object} options
        * @param {Number} options.distance
        * @param {Number} options.maxDistance
        */
-      translate: function(mainPage, menuPage, options) {
+      translateMenu: function(options) {
 
-        menuPage.css('display', 'block');
+        this._menuPage.css('display', 'block');
         this._blackMask.css({display: 'block'});
 
-        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, Math.min(options.maxDistance, options.distance));
+        var menuPageStyle = this._generateMenuPageStyle(Math.min(options.maxDistance, options.distance));
+        var mainPageStyle = this._generateMainPageStyle(Math.min(options.maxDistance, options.distance));
 
-        animit(menuPage[0])
-          .queue(behindStyle)
+        animit(this._menuPage[0])
+          .queue(menuPageStyle)
+          .play();
+
+        animit(this._mainPage[0])
+          .queue(mainPageStyle)
           .play();
       },
 
-      _generateBehindPageStyle: function(mainPage, behindPage, distance) {
-        var max = behindPage[0].clientWidth;
+      _generateMenuPageStyle: function(distance) {
+        var max = this._menuPage[0].clientWidth;
 
-        var behindX = this._isRight ? -distance : distance;
-        var behindTransform = 'translate3d(' + behindX + 'px, 0, 0)';
+        var x = this._isRight ? -distance : distance;
+        var transform = 'translate3d(' + x + 'px, 0, 0)';
 
         return {
-          transform: behindTransform
+          transform: transform,
+          'box-shadow': distance === 0 ? 'none' : '0px 0 10px 0px rgba(0, 0, 0, 0.2)'
         };
+      },
+
+      _generateMainPageStyle: function(distance) {
+        var max = this._menuPage[0].clientWidth;
+        var opacity = 1 - (0.1 * distance / max);
+
+        return {
+          opacity: opacity
+        };
+      },
+
+      copy: function() {
+        return new OverlaySlidingMenuAnimator();
       }
     });
 
@@ -6420,11 +6147,13 @@ limitations under the License.
       },
 
       _destroy: function() {
+        this.emit('destroy', {page: this});
         this._toolbarElement = null;
         this._nullElement = null;
         this._bottomToolbarElement = null;
       }
     });
+    MicroEvent.mixin(PageView);
 
     return PageView;
   });
@@ -6457,6 +6186,10 @@ limitations under the License.
     var PushSlidingMenuAnimator = SlidingMenuAnimator.extend({
 
       _isRight: false,
+      _element: undefined,
+      _menuPage: undefined,
+      _mainPage: undefined,
+      _width: undefined,
 
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
@@ -6466,11 +6199,15 @@ limitations under the License.
        * @param {String} options.width "width" style value
        * @param {Boolean} options.isRight
        */
-      onAttached: function(element, mainPage, menuPage, options) {
+      setup: function(element, mainPage, menuPage, options) {
         options = options || {};
-        options.width = options.width || '90%';
+
+        this._element = element;
+        this._mainPage = mainPage;
+        this._menuPage = menuPage;
 
         this._isRight = !!options.isRight;
+        this._width = options.width || '90%';
 
         menuPage.css({
           width: options.width,
@@ -6491,32 +6228,59 @@ limitations under the License.
       },
 
       /**
-       * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
+       * @param {Object} options
+       * @param {String} options.width
+       * @param {Object} options.isRight
        */
-      onDetached: function(element, mainPage, menuPage) {
-        mainPage.removeAttr('style');
-        menuPage.removeAttr('style');
+      onResized: function(options) {
+        this._menuPage.css('width', options.width);
+
+        if (this._isRight) {
+          this._menuPage.css({
+            right: '-' + options.width,
+            left: 'auto'
+          });
+        } else {
+          this._menuPage.css({
+            right: 'auto',
+            left: '-' + options.width
+          });
+        }
+
+        if (options.isOpened) {
+          var max = this._menuPage[0].clientWidth;
+          var mainPageTransform = this._generateAbovePageTransform(max);
+          var menuPageStyle = this._generateBehindPageStyle(max);
+
+          animit(this._mainPage[0]).queue({transform: mainPageTransform}).play();
+          animit(this._menuPage[0]).queue(menuPageStyle).play();
+        }
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
+       */
+      destroy: function() {
+        this._mainPage.removeAttr('style');
+        this._menuPage.removeAttr('style');
+
+        this._element = this._mainPage = this._menuPage = null;
+      },
+
+      /**
        * @param {Function} callback
        */
-      open: function(mainPage, menuPage, callback) {
+      openMenu: function(callback) {
 
-        menuPage.css('display', 'block');
+        this._menuPage.css('display', 'block');
 
-        var max = menuPage[0].clientWidth;
+        var max = this._menuPage[0].clientWidth;
 
         var aboveTransform = this._generateAbovePageTransform(max);
-        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, max);
+        var behindStyle = this._generateBehindPageStyle(max);
 
         setTimeout(function() {
 
-          animit(mainPage[0])
+          animit(this._mainPage[0])
             .queue({
               transform: aboveTransform
             }, {
@@ -6529,29 +6293,27 @@ limitations under the License.
             })
             .play();
 
-          animit(menuPage[0])
+          animit(this._menuPage[0])
             .queue(behindStyle, {
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .play();
 
-        }, 1000 / 60);
+        }.bind(this), 1000 / 60);
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        * @param {Function} callback
        */
-      close: function(mainPage, menuPage, callback) {
+      closeMenu: function(callback) {
 
         var aboveTransform = this._generateAbovePageTransform(0);
-        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, 0);
+        var behindStyle = this._generateBehindPageStyle(0);
 
         setTimeout(function() {
 
-          animit(mainPage[0])
+          animit(this._mainPage[0])
             .queue({
               transform: aboveTransform
             }, {
@@ -6562,13 +6324,13 @@ limitations under the License.
               transform: 'translate3d(0, 0, 0)'
             })
             .queue(function(done) {
-              menuPage.css('display', 'none');
+              this._menuPage.css('display', 'none');
               callback();
               done();
-            })
+            }.bind(this))
             .play();
 
-          animit(menuPage[0])
+          animit(this._menuPage[0])
             .queue(behindStyle, {
               duration: 0.4,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
@@ -6578,28 +6340,26 @@ limitations under the License.
             })
             .play();
 
-        }, 1000 / 60);
+        }.bind(this), 1000 / 60);
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        * @param {Object} options
        * @param {Number} options.distance
        * @param {Number} options.maxDistance
        */
-      translate: function(mainPage, menuPage, options) {
+      translateMenu: function(options) {
 
-        menuPage.css('display', 'block');
+        this._menuPage.css('display', 'block');
 
         var aboveTransform = this._generateAbovePageTransform(Math.min(options.maxDistance, options.distance));
-        var behindStyle = this._generateBehindPageStyle(mainPage, menuPage, Math.min(options.maxDistance, options.distance));
+        var behindStyle = this._generateBehindPageStyle(Math.min(options.maxDistance, options.distance));
 
-        animit(mainPage[0])
+        animit(this._mainPage[0])
           .queue({transform: aboveTransform})
           .play();
 
-        animit(menuPage[0])
+        animit(this._menuPage[0])
           .queue(behindStyle)
           .play();
       },
@@ -6611,8 +6371,8 @@ limitations under the License.
         return aboveTransform;
       },
 
-      _generateBehindPageStyle: function(mainPage, behindPage, distance) {
-        var max = behindPage[0].clientWidth;
+      _generateBehindPageStyle: function(distance) {
+        var max = this._menuPage[0].clientWidth;
 
         var behindX = this._isRight ? -distance : distance;
         var behindTransform = 'translate3d(' + behindX + 'px, 0, 0)';
@@ -6620,10 +6380,264 @@ limitations under the License.
         return {
           transform: behindTransform
         };
+      },
+
+      copy: function() {
+        return new PushSlidingMenuAnimator();
       }
     });
 
     return PushSlidingMenuAnimator;
+  });
+
+})();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function() {
+  'use strict';
+  var module = angular.module('onsen');
+
+  module.factory('RevealSlidingMenuAnimator', function(SlidingMenuAnimator) {
+
+    var RevealSlidingMenuAnimator = SlidingMenuAnimator.extend({
+
+      _blackMask: undefined,
+
+      _isRight: false,
+
+      _menuPage: undefined,
+      _element: undefined,
+      _mainPage: undefined,
+
+      /**
+       * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
+       * @param {jqLite} mainPage
+       * @param {jqLite} menuPage
+       * @param {Object} options
+       * @param {String} options.width "width" style value
+       * @param {Boolean} options.isRight
+       */
+      setup: function(element, mainPage, menuPage, options) {
+        this._element = element;
+        this._menuPage = menuPage;
+        this._mainPage = mainPage;
+        this._isRight = !!options.isRight;
+        this._width = options.width || '90%';
+
+        mainPage.css('box-shadow', '0px 0 10px 0px rgba(0, 0, 0, 0.2)');
+        menuPage.css({
+          width: options.width,
+          display: 'none'
+        });
+
+        if (this._isRight) {
+          menuPage.css({
+            right: '0px',
+            left: 'auto'
+          });
+        } else {
+          menuPage.css({
+            right: 'auto',
+            left: '0px'
+          });
+        }
+
+        this._blackMask = angular.element('<div></div>').css({
+          backgroundColor: 'black',
+          top: '0px',
+          left: '0px',
+          right: '0px',
+          bottom: '0px',
+          position: 'absolute',
+          display: 'none'
+        });
+
+        element.prepend(this._blackMask);
+
+        // Dirty fix for broken rendering bug on android 4.x.
+        animit(mainPage[0]).queue({transform: 'translate3d(0, 0, 0)'}).play();
+      },
+
+      /**
+       * @param {Object} options
+       * @param {Boolean} options.isOpened
+       * @param {String} options.width
+       */
+      onResized: function(options) {
+        this._width = options.width;
+        this._menuPage.css('width', this._width);
+
+        if (options.isOpened) {
+          var max = this._menuPage[0].clientWidth;
+
+          var aboveTransform = this._generateAbovePageTransform(max);
+          var behindStyle = this._generateBehindPageStyle(max);
+
+          animit(this._mainPage[0]).queue({transform: aboveTransform}).play();
+          animit(this._menuPage[0]).queue(behindStyle).play();
+        }
+      },
+
+      /**
+       * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
+       * @param {jqLite} mainPage
+       * @param {jqLite} menuPage
+       */
+      destroy: function() {
+        if (this._blackMask) {
+          this._blackMask.remove();
+          this._blackMask = null;
+        }
+
+        this._mainPage.removeAttr('style');
+        this._menuPage.removeAttr('style');
+        this._mainPage = this._menuPage = this._element = undefined;
+      },
+
+      /**
+       * @param {Function} callback
+       */
+      openMenu: function(callback) {
+
+        this._menuPage.css('display', 'block');
+        this._blackMask.css('display', 'block');
+
+        var max = this._menuPage[0].clientWidth;
+
+        var aboveTransform = this._generateAbovePageTransform(max);
+        var behindStyle = this._generateBehindPageStyle(max);
+
+        setTimeout(function() {
+
+          animit(this._mainPage[0])
+            .queue({
+              transform: aboveTransform
+            }, {
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .queue(function(done) {
+              callback();
+              done();
+            })
+            .play();
+
+          animit(this._menuPage[0])
+            .queue(behindStyle, {
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .play();
+
+        }.bind(this), 1000 / 60);
+      },
+
+      /**
+       * @param {Function} callback
+       */
+      closeMenu: function(callback) {
+        this._blackMask.css('display', 'block');
+
+        var aboveTransform = this._generateAbovePageTransform(0);
+        var behindStyle = this._generateBehindPageStyle(0);
+
+        setTimeout(function() {
+
+          animit(this._mainPage[0])
+            .queue({
+              transform: aboveTransform
+            }, {
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .queue({
+              transform: 'translate3d(0, 0, 0)'
+            })
+            .queue(function(done) {
+              this._menuPage.css('display', 'none');
+              callback();
+              done();
+            }.bind(this))
+            .play();
+
+          animit(this._menuPage[0])
+            .queue(behindStyle, {
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .queue(function(done) {
+              done();
+            })
+            .play();
+
+        }.bind(this), 1000 / 60);
+      },
+
+      /**
+       * @param {Object} options
+       * @param {Number} options.distance
+       * @param {Number} options.maxDistance
+       */
+      translateMenu: function(options) {
+
+        this._menuPage.css('display', 'block');
+        this._blackMask.css('display', 'block');
+
+        var aboveTransform = this._generateAbovePageTransform(Math.min(options.maxDistance, options.distance));
+        var behindStyle = this._generateBehindPageStyle(Math.min(options.maxDistance, options.distance));
+
+        animit(this._mainPage[0])
+          .queue({transform: aboveTransform})
+          .play();
+
+        animit(this._menuPage[0])
+          .queue(behindStyle)
+          .play();
+      },
+
+      _generateAbovePageTransform: function(distance) {
+        var x = this._isRight ? -distance : distance;
+        var aboveTransform = 'translate3d(' + x + 'px, 0, 0)';
+
+        return aboveTransform;
+      },
+
+      _generateBehindPageStyle: function(distance) {
+        var max = this._menuPage[0].clientWidth;
+
+        var behindDistance = Math.min((distance - max) / max * 10, 0);
+        var behindX = this._isRight ? -behindDistance : behindDistance;
+        var behindTransform = 'translate3d(' + behindX + '%, 0, 0)';
+        var opacity = 1 + behindDistance / 100;
+
+        return {
+          transform: behindTransform,
+          opacity: opacity
+        };
+      },
+
+      copy: function() {
+        return new RevealSlidingMenuAnimator();
+      }
+    });
+
+    return RevealSlidingMenuAnimator;
   });
 
 })();
@@ -6855,17 +6869,24 @@ limitations under the License.
      * @param {Number} maxDistance
      */
     init: function(options) {
-      this._maxDistance = options.maxDistance;
-
       if (!angular.isNumber(options.maxDistance)) {
         throw new Error('options.maxDistance must be number');
       }
+
+      this.setMaxDistance(options.maxDistance);
     },
 
     /**
      * @param {Number} maxDistance
      */
     setMaxDistance: function(maxDistance) {
+      if (maxDistance <= 0) {
+        throw new Error('maxDistance must be greater then zero.');
+      }
+
+      if (this.isOpened()) {
+        this._distance = maxDistance;
+      }
       this._maxDistance = maxDistance;
     },
 
@@ -6945,7 +6966,7 @@ limitations under the License.
      * @param {Number} x
      */
     translate: function(x) {
-      this._distance = Math.max(0, Math.min(this._maxDistance, x));
+      this._distance = Math.max(1, Math.min(this._maxDistance - 1, x));
 
       var options = {
         distance: this._distance,
@@ -6966,7 +6987,7 @@ limitations under the License.
   MicroEvent.mixin(SlidingMenuViewModel);
 
   var MAIN_PAGE_RATIO = 0.9;
-  module.factory('SlidingMenuView', function($onsen, $compile, SlidingMenuAnimator, DefaultSlidingMenuAnimator, 
+  module.factory('SlidingMenuView', function($onsen, $compile, SlidingMenuAnimator, RevealSlidingMenuAnimator, 
                                              PushSlidingMenuAnimator, OverlaySlidingMenuAnimator) {
 
     var SlidingMenuView = Class.extend({
@@ -6993,8 +7014,8 @@ limitations under the License.
 
         this._isRightMenu = attrs.side === 'right';
 
-        var maxDistance = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
-        this._logic = new SlidingMenuViewModel({maxDistance: maxDistance});
+        var maxDistance = this._normalizeMaxSlideDistanceAttr();
+        this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
         this._logic.on('translate', this._translate.bind(this));
         this._logic.on('open', function(options) {
           this._open(options.callback);
@@ -7005,47 +7026,79 @@ limitations under the License.
 
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
         attrs.$observe('swipable', this._onSwipableChanged.bind(this));
-        attrs.$observe('swipeTargetWidth', this._onSwipeTargetWidthChanged.bind(this));
 
         window.addEventListener('resize', this._onWindowResize.bind(this));
 
         this._boundHandleEvent = this._handleEvent.bind(this);
         this._bindEvents();
 
-        if (attrs.abovePage) {
-          this.setAbovePage(attrs.abovePage);
+        if (attrs.mainPage) {
+          this.setMainPage(attrs.mainPage);
+        } else if (attrs.abovePage) {
+          this.setMainPage(attrs.abovePage);
         }
 
-        if (attrs.behindPage) {
-          this.setBehindPage(attrs.behindPage);
+        if (attrs.menuPage) {
+          this.setMenuPage(attrs.menuPage);
+        } else if (attrs.behindPage) {
+          this.setMenuPage(attrs.behindPage);
         }
 
         var unlock = this._doorLock.lock();
 
         window.setTimeout(function() {
+          var maxDistance = this._normalizeMaxSlideDistanceAttr();
+          this._logic.setMaxDistance(maxDistance);
+
           unlock();
 
           this._behindPage.css({opacity: 1});
 
           this._animator = this._getAnimatorOption();
-          this._animator.onAttached(
+          this._animator.setup(
             this._element,
             this._abovePage,
             this._behindPage,
-            {isRight: this._isRightMenu}
+            {
+              isRight: this._isRightMenu,
+              width: this._attrs.maxSlideDistance || '90%'
+            }
           );
 
         }.bind(this), 400);
+
+        scope.$on('$destroy', this._destroy.bind(this));
+      },
+
+      _refreshBehindPageWidth: function() {
+        var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
+
+        if (('maxSlideDistance' in this._attrs) && this._animator) {
+          this._animator.onResized(
+            {
+              isOpened: this._logic.isOpened(),
+              width: width
+            }
+          );
+        }
+      },
+
+      _destroy: function() {
+        this.emit('destroy', {slidingMenu: this});
+
+        this._element = null;
+        this._scope = null;
+        this._attrs = null;
       },
 
       _getAnimatorOption: function() {
-        var animator = SlidingMenuView._animatorDict[this._attrs['type']];
+        var animator = SlidingMenuView._animatorDict[this._attrs.type];
 
         if (!(animator instanceof SlidingMenuAnimator)) {
           animator = SlidingMenuView._animatorDict['default'];
         }
 
-        return animator;
+        return animator.copy();
       },
 
       _onSwipableChanged: function(swipable) {
@@ -7065,45 +7118,40 @@ limitations under the License.
         }
       },
 
-      /**
-       * @param {Number} targetWidth
-       */
-      setSwipeTargetWidth: function(targetWidth) {
-        var width = parseInt(targetWidth, 10);
-        if (width < 0 || !targetWidth) {
-          this._swipeTargetWidth = this._abovePage[0].clientWidth;
-        } else {
-          this._swipeTargetWidth = width;
-        }
-      },
-
-      _onSwipeTargetWidthChanged: function(targetWidth) {
-        if (typeof targetWidth == 'string') {
-          targetWidth = targetWidth.replace('px', '');
-        }
-
-        this.setSwipeTargetWidth(targetWidth);
-      },
-
       _onWindowResize: function() {
         this._recalculateMAX();
+        this._refreshBehindPageWidth();
       },
 
       _onMaxSlideDistanceChanged: function() {
         this._recalculateMAX();
+        this._refreshBehindPageWidth();
       },
 
-      _recalculateMAX: function() {
+      /**
+       * @return {Number}
+       */
+      _normalizeMaxSlideDistanceAttr: function() {
         var maxDistance = this._attrs.maxSlideDistance;
 
-        if (typeof maxDistance == 'string') {
-          if (maxDistance.indexOf('px') > 0) {
-            maxDistance = maxDistance.replace('px', '');
-          } else if (maxDistance.indexOf('%') > 0) {
+        if (!('maxSlideDistance' in this._attrs)) {
+          maxDistance = 0.9 * this._abovePage[0].clientWidth;
+        } else if (typeof maxDistance == 'string') {
+          if (maxDistance.indexOf('px', maxDistance.length - 2) !== -1) {
+            maxDistance = parseInt(maxDistance.replace('px', ''), 10);
+          } else if (maxDistance.indexOf('%', maxDistance.length - 1) > 0) {
             maxDistance = maxDistance.replace('%', '');
             maxDistance = parseFloat(maxDistance) / 100 * this._abovePage[0].clientWidth;
           }
+        } else {
+          throw new Error('invalid state');
         }
+
+        return maxDistance;
+      },
+
+      _recalculateMAX: function() {
+        var maxDistance = this._normalizeMaxSlideDistanceAttr();
 
         if (maxDistance) {
           this._logic.setMaxDistance(parseInt(maxDistance, 10));
@@ -7162,7 +7210,7 @@ limitations under the License.
        * @param {Boolean} [options.closeMenu]
        * @param {Boolean} [options.callback]
        */
-      setBehindPage: function(page, options) {
+      setMenuPage: function(page, options) {
         if (page) {
           options = options || {};
           options.callback = options.callback || function() {};
@@ -7182,14 +7230,17 @@ limitations under the License.
         }
       },
 
+      setBehindPage: function() {
+        return this.setMenuPage.apply(this, arguments);
+      },
+
       /**
        * @param {String} pageUrl
        * @param {Object} options
        * @param {Boolean} [options.closeMenu]
        * @param {Boolean} [options.callback]
        */
-      setAbovePage: function(pageUrl, options) {
-
+      setMainPage: function(pageUrl, options) {
         options = options || {};
         options.callback = options.callback || function() {};
 
@@ -7218,6 +7269,10 @@ limitations under the License.
         }
       },
 
+      setAbovePage: function(pageUrl, options) {
+        return this.setMainPage.apply(this, arguments);
+      },
+
       _handleEvent: function(event) {
 
         if (this._doorLock.isLocked()) {
@@ -7225,14 +7280,14 @@ limitations under the License.
         }
 
         if (this._isInsideIgnoredElement(event.target)){
-          event._gesture.stopDetect();
+          event.gesture.stopDetect();
         }
 
         switch (event.type) {
 
           case 'touch':
             if (this._logic.isClosed()) {
-              if (!this._isInsideSwipeTargetArea(event.gesture.center.pageX)) {
+              if (!this._isInsideSwipeTargetArea(event)) {
                 event.gesture.stopDetect();
               }
             }
@@ -7243,7 +7298,14 @@ limitations under the License.
           case 'dragright':
             event.gesture.preventDefault();
 
-            var deltaDistance = this._isRightMenu ? -event.gesture.deltaX : event.gesture.deltaX;
+            var deltaX = event.gesture.deltaX;
+            var deltaDistance = this._isRightMenu ? -deltaX : deltaX;
+
+            var startEvent = event.gesture.startEvent;
+
+            if (!('isOpened' in startEvent)) {
+              startEvent.isOpened = this._logic.isOpened();
+            }
 
             if (deltaDistance < 0 && this._logic.isClosed()) {
               break;
@@ -7253,9 +7315,8 @@ limitations under the License.
               break;
             }
 
-            var distance = deltaDistance > 0
-              ? deltaDistance
-              : deltaDistance + this._logic.getMaxDistance() ;
+            var distance = startEvent.isOpened ?
+              deltaDistance + this._logic.getMaxDistance() : deltaDistance;
 
             this._logic.translate(distance);
 
@@ -7270,6 +7331,7 @@ limitations under the License.
               this.close();
             }
 
+            event.gesture.stopDetect();
             break;
 
           case 'swiperight':
@@ -7281,9 +7343,12 @@ limitations under the License.
               this.open();
             }
 
+            event.gesture.stopDetect();
             break;
 
           case 'release':
+            this._lastDistance = null;
+
             if (this._logic.shouldOpen()) {
               this.open();
             } else if (this._logic.shouldClose()) {
@@ -7309,8 +7374,30 @@ limitations under the License.
         return false;
       },
 
-      _isInsideSwipeTargetArea: function(x) {
-        return this._isRightMenu ? this._abovePage[0].clientWidth - x < this._swipeTargetWidth : x < this._swipeTargetWidth;
+      _isInsideSwipeTargetArea: function(event) {
+        var x = event.gesture.center.pageX;
+
+        if (!('_swipeTargetWidth' in event.gesture.startEvent)) {
+          event.gesture.startEvent._swipeTargetWidth = this._getSwipeTargetWidth();
+        }
+
+        var targetWidth = event.gesture.startEvent._swipeTargetWidth;
+        return this._isRightMenu ? this._abovePage[0].clientWidth - x < targetWidth : x < targetWidth;
+      },
+
+      _getSwipeTargetWidth: function() {
+        var targetWidth = this._attrs.swipeTargetWidth;
+
+        if (typeof targetWidth == 'string') {
+          targetWidth = targetWidth.replace('px', '');
+        }
+
+        var width = parseInt(targetWidth, 10);
+        if (width < 0 || !targetWidth) {
+          return this._abovePage[0].clientWidth;
+        } else {
+          return width;
+        }
       },
 
       closeMenu: function() {
@@ -7336,7 +7423,7 @@ limitations under the License.
         callback = callback || function() {};
 
         var unlock = this._doorLock.lock();
-        this._animator.close(this._abovePage, this._behindPage, function() {
+        this._animator.closeMenu(function() {
           unlock();
           this.emit('postclose');
           callback();
@@ -7365,8 +7452,8 @@ limitations under the License.
       _open: function(callback) {
         callback = callback || function() {};
         var unlock = this._doorLock.lock();
-        
-        this._animator.open(this._abovePage, this._behindPage, function() {
+
+        this._animator.openMenu(function() {
           unlock();
           this.emit('postopen');
           callback();
@@ -7395,15 +7482,15 @@ limitations under the License.
        * @param {Object} event
        */
       _translate: function(event) {
-        this._animator.translate(this._abovePage, this._behindPage, event);
+        this._animator.translateMenu(event);
       }
     });
 
     // Preset sliding menu animators.
     SlidingMenuView._animatorDict = {
-      'default': new DefaultSlidingMenuAnimator(),
+      'default': new RevealSlidingMenuAnimator(),
       'overlay': new OverlaySlidingMenuAnimator(),
-      'reveal': new DefaultSlidingMenuAnimator(),
+      'reveal': new RevealSlidingMenuAnimator(),
       'push': new PushSlidingMenuAnimator()
     };
 
@@ -7457,41 +7544,48 @@ limitations under the License.
        * @param {String} options.width "width" style value
        * @param {Boolean} options.isRight
        */
-      onAttached: function(element, mainPage, menuPage, options) {
+      setup: function(element, mainPage, menuPage, options) {
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
+       * @param {Object} options
+       * @param {Boolean} options.isRight
+       * @param {Boolean} options.isOpened
+       * @param {String} options.width
+       */
+      onResized: function(options) {
+      },
+
+      /**
        * @param {Function} callback
        */
-      open: function(mainPage, menuPage, callback) {
+      openMenu: function(callback) {
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        * @param {Function} callback
        */
-      close: function(mainPage, menuPage, callback) {
+      closeClose: function(callback) {
       },
 
       /**
-       * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        */
-      onDetached: function(element, mainPage, menuPage) {
+      destroy: function() {
       },
 
       /**
-       * @param {jqLite} mainPage
-       * @param {jqLite} menuPage
        * @param {Object} options
        * @param {Number} options.distance
        * @param {Number} options.maxDistance
        */
-      translate: function(mainPage, menuPage, options) {
+      translateMenu: function(mainPage, menuPage, options) {
+      },
+
+      /**
+       * @return {SlidingMenuAnimator}
+       */
+      copy: function() {
+        throw new Error('Override copy method.');
       }
     });
   });
@@ -7517,7 +7611,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('SplitView', function($compile, DefaultSlidingMenuAnimator, $onsen) {
+  module.factory('SplitView', function($compile, RevealSlidingMenuAnimator, $onsen) {
     var SPLIT_MODE = 0;
     var COLLAPSE_MODE = 1;
     var MAIN_PAGE_RATIO = 0.9;
@@ -7550,7 +7644,7 @@ limitations under the License.
         window.addEventListener('orientationchange', this._onOrientationChange.bind(this));
         window.addEventListener('resize', this._onResize.bind(this));
 
-        this._animator = new DefaultSlidingMenuAnimator();
+        this._animator = new RevealSlidingMenuAnimator();
 
         this._element.css('display', 'none');
 
@@ -7565,11 +7659,14 @@ limitations under the License.
         var unlock = this._doorLock.lock();
 
         this._considerChangingCollapse();
+        this._setSize();
 
         setTimeout(function() {
           this._element.css('display', 'block');
           unlock();
         }.bind(this), 1000 / 60 * 2);
+
+        scope.$on('$destroy', this._destroy.bind(this));
       },
 
       /**
@@ -7639,11 +7736,21 @@ limitations under the License.
       },
 
       _onOrientationChange: function() {
-        this._considerChangingCollapse();
+        this._onResize();
       },
 
       _onResize: function() {
         this._considerChangingCollapse();
+
+        if (this._mode === COLLAPSE_MODE) {
+          this._animator.onResized(
+            {
+              isOpened: this._startX > 0,
+              width: '90%'
+            }
+          );
+        }
+
         this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
       },
 
@@ -7696,21 +7803,24 @@ limitations under the License.
       },
 
       _setSize: function() {
-        if (!this._scope.mainPageWidth) {
-          this._scope.mainPageWidth = '70';
+        if (this._mode === SPLIT_MODE) {
+          if (!this._scope.mainPageWidth) {
+            this._scope.mainPageWidth = '70';
+          }
+
+          var behindSize = 100 - this._scope.mainPageWidth.replace('%', '');
+          this._behindPage.css({
+            width: behindSize + '%',
+            opacity: 1
+          });
+
+          this._abovePage.css({
+            width: this._scope.mainPageWidth + '%'
+          });
+
+          this._abovePage.css('left', behindSize + '%');
+          this._currentX = this._behindPage[0].clientWidth;
         }
-
-        var behindSize = 100 - this._scope.mainPageWidth.replace('%', '');
-        this._behindPage.css({
-          width: behindSize + '%',
-          opacity: 1
-        });
-
-        this._abovePage.css({
-          width: this._scope.mainPageWidth + '%'
-        });
-
-        this._translateAboveOnly(this._behindPage[0].clientWidth);
       },
 
       _activateCollapseMode: function() {
@@ -7722,8 +7832,11 @@ limitations under the License.
 
           this._onSwipableChanged(this._scope.swipable);
 
-          this._animator.onAttached(
-            this._element, this._abovePage, this._behindPage
+          this._animator.setup(
+            this._element,
+            this._abovePage,
+            this._behindPage,
+            {isRight: false, width: '90%'}
           );
 
           this._translate(0);
@@ -7732,11 +7845,7 @@ limitations under the License.
 
       _activateSplitMode: function() {
         if (this._mode !== SPLIT_MODE) {
-          this._animator.onDetached(
-            this._element,
-            this._abovePage,
-            this._behindPage
-          );
+          this._animator.destroy();
 
           this._behindPage.removeAttr('style');
           this._abovePage.removeAttr('style');
@@ -7824,15 +7933,11 @@ limitations under the License.
               var unlock = self._doorLock.lock();
               self._currentX = 0;
 
-              self._animator.close(
-                self._abovePage,
-                self._behindPage,
-                function() {
-                  unlock();
-                  self._onTransitionEnd();
-                  callback();
-                }
-              );
+              self._animator.closeMenu(function() {
+                unlock();
+                self._onTransitionEnd();
+                callback();
+              });
             });
           }
         }
@@ -7853,15 +7958,11 @@ limitations under the License.
               var unlock = self._doorLock.lock();
               self._currentX = self._max;
 
-              self._animator.open(
-                self._abovePage, 
-                self._behindPage, 
-                function() {
-                  unlock();
-                  self._onTransitionEnd();
-                  callback();
-                }
-              );
+              self._animator.openMenu(function() {
+                unlock();
+                self._onTransitionEnd();
+                callback();
+              });
             });
           }
         }
@@ -7884,16 +7985,15 @@ limitations under the License.
             maxDistance: this._max
           };
 
-          this._animator.translate(this._abovePage, this._behindPage, options);
+          this._animator.translateMenu(options);
         }
       },
 
-      _translateAboveOnly: function(x) {
-        var aboveTransform = 'translate2d(' + x + 'px, 0)';
-        var behindTransform = 'none';
+      _destroy: function() {
+        this.emit('destroy', {splitView: this});
 
-        this._abovePage.css('left', x + 'px');
-        this._currentX = x;
+        this._element = null;
+        this._scope = null;
       }
     });
 
@@ -7901,10 +8001,87 @@ limitations under the License.
       return !isNaN(parseFloat(n)) && isFinite(n);
     }
 
+    MicroEvent.mixin(SplitView);
+
     return SplitView;
 
   });
 
+})();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function(){
+  'use strict';
+  var module = angular.module('onsen');
+
+  module.factory('SwitchView', function($onsen) {
+
+    var SwitchView = Class.extend({
+
+      /**
+       * @param {jqLite} element
+       * @param {Object} scope
+       * @param {Object} attrs
+       */
+      init: function(element, scope, attrs) {
+        this._element = element;
+        this._checkbox = angular.element(element[0].querySelector('input[type=checkbox]'));
+        this._scope = scope;
+
+        attrs.$observe('disabled', function(disabled) {
+          if (!!element.attr('disabled')) {
+            this._checkbox.attr('disabled', 'disabled');
+          } else {
+            this._checkbox.removeAttr('disabled');
+          }
+        }.bind(this));
+
+        scope.$watch('model', function(model) {
+          this.emit('change', {'switch': this, value: !!model});
+        }.bind(this));
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      isChecked: function() {
+        return this._checkbox[0].checked;
+      },
+
+      /**
+       * @param {Boolean}
+       */
+      setChecked: function(isChecked) {
+        this._checkbox[0].checked = !!isChecked;
+      },
+
+      /**
+       * @return {HTMLElement}
+       */
+      getCheckboxElemenet: function() {
+        return this._checkbox[0];
+      }
+    });
+    MicroEvent.mixin(SwitchView);
+
+    return SwitchView;
+  });
 })();
 
 /*
@@ -7994,7 +8171,6 @@ limitations under the License.
     return {
       restrict: 'E',
       replace: false,
-      require: '^onsPage',
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
@@ -8010,12 +8186,13 @@ limitations under the License.
         element.css({'z-index': 0});
 
         return {
-          pre: function(scope, element, attrs, pageController) {
+          pre: function(scope, element, attrs) {
             // modifier
             scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
-            if (pageController) {
-              pageController.registerBottomToolbar(element);
+            var pageView = element.inheritedData('ons-page');
+            if (pageView) {
+              pageView.registerBottomToolbar(element);
             }
           }
         };
@@ -8070,6 +8247,10 @@ limitations under the License.
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs){
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
+
         var effectButton = element;
         var TYPE_PREFIX = 'button--';
         scope.item = {};
@@ -8126,88 +8307,12 @@ limitations under the License.
 
 /**
  * @ngdoc directive
- * @id checkbox
- * @name ons-checkbox
- * @description
- * Checkbox component.
- * @param ng-model The model to bind to
- * @param ng-true-value The value to be set to the model when this checkbox is checked
- * @param ng-false-value The value to be set to the model when this checkbox is unchecked.
- */
-(function(){
-  'use strict';
-
-  var module = angular.module('onsen'); 
-
-  module.directive('onsCheckbox', function($onsen) {
-    return {
-      require: '?ngModel',
-      restrict: 'E',
-      replace: true,
-      scope: {
-        ngModel: '=',
-        ngTrueValue: '@',
-        ngFalseValue: '@'
-      },
-      transclude: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
-      link: function($scope, element, attrs, ngModel) {
-        var checkbox = element.find('input');
-        var checked = false;
-        attrs.$observe('disabled', function(disabled) {
-          if (disabled === undefined) {
-            checkbox.attr('disabled', false);
-          } else {
-            checkbox.attr('disabled', true);
-          }
-        });
-
-        $scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
-        if (ngModel) {
-          ngModel.$render = function() {
-            checked = ( ngModel.$viewValue == 'true' || ngModel.$viewValue == $scope.ngTrueValue );
-            checkbox.attr('checked', checked);
-          };
-
-          checkbox.bind('change', function(){
-            $scope.$apply(function(){
-              ngModel.$setViewValue(checkbox[0].checked);
-            });
-          });
-        }
-      }
-    };
-  });
-})();
-
-
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-/**
- * @ngdoc directive
  * @id col
  * @name ons-col
  * @description
  * Use with <ons-row> to layout component.
  * @param align Vertical align the column. Valid values are [top/center/bottom].
- * @param size The size of the column in percentage. Valid values are [10/20/25/33/67/75/80/90]
- * @param offset Offset the column. Valid values are [10/20/25/33/67/75/80/90]
+ * @param width The width of the column. Valid values are css "width" value. eg. "10%", "50px"
  * @note For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.
  */
 (function(){
@@ -8218,19 +8323,68 @@ limitations under the License.
   module.directive('onsCol', function($timeout, $onsen) {
     return {
       restrict: 'E',
-      replace: true,
-      transclude: true,
-      scope: {
-        align: '@',
-        size: '@',
-        offst: '@'
-      },
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/column.tpl',
-      compile: function(elt, attr, transclude) {
-        return function(scope, elt, attr) {
-          transclude(scope.$parent, function(clone) {
-            elt.append(clone);
+      replace: false,
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      transclude: false,
+      scope: false,
+
+      compile: function(element, attrs, transclude) {
+        element.addClass('col ons-col-inner');
+
+        return function(scope, element, attrs) {
+
+          attrs.$observe('align', function(align) {
+            updateAlign(align);
           });
+
+          attrs.$observe('width', function(width) {
+            updateWidth(width);
+          });
+
+          // For BC
+          attrs.$observe('size', function(size) {
+            if (!attrs.width) {
+              updateWidth(size);
+            }
+          });
+
+          updateAlign(attrs.align);
+
+          if (attrs.size && !attrs.width) {
+            updateWidth(attrs.size);
+          } else {
+            updateWidth(attrs.width);
+          }
+
+          function updateAlign(align) {
+            if (align === 'top' || align === 'center' || align === 'bottom') {
+              element.removeClass('col-top col-center col-bottom');
+              element.addClass('col-' + align);
+            } else {
+              element.removeClass('col-top col-center col-bottom');
+            }
+          }
+
+          function updateWidth(width) {
+            if (typeof width  === 'string') {
+              width = ('' + width).trim();
+              width = width.match(/^\d+$/) ? width + '%' : width;
+
+              element.css({
+                '-webkit-box-flex': '0',
+                '-webkit-flex': '0 0 ' + width,
+                '-moz-box-flex': '0',
+                '-moz-flex': '0 0 ' + width,
+                '-ms-flex': '0 0 ' + width,
+                'flex': '0 0 ' + width,
+                'max-width': width
+              });
+            } else {
+              element.removeAttr('style');
+            }
+          }
         };
       }
     };
@@ -8306,10 +8460,10 @@ limitations under the License.
  * @description
  * Wrapper for font-awesome icon.
  * @param icon The icon name. set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". See all icons: http://fontawesome.io/icons/.
- * @param size The sizes of the icon. Valid values are [lg/2x/3x/4x//5x]
+ * @param size The sizes of the icon. Valid values are [lg/2x/3x/4x/5x] or css font-size value.
  * @param rotate The degree to rotate the icon. Valid values are [90/180/270]
  * @param flip Flip the icon. Valid values are [horizontal/vertial]
- * @param fixed-width When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are [true/false]
+ * @param fixed-width When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are [true/false]. Default is true.
  * @param spin Whether to spin the icon. Valid values are [true/false]
  */
 (function(){
@@ -8324,12 +8478,34 @@ limitations under the License.
       transclude: false,
       scope: {
         icon: '@',
-        size: '@',
         rotate: '@',
         flip: '@'
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/icon.tpl',
       link: function($scope, element, attrs) {
+
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
+
+        $scope.style = {};
+        $scope.sizeClass = '';
+
+        attrs.$observe('size', function(size) {
+          size = '' + size;
+
+          if (size.match(/^[1-5]x|lg$/)) {
+            $scope.sizeClass = 'fa-' + size;
+            $scope.style['font-size'] = '';
+          } else if (size.match(/^\d+(px|%|[a-zA-Z]+)$/)) {
+            $scope.sizeClass = '';
+            $scope.style['font-size'] = size;
+          } else {
+            $scope.sizeClass = 'fa-lg';
+            $scope.style['font-size'] = '';
+          }
+        });
+
         attrs.$observe('spin', function(spin) {
           if (spin === 'true') {
             $scope.spin = 'spin';
@@ -8338,11 +8514,11 @@ limitations under the License.
           }
         });
 
-        attrs.$observe('fixedWidth', function(fixedWidth){
-          if (fixedWidth === 'true') {
-            $scope.fixedWidth = 'fw';
-          } else {
+        attrs.$observe('fixedWidth', function(fixedWidth) {
+          if (fixedWidth === 'false') {
             $scope.fixedWidth = '';
+          } else {
+            $scope.fixedWidth = 'fw';
           }
         });
       }
@@ -8374,7 +8550,7 @@ limitations under the License.
  * @name ons-if-orientation
  * @description
  * Conditionally display content depending on screen orientation. Valid values are [portrait/landscape]. Different from other components, this component is used as attribute in any element.
- * @param ons-if-orientation Either portrait or landscape.
+ * @param ons-if-orientation Either "portrait" or "landscape".
  */
 (function(){
   'use strict';
@@ -8385,44 +8561,51 @@ limitations under the License.
     return {
       restrict: 'A',
       replace: false,
-      transclude: true,
-      scope: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/if_orientation.tpl',
-      link: function($scope, element, attrs) {
 
-        function getLandscapeOrPortraitFromInteger(orientation){
-          if (orientation === undefined ) {
-            return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      transclude: false,
+      scope: false,
+
+      compile: function(element) {
+        element.css('display', 'none');
+
+        return function($scope, element, attrs) {
+          element.addClass('ons-if-orientation-inner');
+
+          window.addEventListener('orientationchange', update, false);
+          window.addEventListener('resize', update, false);
+          attrs.$observe('onsIfOrientation', update);
+
+          update();
+
+          function update() {
+            var userOrientation = ('' + attrs.onsIfOrientation).toLowerCase();
+            var orientation = getLandscapeOrPortraitFromInteger(window.orientation);
+
+            if (userOrientation && (userOrientation === 'portrait' || userOrientation === 'landscape')) {
+              if (userOrientation === orientation) {
+                element.css('display', 'block');
+              } else {
+                element.css('display', 'none');
+              }
+            }
           }
 
-          if (orientation == 90 || orientation == -90) {
-            return 'landscape';
+          function getLandscapeOrPortraitFromInteger(orientation) {
+            if (orientation === undefined ) {
+              return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+            }
+
+            if (orientation == 90 || orientation == -90) {
+              return 'landscape';
+            }
+
+            if (orientation === 0 || orientation == 180) {
+              return 'portrait';
+            }
           }
-
-          if (orientation === 0 || orientation == 180) {
-            return 'portrait';
-          }
-        }
-
-        $scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
-
-        window.addEventListener("orientationchange", function() {
-          $scope.$apply(function(){
-            $scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
-          });
-        }, false);
-
-        window.addEventListener("resize", function() {
-          $scope.$apply(function(){
-            $scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
-          });
-        }, false);
-
-        attrs.$observe('onsIfOrientation', function(userOrientation){
-          if(userOrientation){
-            $scope.userOrientation = userOrientation;
-          }
-        });
+        };
       }
     };
   });
@@ -8452,7 +8635,7 @@ limitations under the License.
  * @name ons-if-platform
  * @description
  * Conditionally display content depending on the platform/browser. Valid values are [ios/android/blackberry/chrome/safari/firefox/opera]. Different from other components, this component is used as attribute in any element.
- * @param ons-if-platform Either opera, firefox, safari, chrome, ie, android, blackberry, ios or windows.
+ * @param ons-if-platform Either "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".
  */
 (function() {
   'use strict';
@@ -8463,65 +8646,82 @@ limitations under the License.
     return {
       restrict: 'A',
       replace: false,
-      transclude: true,
-      scope: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/if_platform.tpl',
-      link: function($scope, element, attrs) {
 
-        var platform;
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      transclude: false,
+      scope: false,
 
-        var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-        // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
-        var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
-        var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-        // At least Safari 3+: "[object HTMLElementConstructor]"
-        var isChrome = !!window.chrome && !isOpera;              // Chrome 1+
-        var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
+      compile: function(element) {
+        element.addClass('ons-if-platform-inner');
+        element.css('display', 'none');
 
-        if(isOpera){
-          platform = "opera";
-        }
+        var platform = getPlatformString();
 
-        if(isFirefox){
-          platform = "firefox";
-        }
+        return function($scope, element, attrs) {
+          attrs.$observe('onsIfPlatform', function(userPlatform) {
+            if (userPlatform) {
+              update();
+            }
+          });
 
-        if(isSafari){
-          platform = "safari";
-        }
+          update();
 
-        if(isChrome){
-          platform = "chrome";
-        }
-
-        if(isIE){
-          platform = "ie";
-        }
-
-        if (navigator.userAgent.match(/Android/i)) {
-          platform = "android";
-        }
-
-        if ((navigator.userAgent.match(/BlackBerry/i)) || (navigator.userAgent.match(/RIM Tablet OS/i)) || (navigator.userAgent.match(/BB10/i))) {
-          platform = "blackberry";
-        }
-
-        if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-          platform = "ios";
-        }
-
-        if (navigator.userAgent.match(/IEMobile/i)) {
-          platform = "windows";
-        }
-
-        $scope.platform = platform;
-
-
-        attrs.$observe('onsIfPlatform', function(userPlatform) {
-          if (userPlatform) {
-            $scope.userPlatform = userPlatform.toLowerCase();
+          function update() {
+            if (attrs.onsIfPlatform.toLowerCase() === platform.toLowerCase()) {
+              element.css('display', 'block');
+            } else {
+              element.css('display', 'none');
+            }
           }
-        });
+        };
+
+        function getPlatformString() {
+          // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
+          var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+          if (isOpera) {
+            return 'opera';
+          }
+
+          var isFirefox = typeof InstallTrigger !== 'undefined';   // Firefox 1.0+
+          if (isFirefox) {
+            return 'firefox';
+          }
+
+          var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+          // At least Safari 3+: "[object HTMLElementConstructor]"
+          if (isSafari) {
+            return 'safari';
+          }
+
+          var isChrome = !!window.chrome && !isOpera; // Chrome 1+
+          if (isChrome) {
+            return 'chrome';
+          }
+
+          var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
+          if (isIE) {
+            return 'ie';
+          }
+
+          if (navigator.userAgent.match(/Android/i)) {
+            return 'android';
+          }
+
+          if ((navigator.userAgent.match(/BlackBerry/i)) || (navigator.userAgent.match(/RIM Tablet OS/i)) || (navigator.userAgent.match(/BB10/i))) {
+            return 'blackberry';
+          }
+
+          if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+            return 'ios';
+          }
+
+          if (navigator.userAgent.match(/IEMobile/i)) {
+            return 'windows';
+          }
+
+          return 'unknown';
+        }
       }
     };
   });
@@ -8550,6 +8750,7 @@ limitations under the License.
  * @name ons-list
  * @description
  * The container for list-item. Similar to <ul> but styled for mobile.
+ * @param modifier
  * @demoURL
  * OnsenUI/demo/list/
  */
@@ -8561,20 +8762,18 @@ limitations under the License.
   module.directive('onsList', function($onsen) {
     return {
       restrict: 'E',
-      replace: false,
-      transclude: true,
       scope: false,
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclude.
+      replace: false,
+      transclude: false,
 
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/list.tpl',
-      link: function(scope, element, attrs, controller, transclude) {
-        scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+      compile: function(element, attrs) {
+        var templater = $onsen.generateModifierTemplater(attrs);
 
-        transclude(scope, function(clonedElement) {
-          angular.element(element[0].querySelector('.list__container')).append(clonedElement);
-        });
+        element.addClass('list ons-list-inner');
+        element.addClass(templater('list--*'));
       }
     };
   });
@@ -8600,10 +8799,59 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+ * @id list-header
+ * @name ons-list-header
+ * @param modifier
+ * @description
+ * Header element for list items. Must be put inside ons-list tag.
+ */
+(function() {
+  'use strict';
+
+  var module = angular.module('onsen');
+
+  module.directive('onsListHeader', function($onsen) {
+    return {
+      restrict: 'E',
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      replace: false,
+      transclude: false,
+
+      compile: function(elem, attrs, transcludeFn) {
+        var templater = $onsen.generateModifierTemplater(attrs);
+        elem.addClass('list__header ons-list-header-inner');
+        elem.addClass(templater('list__header--*'));
+      }
+    };
+  });
+})();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+/**
+ * @ngdoc directive
  * @id list-item
  * @name ons-list-item
+ * @param modifier
  * @description
- * Works like <li> but styled for mobile. Must be put inside list tag.
+ * Works like <li> but styled for mobile. Must be put inside ons-list tag.
  */
 (function() {
   'use strict';
@@ -8613,17 +8861,16 @@ limitations under the License.
   module.directive('onsListItem', function($onsen) {
     return {
       restrict: 'E',
-      replace: true,
-      transclude: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/list_item.tpl',
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      replace: false,
+      transclude: false,
+
       compile: function(elem, attrs, transcludeFn) {
         var templater = $onsen.generateModifierTemplater(attrs);
-        return function(scope, element, attrs) {
-          scope.modifierTemplater = templater;
-          transcludeFn(scope, function(clone) {
-            element.append(clone);
-          });
-        };
+        elem.addClass('list__item ons-list-item-inner');
+        elem.addClass(templater('list__item--*'));
       }
     };
   });
@@ -8654,13 +8901,15 @@ limitations under the License.
  *  [en]Manages the page navigation backed by page stack.[/en]
  *  [ja]ページスタックを用いたページの切り替えを管理します。[/ja]
  * @param page First page to show when navigator is initialized
+ * @param var Variable name to refer this navigator.
  * @property pushPage(pageUrl, options)
- *  [en]Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. the options object include all the attributes of this navigator but replace the hyphen '-' with camel-case letter. eg. pushPage('page2.html')[/en]
+ *  [en]Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. eg. pushPage('page2.html')[/en]
  *  [ja]指定したpageUrlを新しいページスタックに追加します。[/ja]
  * @property popPage() Pops current page from the page stack
  * @property resetToPage(pageUrl,options) Clears page stack and add the specified pageUrl to the page stack. If options object is specified, apply the options. the options object include all the attributes of this navigator
  * @property getCurrentPage() Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method. eg. ons.navigator.getCurrentPage().options
  * @property getPages() Retrieve the entire page stages of the navigator.
+ * @property on(eventName, listener) Added an event listener. Preset events are 'prepop', 'prepush', 'postpop' and 'postpush'.
  *
  * @example
  * <ons-navigator>
@@ -8751,6 +9000,8 @@ limitations under the License.
  * @ngdoc directive
  * @id page
  * @name ons-page
+ * @param var Variable name to refer this page.
+ * @param modifier Modifier name.
  * @description
  * Should be used as root component of each page. The content inside page component is not scrollable. If you need scroll behavior, you can put inside this component.
  * @demoURL
@@ -8763,24 +9014,35 @@ limitations under the License.
 
   module.directive('onsPage', function($onsen, $timeout, PageView) {
 
-    function firePageInitEvent(pageContainer) {
-      function findPageDOM() {
-        if (angular.element(pageContainer).hasClass('page')) {
-          return pageContainer;
+    function firePageInitEvent(element) {
+      function isAttached(element) {
+        if (document.documentElement === element) {
+          return true;
         }
-
-        var result = pageContainer.querySelector('.page');
-
-        if (!result) {
-          throw new Error('An element of "page" class is not found.');
-        }
-
-        return result;
+        return element.parentNode ? isAttached(element.parentNode) : false;
       }
-      
-      var event = document.createEvent('HTMLEvents');    
-      event.initEvent('pageinit', true, true);
-      findPageDOM().dispatchEvent(event);    
+
+      function fire() {
+        var event = document.createEvent('HTMLEvents');    
+        event.initEvent('pageinit', true, true);
+        element.dispatchEvent(event);    
+      }
+
+      // TODO: remove dirty fix
+      var i = 0;
+      var f = function() {
+        if (i++ < 5)  {
+          if (isAttached(element)) {
+            fire();
+          } else {
+            setImmediate(f);
+          }
+        } else {
+          throw new Error('Fail to fire "pageinit" event. Attach "ons-page" element to the document after initialization.');
+        }
+      };
+
+      f();
     }
 
     return {
@@ -8885,73 +9147,6 @@ limitations under the License.
 
 /**
  * @ngdoc directive
- * @id radio_button
- * @name ons-radio-button
- * @description
- * Radio button component
- * @param ng-model The model to bind to
- * @param value The value to be set to the model when this button is selected
- * @param left-label The label to be shown on the left of the button
- * @param right-label The label to be shown on the right of the button
- * @param name The group name of this radio button
- * @note Square box may be displayed for radio button in Android 2.3
- */
-(function(){
-  'use strict';
-
-  var module = angular.module('onsen');
-
-  module.directive('onsRadioButton', function($onsen) {
-    return {
-      restrict: 'E',
-      replace: false,
-      scope: {
-        value: '@',
-        ngModel: '=',
-        leftLabel: '@',
-        rightLabel: '@',
-        name: '@'
-      },
-      transclude: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/radio_button.tpl',
-      link: function($scope, element, attrs) {
-        var radioButton = element.find('input');
-        var checked = false;
-
-        $scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
-        attrs.$observe('disabled', function(disabled) {
-          if (disabled === undefined) {
-            radioButton.attr('disabled', false);
-          } else {
-            radioButton.attr('disabled', true);
-          }
-        });
-      }
-    };
-  });
-})();
-
-
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-/**
- * @ngdoc directive
  * @id row
  * @name ons-row
  * @description
@@ -8967,17 +9162,30 @@ limitations under the License.
   module.directive('onsRow', function($onsen, $timeout) {
     return {
       restrict: 'E',
-      replace: true,
-      transclude: true,
-      scope: {
-        align: '@'
-      },
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/row.tpl',
-      compile: function(elt, attr, transclude) {
-        return function(scope, elt, attr) {
-          transclude(scope.$parent, function(clone) {
-            elt.append(clone);
+      replace: false,
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      transclude: false,
+      scope: false,
+
+      compile: function(element, attrs) {
+        element.addClass('row ons-row-inner');
+
+        return function(scope, element, attrs) {
+          attrs.$observe('align', function(align) {
+            update();
           });
+
+          update();
+
+          function update() {
+            var align = ('' + attrs.align).trim();
+            if (align === 'top' || align === 'center' || align === 'bottom') {
+              element.removeClass('row-bottom row-center row-top');
+              element.addClass('row-' + align);
+            }
+          }
         };
       }
     };
@@ -9009,6 +9217,7 @@ limitations under the License.
  * @description
  * The root element. This is usually put inside <body> tag.
  * @param page The root page of this screen element
+ * @param var Variable name to refer this screen.
  * @property presentPage(pageUrl) Presents a page
  * @property dismissPage() Dismisses the page that was presented
  * @demoURL
@@ -9422,51 +9631,6 @@ limitations under the License.
 
 /**
  * @ngdoc directive
- * @id search-input
- * @name ons-search-input
- * @description
- * Component for inputting search text.
- * @param placeholder The placeholder inside the input area.
- * @param disabled Wether the input should be disabled.
- */
-(function(){
-  'use strict';
-
-  var module = angular.module('onsen');
-
-  module.directive('onsSearchInput', function($onsen) {
-    return {
-      restrict: 'E',
-      replace: true,
-      transclude: false,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/search_input.tpl',
-      link: function(scope, element, attrs) {
-        element.addClass($onsen.generateModifierTemplater(attrs)('search-input--*'));
-      }
-    };
-  });
-})();
-
-
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-/**
- * @ngdoc directive
  * @id sliding_menu
  * @name ons-sliding-menu
  * @description
@@ -9475,12 +9639,16 @@ limitations under the License.
  * @param above-page The url of the page to be set to the above layer
  * @param swipable Wether to enable swipe interaction
  * @param swipe-target-width The width of swipable area calculated from the left (in pixel). Eg. Use this to enable swipe only when the finger touch on the left edge.
- * @param max-slide-distance How far the above page will slide open. Can specify both in px and %
- * @property setAbovePage(pageUrl) Show the page specified in pageUrl in the above layer.
- * @property setBehindPage(pageUrl) Show the page specified in pageUrl in the behind layer.
+ * @param max-slide-distance How far the above page will slide open. Can specify both in px and %. eg. 90%, 200px
+ * @param var Variable name to refer this sliding menu.
+ * @property setMainPage(pageUrl, [options]) Show the page specified in pageUrl in the main contents pane.
+ * @property setMenuPage(pageUrl, [options]) Show the page specified in pageUrl in the side menu pane.
+ * @property [Deprecated] setAbovePage(pageUrl) Show the page specified in pageUrl in the above layer.
+ * @property [Deprecated] setBehindPage(pageUrl) Show the page specified in pageUrl in the behind layer.
  * @property openMenu() Slide the above layer to reveal the layer behind.
  * @property closeMenu() Slide the above layer to hide the layer behind.
  * @property toggleMenu() Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.
+ * @property on(eventName, listener) Added an event listener. Preset events are 'preopen', 'preclose', 'postopen' and 'postclose'.
  */
 (function() {
   'use strict';
@@ -9491,6 +9659,8 @@ limitations under the License.
       restrict: 'E',
       replace: false,
 
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
       transclude: false,
       scope: true,
 
@@ -9499,7 +9669,7 @@ limitations under the License.
       link: function(scope, element, attrs) {
 
         if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controlelr directive.');
+          throw new Error('This element can\'t accept ng-controller directive.');
         }
 
         var slidingMenu = new SlidingMenuView(scope, element, attrs);
@@ -9543,12 +9713,13 @@ limitations under the License.
  * @param secondary-page The url of the page on the left
  * @param main-page The url of the page on the right
  * @param main-page-width Main page's width percentage. The width of secondary page take the remaining percentage
- * @param collapse Specify the collapse behavior. Valid values are [portrait/landscape/width ##px]. "portrait" means the view will collapse when device is in portrait orien0ation. "landscape" means the view will collapse when device is in landscape orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px
+ * @param collapse [Deprecated] Specify the collapse behavior. Valid values are [portrait/landscape/width ##px]. "portrait" means the view will collapse when device is in portrait orien0ation. "landscape" means the view will collapse when device is in landscape orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px
+ * @param var Variable name to refer this split view.
  * @property setMainPage(pageUrl) Show the page specified in pageUrl in the right section
  * @property setSecondaryPage(pageUrl) Show the page specified in pageUrl in the left section
- * @property open() Reveal the secondary page if the view is in collapse mode
- * @property close() hide the secondary page if the view is in collapse mode
- * @property toggle() Reveal the secondary page if it is currently hidden, otherwies, reveal it
+ * @property [Deprecated] open() Reveal the secondary page if the view is in collapse mode
+ * @property [Deprecated] close() hide the secondary page if the view is in collapse mode
+ * @property [Deprecated] toggle() Reveal the secondary page if it is currently hidden, otherwies, reveal it
  * @example
  * index.html
  * <pre>
@@ -9620,8 +9791,8 @@ limitations under the License.
     return {
       restrict: 'E',
       replace: false,
-      transclude: false,
 
+      transclude: false,
       scope: {
         secondaryPage: '@',
         mainPage: '@',
@@ -9632,6 +9803,10 @@ limitations under the License.
 
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
       link: function(scope, element, attrs) {
+
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
 
         var splitView = new SplitView(scope, element, attrs);
         $onsen.declareVarAttribute(attrs, splitView);
@@ -9667,9 +9842,102 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+ * @id switch
+ * @name ons-switch
+ * @description
+ * Switch component.
+ * @param disabled Wether the switch shoud be disabled.
+ * @param checked Wether the switch is checked.
+ * @param var Variable name to refer this switch.
+ * @param modifier Modifier name.
+ * @property isChecked()
+ * @property setChecked(isChecked)
+ * @property getCheckboxElement() Get inner input[type=checkbox] element.
+ * @property on(eventName, listener) Added an event listener. Preset event is 'chage'.
+ */
+(function(){
+  'use strict';
+  var module = angular.module('onsen');
+
+  module.directive('onsSwitch', function($onsen, SwitchView) {
+    return {
+      restrict: 'E',
+      replace: false,
+
+      transclude: false,
+      scope: true,
+
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/switch.tpl',
+      compile: function(element) {
+        return function(scope, element, attrs) {
+          if (attrs.ngController) {
+            throw new Error('This element can\'t accept ng-controller directive.');
+          }
+
+          var switchView = new SwitchView(element, scope, attrs);
+          var checkbox = angular.element(element[0].querySelector('input[type=checkbox]'));
+
+          scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+          attrs.$observe('checked', function(checked) {
+            scope.model = !!element.attr('checked');
+          });
+
+          attrs.$observe('name', function(name) {
+            if (!!element.attr('name')) {
+              checkbox.attr('name', name);
+            }
+          });
+
+          if (attrs.ngModel) {
+            scope.$parent.$watch(attrs.ngModel, function(value) {
+              scope.model = value;
+            });
+
+            scope.$watch('model', function(model) {
+              scope.$parent[attrs.ngModel] = model;
+            });
+
+            scope.$parent[attrs.ngModel] = !!element.attr('checked');
+          }
+
+          $onsen.declareVarAttribute(attrs, switchView);
+          $onsen.aliasStack.register('ons.switch', switchView);
+          element.data('ons-switch', switchView);
+
+          scope.$on('$destroy', function() {
+            element.data('ons-switch', undefined);
+            $onsen.aliasStack.unregister('ons.navigator', navigator);
+          });
+        };
+      }
+    };
+  });
+})();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+/**
+ * @ngdoc directive
  * @id tabbar
  * @name ons-tabbar
  * @param hide-tabs Wether to hide the tabs. Valid values are [true/false] or angular binding. eg: {{ shouldHide }}
+ * @param var Variable name to refer this tabbar.
+ * @property on(eventName, listener) Added an event listener. Preset events are 'prechange' and 'postchange'.
  * @description
  * Used with tabbar-item to manage pages using tabs.
  */
@@ -9688,6 +9956,11 @@ limitations under the License.
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
       controller: function($scope, $element, $attrs) {
+
+        if ($attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
+
         this.modifierTemplater = $scope.modifierTemplater = $onsen.generateModifierTemplater($attrs);
 
         var container = angular.element($element[0].querySelector('.ons-tab-bar__content'));
@@ -9789,6 +10062,10 @@ limitations under the License.
             } else {
               throw new Error('Cannot set undefined page');
             }
+          },
+
+          _destroy: function() {
+            this.emit('destroy', {tabbar: this});
           }
         };
         MicroEvent.mixin(tabbarView);
@@ -9798,6 +10075,7 @@ limitations under the License.
         $onsen.declareVarAttribute($attrs, tabbarView);
 
         $scope.$watch('$destroy', function() {
+          tabbarView._destroy();
           $element.data('ons-tabbar', undefined);
           $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
         });
@@ -9913,113 +10191,11 @@ limitations under the License.
 
 /**
  * @ngdoc directive
- * @id text-area
- * @name ons-text-area
- * @description
- * Component for inputting text.
- * @param rows The number of rows
- * @param cols The number of columns
- * @param placeholder The placeholder inside the text area.
- * @param disabled Wether the input should be disabled.
- */
-(function(){
-  'use strict';
-
-  var module = angular.module('onsen');
-
-  module.directive('onsTextArea', function($onsen) {
-    return {
-      restrict: 'E',
-      replace: true,
-      transclude: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/text_area.tpl',
-      link: function(scope, element, attrs) {
-        var classes = $onsen.generateModifierTemplater(attrs)('textarea--*');
-        element.addClass(classes);
-      }
-    };
-  });
-})();
-
-
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-/**
- * @ngdoc directive
- * @id text-input
- * @name ons-text-input
- * @description
- * Component for doing text input.
- * @param placeholder The placeholder inside the input area.
- * @param disabled Wether the input should be disabled.
- */
-(function(){
-  'use strict';
-
-  var module = angular.module('onsen');
-
-  module.directive('onsTextInput', function($onsen) {
-    return {
-      restrict: 'E',
-      replace: true,
-      transclude: false,
-      scope: {
-        disabled: '='
-      },
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/text_input.tpl',
-      link: function($scope, element, attrs) {
-        element.addClass($onsen.generateModifierTemplater(attrs)('text-input--*'));
-
-        $scope.$watch(function() {
-          return $scope.disabled;
-        }, function(disabled) {
-          var isDisabled = $scope.$eval(disabled);
-          element.attr('disabled', isDisabled);
-        });
-      }
-    };
-  });
-})();
-
-
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-/**
- * @ngdoc directive
  * @id toolbar
  * @name ons-toolbar
  * @description
  * Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.
+ * @param modifier Modifier name.
  * @demoURL
  * OnsenUI/demo/screen/
  */
@@ -10110,13 +10286,14 @@ limitations under the License.
   }
 
   function ensureToolbarItemElements(element) {
+    var center;
     if (hasCenterClassElementOnly(element)) {
-      var center = ensureCenterContainer(element);
+      center = ensureCenterContainer(element);
       element.contents().remove();
       element.append(center);
     } else {
+      center = ensureCenterContainer(element);
       var left = ensureLeftContainer(element);
-      var center = ensureCenterContainer(element);
       var right = ensureRightContainer(element);
 
       element.contents().remove();
@@ -10194,6 +10371,7 @@ limitations under the License.
  * @ngdoc directive
  * @id toolbar_button
  * @name ons-toolbar-button
+ * @param modifier Modifier name.
  * @description
  * Button component for toolbar.
  */
@@ -10208,6 +10386,11 @@ limitations under the License.
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
+
+          if (attrs.ngController) {
+            throw new Error('This element can\'t accept ng-controller directive.');
+          }
+
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         }
       }
@@ -10409,6 +10592,71 @@ limitations under the License.
    */
   module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, BackButtonHandlerStack) {
 
+    var unlockerDict = {
+      _unlockersDict: {},
+
+      _unlockedVarDict: {},
+
+      /**
+       * @param {String} name
+       * @param {Function} unlocker
+       */
+      _addVarLock: function (name, unlocker) {
+        if (!(unlocker instanceof Function)) {
+          throw new Error('unlocker argument must be an instance of Function.');
+        }
+
+        if (this._unlockersDict[name]) {
+          this._unlockersDict[name].push(unlocker);
+        } else {
+          this._unlockersDict[name] = [unlocker];
+        }
+      },
+
+      /**
+       * @param {String} varName
+       */
+      unlockVarName: function(varName) {
+        var unlockers = this._unlockersDict[varName];
+
+        if (unlockers) {
+          unlockers.forEach(function(unlock) {
+            unlock();
+          });
+        }
+        this._unlockedVarDict[varName] = true;
+      },
+
+      /**
+       * @param {Array} dependencies an array of var name
+       * @param {Function} callback
+       */
+      addCallback: function(dependencies, callback) {
+        if (!(callback instanceof Function)) {
+          throw new Error('callback argument must be an instance of Function.');
+        }
+
+        var doorLock = new DoorLock();
+        var self = this;
+
+        dependencies.forEach(function(varName) {
+
+          if (!self._unlockedVarDict[varName]) {
+            // wait for variable declaration
+            var unlock = doorLock.lock();
+            self._addVarLock(varName, unlock);
+          }
+
+        });
+
+        if (doorLock.isLocked()) {
+          doorLock.waitUnlock(callback);
+        } else {
+          callback();
+        }
+      }
+    };
+
     /**
      * Global object stack manager.
      *
@@ -10440,7 +10688,7 @@ limitations under the License.
         }
         stack.splice(index, 1);
 
-        var obj = stack.length > 1 ? stack[stack.length - 1] : null;
+        var obj = stack.length > 0 ? stack[stack.length - 1] : null;
         $onsen._defineVar(name, obj);
       },
 
@@ -10505,6 +10753,15 @@ limitations under the License.
         } while (el.parentNode);
 
         return null;
+      },
+
+
+      /**
+       * @param {Array} dependencies
+       * @param {Function} callback
+       */
+      waitForVariables: function(dependencies, callback) {
+        unlockerDict.addCallback(dependencies, callback);
       },
 
       /**
@@ -10588,7 +10845,10 @@ limitations under the License.
        */
       declareVarAttribute: function(attrs, object) {
         if (typeof attrs['var'] === 'string') {
-          this._defineVar(attrs['var'], object);
+          var varName = attrs['var'];
+
+          this._defineVar(varName, object);
+          unlockerDict.unlockVarName(varName);
         }
       },
 
