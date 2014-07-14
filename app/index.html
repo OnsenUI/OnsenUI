@@ -16,10 +16,9 @@
   <script src="js/app.js"></script>
   <script>
     ons.bootstrap();
+
     ons.ready(function() {
       console.log("ons.ready");
-
-      navi.enableAndroidBackButtonHandler();
 
       navi.on('postPop', function(event) {
         console.log(event);
@@ -43,7 +42,7 @@
       <ons-toolbar>
         <div class="left"></div>
         <div class="center">{{pageTitle}}</div>
-        <div class="right"><ons-toolbar-button>hoge</ons-toolbar-button></div> 
+        <div class="right"><ons-toolbar-button onclick="alert('Tapped')">Label</ons-toolbar-button></div> 
       </ons-toolbar>
 
       <div style="text-align: center">

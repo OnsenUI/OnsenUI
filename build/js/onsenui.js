@@ -5937,6 +5937,7 @@ limitations under the License.
 
         var menuPageStyle = this._generateMenuPageStyle(Math.min(options.maxDistance, options.distance));
         var mainPageStyle = this._generateMainPageStyle(Math.min(options.maxDistance, options.distance));
+        delete mainPageStyle.opacity;
 
         animit(this._menuPage[0])
           .queue(menuPageStyle)
@@ -6601,6 +6602,7 @@ limitations under the License.
 
         var aboveTransform = this._generateAbovePageTransform(Math.min(options.maxDistance, options.distance));
         var behindStyle = this._generateBehindPageStyle(Math.min(options.maxDistance, options.distance));
+        delete behindStyle.opacity;
 
         animit(this._mainPage[0])
           .queue({transform: aboveTransform})
