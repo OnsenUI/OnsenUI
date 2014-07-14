@@ -207,6 +207,7 @@ limitations under the License.
 
         var aboveTransform = this._generateAbovePageTransform(Math.min(options.maxDistance, options.distance));
         var behindStyle = this._generateBehindPageStyle(Math.min(options.maxDistance, options.distance));
+        delete behindStyle.opacity;
 
         animit(this._mainPage[0])
           .queue({transform: aboveTransform})

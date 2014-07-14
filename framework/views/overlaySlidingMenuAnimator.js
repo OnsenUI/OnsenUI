@@ -201,6 +201,7 @@ limitations under the License.
 
         var menuPageStyle = this._generateMenuPageStyle(Math.min(options.maxDistance, options.distance));
         var mainPageStyle = this._generateMainPageStyle(Math.min(options.maxDistance, options.distance));
+        delete mainPageStyle.opacity;
 
         animit(this._menuPage[0])
           .queue(menuPageStyle)
