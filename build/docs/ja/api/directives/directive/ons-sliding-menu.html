@@ -1,105 +1,129 @@
-<div class="directive-container clearfix" id="module:directives.directive:ons-sliding-menu">
-<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
-  <h1 class="h1-separator">ons-sliding-menu</h1>
+<div class="directive-container" id="module:directives.directive:ons-sliding-menu">
+  <div>
+    <h4>Description</h4>
 
-  <section>
-    <p>Facebook/Path like sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.</p>
-  </section>
+    <section class="description">
+      <p>Facebook/Path like sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.</p>
+    </section>
 
-  <span class="anchor" id="ons-sliding-menu-attributes"></span>
-  
-    <section ng-show="directive.attributes.length > 0">
+    <span class="anchor" id="ons-sliding-menu-attributes"></span>
+    
+      <section>
+        <table>
+          <thead>
+            <tr><th colspan="2">Attributes</th></tr>
+          </thead>
+          <tbody>
+            
+            <span class="anchor" id="ons-sliding-menu-behind-page"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">behind-page</td>
+              <td>The url of the page to be set to the behind layer.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-above-page"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">above-page</td>
+              <td>The url of the page to be set to the above layer</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-swipable"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">swipable</td>
+              <td>Wether to enable swipe interaction</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-swipe-target-width"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">swipe-target-width</td>
+              <td>The width of swipable area calculated from the left (in pixel). Eg. Use this to enable swipe only when the finger touch on the left edge.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-max-slide-distance"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">max-slide-distance</td>
+              <td>How far the above page will slide open. Can specify both in px and %. eg. 90%, 200px</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-var"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">var</td>
+              <td>Variable name to refer this sliding menu.</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+    
+
+    <span class="anchor" id="ons-sliding-menu-methods"></span>
+    
+    <section class="round-corner">
       <table>
         <thead>
-          <tr><th colspan="2">Attributes</th></tr>
+          <tr><th colspan="2">Methods</th></tr>
         </thead>
         <tbody>
           
-          <span class="anchor" id="ons-sliding-menu-behind-page"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">behind-page</td>
-            <td>The url of the page to be set to the behind layer.</td>
+          <span class="anchor" id="setMainPage(pageUrl,-setMainPage(pageUrl,"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setMainPage(pageUrl,</code></td>
+            <td>[options]) Show the page specified in pageUrl in the main contents pane.</td>
           </tr>
           
-          <span class="anchor" id="ons-sliding-menu-above-page"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">above-page</td>
-            <td>The url of the page to be set to the above layer</td>
+          <span class="anchor" id="setMenuPage(pageUrl,-setMenuPage(pageUrl,"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setMenuPage(pageUrl,</code></td>
+            <td>[options]) Show the page specified in pageUrl in the side menu pane.</td>
           </tr>
           
-          <span class="anchor" id="ons-sliding-menu-swipable"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">swipable</td>
-            <td>Wether to enable swipe interaction</td>
+          <span class="anchor" id="Deprecated-Deprecated"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>Deprecated</code></td>
+            <td>setAbovePage(pageUrl) Show the page specified in pageUrl in the above layer.</td>
           </tr>
           
-          <span class="anchor" id="ons-sliding-menu-swipe-target-width"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">swipe-target-width</td>
-            <td>The width of swipable area calculated from the left (in pixel). Eg. Use this to enable swipe only when the finger touch on the left edge.</td>
+          <span class="anchor" id="Deprecated-Deprecated"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>Deprecated</code></td>
+            <td>setBehindPage(pageUrl) Show the page specified in pageUrl in the behind layer.</td>
           </tr>
           
-          <span class="anchor" id="ons-sliding-menu-max-slide-distance"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">max-slide-distance</td>
-            <td>How far the above page will slide open. Can specify both in px and %</td>
+          <span class="anchor" id="openMenu()-openMenu()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>openMenu()</code></td>
+            <td>Slide the above layer to reveal the layer behind.</td>
+          </tr>
+          
+          <span class="anchor" id="closeMenu()-closeMenu()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>closeMenu()</code></td>
+            <td>Slide the above layer to hide the layer behind.</td>
+          </tr>
+          
+          <span class="anchor" id="toggleMenu()-toggleMenu()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>toggleMenu()</code></td>
+            <td>Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.</td>
+          </tr>
+          
+          <span class="anchor" id="on(eventName,-on(eventName,"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>on(eventName,</code></td>
+            <td>listener) Added an event listener. Preset events are &#39;preopen&#39;, &#39;preclose&#39;, &#39;postopen&#39; and &#39;postclose&#39;.</td>
           </tr>
           
         </tbody>
       </table>
     </section>
-  
-  <span class="anchor" id="ons-sliding-menu-methods"></span>
+    
 
-  
-  <section ng-show="directive.methods.length > 0" class="round-corner">
-    <table>
-      <thead>
-        <tr><th colspan="2">Methods</th></tr>
-      </thead>
-      <tbody>
-        
-        <span class="anchor" id="setAbovePage(pageUrl)-setAbovePage(pageUrl)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>setAbovePage(pageUrl)</code></td>
-          <td>Show the page specified in pageUrl in the above layer.</td>
-        </tr>
-        
-        <span class="anchor" id="setBehindPage(pageUrl)-setBehindPage(pageUrl)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>setBehindPage(pageUrl)</code></td>
-          <td>Show the page specified in pageUrl in the behind layer.</td>
-        </tr>
-        
-        <span class="anchor" id="openMenu()-openMenu()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>openMenu()</code></td>
-          <td>Slide the above layer to reveal the layer behind.</td>
-        </tr>
-        
-        <span class="anchor" id="closeMenu()-closeMenu()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>closeMenu()</code></td>
-          <td>Slide the above layer to hide the layer behind.</td>
-        </tr>
-        
-        <span class="anchor" id="toggleMenu()-toggleMenu()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>toggleMenu()</code></td>
-          <td>Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.</td>
-        </tr>
-        
-      </tbody>
-    </table>
-  </section>
-  
+    
 
-  
+    
 
-  
+    
 
-</div>
-
-
+  </div>
 
 </div>

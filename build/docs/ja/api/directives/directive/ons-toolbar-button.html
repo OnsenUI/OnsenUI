@@ -1,35 +1,40 @@
-<div class="directive-container clearfix" id="module:directives.directive:ons-toolbar-button">
-<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
-  <h1 class="h1-separator">ons-toolbar-button</h1>
+<div class="directive-container" id="module:directives.directive:ons-toolbar-button">
+  <div>
+    <h4>Description</h4>
 
-  <section>
-    <p>Button component for toolbar.</p>
-  </section>
+    <section class="description">
+      <p>Button component for toolbar.</p>
+    </section>
 
-  <span class="anchor" id="ons-toolbar-button-attributes"></span>
-  
-  <section ng-show="!directive.attributes || directive.attributes.length === 0">
-    <p class="text-muted">
-      This tag has no attribute
-    </p>
-  </section>
-  
-  <span class="anchor" id="ons-toolbar-button-methods"></span>
+    <span class="anchor" id="ons-toolbar-button-attributes"></span>
+    
+      <section>
+        <table>
+          <thead>
+            <tr><th colspan="2">Attributes</th></tr>
+          </thead>
+          <tbody>
+            
+            <span class="anchor" id="ons-toolbar-button-modifier"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">modifier</td>
+              <td>Modifier name.</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+    
 
-  
-  <section ng-show="!directive.methods || directive.methods.length === 0">
-    <p class="text-muted">
-      This tag has no method
-    </p>
-  </section>
-  
+    <span class="anchor" id="ons-toolbar-button-methods"></span>
+    
 
-  
+    
 
-  
+    
 
-</div>
+    
 
-
+  </div>
 
 </div>

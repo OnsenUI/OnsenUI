@@ -1,64 +1,58 @@
-<div class="directive-container clearfix" id="module:directives.directive:ons-button">
-<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
-  <h1 class="h1-separator">ons-button</h1>
+<div class="directive-container" id="module:directives.directive:ons-button">
+  <div>
+    <h4>Description</h4>
 
-  <section>
-    <p>Button component. It includes a spinner useful for showing work in progress.</p>
-  </section>
-
-  <span class="anchor" id="ons-button-attributes"></span>
-  
-    <section ng-show="directive.attributes.length > 0">
-      <table>
-        <thead>
-          <tr><th colspan="2">Attributes</th></tr>
-        </thead>
-        <tbody>
-          
-          <span class="anchor" id="ons-button-type"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">type</td>
-            <td>The type of the button. Can be any of [ &#39;quiet&#39;, &#39;large&#39;, &#39;large--quiet&#39;, &#39;cta&#39;, &#39;large--cta&#39; ]</td>
-          </tr>
-          
-          <span class="anchor" id="ons-button-should-spin"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">should-spin</td>
-            <td>Wether the button shoud switch to show spinner</td>
-          </tr>
-          
-          <span class="anchor" id="ons-button-animation"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">animation</td>
-            <td>The animation when the button transitions to and from the spinner. Can be any of [ &#39;expand-left&#39;, &#39;expand-right&#39;, &#39;expand-up&#39;, &#39;expand-down&#39;, &#39;slide-left&#39;, &#39;slide-right&#39;, &#39;slide-up&#39;, &#39;slide-down&#39;, &#39;zoom-out&#39;, &#39;zoom-in&#39; ]. The default is &#39;slide-left&#39;</td>
-          </tr>
-          
-          <span class="anchor" id="ons-button-disabled"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">disabled</td>
-            <td>Wether the button shoud be disabled.</td>
-          </tr>
-          
-        </tbody>
-      </table>
+    <section class="description">
+      <p>Button component. It includes a spinner useful for showing work in progress.</p>
     </section>
-  
-  <span class="anchor" id="ons-button-methods"></span>
 
-  
-  <section ng-show="!directive.methods || directive.methods.length === 0">
-    <p class="text-muted">
-      This tag has no method
-    </p>
-  </section>
-  
+    <span class="anchor" id="ons-button-attributes"></span>
+    
+      <section>
+        <table>
+          <thead>
+            <tr><th colspan="2">Attributes</th></tr>
+          </thead>
+          <tbody>
+            
+            <span class="anchor" id="ons-button-type"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">type</td>
+              <td>The type of the button. Can be any of [ &#39;quiet&#39;, &#39;large&#39;, &#39;large--quiet&#39;, &#39;cta&#39;, &#39;large--cta&#39; ]</td>
+            </tr>
+            
+            <span class="anchor" id="ons-button-should-spin"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">should-spin</td>
+              <td>Wether the button shoud switch to show spinner</td>
+            </tr>
+            
+            <span class="anchor" id="ons-button-animation"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">animation</td>
+              <td>The animation when the button transitions to and from the spinner. Can be any of [ &#39;expand-left&#39;, &#39;expand-right&#39;, &#39;expand-up&#39;, &#39;expand-down&#39;, &#39;slide-left&#39;, &#39;slide-right&#39;, &#39;slide-up&#39;, &#39;slide-down&#39;, &#39;zoom-out&#39;, &#39;zoom-in&#39; ]. The default is &#39;slide-left&#39;</td>
+            </tr>
+            
+            <span class="anchor" id="ons-button-disabled"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">disabled</td>
+              <td>Wether the button shoud be disabled.</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+    
 
-  
+    <span class="anchor" id="ons-button-methods"></span>
+    
 
-  
+    
 
-</div>
+    
 
+    
 
+  </div>
 
 </div>
