@@ -1,12 +1,12 @@
-<div class="directive-container clearfix" id="module:directives.directive:ons-list-item">
+<div class="directive-container clearfix" id="module:directives.directive:ons-list-header">
 <div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
-  <h1 class="h1-separator">ons-list-item</h1>
+  <h1 class="h1-separator">ons-list-header</h1>
 
   <section>
-    <p>Works like &lt;li&gt; but styled for mobile. Must be put inside ons-list tag.</p>
+    <p>Header element for list items. Must be put inside ons-list tag.</p>
   </section>
 
-  <span class="anchor" id="ons-list-item-attributes"></span>
+  <span class="anchor" id="ons-list-header-attributes"></span>
   
     <section ng-show="directive.attributes.length > 0">
       <table>
@@ -15,7 +15,7 @@
         </thead>
         <tbody>
           
-          <span class="anchor" id="ons-list-item-modifier"></span>
+          <span class="anchor" id="ons-list-header-modifier"></span>
           <tr ng-repeat="attribute in directive.attributes">
             <td class="attribute-name">modifier</td>
             <td></td>
@@ -25,7 +25,7 @@
       </table>
     </section>
   
-  <span class="anchor" id="ons-list-item-methods"></span>
+  <span class="anchor" id="ons-list-header-methods"></span>
 
   
   <section ng-show="!directive.methods || directive.methods.length === 0">

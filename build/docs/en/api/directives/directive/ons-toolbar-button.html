@@ -8,11 +8,22 @@
 
   <span class="anchor" id="ons-toolbar-button-attributes"></span>
   
-  <section ng-show="!directive.attributes || directive.attributes.length === 0">
-    <p class="text-muted">
-      This tag has no attribute
-    </p>
-  </section>
+    <section ng-show="directive.attributes.length > 0">
+      <table>
+        <thead>
+          <tr><th colspan="2">Attributes</th></tr>
+        </thead>
+        <tbody>
+          
+          <span class="anchor" id="ons-toolbar-button-modifier"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">modifier</td>
+            <td>Modifier name.</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
   
   <span class="anchor" id="ons-toolbar-button-methods"></span>
 

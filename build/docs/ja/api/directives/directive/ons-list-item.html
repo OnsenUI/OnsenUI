@@ -3,16 +3,27 @@
   <h1 class="h1-separator">ons-list-item</h1>
 
   <section>
-    <p>Works like &lt;li&gt; but styled for mobile. Must be put inside list tag.</p>
+    <p>Works like &lt;li&gt; but styled for mobile. Must be put inside ons-list tag.</p>
   </section>
 
   <span class="anchor" id="ons-list-item-attributes"></span>
   
-  <section ng-show="!directive.attributes || directive.attributes.length === 0">
-    <p class="text-muted">
-      This tag has no attribute
-    </p>
-  </section>
+    <section ng-show="directive.attributes.length > 0">
+      <table>
+        <thead>
+          <tr><th colspan="2">Attributes</th></tr>
+        </thead>
+        <tbody>
+          
+          <span class="anchor" id="ons-list-item-modifier"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">modifier</td>
+            <td></td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
   
   <span class="anchor" id="ons-list-item-methods"></span>
 

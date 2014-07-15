@@ -21,6 +21,12 @@
             <td>First page to show when navigator is initialized</td>
           </tr>
           
+          <span class="anchor" id="ons-navigator-var"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">var</td>
+            <td>Variable name to refer this navigator.</td>
+          </tr>
+          
         </tbody>
       </table>
     </section>
@@ -38,7 +44,7 @@
         <span class="anchor" id="pushPage(pageUrl,-pushPage(pageUrl,"></span>
         <tr ng-repeat="method in directive.methods">
           <td><code>pushPage(pageUrl,</code></td>
-          <td>Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. the options object include all the attributes of this navigator but replace the hyphen &#39;-&#39; with camel-case letter. eg. pushPage(&#39;page2.html&#39;)</td>
+          <td>Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. eg. pushPage(&#39;page2.html&#39;)</td>
         </tr>
         
         <span class="anchor" id="popPage()-popPage()"></span>
@@ -62,7 +68,13 @@
         <span class="anchor" id="getPages()-getPages()"></span>
         <tr ng-repeat="method in directive.methods">
           <td><code>getPages()</code></td>
-          <td>Retrieve the entire page stages of the navigator.
+          <td>Retrieve the entire page stages of the navigator.</td>
+        </tr>
+        
+        <span class="anchor" id="on(eventName,-on(eventName,"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>on(eventName,</code></td>
+          <td>listener) Added an event listener. Preset events are &#39;prepop&#39;, &#39;prepush&#39;, &#39;postpop&#39; and &#39;postpush&#39;.
 </td>
         </tr>
         

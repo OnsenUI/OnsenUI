@@ -21,6 +21,12 @@
             <td>Wether to hide the tabs. Valid values are [true/false] or angular binding. eg:</td>
           </tr>
           
+          <span class="anchor" id="ons-tabbar-var"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">var</td>
+            <td>Variable name to refer this tabbar.</td>
+          </tr>
+          
         </tbody>
       </table>
     </section>
@@ -28,10 +34,21 @@
   <span class="anchor" id="ons-tabbar-methods"></span>
 
   
-  <section ng-show="!directive.methods || directive.methods.length === 0">
-    <p class="text-muted">
-      This tag has no method
-    </p>
+  <section ng-show="directive.methods.length > 0" class="round-corner">
+    <table>
+      <thead>
+        <tr><th colspan="2">Methods</th></tr>
+      </thead>
+      <tbody>
+        
+        <span class="anchor" id="on(eventName,-on(eventName,"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>on(eventName,</code></td>
+          <td>listener) Added an event listener. Preset events are &#39;prechange&#39; and &#39;postchange&#39;.</td>
+        </tr>
+        
+      </tbody>
+    </table>
   </section>
   
 

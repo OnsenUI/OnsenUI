@@ -255,7 +255,8 @@ gulp.task('build', function() {
     'clean',
     'prepare',
     'prepare-project-templates',
-    'compress-project-templates'
+    'compress-project-templates',
+    'build-doc'
   );
 });
 
