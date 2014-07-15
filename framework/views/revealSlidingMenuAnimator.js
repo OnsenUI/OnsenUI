@@ -46,9 +46,13 @@ limitations under the License.
         this._isRight = !!options.isRight;
         this._width = options.width || '90%';
 
-        mainPage.css('box-shadow', '0px 0 10px 0px rgba(0, 0, 0, 0.2)');
+        mainPage.css({
+          boxShadow: '0px 0 10px 0px rgba(0, 0, 0, 0.2)'
+        });
+
         menuPage.css({
           width: options.width,
+          opacity: 0.9,
           display: 'none'
         });
 
