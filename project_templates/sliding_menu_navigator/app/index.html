@@ -8,7 +8,7 @@
   <title>My App</title>  
   
   <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
-  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css"> 
+  <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css"> 
   <link rel="stylesheet" href="styles/app.css"/> 
 
   <script src="lib/onsen/js/angular/angular.js"></script>    
@@ -19,14 +19,8 @@
 
 <body>    
   
-  <ons-screen>
-
-    <ons-sliding-menu 
-      behind-page="menu.html" 
-      above-page="navigator1.html">
-    </ons-sliding-menu>
-    
-  </ons-screen>
+  <ons-sliding-menu menu-page="menu.html" main-page="navigator1.html">
+  </ons-sliding-menu>
  
 </body>
 </html>

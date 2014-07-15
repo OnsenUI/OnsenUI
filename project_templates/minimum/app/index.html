@@ -8,7 +8,7 @@
   <title>My App</title>  
   
   <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
-  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">    
+  <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">    
   <link rel="stylesheet" href="styles/app.css"/>
 
   <script src="lib/onsen/js/angular/angular.js"></script>    
@@ -19,19 +19,17 @@
 
 <body>    
   
-  <ons-screen>
-    <ons-navigator>
-      <ons-toolbar>
-        <div class="center">Page 1</div>
-      </ons-toolbar>
+  <ons-navigator>
+    <ons-toolbar>
+      <div class="center">Page 1</div>
+    </ons-toolbar>
 
-      <div class="center">
-        <h1>Page 1</h1>
-        <ons-button ng-click="ons.navigator.pushPage('page2.html')">Push Page 2</ons-button> 
-      </div>
+    <div class="center">
+      <h1>Page 1</h1>
+      <ons-button ng-click="ons.navigator.pushPage('page2.html')">Push Page 2</ons-button> 
+    </div>
 
-    </ons-navigator>
-  </ons-screen>
+  </ons-navigator>
  
 </body>
 </html>

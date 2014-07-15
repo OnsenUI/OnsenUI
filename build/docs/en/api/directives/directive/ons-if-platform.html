@@ -1,6 +1,45 @@
+<<<<<<< HEAD
 <div class="directive-container" id="module:directives.directive:ons-if-platform">
   <div>
     <h4>Description</h4>
+=======
+<div class="directive-container clearfix" id="module:directives.directive:ons-if-platform">
+<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
+  <h1 class="h1-separator">ons-if-platform</h1>
+
+  <section>
+    <p>Conditionally display content depending on the platform/browser. Valid values are [ios/android/blackberry/chrome/safari/firefox/opera]. Different from other components, this component is used as attribute in any element.</p>
+  </section>
+
+  <span class="anchor" id="ons-if-platform-attributes"></span>
+  
+    <section ng-show="directive.attributes.length > 0">
+      <table>
+        <thead>
+          <tr><th colspan="2">Attributes</th></tr>
+        </thead>
+        <tbody>
+          
+          <span class="anchor" id="ons-if-platform-ons-if-platform"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">ons-if-platform</td>
+            <td>Either &quot;opera&quot;, &quot;firefox&quot;, &quot;safari&quot;, &quot;chrome&quot;, &quot;ie&quot;, &quot;android&quot;, &quot;blackberry&quot;, &quot;ios&quot; or &quot;windows&quot;.</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+  
+  <span class="anchor" id="ons-if-platform-methods"></span>
+
+  
+  <section ng-show="!directive.methods || directive.methods.length === 0">
+    <p class="text-muted">
+      This tag has no method
+    </p>
+  </section>
+  
+>>>>>>> 954d575711c5a0dcec32ee281e395cf24226f3cf
 
     <section class="description">
       <p>Conditionally display content depending on the platform/browser. Valid values are [ios/android/blackberry/chrome/safari/firefox/opera]. Different from other components, this component is used as attribute in any element.</p>

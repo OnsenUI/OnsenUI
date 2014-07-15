@@ -8,7 +8,7 @@
   <title>My App</title>  
   
   <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
-  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">  
+  <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">  
   <link rel="stylesheet" href="styles/app.css"/>
 
   <script src="lib/onsen/js/angular/angular.js"></script>    
@@ -19,27 +19,26 @@
 
 <body>    
   
-  <ons-screen>
+  <ons-tabbar>
+    <ons-tabbar-item
+      active="true"
+      label="Home"
+      icon="home"
+      page="navigator1.html">
+    </ons-tabbar-item>
 
-    <ons-tabbar>
-      <ons-tabbar-item
-              active="true"
-              label="Home"
-              icon="home"
-              page="navigator1.html"></ons-tabbar-item>
+    <ons-tabbar-item
+      label="Camera"
+      icon="camera"
+      page="page2.html">
+    </ons-tabbar-item>
 
-      <ons-tabbar-item
-          label="Camera"
-              icon="camera"
-              page="page2.html"></ons-tabbar-item>
-
-      <ons-tabbar-item
-          label="Settings"
-              icon="gear"
-              page="page3.html"></ons-tabbar-item>
-    </ons-tabbar>
-    
-  </ons-screen>
+    <ons-tabbar-item
+      label="Settings"
+      icon="gear"
+      page="page3.html">
+    </ons-tabbar-item>
+  </ons-tabbar>
  
 </body>
 </html>

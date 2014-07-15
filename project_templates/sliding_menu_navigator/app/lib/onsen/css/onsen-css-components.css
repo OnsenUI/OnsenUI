@@ -1,13 +1,15 @@
 html {
-  width: 100%;
   height: 100%;
+  width: 100%;
 }
 body {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  margin: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
   padding: 0;
+  margin: 0;
 }
 *:not(input,
 textarea,
@@ -20,8 +22,16 @@ select) {
 * {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
+input:active,
+input:focus,
+textarea:active,
+textarea:focus,
+select:active,
+select:focus {
+  outline: none;
+}
 .page {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -31,8 +41,8 @@ select) {
   left: 0px;
   right: 0px;
   bottom: 0px;
-  overflow: hidden;
-  font-size: 16px;
+  overflow: visible;
+  font-size: 17px;
   color: #1f1f21;
 }
 .page::-webkit-scrollbar {
@@ -45,6 +55,9 @@ select) {
   left: 0px;
   right: 0px;
   bottom: 0px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 /* topdoc
   name: Switch
@@ -77,15 +90,13 @@ select) {
   background-clip: padding-box;
   position: relative;
   overflow: hidden;
-  font-size: 16px;
+  font-size: 17px;
   padding: 0 20px;
   border: none;
   overflow: visible;
   width: 51px;
   height: 32px;
-  -webkit-border-radius: 30px;
-  border-radius: 30px;
-  z-index: 1;
+  z-index: 0;
   text-align: left;
 }
 .switch__input {
@@ -104,13 +115,46 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
   width: 51px;
   height: 44px;
   margin-top: -6px;
   top: 0px;
   left: 0px;
+  -webkit-transition: all 0.2s linear;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.switch__toggle {
+  background-color: #ddd;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.35s;
+  -moz-transition-duration: 0.35s;
+  -o-transition-duration: 0.35s;
+  transition-duration: 0.35s;
+  -webkit-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -moz-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -o-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
 }
 .switch__toggle:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
   position: absolute;
   content: '';
   -webkit-border-radius: 28px;
@@ -118,68 +162,42 @@ select) {
   height: 28px;
   width: 28px;
   background-color: #fff;
-  border: 1px solid #ddd;
-  left: 0;
-  top: 1px;
-  -webkit-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
-  -moz-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
-  -o-transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
-  transition: all 0.35s cubic-bezier(0.5, 1.6, 0.5, 1);
+  left: 2px;
+  top: 2px;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.35s;
+  -moz-transition-duration: 0.35s;
+  -o-transition-duration: 0.35s;
+  transition-duration: 0.35s;
+  -webkit-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -moz-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -o-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
 }
-.switch__toggle {
-  background-color: #ddd;
-  width: 50px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  -webkit-border-radius: 30px;
-  border-radius: 30px;
-  height: 32px;
-}
-.switch__input + .switch__toggle:before {
-  margin-left: 0px;
+.switch__input:checked + .switch__toggle {
+  background-color: #4cd964;
 }
 .switch__input:checked + .switch__toggle:before {
-  margin-left: 0px;
-  -webkit-transform: translate3d(19px, 0px, 0px);
-  -moz-transform: translate3d(19px, 0px, 0px);
-  -o-transform: translate3d(19px, 0px, 0px);
-  transform: translate3d(19px, 0px, 0px);
-  border-color: #4cd964;
+  -webkit-transform: translateX(18px);
+  -moz-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  -o-transform: translateX(18px);
+  transform: translateX(18px);
 }
-.switch__input:active + .switch__toggle {
-  border: none;
-}
-.switch__input:focus + .switch__toggle {
-  border: none;
+.switch__input:not(:checked) + .switch__toggle:before {
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  -ms-transform: translateX(0px);
+  -o-transform: translateX(0px);
+  transform: translateX(0px);
 }
 .switch__input:disabled + .switch__toggle {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
-}
-.switch__input:checked + .switch__toggle {
-  background-color: #4cd964;
-  -webkit-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
-  box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
-  -webkit-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
-  -moz-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
-  -o-transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
-  transition: background-color 0.5s cubic-bezier(0.5, 1.6, 0.5, 1);
-}
-.switch__input:not(:checked) + .switch__toggle {
-  -webkit-box-shadow: inset 0 0 0 0px rgba(0,0,0,0.1);
-  box-shadow: inset 0 0 0 0px rgba(0,0,0,0.1);
-  -webkit-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
-  -moz-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
-  -o-transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
-  transition: background-color 0.5s cubic-bezier(0.5, 1.3, 0.5, 1);
-}
-.switch__input:not(:checked) + .switch__toggle:before {
-  -webkit-transform: translate3d(1px, 0px, 0px);
-  -moz-transform: translate3d(1px, 0px, 0px);
-  -o-transform: translate3d(1px, 0px, 0px);
-  transform: translate3d(1px, 0px, 0px);
 }
 /* topdoc
   name: Range
@@ -221,6 +239,7 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -228,6 +247,7 @@ select) {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
+  line-height: 1;
   -webkit-appearance: none;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -316,7 +336,7 @@ select) {
     </div>
 */
 .navigation-bar {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -334,31 +354,15 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   z-index: 2;
-  box-flex: 0;
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 auto;
-  -moz-box-flex: 0;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  -webkit-box-align: stretch;
-  -webkit-align-items: stretch;
-  -moz-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  -webkit-align-content: stretch;
-  -ms-flex-line-pack: stretch;
-  align-content: stretch;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: table;
+  table-layout: fixed;
   height: 44px;
   padding-left: 0;
   padding-right: 0;
@@ -369,6 +373,8 @@ select) {
   border-bottom: 1px solid #ddd;
   font-weight: 400;
   width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .navigation-bar__line-height {
   line-height: 44px;
@@ -393,43 +399,44 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  line-height: 1;
+  height: 44px;
   vertical-align: top;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -moz-box-flex: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  overflow: visible;
+  overflow: hidden;
+  display: table-cell;
+  vertical-align: middle;
 }
 .navigation-bar__left {
-  width: 25%;
+  max-width: 50%;
   text-align: left;
 }
 .navigation-bar__right {
-  width: 25%;
+  max-width: 50%;
   text-align: right;
 }
 .navigation-bar__center {
-  -webkit-box-flex: 2;
-  -webkit-flex-grow: 2;
-  -moz-box-flex: 2;
-  -ms-flex-positive: 2;
-  flex-grow: 2;
-  min-width: 50%;
+  width: 45%;
   text-align: center;
+  line-height: 44px;
+  font-size: 17px;
+  font-weight: 500;
 }
 .navigation-bar__center:first-child:last-child {
   width: 100%;
 }
 .navigation-bar__title {
   line-height: 44px;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   color: #1f1f21;
+  margin: 0;
+  padding: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 /* topdoc
   name: Navigation Bar Item
@@ -444,7 +451,7 @@ select) {
       </div>
 
       <div class="navigation-bar__center">
-        <h1 class="navigation-bar__title">Navigation Bar</h1>
+        Navigation Bar
       </div>
 
       <div class="navigation-bar__right">
@@ -462,7 +469,7 @@ select) {
     </div>
 */
 .bottom-bar {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -480,6 +487,7 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -555,7 +563,8 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -570,7 +579,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -603,7 +612,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
 }
 .button:focus {
   -webkit-box-shadow: none;
@@ -637,7 +646,8 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -652,7 +662,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -704,7 +714,8 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
+  color: #1284ff;
 }
 /* topdoc
   name: Large Button
@@ -727,7 +738,8 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -742,7 +754,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -759,7 +771,7 @@ select) {
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   line-height: 36px;
   padding: 4px 20px;
@@ -775,7 +787,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
@@ -818,7 +830,8 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -833,7 +846,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -850,7 +863,7 @@ select) {
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   line-height: 36px;
   padding: 4px 20px;
@@ -867,7 +880,12 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
+  color: #1284ff;
+  background: transparent;
+  border: 1px solid transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .button--large--quiet:disabled {
   opacity: 0.3;
@@ -905,7 +923,8 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -920,7 +939,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -964,7 +983,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
 }
 .button--cta:disabled {
   opacity: 0.3;
@@ -992,7 +1011,8 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1007,7 +1027,7 @@ select) {
   height: auto;
   text-decoration: none;
   padding: 4px 20px;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 36px;
   letter-spacing: 0;
   color: #fff;
@@ -1030,7 +1050,7 @@ select) {
   box-shadow: none;
   color: #fff;
   text-shadow: none;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   line-height: 36px;
   padding: 4px 20px;
@@ -1057,7 +1077,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
 }
 .button--large--cta:disabled {
   opacity: 0.3;
@@ -1083,7 +1103,7 @@ select) {
     </div>
 */
 .button-bar {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1092,15 +1112,12 @@ select) {
   white-space: nowrap;
   margin: 0;
   padding: 0;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
+  position: relative;
   margin: 0;
-  border: 0px solid #1284ff;
+  border: none;
 }
 .button-bar__item {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1111,21 +1128,9 @@ select) {
   position: relative;
   position: relative;
   overflow: hidden;
-  border-top: 1px solid #1284ff;
-  border-bottom: 1px solid #1284ff;
   padding: 0;
-}
-.button-bar > .button-bar__item:first-child {
-  -webkit-border-top-left-radius: 4px;
-  border-top-left-radius: 4px;
-  -webkit-border-bottom-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-.button-bar > .button-bar__item:last-child {
-  -webkit-border-top-right-radius: 4px;
-  border-top-right-radius: 4px;
-  -webkit-border-bottom-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  position: relative;
+  overflow: hidden;
 }
 .button-bar__item > input {
   position: absolute;
@@ -1143,16 +1148,26 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .button-bar__item:first-child > .button-bar__button {
   border-left: 1px solid #1284ff;
   border-right: 1px solid #1284ff;
+  -webkit-border-top-left-radius: 4px;
+  border-top-left-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 .button-bar__item:last-child > .button-bar__button {
   border-right: 1px solid #1284ff;
+  -webkit-border-top-right-radius: 4px;
+  border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 .button-bar__button {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1161,6 +1176,8 @@ select) {
   background-color: transparent;
   color: #1284ff;
   border: 0px solid #1284ff;
+  border-top: 1px solid #1284ff;
+  border-bottom: 1px solid #1284ff;
   border-right: 1px solid #1284ff;
   font-weight: 400;
   padding: 0 8px;
@@ -1180,6 +1197,8 @@ select) {
 :active + .button-bar__button {
   background-color: rgba(18,132,255,0.2);
   border: 0px solid #1284ff;
+  border-top: 1px solid #1284ff;
+  border-bottom: 1px solid #1284ff;
   border-right: 1px solid #1284ff;
   height: 27px;
   line-height: 27px;
@@ -1189,7 +1208,6 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  padding: 0;
 }
 .button-bar__item.active > .button-bar__button,
 :checked + .button-bar__button {
@@ -1298,7 +1316,7 @@ select) {
     </div>
 */
 .tab-bar {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1317,7 +1335,7 @@ select) {
   width: 100%;
 }
 .tab-bar__item {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1344,12 +1362,14 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .tab-bar__button {
   position: relative;
   display: inline-block;
   vertical-align: top;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1364,6 +1384,7 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -1396,7 +1417,7 @@ select) {
   height: 32px;
 }
 .tab-bar__label {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1507,7 +1528,8 @@ select) {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1551,7 +1573,7 @@ select) {
 */
 .icon-button,
 .icon-button--quiet {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1561,13 +1583,11 @@ select) {
   text-shadow: 0 1px none;
   vertical-align: baseline;
   background-color: rgba(0,0,0,0);
-  -webkit-box-shadow: none;
-  box-shadow: none;
   border: 1px solid #1284ff;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 17px;
   -webkit-transition: opacity 0.2s linear;
   -moz-transition: opacity 0.2s linear;
   -o-transition: opacity 0.2s linear;
@@ -1581,7 +1601,7 @@ select) {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  opacity: 0.6;
+  opacity: 0.2;
 }
 .icon-button:disabled,
 .icon-button--quiet:disabled {
@@ -1592,6 +1612,12 @@ select) {
 .icon-button:focus,
 .icon-button--quiet:focus {
   outline: 0;
+}
+.icon-button:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
 }
 .icon-button--quiet {
   background: transparent;
@@ -1607,8 +1633,13 @@ select) {
   text-shadow: 0 1px none;
   background-color: transparent;
   border: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+  opacity: 0.2;
+}
+.icon-button--quiet:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
 }
 /* topdoc
   name: Checkbox
@@ -1644,7 +1675,7 @@ select) {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1665,7 +1696,7 @@ select) {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1689,8 +1720,10 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
-  height: 24px;
-  width: 24px;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0;
+  width: 0;
 }
 .checkbox > input[type="checkbox"]:checked {
   background: #1284ff;
@@ -1734,7 +1767,7 @@ select) {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1816,6 +1849,8 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 .checkbox--noborder {
   position: relative;
@@ -1826,7 +1861,7 @@ select) {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1851,6 +1886,27 @@ select) {
   background-clip: padding-box;
   height: 24px;
   background: transparent;
+}
+.checkbox--noborder > input[type="checkbox"] {
+  position: absolute;
+  overflow: hidden;
+  right: 0px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0;
+  width: 0;
 }
 .checkbox--noborder > input[type="checkbox"]:checked + .checkbox__checkmark:before {
   background: transparent;
@@ -1929,46 +1985,28 @@ select) {
   name: List
   class: list
   markup:
-    <div class="list">
-      <ul class="list__container">
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+    </ul>
 */
-.list {
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #f0eff4;
-}
 .list--noborder {
   border-top: none;
   border-bottom: none;
 }
 .list__header {
   margin: 0;
+  padding: 0;
+  list-style: none;
   text-align: left;
+  display: block;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   padding: 0 0 0 10px;
   font-size: 15px;
   font-weight: 500;
@@ -1980,13 +2018,34 @@ select) {
   min-height: 24px;
   line-height: 24px;
 }
-.list__container {
+.list {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
   padding: 0;
   margin: 0;
   list-style-type: none;
   text-align: left;
-  border-top: none;
+  overflow: auto;
+  display: block;
+  -webkit-overflow-scrolling: touch;
   padding: 0;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   background-color: #fff;
 }
 .list__item {
@@ -1997,6 +2056,7 @@ select) {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  display: block;
   padding: 0 0 0 10px;
   margin: 0 0 0 0;
   border-top: none;
@@ -2004,9 +2064,10 @@ select) {
   color: #1f1f21;
   background-color: #fff;
   min-height: 44px;
-  position: relative;
+  line-height: 44px;
 }
-.list__item__line-height {
+.list__item__line-height,
+.list__item--line-height {
   line-height: 44px;
 }
 .list__item_active:active {
@@ -2020,54 +2081,33 @@ select) {
   padding-left: 10px;
   margin: 0;
   border-top: none;
-  border-bottom: none;
+  border-bottom: 1px solid #ddd;
 }
 .list__item:last-child {
   padding-left: 10px;
   margin: 0;
-  border-top: none;
   border-bottom: none;
 }
-.list__item:nth-child(2) {
-  border-top: 1px solid #ddd;
+.list__item:first-child:last-child {
+  border-top: none;
+  border-bottom: none;
 }
 /* topdoc
   name: Noborder List
   class: list--noborder
   use: List
   markup:
-    <div class="list--noborder">
-      <ul class="list__container">
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-        <li class="list__item">
-          <span class="list__item__line-height">Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list list--noborder">
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+      <li class="list__item">
+        <span class="list__item__line-height">Item</span>
+      </li>
+    </ul>
  */
 .list--noborder {
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #f0eff4;
+  background-color: #fff;
   border-top: none;
   border-bottom: none;
 }
@@ -2076,44 +2116,33 @@ select) {
   class: list__header
   use: List
   markup:
-    <div class="list">
-      <h3 class="list__header">Category</h3>
-      <ul class="list__container">
-        <li class="list__item list__item__line-height">
-          Item
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__header">
+        Header
+      </li>
+      <li class="list__item">
+        Item
+      </li>
+      <li class="list__header">
+        Header
+      </li>
+      <li class="list__item">
+        Item
+      </li>
+    </ul>
  */
 /* topdoc
   name: Tappable List
   class: list__item--tappable
   use: List
   markup:
-    <div class="list">
-      <ul class="list__container">
-        <li class="list__item--tappable">
-          <span class="list__item__line-height">Tappable Item</span>
-        </li>
-      </ul>
-    </div>
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        Tappable Item
+      </li>
+    </ul>
  */
 .list__item--tappable {
-  margin: 0;
-  padding: 0;
-  position: relative;
-  list-style: none;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding: 0 0 0 10px;
-  margin: 0 0 0 0;
-  border-top: none;
-  border-bottom: 1px solid #ddd;
-  color: #1f1f21;
-  background-color: #fff;
-  min-height: 44px;
-  position: relative;
   -webkit-transition: background-color 0.2s linear;
   -moz-transition: background-color 0.2s linear;
   -o-transition: background-color 0.2s linear;
@@ -2126,20 +2155,90 @@ select) {
   -o-transition: none;
   transition: none;
 }
-.list__item--tappable:first-child {
-  padding-left: 10px;
-  margin: 0;
-  border-top: none;
-  border-bottom: none;
+.list__item--tappable:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
 }
-.list__item--tappable:last-child {
-  padding-left: 10px;
-  margin: 0;
-  border-top: none;
-  border-bottom: none;
+/* topdoc
+  name: Switch in List Item
+  class: switch--list-item
+  use: Switch, List
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        Label
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input" checked>
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+      <li class="list__item">
+        Label
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input">
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+    </ul>
+*/
+.switch--list-item {
+  float: right;
+  margin-top: 6px;
+  margin-right: 10px;
 }
-.list__item--tappable:nth-child(2) {
-  border-top: 1px solid #ddd;
+/* topdoc
+  name: List Item with Chevron
+  class: list__item--chevron
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--chevron">
+        Tappable Item
+      </li>
+      <li class="list__item list__item--chevron">
+        Tappable Item
+      </li>
+    </ul>
+ */
+.list__item--chevron {
+  -webkit-transition: background-color 0.2s linear;
+  -moz-transition: background-color 0.2s linear;
+  -o-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+  overflow: hidden;
+}
+.list__item--chevron:active {
+  background-color: #d9d9d9;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.list__item--chevron:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.list__item--chevron:before {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  color: #ddd;
+  line-height: 28px;
+  height: 28px;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-size: 28px;
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  content: "\f105";
 }
 /* topdoc
   name: Radio Button
@@ -2180,18 +2279,22 @@ select) {
   width: 100%;
   height: 100%;
   margin: 0;
-  height: 24px;
-  width: 24px;
-  margin-top: 0;
-  margin-right: -24px;
-  margin-bottom: -24px;
-  margin-left: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0px;
+  width: 0px;
 }
-.radio-button > input[type="radio"]:active {
+.radio-button > input[type="radio"]:active,
+.radio-button > input[type="radio"]:focus {
   outline: 0;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 .radio-button > input[type="radio"]:checked + .radio-button__checkmark:after {
   opacity: 1;
+}
+.radio-button > input[type="radio"]:checked + .radio-button__checkmark:before {
+  background: transparent;
+  border: none;
 }
 .radio-button {
   position: relative;
@@ -2240,7 +2343,7 @@ select) {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2308,6 +2411,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2315,11 +2419,15 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: 1;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   -webkit-appearance: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   height: 31px;
   font-size: 15px;
   border: 1px solid #ddd;
@@ -2327,18 +2435,17 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
-  padding: 5px 0 5px 28px;
+  padding: 4px 0 0 28px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   background-image: url("data:image/svg+xml;utf8,<svg width='41px' height='40px' viewBox='0 0 41 40' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:sketch='http://www.bohemiancoding.com/sketch/ns'><title>Slice 1</title><description>Created with Sketch (http://www.bohemiancoding.com/sketch)</description><defs></defs><g id='Page 1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'><g id='search' fill='#C6C8C8'><path d='M0.504,16.338 C0.504,25.085 7.635,32.165 16.444,32.165 C25.24,32.165 32.382,25.085 32.382,16.338 C32.382,7.591 25.24,0.5 16.444,0.5 C7.635,0.5 0.504,7.591 0.504,16.338 L0.504,16.338 Z M5.555,16.338 C5.555,10.359 10.423,5.521 16.445,5.521 C22.455,5.521 27.333,10.36 27.333,16.338 C27.333,22.317 22.455,27.156 16.445,27.156 C10.423,27.156 5.555,22.316 5.555,16.338 L5.555,16.338 Z M27.666,30.861 L34.521,38.67 C35.625,39.772 36.338,39.781 37.46,38.67 L39.661,36.489 C40.743,35.408 40.811,34.711 39.661,33.568 L31.765,26.793 L27.666,30.861 L27.666,30.861 Z M27.666,30.861' id='Shape'></path></g></g></svg>");
   background-position: 8px center;
   background-repeat: no-repeat;
-  -webkit-background-size: 16px;
-  background-size: 16px;
+  -webkit-background-size: 17px;
+  background-size: 17px;
   font-weight: 400;
   display: block;
   width: 100%;
-  vertical-align: middle;
 }
 .search-input:focus {
   background-color: #fff;
@@ -2351,7 +2458,9 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .search-input::-webkit-search-decoration {
   margin-right: 0px;
 }
-.search-input:focus::-webkit-input-placeholder {
+.search-input::-webkit-input-placeholder,
+.search-input::-moz-placeholder,
+.search-input::-ms-input-placeholder {
   color: #ccc;
 }
 .search-input:disabled {
@@ -2378,6 +2487,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2385,7 +2495,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: 1;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2397,18 +2508,17 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
-  padding: 4px 8px;
+  padding: 4px 8px 0 8px;
+  margin: 0;
   font-size: 15px;
   height: 31px;
-  vertical-align: middle;
   font-weight: 400;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
-.text-input::-webkit-input-placeholder {
-  color: #ccc;
-}
-.text-input::-moz-placeholder {
-  color: #ccc;
-}
+.text-input::-webkit-input-placeholder,
+.text-input::-moz-placeholder,
 .text-input::-ms-input-placeholder {
   color: #ccc;
 }
@@ -2441,6 +2551,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2448,7 +2559,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: 1;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2460,11 +2572,14 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
-  padding: 4px 8px;
+  padding: 4px 8px 0 8px;
+  margin: 0;
   font-size: 15px;
   height: 31px;
-  vertical-align: middle;
   font-weight: 400;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   border: none;
   background-color: transparent;
   padding-left: 0;
@@ -2505,6 +2620,7 @@ webkit-input-placeholder() {
   color: inherit;
   background: transparent;
   border: none;
+  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2512,7 +2628,8 @@ webkit-input-placeholder() {
   background-clip: padding-box;
   vertical-align: top;
   outline: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: 1;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2524,11 +2641,14 @@ webkit-input-placeholder() {
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
-  padding: 4px 8px;
+  padding: 4px 8px 0 8px;
+  margin: 0;
   font-size: 15px;
   height: 31px;
-  vertical-align: middle;
   font-weight: 400;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   border: none;
   background-color: transparent;
   border-bottom: 1px solid #ddd;
@@ -2578,7 +2698,8 @@ webkit-input-placeholder() {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2629,7 +2750,8 @@ webkit-input-placeholder() {
   color: inherit;
   background: transparent;
   border: none;
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;

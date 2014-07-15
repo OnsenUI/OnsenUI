@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.0-dev - 2014-07-14 */
+/*! onsenui - v1.1.0-dev - 2014-07-15 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org

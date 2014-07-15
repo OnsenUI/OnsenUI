@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-/*! onsenui - v1.1.0-dev - 2014-06-29 */
-=======
-/*! onsenui - v1.0.4 - 2014-06-26 */
-
->>>>>>> remotes/origin/master
+/*! onsenui - v1.1.0-dev - 2014-07-15 */
 /*
 Copyright 2013-2014 ASIAL CORPORATION
 
@@ -23,9 +18,29 @@ limitations under the License.
 
 @import url("font_awesome/css/font-awesome.min.css");
 
+/* cutsom elements */
+ons-page, ons-screen, ons-navigator,
+ons-split-view, ons-sliding-menu, ons-tabbar {
+  display: block;
+}
+
+ons-navigator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+}
+
 * {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 input, textarea {
@@ -52,10 +67,11 @@ ons-toolbar + .page__content {
 .page__content {
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
+  z-index: 0;
 }
 
 .page__bottom-bar-fill ~ .page__content {
-  padding-bottom: 44px;
+  margin-bottom: 44px;
 }
 
 .page__content::-webkit-scrollbar {
@@ -76,17 +92,20 @@ ons-toolbar + .page__content {
 
 .effeckt-button > .spinner {
   position: absolute;
-  width: 20px;
-  height: 10px;
+  width: 26px;
+  height: 13px;
   top: 50%;
-  margin-top: -13px;
+  margin-top: -12px;
   opacity: 0;
-  /*border: 3px solid #fff; specified in topcoat theme. .topcoat-button__spinner*/
+  border: 3px solid white;
   border-bottom: 0;
   -webkit-border-radius: 40px 40px 0 0;
   border-radius: 40px 40px 0 0;
   -webkit-transform-origin: bottom center;
   background: transparent;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .effeckt-button[data-loading] > .spinner {
@@ -461,11 +480,16 @@ ons-toolbar + .page__content {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  width: 100%; }
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
 .row + .row {
   margin-top: -5px;
-  padding-top: 0; }
+  padding-top: 0;
+}
 
 .col {
   -webkit-box-flex: 1;
@@ -475,7 +499,11 @@ ons-toolbar + .page__content {
   -ms-flex: 1;
   flex: 1;
   display: block;
-  width: 100%; }
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
 /* Vertically Align Columns */
 /* .row-* vertically aligns every .col in the .row */
@@ -485,7 +513,8 @@ ons-toolbar + .page__content {
   -webkit-align-items: flex-start;
   -moz-align-items: flex-start;
   -moz-box-align: start;
-  align-items: flex-start; }
+  align-items: flex-start;
+}
 
 .row-bottom {
   -webkit-box-align: end;
@@ -493,7 +522,8 @@ ons-toolbar + .page__content {
   -webkit-align-items: flex-end;
   -moz-align-items: flex-end;
   -moz-box-align: end;
-  align-items: flex-end; }
+  align-items: flex-end;
+}
 
 .row-center {
   -webkit-box-align: center;
@@ -501,7 +531,8 @@ ons-toolbar + .page__content {
   -webkit-align-items: center;
   -moz-align-items: center;
   -moz-box-align: center;
-  align-items: center; }
+  align-items: center;
+}
 
 /* .col-* vertically aligns an individual .col */
 .col-top {
@@ -549,92 +580,6 @@ ons-toolbar + .page__content {
 
 .col-offset-90 {
   margin-left: 90%; }
-
-/* Explicit Column Percent Sizes */
-/* By default each grid column will evenly distribute */
-/* across the grid. However, you can specify individual */
-/* columns to take up a certain size of the available area */
-.col-10 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 10%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 10%;
-  -ms-flex: 0 0 10%;
-  flex: 0 0 10%;
-  max-width: 10%; }
-
-.col-20 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 20%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 20%;
-  -ms-flex: 0 0 20%;
-  flex: 0 0 20%;
-  max-width: 20%; }
-
-.col-25 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 25%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 25%;
-  -ms-flex: 0 0 25%;
-  flex: 0 0 25%;
-  max-width: 25%; }
-
-.col-33, .col-34 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 33.3333%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 33.3333%;
-  -ms-flex: 0 0 33.3333%;
-  flex: 0 0 33.3333%;
-  max-width: 33.3333%; }
-
-.col-50 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 50%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 50%;
-  -ms-flex: 0 0 50%;
-  flex: 0 0 50%;
-  max-width: 50%; }
-
-.col-66, .col-67 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 66.6666%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 66.6666%;
-  -ms-flex: 0 0 66.6666%;
-  flex: 0 0 66.6666%;
-  max-width: 66.6666%; }
-
-.col-75 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 75%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 75%;
-  -ms-flex: 0 0 75%;
-  flex: 0 0 75%;
-  max-width: 75%; }
-
-.col-80 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 80%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 80%;
-  -ms-flex: 0 0 80%;
-  flex: 0 0 80%;
-  max-width: 80%; }
-
-.col-90 {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 90%;
-  -moz-box-flex: 0;
-  -moz-flex: 0 0 90%;
-  -ms-flex: 0 0 90%;
-  flex: 0 0 90%;
-  max-width: 90%; }
-
 
 .row--fit > .col {
   -webkit-box-flex: 1;
@@ -696,6 +641,16 @@ limitations under the License.
 
 */
 
+ons-sliding-menu {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  overflow: hidden;
+  z-index: 0;
+}
+
 .onsen-sliding-menu__behind,
 .onsen-sliding-menu__above {
   position: absolute;
@@ -703,11 +658,10 @@ limitations under the License.
   left: 0px;
   bottom: 0px;
   right: 0px;
+  z-index: 0;
 }
 
 .onsen-sliding-menu__above {
-  -webkit-box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.1);
-  box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.1);
   margin: 0;
   padding: 0;
 }
@@ -715,6 +669,7 @@ limitations under the License.
 .onsen-sliding-menu__behind {
   opacity: 0;
 }
+
 
 /*
 Copyright 2013-2014 ASIAL CORPORATION
@@ -733,14 +688,18 @@ limitations under the License.
 
 */
 
+ons-split-view {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  z-index: 0;
+}
+
 .onsen-split-view__secondary {
   opacity: 0;
   width: 100%;
-  overflow: hidden;
-}
-
-.onsen-split-view__main {
-  overflow: hidden;
 }
 
 .onsen-split-view__secondary,
@@ -750,11 +709,7 @@ limitations under the License.
   left: 0px;
   bottom: 0px;
   right: 0px;
-}
-
-.onsen-split-view__shadow {
-  -webkit-box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
-  box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+  z-index: 0;
 }
 
 /*
@@ -776,8 +731,8 @@ limitations under the License.
 
 .ons-tab-bar__footer {
   position: absolute;
-  bottom:0;
-  left:0;
+  bottom: 0;
+  left: 0;
 }
 
 .ons-tab-bar__content {
