@@ -1,172 +1,105 @@
-<div class="directive-container clearfix" id="module:directives.directive:ons-split-view">
-<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
-  <h1 class="h1-separator">ons-split-view</h1>
+<div class="directive-container" id="module:directives.directive:ons-split-view">
+  <div>
+    <h4>Description</h4>
 
-  <section>
-    <p>Divides the screen into left and right section. This component can also act as sliding menu which can be controlled by &#39;collapse&#39; attribute</p>
-  </section>
+    <section class="description">
+      <p>Divides the screen into left and right section. This component can also act as sliding menu which can be controlled by &#39;collapse&#39; attribute</p>
+    </section>
 
-  <span class="anchor" id="ons-split-view-attributes"></span>
-  
-    <section ng-show="directive.attributes.length > 0">
+    <span class="anchor" id="ons-split-view-attributes"></span>
+    
+      <section>
+        <table>
+          <thead>
+            <tr><th colspan="2">Attributes</th></tr>
+          </thead>
+          <tbody>
+            
+            <span class="anchor" id="ons-split-view-secondary-page"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">secondary-page</td>
+              <td>The url of the page on the left</td>
+            </tr>
+            
+            <span class="anchor" id="ons-split-view-main-page"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">main-page</td>
+              <td>The url of the page on the right</td>
+            </tr>
+            
+            <span class="anchor" id="ons-split-view-main-page-width"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">main-page-width</td>
+              <td>Main page&#39;s width percentage. The width of secondary page take the remaining percentage</td>
+            </tr>
+            
+            <span class="anchor" id="ons-split-view-collapse"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">collapse</td>
+              <td>[Deprecated] Specify the collapse behavior. Valid values are [portrait/landscape/width ##px]. &quot;portrait&quot; means the view will collapse when device is in portrait orien0ation. &quot;landscape&quot; means the view will collapse when device is in landscape orientation. &quot;width ##px&quot; means the view will collapse when the window width is smaller than the specified ##px</td>
+            </tr>
+            
+            <span class="anchor" id="ons-split-view-var"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">var</td>
+              <td>Variable name to refer this split view.</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+    
+
+    <span class="anchor" id="ons-split-view-methods"></span>
+    
+    <section class="round-corner">
       <table>
         <thead>
-          <tr><th colspan="2">Attributes</th></tr>
+          <tr><th colspan="2">Methods</th></tr>
         </thead>
         <tbody>
           
-          <span class="anchor" id="ons-split-view-secondary-page"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">secondary-page</td>
-            <td>The url of the page on the left</td>
+          <span class="anchor" id="setMainPage(pageUrl)-setMainPage(pageUrl)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setMainPage(pageUrl)</code></td>
+            <td>Show the page specified in pageUrl in the right section</td>
           </tr>
           
-          <span class="anchor" id="ons-split-view-main-page"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">main-page</td>
-            <td>The url of the page on the right</td>
+          <span class="anchor" id="setSecondaryPage(pageUrl)-setSecondaryPage(pageUrl)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setSecondaryPage(pageUrl)</code></td>
+            <td>Show the page specified in pageUrl in the left section</td>
           </tr>
           
-          <span class="anchor" id="ons-split-view-main-page-width"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">main-page-width</td>
-            <td>Main page&#39;s width percentage. The width of secondary page take the remaining percentage</td>
+          <span class="anchor" id="Deprecated-Deprecated"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>Deprecated</code></td>
+            <td>open() Reveal the secondary page if the view is in collapse mode</td>
           </tr>
           
-          <span class="anchor" id="ons-split-view-collapse"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">collapse</td>
-            <td>[Deprecated] Specify the collapse behavior. Valid values are [portrait/landscape/width ##px]. &quot;portrait&quot; means the view will collapse when device is in portrait orien0ation. &quot;landscape&quot; means the view will collapse when device is in landscape orientation. &quot;width ##px&quot; means the view will collapse when the window width is smaller than the specified ##px</td>
+          <span class="anchor" id="Deprecated-Deprecated"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>Deprecated</code></td>
+            <td>close() hide the secondary page if the view is in collapse mode</td>
           </tr>
           
-          <span class="anchor" id="ons-split-view-var"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">var</td>
-            <td>Variable name to refer this split view.</td>
+          <span class="anchor" id="Deprecated-Deprecated"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>Deprecated</code></td>
+            <td>toggle() Reveal the secondary page if it is currently hidden, otherwies, reveal it</td>
           </tr>
           
         </tbody>
       </table>
     </section>
-  
-  <span class="anchor" id="ons-split-view-methods"></span>
+    
 
-  
-  <section ng-show="directive.methods.length > 0" class="round-corner">
-    <table>
-      <thead>
-        <tr><th colspan="2">Methods</th></tr>
-      </thead>
-      <tbody>
-        
-        <span class="anchor" id="setMainPage(pageUrl)-setMainPage(pageUrl)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>setMainPage(pageUrl)</code></td>
-          <td>Show the page specified in pageUrl in the right section</td>
-        </tr>
-        
-        <span class="anchor" id="setSecondaryPage(pageUrl)-setSecondaryPage(pageUrl)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>setSecondaryPage(pageUrl)</code></td>
-          <td>Show the page specified in pageUrl in the left section</td>
-        </tr>
-        
-        <span class="anchor" id="Deprecated-Deprecated"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>Deprecated</code></td>
-          <td>open() Reveal the secondary page if the view is in collapse mode</td>
-        </tr>
-        
-        <span class="anchor" id="Deprecated-Deprecated"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>Deprecated</code></td>
-          <td>close() hide the secondary page if the view is in collapse mode</td>
-        </tr>
-        
-        <span class="anchor" id="Deprecated-Deprecated"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>Deprecated</code></td>
-          <td>toggle() Reveal the secondary page if it is currently hidden, otherwies, reveal it</td>
-        </tr>
-        
-      </tbody>
-    </table>
-  </section>
-  
+    
 
-  
-  <section class="directive-example">
-    <h4>Example
-      
-    </h4>
+    
 
-    index.html
-<pre>
-<ons-screen>
-    <ons-split-view
-      secondary-page="secondary.html"
-      main-page="page1.html"
-      main-page-width="40%"
-      collapse="width 650px">
-    </ons-split-view>
-</ons-screen>
-</pre>
+    
 
-secondary.html
-<pre>
-<ons-page>
-
-  <ul class="topcoat-list">
-
-    <ons-list-item
-      class="topcoat-list__item--tappable topcoat-list__item__line-height"
-      ng-click="
-        ons.splitView.toggle();
-        ons.splitView.setMainPage('page1.html');">
-      <i class="fa fa-home fa-lg" style="color: #666"></i>
-      &nbsp; Page 1
-    </ons-list-item>
-
-    <ons-list-item
-      class="topcoat-list__item--tappable topcoat-list__item__line-height"
-      ng-click="
-        ons.splitView.toggle();
-        ons.splitView.setMainPage('page2.html');">
-      <i class="fa fa-gear fa-lg" style="color: #666"></i>
-      &nbsp; Page 2
-    </ons-list-item>
-
-  </ul>
-</ons-page>
-</pre>
-
-page1.html
-<pre>
-<ons-navigator title="Page 1">
-  <ons-page class="center" style="padding: 10px">
-    <h1>Page 1</h1>
-    <p>This spitview collapses when the width is less than 650px.</p>
-    <p>When in collapse mode, you can swipe left and right to close and open the secondary page.</p>
-  </ons-page>
-</ons-navigator>
-</pre>
-
-page2.html
-
-<pre>
-<ons-navigator title="Page 2">
-  <ons-page class="center">
-    <h1>Page 2</h1>
-  </ons-page>
-</ons-navigator>
-</pre>
-  </section>
-  
-
-  
-
-</div>
-
-
+  </div>
 
 </div>

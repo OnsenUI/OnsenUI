@@ -1,93 +1,93 @@
-<div class="directive-container clearfix" id="module:directives.directive:ons-switch">
-<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
-  <h1 class="h1-separator">ons-switch</h1>
+<div class="directive-container" id="module:directives.directive:ons-switch">
+  <div>
+    <h4>Description</h4>
 
-  <section>
-    <p>Switch component.</p>
-  </section>
+    <section class="description">
+      <p>Switch component.</p>
+    </section>
 
-  <span class="anchor" id="ons-switch-attributes"></span>
-  
-    <section ng-show="directive.attributes.length > 0">
+    <span class="anchor" id="ons-switch-attributes"></span>
+    
+      <section>
+        <table>
+          <thead>
+            <tr><th colspan="2">Attributes</th></tr>
+          </thead>
+          <tbody>
+            
+            <span class="anchor" id="ons-switch-disabled"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">disabled</td>
+              <td>Wether the switch shoud be disabled.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-switch-checked"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">checked</td>
+              <td>Wether the switch is checked.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-switch-var"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">var</td>
+              <td>Variable name to refer this switch.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-switch-modifier"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">modifier</td>
+              <td>Modifier name.</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+    
+
+    <span class="anchor" id="ons-switch-methods"></span>
+    
+    <section class="round-corner">
       <table>
         <thead>
-          <tr><th colspan="2">Attributes</th></tr>
+          <tr><th colspan="2">Methods</th></tr>
         </thead>
         <tbody>
           
-          <span class="anchor" id="ons-switch-disabled"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">disabled</td>
-            <td>Wether the switch shoud be disabled.</td>
+          <span class="anchor" id="isChecked()-isChecked()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>isChecked()</code></td>
+            <td></td>
           </tr>
           
-          <span class="anchor" id="ons-switch-checked"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">checked</td>
-            <td>Wether the switch is checked.</td>
+          <span class="anchor" id="setChecked(isChecked)-setChecked(isChecked)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setChecked(isChecked)</code></td>
+            <td></td>
           </tr>
           
-          <span class="anchor" id="ons-switch-var"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">var</td>
-            <td>Variable name to refer this switch.</td>
+          <span class="anchor" id="getCheckboxElement()-getCheckboxElement()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>getCheckboxElement()</code></td>
+            <td>Get inner input[type=checkbox] element.</td>
           </tr>
           
-          <span class="anchor" id="ons-switch-modifier"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">modifier</td>
-            <td>Modifier name.</td>
+          <span class="anchor" id="on(eventName,-on(eventName,"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>on(eventName,</code></td>
+            <td>listener) Added an event listener. Preset event is &#39;chage&#39;.</td>
           </tr>
           
         </tbody>
       </table>
     </section>
-  
-  <span class="anchor" id="ons-switch-methods"></span>
+    
 
-  
-  <section ng-show="directive.methods.length > 0" class="round-corner">
-    <table>
-      <thead>
-        <tr><th colspan="2">Methods</th></tr>
-      </thead>
-      <tbody>
-        
-        <span class="anchor" id="isChecked()-isChecked()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>isChecked()</code></td>
-          <td></td>
-        </tr>
-        
-        <span class="anchor" id="setChecked(isChecked)-setChecked(isChecked)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>setChecked(isChecked)</code></td>
-          <td></td>
-        </tr>
-        
-        <span class="anchor" id="getCheckboxElement()-getCheckboxElement()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>getCheckboxElement()</code></td>
-          <td>Get inner input[type=checkbox] element.</td>
-        </tr>
-        
-        <span class="anchor" id="on(eventName,-on(eventName,"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>on(eventName,</code></td>
-          <td>listener) Added an event listener. Preset event is &#39;chage&#39;.</td>
-        </tr>
-        
-      </tbody>
-    </table>
-  </section>
-  
+    
 
-  
+    
 
-  
+    
 
-</div>
-
-
+  </div>
 
 </div>

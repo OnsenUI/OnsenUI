@@ -1,105 +1,79 @@
-<div class="directive-container clearfix" id="{$ doc.id $}">
-<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
-  <h1 class="h1-separator">{$ doc.name | e $}</h1>
+<div class="directive-container" id="{$ doc.id $}">
+  <div>
+    <h4>Description</h4>
 
-  <section>
-    <p>{$ doc.description | lang | e $}</p>
-  </section>
+    <section class="description">
+      <p>{$ doc.description | lang | e $}</p>
+    </section>
 
-  <span class="anchor" id="{$ doc.name $}-attributes"></span>
-  {% if not doc.params %}
-  <section ng-show="!directive.attributes || directive.attributes.length === 0">
-    <p class="text-muted">
-      This tag has no attribute
-    </p>
-  </section>
-  {% else %}
-    <section ng-show="directive.attributes.length > 0">
+    <span class="anchor" id="{$ doc.name $}-attributes"></span>
+    {% if doc.params %}
+      <section>
+        <table>
+          <thead>
+            <tr><th colspan="2">Attributes</th></tr>
+          </thead>
+          <tbody>
+            {% for param in doc.params %}
+            <span class="anchor" id="{$ doc.name $}-{$ param.name $}"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">{$ param.name | e $}</td>
+              <td>{$ param.description | lang | e $}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </section>
+    {% endif %}
+
+    <span class="anchor" id="{$ doc.name $}-methods"></span>
+    {% if doc.properties %}
+    <section class="round-corner">
       <table>
         <thead>
-          <tr><th colspan="2">Attributes</th></tr>
+          <tr><th colspan="2">Methods</th></tr>
         </thead>
         <tbody>
-          {% for param in doc.params %}
-          <span class="anchor" id="{$ doc.name $}-{$ param.name $}"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">{$ param.name | e $}</td>
-            <td>{$ param.description | lang | e $}</td>
+          {% for property in doc.properties %}
+          <span class="anchor" id="{$ property.name $}-{$ property.name $}"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>{$ property.name | e $}</code></td>
+            <td>{$ property.description | lang | e $}</td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
     </section>
-  {% endif %}
-  <span class="anchor" id="{$ doc.name $}-methods"></span>
+    {% endif %}
 
-  {% if not doc.properties %}
-  <section ng-show="!directive.methods || directive.methods.length === 0">
-    <p class="text-muted">
-      This tag has no method
-    </p>
-  </section>
-  {% else %}
-  <section ng-show="directive.methods.length > 0" class="round-corner">
-    <table>
-      <thead>
-        <tr><th colspan="2">Methods</th></tr>
-      </thead>
-      <tbody>
-        {% for property in doc.properties %}
-        <span class="anchor" id="{$ property.name $}-{$ property.name $}"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>{$ property.name | e $}</code></td>
-          <td>{$ property.description | lang | e $}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </section>
-  {% endif %}
+    {% if doc.note %}
+    <section class="note">
+      <p>Note: {$ doc.note $}</p>
+    </section>
+    {% endif %}
 
-  {% if doc.example %}
-  <section class="directive-example">
-    <h4>Example
-      {% if doc.example and doc.demoURL %}
-      <a title="Open an example page in a new window" href="{$ rootUrl $}{$ doc.demoURL $}" target="_blank"><img src="/images/components/open_demo_icon.png" width="16" height="16"></a>
-      {% endif %}
-    </h4>
+    {% if doc.codepen %}
+    <h4>Sample</h4>
 
-    {$ doc.example $}
-  </section>
-  {% endif %}
-
-  {% if doc.note %}
-  <section>
-    <p>Known issue: {$ doc.note $}</p>
-  </section>
-  {% endif %}
-
-</div>
-
-{% if doc.demoURL %}
-    <div class="demo">
-      <div class="fit-iphone-frame">
-          <iframe
-              class="simulater-iframe"
-              data-src="{$ rootUrl $}{$ doc.demoURL $}"
-              width="320" height="570" style="background: -moz-linear-gradient(top, #fff 0%, #dddddd 100%);
-              background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff), color-stop(100%,#dddddd));
-              background: -webkit-linear-gradient(top, #fff 0%,#dddddd 100%);
-              background: -o-linear-gradient(top, #fff 0%,#dddddd 100%);
-              background: -ms-linear-gradient(top, #fff 0%,#dddddd 100%);
-              background: linear-gradient(to bottom, #fff 0%,#dddddd 100%);"></iframe>
-      </div>
-      <div style="position: absolute; top: 830px; left: 0px; text-align: center; width:400px">
-        <!--
-        <ul class="theme-switch-control segment-control">
-          <li class="current" data-theme-name="ios">iOS7</li>
-          <li data-theme-name="android">Android</li>
-        </ul>-->
-      </div>
+    <div style="height: 480px;">
+      <p data-height="480" data-theme-id="7186" data-slug-hash="{$ doc.codepen $}" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/{$ doc.codepen $}/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
     </div>
+    {% endif %}
 
-{% endif %}
+    {% if doc.guide or doc.seealsos %}
+      <h4>See also</h4>
+      <ul>
+        {% if doc.guide %}
+          <li><a href="overview.html#{$ doc.guide $}">Guide for {$ doc.name $}</a></li>
+        {% endif %}
+        {% if doc.seealsos %}
+          {% for seealso in doc.seealsos %}
+            <li><a href="#{$ seealso $}">{$ seealso $} component</a></li>
+          {% endfor %}
+        {% endif %}
+      </ul>
+    {% endif %}
+
+  </div>
 
 </div>

@@ -24,34 +24,17 @@ limitations under the License.
  *  [ja]ページスタックを用いたページの切り替えを管理します。[/ja]
  * @param page First page to show when navigator is initialized
  * @param var Variable name to refer this navigator.
- * @property pushPage(pageUrl, options)
+ * @property pushPage(pageUrl,options)
  *  [en]Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. eg. pushPage('page2.html')[/en]
  *  [ja]指定したpageUrlを新しいページスタックに追加します。[/ja]
  * @property popPage() Pops current page from the page stack
  * @property resetToPage(pageUrl,options) Clears page stack and add the specified pageUrl to the page stack. If options object is specified, apply the options. the options object include all the attributes of this navigator
  * @property getCurrentPage() Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method. eg. ons.navigator.getCurrentPage().options
  * @property getPages() Retrieve the entire page stages of the navigator.
- * @property on(eventName, listener) Added an event listener. Preset events are 'prepop', 'prepush', 'postpop' and 'postpush'.
- *
- * @example
- * <ons-navigator>
- *   <ons-page>
- *     <!-- Toolbar -->
- *     <ons-toolbar>
- *      <div class="left"></div>
- *      <div class="center">Title</div>
- *      <div class="right">
- *        <ons-button>Config</ons-button>
- *      </div>
- *     </ons-toolbar>
- *   </ons-page>
- * </ons-navigator>
- * @demoURL
- * OnsenUI/demo/screen/
- */
-/**
- * @lang ja
- * @description
+ * @property on(eventName,listener) Added an event listener. Preset events are 'prepop', 'prepush', 'postpop' and 'postpush'.
+ * @codepen yrhtv
+ * @guide page-navigation
+ * @seealso ons-toolbar
  */
 (function() {
   'use strict';

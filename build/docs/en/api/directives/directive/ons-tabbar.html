@@ -1,63 +1,63 @@
-<div class="directive-container clearfix" id="module:directives.directive:ons-tabbar">
-<div ng-repeat="directive in framework.directives" style="float:left; width: 500px;">
-  <h1 class="h1-separator">ons-tabbar</h1>
+<div class="directive-container" id="module:directives.directive:ons-tabbar">
+  <div>
+    <h4>Description</h4>
 
-  <section>
-    <p>Used with tabbar-item to manage pages using tabs.</p>
-  </section>
+    <section class="description">
+      <p>Used with tabbar-item to manage pages using tabs.</p>
+    </section>
 
-  <span class="anchor" id="ons-tabbar-attributes"></span>
-  
-    <section ng-show="directive.attributes.length > 0">
+    <span class="anchor" id="ons-tabbar-attributes"></span>
+    
+      <section>
+        <table>
+          <thead>
+            <tr><th colspan="2">Attributes</th></tr>
+          </thead>
+          <tbody>
+            
+            <span class="anchor" id="ons-tabbar-hide-tabs"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">hide-tabs</td>
+              <td>Wether to hide the tabs. Valid values are [true/false] or angular binding. eg:</td>
+            </tr>
+            
+            <span class="anchor" id="ons-tabbar-var"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">var</td>
+              <td>Variable name to refer this tabbar.</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+    
+
+    <span class="anchor" id="ons-tabbar-methods"></span>
+    
+    <section class="round-corner">
       <table>
         <thead>
-          <tr><th colspan="2">Attributes</th></tr>
+          <tr><th colspan="2">Methods</th></tr>
         </thead>
         <tbody>
           
-          <span class="anchor" id="ons-tabbar-hide-tabs"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">hide-tabs</td>
-            <td>Wether to hide the tabs. Valid values are [true/false] or angular binding. eg:</td>
-          </tr>
-          
-          <span class="anchor" id="ons-tabbar-var"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">var</td>
-            <td>Variable name to refer this tabbar.</td>
+          <span class="anchor" id="on(eventName,-on(eventName,"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>on(eventName,</code></td>
+            <td>listener) Added an event listener. Preset events are &#39;prechange&#39; and &#39;postchange&#39;.</td>
           </tr>
           
         </tbody>
       </table>
     </section>
-  
-  <span class="anchor" id="ons-tabbar-methods"></span>
+    
 
-  
-  <section ng-show="directive.methods.length > 0" class="round-corner">
-    <table>
-      <thead>
-        <tr><th colspan="2">Methods</th></tr>
-      </thead>
-      <tbody>
-        
-        <span class="anchor" id="on(eventName,-on(eventName,"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>on(eventName,</code></td>
-          <td>listener) Added an event listener. Preset events are &#39;prechange&#39; and &#39;postchange&#39;.</td>
-        </tr>
-        
-      </tbody>
-    </table>
-  </section>
-  
+    
 
-  
+    
 
-  
+    
 
-</div>
-
-
+  </div>
 
 </div>
