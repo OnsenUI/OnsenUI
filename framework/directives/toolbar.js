@@ -128,12 +128,6 @@
 
       compile: function(element, attrs) {
 
-        if ($onsen.isWebView() && $onsen.isIOS7Above()) {
-          // Adjustments for iOS7
-          element.css('paddingTop', '20px');
-          element.css('height', '64px');
-        }
-
         var modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
         element.addClass('navigation-bar');

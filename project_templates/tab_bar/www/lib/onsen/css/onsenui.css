@@ -60,6 +60,16 @@ ons-toolbar + .page__content {
   padding-top: 44px;
 }
 
+.page__status-bar-fill + ons-toolbar {
+  height: 64px;
+}
+
+.page__status-bar-fill + ons-toolbar > .center,
+.page__status-bar-fill + ons-toolbar > .left,
+.page__status-bar-fill + ons-toolbar > .right {
+  padding-top: 20px;
+}
+
 .page__status-bar-fill + ons-toolbar + .page__content {
   padding-top: 64px;
 }
