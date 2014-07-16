@@ -42,7 +42,8 @@
     "topdoc-theme": "~0.2.7",
     "gulp-cached": "0.0.3",
     "gulp-if": "^1.2.1",
-    "canonical-path": "0.0.2"
+    "canonical-path": "0.0.2",
+    "lodash": "^2.4.1"
   },
   "dependencies": {
     "gulp-shell": "^0.2.4",

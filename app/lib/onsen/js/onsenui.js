@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.0-dev - 2014-07-15 */
+/*! onsenui - v1.1.0-dev - 2014-07-16 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -6441,9 +6441,13 @@ limitations under the License.
         this._isRight = !!options.isRight;
         this._width = options.width || '90%';
 
-        mainPage.css('box-shadow', '0px 0 10px 0px rgba(0, 0, 0, 0.2)');
+        mainPage.css({
+          boxShadow: '0px 0 10px 0px rgba(0, 0, 0, 0.2)'
+        });
+
         menuPage.css({
           width: options.width,
+          opacity: 0.9,
           display: 'none'
         });
 
@@ -8086,29 +8090,14 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
 /**
  * @ngdoc directive
  * @id back_button
  * @name ons-back-button
  * @description
+ *   [en]Provides back button for toolbar that can be used for navigation.[/en]
+ * @codepen aHmGL
+ * @seealso ons-toolbar ons-toolbar component
  */
 (function(){
   'use strict';
@@ -8138,31 +8127,13 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id bottom_toolbar
  * @name ons-bottom-toolbar
  * @description
  * Use this component to have toolbar position at the bottom of the page.
- * @demoURL
- * OnsenUI/demo/list/
+ * @seealso ons-toolbar ons-toolbar component
  */
 (function(){
   'use strict';
@@ -8204,23 +8175,6 @@ limitations under the License.
 })();
 
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id button
@@ -8228,9 +8182,11 @@ limitations under the License.
  * @description
  * Button component. It includes a spinner useful for showing work in progress.
  * @param type The type of the button. Can be any of [ 'quiet', 'large', 'large--quiet', 'cta', 'large--cta' ]
- * @param should-spin Wether the button shoud switch to show spinner
+ * @param should-spin Whether the button should switch to show spinner
  * @param animation The animation when the button transitions to and from the spinner. Can be any of [ 'expand-left', 'expand-right', 'expand-up', 'expand-down', 'slide-left', 'slide-right', 'slide-up', 'slide-down', 'zoom-out', 'zoom-in' ]. The default is 'slide-left'
- * @param disabled Wether the button shoud be disabled.
+ * @param disabled Whether the button should be disabled.
+ * @codepen hLayx
+ * @guide button Guide for ons-button
  */
 (function(){
   'use strict';
@@ -8290,32 +8246,18 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id col
  * @name ons-col
  * @description
- * Use with <ons-row> to layout component.
+ * Use to layout component.
  * @param align Vertical align the column. Valid values are [top/center/bottom].
  * @param width The width of the column. Valid values are css "width" value. eg. "10%", "50px"
  * @note For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.
+ * @codepen GgujC
+ * @guide layouting Layouting guide
+ * @seealso ons-row ons-row component
  */
 (function(){
   'use strict';
@@ -8394,24 +8336,6 @@ limitations under the License.
 })();
 
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
 (function() {
   'use strict';
 
@@ -8438,26 +8362,9 @@ limitations under the License.
 
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
- * @id button
+ * @id icon
  * @name ons-icon
  * @description
  * Wrapper for font-awesome icon.
@@ -8467,6 +8374,8 @@ limitations under the License.
  * @param flip Flip the icon. Valid values are [horizontal/vertial]
  * @param fixed-width When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are [true/false]. Default is true.
  * @param spin Whether to spin the icon. Valid values are [true/false]
+ * @codepen xAhvg
+ * @guide using-icons Using icons
  */
 (function(){
   'use strict';
@@ -8529,23 +8438,6 @@ limitations under the License.
 })();
 
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id if-orientation
@@ -8553,6 +8445,8 @@ limitations under the License.
  * @description
  * Conditionally display content depending on screen orientation. Valid values are [portrait/landscape]. Different from other components, this component is used as attribute in any element.
  * @param ons-if-orientation Either "portrait" or "landscape".
+ * @seealso ons-if-platform ons-if-platform component
+ * @guide utility-apis Other utility APIs
  */
 (function(){
   'use strict';
@@ -8614,23 +8508,6 @@ limitations under the License.
 })();
 
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id if-platform
@@ -8638,6 +8515,8 @@ limitations under the License.
  * @description
  * Conditionally display content depending on the platform/browser. Valid values are [ios/android/blackberry/chrome/safari/firefox/opera]. Different from other components, this component is used as attribute in any element.
  * @param ons-if-platform Either "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".
+ * @seealso ons-if-orientation ons-if-orientation component
+ * @guide utility-apis Other utility APIs
  */
 (function() {
   'use strict';
@@ -8729,23 +8608,6 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id list
@@ -8753,8 +8615,10 @@ limitations under the License.
  * @description
  * The container for list-item. Similar to <ul> but styled for mobile.
  * @param modifier
- * @demoURL
- * OnsenUI/demo/list/
+ * @seealso ons-list-item ons-list-item component
+ * @seealso ons-list-header ons-list-header component
+ * @guide using-lists Using lists
+ * @codepen yxcCt
  */
 (function(){
   'use strict';
@@ -8782,23 +8646,6 @@ limitations under the License.
 })();
 
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id list-header
@@ -8806,6 +8653,10 @@ limitations under the License.
  * @param modifier
  * @description
  * Header element for list items. Must be put inside ons-list tag.
+ * @seealso ons-list ons-list component
+ * @seealso ons-list-item ons-list-item component
+ * @guide using-lists Using lists
+ * @codepen yxcCt
  */
 (function() {
   'use strict';
@@ -8830,23 +8681,6 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id list-item
@@ -8854,6 +8688,10 @@ limitations under the License.
  * @param modifier
  * @description
  * Works like <li> but styled for mobile. Must be put inside ons-list tag.
+ * @seealso ons-list ons-list component
+ * @seealso ons-list-header ons-list-header component
+ * @guide using-lists Using lists
+ * @codepen yxcCt
  */
 (function() {
   'use strict';
@@ -8878,23 +8716,6 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id navigator
@@ -8904,34 +8725,18 @@ limitations under the License.
  *  [ja]ページスタックを用いたページの切り替えを管理します。[/ja]
  * @param page First page to show when navigator is initialized
  * @param var Variable name to refer this navigator.
- * @property pushPage(pageUrl, options)
+ * @property pushPage(pageUrl,options)
  *  [en]Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. eg. pushPage('page2.html')[/en]
  *  [ja]指定したpageUrlを新しいページスタックに追加します。[/ja]
  * @property popPage() Pops current page from the page stack
  * @property resetToPage(pageUrl,options) Clears page stack and add the specified pageUrl to the page stack. If options object is specified, apply the options. the options object include all the attributes of this navigator
  * @property getCurrentPage() Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method. eg. ons.navigator.getCurrentPage().options
  * @property getPages() Retrieve the entire page stages of the navigator.
- * @property on(eventName, listener) Added an event listener. Preset events are 'prepop', 'prepush', 'postpop' and 'postpush'.
- *
- * @example
- * <ons-navigator>
- *   <ons-page>
- *     <!-- Toolbar -->
- *     <ons-toolbar>
- *      <div class="left"></div>
- *      <div class="center">Title</div>
- *      <div class="right">
- *        <ons-button>Config</ons-button>
- *      </div>
- *     </ons-toolbar>
- *   </ons-page>
- * </ons-navigator>
- * @demoURL
- * OnsenUI/demo/screen/
- */
-/**
- * @lang ja
- * @description
+ * @property on(eventName,listener) Added an event listener. Preset events are 'prepop', 'prepush', 'postpop' and 'postpush'.
+ * @codepen yrhtv
+ * @guide page-navigation Guide for navigation
+ * @guide calling-component-apis-from-javascript Using navigator from JavaScript
+ * @seealso ons-toolbar ons-toolbar component
  */
 (function() {
   'use strict';
@@ -8981,23 +8786,6 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id page
@@ -9006,8 +8794,6 @@ limitations under the License.
  * @param modifier Modifier name.
  * @description
  * Should be used as root component of each page. The content inside page component is not scrollable. If you need scroll behavior, you can put inside this component.
- * @demoURL
- * OnsenUI/demo/page/
  */
 (function() {
   'use strict';
@@ -9130,23 +8916,6 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id row
@@ -9155,6 +8924,9 @@ limitations under the License.
  * Use <ons-row> and <ons-col> grid system to layout component. By default, all <ons-col> inside a <ons-row> will have the same width. You can specify any <ons-col> to have a specific width and let others take the remaining width in a <ons-row>. You can event vertical align each <ons-col> in a <ons-row>
  * @param align Short hand attribute for aligning all colum in a row. Valid values are [top/bottom/center].
  * @note For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.
+ * @codepen GgujC
+ * @guide layouting Layouting guide
+ * @seealso ons-col ons-col component
  */
 (function(){
   'use strict';
@@ -9194,23 +8966,6 @@ limitations under the License.
   });
 })();
 
-
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
 
 /**
  * @ngdoc directive
@@ -9509,23 +9264,6 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id scroller
@@ -9614,23 +9352,6 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id sliding_menu
@@ -9651,6 +9372,8 @@ limitations under the License.
  * @property closeMenu() Slide the above layer to hide the layer behind.
  * @property toggleMenu() Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.
  * @property on(eventName, listener) Added an event listener. Preset events are 'preopen', 'preclose', 'postopen' and 'postclose'.
+ * @codepen IDvFJ
+ * @guide using-sliding-menu Using sliding menu
  */
 (function() {
   'use strict';
@@ -9689,23 +9412,6 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id split-view
@@ -9722,67 +9428,8 @@ limitations under the License.
  * @property [Deprecated] open() Reveal the secondary page if the view is in collapse mode
  * @property [Deprecated] close() hide the secondary page if the view is in collapse mode
  * @property [Deprecated] toggle() Reveal the secondary page if it is currently hidden, otherwies, reveal it
- * @example
- * index.html
- * <pre>
- * <ons-screen>
- *     <ons-split-view
- *       secondary-page="secondary.html"
- *       main-page="page1.html"
- *       main-page-width="40%"
- *       collapse="width 650px">
- *     </ons-split-view>
- * </ons-screen>
- * </pre>
- *
- * secondary.html
- * <pre>
- * <ons-page>
- *
- *   <ul class="topcoat-list">
- *
- *     <ons-list-item
- *       class="topcoat-list__item--tappable topcoat-list__item__line-height"
- *       ng-click="
- *         ons.splitView.toggle();
- *         ons.splitView.setMainPage('page1.html');">
- *       <i class="fa fa-home fa-lg" style="color: #666"></i>
- *       &nbsp; Page 1
- *     </ons-list-item>
- *
- *     <ons-list-item
- *       class="topcoat-list__item--tappable topcoat-list__item__line-height"
- *       ng-click="
- *         ons.splitView.toggle();
- *         ons.splitView.setMainPage('page2.html');">
- *       <i class="fa fa-gear fa-lg" style="color: #666"></i>
- *       &nbsp; Page 2
- *     </ons-list-item>
- *
- *   </ul>
- * </ons-page>
- * </pre>
- *
- * page1.html
- * <pre>
- * <ons-navigator title="Page 1">
- *   <ons-page class="center" style="padding: 10px">
- *     <h1>Page 1</h1>
- *     <p>This spitview collapses when the width is less than 650px.</p>
- *     <p>When in collapse mode, you can swipe left and right to close and open the secondary page.</p>
- *   </ons-page>
- * </ons-navigator>
- * </pre>
- *
- * page2.html
- *
- * <pre>
- * <ons-navigator title="Page 2">
- *   <ons-page class="center">
- *     <h1>Page 2</h1>
- *   </ons-page>
- * </ons-navigator>
- * </pre>
+ * @codepen nKqfv
+ * @guide multi-screen-support Multi screen support
  */
 (function() {
   'use strict';
@@ -9825,23 +9472,6 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id switch
@@ -9855,7 +9485,9 @@ limitations under the License.
  * @property isChecked()
  * @property setChecked(isChecked)
  * @property getCheckboxElement() Get inner input[type=checkbox] element.
- * @property on(eventName, listener) Added an event listener. Preset event is 'chage'.
+ * @property on(eventName,listener) Added an event listener. There is 'change' event.
+ * @guide using-form-components Using form components
+ * @seealso ons-button ons-button component
  */
 (function(){
   'use strict';
@@ -9916,32 +9548,18 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id tabbar
  * @name ons-tabbar
- * @param hide-tabs Wether to hide the tabs. Valid values are [true/false] or angular binding. eg: {{ shouldHide }}
+ * @param hide-tabs Whether to hide the tabs. Valid values are [true/false] or angular binding. eg: {{ shouldHide }}
  * @param var Variable name to refer this tabbar.
- * @property on(eventName, listener) Added an event listener. Preset events are 'prechange' and 'postchange'.
+ * @property on(eventName,listener) Added an event listener. Preset events are 'prechange' and 'postchange'.
  * @description
  * Used with tabbar-item to manage pages using tabs.
+ * @codepen kxgys
+ * @guide using-tab-bar Using tab bar
+ * @seealso ons-tabbar-item ons-tabbar-item component
  */
 (function() {
   'use strict';
@@ -10086,23 +9704,6 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id tabbar_item
@@ -10114,6 +9715,9 @@ limitations under the License.
  * @param active Set wether this tab should be active or not. Valid values are [true/false]
  * @description
  * Represents a tab inside tabbar. Each tabbar-item represents a page
+ * @codepen kxgys
+ * @guide using-tab-bar Using tab bar
+ * @seealso ons-tabbar ons-tabbar component
  */
 (function() {
   'use strict';
@@ -10174,23 +9778,6 @@ limitations under the License.
   });
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id toolbar
@@ -10198,8 +9785,11 @@ limitations under the License.
  * @description
  * Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.
  * @param modifier Modifier name.
- * @demoURL
- * OnsenUI/demo/screen/
+ * @codepen aHmGL
+ * @guide adding-a-toolbar Adding a toolbar
+ * @seealso ons-bottom-toolbar ons-bottom-toolbar component
+ * @seealso ons-back-button ons-back-button component
+ * @seealso ons-toolbar-button ons-toolbar-button component
  */
 (function() {
   'use strict';
@@ -10352,23 +9942,6 @@ limitations under the License.
 
 })();
 
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
  * @id toolbar_button
@@ -10376,6 +9949,11 @@ limitations under the License.
  * @param modifier Modifier name.
  * @description
  * Button component for toolbar.
+ * @codepen aHmGL
+ * @guide adding-a-toolbar Adding a toolbar
+ * @seealso ons-toolbar ons-toolbar component
+ * @seealso ons-bottom-toolbar ons-bottom-toolbar component
+ * @seealso ons-back-button ons-back-button component
  */
 (function(){
   'use strict';
