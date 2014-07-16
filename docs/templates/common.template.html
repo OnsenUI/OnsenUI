@@ -9,10 +9,8 @@
     <span class="anchor" id="{$ doc.name $}-attributes"></span>
     {% if doc.params %}
       <section>
+        <h3>Attributes</h3>
         <table>
-          <thead>
-            <tr><th colspan="2">Attributes</th></tr>
-          </thead>
           <tbody>
             {% for param in doc.params %}
             <span class="anchor" id="{$ doc.name $}-{$ param.name $}"></span>
@@ -28,11 +26,9 @@
 
     <span class="anchor" id="{$ doc.name $}-methods"></span>
     {% if doc.properties %}
-    <section class="round-corner">
+    <section>
+      <h3>Methods</h3>
       <table>
-        <thead>
-          <tr><th colspan="2">Methods</th></tr>
-        </thead>
         <tbody>
           {% for property in doc.properties %}
           <span class="anchor" id="{$ property.name $}-{$ property.name $}"></span>
