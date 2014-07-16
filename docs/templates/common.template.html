@@ -62,13 +62,15 @@
 
     {% if doc.guide or doc.seealsos %}
       <h4>See also</h4>
-      <ul>
-        {% if doc.guide %}
-          <li><a href="overview.html#{$ doc.guide $}">Guide for {$ doc.name $}</a></li>
+      <ul class="seealso">
+        {% if doc.guides %}
+          {% for guide in doc.guides %}
+            <li class="guide"><a href="overview.html#{$ guide.name $}">{$ guide.description $}</a></li>
+          {% endfor %}
         {% endif %}
         {% if doc.seealsos %}
           {% for seealso in doc.seealsos %}
-            <li><a href="#{$ seealso $}">{$ seealso $} component</a></li>
+            <li class="seealso"><a href="#{$ seealso.name $}">{$ seealso.description $}</a></li>
           {% endfor %}
         {% endif %}
       </ul>

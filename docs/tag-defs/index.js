@@ -1,3 +1,5 @@
+var extractName = require('./extract-name');
+
 module.exports = [
   { name: 'demoURL' },
   { name: 'example' },
@@ -6,8 +8,24 @@ module.exports = [
   {
     name: 'seealso',
     multi: true,
-    docProperty: 'seealsos'
+    docProperty: 'seealsos',
+    transforms: function(doc, tag, value) {
+      return {
+        name: value.split(" ")[0],
+        description: value.split(" ").slice(1).join(" ")
+      };
+    }
   },
-  { name: 'guide' },
+  {
+    name: 'guide',
+    multi: true,
+    docProperty: 'guides',
+    transforms: function(doc, tag, value) {
+      return {
+        name: value.split(" ", 2)[0],
+        description: value.split(" ").slice(1).join(" ")
+      };
+    }
+  },
   { name: 'codepen' }
 ];

@@ -1,23 +1,6 @@
-/*
-Copyright 2013-2014 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
 /**
  * @ngdoc directive
- * @id button
+ * @id icon
  * @name ons-icon
  * @description
  * Wrapper for font-awesome icon.
@@ -27,6 +10,8 @@ limitations under the License.
  * @param flip Flip the icon. Valid values are [horizontal/vertial]
  * @param fixed-width When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are [true/false]. Default is true.
  * @param spin Whether to spin the icon. Valid values are [true/false]
+ * @codepen xAhvg
+ * @guide using-icons Using icons
  */
 (function(){
   'use strict';
