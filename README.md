@@ -38,19 +38,19 @@ See the [Onsen UI Getting Started Page].
 
 * Clone this repository
 
-        git clone https://github.com/monaca/OnsenUI.git
+        $ git clone https://github.com/monaca/OnsenUI.git
 
 * Open the terminal from OnsenUI directory
 
-        cd OnsenUI
+        $ cd OnsenUI
 
 * Install dependencies using [npm](http://nodejs.org/download/)
 
-        npm install
+        $ npm install
 
 * Install gulp (globally)
 
-        [sudo] npm install -g gulp
+        $ [sudo] npm install -g gulp
 
 * Type gulp to start building
 
@@ -60,11 +60,13 @@ The files will be built and copied into **build**, **demo/lib/onsen/**, and **ap
 
 ## Running Demo
 
-* Run script
+        $ npm install
 
-        scripts/web-server.js
+        $ [sudo] npm install -g gulp
 
-* Then navigate your browser to [http://localhost:8000/demo/index.html](http://localhost:8000/demo/index.html)
+        $ gulp serve
+
+* Then navigate your browser to [http://0.0.0.0:8000/demo/index.html](http://0.0.0.0:8000/demo/index.html)
 
 ## Developing your app
 
@@ -87,7 +89,7 @@ Access [http://0.0.0.0:8000/demo/index.html](http://0.0.0.0:8000/demo/index.html
 * Fill out the CLA [here](https://docs.google.com/forms/d/1ldg4_QReI2hC12HvF1OuDhW1QromvXat6kA4Uhdsw2M/viewform)
 * Fork the repo
 * Commit your changes
-* Make a [pull request](https://help.github.com/articles/using-pull-requests) to **dev** branch.
+* Make a [pull request](https://help.github.com/articles/using-pull-requests) to **master** branch.
 
 ## Getting support
 
@@ -96,7 +98,7 @@ If anything about Onsen UI is unclear, please ask a question on <a href="http://
 If you have any requests or comments regarding the development of Onsen UI, please feel free to direct them to the Twitter account (<a href="http://twitter.com/Onsen_UI" target="_blank">@Onsen_UI</a>).
 
 
-[Onsen UI docs]:http://docs.monaca.mobi/onsen/docs/en/
+[Onsen UI]:http://onsenui.io/
+[Onsen UI Getting Started Page]:http://onsenui.io/getting_started/
 [Monaca Forum]:http://monaca.mobi/forum
-[Onsen UI Getting Started Page]:http://docs.monaca.mobi/onsen/getting_started/en/
 [Monaca IDE]:http://monaca.mobi/

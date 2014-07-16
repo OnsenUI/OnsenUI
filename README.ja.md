@@ -15,32 +15,18 @@ Onsen UIは以下のWebkit系のブラウザやモバイルOSをサポートし�
  * Safari
 
 ## 開発を始めるにあたって
+
 [Onsen UI Getting Started]を参照してください。
 
 ## ドキュメント
+
 [Onsen UI ドキュメント]を参照してください。
 
 ## サポート
+
 [Monacaフォーラム]で"Onsen-UI"タグを使ってOnsen UIに関する質問を行うことができます。
 
-## Contributors
-
-Creator  
-- Kruy Vanna
-
-Mentor  
-- Masahiro Tanaka
-
-Mentor  
-- Hiroshi Shikata
-
-Logo Designer  
-- Mao Takahashi
-
-Project Name  
-- Khourn Khemry
-
-[Onsen UI ドキュメント]:http://docs.monaca.mobi/onsen/docs/ja/
+[Onsen UI ドキュメント]:http://onsenui.io/guide/overview.html
+[Onsen UI Getting Started Page]:http://onsenui.io/guide/getting_started.html
 [Monacaフォーラム]:http://monaca.mobi/forum
-[Onsen UI Getting Started Page]:http://docs.monaca.mobi/onsen/getting_started/ja/
-[Monaca]:http://monaca.mobi
+[Monaca IDE]:http://monaca.mobi/
