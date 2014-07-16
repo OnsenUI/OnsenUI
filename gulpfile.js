@@ -106,10 +106,6 @@ gulp.task('clean', function() {
 gulp.task('prepare', ['html2js'], function() {
   return merge(
 
-    // plugin info(monaca)
-    gulp.src('plugin_info.json')
-      .pipe(gulp.dest('build/')),
-
     // onsenui.js
     gulp.src([
       'framework/lib/*.js',
@@ -192,15 +188,15 @@ gulp.task('prepare', ['html2js'], function() {
 ////////////////////////////////////////
 gulp.task('prepare-project-templates', function() {
   // projects template
-  return gulp.src(['build/**', '!build/plugin_info.json'])
+  return gulp.src(['build/**', '!build/docs/**'])
     .pipe(gulp.dest('app/lib/onsen'))
-    .pipe(gulp.dest('project_templates/minimum/app/lib/onsen/'))
-    .pipe(gulp.dest('project_templates/sliding_menu/app/lib/onsen/'))
-    .pipe(gulp.dest('project_templates/sliding_menu_navigator/app/lib/onsen/'))
-    .pipe(gulp.dest('project_templates/tab_bar/app/lib/onsen/'))
-    .pipe(gulp.dest('project_templates/split_view/app/lib/onsen/'))
-    .pipe(gulp.dest('project_templates/split_view_navigator/app/lib/onsen/'))
-    .pipe(gulp.dest('project_templates/master_detail/app/lib/onsen/'));
+    .pipe(gulp.dest('project_templates/minimum/www/lib/onsen/'))
+    .pipe(gulp.dest('project_templates/sliding_menu/www/lib/onsen/'))
+    .pipe(gulp.dest('project_templates/sliding_menu_navigator/www/lib/onsen/'))
+    .pipe(gulp.dest('project_templates/tab_bar/www/lib/onsen/'))
+    .pipe(gulp.dest('project_templates/split_view/www/lib/onsen/'))
+    .pipe(gulp.dest('project_templates/split_view_navigator/www/lib/onsen/'))
+    .pipe(gulp.dest('project_templates/master_detail/www/lib/onsen/'));
 });
 
 ////////////////////////////////////////
@@ -227,9 +223,10 @@ gulp.task('compress-project-templates', function(done) {
       name + '/*/*/*/*/*',
       name + '/*/*/*/*/*/*',
     ];
+
     var stream = gulp.src(src, {cwd : __dirname + '/project_templates'})
-    .pipe(zip(name + '.zip'))
-    .pipe(gulp.dest('./project_templates/'));
+      .pipe(zip(name + '.zip'))
+      .pipe(gulp.dest('./project_templates/'));
 
     if (name === 'minimum') {
       stream.on('end', function() {
