@@ -69,18 +69,8 @@ limitations under the License.
         this._doorLock = new DoorLock();
         this.pages = [];
 
-        var self = this;
-        this._backButtonHandler = $onsen.backButtonHandlerStack.push(function(event) {
-          self.popPage();
-          event.preventDefault();
-        });
-        this._refreshBackButtonHandler();
-
+        this._backButtonHandler = $onsen.backButtonHandlerStack.push(this._onBackButton.bind(this));
         this._scope.$on('$destroy', this._destroy.bind(this));
-      },
-
-      _refreshBackButtonHandler: function() {
-        this._backButtonHandler.setEnabled(this.pages.length > 1);
       },
 
       _destroy: function() {
@@ -92,6 +82,15 @@ limitations under the License.
 
         this._backButtonHandler.remove();
         this._backButtonHandler = null;
+      },
+
+      _onBackButton: function() {
+        if (this.pages.length > 1) {
+          this.popPage();
+          return true;
+        }
+
+        return false;
       },
 
       /**
@@ -248,8 +247,6 @@ limitations under the License.
             if (index !== -1) {
               self.pages.splice(index, 1);
             }
-
-            self._refreshBackButtonHandler();
           }
         };
 
@@ -260,7 +257,6 @@ limitations under the License.
         };
 
         this.pages.push(pageObject);
-        this._refreshBackButtonHandler();
 
         var done = function() {
           if (self.pages[self.pages.length - 2]) {
@@ -272,7 +268,6 @@ limitations under the License.
           }
 
           unlock();
-          self._refreshBackButtonHandler();
 
           self.emit('postpush', event);
 
@@ -367,7 +362,6 @@ limitations under the License.
           var callback = function() {
             leavePage.destroy();
             unlock();
-            self._refreshBackButtonHandler();
             self.emit('postpop', event);
             if (typeof options.onTransitionEnd === 'function') {
               options.onTransitionEnd();

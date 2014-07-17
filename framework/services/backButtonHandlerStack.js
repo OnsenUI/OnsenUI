@@ -20,7 +20,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  var registerer = {
+  var util = {
     init: function() {
       var self = this;
     },
@@ -47,7 +47,7 @@ limitations under the License.
   };
 
   window.document.addEventListener('deviceready', function() {
-    registerer._deviceready = true;
+    util._deviceready = true;
   }, false);
 
   /**
@@ -65,17 +65,34 @@ limitations under the License.
         this._stack = [];
 
         this._listener = function() {
-          return this._getTopAvailableListener().apply(null, arguments);
+          return this.dispatchHandler.apply(this, arguments);
         }.bind(this);
 
-        this.enable();
+        util.addListener(this._listener);
       },
 
-      _refreshListener: function() {
-        if (this._enabled && this._getTopAvailableListener()) {
-          registerer.addListener(this._listener);
-        } else {
-          registerer.removeListener(this._listener);
+      /**
+       * Call handler's listener on backbutton event.
+       */
+      dispatchHandler: function(event) {
+        var availableListeners = this._stack.filter(function(handler) {
+          return handler._enabled;
+        }).map(function(handler) {
+          return handler.listener;
+        });
+
+        event.preventDefault();
+
+        availableListeners.reverse();
+
+        for (var i = 0; i < availableListeners.length; i++) {
+          try {
+            if (availableListeners[i].apply(null, arguments)) {
+              return;
+            }
+          } catch (e) {
+            console.log(e);
+          }
         }
       },
 
@@ -90,7 +107,6 @@ limitations under the License.
           listener: listener,
           setEnabled: function(enabled) {
             this._enabled = enabled;
-            self._refreshListener();
           },
           remove: function() {
             self.remove(this.listener);
@@ -115,7 +131,7 @@ limitations under the License.
       enable: function() {
         if (!this._enabled) {
           this._enabled = true;
-          this._refreshListener();
+          util.addListener(this._listener);
         }
       },
 
@@ -125,19 +141,36 @@ limitations under the License.
       disable: function() {
         if (this._enabled) {
           this._enabled = false;
-          this._refreshListener();
+          util.removeListener(this._listener);
         }
       },
 
       /**
-       * @param {Function} listener
+       * @return {Boolean}
+       */
+      getEnabled: function() {
+        return this._enabled;
+      },
+
+      /**
+       * @param {Boolean} enabled
+       */
+      setEnabled: function(enabled) {
+        if (enabled) {
+          this.enable();
+        } else {
+          this.disable();
+        }
+      },
+
+      /**
+       * @param {Function} listener Callback on back button. If this callback returns true, dispatching is stopped.
        * @reutrn {Object} handler object
        */
       push: function(listener) {
         var handler = this._createStackObject(listener);
 
         this._stack.push(handler);
-        this._refreshListener();
 
         return handler;
       },
@@ -157,10 +190,9 @@ limitations under the License.
         if (index !== -1) {
           this._stack.splice(index, 1);
         }
-        this._refreshListener();
       }
     });
 
-    return new BackButtonHandlerStack();
+    return BackButtonHandlerStack;
   });
 })();

@@ -143,7 +143,30 @@ limitations under the License.
 
       aliasStack: aliasStack,
 
-      backButtonHandlerStack: BackButtonHandlerStack,
+      _defaultBackButtonListener: function() {
+        navigator.app.exitApp();
+        return true;
+      },
+
+      backButtonHandlerStack: (function() {
+        var stack = new BackButtonHandlerStack();
+
+        stack.push(function() {
+          return $onsen._defaultBackButtonListener();
+        });
+
+        return stack;
+      })(),
+
+      /**
+       * @param {Function}
+       */
+      setDefaultBackButtonListener: function(listener) {
+        if (!(listener instanceof Function)) {
+          throw new Error('listener argument must be function.');
+        }
+        this._defaultBackButtonListener = listener;
+      },
 
       /**
        * Cache for predefined template.

@@ -211,6 +211,8 @@ limitations under the License.
           this.setMenuPage(attrs.behindPage);
         }
 
+        this._backButtonHandler = $onsen.backButtonHandlerStack.push(this._onBackButton.bind(this));
+
         var unlock = this._doorLock.lock();
 
         window.setTimeout(function() {
@@ -237,6 +239,14 @@ limitations under the License.
         scope.$on('$destroy', this._destroy.bind(this));
       },
 
+      _onBackButton: function() {
+        if (this.isMenuOpened()) {
+          this.closeMenu();
+          return true;
+        }
+        return false;
+      },
+
       _refreshBehindPageWidth: function() {
         var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
 
@@ -252,6 +262,8 @@ limitations under the License.
 
       _destroy: function() {
         this.emit('destroy', {slidingMenu: this});
+
+        this._backButtonHandler.remove();
 
         this._element = null;
         this._scope = null;
@@ -643,6 +655,13 @@ limitations under the License.
        */
       toggleMenu: function() {
         return this.toggle.apply(this, arguments);
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      isMenuOpened: function() {
+        return this._logic.isOpened();
       },
 
       /**
