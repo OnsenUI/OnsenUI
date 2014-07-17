@@ -18,7 +18,7 @@
   module.directive('onsButton', function($onsen) {
     return {
       restrict: 'E',
-      replace: true,
+      replace: false,
       transclude: true,
       scope: {
         shouldSpin: '@',
