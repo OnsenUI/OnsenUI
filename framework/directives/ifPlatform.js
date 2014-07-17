@@ -48,6 +48,23 @@
         };
 
         function getPlatformString() {
+
+          if (navigator.userAgent.match(/Android/i)) {
+            return 'android';
+          }
+
+          if ((navigator.userAgent.match(/BlackBerry/i)) || (navigator.userAgent.match(/RIM Tablet OS/i)) || (navigator.userAgent.match(/BB10/i))) {
+            return 'blackberry';
+          }
+
+          if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+            return 'ios';
+          }
+
+          if (navigator.userAgent.match(/IEMobile/i)) {
+            return 'windows';
+          }
+
           // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
           var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
           if (isOpera) {
@@ -73,22 +90,6 @@
           var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
           if (isIE) {
             return 'ie';
-          }
-
-          if (navigator.userAgent.match(/Android/i)) {
-            return 'android';
-          }
-
-          if ((navigator.userAgent.match(/BlackBerry/i)) || (navigator.userAgent.match(/RIM Tablet OS/i)) || (navigator.userAgent.match(/BB10/i))) {
-            return 'blackberry';
-          }
-
-          if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-            return 'ios';
-          }
-
-          if (navigator.userAgent.match(/IEMobile/i)) {
-            return 'windows';
           }
 
           return 'unknown';
