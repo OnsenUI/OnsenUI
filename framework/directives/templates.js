@@ -5,7 +5,7 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/back_button.tpl",
     "<span class=\"icon-button--quiet {{modifierTemplater('icon-button--quiet--*')}}\" ng-click=\"$root.ons.getDirectiveObject('ons-navigator', $event).popPage()\" style=\"height: 44px; line-height: 0; padding: 0; position: relative;\">\n" +
-    "  <i class=\"fa fa-angle-left ons-back-button__icon\" style=\"vertical-align: top; line-height: 44px; font-size: 36px; padding-left: 8px; padding-right: 4px; height: 44px;\"></i><span style=\"vertical-align: top; display: inline-block; line-height: 44px; height: 44px;\" class=\"back-button__label\"></span>\n" +
+    "  <i class=\"fa fa-angle-left ons-back-button__icon\" style=\"vertical-align: top; line-height: 44px; font-size: 36px; padding-left: 8px; padding-right: 4px; height: 44px; width: 14px;\"></i><span style=\"vertical-align: top; display: inline-block; line-height: 44px; height: 44px;\" class=\"back-button__label\"></span>\n" +
     "</span>\n" +
     "");
 }]);
@@ -125,7 +125,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/tab_bar_item.tpl",
-    "<label class=\"tab-bar__item no-select {{tabbarModifierTemplater('tab-bar--*__item')}} {{modifierTemplater('tab-bar__item--*')}}\">\n" +
+    "<label class=\"tab-bar__item {{tabbarModifierTemplater('tab-bar--*__item')}} {{modifierTemplater('tab-bar__item--*')}}\">\n" +
     "  <input type=\"radio\" name=\"tab-bar-{{tabbarId}}\" ng-click=\"setActive()\">\n" +
     "  <button class=\"tab-bar__button {{tabbarModifierTemplater('tab-bar--*__button')}} {{modifierTemplater('tab-bar__button--*')}}\" ng-click=\"setActive()\">\n" +
     "    <i ng-show=\"icon != undefined\" class=\"tab-bar__icon fa fa-2x fa-{{tabIcon}} {{tabIcon}}\"></i>\n" +
