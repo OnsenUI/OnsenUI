@@ -40,23 +40,18 @@ angular.module('app').factory('GeneratedCss', function($http, $rootScope, CSSMod
     },
 
     onColorsChanged: function() {
-      /*
-      $http.get(this.getURLString()).then(function(response) {
-        this.css = response.data;
-        $rootScope.$broadcast('GeneratedCss:changed', this.css);
-      }.bind(this));*/
-
-      if (this.templateCss) {
+     /*if (this.templateCss) {
         this.css = this.compile(this.colors);
         $rootScope.$broadcast('GeneratedCss:changed', this.css);
+      }*/
+
+      if (this.templateCss) {
+        this.css = this.compile(this.templateCss, this.colors);
+        $rootScope.$broadcast('GeneratedCss:changed', this.templateCss);
       }
     },
 
-    compile: function(colors) {
-      if (!this.templateCss) {
-        throw new Error('this.templateCss is undefined');
-      }
-
+    compile: function(templateCss, colors) {
       var self = this;
 
       function lighten(color) {
@@ -66,7 +61,7 @@ angular.module('app').factory('GeneratedCss', function($http, $rootScope, CSSMod
         return 'rgba(' + rgba[0] + ', ' + rgba[1] + ', ' + rgba[2] + ', ' + rgba[3] + ')';
       }
 
-      return this.templateCss.replace(VAR_REGEX, function(name) {
+      return templateCss.replace(VAR_REGEX, function(name) {
         name = name.substr(1, name.length);
 
         // resolve lighten color
@@ -79,30 +74,23 @@ angular.module('app').factory('GeneratedCss', function($http, $rootScope, CSSMod
       });
     },
 
-    getPageCss: function() {
-      if (!this.css) {
-        throw new Error('this.css is undefined.');
+    /**
+     * @param {String} css
+     * @return {Object}
+     */
+    buildVarNameDict: function(css) {
+      var names = css.match(VAR_REGEX).map(function(name) {
+        return name.substring(1, name.length);
+      });
+
+      var result = {};
+      for (var i = 0; i < names.length; i++) {
+        result[names[i]] = names[i];
       }
 
-      var ast = CSSModule.parse(this.css);
-
-      ast.stylesheet.rules = ast.stylesheet.rules.reduce(function(rules, rule) {
-        if (rule.selectors) {
-          rule.selectors = rule.selectors.filter(function(selector) {
-            return selector === '.page';
-          });
-
-          if (rule.selectors.length > 0) {
-            rules.push(rule);
-          }
-        }
-
-        return rules;
-      }, []);
-
-      return CSSModule.stringify(ast);
+      return result;
     }
-  }
+  };
 
   $rootScope.$on('colors:changed', function(event, colors) {
     generatedCss.setColors(colors);

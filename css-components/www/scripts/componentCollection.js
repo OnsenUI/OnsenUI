@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').factory('ComponentCollection', function(Component, CssComponentParser, $rootScope) {
+angular.module('app').factory('ComponentCollection', function(Component, CssComponentParser, GeneratedCss, $rootScope) {
 
   function ComponentCollection(){
     ComponentCollection.prototype.init.apply(this, arguments);
@@ -10,13 +10,22 @@ angular.module('app').factory('ComponentCollection', function(Component, CssComp
     collection: undefined,
 
     init: function() {
-      $rootScope.$on('GeneratedCss:changed', function(event, css) {
-        this.parseCss(css);
+      $rootScope.$on('GeneratedCss:changed', function(event) {
+        this.parseCss(GeneratedCss.templateCss);
+      }.bind(this));
+
+      $rootScope.$on('colors:changed', function(event, colors) {
+        this.colors = colors;
       }.bind(this));
     },
 
     parseCss: function(css) {
-      this.collection = CssComponentParser.parse(css);
+      this.collection = CssComponentParser.parse(css).map(function(component) {
+        component.varNameDict = GeneratedCss.buildVarNameDict(component.css);
+        component.css = GeneratedCss.compile(component.css, this.colors);
+
+        return component;
+      }.bind(this));
 
       $rootScope.$broadcast('ComponentCollection:changed', this.collection);
     },

@@ -5,7 +5,9 @@
 
   <ul id="components">
     <li ng-repeat="component in components">
-      <h3>{{component.name}}</h3>
+      <h3><label>
+          <input type="checkbox" name="component-varname-highlight" ng-model="component.checked" ng-change="updateVarNamesHighlight()">{{component.name}}
+      </label></h3>
       <div class="component-preview" ng-click="componentDialog.show(component)">
         <div class="component-preview-mask"></div>
         <component-element html="component.html"></component-element>
