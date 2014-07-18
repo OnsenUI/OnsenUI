@@ -289,11 +289,9 @@ module.controller('AppController',
   setTimeout(function() {
     var isAccessed = window.localStorage.getItem('isAccessed');
     if (!isAccessed) {
-      $scope.welcomeDialog.show();
-      $scope.$apply();
       window.localStorage.setItem('isAccessed', 1);
     } else {
-      if (!window.IS_DEV) { 
+      if (!window.IS_DEV) {
         $scope.showNewsletterPopup();
       }
     }
@@ -301,7 +299,7 @@ module.controller('AppController',
 
   $scope.showNewsletterPopup = function() {
     var isEntered = window.localStorage.getItem('isEntered');
-    if (!isEntered && !window.IS_DEV) { 
+    if (!isEntered && !window.IS_DEV) {
       setTimeout(function() {
         $scope.newsletterPopup.show();
         $scope.$apply();
