@@ -29,8 +29,6 @@ app.run(["$templateCache", function($templateCache) {
     "        <div class=\"codemirror-container\" data-lang=\"css\" data-name=\"cssEditor\"></div>\n" +
     "      </div>\n" +
     "    </div>\n" +
-    "\n" +
-    "    <footer translate>T_TEASING_LINK</footer>\n" +
     "  </div>\n" +
     "</div>\n" +
     "\n" +
@@ -177,8 +175,6 @@ app.run(["$templateCache", function($templateCache) {
     "    <div class=\"css-container\">\n" +
     "      <div class=\"codemirror-container\" data-lang=\"css\" data-name=\"cssDialogEditor\"></div>\n" +
     "    </div>\n" +
-    "\n" +
-    "    <footer translate>T_TEASING_LINK</footer>\n" +
     "  </div>\n" +
     "</div>\n" +
     "\n" +
