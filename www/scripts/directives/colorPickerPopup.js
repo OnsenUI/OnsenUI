@@ -53,7 +53,9 @@ angular.module('app').directive('colorPickerPopup', function($window) {
             }
           }
 
-          callback($(this).minicolors('rgbaString'));
+          var color = $(this).minicolors('rgbaString');
+
+          callback(color, normalizeColor(color));
 
           if (target) {
             $(target).css('background-color', $(this).minicolors('rgbaString'));
@@ -102,9 +104,9 @@ angular.module('app').directive('colorPickerPopup', function($window) {
       '</div>',
 
     link: function(scope, element/* , attrs, controller */) {
-      initColorPicker(element[0], function(color){
+      initColorPicker(element[0], function(color, normalizedColor){
         scope.onColorChanged({
-          $color: color
+          $color: normalizedColor
         });
       });
 
