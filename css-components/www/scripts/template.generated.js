@@ -111,8 +111,8 @@ app.run(["$templateCache", function($templateCache) {
     "  </div>\n" +
     "</div>\n" +
     "\n" +
-    "<div class=\"guide-mask left-position uninitialized\" ng-show=\"guide.index == 3\" style=\"left: 660px; top: 36px;\"></div>\n" +
-    "<div class=\"popup-container right-bottom-position\" style=\"left: 610px; top: 66px;\"ng-show=\"guide.index == 3\">\n" +
+    "<div class=\"guide-mask left-position uninitialized\" ng-show=\"guide.index == 3\" style=\"left: 560px; top: 36px;\"></div>\n" +
+    "<div class=\"popup-container right-bottom-position\" style=\"left: 560px; top: 66px;\"ng-show=\"guide.index == 3\">\n" +
     "  <div class=\"popup\" ng-show=\"guide.index == 3\">\n" +
     "\n" +
     "    <h2 translate>T_GUIDE3_TITLE</h2>\n" +
