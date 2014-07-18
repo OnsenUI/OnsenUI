@@ -40,37 +40,6 @@
           <li><a href="http://onsenui.io/blog/">Blog</a></li>
         </ul>
 
-        <div style="display: none;">
-          <!-- social button -->
-          <div style="display: inline-block; vertical-align: middle;">
-            <!-- twitter -->
-            <iframe allowtransparency="true" frameborder="0" scrolling="no"
-                    src="https://platform.twitter.com/widgets/tweet_button.html?text=Checkout Onsen CSS Component! Beautiful CSS for your App"
-                    style="width:82px; height:20px;">
-            </iframe>
-
-            <!-- facebook -->
-            <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fcomponents.onsenui.io&amp;width=50&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=false&amp;height=21&amp;appId=248698408604378" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe>
-            <!-- google+ -->
-            <div class="g-plusone"></div>
-            <!-- Place this tag after the last +1 button tag. -->
-            <script type="text/javascript">
-              (function() {
-                window.___gcfg = {
-                  lang: 'en-US'
-                }
-                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                po.src = 'https://apis.google.com/js/platform.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-              })();
-            </script>
-
-            <!-- github -->
-            <iframe src="http://ghbtns.com/github-btn.html?user=onsenui&repo=onsen-css-component&type=watch&count=true" height="22" width="135" frameborder="0" scrolling="0" style="display: inline-block;" allowTransparency="true"></iframe>
-          </div>
-
-        </div>
-
       </header>
 
       <!-- customizer panel -->
@@ -244,12 +213,6 @@
         }
       });
 
-      if (!IS_DEV) {
-        $(window).on('beforeunload', function() {
-          return 'Are you sure to leave or reload this page?';
-        });
-      }
-
       $(function() {
         $('.uninitialized').removeClass('uninitialized');
 
@@ -265,19 +228,6 @@
         }, 200);
       });
     </script>
-
-    <!-- Twitter -->
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-    <!-- facebook -->
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
 
     <!-- heatmap -->
     <script type="text/javascript">
