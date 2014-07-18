@@ -26,14 +26,21 @@
 
     <div id="content-container" ng-cloak>
 
-      <header>
+      <header class="global-header">
         <div>
-          <img src="images/mark.png" class="logo-mark" width="34" height="34">
-          <h1><img src="images/logo.png" width="297" height="21"></h1>
-          <p>Free CSS Generator for Mobile Apps. Made by <a target="_blank" href="/coming-soon/01/index.html?link=subtitle" style="font-size: 13px">Onsen UI</a> Team.</p>
+          <h1><a href="http://onsenui.io"><img src="images/header-logo.png" class="logo-mark" width="167" height="38"></a></h1>
         </div>
 
-        <div>
+        <ul class="gnav">
+          <li><a href="http://onsenui.io/guide/getting_started.html">Getting Started</a></li>
+          <li><a href="http://onsenui.io/guide/components.html">Components</a></li>
+          <li><a href="http://onsenui.io/guide/overview.html">Guide</a></li>
+          <li class="current"><a href="http://components.onsenui.io/">Themes</a></li>
+          <li><a href="http://onsenui.io/forum.html">Forum</a></li>
+          <li><a href="http://onsenui.io/blog/">Blog</a></li>
+        </ul>
+
+        <div style="display: none;">
           <!-- social button -->
           <div style="display: inline-block; vertical-align: middle;">
             <!-- twitter -->
@@ -74,7 +81,7 @@
 
         <section>
           <div class="customizer-section">
-            <a class="get-css-button" ng-click="thankyouDialog.show()"><img src="images/download-icon.png" alt=""  style="margin-bottom: -2px;"> Download CSS</a>
+            <a class="get-css-button" ng-click="thankyouDialog.show()"><img src="images/download-icon.png" alt=""  style="margin-bottom: -2px;"> Download Theme</a>
           </div>
           <div class="customizer-section">
             <h3 translate>Predefined Color Scheme</h3>

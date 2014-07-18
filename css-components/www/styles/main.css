@@ -301,29 +301,54 @@ div#content-container > header {
   top: 0px;
   left: 0px;
   right: 0px;
-  height: 82px;
+  height: 84px;
   background-color: white;
-  padding: 16px 23px 0 23px;
+  padding: 0px 40px 0 40px;
   box-sizing: border-box;
   min-width: 1200px;
 }
-div#content-container > header > div:first-child {
-  float: left;
-  width: 500px;
-}
-div#content-container > header > div:first-child > .logo-mark {
-  float: left;
-  margin: 8px 12px 0 0;
-}
 div#content-container > header > div:first-child > h1 {
-  margin: -4px 0 0 0;
+  margin: 22px 0 0 0;
   padding: 0;
-  height: 26px;
 }
-div#content-container > header > div:first-child > p {
-  margin: 4px 0 0 0;
+div#content-container > header .gnav {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  height: 84px;
+  line-height: 84px;
+  margin: 0;
   padding: 0;
-  font-size: 13px;
+}
+div#content-container > header .gnav > li {
+  color: #a6a6a6;
+  display: inline-block;
+  font-size: 20px;
+  height: 84px;
+  margin: 0 4px;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+div#content-container > header .gnav > li.current {
+  border-bottom: 2px solid #ff3f2b;
+}
+div#content-container > header .gnav > li.current a {
+  color: #ff3f2b;
+}
+div#content-container > header .gnav > li.current a:hover,
+div#content-container > header .gnav > li.current a:visited,
+div#content-container > header .gnav > li.current a:active {
+  color: #ff3f2b;
+}
+div#content-container > header .gnav > li a:link,
+div#content-container > header .gnav > li a:visited,
+div#content-container > header .gnav > li a:active {
+  color: #666;
+  text-decoration: none;
+}
+div#content-container > header .gnav > li a:hover {
+  color: #ff3f2b;
+  text-decoration: underline;
 }
 div#content-container > header > div:nth-child(2) {
   position: absolute;
@@ -338,7 +363,7 @@ div#content-container > header > div:nth-child(2) {
 }
 div#customizer-panel {
   position: absolute;
-  top: 82px;
+  top: 84px;
   right: 0px;
   bottom: 0px;
   width: 300px;
@@ -543,7 +568,7 @@ div#customizer-panel > section > div.customizer-section > ul.color-scheme-switch
 }
 div#main-panel {
   position: absolute;
-  top: 82px;
+  top: 84px;
   right: 299px;
   bottom: 0px;
   left: 0px;
@@ -729,7 +754,7 @@ div#components-container > ul#components > li > h3 {
 }
 div#components-container > ul#components > li > div.component-preview {
   margin-top: 3px;
-  height: 80px;
+  height: 110px;
   text-align: center;
   vertical-align: middle;
   overflow: hidden;
