@@ -22,10 +22,46 @@ div#components-container {
       display: inline-block;
       width: 320px;
 
+      label, input[type=checkbox] {
+        cursor: pointer;
+      }
+
+      input[type=checkbox] {
+        border: 1px solid #555;
+        border-radius: 2px;
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: transparent;
+        width: 14px;
+        height: 14px;
+        vertical-align: middle;
+        position: relative;
+        display: inline-block;
+        margin-right: 6px;
+
+        &:checked:after {
+          content: '';
+          position: absolute;
+          top: 0px;
+          left: 1px;
+          opacity: 1;
+          width: 10px;
+          height: 4px;
+          background: transparent;
+          border: 2px solid #fff;
+          border-top: none;
+          border-right: none;
+          border-radius: 0px;
+          transform: rotate(-45deg);
+        }
+      }
+
+
       > h3 {
         font-size: 18px;
         font-weight: 300;
         color: white;
+        line-height: 28px;
       }
 
       > div.component-preview {

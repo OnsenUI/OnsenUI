@@ -66,7 +66,9 @@ app.run(["$templateCache", function($templateCache) {
     "\n" +
     "  <ul id=\"components\">\n" +
     "    <li ng-repeat=\"component in components\">\n" +
-    "      <h3>{{component.name}}</h3>\n" +
+    "      <h3><label>\n" +
+    "          <input type=\"checkbox\" name=\"component-varname-highlight\" ng-model=\"component.checked\" ng-change=\"updateVarNamesHighlight()\">{{component.name}}\n" +
+    "      </label></h3>\n" +
     "      <div class=\"component-preview\" ng-click=\"componentDialog.show(component)\">\n" +
     "        <div class=\"component-preview-mask\"></div>\n" +
     "        <component-element html=\"component.html\"></component-element>\n" +

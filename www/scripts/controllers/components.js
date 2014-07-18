@@ -2,4 +2,20 @@
 
 angular.module('app').controller('ComponentsController', function ($scope, ComponentCollection, GeneratedCss) {
 
+  $scope.updateVarNamesHighlight = function() {
+    var result = {};
+
+    var dicts = $scope.components.filter(function(component) {
+      return component.checked;
+    }).map(function(component) {
+      return component.varNameDict;
+    }).forEach(function(dict) {
+      for (var name in dict) {
+        result[name] = name;
+      }
+    });
+
+    $scope.colorCustomizer.currentVarNameDict = result;
+  };
+
 });
