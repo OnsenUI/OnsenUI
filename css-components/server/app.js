@@ -143,12 +143,11 @@ module.exports = function(middlewares, fn) {
     return compiler.validate(variables)
     .then(compiler.compile)
     .then(prefix)
-    .then(function(css){
+    .then(function(css) {
       archive.append(css, { name: 'onsen-css-components.css' });
-      archive.append(css, { name: 'onsen-css-components-default.css' });
       return css;
     })
-    .then(minify).then(function(minifiedCSS){
+    .then(minify).then(function(minifiedCSS) {
       archive.append(minifiedCSS, { name: 'onsen-css-components.min.css' });
     });
   }
@@ -159,7 +158,6 @@ module.exports = function(middlewares, fn) {
 
     Q.all([
       addDownloadTemplateFilesToZip(archive),
-      addPatternsFilesToZip(archive),
       addCSSFilesToZip(variableJson, archive)
     ]).then(function(){
       archive.finalize();
@@ -178,7 +176,7 @@ module.exports = function(middlewares, fn) {
     });
   });
 
-  app.get('/components', function(req, res){
+  app.get('/patterns', function(req, res){
     res.sendfile(path.resolve(appDir + '/index.html'), function(err){
       debug('error?:' + err);
     });
