@@ -4,7 +4,7 @@ div#customizer-panel {
   top: 84px;
   left: 0px;
   bottom: 0px;
-  width: 300px;
+  width: 330px;
   border-left: 1px solid #ddd;
   box-sizing: border-box;
   margin: 0;
@@ -110,6 +110,7 @@ div#customizer-panel {
         line-height: 44px;
         color: white;
         font-size: 16px;
+        overflow: hidden;
 
         &:first-child {
           border-top: 0px;
@@ -119,15 +120,29 @@ div#customizer-panel {
           border-bottom: 0px;
         }
 
+        &:hover {
+          > span.color-picker-label {
+            opacity: 1;
+          }
+        }
+
+        > span.color-picker-label {
+          font-size: 14px;
+          color: #666;
+          line-height: 44px;
+          opacity: 0;
+        }
+
         > div.color-picker-container {
           user-select: none;
           float: right;
-          width: 23px;
           height: 23px;
+          width: 23px;
           margin-top: 11px;
           display: inline-block;
           background-image: url(../images/color-picker-background.png);
           cursor: pointer;
+
           &:active {
             opacity: 0.8;
           }
@@ -148,7 +163,7 @@ div#customizer-panel {
       box-sizing: border-box;
       border-radius: 4px;
       height: 32px;
-      width: 273px;
+      width: 100%;
       padding: 0;
       margin: 0;
       display: table;

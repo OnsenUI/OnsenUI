@@ -366,7 +366,7 @@ div#customizer-panel {
   top: 84px;
   left: 0px;
   bottom: 0px;
-  width: 300px;
+  width: 330px;
   border-left: 1px solid #ddd;
   box-sizing: border-box;
   margin: 0;
@@ -465,6 +465,7 @@ div#customizer-panel > section > div.customizer-section > ul.customize-item-list
   line-height: 44px;
   color: white;
   font-size: 16px;
+  overflow: hidden;
 }
 div#customizer-panel > section > div.customizer-section > ul.customize-item-list > li:first-child {
   border-top: 0px;
@@ -472,14 +473,23 @@ div#customizer-panel > section > div.customizer-section > ul.customize-item-list
 div#customizer-panel > section > div.customizer-section > ul.customize-item-list > li:last-child {
   border-bottom: 0px;
 }
+div#customizer-panel > section > div.customizer-section > ul.customize-item-list > li:hover > span.color-picker-label {
+  opacity: 1;
+}
+div#customizer-panel > section > div.customizer-section > ul.customize-item-list > li > span.color-picker-label {
+  font-size: 14px;
+  color: #666;
+  line-height: 44px;
+  opacity: 0;
+}
 div#customizer-panel > section > div.customizer-section > ul.customize-item-list > li > div.color-picker-container {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
   float: right;
-  width: 23px;
   height: 23px;
+  width: 23px;
   margin-top: 11px;
   display: inline-block;
   background-image: url(../images/color-picker-background.png);
@@ -500,7 +510,7 @@ div#customizer-panel > section > div.customizer-section > ul.color-scheme-switch
   box-sizing: border-box;
   border-radius: 4px;
   height: 32px;
-  width: 273px;
+  width: 100%;
   padding: 0;
   margin: 0;
   display: table;
@@ -569,7 +579,7 @@ div#customizer-panel > section > div.customizer-section > ul.color-scheme-switch
 div#main-panel {
   position: absolute;
   top: 84px;
-  left: 299px;
+  left: 329px;
   bottom: 0px;
   right: 0px;
   border-left: 1px solid #222;
@@ -1273,7 +1283,7 @@ div.popup-container.newsletter-popup-container {
   -webkit-transform: translateY(-8px) translateX(26px);
   transform: translateY(-8px) translateX(26px);
   z-index: 22;
-  right: 400px;
+  right: 64px;
   width: 600px;
   bottom: 50px;
 }

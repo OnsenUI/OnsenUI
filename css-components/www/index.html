@@ -81,6 +81,8 @@
                 <div class="color-picker-container">
                   <div class="color-picker" data-variable-name="{{item.name}}" style="background-color: {{item.value}}" ng-click="colorPicker.show($event);"></div>
                 </div>
+
+                <span class="color-picker-label">{{colorSchemeSwitcher.current.getColor(item.name)}}</span>
               </li>
             </ul>
           </div>
