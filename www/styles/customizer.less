@@ -63,6 +63,30 @@ div#customizer-panel {
       font-weight: 500;
     }
 
+    > a.get-css-button {
+      margin-top: 4px;
+      width: 100%;
+      text-align: center;
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 3px;
+      display: inline-block;
+      font-size: 20px;
+      line-height: 44px;
+      color: #fff;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 1px 0 rgba(255, 255, 255, 0.07);
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+
+      &, &:link, &:hover, &:visited, &:active {
+        text-decoration: none;
+      }
+
+      &:active {
+        opacity: 1;
+        background-color: rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.07);
+      }
+    }
+
     &:first-child > h3 {
       margin-top: 0;
     }

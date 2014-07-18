@@ -327,46 +327,6 @@ div#content-container > header > div:first-child > p {
 }
 div#content-container > header > div:nth-child(2) {
   position: absolute;
-  top: 0px;
-  left: 500px;
-  line-height: 82px;
-  display: inline-block;
-}
-div#content-container > header > div:nth-child(2) > button {
-  appearance: none;
-  -webkit-appearance: none;
-  border-radius: 3px;
-  background-color: #f3f3f3;
-  color: #333;
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 44px;
-  height: 44px;
-  padding: 0 18px;
-  border: none;
-  cursor: pointer;
-  font-family: 'Helvetica Neue', Helvetica;
-  -webkit-font-smoothing: antialiased;
-}
-div#content-container > header > div:nth-child(2) > button.download-button {
-  background-color: #ff1a33;
-  color: white;
-}
-div#content-container > header > div:nth-child(2) > button.download-button > img {
-  vertical-align: middle;
-}
-div#content-container > header > div:nth-child(2) > button:active,
-div#content-container > header > div:nth-child(2) > button:focus {
-  outline: none;
-}
-div#content-container > header > div:nth-child(2) > button:hover {
-  opacity: 0.7;
-}
-div#content-container > header > div:nth-child(2) > button:active {
-  opacity: 1;
-}
-div#content-container > header > div:nth-child(3) {
-  position: absolute;
   display: inline-block;
   right: 0px;
   top: 0px;
@@ -374,6 +334,7 @@ div#content-container > header > div:nth-child(3) {
   text-align: right;
   line-height: 82px;
   padding-right: 16px;
+  width: 600px;
 }
 div#customizer-panel {
   position: absolute;
@@ -431,6 +392,31 @@ div#customizer-panel > section > div.customizer-section > h3 {
   text-shadow: 0px 1px 0px black;
   opacity: 0.4;
   font-weight: 500;
+}
+div#customizer-panel > section > div.customizer-section > a.get-css-button {
+  margin-top: 4px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 20px;
+  line-height: 44px;
+  color: #fff;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 1px 0 rgba(255, 255, 255, 0.07);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+div#customizer-panel > section > div.customizer-section > a.get-css-button,
+div#customizer-panel > section > div.customizer-section > a.get-css-button:link,
+div#customizer-panel > section > div.customizer-section > a.get-css-button:hover,
+div#customizer-panel > section > div.customizer-section > a.get-css-button:visited,
+div#customizer-panel > section > div.customizer-section > a.get-css-button:active {
+  text-decoration: none;
+}
+div#customizer-panel > section > div.customizer-section > a.get-css-button:active {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 div#customizer-panel > section > div.customizer-section:first-child > h3 {
   margin-top: 0;
