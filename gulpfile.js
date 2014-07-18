@@ -188,7 +188,7 @@ gulp.task('prepare', ['html2js'], function() {
 ////////////////////////////////////////
 gulp.task('prepare-project-templates', function() {
   // projects template
-  return gulp.src(['build/**', '!build/docs/**'])
+  return gulp.src(['build/**', '!build/docs', '!build/docs/**'])
     .pipe(gulp.dest('app/lib/onsen'))
     .pipe(gulp.dest('project_templates/minimum/www/lib/onsen/'))
     .pipe(gulp.dest('project_templates/sliding_menu/www/lib/onsen/'))
@@ -214,24 +214,14 @@ gulp.task('compress-project-templates', function(done) {
   ];
 
   var streams = names.map(function(name) {
-    // '**/*' cause error???
     var src = [
-      name + '/*',
-      name + '/*/*',
-      name + '/*/*/*',
-      name + '/*/*/*/*',
-      name + '/*/*/*/*/*',
-      name + '/*/*/*/*/*/*',
+      __dirname + '/project_templates/' + name + '/**/*',
+      '!.DS_Store'
     ];
 
-    var stream = gulp.src(src, {cwd : __dirname + '/project_templates'})
+    var stream = gulp.src(src, {cwd : __dirname + '/project_templates', dot: true})
       .pipe(zip(name + '.zip'))
-      .pipe(gulp.dest('./project_templates/'));
-
-    if (name === 'minimum') {
-      stream.on('end', function() {
-      });
-    }
+      .pipe(gulp.dest(__dirname + '/project_templates'));
 
     return stream;
   });

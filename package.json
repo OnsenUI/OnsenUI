@@ -35,7 +35,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-stylus": "^0.1.0",
     "gulp-util": "~2.2.14",
-    "gulp-zip": "~0.1.2",
+    "gulp-zip": "^0.4.0",
     "jshint-stylish": "~0.1.5",
     "prompt": "*",
     "run-sequence": "~0.3.6",
