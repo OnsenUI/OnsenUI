@@ -3,7 +3,7 @@
 var module = angular.module('app');
 module.controller('AppController',
   function($scope, $location, $http, $rootScope, ColorSchemeFactory,
-    GeneratedCss, ComponentCollection, URLShortener, Colors2URL,
+    GeneratedCss, ComponentCollection, Colors2URL,
     ClipboardClients, Dialog, ComponentDialog, SimpleColorCustomizer) {
 
   $scope.colorCustomizer = SimpleColorCustomizer;
@@ -14,8 +14,6 @@ module.controller('AppController',
   $scope.createDialog = function () {
     return new Dialog();
   };
-
-  $scope.URLShortener = URLShortener;
 
   $scope.$on('ComponentCollection:changed', function() {
     if (!$scope.components || $scope.components.length <= 0) {
@@ -166,38 +164,6 @@ module.controller('AppController',
       annotation: 'bubble',
       action: "share"
     });
-  }
-
-  $scope.showShareDialog = function() {
-    var colors = $scope.colorSchemeSwitcher.current.getColors();
-    var colorParam = $.param(colors);
-    var longURL = window.location.origin + "?" + colorParam;
-
-    $scope.shareDialog.longURL = longURL;
-    $scope.shareDialog.shareURL = 'Prettifying URL, pleaes wait...';
-    $scope.shareDialog.show();
-
-    $scope.URLShortener.shortenUrl(longURL).done(function(shortURL){
-      $scope.shareDialog.shareURL = shortURL;
-
-      renderShareTwitterButton(shortURL, longURL);
-      renderFacebookShareButton(shortURL);
-      renderGooglePlusShareButton(shortURL);
-
-      $scope.$apply();
-      ga('send', 'event', 'dialog', 'shareDialog');
-    });
-
-    var urlClipboardClient = new ZeroClipboard($('#url-share-button'));
-    urlClipboardClient.on('dataRequested', function(client) {
-      client.setText($scope.shareDialog.shareURL);
-    });
-
-    urlClipboardClient.on('complete', function() {
-      alert('Copied to clipboard!' );
-    });
-
-    ClipboardClients.push(urlClipboardClient);
   }
 
   $scope.thankyouDialog = (function(dialog) {
