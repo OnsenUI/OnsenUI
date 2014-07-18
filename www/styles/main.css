@@ -364,7 +364,7 @@ div#content-container > header > div:nth-child(2) {
 div#customizer-panel {
   position: absolute;
   top: 84px;
-  right: 0px;
+  left: 0px;
   bottom: 0px;
   width: 300px;
   border-left: 1px solid #ddd;
@@ -569,9 +569,10 @@ div#customizer-panel > section > div.customizer-section > ul.color-scheme-switch
 div#main-panel {
   position: absolute;
   top: 84px;
-  right: 299px;
+  left: 299px;
   bottom: 0px;
-  left: 0px;
+  right: 0px;
+  border-left: 1px solid #222;
 }
 div#main-panel > ul#main-panel-tabbar {
   margin: 0;
