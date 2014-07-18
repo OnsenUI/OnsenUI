@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.0-dev - 2014-07-16 */
+/*! onsenui - v1.1.0-dev - 2014-07-18 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -3948,7 +3948,7 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/back_button.tpl",
     "<span class=\"icon-button--quiet {{modifierTemplater('icon-button--quiet--*')}}\" ng-click=\"$root.ons.getDirectiveObject('ons-navigator', $event).popPage()\" style=\"height: 44px; line-height: 0; padding: 0; position: relative;\">\n" +
-    "  <i class=\"fa fa-angle-left ons-back-button__icon\" style=\"vertical-align: top; line-height: 44px; font-size: 36px; padding-left: 8px; padding-right: 4px; height: 44px;\"></i><span style=\"vertical-align: top; display: inline-block; line-height: 44px; height: 44px;\" class=\"back-button__label\"></span>\n" +
+    "  <i class=\"fa fa-angle-left ons-back-button__icon\" style=\"vertical-align: top; line-height: 44px; font-size: 36px; padding-left: 8px; padding-right: 4px; height: 44px; width: 14px;\"></i><span style=\"vertical-align: top; display: inline-block; line-height: 44px; height: 44px;\" class=\"back-button__label\"></span>\n" +
     "</span>\n" +
     "");
 }]);
@@ -4068,7 +4068,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/tab_bar_item.tpl",
-    "<label class=\"tab-bar__item no-select {{tabbarModifierTemplater('tab-bar--*__item')}} {{modifierTemplater('tab-bar__item--*')}}\">\n" +
+    "<label class=\"tab-bar__item {{tabbarModifierTemplater('tab-bar--*__item')}} {{modifierTemplater('tab-bar__item--*')}}\">\n" +
     "  <input type=\"radio\" name=\"tab-bar-{{tabbarId}}\" ng-click=\"setActive()\">\n" +
     "  <button class=\"tab-bar__button {{tabbarModifierTemplater('tab-bar--*__button')}} {{modifierTemplater('tab-bar__button--*')}}\" ng-click=\"setActive()\">\n" +
     "    <i ng-show=\"icon != undefined\" class=\"tab-bar__icon fa fa-2x fa-{{tabIcon}} {{tabIcon}}\"></i>\n" +
@@ -5272,18 +5272,8 @@ limitations under the License.
         this._doorLock = new DoorLock();
         this.pages = [];
 
-        var self = this;
-        this._backButtonHandler = $onsen.backButtonHandlerStack.push(function(event) {
-          self.popPage();
-          event.preventDefault();
-        });
-        this._refreshBackButtonHandler();
-
+        this._backButtonHandler = $onsen.backButtonHandlerStack.push(this._onBackButton.bind(this));
         this._scope.$on('$destroy', this._destroy.bind(this));
-      },
-
-      _refreshBackButtonHandler: function() {
-        this._backButtonHandler.setEnabled(this.pages.length > 1);
       },
 
       _destroy: function() {
@@ -5295,6 +5285,15 @@ limitations under the License.
 
         this._backButtonHandler.remove();
         this._backButtonHandler = null;
+      },
+
+      _onBackButton: function() {
+        if (this.pages.length > 1) {
+          this.popPage();
+          return true;
+        }
+
+        return false;
       },
 
       /**
@@ -5451,8 +5450,6 @@ limitations under the License.
             if (index !== -1) {
               self.pages.splice(index, 1);
             }
-
-            self._refreshBackButtonHandler();
           }
         };
 
@@ -5463,7 +5460,6 @@ limitations under the License.
         };
 
         this.pages.push(pageObject);
-        this._refreshBackButtonHandler();
 
         var done = function() {
           if (self.pages[self.pages.length - 2]) {
@@ -5475,7 +5471,6 @@ limitations under the License.
           }
 
           unlock();
-          self._refreshBackButtonHandler();
 
           self.emit('postpush', event);
 
@@ -5570,7 +5565,6 @@ limitations under the License.
           var callback = function() {
             leavePage.destroy();
             unlock();
-            self._refreshBackButtonHandler();
             self.emit('postpop', event);
             if (typeof options.onTransitionEnd === 'function') {
               options.onTransitionEnd();
@@ -7050,6 +7044,8 @@ limitations under the License.
           this.setMenuPage(attrs.behindPage);
         }
 
+        this._backButtonHandler = $onsen.backButtonHandlerStack.push(this._onBackButton.bind(this));
+
         var unlock = this._doorLock.lock();
 
         window.setTimeout(function() {
@@ -7076,6 +7072,14 @@ limitations under the License.
         scope.$on('$destroy', this._destroy.bind(this));
       },
 
+      _onBackButton: function() {
+        if (this.isMenuOpened()) {
+          this.closeMenu();
+          return true;
+        }
+        return false;
+      },
+
       _refreshBehindPageWidth: function() {
         var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
 
@@ -7091,6 +7095,8 @@ limitations under the License.
 
       _destroy: function() {
         this.emit('destroy', {slidingMenu: this});
+
+        this._backButtonHandler.remove();
 
         this._element = null;
         this._scope = null;
@@ -7482,6 +7488,13 @@ limitations under the License.
        */
       toggleMenu: function() {
         return this.toggle.apply(this, arguments);
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      isMenuOpened: function() {
+        return this._logic.isOpened();
       },
 
       /**
@@ -8195,7 +8208,7 @@ limitations under the License.
   module.directive('onsButton', function($onsen) {
     return {
       restrict: 'E',
-      replace: true,
+      replace: false,
       transclude: true,
       scope: {
         shouldSpin: '@',
@@ -8371,7 +8384,7 @@ limitations under the License.
  * @param icon The icon name. set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". See all icons: http://fontawesome.io/icons/.
  * @param size The sizes of the icon. Valid values are [lg/2x/3x/4x/5x] or css font-size value.
  * @param rotate The degree to rotate the icon. Valid values are [90/180/270]
- * @param flip Flip the icon. Valid values are [horizontal/vertial]
+ * @param flip Flip the icon. Valid values are [horizontal/vertical]
  * @param fixed-width When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are [true/false]. Default is true.
  * @param spin Whether to spin the icon. Valid values are [true/false]
  * @codepen xAhvg
@@ -8382,56 +8395,80 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
+  function cleanClassAttribute(element) {
+    var classList = ('' + element.attr('class')).split(/ +/).filter(function(classString) {
+      return classString !== 'fa' && classString.substring(0, 3) !== 'fa-';
+    });
+
+    element.attr('class', classList.join(' '));
+  }
+
+  function buildClassAndStyle(attrs) {
+    var classList = ['fa'];
+    var style = {};
+
+    // size
+    var size = '' + attrs.size;
+    if (size.match(/^[1-5]x|lg$/)) {
+      classList.push('fa-' + size);
+    } else if (typeof attrs.size === 'string') {
+      style['font-size'] = size;
+    } else {
+      classList.push('fa-lg');
+    }
+
+    // icon
+    classList.push('fa-' + attrs.icon);
+    
+    // rotate
+    if (attrs.rotate === '90' || attrs.rotate === '180' || attrs.rotate === '270') {
+
+      classList.push('fa-rotate-' + attrs.rotate);
+    }
+
+    // flip
+    if (attrs.flip === 'horizontal' || attrs.flip === 'vertical') {
+      classList.push('fa-flip-' + attrs.flip);
+    }
+
+    // fixed-width
+    if (attrs.fixedWidth !== 'false') {
+      classList.push('fa-fw');
+    }
+
+    // spin
+    if (attrs.spin === 'true') {
+      classList.push('fa-spin');
+    }
+
+    return {
+      'class': classList.join(' '),
+      'style': style
+    };
+  }
+
   module.directive('onsIcon', function($onsen) {
     return {
       restrict: 'E',
-      replace: true,
+      replace: false,
       transclude: false,
-      scope: {
-        icon: '@',
-        rotate: '@',
-        flip: '@'
-      },
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/icon.tpl',
       link: function($scope, element, attrs) {
 
         if (attrs.ngController) {
           throw new Error('This element can\'t accept ng-controller directive.');
         }
 
-        $scope.style = {};
-        $scope.sizeClass = '';
+        var update = function() {
+          cleanClassAttribute(element);
 
-        attrs.$observe('size', function(size) {
-          size = '' + size;
+          var builded = buildClassAndStyle(attrs);
+          element.css(builded.style);
+          element.addClass(builded['class']);
+        };
 
-          if (size.match(/^[1-5]x|lg$/)) {
-            $scope.sizeClass = 'fa-' + size;
-            $scope.style['font-size'] = '';
-          } else if (size.match(/^\d+(px|%|[a-zA-Z]+)$/)) {
-            $scope.sizeClass = '';
-            $scope.style['font-size'] = size;
-          } else {
-            $scope.sizeClass = 'fa-lg';
-            $scope.style['font-size'] = '';
-          }
-        });
-
-        attrs.$observe('spin', function(spin) {
-          if (spin === 'true') {
-            $scope.spin = 'spin';
-          } else {
-            $scope.spin = '';
-          }
-        });
-
-        attrs.$observe('fixedWidth', function(fixedWidth) {
-          if (fixedWidth === 'false') {
-            $scope.fixedWidth = '';
-          } else {
-            $scope.fixedWidth = 'fw';
-          }
-        });
+        var builded = buildClassAndStyle(attrs);
+        element.css(builded.style);
+        element.addClass(builded['class']);
       }
     };
   });
@@ -8558,6 +8595,23 @@ limitations under the License.
         };
 
         function getPlatformString() {
+
+          if (navigator.userAgent.match(/Android/i)) {
+            return 'android';
+          }
+
+          if ((navigator.userAgent.match(/BlackBerry/i)) || (navigator.userAgent.match(/RIM Tablet OS/i)) || (navigator.userAgent.match(/BB10/i))) {
+            return 'blackberry';
+          }
+
+          if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+            return 'ios';
+          }
+
+          if (navigator.userAgent.match(/IEMobile/i)) {
+            return 'windows';
+          }
+
           // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
           var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
           if (isOpera) {
@@ -8583,22 +8637,6 @@ limitations under the License.
           var isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
           if (isIE) {
             return 'ie';
-          }
-
-          if (navigator.userAgent.match(/Android/i)) {
-            return 'android';
-          }
-
-          if ((navigator.userAgent.match(/BlackBerry/i)) || (navigator.userAgent.match(/RIM Tablet OS/i)) || (navigator.userAgent.match(/BB10/i))) {
-            return 'blackberry';
-          }
-
-          if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-            return 'ios';
-          }
-
-          if (navigator.userAgent.match(/IEMobile/i)) {
-            return 'windows';
           }
 
           return 'unknown';
@@ -9358,20 +9396,23 @@ limitations under the License.
  * @name ons-sliding-menu
  * @description
  * Facebook/Path like sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.
+ *
  * @param behind-page The url of the page to be set to the behind layer.
  * @param above-page The url of the page to be set to the above layer
  * @param swipable Wether to enable swipe interaction
  * @param swipe-target-width The width of swipable area calculated from the left (in pixel). Eg. Use this to enable swipe only when the finger touch on the left edge.
  * @param max-slide-distance How far the above page will slide open. Can specify both in px and %. eg. 90%, 200px
  * @param var Variable name to refer this sliding menu.
- * @property setMainPage(pageUrl, [options]) Show the page specified in pageUrl in the main contents pane.
- * @property setMenuPage(pageUrl, [options]) Show the page specified in pageUrl in the side menu pane.
- * @property [Deprecated] setAbovePage(pageUrl) Show the page specified in pageUrl in the above layer.
- * @property [Deprecated] setBehindPage(pageUrl) Show the page specified in pageUrl in the behind layer.
+ *
+ * @property setMainPage(pageUrl,[options]) Show the page specified in pageUrl in the main contents pane.
+ * @property setMenuPage(pageUrl,[options]) Show the page specified in pageUrl in the side menu pane.
+ * @property setAbovePage(pageUrl) [Deprecated]Show the page specified in pageUrl in the above layer.
+ * @property setBehindPage(pageUrl) [Deprecated]Show the page specified in pageUrl in the behind layer.
  * @property openMenu() Slide the above layer to reveal the layer behind.
  * @property closeMenu() Slide the above layer to hide the layer behind.
  * @property toggleMenu() Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.
- * @property on(eventName, listener) Added an event listener. Preset events are 'preopen', 'preclose', 'postopen' and 'postclose'.
+ * @property on(eventName,listener) Added an event listener. Preset events are 'preopen', 'preclose', 'postopen' and 'postclose'.
+ * @property isMenuOpend()
  * @codepen IDvFJ
  * @guide using-sliding-menu Using sliding menu
  */
@@ -9994,7 +10035,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  var registerer = {
+  var util = {
     init: function() {
       var self = this;
     },
@@ -10021,7 +10062,7 @@ limitations under the License.
   };
 
   window.document.addEventListener('deviceready', function() {
-    registerer._deviceready = true;
+    util._deviceready = true;
   }, false);
 
   /**
@@ -10039,17 +10080,34 @@ limitations under the License.
         this._stack = [];
 
         this._listener = function() {
-          return this._getTopAvailableListener().apply(null, arguments);
+          return this.dispatchHandler.apply(this, arguments);
         }.bind(this);
 
-        this.enable();
+        util.addListener(this._listener);
       },
 
-      _refreshListener: function() {
-        if (this._enabled && this._getTopAvailableListener()) {
-          registerer.addListener(this._listener);
-        } else {
-          registerer.removeListener(this._listener);
+      /**
+       * Call handler's listener on backbutton event.
+       */
+      dispatchHandler: function(event) {
+        var availableListeners = this._stack.filter(function(handler) {
+          return handler._enabled;
+        }).map(function(handler) {
+          return handler.listener;
+        });
+
+        event.preventDefault();
+
+        availableListeners.reverse();
+
+        for (var i = 0; i < availableListeners.length; i++) {
+          try {
+            if (availableListeners[i].apply(null, arguments)) {
+              return;
+            }
+          } catch (e) {
+            console.log(e);
+          }
         }
       },
 
@@ -10064,7 +10122,6 @@ limitations under the License.
           listener: listener,
           setEnabled: function(enabled) {
             this._enabled = enabled;
-            self._refreshListener();
           },
           remove: function() {
             self.remove(this.listener);
@@ -10089,7 +10146,7 @@ limitations under the License.
       enable: function() {
         if (!this._enabled) {
           this._enabled = true;
-          this._refreshListener();
+          util.addListener(this._listener);
         }
       },
 
@@ -10099,19 +10156,36 @@ limitations under the License.
       disable: function() {
         if (this._enabled) {
           this._enabled = false;
-          this._refreshListener();
+          util.removeListener(this._listener);
         }
       },
 
       /**
-       * @param {Function} listener
+       * @return {Boolean}
+       */
+      getEnabled: function() {
+        return this._enabled;
+      },
+
+      /**
+       * @param {Boolean} enabled
+       */
+      setEnabled: function(enabled) {
+        if (enabled) {
+          this.enable();
+        } else {
+          this.disable();
+        }
+      },
+
+      /**
+       * @param {Function} listener Callback on back button. If this callback returns true, dispatching is stopped.
        * @reutrn {Object} handler object
        */
       push: function(listener) {
         var handler = this._createStackObject(listener);
 
         this._stack.push(handler);
-        this._refreshListener();
 
         return handler;
       },
@@ -10131,11 +10205,10 @@ limitations under the License.
         if (index !== -1) {
           this._stack.splice(index, 1);
         }
-        this._refreshListener();
       }
     });
 
-    return new BackButtonHandlerStack();
+    return BackButtonHandlerStack;
   });
 })();
 
@@ -10284,7 +10357,30 @@ limitations under the License.
 
       aliasStack: aliasStack,
 
-      backButtonHandlerStack: BackButtonHandlerStack,
+      _defaultBackButtonListener: function() {
+        navigator.app.exitApp();
+        return true;
+      },
+
+      backButtonHandlerStack: (function() {
+        var stack = new BackButtonHandlerStack();
+
+        stack.push(function() {
+          return $onsen._defaultBackButtonListener();
+        });
+
+        return stack;
+      })(),
+
+      /**
+       * @param {Function}
+       */
+      setDefaultBackButtonListener: function(listener) {
+        if (!(listener instanceof Function)) {
+          throw new Error('listener argument must be function.');
+        }
+        this._defaultBackButtonListener = listener;
+      },
 
       /**
        * Cache for predefined template.
