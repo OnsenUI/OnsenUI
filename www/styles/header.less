@@ -2,38 +2,63 @@
   width: 71px !important;
 }
 
-
 div#content-container > header {
   position: absolute;
   top: 0px;
   left: 0px;
   right: 0px;
-  height: 82px;
+  height: 84px;
   background-color: white;
-  padding: 16px 23px 0 23px;
+  padding: 0px 40px 0 40px;
   box-sizing: border-box;
   min-width: 1200px;
 
   // header left
   > div:first-child {
-    float: left;
-    width: 500px;
-
-    > .logo-mark {
-      float: left;
-      margin: 8px 12px 0 0;
-    }
-
     > h1 {
-      margin: -4px 0 0 0;
+      margin: 22px 0 0 0;
       padding: 0;
-      height: 26px;
     }
+  }
 
-    > p {
-      margin: 4px 0 0 0;
-      padding: 0;
-      font-size: 13px;
+  .gnav {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    height: 84px;
+    line-height: 84px;
+    margin: 0;
+    padding: 0;
+    
+    > li {
+      color: #a6a6a6;
+      display: inline-block;
+      font-size: 20px;
+      height: 84px;
+      margin: 0 4px;
+      padding: 0 15px;
+      box-sizing: border-box;
+
+      &.current {
+        border-bottom: 2px solid #ff3f2b;
+
+        a {
+          color: #ff3f2b;
+          &:hover, &:visited, &:active {
+            color: #ff3f2b;
+          }
+        }
+      }
+      a {
+        &:link, &:visited, &:active {
+          color: #666;
+          text-decoration: none;
+        }
+        &:hover {
+          color: #ff3f2b;
+          text-decoration: underline;
+        }
+      }
     }
   }
 
