@@ -9,10 +9,10 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'pascalprecht.translate
 app.config(function($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: 'views/overview.html'
-    })
-    .when('/components', {
       templateUrl: 'views/components.html'
+    })
+    .when('/patterns', {
+      templateUrl: 'views/overview.html'
     })
     .otherwise({
       redirectTo: '/'
@@ -60,7 +60,7 @@ app.config(function($translateProvider) {
     '<a href="https://github.com/OnsenUI/onsen-css-components/wiki/tform.twitter.com/widgets/tweet_button.html?text=Checkout Onsen CSS Component! Beautiful CSS for your App"Requesting-pattern-or-component" target="_blank">Request</a> new components': '新しいパターンやコンポーネントを<a href="https://github.com/OnsenUI/onsen-css-components/wiki/Requesting-pattern-or-component" target="_blank">リクエスト</a>',
     'Guide': 'ガイド',
     'Patterns': 'パターン',
-    'Components': 'コンポーネント',
+    'CSS Components': 'CSSコンポーネント',
     'Keep Me Updated': 'Onsen UI ニュースレター',
 
     T_COMPONENT_SNIPPET: 'コンポーネント',
@@ -75,7 +75,7 @@ app.config(function($translateProvider) {
     T_SHARE_DESC: 'カスタマイズした定義を、世界中のユーザーに共有しよう。',
     T_DOWNLOAD_TITLE: 'ダウンロードありがとうございます。',
     T_DOWNLOADING: '数秒後ダウンロードが自動的に開始されます...<br>自動的に開始されない場合は、こちらを<a id="download-link" target="_blank" class="click-to-download-btn" href="">クリック</a>して下さい。',
-    T_DOWNLOAD_DESC: '是非、あなたのメールアドレスを登録して下さい。本サイトが正式リリースされた際に連絡いたします！',
+    T_DOWNLOAD_DESC: '是非、あなたのメールアドレスを登録して下さい。',
     T_WELCOME_TITLE: 'Onsen CSS Componentsへようこそ！',
     T_WELCOME_DESC: '<p>こんにちは！本サイトはHTML5でモバイルアプリを開発するためのパターン集を提供しています。</p></p>クイックツアーを表示しますか？</p>',
     T_NO_THANKS: 'やめておく',
