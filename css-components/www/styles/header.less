@@ -37,56 +37,8 @@ div#content-container > header {
     }
   }
 
-  // buttons
-  > div:nth-child(2) {
-    position: absolute;
-    top: 0px;
-    left: 500px;
-    line-height: 82px;
-    display: inline-block;
-
-    > button {
-      appearance: none;
-      -webkit-appearance: none;
-      border-radius: 3px;
-      background-color: #f3f3f3;
-      color: #333;
-      font-size: 18px;
-      font-weight: 200;
-      line-height: 44px;
-      height: 44px;
-      padding: 0 18px;
-      border: none;
-      cursor: pointer;
-
-      font-family: 'Helvetica Neue', Helvetica;
-      -webkit-font-smoothing: antialiased;
-
-      &.download-button {
-        background-color: #ff1a33;
-        color: white;
-
-        > img {
-          vertical-align: middle;
-        }
-      }
-
-      &:active, &:focus {
-        outline: none;
-      }
-
-      &:hover {
-        opacity: 0.7;
-      }
-
-      &:active {
-        opacity: 1;
-      }
-    }
-  }
-
   // right menu
-  > div:nth-child(3) {
+  > div:nth-child(2) {
     position: absolute;
     display: inline-block;
     right: 0px;
@@ -95,5 +47,6 @@ div#content-container > header {
     text-align: right;
     line-height: 82px;
     padding-right: 16px;
+    width: 600px;
   }
 }

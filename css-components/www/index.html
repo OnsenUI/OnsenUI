@@ -34,14 +34,6 @@
         </div>
 
         <div>
-          <button class="download-button" tooltip="Download Generated Package" ng-click="thankyouDialog.show()"><img src="images/download-icon.png" alt="" >&nbsp;<span translate>Download</span></button>
-        </div>
-
-        <div>
-          <a ng-click="welcomeDialog.show()" translate>Guide</a>
-          &nbsp;&nbsp;/&nbsp;&nbsp;
-          <span><a href="https://github.com/OnsenUI/onsen-css-components/wiki/Requesting-pattern-or-component" target="_blank">Request</a> new components</span>
-
           <!-- social button -->
           <div style="display: inline-block; vertical-align: middle;">
             <!-- twitter -->
@@ -74,12 +66,16 @@
 
       </header>
 
+      <!-- customizer panel -->
       <div id="customizer-panel">
         <header>
           <h2 translate>Customizer</h2>
         </header>
 
         <section>
+          <div class="customizer-section">
+            <a class="get-css-button" ng-click="thankyouDialog.show()"><img src="images/download-icon.png" alt=""  style="margin-bottom: -2px;"> Download CSS</a>
+          </div>
           <div class="customizer-section">
             <h3 translate>Predefined Color Scheme</h3>
             <ul class="color-scheme-switcher">
@@ -114,6 +110,7 @@
           </div>
         </section>
       </div>
+      <!-- /customizer panel -->
 
       <div id="main-panel">
         <ul id="main-panel-tabbar">
