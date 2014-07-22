@@ -29505,6 +29505,7 @@ limitations under the License.
               content.addClass(modifierTemplater('page--*__content'));
               if (element.attr('style')) {
                 content.attr('style', element.attr('style'));
+                element.removeAttr('style');
               }
               element.append(content);
 

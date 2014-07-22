@@ -49,7 +49,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  background-color: #efeff4;
+  background-color: #fff;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -63,7 +63,7 @@ h6 {
   display: none;
 }
 .page__content {
-  background-color: #efeff4;
+  background-color: #fff;
   position: absolute;
   top: 0px;
   left: 0px;

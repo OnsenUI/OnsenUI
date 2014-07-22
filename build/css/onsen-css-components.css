@@ -49,7 +49,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  background-color: #efeff4;
+  background-color: #fff;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -63,7 +63,7 @@ h6 {
   display: none;
 }
 .page__content {
-  background-color: #efeff4;
+  background-color: #fff;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -644,18 +644,20 @@ h6 {
 /* topdoc
   name: Light Button
   class: button--light
+  use: Button
   markup:
     <button class="button button--light">Button</button>
     <button class="button button--light" disabled>Button</button>
 */
 .button--light {
   background-color: transparent;
-  color: rgba(0,0,0,0.3);
-  border: 1px solid rgba(0,0,0,0.3);
+  color: rgba(0,0,0,0.4);
+  border: 1px solid rgba(0,0,0,0.2);
 }
 .button--light:active {
   background-color: rgba(0,0,0,0.05);
-  color: rgba(0,0,0,0.3);
+  color: rgba(0,0,0,0.4);
+  border: 1px solid rgba(0,0,0,0.2);
   opacity: 1;
 }
 /* topdoc

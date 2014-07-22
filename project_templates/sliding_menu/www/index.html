@@ -54,13 +54,14 @@
         <div class="center">Page 1</div>
       </ons-toolbar>
 
-      <div class="content-padded">
-        <ons-button modifier="light" ng-click="ons.slidingMenu.toggleMenu()">
-          Toggle Menu
-        </ons-button>
-
-        <p>Click "Toggle Menu" to close/open menu, You can also swipe the page left/right.</p>
-      </div>
+      <ons-row style="margin-top: 100px;">
+        <ons-col align="center">
+          <ons-button modifier="light" ng-click="ons.slidingMenu.toggleMenu()">
+            Toggle Menu
+          </ons-button>
+          <p style="color: #999">Click "Toggle Menu" to close/open menu, You can also swipe the page left/right.</p>
+        </ons-col>
+      </ons-row>
     </ons-page>
   </script>
 
@@ -70,11 +71,14 @@
         <div class="center">Page 2</div>
       </ons-toolbar>
 
-      <div class="content-padded">
-        <ons-button modifier="light" ng-click="ons.slidingMenu.toggleMenu()">
-          Toggle Menu
-        </ons-button>
-      </div>
+
+      <ons-row style="margin-top: 100px;">
+        <ons-col align="center">
+          <ons-button modifier="light" ng-click="ons.slidingMenu.toggleMenu()">
+            Toggle Menu
+          </ons-button>
+        </ons-col>
+      </ons-row>
 
     </ons-page>
   </script>

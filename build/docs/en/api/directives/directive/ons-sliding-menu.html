@@ -46,7 +46,8 @@
             <span class="anchor" id="ons-sliding-menu-var"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">var</td>
-              <td>Variable name to refer this sliding menu.</td>
+              <td>Variable name to refer this sliding menu.
+</td>
             </tr>
             
           </tbody>
@@ -61,28 +62,28 @@
       <table>
         <tbody>
           
-          <span class="anchor" id="setMainPage(pageUrl,-setMainPage(pageUrl,"></span>
+          <span class="anchor" id="setMainPage(pageUrl,[options])-setMainPage(pageUrl,[options])"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>setMainPage(pageUrl,</code></td>
-            <td>[options]) Show the page specified in pageUrl in the main contents pane.</td>
+            <td><code>setMainPage(pageUrl,[options])</code></td>
+            <td>Show the page specified in pageUrl in the main contents pane.</td>
           </tr>
           
-          <span class="anchor" id="setMenuPage(pageUrl,-setMenuPage(pageUrl,"></span>
+          <span class="anchor" id="setMenuPage(pageUrl,[options])-setMenuPage(pageUrl,[options])"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>setMenuPage(pageUrl,</code></td>
-            <td>[options]) Show the page specified in pageUrl in the side menu pane.</td>
+            <td><code>setMenuPage(pageUrl,[options])</code></td>
+            <td>Show the page specified in pageUrl in the side menu pane.</td>
           </tr>
           
-          <span class="anchor" id="Deprecated-Deprecated"></span>
+          <span class="anchor" id="setAbovePage(pageUrl)-setAbovePage(pageUrl)"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>Deprecated</code></td>
-            <td>setAbovePage(pageUrl) Show the page specified in pageUrl in the above layer.</td>
+            <td><code>setAbovePage(pageUrl)</code></td>
+            <td>[Deprecated]Show the page specified in pageUrl in the above layer.</td>
           </tr>
           
-          <span class="anchor" id="Deprecated-Deprecated"></span>
+          <span class="anchor" id="setBehindPage(pageUrl)-setBehindPage(pageUrl)"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>Deprecated</code></td>
-            <td>setBehindPage(pageUrl) Show the page specified in pageUrl in the behind layer.</td>
+            <td><code>setBehindPage(pageUrl)</code></td>
+            <td>[Deprecated]Show the page specified in pageUrl in the behind layer.</td>
           </tr>
           
           <span class="anchor" id="openMenu()-openMenu()"></span>
@@ -103,10 +104,16 @@
             <td>Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.</td>
           </tr>
           
-          <span class="anchor" id="on(eventName,-on(eventName,"></span>
+          <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>on(eventName,</code></td>
-            <td>listener) Added an event listener. Preset events are &#39;preopen&#39;, &#39;preclose&#39;, &#39;postopen&#39; and &#39;postclose&#39;.</td>
+            <td><code>on(eventName,listener)</code></td>
+            <td>Added an event listener. Preset events are &#39;preopen&#39;, &#39;preclose&#39;, &#39;postopen&#39; and &#39;postclose&#39;.</td>
+          </tr>
+          
+          <span class="anchor" id="isMenuOpend()-isMenuOpend()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>isMenuOpend()</code></td>
+            <td></td>
           </tr>
           
         </tbody>

@@ -49,9 +49,13 @@
           <div class="center">Page 1</div>
         </ons-toolbar>
 
-        <ons-button ng-click="ons.navigator.pushPage('page4.html')">
-          Push New Page
-        </ons-button>
+        <ons-row style="margin-top: 100px;">
+          <ons-col align="center">
+            <ons-button modifier="light" ng-click="ons.navigator.pushPage('page4.html')">
+              Push New Page
+            </ons-button>
+          </ons-col>
+        </ons-row>
       </ons-page>
     </ons-navigator>
   </script>
@@ -80,7 +84,11 @@
         <div class="center">New Page</div>
       </ons-toolbar>
 
-      <ons-button ng-click="ons.navigator.popPage();">Pop Page</ons-button>
+      <ons-row style="margin-top: 100px;">
+        <ons-col align="center">
+          <ons-button modifier="light" ng-click="ons.navigator.popPage();">Pop Page</ons-button>
+        </ons-col>
+      </ons-row>
     </ons-page>
   </script>
  
