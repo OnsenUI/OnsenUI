@@ -30,6 +30,20 @@ select:active,
 select:focus {
   outline: none;
 }
+h1 {
+  font-size: 36px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4,
+h5,
+h6 {
+  font-size: 18px;
+}
 .page {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -58,6 +72,9 @@ select:focus {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+.content-padded {
+  padding: 8px;
 }
 /* topdoc
   name: Switch
@@ -578,9 +595,9 @@ select:focus {
   overflow: hidden;
   height: auto;
   text-decoration: none;
-  padding: 4px 20px;
+  padding: 4px 10px;
   font-size: 17px;
-  line-height: 36px;
+  line-height: 32px;
   letter-spacing: 0;
   color: #fff;
   text-shadow: 0 1px none;
@@ -589,8 +606,8 @@ select:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
   -webkit-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
@@ -623,6 +640,23 @@ select:focus {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
+}
+/* topdoc
+  name: Light Button
+  class: button--light
+  markup:
+    <button class="button button--light">Button</button>
+    <button class="button button--light" disabled>Button</button>
+*/
+.button--light {
+  background-color: transparent;
+  color: rgba(0,0,0,0.3);
+  border: 1px solid rgba(0,0,0,0.3);
+}
+.button--light:active {
+  background-color: rgba(0,0,0,0.05);
+  color: rgba(0,0,0,0.3);
+  opacity: 1;
 }
 /* topdoc
   name: Quiet Button
@@ -661,9 +695,9 @@ select:focus {
   overflow: hidden;
   height: auto;
   text-decoration: none;
-  padding: 4px 20px;
+  padding: 4px 10px;
   font-size: 17px;
-  line-height: 36px;
+  line-height: 32px;
   letter-spacing: 0;
   color: #fff;
   text-shadow: 0 1px none;
@@ -672,8 +706,8 @@ select:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
   -webkit-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
@@ -753,9 +787,9 @@ select:focus {
   overflow: hidden;
   height: auto;
   text-decoration: none;
-  padding: 4px 20px;
+  padding: 4px 10px;
   font-size: 17px;
-  line-height: 36px;
+  line-height: 32px;
   letter-spacing: 0;
   color: #fff;
   text-shadow: 0 1px none;
@@ -764,8 +798,8 @@ select:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
   -webkit-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
@@ -774,7 +808,7 @@ select:focus {
   font-size: 17px;
   font-weight: 500;
   line-height: 36px;
-  padding: 4px 20px;
+  padding: 4px 12px;
   display: block;
   width: 100%;
 }
@@ -845,9 +879,9 @@ select:focus {
   overflow: hidden;
   height: auto;
   text-decoration: none;
-  padding: 4px 20px;
+  padding: 4px 10px;
   font-size: 17px;
-  line-height: 36px;
+  line-height: 32px;
   letter-spacing: 0;
   color: #fff;
   text-shadow: 0 1px none;
@@ -856,8 +890,8 @@ select:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
   -webkit-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
@@ -866,7 +900,7 @@ select:focus {
   font-size: 17px;
   font-weight: 500;
   line-height: 36px;
-  padding: 4px 20px;
+  padding: 4px 12px;
   display: block;
   width: 100%;
   background: transparent;
@@ -938,9 +972,9 @@ select:focus {
   overflow: hidden;
   height: auto;
   text-decoration: none;
-  padding: 4px 20px;
+  padding: 4px 10px;
   font-size: 17px;
-  line-height: 36px;
+  line-height: 32px;
   letter-spacing: 0;
   color: #fff;
   text-shadow: 0 1px none;
@@ -949,8 +983,8 @@ select:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
   -webkit-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
@@ -1026,9 +1060,9 @@ select:focus {
   overflow: hidden;
   height: auto;
   text-decoration: none;
-  padding: 4px 20px;
+  padding: 4px 10px;
   font-size: 17px;
-  line-height: 36px;
+  line-height: 32px;
   letter-spacing: 0;
   color: #fff;
   text-shadow: 0 1px none;
@@ -1037,8 +1071,8 @@ select:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
   -webkit-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
@@ -1053,7 +1087,7 @@ select:focus {
   font-size: 17px;
   font-weight: 500;
   line-height: 36px;
-  padding: 4px 20px;
+  padding: 4px 12px;
   width: 100%;
   display: block;
 }

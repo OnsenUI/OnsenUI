@@ -20,7 +20,64 @@
 
 <body>    
   
-  <ons-sliding-menu menu-page="menu.html" main-page="page1.html"></ons-sliding-menu>
+  <ons-sliding-menu
+    menu-page="menu.html" main-page="page1.html" side="left"
+    type="reveal" max-slide-distance="300px" swipable="true">
+  </ons-sliding-menu>
+
+  <script type="text/ons-template" id="menu.html">
+    <ons-page style="background-color: white">
+
+      <ons-list>
+        <ons-list-item
+          modifier="chevron"
+          ng-click="ons.slidingMenu.setMainPage('page1.html', {closeMenu: true})">
+
+          <i class="fa fa-home fa-lg" style="color: #666"></i> &nbsp; Page 1
+        </ons-list-item>
+
+        <ons-list-item 
+          modifier="chevron"
+          ng-click="ons.slidingMenu.setMainPage('page2.html', {closeMenu: true})">
+
+          <i class="fa fa-gear fa-lg" style="color: #666"></i> &nbsp; Page 2
+        </ons-list-item>
+      </ons-list>
+
+    </ons-page>
+
+  </script>
+
+  <script type="text/ons-template" id="page1.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Page 1</div>
+      </ons-toolbar>
+
+      <div class="content-padded">
+        <ons-button modifier="light" ng-click="ons.slidingMenu.toggleMenu()">
+          Toggle Menu
+        </ons-button>
+
+        <p>Click "Toggle Menu" to close/open menu, You can also swipe the page left/right.</p>
+      </div>
+    </ons-page>
+  </script>
+
+  <script type="text/ons-template" id="page2.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Page 2</div>
+      </ons-toolbar>
+
+      <div class="content-padded">
+        <ons-button modifier="light" ng-click="ons.slidingMenu.toggleMenu()">
+          Toggle Menu
+        </ons-button>
+      </div>
+
+    </ons-page>
+  </script>
  
 </body>
 </html>
