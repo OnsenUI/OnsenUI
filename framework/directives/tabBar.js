@@ -7,7 +7,7 @@
  * @property on(eventName,listener) Added an event listener. Preset events are 'prechange' and 'postchange'.
  * @description
  * Used with tabbar-item to manage pages using tabs.
- * @codepen kxgys
+ * @codepen pGuDL
  * @guide using-tab-bar Using tab bar
  * @seealso ons-tabbar-item ons-tabbar-item component
  */
