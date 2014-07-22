@@ -24,6 +24,10 @@ ons-split-view, ons-sliding-menu, ons-tabbar {
   display: block;
 }
 
+ons-icon {
+
+}
+
 ons-navigator {
   position: absolute;
   top: 0;

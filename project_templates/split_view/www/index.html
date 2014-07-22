@@ -27,6 +27,73 @@
     main-page-width="70%" 
     collapse="portrait">
   </ons-split-view>
+
+  <script type="text/ons-template" id="page1.html">
+    <ons-page class="center">
+      <ons-toolbar>
+        <div class="center">Page 1</div>
+      </ons-toolbar>
+
+      <div class="content-padded" style="text-align: center">
+
+        <p>Rotate the device to landscape/portrait see the views split/collapse.</p>
+        <p>Or resize the window so that the width is larger than the height (landscape)/smaller than the height (portrait).</p>	
+
+        <ons-row>
+          <ons-col></ons-col>
+
+          <ons-col width="90px">
+            <ons-icon icon="mobile" size="5x"></ons-icon>
+          </ons-col>
+          <ons-col width="90px">
+            <ons-icon icon="arrows-h" size="2x"></ons-icon>
+          </ons-col>
+          <ons-col width="90px">
+            <ons-icon icon="mobile" size="5x" rotate="90"></ons-icon>
+          </ons-col>
+
+          <ons-col></ons-col>
+        </ons-row>
+
+        <p>When in portrait, swipe right to reveal the secondary page.</p>
+
+        <img src="images/ico_swipe_right_s.png" alt="">
+      </div>
+    </ons-page>
+  </script>
+
+  <script type="text/ons-template" id="page2.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Page 2</div>
+      </ons-toolbar>
+    </ons-page>
+  </script>
+
+  <script type="text/ons-template" id="secondary.html">
+    <ons-page style="background-color: white; border-right: 1px solid #ddd;">
+
+      <ons-list>
+
+        <ons-list-item
+          modifier="chevron"
+          ng-click="ons.splitView.toggle();
+            ons.splitView.setMainPage('page1.html');">
+          <i class="fa fa-home fa-lg" style="color: #666"></i>
+          &nbsp; Page 1
+        </ons-list-item>
+
+        <ons-list-item 
+          modifier="chevron"
+          ng-click="ons.splitView.toggle(); ons.splitView.setMainPage('page2.html');">
+          <i class="fa fa-gear fa-lg" style="color: #666"></i>
+          &nbsp; Page 2
+        </ons-list-item>
+
+      </ons-list>
+
+    </ons-page>
+  </script>
  
 </body>
 </html>
