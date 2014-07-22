@@ -35,11 +35,12 @@ var-box-shadow--cta--down = none
 var-background-color--cta--down = var-background-color--cta
 var-color--cta = white
 var-color--cta--down = white
-var-padding--button--large = 4px 20px
-var-padding--button = 4px 20px
-var-line-height--button = 36px
+var-padding--button--large = 4px 12px
+var-padding--button = 4px 10px
+var-line-height--button = 32px
 var-line-height--button--large = 36px
 var-active-button-opacity = 0.2
+var-border-radius__button = 3px
 
 /*! topdoc
   name: Button
@@ -81,7 +82,7 @@ button()
   background-color var-background-color__button
   box-shadow var-box-shadow
   border none
-  border-radius var-border-radius
+  border-radius var-border-radius__button
   transition background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear
   font-weight var-font-weight
 
@@ -110,6 +111,23 @@ button--active()
 
 .button:disabled
   button--disabled()
+
+/*! topdoc
+  name: Light Button
+  class: button--light
+  markup:
+    <button class="button button--light">Button</button>
+    <button class="button button--light" disabled>Button</button>
+*/
+.button--light
+  background-color transparent
+  color rgba(0, 0, 0, 0.3)
+  border 1px solid rgba(0, 0, 0, 0.3)
+
+.button--light:active
+  background-color rgba(0, 0, 0, 0.05)
+  color rgba(0, 0, 0, 0.3)
+  opacity 1
 
 /*! topdoc
   name: Quiet Button
