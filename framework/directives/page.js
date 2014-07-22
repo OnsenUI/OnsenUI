@@ -5,7 +5,7 @@
  * @param var Variable name to refer this page.
  * @param modifier Modifier name.
  * @description
- * Should be used as root component of each page. The content inside page component is not scrollable. If you need scroll behavior, you can put inside this component.
+ * Should be used as root component of each page. The content inside page component is scrollable. If you need scroll behavior, you can put inside this component.
  */
 (function() {
   'use strict';
