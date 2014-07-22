@@ -10,7 +10,7 @@ angular.module('app').factory('GeneratedCss', function($http, $rootScope, CSSMod
   var VAR_REGEX = /\$[-a-zA-Z0-9]+/g;
 
   var generatedCss = {
-    css: undefined, 
+    css: undefined,
     templateCss: undefined,
 
     setColors: function(colors) {
@@ -79,11 +79,13 @@ angular.module('app').factory('GeneratedCss', function($http, $rootScope, CSSMod
      * @return {Object}
      */
     buildVarNameDict: function(css) {
-      var names = css.match(VAR_REGEX).map(function(name) {
+      var matches = css.match(VAR_REGEX) || [];
+      var result = {};
+
+      var names = matches.map(function(name) {
         return name.substring(1, name.length);
       });
 
-      var result = {};
       for (var i = 0; i < names.length; i++) {
         result[names[i]] = names[i];
       }
