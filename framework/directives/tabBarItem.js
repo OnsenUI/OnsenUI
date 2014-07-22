@@ -9,7 +9,7 @@
  * @param active Set wether this tab should be active or not. Valid values are [true/false]
  * @description
  * Represents a tab inside tabbar. Each tabbar-item represents a page
- * @codepen kxgys
+ * @codepen pGuDL
  * @guide using-tab-bar Using tab bar
  * @seealso ons-tabbar ons-tabbar component
  */
