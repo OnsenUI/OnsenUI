@@ -90,12 +90,9 @@ gulp.task('clean', function() {
     '.tmp',
     'build',
     'app/lib/onsen/',
-    'project_templates/minimum/app/lib/onsen/',
     'project_templates/sliding_menu/app/lib/onsen/',
-    'project_templates/sliding_menu_navigator/app/lib/onsen/',
     'project_templates/tab_bar/app/lib/onsen/',
     'project_templates/split_view/app/lib/onsen/',
-    'project_templates/split_view_navigator/app/lib/onsen/',
     'project_templates/master_detail/app/lib/onsen/'
   ], {read: false}).pipe(clean());
 });
@@ -190,12 +187,9 @@ gulp.task('prepare-project-templates', function() {
   // projects template
   return gulp.src(['build/**', '!build/docs', '!build/docs/**'])
     .pipe(gulp.dest('app/lib/onsen'))
-    .pipe(gulp.dest('project_templates/minimum/www/lib/onsen/'))
     .pipe(gulp.dest('project_templates/sliding_menu/www/lib/onsen/'))
-    .pipe(gulp.dest('project_templates/sliding_menu_navigator/www/lib/onsen/'))
     .pipe(gulp.dest('project_templates/tab_bar/www/lib/onsen/'))
     .pipe(gulp.dest('project_templates/split_view/www/lib/onsen/'))
-    .pipe(gulp.dest('project_templates/split_view_navigator/www/lib/onsen/'))
     .pipe(gulp.dest('project_templates/master_detail/www/lib/onsen/'));
 });
 
@@ -204,13 +198,10 @@ gulp.task('prepare-project-templates', function() {
 ////////////////////////////////////////
 gulp.task('compress-project-templates', function(done) {
   var names = [
-    'minimum',
     'master_detail',
     'sliding_menu',
-    'sliding_menu_navigator',
     'tab_bar',
-    'split_view',
-    'split_view_navigator'
+    'split_view'
   ];
 
   var streams = names.map(function(name) {
@@ -220,17 +211,10 @@ gulp.task('compress-project-templates', function(done) {
     ];
 
     var stream = gulp.src(src, {cwd : __dirname + '/project_templates', dot: true})
-      .pipe(zip(name + '.zip'))
+      .pipe(zip('onsen_' + name + '.zip'))
       .pipe(gulp.dest(__dirname + '/project_templates'));
 
     return stream;
-  });
-
-  merge.apply(null, streams).on('end', function() {
-    return gulp.src(__dirname + '/project_templates/minimum.zip')
-      .pipe(rename('onsen_ui.zip'))
-      .pipe(gulp.dest('./project_templates/'))
-      .on('end', done);
   });
 });
 
