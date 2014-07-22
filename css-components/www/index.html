@@ -77,7 +77,7 @@
           <div class="customizer-section" ng-repeat="group in colorCustomizer.itemGroups">
             <h3>{{group.name|translate}}</h3>
             <ul class="customize-item-list">
-              <li ng-repeat="item in group.items">{{item.displayName|translate}}
+              <li ng-repeat="item in group.items" ng-style="{opacity: colorCustomizer.shouldHighlight(item.name) ? 1 : 0.3}">{{item.displayName|translate}}
                 <div class="color-picker-container">
                   <div class="color-picker" data-variable-name="{{item.name}}" style="background-color: {{item.value}}" ng-click="colorPicker.show($event);"></div>
                 </div>
