@@ -1,3 +1,0 @@
-[submodule "framework/css/topcoat"]
-	path = framework/css/topcoat
-	url = https://github.com/monaca/topcoat.git
