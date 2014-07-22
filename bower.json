@@ -11,7 +11,7 @@
     "build/js/onsenui.js"
   ],
   "styles": [
-    "build/css/onsenui.css"
+    "build/css/onsenui.css",
     "build/css/onsen-css-components.css"
   ],
   "keywords": [
