@@ -32,7 +32,7 @@
           throw new Error('This element can\'t accept ng-controller directive.');
         }
 
-        var effectButton = element;
+        var effectButton = element.children();
         var TYPE_PREFIX = 'button--';
         scope.item = {};
 
