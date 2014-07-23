@@ -14,7 +14,7 @@
  * @property [Deprecated] open() Reveal the secondary page if the view is in collapse mode
  * @property [Deprecated] close() hide the secondary page if the view is in collapse mode
  * @property [Deprecated] toggle() Reveal the secondary page if it is currently hidden, otherwies, reveal it
- * @codepen nKqfv
+ * @codepen nKqfv {wide}
  * @guide multi-screen-support Multi screen support
  */
 (function() {

@@ -27,5 +27,13 @@ module.exports = [
       };
     }
   },
-  { name: 'codepen' }
+  {
+    name: 'codepen',
+    transforms: function(doc, tag, value) {
+      return {
+        id: value.split(" ", 2)[0],
+        isWide: !!value.match(/\{wide}/)
+      };
+    }
+  }
 ];

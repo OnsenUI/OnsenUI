@@ -51,8 +51,12 @@
     {% if doc.codepen %}
     <h4>Sample</h4>
 
+    {% if doc.codepen.isWide %}
     <div style="height: 480px;">
-      <p data-height="480" data-theme-id="7186" data-slug-hash="{$ doc.codepen $}" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/{$ doc.codepen $}/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    {% else %}
+    <div style="height: 480px; width: 320px;">
+    {% endif %}
+      <p data-height="480" data-theme-id="7186" data-slug-hash="{$ doc.codepen.id $}" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/{$ doc.codepen.id $}/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
     </div>
     {% endif %}
 
