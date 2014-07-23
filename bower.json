@@ -32,15 +32,14 @@
     "**/.*",
     "app",
     "demo",
+    "docs",
     "package.json",
-    "themes",
+    "css-components",
     "node_modules",
     "config",
     "framework",
     "project_templates",
     "test",
-    "Gruntfile.js",
-    "plugin_info.json",
-    "build/js/angular"
+    "gulpfile.js"
   ]
 }
