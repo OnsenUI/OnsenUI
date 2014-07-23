@@ -225,9 +225,9 @@ gulp.task('build', function() {
   return runSequence(
     'clean',
     'prepare',
+    'build-doc',
     'prepare-project-templates',
-    'compress-project-templates',
-    'build-doc'
+    'compress-project-templates'
   );
 });
 

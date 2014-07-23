@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.0 - 2014-07-22 */
+/*! onsenui - v1.1.0 - 2014-07-23 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -29426,7 +29426,7 @@ limitations under the License.
  * @param var Variable name to refer this page.
  * @param modifier Modifier name.
  * @description
- * Should be used as root component of each page. The content inside page component is not scrollable. If you need scroll behavior, you can put inside this component.
+ * Should be used as root component of each page. The content inside page component is scrollable. If you need scroll behavior, you can put inside this component.
  */
 (function() {
   'use strict';
@@ -30194,7 +30194,7 @@ limitations under the License.
  * @property on(eventName,listener) Added an event listener. Preset events are 'prechange' and 'postchange'.
  * @description
  * Used with tabbar-item to manage pages using tabs.
- * @codepen kxgys
+ * @codepen pGuDL
  * @guide using-tab-bar Using tab bar
  * @seealso ons-tabbar-item ons-tabbar-item component
  */
@@ -30352,7 +30352,7 @@ limitations under the License.
  * @param active Set wether this tab should be active or not. Valid values are [true/false]
  * @description
  * Represents a tab inside tabbar. Each tabbar-item represents a page
- * @codepen kxgys
+ * @codepen pGuDL
  * @guide using-tab-bar Using tab bar
  * @seealso ons-tabbar ons-tabbar component
  */
