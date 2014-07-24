@@ -17,12 +17,14 @@ angular.module("templates/button.tpl", []).run(["$templateCache", function($temp
 angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/checkbox.tpl",
     "<label class=\"topcoat-checkbox\">\n" +
-    "  <input type=\"checkbox\" ng-model=\"ngModel\" ng-true-value=\"{{ngTrueValue || true}}\" ng-false-value=\"{{ngFalseValue || false}}\">\n" +
-    "  <div class=\"topcoat-checkbox__checkmark\"></div>\n" +
-    "  <span ng-transclude>\n" +
-    "  	\n" +
-    "  </span>\n" +
-    "</label>");
+    "<input type=\"checkbox\" ng-model=\"value\"></input>\n" +
+    "<div class=\"topcoat-checkbox__checkmark\"></div>\n" +
+    "<span ng-transclude>\n" +
+    "\n" +
+    "</span>\n" +
+    "<span>Isolated scope model {{value}}</span>\n" +
+    "</label>\n" +
+    "");
 }]);
 
 angular.module("templates/column.tpl", []).run(["$templateCache", function($templateCache) {

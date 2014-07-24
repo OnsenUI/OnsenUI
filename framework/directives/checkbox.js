@@ -23,40 +23,24 @@ limitations under the License.
 
   directives.directive('onsCheckbox', ['ONSEN_CONSTANTS', function(ONSEN_CONSTANTS) {
     return {
-      require: '?ngModel',
       restrict: 'E',
       replace: true,
       scope: {
-        ngModel: '=',
-        ngTrueValue: '@',
-        ngFalseValue: '@'
+        value: '='
       },
       transclude: true,
       templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
       link: function($scope, element, attrs, ngModel){
-        var checkbox = element.find('input');				
-        var checked = false;
+        var checkbox = element.find('input');
+
         attrs.$observe('disabled', function(disabled){
           if(disabled === undefined){
-            checkbox.attr('disabled', false);						
+            checkbox.attr('disabled', false);
           }else{
             checkbox.attr('disabled', true);
           }
         });
-
-        if(ngModel){					
-          ngModel.$render = function() {						
-            checked = ( ngModel.$viewValue == 'true' || ngModel.$viewValue == $scope.ngTrueValue );
-            checkbox.attr('checked', checked);
-          };
-
-          checkbox.bind('change', function(){
-            $scope.$apply(function(){
-              ngModel.$setViewValue(checkbox[0].checked);
-            });						
-          });
-        }
-      }
+     } 
     };
   }]);
 })();

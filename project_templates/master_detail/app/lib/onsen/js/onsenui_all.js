@@ -1,4 +1,4 @@
-/*! onsenui - v1.0.4 - 2014-07-07 */
+/*! onsenui - v1.0.4 - 2014-07-24 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -21175,12 +21175,14 @@ angular.module("templates/button.tpl", []).run(["$templateCache", function($temp
 angular.module("templates/checkbox.tpl", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("templates/checkbox.tpl",
     "<label class=\"topcoat-checkbox\">\n" +
-    "  <input type=\"checkbox\" ng-model=\"ngModel\" ng-true-value=\"{{ngTrueValue || true}}\" ng-false-value=\"{{ngFalseValue || false}}\">\n" +
-    "  <div class=\"topcoat-checkbox__checkmark\"></div>\n" +
-    "  <span ng-transclude>\n" +
-    "  	\n" +
-    "  </span>\n" +
-    "</label>");
+    "<input type=\"checkbox\" ng-model=\"value\"></input>\n" +
+    "<div class=\"topcoat-checkbox__checkmark\"></div>\n" +
+    "<span ng-transclude>\n" +
+    "\n" +
+    "</span>\n" +
+    "<span>Isolated scope model {{value}}</span>\n" +
+    "</label>\n" +
+    "");
 }]);
 
 angular.module("templates/column.tpl", []).run(["$templateCache", function($templateCache) {
@@ -21567,40 +21569,24 @@ limitations under the License.
 
   directives.directive('onsCheckbox', ['ONSEN_CONSTANTS', function(ONSEN_CONSTANTS) {
     return {
-      require: '?ngModel',
       restrict: 'E',
       replace: true,
       scope: {
-        ngModel: '=',
-        ngTrueValue: '@',
-        ngFalseValue: '@'
+        value: '='
       },
       transclude: true,
       templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
       link: function($scope, element, attrs, ngModel){
-        var checkbox = element.find('input');				
-        var checked = false;
+        var checkbox = element.find('input');
+
         attrs.$observe('disabled', function(disabled){
           if(disabled === undefined){
-            checkbox.attr('disabled', false);						
+            checkbox.attr('disabled', false);
           }else{
             checkbox.attr('disabled', true);
           }
         });
-
-        if(ngModel){					
-          ngModel.$render = function() {						
-            checked = ( ngModel.$viewValue == 'true' || ngModel.$viewValue == $scope.ngTrueValue );
-            checkbox.attr('checked', checked);
-          };
-
-          checkbox.bind('change', function(){
-            $scope.$apply(function(){
-              ngModel.$setViewValue(checkbox[0].checked);
-            });						
-          });
-        }
-      }
+     } 
     };
   }]);
 })();
