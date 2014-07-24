@@ -7,7 +7,7 @@
  * @param align Vertical align the column. Valid values are [top/center/bottom].
  * @param width The width of the column. Valid values are css "width" value. eg. "10%", "50px"
  * @note For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.
- * @codepen GgujC
+ * @codepen GgujC {wide}
  * @guide layouting Layouting guide
  * @seealso ons-row ons-row component
  */
