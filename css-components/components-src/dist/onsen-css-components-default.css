@@ -11,9 +11,7 @@ body {
   padding: 0;
   margin: 0;
 }
-*:not(input,
-textarea,
-select) {
+*:not(input):not(textarea):not(select) {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

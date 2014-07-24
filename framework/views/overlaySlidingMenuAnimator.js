@@ -207,9 +207,11 @@ limitations under the License.
           .queue(menuPageStyle)
           .play();
 
-        animit(this._mainPage[0])
-          .queue(mainPageStyle)
-          .play();
+        if (Object.keys(mainPageStyle).length > 0) {
+          animit(this._mainPage[0])
+            .queue(mainPageStyle)
+            .play();
+        }
       },
 
       _generateMenuPageStyle: function(distance) {
