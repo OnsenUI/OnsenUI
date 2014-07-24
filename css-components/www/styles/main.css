@@ -340,6 +340,10 @@ div#content-container > header .gnav > li.current a:visited,
 div#content-container > header .gnav > li.current a:active {
   color: #ff3f2b;
 }
+div#content-container > header .gnav > li a {
+  font-family: 'pragmatica-web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+}
 div#content-container > header .gnav > li a:link,
 div#content-container > header .gnav > li a:visited,
 div#content-container > header .gnav > li a:active {
