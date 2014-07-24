@@ -4,5 +4,4 @@
 <span ng-transclude>
 
 </span>
-<span>Isolated scope model {{value}}</span>
 </label>
