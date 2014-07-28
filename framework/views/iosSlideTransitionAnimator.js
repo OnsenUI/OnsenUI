@@ -23,7 +23,7 @@ limitations under the License.
   /**
    * Fade-in screen transition.
    */
-  module.factory('IOSSlideTransitionAnimator', function(NavigatorTransitionAnimator) {
+  module.factory('IOSSlideTransitionAnimator', function(NavigatorTransitionAnimator, PageView) {
 
     /**
      * Slide animator for navigator transition like iOS's screen slide transition.
@@ -39,8 +39,8 @@ limitations under the License.
       _decompose: function(page) {
         var elements = [];
 
-        var left = page.controller.getToolbarLeftItemsElement();
-        var right = page.controller.getToolbarRightItemsElement();
+        var left = page.getPageView().getToolbarLeftItemsElement();
+        var right = page.getPageView().getToolbarRightItemsElement();
 
         var other = []
           .concat(left.children.length === 0 ? left : excludeBackButtonLabel(left.children))
@@ -48,16 +48,16 @@ limitations under the License.
 
 
         var pageLabels = [
-          page.controller.getToolbarCenterItemsElement(),
-          page.controller.getToolbarBackButtonLabelElement()
+          page.getPageView().getToolbarCenterItemsElement(),
+          page.getPageView().getToolbarBackButtonLabelElement()
         ];
 
         return {
           pageLabels: pageLabels,
           other: other,
-          content: page.controller.getContentElement(),
-          toolbar: page.controller.getToolbarElement(),
-          bottomToolbar: page.controller.getBottomToolbarElement()
+          content: page.getPageView().getContentElement(),
+          toolbar: page.getPageView().getToolbarElement(),
+          bottomToolbar: page.getPageView().getBottomToolbarElement()
         };
 
         function excludeBackButtonLabel(elements) {
@@ -110,12 +110,12 @@ limitations under the License.
           });
 
         var bothPageHasToolbar =
-          enterPage.controller.hasToolbarElement() &&
-          leavePage.controller.hasToolbarElement();
+          enterPage.getPageView().hasToolbarElement() &&
+          leavePage.getPageView().hasToolbarElement();
 
         var isToolbarNothing = 
-          !enterPage.controller.hasToolbarElement() &&
-          !leavePage.controller.hasToolbarElement();
+          !enterPage.getPageView().hasToolbarElement() &&
+          !leavePage.getPageView().hasToolbarElement();
 
         if (bothPageHasToolbar) {
           animit.runAll(
@@ -320,12 +320,12 @@ limitations under the License.
 
 
         var bothPageHasToolbar =
-          enterPage.controller.hasToolbarElement() &&
-          leavePage.controller.hasToolbarElement();
+          enterPage.getPageView().hasToolbarElement() &&
+          leavePage.getPageView().hasToolbarElement();
 
         var isToolbarNothing = 
-          !enterPage.controller.hasToolbarElement() &&
-          !leavePage.controller.hasToolbarElement();
+          !enterPage.getPageView().hasToolbarElement() &&
+          !leavePage.getPageView().hasToolbarElement();
 
         if (bothPageHasToolbar || isToolbarNothing) {
           animit.runAll(

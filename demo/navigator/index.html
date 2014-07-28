@@ -10,20 +10,29 @@
   <script src="../../build/js/angular/angular.js"></script>    
   <script src="../../build/js/onsenui.js"></script>    
   <script src="../app.js"></script>  
+
+  <script>
+    function PageController($scope) {
+      var options = $scope.myNavigator.getCurrentPage().options;
+      console.log(myNavigator.getPages().length);
+      console.log(options);
+    }
+  </script>
   
 </head>
 
 <body>    
-  <ons-navigator title="Navigator" var="myNavigator">
-  <ons-page>
+  <ons-navigator var="myNavigator">
+
+    <ons-page>
       <ons-toolbar>
-        <div class="center">Icon</div>
+        <div class="center">Navigator</div>
       </ons-toolbar>
 
       <div style="text-align: center">
         <br>
         <ons-button 
-          onclick="myNavigator.pushPage('page1.html')">
+          onclick="myNavigator.pushPage('page1.html', {hoge: 'hoge'})">
           Push Page 2
         </ons-button>
       </div>
@@ -32,14 +41,13 @@
   </ons-navigator>  
 
   <script type="text/ons-template" id="page1.html">
-    <ons-page>
+    <ons-page ng-controller="PageController">
       <ons-toolbar>
         <div class="left"><ons-back-button>Back</ons-back-button></div>
         <div class="center">Page 2</div>
       </ons-toolbar>
 
       <div style="text-align: center">
-
         <h1>Page 2</h1>
         <ons-button 
           onclick="myNavigator.pushPage('page1.html', {title: 'Page'})">

@@ -33,7 +33,6 @@ limitations under the License.
       _bottomToolbarElement : angular.element(this.nullElement),
 
       init: function(scope, element) {
-
         this._scope = scope;
         this._element = element;
 

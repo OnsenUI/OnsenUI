@@ -38,7 +38,7 @@
         element.contents().remove();
 
         return {
-          pre: function(scope, element, attrs, controller, transclude) {
+          pre: function(scope, element, attrs, controller) {
             var navigator = new NavigatorView({
               scope: scope, 
               element: element
@@ -50,8 +50,13 @@
               navigator.pushPage(attrs.page, {});
             } else {
               var pageScope = navigator._createPageScope();
-              var compiledPage = $compile(angular.element(html))(pageScope);
-              navigator._pushPageDOM('', compiledPage, pageScope, {});
+              var pageElement = angular.element(html);
+              var linkScope = $compile(pageElement);
+              var link = function() {
+                linkScope(pageScope);
+              };
+
+              navigator._pushPageDOM('', pageElement, link, pageScope, {});
             }
 
             $onsen.aliasStack.register('ons.navigator', navigator);

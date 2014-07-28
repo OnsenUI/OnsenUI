@@ -107,6 +107,29 @@ limitations under the License.
         throw new Error('invalid state');
       },
 
+
+      _createPageElementAndLinkFunction : function(templateHTML, pageScope, done) {
+        var div = document.createElement('div');
+        div.innerHTML = templateHTML.trim();
+        var pageElement = angular.element(div);
+
+        var hasPage = div.childElementCount === 1 &&
+          div.childNodes[0].nodeName.toLowerCase() === 'ons-page';
+        if (hasPage) {
+          pageElement = angular.element(div.childNodes[0]);
+        } else {
+          throw new Error('You can not supply no "ons-page" element to "ons-navigator".');
+        }
+
+        var link = $compile(pageElement);
+        return {
+          element: pageElement,
+          link: function() {
+            return link(pageScope);
+          }
+        };
+      },
+
       /**
        * Pushes the specified pageUrl into the page stack and
        * if options object is specified, apply the options.
@@ -124,7 +147,7 @@ limitations under the License.
         options = options || {};
 
         if (options && typeof options != 'object') {
-          throw new Error('options must be an objected. You supplied ' + options);
+          throw new Error('options must be an object. You supplied ' + options);
         }
 
         if (this._emitPrePushEvent()) {
@@ -145,12 +168,13 @@ limitations under the License.
 
           $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
             var pageScope = self._createPageScope();
-            var pageElement = createPageElement(templateHTML, pageScope);
+            var object = self._createPageElementAndLinkFunction(templateHTML, pageScope);
+            var element = object.element;
+            var link = object.link;
 
             setImmediate(function() {
-              self._pushPageDOM(page, pageElement, pageScope, options, done);
+              self._pushPageDOM(page, element, link, pageScope, options, done);
             });
-
           }, function() {
             unlock();
             if (self._profiling) {
@@ -159,23 +183,6 @@ limitations under the License.
             throw new Error('Page is not found: ' + page);
           });
         });
-
-        function createPageElement(templateHTML, pageScope, done) {
-          var div = document.createElement('div');
-          div.innerHTML = templateHTML.trim();
-          var pageElement = angular.element(div);
-
-          var hasPage = div.childElementCount === 1 &&
-            div.childNodes[0].nodeName.toLowerCase() === 'ons-page';
-          if (hasPage) {
-            pageElement = angular.element(div.childNodes[0]);
-          } else {
-            throw new Error('You can not supply no "ons-page" element to "ons-navigator".');
-          }
-
-          var element = $compile(pageElement)(pageScope);
-          return element;
-        }
 
         function getAnimatorOption() {
           var animator = null;
@@ -206,49 +213,64 @@ limitations under the License.
       },
 
       /**
-       * @param {String} page Page name.
-       * @param {Object} element Compiled page element.
+       * @param {String} page
+       * @param {jqLite} element
        * @param {Object} pageScope
        * @param {Object} options
-       * @param {Function} [unlock]
        */
-      _pushPageDOM: function(page, element, pageScope, options, unlock) {
-        if (this._profiling) {
-          console.time('pushPageDOM');
-        }
-        unlock = unlock || function() {};
-        options = options || {};
-        element = this._normalizePageElement(element);
+      _createPageObject: function(page, element, pageScope, options) {
+        var navigator = this;
 
-        var pageController = element.inheritedData('ons-page');
-        if (!pageController) {
-          throw new Error('Fail to fetch $onsPageController.');
-        }
-
-        var self = this;
-
-        var pageObject = {
+        return {
           page: page,
           name: page,
           element: element,
           pageScope: pageScope,
-          controller: pageController,
           options: options,
+          getPageView: function() {
+            if (!this._pageView) {
+              this._pageView = element.inheritedData('ons-page');
+              if (!this._pageView) {
+                throw new Error('Fail to fetch PageView from ons-page element.');
+              }
+            }
+            return this._pageView;
+          },
           destroy: function() {
-            pageObject.element.remove();
-            pageObject.pageScope.$destroy();
+            this.element.remove();
+            this.pageScope.$destroy();
 
-            pageObject.controller = null;
-            pageObject.element = null;
-            pageObject.pageScope = null;
-            pageObject.options = null;
+            this._pageView = null;
+            this.element = null;
+            this.pageScope = null;
+            this.options = null;
 
-            var index = self.pages.indexOf(this);
+            var index = navigator.pages.indexOf(this);
             if (index !== -1) {
-              self.pages.splice(index, 1);
+              navigator.pages.splice(index, 1);
             }
           }
         };
+      },
+
+      /**
+       * @param {String} page Page name.
+       * @param {Object} element
+       * @param {Function} link
+       * @param {Object} pageScope
+       * @param {Object} options
+       * @param {Function} [unlock]
+       */
+      _pushPageDOM: function(page, element, link, pageScope, options, unlock) {
+        if (this._profiling) {
+          console.time('pushPageDOM');
+        }
+
+        unlock = unlock || function() {};
+        options = options || {};
+        element = this._normalizePageElement(element);
+
+        var pageObject = this._createPageObject(page, element, pageScope, options);
 
         var event = {
           enterPage: pageObject,
@@ -259,32 +281,34 @@ limitations under the License.
         this.pages.push(pageObject);
 
         var done = function() {
-          if (self.pages[self.pages.length - 2]) {
-            self.pages[self.pages.length - 2].element.css('display', 'none');
+          if (this.pages[this.pages.length - 2]) {
+            this.pages[this.pages.length - 2].element.css('display', 'none');
           }
 
-          if (self._profiling) {
+          if (this._profiling) {
             console.timeEnd('pushPageDOM');
           }
 
           unlock();
 
-          self.emit('postpush', event);
+          this.emit('postpush', event);
 
           if (typeof options.onTransitionEnd === 'function') {
             options.onTransitionEnd();
           }
-        };
+        }.bind(this);
 
         if (this.pages.length > 1) {
           var leavePage = this.pages.slice(-2)[0];
           var enterPage = this.pages.slice(-1)[0];
 
-          options.animator.push(enterPage, leavePage, done);
           this._element.append(element);
+          link();
+          options.animator.push(enterPage, leavePage, done);
 
         } else {
           this._element.append(element);
+          link();
           done();
         }
       },
@@ -341,34 +365,33 @@ limitations under the License.
           return;
         }
 
-        var self = this;
         this._doorLock.waitUnlock(function() {
-          var unlock = self._doorLock.lock();
+          var unlock = this._doorLock.lock();
 
-          var leavePage = self.pages.pop();
+          var leavePage = this.pages.pop();
 
-          if (self.pages[self.pages.length - 1]) {
-            self.pages[self.pages.length - 1].element.css('display', 'block');
+          if (this.pages[this.pages.length - 1]) {
+            this.pages[this.pages.length - 1].element.css('display', 'block');
           }
 
-          var enterPage = self.pages[self.pages.length -1];
+          var enterPage = this.pages[this.pages.length -1];
 
           var event = {
             leavePage: leavePage,
-            enterPage: self.pages[self.pages.length - 1],
-            navigator: self
+            enterPage: this.pages[this.pages.length - 1],
+            navigator: this
           };
 
           var callback = function() {
             leavePage.destroy();
             unlock();
-            self.emit('postpop', event);
+            this.emit('postpop', event);
             if (typeof options.onTransitionEnd === 'function') {
               options.onTransitionEnd();
             }
-          };
+          }.bind(this);
           leavePage.options.animator.pop(enterPage, leavePage, callback);
-        });
+        }.bind(this));
       },
 
       /**
