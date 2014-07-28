@@ -10,6 +10,7 @@ body {
   bottom: 0;
   padding: 0;
   margin: 0;
+  -webkit-text-size-adjust: 100%;
 }
 *:not(input):not(textarea):not(select) {
   -webkit-user-select: none;
