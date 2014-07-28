@@ -2,14 +2,25 @@
  * @ngdoc directive
  * @id tabbar
  * @name ons-tabbar
- * @param hide-tabs Whether to hide the tabs. Valid values are [true/false] or angular binding. eg: {{ shouldHide }}
- * @param var Variable name to refer this tabbar.
- * @property on(eventName,listener) Added an event listener. Preset events are 'prechange' and 'postchange'.
  * @description
- * Used with tabbar-item to manage pages using tabs.
+ *  [en]A component to display a tab bar on the bottom of a page. Used with ons-tabbar-item to manage pages using tabs.[/en]
+ *  [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabbar-itemと組み合わせて使うことで、ページを管理できます。[/ja]
+ * @param hide-tabs
+ *  [en]Whether to hide the tabs. Valid values are true/false.[/en]
+ *  [ja]タブを非表示にする場合に指定します。trueもしくはfalseを指定できます。[/ja]
+ * @param var
+ *  [en]Variable name to refer this tabbar.[/en]
+ *  [ja]JavaScriptからコンポーネントにアクセスするための変数名を指定します。[/ja]
+ * @property on(eventName,listener)
+ *  [en]Add an event listener. Possible events are prechange and postchange.[/en]
+ *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。[/ja]
  * @codepen pGuDL
- * @guide using-tab-bar Using tab bar
- * @seealso ons-tabbar-item ons-tabbar-item component
+ * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
+ * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
+ * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-tabbar-item [en]ons-tabbar-item component[/en][ja]ons-tabbar-itemコンポーネント[/ja]
+ * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
  */
 (function() {
   'use strict';

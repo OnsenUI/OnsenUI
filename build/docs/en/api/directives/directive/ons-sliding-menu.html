@@ -1,9 +1,7 @@
 <div class="directive-container" id="module:directives.directive:ons-sliding-menu">
   <div>
-    <h4>Description</h4>
-
     <section class="description">
-      <p>Facebook/Path like sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.</p>
+      <p>Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.</p>
     </section>
 
     <span class="anchor" id="ons-sliding-menu-attributes"></span>
@@ -22,32 +20,37 @@
             <span class="anchor" id="ons-sliding-menu-above-page"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">above-page</td>
-              <td>The url of the page to be set to the above layer</td>
+              <td>The url of the page to be set to the above layer.</td>
             </tr>
             
             <span class="anchor" id="ons-sliding-menu-swipable"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">swipable</td>
-              <td>Wether to enable swipe interaction</td>
+              <td>Whether to enable swipe interaction.</td>
             </tr>
             
             <span class="anchor" id="ons-sliding-menu-swipe-target-width"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">swipe-target-width</td>
-              <td>The width of swipable area calculated from the left (in pixel). Eg. Use this to enable swipe only when the finger touch on the left edge.</td>
+              <td>The width of swipable area calculated from the left (in pixel). Use this to enable swipe only when the finger touch on the screen edge.</td>
             </tr>
             
             <span class="anchor" id="ons-sliding-menu-max-slide-distance"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">max-slide-distance</td>
-              <td>How far the above page will slide open. Can specify both in px and %. eg. 90%, 200px</td>
+              <td>How far the behind page will slide open. Can specify both in px and %. eg. 90%, 200px</td>
             </tr>
             
             <span class="anchor" id="ons-sliding-menu-var"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">var</td>
-              <td>Variable name to refer this sliding menu.
-</td>
+              <td>Variable name to refer this sliding menu.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-sliding-menu-side"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">side</td>
+              <td>Specify which side of the screen the behind page is located on. Possible values are left and right.</td>
             </tr>
             
           </tbody>
@@ -107,13 +110,13 @@
           <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>on(eventName,listener)</code></td>
-            <td>Added an event listener. Preset events are &#39;preopen&#39;, &#39;preclose&#39;, &#39;postopen&#39; and &#39;postclose&#39;.</td>
+            <td>Add an event listener. Preset events are preopen, preclose, postopen and postclose.</td>
           </tr>
           
-          <span class="anchor" id="isMenuOpend()-isMenuOpend()"></span>
+          <span class="anchor" id="isMenuOpened()-isMenuOpened()"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>isMenuOpend()</code></td>
-            <td></td>
+            <td><code>isMenuOpened()</code></td>
+            <td>Returns true if the menu page is open, otherwise false.</td>
           </tr>
           
         </tbody>
@@ -135,6 +138,26 @@
     <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/IDvFJ" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
     
 
+    
+      <h4>See also</h4>
+      <ul class="seealso">
+        
+          
+            <li class="guide"><a href="overview.html#UsingSlidingMenu">Using sliding menu</a></li>
+          
+            <li class="guide"><a href="overview.html#EventHandling">Using events</a></li>
+          
+            <li class="guide"><a href="overview.html#CallingComponentAPIsfromJavaScript">Using navigator from JavaScript</a></li>
+          
+            <li class="guide"><a href="overview.html#DefiningMultiplePagesinSingleHTML">Defining multiple pages in single html</a></li>
+          
+        
+        
+          
+            <li class="seealso"><a href="#ons-page">ons-page component</a></li>
+          
+        
+      </ul>
     
 
   </div>

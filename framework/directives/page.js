@@ -2,10 +2,15 @@
  * @ngdoc directive
  * @id page
  * @name ons-page
- * @param var Variable name to refer this page.
- * @param modifier Modifier name.
  * @description
- * Should be used as root component of each page. The content inside page component is scrollable. If you need scroll behavior, you can put inside this component.
+ *  [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
+ *  [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
+ * @param var [en]Variable name to refer this page.[/en][ja]このページを参照するための変数名を指定します。[/ja]
+ * @param modifier [en]Specify modifier name to specify custom styles.[/en][ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+ * @guide ManagingMultiplePages [en]Managing multiple pages[/en][ja]複数のページを管理する[/ja]
+ * @guide Pageinitevent [en]Event for page initialization[/en][ja]ページ初期化のイベント[/ja]
+ * @guide OverridingCSSstyles [en]Overriding CSS styles[/en][ja]CSSスタイルのオーバーライド[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
  */
 (function() {
   'use strict';

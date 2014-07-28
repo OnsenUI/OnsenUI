@@ -10,7 +10,7 @@
  *  [ja]ナビゲーターが初期化された時に表示するページを指定します。[/ja]
  * @param var
  *  [en]Variable name to refer this navigator.[/en]
- *  [ja]ナビゲーターを指定するための変数を指定します。[/ja]
+ *  [ja]ナビゲーターを参照するための変数を指定します。[/ja]
  * @property pushPage(pageUrl,options)
  *  [en]Pushes the specified pageUrl into the page stack.[/en]
  *  [ja]指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。[/ja]
@@ -33,6 +33,7 @@
  * @guide page-navigation [en]Guide for page navigation[/en][ja]ページナビゲーションの概要[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  */
 (function() {

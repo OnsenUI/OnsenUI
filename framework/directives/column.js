@@ -3,8 +3,8 @@
  * @id col
  * @name ons-col
  * @description
- *    [en]Use with ons-row to layout components.[/en]
- *    [ja]ons-rowとともに使用し、コンポーネントの配置に使用します。[/ja]
+ *    [en]Represents a column in the grid system. Use with ons-row to layout components.[/en]
+ *    [ja]グリッドシステムにて列を定義します。ons-rowとともに使用し、コンポーネントの配置に使用します。[/ja]
  * @param align
  *    [en]Vertical align the column. Valid values are top, center, and bottom.[/en]
  *    [ja]縦の配置を指定します。次の値から選択してください: top, center, bottom[/ja]

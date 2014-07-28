@@ -2,14 +2,15 @@
  * @ngdoc directive
  * @id toolbar_button
  * @name ons-toolbar-button
- * @param modifier Modifier name.
  * @description
- * Button component for toolbar.
+ *  [en]Button component for ons-toolbar and ons-bottom-toolbar.[/en]
+ *  [ja]ons-toolbarあるいはons-bottom-toolbarに設置できるボタン用コンポーネントです。[/ja]
+ * @param modifier [en]Specify modifier name to specify custom styles.[/en][ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
  * @codepen aHmGL
- * @guide adding-a-toolbar Adding a toolbar
- * @seealso ons-toolbar ons-toolbar component
- * @seealso ons-bottom-toolbar ons-bottom-toolbar component
- * @seealso ons-back-button ons-back-button component
+ * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
+ * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
+ * @seealso ons-back-button [en]ons-back-button component[/en][ja]ons-back-buttonコンポーネント[/ja]
+ * @seealso ons-toolbar-button [en]ons-toolbar-button component[/en][ja]ons-toolbar-buttonコンポーネント[/ja]
  */
 (function(){
   'use strict';
