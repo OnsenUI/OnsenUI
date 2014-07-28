@@ -22,7 +22,6 @@ limitations under the License.
 
   module.factory('PageView', function($onsen) {
 
-
     var PageView = Class.extend({
       _registeredToolbarElement : false,
       _registeredBottomToolbarElement : false,

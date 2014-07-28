@@ -48,7 +48,6 @@ limitations under the License.
 
         scope.$watch('swipable', this._onSwipableChanged.bind(this));
 
-        window.addEventListener('orientationchange', this._onOrientationChange.bind(this));
         window.addEventListener('resize', this._onResize.bind(this));
 
         this._animator = new RevealSlidingMenuAnimator();
@@ -142,20 +141,15 @@ limitations under the License.
         }
       },
 
-      _onOrientationChange: function() {
-        this._onResize();
-      },
-
       _onResize: function() {
+        var lastMode = this._mode;
         this._considerChangingCollapse();
 
-        if (this._mode === COLLAPSE_MODE) {
-          this._animator.onResized(
-            {
-              isOpened: this._startX > 0,
-              width: '90%'
-            }
-          );
+        if (lastMode === COLLAPSE_MODE && this._mode === COLLAPSE_MODE) {
+          this._animator.onResized({
+            isOpened: this._currentX > 0,
+            width: '90%'
+          });
         }
 
         this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
@@ -232,8 +226,8 @@ limitations under the License.
 
       _activateCollapseMode: function() {
         if (this._mode !== COLLAPSE_MODE) {
-          this._behindPage.removeAttr('style');
-          this._abovePage.removeAttr('style');
+          this._behindPage.attr('style', '');
+          this._abovePage.attr('style', '');
 
           this._mode = COLLAPSE_MODE;
 
@@ -245,24 +239,19 @@ limitations under the License.
             this._behindPage,
             {isRight: false, width: '90%'}
           );
-
-          this._translate(0);
+          this._currentX = this._startX = 0;
         }
       },
 
       _activateSplitMode: function() {
-        if (this._mode !== SPLIT_MODE) {
-          this._animator.destroy();
+        this._animator.destroy();
 
-          this._behindPage.removeAttr('style');
-          this._abovePage.removeAttr('style');
+        this._behindPage.attr('style', '');
+        this._abovePage.attr('style', '');
 
-          this._setSize();
-          this._deactivateHammer();
-          this._mode = SPLIT_MODE;
-        } else {
-          this._setSize();
-        }
+        this._mode = SPLIT_MODE;
+        this._setSize();
+        this._deactivateHammer();
       },
 
       _activateHammer: function() {
@@ -289,9 +278,9 @@ limitations under the License.
         }
 
         switch (event.type) {
-
           case 'dragleft':
           case 'dragright':
+            event.preventDefault();
             event.gesture.preventDefault();
             var deltaX = event.gesture.deltaX;
 
@@ -411,7 +400,5 @@ limitations under the License.
     MicroEvent.mixin(SplitView);
 
     return SplitView;
-
   });
-
 })();

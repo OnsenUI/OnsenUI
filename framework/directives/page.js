@@ -50,16 +50,54 @@
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
-      transclude: true,
+      transclude: false,
       scope: true,
 
       compile: function(element) {
+        var children = element.children().remove();
+
         if ($onsen.isWebView() && $onsen.isIOS7Above()) {
           // Adjustments for IOS7
           var fill = angular.element(document.createElement('div'));
           fill.addClass('page__status-bar-fill');
           fill.css({width: '0px', height: '0px'});
           element.prepend(fill);
+        }
+
+        var content = angular.element('<div class="page__content ons-page-inner"></div>').append(children);
+
+        if (element.attr('style')) {
+          content.attr('style', element.attr('style'));
+          element.attr('style', '');
+        }
+
+        if (Modernizr.csstransforms3d) {
+          element.append(content);
+        } else {
+          content.css('overflow', 'visible');
+
+          var wrapper = angular.element('<div></div>');
+          wrapper.append(children);
+          content.append(wrapper);
+          element.append(content);
+
+          // IScroll for Android2
+          var scroller = new IScroll(content[0], {
+            momentum: true,
+            bounce: true,
+            hScrollbar: false,
+            vScrollbar: false,
+            preventDefault: false
+          });
+
+          var offset = 10;
+          scroller.on('scrollStart', function(e) {
+            var scrolled = scroller.y - offset;
+            if (scrolled < (scroller.maxScrollY + 40)) {
+              // TODO: find a better way to know when content is upated so we can refresh
+              scroller.refresh();
+            }
+          });
         }
 
         return {
@@ -79,45 +117,8 @@
             var modifierTemplater = $onsen.generateModifierTemplater(attrs);
             element.addClass('page ' + modifierTemplater('page--*'));
 
-            transclude(scope, function(clonedElement) {
-              var content = angular.element('<div class="page__content ons-page-inner"></div>');
-              content.addClass(modifierTemplater('page--*__content'));
-              if (element.attr('style')) {
-                content.attr('style', element.attr('style'));
-                element.removeAttr('style');
-              }
-              element.append(content);
-
-              if (Modernizr.csstransforms3d) {
-                content.append(clonedElement);
-              }  else {
-                content.css('overflow', 'visible');
-
-                var wrapper = angular.element('<div></div>');
-                content.append(wrapper);
-                wrapper.append(clonedElement);
-
-                // IScroll for Android2
-                var scroller = new IScroll(content[0], {
-                  momentum: true,
-                  bounce: true,
-                  hScrollbar: false,
-                  vScrollbar: false,
-                  preventDefault: false
-                });
-
-                var offset = 10;
-                scroller.on('scrollStart', function(e) {
-                  var scrolled = scroller.y - offset;
-                  if (scrolled < (scroller.maxScrollY + 40)) {
-                    // TODO: find a better way to know when content is upated so we can refresh
-                    scroller.refresh();
-                  }
-                });
-              }
-            });
-
-
+            var pageContent = angular.element(element[0].querySelector('.page__content'));
+            pageContent.addClass(modifierTemplater('page--*__content'));
           },
 
           post: function(scope, element, attrs) {

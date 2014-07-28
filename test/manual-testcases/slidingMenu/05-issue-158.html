@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../build/js/angular/angular.js"></script>    
+    <script src="../../../build/js/onsenui.js"></script>    
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      ons.bootstrap();
+
+      ons.ready(function() {
+        menu.setMenuPage('menu-second.html', {closeMenu: true});
+      });
+
+      function PageController($scope) {
+        alert(document.querySelector('#p') ? 'OK' : 'NG');
+      }
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-sliding-menu above-page="page.html" behind-page="menu.html" side="left" var="menu">
+    </ons-sliding-menu>
+
+    <script type="text/ons-template" id="page.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">Page</div>
+        </ons-toolbar>
+
+      </ons-page>
+    </script>
+
+    <script type="text/ons-template" id="menu.html">
+
+    </script>
+
+    <script type="text/ons-template" id="menu-second.html">
+      <ons-page ng-controller="PageController">
+        <p id="p">Menu Content</p>
+      </ons-page>
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" ng-app="my-app">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../build/js/angular/angular.js"></script>    
+    <script src="../../../build/js/onsenui.js"></script>    
+    <script>
+      var module = angular.module('my-app', ['onsen']);
+
+      module.controller('SecondPageController', function($scope) {
+        console.log("init controller");
+        var rect = document.querySelector('#p').getBoundingClientRect();
+        var rectString = JSON.stringify(rect);
+
+        var detachedRectString = JSON.stringify(document.createElement('div').getBoundingClientRect());
+
+        alert(rectString !== detachedRectString ? 'OK: ' + rectString : 'NG: ' + rectString);
+      });
+      
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-navigator var="navi">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">Navigator</div>
+        </ons-toolbar>
+
+        <p style="text-align: center;">
+          <br>
+          <ons-button modifier="light" ng-click="navi.pushPage('page.html')">push</ons-button>
+        </p>
+      </ons-page>
+    </ons-navigator>
+
+    <script type="text/ons-template" id="page.html">
+      <ons-page ng-controller="SecondPageController">
+        <ons-toolbar>
+          <div class="left"><ons-back-button>Back</ons-back-button></div>
+          <div class="center">Page</div>
+        </ons-toolbar>
+
+        <p style="text-align: center;" id="p">
+          Page Content
+        </p>
+      </ons-page>
+    </script>
+   
+  </body>
+</html>

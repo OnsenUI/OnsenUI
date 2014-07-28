@@ -115,8 +115,14 @@ limitations under the License.
           this._blackMask = null;
         }
 
-        this._mainPage.removeAttr('style');
-        this._menuPage.removeAttr('style');
+        if (this._mainPage) {
+          this._mainPage.attr('style', '');
+        }
+
+        if (this._menuPage) {
+          this._menuPage.attr('style', '');
+        }
+
         this._mainPage = this._menuPage = this._element = undefined;
       },
 
@@ -230,9 +236,11 @@ limitations under the License.
       },
 
       _generateBehindPageStyle: function(distance) {
-        var max = this._menuPage[0].clientWidth;
+        var max = this._menuPage[0].getBoundingClientRect().width;
 
-        var behindDistance = Math.min((distance - max) / max * 10, 0);
+        var behindDistance = (distance - max) / max * 10;
+        behindDistance = isNaN(behindDistance) ? 0 : Math.max(Math.min(behindDistance, 0), -10);
+
         var behindX = this._isRight ? -behindDistance : behindDistance;
         var behindTransform = 'translate3d(' + behindX + '%, 0, 0)';
         var opacity = 1 + behindDistance / 100;

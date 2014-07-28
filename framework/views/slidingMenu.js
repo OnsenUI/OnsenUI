@@ -351,7 +351,8 @@ limitations under the License.
 
       _appendAbovePage: function(pageUrl, templateHTML) {
         var pageScope = this._scope.$parent.$new();
-        var pageContent = $compile(templateHTML)(pageScope);
+        var pageContent = angular.element(templateHTML);
+        var link = $compile(pageContent);
 
         this._abovePage.append(pageContent);
 
@@ -359,6 +360,8 @@ limitations under the License.
           this._currentPageElement.remove();
           this._currentPageScope.$destroy();
         }
+
+        link(pageScope);
 
         this._currentPageElement = pageContent;
         this._currentPageScope = pageScope;
@@ -370,7 +373,8 @@ limitations under the License.
        */
       _appendBehindPage: function(templateHTML) {
         var pageScope = this._scope.$parent.$new();
-        var pageContent = $compile(templateHTML)(pageScope);
+        var pageContent = angular.element(templateHTML);
+        var link = $compile(pageContent);
 
         this._behindPage.append(pageContent);
 
@@ -378,6 +382,8 @@ limitations under the License.
           this._currentBehindPageScope.$destroy();
           this._currentBehindPageElement.remove();
         }
+
+        link(pageScope);
 
         this._currentBehindPageElement = pageContent;
         this._currentBehindPageScope = pageScope;
