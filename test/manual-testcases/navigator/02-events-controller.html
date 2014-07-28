@@ -12,7 +12,7 @@
       
       module.controller('AppController', function($scope) {
         if (!$scope.navi) {
-          alert('$scope.navi is undefined in AppController');
+          console.log('OK: $scope.navi is undefined in AppController');
         }
       });
 
@@ -59,7 +59,6 @@
           </ons-list-item>
         </ons-list>
       </ons-page>
-
     </ons-navigator>
 
     <script type="text/ons-template" id="page.html">
