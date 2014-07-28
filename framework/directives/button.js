@@ -3,13 +3,23 @@
  * @id button
  * @name ons-button
  * @description
- * Button component. It includes a spinner useful for showing work in progress.
- * @param type The type of the button. Can be any of [ 'quiet', 'large', 'large--quiet', 'cta', 'large--cta' ]
- * @param should-spin Whether the button should switch to show spinner
- * @param animation The animation when the button transitions to and from the spinner. Can be any of [ 'expand-left', 'expand-right', 'expand-up', 'expand-down', 'slide-left', 'slide-right', 'slide-up', 'slide-down', 'zoom-out', 'zoom-in' ]. The default is 'slide-left'
- * @param disabled Whether the button should be disabled.
+ *    [en]Button component. If you want to place a button in a toolbar, use ons-toolbar-button or ons-back-button instead.[/en]
+ *    [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、ons-toolbar-buttonもしくはons-back-buttonコンポーネントを使用してください。[/ja]
+ * @param modifier
+ *    [en]The appearance of the button. Predefined modifiers are quiet, light, large, large--quiet, cta, and large--cta.[/en]
+ *    [ja]ボタンの表現を指定します。次の値からも選択できます: quiet, light, large, large--quiet, cta, large--cta[/ja]
+ * @param should-spin
+ *    [en]Specify if the button should have a spinner.[/en]
+ *    [ja]ボタンにスピナーを表示する場合は指定してください。[/ja]
+ * @param animation
+ *    [en]The animation when the button transitions to and from the spinner. Possible values are slide-left (default), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in.[/en]
+ *    [ja]スピナーを表示する場合のアニメーションを指定します。次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in[/ja]
+ * @param disabled
+ *    [en]Specify if button should be disabled.[/en]
+ *    [ja]ボタンを無効化する場合は指定してください。[/ja]
  * @codepen hLayx
- * @guide button Guide for ons-button
+ * @guide Button [en]Guide for ons-button[/en][ja]ons-buttonの使い方[/ja]
+ * @guide OverridingCSSstyles [en]More details about modifier attribute[/en][ja]modifier属性の使い方[/ja]
  */
 (function(){
   'use strict';

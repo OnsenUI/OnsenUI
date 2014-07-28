@@ -3,11 +3,12 @@
  * @id list
  * @name ons-list
  * @description
- * The container for list-item. Similar to <ul> but styled for mobile.
+ *    [en]Component to defines a list, and the container for ons-list-item(s).[/en]
+ *    [ja]リストを表現するためのコンポーネント。ons-list-itemのコンテナとして使用します。[/ja]
  * @param modifier
- * @seealso ons-list-item ons-list-item component
- * @seealso ons-list-header ons-list-header component
- * @guide using-lists Using lists
+ * @seealso ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]
+ * @seealso ons-list-header [en]ons-list-header component[/en][ja]ons-list-headerコンポーネント[/ja]
+ * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
  * @codepen yxcCt
  */
 (function(){

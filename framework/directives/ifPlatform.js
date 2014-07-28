@@ -3,10 +3,13 @@
  * @id if-platform
  * @name ons-if-platform
  * @description
- * Conditionally display content depending on the platform/browser. Valid values are [ios/android/blackberry/chrome/safari/firefox/opera]. Different from other components, this component is used as attribute in any element.
- * @param ons-if-platform Either "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".
+ *    [en]Conditionally display content depending on the platform / browser. Valid values are ios, android, blackberry, chrome, safari, firefox, and opera.[/en]
+ *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaを指定できます。[/ja]
+ * @param ons-if-platform
+ *    [en]Either opera, firefox, safari, chrome, ie, android, blackberry, ios or windows.[/en]
+ *    [ja]opera, firefox, safari, chrome, ie, android, blackberry, ios, windowsから指定します。[/ja]
  * @seealso ons-if-orientation ons-if-orientation component
- * @guide utility-apis Other utility APIs
+ * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  */
 (function() {
   'use strict';

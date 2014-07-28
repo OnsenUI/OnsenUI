@@ -1,7 +1,5 @@
 <div class="directive-container" id="{$ doc.id $}">
   <div>
-    <h4>Description</h4>
-
     <section class="description">
       <p>{$ doc.description | lang | e $}</p>
     </section>
@@ -9,7 +7,7 @@
     <span class="anchor" id="{$ doc.name $}-attributes"></span>
     {% if doc.params %}
       <section>
-        <h4>Attributes</h4>
+        <h4>{% if lang == "en" %}Attributes{% else %}属性{% endif %}</h4>
         <table>
           <tbody>
             {% for param in doc.params %}
@@ -27,7 +25,7 @@
     <span class="anchor" id="{$ doc.name $}-methods"></span>
     {% if doc.properties %}
     <section>
-      <h4>Methods</h4>
+      <h4>{% if lang == "en" %}Methods{% else %}メソッド{% endif %}</h4>
       <table>
         <tbody>
           {% for property in doc.properties %}
@@ -44,12 +42,12 @@
 
     {% if doc.note %}
     <section class="note">
-      <p>Note: {$ doc.note $}</p>
+      <p>{% if lang == "en" %}Note{% else %}注意{% endif %}: {$ doc.note | lang $}</p>
     </section>
     {% endif %}
 
     {% if doc.codepen %}
-    <h4>Sample</h4>
+    <h4>{% if lang == "en" %}Sample{% else %}サンプル{% endif %}</h4>
 
     {% if doc.codepen.isWide %}
     <div style="height: 480px; width: 100%;" class="codepen-wrapper">
@@ -62,17 +60,17 @@
     <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/{$ doc.codepen.id $}" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
     {% endif %}
 
-    {% if doc.guide or doc.seealsos %}
-      <h4>See also</h4>
+    {% if doc.guides or doc.seealsos %}
+      <h4>{% if lang == "en" %}See also{% else %}関連情報{% endif %}</h4>
       <ul class="seealso">
         {% if doc.guides %}
           {% for guide in doc.guides %}
-            <li class="guide"><a href="overview.html#{$ guide.name $}">{$ guide.description $}</a></li>
+            <li class="guide"><a href="overview.html#{$ guide.name $}">{$ guide.description | lang $}</a></li>
           {% endfor %}
         {% endif %}
         {% if doc.seealsos %}
           {% for seealso in doc.seealsos %}
-            <li class="seealso"><a href="#{$ seealso.name $}">{$ seealso.description $}</a></li>
+            <li class="seealso"><a href="#{$ seealso.name $}">{$ seealso.description | lang $}</a></li>
           {% endfor %}
         {% endif %}
       </ul>
