@@ -27,7 +27,9 @@
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
           transclude(scope, function(clonedElement) {
-            element[0].querySelector('.back-button__label').appendChild(clonedElement[0]);
+            if (clonedElement[0]) {
+              element[0].querySelector('.back-button__label').appendChild(clonedElement[0]);
+            }
           });
         }
       }
