@@ -1,46 +1,44 @@
 <div class="directive-container" id="module:directives.directive:ons-tabbar-item">
   <div>
-    <h4>Description</h4>
-
     <section class="description">
-      <p>Represents a tab inside tabbar. Each tabbar-item represents a page</p>
+      <p>タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabbar-itemはページを表します。</p>
     </section>
 
     <span class="anchor" id="ons-tabbar-item-attributes"></span>
     
       <section>
-        <h4>Attributes</h4>
+        <h4>属性</h4>
         <table>
           <tbody>
             
             <span class="anchor" id="ons-tabbar-item-page"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">page</td>
-              <td>The page that this tabbar-item points to</td>
+              <td>ons-tabbar-itemが参照するページへのURLを指定します。</td>
             </tr>
             
             <span class="anchor" id="ons-tabbar-item-icon"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">icon</td>
-              <td>The icon of the tab. To use font-awesome icon, just set the icon name without &quot;fa-&quot; prefix. eg. to use &quot;fa-home&quot; icon, set it to &quot;home&quot;. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here</td>
+              <td>アイコン名を指定します。ons-iconと同じアイコン名を指定できます。個別にアイコンをカスタマイズする場合は、background-imageなどのCSSスタイルを用いて指定できます。</td>
             </tr>
             
             <span class="anchor" id="ons-tabbar-item-active-icon"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">active-icon</td>
-              <td>The icon of the tab when active. To use font-awesome icon, just set the icon name without &quot;fa-&quot; prefix. eg. to use &quot;fa-home&quot; icon, set it to &quot;home&quot;. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here</td>
+              <td>アクティブの際のアイコン名を指定します。</td>
             </tr>
             
             <span class="anchor" id="ons-tabbar-item-label"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">label</td>
-              <td>The label of the tab</td>
+              <td>アイコン下に表示されるラベルを指定します。</td>
             </tr>
             
             <span class="anchor" id="ons-tabbar-item-active"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">active</td>
-              <td>Set wether this tab should be active or not. Valid values are [true/false]</td>
+              <td>このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。</td>
             </tr>
             
           </tbody>
@@ -54,7 +52,7 @@
     
 
     
-    <h4>Sample</h4>
+    <h4>サンプル</h4>
 
     
     <div style="height: 480px; width: 320px;" class="codepen-wrapper">
@@ -66,16 +64,22 @@
     
 
     
-      <h4>See also</h4>
+      <h4>関連情報</h4>
       <ul class="seealso">
         
           
-            <li class="guide"><a href="overview.html#using-tab-bar">Using tab bar</a></li>
+            <li class="guide"><a href="overview.html#UsingTabBar">タブバーを使う</a></li>
+          
+            <li class="guide"><a href="overview.html#DefiningMultiplePagesinSingleHTML">複数のページを1つのHTMLに記述する</a></li>
           
         
         
           
-            <li class="seealso"><a href="#ons-tabbar">ons-tabbar component</a></li>
+            <li class="seealso"><a href="#ons-tabbar">ons-tabbarコンポーネント</a></li>
+          
+            <li class="seealso"><a href="#ons-page">ons-pageコンポーネント</a></li>
+          
+            <li class="seealso"><a href="#ons-icon">ons-iconコンポーネント</a></li>
           
         
       </ul>

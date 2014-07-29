@@ -3,12 +3,16 @@
  * @id row
  * @name ons-row
  * @description
- * Use <ons-row> and <ons-col> grid system to layout component. By default, all <ons-col> inside a <ons-row> will have the same width. You can specify any <ons-col> to have a specific width and let others take the remaining width in a <ons-row>. You can event vertical align each <ons-col> in a <ons-row>
- * @param align Short hand attribute for aligning all colum in a row. Valid values are [top/bottom/center].
- * @note For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.
+ *  [en]Represents a row in the grid system. Use with ons-col to layout components.[/en]
+ *  [ja]グリッドシステムにて行を定義します。ons-colとともに使用し、コンポーネントの配置に使用します。[/ja]
+ * @param align
+ *  [en]Short hand attribute for aligning vertically. Valid values are top, bottom, and center.[/en]
+ *  [ja]縦に整列するために指定します。top、bottom、centerのいずれかを指定できます。[/ja]
+ *  [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.[/en]
+ *  [ja]Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。[/ja]
  * @codepen GgujC {wide}
- * @guide layouting Layouting guide
- * @seealso ons-col ons-col component
+ * @guide Layouting [en]Layouting guide[/en][ja]レイアウト調整[/ja]
+ * @seealso ons-col [en]ons-col component[/en][ja]ons-colコンポーネント[/ja]
  */
 (function(){
   'use strict';

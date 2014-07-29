@@ -3,13 +3,13 @@
  * @id toolbar
  * @name ons-toolbar
  * @description
- * Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.
- * @param modifier Modifier name.
+ *  [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]
+ *  [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
  * @codepen aHmGL
- * @guide adding-a-toolbar Adding a toolbar
- * @seealso ons-bottom-toolbar ons-bottom-toolbar component
- * @seealso ons-back-button ons-back-button component
- * @seealso ons-toolbar-button ons-toolbar-button component
+ * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
+ * @seealso ons-bottom-toolbar [en]ons-bottom-toolbar component[/en][ja]ons-bottom-toolbarコンポーネント[/ja]
+ * @seealso ons-back-button [en]ons-back-button component[/en][ja]ons-back-buttonコンポーネント[/ja]
+ * @seealso ons-toolbar-button [en]ons-toolbar-button component[/en][ja]ons-toolbar-buttonコンポーネント[/ja]
  */
 (function() {
   'use strict';

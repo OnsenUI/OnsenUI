@@ -1,28 +1,26 @@
 <div class="directive-container" id="module:directives.directive:ons-tabbar">
   <div>
-    <h4>Description</h4>
-
     <section class="description">
-      <p>Used with tabbar-item to manage pages using tabs.</p>
+      <p>タブバーをページ下部に表示するためのコンポーネントです。ons-tabbar-itemと組み合わせて使うことで、ページを管理できます。</p>
     </section>
 
     <span class="anchor" id="ons-tabbar-attributes"></span>
     
       <section>
-        <h4>Attributes</h4>
+        <h4>属性</h4>
         <table>
           <tbody>
             
             <span class="anchor" id="ons-tabbar-hide-tabs"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">hide-tabs</td>
-              <td>Whether to hide the tabs. Valid values are [true/false] or angular binding. eg:</td>
+              <td>タブを非表示にする場合に指定します。trueもしくはfalseを指定できます。</td>
             </tr>
             
             <span class="anchor" id="ons-tabbar-var"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">var</td>
-              <td>Variable name to refer this tabbar.</td>
+              <td>JavaScriptからコンポーネントにアクセスするための変数名を指定します。</td>
             </tr>
             
           </tbody>
@@ -33,14 +31,14 @@
     <span class="anchor" id="ons-tabbar-methods"></span>
     
     <section>
-      <h4>Methods</h4>
+      <h4>メソッド</h4>
       <table>
         <tbody>
           
           <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>on(eventName,listener)</code></td>
-            <td>Added an event listener. Preset events are &#39;prechange&#39; and &#39;postchange&#39;.</td>
+            <td>イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。</td>
           </tr>
           
         </tbody>
@@ -51,7 +49,7 @@
     
 
     
-    <h4>Sample</h4>
+    <h4>サンプル</h4>
 
     
     <div style="height: 480px; width: 320px;" class="codepen-wrapper">
@@ -63,16 +61,24 @@
     
 
     
-      <h4>See also</h4>
+      <h4>関連情報</h4>
       <ul class="seealso">
         
           
-            <li class="guide"><a href="overview.html#using-tab-bar">Using tab bar</a></li>
+            <li class="guide"><a href="overview.html#UsingTabBar">タブバーを使う</a></li>
+          
+            <li class="guide"><a href="overview.html#EventHandling">イベント処理の使い方</a></li>
+          
+            <li class="guide"><a href="overview.html#CallingComponentAPIsfromJavaScript">JavaScriptからコンポーネントを呼び出す</a></li>
+          
+            <li class="guide"><a href="overview.html#DefiningMultiplePagesinSingleHTML">複数のページを1つのHTMLに記述する</a></li>
           
         
         
           
-            <li class="seealso"><a href="#ons-tabbar-item">ons-tabbar-item component</a></li>
+            <li class="seealso"><a href="#ons-tabbar-item">ons-tabbar-itemコンポーネント</a></li>
+          
+            <li class="seealso"><a href="#ons-page">ons-pageコンポーネント</a></li>
           
         
       </ul>

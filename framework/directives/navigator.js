@@ -3,22 +3,38 @@
  * @id navigator
  * @name ons-navigator
  * @description
- *  [en]Manages the page navigation backed by page stack.[/en]
- *  [ja]ページスタックを用いたページの切り替えを管理します。[/ja]
- * @param page First page to show when navigator is initialized
- * @param var Variable name to refer this navigator.
+ *  [en]A component that provides page stack management and navigation. This component does not have a visible content.[/en]
+ *  [ja]ページスタックの管理とナビゲーション機能を提供するコンポーネント。画面上への出力はありません。[/ja]
+ * @param page
+ *  [en]First page to show when navigator is initialized.[/en]
+ *  [ja]ナビゲーターが初期化された時に表示するページを指定します。[/ja]
+ * @param var
+ *  [en]Variable name to refer this navigator.[/en]
+ *  [ja]ナビゲーターを参照するための変数を指定します。[/ja]
  * @property pushPage(pageUrl,options)
- *  [en]Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. eg. pushPage('page2.html')[/en]
- *  [ja]指定したpageUrlを新しいページスタックに追加します。[/ja]
- * @property popPage() Pops current page from the page stack
- * @property resetToPage(pageUrl,options) Clears page stack and add the specified pageUrl to the page stack. If options object is specified, apply the options. the options object include all the attributes of this navigator
- * @property getCurrentPage() Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method. eg. ons.navigator.getCurrentPage().options
- * @property getPages() Retrieve the entire page stages of the navigator.
- * @property on(eventName,listener) Added an event listener. Preset events are 'prepop', 'prepush', 'postpop' and 'postpush'.
+ *  [en]Pushes the specified pageUrl into the page stack.[/en]
+ *  [ja]指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。[/ja]
+ * @property popPage()
+ *  [en]Pops current page from the page stack. One previous page will be displayed.[/en]
+ *  [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
+ * @property resetToPage(pageUrl,options)
+ *  [en]Clears page stack and add the specified pageUrl to the page stack.[/en]
+ *  [ja]ページスタックをリセットし、指定したページを表示します。[/ja]
+ * @property getCurrentPage()
+ *  [en]Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method.[/en]
+ *  [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
+ * @property getPages()
+ *  [en]Retrieve the entire page stacks of the navigator.[/en]
+ *  [ja]ナビゲーターの持つページスタックの一覧を取得します。[/ja]
+ * @property on(eventName,listener)
+ *  [en]Add an event listener. Preset events are prepop, prepush, postpop and postpush.[/en]
+ *  [ja]イベントリスナーを追加します。prepop, prepush, postpop, postpushを指定できます。[/ja]
  * @codepen yrhtv
- * @guide page-navigation Guide for navigation
- * @guide calling-component-apis-from-javascript Using navigator from JavaScript
- * @seealso ons-toolbar ons-toolbar component
+ * @guide page-navigation [en]Guide for page navigation[/en][ja]ページナビゲーションの概要[/ja]
+ * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  */
 (function() {
   'use strict';

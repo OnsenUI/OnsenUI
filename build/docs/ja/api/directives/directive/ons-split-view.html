@@ -1,46 +1,44 @@
 <div class="directive-container" id="module:directives.directive:ons-split-view">
   <div>
-    <h4>Description</h4>
-
     <section class="description">
-      <p>Divides the screen into left and right section. This component can also act as sliding menu which can be controlled by &#39;collapse&#39; attribute</p>
+      <p>画面を左右に分割します。collapse属性を用いることで、スライディングメニューとしての使い方もできます。</p>
     </section>
 
     <span class="anchor" id="ons-split-view-attributes"></span>
     
       <section>
-        <h4>Attributes</h4>
+        <h4>属性</h4>
         <table>
           <tbody>
-            
-            <span class="anchor" id="ons-split-view-secondary-page"></span>
-            <tr ng-repeat="attribute in directive.attributes">
-              <td class="attribute-name">secondary-page</td>
-              <td>The url of the page on the left</td>
-            </tr>
             
             <span class="anchor" id="ons-split-view-main-page"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">main-page</td>
-              <td>The url of the page on the right</td>
+              <td>右側に表示するページのURLを指定します。</td>
             </tr>
             
             <span class="anchor" id="ons-split-view-main-page-width"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">main-page-width</td>
-              <td>Main page&#39;s width percentage. The width of secondary page take the remaining percentage</td>
+              <td>右側のページの幅をパーセント単位で指定します。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-split-view-secondary-page"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">secondary-page</td>
+              <td>左側に表示するページのURLを指定します。</td>
             </tr>
             
             <span class="anchor" id="ons-split-view-collapse"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">collapse</td>
-              <td>[Deprecated] Specify the collapse behavior. Valid values are [portrait/landscape/width ##px]. &quot;portrait&quot; means the view will collapse when device is in portrait orien0ation. &quot;landscape&quot; means the view will collapse when device is in landscape orientation. &quot;width ##px&quot; means the view will collapse when the window width is smaller than the specified ##px</td>
+              <td>[非推奨]左側のページを非表示にする条件を指定します。portrait, landscapeもしくはwidth ##pxの指定が可能です。portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。width ##pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。</td>
             </tr>
             
             <span class="anchor" id="ons-split-view-var"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">var</td>
-              <td>Variable name to refer this split view.</td>
+              <td>JavaScriptからスプリットビューコンポーネントにアクセスするための変数を定義します。</td>
             </tr>
             
           </tbody>
@@ -51,7 +49,7 @@
     <span class="anchor" id="ons-split-view-methods"></span>
     
     <section>
-      <h4>Methods</h4>
+      <h4>メソッド</h4>
       <table>
         <tbody>
           
@@ -67,22 +65,22 @@
             <td>Show the page specified in pageUrl in the left section</td>
           </tr>
           
-          <span class="anchor" id="Deprecated-Deprecated"></span>
+          <span class="anchor" id="open()-open()"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>Deprecated</code></td>
-            <td>open() Reveal the secondary page if the view is in collapse mode</td>
+            <td><code>open()</code></td>
+            <td>[Deprecated] Reveal the secondary page if the view is in collapse mode</td>
           </tr>
           
-          <span class="anchor" id="Deprecated-Deprecated"></span>
+          <span class="anchor" id="close()-close()"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>Deprecated</code></td>
-            <td>close() hide the secondary page if the view is in collapse mode</td>
+            <td><code>close()</code></td>
+            <td>[Deprecated] hide the secondary page if the view is in collapse mode</td>
           </tr>
           
-          <span class="anchor" id="Deprecated-Deprecated"></span>
+          <span class="anchor" id="toggle()-toggle()"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>Deprecated</code></td>
-            <td>toggle() Reveal the secondary page if it is currently hidden, otherwies, reveal it</td>
+            <td><code>toggle()</code></td>
+            <td>[Deprecated] Reveal the secondary page if it is currently hidden, otherwies, reveal it</td>
           </tr>
           
         </tbody>
@@ -93,7 +91,7 @@
     
 
     
-    <h4>Sample</h4>
+    <h4>サンプル</h4>
 
     
     <div style="height: 480px; width: 100%;" class="codepen-wrapper">
@@ -104,6 +102,18 @@
     <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/nKqfv" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
     
 
+    
+      <h4>関連情報</h4>
+      <ul class="seealso">
+        
+          
+            <li class="guide"><a href="overview.html#Usingonssplitviewcomponent">ons-split-viewコンポーネントを使う</a></li>
+          
+            <li class="guide"><a href="overview.html#CallingComponentAPIsfromJavaScript">JavaScriptからコンポーネントを呼び出す</a></li>
+          
+        
+        
+      </ul>
     
 
   </div>

@@ -3,13 +3,22 @@
  * @id split-view
  * @name ons-split-view
  * @description
- * Divides the screen into left and right section. This component can also act as sliding menu which can be controlled by 'collapse' attribute
+ *  [en]Divides the screen into left and right section. This component can also act as sliding menu which can be controlled by collapse attribute.[/en]
+ *  [ja]画面を左右に分割します。collapse属性を用いることで、スライディングメニューとしての使い方もできます。[/ja]
  *
- * @param secondary-page The url of the page on the left
- * @param main-page The url of the page on the right
- * @param main-page-width Main page's width percentage. The width of secondary page take the remaining percentage
- * @param collapse [Deprecated] Specify the collapse behavior. Valid values are [portrait/landscape/width ##px]. "portrait" means the view will collapse when device is in portrait orien0ation. "landscape" means the view will collapse when device is in landscape orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px
- * @param var Variable name to refer this split view.
+ * @param main-page
+ *  [en]The url of the page on the right.[/en]
+ *  [ja]右側に表示するページのURLを指定します。[/ja]
+ * @param main-page-width
+ *  [en]Main page's width percentage. The width of secondary page take the remaining percentage.[/en]
+ *  [ja]右側のページの幅をパーセント単位で指定します。[/ja]
+ * @param secondary-page
+ *  [en]The url of the page on the left.[/en]
+ *  [ja]左側に表示するページのURLを指定します。[/ja]
+ * @param collapse
+ *  [en][Deprecated] Specify the collapse behavior. Valid values are portrait, landscape, width ##px. "portrait" or "landscape" means the view will collapse when device is in landscape or portrait orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px.[/en]
+ *  [ja][非推奨]左側のページを非表示にする条件を指定します。portrait, landscapeもしくはwidth ##pxの指定が可能です。portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。width ##pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。[/ja]
+ * @param var [en]Variable name to refer this split view.[/en][ja]JavaScriptからスプリットビューコンポーネントにアクセスするための変数を定義します。[/ja]
  *
  * @property setMainPage(pageUrl) Show the page specified in pageUrl in the right section
  * @property setSecondaryPage(pageUrl) Show the page specified in pageUrl in the left section
@@ -17,7 +26,8 @@
  * @property close() [Deprecated] hide the secondary page if the view is in collapse mode
  * @property toggle() [Deprecated] Reveal the secondary page if it is currently hidden, otherwies, reveal it
  * @codepen nKqfv {wide}
- * @guide multi-screen-support Multi screen support
+ * @guide Usingonssplitviewcomponent [en]Using ons-split-view.[/en][ja]ons-split-viewコンポーネントを使う[/ja]
+ * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  */
 (function() {
   'use strict';

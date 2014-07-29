@@ -3,8 +3,10 @@
  * @id bottom_toolbar
  * @name ons-bottom-toolbar
  * @description
- * Use this component to have toolbar position at the bottom of the page.
- * @seealso ons-toolbar ons-toolbar component
+ * [en]Toolbar component that is positioned at the bottom of the page. Has same functionality as the ons-toolbar component.[/en]
+ * [ja]ページ下部に配置されるツールバー用コンポーネント。機能的にはons-toolbarと同様です。[/ja]
+ * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
+ * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  */
 (function(){
   'use strict';
