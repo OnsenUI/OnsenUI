@@ -45,7 +45,6 @@ limitations under the License.
        */
       show: function() {
         this._element.css('display', null);
-        this._backButtonHandler.setEnabled(true);
         $onsen.backButtonHandlerStack.push(this._backButtonHandler);
       },
 
@@ -65,7 +64,6 @@ limitations under the License.
        */
       hide: function() {
         this._element.css('display', 'none');
-        this._backButtonHandler.setEnabled(false);
       },
 
       /**
