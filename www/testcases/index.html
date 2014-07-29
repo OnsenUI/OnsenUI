@@ -57,6 +57,7 @@
               <li><a href="#icon-button">Icon Button</a></li>
               <li><a href="#checkbox">Checkbox</a></li>
               <li><a href="#no-border-checkbox">No border Checkbox</a></li>
+              <li><a href="#radio-button">Radio Button</a></li>
               <li><a href="#list">List</a></li>
               <li><a href="#noborder-list">Noborder List</a></li>
               <li><a href="#category-list-header">Category List Header</a></li>
@@ -64,7 +65,9 @@
               <li><a href="#switch-in-list-item">Switch in List Item</a></li>
               <li><a href="#list-item-with-chevron">List Item with Chevron</a></li>
               <li><a href="#inset-list">Inset List</a></li>
-              <li><a href="#radio-button">Radio Button</a></li>
+              <li><a href="#radio-button-in-list-item">Radio Button in List Item</a></li>
+              <li><a href="#checkbox-in-list-item">Checkbox in List Item</a></li>
+              <li><a href="#no-border-checkbox-in-list-item">No border Checkbox in List Item</a></li>
               <li><a href="#search-input">Search Input</a></li>
               <li><a href="#text-input">Text Input</a></li>
               <li><a href="#transparent-text-input">Transparent Text Input</a></li>
@@ -484,6 +487,23 @@
               </section>
             </footer>
           </article>
+          <article id="radio-button" class="component">
+            <header>
+              <h2>Radio Button</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 120px;" class="markup">
+                <div style="width: 100%; height: 100%; position:absolute"><label class="radio-button">  <input type="radio" name="r" checked="checked">  <div class="radio-button__checkmark"></div>  Label</label><label class="radio-button">  <input type="radio" name="r">  <div class="radio-button__checkmark"></div>  Label</label><label class="radio-button">  <input type="radio" name="r">  <div class="radio-button__checkmark"></div>  Label</label></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;label class=&quot;radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;r&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;&lt;label class=&quot;radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;r&quot;&gt;  &lt;div class=&quot;radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;&lt;label class=&quot;radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;r&quot;&gt;  &lt;div class=&quot;radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
           <article id="list" class="component">
             <header>
               <h2>List</h2>
@@ -603,19 +623,53 @@
               </section>
             </footer>
           </article>
-          <article id="radio-button" class="component">
+          <article id="radio-button-in-list-item" class="component">
             <header>
-              <h2>Radio Button</h2>
+              <h2>Radio Button in List Item</h2>
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 120px;" class="markup">
-                <div style="width: 100%; height: 100%; position:absolute"><label class="radio-button">  <input type="radio" name="r" checked="checked">  <div class="radio-button__checkmark"></div>  Label</label><label class="radio-button">  <input type="radio" name="r">  <div class="radio-button__checkmark"></div>  Label</label><label class="radio-button">  <input type="radio" name="r">  <div class="radio-button__checkmark"></div>  Label</label></div>
+                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--tappable">    <label class="radio-button radio-button--list-item">      <input type="radio" name="b" checked="checked">      <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>      Radio Button    </label>  </li>  <li class="list__item list__item--tappable">    <label class="radio-button radio-button--list-item">      <input type="radio" name="b">      <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>      Radio Button    </label>  </li></ul></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;label class=&quot;radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;r&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;&lt;label class=&quot;radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;r&quot;&gt;  &lt;div class=&quot;radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;&lt;label class=&quot;radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;r&quot;&gt;  &lt;div class=&quot;radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;radio-button radio-button--list-item&quot;&gt;      &lt;input type=&quot;radio&quot; name=&quot;b&quot; checked=&quot;checked&quot;&gt;      &lt;div class=&quot;radio-button__checkmark radio-button--list-item__checkmark&quot;&gt;&lt;/div&gt;      Radio Button    &lt;/label&gt;  &lt;/li&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;radio-button radio-button--list-item&quot;&gt;      &lt;input type=&quot;radio&quot; name=&quot;b&quot;&gt;      &lt;div class=&quot;radio-button__checkmark radio-button--list-item__checkmark&quot;&gt;&lt;/div&gt;      Radio Button    &lt;/label&gt;  &lt;/li&gt;&lt;/ul&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="checkbox-in-list-item" class="component">
+            <header>
+              <h2>Checkbox in List Item</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 120px;" class="markup">
+                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--list-item">      <input type="checkbox">      <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li>  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--list-item">      <input type="checkbox" checked>      <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li></ul></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;checkbox checkbox--list-item&quot;&gt;      &lt;input type=&quot;checkbox&quot;&gt;      &lt;div class=&quot;checkbox__checkmark checkbox--list-item__checkmark&quot;&gt;&lt;/div&gt;      Checkbox    &lt;/label&gt;  &lt;/li&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;checkbox checkbox--list-item&quot;&gt;      &lt;input type=&quot;checkbox&quot; checked&gt;      &lt;div class=&quot;checkbox__checkmark checkbox--list-item__checkmark&quot;&gt;&lt;/div&gt;      Checkbox    &lt;/label&gt;  &lt;/li&gt;&lt;/ul&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="no-border-checkbox-in-list-item" class="component">
+            <header>
+              <h2>No border Checkbox in List Item</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 120px;" class="markup">
+                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--noborder checkbox--list-item">      <input type="checkbox">      <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li>  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--noborder checkbox--list-item">      <input type="checkbox" checked>      <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li></ul></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;checkbox checkbox--noborder checkbox--list-item&quot;&gt;      &lt;input type=&quot;checkbox&quot;&gt;      &lt;div class=&quot;checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark&quot;&gt;&lt;/div&gt;      Checkbox    &lt;/label&gt;  &lt;/li&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;checkbox checkbox--noborder checkbox--list-item&quot;&gt;      &lt;input type=&quot;checkbox&quot; checked&gt;      &lt;div class=&quot;checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark&quot;&gt;&lt;/div&gt;      Checkbox    &lt;/label&gt;  &lt;/li&gt;&lt;/ul&gt;</code></pre>
                 </div>
               </section>
             </footer>
