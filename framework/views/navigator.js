@@ -250,6 +250,10 @@ limitations under the License.
 
       },
 
+      getBackButtonHandler: function() {
+        return this._backButtonHandler;
+      },
+
       /**
        * @param {Object} options pushPage()'s options parameter
        */

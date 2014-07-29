@@ -40,6 +40,10 @@ limitations under the License.
         this.hide();
       },
 
+      getBackButtonHandler: function() {
+        return this._backButtonHandler;
+      },
+
       /**
        * Show modal view.
        */

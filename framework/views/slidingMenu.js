@@ -239,6 +239,10 @@ limitations under the License.
         scope.$on('$destroy', this._destroy.bind(this));
       },
 
+      getBackButtonHandler: function() {
+        return this._backButtonHandler;
+      },
+
       _onBackButton: function() {
         if (this.isMenuOpened()) {
           this.closeMenu();
