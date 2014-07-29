@@ -302,3 +302,89 @@ list__item()
   border 1px solid var-list-item-separator-color
   border-radius 4px
 
+/*! topdoc
+  name: Radio Button in List Item
+  modifiers:
+  use: Radio Button, List, Tappable List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="b" checked="checked">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Radio Button
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="b">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Radio Button
+        </label>
+      </li>
+    </ul>
+*/
+
+.radio-button--list-item
+  width 100%
+  height 100%
+  padding 0
+  margin 0
+  line-height var-min-height--list-item
+
+.radio-button--list-item__checkmark
+  margin-top 10px
+
+/*! topdoc
+  name: Checkbox in List Item
+  use: Checkbox, List, Tappable List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--list-item">
+          <input type="checkbox">
+          <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--list-item">
+          <input type="checkbox" checked>
+          <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+    </ul>
+*/
+
+.checkbox--list-item
+  width 100%
+  height 100%
+  padding 0
+  margin 0
+  line-height var-min-height--list-item
+
+.checkbox--list-item__checkmark
+  margin-top 10px
+
+/*! topdoc
+  name: No border Checkbox in List Item
+  use: Checkbox in List Item, No border Checkbox
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--noborder checkbox--list-item">
+          <input type="checkbox">
+          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--noborder checkbox--list-item">
+          <input type="checkbox" checked>
+          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+    </ul>
+*/

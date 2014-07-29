@@ -19,7 +19,7 @@ angular.module('app').factory('CssComponentParser', function(Component, $rootSco
           html: cssComponent.markup,
           class: cssComponent.class,
           hint: cssComponent.hint,
-          css: cssComponent.css
+          css: cssComponent.resolvedCss
         });
         result.push(component);
       }
@@ -37,38 +37,9 @@ angular.module('app').factory('CssComponentParser', function(Component, $rootSco
 
     resolveDependencies: function(components) {
 
-      function resolve(component) {
-        if (component.use) {
-          var names = component.use.split(/, +/).map(function(name) {
-            return name.trim();
-          });
+      components = this.addOrder(components).map(collectDependencies).map(resolve);
 
-          var orderedComponents = names.map(function(name) {
-            var dep = find(name);
-
-            if (dep.use) {
-              dep = resolve(dep);
-            }
-
-            return dep;
-          });
-
-          orderedComponents.sort(function(left, right) {
-            if (left.order === right.order) {
-              return 0;
-            }
-            return left.order - right.order ? -1 : 1;
-          })
-
-          component.css = orderedComponents.map(function(component) {
-            return component.css;
-          }).join('') + component.css;
-
-          component.use = undefined;
-        }
-
-        return component;
-      }
+      return components;
 
       function find(name) {
         for (var i = 0; i < components.length; i++) {
@@ -79,9 +50,60 @@ angular.module('app').factory('CssComponentParser', function(Component, $rootSco
         throw new Error('no such component: ' + name);
       }
 
-      components = this.addOrder(components).map(resolve);
+      function collectDependencies(component) {
+        if (component.use) {
+          var names = component.use.split(/, +/).map(function(name) {
+            return name.trim();
+          });
 
-      return components;
+          component.dependencies = names.map(function(name) {
+            return find(name);
+          });
+        } else {
+          component.dependencies = [];
+        }
+        return component;
+      }
+
+      function resolve(component) {
+        var components = uniquenizeDependencies(getFlatDependencies(component));
+
+        components = components.sort(function(left, right) {
+          if (left.order === right.order) {
+            return 0;
+          }
+          return left.order - right.order < 0 ? -1 : 1;
+        });
+
+        console.log(component.name + ':');
+        for (var i = 0; i < components.length; i++) {
+          console.log(' -> ' + components[i].name + '#' + components[i].order);
+        }
+
+        component.resolvedCss = components.map(function(component) {
+          return component.css;
+        }).join('');
+
+        return component;
+
+        function getFlatDependencies(component) {
+          return Array.prototype.concat.apply([component], component.dependencies.map(function(component) {
+            return component.dependencies.length > 0 ? [component].concat(getFlatDependencies(component)) : [component];
+          }));
+        }
+
+        function uniquenizeDependencies(dependencies) {
+          var dict = {};
+          dependencies.forEach(function(dependency) {
+            dict[dependency.name] = dependency;
+          });
+
+          var result = [];
+          return Object.keys(dict).map(function(name) {
+            return dict[name];
+          });
+        }
+      }
     }
   };
 

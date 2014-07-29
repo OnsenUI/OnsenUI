@@ -767,7 +767,7 @@ div#components-container > ul#components > li label,
 div#components-container > ul#components > li input[type=checkbox] {
   cursor: pointer;
 }
-div#components-container > ul#components > li input[type=checkbox] {
+div#components-container > ul#components > li h3 > label > input[type=checkbox] {
   border: 1px solid #555;
   border-radius: 2px;
   -webkit-appearance: none;
@@ -780,7 +780,7 @@ div#components-container > ul#components > li input[type=checkbox] {
   display: inline-block;
   margin-right: 6px;
 }
-div#components-container > ul#components > li input[type=checkbox]:checked:after {
+div#components-container > ul#components > li h3 > label > input[type=checkbox]:checked:after {
   content: '';
   position: absolute;
   top: 0px;
