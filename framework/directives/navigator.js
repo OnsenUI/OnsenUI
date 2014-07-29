@@ -14,6 +14,9 @@
  * @property pushPage(pageUrl,options)
  *  [en]Pushes the specified pageUrl into the page stack.[/en]
  *  [ja]指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。[/ja]
+ * @property insertPage(index,pageUrl,options)
+ *  [en]Insert the specified pageUrl into the page stack with specified index.[/en]
+ *  [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
  * @property popPage()
  *  [en]Pops current page from the page stack. One previous page will be displayed.[/en]
  *  [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]

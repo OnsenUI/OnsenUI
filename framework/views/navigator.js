@@ -131,6 +131,72 @@ limitations under the License.
       },
 
       /**
+       * Insert page object that has the specified pageUrl into the page stack and
+       * if options object is specified, apply the options.
+       *
+       * @param {Number} index
+       * @param {String} page
+       * @param {Object} [options]
+       * @param {String/NavigatorTransitionAnimator} [options.animation]
+       */
+      insertPage: function(index, page, options) {
+        options = options || {};
+
+        if (options && typeof options != 'object') {
+          throw new Error('options must be an object. You supplied ' + options);
+        }
+
+        if (this.pages.length == 0) {
+          return this.pushPage.apply(this, arguments);
+        }
+
+        this._doorLock.waitUnlock(function() {
+          var unlock = this._doorLock.lock();
+
+          $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
+
+            var pageScope = this._createPageScope();
+            var object = this._createPageElementAndLinkFunction(templateHTML, pageScope);
+            var element = object.element;
+            var link = object.link;
+
+            element = this._normalizePageElement(element);
+
+            var pageObject = this._createPageObject(page, element, pageScope, options);
+
+            if (this.pages.length > 0) {
+              index = normalizeIndex(index);
+
+              this._element[0].insertBefore(element[0], this.pages[index].element[0]);
+              this.pages.splice(index, 0, pageObject);
+              link();
+
+              setTimeout(function() {
+                element.css('display', 'none');
+                unlock();
+              }, 1000 / 60);
+
+            } else {
+              this._element.append(element);
+              this.pages.push(pageObject);
+              link();
+              unlock();
+            }
+          }.bind(this), function() {
+            unlock();
+            throw new Error('Page is not found: ' + page);
+          });
+        }.bind(this));
+
+        var normalizeIndex = function(index) {
+          if (index < 0) {
+            index = this.pages.length + index;
+          }
+          return index;
+        }.bind(this);
+      },
+
+      /**
        * Pushes the specified pageUrl into the page stack and
        * if options object is specified, apply the options.
        *
@@ -153,8 +219,6 @@ limitations under the License.
         if (this._emitPrePushEvent()) {
           return;
         }
-
-        options.animator = getAnimatorOption();
 
         var self = this;
         this._doorLock.waitUnlock(function() {
@@ -184,27 +248,31 @@ limitations under the License.
           });
         });
 
-        function getAnimatorOption() {
-          var animator = null;
+      },
 
-          if (options.animation instanceof NavigatorTransitionAnimator) {
-            return options.animation;
-          }
+      /**
+       * @param {Object} options pushPage()'s options parameter
+       */
+      _getAnimatorOption: function(options) {
+        var animator = null;
 
-          if (typeof options.animation === 'string') {
-            animator = NavigatorView._transitionAnimatorDict[options.animation];
-          }
-
-          if (!animator) {
-            animator = NavigatorView._transitionAnimatorDict['default'];
-          }
-
-          if (!(animator instanceof NavigatorTransitionAnimator)) {
-            throw new Error('"animator" is not an instance of NavigatorTransitionAnimator.');
-          }
-
-          return animator;
+        if (options.animation instanceof NavigatorTransitionAnimator) {
+          return options.animation;
         }
+
+        if (typeof options.animation === 'string') {
+          animator = NavigatorView._transitionAnimatorDict[options.animation];
+        }
+
+        if (!animator) {
+          animator = NavigatorView._transitionAnimatorDict['default'];
+        }
+
+        if (!(animator instanceof NavigatorTransitionAnimator)) {
+          throw new Error('"animator" is not an instance of NavigatorTransitionAnimator.');
+        }
+
+        return animator;
       },
 
 
@@ -220,6 +288,8 @@ limitations under the License.
        */
       _createPageObject: function(page, element, pageScope, options) {
         var navigator = this;
+
+        options.animator = this._getAnimatorOption(options);
 
         return {
           page: page,
