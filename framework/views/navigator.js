@@ -167,14 +167,16 @@ limitations under the License.
             if (this.pages.length > 0) {
               index = normalizeIndex(index);
 
-              this._element[0].insertBefore(element[0], this.pages[index].element[0]);
+              this._element[0].insertBefore(element[0], this.pages[index] ? this.pages[index].element[0] : null);
               this.pages.splice(index, 0, pageObject);
               link();
 
               setTimeout(function() {
-                element.css('display', 'none');
+                if (this.getCurrentPage() !== pageObject) {
+                  element.css('display', 'none');
+                }
                 unlock();
-              }, 1000 / 60);
+              }.bind(this), 1000 / 60);
 
             } else {
               this._element.append(element);
