@@ -282,3 +282,23 @@ list__item()
   font-weight normal
   content "\f105"
 
+/*! topdoc
+  name: Inset List
+  use: List, List Item with Chevron
+  markup:
+    <ul class="list list--inset">
+      <li class="list__item list__item--chevron">
+        List Item with Chevron
+      </li>
+      <li class="list__item list__item--chevron">
+        List Item with Chevron
+      </li>
+    </ul>
+ */
+
+.list--inset
+  margin-left 8px
+  margin-right 8px
+  border 1px solid var-list-item-separator-color
+  border-radius 4px
+
