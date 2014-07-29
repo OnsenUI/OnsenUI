@@ -478,9 +478,29 @@ h6 {
     </div>
 */
 /* topdoc
+  name: Transparent Navigation Bar
+  use: Icon Button, Navigation Bar
+  markup:
+    <div class="navigation-bar navigation-bar--transparent">
+      <div class="navigation-bar__left">
+        <span class="icon-button--quiet navigation-bar__line-height">Label</span>
+      </div>
+      <div class="navigation-bar__center">
+        <h1 class="navigation-bar__title">Navigation Bar</h1>
+      </div>
+      <div class="navigation-bar__right">
+        <span class="icon-button--quiet navigation-bar__line-height">Label</span>
+      </div>
+    </div>
+*/
+.navigation-bar--transparent {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+}
+/* topdoc
   name: Bottom Bar
   use: Navigation Bar
-  class: navigation-bar--bottom
   markup:
     <div class="bottom-bar">
       <div class="bottom-bar__line-height" style="text-align:center">Bottom Toolbar</div>
@@ -533,6 +553,11 @@ h6 {
   line-height: 44px;
   padding-bottom: 0;
   padding-top: 0;
+}
+.bottom-bar--transparent {
+  background-color: transparent;
+  background-image: none;
+  border: none;
 }
 /* topdoc
   name: Navigation Bar with Segment
