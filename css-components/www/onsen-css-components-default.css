@@ -48,6 +48,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   background-color: #fff;
   position: absolute;
   top: 0px;
@@ -356,6 +357,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -489,6 +491,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -584,6 +587,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -611,7 +615,6 @@ h6 {
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
-  font-weight: 400;
 }
 .button:hover {
   -webkit-transition: none;
@@ -686,6 +689,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -713,7 +717,6 @@ h6 {
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
-  font-weight: 400;
   background: transparent;
   border: 1px solid transparent;
   -webkit-box-shadow: none;
@@ -778,6 +781,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -805,7 +809,6 @@ h6 {
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
-  font-weight: 400;
   font-size: 17px;
   font-weight: 500;
   line-height: 36px;
@@ -870,6 +873,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -897,7 +901,6 @@ h6 {
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
-  font-weight: 400;
   font-size: 17px;
   font-weight: 500;
   line-height: 36px;
@@ -963,6 +966,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -990,7 +994,6 @@ h6 {
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
-  font-weight: 400;
   border: none;
   background-color: #4cda64;
   -webkit-box-shadow: none;
@@ -1051,6 +1054,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -1078,7 +1082,6 @@ h6 {
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
-  font-weight: 400;
   border: none;
   background-color: #4cda64;
   -webkit-box-shadow: none;
@@ -1142,6 +1145,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   display: table;
   table-layout: fixed;
   white-space: nowrap;
@@ -1156,6 +1160,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   display: table-cell;
   width: auto;
   -webkit-border-radius: 0;
@@ -1206,6 +1211,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   -webkit-border-radius: inherit;
   border-radius: inherit;
   background-color: transparent;
@@ -1355,6 +1361,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   display: table;
   table-layout: fixed;
   position: absolute;
@@ -1374,6 +1381,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   position: relative;
   overflow: hidden;
   display: table-cell;
@@ -1408,6 +1416,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -1456,6 +1465,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
 }
 .tab-bar__icon + .tab-bar__label {
   font-size: 10px;
@@ -1568,6 +1578,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -1612,6 +1623,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   padding: 4px 10px;
   letter-spacing: 0;
   color: #1284ff;
@@ -1714,6 +1726,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   line-height: 24px;
   margin: 10px 0;
 }
@@ -1735,6 +1748,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   position: relative;
   overflow: hidden;
   height: 24px;
@@ -1806,6 +1820,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   position: relative;
   overflow: hidden;
   width: 24px;
@@ -1900,6 +1915,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   line-height: 24px;
   margin: 10px 0;
   position: relative;
@@ -2070,6 +2086,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   padding: 0;
   margin: 0;
   list-style-type: none;
@@ -2382,6 +2399,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   position: relative;
   overflow: hidden;
   position: relative;
@@ -2459,6 +2477,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   -webkit-appearance: none;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -2535,6 +2554,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   letter-spacing: 0;
   border: 1px solid #ddd;
   -webkit-border-radius: 4px;
@@ -2599,6 +2619,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   letter-spacing: 0;
   border: 1px solid #ddd;
   -webkit-border-radius: 4px;
@@ -2668,6 +2689,7 @@ webkit-input-placeholder() {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   letter-spacing: 0;
   border: 1px solid #ddd;
   -webkit-border-radius: 4px;
@@ -2738,6 +2760,7 @@ webkit-input-placeholder() {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   vertical-align: top;
   resize: none;
   outline: none;
@@ -2790,6 +2813,7 @@ webkit-input-placeholder() {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   vertical-align: top;
   resize: none;
   outline: none;
@@ -2815,4 +2839,82 @@ webkit-input-placeholder() {
 .textarea--transparent::-moz-placeholder,
 .textarea--transparent:-ms-input-placeholder {
   color: #ccc;
+}
+/* topdoc
+  name: Modal
+  markup:
+    <div class="modal">
+      <div class="modal__content">
+        Message Text
+      </div>
+    </div>
+*/
+.modal {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  white-space: nowrap;
+  overflow: hidden;
+  word-spacing: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.8);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: table;
+  z-index: 2147483647;
+}
+.modal__content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  white-space: nowrap;
+  overflow: hidden;
+  word-spacing: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  color: #fff;
 }
