@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Modal | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../app.js"></script>
+  <style type="text/css">
+  </style>
+</head>
+
+<body>
+
+  <ons-modal var="app.modal">
+    <ons-icon icon="gear" spin="true"></ons-icon> Loading...
+  </ons-modal>
+
+  <ons-navigator>
+    <ons-toolbar>
+      <div class="center">Modal</div>
+    </ons-toolbar>
+
+    <p style="text-align: center">
+      <ons-button modifier="light" onclick="app.modal.show(); setTimeout(function() { app.modal.hide(); }, 2000);">Open Modal</ons-button>
+    </p>
+  </ons-navigator>
+
+</body>
+</html>
