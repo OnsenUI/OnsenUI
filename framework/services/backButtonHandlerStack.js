@@ -108,6 +108,12 @@ limitations under the License.
           setEnabled: function(enabled) {
             this._enabled = enabled;
           },
+          enable: function() {
+            this.setEnabled(true);
+          },
+          disable: function() {
+            this.setEnabled(false);
+          },
           remove: function() {
             self.remove(this.listener);
           }
@@ -164,12 +170,13 @@ limitations under the License.
       },
 
       /**
-       * @param {Function} listener Callback on back button. If this callback returns true, dispatching is stopped.
+       * @param {Function/Object} listener Callback on back button. If this callback returns true, dispatching is stopped.
        * @reutrn {Object} handler object
        */
       push: function(listener) {
-        var handler = this._createStackObject(listener);
+        var handler = listener instanceof Function ? this._createStackObject(listener) : listener;
 
+        this.remove(handler.listener);
         this._stack.push(handler);
 
         return handler;

@@ -26,32 +26,66 @@ limitations under the License.
       _element: undefined,
       _scope: undefined,
 
+      /**
+       * @param {Object} scope
+       * @param {jqLite} element
+       */
       init: function(scope, element) {
         this._scope = scope;
         this._element = element;
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
+        this._backButtonHandler = $onsen.backButtonHandlerStack.push(this._onBackButton.bind(this));
+
+        this.hide();
       },
 
+      /**
+       * Show modal view.
+       */
       show: function() {
         this._element.css('display', null);
+        this._backButtonHandler.setEnabled(true);
+        $onsen.backButtonHandlerStack.push(this._backButtonHandler);
       },
 
+      _isVisible: function() {
+        return this._element[0].clientWidth > 0;
+      },
+
+      _onBackButton: function() {
+        if (this._isVisible()) {
+          // Do nothing and stop backbutton handler chain.
+          return true;
+        }
+      },
+
+      /**
+       * Hide modal view.
+       */
       hide: function() {
         this._element.css('display', 'none');
+        this._backButtonHandler.setEnabled(false);
       },
 
+      /**
+       * Toggle modal view visibility.
+       */
       toggle: function() {
-        if (this._element[0].clientWidth > 0) {
-          return this.show.apply(this, argument);
+        if (this._isVisible()) {
+          return this.hide.apply(this, arguments);
         } else {
-          return this.hide.apply(this, argument);
+          return this.show.apply(this, arguments);
         }
       },
 
       _destroy: function() {
         this.emit('destroy', {page: this});
-        this._toolbarElement = null;
-        this._nullElement = null;
-        this._bottomToolbarElement = null;
+        this._element = null;
+        this._scope = null;
+
+        this._backButtonHandler.remove();
+        this._backButtonHandler = null;
       }
     });
     MicroEvent.mixin(ModalView);
