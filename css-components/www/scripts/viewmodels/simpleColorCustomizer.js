@@ -79,6 +79,10 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
           displayName: 'Background Color'
         },
         {
+          name: 'list-tap-active-background-color',
+          displayName: 'Active Background Color'
+        },
+        {
           name: 'list-header-background-color',
           displayName: 'Header Background Color'
         }
