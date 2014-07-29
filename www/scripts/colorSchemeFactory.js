@@ -29,6 +29,7 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
         // List
         'list-background-color': '#fff',
         'list-header-background-color': '#eee',
+        'list-tap-active-background-color': '#d9d9d9',
 
         // Switch
         'switch-highlight-color': '#4cd964',
@@ -61,6 +62,7 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
         // List
         'list-background-color': transparent,
         'list-header-background-color': '#222329',
+        'list-tap-active-background-color': '#47484d',
 
         // Switch
         'switch-highlight-color': '#3385ff',
@@ -92,6 +94,7 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
         // List
         'list-background-color': '#fff',
         'list-header-background-color': '#eee',
+        'list-tap-active-background-color': '#d9d9d9',
 
         // Switch
         'switch-highlight-color': '#4cd964',
@@ -124,6 +127,7 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
         // List
         'list-background-color': '#fff',
         'list-header-background-color': '#eee',
+        'list-tap-active-background-color': '#d9d9d9',
 
         // Switch
         'switch-highlight-color': '#574bdb',
