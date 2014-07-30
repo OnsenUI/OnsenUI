@@ -10,10 +10,9 @@ body {
   bottom: 0;
   padding: 0;
   margin: 0;
+  -webkit-text-size-adjust: 100%;
 }
-*:not(input,
-textarea,
-select) {
+*:not(input):not(textarea):not(select) {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -49,6 +48,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   background-color: #fff;
   position: absolute;
   top: 0px;
@@ -357,6 +357,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -477,9 +478,29 @@ h6 {
     </div>
 */
 /* topdoc
+  name: Transparent Navigation Bar
+  use: Icon Button, Navigation Bar
+  markup:
+    <div class="navigation-bar navigation-bar--transparent">
+      <div class="navigation-bar__left">
+        <span class="icon-button--quiet navigation-bar__line-height">Label</span>
+      </div>
+      <div class="navigation-bar__center">
+        <h1 class="navigation-bar__title">Navigation Bar</h1>
+      </div>
+      <div class="navigation-bar__right">
+        <span class="icon-button--quiet navigation-bar__line-height">Label</span>
+      </div>
+    </div>
+*/
+.navigation-bar--transparent {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+}
+/* topdoc
   name: Bottom Bar
   use: Navigation Bar
-  class: navigation-bar--bottom
   markup:
     <div class="bottom-bar">
       <div class="bottom-bar__line-height" style="text-align:center">Bottom Toolbar</div>
@@ -490,6 +511,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -531,6 +553,11 @@ h6 {
   line-height: 44px;
   padding-bottom: 0;
   padding-top: 0;
+}
+.bottom-bar--transparent {
+  background-color: transparent;
+  background-image: none;
+  border: none;
 }
 /* topdoc
   name: Navigation Bar with Segment
@@ -585,6 +612,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -612,7 +640,6 @@ h6 {
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
-  font-weight: 400;
 }
 .button:hover {
   -webkit-transition: none;
@@ -687,6 +714,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -714,7 +742,6 @@ h6 {
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
-  font-weight: 400;
   background: transparent;
   border: 1px solid transparent;
   -webkit-box-shadow: none;
@@ -779,6 +806,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -806,7 +834,6 @@ h6 {
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
-  font-weight: 400;
   font-size: 17px;
   font-weight: 500;
   line-height: 36px;
@@ -871,6 +898,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -898,7 +926,6 @@ h6 {
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
-  font-weight: 400;
   font-size: 17px;
   font-weight: 500;
   line-height: 36px;
@@ -964,6 +991,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -991,7 +1019,6 @@ h6 {
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
-  font-weight: 400;
   border: none;
   background-color: #4cda64;
   -webkit-box-shadow: none;
@@ -1052,6 +1079,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -1079,7 +1107,6 @@ h6 {
   -moz-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   -o-transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
   transition: background-color 0.2s linear, color 0.2s linear, opacity 0.2s linear;
-  font-weight: 400;
   border: none;
   background-color: #4cda64;
   -webkit-box-shadow: none;
@@ -1143,6 +1170,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   display: table;
   table-layout: fixed;
   white-space: nowrap;
@@ -1157,6 +1185,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   display: table-cell;
   width: auto;
   -webkit-border-radius: 0;
@@ -1207,6 +1236,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   -webkit-border-radius: inherit;
   border-radius: inherit;
   background-color: transparent;
@@ -1356,6 +1386,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   display: table;
   table-layout: fixed;
   position: absolute;
@@ -1375,6 +1406,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   position: relative;
   overflow: hidden;
   display: table-cell;
@@ -1409,6 +1441,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -1457,6 +1490,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
 }
 .tab-bar__icon + .tab-bar__label {
   font-size: 10px;
@@ -1569,6 +1603,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -1613,6 +1648,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   padding: 4px 10px;
   letter-spacing: 0;
   color: #1284ff;
@@ -1715,6 +1751,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   line-height: 24px;
   margin: 10px 0;
 }
@@ -1736,6 +1773,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   position: relative;
   overflow: hidden;
   height: 24px;
@@ -1807,6 +1845,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   position: relative;
   overflow: hidden;
   width: 24px;
@@ -1901,6 +1940,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   line-height: 24px;
   margin: 10px 0;
   position: relative;
@@ -2018,6 +2058,159 @@ h6 {
   border: none;
 }
 /* topdoc
+  name: Radio Button
+  class: radio-button
+  modifiers:
+  markup:
+    <label class="radio-button">
+      <input type="radio" name="r" checked="checked">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+
+    <label class="radio-button">
+      <input type="radio" name="r">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+
+    <label class="radio-button">
+      <input type="radio" name="r">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+*/
+.radio-button > input[type="radio"] {
+  position: absolute;
+  overflow: hidden;
+  right: 0px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0px;
+  width: 0px;
+}
+.radio-button > input[type="radio"]:active,
+.radio-button > input[type="radio"]:focus {
+  outline: 0;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.radio-button > input[type="radio"]:checked + .radio-button__checkmark:after {
+  opacity: 1;
+}
+.radio-button > input[type="radio"]:checked + .radio-button__checkmark:before {
+  background: transparent;
+  border: none;
+}
+.radio-button {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  line-height: 24px;
+  text-align: left;
+  margin: 10px 0;
+}
+.radio-button__checkmark:before {
+  content: '';
+  position: absolute;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  left: 0;
+}
+.radio-button__checkmark {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  position: relative;
+  overflow: hidden;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+}
+.radio-button > input[type="radio"]:checked + .radio-button__checkmark {
+  background: rgba(0,0,0,0);
+}
+.radio-button__checkmark:after {
+  content: '';
+  position: absolute;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  top: 5px;
+  left: 4px;
+  opacity: 0;
+  width: 12px;
+  height: 6px;
+  background: transparent;
+  border: 3px solid #1284ff;
+  border-width: 3px;
+  border-top: none;
+  border-right: none;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.radio-button > input[type="radio"]:disabled + .radio-button__checkmark {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+/* topdoc
   name: List
   class: list
   markup:
@@ -2071,6 +2264,7 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   padding: 0;
   margin: 0;
   list-style-type: none;
@@ -2277,157 +2471,109 @@ h6 {
   content: "\f105";
 }
 /* topdoc
-  name: Radio Button
-  class: radio-button
-  modifiers:
+  name: Inset List
+  use: List, List Item with Chevron
   markup:
-    <label class="radio-button">
-      <input type="radio" name="r" checked="checked">
-      <div class="radio-button__checkmark"></div>
-      Label
-    </label>
-
-    <label class="radio-button">
-      <input type="radio" name="r">
-      <div class="radio-button__checkmark"></div>
-      Label
-    </label>
-
-    <label class="radio-button">
-      <input type="radio" name="r">
-      <div class="radio-button__checkmark"></div>
-      Label
-    </label>
+    <ul class="list list--inset">
+      <li class="list__item list__item--chevron">
+        List Item with Chevron
+      </li>
+      <li class="list__item list__item--chevron">
+        List Item with Chevron
+      </li>
+    </ul>
+ */
+.list--inset {
+  margin-left: 8px;
+  margin-right: 8px;
+  border: 1px solid #ddd;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* topdoc
+  name: Radio Button in List Item
+  modifiers:
+  use: Radio Button, List, Tappable List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="b" checked="checked">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Radio Button
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="b">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Radio Button
+        </label>
+      </li>
+    </ul>
 */
-.radio-button > input[type="radio"] {
-  position: absolute;
-  overflow: hidden;
-  right: 0px;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  padding: 0;
-  border: 0;
-  opacity: 0.001;
-  z-index: 1;
-  vertical-align: top;
-  outline: none;
+.radio-button--list-item {
   width: 100%;
   height: 100%;
+  padding: 0;
   margin: 0;
-  -webkit-appearance: none;
-  appearance: none;
-  height: 0px;
-  width: 0px;
+  line-height: 44px;
 }
-.radio-button > input[type="radio"]:active,
-.radio-button > input[type="radio"]:focus {
-  outline: 0;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+.radio-button--list-item__checkmark {
+  margin-top: 10px;
 }
-.radio-button > input[type="radio"]:checked + .radio-button__checkmark:after {
-  opacity: 1;
+/* topdoc
+  name: Checkbox in List Item
+  use: Checkbox, List, Tappable List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--list-item">
+          <input type="checkbox">
+          <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--list-item">
+          <input type="checkbox" checked>
+          <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+    </ul>
+*/
+.checkbox--list-item {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  line-height: 44px;
 }
-.radio-button > input[type="radio"]:checked + .radio-button__checkmark:before {
-  background: transparent;
-  border: none;
+.checkbox--list-item__checkmark {
+  margin-top: 10px;
 }
-.radio-button {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  position: relative;
-  overflow: hidden;
-  line-height: 24px;
-  text-align: left;
-  margin: 10px 0;
-}
-.radio-button__checkmark:before {
-  content: '';
-  position: absolute;
-  -webkit-border-radius: 100%;
-  border-radius: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  width: 24px;
-  height: 24px;
-  background: transparent;
-  border: none;
-  -webkit-border-radius: 16px;
-  border-radius: 16px;
-  left: 0;
-}
-.radio-button__checkmark {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  position: relative;
-  overflow: hidden;
-  position: relative;
-  width: 24px;
-  height: 24px;
-  background: transparent;
-}
-.radio-button > input[type="radio"]:checked + .radio-button__checkmark {
-  background: rgba(0,0,0,0);
-}
-.radio-button__checkmark:after {
-  content: '';
-  position: absolute;
-  -webkit-border-radius: 100%;
-  border-radius: 100%;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  top: 5px;
-  left: 4px;
-  opacity: 0;
-  width: 12px;
-  height: 6px;
-  background: transparent;
-  border: 3px solid #1284ff;
-  border-width: 3px;
-  border-top: none;
-  border-right: none;
-  -webkit-border-radius: 0px;
-  border-radius: 0px;
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-}
-.radio-button > input[type="radio"]:disabled + .radio-button__checkmark {
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none;
-}
+/* topdoc
+  name: No border Checkbox in List Item
+  use: Checkbox in List Item, No border Checkbox
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--noborder checkbox--list-item">
+          <input type="checkbox">
+          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--noborder checkbox--list-item">
+          <input type="checkbox" checked>
+          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </li>
+    </ul>
+*/
 /* topdoc
   name: Search Input
   class: search-input
@@ -2460,6 +2606,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   -webkit-appearance: none;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -2536,6 +2683,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   letter-spacing: 0;
   border: 1px solid #ddd;
   -webkit-border-radius: 4px;
@@ -2600,6 +2748,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   letter-spacing: 0;
   border: 1px solid #ddd;
   -webkit-border-radius: 4px;
@@ -2669,6 +2818,7 @@ webkit-input-placeholder() {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   letter-spacing: 0;
   border: 1px solid #ddd;
   -webkit-border-radius: 4px;
@@ -2739,6 +2889,7 @@ webkit-input-placeholder() {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   vertical-align: top;
   resize: none;
   outline: none;
@@ -2791,6 +2942,7 @@ webkit-input-placeholder() {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
+  font-size: 17px;
   vertical-align: top;
   resize: none;
   outline: none;
@@ -2816,4 +2968,82 @@ webkit-input-placeholder() {
 .textarea--transparent::-moz-placeholder,
 .textarea--transparent:-ms-input-placeholder {
   color: #ccc;
+}
+/* topdoc
+  name: Modal
+  markup:
+    <div class="modal">
+      <div class="modal__content">
+        Message Text
+      </div>
+    </div>
+*/
+.modal {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  white-space: nowrap;
+  overflow: hidden;
+  word-spacing: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.8);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: table;
+  z-index: 2147483647;
+}
+.modal__content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  white-space: nowrap;
+  overflow: hidden;
+  word-spacing: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  color: #fff;
 }
