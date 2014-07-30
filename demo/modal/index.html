@@ -10,9 +10,19 @@
   <script src="../../build/js/angular/angular.js"></script>
   <script src="../../build/js/onsenui.js"></script>
   <script src="../app.js"></script>
+  <script>
+    angular.module('myApp').controller('PageController', function($scope) {
+      $scope.open = function() {
+        $scope.app.modal.show();
+        setTimeout(function() {
+          $scope.app.modal.hide();
+        }, 2000);
+      };
+    });
+  </script>
 </head>
 
-<body>
+<body ng-controller="PageController">
 
   <ons-modal var="app.modal">
     <ons-icon icon="gear" spin="true"></ons-icon> Loading...
@@ -24,7 +34,7 @@
     </ons-toolbar>
 
     <p style="text-align: center">
-      <ons-button modifier="light" onclick="app.modal.show(); setTimeout(function() { app.modal.hide(); }, 2000);">Open Modal</ons-button>
+      <ons-button modifier="light" ng-click="open();">Open Modal</ons-button>
     </p>
   </ons-navigator>
 
