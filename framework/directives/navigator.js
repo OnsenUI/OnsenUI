@@ -33,7 +33,7 @@
  *  [en]Add an event listener. Preset events are prepop, prepush, postpop and postpush.[/en]
  *  [ja]イベントリスナーを追加します。prepop, prepush, postpop, postpushを指定できます。[/ja]
  * @codepen yrhtv
- * @guide page-navigation [en]Guide for page navigation[/en][ja]ページナビゲーションの概要[/ja]
+ * @guide PageNavigation [en]Guide for page navigation[/en][ja]ページナビゲーションの概要[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
