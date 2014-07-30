@@ -312,9 +312,13 @@ gulp.task('build-doc-en', function() {
   dgeni.generator('docs/dgeni.conf.js')();
 })
 
-gulp.task('build-doc', function() {
-  return runSequence(
-    "build-doc-ja",
-    "build-doc-en"
-  );
+gulp.task('build-docs', function() {
+  njglobals.rootUrl = '/';
+  njglobals.lang = 'ja';
+  dgeni.generator('docs/dgeni.conf.js')()
+    .then(function() {
+      njglobals.rootUrl = '/';
+      njglobals.lang = 'en';
+      dgeni.generator('docs/dgeni.conf.js')();
+    });
 });
