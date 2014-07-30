@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.0 - 2014-07-23 */
+/*! onsenui - v1.1.1-dev - 2014-07-30 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -25020,7 +25020,7 @@ limitations under the License.
 
         animit.runAll(
 
-          animit(enterPage.controller.getContentElement())
+          animit(enterPage.getPageView().getContentElement())
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -25042,7 +25042,7 @@ limitations under the License.
               done();
             }),
 
-          animit(enterPage.controller.getToolbarElement())
+          animit(enterPage.getPageView().getToolbarElement())
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -25071,7 +25071,7 @@ limitations under the License.
       pop: function(enterPage, leavePage, callback) {
         animit.runAll(
 
-          animit(leavePage.controller.getContentElement())
+          animit(leavePage.getPageView().getContentElement())
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -25092,7 +25092,7 @@ limitations under the License.
               done();
             }),
 
-          animit(leavePage.controller.getToolbarElement())
+          animit(leavePage.getPageView().getToolbarElement())
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -25143,7 +25143,7 @@ limitations under the License.
   /**
    * Fade-in screen transition.
    */
-  module.factory('IOSSlideTransitionAnimator', function(NavigatorTransitionAnimator) {
+  module.factory('IOSSlideTransitionAnimator', function(NavigatorTransitionAnimator, PageView) {
 
     /**
      * Slide animator for navigator transition like iOS's screen slide transition.
@@ -25159,8 +25159,8 @@ limitations under the License.
       _decompose: function(page) {
         var elements = [];
 
-        var left = page.controller.getToolbarLeftItemsElement();
-        var right = page.controller.getToolbarRightItemsElement();
+        var left = page.getPageView().getToolbarLeftItemsElement();
+        var right = page.getPageView().getToolbarRightItemsElement();
 
         var other = []
           .concat(left.children.length === 0 ? left : excludeBackButtonLabel(left.children))
@@ -25168,16 +25168,16 @@ limitations under the License.
 
 
         var pageLabels = [
-          page.controller.getToolbarCenterItemsElement(),
-          page.controller.getToolbarBackButtonLabelElement()
+          page.getPageView().getToolbarCenterItemsElement(),
+          page.getPageView().getToolbarBackButtonLabelElement()
         ];
 
         return {
           pageLabels: pageLabels,
           other: other,
-          content: page.controller.getContentElement(),
-          toolbar: page.controller.getToolbarElement(),
-          bottomToolbar: page.controller.getBottomToolbarElement()
+          content: page.getPageView().getContentElement(),
+          toolbar: page.getPageView().getToolbarElement(),
+          bottomToolbar: page.getPageView().getBottomToolbarElement()
         };
 
         function excludeBackButtonLabel(elements) {
@@ -25230,12 +25230,12 @@ limitations under the License.
           });
 
         var bothPageHasToolbar =
-          enterPage.controller.hasToolbarElement() &&
-          leavePage.controller.hasToolbarElement();
+          enterPage.getPageView().hasToolbarElement() &&
+          leavePage.getPageView().hasToolbarElement();
 
         var isToolbarNothing = 
-          !enterPage.controller.hasToolbarElement() &&
-          !leavePage.controller.hasToolbarElement();
+          !enterPage.getPageView().hasToolbarElement() &&
+          !leavePage.getPageView().hasToolbarElement();
 
         if (bothPageHasToolbar) {
           animit.runAll(
@@ -25440,12 +25440,12 @@ limitations under the License.
 
 
         var bothPageHasToolbar =
-          enterPage.controller.hasToolbarElement() &&
-          leavePage.controller.hasToolbarElement();
+          enterPage.getPageView().hasToolbarElement() &&
+          leavePage.getPageView().hasToolbarElement();
 
         var isToolbarNothing = 
-          !enterPage.controller.hasToolbarElement() &&
-          !leavePage.controller.hasToolbarElement();
+          !enterPage.getPageView().hasToolbarElement() &&
+          !leavePage.getPageView().hasToolbarElement();
 
         if (bothPageHasToolbar || isToolbarNothing) {
           animit.runAll(
@@ -25818,6 +25818,105 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
+  module.factory('ModalView', function($onsen) {
+
+    var ModalView = Class.extend({
+      _element: undefined,
+      _scope: undefined,
+
+      /**
+       * @param {Object} scope
+       * @param {jqLite} element
+       */
+      init: function(scope, element) {
+        this._scope = scope;
+        this._element = element;
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
+        this._backButtonHandler = $onsen.backButtonHandlerStack.push(this._onBackButton.bind(this));
+
+        this.hide();
+      },
+
+      getBackButtonHandler: function() {
+        return this._backButtonHandler;
+      },
+
+      /**
+       * Show modal view.
+       */
+      show: function() {
+        this._element.css('display', null);
+        $onsen.backButtonHandlerStack.push(this._backButtonHandler);
+      },
+
+      _isVisible: function() {
+        return this._element[0].clientWidth > 0;
+      },
+
+      _onBackButton: function() {
+        if (this._isVisible()) {
+          // Do nothing and stop backbutton handler chain.
+          return true;
+        }
+      },
+
+      /**
+       * Hide modal view.
+       */
+      hide: function() {
+        this._element.css('display', 'none');
+      },
+
+      /**
+       * Toggle modal view visibility.
+       */
+      toggle: function() {
+        if (this._isVisible()) {
+          return this.hide.apply(this, arguments);
+        } else {
+          return this.show.apply(this, arguments);
+        }
+      },
+
+      _destroy: function() {
+        this.emit('destroy', {page: this});
+        this._element = null;
+        this._scope = null;
+
+        this._backButtonHandler.remove();
+        this._backButtonHandler = null;
+      }
+    });
+    MicroEvent.mixin(ModalView);
+
+    return ModalView;
+  });
+})();
+
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function() {
+  'use strict;';
+
+  var module = angular.module('onsen');
+
   module.factory('NavigatorView', function($http, $parse, $templateCache, $compile, $onsen,
     SimpleSlideTransitionAnimator, NavigatorTransitionAnimator, LiftTransitionAnimator,
     NullTransitionAnimator, IOSSlideTransitionAnimator, FadeTransitionAnimator) {
@@ -25905,6 +26004,97 @@ limitations under the License.
         throw new Error('invalid state');
       },
 
+
+      _createPageElementAndLinkFunction : function(templateHTML, pageScope, done) {
+        var div = document.createElement('div');
+        div.innerHTML = templateHTML.trim();
+        var pageElement = angular.element(div);
+
+        var hasPage = div.childElementCount === 1 &&
+          div.childNodes[0].nodeName.toLowerCase() === 'ons-page';
+        if (hasPage) {
+          pageElement = angular.element(div.childNodes[0]);
+        } else {
+          throw new Error('You can not supply no "ons-page" element to "ons-navigator".');
+        }
+
+        var link = $compile(pageElement);
+        return {
+          element: pageElement,
+          link: function() {
+            return link(pageScope);
+          }
+        };
+      },
+
+      /**
+       * Insert page object that has the specified pageUrl into the page stack and
+       * if options object is specified, apply the options.
+       *
+       * @param {Number} index
+       * @param {String} page
+       * @param {Object} [options]
+       * @param {String/NavigatorTransitionAnimator} [options.animation]
+       */
+      insertPage: function(index, page, options) {
+        options = options || {};
+
+        if (options && typeof options != 'object') {
+          throw new Error('options must be an object. You supplied ' + options);
+        }
+
+        if (this.pages.length == 0) {
+          return this.pushPage.apply(this, arguments);
+        }
+
+        this._doorLock.waitUnlock(function() {
+          var unlock = this._doorLock.lock();
+
+          $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
+
+            var pageScope = this._createPageScope();
+            var object = this._createPageElementAndLinkFunction(templateHTML, pageScope);
+            var element = object.element;
+            var link = object.link;
+
+            element = this._normalizePageElement(element);
+
+            var pageObject = this._createPageObject(page, element, pageScope, options);
+
+            if (this.pages.length > 0) {
+              index = normalizeIndex(index);
+
+              this._element[0].insertBefore(element[0], this.pages[index] ? this.pages[index].element[0] : null);
+              this.pages.splice(index, 0, pageObject);
+              link();
+
+              setTimeout(function() {
+                if (this.getCurrentPage() !== pageObject) {
+                  element.css('display', 'none');
+                }
+                unlock();
+              }.bind(this), 1000 / 60);
+
+            } else {
+              this._element.append(element);
+              this.pages.push(pageObject);
+              link();
+              unlock();
+            }
+          }.bind(this), function() {
+            unlock();
+            throw new Error('Page is not found: ' + page);
+          });
+        }.bind(this));
+
+        var normalizeIndex = function(index) {
+          if (index < 0) {
+            index = this.pages.length + index;
+          }
+          return index;
+        }.bind(this);
+      },
+
       /**
        * Pushes the specified pageUrl into the page stack and
        * if options object is specified, apply the options.
@@ -25922,14 +26112,12 @@ limitations under the License.
         options = options || {};
 
         if (options && typeof options != 'object') {
-          throw new Error('options must be an objected. You supplied ' + options);
+          throw new Error('options must be an object. You supplied ' + options);
         }
 
         if (this._emitPrePushEvent()) {
           return;
         }
-
-        options.animator = getAnimatorOption();
 
         var self = this;
         this._doorLock.waitUnlock(function() {
@@ -25943,12 +26131,13 @@ limitations under the License.
 
           $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
             var pageScope = self._createPageScope();
-            var pageElement = createPageElement(templateHTML, pageScope);
+            var object = self._createPageElementAndLinkFunction(templateHTML, pageScope);
+            var element = object.element;
+            var link = object.link;
 
             setImmediate(function() {
-              self._pushPageDOM(page, pageElement, pageScope, options, done);
+              self._pushPageDOM(page, element, link, pageScope, options, done);
             });
-
           }, function() {
             unlock();
             if (self._profiling) {
@@ -25958,44 +26147,35 @@ limitations under the License.
           });
         });
 
-        function createPageElement(templateHTML, pageScope, done) {
-          var div = document.createElement('div');
-          div.innerHTML = templateHTML.trim();
-          var pageElement = angular.element(div);
+      },
 
-          var hasPage = div.childElementCount === 1 &&
-            div.childNodes[0].nodeName.toLowerCase() === 'ons-page';
-          if (hasPage) {
-            pageElement = angular.element(div.childNodes[0]);
-          } else {
-            throw new Error('You can not supply no "ons-page" element to "ons-navigator".');
-          }
+      getBackButtonHandler: function() {
+        return this._backButtonHandler;
+      },
 
-          var element = $compile(pageElement)(pageScope);
-          return element;
+      /**
+       * @param {Object} options pushPage()'s options parameter
+       */
+      _getAnimatorOption: function(options) {
+        var animator = null;
+
+        if (options.animation instanceof NavigatorTransitionAnimator) {
+          return options.animation;
         }
 
-        function getAnimatorOption() {
-          var animator = null;
-
-          if (options.animation instanceof NavigatorTransitionAnimator) {
-            return options.animation;
-          }
-
-          if (typeof options.animation === 'string') {
-            animator = NavigatorView._transitionAnimatorDict[options.animation];
-          }
-
-          if (!animator) {
-            animator = NavigatorView._transitionAnimatorDict['default'];
-          }
-
-          if (!(animator instanceof NavigatorTransitionAnimator)) {
-            throw new Error('"animator" is not an instance of NavigatorTransitionAnimator.');
-          }
-
-          return animator;
+        if (typeof options.animation === 'string') {
+          animator = NavigatorView._transitionAnimatorDict[options.animation];
         }
+
+        if (!animator) {
+          animator = NavigatorView._transitionAnimatorDict['default'];
+        }
+
+        if (!(animator instanceof NavigatorTransitionAnimator)) {
+          throw new Error('"animator" is not an instance of NavigatorTransitionAnimator.');
+        }
+
+        return animator;
       },
 
 
@@ -26004,49 +26184,66 @@ limitations under the License.
       },
 
       /**
-       * @param {String} page Page name.
-       * @param {Object} element Compiled page element.
+       * @param {String} page
+       * @param {jqLite} element
        * @param {Object} pageScope
        * @param {Object} options
-       * @param {Function} [unlock]
        */
-      _pushPageDOM: function(page, element, pageScope, options, unlock) {
-        if (this._profiling) {
-          console.time('pushPageDOM');
-        }
-        unlock = unlock || function() {};
-        options = options || {};
-        element = this._normalizePageElement(element);
+      _createPageObject: function(page, element, pageScope, options) {
+        var navigator = this;
 
-        var pageController = element.inheritedData('ons-page');
-        if (!pageController) {
-          throw new Error('Fail to fetch $onsPageController.');
-        }
+        options.animator = this._getAnimatorOption(options);
 
-        var self = this;
-
-        var pageObject = {
+        return {
           page: page,
           name: page,
           element: element,
           pageScope: pageScope,
-          controller: pageController,
           options: options,
+          getPageView: function() {
+            if (!this._pageView) {
+              this._pageView = element.inheritedData('ons-page');
+              if (!this._pageView) {
+                throw new Error('Fail to fetch PageView from ons-page element.');
+              }
+            }
+            return this._pageView;
+          },
           destroy: function() {
-            pageObject.element.remove();
-            pageObject.pageScope.$destroy();
+            this.element.remove();
+            this.pageScope.$destroy();
 
-            pageObject.controller = null;
-            pageObject.element = null;
-            pageObject.pageScope = null;
-            pageObject.options = null;
+            this._pageView = null;
+            this.element = null;
+            this.pageScope = null;
+            this.options = null;
 
-            var index = self.pages.indexOf(this);
+            var index = navigator.pages.indexOf(this);
             if (index !== -1) {
-              self.pages.splice(index, 1);
+              navigator.pages.splice(index, 1);
             }
           }
         };
+      },
+
+      /**
+       * @param {String} page Page name.
+       * @param {Object} element
+       * @param {Function} link
+       * @param {Object} pageScope
+       * @param {Object} options
+       * @param {Function} [unlock]
+       */
+      _pushPageDOM: function(page, element, link, pageScope, options, unlock) {
+        if (this._profiling) {
+          console.time('pushPageDOM');
+        }
+
+        unlock = unlock || function() {};
+        options = options || {};
+        element = this._normalizePageElement(element);
+
+        var pageObject = this._createPageObject(page, element, pageScope, options);
 
         var event = {
           enterPage: pageObject,
@@ -26057,32 +26254,34 @@ limitations under the License.
         this.pages.push(pageObject);
 
         var done = function() {
-          if (self.pages[self.pages.length - 2]) {
-            self.pages[self.pages.length - 2].element.css('display', 'none');
+          if (this.pages[this.pages.length - 2]) {
+            this.pages[this.pages.length - 2].element.css('display', 'none');
           }
 
-          if (self._profiling) {
+          if (this._profiling) {
             console.timeEnd('pushPageDOM');
           }
 
           unlock();
 
-          self.emit('postpush', event);
+          this.emit('postpush', event);
 
           if (typeof options.onTransitionEnd === 'function') {
             options.onTransitionEnd();
           }
-        };
+        }.bind(this);
 
         if (this.pages.length > 1) {
           var leavePage = this.pages.slice(-2)[0];
           var enterPage = this.pages.slice(-1)[0];
 
-          options.animator.push(enterPage, leavePage, done);
           this._element.append(element);
+          link();
+          options.animator.push(enterPage, leavePage, done);
 
         } else {
           this._element.append(element);
+          link();
           done();
         }
       },
@@ -26139,34 +26338,33 @@ limitations under the License.
           return;
         }
 
-        var self = this;
         this._doorLock.waitUnlock(function() {
-          var unlock = self._doorLock.lock();
+          var unlock = this._doorLock.lock();
 
-          var leavePage = self.pages.pop();
+          var leavePage = this.pages.pop();
 
-          if (self.pages[self.pages.length - 1]) {
-            self.pages[self.pages.length - 1].element.css('display', 'block');
+          if (this.pages[this.pages.length - 1]) {
+            this.pages[this.pages.length - 1].element.css('display', 'block');
           }
 
-          var enterPage = self.pages[self.pages.length -1];
+          var enterPage = this.pages[this.pages.length -1];
 
           var event = {
             leavePage: leavePage,
-            enterPage: self.pages[self.pages.length - 1],
-            navigator: self
+            enterPage: this.pages[this.pages.length - 1],
+            navigator: this
           };
 
           var callback = function() {
             leavePage.destroy();
             unlock();
-            self.emit('postpop', event);
+            this.emit('postpop', event);
             if (typeof options.onTransitionEnd === 'function') {
               options.onTransitionEnd();
             }
-          };
+          }.bind(this);
           leavePage.options.animator.pop(enterPage, leavePage, callback);
-        });
+        }.bind(this));
       },
 
       /**
@@ -26532,9 +26730,11 @@ limitations under the License.
           .queue(menuPageStyle)
           .play();
 
-        animit(this._mainPage[0])
-          .queue(mainPageStyle)
-          .play();
+        if (Object.keys(mainPageStyle).length > 0) {
+          animit(this._mainPage[0])
+            .queue(mainPageStyle)
+            .play();
+        }
       },
 
       _generateMenuPageStyle: function(distance) {
@@ -26592,7 +26792,6 @@ limitations under the License.
 
   module.factory('PageView', function($onsen) {
 
-
     var PageView = Class.extend({
       _registeredToolbarElement : false,
       _registeredBottomToolbarElement : false,
@@ -26603,7 +26802,6 @@ limitations under the License.
       _bottomToolbarElement : angular.element(this.nullElement),
 
       init: function(scope, element) {
-
         this._scope = scope;
         this._element = element;
 
@@ -27099,8 +27297,14 @@ limitations under the License.
           this._blackMask = null;
         }
 
-        this._mainPage.removeAttr('style');
-        this._menuPage.removeAttr('style');
+        if (this._mainPage) {
+          this._mainPage.attr('style', '');
+        }
+
+        if (this._menuPage) {
+          this._menuPage.attr('style', '');
+        }
+
         this._mainPage = this._menuPage = this._element = undefined;
       },
 
@@ -27214,9 +27418,11 @@ limitations under the License.
       },
 
       _generateBehindPageStyle: function(distance) {
-        var max = this._menuPage[0].clientWidth;
+        var max = this._menuPage[0].getBoundingClientRect().width;
 
-        var behindDistance = Math.min((distance - max) / max * 10, 0);
+        var behindDistance = (distance - max) / max * 10;
+        behindDistance = isNaN(behindDistance) ? 0 : Math.max(Math.min(behindDistance, 0), -10);
+
         var behindX = this._isRight ? -behindDistance : behindDistance;
         var behindTransform = 'translate3d(' + behindX + '%, 0, 0)';
         var opacity = 1 + behindDistance / 100;
@@ -27667,6 +27873,10 @@ limitations under the License.
         scope.$on('$destroy', this._destroy.bind(this));
       },
 
+      getBackButtonHandler: function() {
+        return this._backButtonHandler;
+      },
+
       _onBackButton: function() {
         if (this.isMenuOpened()) {
           this.closeMenu();
@@ -27779,7 +27989,8 @@ limitations under the License.
 
       _appendAbovePage: function(pageUrl, templateHTML) {
         var pageScope = this._scope.$parent.$new();
-        var pageContent = $compile(templateHTML)(pageScope);
+        var pageContent = angular.element(templateHTML);
+        var link = $compile(pageContent);
 
         this._abovePage.append(pageContent);
 
@@ -27787,6 +27998,8 @@ limitations under the License.
           this._currentPageElement.remove();
           this._currentPageScope.$destroy();
         }
+
+        link(pageScope);
 
         this._currentPageElement = pageContent;
         this._currentPageScope = pageScope;
@@ -27798,7 +28011,8 @@ limitations under the License.
        */
       _appendBehindPage: function(templateHTML) {
         var pageScope = this._scope.$parent.$new();
-        var pageContent = $compile(templateHTML)(pageScope);
+        var pageContent = angular.element(templateHTML);
+        var link = $compile(pageContent);
 
         this._behindPage.append(pageContent);
 
@@ -27806,6 +28020,8 @@ limitations under the License.
           this._currentBehindPageScope.$destroy();
           this._currentBehindPageElement.remove();
         }
+
+        link(pageScope);
 
         this._currentBehindPageElement = pageContent;
         this._currentBehindPageScope = pageScope;
@@ -28255,7 +28471,6 @@ limitations under the License.
 
         scope.$watch('swipable', this._onSwipableChanged.bind(this));
 
-        window.addEventListener('orientationchange', this._onOrientationChange.bind(this));
         window.addEventListener('resize', this._onResize.bind(this));
 
         this._animator = new RevealSlidingMenuAnimator();
@@ -28349,20 +28564,15 @@ limitations under the License.
         }
       },
 
-      _onOrientationChange: function() {
-        this._onResize();
-      },
-
       _onResize: function() {
+        var lastMode = this._mode;
         this._considerChangingCollapse();
 
-        if (this._mode === COLLAPSE_MODE) {
-          this._animator.onResized(
-            {
-              isOpened: this._startX > 0,
-              width: '90%'
-            }
-          );
+        if (lastMode === COLLAPSE_MODE && this._mode === COLLAPSE_MODE) {
+          this._animator.onResized({
+            isOpened: this._currentX > 0,
+            width: '90%'
+          });
         }
 
         this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
@@ -28439,8 +28649,8 @@ limitations under the License.
 
       _activateCollapseMode: function() {
         if (this._mode !== COLLAPSE_MODE) {
-          this._behindPage.removeAttr('style');
-          this._abovePage.removeAttr('style');
+          this._behindPage.attr('style', '');
+          this._abovePage.attr('style', '');
 
           this._mode = COLLAPSE_MODE;
 
@@ -28452,24 +28662,19 @@ limitations under the License.
             this._behindPage,
             {isRight: false, width: '90%'}
           );
-
-          this._translate(0);
+          this._currentX = this._startX = 0;
         }
       },
 
       _activateSplitMode: function() {
-        if (this._mode !== SPLIT_MODE) {
-          this._animator.destroy();
+        this._animator.destroy();
 
-          this._behindPage.removeAttr('style');
-          this._abovePage.removeAttr('style');
+        this._behindPage.attr('style', '');
+        this._abovePage.attr('style', '');
 
-          this._setSize();
-          this._deactivateHammer();
-          this._mode = SPLIT_MODE;
-        } else {
-          this._setSize();
-        }
+        this._mode = SPLIT_MODE;
+        this._setSize();
+        this._deactivateHammer();
       },
 
       _activateHammer: function() {
@@ -28496,9 +28701,9 @@ limitations under the License.
         }
 
         switch (event.type) {
-
           case 'dragleft':
           case 'dragright':
+            event.preventDefault();
             event.gesture.preventDefault();
             var deltaX = event.gesture.deltaX;
 
@@ -28618,9 +28823,7 @@ limitations under the License.
     MicroEvent.mixin(SplitView);
 
     return SplitView;
-
   });
-
 })();
 
 /*
@@ -28703,9 +28906,12 @@ limitations under the License.
  * @id back_button
  * @name ons-back-button
  * @description
- *   [en]Provides back button for toolbar that can be used for navigation.[/en]
+ *   [en]Back button component for ons-toolbar. Can be used with ons-navigator to provide back button support.[/en]
+ *   [ja]ons-toolbarに配置できる「戻るボタン」用コンポーネント。ons-navigatorと共に使用し、ページを1つ前に戻る動作を行います。[/ja]
  * @codepen aHmGL
- * @seealso ons-toolbar ons-toolbar component
+ * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
+ * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
+ * @guide Returningfromapage [en]Returning from a page[/en][ja]一つ前のページに戻る[/ja]
  */
 (function(){
   'use strict';
@@ -28727,7 +28933,9 @@ limitations under the License.
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
           transclude(scope, function(clonedElement) {
-            element[0].querySelector('.back-button__label').appendChild(clonedElement[0]);
+            if (clonedElement[0]) {
+              element[0].querySelector('.back-button__label').appendChild(clonedElement[0]);
+            }
           });
         }
       }
@@ -28740,8 +28948,10 @@ limitations under the License.
  * @id bottom_toolbar
  * @name ons-bottom-toolbar
  * @description
- * Use this component to have toolbar position at the bottom of the page.
- * @seealso ons-toolbar ons-toolbar component
+ * [en]Toolbar component that is positioned at the bottom of the page. Has same functionality as the ons-toolbar component.[/en]
+ * [ja]ページ下部に配置されるツールバー用コンポーネント。機能的にはons-toolbarと同様です。[/ja]
+ * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
+ * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  */
 (function(){
   'use strict';
@@ -28788,13 +28998,23 @@ limitations under the License.
  * @id button
  * @name ons-button
  * @description
- * Button component. It includes a spinner useful for showing work in progress.
- * @param type The type of the button. Can be any of [ 'quiet', 'large', 'large--quiet', 'cta', 'large--cta' ]
- * @param should-spin Whether the button should switch to show spinner
- * @param animation The animation when the button transitions to and from the spinner. Can be any of [ 'expand-left', 'expand-right', 'expand-up', 'expand-down', 'slide-left', 'slide-right', 'slide-up', 'slide-down', 'zoom-out', 'zoom-in' ]. The default is 'slide-left'
- * @param disabled Whether the button should be disabled.
+ *    [en]Button component. If you want to place a button in a toolbar, use ons-toolbar-button or ons-back-button instead.[/en]
+ *    [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、ons-toolbar-buttonもしくはons-back-buttonコンポーネントを使用してください。[/ja]
+ * @param modifier
+ *    [en]The appearance of the button. Predefined modifiers are quiet, light, large, large--quiet, cta, and large--cta.[/en]
+ *    [ja]ボタンの表現を指定します。次の値からも選択できます: quiet, light, large, large--quiet, cta, large--cta[/ja]
+ * @param should-spin
+ *    [en]Specify if the button should have a spinner.[/en]
+ *    [ja]ボタンにスピナーを表示する場合は指定してください。[/ja]
+ * @param animation
+ *    [en]The animation when the button transitions to and from the spinner. Possible values are slide-left (default), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in.[/en]
+ *    [ja]スピナーを表示する場合のアニメーションを指定します。次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in[/ja]
+ * @param disabled
+ *    [en]Specify if button should be disabled.[/en]
+ *    [ja]ボタンを無効化する場合は指定してください。[/ja]
  * @codepen hLayx
- * @guide button Guide for ons-button
+ * @guide Button [en]Guide for ons-button[/en][ja]ons-buttonの使い方[/ja]
+ * @guide OverridingCSSstyles [en]More details about modifier attribute[/en][ja]modifier属性の使い方[/ja]
  */
 (function(){
   'use strict';
@@ -28859,13 +29079,21 @@ limitations under the License.
  * @id col
  * @name ons-col
  * @description
- * Use to layout component.
- * @param align Vertical align the column. Valid values are [top/center/bottom].
- * @param width The width of the column. Valid values are css "width" value. eg. "10%", "50px"
- * @note For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.
- * @codepen GgujC
- * @guide layouting Layouting guide
- * @seealso ons-row ons-row component
+ *    [en]Represents a column in the grid system. Use with ons-row to layout components.[/en]
+ *    [ja]グリッドシステムにて列を定義します。ons-rowとともに使用し、コンポーネントの配置に使用します。[/ja]
+ * @param align
+ *    [en]Vertical align the column. Valid values are top, center, and bottom.[/en]
+ *    [ja]縦の配置を指定します。次の値から選択してください: top, center, bottom[/ja]
+ *
+ * @param width
+ *    [en]The width of the column. Valid values are css width values ("10%", "50px").[/en]
+ *    [ja]カラムの横幅を指定します。パーセントもしくはピクセルで指定します（10%や50px）。[/ja]
+ * @note
+ *    [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.[/en]
+ *    [ja]Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。[/ja]
+ * @codepen GgujC {wide}
+ * @guide layouting [en]Layouting guide[/en][ja]レイアウト機能[/ja]
+ * @seealso ons-row [en]ons-row component[/en][ja]ons-rowコンポーネント[/ja]
  */
 (function(){
   'use strict';
@@ -28975,15 +29203,28 @@ limitations under the License.
  * @id icon
  * @name ons-icon
  * @description
- * Wrapper for font-awesome icon.
- * @param icon The icon name. set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". See all icons: http://fontawesome.io/icons/.
- * @param size The sizes of the icon. Valid values are [lg/2x/3x/4x/5x] or css font-size value.
- * @param rotate The degree to rotate the icon. Valid values are [90/180/270]
- * @param flip Flip the icon. Valid values are [horizontal/vertical]
- * @param fixed-width When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are [true/false]. Default is true.
- * @param spin Whether to spin the icon. Valid values are [true/false]
+ *    [en]Displays an icon. Can be specified from Font Awesome lineups.[/en]
+ *    [ja]アイコンを表示するコンポーネントです。Font Awesomeから選択できます。[/ja]
+ * @param icon
+ *    [en]The icon name. set the icon name without `fa-` prefix. eg. to use fa-home icon, set it to "home". See all icons: http://fontawesome.io/icons/.[/en]
+ *    [ja]アイコン名を指定します。先頭の`fa-`の部分は取り除いてください。使用できるアイコンはこちら: http://fontawesome.io/icons/。[/ja]
+ * @param size
+ *    [en]The sizes of the icon. Valid values are lg, 2x, 3x, 4x, 5x, or in pixels.[/en]
+ *    [ja]アイコンのサイズを指定します。値は、lg, 2x, 3x, 4x, 5xもしくはピクセル単位で指定できます。[/ja]
+ * @param rotate
+ *    [en]The degree to rotate the icon. Valid values are 90, 180, or 270.[/en]
+ *    [ja]アイコンを回転して表示します。90, 180, 270から指定できます。[/ja]
+ * @param flip
+ *    [en]Flip the icon. Valid values are horizontal and vertical.[/en]
+ *    [ja]アイコンを反転します。horizontalもしくはverticalを指定できます。[/ja]
+ * @param fixed-width
+ *    [en]When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are true, false. Default is true.[/en]
+ *    [ja]リスト内で使う場合に、trueを指定すると縦に整列します。trueもしくはfalseを指定できます。デフォルトはtrueです。[/ja]
+ * @param spin
+ *    [en]Whether to spin the icon. Valid values are true and false.[/en]
+ *    [ja]アイコンを回転するかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
  * @codepen xAhvg
- * @guide using-icons Using icons
+ * @guide UsingIcons [en]Using icons[/en][ja]アイコンを使う[/ja]
  */
 (function(){
   'use strict';
@@ -29075,10 +29316,13 @@ limitations under the License.
  * @id if-orientation
  * @name ons-if-orientation
  * @description
- * Conditionally display content depending on screen orientation. Valid values are [portrait/landscape]. Different from other components, this component is used as attribute in any element.
- * @param ons-if-orientation Either "portrait" or "landscape".
- * @seealso ons-if-platform ons-if-platform component
- * @guide utility-apis Other utility APIs
+ *    [en]Conditionally display content depending on screen orientation. Valid values are portrait and landscape. Different from other components, this component is used as attribute in any element.[/en]
+ *    [ja]画面の向きに応じてコンテンツの制御を行います。portraitもしくはlandscapeを指定できます。すべての要素の属性に使用できます。[/ja]
+ * @param ons-if-orientation
+ *    [en]Either portrait or landscape.[/en]
+ *    [ja]portraitもしくはlandscapeを指定します。[/ja]
+ * @seealso ons-if-platform [en]ons-if-platform component[/en][ja]ons-if-platformコンポーネント[/ja]
+ * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  */
 (function(){
   'use strict';
@@ -29145,10 +29389,13 @@ limitations under the License.
  * @id if-platform
  * @name ons-if-platform
  * @description
- * Conditionally display content depending on the platform/browser. Valid values are [ios/android/blackberry/chrome/safari/firefox/opera]. Different from other components, this component is used as attribute in any element.
- * @param ons-if-platform Either "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".
- * @seealso ons-if-orientation ons-if-orientation component
- * @guide utility-apis Other utility APIs
+ *    [en]Conditionally display content depending on the platform / browser. Valid values are ios, android, blackberry, chrome, safari, firefox, and opera.[/en]
+ *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaを指定できます。[/ja]
+ * @param ons-if-platform
+ *    [en]Either opera, firefox, safari, chrome, ie, android, blackberry, ios or windows.[/en]
+ *    [ja]opera, firefox, safari, chrome, ie, android, blackberry, ios, windowsから指定します。[/ja]
+ * @seealso ons-if-orientation [en]ons-if-orientation component[/en][ja]ons-if-orientationコンポーネント[/ja]
+ * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  */
 (function() {
   'use strict';
@@ -29246,11 +29493,12 @@ limitations under the License.
  * @id list
  * @name ons-list
  * @description
- * The container for list-item. Similar to <ul> but styled for mobile.
+ *    [en]Component to defines a list, and the container for ons-list-item(s).[/en]
+ *    [ja]リストを表現するためのコンポーネント。ons-list-itemのコンテナとして使用します。[/ja]
  * @param modifier
- * @seealso ons-list-item ons-list-item component
- * @seealso ons-list-header ons-list-header component
- * @guide using-lists Using lists
+ * @seealso ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]
+ * @seealso ons-list-header [en]ons-list-header component[/en][ja]ons-list-headerコンポーネント[/ja]
+ * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
  * @codepen yxcCt
  */
 (function(){
@@ -29285,10 +29533,11 @@ limitations under the License.
  * @name ons-list-header
  * @param modifier
  * @description
- * Header element for list items. Must be put inside ons-list tag.
- * @seealso ons-list ons-list component
- * @seealso ons-list-item ons-list-item component
- * @guide using-lists Using lists
+ *    [en]Header element for list items. Must be put inside ons-list component.[/en]
+ *    [ja]リスト要素に使用するヘッダー用コンポーネント。ons-listと共に使用します。[/ja]
+ * @seealso ons-list [en]ons-list component[/en][ja]ons-listコンポーネント[/ja]
+ * @seealso ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]
+ * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
  * @codepen yxcCt
  */
 (function() {
@@ -29320,10 +29569,11 @@ limitations under the License.
  * @name ons-list-item
  * @param modifier
  * @description
- * Works like <li> but styled for mobile. Must be put inside ons-list tag.
- * @seealso ons-list ons-list component
- * @seealso ons-list-header ons-list-header component
- * @guide using-lists Using lists
+ *    [en]Component that represents each item in the list. Must be put inside ons-list component.[/en]
+ *    [ja]リストの各要素を表現するためのコンポーネント。ons-listコンポーネントと共に使用します。[/ja]
+ * @seealso ons-list [en]ons-list component[/en][ja]ons-listコンポーネント[/ja]
+ * @seealso ons-list-header [en]ons-list-header component[/en][ja]ons-list-headerコンポーネント[/ja]
+ * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
  * @codepen yxcCt
  */
 (function() {
@@ -29351,25 +29601,119 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+ * @id modal
+ * @name ons-modal
+ * @description Modal component that mask current screen.
+ * @param modifier Modifier name.
+ * @param var Variable name to refer this modal.
+ * @property toggle() Toggle modal view visibility.
+ * @property show() Show modal view.
+ * @property hide() Hide modal view.
+ */
+(function() {
+  'use strict';
+
+  var module = angular.module('onsen');
+
+  /**
+   * Modal directive.
+   */
+  module.directive('onsModal', function($onsen, ModalView) {
+    return {
+      restrict: 'E',
+      replace: false,
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclde.
+      scope: false, 
+      transclude: false,
+
+      compile: function(element, attrs) {
+        compile(element, attrs);
+
+        return {
+          pre: function(scope, element, attrs) {
+            var modal = new ModalView(scope, element);
+
+            $onsen.declareVarAttribute(attrs, modal);
+
+            $onsen.aliasStack.register('ons.modal', modal);
+            element.data('ons-modal', modal);
+
+            scope.$on('$destroy', function() {
+              element.data('ons-modal', undefined);
+              $onsen.aliasStack.unregister('ons.modal', modal);
+            });
+          },
+
+          post: function() {
+
+          }
+        };
+      }
+    };
+
+    function compile(element, attrs) {
+      var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+      var html = element[0].innerHTML;
+      element[0].innerHTML = '';
+
+      var wrapper = angular.element('<div></div>');
+      wrapper.addClass('modal__content');
+      wrapper.addClass(modifierTemplater('modal--*__content'));
+
+      element.css('display', 'none');
+      element.addClass('modal');
+      element.addClass(modifierTemplater('modal--*'));
+
+      wrapper[0].innerHTML = html;
+      element.append(wrapper);
+    }
+  });
+
+})();
+
+/**
+ * @ngdoc directive
  * @id navigator
  * @name ons-navigator
  * @description
- *  [en]Manages the page navigation backed by page stack.[/en]
- *  [ja]ページスタックを用いたページの切り替えを管理します。[/ja]
- * @param page First page to show when navigator is initialized
- * @param var Variable name to refer this navigator.
+ *  [en]A component that provides page stack management and navigation. This component does not have a visible content.[/en]
+ *  [ja]ページスタックの管理とナビゲーション機能を提供するコンポーネント。画面上への出力はありません。[/ja]
+ * @param page
+ *  [en]First page to show when navigator is initialized.[/en]
+ *  [ja]ナビゲーターが初期化された時に表示するページを指定します。[/ja]
+ * @param var
+ *  [en]Variable name to refer this navigator.[/en]
+ *  [ja]ナビゲーターを参照するための変数を指定します。[/ja]
  * @property pushPage(pageUrl,options)
- *  [en]Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. eg. pushPage('page2.html')[/en]
- *  [ja]指定したpageUrlを新しいページスタックに追加します。[/ja]
- * @property popPage() Pops current page from the page stack
- * @property resetToPage(pageUrl,options) Clears page stack and add the specified pageUrl to the page stack. If options object is specified, apply the options. the options object include all the attributes of this navigator
- * @property getCurrentPage() Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method. eg. ons.navigator.getCurrentPage().options
- * @property getPages() Retrieve the entire page stages of the navigator.
- * @property on(eventName,listener) Added an event listener. Preset events are 'prepop', 'prepush', 'postpop' and 'postpush'.
+ *  [en]Pushes the specified pageUrl into the page stack.[/en]
+ *  [ja]指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。[/ja]
+ * @property insertPage(index,pageUrl,options)
+ *  [en]Insert the specified pageUrl into the page stack with specified index.[/en]
+ *  [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
+ * @property popPage()
+ *  [en]Pops current page from the page stack. One previous page will be displayed.[/en]
+ *  [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
+ * @property resetToPage(pageUrl,options)
+ *  [en]Clears page stack and add the specified pageUrl to the page stack.[/en]
+ *  [ja]ページスタックをリセットし、指定したページを表示します。[/ja]
+ * @property getCurrentPage()
+ *  [en]Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method.[/en]
+ *  [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
+ * @property getPages()
+ *  [en]Retrieve the entire page stacks of the navigator.[/en]
+ *  [ja]ナビゲーターの持つページスタックの一覧を取得します。[/ja]
+ * @property on(eventName,listener)
+ *  [en]Add an event listener. Preset events are prepop, prepush, postpop and postpush.[/en]
+ *  [ja]イベントリスナーを追加します。prepop, prepush, postpop, postpushを指定できます。[/ja]
  * @codepen yrhtv
- * @guide page-navigation Guide for navigation
- * @guide calling-component-apis-from-javascript Using navigator from JavaScript
- * @seealso ons-toolbar ons-toolbar component
+ * @guide page-navigation [en]Guide for page navigation[/en][ja]ページナビゲーションの概要[/ja]
+ * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  */
 (function() {
   'use strict';
@@ -29389,7 +29733,7 @@ limitations under the License.
         element.contents().remove();
 
         return {
-          pre: function(scope, element, attrs, controller, transclude) {
+          pre: function(scope, element, attrs, controller) {
             var navigator = new NavigatorView({
               scope: scope, 
               element: element
@@ -29401,8 +29745,13 @@ limitations under the License.
               navigator.pushPage(attrs.page, {});
             } else {
               var pageScope = navigator._createPageScope();
-              var compiledPage = $compile(angular.element(html))(pageScope);
-              navigator._pushPageDOM('', compiledPage, pageScope, {});
+              var pageElement = angular.element(html);
+              var linkScope = $compile(pageElement);
+              var link = function() {
+                linkScope(pageScope);
+              };
+
+              navigator._pushPageDOM('', pageElement, link, pageScope, {});
             }
 
             $onsen.aliasStack.register('ons.navigator', navigator);
@@ -29423,10 +29772,15 @@ limitations under the License.
  * @ngdoc directive
  * @id page
  * @name ons-page
- * @param var Variable name to refer this page.
- * @param modifier Modifier name.
  * @description
- * Should be used as root component of each page. The content inside page component is scrollable. If you need scroll behavior, you can put inside this component.
+ *  [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
+ *  [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
+ * @param var [en]Variable name to refer this page.[/en][ja]このページを参照するための変数名を指定します。[/ja]
+ * @param modifier [en]Specify modifier name to specify custom styles.[/en][ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+ * @guide ManagingMultiplePages [en]Managing multiple pages[/en][ja]複数のページを管理する[/ja]
+ * @guide Pageinitevent [en]Event for page initialization[/en][ja]ページ初期化のイベント[/ja]
+ * @guide OverridingCSSstyles [en]Overriding CSS styles[/en][ja]CSSスタイルのオーバーライド[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
  */
 (function() {
   'use strict';
@@ -29471,16 +29825,54 @@ limitations under the License.
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
-      transclude: true,
+      transclude: false,
       scope: true,
 
       compile: function(element) {
+        var children = element.children().remove();
+
         if ($onsen.isWebView() && $onsen.isIOS7Above()) {
           // Adjustments for IOS7
           var fill = angular.element(document.createElement('div'));
           fill.addClass('page__status-bar-fill');
           fill.css({width: '0px', height: '0px'});
           element.prepend(fill);
+        }
+
+        var content = angular.element('<div class="page__content ons-page-inner"></div>').append(children);
+
+        if (element.attr('style')) {
+          content.attr('style', element.attr('style'));
+          element.attr('style', '');
+        }
+
+        if (Modernizr.csstransforms3d) {
+          element.append(content);
+        } else {
+          content.css('overflow', 'visible');
+
+          var wrapper = angular.element('<div></div>');
+          wrapper.append(children);
+          content.append(wrapper);
+          element.append(content);
+
+          // IScroll for Android2
+          var scroller = new IScroll(content[0], {
+            momentum: true,
+            bounce: true,
+            hScrollbar: false,
+            vScrollbar: false,
+            preventDefault: false
+          });
+
+          var offset = 10;
+          scroller.on('scrollStart', function(e) {
+            var scrolled = scroller.y - offset;
+            if (scrolled < (scroller.maxScrollY + 40)) {
+              // TODO: find a better way to know when content is upated so we can refresh
+              scroller.refresh();
+            }
+          });
         }
 
         return {
@@ -29500,45 +29892,8 @@ limitations under the License.
             var modifierTemplater = $onsen.generateModifierTemplater(attrs);
             element.addClass('page ' + modifierTemplater('page--*'));
 
-            transclude(scope, function(clonedElement) {
-              var content = angular.element('<div class="page__content ons-page-inner"></div>');
-              content.addClass(modifierTemplater('page--*__content'));
-              if (element.attr('style')) {
-                content.attr('style', element.attr('style'));
-                element.removeAttr('style');
-              }
-              element.append(content);
-
-              if (Modernizr.csstransforms3d) {
-                content.append(clonedElement);
-              }  else {
-                content.css('overflow', 'visible');
-
-                var wrapper = angular.element('<div></div>');
-                content.append(wrapper);
-                wrapper.append(clonedElement);
-
-                // IScroll for Android2
-                var scroller = new IScroll(content[0], {
-                  momentum: true,
-                  bounce: true,
-                  hScrollbar: false,
-                  vScrollbar: false,
-                  preventDefault: false
-                });
-
-                var offset = 10;
-                scroller.on('scrollStart', function(e) {
-                  var scrolled = scroller.y - offset;
-                  if (scrolled < (scroller.maxScrollY + 40)) {
-                    // TODO: find a better way to know when content is upated so we can refresh
-                    scroller.refresh();
-                  }
-                });
-              }
-            });
-
-
+            var pageContent = angular.element(element[0].querySelector('.page__content'));
+            pageContent.addClass(modifierTemplater('page--*__content'));
           },
 
           post: function(scope, element, attrs) {
@@ -29555,12 +29910,16 @@ limitations under the License.
  * @id row
  * @name ons-row
  * @description
- * Use <ons-row> and <ons-col> grid system to layout component. By default, all <ons-col> inside a <ons-row> will have the same width. You can specify any <ons-col> to have a specific width and let others take the remaining width in a <ons-row>. You can event vertical align each <ons-col> in a <ons-row>
- * @param align Short hand attribute for aligning all colum in a row. Valid values are [top/bottom/center].
- * @note For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.
- * @codepen GgujC
- * @guide layouting Layouting guide
- * @seealso ons-col ons-col component
+ *  [en]Represents a row in the grid system. Use with ons-col to layout components.[/en]
+ *  [ja]グリッドシステムにて行を定義します。ons-colとともに使用し、コンポーネントの配置に使用します。[/ja]
+ * @param align
+ *  [en]Short hand attribute for aligning vertically. Valid values are top, bottom, and center.[/en]
+ *  [ja]縦に整列するために指定します。top、bottom、centerのいずれかを指定できます。[/ja]
+ *  [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.[/en]
+ *  [ja]Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。[/ja]
+ * @codepen GgujC {wide}
+ * @guide Layouting [en]Layouting guide[/en][ja]レイアウト調整[/ja]
+ * @seealso ons-col [en]ons-col component[/en][ja]ons-colコンポーネント[/ja]
  */
 (function(){
   'use strict';
@@ -29991,26 +30350,63 @@ limitations under the License.
  * @id sliding_menu
  * @name ons-sliding-menu
  * @description
- * Facebook/Path like sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.
+ *  [en]Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.[/en]
+ *  [ja]スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。[/ja]
+ * @param behind-page
+ *  [en]The url of the page to be set to the behind layer.[/en]
+ *  [ja]後方のレイヤーにセットされたページのURLを指定します。[/ja]
+ * @param above-page
+ *  [en]The url of the page to be set to the above layer.[/en]
+ *  [ja]前方のレイヤーにセットされたページのURLを指定します。[/ja]
+ * @param swipable
+ *  [en]Whether to enable swipe interaction.[/en]
+ *  [ja]スワイプ操作を有効にする場合に指定します。[/ja]
+ * @param swipe-target-width
+ *  [en]The width of swipable area calculated from the left (in pixel). Use this to enable swipe only when the finger touch on the screen edge.[/en]
+ *  [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]
+ * @param max-slide-distance
+ *  [en]How far the behind page will slide open. Can specify both in px and %. eg. 90%, 200px[/en]
+ *  [ja]behind-pageで指定されたページの表示幅を指定します。ピクセルもしくは%の両方で指定できます（例: 90%, 200px）[/ja]
+ * @param var
+ *  [en]Variable name to refer this sliding menu.[/en]
+ *  [ja]JavaScriptから操作するための変数名を指定します。[/ja]
+ * @param side
+ *  [en]Specify which side of the screen the behind page is located on. Possible values are left and right.[/en]
+ *  [ja]behind-pageで指定されたページが画面のどちら側から表示されるかを指定します。leftもしくはrightのいずれかを指定できます。[/ja]
  *
- * @param behind-page The url of the page to be set to the behind layer.
- * @param above-page The url of the page to be set to the above layer
- * @param swipable Wether to enable swipe interaction
- * @param swipe-target-width The width of swipable area calculated from the left (in pixel). Eg. Use this to enable swipe only when the finger touch on the left edge.
- * @param max-slide-distance How far the above page will slide open. Can specify both in px and %. eg. 90%, 200px
- * @param var Variable name to refer this sliding menu.
- *
- * @property setMainPage(pageUrl,[options]) Show the page specified in pageUrl in the main contents pane.
- * @property setMenuPage(pageUrl,[options]) Show the page specified in pageUrl in the side menu pane.
- * @property setAbovePage(pageUrl) [Deprecated]Show the page specified in pageUrl in the above layer.
- * @property setBehindPage(pageUrl) [Deprecated]Show the page specified in pageUrl in the behind layer.
- * @property openMenu() Slide the above layer to reveal the layer behind.
- * @property closeMenu() Slide the above layer to hide the layer behind.
- * @property toggleMenu() Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.
- * @property on(eventName,listener) Added an event listener. Preset events are 'preopen', 'preclose', 'postopen' and 'postclose'.
- * @property isMenuOpend()
+ * @property setMainPage(pageUrl,[options])
+ *  [en]Show the page specified in pageUrl in the main contents pane.[/en]
+ *  [ja]中央部分に表示されるページをpageUrlに指定します。[/ja]
+ * @property setMenuPage(pageUrl,[options])
+ *  [en]Show the page specified in pageUrl in the side menu pane.[/en]
+ *  [ja]メニュー部分に表示されるページをpageUrlに指定します。[/ja]
+ * @property setAbovePage(pageUrl)
+ *  [en][Deprecated]Show the page specified in pageUrl in the above layer.[/en]
+ *  [ja][非推奨]上部に表示されるページをpageUrlに指定します。[/ja]
+ * @property setBehindPage(pageUrl)
+ *  [en][Deprecated]Show the page specified in pageUrl in the behind layer.[/en]
+ *  [ja][非推奨]下部に表示されるページをpageUrlに指定します。[/ja]
+ * @property openMenu()
+ *  [en]Slide the above layer to reveal the layer behind.[/en]
+ *  [ja]メニューページを表示します。[/ja]
+ * @property closeMenu()
+ *  [en]Slide the above layer to hide the layer behind.[/en]
+ *  [ja]メニューページを非表示にします。[/ja]
+ * @property toggleMenu()
+ *  [en]Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.[/en]
+ *  [ja]現在の状況に合わせて、メニューページを表示もしくは非表示にします。[/ja]
+ * @property on(eventName,listener)
+ *  [en]Add an event listener. Preset events are preopen, preclose, postopen and postclose.[/en]
+ *  [ja]イベントリスナーを追加します。preopen, preclose, postopen, postcloseのイベントに対応しています。[/ja]
+ * @property isMenuOpened()
+ *  [en]Returns true if the menu page is open, otherwise false.[/en]
+ *  [ja]メニューページが開いている場合はtrue、そうでない場合はfalseを返します。[/ja]
  * @codepen IDvFJ
- * @guide using-sliding-menu Using sliding menu
+ * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
+ * @guide UsingSlidingMenu [en]Using sliding menu[/en][ja]スライディングメニューを使う[/ja]
+ * @guide EventHandling [en]Using events[/en][ja]イベントの利用[/ja]
+ * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
  */
 (function() {
   'use strict';
@@ -30054,19 +30450,33 @@ limitations under the License.
  * @id split-view
  * @name ons-split-view
  * @description
- * Divides the screen into left and right section. This component can also act as sliding menu which can be controlled by 'collapse' attribute
- * @param secondary-page The url of the page on the left
- * @param main-page The url of the page on the right
- * @param main-page-width Main page's width percentage. The width of secondary page take the remaining percentage
- * @param collapse [Deprecated] Specify the collapse behavior. Valid values are [portrait/landscape/width ##px]. "portrait" means the view will collapse when device is in portrait orien0ation. "landscape" means the view will collapse when device is in landscape orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px
- * @param var Variable name to refer this split view.
+ *  [en]Divides the screen into left and right section. This component can also act as sliding menu which can be controlled by collapse attribute.[/en]
+ *  [ja]画面を左右に分割します。collapse属性を用いることで、スライディングメニューとしての使い方もできます。[/ja]
+ *
+ * @param main-page
+ *  [en]The url of the page on the right.[/en]
+ *  [ja]右側に表示するページのURLを指定します。[/ja]
+ * @param main-page-width
+ *  [en]Main page's width percentage. The width of secondary page take the remaining percentage.[/en]
+ *  [ja]右側のページの幅をパーセント単位で指定します。[/ja]
+ * @param secondary-page
+ *  [en]The url of the page on the left.[/en]
+ *  [ja]左側に表示するページのURLを指定します。[/ja]
+ * @param collapse
+ *  [en]Specify the collapse behavior. Valid values are portrait, landscape, width ##px. "portrait" or "landscape" means the view will collapse when device is in landscape or portrait orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px.[/en]
+ *  [ja]左側のページを非表示にする条件を指定します。portrait, landscapeもしくはwidth ##pxの指定が可能です。portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。width ##pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。[/ja]
+ * @param var 
+ *  [en]Variable name to refer this split view.[/en]
+ *  [ja]JavaScriptからスプリットビューコンポーネントにアクセスするための変数を定義します。[/ja]
+ *
  * @property setMainPage(pageUrl) Show the page specified in pageUrl in the right section
  * @property setSecondaryPage(pageUrl) Show the page specified in pageUrl in the left section
- * @property [Deprecated] open() Reveal the secondary page if the view is in collapse mode
- * @property [Deprecated] close() hide the secondary page if the view is in collapse mode
- * @property [Deprecated] toggle() Reveal the secondary page if it is currently hidden, otherwies, reveal it
- * @codepen nKqfv
- * @guide multi-screen-support Multi screen support
+ * @property open() [Deprecated] Reveal the secondary page if the view is in collapse mode
+ * @property close() [Deprecated] hide the secondary page if the view is in collapse mode
+ * @property toggle() [Deprecated] Reveal the secondary page if it is currently hidden, otherwies, reveal it
+ * @codepen nKqfv {wide}
+ * @guide Usingonssplitviewcomponent [en]Using ons-split-view.[/en][ja]ons-split-viewコンポーネントを使う[/ja]
+ * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  */
 (function() {
   'use strict';
@@ -30114,17 +30524,35 @@ limitations under the License.
  * @id switch
  * @name ons-switch
  * @description
- * Switch component.
- * @param disabled Wether the switch shoud be disabled.
- * @param checked Wether the switch is checked.
- * @param var Variable name to refer this switch.
- * @param modifier Modifier name.
+ *  [en]Switch component.[/en]
+ *  [ja]スイッチを表示するコンポーネントです。[/ja]
+ * @param disabled
+ *  [en]Whether the switch should be disabled.[/en]
+ *  [ja]スイッチを無効の状態にする場合に指定します。[/ja]
+ * @param checked
+ *  [en]Whether the switch is checked.[/en]
+ *  [ja]スイッチがONの状態にするときに指定します。[/ja]
+ * @param var
+ *  [en]Variable name to refer this switch.[/en]
+ *  [ja]JavaScriptから参照するための変数名を指定します。[/ja]
+ * @param modifier
+ *  [en]Modifier name to apply custom styles.[/en]
+ *  [ja]カスタムなスタイルを適用するための名前を指定します。[/ja]
  * @property isChecked()
+ *  [en]Returns true if the switch is ON.[/en]
+ *  [ja]スイッチがONの場合にtrueを返します。[/ja]
  * @property setChecked(isChecked)
- * @property getCheckboxElement() Get inner input[type=checkbox] element.
- * @property on(eventName,listener) Added an event listener. There is 'change' event.
- * @guide using-form-components Using form components
- * @seealso ons-button ons-button component
+ *  [en]Set the value of the switch. isChecked can be either true or false.[/en]
+ *  [ja]スイッチの値を指定します。isCheckedにはtrueもしくはfalseを指定します。[/ja]
+ * @property getCheckboxElement()
+ *  [en]Get inner input[type=checkbox] element.[/en]
+ *  [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]
+ * @property on(eventName,listener)
+ *  [en]Add an event listener. Possible event name is change.[/en]
+ *  [ja]イベントリスナーを追加します。changeイベントを使用できます。[/ja]
+ * @guide UsingFormComponents [en]Using form components[/en][ja]フォームを使う[/ja]
+ * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
+ * @seealso ons-button [en]ons-button component[/en][ja]ons-buttonコンポーネント[/ja]
  */
 (function(){
   'use strict';
@@ -30189,14 +30617,25 @@ limitations under the License.
  * @ngdoc directive
  * @id tabbar
  * @name ons-tabbar
- * @param hide-tabs Whether to hide the tabs. Valid values are [true/false] or angular binding. eg: {{ shouldHide }}
- * @param var Variable name to refer this tabbar.
- * @property on(eventName,listener) Added an event listener. Preset events are 'prechange' and 'postchange'.
  * @description
- * Used with tabbar-item to manage pages using tabs.
+ *  [en]A component to display a tab bar on the bottom of a page. Used with ons-tabbar-item to manage pages using tabs.[/en]
+ *  [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabbar-itemと組み合わせて使うことで、ページを管理できます。[/ja]
+ * @param hide-tabs
+ *  [en]Whether to hide the tabs. Valid values are true/false.[/en]
+ *  [ja]タブを非表示にする場合に指定します。trueもしくはfalseを指定できます。[/ja]
+ * @param var
+ *  [en]Variable name to refer this tabbar.[/en]
+ *  [ja]JavaScriptからコンポーネントにアクセスするための変数名を指定します。[/ja]
+ * @property on(eventName,listener)
+ *  [en]Add an event listener. Possible events are prechange and postchange.[/en]
+ *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。[/ja]
  * @codepen pGuDL
- * @guide using-tab-bar Using tab bar
- * @seealso ons-tabbar-item ons-tabbar-item component
+ * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
+ * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
+ * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-tabbar-item [en]ons-tabbar-item component[/en][ja]ons-tabbar-itemコンポーネント[/ja]
+ * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
  */
 (function() {
   'use strict';
@@ -30345,16 +30784,30 @@ limitations under the License.
  * @ngdoc directive
  * @id tabbar_item
  * @name ons-tabbar-item
- * @param page The page that this tabbar-item points to
- * @param icon The icon of the tab. To use font-awesome icon, just set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here
- * @param active-icon The icon of the tab when active. To use font-awesome icon, just set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here
- * @param label The label of the tab
- * @param active Set wether this tab should be active or not. Valid values are [true/false]
  * @description
- * Represents a tab inside tabbar. Each tabbar-item represents a page
+ *  [en]Represents a tab inside tabbar. Each ons-tabbar-item represents a page.[/en]
+ *  [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabbar-itemはページを表します。[/ja]
+ * @param page
+ *  [en]The page that this ons-tabbar-item points to.[/en]
+ *  [ja]ons-tabbar-itemが参照するページへのURLを指定します。[/ja]
+ * @param icon
+ *  [en]The icon name of the tab. Can specify the same icon name as ons-icon. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.[/en]
+ *  [ja]アイコン名を指定します。ons-iconと同じアイコン名を指定できます。個別にアイコンをカスタマイズする場合は、background-imageなどのCSSスタイルを用いて指定できます。[/ja]
+ * @param active-icon
+ *  [en]The icon name of the tab when active.[/en]
+ *  [ja]アクティブの際のアイコン名を指定します。[/ja]
+ * @param label
+ *  [en]The label of the tab item.[/en]
+ *  [ja]アイコン下に表示されるラベルを指定します。[/ja]
+ * @param active
+ *  [en]Set whether this item should be active or not. Valid values are true and false.[/en]
+ *  [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
  * @codepen pGuDL
- * @guide using-tab-bar Using tab bar
- * @seealso ons-tabbar ons-tabbar component
+ * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-tabbar [en]ons-tabbar component[/en][ja]ons-tabbarコンポーネント[/ja]
+ * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
+ * @seealso ons-icon [en]ons-icon component[/en][ja]ons-iconコンポーネント[/ja]
  */
 (function() {
   'use strict';
@@ -30420,13 +30873,13 @@ limitations under the License.
  * @id toolbar
  * @name ons-toolbar
  * @description
- * Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.
- * @param modifier Modifier name.
+ *  [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]
+ *  [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
  * @codepen aHmGL
- * @guide adding-a-toolbar Adding a toolbar
- * @seealso ons-bottom-toolbar ons-bottom-toolbar component
- * @seealso ons-back-button ons-back-button component
- * @seealso ons-toolbar-button ons-toolbar-button component
+ * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
+ * @seealso ons-bottom-toolbar [en]ons-bottom-toolbar component[/en][ja]ons-bottom-toolbarコンポーネント[/ja]
+ * @seealso ons-back-button [en]ons-back-button component[/en][ja]ons-back-buttonコンポーネント[/ja]
+ * @seealso ons-toolbar-button [en]ons-toolbar-button component[/en][ja]ons-toolbar-buttonコンポーネント[/ja]
  */
 (function() {
   'use strict';
@@ -30577,14 +31030,15 @@ limitations under the License.
  * @ngdoc directive
  * @id toolbar_button
  * @name ons-toolbar-button
- * @param modifier Modifier name.
  * @description
- * Button component for toolbar.
+ *  [en]Button component for ons-toolbar and ons-bottom-toolbar.[/en]
+ *  [ja]ons-toolbarあるいはons-bottom-toolbarに設置できるボタン用コンポーネントです。[/ja]
+ * @param modifier [en]Specify modifier name to specify custom styles.[/en][ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
  * @codepen aHmGL
- * @guide adding-a-toolbar Adding a toolbar
- * @seealso ons-toolbar ons-toolbar component
- * @seealso ons-bottom-toolbar ons-bottom-toolbar component
- * @seealso ons-back-button ons-back-button component
+ * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
+ * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
+ * @seealso ons-back-button [en]ons-back-button component[/en][ja]ons-back-buttonコンポーネント[/ja]
+ * @seealso ons-toolbar-button [en]ons-toolbar-button component[/en][ja]ons-toolbar-buttonコンポーネント[/ja]
  */
 (function(){
   'use strict';
@@ -30719,6 +31173,12 @@ limitations under the License.
           setEnabled: function(enabled) {
             this._enabled = enabled;
           },
+          enable: function() {
+            this.setEnabled(true);
+          },
+          disable: function() {
+            this.setEnabled(false);
+          },
           remove: function() {
             self.remove(this.listener);
           }
@@ -30775,12 +31235,13 @@ limitations under the License.
       },
 
       /**
-       * @param {Function} listener Callback on back button. If this callback returns true, dispatching is stopped.
+       * @param {Function/Object} listener Callback on back button. If this callback returns true, dispatching is stopped.
        * @reutrn {Object} handler object
        */
       push: function(listener) {
-        var handler = this._createStackObject(listener);
+        var handler = listener instanceof Function ? this._createStackObject(listener) : listener;
 
+        this.remove(handler.listener);
         this._stack.push(handler);
 
         return handler;

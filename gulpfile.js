@@ -196,7 +196,7 @@ gulp.task('prepare-project-templates', function() {
 ////////////////////////////////////////
 // compress
 ////////////////////////////////////////
-gulp.task('compress-project-templates', function(done) {
+gulp.task('compress-project-templates', function() {
   var names = [
     'master_detail',
     'sliding_menu',
