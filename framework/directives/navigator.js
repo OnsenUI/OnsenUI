@@ -76,6 +76,7 @@
               };
 
               navigator._pushPageDOM('', pageElement, link, pageScope, {});
+              pageElement = null;
             }
 
             $onsen.aliasStack.register('ons.navigator', navigator);
@@ -84,6 +85,7 @@
             scope.$on('$destroy', function() {
               element.data('ons-navigator', undefined);
               $onsen.aliasStack.unregister('ons.navigator', navigator);
+              element = null;
             });
           }
         };

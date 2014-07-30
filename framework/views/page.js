@@ -28,8 +28,8 @@ limitations under the License.
 
       _nullElement : window.document.createElement('div'),
 
-      _toolbarElement : angular.element(this.nullElement),
-      _bottomToolbarElement : angular.element(this.nullElement),
+      _toolbarElement : null,
+      _bottomToolbarElement : null,
 
       init: function(scope, element) {
         this._scope = scope;
@@ -43,9 +43,7 @@ limitations under the License.
         this._toolbarElement = angular.element(this._nullElement);
         this._bottomToolbarElement = angular.element(this._nullElement);
 
-        scope.$on('$destroy', function() {
-          this._destroy();
-        }.bind(this));
+        scope.$on('$destroy', this._destroy.bind(this));
       },
 
       /**
@@ -166,9 +164,12 @@ limitations under the License.
 
       _destroy: function() {
         this.emit('destroy', {page: this});
+
+        this._element = null;
         this._toolbarElement = null;
         this._nullElement = null;
         this._bottomToolbarElement = null;
+        this._scope = null;
       }
     });
     MicroEvent.mixin(PageView);

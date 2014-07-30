@@ -20,6 +20,55 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
+  var NavigatorPageObject = Class.extend({
+    /**
+     * @param {Object} params
+     * @param {Object} params.page
+     * @param {Object} params.element
+     * @param {Object} params.pageScope
+     * @param {Object} params.options
+     * @param {Object} params.navigator
+     */
+    init: function(params) {
+      this.page = params.page;
+      this.name = params.page;
+      this.element = params.element;
+      this.pageScope = params.pageScope;
+      this.options = params.options;
+      this.navigator = params.navigator;
+    },
+
+    /**
+     * @return {PageView}
+     */
+    getPageView: function() {
+      if (!this._pageView) {
+        this._pageView = this.element.inheritedData('ons-page');
+        if (!this._pageView) {
+          throw new Error('Fail to fetch PageView from ons-page element.');
+        }
+      }
+      return this._pageView;
+    },
+
+    destroy: function() {
+      this.element.remove();
+      this.pageScope.$destroy();
+
+      this._pageView = null;
+      this.element = null;
+      this.pageScope = null;
+      this.options = null;
+
+      var index = this.navigator.pages.indexOf(this);
+      if (index !== -1) {
+        this.navigator.pages.splice(index, 1);
+      }
+
+      this.navigator = null;
+    }
+  });
+
   module.factory('NavigatorView', function($http, $parse, $templateCache, $compile, $onsen,
     SimpleSlideTransitionAnimator, NavigatorTransitionAnimator, LiftTransitionAnimator,
     NullTransitionAnimator, IOSSlideTransitionAnimator, FadeTransitionAnimator) {
@@ -146,7 +195,7 @@ limitations under the License.
           throw new Error('options must be an object. You supplied ' + options);
         }
 
-        if (this.pages.length == 0) {
+        if (this.pages.length === 0) {
           return this.pushPage.apply(this, arguments);
         }
 
@@ -176,6 +225,7 @@ limitations under the License.
                   element.css('display', 'none');
                 }
                 unlock();
+                element = null;
               }.bind(this), 1000 / 60);
 
             } else {
@@ -183,6 +233,7 @@ limitations under the License.
               this.pages.push(pageObject);
               link();
               unlock();
+              element = null;
             }
           }.bind(this), function() {
             unlock();
@@ -222,34 +273,32 @@ limitations under the License.
           return;
         }
 
-        var self = this;
         this._doorLock.waitUnlock(function() {
-          var unlock = self._doorLock.lock();
-          var done = function() {
-            unlock();
-            if (self._profiling) {
-              console.timeEnd('pushPage');
-            }
-          };
+          this._pushPage(page, options);
+        }.bind(this));
+      },
 
-          $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
-            var pageScope = self._createPageScope();
-            var object = self._createPageElementAndLinkFunction(templateHTML, pageScope);
-            var element = object.element;
-            var link = object.link;
+      _pushPage: function(page, options) {
+        var unlock = this._doorLock.lock();
+        var done = function() {
+          unlock();
+          if (this._profiling) {
+            console.timeEnd('pushPage');
+          }
+        };
 
-            setImmediate(function() {
-              self._pushPageDOM(page, element, link, pageScope, options, done);
-            });
-          }, function() {
-            unlock();
-            if (self._profiling) {
-              console.timeEnd('pushPage');
-            }
-            throw new Error('Page is not found: ' + page);
-          });
-        });
+        $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
+          var pageScope = this._createPageScope();
+          var object = this._createPageElementAndLinkFunction(templateHTML, pageScope);
 
+          setImmediate(function() {
+            this._pushPageDOM(page, object.element, object.link, pageScope, options, done);
+            object = null;
+          }.bind(this));
+        }.bind(this), function() {
+          done();
+          throw new Error('Page is not found: ' + page);
+        }.bind(this));
       },
 
       getBackButtonHandler: function() {
@@ -293,40 +342,15 @@ limitations under the License.
        * @param {Object} options
        */
       _createPageObject: function(page, element, pageScope, options) {
-        var navigator = this;
-
         options.animator = this._getAnimatorOption(options);
 
-        return {
+        return new NavigatorPageObject({
           page: page,
-          name: page,
           element: element,
           pageScope: pageScope,
           options: options,
-          getPageView: function() {
-            if (!this._pageView) {
-              this._pageView = element.inheritedData('ons-page');
-              if (!this._pageView) {
-                throw new Error('Fail to fetch PageView from ons-page element.');
-              }
-            }
-            return this._pageView;
-          },
-          destroy: function() {
-            this.element.remove();
-            this.pageScope.$destroy();
-
-            this._pageView = null;
-            this.element = null;
-            this.pageScope = null;
-            this.options = null;
-
-            var index = navigator.pages.indexOf(this);
-            if (index !== -1) {
-              navigator.pages.splice(index, 1);
-            }
-          }
-        };
+          navigator: this
+        });
       },
 
       /**
@@ -372,6 +396,7 @@ limitations under the License.
           if (typeof options.onTransitionEnd === 'function') {
             options.onTransitionEnd();
           }
+          element = null;
         }.bind(this);
 
         if (this.pages.length > 1) {
@@ -381,11 +406,12 @@ limitations under the License.
           this._element.append(element);
           link();
           options.animator.push(enterPage, leavePage, done);
-
+          element = null;
         } else {
           this._element.append(element);
           link();
           done();
+          element = null;
         }
       },
 
@@ -442,32 +468,39 @@ limitations under the License.
         }
 
         this._doorLock.waitUnlock(function() {
-          var unlock = this._doorLock.lock();
-
-          var leavePage = this.pages.pop();
-
-          if (this.pages[this.pages.length - 1]) {
-            this.pages[this.pages.length - 1].element.css('display', 'block');
-          }
-
-          var enterPage = this.pages[this.pages.length -1];
-
-          var event = {
-            leavePage: leavePage,
-            enterPage: this.pages[this.pages.length - 1],
-            navigator: this
-          };
-
-          var callback = function() {
-            leavePage.destroy();
-            unlock();
-            this.emit('postpop', event);
-            if (typeof options.onTransitionEnd === 'function') {
-              options.onTransitionEnd();
-            }
-          }.bind(this);
-          leavePage.options.animator.pop(enterPage, leavePage, callback);
+          this._popPage(options);
         }.bind(this));
+      },
+
+      _popPage: function(options) {
+        var unlock = this._doorLock.lock();
+
+        var leavePage = this.pages.pop();
+
+        if (this.pages[this.pages.length - 1]) {
+          this.pages[this.pages.length - 1].element.css('display', 'block');
+        }
+
+        var enterPage = this.pages[this.pages.length -1];
+
+        var event = {
+          leavePage: leavePage,
+          enterPage: this.pages[this.pages.length - 1],
+          navigator: this
+        };
+
+        var callback = function() {
+          leavePage.destroy();
+          unlock();
+          this.emit('postpop', event);
+          event.leavePage = null;
+
+          if (typeof options.onTransitionEnd === 'function') {
+            options.onTransitionEnd();
+          }
+        }.bind(this);
+
+        leavePage.options.animator.pop(enterPage, leavePage, callback);
       },
 
       /**

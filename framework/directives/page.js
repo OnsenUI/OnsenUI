@@ -20,25 +20,13 @@
   module.directive('onsPage', function($onsen, $timeout, PageView) {
 
     function firePageInitEvent(element) {
-      function isAttached(element) {
-        if (document.documentElement === element) {
-          return true;
-        }
-        return element.parentNode ? isAttached(element.parentNode) : false;
-      }
-
-      function fire() {
-        var event = document.createEvent('HTMLEvents');    
-        event.initEvent('pageinit', true, true);
-        element.dispatchEvent(event);    
-      }
 
       // TODO: remove dirty fix
       var i = 0;
       var f = function() {
         if (i++ < 5)  {
           if (isAttached(element)) {
-            fire();
+            fireActualPageInitEvent(element);
           } else {
             setImmediate(f);
           }
@@ -48,6 +36,45 @@
       };
 
       f();
+    }
+
+    function fireActualPageInitEvent(element) {
+      var event = document.createEvent('HTMLEvents');    
+      event.initEvent('pageinit', true, true);
+      element.dispatchEvent(event);    
+    }
+
+    function isAttached(element) {
+      if (document.documentElement === element) {
+        return true;
+      }
+      return element.parentNode ? isAttached(element.parentNode) : false;
+    }
+
+    function preLink(scope, element, attrs, controller, transclude) {
+      var page = new PageView(scope, element);
+
+      $onsen.declareVarAttribute(attrs, page);
+
+      $onsen.aliasStack.register('ons.page', page);
+      element.data('ons-page', page);
+
+      scope.$on('$destroy', function() {
+        element.data('ons-page', undefined);
+        $onsen.aliasStack.unregister('ons.page', page);
+        element = null;
+      });
+
+      var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+      element.addClass('page ' + modifierTemplater('page--*'));
+
+      var pageContent = angular.element(element[0].querySelector('.page__content'));
+      pageContent.addClass(modifierTemplater('page--*__content'));
+      pageContent = null;
+    }
+
+    function postLink(scope, element, attrs) {
+      firePageInitEvent(element[0]);
     }
 
     return {
@@ -85,6 +112,7 @@
           wrapper.append(children);
           content.append(wrapper);
           element.append(content);
+          wrapper = null;
 
           // IScroll for Android2
           var scroller = new IScroll(content[0], {
@@ -105,30 +133,12 @@
           });
         }
 
+        content = null;
+        children = null;
+
         return {
-          pre: function(scope, element, attrs, controller, transclude) {
-            var page = new PageView(scope, element);
-
-            $onsen.declareVarAttribute(attrs, page);
-
-            $onsen.aliasStack.register('ons.page', page);
-            element.data('ons-page', page);
-
-            scope.$on('$destroy', function() {
-              element.data('ons-page', undefined);
-              $onsen.aliasStack.unregister('ons.page', page);
-            });
-
-            var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-            element.addClass('page ' + modifierTemplater('page--*'));
-
-            var pageContent = angular.element(element[0].querySelector('.page__content'));
-            pageContent.addClass(modifierTemplater('page--*__content'));
-          },
-
-          post: function(scope, element, attrs) {
-            firePageInitEvent(element[0]);
-          }
+          pre: preLink,
+          post: postLink
         };
       }
     };
