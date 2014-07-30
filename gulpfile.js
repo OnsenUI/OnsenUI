@@ -216,18 +216,21 @@ gulp.task('compress-project-templates', function(done) {
 
     return stream;
   });
+
+  return merge.apply(null, streams);
 });
 
 ////////////////////////////////////////
 // build
 ////////////////////////////////////////
-gulp.task('build', function() {
+gulp.task('build', function(done) {
   return runSequence(
     'clean',
     'prepare',
     'build-doc',
     'prepare-project-templates',
-    'compress-project-templates'
+    'compress-project-templates',
+    done
   );
 });
 
@@ -300,21 +303,22 @@ gulp.task('build-topdoc', shell.task([
 ////////////////////////////////////////
 // build-doc
 ////////////////////////////////////////
-gulp.task('build-doc-ja', function() {
+gulp.task('build-doc-ja', function(done) {
   njglobals.rootUrl = '/';
   njglobals.lang = 'ja';
-  dgeni.generator('docs/dgeni.conf.js')();
+  dgeni.generator('docs/dgeni.conf.js')().then(done);
 });
 
-gulp.task('build-doc-en', function() {
+gulp.task('build-doc-en', function(done) {
   njglobals.rootUrl = '/';
   njglobals.lang = 'en';
-  dgeni.generator('docs/dgeni.conf.js')();
+  dgeni.generator('docs/dgeni.conf.js')().then(done);
 })
 
-gulp.task('build-doc', function() {
+gulp.task('build-doc', function(done) {
   return runSequence(
-    "build-doc-ja",
-    "build-doc-en"
+    'build-doc-ja',
+    'build-doc-en',
+    done
   );
 });
