@@ -1,26 +1,26 @@
 <div class="directive-container" id="module:directives.directive:ons-col">
   <div>
     <section class="description">
-      <p>グリッドシステムにて列を定義します。ons-rowとともに使用し、コンポーネントの配置に使用します。</p>
+      <p>Represents a column in the grid system. Use with ons-row to layout components.</p>
     </section>
 
     <span class="anchor" id="ons-col-attributes"></span>
     
       <section>
-        <h4>属性</h4>
+        <h4>Attributes</h4>
         <table>
           <tbody>
             
             <span class="anchor" id="ons-col-align"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">align</td>
-              <td>縦の配置を指定します。次の値から選択してください: top, center, bottom</td>
+              <td>Vertical align the column. Valid values are top, center, and bottom.</td>
             </tr>
             
             <span class="anchor" id="ons-col-width"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">width</td>
-              <td>カラムの横幅を指定します。パーセントもしくはピクセルで指定します（10%や50px）。</td>
+              <td>The width of the column. Valid values are css width values (&quot;10%&quot;, &quot;50px&quot;).</td>
             </tr>
             
           </tbody>
@@ -33,12 +33,12 @@
 
     
     <section class="note">
-      <p>注意: Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。</p>
+      <p>Note: For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.</p>
     </section>
     
 
     
-    <h4>サンプル</h4>
+    <h4>Sample</h4>
 
     
     <div style="height: 480px; width: 100%;" class="codepen-wrapper">
@@ -50,16 +50,16 @@
     
 
     
-      <h4>関連情報</h4>
+      <h4>See also</h4>
       <ul class="seealso">
         
           
-            <li class="guide"><a href="overview.html#layouting">レイアウト機能</a></li>
+            <li class="guide"><a href="overview.html#layouting">Layouting guide</a></li>
           
         
         
           
-            <li class="seealso"><a href="#ons-row">ons-rowコンポーネント</a></li>
+            <li class="seealso"><a href="#ons-row">ons-row component</a></li>
           
         
       </ul>

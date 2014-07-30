@@ -2,12 +2,16 @@
  * @ngdoc directive
  * @id modal
  * @name ons-modal
- * @description Modal component that mask current screen.
- * @param modifier Modifier name.
- * @param var Variable name to refer this modal.
- * @property toggle() Toggle modal view visibility.
- * @property show() Show modal view.
- * @property hide() Hide modal view.
+ * @description 
+ *  [en]Modal component that mask current screen. Underlying components are not noticed from any events while the modal component is shown.[/en]
+ *  [ja]画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、モーダルが表示されている間はイベント通知が行われません。[/ja]
+ * @param var [en]Variable name to refer this modal.[/en][ja]このコンポーネントを参照するための変数名を指定します。[/ja]
+ * @property toggle() [en]Toggle modal view visibility.[/en][ja]モーダルの表示を切り替えます。[/ja]
+ * @property show() [en]Show modal view.[/en][ja]モーダルを表示します。[/ja]
+ * @property hide() [en]Hide modal view.[/en][ja]モーダルを非表示にします。[/ja]
+ * @guide UsingModal [en]Using ons-modal component[/en][ja]モーダルの使い方[/ja]
+ * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @codepen devIg
  */
 (function() {
   'use strict';

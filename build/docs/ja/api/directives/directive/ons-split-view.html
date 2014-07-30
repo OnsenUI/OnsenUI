@@ -1,44 +1,44 @@
 <div class="directive-container" id="module:directives.directive:ons-split-view">
   <div>
     <section class="description">
-      <p>画面を左右に分割します。collapse属性を用いることで、スライディングメニューとしての使い方もできます。</p>
+      <p>Divides the screen into left and right section. This component can also act as sliding menu which can be controlled by collapse attribute.</p>
     </section>
 
     <span class="anchor" id="ons-split-view-attributes"></span>
     
       <section>
-        <h4>属性</h4>
+        <h4>Attributes</h4>
         <table>
           <tbody>
             
             <span class="anchor" id="ons-split-view-main-page"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">main-page</td>
-              <td>右側に表示するページのURLを指定します。</td>
+              <td>The url of the page on the right.</td>
             </tr>
             
             <span class="anchor" id="ons-split-view-main-page-width"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">main-page-width</td>
-              <td>右側のページの幅をパーセント単位で指定します。</td>
+              <td>Main page&#39;s width percentage. The width of secondary page take the remaining percentage.</td>
             </tr>
             
             <span class="anchor" id="ons-split-view-secondary-page"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">secondary-page</td>
-              <td>左側に表示するページのURLを指定します。</td>
+              <td>The url of the page on the left.</td>
             </tr>
             
             <span class="anchor" id="ons-split-view-collapse"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">collapse</td>
-              <td>[非推奨]左側のページを非表示にする条件を指定します。portrait, landscapeもしくはwidth ##pxの指定が可能です。portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。width ##pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。</td>
+              <td>Specify the collapse behavior. Valid values are portrait, landscape, width ##px. &quot;portrait&quot; or &quot;landscape&quot; means the view will collapse when device is in landscape or portrait orientation. &quot;width ##px&quot; means the view will collapse when the window width is smaller than the specified ##px.</td>
             </tr>
             
             <span class="anchor" id="ons-split-view-var"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">var</td>
-              <td>JavaScriptからスプリットビューコンポーネントにアクセスするための変数を定義します。</td>
+              <td>Variable name to refer this split view.</td>
             </tr>
             
           </tbody>
@@ -49,7 +49,7 @@
     <span class="anchor" id="ons-split-view-methods"></span>
     
     <section>
-      <h4>メソッド</h4>
+      <h4>Methods</h4>
       <table>
         <tbody>
           
@@ -91,7 +91,7 @@
     
 
     
-    <h4>サンプル</h4>
+    <h4>Sample</h4>
 
     
     <div style="height: 480px; width: 100%;" class="codepen-wrapper">
@@ -103,13 +103,13 @@
     
 
     
-      <h4>関連情報</h4>
+      <h4>See also</h4>
       <ul class="seealso">
         
           
-            <li class="guide"><a href="overview.html#Usingonssplitviewcomponent">ons-split-viewコンポーネントを使う</a></li>
+            <li class="guide"><a href="overview.html#Usingonssplitviewcomponent">Using ons-split-view.</a></li>
           
-            <li class="guide"><a href="overview.html#CallingComponentAPIsfromJavaScript">JavaScriptからコンポーネントを呼び出す</a></li>
+            <li class="guide"><a href="overview.html#CallingComponentAPIsfromJavaScript">Using navigator from JavaScript</a></li>
           
         
         

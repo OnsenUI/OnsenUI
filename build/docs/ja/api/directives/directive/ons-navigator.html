@@ -1,26 +1,26 @@
 <div class="directive-container" id="module:directives.directive:ons-navigator">
   <div>
     <section class="description">
-      <p>ページスタックの管理とナビゲーション機能を提供するコンポーネント。画面上への出力はありません。</p>
+      <p>A component that provides page stack management and navigation. This component does not have a visible content.</p>
     </section>
 
     <span class="anchor" id="ons-navigator-attributes"></span>
     
       <section>
-        <h4>属性</h4>
+        <h4>Attributes</h4>
         <table>
           <tbody>
             
             <span class="anchor" id="ons-navigator-page"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">page</td>
-              <td>ナビゲーターが初期化された時に表示するページを指定します。</td>
+              <td>First page to show when navigator is initialized.</td>
             </tr>
             
             <span class="anchor" id="ons-navigator-var"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">var</td>
-              <td>ナビゲーターを参照するための変数を指定します。</td>
+              <td>Variable name to refer this navigator.</td>
             </tr>
             
           </tbody>
@@ -31,44 +31,50 @@
     <span class="anchor" id="ons-navigator-methods"></span>
     
     <section>
-      <h4>メソッド</h4>
+      <h4>Methods</h4>
       <table>
         <tbody>
           
           <span class="anchor" id="pushPage(pageUrl,options)-pushPage(pageUrl,options)"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>pushPage(pageUrl,options)</code></td>
-            <td>指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。</td>
+            <td>Pushes the specified pageUrl into the page stack.</td>
+          </tr>
+          
+          <span class="anchor" id="insertPage(index,pageUrl,options)-insertPage(index,pageUrl,options)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>insertPage(index,pageUrl,options)</code></td>
+            <td>Insert the specified pageUrl into the page stack with specified index.</td>
           </tr>
           
           <span class="anchor" id="popPage()-popPage()"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>popPage()</code></td>
-            <td>現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。</td>
+            <td>Pops current page from the page stack. One previous page will be displayed.</td>
           </tr>
           
           <span class="anchor" id="resetToPage(pageUrl,options)-resetToPage(pageUrl,options)"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>resetToPage(pageUrl,options)</code></td>
-            <td>ページスタックをリセットし、指定したページを表示します。</td>
+            <td>Clears page stack and add the specified pageUrl to the page stack.</td>
           </tr>
           
           <span class="anchor" id="getCurrentPage()-getCurrentPage()"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>getCurrentPage()</code></td>
-            <td>現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。</td>
+            <td>Get current page&#39;s navigator item. Use this method to access options passed by pushPage() or resetToPage() method.</td>
           </tr>
           
           <span class="anchor" id="getPages()-getPages()"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>getPages()</code></td>
-            <td>ナビゲーターの持つページスタックの一覧を取得します。</td>
+            <td>Retrieve the entire page stacks of the navigator.</td>
           </tr>
           
           <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>on(eventName,listener)</code></td>
-            <td>イベントリスナーを追加します。prepop, prepush, postpop, postpushを指定できます。</td>
+            <td>Add an event listener. Preset events are prepop, prepush, postpop and postpush.</td>
           </tr>
           
         </tbody>
@@ -79,7 +85,7 @@
     
 
     
-    <h4>サンプル</h4>
+    <h4>Sample</h4>
 
     
     <div style="height: 480px; width: 320px;" class="codepen-wrapper">
@@ -91,22 +97,22 @@
     
 
     
-      <h4>関連情報</h4>
+      <h4>See also</h4>
       <ul class="seealso">
         
           
-            <li class="guide"><a href="overview.html#page-navigation">ページナビゲーションの概要</a></li>
+            <li class="guide"><a href="overview.html#page-navigation">Guide for page navigation</a></li>
           
-            <li class="guide"><a href="overview.html#CallingComponentAPIsfromJavaScript">JavaScriptからコンポーネントを呼び出す</a></li>
+            <li class="guide"><a href="overview.html#CallingComponentAPIsfromJavaScript">Using navigator from JavaScript</a></li>
           
-            <li class="guide"><a href="overview.html#EventHandling">イベント処理の使い方</a></li>
+            <li class="guide"><a href="overview.html#EventHandling">Event handling descriptions</a></li>
           
-            <li class="guide"><a href="overview.html#DefiningMultiplePagesinSingleHTML">複数のページを1つのHTMLに記述する</a></li>
+            <li class="guide"><a href="overview.html#DefiningMultiplePagesinSingleHTML">Defining multiple pages in single html</a></li>
           
         
         
           
-            <li class="seealso"><a href="#ons-toolbar">ons-toolbarコンポーネント</a></li>
+            <li class="seealso"><a href="#ons-toolbar">ons-toolbar component</a></li>
           
         
       </ul>
