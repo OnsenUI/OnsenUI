@@ -5251,7 +5251,7 @@ limitations under the License.
        * Show modal view.
        */
       show: function() {
-        this._element.css('display', null);
+        this._element.css('display', 'table');
         $onsen.backButtonHandlerStack.push(this._backButtonHandler);
       },
 
