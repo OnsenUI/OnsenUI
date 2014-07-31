@@ -254,13 +254,11 @@ limitations under the License.
       _refreshBehindPageWidth: function() {
         var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
 
-        if (('maxSlideDistance' in this._attrs) && this._animator) {
-          this._animator.onResized(
-            {
-              isOpened: this._logic.isOpened(),
-              width: width
-            }
-          );
+        if (this._animator) {
+          this._animator.onResized({
+            isOpened: this._logic.isOpened(),
+            width: width
+          });
         }
       },
 
