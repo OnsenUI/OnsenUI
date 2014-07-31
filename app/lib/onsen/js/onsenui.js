@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.1-dev - 2014-07-31 */
+/*! onsenui - v1.1.1 - 2014-07-31 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -7327,13 +7327,11 @@ limitations under the License.
       _refreshBehindPageWidth: function() {
         var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
 
-        if (('maxSlideDistance' in this._attrs) && this._animator) {
-          this._animator.onResized(
-            {
-              isOpened: this._logic.isOpened(),
-              width: width
-            }
-          );
+        if (this._animator) {
+          this._animator.onResized({
+            isOpened: this._logic.isOpened(),
+            width: width
+          });
         }
       },
 
@@ -7910,7 +7908,11 @@ limitations under the License.
 
         scope.$watch('swipable', this._onSwipableChanged.bind(this));
 
-        window.addEventListener('resize', this._onResize.bind(this));
+        if ($onsen.isIOS()) {
+          window.addEventListener('orientationchange', this._onResize.bind(this));
+        } else {
+          window.addEventListener('resize', this._onResize.bind(this));
+        }
 
         this._animator = new RevealSlidingMenuAnimator();
 

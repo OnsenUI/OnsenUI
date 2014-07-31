@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.1-dev - 2014-07-30 */
+/*! onsenui - v1.1.1 - 2014-07-31 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -25917,6 +25917,55 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
+  var NavigatorPageObject = Class.extend({
+    /**
+     * @param {Object} params
+     * @param {Object} params.page
+     * @param {Object} params.element
+     * @param {Object} params.pageScope
+     * @param {Object} params.options
+     * @param {Object} params.navigator
+     */
+    init: function(params) {
+      this.page = params.page;
+      this.name = params.page;
+      this.element = params.element;
+      this.pageScope = params.pageScope;
+      this.options = params.options;
+      this.navigator = params.navigator;
+    },
+
+    /**
+     * @return {PageView}
+     */
+    getPageView: function() {
+      if (!this._pageView) {
+        this._pageView = this.element.inheritedData('ons-page');
+        if (!this._pageView) {
+          throw new Error('Fail to fetch PageView from ons-page element.');
+        }
+      }
+      return this._pageView;
+    },
+
+    destroy: function() {
+      this.element.remove();
+      this.pageScope.$destroy();
+
+      this._pageView = null;
+      this.element = null;
+      this.pageScope = null;
+      this.options = null;
+
+      var index = this.navigator.pages.indexOf(this);
+      if (index !== -1) {
+        this.navigator.pages.splice(index, 1);
+      }
+
+      this.navigator = null;
+    }
+  });
+
   module.factory('NavigatorView', function($http, $parse, $templateCache, $compile, $onsen,
     SimpleSlideTransitionAnimator, NavigatorTransitionAnimator, LiftTransitionAnimator,
     NullTransitionAnimator, IOSSlideTransitionAnimator, FadeTransitionAnimator) {
@@ -26043,7 +26092,7 @@ limitations under the License.
           throw new Error('options must be an object. You supplied ' + options);
         }
 
-        if (this.pages.length == 0) {
+        if (this.pages.length === 0) {
           return this.pushPage.apply(this, arguments);
         }
 
@@ -26073,6 +26122,7 @@ limitations under the License.
                   element.css('display', 'none');
                 }
                 unlock();
+                element = null;
               }.bind(this), 1000 / 60);
 
             } else {
@@ -26080,6 +26130,7 @@ limitations under the License.
               this.pages.push(pageObject);
               link();
               unlock();
+              element = null;
             }
           }.bind(this), function() {
             unlock();
@@ -26119,34 +26170,32 @@ limitations under the License.
           return;
         }
 
-        var self = this;
         this._doorLock.waitUnlock(function() {
-          var unlock = self._doorLock.lock();
-          var done = function() {
-            unlock();
-            if (self._profiling) {
-              console.timeEnd('pushPage');
-            }
-          };
+          this._pushPage(page, options);
+        }.bind(this));
+      },
 
-          $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
-            var pageScope = self._createPageScope();
-            var object = self._createPageElementAndLinkFunction(templateHTML, pageScope);
-            var element = object.element;
-            var link = object.link;
+      _pushPage: function(page, options) {
+        var unlock = this._doorLock.lock();
+        var done = function() {
+          unlock();
+          if (this._profiling) {
+            console.timeEnd('pushPage');
+          }
+        };
 
-            setImmediate(function() {
-              self._pushPageDOM(page, element, link, pageScope, options, done);
-            });
-          }, function() {
-            unlock();
-            if (self._profiling) {
-              console.timeEnd('pushPage');
-            }
-            throw new Error('Page is not found: ' + page);
-          });
-        });
+        $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
+          var pageScope = this._createPageScope();
+          var object = this._createPageElementAndLinkFunction(templateHTML, pageScope);
 
+          setImmediate(function() {
+            this._pushPageDOM(page, object.element, object.link, pageScope, options, done);
+            object = null;
+          }.bind(this));
+        }.bind(this), function() {
+          done();
+          throw new Error('Page is not found: ' + page);
+        }.bind(this));
       },
 
       getBackButtonHandler: function() {
@@ -26190,40 +26239,15 @@ limitations under the License.
        * @param {Object} options
        */
       _createPageObject: function(page, element, pageScope, options) {
-        var navigator = this;
-
         options.animator = this._getAnimatorOption(options);
 
-        return {
+        return new NavigatorPageObject({
           page: page,
-          name: page,
           element: element,
           pageScope: pageScope,
           options: options,
-          getPageView: function() {
-            if (!this._pageView) {
-              this._pageView = element.inheritedData('ons-page');
-              if (!this._pageView) {
-                throw new Error('Fail to fetch PageView from ons-page element.');
-              }
-            }
-            return this._pageView;
-          },
-          destroy: function() {
-            this.element.remove();
-            this.pageScope.$destroy();
-
-            this._pageView = null;
-            this.element = null;
-            this.pageScope = null;
-            this.options = null;
-
-            var index = navigator.pages.indexOf(this);
-            if (index !== -1) {
-              navigator.pages.splice(index, 1);
-            }
-          }
-        };
+          navigator: this
+        });
       },
 
       /**
@@ -26269,6 +26293,7 @@ limitations under the License.
           if (typeof options.onTransitionEnd === 'function') {
             options.onTransitionEnd();
           }
+          element = null;
         }.bind(this);
 
         if (this.pages.length > 1) {
@@ -26278,11 +26303,12 @@ limitations under the License.
           this._element.append(element);
           link();
           options.animator.push(enterPage, leavePage, done);
-
+          element = null;
         } else {
           this._element.append(element);
           link();
           done();
+          element = null;
         }
       },
 
@@ -26339,32 +26365,39 @@ limitations under the License.
         }
 
         this._doorLock.waitUnlock(function() {
-          var unlock = this._doorLock.lock();
-
-          var leavePage = this.pages.pop();
-
-          if (this.pages[this.pages.length - 1]) {
-            this.pages[this.pages.length - 1].element.css('display', 'block');
-          }
-
-          var enterPage = this.pages[this.pages.length -1];
-
-          var event = {
-            leavePage: leavePage,
-            enterPage: this.pages[this.pages.length - 1],
-            navigator: this
-          };
-
-          var callback = function() {
-            leavePage.destroy();
-            unlock();
-            this.emit('postpop', event);
-            if (typeof options.onTransitionEnd === 'function') {
-              options.onTransitionEnd();
-            }
-          }.bind(this);
-          leavePage.options.animator.pop(enterPage, leavePage, callback);
+          this._popPage(options);
         }.bind(this));
+      },
+
+      _popPage: function(options) {
+        var unlock = this._doorLock.lock();
+
+        var leavePage = this.pages.pop();
+
+        if (this.pages[this.pages.length - 1]) {
+          this.pages[this.pages.length - 1].element.css('display', 'block');
+        }
+
+        var enterPage = this.pages[this.pages.length -1];
+
+        var event = {
+          leavePage: leavePage,
+          enterPage: this.pages[this.pages.length - 1],
+          navigator: this
+        };
+
+        var callback = function() {
+          leavePage.destroy();
+          unlock();
+          this.emit('postpop', event);
+          event.leavePage = null;
+
+          if (typeof options.onTransitionEnd === 'function') {
+            options.onTransitionEnd();
+          }
+        }.bind(this);
+
+        leavePage.options.animator.pop(enterPage, leavePage, callback);
       },
 
       /**
@@ -26798,8 +26831,8 @@ limitations under the License.
 
       _nullElement : window.document.createElement('div'),
 
-      _toolbarElement : angular.element(this.nullElement),
-      _bottomToolbarElement : angular.element(this.nullElement),
+      _toolbarElement : null,
+      _bottomToolbarElement : null,
 
       init: function(scope, element) {
         this._scope = scope;
@@ -26813,9 +26846,7 @@ limitations under the License.
         this._toolbarElement = angular.element(this._nullElement);
         this._bottomToolbarElement = angular.element(this._nullElement);
 
-        scope.$on('$destroy', function() {
-          this._destroy();
-        }.bind(this));
+        scope.$on('$destroy', this._destroy.bind(this));
       },
 
       /**
@@ -26936,9 +26967,12 @@ limitations under the License.
 
       _destroy: function() {
         this.emit('destroy', {page: this});
+
+        this._element = null;
         this._toolbarElement = null;
         this._nullElement = null;
         this._bottomToolbarElement = null;
+        this._scope = null;
       }
     });
     MicroEvent.mixin(PageView);
@@ -27888,13 +27922,11 @@ limitations under the License.
       _refreshBehindPageWidth: function() {
         var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
 
-        if (('maxSlideDistance' in this._attrs) && this._animator) {
-          this._animator.onResized(
-            {
-              isOpened: this._logic.isOpened(),
-              width: width
-            }
-          );
+        if (this._animator) {
+          this._animator.onResized({
+            isOpened: this._logic.isOpened(),
+            width: width
+          });
         }
       },
 
@@ -28471,7 +28503,11 @@ limitations under the License.
 
         scope.$watch('swipable', this._onSwipableChanged.bind(this));
 
-        window.addEventListener('resize', this._onResize.bind(this));
+        if ($onsen.isIOS()) {
+          window.addEventListener('orientationchange', this._onResize.bind(this));
+        } else {
+          window.addEventListener('resize', this._onResize.bind(this));
+        }
 
         this._animator = new RevealSlidingMenuAnimator();
 
@@ -29603,12 +29639,16 @@ limitations under the License.
  * @ngdoc directive
  * @id modal
  * @name ons-modal
- * @description Modal component that mask current screen.
- * @param modifier Modifier name.
- * @param var Variable name to refer this modal.
- * @property toggle() Toggle modal view visibility.
- * @property show() Show modal view.
- * @property hide() Hide modal view.
+ * @description 
+ *  [en]Modal component that mask current screen. Underlying components are not noticed from any events while the modal component is shown.[/en]
+ *  [ja]画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、モーダルが表示されている間はイベント通知が行われません。[/ja]
+ * @param var [en]Variable name to refer this modal.[/en][ja]このコンポーネントを参照するための変数名を指定します。[/ja]
+ * @property toggle() [en]Toggle modal view visibility.[/en][ja]モーダルの表示を切り替えます。[/ja]
+ * @property show() [en]Show modal view.[/en][ja]モーダルを表示します。[/ja]
+ * @property hide() [en]Hide modal view.[/en][ja]モーダルを非表示にします。[/ja]
+ * @guide UsingModal [en]Using ons-modal component[/en][ja]モーダルの使い方[/ja]
+ * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @codepen devIg
  */
 (function() {
   'use strict';
@@ -29709,7 +29749,7 @@ limitations under the License.
  *  [en]Add an event listener. Preset events are prepop, prepush, postpop and postpush.[/en]
  *  [ja]イベントリスナーを追加します。prepop, prepush, postpop, postpushを指定できます。[/ja]
  * @codepen yrhtv
- * @guide page-navigation [en]Guide for page navigation[/en][ja]ページナビゲーションの概要[/ja]
+ * @guide PageNavigation [en]Guide for page navigation[/en][ja]ページナビゲーションの概要[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
@@ -29752,6 +29792,7 @@ limitations under the License.
               };
 
               navigator._pushPageDOM('', pageElement, link, pageScope, {});
+              pageElement = null;
             }
 
             $onsen.aliasStack.register('ons.navigator', navigator);
@@ -29760,6 +29801,7 @@ limitations under the License.
             scope.$on('$destroy', function() {
               element.data('ons-navigator', undefined);
               $onsen.aliasStack.unregister('ons.navigator', navigator);
+              element = null;
             });
           }
         };
@@ -29790,25 +29832,13 @@ limitations under the License.
   module.directive('onsPage', function($onsen, $timeout, PageView) {
 
     function firePageInitEvent(element) {
-      function isAttached(element) {
-        if (document.documentElement === element) {
-          return true;
-        }
-        return element.parentNode ? isAttached(element.parentNode) : false;
-      }
-
-      function fire() {
-        var event = document.createEvent('HTMLEvents');    
-        event.initEvent('pageinit', true, true);
-        element.dispatchEvent(event);    
-      }
 
       // TODO: remove dirty fix
       var i = 0;
       var f = function() {
         if (i++ < 5)  {
           if (isAttached(element)) {
-            fire();
+            fireActualPageInitEvent(element);
           } else {
             setImmediate(f);
           }
@@ -29818,6 +29848,45 @@ limitations under the License.
       };
 
       f();
+    }
+
+    function fireActualPageInitEvent(element) {
+      var event = document.createEvent('HTMLEvents');    
+      event.initEvent('pageinit', true, true);
+      element.dispatchEvent(event);    
+    }
+
+    function isAttached(element) {
+      if (document.documentElement === element) {
+        return true;
+      }
+      return element.parentNode ? isAttached(element.parentNode) : false;
+    }
+
+    function preLink(scope, element, attrs, controller, transclude) {
+      var page = new PageView(scope, element);
+
+      $onsen.declareVarAttribute(attrs, page);
+
+      $onsen.aliasStack.register('ons.page', page);
+      element.data('ons-page', page);
+
+      scope.$on('$destroy', function() {
+        element.data('ons-page', undefined);
+        $onsen.aliasStack.unregister('ons.page', page);
+        element = null;
+      });
+
+      var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+      element.addClass('page ' + modifierTemplater('page--*'));
+
+      var pageContent = angular.element(element[0].querySelector('.page__content'));
+      pageContent.addClass(modifierTemplater('page--*__content'));
+      pageContent = null;
+    }
+
+    function postLink(scope, element, attrs) {
+      firePageInitEvent(element[0]);
     }
 
     return {
@@ -29855,6 +29924,7 @@ limitations under the License.
           wrapper.append(children);
           content.append(wrapper);
           element.append(content);
+          wrapper = null;
 
           // IScroll for Android2
           var scroller = new IScroll(content[0], {
@@ -29875,30 +29945,12 @@ limitations under the License.
           });
         }
 
+        content = null;
+        children = null;
+
         return {
-          pre: function(scope, element, attrs, controller, transclude) {
-            var page = new PageView(scope, element);
-
-            $onsen.declareVarAttribute(attrs, page);
-
-            $onsen.aliasStack.register('ons.page', page);
-            element.data('ons-page', page);
-
-            scope.$on('$destroy', function() {
-              element.data('ons-page', undefined);
-              $onsen.aliasStack.unregister('ons.page', page);
-            });
-
-            var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-            element.addClass('page ' + modifierTemplater('page--*'));
-
-            var pageContent = angular.element(element[0].querySelector('.page__content'));
-            pageContent.addClass(modifierTemplater('page--*__content'));
-          },
-
-          post: function(scope, element, attrs) {
-            firePageInitEvent(element[0]);
-          }
+          pre: preLink,
+          post: postLink
         };
       }
     };
