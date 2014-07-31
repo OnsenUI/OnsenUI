@@ -48,7 +48,11 @@ limitations under the License.
 
         scope.$watch('swipable', this._onSwipableChanged.bind(this));
 
-        window.addEventListener('resize', this._onResize.bind(this));
+        if ($onsen.isIOS()) {
+          window.addEventListener('orientationchange', this._onResize.bind(this));
+        } else {
+          window.addEventListener('resize', this._onResize.bind(this));
+        }
 
         this._animator = new RevealSlidingMenuAnimator();
 
