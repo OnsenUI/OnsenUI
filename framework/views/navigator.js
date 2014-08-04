@@ -174,7 +174,8 @@ limitations under the License.
         return {
           element: pageElement,
           link: function() {
-            return link(pageScope);
+            link(pageScope);
+            pageScope.$apply();
           }
         };
       },
