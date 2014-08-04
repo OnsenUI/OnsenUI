@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.1 - 2014-07-31 */
+/*! onsenui - v1.1.1 - 2014-08-04 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -26071,7 +26071,8 @@ limitations under the License.
         return {
           element: pageElement,
           link: function() {
-            return link(pageScope);
+            link(pageScope);
+            pageScope.$apply();
           }
         };
       },

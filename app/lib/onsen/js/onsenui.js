@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.1 - 2014-07-31 */
+/*! onsenui - v1.1.1 - 2014-08-04 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -5476,7 +5476,8 @@ limitations under the License.
         return {
           element: pageElement,
           link: function() {
-            return link(pageScope);
+            link(pageScope);
+            pageScope.$apply();
           }
         };
       },
