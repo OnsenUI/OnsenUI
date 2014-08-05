@@ -41,12 +41,12 @@
       <ons-toolbar>
         <div class="left"></div>
         <div class="center">{{pageTitle}}</div>
-        <div class="right"><ons-toolbar-button onclick="alert('Tapped')">Label</ons-toolbar-button></div> 
+        <div class="right"><ons-toolbar-button>Label</ons-toolbar-button></div> 
       </ons-toolbar>
 
       <div style="text-align: center">
         <br>
-        <ons-button onclick="navi.pushPage('page2.html')">Push Page</ons-button>
+        <ons-button ng-click="navi.pushPage('page2.html')">Push Page</ons-button>
       </div>
 
       <ons-bottom-toolbar>
@@ -64,8 +64,8 @@
 
     <div style="text-align: center">
       <br>
-      <ons-button onclick="navi.popPage()">Pop</ons-button>
-      <ons-button onclick="navi.pushPage('page2.html')">Push</ons-button>
+      <ons-button ng-click="navi.popPage()">Pop</ons-button>
+      <ons-button ng-click="navi.pushPage('page2.html')">Push</ons-button>
     </div>
   </script>
  
