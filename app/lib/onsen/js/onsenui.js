@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.1 - 2014-08-04 */
+/*! onsenui - v1.1.2-dev - 2014-08-05 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
