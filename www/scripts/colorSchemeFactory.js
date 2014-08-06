@@ -35,6 +35,10 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
         // Switch
         'switch-highlight-color': '#4cd964',
 
+        // Modal
+        'modal-background-color': 'rgba(0, 0, 0, 0.7)',
+        'modal-text-color': '#fff',
+
         // Notification
         'notification-background-color': '#dc5236'
       }
@@ -69,6 +73,10 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
         // Switch
         'switch-highlight-color': '#3385ff',
 
+        // Modal
+        'modal-background-color': 'rgba(0, 0, 0, 0.7)',
+        'modal-text-color': '#fff',
+
         // Notification
         'notification-background-color': '#3385ff'
       }
@@ -101,6 +109,10 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
 
         // Switch
         'switch-highlight-color': '#4cd964',
+
+        // Modal
+        'modal-background-color': 'rgba(0, 0, 0, 0.7)',
+        'modal-text-color': '#fff',
 
         // Notification
         'notification-background-color': '#666'
@@ -135,6 +147,10 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
 
         // Switch
         'switch-highlight-color': '#574bdb',
+
+        // Modal
+        'modal-background-color': 'rgba(0, 0, 0, 0.7)',
+        'modal-text-color': '#fff',
 
         // Notification
         'notification-background-color': '#dc5236'

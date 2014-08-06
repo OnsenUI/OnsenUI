@@ -95,6 +95,20 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
+      name: 'Modal',
+      items: [
+        {
+          name: 'modal-background-color',
+          displayName: 'Background Color'
+        },
+        {
+          name: 'modal-text-color',
+          displayName: 'Text Color'
+        }
+      ]
+    },
+
+    {
       name: 'Other',
       items: [
         {
@@ -104,7 +118,7 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
         {
           name: 'notification-background-color',
           displayName: 'Notification Background Color'
-        }
+        },
       ]
     }
   ];
