@@ -17,7 +17,7 @@
 
   var module = angular.module('onsen');
 
-  module.directive('onsPage', function($onsen, $timeout, PageView) {
+  module.directive('onsPage', function($onsen, PageView) {
 
     function firePageInitEvent(element) {
 
@@ -59,18 +59,24 @@
       $onsen.aliasStack.register('ons.page', page);
       element.data('ons-page', page);
 
-      scope.$on('$destroy', function() {
-        element.data('ons-page', undefined);
-        $onsen.aliasStack.unregister('ons.page', page);
-        element = null;
-      });
-
       var modifierTemplater = $onsen.generateModifierTemplater(attrs);
       element.addClass('page ' + modifierTemplater('page--*'));
 
       var pageContent = angular.element(element[0].querySelector('.page__content'));
       pageContent.addClass(modifierTemplater('page--*__content'));
       pageContent = null;
+
+      $onsen.cleaner.onDestroy(scope, function() {
+        element.data('ons-page', undefined);
+        $onsen.aliasStack.unregister('ons.page', page);
+
+        $onsen.clearComponent({
+          element: element,
+          scope: scope,
+          attrs: attrs
+        });
+        scope = element = attrs = null;
+      });
     }
 
     function postLink(scope, element, attrs) {

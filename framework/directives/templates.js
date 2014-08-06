@@ -18,7 +18,7 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/button.tpl",
     "<button class=\"{{item.animation}} button--{{onsType}} effeckt-button button no-select {{modifierTemplater('button--*')}}\">\n" +
-    "  <span class=\"label ons-button-inner\" ng-transclude></span>\n" +
+    "  <span class=\"label ons-button-inner\"></span>\n" +
     "  <span class=\"spinner button__spinner {{modifierTemplater('button--*__spinner')}}\"></span>\n" +
     "</button>\n" +
     "");

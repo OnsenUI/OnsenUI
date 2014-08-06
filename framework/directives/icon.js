@@ -88,7 +88,7 @@
       restrict: 'E',
       replace: false,
       transclude: false,
-      link: function($scope, element, attrs) {
+      link: function(scope, element, attrs) {
 
         if (attrs.ngController) {
           throw new Error('This element can\'t accept ng-controller directive.');
@@ -105,6 +105,22 @@
         var builded = buildClassAndStyle(attrs);
         element.css(builded.style);
         element.addClass(builded['class']);
+
+        attrs.$observe('icon', update);
+        attrs.$observe('size', update);
+        attrs.$observe('fixedWidth', update);
+        attrs.$observe('rotate', update);
+        attrs.$observe('flip', update);
+        attrs.$observe('spin', update);
+
+        $onsen.cleaner.onDestroy(scope, function() {
+          $onsen.clearComponent({
+            scope: scope,
+            element: element,
+            attrs: attrs
+          });
+          element = scope = attrs = null;
+        });
       }
     };
   });

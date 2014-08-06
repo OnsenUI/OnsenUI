@@ -14,7 +14,7 @@
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsBackButton', function($onsen, $compile) {
+  module.directive('onsBackButton', function($onsen, $compile, ComponentCleaner) {
     return {
       restrict: 'E',
       replace: false,
@@ -33,6 +33,15 @@
             if (clonedElement[0]) {
               element[0].querySelector('.back-button__label').appendChild(clonedElement[0]);
             }
+          });
+
+          ComponentCleaner.onDestroy(scope, function() {
+            ComponentCleaner.destroyScope(scope);
+            ComponentCleaner.destroyAttributes(attrs);
+
+            element = null;
+            scope = null;
+            attrs = null;
           });
         }
       }

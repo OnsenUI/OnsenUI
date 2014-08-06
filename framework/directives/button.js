@@ -37,7 +37,12 @@
         disabled: '@'
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
-      link: function(scope, element, attrs){
+      link: function(scope, element, attrs, _, transclude) {
+
+        transclude(scope, function(cloned, innerScope) {
+          angular.element(element[0].querySelector('.ons-button-inner')).append(cloned);
+        });
+
         if (attrs.ngController) {
           throw new Error('This element can\'t accept ng-controller directive.');
         }
@@ -73,6 +78,16 @@
           } else {
             effectButton.removeAttr('data-loading');
           }
+        });
+
+        $onsen.cleaner.onDestroy(scope, function() {
+          $onsen.clearComponent({
+            scope: scope,
+            attrs: attrs,
+            element: element
+          });
+
+          effectButton = scope = element = attrs = null;
         });
       }
     };

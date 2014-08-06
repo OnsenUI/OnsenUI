@@ -23,7 +23,7 @@ limitations under the License.
   /**
    * Internal service class for framework implementation.
    */
-  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, BackButtonHandlerStack) {
+  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, BackButtonHandlerStack, ComponentCleaner) {
 
     var unlockerDict = {
       _unlockersDict: {},
@@ -143,9 +143,38 @@ limitations under the License.
 
       aliasStack: aliasStack,
 
+      cleaner: ComponentCleaner,
+
       _defaultBackButtonListener: function() {
         navigator.app.exitApp();
         return true;
+      },
+
+      /**
+       * @param {Object} params
+       * @param {Scope} [params.scope]
+       * @param {jqLite} [params.element]
+       * @param {Array} [params.elements]
+       * @param {Attributes} [params.attrs]
+       */
+      clearComponent: function(params) {
+        if (params.scope) {
+          ComponentCleaner.destroyScope(params.scope);
+        }
+
+        if (params.attrs) {
+          ComponentCleaner.destroyAttributes(params.attrs);
+        }
+
+        if (params.element) {
+          ComponentCleaner.destroyElement(params.element);
+        }
+
+        if (params.elements) {
+          params.elements.forEach(function(element) {
+            ComponentCleaner.destroyElement(element);
+          });
+        }
       },
 
       backButtonHandlerStack: (function() {

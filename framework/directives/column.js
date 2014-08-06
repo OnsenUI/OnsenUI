@@ -62,6 +62,15 @@
             updateWidth(attrs.width);
           }
 
+          $onsen.cleaner.onDestroy(scope, function() {
+            $onsen.clearComponent({
+              scope: scope,
+              element: element,
+              attrs: attrs
+            });
+            element = attrs = scope = null;
+          });
+
           function updateAlign(align) {
             if (align === 'top' || align === 'center' || align === 'bottom') {
               element.removeClass('col-top col-center col-bottom');

@@ -52,9 +52,9 @@ limitations under the License.
     },
 
     destroy: function() {
-      this.element.remove();
       this.pageScope.$destroy();
 
+      this.element.remove();
       this._pageView = null;
       this.element = null;
       this.pageScope = null;

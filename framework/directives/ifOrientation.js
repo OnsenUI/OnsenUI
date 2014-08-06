@@ -29,7 +29,7 @@
       compile: function(element) {
         element.css('display', 'none');
 
-        return function($scope, element, attrs) {
+        return function(scope, element, attrs) {
           element.addClass('ons-if-orientation-inner');
 
           window.addEventListener('orientationchange', update, false);
@@ -37,6 +37,18 @@
           attrs.$observe('onsIfOrientation', update);
 
           update();
+
+          $onsen.cleaner.onDestroy(scope, function() {
+            window.removeEventListener('orientationchange', update, false);
+            window.removeEventListener('resize', update, false);
+
+            $onsen.clearComponent({
+              element: element,
+              scope: scope,
+              attrs: attrs
+            });
+            element = scope = attrs = null;
+          });
 
           function update() {
             var userOrientation = ('' + attrs.onsIfOrientation).toLowerCase();

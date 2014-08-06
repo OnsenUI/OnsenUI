@@ -79,12 +79,18 @@
           }
 
           $onsen.declareVarAttribute(attrs, switchView);
-          $onsen.aliasStack.register('ons.switch', switchView);
           element.data('ons-switch', switchView);
+          $onsen.aliasStack.register('ons.switch', switchView);
 
-          scope.$on('$destroy', function() {
+          $onsen.cleaner.onDestroy(scope, function() {
             element.data('ons-switch', undefined);
-            $onsen.aliasStack.unregister('ons.navigator', navigator);
+            $onsen.aliasStack.unregister('ons.switch', switchView);
+            $onsen.clearComponent({
+              element : element,
+              scope : scope,
+              attrs : attrs
+            });
+            checkbox = element = attrs = scope = null;
           });
         };
       }

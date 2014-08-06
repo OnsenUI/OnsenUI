@@ -32,7 +32,7 @@
 
         var platform = getPlatformString();
 
-        return function($scope, element, attrs) {
+        return function(scope, element, attrs) {
           attrs.$observe('onsIfPlatform', function(userPlatform) {
             if (userPlatform) {
               update();
@@ -40,6 +40,15 @@
           });
 
           update();
+
+          $onsen.cleaner.onDestroy(scope, function() {
+            $onsen.clearComponent({
+              element: element,
+              scope: scope,
+              attrs: attrs
+            });
+            element = scope = attrs = null;
+          });
 
           function update() {
             if (attrs.onsIfPlatform.toLowerCase() === platform.toLowerCase()) {

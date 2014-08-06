@@ -22,13 +22,22 @@
       transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
-        pre: function(scope, element, attrs, controller, transclude) {
+        pre: function(scope, element, attrs) {
 
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+          $onsen.cleaner.onDestroy(scope, function() {
+            $onsen.clearComponent({
+              scope: scope,
+              attrs: attrs,
+              element: element,
+            });
+            scope = element = attrs = null;
+          });
         }
       }
     };
