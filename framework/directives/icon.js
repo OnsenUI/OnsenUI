@@ -40,7 +40,7 @@
   }
 
   function buildClassAndStyle(attrs) {
-    var classList = ['fa'];
+    var classList = [];
     var style = {};
 
     // size
@@ -54,7 +54,15 @@
     }
 
     // icon
-    classList.push('fa-' + attrs.icon);
+    if (attrs.icon.indexOf('ion-') === 0) {
+      classList.push(attrs.icon);
+    } else if (attrs.icon.indexOf('fa-') === 0) {
+      classList.push(attrs.icon);
+      classList.push('fa');
+    } else {
+      classList.push('fa');
+      classList.push('fa-' + attrs.icon);
+    }
     
     // rotate
     if (attrs.rotate === '90' || attrs.rotate === '180' || attrs.rotate === '270') {

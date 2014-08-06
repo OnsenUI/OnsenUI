@@ -163,15 +163,15 @@ gulp.task('prepare', ['html2js'], function() {
       .pipe(gulp.dest('app/lib/onsen/js/angular/'))
       .pipe(gulp.dest('build/js/angular/')),
 
-    // font-awesome css copy
+    // font-awesome fle copy
     gulp.src('framework/css/font_awesome/**/*')
       .pipe(gulp.dest('build/css/font_awesome/'))
-      .pipe(gulp.dest('app/lib/onsen/css/font_awesome')),
+      .pipe(gulp.dest('app/lib/onsen/css/font_awesome/')),
 
-    // css polyfills
-    gulp.src('framework/css/polyfill/*.css')
-      .pipe(gulp.dest('build/css/polyfill/'))
-      .pipe(gulp.dest('app/lib/onsen/css')),
+    // ionicons file copy
+    gulp.src('framework/css/ionicons/**/*')
+      .pipe(gulp.dest('build/css/ionicons/'))
+      .pipe(gulp.dest('app/lib/onsen/css/ionicons/')),
 
     // auto prepare
     gulp.src('cordova-app/www/index.html')
