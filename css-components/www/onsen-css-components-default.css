@@ -3005,7 +3005,7 @@ webkit-input-placeholder() {
   font-weight: 400;
   font-size: 17px;
   overflow: hidden;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.7);
   position: absolute;
   left: 0;
   right: 0;
