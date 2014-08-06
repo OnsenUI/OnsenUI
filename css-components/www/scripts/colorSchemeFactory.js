@@ -19,6 +19,7 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
 
         // Toolbar
         'toolbar-background-color': '#f8f8f8',
+        'toolbar-button-color': '#1284ff',
         'toolbar-text-color': '#1f1f21',
         'toolbar-border-color': '#ddd',
 
@@ -52,6 +53,7 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
 
         // Toolbar
         'toolbar-background-color': '#212226',
+        'toolbar-button-color': '#4073eb',
         'toolbar-text-color': '#fff',
         'toolbar-border-color': 'rgba(0,0,0,0)',
 
@@ -84,6 +86,7 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
 
         // Toolbar
         'toolbar-background-color': '#fff',
+        'toolbar-button-color': '#ff4255',
         'toolbar-text-color': '#fa3737',
         'toolbar-border-color': transparent,
 
@@ -117,6 +120,7 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
 
         // Toolbar
         'toolbar-background-color': '#fff',
+        'toolbar-button-color': '#8962ed',
         'toolbar-text-color': '#5b2c7a',
         'toolbar-border-color': '#ddd',
 
