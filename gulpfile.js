@@ -164,9 +164,9 @@ gulp.task('prepare', ['html2js'], function() {
       .pipe(gulp.dest('build/js/angular/')),
 
     // font-awesome css copy
-    gulp.src('framework/css/font_awesome/*/*')
+    gulp.src('framework/css/font_awesome/**/*')
       .pipe(gulp.dest('build/css/font_awesome/'))
-      .pipe(gulp.dest('app/lib/onsen/css')),
+      .pipe(gulp.dest('app/lib/onsen/css/font_awesome')),
 
     // css polyfills
     gulp.src('framework/css/polyfill/*.css')
