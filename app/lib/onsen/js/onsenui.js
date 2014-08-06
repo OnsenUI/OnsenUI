@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.2-dev - 2014-08-05 */
+/*! onsenui - v1.1.2-dev - 2014-08-06 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -3961,7 +3961,7 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/button.tpl",
     "<button class=\"{{item.animation}} button--{{onsType}} effeckt-button button no-select {{modifierTemplater('button--*')}}\">\n" +
-    "  <span class=\"label ons-button-inner\" ng-transclude></span>\n" +
+    "  <span class=\"label ons-button-inner\"></span>\n" +
     "  <span class=\"spinner button__spinner {{modifierTemplater('button--*__spinner')}}\"></span>\n" +
     "</button>\n" +
     "");
@@ -5354,9 +5354,9 @@ limitations under the License.
     },
 
     destroy: function() {
-      this.element.remove();
       this.pageScope.$destroy();
 
+      this.element.remove();
       this._pageView = null;
       this.element = null;
       this.pageScope = null;
@@ -6252,7 +6252,7 @@ limitations under the License.
         this._toolbarElement = angular.element(this._nullElement);
         this._bottomToolbarElement = angular.element(this._nullElement);
 
-        scope.$on('$destroy', this._destroy.bind(this));
+        this._clearListener = scope.$on('$destroy', this._destroy.bind(this));
       },
 
       /**
@@ -6379,6 +6379,7 @@ limitations under the License.
         this._nullElement = null;
         this._bottomToolbarElement = null;
         this._scope = null;
+        this._clearListener();
       }
     });
     MicroEvent.mixin(PageView);
@@ -8359,7 +8360,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsBackButton', function($onsen, $compile) {
+  module.directive('onsBackButton', function($onsen, $compile, ComponentCleaner) {
     return {
       restrict: 'E',
       replace: false,
@@ -8378,6 +8379,15 @@ limitations under the License.
             if (clonedElement[0]) {
               element[0].querySelector('.back-button__label').appendChild(clonedElement[0]);
             }
+          });
+
+          ComponentCleaner.onDestroy(scope, function() {
+            ComponentCleaner.destroyScope(scope);
+            ComponentCleaner.destroyAttributes(attrs);
+
+            element = null;
+            scope = null;
+            attrs = null;
           });
         }
       }
@@ -8474,7 +8484,12 @@ limitations under the License.
         disabled: '@'
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
-      link: function(scope, element, attrs){
+      link: function(scope, element, attrs, _, transclude) {
+
+        transclude(scope, function(cloned, innerScope) {
+          angular.element(element[0].querySelector('.ons-button-inner')).append(cloned);
+        });
+
         if (attrs.ngController) {
           throw new Error('This element can\'t accept ng-controller directive.');
         }
@@ -8510,6 +8525,16 @@ limitations under the License.
           } else {
             effectButton.removeAttr('data-loading');
           }
+        });
+
+        $onsen.cleaner.onDestroy(scope, function() {
+          $onsen.clearComponent({
+            scope: scope,
+            attrs: attrs,
+            element: element
+          });
+
+          effectButton = scope = element = attrs = null;
         });
       }
     };
@@ -8579,6 +8604,15 @@ limitations under the License.
           } else {
             updateWidth(attrs.width);
           }
+
+          $onsen.cleaner.onDestroy(scope, function() {
+            $onsen.clearComponent({
+              scope: scope,
+              element: element,
+              attrs: attrs
+            });
+            element = attrs = scope = null;
+          });
 
           function updateAlign(align) {
             if (align === 'top' || align === 'center' || align === 'bottom') {
@@ -8730,7 +8764,7 @@ limitations under the License.
       restrict: 'E',
       replace: false,
       transclude: false,
-      link: function($scope, element, attrs) {
+      link: function(scope, element, attrs) {
 
         if (attrs.ngController) {
           throw new Error('This element can\'t accept ng-controller directive.');
@@ -8747,6 +8781,22 @@ limitations under the License.
         var builded = buildClassAndStyle(attrs);
         element.css(builded.style);
         element.addClass(builded['class']);
+
+        attrs.$observe('icon', update);
+        attrs.$observe('size', update);
+        attrs.$observe('fixedWidth', update);
+        attrs.$observe('rotate', update);
+        attrs.$observe('flip', update);
+        attrs.$observe('spin', update);
+
+        $onsen.cleaner.onDestroy(scope, function() {
+          $onsen.clearComponent({
+            scope: scope,
+            element: element,
+            attrs: attrs
+          });
+          element = scope = attrs = null;
+        });
       }
     };
   });
@@ -8784,7 +8834,7 @@ limitations under the License.
       compile: function(element) {
         element.css('display', 'none');
 
-        return function($scope, element, attrs) {
+        return function(scope, element, attrs) {
           element.addClass('ons-if-orientation-inner');
 
           window.addEventListener('orientationchange', update, false);
@@ -8792,6 +8842,18 @@ limitations under the License.
           attrs.$observe('onsIfOrientation', update);
 
           update();
+
+          $onsen.cleaner.onDestroy(scope, function() {
+            window.removeEventListener('orientationchange', update, false);
+            window.removeEventListener('resize', update, false);
+
+            $onsen.clearComponent({
+              element: element,
+              scope: scope,
+              attrs: attrs
+            });
+            element = scope = attrs = null;
+          });
 
           function update() {
             var userOrientation = ('' + attrs.onsIfOrientation).toLowerCase();
@@ -8860,7 +8922,7 @@ limitations under the License.
 
         var platform = getPlatformString();
 
-        return function($scope, element, attrs) {
+        return function(scope, element, attrs) {
           attrs.$observe('onsIfPlatform', function(userPlatform) {
             if (userPlatform) {
               update();
@@ -8868,6 +8930,15 @@ limitations under the License.
           });
 
           update();
+
+          $onsen.cleaner.onDestroy(scope, function() {
+            $onsen.clearComponent({
+              element: element,
+              scope: scope,
+              attrs: attrs
+            });
+            element = scope = attrs = null;
+          });
 
           function update() {
             if (attrs.onsIfPlatform.toLowerCase() === platform.toLowerCase()) {
@@ -9235,7 +9306,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.directive('onsPage', function($onsen, $timeout, PageView) {
+  module.directive('onsPage', function($onsen, PageView) {
 
     function firePageInitEvent(element) {
 
@@ -9277,18 +9348,24 @@ limitations under the License.
       $onsen.aliasStack.register('ons.page', page);
       element.data('ons-page', page);
 
-      scope.$on('$destroy', function() {
-        element.data('ons-page', undefined);
-        $onsen.aliasStack.unregister('ons.page', page);
-        element = null;
-      });
-
       var modifierTemplater = $onsen.generateModifierTemplater(attrs);
       element.addClass('page ' + modifierTemplater('page--*'));
 
       var pageContent = angular.element(element[0].querySelector('.page__content'));
       pageContent.addClass(modifierTemplater('page--*__content'));
       pageContent = null;
+
+      $onsen.cleaner.onDestroy(scope, function() {
+        element.data('ons-page', undefined);
+        $onsen.aliasStack.unregister('ons.page', page);
+
+        $onsen.clearComponent({
+          element: element,
+          scope: scope,
+          attrs: attrs
+        });
+        scope = element = attrs = null;
+      });
     }
 
     function postLink(scope, element, attrs) {
@@ -10058,12 +10135,18 @@ limitations under the License.
           }
 
           $onsen.declareVarAttribute(attrs, switchView);
-          $onsen.aliasStack.register('ons.switch', switchView);
           element.data('ons-switch', switchView);
+          $onsen.aliasStack.register('ons.switch', switchView);
 
-          scope.$on('$destroy', function() {
+          $onsen.cleaner.onDestroy(scope, function() {
             element.data('ons-switch', undefined);
-            $onsen.aliasStack.unregister('ons.navigator', navigator);
+            $onsen.aliasStack.unregister('ons.switch', switchView);
+            $onsen.clearComponent({
+              element : element,
+              scope : scope,
+              attrs : attrs
+            });
+            checkbox = element = attrs = scope = null;
           });
         };
       }
@@ -10508,13 +10591,22 @@ limitations under the License.
       transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
-        pre: function(scope, element, attrs, controller, transclude) {
+        pre: function(scope, element, attrs) {
 
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+          $onsen.cleaner.onDestroy(scope, function() {
+            $onsen.clearComponent({
+              scope: scope,
+              attrs: attrs,
+              element: element,
+            });
+            scope = element = attrs = null;
+          });
         }
       }
     };
@@ -10749,10 +10841,139 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
+  var ComponentCleaner = {
+    
+    /**
+     * @param {jqLite} element
+     */
+    decomposeNode: function(element) {
+      var children = element.remove().children();
+      for (var i = 0; i < children.length; i++) {
+        ComponentCleaner.decomposeNode(angular.element(children[i]));
+      }
+    },
+
+    /**
+     * @param {Attributes} attrs
+     */
+    destroyAttributes: function(attrs) {
+      attrs.$$element = null;
+      attrs.$$observers = null;
+    },
+
+    /**
+     * @param {jqLite} element
+     */
+    destroyElement: function(element) {
+      element.remove();
+    },
+
+    /**
+     * @param {Scope} scope
+     */
+    destroyScope: function(scope) {
+      scope.$$listeners = {};
+      scope.$$watchers = null;
+      scope = null;
+    },
+
+    /**
+     * @param {Scope} scope
+     * @param {Function} fn
+     */
+    onDestroy: function(scope, fn) {
+      var clear = scope.$on('$destroy', function() {
+        clear();
+        fn.apply(null, arguments);
+      });
+    }
+  };
+
+  module.factory('ComponentCleaner', function() {
+    return ComponentCleaner;
+  });
+
+  // override builtin ng-(eventname) directives
+  (function() {
+    var ngEventDirectives = {};
+    'click dblclick mousedown mouseup mouseover mouseout mousemove mouseenter mouseleave keydown keyup keypress submit focus blur copy cut paste'.split(' ').forEach(
+      function(name) {
+        var directiveName = directiveNormalize('ng-' + name);
+        ngEventDirectives[directiveName] = ['$parse', function($parse) {
+          return {
+            compile: function($element, attr) {
+              var fn = $parse(attr[directiveName]);
+              return function(scope, element, attr) {
+                var listener = function(event) {
+                  scope.$apply(function() {
+                    fn(scope, {$event:event});
+                  });
+                };
+                element.on(name, listener);
+
+                ComponentCleaner.onDestroy(scope, function() {
+                  element.off(name, listener);
+                  element = null;
+
+                  ComponentCleaner.destroyScope(scope);
+                  scope = null;
+
+                  ComponentCleaner.destroyAttributes(attr);
+                  attr = null;
+                });
+              };
+            }
+          };
+        }];
+
+        function directiveNormalize(name) {
+          return name.replace(/-([a-z])/g, function(matches) {
+            return matches[1].toUpperCase();
+          });
+        }
+      }
+    );
+    module.config(function($provide) {
+      var shift = function($delegate) {
+        $delegate.shift();
+        return $delegate;
+      };
+      Object.keys(ngEventDirectives).forEach(function(directiveName) {
+        $provide.decorator(directiveName + 'Directive', ['$delegate', shift]);
+      });
+    });
+    Object.keys(ngEventDirectives).forEach(function(directiveName) {
+      module.directive(directiveName, ngEventDirectives[directiveName]);
+    });
+  })();
+})();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function(){
+  'use strict';
+
+  var module = angular.module('onsen');
+
   /**
    * Internal service class for framework implementation.
    */
-  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, BackButtonHandlerStack) {
+  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, BackButtonHandlerStack, ComponentCleaner) {
 
     var unlockerDict = {
       _unlockersDict: {},
@@ -10872,9 +11093,38 @@ limitations under the License.
 
       aliasStack: aliasStack,
 
+      cleaner: ComponentCleaner,
+
       _defaultBackButtonListener: function() {
         navigator.app.exitApp();
         return true;
+      },
+
+      /**
+       * @param {Object} params
+       * @param {Scope} [params.scope]
+       * @param {jqLite} [params.element]
+       * @param {Array} [params.elements]
+       * @param {Attributes} [params.attrs]
+       */
+      clearComponent: function(params) {
+        if (params.scope) {
+          ComponentCleaner.destroyScope(params.scope);
+        }
+
+        if (params.attrs) {
+          ComponentCleaner.destroyAttributes(params.attrs);
+        }
+
+        if (params.element) {
+          ComponentCleaner.destroyElement(params.element);
+        }
+
+        if (params.elements) {
+          params.elements.forEach(function(element) {
+            ComponentCleaner.destroyElement(element);
+          });
+        }
       },
 
       backButtonHandlerStack: (function() {
