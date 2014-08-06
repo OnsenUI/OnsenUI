@@ -10,19 +10,6 @@
   <script src="../../build/js/angular/angular.js"></script>
   <script src="../../build/js/onsenui.js"></script>    
   <script src="../app.js"></script>  
-
-  <script>
-    ons.ready(function() {
-      tabbar.on('prechange', function() {
-        console.log('prechange');
-      });
-
-      tabbar.on('postchange', function() {
-        console.log('postchange');
-      });
-    });
-
-  </script>
   
 </head>
 
@@ -30,23 +17,20 @@
   
   <ons-tabbar var="tabbar">
     <ons-tabbar-item 
-      icon="ion-home"
-      label="Home"
-      page="page1.html"
+      icon="home"
+      page="page.html"
       active="true"></ons-tabbar-item> 
     <ons-tabbar-item 
-      icon="ion-chatbox-working"
-      label="Comments"      
-      page="page2.html"></ons-tabbar-item> 
+      icon="comment"      
+      page="page.html"></ons-tabbar-item> 
     <ons-tabbar-item 
-      icon="ion-ios7-cog"
-      label="Settings"
-      page="page3.html"></ons-tabbar-item> 
+      icon="gear"
+      page="page.html"></ons-tabbar-item> 
   </ons-tabbar>
 
-  <script type="text/ons-template" id="page3.html">
+  <script type="text/ons-template" id="page.html">
     <ons-toolbar>
-      <div class="center">Page3</div>
+      <div class="center">Page</div>
     </ons-toolbar>
   </script>
  
