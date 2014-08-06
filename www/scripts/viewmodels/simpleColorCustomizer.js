@@ -51,6 +51,11 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
         },
 
         {
+          name: 'toolbar-button-color',
+          displayName: 'Button Color'
+        },
+
+        {
           name: 'toolbar-border-color',
           displayName: 'Border Color'
         }
