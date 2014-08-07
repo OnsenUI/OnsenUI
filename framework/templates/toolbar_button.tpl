@@ -1,1 +1,1 @@
-<span class="icon-button--quiet {{modifierTemplater('icon-button--quiet--*')}} navigation-bar__line-height" ng-transclude></span>
+<span class="toolbar-button {{modifierTemplater('toolbar-button--quiet--*')}} navigation-bar__line-height" ng-transclude></span>

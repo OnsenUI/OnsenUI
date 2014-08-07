@@ -82,7 +82,7 @@ angular.module('app').factory('CssComponentParser', function(Component, $rootSco
 
         component.resolvedCss = components.map(function(component) {
           return component.css;
-        }).join('');
+        }).join('\n');
 
         return component;
 

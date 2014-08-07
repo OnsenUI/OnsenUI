@@ -459,11 +459,11 @@ h6 {
 /* topdoc
   name: Navigation Bar Item
   class: navigation-bar__item
-  use: Icon Button, Navigation Bar
+  use: Toolbar Button, Navigation Bar
   markup:
     <div class="navigation-bar">
       <div class="navigation-bar__left">
-        <span class="icon-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -473,17 +473,38 @@ h6 {
       </div>
 
       <div class="navigation-bar__right">
-        <span class="icon-button--quiet navigation-bar__line-height">Label</span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Navigation Bar with Bordered Button
+  class: navigation-bar__item
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <div class="navigation-bar">
+      <div class="navigation-bar__left">
+        <span class="toolbar-button--bordered navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+
+      <div class="navigation-bar__center">
+        Title
+      </div>
+
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--bordered navigation-bar__line-height">Button</span>
       </div>
     </div>
 */
 /* topdoc
   name: Transparent Navigation Bar
-  use: Icon Button, Navigation Bar
+  use: Toolbar Button, Navigation Bar
   markup:
     <div class="navigation-bar navigation-bar--transparent">
       <div class="navigation-bar__left">
-        <span class="icon-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -491,7 +512,7 @@ h6 {
         <h1 class="navigation-bar__title">Navigation Bar</h1>
       </div>
       <div class="navigation-bar__right">
-        <span class="icon-button--quiet navigation-bar__line-height">Label</span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
       </div>
     </div>
 */
@@ -1629,23 +1650,23 @@ h6 {
   font-weight: 400;
 }
 /* topdoc
-  name: Icon Button
-  class: icon-button
+  name: Toolbar Button
   modifiers:
     :active: Active state
     :disabled: Disabled state
     :focus: Focused
   markup:
-    <button class="icon-button">
+    <button class="toolbar-button">
       <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
 
-    <button class="icon-button--quiet">
+    <button class="toolbar-button toolbar-button--bordered">
       <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
 */
-.icon-button,
-.icon-button--quiet {
+.toolbar-button,
+.toolbar-button--bordered,
+.toolbar-button--quiet {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1657,9 +1678,9 @@ h6 {
   text-shadow: 0 1px none;
   vertical-align: baseline;
   background-color: rgba(0,0,0,0);
-  border: 1px solid #1284ff;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid transparent;
   font-weight: 400;
   font-size: 17px;
   -webkit-transition: opacity 0.2s linear;
@@ -1668,8 +1689,9 @@ h6 {
   transition: opacity 0.2s linear;
   vertical-align: middle;
 }
-.icon-button:active,
-.icon-button--quiet:active {
+.toolbar-button:active,
+.toolbar-button--bordered:active,
+.toolbar-button--quiet:active {
   background-color: rgba(0,0,0,0);
   -webkit-transition: none;
   -moz-transition: none;
@@ -1677,43 +1699,29 @@ h6 {
   transition: none;
   opacity: 0.2;
 }
-.icon-button:disabled,
-.icon-button--quiet:disabled {
+.toolbar-button:disabled {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-.icon-button:focus,
-.icon-button--quiet:focus {
+.toolbar-button:focus,
+.toolbar-button--bordered:focus,
+.toolbar-button--quiet:focus {
   outline: 0;
 }
-.icon-button:hover {
+.toolbar-button:hover,
+.toolbar-button--bordered:hover,
+.toolbar-button--quiet:hover {
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
   transition: none;
 }
-.icon-button--quiet {
-  background: transparent;
-  border: 1px solid transparent;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  background-color: transparent;
-  border: none;
-  color: #1284ff;
-}
-.icon-button--quiet:active {
-  color: #1284ff;
-  text-shadow: 0 1px none;
-  background-color: transparent;
-  border: none;
-  opacity: 0.2;
-}
-.icon-button--quiet:hover {
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
+.toolbar-button--bordered {
+  border: 1px solid #1284ff;
+  margin: auto 8px;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 /* topdoc
   name: Checkbox
@@ -1856,13 +1864,13 @@ h6 {
 .checkbox > .checkbox__checkmark:after {
   content: '';
   position: absolute;
-  top: 5px;
-  left: 4px;
+  top: 6px;
+  left: 5px;
   width: 12px;
   height: 6px;
   background: transparent;
   border: 3px solid #fff;
-  border-width: 3px;
+  border-width: 2px;
   border-top: none;
   border-right: none;
   -webkit-border-radius: 0px;
@@ -2025,14 +2033,14 @@ h6 {
 .checkbox--noborder > .checkbox__checkmark:after {
   content: '';
   position: absolute;
-  top: 5px;
-  left: 4px;
+  top: 6px;
+  left: 5px;
   opacity: 0;
   width: 12px;
   height: 6px;
   background: transparent;
   border: 3px solid #1284ff;
-  border-width: 3px;
+  border-width: 2px;
   border-top: none;
   border-right: none;
   -webkit-border-radius: 0px;
@@ -2189,14 +2197,14 @@ h6 {
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  top: 5px;
-  left: 4px;
+  top: 6px;
+  left: 5px;
   opacity: 0;
   width: 12px;
   height: 6px;
   background: transparent;
   border: 3px solid #1284ff;
-  border-width: 3px;
+  border-width: 2px;
   border-top: none;
   border-right: none;
   -webkit-border-radius: 0px;
