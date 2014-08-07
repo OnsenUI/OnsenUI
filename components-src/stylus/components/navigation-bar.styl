@@ -116,11 +116,11 @@ navigation-bar__item()
 /*! topdoc
   name: Navigation Bar Item
   class: navigation-bar__item
-  use: Icon Button, Navigation Bar
+  use: Toolbar Button, Navigation Bar
   markup:
     <div class="navigation-bar">
       <div class="navigation-bar__left">
-        <span class="icon-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -130,18 +130,40 @@ navigation-bar__item()
       </div>
 
       <div class="navigation-bar__right">
-        <span class="icon-button--quiet navigation-bar__line-height">Label</span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+      </div>
+    </div>
+*/
+
+/*! topdoc
+  name: Navigation Bar with Bordered Button
+  class: navigation-bar__item
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <div class="navigation-bar">
+      <div class="navigation-bar__left">
+        <span class="toolbar-button--bordered navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+
+      <div class="navigation-bar__center">
+        Title
+      </div>
+
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--bordered navigation-bar__line-height">Button</span>
       </div>
     </div>
 */
 
 /*! topdoc
   name: Transparent Navigation Bar
-  use: Icon Button, Navigation Bar
+  use: Toolbar Button, Navigation Bar
   markup:
     <div class="navigation-bar navigation-bar--transparent">
       <div class="navigation-bar__left">
-        <span class="icon-button--quiet navigation-bar__line-height">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -149,7 +171,7 @@ navigation-bar__item()
         <h1 class="navigation-bar__title">Navigation Bar</h1>
       </div>
       <div class="navigation-bar__right">
-        <span class="icon-button--quiet navigation-bar__line-height">Label</span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
       </div>
     </div>
 */

@@ -37,6 +37,7 @@
               <li><a href="#range">Range</a></li>
               <li><a href="#navigation-bar">Navigation Bar</a></li>
               <li><a href="#navigation-bar-item">Navigation Bar Item</a></li>
+              <li><a href="#navigation-bar-with-bordered-button">Navigation Bar with Bordered Button</a></li>
               <li><a href="#transparent-navigation-bar">Transparent Navigation Bar</a></li>
               <li><a href="#bottom-bar">Bottom Bar</a></li>
               <li><a href="#navigation-bar-with-segment">Navigation Bar with Segment</a></li>
@@ -53,7 +54,7 @@
               <li><a href="#tab-bar">Tab Bar</a></li>
               <li><a href="#icon-only-tab-bar">Icon Only Tab Bar</a></li>
               <li><a href="#notification">Notification</a></li>
-              <li><a href="#icon-button">Icon Button</a></li>
+              <li><a href="#toolbar-button">Toolbar Button</a></li>
               <li><a href="#checkbox">Checkbox</a></li>
               <li><a href="#no-border-checkbox">No border Checkbox</a></li>
               <li><a href="#radio-button">Radio Button</a></li>
@@ -152,13 +153,30 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 120px;" class="markup">
-                <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar">  <div class="navigation-bar__left">    <span class="icon-button--quiet navigation-bar__line-height">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Navigation Bar  </div>  <div class="navigation-bar__right">    <span class="icon-button--quiet navigation-bar__line-height">Label</span>  </div></div></div>
+                <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar">  <div class="navigation-bar__left">    <span class="toolbar-button--quiet navigation-bar__line-height">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Navigation Bar  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>  </div></div></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;navigation-bar&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;icon-button--quiet navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    Navigation Bar  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;icon-button--quiet navigation-bar__line-height&quot;&gt;Label&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;navigation-bar&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    Navigation Bar  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;Label&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="navigation-bar-with-bordered-button" class="component">
+            <header>
+              <h2>Navigation Bar with Bordered Button</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 120px;" class="markup">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar">  <div class="navigation-bar__left">    <span class="toolbar-button--bordered navigation-bar__line-height">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Title  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--bordered navigation-bar__line-height">Button</span>  </div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;navigation-bar&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;toolbar-button--bordered navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    Title  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;toolbar-button--bordered navigation-bar__line-height&quot;&gt;Button&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -169,13 +187,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 120px;" class="markup">
-                <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar navigation-bar--transparent">  <div class="navigation-bar__left">    <span class="icon-button--quiet navigation-bar__line-height">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    <h1 class="navigation-bar__title">Navigation Bar</h1>  </div>  <div class="navigation-bar__right">    <span class="icon-button--quiet navigation-bar__line-height">Label</span>  </div></div></div>
+                <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar navigation-bar--transparent">  <div class="navigation-bar__left">    <span class="toolbar-button--quiet navigation-bar__line-height">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    <h1 class="navigation-bar__title">Navigation Bar</h1>  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>  </div></div></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;navigation-bar navigation-bar--transparent&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;icon-button--quiet navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    &lt;h1 class=&quot;navigation-bar__title&quot;&gt;Navigation Bar&lt;/h1&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;icon-button--quiet navigation-bar__line-height&quot;&gt;Label&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;navigation-bar navigation-bar--transparent&quot;&gt;  &lt;div class=&quot;navigation-bar__left&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;      &lt;i class=&quot;ion-navicon&quot; style=&quot;font-size:32px; vertical-align:-6px;&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center&quot;&gt;    &lt;h1 class=&quot;navigation-bar__title&quot;&gt;Navigation Bar&lt;/h1&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right&quot;&gt;    &lt;span class=&quot;toolbar-button--quiet navigation-bar__line-height&quot;&gt;Label&lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -435,19 +453,19 @@
               </section>
             </footer>
           </article>
-          <article id="icon-button" class="component">
+          <article id="toolbar-button" class="component">
             <header>
-              <h2>Icon Button</h2>
+              <h2>Toolbar Button</h2>
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 120px;" class="markup">
-                <div style="width: 100%; height: 100%; position:absolute"><button class="icon-button">  <i class="fa fa-bell" style="font-size:17px"></i> Label</button><button class="icon-button--quiet">  <i class="fa fa-bell" style="font-size:17px"></i> Label</button></div>
+                <div style="width: 100%; height: 100%; position:absolute"><button class="toolbar-button">  <i class="fa fa-bell" style="font-size:17px"></i> Label</button><button class="toolbar-button toolbar-button--bordered">  <i class="fa fa-bell" style="font-size:17px"></i> Label</button></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;button class=&quot;icon-button&quot;&gt;  &lt;i class=&quot;fa fa-bell&quot; style=&quot;font-size:17px&quot;&gt;&lt;/i&gt; Label&lt;/button&gt;&lt;button class=&quot;icon-button--quiet&quot;&gt;  &lt;i class=&quot;fa fa-bell&quot; style=&quot;font-size:17px&quot;&gt;&lt;/i&gt; Label&lt;/button&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;button class=&quot;toolbar-button&quot;&gt;  &lt;i class=&quot;fa fa-bell&quot; style=&quot;font-size:17px&quot;&gt;&lt;/i&gt; Label&lt;/button&gt;&lt;button class=&quot;toolbar-button toolbar-button--bordered&quot;&gt;  &lt;i class=&quot;fa fa-bell&quot; style=&quot;font-size:17px&quot;&gt;&lt;/i&gt; Label&lt;/button&gt;</code></pre>
                 </div>
               </section>
             </footer>
