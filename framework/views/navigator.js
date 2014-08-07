@@ -69,7 +69,7 @@ limitations under the License.
     }
   });
 
-  module.factory('NavigatorView', function($http, $parse, $templateCache, $compile, $onsen,
+  module.factory('NavigatorView', function($http, $parse, $templateCache, $compile, $onsen, $timeout,
     SimpleSlideTransitionAnimator, NavigatorTransitionAnimator, LiftTransitionAnimator,
     NullTransitionAnimator, IOSSlideTransitionAnimator, FadeTransitionAnimator) {
 
@@ -175,9 +175,16 @@ limitations under the License.
           element: pageElement,
           link: function() {
             link(pageScope);
-            pageScope.$apply();
+            safeApply(pageScope);
           }
         };
+
+        function safeApply(scope) {
+          var phase = scope.$root.$$phase;
+          if(phase !== '$apply' && phase !== '$digest') {
+            scope.$apply();
+          }
+        }
       },
 
       /**
