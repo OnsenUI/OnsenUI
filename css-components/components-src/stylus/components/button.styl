@@ -112,6 +112,27 @@ button--active()
   button--disabled()
 
 /*! topdoc
+  name: Outline Button
+  class: button--outline
+  use: Button
+  markup:
+    <button class="button button--outline">Button</button>
+    <button class="button button--outline" disabled>Button</button>
+*/
+.button--outline
+  background-color transparent
+  border 1px solid var-background-color__button
+  color var-background-color__button
+
+.button--outline:active
+  background-color mylighten(var-background-color__button)
+  color var-background-color__button
+  opacity 1
+
+.button--outline:hover
+  transition 0
+
+/*! topdoc
   name: Light Button
   class: button--light
   use: Button
@@ -165,14 +186,47 @@ button--active()
   color var-quiet-button-color
 
 /*! topdoc
+  name: Call To Action Button
+  class: button--cta
+  markup:
+    <button class="button--cta">Button</button>
+    <button class="button--cta" disabled>Button</button>
+*/
+
+.button--cta
+  button()
+  border none
+  background-color var-background-color--cta
+  box-shadow var-box-shadow--cta
+  color var-color--cta
+  text-shadow var-text-shadow--cta
+
+.button--cta:hover
+  button--hover()
+
+.button--cta:focus
+  button--focus()
+
+.button--cta:active
+  color var-color--cta--down
+  background-color var-background-color--cta--down
+  box-shadow var-box-shadow--cta--down
+  transition none
+  opacity var-active-button-opacity
+
+.button--cta:disabled
+  button--disabled()
+
+
+/*! topdoc
   name: Large Button
   class: button--large
+  use: Button
   markup:
-    <button class="button--large">Button</button>
+    <button class="button button--large">Button</button>
 */
 
 .button--large
-  button()
   font-size var-font-size--large
   font-weight var-font-weight--large
   line-height var-line-height--button--large
@@ -225,38 +279,6 @@ button--active()
 
 .button--large--quiet:focus
   outline 0
-
-/*! topdoc
-  name: Call To Action Button
-  class: button--cta
-  markup:
-    <button class="button--cta">Button</button>
-    <button class="button--cta" disabled>Button</button>
-*/
-
-.button--cta
-  button()
-  border none
-  background-color var-background-color--cta
-  box-shadow var-box-shadow--cta
-  color var-color--cta
-  text-shadow var-text-shadow--cta
-
-.button--cta:hover
-  button--hover()
-
-.button--cta:focus
-  button--focus()
-
-.button--cta:active
-  color var-color--cta--down
-  background-color var-background-color--cta--down
-  box-shadow var-box-shadow--cta--down
-  transition none
-  opacity var-active-button-opacity
-
-.button--cta:disabled
-  button--disabled()
 
 
 /*! topdoc

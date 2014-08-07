@@ -692,6 +692,30 @@ h6 {
   pointer-events: none;
 }
 /* topdoc
+  name: Outline Button
+  class: button--outline
+  use: Button
+  markup:
+    <button class="button button--outline">Button</button>
+    <button class="button button--outline" disabled>Button</button>
+*/
+.button--outline {
+  background-color: transparent;
+  border: 1px solid #1284ff;
+  color: #1284ff;
+}
+.button--outline:active {
+  background-color: rgba(18,132,255,0.2);
+  color: #1284ff;
+  opacity: 1;
+}
+.button--outline:hover {
+  -webkit-transition: 0;
+  -moz-transition: 0;
+  -o-transition: 0;
+  transition: 0;
+}
+/* topdoc
   name: Light Button
   class: button--light
   use: Button
@@ -804,12 +828,13 @@ h6 {
   color: #1284ff;
 }
 /* topdoc
-  name: Large Button
-  class: button--large
+  name: Call To Action Button
+  class: button--cta
   markup:
-    <button class="button--large">Button</button>
+    <button class="button--cta">Button</button>
+    <button class="button--cta" disabled>Button</button>
 */
-.button--large {
+.button--cta {
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -857,6 +882,48 @@ h6 {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
+  border: none;
+  background-color: #4cda64;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #fff;
+  text-shadow: none;
+}
+.button--cta:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button--cta:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: 0;
+}
+.button--cta:active {
+  color: #fff;
+  background-color: #4cda64;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  opacity: 0.2;
+}
+.button--cta:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+/* topdoc
+  name: Large Button
+  class: button--large
+  use: Button
+  markup:
+    <button class="button button--large">Button</button>
+*/
+.button--large {
   font-size: 17px;
   font-weight: 500;
   line-height: 36px;
@@ -986,95 +1053,6 @@ h6 {
 }
 .button--large--quiet:focus {
   outline: 0;
-}
-/* topdoc
-  name: Call To Action Button
-  class: button--cta
-  markup:
-    <button class="button--cta">Button</button>
-    <button class="button--cta" disabled>Button</button>
-*/
-.button--cta {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 17px;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  height: auto;
-  text-decoration: none;
-  padding: 4px 10px;
-  font-size: 17px;
-  line-height: 32px;
-  letter-spacing: 0;
-  color: #fff;
-  text-shadow: 0 1px none;
-  vertical-align: middle;
-  background-color: #1284ff;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border: none;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-  border: none;
-  background-color: #4cda64;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  color: #fff;
-  text-shadow: none;
-}
-.button--cta:hover {
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-.button--cta:focus {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  outline: 0;
-}
-.button--cta:active {
-  color: #fff;
-  background-color: #4cda64;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-  opacity: 0.2;
-}
-.button--cta:disabled {
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none;
 }
 /* topdoc
   name: Large Call To Action Button
