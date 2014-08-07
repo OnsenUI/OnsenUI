@@ -95,6 +95,28 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
+      name: 'Tabbar',
+      items: [
+        {
+          name: 'tabbar-background-color',
+          displayName: 'Background Color'
+        },
+        {
+          name: 'tabbar-text-color',
+          displayName: 'Text Color'
+        },
+        {
+          name: 'tabbar-highlight-text-color',
+          displayName: 'Highlight Text Color'
+        },
+        {
+          name: 'tabbar-border-color',
+          displayName: 'Border Color'
+        }
+      ]
+    },
+
+    {
       name: 'Modal',
       items: [
         {
