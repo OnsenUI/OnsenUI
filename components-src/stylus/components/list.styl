@@ -32,7 +32,7 @@ var-font-size--list-header = 15px
 var-list-border = 1px solid var-list-item-separator-color
 
 var-margin--list-item = 0 0 0 0
-var-padding--list-item = 0 0 0 10px
+var-padding--list-item = 0 10px 0 10px
 var-padding--list-header = 0 0 0 10px
 var-padding-left--list-item--first = 10px
 var-padding-left--list-item--last = 10px
@@ -127,6 +127,9 @@ list__item()
   background-color var-background-color--list-item
   min-height var-min-height--list-item
   line-height var-min-height--list-item
+
+.list__item--no-padding
+  padding 0
 
 .list__item__line-height,
 .list__item--line-height
@@ -388,3 +391,46 @@ list__item()
       </li>
     </ul>
 */
+
+/*! topdoc
+  name: Text Input in List Item
+  use: List, Transparent Text Input
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--no-padding">
+        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="name">
+      </li>
+      <li class="list__item list__item--no-padding">
+        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="email">
+      </li>
+    </ul>
+*/
+
+/*! topdoc
+  name: Textarea in List Item
+  use: List, Textarea Transparent
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--no-padding">
+        <textarea class="textarea textarea--transparent" style="width:100%;height:50px;margin-top:4px;" placeholder="text message"></textarea>
+      </li>
+    </ul>
+*/
+
+/*! topdoc
+  name: Right Label in List Item
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--no-padding">
+        <div class="list__right-label">Label</div>
+        Label
+      </li>
+    </ul>
+*/
+
+.list__right-label {
+  font-size: var-font-size--mini;
+  padding-right: 8px;
+  float: right;
+}

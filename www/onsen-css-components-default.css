@@ -2297,7 +2297,7 @@ h6 {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   display: block;
-  padding: 0 0 0 10px;
+  padding: 0 10px 0 10px;
   margin: 0 0 0 0;
   border-top: none;
   border-bottom: 1px solid #ddd;
@@ -2305,6 +2305,9 @@ h6 {
   background-color: #fff;
   min-height: 44px;
   line-height: 44px;
+}
+.list__item--no-padding {
+  padding: 0;
 }
 .list__item__line-height,
 .list__item--line-height {
@@ -2584,6 +2587,45 @@ h6 {
       </li>
     </ul>
 */
+/* topdoc
+  name: Text Input in List Item
+  use: List, Transparent Text Input
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--no-padding">
+        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="name">
+      </li>
+      <li class="list__item list__item--no-padding">
+        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="email">
+      </li>
+    </ul>
+*/
+/* topdoc
+  name: Textarea in List Item
+  use: List, Textarea Transparent
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--no-padding">
+        <textarea class="textarea textarea--transparent" style="width:100%;height:50px;margin-top:4px;" placeholder="text message"></textarea>
+      </li>
+    </ul>
+*/
+/* topdoc
+  name: Right Label in List Item
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--no-padding">
+        <div class="list__right-label">Label</div>
+        Label
+      </li>
+    </ul>
+*/
+.list__right-label {
+  font-size: 14px;
+  padding-right: 8px;
+  float: right;
+}
 /* topdoc
   name: Search Input
   class: search-input
