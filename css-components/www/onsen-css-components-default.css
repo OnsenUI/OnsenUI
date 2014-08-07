@@ -458,7 +458,6 @@ h6 {
 }
 /* topdoc
   name: Navigation Bar Item
-  class: navigation-bar__item
   use: Toolbar Button, Navigation Bar
   markup:
     <div class="navigation-bar">
@@ -479,7 +478,6 @@ h6 {
 */
 /* topdoc
   name: Navigation Bar with Bordered Button
-  class: navigation-bar__item
   use: Toolbar Button, Navigation Bar
   markup:
     <div class="navigation-bar">
@@ -500,6 +498,7 @@ h6 {
 */
 /* topdoc
   name: Transparent Navigation Bar
+  class: navigation-bar--transparent
   use: Toolbar Button, Navigation Bar
   markup:
     <div class="navigation-bar navigation-bar--transparent">
@@ -523,6 +522,7 @@ h6 {
 }
 /* topdoc
   name: Bottom Bar
+  class: bottom-bar
   use: Navigation Bar
   markup:
     <div class="bottom-bar">
@@ -1579,6 +1579,7 @@ h6 {
 */
 /* topdoc
   name: Notification
+  class: notification
   markup:
     <span class="notification">1</span>
     <span class="notification">10</span>
@@ -1629,6 +1630,7 @@ h6 {
 }
 /* topdoc
   name: Toolbar Button
+  class: toolbar-button
   modifiers:
     :active: Active state
     :disabled: Disabled state
@@ -2547,6 +2549,7 @@ h6 {
 /* topdoc
   name: No border Checkbox in List Item
   use: Checkbox in List Item, No border Checkbox
+  class: chckbox--list-item
   markup:
     <ul class="list">
       <li class="list__item list__item--tappable">
@@ -2591,6 +2594,7 @@ h6 {
 /* topdoc
   name: Right Label in List Item
   use: List
+  class: list__right-label
   markup:
     <ul class="list">
       <li class="list__item list__item--no-padding">
@@ -3001,6 +3005,7 @@ webkit-input-placeholder() {
 }
 /* topdoc
   name: Modal
+  class: modal
   markup:
     <div class="modal">
       <div class="modal__content">
