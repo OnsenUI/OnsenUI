@@ -181,7 +181,7 @@ limitations under the License.
 
         function safeApply(scope) {
           var phase = scope.$root.$$phase;
-          if(phase !== '$apply' && phase !== '$digest') {
+          if (phase !== '$apply' && phase !== '$digest') {
             scope.$apply();
           }
         }
