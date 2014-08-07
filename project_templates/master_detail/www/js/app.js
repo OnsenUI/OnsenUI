@@ -31,7 +31,7 @@
               description: 'Item 2 Description'
           },
           { 
-              title: 'Yet Anoter Item Title',
+              title: 'Yet Another Item Title',
               icon: 'heart-o',
               description: 'Item 3 Description'
           }
