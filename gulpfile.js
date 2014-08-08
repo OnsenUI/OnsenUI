@@ -41,6 +41,8 @@ var browserSync = require('browser-sync');
 var cache = require('gulp-cached');
 var gulpIf = require('gulp-if');
 var dgeni = require('dgeni');
+var ngAnnotate = require('gulp-ng-annotate');
+var uglify = require('gulp-uglify');
 var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
 
 ////////////////////////////////////////
@@ -114,8 +116,21 @@ gulp.task('prepare', ['html2js'], function() {
       'framework/services/*.js',
       'framework/js/*.js'
     ])
+      .pipe(ngAnnotate({add: true, single_quotes: true}))
       .pipe(concat('onsenui.js'))            
       .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+      .pipe(gulp.dest('build/js/'))
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
+      .pipe(gulp.dest('app/lib/onsen/js'))
+      .pipe(uglify({
+        mangle: false,
+        preserveComments: function(node, comment) {
+          return comment.line === 1;
+        }
+      }))
+      .pipe(rename(function(path) {
+        path.extname = '.min.js';
+      }))
       .pipe(gulp.dest('build/js/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
       .pipe(gulp.dest('app/lib/onsen/js')),
@@ -132,10 +147,24 @@ gulp.task('prepare', ['html2js'], function() {
       'framework/services/*.js',
       'framework/js/*.js'
     ])
+      .pipe(ngAnnotate({add: true, single_quotes: true}))
       .pipe(concat('onsenui_all.js'))
       .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/js/'))
+      .pipe(gulp.dest('app/lib/onsen/js'))
+      .pipe(uglify({
+        mangle: false,
+        preserveComments: function(node, comment) {
+          return comment.line === 1;
+        }
+      }))
+      .pipe(rename(function(path) {
+        path.extname = '.min.js';
+      }))
+      .pipe(gulp.dest('build/js/'))
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
       .pipe(gulp.dest('app/lib/onsen/js')),
+
 
     // onsen-css-components.css
     gulp.src([

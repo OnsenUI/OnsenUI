@@ -43,7 +43,9 @@
     "gulp-cached": "0.0.3",
     "gulp-if": "^1.2.1",
     "canonical-path": "0.0.2",
-    "lodash": "^2.4.1"
+    "lodash": "^2.4.1",
+    "gulp-ng-annotate": "^0.3.0",
+    "gulp-uglify": "^0.3.1"
   },
   "dependencies": {
     "gulp-shell": "^0.2.4",
