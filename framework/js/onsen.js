@@ -19,15 +19,13 @@ limitations under the License.
   'use strict';
 
   var module = angular.module('onsen', ['templates-main']);
-
-  var readyLock = new DoorLock();
-
-  var unlockOnsenUI = readyLock.lock();
-
   // for BC
   angular.module('onsen.directives', ['onsen']);
 
+  var readyLock = new DoorLock();
+  var unlockOnsenUI = readyLock.lock();
   var onsenService;
+
   module.run(function($compile, $rootScope, $onsen) {
     onsenService = $onsen;
 
@@ -58,6 +56,7 @@ limitations under the License.
     }
 
   });
+
 
   // JS Global facade for Onsen UI.
   var ons = window.ons = {
@@ -188,5 +187,17 @@ limitations under the License.
       unlockDeviceReady();
     }
   }, false);
+
+  module.run(function($templateCache) {
+    var templates = window.document.querySelectorAll('script[type="text/ons-template"]');
+
+    for (var i = 0; i < templates.length; i++) {
+      var template = angular.element(templates[i]);
+      var id = template.attr('id');
+      if (typeof id === 'string') {
+        $templateCache.put(id, template.text());
+      }
+    }
+  });
 
 })();

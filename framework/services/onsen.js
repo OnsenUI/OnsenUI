@@ -198,26 +198,6 @@ limitations under the License.
       },
 
       /**
-       * Cache for predefined template.
-       * eg. <script type="text/ons-template">...</script>
-       */
-      predefinedPageCache: (function() {
-        var cache = $cacheFactory('$onsenPredefinedPageCache');
-
-        var templates = $document[0].querySelectorAll('script[type="text/ons-template"]');
-
-        for (var i = 0; i < templates.length; i++) {
-          var template = angular.element(templates[i]);
-          var id = template.attr('id');
-          if (typeof id === 'string') {
-            cache.put(id, template.text());
-          }
-        }
-
-        return cache;
-      })(),
-
-      /**
        * Find first ancestor of el with tagName
        * or undefined if not found
        *
@@ -262,7 +242,7 @@ limitations under the License.
        * @return {Promise}
        */
       getPageHTMLAsync: function(page) {
-        var cache = $templateCache.get(page) || $onsen.predefinedPageCache.get(page);
+        var cache = $templateCache.get(page);
 
         if (cache) {
           var deferred = $q.defer();
@@ -275,16 +255,12 @@ limitations under the License.
         } else {
           return $http({
             url: page,
-            method: 'GET',
-            cache: $onsen.predefinedPageCache
+            method: 'GET'
           }).then(function(response) {
             var html = response.data;
 
             return this.normalizePageHTML(html);
           }.bind(this));
-        }
-
-        function normalize(html) {
         }
       },
 
