@@ -480,6 +480,10 @@ div#customizer-panel > section > div.customizer-section > ul.customize-item-list
 }
 div#customizer-panel > section > div.customizer-section > ul.customize-item-list > li:hover > span.color-picker-label {
   opacity: 1;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 div#customizer-panel > section > div.customizer-section > ul.customize-item-list > li > span.color-picker-label {
   font-size: 14px;
