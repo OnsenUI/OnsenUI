@@ -20,7 +20,6 @@
 
 // internal variables
 var-background-color--tab-bar := #f8f8f8
-var-background-color--tab-bar__button := #f8f8f8
 var-background-color--tab-bar--active := #f8f8f8
 var-tab-bar-border-color := #ddd
 var-color--tab-bar__button := #888
@@ -99,6 +98,14 @@ var-border-top--tab-bar = 1px solid var-tab-bar-border-color
     </div>
 */
 
+retina-tabbar-border(color = var-tab-bar-border-color)
+  +retina-query()
+    border-top none
+    background-size 100% 1px
+    background-repeat no-repeat
+    background-position top
+    background-image linear-gradient(180deg, color, color 50%, transparent 50%)
+
 .tab-bar
   reset-font()
   display table
@@ -114,6 +121,7 @@ var-border-top--tab-bar = 1px solid var-tab-bar-border-color
   background-color var-background-color--tab-bar
   border-top var-border-top--tab-bar
   width 100%
+  retina-tabbar-border(color = var-tab-bar-border-color)
 
 .tab-bar__item
   reset-font()
@@ -140,11 +148,13 @@ var-border-top--tab-bar = 1px solid var-tab-bar-border-color
   color var-color--tab-bar__button
   text-shadow var-text-shadow
   vertical-align top
-  background-color var-background-color--tab-bar__button
+  background-color transparent
   box-shadow var-box-shadow
   border-top var-border--tab-bar__button
   width 100%
   font-weight var-font-weight
+  @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) 
+    border-top none
 
 .tab-bar__button > .tab-bar__icon
   font-size 24px
@@ -175,7 +185,7 @@ var-border-top--tab-bar = 1px solid var-tab-bar-border-color
 .tab-bar__button:active,
 :checked + .tab-bar__button
   color var-color--tab-bar--active
-  background-color var-background-color--tab-bar--active
+  background-color transparent
   box-shadow var-box-shadow--tab-bar--active
   border-top var-border-top--tab-bar--active
 

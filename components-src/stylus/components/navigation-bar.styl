@@ -39,6 +39,15 @@ var-border-bottom--navigation-bar = 1px solid var-navigation-bar-separator-color
     </div>
 */
 
+retina-navigation-bar-border(position = bottom, color = #ddd)
+  +retina-query()
+    border-{position} none
+    background-size 100% 1px
+    background-repeat no-repeat
+    background-position position
+    background-image linear-gradient(0deg, color, color 50%, transparent 50%) if position == 'bottom'
+    background-image linear-gradient(180deg, color, color 50%, transparent 50%) if position == 'top'
+
 navigation-bar()
   reset-font()
   reset-container()
@@ -66,6 +75,7 @@ navigation-bar__item()
   width 100%
   white-space nowrap
   overflow hidden
+  retina-navigation-bar-border(bottom, var-navigation-bar-separator-color)
 
 .navigation-bar__line-height
   line-height var-height--navigation-bar
@@ -205,6 +215,7 @@ navigation-bar__item()
   bottom 0px
   right 0px
   left 0px
+  retina-navigation-bar-border(top, var-navigation-bar-separator-color)
 
 .bottom-bar__line-height
   line-height var-height--navigation-bar

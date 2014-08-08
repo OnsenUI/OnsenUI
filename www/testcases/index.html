@@ -4,18 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Testcases for Onsen CSS Components</title>
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale = 1.0,maximum-scale = 1.0, target-densitydpi=medium-dpi">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../onsen-css-components-default.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/brackets.css">
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.css" rel="stylesheet">
-    <script type="text/javascript" src="../../build/js/angular/angular.js"></script>
-    <script type="text/javascript" src="../../build/js/angular/angular-touch.js"></script>
-    <script type="text/javascript" src="../../build/js/onsenui.js"></script>
-    <script type="text/javascript">
-      var app = angular.module('app', ['ngTouch', 'onsen.directives']);
-      
-    </script>
+    <link href="/patterns/lib/font_awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/patterns/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
   </head>
   <body ng-app="app" ontouchstart="" class="light">
     <div id="wrapper">
@@ -650,13 +644,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 120px;" class="markup">
-                <div style="width: 100%; height: 100%; position:absolute"><ul class="list list--inset">  <li class="list__item list__item--chevron">    List Item with Chevron  </li>  <li class="list__item list__item--chevron">    List Item with Chevron  </li></ul></div>
+                <div style="width: 100%; height: 100%; position:absolute"><ul class="list list--inset">  <li class="list__item list--inset__item list__item--chevron">    List Item with Chevron  </li>  <li class="list__item list--inset__item list__item--chevron">    List Item with Chevron  </li></ul></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list list--inset&quot;&gt;  &lt;li class=&quot;list__item list__item--chevron&quot;&gt;    List Item with Chevron  &lt;/li&gt;  &lt;li class=&quot;list__item list__item--chevron&quot;&gt;    List Item with Chevron  &lt;/li&gt;&lt;/ul&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list list--inset&quot;&gt;  &lt;li class=&quot;list__item list--inset__item list__item--chevron&quot;&gt;    List Item with Chevron  &lt;/li&gt;  &lt;li class=&quot;list__item list--inset__item list__item--chevron&quot;&gt;    List Item with Chevron  &lt;/li&gt;&lt;/ul&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -718,13 +712,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 120px;" class="markup">
-                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--no-padding">    <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="name">  </li>  <li class="list__item list__item--no-padding">    <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="email">  </li></ul></div>
+                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item">    <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="name">  </li>  <li class="list__item">    <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="email">  </li></ul></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item list__item--no-padding&quot;&gt;    &lt;input type=&quot;text&quot; class=&quot;text-input text-input--transparent&quot; style=&quot;width:100%; margin-top:4px;&quot; placeholder=&quot;name&quot;&gt;  &lt;/li&gt;  &lt;li class=&quot;list__item list__item--no-padding&quot;&gt;    &lt;input type=&quot;text&quot; class=&quot;text-input text-input--transparent&quot; style=&quot;width:100%; margin-top:4px;&quot; placeholder=&quot;email&quot;&gt;  &lt;/li&gt;&lt;/ul&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item&quot;&gt;    &lt;input type=&quot;text&quot; class=&quot;text-input text-input--transparent&quot; style=&quot;width:100%; margin-top:4px;&quot; placeholder=&quot;name&quot;&gt;  &lt;/li&gt;  &lt;li class=&quot;list__item&quot;&gt;    &lt;input type=&quot;text&quot; class=&quot;text-input text-input--transparent&quot; style=&quot;width:100%; margin-top:4px;&quot; placeholder=&quot;email&quot;&gt;  &lt;/li&gt;&lt;/ul&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -735,13 +729,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 120px;" class="markup">
-                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--no-padding">    <textarea class="textarea textarea--transparent" style="width:100%;height:50px;margin-top:4px;" placeholder="text message"></textarea>  </li></ul></div>
+                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item">    <textarea class="textarea textarea--transparent" style="width:100%;height:50px;margin-top:4px;" placeholder="text message"></textarea>  </li></ul></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item list__item--no-padding&quot;&gt;    &lt;textarea class=&quot;textarea textarea--transparent&quot; style=&quot;width:100%;height:50px;margin-top:4px;&quot; placeholder=&quot;text message&quot;&gt;&lt;/textarea&gt;  &lt;/li&gt;&lt;/ul&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item&quot;&gt;    &lt;textarea class=&quot;textarea textarea--transparent&quot; style=&quot;width:100%;height:50px;margin-top:4px;&quot; placeholder=&quot;text message&quot;&gt;&lt;/textarea&gt;  &lt;/li&gt;&lt;/ul&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -752,13 +746,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 120px;" class="markup">
-                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--no-padding">    <div class="list__right-label">Label</div>    Label  </li></ul></div>
+                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item">    <div class="list__right-label">Label</div>    Label  </li></ul></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item list__item--no-padding&quot;&gt;    &lt;div class=&quot;list__right-label&quot;&gt;Label&lt;/div&gt;    Label  &lt;/li&gt;&lt;/ul&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item&quot;&gt;    &lt;div class=&quot;list__right-label&quot;&gt;Label&lt;/div&gt;    Label  &lt;/li&gt;&lt;/ul&gt;</code></pre>
                 </div>
               </section>
             </footer>

@@ -8,18 +8,13 @@ html
 		meta(charset = 'utf-8')
 		meta('http-equiv' = 'X-UA-Compatible', content = 'IE=edge,chrome=1')
 		title Testcases for Onsen CSS Components
-		meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale = 1.0,maximum-scale = 1.0, target-densitydpi=medium-dpi")
+		meta(name="viewport", content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0")
 
 		link(rel = 'stylesheet', type = 'text/css', href = '../onsen-css-components-default.css')
 		link(rel = 'stylesheet', type = 'text/css', href = 'css/main.css')
 		link(rel = 'stylesheet', type = 'text/css', href = 'css/brackets.css')
-		link(href="http://netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.css", rel="stylesheet")
-
-		script(type='text/javascript', src='../../build/js/angular/angular.js')
-		script(type='text/javascript', src='../../build/js/angular/angular-touch.js')
-		script(type='text/javascript', src='../../build/js/onsenui.js')
-		script(type="text/javascript").
-			var app = angular.module('app', ['ngTouch', 'onsen.directives']);
+		link(href="/patterns/lib/font_awesome/css/font-awesome.min.css", rel="stylesheet")
+		link(href="/patterns/lib/ionicons/css/ionicons.min.css", rel="stylesheet")
 
 	body(class=tint, ng-app='app', ontouchstart='')
 		#wrapper

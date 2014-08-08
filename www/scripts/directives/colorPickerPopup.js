@@ -98,7 +98,7 @@ angular.module('app').directive('colorPickerPopup', function($window) {
     template:
       '<div class="color-picker-popup-mask" ng-click="show = false" ng-show="show"></div>' +
       '<div class="color-picker-popup" ng-show="show">' +
-        '<img src="images/close.png" class="close" ng-click="show = false">'+
+        '<img src="/images/close.png" class="close" ng-click="show = false">'+
         '<input type="text" name="color" class="color-picker-input" value="#ffffff">' +
         '<input type="text" class="mini-color-picker">' +
       '</div>',
