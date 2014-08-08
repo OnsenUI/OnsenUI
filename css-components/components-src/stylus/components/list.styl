@@ -66,6 +66,30 @@ var-border-top--list-item = none
     </ul>
 */
 
+retina-list-item-border(color = var-tab-bar-border-color)
+  +retina-query()
+    border-bottom none
+    background-size 100% 1px
+    background-repeat no-repeat
+    background-position bottom
+    background-image linear-gradient(0deg, color, color 50%, transparent 50%)
+
+retina-list-border(color = var-list-item-separator-color)
+  +retina-query()
+    border none
+    background-size 100% 1px, 100% 1px
+    background-repeat no-repeat
+    background-position bottom, top
+    background-image linear-gradient(0deg, color, color 50%, transparent 50%), linear-gradient(180deg, color, color 50%, transparent 50%)
+
+retina-list-header-border(color = var-tab-bar-border-color)
+  +retina-query()
+    border-top none
+    background-size 100% 1px
+    background-repeat no-repeat
+    background-position top
+    background-image linear-gradient(180deg, color, color 50%, transparent 50%)
+
 list()
   reset-base()
   reset-cursor()
@@ -108,6 +132,9 @@ list__item()
   min-height var-min-height--list-header
   line-height @min-height
 
+.list__header:first-child
+  retina-list-header-border()
+
 .list
   list()
   padding var-padding--list
@@ -115,7 +142,7 @@ list__item()
   border-top var-border-top--list
   border-bottom var-border-bottom--list
   background-color var-background-color--list
-
+  retina-list-border()
 
 .list__item
   list__item()
@@ -124,7 +151,7 @@ list__item()
   border-top none
   border-bottom var-list-border
   color var-color--list-item
-  background-color var-background-color--list-item
+  background-color transparent
   min-height var-min-height--list-item
   line-height var-min-height--list-item
 
@@ -140,19 +167,18 @@ list__item()
   transition none
 
 .list__item:first-child
-  padding-left var-padding-left--list-item--first
-  margin var-margin--list-item--first
   border-top none
   border-bottom var-list-border
 
 .list__item:last-child
-  padding-left var-padding-left--list-item--last
-  margin var-margin--list-item--last
   border-bottom none
 
 .list__item:first-child:last-child
   border-top none
   border-bottom none
+
+.list__item:not(:last-child)
+  retina-list-item-border()
 
 /*! topdoc
   name: Noborder List
@@ -173,6 +199,7 @@ list__item()
   background-color var-background-color--list
   border-top none
   border-bottom none
+  background-image none
 
 /*! topdoc
   name: Category List Header
@@ -290,10 +317,10 @@ list__item()
   use: List, List Item with Chevron
   markup:
     <ul class="list list--inset">
-      <li class="list__item list__item--chevron">
+      <li class="list__item list--inset__item list__item--chevron">
         List Item with Chevron
       </li>
-      <li class="list__item list__item--chevron">
+      <li class="list__item list--inset__item list__item--chevron">
         List Item with Chevron
       </li>
     </ul>
@@ -304,6 +331,11 @@ list__item()
   margin-right 8px
   border 1px solid var-list-item-separator-color
   border-radius 4px
+  background-image none
+
+.list--inset__item:not(:last-child)
+  border-bottom 1px solid var-list-item-separator-color
+  background-image none
 
 /*! topdoc
   name: Radio Button in List Item
@@ -398,10 +430,10 @@ list__item()
   use: List, Transparent Text Input
   markup:
     <ul class="list">
-      <li class="list__item list__item--no-padding">
+      <li class="list__item">
         <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="name">
       </li>
-      <li class="list__item list__item--no-padding">
+      <li class="list__item">
         <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="email">
       </li>
     </ul>
@@ -412,7 +444,7 @@ list__item()
   use: List, Textarea Transparent
   markup:
     <ul class="list">
-      <li class="list__item list__item--no-padding">
+      <li class="list__item">
         <textarea class="textarea textarea--transparent" style="width:100%;height:50px;margin-top:4px;" placeholder="text message"></textarea>
       </li>
     </ul>
@@ -424,7 +456,7 @@ list__item()
   class: list__right-label
   markup:
     <ul class="list">
-      <li class="list__item list__item--no-padding">
+      <li class="list__item">
         <div class="list__right-label">Label</div>
         Label
       </li>

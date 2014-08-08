@@ -394,6 +394,19 @@ h6 {
   white-space: nowrap;
   overflow: hidden;
 }
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .navigation-bar {
+    border-bottom: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
 .navigation-bar__line-height {
   line-height: 44px;
   padding-bottom: 0;
@@ -440,7 +453,7 @@ h6 {
   text-align: center;
   line-height: 44px;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 400;
 }
 .navigation-bar__center:first-child:last-child {
   width: 100%;
@@ -448,7 +461,7 @@ h6 {
 .navigation-bar__title {
   line-height: 44px;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 400;
   color: #1f1f21;
   margin: 0;
   padding: 0;
@@ -571,6 +584,19 @@ h6 {
   bottom: 0px;
   right: 0px;
   left: 0px;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .bottom-bar {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+  }
 }
 .bottom-bar__line-height {
   line-height: 44px;
@@ -925,7 +951,7 @@ h6 {
 */
 .button--large {
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 36px;
   padding: 4px 12px;
   display: block;
@@ -1017,7 +1043,7 @@ h6 {
   -o-transition: none;
   transition: none;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 36px;
   padding: 4px 12px;
   display: block;
@@ -1115,7 +1141,7 @@ h6 {
   color: #fff;
   text-shadow: none;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 36px;
   padding: 4px 12px;
   width: 100%;
@@ -1402,6 +1428,19 @@ h6 {
   border-top: 1px solid #ddd;
   width: 100%;
 }
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .tab-bar {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
 .tab-bar__item {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -1471,12 +1510,17 @@ h6 {
   color: #888;
   text-shadow: 0 1px none;
   vertical-align: top;
-  background-color: #f8f8f8;
+  background-color: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
   border-top: none;
   width: 100%;
   font-weight: 400;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .tab-bar__button {
+    border-top: none;
+  }
 }
 .tab-bar__button > .tab-bar__icon {
   font-size: 24px;
@@ -1511,7 +1555,7 @@ h6 {
 .tab-bar__button:active,
 :checked + .tab-bar__button {
   color: #1284ff;
-  background-color: #f8f8f8;
+  background-color: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
   border-top: none;
@@ -1663,10 +1707,10 @@ h6 {
   border: 1px solid transparent;
   font-weight: 400;
   font-size: 17px;
-  -webkit-transition: opacity 0.2s linear;
-  -moz-transition: opacity 0.2s linear;
-  -o-transition: opacity 0.2s linear;
-  transition: opacity 0.2s linear;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
   vertical-align: middle;
 }
 .toolbar-button:active,
@@ -1688,6 +1732,10 @@ h6 {
 .toolbar-button--bordered:focus,
 .toolbar-button--quiet:focus {
   outline: 0;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
 }
 .toolbar-button:hover,
 .toolbar-button--bordered:hover,
@@ -2228,7 +2276,7 @@ h6 {
   box-sizing: border-box;
   padding: 0 0 0 10px;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   background-color: #f0eff4;
   color: #1f1f21;
   text-shadow: none;
@@ -2236,6 +2284,19 @@ h6 {
   border-bottom: none;
   min-height: 24px;
   line-height: 24px;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .list__header:first-child {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+  }
 }
 .list {
   padding: 0;
@@ -2268,6 +2329,19 @@ h6 {
   border-bottom: 1px solid #ddd;
   background-color: #fff;
 }
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .list {
+    border: none;
+    -webkit-background-size: 100% 1px, 100% 1px;
+    background-size: 100% 1px, 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom, top;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%), linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
 .list__item {
   margin: 0;
   padding: 0;
@@ -2282,7 +2356,7 @@ h6 {
   border-top: none;
   border-bottom: 1px solid #ddd;
   color: #1f1f21;
-  background-color: #fff;
+  background-color: transparent;
   min-height: 44px;
   line-height: 44px;
 }
@@ -2301,19 +2375,28 @@ h6 {
   transition: none;
 }
 .list__item:first-child {
-  padding-left: 10px;
-  margin: 0;
   border-top: none;
   border-bottom: 1px solid #ddd;
 }
 .list__item:last-child {
-  padding-left: 10px;
-  margin: 0;
   border-bottom: none;
 }
 .list__item:first-child:last-child {
   border-top: none;
   border-bottom: none;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .list__item:not(:last-child) {
+    border-bottom: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+  }
 }
 /* topdoc
   name: Noborder List
@@ -2333,6 +2416,7 @@ h6 {
   background-color: #fff;
   border-top: none;
   border-bottom: none;
+  background-image: none;
 }
 /* topdoc
   name: Category List Header
@@ -2468,10 +2552,10 @@ h6 {
   use: List, List Item with Chevron
   markup:
     <ul class="list list--inset">
-      <li class="list__item list__item--chevron">
+      <li class="list__item list--inset__item list__item--chevron">
         List Item with Chevron
       </li>
-      <li class="list__item list__item--chevron">
+      <li class="list__item list--inset__item list__item--chevron">
         List Item with Chevron
       </li>
     </ul>
@@ -2482,6 +2566,11 @@ h6 {
   border: 1px solid #ddd;
   -webkit-border-radius: 4px;
   border-radius: 4px;
+  background-image: none;
+}
+.list--inset__item:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+  background-image: none;
 }
 /* topdoc
   name: Radio Button in List Item
@@ -2573,10 +2662,10 @@ h6 {
   use: List, Transparent Text Input
   markup:
     <ul class="list">
-      <li class="list__item list__item--no-padding">
+      <li class="list__item">
         <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="name">
       </li>
-      <li class="list__item list__item--no-padding">
+      <li class="list__item">
         <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="email">
       </li>
     </ul>
@@ -2586,7 +2675,7 @@ h6 {
   use: List, Textarea Transparent
   markup:
     <ul class="list">
-      <li class="list__item list__item--no-padding">
+      <li class="list__item">
         <textarea class="textarea textarea--transparent" style="width:100%;height:50px;margin-top:4px;" placeholder="text message"></textarea>
       </li>
     </ul>
@@ -2597,7 +2686,7 @@ h6 {
   class: list__right-label
   markup:
     <ul class="list">
-      <li class="list__item list__item--no-padding">
+      <li class="list__item">
         <div class="list__right-label">Label</div>
         Label
       </li>
@@ -2981,6 +3070,8 @@ webkit-input-placeholder() {
   resize: none;
   outline: none;
   padding: 5px 5px 5px 5px;
+  padding-left: 0;
+  padding-right: 0;
   font-size: 15px;
   font-weight: 400;
   -webkit-border-radius: 4px;
