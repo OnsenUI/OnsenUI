@@ -394,6 +394,19 @@ h6 {
   white-space: nowrap;
   overflow: hidden;
 }
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .navigation-bar {
+    border-bottom: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
 .navigation-bar__line-height {
   line-height: 44px;
   padding-bottom: 0;
@@ -440,7 +453,7 @@ h6 {
   text-align: center;
   line-height: 44px;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 400;
 }
 .navigation-bar__center:first-child:last-child {
   width: 100%;
@@ -448,7 +461,7 @@ h6 {
 .navigation-bar__title {
   line-height: 44px;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 400;
   color: #1f1f21;
   margin: 0;
   padding: 0;
@@ -458,13 +471,12 @@ h6 {
 }
 /* topdoc
   name: Navigation Bar Item
-  class: navigation-bar__item
-  use: Icon Button, Navigation Bar
+  use: Toolbar Button, Navigation Bar
   markup:
     <div class="navigation-bar">
       <div class="navigation-bar__left">
-        <span class="icon-button--quiet navigation-bar__line-height">
-          <i class="fa fa-bars" style="font-size:20px"></i>
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
 
@@ -473,23 +485,46 @@ h6 {
       </div>
 
       <div class="navigation-bar__right">
-        <span class="icon-button--quiet navigation-bar__line-height">Label</span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Navigation Bar with Bordered Button
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <div class="navigation-bar">
+      <div class="navigation-bar__left">
+        <span class="toolbar-button--bordered navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+
+      <div class="navigation-bar__center">
+        Title
+      </div>
+
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--bordered navigation-bar__line-height">Button</span>
       </div>
     </div>
 */
 /* topdoc
   name: Transparent Navigation Bar
-  use: Icon Button, Navigation Bar
+  class: navigation-bar--transparent
+  use: Toolbar Button, Navigation Bar
   markup:
     <div class="navigation-bar navigation-bar--transparent">
       <div class="navigation-bar__left">
-        <span class="icon-button--quiet navigation-bar__line-height">Label</span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
       </div>
       <div class="navigation-bar__center">
         <h1 class="navigation-bar__title">Navigation Bar</h1>
       </div>
       <div class="navigation-bar__right">
-        <span class="icon-button--quiet navigation-bar__line-height">Label</span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
       </div>
     </div>
 */
@@ -500,6 +535,7 @@ h6 {
 }
 /* topdoc
   name: Bottom Bar
+  class: bottom-bar
   use: Navigation Bar
   markup:
     <div class="bottom-bar">
@@ -548,6 +584,19 @@ h6 {
   bottom: 0px;
   right: 0px;
   left: 0px;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .bottom-bar {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+  }
 }
 .bottom-bar__line-height {
   line-height: 44px;
@@ -669,6 +718,30 @@ h6 {
   pointer-events: none;
 }
 /* topdoc
+  name: Outline Button
+  class: button--outline
+  use: Button
+  markup:
+    <button class="button button--outline">Button</button>
+    <button class="button button--outline" disabled>Button</button>
+*/
+.button--outline {
+  background-color: transparent;
+  border: 1px solid #1284ff;
+  color: #1284ff;
+}
+.button--outline:active {
+  background-color: rgba(18,132,255,0.2);
+  color: #1284ff;
+  opacity: 1;
+}
+.button--outline:hover {
+  -webkit-transition: 0;
+  -moz-transition: 0;
+  -o-transition: 0;
+  transition: 0;
+}
+/* topdoc
   name: Light Button
   class: button--light
   use: Button
@@ -781,12 +854,13 @@ h6 {
   color: #1284ff;
 }
 /* topdoc
-  name: Large Button
-  class: button--large
+  name: Call To Action Button
+  class: button--cta
   markup:
-    <button class="button--large">Button</button>
+    <button class="button--cta">Button</button>
+    <button class="button--cta" disabled>Button</button>
 */
-.button--large {
+.button--cta {
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -834,8 +908,50 @@ h6 {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
+  border: none;
+  background-color: #4cda64;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #fff;
+  text-shadow: none;
+}
+.button--cta:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.button--cta:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: 0;
+}
+.button--cta:active {
+  color: #fff;
+  background-color: #4cda64;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  opacity: 0.2;
+}
+.button--cta:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+/* topdoc
+  name: Large Button
+  class: button--large
+  use: Button
+  markup:
+    <button class="button button--large">Button</button>
+*/
+.button--large {
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 36px;
   padding: 4px 12px;
   display: block;
@@ -927,7 +1043,7 @@ h6 {
   -o-transition: none;
   transition: none;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 36px;
   padding: 4px 12px;
   display: block;
@@ -963,95 +1079,6 @@ h6 {
 }
 .button--large--quiet:focus {
   outline: 0;
-}
-/* topdoc
-  name: Call To Action Button
-  class: button--cta
-  markup:
-    <button class="button--cta">Button</button>
-    <button class="button--cta" disabled>Button</button>
-*/
-.button--cta {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 17px;
-  cursor: default;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  height: auto;
-  text-decoration: none;
-  padding: 4px 10px;
-  font-size: 17px;
-  line-height: 32px;
-  letter-spacing: 0;
-  color: #fff;
-  text-shadow: 0 1px none;
-  vertical-align: middle;
-  background-color: #1284ff;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border: none;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-  border: none;
-  background-color: #4cda64;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  color: #fff;
-  text-shadow: none;
-}
-.button--cta:hover {
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-}
-.button--cta:focus {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  outline: 0;
-}
-.button--cta:active {
-  color: #fff;
-  background-color: #4cda64;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  -webkit-transition: none;
-  -moz-transition: none;
-  -o-transition: none;
-  transition: none;
-  opacity: 0.2;
-}
-.button--cta:disabled {
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none;
 }
 /* topdoc
   name: Large Call To Action Button
@@ -1114,7 +1141,7 @@ h6 {
   color: #fff;
   text-shadow: none;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 36px;
   padding: 4px 12px;
   width: 100%;
@@ -1330,7 +1357,7 @@ h6 {
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-a" checked="checked">
         <button class="tab-bar__button">
-          <i class="tab-bar__icon fa fa-stop"></i>
+          <i class="tab-bar__icon ion-stop"></i>
           <div class="tab-bar__label">One</div>
         </button>
       </label>
@@ -1338,7 +1365,7 @@ h6 {
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-a">
         <button class="tab-bar__button">
-          <i class="tab-bar__icon fa fa-circle"></i>
+          <i class="tab-bar__icon ion-record"></i>
           <div class="tab-bar__label">Two</div>
         </button>
       </label>
@@ -1346,7 +1373,7 @@ h6 {
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-a">
         <button class="tab-bar__button">
-          <i class="tab-bar__icon fa fa-play fa-rotate-270"></i>
+          <i class="tab-bar__icon ion-star"></i>
           <div class="tab-bar__label">Three</div>
         </button>
       </label>
@@ -1400,6 +1427,19 @@ h6 {
   background-color: #f8f8f8;
   border-top: 1px solid #ddd;
   width: 100%;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .tab-bar {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+  }
 }
 .tab-bar__item {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
@@ -1470,12 +1510,17 @@ h6 {
   color: #888;
   text-shadow: 0 1px none;
   vertical-align: top;
-  background-color: #f8f8f8;
+  background-color: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
   border-top: none;
   width: 100%;
   font-weight: 400;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .tab-bar__button {
+    border-top: none;
+  }
 }
 .tab-bar__button > .tab-bar__icon {
   font-size: 24px;
@@ -1510,7 +1555,7 @@ h6 {
 .tab-bar__button:active,
 :checked + .tab-bar__button {
   color: #1284ff;
-  background-color: #f8f8f8;
+  background-color: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
   border-top: none;
@@ -1543,41 +1588,42 @@ h6 {
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-b" checked="checked">
         <button class="tab-bar__button">
-          <i class="tab-bar__icon fa fa-stop"></i>
+          <i class="tab-bar__icon ion-stop"></i>
         </button>
       </label>
 
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-b">
         <button class="tab-bar__button">
-          <i class="tab-bar__icon fa fa-circle"></i>
+          <i class="tab-bar__icon ion-record"></i>
         </button>
       </label>
 
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-b">
         <button class="tab-bar__button">
-          <i class="tab-bar__icon fa fa-play fa-rotate-270"></i>
+          <i class="tab-bar__icon ion-star"></i>
         </button>
       </label>
 
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-b">
         <button class="tab-bar__button">
-          <i class="tab-bar__icon fa fa-comment"></i>
+          <i class="tab-bar__icon ion-ios7-cloud-outline"></i>
         </button>
       </label>
 
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-b">
         <button class="tab-bar__button">
-          <i class="tab-bar__icon fa fa-cloud"></i>
+          <i class="tab-bar__icon ion-ios7-pie"></i>
         </button>
       </label>
     </div>
 */
 /* topdoc
   name: Notification
+  class: notification
   markup:
     <span class="notification">1</span>
     <span class="notification">10</span>
@@ -1627,23 +1673,24 @@ h6 {
   font-weight: 400;
 }
 /* topdoc
-  name: Icon Button
-  class: icon-button
+  name: Toolbar Button
+  class: toolbar-button
   modifiers:
     :active: Active state
     :disabled: Disabled state
     :focus: Focused
   markup:
-    <button class="icon-button">
+    <button class="toolbar-button">
       <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
 
-    <button class="icon-button--quiet">
+    <button class="toolbar-button toolbar-button--bordered">
       <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
 */
-.icon-button,
-.icon-button--quiet {
+.toolbar-button,
+.toolbar-button--bordered,
+.toolbar-button--quiet {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1655,19 +1702,20 @@ h6 {
   text-shadow: 0 1px none;
   vertical-align: baseline;
   background-color: rgba(0,0,0,0);
-  border: 1px solid #1284ff;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid transparent;
   font-weight: 400;
   font-size: 17px;
-  -webkit-transition: opacity 0.2s linear;
-  -moz-transition: opacity 0.2s linear;
-  -o-transition: opacity 0.2s linear;
-  transition: opacity 0.2s linear;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
   vertical-align: middle;
 }
-.icon-button:active,
-.icon-button--quiet:active {
+.toolbar-button:active,
+.toolbar-button--bordered:active,
+.toolbar-button--quiet:active {
   background-color: rgba(0,0,0,0);
   -webkit-transition: none;
   -moz-transition: none;
@@ -1675,43 +1723,33 @@ h6 {
   transition: none;
   opacity: 0.2;
 }
-.icon-button:disabled,
-.icon-button--quiet:disabled {
+.toolbar-button:disabled {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-.icon-button:focus,
-.icon-button--quiet:focus {
+.toolbar-button:focus,
+.toolbar-button--bordered:focus,
+.toolbar-button--quiet:focus {
   outline: 0;
-}
-.icon-button:hover {
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
   transition: none;
 }
-.icon-button--quiet {
-  background: transparent;
-  border: 1px solid transparent;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  background-color: transparent;
-  border: none;
-  color: #1284ff;
-}
-.icon-button--quiet:active {
-  color: #1284ff;
-  text-shadow: 0 1px none;
-  background-color: transparent;
-  border: none;
-  opacity: 0.2;
-}
-.icon-button--quiet:hover {
+.toolbar-button:hover,
+.toolbar-button--bordered:hover,
+.toolbar-button--quiet:hover {
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
   transition: none;
+}
+.toolbar-button--bordered {
+  border: 1px solid #1284ff;
+  margin: auto 8px;
+  padding-left: 6px;
+  padding-right: 6px;
 }
 /* topdoc
   name: Checkbox
@@ -1854,13 +1892,13 @@ h6 {
 .checkbox > .checkbox__checkmark:after {
   content: '';
   position: absolute;
-  top: 5px;
-  left: 4px;
+  top: 6px;
+  left: 5px;
   width: 12px;
   height: 6px;
   background: transparent;
   border: 3px solid #fff;
-  border-width: 3px;
+  border-width: 2px;
   border-top: none;
   border-right: none;
   -webkit-border-radius: 0px;
@@ -2023,14 +2061,14 @@ h6 {
 .checkbox--noborder > .checkbox__checkmark:after {
   content: '';
   position: absolute;
-  top: 5px;
-  left: 4px;
+  top: 6px;
+  left: 5px;
   opacity: 0;
   width: 12px;
   height: 6px;
   background: transparent;
   border: 3px solid #1284ff;
-  border-width: 3px;
+  border-width: 2px;
   border-top: none;
   border-right: none;
   -webkit-border-radius: 0px;
@@ -2187,14 +2225,14 @@ h6 {
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  top: 5px;
-  left: 4px;
+  top: 6px;
+  left: 5px;
   opacity: 0;
   width: 12px;
   height: 6px;
   background: transparent;
   border: 3px solid #1284ff;
-  border-width: 3px;
+  border-width: 2px;
   border-top: none;
   border-right: none;
   -webkit-border-radius: 0px;
@@ -2238,7 +2276,7 @@ h6 {
   box-sizing: border-box;
   padding: 0 0 0 10px;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   background-color: #f0eff4;
   color: #1f1f21;
   text-shadow: none;
@@ -2246,6 +2284,19 @@ h6 {
   border-bottom: none;
   min-height: 24px;
   line-height: 24px;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .list__header:first-child {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+  }
 }
 .list {
   padding: 0;
@@ -2278,6 +2329,19 @@ h6 {
   border-bottom: 1px solid #ddd;
   background-color: #fff;
 }
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .list {
+    border: none;
+    -webkit-background-size: 100% 1px, 100% 1px;
+    background-size: 100% 1px, 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom, top;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%), linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
 .list__item {
   margin: 0;
   padding: 0;
@@ -2287,14 +2351,17 @@ h6 {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   display: block;
-  padding: 0 0 0 10px;
+  padding: 0 10px 0 10px;
   margin: 0 0 0 0;
   border-top: none;
   border-bottom: 1px solid #ddd;
   color: #1f1f21;
-  background-color: #fff;
+  background-color: transparent;
   min-height: 44px;
   line-height: 44px;
+}
+.list__item--no-padding {
+  padding: 0;
 }
 .list__item__line-height,
 .list__item--line-height {
@@ -2308,19 +2375,28 @@ h6 {
   transition: none;
 }
 .list__item:first-child {
-  padding-left: 10px;
-  margin: 0;
   border-top: none;
   border-bottom: 1px solid #ddd;
 }
 .list__item:last-child {
-  padding-left: 10px;
-  margin: 0;
   border-bottom: none;
 }
 .list__item:first-child:last-child {
   border-top: none;
   border-bottom: none;
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+  .list__item:not(:last-child) {
+    border-bottom: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+  }
 }
 /* topdoc
   name: Noborder List
@@ -2340,6 +2416,7 @@ h6 {
   background-color: #fff;
   border-top: none;
   border-bottom: none;
+  background-image: none;
 }
 /* topdoc
   name: Category List Header
@@ -2475,10 +2552,10 @@ h6 {
   use: List, List Item with Chevron
   markup:
     <ul class="list list--inset">
-      <li class="list__item list__item--chevron">
+      <li class="list__item list--inset__item list__item--chevron">
         List Item with Chevron
       </li>
-      <li class="list__item list__item--chevron">
+      <li class="list__item list--inset__item list__item--chevron">
         List Item with Chevron
       </li>
     </ul>
@@ -2489,6 +2566,11 @@ h6 {
   border: 1px solid #ddd;
   -webkit-border-radius: 4px;
   border-radius: 4px;
+  background-image: none;
+}
+.list--inset__item:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+  background-image: none;
 }
 /* topdoc
   name: Radio Button in List Item
@@ -2556,6 +2638,7 @@ h6 {
 /* topdoc
   name: No border Checkbox in List Item
   use: Checkbox in List Item, No border Checkbox
+  class: chckbox--list-item
   markup:
     <ul class="list">
       <li class="list__item list__item--tappable">
@@ -2574,6 +2657,46 @@ h6 {
       </li>
     </ul>
 */
+/* topdoc
+  name: Text Input in List Item
+  use: List, Transparent Text Input
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="name">
+      </li>
+      <li class="list__item">
+        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="email">
+      </li>
+    </ul>
+*/
+/* topdoc
+  name: Textarea in List Item
+  use: List, Textarea Transparent
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <textarea class="textarea textarea--transparent" style="width:100%;height:50px;margin-top:4px;" placeholder="text message"></textarea>
+      </li>
+    </ul>
+*/
+/* topdoc
+  name: Right Label in List Item
+  use: List
+  class: list__right-label
+  markup:
+    <ul class="list">
+      <li class="list__item">
+        <div class="list__right-label">Label</div>
+        Label
+      </li>
+    </ul>
+*/
+.list__right-label {
+  font-size: 14px;
+  padding-right: 8px;
+  float: right;
+}
 /* topdoc
   name: Search Input
   class: search-input
@@ -2947,6 +3070,8 @@ webkit-input-placeholder() {
   resize: none;
   outline: none;
   padding: 5px 5px 5px 5px;
+  padding-left: 0;
+  padding-right: 0;
   font-size: 15px;
   font-weight: 400;
   -webkit-border-radius: 4px;
@@ -2971,6 +3096,7 @@ webkit-input-placeholder() {
 }
 /* topdoc
   name: Modal
+  class: modal
   markup:
     <div class="modal">
       <div class="modal__content">
@@ -3005,7 +3131,7 @@ webkit-input-placeholder() {
   font-weight: 400;
   font-size: 17px;
   overflow: hidden;
-  background-color: rgba(0,0,0,0.8);
+  background-color: rgba(0,0,0,0.7);
   position: absolute;
   left: 0;
   right: 0;
