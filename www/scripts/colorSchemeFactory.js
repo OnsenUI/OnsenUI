@@ -138,6 +138,50 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
     },
 
     {
+      text: 'blue-basic',
+      colors: {
+        // Global
+        'background-color': '#fff',
+        'text-color': '#1f1f21',
+        'sub-text-color': '#999',
+        'highlight-color': 'rgba(24,103,194,0.81)',
+        'second-highlight-color': '#25a6d9',
+        'border-color': '#ddd',
+
+        // Toolbar
+        'toolbar-background-color': '#fff',
+        'toolbar-button-color': 'rgba(38,100,171,0.81)',
+        'toolbar-text-color': '#1f1f21',
+        'toolbar-border-color': '#ddd',
+
+        // Button Bar
+        'buttonbar-color': 'rgba(18,114,224,0.77)',
+        'buttonbar-active-text-color': '#fff',
+
+        // List
+        'list-background-color': '#fff',
+        'list-header-background-color': '#eee',
+        'list-tap-active-background-color': '#d9d9d9',
+
+        // Tabbar
+        'tabbar-background-color': '#fff',
+        'tabbar-text-color': '#999',
+        'tabbar-highlight-text-color': '#468ad9',
+        'tabbar-border-color': '#ddd',
+
+        // Switch
+        'switch-highlight-color': '#5198db',
+
+        // Modal
+        'modal-background-color': 'rgba(0, 0, 0, 0.7)',
+        'modal-text-color': '#fff',
+
+        // Notification
+        'notification-background-color': '#dc5236'
+      }
+    },
+
+    {
       text: 'purple',
       colors: {
         // Global
