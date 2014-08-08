@@ -83,7 +83,7 @@ angular.module('app').directive('colorPickerPopup', function($window) {
   }
 
   function toRgbaColorString(red, green, blue, alpha) {
-    return 'rgba(' + red + ',' + blue + ',' + green + ',' + alpha + ')';
+    return 'rgba(' + red + ',' + green + ',' + blue + ',' + alpha + ')';
   }
 
   return {
