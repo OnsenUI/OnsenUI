@@ -10,6 +10,7 @@ v1.1.2-dev
  * core: Added minified scripts.
  * core: Added 'ons-template' directive.
  * core: Added ons.findView() method.
+ * core: Changes ons.bootstrap() to accept dependency module names, e.g. `ons.bootstrap(['ngAnimate'])`.
  * css-components: Updated border styles on some components for retina display.
  * css-components: Added 'button--outline' component.
  * css-components: Renamed 'icon-button' css-component to 'toolbar-button'.
