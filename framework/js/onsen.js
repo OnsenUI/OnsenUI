@@ -19,49 +19,14 @@ limitations under the License.
   'use strict';
 
   var module = angular.module('onsen', ['templates-main']);
-  // for BC
-  angular.module('onsen.directives', ['onsen']);
-
-  var readyLock = new DoorLock();
-  var unlockOnsenUI = readyLock.lock();
-  var onsenService;
-
-  module.run(function($compile, $rootScope, $onsen) {
-    onsenService = $onsen;
-
-    $rootScope.ons = window.ons;
-    $rootScope.console = window.console;
-    $rootScope.alert = window.alert;
-
-    ons.$compile = $compile;
-    $rootScope.$on('$ons-ready', function() {
-      unlockOnsenUI();
-    });
-
-    // for initialization hook.
-    if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
-      angular.element(document.body).on('DOMContentLoaded', function() {
-        var dom = document.createElement('ons-dummy-for-init');
-        document.body.appendChild(dom);
-      });
-    } else if (document.body) {
-      var dom = document.createElement('ons-dummy-for-init');
-      document.body.appendChild(dom);
-    } else {
-      throw new Error('Invalid initialization state.');
-    }
-
-    if (document.body) {
-      angular.element(document.body).attr('ng-cloak', 'ng-cloak');
-    }
-
-  });
-
+  angular.module('onsen.directives', ['onsen']); // for BC
 
   // JS Global facade for Onsen UI.
   var ons = window.ons = {
 
-    _readyLock: readyLock,
+    _readyLock: new DoorLock(),
+
+    _onsenService: null,
 
     _unlockersDict: {},
 
@@ -105,7 +70,7 @@ limitations under the License.
      * @return {Boolean}
      */
     isReady: function() {
-      return !readyLock.isLocked();
+      return !ons._readyLock.isLocked();
     },
 
     /**
@@ -136,11 +101,11 @@ limitations under the License.
     },
 
     _getOnsenService: function() {
-      if (!onsenService) {
+      if (!this._onsenService) {
         throw new Error('$onsen is not loaded, wait for ons.ready().');
       }
 
-      return onsenService;
+      return this._onsenService;
     },
 
     /**
@@ -152,7 +117,7 @@ limitations under the License.
         if (ons.isReady()) {
           callback();
         } else {
-          readyLock.waitUnlock(callback);
+          ons._readyLock.waitUnlock(callback);
         }
       } else if (angular.isArray(callback) && arguments[1] instanceof Function) {
         var dependencies = callback;
@@ -178,26 +143,49 @@ limitations under the License.
     }
   };
 
+  waitDeviceReady();
+  waitOnsenUILoad();
+  init();
 
-  var unlockDeviceReady = readyLock.lock();
-  window.addEventListener('DOMContentLoaded', function() {
-    if (ons.isWebView()) {
-      window.document.addEventListener('deviceready', unlockDeviceReady, false);
-    } else {
-      unlockDeviceReady();
-    }
-  }, false);
-
-  module.run(function($templateCache) {
-    var templates = window.document.querySelectorAll('script[type="text/ons-template"]');
-
-    for (var i = 0; i < templates.length; i++) {
-      var template = angular.element(templates[i]);
-      var id = template.attr('id');
-      if (typeof id === 'string') {
-        $templateCache.put(id, template.text());
+  function waitDeviceReady() {
+    var unlockDeviceReady = ons._readyLock.lock();
+    window.addEventListener('DOMContentLoaded', function() {
+      if (ons.isWebView()) {
+        window.document.addEventListener('deviceready', unlockDeviceReady, false);
+      } else {
+        unlockDeviceReady();
       }
-    }
-  });
+    }, false);
+  }
+
+  function waitOnsenUILoad() {
+    var unlockOnsenUI = ons._readyLock.lock();
+    module.run(function($compile, $rootScope, $onsen) {
+      // for initialization hook.
+      if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
+        window.addEventListener('DOMContentLoaded', function() {
+          document.body.appendChild(document.createElement('ons-dummy-for-init'));
+        });
+      } else if (document.body) {
+        document.body.appendChild(document.createElement('ons-dummy-for-init'));
+      } else {
+        throw new Error('Invalid initialization state.');
+      }
+
+      $rootScope.$on('$ons-ready', unlockOnsenUI);
+    });
+  }
+
+  function init() {
+    module.run(function($compile, $rootScope, $onsen) {
+      ons._onsenService = $onsen;
+
+      $rootScope.ons = window.ons;
+      $rootScope.console = window.console;
+      $rootScope.alert = window.alert;
+
+      ons.$compile = $compile;
+    });
+  }
 
 })();
