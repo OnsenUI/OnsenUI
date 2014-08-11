@@ -40,7 +40,7 @@
   }
 
   function buildClassAndStyle(attrs) {
-    var classList = [];
+    var classList = ['ons-icon'];
     var style = {};
 
     // size
@@ -66,23 +66,22 @@
     
     // rotate
     if (attrs.rotate === '90' || attrs.rotate === '180' || attrs.rotate === '270') {
-
-      classList.push('fa-rotate-' + attrs.rotate);
+      classList.push('ons-icon--rotate-' + attrs.rotate);
     }
 
     // flip
     if (attrs.flip === 'horizontal' || attrs.flip === 'vertical') {
-      classList.push('fa-flip-' + attrs.flip);
+      classList.push('ons-icon--flip-' + attrs.flip);
     }
 
     // fixed-width
     if (attrs.fixedWidth !== 'false') {
-      classList.push('fa-fw');
+      classList.push('ons-icon--fw');
     }
 
     // spin
     if (attrs.spin === 'true') {
-      classList.push('fa-spin');
+      classList.push('ons-icon--spin');
     }
 
     return {
