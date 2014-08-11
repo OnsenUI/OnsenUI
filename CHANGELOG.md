@@ -7,6 +7,7 @@ v1.1.2-dev
 
  * core: Removed several memory leak possibilities.
  * core: Added minified scripts.
+ * core: Added 'ons-template' directive.
  * css-components: Updated border styles on some components for retina display.
  * css-components: Added 'button--outline' component.
  * css-components: Renamed 'icon-button' css-component to 'toolbar-button'.
