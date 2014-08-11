@@ -31,13 +31,14 @@
       replace: false,
       transclude: true,
       scope: {
-        shouldSpin: '@',
         animation: '@',
-        onsType: '@',
-        disabled: '@'
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs, _, transclude) {
+
+        scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+        element.addClass('button effeckt-button');
+        element.addClass(scope.modifierTemplater('button--*'));
 
         transclude(scope, function(cloned, innerScope) {
           angular.element(element[0].querySelector('.ons-button-inner')).append(cloned);
@@ -51,14 +52,12 @@
         var TYPE_PREFIX = 'button--';
         scope.item = {};
 
-        scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
         // if animation is not specified -> default is slide-left
         if (scope.animation === undefined || scope.animation === '') {
           scope.item.animation = 'slide-left';
         }
 
-        scope.$watch('disabled', function(disabled) {
+        attrs.$observe('disabled', function(disabled) {
           if (disabled === 'true') {
             effectButton.attr('disabled', true);
           } else {
@@ -66,13 +65,17 @@
           }
         });
 
-        scope.$watch('animation', function(newAnimation) {
+        attrs.$observe('animation', function(newAnimation) {
           if (newAnimation) {
+            if (scope.item.animation) {
+              element.removeClass(scope.item.animation);
+            }
             scope.item.animation = newAnimation;
+            element.addClass(scope.item.animation);
           }
         });
 
-        scope.$watch('shouldSpin', function(shouldSpin) {
+        attrs.$observe('shouldSpin', function(shouldSpin) {
           if (shouldSpin === 'true') {
             effectButton.attr('data-loading', true);
           } else {
