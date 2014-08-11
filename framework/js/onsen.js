@@ -34,15 +34,19 @@ limitations under the License.
      * Bootstrap this document as a Onsen UI application.
      *
      * If you want use your AngularJS module, use "ng-app" directive and "angular.module()" manually.
+     *
+     * @param {Array} [deps] dependency modules
      */
-    bootstrap : function() {
+    bootstrap : function(deps) {
+      deps = ['onsen'].concat(angular.isArray(deps) ? deps : []);
+
       var doc = window.document;
       if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
         doc.addEventListener('DOMContentLoaded', function() {
-          angular.bootstrap(doc.documentElement, ['onsen']);
+          angular.bootstrap(doc.documentElement, deps);
         }, false);
       } else if (doc.documentElement) {
-        angular.bootstrap(doc.documentElement, ['onsen']);
+        angular.bootstrap(doc.documentElement, deps);
       } else {
         throw new Error('Invalid state');
       }
