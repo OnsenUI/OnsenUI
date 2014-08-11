@@ -712,7 +712,8 @@ h6 {
   box-shadow: none;
   outline: 0;
 }
-.button:disabled {
+.button:disabled,
+.button[disabled] {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
@@ -823,7 +824,8 @@ h6 {
   color: #1284ff;
   border: none;
 }
-.button--quiet:disabled {
+.button--quiet:disabled,
+.button--quiet[disabled] {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
@@ -937,7 +939,8 @@ h6 {
   transition: none;
   opacity: 0.2;
 }
-.button--cta:disabled {
+.button--cta:disabled,
+.button--cta[disabled] {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
@@ -956,6 +959,7 @@ h6 {
   padding: 4px 12px;
   display: block;
   width: 100%;
+  text-align: center;
 }
 .button--large:active {
   background-color: #1284ff;
@@ -972,7 +976,8 @@ h6 {
   -o-transition: none;
   transition: none;
 }
-.button--large:disabled {
+.button--large:disabled,
+.button--large[disabled] {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
@@ -1053,6 +1058,7 @@ h6 {
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1284ff;
+  text-align: center;
 }
 .button--large--quiet:active {
   -webkit-transition: none;
@@ -1066,7 +1072,8 @@ h6 {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.button--large--quiet:disabled {
+.button--large--quiet:disabled,
+.button--large--quiet[disabled] {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
@@ -1145,6 +1152,7 @@ h6 {
   line-height: 36px;
   padding: 4px 12px;
   width: 100%;
+  text-align: center;
   display: block;
 }
 .button--large--cta:hover {
@@ -1169,7 +1177,8 @@ h6 {
   transition: none;
   opacity: 0.2;
 }
-.button--large--cta:disabled {
+.button--large--cta:disabled,
+.button--large--cta[disabled] {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
