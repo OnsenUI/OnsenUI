@@ -67,6 +67,18 @@ limitations under the License.
     },
 
     /**
+     * Find view object correspond dom element queried by CSS selector.
+     *
+     * @param {String} selector CSS selector
+     * @param {HTMLElement} dom
+     * @return {Object/void}
+     */
+    findView: function(selector, dom) {
+      var target = (dom ? dom : document).querySelector(selector);
+      return target ? angular.element(target).data(target.nodeName.toLowerCase()) || null : null;
+    },
+
+    /**
      * @return {Boolean}
      */
     isReady: function() {
