@@ -35,12 +35,14 @@
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs, _, transclude) {
+        var initialAnimation = 'slide-left';
 
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         element.addClass('button effeckt-button');
         element.addClass(scope.modifierTemplater('button--*'));
+        element.addClass(initialAnimation);
 
-        transclude(scope, function(cloned, innerScope) {
+        transclude(scope, function(cloned) {
           angular.element(element[0].querySelector('.ons-button-inner')).append(cloned);
         });
 
@@ -48,24 +50,19 @@
           throw new Error('This element can\'t accept ng-controller directive.');
         }
 
-        var effectButton = element.children();
-        var TYPE_PREFIX = 'button--';
         scope.item = {};
-
         // if animation is not specified -> default is slide-left
-        if (scope.animation === undefined || scope.animation === '') {
-          scope.item.animation = 'slide-left';
-        }
+        scope.item.animation = initialAnimation;
 
         attrs.$observe('disabled', function(disabled) {
           if (disabled === 'true') {
-            effectButton.attr('disabled', true);
+            element.attr('disabled', true);
           } else {
-            effectButton.attr('disabled', false);
+            element.attr('disabled', false);
           }
         });
 
-        attrs.$observe('animation', function(newAnimation) {
+        scope.$watch('animation', function(newAnimation) {
           if (newAnimation) {
             if (scope.item.animation) {
               element.removeClass(scope.item.animation);
@@ -77,9 +74,9 @@
 
         attrs.$observe('shouldSpin', function(shouldSpin) {
           if (shouldSpin === 'true') {
-            effectButton.attr('data-loading', true);
+            element.attr('data-loading', true);
           } else {
-            effectButton.removeAttr('data-loading');
+            element.removeAttr('data-loading');
           }
         });
 
@@ -90,7 +87,7 @@
             element: element
           });
 
-          effectButton = scope = element = attrs = null;
+          scope = element = attrs = null;
         });
       }
     };
