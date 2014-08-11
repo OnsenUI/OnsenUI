@@ -100,6 +100,40 @@ gulp.task('clean', function() {
 });
 
 ////////////////////////////////////////
+// minify
+////////////////////////////////////////
+gulp.task('minify-js', function() {
+  return merge(
+    gulp.src('build/js/onsenui.js')
+      .pipe(uglify({
+        mangle: false,
+        preserveComments: function(node, comment) {
+          return comment.line === 1;
+        }
+      }))
+      .pipe(rename(function(path) {
+        path.extname = '.min.js';
+      }))
+      .pipe(gulp.dest('build/js/'))
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
+      .pipe(gulp.dest('app/lib/onsen/js')),
+    gulp.src('build/js/onsenui_all.js')
+      .pipe(uglify({
+        mangle: false,
+        preserveComments: function(node, comment) {
+          return comment.line === 1;
+        }
+      }))
+      .pipe(rename(function(path) {
+        path.extname = '.min.js';
+      }))
+      .pipe(gulp.dest('build/js/'))
+      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
+      .pipe(gulp.dest('app/lib/onsen/js'))
+  );
+});
+
+////////////////////////////////////////
 // prepare
 ////////////////////////////////////////
 gulp.task('prepare', ['html2js'], function() {
@@ -121,18 +155,6 @@ gulp.task('prepare', ['html2js'], function() {
       .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/js/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
-      .pipe(gulp.dest('app/lib/onsen/js'))
-      .pipe(uglify({
-        mangle: false,
-        preserveComments: function(node, comment) {
-          return comment.line === 1;
-        }
-      }))
-      .pipe(rename(function(path) {
-        path.extname = '.min.js';
-      }))
-      .pipe(gulp.dest('build/js/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
       .pipe(gulp.dest('app/lib/onsen/js')),
 
     // onsenui_all.js
@@ -151,18 +173,6 @@ gulp.task('prepare', ['html2js'], function() {
       .pipe(concat('onsenui_all.js'))
       .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/js/'))
-      .pipe(gulp.dest('app/lib/onsen/js'))
-      .pipe(uglify({
-        mangle: false,
-        preserveComments: function(node, comment) {
-          return comment.line === 1;
-        }
-      }))
-      .pipe(rename(function(path) {
-        path.extname = '.min.js';
-      }))
-      .pipe(gulp.dest('build/js/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
       .pipe(gulp.dest('app/lib/onsen/js')),
 
 
@@ -256,6 +266,7 @@ gulp.task('build', function(done) {
   return runSequence(
     'clean',
     'prepare',
+    'minify-js',
     'build-docs',
     'prepare-project-templates',
     'compress-project-templates',
@@ -298,36 +309,6 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
       .pipe(browserSync.reload({stream: true, once: true}));
   });
 });
-
-////////////////////////////////////////
-// build-theme
-////////////////////////////////////////
-gulp.task('build-theme', function(done) {
-  gulp.src('themes/theme-modules/*/theme-*.styl')
-  .pipe(stylus())
-  .pipe(rename(function(path) {
-    path.dirname = '.';
-    path.basename = path.basename.replace(/^theme-/, '');
-  }))
-  .pipe(autoprefix('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2'))
-  .pipe(gulp.dest('themes/css/'))
-  .on('end', function() {
-    gutil.log('minify start');
-    // minify
-    gulp.src(['themes/css/*.css', '!themes/css/*.min.css'])
-    .pipe(rename({extname: '.min.css'}))
-    .pipe(cssminify())
-    .pipe(gulp.dest('themes/css/'))
-    .on('end', done);
-  });
-});
-
-////////////////////////////////////////
-// build-topdoc
-////////////////////////////////////////
-gulp.task('build-topdoc', shell.task([
-  './node_modules/.bin/topdoc --source themes/css --destination themes/testcases --template themes/testcases-topdoc-template'
-]));
 
 ////////////////////////////////////////
 // build-doc-ja
