@@ -53,11 +53,11 @@ limitations under the License.
     },
 
     /**
-     * @param {String} name
+     * @param {String} [name]
      * @param {Object/jqLite/HTMLElement} dom $event object or jqLite object or HTMLElement object.
      * @return {Object}
      */
-    getDirectiveObject: function(name, dom) {
+    findWrapperView: function(name, dom) {
       var element;
       if (dom instanceof HTMLElement) {
         element = angular.element(dom);
