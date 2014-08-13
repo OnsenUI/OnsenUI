@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.2-dev - 2014-08-08 */
+/*! onsenui - v1.1.2-dev - 2014-08-13 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -3947,7 +3947,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/back_button.tpl",
-    "<span class=\"toolbar-button--quiet {{modifierTemplater('toolbar-button--quiet--*')}}\" ng-click=\"$root.ons.getDirectiveObject('ons-navigator', $event).popPage()\" style=\"height: 44px; line-height: 0; padding: 0; position: relative;\">\n" +
+    "<span class=\"toolbar-button--quiet {{modifierTemplater('toolbar-button--quiet--*')}}\" ng-click=\"$root.ons.findWrapperView('ons-navigator', $event).popPage()\" style=\"height: 44px; line-height: 0; padding: 0; position: relative;\">\n" +
     "  <i class=\"fa fa-angle-left ons-back-button__icon\" style=\"vertical-align: top; line-height: 44px; font-size: 36px; padding-left: 8px; padding-right: 4px; height: 44px; width: 14px;\"></i><span style=\"vertical-align: top; display: inline-block; line-height: 44px; height: 44px;\" class=\"back-button__label\"></span>\n" +
     "</span>\n" +
     "");
@@ -3960,10 +3960,8 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/button.tpl",
-    "<button class=\"{{item.animation}} button--{{onsType}} effeckt-button button no-select {{modifierTemplater('button--*')}}\">\n" +
-    "  <span class=\"label ons-button-inner\"></span>\n" +
-    "  <span class=\"spinner button__spinner {{modifierTemplater('button--*__spinner')}}\"></span>\n" +
-    "</button>\n" +
+    "<span class=\"label ons-button-inner\"></span>\n" +
+    "<span class=\"spinner button__spinner {{modifierTemplater('button--*__spinner')}}\"></span>\n" +
     "");
 }]);
 })();
@@ -4215,50 +4213,14 @@ limitations under the License.
   'use strict';
 
   var module = angular.module('onsen', ['templates-main']);
-
-  var readyLock = new DoorLock();
-
-  var unlockOnsenUI = readyLock.lock();
-
-  // for BC
-  angular.module('onsen.directives', ['onsen']);
-
-  var onsenService;
-  module.run(['$compile', '$rootScope', '$onsen', function($compile, $rootScope, $onsen) {
-    onsenService = $onsen;
-
-    $rootScope.ons = window.ons;
-    $rootScope.console = window.console;
-    $rootScope.alert = window.alert;
-
-    ons.$compile = $compile;
-    $rootScope.$on('$ons-ready', function() {
-      unlockOnsenUI();
-    });
-
-    // for initialization hook.
-    if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
-      angular.element(document.body).on('DOMContentLoaded', function() {
-        var dom = document.createElement('ons-dummy-for-init');
-        document.body.appendChild(dom);
-      });
-    } else if (document.body) {
-      var dom = document.createElement('ons-dummy-for-init');
-      document.body.appendChild(dom);
-    } else {
-      throw new Error('Invalid initialization state.');
-    }
-
-    if (document.body) {
-      angular.element(document.body).attr('ng-cloak', 'ng-cloak');
-    }
-
-  }]);
+  angular.module('onsen.directives', ['onsen']); // for BC
 
   // JS Global facade for Onsen UI.
   var ons = window.ons = {
 
-    _readyLock: readyLock,
+    _readyLock: new DoorLock(),
+
+    _onsenService: null,
 
     _unlockersDict: {},
 
@@ -4266,26 +4228,30 @@ limitations under the License.
      * Bootstrap this document as a Onsen UI application.
      *
      * If you want use your AngularJS module, use "ng-app" directive and "angular.module()" manually.
+     *
+     * @param {Array} [deps] dependency modules
      */
-    bootstrap : function() {
+    bootstrap : function(deps) {
+      deps = ['onsen'].concat(angular.isArray(deps) ? deps : []);
+
       var doc = window.document;
       if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
         doc.addEventListener('DOMContentLoaded', function() {
-          angular.bootstrap(doc.documentElement, ['onsen']);
+          angular.bootstrap(doc.documentElement, deps);
         }, false);
       } else if (doc.documentElement) {
-        angular.bootstrap(doc.documentElement, ['onsen']);
+        angular.bootstrap(doc.documentElement, deps);
       } else {
         throw new Error('Invalid state');
       }
     },
 
     /**
-     * @param {String} name
+     * @param {String} [name]
      * @param {Object/jqLite/HTMLElement} dom $event object or jqLite object or HTMLElement object.
      * @return {Object}
      */
-    getDirectiveObject: function(name, dom) {
+    findWrapperView: function(name, dom) {
       var element;
       if (dom instanceof HTMLElement) {
         element = angular.element(dom);
@@ -4299,10 +4265,22 @@ limitations under the License.
     },
 
     /**
+     * Find view object correspond dom element queried by CSS selector.
+     *
+     * @param {String} selector CSS selector
+     * @param {HTMLElement} dom
+     * @return {Object/void}
+     */
+    findView: function(selector, dom) {
+      var target = (dom ? dom : document).querySelector(selector);
+      return target ? angular.element(target).data(target.nodeName.toLowerCase()) || null : null;
+    },
+
+    /**
      * @return {Boolean}
      */
     isReady: function() {
-      return !readyLock.isLocked();
+      return !ons._readyLock.isLocked();
     },
 
     /**
@@ -4333,11 +4311,11 @@ limitations under the License.
     },
 
     _getOnsenService: function() {
-      if (!onsenService) {
+      if (!this._onsenService) {
         throw new Error('$onsen is not loaded, wait for ons.ready().');
       }
 
-      return onsenService;
+      return this._onsenService;
     },
 
     /**
@@ -4349,7 +4327,7 @@ limitations under the License.
         if (ons.isReady()) {
           callback();
         } else {
-          readyLock.waitUnlock(callback);
+          ons._readyLock.waitUnlock(callback);
         }
       } else if (angular.isArray(callback) && arguments[1] instanceof Function) {
         var dependencies = callback;
@@ -4375,15 +4353,50 @@ limitations under the License.
     }
   };
 
+  waitDeviceReady();
+  waitOnsenUILoad();
+  init();
 
-  var unlockDeviceReady = readyLock.lock();
-  window.addEventListener('DOMContentLoaded', function() {
-    if (ons.isWebView()) {
-      window.document.addEventListener('deviceready', unlockDeviceReady, false);
-    } else {
-      unlockDeviceReady();
-    }
-  }, false);
+  function waitDeviceReady() {
+    var unlockDeviceReady = ons._readyLock.lock();
+    window.addEventListener('DOMContentLoaded', function() {
+      if (ons.isWebView()) {
+        window.document.addEventListener('deviceready', unlockDeviceReady, false);
+      } else {
+        unlockDeviceReady();
+      }
+    }, false);
+  }
+
+  function waitOnsenUILoad() {
+    var unlockOnsenUI = ons._readyLock.lock();
+    module.run(['$compile', '$rootScope', '$onsen', function($compile, $rootScope, $onsen) {
+      // for initialization hook.
+      if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
+        window.addEventListener('DOMContentLoaded', function() {
+          document.body.appendChild(document.createElement('ons-dummy-for-init'));
+        });
+      } else if (document.body) {
+        document.body.appendChild(document.createElement('ons-dummy-for-init'));
+      } else {
+        throw new Error('Invalid initialization state.');
+      }
+
+      $rootScope.$on('$ons-ready', unlockOnsenUI);
+    }]);
+  }
+
+  function init() {
+    module.run(['$compile', '$rootScope', '$onsen', function($compile, $rootScope, $onsen) {
+      ons._onsenService = $onsen;
+
+      $rootScope.ons = window.ons;
+      $rootScope.console = window.console;
+      $rootScope.alert = window.alert;
+
+      ons.$compile = $compile;
+    }]);
+  }
 
 })();
 
@@ -8485,15 +8498,18 @@ limitations under the License.
       replace: false,
       transclude: true,
       scope: {
-        shouldSpin: '@',
         animation: '@',
-        onsType: '@',
-        disabled: '@'
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs, _, transclude) {
+        var initialAnimation = 'slide-left';
 
-        transclude(scope, function(cloned, innerScope) {
+        scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+        element.addClass('button effeckt-button');
+        element.addClass(scope.modifierTemplater('button--*'));
+        element.addClass(initialAnimation);
+
+        transclude(scope, function(cloned) {
           angular.element(element[0].querySelector('.ons-button-inner')).append(cloned);
         });
 
@@ -8501,36 +8517,33 @@ limitations under the License.
           throw new Error('This element can\'t accept ng-controller directive.');
         }
 
-        var effectButton = element.children();
-        var TYPE_PREFIX = 'button--';
         scope.item = {};
-
-        scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
         // if animation is not specified -> default is slide-left
-        if (scope.animation === undefined || scope.animation === '') {
-          scope.item.animation = 'slide-left';
-        }
+        scope.item.animation = initialAnimation;
 
-        scope.$watch('disabled', function(disabled) {
+        attrs.$observe('disabled', function(disabled) {
           if (disabled === 'true') {
-            effectButton.attr('disabled', true);
+            element.attr('disabled', true);
           } else {
-            effectButton.attr('disabled', false);
+            element.attr('disabled', false);
           }
         });
 
         scope.$watch('animation', function(newAnimation) {
           if (newAnimation) {
+            if (scope.item.animation) {
+              element.removeClass(scope.item.animation);
+            }
             scope.item.animation = newAnimation;
+            element.addClass(scope.item.animation);
           }
         });
 
-        scope.$watch('shouldSpin', function(shouldSpin) {
+        attrs.$observe('shouldSpin', function(shouldSpin) {
           if (shouldSpin === 'true') {
-            effectButton.attr('data-loading', true);
+            element.attr('data-loading', true);
           } else {
-            effectButton.removeAttr('data-loading');
+            element.removeAttr('data-loading');
           }
         });
 
@@ -8541,7 +8554,7 @@ limitations under the License.
             element: element
           });
 
-          effectButton = scope = element = attrs = null;
+          scope = element = attrs = null;
         });
       }
     };
@@ -8723,7 +8736,7 @@ limitations under the License.
   }
 
   function buildClassAndStyle(attrs) {
-    var classList = [];
+    var classList = ['ons-icon'];
     var style = {};
 
     // size
@@ -8749,23 +8762,22 @@ limitations under the License.
     
     // rotate
     if (attrs.rotate === '90' || attrs.rotate === '180' || attrs.rotate === '270') {
-
-      classList.push('fa-rotate-' + attrs.rotate);
+      classList.push('ons-icon--rotate-' + attrs.rotate);
     }
 
     // flip
     if (attrs.flip === 'horizontal' || attrs.flip === 'vertical') {
-      classList.push('fa-flip-' + attrs.flip);
+      classList.push('ons-icon--flip-' + attrs.flip);
     }
 
     // fixed-width
     if (attrs.fixedWidth !== 'false') {
-      classList.push('fa-fw');
+      classList.push('ons-icon--fw');
     }
 
     // spin
     if (attrs.spin === 'true') {
-      classList.push('fa-spin');
+      classList.push('ons-icon--spin');
     }
 
     return {
@@ -10426,6 +10438,30 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+ * @id template
+ * @name ons-template
+ * @description
+ *  [en]Template element to put html fragment.[/en]
+ */
+(function(){
+  'use strict';
+  var module = angular.module('onsen');
+
+  module.directive('onsTemplate', ['$onsen', '$templateCache', function($onsen, $templateCache) {
+    return {
+      restrict: 'E',
+      transclude: false,
+      priority: 1000,
+      terminal: true,
+      compile: function(element) {
+        $templateCache.put(element.attr('id'), element.remove().html());
+      }
+    };
+  }]);
+})();
+
+/**
+ * @ngdoc directive
  * @id toolbar
  * @name ons-toolbar
  * @description
@@ -10652,11 +10688,11 @@ limitations under the License.
 
   var util = {
     init: function() {
-      var self = this;
+      this.ready = false;
     },
 
     addListener: function(fn) {
-      if (this._deviceready) {
+      if (this._ready) {
         window.document.addEventListener('backbutton', fn, false);
       } else {
         window.document.addEventListener('deviceready', function() {
@@ -10666,7 +10702,7 @@ limitations under the License.
     },
 
     removeListener: function(fn) {
-      if (this._deviceready) {
+      if (this._ready) {
         window.document.removeEventListener('backbutton', fn, false);
       } else {
         window.document.addEventListener('deviceready', function() {
@@ -10675,15 +10711,20 @@ limitations under the License.
       }
     }
   };
-
-  window.document.addEventListener('deviceready', function() {
-    util._deviceready = true;
-  }, false);
+  util.init();
 
   /**
    * 'backbutton' event handler manager.
    */
   module.factory('BackButtonHandlerStack', function() {
+
+    if (window.ons.isWebView()) {
+      window.document.addEventListener('deviceready', function() {
+        util._ready = true;
+      }, false);
+    } else {
+      util._ready = true;
+    }
 
     var BackButtonHandlerStack = Class.extend({
 
@@ -10759,6 +10800,13 @@ limitations under the License.
         }).reverse()[0];
 
         return object ? object.listener : undefined;
+      },
+
+      fireBackButtonEvent: function() {
+        var event = document.createEvent('Event');
+        event.initEvent('backbutton', true, true);
+
+        return this.dispatchHandler(event);
       },
 
       /**
@@ -11163,26 +11211,6 @@ limitations under the License.
       },
 
       /**
-       * Cache for predefined template.
-       * eg. <script type="text/ons-template">...</script>
-       */
-      predefinedPageCache: (function() {
-        var cache = $cacheFactory('$onsenPredefinedPageCache');
-
-        var templates = $document[0].querySelectorAll('script[type="text/ons-template"]');
-
-        for (var i = 0; i < templates.length; i++) {
-          var template = angular.element(templates[i]);
-          var id = template.attr('id');
-          if (typeof id === 'string') {
-            cache.put(id, template.text());
-          }
-        }
-
-        return cache;
-      })(),
-
-      /**
        * Find first ancestor of el with tagName
        * or undefined if not found
        *
@@ -11227,7 +11255,7 @@ limitations under the License.
        * @return {Promise}
        */
       getPageHTMLAsync: function(page) {
-        var cache = $templateCache.get(page) || $onsen.predefinedPageCache.get(page);
+        var cache = $templateCache.get(page);
 
         if (cache) {
           var deferred = $q.defer();
@@ -11240,16 +11268,12 @@ limitations under the License.
         } else {
           return $http({
             url: page,
-            method: 'GET',
-            cache: $onsen.predefinedPageCache
+            method: 'GET'
           }).then(function(response) {
             var html = response.data;
 
             return this.normalizePageHTML(html);
           }.bind(this));
-        }
-
-        function normalize(html) {
         }
       },
 
@@ -11842,4 +11866,38 @@ window.animit = (function(){
       'overflowtouch',
       window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
   });
+})();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function(){
+  'use strict';
+
+  angular.module('onsen').run(['$templateCache', function($templateCache) {
+    var templates = window.document.querySelectorAll('script[type="text/ons-template"]');
+
+    for (var i = 0; i < templates.length; i++) {
+      var template = angular.element(templates[i]);
+      var id = template.attr('id');
+      if (typeof id === 'string') {
+        $templateCache.put(id, template.text());
+      }
+    }
+  }]);
+
 })();
