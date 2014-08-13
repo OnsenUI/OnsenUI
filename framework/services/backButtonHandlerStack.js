@@ -22,11 +22,11 @@ limitations under the License.
 
   var util = {
     init: function() {
-      var self = this;
+      this.ready = false;
     },
 
     addListener: function(fn) {
-      if (this._deviceready) {
+      if (this._ready) {
         window.document.addEventListener('backbutton', fn, false);
       } else {
         window.document.addEventListener('deviceready', function() {
@@ -36,7 +36,7 @@ limitations under the License.
     },
 
     removeListener: function(fn) {
-      if (this._deviceready) {
+      if (this._ready) {
         window.document.removeEventListener('backbutton', fn, false);
       } else {
         window.document.addEventListener('deviceready', function() {
@@ -45,15 +45,20 @@ limitations under the License.
       }
     }
   };
-
-  window.document.addEventListener('deviceready', function() {
-    util._deviceready = true;
-  }, false);
+  util.init();
 
   /**
    * 'backbutton' event handler manager.
    */
   module.factory('BackButtonHandlerStack', function() {
+
+    if (window.ons.isWebView()) {
+      window.document.addEventListener('deviceready', function() {
+        util._ready = true;
+      }, false);
+    } else {
+      util._ready = true;
+    }
 
     var BackButtonHandlerStack = Class.extend({
 
@@ -129,6 +134,13 @@ limitations under the License.
         }).reverse()[0];
 
         return object ? object.listener : undefined;
+      },
+
+      fireBackButtonEvent: function() {
+        var event = document.createEvent('Event');
+        event.initEvent('backbutton', true, true);
+
+        return this.dispatchHandler(event);
       },
 
       /**
