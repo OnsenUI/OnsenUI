@@ -41,6 +41,7 @@ var browserSync = require('browser-sync');
 var cache = require('gulp-cached');
 var gulpIf = require('gulp-if');
 var dgeni = require('dgeni');
+var plumber = require('gulp-plumber');
 var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
 var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
@@ -150,6 +151,7 @@ gulp.task('prepare', ['html2js'], function() {
       'framework/services/*.js',
       'framework/js/*.js'
     ])
+      .pipe(plumber())
       .pipe(ngAnnotate({add: true, single_quotes: true}))
       .pipe(concat('onsenui.js'))            
       .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
@@ -169,6 +171,7 @@ gulp.task('prepare', ['html2js'], function() {
       'framework/services/*.js',
       'framework/js/*.js'
     ])
+      .pipe(plumber())
       .pipe(ngAnnotate({add: true, single_quotes: true}))
       .pipe(concat('onsenui_all.js'))
       .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))

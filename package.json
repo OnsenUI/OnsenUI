@@ -45,7 +45,8 @@
     "canonical-path": "0.0.2",
     "lodash": "^2.4.1",
     "gulp-ng-annotate": "^0.3.0",
-    "gulp-uglify": "^0.3.1"
+    "gulp-uglify": "^0.3.1",
+    "gulp-plumber": "^0.6.4"
   },
   "dependencies": {
     "gulp-shell": "^0.2.4",

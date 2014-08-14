@@ -13,40 +13,41 @@
   <script>
   var module = angular.module('myApp', ['onsen.directives']); 
   module.controller('DemoListController', function($scope, $window) {
-      $scope.containerDemoList = [
-          {href : 'bottom_toolbar/', name : 'Bottom Toolbar'},
-          {href : 'grid/', name : 'Grid'},
-          {href : 'if_orientation/', name : 'Orientation'},
-          {href : 'if_platform/', name : 'Platform'},
-          {href : 'list/', name : 'List'},
-          {href : 'modal/', name : 'Modal'},
-          {href : 'navigator/', name : 'Navigator'},
-          {href : 'navigator_insert/', name : 'Navigator: Insert page'},
-          {href : 'navigator_inside_tabbar/', name : 'Navigator inside Tabbar'},
-          {href : 'navigator_reset/', name : 'Navigator: Reset'},
-          {href : 'page/', name : 'Page'},
-          {href : 'sliding_menu/', name : 'Sliding Menu'},
-          {href : 'split_view/', name : 'Split View'},
-          {href : 'screen/', name : 'Screen'},
-          {href : 'tabbar/', name : 'Tabbar (Icon with Label)'},
-          {href : 'tabbar_icon/', name : 'Tabbar (Icon only)'},
-          {href : 'tabbar_text/', name : 'Tabbar (Label only)'},
-          {href : 'scroller/', name : 'Scroller'}
-      ];
-      $scope.inlineDemoList = [
-          {href : 'button/', name : 'Button'},
-          {href : 'checkbox/', name : 'Checkbox'},
-          {href : 'icon/', name : 'Icons'},
-          {href : 'kitchen_sink/', name : 'Kitchen Sink'},
-          {href : 'radio_button/', name : 'Radio Button'},
-          {href : 'search_input/', name : 'Search Input'},
-          {href : 'switch', name : 'Switch'},
-          {href : 'text_input/', name : 'Text Input'},
-          {href : 'textarea/', name : 'Text Area'}
-      ];
-      $scope.go = function(demo) {
-        $window.location.href = demo.href;
-      };
+    $scope.containerDemoList = [
+      {href : 'bottom_toolbar/', name : 'Bottom Toolbar'},
+      {href : 'gesture_detector/', name : 'Gesture Detector'},
+      {href : 'grid/', name : 'Grid'},
+      {href : 'if_orientation/', name : 'Orientation'},
+      {href : 'if_platform/', name : 'Platform'},
+      {href : 'list/', name : 'List'},
+      {href : 'modal/', name : 'Modal'},
+      {href : 'navigator/', name : 'Navigator'},
+      {href : 'navigator_insert/', name : 'Navigator: Insert page'},
+      {href : 'navigator_inside_tabbar/', name : 'Navigator inside Tabbar'},
+      {href : 'navigator_reset/', name : 'Navigator: Reset'},
+      {href : 'page/', name : 'Page'},
+      {href : 'sliding_menu/', name : 'Sliding Menu'},
+      {href : 'split_view/', name : 'Split View'},
+      {href : 'screen/', name : 'Screen'},
+      {href : 'tabbar/', name : 'Tabbar (Icon with Label)'},
+      {href : 'tabbar_icon/', name : 'Tabbar (Icon only)'},
+      {href : 'tabbar_text/', name : 'Tabbar (Label only)'},
+      {href : 'scroller/', name : 'Scroller'}
+    ];
+    $scope.inlineDemoList = [
+      {href : 'button/', name : 'Button'},
+      {href : 'checkbox/', name : 'Checkbox'},
+      {href : 'icon/', name : 'Icons'},
+      {href : 'kitchen_sink/', name : 'Kitchen Sink'},
+      {href : 'radio_button/', name : 'Radio Button'},
+      {href : 'search_input/', name : 'Search Input'},
+      {href : 'switch', name : 'Switch'},
+      {href : 'text_input/', name : 'Text Input'},
+      {href : 'textarea/', name : 'Text Area'}
+    ];
+    $scope.go = function(demo) {
+      $window.location.href = demo.href;
+    };
   });
   </script>  
   

@@ -20,7 +20,8 @@ limitations under the License.
 
 /* cutsom elements */
 ons-page, ons-screen, ons-navigator,
-ons-split-view, ons-sliding-menu, ons-tabbar {
+ons-split-view, ons-sliding-menu, ons-tabbar,
+ons-gesture-detector {
   display: block;
 }
 

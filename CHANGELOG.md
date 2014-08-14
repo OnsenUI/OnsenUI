@@ -6,6 +6,7 @@ v1.1.2-dev
 ----
 
  * Added 'ons-template' directive.
+ * Added 'ons-gesture-detector' directive.
  * core: Removed several memory leak possibilities.
  * core: Added minified scripts.
  * core: Added 'ons-template' directive.

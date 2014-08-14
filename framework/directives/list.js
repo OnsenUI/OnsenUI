@@ -11,7 +11,7 @@
  * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
  * @codepen yxcCt
  */
-(function(){
+(function() {
   'use strict';
 
   var module = angular.module('onsen');
