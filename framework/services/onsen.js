@@ -23,7 +23,7 @@ limitations under the License.
   /**
    * Internal service class for framework implementation.
    */
-  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, BackButtonHandlerStack, ComponentCleaner) {
+  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, ComponentCleaner, DeviceBackButtonHandler) {
 
     var unlockerDict = {
       _unlockersDict: {},
@@ -145,9 +145,14 @@ limitations under the License.
 
       cleaner: ComponentCleaner,
 
-      _defaultBackButtonListener: function() {
+      DeviceBackButtonHandler: DeviceBackButtonHandler,
+
+      _defaultDeviceBackButtonHandler: DeviceBackButtonHandler.create(angular.element(document.body), function() {
         navigator.app.exitApp();
-        return true;
+      }),
+
+      getDefaultDeviceBackButtonHandler: function() {
+        return this._defaultDeviceBackButtonHandler;
       },
 
       /**
@@ -175,26 +180,6 @@ limitations under the License.
             ComponentCleaner.destroyElement(element);
           });
         }
-      },
-
-      backButtonHandlerStack: (function() {
-        var stack = new BackButtonHandlerStack();
-
-        stack.push(function() {
-          return $onsen._defaultBackButtonListener();
-        });
-
-        return stack;
-      })(),
-
-      /**
-       * @param {Function}
-       */
-      setDefaultBackButtonListener: function(listener) {
-        if (!(listener instanceof Function)) {
-          throw new Error('listener argument must be function.');
-        }
-        this._defaultBackButtonListener = listener;
       },
 
       /**

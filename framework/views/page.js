@@ -20,7 +20,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('PageView', function($onsen) {
+  module.factory('PageView', function($onsen, $parse) {
 
     var PageView = Class.extend({
       _registeredToolbarElement : false,
@@ -31,9 +31,10 @@ limitations under the License.
       _toolbarElement : null,
       _bottomToolbarElement : null,
 
-      init: function(scope, element) {
+      init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
+        this._attrs = attrs;
 
         this._registeredToolbarElement = false;
         this._registeredBottomToolbarElement = false;
@@ -44,6 +45,41 @@ limitations under the License.
         this._bottomToolbarElement = angular.element(this._nullElement);
 
         this._clearListener = scope.$on('$destroy', this._destroy.bind(this));
+        this._userDeviceBackButtonListener = angular.noop;
+      },
+
+      _onDeviceBackButton: function($event) {
+        this._userDeviceBackButtonListener($event);
+
+        // ng-device-backbutton
+        if (this._attrs.ngDeviceBackbutton) {
+          $parse(this._attrs.ngDeviceBackbutton)(this._scope, {$event: $event});
+        }
+
+        // on-device-backbutton
+        if (this._attrs.onDeviceBackbutton) {
+          with (window) with ({event: $event}) {
+            eval(this._attrs.onDeviceBackbutton);
+          }
+        }
+      },
+
+      /**
+       * @param {Function} callback
+       */
+      setDeviceBackButtonHandler: function(callback) {
+        if (!this._deviceBackButtonHandler) {
+          this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+        }
+
+        this._userDeviceBackButtonListener = callback;
+      },
+
+      /**
+       * @return {Object}
+       */
+      getDeviceBackButtonHandler: function() {
+        return this._deviceBackButtonHandler;
       },
 
       /**
@@ -51,7 +87,7 @@ limitations under the License.
        *
        * @param {jqLite} element
        */
-      registerToolbar : function(element) {
+      registerToolbar: function(element) {
         if (this._registeredToolbarElement) {
           throw new Error('This page\'s toolbar is already registered.');
         }
@@ -73,7 +109,7 @@ limitations under the License.
        *
        * @param {jqLite} element
        */
-      registerBottomToolbar : function(element) {
+      registerBottomToolbar: function(element) {
         if (this._registeredBottomToolbarElement) {
           throw new Error('This page\'s bottom-toolbar is already registered.');
         }
@@ -164,6 +200,11 @@ limitations under the License.
 
       _destroy: function() {
         this.emit('destroy', {page: this});
+
+        if (this._deviceBackButtonHandler) {
+          this._deviceBackButtonHandler.destroy();
+          this._deviceBackButtonHandler = null;
+        }
 
         this._element = null;
         this._toolbarElement = null;

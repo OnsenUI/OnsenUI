@@ -211,7 +211,7 @@ limitations under the License.
           this.setMenuPage(attrs.behindPage);
         }
 
-        this._backButtonHandler = $onsen.backButtonHandlerStack.push(this._onBackButton.bind(this));
+        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
 
         var unlock = this._doorLock.lock();
 
@@ -239,16 +239,16 @@ limitations under the License.
         scope.$on('$destroy', this._destroy.bind(this));
       },
 
-      getBackButtonHandler: function() {
-        return this._backButtonHandler;
+      getDeviceBackButtonHandler: function() {
+        return this._deviceBackButtonHandler;
       },
 
-      _onBackButton: function() {
+      _onDeviceBackButton: function(event) {
         if (this.isMenuOpened()) {
           this.closeMenu();
-          return true;
+        } else {
+          event.callParentHandler();
         }
-        return false;
       },
 
       _refreshBehindPageWidth: function() {
@@ -265,11 +265,8 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy', {slidingMenu: this});
 
-        this._backButtonHandler.remove();
-
-        this._element = null;
-        this._scope = null;
-        this._attrs = null;
+        this._deviceBackButtonHandler.destroy();
+        this._element = this._scope = this._attrs = null;
       },
 
       _getAnimatorOption: function() {

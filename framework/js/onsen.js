@@ -71,6 +71,27 @@ limitations under the License.
     },
 
     /**
+     * @param {Function} listener
+     */
+    setDefaultDeviceBackButtonListener: function(listener) {
+      this._getOnsenService().getDefaultDeviceBackButtonHandler().setListener(listener);
+    },
+
+    /**
+     * Disable this framework to handle cordova "backbutton" event.
+     */
+    disableDeviceBackButtonHandler: function() {
+      this._getOnsenService().DeviceBackButtonHandler.disable();
+    },
+
+    /**
+     * Enable this framework to handle cordova "backbutton" event.
+     */
+    enableDeviceBackButtonHandler: function() {
+      this._getOnsenService().DeviceBackButtonHandler.enable();
+    },
+
+    /**
      * Find view object correspond dom element queried by CSS selector.
      *
      * @param {String} selector CSS selector

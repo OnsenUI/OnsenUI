@@ -35,13 +35,13 @@ limitations under the License.
         this._element = element;
 
         this._scope.$on('$destroy', this._destroy.bind(this));
-        this._backButtonHandler = $onsen.backButtonHandlerStack.push(this._onBackButton.bind(this));
+        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
 
         this.hide();
       },
 
-      getBackButtonHandler: function() {
-        return this._backButtonHandler;
+      getDeviceBackButtonHandler: function() {
+        return this._deviceBackButtonHandler;
       },
 
       /**
@@ -49,18 +49,15 @@ limitations under the License.
        */
       show: function() {
         this._element.css('display', 'table');
-        $onsen.backButtonHandlerStack.push(this._backButtonHandler);
       },
 
       _isVisible: function() {
         return this._element[0].clientWidth > 0;
       },
 
-      _onBackButton: function() {
-        if (this._isVisible()) {
-          // Do nothing and stop backbutton handler chain.
-          return true;
-        }
+      _onDeviceBackButton: function() {
+        // Do nothing and stop device-backbutton handler chain.
+        return;
       },
 
       /**
@@ -83,11 +80,10 @@ limitations under the License.
 
       _destroy: function() {
         this.emit('destroy', {page: this});
-        this._element = null;
-        this._scope = null;
 
-        this._backButtonHandler.remove();
-        this._backButtonHandler = null;
+        this._deviceBackButtonHandler.destroy();
+
+        this._element = this._scope = null;
       }
     });
     MicroEvent.mixin(ModalView);

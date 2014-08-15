@@ -52,7 +52,7 @@
     }
 
     function preLink(scope, element, attrs, controller, transclude) {
-      var page = new PageView(scope, element);
+      var page = new PageView(scope, element, attrs);
 
       $onsen.declareVarAttribute(attrs, page);
 

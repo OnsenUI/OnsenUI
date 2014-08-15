@@ -118,7 +118,7 @@ limitations under the License.
         this._doorLock = new DoorLock();
         this.pages = [];
 
-        this._backButtonHandler = $onsen.backButtonHandlerStack.push(this._onBackButton.bind(this));
+        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
         this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
@@ -129,17 +129,16 @@ limitations under the License.
           page.destroy();
         });
 
-        this._backButtonHandler.remove();
-        this._backButtonHandler = null;
+        this._deviceBackButtonHandler.destroy();
+        this._deviceBackButtonHandler = null;
       },
 
-      _onBackButton: function() {
+      _onDeviceBackButton: function(event) {
         if (this.pages.length > 1) {
           this.popPage();
-          return true;
+        } else {
+          event.callParentHandler();
         }
-
-        return false;
       },
 
       /**
@@ -309,8 +308,8 @@ limitations under the License.
         }.bind(this));
       },
 
-      getBackButtonHandler: function() {
-        return this._backButtonHandler;
+      getDeviceBackButtonHandler: function() {
+        return this._deviceBackButtonHandler;
       },
 
       /**
