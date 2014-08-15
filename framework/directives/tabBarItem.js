@@ -45,13 +45,13 @@
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
       link: function(scope, element, attrs) {
-        var radioButton = element[0].querySelector('input');
 
         var tabbarView = element.inheritedData('ons-tabbar');
-
         if (!tabbarView) {
           throw new Error('ons-tabbar-item is must be child of ons-tabbar element.');
         }
+
+        var radioButton = element[0].querySelector('input');
 
         scope.tabbarModifierTemplater = tabbarView.modifierTemplater;
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
@@ -60,10 +60,8 @@
 
         tabbarView.addTabItem(scope);
 
+        // Make this tab active.
         scope.setActive = function() {
-
-          tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
-
           element.addClass('active');
           radioButton.checked = true;
 
@@ -72,15 +70,27 @@
           }
         };
 
+        // Make this tab inactive.
         scope.setInactive = function() {
           element.removeClass('active');
+          radioButton.checked = false;
           scope.tabIcon = scope.icon;
         };
 
-        if (scope.active) {
-          scope.setActive();
-        }
+        /**
+         * @return {Boolean}
+         */
+        scope.isActive = function() {
+          return element.hasClass('active');
+        };
 
+        scope.tryToChange = function() {
+          tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
+        };
+
+        if (scope.active) {
+          tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
+        }
       }
     };
   });

@@ -13,8 +13,10 @@
 
   <script>
     ons.ready(function() {
-      tabbar.on('prechange', function() {
-        console.log('prechange');
+      tabbar.on('prechange', function(event) {
+        if (!confirm('change?')) {
+          event.cancel();
+        }
       });
 
       tabbar.on('postchange', function() {

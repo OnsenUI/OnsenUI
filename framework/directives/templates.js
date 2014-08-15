@@ -112,7 +112,7 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/tab_bar.tpl",
     "<div style=\"margin-bottom: {{tabbarHeight}}\" class=\"ons-tab-bar__content\"></div>\n" +
-    "<div ng-hide=\"hideTabs\" class=\"tab-bar ons-tab-bar__footer {{modifierTemplater('tab-bar--*')}} ons-tabbar-inner\" ng-transclude></div>\n" +
+    "<div ng-hide=\"hideTabs\" class=\"tab-bar ons-tab-bar__footer {{modifierTemplater('tab-bar--*')}} ons-tabbar-inner\"></div>\n" +
     "");
 }]);
 })();
@@ -124,8 +124,8 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/tab_bar_item.tpl",
     "<label class=\"tab-bar__item {{tabbarModifierTemplater('tab-bar--*__item')}} {{modifierTemplater('tab-bar__item--*')}}\">\n" +
-    "  <input type=\"radio\" name=\"tab-bar-{{tabbarId}}\" ng-click=\"setActive()\">\n" +
-    "  <button class=\"tab-bar__button {{tabbarModifierTemplater('tab-bar--*__button')}} {{modifierTemplater('tab-bar__button--*')}}\" ng-click=\"setActive()\">\n" +
+    "  <input type=\"radio\" name=\"tab-bar-{{tabbarId}}\" style=\"display: none\">\n" +
+    "  <button class=\"tab-bar__button {{tabbarModifierTemplater('tab-bar--*__button')}} {{modifierTemplater('tab-bar__button--*')}}\" ng-click=\"tryToChange()\">\n" +
     "    <div ng-if=\"icon != undefined\" class=\"tab-bar__icon\"><ons-icon icon=\"{{tabIcon}}\" style=\"font-size: 28px; line-height: 34px; vertical-align: top;\"></ons-icon></div>\n" +
     "    <div ng-if=\"label\" class=\"tab-bar__label\">{{label}}</div>\n" +
     "  </button>\n" +

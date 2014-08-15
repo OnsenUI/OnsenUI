@@ -22,4 +22,6 @@ v1.1.2-dev
  * ons-modal: Added modal.getDeviceBackButtonHandler().
  * ons-sliding-menu: Added slidingMenu.getDeviceBackButtonHandler().
  * ons-icon: Added [ionicons](http://ionicons.com).
+ * ons-tabbar: Added tabbar.setPage(), tabbar.getActiveTabIndex().
+ * ons-tabbar: Changed tab-change behaivior to be cancelable with event.cancel() method on 'prechange' events.
 

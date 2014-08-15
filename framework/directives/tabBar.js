@@ -26,7 +26,164 @@
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsTabbar', function($timeout, $compile, $onsen) {
+  module.factory('TabbarView', function($onsen, $compile) {
+    var TabbarView = Class.extend({
+      _tabbarId: this.tabbarId,
+
+      _tabItems: [],
+
+      init: function(scope, element, attrs) {
+        this._scope = scope;
+        this._element = element;
+        this._attrs = attrs;
+
+        this._containerElement = angular.element(element[0].querySelector('.ons-tab-bar__content'));
+        this._footerElement = angular.element(element[0].querySelector('.ons-tab-bar__footer'));
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
+      },
+
+      /**
+       * @param {Number} index
+       * @param {Object} [options]
+       * @param {Boolean} [options.withoutSetPage]
+       * @return {Boolean} success or not
+       */
+      setActiveTab: function(index, options) {
+        var previousTabItem = this._tabItems[this.getActiveTabIndex()];
+        options = options || {};
+        var selectedTabItem = this._tabItems[index];
+
+        if (!selectedTabItem) {
+          return false;
+        }
+
+        var canceled = false;
+        this.emit('prechange', {
+          index: index,
+          tabItem: selectedTabItem,
+          cancel: function() {
+            canceled = true;
+          }
+        });
+
+        if (canceled) {
+          selectedTabItem.setInactive();
+          if (previousTabItem) {
+            previousTabItem.setActive();
+          }
+          return false;
+        }
+
+        selectedTabItem.setActive();
+        
+        if (selectedTabItem.page && !options.withoutSetPage) {
+          this._setPage(selectedTabItem.page);
+        }
+
+        for (var i = 0; i < this._tabItems.length; i++) {
+          if (this._tabItems[i] != selectedTabItem) {
+            this._tabItems[i].setInactive();
+          } else {
+            this._triggerActiveTabChanged(i, selectedTabItem);
+            this.emit('postchange', {index: i, tabItem: selectedTabItem});
+          }
+        }
+        return true;
+      },
+
+      _triggerActiveTabChanged: function(index, tabItem){
+        this._scope.onActiveTabChanged({
+          $index: index,
+          $tabItem: tabItem
+        });
+      },
+
+      /**
+       * @param {Boolean} visible
+       */
+      setTabbarVisibility: function(visible) {
+        this._scope.hideTabs = !visible;
+        this._onTabbarVisibilityChanged();
+      },
+
+      _onTabbarVisibilityChanged: function() {
+        if (this._scope.hideTabs) {
+          this._scope.tabbarHeight = 0;
+        } else {
+          this._scope.tabbarHeight = this._footerElement[0].clientHeight + 'px';
+        }
+      },
+
+      /**
+       * @param {Object} tabItem
+       */
+      addTabItem: function(tabItem) {
+        this._tabItems.push(tabItem);
+      },
+
+      /**
+       * @return {Number} When active tab is not found, returns -1.
+       */
+      getActiveTabIndex: function() {
+        var tabItem;
+        for (var i = 0; i < this._tabItems.length; i++) {
+          tabItem = this._tabItems[i];
+          if (tabItem.isActive()) {
+            return i;
+          }
+        }
+
+        return -1;
+      },
+
+      /**
+       * @param {String} page
+       */
+      setPage: function(page) {
+        return this._setPage(page);
+      },
+
+      /**
+       * @param {String} page
+       */
+      _setPage: function(page) {
+        var pageScope = this._scope.$parent.$new();
+
+        $onsen.getPageHTMLAsync(page).then(function(html) {
+
+          var templateHTML = angular.element(html.trim());
+          var link = $compile(templateHTML);
+
+          this._containerElement.append(templateHTML);
+          var pageContent = link(pageScope);
+          pageScope.$evalAsync();
+
+          if (this._currentPageElement) {
+            this._currentPageElement.remove();
+            console.log("currentPageScope death");
+            this._currentPageScope.$destroy();
+          }
+
+          this._currentPageElement = pageContent;
+          this._currentPageScope = pageScope;
+        }.bind(this), function() {
+          throw new Error('Page is not found: ' + page);
+        });
+      },
+
+      _destroy: function() {
+        this.emit('destroy', {tabbar: this});
+
+        this._element = this._scope = this._attrs = null;
+      }
+    });
+    MicroEvent.mixin(TabbarView);
+
+    return TabbarView;
+  });
+
+  module.directive('onsTabbar', function($onsen, $compile, TabbarView) {
     return {
       restrict: 'E',
       replace: false,
@@ -36,128 +193,36 @@
         onActiveTabChanged: '&'
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
-      controller: function($scope, $element, $attrs) {
+      link: function(scope, element, attrs, controller, transclude) {
 
-        if ($attrs.ngController) {
+        if (attrs.ngController) {
           throw new Error('This element can\'t accept ng-controller directive.');
         }
 
-        this.modifierTemplater = $scope.modifierTemplater = $onsen.generateModifierTemplater($attrs);
+        scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+        scope.tabbarId = Date.now();
 
-        var container = angular.element($element[0].querySelector('.ons-tab-bar__content'));
-        var footer = $element[0].querySelector('.ons-tab-bar__footer');
-
-        this.tabbarId = Date.now();
-
-        $scope.selectedTabItem = {
+        scope.selectedTabItem = {
           source: ''
         };
 
-        $attrs.$observe('hideTabs', function(hide) {
-          $scope.hideTabs = hide;
+        attrs.$observe('hideTabs', function(hide) {
+          scope.hideTabs = hide;
           tabbarView._onTabbarVisibilityChanged();
         });
 
-        var tabbarView = {
-          _tabbarId: this.tabbarId,
-
-          _tabItems: [],
-
-          /**
-           * @param {Number} index
-           */
-          setActiveTab: function(index) {
-            var selectedTabItem = this._tabItems[index];
-
-            if (!selectedTabItem) {
-              return;
-            }
-
-            this.emit('prechange', {index: index, tabItem: selectedTabItem});
-            
-            if (selectedTabItem.page) {
-              this._setPage(selectedTabItem.page);
-            }
-
-            for (var i = 0; i < this._tabItems.length; i++) {
-              if (this._tabItems[i] != selectedTabItem) {
-                this._tabItems[i].setInactive();
-              } else {
-                this._triggerActiveTabChanged(i, selectedTabItem);
-                this.emit('postchange', {index: i, tabItem: selectedTabItem});
-              }
-            }
-          },
-
-          _triggerActiveTabChanged: function(index, tabItem){
-            $scope.onActiveTabChanged({
-              $index: index,
-              $tabItem: tabItem
-            });
-          },
-
-          /**
-           * @param {Boolean} visible
-           */
-          setTabbarVisibility: function(visible) {
-            $scope.hideTabs = !visible;
-            this._onTabbarVisibilityChanged();
-          },
-
-          _onTabbarVisibilityChanged: function() {
-            if ($scope.hideTabs) {
-              $scope.tabbarHeight = 0;
-            } else {
-              $scope.tabbarHeight = footer.clientHeight + 'px';
-            }
-          },
-
-          /**
-           * @param {Object} tabItem
-           */
-          addTabItem : function(tabItem) {
-            this._tabItems.push(tabItem);
-          },
-
-          /**
-           * @param {String} page
-           */
-          _setPage: function(page) {
-            if (page) {
-              $onsen.getPageHTMLAsync(page).then(function(html) {
-                var templateHTML = angular.element(html.trim());
-                var pageScope = $scope.$parent.$new();
-                var pageContent = $compile(templateHTML)(pageScope);
-                container.append(pageContent);
-
-                if (this._currentPageElement) {
-                  this._currentPageElement.remove();
-                  this._currentPageScope.$destroy();
-                }
-
-                this._currentPageElement = pageContent;
-                this._currentPageScope = pageScope;
-              }.bind(this), function() {
-                throw new Error('Page is not found: ' + page);
-              });
-            } else {
-              throw new Error('Cannot set undefined page');
-            }
-          },
-
-          _destroy: function() {
-            this.emit('destroy', {tabbar: this});
-          }
-        };
-        MicroEvent.mixin(tabbarView);
+        var tabbarView = new TabbarView(scope, element, attrs);
 
         $onsen.aliasStack.register('ons.tabbar', tabbarView);
-        $element.data('ons-tabbar', tabbarView);
-        $onsen.declareVarAttribute($attrs, tabbarView);
+        element.data('ons-tabbar', tabbarView);
+        $onsen.declareVarAttribute(attrs, tabbarView);
 
-        $scope.$watch('$destroy', function() {
-          tabbarView._destroy();
-          $element.data('ons-tabbar', undefined);
+        transclude(function(cloned) {
+          angular.element(element[0].querySelector('.ons-tabbar-inner')).append(cloned);
+        });
+
+        scope.$on('$destroy', function() {
+          element.data('ons-tabbar', undefined);
           $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
         });
       }
