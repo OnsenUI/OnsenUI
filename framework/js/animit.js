@@ -360,7 +360,11 @@ window.animit = (function(){
             element.getBoundingClientRect();
           });
 
-          setTimeout(callback, 1000 / 60);
+          if (window.requestAnimationFrame) {
+            requestAnimationFrame(callback);
+          } else {
+            setTimeout(callback, 1000 / 30);
+          }
         };
       }
 
