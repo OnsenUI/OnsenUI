@@ -54,6 +54,9 @@
  * @property isMenuOpened()
  *  [en]Returns true if the menu page is open, otherwise false.[/en]
  *  [ja]メニューページが開いている場合はtrue、そうでない場合はfalseを返します。[/ja]
+ * @property getDeviceBackButtonHandler()
+ *  [en]Retrieve the back-button handler.[/en]
+ *  [ja]ons-sliding-menuに紐付いているバックボタンハンドラを取得します。[/ja]
  * @codepen IDvFJ
  * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
  * @guide UsingSlidingMenu [en]Using sliding menu[/en][ja]スライディングメニューを使う[/ja]

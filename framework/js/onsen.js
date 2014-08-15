@@ -130,13 +130,6 @@ limitations under the License.
       ons.$compile(dom)(scope);
     },
 
-    /**
-     * @return {BackButtonHandlerStack}
-     */
-    getBackButtonHandlerStack: function() {
-      return this._getOnsenService().backButtonHandlerStack;
-    },
-
     _getOnsenService: function() {
       if (!this._onsenService) {
         throw new Error('$onsen is not loaded, wait for ons.ready().');

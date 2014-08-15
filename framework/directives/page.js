@@ -5,12 +5,33 @@
  * @description
  *  [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
  *  [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
- * @param var [en]Variable name to refer this page.[/en][ja]このページを参照するための変数名を指定します。[/ja]
- * @param modifier [en]Specify modifier name to specify custom styles.[/en][ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
- * @guide ManagingMultiplePages [en]Managing multiple pages[/en][ja]複数のページを管理する[/ja]
- * @guide Pageinitevent [en]Event for page initialization[/en][ja]ページ初期化のイベント[/ja]
- * @guide OverridingCSSstyles [en]Overriding CSS styles[/en][ja]CSSスタイルのオーバーライド[/ja]
- * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
+ * @param var
+ *  [en]Variable name to refer this page.[/en]
+ *  [ja]このページを参照するための変数名を指定します。[/ja]
+ * @param modifier
+ *  [en]Specify modifier name to specify custom styles.[/en]
+ *  [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+ * @param onDeviceBackbutton
+ *  [en]The onDeviceBackbutton attribute allows you to specify custom behavior when device's back-button is tapped.[/en]
+ *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
+ * @param ngDeviceBackbutton
+ *  [en]The ngDeviceBackbutton attribute allows you to specify custom behavior with AngularJS expresion when device's back-button is tapped.[/en]
+ *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
+ * @property getDeviceBackButtonHandler()
+ *  [en]Retrieve the back-button handler. This method may returns null.[/en]
+ *  [ja]ons-pageに紐付いているバックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
+ * @guide ManagingMultiplePages
+ *  [en]Managing multiple pages[/en]
+ *  [ja]複数のページを管理する[/ja]
+ * @guide Pageinitevent
+ *  [en]Event for page initialization[/en]
+ *  [ja]ページ初期化のイベント[/ja]
+ * @guide OverridingCSSstyles
+ *  [en]Overriding CSS styles[/en]
+ *  [ja]CSSスタイルのオーバーライド[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML
+ *  [en]Defining multiple pages in single html[/en]
+ *  [ja]複数のページを1つのHTMLに記述する[/ja]
  */
 (function() {
   'use strict';
