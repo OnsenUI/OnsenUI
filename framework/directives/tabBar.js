@@ -14,6 +14,10 @@
  * @property on(eventName,listener)
  *  [en]Add an event listener. Possible events are prechange and postchange.[/en]
  *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。[/ja]
+ * @property setActiveTab(index,[options])
+ * @property getActiveTabIndex()
+ *  [en]Get tab index on current active tab. If active tab is not found, returns -1.[/en]
+ *  [ja]現在アクティブになっているタブのインデックスを返す。現在アクティブなタブがない場合には-1を返す。[/ja]
  * @codepen pGuDL
  * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
