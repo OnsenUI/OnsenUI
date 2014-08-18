@@ -18,6 +18,7 @@ v1.1.2-dev
  * css-components: Renamed 'icon-button' css-component to 'toolbar-button'.
  * ons-navigator: Fixed [#165](https://github.com/OnsenUI/OnsenUI/issues/165).
  * ons-navigator: Added navigator.getDeviceBackButtonHandler().
+ * ons-tabbar: Added 'animation' attribute.
  * ons-page: Added page.getDeviceBackButtonHandler(), page.setDeviceBackButtonHandler().
  * ons-modal: Added modal.getDeviceBackButtonHandler().
  * ons-sliding-menu: Added slidingMenu.getDeviceBackButtonHandler().

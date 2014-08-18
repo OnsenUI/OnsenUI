@@ -326,6 +326,10 @@ limitations under the License.
           animator = NavigatorView._transitionAnimatorDict[options.animation];
         }
 
+        if (!animator && this._element.attr('animation')) {
+          animator = NavigatorView._transitionAnimatorDict[this._element.attr('animation')];
+        }
+
         if (!animator) {
           animator = NavigatorView._transitionAnimatorDict['default'];
         }
