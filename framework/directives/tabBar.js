@@ -50,7 +50,7 @@
       /**
        * @param {Number} index
        * @param {Object} [options]
-       * @param {Boolean} [options.withoutSetPage]
+       * @param {Boolean} [options.withoutLoadPage]
        * @return {Boolean} success or not
        */
       setActiveTab: function(index, options) {
@@ -81,8 +81,8 @@
 
         selectedTabItem.setActive();
         
-        if (selectedTabItem.page && !options.withoutSetPage) {
-          this._setPage(selectedTabItem.page);
+        if (selectedTabItem.page && !options.withoutLoadPage) {
+          this._loadPage(selectedTabItem.page);
         }
 
         for (var i = 0; i < this._tabItems.length; i++) {
@@ -143,15 +143,19 @@
 
       /**
        * @param {String} page
+       * @param {Object} [options]
+       * @param {Object} [options.animation]
        */
-      setPage: function(page) {
-        return this._setPage(page);
+      loadPage: function(page, options) {
+        return this._loadPage(page, options);
       },
 
       /**
        * @param {String} page
+       * @param {Object} [options]
+       * @param {Object} [options.animation]
        */
-      _setPage: function(page) {
+      _loadPage: function(page, options) {
         var pageScope = this._scope.$parent.$new();
 
         $onsen.getPageHTMLAsync(page).then(function(html) {
@@ -174,6 +178,16 @@
         }.bind(this), function() {
           throw new Error('Page is not found: ' + page);
         });
+      },
+
+      /**
+       * @param {String} page
+       * @param {jqLite} element
+       * @param {Object} [options]
+       * @param {Object} [options.animation]
+       */
+      _loadPageDOM: function(page, element, options) {
+
       },
 
       _destroy: function() {
