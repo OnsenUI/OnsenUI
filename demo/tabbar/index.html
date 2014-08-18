@@ -14,9 +14,9 @@
   <script>
     ons.ready(function() {
       tabbar.on('prechange', function(event) {
-        if (!confirm('change?')) {
+        /*if (!confirm('change?')) {
           event.cancel();
-        }
+        }*/
       });
 
       tabbar.on('postchange', function() {
@@ -30,7 +30,7 @@
 
 <body>    
   
-  <ons-tabbar var="tabbar">
+  <ons-tabbar var="tabbar" animation="fade">
     <ons-tabbar-item 
       icon="ion-home"
       label="Home"

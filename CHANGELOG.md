@@ -24,4 +24,5 @@ v1.1.2-dev
  * ons-icon: Added [ionicons](http://ionicons.com).
  * ons-tabbar: Added tabbar.loadPage(), tabbar.getActiveTabIndex().
  * ons-tabbar: Changed tab-change behaivior to be cancelable with event.cancel() method on 'prechange' events.
+ * ons-tabbar: Added 'animation' attribute and TabbarView.registerAnimator() to use tabbar animation on loading.
 

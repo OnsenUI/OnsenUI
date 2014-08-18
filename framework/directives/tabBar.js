@@ -11,6 +11,9 @@
  * @param var
  *  [en]Variable name to refer this tabbar.[/en]
  *  [ja]JavaScriptからコンポーネントにアクセスするための変数名を指定します。[/ja]
+ * @param animation
+ *  [en]Animation name. Preset values are none/fade.[/en]
+ *  [ja]ページ読み込み時のアニメーションを指定します。nodeもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Possible events are prechange and postchange.[/en]
  *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。[/ja]
@@ -30,177 +33,6 @@
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('TabbarView', function($onsen, $compile) {
-    var TabbarView = Class.extend({
-      _tabbarId: this.tabbarId,
-
-      _tabItems: [],
-
-      init: function(scope, element, attrs) {
-        this._scope = scope;
-        this._element = element;
-        this._attrs = attrs;
-
-        this._containerElement = angular.element(element[0].querySelector('.ons-tab-bar__content'));
-        this._footerElement = angular.element(element[0].querySelector('.ons-tab-bar__footer'));
-
-        this._scope.$on('$destroy', this._destroy.bind(this));
-      },
-
-      /**
-       * @param {Number} index
-       * @param {Object} [options]
-       * @param {Boolean} [options.withoutLoadPage]
-       * @return {Boolean} success or not
-       */
-      setActiveTab: function(index, options) {
-        var previousTabItem = this._tabItems[this.getActiveTabIndex()];
-        options = options || {};
-        var selectedTabItem = this._tabItems[index];
-
-        if (!selectedTabItem) {
-          return false;
-        }
-
-        var canceled = false;
-        this.emit('prechange', {
-          index: index,
-          tabItem: selectedTabItem,
-          cancel: function() {
-            canceled = true;
-          }
-        });
-
-        if (canceled) {
-          selectedTabItem.setInactive();
-          if (previousTabItem) {
-            previousTabItem.setActive();
-          }
-          return false;
-        }
-
-        selectedTabItem.setActive();
-        
-        if (selectedTabItem.page && !options.withoutLoadPage) {
-          this._loadPage(selectedTabItem.page);
-        }
-
-        for (var i = 0; i < this._tabItems.length; i++) {
-          if (this._tabItems[i] != selectedTabItem) {
-            this._tabItems[i].setInactive();
-          } else {
-            this._triggerActiveTabChanged(i, selectedTabItem);
-            this.emit('postchange', {index: i, tabItem: selectedTabItem});
-          }
-        }
-        return true;
-      },
-
-      _triggerActiveTabChanged: function(index, tabItem){
-        this._scope.onActiveTabChanged({
-          $index: index,
-          $tabItem: tabItem
-        });
-      },
-
-      /**
-       * @param {Boolean} visible
-       */
-      setTabbarVisibility: function(visible) {
-        this._scope.hideTabs = !visible;
-        this._onTabbarVisibilityChanged();
-      },
-
-      _onTabbarVisibilityChanged: function() {
-        if (this._scope.hideTabs) {
-          this._scope.tabbarHeight = 0;
-        } else {
-          this._scope.tabbarHeight = this._footerElement[0].clientHeight + 'px';
-        }
-      },
-
-      /**
-       * @param {Object} tabItem
-       */
-      addTabItem: function(tabItem) {
-        this._tabItems.push(tabItem);
-      },
-
-      /**
-       * @return {Number} When active tab is not found, returns -1.
-       */
-      getActiveTabIndex: function() {
-        var tabItem;
-        for (var i = 0; i < this._tabItems.length; i++) {
-          tabItem = this._tabItems[i];
-          if (tabItem.isActive()) {
-            return i;
-          }
-        }
-
-        return -1;
-      },
-
-      /**
-       * @param {String} page
-       * @param {Object} [options]
-       * @param {Object} [options.animation]
-       */
-      loadPage: function(page, options) {
-        return this._loadPage(page, options);
-      },
-
-      /**
-       * @param {String} page
-       * @param {Object} [options]
-       * @param {Object} [options.animation]
-       */
-      _loadPage: function(page, options) {
-        var pageScope = this._scope.$parent.$new();
-
-        $onsen.getPageHTMLAsync(page).then(function(html) {
-
-          var templateHTML = angular.element(html.trim());
-          var link = $compile(templateHTML);
-
-          this._containerElement.append(templateHTML);
-          var pageContent = link(pageScope);
-          pageScope.$evalAsync();
-
-          if (this._currentPageElement) {
-            this._currentPageElement.remove();
-            console.log("currentPageScope death");
-            this._currentPageScope.$destroy();
-          }
-
-          this._currentPageElement = pageContent;
-          this._currentPageScope = pageScope;
-        }.bind(this), function() {
-          throw new Error('Page is not found: ' + page);
-        });
-      },
-
-      /**
-       * @param {String} page
-       * @param {jqLite} element
-       * @param {Object} [options]
-       * @param {Object} [options.animation]
-       */
-      _loadPageDOM: function(page, element, options) {
-
-      },
-
-      _destroy: function() {
-        this.emit('destroy', {tabbar: this});
-
-        this._element = this._scope = this._attrs = null;
-      }
-    });
-    MicroEvent.mixin(TabbarView);
-
-    return TabbarView;
-  });
-
   module.directive('onsTabbar', function($onsen, $compile, TabbarView) {
     return {
       restrict: 'E',
@@ -218,11 +50,7 @@
         }
 
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-        scope.tabbarId = Date.now();
-
-        scope.selectedTabItem = {
-          source: ''
-        };
+        scope.selectedTabItem = {source: ''};
 
         attrs.$observe('hideTabs', function(hide) {
           scope.hideTabs = hide;
@@ -230,6 +58,8 @@
         });
 
         var tabbarView = new TabbarView(scope, element, attrs);
+
+        scope.tabbarId = tabbarView._tabbarId;
 
         $onsen.aliasStack.register('ons.tabbar', tabbarView);
         element.data('ons-tabbar', tabbarView);
