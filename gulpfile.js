@@ -188,6 +188,16 @@ gulp.task('prepare', ['html2js'], function() {
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
       .pipe(gulp.dest('app/lib/onsen/css')),
 
+    // stylus files
+    gulp.src([
+      'css-components/components-src/stylus/**/*',
+      '!css-components/components-src/stylus/custom.styl',
+      '!css-components/components-src/stylus/custom-*.styl',
+    ])
+      .pipe(gulp.dest('app/lib/onsen/stylus'))
+      .pipe(gulp.dest('build/stylus/')),
+
+
     // onsenui.css
     gulp.src([
       'framework/css/common.css',
