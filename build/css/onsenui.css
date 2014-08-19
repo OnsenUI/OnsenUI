@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.2-dev - 2014-08-13 */
+/*! onsenui - v1.1.2-dev - 2014-08-19 */
 /*
 Copyright 2013-2014 ASIAL CORPORATION
 
@@ -21,7 +21,8 @@ limitations under the License.
 
 /* cutsom elements */
 ons-page, ons-screen, ons-navigator,
-ons-split-view, ons-sliding-menu, ons-tabbar {
+ons-split-view, ons-sliding-menu, ons-tabbar,
+ons-gesture-detector {
   display: block;
 }
 

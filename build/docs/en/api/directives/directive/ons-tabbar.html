@@ -23,6 +23,12 @@
               <td>Variable name to refer this tabbar.</td>
             </tr>
             
+            <span class="anchor" id="ons-tabbar-animation"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">animation</td>
+              <td>Animation name. Preset values are none/fade.</td>
+            </tr>
+            
           </tbody>
         </table>
       </section>
@@ -39,6 +45,18 @@
           <tr ng-repeat="method in directive.methods">
             <td><code>on(eventName,listener)</code></td>
             <td>Add an event listener. Possible events are prechange and postchange.</td>
+          </tr>
+          
+          <span class="anchor" id="setActiveTab(index,[options])-setActiveTab(index,[options])"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setActiveTab(index,[options])</code></td>
+            <td></td>
+          </tr>
+          
+          <span class="anchor" id="getActiveTabIndex()-getActiveTabIndex()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>getActiveTabIndex()</code></td>
+            <td>Get tab index on current active tab. If active tab is not found, returns -1.</td>
           </tr>
           
         </tbody>

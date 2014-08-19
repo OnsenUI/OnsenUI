@@ -23,12 +23,39 @@
               <td>Specify modifier name to specify custom styles.</td>
             </tr>
             
+            <span class="anchor" id="ons-page-onDeviceBackbutton"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">onDeviceBackbutton</td>
+              <td>The onDeviceBackbutton attribute allows you to specify custom behavior when device&#39;s back-button is tapped.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-page-ngDeviceBackbutton"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">ngDeviceBackbutton</td>
+              <td>The ngDeviceBackbutton attribute allows you to specify custom behavior with AngularJS expresion when device&#39;s back-button is tapped.</td>
+            </tr>
+            
           </tbody>
         </table>
       </section>
     
 
     <span class="anchor" id="ons-page-methods"></span>
+    
+    <section>
+      <h4>Methods</h4>
+      <table>
+        <tbody>
+          
+          <span class="anchor" id="getDeviceBackButtonHandler()-getDeviceBackButtonHandler()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>getDeviceBackButtonHandler()</code></td>
+            <td>Retrieve the back-button handler. This method may returns null.</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
     
 
     
@@ -40,13 +67,17 @@
       <ul class="seealso">
         
           
-            <li class="guide"><a href="overview.html#ManagingMultiplePages">Managing multiple pages</a></li>
+            <li class="guide"><a href="overview.html#ManagingMultiplePages
+">Managing multiple pages</a></li>
           
-            <li class="guide"><a href="overview.html#Pageinitevent">Event for page initialization</a></li>
+            <li class="guide"><a href="overview.html#Pageinitevent
+">Event for page initialization</a></li>
           
-            <li class="guide"><a href="overview.html#OverridingCSSstyles">Overriding CSS styles</a></li>
+            <li class="guide"><a href="overview.html#OverridingCSSstyles
+">Overriding CSS styles</a></li>
           
-            <li class="guide"><a href="overview.html#DefiningMultiplePagesinSingleHTML">Defining multiple pages in single html</a></li>
+            <li class="guide"><a href="overview.html#DefiningMultiplePagesinSingleHTML
+">Defining multiple pages in single html</a></li>
           
         
         

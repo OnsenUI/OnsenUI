@@ -23,12 +23,39 @@
               <td>スタイル定義をカスタマイズするための名前を指定します。</td>
             </tr>
             
+            <span class="anchor" id="ons-page-onDeviceBackbutton"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">onDeviceBackbutton</td>
+              <td>デバイスのバックボタンが押された時の挙動を設定できます。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-page-ngDeviceBackbutton"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">ngDeviceBackbutton</td>
+              <td>デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。</td>
+            </tr>
+            
           </tbody>
         </table>
       </section>
     
 
     <span class="anchor" id="ons-page-methods"></span>
+    
+    <section>
+      <h4>メソッド</h4>
+      <table>
+        <tbody>
+          
+          <span class="anchor" id="getDeviceBackButtonHandler()-getDeviceBackButtonHandler()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>getDeviceBackButtonHandler()</code></td>
+            <td>ons-pageに紐付いているバックボタンハンドラを取得します。このメソッドはnullを返す場合があります。</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
     
 
     
@@ -40,13 +67,17 @@
       <ul class="seealso">
         
           
-            <li class="guide"><a href="overview.html#ManagingMultiplePages">複数のページを管理する</a></li>
+            <li class="guide"><a href="overview.html#ManagingMultiplePages
+">複数のページを管理する</a></li>
           
-            <li class="guide"><a href="overview.html#Pageinitevent">ページ初期化のイベント</a></li>
+            <li class="guide"><a href="overview.html#Pageinitevent
+">ページ初期化のイベント</a></li>
           
-            <li class="guide"><a href="overview.html#OverridingCSSstyles">CSSスタイルのオーバーライド</a></li>
+            <li class="guide"><a href="overview.html#OverridingCSSstyles
+">CSSスタイルのオーバーライド</a></li>
           
-            <li class="guide"><a href="overview.html#DefiningMultiplePagesinSingleHTML">複数のページを1つのHTMLに記述する</a></li>
+            <li class="guide"><a href="overview.html#DefiningMultiplePagesinSingleHTML
+">複数のページを1つのHTMLに記述する</a></li>
           
         
         

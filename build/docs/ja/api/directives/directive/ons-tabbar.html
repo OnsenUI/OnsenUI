@@ -23,6 +23,12 @@
               <td>JavaScriptからコンポーネントにアクセスするための変数名を指定します。</td>
             </tr>
             
+            <span class="anchor" id="ons-tabbar-animation"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">animation</td>
+              <td>ページ読み込み時のアニメーションを指定します。nodeもしくはfadeを選択できます。デフォルトはnoneです。</td>
+            </tr>
+            
           </tbody>
         </table>
       </section>
@@ -39,6 +45,18 @@
           <tr ng-repeat="method in directive.methods">
             <td><code>on(eventName,listener)</code></td>
             <td>イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。</td>
+          </tr>
+          
+          <span class="anchor" id="setActiveTab(index,[options])-setActiveTab(index,[options])"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setActiveTab(index,[options])</code></td>
+            <td></td>
+          </tr>
+          
+          <span class="anchor" id="getActiveTabIndex()-getActiveTabIndex()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>getActiveTabIndex()</code></td>
+            <td>現在アクティブになっているタブのインデックスを返す。現在アクティブなタブがない場合には-1を返す。</td>
           </tr>
           
         </tbody>

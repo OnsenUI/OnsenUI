@@ -161,10 +161,10 @@ h6 {
   -moz-transition-duration: 0.35s;
   -o-transition-duration: 0.35s;
   transition-duration: 0.35s;
-  -webkit-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
-  -moz-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
-  -o-transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
-  transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
+  -webkit-transition-timing-function: ease-out;
+  -moz-transition-timing-function: ease-out;
+  -o-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
 }
 .switch__toggle:before {
   -webkit-box-sizing: border-box;
@@ -394,7 +394,7 @@ h6 {
   white-space: nowrap;
   overflow: hidden;
 }
-@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .navigation-bar {
     border-bottom: none;
     -webkit-background-size: 100% 1px;
@@ -453,7 +453,7 @@ h6 {
   text-align: center;
   line-height: 44px;
   font-size: 17px;
-  font-weight: 400;
+  font-weight: 500;
 }
 .navigation-bar__center:first-child:last-child {
   width: 100%;
@@ -461,7 +461,7 @@ h6 {
 .navigation-bar__title {
   line-height: 44px;
   font-size: 17px;
-  font-weight: 400;
+  font-weight: 500;
   color: #1f1f21;
   margin: 0;
   padding: 0;
@@ -585,7 +585,7 @@ h6 {
   right: 0px;
   left: 0px;
 }
-@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .bottom-bar {
     border-top: none;
     -webkit-background-size: 100% 1px;
@@ -954,7 +954,7 @@ h6 {
 */
 .button--large {
   font-size: 17px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 36px;
   padding: 4px 12px;
   display: block;
@@ -1048,7 +1048,7 @@ h6 {
   -o-transition: none;
   transition: none;
   font-size: 17px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 36px;
   padding: 4px 12px;
   display: block;
@@ -1148,7 +1148,7 @@ h6 {
   color: #fff;
   text-shadow: none;
   font-size: 17px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 36px;
   padding: 4px 12px;
   width: 100%;
@@ -1437,7 +1437,7 @@ h6 {
   border-top: 1px solid #ddd;
   width: 100%;
 }
-@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .tab-bar {
     border-top: none;
     -webkit-background-size: 100% 1px;
@@ -2285,7 +2285,7 @@ h6 {
   box-sizing: border-box;
   padding: 0 0 0 10px;
   font-size: 15px;
-  font-weight: 400;
+  font-weight: 500;
   background-color: #f0eff4;
   color: #1f1f21;
   text-shadow: none;
@@ -2294,7 +2294,7 @@ h6 {
   min-height: 24px;
   line-height: 24px;
 }
-@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .list__header:first-child {
     border-top: none;
     -webkit-background-size: 100% 1px;
@@ -2338,7 +2338,7 @@ h6 {
   border-bottom: 1px solid #ddd;
   background-color: #fff;
 }
-@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .list {
     border: none;
     -webkit-background-size: 100% 1px, 100% 1px;
@@ -2394,7 +2394,7 @@ h6 {
   border-top: none;
   border-bottom: none;
 }
-@media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .list__item:not(:last-child) {
     border-bottom: none;
     -webkit-background-size: 100% 1px;
