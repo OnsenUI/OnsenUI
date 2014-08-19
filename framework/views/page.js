@@ -132,6 +132,21 @@ limitations under the License.
       },
 
       /**
+       * @param {jqLite} element
+       */
+      registerExtraElement: function(element) {
+        if (!this._extraElement) {
+          this._extraElement = angular.element('<div></div>');
+          this._extraElement.addClass('page__extra');
+          this._extraElement.css({
+            'z-index': '10001'
+          });
+          this._element.append(this._extraElement);
+        }
+        this._extraElement.append(element.remove());
+      },
+
+      /**
        * @return {Boolean}
        */
       hasToolbarElement : function() {
@@ -214,7 +229,9 @@ limitations under the License.
         this._toolbarElement = null;
         this._nullElement = null;
         this._bottomToolbarElement = null;
+        this._extraElement = null;
         this._scope = null;
+
         this._clearListener();
       }
     });

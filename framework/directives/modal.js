@@ -47,6 +47,11 @@
 
         return {
           pre: function(scope, element, attrs) {
+            var page = element.inheritedData('ons-page');
+            if (page) {
+              page.registerExtraElement(element);
+            }
+
             var modal = new ModalView(scope, element);
 
             $onsen.declareVarAttribute(attrs, modal);

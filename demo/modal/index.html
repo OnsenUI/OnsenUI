@@ -24,11 +24,12 @@
 
 <body ng-controller="PageController">
 
-  <ons-modal var="app.modal">
-    <ons-icon icon="gear" spin="true"></ons-icon> Loading...
-  </ons-modal>
-
   <ons-navigator>
+
+    <ons-modal var="app.modal">
+      <ons-icon icon="gear" spin="true"></ons-icon> Loading...
+    </ons-modal>
+
     <ons-toolbar>
       <div class="center">Modal</div>
     </ons-toolbar>
@@ -36,6 +37,7 @@
     <p style="text-align: center">
       <ons-button modifier="light" ng-click="open();">Open Modal</ons-button>
     </p>
+
   </ons-navigator>
 
 </body>
