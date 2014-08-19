@@ -21,7 +21,7 @@ MicroEvent.prototype  = {
   once : function(event, fct){
     var self = this;
     var wrapper = function() {
-      self.off(wrapper);
+      self.off(event, wrapper);
       return fct.apply(null, arguments);
     };
     this.on(event, wrapper);
