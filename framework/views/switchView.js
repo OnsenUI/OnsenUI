@@ -57,7 +57,8 @@ limitations under the License.
        * @param {Boolean}
        */
       setChecked: function(isChecked) {
-        this._checkbox[0].checked = !!isChecked;
+        this._scope.model = !!isChecked;
+        this._scope.$evalAsync();
       },
 
       /**
