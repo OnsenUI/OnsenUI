@@ -118,14 +118,14 @@ limitations under the License.
       /**
        * @param {Number} index
        * @param {Object} [options]
-       * @param {Boolean} [options.withoutLoadPage]
+       * @param {Boolean} [options.keepPage]
        * @return {Boolean} success or not
        */
       setActiveTab: function(index, options) {
         options = options || {};
         var previousTabItem = this._tabItems[this.getActiveTabIndex()];
         var selectedTabItem = this._tabItems[index];
-        var needLoad = selectedTabItem.page && !options.withoutLoadPage;
+        var needLoad = selectedTabItem.page && !options.keepPage;
 
         if (!selectedTabItem) {
           return false;
