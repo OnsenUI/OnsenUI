@@ -21,8 +21,11 @@ v1.1.2-dev
  * ons-tabbar: Added 'animation' attribute.
  * ons-page: Added page.getDeviceBackButtonHandler(), page.setDeviceBackButtonHandler().
  * ons-modal: Added modal.getDeviceBackButtonHandler().
+ * ons-modal: Fixed [#182](https://github.com/OnsenUI/OnsenUI/issues/182).
  * ons-sliding-menu: Added slidingMenu.getDeviceBackButtonHandler().
  * ons-icon: Added [ionicons](http://ionicons.com).
+ * ons-scroller: Fixed [#184](https://github.com/OnsenUI/OnsenUI/issues/184).
+ * ons-switch: Fixed [#185](https://github.com/OnsenUI/OnsenUI/issues/185).
  * ons-tabbar: Added tabbar.loadPage(), tabbar.getActiveTabIndex().
  * ons-tabbar: Changed tab-change behaivior to be cancelable with event.cancel() method on 'prechange' events.
  * ons-tabbar: Added 'animation' attribute and TabbarView.registerAnimator() to use tabbar animation on loading.
