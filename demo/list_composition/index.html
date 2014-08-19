@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">  
+
+  <script src="../../build/js/angular/angular.js"></script>    
+  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../app.js"></script>  
+  
+</head>
+
+<body>    
+  
+  <ons-navigator title="List">
+    <ons-toolbar>
+      <div class="center">List Composition</div>
+    </ons-toolbar>
+    <br>
+
+    <ons-list>
+      <ons-list-header>Checkbox</ons-list-header>
+      <ons-list-item modifier="tappable">
+        <label class="checkbox checkbox--noborder checkbox--list-item">
+          <input type="checkbox" checked>
+          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </ons-list-item>
+      <ons-list-item modifier="tappable">
+        <label class="checkbox checkbox--noborder checkbox--list-item">
+          <input type="checkbox">
+          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+          Checkbox
+        </label>
+      </ons-list-item>
+
+      <ons-list-header>Switch</ons-list-header>
+      <ons-list-item>
+        Label
+        <ons-switch modifier="list-item"></ons-switch>
+      </ons-list-item>
+
+      <ons-list-header>Radio Button</ons-list-header>
+      <ons-list-item modifier="tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="b" checked="checked">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Radio Button
+        </label>
+      </ons-list-item>
+      <ons-list-item modifier="tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="b">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Radio Button
+        </label>
+      </ons-list-item>
+
+      <ons-list-header>Text Input</ons-list-header>
+      <ons-list-item>
+        <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="name">
+      </ons-list-item>
+
+      <ons-list-header>Textarea</ons-list-header>
+      <ons-list-item>
+        <textarea class="textarea textarea--transparent" style="width:100%;height:50px;margin-top:4px;" placeholder="text message"></textarea>
+      </ons-list-item>
+    </ons-list>
+  </ons-navigator>
+
+</body>
+</html>
