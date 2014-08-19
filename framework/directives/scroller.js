@@ -20,15 +20,22 @@
         infinitScrollEnable: '='
       },
 
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/scroller.tpl',
-
       compile: function(element, attrs) {
-        element.addClass('ons-scroller');
+        var content = element.addClass('ons-scroller').children().remove();
+        
+        var wrapper = angular.element('<div></div>');
+        wrapper.addClass('ons-scroller__content ons-scroller-inner');
+        element.append(wrapper);
 
-        return function(scope, element, attrs) {
+        return function(scope, element, attrs, controller, transclude) {
           if (attrs.ngController) {
             throw new Error('"ons-scroller" can\'t accept "ng-controller" directive.');
           }
+
+          transclude(scope.$parent, function(cloned) {
+            wrapper.append(cloned);
+            wrapper = null;
+          });
 
           // inifinte scroll
           var scrollWrapper;

@@ -61,17 +61,6 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/scroller.tpl",
-    "<div class=\"ons-scroller__content ons-scroller-inner\" ng-transclude></div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("templates/sliding_menu.tpl",
     "<div class=\"onsen-sliding-menu__behind ons-sliding-menu-inner\"></div>\n" +
     "<div class=\"onsen-sliding-menu__above ons-sliding-menu-inner\"></div>\n" +
