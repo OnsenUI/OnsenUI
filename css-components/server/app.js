@@ -127,7 +127,7 @@ module.exports = function(middlewares, fn) {
     return defer.promise;
   }
 
-  function addPatternsFilesToZip(archive){
+  function addPatternsFilesToZip(archive) {
     var defer = Q.defer();
     var basePath = path.resolve(__dirname + '/../www/patterns/');
 
@@ -139,7 +139,19 @@ module.exports = function(middlewares, fn) {
     return defer.promise;
   }
 
-  function addCSSFilesToZip(variables, archive){
+  function addStylusFilesToZip(archive) {
+    var defer = Q.defer();
+    var basePath = path.resolve(__dirname + '/../components-src/stylus');
+
+    archive.bulk([
+      { expand: true, cwd: basePath, src: ['**', '!custom.styl', '!custom-*.styl'], dest: 'stylus' }
+    ]);
+
+    defer.resolve();
+    return defer.promise;
+  }
+
+  function addCSSFilesToZip(variables, archive) {
     return compiler.validate(variables)
     .then(compiler.compile)
     .then(prefix)
@@ -158,6 +170,7 @@ module.exports = function(middlewares, fn) {
 
     Q.all([
       addDownloadTemplateFilesToZip(archive),
+      addStylusFilesToZip(archive),
       addCSSFilesToZip(variableJson, archive)
     ]).then(function(){
       archive.finalize();
