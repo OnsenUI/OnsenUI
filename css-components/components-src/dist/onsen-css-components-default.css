@@ -682,7 +682,7 @@ h6 {
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid currentColor;
+  border: 0px solid currentColor;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: none;
@@ -733,10 +733,12 @@ h6 {
 }
 .button--outline:active {
   background-color: rgba(18,132,255,0.2);
+  border: 1px solid #1284ff;
   color: #1284ff;
   opacity: 1;
 }
 .button--outline:hover {
+  border: 1px solid #1284ff;
   -webkit-transition: 0;
   -moz-transition: 0;
   -o-transition: 0;
@@ -809,7 +811,7 @@ h6 {
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid currentColor;
+  border: 0px solid currentColor;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: none;
@@ -903,7 +905,7 @@ h6 {
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid currentColor;
+  border: 0px solid currentColor;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: none;
@@ -1040,7 +1042,7 @@ h6 {
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid currentColor;
+  border: 0px solid currentColor;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: none;
@@ -1134,7 +1136,7 @@ h6 {
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid currentColor;
+  border: 0px solid currentColor;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: none;
