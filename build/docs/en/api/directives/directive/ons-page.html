@@ -23,16 +23,16 @@
               <td>Specify modifier name to specify custom styles.</td>
             </tr>
             
-            <span class="anchor" id="ons-page-onDeviceBackbutton"></span>
+            <span class="anchor" id="ons-page-on-device-backbutton"></span>
             <tr ng-repeat="attribute in directive.attributes">
-              <td class="attribute-name">onDeviceBackbutton</td>
-              <td>The onDeviceBackbutton attribute allows you to specify custom behavior when device&#39;s back-button is tapped.</td>
+              <td class="attribute-name">on-device-backbutton</td>
+              <td>Allows you to specify custom behavior when the back button is pressed.</td>
             </tr>
             
-            <span class="anchor" id="ons-page-ngDeviceBackbutton"></span>
+            <span class="anchor" id="ons-page-ng-device-backbutton"></span>
             <tr ng-repeat="attribute in directive.attributes">
-              <td class="attribute-name">ngDeviceBackbutton</td>
-              <td>The ngDeviceBackbutton attribute allows you to specify custom behavior with AngularJS expresion when device&#39;s back-button is tapped.</td>
+              <td class="attribute-name">ng-device-backbutton</td>
+              <td>Allows you to specify custom behavior with AngularJS expresion when the back button is pressed.</td>
             </tr>
             
           </tbody>
@@ -50,7 +50,7 @@
           <span class="anchor" id="getDeviceBackButtonHandler()-getDeviceBackButtonHandler()"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>getDeviceBackButtonHandler()</code></td>
-            <td>Retrieve the back-button handler. This method may returns null.</td>
+            <td>Get the associated back button handler. This method may return null if no handler is assigned.</td>
           </tr>
           
         </tbody>
@@ -72,6 +72,9 @@
           
             <li class="guide"><a href="overview.html#Pageinitevent
 ">Event for page initialization</a></li>
+          
+            <li class="guide"><a href="overview.html#HandlingBackButton
+">Handling back button</a></li>
           
             <li class="guide"><a href="overview.html#OverridingCSSstyles
 ">Overriding CSS styles</a></li>

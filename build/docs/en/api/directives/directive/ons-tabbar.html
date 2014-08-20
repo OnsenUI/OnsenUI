@@ -44,19 +44,25 @@
           <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>on(eventName,listener)</code></td>
-            <td>Add an event listener. Possible events are prechange and postchange.</td>
+            <td>Add an event listener. Possible events are prechange and postchange. See the guide for more details.</td>
           </tr>
           
           <span class="anchor" id="setActiveTab(index,[options])-setActiveTab(index,[options])"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>setActiveTab(index,[options])</code></td>
-            <td></td>
+            <td>Show specified tab page. Animations and other options can be specified by the second parameter.</td>
           </tr>
           
           <span class="anchor" id="getActiveTabIndex()-getActiveTabIndex()"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>getActiveTabIndex()</code></td>
-            <td>Get tab index on current active tab. If active tab is not found, returns -1.</td>
+            <td>Returns tab index on current active tab. If active tab is not found, returns -1.</td>
+          </tr>
+          
+          <span class="anchor" id="loadPage(url)-loadPage(url)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>loadPage(url)</code></td>
+            <td>Displays a new page without changing the active index.</td>
           </tr>
           
         </tbody>
