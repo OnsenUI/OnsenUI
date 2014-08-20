@@ -15,7 +15,8 @@ v1.1.2-dev
  * core: Added ons.setDefaultDeviceBackButtonListener(), ons.disableDeviceBackButtonHandler(), ons.enableDeviceBackButtonHandler() methods.
  * css-components: Updated border styles on some components for retina display.
  * css-components: Added 'button--outline' component.
- * css-components: Renamed 'icon-button' css-component to 'toolbar-button'.
+ * css-components: Renamed 'icon-button' component to 'toolbar-button'.
+ * css-components: Added 'toolbar-button--outline' component.
  * ons-navigator: Fixed [#165](https://github.com/OnsenUI/OnsenUI/issues/165).
  * ons-navigator: Added navigator.getDeviceBackButtonHandler().
  * ons-tabbar: Added 'animation' attribute.
