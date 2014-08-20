@@ -24,6 +24,11 @@ limitations under the License.
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ons-icon--ion {
+  line-height: 0.75em;
+  vertical-align: -25%;
+}
+
 .ons-icon--spin {
   -webkit-animation: ons-icon-spin 2s infinite linear;
   -moz-animation: ons-icon-spin 2s infinite linear;

@@ -43,6 +43,18 @@
     var classList = ['ons-icon'];
     var style = {};
 
+    // icon
+    if (attrs.icon.indexOf('ion-') === 0) {
+      classList.push(attrs.icon);
+      classList.push('ons-icon--ion');
+    } else if (attrs.icon.indexOf('fa-') === 0) {
+      classList.push(attrs.icon);
+      classList.push('fa');
+    } else {
+      classList.push('fa');
+      classList.push('fa-' + attrs.icon);
+    }
+
     // size
     var size = '' + attrs.size;
     if (size.match(/^[1-5]x|lg$/)) {
@@ -51,17 +63,6 @@
       style['font-size'] = size;
     } else {
       classList.push('fa-lg');
-    }
-
-    // icon
-    if (attrs.icon.indexOf('ion-') === 0) {
-      classList.push(attrs.icon);
-    } else if (attrs.icon.indexOf('fa-') === 0) {
-      classList.push(attrs.icon);
-      classList.push('fa');
-    } else {
-      classList.push('fa');
-      classList.push('fa-' + attrs.icon);
     }
     
     // rotate
