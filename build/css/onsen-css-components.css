@@ -490,12 +490,12 @@ h6 {
     </div>
 */
 /* topdoc
-  name: Navigation Bar with Bordered Button
+  name: Navigation Bar with Outline Button
   use: Toolbar Button, Navigation Bar
   markup:
     <div class="navigation-bar">
       <div class="navigation-bar__left">
-        <span class="toolbar-button--bordered navigation-bar__line-height">
+        <span class="toolbar-button--outline navigation-bar__line-height">
           <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
         </span>
       </div>
@@ -505,7 +505,7 @@ h6 {
       </div>
 
       <div class="navigation-bar__right">
-        <span class="toolbar-button--bordered navigation-bar__line-height">Button</span>
+        <span class="toolbar-button--outline navigation-bar__line-height">Button</span>
       </div>
     </div>
 */
@@ -682,7 +682,7 @@ h6 {
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid currentColor;
+  border: 0px solid currentColor;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: none;
@@ -733,10 +733,12 @@ h6 {
 }
 .button--outline:active {
   background-color: rgba(18,132,255,0.2);
+  border: 1px solid #1284ff;
   color: #1284ff;
   opacity: 1;
 }
 .button--outline:hover {
+  border: 1px solid #1284ff;
   -webkit-transition: 0;
   -moz-transition: 0;
   -o-transition: 0;
@@ -809,7 +811,7 @@ h6 {
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid currentColor;
+  border: 0px solid currentColor;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: none;
@@ -903,7 +905,7 @@ h6 {
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid currentColor;
+  border: 0px solid currentColor;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: none;
@@ -1040,7 +1042,7 @@ h6 {
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid currentColor;
+  border: 0px solid currentColor;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: none;
@@ -1134,7 +1136,7 @@ h6 {
   background-color: #1284ff;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border: 1px solid currentColor;
+  border: 0px solid currentColor;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: none;
@@ -1693,12 +1695,12 @@ h6 {
       <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
 
-    <button class="toolbar-button toolbar-button--bordered">
+    <button class="toolbar-button toolbar-button--outline">
       <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
 */
 .toolbar-button,
-.toolbar-button--bordered,
+.toolbar-button--outline,
 .toolbar-button--quiet {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -1723,7 +1725,7 @@ h6 {
   vertical-align: middle;
 }
 .toolbar-button:active,
-.toolbar-button--bordered:active,
+.toolbar-button--outline:active,
 .toolbar-button--quiet:active {
   background-color: rgba(0,0,0,0);
   -webkit-transition: none;
@@ -1738,7 +1740,7 @@ h6 {
   pointer-events: none;
 }
 .toolbar-button:focus,
-.toolbar-button--bordered:focus,
+.toolbar-button--outline:focus,
 .toolbar-button--quiet:focus {
   outline: 0;
   -webkit-transition: none;
@@ -1747,14 +1749,14 @@ h6 {
   transition: none;
 }
 .toolbar-button:hover,
-.toolbar-button--bordered:hover,
+.toolbar-button--outline:hover,
 .toolbar-button--quiet:hover {
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
   transition: none;
 }
-.toolbar-button--bordered {
+.toolbar-button--outline {
   border: 1px solid #1284ff;
   margin: auto 8px;
   padding-left: 6px;

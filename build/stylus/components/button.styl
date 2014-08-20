@@ -81,7 +81,7 @@ button()
   vertical-align middle
   background-color var-background-color__button
   box-shadow var-box-shadow
-  border 1px solid currentColor
+  border 0px solid currentColor
   border-radius var-border-radius__button
   transition none
 
@@ -127,10 +127,12 @@ button--active()
 
 .button--outline:active
   background-color mylighten(var-background-color__button)
+  border 1px solid var-background-color__button
   color var-background-color__button
   opacity 1
 
 .button--outline:hover
+  border 1px solid var-background-color__button
   transition 0
 
 /*! topdoc

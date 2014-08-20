@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.2-dev - 2014-08-19 */
+/*! onsenui - v1.1.2 - 2014-08-20 */
 /*
 Copyright 2013-2014 ASIAL CORPORATION
 
@@ -632,6 +632,11 @@ limitations under the License.
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.ons-icon--ion {
+  line-height: 0.75em;
+  vertical-align: -25%;
 }
 
 .ons-icon--spin {

@@ -43,7 +43,7 @@ var-color--toolbar-button--quiet = var-color--toolbar-button
       <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
 
-    <button class="toolbar-button toolbar-button--bordered">
+    <button class="toolbar-button toolbar-button--outline">
       <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
 */
@@ -78,20 +78,20 @@ var-color--toolbar-button--quiet = var-color--toolbar-button
 .toolbar-button:hover
   transition none
 
-.toolbar-button--bordered
+.toolbar-button--outline
   @extend .toolbar-button
   border var-border--toolbar-button
   margin auto 8px
   padding-left 6px
   padding-right 6px
 
-.toolbar-button--bordered:hover
+.toolbar-button--outline:hover
   @extend .toolbar-button:hover
 
-.toolbar-button--bordered:active
+.toolbar-button--outline:active
   @extend .toolbar-button:active
 
-.toolbar-button--bordered:focus
+.toolbar-button--outline:focus
   @extend .toolbar-button:focus
 
 .toolbar-button--quiet
