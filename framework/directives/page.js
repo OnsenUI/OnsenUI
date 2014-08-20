@@ -11,21 +11,24 @@
  * @param modifier
  *  [en]Specify modifier name to specify custom styles.[/en]
  *  [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
- * @param onDeviceBackbutton
- *  [en]The onDeviceBackbutton attribute allows you to specify custom behavior when device's back-button is tapped.[/en]
+ * @param on-device-backbutton
+ *  [en]Allows you to specify custom behavior when the back button is pressed.[/en]
  *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
- * @param ngDeviceBackbutton
- *  [en]The ngDeviceBackbutton attribute allows you to specify custom behavior with AngularJS expresion when device's back-button is tapped.[/en]
+ * @param ng-device-backbutton
+ *  [en]Allows you to specify custom behavior with AngularJS expresion when the back button is pressed.[/en]
  *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
  * @property getDeviceBackButtonHandler()
- *  [en]Retrieve the back-button handler. This method may returns null.[/en]
- *  [ja]ons-pageに紐付いているバックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
+ *  [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
+ *  [ja]バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
  * @guide ManagingMultiplePages
  *  [en]Managing multiple pages[/en]
  *  [ja]複数のページを管理する[/ja]
  * @guide Pageinitevent
  *  [en]Event for page initialization[/en]
  *  [ja]ページ初期化のイベント[/ja]
+ * @guide HandlingBackButton
+ *  [en]Handling back button[/en]
+ *  [ja]バックボタンに対応する[/ja]
  * @guide OverridingCSSstyles
  *  [en]Overriding CSS styles[/en]
  *  [ja]CSSスタイルのオーバーライド[/ja]

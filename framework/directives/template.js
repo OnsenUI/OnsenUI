@@ -3,7 +3,11 @@
  * @id template
  * @name ons-template
  * @description
- *  [en]Template element to put html fragment.[/en]
+ *  [en]Define a separate HTML fragment and use as a template.[/en]
+ *  [ja]テンプレートとして使用するためのHTMLフラグメントを定義します。[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML
+ *  [en]Defining multiple pages in single html[/en]
+ *  [ja]複数のページを1つのHTMLに記述する[/ja]
  */
 (function(){
   'use strict';

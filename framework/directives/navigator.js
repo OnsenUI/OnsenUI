@@ -30,8 +30,8 @@
  *  [en]Retrieve the entire page stacks of the navigator.[/en]
  *  [ja]ナビゲーターの持つページスタックの一覧を取得します。[/ja]
  * @property getDeviceBackButtonHandler()
- *  [en]Retrieve the back-button handler.[/en]
- *  [ja]ons-navigatorに紐付いているバックボタンハンドラを取得します。[/ja]
+ *  [en]Retrieve the back button handler for overriding the default behavior.[/en]
+ *  [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Preset events are prepop, prepush, postpop and postpush.[/en]
  *  [ja]イベントリスナーを追加します。prepop, prepush, postpop, postpushを指定できます。[/ja]

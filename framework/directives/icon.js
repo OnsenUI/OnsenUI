@@ -3,11 +3,11 @@
  * @id icon
  * @name ons-icon
  * @description
- *    [en]Displays an icon. Can be specified from Font Awesome lineups.[/en]
- *    [ja]アイコンを表示するコンポーネントです。Font Awesomeから選択できます。[/ja]
+ *    [en]Displays an icon. Font Awesome and Ionicon icons are supported.[/en]
+ *    [ja]アイコンを表示するコンポーネントです。Font AwesomeもしくはIoniconsから選択できます。[/ja]
  * @param icon
- *    [en]The icon name. set the icon name without `fa-` prefix. eg. to use fa-home icon, set it to "home". See all icons: http://fontawesome.io/icons/.[/en]
- *    [ja]アイコン名を指定します。先頭の`fa-`の部分は取り除いてください。使用できるアイコンはこちら: http://fontawesome.io/icons/。[/ja]
+ *    [en]The icon name. `fa-` prefix for Font Awesome, `ion-` prefix for Ionicons icons. See all icons at http://fontawesome.io/icons/ and http://ionicons.com.[/en]
+ *    [ja]アイコン名を指定します。`fa-`で始まるものはFont Awesomeとして、`ion-`で始まるものはIoniconsとして扱われます。使用できるアイコンはこちら: http://fontawesome.io/icons/　および　http://ionicons.com。[/ja]
  * @param size
  *    [en]The sizes of the icon. Valid values are lg, 2x, 3x, 4x, 5x, or in pixels.[/en]
  *    [ja]アイコンのサイズを指定します。値は、lg, 2x, 3x, 4x, 5xもしくはピクセル単位で指定できます。[/ja]

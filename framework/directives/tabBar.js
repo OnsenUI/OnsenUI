@@ -15,12 +15,17 @@
  *  [en]Animation name. Preset values are none/fade.[/en]
  *  [ja]ページ読み込み時のアニメーションを指定します。nodeもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
  * @property on(eventName,listener)
- *  [en]Add an event listener. Possible events are prechange and postchange.[/en]
- *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。[/ja]
+ *  [en]Add an event listener. Possible events are prechange and postchange. See the guide for more details.[/en]
+ *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。詳細はガイドを参照してください。[/ja]
  * @property setActiveTab(index,[options])
+ *  [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
+ *  [ja]指定したインデックスのタブを表示します。アニメーションなどのオプションを指定できます。[/ja]
  * @property getActiveTabIndex()
- *  [en]Get tab index on current active tab. If active tab is not found, returns -1.[/en]
- *  [ja]現在アクティブになっているタブのインデックスを返す。現在アクティブなタブがない場合には-1を返す。[/ja]
+ *  [en]Returns tab index on current active tab. If active tab is not found, returns -1.[/en]
+ *  [ja]現在アクティブになっているタブのインデックスを返します。現在アクティブなタブがない場合には-1を返します。[/ja]
+ * @property loadPage(url)
+ *  [en]Displays a new page without changing the active index.[/en]
+ *  [ja]現在のアクティブなインデックスを変更せずに、新しいページを表示します。[/ja]
  * @codepen pGuDL
  * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
