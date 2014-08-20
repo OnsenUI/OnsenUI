@@ -9065,28 +9065,11 @@ limitations under the License.
  * @id gestureDetector
  * @name ons-gesture-detector
  * @description
- *    [en]Component to detect several gestures.[/en]
- *    [ja]ジェスチャを検知するためのコンポーネントです。[/ja]
- * @param ngDrag
- * @param ngDragleft
- * @param ngDragright
- * @param ngDragup
- * @param ngDragdown
- * @param ngHold
- * @param ngRelease
- * @param ngSwipe
- * @param ngSwipeleft
- * @param ngSwiperight
- * @param ngSwipeup
- * @param ngSwipedown
- * @param ngTap
- * @param ngDoubletap
- * @param ngTouch
- * @param ngTransform
- * @param ngPinch
- * @param ngPinchin
- * @param ngPinchout
- * @param ngRotate
+ *    [en]Component to detect finger gestures within the wrapped element. See the guide for more details.[/en]
+ *    [ja]要素内のジェスチャー操作を検知します。詳しくはガイドを参照してください。[/ja]
+ * @guide DetectingFingerGestures
+ *  [en]Detecting finger gestures[/en]
+ *  [ja]ジェスチャー操作を検知する[/ja]
  */
 (function() {
   'use strict';
@@ -9154,11 +9137,11 @@ limitations under the License.
  * @id icon
  * @name ons-icon
  * @description
- *    [en]Displays an icon. Can be specified from Font Awesome lineups.[/en]
- *    [ja]アイコンを表示するコンポーネントです。Font Awesomeから選択できます。[/ja]
+ *    [en]Displays an icon. Font Awesome and Ionicon icons are supported.[/en]
+ *    [ja]アイコンを表示するコンポーネントです。Font AwesomeもしくはIoniconsから選択できます。[/ja]
  * @param icon
- *    [en]The icon name. set the icon name without `fa-` prefix. eg. to use fa-home icon, set it to "home". See all icons: http://fontawesome.io/icons/.[/en]
- *    [ja]アイコン名を指定します。先頭の`fa-`の部分は取り除いてください。使用できるアイコンはこちら: http://fontawesome.io/icons/。[/ja]
+ *    [en]The icon name. `fa-` prefix for Font Awesome, `ion-` prefix for Ionicons icons. See all icons at http://fontawesome.io/icons/ and http://ionicons.com.[/en]
+ *    [ja]アイコン名を指定します。`fa-`で始まるものはFont Awesomeとして、`ion-`で始まるものはIoniconsとして扱われます。使用できるアイコンはこちら: http://fontawesome.io/icons/　および　http://ionicons.com。[/ja]
  * @param size
  *    [en]The sizes of the icon. Valid values are lg, 2x, 3x, 4x, 5x, or in pixels.[/en]
  *    [ja]アイコンのサイズを指定します。値は、lg, 2x, 3x, 4x, 5xもしくはピクセル単位で指定できます。[/ja]
@@ -9722,8 +9705,8 @@ limitations under the License.
  *  [en]Retrieve the entire page stacks of the navigator.[/en]
  *  [ja]ナビゲーターの持つページスタックの一覧を取得します。[/ja]
  * @property getDeviceBackButtonHandler()
- *  [en]Retrieve the back-button handler.[/en]
- *  [ja]ons-navigatorに紐付いているバックボタンハンドラを取得します。[/ja]
+ *  [en]Retrieve the back button handler for overriding the default behavior.[/en]
+ *  [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Preset events are prepop, prepush, postpop and postpush.[/en]
  *  [ja]イベントリスナーを追加します。prepop, prepush, postpop, postpushを指定できます。[/ja]
@@ -9802,21 +9785,24 @@ limitations under the License.
  * @param modifier
  *  [en]Specify modifier name to specify custom styles.[/en]
  *  [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
- * @param onDeviceBackbutton
- *  [en]The onDeviceBackbutton attribute allows you to specify custom behavior when device's back-button is tapped.[/en]
+ * @param on-device-backbutton
+ *  [en]Allows you to specify custom behavior when the back button is pressed.[/en]
  *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
- * @param ngDeviceBackbutton
- *  [en]The ngDeviceBackbutton attribute allows you to specify custom behavior with AngularJS expresion when device's back-button is tapped.[/en]
+ * @param ng-device-backbutton
+ *  [en]Allows you to specify custom behavior with AngularJS expresion when the back button is pressed.[/en]
  *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
  * @property getDeviceBackButtonHandler()
- *  [en]Retrieve the back-button handler. This method may returns null.[/en]
- *  [ja]ons-pageに紐付いているバックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
+ *  [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
+ *  [ja]バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
  * @guide ManagingMultiplePages
  *  [en]Managing multiple pages[/en]
  *  [ja]複数のページを管理する[/ja]
  * @guide Pageinitevent
  *  [en]Event for page initialization[/en]
  *  [ja]ページ初期化のイベント[/ja]
+ * @guide HandlingBackButton
+ *  [en]Handling back button[/en]
+ *  [ja]バックボタンに対応する[/ja]
  * @guide OverridingCSSstyles
  *  [en]Overriding CSS styles[/en]
  *  [ja]CSSスタイルのオーバーライド[/ja]
@@ -10704,12 +10690,17 @@ limitations under the License.
  *  [en]Animation name. Preset values are none/fade.[/en]
  *  [ja]ページ読み込み時のアニメーションを指定します。nodeもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
  * @property on(eventName,listener)
- *  [en]Add an event listener. Possible events are prechange and postchange.[/en]
- *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。[/ja]
+ *  [en]Add an event listener. Possible events are prechange and postchange. See the guide for more details.[/en]
+ *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。詳細はガイドを参照してください。[/ja]
  * @property setActiveTab(index,[options])
+ *  [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
+ *  [ja]指定したインデックスのタブを表示します。アニメーションなどのオプションを指定できます。[/ja]
  * @property getActiveTabIndex()
- *  [en]Get tab index on current active tab. If active tab is not found, returns -1.[/en]
- *  [ja]現在アクティブになっているタブのインデックスを返す。現在アクティブなタブがない場合には-1を返す。[/ja]
+ *  [en]Returns tab index on current active tab. If active tab is not found, returns -1.[/en]
+ *  [ja]現在アクティブになっているタブのインデックスを返します。現在アクティブなタブがない場合には-1を返します。[/ja]
+ * @property loadPage(url)
+ *  [en]Displays a new page without changing the active index.[/en]
+ *  [ja]現在のアクティブなインデックスを変更せずに、新しいページを表示します。[/ja]
  * @codepen pGuDL
  * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
@@ -10870,7 +10861,11 @@ limitations under the License.
  * @id template
  * @name ons-template
  * @description
- *  [en]Template element to put html fragment.[/en]
+ *  [en]Define a separate HTML fragment and use as a template.[/en]
+ *  [ja]テンプレートとして使用するためのHTMLフラグメントを定義します。[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML
+ *  [en]Defining multiple pages in single html[/en]
+ *  [ja]複数のページを1つのHTMLに記述する[/ja]
  */
 (function(){
   'use strict';

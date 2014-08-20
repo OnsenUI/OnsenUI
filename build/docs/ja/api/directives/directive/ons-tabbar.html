@@ -44,19 +44,25 @@
           <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>on(eventName,listener)</code></td>
-            <td>イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。</td>
+            <td>イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。詳細はガイドを参照してください。</td>
           </tr>
           
           <span class="anchor" id="setActiveTab(index,[options])-setActiveTab(index,[options])"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>setActiveTab(index,[options])</code></td>
-            <td></td>
+            <td>指定したインデックスのタブを表示します。アニメーションなどのオプションを指定できます。</td>
           </tr>
           
           <span class="anchor" id="getActiveTabIndex()-getActiveTabIndex()"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>getActiveTabIndex()</code></td>
-            <td>現在アクティブになっているタブのインデックスを返す。現在アクティブなタブがない場合には-1を返す。</td>
+            <td>現在アクティブになっているタブのインデックスを返します。現在アクティブなタブがない場合には-1を返します。</td>
+          </tr>
+          
+          <span class="anchor" id="loadPage(url)-loadPage(url)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>loadPage(url)</code></td>
+            <td>現在のアクティブなインデックスを変更せずに、新しいページを表示します。</td>
           </tr>
           
         </tbody>
