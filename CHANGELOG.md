@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v1.1.2-dev
+v1.1.2
 ----
 
  * Added 'ons-template' directive.
