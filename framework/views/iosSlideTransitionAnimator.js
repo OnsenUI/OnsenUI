@@ -20,9 +20,6 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  /**
-   * Fade-in screen transition.
-   */
   module.factory('IOSSlideTransitionAnimator', function(NavigatorTransitionAnimator, PageView) {
 
     /**
@@ -151,7 +148,6 @@ limitations under the License.
               .resetStyle({
                 duration: 0.1,
                 transition:
-                  'background 0.1s linear, ' +
                   'background-color 0.1s linear, ' + 
                   'border-color 0.1s linear'
               }),

@@ -138,9 +138,10 @@ window.animit = (function(){
     /**
      * Reset element's style.
      *
-     * @param {Object} options
-     * @param {Float} options.duration
-     * @param {String} options.timing
+     * @param {Object} [options]
+     * @param {Float} [options.duration]
+     * @param {String} [options.timing]
+     * @param {String} [options.transition]
      */
     resetStyle: function(options) {
       options = options || {};
@@ -290,6 +291,7 @@ window.animit = (function(){
   /**
    * @param {Object} options
    * @param {Float} [options.duration]
+   * @param {String} [options.property]
    * @param {String} [options.timing]
    */
   Animit.Transition = function(options) {
@@ -297,9 +299,11 @@ window.animit = (function(){
     this.options.duration = this.options.duration || 0;
     this.options.timing = this.options.timing || 'linear';
     this.options.css = this.options.css || {};
+    this.options.property = this.options.property || 'all';
   };
 
   Animit.Transition.prototype = {
+
     /**
      * @param {HTMLElement} element
      * @return {Function}
@@ -313,7 +317,7 @@ window.animit = (function(){
       var css = createActualCssProps(this.options.css);
 
       if (this.options.duration > 0) {
-        var transitionValue = 'all ' + this.options.duration + 's ' + this.options.timing;
+        var transitionValue = util.buildTransitionValue(this.options);
         var self = this;
 
         return function(callback) {
@@ -407,6 +411,24 @@ window.animit = (function(){
     // capitalize string
     capitalize : function(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
+    },
+
+    /**
+     * @param {Object} params
+     * @param {String} params.property
+     * @param {Float} params.duration
+     * @param {String} params.timing
+     */
+    buildTransitionValue: function(params) {
+      params.property = params.property || 'all';
+      params.duration = params.duration || 0.4;
+      params.timing = params.timing || 'linear';
+
+      var props = params.property.split(/ +/);
+
+      return props.map(function(prop) {
+        return prop + ' ' + params.duration + 's ' + params.timing;
+      }).join(', ');
     },
 
     /**
