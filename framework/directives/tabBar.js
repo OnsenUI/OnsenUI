@@ -13,7 +13,7 @@
  *  [ja]JavaScriptからコンポーネントにアクセスするための変数名を指定します。[/ja]
  * @param animation
  *  [en]Animation name. Preset values are none/fade.[/en]
- *  [ja]ページ読み込み時のアニメーションを指定します。nodeもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
+ *  [ja]ページ読み込み時のアニメーションを指定します。noneもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Possible events are prechange and postchange. See the guide for more details.[/en]
  *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。詳細はガイドを参照してください。[/ja]
