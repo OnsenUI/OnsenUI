@@ -164,7 +164,8 @@ limitations under the License.
             var hander = null;
 
             while (parent[0]) {
-              if (handler = parent.data('device-backbutton-handler')) {
+              handler = parent.data('device-backbutton-handler');
+              if (handler) {
                 return handler._callback(createEvent(parent));
               }
               parent = parent.parent();
