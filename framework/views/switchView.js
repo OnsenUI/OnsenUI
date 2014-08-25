@@ -41,8 +41,8 @@ limitations under the License.
           }
         }.bind(this));
 
-        scope.$watch('model', function(model) {
-          this.emit('change', {'switch': this, value: !!model});
+        this._checkbox.on('change', function(event) {
+          this.emit('change', {'switch': this, value: this._checkbox[0].checked, triggeredBy: 'human'});
         }.bind(this));
       },
 
@@ -57,8 +57,15 @@ limitations under the License.
        * @param {Boolean}
        */
       setChecked: function(isChecked) {
-        this._scope.model = !!isChecked;
-        this._scope.$evalAsync();
+        isChecked = !!isChecked;
+
+        if (this._checkbox[0].checked != isChecked) {
+          this._scope.model = isChecked;
+          this._checkbox[0].checked = isChecked;
+          this._scope.$evalAsync();
+
+          this.emit('change', {'switch': this, value: isChecked, triggeredBy: 'setchecked'});
+        }
       },
 
       /**
