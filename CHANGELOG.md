@@ -6,6 +6,7 @@ v1.1.3-dev
 ----
 
  * core: Changed to write warning message on loading if angular.element is not JQLite.
+ * ons-switch: Implemented [#199](https://github.com/OnsenUI/OnsenUI/issues/199). Changed switch component 'change' event to have 'triggeredBy' property.
 
 v1.1.2
 ----
