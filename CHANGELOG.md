@@ -5,6 +5,8 @@ CHANGELOG
 v1.1.3-dev
 ----
 
+ * core: Changed to write warning message on loading if angular.element is not JQLite.
+
 v1.1.2
 ----
 
