@@ -8,8 +8,8 @@
   <title>My App</title>  
   
   <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
-  <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">  
   <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="styles/onsen-css-components.css">  
 
   <script src="lib/onsen/js/angular/angular.js"></script>    
   <script src="lib/onsen/js/onsenui.js"></script>    
@@ -45,7 +45,7 @@
     </ons-page>
   </ons-navigator>
 
-  <script type="text/ons-template" id="detail.html">
+  <ons-template id="detail.html">
     <ons-page ng-controller="DetailController" style="background-color: #f9f9f9;">
       <ons-toolbar>
         <div class="left"><ons-back-button>Back</ons-back-button></div>
@@ -63,6 +63,6 @@
           </ons-row>
       </ons-list>
     </ons-page>
-  </script>
+  </ons-template>
 </body>  
 </html>
