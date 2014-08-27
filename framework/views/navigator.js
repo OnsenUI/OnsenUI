@@ -469,16 +469,15 @@ limitations under the License.
        */
       popPage: function(options) {
         options = options || {};
-
-        if (this.pages.length <= 1) {
-          throw new Error('NavigatorView\'s page stack is empty.');
-        }
-
-        if (this._emitPrePopEvent()) {
-          return;
-        }
-
+        
         this._doorLock.waitUnlock(function() {
+          if (this.pages.length <= 1) {
+            throw new Error('NavigatorView\'s page stack is empty.');
+          }
+
+          if (this._emitPrePopEvent()) {
+            return;
+          }
           this._popPage(options);
         }.bind(this));
       },
