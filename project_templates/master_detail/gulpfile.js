@@ -18,7 +18,7 @@ gulp.task('default', $.taskListing.withFilters(null, 'default'));
 ////////////////////
 gulp.task('compile-stylus', function() {
   return gulp.src([__dirname + '/www/lib/onsen/stylus/default.styl'])
-    .pipe($.plumber())
+    .pipe(plumber())
     .pipe($.stylus({errors: true, define: {mylighten: mylighten}}))
     .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2'))
     .pipe($.rename(function(path) {
@@ -44,15 +44,35 @@ gulp.task('compile-stylus', function() {
 ////////////////////
 gulp.task('jshint', function() {
   return gulp.src([__dirname + '/www/*.js', __dirname + '/www/js/**/*.js'])
+    .pipe(plumber())
     .pipe($.cached('jshint'))
     .pipe($.jshint())
+    .pipe(jshintNotify())
     .pipe($.jshint.reporter('jshint-stylish'));
 });
 
 ////////////////////
 // serve
 ////////////////////
-gulp.task('serve', ['build', 'watch-stylus', 'watch-jshint', 'browser-sync']);
+gulp.task('serve', ['build', 'browser-sync'], function() {
+  gulp.watch(
+    [__dirname + '/www/lib/onsen/stylus/**/*.styl'],
+    {debounceDelay: 400},
+    ['compile-stylus']
+  );
+
+  gulp.watch(
+    [__dirname + '/www/*.js', __dirname + '/www/js/**/*.js'],
+    {debounceDelay: 400},
+    ['jshint']
+  );
+
+  gulp.watch(
+    [__dirname + '/www/**/*.*'],
+    {debounceDelay: 400},
+    ['prepare-cordova']
+  );
+});
 
 ////////////////////
 // browser-sync
@@ -64,7 +84,6 @@ gulp.task('browser-sync', function() {
       directory: true
     },
     ghostMode: false,
-    browser: 'google chrome',
     notify: false,
     debounce: 200,
     port: 8901,
@@ -81,15 +100,29 @@ gulp.task('browser-sync', function() {
 });
 
 ////////////////////
-// watch-stylus
+// prepare-cordova
 ////////////////////
-gulp.task('watch-stylus', function() {
-  gulp.watch([__dirname + '/www/lib/onsen/stylus/**/*.styl'], ['compile-stylus']);
+gulp.task('prepare-cordova', function() {
+  return gulp.src('')
+    .pipe($.plumber())
+    .pipe($.shell(['cordova prepare'], {cwd: __dirname}));
 });
 
-////////////////////
-// watch-jshint
-////////////////////
-gulp.task('watch-jshint', function() {
-  gulp.watch([__dirname + '/www/*.js', __dirname + '/www/js/**/*.js'], ['jshint']);
-});
+// utils
+function plumber() {
+  return $.plumber({errorHandler: $.notify.onError()});
+}
+
+function jshintNotify() {
+  return $.notify(function(file) {
+    if (file.jshint.success) {
+      return false;
+    }
+
+    var errors = file.jshint.results.map(function (data) {
+      return data.error ? '(' + data.error.line + ':' + data.error.character + ') ' + data.error.reason : '';
+    }).join('\n');
+
+    return file.relative + ' (' + file.jshint.results.length + ' errors)\n' + errors;
+  });
+}
