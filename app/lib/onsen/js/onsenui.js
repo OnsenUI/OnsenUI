@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.2 - 2014-08-20 */
+/*! onsenui - v1.1.3-dev - 2014-08-28 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -6264,11 +6264,15 @@ limitations under the License.
         }
 
         // on-device-backbutton
+        /* jshint ignore:start */
         if (this._attrs.onDeviceBackbutton) {
-          with (window) with ({event: $event}) {
-            eval(this._attrs.onDeviceBackbutton);
+          with (window) {
+            with ({event: $event}) {
+              eval(this._attrs.onDeviceBackbutton);
+            }
           }
         }
+        /* jshint ignore:end */
       },
 
       /**
@@ -8365,8 +8369,8 @@ limitations under the License.
           }
         }.bind(this));
 
-        scope.$watch('model', function(model) {
-          this.emit('change', {'switch': this, value: !!model});
+        this._checkbox.on('change', function(event) {
+          this.emit('change', {'switch': this, value: this._checkbox[0].checked, triggeredBy: 'human'});
         }.bind(this));
       },
 
@@ -8381,8 +8385,15 @@ limitations under the License.
        * @param {Boolean}
        */
       setChecked: function(isChecked) {
-        this._scope.model = !!isChecked;
-        this._scope.$evalAsync();
+        isChecked = !!isChecked;
+
+        if (this._checkbox[0].checked != isChecked) {
+          this._scope.model = isChecked;
+          this._checkbox[0].checked = isChecked;
+          this._scope.$evalAsync();
+
+          this.emit('change', {'switch': this, value: isChecked, triggeredBy: 'setchecked'});
+        }
       },
 
       /**
@@ -10688,7 +10699,7 @@ limitations under the License.
  *  [ja]JavaScriptからコンポーネントにアクセスするための変数名を指定します。[/ja]
  * @param animation
  *  [en]Animation name. Preset values are none/fade.[/en]
- *  [ja]ページ読み込み時のアニメーションを指定します。nodeもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
+ *  [ja]ページ読み込み時のアニメーションを指定します。noneもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Possible events are prechange and postchange. See the guide for more details.[/en]
  *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。詳細はガイドを参照してください。[/ja]
@@ -11383,7 +11394,8 @@ limitations under the License.
             var hander = null;
 
             while (parent[0]) {
-              if (handler = parent.data('device-backbutton-handler')) {
+              handler = parent.data('device-backbutton-handler');
+              if (handler) {
                 return handler._callback(createEvent(parent));
               }
               parent = parent.parent();
@@ -12350,6 +12362,11 @@ window.animit = (function(){
       'overflowtouch',
       window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
   });
+
+  // confirm to use jqLite
+  if (window.jQuery && angular.element === window.jQuery) {
+    console.warn('Onsen UI require jqLite. Load jQuery after loading AngularJS to fix this error. jQuery may break Onsen UI behavior.');
+  }
 })();
 
 /*
