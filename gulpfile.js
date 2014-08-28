@@ -20,30 +20,14 @@ var CORDOVA_APP = false;
 ////////////////////////////////////////
 
 var gulp = require('gulp');
-var gutil = require('gulp-util');
-var shell = require('gulp-shell');
-var html2js = require('gulp-html2js');
-var concat = require('gulp-concat');
-var clean = require('gulp-clean');
-var autoprefix = require('gulp-autoprefixer');
-var zip = require('gulp-zip');
-var header = require('gulp-header');
+var $ = require('gulp-load-plugins')();
+var pkg = require('./package.json');
 var merge = require('event-stream').merge;
 var runSequence = require('run-sequence');
-var dateformat = require("dateformat");
-var pkg = require('./package.json');
-var livereload = require('gulp-livereload');
-var rename = require('gulp-rename');
-var stylus = require('gulp-stylus');
-var cssminify = require('gulp-minify-css');
-var jshint = require('gulp-jshint');
+var dateformat = require('dateformat');
 var browserSync = require('browser-sync');
-var cache = require('gulp-cached');
 var gulpIf = require('gulp-if');
 var dgeni = require('dgeni');
-var plumber = require('gulp-plumber');
-var ngAnnotate = require('gulp-ng-annotate');
-var uglify = require('gulp-uglify');
 var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
 
 ////////////////////////////////////////
@@ -65,8 +49,8 @@ gulp.task('browser-sync', function() {
 ////////////////////////////////////////
 gulp.task('html2js', function() {
   return gulp.src('framework/templates/*.tpl')
-    .pipe(html2js({base: __dirname + '/framework', outputModuleName: 'templates-main', useStrict: true}))
-    .pipe(concat('templates.js'))
+    .pipe($.html2js({base: __dirname + '/framework', outputModuleName: 'templates-main', useStrict: true}))
+    .pipe($.concat('templates.js'))
     .pipe(gulp.dest('framework/directives/'));
 });
 
@@ -80,9 +64,9 @@ gulp.task('jshint', function() {
     'framework/services/*.js',
     'framework/views/*.js'
   ])
-    .pipe(cache('js'))
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe($.cached('js'))
+    .pipe($.jshint())
+    .pipe($.jshint.reporter('jshint-stylish'));
 });
 
 ////////////////////////////////////////
@@ -93,11 +77,8 @@ gulp.task('clean', function() {
     '.tmp',
     'build',
     'app/lib/onsen/',
-    'project_templates/sliding_menu/app/lib/onsen/',
-    'project_templates/tab_bar/app/lib/onsen/',
-    'project_templates/split_view/app/lib/onsen/',
-    'project_templates/master_detail/app/lib/onsen/'
-  ], {read: false}).pipe(clean());
+    'project_templates/gen/',
+  ], {read: false}).pipe($.clean());
 });
 
 ////////////////////////////////////////
@@ -106,26 +87,26 @@ gulp.task('clean', function() {
 gulp.task('minify-js', function() {
   return merge(
     gulp.src('build/js/onsenui.js')
-      .pipe(uglify({
+      .pipe($.uglify({
         mangle: false,
         preserveComments: function(node, comment) {
           return comment.line === 1;
         }
       }))
-      .pipe(rename(function(path) {
+      .pipe($.rename(function(path) {
         path.extname = '.min.js';
       }))
       .pipe(gulp.dest('build/js/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
       .pipe(gulp.dest('app/lib/onsen/js')),
     gulp.src('build/js/onsenui_all.js')
-      .pipe(uglify({
+      .pipe($.uglify({
         mangle: false,
         preserveComments: function(node, comment) {
           return comment.line === 1;
         }
       }))
-      .pipe(rename(function(path) {
+      .pipe($.rename(function(path) {
         path.extname = '.min.js';
       }))
       .pipe(gulp.dest('build/js/'))
@@ -151,10 +132,10 @@ gulp.task('prepare', ['html2js'], function() {
       'framework/services/*.js',
       'framework/js/*.js'
     ])
-      .pipe(plumber())
-      .pipe(ngAnnotate({add: true, single_quotes: true}))
-      .pipe(concat('onsenui.js'))            
-      .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+      .pipe($.plumber())
+      .pipe($.ngAnnotate({add: true, single_quotes: true}))
+      .pipe($.concat('onsenui.js'))            
+      .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/js/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
       .pipe(gulp.dest('app/lib/onsen/js')),
@@ -171,10 +152,10 @@ gulp.task('prepare', ['html2js'], function() {
       'framework/services/*.js',
       'framework/js/*.js'
     ])
-      .pipe(plumber())
-      .pipe(ngAnnotate({add: true, single_quotes: true}))
-      .pipe(concat('onsenui_all.js'))
-      .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+      .pipe($.plumber())
+      .pipe($.ngAnnotate({add: true, single_quotes: true}))
+      .pipe($.concat('onsenui_all.js'))
+      .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/js/'))
       .pipe(gulp.dest('app/lib/onsen/js')),
 
@@ -183,7 +164,7 @@ gulp.task('prepare', ['html2js'], function() {
     gulp.src([
       'css-components/components-src/dist/onsen-css-components-default.css',
     ])
-      .pipe(rename({basename: 'onsen-css-components'}))
+      .pipe($.rename({basename: 'onsen-css-components'}))
       .pipe(gulp.dest('build/css/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
       .pipe(gulp.dest('app/lib/onsen/css')),
@@ -203,9 +184,9 @@ gulp.task('prepare', ['html2js'], function() {
       'framework/css/common.css',
       'framework/css/*.css'
     ])
-      .pipe(concat('onsenui.css'))
-      .pipe(autoprefix('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6'))
-      .pipe(header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+      .pipe($.concat('onsenui.css'))
+      .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6'))
+      .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/css/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
       .pipe(gulp.dest('app/lib/onsen/css')),
@@ -227,7 +208,7 @@ gulp.task('prepare', ['html2js'], function() {
 
     // auto prepare
     gulp.src('cordova-app/www/index.html')
-      .pipe(gulpIf(CORDOVA_APP, shell(['cd cordova-app; cordova prepare'])))
+      .pipe(gulpIf(CORDOVA_APP, $.shell(['cd cordova-app; cordova prepare'])))
   );
 
 });
@@ -235,14 +216,30 @@ gulp.task('prepare', ['html2js'], function() {
 ////////////////////////////////////////
 // prepare-project-templates
 ////////////////////////////////////////
-gulp.task('prepare-project-templates', function() {
-  // projects template
-  return gulp.src(['build/**', '!build/docs', '!build/docs/**'])
+gulp.task('prepare-project-templates', function(done) {
+  var names = [
+    'master_detail',
+    'sliding_menu',
+    'tab_bar',
+    'split_view'
+  ];
+
+  gulp.src(['build/**', '!build/docs', '!build/docs/**'])
     .pipe(gulp.dest('app/lib/onsen'))
-    .pipe(gulp.dest('project_templates/sliding_menu/www/lib/onsen/'))
-    .pipe(gulp.dest('project_templates/tab_bar/www/lib/onsen/'))
-    .pipe(gulp.dest('project_templates/split_view/www/lib/onsen/'))
-    .pipe(gulp.dest('project_templates/master_detail/www/lib/onsen/'));
+    .pipe(gulp.dest('project_templates/base/www/lib/onsen/'))
+    .on('end', function() {
+      gulp.src(['project_templates/base/**/*', '!project_templates/base/node_modules/**/*'], {dot: true})
+        .pipe(gulp.dest('project_templates/gen/master_detail'))
+        .pipe(gulp.dest('project_templates/gen/sliding_menu'))
+        .pipe(gulp.dest('project_templates/gen/tab_bar'))
+        .pipe(gulp.dest('project_templates/gen/split_view'))
+        .on('end', function() {
+          gulp.src(['project_templates/templates/**/*'])
+            .pipe(gulp.dest('project_templates/gen/'))
+            .on('end', done);
+        });
+
+    });
 });
 
 ////////////////////////////////////////
@@ -258,12 +255,13 @@ gulp.task('compress-project-templates', function() {
 
   var streams = names.map(function(name) {
     var src = [
-      __dirname + '/project_templates/' + name + '/**/*',
-      '!.DS_Store'
+      __dirname + '/project_templates/gen/' + name + '/**/*',
+      '!.DS_Store',
+      '!node_modules'
     ];
 
     var stream = gulp.src(src, {cwd : __dirname + '/project_templates', dot: true})
-      .pipe(zip('onsen_' + name + '.zip'))
+      .pipe($.zip('onsen_' + name + '.zip'))
       .pipe(gulp.dest(__dirname + '/project_templates'));
 
     return stream;
@@ -315,8 +313,7 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
 
   // for livereload
   gulp.watch([
-    'app/**/*.{js,css,html}',
-    'project_templates/**/*.{js,css,html}'
+    'app/**/*.{js,css,html}'
   ]).on('change', function(changedFile) {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({stream: true, once: true}));

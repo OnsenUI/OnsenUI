@@ -22,7 +22,6 @@
     "dgeni": "^0.3.0",
     "dgeni-packages": "^0.9.3",
     "event-stream": "~3.1.0",
-    "gulp": "^3.6.0",
     "gulp-autoprefixer": "0.0.6",
     "gulp-clean": "~0.2.4",
     "gulp-concat": "~2.2.0",
@@ -30,7 +29,6 @@
     "gulp-header": "~1.0.2",
     "gulp-html2js": "~0.1.0",
     "gulp-jshint": "^1.6.1",
-    "gulp-livereload": "~1.2.0",
     "gulp-minify-css": "^0.3.0",
     "gulp-rename": "^1.2.0",
     "gulp-stylus": "^0.1.0",
@@ -48,6 +46,8 @@
     "gulp-uglify": "^0.3.1",
     "gulp-plumber": "^0.6.4",
     "gulp-shell": "^0.2.4",
-    "topdoc": "~0.4.0"
+    "topdoc": "~0.4.0",
+    "gulp-load-plugins": "^0.6.0",
+    "gulp": "^3.8.7"
   }
 }
