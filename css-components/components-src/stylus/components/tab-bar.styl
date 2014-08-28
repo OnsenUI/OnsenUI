@@ -143,7 +143,6 @@ retina-tabbar-border(color = var-tab-bar-border-color)
   text-decoration none
   padding 0
   height var-line-height--tab-bar__button
-  line-height var-line-height--tab-bar__button
   letter-spacing var-letter-spacing
   color var-color--tab-bar__button
   text-shadow var-text-shadow
@@ -153,19 +152,21 @@ retina-tabbar-border(color = var-tab-bar-border-color)
   border-top var-border--tab-bar__button
   width 100%
   font-weight var-font-weight
-  @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) 
+  @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5)
     border-top none
 
-.tab-bar__button > .tab-bar__icon
+.tab-bar__icon
   font-size 24px
   padding 0
   margin 0
   line-height 32px
   display block
   height 32px
+  line-height var-line-height--tab-bar__button
 
 .tab-bar__label
   reset-font()
+  line-height var-line-height--tab-bar__button
 
 .tab-bar__icon + .tab-bar__label
   font-size 10px
@@ -182,14 +183,12 @@ retina-tabbar-border(color = var-tab-bar-border-color)
 .tab-bar__button
   color var-color--tab-bar__button
 
-.tab-bar__button:active,
 :checked + .tab-bar__button
   color var-color--tab-bar--active
   background-color transparent
   box-shadow var-box-shadow--tab-bar--active
   border-top var-border-top--tab-bar--active
 
-.tab-bar__button:active > .tab-bar__icon,
 :checked + .tab-bar__button > .tab-bar__icon
   color var-color--tab-bar--active
 

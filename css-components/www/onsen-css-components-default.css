@@ -1516,7 +1516,6 @@ h6 {
   text-decoration: none;
   padding: 0;
   height: 49px;
-  line-height: 49px;
   letter-spacing: 0;
   color: #888;
   text-shadow: 0 1px none;
@@ -1533,13 +1532,14 @@ h6 {
     border-top: none;
   }
 }
-.tab-bar__button > .tab-bar__icon {
+.tab-bar__icon {
   font-size: 24px;
   padding: 0;
   margin: 0;
   line-height: 32px;
   display: block;
   height: 32px;
+  line-height: 49px;
 }
 .tab-bar__label {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
@@ -1563,7 +1563,6 @@ h6 {
 .tab-bar__button {
   color: #888;
 }
-.tab-bar__button:active,
 :checked + .tab-bar__button {
   color: #1284ff;
   background-color: transparent;
@@ -1571,7 +1570,6 @@ h6 {
   box-shadow: none;
   border-top: none;
 }
-.tab-bar__button:active > .tab-bar__icon,
 :checked + .tab-bar__button > .tab-bar__icon {
   color: #1284ff;
 }
