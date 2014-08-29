@@ -110,9 +110,20 @@ limitations under the License.
         this._tabItems = [];
 
         this._containerElement = angular.element(element[0].querySelector('.ons-tab-bar__content'));
-        this._footerElement = angular.element(element[0].querySelector('.ons-tab-bar__footer'));
+        this._tabbarElement = angular.element(element[0].querySelector('.ons-tab-bar__footer'));
 
         this._scope.$on('$destroy', this._destroy.bind(this));
+
+        if (this._hasTopTabbar()) {
+          setImmediate(function() {
+            this._containerElement.addClass('tab-bar-content--bottom');
+            this._tabbarElement.addClass('tab-bar--top');
+          }.bind(this));
+        }
+      },
+
+      _hasTopTabbar: function() {
+        return this._attrs.position === 'top';
       },
 
       /**
@@ -189,10 +200,14 @@ limitations under the License.
       },
 
       _onTabbarVisibilityChanged: function() {
-        if (this._scope.hideTabs) {
-          this._scope.tabbarHeight = 0;
+        if (this._hasTopTabbar()) {
+          console.log('unimplemented');
         } else {
-          this._scope.tabbarHeight = this._footerElement[0].clientHeight + 'px';
+          if (this._scope.hideTabs) {
+            this._tabbarElement.css('bottom', '0px');
+          } else {
+            this._tabbarElement.css('bottom', '');
+          }
         }
       },
 

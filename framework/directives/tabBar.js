@@ -14,6 +14,9 @@
  * @param animation
  *  [en]Animation name. Preset values are none/fade.[/en]
  *  [ja]ページ読み込み時のアニメーションを指定します。noneもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
+ * @param position
+ *  [en]Tabbar's position. Preset values are bottom/top.[/en]
+ *  [ja]タブバーの位置を指定します。bottomもしくはtopを選択できます。デフォルトはbottomです。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Possible events are prechange and postchange. See the guide for more details.[/en]
  *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。詳細はガイドを参照してください。[/ja]
