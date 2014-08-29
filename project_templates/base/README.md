@@ -27,6 +27,10 @@ You should see running app on browser and you can start to develop your app with
 
     README.md     --> this file
     gulpfile.js   --> gulp tasks definition
+    config.xml    --> cordova's config.xml
+    package.json
+    .jshintrc
+    .gitignore
     www/          --> all of the files for app
       index.html  --> app entry point
       js/
