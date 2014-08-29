@@ -1,23 +1,24 @@
-Onsen UI Project Template
+Onsen UI Quick Startup Guide
 ====
 
-Projecte template built for Onsen UI.
+This document describes the minimum information required to develop an app using Onsen UI.
 
 ## Requirement
 
  * Node.js - [Install Node.js](http://nodejs.org)
+ * Cordova - Install by `npm install cordova`
 
-## Instructions
+## Development Instructions
 
 1. Install dependencies
 
     $ npm install
 
-2. Install gulp globally
+2. Install Gulp globally
 
     $ npm install -g gulp
 
-3. Run "gulp serve" command to run an web server
+3. Run `gulp serve` and run the web server
 
     $ gulp serve
 
@@ -25,28 +26,23 @@ You should see running app on browser and you can start to develop your app with
 
 ### Directory Layout
 
-    README.md     --> this file
-    gulpfile.js   --> gulp tasks definition
-    config.xml    --> cordova's config.xml
-    package.json
-    .jshintrc
-    .gitignore
-    www/          --> all of the files for app
-      index.html  --> app entry point
+    README.md     --> This file
+    gulpfile.js   --> Gulp tasks definition
+    www/          --> Asset files for app
+      index.html  --> App entry point
       js/
       styles/
       lib/onsen/
-        stylus/   --> stylus files for onsen-css-components.css
-        js/       --> js files for Onsen UI
-        css/      --> css files for Onsen UI
-    platforms/    --> cordova platform directory
-    plugins/      --> cordova plugin directory
-    merges/       --> cordova merge directory
-    hooks/        --> cordova hook directory
+        stylus/   --> Stylus files for onsen-css-components.css
+        js/       --> JS files for Onsen UI
+        css/      --> CSS files for Onsen UI
+    platforms/    --> Cordova platform directory
+    plugins/      --> Cordova plugin directory
+    merges/       --> Cordova merge directory
+    hooks/        --> Cordova hook directory
 
-## Tasks
+## Gulp Tasks
 
- * gulp serve - Running the app for development
- * gulp build - Build several files for project
- * gulp jshint - Generate [jshint](https://github.com/jshint/jshint) report
-
+ * `gulp serve` - Running the app for development.
+ * `gulp build` - Build several files for project.
+ * `gulp jshint` - Generate [jshint](https://github.com/jshint/jshint) report.
