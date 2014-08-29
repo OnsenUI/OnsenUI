@@ -98,12 +98,12 @@ var-border-top--tab-bar = 1px solid var-tab-bar-border-color
     </div>
 */
 
-retina-tabbar-border(color = var-tab-bar-border-color)
+retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   +retina-query()
     border-top none
     background-size 100% 1px
     background-repeat no-repeat
-    background-position top
+    background-position border-position
     background-image linear-gradient(180deg, color, color 50%, transparent 50%)
 
 .tab-bar
@@ -152,7 +152,8 @@ retina-tabbar-border(color = var-tab-bar-border-color)
   border-top var-border--tab-bar__button
   width 100%
   font-weight var-font-weight
-  @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5)
+  line-height var-line-height--tab-bar__button
+  +retina-query()
     border-top none
 
 .tab-bar__icon
@@ -162,11 +163,9 @@ retina-tabbar-border(color = var-tab-bar-border-color)
   line-height 32px
   display block
   height 32px
-  line-height var-line-height--tab-bar__button
 
 .tab-bar__label
   reset-font()
-  line-height var-line-height--tab-bar__button
 
 .tab-bar__icon + .tab-bar__label
   font-size 10px
@@ -200,6 +199,14 @@ retina-tabbar-border(color = var-tab-bar-border-color)
   border-top var-border-top--tab-bar--focus
   box-shadow var-box-shadow--tab-bar__button--focus
   outline 0
+
+.tab-bar-content
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom var-height--tab-bar
+  z-index 0
 
 /*! topdoc
   name: Icon Only Tab Bar
@@ -247,3 +254,51 @@ retina-tabbar-border(color = var-tab-bar-border-color)
     </div>
 */
 
+/*! topdoc
+  name: Top Tab Bar
+  class: tab-bar--top
+  use: Tab Bar
+  markup:
+    <div class="tab-bar tab-bar--top">
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a" checked="checked">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-stop"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-record"></i>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-star"></i>
+        </button>
+      </label>
+    </div>
+*/
+
+.tab-bar--top
+  position relative
+  top 0px
+  left 0px
+  right 0px
+  bottom auto
+  border-top none
+  border-bottom var-border-top--tab-bar
+  retina-tabbar-border(color = var-tab-bar-border-color, border-position = bottom)
+
+.tab-bar--toolbar-top
+  top 44px
+
+.tab-bar-content--bottom
+  top var-height--tab-bar
+  left 0
+  right 0
+  bottom 0
+  z-index 0
