@@ -40,7 +40,8 @@ gulp.task('browser-sync', function() {
       directory: true
     },
     ghostMode: false,
-    debounce: 200
+    debounce: 200,
+    notify: false
   });
 });
 
