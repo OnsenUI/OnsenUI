@@ -31,19 +31,22 @@
 <body>    
   
   <ons-tabbar var="tabbar" animation="fade">
-    <ons-tabbar-item 
-      icon="ion-home"
-      label="Home"
-      page="page1.html"
-      active="true"></ons-tabbar-item> 
-    <ons-tabbar-item 
+    <ons-tab page="page1.html" active="true">
+      <div ons-tab-active>
+        HOME
+      </div>
+      <div ons-tab-inactive>
+        home
+      </div>
+    </ons-tab> 
+    <ons-tab
       icon="ion-chatbox-working"
       label="Comments"      
-      page="page2.html"></ons-tabbar-item> 
-    <ons-tabbar-item 
+      page="page2.html"></ons-tab>
+    <ons-tab
       icon="ion-ios7-cog"
       label="Settings"
-      page="page3.html"></ons-tabbar-item> 
+      page="page3.html"></ons-tab>
   </ons-tabbar>
 
   <script type="text/ons-template" id="page3.html">
