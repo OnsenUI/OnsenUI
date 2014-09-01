@@ -109,7 +109,7 @@ limitations under the License.
         this._tabbarId = Date.now();
         this._tabItems = [];
 
-        this._containerElement = angular.element(element[0].querySelector('.ons-tab-bar__content'));
+        this._contentElement = angular.element(element[0].querySelector('.ons-tab-bar__content'));
         this._tabbarElement = angular.element(element[0].querySelector('.ons-tab-bar__footer'));
 
         this._scope.$on('$destroy', this._destroy.bind(this));
@@ -117,7 +117,7 @@ limitations under the License.
 
         if (this._hasTopTabbar()) {
           setImmediate(function() {
-            this._containerElement.addClass('tab-bar--top__content');
+            this._contentElement.addClass('tab-bar--top__content');
             this._tabbarElement.addClass('tab-bar--top');
           }.bind(this));
 
@@ -208,7 +208,11 @@ limitations under the License.
 
       _onTabbarVisibilityChanged: function() {
         if (this._hasTopTabbar()) {
-          console.log('unimplemented');
+          if (this._scope.hideTabs) {
+            this._contentElement.css('top', '0px');
+          } else {
+            this._contentElement.css('top', '');
+          }
         } else {
           if (this._scope.hideTabs) {
             this._tabbarElement.css('bottom', '0px');
@@ -278,7 +282,7 @@ limitations under the License.
         var pageScope = this._scope.$parent.$new();
         var link = $compile(element);
 
-        this._containerElement.append(element);
+        this._contentElement.append(element);
         var pageContent = link(pageScope);
         pageScope.$evalAsync();
 

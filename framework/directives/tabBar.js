@@ -47,7 +47,7 @@
       replace: false,
       transclude: true,
       scope: {
-        hide: '@',
+        hideTabs: '=',
         onActiveTabChanged: '&'
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
@@ -60,9 +60,8 @@
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         scope.selectedTabItem = {source: ''};
 
-        attrs.$observe('hideTabs', function(hide) {
-          scope.hideTabs = hide;
-          tabbarView._onTabbarVisibilityChanged();
+        scope.$watch('hideTabs', function(hide) {
+          tabbarView.setTabbarVisibility(!hide);
         });
 
         var tabbarView = new TabbarView(scope, element, attrs);

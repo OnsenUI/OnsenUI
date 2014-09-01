@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../build/js/angular/angular.js"></script>    
+    <script src="../../../build/js/onsenui.js"></script>    
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      ons.bootstrap();
+    </script>
+  </head>
+  <body>
+
+    <ons-tabbar position="top" hide-tabs="$root.hide">
+      <ons-tabbar-item icon="ion-stop" label="menu" page="hoge.html" active="true"></ons-tabbar-item>
+    </ons-tabbar>
+
+    <script type="text/ons-template" id="hoge.html">
+      <p style="text-align: center">
+        <ons-button modifier="light" ng-click="$root.hide = !$root.hide">Change Tabbar Visibility</ons-button>
+        <div style="text-align: center">
+          <p>a</p>
+          <p>b</p>
+          <p>c</p>
+          <p>d</p>
+          <p>e</p>
+          <p>f</p>
+          <p>g</p>
+          <p>h</p>
+          <p>i</p>
+          <p>j</p>
+          <p>k</p>
+          <p>l</p>
+          <p>m</p>
+          <p>n</p>
+          <p>last</p>
+        </div>
+      </p>
+    </script>
+
+
+  </body>
+</html>
