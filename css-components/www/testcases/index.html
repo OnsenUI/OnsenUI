@@ -49,6 +49,7 @@
               <li><a href="#tab-bar">Tab Bar</a></li>
               <li><a href="#icon-only-tab-bar">Icon Only Tab Bar</a></li>
               <li><a href="#top-tab-bar">Top Tab Bar</a></li>
+              <li><a href="#bordered-top-tab-bar">Bordered Top Tab Bar</a></li>
               <li><a href="#notification">Notification</a></li>
               <li><a href="#toolbar-button">Toolbar Button</a></li>
               <li><a href="#checkbox">Checkbox</a></li>
@@ -458,13 +459,30 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 120px;" class="markup">
-                <div style="width: 100%; height: 100%; position:absolute"><div class="tab-bar tab-bar--top">  <label class="tab-bar__item">    <input type="radio" name="tab-bar-a" checked="checked">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-stop"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-a">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-record"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-a">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-star"></i>    </button>  </label></div></div>
+                <div style="width: 100%; height: 100%; position:absolute"><div class="tab-bar tab-bar--top">  <label class="tab-bar__item">    <input type="radio" name="top-tab-bar-a" checked="checked">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-stop"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="top-tab-bar-a">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-record"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="top-tab-bar-a">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-star"></i>    </button>  </label></div></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;div class=&quot;tab-bar tab-bar--top&quot;&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon ion-stop&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon ion-record&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;tab-bar-a&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon ion-star&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;tab-bar tab-bar--top&quot;&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;top-tab-bar-a&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon ion-stop&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;top-tab-bar-a&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon ion-record&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;top-tab-bar-a&quot;&gt;    &lt;button class=&quot;tab-bar__button&quot;&gt;      &lt;i class=&quot;tab-bar__icon ion-star&quot;&gt;&lt;/i&gt;    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="bordered-top-tab-bar" class="component">
+            <header>
+              <h2>Bordered Top Tab Bar</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 120px;" class="markup">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="tab-bar tab-bar--top tab-bar--top-border">  <label class="tab-bar__item tab-bar--top-border__item">    <input type="radio" name="top-tab-bar-b" checked="checked">    <button class="tab-bar__button tab-bar--top-border__button">      Home    </button>  </label>  <label class="tab-bar__item tab-bar--top-border__item">    <input type="radio" name="top-tab-bar-b">    <button class="tab-bar__button tab-bar--top-border__button">      Comments    </button>  </label>  <label class="tab-bar__item tab-bar--top-border__item">    <input type="radio" name="top-tab-bar-b">    <button class="tab-bar__button tab-bar--top-border__button">      Activity    </button>  </label></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;tab-bar tab-bar--top tab-bar--top-border&quot;&gt;  &lt;label class=&quot;tab-bar__item tab-bar--top-border__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;top-tab-bar-b&quot; checked=&quot;checked&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--top-border__button&quot;&gt;      Home    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item tab-bar--top-border__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;top-tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--top-border__button&quot;&gt;      Comments    &lt;/button&gt;  &lt;/label&gt;  &lt;label class=&quot;tab-bar__item tab-bar--top-border__item&quot;&gt;    &lt;input type=&quot;radio&quot; name=&quot;top-tab-bar-b&quot;&gt;    &lt;button class=&quot;tab-bar__button tab-bar--top-border__button&quot;&gt;      Activity    &lt;/button&gt;  &lt;/label&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
