@@ -200,7 +200,7 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   box-shadow var-box-shadow--tab-bar__button--focus
   outline 0
 
-.tab-bar-content
+.tab-bar__content
   position absolute
   top 0
   left 0
@@ -261,21 +261,21 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   markup:
     <div class="tab-bar tab-bar--top">
       <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-a" checked="checked">
+        <input type="radio" name="top-tab-bar-a" checked="checked">
         <button class="tab-bar__button">
           <i class="tab-bar__icon ion-stop"></i>
         </button>
       </label>
 
       <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-a">
+        <input type="radio" name="top-tab-bar-a">
         <button class="tab-bar__button">
           <i class="tab-bar__icon ion-record"></i>
         </button>
       </label>
 
       <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-a">
+        <input type="radio" name="top-tab-bar-a">
         <button class="tab-bar__button">
           <i class="tab-bar__icon ion-star"></i>
         </button>
@@ -293,12 +293,47 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   border-bottom var-border-top--tab-bar
   retina-tabbar-border(color = var-tab-bar-border-color, border-position = bottom)
 
-.tab-bar--toolbar-top
-  top 44px
-
-.tab-bar-content--bottom
+.tab-bar--top__content
   top var-height--tab-bar
   left 0
   right 0
   bottom 0
   z-index 0
+
+/*! topdoc
+  name: Bordered Top Tab Bar
+  class: tab-bar--top-border
+  use: Top Tab Bar
+  markup:
+    <div class="tab-bar tab-bar--top tab-bar--top-border">
+      <label class="tab-bar__item tab-bar--top-border__item">
+        <input type="radio" name="top-tab-bar-b" checked="checked">
+        <button class="tab-bar__button tab-bar--top-border__button">
+          Home
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--top-border__item">
+        <input type="radio" name="top-tab-bar-b">
+        <button class="tab-bar__button tab-bar--top-border__button">
+          Comments
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--top-border__item">
+        <input type="radio" name="top-tab-bar-b">
+        <button class="tab-bar__button tab-bar--top-border__button">
+          Activity
+        </button>
+      </label>
+    </div>
+*/
+
+.tab-bar--top-border__button
+  background-color transparent
+  border-bottom 4px solid transparent
+
+:checked + .tab-bar--top-border__button
+  background-color transparent
+  border-bottom 4px solid var-color--tab-bar--active
+
