@@ -25,7 +25,8 @@ ons-gesture-detector {
   display: block;
 }
 
-ons-navigator {
+ons-navigator,
+ons-tabbar {
   position: absolute;
   top: 0;
   left: 0;

@@ -113,7 +113,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/tab_bar.tpl",
-    "<div class=\"ons-tab-bar__content tab-bar-content\"></div>\n" +
+    "<div class=\"ons-tab-bar__content tab-bar__content\"></div>\n" +
     "<div ng-hide=\"hideTabs\" class=\"tab-bar ons-tab-bar__footer {{modifierTemplater('tab-bar--*')}} ons-tabbar-inner\"></div>\n" +
     "");
 }]);

@@ -21,18 +21,15 @@
     <ons-toolbar>
       <div class="center">Title</div>
     </ons-toolbar>
-    <ons-tabbar position="top" var="tabbar">
-      <ons-tab page="page1.html" icon="ion-home" active="true"></ons-tab> 
-      <ons-tab icon="ion-chatbox-working" page="page2.html"></ons-tab>
-      <ons-tab icon="ion-ios7-cog" page="page3.html"></ons-tab>
+    <ons-tabbar position="top" var="tabbar" modifier="top-border">
+      <ons-tab page="page.html" icon="ion-home" active="true"></ons-tab> 
+      <ons-tab icon="ion-chatbox-working" page="page.html"></ons-tab>
+      <ons-tab icon="ion-ios7-cog" page="page.html"></ons-tab>
     </ons-tabbar>
   </ons-page>
 
 
-  <ons-template type="text/ons-template" id="page1.html">
-    <ons-toolbar modifier="transparent">
-      <div class="center">Page1</div>
-    </ons-toolbar>
+  <ons-template type="text/ons-template" id="page.html">
     <div style="text-align: center">
       <p>1</p>
       <p>2</p>
@@ -42,18 +39,6 @@
       <br><br><br><br><br><br><br><br><br><br><br>
       <p>last</p>
     </div>
-  </ons-template>
-
-  <ons-template type="text/ons-template" id="page2.html">
-    <ons-toolbar modifier="transparent">
-      <div class="center">Page2</div>
-    </ons-toolbar>
-  </ons-template>
-
-  <ons-template type="text/ons-template" id="page3.html">
-    <ons-toolbar modifier="transparent">
-      <div class="center">Page2</div>
-    </ons-toolbar>
   </ons-template>
  
 </body>

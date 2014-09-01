@@ -114,11 +114,18 @@ limitations under the License.
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
+
         if (this._hasTopTabbar()) {
           setImmediate(function() {
-            this._containerElement.addClass('tab-bar-content--bottom');
+            this._containerElement.addClass('tab-bar--top__content');
             this._tabbarElement.addClass('tab-bar--top');
           }.bind(this));
+
+          var page = ons.findParentComponentUntil('ons-page', this._element[0]);
+          if (page) {
+            window.hoge = page.getContentElement();
+            this._element.css('top', window.getComputedStyle(page.getContentElement(), null).getPropertyValue('padding-top'));
+          }
         }
       },
 
