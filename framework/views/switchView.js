@@ -42,7 +42,7 @@ limitations under the License.
         }.bind(this));
 
         this._checkbox.on('change', function(event) {
-          this.emit('change', {'switch': this, value: this._checkbox[0].checked, triggeredBy: 'human'});
+          this.emit('change', {'switch': this, value: this._checkbox[0].checked, isInteractive: true});
         }.bind(this));
       },
 
@@ -64,7 +64,7 @@ limitations under the License.
           this._checkbox[0].checked = isChecked;
           this._scope.$evalAsync();
 
-          this.emit('change', {'switch': this, value: isChecked, triggeredBy: 'setchecked'});
+          this.emit('change', {'switch': this, value: isChecked, isInteractive: false});
         }
       },
 

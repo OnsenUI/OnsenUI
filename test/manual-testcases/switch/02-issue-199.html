@@ -13,13 +13,13 @@
 
       ons.ready(function() {
         mySwitch.once('change', function(event) {
-          alert(event.triggeredBy == 'setchecked' && event.value ? 'OK 1' : 'NG 1');
+          alert(!event.isInteractive && event.value ? 'OK 1' : 'NG 1');
 
           mySwitch.once('change', function(event) {
-            alert(event.triggeredBy == 'setchecked' && !event.value ? 'OK 2' : 'NG 2');
+            alert(!event.isInteractive && !event.value ? 'OK 2' : 'NG 2');
 
             mySwitch.once('change', function(event) {
-              alert(event.triggeredBy == 'human' && event.value ? 'OK 3' : 'NG 3');
+              alert(event.isInteractive && event.value ? 'OK 3' : 'NG 3');
             });
           });
         });
