@@ -118,7 +118,7 @@
       compile: function(element) {
         var children = element.children().remove();
 
-        if ($onsen.isWebView() && $onsen.isIOS7Above()) {
+        if ($onsen.shouldFillStatusBar()) {
           // Adjustments for IOS7
           var fill = angular.element(document.createElement('div'));
           fill.addClass('page__status-bar-fill');

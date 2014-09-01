@@ -22,160 +22,10 @@ limitations under the License.
   angular.module('onsen.directives', ['onsen']); // for BC
 
   // JS Global facade for Onsen UI.
-  var ons = window.ons = {
-
-    _readyLock: new DoorLock(),
-
-    _onsenService: null,
-
-    _unlockersDict: {},
-
-    /**
-     * Bootstrap this document as a Onsen UI application.
-     *
-     * If you want use your AngularJS module, use "ng-app" directive and "angular.module()" manually.
-     *
-     * @param {Array} [deps] dependency modules
-     */
-    bootstrap : function(deps) {
-      deps = ['onsen'].concat(angular.isArray(deps) ? deps : []);
-
-      var doc = window.document;
-      if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
-        doc.addEventListener('DOMContentLoaded', function() {
-          angular.bootstrap(doc.documentElement, deps);
-        }, false);
-      } else if (doc.documentElement) {
-        angular.bootstrap(doc.documentElement, deps);
-      } else {
-        throw new Error('Invalid state');
-      }
-    },
-
-    /**
-     * @param {String} [name]
-     * @param {Object/jqLite/HTMLElement} dom $event object or jqLite object or HTMLElement object.
-     * @return {Object}
-     */
-    findParentComponentUntil: function(name, dom) {
-      var element;
-      if (dom instanceof HTMLElement) {
-        element = angular.element(dom);
-      } else if (dom instanceof angular.element) {
-        element = dom;
-      } else if (dom.target) {
-        element = angular.element(dom.target);
-      }
-
-      return element.inheritedData(name);
-    },
-
-    /**
-     * @param {Function} listener
-     */
-    setDefaultDeviceBackButtonListener: function(listener) {
-      this._getOnsenService().getDefaultDeviceBackButtonHandler().setListener(listener);
-    },
-
-    /**
-     * Disable this framework to handle cordova "backbutton" event.
-     */
-    disableDeviceBackButtonHandler: function() {
-      this._getOnsenService().DeviceBackButtonHandler.disable();
-    },
-
-    /**
-     * Enable this framework to handle cordova "backbutton" event.
-     */
-    enableDeviceBackButtonHandler: function() {
-      this._getOnsenService().DeviceBackButtonHandler.enable();
-    },
-
-    /**
-     * Find view object correspond dom element queried by CSS selector.
-     *
-     * @param {String} selector CSS selector
-     * @param {HTMLElement} [dom]
-     * @return {Object/void}
-     */
-    findComponent: function(selector, dom) {
-      var target = (dom ? dom : document).querySelector(selector);
-      return target ? angular.element(target).data(target.nodeName.toLowerCase()) || null : null;
-    },
-
-    /**
-     * @return {Boolean}
-     */
-    isReady: function() {
-      return !ons._readyLock.isLocked();
-    },
-
-    /**
-     * @param {HTMLElement} dom
-     */
-    compile : function(dom) {
-      if (!ons.$compile) {
-        throw new Error('ons.$compile() is not ready. Wait for initialization with ons.ready().');
-      }
-
-      if (!(dom instanceof HTMLElement)) {
-        throw new Error('First argument must be an instance of HTMLElement.');
-      }
-
-      var scope = angular.element(dom).scope();
-      if (!scope) {
-        throw new Error('AngularJS Scope is null. Argument DOM element must be attached in DOM document.');
-      }
-
-      ons.$compile(dom)(scope);
-    },
-
-    _getOnsenService: function() {
-      if (!this._onsenService) {
-        throw new Error('$onsen is not loaded, wait for ons.ready().');
-      }
-
-      return this._onsenService;
-    },
-
-    /**
-     * @param {Array} [dependencies]
-     * @param {Function} callback
-     */
-    ready : function(/* dependencies, */callback) {
-      if (callback instanceof Function) {
-        if (ons.isReady()) {
-          callback();
-        } else {
-          ons._readyLock.waitUnlock(callback);
-        }
-      } else if (angular.isArray(callback) && arguments[1] instanceof Function) {
-        var dependencies = callback;
-        callback = arguments[1];
-
-        ons.ready(function() {
-          var $onsen = ons._getOnsenService();
-          $onsen.waitForVariables(dependencies, callback);
-        });
-      }
-    },
-
-    /**
-     * @return {Boolean}
-     */
-    isWebView: function() {
-
-      if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
-        throw new Error('isWebView() method is available after dom contents loaded.');
-      }
-
-      return !!(window.cordova || window.phonegap || window.PhoneGap);
-    }
-  };
-
+  var ons = window.ons = createOnsenFacade();
   waitDeviceReady();
   waitOnsenUILoad();
-  init();
+  initAngularModule();
 
   function waitDeviceReady() {
     var unlockDeviceReady = ons._readyLock.lock();
@@ -206,7 +56,8 @@ limitations under the License.
     });
   }
 
-  function init() {
+  function initAngularModule() {
+    module.value('$onsGlobal', ons);
     module.run(function($compile, $rootScope, $onsen) {
       ons._onsenService = $onsen;
 
@@ -216,6 +67,184 @@ limitations under the License.
 
       ons.$compile = $compile;
     });
+  }
+
+  function createOnsenFacade() {
+    var ons = {
+
+      _readyLock: new DoorLock(),
+
+      _onsenService: null,
+
+      _config: {
+        autoStatusBarFill: true
+      },
+
+      _unlockersDict: {},
+
+      /**
+       * Bootstrap this document as a Onsen UI application.
+       *
+       * If you want use your AngularJS module, use "ng-app" directive and "angular.module()" manually.
+       *
+       * @param {Array} [deps] dependency modules
+       */
+      bootstrap : function(deps) {
+        deps = ['onsen'].concat(angular.isArray(deps) ? deps : []);
+
+        var doc = window.document;
+        if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
+          doc.addEventListener('DOMContentLoaded', function() {
+            angular.bootstrap(doc.documentElement, deps);
+          }, false);
+        } else if (doc.documentElement) {
+          angular.bootstrap(doc.documentElement, deps);
+        } else {
+          throw new Error('Invalid state');
+        }
+      },
+
+      /**
+       * Enable status bar fill feature on iOS7 and above.
+       */
+      enableAutoStatusBarFill: function() {
+        if (this.isReady()) {
+          throw new Error('This method must be called before ons.isReady() is true.');
+        }
+        this._config.autoStatusBarFill = true;
+      },
+
+      /**
+       * Disabled status bar fill feature on iOS7 and above.
+       */
+      disableAutoStatusBarFill: function() {
+        if (this.isReady()) {
+          throw new Error('This method must be called before ons.isReady() is true.');
+        }
+        this._config.autoStatusBarFill = false;
+      },
+
+      /**
+       * @param {String} [name]
+       * @param {Object/jqLite/HTMLElement} dom $event object or jqLite object or HTMLElement object.
+       * @return {Object}
+       */
+      findParentComponentUntil: function(name, dom) {
+        var element;
+        if (dom instanceof HTMLElement) {
+          element = angular.element(dom);
+        } else if (dom instanceof angular.element) {
+          element = dom;
+        } else if (dom.target) {
+          element = angular.element(dom.target);
+        }
+
+        return element.inheritedData(name);
+      },
+
+      /**
+       * @param {Function} listener
+       */
+      setDefaultDeviceBackButtonListener: function(listener) {
+        this._getOnsenService().getDefaultDeviceBackButtonHandler().setListener(listener);
+      },
+
+      /**
+       * Disable this framework to handle cordova "backbutton" event.
+       */
+      disableDeviceBackButtonHandler: function() {
+        this._getOnsenService().DeviceBackButtonHandler.disable();
+      },
+
+      /**
+       * Enable this framework to handle cordova "backbutton" event.
+       */
+      enableDeviceBackButtonHandler: function() {
+        this._getOnsenService().DeviceBackButtonHandler.enable();
+      },
+
+      /**
+       * Find view object correspond dom element queried by CSS selector.
+       *
+       * @param {String} selector CSS selector
+       * @param {HTMLElement} [dom]
+       * @return {Object/void}
+       */
+      findComponent: function(selector, dom) {
+        var target = (dom ? dom : document).querySelector(selector);
+        return target ? angular.element(target).data(target.nodeName.toLowerCase()) || null : null;
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      isReady: function() {
+        return !ons._readyLock.isLocked();
+      },
+
+      /**
+       * @param {HTMLElement} dom
+       */
+      compile : function(dom) {
+        if (!ons.$compile) {
+          throw new Error('ons.$compile() is not ready. Wait for initialization with ons.ready().');
+        }
+
+        if (!(dom instanceof HTMLElement)) {
+          throw new Error('First argument must be an instance of HTMLElement.');
+        }
+
+        var scope = angular.element(dom).scope();
+        if (!scope) {
+          throw new Error('AngularJS Scope is null. Argument DOM element must be attached in DOM document.');
+        }
+
+        ons.$compile(dom)(scope);
+      },
+
+      _getOnsenService: function() {
+        if (!this._onsenService) {
+          throw new Error('$onsen is not loaded, wait for ons.ready().');
+        }
+
+        return this._onsenService;
+      },
+
+      /**
+       * @param {Array} [dependencies]
+       * @param {Function} callback
+       */
+      ready : function(/* dependencies, */callback) {
+        if (callback instanceof Function) {
+          if (ons.isReady()) {
+            callback();
+          } else {
+            ons._readyLock.waitUnlock(callback);
+          }
+        } else if (angular.isArray(callback) && arguments[1] instanceof Function) {
+          var dependencies = callback;
+          callback = arguments[1];
+
+          ons.ready(function() {
+            var $onsen = ons._getOnsenService();
+            $onsen.waitForVariables(dependencies, callback);
+          });
+        }
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      isWebView: function() {
+
+        if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
+          throw new Error('isWebView() method is available after dom contents loaded.');
+        }
+
+        return !!(window.cordova || window.phonegap || window.PhoneGap);
+      }
+    };
+    return ons;
   }
 
 })();
