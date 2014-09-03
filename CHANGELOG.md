@@ -8,6 +8,7 @@ v1.1.3-dev
  * Added task automation with gulp.js in project templates.
  * core: Added ons.disableAutoStatusBarFill() and ons.enableAutoStatusBarFill().
  * core: Changed to write warning message on loading if angular.element is not JQLite.
+ * core: Added ons.orientation for dealing with device orientation.
  * ons-switch: Implemented [#199](https://github.com/OnsenUI/OnsenUI/issues/199). Changed switch component 'change' event to have 'isInteractive' property.
  * ons-tabbar: Renamed 'ons-tabbar-item' to 'ons-tab'.
  * ons-tabbar: Changed 'ons-tab' to accept child html contents.
