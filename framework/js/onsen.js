@@ -15,17 +15,19 @@ limitations under the License.
 
 */
 
-(function(){
+window.ons = (function(){
   'use strict';
 
   var module = angular.module('onsen', ['templates-main']);
   angular.module('onsen.directives', ['onsen']); // for BC
 
   // JS Global facade for Onsen UI.
-  var ons = window.ons = createOnsenFacade();
+  var ons = createOnsenFacade();
   waitDeviceReady();
   waitOnsenUILoad();
   initAngularModule();
+
+  return ons;
 
   function waitDeviceReady() {
     var unlockDeviceReady = ons._readyLock.lock();
