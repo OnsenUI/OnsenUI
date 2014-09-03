@@ -58,8 +58,8 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
         'text-color': '#fff',
         'sub-text-color': '#87888f',
         'highlight-color': '#4073eb',
-        'second-highlight-color': '#1a1b1f',
-        'border-color': '#65676e',
+        'second-highlight-color': '#5494d1',
+        'border-color': '#3b3c42',
 
         // Toolbar
         'toolbar-background-color': '#212226',
@@ -97,21 +97,21 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
       text: 'sunshine',
       colors: {
         // Global
-        'background-color': '#fff',
-        'text-color': '#fa3737',
-        'sub-text-color': '#c79090',
-        'highlight-color': '#ff4255',
-        'second-highlight-color': '#ff4c5e',
-        'border-color': '#f0d3d3',
+        'background-color': '#f9f9f9',
+        'text-color': '#333',
+        'sub-text-color': '#999',
+        'highlight-color': '#eb5e2f',
+        'second-highlight-color': '#f2ab27',
+        'border-color': '#ddd',
 
         // Toolbar
         'toolbar-background-color': '#fff',
-        'toolbar-button-color': '#ff4255',
-        'toolbar-text-color': '#fa3737',
-        'toolbar-border-color': transparent,
+        'toolbar-button-color': '#eb5e2f',
+        'toolbar-text-color': '#333',
+        'toolbar-border-color': '#ddd',
 
         // Button Bar
-        'buttonbar-color': '#ff1a33',
+        'buttonbar-color': 'rgba(235, 94, 47, 0.84)',
         'buttonbar-active-text-color': '#fff',
 
         // List
@@ -121,19 +121,19 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
 
         // Tabbar
         'tabbar-background-color': '#fff',
-        'tabbar-text-color': '#c79090',
-        'tabbar-highlight-text-color': '#ff4255',
-        'tabbar-border-color': '#f0d3d3',
+        'tabbar-text-color': '#ccc',
+        'tabbar-highlight-text-color': '#eb5e2f',
+        'tabbar-border-color': '#ddd',
 
         // Switch
-        'switch-highlight-color': '#4cd964',
+        'switch-highlight-color': '#3591e6',
 
         // Modal
         'modal-background-color': 'rgba(0, 0, 0, 0.7)',
         'modal-text-color': '#fff',
 
         // Notification
-        'notification-background-color': '#666'
+        'notification-background-color': '#eb5e2f'
       }
     },
 
