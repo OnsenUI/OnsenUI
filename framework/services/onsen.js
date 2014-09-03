@@ -54,7 +54,7 @@ limitations under the License.
          * @return {Boolean}
          */
         isEnabledAutoStatusBarFill: function() {
-          return !!$onsGlobal._config['autoStatusBarFill'];
+          return !!$onsGlobal._config.autoStatusBarFill;
         },
 
         /**
