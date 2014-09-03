@@ -16,7 +16,7 @@
 
   var module = angular.module('onsen');
 
-  module.directive('onsIfOrientation', function($onsen) {
+  module.directive('onsIfOrientation', function($onsen, $onsGlobal) {
     return {
       restrict: 'A',
       replace: false,
@@ -32,15 +32,13 @@
         return function(scope, element, attrs) {
           element.addClass('ons-if-orientation-inner');
 
-          window.addEventListener('orientationchange', update, false);
-          window.addEventListener('resize', update, false);
           attrs.$observe('onsIfOrientation', update);
+          $onsGlobal.orientation.on('change', update);
 
           update();
 
           $onsen.cleaner.onDestroy(scope, function() {
-            window.removeEventListener('orientationchange', update, false);
-            window.removeEventListener('resize', update, false);
+            $onsGlobal.orientation.off('change', update);
 
             $onsen.clearComponent({
               element: element,
@@ -52,29 +50,19 @@
 
           function update() {
             var userOrientation = ('' + attrs.onsIfOrientation).toLowerCase();
-            var orientation = getLandscapeOrPortraitFromInteger(window.orientation);
+            var orientation = getLandscapeOrPortrait();
 
-            if (userOrientation && (userOrientation === 'portrait' || userOrientation === 'landscape')) {
+            if (userOrientation === 'portrait' || userOrientation === 'landscape') {
               if (userOrientation === orientation) {
-                element.css('display', 'block');
+                element.css('display', '');
               } else {
                 element.css('display', 'none');
               }
             }
           }
 
-          function getLandscapeOrPortraitFromInteger(orientation) {
-            if (orientation === undefined ) {
-              return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
-            }
-
-            if (orientation == 90 || orientation == -90) {
-              return 'landscape';
-            }
-
-            if (orientation === 0 || orientation == 180) {
-              return 'portrait';
-            }
+          function getLandscapeOrPortrait() {
+            return $onsGlobal.orientation.isPortrait() ? 'portrait' : 'landscape';
           }
         };
       }
