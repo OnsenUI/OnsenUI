@@ -100,8 +100,8 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
         'background-color': '#f9f9f9',
         'text-color': '#333',
         'sub-text-color': '#999',
-        'highlight-color': '#eb5e2f',
-        'second-highlight-color': '#f2ab27',
+        'highlight-color': '#eb482f',
+        'second-highlight-color': '#f28227',
         'border-color': '#ddd',
 
         // Toolbar
