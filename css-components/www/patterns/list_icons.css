@@ -4,28 +4,28 @@ ons-list-item > ons-icon {
 }
 
 .list-item-action {
-    position: absolute;
-    right: 10px;
-    top: 0px;
-    font-size: 20px;
-    opacity: 0.3;
+  position: absolute;
+  right: 10px;
+  top: 0px;
+  font-size: 20px;
+  opacity: 0.3;
 }
 
 .list-item-action > ons-icon {
-    margin-top: 14px;
+  margin-top: 14px;
 }
 
 .list-item-note {
-    position: absolute;
-    right: 36px;
-    top: 0px;
-    font-size: 14px;
+  position: absolute;
+  right: 36px;
+  top: 0px;
+  font-size: 14px;
 }
 
 .list-item-note > .notification {
-    margin-top: 12px;
+  margin-top: 12px;
 }
 
 .lucent {
-    opacity: 0.4;
+  opacity: 0.4;
 }

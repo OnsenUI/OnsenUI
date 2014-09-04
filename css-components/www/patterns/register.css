@@ -1,87 +1,87 @@
 .panel-account {
-    position: relative;
-    margin: 10px 15px;
+  position: relative;
+  margin: 10px 15px;
 }
 
 .panel-account-text {
-    position: absolute;
-    top: 0px;
-    left: 70px;
-    white-space: nowrap;
+  position: absolute;
+  top: 0px;
+  left: 70px;
+  white-space: nowrap;
 }
 
 .panel-account-text input {
-    width: 220px;
-    height: 35px;
+  width: 220px;
+  height: 35px;
 }
 
 .label-profile {
-    margin: 0px 10px 0px 10px;
+  margin: 0px 10px 0px 10px;
 }
 
 .list-container {
-    margin: 5px 0px 10px 0px;
+  margin: 5px 0px 10px 0px;
 }
 
 .fb-area {
-    position: absolute;
-    left: 5px;
-    top: 4px;
+  position: absolute;
+  left: 5px;
+  top: 4px;
 }
 
 .fb-icon {
-    opacity: 0.4;
-    font-size: 30px;
+  opacity: 0.4;
+  font-size: 30px;
 }
 
 .fb-text {
-    position: absolute;
-    left: 40px;
-    top: 0px;
-    bottom: 0px;
-    line-height: 44px;
+  position: absolute;
+  left: 40px;
+  top: 0px;
+  bottom: 0px;
+  line-height: 44px;
 }
 
 .fb-button {
-    position: absolute;
-    right: 8px;
-    bottom: 8px;
-    line-height: 28px;
-    opacity: 0.4;
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  line-height: 28px;
+  opacity: 0.4;
 }
 
 .list-item {
-    margin: 0px !important;
-    padding: 0px !important;
+  margin: 0px !important;
+  padding: 0px !important;
 }
 
 .list-item input {
-    margin: 0px;
-    width: 100%;
-    height: 47px;
-    outline: 0px;
-    border: 0px;
-    font-family: 'FontAwesome';
+  margin: 0px;
+  width: 100%;
+  height: 47px;
+  outline: 0px;
+  border: 0px;
+  font-family: 'FontAwesome';
 }
 
 .list-item-optional {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    opacity: 0.4;
-    font-size: 12px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  opacity: 0.4;
+  font-size: 12px;
 }
 
 .about-service {
-    margin: 0px 10px 0px 10px;
-    font-size: 12px;
+  margin: 0px 10px 0px 10px;
+  font-size: 12px;
 }
 
 .transparent {
-    background: transparent;
+  background: transparent;
 }
 
 .register-button-full {
-    margin: 8px !important;
-    padding: 0px !important;
+  margin: 8px !important;
+  padding: 0px !important;
 }

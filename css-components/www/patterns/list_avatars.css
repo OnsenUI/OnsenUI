@@ -1,44 +1,44 @@
 .list-item-container {
-    line-height: 1;
-    font-size: 14px;
-    padding: 15px 0px 15px 15px;
+  line-height: 1;
+  font-size: 14px;
+  padding: 15px 0px 15px 15px;
 }
 
 .list-item-left {
-    width: 60px;
-    margin-right: -60px;
-    float: left;
+  width: 60px;
+  margin-right: -60px;
+  float: left;
 }
 
 .list-item-right {
-    width: 100%;
-    float: right;
+  width: 100%;
+  float: right;
 }
 
 .list-item-content {
-    margin-left: 50px;
-    margin-right: 30px;
+  margin-left: 50px;
+  margin-right: 30px;
 }
 
 .avator {
-    width: 40px;
-    height: 40px;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
 }
 
 .name {
-    font-weight: 500;
-    line-height: 16px;
-    font-size: 15px;
-    margin-bottom: 6px;
+  font-weight: 500;
+  line-height: 16px;
+  font-size: 15px;
+  margin-bottom: 6px;
 }
 
 .desc {
-    line-height: 16px;
+  line-height: 16px;
 }
 
 .lucent {
-    opacity: 0.4;
+  opacity: 0.4;
 }
 

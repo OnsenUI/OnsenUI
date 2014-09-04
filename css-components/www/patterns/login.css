@@ -1,25 +1,25 @@
 .login-form {
-    text-align: center;
-    width: 80%;
-    margin: 60px auto 0;
+  text-align: center;
+  width: 80%;
+  margin: 60px auto 0;
 }
 
 input[type=email], input[type=password] {
-    display: block;
-    width: 100%;
-    margin: 0 auto;
-    outline: none;
-    padding-top: 24px;
-    padding-bottom: 24px;
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  outline: none;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 .login-button {
-    width: 100%;
-    margin: 0 auto;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .forgot-password {
-    display: block;
-    margin: 8px auto 0 auto;
-    font-size: 14px;
+  display: block;
+  margin: 8px auto 0 auto;
+  font-size: 14px;
 }

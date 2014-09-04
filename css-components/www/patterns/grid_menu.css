@@ -1,91 +1,91 @@
 .grid-menu {
-    width: 100%;
-    height: 300px;
+  width: 100%;
+  height: 300px;
 }
 
 .float-left {
-    float: left;
+  float: left;
 }
 
 .font-weight-500 {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 .centering-and-alignment {
-    display: box;
-    display: -ms-box;
-    display: -moz-box;
-    display: -o-box;
-    display: -webkit-box;
-    box-align: center;
-    -ms-box-align: center;
-    -moz-box-align: center;
-    -o-box-align: center;
-    -webkit-box-align: center;
-    box-pack: center;
-    -ms-box-pack: center;
-    -moz-box-pack: center;
-    -o-box-pack: center;
-    -webkit-box-pack: center;
+  display: box;
+  display: -ms-box;
+  display: -moz-box;
+  display: -o-box;
+  display: -webkit-box;
+  box-align: center;
+  -ms-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -webkit-box-align: center;
+  box-pack: center;
+  -ms-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -webkit-box-pack: center;
 }
 
 .grid-menu-scroller {
-    height: 100%;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
+  height: 100%;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .grid-menu-3items-row {
-    width: 100%;
-    height: 33.3333%;
-    min-height: 100px;
-    margin: 0;
-    padding: 0;
+  width: 100%;
+  height: 33.3333%;
+  min-height: 100px;
+  margin: 0;
+  padding: 0;
 }
 
 .grid-menu-item {
-    width: 33.3333%;
-    height: 100%;
-    min-width: 100px;
-    min-height: 100px;
-    margin: 0;
-    padding: 0;
-    border-left: 1px solid #CECECE !important;
-    border-bottom: 1px solid #CECECE !important;
-    font-size: 48px;
-    text-align: center;
-    opacity: 0.6;
-    border-top: 0px !important;
+  width: 33.3333%;
+  height: 100%;
+  min-width: 100px;
+  min-height: 100px;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid #CECECE !important;
+  border-bottom: 1px solid #CECECE !important;
+  font-size: 48px;
+  text-align: center;
+  opacity: 0.6;
+  border-top: 0px !important;
 }
 
 .grid-menu-item:first-child {
-    border-left: none !important;
+  border-left: none !important;
 }
 
 .grid-menu-item i {
-    margin-top: 20px;
-    font-size: 36px;
-    opacity: 0.4;
+  margin-top: 20px;
+  font-size: 36px;
+  opacity: 0.4;
 }
 
 .grid-menu-item-label {
-    margin-top: 3%;
-    font-size: 14px;
+  margin-top: 3%;
+  font-size: 14px;
 }
 
 .grid-menu-list-item-left {
-    width: 90%;
-    opacity: 0.6;
+  width: 90%;
+  opacity: 0.6;
 }
 
 .grid-menu-list-item-right {
-    position: absolute;
-    bottom: 0px;
-    top: 0px;
-    right: 16px;
-    width: 80px;
-    font-size: 20px;
-    opacity: 0.4;
-    text-align: right;
-    line-height: 44px;
+  position: absolute;
+  bottom: 0px;
+  top: 0px;
+  right: 16px;
+  width: 80px;
+  font-size: 20px;
+  opacity: 0.4;
+  text-align: right;
+  line-height: 44px;
 }

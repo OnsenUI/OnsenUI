@@ -1,29 +1,29 @@
 .list-item-container {
-    line-height: 1;
-    padding: 15px 0px 15px 15px;
+  line-height: 1;
+  padding: 15px 0px 15px 15px;
 }
 
 .thumbnail {
-    width: 80px;
-    height: 80px;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
 }
 
 .name {
-    font-weight: 500;
-    line-height: 16px;
-    font-size: 15px;
-    margin-bottom: 6px;
+  font-weight: 500;
+  line-height: 16px;
+  font-size: 15px;
+  margin-bottom: 6px;
 }
 
 .location {
-    font-size: 14px;
-    opacity: 0.4;
-    margin-bottom: 6px;
+  font-size: 14px;
+  opacity: 0.4;
+  margin-bottom: 6px;
 }
 
 .desc {
-    line-height: 1.2;
-    font-size: 13px;
+  line-height: 1.2;
+  font-size: 13px;
 }
