@@ -86,7 +86,7 @@ gulp.task('jshint', function() {
       '!./www/scripts/**/*.generated.js'
     ])
     .pipe($.jshint())
-    .pipe($.jshint.reporter('default'));
+    .pipe($.jshint.reporter('jshint-stylish'));
 });
 
 ////////////////////////////////////////
