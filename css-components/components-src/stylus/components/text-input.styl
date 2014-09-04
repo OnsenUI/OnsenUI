@@ -65,8 +65,8 @@ webkit-input-placeholder()
   color var-input-placeholder-color
 
 text-input--invalid()
-  border var-border--invalid
-  color var-color-invalid
+  border 1px solid var-input-invalid-border-color
+  color var-input-invalid-text-color
 
 .text-input
   text-input()
@@ -155,5 +155,5 @@ text-input--invalid()
   text-input--invalid()
   border none
   background-color transparent
-  border-bottom 1px solid var-color-invalid
+  border-bottom 1px solid var-input-invalid-border-color
 
