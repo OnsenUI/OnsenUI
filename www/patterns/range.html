@@ -2,94 +2,98 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="./lib/font_awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
     <link rel="stylesheet" href="../onsen-css-components-default.css">
     <link rel="stylesheet" href="range.css">
+
+    <script src="lib/onsen/js/angular/angular.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+    </script>
   </head>
+
   <body>
-    <div class="page">
+    <ons-page>
 
-      <div class="navigation-bar">
-        <div class="navigation-bar__left">
-          <span class="toolbar-button--quiet navigation-bar__line-height">&nbsp; </span>
+      <ons-toolbar>
+        <div class="center">
+          Ranges
         </div>
-        <div class="navigation-bar__center">
-          <span class="navigation-bar__title navigation-bar__line-height">Onsen Ranges</span>
-        </div>
-        <div class="navigation-bar__right">
-          <span class="toolbar-button--quiet navigation-bar__line-height font-weight-500">&nbsp; </span>
-        </div>
-      </div>
+      </ons-toolbar>
 
-      <ul class="list margin-top-adjust">
-        <li class="list__item">
-          <div class="list-item-left">
-            <i class="fa fa-volume-down lower"></i>
-          </div>
-          <div class="list-item-center">
-            <span class="list__item__line-height">
-              <input type="range" value="50" class="range range-center">
-            </span>
-          </div>
-          <div class="list-item-right">
-            <i class="fa fa-volume-up"></i>
-          </div>
-        </li>
-        <li class="list__item">
-          <div class="list-item-left">
-            <i class="fa fa-umbrella lower"></i>
-          </div>
-          <div class="list-item-center">
-            <span class="list__item__line-height">
-              <input type="range" value="12" class="range range-center">
-            </span>
-          </div>
-          <div class="list-item-right">
-            <i class="fa fa-umbrella"></i>
-          </div>
-        </li>
-        <li class="list__item" style="text-aling:center;">
-          <div class="list-item-left">
-            <i class="fa fa-sun-o lower"></i>
-          </div>
-          <div class="list-item-center">
-            <span class="list__item__line-height">
-              <input type="range" value="80" class="range range-center">
-            </span>
-          </div>
-          <div class="list-item-right">
-            <i class="fa fa-sun-o"></i>
-          </div>
-        </li>
-        <li class="list__item" style="text-aling:center;">
-          <div class="list-item-left">
-            <i class="fa fa-bolt lower"></i>
-          </div>
-          <div class="list-item-center">
-            <span class="list__item__line-height">
-              <input type="range" value="32" class="range range-center">
-            </span>
-          </div>
-          <div class="list-item-right">
-            <i class="fa fa-bolt"></i>
-          </div>
-        </li>
-        <li class="list__item" style="text-aling:center;">
-          <div class="list-item-left">
-            <i class="fa fa-moon-o lower"></i>
-          </div>
-          <div class="list-item-center">
-            <span class="list__item__line-height">
-              <input type="range" value="68" class="range range-center">
-            </span>
-          </div>
-          <div class="list-item-right">
-            <i class="fa fa-moon-o"></i>
-          </div>
-        </li>
-      </ul>
+      <ons-list class="range-list">
+        <ons-list-item>
+          <ons-row>
+            <ons-col width="40px">
+              <ons-icon icon="fa-volume-down" class="lower"></ons-icon>
+            </ons-col>
+            <ons-col class="range-wrapper">
+              <input type="range" value="10" class="range">
+            </ons-col>
+            <ons-col width="40px">
+              <ons-icon icon="fa-volume-up"></ons-icon>
+            </ons-col>
+          </ons-row>
+        </ons-list-item>
 
-    </div>
+        <ons-list-item>
+          <ons-row>
+            <ons-col width="40px">
+              <ons-icon icon="fa-umbrella" class="lower"></ons-icon>
+            </ons-col>
+            <ons-col class="range-wrapper">
+              <input type="range" value="30" class="range">
+            </ons-col>
+            <ons-col width="40px">
+              <ons-icon icon="fa-umbrella"></ons-icon>
+            </ons-col>
+          </ons-row>
+        </ons-list-item>
+
+        <ons-list-item>
+          <ons-row>
+            <ons-col width="40px">
+              <ons-icon icon="fa-sun-o" class="lower"></ons-icon>
+            </ons-col>
+            <ons-col class="range-wrapper">
+              <input type="range" value="50" class="range">
+            </ons-col>
+            <ons-col width="40px">
+              <ons-icon icon="fa-sun-o"></ons-icon>
+            </ons-col>
+          </ons-row>
+        </ons-list-item>
+
+        <ons-list-item>
+          <ons-row>
+            <ons-col width="40px">
+              <ons-icon icon="fa-bolt" class="lower"></ons-icon>
+            </ons-col>
+            <ons-col class="range-wrapper">
+              <input type="range" value="70" class="range">
+            </ons-col>
+            <ons-col width="40px">
+              <ons-icon icon="fa-bolt"></ons-icon>
+            </ons-col>
+          </ons-row>
+        </ons-list-item>
+
+        <ons-list-item>
+          <ons-row>
+            <ons-col width="40px">
+              <ons-icon icon="fa-moon-o" class="lower"></ons-icon>
+            </ons-col>
+            <ons-col class="range-wrapper">
+              <input type="range" value="90" class="range">
+            </ons-col>
+            <ons-col width="40px">
+              <ons-icon icon="fa-moon-o"></ons-icon>
+            </ons-col>
+          </ons-row>
+        </ons-list-item>
+      </ons-list>
+
+    </ons-page>
   </body>
 </html>

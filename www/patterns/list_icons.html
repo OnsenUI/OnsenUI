@@ -1,82 +1,79 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Onsen UI Themes</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="./lib/font_awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
     <link rel="stylesheet" href="../onsen-css-components-default.css">
     <link rel="stylesheet" href="list_icons.css">
+
+    <script src="lib/onsen/js/angular/angular.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+    </script>
   </head>
-  <body ontouchstart="" class="page">
-    <div class="navigation-bar">
-      <div class="navigation-bar__left">&nbsp; </div>
-      <div class="navigation-bar__center">
-        <span class="navigation-bar__title navigation-bar__line-height">List Icons</span>
-      </div>
-      <div class="navigation-bar__right">&nbsp; </div>
-    </div>
 
-    <ul class="list list-top">
-      <li class="list__item list__item--tappable list__item__line-height">
-        <i class="fa fa-comment"></i>&nbsp; Make Call
-        <span class="list-item-action" >
-          <i class="fa fa-lg fa-phone-square"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height">
-        <i class="fa fa-credit-card"></i>&nbsp; Change Credit Card
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height">
-        <i class="fa fa-users"></i>&nbsp; See My Friends
-        <span class="list-item-note" >
-          <span class="notification">10</span>
-        </span>
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
+  <body>
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">List Icons</div>
+      </ons-toolbar>
 
-      <li class="list__header">Who I Am</li>
-      <li class="list__item list__item--tappable list__item__line-height">
-        <i class="fa fa-film"></i>&nbsp; My Movie
-        <span class="list-item-note lucent" >Matrix</span>
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height">
-        <i class="fa fa-music"></i>&nbsp; My Music
-        <span class="list-item-note lucent" >Hikaru Utada</span>
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
+      <ons-list>
+        <ons-list-item modifier="tappable">
+          <ons-icon icon="fa-comment" size="20px"></ons-icon>
+          Make Call
+          <span class="list-item-action">
+            <ons-icon icon="fa-phone-square" size="22px"></ons-icon>
+          </span>
+        </ons-list-item>
 
-      <li class="list__item list__item--tappable list__item__line-height">
-        <i class="fa fa-gamepad"></i>&nbsp; My Game
-        <span class="list-item-note lucent" >Super Mario</span>
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
+        <ons-list-item modifier="chevron">
+          <ons-icon icon="fa-credit-card" size="20px"></ons-icon>
+          Change Credit Card
+        </ons-list-item>
 
-      <li class="list__header">Other Icons</li>
-      <li class="list__item list__item--tappable list__item__line-height">
-        <i class="fa fa-cog"></i>&nbsp; Settings
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height">
-        <i class="fa fa-minus-circle"></i>&nbsp; Delete Configuration
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-    </ul>
+        <ons-list-item modifier="chevron">
+          <ons-icon icon="fa-users" size="20px"></ons-icon>
+          See My Friends
+          <span class="list-item-note">
+            <span class="notification">10</span>
+          </span>
+        </ons-list-item>
+
+        <ons-list-header>Who I Am</ons-list-header>
+
+        <ons-list-item modifier="chevron">
+          <ons-icon icon="fa-film" size="20px"></ons-icon>
+          My Movie
+          <span class="list-item-note lucent">Matrix</span>
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron">
+          <ons-icon icon="fa-music" size="20px"></ons-icon>
+          My Music
+          <span class="list-item-note lucent">Hikaru Utada</span>
+        </ons-list-item>
+        
+        <ons-list-item modifier="chevron">
+          <ons-icon icon="fa-gamepad" size="20px"></ons-icon>
+          My Game
+          <span class="list-item-note lucent">Super Mario</span>
+        </ons-list-item>
+
+        <ons-list-header>Other</ons-list-header>
+
+        <ons-list-item modifier="chevron">
+          <ons-icon icon="fa-cog" size="20px"></ons-icon>
+          Settings
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron">
+          <ons-icon icon="fa-minus-circle" size="20px"></ons-icon>
+          Delete Configuration
+        </ons-list-item>
+
+      </ons-list>
+    </ons-page>
 
   </body>
 </html>

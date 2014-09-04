@@ -1,21 +1,2 @@
-.float-left {
-    float: left;
-}
 
-.list-item-action {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    margin-top: -10px;
-    font-size: 20px;
-    line-height: 26px;
-    opacity: 0.4;
-}
-
-.list-item-action > fa {
-    font-size: 22px;
-}
-
-.list-top {
-    margin-top: -1px;
-}
+/* none */

@@ -1,33 +1,29 @@
-.float-left {
-    float: left;
+ons-list-item > ons-icon {
+  margin: 0 4px 0 0;
+  opacity: 0.8;
 }
 
 .list-item-action {
     position: absolute;
-    right: 16px;
-    top: 50%;
-    margin-top: -10px;
+    right: 10px;
+    top: 0px;
     font-size: 20px;
-    line-height: 26px;
-    opacity: 0.4;
+    opacity: 0.3;
 }
 
-.list-item-action fa {
-    font-size: 22px;
+.list-item-action > ons-icon {
+    margin-top: 14px;
 }
 
 .list-item-note {
     position: absolute;
-    right: 48px;
-    line-height: 44px;
+    right: 36px;
+    top: 0px;
+    font-size: 14px;
 }
 
-.list-item-note .notification {
+.list-item-note > .notification {
     margin-top: 12px;
-}
-
-.list-top {
-    margin-top: -1px;
 }
 
 .lucent {
