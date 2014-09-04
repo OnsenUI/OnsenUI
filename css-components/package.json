@@ -17,7 +17,7 @@
   },
   "private": true,
   "devDependencies": {
-    "jshint-stylish": "~0.1.3",
+    "jshint-stylish": "^0.4.0",
     "gulp-concat": "^2.2.0",
     "run-sequence": "^0.3.6",
     "event-stream": "^3.1.2",
