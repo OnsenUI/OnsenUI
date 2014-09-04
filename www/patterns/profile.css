@@ -3,12 +3,10 @@
   width: 100%;
   text-align: center;
   color: white;
-  padding: 50px 0;
+  padding: 30px 0;
   line-height: 1.4;
-  background: rgba(0, 0, 0, 0.5); /* Old browsers */
-  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%); /* FF3.6+ */
-  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.4) 0%,rgba(0, 0, 0, 0.7) 100%); /* Chrome10+,Safari5.1+ */
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%,rgba(0, 0, 0, 0.7) 100%); /* W3C */
+  background-color: #33393c;
+  text-shadow: rgba(0, 0, 0, 0.4) 0px 1px 0px;
 }
 
 .profile-image {
