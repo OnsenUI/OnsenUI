@@ -1,0 +1,32 @@
+
+.to-wrapper {
+  line-height: 1;
+  height: 62px;
+  padding: 10px;
+}
+
+.to-image {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.to-name {
+  font-weight: 500;
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+.to-email {
+  font-size: 14px;
+  opacity: 0.4;
+}
+
+.text-input {
+  margin-top: 4px;
+}
+
+.textarea {
+  margin-top: 4px;
+}
