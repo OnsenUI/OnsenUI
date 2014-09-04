@@ -1,119 +1,96 @@
 <!Doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="./lib/font_awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
     <link rel="stylesheet" href="../onsen-css-components-default.css">
     <link rel="stylesheet" href="checkbox_list.css">
+
+    <script src="lib/onsen/js/angular/angular.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+    </script>
   </head>
   <body>
-    <div class="page">
-      <div class="navigation-bar">
-        <div class="navigation-bar__left">
-          <span class="toolbar-button--quiet navigation-bar__line-height">&nbsp; </span>
-        </div>
-        <div class="navigation-bar__center">
-          <span class="navigation-bar__title navigation-bar__line-height">Checkbox </span>
-        </div>
-        <div class="navigation-bar__right">
-          <span class="toolbar-button--quiet navigation-bar__line-height font-weight-500">&nbsp; </span>
-        </div>
-      </div>
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Checkbox</div>
+      </ons-toolbar>
 
-      <ul class="list margin-top-adjuster">
-        <li class="list__header">Sports</li>
-        <li class="list__item list__item--tappable">
-          <span class="list__item__line-height">
-            <label class="checkbox wrapper-label">
-              <input type="checkbox">
-              <div class="checkbox__checkmark checkbox-list-left-section">
-              </div>
-              <div class="checkbox-list-right-section">Baseball</div>
-            </label>
-          </span>
-        </li>
-        <li class="list__item list__item--tappable">
-          <span class="list__item__line-height">
-            <label class="checkbox wrapper-label">
-              <input type="checkbox">
-              <div class="checkbox__checkmark checkbox-list-left-section">
-              </div>
-              <div class="checkbox-list-right-section">Soccer
-              </div>
-            </label>
-          </span>
-        </li>
-        <li class="list__item list__item--tappable">
-          <span class="list__item__line-height">
-            <label class="checkbox wrapper-label">
-              <input type="checkbox" checked="checked">
-              <div class="checkbox__checkmark checkbox-list-left-section">
-              </div>
-              <div class="checkbox-list-right-section">Basketball
-              </div>
-            </label>
-          </span>
-        </li>
-        <li class="list__item list__item--tappable">
-          <span class="list__item__line-height">
-            <label class="checkbox wrapper-label">
-              <input type="checkbox">
-              <div class="checkbox__checkmark checkbox-list-left-section">
-              </div>
-              <div class="checkbox-list-right-section">Golf
-              </div>
-            </label>
-          </span>
-        </li>
-        <li class="list__header">Food</li>
-        <li class="list__item list__item--tappable">
-          <span class="list__item__line-height">
-            <label class="checkbox wrapper-label checkbox--noborder">
-              <input type="checkbox">
-              <div class="checkbox__checkmark checkbox-list-left-section">
-              </div>
-              <div class="checkbox-list-right-section">Hamburger
-              </div>
-            </label>
-          </span>
-        </li>
-        <li class="list__item list__item--tappable">
-          <span class="list__item__line-height">
-            <label class="checkbox wrapper-label checkbox--noborder">
-              <input type="checkbox">
-              <div class="checkbox__checkmark checkbox-list-left-section">
-              </div>
-              <div class="checkbox-list-right-section">Beefsteak
-              </div>
-            </label>
-          </span>
-        </li>
-        <li class="list__item list__item--tappable">
-          <span class="list__item__line-height">
-            <label class="checkbox wrapper-label checkbox--noborder">
-              <input type="checkbox" checked="checked">
-              <div class="checkbox__checkmark checkbox-list-left-section">
-              </div>
-              <div class="checkbox-list-right-section">Spaghetti
-              </div>
-            </label>
-          </span>
-        </li>
-        <li class="list__item list__item--tappable">
-          <span class="list__item__line-height">
-            <label class="checkbox wrapper-label checkbox--noborder">
-              <input type="checkbox">
-              <div class="checkbox__checkmark checkbox-list-left-section">
-              </div>
-              <div class="checkbox-list-right-section">Natto
-              </div>
-            </label>
-          </span>
-        </li>
-      </ul>
+      <ons-list>
 
-    </div>
+        <ons-list-header>Sports</ons-list-header>
+
+        <ons-list-item modifier="tappable">
+          <label class="checkbox checkbox--list-item">
+            <input type="checkbox">
+            <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+            Baseball
+          </label>
+        </ons-list-item>
+
+        <ons-list-item modifier="tappable">
+          <label class="checkbox checkbox--list-item">
+            <input type="checkbox">
+            <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+            Soccer
+          </label>
+        </ons-list-item>
+
+        <ons-list-item modifier="tappable">
+          <label class="checkbox checkbox--list-item">
+            <input type="checkbox" checked="checked">
+            <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+            Basketball
+          </label>
+        </ons-list-item>
+
+        <ons-list-item modifier="tappable">
+          <label class="checkbox checkbox--list-item">
+            <input type="checkbox" checked="checked">
+            <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
+            Golf
+          </label>
+        </ons-list-item>
+
+        <ons-list-header>Food</ons-list-header>
+
+        <ons-list-item modifier="tappable">
+          <label class="checkbox checkbox--noborder checkbox--list-item">
+            <input type="checkbox" checked="checked">
+            <div class="checkbox__checkmark checkbox--noborder__checkmark checkbox--list-item__checkmark"></div>
+            Hamburger
+          </label>
+        </ons-list-item>
+
+        <ons-list-item modifier="tappable">
+          <label class="checkbox checkbox--noborder checkbox--list-item">
+            <input type="checkbox">
+            <div class="checkbox__checkmark checkbox--noborder__checkmark checkbox--list-item__checkmark"></div>
+            Beefsteak
+          </label>
+        </ons-list-item>
+
+        <ons-list-item modifier="tappable">
+          <label class="checkbox checkbox--noborder checkbox--list-item">
+            <input type="checkbox" checked="checked">
+            <div class="checkbox__checkmark checkbox--noborder__checkmark checkbox--list-item__checkmark"></div>
+            Spaghetti
+          </label>
+        </ons-list-item>
+
+        <ons-list-item modifier="tappable">
+          <label class="checkbox checkbox--noborder checkbox--list-item">
+            <input type="checkbox">
+            <div class="checkbox__checkmark checkbox--noborder__checkmark checkbox--list-item__checkmark"></div>
+            Natto
+          </label>
+        </ons-list-item>
+
+      </ons-list>
+
+    </ons-page>
 
   </body>
 </html>

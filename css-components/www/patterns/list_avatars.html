@@ -1,115 +1,105 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Onsen UI Themes</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="./lib/font_awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
     <link rel="stylesheet" href="../onsen-css-components-default.css">
     <link rel="stylesheet" href="list_avatars.css">
-  </head>
-  <body ontouchstart="" class="page">
-    <div class="navigation-bar">
-      <div class="navigation-bar__center">
-        <span class="navigation-bar__title navigation-bar__line-height">List with Mini Pictures</span>
-      </div>
-    </div>
 
-    <ul class="list list-top">
-      <li class="list__item list__item--tappable list__item__line-height list-item-container">
-        <div class="list-item-main">
+    <script src="lib/onsen/js/angular/angular.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+    </script>
+  </head>
+  <body>
+
+    <ons-tabbar hide-tabs="hgoe">
+      <ons-tab page="page.html" active="true">
+        <ons-icon icon="star"></ons-icon>
+      </ons-tab>
+      
+      <ons-tab>
+        <ons-icon icon="comment"></ons-icon>
+      </ons-tab>
+
+      <ons-tab>
+        <ons-icon icon="circle"></ons-icon>
+      </ons-tab>
+
+    </ons-tabbar>
+
+    <ons-template id="empty.html">
+      <ons-toolbar>
+        <div class="center">Page</div>
+      </ons-toolbar>
+    </ons-template>
+
+    <ons-template id="page.html">
+      <ons-toolbar>
+        <div class="center">List with Mini Pictures</div>
+      </ons-toolbar>
+
+      <ons-list>
+
+        <ons-list-item modifier="chevron" class="list-item-container">
           <div class="list-item-left">
             <img src="images/4548488065_dae90277db_q.jpg" class="avator">
           </div>
           <div class="list-item-right">
             <div class="list-item-content">
-              <span class="list-item-name">Daniel
+              <div class="name">Daniel
                 <span class="lucent">@Danny</span>
-              </span>
-              <br />
-              <span class="list-item-text">Hi, how are you? Glad to hear you are interested in our project.</span>
+              </div>
+
+              <span class="desc">Hi, how are you? Glad to hear you are interested in our project.</span>
             </div>
           </div>
-        </div>
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height list-item-container">
-        <div class="list-item-main">
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" class="list-item-container">
           <div class="list-item-left">
             <img src="images/3936883765_39121dcab5_q.jpg" class="avator">
           </div>
           <div class="list-item-right">
             <div class="list-item-content">
-              <span class="list-item-name">John</span>
-              <br />
-              <span class="list-item-text">I am a teacher at a elementary school.</span>
+              <div class="name">John</div>
+              <span class="desc">I am a teacher at a elementary school.</span>
             </div>
           </div>
-        </div>
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height list-item-container">
-        <div class="list-item-main">
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" class="list-item-container">
           <div class="list-item-left">
             <img src="images/5388738458_ea9fd2a7d7_q.jpg" class="avator">
           </div>
           <div class="list-item-right">
             <div class="list-item-content">
-              <span class="list-item-name">Lucy</span>
-              <br />
-              <span class="list-item-text">Hello, nice meeting you <i class="fa fa-meh-o" style="color: orangered;"></i></span>
+              <div class="name">Lucy</div>
+
+              <span class="desc">Hello, nice meeting you <i class="fa fa-meh-o" style="color: orangered;"></i></span>
             </div>
           </div>
-        </div>
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height list-item-container">
-        <div class="list-item-main">
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" class="list-item-container">
           <div class="list-item-left">
             <img src="images/3152983303_4c0fd3140b_q.jpg" class="avator">
           </div>
           <div class="list-item-right">
             <div class="list-item-content">
-              <span class="list-item-name">Elizabeth
+              <div class="name">Elizabeth
                 <span class="lucent">@Elizabeth</span>
-              </span>
-              <br />
-              <span class="list-item-text"><i class="fa fa-phone"></i> 1-800-123-4567</span>
+              </div>
+              <span class="desc"><ons-icon icon="fa-phone" fixed-width="false" size="13px"></ons-icon> 1-800-123-4567</span>
               <br>
-              <span class="list-item-text">Please call me when you're ready.</span>
+              <span class="desc">Please call me when you're ready.</span>
             </div>
           </div>
-        </div>
-        <span class="list-item-action">
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-    </ul>
+        </ons-list-item>
+      </ons-list>
 
-    <div class="tab-bar">
-      <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-c" checked="checked">
-        <button class="tab-bar__button">
-          <i class="tab-bar__icon fa fa-2x fa-star"></i>
-        </button>
-      </label>
-      <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-c">
-        <button class="tab-bar__button">
-          <i class="tab-bar__icon fa fa-2x fa-comment"></i>
-        </button>
-      </label>
-      <label class="tab-bar__item">
-        <input type="radio" name="tab-bar-c">
-        <button class="tab-bar__button">
-          <i class="tab-bar__icon fa fa-2x fa-circle"></i>
-        </button>
-      </label>
-    </div>
+    </ons-template>
+
+
   </body>
 </html>

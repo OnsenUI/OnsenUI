@@ -1,113 +1,108 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Onsen UI Themes</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="./lib/font_awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
     <link rel="stylesheet" href="../onsen-css-components-default.css">
     <link rel="stylesheet" href="list_thumbnails.css">
-  </head>
-  <body ontouchstart="" class="page scroller">
-    <div class="navigation-bar">
-      <div class="navigation-bar__left">&nbsp; </div>
-      <div class="navigation-bar__center">
-        <span class="navigation-bar__title navigation-bar__line-height">List with Pictures
-        </span>
-      </div>
-      <div class="navigation-bar__right">&nbsp; </div>
-    </div>
 
-    <ul class="list list-top">
-      <li class="list__item list__item--tappable list__item__line-height list-item-container">
-        <div class="list-item-main">
-          <div class="list-item-left">
-            <img src="images/location1.png" class="thumbnail">
-          </div>
-          <div class="list-item-right">
-            <div class="list-item-content">
-              <span class="list-item-name">Eiffel Tower &nbsp;
-              <br/>
-              <span class="lucent">
-              <i class="fa fa-map-marker"></i>&nbsp; Paris, France
-              </span>
-              </span>
-              <br/>
-              <span class="list-item-text" style="margin-top:16px;">Eiffel Tower is the symbol of Paris and named by Gustave Eiffel.
-              </span>
-            </div>
-          </div>
-        </div>
-        <span class="list-item-action" >
-        <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height list-item-container">
-        <div class="list-item-main">
-          <div class="list-item-left">
-            <img src="images/location2.png" class="thumbnail">
-          </div>
-          <div class="list-item-right">
-            <div class="list-item-content">
-              <span class="list-item-name">Monument Valley &nbsp;
-              <br/>
-              <span class="lucent">
-              <i class="fa fa-map-marker"></i>&nbsp; Utah, USA
-              </span>
-              </span>
-              <br/>Director John Ford used Monument Valley for a number of his best-known films.
-              </span>
-            </div>
-          </div>
-        </div>
-        <span class="list-item-action" >
-        <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height list-item-container">
-        <div class="list-item-main">
-          <div class="list-item-left">
-            <img src="images/location3.png" class="thumbnail">
-          </div>
-          <div class="list-item-right">
-            <div class="list-item-content">
-              <span class="list-item-name">Mount Fuji &nbsp;
-              <br/>
-              <span class="lucent">
-              <i class="fa fa-map-marker"></i>&nbsp; Japan
-              </span>
-              </span>
-              <br/>Mount Fuji is the highest mountain in Japan and a frequent attractive subject of Japanese art.
-              </span>
-            </div>
-          </div>
-        </div>
-        <span class="list-item-action" >
-        <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height list-item-container">
-        <div class="list-item-main">
-          <div class="list-item-left">
-            <img src="images/location4.png" class="thumbnail">
-          </div>
-          <div class="list-item-right">
-            <div class="list-item-content">
-              <span class="list-item-name">Tokyo Tower&nbsp;
-              <br/>
-              <span class="lucent">
-              <i class="fa fa-map-marker"></i>&nbsp; Tokyo, Japan
-              </span>
-              </span>
-              <br/>Tokyo Tower is a communications and observation tower located in Tokyo, Japan.
-              </span>
-            </div>
-          </div>
-        </div>
-        <span class="list-item-action" >
-        <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-    </ul>
+    <script src="lib/onsen/js/angular/angular.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+    </script>
+  </head>
+
+  <body>
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">List with Pictures</div>
+      </ons-toolbar>
+
+      <ons-list>
+
+        <ons-list-item modifier="chevron" class="list-item-container">
+          <ons-row>
+            <ons-col width="95px">
+              <img src="images/location1.png" class="thumbnail">
+            </ons-col>
+            <ons-col>
+              <div class="name">
+                Eiffel Tower
+              </div>
+              <div class="location">
+                <i class="fa fa-map-marker"></i> Paris, France
+              </div>
+              <div class="desc">
+                Eiffel Tower is the symbol of Paris and named by Gustave Eiffel.
+              </div>
+            </ons-col>
+            <ons-col width="40px"></ons-col>
+          </ons-row>
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" class="list-item-container">
+          <ons-row>
+            <ons-col width="95px">
+              <img src="images/location2.png" class="thumbnail">
+            </ons-col>
+            <ons-col>
+              <div class="name">
+                Monument Valley
+              </div>
+              <div class="location">
+                <i class="fa fa-map-marker"></i> Utah, USA
+              </div>
+              <div class="desc">
+                Director John Ford used Monument Valley for a number of his best-known films.
+              </div>
+            </ons-col>
+            <ons-col width="40px"></ons-col>
+          </ons-row>
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" class="list-item-container">
+          <ons-row>
+            <ons-col width="95px">
+              <img src="images/location3.png" class="thumbnail">
+            </ons-col>
+            <ons-col>
+              <div class="name">
+                Mount Fuji
+              </div>
+              <div class="location">
+                <i class="fa fa-map-marker"></i> Japan
+              </div>
+              <div class="desc">
+                Mount Fuji is the highest mountain in Japan and a frequent attractive subject of Japanese art.
+              </div>
+            </ons-col>
+            <ons-col width="40px"></ons-col>
+          </ons-row>
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" class="list-item-container">
+          <ons-row>
+            <ons-col width="95px">
+              <img src="images/location4.png" class="thumbnail">
+            </ons-col>
+            <ons-col>
+              <div class="name">
+                Tokyo Tower
+              </div>
+              <div class="location">
+                <i class="fa fa-map-marker"></i> Tokyo, Japan
+              </div>
+              <div class="desc">
+                Tokyo Tower is a communications and observation tower located in Tokyo, Japan.
+              </div>
+            </ons-col>
+            <ons-col width="40px"></ons-col>
+          </ons-row>
+        </ons-list-item>
+      </ons-list>
+
+    </ons-page>
+
 
   </body>
 </html>

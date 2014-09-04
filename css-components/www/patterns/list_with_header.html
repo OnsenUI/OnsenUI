@@ -1,68 +1,38 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Onsen UI Themes</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="./lib/font_awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
     <link rel="stylesheet" href="../onsen-css-components-default.css">
     <link rel="stylesheet" href="list_with_header.css">
+
+    <script src="lib/onsen/js/angular/angular.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+    </script>
   </head>
-  <body ontouchstart="" class="page">
-    <div class="navigation-bar">
-      <div class="navigation-bar__left">&nbsp; </div>
-      <div class="navigation-bar__center">
-        <span class="navigation-bar__title navigation-bar__line-height">List With Header</span>
-      </div>
-      <div class="navigation-bar__right">&nbsp; </div>
-    </div>
+  <body>
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">List With Header</div>
+      </ons-toolbar>
 
-    <ul class="list list-top">
+      <ons-list>
+        <ons-list-header>Android</ons-list-header>
 
-      <li class="list__header">Android</li>
-      <li class="list__item list__item--tappable list__item__line-height">KitKat
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height">Jelly Bean
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height">Ice Cream Sandwich
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height">Honeycomb
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
+        <ons-list-item modifier="chevron">KitKat</ons-list-item>
+        <ons-list-item modifier="chevron">Jelly Bean</ons-list-item>
+        <ons-list-item modifier="chevron">Honycomb</ons-list-item>
+        
+        <ons-list-header>Mac OS</ons-list-header>
 
-      <li class="list__header">Mac OS</li>
+        <ons-list-item modifier="chevron">Mavericks</ons-list-item>
+        <ons-list-item modifier="chevron">Mountain Lion</ons-list-item>
+        <ons-list-item modifier="chevron">Lion</ons-list-item>
+        <ons-list-item modifier="chevron">SnowLeopard</ons-list-item>
 
-      <li class="list__item list__item--tappable list__item__line-height">Mavericks
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height">Mountain Lion
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height">Lion
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
-      <li class="list__item list__item--tappable list__item__line-height">SnowLeopard
-        <span class="list-item-action" >
-          <i class="fa fa-angle-right"></i>
-        </span>
-      </li>
+      </ons-list>
 
-    </ul>
+    </ons-page>
   </body>
 </html>

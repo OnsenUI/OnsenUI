@@ -1,35 +1,16 @@
-div.float-left {
-    float: left;
+.range-list {
     text-align: center;
 }
 
-.margin-top-adjust {
-    margin-top: -1px;
-}
-
-.list-item-left {
-    display: inline-block;
-    width: 10%;
-    text-align: center;
-}
-
-.list-item-center {
-    display: inline-block;
-    width: 75%;
-    text-align: center;
-}
-
-.range-center {
+.range-wrapper .range {
+    margin-top: 7px;
     width: 100%;
-    vertical-align: -10px;
 }
 
-.list-item-right {
-    display: inline-block;
-    width: 10%;
-    text-align: center;
+ons-icon {
+    opacity: 0.8;
 }
 
 .lower {
-    opacity: 0.4;
+    opacity: 0.2;
 }
