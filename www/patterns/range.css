@@ -1,16 +1,16 @@
 .range-list {
-    text-align: center;
+  text-align: center;
 }
 
 .range-wrapper .range {
-    margin-top: 7px;
-    width: 100%;
+  margin-top: 7px;
+  width: 100%;
 }
 
 ons-icon {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .lower {
-    opacity: 0.2;
+  opacity: 0.2;
 }

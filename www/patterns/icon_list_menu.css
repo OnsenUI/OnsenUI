@@ -1,90 +1,90 @@
 .header-row {
-    display: box;
-    display: -moz-box;
-    display: -ms-box;
-    display: -o-box;
-    display: -webkit-box;
-    box-align: center;
-    -ms-box-align: center;
-    -moz-box-align: center;
-    -o-box-align: center;
-    -webkit-box-align: center;
+  display: box;
+  display: -moz-box;
+  display: -ms-box;
+  display: -o-box;
+  display: -webkit-box;
+  box-align: center;
+  -ms-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -webkit-box-align: center;
 }
 
 .list-icon-wrapper i.fa {
-    color: white;
+  color: white;
 }
 
 .login-icon-label {
-    font-size: 19px;
+  font-size: 19px;
 }
 
 .icon-menu-list-page {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
-.icon-menu-list-page::-webkit-scrollbar { 
-    width: 0;
-} 
+.icon-menu-list-page::-webkit-scrollbar {
+  width: 0;
+}
 
 .icon-menu-list-header {
-    margin: 0;
-    padding: 0;
-    height: 44px;
+  margin: 0;
+  padding: 0;
+  height: 44px;
 }
 
 .icon-menu-list-header-left {
-    width: 200px;
-    margin-left: 4px;
+  width: 200px;
+  margin-left: 4px;
 }
 
 .icon-menu-list-header-right {
-    position: absolute;
-    width: 100px;
-    top: 0px;
-    right: 0px;
-    padding-right: 8px;
-    text-align: right;
-    height: 44px;
-    margin-top: 12px;
+  position: absolute;
+  width: 100px;
+  top: 0px;
+  right: 0px;
+  padding-right: 8px;
+  text-align: right;
+  height: 44px;
+  margin-top: 12px;
 }
 
 .search-box-wrapper {
-    margin: 8px;
+  margin: 8px;
 }
 
 .icon-menu-list-item {
-    display: box;
-    display: -ms-box;
-    display: -moz-box;
-    display: -o-box;
-    display: -webkit-box;
-    box-align: center;
-    -ms-box-align: center;
-    -moz-box-align: center;
-    -o-box-align: center;
-    -webkit-box-align: center;
-    height: 60px;
-    width: 100%;
+  display: box;
+  display: -ms-box;
+  display: -moz-box;
+  display: -o-box;
+  display: -webkit-box;
+  box-align: center;
+  -ms-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -webkit-box-align: center;
+  height: 60px;
+  width: 100%;
 }
 
 .list-icon-wrapper {
-    display: inline-block;
-    width: 44px;
-    height: 44px;
-    margin-left: 4px;
-    border-radius: 100%;
-    background: #000000;
-    text-align: center;
-    opacity: 0.2;
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  margin-left: 4px;
+  border-radius: 100%;
+  background: #000000;
+  text-align: center;
+  opacity: 0.2;
 }
 
 .list-icon-text {
-    display: inline-block;
-    font-size: 20px;
-    margin-left: 12px;
-    opacity: 0.6;
+  display: inline-block;
+  font-size: 20px;
+  margin-left: 12px;
+  opacity: 0.6;
 }
 
