@@ -126,7 +126,7 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
         'tabbar-border-color': '#ddd',
 
         // Switch
-        'switch-highlight-color': '#3591e6',
+        'switch-highlight-color': '#e69e33',
 
         // Modal
         'modal-background-color': 'rgba(0, 0, 0, 0.7)',
