@@ -2950,8 +2950,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: #ccc;
 }
 .text-input:invalid {
-  border: 1px solid #f00;
-  color: #f00;
+  border: 1px solid #ddd;
+  color: #1f1f21;
 }
 /* topdoc
   name: Transparent Text Input
@@ -3018,8 +3018,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-color: transparent;
 }
 .text-input--transparent:invalid {
-  border: 1px solid #f00;
-  color: #f00;
+  border: 1px solid #ddd;
+  color: #1f1f21;
   border: none;
   background-color: transparent;
 }
@@ -3090,11 +3090,11 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-color: transparent;
 }
 .text-input--underbar:invalid {
-  border: 1px solid #f00;
-  color: #f00;
+  border: 1px solid #ddd;
+  color: #1f1f21;
   border: none;
   background-color: transparent;
-  border-bottom: 1px solid #f00;
+  border-bottom: 1px solid #ddd;
 }
 /* topdoc
   name: Textarea
