@@ -141,7 +141,7 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
       text: 'blue-basic',
       colors: {
         // Global
-        'background-color': '#fff',
+        'background-color': '#f9f9f9',
         'text-color': '#1f1f21',
         'sub-text-color': '#999',
         'highlight-color': 'rgba(24,103,194,0.81)',
@@ -164,10 +164,10 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
         'list-tap-active-background-color': '#d9d9d9',
 
         // Tabbar
-        'tabbar-background-color': '#fff',
+        'tabbar-background-color': '#222',
         'tabbar-text-color': '#999',
-        'tabbar-highlight-text-color': '#468ad9',
-        'tabbar-border-color': '#ddd',
+        'tabbar-highlight-text-color': '#7abfff',
+        'tabbar-border-color': transparent,
 
         // Switch
         'switch-highlight-color': '#5198db',
