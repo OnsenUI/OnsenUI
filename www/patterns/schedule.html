@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
+    <link rel="stylesheet" href="../onsen-css-components-default.css">
+    <link rel="stylesheet" href="schedule.css">
+
+    <script src="lib/onsen/js/angular/angular.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+    </script>
+
+  </head>
+  <body>
+
+    <ons-tabbar>
+      <ons-tab page="schedule.html" active="true">
+        <ons-icon icon="ion-ios7-calendar" style="font-size: 28px"></ons-icon>
+      </ons-tab>
+
+
+      <ons-tab page="schedule.html">
+        <ons-icon icon="ion-ios7-people" style="font-size: 28px"></ons-icon>
+      </ons-tab>
+
+      <ons-tab page="schedule.html">
+        <ons-icon icon="ion-gear-a" style="font-size: 28px"></ons-icon>
+      </ons-tab>
+    </ons-tabbar>
+
+    <ons-template id="schedule.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="left">
+          </div>
+          <div class="center">
+            Schedule
+          </div>
+          <div class="right">
+            <ons-toolbar-button>
+              <ons-icon icon="ion-plus" fixed-width="false"></ons-icon>
+            </ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+
+        <div class="navigation-bar">
+          <div class="navigation-bar__center">
+
+            <!-- segment control -->
+            <div class="button-bar" style="width:200px; margin:3px auto 0;">
+              <div class="button-bar__item">
+                <input type="radio" name="navi-segment-a" checked>
+                <div class="button-bar__button">Today</div>
+              </div>
+              <div class="button-bar__item">
+                <input type="radio" name="navi-segment-a">
+                <div class="button-bar__button">Tomorrow</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <ons-list class="plan-list">
+          <ons-list-item modifier="chevron" class="plan" ng-repeat="a in [1,2,3,4,5,6,7,8,9,10]">
+            <ons-row>
+              <ons-col width="80px" class="plan-left">
+                <div class="plan-date">8:45 AM</div>
+                <div class="plan-duration">1h</div>
+              </ons-col>
+
+              <ons-col width="6px" class="plan-center" ng-style="{backgroundColor:a % 3 == 1 ? '#3399ff' : '#ccc'}">
+              </ons-col>
+
+              <ons-col class="plan-right">
+                <div class="plan-name">Developer's meetup</div>
+
+                <div class="plan-info">
+                  <div ng-hide="a % 4 == 0">
+                    <ons-icon icon="fa-phone"></ons-icon>123-456-789
+                  </div>
+
+                  <div ng-hide="a % 3 == 0">
+                    <ons-icon icon="fa-map-marker"></ons-icon>1001, Bemona Civic Center
+                  </div>
+                </div>
+              </ons-col>
+            </ons-row>
+          </ons-list-item>
+
+        </ons-list>
+
+
+
+      </ons-page>
+    </ons-template>
+
+  </body>
+</html>
