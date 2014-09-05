@@ -9,6 +9,7 @@ v1.1.3-dev
  * core: Added ons.disableAutoStatusBarFill() and ons.enableAutoStatusBarFill().
  * core: Changed to write warning message on loading if angular.element is not JQLite.
  * core: Added ons.orientation for dealing with device orientation.
+ * navigator: Fixed [#208](https://github.com/OnsenUI/OnsenUI/issues/208).
  * ons-switch: Implemented [#199](https://github.com/OnsenUI/OnsenUI/issues/199). Changed switch component 'change' event to have 'isInteractive' property.
  * ons-tabbar: Renamed 'ons-tabbar-item' to 'ons-tab'.
  * ons-tabbar: Changed 'ons-tab' to accept child html contents.

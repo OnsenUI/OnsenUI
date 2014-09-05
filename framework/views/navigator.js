@@ -385,7 +385,7 @@ limitations under the License.
 
         var event = {
           enterPage: pageObject,
-          leagePage: this.pages[this.pages.length - 1],
+          leavePage: this.pages[this.pages.length - 1],
           navigator: this
         };
 
