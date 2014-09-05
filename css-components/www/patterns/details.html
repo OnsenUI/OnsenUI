@@ -26,86 +26,90 @@
     </ons-tabbar>
 
     <ons-template id="page.html">
-      <ons-page modifier="details">
+      <ons-page>
+        <ons-toolbar modifier="transparent">
+          <div class="right">
+            <ons-toolbar-button><ons-icon icon="ion-ios7-chatboxes" style="color: white"></ons-icon></ons-toolbar-button>
+          </div>
+          <div class="left">
+            <ons-toolbar-button><ons-icon icon="ion-arrow-left-c" style="color: white; font-size: 28px;" fixed-width="false"></ons-icon></ons-toolbar-button>
+          </div>
+        </ons-toolbar>
 
-        <div class="card">
-          <div class="card-toolbar">
-            <div style="float: right;">
-              <ons-toolbar-button><ons-icon icon="ion-ios7-chatboxes" style="color: white"></ons-icon></ons-toolbar-button>
-            </div>
-            <div>
-              <ons-toolbar-button><ons-icon icon="ion-arrow-left-c" style="color: white; font-size: 28px;" fixed-width="false"></ons-icon></ons-toolbar-button>
-            </div>
+        <div class="details-content">
+
+          <div class="card">
+
+            <div class="card-name">Heiroku Sushi</div>
+            <div class="card-desc">Traditional Japanese Sushi<br>/ Open until 10:30pm</div>
+            
           </div>
 
-          <div class="card-name">Heiroku Sushi</div>
-          <div class="card-desc">Traditional Japanese Sushi<br>/ Open until 10:30pm</div>
-          
+          <div class="rating"><div class="rating-num">
+              <ons-icon icon="fa-star" fixed-width="false"></ons-icon> 
+              <ons-icon icon="fa-star" fixed-width="false"></ons-icon> 
+              <ons-icon icon="fa-star" fixed-width="false"></ons-icon> 
+              <ons-icon icon="fa-star-half" fixed-width="false"></ons-icon> 
+              3.5
+          </div></div>
+
+          <ons-list style="border-top: none"><ons-list-item style="line-height: 1; padding: 0;">
+            <ons-row class="action">
+
+              <ons-col class="action-col"> 
+                <div class="action-icon"><ons-icon icon="ion-ios7-star-half"></ons-icon></div>
+                <div class="action-label">Rate</div>
+              </ons-col>
+
+              <ons-col class="action-col">
+                <div class="action-icon"><ons-icon icon="ion-bookmark"></ons-icon></div>
+                <div class="action-label">Save</div>
+              </ons-col>
+
+              <ons-col class="action-col">
+                <div class="action-icon"><ons-icon icon="ion-share"></ons-icon></div>
+                <div class="action-label">Share</div>
+              </ons-col>
+
+              <ons-col class="action-col">
+                <div class="action-icon"><ons-icon icon="ion-compose"></ons-icon></div>
+                <div class="action-label">Check In</div>
+              </ons-col>
+
+            </ons-row>
+          </ons-list-item></ons-list>
+
+          <ons-list style="margin-top: 12px;">
+            <ons-list-item modifier="chevron">
+              <div class="prop-desc">
+                <ons-icon icon="fa-map-marker"></ons-icon>
+                Bunkyo-ku Hongo 5-1-2
+              </div>
+            </ons-list-item>
+
+            <ons-list-item modifier="chevron">
+              <div class="prop-desc">
+                <ons-icon icon="fa-mobile"></ons-icon>
+                (080) 5260-25xx
+              </div>
+            </ons-list-item>
+
+            <ons-list-item modifier="chevron">
+              <div class="prop-desc">
+                <ons-icon icon="fa-book"></ons-icon>
+                View Menu
+              </div>
+            </ons-list-item>
+
+            <ons-list-item modifier="chevron">
+              <div class="prop-desc">
+                <ons-icon icon="fa-clock-o"></ons-icon>
+                Make Reservation
+              </div>
+            </ons-list-item>
+          </ons-list>
+
         </div>
-
-        <div class="rating"><div class="rating-num">
-            <ons-icon icon="fa-star" fixed-width="false"></ons-icon> 
-            <ons-icon icon="fa-star" fixed-width="false"></ons-icon> 
-            <ons-icon icon="fa-star" fixed-width="false"></ons-icon> 
-            <ons-icon icon="fa-star-half" fixed-width="false"></ons-icon> 
-            3.5
-        </div></div>
-
-        <ons-list style="border-top: none"><ons-list-item style="line-height: 1; padding: 0;">
-          <ons-row class="action">
-
-            <ons-col class="action-col"> 
-              <div class="action-icon"><ons-icon icon="ion-ios7-star-half"></ons-icon></div>
-              <div class="action-label">Rate</div>
-            </ons-col>
-
-            <ons-col class="action-col">
-              <div class="action-icon"><ons-icon icon="ion-bookmark"></ons-icon></div>
-              <div class="action-label">Save</div>
-            </ons-col>
-
-            <ons-col class="action-col">
-              <div class="action-icon"><ons-icon icon="ion-share"></ons-icon></div>
-              <div class="action-label">Share</div>
-            </ons-col>
-
-            <ons-col class="action-col">
-              <div class="action-icon"><ons-icon icon="ion-compose"></ons-icon></div>
-              <div class="action-label">Check In</div>
-            </ons-col>
-
-          </ons-row>
-        </ons-list-item></ons-list>
-
-        <ons-list style="margin-top: 12px;">
-          <ons-list-item modifier="chevron">
-            <div class="prop-desc">
-              <ons-icon icon="fa-map-marker"></ons-icon>
-              Bunkyo-ku Hongo 5-1-2
-            </div>
-          </ons-list-item>
-
-          <ons-list-item modifier="chevron">
-            <div class="prop-desc">
-              <ons-icon icon="fa-mobile"></ons-icon>
-              (080) 5260-25xx
-            </div>
-          </ons-list-item>
-
-          <ons-list-item modifier="chevron">
-            <div class="prop-desc">
-              <ons-icon icon="fa-book"></ons-icon>
-              View Menu
-            </div>
-          </ons-list-item>
-
-          <ons-list-item modifier="chevron">
-            <div class="prop-desc">
-              <ons-icon icon="fa-clock-o"></ons-icon>
-              Make Reservation
-            </div>
-          </ons-list-item>
-        </ons-list>
 
       </ons-page>
     </ons-template>

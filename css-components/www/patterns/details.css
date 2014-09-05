@@ -1,4 +1,10 @@
-
+.details-content {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+}
 
 .card {
   background-color: white;
@@ -9,10 +15,6 @@
   height: 250px;
 }
 
-.card-toolbar {
-  opacity: 0.8;
-}
-
 .card-toolbar ons-back-button span {
   color: white;
 }
@@ -20,7 +22,7 @@
 .card-name {
   font-weight: 600;
   font-size: 20px;
-  padding: 46px 0 8px 0;
+  padding: 66px 0 8px 0;
   text-align: center;
 }
 
