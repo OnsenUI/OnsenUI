@@ -57,10 +57,10 @@
 
         <ons-list class="person-list" ng-repeat="char in ['A', 'B', 'C', 'D', 'E']">
           <ons-list-header class="person-list-header">{{char}}</ons-list-header>
-          <ons-list-item class="person" modifier="tappable" ng-repeat="b in [1,2,3,4,5]"> 
+          <ons-list-item class="person" modifier="tappable" ng-repeat="i in [1,2,3,4,5]"> 
             <ons-row>
               <ons-col width="40px">
-                <img src="images/new/profile-image.png" class="person-image">
+              <img src="images/new/profile-image-0{{i}}.png" class="person-image">
               </ons-col>
               <ons-col class="person-name">
                 Adam Erope
