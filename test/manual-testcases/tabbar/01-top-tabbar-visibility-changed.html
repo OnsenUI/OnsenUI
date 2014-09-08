@@ -14,13 +14,19 @@
   </head>
   <body>
 
-    <ons-tabbar position="top" hide-tabs="$root.hide">
-      <ons-tabbar-item icon="ion-stop" label="menu" page="hoge.html" active="true"></ons-tabbar-item>
+    <ons-tabbar position="top" hide-tabs="{{$root.hide}}">
+      <ons-tabbar-item icon="ion-stop" label="page" page="hoge.html" active="true"></ons-tabbar-item>
+      <ons-tabbar-item icon="ion-stop" label="page"></ons-tabbar-item>
+      <ons-tabbar-item icon="ion-stop" label="page"></ons-tabbar-item>
     </ons-tabbar>
 
     <script type="text/ons-template" id="hoge.html">
       <p style="text-align: center">
-        <ons-button modifier="light" ng-click="$root.hide = !$root.hide">Change Tabbar Visibility</ons-button>
+
+        <ons-button modifier="light" ng-click="$root.hide = 'false'">Show</ons-button>
+
+        <ons-button modifier="light" ng-click="$root.hide = 'true'">Hide</ons-button>
+
         <div style="text-align: center">
           <p>a</p>
           <p>b</p>
