@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.3-dev - 2014-08-28 */
+/*! onsenui - v1.1.3-dev - 2014-09-08 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -24614,9 +24614,10 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/tab_bar.tpl",
-    "<div style=\"margin-bottom: {{tabbarHeight}}\" class=\"ons-tab-bar__content\"></div>\n" +
-    "<div ng-hide=\"hideTabs\" class=\"tab-bar ons-tab-bar__footer {{modifierTemplater('tab-bar--*')}} ons-tabbar-inner\"></div>\n" +
+  $templateCache.put("templates/tab.tpl",
+    "<input type=\"radio\" name=\"tab-bar-{{tabbarId}}\" style=\"display: none\">\n" +
+    "<button class=\"tab-bar__button tab-bar-inner {{tabbarModifierTemplater('tab-bar--*__button')}} {{modifierTemplater('tab-bar__button--*')}}\" ng-click=\"tryToChange()\">\n" +
+    "</button>\n" +
     "");
 }]);
 })();
@@ -24626,14 +24627,9 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/tab_bar_item.tpl",
-    "<label class=\"tab-bar__item {{tabbarModifierTemplater('tab-bar--*__item')}} {{modifierTemplater('tab-bar__item--*')}}\">\n" +
-    "  <input type=\"radio\" name=\"tab-bar-{{tabbarId}}\" style=\"display: none\">\n" +
-    "  <button class=\"tab-bar__button {{tabbarModifierTemplater('tab-bar--*__button')}} {{modifierTemplater('tab-bar__button--*')}}\" ng-click=\"tryToChange()\">\n" +
-    "    <div ng-if=\"icon != undefined\" class=\"tab-bar__icon\"><ons-icon icon=\"{{tabIcon}}\" style=\"font-size: 28px; line-height: 34px; vertical-align: top;\"></ons-icon></div>\n" +
-    "    <div ng-if=\"label\" class=\"tab-bar__label\">{{label}}</div>\n" +
-    "  </button>\n" +
-    "</label>\n" +
+  $templateCache.put("templates/tab_bar.tpl",
+    "<div class=\"ons-tab-bar__content tab-bar__content\"></div>\n" +
+    "<div ng-hide=\"hideTabs\" class=\"tab-bar ons-tab-bar__footer {{modifierTemplater('tab-bar--*')}} ons-tabbar-inner\"></div>\n" +
     "");
 }]);
 })();
@@ -24770,167 +24766,19 @@ limitations under the License.
 
 */
 
-(function(){
+window.ons = (function(){
   'use strict';
 
   var module = angular.module('onsen', ['templates-main']);
   angular.module('onsen.directives', ['onsen']); // for BC
 
   // JS Global facade for Onsen UI.
-  var ons = window.ons = {
-
-    _readyLock: new DoorLock(),
-
-    _onsenService: null,
-
-    _unlockersDict: {},
-
-    /**
-     * Bootstrap this document as a Onsen UI application.
-     *
-     * If you want use your AngularJS module, use "ng-app" directive and "angular.module()" manually.
-     *
-     * @param {Array} [deps] dependency modules
-     */
-    bootstrap : function(deps) {
-      deps = ['onsen'].concat(angular.isArray(deps) ? deps : []);
-
-      var doc = window.document;
-      if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
-        doc.addEventListener('DOMContentLoaded', function() {
-          angular.bootstrap(doc.documentElement, deps);
-        }, false);
-      } else if (doc.documentElement) {
-        angular.bootstrap(doc.documentElement, deps);
-      } else {
-        throw new Error('Invalid state');
-      }
-    },
-
-    /**
-     * @param {String} [name]
-     * @param {Object/jqLite/HTMLElement} dom $event object or jqLite object or HTMLElement object.
-     * @return {Object}
-     */
-    findParentComponentUntil: function(name, dom) {
-      var element;
-      if (dom instanceof HTMLElement) {
-        element = angular.element(dom);
-      } else if (dom instanceof angular.element) {
-        element = dom;
-      } else if (dom.target) {
-        element = angular.element(dom.target);
-      }
-
-      return element.inheritedData(name);
-    },
-
-    /**
-     * @param {Function} listener
-     */
-    setDefaultDeviceBackButtonListener: function(listener) {
-      this._getOnsenService().getDefaultDeviceBackButtonHandler().setListener(listener);
-    },
-
-    /**
-     * Disable this framework to handle cordova "backbutton" event.
-     */
-    disableDeviceBackButtonHandler: function() {
-      this._getOnsenService().DeviceBackButtonHandler.disable();
-    },
-
-    /**
-     * Enable this framework to handle cordova "backbutton" event.
-     */
-    enableDeviceBackButtonHandler: function() {
-      this._getOnsenService().DeviceBackButtonHandler.enable();
-    },
-
-    /**
-     * Find view object correspond dom element queried by CSS selector.
-     *
-     * @param {String} selector CSS selector
-     * @param {HTMLElement} [dom]
-     * @return {Object/void}
-     */
-    findComponent: function(selector, dom) {
-      var target = (dom ? dom : document).querySelector(selector);
-      return target ? angular.element(target).data(target.nodeName.toLowerCase()) || null : null;
-    },
-
-    /**
-     * @return {Boolean}
-     */
-    isReady: function() {
-      return !ons._readyLock.isLocked();
-    },
-
-    /**
-     * @param {HTMLElement} dom
-     */
-    compile : function(dom) {
-      if (!ons.$compile) {
-        throw new Error('ons.$compile() is not ready. Wait for initialization with ons.ready().');
-      }
-
-      if (!(dom instanceof HTMLElement)) {
-        throw new Error('First argument must be an instance of HTMLElement.');
-      }
-
-      var scope = angular.element(dom).scope();
-      if (!scope) {
-        throw new Error('AngularJS Scope is null. Argument DOM element must be attached in DOM document.');
-      }
-
-      ons.$compile(dom)(scope);
-    },
-
-    _getOnsenService: function() {
-      if (!this._onsenService) {
-        throw new Error('$onsen is not loaded, wait for ons.ready().');
-      }
-
-      return this._onsenService;
-    },
-
-    /**
-     * @param {Array} [dependencies]
-     * @param {Function} callback
-     */
-    ready : function(/* dependencies, */callback) {
-      if (callback instanceof Function) {
-        if (ons.isReady()) {
-          callback();
-        } else {
-          ons._readyLock.waitUnlock(callback);
-        }
-      } else if (angular.isArray(callback) && arguments[1] instanceof Function) {
-        var dependencies = callback;
-        callback = arguments[1];
-
-        ons.ready(function() {
-          var $onsen = ons._getOnsenService();
-          $onsen.waitForVariables(dependencies, callback);
-        });
-      }
-    },
-
-    /**
-     * @return {Boolean}
-     */
-    isWebView: function() {
-
-      if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
-        throw new Error('isWebView() method is available after dom contents loaded.');
-      }
-
-      return !!(window.cordova || window.phonegap || window.PhoneGap);
-    }
-  };
-
+  var ons = createOnsenFacade();
   waitDeviceReady();
   waitOnsenUILoad();
-  init();
+  initAngularModule();
+
+  return ons;
 
   function waitDeviceReady() {
     var unlockDeviceReady = ons._readyLock.lock();
@@ -24961,7 +24809,8 @@ limitations under the License.
     }]);
   }
 
-  function init() {
+  function initAngularModule() {
+    module.value('$onsGlobal', ons);
     module.run(['$compile', '$rootScope', '$onsen', function($compile, $rootScope, $onsen) {
       ons._onsenService = $onsen;
 
@@ -24971,6 +24820,184 @@ limitations under the License.
 
       ons.$compile = $compile;
     }]);
+  }
+
+  function createOnsenFacade() {
+    var ons = {
+
+      _readyLock: new DoorLock(),
+
+      _onsenService: null,
+
+      _config: {
+        autoStatusBarFill: true
+      },
+
+      _unlockersDict: {},
+
+      /**
+       * Bootstrap this document as a Onsen UI application.
+       *
+       * If you want use your AngularJS module, use "ng-app" directive and "angular.module()" manually.
+       *
+       * @param {Array} [deps] dependency modules
+       */
+      bootstrap : function(deps) {
+        deps = ['onsen'].concat(angular.isArray(deps) ? deps : []);
+
+        var doc = window.document;
+        if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
+          doc.addEventListener('DOMContentLoaded', function() {
+            angular.bootstrap(doc.documentElement, deps);
+          }, false);
+        } else if (doc.documentElement) {
+          angular.bootstrap(doc.documentElement, deps);
+        } else {
+          throw new Error('Invalid state');
+        }
+      },
+
+      /**
+       * Enable status bar fill feature on iOS7 and above.
+       */
+      enableAutoStatusBarFill: function() {
+        if (this.isReady()) {
+          throw new Error('This method must be called before ons.isReady() is true.');
+        }
+        this._config.autoStatusBarFill = true;
+      },
+
+      /**
+       * Disabled status bar fill feature on iOS7 and above.
+       */
+      disableAutoStatusBarFill: function() {
+        if (this.isReady()) {
+          throw new Error('This method must be called before ons.isReady() is true.');
+        }
+        this._config.autoStatusBarFill = false;
+      },
+
+      /**
+       * @param {String} [name]
+       * @param {Object/jqLite/HTMLElement} dom $event object or jqLite object or HTMLElement object.
+       * @return {Object}
+       */
+      findParentComponentUntil: function(name, dom) {
+        var element;
+        if (dom instanceof HTMLElement) {
+          element = angular.element(dom);
+        } else if (dom instanceof angular.element) {
+          element = dom;
+        } else if (dom.target) {
+          element = angular.element(dom.target);
+        }
+
+        return element.inheritedData(name);
+      },
+
+      /**
+       * @param {Function} listener
+       */
+      setDefaultDeviceBackButtonListener: function(listener) {
+        this._getOnsenService().getDefaultDeviceBackButtonHandler().setListener(listener);
+      },
+
+      /**
+       * Disable this framework to handle cordova "backbutton" event.
+       */
+      disableDeviceBackButtonHandler: function() {
+        this._getOnsenService().DeviceBackButtonHandler.disable();
+      },
+
+      /**
+       * Enable this framework to handle cordova "backbutton" event.
+       */
+      enableDeviceBackButtonHandler: function() {
+        this._getOnsenService().DeviceBackButtonHandler.enable();
+      },
+
+      /**
+       * Find view object correspond dom element queried by CSS selector.
+       *
+       * @param {String} selector CSS selector
+       * @param {HTMLElement} [dom]
+       * @return {Object/void}
+       */
+      findComponent: function(selector, dom) {
+        var target = (dom ? dom : document).querySelector(selector);
+        return target ? angular.element(target).data(target.nodeName.toLowerCase()) || null : null;
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      isReady: function() {
+        return !ons._readyLock.isLocked();
+      },
+
+      /**
+       * @param {HTMLElement} dom
+       */
+      compile : function(dom) {
+        if (!ons.$compile) {
+          throw new Error('ons.$compile() is not ready. Wait for initialization with ons.ready().');
+        }
+
+        if (!(dom instanceof HTMLElement)) {
+          throw new Error('First argument must be an instance of HTMLElement.');
+        }
+
+        var scope = angular.element(dom).scope();
+        if (!scope) {
+          throw new Error('AngularJS Scope is null. Argument DOM element must be attached in DOM document.');
+        }
+
+        ons.$compile(dom)(scope);
+      },
+
+      _getOnsenService: function() {
+        if (!this._onsenService) {
+          throw new Error('$onsen is not loaded, wait for ons.ready().');
+        }
+
+        return this._onsenService;
+      },
+
+      /**
+       * @param {Array} [dependencies]
+       * @param {Function} callback
+       */
+      ready : function(/* dependencies, */callback) {
+        if (callback instanceof Function) {
+          if (ons.isReady()) {
+            callback();
+          } else {
+            ons._readyLock.waitUnlock(callback);
+          }
+        } else if (angular.isArray(callback) && arguments[1] instanceof Function) {
+          var dependencies = callback;
+          callback = arguments[1];
+
+          ons.ready(function() {
+            var $onsen = ons._getOnsenService();
+            $onsen.waitForVariables(dependencies, callback);
+          });
+        }
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      isWebView: function() {
+
+        if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
+          throw new Error('isWebView() method is available after dom contents loaded.');
+        }
+
+        return !!(window.cordova || window.phonegap || window.PhoneGap);
+      }
+    };
+    return ons;
   }
 
 })();
@@ -26267,7 +26294,7 @@ limitations under the License.
 
         var event = {
           enterPage: pageObject,
-          leagePage: this.pages[this.pages.length - 1],
+          leavePage: this.pages[this.pages.length - 1],
           navigator: this
         };
 
@@ -28966,7 +28993,7 @@ limitations under the License.
         }.bind(this));
 
         this._checkbox.on('change', function(event) {
-          this.emit('change', {'switch': this, value: this._checkbox[0].checked, triggeredBy: 'human'});
+          this.emit('change', {'switch': this, value: this._checkbox[0].checked, isInteractive: true});
         }.bind(this));
       },
 
@@ -28988,7 +29015,7 @@ limitations under the License.
           this._checkbox[0].checked = isChecked;
           this._scope.$evalAsync();
 
-          this.emit('change', {'switch': this, value: isChecked, triggeredBy: 'setchecked'});
+          this.emit('change', {'switch': this, value: isChecked, isInteractive: false});
         }
       },
 
@@ -29116,10 +29143,28 @@ limitations under the License.
         this._tabbarId = Date.now();
         this._tabItems = [];
 
-        this._containerElement = angular.element(element[0].querySelector('.ons-tab-bar__content'));
-        this._footerElement = angular.element(element[0].querySelector('.ons-tab-bar__footer'));
+        this._contentElement = angular.element(element[0].querySelector('.ons-tab-bar__content'));
+        this._tabbarElement = angular.element(element[0].querySelector('.ons-tab-bar__footer'));
 
         this._scope.$on('$destroy', this._destroy.bind(this));
+
+
+        if (this._hasTopTabbar()) {
+          setImmediate(function() {
+            this._contentElement.addClass('tab-bar--top__content');
+            this._tabbarElement.addClass('tab-bar--top');
+          }.bind(this));
+
+          var page = ons.findParentComponentUntil('ons-page', this._element[0]);
+          if (page) {
+            window.hoge = page.getContentElement();
+            this._element.css('top', window.getComputedStyle(page.getContentElement(), null).getPropertyValue('padding-top'));
+          }
+        }
+      },
+
+      _hasTopTabbar: function() {
+        return this._attrs.position === 'top';
       },
 
       /**
@@ -29196,10 +29241,18 @@ limitations under the License.
       },
 
       _onTabbarVisibilityChanged: function() {
-        if (this._scope.hideTabs) {
-          this._scope.tabbarHeight = 0;
+        if (this._hasTopTabbar()) {
+          if (this._scope.hideTabs) {
+            this._contentElement.css('top', '0px');
+          } else {
+            this._contentElement.css('top', '');
+          }
         } else {
-          this._scope.tabbarHeight = this._footerElement[0].clientHeight + 'px';
+          if (this._scope.hideTabs) {
+            this._tabbarElement.css('bottom', '0px');
+          } else {
+            this._tabbarElement.css('bottom', '');
+          }
         }
       },
 
@@ -29263,7 +29316,7 @@ limitations under the License.
         var pageScope = this._scope.$parent.$new();
         var link = $compile(element);
 
-        this._containerElement.append(element);
+        this._contentElement.append(element);
         var pageContent = link(pageScope);
         pageScope.$evalAsync();
 
@@ -29894,7 +29947,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.directive('onsIfOrientation', ['$onsen', function($onsen) {
+  module.directive('onsIfOrientation', ['$onsen', '$onsGlobal', function($onsen, $onsGlobal) {
     return {
       restrict: 'A',
       replace: false,
@@ -29910,15 +29963,13 @@ limitations under the License.
         return function(scope, element, attrs) {
           element.addClass('ons-if-orientation-inner');
 
-          window.addEventListener('orientationchange', update, false);
-          window.addEventListener('resize', update, false);
           attrs.$observe('onsIfOrientation', update);
+          $onsGlobal.orientation.on('change', update);
 
           update();
 
           $onsen.cleaner.onDestroy(scope, function() {
-            window.removeEventListener('orientationchange', update, false);
-            window.removeEventListener('resize', update, false);
+            $onsGlobal.orientation.off('change', update);
 
             $onsen.clearComponent({
               element: element,
@@ -29930,29 +29981,19 @@ limitations under the License.
 
           function update() {
             var userOrientation = ('' + attrs.onsIfOrientation).toLowerCase();
-            var orientation = getLandscapeOrPortraitFromInteger(window.orientation);
+            var orientation = getLandscapeOrPortrait();
 
-            if (userOrientation && (userOrientation === 'portrait' || userOrientation === 'landscape')) {
+            if (userOrientation === 'portrait' || userOrientation === 'landscape') {
               if (userOrientation === orientation) {
-                element.css('display', 'block');
+                element.css('display', '');
               } else {
                 element.css('display', 'none');
               }
             }
           }
 
-          function getLandscapeOrPortraitFromInteger(orientation) {
-            if (orientation === undefined ) {
-              return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
-            }
-
-            if (orientation == 90 || orientation == -90) {
-              return 'landscape';
-            }
-
-            if (orientation === 0 || orientation == 180) {
-              return 'portrait';
-            }
+          function getLandscapeOrPortrait() {
+            return $onsGlobal.orientation.isPortrait() ? 'portrait' : 'landscape';
           }
         };
       }
@@ -30499,7 +30540,7 @@ limitations under the License.
       compile: function(element) {
         var children = element.children().remove();
 
-        if ($onsen.isWebView() && $onsen.isIOS7Above()) {
+        if ($onsen.shouldFillStatusBar()) {
           // Adjustments for IOS7
           var fill = angular.element(document.createElement('div'));
           fill.addClass('page__status-bar-fill');
@@ -31282,6 +31323,141 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+ * @id tabbar_item
+ * @name ons-tab
+ * @description
+ *  [en]Represents a tab inside tabbar. Each ons-tabbar-item represents a page.[/en]
+ *  [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabbar-itemはページを表します。[/ja]
+ * @param page
+ *  [en]The page that this ons-tabbar-item points to.[/en]
+ *  [ja]ons-tabbar-itemが参照するページへのURLを指定します。[/ja]
+ * @param icon
+ *  [en]The icon name of the tab. Can specify the same icon name as ons-icon. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.[/en]
+ *  [ja]アイコン名を指定します。ons-iconと同じアイコン名を指定できます。個別にアイコンをカスタマイズする場合は、background-imageなどのCSSスタイルを用いて指定できます。[/ja]
+ * @param active-icon
+ *  [en]The icon name of the tab when active.[/en]
+ *  [ja]アクティブの際のアイコン名を指定します。[/ja]
+ * @param label
+ *  [en]The label of the tab item.[/en]
+ *  [ja]アイコン下に表示されるラベルを指定します。[/ja]
+ * @param active
+ *  [en]Set whether this item should be active or not. Valid values are true and false.[/en]
+ *  [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
+ * @codepen pGuDL
+ * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-tabbar [en]ons-tabbar component[/en][ja]ons-tabbarコンポーネント[/ja]
+ * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
+ * @seealso ons-icon [en]ons-icon component[/en][ja]ons-iconコンポーネント[/ja]
+ */
+(function() {
+  'use strict';
+  var module = angular.module('onsen');
+
+  module.directive('onsTab', tab);
+  module.directive('onsTabbarItem', tab); // for BC
+
+  var defaultInnerTemplate = 
+    '<div ng-if="icon != undefined" class="tab-bar__icon">' +
+      '<ons-icon icon="{{tabIcon}}" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>' + 
+    '</div>' +
+    '<div ng-if="label" class="tab-bar__label">{{label}}</div>';
+
+  function tab($onsen, $compile) {
+    return {
+      restrict: 'E',
+      transclude: true,
+
+      scope: {
+        page: '@',
+        active: '@',
+        icon: '@',
+        activeIcon: '@',
+        label: '@'
+      },
+
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab.tpl',
+
+      compile: function(element, attrs) {
+        element.addClass('tab-bar__item');
+
+        return function(scope, element, attrs, controller, transclude) {
+
+          var tabbarView = element.inheritedData('ons-tabbar');
+          if (!tabbarView) {
+            throw new Error('This ons-tab element is must be child of ons-tabbar element.');
+          }
+
+          element.addClass(tabbarView._scope.modifierTemplater('tab-bar--*__item'));
+          element.addClass(tabbarView._scope.modifierTemplater('tab-bar__item--*'));
+
+          transclude(function(cloned) {
+            var wrapper = angular.element(element[0].querySelector('.tab-bar-inner'));
+
+            if (attrs.icon || attrs.label || !cloned[0]) {
+              var innerElement = angular.element('<div>' + defaultInnerTemplate + '</div>').children();
+              wrapper.append(innerElement);
+              $compile(innerElement)(scope);
+            } else {
+              wrapper.append(cloned);
+            }
+          });
+
+          var radioButton = element[0].querySelector('input');
+
+          scope.tabbarModifierTemplater = tabbarView._scope.modifierTemplater;
+          scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+          scope.tabbarId = tabbarView._tabbarId;
+          scope.tabIcon = scope.icon;
+
+          tabbarView.addTabItem(scope);
+
+          // Make this tab active.
+          scope.setActive = function() {
+            element.addClass('active');
+            radioButton.checked = true;
+
+            if (scope.activeIcon) {
+              scope.tabIcon = scope.activeIcon;
+            }
+
+            angular.element(element[0].querySelectorAll('[ons-tab-inactive]')).css('display', 'none');
+            angular.element(element[0].querySelectorAll('[ons-tab-active]')).css('display', 'inherit');
+          };
+
+          // Make this tab inactive.
+          scope.setInactive = function() {
+            element.removeClass('active');
+            radioButton.checked = false;
+            scope.tabIcon = scope.icon;
+
+            angular.element(element[0].querySelectorAll('[ons-tab-inactive]')).css('display', 'inherit');
+            angular.element(element[0].querySelectorAll('[ons-tab-active]')).css('display', 'none');
+          };
+
+          /**
+           * @return {Boolean}
+           */
+          scope.isActive = function() {
+            return element.hasClass('active');
+          };
+
+          scope.tryToChange = function() {
+            tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
+          };
+
+          if (scope.active) {
+            tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
+          }
+        };
+      }
+    };
+  }
+  tab.$inject = ['$onsen', '$compile'];
+})();
+
+/**
+ * @ngdoc directive
  * @id tabbar
  * @name ons-tabbar
  * @description
@@ -31296,6 +31472,9 @@ limitations under the License.
  * @param animation
  *  [en]Animation name. Preset values are none/fade.[/en]
  *  [ja]ページ読み込み時のアニメーションを指定します。noneもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
+ * @param position
+ *  [en]Tabbar's position. Preset values are bottom/top.[/en]
+ *  [ja]タブバーの位置を指定します。bottomもしくはtopを選択できます。デフォルトはbottomです。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Possible events are prechange and postchange. See the guide for more details.[/en]
  *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。詳細はガイドを参照してください。[/ja]
@@ -31326,7 +31505,7 @@ limitations under the License.
       replace: false,
       transclude: true,
       scope: {
-        hide: '@',
+        hideTabs: '=',
         onActiveTabChanged: '&'
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
@@ -31339,9 +31518,8 @@ limitations under the License.
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         scope.selectedTabItem = {source: ''};
 
-        attrs.$observe('hideTabs', function(hide) {
-          scope.hideTabs = hide;
-          tabbarView._onTabbarVisibilityChanged();
+        scope.$watch('hideTabs', function(hide) {
+          tabbarView.setTabbarVisibility(!hide);
         });
 
         var tabbarView = new TabbarView(scope, element, attrs);
@@ -31360,104 +31538,6 @@ limitations under the License.
           element.data('ons-tabbar', undefined);
           $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
         });
-      }
-    };
-  }]);
-})();
-
-/**
- * @ngdoc directive
- * @id tabbar_item
- * @name ons-tabbar-item
- * @description
- *  [en]Represents a tab inside tabbar. Each ons-tabbar-item represents a page.[/en]
- *  [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabbar-itemはページを表します。[/ja]
- * @param page
- *  [en]The page that this ons-tabbar-item points to.[/en]
- *  [ja]ons-tabbar-itemが参照するページへのURLを指定します。[/ja]
- * @param icon
- *  [en]The icon name of the tab. Can specify the same icon name as ons-icon. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.[/en]
- *  [ja]アイコン名を指定します。ons-iconと同じアイコン名を指定できます。個別にアイコンをカスタマイズする場合は、background-imageなどのCSSスタイルを用いて指定できます。[/ja]
- * @param active-icon
- *  [en]The icon name of the tab when active.[/en]
- *  [ja]アクティブの際のアイコン名を指定します。[/ja]
- * @param label
- *  [en]The label of the tab item.[/en]
- *  [ja]アイコン下に表示されるラベルを指定します。[/ja]
- * @param active
- *  [en]Set whether this item should be active or not. Valid values are true and false.[/en]
- *  [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
- * @codepen pGuDL
- * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
- * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
- * @seealso ons-tabbar [en]ons-tabbar component[/en][ja]ons-tabbarコンポーネント[/ja]
- * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
- * @seealso ons-icon [en]ons-icon component[/en][ja]ons-iconコンポーネント[/ja]
- */
-(function() {
-  'use strict';
-  var module = angular.module('onsen');
-
-  module.directive('onsTabbarItem', ['$onsen', function($onsen) {
-    return {
-      restrict: 'E',
-      replace: true,
-      transclude: true,
-      scope: {
-        page: '@',
-        active: '@',
-        icon: '@',
-        activeIcon: '@',
-        label: '@'
-      },
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar_item.tpl',
-      link: function(scope, element, attrs) {
-
-        var tabbarView = element.inheritedData('ons-tabbar');
-        if (!tabbarView) {
-          throw new Error('ons-tabbar-item is must be child of ons-tabbar element.');
-        }
-
-        var radioButton = element[0].querySelector('input');
-
-        scope.tabbarModifierTemplater = tabbarView.modifierTemplater;
-        scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-        scope.tabbarId = tabbarView._tabbarId;
-        scope.tabIcon = scope.icon;
-
-        tabbarView.addTabItem(scope);
-
-        // Make this tab active.
-        scope.setActive = function() {
-          element.addClass('active');
-          radioButton.checked = true;
-
-          if (scope.activeIcon) {
-            scope.tabIcon = scope.activeIcon;
-          }
-        };
-
-        // Make this tab inactive.
-        scope.setInactive = function() {
-          element.removeClass('active');
-          radioButton.checked = false;
-          scope.tabIcon = scope.icon;
-        };
-
-        /**
-         * @return {Boolean}
-         */
-        scope.isActive = function() {
-          return element.hasClass('active');
-        };
-
-        scope.tryToChange = function() {
-          tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
-        };
-
-        if (scope.active) {
-          tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
-        }
       }
     };
   }]);
@@ -32117,351 +32197,375 @@ limitations under the License.
   /**
    * Internal service class for framework implementation.
    */
-  module.factory('$onsen', ['$rootScope', '$window', '$cacheFactory', '$document', '$templateCache', '$http', '$q', 'ComponentCleaner', 'DeviceBackButtonHandler', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, ComponentCleaner, DeviceBackButtonHandler) {
+  module.factory('$onsen', ['$rootScope', '$window', '$cacheFactory', '$document', '$templateCache', '$http', '$q', '$onsGlobal', 'ComponentCleaner', 'DeviceBackButtonHandler', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner, DeviceBackButtonHandler) {
 
-    var unlockerDict = {
-      _unlockersDict: {},
-
-      _unlockedVarDict: {},
-
-      /**
-       * @param {String} name
-       * @param {Function} unlocker
-       */
-      _addVarLock: function (name, unlocker) {
-        if (!(unlocker instanceof Function)) {
-          throw new Error('unlocker argument must be an instance of Function.');
-        }
-
-        if (this._unlockersDict[name]) {
-          this._unlockersDict[name].push(unlocker);
-        } else {
-          this._unlockersDict[name] = [unlocker];
-        }
-      },
-
-      /**
-       * @param {String} varName
-       */
-      unlockVarName: function(varName) {
-        var unlockers = this._unlockersDict[varName];
-
-        if (unlockers) {
-          unlockers.forEach(function(unlock) {
-            unlock();
-          });
-        }
-        this._unlockedVarDict[varName] = true;
-      },
-
-      /**
-       * @param {Array} dependencies an array of var name
-       * @param {Function} callback
-       */
-      addCallback: function(dependencies, callback) {
-        if (!(callback instanceof Function)) {
-          throw new Error('callback argument must be an instance of Function.');
-        }
-
-        var doorLock = new DoorLock();
-        var self = this;
-
-        dependencies.forEach(function(varName) {
-
-          if (!self._unlockedVarDict[varName]) {
-            // wait for variable declaration
-            var unlock = doorLock.lock();
-            self._addVarLock(varName, unlock);
-          }
-
-        });
-
-        if (doorLock.isLocked()) {
-          doorLock.waitUnlock(callback);
-        } else {
-          callback();
-        }
-      }
-    };
-
-    /**
-     * Global object stack manager.
-     *
-     * e.g. "ons.screen", "ons.navigator"
-     */
-    var aliasStack = {
-      _stackDict : {},
-
-      /**
-       * @param {String} name
-       * @param {Object} object
-       */
-      register: function(name, object) {
-        this._getStack(name).push(object);
-        
-        $onsen._defineVar(name, object);
-      },
-
-      /**
-       * @param {String} name
-       * @param {Object} target
-       */
-      unregister: function(name, target) {
-        var stack = this._getStack(name);
-
-        var index = stack.indexOf(target);
-        if (index === -1) {
-          throw new Error('no such object: ' + target);
-        }
-        stack.splice(index, 1);
-
-        var obj = stack.length > 0 ? stack[stack.length - 1] : null;
-        $onsen._defineVar(name, obj);
-      },
-
-      /**
-       * @param {String} name
-       */
-      _getStack: function(name) {
-        if (!this._stackDict[name]) {
-          this._stackDict[name] = [];
-        }
-
-        return this._stackDict[name];
-      }
-    };
-
-    var $onsen = {
-
-      DIRECTIVE_TEMPLATE_URL: "templates",
-
-      aliasStack: aliasStack,
-
-      cleaner: ComponentCleaner,
-
-      DeviceBackButtonHandler: DeviceBackButtonHandler,
-
-      _defaultDeviceBackButtonHandler: DeviceBackButtonHandler.create(angular.element(document.body), function() {
-        navigator.app.exitApp();
-      }),
-
-      getDefaultDeviceBackButtonHandler: function() {
-        return this._defaultDeviceBackButtonHandler;
-      },
-
-      /**
-       * @param {Object} params
-       * @param {Scope} [params.scope]
-       * @param {jqLite} [params.element]
-       * @param {Array} [params.elements]
-       * @param {Attributes} [params.attrs]
-       */
-      clearComponent: function(params) {
-        if (params.scope) {
-          ComponentCleaner.destroyScope(params.scope);
-        }
-
-        if (params.attrs) {
-          ComponentCleaner.destroyAttributes(params.attrs);
-        }
-
-        if (params.element) {
-          ComponentCleaner.destroyElement(params.element);
-        }
-
-        if (params.elements) {
-          params.elements.forEach(function(element) {
-            ComponentCleaner.destroyElement(element);
-          });
-        }
-      },
-
-      /**
-       * Find first ancestor of el with tagName
-       * or undefined if not found
-       *
-       * @param {jqLite} element
-       * @param {String} tagName
-       */
-      upTo : function(el, tagName) {
-        tagName = tagName.toLowerCase();
-
-        do {
-          if (!el) {
-            return null;
-          }
-          el = el.parentNode;
-          if (el.tagName.toLowerCase() == tagName) {
-            return el;
-          }
-        } while (el.parentNode);
-
-        return null;
-      },
-
-
-      /**
-       * @param {Array} dependencies
-       * @param {Function} callback
-       */
-      waitForVariables: function(dependencies, callback) {
-        unlockerDict.addCallback(dependencies, callback);
-      },
-
-      /**
-       * @param {jqLite} element
-       * @param {String} name
-       */
-      findElementeObject: function(element, name) {
-        return element.inheritedData(name);
-      },
-
-      /**
-       * @param {String} page
-       * @return {Promise}
-       */
-      getPageHTMLAsync: function(page) {
-        var cache = $templateCache.get(page);
-
-        if (cache) {
-          var deferred = $q.defer();
-
-          var html = typeof cache === 'string' ? cache : cache[1];
-          deferred.resolve(this.normalizePageHTML(html));
-
-          return deferred.promise;
-          
-        } else {
-          return $http({
-            url: page,
-            method: 'GET'
-          }).then(function(response) {
-            var html = response.data;
-
-            return this.normalizePageHTML(html);
-          }.bind(this));
-        }
-      },
-
-      /**
-       * @param {String} html
-       * @return {String}
-       */
-      normalizePageHTML: function(html) {
-        html = ('' + html).trim();
-
-        if (!html.match(/^<ons-page/)) {
-          html = '<ons-page>' + html + '</ons-page>';
-        }
-        
-        return html;
-      },
-
-      /**
-       * Create modifier templater function. The modifier templater generate css classes binded modifier name.
-       *
-       * @param {Object} attrs
-       * @return {Function} 
-       */
-      generateModifierTemplater: function(attrs) {
-        var modifiers = attrs && typeof attrs.modifier === 'string' ? attrs.modifier.trim().split(/ +/) : [];
-
-        /**
-         * @return {String} template eg. 'ons-button--*', 'ons-button--*__item'
-         * @return {String}
-         */
-        return function(template) {
-          return modifiers.map(function(modifier) {
-            return template.replace('*', modifier);
-          }).join(' ');
-        };
-      },
-
-      /**
-       * Define a variable to JavaScript global scope and AngularJS scope as 'var' attribute name.
-       *
-       * @param {Object} attrs
-       * @param object
-       */
-      declareVarAttribute: function(attrs, object) {
-        if (typeof attrs['var'] === 'string') {
-          var varName = attrs['var'];
-
-          this._defineVar(varName, object);
-          unlockerDict.unlockVarName(varName);
-        }
-      },
-
-      /**
-       * @return {Boolean}
-       */
-      isAndroid: function() {
-        return !!window.navigator.userAgent.match(/android/i);
-      },
-
-      /**
-       * @return {Boolean}
-       */
-      isIOS: function() {
-        return !!window.navigator.userAgent.match(/(ipad|iphone|ipod touch)/i);
-      },
-
-      /**
-       * @return {Boolean}
-       */
-      isWebView: function() {
-        return window.ons.isWebView();
-      },
-
-      /**
-       * @return {Boolean}
-       */
-      isIOS7Above: (function() {
-        var ua = window.navigator.userAgent;
-        var match = ua.match(/(iPad|iPhone|iPod touch);.*CPU.*OS (\d+)_(\d+)/i);
-
-        var result = match ? parseFloat(match[2] + '.' + match[3]) >= 7 : false;
-
-        return function() {
-          return result;
-        };
-      })(),
-
-      /**
-       * Define a variable to JavaScript global scope and AngularJS scope.
-       *
-       * Util.defineVar('foo', 'foo-value');
-       * // => window.foo and $scope.foo is now 'foo-value'
-       *
-       * Util.defineVar('foo.bar', 'foo-bar-value');
-       * // => window.foo.bar and $scope.foo.bar is now 'foo-bar-value'
-       *
-       * @param {String} name
-       * @param object
-       */
-      _defineVar: function(name, object) {
-        var names = name.split(/\./);
-
-        function set(container, names, object) {
-          var name;
-          for (var i = 0; i < names.length - 1; i++) {
-            name = names[i];
-            if (container[name] === undefined || container[name] === null) {
-              container[name] = {};
-            }
-            container = container[name];
-          }
-
-          container[names[names.length - 1]] = object;
-        }
-
-        set($window, names, object);
-        set($rootScope, names, object);
-      }
-    };
+    var unlockerDict = createUnlockerDict();
+    var aliasStack = createAliasStack();
+    var $onsen = createOnsenService();
 
     return $onsen;
-    
+
+    function createOnsenService() {
+      return {
+
+        DIRECTIVE_TEMPLATE_URL: 'templates',
+
+        aliasStack: aliasStack,
+
+        cleaner: ComponentCleaner,
+
+        DeviceBackButtonHandler: DeviceBackButtonHandler,
+
+        _defaultDeviceBackButtonHandler: DeviceBackButtonHandler.create(angular.element(document.body), function() {
+          navigator.app.exitApp();
+        }),
+
+        getDefaultDeviceBackButtonHandler: function() {
+          return this._defaultDeviceBackButtonHandler;
+        },
+
+        /**
+         * @return {Boolean}
+         */
+        isEnabledAutoStatusBarFill: function() {
+          return !!$onsGlobal._config.autoStatusBarFill;
+        },
+
+        /**
+         * @return {Boolean}
+         */
+        shouldFillStatusBar: function() {
+          return this.isEnabledAutoStatusBarFill() && this.isWebView() && this.isIOS7Above();
+        },
+
+        /**
+         * @param {Object} params
+         * @param {Scope} [params.scope]
+         * @param {jqLite} [params.element]
+         * @param {Array} [params.elements]
+         * @param {Attributes} [params.attrs]
+         */
+        clearComponent: function(params) {
+          if (params.scope) {
+            ComponentCleaner.destroyScope(params.scope);
+          }
+
+          if (params.attrs) {
+            ComponentCleaner.destroyAttributes(params.attrs);
+          }
+
+          if (params.element) {
+            ComponentCleaner.destroyElement(params.element);
+          }
+
+          if (params.elements) {
+            params.elements.forEach(function(element) {
+              ComponentCleaner.destroyElement(element);
+            });
+          }
+        },
+
+        /**
+         * Find first ancestor of el with tagName
+         * or undefined if not found
+         *
+         * @param {jqLite} element
+         * @param {String} tagName
+         */
+        upTo : function(el, tagName) {
+          tagName = tagName.toLowerCase();
+
+          do {
+            if (!el) {
+              return null;
+            }
+            el = el.parentNode;
+            if (el.tagName.toLowerCase() == tagName) {
+              return el;
+            }
+          } while (el.parentNode);
+
+          return null;
+        },
+
+
+        /**
+         * @param {Array} dependencies
+         * @param {Function} callback
+         */
+        waitForVariables: function(dependencies, callback) {
+          unlockerDict.addCallback(dependencies, callback);
+        },
+
+        /**
+         * @param {jqLite} element
+         * @param {String} name
+         */
+        findElementeObject: function(element, name) {
+          return element.inheritedData(name);
+        },
+
+        /**
+         * @param {String} page
+         * @return {Promise}
+         */
+        getPageHTMLAsync: function(page) {
+          var cache = $templateCache.get(page);
+
+          if (cache) {
+            var deferred = $q.defer();
+
+            var html = typeof cache === 'string' ? cache : cache[1];
+            deferred.resolve(this.normalizePageHTML(html));
+
+            return deferred.promise;
+            
+          } else {
+            return $http({
+              url: page,
+              method: 'GET'
+            }).then(function(response) {
+              var html = response.data;
+
+              return this.normalizePageHTML(html);
+            }.bind(this));
+          }
+        },
+
+        /**
+         * @param {String} html
+         * @return {String}
+         */
+        normalizePageHTML: function(html) {
+          html = ('' + html).trim();
+
+          if (!html.match(/^<ons-page/)) {
+            html = '<ons-page>' + html + '</ons-page>';
+          }
+          
+          return html;
+        },
+
+        /**
+         * Create modifier templater function. The modifier templater generate css classes binded modifier name.
+         *
+         * @param {Object} attrs
+         * @return {Function} 
+         */
+        generateModifierTemplater: function(attrs) {
+          var modifiers = attrs && typeof attrs.modifier === 'string' ? attrs.modifier.trim().split(/ +/) : [];
+
+          /**
+           * @return {String} template eg. 'ons-button--*', 'ons-button--*__item'
+           * @return {String}
+           */
+          return function(template) {
+            return modifiers.map(function(modifier) {
+              return template.replace('*', modifier);
+            }).join(' ');
+          };
+        },
+
+        /**
+         * Define a variable to JavaScript global scope and AngularJS scope as 'var' attribute name.
+         *
+         * @param {Object} attrs
+         * @param object
+         */
+        declareVarAttribute: function(attrs, object) {
+          if (typeof attrs['var'] === 'string') {
+            var varName = attrs['var'];
+
+            this._defineVar(varName, object);
+            unlockerDict.unlockVarName(varName);
+          }
+        },
+
+        /**
+         * @return {Boolean}
+         */
+        isAndroid: function() {
+          return !!window.navigator.userAgent.match(/android/i);
+        },
+
+        /**
+         * @return {Boolean}
+         */
+        isIOS: function() {
+          return !!window.navigator.userAgent.match(/(ipad|iphone|ipod touch)/i);
+        },
+
+        /**
+         * @return {Boolean}
+         */
+        isWebView: function() {
+          return window.ons.isWebView();
+        },
+
+        /**
+         * @return {Boolean}
+         */
+        isIOS7Above: (function() {
+          var ua = window.navigator.userAgent;
+          var match = ua.match(/(iPad|iPhone|iPod touch);.*CPU.*OS (\d+)_(\d+)/i);
+
+          var result = match ? parseFloat(match[2] + '.' + match[3]) >= 7 : false;
+
+          return function() {
+            return result;
+          };
+        })(),
+
+        /**
+         * Define a variable to JavaScript global scope and AngularJS scope.
+         *
+         * Util.defineVar('foo', 'foo-value');
+         * // => window.foo and $scope.foo is now 'foo-value'
+         *
+         * Util.defineVar('foo.bar', 'foo-bar-value');
+         * // => window.foo.bar and $scope.foo.bar is now 'foo-bar-value'
+         *
+         * @param {String} name
+         * @param object
+         */
+        _defineVar: function(name, object) {
+          var names = name.split(/\./);
+
+          function set(container, names, object) {
+            var name;
+            for (var i = 0; i < names.length - 1; i++) {
+              name = names[i];
+              if (container[name] === undefined || container[name] === null) {
+                container[name] = {};
+              }
+              container = container[name];
+            }
+
+            container[names[names.length - 1]] = object;
+          }
+
+          set($window, names, object);
+          set($rootScope, names, object);
+        }
+      };
+    }
+
+    function createUnlockerDict() {
+
+      return {
+        _unlockersDict: {},
+
+        _unlockedVarDict: {},
+
+        /**
+         * @param {String} name
+         * @param {Function} unlocker
+         */
+        _addVarLock: function (name, unlocker) {
+          if (!(unlocker instanceof Function)) {
+            throw new Error('unlocker argument must be an instance of Function.');
+          }
+
+          if (this._unlockersDict[name]) {
+            this._unlockersDict[name].push(unlocker);
+          } else {
+            this._unlockersDict[name] = [unlocker];
+          }
+        },
+
+        /**
+         * @param {String} varName
+         */
+        unlockVarName: function(varName) {
+          var unlockers = this._unlockersDict[varName];
+
+          if (unlockers) {
+            unlockers.forEach(function(unlock) {
+              unlock();
+            });
+          }
+          this._unlockedVarDict[varName] = true;
+        },
+
+        /**
+         * @param {Array} dependencies an array of var name
+         * @param {Function} callback
+         */
+        addCallback: function(dependencies, callback) {
+          if (!(callback instanceof Function)) {
+            throw new Error('callback argument must be an instance of Function.');
+          }
+
+          var doorLock = new DoorLock();
+          var self = this;
+
+          dependencies.forEach(function(varName) {
+
+            if (!self._unlockedVarDict[varName]) {
+              // wait for variable declaration
+              var unlock = doorLock.lock();
+              self._addVarLock(varName, unlock);
+            }
+
+          });
+
+          if (doorLock.isLocked()) {
+            doorLock.waitUnlock(callback);
+          } else {
+            callback();
+          }
+        }
+      };
+    }
+
+    function createAliasStack() {
+      /**
+       * Global object stack manager.
+       *
+       * e.g. "ons.screen", "ons.navigator"
+       */
+      return {
+        _stackDict : {},
+
+        /**
+         * @param {String} name
+         * @param {Object} object
+         */
+        register: function(name, object) {
+          this._getStack(name).push(object);
+          
+          $onsen._defineVar(name, object);
+        },
+
+        /**
+         * @param {String} name
+         * @param {Object} target
+         */
+        unregister: function(name, target) {
+          var stack = this._getStack(name);
+
+          var index = stack.indexOf(target);
+          if (index === -1) {
+            throw new Error('no such object: ' + target);
+          }
+          stack.splice(index, 1);
+
+          var obj = stack.length > 0 ? stack[stack.length - 1] : null;
+          $onsen._defineVar(name, obj);
+        },
+
+        /**
+         * @param {String} name
+         */
+        _getStack: function(name) {
+          if (!this._stackDict[name]) {
+            this._stackDict[name] = [];
+          }
+
+          return this._stackDict[name];
+        }
+      };
+    }
   }]);
 })();
 
@@ -32940,6 +33044,95 @@ window.animit = (function(){
 
   return Animit;
 })();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+window.ons.orientation = (function() {
+  return create()._init();
+
+  function create() {
+    var obj = {
+      // width and height on "orientationchange" event.
+      _innerWidth: 0,
+      _innerHeight: 0,
+
+      /**
+       * @return {Boolean}
+       */
+      isPortrait: function() {
+        return this._innerWidth < this._innerHeight;
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      isLandscape: function() {
+        return !this.isPortrait();
+      },
+
+      _init: function() {
+        document.addEventListener('DOMContentLoaded', this._onDOMContentLoaded.bind(this), false);
+
+        if ('orientation' in window) {
+          window.addEventListener('orientationchange', this._onOrientationChange.bind(this), false);
+        } else {
+          window.addEventListener('resize', this._onResize.bind(this), false);
+        }
+
+        this._updateDimentionInfo();
+
+        return this;
+      },
+
+      _updateDimentionInfo: function() {
+        this._innerWidth = window.innerWidth;
+        this._innerHeight = window.innerHeight;
+      },
+
+      _onDOMContentLoaded: function() {
+        this._updateDimentionInfo();
+        this.emit('change', {isPortrait: this.isPortrait()});
+      },
+
+      _onOrientationChange: function() {
+        // We use setImmediate because there is some cases that window's dimention information is not updated on "orientationchange".
+        setImmediate(function() {
+          this._updateDimentionInfo();
+          this.emit('change', {isPortrait: this.isPortrait()});
+        }.bind(this));
+      },
+
+      // Run on not mobile browser.
+      _onResize: function() {
+        var last = this.isPortrait();
+        this._updateDimentionInfo();
+        if (this.isPortrait() !== last) {
+          this.emit('change', {isPortrait: this.isPortrait()});
+        }
+      }
+    };
+
+    MicroEvent.mixin(obj);
+
+    return obj;
+  }
+})();
+
 
 (function() {
   'use strict';
