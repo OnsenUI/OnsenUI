@@ -232,10 +232,6 @@ module.controller('AppController',
 
 
   $scope.patterns = [
-    {name: 'login', displayName: 'Login'},
-    {name: 'signup', displayName: 'Signup' },
-    {name: 'list_avatars', displayName: 'List with Mini Pictures'},
-    {name: 'list_thumbnails', displayName: 'List with Pictures'},
     {name: 'details', displayName: 'Shop Details'},
     {name: 'profile', displayName: 'Profile'},
     {name: 'timeline', displayName: 'Timeline'},
@@ -244,22 +240,15 @@ module.controller('AppController',
     {name: 'settings', displayName: 'Settings'},
     {name: 'sliding_menu', displayName: 'Sliding Menu'},
     {name: 'compose', displayName: 'New Message'},
+    {name: 'login', displayName: 'Login'},
+    {name: 'signup', displayName: 'Signup' },
+    {name: 'list_avatars', displayName: 'List with Mini Pictures'},
+    {name: 'list_thumbnails', displayName: 'List with Pictures'},
     {name: 'list_with_header', displayName: 'List With Header'},
     {name: 'list_icons' , displayName: 'List Icons'},
     {name: 'range', displayName: 'Ranges'},
     {name: 'checkbox_list', displayName: 'Checkboxes'},
-    /*
-    {name: 'buttons_icons', displayName: 'Icon Buttons'},
-    {name: 'buttons_different_sizes', displayName: 'Buttons Different Sizes'},
-    {name: 'grid_menu', displayName: 'Grid Menu'},
-    {name: 'twitter', displayName: 'Timeline'},
-    {name: 'facebook_like_profile', displayName: 'Profile'},
-    {name: 'facebook-card', displayName: 'Card'},
-    {name: 'image_view', displayName: 'Image View'},
-    {name: 'register', displayName: 'Register'},
-    {name: 'search_shop', displayName: 'Search'},
-    */
-    {name: 'radiobutton_list', displayName: 'Radio Buttons'},
+    {name: 'radiobutton_list', displayName: 'Radio Buttons'}
   ];
 
   setTimeout(function() {
