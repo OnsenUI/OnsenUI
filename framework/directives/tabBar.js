@@ -60,7 +60,6 @@
         scope.selectedTabItem = {source: ''};
 
         attrs.$observe('hideTabs', function(hide) {
-          console.log(hide);
           var visible = hide !== 'true';
           tabbarView.setTabbarVisibility(visible);
         });
