@@ -379,8 +379,7 @@ h6 {
   -ms-user-select: none;
   user-select: none;
   z-index: 2;
-  display: table;
-  table-layout: fixed;
+  display: block;
   height: 44px;
   padding-left: 0;
   padding-right: 0;
@@ -392,7 +391,7 @@ h6 {
   font-weight: 400;
   width: 100%;
   white-space: nowrap;
-  overflow: hidden;
+  overflow: visible;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .navigation-bar {
@@ -431,43 +430,44 @@ h6 {
   background: transparent;
   border: none;
   line-height: normal;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
   height: 44px;
   vertical-align: top;
-  overflow: hidden;
-  display: table-cell;
+  overflow: visible;
+  display: block;
   vertical-align: middle;
+  float: left;
 }
 .navigation-bar__left {
   max-width: 50%;
+  width: 27%;
   text-align: left;
 }
 .navigation-bar__right {
   max-width: 50%;
+  width: 27%;
   text-align: right;
 }
 .navigation-bar__center {
-  width: 45%;
+  width: 46%;
   text-align: center;
   line-height: 44px;
   font-size: 17px;
   font-weight: 500;
-}
-.navigation-bar__center:first-child:last-child {
-  width: 100%;
 }
 .navigation-bar__title {
   line-height: 44px;
   font-size: 17px;
   font-weight: 500;
   color: #1f1f21;
+  width: 46%;
   margin: 0;
   padding: 0;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+.navigation-bar__center:first-child:last-child {
+  width: 100%;
 }
 /* topdoc
   name: Navigation Bar Item

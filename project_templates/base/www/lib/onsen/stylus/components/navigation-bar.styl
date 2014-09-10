@@ -58,12 +58,10 @@ navigation-bar()
 navigation-bar__item()
   reset-box-model()
   reset-base()
-  ellipsis()
 
 .navigation-bar
   navigation-bar()
-  display table
-  table-layout fixed
+  display block
   height var-height--navigation-bar
   padding-left var-padding--navigation-bar
   padding-right var-padding--navigation-bar
@@ -74,7 +72,7 @@ navigation-bar__item()
   font-weight var-font-weight
   width 100%
   white-space nowrap
-  overflow hidden
+  overflow visible
   retina-navigation-bar-border(bottom, var-navigation-bar-separator-color)
 
 .navigation-bar__line-height
@@ -89,39 +87,43 @@ navigation-bar__item()
   navigation-bar__item()
   height var-height--navigation-bar
   vertical-align top
-  overflow hidden
-  display table-cell
+  overflow visible
+  display block
   vertical-align middle
+  float left
 
 .navigation-bar__left
   @extend .navigation-bar__item
   max-width 50%
+  width 27%
   text-align left
 
 .navigation-bar__right
   @extend .navigation-bar__item
   max-width 50%
+  width 27%
   text-align right
 
 .navigation-bar__center
   @extend .navigation-bar__item
-  width 45%
+  width 46%
   text-align center
   line-height 44px
   font-size var-font-size--large
   font-weight var-font-weight--large
-
-.navigation-bar__center:first-child:last-child
-  width 100%
 
 .navigation-bar__title
   line-height var-height--navigation-bar
   font-size var-font-size--large
   font-weight var-font-weight--large
   color var-color--navigation-bar
+  width 46%
   margin 0
   padding 0
   ellipsis()
+
+.navigation-bar__center:first-child:last-child
+  width 100%
 
 /*! topdoc
   name: Navigation Bar Item
