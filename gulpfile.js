@@ -233,21 +233,26 @@ gulp.task('prepare-project-templates', function(done) {
     'split_view'
   ];
 
-  gulp.src(['build/**', '!build/docs', '!build/docs/**'])
-    .pipe(gulp.dest('app/lib/onsen'))
-    .pipe(gulp.dest('project_templates/base/www/lib/onsen/'))
+  gulp.src('build/css/onsen-css-components.css')
+    .pipe(gulp.dest('project_templates/base/www/styles/'))
     .on('end', function() {
-      gulp.src(['project_templates/base/**/*', '!project_templates/base/node_modules/**/*'], {dot: true})
-        .pipe(gulp.dest('project_templates/gen/master_detail'))
-        .pipe(gulp.dest('project_templates/gen/sliding_menu'))
-        .pipe(gulp.dest('project_templates/gen/tab_bar'))
-        .pipe(gulp.dest('project_templates/gen/split_view'))
-        .on('end', function() {
-          gulp.src(['project_templates/templates/**/*'])
-            .pipe(gulp.dest('project_templates/gen/'))
-            .on('end', done);
-        });
 
+      gulp.src(['build/**', '!build/docs', '!build/docs/**'])
+        .pipe(gulp.dest('app/lib/onsen'))
+        .pipe(gulp.dest('project_templates/base/www/lib/onsen/'))
+        .on('end', function() {
+          gulp.src(['project_templates/base/**/*', '!project_templates/base/node_modules/**/*'], {dot: true})
+            .pipe(gulp.dest('project_templates/gen/master_detail'))
+            .pipe(gulp.dest('project_templates/gen/sliding_menu'))
+            .pipe(gulp.dest('project_templates/gen/tab_bar'))
+            .pipe(gulp.dest('project_templates/gen/split_view'))
+            .on('end', function() {
+              gulp.src(['project_templates/templates/**/*'])
+                .pipe(gulp.dest('project_templates/gen/'))
+                .on('end', done);
+            });
+
+        });
     });
 });
 
