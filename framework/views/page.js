@@ -99,7 +99,9 @@ limitations under the License.
         if (this._registeredToolbarElement) {
           throw new Error('This page\'s toolbar is already registered.');
         }
-        
+
+        angular.element(this.getContentElement()).attr('no-status-bar-fill', '');
+
         element.remove();
         var statusFill = this._element[0].querySelector('.page__status-bar-fill');
         if (statusFill) {

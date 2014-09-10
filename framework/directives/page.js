@@ -50,6 +50,7 @@
       var f = function() {
         if (i++ < 5)  {
           if (isAttached(element)) {
+            fillStatusBar(element);
             fireActualPageInitEvent(element);
           } else {
             setImmediate(f);
@@ -66,6 +67,17 @@
       var event = document.createEvent('HTMLEvents');    
       event.initEvent('pageinit', true, true);
       element.dispatchEvent(event);    
+    }
+
+    function fillStatusBar(element) {
+      if ($onsen.shouldFillStatusBar(element)) {
+        // Adjustments for IOS7
+        var fill = angular.element(document.createElement('div'));
+        fill.addClass('page__status-bar-fill');
+        fill.css({width: '0px', height: '0px'});
+
+        angular.element(element).prepend(fill);
+      }
     }
 
     function isAttached(element) {
@@ -117,14 +129,6 @@
 
       compile: function(element) {
         var children = element.children().remove();
-
-        if ($onsen.shouldFillStatusBar()) {
-          // Adjustments for IOS7
-          var fill = angular.element(document.createElement('div'));
-          fill.addClass('page__status-bar-fill');
-          fill.css({width: '0px', height: '0px'});
-          element.prepend(fill);
-        }
 
         var content = angular.element('<div class="page__content ons-page-inner"></div>').append(children);
 

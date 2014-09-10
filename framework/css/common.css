@@ -89,3 +89,11 @@ ons-toolbar + .page__content {
 .page__content::-webkit-scrollbar {
   display: none;
 }
+
+.tab-bar__status-bar-fill ~ .tab-bar--top__content {
+  top: 71px;
+}
+
+.tab-bar__status-bar-fill ~ .tab-bar--top {
+  padding-top: 22px;
+}

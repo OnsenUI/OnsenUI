@@ -114,18 +114,31 @@ limitations under the License.
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
-
         if (this._hasTopTabbar()) {
-          setImmediate(function() {
-            this._contentElement.addClass('tab-bar--top__content');
-            this._tabbarElement.addClass('tab-bar--top');
-          }.bind(this));
+          this._prepareForTopTabbar();
+        }
+      },
 
-          var page = ons.findParentComponentUntil('ons-page', this._element[0]);
-          if (page) {
-            window.hoge = page.getContentElement();
-            this._element.css('top', window.getComputedStyle(page.getContentElement(), null).getPropertyValue('padding-top'));
-          }
+      _prepareForTopTabbar: function() {
+        this._contentElement.attr('no-status-bar-fill', '');
+
+        setImmediate(function() {
+          this._contentElement.addClass('tab-bar--top__content');
+          this._tabbarElement.addClass('tab-bar--top');
+        }.bind(this));
+
+        var page = ons.findParentComponentUntil('ons-page', this._element[0]);
+        if (page) {
+          this._element.css('top', window.getComputedStyle(page.getContentElement(), null).getPropertyValue('padding-top'));
+        }
+
+        if ($onsen.shouldFillStatusBar(this._element[0])) {
+          // Adjustments for IOS7
+          var fill = angular.element(document.createElement('div'));
+          fill.addClass('tab-bar__status-bar-fill');
+          fill.css({width: '0px', height: '0px'});
+
+          this._element.prepend(fill);
         }
       },
 
