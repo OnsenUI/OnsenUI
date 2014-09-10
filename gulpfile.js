@@ -215,6 +215,14 @@ gulp.task('prepare', ['html2js'], function() {
 });
 
 ////////////////////////////////////////
+// prepare-css-components
+////////////////////////////////////////
+gulp.task('prepare-css-components', ['prepare'], function() {
+  return gulp.src(['build/**', '!build/docs', '!build/docs/**'])
+    .pipe(gulp.dest('css-components/www/patterns/lib/onsen'));
+});
+
+////////////////////////////////////////
 // prepare-project-templates
 ////////////////////////////////////////
 gulp.task('prepare-project-templates', function(done) {
@@ -281,6 +289,7 @@ gulp.task('build', function(done) {
     'minify-js',
     'build-docs',
     'prepare-project-templates',
+    'prepare-css-components',
     'compress-project-templates',
     done
   );
