@@ -54,16 +54,16 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
       text: 'dark',
       colors: {
         // Global
-        'background-color': '#292a2e',
+        'background-color': '#242424',
         'text-color': '#fff',
         'sub-text-color': '#87888f',
-        'highlight-color': '#4073eb',
+        'highlight-color': '#3d74ff',
         'second-highlight-color': '#5494d1',
-        'border-color': '#3b3c42',
+        'border-color': '#424242',
 
         // Toolbar
-        'toolbar-background-color': '#212226',
-        'toolbar-button-color': '#4073eb',
+        'toolbar-background-color': '#1a1a1a',
+        'toolbar-button-color': '#aaa',
         'toolbar-text-color': '#fff',
         'toolbar-border-color': transparent,
 
@@ -73,13 +73,13 @@ angular.module('app').factory('ColorSchemeFactory', function(ColorScheme) {
 
         // List
         'list-background-color': transparent,
-        'list-header-background-color': '#222329',
+        'list-header-background-color': '#3e3f42',
         'list-tap-active-background-color': '#47484d',
 
         // Tabbar
-        'tabbar-background-color': '#212226',
-        'tabbar-text-color': '#87888f',
-        'tabbar-highlight-text-color': '#fff',
+        'tabbar-background-color': '#1a1a1a',
+        'tabbar-text-color': '#bdbdbd',
+        'tabbar-highlight-text-color': '#549eff',
         'tabbar-border-color': transparent,
 
         // Switch
