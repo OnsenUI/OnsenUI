@@ -20,15 +20,14 @@ window.ons.orientation = (function() {
 
   function create() {
     var obj = {
-      // width and height on "orientationchange" event.
-      _innerWidth: 0,
-      _innerHeight: 0,
+      // actual implementation to detect if whether current screen is portrait or not
+      _isPortrait: false,
 
       /**
        * @return {Boolean}
        */
       isPortrait: function() {
-        return this._innerWidth < this._innerHeight;
+        return this._isPortrait();
       },
 
       /**
@@ -47,36 +46,54 @@ window.ons.orientation = (function() {
           window.addEventListener('resize', this._onResize.bind(this), false);
         }
 
-        this._updateDimentionInfo();
+        this._isPortrait = function() {
+          return window.innerHeight > window.innerWidth;
+        };
 
         return this;
       },
 
-      _updateDimentionInfo: function() {
-        this._innerWidth = window.innerWidth;
-        this._innerHeight = window.innerHeight;
-      },
-
       _onDOMContentLoaded: function() {
-        this._updateDimentionInfo();
+        this._installIsPortraintImplementation();
         this.emit('change', {isPortrait: this.isPortrait()});
       },
 
+      _installIsPortraintImplementation: function() {
+        var isPortrait = window.innerWidth < window.innerHeight;
+
+        if (!('orientation' in window)) {
+          this._isPortrait = function() {
+            return window.innerHeight > window.innerWidth;
+          };
+        } else if (window.orientation % 180 === 0) {
+          this._isPortrait = function() {
+            return window.orientation % 180 === 0 ? isPortrait : !isPortrait;
+          };
+        } else {
+          this._isPortrait = function() {
+            return window.orientation % 180 === 90 ? isPortrait : !isPortrait;
+          };
+        }
+      },
+
       _onOrientationChange: function() {
-        // We use setImmediate because there is some cases that window's dimention information is not updated on "orientationchange".
+        // We use setImmediate because window's dimention information is not updated on "orientationchange" in some cases.
         setImmediate(function() {
-          this._updateDimentionInfo();
           this.emit('change', {isPortrait: this.isPortrait()});
         }.bind(this));
       },
 
       // Run on not mobile browser.
       _onResize: function() {
-        var last = this.isPortrait();
-        this._updateDimentionInfo();
-        if (this.isPortrait() !== last) {
+        if ('_lastScreenIsPortraitOrNot' in this) {
+          if (this.isPortrait() !== this._lastScreenIsPortraitOrNot) {
+            this.emit('change', {isPortrait: this.isPortrait()});
+          }
+        } else {
           this.emit('change', {isPortrait: this.isPortrait()});
         }
+
+        this._lastScreenIsPortraitOrNot = this.isPortrait();
       }
     };
 
