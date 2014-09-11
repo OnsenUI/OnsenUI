@@ -63,6 +63,24 @@
  * @guide EventHandling [en]Using events[/en][ja]イベントの利用[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
+ * @example
+ *   <ons-sliding-menu var="app.menu" main-page="page.html" menu-page="menu.html" max-slide-distance="200px" type="reveal" side="left">
+ *   </ons-sliding-menu>
+ *
+ *   <ons-template id="page.html">
+ *     <ons-page>
+ *      <p style="text-align: center">
+ *        <ons-button ng-click="app.menu.toggleMenu()">Toggle</ons-button>
+ *      </p>
+ *     </ons-page>
+ *   </ons-template>
+ *
+ *   <ons-template id="menu.html">
+ *     <ons-page>
+ *       <!-- menu page's contents -->
+ *     </ons-page>
+ *   </ons-template>
+ *
  */
 (function() {
   'use strict';

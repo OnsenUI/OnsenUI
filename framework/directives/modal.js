@@ -23,6 +23,10 @@
  * @guide UsingModal [en]Using ons-modal component[/en][ja]モーダルの使い方[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @codepen devIg
+ * @example
+ *  <ons-modal>
+ *    ...
+ *  </ons-modal>
  */
 (function() {
   'use strict';

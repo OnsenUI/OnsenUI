@@ -18,6 +18,11 @@
  * @codepen GgujC {wide}
  * @guide layouting [en]Layouting guide[/en][ja]レイアウト機能[/ja]
  * @seealso ons-row [en]ons-row component[/en][ja]ons-rowコンポーネント[/ja]
+ * @example
+ *   <ons-row>
+ *    <ons-col width="50px"><ons-icon icon="fa-twitter"></ons-icon></ons-col>
+ *    <ons-col>Text</ons-col>
+ *   </ons-row>
  */
 (function(){
   'use strict';

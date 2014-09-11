@@ -10,6 +10,10 @@
  *    [ja]portraitもしくはlandscapeを指定します。[/ja]
  * @seealso ons-if-platform [en]ons-if-platform component[/en][ja]ons-if-platformコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
+ * @example
+ *   <div if-orientation="portrait">
+ *     ...
+ *   </div>
  */
 (function(){
   'use strict';

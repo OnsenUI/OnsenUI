@@ -35,6 +35,14 @@
  * @guide DefiningMultiplePagesinSingleHTML
  *  [en]Defining multiple pages in single html[/en]
  *  [ja]複数のページを1つのHTMLに記述する[/ja]
+ * @example
+ *  <ons-page>
+ *    <ons-toolbar>
+ *      <div class="center">Title</div>
+ *    </ons-toolbar>
+ *
+ *    ...
+ *  </ons-page>
  */
 (function() {
   'use strict';

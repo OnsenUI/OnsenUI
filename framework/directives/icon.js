@@ -19,12 +19,14 @@
  *    [ja]アイコンを反転します。horizontalもしくはverticalを指定できます。[/ja]
  * @param fixed-width
  *    [en]When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are true, false. Default is true.[/en]
- *    [ja]リスト内で使う場合に、trueを指定すると縦に整列します。trueもしくはfalseを指定できます。デフォルトはtrueです。[/ja]
+ *    [ja]等幅にするかどうかを指定します。trueもしくはfalseを指定できます。デフォルトはtrueです。[/ja]
  * @param spin
  *    [en]Whether to spin the icon. Valid values are true and false.[/en]
  *    [ja]アイコンを回転するかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
  * @codepen xAhvg
  * @guide UsingIcons [en]Using icons[/en][ja]アイコンを使う[/ja]
+ * @example
+ *   <ons-icon icon="fa-twitter" size="20px" fixed-width="false" style="color: red"></ons-icon>
  */
 (function(){
   'use strict';

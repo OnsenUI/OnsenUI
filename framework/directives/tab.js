@@ -4,10 +4,10 @@
  * @name ons-tab
  * @description
  *  [en]Represents a tab inside tabbar. Each ons-tabbar-item represents a page.[/en]
- *  [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabbar-itemはページを表します。[/ja]
+ *  [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。[/ja]
  * @param page
  *  [en]The page that this ons-tabbar-item points to.[/en]
- *  [ja]ons-tabbar-itemが参照するページへのURLを指定します。[/ja]
+ *  [ja]ons-tabが参照するページへのURLを指定します。[/ja]
  * @param icon
  *  [en]The icon name of the tab. Can specify the same icon name as ons-icon. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.[/en]
  *  [ja]アイコン名を指定します。ons-iconと同じアイコン名を指定できます。個別にアイコンをカスタマイズする場合は、background-imageなどのCSSスタイルを用いて指定できます。[/ja]
@@ -26,6 +26,33 @@
  * @seealso ons-tabbar [en]ons-tabbar component[/en][ja]ons-tabbarコンポーネント[/ja]
  * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
  * @seealso ons-icon [en]ons-icon component[/en][ja]ons-iconコンポーネント[/ja]
+ * @example
+ *   <ons-tabbar>
+ *     <ons-tab page="home.html" active="true">
+ *       <ons-icon icon="ion-home"></ons-icon>
+ *       <span style="font-size: 14px">Home</span>
+ *     </ons-tab>
+ *     <ons-tab page="fav.html" active="true">
+ *       <ons-icon icon="ion-star"></ons-icon>
+ *       <span style="font-size: 14px">Favorites</span>
+ *     </ons-tab>
+ *     <ons-tab page="settings.html" active="true">
+ *       <ons-icon icon="ion-gear-a"></ons-icon>
+ *       <span style="font-size: 14px">Settings</span>
+ *     </ons-tab>
+ *   </ons-tabbar>
+ *
+ *   <ons-template id="home.html">
+ *     ...
+ *   </ons-template>
+ *
+ *   <ons-template id="fav.html">
+ *     ...
+ *   </ons-template>
+ *
+ *   <ons-template id="settings.html">
+ *     ...
+ *   </ons-template>
  */
 (function() {
   'use strict';

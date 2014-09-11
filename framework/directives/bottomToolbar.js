@@ -7,6 +7,10 @@
  * [ja]ページ下部に配置されるツールバー用コンポーネント。機能的にはons-toolbarと同様です。[/ja]
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
+ * @example
+ *   <ons-bottom-toolbar>
+ *    <div style="text-align: center; line-height: 44px">Text</div>
+ *   </ons-bottom-toolbar>
  */
 (function(){
   'use strict';

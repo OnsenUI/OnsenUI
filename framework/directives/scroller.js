@@ -4,6 +4,10 @@
  * @name ons-scroller
  * @description
  * Makes the content inside this tag scrollable.
+ * @example
+ *   <ons-scroller style="height: 200px; width: 100%">
+ *     ...
+ *   </ons-scroller>
  */
 (function() {
   'use strict';

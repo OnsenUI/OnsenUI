@@ -32,6 +32,8 @@
  * @guide UsingFormComponents [en]Using form components[/en][ja]フォームを使う[/ja]
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
  * @seealso ons-button [en]ons-button component[/en][ja]ons-buttonコンポーネント[/ja]
+ * @example
+ *   <ons-switch checked></ons-switch>
  */
 (function(){
   'use strict';
