@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="app">
 <head>
   <meta charset="utf-8">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -51,7 +51,7 @@
   </style>
 </head>
 
-<body>    
+<body ng-controller="AppController">    
 
   <ons-navigator>
     <ons-page>
@@ -102,13 +102,13 @@
           </ons-row>
         </ons-list-item>
 
-        <ons-list-item modifier="chevron">
+        <ons-list-item modifier="chevron" ng-click="doSomething()">
           <ons-icon icon="ion-chatboxes" fixed-width="true" style="color: #ccc"></ons-icon>
           Add a note
         </ons-list-item>
       </ons-list>
 
-      <ons-list modifier="inset" style="margin-top: 10px">
+      <ons-list style="margin-top: 10px">
         <ons-list-item class="item" ng-repeat="i in [1,2,3]">
           <header>
             <span class="item-title">Lorem ipsum dolor sit amet</span>

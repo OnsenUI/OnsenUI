@@ -1,6 +1,14 @@
 (function(){
   'use strict';
-  var module = angular.module('myApp', ['onsen']);
+  var module = angular.module('app', ['onsen']);
+
+  module.controller('AppController', function($scope, $data) {
+    $scope.doSomething = function() {
+      setTimeout(function() {
+        alert('tappaed');
+      }, 100);
+    };
+  });
 
   module.controller('DetailController', function($scope, $data) {
     $scope.item = $data.selectedItem;

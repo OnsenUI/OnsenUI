@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="app">
 <head>
   <meta charset="utf-8">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -18,9 +18,13 @@
   <script src="js/app.js"></script> 
 
   <script>
-    angular.module('myApp').controller('AppController', function($scope) {
+    angular.module('app', ['onsen']);
+
+    angular.module('app').controller('AppController', function($scope) {
       $scope.doSomething = function() {
-        alert('tapped');
+        setTimeout(function() {
+          alert('tapped');
+        }, 100);
       };
     });
   </script>
@@ -138,8 +142,8 @@
           <div class="right"></div>
         </ons-toolbar>
 
-        <ons-list>
-          <ons-list-item modifier="chevron" class="item" ng-repeat="i in [1,2,3,4,5]" ng-click="ons.navigator.pushPage('detail.html')">
+        <ons-list style="margin: -1px 0">
+          <ons-list-item modifier="chevron" class="item" ng-repeat="i in [1,2,3,4,5]" ng-click="doSomething()">
             <ons-row>
               <ons-col width="60px"> 
                 <div class="item-thum"></div>
@@ -156,43 +160,6 @@
         </ons-list>
       </ons-page>
     </ons-navigator>
-  </ons-template>
-
-  <ons-template id="detail.html">
-    <ons-page>
-      <ons-toolbar>
-        <div class="left"><ons-back-button>Back</ons-back-button></div>
-        <div class="center"></div>
-      </ons-toolbar>
-
-      <ons-list modifier="inset" style="margin-top: 10px">
-        <ons-list-item class="item">
-          <ons-row>
-            <ons-col width="60px"> 
-              <div class="item-thum"></div>
-            </ons-col>
-            <ons-col>
-              <header>
-                <span class="item-title">Rorem Ipsum</span>
-                <span class="item-label">5h</span>
-              </header>
-              <p class="item-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </ons-col>
-          </ons-row>                          
-        </ons-list-item>
-      </ons-list>
-
-    </ons-page>
-  </ons-template>
-
-  <ons-template id="page.html">
-    <ons-page>
-      <ons-toolbar>
-        <div class="left"><ons-back-button>Back</ons-back-button></div>
-        <div class="center">Page 2</div>
-      </ons-toolbar>
-
-    </ons-page>
   </ons-template>
 
   <ons-template id="settings.html">
@@ -247,6 +214,9 @@
           Sign out
         </ons-list-item>
       </ons-list>
+
+      <br>
+
     </ons-page>
   </ons-template>
 
