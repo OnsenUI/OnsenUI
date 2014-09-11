@@ -9,9 +9,9 @@
  *  [en]Detecting finger gestures[/en]
  *  [ja]ジェスチャー操作を検知する[/ja]
  * @example
- *   <ons-gesture-detector>
- *     ...
- *   </ons-gesture-detector>
+ * <ons-gesture-detector>
+ *   ...
+ * </ons-gesture-detector>
  */
 (function() {
   'use strict';

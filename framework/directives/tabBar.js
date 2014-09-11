@@ -37,32 +37,32 @@
  * @seealso ons-tabbar-item [en]ons-tabbar-item component[/en][ja]ons-tabbar-itemコンポーネント[/ja]
  * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
  * @example
- *   <ons-tabbar>
- *     <ons-tab page="home.html" active="true">
- *       <ons-icon icon="ion-home"></ons-icon>
- *       <span style="font-size: 14px">Home</span>
- *     </ons-tab>
- *     <ons-tab page="fav.html" active="true">
- *       <ons-icon icon="ion-star"></ons-icon>
- *       <span style="font-size: 14px">Favorites</span>
- *     </ons-tab>
- *     <ons-tab page="settings.html" active="true">
- *       <ons-icon icon="ion-gear-a"></ons-icon>
- *       <span style="font-size: 14px">Settings</span>
- *     </ons-tab>
- *   </ons-tabbar>
+ * <ons-tabbar>
+ *   <ons-tab page="home.html" active="true">
+ *     <ons-icon icon="ion-home"></ons-icon>
+ *     <span style="font-size: 14px">Home</span>
+ *   </ons-tab>
+ *   <ons-tab page="fav.html" active="true">
+ *     <ons-icon icon="ion-star"></ons-icon>
+ *     <span style="font-size: 14px">Favorites</span>
+ *   </ons-tab>
+ *   <ons-tab page="settings.html" active="true">
+ *     <ons-icon icon="ion-gear-a"></ons-icon>
+ *     <span style="font-size: 14px">Settings</span>
+ *   </ons-tab>
+ * </ons-tabbar>
  *
- *   <ons-template id="home.html">
- *     ...
- *   </ons-template>
+ * <ons-template id="home.html">
+ *   ...
+ * </ons-template>
  *
- *   <ons-template id="fav.html">
- *     ...
- *   </ons-template>
+ * <ons-template id="fav.html">
+ *   ...
+ * </ons-template>
  *
- *   <ons-template id="settings.html">
- *     ...
- *   </ons-template>
+ * <ons-template id="settings.html">
+ *   ...
+ * </ons-template>
  */
 (function() {
   'use strict';

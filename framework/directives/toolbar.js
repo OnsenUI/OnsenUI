@@ -11,13 +11,13 @@
  * @seealso ons-back-button [en]ons-back-button component[/en][ja]ons-back-buttonコンポーネント[/ja]
  * @seealso ons-toolbar-button [en]ons-toolbar-button component[/en][ja]ons-toolbar-buttonコンポーネント[/ja]
  * @example 
- *   <ons-page>
- *     <ons-toolbar>
- *       <div class="left"><ons-back-button>Back</ons-back-button></div>
- *       <div class="center">Title</div>
- *       <div class="right">Label</div>
- *     </ons-toolbar>
- *   </ons-page>
+ * <ons-page>
+ *   <ons-toolbar>
+ *     <div class="left"><ons-back-button>Back</ons-back-button></div>
+ *     <div class="center">Title</div>
+ *     <div class="right">Label</div>
+ *   </ons-toolbar>
+ * </ons-page>
  */
 (function() {
   'use strict';

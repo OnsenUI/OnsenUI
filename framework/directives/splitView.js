@@ -30,6 +30,13 @@
  * @codepen nKqfv {wide}
  * @guide Usingonssplitviewcomponent [en]Using ons-split-view.[/en][ja]ons-split-viewコンポーネントを使う[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @example
+ * <ons-split-view 
+ *   secondary-page="secondary.html" 
+ *   main-page="main.html" 
+ *   main-page-width="70%" 
+ *   collapse="portrait">
+ * </ons-split-view>
  */
 (function() {
   'use strict';

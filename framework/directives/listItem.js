@@ -11,11 +11,11 @@
  * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
  * @codepen yxcCt
  * @example
- *  <ons-list>
- *    <ons-list-header>Header Text</ons-list-header>
- *    <ons-list-item>Item</ons-list-item>
- *    <ons-list-item>Item</ons-list-item>
- *  </ons-list>
+ * <ons-list>
+ *   <ons-list-header>Header Text</ons-list-header>
+ *   <ons-list-item>Item</ons-list-item>
+ *   <ons-list-item>Item</ons-list-item>
+ * </ons-list>
  */
 (function() {
   'use strict';

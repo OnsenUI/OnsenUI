@@ -14,10 +14,10 @@
  * @guide Layouting [en]Layouting guide[/en][ja]レイアウト調整[/ja]
  * @seealso ons-col [en]ons-col component[/en][ja]ons-colコンポーネント[/ja]
  * @example
- *   <ons-row>
- *    <ons-col width="50px"><ons-icon icon="fa-twitter"></ons-icon></ons-col>
- *    <ons-col>Text</ons-col>
- *   </ons-row>
+ * <ons-row>
+ *   <ons-col width="50px"><ons-icon icon="fa-twitter"></ons-icon></ons-col>
+ *   <ons-col>Text</ons-col>
+ * </ons-row>
  */
 (function(){
   'use strict';

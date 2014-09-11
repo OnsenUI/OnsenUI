@@ -8,9 +8,9 @@
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @example
- *   <ons-bottom-toolbar>
- *    <div style="text-align: center; line-height: 44px">Text</div>
- *   </ons-bottom-toolbar>
+ * <ons-bottom-toolbar>
+ *  <div style="text-align: center; line-height: 44px">Text</div>
+ * </ons-bottom-toolbar>
  */
 (function(){
   'use strict';

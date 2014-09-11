@@ -42,29 +42,29 @@
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  * @example
- *  <ons-navigator animation="slide" var="app.navi">
- *    <ons-page>
- *      <ons-toolbar>
- *        <div class="center">Title</div>
- *      </ons-toolbar>
+ * <ons-navigator animation="slide" var="app.navi">
+ *   <ons-page>
+ *     <ons-toolbar>
+ *       <div class="center">Title</div>
+ *     </ons-toolbar>
  *
- *      <p style="text-align: center">
- *        <ons-button modifier="light" ng-click="app.navi.pushPage('page.html');">Push</ons-button>
- *      </p>
- *    </ons-page>
- *  </ons-navigator>
+ *     <p style="text-align: center">
+ *       <ons-button modifier="light" ng-click="app.navi.pushPage('page.html');">Push</ons-button>
+ *     </p>
+ *   </ons-page>
+ * </ons-navigator>
  *
- *  <ons-template id="page.html">
- *    <ons-page>
- *      <ons-toolbar>
- *        <div class="center">Title</div>
- *      </ons-toolbar>
+ * <ons-template id="page.html">
+ *   <ons-page>
+ *     <ons-toolbar>
+ *       <div class="center">Title</div>
+ *     </ons-toolbar>
  *
- *      <p style="text-align: center">
- *        <ons-button modifier="light" ng-click="app.navi.popPage('page.html');">Pop</ons-button>
- *      </p>
- *    </ons-page>
- *  </ons-template>
+ *     <p style="text-align: center">
+ *       <ons-button modifier="light" ng-click="app.navi.popPage('page.html');">Pop</ons-button>
+ *     </p>
+ *   </ons-page>
+ * </ons-template>
  */
 (function() {
   'use strict';
