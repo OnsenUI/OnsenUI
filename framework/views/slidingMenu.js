@@ -219,8 +219,6 @@ limitations under the License.
           var maxDistance = this._normalizeMaxSlideDistanceAttr();
           this._logic.setMaxDistance(maxDistance);
 
-          unlock();
-
           this._behindPage.css({opacity: 1});
 
           this._animator = this._getAnimatorOption();
@@ -234,6 +232,7 @@ limitations under the License.
             }
           );
 
+          unlock();
         }.bind(this), 400);
 
         scope.$on('$destroy', this._destroy.bind(this));
