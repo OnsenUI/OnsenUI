@@ -5,6 +5,14 @@
     </section>
 
     <span class="anchor" id="{$ doc.name $}-attributes"></span>
+
+    {% if doc.examples[0] %}
+      <section>
+        <h4>{% if lang == "en" %}Example{% else %}例{% endif %}</h4>
+        <pre><code class="xml">{$ doc.examples[0] | e $}</code></pre>
+      </section>
+    {% endif %}
+
     {% if doc.params %}
       <section>
         <h4>{% if lang == "en" %}Attributes{% else %}属性{% endif %}</h4>
