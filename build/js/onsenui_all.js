@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.3-dev - 2014-09-10 */
+/*! onsenui - v1.1.3-dev - 2014-09-11 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -27979,8 +27979,6 @@ limitations under the License.
           var maxDistance = this._normalizeMaxSlideDistanceAttr();
           this._logic.setMaxDistance(maxDistance);
 
-          unlock();
-
           this._behindPage.css({opacity: 1});
 
           this._animator = this._getAnimatorOption();
@@ -27994,6 +27992,7 @@ limitations under the License.
             }
           );
 
+          unlock();
         }.bind(this), 400);
 
         scope.$on('$destroy', this._destroy.bind(this));
@@ -29416,6 +29415,8 @@ limitations under the License.
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @guide Returningfromapage [en]Returning from a page[/en][ja]一つ前のページに戻る[/ja]
+ * @example
+ *   <ons-back-button>Back</ons-back-button>
  */
 (function(){
   'use strict';
@@ -29465,6 +29466,10 @@ limitations under the License.
  * [ja]ページ下部に配置されるツールバー用コンポーネント。機能的にはons-toolbarと同様です。[/ja]
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
+ * @example
+ * <ons-bottom-toolbar>
+ *  <div style="text-align: center; line-height: 44px">Text</div>
+ * </ons-bottom-toolbar>
  */
 (function(){
   'use strict';
@@ -29528,6 +29533,8 @@ limitations under the License.
  * @codepen hLayx
  * @guide Button [en]Guide for ons-button[/en][ja]ons-buttonの使い方[/ja]
  * @guide OverridingCSSstyles [en]More details about modifier attribute[/en][ja]modifier属性の使い方[/ja]
+ * @example
+ *   <ons-button>Tap Me</ons-button>
  */
 (function(){
   'use strict';
@@ -29622,6 +29629,11 @@ limitations under the License.
  * @codepen GgujC {wide}
  * @guide layouting [en]Layouting guide[/en][ja]レイアウト機能[/ja]
  * @seealso ons-row [en]ons-row component[/en][ja]ons-rowコンポーネント[/ja]
+ * @example
+ * <ons-row>
+ *   <ons-col width="50px"><ons-icon icon="fa-twitter"></ons-icon></ons-col>
+ *   <ons-col>Text</ons-col>
+ * </ons-row>
  */
 (function(){
   'use strict';
@@ -29745,6 +29757,10 @@ limitations under the License.
  * @guide DetectingFingerGestures
  *  [en]Detecting finger gestures[/en]
  *  [ja]ジェスチャー操作を検知する[/ja]
+ * @example
+ * <ons-gesture-detector>
+ *   ...
+ * </ons-gesture-detector>
  */
 (function() {
   'use strict';
@@ -29828,12 +29844,14 @@ limitations under the License.
  *    [ja]アイコンを反転します。horizontalもしくはverticalを指定できます。[/ja]
  * @param fixed-width
  *    [en]When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are true, false. Default is true.[/en]
- *    [ja]リスト内で使う場合に、trueを指定すると縦に整列します。trueもしくはfalseを指定できます。デフォルトはtrueです。[/ja]
+ *    [ja]等幅にするかどうかを指定します。trueもしくはfalseを指定できます。デフォルトはtrueです。[/ja]
  * @param spin
  *    [en]Whether to spin the icon. Valid values are true and false.[/en]
  *    [ja]アイコンを回転するかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
  * @codepen xAhvg
  * @guide UsingIcons [en]Using icons[/en][ja]アイコンを使う[/ja]
+ * @example
+ *   <ons-icon icon="fa-twitter" size="20px" fixed-width="false" style="color: red"></ons-icon>
  */
 (function(){
   'use strict';
@@ -29956,6 +29974,10 @@ limitations under the License.
  *    [ja]portraitもしくはlandscapeを指定します。[/ja]
  * @seealso ons-if-platform [en]ons-if-platform component[/en][ja]ons-if-platformコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
+ * @example
+ * <div if-orientation="portrait">
+ *   ...
+ * </div>
  */
 (function(){
   'use strict';
@@ -30029,6 +30051,10 @@ limitations under the License.
  *    [ja]opera, firefox, safari, chrome, ie, android, blackberry, ios, windowsから指定します。[/ja]
  * @seealso ons-if-orientation [en]ons-if-orientation component[/en][ja]ons-if-orientationコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
+ * @example
+ * <div if-platform="android">
+ *   ...
+ * </div>
  */
 (function() {
   'use strict';
@@ -30142,6 +30168,12 @@ limitations under the License.
  * @seealso ons-list-header [en]ons-list-header component[/en][ja]ons-list-headerコンポーネント[/ja]
  * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
  * @codepen yxcCt
+ * @example
+ * <ons-list>
+ *   <ons-list-header>Header Text</ons-list-header>
+ *   <ons-list-item>Item</ons-list-item>
+ *   <ons-list-item>Item</ons-list-item>
+ * </ons-list>
  */
 (function() {
   'use strict';
@@ -30181,6 +30213,12 @@ limitations under the License.
  * @seealso ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]
  * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
  * @codepen yxcCt
+ * @example
+ * <ons-list>
+ *   <ons-list-header>Header Text</ons-list-header>
+ *   <ons-list-item>Item</ons-list-item>
+ *   <ons-list-item>Item</ons-list-item>
+ * </ons-list>
  */
 (function() {
   'use strict';
@@ -30217,6 +30255,12 @@ limitations under the License.
  * @seealso ons-list-header [en]ons-list-header component[/en][ja]ons-list-headerコンポーネント[/ja]
  * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
  * @codepen yxcCt
+ * @example
+ * <ons-list>
+ *   <ons-list-header>Header Text</ons-list-header>
+ *   <ons-list-item>Item</ons-list-item>
+ *   <ons-list-item>Item</ons-list-item>
+ * </ons-list>
  */
 (function() {
   'use strict';
@@ -30266,6 +30310,10 @@ limitations under the License.
  * @guide UsingModal [en]Using ons-modal component[/en][ja]モーダルの使い方[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @codepen devIg
+ * @example
+ * <ons-modal>
+ *   ...
+ * </ons-modal>
  */
 (function() {
   'use strict';
@@ -30379,6 +30427,30 @@ limitations under the License.
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
+ * @example
+ * <ons-navigator animation="slide" var="app.navi">
+ *   <ons-page>
+ *     <ons-toolbar>
+ *       <div class="center">Title</div>
+ *     </ons-toolbar>
+ *
+ *     <p style="text-align: center">
+ *       <ons-button modifier="light" ng-click="app.navi.pushPage('page.html');">Push</ons-button>
+ *     </p>
+ *   </ons-page>
+ * </ons-navigator>
+ *
+ * <ons-template id="page.html">
+ *   <ons-page>
+ *     <ons-toolbar>
+ *       <div class="center">Title</div>
+ *     </ons-toolbar>
+ *
+ *     <p style="text-align: center">
+ *       <ons-button modifier="light" ng-click="app.navi.popPage('page.html');">Pop</ons-button>
+ *     </p>
+ *   </ons-page>
+ * </ons-template>
  */
 (function() {
   'use strict';
@@ -30472,6 +30544,14 @@ limitations under the License.
  * @guide DefiningMultiplePagesinSingleHTML
  *  [en]Defining multiple pages in single html[/en]
  *  [ja]複数のページを1つのHTMLに記述する[/ja]
+ * @example
+ * <ons-page>
+ *   <ons-toolbar>
+ *     <div class="center">Title</div>
+ *   </ons-toolbar>
+ *
+ *   ...
+ * </ons-page>
  */
 (function() {
   'use strict';
@@ -30631,6 +30711,11 @@ limitations under the License.
  * @codepen GgujC {wide}
  * @guide Layouting [en]Layouting guide[/en][ja]レイアウト調整[/ja]
  * @seealso ons-col [en]ons-col component[/en][ja]ons-colコンポーネント[/ja]
+ * @example
+ * <ons-row>
+ *   <ons-col width="50px"><ons-icon icon="fa-twitter"></ons-icon></ons-col>
+ *   <ons-col>Text</ons-col>
+ * </ons-row>
  */
 (function(){
   'use strict';
@@ -30974,6 +31059,10 @@ limitations under the License.
  * @name ons-scroller
  * @description
  * Makes the content inside this tag scrollable.
+ * @example
+ * <ons-scroller style="height: 200px; width: 100%">
+ *   ...
+ * </ons-scroller>
  */
 (function() {
   'use strict';
@@ -31128,6 +31217,24 @@ limitations under the License.
  * @guide EventHandling [en]Using events[/en][ja]イベントの利用[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
+ * @example
+ * <ons-sliding-menu var="app.menu" main-page="page.html" menu-page="menu.html" max-slide-distance="200px" type="reveal" side="left">
+ * </ons-sliding-menu>
+ *
+ * <ons-template id="page.html">
+ *   <ons-page>
+ *    <p style="text-align: center">
+ *      <ons-button ng-click="app.menu.toggleMenu()">Toggle</ons-button>
+ *    </p>
+ *   </ons-page>
+ * </ons-template>
+ *
+ * <ons-template id="menu.html">
+ *   <ons-page>
+ *     <!-- menu page's contents -->
+ *   </ons-page>
+ * </ons-template>
+ *
  */
 (function() {
   'use strict';
@@ -31198,6 +31305,13 @@ limitations under the License.
  * @codepen nKqfv {wide}
  * @guide Usingonssplitviewcomponent [en]Using ons-split-view.[/en][ja]ons-split-viewコンポーネントを使う[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @example
+ * <ons-split-view 
+ *   secondary-page="secondary.html" 
+ *   main-page="main.html" 
+ *   main-page-width="70%" 
+ *   collapse="portrait">
+ * </ons-split-view>
  */
 (function() {
   'use strict';
@@ -31274,6 +31388,8 @@ limitations under the License.
  * @guide UsingFormComponents [en]Using form components[/en][ja]フォームを使う[/ja]
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
  * @seealso ons-button [en]ons-button component[/en][ja]ons-buttonコンポーネント[/ja]
+ * @example
+ *   <ons-switch checked></ons-switch>
  */
 (function(){
   'use strict';
@@ -31346,10 +31462,10 @@ limitations under the License.
  * @name ons-tab
  * @description
  *  [en]Represents a tab inside tabbar. Each ons-tabbar-item represents a page.[/en]
- *  [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabbar-itemはページを表します。[/ja]
+ *  [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。[/ja]
  * @param page
  *  [en]The page that this ons-tabbar-item points to.[/en]
- *  [ja]ons-tabbar-itemが参照するページへのURLを指定します。[/ja]
+ *  [ja]ons-tabが参照するページへのURLを指定します。[/ja]
  * @param icon
  *  [en]The icon name of the tab. Can specify the same icon name as ons-icon. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.[/en]
  *  [ja]アイコン名を指定します。ons-iconと同じアイコン名を指定できます。個別にアイコンをカスタマイズする場合は、background-imageなどのCSSスタイルを用いて指定できます。[/ja]
@@ -31368,6 +31484,33 @@ limitations under the License.
  * @seealso ons-tabbar [en]ons-tabbar component[/en][ja]ons-tabbarコンポーネント[/ja]
  * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
  * @seealso ons-icon [en]ons-icon component[/en][ja]ons-iconコンポーネント[/ja]
+ * @example
+ * <ons-tabbar>
+ *   <ons-tab page="home.html" active="true">
+ *     <ons-icon icon="ion-home"></ons-icon>
+ *     <span style="font-size: 14px">Home</span>
+ *   </ons-tab>
+ *   <ons-tab page="fav.html" active="true">
+ *     <ons-icon icon="ion-star"></ons-icon>
+ *     <span style="font-size: 14px">Favorites</span>
+ *   </ons-tab>
+ *   <ons-tab page="settings.html" active="true">
+ *     <ons-icon icon="ion-gear-a"></ons-icon>
+ *     <span style="font-size: 14px">Settings</span>
+ *   </ons-tab>
+ * </ons-tabbar>
+ *
+ * <ons-template id="home.html">
+ *   ...
+ * </ons-template>
+ *
+ * <ons-template id="fav.html">
+ *   ...
+ * </ons-template>
+ *
+ * <ons-template id="settings.html">
+ *   ...
+ * </ons-template>
  */
 (function() {
   'use strict';
@@ -31513,6 +31656,33 @@ limitations under the License.
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
  * @seealso ons-tabbar-item [en]ons-tabbar-item component[/en][ja]ons-tabbar-itemコンポーネント[/ja]
  * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
+ * @example
+ * <ons-tabbar>
+ *   <ons-tab page="home.html" active="true">
+ *     <ons-icon icon="ion-home"></ons-icon>
+ *     <span style="font-size: 14px">Home</span>
+ *   </ons-tab>
+ *   <ons-tab page="fav.html" active="true">
+ *     <ons-icon icon="ion-star"></ons-icon>
+ *     <span style="font-size: 14px">Favorites</span>
+ *   </ons-tab>
+ *   <ons-tab page="settings.html" active="true">
+ *     <ons-icon icon="ion-gear-a"></ons-icon>
+ *     <span style="font-size: 14px">Settings</span>
+ *   </ons-tab>
+ * </ons-tabbar>
+ *
+ * <ons-template id="home.html">
+ *   ...
+ * </ons-template>
+ *
+ * <ons-template id="fav.html">
+ *   ...
+ * </ons-template>
+ *
+ * <ons-template id="settings.html">
+ *   ...
+ * </ons-template>
  */
 (function() {
   'use strict';
@@ -31572,6 +31742,10 @@ limitations under the License.
  * @guide DefiningMultiplePagesinSingleHTML
  *  [en]Defining multiple pages in single html[/en]
  *  [ja]複数のページを1つのHTMLに記述する[/ja]
+ * @example
+ * <ons-template id="foobar.html">
+ *   ...
+ * </ons-template>
  */
 (function(){
   'use strict';
@@ -31602,6 +31776,14 @@ limitations under the License.
  * @seealso ons-bottom-toolbar [en]ons-bottom-toolbar component[/en][ja]ons-bottom-toolbarコンポーネント[/ja]
  * @seealso ons-back-button [en]ons-back-button component[/en][ja]ons-back-buttonコンポーネント[/ja]
  * @seealso ons-toolbar-button [en]ons-toolbar-button component[/en][ja]ons-toolbar-buttonコンポーネント[/ja]
+ * @example 
+ * <ons-page>
+ *   <ons-toolbar>
+ *     <div class="left"><ons-back-button>Back</ons-back-button></div>
+ *     <div class="center">Title</div>
+ *     <div class="right">Label</div>
+ *   </ons-toolbar>
+ * </ons-page>
  */
 (function() {
   'use strict';
@@ -31761,6 +31943,12 @@ limitations under the License.
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  * @seealso ons-back-button [en]ons-back-button component[/en][ja]ons-back-buttonコンポーネント[/ja]
  * @seealso ons-toolbar-button [en]ons-toolbar-button component[/en][ja]ons-toolbar-buttonコンポーネント[/ja]
+ * @example 
+ * <ons-toolbar>
+ *   <div class="left"><ons-toolbar-button>Button</ons-toolbar-button></div>
+ *   <div class="center">Title</div>
+ *   <div class="right"><ons-toolbar-button><ons-icon icon="ion-navion" size="28px"></ons-icon></ons-toolbar-button></div>
+ * </ons-toolbar>
  */
 (function(){
   'use strict';

@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.3-dev - 2014-09-03 */
+/*! onsenui - v1.1.3-dev - 2014-09-11 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -3924,7 +3924,7 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/back_button.tpl",
     "<span class=\"toolbar-button--quiet {{modifierTemplater('toolbar-button--quiet--*')}}\" ng-click=\"$root.ons.findParentComponentUntil('ons-navigator', $event).popPage()\" style=\"height: 44px; line-height: 0; padding: 0; position: relative;\">\n" +
-    "  <i class=\"fa fa-angle-left ons-back-button__icon\" style=\"vertical-align: top; line-height: 44px; font-size: 36px; padding-left: 8px; padding-right: 4px; height: 44px; width: 14px;\"></i><span style=\"vertical-align: top; display: inline-block; line-height: 44px; height: 44px;\" class=\"back-button__label\"></span>\n" +
+    "  <i class=\"ion-ios7-arrow-back ons-back-button__icon\" style=\"vertical-align: middle; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; height: 44px; width: 16px !important; display: inline-block;\"></i><span style=\"vertical-align: top; display: inline-block; line-height: 44px; height: 44px;\" class=\"back-button__label\"></span>\n" +
     "</span>\n" +
     "");
 }]);
@@ -5698,7 +5698,7 @@ limitations under the License.
 
         var event = {
           enterPage: pageObject,
-          leagePage: this.pages[this.pages.length - 1],
+          leavePage: this.pages[this.pages.length - 1],
           navigator: this
         };
 
@@ -6329,7 +6329,9 @@ limitations under the License.
         if (this._registeredToolbarElement) {
           throw new Error('This page\'s toolbar is already registered.');
         }
-        
+
+        angular.element(this.getContentElement()).attr('no-status-bar-fill', '');
+
         element.remove();
         var statusFill = this._element[0].querySelector('.page__status-bar-fill');
         if (statusFill) {
@@ -7381,8 +7383,6 @@ limitations under the License.
           var maxDistance = this._normalizeMaxSlideDistanceAttr();
           this._logic.setMaxDistance(maxDistance);
 
-          unlock();
-
           this._behindPage.css({opacity: 1});
 
           this._animator = this._getAnimatorOption();
@@ -7396,6 +7396,7 @@ limitations under the License.
             }
           );
 
+          unlock();
         }.bind(this), 400);
 
         scope.$on('$destroy', this._destroy.bind(this));
@@ -8552,18 +8553,31 @@ limitations under the License.
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
-
         if (this._hasTopTabbar()) {
-          setImmediate(function() {
-            this._contentElement.addClass('tab-bar--top__content');
-            this._tabbarElement.addClass('tab-bar--top');
-          }.bind(this));
+          this._prepareForTopTabbar();
+        }
+      },
 
-          var page = ons.findParentComponentUntil('ons-page', this._element[0]);
-          if (page) {
-            window.hoge = page.getContentElement();
-            this._element.css('top', window.getComputedStyle(page.getContentElement(), null).getPropertyValue('padding-top'));
-          }
+      _prepareForTopTabbar: function() {
+        this._contentElement.attr('no-status-bar-fill', '');
+
+        setImmediate(function() {
+          this._contentElement.addClass('tab-bar--top__content');
+          this._tabbarElement.addClass('tab-bar--top');
+        }.bind(this));
+
+        var page = ons.findParentComponentUntil('ons-page', this._element[0]);
+        if (page) {
+          this._element.css('top', window.getComputedStyle(page.getContentElement(), null).getPropertyValue('padding-top'));
+        }
+
+        if ($onsen.shouldFillStatusBar(this._element[0])) {
+          // Adjustments for IOS7
+          var fill = angular.element(document.createElement('div'));
+          fill.addClass('tab-bar__status-bar-fill');
+          fill.css({width: '0px', height: '0px'});
+
+          this._element.prepend(fill);
         }
       },
 
@@ -9876,6 +9890,7 @@ limitations under the License.
       var f = function() {
         if (i++ < 5)  {
           if (isAttached(element)) {
+            fillStatusBar(element);
             fireActualPageInitEvent(element);
           } else {
             setImmediate(f);
@@ -9892,6 +9907,17 @@ limitations under the License.
       var event = document.createEvent('HTMLEvents');    
       event.initEvent('pageinit', true, true);
       element.dispatchEvent(event);    
+    }
+
+    function fillStatusBar(element) {
+      if ($onsen.shouldFillStatusBar(element)) {
+        // Adjustments for IOS7
+        var fill = angular.element(document.createElement('div'));
+        fill.addClass('page__status-bar-fill');
+        fill.css({width: '0px', height: '0px'});
+
+        angular.element(element).prepend(fill);
+      }
     }
 
     function isAttached(element) {
@@ -9943,14 +9969,6 @@ limitations under the License.
 
       compile: function(element) {
         var children = element.children().remove();
-
-        if ($onsen.shouldFillStatusBar()) {
-          // Adjustments for IOS7
-          var fill = angular.element(document.createElement('div'));
-          fill.addClass('page__status-bar-fill');
-          fill.css({width: '0px', height: '0px'});
-          element.prepend(fill);
-        }
 
         var content = angular.element('<div class="page__content ons-page-inner"></div>').append(children);
 
@@ -10909,7 +10927,6 @@ limitations under the License.
       replace: false,
       transclude: true,
       scope: {
-        hideTabs: '=',
         onActiveTabChanged: '&'
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
@@ -10922,8 +10939,9 @@ limitations under the License.
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         scope.selectedTabItem = {source: ''};
 
-        scope.$watch('hideTabs', function(hide) {
-          tabbarView.setTabbarVisibility(!hide);
+        attrs.$observe('hideTabs', function(hide) {
+          var visible = hide !== 'true';
+          tabbarView.setTabbarVisibility(visible);
         });
 
         var tabbarView = new TabbarView(scope, element, attrs);
@@ -11636,10 +11654,29 @@ limitations under the License.
         },
 
         /**
+         * @param {HTMLElement} element
          * @return {Boolean}
          */
-        shouldFillStatusBar: function() {
-          return this.isEnabledAutoStatusBarFill() && this.isWebView() && this.isIOS7Above();
+        shouldFillStatusBar: function(element) {
+          if (this.isEnabledAutoStatusBarFill() && this.isWebView() && this.isIOS7Above()) {
+            if (!(element instanceof HTMLElement)) {
+              throw new Error('element must be an instance of HTMLElement');
+            }
+            var debug = element.tagName === 'ONS-TABBAR' ? console.log.bind(console) : angular.noop;
+
+            for (;;) {
+              if (element.hasAttribute('no-status-bar-fill')) {
+                return false;
+              }
+
+              element = element.parentNode;
+              debug(element);
+              if (!element || !element.hasAttribute) {
+                return true;
+              }
+            }
+          }
+          return false;
         },
 
         /**
@@ -12471,15 +12508,14 @@ window.ons.orientation = (function() {
 
   function create() {
     var obj = {
-      // width and height on "orientationchange" event.
-      _innerWidth: 0,
-      _innerHeight: 0,
+      // actual implementation to detect if whether current screen is portrait or not
+      _isPortrait: false,
 
       /**
        * @return {Boolean}
        */
       isPortrait: function() {
-        return this._innerWidth < this._innerHeight;
+        return this._isPortrait();
       },
 
       /**
@@ -12498,36 +12534,54 @@ window.ons.orientation = (function() {
           window.addEventListener('resize', this._onResize.bind(this), false);
         }
 
-        this._updateDimentionInfo();
+        this._isPortrait = function() {
+          return window.innerHeight > window.innerWidth;
+        };
 
         return this;
       },
 
-      _updateDimentionInfo: function() {
-        this._innerWidth = window.innerWidth;
-        this._innerHeight = window.innerHeight;
-      },
-
       _onDOMContentLoaded: function() {
-        this._updateDimentionInfo();
+        this._installIsPortraintImplementation();
         this.emit('change', {isPortrait: this.isPortrait()});
       },
 
+      _installIsPortraintImplementation: function() {
+        var isPortrait = window.innerWidth < window.innerHeight;
+
+        if (!('orientation' in window)) {
+          this._isPortrait = function() {
+            return window.innerHeight > window.innerWidth;
+          };
+        } else if (window.orientation % 180 === 0) {
+          this._isPortrait = function() {
+            return window.orientation % 180 === 0 ? isPortrait : !isPortrait;
+          };
+        } else {
+          this._isPortrait = function() {
+            return window.orientation % 180 === 90 ? isPortrait : !isPortrait;
+          };
+        }
+      },
+
       _onOrientationChange: function() {
-        // We use setImmediate because there is some cases that window's dimention information is not updated on "orientationchange".
+        // We use setImmediate because window's dimention information is not updated on "orientationchange" in some cases.
         setImmediate(function() {
-          this._updateDimentionInfo();
           this.emit('change', {isPortrait: this.isPortrait()});
         }.bind(this));
       },
 
       // Run on not mobile browser.
       _onResize: function() {
-        var last = this.isPortrait();
-        this._updateDimentionInfo();
-        if (this.isPortrait() !== last) {
+        if ('_lastScreenIsPortraitOrNot' in this) {
+          if (this.isPortrait() !== this._lastScreenIsPortraitOrNot) {
+            this.emit('change', {isPortrait: this.isPortrait()});
+          }
+        } else {
           this.emit('change', {isPortrait: this.isPortrait()});
         }
+
+        this._lastScreenIsPortraitOrNot = this.isPortrait();
       }
     };
 
