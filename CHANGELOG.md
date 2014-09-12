@@ -14,6 +14,9 @@ v1.1.3-dev
  * ons-tabbar: Renamed 'ons-tabbar-item' to 'ons-tab'.
  * ons-tabbar: Changed 'ons-tab' to accept child html contents.
  * ons-tabbar: Added 'ons-tab-active' and 'ons-tab-inactive' attributes on child elements of 'ons-tab'.
+ * ons-tabbar: Added 'position' attribute on 'ons-tabbar' to put tabbar on screen top or screen bottom.
+ * ons-tabbar: Added 'ons-tab-active', 'ons-tab-inactive' attribute on 'ons-tab'.
+ * css-components: Rewritten all patterns completely with Onsen UI.
 
 v1.1.2
 ----
