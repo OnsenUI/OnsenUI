@@ -1,6 +1,7 @@
 
 .plan-list {
   border-top: none;
+  background-image: none !important;
 }
 
 .plan {
