@@ -18,17 +18,17 @@
 
     <ons-tabbar>
       <ons-tab page="timeline.html" active="true">
-        <ons-icon icon="ion-home" style="font-size: 28px"></ons-icon>
+        <ons-icon icon="ion-home" class="tab-icon"></ons-icon>
       </ons-tab>
       <ons-tab page="timeline.html">
         <div class="notification reply-notification" ons-tab-inactive>4</div>
-        <ons-icon icon="ion-at" style="font-size: 28px"></ons-icon>
+        <ons-icon icon="ion-at" class="tab-icon"></ons-icon>
       </ons-tab>
       <ons-tab page="timeline.html">
-        <ons-icon icon="ion-heart" style="font-size: 28px"></ons-icon>
+        <ons-icon icon="ion-heart" class="tab-icon"></ons-icon>
       </ons-tab>
       <ons-tab page="timeline.html">
-        <ons-icon icon="ion-person" style="font-size: 28px"></ons-icon>
+        <ons-icon icon="ion-person" class="tab-icon"></ons-icon>
       </ons-tab>
     </ons-tabbar>
 
@@ -37,7 +37,7 @@
         <ons-toolbar>
           <div class="left">
             <ons-toolbar-button>
-              <ons-icon icon="ion-compose" fixed-width="false"></ons-icon>
+              <ons-icon icon="ion-compose" fixed-width="false" style="font-size: 26px; vertical-align: -4px"></ons-icon>
             </ons-toolbar-button>
           </div>
           <div class="center">
@@ -45,7 +45,7 @@
           </div>
           <div class="right">
             <ons-toolbar-button>
-              <ons-icon icon="ion-ios7-search-strong" fixed-width="false"></ons-icon>
+              <ons-icon icon="ion-ios7-search-strong" fixed-width="false" style="font-size: 26px; vertical-align: -4px;"></ons-icon>
             </ons-toolbar-button>
           </div>
         </ons-toolbar>
@@ -54,7 +54,7 @@
           <ons-list-item class="timeline-li" modifier="tappable" ng-repeat="i in [1,2,3,4,5,6,7,8,9]">
             <ons-row>
               <ons-col width="50px">
-                <img src="images/profile-image-0{{i}}.png" class="timeline-image">
+                <img ng-src="images/profile-image-0{{i}}.png" class="timeline-image">
               </ons-col>
 
               <ons-col>

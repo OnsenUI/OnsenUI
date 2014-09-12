@@ -10,6 +10,11 @@
   min-width: 13px;
 }
 
+.tab-icon {
+  font-size: 28px;
+  vertical-align: -4px;
+}
+
 .timeline {
   margin-top: 10px;
   margin-bottom: 10px;
