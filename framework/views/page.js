@@ -63,11 +63,10 @@ limitations under the License.
         // on-device-backbutton
         /* jshint ignore:start */
         if (this._attrs.onDeviceBackbutton) {
-          with (window) {
-            with ({event: $event}) {
-              eval(this._attrs.onDeviceBackbutton);
-            }
-          }
+          var lastEvent = window.$event;
+          window.$event = $event;
+          new Function(this._attrs.onDeviceBackbutton)();
+          window.$event = lastEvent;
         }
         /* jshint ignore:end */
       },
