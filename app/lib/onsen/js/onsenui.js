@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.3-dev - 2014-09-11 */
+/*! onsenui - v1.1.3 - 2014-09-12 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -3924,7 +3924,7 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/back_button.tpl",
     "<span class=\"toolbar-button--quiet {{modifierTemplater('toolbar-button--quiet--*')}}\" ng-click=\"$root.ons.findParentComponentUntil('ons-navigator', $event).popPage()\" style=\"height: 44px; line-height: 0; padding: 0; position: relative;\">\n" +
-    "  <i class=\"ion-ios7-arrow-back ons-back-button__icon\" style=\"vertical-align: middle; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; height: 44px; width: 16px !important; display: inline-block;\"></i><span style=\"vertical-align: top; display: inline-block; line-height: 44px; height: 44px;\" class=\"back-button__label\"></span>\n" +
+    "  <i class=\"ion-ios7-arrow-back ons-back-button__icon\" style=\"vertical-align: top; background-color: transparent; height: 44px; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; width: 16px; display: inline-block; padding-top: 1px;\"></i><span style=\"vertical-align: top; display: inline-block; line-height: 44px; height: 44px;\" class=\"back-button__label\"></span>\n" +
     "</span>\n" +
     "");
 }]);
@@ -6293,11 +6293,10 @@ limitations under the License.
         // on-device-backbutton
         /* jshint ignore:start */
         if (this._attrs.onDeviceBackbutton) {
-          with (window) {
-            with ({event: $event}) {
-              eval(this._attrs.onDeviceBackbutton);
-            }
-          }
+          var lastEvent = window.$event;
+          window.$event = $event;
+          new Function(this._attrs.onDeviceBackbutton)();
+          window.$event = lastEvent;
         }
         /* jshint ignore:end */
       },

@@ -7,6 +7,26 @@
     <span class="anchor" id="ons-sliding-menu-attributes"></span>
 
     
+      <section>
+        <h4>例</h4>
+        <pre><code class="xml">&lt;ons-sliding-menu var=&quot;app.menu&quot; main-page=&quot;page.html&quot; menu-page=&quot;menu.html&quot; max-slide-distance=&quot;200px&quot; type=&quot;reveal&quot; side=&quot;left&quot;&gt;
+&lt;/ons-sliding-menu&gt;
+
+&lt;ons-template id=&quot;page.html&quot;&gt;
+  &lt;ons-page&gt;
+   &lt;p style=&quot;text-align: center&quot;&gt;
+     &lt;ons-button ng-click=&quot;app.menu.toggleMenu()&quot;&gt;Toggle&lt;/ons-button&gt;
+   &lt;/p&gt;
+  &lt;/ons-page&gt;
+&lt;/ons-template&gt;
+
+&lt;ons-template id=&quot;menu.html&quot;&gt;
+  &lt;ons-page&gt;
+    &lt;!-- menu page&#39;s contents --&gt;
+  &lt;/ons-page&gt;
+&lt;/ons-template&gt;</code></pre>
+      </section>
+    
 
     
       <section>

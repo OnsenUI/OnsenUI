@@ -1678,15 +1678,15 @@ h6 {
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .tab-bar--top {
-    border-top: none;
+    border-bottom: none;
     -webkit-background-size: 100% 1px;
     background-size: 100% 1px;
     background-repeat: no-repeat;
-    background-position: top;
-    background-image: -webkit-linear-gradient(270deg, #ddd, bottom, #ddd, bottom 50%, transparent 50%);
-    background-image: -moz-linear-gradient(270deg, #ddd, bottom, #ddd, bottom 50%, transparent 50%);
-    background-image: -o-linear-gradient(270deg, #ddd, bottom, #ddd, bottom 50%, transparent 50%);
-    background-image: linear-gradient(180deg, #ddd, bottom, #ddd, bottom 50%, transparent 50%);
+    background-position: bottom;
+    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
   }
 }
 .tab-bar--top__content {

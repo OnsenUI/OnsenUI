@@ -7,6 +7,33 @@
     <span class="anchor" id="ons-navigator-attributes"></span>
 
     
+      <section>
+        <h4>Example</h4>
+        <pre><code class="xml">&lt;ons-navigator animation=&quot;slide&quot; var=&quot;app.navi&quot;&gt;
+  &lt;ons-page&gt;
+    &lt;ons-toolbar&gt;
+      &lt;div class=&quot;center&quot;&gt;Title&lt;/div&gt;
+    &lt;/ons-toolbar&gt;
+
+    &lt;p style=&quot;text-align: center&quot;&gt;
+      &lt;ons-button modifier=&quot;light&quot; ng-click=&quot;app.navi.pushPage(&#39;page.html&#39;);&quot;&gt;Push&lt;/ons-button&gt;
+    &lt;/p&gt;
+  &lt;/ons-page&gt;
+&lt;/ons-navigator&gt;
+
+&lt;ons-template id=&quot;page.html&quot;&gt;
+  &lt;ons-page&gt;
+    &lt;ons-toolbar&gt;
+      &lt;div class=&quot;center&quot;&gt;Title&lt;/div&gt;
+    &lt;/ons-toolbar&gt;
+
+    &lt;p style=&quot;text-align: center&quot;&gt;
+      &lt;ons-button modifier=&quot;light&quot; ng-click=&quot;app.navi.popPage(&#39;page.html&#39;);&quot;&gt;Pop&lt;/ons-button&gt;
+    &lt;/p&gt;
+  &lt;/ons-page&gt;
+&lt;/ons-template&gt;</code></pre>
+      </section>
+    
 
     
       <section>
