@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v1.1.3-dev
+v1.1.3
 ----
 
  * Added task automation with gulp.js in project templates.
