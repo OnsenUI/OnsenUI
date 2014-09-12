@@ -100,11 +100,12 @@ var-border-top--tab-bar = 1px solid var-tab-bar-border-color
 
 retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   +retina-query()
-    border-top none
+    border-{border-position} none
     background-size 100% 1px
     background-repeat no-repeat
     background-position border-position
-    background-image linear-gradient(180deg, color, color 50%, transparent 50%)
+    background-image linear-gradient(0deg, color, color 50%, transparent 50%) if border-position == 'bottom'
+    background-image linear-gradient(180deg, color, color 50%, transparent 50%) if border-position == 'top'
 
 .tab-bar
   reset-font()
@@ -121,7 +122,7 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   background-color var-background-color--tab-bar
   border-top var-border-top--tab-bar
   width 100%
-  retina-tabbar-border(color = var-tab-bar-border-color)
+  retina-tabbar-border(var-tab-bar-border-color)
 
 .tab-bar__item
   reset-font()
@@ -291,7 +292,7 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   bottom auto
   border-top none
   border-bottom var-border-top--tab-bar
-  retina-tabbar-border(color = var-tab-bar-border-color, border-position = bottom)
+  retina-tabbar-border(var-tab-bar-border-color, bottom)
 
 .tab-bar--top__content
   top var-height--tab-bar
