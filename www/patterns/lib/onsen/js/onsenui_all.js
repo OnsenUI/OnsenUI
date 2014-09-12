@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.3-dev - 2014-09-12 */
+/*! onsenui - v1.1.3 - 2014-09-12 */
 /**
  * @license AngularJS v1.2.10
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -26889,11 +26889,10 @@ limitations under the License.
         // on-device-backbutton
         /* jshint ignore:start */
         if (this._attrs.onDeviceBackbutton) {
-          with (window) {
-            with ({event: $event}) {
-              eval(this._attrs.onDeviceBackbutton);
-            }
-          }
+          var lastEvent = window.$event;
+          window.$event = $event;
+          new Function(this._attrs.onDeviceBackbutton)();
+          window.$event = lastEvent;
         }
         /* jshint ignore:end */
       },
