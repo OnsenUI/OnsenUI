@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <title>My App</title>  
+  
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
+  <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css"> 
+  <link rel="stylesheet" href="styles/app.css"/> 
+
+  <script src="lib/onsen/js/angular/angular.js"></script>    
+  <script src="lib/onsen/js/onsenui.js"></script>    
+
+  <script src="cordova.js"></script>
+  <script>
+    var module = angular.module('app', ['onsen']);
+  </script>
+  
+</head>
+
+<body>    
+  
+  <ons-split-view 
+    secondary-page="secondary.html" 
+    main-page="page1.html" 
+    main-page-width="70%" 
+    collapse="portrait">
+  </ons-split-view>
+
+  <ons-template id="page1.html">
+    <ons-page class="center">
+      <ons-toolbar>
+        <div class="center">Page 1</div>
+      </ons-toolbar>
+
+      <div class="content-padded" style="font-size: 13px; text-align: center; color: #999;">
+        <p>Rotate the device to landscape/portrait see the views split/collapse.</p>
+        <p>Or resize the window so that the width is larger than the height (landscape)/smaller than the height (portrait).</p>	
+      </div>
+
+      <ons-bottom-toolbar>
+      </ons-bottom-toolbar>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="page2.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Page 2</div>
+      </ons-toolbar>
+
+      <div class="content-padded" style="font-size: 13px; text-align: center; color: #999;">
+        <p>Rotate the device to landscape/portrait see the views split/collapse.</p>
+        <p>Or resize the window so that the width is larger than the height (landscape)/smaller than the height (portrait).</p>	
+      </div>
+
+      <ons-bottom-toolbar>
+      </ons-bottom-toolbar>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="secondary.html">
+    <ons-page style="border-right: 1px solid #ddd;">
+
+      <ons-list>
+
+        <ons-list-item
+          modifier="chevron"
+          ng-click="ons.splitView.toggle();
+            ons.splitView.setMainPage('page1.html');">
+          <i class="fa fa-home fa-lg" style="color: #666"></i>
+          &nbsp; Page 1
+        </ons-list-item>
+
+        <ons-list-item 
+          modifier="chevron"
+          ng-click="ons.splitView.toggle(); ons.splitView.setMainPage('page2.html');">
+          <i class="fa fa-gear fa-lg" style="color: #666"></i>
+          &nbsp; Page 2
+        </ons-list-item>
+
+      </ons-list>
+
+    </ons-page>
+  </ons-template>
+ 
+</body>
+</html>

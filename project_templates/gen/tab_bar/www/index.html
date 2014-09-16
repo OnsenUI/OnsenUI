@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  
+  <title>My App</title>  
+  
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
+  <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">  
+  <link rel="stylesheet" href="styles/app.css"/>
+
+  <script src="lib/onsen/js/angular/angular.js"></script>    
+  <script src="lib/onsen/js/onsenui.js"></script>    
+
+  <script src="cordova.js"></script>
+  <script src="js/app.js"></script> 
+
+  <script>
+    angular.module('app', ['onsen']);
+
+    angular.module('app').controller('AppController', function($scope) {
+      $scope.doSomething = function() {
+        setTimeout(function() {
+          alert('tapped');
+        }, 100);
+      };
+    });
+  </script>
+
+  <style>
+    .tab {
+      line-height: 1;
+    }
+    .tab-icon {
+      font-size: 24px;
+      padding: 0;
+      margin: 0;
+      vertical-align: top;
+      line-height: 28px;
+    }
+    .tab-label {
+      line-height: 11px;
+      vertical-align: top;
+      font-size: 11px;
+    }
+
+    .profile-wrapper {
+      padding: 16px 10px 0 10px;
+    }
+
+    .profile-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 100%;
+      -webkit-border-radius: 100%;
+      background-color: #ccc;
+    }
+
+    .profile-name {
+      font-size: 18px;
+      padding: 4px 0 2px 0;
+    }
+
+    .profile-email {
+      font-size: 15px;
+      opacity: 0.4;
+    }
+
+    .switch--list-item {
+      margin-right: 0px;
+    }
+
+    .settings-header {
+      font-weight: 500;
+      font-size: 14px;
+      opacity: 0.4;
+      padding: 10px 0 0px 10px;
+      margin-bottom: -4px;
+    }
+
+    .settings-list {
+      margin-top: 10px;
+    }
+
+    .item {
+      padding: 10px;
+      line-height: 1;
+    }
+    .item-thum {
+      background-color: #ccc;
+      width: 50px;
+      height: 50px;
+      border-radius: 100%;
+      -webkit-border-radius: 100%;
+    }
+    .item-title {
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .item-desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.3;
+      margin: 4px 0 0 0;
+      padding: 0 30px 0 0;
+    }
+    .item-label {
+      font-size: 12px;
+      color: #999;
+      float: right;
+    }
+  </style>
+  
+</head>
+
+<body ng-controller="AppController">    
+  
+  <ons-tabbar>
+    <ons-tabbar-item active="true" page="home.html">
+      <div class="tab">
+        <ons-icon icon="ion-home" class="tab-icon"></ons-icon>
+        <div class="tab-label">Timeline</div>
+      </div>
+    </ons-tabbar-item>
+
+    <ons-tabbar-item page="settings.html">
+      <div class="tab">
+        <ons-icon icon="ion-gear-a" class="tab-icon"></ons-icon>
+        <div class="tab-label">Settings</div>
+      </div>
+    </ons-tabbar-item>
+  </ons-tabbar>
+
+  <ons-template id="home.html">
+    <ons-navigator>
+      <ons-page>
+        <ons-toolbar>
+          <div class="left"><ons-toolbar-button ng-click="doSomething()"><ons-icon icon="ion-compose"></ons-icon></ons-toolbar-button></div>
+          <div class="center">Home</div>
+          <div class="right"></div>
+        </ons-toolbar>
+
+        <ons-list style="margin: -1px 0">
+          <ons-list-item modifier="chevron" class="item" ng-repeat="i in [1,2,3,4,5]" ng-click="doSomething()">
+            <ons-row>
+              <ons-col width="60px"> 
+                <div class="item-thum"></div>
+              </ons-col>
+              <ons-col>
+                <header>
+                  <span class="item-title">Rorem Ipsum</span>
+                  <span class="item-label">5h</span>
+                </header>
+                <p class="item-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              </ons-col>
+            </ons-row>                          
+          </ons-list-item>
+        </ons-list>
+      </ons-page>
+    </ons-navigator>
+  </ons-template>
+
+  <ons-template id="settings.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Settings</div>
+      </ons-toolbar>
+
+      <ons-row class="profile-wrapper">
+        <ons-col width="60px" class="profile-image-wrapper">
+          <div class="profile-image"></div>
+        </ons-col>
+
+        <ons-col>
+          <div class="profile-name">Foobar</div>
+          <div class="profile-email">foobar@example.com</div>
+        </ons-col>
+
+      </ons-row>
+
+      <div class="settings-header">Share</div>
+
+      <ons-list modifier="inset" class="settings-list">
+        <ons-list-item>
+          Twitter
+          <ons-switch modifier="list-item"></ons-switch>
+        </ons-list-item>
+
+        <ons-list-item>
+          Facebook
+          <ons-switch modifier="list-item" checked></ons-switch>
+        </ons-list-item>
+      </ons-list>
+
+      <div class="settings-header">Others</div>
+
+      <ons-list modifier="inset" class="settings-list">
+        <ons-list-item modifier="chevron" ng-click="doSomething()">
+          Terms of Service
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="doSomething()">
+          Privacy Policy
+        </ons-list-item>
+      </ons-list>
+
+      <br>
+
+      <ons-list modifier="inset" class="settings-list">
+        <ons-list-item modifier="tappable" ng-click="doSomething()">
+          <ons-icon icon="ion-log-out" style="opacity: 0.8"></ons-icon>
+          Sign out
+        </ons-list-item>
+      </ons-list>
+
+      <br>
+
+    </ons-page>
+  </ons-template>
+
+</body>
+</html>
