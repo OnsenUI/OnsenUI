@@ -348,9 +348,7 @@ h6 {
   class: navigation-bar
   markup:
     <div class="navigation-bar">
-      <div class="navigation-bar__center">
-        <h1 class="navigation-bar__title">Navigation Bar</h1>
-      </div>
+      <div class="navigation-bar__center">Navigation Bar</div>
     </div>
 */
 .navigation-bar {
@@ -522,7 +520,7 @@ h6 {
         </span>
       </div>
       <div class="navigation-bar__center">
-        <h1 class="navigation-bar__title">Navigation Bar</h1>
+        Navigation Bar
       </div>
       <div class="navigation-bar__right">
         <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
