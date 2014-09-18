@@ -6,11 +6,17 @@
  *  [en]Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.[/en]
  *  [ja]スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。[/ja]
  * @param behind-page
- *  [en]The url of the page to be set to the behind layer.[/en]
- *  [ja]後方のレイヤーにセットされたページのURLを指定します。[/ja]
+ *  [en][Depricated]The url of the page to be set to the behind layer.[/en]
+ *  [ja][非推奨]後方のレイヤーにセットされたページのURLを指定します。[/ja]
  * @param above-page
- *  [en]The url of the page to be set to the above layer.[/en]
- *  [ja]前方のレイヤーにセットされたページのURLを指定します。[/ja]
+ *  [en][Depricated]The url of the page to be set to the above layer.[/en]
+ *  [ja][非推奨]前方のレイヤーにセットされたページのURLを指定します。[/ja]
+ * @param menu-page
+ *  [en]The url of the page to be set to the left side.[/en]
+ *  [ja]左に位置するメニューページのURLを指定します。[/ja]
+ * @param main-page
+ *  [en]The url of the page to be set to the right side.[/en]
+ *  [ja]右に位置するメインページのURLを指定します。[/ja]
  * @param swipable
  *  [en]Whether to enable swipe interaction.[/en]
  *  [ja]スワイプ操作を有効にする場合に指定します。[/ja]
