@@ -5,6 +5,8 @@ CHANGELOG
 v1.2.0-dev
 ----
 
+ * css-components: Fixed [#217](https://github.com/OnsenUI/OnsenUI/issues/217).
+
 v1.1.3
 ----
 
