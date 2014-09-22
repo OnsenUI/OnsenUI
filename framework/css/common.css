@@ -54,25 +54,25 @@ input, textarea {
   background: transparent !important;
 }
 
-.page__status-bar-fill + .page__content {
+.page__status-bar-fill ~ .page__content {
   padding-top: 20px;
 }
 
-ons-toolbar + .page__content {
+ons-toolbar ~ .page__content {
   padding-top: 44px;
 }
 
-.page__status-bar-fill + ons-toolbar {
+.page__status-bar-fill ~ ons-toolbar {
   height: 64px;
 }
 
-.page__status-bar-fill + ons-toolbar > .center,
-.page__status-bar-fill + ons-toolbar > .left,
-.page__status-bar-fill + ons-toolbar > .right {
+.page__status-bar-fill ~ ons-toolbar > .center,
+.page__status-bar-fill ~ ons-toolbar > .left,
+.page__status-bar-fill ~ ons-toolbar > .right {
   padding-top: 20px;
 }
 
-.page__status-bar-fill + ons-toolbar + .page__content {
+.page__status-bar-fill ~ ons-toolbar ~ .page__content {
   padding-top: 64px;
 }
 
