@@ -348,9 +348,7 @@ h6 {
   class: navigation-bar
   markup:
     <div class="navigation-bar">
-      <div class="navigation-bar__center">
-        <h1 class="navigation-bar__title">Navigation Bar</h1>
-      </div>
+      <div class="navigation-bar__center">Navigation Bar</div>
     </div>
 */
 .navigation-bar {
@@ -460,12 +458,9 @@ h6 {
   font-size: 17px;
   font-weight: 500;
   color: #1f1f21;
-  width: 46%;
   margin: 0;
   padding: 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  overflow: visible;
 }
 .navigation-bar__center:first-child:last-child {
   width: 100%;
@@ -522,7 +517,7 @@ h6 {
         </span>
       </div>
       <div class="navigation-bar__center">
-        <h1 class="navigation-bar__title">Navigation Bar</h1>
+        Navigation Bar
       </div>
       <div class="navigation-bar__right">
         <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
