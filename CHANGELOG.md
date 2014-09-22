@@ -2,9 +2,10 @@
 CHANGELOG
 ====
 
-v1.1.4-dev
+v1.1.4
 ----
 
+ * core: Fixed broken navigation-bar layout on runninng with iOS Cordova in some cases.
  * css-components: Fixed [#217](https://github.com/OnsenUI/OnsenUI/issues/217).
 
 v1.1.3
