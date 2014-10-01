@@ -29,13 +29,14 @@
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
         pre: function(scope, element, attrs) {
-
+          var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+          
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
 
-          scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
+          element.children('span').addClass(modifierTemplater('toolbar-button--*'));
+            
           $onsen.cleaner.onDestroy(scope, function() {
             $onsen.clearComponent({
               scope: scope,
