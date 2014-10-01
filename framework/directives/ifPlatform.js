@@ -11,7 +11,7 @@
  * @seealso ons-if-orientation [en]ons-if-orientation component[/en][ja]ons-if-orientationコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
- * <div if-platform="android">
+ * <div ons-if-platform="android">
  *   ...
  * </div>
  */
