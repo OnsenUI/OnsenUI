@@ -125,7 +125,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/toolbar_button.tpl",
-    "<span class=\"toolbar-button {{modifierTemplater('toolbar-button--quiet--*')}} navigation-bar__line-height\" ng-transclude></span>\n" +
+    "<span class=\"toolbar-button navigation-bar__line-height\" ng-transclude></span>\n" +
     "");
 }]);
 })();
