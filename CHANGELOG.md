@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v1.1.5
+v1.1.5-dev
 ----
 
 * ons-tabbar: Added attribute 'no-reload' to tabs to stop the tab from reloading when pressing it twice.
