@@ -156,6 +156,16 @@ limitations under the License.
         options = options || {};
         var previousTabItem = this._tabItems[this.getActiveTabIndex()];
         var selectedTabItem = this._tabItems[index];
+
+        if(typeof selectedTabItem.noReload !== 'undefined' && 
+            index == this.getActiveTabIndex()) {
+          this.emit('reactive', {
+            index: index,
+            tabItem: selectedTabItem,
+          }); 
+          return false;
+        }
+
         var needLoad = selectedTabItem.page && !options.keepPage;
 
         if (!selectedTabItem) {
