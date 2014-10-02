@@ -2,7 +2,12 @@
 CHANGELOG
 ====
 
-v1.2.0-dev
+v1.1.5-dev
+----
+
+ * ons-toolbar-button: Fixed [#219](https://github.com/OnsenUI/OnsenUI/issues/219).
+
+v1.1.4
 ----
 
  * css-components: Fixed [#217](https://github.com/OnsenUI/OnsenUI/issues/217).
