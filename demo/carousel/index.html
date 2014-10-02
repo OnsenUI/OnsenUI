@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Carousel</title>  
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/angular/angular.js"></script>    
+  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../app.js"></script>  
+
+  <script>
+    function PageController($scope) {
+      var options = $scope.myNavigator.getCurrentPage().options;
+      console.log(myNavigator.getPages().length);
+      console.log(options);
+    }
+  </script>
+  
+</head>
+
+<body>    
+  <ons-navigator var="myNavigator">
+
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Carousel</div>
+      </ons-toolbar>
+
+      <ons-carousel style="height: 150px;">
+        <ons-carousel-item style="background-color: red">
+        </ons-carousel-item>
+        <ons-carousel-item style="background-color: blue">
+        </ons-carousel-item>
+      </ons-carousel>
+
+      <ons-carousel style="height: 150px;">
+        <ons-carousel-item style="background-color: yellow">
+        </ons-carousel-item>
+        <ons-carousel-item style="background-color: green">
+        </ons-carousel-item>
+        <ons-carousel-item style="background-color: cyan">
+        </ons-carousel-item>
+      </ons-carousel>
+
+      <ons-carousel style="height: 150px;">
+        <ons-carousel-item style="background-color: gray">
+        </ons-carousel-item>
+        <ons-carousel-item style="background-color: black">
+        </ons-carousel-item>
+        <ons-carousel-item style="background-color: purple">
+        </ons-carousel-item>
+        <ons-carousel-item style="background-color: blue">
+        </ons-carousel-item>
+      </ons-carousel>
+
+
+    </ons-page>
+
+  </ons-navigator>  
+
+</body>
+</html>
