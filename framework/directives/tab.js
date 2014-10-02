@@ -22,7 +22,7 @@
  *  [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
  * @param no-reload
  *  [en]Set if the page shouldn't be reloaded when clicking on the same tab twice.[/en]
- *  [jp]同じタブを再びクリックするとページの再読み込みは発生しません。[/jp]
+ *  [jp]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/jp]
  * @codepen pGuDL
  * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
