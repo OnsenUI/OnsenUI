@@ -18,7 +18,7 @@
  *  [en]Tabbar's position. Preset values are bottom/top.[/en]
  *  [ja]タブバーの位置を指定します。bottomもしくはtopを選択できます。デフォルトはbottomです。[/ja]
  * @property on(eventName,listener)
- *  [en]Add an event listener. Possible events are prechange and postchange. See the guide for more details.[/en]
+ *  [en]Add an event listener. Possible events are prechange, postchange and reactive. See the guide for more details.[/en]
  *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。詳細はガイドを参照してください。[/ja]
  * @property setActiveTab(index,[options])
  *  [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]

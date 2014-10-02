@@ -2,6 +2,12 @@
 CHANGELOG
 ====
 
+v1.1.5
+----
+
+* ons-tabbar: Added attribute 'no-reload' to tabs to stop the tab from reloading when pressing it twice.
+* ons-tabbar: The event 'reactive' is triggered when pressing the same tab twice if 'no-reload' is set.
+
 v1.1.4
 ----
 
