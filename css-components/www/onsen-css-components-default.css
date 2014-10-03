@@ -74,6 +74,17 @@ h6 {
   box-sizing: border-box;
   margin-top: -1px;
 }
+.page__background {
+  background-color: #fff;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 .content-padded {
   padding: 8px;
 }
@@ -458,12 +469,9 @@ h6 {
   font-size: 17px;
   font-weight: 500;
   color: #1f1f21;
-  width: 46%;
   margin: 0;
   padding: 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  overflow: visible;
 }
 .navigation-bar__center:first-child:last-child {
   width: 100%;
