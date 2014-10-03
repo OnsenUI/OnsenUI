@@ -35,7 +35,7 @@
 
   function cleanClassAttribute(element) {
     var classList = ('' + element.attr('class')).split(/ +/).filter(function(classString) {
-      return classString !== 'fa' && classString.substring(0, 3) !== 'fa-';
+      return classString !== 'fa' && classString.substring(0, 3) !== 'fa-' && classString.substring(0, 4) !== 'ion-';
     });
 
     element.attr('class', classList.join(' '));
