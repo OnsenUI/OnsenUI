@@ -153,7 +153,6 @@ limitations under the License.
   });
   MicroEvent.mixin(SlidingMenuViewModel);
 
-  var MAIN_PAGE_RATIO = 0.9;
   module.factory('SlidingMenuView', function($onsen, $compile, SlidingMenuAnimator, RevealSlidingMenuAnimator, 
                                              PushSlidingMenuAnimator, OverlaySlidingMenuAnimator) {
 
@@ -162,8 +161,8 @@ limitations under the License.
       _attrs: undefined,
 
       _element: undefined,
-      _behindPage: undefined,
-      _abovePage: undefined,
+      _menuPage: undefined,
+      _mainPage: undefined,
 
       _doorLock: undefined,
 
@@ -174,8 +173,8 @@ limitations under the License.
         this._attrs = attrs;
         this._element = element;
 
-        this._behindPage = angular.element(element[0].querySelector('.onsen-sliding-menu__behind'));
-        this._abovePage = angular.element(element[0].querySelector('.onsen-sliding-menu__above'));
+        this._menuPage = angular.element(element[0].querySelector('.onsen-sliding-menu__menu'));
+        this._mainPage = angular.element(element[0].querySelector('.onsen-sliding-menu__main'));
 
         this._doorLock = new DoorLock();
 
@@ -201,14 +200,10 @@ limitations under the License.
 
         if (attrs.mainPage) {
           this.setMainPage(attrs.mainPage);
-        } else if (attrs.abovePage) {
-          this.setMainPage(attrs.abovePage);
         }
 
         if (attrs.menuPage) {
           this.setMenuPage(attrs.menuPage);
-        } else if (attrs.behindPage) {
-          this.setMenuPage(attrs.behindPage);
         }
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
@@ -219,13 +214,13 @@ limitations under the License.
           var maxDistance = this._normalizeMaxSlideDistanceAttr();
           this._logic.setMaxDistance(maxDistance);
 
-          this._behindPage.css({opacity: 1});
+          this._menuPage.css({opacity: 1});
 
           this._animator = this._getAnimatorOption();
           this._animator.setup(
             this._element,
-            this._abovePage,
-            this._behindPage,
+            this._mainPage,
+            this._menuPage,
             {
               isRight: this._isRightMenu,
               width: this._attrs.maxSlideDistance || '90%'
@@ -250,7 +245,7 @@ limitations under the License.
         }
       },
 
-      _refreshBehindPageWidth: function() {
+      _refreshMenuPageWidth: function() {
         var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
 
         if (this._animator) {
@@ -297,12 +292,12 @@ limitations under the License.
 
       _onWindowResize: function() {
         this._recalculateMAX();
-        this._refreshBehindPageWidth();
+        this._refreshMenuPageWidth();
       },
 
       _onMaxSlideDistanceChanged: function() {
         this._recalculateMAX();
-        this._refreshBehindPageWidth();
+        this._refreshMenuPageWidth();
       },
 
       /**
@@ -312,13 +307,13 @@ limitations under the License.
         var maxDistance = this._attrs.maxSlideDistance;
 
         if (!('maxSlideDistance' in this._attrs)) {
-          maxDistance = 0.9 * this._abovePage[0].clientWidth;
+          maxDistance = 0.9 * this._mainPage[0].clientWidth;
         } else if (typeof maxDistance == 'string') {
           if (maxDistance.indexOf('px', maxDistance.length - 2) !== -1) {
             maxDistance = parseInt(maxDistance.replace('px', ''), 10);
           } else if (maxDistance.indexOf('%', maxDistance.length - 1) > 0) {
             maxDistance = maxDistance.replace('%', '');
-            maxDistance = parseFloat(maxDistance) / 100 * this._abovePage[0].clientWidth;
+            maxDistance = parseFloat(maxDistance) / 100 * this._mainPage[0].clientWidth;
           }
         } else {
           throw new Error('invalid state');
@@ -347,12 +342,12 @@ limitations under the License.
         this._hammertime = new Hammer(this._element[0]);
       },
 
-      _appendAbovePage: function(pageUrl, templateHTML) {
+      _appendMainPage: function(pageUrl, templateHTML) {
         var pageScope = this._scope.$parent.$new();
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
-        this._abovePage.append(pageContent);
+        this._mainPage.append(pageContent);
 
         if (this._currentPageElement) {
           this._currentPageElement.remove();
@@ -369,22 +364,22 @@ limitations under the License.
       /**
        * @param {String}
        */
-      _appendBehindPage: function(templateHTML) {
+      _appendMenuPage: function(templateHTML) {
         var pageScope = this._scope.$parent.$new();
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
-        this._behindPage.append(pageContent);
+        this._menuPage.append(pageContent);
 
-        if (this._currentBehindPageScope) {
-          this._currentBehindPageScope.$destroy();
-          this._currentBehindPageElement.remove();
+        if (this._currentMenuPageScope) {
+          this._currentMenuPageScope.$destroy();
+          this._currentMenuPageElement.remove();
         }
 
         link(pageScope);
 
-        this._currentBehindPageElement = pageContent;
-        this._currentBehindPageScope = pageScope;
+        this._currentMenuPageElement = pageContent;
+        this._currentMenuPageScope = pageScope;
       },
 
       /**
@@ -400,7 +395,7 @@ limitations under the License.
 
           var self = this;
           $onsen.getPageHTMLAsync(page).then(function(html) {
-            self._appendBehindPage(angular.element(html));
+            self._appendMenuPage(angular.element(html));
             if (options.closeMenu) {
               self.close();
             }
@@ -411,10 +406,6 @@ limitations under the License.
         } else {
           throw new Error('cannot set undefined page');
         }
-      },
-
-      setBehindPage: function() {
-        return this.setMenuPage.apply(this, arguments);
       },
 
       /**
@@ -442,7 +433,7 @@ limitations under the License.
         if (pageUrl) {
           var self = this;
           $onsen.getPageHTMLAsync(pageUrl).then(function(html) {
-            self._appendAbovePage(pageUrl, html);
+            self._appendMainPage(pageUrl, html);
             done();
           }, function() {
             throw new Error('Page is not found: ' + page);
@@ -450,10 +441,6 @@ limitations under the License.
         } else {
           throw new Error('cannot set undefined page');
         }
-      },
-
-      setAbovePage: function(pageUrl, options) {
-        return this.setMainPage.apply(this, arguments);
       },
 
       _handleEvent: function(event) {
@@ -565,7 +552,7 @@ limitations under the License.
         }
 
         var targetWidth = event.gesture.startEvent._swipeTargetWidth;
-        return this._isRightMenu ? this._abovePage[0].clientWidth - x < targetWidth : x < targetWidth;
+        return this._isRightMenu ? this._mainPage[0].clientWidth - x < targetWidth : x < targetWidth;
       },
 
       _getSwipeTargetWidth: function() {
@@ -577,7 +564,7 @@ limitations under the License.
 
         var width = parseInt(targetWidth, 10);
         if (width < 0 || !targetWidth) {
-          return this._abovePage[0].clientWidth;
+          return this._mainPage[0].clientWidth;
         } else {
           return width;
         }

@@ -5,12 +5,6 @@
  * @description
  *  [en]Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.[/en]
  *  [ja]スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。[/ja]
- * @param behind-page
- *  [en][Depricated]The url of the page to be set to the behind layer.[/en]
- *  [ja][非推奨]後方のレイヤーにセットされたページのURLを指定します。[/ja]
- * @param above-page
- *  [en][Depricated]The url of the page to be set to the above layer.[/en]
- *  [ja][非推奨]前方のレイヤーにセットされたページのURLを指定します。[/ja]
  * @param menu-page
  *  [en]The url of the page to be set to the left side.[/en]
  *  [ja]左に位置するメニューページのURLを指定します。[/ja]
@@ -24,14 +18,14 @@
  *  [en]The width of swipable area calculated from the left (in pixel). Use this to enable swipe only when the finger touch on the screen edge.[/en]
  *  [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]
  * @param max-slide-distance
- *  [en]How far the behind page will slide open. Can specify both in px and %. eg. 90%, 200px[/en]
- *  [ja]behind-pageで指定されたページの表示幅を指定します。ピクセルもしくは%の両方で指定できます（例: 90%, 200px）[/ja]
+ *  [en]How far the menu page will slide open. Can specify both in px and %. eg. 90%, 200px[/en]
+ *  [ja]menu-pageで指定されたページの表示幅を指定します。ピクセルもしくは%の両方で指定できます（例: 90%, 200px）[/ja]
  * @param var
  *  [en]Variable name to refer this sliding menu.[/en]
  *  [ja]JavaScriptから操作するための変数名を指定します。[/ja]
  * @param side
- *  [en]Specify which side of the screen the behind page is located on. Possible values are left and right.[/en]
- *  [ja]behind-pageで指定されたページが画面のどちら側から表示されるかを指定します。leftもしくはrightのいずれかを指定できます。[/ja]
+ *  [en]Specify which side of the screen the menu page is located on. Possible values are left and right.[/en]
+ *  [ja]menu-pageで指定されたページが画面のどちら側から表示されるかを指定します。leftもしくはrightのいずれかを指定できます。[/ja]
  *
  * @property setMainPage(pageUrl,[options])
  *  [en]Show the page specified in pageUrl in the main contents pane.[/en]
@@ -39,12 +33,6 @@
  * @property setMenuPage(pageUrl,[options])
  *  [en]Show the page specified in pageUrl in the side menu pane.[/en]
  *  [ja]メニュー部分に表示されるページをpageUrlに指定します。[/ja]
- * @property setAbovePage(pageUrl)
- *  [en][Deprecated]Show the page specified in pageUrl in the above layer.[/en]
- *  [ja][非推奨]上部に表示されるページをpageUrlに指定します。[/ja]
- * @property setBehindPage(pageUrl)
- *  [en][Deprecated]Show the page specified in pageUrl in the behind layer.[/en]
- *  [ja][非推奨]下部に表示されるページをpageUrlに指定します。[/ja]
  * @property openMenu()
  *  [en]Slide the above layer to reveal the layer behind.[/en]
  *  [ja]メニューページを表示します。[/ja]

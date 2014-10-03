@@ -25,22 +25,19 @@ ons-sliding-menu {
   z-index: 0;
 }
 
-.onsen-sliding-menu__behind,
-.onsen-sliding-menu__above {
+.onsen-sliding-menu__menu,
+.onsen-sliding-menu__main {
   position: absolute;
   top: 0px;
   left: 0px;
   bottom: 0px;
   right: 0px;
   z-index: 0;
-}
-
-.onsen-sliding-menu__above {
   margin: 0;
   padding: 0;
 }
 
-.onsen-sliding-menu__behind {
+.onsen-sliding-menu__menu {
   opacity: 0;
 }
 
