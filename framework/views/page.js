@@ -183,6 +183,21 @@ limitations under the License.
       /**
        * @return {HTMLElement}
        */
+      getBackgroundElement : function() {
+        for (var i = 0; i < this._element.length; i++) {
+          if (this._element[i].querySelector) {
+            var content = this._element[i].querySelector('.page__background');
+            if (content) {
+              return content;
+            }
+          }
+        }
+        throw Error('fail to get ".page__background" element.');
+      },
+
+      /**
+       * @return {HTMLElement}
+       */
       getToolbarElement : function() {
         return this._toolbarElement[0] || this._nullElement;
       },

@@ -49,7 +49,8 @@ input, textarea {
   -webkit-user-select: auto;
 }
 
-.page {
+.page,
+.page__content {
   background-color: transparent !important;
   background: transparent !important;
 }
@@ -59,7 +60,7 @@ input, textarea {
 }
 
 ons-toolbar ~ .page__content {
-  padding-top: 44px;
+  top: 44px;
 }
 
 .page__status-bar-fill ~ ons-toolbar {
@@ -73,7 +74,8 @@ ons-toolbar ~ .page__content {
 }
 
 .page__status-bar-fill ~ ons-toolbar ~ .page__content {
-  padding-top: 64px;
+  top: 64px;
+  padding-top: 0px;
 }
 
 .page__content {
@@ -83,7 +85,7 @@ ons-toolbar ~ .page__content {
 }
 
 .page__bottom-bar-fill ~ .page__content {
-  margin-bottom: 44px;
+  bottom: 44px;
 }
 
 .page__content::-webkit-scrollbar {

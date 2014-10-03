@@ -53,6 +53,7 @@ limitations under the License.
           pageLabels: pageLabels,
           other: other,
           content: page.getPageView().getContentElement(),
+          background: page.getPageView().getBackgroundElement(),
           toolbar: page.getPageView().getToolbarElement(),
           bottomToolbar: page.getPageView().getBottomToolbarElement()
         };
@@ -119,7 +120,7 @@ limitations under the License.
 
             maskClear,
 
-            animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar])
+            animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background])
               .queue({
                 css: {
                   transform: 'translate3D(100%, 0px, 0px)',
@@ -182,7 +183,7 @@ limitations under the License.
               })
               .resetStyle(),
 
-            animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar])
+            animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background])
               .queue({
                 css: {
                   transform: 'translate3D(0, 0, 0)',
@@ -328,7 +329,7 @@ limitations under the License.
 
             maskClear,
 
-            animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar])
+            animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background])
               .queue({
                 css: {
                   transform: 'translate3D(-25%, 0px, 0px)',
@@ -394,7 +395,7 @@ limitations under the License.
               })
               .resetStyle(),
 
-            animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar])
+            animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background])
               .queue({
                 css: {
                   transform: 'translate3D(0px, 0px, 0px)'

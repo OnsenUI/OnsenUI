@@ -110,6 +110,10 @@
       pageContent.addClass(modifierTemplater('page--*__content'));
       pageContent = null;
 
+      var pageBackground = angular.element(element[0].querySelector('.page__background'));
+      pageBackground.addClass(modifierTemplater('page--*__background'));
+      pageBackground = null;
+
       $onsen.cleaner.onDestroy(scope, function() {
         element.data('ons-page', undefined);
         $onsen.aliasStack.unregister('ons.page', page);
@@ -139,11 +143,14 @@
         var children = element.children().remove();
 
         var content = angular.element('<div class="page__content ons-page-inner"></div>').append(children);
+        var background = angular.element('<div class="page__background"></div>');
 
         if (element.attr('style')) {
-          content.attr('style', element.attr('style'));
+          background.attr('style', element.attr('style'));
           element.attr('style', '');
         }
+
+        element.append(background);
 
         if (Modernizr.csstransforms3d) {
           element.append(content);
@@ -176,6 +183,7 @@
         }
 
         content = null;
+        background = null;
         children = null;
 
         return {
