@@ -24,9 +24,6 @@
  *
  * @property setMainPage(pageUrl) Show the page specified in pageUrl in the right section
  * @property setSecondaryPage(pageUrl) Show the page specified in pageUrl in the left section
- * @property open() [Deprecated] Reveal the secondary page if the view is in collapse mode
- * @property close() [Deprecated] hide the secondary page if the view is in collapse mode
- * @property toggle() [Deprecated] Reveal the secondary page if it is currently hidden, otherwies, reveal it
  * @codepen nKqfv {wide}
  * @guide Usingonssplitviewcomponent [en]Using ons-split-view.[/en][ja]ons-split-viewコンポーネントを使う[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
@@ -53,7 +50,6 @@
         secondaryPage: '@',
         mainPage: '@',
         collapse: '@',
-        swipable: '@',
         mainPageWidth: '@'
       },
 

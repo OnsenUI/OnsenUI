@@ -33,20 +33,12 @@ limitations under the License.
         this._element = element;
         this._scope = scope;
 
-        this._abovePage = angular.element(element[0].querySelector('.onsen-split-view__main'));
-        this._behindPage = angular.element(element[0].querySelector('.onsen-split-view__secondary'));
+        this._mainPage = angular.element(element[0].querySelector('.onsen-split-view__main'));
+        this._secondaryPage = angular.element(element[0].querySelector('.onsen-split-view__secondary'));
 
-        this._previousX = 0;
-        this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
-        this._currentX = 0;
-        this._startX = 0;
+        this._max = this._mainPage[0].clientWidth * MAIN_PAGE_RATIO;
         this._mode = SPLIT_MODE;
         this._doorLock = new DoorLock();
-
-        this._hammertime = new Hammer(this._element[0]);
-        this._boundHammerEvent = this._handleEvent.bind(this);
-
-        scope.$watch('swipable', this._onSwipableChanged.bind(this));
 
         if ($onsen.isIOS()) {
           window.addEventListener('orientationchange', this._onResize.bind(this));
@@ -86,15 +78,15 @@ limitations under the License.
         var pageScope = this._scope.$parent.$new();
         var pageContent = $compile(templateHTML)(pageScope);
 
-        this._behindPage.append(pageContent);
+        this._secondaryPage.append(pageContent);
 
-        if (this._currentBehindPageElement) {
-          this._currentBehindPageElement.remove();
-          this._currentBehindPageScope.$destroy();
+        if (this._currentSecondaryPageElement) {
+          this._currentSecondaryPageElement.remove();
+          this._currentSecondaryPageScope.$destroy();
         }
 
-        this._currentBehindPageElement = pageContent;
-        this._currentBehindPageScope = pageScope;
+        this._currentSecondaryPageElement = pageContent;
+        this._currentSecondaryPageScope = pageScope;
       },
 
       /**
@@ -104,7 +96,7 @@ limitations under the License.
         var pageScope = this._scope.$parent.$new();
         var pageContent = $compile(templateHTML)(pageScope);
 
-        this._abovePage.append(pageContent);
+        this._mainPage.append(pageContent);
 
         if (this._currentPage) {
           this._currentPage.remove();
@@ -151,12 +143,12 @@ limitations under the License.
 
         if (lastMode === COLLAPSE_MODE && this._mode === COLLAPSE_MODE) {
           this._animator.onResized({
-            isOpened: this._currentX > 0,
+            isOpened: false,
             width: '90%'
           });
         }
 
-        this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+        this._max = this._mainPage[0].clientWidth * MAIN_PAGE_RATIO;
       },
 
       _considerChangingCollapse: function() {
@@ -213,180 +205,44 @@ limitations under the License.
             this._scope.mainPageWidth = '70';
           }
 
-          var behindSize = 100 - this._scope.mainPageWidth.replace('%', '');
-          this._behindPage.css({
-            width: behindSize + '%',
+          var secondarySize = 100 - this._scope.mainPageWidth.replace('%', '');
+          this._secondaryPage.css({
+            width: secondarySize + '%',
             opacity: 1
           });
 
-          this._abovePage.css({
+          this._mainPage.css({
             width: this._scope.mainPageWidth + '%'
           });
 
-          this._abovePage.css('left', behindSize + '%');
-          this._currentX = this._behindPage[0].clientWidth;
+          this._mainPage.css('left', secondarySize + '%');
         }
       },
 
       _activateCollapseMode: function() {
         if (this._mode !== COLLAPSE_MODE) {
-          this._behindPage.attr('style', '');
-          this._abovePage.attr('style', '');
+          this._secondaryPage.attr('style', '');
+          this._mainPage.attr('style', '');
 
           this._mode = COLLAPSE_MODE;
 
-          this._onSwipableChanged(this._scope.swipable);
-
           this._animator.setup(
             this._element,
-            this._abovePage,
-            this._behindPage,
+            this._mainPage,
+            this._secondaryPage,
             {isRight: false, width: '90%'}
           );
-          this._currentX = this._startX = 0;
         }
       },
 
       _activateSplitMode: function() {
         this._animator.destroy();
 
-        this._behindPage.attr('style', '');
-        this._abovePage.attr('style', '');
+        this._secondaryPage.attr('style', '');
+        this._mainPage.attr('style', '');
 
         this._mode = SPLIT_MODE;
         this._setSize();
-        this._deactivateHammer();
-      },
-
-      _activateHammer: function() {
-        this._hammertime.on('dragleft dragright swipeleft swiperight release', this._boundHammerEvent);
-      },
-
-      _deactivateHammer: function() {
-        this._hammertime.off('dragleft dragright swipeleft swiperight release', this._boundHammerEvent);
-      },
-
-      _onSwipableChanged: function(swipable) {
-        swipable = swipable === '' || swipable === undefined || swipable == 'true';
-
-        if (swipable) {
-          this._activateHammer();
-        } else {
-          this._deactivateHammer();
-        }
-      },
-
-      _handleEvent: function(event) {
-        if (this._doorLock.isLocked()) {
-          return;
-        }
-
-        switch (event.type) {
-          case 'dragleft':
-          case 'dragright':
-            event.preventDefault();
-            event.gesture.preventDefault();
-            var deltaX = event.gesture.deltaX;
-
-            this._currentX = this._startX + deltaX;
-            if (this._currentX >= 0) {
-              this._translate(this._currentX);
-            }
-            break;
-
-          case 'swipeleft':
-            event.gesture.preventDefault();
-            this.close();
-            break;
-
-          case 'swiperight':
-            event.gesture.preventDefault();
-            this.open();
-            break;
-
-          case 'release':
-            if (this._currentX > this._max / 2) {
-              this.open();
-            } else {
-              this.close();
-            }
-            break;
-        }
-      },
-
-      _onTransitionEnd: function() {
-        this._scope.$root.$broadcast(ON_PAGE_READY); //make sure children can do something before the parent.
-      },
-
-      close: function(callback) {
-        callback = callback || function() {};
-
-        if (this._mode === SPLIT_MODE) {
-          callback();
-          return;
-        } else if (this._mode === COLLAPSE_MODE) {
-          this._startX = 0;
-
-          if (this._currentX !== 0) {
-            var self = this;
-            this._doorLock.waitUnlock(function() {
-              var unlock = self._doorLock.lock();
-              self._currentX = 0;
-
-              self._animator.closeMenu(function() {
-                unlock();
-                self._onTransitionEnd();
-                callback();
-              });
-            });
-          }
-        }
-      },
-
-      open: function(callback) {
-        callback = callback || function() {};
-
-        if (this._mode === SPLIT_MODE) {
-          callback();
-          return;
-        } else if (this._mode === COLLAPSE_MODE) {
-          this._startX = this._max;
-
-          if (this._currentX != this._max) {
-            var self = this;
-            this._doorLock.waitUnlock(function() {
-              var unlock = self._doorLock.lock();
-              self._currentX = self._max;
-
-              self._animator.openMenu(function() {
-                unlock();
-                self._onTransitionEnd();
-                callback();
-              });
-            });
-          }
-        }
-      },
-
-      toggle: function(callback) {
-        if (this._startX === 0) {
-          this.open(callback);
-        } else {
-          this.close(callback);
-        }
-      },
-
-      _translate: function(x) {
-        if (this._mode === COLLAPSE_MODE) {
-          this._currentX = x;
-
-          var options = {
-            distance: x,
-            maxDistance: this._max
-          };
-
-          this._animator.translateMenu(options);
-        }
       },
 
       _destroy: function() {
