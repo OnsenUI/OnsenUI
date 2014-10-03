@@ -3,8 +3,8 @@
  * @id split-view
  * @name ons-split-view
  * @description
- *  [en]Divides the screen into left and right section. This component can also act as sliding menu which can be controlled by collapse attribute.[/en]
- *  [ja]画面を左右に分割します。collapse属性を用いることで、スライディングメニューとしての使い方もできます。[/ja]
+ *  [en]Divides the screen into left and right section.[/en]
+ *  [ja]画面を左右に分割します。[/ja]
  *
  * @param main-page
  *  [en]The url of the page on the right.[/en]

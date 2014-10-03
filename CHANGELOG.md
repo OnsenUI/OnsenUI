@@ -5,6 +5,8 @@ CHANGELOG
 v1.2.0-dev
 ----
 
+ * Removed all deprecated methods and attributes on "ons-split-view" and "ons-sliding-menu".
+
 v1.1.4
 ----
 
