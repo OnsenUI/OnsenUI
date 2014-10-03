@@ -1,7 +1,6 @@
 'use strict';
 
-var module = angular.module('app');
-module.controller('AppController',
+angular.module('app').controller('AppController',
   function($scope, $location, $http, $rootScope, ColorSchemeFactory,
     GeneratedCss, ComponentCollection, Colors2URL,
     ClipboardClients, Dialog, ComponentDialog, SimpleColorCustomizer) {
@@ -103,11 +102,11 @@ module.controller('AppController',
   };
 
   $scope.htmlDialog = (function(dialog) {
-    dialog.popup = function(url) {
+    dialog.popup = function() {
       var self = this;
       var x = screen.width/2 - 320/2;
       var y = screen.height/2 - 540/2;
-      window.open(self.url, "htmlView", "width=320,height=540,top=" + x + ",left=" + y);
+      window.open(self.url, 'htmlView', 'width=320,height=540,top=' + x + ',left=' + y);
       ga('send', 'event', 'dialog', 'htmlPopup', self.url);
     };
 
@@ -119,7 +118,7 @@ module.controller('AppController',
       $http.get(cssURL).then(function(response){
         window.cssDialogEditor.setValue(response.data);
         window.cssEditor.refresh();
-      }, function(err){
+      }, function() {
         window.cssDialogEditor.setValue('');
         window.cssEditor.refresh();
       });
@@ -140,31 +139,6 @@ module.controller('AppController',
 
     return dialog;
   })(new Dialog());
-
-  function renderShareTwitterButton(shortURL, longURL){
-    var twitterButton = $('<a class="twitter-share-button" data-lang="en"></a>');
-      twitterButton.attr('href', 'https://twitter.com/share?text=Checkout my custom made CSS components!');
-      twitterButton.attr('data-url', shortURL);
-      twitterButton.attr('data-counturl', longURL);
-
-      $('#twitter-share-box').empty().append(twitterButton);
-      twttr.widgets.load();
-  }
-
-  function renderFacebookShareButton(shortURL){
-    var button = $('<div class="fb-share-button" data-type="button_count"></div>');
-    button.attr('data-href', shortURL);
-    $('#facebook-share-box').empty().append(button);
-    FB.XFBML.parse(document.getElementById('facebook-share-box'));
-  }
-
-  function renderGooglePlusShareButton(shortURL){
-    gapi.plus.render('gplus-share-box', {
-      href: shortURL,
-      annotation: 'bubble',
-      action: "share"
-    });
-  }
 
   $scope.thankyouDialog = (function(dialog) {
     var show = dialog.show;
@@ -191,7 +165,7 @@ module.controller('AppController',
       $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', {email: email})
         .done(function(data) {
           var ret = JSON.parse(data);
-          if (ret.status !== undefined && ret.status === "success") {
+          if (ret.status !== undefined && ret.status === 'success') {
             dialog.emailSent = true;
             $scope.$apply();
             ga('send', 'event', 'newsletter', 'send');
@@ -217,7 +191,7 @@ module.controller('AppController',
       $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', {email: email})
         .done(function(data) {
           var ret = JSON.parse(data);
-          if (ret.status !== undefined && ret.status === "success") {
+          if (ret.status !== undefined && ret.status === 'success') {
             $scope.newsletterPopup.emailSent = true;
             $scope.$apply();
             ga('send', 'event', 'newsletter', 'send');

@@ -10,7 +10,7 @@ angular.module('app').factory('ComponentCollection', function(Component, CssComp
     collection: undefined,
 
     init: function() {
-      $rootScope.$on('GeneratedCss:changed', function(event) {
+      $rootScope.$on('GeneratedCss:changed', function() {
         this.parseCss(GeneratedCss.templateCss);
       }.bind(this));
 

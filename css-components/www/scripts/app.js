@@ -1,9 +1,5 @@
 'use strict';
 
-window.time = function(fn) {
-
-};
-
 var app = angular.module('app', ['ngRoute', 'ngAnimate', 'pascalprecht.translate', 'template']);
 
 app.config(function($routeProvider, $locationProvider) {

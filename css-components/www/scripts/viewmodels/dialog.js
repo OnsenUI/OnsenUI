@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app').factory('Dialog', function(ClipboardClients) {
-  function Dialog() {
+  var Dialog = function() {
   };
 
   Dialog.prototype = {
