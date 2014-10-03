@@ -19,7 +19,7 @@ limitations under the License.
 @import url("ionicons/css/ionicons.min.css");
 
 /* cutsom elements */
-ons-page, ons-screen, ons-navigator,
+ons-page, ons-navigator,
 ons-split-view, ons-sliding-menu, ons-tabbar,
 ons-gesture-detector {
   display: block;

@@ -5,6 +5,7 @@ CHANGELOG
 v1.2.0-dev
 ----
 
+ * ons-screen: Removed.
  * Removed all deprecated methods and attributes on "ons-split-view" and "ons-sliding-menu".
  * ons-page: Changed some internal markup structure and added ".page__background" elements for displaying page background.
 
