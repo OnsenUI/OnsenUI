@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').factory('GeneratedCss', function($http, $rootScope, CSSModule) {
+angular.module('app').factory('GeneratedCss', function($http, $rootScope) {
 
   $http.get('/onsen-css-components.css').then(function(response) {
     generatedCss.templateCss = response.data;
@@ -40,18 +40,13 @@ angular.module('app').factory('GeneratedCss', function($http, $rootScope, CSSMod
     },
 
     onColorsChanged: function() {
-     /*if (this.templateCss) {
-        this.css = this.compile(this.colors);
-        $rootScope.$broadcast('GeneratedCss:changed', this.css);
-      }*/
-
       if (this.templateCss) {
         this.css = this.compile(this.templateCss, this.colors);
         $rootScope.$broadcast('GeneratedCss:changed', this.templateCss);
       }
     },
 
-    compile: function(templateCss, colors) {
+    compile: function(templateCss) {
       var self = this;
 
       function lighten(color) {

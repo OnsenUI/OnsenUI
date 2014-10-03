@@ -1,8 +1,8 @@
 'use strict';
 
 // TODO: refactoring
-angular.module('app').directive('patternInspector', function($rootScope, GeneratedCss) {
-  return function(scope, element, attrs) {
+angular.module('app').directive('patternInspector', function() {
+  return function(scope, element) {
 
     scope.showComponentDialog = function() {
       ga('send', 'event', 'overview', 'inspect', scope.pattern.src);
@@ -64,9 +64,10 @@ angular.module('app').directive('patternInspector', function($rootScope, Generat
       var point = relativePosition(event.clientX, event.clientY);
       var targetElement = getIframe()[0].contentDocument.elementFromPoint(point.x, point.y);
       var component = searchTopcoatComponent(targetElement);
+      var rect;
 
       if (component) {
-        var rect = component.element.getBoundingClientRect();
+        rect = component.element.getBoundingClientRect();
 
         highlight.css({
           left: rect.left,
@@ -87,7 +88,7 @@ angular.module('app').directive('patternInspector', function($rootScope, Generat
         label
           .removeClass('above below')
           .addClass('inner')
-          .text("Full Source");
+          .text('Full Source');
 
         highlight.css({
           left: rect.left,

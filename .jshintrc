@@ -8,9 +8,9 @@
   "eqeqeq": true,
   "immed": true,
   "indent": 2,
-  "latedef": true,
   "newcap": true,
   "noarg": true,
+  "latedef": "nofunc",
   "quotmark": "single",
   "regexp": true,
   "undef": true,
@@ -23,6 +23,7 @@
     "angular": false,
     "$": false,
     "parseCSSColor": false,
-    "ZeroClipboard": false
+    "ZeroClipboard": false,
+    "ga": false
   }
 }

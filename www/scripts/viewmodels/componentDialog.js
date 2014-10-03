@@ -1,8 +1,6 @@
 'use strict';
 
-var module = angular.module('app');
-
-module.factory('ComponentDialog', function(Dialog, ClipboardClients, ComponentCollection, GeneratedCss) {
+angular.module('app').factory('ComponentDialog', function(Dialog, ClipboardClients) {
   var dialog = new Dialog();
 
   dialog.show = function(component) {

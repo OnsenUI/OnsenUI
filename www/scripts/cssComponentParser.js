@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app').factory('CssComponentParser', function(Component, $rootScope) {
+angular.module('app').factory('CssComponentParser', function(Component) {
 
   var parser = {
 
@@ -10,7 +10,7 @@ angular.module('app').factory('CssComponentParser', function(Component, $rootSco
       var parsedCss = topdocParser.parse(css);
       parsedCss.components = this.resolveDependencies(parsedCss.components);
 
-      var result = []
+      var result = [];
       for (var i = 0; i < parsedCss.components.length ; i++) {
         var cssComponent = parsedCss.components[i];
 
@@ -98,7 +98,6 @@ angular.module('app').factory('CssComponentParser', function(Component, $rootSco
             dict[dependency.name] = dependency;
           });
 
-          var result = [];
           return Object.keys(dict).map(function(name) {
             return dict[name];
           });
