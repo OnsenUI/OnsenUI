@@ -120,6 +120,8 @@
           element.data('ons-sliding-menu', undefined);
           $onsen.aliasStack.unregister('ons.slidingMenu', slidingMenu);
         });
+
+        ons.fireComponentEvent(element[0], "init");
       }
     };
   });

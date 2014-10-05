@@ -66,6 +66,9 @@
  *   </ons-page>
  * </ons-template>
  */
+
+var el;
+
 (function() {
   'use strict';
   var module = angular.module('onsen');
@@ -80,6 +83,7 @@
       scope: true,
 
       compile: function(element) {
+
         var html = $onsen.normalizePageHTML(element.html());
         element.contents().remove();
 
@@ -114,6 +118,10 @@
               $onsen.aliasStack.unregister('ons.navigator', navigator);
               element = null;
             });
+
+          },
+          post: function(scope, element, attrs) {
+            ons.fireComponentEvent(element[0], "init");
           }
         };
       }

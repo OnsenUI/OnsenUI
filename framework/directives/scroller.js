@@ -91,6 +91,8 @@
 
             }, 500);
           }
+        
+          ons.fireComponentEvent(element[0], "init");
         };
       }
     };

@@ -74,6 +74,8 @@
           element.data('ons-split-view', undefined);
           $onsen.aliasStack.unregister('ons.splitView', splitView);
         });
+
+        ons.fireComponentEvent(element[0], "init");
       }
     };
   });

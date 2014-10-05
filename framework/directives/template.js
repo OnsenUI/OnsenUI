@@ -25,6 +25,7 @@
       terminal: true,
       compile: function(element) {
         $templateCache.put(element.attr('id'), element.remove().html());
+        ons.fireComponentEvent(element[0], "init");
       }
     };
   });

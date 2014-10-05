@@ -36,6 +36,8 @@
           setImmediate(function() {
             var carouselView = new CarouselView(scope, element, attrs);
           });
+
+          ons.fireComponentEvent(element[0], "init");
         };
       },
 

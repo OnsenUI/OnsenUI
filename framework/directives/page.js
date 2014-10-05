@@ -124,6 +124,7 @@
     }
 
     function postLink(scope, element, attrs) {
+      ons.fireComponentEvent(element[0], "init");
       firePageInitEvent(element[0]);
     }
 

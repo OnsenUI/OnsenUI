@@ -63,6 +63,8 @@
               scope[attr]({$event: event});
             }
           }
+       
+          ons.fireComponentEvent(element[0], "init");
         };
       }
     };
