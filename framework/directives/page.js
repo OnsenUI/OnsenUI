@@ -59,6 +59,7 @@
         if (i++ < 5)  {
           if (isAttached(element)) {
             fillStatusBar(element);
+            $onsen.fireComponentEvent(element, "init");
             fireActualPageInitEvent(element);
           } else {
             setImmediate(f);
@@ -124,7 +125,6 @@
     }
 
     function postLink(scope, element, attrs) {
-      $onsen.fireComponentEvent(element[0], "init");
       firePageInitEvent(element[0]);
     }
 
