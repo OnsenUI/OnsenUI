@@ -37,7 +37,7 @@
         elem.addClass(templater('list__header--*'));
       
         return function(scope, element, attrs) {
-          ons.fireComponentEvent(element[0], "init");
+          $onsen.fireComponentEvent(element[0], "init");
         };
       }
     };

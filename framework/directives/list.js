@@ -39,7 +39,7 @@
         element.addClass(templater('list--*'));
       
         return function(scope, element, attrs) {
-          ons.fireComponentEvent(element[0], "init"); 
+          $onsen.fireComponentEvent(element[0], "init"); 
         };
       }
     };

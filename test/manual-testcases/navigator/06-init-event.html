@@ -13,7 +13,11 @@
       var itWorked = false;
 
       document.addEventListener("ons-navigator:init", function(event) {
-        var navigator = ons.eventToComponent(event);
+        console.log(event.component);
+        var navigator = event.component;
+
+
+
         navigator.pushPage("page2.html");
         itWorked = true;
       });

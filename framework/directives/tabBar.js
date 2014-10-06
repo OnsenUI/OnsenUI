@@ -108,7 +108,7 @@
           $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
         });
       
-        ons.fireComponentEvent(element[0], "init");
+        $onsen.fireComponentEvent(element[0], "init");
       }
     };
   });

@@ -262,6 +262,21 @@ limitations under the License.
         })(),
 
         /**
+         * Fire a named event for a component. The view object, if it exists, is attached to event.component.
+         *
+         * @param {HTMLElement} [dom]
+         * @param {String} event name
+         */
+        fireComponentEvent: function(dom, eventName) {
+          var event = document.createEvent('HTMLEvents');
+
+          event.component = dom ? 
+            angular.element(dom).data(dom.nodeName.toLowerCase()) || null : null;
+          event.initEvent(dom.nodeName.toLowerCase() + ":" + eventName, true, true);
+          dom.dispatchEvent(event);
+        },
+
+        /**
          * Define a variable to JavaScript global scope and AngularJS scope.
          *
          * Util.defineVar('foo', 'foo-value');

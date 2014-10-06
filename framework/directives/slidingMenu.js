@@ -121,7 +121,7 @@
           $onsen.aliasStack.unregister('ons.slidingMenu', slidingMenu);
         });
 
-        ons.fireComponentEvent(element[0], "init");
+        $onsen.fireComponentEvent(element[0], "init");
       }
     };
   });

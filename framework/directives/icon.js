@@ -132,7 +132,7 @@
           element = scope = attrs = null;
         });
       
-        ons.fireComponentEvent(element[0], "init");
+        $onsen.fireComponentEvent(element[0], "init");
       }
     };
   });

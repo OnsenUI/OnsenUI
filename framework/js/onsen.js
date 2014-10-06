@@ -178,29 +178,6 @@ window.ons = (function(){
       },
 
       /**
-       * Find view object given an event object if there is one.
-       *
-       * @param {Object} Event object
-       * @return {Object/void}
-       */
-      eventToComponent: function(event) {
-        var target = event.target;
-        return target ? angular.element(target).data(target.nodeName.toLowerCase()) || null : null;
-      },
-
-      /**
-       * Fire a named event for a component.
-       *
-       * @param {HTMLElement} [dom]
-       * @param {String} event name
-       */
-      fireComponentEvent: function(dom, eventName) {
-        var event = document.createEvent('HTMLEvents');
-        event.initEvent(dom.nodeName.toLowerCase() + ":" + eventName, true, true);
-        dom.dispatchEvent(event);
-      },
-
-      /**
        * @return {Boolean}
        */
       isReady: function() {
