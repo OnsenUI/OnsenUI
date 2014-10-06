@@ -21,12 +21,12 @@
 // internal variables
 var-navigation-bar-background-color = $toolbar-background-color
 var-navigation-bar-separator-color = $toolbar-border-color
-var-color--navigation-bar = $toolbar-text-color
+var-navigation-bar-color = $toolbar-text-color
 
-var-height--navigation-bar = 44px
-var-box-shadow--navigation-bar = none
-var-padding--navigation-bar = 0
-var-border-bottom--navigation-bar = 1px solid var-navigation-bar-separator-color
+var-navigation-bar-height = 44px
+var-navigation-bar-box-shadow = none
+var-navigation-bar-padding = 0
+var-navigation-bar-separator = 1px solid var-navigation-bar-separator-color
 
 /*! topdoc
   name: Navigation Bar
@@ -60,13 +60,13 @@ navigation-bar__item()
 .navigation-bar
   navigation-bar()
   display block
-  height var-height--navigation-bar
-  padding-left var-padding--navigation-bar
-  padding-right var-padding--navigation-bar
+  height var-navigation-bar-height
+  padding-left var-navigation-bar-padding
+  padding-right var-navigation-bar-padding
   background var-navigation-bar-background-color
-  color var-color--navigation-bar
-  box-shadow var-box-shadow--navigation-bar
-  border-bottom var-border-bottom--navigation-bar
+  color var-navigation-bar-color
+  box-shadow var-navigation-bar-box-shadow
+  border-bottom var-navigation-bar-separator
   font-weight var-font-weight
   width 100%
   white-space nowrap
@@ -74,7 +74,7 @@ navigation-bar__item()
   retina-navigation-bar-border(bottom, var-navigation-bar-separator-color)
 
 .navigation-bar__line-height
-  line-height var-height--navigation-bar
+  line-height var-navigation-bar-height
   padding-bottom 0
   padding-top 0
 
@@ -83,7 +83,7 @@ navigation-bar__item()
 
 .navigation-bar__item
   navigation-bar__item()
-  height var-height--navigation-bar
+  height var-navigation-bar-height
   vertical-align top
   overflow visible
   display block
@@ -111,10 +111,10 @@ navigation-bar__item()
   font-weight var-font-weight--large
 
 .navigation-bar__title
-  line-height var-height--navigation-bar
+  line-height var-navigation-bar-height
   font-size var-font-size--large
   font-weight var-font-weight--large
-  color var-color--navigation-bar
+  color var-navigation-bar-color
   margin 0
   padding 0
   overflow visible
@@ -201,15 +201,15 @@ navigation-bar__item()
 .bottom-bar
   navigation-bar()
   display block
-  height var-height--navigation-bar
-  padding-left var-padding--navigation-bar
-  padding-right var-padding--navigation-bar
+  height var-navigation-bar-height
+  padding-left var-navigation-bar-padding
+  padding-right var-navigation-bar-padding
   background var-navigation-bar-background-color
-  color var-color--navigation-bar
-  box-shadow var-box-shadow--navigation-bar
+  color var-navigation-bar-color
+  box-shadow var-navigation-bar-box-shadow
   font-weight var-font-weight
   border-bottom none
-  border-top var-border-bottom--navigation-bar
+  border-top var-navigation-bar-separator
   position absolute
   bottom 0px
   right 0px
@@ -217,7 +217,7 @@ navigation-bar__item()
   retina-navigation-bar-border(top, var-navigation-bar-separator-color)
 
 .bottom-bar__line-height
-  line-height var-height--navigation-bar
+  line-height var-navigation-bar-height
   padding-bottom 0
   padding-top 0
 
