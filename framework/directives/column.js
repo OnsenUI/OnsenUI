@@ -103,6 +103,8 @@
               element.removeAttr('style');
             }
           }
+
+          $onsen.fireComponentEvent(element[0], "init");
         };
       }
     };

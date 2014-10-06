@@ -35,6 +35,10 @@
         var templater = $onsen.generateModifierTemplater(attrs);
         elem.addClass('list__item ons-list-item-inner');
         elem.addClass(templater('list__item--*'));
+
+        return function(scope, element, attrs) {
+          $onsen.fireComponentEvent(element[0], "init");
+        };
       }
     };
   });

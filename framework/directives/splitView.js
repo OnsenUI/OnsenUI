@@ -70,6 +70,8 @@
           element.data('ons-split-view', undefined);
           $onsen.aliasStack.unregister('ons.splitView', splitView);
         });
+
+        $onsen.fireComponentEvent(element[0], "init");
       }
     };
   });

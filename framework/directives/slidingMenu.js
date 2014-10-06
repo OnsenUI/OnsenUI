@@ -108,6 +108,8 @@
           element.data('ons-sliding-menu', undefined);
           $onsen.aliasStack.unregister('ons.slidingMenu', slidingMenu);
         });
+
+        $onsen.fireComponentEvent(element[0], "init");
       }
     };
   });

@@ -51,6 +51,8 @@
               element.addClass('row-' + align);
             }
           }
+        
+          $onsen.fireComponentEvent(element[0], "init");
         };
       }
     };

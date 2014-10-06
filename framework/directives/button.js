@@ -91,6 +91,8 @@
 
           scope = element = attrs = null;
         });
+        
+        $onsen.fireComponentEvent(element[0], "init");
       }
     };
   });

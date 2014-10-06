@@ -59,6 +59,7 @@
         if (i++ < 5)  {
           if (isAttached(element)) {
             fillStatusBar(element);
+            $onsen.fireComponentEvent(element, "init");
             fireActualPageInitEvent(element);
           } else {
             setImmediate(f);

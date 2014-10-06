@@ -156,6 +156,9 @@
             if (pageView) {
               pageView.registerToolbar(element);
             }
+          },
+          post: function(scope, element, attrs) {
+            $onsen.fireComponentEvent(element[0], "init");  
           }
         };
       }

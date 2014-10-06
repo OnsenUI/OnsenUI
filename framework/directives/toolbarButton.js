@@ -44,6 +44,9 @@
             });
             scope = element = attrs = null;
           });
+        },
+        post: function(scope, element, attrs) {
+          $onsen.fireComponentEvent(element[0], "init");
         }
       }
     };
