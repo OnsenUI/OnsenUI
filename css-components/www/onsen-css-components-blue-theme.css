@@ -286,11 +286,11 @@ h6 {
   border-radius: 0;
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#ccc));
-  background-image: -webkit-linear-gradient(#ccc, #ccc);
-  background-image: -moz-linear-gradient(#ccc, #ccc);
-  background-image: -o-linear-gradient(#ccc, #ccc);
-  background-image: linear-gradient(#ccc, #ccc);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#ddd));
+  background-image: -webkit-linear-gradient(#ddd, #ddd);
+  background-image: -moz-linear-gradient(#ddd, #ddd);
+  background-image: -o-linear-gradient(#ddd, #ddd);
+  background-image: linear-gradient(#ddd, #ddd);
   background-position: left center;
   -webkit-background-size: 100% 2px;
   background-size: 100% 2px;
@@ -301,7 +301,7 @@ h6 {
 .range::-moz-range-track {
   position: relative;
   border: none;
-  background-color: #ccc;
+  background-color: #ddd;
   height: 2px;
   border-radius: 30px;
   box-shadow: none;
@@ -1524,7 +1524,7 @@ h6 {
   padding: 0;
   height: 49px;
   letter-spacing: 0;
-  color: #888;
+  color: #666;
   text-shadow: 0 1px none;
   vertical-align: top;
   background-color: transparent;
@@ -1568,7 +1568,7 @@ h6 {
   padding: 0;
 }
 .tab-bar__button {
-  color: #888;
+  color: #666;
 }
 :checked + .tab-bar__button {
   color: #1284ff;
@@ -2394,7 +2394,7 @@ h6 {
   padding: 0 0 0 10px;
   font-size: 15px;
   font-weight: 500;
-  background-color: #f0eff4;
+  background-color: #eee;
   color: #1f1f21;
   text-shadow: none;
   border-top: none;
@@ -2884,7 +2884,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .search-input::-webkit-input-placeholder,
 .search-input::-moz-placeholder,
 .search-input::-ms-input-placeholder {
-  color: #ccc;
+  color: #999;
 }
 .search-input:disabled {
   opacity: 0.3;
@@ -2944,7 +2944,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .text-input::-webkit-input-placeholder,
 .text-input::-moz-placeholder,
 .text-input::-ms-input-placeholder {
-  color: #ccc;
+  color: #999;
 }
 .text-input:disabled {
   opacity: 0.3;
@@ -2954,10 +2954,10 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .text-input:disabled::-webkit-input-placeholder,
 .text-input:disabled::-moz-placeholder,
 .text-input:disabled:-ms-input-placeholder {
-  color: #ccc;
+  color: #999;
 }
 .text-input:invalid {
-  border: 1px solid #ddd;
+  border: 1px solid var-input-invalid-border-color;
   color: #1f1f21;
 }
 /* topdoc
@@ -3020,12 +3020,12 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .text-input--transparent:disabled::-webkit-input-placeholder,
 .text-input--transparent:disabled::-moz-placeholder,
 .text-input--transparent:disabled:-ms-input-placeholder {
-  color: #ccc;
+  color: #999;
   border: none;
   background-color: transparent;
 }
 .text-input--transparent:invalid {
-  border: 1px solid #ddd;
+  border: 1px solid var-input-invalid-border-color;
   color: #1f1f21;
   border: none;
   background-color: transparent;
@@ -3092,16 +3092,16 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .text-input--underbar:disabled::-webkit-input-placeholder,
 .text-input--underbar:disabled::-moz-placeholder,
 .text-input--underbar:disabled:-ms-input-placeholder {
-  color: #ccc;
+  color: #999;
   border: none;
   background-color: transparent;
 }
 .text-input--underbar:invalid {
-  border: 1px solid #ddd;
+  border: 1px solid var-input-invalid-border-color;
   color: #1f1f21;
   border: none;
   background-color: transparent;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var-input-invalid-border-color;
 }
 /* topdoc
   name: Textarea
@@ -3154,7 +3154,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .textarea::-webkit-input-placeholder,
 .textarea::-moz-placeholder,
 .textarea:-ms-input-placeholder {
-  color: #ccc;
+  color: #999;
 }
 /* topdoc
   name: Textarea Transparent
@@ -3209,7 +3209,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .textarea--transpanret::-webkit-input-placeholder,
 .textarea--transparent::-moz-placeholder,
 .textarea--transparent:-ms-input-placeholder {
-  color: #ccc;
+  color: #999;
 }
 /* topdoc
   name: Modal
