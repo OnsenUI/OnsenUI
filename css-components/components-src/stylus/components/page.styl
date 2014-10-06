@@ -1,11 +1,11 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
-var-background-color--page = $background-color
+var-page-background-color = $background-color
 
 .page
   reset-font()
-  background-color var-background-color--page
+  background-color var-page-background-color
   position absolute
   top 0px
   left 0px
@@ -19,7 +19,7 @@ var-background-color--page = $background-color
   display none
 
 .page__content
-  background-color var-background-color--page
+  background-color var-page-background-color
   position absolute
   top 0px
   left 0px
@@ -29,7 +29,7 @@ var-background-color--page = $background-color
   margin-top -1px
 
 .page__background
-  background-color var-background-color--page
+  background-color var-page-background-color
   position absolute
   top 0px
   left 0px

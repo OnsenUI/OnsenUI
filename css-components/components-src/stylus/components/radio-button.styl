@@ -24,7 +24,7 @@ var-radio-button-indicator-color = $highlight-color
 
 var-radio-button-background = transparent
 var-radio-button-border = 3px solid var-radio-button-indicator-color
-var-size--radio-button = 24px
+var-radio-button-size = 24px
 
 /*! topdoc
   name: Radio Button
@@ -98,14 +98,14 @@ radio-button--disabled()
 .radio-button
   radio-button__label()
   hide-input-parent()
-  line-height var-size--radio-button
+  line-height var-radio-button-size
   text-align left
   margin 10px 0
 
 .radio-button__checkmark:before
   radio-button--before()
-  width var-size--checkbox
-  height var-size--checkbox
+  width var-checkbox-size
+  height var-checkbox-size
   background transparent
   border none
   border-radius var-border-radius--checkbox
@@ -114,8 +114,8 @@ radio-button--disabled()
 .radio-button__checkmark
   radio-button()
   position relative
-  width var-size--radio-button
-  height var-size--radio-button
+  width var-radio-button-size
+  height var-radio-button-size
   background var-radio-button-background
 
 .radio-button > input[type="radio"]:checked + .radio-button__checkmark
@@ -123,18 +123,18 @@ radio-button--disabled()
 
 .radio-button__checkmark:after
   radio-button--after()
-  top var-top--checkmark
-  left var-left--checkmark
+  top var-checkmark-top
+  left var-checkmark-left
   opacity 0
-  width var-width--checkmark__tail
-  height var-height--checkmark__foot
+  width var-checkmark-tail-width
+  height var-checkmark-foot-height
   background transparent
   border var-radio-button-border
-  border-width var-border-width--checkmark
+  border-width var-checkmark-border-width
   border-top none
   border-right none
-  border-radius var-border-radius--checkmark
-  transform var-transform--checkmark
+  border-radius var-checkmark-border-radius
+  transform rotate(-45deg)
 
 .radio-button > input[type="radio"]:disabled + .radio-button__checkmark
   radio-button--disabled()
