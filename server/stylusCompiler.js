@@ -35,12 +35,7 @@ function compile(variables) {
     renderer.define('$' + key, stylusColorNode);
   }
 
-  renderer.import(__dirname + '/../components-src/stylus/custom.styl');
-
-  renderer.define('hoge', function(param) {
-    console.log(param);
-    return new stylus.nodes.Ident('foobar', '', false);
-  });
+  renderer.import(__dirname + '/../components-src/stylus/components/index.styl');
 
   renderer.define('mylighten', mylighten);
   renderer.render(function(err, css) {

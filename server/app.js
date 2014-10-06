@@ -6,12 +6,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var stylus = require('stylus');
-var compiler = require('./stylus_compiler');
+var compiler = require('./stylusCompiler');
 var prefix = require('./cssprefixer');
 var minify = require('./cssminify');
 var archiver = require('archiver');
 var Q = require('q');
 var debug = require('debug')('my-application');
+var schemeWriter = require('./schemeWriter');
 
 module.exports = function(middlewares, fn) {
 
@@ -119,9 +120,12 @@ module.exports = function(middlewares, fn) {
     var defer = Q.defer();
     var basePath = __dirname + '/download_template/';
 
-    archive.bulk([
-      { expand: true, cwd: basePath, src: ['**'], dest: '' }
-    ]);
+    archive.bulk([{
+      expand: true, 
+      cwd: basePath,
+      src: ['**'],
+      dest: ''
+    }]);
 
     defer.resolve();
     return defer.promise;
@@ -143,9 +147,12 @@ module.exports = function(middlewares, fn) {
     var defer = Q.defer();
     var basePath = path.resolve(__dirname + '/../components-src/stylus');
 
-    archive.bulk([
-      { expand: true, cwd: basePath, src: ['**', '!custom.styl', '!custom-*.styl'], dest: 'stylus' }
-    ]);
+    archive.bulk([{
+      expand: true,
+      cwd: basePath,
+      src: ['**'],
+      dest: 'stylus'
+    }]);
 
     defer.resolve();
     return defer.promise;
@@ -156,11 +163,15 @@ module.exports = function(middlewares, fn) {
     .then(compiler.compile)
     .then(prefix)
     .then(function(css) {
-      archive.append(css, { name: 'onsen-css-components.css' });
+      archive.append(css, {name: 'onsen-css-components.css'});
       return css;
     })
     .then(minify).then(function(minifiedCSS) {
       archive.append(minifiedCSS, { name: 'onsen-css-components.min.css' });
+      archive.append(schemeWriter.generateThemeStylus({
+        text: 'custom',
+        colors: variables
+      }), {name: 'stylus/custom-theme.stylus'});
     });
   }
 

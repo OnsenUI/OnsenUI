@@ -7,6 +7,7 @@ var merge = require('event-stream').merge;
 var gutil = require('gulp-util');
 var runSequence = require('run-sequence');
 var $ = require('gulp-load-plugins')();
+var schemeWriter = require('./server/schemeWriter');
 
 
 ////////////////////////////////////////
@@ -99,6 +100,8 @@ gulp.task('serve', ['jshint', 'build', 'app-server'], function() {
 
   gulp.watch(['components-src/stylus/**/*'], ['build-css-topdoc']);
 
+  gulp.watch(['www/theme.js'], ['build-css-components']);
+
   var livereload = require('gulp-livereload')();
 
   // for livereload
@@ -147,7 +150,7 @@ gulp.task('app-server', function() {
 ////////////////////////////////////////
 // build-css-components
 ////////////////////////////////////////
-gulp.task('build-css-components', function() {
+gulp.task('build-css-components', ['build-schemes'], function() {
   function prefix(path) {
     return 'components-src/stylus/' + path;
   }
@@ -155,13 +158,13 @@ gulp.task('build-css-components', function() {
   return merge(
     // Compile to onsen-css-components.css with default variables
     gulp.src([
-      'default.styl',
+      '*-theme.styl',
     ].map(prefix))
       .pipe($.stylus({errors: true, define: {mylighten: mylighten}}))
       .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2'))
       .pipe($.rename(function(path) {
         path.dirname = '.';
-        path.basename = 'onsen-css-components-default';
+        path.basename = 'onsen-css-components-' + path.basename;
       }))
       .pipe(gulp.dest('./components-src/dist/'))
       .pipe(gulp.dest('./www/'))
@@ -172,5 +175,12 @@ gulp.task('build-css-components', function() {
 // build-css-topdoc
 ////////////////////////////////////////
 gulp.task('build-css-topdoc', ['build-css-components'], $.shell.task([
-    './node_modules/.bin/topdoc --source ./components-src/dist --destination ./www/testcases --template ./components-src/testcases-topdoc-template'
+  './node_modules/.bin/topdoc --source ./components-src/dist --destination ./www/testcases --template ./components-src/testcases-topdoc-template'
 ]));
+
+////////////////////////////////////////
+// build-schemes
+////////////////////////////////////////
+gulp.task('build-schemes', function() {
+  schemeWriter.write();
+});
