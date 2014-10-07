@@ -7,6 +7,7 @@ var merge = require('event-stream').merge;
 var gutil = require('gulp-util');
 var runSequence = require('run-sequence');
 var $ = require('gulp-load-plugins')();
+var rimraf = require('rimraf');
 
 
 ////////////////////////////////////////
@@ -42,39 +43,43 @@ gulp.task('build', function(done) {
 });
 
 ////////////////////////////////////////
+// clean 
+////////////////////////////////////////
+gulp.task('clean', function (cb) {
+  rimraf('www.prod/**/*', cb);
+});
+
+////////////////////////////////////////
 // build-minified
 ////////////////////////////////////////
-gulp.task('build-minified', ['html2js', 'css'],function(done) {
+gulp.task('build-minified', ['html2js', 'css', 'clean'],function(done) {
   var jsFilter = $.filter('www/**/*.js');
   var cssFilter = $.filter('www/**/*.css');
 
-  gulp.src('www.prod/**/*').pipe($.clean()).on('end', function() {
+  // copy files
+  gulp.src(['www/**/*', 'www/*'], {base: 'www'})
+    .pipe(gulp.dest('www.prod/'))
+    .on('end', function() {
 
-    // copy files
-    gulp.src(['www/**/*', 'www/*'], {base: 'www'})
-      .pipe(gulp.dest('www.prod/'))
-      .on('end', function() {
+      // generate minified files
+      merge(
+        gulp.src('www/index.html')
+          .pipe($.useref.assets())
+          .pipe(jsFilter)
+          .pipe($.ngmin())
+          .pipe($.uglify())
+          .pipe(jsFilter.restore())
+          .pipe(cssFilter)
+          .pipe($.minifyCss())
+          .pipe(cssFilter.restore())
+          .pipe($.useref.restore())
+          .pipe($.useref())
+          .pipe(gulp.dest('www.prod')),
+        gulp.src('www/bower_components/jquery-minicolors/jquery.minicolors.png')
+          .pipe(gulp.dest('www.prod/styles'))
+      ).on('end', done);
 
-        // generate minified files
-        merge(
-          gulp.src('www/index.html')
-            .pipe($.useref.assets())
-            .pipe(jsFilter)
-            .pipe($.ngmin())
-            .pipe($.uglify())
-            .pipe(jsFilter.restore())
-            .pipe(cssFilter)
-            .pipe($.minifyCss())
-            .pipe(cssFilter.restore())
-            .pipe($.useref.restore())
-            .pipe($.useref())
-            .pipe(gulp.dest('www.prod')),
-          gulp.src('www/bower_components/jquery-minicolors/jquery.minicolors.png')
-            .pipe(gulp.dest('www.prod/styles'))
-        ).on('end', done);
-
-      });
-  });
+    });
 });
 
 ////////////////////////////////////////
