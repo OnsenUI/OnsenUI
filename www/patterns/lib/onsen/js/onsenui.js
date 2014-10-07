@@ -8949,6 +8949,9 @@ limitations under the License.
             scope = null;
             attrs = null;
           });
+        },
+        post: function(scope, element) {
+          $onsen.fireComponentEvent(element[0], "init");
         }
       }
     };
@@ -9001,6 +9004,9 @@ limitations under the License.
             if (pageView) {
               pageView.registerBottomToolbar(element);
             }
+          },
+          post: function(scope, element, attrs) {
+            $onsen.fireComponentEvent(element[0], "init");
           }
         };
       }
@@ -9102,6 +9108,8 @@ limitations under the License.
 
           scope = element = attrs = null;
         });
+        
+        $onsen.fireComponentEvent(element[0], "init");
       }
     };
   }]);
@@ -9145,6 +9153,8 @@ limitations under the License.
           setImmediate(function() {
             var carouselView = new CarouselView(scope, element, attrs);
           });
+
+          $onsen.fireComponentEvent(element[0], "init");
         };
       },
 
@@ -9281,6 +9291,8 @@ limitations under the License.
               element.removeAttr('style');
             }
           }
+
+          $onsen.fireComponentEvent(element[0], "init");
         };
       }
     };
@@ -9379,6 +9391,8 @@ limitations under the License.
               scope[attr]({$event: event});
             }
           }
+       
+          $onsen.fireComponentEvent(element[0], "init");
         };
       }
     };
@@ -9523,6 +9537,8 @@ limitations under the License.
           });
           element = scope = attrs = null;
         });
+      
+        $onsen.fireComponentEvent(element[0], "init");
       }
     };
   }]);
@@ -9762,6 +9778,10 @@ limitations under the License.
 
         element.addClass('list ons-list-inner');
         element.addClass(templater('list--*'));
+      
+        return function(scope, element, attrs) {
+          $onsen.fireComponentEvent(element[0], "init"); 
+        };
       }
     };
   }]);
@@ -9805,6 +9825,10 @@ limitations under the License.
         var templater = $onsen.generateModifierTemplater(attrs);
         elem.addClass('list__header ons-list-header-inner');
         elem.addClass(templater('list__header--*'));
+      
+        return function(scope, element, attrs) {
+          $onsen.fireComponentEvent(element[0], "init");
+        };
       }
     };
   }]);
@@ -9847,6 +9871,10 @@ limitations under the License.
         var templater = $onsen.generateModifierTemplater(attrs);
         elem.addClass('list__item ons-list-item-inner');
         elem.addClass(templater('list__item--*'));
+
+        return function(scope, element, attrs) {
+          $onsen.fireComponentEvent(element[0], "init");
+        };
       }
     };
   }]);
@@ -9923,8 +9951,8 @@ limitations under the License.
             });
           },
 
-          post: function() {
-
+          post: function(scope, element) {
+            $onsen.fireComponentEvent(element[0], "init");
           }
         };
       }
@@ -10019,6 +10047,7 @@ limitations under the License.
  *   </ons-page>
  * </ons-template>
  */
+
 (function() {
   'use strict';
   var module = angular.module('onsen');
@@ -10033,6 +10062,7 @@ limitations under the License.
       scope: true,
 
       compile: function(element) {
+
         var html = $onsen.normalizePageHTML(element.html());
         element.contents().remove();
 
@@ -10067,6 +10097,10 @@ limitations under the License.
               $onsen.aliasStack.unregister('ons.navigator', navigator);
               element = null;
             });
+
+          },
+          post: function(scope, element, attrs) {
+            $onsen.fireComponentEvent(element[0], "init");
           }
         };
       }
@@ -10135,6 +10169,7 @@ limitations under the License.
         if (i++ < 5)  {
           if (isAttached(element)) {
             fillStatusBar(element);
+            $onsen.fireComponentEvent(element, "init");
             fireActualPageInitEvent(element);
           } else {
             setImmediate(f);
@@ -10324,6 +10359,8 @@ limitations under the License.
               element.addClass('row-' + align);
             }
           }
+        
+          $onsen.fireComponentEvent(element[0], "init");
         };
       }
     };
@@ -10424,6 +10461,8 @@ limitations under the License.
 
             }, 500);
           }
+        
+          $onsen.fireComponentEvent(element[0], "init");
         };
       }
     };
@@ -10540,6 +10579,8 @@ limitations under the License.
           element.data('ons-sliding-menu', undefined);
           $onsen.aliasStack.unregister('ons.slidingMenu', slidingMenu);
         });
+
+        $onsen.fireComponentEvent(element[0], "init");
       }
     };
   }]);
@@ -10617,6 +10658,8 @@ limitations under the License.
           element.data('ons-split-view', undefined);
           $onsen.aliasStack.unregister('ons.splitView', splitView);
         });
+
+        $onsen.fireComponentEvent(element[0], "init");
       }
     };
   }]);
@@ -10718,6 +10761,8 @@ limitations under the License.
             });
             checkbox = element = attrs = scope = null;
           });
+        
+          $onsen.fireComponentEvent(element[0], "init");
         };
       }
     };
@@ -10812,7 +10857,6 @@ limitations under the License.
         element.addClass('tab-bar__item');
 
         return function(scope, element, attrs, controller, transclude) {
-
           var tabbarView = element.inheritedData('ons-tabbar');
           if (!tabbarView) {
             throw new Error('This ons-tab element is must be child of ons-tabbar element.');
@@ -10879,6 +10923,8 @@ limitations under the License.
           if (scope.active) {
             tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
           }
+        
+          $onsen.fireComponentEvent(element[0], "init");
         };
       }
     };
@@ -10995,6 +11041,8 @@ limitations under the License.
           element.data('ons-tabbar', undefined);
           $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
         });
+      
+        $onsen.fireComponentEvent(element[0], "init");
       }
     };
   }]);
@@ -11027,6 +11075,7 @@ limitations under the License.
       terminal: true,
       compile: function(element) {
         $templateCache.put(element.attr('id'), element.remove().html());
+        $onsen.fireComponentEvent(element[0], "init");
       }
     };
   }]);
@@ -11190,6 +11239,9 @@ limitations under the License.
             if (pageView) {
               pageView.registerToolbar(element);
             }
+          },
+          post: function(scope, element, attrs) {
+            $onsen.fireComponentEvent(element[0], "init");  
           }
         };
       }
@@ -11244,6 +11296,9 @@ limitations under the License.
             });
             scope = element = attrs = null;
           });
+        },
+        post: function(scope, element, attrs) {
+          $onsen.fireComponentEvent(element[0], "init");
         }
       }
     };
@@ -11909,6 +11964,21 @@ limitations under the License.
             return result;
           };
         })(),
+
+        /**
+         * Fire a named event for a component. The view object, if it exists, is attached to event.component.
+         *
+         * @param {HTMLElement} [dom]
+         * @param {String} event name
+         */
+        fireComponentEvent: function(dom, eventName) {
+          var event = document.createEvent('HTMLEvents');
+
+          event.component = dom ? 
+            angular.element(dom).data(dom.nodeName.toLowerCase()) || null : null;
+          event.initEvent(dom.nodeName.toLowerCase() + ":" + eventName, true, true);
+          dom.dispatchEvent(event);
+        },
 
         /**
          * Define a variable to JavaScript global scope and AngularJS scope.
