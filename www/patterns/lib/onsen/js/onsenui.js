@@ -1,4 +1,4 @@
-/*! onsenui - v1.1.3 - 2014-09-12 */
+/*! onsenui - v1.2.0-dev - 2014-10-07 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -3969,20 +3969,9 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/screen.tpl",
-    "<div class=\"ons-screen\"></div>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("templates/sliding_menu.tpl",
-    "<div class=\"onsen-sliding-menu__behind ons-sliding-menu-inner\"></div>\n" +
-    "<div class=\"onsen-sliding-menu__above ons-sliding-menu-inner\"></div>\n" +
+    "<div class=\"onsen-sliding-menu__menu ons-sliding-menu-inner\"></div>\n" +
+    "<div class=\"onsen-sliding-menu__main ons-sliding-menu-inner\"></div>\n" +
     "");
 }]);
 })();
@@ -4428,6 +4417,253 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
+  module.factory('CarouselView', ['$http', '$parse', '$templateCache', '$compile', '$onsen', '$timeout', function($http, $parse, $templateCache, $compile, $onsen, $timeout) {
+
+    /**
+     * scroll
+     * |----------|----------|
+     * |          |          |
+     * |----------|----------|
+     * @class CarouselView
+     */
+    var CarouselView = Class.extend({
+
+      /**
+       * @member jqLite Object
+       */
+      _element: undefined,
+
+      /**
+       * @member {Object}
+       */
+      _scope: undefined,
+
+      /**
+       * @member {DoorLock}
+       */
+      _doorLock: undefined,
+
+      /**
+       * @param {Object} scope
+       * @param {jqLite} element
+       * @param {Object} attrs
+       */
+      init: function(scope, element, attrs) {
+        this._element = element;
+        this._scope = scope;
+        this._attrs = attrs;
+
+        this._doorLock = new DoorLock();
+        this._scroll = 0;
+
+        this._prepareEventListeners();
+        this._layoutItems();
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
+      },
+
+      _layoutItems: function() {
+        var children = this._element.children();
+        
+        for (var i = 0; i < children.length; i++) {
+          angular.element(children[i]).css({
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            top: '0px',
+            left: (i * 100) + '%'
+          });
+        }
+      },
+
+      _prepareEventListeners: function() {
+        this._hammer = new Hammer(this._element[0]);
+
+        var scrollTo = function() {
+        }.bind(this);
+
+        this._hammer.on('drag', function(event) {
+          var scroll = this._scroll - event.gesture.deltaX;
+          this._scrollTo(scroll);
+        }.bind(this));
+
+        this._hammer.on('dragend', function(event) {
+          this._scroll = this._scroll - event.gesture.deltaX;
+          if (this._isOverScroll(this._scroll)) {
+            this._scrollToKillOverScroll();
+          } else {
+            this._startMomemtumScroll(event);
+          }
+        }.bind(this));
+      },
+
+      _startMomemtumScroll: function(event) {
+        var velocity = event.gesture.velocityX;
+        var duration = 0.3;
+        var scrollDelta = duration * 1000 * velocity;
+        console.log(scrollDelta);
+        var scroll = this._scroll + (event.gesture.deltaX > 0 ? -scrollDelta : scrollDelta);
+        scroll = this._normalizeScrollPosition(scroll);
+
+        this._scroll = Math.min(Math.max(scroll, 0), this._calculateMaxScroll());
+
+        animit(this._getItemElements())
+          .queue({
+            transform: 'translate3d(' + -this._scroll + 'px, 0px, 0px)'
+          }, {
+            duration: duration,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .play();
+      },
+
+      _normalizeScrollPosition: function(scroll) {
+        var arr = [];
+        var width = this._element[0].getBoundingClientRect().width;
+        for (var i = 0; i < this._getItemCount(); i++) {
+          arr.push(i * width);
+        }
+        arr.sort(function(left, right) {
+          var left = Math.abs(left - scroll);
+          var right = Math.abs(right - scroll);
+
+          return left - right;
+        });
+
+        return arr[0];
+      },
+
+      _updateLayout: function() {
+        //...
+      },
+
+      _getItemElements: function() {
+        var items = [];
+        var children = this._element.children();
+
+        for (var i = 0; i < children.length; i++) {
+          items.push(children[i]);
+        }
+
+        return items;
+      },
+
+      _scrollTo: function(scroll) {
+        var items = [];
+        var self = this;
+        var children = this._element.children();
+
+        for (var i = 0; i < children.length; i++) {
+          items.push(children[i]);
+        }
+
+        animit(items)
+          .queue({transform: 'translate3d(' + -normalizeScroll(scroll) + 'px, 0px, 0px)'})
+          .play();
+
+        function normalizeScroll(scroll) {
+          var ratio = 0.2;
+
+          if (scroll < 0) {
+            return Math.round(scroll * ratio);
+          }
+
+          var maxScroll = self._calculateMaxScroll();
+          if (maxScroll < scroll) {
+            return maxScroll + Math.round((scroll - maxScroll) * ratio);
+          }
+
+          return scroll;
+        }
+      },
+
+      _calculateMaxScroll: function() {
+        return (this._getItemCount() - 1) * this._element[0].getBoundingClientRect().width;
+      },
+
+      _isOverScroll: function(scroll) {
+        if (scroll < 0 || scroll > this._calculateMaxScroll()) {
+          return true;
+        }
+        return false;
+      },
+
+      _scrollToKillOverScroll: function() {
+        if (this._scroll < 0) {
+          animit(this._getItemElements())
+            .queue({
+              transform: 'translate3d(0px, 0px, 0px)'
+            }, {
+              duration: 0.1,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .play();
+          this._scroll = 0;
+          return;
+        }
+
+        var maxScroll = (this._getItemCount() - 1) * this._element[0].getBoundingClientRect().width;
+        if (maxScroll < this._scroll) {
+          animit(this._getItemElements())
+            .queue({
+              transform: 'translate3d(' + -maxScroll + 'px, 0px, 0px)'
+            }, {
+              duration: 0.1,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .play();
+          this._scroll = maxScroll;
+          return;
+        }
+
+        return;
+      },
+
+      _getItemCount: function() {
+        return this._element.children().length;
+      },
+
+      /**
+       *
+       */
+      refresh: function() {
+
+      },
+
+      _destroy: function() {
+        this.emit('destroy', {navigator: this});
+      }
+
+    });
+
+    MicroEvent.mixin(CarouselView);
+
+    return CarouselView;
+  }]);
+})();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function() {
+  'use strict;';
+
+  var module = angular.module('onsen');
+
   module.factory('FadeTransitionAnimator', ['NavigatorTransitionAnimator', function(NavigatorTransitionAnimator) {
 
     /**
@@ -4444,7 +4680,7 @@ limitations under the License.
 
         animit.runAll(
 
-          animit(enterPage.getPageView().getContentElement())
+          animit([enterPage.getPageView().getContentElement(), enterPage.getPageView().getBackgroundElement()])
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -4495,7 +4731,7 @@ limitations under the License.
       pop: function(enterPage, leavePage, callback) {
         animit.runAll(
 
-          animit(leavePage.getPageView().getContentElement())
+          animit([leavePage.getPageView().getContentElement(), leavePage.getPageView().getBackgroundElement()])
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -4597,6 +4833,7 @@ limitations under the License.
           pageLabels: pageLabels,
           other: other,
           content: page.getPageView().getContentElement(),
+          background: page.getPageView().getBackgroundElement(),
           toolbar: page.getPageView().getToolbarElement(),
           bottomToolbar: page.getPageView().getBottomToolbarElement()
         };
@@ -4663,7 +4900,7 @@ limitations under the License.
 
             maskClear,
 
-            animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar])
+            animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background])
               .queue({
                 css: {
                   transform: 'translate3D(100%, 0px, 0px)',
@@ -4726,7 +4963,7 @@ limitations under the License.
               })
               .resetStyle(),
 
-            animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar])
+            animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background])
               .queue({
                 css: {
                   transform: 'translate3D(0, 0, 0)',
@@ -4872,7 +5109,7 @@ limitations under the License.
 
             maskClear,
 
-            animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar])
+            animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background])
               .queue({
                 css: {
                   transform: 'translate3D(-25%, 0px, 0px)',
@@ -4938,7 +5175,7 @@ limitations under the License.
               })
               .resetStyle(),
 
-            animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar])
+            animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background])
               .queue({
                 css: {
                   transform: 'translate3D(0px, 0px, 0px)'
@@ -6413,6 +6650,21 @@ limitations under the License.
       /**
        * @return {HTMLElement}
        */
+      getBackgroundElement : function() {
+        for (var i = 0; i < this._element.length; i++) {
+          if (this._element[i].querySelector) {
+            var content = this._element[i].querySelector('.page__background');
+            if (content) {
+              return content;
+            }
+          }
+        }
+        throw Error('fail to get ".page__background" element.');
+      },
+
+      /**
+       * @return {HTMLElement}
+       */
       getToolbarElement : function() {
         return this._toolbarElement[0] || this._nullElement;
       },
@@ -7316,7 +7568,6 @@ limitations under the License.
   });
   MicroEvent.mixin(SlidingMenuViewModel);
 
-  var MAIN_PAGE_RATIO = 0.9;
   module.factory('SlidingMenuView', ['$onsen', '$compile', 'SlidingMenuAnimator', 'RevealSlidingMenuAnimator', 'PushSlidingMenuAnimator', 'OverlaySlidingMenuAnimator', function($onsen, $compile, SlidingMenuAnimator, RevealSlidingMenuAnimator, 
                                              PushSlidingMenuAnimator, OverlaySlidingMenuAnimator) {
 
@@ -7325,8 +7576,8 @@ limitations under the License.
       _attrs: undefined,
 
       _element: undefined,
-      _behindPage: undefined,
-      _abovePage: undefined,
+      _menuPage: undefined,
+      _mainPage: undefined,
 
       _doorLock: undefined,
 
@@ -7337,8 +7588,8 @@ limitations under the License.
         this._attrs = attrs;
         this._element = element;
 
-        this._behindPage = angular.element(element[0].querySelector('.onsen-sliding-menu__behind'));
-        this._abovePage = angular.element(element[0].querySelector('.onsen-sliding-menu__above'));
+        this._menuPage = angular.element(element[0].querySelector('.onsen-sliding-menu__menu'));
+        this._mainPage = angular.element(element[0].querySelector('.onsen-sliding-menu__main'));
 
         this._doorLock = new DoorLock();
 
@@ -7364,14 +7615,10 @@ limitations under the License.
 
         if (attrs.mainPage) {
           this.setMainPage(attrs.mainPage);
-        } else if (attrs.abovePage) {
-          this.setMainPage(attrs.abovePage);
         }
 
         if (attrs.menuPage) {
           this.setMenuPage(attrs.menuPage);
-        } else if (attrs.behindPage) {
-          this.setMenuPage(attrs.behindPage);
         }
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
@@ -7382,13 +7629,13 @@ limitations under the License.
           var maxDistance = this._normalizeMaxSlideDistanceAttr();
           this._logic.setMaxDistance(maxDistance);
 
-          this._behindPage.css({opacity: 1});
+          this._menuPage.css({opacity: 1});
 
           this._animator = this._getAnimatorOption();
           this._animator.setup(
             this._element,
-            this._abovePage,
-            this._behindPage,
+            this._mainPage,
+            this._menuPage,
             {
               isRight: this._isRightMenu,
               width: this._attrs.maxSlideDistance || '90%'
@@ -7413,7 +7660,7 @@ limitations under the License.
         }
       },
 
-      _refreshBehindPageWidth: function() {
+      _refreshMenuPageWidth: function() {
         var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
 
         if (this._animator) {
@@ -7460,12 +7707,12 @@ limitations under the License.
 
       _onWindowResize: function() {
         this._recalculateMAX();
-        this._refreshBehindPageWidth();
+        this._refreshMenuPageWidth();
       },
 
       _onMaxSlideDistanceChanged: function() {
         this._recalculateMAX();
-        this._refreshBehindPageWidth();
+        this._refreshMenuPageWidth();
       },
 
       /**
@@ -7475,13 +7722,13 @@ limitations under the License.
         var maxDistance = this._attrs.maxSlideDistance;
 
         if (!('maxSlideDistance' in this._attrs)) {
-          maxDistance = 0.9 * this._abovePage[0].clientWidth;
+          maxDistance = 0.9 * this._mainPage[0].clientWidth;
         } else if (typeof maxDistance == 'string') {
           if (maxDistance.indexOf('px', maxDistance.length - 2) !== -1) {
             maxDistance = parseInt(maxDistance.replace('px', ''), 10);
           } else if (maxDistance.indexOf('%', maxDistance.length - 1) > 0) {
             maxDistance = maxDistance.replace('%', '');
-            maxDistance = parseFloat(maxDistance) / 100 * this._abovePage[0].clientWidth;
+            maxDistance = parseFloat(maxDistance) / 100 * this._mainPage[0].clientWidth;
           }
         } else {
           throw new Error('invalid state');
@@ -7510,12 +7757,12 @@ limitations under the License.
         this._hammertime = new Hammer(this._element[0]);
       },
 
-      _appendAbovePage: function(pageUrl, templateHTML) {
+      _appendMainPage: function(pageUrl, templateHTML) {
         var pageScope = this._scope.$parent.$new();
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
-        this._abovePage.append(pageContent);
+        this._mainPage.append(pageContent);
 
         if (this._currentPageElement) {
           this._currentPageElement.remove();
@@ -7532,22 +7779,22 @@ limitations under the License.
       /**
        * @param {String}
        */
-      _appendBehindPage: function(templateHTML) {
+      _appendMenuPage: function(templateHTML) {
         var pageScope = this._scope.$parent.$new();
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
-        this._behindPage.append(pageContent);
+        this._menuPage.append(pageContent);
 
-        if (this._currentBehindPageScope) {
-          this._currentBehindPageScope.$destroy();
-          this._currentBehindPageElement.remove();
+        if (this._currentMenuPageScope) {
+          this._currentMenuPageScope.$destroy();
+          this._currentMenuPageElement.remove();
         }
 
         link(pageScope);
 
-        this._currentBehindPageElement = pageContent;
-        this._currentBehindPageScope = pageScope;
+        this._currentMenuPageElement = pageContent;
+        this._currentMenuPageScope = pageScope;
       },
 
       /**
@@ -7563,7 +7810,7 @@ limitations under the License.
 
           var self = this;
           $onsen.getPageHTMLAsync(page).then(function(html) {
-            self._appendBehindPage(angular.element(html));
+            self._appendMenuPage(angular.element(html));
             if (options.closeMenu) {
               self.close();
             }
@@ -7574,10 +7821,6 @@ limitations under the License.
         } else {
           throw new Error('cannot set undefined page');
         }
-      },
-
-      setBehindPage: function() {
-        return this.setMenuPage.apply(this, arguments);
       },
 
       /**
@@ -7605,7 +7848,7 @@ limitations under the License.
         if (pageUrl) {
           var self = this;
           $onsen.getPageHTMLAsync(pageUrl).then(function(html) {
-            self._appendAbovePage(pageUrl, html);
+            self._appendMainPage(pageUrl, html);
             done();
           }, function() {
             throw new Error('Page is not found: ' + page);
@@ -7613,10 +7856,6 @@ limitations under the License.
         } else {
           throw new Error('cannot set undefined page');
         }
-      },
-
-      setAbovePage: function(pageUrl, options) {
-        return this.setMainPage.apply(this, arguments);
       },
 
       _handleEvent: function(event) {
@@ -7728,7 +7967,7 @@ limitations under the License.
         }
 
         var targetWidth = event.gesture.startEvent._swipeTargetWidth;
-        return this._isRightMenu ? this._abovePage[0].clientWidth - x < targetWidth : x < targetWidth;
+        return this._isRightMenu ? this._mainPage[0].clientWidth - x < targetWidth : x < targetWidth;
       },
 
       _getSwipeTargetWidth: function() {
@@ -7740,7 +7979,7 @@ limitations under the License.
 
         var width = parseInt(targetWidth, 10);
         if (width < 0 || !targetWidth) {
-          return this._abovePage[0].clientWidth;
+          return this._mainPage[0].clientWidth;
         } else {
           return width;
         }
@@ -7979,20 +8218,12 @@ limitations under the License.
         this._element = element;
         this._scope = scope;
 
-        this._abovePage = angular.element(element[0].querySelector('.onsen-split-view__main'));
-        this._behindPage = angular.element(element[0].querySelector('.onsen-split-view__secondary'));
+        this._mainPage = angular.element(element[0].querySelector('.onsen-split-view__main'));
+        this._secondaryPage = angular.element(element[0].querySelector('.onsen-split-view__secondary'));
 
-        this._previousX = 0;
-        this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
-        this._currentX = 0;
-        this._startX = 0;
+        this._max = this._mainPage[0].clientWidth * MAIN_PAGE_RATIO;
         this._mode = SPLIT_MODE;
         this._doorLock = new DoorLock();
-
-        this._hammertime = new Hammer(this._element[0]);
-        this._boundHammerEvent = this._handleEvent.bind(this);
-
-        scope.$watch('swipable', this._onSwipableChanged.bind(this));
 
         if ($onsen.isIOS()) {
           window.addEventListener('orientationchange', this._onResize.bind(this));
@@ -8032,15 +8263,15 @@ limitations under the License.
         var pageScope = this._scope.$parent.$new();
         var pageContent = $compile(templateHTML)(pageScope);
 
-        this._behindPage.append(pageContent);
+        this._secondaryPage.append(pageContent);
 
-        if (this._currentBehindPageElement) {
-          this._currentBehindPageElement.remove();
-          this._currentBehindPageScope.$destroy();
+        if (this._currentSecondaryPageElement) {
+          this._currentSecondaryPageElement.remove();
+          this._currentSecondaryPageScope.$destroy();
         }
 
-        this._currentBehindPageElement = pageContent;
-        this._currentBehindPageScope = pageScope;
+        this._currentSecondaryPageElement = pageContent;
+        this._currentSecondaryPageScope = pageScope;
       },
 
       /**
@@ -8050,7 +8281,7 @@ limitations under the License.
         var pageScope = this._scope.$parent.$new();
         var pageContent = $compile(templateHTML)(pageScope);
 
-        this._abovePage.append(pageContent);
+        this._mainPage.append(pageContent);
 
         if (this._currentPage) {
           this._currentPage.remove();
@@ -8097,12 +8328,12 @@ limitations under the License.
 
         if (lastMode === COLLAPSE_MODE && this._mode === COLLAPSE_MODE) {
           this._animator.onResized({
-            isOpened: this._currentX > 0,
+            isOpened: false,
             width: '90%'
           });
         }
 
-        this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+        this._max = this._mainPage[0].clientWidth * MAIN_PAGE_RATIO;
       },
 
       _considerChangingCollapse: function() {
@@ -8159,180 +8390,44 @@ limitations under the License.
             this._scope.mainPageWidth = '70';
           }
 
-          var behindSize = 100 - this._scope.mainPageWidth.replace('%', '');
-          this._behindPage.css({
-            width: behindSize + '%',
+          var secondarySize = 100 - this._scope.mainPageWidth.replace('%', '');
+          this._secondaryPage.css({
+            width: secondarySize + '%',
             opacity: 1
           });
 
-          this._abovePage.css({
+          this._mainPage.css({
             width: this._scope.mainPageWidth + '%'
           });
 
-          this._abovePage.css('left', behindSize + '%');
-          this._currentX = this._behindPage[0].clientWidth;
+          this._mainPage.css('left', secondarySize + '%');
         }
       },
 
       _activateCollapseMode: function() {
         if (this._mode !== COLLAPSE_MODE) {
-          this._behindPage.attr('style', '');
-          this._abovePage.attr('style', '');
+          this._secondaryPage.attr('style', '');
+          this._mainPage.attr('style', '');
 
           this._mode = COLLAPSE_MODE;
 
-          this._onSwipableChanged(this._scope.swipable);
-
           this._animator.setup(
             this._element,
-            this._abovePage,
-            this._behindPage,
+            this._mainPage,
+            this._secondaryPage,
             {isRight: false, width: '90%'}
           );
-          this._currentX = this._startX = 0;
         }
       },
 
       _activateSplitMode: function() {
         this._animator.destroy();
 
-        this._behindPage.attr('style', '');
-        this._abovePage.attr('style', '');
+        this._secondaryPage.attr('style', '');
+        this._mainPage.attr('style', '');
 
         this._mode = SPLIT_MODE;
         this._setSize();
-        this._deactivateHammer();
-      },
-
-      _activateHammer: function() {
-        this._hammertime.on('dragleft dragright swipeleft swiperight release', this._boundHammerEvent);
-      },
-
-      _deactivateHammer: function() {
-        this._hammertime.off('dragleft dragright swipeleft swiperight release', this._boundHammerEvent);
-      },
-
-      _onSwipableChanged: function(swipable) {
-        swipable = swipable === '' || swipable === undefined || swipable == 'true';
-
-        if (swipable) {
-          this._activateHammer();
-        } else {
-          this._deactivateHammer();
-        }
-      },
-
-      _handleEvent: function(event) {
-        if (this._doorLock.isLocked()) {
-          return;
-        }
-
-        switch (event.type) {
-          case 'dragleft':
-          case 'dragright':
-            event.preventDefault();
-            event.gesture.preventDefault();
-            var deltaX = event.gesture.deltaX;
-
-            this._currentX = this._startX + deltaX;
-            if (this._currentX >= 0) {
-              this._translate(this._currentX);
-            }
-            break;
-
-          case 'swipeleft':
-            event.gesture.preventDefault();
-            this.close();
-            break;
-
-          case 'swiperight':
-            event.gesture.preventDefault();
-            this.open();
-            break;
-
-          case 'release':
-            if (this._currentX > this._max / 2) {
-              this.open();
-            } else {
-              this.close();
-            }
-            break;
-        }
-      },
-
-      _onTransitionEnd: function() {
-        this._scope.$root.$broadcast(ON_PAGE_READY); //make sure children can do something before the parent.
-      },
-
-      close: function(callback) {
-        callback = callback || function() {};
-
-        if (this._mode === SPLIT_MODE) {
-          callback();
-          return;
-        } else if (this._mode === COLLAPSE_MODE) {
-          this._startX = 0;
-
-          if (this._currentX !== 0) {
-            var self = this;
-            this._doorLock.waitUnlock(function() {
-              var unlock = self._doorLock.lock();
-              self._currentX = 0;
-
-              self._animator.closeMenu(function() {
-                unlock();
-                self._onTransitionEnd();
-                callback();
-              });
-            });
-          }
-        }
-      },
-
-      open: function(callback) {
-        callback = callback || function() {};
-
-        if (this._mode === SPLIT_MODE) {
-          callback();
-          return;
-        } else if (this._mode === COLLAPSE_MODE) {
-          this._startX = this._max;
-
-          if (this._currentX != this._max) {
-            var self = this;
-            this._doorLock.waitUnlock(function() {
-              var unlock = self._doorLock.lock();
-              self._currentX = self._max;
-
-              self._animator.openMenu(function() {
-                unlock();
-                self._onTransitionEnd();
-                callback();
-              });
-            });
-          }
-        }
-      },
-
-      toggle: function(callback) {
-        if (this._startX === 0) {
-          this.open(callback);
-        } else {
-          this.close(callback);
-        }
-      },
-
-      _translate: function(x) {
-        if (this._mode === COLLAPSE_MODE) {
-          this._currentX = x;
-
-          var options = {
-            distance: x,
-            maxDistance: this._max
-          };
-
-          this._animator.translateMenu(options);
-        }
       },
 
       _destroy: function() {
@@ -9014,6 +9109,75 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+ * @id carousel
+ * @name ons-carousel
+ * @param modifier
+ * @param direction
+ * @param item-width
+ * @param 
+ * @example
+ * <ons-carousel>
+ *   <ons-carousel-item>Header Text</ons-carousel-item>
+ *   <ons-carousel-cover>Header Text</ons-carousel-cover>
+ * </ons-carousel>
+ */
+(function() {
+  'use strict';
+
+  var module = angular.module('onsen');
+
+  module.directive('onsCarousel', ['$onsen', 'CarouselView', function($onsen, CarouselView) {
+    return {
+      restrict: 'E',
+      replace: false,
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      scope: false,
+      transclude: false,
+
+      compile: function(element, attrs) {
+        var templater = $onsen.generateModifierTemplater(attrs);
+
+        element.addClass(templater('carousel--*'));
+
+        return function(scope, element, attrs) {
+          setImmediate(function() {
+            var carouselView = new CarouselView(scope, element, attrs);
+          });
+        };
+      },
+
+    };
+  }]);
+
+  module.directive('onsCarouselItem', ['$onsen', function($onsen) {
+    return {
+      restrict: 'E',
+      replace: false,
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      scope: false,
+      transclude: false,
+
+      compile: function(element, attrs) {
+        var templater = $onsen.generateModifierTemplater(attrs);
+
+        element.addClass(templater('carousel-item--*'));
+        element.css('width', '100%');
+
+        return function(scope, element, attrs) {
+        };
+      },
+
+    };
+  }]);
+})();
+
+
+/**
+ * @ngdoc directive
  * @id col
  * @name ons-col
  * @description
@@ -9263,7 +9427,7 @@ limitations under the License.
 
   function cleanClassAttribute(element) {
     var classList = ('' + element.attr('class')).split(/ +/).filter(function(classString) {
-      return classString !== 'fa' && classString.substring(0, 3) !== 'fa-';
+      return classString !== 'fa' && classString.substring(0, 3) !== 'fa-' && classString.substring(0, 4) !== 'ion-';
     });
 
     element.attr('class', classList.join(' '));
@@ -9455,7 +9619,7 @@ limitations under the License.
  * @seealso ons-if-orientation [en]ons-if-orientation component[/en][ja]ons-if-orientationコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
- * <div if-platform="android">
+ * <div ons-if-platform="android">
  *   ...
  * </div>
  */
@@ -10022,6 +10186,10 @@ limitations under the License.
       pageContent.addClass(modifierTemplater('page--*__content'));
       pageContent = null;
 
+      var pageBackground = angular.element(element[0].querySelector('.page__background'));
+      pageBackground.addClass(modifierTemplater('page--*__background'));
+      pageBackground = null;
+
       $onsen.cleaner.onDestroy(scope, function() {
         element.data('ons-page', undefined);
         $onsen.aliasStack.unregister('ons.page', page);
@@ -10051,11 +10219,14 @@ limitations under the License.
         var children = element.children().remove();
 
         var content = angular.element('<div class="page__content ons-page-inner"></div>').append(children);
+        var background = angular.element('<div class="page__background"></div>');
 
         if (element.attr('style')) {
-          content.attr('style', element.attr('style'));
+          background.attr('style', element.attr('style'));
           element.attr('style', '');
         }
+
+        element.append(background);
 
         if (Modernizr.csstransforms3d) {
           element.append(content);
@@ -10088,6 +10259,7 @@ limitations under the License.
         }
 
         content = null;
+        background = null;
         children = null;
 
         return {
@@ -10158,303 +10330,6 @@ limitations under the License.
   }]);
 })();
 
-
-/**
- * @ngdoc directive
- * @id screen
- * @name ons-screen
- * @description
- * The root element. This is usually put inside <body> tag.
- * @param page The root page of this screen element
- * @param var Variable name to refer this screen.
- * @property presentPage(pageUrl) Presents a page
- * @property dismissPage() Dismisses the page that was presented
- * @demoURL
- * OnsenUI/demo/screen/
- */
-(function() {
-  'use strict';
-  var module = angular.module('onsen');
-
-  var TransitionAnimator = Class.extend({
-    push: function(enterPage, leavePage, callback) {
-      callback();
-    }, 
-
-    pop: function(enterPage, leavePage, callback) {
-      callback();
-    }
-  });
-
-  var ModalTransitionAnimator = TransitionAnimator.extend({
-
-    /** Black mask */
-    backgroundMask : angular.element(
-      '<div style="position: absolute; width: 100%;' +
-      'height: 100%; background-color: black;"></div>'
-    ),
-
-    push: function(enterPage, leavePage, callback) {
-      var mask = this.backgroundMask.remove();
-      leavePage.pageElement[0].parentNode.insertBefore(mask[0], leavePage.pageElement[0]);
-
-      animit.runAll(
-
-        animit(mask[0])
-          .wait(0.4)
-          .queue(function(done) {
-            mask.remove();
-            done();
-          }),
-        
-        animit(enterPage.pageElement[0])
-          .queue({
-            transform: 'translate3D(0, 100%, 0)'
-          })
-          .queue({
-            transform: 'translate3D(0, 0, 0)'
-          }, {
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .resetStyle()
-          .queue(function(done) {
-            callback();
-            done();
-          }),
-
-        animit(leavePage.pageElement[0])
-          .queue({
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 1.0
-          })
-          .queue({
-            transform: 'translate3D(0, -10%, 0)',
-            opacity: 0.9
-          }, {
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .resetStyle()
-      );
-    },
-
-    pop: function(enterPage, leavePage, callback) {
-
-      var mask = this.backgroundMask.remove();
-      enterPage.pageElement[0].parentNode.insertBefore(mask[0], enterPage.pageElement[0]);
-
-      animit.runAll(
-
-        animit(mask[0])
-          .wait(0.4)
-          .queue(function(done) {
-            mask.remove();
-            done();
-          }),
-
-        animit(enterPage.pageElement[0])
-          .queue({
-            transform: 'translate3D(0, -10%, 0)',
-            opacity: 0.9
-          })
-          .queue({
-            transform: 'translate3D(0, 0, 0)',
-            opacity: 1.0
-          }, {
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .resetStyle()
-          .queue(function(done) {
-            callback();
-            done();
-          }),
-
-        animit(leavePage.pageElement[0])
-          .queue({
-            transform: 'translate3D(0, 0, 0)'
-          })
-          .queue({
-            transform: 'translate3D(0, 100%, 0)'
-          }, {
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-      );
-    }
-  });
-
-  module.service('Screen', ['$compile', '$onsen', function($compile, $onsen) {
-    var TRANSITION_END = 'webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd';
-    var TRANSITION_START = 'webkitAnimationStart animationStart msAnimationStart oAnimationStart';
-
-    var Screen = Class.extend({
-
-      init: function(scope, element, attrs) {
-        this.screenItems = [];
-        this.scope = scope;
-        this.element = element;
-        this.attrs = attrs;
-
-        this._doorLock = new DoorLock();
-        this.attachMethods();
-
-        if (scope.page) {
-          this.resetToPage(scope.page);
-        }
-      },
-
-      isEmpty: function() {
-        return this.screenItems.length < 1;
-      },
-
-      compilePageEl: function(pageEl, pageScope){
-        var compiledPage = $compile(pageEl)(pageScope);
-        return compiledPage;
-      },
-
-      createPageScope: function(){
-        var pageScope = this.scope.$new();
-        return pageScope;
-      },
-
-      /**
-       * @param {String} pageUrl
-       * @param {DOMElement} element This element is must be ons-page element.
-       * @param {Object} pageScope
-       * @param {Function} [callback]
-       */
-      _presentPageDOM: function(pageUrl, compiledPage, pageScope, callback) {
-        callback = callback || function() {};
-
-        var screenItem = {
-          pageUrl: pageUrl,
-          pageElement: compiledPage,
-          pageScope: pageScope,
-          destroy: function() {
-            this.pageElement.remove();
-            this.pageScope.$destroy();
-          }
-        };
-
-        // create stack context.
-        compiledPage.css('z-index', 0);
-
-        this.screenItems.push(screenItem);
-
-        if (this.screenItems.length > 1) {
-
-          var enterPage = screenItem;
-          var leavePage = this.screenItems[this.screenItems.length - 2];
-
-          new ModalTransitionAnimator().push(enterPage, leavePage, function() {
-            leavePage.pageElement.css({display: 'none'});
-            callback();
-          });
-          this.element.append(compiledPage);
-        } else {
-          this.element.append(compiledPage);
-          callback();
-        }
-      },
-
-      presentPage: function(page) {
-        var self = this;
-
-        this._doorLock.waitUnlock(function() {
-          var unlock = self._doorLock.lock();
-
-          $onsen.getPageHTMLAsync(page).then(function(html) {
-            var pageContent = angular.element(html.trim());
-            var pageScope = self.createPageScope();
-            var compiledPage = self.compilePageEl(pageContent, pageScope);
-
-            self._presentPageDOM(page, compiledPage, pageScope, unlock);
-          }, function() {
-            unlock();
-            throw new Error('Page is not found: ' + page);
-          });
-        });
-      },
-
-      dismissPage: function(){
-        if (this.screenItems.length < 2) {
-          return;
-        }
-
-        var self = this;
-        this._doorLock.waitUnlock(function() {
-          var unlock = self._doorLock.lock();
-
-          var leavePage = self.screenItems.pop();
-          var enterPage = self.screenItems[self.screenItems.length - 1];
-
-          enterPage.pageElement.css({display: 'block'});
-
-          new ModalTransitionAnimator().pop(enterPage, leavePage, function() {
-            leavePage.destroy();
-            unlock();
-          });
-        });
-      },
-
-      resetToPage: function(page){
-        this.scope.presentPage(page);
-        for (var i = 0; i < this.screenItems.length - 1; i++) {
-          this.screenItems[i].destroy();
-        }
-      },
-
-      attachMethods: function() {
-        this.scope.presentPage = this.presentPage.bind(this);
-        this.scope.resetToPage = this.resetToPage.bind(this);
-        this.scope.dismissPage = this.dismissPage.bind(this);
-      }
-    });
-
-    return Screen;
-  }]);
-
-  module.directive('onsScreen', ['$compile', 'Screen', '$onsen', function($compile, Screen, $onsen) {
-
-    return {
-      restrict: 'E',
-      replace: false,
-
-      // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclude.
-      transclude: false,
-      scope: true,
-
-      compile: function(element, attrs, transclude) {
-        var html = $onsen.normalizePageHTML(element.html().trim());
-        element.contents().remove();
-
-        return function(scope, element, attrs) {
-          var screen = new Screen(scope, element, attrs);
-          $onsen.declareVarAttribute(attrs, screen);
-
-          if (!attrs.page) {
-            var pageScope = screen.createPageScope();
-
-            var compiled = $compile(angular.element(html))(pageScope);
-            screen._presentPageDOM('', compiled, pageScope);
-          }
-
-          $onsen.aliasStack.register('ons.screen', screen);
-          element.data('ons-screen', screen);
-
-          scope.$on('$destroy', function(){
-            element.data('ons-screen', undefined);
-            $onsen.aliasStack.register('ons.screen', screen);
-          });
-        };
-
-      }
-    };
-  }]);
-})();
 
 /**
  * @ngdoc directive
@@ -10562,12 +10437,12 @@ limitations under the License.
  * @description
  *  [en]Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.[/en]
  *  [ja]スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。[/ja]
- * @param behind-page
- *  [en]The url of the page to be set to the behind layer.[/en]
- *  [ja]後方のレイヤーにセットされたページのURLを指定します。[/ja]
- * @param above-page
- *  [en]The url of the page to be set to the above layer.[/en]
- *  [ja]前方のレイヤーにセットされたページのURLを指定します。[/ja]
+ * @param menu-page
+ *  [en]The url of the page to be set to the left side.[/en]
+ *  [ja]左に位置するメニューページのURLを指定します。[/ja]
+ * @param main-page
+ *  [en]The url of the page to be set to the right side.[/en]
+ *  [ja]右に位置するメインページのURLを指定します。[/ja]
  * @param swipable
  *  [en]Whether to enable swipe interaction.[/en]
  *  [ja]スワイプ操作を有効にする場合に指定します。[/ja]
@@ -10575,14 +10450,14 @@ limitations under the License.
  *  [en]The width of swipable area calculated from the left (in pixel). Use this to enable swipe only when the finger touch on the screen edge.[/en]
  *  [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]
  * @param max-slide-distance
- *  [en]How far the behind page will slide open. Can specify both in px and %. eg. 90%, 200px[/en]
- *  [ja]behind-pageで指定されたページの表示幅を指定します。ピクセルもしくは%の両方で指定できます（例: 90%, 200px）[/ja]
+ *  [en]How far the menu page will slide open. Can specify both in px and %. eg. 90%, 200px[/en]
+ *  [ja]menu-pageで指定されたページの表示幅を指定します。ピクセルもしくは%の両方で指定できます（例: 90%, 200px）[/ja]
  * @param var
  *  [en]Variable name to refer this sliding menu.[/en]
  *  [ja]JavaScriptから操作するための変数名を指定します。[/ja]
  * @param side
- *  [en]Specify which side of the screen the behind page is located on. Possible values are left and right.[/en]
- *  [ja]behind-pageで指定されたページが画面のどちら側から表示されるかを指定します。leftもしくはrightのいずれかを指定できます。[/ja]
+ *  [en]Specify which side of the screen the menu page is located on. Possible values are left and right.[/en]
+ *  [ja]menu-pageで指定されたページが画面のどちら側から表示されるかを指定します。leftもしくはrightのいずれかを指定できます。[/ja]
  *
  * @property setMainPage(pageUrl,[options])
  *  [en]Show the page specified in pageUrl in the main contents pane.[/en]
@@ -10590,12 +10465,6 @@ limitations under the License.
  * @property setMenuPage(pageUrl,[options])
  *  [en]Show the page specified in pageUrl in the side menu pane.[/en]
  *  [ja]メニュー部分に表示されるページをpageUrlに指定します。[/ja]
- * @property setAbovePage(pageUrl)
- *  [en][Deprecated]Show the page specified in pageUrl in the above layer.[/en]
- *  [ja][非推奨]上部に表示されるページをpageUrlに指定します。[/ja]
- * @property setBehindPage(pageUrl)
- *  [en][Deprecated]Show the page specified in pageUrl in the behind layer.[/en]
- *  [ja][非推奨]下部に表示されるページをpageUrlに指定します。[/ja]
  * @property openMenu()
  *  [en]Slide the above layer to reveal the layer behind.[/en]
  *  [ja]メニューページを表示します。[/ja]
@@ -10681,8 +10550,8 @@ limitations under the License.
  * @id split-view
  * @name ons-split-view
  * @description
- *  [en]Divides the screen into left and right section. This component can also act as sliding menu which can be controlled by collapse attribute.[/en]
- *  [ja]画面を左右に分割します。collapse属性を用いることで、スライディングメニューとしての使い方もできます。[/ja]
+ *  [en]Divides the screen into left and right section.[/en]
+ *  [ja]画面を左右に分割します。[/ja]
  *
  * @param main-page
  *  [en]The url of the page on the right.[/en]
@@ -10702,9 +10571,6 @@ limitations under the License.
  *
  * @property setMainPage(pageUrl) Show the page specified in pageUrl in the right section
  * @property setSecondaryPage(pageUrl) Show the page specified in pageUrl in the left section
- * @property open() [Deprecated] Reveal the secondary page if the view is in collapse mode
- * @property close() [Deprecated] hide the secondary page if the view is in collapse mode
- * @property toggle() [Deprecated] Reveal the secondary page if it is currently hidden, otherwies, reveal it
  * @codepen nKqfv {wide}
  * @guide Usingonssplitviewcomponent [en]Using ons-split-view.[/en][ja]ons-split-viewコンポーネントを使う[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
@@ -10731,7 +10597,6 @@ limitations under the License.
         secondaryPage: '@',
         mainPage: '@',
         collapse: '@',
-        swipable: '@',
         mainPageWidth: '@'
       },
 
