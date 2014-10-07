@@ -19,20 +19,19 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
-var-background-color--tab-bar := #f8f8f8
-var-background-color--tab-bar--active := #f8f8f8
-var-tab-bar-border-color := #ddd
-var-color--tab-bar__button := #888
-var-color--tab-bar--active := #1284ff
+var-tab-bar-background-color = $tabbar-background-color // Background color
+var-tab-bar-border-color = $tabbar-border-color // Separator
+var-tab-bar-button-color = $tabbar-text-color // Text color
+var-tab-bar-active-color = $tabbar-highlight-text-color // Text color active
 
-var-border-top--tab-bar--active = none
-var-border-top--tab-bar--focus = none
-var-height--tab-bar = 49px
-var-line-height--tab-bar__button = 49px
-var-border--tab-bar__button = none
-var-box-shadow--tab-bar--active = none
-var-box-shadow--tab-bar__button--focus = none
-var-border-top--tab-bar = 1px solid var-tab-bar-border-color
+var-tab-bar-active-border-top = none
+var-tab-bar-focus-border-top = none
+var-tab-bar-height = 49px
+var-tab-bar-button-line-height = 49px
+var-tab-bar-button-border = none
+var-tab-bar-active-box-shadow = none
+var-tab-bar-button-focus-box-shadow = none
+var-tab-bar-border-top = 1px solid var-tab-bar-border-color
 
 /*! topdoc
   name: Icon Tab Bar
@@ -118,9 +117,9 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   white-space nowrap
   margin 0
   padding 0
-  height var-height--tab-bar
-  background-color var-background-color--tab-bar
-  border-top var-border-top--tab-bar
+  height var-tab-bar-height
+  background-color var-tab-bar-background-color
+  border-top var-tab-bar-border-top
   width 100%
   retina-tabbar-border(var-tab-bar-border-color)
 
@@ -143,17 +142,17 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   ellipsis()
   text-decoration none
   padding 0
-  height var-line-height--tab-bar__button
+  height var-tab-bar-button-line-height
   letter-spacing var-letter-spacing
-  color var-color--tab-bar__button
+  color var-tab-bar-button-color
   text-shadow var-text-shadow
   vertical-align top
   background-color transparent
   box-shadow var-box-shadow
-  border-top var-border--tab-bar__button
+  border-top var-tab-bar-button-border
   width 100%
   font-weight var-font-weight
-  line-height var-line-height--tab-bar__button
+  line-height var-tab-bar-button-line-height
   +retina-query()
     border-top none
 
@@ -176,29 +175,29 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
 
 .tab-bar__label:first-child
   font-size 16px
-  line-height var-line-height--tab-bar__button
+  line-height var-tab-bar-button-line-height
   margin 0
   padding 0
 
 .tab-bar__button
-  color var-color--tab-bar__button
+  color var-tab-bar-button-color
 
 :checked + .tab-bar__button
-  color var-color--tab-bar--active
+  color var-tab-bar-active-color
   background-color transparent
-  box-shadow var-box-shadow--tab-bar--active
-  border-top var-border-top--tab-bar--active
+  box-shadow var-tab-bar-active-box-shadow
+  border-top var-tab-bar-active-border-top
 
 :checked + .tab-bar__button > .tab-bar__icon
-  color var-color--tab-bar--active
+  color var-tab-bar-active-color
 
 .tab-bar__button:disabled
   disabled()
 
 .tab-bar__button:focus
   z-index 1
-  border-top var-border-top--tab-bar--focus
-  box-shadow var-box-shadow--tab-bar__button--focus
+  border-top var-tab-bar-focus-border-top
+  box-shadow var-tab-bar-button-focus-box-shadow
   outline 0
 
 .tab-bar__content
@@ -206,7 +205,7 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   top 0
   left 0
   right 0
-  bottom var-height--tab-bar
+  bottom var-tab-bar-height
   z-index 0
 
 /*! topdoc
@@ -291,11 +290,11 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
   right 0px
   bottom auto
   border-top none
-  border-bottom var-border-top--tab-bar
+  border-bottom var-tab-bar-border-top
   retina-tabbar-border(var-tab-bar-border-color, bottom)
 
 .tab-bar--top__content
-  top var-height--tab-bar
+  top var-tab-bar-height
   left 0
   right 0
   bottom 0
@@ -336,5 +335,5 @@ retina-tabbar-border(color = var-tab-bar-border-color, border-position = top)
 
 :checked + .tab-bar--top-border__button
   background-color transparent
-  border-bottom 4px solid var-color--tab-bar--active
+  border-bottom 4px solid var-tab-bar-active-color
 
