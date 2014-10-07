@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
-    <link rel="stylesheet" href="../onsen-css-components-default.css">
+    <link rel="stylesheet" href="../onsen-css-components-blue-basic-theme.css">
     <link rel="stylesheet" href="details.css">
 
     <script src="lib/onsen/js/angular/angular.js"></script>
@@ -26,7 +26,7 @@
     </ons-tabbar>
 
     <ons-template id="page.html">
-      <ons-page>
+      <ons-page modifier="shop-details">
         <ons-toolbar modifier="transparent">
           <div class="right">
             <ons-toolbar-button><ons-icon icon="ion-ios7-chatboxes" style="color: white"></ons-icon></ons-toolbar-button>
@@ -36,81 +36,77 @@
           </div>
         </ons-toolbar>
 
-        <div class="details-content">
+        <div class="card">
 
-          <div class="card">
-
-            <div class="card-name">Onsen Sushi</div>
-            <div class="card-desc">Traditional Japanese Sushi<br>Open until 10:30pm</div>
-            
-          </div>
-
-          <div class="rating"><div class="rating-num">
-              <ons-icon icon="fa-star" fixed-width="false"></ons-icon> 
-              <ons-icon icon="fa-star" fixed-width="false"></ons-icon> 
-              <ons-icon icon="fa-star" fixed-width="false"></ons-icon> 
-              <ons-icon icon="fa-star" fixed-width="false"></ons-icon> 
-              <ons-icon icon="fa-star-half" fixed-width="false"></ons-icon> 
-              4.5
-          </div></div>
-
-          <ons-list style="border-top: none"><ons-list-item style="line-height: 1; padding: 0;">
-            <ons-row class="action">
-
-              <ons-col class="action-col"> 
-                <div class="action-icon"><ons-icon icon="ion-ios7-star-half"></ons-icon></div>
-                <div class="action-label">Rate</div>
-              </ons-col>
-
-              <ons-col class="action-col">
-                <div class="action-icon"><ons-icon icon="ion-bookmark"></ons-icon></div>
-                <div class="action-label">Favorite</div>
-              </ons-col>
-
-              <ons-col class="action-col">
-                <div class="action-icon"><ons-icon icon="ion-share"></ons-icon></div>
-                <div class="action-label">Share</div>
-              </ons-col>
-
-              <ons-col class="action-col">
-                <div class="action-icon"><ons-icon icon="ion-compose"></ons-icon></div>
-                <div class="action-label">Check In</div>
-              </ons-col>
-
-            </ons-row>
-          </ons-list-item></ons-list>
-
-          <ons-list style="margin-top: 12px;">
-            <ons-list-item modifier="chevron">
-              <div class="prop-desc">
-                <ons-icon icon="fa-map-marker"></ons-icon>
-                2-15-13 Hongo Bunkyo Tokyo
-              </div>
-            </ons-list-item>
-
-            <ons-list-item modifier="chevron">
-              <div class="prop-desc">
-                <ons-icon icon="fa-mobile"></ons-icon>
-                (111) 123-4567
-              </div>
-            </ons-list-item>
-
-            <ons-list-item modifier="chevron">
-              <div class="prop-desc">
-                <ons-icon icon="fa-book"></ons-icon>
-                Store Photos and Menus
-              </div>
-            </ons-list-item>
-
-            <ons-list-item modifier="chevron">
-              <div class="prop-desc">
-                <ons-icon icon="fa-clock-o"></ons-icon>
-                Make a Reservation
-              </div>
-            </ons-list-item>
-          </ons-list>
+          <div class="card-name">Onsen Sushi</div>
+          <div class="card-desc">Traditional Japanese Sushi<br>Open until 10:30pm</div>
 
         </div>
+
+        <div class="rating"><div class="rating-num">
+            <ons-icon icon="fa-star" fixed-width="false"></ons-icon>
+            <ons-icon icon="fa-star" fixed-width="false"></ons-icon>
+            <ons-icon icon="fa-star" fixed-width="false"></ons-icon>
+            <ons-icon icon="fa-star" fixed-width="false"></ons-icon>
+            <ons-icon icon="fa-star-half" fixed-width="false"></ons-icon>
+            4.5
+        </div></div>
+
+        <ons-list style="border-top: none"><ons-list-item style="line-height: 1; padding: 0;">
+          <ons-row class="action">
+
+            <ons-col class="action-col">
+              <div class="action-icon"><ons-icon icon="ion-ios7-star-half"></ons-icon></div>
+              <div class="action-label">Rate</div>
+            </ons-col>
+
+            <ons-col class="action-col">
+              <div class="action-icon"><ons-icon icon="ion-bookmark"></ons-icon></div>
+              <div class="action-label">Favorite</div>
+            </ons-col>
+
+            <ons-col class="action-col">
+              <div class="action-icon"><ons-icon icon="ion-share"></ons-icon></div>
+              <div class="action-label">Share</div>
+            </ons-col>
+
+            <ons-col class="action-col">
+              <div class="action-icon"><ons-icon icon="ion-compose"></ons-icon></div>
+              <div class="action-label">Check In</div>
+            </ons-col>
+
+          </ons-row>
+        </ons-list-item></ons-list>
+
+        <ons-list style="margin-top: 12px;">
+          <ons-list-item modifier="chevron">
+            <div class="prop-desc">
+              <ons-icon icon="fa-map-marker"></ons-icon>
+              2-15-13 Hongo Bunkyo Tokyo
+            </div>
+          </ons-list-item>
+
+          <ons-list-item modifier="chevron">
+            <div class="prop-desc">
+              <ons-icon icon="fa-mobile"></ons-icon>
+              (111) 123-4567
+            </div>
+          </ons-list-item>
+
+          <ons-list-item modifier="chevron">
+            <div class="prop-desc">
+              <ons-icon icon="fa-book"></ons-icon>
+              Store Photos and Menus
+            </div>
+          </ons-list-item>
+
+          <ons-list-item modifier="chevron">
+            <div class="prop-desc">
+              <ons-icon icon="fa-clock-o"></ons-icon>
+              Make a Reservation
+            </div>
+          </ons-list-item>
+        </ons-list>
 
       </ons-page>
     </ons-template>
