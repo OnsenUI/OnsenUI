@@ -18,8 +18,8 @@
  *    [en]Flip the icon. Valid values are horizontal and vertical.[/en]
  *    [ja]アイコンを反転します。horizontalもしくはverticalを指定できます。[/ja]
  * @param fixed-width
- *    [en]When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are true, false. Default is true.[/en]
- *    [ja]等幅にするかどうかを指定します。trueもしくはfalseを指定できます。デフォルトはtrueです。[/ja]
+ *    [en]When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are true, false. Default is false.[/en]
+ *    [ja]等幅にするかどうかを指定します。trueもしくはfalseを指定できます。デフォルトはfalseです。[/ja]
  * @param spin
  *    [en]Whether to spin the icon. Valid values are true and false.[/en]
  *    [ja]アイコンを回転するかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
@@ -67,26 +67,6 @@
       classList.push('fa-lg');
     }
     
-    // rotate
-    if (attrs.rotate === '90' || attrs.rotate === '180' || attrs.rotate === '270') {
-      classList.push('ons-icon--rotate-' + attrs.rotate);
-    }
-
-    // flip
-    if (attrs.flip === 'horizontal' || attrs.flip === 'vertical') {
-      classList.push('ons-icon--flip-' + attrs.flip);
-    }
-
-    // fixed-width
-    if (attrs.fixedWidth !== 'false') {
-      classList.push('ons-icon--fw');
-    }
-
-    // spin
-    if (attrs.spin === 'true') {
-      classList.push('ons-icon--spin');
-    }
-
     return {
       'class': classList.join(' '),
       'style': style
