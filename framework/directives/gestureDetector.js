@@ -63,6 +63,8 @@
               scope[attr]({$event: event});
             }
           }
+       
+          $onsen.fireComponentEvent(element[0], "init");
         };
       }
     };

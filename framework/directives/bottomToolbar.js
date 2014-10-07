@@ -44,6 +44,9 @@
             if (pageView) {
               pageView.registerBottomToolbar(element);
             }
+          },
+          post: function(scope, element, attrs) {
+            $onsen.fireComponentEvent(element[0], "init");
           }
         };
       }

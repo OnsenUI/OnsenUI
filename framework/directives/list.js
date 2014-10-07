@@ -37,6 +37,10 @@
 
         element.addClass('list ons-list-inner');
         element.addClass(templater('list--*'));
+      
+        return function(scope, element, attrs) {
+          $onsen.fireComponentEvent(element[0], "init"); 
+        };
       }
     };
   });

@@ -86,7 +86,6 @@
         element.addClass('tab-bar__item');
 
         return function(scope, element, attrs, controller, transclude) {
-
           var tabbarView = element.inheritedData('ons-tabbar');
           if (!tabbarView) {
             throw new Error('This ons-tab element is must be child of ons-tabbar element.');
@@ -153,6 +152,8 @@
           if (scope.active) {
             tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
           }
+        
+          $onsen.fireComponentEvent(element[0], "init");
         };
       }
     };

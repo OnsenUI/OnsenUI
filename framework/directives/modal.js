@@ -69,8 +69,8 @@
             });
           },
 
-          post: function() {
-
+          post: function(scope, element) {
+            $onsen.fireComponentEvent(element[0], "init");
           }
         };
       }
