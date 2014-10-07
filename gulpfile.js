@@ -161,20 +161,17 @@ gulp.task('prepare', ['html2js'], function() {
       .pipe(gulp.dest('app/lib/onsen/js')),
 
 
-    // onsen-css-components.css
+    // onsen-css-components
     gulp.src([
-      'css-components/components-src/dist/onsen-css-components-default.css',
+      'css-components/components-src/dist/*.css',
     ])
-      .pipe($.rename({basename: 'onsen-css-components'}))
       .pipe(gulp.dest('build/css/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/css')))
       .pipe(gulp.dest('app/lib/onsen/css')),
 
     // stylus files
     gulp.src([
-      'css-components/components-src/stylus/**/*',
-      '!css-components/components-src/stylus/custom.styl',
-      '!css-components/components-src/stylus/custom-*.styl',
+      'css-components/components-src/stylus/**/*'
     ])
       .pipe(gulp.dest('app/lib/onsen/stylus'))
       .pipe(gulp.dest('build/stylus/')),
@@ -233,7 +230,7 @@ gulp.task('prepare-project-templates', function(done) {
     'split_view'
   ];
 
-  gulp.src('build/css/onsen-css-components.css')
+  gulp.src('build/css/*.css')
     .pipe(gulp.dest('project_templates/base/www/styles/'))
     .on('end', function() {
 
@@ -315,7 +312,7 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
 
   var watched = [
     'framework/*/*',
-    'css-components/components-src/dist/onsen-css-components-default.css'
+    'css-components/components-src/dist/*.css'
   ];
 
   if (CORDOVA_APP) {

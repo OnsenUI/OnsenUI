@@ -19,29 +19,13 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
-var-buttonbar-color := #1284ff
-var-color--button-bar__button--active := white
-
+var-button-bar-color = $buttonbar-color
+var-button-bar-active-color = $buttonbar-active-text-color
 var-button-bar-margin = 0
-var-border-right--button-bar = none
-var-border-right--button-bar__button--z-index = 1
-var-border-top--button-bar__button = 1px solid var-buttonbar-color
-var-border-bottom--button-bar__button = 1px solid var-buttonbar-color
-var-border--button-bar = 0px solid var-buttonbar-color
-var-border--button-bar__button = 0px solid var-buttonbar-color
-var-border--button-bar__button--active = 0px solid var-buttonbar-color
-var-border-right--button-bar__button = 1px solid var-buttonbar-color
-var-border-right--button-bar__button--active = 1px solid var-buttonbar-color
-var-border-right--button-bar__button--focus = 1px solid var-buttonbar-color
-var-border-left--button-bar__button__first = 1px solid var-buttonbar-color
-var-border-right--button-bar__button__first = 1px solid var-buttonbar-color
-var-border-right--button-bar__button__last = 1px solid var-buttonbar-color
-var-background-color--button-bar = transparent
-var-background-color--button-bar--button--active = mylighten(var-buttonbar-color)
-var-background-color--button-bar--button--hover = white
-var-background-color--button-bar--button--on-state = var-buttonbar-color
-var-color--button-bar--button = var-buttonbar-color
-var-color--button-bar__button--hover = var-buttonbar-color
+var-button-bar-border-top = 1px solid var-button-bar-color
+var-button-bar-border-bottom = 1px solid var-button-bar-color
+var-button-bar-border = 0px solid var-button-bar-color
+var-button-bar-active-background-color = mylighten(var-button-bar-color)
 
 /*! topdoc
   name: Button Bar
@@ -94,25 +78,25 @@ button-bar__item()
   hide-input()
 
 .button-bar__item:first-child > .button-bar__button
-  border-left var-border-left--button-bar__button__first
-  border-right var-border-right--button-bar__button__first
+  border-left 1px solid var-button-bar-color
+  border-right 1px solid var-button-bar-color
   border-top-left-radius var-border-radius
   border-bottom-left-radius var-border-radius
 
 .button-bar__item:last-child > .button-bar__button
-  border-right var-border-right--button-bar__button__last
+  border-right 1px solid var-button-bar-color
   border-top-right-radius var-border-radius
   border-bottom-right-radius var-border-radius
 
 .button-bar__button
   reset-font()
   border-radius inherit
-  background-color var-background-color--button-bar
-  color var-color--button-bar--button
-  border var-border--button-bar__button
-  border-top var-border-top--button-bar__button
-  border-bottom var-border-bottom--button-bar__button
-  border-right var-border-right--button-bar__button
+  background-color transparent
+  color var-button-bar-color
+  border var-button-bar-border
+  border-top var-button-bar-border-top
+  border-bottom var-button-bar-border-bottom
+  border-right 1px solid var-button-bar-color
   font-weight var-font-weight
   padding 0 8px
   height 27px
@@ -124,11 +108,11 @@ button-bar__item()
 
 .button-bar__button:active,
 :active + .button-bar__button
-  background-color var-background-color--button-bar--button--active
-  border var-border--button-bar__button
-  border-top var-border-top--button-bar__button
-  border-bottom var-border-bottom--button-bar__button
-  border-right var-border-right--button-bar__button
+  background-color var-button-bar-active-background-color
+  border var-button-bar-border
+  border-top var-button-bar-border-top
+  border-bottom var-button-bar-border-bottom
+  border-right 1px solid var-button-bar-color
   height 27px
   line-height 27px
   font-size 13px
@@ -137,8 +121,8 @@ button-bar__item()
 
 .button-bar__item.active > .button-bar__button,
 :checked + .button-bar__button
-  background-color var-background-color--button-bar--button--on-state
-  color var-color--button-bar__button--active
+  background-color var-button-bar-color
+  color var-button-bar-active-color
   transition none
 
 .button-bar__button:disabled

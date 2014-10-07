@@ -19,12 +19,10 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
-var-font-size--textarea = var-font-size
-var-color--textarea = var-input-text-color
-var-border--textarea = 1px solid var-input-border-color
-var-border-color--textarea = var-input-border-color
-var-padding--textarea = 5px 5px 5px 5px
-var-box-shadow--textarea = none
+var-textarea-color = var-input-text-color
+var-textarea-border = 1px solid var-input-border-color
+var-textarea-padding = 5px 5px 5px 5px
+var-textarea-box-shadow = none
 
 /*! topdoc
   name: Textarea
@@ -43,15 +41,15 @@ var-box-shadow--textarea = none
   vertical-align top
   resize none
   outline none
-  padding var-padding--textarea
+  padding var-textarea-padding
   font-size var-font-size--text-input
   font-weight var-font-weight
   border-radius var-border-radius
-  border var-border--textarea
+  border var-textarea-border
   background-color var-input-bg-color
-  color var-color--textarea
+  color var-textarea-color
   letter-spacing var-letter-spacing
-  box-shadow var-box-shadow--textarea
+  box-shadow var-textarea-box-shadow
   -webkit-appearance none
 
 .textarea:disabled
@@ -79,7 +77,7 @@ var-box-shadow--textarea = none
   vertical-align top
   resize none
   outline none
-  padding var-padding--textarea
+  padding var-textarea-padding
   padding-left 0
   padding-right 0
   font-size var-font-size--text-input
@@ -87,9 +85,9 @@ var-box-shadow--textarea = none
   border-radius var-border-radius
   border none
   background-color transparent
-  color var-color--textarea
+  color var-textarea-color
   letter-spacing var-letter-spacing
-  box-shadow var-box-shadow--textarea
+  box-shadow var-textarea-box-shadow
   -webkit-appearance none
 
 .textarea--transparent:disabled
