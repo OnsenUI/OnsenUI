@@ -469,6 +469,7 @@ h6 {
   name: Navigation Bar Item
   use: Toolbar Button, Navigation Bar
   markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="navigation-bar">
       <div class="navigation-bar__left">
         <span class="toolbar-button--quiet navigation-bar__line-height">
@@ -489,6 +490,7 @@ h6 {
   name: Navigation Bar with Outline Button
   use: Toolbar Button, Navigation Bar
   markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="navigation-bar">
       <div class="navigation-bar__left">
         <span class="toolbar-button--outline navigation-bar__line-height">
@@ -510,6 +512,7 @@ h6 {
   class: navigation-bar--transparent
   use: Toolbar Button, Navigation Bar
   markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="navigation-bar navigation-bar--transparent">
       <div class="navigation-bar__left">
         <span class="toolbar-button--quiet navigation-bar__line-height">
@@ -1360,6 +1363,7 @@ h6 {
   modifiers:
     :disabled: Disabled state
   markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="tab-bar">
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-a" checked="checked">
@@ -1597,6 +1601,7 @@ h6 {
   modifiers:
     :disabled: Disabled state
   markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="tab-bar">
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-b" checked="checked">
@@ -1639,6 +1644,7 @@ h6 {
   class: tab-bar--top
   use: Tab Bar
   markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="tab-bar tab-bar--top">
       <label class="tab-bar__item">
         <input type="radio" name="top-tab-bar-a" checked="checked">
@@ -1786,6 +1792,7 @@ h6 {
     :disabled: Disabled state
     :focus: Focused
   markup:
+    <!-- Prerequisite=This example use font-awesome(http://fortawesome.github.io/Font-Awesome/) to display icons. -->
     <button class="toolbar-button">
       <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>

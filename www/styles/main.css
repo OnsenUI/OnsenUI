@@ -365,6 +365,33 @@ div#content-container > header > div:nth-child(2) {
   padding-right: 16px;
   width: 600px;
 }
+div#header-monaca {
+  background-color: #3a3a3a;
+  height: 48px;
+}
+div#header-monaca:hover {
+  opacity: 0.8;
+}
+div#header-monaca #header-monaca-inner {
+  margin: 0px 0px 0px 44px;
+}
+div#header-monaca img {
+  margin-top: 9px;
+  float: left;
+}
+div#header-monaca img:hover {
+  opacity: 1.0;
+}
+div#header-monaca a {
+  text-decoration: none !important;
+}
+div#header-monaca span {
+  color: #cbcbcb;
+  display: block;
+  font-size: 13px;
+  margin: 19px 0px 0px 15px;
+  float: left;
+}
 div#customizer-panel {
   position: absolute;
   top: 84px;
@@ -1503,34 +1530,4 @@ div.popup div.highlight-content button.site-button {
   font-size: 20px;
   line-height: 40px;
   box-sizing: border-box;
-}
-
-div#header-monaca {
-  background-color: #3a3a3a;
-  height: 48px;
-}
-
-div#header-monaca:hover {
-  opacity: 0.8;
-}
-
-div#header-monaca-inner {
-  margin: 0px 0px 0px 44px;
-}
-  
-div#header-monaca-inner img {
-  margin-top: 9px;
-  float: left;
-}
-
-div#header-monaca a {
-  text-decoration: none !important;
-}
-
-div#header-monaca-inner span {
-  color: #cbcbcb;
-  display: block;
-  font-size: 13px;
-  margin: 19px 0px 0px 15px;
-  float: left;
 }
