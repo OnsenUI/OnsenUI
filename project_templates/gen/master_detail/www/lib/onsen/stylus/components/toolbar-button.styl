@@ -17,17 +17,13 @@
 */
 
 // internal variables
-var-color--toolbar-button := #1284ff
-var-background-color--toolbar-button := rgba(0, 0, 0, 0)
-var-toolbar-button-border-color := #1284ff
-
+var-toolbar-button-color = $toolbar-button-color
+var-toolbar-button-background-color = rgba(0, 0, 0, 0)
+var-toolbar-button-border-color = $toolbar-button-color
 var-toolbar-button-border-radius = 2px
-var-padding--toolbar-button = 4px 10px
-var-toolbar-top = 0
-var-toolbar-top--large = 0px
-var-background-color--toolbar-button--active = var-background-color--toolbar-button
-var-border--toolbar-button = 1px solid var-toolbar-button-border-color
-var-color--toolbar-button--quiet = var-color--toolbar-button
+var-toolbar-button-padding = 4px 10px
+var-toolbar-button-active-background-color = var-toolbar-button-background-color
+var-toolbar-button-border = 1px solid var-toolbar-button-border-color
 
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
@@ -50,12 +46,12 @@ var-color--toolbar-button--quiet = var-color--toolbar-button
 
 .toolbar-button
   reset-font()
-  padding var-padding--toolbar-button
+  padding var-toolbar-button-padding
   letter-spacing var-letter-spacing
-  color var-color--toolbar-button
+  color var-toolbar-button-color
   text-shadow var-text-shadow
   vertical-align baseline
-  background-color var-background-color--toolbar-button
+  background-color var-toolbar-button-background-color
   border-radius var-toolbar-button-border-radius
   border 1px solid transparent
   font-weight var-font-weight
@@ -64,7 +60,7 @@ var-color--toolbar-button--quiet = var-color--toolbar-button
   vertical-align middle
 
 .toolbar-button:active
-  background-color var-background-color--toolbar-button--active
+  background-color var-toolbar-button-active-background-color
   transition none
   opacity 0.2
 
@@ -80,7 +76,7 @@ var-color--toolbar-button--quiet = var-color--toolbar-button
 
 .toolbar-button--outline
   @extend .toolbar-button
-  border var-border--toolbar-button
+  border var-toolbar-button-border
   margin auto 8px
   padding-left 6px
   padding-right 6px

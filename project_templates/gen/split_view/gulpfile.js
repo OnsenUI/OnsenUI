@@ -17,13 +17,13 @@ gulp.task('default', $.taskListing.withFilters(null, 'default'));
 // compile-stylus
 ////////////////////
 gulp.task('compile-stylus', function() {
-  return gulp.src([__dirname + '/www/lib/onsen/stylus/default.styl'])
+  return gulp.src([__dirname + '/www/lib/onsen/stylus/*-theme.styl'])
     .pipe(plumber())
     .pipe($.stylus({errors: true, define: {mylighten: mylighten}}))
     .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2'))
     .pipe($.rename(function(path) {
       path.dirname = '.';
-      path.basename = 'onsen-css-components';
+      path.basename = 'onsen-css-components-' + path.basename;
       path.ext = 'css';
     }))
     .pipe(gulp.dest(__dirname + '/www/styles/'));

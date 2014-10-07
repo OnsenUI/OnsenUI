@@ -49,7 +49,7 @@ h6 {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 17px;
-  background-color: #fff;
+  background-color: $background-color;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -57,13 +57,13 @@ h6 {
   bottom: 0px;
   overflow: visible;
   font-size: 17px;
-  color: #1f1f21;
+  color: $text-color;
 }
 .page::-webkit-scrollbar {
   display: none;
 }
 .page__content {
-  background-color: #fff;
+  background-color: $background-color;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -73,6 +73,17 @@ h6 {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   margin-top: -1px;
+}
+.page__background {
+  background-color: $background-color;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 .content-padded {
   padding: 8px;
@@ -146,7 +157,7 @@ h6 {
   transition: all 0.2s linear;
 }
 .switch__toggle {
-  background-color: #ddd;
+  background-color: $border-color;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -196,7 +207,7 @@ h6 {
   transition-timing-function: cubic-bezier(0.5, 1.6, 0.5, 1);
 }
 .switch__input:checked + .switch__toggle {
-  background-color: #4cd964;
+  background-color: $switch-highlight-color;
 }
 .switch__input:checked + .switch__toggle:before {
   -webkit-transform: translateX(18px);
@@ -275,11 +286,11 @@ h6 {
   border-radius: 0;
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#ccc));
-  background-image: -webkit-linear-gradient(#ccc, #ccc);
-  background-image: -moz-linear-gradient(#ccc, #ccc);
-  background-image: -o-linear-gradient(#ccc, #ccc);
-  background-image: linear-gradient(#ccc, #ccc);
+  background-image: -webkit-gradient(linear, left top, left bottom, from($border-color), to($border-color));
+  background-image: -webkit-linear-gradient($border-color, $border-color);
+  background-image: -moz-linear-gradient($border-color, $border-color);
+  background-image: -o-linear-gradient($border-color, $border-color);
+  background-image: linear-gradient($border-color, $border-color);
   background-position: left center;
   -webkit-background-size: 100% 2px;
   background-size: 100% 2px;
@@ -290,7 +301,7 @@ h6 {
 .range::-moz-range-track {
   position: relative;
   border: none;
-  background-color: #ccc;
+  background-color: $border-color;
   height: 2px;
   border-radius: 30px;
   box-shadow: none;
@@ -305,7 +316,7 @@ h6 {
   height: 29px;
   width: 29px;
   background-color: #fff;
-  border: 1px solid #ddd;
+  border: 1px solid $border-color;
   -webkit-border-radius: 30px;
   border-radius: 30px;
   -webkit-box-shadow: none;
@@ -320,7 +331,7 @@ h6 {
   height: 29px;
   width: 29px;
   background-color: #fff;
-  border: 1px solid #ddd;
+  border: 1px solid $border-color;
   border-radius: 30px;
   box-shadow: none;
   margin: 0;
@@ -333,7 +344,7 @@ h6 {
   left: -1024px;
   width: 1024px;
   height: 2px;
-  background-color: #1284ff;
+  background-color: $highlight-color;
   content: '';
   margin: 0;
   padding: 0;
@@ -348,9 +359,7 @@ h6 {
   class: navigation-bar
   markup:
     <div class="navigation-bar">
-      <div class="navigation-bar__center">
-        <h1 class="navigation-bar__title">Navigation Bar</h1>
-      </div>
+      <div class="navigation-bar__center">Navigation Bar</div>
     </div>
 */
 .navigation-bar {
@@ -384,11 +393,11 @@ h6 {
   height: 44px;
   padding-left: 0;
   padding-right: 0;
-  background: #f8f8f8;
-  color: #1f1f21;
+  background: $toolbar-background-color;
+  color: $toolbar-text-color;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $toolbar-border-color;
   font-weight: 400;
   width: 100%;
   white-space: nowrap;
@@ -401,10 +410,10 @@ h6 {
     background-size: 100% 1px;
     background-repeat: no-repeat;
     background-position: bottom;
-    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -webkit-linear-gradient(90deg, $toolbar-border-color, $toolbar-border-color 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, $toolbar-border-color, $toolbar-border-color 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, $toolbar-border-color, $toolbar-border-color 50%, transparent 50%);
+    background-image: linear-gradient(0deg, $toolbar-border-color, $toolbar-border-color 50%, transparent 50%);
   }
 }
 .navigation-bar__line-height {
@@ -413,7 +422,7 @@ h6 {
   padding-top: 0;
 }
 .navigation-bar__bg {
-  background: #f8f8f8;
+  background: $toolbar-background-color;
 }
 .navigation-bar__item,
 .navigation-bar__left,
@@ -459,13 +468,10 @@ h6 {
   line-height: 44px;
   font-size: 17px;
   font-weight: 500;
-  color: #1f1f21;
-  width: 46%;
+  color: $toolbar-text-color;
   margin: 0;
   padding: 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+  overflow: visible;
 }
 .navigation-bar__center:first-child:last-child {
   width: 100%;
@@ -522,7 +528,7 @@ h6 {
         </span>
       </div>
       <div class="navigation-bar__center">
-        <h1 class="navigation-bar__title">Navigation Bar</h1>
+        Navigation Bar
       </div>
       <div class="navigation-bar__right">
         <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
@@ -574,13 +580,13 @@ h6 {
   height: 44px;
   padding-left: 0;
   padding-right: 0;
-  background: #f8f8f8;
-  color: #1f1f21;
+  background: $toolbar-background-color;
+  color: $toolbar-text-color;
   -webkit-box-shadow: none;
   box-shadow: none;
   font-weight: 400;
   border-bottom: none;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid $toolbar-border-color;
   position: absolute;
   bottom: 0px;
   right: 0px;
@@ -593,10 +599,10 @@ h6 {
     background-size: 100% 1px;
     background-repeat: no-repeat;
     background-position: top;
-    background-image: -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -webkit-linear-gradient(270deg, $toolbar-border-color, $toolbar-border-color 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, $toolbar-border-color, $toolbar-border-color 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, $toolbar-border-color, $toolbar-border-color 50%, transparent 50%);
+    background-image: linear-gradient(180deg, $toolbar-border-color, $toolbar-border-color 50%, transparent 50%);
   }
 }
 .bottom-bar__line-height {
@@ -680,7 +686,7 @@ h6 {
   color: #fff;
   text-shadow: 0 1px none;
   vertical-align: middle;
-  background-color: #1284ff;
+  background-color: $highlight-color;
   -webkit-box-shadow: none;
   box-shadow: none;
   border: 0px solid currentColor;
@@ -698,7 +704,7 @@ h6 {
   transition: none;
 }
 .button:active {
-  background-color: #1284ff;
+  background-color: $highlight-color;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #fff;
@@ -729,17 +735,17 @@ h6 {
 */
 .button--outline {
   background-color: transparent;
-  border: 1px solid #1284ff;
-  color: #1284ff;
+  border: 1px solid $highlight-color;
+  color: $highlight-color;
 }
 .button--outline:active {
-  background-color: rgba(18,132,255,0.2);
-  border: 1px solid #1284ff;
-  color: #1284ff;
+  background-color: $highlight-color--lighten;
+  border: 1px solid $highlight-color;
+  color: $highlight-color;
   opacity: 1;
 }
 .button--outline:hover {
-  border: 1px solid #1284ff;
+  border: 1px solid $highlight-color;
   -webkit-transition: 0;
   -moz-transition: 0;
   -o-transition: 0;
@@ -809,7 +815,7 @@ h6 {
   color: #fff;
   text-shadow: 0 1px none;
   vertical-align: middle;
-  background-color: #1284ff;
+  background-color: $highlight-color;
   -webkit-box-shadow: none;
   box-shadow: none;
   border: 0px solid currentColor;
@@ -824,7 +830,7 @@ h6 {
   -webkit-box-shadow: none;
   box-shadow: none;
   background: transparent;
-  color: #1284ff;
+  color: $highlight-color;
   border: none;
 }
 .button--quiet:disabled,
@@ -856,7 +862,7 @@ h6 {
   -o-transition: none;
   transition: none;
   opacity: 0.2;
-  color: #1284ff;
+  color: $highlight-color;
 }
 /* topdoc
   name: Call To Action Button
@@ -903,7 +909,7 @@ h6 {
   color: #fff;
   text-shadow: 0 1px none;
   vertical-align: middle;
-  background-color: #1284ff;
+  background-color: $highlight-color;
   -webkit-box-shadow: none;
   box-shadow: none;
   border: 0px solid currentColor;
@@ -914,7 +920,7 @@ h6 {
   -o-transition: none;
   transition: none;
   border: none;
-  background-color: #4cda64;
+  background-color: $second-highlight-color;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #fff;
@@ -933,7 +939,7 @@ h6 {
 }
 .button--cta:active {
   color: #fff;
-  background-color: #4cda64;
+  background-color: $second-highlight-color;
   -webkit-box-shadow: none;
   box-shadow: none;
   -webkit-transition: none;
@@ -965,7 +971,7 @@ h6 {
   text-align: center;
 }
 .button--large:active {
-  background-color: #1284ff;
+  background-color: $highlight-color;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #fff;
@@ -1040,7 +1046,7 @@ h6 {
   color: #fff;
   text-shadow: 0 1px none;
   vertical-align: middle;
-  background-color: #1284ff;
+  background-color: $highlight-color;
   -webkit-box-shadow: none;
   box-shadow: none;
   border: 0px solid currentColor;
@@ -1060,7 +1066,7 @@ h6 {
   border: 1px solid transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #1284ff;
+  color: $highlight-color;
   text-align: center;
 }
 .button--large--quiet:active {
@@ -1069,7 +1075,7 @@ h6 {
   -o-transition: none;
   transition: none;
   opacity: 0.2;
-  color: #1284ff;
+  color: $highlight-color;
   background: transparent;
   border: 1px solid transparent;
   -webkit-box-shadow: none;
@@ -1134,7 +1140,7 @@ h6 {
   color: #fff;
   text-shadow: 0 1px none;
   vertical-align: middle;
-  background-color: #1284ff;
+  background-color: $highlight-color;
   -webkit-box-shadow: none;
   box-shadow: none;
   border: 0px solid currentColor;
@@ -1145,7 +1151,7 @@ h6 {
   -o-transition: none;
   transition: none;
   border: none;
-  background-color: #4cda64;
+  background-color: $second-highlight-color;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #fff;
@@ -1171,7 +1177,7 @@ h6 {
 }
 .button--large--cta:active {
   color: #fff;
-  background-color: #4cda64;
+  background-color: $second-highlight-color;
   -webkit-box-shadow: none;
   box-shadow: none;
   -webkit-transition: none;
@@ -1256,15 +1262,15 @@ h6 {
   appearance: none;
 }
 .button-bar__item:first-child > .button-bar__button {
-  border-left: 1px solid #1284ff;
-  border-right: 1px solid #1284ff;
+  border-left: 1px solid $buttonbar-color;
+  border-right: 1px solid $buttonbar-color;
   -webkit-border-top-left-radius: 4px;
   border-top-left-radius: 4px;
   -webkit-border-bottom-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
 .button-bar__item:last-child > .button-bar__button {
-  border-right: 1px solid #1284ff;
+  border-right: 1px solid $buttonbar-color;
   -webkit-border-top-right-radius: 4px;
   border-top-right-radius: 4px;
   -webkit-border-bottom-right-radius: 4px;
@@ -1279,11 +1285,11 @@ h6 {
   -webkit-border-radius: inherit;
   border-radius: inherit;
   background-color: transparent;
-  color: #1284ff;
-  border: 0px solid #1284ff;
-  border-top: 1px solid #1284ff;
-  border-bottom: 1px solid #1284ff;
-  border-right: 1px solid #1284ff;
+  color: $buttonbar-color;
+  border: 0px solid $buttonbar-color;
+  border-top: 1px solid $buttonbar-color;
+  border-bottom: 1px solid $buttonbar-color;
+  border-right: 1px solid $buttonbar-color;
   font-weight: 400;
   padding: 0 8px;
   height: 27px;
@@ -1300,11 +1306,11 @@ h6 {
 }
 .button-bar__button:active,
 :active + .button-bar__button {
-  background-color: rgba(18,132,255,0.2);
-  border: 0px solid #1284ff;
-  border-top: 1px solid #1284ff;
-  border-bottom: 1px solid #1284ff;
-  border-right: 1px solid #1284ff;
+  background-color: $buttonbar-color--lighten;
+  border: 0px solid $buttonbar-color;
+  border-top: 1px solid $buttonbar-color;
+  border-bottom: 1px solid $buttonbar-color;
+  border-right: 1px solid $buttonbar-color;
   height: 27px;
   line-height: 27px;
   font-size: 13px;
@@ -1316,8 +1322,8 @@ h6 {
 }
 .button-bar__item.active > .button-bar__button,
 :checked + .button-bar__button {
-  background-color: #1284ff;
-  color: #fff;
+  background-color: $buttonbar-color;
+  color: $buttonbar-active-text-color;
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
@@ -1436,8 +1442,8 @@ h6 {
   margin: 0;
   padding: 0;
   height: 49px;
-  background-color: #f8f8f8;
-  border-top: 1px solid #ddd;
+  background-color: $tabbar-background-color;
+  border-top: 1px solid $tabbar-border-color;
   width: 100%;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
@@ -1447,10 +1453,10 @@ h6 {
     background-size: 100% 1px;
     background-repeat: no-repeat;
     background-position: top;
-    background-image: -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -webkit-linear-gradient(270deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
+    background-image: linear-gradient(180deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
   }
 }
 .tab-bar__item {
@@ -1518,7 +1524,7 @@ h6 {
   padding: 0;
   height: 49px;
   letter-spacing: 0;
-  color: #888;
+  color: $tabbar-text-color;
   text-shadow: 0 1px none;
   vertical-align: top;
   background-color: transparent;
@@ -1562,17 +1568,17 @@ h6 {
   padding: 0;
 }
 .tab-bar__button {
-  color: #888;
+  color: $tabbar-text-color;
 }
 :checked + .tab-bar__button {
-  color: #1284ff;
+  color: $tabbar-highlight-text-color;
   background-color: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
   border-top: none;
 }
 :checked + .tab-bar__button > .tab-bar__icon {
-  color: #1284ff;
+  color: $tabbar-highlight-text-color;
 }
 .tab-bar__button:disabled {
   opacity: 0.3;
@@ -1674,7 +1680,7 @@ h6 {
   right: 0px;
   bottom: auto;
   border-top: none;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $tabbar-border-color;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .tab-bar--top {
@@ -1683,10 +1689,10 @@ h6 {
     background-size: 100% 1px;
     background-repeat: no-repeat;
     background-position: bottom;
-    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -webkit-linear-gradient(90deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
+    background-image: linear-gradient(0deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
   }
 }
 .tab-bar--top__content {
@@ -1730,7 +1736,7 @@ h6 {
 }
 :checked + .tab-bar--top-border__button {
   background-color: transparent;
-  border-bottom: 4px solid #1284ff;
+  border-bottom: 4px solid $tabbar-highlight-text-color;
 }
 /* topdoc
   name: Notification
@@ -1775,7 +1781,7 @@ h6 {
   height: 19px;
   -webkit-border-radius: 19px;
   border-radius: 19px;
-  background-color: #dc5236;
+  background-color: $notification-background-color;
   color: #fff;
   text-align: center;
   font-size: 16px;
@@ -1809,7 +1815,7 @@ h6 {
   font-size: 17px;
   padding: 4px 10px;
   letter-spacing: 0;
-  color: #1284ff;
+  color: $toolbar-button-color;
   text-shadow: 0 1px none;
   vertical-align: baseline;
   background-color: rgba(0,0,0,0);
@@ -1857,7 +1863,7 @@ h6 {
   transition: none;
 }
 .toolbar-button--outline {
-  border: 1px solid #1284ff;
+  border: 1px solid $toolbar-button-color;
   margin: auto 8px;
   padding-left: 6px;
   padding-right: 6px;
@@ -1949,11 +1955,11 @@ h6 {
   width: 0;
 }
 .checkbox > input[type="checkbox"]:checked {
-  background: #1284ff;
+  background: $highlight-color;
 }
 .checkbox > input[type="checkbox"]:checked + .checkbox__checkmark:before {
-  background: #1284ff;
-  border: 1px solid #1284ff;
+  background: $highlight-color;
+  border: 1px solid $highlight-color;
 }
 .checkbox > input[type="checkbox"]:checked + .checkbox__checkmark:after {
   opacity: 1;
@@ -1969,7 +1975,7 @@ h6 {
   width: 24px;
   height: 24px;
   background: transparent;
-  border: 1px solid #1284ff;
+  border: 1px solid $highlight-color;
   -webkit-border-radius: 16px;
   border-radius: 16px;
   -webkit-box-shadow: none;
@@ -2178,7 +2184,7 @@ h6 {
   width: 12px;
   height: 6px;
   background: transparent;
-  border: 3px solid #1284ff;
+  border: 3px solid $highlight-color;
   border-width: 2px;
   border-top: none;
   border-right: none;
@@ -2342,7 +2348,7 @@ h6 {
   width: 12px;
   height: 6px;
   background: transparent;
-  border: 3px solid #1284ff;
+  border: 3px solid $highlight-color;
   border-width: 2px;
   border-top: none;
   border-right: none;
@@ -2388,8 +2394,8 @@ h6 {
   padding: 0 0 0 10px;
   font-size: 15px;
   font-weight: 500;
-  background-color: #f0eff4;
-  color: #1f1f21;
+  background-color: $list-header-background-color;
+  color: $text-color;
   text-shadow: none;
   border-top: none;
   border-bottom: none;
@@ -2403,10 +2409,10 @@ h6 {
     background-size: 100% 1px;
     background-repeat: no-repeat;
     background-position: top;
-    background-image: -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -webkit-linear-gradient(270deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
+    background-image: linear-gradient(180deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
   }
 }
 .list {
@@ -2435,10 +2441,10 @@ h6 {
   display: block;
   -webkit-overflow-scrolling: touch;
   padding: 0;
-  background-color: #fff;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: #fff;
+  background-color: $list-background-color;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  background-color: $list-background-color;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .list {
@@ -2447,10 +2453,10 @@ h6 {
     background-size: 100% 1px, 100% 1px;
     background-repeat: no-repeat;
     background-position: bottom, top;
-    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%), -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%), linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -webkit-linear-gradient(90deg, $border-color, $border-color 50%, transparent 50%), -webkit-linear-gradient(270deg, $border-color, $border-color 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, $border-color, $border-color 50%, transparent 50%), -moz-linear-gradient(270deg, $border-color, $border-color 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, $border-color, $border-color 50%, transparent 50%), -o-linear-gradient(270deg, $border-color, $border-color 50%, transparent 50%);
+    background-image: linear-gradient(0deg, $border-color, $border-color 50%, transparent 50%), linear-gradient(180deg, $border-color, $border-color 50%, transparent 50%);
   }
 }
 .list__item {
@@ -2465,8 +2471,8 @@ h6 {
   padding: 0 10px 0 10px;
   margin: 0 0 0 0;
   border-top: none;
-  border-bottom: 1px solid #ddd;
-  color: #1f1f21;
+  border-bottom: 1px solid $border-color;
+  color: $text-color;
   background-color: transparent;
   min-height: 44px;
   line-height: 44px;
@@ -2479,7 +2485,7 @@ h6 {
   line-height: 44px;
 }
 .list__item_active:active {
-  background-color: #d9d9d9;
+  background-color: $list-tap-active-background-color;
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
@@ -2487,7 +2493,7 @@ h6 {
 }
 .list__item:first-child {
   border-top: none;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $border-color;
 }
 .list__item:last-child {
   border-bottom: none;
@@ -2503,10 +2509,10 @@ h6 {
     background-size: 100% 1px;
     background-repeat: no-repeat;
     background-position: bottom;
-    background-image: -webkit-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -moz-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: -o-linear-gradient(90deg, #ddd, #ddd 50%, transparent 50%);
-    background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -webkit-linear-gradient(90deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
+    background-image: linear-gradient(0deg, $tabbar-border-color, $tabbar-border-color 50%, transparent 50%);
   }
 }
 /* topdoc
@@ -2524,7 +2530,7 @@ h6 {
     </ul>
  */
 .list--noborder {
-  background-color: #fff;
+  background-color: $list-background-color;
   border-top: none;
   border-bottom: none;
   background-image: none;
@@ -2567,7 +2573,7 @@ h6 {
   transition: background-color 0.2s linear;
 }
 .list__item--tappable:active {
-  background-color: #d9d9d9;
+  background-color: $list-tap-active-background-color;
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
@@ -2628,7 +2634,7 @@ h6 {
   overflow: hidden;
 }
 .list__item--chevron:active {
-  background-color: #d9d9d9;
+  background-color: $list-tap-active-background-color;
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
@@ -2644,7 +2650,7 @@ h6 {
   position: absolute;
   right: 16px;
   top: 50%;
-  color: #ddd;
+  color: $border-color;
   line-height: 28px;
   height: 28px;
   -webkit-transform: translateY(-50%);
@@ -2674,13 +2680,13 @@ h6 {
 .list--inset {
   margin-left: 8px;
   margin-right: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid $border-color;
   -webkit-border-radius: 4px;
   border-radius: 4px;
   background-image: none;
 }
 .list--inset__item:not(:last-child) {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $border-color;
   background-image: none;
 }
 /* topdoc
@@ -2847,11 +2853,11 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   box-sizing: border-box;
   height: 31px;
   font-size: 15px;
-  border: 1px solid #ddd;
-  background-color: #fff;
+  border: 1px solid $border-color;
+  background-color: $background-color;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #1f1f21;
+  color: $text-color;
   padding: 4px 0 0 28px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -2865,9 +2871,9 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   width: 100%;
 }
 .search-input:focus {
-  background-color: #fff;
-  color: #1f1f21;
-  border: 1px solid #ddd;
+  background-color: $background-color;
+  color: $text-color;
+  border: 1px solid $border-color;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -2878,7 +2884,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .search-input::-webkit-input-placeholder,
 .search-input::-moz-placeholder,
 .search-input::-ms-input-placeholder {
-  color: #ccc;
+  color: $sub-text-color;
 }
 .search-input:disabled {
   opacity: 0.3;
@@ -2919,13 +2925,13 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-weight: 400;
   font-size: 17px;
   letter-spacing: 0;
-  border: 1px solid #ddd;
+  border: 1px solid $border-color;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  background-color: #fff;
+  background-color: $background-color;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #1f1f21;
+  color: $text-color;
   padding: 4px 8px 0 8px;
   margin: 0;
   font-size: 15px;
@@ -2938,7 +2944,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .text-input::-webkit-input-placeholder,
 .text-input::-moz-placeholder,
 .text-input::-ms-input-placeholder {
-  color: #ccc;
+  color: $sub-text-color;
 }
 .text-input:disabled {
   opacity: 0.3;
@@ -2948,11 +2954,11 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .text-input:disabled::-webkit-input-placeholder,
 .text-input:disabled::-moz-placeholder,
 .text-input:disabled:-ms-input-placeholder {
-  color: #ccc;
+  color: $sub-text-color;
 }
 .text-input:invalid {
-  border: 1px solid #ddd;
-  color: #1f1f21;
+  border: 1px solid var-input-invalid-border-color;
+  color: $text-color;
 }
 /* topdoc
   name: Transparent Text Input
@@ -2984,13 +2990,13 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-weight: 400;
   font-size: 17px;
   letter-spacing: 0;
-  border: 1px solid #ddd;
+  border: 1px solid $border-color;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  background-color: #fff;
+  background-color: $background-color;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #1f1f21;
+  color: $text-color;
   padding: 4px 8px 0 8px;
   margin: 0;
   font-size: 15px;
@@ -3014,13 +3020,13 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .text-input--transparent:disabled::-webkit-input-placeholder,
 .text-input--transparent:disabled::-moz-placeholder,
 .text-input--transparent:disabled:-ms-input-placeholder {
-  color: #ccc;
+  color: $sub-text-color;
   border: none;
   background-color: transparent;
 }
 .text-input--transparent:invalid {
-  border: 1px solid #ddd;
-  color: #1f1f21;
+  border: 1px solid var-input-invalid-border-color;
+  color: $text-color;
   border: none;
   background-color: transparent;
 }
@@ -3054,13 +3060,13 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-weight: 400;
   font-size: 17px;
   letter-spacing: 0;
-  border: 1px solid #ddd;
+  border: 1px solid $border-color;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  background-color: #fff;
+  background-color: $background-color;
   -webkit-box-shadow: none;
   box-shadow: none;
-  color: #1f1f21;
+  color: $text-color;
   padding: 4px 8px 0 8px;
   margin: 0;
   font-size: 15px;
@@ -3071,7 +3077,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   box-sizing: border-box;
   border: none;
   background-color: transparent;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $border-color;
   -webkit-border-radius: 0px;
   border-radius: 0px;
 }
@@ -3081,21 +3087,21 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   pointer-events: none;
   border: none;
   background-color: transparent;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid $border-color;
 }
 .text-input--underbar:disabled::-webkit-input-placeholder,
 .text-input--underbar:disabled::-moz-placeholder,
 .text-input--underbar:disabled:-ms-input-placeholder {
-  color: #ccc;
+  color: $sub-text-color;
   border: none;
   background-color: transparent;
 }
 .text-input--underbar:invalid {
-  border: 1px solid #ddd;
-  color: #1f1f21;
+  border: 1px solid var-input-invalid-border-color;
+  color: $text-color;
   border: none;
   background-color: transparent;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var-input-invalid-border-color;
 }
 /* topdoc
   name: Textarea
@@ -3132,9 +3138,9 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-weight: 400;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  color: #1f1f21;
+  border: 1px solid $border-color;
+  background-color: $background-color;
+  color: $text-color;
   letter-spacing: 0;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -3148,7 +3154,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .textarea::-webkit-input-placeholder,
 .textarea::-moz-placeholder,
 .textarea:-ms-input-placeholder {
-  color: #ccc;
+  color: $sub-text-color;
 }
 /* topdoc
   name: Textarea Transparent
@@ -3189,7 +3195,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   border-radius: 4px;
   border: none;
   background-color: transparent;
-  color: #1f1f21;
+  color: $text-color;
   letter-spacing: 0;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -3203,7 +3209,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .textarea--transpanret::-webkit-input-placeholder,
 .textarea--transparent::-moz-placeholder,
 .textarea--transparent:-ms-input-placeholder {
-  color: #ccc;
+  color: $sub-text-color;
 }
 /* topdoc
   name: Modal
@@ -3242,7 +3248,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-weight: 400;
   font-size: 17px;
   overflow: hidden;
-  background-color: rgba(0,0,0,0.7);
+  background-color: $modal-background-color;
   position: absolute;
   left: 0;
   right: 0;
@@ -3282,5 +3288,5 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  color: #fff;
+  color: $modal-text-color;
 }
