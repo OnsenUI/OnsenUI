@@ -58,6 +58,9 @@
 
             var modal = new ModalView(scope, element);
 
+            $onsen.addModifierMethods(modal, 'modal--*', element);
+            $onsen.addModifierMethods(modal, 'modal--*__content', element.children());
+
             $onsen.declareVarAttribute(attrs, modal);
 
             $onsen.aliasStack.register('ons.modal', modal);

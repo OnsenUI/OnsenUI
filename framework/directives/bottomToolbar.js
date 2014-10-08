@@ -17,7 +17,7 @@
 
   var module = angular.module('onsen');
 
-  module.directive('onsBottomToolbar', function($onsen) {
+  module.directive('onsBottomToolbar', function($onsen, BottomToolbarView) {
     return {
       restrict: 'E',
       replace: false,
@@ -29,16 +29,30 @@
 
       compile: function(element, attrs) {
 
-        var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
-        element.addClass('bottom-bar');
-        element.addClass(modifierTemplater('bottom-bar--*'));
-        element.css({'z-index': 0});
-
         return {
           pre: function(scope, element, attrs) {
+            var bottomToolbar = new BottomToolbarView(scope, element, attrs);
+            
+            $onsen.declareVarAttribute(attrs, bottomToolbar);
+
+            $onsen.aliasStack.register('ons.bottomToolbar', bottomToolbar);
+            element.data('ons-bottomToolbar', bottomToolbar);
+
+            scope.$on('$destroy', function() {
+              bottomToolbar._events = undefined;
+              element.data('ons-bottomToolbar', undefined);
+              $onsen.aliasStack.unregister('ons.bottomToolbar', bottomToolbar);
+              element = null;
+            });
+
             // modifier
-            scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+            var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+            element.addClass('bottom-bar');
+            element.addClass(modifierTemplater('bottom-bar--*'));
+            element.css({'z-index': 0});
+
+            $onsen.addModifierMethods(bottomToolbar, 'bottom-bar--*', element);
 
             var pageView = element.inheritedData('ons-page');
             if (pageView) {

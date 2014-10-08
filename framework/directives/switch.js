@@ -58,6 +58,15 @@
           var checkbox = angular.element(element[0].querySelector('input[type=checkbox]'));
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+          var label = element.children(),
+              input = angular.element(label.children()[0]),
+              toggle = angular.element(label.children()[1]);
+
+          $onsen.addModifierMethods(switchView, 'switch--*', label);
+          $onsen.addModifierMethods(switchView, 'switch--*__input', input);
+          $onsen.addModifierMethods(switchView, 'switch--*__toggle', toggle);
+          
           attrs.$observe('checked', function(checked) {
             scope.model = !!element.attr('checked');
           });

@@ -27,7 +27,7 @@
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsButton', function($onsen) {
+  module.directive('onsButton', function($onsen, ButtonView) {
     return {
       restrict: 'E',
       replace: false,
@@ -37,12 +37,28 @@
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs, _, transclude) {
-        var initialAnimation = 'slide-left';
+        var button = new ButtonView(scope, element, attrs);
+        
+        $onsen.declareVarAttribute(attrs, button);
 
+        $onsen.aliasStack.register('ons.button', button);
+        element.data('ons-button', button);
+
+        scope.$on('$destroy', function() {
+          button._events = undefined;
+          element.data('ons-button', undefined);
+          $onsen.aliasStack.unregister('ons.button', button);
+          element = null;
+        });
+
+        var initialAnimation = 'slide-left';
+        
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         element.addClass('button effeckt-button');
         element.addClass(scope.modifierTemplater('button--*'));
         element.addClass(initialAnimation);
+
+        $onsen.addModifierMethods(button, 'button--*', element); 
 
         transclude(scope, function(cloned) {
           angular.element(element[0].querySelector('.ons-button-inner')).append(cloned);
