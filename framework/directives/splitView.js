@@ -67,6 +67,7 @@
         $onsen.aliasStack.register('ons.splitView', splitView);
 
         scope.$on('$destroy', function() {
+          splitView._events = undefined;
           element.data('ons-split-view', undefined);
           $onsen.aliasStack.unregister('ons.splitView', splitView);
         });

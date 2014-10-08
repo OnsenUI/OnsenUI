@@ -105,6 +105,7 @@
         element.data('ons-sliding-menu', slidingMenu);
 
         scope.$on('$destroy', function(){
+          slidingMenu._events = undefined;
           element.data('ons-sliding-menu', undefined);
           $onsen.aliasStack.unregister('ons.slidingMenu', slidingMenu);
         });
