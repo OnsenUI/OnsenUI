@@ -5,6 +5,9 @@
  * @description
  *  [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]
  *  [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
+ * @param inline
+ *  [en]Display the toolbar as an inline element.
+ *  [ja]ツールバーをインラインに置く。
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-bottom-toolbar [en]ons-bottom-toolbar component[/en][ja]ons-bottom-toolbarコンポーネント[/ja]
@@ -135,25 +138,29 @@
       transclude: false,
 
       compile: function(element, attrs) {
-
-        var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+        var modifierTemplater = $onsen.generateModifierTemplater(attrs),
+          inline = typeof attrs.inline !== "undefined";;
 
         element.addClass('navigation-bar');
         element.addClass(modifierTemplater('navigation-bar--*'));
-        element.css({
-          'position': 'absolute',
-          'z-index': '10000',
-          'left': '0px',
-          'right': '0px',
-          'top': '0px'
-        });
+
+        if(!inline) {
+          element.css({
+            'position': 'absolute',
+            'z-index': '10000',
+            'left': '0px',
+            'right': '0px',
+            'top': '0px'
+          });
+        }
+
         ensureToolbarItemElements(element);
 
         return {
           pre: function(scope, element, attrs) {
             var pageView = element.inheritedData('ons-page');
 
-            if (pageView) {
+            if (pageView && !inline) {
               pageView.registerToolbar(element);
             }
           },
