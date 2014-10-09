@@ -89,10 +89,20 @@ window.ons = (function(){
        *
        * If you want use your AngularJS module, use "ng-app" directive and "angular.module()" manually.
        *
-       * @param {Array} [deps] dependency modules
+       * @param {String} [name] optional name
+       * @param {Array} [deps] optional dependency modules
        */
-      bootstrap : function(deps) {
-        deps = ['onsen'].concat(angular.isArray(deps) ? deps : []);
+      bootstrap : function(name, deps) {
+        if(angular.isArray(name)) {
+          deps = name;
+        }
+
+        if(!name) {
+          name = 'myOnsenApp';
+        }
+
+        deps = ['onsen', name].concat(angular.isArray(deps) ? deps : []);
+        var module = angular.module(name, []);
 
         var doc = window.document;
         if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
@@ -104,6 +114,8 @@ window.ons = (function(){
         } else {
           throw new Error('Invalid state');
         }
+
+        return module;
       },
 
       /**
