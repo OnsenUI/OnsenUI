@@ -139,7 +139,7 @@
 
       compile: function(element, attrs) {
         var modifierTemplater = $onsen.generateModifierTemplater(attrs),
-          inline = typeof attrs.inline !== "undefined";;
+          inline = typeof attrs.inline !== "undefined";
 
         element.addClass('navigation-bar');
         element.addClass(modifierTemplater('navigation-bar--*'));
