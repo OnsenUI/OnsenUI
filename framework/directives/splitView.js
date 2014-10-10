@@ -53,26 +53,49 @@
         mainPageWidth: '@'
       },
 
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
-      link: function(scope, element, attrs) {
+      compile: function(element, attrs) {
+        var mainPage = element[0].querySelector('.main-page'),
+            secondaryPage = element[0].querySelector('.secondary-page');
 
-        if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controller directive.');
+        if(mainPage) {
+          var mainHtml = angular.element(mainPage).remove().html().trim();
         }
 
-        var splitView = new SplitView(scope, element, attrs);
-        $onsen.declareVarAttribute(attrs, splitView);
+        if(secondaryPage) {
+          var secondaryHtml = angular.element(secondaryPage).remove().html().trim();
+        }
 
-        element.data('ons-split-view', splitView);
-        $onsen.aliasStack.register('ons.splitView', splitView);
+        return function(scope, element, attrs) {
+          if (attrs.ngController) {
+            throw new Error('This element can\'t accept ng-controller directive.');
+          }
 
-        scope.$on('$destroy', function() {
-          splitView._events = undefined;
-          element.data('ons-split-view', undefined);
-          $onsen.aliasStack.unregister('ons.splitView', splitView);
-        });
+          element.append(angular.element('<div></div>').addClass('onsen-split-view__secondary full-screen ons-split-view-inner'));
+          element.append(angular.element('<div></div>').addClass('onsen-split-view__main full-screen ons-split-view-inner'));
 
-        $onsen.fireComponentEvent(element[0], "init");
+          var splitView = new SplitView(scope, element, attrs);
+
+          if(mainHtml && !attrs.mainPage) {
+            splitView._appendMainPage(mainHtml);
+          }
+
+          if(secondaryHtml && !attrs.secondaryPage) {
+            splitView._appendSecondPage(secondaryHtml);
+          }
+
+          $onsen.declareVarAttribute(attrs, splitView);
+
+          element.data('ons-split-view', splitView);
+          $onsen.aliasStack.register('ons.splitView', splitView);
+
+          scope.$on('$destroy', function() {
+            splitView._events = undefined;
+            element.data('ons-split-view', undefined);
+            $onsen.aliasStack.unregister('ons.splitView', splitView);
+          });
+
+          $onsen.fireComponentEvent(element[0], "init");
+        };
       }
     };
   });
