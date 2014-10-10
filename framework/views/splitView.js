@@ -40,6 +40,9 @@ limitations under the License.
         this._mode = SPLIT_MODE;
         this._doorLock = new DoorLock();
 
+        this._doSplit = false;
+        this._doCollapse = false;
+
         if ($onsen.isIOS()) {
           window.addEventListener('orientationchange', this._onResize.bind(this));
         } else {
@@ -152,19 +155,69 @@ limitations under the License.
       },
 
       _considerChangingCollapse: function() {
-        if (this._shouldCollapse()) {
-          this._activateCollapseMode();
-        } else {
-          this._activateSplitMode();
+        if (this._shouldCollapse() && this._mode !== COLLAPSE_MODE) {
+          this._fireUpdateEvent();
+          if(this._doSplit) {
+            this._activateSplitMode();
+          } else {
+            this._activateCollapseMode();
+          }
+        } else if(!this._shouldCollapse() && this._mode === COLLAPSE_MODE) {
+          this._fireUpdateEvent();
+          if(this._doCollapse) {
+            this._activateCollapseMode();
+          } else {
+            this._activateSplitMode();
+          }
         }
+
+        this._doCollapse = this._doSplit = false;
       },
 
-      _shouldCollapse: function() {
+      update: function() {
+        this._fireUpdateEvent();
+
+        if(this._doSplit) {
+          this._activateSplitMode(); 
+        } else if(this._doCollapse) {
+          this._activateCollapseMode(); 
+        } else if(this._shouldCollapse()) {
+          this._activateCollapseMode();
+        } else if(!this._shouldCollapsei()) {
+          this._activateSplitMode();
+        }
+
+        this._doSplit = this._doCollapse = false;
+      },
+
+      _getOrientation: function(asWord) {
+        if(asWord !== true) {
+          asWord = false;
+        }
+
         var orientation = window.orientation;
 
         if (orientation === undefined) {
           orientation = window.innerWidth > window.innerHeight ? 90 : 0;
         }
+
+        if(!asWord) {
+          return orientation;
+        } else {
+          return orientation === 180 || orientation === 0 ? 'portrait' : 'landscape';
+        }
+      },
+
+      getCurrentMode: function() {
+        if(this._mode === COLLAPSE_MODE) {
+          return 'collapse';
+        } else {
+          return 'split';
+        }
+      },
+
+      _shouldCollapse: function() {
+        var orientation = this._getOrientation();
 
         switch (this._scope.collapse) {
           case undefined:
@@ -219,8 +272,38 @@ limitations under the License.
         }
       },
 
+      _fireEvent: function(name) {
+        this.emit(name, {
+          splitView: this,
+          width: window.innerWidth,
+          orientation: this._getOrientation(true) 
+        });
+      },
+
+      _fireUpdateEvent: function() {
+        var that = this;
+
+        this.emit('update', {
+          splitView: this,
+          shouldCollapse: this._shouldCollapse(),
+          currentMode: this.getCurrentMode(),
+          split: function() {
+            that._doSplit = true;
+            that._doCollapse = false;
+          },
+          collapse: function() {
+            that._doSplit = false;
+            that._doCollapse = true;
+          },
+          width: window.innerWidth,
+          orientation: this._getOrientation(true)
+        }); 
+      },
+
       _activateCollapseMode: function() {
         if (this._mode !== COLLAPSE_MODE) {
+          this._fireEvent('precollapse');
+       
           this._secondaryPage.attr('style', '');
           this._mainPage.attr('style', '');
 
@@ -232,17 +315,25 @@ limitations under the License.
             this._secondaryPage,
             {isRight: false, width: '90%'}
           );
+
+          this._fireEvent('postcollapse');
         }
       },
 
       _activateSplitMode: function() {
-        this._animator.destroy();
+        if (this._mode !== SPLIT_MODE) {
+          this._fireEvent('presplit');
 
-        this._secondaryPage.attr('style', '');
-        this._mainPage.attr('style', '');
+          this._animator.destroy();
 
-        this._mode = SPLIT_MODE;
-        this._setSize();
+          this._secondaryPage.attr('style', '');
+          this._mainPage.attr('style', '');
+
+          this._mode = SPLIT_MODE;
+          this._setSize();
+       
+          this._fireEvent('postsplit');
+        }
       },
 
       _destroy: function() {
