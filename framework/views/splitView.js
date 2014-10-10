@@ -183,7 +183,7 @@ limitations under the License.
           this._activateCollapseMode(); 
         } else if(this._shouldCollapse()) {
           this._activateCollapseMode();
-        } else if(!this._shouldCollapsei()) {
+        } else if(!this._shouldCollapse()) {
           this._activateSplitMode();
         }
 
@@ -219,36 +219,21 @@ limitations under the License.
       _shouldCollapse: function() {
         var orientation = this._getOrientation();
 
-        switch (this._scope.collapse) {
-          case undefined:
-          case 'none':
-            return false;
-
-          case 'portrait':
-            return orientation === 180 || orientation === 0;
-
-          case 'landscape':
-            return orientation == 90 || orientation == -90;
-
-          default:
-            // by width
-            if (this._scope.collapse === undefined) {
-              return false;
-            } 
-
-            var widthToken;
-            if (this._scope.collapse.indexOf('width') >= 0) {
-              var tokens = this._scope.collapse.split(' ');
-              widthToken = tokens[tokens.length - 1];
-            } else {
-              widthToken = this._scope.collapse;
-            }
-
-            if (widthToken.indexOf('px') > 0) {
-              widthToken = widthToken.substr(0, widthToken.length - 2);
-            }
-
-            return isNumber(widthToken) && window.innerWidth < widthToken;
+        var c = this._scope.collapse.trim();
+        
+        if(c == 'portrait') {
+          return orientation === 180 || orientation === 0;
+        } else if(c == 'landscape') {
+          return orientation == 90 || orientation == -90;
+        } else if(c.substr(0,5) == 'width') {
+          var num = c.split(' ')[1];
+          if(num.indexOf("px") >= 0) {
+            num = num.substr(0,num.length-2);
+          }
+          return isNumber(num) && window.innerWidth < num;
+        } else {
+          var mq = window.matchMedia(c);
+          return mq.matches;
         }
       },
 
