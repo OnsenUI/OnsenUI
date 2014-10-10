@@ -26,7 +26,7 @@ Onsen UIは以下のWebkit系のブラウザやモバイルOSをサポートし�
 
 [Monacaフォーラム]で"Onsen-UI"タグを使ってOnsen UIに関する質問を行うことができます。
 
-[Onsen UI ドキュメント]:http://onsenui.io/guide/overview.html
-[Onsen UI Getting Started Page]:http://onsenui.io/guide/getting_started.html
+[Onsen UI ドキュメント]:http://onsen.io/guide/overview.html
+[Onsen UI Getting Started Page]:http://onsen.io/guide/getting_started.html
 [Monacaフォーラム]:http://monaca.mobi/forum
 [Monaca IDE]:http://monaca.mobi/

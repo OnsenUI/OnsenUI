@@ -4,7 +4,7 @@
 
 Onsen CSS Components is CSS Generator for Mobile Apps.
 
-[Onsen CSS Components]:http://components.onsenui.io/
+[Onsen CSS Components]:http://components.onsen.io/
 
 ## How to run
 

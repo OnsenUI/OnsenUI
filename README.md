@@ -17,7 +17,7 @@ Onsen UI is tested with the following browsers and mobile OS.
 
 ## Demo
 
-Click [Here](http://onsenui.io/guide/components.html) to see Onsen UI in action!
+Click [Here](http://onsen.io/guide/components.html) to see Onsen UI in action!
 
 ## What's Included
 
@@ -28,7 +28,7 @@ Click [Here](http://onsenui.io/guide/components.html) to see Onsen UI in action!
 
 ## Getting Started Using Templates
 
-See [getting started](http://onsenui.io/getting_started/) page.
+See [getting started](http://onsen.io/getting_started/) page.
 
 ## Getting Started Using Monaca
 
@@ -98,7 +98,7 @@ If anything about Onsen UI is unclear, please ask a question on <a href="http://
 If you have any requests or comments regarding the development of Onsen UI, please feel free to direct them to the Twitter account (<a href="http://twitter.com/Onsen_UI" target="_blank">@Onsen_UI</a>).
 
 
-[Onsen UI]:http://onsenui.io/
-[Onsen UI Getting Started Page]:http://onsenui.io/getting_started/
+[Onsen UI]:http://onsen.io/
+[Onsen UI Getting Started Page]:http://onsen.io/getting_started/
 [Monaca Forum]:http://monaca.mobi/forum
 [Monaca IDE]:http://monaca.mobi/
