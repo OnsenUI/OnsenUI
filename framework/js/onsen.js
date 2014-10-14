@@ -26,6 +26,7 @@ window.ons = (function(){
   waitDeviceReady();
   waitOnsenUILoad();
   initAngularModule();
+  initKeyboardEvents();
 
   return ons;
 
@@ -69,6 +70,44 @@ window.ons = (function(){
 
       ons.$compile = $compile;
     });
+  }
+
+  function initKeyboardEvents() {
+    ons.softwareKeyboard = new MicroEvent();
+    ons.softwareKeyboard._visible = false;
+
+    if(typeof cordova !== 'undefined') {
+      var onShow = function() {
+        ons.softwareKeyboard._visible = true;
+        ons.softwareKeyboard.emit('show');
+      },
+          onHide = function() {
+        ons.softwareKeyboard._visible = false;
+        ons.softwareKeyboard.emit('hide');
+      };
+
+      var bindEvents = function() {
+        if(typeof Keyboard !== 'undefined') {
+          // https://github.com/martinmose/cordova-keyboard/blob/95f3da3a38d8f8e1fa41fbf40145352c13535a00/README.md
+          Keyboard.onshow = onShow;
+          Keyboard.onhide = onHide;
+          ons.softwareKeyboard.emit('init', {visible: Keyboard.isVisible});
+          return true;
+        } else if(typeof cordova.plugins !== 'undefined' && typeof cordova.plugins.Keyboard !== 'undefined') {
+          // https://github.com/driftyco/ionic-plugins-keyboard/blob/ca27ecf/README.md
+          window.addEventListener('native.keyboardshow', onShow);
+          window.addEventListener('native.keyboardhide', onHide);
+          ons.softwareKeyboard.emit('init', {visible: cordova.plugins.Keyboard.isVisible});
+          return true;
+        }
+        return false;
+      };
+
+      // Try to find Keyboard plugin and bind events.
+      if(!bindEvents()) {
+        setTimeout(bindEvents, 200);
+      }
+    }
   }
 
   function createOnsenFacade() {
