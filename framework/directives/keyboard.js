@@ -48,7 +48,7 @@
         ons.softwareKeyboard.on('show', onShow);
         ons.softwareKeyboard.on('hide', onHide);
         ons.softwareKeyboard.on('init', function(e) {
-          if(e.isVisible) {
+          if(e.visible) {
             onShow();
           } else {
             onHide();
