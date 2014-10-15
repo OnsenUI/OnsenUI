@@ -25,15 +25,6 @@
   var compileFunction = function(show, $onsen) {
     return function(element) {
       return function(scope, element, attrs) {
-        $onsen.cleaner.onDestroy(scope, function() {
-          $onsen.clearComponent({
-            element: element,
-            scope: scope,
-            attrs: attrs
-          });
-          element = scope = attrs = null;
-        });
-
         var dispShow = show ? 'block' : 'none',
             dispHide = show ? 'none' : 'block';
 
@@ -45,21 +36,36 @@
           element.css('display', dispHide);
         };
        
-        ons.softwareKeyboard.on('show', onShow);
-        ons.softwareKeyboard.on('hide', onHide);
-        ons.softwareKeyboard.on('init', function(e) {
+        var onInit = function(e) {
           if (e.visible) {
             onShow();
           } else {
             onHide();
           }
-        });
+        };
+
+        ons.softwareKeyboard.on('show', onShow);
+        ons.softwareKeyboard.on('hide', onHide);
+        ons.softwareKeyboard.on('init', onInit);
 
         if (ons.softwareKeyboard._visible) {
           onShow();
         } else {
           onHide();
         }
+
+        $onsen.cleaner.onDestroy(scope, function() {
+          ons.softwareKeyboard.off('show', onShow);
+          ons.softwareKeyboard.off('hide', onHide);
+          ons.softwareKeyboard.off('init', onInit);
+
+          $onsen.clearComponent({
+            element: element,
+            scope: scope,
+            attrs: attrs
+          });
+          element = scope = attrs = null;
+        });
       };
     };
   };
