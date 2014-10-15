@@ -90,27 +90,48 @@
       transclude: false,
       scope: true,
 
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
+      compile: function(element, attrs) {
+        var main = element[0].querySelector('.main'),
+            menu = element[0].querySelector('.menu');
 
-      link: function(scope, element, attrs) {
-
-        if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controller directive.');
+        if (main) {
+          var mainHtml = angular.element(main).remove().html().trim();
         }
 
-        var slidingMenu = new SlidingMenuView(scope, element, attrs);
+        if (menu) {
+          var menuHtml = angular.element(menu).remove().html().trim();
+        }
 
-        $onsen.aliasStack.register('ons.slidingMenu', slidingMenu);
-        $onsen.declareVarAttribute(attrs, slidingMenu);
-        element.data('ons-sliding-menu', slidingMenu);
+        return function(scope, element, attrs) {
+          if (attrs.ngController) {
+            throw new Error('This element can\'t accept ng-controller directive.');
+          }
+          
+          element.append(angular.element('<div></div>').addClass('onsen-sliding-menu__menu ons-sliding-menu-inner'));
+          element.append(angular.element('<div></div>').addClass('onsen-sliding-menu__main ons-sliding-menu-inner'));
 
-        scope.$on('$destroy', function(){
-          slidingMenu._events = undefined;
-          element.data('ons-sliding-menu', undefined);
-          $onsen.aliasStack.unregister('ons.slidingMenu', slidingMenu);
-        });
+          var slidingMenu = new SlidingMenuView(scope, element, attrs);
 
-        $onsen.fireComponentEvent(element[0], "init");
+          if (mainHtml && !attrs.mainPage) {
+            slidingMenu._appendMainPage(null, mainHtml);
+          }
+
+          if (menuHtml && !attrs.menuPage) {
+            slidingMenu._appendMenuPage(menuHtml);
+          }
+
+          $onsen.aliasStack.register('ons.slidingMenu', slidingMenu);
+          $onsen.declareVarAttribute(attrs, slidingMenu);
+          element.data('ons-sliding-menu', slidingMenu);
+
+          scope.$on('$destroy', function(){
+            slidingMenu._events = undefined;
+            element.data('ons-sliding-menu', undefined);
+            $onsen.aliasStack.unregister('ons.slidingMenu', slidingMenu);
+          });
+
+          $onsen.fireComponentEvent(element[0], 'init');
+        }
       }
     };
   });
