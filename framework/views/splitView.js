@@ -157,14 +157,14 @@ limitations under the License.
       _considerChangingCollapse: function() {
         if (this._shouldCollapse() && this._mode !== COLLAPSE_MODE) {
           this._fireUpdateEvent();
-          if(this._doSplit) {
+          if (this._doSplit) {
             this._activateSplitMode();
           } else {
             this._activateCollapseMode();
           }
-        } else if(!this._shouldCollapse() && this._mode === COLLAPSE_MODE) {
+        } else if (!this._shouldCollapse() && this._mode === COLLAPSE_MODE) {
           this._fireUpdateEvent();
-          if(this._doCollapse) {
+          if (this._doCollapse) {
             this._activateCollapseMode();
           } else {
             this._activateSplitMode();
@@ -177,13 +177,13 @@ limitations under the License.
       update: function() {
         this._fireUpdateEvent();
 
-        if(this._doSplit) {
+        if (this._doSplit) {
           this._activateSplitMode(); 
-        } else if(this._doCollapse) {
+        } else if (this._doCollapse) {
           this._activateCollapseMode(); 
-        } else if(this._shouldCollapse()) {
+        } else if (this._shouldCollapse()) {
           this._activateCollapseMode();
-        } else if(!this._shouldCollapse()) {
+        } else if (!this._shouldCollapse()) {
           this._activateSplitMode();
         }
 
@@ -201,7 +201,7 @@ limitations under the License.
           orientation = window.innerWidth > window.innerHeight ? 90 : 0;
         }
 
-        if(!asWord) {
+        if (!asWord) {
           return orientation;
         } else {
           return orientation === 180 || orientation === 0 ? 'portrait' : 'landscape';
@@ -209,7 +209,7 @@ limitations under the License.
       },
 
       getCurrentMode: function() {
-        if(this._mode === COLLAPSE_MODE) {
+        if (this._mode === COLLAPSE_MODE) {
           return 'collapse';
         } else {
           return 'split';
@@ -221,13 +221,13 @@ limitations under the License.
 
         var c = this._scope.collapse.trim();
         
-        if(c == 'portrait') {
+        if (c == 'portrait') {
           return orientation === 180 || orientation === 0;
-        } else if(c == 'landscape') {
+        } else if (c == 'landscape') {
           return orientation == 90 || orientation == -90;
-        } else if(c.substr(0,5) == 'width') {
+        } else if (c.substr(0,5) == 'width') {
           var num = c.split(' ')[1];
-          if(num.indexOf("px") >= 0) {
+          if (num.indexOf("px") >= 0) {
             num = num.substr(0,num.length-2);
           }
           return isNumber(num) && window.innerWidth < num;

@@ -61,11 +61,11 @@
         var mainPage = element[0].querySelector('.main-page'),
             secondaryPage = element[0].querySelector('.secondary-page');
 
-        if(mainPage) {
+        if (mainPage) {
           var mainHtml = angular.element(mainPage).remove().html().trim();
         }
 
-        if(secondaryPage) {
+        if (secondaryPage) {
           var secondaryHtml = angular.element(secondaryPage).remove().html().trim();
         }
 
@@ -79,11 +79,11 @@
 
           var splitView = new SplitView(scope, element, attrs);
 
-          if(mainHtml && !attrs.mainPage) {
+          if (mainHtml && !attrs.mainPage) {
             splitView._appendMainPage(mainHtml);
           }
 
-          if(secondaryHtml && !attrs.secondaryPage) {
+          if (secondaryHtml && !attrs.secondaryPage) {
             splitView._appendSecondPage(secondaryHtml);
           }
 
