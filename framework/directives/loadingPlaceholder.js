@@ -19,17 +19,29 @@
 
   var module = angular.module('onsen');
 
-  module.directive('onsLoadingPlaceholder', function($onsen) {
+  module.directive('onsLoadingPlaceholder', function($onsen, $compile) {
     return {
       restrict: 'A',
       replace: false,
       transclude: false,
       scope: false,
-      link: function(scope, element, attrs) {
+      compile: function(element, attrs) {
+        if(!attrs.onsLoadingPlaceholder.length) {
+          throw Error('Must define page to load.');
+        }
+        
         $onsen.getPageHTMLAsync(attrs.onsLoadingPlaceholder).then(function(html) {
-          element[0].innerHTML = html.trim(); 
+          var div = document.createElement('div');
+          div.innerHTML = html.trim();
+         
+          var newElement = angular.element(div);
+
+          element[0].innerHTML = "";
+          element.append(newElement);
+
+          $compile(newElement);
         });
-      }
+      }    
     };
   });
 })();
