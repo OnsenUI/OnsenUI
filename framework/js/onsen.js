@@ -104,9 +104,16 @@ window.ons = (function(){
       };
 
       // Try to find Keyboard plugin and bind events.
-      if(!bindEvents()) {
-        setTimeout(bindEvents, 200);
-      }
+      var tries = 0;
+      var tryBind = function() {
+        if(bindEvents() || tries == 10) {
+          return;
+        } else {
+          tries++;
+          setTimeout(tryBind, 200);
+        }
+      };
+      tryBind();
     }
   }
 
