@@ -43,11 +43,7 @@ limitations under the License.
         this._doSplit = false;
         this._doCollapse = false;
 
-        if ($onsen.isIOS()) {
-          window.addEventListener('orientationchange', this._onResize.bind(this));
-        } else {
-          window.addEventListener('resize', this._onResize.bind(this));
-        }
+        $onsGlobal.orientation.on('change', this._onResize.bind(this));
 
         this._animator = new RevealSlidingMenuAnimator();
 
