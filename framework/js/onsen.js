@@ -23,10 +23,10 @@ window.ons = (function(){
 
   // JS Global facade for Onsen UI.
   var ons = createOnsenFacade();
+  initKeyboardEvents();
   waitDeviceReady();
   waitOnsenUILoad();
   initAngularModule();
-  initKeyboardEvents();
 
   return ons;
 
@@ -103,17 +103,7 @@ window.ons = (function(){
         return false;
       };
 
-      // Try to find Keyboard plugin and bind events.
-      var tries = 0;
-      var tryBind = function() {
-        if (bindEvents() || tries == 10) {
-          return;
-        } else {
-          tries++;
-          setTimeout(tryBind, 200);
-        }
-      };
-      tryBind();
+      document.addEventListener('deviceready', bindEvents);
     }
   }
 
