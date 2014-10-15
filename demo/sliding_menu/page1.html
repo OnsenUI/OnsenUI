@@ -13,7 +13,12 @@
         ng-click="app.slidingMenu.toggleMenu()">
         Toggle Menu
       </ons-button>
-      
+
+      <ons-button
+        ng-click="app.slidingMenu.toggleMenu({animation: 'none'})">
+        Toggle Menu (fast)
+      </ons-button>
+
       <p> Click "Toggle Menu" to close/open menu, </p>
       <p> You can also swipe the page left/right.  </p>
       <img src="../images/ico_swipe_right_s.png" alt="">

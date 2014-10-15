@@ -71,31 +71,31 @@ limitations under the License.
       return !this.isClosed() && this._distance < this._maxDistance / 2;
     },
 
-    openOrClose: function(callback) {
+    openOrClose: function(options) {
       if (this.shouldOpen()) {
-        this.open(callback);
+        this.open(options);
       } else if (this.shouldClose()) {
-        this.close(callback);
+        this.close(options);
       }
     },
 
-    close: function(callback) {
-      callback = callback || function() {};
+    close: function(options) {
+      var callback = options.callback || function() {};
 
       if (!this.isClosed()) {
         this._distance = 0;
-        this.emit('close', {callback: callback});
+        this.emit('close', options);
       } else {
         callback();
       }
     },
 
-    open: function(callback) {
-      callback = callback || function() {};
+    open: function(options) {
+      var callback = options.callback || function() {};
 
       if (!this.isOpened()) {
         this._distance = this._maxDistance;
-        this.emit('open', {callback: callback});
+        this.emit('open', options);
       } else {
         callback();
       }
@@ -184,10 +184,10 @@ limitations under the License.
         this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
         this._logic.on('translate', this._translate.bind(this));
         this._logic.on('open', function(options) {
-          this._open(options.callback);
+          this._open(options);
         }.bind(this));
         this._logic.on('close', function(options) {
-          this._close(options.callback);
+          this._close(options);
         }.bind(this));
 
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
@@ -577,27 +577,29 @@ limitations under the License.
       /**
        * Close sliding-menu page.
        *
-       * @param {Function} callback
+       * @param {Object} options 
        */
-      close: function(callback) {
-        callback = callback || function() {};
-
+      close: function(options) {
+        options = options || {};
+        options = typeof options == "function" ? {callback: options} : options;
+        
         this.emit('preclose');
 
         this._doorLock.waitUnlock(function() {
-          this._logic.close(callback);
+          this._logic.close(options);
         }.bind(this));
       },
 
-      _close: function(callback) {
-        callback = callback || function() {};
+      _close: function(options) {
+        var callback = options.callback || function() {},
+            unlock = this._doorLock.lock(),
+            instant = options.animation == "none";
 
-        var unlock = this._doorLock.lock();
         this._animator.closeMenu(function() {
           unlock();
           this.emit('postclose');
           callback();
-        }.bind(this));
+        }.bind(this), instant);
       },
 
       openMenu: function() {
@@ -607,37 +609,39 @@ limitations under the License.
       /**
        * Open sliding-menu page.
        *
-       * @param {Function} callback
+       * @param {Object} options 
        */
-      open: function(callback) {
-        callback = callback || function() {};
+      open: function(options) {
+        options = options || {};
+        options = typeof options == "function" ? {callback: options} : options;
 
         this.emit('preopen');
 
         this._doorLock.waitUnlock(function() {
-          this._logic.open(callback);
+          this._logic.open(options);
         }.bind(this));
       },
 
-      _open: function(callback) {
-        callback = callback || function() {};
-        var unlock = this._doorLock.lock();
+      _open: function(options) {
+        var callback = options.callback || function() {},
+            unlock = this._doorLock.lock(),
+            instant = options.animation == "none";
 
         this._animator.openMenu(function() {
           unlock();
           this.emit('postopen');
           callback();
-        }.bind(this));
+        }.bind(this), instant);
       },
 
       /**
        * Toggle sliding-menu page.
        */
-      toggle: function(callback) {
+      toggle: function(options) {
         if (this._logic.isClosed()) {
-          this.open(callback);
+          this.open(options);
         } else {
-          this.close(callback);
+          this.close(options);
         }
       },
 
