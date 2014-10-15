@@ -18,7 +18,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('SplitView', function($compile, RevealSlidingMenuAnimator, $onsen) {
+  module.factory('SplitView', function($compile, RevealSlidingMenuAnimator, $onsen, $onsGlobal) {
     var SPLIT_MODE = 0;
     var COLLAPSE_MODE = 1;
     var MAIN_PAGE_RATIO = 0.9;
@@ -190,21 +190,11 @@ limitations under the License.
         this._doSplit = this._doCollapse = false;
       },
 
-      _getOrientation: function(asWord) {
-        if(asWord !== true) {
-          asWord = false;
-        }
-
-        var orientation = window.orientation;
-
-        if (orientation === undefined) {
-          orientation = window.innerWidth > window.innerHeight ? 90 : 0;
-        }
-
-        if (!asWord) {
-          return orientation;
+      _getOrientation: function() {
+        if ($onsGlobal.orientation.isPortrait()) {
+          return 'portrait';
         } else {
-          return orientation === 180 || orientation === 0 ? 'portrait' : 'landscape';
+          return 'landscape';
         }
       },
 
@@ -222,9 +212,9 @@ limitations under the License.
         var c = this._scope.collapse.trim();
         
         if (c == 'portrait') {
-          return orientation === 180 || orientation === 0;
+          return $onsGlobal.orientation.isPortrait();
         } else if (c == 'landscape') {
-          return orientation == 90 || orientation == -90;
+          return $onsGlobal.orientation.isLandscape();
         } else if (c.substr(0,5) == 'width') {
           var num = c.split(' ')[1];
           if (num.indexOf("px") >= 0) {
@@ -261,7 +251,7 @@ limitations under the License.
         this.emit(name, {
           splitView: this,
           width: window.innerWidth,
-          orientation: this._getOrientation(true) 
+          orientation: this._getOrientation() 
         });
       },
 
@@ -281,7 +271,7 @@ limitations under the License.
             that._doCollapse = true;
           },
           width: window.innerWidth,
-          orientation: this._getOrientation(true)
+          orientation: this._getOrientation()
         }); 
       },
 
