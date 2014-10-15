@@ -100,16 +100,16 @@ window.ons = (function(){
           name = 'myOnsenApp';
         }
 
-        deps = ['onsen', name].concat(angular.isArray(deps) ? deps : []);
+        deps = ['onsen'].concat(angular.isArray(deps) ? deps : []);
         var module = angular.module(name, deps);
 
         var doc = window.document;
         if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
           doc.addEventListener('DOMContentLoaded', function() {
-            angular.bootstrap(doc.documentElement, deps);
+            angular.bootstrap(doc.documentElement, [name]);
           }, false);
         } else if (doc.documentElement) {
-          angular.bootstrap(doc.documentElement, deps);
+          angular.bootstrap(doc.documentElement, [name]);
         } else {
           throw new Error('Invalid state');
         }
