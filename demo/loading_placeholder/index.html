@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Loading placeholder | Onsen UI</title>  
+    <link rel="stylesheet" href="../styles/app.css"/>
+    <link rel="stylesheet" href="../../build/css/onsenui.css">
+    <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+    <script src="../../build/js/angular/angular.js"></script>    
+    <script src="../../build/js/onsenui.js"></script>    
+    <script src="../app.js"></script>  
+  </head>
+
+  <body>
+
+    <div ons-loading-placeholder="page.html">
+      <ons-navigator>
+        <ons-toolbar>
+         <div class="center">Loading...</div>
+         </ons-toolbar>
+         <br />
+         <br />
+         <br />
+         <br />
+         <br />
+        <div style="text-align: center;">
+          <ons-icon size="5x" icon="spinner" spin="true"></ons-icon>  
+        </div>    
+      </ons-navigator>
+    </div>
+
+  </body>
+</html>

@@ -26,20 +26,24 @@
       transclude: false,
       scope: false,
       compile: function(element, attrs) {
-        if(!attrs.onsLoadingPlaceholder.length) {
+        if (!attrs.onsLoadingPlaceholder.length) {
           throw Error('Must define page to load.');
         }
         
         $onsen.getPageHTMLAsync(attrs.onsLoadingPlaceholder).then(function(html) {
-          var div = document.createElement('div');
-          div.innerHTML = html.trim();
-         
-          var newElement = angular.element(div);
+          setImmediate(function() { 
+            var div = document.createElement('div');
+            div.innerHTML = html.trim();
+            
+            var newElement = angular.element(div);
+            newElement.css("display", "none");
 
-          element[0].innerHTML = "";
-          element.append(newElement);
+            element.append(newElement);
+            ons.compile(newElement[0]);
 
-          $compile(newElement);
+            element.children()[0].remove();
+            newElement.css("display", "block");
+          });
         });
       }    
     };
