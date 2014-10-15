@@ -184,7 +184,6 @@ limitations under the License.
         this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
         this._logic.on('translate', this._translate.bind(this));
         this._logic.on('open', function(options) {
-          console.log(options);
           this._open(options);
         }.bind(this));
         this._logic.on('close', function(options) {
