@@ -64,6 +64,7 @@
             element.data('ons-modal', modal);
 
             scope.$on('$destroy', function() {
+              modal._events = undefined;
               element.data('ons-modal', undefined);
               $onsen.aliasStack.unregister('ons.modal', modal);
             });

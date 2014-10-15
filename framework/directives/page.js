@@ -116,6 +116,7 @@
       pageBackground = null;
 
       $onsen.cleaner.onDestroy(scope, function() {
+        page._events = undefined;
         element.data('ons-page', undefined);
         $onsen.aliasStack.unregister('ons.page', page);
 

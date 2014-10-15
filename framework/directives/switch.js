@@ -85,6 +85,7 @@
           $onsen.aliasStack.register('ons.switch', switchView);
 
           $onsen.cleaner.onDestroy(scope, function() {
+            switchView._events = undefined;
             element.data('ons-switch', undefined);
             $onsen.aliasStack.unregister('ons.switch', switchView);
             $onsen.clearComponent({

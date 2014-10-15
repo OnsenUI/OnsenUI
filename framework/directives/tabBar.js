@@ -104,6 +104,7 @@
         });
 
         scope.$on('$destroy', function() {
+          tabbarView._events = undefined;
           element.data('ons-tabbar', undefined);
           $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
         });

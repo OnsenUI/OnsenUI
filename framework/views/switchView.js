@@ -71,7 +71,7 @@ limitations under the License.
       /**
        * @return {HTMLElement}
        */
-      getCheckboxElemenet: function() {
+      getCheckboxElement: function() {
         return this._checkbox[0];
       }
     });
