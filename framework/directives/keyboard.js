@@ -48,14 +48,14 @@
         ons.softwareKeyboard.on('show', onShow);
         ons.softwareKeyboard.on('hide', onHide);
         ons.softwareKeyboard.on('init', function(e) {
-          if(e.visible) {
+          if (e.visible) {
             onShow();
           } else {
             onHide();
           }
         });
 
-        if(ons.softwareKeyboard._visible) {
+        if (ons.softwareKeyboard._visible) {
           onShow();
         } else {
           onHide();
