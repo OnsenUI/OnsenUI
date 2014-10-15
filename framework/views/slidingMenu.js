@@ -84,7 +84,7 @@ limitations under the License.
 
       if (!this.isClosed()) {
         this._distance = 0;
-        this.emit('close', {callback: options});
+        this.emit('close', options);
       } else {
         callback();
       }
@@ -95,7 +95,7 @@ limitations under the License.
 
       if (!this.isOpened()) {
         this._distance = this._maxDistance;
-        this.emit('open', {callback: options});
+        this.emit('open', options);
       } else {
         callback();
       }
@@ -184,10 +184,11 @@ limitations under the License.
         this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
         this._logic.on('translate', this._translate.bind(this));
         this._logic.on('open', function(options) {
-          this._open(options.callback);
+          console.log(options);
+          this._open(options);
         }.bind(this));
         this._logic.on('close', function(options) {
-          this._close(options.callback);
+          this._close(options);
         }.bind(this));
 
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
