@@ -16,14 +16,18 @@
  *  [en]The url of the page on the left.[/en]
  *  [ja]左側に表示するページのURLを指定します。[/ja]
  * @param collapse
- *  [en]Specify the collapse behavior. Valid values are portrait, landscape, width ##px. "portrait" or "landscape" means the view will collapse when device is in landscape or portrait orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px.[/en]
- *  [ja]左側のページを非表示にする条件を指定します。portrait, landscapeもしくはwidth ##pxの指定が可能です。portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。width ##pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。[/ja]
+ *  [en]Specify the collapse behavior. Valid values are portrait, landscape, width ##px or a media query. "portrait" or "landscape" means the view will collapse when device is in landscape or portrait orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px. If the value is a media query, the view will collapse when the media query is true.[/en]
+ *  [ja]左側のページを非表示にする条件を指定します。portrait, landscape、width ##pxもしくはメディアクエリの指定が可能です。portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。width ##pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。メディアクエリを指定すると、指定したクエリに適合している場合に適用されます。[/ja]
  * @param var 
  *  [en]Variable name to refer this split view.[/en]
  *  [ja]JavaScriptからスプリットビューコンポーネントにアクセスするための変数を定義します。[/ja]
  *
  * @property setMainPage(pageUrl) Show the page specified in pageUrl in the right section
  * @property setSecondaryPage(pageUrl) Show the page specified in pageUrl in the left section
+ * @property update() Trigger an 'update' event and try to determine if the split behaviour should be changed.
+ * @property on(eventName,listener)
+ *  [en]Add an event listener. Preset events are presplit, postsplit, precollapse and postcollapse.[/en]
+ *  [ja]イベントリスナーを追加します。presplit, postsplit, precollapse, postcollapse, updateを指定できます。[/ja]
  * @codepen nKqfv {wide}
  * @guide Usingonssplitviewcomponent [en]Using ons-split-view.[/en][ja]ons-split-viewコンポーネントを使う[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
@@ -53,26 +57,49 @@
         mainPageWidth: '@'
       },
 
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
-      link: function(scope, element, attrs) {
+      compile: function(element, attrs) {
+        var mainPage = element[0].querySelector('.main-page'),
+            secondaryPage = element[0].querySelector('.secondary-page');
 
-        if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controller directive.');
+        if (mainPage) {
+          var mainHtml = angular.element(mainPage).remove().html().trim();
         }
 
-        var splitView = new SplitView(scope, element, attrs);
-        $onsen.declareVarAttribute(attrs, splitView);
+        if (secondaryPage) {
+          var secondaryHtml = angular.element(secondaryPage).remove().html().trim();
+        }
 
-        element.data('ons-split-view', splitView);
-        $onsen.aliasStack.register('ons.splitView', splitView);
+        return function(scope, element, attrs) {
+          if (attrs.ngController) {
+            throw new Error('This element can\'t accept ng-controller directive.');
+          }
 
-        scope.$on('$destroy', function() {
-          splitView._events = undefined;
-          element.data('ons-split-view', undefined);
-          $onsen.aliasStack.unregister('ons.splitView', splitView);
-        });
+          element.append(angular.element('<div></div>').addClass('onsen-split-view__secondary full-screen ons-split-view-inner'));
+          element.append(angular.element('<div></div>').addClass('onsen-split-view__main full-screen ons-split-view-inner'));
 
-        $onsen.fireComponentEvent(element[0], "init");
+          var splitView = new SplitView(scope, element, attrs);
+
+          if (mainHtml && !attrs.mainPage) {
+            splitView._appendMainPage(mainHtml);
+          }
+
+          if (secondaryHtml && !attrs.secondaryPage) {
+            splitView._appendSecondPage(secondaryHtml);
+          }
+
+          $onsen.declareVarAttribute(attrs, splitView);
+
+          element.data('ons-split-view', splitView);
+          $onsen.aliasStack.register('ons.splitView', splitView);
+
+          scope.$on('$destroy', function() {
+            splitView._events = undefined;
+            element.data('ons-split-view', undefined);
+            $onsen.aliasStack.unregister('ons.splitView', splitView);
+          });
+
+          $onsen.fireComponentEvent(element[0], "init");
+        };
       }
     };
   });

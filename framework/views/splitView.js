@@ -18,7 +18,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('SplitView', function($compile, RevealSlidingMenuAnimator, $onsen) {
+  module.factory('SplitView', function($compile, RevealSlidingMenuAnimator, $onsen, $onsGlobal) {
     var SPLIT_MODE = 0;
     var COLLAPSE_MODE = 1;
     var MAIN_PAGE_RATIO = 0.9;
@@ -40,11 +40,10 @@ limitations under the License.
         this._mode = SPLIT_MODE;
         this._doorLock = new DoorLock();
 
-        if ($onsen.isIOS()) {
-          window.addEventListener('orientationchange', this._onResize.bind(this));
-        } else {
-          window.addEventListener('resize', this._onResize.bind(this));
-        }
+        this._doSplit = false;
+        this._doCollapse = false;
+
+        $onsGlobal.orientation.on('change', this._onResize.bind(this));
 
         this._animator = new RevealSlidingMenuAnimator();
 
@@ -152,50 +151,75 @@ limitations under the License.
       },
 
       _considerChangingCollapse: function() {
-        if (this._shouldCollapse()) {
+        if (this._shouldCollapse() && this._mode !== COLLAPSE_MODE) {
+          this._fireUpdateEvent();
+          if (this._doSplit) {
+            this._activateSplitMode();
+          } else {
+            this._activateCollapseMode();
+          }
+        } else if (!this._shouldCollapse() && this._mode === COLLAPSE_MODE) {
+          this._fireUpdateEvent();
+          if (this._doCollapse) {
+            this._activateCollapseMode();
+          } else {
+            this._activateSplitMode();
+          }
+        }
+
+        this._doCollapse = this._doSplit = false;
+      },
+
+      update: function() {
+        this._fireUpdateEvent();
+
+        if (this._doSplit) {
+          this._activateSplitMode(); 
+        } else if (this._doCollapse) {
+          this._activateCollapseMode(); 
+        } else if (this._shouldCollapse()) {
           this._activateCollapseMode();
-        } else {
+        } else if (!this._shouldCollapse()) {
           this._activateSplitMode();
+        }
+
+        this._doSplit = this._doCollapse = false;
+      },
+
+      _getOrientation: function() {
+        if ($onsGlobal.orientation.isPortrait()) {
+          return 'portrait';
+        } else {
+          return 'landscape';
+        }
+      },
+
+      getCurrentMode: function() {
+        if (this._mode === COLLAPSE_MODE) {
+          return 'collapse';
+        } else {
+          return 'split';
         }
       },
 
       _shouldCollapse: function() {
-        var orientation = window.orientation;
+        var orientation = this._getOrientation();
 
-        if (orientation === undefined) {
-          orientation = window.innerWidth > window.innerHeight ? 90 : 0;
-        }
-
-        switch (this._scope.collapse) {
-          case undefined:
-          case 'none':
-            return false;
-
-          case 'portrait':
-            return orientation === 180 || orientation === 0;
-
-          case 'landscape':
-            return orientation == 90 || orientation == -90;
-
-          default:
-            // by width
-            if (this._scope.collapse === undefined) {
-              return false;
-            } 
-
-            var widthToken;
-            if (this._scope.collapse.indexOf('width') >= 0) {
-              var tokens = this._scope.collapse.split(' ');
-              widthToken = tokens[tokens.length - 1];
-            } else {
-              widthToken = this._scope.collapse;
-            }
-
-            if (widthToken.indexOf('px') > 0) {
-              widthToken = widthToken.substr(0, widthToken.length - 2);
-            }
-
-            return isNumber(widthToken) && window.innerWidth < widthToken;
+        var c = this._scope.collapse.trim();
+        
+        if (c == 'portrait') {
+          return $onsGlobal.orientation.isPortrait();
+        } else if (c == 'landscape') {
+          return $onsGlobal.orientation.isLandscape();
+        } else if (c.substr(0,5) == 'width') {
+          var num = c.split(' ')[1];
+          if (num.indexOf("px") >= 0) {
+            num = num.substr(0,num.length-2);
+          }
+          return isNumber(num) && window.innerWidth < num;
+        } else {
+          var mq = window.matchMedia(c);
+          return mq.matches;
         }
       },
 
@@ -219,8 +243,38 @@ limitations under the License.
         }
       },
 
+      _fireEvent: function(name) {
+        this.emit(name, {
+          splitView: this,
+          width: window.innerWidth,
+          orientation: this._getOrientation() 
+        });
+      },
+
+      _fireUpdateEvent: function() {
+        var that = this;
+
+        this.emit('update', {
+          splitView: this,
+          shouldCollapse: this._shouldCollapse(),
+          currentMode: this.getCurrentMode(),
+          split: function() {
+            that._doSplit = true;
+            that._doCollapse = false;
+          },
+          collapse: function() {
+            that._doSplit = false;
+            that._doCollapse = true;
+          },
+          width: window.innerWidth,
+          orientation: this._getOrientation()
+        }); 
+      },
+
       _activateCollapseMode: function() {
         if (this._mode !== COLLAPSE_MODE) {
+          this._fireEvent('precollapse');
+       
           this._secondaryPage.attr('style', '');
           this._mainPage.attr('style', '');
 
@@ -232,17 +286,25 @@ limitations under the License.
             this._secondaryPage,
             {isRight: false, width: '90%'}
           );
+
+          this._fireEvent('postcollapse');
         }
       },
 
       _activateSplitMode: function() {
-        this._animator.destroy();
+        if (this._mode !== SPLIT_MODE) {
+          this._fireEvent('presplit');
 
-        this._secondaryPage.attr('style', '');
-        this._mainPage.attr('style', '');
+          this._animator.destroy();
 
-        this._mode = SPLIT_MODE;
-        this._setSize();
+          this._secondaryPage.attr('style', '');
+          this._mainPage.attr('style', '');
+
+          this._mode = SPLIT_MODE;
+          this._setSize();
+       
+          this._fireEvent('postsplit');
+        }
       },
 
       _destroy: function() {
