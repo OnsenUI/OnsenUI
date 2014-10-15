@@ -91,15 +91,15 @@
       scope: true,
 
       compile: function(element, attrs) {
-        var main = angular.element(element[0].querySelector('.main')),
-            menu = angular.element(element[0].querySelector('.menu'));
+        var main = element[0].querySelector('.main'),
+            menu = element[0].querySelector('.menu');
 
-        if(main) {
-          var mainHtml = main.remove().html().trim();
+        if (main) {
+          var mainHtml = angular.element(main).remove().html().trim();
         }
 
-        if(menu) {
-          var menuHtml = menu.remove().html().trim();
+        if (menu) {
+          var menuHtml = angular.element(menu).remove().html().trim();
         }
 
         return function(scope, element, attrs) {
@@ -112,13 +112,11 @@
 
           var slidingMenu = new SlidingMenuView(scope, element, attrs);
 
-          console.log("main: ", attrs.mainPage);
-
-          if(mainHtml && !attrs.mainPage) {
+          if (mainHtml && !attrs.mainPage) {
             slidingMenu._appendMainPage(null, mainHtml);
           }
 
-          if(menuHtml && !attrs.menuPage) {
+          if (menuHtml && !attrs.menuPage) {
             slidingMenu._appendMenuPage(menuHtml);
           }
 
