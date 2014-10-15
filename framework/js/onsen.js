@@ -87,22 +87,21 @@ window.ons = (function(){
       /**
        * Bootstrap this document as a Onsen UI application.
        *
-       * If you want use your AngularJS module, use "ng-app" directive and "angular.module()" manually.
-       *
        * @param {String} [name] optional name
        * @param {Array} [deps] optional dependency modules
        */
       bootstrap : function(name, deps) {
-        if(angular.isArray(name)) {
+        if (angular.isArray(name)) {
           deps = name;
+          name = undefined;
         }
 
-        if(!name) {
+        if (!name) {
           name = 'myOnsenApp';
         }
 
         deps = ['onsen', name].concat(angular.isArray(deps) ? deps : []);
-        var module = angular.module(name, []);
+        var module = angular.module(name, deps);
 
         var doc = window.document;
         if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
