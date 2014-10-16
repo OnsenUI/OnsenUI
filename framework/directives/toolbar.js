@@ -7,7 +7,7 @@
  *  [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
  * @param inline
  *  [en]Display the toolbar as an inline element.
- *  [ja]ツールバーをインラインに置く。
+ *  [ja]ツールバーをインラインに置きます。
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-bottom-toolbar [en]ons-bottom-toolbar component[/en][ja]ons-bottom-toolbarコンポーネント[/ja]
@@ -139,12 +139,12 @@
 
       compile: function(element, attrs) {
         var modifierTemplater = $onsen.generateModifierTemplater(attrs),
-          inline = typeof attrs.inline !== "undefined";
+          inline = typeof attrs.inline !== 'undefined';
 
         element.addClass('navigation-bar');
         element.addClass(modifierTemplater('navigation-bar--*'));
 
-        if(!inline) {
+        if (!inline) {
           element.css({
             'position': 'absolute',
             'z-index': '10000',

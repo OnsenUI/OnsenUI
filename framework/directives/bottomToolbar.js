@@ -5,6 +5,9 @@
  * @description
  * [en]Toolbar component that is positioned at the bottom of the page. Has same functionality as the ons-toolbar component.[/en]
  * [ja]ページ下部に配置されるツールバー用コンポーネント。機能的にはons-toolbarと同様です。[/ja]
+ * @param inline
+ *  [en]Display the toolbar as an inline element.
+ *  [ja]ツールバーをインラインに置きます。
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @example
@@ -29,11 +32,16 @@
 
       compile: function(element, attrs) {
 
-        var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+        var modifierTemplater = $onsen.generateModifierTemplater(attrs),
+          inline = typeof attrs.inline !== 'undefined';
 
         element.addClass('bottom-bar');
         element.addClass(modifierTemplater('bottom-bar--*'));
         element.css({'z-index': 0});
+
+        if (inline) {
+          element.css('position', 'static');
+        }
 
         return {
           pre: function(scope, element, attrs) {
@@ -41,7 +49,7 @@
             scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
             var pageView = element.inheritedData('ons-page');
-            if (pageView) {
+            if (pageView && !inline) {
               pageView.registerBottomToolbar(element);
             }
           },
