@@ -150,25 +150,24 @@ gulp.task('app-server', function() {
 ////////////////////////////////////////
 // build-css-components
 ////////////////////////////////////////
-gulp.task('build-css-components', ['build-schemes'], function() {
-  function prefix(path) {
-    return 'components-src/stylus/' + path;
-  }
-
-  return merge(
-    // Compile to onsen-css-components.css with default variables
-    gulp.src([
-      '*-theme.styl',
-    ].map(prefix))
-      .pipe($.stylus({errors: true, define: {mylighten: mylighten}}))
-      .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2'))
-      .pipe($.rename(function(path) {
-        path.dirname = '.';
-        path.basename = 'onsen-css-components-' + path.basename;
-      }))
-      .pipe(gulp.dest('./components-src/dist/'))
-      .pipe(gulp.dest('./www/'))
-  );
+gulp.task('build-css-components', ['build-schemes'], function(done) {
+  gulp.src('components-src/stylus/*-theme.styl')
+    .pipe($.stylus({errors: true, define: {mylighten: mylighten}}))
+    .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2'))
+    .pipe($.rename(function(path) {
+      path.dirname = '.';
+      path.basename = 'onsen-css-components-' + path.basename;
+    }))
+    .pipe(gulp.dest('./components-src/dist/'))
+    .pipe(gulp.dest('./www/'))
+    .on('end', function() {
+      // Copy as default theme
+      gulp.src('components-src/dist/onsen-css-components-blue-basic-theme.css')
+        .pipe($.rename('onsen-css-components.css'))
+        .pipe(gulp.dest('./components-src/dist/'))
+        .pipe(gulp.dest('./www/'))
+        .on('end', done);
+    });
 });
 
 ////////////////////////////////////////
