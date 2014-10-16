@@ -33,13 +33,13 @@
  * @property setMenuPage(pageUrl,[options])
  *  [en]Show the page specified in pageUrl in the side menu pane.[/en]
  *  [ja]メニュー部分に表示されるページをpageUrlに指定します。[/ja]
- * @property openMenu()
+ * @property openMenu([options])
  *  [en]Slide the above layer to reveal the layer behind.[/en]
  *  [ja]メニューページを表示します。[/ja]
- * @property closeMenu()
+ * @property closeMenu([options])
  *  [en]Slide the above layer to hide the layer behind.[/en]
  *  [ja]メニューページを非表示にします。[/ja]
- * @property toggleMenu()
+ * @property toggleMenu([options])
  *  [en]Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.[/en]
  *  [ja]現在の状況に合わせて、メニューページを表示もしくは非表示にします。[/ja]
  * @property on(eventName,listener)

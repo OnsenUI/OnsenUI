@@ -4,10 +4,13 @@
  * @name keyboard-active
  * @description
  *    [en]Conditionally display content depending on if the software keyboard is visible or hidden. This component requires cordova and that the com.ionic.keyboard plugin is installed.[/en]
- *    [ja][/ja]
+ *    [ja]ソフトウェアキーボードが表示されているかどうかで、コンテンツを表示するかどうかを切り替えることが出来ます。このコンポーネントは、Cordovaやcom.ionic.keyboardプラグインを必要とします。[/ja]
  * @param ons-keyboard-active
  *    [en]The content of tags with this attribute will be visible when the software keyboard is open.[/en]
- *    [ja][/ja]
+ *    [ja]この属性がついた要素は、ソフトウェアキーボードが表示された時に初めて表示されます。[/ja]
+ * @param ons-keyboard-inactive
+ *    [en]The content of tags with this attribute will be visible when the software keyboard is hidden.[/en]
+ *    [ja]この属性がついた要素は、ソフトウェアキーボードが隠れている時のみ表示されます。[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
  * <div ons-keyboard-active>

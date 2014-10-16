@@ -6,8 +6,8 @@
  *  [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]
  *  [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
  * @param inline
- *  [en]Display the toolbar as an inline element.
- *  [ja]ツールバーをインラインに置きます。
+ *  [en]Display the toolbar as an inline element.[/en]
+ *  [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-bottom-toolbar [en]ons-bottom-toolbar component[/en][ja]ons-bottom-toolbarコンポーネント[/ja]
