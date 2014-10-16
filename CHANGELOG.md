@@ -8,6 +8,19 @@ v1.2.0-dev
  * ons-screen: Removed.
  * Removed all deprecated methods and attributes on "ons-split-view" and "ons-sliding-menu".
  * ons-page: Changed some internal markup structure and added ".page__background" elements for displaying page background.
+ * core: Added "init" events to components.
+ * core: Fixed memory leak where events handlers were not removed when components were destroyed.
+ * ons-icon: Implemented ons-icon attributes with css attribute selectors instead of javascript.
+ * ons-toolbar: Added "inline" attribute to toolbars.
+ * core: Changed so "ons.bootstrap()" returns an angular.module.
+ * ons-sliding-menu: Changed so the main page and menu can be defined as child elements.
+ * ons-sliding-menu: Animation can now be disabled when opening and closing menu.
+ * ons-split-view: Changed so the main and secondary page can be defined as child elements.
+ * ons-split-view: Added events and methods to control the default collapse behavior.
+ * ons-split-view: The 'collapse' attribute can now be a media query.
+ * ons-platform: Added ons.platform interface that can be used to query platform and OS.
+ * ons-keyboard-active: Implemented component that only shows content when the software keyboard is active.
+ * ons-loading-placeholder: Added component that shows a placeholder while loading a page.
 
 v1.1.4
 ----
