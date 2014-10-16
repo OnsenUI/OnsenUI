@@ -5,8 +5,9 @@ CHANGELOG
 v1.1.5-dev
 ----
 
-* ons-tabbar: Added attribute 'no-reload' to tabs to stop the tab from reloading when pressing it twice.
-* ons-tabbar: The event 'reactive' is triggered when pressing the same tab twice if 'no-reload' is set.
+ * ons-tabbar: Added attribute 'no-reload' to tabs to stop the tab from reloading when pressing it twice.
+ * ons-tabbar: The event 'reactive' is triggered when pressing the same tab twice if 'no-reload' is set.
+ * ons-navigator: Fixed [#228](https://github.com/OnsenUI/OnsenUI/issues/228).
 
 v1.1.4
 ----

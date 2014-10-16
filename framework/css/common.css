@@ -32,6 +32,9 @@ ons-tabbar {
   left: 0;
   bottom: 0;
   right: 0;
+}
+
+ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
   z-index: 2;
 }
 

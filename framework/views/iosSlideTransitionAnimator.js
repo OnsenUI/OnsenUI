@@ -115,6 +115,9 @@ limitations under the License.
           !leavePage.getPageView().hasToolbarElement();
 
         if (bothPageHasToolbar) {
+          enterPage.element.css({zIndex: 'auto'});
+          leavePage.element.css({zIndex: 'auto'});
+
           animit.runAll(
 
             maskClear,
@@ -198,6 +201,8 @@ limitations under the License.
               })
               .resetStyle()
               .queue(function(done) {
+                enterPage.element.css({zIndex: ''});
+                leavePage.element.css({zIndex: ''});
                 callback();
                 done();
               }),
@@ -324,6 +329,9 @@ limitations under the License.
           !leavePage.getPageView().hasToolbarElement();
 
         if (bothPageHasToolbar || isToolbarNothing) {
+          enterPage.element.css({zIndex: 'auto'});
+          leavePage.element.css({zIndex: 'auto'});
+
           animit.runAll(
 
             maskClear,
@@ -410,6 +418,8 @@ limitations under the License.
               })
               .wait(0)
               .queue(function(finish) {
+                enterPage.element.css({zIndex: ''});
+                leavePage.element.css({zIndex: ''});
                 done();
                 finish();
               }),
