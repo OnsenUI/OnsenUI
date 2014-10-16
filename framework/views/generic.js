@@ -19,9 +19,9 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('ListHeaderView', function($onsen) {
+  module.factory('GenericView', function($onsen) {
 
-    var ListHeaderView = Class.extend({
+    var GenericView = Class.extend({
 
       /**
        * @param {Object} scope
@@ -33,8 +33,8 @@ limitations under the License.
         this._scope = scope;
       }
     });
-    MicroEvent.mixin(ListHeaderView);
+    MicroEvent.mixin(GenericView);
 
-    return ListHeaderView;
+    return GenericView;
   });
 })();

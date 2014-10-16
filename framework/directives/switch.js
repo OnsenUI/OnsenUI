@@ -95,6 +95,7 @@
 
           $onsen.cleaner.onDestroy(scope, function() {
             switchView._events = undefined;
+            $onsen.removeModifierMethods(switchView);
             element.data('ons-switch', undefined);
             $onsen.aliasStack.unregister('ons.switch', switchView);
             $onsen.clearComponent({

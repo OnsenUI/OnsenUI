@@ -22,7 +22,7 @@
 
   var module = angular.module('onsen');
 
-  module.directive('onsList', function($onsen, ListView) {
+  module.directive('onsList', function($onsen, GenericView) {
     return {
       restrict: 'E',
       scope: false,
@@ -35,7 +35,7 @@
       compile: function(element, attrs) {
      
         return function(scope, element, attrs) {
-          var list = new ListView(scope, element, attrs);
+          var list = new GenericView(scope, element, attrs);
           
           $onsen.declareVarAttribute(attrs, list);
 
@@ -44,6 +44,7 @@
 
           scope.$on('$destroy', function() {
             list._events = undefined;
+            $onsen.removeModifierMethods(list);
             element.data('ons-list', undefined);
             $onsen.aliasStack.unregister('ons.list', list);
             element = null;

@@ -22,7 +22,7 @@
 
   var module = angular.module('onsen');
 
-  module.directive('onsListHeader', function($onsen, ListHeaderView) {
+  module.directive('onsListHeader', function($onsen, GenericView) {
     return {
       restrict: 'E',
 
@@ -33,7 +33,7 @@
 
       compile: function(elem, attrs, transcludeFn) {
         return function(scope, element, attrs) {
-          var listHeader = new ListHeaderView(scope, element, attrs);
+          var listHeader = new GenericView(scope, element, attrs);
 
           $onsen.declareVarAttribute(attrs, listHeader);
 
@@ -42,6 +42,7 @@
 
           scope.$on('$destroy', function() {
             listHeader._events = undefined;
+            $onsen.removeModifierMethods(listHeader);
             element.data('ons-listHeader', undefined);
             $onsen.aliasStack.unregister('ons.listHeader', listHeader);
             element = null;

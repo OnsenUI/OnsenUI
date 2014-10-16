@@ -22,14 +22,14 @@
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsToolbarButton', function($onsen, ToolbarButtonView) {
+  module.directive('onsToolbarButton', function($onsen, GenericView) {
     return {
       restrict: 'E',
       transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
         pre: function(scope, element, attrs) {
-          var toolbarButton = new ToolbarButtonView(scope, element, attrs);
+          var toolbarButton = new GenericView(scope, element, attrs);
 
           $onsen.declareVarAttribute(attrs, toolbarButton);
 
@@ -38,6 +38,7 @@
 
           scope.$on('$destroy', function() {
             toolbarButton._events = undefined;
+            $onsen.removeModifierMethods(toolbarButton);
             element.data('ons-toolbar-button', undefined);
             $onsen.aliasStack.unregister('ons.toolbarButton', toolbarButton);
             element = null;

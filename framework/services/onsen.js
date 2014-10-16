@@ -240,10 +240,10 @@ limitations under the License.
               var classes = element.attr('class').split(/\s+/),
                   patt = template.replace('*', '.');
 
-              for(var i=0; i < classes.length; i++) {
+              for (var i=0; i < classes.length; i++) {
                 var cls = classes[i];
 
-                if(cls.match(patt)) {
+                if (cls.match(patt)) {
                   element.removeClass(cls);
                 }
               }
@@ -252,9 +252,8 @@ limitations under the License.
             },
 
             toggleModifier: function(modifier) {
-              console.log(modifier, element);
               var cls = _tr(modifier);
-              if(element.hasClass(cls)) {
+              if (element.hasClass(cls)) {
                 element.removeClass(cls);  
               } else {
                 element.addClass(cls);
@@ -263,7 +262,7 @@ limitations under the License.
           };
 
           var append = function(oldFn, newFn) {
-            if(typeof oldFn !== "undefined") {
+            if (typeof oldFn !== "undefined") {
               return function() {
                 return oldFn.apply(null, arguments) || newFn.apply(null, arguments);
               };
@@ -277,6 +276,17 @@ limitations under the License.
           view.addModifier = append(view.addModifier, fns.addModifier);
           view.setModifier = append(view.setModifier, fns.setModifier);
           view.toggleModifier = append(view.toggleModifier, fns.toggleModifier);
+        },
+
+        /**
+         * Remove modifier methods.
+         *
+         * @param {Object} view object
+         */
+        removeModifierMethods: function(view) {
+          view.hasModifier = view.removeModifier =
+            view.addModifier = view.setModifier =
+            view.toggleModifier = undefined;
         },
 
         /**

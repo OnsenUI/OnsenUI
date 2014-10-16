@@ -27,7 +27,7 @@
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsButton', function($onsen, ButtonView) {
+  module.directive('onsButton', function($onsen, GenericView) {
     return {
       restrict: 'E',
       replace: false,
@@ -37,7 +37,7 @@
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs, _, transclude) {
-        var button = new ButtonView(scope, element, attrs);
+        var button = new GenericView(scope, element, attrs);
         
         $onsen.declareVarAttribute(attrs, button);
 
@@ -46,6 +46,7 @@
 
         scope.$on('$destroy', function() {
           button._events = undefined;
+          $onsen.removeModifierMethods(button);
           element.data('ons-button', undefined);
           $onsen.aliasStack.unregister('ons.button', button);
           element = null;

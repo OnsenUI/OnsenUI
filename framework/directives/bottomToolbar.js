@@ -17,7 +17,7 @@
 
   var module = angular.module('onsen');
 
-  module.directive('onsBottomToolbar', function($onsen, BottomToolbarView) {
+  module.directive('onsBottomToolbar', function($onsen, GenericView) {
     return {
       restrict: 'E',
       replace: false,
@@ -31,7 +31,7 @@
 
         return {
           pre: function(scope, element, attrs) {
-            var bottomToolbar = new BottomToolbarView(scope, element, attrs);
+            var bottomToolbar = new GenericView(scope, element, attrs);
             
             $onsen.declareVarAttribute(attrs, bottomToolbar);
 
@@ -40,6 +40,7 @@
 
             scope.$on('$destroy', function() {
               bottomToolbar._events = undefined;
+              $onsen.removeModifierMethods(bottomToolbar);
               element.data('ons-bottomToolbar', undefined);
               $onsen.aliasStack.unregister('ons.bottomToolbar', bottomToolbar);
               element = null;

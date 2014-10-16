@@ -106,6 +106,7 @@
 
         scope.$on('$destroy', function() {
           tabbarView._events = undefined;
+          $onsen.removeModifierMethods(tabbarView);
           element.data('ons-tabbar', undefined);
           $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
         });
