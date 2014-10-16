@@ -15,10 +15,24 @@
         $scope.person = {
           isSick: false
         }
+      });
 
-        $scope.$watch('person.isSick', function(a, b) {
-          console.log(a,b);
-        });
+      ons.ready(function() {
+        $("#switch").children().click();
+
+        if ($("#checkbox").prop("checked")) {
+          alert("OK 1");  
+        } else {
+          alert("NG 1");
+        }
+
+        $("#checkbox").click();
+
+        if (mySwitch.isChecked()) {
+          alert("NG 2");
+        } else {
+          alert("OK 2");
+        }
       });
 
     </script>
@@ -36,8 +50,8 @@
 
       <br>
       <div style="text-align: center">
-        Sick? <ons-switch var="mySwitch" ng-model="person.isSick"></ons-switch>
-        <input type="checkbox" ng-model="person.isSick"></input>
+        Sick? <ons-switch id="switch" var="mySwitch" ng-model="person.isSick"></ons-switch>
+        <input id="checkbox" type="checkbox" ng-model="person.isSick"></input>
         <p>The person is {{ person.isSick ? 'sick' : 'well' }}</p>
       </div>
     </ons-page>
