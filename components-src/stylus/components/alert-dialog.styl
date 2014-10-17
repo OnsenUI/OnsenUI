@@ -63,6 +63,7 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   border-radius 8px
   overflow hidden
   padding 16px 0 0 0
+  max-width 95%
 
 .alert-dialog-title
   reset-font()
@@ -73,7 +74,7 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
 
 .alert-dialog-content
   reset-box-model()
-  padding 4px 16px 8px 16px
+  padding 4px 12px 8px 12px
   font-size var-font-size--mini
   min-height 60px
   text-align center
@@ -207,4 +208,42 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
       </div>
     </div>
 */
+
+/*! topdoc
+  name: Android-like Alert Dialog
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="mask"></div>
+
+    <div class="alert-dialog alert-dialog--android">
+      <div class="alert-dialog-title alert-dialog-title--android">
+        Alert
+      </div>
+
+      <div class="alert-dialog-content alert-dialog-content--android">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer alert-dialog-footer--one">
+        <button class="alert-dialog-button alert-dialog-button--one">Cancel</button>
+        <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Ok</button>
+      </div>
+    </div>
+*/
+.alert-dialog--android
+  border-radius 2px
+  padding 0
+
+.alert-dialog-title--android
+  border-bottom 1px solid var-alert-dialog-separator-color
+  height 52px
+  line-height 52px
+  padding 0 12px
+  margin-bottom 8px
+  text-align left
+
+.alert-dialog-content--android
+  text-align left
+  padding 8px 12px
 
