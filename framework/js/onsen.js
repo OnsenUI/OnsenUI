@@ -304,6 +304,35 @@ window.ons = (function(){
         return !!(window.cordova || window.phonegap || window.PhoneGap);
       },
 
+      createAlertDialog: function(page) {
+        if(!page) {
+          throw new Error('Page url must be defined.');
+        }
+
+        var alertDialog = angular.element('<ons-alert-dialog>'),
+          $onsen = this._getOnsenService();
+        
+        angular.element(document.body).append(angular.element(alertDialog));
+        ons.compile(alertDialog[0]);    
+
+        $onsen.getPageHTMLAsync(page).then(function(html) {
+          var el = document.createElement('div');
+          el.innerHTML = html;
+
+          var inner = el.getElementsByTagName('ons-alert-dialog');
+        
+          console.log(inner);
+
+          if(!inner || inner.length != 1) {
+            throw new Error('Page must contain one <ons-alert-dialog> tag.');
+          }
+
+          console.log(inner);
+        });
+
+        return alertDialog.data('ons-alert-dialog');
+      },
+
       platform: {
         /**
          * @return {Boolean}
