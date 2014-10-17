@@ -23,21 +23,24 @@ limitations under the License.
   module.factory('AlertDialogView', function($onsen) {
 
     var AlertDialogView = Class.extend({
-      _element: undefined,
-      _scope: undefined,
 
       /**
        * @param {Object} scope
        * @param {jqLite} element
        */
-      init: function(scope, element) {
+      init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
+        this._overlayColor = 'rgba(0, 0, 0, 0.2)';
+
+        this._cancelable = attrs.cancelable ? !!attrs.cancelable : false;
         this._disabled = false;
         this._visible = false;
+
+        this._createOverlay();
 
         this.hide();
       },
@@ -51,6 +54,8 @@ limitations under the License.
        */
       show: function() {
         this._element.css("display", "block");
+        this._overlay.css("display", "block");
+        
         this._visible = true;
       },
 
@@ -59,6 +64,8 @@ limitations under the License.
        */
       hide: function() {
         this._element.css("display", "none");
+        this._overlay.css("display", "none");
+
         this._visible = false;
       },
 
@@ -85,7 +92,7 @@ limitations under the License.
        */
       setDisabled: function(disabled) {
         if (typeof disabled !== 'boolean') {
-          throw Error('Argument must be a boolean.');
+          throw new Error('Argument must be a boolean.');
         }
 
         this._disabled = disabled;
@@ -100,9 +107,49 @@ limitations under the License.
         return this._disabled;
       },
 
+      /**
+       * Make alert dialog cancelable or uncancelable. 
+       *
+       * @param {Boolean}
+       */
+      setCancelable: function(cancelable) {
+        if (typeof cancelable !== 'boolean') {
+          throw new Error('Argument must be a boolean.'); 
+        }  
+
+        this._cancelable = cancelable;
+      },
+
+      isCancelable: function() {
+        return this._cancelable;
+      },
+
+      _cancel: function() {
+        if(this.isCancelable()) {
+          this.hide();
+        }
+      },
+
       _destroy: function() {
         this.emit('destroy');
         this._element = this._scope = null;
+      },
+
+      _createOverlay: function() {
+        this._overlay = angular.element('<div>').css({
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          backgroundColor: this._overlayColor,
+          width: "100%",
+          height: "100%",
+          zIndex: 20000,
+          display: "none"
+        });
+
+        this._overlay.on('click', this._cancel.bind(this));
+
+        angular.element(document.body).append(this._overlay);
       }
     });
     MicroEvent.mixin(AlertDialogView);

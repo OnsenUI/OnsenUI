@@ -38,7 +38,7 @@
 
         return {
           pre: function(scope, element, attrs) {
-            var alertDialog = new AlertDialogView(scope, element);
+            var alertDialog = new AlertDialogView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, alertDialog);
             $onsen.aliasStack.register('ons.alertDialog', alertDialog);

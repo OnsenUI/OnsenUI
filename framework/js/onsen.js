@@ -313,23 +313,23 @@ window.ons = (function(){
           $onsen = this._getOnsenService();
         
         angular.element(document.body).append(angular.element(alertDialog));
-        ons.compile(alertDialog[0]);    
 
         $onsen.getPageHTMLAsync(page).then(function(html) {
-          var el = document.createElement('div');
-          el.innerHTML = html;
+          var div = document.createElement('div');
+          div.innerHTML = html;
 
-          var inner = el.getElementsByTagName('ons-alert-dialog');
-        
-          console.log(inner);
+          var el = angular.element(div.querySelector('ons-alert-dialog'));
 
-          if(!inner || inner.length != 1) {
-            throw new Error('Page must contain one <ons-alert-dialog> tag.');
+          // Copy attributes and insert html.
+          var attrs = el.prop('attributes');
+          for (var i = 0, l = attrs.length; i < l; i ++) {
+            alertDialog.attr(attrs[i].name, attrs[i].value); 
           }
 
-          console.log(inner);
+          alertDialog.html(el.html());
         });
-
+        ons.compile(alertDialog[0]);    
+     
         return alertDialog.data('ons-alert-dialog');
       },
 
