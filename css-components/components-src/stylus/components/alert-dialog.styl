@@ -18,8 +18,10 @@ limitations under the License.
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
-var-alert-dialog-separator-color = $toolbar-border-color
-var-alert-dialog-button-color = $highlight-color
+var-alert-dialog-separator-color = $alert-dialog-separator-color
+var-alert-dialog-button-color = $alert-dialog-button-color
+var-alert-dialog-background-color = $alert-dialog-background-color
+var-alert-dialog-text-color = $alert-dialog-text-color
 
 retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   +retina-query()
@@ -58,12 +60,13 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   transform translate(-50%, -50%)
   width 270px
   margin auto auto
-  background-color rgba(255, 255, 255, 0.95)
+  background-color var-alert-dialog-background-color
   box-shadow 0 2px 12px rgba(0, 0, 0, 0.07)
   border-radius 8px
   overflow hidden
   padding 16px 0 0 0
   max-width 95%
+  color var-alert-dialog-text-color
 
 .alert-dialog-title
   reset-font()
@@ -71,6 +74,7 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   font-weight var-font-weight--large
   padding 0px 8px 0px 8px
   text-align center
+  color var-alert-dialog-text-color
 
 .alert-dialog-content
   reset-box-model()
@@ -78,6 +82,7 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   font-size var-font-size--mini
   min-height 36px
   text-align center
+  color var-alert-dialog-text-color
 
 .alert-dialog-footer
   width 100%

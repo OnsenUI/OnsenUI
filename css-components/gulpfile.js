@@ -182,6 +182,7 @@ gulp.task('build-css-topdoc', ['build-css-components'], $.shell.task([
 ////////////////////////////////////////
 // build-schemes
 ////////////////////////////////////////
-gulp.task('build-schemes', function() {
+gulp.task('build-schemes', function(done) {
   schemeWriter.write();
+  setTimeout(done, 40);
 });

@@ -44,6 +44,12 @@
         'modal-background-color': 'rgba(0, 0, 0, 0.7)',
         'modal-text-color': '#fff',
 
+        // Alert Dialog
+        'alert-dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'alert-dialog-text-color': '#1f1f21',
+        'alert-dialog-button-color': 'rgba(24,103,194,0.81)',
+        'alert-dialog-separator-color': '#ddd',
+
         // Notification
         'notification-background-color': '#dc5236'
       }
@@ -87,6 +93,12 @@
         // Modal
         'modal-background-color': 'rgba(0, 0, 0, 0.7)',
         'modal-text-color': '#fff',
+
+        // Alert Dialog
+        'alert-dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'alert-dialog-text-color': '#1f1f21',
+        'alert-dialog-button-color': '#1284ff',
+        'alert-dialog-separator-color': '#ddd',
 
         // Notification
         'notification-background-color': '#dc5236'
@@ -132,6 +144,12 @@
         'modal-background-color': 'rgba(0, 0, 0, 0.7)',
         'modal-text-color': '#fff',
 
+        // Alert Dialog
+        'alert-dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'alert-dialog-text-color': '#1f1f21',
+        'alert-dialog-button-color': '#3d74ff',
+        'alert-dialog-separator-color': '#ddd',
+
         // Notification
         'notification-background-color': '#3385ff'
       }
@@ -174,6 +192,12 @@
         // Modal
         'modal-background-color': 'rgba(0, 0, 0, 0.7)',
         'modal-text-color': '#fff',
+
+        // Alert Dialog
+        'alert-dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'alert-dialog-text-color': '#1f1f21',
+        'alert-dialog-button-color': '#eb482f',
+        'alert-dialog-separator-color': '#ddd',
 
         // Notification
         'notification-background-color': '#eb5e2f'
@@ -218,6 +242,12 @@
         // Modal
         'modal-background-color': 'rgba(0, 0, 0, 0.7)',
         'modal-text-color': '#fff',
+
+        // Alert Dialog
+        'alert-dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+        'alert-dialog-text-color': '#1f1f21',
+        'alert-dialog-button-color': '#574bdb',
+        'alert-dialog-separator-color': '#ddd',
 
         // Notification
         'notification-background-color': '#dc5236'
