@@ -92,6 +92,7 @@
         });
 
         var tabbarView = new TabbarView(scope, element, attrs);
+        $onsen.addModifierMethods(tabbarView, 'tab-bar--*', angular.element(element.children()[1]))
 
         scope.tabbarId = tabbarView._tabbarId;
 
@@ -105,6 +106,7 @@
 
         scope.$on('$destroy', function() {
           tabbarView._events = undefined;
+          $onsen.removeModifierMethods(tabbarView);
           element.data('ons-tabbar', undefined);
           $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
         });

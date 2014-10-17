@@ -1,4 +1,4 @@
-/*! onsenui - v1.2.0-dev - 2014-10-16 */
+/*! onsenui - v1.2.0-dev - 2014-10-17 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -3923,7 +3923,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/back_button.tpl",
-    "<span class=\"toolbar-button--quiet {{modifierTemplater('toolbar-button--quiet--*')}}\" ng-click=\"$root.ons.findParentComponentUntil('ons-navigator', $event).popPage()\" style=\"height: 44px; line-height: 0; padding: 0; position: relative;\">\n" +
+    "<span class=\"toolbar-button--quiet {{modifierTemplater('toolbar-button--*')}}\" ng-click=\"$root.ons.findParentComponentUntil('ons-navigator', $event).popPage()\" style=\"height: 44px; line-height: 0; padding: 0; position: relative;\">\n" +
     "  <i class=\"ion-ios7-arrow-back ons-back-button__icon\" style=\"vertical-align: top; background-color: transparent; height: 44px; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; width: 16px; display: inline-block; padding-top: 1px;\"></i><span style=\"vertical-align: top; display: inline-block; line-height: 44px; height: 44px;\" class=\"back-button__label\"></span>\n" +
     "</span>\n" +
     "");
@@ -4033,7 +4033,7 @@ catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/toolbar_button.tpl",
-    "<span class=\"toolbar-button {{modifierTemplater('toolbar-button--quiet--*')}} navigation-bar__line-height\" ng-transclude></span>\n" +
+    "<span class=\"toolbar-button {{modifierTemplater('toolbar-button--*')}} navigation-bar__line-height\" ng-transclude></span>\n" +
     "");
 }]);
 })();
@@ -4554,6 +4554,120 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
+  module.factory('AlertDialogView', ['$onsen', function($onsen) {
+
+    var AlertDialogView = Class.extend({
+      _element: undefined,
+      _scope: undefined,
+
+      /**
+       * @param {Object} scope
+       * @param {jqLite} element
+       */
+      init: function(scope, element) {
+        this._scope = scope;
+        this._element = element;
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
+
+        this._disabled = false;
+        this._visible = false;
+
+        this.hide();
+      },
+
+      getDeviceBackButtonHandler: function() {
+        return this._deviceBackButtonHandler;
+      },
+
+      /**
+       * Show alert dialog.
+       */
+      show: function() {
+        element.css("display", "block");
+        this._visible = true;
+      },
+
+      /**
+       * Hide alert dialog.
+       */
+      hide: function() {
+        element.css("display", "none");
+        this._visible = false;
+      },
+
+      /**
+       * True if alert dialog is visible.
+       *
+       * @return {Boolean}
+       */
+      isShown: function() {
+        return this._visible;
+      },
+
+      /**
+       * Destroy alert dialog.
+       */
+      destroy: function() {
+        // Destroy everything!!!
+      },
+
+      /**
+       * Disable or enable alert dialog.
+       *
+       * @param {Boolean} 
+       */
+      setDisabled: function(disabled) {
+        if (typeof disabled !== 'boolean') {
+          throw Error('Argument must be a boolean.');
+        }
+
+        this._disabled = disabled;
+      },
+
+      /**
+       * True if alert dialog is disabled.
+       *
+       * @return {Boolean}
+       */
+      isDisabled: function() {
+        return this._disabled;
+      },
+
+      _destroy: function() {
+        this.emit('destroy');
+        this._element = this._scope = null;
+      }
+    });
+    MicroEvent.mixin(AlertDialogView);
+
+    return AlertDialogView;
+  }]);
+})();
+
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function() {
+  'use strict;';
+
+  var module = angular.module('onsen');
+
   module.factory('CarouselView', ['$http', '$parse', '$templateCache', '$compile', '$onsen', '$timeout', function($http, $parse, $templateCache, $compile, $onsen, $timeout) {
 
     /**
@@ -4913,6 +5027,47 @@ limitations under the License.
     return FadeTransitionAnimator;
   }]);
 
+})();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function(){
+  'use strict';
+  var module = angular.module('onsen');
+
+  module.factory('GenericView', ['$onsen', function($onsen) {
+
+    var GenericView = Class.extend({
+
+      /**
+       * @param {Object} scope
+       * @param {jqLite} element
+       * @param {Object} attrs
+       */
+      init: function(scope, element, attrs) {
+        this._element = element;
+        this._scope = scope;
+      }
+    });
+    MicroEvent.mixin(GenericView);
+
+    return GenericView;
+  }]);
 })();
 
 /*
@@ -9126,6 +9281,69 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+ * @id alert-dialog 
+ * @name ons-alert-dialog
+ * @description 
+ *  [en]Alert dialog that is displayed on top of current screen.[/en]
+ *  [ja][/ja]
+ * @param var 
+ *  [en]Variable name to refer this alert dialog.[/en]
+ *  [ja][/ja]
+ * @example
+ * <ons-alert-dialog>
+ *   ...
+ * </ons-alert-dialog>
+ */
+(function() {
+  'use strict';
+
+  var module = angular.module('onsen');
+
+  /**
+   * Alert dialog directive.
+   */
+  module.directive('onsAlertDialog', ['$onsen', 'AlertDialogView', function($onsen, AlertDialogView) {
+    return {
+      restrict: 'E',
+      replace: false,
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclde.
+      scope: false, 
+      transclude: false,
+
+      compile: function(element, attrs) {
+        var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+        element.addClass(modifierTemplater('alert-dialog--*'));
+
+        return {
+          pre: function(scope, element, attrs) {
+            var alertDialog = new AlertDialogView(scope, element);
+
+            $onsen.declareVarAttribute(attrs, alertDialog);
+            $onsen.aliasStack.register('ons.alertDialog', alertDialog);
+            element.data('ons-alert-dialog', alertDialog);
+
+            scope.$on('$destroy', function() {
+              alertDialog._events = undefined;
+              element.data('ons-alert-dialog', undefined);
+              $onsen.aliasStack.unregister('ons.alertDialog', alertDialog);
+            });
+          },
+
+          post: function(scope, element) {
+            $onsen.fireComponentEvent(element[0], "init");
+          }
+        };
+      }
+    };
+  }]);
+
+})();
+
+/**
+ * @ngdoc directive
  * @id back_button
  * @name ons-back-button
  * @description
@@ -9142,7 +9360,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsBackButton', ['$onsen', '$compile', 'ComponentCleaner', function($onsen, $compile, ComponentCleaner) {
+  module.directive('onsBackButton', ['$onsen', '$compile', 'GenericView', 'ComponentCleaner', function($onsen, $compile, GenericView, ComponentCleaner) {
     return {
       restrict: 'E',
       replace: false,
@@ -9155,7 +9373,24 @@ limitations under the License.
 
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
+          var backButton = new GenericView(scope, element, attrs);
+          
+          $onsen.declareVarAttribute(attrs, backButton);
+
+          $onsen.aliasStack.register('ons.backButton', backButton);
+          element.data('ons-back-button', backButton);
+
+          scope.$on('$destroy', function() {
+            backButton._events = undefined;
+            $onsen.removeModifierMethods(backButton);
+            element.data('ons-back-button', undefined);
+            $onsen.aliasStack.unregister('ons.backButton', backButton);
+            element = null;
+          });
+
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+          $onsen.addModifierMethods(backButton, 'toolbar-button--*', element.children());
 
           transclude(scope, function(clonedElement) {
             if (clonedElement[0]) {
@@ -9202,7 +9437,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.directive('onsBottomToolbar', ['$onsen', function($onsen) {
+  module.directive('onsBottomToolbar', ['$onsen', 'GenericView', function($onsen, GenericView) {
     return {
       restrict: 'E',
       replace: false,
@@ -9213,7 +9448,6 @@ limitations under the License.
       scope: false,
 
       compile: function(element, attrs) {
-
         var modifierTemplater = $onsen.generateModifierTemplater(attrs),
           inline = typeof attrs.inline !== 'undefined';
 
@@ -9227,8 +9461,22 @@ limitations under the License.
 
         return {
           pre: function(scope, element, attrs) {
-            // modifier
-            scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+            var bottomToolbar = new GenericView(scope, element, attrs);
+            
+            $onsen.declareVarAttribute(attrs, bottomToolbar);
+
+            $onsen.aliasStack.register('ons.bottomToolbar', bottomToolbar);
+            element.data('ons-bottomToolbar', bottomToolbar);
+
+            scope.$on('$destroy', function() {
+              bottomToolbar._events = undefined;
+              $onsen.removeModifierMethods(bottomToolbar);
+              element.data('ons-bottomToolbar', undefined);
+              $onsen.aliasStack.unregister('ons.bottomToolbar', bottomToolbar);
+              element = null;
+            });
+
+            $onsen.addModifierMethods(bottomToolbar, 'bottom-bar--*', element);
 
             var pageView = element.inheritedData('ons-page');
             if (pageView && !inline) {
@@ -9274,7 +9522,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsButton', ['$onsen', function($onsen) {
+  module.directive('onsButton', ['$onsen', 'GenericView', function($onsen, GenericView) {
     return {
       restrict: 'E',
       replace: false,
@@ -9284,12 +9532,29 @@ limitations under the License.
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs, _, transclude) {
-        var initialAnimation = 'slide-left';
+        var button = new GenericView(scope, element, attrs);
+        
+        $onsen.declareVarAttribute(attrs, button);
 
+        $onsen.aliasStack.register('ons.button', button);
+        element.data('ons-button', button);
+
+        scope.$on('$destroy', function() {
+          button._events = undefined;
+          $onsen.removeModifierMethods(button);
+          element.data('ons-button', undefined);
+          $onsen.aliasStack.unregister('ons.button', button);
+          element = null;
+        });
+
+        var initialAnimation = 'slide-left';
+        
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         element.addClass('button effeckt-button');
         element.addClass(scope.modifierTemplater('button--*'));
         element.addClass(initialAnimation);
+
+        $onsen.addModifierMethods(button, 'button--*', element); 
 
         transclude(scope, function(cloned) {
           angular.element(element[0].querySelector('.ons-button-inner')).append(cloned);
@@ -10069,7 +10334,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.directive('onsList', ['$onsen', function($onsen) {
+  module.directive('onsList', ['$onsen', 'GenericView', function($onsen, GenericView) {
     return {
       restrict: 'E',
       scope: false,
@@ -10080,12 +10345,30 @@ limitations under the License.
       transclude: false,
 
       compile: function(element, attrs) {
-        var templater = $onsen.generateModifierTemplater(attrs);
-
-        element.addClass('list ons-list-inner');
-        element.addClass(templater('list--*'));
-      
+     
         return function(scope, element, attrs) {
+          var list = new GenericView(scope, element, attrs);
+          
+          $onsen.declareVarAttribute(attrs, list);
+
+          $onsen.aliasStack.register('ons.list', list);
+          element.data('ons-list', list);
+
+          scope.$on('$destroy', function() {
+            list._events = undefined;
+            $onsen.removeModifierMethods(list);
+            element.data('ons-list', undefined);
+            $onsen.aliasStack.unregister('ons.list', list);
+            element = null;
+          });
+
+          var templater = $onsen.generateModifierTemplater(attrs);
+
+          element.addClass('list ons-list-inner');
+          element.addClass(templater('list--*'));
+         
+          $onsen.addModifierMethods(list, 'list--*', element);
+
           $onsen.fireComponentEvent(element[0], "init"); 
         };
       }
@@ -10118,7 +10401,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.directive('onsListHeader', ['$onsen', function($onsen) {
+  module.directive('onsListHeader', ['$onsen', 'GenericView', function($onsen, GenericView) {
     return {
       restrict: 'E',
 
@@ -10128,11 +10411,28 @@ limitations under the License.
       transclude: false,
 
       compile: function(elem, attrs, transcludeFn) {
-        var templater = $onsen.generateModifierTemplater(attrs);
-        elem.addClass('list__header ons-list-header-inner');
-        elem.addClass(templater('list__header--*'));
-      
         return function(scope, element, attrs) {
+          var listHeader = new GenericView(scope, element, attrs);
+
+          $onsen.declareVarAttribute(attrs, listHeader);
+
+          $onsen.aliasStack.register('ons.listHeader', listHeader);
+          element.data('ons-listHeader', listHeader);
+
+          scope.$on('$destroy', function() {
+            listHeader._events = undefined;
+            $onsen.removeModifierMethods(listHeader);
+            element.data('ons-listHeader', undefined);
+            $onsen.aliasStack.unregister('ons.listHeader', listHeader);
+            element = null;
+          });
+         
+          var templater = $onsen.generateModifierTemplater(attrs);
+          elem.addClass('list__header ons-list-header-inner');
+          elem.addClass(templater('list__header--*'));
+
+          $onsen.addModifierMethods(listHeader, 'list__header--*', elem);
+
           $onsen.fireComponentEvent(element[0], "init");
         };
       }
@@ -10164,7 +10464,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.directive('onsListItem', ['$onsen', function($onsen) {
+  module.directive('onsListItem', ['$onsen', 'GenericView', function($onsen, GenericView) {
     return {
       restrict: 'E',
 
@@ -10174,11 +10474,28 @@ limitations under the License.
       transclude: false,
 
       compile: function(elem, attrs, transcludeFn) {
-        var templater = $onsen.generateModifierTemplater(attrs);
-        elem.addClass('list__item ons-list-item-inner');
-        elem.addClass(templater('list__item--*'));
-
         return function(scope, element, attrs) {
+          var listItem = new GenericView(scope, element, attrs);
+
+          $onsen.declareVarAttribute(attrs, listItem);
+
+          $onsen.aliasStack.register('ons.listItem', listItem);
+          element.data('ons-listItem', listItem);
+
+          scope.$on('$destroy', function() {
+            listItem._events = undefined;
+            $onsen.removeModifierMethods(listItem);
+            element.data('ons-listItem', undefined);
+            $onsen.aliasStack.unregister('ons.listItem', listItem);
+            element = null;
+          });
+
+          var templater = $onsen.generateModifierTemplater(attrs);
+          elem.addClass('list__item ons-list-item-inner');
+          elem.addClass(templater('list__item--*'));
+
+          $onsen.addModifierMethods(listItem, 'list__item--*', elem);
+
           $onsen.fireComponentEvent(element[0], "init");
         };
       }
@@ -10299,6 +10616,9 @@ limitations under the License.
 
             var modal = new ModalView(scope, element);
 
+            $onsen.addModifierMethods(modal, 'modal--*', element);
+            $onsen.addModifierMethods(modal, 'modal--*__content', element.children());
+
             $onsen.declareVarAttribute(attrs, modal);
 
             $onsen.aliasStack.register('ons.modal', modal);
@@ -10306,6 +10626,7 @@ limitations under the License.
 
             scope.$on('$destroy', function() {
               modal._events = undefined;
+              $onsen.removeModifierMethods(modal);
               element.data('ons-modal', undefined);
               $onsen.aliasStack.unregister('ons.modal', modal);
             });
@@ -10575,8 +10896,10 @@ limitations under the License.
       $onsen.aliasStack.register('ons.page', page);
       element.data('ons-page', page);
 
-      var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-      element.addClass('page ' + modifierTemplater('page--*'));
+      var modifierTemplater = $onsen.generateModifierTemplater(attrs),
+          template = 'page--*';
+      element.addClass('page ' + modifierTemplater(template));
+      $onsen.addModifierMethods(page, template, element);
 
       var pageContent = angular.element(element[0].querySelector('.page__content'));
       pageContent.addClass(modifierTemplater('page--*__content'));
@@ -11137,6 +11460,15 @@ limitations under the License.
           var checkbox = angular.element(element[0].querySelector('input[type=checkbox]'));
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+          var label = element.children(),
+              input = angular.element(label.children()[0]),
+              toggle = angular.element(label.children()[1]);
+
+          $onsen.addModifierMethods(switchView, 'switch--*', label);
+          $onsen.addModifierMethods(switchView, 'switch--*__input', input);
+          $onsen.addModifierMethods(switchView, 'switch--*__toggle', toggle);
+          
           attrs.$observe('checked', function(checked) {
             scope.model = !!element.attr('checked');
           });
@@ -11165,6 +11497,7 @@ limitations under the License.
 
           $onsen.cleaner.onDestroy(scope, function() {
             switchView._events = undefined;
+            $onsen.removeModifierMethods(switchView);
             element.data('ons-switch', undefined);
             $onsen.aliasStack.unregister('ons.switch', switchView);
             $onsen.clearComponent({
@@ -11439,6 +11772,7 @@ limitations under the License.
         });
 
         var tabbarView = new TabbarView(scope, element, attrs);
+        $onsen.addModifierMethods(tabbarView, 'tab-bar--*', angular.element(element.children()[1]))
 
         scope.tabbarId = tabbarView._tabbarId;
 
@@ -11452,6 +11786,7 @@ limitations under the License.
 
         scope.$on('$destroy', function() {
           tabbarView._events = undefined;
+          $onsen.removeModifierMethods(tabbarView);
           element.data('ons-tabbar', undefined);
           $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
         });
@@ -11695,19 +12030,34 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsToolbarButton', ['$onsen', function($onsen) {
+  module.directive('onsToolbarButton', ['$onsen', 'GenericView', function($onsen, GenericView) {
     return {
       restrict: 'E',
       transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
         pre: function(scope, element, attrs) {
+          var toolbarButton = new GenericView(scope, element, attrs);
+
+          $onsen.declareVarAttribute(attrs, toolbarButton);
+
+          $onsen.aliasStack.register('ons.toolbarButton', toolbarButton);
+          element.data('ons-toolbar-button', toolbarButton);
+
+          scope.$on('$destroy', function() {
+            toolbarButton._events = undefined;
+            $onsen.removeModifierMethods(toolbarButton);
+            element.data('ons-toolbar-button', undefined);
+            $onsen.aliasStack.unregister('ons.toolbarButton', toolbarButton);
+            element = null;
+          });
 
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+          $onsen.addModifierMethods(toolbarButton, 'toolbar-button--*', element.children());
 
           $onsen.cleaner.onDestroy(scope, function() {
             $onsen.clearComponent({
@@ -12334,6 +12684,84 @@ limitations under the License.
               return template.replace('*', modifier);
             }).join(' ');
           };
+        },
+
+        /**
+         * Add modifier methods to view object.
+         *
+         * @param {Object} view object
+         * @param {String} template
+         * @param {jqLite} element 
+         */
+        addModifierMethods: function(view, template, element) {
+          var _tr = function(modifier) {
+            return template.replace('*', modifier);
+          };
+
+          var fns = {
+            hasModifier: function(modifier) {
+              return element.hasClass(_tr(modifier));
+            },
+
+            removeModifier: function(modifier) {
+              element.removeClass(_tr(modifier));
+            },
+
+            addModifier: function(modifier) {
+              element.addClass(_tr(modifier)); 
+            },
+
+            setModifier: function(modifier) {
+              var classes = element.attr('class').split(/\s+/),
+                  patt = template.replace('*', '.');
+
+              for (var i=0; i < classes.length; i++) {
+                var cls = classes[i];
+
+                if (cls.match(patt)) {
+                  element.removeClass(cls);
+                }
+              }
+
+              element.addClass(_tr(modifier));
+            },
+
+            toggleModifier: function(modifier) {
+              var cls = _tr(modifier);
+              if (element.hasClass(cls)) {
+                element.removeClass(cls);  
+              } else {
+                element.addClass(cls);
+              }
+            }
+          };
+
+          var append = function(oldFn, newFn) {
+            if (typeof oldFn !== "undefined") {
+              return function() {
+                return oldFn.apply(null, arguments) || newFn.apply(null, arguments);
+              };
+            } else {
+              return newFn;
+            }
+          };
+
+          view.hasModifier = append(view.hasModifier, fns.hasModifier);
+          view.removeModifier = append(view.removeModifier, fns.removeModifier);
+          view.addModifier = append(view.addModifier, fns.addModifier);
+          view.setModifier = append(view.setModifier, fns.setModifier);
+          view.toggleModifier = append(view.toggleModifier, fns.toggleModifier);
+        },
+
+        /**
+         * Remove modifier methods.
+         *
+         * @param {Object} view object
+         */
+        removeModifierMethods: function(view) {
+          view.hasModifier = view.removeModifier =
+            view.addModifier = view.setModifier =
+            view.toggleModifier = undefined;
         },
 
         /**
