@@ -165,8 +165,8 @@ gulp.task('build-css-components', ['build-schemes'], function(done) {
       gulp.src('components-src/dist/onsen-css-components-blue-basic-theme.css')
         .pipe($.rename('onsen-css-components.css'))
         .pipe(gulp.dest('./components-src/dist/'))
-        .pipe(gulp.dest('./www/'))
         .pipe($.rename('onsen-css-components-default.css'))
+        .pipe(gulp.dest('./components-src/dist/'))
         .pipe(gulp.dest('./www/'))
         .on('end', done);
     });

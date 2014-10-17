@@ -67,7 +67,7 @@ html
 							header
 								h2=component.name
 							section.component
-								div.markup.page__background(style="width: 320px; position: relative; min-height: 120px;")
+								div.markup.page__background(style="width: 320px; position: relative; min-height: " + (component.height || '160px') + ";")
 									div(style="width: 100%; height: 100%; position:absolute")!=component.markup
 							- if(component.examples)
 								section.examples

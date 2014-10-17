@@ -3168,6 +3168,304 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: #87888f;
 }
 /* topdoc
+  name: Alert Dialog
+  class: alert-dialog
+  height: 360px
+  markup:
+    <div class="mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-title">Alert</div>
+
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+*/
+.alert-dialog {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 270px;
+  margin: auto auto;
+  background-color: rgba(255,255,255,0.95);
+  -webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 16px 0 0 0;
+  max-width: 95%;
+}
+.alert-dialog-title {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 0px 8px 0px 8px;
+  text-align: center;
+}
+.alert-dialog-content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 4px 12px 8px 12px;
+  font-size: 14px;
+  min-height: 36px;
+  text-align: center;
+}
+.alert-dialog-footer {
+  width: 100%;
+}
+.alert-dialog-button {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
+  letter-spacing: 0;
+  vertical-align: middle;
+  border: none;
+  border-top: 1px solid rgba(0,0,0,0);
+  font-size: 16px;
+  padding: 0 8px;
+  margin: 0;
+  display: block;
+  width: 100%;
+  background-color: transparent;
+  text-align: center;
+  height: 44px;
+  line-height: 44px;
+  outline: none;
+  color: #3d74ff;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: -webkit-linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+    background-image: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+  }
+}
+.alert-dialog-button:active {
+  background-color: rgba(0,0,0,0.05);
+}
+.alert-dialog-button--primal {
+  font-weight: 500;
+}
+.alert-dialog-footer--one {
+  white-space: nowrap;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.alert-dialog-button--one {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: block;
+  width: 100%;
+}
+.alert-dialog-button--one:not(:first-child) {
+  border-left: 1px solid rgba(0,0,0,0);
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--one:not(:first-child) {
+    border-top: none;
+    border-left: none;
+    -webkit-background-size: 100% 1px, 1px 100%;
+    background-size: 100% 1px, 1px 100%;
+    background-repeat: no-repeat;
+    background-position: top, left;
+    background-image: -webkit-linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%), -webkit-linear-gradient(0deg, transparent, transparent 50%, rgba(0,0,0,0) 50%);
+    background-image: -moz-linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%), -moz-linear-gradient(0deg, transparent, transparent 50%, rgba(0,0,0,0) 50%);
+    background-image: -o-linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%), -o-linear-gradient(0deg, transparent, transparent 50%, rgba(0,0,0,0) 50%);
+    background-image: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%), linear-gradient(90deg, transparent, transparent 50%, rgba(0,0,0,0) 50%);
+  }
+}
+.mask {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.2);
+}
+/* topdoc
+  name: Alert Dialog without Title
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Alert Dialog with Multiple Buttons
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button">Cancel</button>
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Alert Dialog with Multiple Buttons 2
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-title">Alert</div>
+
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer alert-dialog-footer--one">
+        <button class="alert-dialog-button alert-dialog-button--one">Left</button>
+        <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Center</button>
+        <button class="alert-dialog-button alert-dialog-button--one">Right</button>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Android-like Alert Dialog
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="mask"></div>
+
+    <div class="alert-dialog alert-dialog--android">
+      <div class="alert-dialog-title alert-dialog-title--android">
+        Alert
+      </div>
+
+      <div class="alert-dialog-content alert-dialog-content--android">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer alert-dialog-footer--one">
+        <button class="alert-dialog-button alert-dialog-button--one">Cancel</button>
+        <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Ok</button>
+      </div>
+    </div>
+*/
+.alert-dialog--android {
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  padding: 0;
+}
+.alert-dialog-title--android {
+  border-bottom: 1px solid rgba(0,0,0,0);
+  height: 52px;
+  line-height: 52px;
+  padding: 0 12px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+.alert-dialog-content--android {
+  text-align: left;
+  padding: 8px 12px;
+}
+/* topdoc
   name: Modal
   class: modal
   markup:
