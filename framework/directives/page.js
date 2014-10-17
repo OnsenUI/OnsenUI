@@ -119,6 +119,7 @@
 
       $onsen.cleaner.onDestroy(scope, function() {
         page._events = undefined;
+        $onsen.removeModifierMethods(page);
         element.data('ons-page', undefined);
         $onsen.aliasStack.unregister('ons.page', page);
 
