@@ -104,8 +104,10 @@
       $onsen.aliasStack.register('ons.page', page);
       element.data('ons-page', page);
 
-      var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-      element.addClass('page ' + modifierTemplater('page--*'));
+      var modifierTemplater = $onsen.generateModifierTemplater(attrs),
+          template = 'page--*';
+      element.addClass('page ' + modifierTemplater(template));
+      $onsen.addModifierMethods(page, template, element);
 
       var pageContent = angular.element(element[0].querySelector('.page__content'));
       pageContent.addClass(modifierTemplater('page--*__content'));
@@ -117,6 +119,7 @@
 
       $onsen.cleaner.onDestroy(scope, function() {
         page._events = undefined;
+        $onsen.removeModifierMethods(page);
         element.data('ons-page', undefined);
         $onsen.aliasStack.unregister('ons.page', page);
 
