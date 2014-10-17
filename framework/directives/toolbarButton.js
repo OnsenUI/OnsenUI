@@ -22,19 +22,34 @@
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsToolbarButton', function($onsen) {
+  module.directive('onsToolbarButton', function($onsen, GenericView) {
     return {
       restrict: 'E',
       transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
         pre: function(scope, element, attrs) {
+          var toolbarButton = new GenericView(scope, element, attrs);
+
+          $onsen.declareVarAttribute(attrs, toolbarButton);
+
+          $onsen.aliasStack.register('ons.toolbarButton', toolbarButton);
+          element.data('ons-toolbar-button', toolbarButton);
+
+          scope.$on('$destroy', function() {
+            toolbarButton._events = undefined;
+            $onsen.removeModifierMethods(toolbarButton);
+            element.data('ons-toolbar-button', undefined);
+            $onsen.aliasStack.unregister('ons.toolbarButton', toolbarButton);
+            element = null;
+          });
 
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+          $onsen.addModifierMethods(toolbarButton, 'toolbar-button--*', element.children());
 
           $onsen.cleaner.onDestroy(scope, function() {
             $onsen.clearComponent({

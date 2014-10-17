@@ -22,7 +22,7 @@
 
   var module = angular.module('onsen');
 
-  module.directive('onsList', function($onsen) {
+  module.directive('onsList', function($onsen, GenericView) {
     return {
       restrict: 'E',
       scope: false,
@@ -33,12 +33,30 @@
       transclude: false,
 
       compile: function(element, attrs) {
-        var templater = $onsen.generateModifierTemplater(attrs);
-
-        element.addClass('list ons-list-inner');
-        element.addClass(templater('list--*'));
-      
+     
         return function(scope, element, attrs) {
+          var list = new GenericView(scope, element, attrs);
+          
+          $onsen.declareVarAttribute(attrs, list);
+
+          $onsen.aliasStack.register('ons.list', list);
+          element.data('ons-list', list);
+
+          scope.$on('$destroy', function() {
+            list._events = undefined;
+            $onsen.removeModifierMethods(list);
+            element.data('ons-list', undefined);
+            $onsen.aliasStack.unregister('ons.list', list);
+            element = null;
+          });
+
+          var templater = $onsen.generateModifierTemplater(attrs);
+
+          element.addClass('list ons-list-inner');
+          element.addClass(templater('list--*'));
+         
+          $onsen.addModifierMethods(list, 'list--*', element);
+
           $onsen.fireComponentEvent(element[0], "init"); 
         };
       }

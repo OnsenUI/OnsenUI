@@ -212,6 +212,84 @@ limitations under the License.
         },
 
         /**
+         * Add modifier methods to view object.
+         *
+         * @param {Object} view object
+         * @param {String} template
+         * @param {jqLite} element 
+         */
+        addModifierMethods: function(view, template, element) {
+          var _tr = function(modifier) {
+            return template.replace('*', modifier);
+          };
+
+          var fns = {
+            hasModifier: function(modifier) {
+              return element.hasClass(_tr(modifier));
+            },
+
+            removeModifier: function(modifier) {
+              element.removeClass(_tr(modifier));
+            },
+
+            addModifier: function(modifier) {
+              element.addClass(_tr(modifier)); 
+            },
+
+            setModifier: function(modifier) {
+              var classes = element.attr('class').split(/\s+/),
+                  patt = template.replace('*', '.');
+
+              for (var i=0; i < classes.length; i++) {
+                var cls = classes[i];
+
+                if (cls.match(patt)) {
+                  element.removeClass(cls);
+                }
+              }
+
+              element.addClass(_tr(modifier));
+            },
+
+            toggleModifier: function(modifier) {
+              var cls = _tr(modifier);
+              if (element.hasClass(cls)) {
+                element.removeClass(cls);  
+              } else {
+                element.addClass(cls);
+              }
+            }
+          };
+
+          var append = function(oldFn, newFn) {
+            if (typeof oldFn !== "undefined") {
+              return function() {
+                return oldFn.apply(null, arguments) || newFn.apply(null, arguments);
+              };
+            } else {
+              return newFn;
+            }
+          };
+
+          view.hasModifier = append(view.hasModifier, fns.hasModifier);
+          view.removeModifier = append(view.removeModifier, fns.removeModifier);
+          view.addModifier = append(view.addModifier, fns.addModifier);
+          view.setModifier = append(view.setModifier, fns.setModifier);
+          view.toggleModifier = append(view.toggleModifier, fns.toggleModifier);
+        },
+
+        /**
+         * Remove modifier methods.
+         *
+         * @param {Object} view object
+         */
+        removeModifierMethods: function(view) {
+          view.hasModifier = view.removeModifier =
+            view.addModifier = view.setModifier =
+            view.toggleModifier = undefined;
+        },
+
+        /**
          * Define a variable to JavaScript global scope and AngularJS scope as 'var' attribute name.
          *
          * @param {Object} attrs

@@ -58,6 +58,9 @@
 
             var modal = new ModalView(scope, element);
 
+            $onsen.addModifierMethods(modal, 'modal--*', element);
+            $onsen.addModifierMethods(modal, 'modal--*__content', element.children());
+
             $onsen.declareVarAttribute(attrs, modal);
 
             $onsen.aliasStack.register('ons.modal', modal);
@@ -65,6 +68,7 @@
 
             scope.$on('$destroy', function() {
               modal._events = undefined;
+              $onsen.removeModifierMethods(modal);
               element.data('ons-modal', undefined);
               $onsen.aliasStack.unregister('ons.modal', modal);
             });
