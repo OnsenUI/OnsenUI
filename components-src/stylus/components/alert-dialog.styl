@@ -19,10 +19,20 @@ limitations under the License.
 
 // internal variables
 var-alert-dialog-separator-color = $toolbar-border-color
+var-alert-dialog-button-color = $highlight-color
+
+retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
+  +retina-query()
+    border-top none
+    background-size 100% 1px
+    background-repeat no-repeat
+    background-position top
+    background-image linear-gradient(180deg, color, color 50%, transparent 50%)
 
 /*! topdoc
   name: Alert Dialog
   class: alert-dialog
+  height: 360px
   markup:
     <div class="mask"></div>
     <div class="alert-dialog">
@@ -33,11 +43,12 @@ var-alert-dialog-separator-color = $toolbar-border-color
       </div>
 
       <div class="alert-dialog-footer">
-        <button class="alert-dialog-button">OK</button>
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
       </div>
     </div>
 */
 .alert-dialog
+  reset-box-model()
   reset-base()
   reset-cursor()
   reset-font()
@@ -45,34 +56,44 @@ var-alert-dialog-separator-color = $toolbar-border-color
   top 50%
   left 50%
   transform translate(-50%, -50%)
-  width 280px
+  width 270px
   margin auto auto
   background-color rgba(255, 255, 255, 0.95)
-  box-shadow 0 4px 12px rgba(0, 0, 0, 0.07)
-  border-radius 6px
+  box-shadow 0 2px 12px rgba(0, 0, 0, 0.07)
+  border-radius 8px
   overflow hidden
+  padding 16px 0 0 0
 
 .alert-dialog-title
   reset-font()
   font-size var-font-size--large
   font-weight var-font-weight--large
-  padding 14px 8px 0px 8px
+  padding 0px 8px 0px 8px
   text-align center
 
 .alert-dialog-content
-  margin 16px 8px
+  reset-box-model()
+  padding 4px 16px 8px 16px
+  font-size var-font-size--mini
+  min-height 60px
+  text-align center
 
 .alert-dialog-footer
   width 100%
 
 .alert-dialog-button
+  reset-box-model()
   reset-base()
-  reset-cursor()
   reset-font()
+  reset-cursor()
+  ellipsis()
+  text-decoration none
+  letter-spacing var-letter-spacing
+  vertical-align middle
   border none
-  border-top 1px solid #ccc
+  border-top 1px solid var-alert-dialog-separator-color
   font-size var-font-size - 1px
-  padding 0
+  padding 0 8px
   margin 0
   display block
   width 100%
@@ -81,10 +102,45 @@ var-alert-dialog-separator-color = $toolbar-border-color
   height 44px
   line-height 44px
   outline none
+  color var-alert-dialog-button-color
+  retina-alert-dialog-button-border()
 
 .alert-dialog-button:active
-  border-top 1px solid var-alert-dialog-separator-color
   background-color rgba(0, 0, 0, 0.05)
+
+.alert-dialog-button--primal
+  font-weight var-font-weight--large
+  
+.alert-dialog-footer--one
+  white-space nowrap
+  display -webkit-box
+  display -webkit-flex
+  display -moz-box
+  display -moz-flex
+  display -ms-flexbox
+  display flex
+  flex-wrap wrap
+
+.alert-dialog-button--one
+  -webkit-box-flex 1
+  -webkit-flex 1
+  -moz-box-flex 1
+  -moz-flex 1
+  -ms-flex 1
+  flex 1
+  display block
+  width 100%
+
+.alert-dialog-button--one:not(:first-child)
+  border-left 1px solid var-alert-dialog-separator-color
+  +retina-query()
+    border-top none
+    border-left none
+    background-size 100% 1px, 1px 100%
+    background-repeat no-repeat
+    background-position top, left
+    background-image linear-gradient(180deg, var-alert-dialog-separator-color, var-alert-dialog-separator-color 50%, transparent 50%), linear-gradient(90deg, transparent, transparent 50%, var-alert-dialog-separator-color 50%)
+
 
 .mask
   reset-base()
@@ -95,4 +151,60 @@ var-alert-dialog-separator-color = $toolbar-border-color
   left 0
   bottom 0
   background-color rgba(0, 0, 0, 0.2)
+
+/*! topdoc
+  name: Alert Dialog without Title
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+*/
+
+/*! topdoc
+  name: Alert Dialog with Multiple Buttons
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-title">Alert</div>
+
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button">Cancel</button>
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+*/
+
+/*! topdoc
+  name: Alert Dialog with Multiple Buttons 2
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer alert-dialog-footer--one">
+        <button class="alert-dialog-button alert-dialog-button--one">Left</button>
+        <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Center</button>
+        <button class="alert-dialog-button alert-dialog-button--one">Right</button>
+      </div>
+    </div>
+*/
 
