@@ -16,7 +16,7 @@
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsBackButton', function($onsen, $compile, ComponentCleaner) {
+  module.directive('onsBackButton', function($onsen, $compile, GenericView, ComponentCleaner) {
     return {
       restrict: 'E',
       replace: false,
@@ -29,7 +29,24 @@
 
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
+          var backButton = new GenericView(scope, element, attrs);
+          
+          $onsen.declareVarAttribute(attrs, backButton);
+
+          $onsen.aliasStack.register('ons.backButton', backButton);
+          element.data('ons-back-button', backButton);
+
+          scope.$on('$destroy', function() {
+            backButton._events = undefined;
+            $onsen.removeModifierMethods(backButton);
+            element.data('ons-back-button', undefined);
+            $onsen.aliasStack.unregister('ons.backButton', backButton);
+            element = null;
+          });
+
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+          $onsen.addModifierMethods(backButton, 'toolbar-button--*', element.children());
 
           transclude(scope, function(clonedElement) {
             if (clonedElement[0]) {

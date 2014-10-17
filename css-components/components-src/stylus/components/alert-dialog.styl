@@ -1,0 +1,99 @@
+/**
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-alert-dialog-separator-color = $toolbar-border-color
+var-alert-dialog-button-color = 
+
+/*! topdoc
+  name: Alert Dialog
+  class: alert-dialog
+  markup:
+    <div class="mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-title">Alert</div>
+
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button">OK</button>
+      </div>
+    </div>
+*/
+.alert-dialog
+  reset-base()
+  reset-cursor()
+  reset-font()
+  position absolute
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+  width 280px
+  margin auto auto
+  background-color rgba(255, 255, 255, 0.95)
+  box-shadow 0 4px 12px rgba(0, 0, 0, 0.07)
+  border-radius 6px
+  overflow hidden
+
+.alert-dialog-title
+  reset-font()
+  font-size var-font-size--large
+  font-weight var-font-weight--large
+  padding 14px 8px 0px 8px
+  text-align center
+
+.alert-dialog-content
+  margin 16px 8px
+
+.alert-dialog-footer
+  width 100%
+
+.alert-dialog-button
+  reset-base()
+  reset-cursor()
+  reset-font()
+  border none
+  border-top 1px solid #ccc
+  font-size var-font-size - 1px
+  padding 0
+  margin 0
+  display block
+  width 100%
+  background-color transparent
+  text-align center
+  height 44px
+  line-height 44px
+  outline none
+
+.alert-dialog-button:active
+  border-top 1px solid var-alert-dialog-separator-color
+  background-color rgba(0, 0, 0, 0.05)
+
+.mask
+  reset-base()
+  reset-cursor()
+  position absolute
+  top 0
+  right 0
+  left 0
+  bottom 0
+  background-color rgba(0, 0, 0, 0.2)
+
