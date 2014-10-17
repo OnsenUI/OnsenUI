@@ -20,7 +20,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('AlertDialogView', function($onsen) {
+  module.factory('AlertDialogView', function($onsen, DialogAnimator, SlideDialogAnimator) {
 
     var AlertDialogView = Class.extend({
 
@@ -28,21 +28,27 @@ limitations under the License.
        * @param {Object} scope
        * @param {jqLite} element
        */
-      init: function(scope, element, attrs) {
+      init: function(scope, element) {
         this._scope = scope;
         this._element = element;
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
-        this._overlayColor = 'rgba(0, 0, 0, 0.2)';
+        console.log("dis", scope.disabled);
 
-        this._cancelable = attrs.cancelable ? !!attrs.cancelable : false;
+        this._cancelable = typeof scope.cancelable !== 'undefined' ? true : false;
+        this._animation = this._animations[typeof scope.animation !== 'undefined' ? 
+          scope.animation : 'default'];
+        this.setDisabled(typeof scope.disabled !== "undefined");
+
+        if (!this._animation) {
+          throw new Error('No such animation: ' + scope.animation);
+        }
+
         this._disabled = false;
         this._visible = false;
 
-        this._createOverlay();
-
-        this.hide();
+        this._createMask(scope.maskColor);
       },
 
       getDeviceBackButtonHandler: function() {
@@ -53,20 +59,26 @@ limitations under the License.
        * Show alert dialog.
        */
       show: function() {
-        this._element.css("display", "block");
-        this._overlay.css("display", "block");
-        
-        this._visible = true;
+        this._mask.css('display', 'block');
+        this._element.css('display', 'block');
+
+        var that = this;
+        this._animation.show(this, function() {
+          that._visible = true;
+        });
       },
 
       /**
        * Hide alert dialog.
        */
       hide: function() {
-        this._element.css("display", "none");
-        this._overlay.css("display", "none");
+        var that = this;
 
-        this._visible = false;
+        this._animation.hide(this, function() {
+          that._element.css('display', 'none');
+          that._mask.css('display', 'none');
+          that._visible = false;
+        });
       },
 
       /**
@@ -93,6 +105,12 @@ limitations under the License.
       setDisabled: function(disabled) {
         if (typeof disabled !== 'boolean') {
           throw new Error('Argument must be a boolean.');
+        }
+
+        if(disabled) {
+          this._element.css("opacity", 0.75);
+        } else {
+          this._element.css("opacity", 1);
         }
 
         this._disabled = disabled;
@@ -135,21 +153,21 @@ limitations under the License.
         this._element = this._scope = null;
       },
 
-      _createOverlay: function() {
-        this._overlay = angular.element('<div>').css({
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          backgroundColor: this._overlayColor,
-          width: "100%",
-          height: "100%",
-          zIndex: 20000,
-          display: "none"
-        });
+      _createMask: function(color) {
+        this._mask = angular.element('<div>').addClass('mask').css("z-index", 20000);
 
-        this._overlay.on('click', this._cancel.bind(this));
+        this._mask.on('click', this._cancel.bind(this));
+ 
+        if(color) {
+          this._mask.css("background-color", color);
+        }
 
-        angular.element(document.body).append(this._overlay);
+        angular.element(document.body).append(this._mask);
+      },
+
+      _animations: {
+        "default": new SlideDialogAnimator(),
+        "none": new DialogAnimator()
       }
     });
     MicroEvent.mixin(AlertDialogView);

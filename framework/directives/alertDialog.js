@@ -25,16 +25,18 @@
     return {
       restrict: 'E',
       replace: false,
-
-      // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
-      scope: false, 
+      scope: {
+        cancelable: '@',
+        animation: '@',
+        maskColor: '@',
+        disabled: '@'
+      }, 
       transclude: false,
 
       compile: function(element, attrs) {
         var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
-        element.addClass(modifierTemplater('alert-dialog--*'));
+  
+        element.addClass('alert-dialog ' + modifierTemplater('alert-dialog--*'));
 
         return {
           pre: function(scope, element, attrs) {

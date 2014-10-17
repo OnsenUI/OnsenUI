@@ -304,6 +304,10 @@ window.ons = (function(){
         return !!(window.cordova || window.phonegap || window.PhoneGap);
       },
 
+      /**
+       * @param {String} page
+       * @return {Promise}
+       */
       createAlertDialog: function(page) {
         if(!page) {
           throw new Error('Page url must be defined.');
@@ -314,7 +318,7 @@ window.ons = (function(){
         
         angular.element(document.body).append(angular.element(alertDialog));
 
-        $onsen.getPageHTMLAsync(page).then(function(html) {
+        return $onsen.getPageHTMLAsync(page).then(function(html) {
           var div = document.createElement('div');
           div.innerHTML = html;
 
@@ -327,10 +331,12 @@ window.ons = (function(){
           }
 
           alertDialog.html(el.html());
+          ons.compile(alertDialog[0]);
+        
+          var view = alertDialog.data('ons-alert-dialog');
+
+          return view;
         });
-        ons.compile(alertDialog[0]);    
-     
-        return alertDialog.data('ons-alert-dialog');
       },
 
       platform: {
