@@ -31,25 +31,27 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
-        this._element.css('display', 'none');
+        this._element.css({
+          display: 'none',
+          zIndex: 20001
+        });
+
         this._visible = false;
         this._locked = false;
 
         this.setCancelable(typeof attrs.cancelable !== 'undefined');
         this.setDisabled(typeof attrs.disable !== 'undefined');
         
-        this._animation = this._animations[typeof attrs.animation !== 'undefined' ? 
+        this._animation = AlertDialogView._animatorDict[typeof attrs.animation !== 'undefined' ? 
           attrs.animation : 'default'];
 
         if (!this._animation) {
           throw new Error('No such animation: ' + attrs.animation);
         }
 
-        this._createMask(attrs.maskColor);
-      },
+        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
 
-      getDeviceBackButtonHandler: function() {
-        return this._deviceBackButtonHandler;
+        this._createMask(attrs.maskColor);
       },
 
       /**
@@ -76,7 +78,7 @@ limitations under the License.
             animation = this._animation;
           
           if (options.animation) {
-            animation = this._animations[options.animation];
+            animation = AlertDialogView._animatorDict[options.animation];
           }
           
           animation.show(this, function() {
@@ -109,7 +111,7 @@ limitations under the License.
             animation = this._animation;
 
           if (options.animation) {
-            animation = this._animations[options.animation];
+            animation = AlertDialogView._animatorDict[options.animation];
           }
 
           animation.hide(this, function() {
@@ -137,11 +139,12 @@ limitations under the License.
        */
       destroy: function() {
         this._element.remove();
-        this._mask.remove()
+        this._mask.remove();
+        this._deviceBackButtonHandler.destroy();
 
         this._scope.$destroy();
 
-        this._animations = this._element = this._mask = null;
+        this._deviceBackButtonHandler = this._element = this._mask = null;
       },
 
       /**
@@ -154,18 +157,19 @@ limitations under the License.
           throw new Error('Argument must be a boolean.');
         }
 
-        var elements = this._element[0].querySelectorAll('input, button, textarea, select') || [];
+        var elements = this._element[0].querySelectorAll('input, button, textarea, select') || [],
+          i;
 
         if(disabled) {
           this._element.css('opacity', 0.75);
          
-          for (var i=0; i<elements.length; i++) {
+          for (i=0; i<elements.length; i++) {
             angular.element(elements[i]).prop('disabled', true);
           }
         } else {
           this._element.css('opacity', 1);
         
-          for (var i=0; i<elements.length; i++) {
+          for (i=0; i<elements.length; i++) {
             angular.element(elements[i]).removeAttr('disabled');
           }
         }
@@ -210,6 +214,14 @@ limitations under the License.
         }
       },
 
+      _onDeviceBackButton: function(event) {
+        if(this.isCancelable()) {
+          this._cancel.bind(this)();
+        } else {
+          event.callParentHandler();
+        }
+      },
+
       _createMask: function(color) {
         this._mask = angular.element('<div>').addClass('mask').css({
           zIndex: 20000,
@@ -223,13 +235,25 @@ limitations under the License.
         }
 
         angular.element(document.body).append(this._mask);
-      },
-
-      _animations: {
-        'default': new SlideDialogAnimator(),
-        'none': new DialogAnimator()
       }
     });
+
+    AlertDialogView._animatorDict = {
+      'default': new SlideDialogAnimator(),
+      'none': new DialogAnimator()
+    };
+
+    /**
+     * @param {String} name
+     * @param {DialogAnimator} animator
+     */
+    AlertDialogView.registerAnimator = function(name, animator) {
+      if (!(animator instanceof DialogAnimator)) {
+        throw new Error('"animator" param must be an instance of DialogAnimator');
+      }
+      this._animatorDict[name] = animator;
+    };
+
     MicroEvent.mixin(AlertDialogView);
 
     return AlertDialogView;
