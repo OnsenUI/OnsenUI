@@ -808,7 +808,7 @@ div#components-container > ul#components > li > h3 {
 }
 div#components-container > ul#components > li > div.component-preview {
   margin-top: 3px;
-  height: 110px;
+  height: 160px;
   text-align: center;
   vertical-align: middle;
   overflow: hidden;
@@ -816,6 +816,7 @@ div#components-container > ul#components > li > div.component-preview {
   border-radius: 3px;
   width: 320px;
   position: relative;
+  z-index: 0;
   cursor: pointer;
 }
 div#components-container > ul#components > li > div.component-preview:hover {

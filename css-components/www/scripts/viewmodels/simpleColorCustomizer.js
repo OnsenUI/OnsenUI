@@ -131,6 +131,28 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
+      name: 'Alert Dialog',
+      items: [
+        {
+          name: 'alert-dialog-background-color',
+          displayName: 'Background Color'
+        },
+        {
+          name: 'alert-dialog-text-color',
+          displayName: 'Text Color'
+        },
+        {
+          name: 'alert-dialog-button-color',
+          displayName: 'Button Text Color'
+        },
+        {
+          name: 'alert-dialog-separator-color',
+          displayName: 'Separator Color'
+        }
+      ]
+    },
+
+    {
       name: 'Other',
       items: [
         {
