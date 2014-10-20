@@ -29,7 +29,7 @@ limitations under the License.
     var SlideDialogAnimator = DialogAnimator.extend({
 
       timing: 'cubic-bezier(.1, .7, .4, 1)',
-      duration: 0.5, 
+      duration: 0.2, 
 
       init: function(options) {
         options = options || {};

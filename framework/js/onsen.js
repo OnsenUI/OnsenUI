@@ -296,7 +296,6 @@ window.ons = (function(){
        * @return {Boolean}
        */
       isWebView: function() {
-
         if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
           throw new Error('isWebView() method is available after dom contents loaded.');
         }
@@ -329,7 +328,6 @@ window.ons = (function(){
           for (var i = 0, l = attrs.length; i < l; i ++) {
             alertDialog.attr(attrs[i].name, attrs[i].value); 
           }
-
           alertDialog.html(el.html());
           ons.compile(alertDialog[0]);
         

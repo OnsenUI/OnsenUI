@@ -28,27 +28,24 @@ limitations under the License.
        * @param {Object} scope
        * @param {jqLite} element
        */
-      init: function(scope, element) {
+      init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
+        this._element.css('display', 'none');
+        this._visible = false;
+        this._locked = false;
 
-        this._scope.$on('$destroy', this._destroy.bind(this));
-
-        console.log("dis", scope.disabled);
-
-        this._cancelable = typeof scope.cancelable !== 'undefined' ? true : false;
-        this._animation = this._animations[typeof scope.animation !== 'undefined' ? 
-          scope.animation : 'default'];
-        this.setDisabled(typeof scope.disabled !== "undefined");
+        this.setCancelable(typeof attrs.cancelable !== 'undefined');
+        this.setDisabled(typeof attrs.disable !== 'undefined');
+        
+        this._animation = this._animations[typeof attrs.animation !== 'undefined' ? 
+          attrs.animation : 'default'];
 
         if (!this._animation) {
-          throw new Error('No such animation: ' + scope.animation);
+          throw new Error('No such animation: ' + attrs.animation);
         }
 
-        this._disabled = false;
-        this._visible = false;
-
-        this._createMask(scope.maskColor);
+        this._createMask(attrs.maskColor);
       },
 
       getDeviceBackButtonHandler: function() {
@@ -57,28 +54,73 @@ limitations under the License.
 
       /**
        * Show alert dialog.
+       *
+       * @param {Object} options
        */
-      show: function() {
-        this._mask.css('display', 'block');
-        this._element.css('display', 'block');
+      show: function(options) {
+        options = options || {};
+        var cancel = false,
+          callback = options.callback || function() {};
 
-        var that = this;
-        this._animation.show(this, function() {
-          that._visible = true;
+        this.emit('preshow', {
+          alertDialog: this,
+          cancel: function() { cancel = true; }
         });
+        
+        if(!this._locked && !cancel) {
+          this._locked = true;
+          this._mask.css('display', 'block');
+          this._element.css('display', 'block');
+
+          var that = this,
+            animation = this._animation;
+          
+          if (options.animation) {
+            animation = this._animations[options.animation];
+          }
+          
+          animation.show(this, function() {
+            that._visible = true;
+            that._locked = false;
+            that.emit('postshow', {alertDialog: that});
+            callback();
+          });
+        }
       },
 
       /**
        * Hide alert dialog.
+       *
+       * @param {Object} options
        */
-      hide: function() {
-        var that = this;
-
-        this._animation.hide(this, function() {
-          that._element.css('display', 'none');
-          that._mask.css('display', 'none');
-          that._visible = false;
+      hide: function(options) {
+        options = options || {};
+        var cancel = false,
+          callback = options.callback || function() {};
+        
+        this.emit('prehide', {
+          alertDialog: this,
+          cancel: function() { cancel = true; }
         });
+
+        if(!this._locked && !cancel) {
+          this._locked = true;
+          var that = this,
+            animation = this._animation;
+
+          if (options.animation) {
+            animation = this._animations[options.animation];
+          }
+
+          animation.hide(this, function() {
+            that._element.css('display', 'none');
+            that._mask.css('display', 'none');
+            that._visible = false;
+            that._locked = false;
+            that.emit('posthide', {alertDialog: that});
+            callback();
+          });
+        }
       },
 
       /**
@@ -94,7 +136,12 @@ limitations under the License.
        * Destroy alert dialog.
        */
       destroy: function() {
-        // Destroy everything!!!
+        this._element.remove();
+        this._mask.remove()
+
+        this._scope.$destroy();
+
+        this._animations = this._element = this._mask = null;
       },
 
       /**
@@ -107,10 +154,20 @@ limitations under the License.
           throw new Error('Argument must be a boolean.');
         }
 
+        var elements = this._element[0].querySelectorAll('input, button, textarea, select') || [];
+
         if(disabled) {
-          this._element.css("opacity", 0.75);
+          this._element.css('opacity', 0.75);
+         
+          for (var i=0; i<elements.length; i++) {
+            angular.element(elements[i]).prop('disabled', true);
+          }
         } else {
-          this._element.css("opacity", 1);
+          this._element.css('opacity', 1);
+        
+          for (var i=0; i<elements.length; i++) {
+            angular.element(elements[i]).removeAttr('disabled');
+          }
         }
 
         this._disabled = disabled;
@@ -144,30 +201,33 @@ limitations under the License.
 
       _cancel: function() {
         if(this.isCancelable()) {
-          this.hide();
+          var that = this;
+          this.hide({
+            callback: function () {
+              that.emit('cancel');
+            }
+          });
         }
       },
 
-      _destroy: function() {
-        this.emit('destroy');
-        this._element = this._scope = null;
-      },
-
       _createMask: function(color) {
-        this._mask = angular.element('<div>').addClass('mask').css("z-index", 20000);
+        this._mask = angular.element('<div>').addClass('mask').css({
+          zIndex: 20000,
+          display: 'none'
+        });
 
         this._mask.on('click', this._cancel.bind(this));
  
         if(color) {
-          this._mask.css("background-color", color);
+          this._mask.css('background-color', color);
         }
 
         angular.element(document.body).append(this._mask);
       },
 
       _animations: {
-        "default": new SlideDialogAnimator(),
-        "none": new DialogAnimator()
+        'default': new SlideDialogAnimator(),
+        'none': new DialogAnimator()
       }
     });
     MicroEvent.mixin(AlertDialogView);
