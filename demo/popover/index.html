@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Popover | Onsen UI</title>  
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/angular/angular.js"></script>    
+  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../app.js"></script>  
+
+  <script>
+  </script>
+  
+</head>
+
+<body>    
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Popover</div>
+    </ons-toolbar>
+
+    <div style="text-align: center">
+      <br>
+      <ons-button>Click me!</ons-button>
+    </div>
+    <ons-popover var="pop" style="height: 200px; width: 200px" animation="fade">
+      <ons-page>
+        Hello!
+      </ons-page>
+    </ons-popover>
+  </ons-page>
+
+
+  <script type="text/ons-template" id="popover.html">
+    <ons-popover style="height: 200px; width: 200px" animation="fade">
+      <ons-page>
+        Hello!
+      </ons-page>
+    </ons-popover>
+  </script>
+  
+</body>
+</html>
