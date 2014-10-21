@@ -21,12 +21,12 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('SlideDialogAnimator', function(DialogAnimator) {
+  module.factory('AndroidAlertDialogAnimator', function(DialogAnimator) {
 
     /**
      * Slide animator for navigator transition.
      */
-    var SlideDialogAnimator = DialogAnimator.extend({
+    var AndroidAlertDialogAnimator = DialogAnimator.extend({
 
       timing: 'cubic-bezier(.1, .7, .4, 1)',
       duration: 0.2, 
@@ -61,13 +61,15 @@ limitations under the License.
           animit(dialog._element[0])
             .queue({
               css: {
-                transform: 'translate3D(-50%, -350%, 0)',
+                transform: 'translate3d(-50%, -50%, 0) scale3d(0.9, 0.9, 1.0)',
+                opacity: 0.0
               },
               duration: 0
             })
             .queue({
               css: {
-                transform: 'translate3D(-50%, -50%, 0)',
+                transform: 'translate3d(-50%, -50%, 0) scale3d(1.0, 1.0, 1.0)',
+                opacity: 1.0
               },
               duration: this.duration,
               timing: this.timing
@@ -103,13 +105,15 @@ limitations under the License.
           animit(dialog._element[0])
             .queue({
               css: {
-                transform: 'translate3D(-50%, -50%, 0)'
+                transform: 'translate3d(-50%, -50%, 0) scale3d(1.0, 1.0, 1.0)',
+                opacity: 1.0
               },
               duration: 0
             })
             .queue({
               css: {
-                transform: 'translate3D(-50%, -350%, 0)'
+                transform: 'translate3d(-50%, -50%, 0) scale3d(0.9, 0.9, 1.0)',
+                opacity: 0.0
               },
               duration: this.duration,
               timing: this.timing
@@ -124,7 +128,7 @@ limitations under the License.
       }
     });
 
-    return SlideDialogAnimator;
+    return AndroidAlertDialogAnimator;
   });
 
 })();

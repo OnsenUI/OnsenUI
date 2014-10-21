@@ -20,7 +20,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('AlertDialogView', function($onsen, DialogAnimator, SlideDialogAnimator) {
+  module.factory('AlertDialogView', function($onsen, DialogAnimator, SlideDialogAnimator, AndroidAlertDialogAnimator, IOSAlertDialogAnimator) {
 
     var AlertDialogView = Class.extend({
 
@@ -226,7 +226,9 @@ limitations under the License.
     });
 
     AlertDialogView._animatorDict = {
-      'default': new SlideDialogAnimator(),
+      'default': $onsen.isAndroid() ? new AndroidAlertDialogAnimator() : new IOSAlertDialogAnimator(),
+      'fade': $onsen.isAndroid() ? new AndroidAlertDialogAnimator() : new IOSAlertDialogAnimator(),
+      'slide': new SlideDialogAnimator(),
       'none': new DialogAnimator()
     };
 
