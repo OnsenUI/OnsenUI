@@ -153,6 +153,20 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
+      name: 'Popover',
+      items: [
+        {
+          name: 'popover-background-color',
+          displayName: 'Background Color'
+        },
+        {
+          name: 'popover-text-color',
+          displayName: 'Text Color'
+        }
+      ]
+    },
+
+    {
       name: 'Other',
       items: [
         {
