@@ -54,7 +54,7 @@ window.ons.notification = (function() {
 
     if (promptDialog) {
       inputEl = angular.element('<input>').addClass('text-input').attr('placeholder', placeholder);
-      dialogEl.append(inputEl);
+      messageEl.append(inputEl);
     }
 
     dialogEl.append(footerEl);
