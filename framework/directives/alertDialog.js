@@ -12,8 +12,11 @@
  *  [en]The appearance of the dialog.[/en]
  *  [ja]ダイアログの表現を指定します。[/ja]
  * @param cancelable
- *  [en]The dialog can be closed by tapping the background or pressing the back button.[/en] 
+ *  [en]If this attribute is set the dialog can be closed by tapping the background or pressing the back button.[/en] 
  *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
+ * @param disabled
+ *  [en]If this attribute is set the dialog is disabled.[/en]
+ *  [ja][/ja]
  * @param animation
  *  [en]The animation used when showing an hiding the dialog. Can be either "none" or "default".[/en]
  *  [ja][/ja]
@@ -44,6 +47,9 @@
  * @property isDisabled()
  *  [en]Returns "true" if the alert dialog is disabled.[/en]
  *  [ja][/ja]
+ * @property on(eventName,listener)
+ *  [en]Add an event listener. Preset events are preshow, postshow, prehide and posthide.[/en]
+ *  [ja]イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。[/ja]
  * @example
  * <script>
  *   ons.ready(function() {
@@ -92,10 +98,13 @@
 
             $onsen.declareVarAttribute(attrs, alertDialog);
             $onsen.aliasStack.register('ons.alertDialog', alertDialog);
+            $onsen.addModifierMethods(alertDialog, 'alert-dialog--*', element);
+
             element.data('ons-alert-dialog', alertDialog);
 
             scope.$on('$destroy', function() {
               alertDialog._events = undefined;
+              $onsen.removeModifierMethods(alertDialog);
               element.data('ons-alert-dialog', undefined);
               $onsen.aliasStack.unregister('ons.alertDialog', alertDialog);
 

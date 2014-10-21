@@ -27,6 +27,7 @@ limitations under the License.
       /**
        * @param {Object} scope
        * @param {jqLite} element
+       * @param {Object} attrs
        */
       init: function(scope, element, attrs) {
         this._scope = scope;
@@ -50,7 +51,6 @@ limitations under the License.
         }
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
-
         this._createMask(attrs.maskColor);
       },
 
@@ -69,7 +69,7 @@ limitations under the License.
           cancel: function() { cancel = true; }
         });
         
-        if(!this._locked && !cancel) {
+        if (!this._locked && !cancel) {
           this._locked = true;
           this._mask.css('display', 'block');
           this._element.css('display', 'block');
@@ -105,7 +105,7 @@ limitations under the License.
           cancel: function() { cancel = true; }
         });
 
-        if(!this._locked && !cancel) {
+        if (!this._locked && !cancel) {
           this._locked = true;
           var that = this,
             animation = this._animation;
@@ -157,24 +157,11 @@ limitations under the License.
           throw new Error('Argument must be a boolean.');
         }
 
-        var elements = this._element[0].querySelectorAll('input, button, textarea, select') || [],
-          i;
-
         if(disabled) {
-          this._element.css('opacity', 0.75);
-         
-          for (i=0; i<elements.length; i++) {
-            angular.element(elements[i]).prop('disabled', true);
-          }
+          this._element.prop('disabled', true);
         } else {
-          this._element.css('opacity', 1);
-        
-          for (i=0; i<elements.length; i++) {
-            angular.element(elements[i]).removeAttr('disabled');
-          }
+          this._element.removeAttr('disabled');
         }
-
-        this._disabled = disabled;
       },
 
       /**
@@ -183,7 +170,7 @@ limitations under the License.
        * @return {Boolean}
        */
       isDisabled: function() {
-        return this._disabled;
+        return this._element.hasAttr('disabled');
       },
 
       /**
@@ -204,7 +191,7 @@ limitations under the License.
       },
 
       _cancel: function() {
-        if(this.isCancelable()) {
+        if (this.isCancelable()) {
           var that = this;
           this.hide({
             callback: function () {
@@ -215,7 +202,7 @@ limitations under the License.
       },
 
       _onDeviceBackButton: function(event) {
-        if(this.isCancelable()) {
+        if (this.isCancelable()) {
           this._cancel.bind(this)();
         } else {
           event.callParentHandler();

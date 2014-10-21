@@ -55,6 +55,10 @@ window.ons = (function(){
         throw new Error('Invalid initialization state.');
       }
 
+      if (document.querySelector('ons-alert-dialog')) {
+        console.warn('Invalid usage of <ons-alert-dialog>.');
+      }
+
       $rootScope.$on('$ons-ready', unlockOnsenUI);
     });
   }
@@ -308,7 +312,7 @@ window.ons = (function(){
        * @return {Promise}
        */
       createAlertDialog: function(page) {
-        if(!page) {
+        if (!page) {
           throw new Error('Page url must be defined.');
         }
 
@@ -325,15 +329,17 @@ window.ons = (function(){
 
           // Copy attributes and insert html.
           var attrs = el.prop('attributes');
-          for (var i = 0, l = attrs.length; i < l; i ++) {
+          for (var i = 0, l = attrs.length; i < l; i++) {
             alertDialog.attr(attrs[i].name, attrs[i].value); 
           }
           alertDialog.html(el.html());
           ons.compile(alertDialog[0]);
-        
-          var view = alertDialog.data('ons-alert-dialog');
+      
+          if (el.attr('disabled')) {
+            alertDialog.attr('disabled', 'disabled');
+          }
 
-          return view;
+          return  alertDialog.data('ons-alert-dialog');
         });
       },
 

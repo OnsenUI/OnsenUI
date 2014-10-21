@@ -31,7 +31,7 @@ window.ons.notification = (function() {
     return ob;
   };
 
-  var createAlertDialog = function(title, message, buttonLabels, primaryButtonIndex, modifier, animation, callback, messageIsHTML, cancelable, promptDialog, autofocus) {
+  var createAlertDialog = function(title, message, buttonLabels, primaryButtonIndex, modifier, animation, callback, messageIsHTML, cancelable, promptDialog, autofocus, placeholder) {
     var dialogEl = angular.element('<ons-alert-dialog>'),
       titleEl = angular.element('<div>').addClass('alert-dialog-title').text(title),
       messageEl = angular.element('<div>').addClass('alert-dialog-content'),
@@ -53,7 +53,7 @@ window.ons.notification = (function() {
     dialogEl.append(titleEl).append(messageEl);
 
     if (promptDialog) {
-      inputEl = angular.element('<input>').addClass('text-input');
+      inputEl = angular.element('<input>').addClass('text-input').attr('placeholder', placeholder);
       dialogEl.append(inputEl);
     }
 
@@ -65,6 +65,10 @@ window.ons.notification = (function() {
 
     var createButton = function(i) {
       var buttonEl = angular.element('<button>').addClass('alert-dialog-button').text(buttonLabels[i]);
+      
+      if (i == primaryButtonIndex) {
+        buttonEl.addClass('alert-dialog-button--primal');
+      }
       buttonEl.on('click', function() {
         alertDialog.hide({
           callback: function() {
@@ -79,11 +83,9 @@ window.ons.notification = (function() {
           }
         });
       });
-  
       footerEl.append(buttonEl);
       buttonEl = null;
     };
-
     for (var i=0; i<buttonLabels.length; i++) {
       createButton(i);
     }
@@ -96,9 +98,11 @@ window.ons.notification = (function() {
         } else {
           callback(-1);
         }
-        alertDialog.destroy();
-        alertDialog = null;
-        inputEl = null;
+        setTimeout(function() {
+          alertDialog.destroy();
+          alertDialog = null;
+          inputEl = null;
+        });
       });
     }
 
@@ -126,8 +130,8 @@ window.ons.notification = (function() {
       if (!options.message && !options.messageHTML) {
         throw new Error('Alert dialog must contain a message.');
       }
-
-      createAlertDialog(options.title, 
+      createAlertDialog(
+        options.title, 
         options.message || options.messageHTML, 
         [options.buttonLabel], 
         0,
@@ -135,7 +139,8 @@ window.ons.notification = (function() {
         options.animation,
         options.callback,
         !options.message ? true : false,
-        false, false, false);
+        false, false, false
+      );
     },
     confirm: function(options) {
       var defaults = {
@@ -152,7 +157,8 @@ window.ons.notification = (function() {
         throw new Error('Confirm dialog must contain a message.');
       }
 
-      createAlertDialog(options.title,
+      createAlertDialog(
+        options.title,
         options.message || options.messageHTML,
         options.buttonLabels,
         options.primaryButtonIndex,
@@ -161,7 +167,8 @@ window.ons.notification = (function() {
         options.callback,
         !options.message ? true : false,
         options.cancelable,
-        false, false);
+        false, false
+      );
     },
     prompt: function(options) {
       var defaults = {
@@ -171,16 +178,16 @@ window.ons.notification = (function() {
         placeholder: '',
         callback: function() {},
         cancelable: false,
-        autofocus: false
+        autofocus: false,
       };
 
       options = extend(defaults, options);
-      
       if (!options.message && !options.messageHTML) {
         throw new Error('Prompt dialog must contain a message.');
       }
       
-      createAlertDialog(options.title,
+      createAlertDialog(
+        options.title,
         options.message || options.messageHTML,
         [options.buttonLabel],
         0,
@@ -190,7 +197,9 @@ window.ons.notification = (function() {
         !options.message ? true : false,
         options.cancelable,
         true,
-        options.autofocus);
+        options.autofocus,
+        options.placeholder
+      );
     }
   };
 })();

@@ -99,3 +99,8 @@ ons-toolbar ~ .page__content {
 .tab-bar__status-bar-fill ~ .tab-bar--top {
   padding-top: 22px;
 }
+
+ons-alert-dialog[disabled] {
+  pointer-events: none;
+  opacity: 0.75;
+}
