@@ -63,12 +63,21 @@ window.ons.notification = (function() {
     ons.compile(dialogEl[0]);
     var alertDialog = dialogEl.data('ons-alert-dialog');
 
+    if (buttonLabels.length <= 2) {
+      footerEl.addClass('alert-dialog-footer--one');
+    }
+
     var createButton = function(i) {
       var buttonEl = angular.element('<button>').addClass('alert-dialog-button').text(buttonLabels[i]);
       
       if (i == primaryButtonIndex) {
         buttonEl.addClass('alert-dialog-button--primal');
       }
+
+      if (buttonLabels.length <= 2) {
+        buttonEl.addClass('alert-dialog-button--one');
+      }
+
       buttonEl.on('click', function() {
         alertDialog.hide({
           callback: function() {
