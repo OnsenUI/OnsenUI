@@ -91,6 +91,17 @@
         var modifierTemplater = $onsen.generateModifierTemplater(attrs);
  
         element.addClass('alert-dialog ' + modifierTemplater('alert-dialog--*'));
+       
+        var titleElement = angular.element(element[0].querySelector('.alert-dialog-title')),
+          contentElement = angular.element(element[0].querySelector('.alert-dialog-content'));
+
+        if (titleElement.length) {
+          titleElement.addClass(modifierTemplater('alert-dialog-title--*'));
+        }
+
+        if (contentElement.length) {
+          contentElement.addClass(modifierTemplater('alert-dialog-content--*'));
+        }
 
         return {
           pre: function(scope, element, attrs) {
@@ -98,7 +109,20 @@
 
             $onsen.declareVarAttribute(attrs, alertDialog);
             $onsen.aliasStack.register('ons.alertDialog', alertDialog);
+
             $onsen.addModifierMethods(alertDialog, 'alert-dialog--*', element);
+
+            if (titleElement.length) {
+              $onsen.addModifierMethods(alertDialog, 'alert-dialog-title--*', titleElement);
+            }
+
+            if (contentElement.length) {
+              $onsen.addModifierMethods(alertDialog, 'alert-dialog-content--*', contentElement);
+            }
+
+            if ($onsen.isAndroid()) {
+              alertDialog.addModifier('android');
+            }
 
             element.data('ons-alert-dialog', alertDialog);
 

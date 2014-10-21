@@ -15,11 +15,12 @@
     var app = angular.module('myApp', ['onsen']);
 
     app.controller('MyCtrl', function($scope) {
+      ons.createAlertDialog('alert.html').then(function(alertDialog) {
+        $scope.alertDialog = alertDialog;
+      });
+      
       $scope.fromTemplate = function() {
-        ons.createAlertDialog('alert.html').then(function(alertDialog) {
-          $scope.alertDialog = alertDialog;
-          $scope.alertDialog.show();
-        });
+        $scope.alertDialog.show();
       };
 
       $scope.close = function() {
