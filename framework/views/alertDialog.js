@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 (function() {
-  'use strict;';
+  'use strict';
 
   var module = angular.module('onsen');
 
@@ -38,7 +38,7 @@ limitations under the License.
         });
 
         this._visible = false;
-        this._locked = false;
+        this._doorLock = new DoorLock();
 
         this.setCancelable(typeof attrs.cancelable !== 'undefined');
         this.setDisabled(typeof attrs.disable !== 'undefined');
@@ -57,7 +57,9 @@ limitations under the License.
       /**
        * Show alert dialog.
        *
-       * @param {Object} options
+       * @param {Object} [options]
+       * @param {String} [options.animation] animation type
+       * @param {Function} [options.callback] callback after dialog is shown
        */
       show: function(options) {
         options = options || {};
@@ -69,31 +71,34 @@ limitations under the License.
           cancel: function() { cancel = true; }
         });
         
-        if (!this._locked && !cancel) {
-          this._locked = true;
-          this._mask.css('display', 'block');
-          this._element.css('display', 'block');
+        if (!cancel) {
+          this._doorLock.waitUnlock(function() {
+            var unlock = this._doorLock.lock(),
+              animation = this._animation;
 
-          var that = this,
-            animation = this._animation;
-          
-          if (options.animation) {
-            animation = AlertDialogView._animatorDict[options.animation];
-          }
-          
-          animation.show(this, function() {
-            that._visible = true;
-            that._locked = false;
-            that.emit('postshow', {alertDialog: that});
-            callback();
-          });
+            this._mask.css('display', 'block');
+            this._element.css('display', 'block');
+            
+            if (options.animation) {
+              animation = AlertDialogView._animatorDict[options.animation];
+            }
+            
+            animation.show(this, function() {
+              this._visible = true;
+              unlock();
+              this.emit('postshow', {alertDialog: this});
+              callback();
+            }.bind(this));
+          }.bind(this));
         }
       },
 
       /**
        * Hide alert dialog.
        *
-       * @param {Object} options
+       * @param {Object} [options]
+       * @param {String} [options.animation] animation type
+       * @param {Function} [options.callback] callback after dialog is hidden
        */
       hide: function(options) {
         options = options || {};
@@ -105,23 +110,24 @@ limitations under the License.
           cancel: function() { cancel = true; }
         });
 
-        if (!this._locked && !cancel) {
-          this._locked = true;
-          var that = this,
-            animation = this._animation;
+        if (!cancel) {
+          this._doorLock.waitUnlock(function() {
+            var unlock = this._doorLock.lock(),
+              animation = this._animation;
 
-          if (options.animation) {
-            animation = AlertDialogView._animatorDict[options.animation];
-          }
+            if (options.animation) {
+              animation = AlertDialogView._animatorDict[options.animation];
+            }
 
-          animation.hide(this, function() {
-            that._element.css('display', 'none');
-            that._mask.css('display', 'none');
-            that._visible = false;
-            that._locked = false;
-            that.emit('posthide', {alertDialog: that});
-            callback();
-          });
+            animation.hide(this, function() {
+              this._element.css('display', 'none');
+              this._mask.css('display', 'none');
+              this._visible = false;
+              unlock();
+              this.emit('posthide', {alertDialog: this});
+              callback();
+            }.bind(this));
+          }.bind(this));
         }
       },
 
@@ -157,7 +163,7 @@ limitations under the License.
           throw new Error('Argument must be a boolean.');
         }
 
-        if(disabled) {
+        if (disabled) {
           this._element.prop('disabled', true);
         } else {
           this._element.removeAttr('disabled');
@@ -170,7 +176,7 @@ limitations under the License.
        * @return {Boolean}
        */
       isDisabled: function() {
-        return this._element.hasAttr('disabled');
+        return this._element[0].hasAttribute('disabled');
       },
 
       /**
@@ -183,20 +189,23 @@ limitations under the License.
           throw new Error('Argument must be a boolean.'); 
         }  
 
-        this._cancelable = cancelable;
+        if (cancelable) {
+          this._element.attr('cancelable', true);
+        } else {
+          this._element.removeAttr('cancelable');
+        }
       },
 
       isCancelable: function() {
-        return this._cancelable;
+        return this._element[0].hasAttribute('cancelable');
       },
 
       _cancel: function() {
         if (this.isCancelable()) {
-          var that = this;
           this.hide({
             callback: function () {
-              that.emit('cancel');
-            }
+              this.emit('cancel');
+            }.bind(this)
           });
         }
       },
@@ -217,7 +226,7 @@ limitations under the License.
 
         this._mask.on('click', this._cancel.bind(this));
  
-        if(color) {
+        if (color) {
           this._mask.css('background-color', color);
         }
 

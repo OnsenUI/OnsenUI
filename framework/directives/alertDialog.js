@@ -4,10 +4,10 @@
  * @name ons-alert-dialog
  * @description 
  *  [en]Alert dialog that is displayed on top of current screen.[/en]
- *  [ja][/ja]
+ *  [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
  * @param var 
  *  [en]Variable name to refer this alert dialog.[/en]
- *  [ja][/ja]
+ *  [ja]このアラートダイアログを参照するための名前を指定します。[/ja]
  * @param modifier
  *  [en]The appearance of the dialog.[/en]
  *  [ja]ダイアログの表現を指定します。[/ja]
@@ -16,10 +16,10 @@
  *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
  * @param disabled
  *  [en]If this attribute is set the dialog is disabled.[/en]
- *  [ja][/ja]
+ *  [ja]この属性がある時、アラートダイアログはdisabled状態になります。[/ja]
  * @param animation
  *  [en]The animation used when showing an hiding the dialog. Can be either "none" or "default".[/en]
- *  [ja][/ja]
+ *  [ja]ダイアログを表示する際のアニメーション名を指定します。[/ja]
  * @param mask-color
  *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
  *  [ja]背景のマスクの色を指定します。デフォルトは"rgba(0, 0, 0, 0.2)"です。[/ja]
@@ -30,23 +30,23 @@
  *  [en]Hide the alert dialog.[/en]
  *  [ja]ダイアログを閉じます。[/ja]
  * @property isShown()
- *  [en]Returns "true" if the alert dialog is visible.[/en]
- *  [ja][/ja]
+ *  [en]Returns whether the dialog is visible or not.[/en]
+ *  [ja]ダイアログが表示されているかどうかを返します。[/ja]
  * @property destroy()
- *  [en]Destroy the alert dialog.[/en]
- *  [ja][/ja]
+ *  [en]Destroy the alert dialog and remove it from the DOM tree.[/en]
+ *  [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
  * @property setCancelable(cancelable)
- *  [en]Make the alert dialog cancelable.[/en]
- *  [ja][/ja]
+ *  [en]Set whether the dialog can be canceled by the user when it is shown.[/en]
+ *  [ja]アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
  * @property isCancelable()
- *  [en]Returns "true" if the alert dialog is cancelable.[/en]
- *  [ja][/ja]
+ *  [en]Returns whether the dialog is cancelable or not.[/en]
+ *  [ja]このアラートダイアログがキャンセル可能かどうかを返します。[/ja]
  * @property setDisabled(disabled)
- *  [en]Make the alert dialog disabled.[/en]
- *  [ja][/ja]
+ *  [en]Disable or enable the alert dialog.[/en]
+ *  [ja]このアラートダイアログをdisabled状態にするかどうかを設定します。[/ja]
  * @property isDisabled()
- *  [en]Returns "true" if the alert dialog is disabled.[/en]
- *  [ja][/ja]
+ *  [en]Returns whether the dialog is disabled or enabled.[/en]
+ *  [ja]このアラートダイアログがdisabled状態かどうかを返します。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Preset events are preshow, postshow, prehide and posthide.[/en]
  *  [ja]イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。[/ja]

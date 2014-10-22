@@ -24,7 +24,7 @@ limitations under the License.
   module.factory('IOSAlertDialogAnimator', function(DialogAnimator) {
 
     /**
-     * Slide animator for navigator transition.
+     * iOS style animator for alert dialog.
      */
     var IOSAlertDialogAnimator = DialogAnimator.extend({
 

@@ -24,7 +24,7 @@ limitations under the License.
   module.factory('SlideDialogAnimator', function(DialogAnimator) {
 
     /**
-     * Slide animator for navigator transition.
+     * Slide animator for dialog.
      */
     var SlideDialogAnimator = DialogAnimator.extend({
 

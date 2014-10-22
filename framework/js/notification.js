@@ -16,21 +16,6 @@ limitations under the License.
 */
 
 window.ons.notification = (function() {
-  var extend = function(a, b) {
-    var ob = {};
-    for (var key in a) {
-      if (a.hasOwnProperty(key)) {
-        ob[key] = a[key];  
-      }
-    }
-    for (key in b) {
-      if (b.hasOwnProperty(key)) {
-        ob[key] = b[key];
-      }
-    }
-    return ob;
-  };
-
   var createAlertDialog = function(title, message, buttonLabels, primaryButtonIndex, modifier, animation, callback, messageIsHTML, cancelable, promptDialog, autofocus, placeholder) {
     var dialogEl = angular.element('<ons-alert-dialog>'),
       titleEl = angular.element('<div>').addClass('alert-dialog-title').text(title),
@@ -95,11 +80,11 @@ window.ons.notification = (function() {
       footerEl.append(buttonEl);
       buttonEl = null;
     };
-    for (var i=0; i<buttonLabels.length; i++) {
+    for (var i = 0; i < buttonLabels.length; i++) {
       createButton(i);
     }
 
-    if(cancelable) {
+    if (cancelable) {
       alertDialog.setCancelable(cancelable);
       alertDialog.on('cancel', function() {
         if(promptDialog) {
@@ -135,7 +120,7 @@ window.ons.notification = (function() {
         callback: function() {}
       };
     
-      options = extend(defaults, options);
+      options = angular.extend({}, defaults, options);
       if (!options.message && !options.messageHTML) {
         throw new Error('Alert dialog must contain a message.');
       }
@@ -161,7 +146,7 @@ window.ons.notification = (function() {
         cancelable: false
       };
 
-      options = extend(defaults, options);
+      options = angular.extend({}, defaults, options);
       if (!options.message && !options.messageHTML) {
         throw new Error('Confirm dialog must contain a message.');
       }
@@ -190,7 +175,7 @@ window.ons.notification = (function() {
         autofocus: false,
       };
 
-      options = extend(defaults, options);
+      options = angular.extend({}, defaults, options);
       if (!options.message && !options.messageHTML) {
         throw new Error('Prompt dialog must contain a message.');
       }
