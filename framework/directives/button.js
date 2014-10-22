@@ -61,7 +61,7 @@
 
         $onsen.addModifierMethods(button, 'button--*', element); 
 
-        transclude(scope, function(cloned) {
+        transclude(scope.$parent, function(cloned) {
           angular.element(element[0].querySelector('.ons-button-inner')).append(cloned);
         });
 
