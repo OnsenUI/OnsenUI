@@ -27,7 +27,7 @@
 
   var module = angular.module('onsen');
 
-  function ensureLeftContainer(elementk, modifierTemplater) {
+  function ensureLeftContainer(element, modifierTemplater) {
     var container = element[0].querySelector('.left');
 
     if (!container) {
