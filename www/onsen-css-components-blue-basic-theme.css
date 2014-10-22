@@ -3168,6 +3168,91 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: #999;
 }
 /* topdoc
+  name: Dialog
+  class: dialog
+  markup:
+    <div class="dialog-mask"></div>
+    <div class="dialog">
+      <div class="page">
+        <p style="text-align:center;margin-top:35px;opacity:0.4;">Content</p>
+      </div>
+    </div>
+*/
+.dialog {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  margin: auto auto;
+  -webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  overflow: hidden;
+  min-width: 270px;
+  min-height: 100px;
+  text-align: left;
+}
+.dialog-mask {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.3);
+}
+/* topdoc
+  name: Dialog(rounded)
+  use: Dialog
+  markup:
+    <div class="dialog-mask"></div>
+    <div class="dialog dialog--rounded">
+      <div class="page">
+        <p style="text-align:center;margin-top:35px;opacity:0.4;">Content</p>
+      </div>
+    </div>
+*/
+.dialog--rounded {
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* topdoc
   name: Alert Dialog
   class: alert-dialog
   height: 360px
@@ -3218,7 +3303,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   transform: translate(-50%, -50%);
   width: 270px;
   margin: auto auto;
-  background-color: rgba(255,255,255,0.95);
+  background-color: rgba(255,255,255,0.92);
   -webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.07);
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
   -webkit-border-radius: 8px;
@@ -3226,6 +3311,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   overflow: hidden;
   padding: 16px 0 0 0;
   max-width: 95%;
+  color: #1f1f21;
 }
 .alert-dialog-title {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
@@ -3237,6 +3323,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-weight: 500;
   padding: 0px 8px 0px 8px;
   text-align: center;
+  color: #1f1f21;
 }
 .alert-dialog-content {
   -webkit-box-sizing: border-box;
@@ -3248,6 +3335,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-size: 14px;
   min-height: 36px;
   text-align: center;
+  color: #1f1f21;
 }
 .alert-dialog-footer {
   width: 100%;
@@ -3464,6 +3552,208 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .alert-dialog-content--android {
   text-align: left;
   padding: 8px 12px;
+}
+/* topdoc
+  name: Popover
+  class: popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--up" style="bottom:20px;left:50px;">
+      <div class="popover__bottom-arrow"></div>
+      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+    </div>
+*/
+.popover-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.1);
+}
+.popover {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  position: absolute;
+  width: 220px;
+  min-height: 100px;
+  background-color: #fff;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+  color: #1f1f21;
+}
+.popover__bottom-arrow {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  -webkit-transform-origin: 50% 50% 0;
+  -moz-transform-origin: 50% 50% 0;
+  -ms-transform-origin: 50% 50% 0;
+  -o-transform-origin: 50% 50% 0;
+  transform-origin: 50% 50% 0;
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -moz-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -o-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  -webkit-border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 4px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  bottom: 0;
+  left: 50%;
+  margin-left: -9px;
+  margin-bottom: -9px;
+}
+.popover__top-arrow {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  -webkit-transform-origin: 50% 50% 0;
+  -moz-transform-origin: 50% 50% 0;
+  -ms-transform-origin: 50% 50% 0;
+  -o-transform-origin: 50% 50% 0;
+  transform-origin: 50% 50% 0;
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -moz-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -o-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  -webkit-border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 4px;
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
+  top: 0;
+  left: 50%;
+  margin-left: -9px;
+  margin-top: -9px;
+}
+.popover__left-arrow {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  -webkit-transform-origin: 50% 50% 0;
+  -moz-transform-origin: 50% 50% 0;
+  -ms-transform-origin: 50% 50% 0;
+  -o-transform-origin: 50% 50% 0;
+  transform-origin: 50% 50% 0;
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -moz-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -o-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  -webkit-border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 4px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  top: 50%;
+  left: 0;
+  margin-left: -9px;
+  margin-top: -9px;
+}
+.popover__right-arrow {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  -webkit-transform-origin: 50% 50% 0;
+  -moz-transform-origin: 50% 50% 0;
+  -ms-transform-origin: 50% 50% 0;
+  -o-transform-origin: 50% 50% 0;
+  transform-origin: 50% 50% 0;
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -moz-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: -o-linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  background-image: linear-gradient(45deg, #fff, #fff 50%, transparent 50%);
+  -webkit-border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 4px;
+  -webkit-transform: rotate(225deg);
+  -moz-transform: rotate(225deg);
+  -ms-transform: rotate(225deg);
+  -o-transform: rotate(225deg);
+  transform: rotate(225deg);
+  top: 50%;
+  right: 0;
+  margin-right: -9px;
+  margin-top: -9px;
+}
+/* topdoc
+  name: Popover(down)
+  use: Popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--down" style="top:20px;left:50px;">
+      <div class="popover__top-arrow"></div>
+      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+    </div>
+*/
+/* topdoc
+  name: Popover(left)
+  use: Popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--left" style="top:20px;right:20px;">
+      <div class="popover__right-arrow"></div>
+      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+    </div>
+*/
+/* topdoc
+  name: Popover(right)
+  use: Popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--right" style="top:20px;left:20px;">
+      <div class="popover__left-arrow"></div>
+      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+    </div>
+*/
+/* topdoc
+  name: Android-like Popover
+  use: Popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--up popover--android" style="top:10px;right:10px;">
+      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+    </div>
+*/
+.popover--android {
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 /* topdoc
   name: Modal
