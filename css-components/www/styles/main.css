@@ -835,7 +835,7 @@ div#components-container > ul#components > li > div.component-preview > iframe {
   width: 320px;
   height: 80px;
 }
-div.dialog-mask,
+div.popup-dialog-mask,
 div.inspector-background-mask {
   background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
@@ -845,27 +845,27 @@ div.inspector-background-mask {
   bottom: 0px;
   z-index: 99;
 }
-div.dialog-mask.ng-hide-remove,
+div.popup-dialog-mask.ng-hide-remove,
 div.inspector-background-mask.ng-hide-remove {
   opacity: 0;
   transition: 0.2s linear all;
   display: block !important;
 }
-div.dialog-mask.ng-hide-remove-active,
+div.popup-dialog-mask.ng-hide-remove-active,
 div.inspector-background-mask.ng-hide-remove-active {
   opacity: 1;
 }
-div.dialog-mask.ng-hide-add,
+div.popup-dialog-mask.ng-hide-add,
 div.inspector-background-mask.ng-hide-add {
   opacity: 1;
   transition: 0.2s linear all;
   display: block !important;
 }
-div.dialog-mask.ng-hide-add-active,
+div.popup-dialog-mask.ng-hide-add-active,
 div.inspector-background-mask.ng-hide-add-active {
   opacity: 0;
 }
-div.dialog-mask.uninitialized,
+div.popup-dialog-mask.uninitialized,
 div.inspector-background-mask.uninitialized {
   display: none;
 }
@@ -881,7 +881,7 @@ div.dialog-container {
   transform: translate(-50%, -50%);
   z-index: 100;
 }
-div.dialog-container > div.dialog {
+div.dialog-container > div.popup-dialog {
   border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: white;
   box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.2);
@@ -893,51 +893,51 @@ div.dialog-container > div.dialog {
   border-radius: 6px;
   font-size: 16px;
 }
-div.dialog-container > div.dialog.ng-hide-remove {
+div.dialog-container > div.popup-dialog.ng-hide-remove {
   opacity: 0;
   transition: 0.1s ease-in all;
   -webkit-transform: scale(0.9);
   transform: scale(0.9);
   display: block !important;
 }
-div.dialog-container > div.dialog.ng-hide-remove-active {
+div.dialog-container > div.popup-dialog.ng-hide-remove-active {
   -webkit-transform: scale(1);
   transform: scale(1);
   opacity: 1;
 }
-div.dialog-container > div.dialog > img.close {
+div.dialog-container > div.popup-dialog > img.close {
   float: right;
   cursor: pointer;
   margin: -3px -3px 0 0;
 }
-div.dialog-container > div.dialog > img.close:focus {
+div.dialog-container > div.popup-dialog > img.close:focus {
   outline: 0;
   margin: 0;
   padding: 0;
 }
-div.dialog-container > div.dialog > img.close:active {
+div.dialog-container > div.popup-dialog > img.close:active {
   opacity: 0.6;
 }
-div.dialog-container > div.dialog div.side-image-container {
+div.dialog-container > div.popup-dialog div.side-image-container {
   float: left;
   margin: 10px 20px 20px 10px;
 }
-div.dialog-container > div.dialog > h2 {
+div.dialog-container > div.popup-dialog > h2 {
   font-size: 20px;
   color: #333;
   font-weight: 400;
   padding-bottom: 8px;
 }
-div.dialog-container > div.dialog > footer {
+div.dialog-container > div.popup-dialog > footer {
   line-height: 50px;
 }
-div.dialog-container > div.dialog > footer button {
+div.dialog-container > div.popup-dialog > footer button {
   line-height: 38px;
   height: 38px;
   padding: 0 18px;
   font-size: 18px;
 }
-div.dialog-container > div.dialog > footer .right-button {
+div.dialog-container > div.popup-dialog > footer .right-button {
   float: right;
 }
 div.welcome-dialog-container {
@@ -1473,7 +1473,7 @@ div.popup-container > div.popup > footer .right-button {
 .guide-mask.last-guide-mask.ng-hide-add-active {
   opacity: 0;
 }
-div.dialog div.highlight-content,
+div.popup-dialog div.highlight-content,
 div.popup div.highlight-content {
   clear: both;
   background-color: #eee;
@@ -1484,9 +1484,9 @@ div.popup div.highlight-content {
   text-align: center;
   margin: 0 -16px;
 }
-div.dialog div.highlight-content input[type=text].site,
+div.popup-dialog div.highlight-content input[type=text].site,
 div.popup div.highlight-content input[type=text].site,
-div.dialog div.highlight-content input[type=email].site,
+div.popup-dialog div.highlight-content input[type=email].site,
 div.popup div.highlight-content input[type=email].site {
   border: 2px solid #bbb;
   padding: 0 5px;
@@ -1496,7 +1496,7 @@ div.popup div.highlight-content input[type=email].site {
   line-height: 40px;
   font-weight: 300;
 }
-div.dialog div.highlight-content button.site-button,
+div.popup-dialog div.highlight-content button.site-button,
 div.popup div.highlight-content button.site-button {
   background-color: #3d4957;
   color: #fff;

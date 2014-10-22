@@ -25,6 +25,7 @@
               <option value="index.html">Onsen Css Components Blue Basic Theme</option>
               <option value="onsen-css-components-blue-theme.html">Onsen Css Components Blue Theme</option>
               <option value="onsen-css-components-dark-theme.html">Onsen Css Components Dark Theme</option>
+              <option value="onsen-css-components-default.html">Onsen Css Components Default</option>
               <option value="onsen-css-components-purple-theme.html" selected="selected">Onsen Css Components Purple Theme</option>
               <option value="onsen-css-components-sunshine-theme.html">Onsen Css Components Sunshine Theme</option>
               <option value="onsen-css-components.html">Onsen Css Components</option>
@@ -79,11 +80,18 @@
               <li><a href="#underbar-text-input">Underbar Text Input</a></li>
               <li><a href="#textarea">Textarea</a></li>
               <li><a href="#textarea-transparent">Textarea Transparent</a></li>
+              <li><a href="#dialog">Dialog</a></li>
+              <li><a href="#dialogrounded)">Dialog(rounded)</a></li>
               <li><a href="#alert-dialog">Alert Dialog</a></li>
               <li><a href="#alert-dialog-without-title">Alert Dialog without Title</a></li>
               <li><a href="#alert-dialog-with-multiple-buttons">Alert Dialog with Multiple Buttons</a></li>
               <li><a href="#alert-dialog-with-multiple-buttons-2">Alert Dialog with Multiple Buttons 2</a></li>
               <li><a href="#android-like-alert-dialog">Android-like Alert Dialog</a></li>
+              <li><a href="#popover">Popover</a></li>
+              <li><a href="#popoverdown)">Popover(down)</a></li>
+              <li><a href="#popoverleft)">Popover(left)</a></li>
+              <li><a href="#popoverright)">Popover(right)</a></li>
+              <li><a href="#android-like-popover">Android-like Popover</a></li>
               <li><a href="#modal">Modal</a></li>
             </ul>
           </div>
@@ -905,6 +913,40 @@
               </section>
             </footer>
           </article>
+          <article id="dialog" class="component">
+            <header>
+              <h2>Dialog</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="dialog-mask"></div><div class="dialog">  <div class="page">    <p style="text-align:center;margin-top:35px;opacity:0.4;">Content</p>  </div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;dialog-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;dialog&quot;&gt;  &lt;div class=&quot;page&quot;&gt;    &lt;p style=&quot;text-align:center;margin-top:35px;opacity:0.4;&quot;&gt;Content&lt;/p&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="dialogrounded)" class="component">
+            <header>
+              <h2>Dialog(rounded)</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="dialog-mask"></div><div class="dialog dialog--rounded">  <div class="page">    <p style="text-align:center;margin-top:35px;opacity:0.4;">Content</p>  </div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;dialog-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;dialog dialog--rounded&quot;&gt;  &lt;div class=&quot;page&quot;&gt;    &lt;p style=&quot;text-align:center;margin-top:35px;opacity:0.4;&quot;&gt;Content&lt;/p&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
           <article id="alert-dialog" class="component">
             <header>
               <h2>Alert Dialog</h2>
@@ -986,6 +1028,91 @@
               <section class="code">
                 <div>
                   <pre class="html"><code data-language="html">&lt;div class=&quot;mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;alert-dialog alert-dialog--android&quot;&gt;  &lt;div class=&quot;alert-dialog-title alert-dialog-title--android&quot;&gt;    Alert  &lt;/div&gt;  &lt;div class=&quot;alert-dialog-content alert-dialog-content--android&quot;&gt;    Hello World!  &lt;/div&gt;  &lt;div class=&quot;alert-dialog-footer alert-dialog-footer--one&quot;&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--one&quot;&gt;Cancel&lt;/button&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--primal alert-dialog-button--one&quot;&gt;Ok&lt;/button&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="popover" class="component">
+            <header>
+              <h2>Popover</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="popover-mask"></div><div class="popover popover--up" style="bottom:20px;left:50px;">  <div class="popover__bottom-arrow"></div>  <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;popover-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;popover popover--up&quot; style=&quot;bottom:20px;left:50px;&quot;&gt;  &lt;div class=&quot;popover__bottom-arrow&quot;&gt;&lt;/div&gt;  &lt;div style=&quot;text-align:center;opacity:0.4;margin-top:40px&quot;&gt;Content&lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="popoverdown)" class="component">
+            <header>
+              <h2>Popover(down)</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="popover-mask"></div><div class="popover popover--down" style="top:20px;left:50px;">  <div class="popover__top-arrow"></div>  <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;popover-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;popover popover--down&quot; style=&quot;top:20px;left:50px;&quot;&gt;  &lt;div class=&quot;popover__top-arrow&quot;&gt;&lt;/div&gt;  &lt;div style=&quot;text-align:center;opacity:0.4;margin-top:40px&quot;&gt;Content&lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="popoverleft)" class="component">
+            <header>
+              <h2>Popover(left)</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="popover-mask"></div><div class="popover popover--left" style="top:20px;right:20px;">  <div class="popover__right-arrow"></div>  <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;popover-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;popover popover--left&quot; style=&quot;top:20px;right:20px;&quot;&gt;  &lt;div class=&quot;popover__right-arrow&quot;&gt;&lt;/div&gt;  &lt;div style=&quot;text-align:center;opacity:0.4;margin-top:40px&quot;&gt;Content&lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="popoverright)" class="component">
+            <header>
+              <h2>Popover(right)</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="popover-mask"></div><div class="popover popover--right" style="top:20px;left:20px;">  <div class="popover__left-arrow"></div>  <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;popover-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;popover popover--right&quot; style=&quot;top:20px;left:20px;&quot;&gt;  &lt;div class=&quot;popover__left-arrow&quot;&gt;&lt;/div&gt;  &lt;div style=&quot;text-align:center;opacity:0.4;margin-top:40px&quot;&gt;Content&lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="android-like-popover" class="component">
+            <header>
+              <h2>Android-like Popover</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="popover-mask"></div><div class="popover popover--up popover--android" style="top:10px;right:10px;">  <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;popover-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;popover popover--up popover--android&quot; style=&quot;top:10px;right:10px;&quot;&gt;  &lt;div style=&quot;text-align:center;opacity:0.4;margin-top:40px&quot;&gt;Content&lt;/div&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
