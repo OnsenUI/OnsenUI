@@ -92,7 +92,7 @@
         });
 
         var tabbarView = new TabbarView(scope, element, attrs);
-        $onsen.addModifierMethods(tabbarView, 'tab-bar--*', angular.element(element.children()[1]))
+        $onsen.addModifierMethods(tabbarView, 'tab-bar--*', angular.element(element.children()[1]));
 
         scope.tabbarId = tabbarView._tabbarId;
 

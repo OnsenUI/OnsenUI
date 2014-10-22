@@ -131,7 +131,7 @@
           });
 
           $onsen.fireComponentEvent(element[0], 'init');
-        }
+        };
       }
     };
   });
