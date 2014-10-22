@@ -94,7 +94,7 @@
           element.addClass(tabbarView._scope.modifierTemplater('tab-bar--*__item'));
           element.addClass(tabbarView._scope.modifierTemplater('tab-bar__item--*'));
 
-          transclude(function(cloned) {
+          transclude(scope.$parent, function(cloned) {
             var wrapper = angular.element(element[0].querySelector('.tab-bar-inner'));
 
             if (attrs.icon || attrs.label || !cloned[0]) {
