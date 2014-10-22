@@ -28,6 +28,7 @@
               <option value="onsen-css-components-default.html" selected="selected">Onsen Css Components Default</option>
               <option value="onsen-css-components-purple-theme.html">Onsen Css Components Purple Theme</option>
               <option value="onsen-css-components-sunshine-theme.html">Onsen Css Components Sunshine Theme</option>
+              <option value="onsen-css-components.html">Onsen Css Components</option>
             </select>
           </div>
           <div id="pageNav">
@@ -79,6 +80,18 @@
               <li><a href="#underbar-text-input">Underbar Text Input</a></li>
               <li><a href="#textarea">Textarea</a></li>
               <li><a href="#textarea-transparent">Textarea Transparent</a></li>
+              <li><a href="#dialog">Dialog</a></li>
+              <li><a href="#dialogrounded)">Dialog(rounded)</a></li>
+              <li><a href="#alert-dialog">Alert Dialog</a></li>
+              <li><a href="#alert-dialog-without-title">Alert Dialog without Title</a></li>
+              <li><a href="#alert-dialog-with-multiple-buttons">Alert Dialog with Multiple Buttons</a></li>
+              <li><a href="#alert-dialog-with-multiple-buttons-2">Alert Dialog with Multiple Buttons 2</a></li>
+              <li><a href="#android-like-alert-dialog">Android-like Alert Dialog</a></li>
+              <li><a href="#popover">Popover</a></li>
+              <li><a href="#popoverdown)">Popover(down)</a></li>
+              <li><a href="#popoverleft)">Popover(left)</a></li>
+              <li><a href="#popoverright)">Popover(right)</a></li>
+              <li><a href="#android-like-popover">Android-like Popover</a></li>
               <li><a href="#modal">Modal</a></li>
             </ul>
           </div>
@@ -106,7 +119,7 @@
               <h2>Switch</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><label class="switch">  <input type="checkbox" class="switch__input">  <div class="switch__toggle"></div></label><label class="switch">  <input type="checkbox" class="switch__input" checked>  <div class="switch__toggle"></div></label><label class="switch">  <input type="checkbox" class="switch__input" disabled>  <div class="switch__toggle"></div></label></div>
               </div>
             </section>
@@ -123,7 +136,7 @@
               <h2>Range</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><input type="range" class="range"><input type="range" class="range" disabled></div>
               </div>
             </section>
@@ -140,7 +153,7 @@
               <h2>Navigation Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar">  <div class="navigation-bar__center">Navigation Bar</div></div></div>
               </div>
             </section>
@@ -157,7 +170,7 @@
               <h2>Navigation Bar Item</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar">  <div class="navigation-bar__left">    <span class="toolbar-button--quiet navigation-bar__line-height">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Navigation Bar  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>  </div></div></div>
               </div>
             </section>
@@ -174,7 +187,7 @@
               <h2>Navigation Bar with Outline Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar">  <div class="navigation-bar__left">    <span class="toolbar-button--outline navigation-bar__line-height">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Title  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--outline navigation-bar__line-height">Button</span>  </div></div></div>
               </div>
             </section>
@@ -191,7 +204,7 @@
               <h2>Transparent Navigation Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar navigation-bar--transparent">  <div class="navigation-bar__left">    <span class="toolbar-button--quiet navigation-bar__line-height">      <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>    </span>  </div>  <div class="navigation-bar__center">    Navigation Bar  </div>  <div class="navigation-bar__right">    <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>  </div></div></div>
               </div>
             </section>
@@ -208,7 +221,7 @@
               <h2>Bottom Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><div class="bottom-bar">  <div class="bottom-bar__line-height" style="text-align:center">Bottom Toolbar</div></div></div>
               </div>
             </section>
@@ -225,7 +238,7 @@
               <h2>Navigation Bar with Segment</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar">  <div class="navigation-bar__center">    <div class="button-bar" style="width:200px;margin:7px 50px;">      <div class="button-bar__item">        <input type="radio" name="navi-segment-a" checked>        <div class="button-bar__button">One</div>      </div>      <div class="button-bar__item">        <input type="radio" name="navi-segment-a">        <div class="button-bar__button">Two</div>      </div>    </div>  </div></div></div>
               </div>
             </section>
@@ -242,7 +255,7 @@
               <h2>Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><button class="button">Button</button><button class="button" disabled>Button</button></div>
               </div>
             </section>
@@ -259,7 +272,7 @@
               <h2>Outline Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><button class="button button--outline">Button</button><button class="button button--outline" disabled>Button</button></div>
               </div>
             </section>
@@ -276,7 +289,7 @@
               <h2>Light Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><button class="button button--light">Button</button><button class="button button--light" disabled>Button</button></div>
               </div>
             </section>
@@ -293,7 +306,7 @@
               <h2>Quiet Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><button class="button--quiet">Button</button><button class="button--quiet" disabled>Button</button></div>
               </div>
             </section>
@@ -310,7 +323,7 @@
               <h2>Call To Action Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><button class="button--cta">Button</button><button class="button--cta" disabled>Button</button></div>
               </div>
             </section>
@@ -327,7 +340,7 @@
               <h2>Large Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><button class="button button--large">Button</button></div>
               </div>
             </section>
@@ -344,7 +357,7 @@
               <h2>Large Quiet Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><button class="button--large--quiet">Button</button></div>
               </div>
             </section>
@@ -361,7 +374,7 @@
               <h2>Large Call To Action Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><button class="button--large--cta" >Button</button></div>
               </div>
             </section>
@@ -378,7 +391,7 @@
               <h2>Button Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><div class="button-bar" style="width:280px;margin:0 auto;">  <div class="button-bar__item">    <button class="button-bar__button">One</button>  </div>  <div class="button-bar__item">    <button class="button-bar__button">Two</button>  </div>  <div class="button-bar__item">    <button class="button-bar__button">Three</button>  </div></div></div>
               </div>
             </section>
@@ -395,7 +408,7 @@
               <h2>Segment</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><div class="button-bar" style="width:280px;margin:0 auto;">  <div class="button-bar__item">    <input type="radio" name="segment-a" checked>    <button class="button-bar__button">One</button>  </div>  <div class="button-bar__item">    <input type="radio" name="segment-a">    <button class="button-bar__button">Two</button>  </div>  <div class="button-bar__item">    <input type="radio" name="segment-a">    <button class="button-bar__button">Three</button>  </div></div></div>
               </div>
             </section>
@@ -412,7 +425,7 @@
               <h2>Icon Tab Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><div class="tab-bar">  <label class="tab-bar__item">    <input type="radio" name="tab-bar-a" checked="checked">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-stop"></i>      <div class="tab-bar__label">One</div>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-a">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-record"></i>      <div class="tab-bar__label">Two</div>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-a">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-star"></i>      <div class="tab-bar__label">Three</div>    </button>  </label></div></div>
               </div>
             </section>
@@ -429,7 +442,7 @@
               <h2>Tab Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><div class="tab-bar">  <label class="tab-bar__item">    <input type="radio" name="tab-bar-c" checked="checked">    <button class="tab-bar__button">      <div class="tab-bar__label">One</div>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-c">    <button class="tab-bar__button">      <div class="tab-bar__label">Two</div>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-c">    <button class="tab-bar__button">      <div class="tab-bar__label">Three</div>    </button>  </label></div></div>
               </div>
             </section>
@@ -446,7 +459,7 @@
               <h2>Icon Only Tab Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><div class="tab-bar">  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b" checked="checked">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-stop"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-record"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-star"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-ios7-cloud-outline"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="tab-bar-b">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-ios7-pie"></i>    </button>  </label></div></div>
               </div>
             </section>
@@ -463,7 +476,7 @@
               <h2>Top Tab Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><div class="tab-bar tab-bar--top">  <label class="tab-bar__item">    <input type="radio" name="top-tab-bar-a" checked="checked">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-stop"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="top-tab-bar-a">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-record"></i>    </button>  </label>  <label class="tab-bar__item">    <input type="radio" name="top-tab-bar-a">    <button class="tab-bar__button">      <i class="tab-bar__icon ion-star"></i>    </button>  </label></div></div>
               </div>
             </section>
@@ -480,7 +493,7 @@
               <h2>Bordered Top Tab Bar</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><div class="tab-bar tab-bar--top tab-bar--top-border">  <label class="tab-bar__item tab-bar--top-border__item">    <input type="radio" name="top-tab-bar-b" checked="checked">    <button class="tab-bar__button tab-bar--top-border__button">      Home    </button>  </label>  <label class="tab-bar__item tab-bar--top-border__item">    <input type="radio" name="top-tab-bar-b">    <button class="tab-bar__button tab-bar--top-border__button">      Comments    </button>  </label>  <label class="tab-bar__item tab-bar--top-border__item">    <input type="radio" name="top-tab-bar-b">    <button class="tab-bar__button tab-bar--top-border__button">      Activity    </button>  </label></div></div>
               </div>
             </section>
@@ -497,7 +510,7 @@
               <h2>Notification</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><span class="notification">1</span><span class="notification">10</span><span class="notification">999</span></div>
               </div>
             </section>
@@ -514,7 +527,7 @@
               <h2>Toolbar Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><button class="toolbar-button">  <i class="fa fa-bell" style="font-size:17px"></i> Label</button><button class="toolbar-button toolbar-button--outline">  <i class="fa fa-bell" style="font-size:17px"></i> Label</button></div>
               </div>
             </section>
@@ -531,7 +544,7 @@
               <h2>Checkbox</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><label class="checkbox">  <input type="checkbox">  <div class="checkbox__checkmark"></div>  OFF</label><label class="checkbox">  <input type="checkbox" checked="checked">  <div class="checkbox__checkmark"></div>  ON</label><label class="checkbox">  <input type="checkbox" disabled>  <div class="checkbox__checkmark"></div>  Disabled</label></div>
               </div>
             </section>
@@ -548,7 +561,7 @@
               <h2>No border Checkbox</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><label class="checkbox--noborder">  <input type="checkbox">  <div class="checkbox__checkmark"></div>  OFF</label><label class="checkbox--noborder">  <input type="checkbox" checked="checked">  <div class="checkbox__checkmark"></div>  ON</label><label class="checkbox--noborder">  <input type="checkbox" disabled checked="checked">  <div class="checkbox__checkmark"></div>  Disabled</label></div>
               </div>
             </section>
@@ -565,7 +578,7 @@
               <h2>Radio Button</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><label class="radio-button">  <input type="radio" name="r" checked="checked">  <div class="radio-button__checkmark"></div>  Label</label><label class="radio-button">  <input type="radio" name="r">  <div class="radio-button__checkmark"></div>  Label</label><label class="radio-button">  <input type="radio" name="r">  <div class="radio-button__checkmark"></div>  Label</label></div>
               </div>
             </section>
@@ -582,7 +595,7 @@
               <h2>List</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item">    <span class="list__item__line-height">Item</span>  </li>  <li class="list__item">    <span class="list__item__line-height">Item</span>  </li></ul></div>
               </div>
             </section>
@@ -599,7 +612,7 @@
               <h2>Noborder List</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><ul class="list list--noborder">  <li class="list__item">    <span class="list__item__line-height">Item</span>  </li>  <li class="list__item">    <span class="list__item__line-height">Item</span>  </li></ul></div>
               </div>
             </section>
@@ -616,7 +629,7 @@
               <h2>Category List Header</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__header">    Header  </li>  <li class="list__item">    Item  </li>  <li class="list__header">    Header  </li>  <li class="list__item">    Item  </li></ul></div>
               </div>
             </section>
@@ -633,7 +646,7 @@
               <h2>Tappable List</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--tappable">    Tappable Item  </li></ul></div>
               </div>
             </section>
@@ -650,7 +663,7 @@
               <h2>Switch in List Item</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item">    Label    <label class="switch switch--list-item">      <input type="checkbox" class="switch__input" checked>      <div class="switch__toggle"></div>    </label>  </li>  <li class="list__item">    Label    <label class="switch switch--list-item">      <input type="checkbox" class="switch__input">      <div class="switch__toggle"></div>    </label>  </li></ul></div>
               </div>
             </section>
@@ -667,7 +680,7 @@
               <h2>List Item with Chevron</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--chevron">    Tappable Item  </li>  <li class="list__item list__item--chevron">    Tappable Item  </li></ul></div>
               </div>
             </section>
@@ -684,7 +697,7 @@
               <h2>Inset List</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><ul class="list list--inset">  <li class="list__item list--inset__item list__item--chevron">    List Item with Chevron  </li>  <li class="list__item list--inset__item list__item--chevron">    List Item with Chevron  </li></ul></div>
               </div>
             </section>
@@ -701,7 +714,7 @@
               <h2>Radio Button in List Item</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--tappable">    <label class="radio-button radio-button--list-item">      <input type="radio" name="b" checked="checked">      <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>      Radio Button    </label>  </li>  <li class="list__item list__item--tappable">    <label class="radio-button radio-button--list-item">      <input type="radio" name="b">      <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>      Radio Button    </label>  </li></ul></div>
               </div>
             </section>
@@ -718,7 +731,7 @@
               <h2>Checkbox in List Item</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--list-item">      <input type="checkbox">      <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li>  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--list-item">      <input type="checkbox" checked>      <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li></ul></div>
               </div>
             </section>
@@ -735,7 +748,7 @@
               <h2>No border Checkbox in List Item</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--noborder checkbox--list-item">      <input type="checkbox">      <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li>  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--noborder checkbox--list-item">      <input type="checkbox" checked>      <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li></ul></div>
               </div>
             </section>
@@ -752,7 +765,7 @@
               <h2>Text Input in List Item</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item">    <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="name">  </li>  <li class="list__item">    <input type="text" class="text-input text-input--transparent" style="width:100%; margin-top:4px;" placeholder="email">  </li></ul></div>
               </div>
             </section>
@@ -769,7 +782,7 @@
               <h2>Textarea in List Item</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item">    <textarea class="textarea textarea--transparent" style="width:100%;height:50px;margin-top:4px;" placeholder="text message"></textarea>  </li></ul></div>
               </div>
             </section>
@@ -786,7 +799,7 @@
               <h2>Right Label in List Item</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item">    <div class="list__right-label">Label</div>    Label  </li></ul></div>
               </div>
             </section>
@@ -803,7 +816,7 @@
               <h2>Search Input</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><input type="search" value="" placeholder="Search" class="search-input"></div>
               </div>
             </section>
@@ -820,7 +833,7 @@
               <h2>Text Input</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><input type="text" class="text-input" placeholder="text" value=""><br><input type="text" class="text-input" placeholder="text" value="" disabled></div>
               </div>
             </section>
@@ -837,7 +850,7 @@
               <h2>Transparent Text Input</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><input type="text" class="text-input--transparent" placeholder="text" value=""><br><input type="text" class="text-input--transparent" placeholder="text" value="" disabled></div>
               </div>
             </section>
@@ -854,7 +867,7 @@
               <h2>Underbar Text Input</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><input type="text" class="text-input--underbar" placeholder="text" value=""><br><input type="text" class="text-input--underbar" placeholder="text" value="" disabled></div>
               </div>
             </section>
@@ -871,7 +884,7 @@
               <h2>Textarea</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><textarea class="textarea" rows="3" placeholder="Textarea"></textarea></div>
               </div>
             </section>
@@ -888,7 +901,7 @@
               <h2>Textarea Transparent</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><textarea class="textarea--transparent" rows="3" placeholder="Textarea"></textarea></div>
               </div>
             </section>
@@ -900,12 +913,216 @@
               </section>
             </footer>
           </article>
+          <article id="dialog" class="component">
+            <header>
+              <h2>Dialog</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="dialog-mask"></div><div class="dialog">  <div class="page">    <p style="text-align:center;margin-top:35px;opacity:0.4;">Content</p>  </div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;dialog-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;dialog&quot;&gt;  &lt;div class=&quot;page&quot;&gt;    &lt;p style=&quot;text-align:center;margin-top:35px;opacity:0.4;&quot;&gt;Content&lt;/p&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="dialogrounded)" class="component">
+            <header>
+              <h2>Dialog(rounded)</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="dialog-mask"></div><div class="dialog dialog--rounded">  <div class="page">    <p style="text-align:center;margin-top:35px;opacity:0.4;">Content</p>  </div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;dialog-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;dialog dialog--rounded&quot;&gt;  &lt;div class=&quot;page&quot;&gt;    &lt;p style=&quot;text-align:center;margin-top:35px;opacity:0.4;&quot;&gt;Content&lt;/p&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="alert-dialog" class="component">
+            <header>
+              <h2>Alert Dialog</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 360px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="mask"></div><div class="alert-dialog">  <div class="alert-dialog-title">Alert</div>  <div class="alert-dialog-content">    Hello World!  </div>  <div class="alert-dialog-footer">    <button class="alert-dialog-button alert-dialog-button--primal">OK</button>  </div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;alert-dialog&quot;&gt;  &lt;div class=&quot;alert-dialog-title&quot;&gt;Alert&lt;/div&gt;  &lt;div class=&quot;alert-dialog-content&quot;&gt;    Hello World!  &lt;/div&gt;  &lt;div class=&quot;alert-dialog-footer&quot;&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--primal&quot;&gt;OK&lt;/button&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="alert-dialog-without-title" class="component">
+            <header>
+              <h2>Alert Dialog without Title</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 360px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="mask"></div><div class="alert-dialog">  <div class="alert-dialog-content">    Hello World!  </div>  <div class="alert-dialog-footer">    <button class="alert-dialog-button alert-dialog-button--primal">OK</button>  </div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;alert-dialog&quot;&gt;  &lt;div class=&quot;alert-dialog-content&quot;&gt;    Hello World!  &lt;/div&gt;  &lt;div class=&quot;alert-dialog-footer&quot;&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--primal&quot;&gt;OK&lt;/button&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="alert-dialog-with-multiple-buttons" class="component">
+            <header>
+              <h2>Alert Dialog with Multiple Buttons</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 360px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="mask"></div><div class="alert-dialog">  <div class="alert-dialog-content">    Hello World!  </div>  <div class="alert-dialog-footer">    <button class="alert-dialog-button">Cancel</button>    <button class="alert-dialog-button alert-dialog-button--primal">OK</button>  </div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;alert-dialog&quot;&gt;  &lt;div class=&quot;alert-dialog-content&quot;&gt;    Hello World!  &lt;/div&gt;  &lt;div class=&quot;alert-dialog-footer&quot;&gt;    &lt;button class=&quot;alert-dialog-button&quot;&gt;Cancel&lt;/button&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--primal&quot;&gt;OK&lt;/button&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="alert-dialog-with-multiple-buttons-2" class="component">
+            <header>
+              <h2>Alert Dialog with Multiple Buttons 2</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 360px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="mask"></div><div class="alert-dialog">  <div class="alert-dialog-title">Alert</div>  <div class="alert-dialog-content">    Hello World!  </div>  <div class="alert-dialog-footer alert-dialog-footer--one">    <button class="alert-dialog-button alert-dialog-button--one">Left</button>    <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Center</button>    <button class="alert-dialog-button alert-dialog-button--one">Right</button>  </div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;alert-dialog&quot;&gt;  &lt;div class=&quot;alert-dialog-title&quot;&gt;Alert&lt;/div&gt;  &lt;div class=&quot;alert-dialog-content&quot;&gt;    Hello World!  &lt;/div&gt;  &lt;div class=&quot;alert-dialog-footer alert-dialog-footer--one&quot;&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--one&quot;&gt;Left&lt;/button&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--primal alert-dialog-button--one&quot;&gt;Center&lt;/button&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--one&quot;&gt;Right&lt;/button&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="android-like-alert-dialog" class="component">
+            <header>
+              <h2>Android-like Alert Dialog</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 360px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="mask"></div><div class="alert-dialog alert-dialog--android">  <div class="alert-dialog-title alert-dialog-title--android">    Alert  </div>  <div class="alert-dialog-content alert-dialog-content--android">    Hello World!  </div>  <div class="alert-dialog-footer alert-dialog-footer--one">    <button class="alert-dialog-button alert-dialog-button--one">Cancel</button>    <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Ok</button>  </div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;alert-dialog alert-dialog--android&quot;&gt;  &lt;div class=&quot;alert-dialog-title alert-dialog-title--android&quot;&gt;    Alert  &lt;/div&gt;  &lt;div class=&quot;alert-dialog-content alert-dialog-content--android&quot;&gt;    Hello World!  &lt;/div&gt;  &lt;div class=&quot;alert-dialog-footer alert-dialog-footer--one&quot;&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--one&quot;&gt;Cancel&lt;/button&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--primal alert-dialog-button--one&quot;&gt;Ok&lt;/button&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="popover" class="component">
+            <header>
+              <h2>Popover</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="popover-mask"></div><div class="popover popover--up" style="bottom:20px;left:50px;">  <div class="popover__bottom-arrow"></div>  <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;popover-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;popover popover--up&quot; style=&quot;bottom:20px;left:50px;&quot;&gt;  &lt;div class=&quot;popover__bottom-arrow&quot;&gt;&lt;/div&gt;  &lt;div style=&quot;text-align:center;opacity:0.4;margin-top:40px&quot;&gt;Content&lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="popoverdown)" class="component">
+            <header>
+              <h2>Popover(down)</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="popover-mask"></div><div class="popover popover--down" style="top:20px;left:50px;">  <div class="popover__top-arrow"></div>  <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;popover-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;popover popover--down&quot; style=&quot;top:20px;left:50px;&quot;&gt;  &lt;div class=&quot;popover__top-arrow&quot;&gt;&lt;/div&gt;  &lt;div style=&quot;text-align:center;opacity:0.4;margin-top:40px&quot;&gt;Content&lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="popoverleft)" class="component">
+            <header>
+              <h2>Popover(left)</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="popover-mask"></div><div class="popover popover--left" style="top:20px;right:20px;">  <div class="popover__right-arrow"></div>  <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;popover-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;popover popover--left&quot; style=&quot;top:20px;right:20px;&quot;&gt;  &lt;div class=&quot;popover__right-arrow&quot;&gt;&lt;/div&gt;  &lt;div style=&quot;text-align:center;opacity:0.4;margin-top:40px&quot;&gt;Content&lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="popoverright)" class="component">
+            <header>
+              <h2>Popover(right)</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="popover-mask"></div><div class="popover popover--right" style="top:20px;left:20px;">  <div class="popover__left-arrow"></div>  <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;popover-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;popover popover--right&quot; style=&quot;top:20px;left:20px;&quot;&gt;  &lt;div class=&quot;popover__left-arrow&quot;&gt;&lt;/div&gt;  &lt;div style=&quot;text-align:center;opacity:0.4;margin-top:40px&quot;&gt;Content&lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="android-like-popover" class="component">
+            <header>
+              <h2>Android-like Popover</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="popover-mask"></div><div class="popover popover--up popover--android" style="top:10px;right:10px;">  <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;popover-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;popover popover--up popover--android&quot; style=&quot;top:10px;right:10px;&quot;&gt;  &lt;div style=&quot;text-align:center;opacity:0.4;margin-top:40px&quot;&gt;Content&lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
           <article id="modal" class="component">
             <header>
               <h2>Modal</h2>
             </header>
             <section class="component">
-              <div style="width: 320px; position: relative; min-height: 120px;" class="markup page__background">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
                 <div style="width: 100%; height: 100%; position:absolute"><div class="modal">  <div class="modal__content">    Message Text  </div></div></div>
               </div>
             </section>

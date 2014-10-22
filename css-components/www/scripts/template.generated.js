@@ -4,9 +4,9 @@ catch(err) { app = angular.module("template", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("views/componentDialog.html",
-    "<div class=\"dialog-mask uninitialized\" ng-show=\"componentDialog.isShown\" ng-click=\"componentDialog.hide()\"></div>\n" +
+    "<div class=\"popup-dialog-mask uninitialized\" ng-show=\"componentDialog.isShown\" ng-click=\"componentDialog.hide()\"></div>\n" +
     "<div class=\"dialog-container uninitialized component-dialog-container\" ng-show=\"componentDialog.isShown\">\n" +
-    "  <div class=\"dialog component-dialog\" ng-show=\"componentDialog.isShown\">\n" +
+    "  <div class=\"popup-dialog component-dialog\" ng-show=\"componentDialog.isShown\">\n" +
     "    <img src=\"/images/close.png\" class=\"close\" ng-click=\"componentDialog.hide()\">\n" +
     "\n" +
     "    <h2>{{componentDialog.name}}{{\"T_COMPONENT_SNIPPET\"|translate}}</h2>\n" +
@@ -163,9 +163,9 @@ catch(err) { app = angular.module("template", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("views/htmlDialog.html",
-    "<div class=\"dialog-mask uninitialized\" ng-show=\"htmlDialog.isShown\" ng-click=\"htmlDialog.hide()\"></div>\n" +
+    "<div class=\"popup-dialog-mask uninitialized\" ng-show=\"htmlDialog.isShown\" ng-click=\"htmlDialog.hide()\"></div>\n" +
     "<div class=\"dialog-container uninitialized html-dialog-container\" ng-show=\"htmlDialog.isShown\">\n" +
-    "  <div class=\"dialog html-dialog\" ng-show=\"htmlDialog.isShown\">\n" +
+    "  <div class=\"popup-dialog html-dialog\" ng-show=\"htmlDialog.isShown\">\n" +
     "    <img src=\"/images/close.png\" class=\"close\" ng-click=\"htmlDialog.hide()\">\n" +
     "\n" +
     "    <h2>HTML &amp; CSS <a ng-click=\"htmlDialog.popup()\" translate>T_SHOW_IN_SEPARATE_WINDOW</a></h2>\n" +
@@ -258,9 +258,9 @@ catch(err) { app = angular.module("template", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("views/shareDialog.html",
-    "<div class=\"dialog-mask uninitialized\" ng-show=\"shareDialog.isShown\" ng-click=\"shareDialog.hide()\"></div>\n" +
+    "<div class=\"popup-dialog-mask uninitialized\" ng-show=\"shareDialog.isShown\" ng-click=\"shareDialog.hide()\"></div>\n" +
     "<div class=\"dialog-container share-dialog-container\" ng-show=\"shareDialog.isShown\">\n" +
-    "  <div class=\"dialog share-dialog\" ng-show=\"shareDialog.isShown\">\n" +
+    "  <div class=\"popup-dialog share-dialog\" ng-show=\"shareDialog.isShown\">\n" +
     "    <img src=\"images/close.png\" class=\"close\" ng-click=\"shareDialog.hide()\">\n" +
     "\n" +
     "    <h2 translate>T_SHARE_TITLE</h2>\n" +
@@ -300,9 +300,9 @@ catch(err) { app = angular.module("template", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("views/thankyouDialog.html",
-    "<div class=\"dialog-mask uninitialized\" ng-show=\"thankyouDialog.isShown\" ng-click=\"thankyouDialog.hide()\"></div>\n" +
+    "<div class=\"popup-dialog-mask uninitialized\" ng-show=\"thankyouDialog.isShown\" ng-click=\"thankyouDialog.hide()\"></div>\n" +
     "<div class=\"dialog-container thankyou-dialog-container\" ng-show=\"thankyouDialog.isShown\">\n" +
-    "  <div class=\"dialog thankyou-dialog\" ng-show=\"thankyouDialog.isShown\">\n" +
+    "  <div class=\"popup-dialog thankyou-dialog\" ng-show=\"thankyouDialog.isShown\">\n" +
     "    <img src=\"/images/close.png\" class=\"close\" ng-click=\"thankyouDialog.hide()\">\n" +
     "\n" +
     "    <h2>\n" +
@@ -352,7 +352,7 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("views/welcomeDialog.html",
     "<div class=\"dialog-container uninitialized welcome-dialog-container\" ng-show=\"welcomeDialog.isShown\">\n" +
-    "  <div class=\"dialog welcome-dialog\" ng-show=\"welcomeDialog.isShown\">\n" +
+    "  <div class=\"popup-dialog welcome-dialog\" ng-show=\"welcomeDialog.isShown\">\n" +
     "    <img src=\"/images/close.png\" class=\"close\" ng-click=\"welcomeDialog.hide()\">\n" +
     "\n" +
     "    <h2 translate>T_WELCOME_TITLE</h2>\n" +
