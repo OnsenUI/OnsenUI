@@ -21,6 +21,7 @@ v1.2.0-dev
  * ons-platform: Added ons.platform interface that can be used to query platform and OS.
  * ons-keyboard-active: Implemented component that only shows content when the software keyboard is active.
  * ons-loading-placeholder: Added component that shows a placeholder while loading a page.
+ * ons-alert-dialog: Added alert dialog component. Also alert(), confirm() and prompt() methods.
 
 v1.1.4
 ----
