@@ -143,7 +143,7 @@
       transclude: false,
 
       compile: function(element, attrs) {
-        var shouldAppendAndroidModifier = ons.platform.isAndroid() && element[0].hasAttribute('fixed-style');
+        var shouldAppendAndroidModifier = ons.platform.isAndroid() && !element[0].hasAttribute('fixed-style');
         var modifierTemplater = $onsen.generateModifierTemplater(attrs, shouldAppendAndroidModifier ? ['android'] : []),
           inline = typeof attrs.inline !== 'undefined';
 
