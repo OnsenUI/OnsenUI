@@ -6,13 +6,13 @@ v1.2.0-dev
 ----
 
  * ons-screen: Removed.
- * Removed all deprecated methods and attributes on "ons-split-view" and "ons-sliding-menu".
- * ons-page: Changed some internal markup structure and added ".page__background" elements for displaying page background.
- * core: Added "init" events to components.
+ * Removed all deprecated methods and attributes on 'ons-split-view' and 'ons-sliding-menu'.
+ * ons-page: Changed some internal markup structure and added '.page__background' elements for displaying page background.
+ * core: Added 'init' events to components.
  * core: Fixed memory leak where events handlers were not removed when components were destroyed.
  * ons-icon: Implemented ons-icon attributes with css attribute selectors instead of javascript.
- * ons-toolbar: Added "inline" attribute to toolbars.
- * core: Changed so "ons.bootstrap()" returns an angular.module.
+ * ons-toolbar: Added 'inline' attribute to toolbars.
+ * core: Changed so 'ons.bootstrap()' returns an angular.module.
  * ons-sliding-menu: Changed so the main page and menu can be defined as child elements.
  * ons-sliding-menu: Animation can now be disabled when opening and closing menu.
  * ons-split-view: Changed so the main and secondary page can be defined as child elements.
@@ -22,6 +22,9 @@ v1.2.0-dev
  * ons-keyboard-active: Implemented component that only shows content when the software keyboard is active.
  * ons-loading-placeholder: Added component that shows a placeholder while loading a page.
  * ons-alert-dialog: Added alert dialog component. Also alert(), confirm() and prompt() methods.
+ * ons-toolbar: Changed to have 'android' modifier automatically on android platform. And added 'fixed-style' attribute for preventing this behavior.
+ * css-components: Added 'alert-dialog', 'dialog' and 'popover' components.
+ * css-components: Changed default color scheme for css-components.
 
 v1.1.4
 ----
