@@ -61,8 +61,9 @@ window.ons = (function(){
 
   function initAngularModule() {
     module.value('$onsGlobal', ons);
-    module.run(function($compile, $rootScope, $onsen) {
+    module.run(function($compile, $rootScope, $onsen, $q) {
       ons._onsenService = $onsen;
+      ons._qService = $q;
 
       $rootScope.ons = window.ons;
       $rootScope.console = window.console;
@@ -302,6 +303,49 @@ window.ons = (function(){
         }
 
         return !!(window.cordova || window.phonegap || window.PhoneGap);
+      },
+
+
+      /**
+       * @param {String} page
+       * @return {Promise}
+       */
+      createPopover: function(page) {
+        if (!page) {
+          throw new Error('Page url must be defined.');
+        }
+
+        var popover = angular.element('<ons-popover>'),
+          $onsen = this._getOnsenService();
+        
+        angular.element(document.body).append(angular.element(popover));
+
+        return $onsen.getPageHTMLAsync(page).then(function(html) {
+          var div = document.createElement('div');
+          div.innerHTML = html;
+
+          var el = angular.element(div.querySelector('ons-popover'));
+
+          // Copy attributes and insert html.
+          var attrs = el.prop('attributes');
+          for (var i = 0, l = attrs.length; i < l; i++) {
+            popover.attr(attrs[i].name, attrs[i].value); 
+          }
+          popover.html(el.html());
+          ons.compile(popover[0]);
+      
+          if (el.attr('disabled')) {
+            popover.attr('disabled', 'disabled');
+          }
+
+          var deferred = ons._qService.defer();
+
+          popover.on('ons-popover:init', function(e) {
+            deferred.resolve(e.component);
+          });
+
+          return deferred.promise;
+        });
       },
 
       platform: {

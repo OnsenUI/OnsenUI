@@ -11,34 +11,54 @@
   <script src="../../build/js/onsenui.js"></script>    
   <script src="../app.js"></script>  
 
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  
   <script>
+    var pop;
+
+    var app = angular.module('myApp');
+
+    ons.ready(function() {
+      ons.createPopover('popover.html').then(function(popover) {
+        pop = popover;
+      });
+    });
+
+    app.controller('MyController', function($scope) {
+      $scope.toggle = function(idx) {
+        if (pop.isShown()) {
+          pop.hide();
+        } else {
+          pop.show(document.querySelectorAll('ons-button')[idx]);
+        }
+      };
+    });
   </script>
   
 </head>
 
-<body>    
+<body ng-controller="MyController">    
   <ons-page>
     <ons-toolbar>
       <div class="center">Popover</div>
     </ons-toolbar>
 
     <div style="text-align: center">
-      <br>
-      <ons-button>Click me!</ons-button>
+    
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <ons-button ng-click="toggle(0)">Click me!</ons-button>
+      <ons-button ng-click="toggle(1)">Click me!</ons-button>
     </div>
-    <ons-popover var="pop" style="height: 200px; width: 200px" animation="fade">
-      <ons-page>
-        Hello!
-      </ons-page>
-    </ons-popover>
   </ons-page>
 
-
   <script type="text/ons-template" id="popover.html">
-    <ons-popover style="height: 200px; width: 200px" animation="fade">
-      <ons-page>
-        Hello!
-      </ons-page>
+    <ons-popover animation="fade" cancelable>
+      This is a button!
     </ons-popover>
   </script>
   

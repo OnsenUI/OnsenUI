@@ -3,17 +3,6 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
-  $templateCache.put("templates/alert_dialog_button.tpl",
-    "<button class=\"alert-dialog-button {{modifierTemplater('alert-dialog-button--*')}}\" ng-transclude></button>\n" +
-    "");
-}]);
-})();
-
-(function(module) {
-try { app = angular.module("templates-main"); }
-catch(err) { app = angular.module("templates-main", []); }
-app.run(["$templateCache", function($templateCache) {
-  "use strict";
   $templateCache.put("templates/back_button.tpl",
     "<span class=\"toolbar-button--quiet {{modifierTemplater('toolbar-button--*')}}\" ng-click=\"$root.ons.findParentComponentUntil('ons-navigator', $event).popPage()\" style=\"height: 44px; line-height: 0; padding: 0; position: relative;\">\n" +
     "  <i class=\"ion-ios7-arrow-back ons-back-button__icon\" style=\"vertical-align: top; background-color: transparent; height: 44px; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; width: 16px; display: inline-block; padding-top: 1px;\"></i><span style=\"vertical-align: top; display: inline-block; line-height: 44px; height: 44px;\" class=\"back-button__label\"></span>\n" +
@@ -52,10 +41,9 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/popover.tpl",
     "<div class=\"popover-mask\"></div>\n" +
-    "<div class=\"popover popover--{{direction}}\" style=\"top:20px;left:20px;\">\n" +
-    "  <div class=\"popover__{{arrowPosition}}-arrow\"></div>\n" +
-    "  <div class=\"popover__content\" ng-transclude>\n" +
-    "  </div>\n" +
+    "<div class=\"popover popover--{{ direction }}\">\n" +
+    "  <div class=\"popover__{{ arrowPosition }}-arrow\"></div>\n" +
+    "  <div ng-transclude></div>\n" +
     "</div>\n" +
     "");
 }]);
