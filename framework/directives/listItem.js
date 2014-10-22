@@ -31,30 +31,30 @@
       replace: false,
       transclude: false,
 
-      compile: function(elem, attrs, transcludeFn) {
+      compile: function() {
         return function(scope, element, attrs) {
           var listItem = new GenericView(scope, element, attrs);
 
           $onsen.declareVarAttribute(attrs, listItem);
 
           $onsen.aliasStack.register('ons.listItem', listItem);
-          element.data('ons-listItem', listItem);
+          element.data('ons-list-item', listItem);
 
           scope.$on('$destroy', function() {
             listItem._events = undefined;
             $onsen.removeModifierMethods(listItem);
-            element.data('ons-listItem', undefined);
+            element.data('ons-list-item', undefined);
             $onsen.aliasStack.unregister('ons.listItem', listItem);
             element = null;
           });
 
           var templater = $onsen.generateModifierTemplater(attrs);
-          elem.addClass('list__item ons-list-item-inner');
-          elem.addClass(templater('list__item--*'));
+          element.addClass('list__item ons-list-item-inner');
+          element.addClass(templater('list__item--*'));
 
-          $onsen.addModifierMethods(listItem, 'list__item--*', elem);
+          $onsen.addModifierMethods(listItem, 'list__item--*', element);
 
-          $onsen.fireComponentEvent(element[0], "init");
+          $onsen.fireComponentEvent(element[0], 'init');
         };
       }
     };
