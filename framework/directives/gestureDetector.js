@@ -39,7 +39,7 @@
       compile: function(element, attrs) {
         return function link(scope, element, attrs, controller, transclude) {
 
-          transclude(scope.$parent.$new(), function(cloned) {
+          transclude(scope.$parent, function(cloned) {
             element.append(cloned);
           });
 

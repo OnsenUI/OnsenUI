@@ -88,7 +88,7 @@
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclude.
       transclude: false,
-      scope: true,
+      scope: false,
 
       compile: function(element, attrs) {
         var main = element[0].querySelector('.main'),
@@ -131,7 +131,7 @@
           });
 
           $onsen.fireComponentEvent(element[0], 'init');
-        }
+        };
       }
     };
   });

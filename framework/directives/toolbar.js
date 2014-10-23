@@ -27,7 +27,7 @@
 
   var module = angular.module('onsen');
 
-  function ensureLeftContainer(element) {
+  function ensureLeftContainer(element, modifierTemplater) {
     var container = element[0].querySelector('.left');
 
     if (!container) {
@@ -40,12 +40,14 @@
       container.innerHTML = '&nbsp;';
     }
 
-    angular.element(container).addClass('navigation-bar__left');
+    angular.element(container)
+      .addClass('navigation-bar__left')
+      .addClass(modifierTemplater('navigation-bar--*__left'));
 
     return container;
   }
 
-  function ensureCenterContainer(element) {
+  function ensureCenterContainer(element, modifierTemplater) {
     var container = element[0].querySelector('.center');
 
     if (!container) {
@@ -58,12 +60,13 @@
     }
 
     angular.element(container)
-      .addClass('navigation-bar__title navigation-bar__center');
+      .addClass('navigation-bar__title navigation-bar__center')
+      .addClass(modifierTemplater('navigation-bar--*__center'));
 
     return container;
   }
 
-  function ensureRightContainer(element) {
+  function ensureRightContainer(element, modifierTemplater) {
     var container = element[0].querySelector('.right');
 
     if (!container) {
@@ -76,7 +79,9 @@
       container.innerHTML = '&nbsp;';
     }
 
-    angular.element(container).addClass('navigation-bar__right');
+    angular.element(container)
+      .addClass('navigation-bar__right')
+      .addClass(modifierTemplater('navigation-bar--*__right'));
 
     return container;
   }
@@ -108,16 +113,16 @@
     return hasCenter && !hasOther;
   }
 
-  function ensureToolbarItemElements(element) {
+  function ensureToolbarItemElements(element, modifierTemplater) {
     var center;
     if (hasCenterClassElementOnly(element)) {
-      center = ensureCenterContainer(element);
+      center = ensureCenterContainer(element, modifierTemplater);
       element.contents().remove();
       element.append(center);
     } else {
-      center = ensureCenterContainer(element);
-      var left = ensureLeftContainer(element);
-      var right = ensureRightContainer(element);
+      center = ensureCenterContainer(element, modifierTemplater);
+      var left = ensureLeftContainer(element, modifierTemplater);
+      var right = ensureRightContainer(element, modifierTemplater);
 
       element.contents().remove();
       element.append(angular.element([left, center, right]));
@@ -134,11 +139,12 @@
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
-      scope: true, 
+      scope: false, 
       transclude: false,
 
       compile: function(element, attrs) {
-        var modifierTemplater = $onsen.generateModifierTemplater(attrs),
+        var shouldAppendAndroidModifier = ons.platform.isAndroid() && !element[0].hasAttribute('fixed-style');
+        var modifierTemplater = $onsen.generateModifierTemplater(attrs, shouldAppendAndroidModifier ? ['android'] : []),
           inline = typeof attrs.inline !== 'undefined';
 
         element.addClass('navigation-bar');
@@ -154,7 +160,7 @@
           });
         }
 
-        ensureToolbarItemElements(element);
+        ensureToolbarItemElements(element, modifierTemplater);
 
         return {
           pre: function(scope, element, attrs) {

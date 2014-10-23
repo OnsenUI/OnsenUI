@@ -73,6 +73,18 @@ limitations under the License.
         }
       },
 
+      _shouldAnimateToolbar: function(enterPage, leavePage) {
+        var bothPageHasToolbar =
+          enterPage.getPageView().hasToolbarElement() &&
+          leavePage.getPageView().hasToolbarElement();
+
+        var noAndroidLikeToolbar =
+          !angular.element(enterPage.getPageView().getToolbarElement()).hasClass('navigation-bar--android') &&
+          !angular.element(leavePage.getPageView().getToolbarElement()).hasClass('navigation-bar--android');
+
+        return bothPageHasToolbar && noAndroidLikeToolbar;
+      },
+
       /**
        * @param {Object} enterPage
        * @param {Object} leavePage
@@ -107,15 +119,9 @@ limitations under the License.
             done();
           });
 
-        var bothPageHasToolbar =
-          enterPage.getPageView().hasToolbarElement() &&
-          leavePage.getPageView().hasToolbarElement();
+        var shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
 
-        var isToolbarNothing = 
-          !enterPage.getPageView().hasToolbarElement() &&
-          !leavePage.getPageView().hasToolbarElement();
-
-        if (bothPageHasToolbar) {
+        if (shouldAnimateToolbar) {
           animit.runAll(
 
             maskClear,
@@ -315,16 +321,9 @@ limitations under the License.
             done();
           });
 
+        var shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
 
-        var bothPageHasToolbar =
-          enterPage.getPageView().hasToolbarElement() &&
-          leavePage.getPageView().hasToolbarElement();
-
-        var isToolbarNothing = 
-          !enterPage.getPageView().hasToolbarElement() &&
-          !leavePage.getPageView().hasToolbarElement();
-
-        if (bothPageHasToolbar || isToolbarNothing) {
+        if (shouldAnimateToolbar) {
           animit.runAll(
 
             maskClear,

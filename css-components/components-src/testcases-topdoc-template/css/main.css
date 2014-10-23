@@ -1,5 +1,5 @@
 section.code, section.code * {
-  -webkit-user-select: auto !important;    
+  -webkit-user-select: auto !important;
 }
 
 html,body{
@@ -305,7 +305,7 @@ section.examples li {
   }
   #main-header nav li.selected a {
     color: #373435;
-  } 
+  }
   #slide-menu-button{
     display: none;
   }
@@ -456,6 +456,3 @@ section.examples li {
   }
 }
 
-.page {
-  position: relative !important;
-}

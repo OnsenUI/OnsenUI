@@ -127,8 +127,8 @@ limitations under the License.
           arr.push(i * width);
         }
         arr.sort(function(left, right) {
-          var left = Math.abs(left - scroll);
-          var right = Math.abs(right - scroll);
+          left = Math.abs(left - scroll);
+          right = Math.abs(right - scroll);
 
           return left - right;
         });

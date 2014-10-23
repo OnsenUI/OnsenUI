@@ -305,6 +305,41 @@ window.ons = (function(){
         return !!(window.cordova || window.phonegap || window.PhoneGap);
       },
 
+      /**
+       * @param {String} page
+       * @return {Promise}
+       */
+      createAlertDialog: function(page) {
+        if (!page) {
+          throw new Error('Page url must be defined.');
+        }
+
+        var alertDialog = angular.element('<ons-alert-dialog>'),
+          $onsen = this._getOnsenService();
+        
+        angular.element(document.body).append(angular.element(alertDialog));
+
+        return $onsen.getPageHTMLAsync(page).then(function(html) {
+          var div = document.createElement('div');
+          div.innerHTML = html;
+
+          var el = angular.element(div.querySelector('ons-alert-dialog'));
+
+          // Copy attributes and insert html.
+          var attrs = el.prop('attributes');
+          for (var i = 0, l = attrs.length; i < l; i++) {
+            alertDialog.attr(attrs[i].name, attrs[i].value); 
+          }
+          alertDialog.html(el.html());
+          ons.compile(alertDialog[0]);
+      
+          if (el.attr('disabled')) {
+            alertDialog.attr('disabled', 'disabled');
+          }
+
+          return  alertDialog.data('ons-alert-dialog');
+        });
+      },
 
       /**
        * @param {String} page

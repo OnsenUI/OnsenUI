@@ -142,7 +142,7 @@
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
       transclude: false,
-      scope: true,
+      scope: false,
 
       compile: function(element) {
         var children = element.children().remove();

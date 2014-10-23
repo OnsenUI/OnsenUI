@@ -195,10 +195,12 @@ limitations under the License.
          * Create modifier templater function. The modifier templater generate css classes binded modifier name.
          *
          * @param {Object} attrs
+         * @param {Array} [modifiers] an array of appendix modifier
          * @return {Function} 
          */
-        generateModifierTemplater: function(attrs) {
-          var modifiers = attrs && typeof attrs.modifier === 'string' ? attrs.modifier.trim().split(/ +/) : [];
+        generateModifierTemplater: function(attrs, modifiers) {
+          var attrModifiers = attrs && typeof attrs.modifier === 'string' ? attrs.modifier.trim().split(/ +/) : [];
+          modifiers = angular.isArray(modifiers) ? attrModifiers.concat(modifiers) : attrModifiers;
 
           /**
            * @return {String} template eg. 'ons-button--*', 'ons-button--*__item'
