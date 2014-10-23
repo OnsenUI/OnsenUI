@@ -136,8 +136,6 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   flex 1
   display block
   width 100%
-
-.alert-dialog-button--one:not(:first-child)
   border-left 1px solid var-alert-dialog-separator-color
   +retina-query()
     border-top none
@@ -145,7 +143,16 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
     background-size 100% 1px, 1px 100%
     background-repeat no-repeat
     background-position top, left
-    background-image linear-gradient(180deg, var-alert-dialog-separator-color, var-alert-dialog-separator-color 50%, transparent 50%), linear-gradient(90deg, transparent, transparent 50%, var-alert-dialog-separator-color 50%)
+    background-image linear-gradient(0deg, transparent, transparent 50%, var-alert-dialog-separator-color 50%), linear-gradient(90deg, transparent, transparent 50%, var-alert-dialog-separator-color 50%)
+
+.alert-dialog-button--one:first-child
+  border-left none 
+  +retina-query()
+    border-top none
+    background-size 100% 1px
+    background-repeat no-repeat
+    background-position top, left
+    background-image linear-gradient(0deg, transparent, transparent 50%, var-alert-dialog-separator-color 50%)
 
 
 .mask
