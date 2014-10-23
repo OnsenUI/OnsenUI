@@ -37,18 +37,19 @@ limitations under the License.
         
         this._mask.css('z-index', 20000);
         this._popover.css('z-index', 20001);
+        this._element.css('display', 'none');
+
+        if (attrs.maskColor) {
+          this._mask.css('background-color', attrs.maskColor);
+        }
 
         this._mask.on('click', this._cancel.bind(this));
-
-        this._element.css({
-          display: "none",
-        });
 
         this._visible = false;
         this._doorLock = new DoorLock();
 
         this._animation = PopoverView._animatorDict[typeof attrs.animation !== 'undefined' ? 
-          attrs.animation : 'default'];
+          attrs.animation : 'fade'];
 
         if (!this._animation) {
           throw new Error('No such animation: ' + attrs.animation);
@@ -56,13 +57,12 @@ limitations under the License.
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
 
-        window.addEventListener('resize', function() {
+        this._onResize = function() {
           if (this._currentTarget) {
             this._positionPopover(this._currentTarget);
           }
-        }.bind(this));
-
-        this._setDirection(attrs.direction || "up");
+        }.bind(this);
+        window.addEventListener('resize', this._onResize, false);
       },
 
       _onDeviceBackButton: function(event) {
@@ -99,7 +99,7 @@ limitations under the License.
         var el = angular.element(this._element[0].querySelector('.popover')),
           pos = target.getBoundingClientRect(),
           own = el[0].getBoundingClientRect(),
-          offset = 20;
+          offset = 15;
 
         this._setDirection(direction);
  
@@ -128,6 +128,7 @@ limitations under the License.
 
         var position = target.getBoundingClientRect();
 
+        // The popover should be placed on the side with the most space.
         var scores = {
           left: position.left,
           right: window.innerWidth - position.right,
@@ -135,7 +136,7 @@ limitations under the License.
           down: window.innerHeight - position.bottom
         };
 
-        var orderedDirections = Object.keys(scores).sort(function(a, b) {return -(scores[a] - scores[b])}); 
+        var orderedDirections = Object.keys(scores).sort(function(a, b) {return -(scores[a] - scores[b]);}); 
         for (var i = 0, l = orderedDirections.length; i < l; i++) {
           var direction = orderedDirections[i];
           if (directions.indexOf(direction) > -1) {
@@ -149,14 +150,25 @@ limitations under the License.
        * Show popover.
        *
        * @param {HTMLElement} [target] target element
+       * @param {String} [target] css selector
+       * @param {Event} [target] event
        * @param {Object} [options] options
        * @param {String} [options.animation] animation type
        */
       show: function(target, options) {
+        if (typeof target === "string") {
+          target = document.querySelector(target);
+        } else if (target instanceof Event) {
+          target = target.target;
+        }
+      
+        if (!target) {
+         throw new Error('Target undefined');
+        }
+
         options = options || {};
         
         var cancel = false;
-
         this.emit('preshow', {
           popover: this,
           cancel: function() { cancel = true; }
@@ -196,7 +208,6 @@ limitations under the License.
         options = options || {};
 
         var cancel = false;
-
         this.emit('prehide', {
           popover: this,
           cancel: function() { cancel = true; }
@@ -234,12 +245,16 @@ limitations under the License.
        * Destroy the popover and remove it from the DOM tree.
        */
       destroy: function() {
+        this._scope.$destroy();
+
+        this._mask.remove();
+        this._popover.remove();
         this._element.remove();
+        
         this._deviceBackButtonHandler.destroy();
+        window.removeEventListener('resize', this._onResize, false);
 
-        this._scope.destroy();
-
-        this._deviceBackButtonHandler = this._element = this._scope = null;
+        this._onResize = this._deviceBackButtonHandler = this._mask = this._popover = this._element = this._scope = null;
       },
 
       /**
@@ -286,8 +301,8 @@ limitations under the License.
      * @param {PopoverAnimator} animator
      */
     PopoverView.registerAnimator = function(name, animator) {
-      if (!(animator instanceof DialogAnimator)) {
-        throw new Error('"animator" param must be an instance of DialogAnimator');
+      if (!(animator instanceof PopoverAnimator)) {
+        throw new Error('"animator" param must be an instance of PopoverAnimator');
       }
       this._animatorDict[name] = animator;
     };

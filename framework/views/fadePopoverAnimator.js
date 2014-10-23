@@ -29,7 +29,7 @@ limitations under the License.
     var FadePopoverAnimator = PopoverAnimator.extend({
 
       timing: 'cubic-bezier(.1, .7, .4, 1)',
-      duration: 0.3, 
+      duration: 0.2, 
 
       init: function(options) {
         options = options || {};

@@ -41,7 +41,7 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/popover.tpl",
     "<div class=\"popover-mask\"></div>\n" +
-    "<div class=\"popover popover--{{ direction }}\">\n" +
+    "<div class=\"popover popover--{{ direction }} {{ modifierTemplater('popover--*') }}\">\n" +
     "  <div class=\"popover__{{ arrowPosition }}-arrow\"></div>\n" +
     "  <div ng-transclude></div>\n" +
     "</div>\n" +
