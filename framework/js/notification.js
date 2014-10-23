@@ -115,6 +115,16 @@ window.ons.notification = (function() {
   };
 
   return {
+    /**
+     * @param {Object} options
+     * @param {String} [options.message]
+     * @param {String} [options.messageHTML]
+     * @param {String} [options.buttonLabel]
+     * @param {String} [options.animation]
+     * @param {String} [options.title]
+     * @param {String} [options.modifier]
+     * @param {Function} [options.callback]
+     */
     alert: function(options) {
       var defaults = {
         buttonLabel: 'OK',
@@ -139,6 +149,19 @@ window.ons.notification = (function() {
         false, false, false
       );
     },
+
+    /**
+     * @param {Object} options
+     * @param {String} [options.message]
+     * @param {String} [options.messageHTML]
+     * @param {Array} [options.buttonLabels]
+     * @param {Number} [options.primaryButtonIndex]
+     * @param {Boolean} [options.cancelable]
+     * @param {String} [options.animation]
+     * @param {String} [options.title]
+     * @param {String} [options.modifier]
+     * @param {Function} [options.callback]
+     */
     confirm: function(options) {
       var defaults = {
         buttonLabels: ['Cancel', 'OK'],
@@ -167,6 +190,20 @@ window.ons.notification = (function() {
         false, false
       );
     },
+
+    /**
+     * @param {Object} options
+     * @param {String} [options.message]
+     * @param {String} [options.messageHTML]
+     * @param {String} [options.buttonLabel]
+     * @param {Boolean} [options.cancelable]
+     * @param {String} [options.animation]
+     * @param {String} [options.placeholder]
+     * @param {String} [options.title]
+     * @param {String} [options.modifier]
+     * @param {Function} [options.callback]
+     * @param {Boolean} [options.autofocus]
+     */
     prompt: function(options) {
       var defaults = {
         buttonLabel: 'OK',
@@ -175,7 +212,7 @@ window.ons.notification = (function() {
         placeholder: '',
         callback: function() {},
         cancelable: false,
-        autofocus: false,
+        autofocus: true,
       };
 
       options = angular.extend({}, defaults, options);
