@@ -25,6 +25,7 @@ v1.2.0-dev
  * ons-toolbar: Changed to have 'android' modifier automatically on android platform. And added 'fixed-style' attribute for preventing this behavior.
  * css-components: Added 'alert-dialog', 'dialog' and 'popover' components.
  * css-components: Changed default color scheme for css-components.
+ * ons-popover: Added popover component.
 
 v1.1.4
 ----
