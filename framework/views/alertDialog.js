@@ -219,7 +219,7 @@ limitations under the License.
       },
 
       _createMask: function(color) {
-        this._mask = angular.element('<div>').addClass('mask').css({
+        this._mask = angular.element('<div>').addClass('alert-dialog-mask').css({
           zIndex: 20000,
           display: 'none'
         });
