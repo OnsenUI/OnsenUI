@@ -28,6 +28,7 @@
     // useful when your codebase is shared with a big number of developers
     // with different skill levels.
  
+    "quotmark"      : "single",
     "bitwise"       : true,     // Prohibit bitwise operators (&, |, ^, etc.).
     "curly"         : true,     // Require {} for every new block or scope.    
     "forin"         : true,     // Tolerate `for in` loops without `hasOwnPrototype`.
