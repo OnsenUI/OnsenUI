@@ -101,7 +101,7 @@ limitations under the License.
           own = el[0].getBoundingClientRect(),
           arrow = angular.element(el.children()[0]),
           offset = 14,
-          margin = 2;
+          margin = 6;
 
         arrow.css({
           top: '',
