@@ -99,22 +99,51 @@ limitations under the License.
         var el = angular.element(this._element[0].querySelector('.popover')),
           pos = target.getBoundingClientRect(),
           own = el[0].getBoundingClientRect(),
-          offset = 15;
+          arrow = angular.element(el.children()[0]),
+          offset = 14,
+          margin = 2;
+
+        arrow.css({
+          top: '',
+          left: ''
+        });
 
         this._setDirection(direction);
  
-        if (direction == 'left') {
-          el.css('left', (pos.right - pos.width - own.width - offset) + 'px');
+        if (['left', 'right'].indexOf(direction) > -1) {
+          if (direction == 'left') {
+            el.css('left', (pos.right - pos.width - own.width - offset) + 'px');
+          } else {
+            el.css('left', (pos.right + offset) + 'px');
+          }
           el.css('top', (pos.bottom - pos.height/2 - own.height/2) + 'px');
-        } else if (direction == 'right') {
-          el.css('left', (pos.right + offset) + 'px');
-          el.css('top', (pos.bottom - pos.height/2 - own.height/2) + 'px');
-        } else if (direction == 'up') {
-          el.css('top', (pos.bottom - pos.height - own.height - offset) + 'px');
-          el.css('left', (pos.right - pos.width/2 - own.width/2) + 'px');
         } else {
-          el.css('top', (pos.bottom + offset) + 'px');
+          if (direction == 'up') {
+            el.css('top', (pos.bottom - pos.height - own.height - offset) + 'px');
+          } else {
+            el.css('top', (pos.bottom + offset) + 'px');
+          }
           el.css('left', (pos.right - pos.width/2 - own.width/2) + 'px');
+        }
+
+        pos = el[0].getBoundingClientRect();
+
+        if (['left', 'right'].indexOf(direction) > -1) {
+          if (pos.top < margin) {
+            arrow.css('top', (pos.height/2 + pos.top - margin) + 'px');
+            el.css('top', margin + 'px');
+          } else if (pos.bottom > window.innerHeight - margin) {
+            arrow.css('top', (pos.height/2 - (window.innerHeight - pos.bottom) + margin) + 'px');
+            el.css('top', (window.innerHeight - pos.height - margin) + 'px');
+          }
+        } else {
+        if (pos.left < margin) {
+            arrow.css('left', (pos.width/2 + pos.left - margin) + 'px');
+            el.css('left', margin + 'px');
+          } else if (pos.right > window.innerWidth - margin) {
+            arrow.css('left', (pos.width/2 - (window.innerWidth - pos.right) + margin) + 'px');
+            el.css('left', (window.innerWidth - pos.width - margin) + 'px');
+          }
         }
       },
 
@@ -156,7 +185,7 @@ limitations under the License.
        * @param {String} [options.animation] animation type
        */
       show: function(target, options) {
-        if (typeof target === "string") {
+        if (typeof target === 'string') {
           target = document.querySelector(target);
         } else if (target instanceof Event) {
           target = target.target;
