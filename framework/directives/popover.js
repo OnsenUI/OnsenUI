@@ -4,7 +4,7 @@
 * @name ons-popover 
 * @description
 *  [en]A component that displays a popover next to an element.[/en]
-*  [ja][/ja]
+*  [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]
 * @param var 
 *  [en]Variable name to refer this popover.[/en]
 *  [ja]このポップオーバーを参照するための名前を指定します。[/ja]
@@ -13,7 +13,7 @@
 *  [ja]ポップオーバーの表現を指定します。[/ja]
 * @param direction
 *  [en]A space separated list of directions. If more than one will be chosen automatically. Valid directions are "up", "down", "left" and "right".[/en]
-*  [ja][/ja]
+*  [ja]ポップオーバーを表示する方向を空白区切りで複数指定できます。指定できる方向は、"up", "down", "left", "right"の4つです。複数指定された場合、対象とする要素に合わせて指定した値から自動的に選択されます。[/ja]
 * @param cancelable
 *  [en]If this attribute is set the popover can be closed by tapping the background or pressing the back button.[/en] 
 *  [ja]この属性があると、ポップオーバーが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
@@ -28,7 +28,7 @@
 *  [ja]背景のマスクの色を指定します。デフォルトは"rgba(0, 0, 0, 0.2)"です。[/ja]
 * @property show(target, options)
 *  [en]Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..[/en]
-*  [ja][/ja]
+*  [ja]対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。[/ja]
 * @property hide()
 *  [en]Close the popover.[/en]
 *  [ja]ポップオーバーを閉じます。[/ja]
