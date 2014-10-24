@@ -65,8 +65,9 @@ window.ons = (function(){
 
   function initAngularModule() {
     module.value('$onsGlobal', ons);
-    module.run(function($compile, $rootScope, $onsen) {
+    module.run(function($compile, $rootScope, $onsen, $q) {
       ons._onsenService = $onsen;
+      ons._qService = $q;
 
       $rootScope.ons = window.ons;
       $rootScope.console = window.console;
@@ -340,6 +341,54 @@ window.ons = (function(){
           }
 
           return  alertDialog.data('ons-alert-dialog');
+        });
+      },
+
+      /**
+      * @param {String} page
+      * @return {Promise}
+      */
+      createDialog: function(page) {
+        if (!page) {
+          throw new Error('Page url must be defined.');
+        }
+
+        var dialog = angular.element('<ons-dialog>'),
+        $onsen = this._getOnsenService();
+
+        angular.element(document.body).append(angular.element(dialog));
+
+        return $onsen.getPageHTMLAsync(page).then(function(html) {
+          var div = document.createElement('div');
+          div.innerHTML = html;
+
+          var el = angular.element(div.querySelector('ons-dialog'));
+
+          // Copy attributes and insert html.
+          var attrs = el.prop('attributes');
+          for (var i = 0, l = attrs.length; i < l; i++) {
+            dialog.attr(attrs[i].name, attrs[i].value); 
+          }
+          dialog.html(el.html());
+          ons.compile(dialog[0]);
+
+          if (el.attr('disabled')) {
+            dialog.attr('disabled', 'disabled');
+          }
+
+          var deferred = ons._qService.defer();
+
+          dialog.on('ons-dialog:init', function(e) {
+            // Copy "style" attribute from parent.
+            var child = dialog[0].querySelector('.dialog');
+            if (el[0].hasAttribute('style')) {
+              child.setAttribute('style', el[0].getAttribute('style') + child.getAttribute('style'));;
+            }
+
+            deferred.resolve(e.component);
+          });
+
+          return deferred.promise;
         });
       },
 
