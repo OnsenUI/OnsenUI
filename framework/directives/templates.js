@@ -30,7 +30,7 @@ app.run(["$templateCache", function($templateCache) {
   "use strict";
   $templateCache.put("templates/dialog.tpl",
     "<div class=\"dialog-mask\"></div>\n" +
-    "<div class=\"dialog\" ng-transclude></div>\n" +
+    "<div class=\"dialog\"></div>\n" +
     "</div>\n" +
     "");
 }]);

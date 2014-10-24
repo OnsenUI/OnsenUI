@@ -382,7 +382,16 @@ window.ons = (function(){
             // Copy "style" attribute from parent.
             var child = dialog[0].querySelector('.dialog');
             if (el[0].hasAttribute('style')) {
-              child.setAttribute('style', el[0].getAttribute('style') + child.getAttribute('style'));;
+              var parentStyle = el[0].getAttribute('style'),
+              childStyle = child.getAttribute('style'),
+              newStyle = (function(a, b) {
+                var c =
+                (a.substr(-1) === ';' ? a : a + ';') + 
+                  (b.substr(-1) === ';' ? b : b + ';'); 
+                return c;
+              })(parentStyle, childStyle);
+
+              child.setAttribute('style', newStyle);
             }
 
             deferred.resolve(e.component);

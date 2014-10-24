@@ -14,8 +14,6 @@
   <script>
     var app = angular.module('myApp', ['onsen']);
 
-    var d;
-
     app.controller('MyCtrl', function($scope) {
       $scope.data = {
         name: '',
@@ -23,7 +21,6 @@
       };
 
       ons.createDialog('dialog.html').then(function(dialog) {
-        d = dialog;
         $scope.dialog = dialog;
       });
 

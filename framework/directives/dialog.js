@@ -84,9 +84,13 @@
       scope: true,
       transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/dialog.tpl',
-      compile: function(element, attrs) {
+      compile: function(element, attrs, transclude) {
         return {
           pre: function(scope, element, attrs) {
+            transclude(scope, function(clone) {
+              element.children('.dialog').append(clone);
+            });
+
             var dialog = new DialogView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, dialog);
@@ -104,7 +108,7 @@
           },
 
           post: function(scope, element) {
-            $onsen.fireComponentEvent(element[0], "init");
+            $onsen.fireComponentEvent(element[0], 'init');
           }
         };
       }
