@@ -116,32 +116,32 @@ limitations under the License.
           } else {
             el.css('left', (pos.right + offset) + 'px');
           }
-          el.css('top', (pos.bottom - pos.height/2 - own.height/2) + 'px');
+          el.css('top', (pos.bottom - pos.height / 2 - own.height / 2) + 'px');
         } else {
           if (direction == 'up') {
             el.css('top', (pos.bottom - pos.height - own.height - offset) + 'px');
           } else {
             el.css('top', (pos.bottom + offset) + 'px');
           }
-          el.css('left', (pos.right - pos.width/2 - own.width/2) + 'px');
+          el.css('left', (pos.right - pos.width / 2 - own.width / 2) + 'px');
         }
 
         pos = el[0].getBoundingClientRect();
 
         if (['left', 'right'].indexOf(direction) > -1) {
           if (pos.top < margin) {
-            arrow.css('top', (pos.height/2 + pos.top - margin) + 'px');
+            arrow.css('top', (pos.height / 2 + pos.top - margin) + 'px');
             el.css('top', margin + 'px');
           } else if (pos.bottom > window.innerHeight - margin) {
-            arrow.css('top', (pos.height/2 - (window.innerHeight - pos.bottom) + margin) + 'px');
+            arrow.css('top', (pos.height / 2 - (window.innerHeight - pos.bottom) + margin) + 'px');
             el.css('top', (window.innerHeight - pos.height - margin) + 'px');
           }
         } else {
         if (pos.left < margin) {
-            arrow.css('left', (pos.width/2 + pos.left - margin) + 'px');
+            arrow.css('left', (pos.width / 2 + pos.left - margin) + 'px');
             el.css('left', margin + 'px');
           } else if (pos.right > window.innerWidth - margin) {
-            arrow.css('left', (pos.width/2 - (window.innerWidth - pos.right) + margin) + 'px');
+            arrow.css('left', (pos.width / 2 - (window.innerWidth - pos.right) + margin) + 'px');
             el.css('left', (window.innerWidth - pos.width - margin) + 'px');
           }
         }
