@@ -85,7 +85,7 @@
         return { 
           pre: function(scope, element, attrs) {
             transclude(scope, function(clone) {
-              element.children('.popover').append(clone);
+              angular.element(element[0].querySelector('.popover')).append(clone);
             });
 
             var popover = new PopoverView(scope, element, attrs);
