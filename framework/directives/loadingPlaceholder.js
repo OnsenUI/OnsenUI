@@ -36,13 +36,13 @@
             div.innerHTML = html.trim();
             
             var newElement = angular.element(div);
-            newElement.css("display", "none");
+            newElement.css('display', 'none');
 
             element.append(newElement);
             ons.compile(newElement[0]);
 
             element.children()[0].remove();
-            newElement.css("display", "block");
+            newElement.css('display', 'block');
           });
         });
       }    

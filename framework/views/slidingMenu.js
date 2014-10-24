@@ -581,7 +581,7 @@ limitations under the License.
        */
       close: function(options) {
         options = options || {};
-        options = typeof options == "function" ? {callback: options} : options;
+        options = typeof options == 'function' ? {callback: options} : options;
         
         this.emit('preclose');
 
@@ -593,7 +593,7 @@ limitations under the License.
       _close: function(options) {
         var callback = options.callback || function() {},
             unlock = this._doorLock.lock(),
-            instant = options.animation == "none";
+            instant = options.animation == 'none';
 
         this._animator.closeMenu(function() {
           unlock();
@@ -613,7 +613,7 @@ limitations under the License.
        */
       open: function(options) {
         options = options || {};
-        options = typeof options == "function" ? {callback: options} : options;
+        options = typeof options == 'function' ? {callback: options} : options;
 
         this.emit('preopen');
 
@@ -625,7 +625,7 @@ limitations under the License.
       _open: function(options) {
         var callback = options.callback || function() {},
             unlock = this._doorLock.lock(),
-            instant = options.animation == "none";
+            instant = options.animation == 'none';
 
         this._animator.openMenu(function() {
           unlock();
