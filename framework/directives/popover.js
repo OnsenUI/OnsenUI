@@ -81,9 +81,13 @@
       transclude: true,
       scope: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/popover.tpl',
-      compile: function(element, attrs) {
+      compile: function(element, attrs, transclude) {
         return { 
           pre: function(scope, element, attrs) {
+            transclude(scope, function(clone) {
+              element.children('.popover').append(clone);
+            });
+
             var popover = new PopoverView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, popover);
