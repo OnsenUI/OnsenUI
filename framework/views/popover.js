@@ -276,6 +276,7 @@ limitations under the License.
       destroy: function() {
         this._scope.$destroy();
 
+        this._mask.off();
         this._mask.remove();
         this._popover.remove();
         this._element.remove();
