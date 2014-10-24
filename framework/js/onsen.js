@@ -376,6 +376,21 @@ window.ons = (function(){
           var deferred = ons._qService.defer();
 
           popover.on('ons-popover:init', function(e) {
+            // Copy "style" attribute from parent.
+            var child = popover[0].querySelector('.popover');
+            if (el[0].hasAttribute('style')) {
+              var parentStyle = el[0].getAttribute('style'),
+                childStyle = child.getAttribute('style'),
+                newStyle = (function(a, b) {
+                var c =
+                  (a.substr(-1) === ';' ? a : a + ';') + 
+                  (b.substr(-1) === ';' ? b : b + ';'); 
+                return c;
+              })(parentStyle, childStyle);
+  
+              child.setAttribute('style', newStyle);
+            }
+
             deferred.resolve(e.component);
           });
 
