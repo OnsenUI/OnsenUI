@@ -153,6 +153,16 @@ angular.module('app').factory('SimpleColorCustomizer', function(ColorCustomizer)
     },
 
     {
+      name: 'Dialog',
+      items: [
+        {
+          name: 'dialog-background-color',
+          displayName: 'Background Color'
+        }
+      ]
+    },
+
+    {
       name: 'Popover',
       items: [
         {
