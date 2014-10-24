@@ -24,7 +24,7 @@ limitations under the License.
   module.factory('AndroidDialogAnimator', function(DialogAnimator) {
 
     /**
-     * Android style animator for alert dialog.
+     * Android style animator for dialog.
      */
     var AndroidDialogAnimator = DialogAnimator.extend({
 

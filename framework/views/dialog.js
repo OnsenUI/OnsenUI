@@ -155,7 +155,7 @@ limitations under the License.
       },
 
       /**
-       * Disable or enable alert dialog.
+       * Disable or enable dialog.
        *
        * @param {Boolean} 
        */
@@ -172,7 +172,7 @@ limitations under the License.
       },
 
       /**
-       * True if alert dialog is disabled.
+       * True if dialog is disabled.
        *
        * @return {Boolean}
        */
@@ -181,7 +181,7 @@ limitations under the License.
       },
 
       /**
-       * Make alert dialog cancelable or uncancelable. 
+       * Make dialog cancelable or uncancelable. 
        *
        * @param {Boolean}
        */

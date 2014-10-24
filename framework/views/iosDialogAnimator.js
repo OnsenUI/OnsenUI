@@ -24,7 +24,7 @@ limitations under the License.
   module.factory('IOSDialogAnimator', function(DialogAnimator) {
 
     /**
-     * iOS style animator for alert dialog.
+     * iOS style animator for dialog.
      */
     var IOSDialogAnimator = DialogAnimator.extend({
 
