@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Dialog | Onsen UI</title>  
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/angular/angular.js"></script>    
+  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../app.js"></script>  
+
+  <script>
+    var app = angular.module('myApp', ['onsen']);
+
+    var d;
+
+    app.controller('MyCtrl', function($scope) {
+      $scope.data = {
+        name: '',
+        description: '',
+      };
+
+      ons.createDialog('dialog.html').then(function(dialog) {
+        d = dialog;
+        $scope.dialog = dialog;
+      });
+
+      $scope.show = function() {
+        $scope.dialog.show();
+      };
+
+    });
+
+  </script>
+
+</head>
+
+<body ng-controller="MyCtrl"> 
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Dialog</div>
+    </ons-toolbar>
+
+    <div style="text-align: center">
+      <p>Name: <strong>{{ data.name || 'Unknown' }}</strong></p>
+      <p>Description: {{ data.description || 'No description yet...' }}</p>
+
+      <br />
+      <ons-button ng-click="show()">Edit</ons-button>
+    </div>
+  </ons-page>
+
+  <script type="text/ons-template" id="dialog.html">
+    <ons-dialog animation="default" cancelable>
+      <div style="text-align: center">
+
+        <section style="padding: 8px">
+        <label for="name">Name</label>
+        <input type="text" class="text-input" ng-model="data.name" id="name" text" placeholder="Type here" style="display: block; width: 100%">
+        </section>
+        <section style="padding: 0 8px 8px">
+        <label for="description">Description</label>
+        <textarea class="textarea" ng-model="data.description" id="description" placeholder="Type here" style="width: 100%; height: 100px;"></textarea>
+        </section>
+
+      </div>
+    </ons-dialog>  
+  </script>
+  
+</body>
+</html>
