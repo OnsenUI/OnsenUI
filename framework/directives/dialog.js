@@ -88,10 +88,13 @@
         return {
           pre: function(scope, element, attrs) {
             transclude(scope, function(clone) {
-              element.children('.dialog').append(clone);
+              angular.element(element[0].querySelector('.dialog')).append(clone);
             });
 
             var dialog = new DialogView(scope, element, attrs);
+
+            scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+            $onsen.addModifierMethods(dialog, 'dialog--*', angular.element(element[0].querySelector('.dialog')));
 
             $onsen.declareVarAttribute(attrs, dialog);
             $onsen.aliasStack.register('ons.dialog', dialog);

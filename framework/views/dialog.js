@@ -20,8 +20,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('DialogView', function($onsen, DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator
-  ) {
+  module.factory('DialogView', function($onsen, DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator) {
 
     var DialogView = Class.extend({
 
@@ -148,6 +147,7 @@ limitations under the License.
       destroy: function() {
         this._element.remove();
         this._deviceBackButtonHandler.destroy();
+        this._mask.off();
 
         this._scope.$destroy();
 
