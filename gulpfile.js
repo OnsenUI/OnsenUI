@@ -50,7 +50,7 @@ gulp.task('browser-sync', function() {
 ////////////////////////////////////////
 gulp.task('html2js', function() {
   return gulp.src('framework/templates/*.tpl')
-    .pipe($.html2js({base: __dirname + '/framework', outputModuleName: 'templates-main', useStrict: true}))
+    .pipe($.html2js({base: __dirname + '/framework', outputModuleName: 'templates-main', useStrict: true, quoteChar: '\''}))
     .pipe($.concat('templates.js'))
     .pipe(gulp.dest('framework/directives/'));
 });

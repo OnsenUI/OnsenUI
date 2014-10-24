@@ -64,7 +64,7 @@
             }
           }
        
-          $onsen.fireComponentEvent(element[0], "init");
+          $onsen.fireComponentEvent(element[0], 'init');
         };
       }
     };

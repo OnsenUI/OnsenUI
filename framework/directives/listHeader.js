@@ -54,7 +54,7 @@
 
           $onsen.addModifierMethods(listHeader, 'list__header--*', elem);
 
-          $onsen.fireComponentEvent(element[0], "init");
+          $onsen.fireComponentEvent(element[0], 'init');
         };
       }
     };

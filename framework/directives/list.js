@@ -57,7 +57,7 @@
          
           $onsen.addModifierMethods(list, 'list--*', element);
 
-          $onsen.fireComponentEvent(element[0], "init"); 
+          $onsen.fireComponentEvent(element[0], 'init'); 
         };
       }
     };
