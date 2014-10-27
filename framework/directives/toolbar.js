@@ -147,7 +147,6 @@
         var modifierTemplater = $onsen.generateModifierTemplater(attrs, shouldAppendAndroidModifier ? ['android'] : []),
           inline = typeof attrs.inline !== 'undefined';
 
-
         element.addClass('navigation-bar');
         element.addClass(modifierTemplater('navigation-bar--*'));
 
@@ -181,7 +180,7 @@
             });
 
             $onsen.addModifierMethods(toolbar, 'navigation-bar--*', element);
-            angular.forEach(['left', 'center', 'right'], function(position){
+            angular.forEach(['left', 'center', 'right'], function(position) {
               $onsen.addModifierMethods(toolbar, 'navigation-bar--*__' + position,
                 angular.element(element[0].querySelector('.navigation-bar__' + position)));
             });
