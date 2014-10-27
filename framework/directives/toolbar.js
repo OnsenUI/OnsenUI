@@ -132,7 +132,7 @@
   /**
    * Toolbar directive.
    */
-  module.directive('onsToolbar', function($onsen) {
+  module.directive('onsToolbar', function($onsen, GenericView) {
     return {
       restrict: 'E',
       replace: false,
@@ -146,6 +146,7 @@
         var shouldAppendAndroidModifier = ons.platform.isAndroid() && !element[0].hasAttribute('fixed-style');
         var modifierTemplater = $onsen.generateModifierTemplater(attrs, shouldAppendAndroidModifier ? ['android'] : []),
           inline = typeof attrs.inline !== 'undefined';
+
 
         element.addClass('navigation-bar');
         element.addClass(modifierTemplater('navigation-bar--*'));
@@ -164,6 +165,27 @@
 
         return {
           pre: function(scope, element, attrs) {
+            var toolbar = new GenericView(scope, element, attrs);
+
+            $onsen.declareVarAttribute(attrs, toolbar);
+        
+            $onsen.aliasStack.register('ons.toolbar', toolbar);
+            element.data('ons-toolbar', toolbar);
+
+            scope.$on('$destroy', function() {
+              toolbar._events = undefined;
+              $onsen.removeModifierMethods(toolbar);
+              element.data('ons-toolbar', undefined);
+              $onsen.aliasStack.unregister('ons.toolbar', toolbar);
+              element = null;
+            });
+
+            $onsen.addModifierMethods(toolbar, 'navigation-bar--*', element);
+            angular.forEach(['left', 'center', 'right'], function(position){
+              $onsen.addModifierMethods(toolbar, 'navigation-bar--*__' + position,
+                angular.element(element[0].querySelector('.navigation-bar__' + position)));
+            });
+
             var pageView = element.inheritedData('ons-page');
 
             if (pageView && !inline) {
