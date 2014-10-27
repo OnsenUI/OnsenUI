@@ -29,33 +29,66 @@
         <div class="center">Carousel</div>
       </ons-toolbar>
 
-      <ons-carousel style="height: 150px;">
-        <ons-carousel-item style="background-color: red">
-        </ons-carousel-item>
-        <ons-carousel-item style="background-color: blue">
-        </ons-carousel-item>
+      <ons-carousel style="height: 70px;">
+        <ons-carousel-item style="background-color: red">no overscrollable</ons-carousel-item>
+        <ons-carousel-item style="background-color: blue"></ons-carousel-item>
+        <ons-carousel-item style="background-color: orange"></ons-carousel-item>
       </ons-carousel>
 
-      <ons-carousel style="height: 150px;">
-        <ons-carousel-item style="background-color: yellow">
-        </ons-carousel-item>
-        <ons-carousel-item style="background-color: green">
-        </ons-carousel-item>
-        <ons-carousel-item style="background-color: cyan">
-        </ons-carousel-item>
+      <ons-carousel style="height: 70px;" overscrollable>
+        <ons-carousel-item style="background-color: yellow">overscrollable</ons-carousel-item>
+        <ons-carousel-item style="background-color: green"></ons-carousel-item>
+        <ons-carousel-item style="background-color: cyan"></ons-carousel-item>
       </ons-carousel>
 
-      <ons-carousel style="height: 150px;">
-        <ons-carousel-item style="background-color: gray">
-        </ons-carousel-item>
-        <ons-carousel-item style="background-color: black">
-        </ons-carousel-item>
-        <ons-carousel-item style="background-color: purple">
-        </ons-carousel-item>
-        <ons-carousel-item style="background-color: blue">
-        </ons-carousel-item>
+      <ons-carousel style="height: 70px; width: 33%; float: left;" overscrollable direction="vertical">
+        <ons-carousel-item style="background-color: gray">direction="vertical"</ons-carousel-item>
+        <ons-carousel-item style="background-color: black"></ons-carousel-item>
+        <ons-carousel-item style="background-color: purple"></ons-carousel-item>
       </ons-carousel>
 
+      <ons-carousel style="height: 70px; width: 34%; float: left;" overscrollable direction="vertical" autoscroll>
+        <ons-carousel-item style="background-color: green">direction="vertical" autoscroll</ons-carousel-item>
+        <ons-carousel-item style="background-color: red"></ons-carousel-item>
+        <ons-carousel-item style="background-color: yellow"></ons-carousel-item>
+      </ons-carousel>
+
+      <ons-carousel style="height: 70px; width: 33%; float: left;" overscrollable direction="vertical">
+        <ons-carousel-item style="background-color: lime">direction="vertical"</ons-carousel-item>
+        <ons-carousel-item style="background-color: blue"></ons-carousel-item>
+        <ons-carousel-item style="background-color: orange"></ons-carousel-item>
+      </ons-carousel>
+
+      <ons-carousel style="height: 70px;" initial-index="2" autoscroll>
+        <ons-carousel-item style="background-color: red">initial-index="2"</ons-carousel-item>
+        <ons-carousel-item style="background-color: blue"></ons-carousel-item>
+        <ons-carousel-item style="background-color: orange"></ons-carousel-item>
+      </ons-carousel>
+
+      <ons-carousel style="height: 70px;" overscrollable item-width="90%" autoscroll var="myCarousel">
+        <ons-carousel-item style="background-color: blue">item-width="90%"</ons-carousel-item>
+        <ons-carousel-item style="background-color: green"></ons-carousel-item>
+        <ons-carousel-item style="background-color: gray"></ons-carousel-item>
+        <ons-carousel-cover><div style="text-align: center; margin-top: 20px; color: white;">Label</div></ons-carousel-cover>
+      </ons-carousel>
+
+      <ons-carousel style="height: 70px;" overscrollable autoscroll item-width="70px">
+        <ons-carousel-item ng-repeat="i in [1, 2, 3, 4, 5, 6]">
+          <div style="background-color: gray; width: 60px; height: 60px; margin: 5px; border-radius: 6px;"></div>
+        </ons-carousel-item>
+        <ons-carousel-item ng-repeat="i in [1, 2, 3, 4, 5, 6]">
+          <div style="background-color: gray; width: 60px; height: 60px; margin: 5px; border-radius: 6px;"></div>
+        </ons-carousel-item>
+        <ons-carousel-item ng-repeat="i in [1, 2, 3, 4, 5, 6]">
+          <div style="background-color: gray; width: 60px; height: 60px; margin: 5px; border-radius: 6px;"></div>
+        </ons-carousel-item>
+        <ons-carousel-item ng-repeat="i in [1, 2, 3, 4, 5, 6]">
+          <div style="background-color: gray; width: 60px; height: 60px; margin: 5px; border-radius: 6px;"></div>
+        </ons-carousel-item>
+        <ons-carousel-item ng-repeat="i in [1, 2, 3, 4, 5, 6]">
+          <div style="background-color: gray; width: 60px; height: 60px; margin: 5px; border-radius: 6px;"></div>
+        </ons-carousel-item>
+      </ons-carousel>
 
     </ons-page>
 

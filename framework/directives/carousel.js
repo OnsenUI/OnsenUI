@@ -34,10 +34,22 @@
 
         return function(scope, element, attrs) {
           setImmediate(function() {
-            var carouselView = new CarouselView(scope, element, attrs);
-          });
+            var carousel = new CarouselView(scope, element, attrs);
 
-          $onsen.fireComponentEvent(element[0], "init");
+            $onsen.aliasStack.register('ons.carousel', carousel);
+            element.data('ons-carousel', carousel);
+
+            $onsen.declareVarAttribute(attrs, carousel);
+
+            scope.$on('$destroy', function() {
+              carousel._events = undefined;
+              element.data('ons-carousel', undefined);
+              $onsen.aliasStack.unregister('ons.carousel', carousel);
+              element = null;
+            });
+
+            $onsen.fireComponentEvent(element[0], 'init');
+          });
         };
       },
 

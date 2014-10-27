@@ -25,14 +25,16 @@ ons-carousel {
 ons-carousel-item {
   display: block;
   height: 100%;
+  visibility: hidden;
 }
 
-.carousel-item--horizontal {
-  
-}
-
-.carousel-item--vertical {
-  
+ons-carousel-cover {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
 }
 
 ons-carousel[fullscreen] {
@@ -41,4 +43,9 @@ ons-carousel[fullscreen] {
   right: 0px;
   left: 0px;
   bottom: 0px;
+}
+
+ons-carousel[disabled] {
+  pointer-events: none;
+  opacity: 0.75;
 }

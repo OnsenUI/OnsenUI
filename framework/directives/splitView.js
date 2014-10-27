@@ -98,7 +98,7 @@
             $onsen.aliasStack.unregister('ons.splitView', splitView);
           });
 
-          $onsen.fireComponentEvent(element[0], "init");
+          $onsen.fireComponentEvent(element[0], 'init');
         };
       }
     };
