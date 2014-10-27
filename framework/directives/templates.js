@@ -39,6 +39,20 @@ try { app = angular.module("templates-main"); }
 catch(err) { app = angular.module("templates-main", []); }
 app.run(["$templateCache", function($templateCache) {
   "use strict";
+  $templateCache.put("templates/popover.tpl",
+    "<div class=\"popover-mask\"></div>\n" +
+    "<div class=\"popover popover--{{ direction }} {{ modifierTemplater('popover--*') }}\">\n" +
+    "  <div class=\"popover__{{ arrowPosition }}-arrow\"></div>\n" +
+    "</div>\n" +
+    "");
+}]);
+})();
+
+(function(module) {
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
   $templateCache.put("templates/row.tpl",
     "<div class=\"row row-{{align}} ons-row-inner\"></div>\n" +
     "");

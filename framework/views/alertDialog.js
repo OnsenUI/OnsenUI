@@ -144,6 +144,8 @@ limitations under the License.
        * Destroy alert dialog.
        */
       destroy: function() {
+        this._mask.off();
+  
         this._element.remove();
         this._mask.remove();
         this._deviceBackButtonHandler.destroy();

@@ -100,7 +100,7 @@ ons-toolbar ~ .page__content {
   padding-top: 22px;
 }
 
-ons-alert-dialog[disabled] {
+ons-popover[disabled], ons-alert-dialog[disabled] {
   pointer-events: none;
   opacity: 0.75;
 }
