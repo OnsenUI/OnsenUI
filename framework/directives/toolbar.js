@@ -181,8 +181,10 @@
 
             $onsen.addModifierMethods(toolbar, 'navigation-bar--*', element);
             angular.forEach(['left', 'center', 'right'], function(position) {
-              $onsen.addModifierMethods(toolbar, 'navigation-bar--*__' + position,
-                angular.element(element[0].querySelector('.navigation-bar__' + position)));
+              var el = element[0].querySelector('.navigation-bar__' + position);
+              if (el) {
+                $onsen.addModifierMethods(toolbar, 'navigation-bar--*__' + position, angular.element(el));
+              }
             });
 
             var pageView = element.inheritedData('ons-page');
