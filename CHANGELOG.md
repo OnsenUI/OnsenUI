@@ -21,10 +21,11 @@ v1.2.0-dev
  * ons-platform: Added ons.platform interface that can be used to query platform and OS.
  * ons-keyboard-active: Implemented component that only shows content when the software keyboard is active.
  * ons-loading-placeholder: Added component that shows a placeholder while loading a page.
- * ons-alert-dialog: Added alert dialog component. Also alert(), confirm() and prompt() methods.
+ * ons-alert-dialog: Implemented 'alert-dialog' component. Also alert(), confirm() and prompt() methods.
  * ons-toolbar: Changed to have 'android' modifier automatically on android platform. And added 'fixed-style' attribute for preventing this behavior.
  * css-components: Added 'alert-dialog', 'dialog' and 'popover' components.
  * css-components: Changed default color scheme for css-components.
+ * ons-popover: Implemented 'popover' component.
 
 v1.1.4
 ----

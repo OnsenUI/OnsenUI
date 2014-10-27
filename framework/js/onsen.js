@@ -55,18 +55,15 @@ window.ons = (function(){
         throw new Error('Invalid initialization state.');
       }
 
-      if (document.querySelector('ons-alert-dialog')) {
-        console.warn('Invalid usage of <ons-alert-dialog>.');
-      }
-
       $rootScope.$on('$ons-ready', unlockOnsenUI);
     });
   }
 
   function initAngularModule() {
     module.value('$onsGlobal', ons);
-    module.run(function($compile, $rootScope, $onsen) {
+    module.run(function($compile, $rootScope, $onsen, $q) {
       ons._onsenService = $onsen;
+      ons._qService = $q;
 
       $rootScope.ons = window.ons;
       $rootScope.console = window.console;
@@ -300,6 +297,7 @@ window.ons = (function(){
        * @return {Boolean}
        */
       isWebView: function() {
+
         if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
           throw new Error('isWebView() method is available after dom contents loaded.');
         }
@@ -340,6 +338,63 @@ window.ons = (function(){
           }
 
           return  alertDialog.data('ons-alert-dialog');
+        });
+      },
+
+      /**
+       * @param {String} page
+       * @return {Promise}
+       */
+      createPopover: function(page) {
+        if (!page) {
+          throw new Error('Page url must be defined.');
+        }
+
+        var popover = angular.element('<ons-popover>'),
+          $onsen = this._getOnsenService();
+        
+        angular.element(document.body).append(angular.element(popover));
+
+        return $onsen.getPageHTMLAsync(page).then(function(html) {
+          var div = document.createElement('div');
+          div.innerHTML = html;
+
+          var el = angular.element(div.querySelector('ons-popover'));
+
+          // Copy attributes and insert html.
+          var attrs = el.prop('attributes');
+          for (var i = 0, l = attrs.length; i < l; i++) {
+            popover.attr(attrs[i].name, attrs[i].value); 
+          }
+          popover.html(el.html());
+          ons.compile(popover[0]);
+      
+          if (el.attr('disabled')) {
+            popover.attr('disabled', 'disabled');
+          }
+
+          var deferred = ons._qService.defer();
+
+          popover.on('ons-popover:init', function(e) {
+            // Copy "style" attribute from parent.
+            var child = popover[0].querySelector('.popover');
+            if (el[0].hasAttribute('style')) {
+              var parentStyle = el[0].getAttribute('style'),
+                childStyle = child.getAttribute('style'),
+                newStyle = (function(a, b) {
+                var c =
+                  (a.substr(-1) === ';' ? a : a + ';') + 
+                  (b.substr(-1) === ';' ? b : b + ';'); 
+                return c;
+              })(parentStyle, childStyle);
+  
+              child.setAttribute('style', newStyle);
+            }
+
+            deferred.resolve(e.component);
+          });
+
+          return deferred.promise;
         });
       },
 
