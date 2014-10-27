@@ -50,21 +50,42 @@
   </ons-page>
 
   <script type="text/ons-template" id="dialog.html">
-    <ons-dialog animation="default" cancelable>
-      <div style="text-align: center">
-
-        <section style="padding: 8px">
-        <label for="name">Name</label>
-        <input type="text" class="text-input" ng-model="data.name" id="name" text" placeholder="Type here" style="display: block; width: 100%">
-        </section>
-        <section style="padding: 0 8px 8px">
-        <label for="description">Description</label>
-        <textarea class="textarea" ng-model="data.description" id="description" placeholder="Type here" style="width: 100%; height: 100px;"></textarea>
-        </section>
-
-      </div>
+    <ons-dialog style="height: 250px" animation="default" cancelable>
+      <ons-navigator animation="slide" var="app.navi">
+        <ons-page>
+          <ons-toolbar>
+          <div class="center">Name</div>
+          </ons-toolbar>
+          <div style="text-align: center">
+            <label for="name">
+              <p>Name</p>
+            </label>
+            <input id="name" class="text-input" ng-model="data.name">
+            <p>
+              <ons-button modifier="light" ng-click="app.navi.pushPage('page.html');">Next</ons-button>
+            </p>
+          </div>
+          </ons-page>
+      </ons-navigator>
     </ons-dialog>  
   </script>
+
+  <ons-template id="page.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Description</div>
+      </ons-toolbar>
+      <div style="text-align: center">
+        <label for="description">
+          <p>Description</p>
+        </label>
+        <input id="description" class="text-input" ng-model="data.description">
+        <p>
+          <ons-button modifier="light" ng-click="app.navi.popPage('page.html');">Previous</ons-button>
+        </p>
+      </div>
+    </ons-page>
+  </ons-template>
   
 </body>
 </html>
