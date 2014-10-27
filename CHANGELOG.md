@@ -10,6 +10,7 @@ v1.1.5-dev
  * ons-navigator: Fixed [#228](https://github.com/OnsenUI/OnsenUI/issues/228).
  * ons-switch: Fixed [#252](https://github.com/OnsenUI/OnsenUI/issues/252). Model change is now bound correctly when using ngModel.
  * css-components: Fixed [#177](https://github.com/OnsenUI/OnsenUI/issues/177). Checkboxes and radio buttons are now clickable on iOS.
+ * ons-button: Added several methods to the component. 
 
 v1.1.4
 ----
