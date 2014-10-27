@@ -264,7 +264,7 @@ limitations under the License.
           };
 
           var append = function(oldFn, newFn) {
-            if (typeof oldFn !== "undefined") {
+            if (typeof oldFn !== 'undefined') {
               return function() {
                 return oldFn.apply(null, arguments) || newFn.apply(null, arguments);
               };
@@ -352,7 +352,7 @@ limitations under the License.
 
           event.component = dom ? 
             angular.element(dom).data(dom.nodeName.toLowerCase()) || null : null;
-          event.initEvent(dom.nodeName.toLowerCase() + ":" + eventName, true, true);
+          event.initEvent(dom.nodeName.toLowerCase() + ':' + eventName, true, true);
           dom.dispatchEvent(event);
         },
 

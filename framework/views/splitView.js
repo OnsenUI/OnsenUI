@@ -213,7 +213,7 @@ limitations under the License.
           return $onsGlobal.orientation.isLandscape();
         } else if (c.substr(0,5) == 'width') {
           var num = c.split(' ')[1];
-          if (num.indexOf("px") >= 0) {
+          if (num.indexOf('px') >= 0) {
             num = num.substr(0,num.length-2);
           }
           return isNumber(num) && window.innerWidth < num;

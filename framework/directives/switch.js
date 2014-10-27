@@ -106,7 +106,7 @@
             checkbox = element = attrs = scope = null;
           });
         
-          $onsen.fireComponentEvent(element[0], "init");
+          $onsen.fireComponentEvent(element[0], 'init');
         };
       }
     };
