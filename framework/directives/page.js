@@ -117,15 +117,6 @@
       pageBackground.addClass(modifierTemplater('page--*__background'));
       pageBackground = null;
 
-      // Pages inside dialogs should not fill status bar.
-      var el = element[0];
-      for (var el = element[0]; el.parentNode; el = el.parentNode) {
-        if (el.tagName && el.tagName.toLowerCase() === 'ons-dialog') {
-          element[0].setAttribute('no-status-bar-fill', '');
-          break;
-        }
-      }
-
       $onsen.cleaner.onDestroy(scope, function() {
         page._events = undefined;
         $onsen.removeModifierMethods(page);

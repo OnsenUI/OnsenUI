@@ -88,11 +88,13 @@
       transclude: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/dialog.tpl',
       compile: function(element, attrs, transclude) {
+        element[0].setAttribute('no-status-bar-fill', '');
         return {
           pre: function(scope, element, attrs) {
             transclude(scope, function(clone) {
               angular.element(element[0].querySelector('.dialog')).append(clone);
             });
+
 
             var dialog = new DialogView(scope, element, attrs);
 
