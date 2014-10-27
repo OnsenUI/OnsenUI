@@ -50,6 +50,9 @@
  * @property isDisabled()
  *  [en]Returns whether the dialog is disabled or enabled.[/en]
  *  [ja]このダイアログがdisabled状態かどうかを返します。[/ja]
+ * @property getDeviceBackButtonHandler()
+ *  [en]Retrieve the back button handler for overriding the default behavior.[/en]
+ *  [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Preset events are preshow, postshow, prehide and posthide.[/en]
  *  [ja]イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。[/ja]

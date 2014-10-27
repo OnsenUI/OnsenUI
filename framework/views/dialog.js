@@ -57,6 +57,13 @@ limitations under the License.
       },
 
       /**
+       *  @return {Object}
+       */
+      getDeviceBackButtonHandler: function() {
+        return this._deviceBackButtonHandler;
+      },
+
+      /**
        * Show dialog.
        *
        * @param {Object} [options]
