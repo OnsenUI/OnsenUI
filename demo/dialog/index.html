@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Dialog | Onsen UI</title>  
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/angular/angular.js"></script>    
+  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../app.js"></script>  
+
+  <script>
+    var app = angular.module('myApp', ['onsen']);
+
+    app.controller('MyCtrl', function($scope) {
+      $scope.data = {
+        name: '',
+        description: '',
+      };
+
+      ons.createDialog('dialog.html').then(function(dialog) {
+        $scope.dialog = dialog;
+      });
+
+      $scope.show = function() {
+        $scope.dialog.show();
+      };
+
+    });
+
+  </script>
+
+</head>
+
+<body ng-controller="MyCtrl"> 
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Dialog</div>
+    </ons-toolbar>
+
+    <div style="text-align: center">
+      <p>Name: <strong>{{ data.name || 'Unknown' }}</strong></p>
+      <p>Description: {{ data.description || 'No description yet...' }}</p>
+
+      <br />
+      <ons-button ng-click="show()">Edit</ons-button>
+    </div>
+  </ons-page>
+
+  <script type="text/ons-template" id="dialog.html">
+    <ons-dialog style="height: 250px" animation="default" cancelable>
+      <ons-navigator animation="slide" var="app.navi">
+        <ons-page>
+          <ons-toolbar>
+          <div class="center">Name</div>
+          </ons-toolbar>
+          <br />
+          <div style="text-align: center">
+            <input id="name" class="text-input" ng-model="data.name">
+            <p>
+              <ons-button modifier="light" ng-click="app.navi.pushPage('page.html');">Next</ons-button>
+            </p>
+          </div>
+          </ons-page>
+      </ons-navigator>
+    </ons-dialog>  
+  </script>
+
+  <ons-template id="page.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Description</div>
+      </ons-toolbar>
+      <br />
+      <div style="text-align: center">
+        <input id="description" class="text-input" ng-model="data.description">
+        <p>
+          <ons-button modifier="light" ng-click="app.navi.popPage('page.html');">Previous</ons-button>
+        </p>
+      </div>
+    </ons-page>
+  </ons-template>
+  
+</body>
+</html>
