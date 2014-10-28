@@ -34,16 +34,16 @@
         <table>
           <tbody>
             
-            <span class="anchor" id="ons-sliding-menu-behind-page"></span>
+            <span class="anchor" id="ons-sliding-menu-menu-page"></span>
             <tr ng-repeat="attribute in directive.attributes">
-              <td class="attribute-name">behind-page</td>
-              <td>The url of the page to be set to the behind layer.</td>
+              <td class="attribute-name">menu-page</td>
+              <td>The url of the page to be set to the left side.</td>
             </tr>
             
-            <span class="anchor" id="ons-sliding-menu-above-page"></span>
+            <span class="anchor" id="ons-sliding-menu-main-page"></span>
             <tr ng-repeat="attribute in directive.attributes">
-              <td class="attribute-name">above-page</td>
-              <td>The url of the page to be set to the above layer.</td>
+              <td class="attribute-name">main-page</td>
+              <td>The url of the page to be set to the right side.</td>
             </tr>
             
             <span class="anchor" id="ons-sliding-menu-swipable"></span>
@@ -61,7 +61,7 @@
             <span class="anchor" id="ons-sliding-menu-max-slide-distance"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">max-slide-distance</td>
-              <td>How far the behind page will slide open. Can specify both in px and %. eg. 90%, 200px</td>
+              <td>How far the menu page will slide open. Can specify both in px and %. eg. 90%, 200px</td>
             </tr>
             
             <span class="anchor" id="ons-sliding-menu-var"></span>
@@ -73,7 +73,7 @@
             <span class="anchor" id="ons-sliding-menu-side"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">side</td>
-              <td>Specify which side of the screen the behind page is located on. Possible values are left and right.</td>
+              <td>Specify which side of the screen the menu page is located on. Possible values are left and right.</td>
             </tr>
             
           </tbody>
@@ -100,33 +100,21 @@
             <td>Show the page specified in pageUrl in the side menu pane.</td>
           </tr>
           
-          <span class="anchor" id="setAbovePage(pageUrl)-setAbovePage(pageUrl)"></span>
+          <span class="anchor" id="openMenu([options])-openMenu([options])"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>setAbovePage(pageUrl)</code></td>
-            <td>[Deprecated]Show the page specified in pageUrl in the above layer.</td>
-          </tr>
-          
-          <span class="anchor" id="setBehindPage(pageUrl)-setBehindPage(pageUrl)"></span>
-          <tr ng-repeat="method in directive.methods">
-            <td><code>setBehindPage(pageUrl)</code></td>
-            <td>[Deprecated]Show the page specified in pageUrl in the behind layer.</td>
-          </tr>
-          
-          <span class="anchor" id="openMenu()-openMenu()"></span>
-          <tr ng-repeat="method in directive.methods">
-            <td><code>openMenu()</code></td>
+            <td><code>openMenu([options])</code></td>
             <td>Slide the above layer to reveal the layer behind.</td>
           </tr>
           
-          <span class="anchor" id="closeMenu()-closeMenu()"></span>
+          <span class="anchor" id="closeMenu([options])-closeMenu([options])"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>closeMenu()</code></td>
+            <td><code>closeMenu([options])</code></td>
             <td>Slide the above layer to hide the layer behind.</td>
           </tr>
           
-          <span class="anchor" id="toggleMenu()-toggleMenu()"></span>
+          <span class="anchor" id="toggleMenu([options])-toggleMenu([options])"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>toggleMenu()</code></td>
+            <td><code>toggleMenu([options])</code></td>
             <td>Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.</td>
           </tr>
           
@@ -146,6 +134,12 @@
           <tr ng-repeat="method in directive.methods">
             <td><code>getDeviceBackButtonHandler()</code></td>
             <td>Retrieve the back-button handler.</td>
+          </tr>
+          
+          <span class="anchor" id="setSwipable(swipable)-setSwipable(swipable)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setSwipable(swipable)</code></td>
+            <td>Set swipable or not.</td>
           </tr>
           
         </tbody>

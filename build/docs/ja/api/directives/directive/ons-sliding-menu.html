@@ -34,16 +34,16 @@
         <table>
           <tbody>
             
-            <span class="anchor" id="ons-sliding-menu-behind-page"></span>
+            <span class="anchor" id="ons-sliding-menu-menu-page"></span>
             <tr ng-repeat="attribute in directive.attributes">
-              <td class="attribute-name">behind-page</td>
-              <td>後方のレイヤーにセットされたページのURLを指定します。</td>
+              <td class="attribute-name">menu-page</td>
+              <td>左に位置するメニューページのURLを指定します。</td>
             </tr>
             
-            <span class="anchor" id="ons-sliding-menu-above-page"></span>
+            <span class="anchor" id="ons-sliding-menu-main-page"></span>
             <tr ng-repeat="attribute in directive.attributes">
-              <td class="attribute-name">above-page</td>
-              <td>前方のレイヤーにセットされたページのURLを指定します。</td>
+              <td class="attribute-name">main-page</td>
+              <td>右に位置するメインページのURLを指定します。</td>
             </tr>
             
             <span class="anchor" id="ons-sliding-menu-swipable"></span>
@@ -61,7 +61,7 @@
             <span class="anchor" id="ons-sliding-menu-max-slide-distance"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">max-slide-distance</td>
-              <td>behind-pageで指定されたページの表示幅を指定します。ピクセルもしくは%の両方で指定できます（例: 90%, 200px）</td>
+              <td>menu-pageで指定されたページの表示幅を指定します。ピクセルもしくは%の両方で指定できます（例: 90%, 200px）</td>
             </tr>
             
             <span class="anchor" id="ons-sliding-menu-var"></span>
@@ -73,7 +73,7 @@
             <span class="anchor" id="ons-sliding-menu-side"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">side</td>
-              <td>behind-pageで指定されたページが画面のどちら側から表示されるかを指定します。leftもしくはrightのいずれかを指定できます。</td>
+              <td>menu-pageで指定されたページが画面のどちら側から表示されるかを指定します。leftもしくはrightのいずれかを指定できます。</td>
             </tr>
             
           </tbody>
@@ -100,33 +100,21 @@
             <td>メニュー部分に表示されるページをpageUrlに指定します。</td>
           </tr>
           
-          <span class="anchor" id="setAbovePage(pageUrl)-setAbovePage(pageUrl)"></span>
+          <span class="anchor" id="openMenu([options])-openMenu([options])"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>setAbovePage(pageUrl)</code></td>
-            <td>[非推奨]上部に表示されるページをpageUrlに指定します。</td>
-          </tr>
-          
-          <span class="anchor" id="setBehindPage(pageUrl)-setBehindPage(pageUrl)"></span>
-          <tr ng-repeat="method in directive.methods">
-            <td><code>setBehindPage(pageUrl)</code></td>
-            <td>[非推奨]下部に表示されるページをpageUrlに指定します。</td>
-          </tr>
-          
-          <span class="anchor" id="openMenu()-openMenu()"></span>
-          <tr ng-repeat="method in directive.methods">
-            <td><code>openMenu()</code></td>
+            <td><code>openMenu([options])</code></td>
             <td>メニューページを表示します。</td>
           </tr>
           
-          <span class="anchor" id="closeMenu()-closeMenu()"></span>
+          <span class="anchor" id="closeMenu([options])-closeMenu([options])"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>closeMenu()</code></td>
+            <td><code>closeMenu([options])</code></td>
             <td>メニューページを非表示にします。</td>
           </tr>
           
-          <span class="anchor" id="toggleMenu()-toggleMenu()"></span>
+          <span class="anchor" id="toggleMenu([options])-toggleMenu([options])"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>toggleMenu()</code></td>
+            <td><code>toggleMenu([options])</code></td>
             <td>現在の状況に合わせて、メニューページを表示もしくは非表示にします。</td>
           </tr>
           
@@ -146,6 +134,12 @@
           <tr ng-repeat="method in directive.methods">
             <td><code>getDeviceBackButtonHandler()</code></td>
             <td>ons-sliding-menuに紐付いているバックボタンハンドラを取得します。</td>
+          </tr>
+          
+          <span class="anchor" id="setSwipable(swipable)-setSwipable(swipable)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setSwipable(swipable)</code></td>
+            <td>スワイプで開閉するかどうかを設定する。</td>
           </tr>
           
         </tbody>

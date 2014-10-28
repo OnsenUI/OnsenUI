@@ -1,7 +1,7 @@
 <div class="directive-container" id="module:directives.directive:ons-split-view">
   <div>
     <section class="description">
-      <p>画面を左右に分割します。collapse属性を用いることで、スライディングメニューとしての使い方もできます。</p>
+      <p>画面を左右に分割します。</p>
     </section>
 
     <span class="anchor" id="ons-split-view-attributes"></span>
@@ -45,7 +45,7 @@
             <span class="anchor" id="ons-split-view-collapse"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">collapse</td>
-              <td>左側のページを非表示にする条件を指定します。portrait, landscapeもしくはwidth ##pxの指定が可能です。portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。width ##pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。</td>
+              <td>左側のページを非表示にする条件を指定します。portrait, landscape、width ##pxもしくはメディアクエリの指定が可能です。portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。width ##pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。メディアクエリを指定すると、指定したクエリに適合している場合に適用されます。</td>
             </tr>
             
             <span class="anchor" id="ons-split-view-var"></span>
@@ -78,22 +78,16 @@
             <td>Show the page specified in pageUrl in the left section</td>
           </tr>
           
-          <span class="anchor" id="open()-open()"></span>
+          <span class="anchor" id="update()-update()"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>open()</code></td>
-            <td>[Deprecated] Reveal the secondary page if the view is in collapse mode</td>
+            <td><code>update()</code></td>
+            <td>Trigger an &#39;update&#39; event and try to determine if the split behaviour should be changed.</td>
           </tr>
           
-          <span class="anchor" id="close()-close()"></span>
+          <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
           <tr ng-repeat="method in directive.methods">
-            <td><code>close()</code></td>
-            <td>[Deprecated] hide the secondary page if the view is in collapse mode</td>
-          </tr>
-          
-          <span class="anchor" id="toggle()-toggle()"></span>
-          <tr ng-repeat="method in directive.methods">
-            <td><code>toggle()</code></td>
-            <td>[Deprecated] Reveal the secondary page if it is currently hidden, otherwies, reveal it</td>
+            <td><code>on(eventName,listener)</code></td>
+            <td>イベントリスナーを追加します。presplit, postsplit, precollapse, postcollapse, updateを指定できます。</td>
           </tr>
           
         </tbody>

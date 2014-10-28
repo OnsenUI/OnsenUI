@@ -463,6 +463,7 @@ h6 {
   line-height: 44px;
   font-size: 17px;
   font-weight: 500;
+  color: #333;
 }
 .navigation-bar__title {
   line-height: 44px;
@@ -513,6 +514,74 @@ h6 {
 
       <div class="navigation-bar__right">
         <span class="toolbar-button--outline navigation-bar__line-height">Button</span>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Android-like Navigation Bar
+  class: navigation-bar--android
+  hint: .navigation-bar--android
+  use: Navigation Bar, Toolbar Button
+  markup:
+    <div class="navigation-bar navigation-bar--android">
+      <div class="navigation-bar__left navigation-bar--android__left">
+        <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 5px;"><i class="ion-android-arrow-back" style="font-size:20px;"></i></span>
+      </div>
+      <div class="navigation-bar__center navigation-bar--android__center">
+        <span class="toolbar-button navigation-bar__line-height" style="padding:0">
+          <i class="ion-cube" style="font-size:20px;"></i> App Bar
+        </span>
+      </div>
+      <div class="navigation-bar__right navigation-bar--android__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-share" style="font-size:20px;"></i>
+        </span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-more" style="font-size:20px;"></i>
+        </span>
+      </div>
+    </div>
+*/
+.navigation-bar--android__left {
+  float: left;
+  text-align: left;
+  width: auto;
+  min-width: 10px;
+}
+.navigation-bar--android__center {
+  float: left;
+  text-align: left;
+  width: auto;
+}
+.navigation-bar--android__right {
+  float: right;
+  text-align: right;
+  width: auto;
+}
+.navigation-bar--android__center:first-child:last-child {
+  padding-left: 10px;
+}
+/* topdoc
+  name: Android-like Navigation Bar(2)
+  use: Android-like Navigation Bar
+  markup:
+    <div class="navigation-bar navigation-bar--android">
+      <div class="navigation-bar__left navigation-bar--android__left">
+        <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 0;"><i class="ion-android-drawer" style="font-size:20px;"></i></span>
+      </div>
+      <div class="navigation-bar__center navigation-bar--android__center">
+        App Bar
+      </div>
+      <div class="navigation-bar__right navigation-bar--android__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-star" style="font-size:20px;"></i>
+        </span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-search" style="font-size:20px;"></i>
+        </span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-more" style="font-size:20px;"></i>
+        </span>
       </div>
     </div>
 */
@@ -1888,6 +1957,7 @@ h6 {
   position: relative;
   overflow: hidden;
   height: 24px;
+  pointer-events: none;
 }
 .checkbox > input[type="checkbox"] {
   position: absolute;
@@ -2282,6 +2352,7 @@ h6 {
   width: 24px;
   height: 24px;
   background: transparent;
+  pointer-events: none;
 }
 .radio-button > input[type="radio"]:checked + .radio-button__checkmark {
   background: rgba(0,0,0,0);
@@ -3174,7 +3245,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     <div class="dialog-mask"></div>
     <div class="dialog">
       <div class="page">
-        <p style="text-align:center;margin-top:35px;opacity:0.4;">Content</p>
+        <p style="text-align:center;margin-top:40px;opacity:0.4;">Content</p>
       </div>
     </div>
 */
@@ -3210,12 +3281,15 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   margin: auto auto;
+  background-color: rgba(255,255,255,0.92);
   -webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.07);
   box-shadow: 0 2px 12px rgba(0,0,0,0.07);
   overflow: hidden;
   min-width: 270px;
   min-height: 100px;
   text-align: left;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
 }
 .dialog-mask {
   padding: 0;
@@ -3238,26 +3312,11 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-color: rgba(0,0,0,0.3);
 }
 /* topdoc
-  name: Dialog(rounded)
-  use: Dialog
-  markup:
-    <div class="dialog-mask"></div>
-    <div class="dialog dialog--rounded">
-      <div class="page">
-        <p style="text-align:center;margin-top:35px;opacity:0.4;">Content</p>
-      </div>
-    </div>
-*/
-.dialog--rounded {
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-}
-/* topdoc
   name: Alert Dialog
   class: alert-dialog
   height: 360px
   markup:
-    <div class="mask"></div>
+    <div class="alert-dialog-mask"></div>
     <div class="alert-dialog">
       <div class="alert-dialog-title">Alert</div>
 
@@ -3423,25 +3482,39 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   flex: 1;
   display: block;
   width: 100%;
-}
-.alert-dialog-button--one:not(:first-child) {
   border-left: 1px solid #ddd;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .alert-dialog-button--one:not(:first-child) {
+  .alert-dialog-button--one {
     border-top: none;
     border-left: none;
     -webkit-background-size: 100% 1px, 1px 100%;
     background-size: 100% 1px, 1px 100%;
     background-repeat: no-repeat;
     background-position: top, left;
-    background-image: -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%), -webkit-linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
-    background-image: -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%), -moz-linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
-    background-image: -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%), -o-linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
-    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%), linear-gradient(90deg, transparent, transparent 50%, #ddd 50%);
+    background-image: -webkit-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%), -webkit-linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
+    background-image: -moz-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%), -moz-linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
+    background-image: -o-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%), -o-linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
+    background-image: linear-gradient(0deg, transparent, transparent 50%, #ddd 50%), linear-gradient(90deg, transparent, transparent 50%, #ddd 50%);
   }
 }
-.mask {
+.alert-dialog-button--one:first-child {
+  border-left: none;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--one:first-child {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top, left;
+    background-image: -webkit-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%);
+    background-image: -moz-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%);
+    background-image: -o-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%);
+    background-image: linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
+  }
+}
+.alert-dialog-mask {
   padding: 0;
   margin: 0;
   font: inherit;
@@ -3466,7 +3539,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   use: Alert Dialog
   height: 360px
   markup:
-    <div class="mask"></div>
+    <div class="alert-dialog-mask"></div>
     <div class="alert-dialog">
       <div class="alert-dialog-content">
         Hello World!
@@ -3482,7 +3555,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   use: Alert Dialog
   height: 360px
   markup:
-    <div class="mask"></div>
+    <div class="alert-dialog-mask"></div>
     <div class="alert-dialog">
       <div class="alert-dialog-content">
         Hello World!
@@ -3499,7 +3572,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   use: Alert Dialog
   height: 360px
   markup:
-    <div class="mask"></div>
+    <div class="alert-dialog-mask"></div>
     <div class="alert-dialog">
       <div class="alert-dialog-title">Alert</div>
 
@@ -3519,7 +3592,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   use: Alert Dialog
   height: 360px
   markup:
-    <div class="mask"></div>
+    <div class="alert-dialog-mask"></div>
 
     <div class="alert-dialog alert-dialog--android">
       <div class="alert-dialog-title alert-dialog-title--android">
@@ -3540,6 +3613,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-border-radius: 2px;
   border-radius: 2px;
   padding: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .alert-dialog-title--android {
   border-bottom: 1px solid #ddd;

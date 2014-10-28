@@ -1,0 +1,155 @@
+<div class="directive-container" id="module:directives.directive:ons-popover">
+  <div>
+    <section class="description">
+      <p>ある要素を対象とするポップオーバーを表示するコンポーネントです。</p>
+    </section>
+
+    <span class="anchor" id="ons-popover-attributes"></span>
+
+    
+      <section>
+        <h4>例</h4>
+        <pre><code class="xml">&lt;script&gt;
+ons.ready(function() {
+  ons.createPopover(&#39;popover.html&#39;).then(function(popover) {
+    popover.show(&#39;#mybutton&#39;);   
+  });
+});
+&lt;/script&gt;
+
+&lt;script type=&quot;text/ons-template&quot; id=&quot;popover.html&quot;&gt;
+  &lt;ons-popover cancelable&gt;
+    &lt;p style=&quot;text-align: center; opacity: 0.5;&quot;&gt;This popover will choose which side it&#39;s displayed on automatically.&lt;/p&gt;
+  &lt;/ons-popover&gt;
+&lt;/script&gt;</code></pre>
+      </section>
+    
+
+    
+      <section>
+        <h4>属性</h4>
+        <table>
+          <tbody>
+            
+            <span class="anchor" id="ons-popover-var"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">var</td>
+              <td>このポップオーバーを参照するための名前を指定します。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-popover-modifier"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">modifier</td>
+              <td>ポップオーバーの表現を指定します。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-popover-direction"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">direction</td>
+              <td>ポップオーバーを表示する方向を空白区切りで複数指定できます。指定できる方向は、&quot;up&quot;, &quot;down&quot;, &quot;left&quot;, &quot;right&quot;の4つです。複数指定された場合、対象とする要素に合わせて指定した値から自動的に選択されます。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-popover-cancelable"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">cancelable</td>
+              <td>この属性があると、ポップオーバーが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-popover-disabled"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">disabled</td>
+              <td>この属性がある時、ポップオーバーはdisabled状態になります。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-popover-animation"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">animation</td>
+              <td>ポップオーバーを表示する際のアニメーション名を指定します。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-popover-mask-color"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">mask-color</td>
+              <td>背景のマスクの色を指定します。デフォルトは&quot;rgba(0, 0, 0, 0.2)&quot;です。</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+    
+
+    <span class="anchor" id="ons-popover-methods"></span>
+    
+    <section>
+      <h4>メソッド</h4>
+      <table>
+        <tbody>
+          
+          <span class="anchor" id="show(target,-show(target,"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>show(target,</code></td>
+            <td>対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。</td>
+          </tr>
+          
+          <span class="anchor" id="hide()-hide()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>hide()</code></td>
+            <td>ポップオーバーを閉じます。</td>
+          </tr>
+          
+          <span class="anchor" id="isShown()-isShown()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>isShown()</code></td>
+            <td>ポップオーバーが表示されているかどうかを返します。</td>
+          </tr>
+          
+          <span class="anchor" id="destroy()-destroy()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>destroy()</code></td>
+            <td>ポップオーバーを破棄して、DOMツリーから取り除きます。</td>
+          </tr>
+          
+          <span class="anchor" id="setCancelable(cancelable)-setCancelable(cancelable)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setCancelable(cancelable)</code></td>
+            <td>ポップオーバーを表示した際に、ユーザがそのポップオーバーをキャンセルできるかどうかを指定します。</td>
+          </tr>
+          
+          <span class="anchor" id="isCancelable()-isCancelable()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>isCancelable()</code></td>
+            <td>このポップオーバーがキャンセル可能かどうかを返します。</td>
+          </tr>
+          
+          <span class="anchor" id="setDisabled(disabled)-setDisabled(disabled)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setDisabled(disabled)</code></td>
+            <td>このポップオーバーをdisabled状態にするかどうかを設定します。</td>
+          </tr>
+          
+          <span class="anchor" id="isDisabled()-isDisabled()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>isDisabled()</code></td>
+            <td>このポップオーバーがdisabled状態かどうかを返します。</td>
+          </tr>
+          
+          <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>on(eventName,listener)</code></td>
+            <td>イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+</div>

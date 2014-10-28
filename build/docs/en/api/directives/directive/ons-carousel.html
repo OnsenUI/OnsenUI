@@ -1,0 +1,218 @@
+<div class="directive-container" id="module:directives.directive:ons-carousel">
+  <div>
+    <section class="description">
+      <p>Carousel component.</p>
+    </section>
+
+    <span class="anchor" id="ons-carousel-attributes"></span>
+
+    
+      <section>
+        <h4>Example</h4>
+        <pre><code class="xml">&lt;ons-carousel style=&quot;width: 100%; height: 200px&quot;&gt;
+    &lt;ons-carousel-item&gt;
+     ...
+    &lt;/ons-carousel-item&gt;
+    &lt;ons-carousel-item&gt;
+     ...
+    &lt;/ons-carousel-item&gt;
+  &lt;/ons-carousel&gt;</code></pre>
+      </section>
+    
+
+    
+      <section>
+        <h4>Attributes</h4>
+        <table>
+          <tbody>
+            
+            <span class="anchor" id="ons-carousel-direction"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">direction</td>
+              <td>The direction of this carousel. Can be either &quot;horizontal&quot; or &quot;vertical&quot;. Default is &quot;horizontal&quot;.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-carousel-fullscreen"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">fullscreen</td>
+              <td>[en][/en]
+   [ja]この属性があると、absoluteポジションを使ってカルーセルが自動的に画面いっぱいに広がります。[/ja]</td>
+            </tr>
+            
+            <span class="anchor" id="ons-carousel-var"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">var</td>
+              <td>Variable name to refer this carousel.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-carousel-overscrollable"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">overscrollable</td>
+              <td>If this attribute is set the carousel can be overscrolled.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-carousel-item-width"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">item-width</td>
+              <td>ons-carousel-item&#39;s width.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-carousel-item-height"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">item-height</td>
+              <td>ons-carousel-item&#39;s height.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-carousel-auto-scroll"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">auto-scroll</td>
+              <td>If this attribute is set the carousel can be scrolled automatically to the boundary.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-carousel-swipable"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">swipable</td>
+              <td>If this attribute is set the carousel can be scrolled by drag or swipe.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-carousel-disabled"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">disabled</td>
+              <td>If this attribute is set the carousel is disabled.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-carousel-initial-index"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">initial-index</td>
+              <td>[en][/en]
+   [ja]最初に表示するons-carousel-itemを0始まりのインデックスで指定します。デフォルトは0です。[/ja]
+</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+    
+
+    <span class="anchor" id="ons-carousel-methods"></span>
+    
+    <section>
+      <h4>Methods</h4>
+      <table>
+        <tbody>
+          
+          <span class="anchor" id="next()-next()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>next()</code></td>
+            <td>Show next ons-carousel item.</td>
+          </tr>
+          
+          <span class="anchor" id="prev()-prev()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>prev()</code></td>
+            <td>Show previous ons-carousel item.</td>
+          </tr>
+          
+          <span class="anchor" id="first()-first()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>first()</code></td>
+            <td>Show first ons-carousel item.</td>
+          </tr>
+          
+          <span class="anchor" id="last()-last()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>last()</code></td>
+            <td>Show last ons-carousel item.</td>
+          </tr>
+          
+          <span class="anchor" id="setSwipable(swipable)-setSwipable(swipable)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setSwipable(swipable)</code></td>
+            <td>Set whether the carousel is swipable or not.</td>
+          </tr>
+          
+          <span class="anchor" id="isSwipable()-isSwipable()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>isSwipable()</code></td>
+            <td>Returns whether the carousel is swipable or not.</td>
+          </tr>
+          
+          <span class="anchor" id="setActiveCarouselItemIndex(index)-setActiveCarouselItemIndex(index)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setActiveCarouselItemIndex(index)</code></td>
+            <td>[en][/en]
+   [ja]表示するons-carousel-itemをindexで指定する。[/ja] </td>
+          </tr>
+          
+          <span class="anchor" id="getActiveCarouselItemIndex()-getActiveCarouselItemIndex()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>getActiveCarouselItemIndex()</code></td>
+            <td>[en][/en]
+   [ja]現在表示されているons-caroulse-itemのindexを返す。[/ja] </td>
+          </tr>
+          
+          <span class="anchor" id="setAutoScrollEnabled(enabled)-setAutoScrollEnabled(enabled)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setAutoScrollEnabled(enabled)</code></td>
+            <td>[en][/en]
+   [ja]auto-scroll属性があるかどうかを設定する。[/ja] </td>
+          </tr>
+          
+          <span class="anchor" id="isAutoScrollEnabled()-isAutoScrollEnabled()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>isAutoScrollEnabled()</code></td>
+            <td>[en][/en]
+   [ja]auto-scroll属性があるかどうかを返す。[/ja] </td>
+          </tr>
+          
+          <span class="anchor" id="setOverscrollable(overscrollable)-setOverscrollable(overscrollable)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setOverscrollable(overscrollable)</code></td>
+            <td>Set whether the carousel is overscrollabe or not.</td>
+          </tr>
+          
+          <span class="anchor" id="isOverscrollable()-isOverscrollable()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>isOverscrollable()</code></td>
+            <td>Returns whether the carousel is overscrollabe or not.</td>
+          </tr>
+          
+          <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>on(eventName,listener)</code></td>
+            <td>Add an event listener. Preset events are &quot;postchange&quot; and &quot;refresh&quot;.</td>
+          </tr>
+          
+          <span class="anchor" id="refresh()-refresh()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>refresh()</code></td>
+            <td>[en][/en]
+   [ja]レイアウトや内部の状態を最新のものに更新する。ons-caroulse-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用する。[/ja] </td>
+          </tr>
+          
+          <span class="anchor" id="isDisabled()-isDisabled()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>isDisabled()</code></td>
+            <td>Returns whether the dialog is disabled or enabled.</td>
+          </tr>
+          
+          <span class="anchor" id="setDisabled(disabled)-setDisabled(disabled)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setDisabled(disabled)</code></td>
+            <td>Disable or enable the dialog.</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </section>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+</div>
