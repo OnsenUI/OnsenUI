@@ -8,53 +8,53 @@
  *   [ja]カルーセルを表示できるコンポーネント。[/ja]
  *
  * @param direction
- *    [en][/en]
+ *    [en]The direction of this carousel. Can be either "horizontal" or "vertical". Default is "horizontal".[/en]
  *    [ja]カルーセルの方向を指定します。horizontalかverticalを指定できます。デフォルトはhorizontalです。[/ja]
  * @param fullscreen
  *    [en][/en]
  *    [ja]この属性があると、absoluteポジションを使ってカルーセルが自動的に画面いっぱいに広がります。[/ja]
  * @param var
- *    [en][/en]
+ *    [en]Variable name to refer this carousel.[/en]
  *    [ja]このカルーセルを参照するための変数名を指定します。[/ja]
  * @param overscrollable
- *    [en][/en]
+ *    [en]If this attribute is set the carousel can be overscrolled.[/en]
  *    [ja]この属性がある時、タッチやドラッグで端までスクロールした時に、バウンドするような効果が当たります。[/ja]
  * @param item-width
- *    [en][/en]
+ *    [en]ons-carousel-item's width.[/en]
  *    [ja]ons-carousel-itemの幅を指定します。direction属性にhorizontalを指定した時のみ有効です。[/ja]
  * @param item-height
- *    [en][/en]
+ *    [en]ons-carousel-item's height.[/en]
  *    [ja]ons-carousel-itemの高さを指定します。direction属性にverticalを指定した時のみ有効です。[/ja]
  * @param auto-scroll
- *    [en][/en]
+ *    [en]If this attribute is set the carousel can be scrolled automatically to the boundary.[/en]
  *    [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
  * @param swipable
- *    [en][/en]
+ *    [en]If this attribute is set the carousel can be scrolled by drag or swipe.[/en]
  *    [ja]この属性がある時、カルーセルをスワイプやドラッグで移動できるようになります。[/ja]
  * @param disabled
- *    [en][/en]
+ *    [en]If this attribute is set the carousel is disabled.[/en]
  *    [ja]この属性がある時、dargやtouchやswipeで受け付けなくなります。[/ja]
  * @param initial-index
  *    [en][/en]
  *    [ja]最初に表示するons-carousel-itemを0始まりのインデックスで指定します。デフォルトは0です。[/ja]
  *
  * @property next()
- *    [en][/en]
+ *    [en]Show next ons-carousel item.[/en]
  *    [ja]次のons-carousel-itemを表示する。[/ja] 
  * @property prev()
- *    [en][/en]
+ *    [en]Show previous ons-carousel item.[/en]
  *    [ja]前のons-carousel-itemを表示する。[/ja] 
  * @property first()
- *    [en][/en]
+ *    [en]Show first ons-carousel item.[/en]
  *    [ja]最初のons-carousel-itemを表示する。[/ja] 
  * @property last()
- *    [en][/en]
+ *    [en]Show last ons-carousel item.[/en]
  *    [ja]最後のons-caroulse-itemを表示する。[/ja] 
  * @property setSwipable(swipable)
- *    [en][/en]
+ *    [en]Set whether the carousel is swipable or not.[/en]
  *    [ja]swipable属性があるかどうかを設定する。[/ja] 
  * @property isSwipable()
- *    [en][/en]
+ *    [en]Returns whether the carousel is swipable or not.[/en]
  *    [ja]swiapble属性があるかどうかを返す。[/ja] 
  * @property setActiveCarouselItemIndex(index)
  *    [en][/en]
@@ -69,26 +69,26 @@
  *    [en][/en]
  *    [ja]auto-scroll属性があるかどうかを返す。[/ja] 
  * @property setOverscrollable(overscrollable)
- *    [en][/en]
+ *    [en]Set whether the carousel is overscrollabe or not.[/en]
  *    [ja]overscroll属性があるかどうかを設定する。[/ja] 
  * @property isOverscrollable()
- *    [en][/en]
+ *    [en]Returns whether the carousel is overscrollabe or not.[/en]
  *    [ja]overscroll属性があるかどうかを返す。[/ja] 
- * @property on(event,listener)
- *    [en][/en]
- *    [ja]イベントハンドラを指定する。イベント名には、'postchange'と'refresh'を指定できる。[/ja] 
+ * @property on(eventName,listener)
+ *  [en]Add an event listener. Preset events are "postchange" and "refresh".[/en]
+ *  [ja]イベントリスナーを追加します。"postchange"か"refresh"を指定できます。[/ja]
  * @property refresh()
  *    [en][/en]
  *    [ja]レイアウトや内部の状態を最新のものに更新する。ons-caroulse-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用する。[/ja] 
  * @property isDisabled()
- *    [en][/en]
+ *    [en]Returns whether the dialog is disabled or enabled.[/en]
  *    [ja]disabled属性があるかどうかを返す。[/ja] 
  * @property setDisabled(disabled)
- *    [en][/en]
+ *    [en]Disable or enable the dialog.[/en]
  *    [ja]disabled属性があるかどうかを設定する。[/ja] 
  *
  * @example
- *   <ons-carousel>
+ *   <ons-carousel style="width: 100%; height: 200px">
  *     <ons-carousel-item>
  *      ...
  *     </ons-carousel-item>
