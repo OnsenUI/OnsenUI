@@ -106,9 +106,10 @@ navigation-bar__item()
   @extend .navigation-bar__item
   width 46%
   text-align center
-  line-height 44px
+  line-height var-navigation-bar-height
   font-size var-font-size--large
   font-weight var-font-weight--large
+  color var-navigation-bar-color
 
 .navigation-bar__title
   line-height var-navigation-bar-height
@@ -160,6 +161,75 @@ navigation-bar__item()
 
       <div class="navigation-bar__right">
         <span class="toolbar-button--outline navigation-bar__line-height">Button</span>
+      </div>
+    </div>
+*/
+
+/*! topdoc
+  name: Android-like Navigation Bar
+  class: navigation-bar--android
+  hint: .navigation-bar--android
+  use: Navigation Bar, Toolbar Button
+  markup:
+    <div class="navigation-bar navigation-bar--android">
+      <div class="navigation-bar__left navigation-bar--android__left">
+        <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 5px;"><i class="ion-android-arrow-back" style="font-size:20px;"></i></span>
+      </div>
+      <div class="navigation-bar__center navigation-bar--android__center">
+        <span class="toolbar-button navigation-bar__line-height" style="padding:0">
+          <i class="ion-cube" style="font-size:20px;"></i> App Bar
+        </span>
+      </div>
+      <div class="navigation-bar__right navigation-bar--android__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-share" style="font-size:20px;"></i>
+        </span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-more" style="font-size:20px;"></i>
+        </span>
+      </div>
+    </div>
+*/
+.navigation-bar--android__left
+  float left
+  text-align left
+  width auto
+  min-width 10px
+
+.navigation-bar--android__center
+  float left
+  text-align left
+  width auto
+
+.navigation-bar--android__right
+  float right
+  text-align right
+  width auto
+
+.navigation-bar--android__center:first-child:last-child
+  padding-left 10px
+
+/*! topdoc
+  name: Android-like Navigation Bar(2)
+  use: Android-like Navigation Bar
+  markup:
+    <div class="navigation-bar navigation-bar--android">
+      <div class="navigation-bar__left navigation-bar--android__left">
+        <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 0;"><i class="ion-android-drawer" style="font-size:20px;"></i></span>
+      </div>
+      <div class="navigation-bar__center navigation-bar--android__center">
+        App Bar
+      </div>
+      <div class="navigation-bar__right navigation-bar--android__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-star" style="font-size:20px;"></i>
+        </span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-search" style="font-size:20px;"></i>
+        </span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-more" style="font-size:20px;"></i>
+        </span>
       </div>
     </div>
 */

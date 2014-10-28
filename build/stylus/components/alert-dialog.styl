@@ -1,0 +1,262 @@
+/**
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-alert-dialog-separator-color = $alert-dialog-separator-color
+var-alert-dialog-button-color = $alert-dialog-button-color
+var-alert-dialog-background-color = $alert-dialog-background-color
+var-alert-dialog-text-color = $alert-dialog-text-color
+
+retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
+  +retina-query()
+    border-top none
+    background-size 100% 1px
+    background-repeat no-repeat
+    background-position top
+    background-image linear-gradient(180deg, color, color 50%, transparent 50%)
+
+/*! topdoc
+  name: Alert Dialog
+  class: alert-dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-title">Alert</div>
+
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+*/
+.alert-dialog
+  reset-box-model()
+  reset-base()
+  reset-cursor()
+  reset-font()
+  position absolute
+  top 50%
+  left 50%
+  transform translate(-50%, -50%)
+  width 270px
+  margin auto auto
+  background-color var-alert-dialog-background-color
+  box-shadow 0 2px 12px rgba(0, 0, 0, 0.07)
+  border-radius 8px
+  overflow hidden
+  padding 16px 0 0 0
+  max-width 95%
+  color var-alert-dialog-text-color
+
+.alert-dialog-title
+  reset-font()
+  font-size var-font-size--large
+  font-weight var-font-weight--large
+  padding 0px 8px 0px 8px
+  text-align center
+  color var-alert-dialog-text-color
+
+.alert-dialog-content
+  reset-box-model()
+  padding 4px 12px 8px 12px
+  font-size var-font-size--mini
+  min-height 36px
+  text-align center
+  color var-alert-dialog-text-color
+
+.alert-dialog-footer
+  width 100%
+
+.alert-dialog-button
+  reset-box-model()
+  reset-base()
+  reset-font()
+  reset-cursor()
+  ellipsis()
+  text-decoration none
+  letter-spacing var-letter-spacing
+  vertical-align middle
+  border none
+  border-top 1px solid var-alert-dialog-separator-color
+  font-size var-font-size - 1px
+  padding 0 8px
+  margin 0
+  display block
+  width 100%
+  background-color transparent
+  text-align center
+  height 44px
+  line-height 44px
+  outline none
+  color var-alert-dialog-button-color
+  retina-alert-dialog-button-border()
+
+.alert-dialog-button:active
+  background-color rgba(0, 0, 0, 0.05)
+
+.alert-dialog-button--primal
+  font-weight var-font-weight--large
+  
+.alert-dialog-footer--one
+  white-space nowrap
+  display -webkit-box
+  display -webkit-flex
+  display -moz-box
+  display -moz-flex
+  display -ms-flexbox
+  display flex
+  flex-wrap wrap
+
+.alert-dialog-button--one
+  -webkit-box-flex 1
+  -webkit-flex 1
+  -moz-box-flex 1
+  -moz-flex 1
+  -ms-flex 1
+  flex 1
+  display block
+  width 100%
+  border-left 1px solid var-alert-dialog-separator-color
+  +retina-query()
+    border-top none
+    border-left none
+    background-size 100% 1px, 1px 100%
+    background-repeat no-repeat
+    background-position top, left
+    background-image linear-gradient(0deg, transparent, transparent 50%, var-alert-dialog-separator-color 50%), linear-gradient(90deg, transparent, transparent 50%, var-alert-dialog-separator-color 50%)
+
+.alert-dialog-button--one:first-child
+  border-left none 
+  +retina-query()
+    border-top none
+    background-size 100% 1px
+    background-repeat no-repeat
+    background-position top, left
+    background-image linear-gradient(0deg, transparent, transparent 50%, var-alert-dialog-separator-color 50%)
+
+
+.alert-dialog-mask
+  reset-base()
+  reset-cursor()
+  position absolute
+  top 0
+  right 0
+  left 0
+  bottom 0
+  background-color rgba(0, 0, 0, 0.2)
+
+/*! topdoc
+  name: Alert Dialog without Title
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+*/
+
+/*! topdoc
+  name: Alert Dialog with Multiple Buttons
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button">Cancel</button>
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+*/
+
+/*! topdoc
+  name: Alert Dialog with Multiple Buttons 2
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-title">Alert</div>
+
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer alert-dialog-footer--one">
+        <button class="alert-dialog-button alert-dialog-button--one">Left</button>
+        <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Center</button>
+        <button class="alert-dialog-button alert-dialog-button--one">Right</button>
+      </div>
+    </div>
+*/
+
+/*! topdoc
+  name: Android-like Alert Dialog
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+
+    <div class="alert-dialog alert-dialog--android">
+      <div class="alert-dialog-title alert-dialog-title--android">
+        Alert
+      </div>
+
+      <div class="alert-dialog-content alert-dialog-content--android">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer alert-dialog-footer--one">
+        <button class="alert-dialog-button alert-dialog-button--one">Cancel</button>
+        <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Ok</button>
+      </div>
+    </div>
+*/
+.alert-dialog--android
+  border-radius 2px
+  padding 0
+  box-shadow none
+
+.alert-dialog-title--android
+  border-bottom 1px solid var-alert-dialog-separator-color
+  height 52px
+  line-height 52px
+  padding 0 12px
+  margin-bottom 8px
+  text-align left
+
+.alert-dialog-content--android
+  text-align left
+  padding 8px 12px
+

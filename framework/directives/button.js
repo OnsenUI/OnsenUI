@@ -13,10 +13,28 @@
  *    [ja]ボタンにスピナーを表示する場合は指定してください。[/ja]
  * @param animation
  *    [en]The animation when the button transitions to and from the spinner. Possible values are slide-left (default), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in.[/en]
- *    [ja]スピナーを表示する場合のアニメーションを指定します。次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in[/ja]
+ *    [ja]スピナーを表示する場合のアニメーションを指定します。次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
  * @param disabled
  *    [en]Specify if button should be disabled.[/en]
  *    [ja]ボタンを無効化する場合は指定してください。[/ja]
+ * @property startSpin()
+ *    [en]Show spinner on the button.[/en]
+ *    [ja]ボタンにスピナーを表示します。[/ja]
+ * @property stopSpin()
+ *    [en]Remove spinner from button.[/en]
+ *    [ja]ボタンのスピナーを除きます。[/ja]
+ * @property isSpinning()
+ *    [en]Return whether the spinner is visible or not.[/en]
+ *    [ja]ボタンにスピナーは表示されているかどうかを返します。[/ja]
+ * @property setSpinAnimation(animation)
+ *    [en]Set spin animation. Possible values are slide-left (default), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in. [/en]
+ *    [ja]スピナーを表示する場合のアニメーションを指定します。スピナーを表示する次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
+ * @property setDisabled(disabled)
+ *    [en]Disable or enable the button.[/en]
+ *    [ja]このボタンをdisabled状態にするかどうかを設定します。[/ja]
+ * @property isDisabled()
+ *    [en]Returns whether the button is disabled or enabled.[/en]
+ *    [ja]このボタンがdisabled状態かどうかを返します。[/ja] 
  * @codepen hLayx
  * @guide Button [en]Guide for ons-button[/en][ja]ons-buttonの使い方[/ja]
  * @guide OverridingCSSstyles [en]More details about modifier attribute[/en][ja]modifier属性の使い方[/ja]
@@ -27,7 +45,7 @@
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsButton', function($onsen, GenericView) {
+  module.directive('onsButton', function($onsen, ButtonView) {
     return {
       restrict: 'E',
       replace: false,
@@ -37,7 +55,7 @@
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs, _, transclude) {
-        var button = new GenericView(scope, element, attrs);
+        var button = new ButtonView(scope, element, attrs);
         
         $onsen.declareVarAttribute(attrs, button);
 
@@ -51,7 +69,6 @@
           $onsen.aliasStack.unregister('ons.button', button);
           element = null;
         });
-
         var initialAnimation = 'slide-left';
         
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);

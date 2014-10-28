@@ -575,6 +575,7 @@ limitations under the License.
     NavigatorView._transitionAnimatorDict = {
       'default': $onsen.isAndroid() ? new SimpleSlideTransitionAnimator() : new IOSSlideTransitionAnimator(),
       'slide': $onsen.isAndroid() ? new SimpleSlideTransitionAnimator() : new IOSSlideTransitionAnimator(),
+      'simpleslide': new SimpleSlideTransitionAnimator(),
       'lift': new LiftTransitionAnimator(),
       'fade': new FadeTransitionAnimator(),
       'none': new NullTransitionAnimator()

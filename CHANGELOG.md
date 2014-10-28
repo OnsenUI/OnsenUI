@@ -28,10 +28,17 @@ v1.2.0-dev
  * ons-dialog: Implemented 'dialog' component.
  * ons-popover: Implemented 'popover' component.
  * ons-carousel: Implemented 'carousel' component.
+ * ons-tabbar: Added attribute 'no-reload' to tabs to stop the tab from reloading when pressing it twice.
+ * ons-tabbar: The event 'reactive' is triggered when pressing the same tab twice if 'no-reload' is set.
+ * ons-navigator: Fixed [#228](https://github.com/OnsenUI/OnsenUI/issues/228).
+ * ons-switch: Fixed [#252](https://github.com/OnsenUI/OnsenUI/issues/252). Model change is now bound correctly when using ngModel.
+ * css-components: Fixed [#177](https://github.com/OnsenUI/OnsenUI/issues/177). Checkboxes and radio buttons are now clickable on iOS.
+ * ons-button: Added several methods to the component. 
 
 v1.1.4
 ----
 
+ * core: Fixed broken navigation-bar layout on runninng with iOS Cordova in some cases.
  * css-components: Fixed [#217](https://github.com/OnsenUI/OnsenUI/issues/217).
 
 v1.1.3

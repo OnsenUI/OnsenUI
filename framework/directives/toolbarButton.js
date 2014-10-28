@@ -45,6 +45,8 @@
             element = null;
           });
 
+          var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+          
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
@@ -52,6 +54,8 @@
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
           $onsen.addModifierMethods(toolbarButton, 'toolbar-button--*', element.children());
 
+          element.children('span').addClass(modifierTemplater('toolbar-button--*'));
+            
           $onsen.cleaner.onDestroy(scope, function() {
             $onsen.clearComponent({
               scope: scope,
