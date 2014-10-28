@@ -67,11 +67,11 @@ window.ons.orientation = (function() {
           };
         } else if (window.orientation % 180 === 0) {
           this._isPortrait = function() {
-            return window.orientation % 180 === 0 ? isPortrait : !isPortrait;
+            return Math.abs(window.orientation % 180) === 0 ? isPortrait : !isPortrait;
           };
         } else {
           this._isPortrait = function() {
-            return window.orientation % 180 === 90 ? isPortrait : !isPortrait;
+            return Math.abs(window.orientation % 180) === 90 ? isPortrait : !isPortrait;
           };
         }
       },

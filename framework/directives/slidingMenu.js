@@ -51,6 +51,9 @@
  * @property getDeviceBackButtonHandler()
  *  [en]Retrieve the back-button handler.[/en]
  *  [ja]ons-sliding-menuに紐付いているバックボタンハンドラを取得します。[/ja]
+ * @property setSwipable(swipable)
+ *  [en]Set swipable or not.[/en]
+ *  [ja]スワイプで開閉するかどうかを設定する。[/ja]
  * @codepen IDvFJ
  * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
  * @guide UsingSlidingMenu [en]Using sliding menu[/en][ja]スライディングメニューを使う[/ja]

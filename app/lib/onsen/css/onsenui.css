@@ -1,4 +1,4 @@
-/*! onsenui - v1.2.0-dev - 2014-10-17 */
+/*! onsenui - v1.2.0-dev - 2014-10-28 */
 /*
 Copyright 2013-2014 ASIAL CORPORATION
 
@@ -33,6 +33,9 @@ ons-tabbar {
   left: 0;
   bottom: 0;
   right: 0;
+}
+
+ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
   z-index: 2;
 }
 
@@ -101,6 +104,13 @@ ons-toolbar ~ .page__content {
   padding-top: 22px;
 }
 
+ons-dialog[disabled] > .dialog,
+ons-alert-dialog[disabled],
+ons-popover[disabled] {
+  pointer-events: none;
+  opacity: 0.75;
+}
+
 /*
 Copyright 2013-2014 ASIAL CORPORATION
 
@@ -128,14 +138,16 @@ ons-carousel {
 ons-carousel-item {
   display: block;
   height: 100%;
+  visibility: hidden;
 }
 
-.carousel-item--horizontal {
-  
-}
-
-.carousel-item--vertical {
-  
+ons-carousel-cover {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
 }
 
 ons-carousel[fullscreen] {
@@ -144,6 +156,11 @@ ons-carousel[fullscreen] {
   right: 0px;
   left: 0px;
   bottom: 0px;
+}
+
+ons-carousel[disabled] {
+  pointer-events: none;
+  opacity: 0.75;
 }
 
 .effeckt-button {

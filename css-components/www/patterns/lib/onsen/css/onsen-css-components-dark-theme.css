@@ -463,6 +463,7 @@ h6 {
   line-height: 44px;
   font-size: 17px;
   font-weight: 500;
+  color: #fff;
 }
 .navigation-bar__title {
   line-height: 44px;
@@ -513,6 +514,74 @@ h6 {
 
       <div class="navigation-bar__right">
         <span class="toolbar-button--outline navigation-bar__line-height">Button</span>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Android-like Navigation Bar
+  class: navigation-bar--android
+  hint: .navigation-bar--android
+  use: Navigation Bar, Toolbar Button
+  markup:
+    <div class="navigation-bar navigation-bar--android">
+      <div class="navigation-bar__left navigation-bar--android__left">
+        <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 5px;"><i class="ion-android-arrow-back" style="font-size:20px;"></i></span>
+      </div>
+      <div class="navigation-bar__center navigation-bar--android__center">
+        <span class="toolbar-button navigation-bar__line-height" style="padding:0">
+          <i class="ion-cube" style="font-size:20px;"></i> App Bar
+        </span>
+      </div>
+      <div class="navigation-bar__right navigation-bar--android__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-share" style="font-size:20px;"></i>
+        </span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-more" style="font-size:20px;"></i>
+        </span>
+      </div>
+    </div>
+*/
+.navigation-bar--android__left {
+  float: left;
+  text-align: left;
+  width: auto;
+  min-width: 10px;
+}
+.navigation-bar--android__center {
+  float: left;
+  text-align: left;
+  width: auto;
+}
+.navigation-bar--android__right {
+  float: right;
+  text-align: right;
+  width: auto;
+}
+.navigation-bar--android__center:first-child:last-child {
+  padding-left: 10px;
+}
+/* topdoc
+  name: Android-like Navigation Bar(2)
+  use: Android-like Navigation Bar
+  markup:
+    <div class="navigation-bar navigation-bar--android">
+      <div class="navigation-bar__left navigation-bar--android__left">
+        <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 0;"><i class="ion-android-drawer" style="font-size:20px;"></i></span>
+      </div>
+      <div class="navigation-bar__center navigation-bar--android__center">
+        App Bar
+      </div>
+      <div class="navigation-bar__right navigation-bar--android__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-star" style="font-size:20px;"></i>
+        </span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-search" style="font-size:20px;"></i>
+        </span>
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-android-more" style="font-size:20px;"></i>
+        </span>
       </div>
     </div>
 */
@@ -1888,6 +1957,7 @@ h6 {
   position: relative;
   overflow: hidden;
   height: 24px;
+  pointer-events: none;
 }
 .checkbox > input[type="checkbox"] {
   position: absolute;
@@ -2282,6 +2352,7 @@ h6 {
   width: 24px;
   height: 24px;
   background: transparent;
+  pointer-events: none;
 }
 .radio-button > input[type="radio"]:checked + .radio-button__checkmark {
   background: rgba(0,0,0,0);
@@ -2465,10 +2536,10 @@ h6 {
     background-size: 100% 1px;
     background-repeat: no-repeat;
     background-position: bottom;
-    background-image: -webkit-linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
-    background-image: -moz-linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
-    background-image: -o-linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
-    background-image: linear-gradient(0deg, rgba(0,0,0,0), rgba(0,0,0,0) 50%, transparent 50%);
+    background-image: -webkit-linear-gradient(90deg, #424242, #424242 50%, transparent 50%);
+    background-image: -moz-linear-gradient(90deg, #424242, #424242 50%, transparent 50%);
+    background-image: -o-linear-gradient(90deg, #424242, #424242 50%, transparent 50%);
+    background-image: linear-gradient(0deg, #424242, #424242 50%, transparent 50%);
   }
 }
 /* topdoc
@@ -3166,6 +3237,598 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .textarea--transparent::-moz-placeholder,
 .textarea--transparent:-ms-input-placeholder {
   color: #87888f;
+}
+/* topdoc
+  name: Dialog
+  class: dialog
+  markup:
+    <div class="dialog-mask"></div>
+    <div class="dialog">
+      <div class="page">
+        <p style="text-align:center;margin-top:40px;opacity:0.4;">Content</p>
+      </div>
+    </div>
+*/
+.dialog {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  margin: auto auto;
+  background-color: rgba(255,255,255,0.92);
+  -webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  overflow: hidden;
+  min-width: 270px;
+  min-height: 100px;
+  text-align: left;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+.dialog-mask {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.3);
+}
+/* topdoc
+  name: Alert Dialog
+  class: alert-dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-title">Alert</div>
+
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+*/
+.alert-dialog {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 270px;
+  margin: auto auto;
+  background-color: rgba(255,255,255,0.92);
+  -webkit-box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 16px 0 0 0;
+  max-width: 95%;
+  color: #1f1f21;
+}
+.alert-dialog-title {
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 0px 8px 0px 8px;
+  text-align: center;
+  color: #1f1f21;
+}
+.alert-dialog-content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 4px 12px 8px 12px;
+  font-size: 14px;
+  min-height: 36px;
+  text-align: center;
+  color: #1f1f21;
+}
+.alert-dialog-footer {
+  width: 100%;
+}
+.alert-dialog-button {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-decoration: none;
+  letter-spacing: 0;
+  vertical-align: middle;
+  border: none;
+  border-top: 1px solid #ddd;
+  font-size: 16px;
+  padding: 0 8px;
+  margin: 0;
+  display: block;
+  width: 100%;
+  background-color: transparent;
+  text-align: center;
+  height: 44px;
+  line-height: 44px;
+  outline: none;
+  color: #3d74ff;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-image: -webkit-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -moz-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: -o-linear-gradient(270deg, #ddd, #ddd 50%, transparent 50%);
+    background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%);
+  }
+}
+.alert-dialog-button:active {
+  background-color: rgba(0,0,0,0.05);
+}
+.alert-dialog-button--primal {
+  font-weight: 500;
+}
+.alert-dialog-footer--one {
+  white-space: nowrap;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.alert-dialog-button--one {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: block;
+  width: 100%;
+  border-left: 1px solid #ddd;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--one {
+    border-top: none;
+    border-left: none;
+    -webkit-background-size: 100% 1px, 1px 100%;
+    background-size: 100% 1px, 1px 100%;
+    background-repeat: no-repeat;
+    background-position: top, left;
+    background-image: -webkit-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%), -webkit-linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
+    background-image: -moz-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%), -moz-linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
+    background-image: -o-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%), -o-linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
+    background-image: linear-gradient(0deg, transparent, transparent 50%, #ddd 50%), linear-gradient(90deg, transparent, transparent 50%, #ddd 50%);
+  }
+}
+.alert-dialog-button--one:first-child {
+  border-left: none;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .alert-dialog-button--one:first-child {
+    border-top: none;
+    -webkit-background-size: 100% 1px;
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: top, left;
+    background-image: -webkit-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%);
+    background-image: -moz-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%);
+    background-image: -o-linear-gradient(90deg, transparent, transparent 50%, #ddd 50%);
+    background-image: linear-gradient(0deg, transparent, transparent 50%, #ddd 50%);
+  }
+}
+.alert-dialog-mask {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.2);
+}
+/* topdoc
+  name: Alert Dialog without Title
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Alert Dialog with Multiple Buttons
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button">Cancel</button>
+        <button class="alert-dialog-button alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Alert Dialog with Multiple Buttons 2
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+    <div class="alert-dialog">
+      <div class="alert-dialog-title">Alert</div>
+
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer alert-dialog-footer--one">
+        <button class="alert-dialog-button alert-dialog-button--one">Left</button>
+        <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Center</button>
+        <button class="alert-dialog-button alert-dialog-button--one">Right</button>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Android-like Alert Dialog
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog-mask"></div>
+
+    <div class="alert-dialog alert-dialog--android">
+      <div class="alert-dialog-title alert-dialog-title--android">
+        Alert
+      </div>
+
+      <div class="alert-dialog-content alert-dialog-content--android">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer alert-dialog-footer--one">
+        <button class="alert-dialog-button alert-dialog-button--one">Cancel</button>
+        <button class="alert-dialog-button alert-dialog-button--primal alert-dialog-button--one">Ok</button>
+      </div>
+    </div>
+*/
+.alert-dialog--android {
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  padding: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.alert-dialog-title--android {
+  border-bottom: 1px solid #ddd;
+  height: 52px;
+  line-height: 52px;
+  padding: 0 12px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+.alert-dialog-content--android {
+  text-align: left;
+  padding: 8px 12px;
+}
+/* topdoc
+  name: Popover
+  class: popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--up" style="bottom:20px;left:50px;">
+      <div class="popover__bottom-arrow"></div>
+      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+    </div>
+*/
+.popover-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.1);
+}
+.popover {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  position: absolute;
+  width: 220px;
+  min-height: 100px;
+  background-color: #000;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+  color: #fff;
+}
+.popover__bottom-arrow {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  -webkit-transform-origin: 50% 50% 0;
+  -moz-transform-origin: 50% 50% 0;
+  -ms-transform-origin: 50% 50% 0;
+  -o-transform-origin: 50% 50% 0;
+  transform-origin: 50% 50% 0;
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  background-image: -moz-linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  background-image: -o-linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  background-image: linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  -webkit-border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 4px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  bottom: 0;
+  left: 50%;
+  margin-left: -9px;
+  margin-bottom: -9px;
+}
+.popover__top-arrow {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  -webkit-transform-origin: 50% 50% 0;
+  -moz-transform-origin: 50% 50% 0;
+  -ms-transform-origin: 50% 50% 0;
+  -o-transform-origin: 50% 50% 0;
+  transform-origin: 50% 50% 0;
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  background-image: -moz-linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  background-image: -o-linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  background-image: linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  -webkit-border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 4px;
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
+  top: 0;
+  left: 50%;
+  margin-left: -9px;
+  margin-top: -9px;
+}
+.popover__left-arrow {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  -webkit-transform-origin: 50% 50% 0;
+  -moz-transform-origin: 50% 50% 0;
+  -ms-transform-origin: 50% 50% 0;
+  -o-transform-origin: 50% 50% 0;
+  transform-origin: 50% 50% 0;
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  background-image: -moz-linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  background-image: -o-linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  background-image: linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  -webkit-border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 4px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  top: 50%;
+  left: 0;
+  margin-left: -9px;
+  margin-top: -9px;
+}
+.popover__right-arrow {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  -webkit-transform-origin: 50% 50% 0;
+  -moz-transform-origin: 50% 50% 0;
+  -ms-transform-origin: 50% 50% 0;
+  -o-transform-origin: 50% 50% 0;
+  transform-origin: 50% 50% 0;
+  background-color: transparent;
+  background-image: -webkit-linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  background-image: -moz-linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  background-image: -o-linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  background-image: linear-gradient(45deg, #000, #000 50%, transparent 50%);
+  -webkit-border-radius: 0 0 0 4px;
+  border-radius: 0 0 0 4px;
+  -webkit-transform: rotate(225deg);
+  -moz-transform: rotate(225deg);
+  -ms-transform: rotate(225deg);
+  -o-transform: rotate(225deg);
+  transform: rotate(225deg);
+  top: 50%;
+  right: 0;
+  margin-right: -9px;
+  margin-top: -9px;
+}
+/* topdoc
+  name: Popover(down)
+  use: Popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--down" style="top:20px;left:50px;">
+      <div class="popover__top-arrow"></div>
+      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+    </div>
+*/
+/* topdoc
+  name: Popover(left)
+  use: Popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--left" style="top:20px;right:20px;">
+      <div class="popover__right-arrow"></div>
+      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+    </div>
+*/
+/* topdoc
+  name: Popover(right)
+  use: Popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--right" style="top:20px;left:20px;">
+      <div class="popover__left-arrow"></div>
+      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+    </div>
+*/
+/* topdoc
+  name: Android-like Popover
+  use: Popover
+  markup:
+    <div class="popover-mask"></div>
+    <div class="popover popover--up popover--android" style="top:10px;right:10px;">
+      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+    </div>
+*/
+.popover--android {
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 /* topdoc
   name: Modal

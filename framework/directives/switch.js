@@ -39,7 +39,7 @@
   'use strict';
   var module = angular.module('onsen');
 
-  module.directive('onsSwitch', function($onsen, SwitchView) {
+  module.directive('onsSwitch', function($onsen, $parse, SwitchView) {
     return {
       restrict: 'E',
       replace: false,
@@ -78,15 +78,17 @@
           });
 
           if (attrs.ngModel) {
+            var set = $parse(attrs.ngModel).assign;
+
             scope.$parent.$watch(attrs.ngModel, function(value) {
               scope.model = value;
             });
 
             scope.$watch('model', function(model) {
-              scope.$parent[attrs.ngModel] = model;
+              set(scope.$parent, model);
             });
 
-            scope.$parent[attrs.ngModel] = !!element.attr('checked');
+            set(scope.$parent, !!element.attr('checked'));
           }
 
           $onsen.declareVarAttribute(attrs, switchView);

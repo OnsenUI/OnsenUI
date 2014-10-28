@@ -8,7 +8,7 @@ You may obtain a copy of the License at
    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
+:qaistributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
@@ -134,9 +134,11 @@ limitations under the License.
 
         this._doorLock = new DoorLock();
         this._scroll = 0;
+        this._lastActiveIndex = 0;
 
         this._bindedOnDrag = this._onDrag.bind(this);
         this._bindedOnDragEnd = this._onDragEnd.bind(this);
+        this._bindedOnResize = this._onResize.bind(this);
 
         this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
 
@@ -145,6 +147,20 @@ limitations under the License.
         this._setupInitialIndex();
 
         this._scope.$on('$destroy', this._destroy.bind(this));
+
+        this._saveLastState();
+      },
+
+      _onResize: function() {
+        this.refresh();
+      },
+
+      _saveLastState: function() {
+        this._lastState = {
+          elementSize: this._getCarouselItemSize(),
+          caroulseElementCount: this._getCarouselItemCount(),
+          width: this._getCarouselItemSize() * this._getCarouselItemCount()
+        };
       },
 
       /**
@@ -201,6 +217,7 @@ limitations under the License.
 
       _setupInitialIndex: function() {
         this._scroll = this._getCarouselItemSize() * this._getInitialIndex();
+        this._lastActiveIndex = this._getInitialIndex();
         this._scrollTo(this._scroll);
       },
 
@@ -254,7 +271,9 @@ limitations under the License.
         var max = this._calculateMaxScroll();
 
         this._scroll = Math.max(0, Math.min(max, scroll));
-        this._scrollTo(this._scroll, options.animation !== 'none');
+        this._scrollTo(this._scroll, {animate: options.animation !== 'none'});
+
+        this._tryFirePostChangeEvent();
       },
 
       /**
@@ -265,12 +284,18 @@ limitations under the License.
         var count = this._getCarouselItemCount();
         var size = this._getCarouselItemSize();
 
+        if (scroll < 0) {
+          return 0;
+        }
+
         for (var i = 0; i < count; i++) {
           if (size * i <= scroll && size * (i + 1) > scroll) {
             return i;
           }
         }
-        throw new Error('invalid state');
+
+        // max carousel index
+        return i;
       },
 
       /**
@@ -296,9 +321,9 @@ limitations under the License.
        */
       setAutoScrollEnabled: function(enabled) {
         if (enabled) {
-          this._element[0].setAttribute('autoscroll', '');
+          this._element[0].setAttribute('auto-scroll', '');
         } else {
-          this._element[0].removeAttribute('autoscroll');
+          this._element[0].removeAttribute('auto-scroll');
         }
       },
 
@@ -306,7 +331,7 @@ limitations under the License.
        * @param {Boolean} enabled
        */
       isAutoScrollEnabled: function(enabled) {
-        return this._element[0].hasAttribute('autoscroll');
+        return this._element[0].hasAttribute('auto-scroll');
       },
 
       /**
@@ -350,6 +375,16 @@ limitations under the License.
       /**
        * @return {Boolean}
        */
+      _isEnabledChangeEvent: function() {
+        var elementSize = this._getElementSize();
+        var carouselItemSize = this._getCarouselItemSize();
+
+        return this.isAutoScrollEnabled() && elementSize === carouselItemSize;
+      },
+
+      /**
+       * @return {Boolean}
+       */
       _isVertical: function() {
         return this._element.attr('direction') === 'vertical';
       },
@@ -359,6 +394,23 @@ limitations under the License.
 
         this._hammer.on('drag', this._bindedOnDrag);
         this._hammer.on('dragend', this._bindedOnDragEnd);
+
+        angular.element(window).on('resize', this._bindedOnResize);
+      },
+
+      _tryFirePostChangeEvent: function() {
+        var currentIndex = this.getActiveCarouselItemIndex();
+
+        if (this._lastActiveIndex !== currentIndex) {
+          var lastActiveIndex = this._lastActiveIndex;
+          this._lastActiveIndex = currentIndex;
+
+          this.emit('postchange', {
+            carousel: this,
+            activeIndex: currentIndex,
+            lastActiveIndex: lastActiveIndex
+          });
+        }
       },
 
       _onDrag: function(event) {
@@ -367,10 +419,14 @@ limitations under the License.
         var scroll = this._scroll - this._getScrollDelta(event);
         this._scrollTo(scroll);
         event.gesture.preventDefault();
+
+        this._tryFirePostChangeEvent();
       },
 
       _onDragEnd: function(event) {
         this._scroll = this._scroll - this._getScrollDelta(event);
+        this._tryFirePostChangeEvent();
+
         if (this._isOverScroll(this._scroll)) {
           this._scrollToKillOverScroll();
         } else if (this._lastDragEvent !== null) {
@@ -404,6 +460,10 @@ limitations under the License.
               duration: duration,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
+            .queue(function(done) {
+              done();
+              this._tryFirePostChangeEvent();
+            }.bind(this))
             .play();
         }
       },
@@ -453,13 +513,14 @@ limitations under the License.
 
       /**
        * @param {Number} scroll
-       * @param {Boolean} animate
+       * @param {Object} [options]
        */
-      _scrollTo: function(scroll, animate) {
+      _scrollTo: function(scroll, options) {
+        options = options || {};
         var self = this;
         var isOverscrollable = this.isOverscrollable();
 
-        if (animate) {
+        if (options.animate) {
           animit(this._getCarouselItemElements())
             .queue({
               transform: this._generateScrollTransform(normalizeScroll(scroll))
@@ -550,6 +611,31 @@ limitations under the License.
       refresh: function() {
         this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
         this._layoutCarouselItems();
+
+        if (this._lastState && this._lastState.width > 0) {
+          this._scroll = this._scroll / this._lastState.width * this._getCarouselItemSize() * this._getCarouselItemCount();
+          this._scrollTo(this._scroll);
+        }
+
+        this._saveLastState();
+
+        this.emit('refresh', {
+          carousel: this
+        });
+      },
+
+      /**
+       */
+      first: function() {
+        this.setActiveCarouselItemIndex(0);
+      },
+
+      /**
+       */
+      last: function() {
+        this.setActiveCarouselItemIndex(
+          Math.max(this._getCarouselItemCount() - 1, 0)
+        );
       },
 
       _destroy: function() {
@@ -558,7 +644,8 @@ limitations under the License.
         this._hammer.off('drag', this._bindedOnDrag);
         this._hammer.off('dragend', this._bindedOnDragEnd);
 
-        // Remove event listeners
+        angular.element(window).off('resize', this._bindedOnResize);
+
         this._element = this._scope = this._attrs = null;
       }
     });
