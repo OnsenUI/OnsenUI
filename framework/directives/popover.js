@@ -116,7 +116,7 @@
             scope.arrowPosition = 'bottom';
           },
           post: function(scope, element) {
-            $onsen.fireComponentEvent(element[0], "init");
+            $onsen.fireComponentEvent(element[0], 'init');
           }
         };
       }
