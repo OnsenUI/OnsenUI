@@ -58,7 +58,7 @@ limitations under the License.
               timing: this.timing
             }),
 
-          animit(dialog._element[0])
+          animit(dialog._dialog[0])
             .queue({
               css: {
                 transform: 'translate3d(-50%, -50%, 0) scale3d(0.9, 0.9, 1.0)',
@@ -102,7 +102,7 @@ limitations under the License.
               timing: this.timing
             }),
 
-          animit(dialog._element[0])
+          animit(dialog._dialog[0])
             .queue({
               css: {
                 transform: 'translate3d(-50%, -50%, 0) scale3d(1.0, 1.0, 1.0)',

@@ -132,7 +132,7 @@
   /**
    * Toolbar directive.
    */
-  module.directive('onsToolbar', function($onsen) {
+  module.directive('onsToolbar', function($onsen, GenericView) {
     return {
       restrict: 'E',
       replace: false,
@@ -164,6 +164,29 @@
 
         return {
           pre: function(scope, element, attrs) {
+            var toolbar = new GenericView(scope, element, attrs);
+
+            $onsen.declareVarAttribute(attrs, toolbar);
+        
+            $onsen.aliasStack.register('ons.toolbar', toolbar);
+            element.data('ons-toolbar', toolbar);
+
+            scope.$on('$destroy', function() {
+              toolbar._events = undefined;
+              $onsen.removeModifierMethods(toolbar);
+              element.data('ons-toolbar', undefined);
+              $onsen.aliasStack.unregister('ons.toolbar', toolbar);
+              element = null;
+            });
+
+            $onsen.addModifierMethods(toolbar, 'navigation-bar--*', element);
+            angular.forEach(['left', 'center', 'right'], function(position) {
+              var el = element[0].querySelector('.navigation-bar__' + position);
+              if (el) {
+                $onsen.addModifierMethods(toolbar, 'navigation-bar--*__' + position, angular.element(el));
+              }
+            });
+
             var pageView = element.inheritedData('ons-page');
 
             if (pageView && !inline) {

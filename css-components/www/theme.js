@@ -50,6 +50,9 @@
         'alert-dialog-button-color': 'rgba(24,103,194,0.81)',
         'alert-dialog-separator-color': '#ddd',
 
+        // Dialog
+        'dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+
         // Popover
         'popover-background-color': 'white',
         'popover-text-color': '#1f1f21',
@@ -103,6 +106,9 @@
         'alert-dialog-text-color': '#1f1f21',
         'alert-dialog-button-color': '#1284ff',
         'alert-dialog-separator-color': '#ddd',
+        
+        // Dialog
+        'dialog-background-color': 'rgba(255, 255, 255, 0.92)',
 
         // Popover
         'popover-background-color': 'white',
@@ -158,6 +164,9 @@
         'alert-dialog-button-color': '#3d74ff',
         'alert-dialog-separator-color': '#ddd',
 
+        // Dialog
+        'dialog-background-color': 'rgba(255, 255, 255, 0.92)',
+
         // Popover
         'popover-background-color': 'black',
         'popover-text-color': 'white',
@@ -210,6 +219,9 @@
         'alert-dialog-text-color': '#1f1f21',
         'alert-dialog-button-color': '#eb482f',
         'alert-dialog-separator-color': '#ddd',
+
+        // Dialog
+        'dialog-background-color': 'rgba(255, 255, 255, 0.92)',
 
         // Popover
         'popover-background-color': 'white',
@@ -264,6 +276,9 @@
         'alert-dialog-text-color': '#1f1f21',
         'alert-dialog-button-color': '#574bdb',
         'alert-dialog-separator-color': '#ddd',
+        
+        // Dialog
+        'dialog-background-color': 'rgba(255, 255, 255, 0.92)',
 
         // Popover
         'popover-background-color': 'white',

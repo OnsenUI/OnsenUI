@@ -20,9 +20,9 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('AlertDialogView', function($onsen, DialogAnimator, SlideDialogAnimator, AndroidAlertDialogAnimator, IOSAlertDialogAnimator) {
+  module.factory('DialogView', function($onsen, DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator) {
 
-    var AlertDialogView = Class.extend({
+    var DialogView = Class.extend({
 
       /**
        * @param {Object} scope
@@ -32,16 +32,21 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
-        this._element.css({
-          display: 'none',
-          zIndex: 20001
-        });
 
-        this._dialog = element;
+        this._element.css('display', 'none');
+
+        this._dialog = angular.element(element[0].querySelector('.dialog'));
+        this._mask = angular.element(element[0].querySelector('.dialog-mask'));
+
+        this._dialog.css('z-index', 20001);
+        this._mask.css('z-index', 20000);
+
+        this._mask.on('click', this._cancel.bind(this));
+
         this._visible = false;
         this._doorLock = new DoorLock();
 
-        this._animation = AlertDialogView._animatorDict[typeof attrs.animation !== 'undefined' ? 
+        this._animation = DialogView._animatorDict[typeof attrs.animation !== 'undefined' ? 
           attrs.animation : 'default'];
 
         if (!this._animation) {
@@ -49,11 +54,17 @@ limitations under the License.
         }
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
-        this._createMask(attrs.maskColor);
       },
 
       /**
-       * Show alert dialog.
+       *  @return {Object}
+       */
+      getDeviceBackButtonHandler: function() {
+        return this._deviceBackButtonHandler;
+      },
+
+      /**
+       * Show dialog.
        *
        * @param {Object} [options]
        * @param {String} [options.animation] animation type
@@ -65,7 +76,7 @@ limitations under the License.
           callback = options.callback || function() {};
 
         this.emit('preshow', {
-          alertDialog: this,
+          dialog: this,
           cancel: function() { cancel = true; }
         });
         
@@ -74,18 +85,17 @@ limitations under the License.
             var unlock = this._doorLock.lock(),
               animation = this._animation;
 
-            this._mask.css('display', 'block');
-            this._mask.css('opacity', 1);
             this._element.css('display', 'block');
-            
+            this._mask.css('opacity', 1);
+
             if (options.animation) {
-              animation = AlertDialogView._animatorDict[options.animation];
+              animation = DialogView._animatorDict[options.animation];
             }
             
             animation.show(this, function() {
               this._visible = true;
               unlock();
-              this.emit('postshow', {alertDialog: this});
+              this.emit('postshow', {dialog: this});
               callback();
             }.bind(this));
           }.bind(this));
@@ -93,7 +103,7 @@ limitations under the License.
       },
 
       /**
-       * Hide alert dialog.
+       * Hide dialog.
        *
        * @param {Object} [options]
        * @param {String} [options.animation] animation type
@@ -105,7 +115,7 @@ limitations under the License.
           callback = options.callback || function() {};
         
         this.emit('prehide', {
-          alertDialog: this,
+          dialog: this,
           cancel: function() { cancel = true; }
         });
 
@@ -115,15 +125,14 @@ limitations under the License.
               animation = this._animation;
 
             if (options.animation) {
-              animation = AlertDialogView._animatorDict[options.animation];
+              animation = DialogView._animatorDict[options.animation];
             }
 
             animation.hide(this, function() {
               this._element.css('display', 'none');
-              this._mask.css('display', 'none');
               this._visible = false;
               unlock();
-              this.emit('posthide', {alertDialog: this});
+              this.emit('posthide', {dialog: this});
               callback();
             }.bind(this));
           }.bind(this));
@@ -131,7 +140,7 @@ limitations under the License.
       },
 
       /**
-       * True if alert dialog is visible.
+       * True if dialog is visible.
        *
        * @return {Boolean}
        */
@@ -140,22 +149,20 @@ limitations under the License.
       },
 
       /**
-       * Destroy alert dialog.
+       * Destroy dialog.
        */
       destroy: function() {
-        this._mask.off();
-  
         this._element.remove();
-        this._mask.remove();
         this._deviceBackButtonHandler.destroy();
+        this._mask.off();
 
         this._scope.$destroy();
 
-        this._deviceBackButtonHandler = this._element = this._mask = null;
+        this._deviceBackButtonHandler = this._element = this._dialog = this._mask = null;
       },
 
       /**
-       * Disable or enable alert dialog.
+       * Disable or enable dialog.
        *
        * @param {Boolean} 
        */
@@ -172,7 +179,7 @@ limitations under the License.
       },
 
       /**
-       * True if alert dialog is disabled.
+       * True if dialog is disabled.
        *
        * @return {Boolean}
        */
@@ -181,7 +188,7 @@ limitations under the License.
       },
 
       /**
-       * Make alert dialog cancelable or uncancelable. 
+       * Make dialog cancelable or uncancelable. 
        *
        * @param {Boolean}
        */
@@ -197,6 +204,11 @@ limitations under the License.
         }
       },
 
+      /**
+       * True if the dialog is cancelable.
+       *
+       * @return {Boolean}
+       */
       isCancelable: function() {
         return this._element[0].hasAttribute('cancelable');
       },
@@ -217,27 +229,12 @@ limitations under the License.
         } else {
           event.callParentHandler();
         }
-      },
-
-      _createMask: function(color) {
-        this._mask = angular.element('<div>').addClass('alert-dialog-mask').css({
-          zIndex: 20000,
-          display: 'none'
-        });
-
-        this._mask.on('click', this._cancel.bind(this));
- 
-        if (color) {
-          this._mask.css('background-color', color);
-        }
-
-        angular.element(document.body).append(this._mask);
       }
     });
 
-    AlertDialogView._animatorDict = {
-      'default': $onsen.isAndroid() ? new AndroidAlertDialogAnimator() : new IOSAlertDialogAnimator(),
-      'fade': $onsen.isAndroid() ? new AndroidAlertDialogAnimator() : new IOSAlertDialogAnimator(),
+    DialogView._animatorDict = {
+      'default': $onsen.isAndroid() ? new AndroidDialogAnimator() : new IOSDialogAnimator(),
+      'fade': $onsen.isAndroid() ? new AndroidDialogAnimator() : new IOSDialogAnimator(),
       'slide': new SlideDialogAnimator(),
       'none': new DialogAnimator()
     };
@@ -246,16 +243,16 @@ limitations under the License.
      * @param {String} name
      * @param {DialogAnimator} animator
      */
-    AlertDialogView.registerAnimator = function(name, animator) {
+    DialogView.registerAnimator = function(name, animator) {
       if (!(animator instanceof DialogAnimator)) {
         throw new Error('"animator" param must be an instance of DialogAnimator');
       }
       this._animatorDict[name] = animator;
     };
 
-    MicroEvent.mixin(AlertDialogView);
+    MicroEvent.mixin(DialogView);
 
-    return AlertDialogView;
+    return DialogView;
   });
 })();
 
