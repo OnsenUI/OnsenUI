@@ -26,6 +26,7 @@ v1.2.0-dev
  * css-components: Added 'alert-dialog', 'dialog' and 'popover' components.
  * css-components: Changed default color scheme for css-components.
  * ons-popover: Implemented 'popover' component.
+ * ons-carousel: Implemented 'carousel' component.
 
 v1.1.4
 ----
