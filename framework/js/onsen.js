@@ -55,6 +55,10 @@ window.ons = (function(){
         throw new Error('Invalid initialization state.');
       }
 
+      if (document.querySelector('ons-alert-dialog')) {
+        console.warn('Invalid usage of <ons-alert-dialog>.');
+      }
+
       $rootScope.$on('$ons-ready', unlockOnsenUI);
     });
   }
@@ -297,7 +301,6 @@ window.ons = (function(){
        * @return {Boolean}
        */
       isWebView: function() {
-
         if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
           throw new Error('isWebView() method is available after dom contents loaded.');
         }
@@ -338,6 +341,63 @@ window.ons = (function(){
           }
 
           return  alertDialog.data('ons-alert-dialog');
+        });
+      },
+
+      /**
+      * @param {String} page
+      * @return {Promise}
+      */
+      createDialog: function(page) {
+        if (!page) {
+          throw new Error('Page url must be defined.');
+        }
+
+        var dialog = angular.element('<ons-dialog>'),
+        $onsen = this._getOnsenService();
+
+        angular.element(document.body).append(angular.element(dialog));
+
+        return $onsen.getPageHTMLAsync(page).then(function(html) {
+          var div = document.createElement('div');
+          div.innerHTML = html;
+
+          var el = angular.element(div.querySelector('ons-dialog'));
+
+          // Copy attributes and insert html.
+          var attrs = el.prop('attributes');
+          for (var i = 0, l = attrs.length; i < l; i++) {
+            dialog.attr(attrs[i].name, attrs[i].value); 
+          }
+          dialog.html(el.html());
+          ons.compile(dialog[0]);
+
+          if (el.attr('disabled')) {
+            dialog.attr('disabled', 'disabled');
+          }
+
+          var deferred = ons._qService.defer();
+
+          dialog.on('ons-dialog:init', function(e) {
+            // Copy "style" attribute from parent.
+            var child = dialog[0].querySelector('.dialog');
+            if (el[0].hasAttribute('style')) {
+              var parentStyle = el[0].getAttribute('style'),
+              childStyle = child.getAttribute('style'),
+              newStyle = (function(a, b) {
+                var c =
+                (a.substr(-1) === ';' ? a : a + ';') + 
+                  (b.substr(-1) === ';' ? b : b + ';'); 
+                return c;
+              })(parentStyle, childStyle);
+
+              child.setAttribute('style', newStyle);
+            }
+
+            deferred.resolve(e.component);
+          });
+
+          return deferred.promise;
         });
       },
 

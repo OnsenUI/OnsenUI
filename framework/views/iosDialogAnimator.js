@@ -21,15 +21,15 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('IOSAlertDialogAnimator', function(DialogAnimator) {
+  module.factory('IOSDialogAnimator', function(DialogAnimator) {
 
     /**
-     * iOS style animator for alert dialog.
+     * iOS style animator for dialog.
      */
-    var IOSAlertDialogAnimator = DialogAnimator.extend({
+    var IOSDialogAnimator = DialogAnimator.extend({
 
-      timing: 'cubic-bezier(.1, .7, .4, 1)',
-      duration: 0.2, 
+      timing: 'ease-in-out',
+      duration: 0.3, 
 
       init: function(options) {
         options = options || {};
@@ -61,15 +61,13 @@ limitations under the License.
           animit(dialog._dialog[0])
             .queue({
               css: {
-                transform: 'translate3d(-50%, -50%, 0) scale3d(1.3, 1.3, 1.0)',
-                opacity: 0.0
+                transform: 'translate3d(-50%, 300%, 0)'
               },
               duration: 0
             })
             .queue({
               css: {
-                transform: 'translate3d(-50%, -50%, 0) scale3d(1.0, 1.0, 1.0)',
-                opacity: 1.0
+                transform: 'translate3d(-50%, -50%, 0)'
               },
               duration: this.duration,
               timing: this.timing
@@ -105,13 +103,13 @@ limitations under the License.
           animit(dialog._dialog[0])
             .queue({
               css: {
-                opacity: 1.0
+                transform: 'translate3d(-50%, -50%, 0)'
               },
               duration: 0
             })
             .queue({
               css: {
-                opacity: 0.0
+                transform: 'translate3d(-50%, 300%, 0)'
               },
               duration: this.duration,
               timing: this.timing
@@ -126,7 +124,7 @@ limitations under the License.
       }
     });
 
-    return IOSAlertDialogAnimator;
+    return IOSDialogAnimator;
   });
 
 })();
