@@ -12,11 +12,13 @@
   <script src="../app.js"></script>  
 
   <script>
-    function PageController($scope) {
+    var app = angular.module('myApp', ['onsen']);
+
+    app.controller('PageController', function($scope) {
       var options = $scope.myNavigator.getCurrentPage().options;
       console.log(myNavigator.getPages().length);
       console.log(options);
-    }
+    });
   </script>
   
 </head>

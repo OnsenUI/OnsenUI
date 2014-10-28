@@ -27,6 +27,7 @@ v1.2.0-dev
  * css-components: Changed default color scheme for css-components.
  * ons-dialog: Implemented 'dialog' component.
  * ons-popover: Implemented 'popover' component.
+ * core: Updated to AngularJS version 1.3.0.
  * ons-carousel: Implemented 'carousel' component.
  * ons-tabbar: Added attribute 'no-reload' to tabs to stop the tab from reloading when pressing it twice.
  * ons-tabbar: The event 'reactive' is triggered when pressing the same tab twice if 'no-reload' is set.

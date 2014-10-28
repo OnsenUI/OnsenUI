@@ -203,9 +203,10 @@ limitations under the License.
       },
 
       _shouldCollapse: function() {
-        var orientation = this._getOrientation();
-
-        var c = this._scope.collapse.trim();
+        var c = 'portrait';
+        if (typeof this._scope.collapse === 'string') {
+          c = this._scope.collapse.trim();
+        }
         
         if (c == 'portrait') {
           return $onsGlobal.orientation.isPortrait();
