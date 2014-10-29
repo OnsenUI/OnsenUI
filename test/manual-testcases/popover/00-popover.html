@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../build/js/angular/angular.js"></script>    
+    <script src="../../../build/js/onsenui.js"></script>    
+    <script>
+      ons.bootstrap();
+
+      ons.ready(function() {
+        ons.createPopover('popover.html').then(function(popover) {
+          popover.show('#target');
+
+          setTimeout(function() {
+            var el = document.querySelector('.popover'),
+            mask = document.querySelector('.popover-mask');;
+
+            if (!el) {
+              alert('NG 1');  
+              } else {
+              alert('OK 1');
+            }
+
+            if (el.innerHTML.indexOf('Hello') < 0) {
+              alert('NG 2');
+              } else {
+              alert('OK 2');
+            }
+
+            popover.destroy();
+            if (document.querySelector('.popover')) {
+              alert('NG 3');  
+              } else {
+              alert('OK 3');
+            }
+          }, 500);
+
+        });
+      }); 
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <ons-navigator var="navi">
+      <ons-toolbar>
+        <div class="center">Popover test</div>
+      </ons-toolbar>
+      <div style="text-align: center">
+        <br />
+        <br />
+        <ons-button id="target">Click me!</ons-button>
+      </div>
+    </ons-navigator>
+
+    <script type="text/ons-template" id="popover.html">
+      <ons-popover cancelable>
+      Hello
+      </ons-popover>
+    </script>
+
+  </body>
+</html>
