@@ -52,7 +52,7 @@
           element.addClass('list__header ons-list-header-inner');
           element.addClass(templater('list__header--*'));
 
-          $onsen.addModifierMethods(listHeader, 'list__header--*', elem);
+          $onsen.addModifierMethods(listHeader, 'list__header--*', element);
 
           $onsen.fireComponentEvent(element[0], 'init');
         };
