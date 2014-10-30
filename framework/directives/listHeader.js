@@ -31,7 +31,7 @@
       replace: false,
       transclude: false,
 
-      compile: function(elem, attrs, transcludeFn) {
+      compile: function() {
         return function(scope, element, attrs) {
           var listHeader = new GenericView(scope, element, attrs);
 
@@ -49,8 +49,8 @@
           });
          
           var templater = $onsen.generateModifierTemplater(attrs);
-          elem.addClass('list__header ons-list-header-inner');
-          elem.addClass(templater('list__header--*'));
+          element.addClass('list__header ons-list-header-inner');
+          element.addClass(templater('list__header--*'));
 
           $onsen.addModifierMethods(listHeader, 'list__header--*', elem);
 
