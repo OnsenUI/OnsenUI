@@ -16101,7 +16101,11 @@ window.animit = (function(){
 
           elements.forEach(function(element) {
             // force to update rendering
-            element.getBoundingClientRect();
+            try {
+              element.getBoundingClientRect();
+            } catch(e) {
+              // IE10 will create an unspecified error in some cases.
+            }
           });
 
           if (window.requestAnimationFrame) {
