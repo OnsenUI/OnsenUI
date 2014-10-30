@@ -26,7 +26,7 @@
     return {
       restrict: 'E',
       transclude: true,
-      scope: false,
+      scope: {},
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
         pre: function(scope, element, attrs) {
