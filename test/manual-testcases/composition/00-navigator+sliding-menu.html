@@ -9,7 +9,14 @@
     <script src="../../../build/js/onsenui.js"></script>    
     <script src="../vendor/jquery.js"></script>    
     <script>
-      ons.bootstrap();
+      var app = ons.bootstrap();
+
+      app.controller('MyCtrl', function($scope) {
+        $scope.setPage = function(page) {
+          menu.setMainPage(page, {closeMenu: true});
+        };
+
+      });
     </script>
   </head>
   <body>
@@ -18,8 +25,10 @@
     </ons-navigator>
 
     <script type="text/ons-template" id="hoge.html">
+      <ons-page>
       <ons-sliding-menu main-page="page1.html" menu-page="menu.html" side="left" var="menu">
-      </ons-navigator>
+      </ons-sliding-menu>
+      </ons-page>
     </script>
 
     <script type="text/ons-template" id="page1.html">
@@ -50,12 +59,12 @@
     </script>
 
     <script type="text/ons-template" id="menu.html">
-      <ons-list>
-        <ons-list-item modifier="chevron" ng-click="menu.setAbovePage('page1.html', {closeMenu: true})">
+      <ons-list ng-controller="MyCtrl">
+        <ons-list-item modifier="chevron" ng-click="setPage('page1.html')">
           page1.html
         </ons-list-item>
-        <ons-list-item modifier="chevron" ng-click="menu.setAbovePage('page2.html', {closeMenu: true})">
-          page1.html
+        <ons-list-item modifier="chevron" ng-click="setPage('page2.html')">
+          page2.html
         </ons-list-item>
       </ons-list>
     </script>

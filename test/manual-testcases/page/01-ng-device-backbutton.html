@@ -9,7 +9,7 @@
     <script src="../../../build/js/onsenui.js"></script>    
     <script src="../vendor/jquery.js"></script>    
     <script>
-      ons.bootstrap();
+      var app = ons.bootstrap();
 
       $(document).on('pageinit', '#first-page', function() {
         page.setDeviceBackButtonHandler(function() {
@@ -17,7 +17,7 @@
         });
       });
 
-      function AppController($scope, DeviceBackButtonHandler) {
+      app.controller('AppController', function($scope, DeviceBackButtonHandler) {
         $scope.fire = function() {
           DeviceBackButtonHandler.fireDeviceBackButtonEvent();
         };
@@ -28,7 +28,7 @@
             alert('NG: ng-device-backbutton')
           }
         }
-      }
+      });
 
       function onDeviceBackButton(event) {
         if (event.callParentHandler) {

@@ -9,15 +9,15 @@
     <script src="../../../build/js/onsenui.js"></script>    
     <script src="../vendor/jquery.js"></script>    
     <script>
-      ons.bootstrap();
+      var app = ons.bootstrap();
 
       ons.ready(function() {
         menu.setMenuPage('menu-second.html', {closeMenu: true});
       });
 
-      function PageController($scope) {
+      app.controller('PageController', function($scope) {
         alert(document.querySelector('#p') ? 'OK' : 'NG');
-      }
+      });
     </script>
 
     <style>

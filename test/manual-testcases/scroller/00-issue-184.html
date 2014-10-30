@@ -9,9 +9,9 @@
     <script src="../../../build/js/onsenui.js"></script>    
     <script src="../vendor/jquery.js"></script>    
     <script>
-      ons.bootstrap();
+      var app = ons.bootstrap();
 
-      function PageController($scope) {
+      app.controller('PageController', function($scope) {
         $scope.alertFoo = function() {
           if ($scope.foo === 'foo') {
             alert('OK');
@@ -23,7 +23,7 @@
         setTimeout(function() {
           $scope.alertFoo();
         }, 1000);
-      }
+      });
 
     </script>
 
@@ -35,7 +35,7 @@
 
     <ons-page ng-controller="PageController">
       <ons-toolbar>
-        <div class="center">Switch Test</div>
+        <div class="center">Scroller test</div>
       </ons-toolbar>
 
       <ons-scroller style="height: 100px">
