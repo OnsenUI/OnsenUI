@@ -34,14 +34,15 @@
           setImmediate(function() { 
             var div = document.createElement('div');
             div.innerHTML = html.trim();
-            
+
+
             var newElement = angular.element(div);
             newElement.css('display', 'none');
 
             element.append(newElement);
             ons.compile(newElement[0]);
 
-            element.children()[0].remove();
+            angular.element(element.children()[0]).remove();
             newElement.css('display', 'block');
           });
         });
