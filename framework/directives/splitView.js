@@ -22,13 +22,13 @@
  *  [ja]JavaScriptからスプリットビューコンポーネントにアクセスするための変数を定義します。[/ja]
  * @property setMainPage(pageUrl) 
  *  [en]Show the page specified in pageUrl in the right section[/en]
- *  [ja][/ja]
+ *  [ja]指定したURLをメインページを読み込みます。[/ja]
  * @property setSecondaryPage(pageUrl) 
  *  [en]Show the page specified in pageUrl in the left section[/en]
- *  [ja][/ja]
+ *  [ja]指定したURLを左のページの読み込みます。[/ja]
  * @property update() 
  *  [en]Trigger an 'update' event and try to determine if the split behaviour should be changed.[/en]
- *  [ja][/ja]
+ *  [ja]splitモードを変えるべきかどうかを判断するための'update'イベントを発火します。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Preset events are presplit, postsplit, precollapse and postcollapse.[/en]
  *  [ja]イベントリスナーを追加します。presplit, postsplit, precollapse, postcollapse, updateを指定できます。[/ja]
