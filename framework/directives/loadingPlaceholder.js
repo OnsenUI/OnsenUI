@@ -35,7 +35,6 @@
             var div = document.createElement('div');
             div.innerHTML = html.trim();
 
-
             var newElement = angular.element(div);
             newElement.css('display', 'none');
 

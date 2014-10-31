@@ -3,14 +3,13 @@
  * @id split-view
  * @name ons-split-view
  * @description
- *  [en]Divides the screen into left and right section.[/en]
+ *  [en]Divides the screen into a left and right section.[/en]
  *  [ja]画面を左右に分割します。[/ja]
- *
  * @param main-page
  *  [en]The url of the page on the right.[/en]
  *  [ja]右側に表示するページのURLを指定します。[/ja]
  * @param main-page-width
- *  [en]Main page's width percentage. The width of secondary page take the remaining percentage.[/en]
+ *  [en]Main page width percentage. The secondary page width will be the remaining percentage.[/en]
  *  [ja]右側のページの幅をパーセント単位で指定します。[/ja]
  * @param secondary-page
  *  [en]The url of the page on the left.[/en]
@@ -21,10 +20,15 @@
  * @param var 
  *  [en]Variable name to refer this split view.[/en]
  *  [ja]JavaScriptからスプリットビューコンポーネントにアクセスするための変数を定義します。[/ja]
- *
- * @property setMainPage(pageUrl) Show the page specified in pageUrl in the right section
- * @property setSecondaryPage(pageUrl) Show the page specified in pageUrl in the left section
- * @property update() Trigger an 'update' event and try to determine if the split behaviour should be changed.
+ * @property setMainPage(pageUrl) 
+ *  [en]Show the page specified in pageUrl in the right section[/en]
+ *  [ja][/ja]
+ * @property setSecondaryPage(pageUrl) 
+ *  [en]Show the page specified in pageUrl in the left section[/en]
+ *  [ja][/ja]
+ * @property update() 
+ *  [en]Trigger an 'update' event and try to determine if the split behaviour should be changed.[/en]
+ *  [ja][/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Preset events are presplit, postsplit, precollapse and postcollapse.[/en]
  *  [ja]イベントリスナーを追加します。presplit, postsplit, precollapse, postcollapse, updateを指定できます。[/ja]
@@ -48,7 +52,6 @@
     return {
       restrict: 'E',
       replace: false,
-
       transclude: false,
       scope: {
         secondaryPage: '@',

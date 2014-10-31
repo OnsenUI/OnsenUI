@@ -3,7 +3,7 @@
  * @id list
  * @name ons-list
  * @description
- *    [en]Component to defines a list, and the container for ons-list-item(s).[/en]
+ *    [en]Component to define a list, and the container for ons-list-item(s).[/en]
  *    [ja]リストを表現するためのコンポーネント。ons-list-itemのコンテナとして使用します。[/ja]
  * @param modifier
  * @seealso ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]
@@ -31,14 +31,12 @@
       // Do not use isolated scope and template's ng-transclude.
       replace: false,
       transclude: false,
-
       compile: function(element, attrs) {
      
         return function(scope, element, attrs) {
           var list = new GenericView(scope, element, attrs);
           
           $onsen.declareVarAttribute(attrs, list);
-
           $onsen.aliasStack.register('ons.list', list);
           element.data('ons-list', list);
 
@@ -56,7 +54,6 @@
           element.addClass(templater('list--*'));
          
           $onsen.addModifierMethods(list, 'list--*', element);
-
           $onsen.fireComponentEvent(element[0], 'init'); 
         };
       }

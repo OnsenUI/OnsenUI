@@ -15,7 +15,7 @@
  *  [en]Allows you to specify custom behavior when the back button is pressed.[/en]
  *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
  * @param ng-device-backbutton
- *  [en]Allows you to specify custom behavior with AngularJS expresion when the back button is pressed.[/en]
+ *  [en]Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.[/en]
  *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
  * @property getDeviceBackButtonHandler()
  *  [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]

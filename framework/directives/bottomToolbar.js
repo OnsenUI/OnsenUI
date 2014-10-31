@@ -29,7 +29,6 @@
       // Do not use isolated scope and template's ng-transclde.
       transclude: false,
       scope: false,
-
       compile: function(element, attrs) {
         var modifierTemplater = $onsen.generateModifierTemplater(attrs),
           inline = typeof attrs.inline !== 'undefined';
@@ -47,7 +46,6 @@
             var bottomToolbar = new GenericView(scope, element, attrs);
             
             $onsen.declareVarAttribute(attrs, bottomToolbar);
-
             $onsen.aliasStack.register('ons.bottomToolbar', bottomToolbar);
             element.data('ons-bottomToolbar', bottomToolbar);
 

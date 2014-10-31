@@ -3,7 +3,7 @@
  * @id alert-dialog 
  * @name ons-alert-dialog
  * @description 
- *  [en]Alert dialog that is displayed on top of current screen.[/en]
+ *  [en]Alert dialog that is displayed on top of the current screen.[/en]
  *  [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
  * @param var 
  *  [en]Variable name to refer this alert dialog.[/en]
@@ -36,7 +36,7 @@
  *  [en]Destroy the alert dialog and remove it from the DOM tree.[/en]
  *  [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
  * @property setCancelable(cancelable)
- *  [en]Set whether the dialog can be canceled by the user when it is shown.[/en]
+ *  [en]Define whether the dialog can be canceled by the user when it is shown.[/en]
  *  [ja]アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
  * @property isCancelable()
  *  [en]Returns whether the dialog is cancelable or not.[/en]
@@ -109,33 +109,27 @@
 
             $onsen.declareVarAttribute(attrs, alertDialog);
             $onsen.aliasStack.register('ons.alertDialog', alertDialog);
-
             $onsen.addModifierMethods(alertDialog, 'alert-dialog--*', element);
 
             if (titleElement.length) {
               $onsen.addModifierMethods(alertDialog, 'alert-dialog-title--*', titleElement);
             }
-
             if (contentElement.length) {
               $onsen.addModifierMethods(alertDialog, 'alert-dialog-content--*', contentElement);
             }
-
             if ($onsen.isAndroid()) {
               alertDialog.addModifier('android');
             }
 
             element.data('ons-alert-dialog', alertDialog);
-
             scope.$on('$destroy', function() {
               alertDialog._events = undefined;
               $onsen.removeModifierMethods(alertDialog);
               element.data('ons-alert-dialog', undefined);
               $onsen.aliasStack.unregister('ons.alertDialog', alertDialog);
-
               element = null;
             });
           },
-
           post: function(scope, element) {
             $onsen.fireComponentEvent(element[0], 'init');
           }

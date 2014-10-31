@@ -40,7 +40,7 @@
  *  [en]Slide the above layer to hide the layer behind.[/en]
  *  [ja]メニューページを非表示にします。[/ja]
  * @property toggleMenu([options])
- *  [en]Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.[/en]
+ *  [en]Slide the above layer to reveal the layer behind if it is currently hidden, otherwise, hide the layer behind.[/en]
  *  [ja]現在の状況に合わせて、メニューページを表示もしくは非表示にします。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Preset events are preopen, preclose, postopen and postclose.[/en]

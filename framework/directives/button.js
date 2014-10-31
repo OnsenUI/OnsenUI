@@ -27,7 +27,7 @@
  *    [en]Return whether the spinner is visible or not.[/en]
  *    [ja]ボタンにスピナーは表示されているかどうかを返します。[/ja]
  * @property setSpinAnimation(animation)
- *    [en]Set spin animation. Possible values are slide-left (default), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in. [/en]
+ *    [en]Set spin animation. Possible values are slide-left (default), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in.[/en]
  *    [ja]スピナーを表示する場合のアニメーションを指定します。スピナーを表示する次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
  * @property setDisabled(disabled)
  *    [en]Disable or enable the button.[/en]
@@ -58,7 +58,6 @@
         var button = new ButtonView(scope, element, attrs);
         
         $onsen.declareVarAttribute(attrs, button);
-
         $onsen.aliasStack.register('ons.button', button);
         element.data('ons-button', button);
 

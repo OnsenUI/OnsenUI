@@ -95,26 +95,22 @@
               angular.element(element[0].querySelector('.dialog')).append(clone);
             });
 
-
             var dialog = new DialogView(scope, element, attrs);
-
             scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+            
             $onsen.addModifierMethods(dialog, 'dialog--*', angular.element(element[0].querySelector('.dialog')));
-
             $onsen.declareVarAttribute(attrs, dialog);
             $onsen.aliasStack.register('ons.dialog', dialog);
+            
             element.data('ons-dialog', dialog);
-
             scope.$on('$destroy', function() {
               dialog._events = undefined;
               $onsen.removeModifierMethods(dialog);
               element.data('ons-dialog', undefined);
               $onsen.aliasStack.unregister('ons.dialog', dialog);
-
               element = null;
             });
           },
-
           post: function(scope, element) {
             $onsen.fireComponentEvent(element[0], 'init');
           }

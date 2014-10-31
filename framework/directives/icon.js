@@ -15,7 +15,7 @@
  *    [en]The degree to rotate the icon. Valid values are 90, 180, or 270.[/en]
  *    [ja]アイコンを回転して表示します。90, 180, 270から指定できます。[/ja]
  * @param flip
- *    [en]Flip the icon. Valid values are horizontal and vertical.[/en]
+ *    [en]Flip the icon. Valid values are "horizontal" and "vertical".[/en]
  *    [ja]アイコンを反転します。horizontalもしくはverticalを指定できます。[/ja]
  * @param fixed-width
  *    [en]When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are true, false. Default is false.[/en]
