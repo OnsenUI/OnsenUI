@@ -3,8 +3,8 @@
  * @id tabbar
  * @name ons-tabbar
  * @description
- *  [en]A component to display a tab bar on the bottom of a page. Used with ons-tabbar-item to manage pages using tabs.[/en]
- *  [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabbar-itemと組み合わせて使うことで、ページを管理できます。[/ja]
+ *  [en]A component to display a tab bar on the bottom of a page. Used with ons-tab to manage pages using tabs.[/en]
+ *  [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabと組み合わせて使うことで、ページを管理できます。[/ja]
  * @param hide-tabs
  *  [en]Whether to hide the tabs. Valid values are true/false.[/en]
  *  [ja]タブを非表示にする場合に指定します。trueもしくはfalseを指定できます。[/ja]
@@ -34,7 +34,7 @@
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
- * @seealso ons-tabbar-item [en]ons-tabbar-item component[/en][ja]ons-tabbar-itemコンポーネント[/ja]
+ * @seealso ons-tab [en]ons-tab component[/en][ja]ons-tabコンポーネント[/ja]
  * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
  * @example
  * <ons-tabbar>
