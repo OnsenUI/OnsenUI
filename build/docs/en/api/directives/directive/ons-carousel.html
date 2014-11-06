@@ -29,14 +29,13 @@
             <span class="anchor" id="ons-carousel-direction"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">direction</td>
-              <td>The direction of this carousel. Can be either &quot;horizontal&quot; or &quot;vertical&quot;. Default is &quot;horizontal&quot;.</td>
+              <td>The direction of the carousel. Can be either &quot;horizontal&quot; or &quot;vertical&quot;. Default is &quot;horizontal&quot;.</td>
             </tr>
             
             <span class="anchor" id="ons-carousel-fullscreen"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">fullscreen</td>
-              <td>[en][/en]
-   [ja]この属性があると、absoluteポジションを使ってカルーセルが自動的に画面いっぱいに広がります。[/ja]</td>
+              <td>If this attribute is set the carousel will cover the whole screen.</td>
             </tr>
             
             <span class="anchor" id="ons-carousel-var"></span>
@@ -48,25 +47,25 @@
             <span class="anchor" id="ons-carousel-overscrollable"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">overscrollable</td>
-              <td>If this attribute is set the carousel can be overscrolled.</td>
+              <td>If this attribute is set the carousel will be scrollable over the edge. It will bounce back when released.</td>
             </tr>
             
             <span class="anchor" id="ons-carousel-item-width"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">item-width</td>
-              <td>ons-carousel-item&#39;s width.</td>
+              <td>ons-carousel-item&#39;s width. Only works when the direction is set to &quot;horizontal&quot;.</td>
             </tr>
             
             <span class="anchor" id="ons-carousel-item-height"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">item-height</td>
-              <td>ons-carousel-item&#39;s height.</td>
+              <td>ons-carousel-item&#39;s height. Only works when the direction is set to &quot;vertical&quot;.</td>
             </tr>
             
             <span class="anchor" id="ons-carousel-auto-scroll"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">auto-scroll</td>
-              <td>If this attribute is set the carousel can be scrolled automatically to the boundary.</td>
+              <td>If this attribute is set the carousel will be automatically scrolled to the closest item border when released.</td>
             </tr>
             
             <span class="anchor" id="ons-carousel-swipable"></span>
@@ -84,9 +83,7 @@
             <span class="anchor" id="ons-carousel-initial-index"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">initial-index</td>
-              <td>[en][/en]
-   [ja]最初に表示するons-carousel-itemを0始まりのインデックスで指定します。デフォルトは0です。[/ja]
-</td>
+              <td>Specify the index of the ons-carousel-item to show initially. Default is 0.</td>
             </tr>
             
           </tbody>
@@ -140,29 +137,25 @@
           <span class="anchor" id="setActiveCarouselItemIndex(index)-setActiveCarouselItemIndex(index)"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>setActiveCarouselItemIndex(index)</code></td>
-            <td>[en][/en]
-   [ja]表示するons-carousel-itemをindexで指定する。[/ja] </td>
+            <td>Specify the index of the ons-carousel-item to show.</td>
           </tr>
           
           <span class="anchor" id="getActiveCarouselItemIndex()-getActiveCarouselItemIndex()"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>getActiveCarouselItemIndex()</code></td>
-            <td>[en][/en]
-   [ja]現在表示されているons-caroulse-itemのindexを返す。[/ja] </td>
+            <td>Returns the index of the currently visible ons-carousel-item.</td>
           </tr>
           
           <span class="anchor" id="setAutoScrollEnabled(enabled)-setAutoScrollEnabled(enabled)"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>setAutoScrollEnabled(enabled)</code></td>
-            <td>[en][/en]
-   [ja]auto-scroll属性があるかどうかを設定する。[/ja] </td>
+            <td>Enable or disable &quot;auto-scroll&quot; attribute.</td>
           </tr>
           
           <span class="anchor" id="isAutoScrollEnabled()-isAutoScrollEnabled()"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>isAutoScrollEnabled()</code></td>
-            <td>[en][/en]
-   [ja]auto-scroll属性があるかどうかを返す。[/ja] </td>
+            <td>Returns whether the &quot;auto-scroll&quot; attribute is set or not.</td>
           </tr>
           
           <span class="anchor" id="setOverscrollable(overscrollable)-setOverscrollable(overscrollable)"></span>
@@ -186,8 +179,7 @@
           <span class="anchor" id="refresh()-refresh()"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>refresh()</code></td>
-            <td>[en][/en]
-   [ja]レイアウトや内部の状態を最新のものに更新する。ons-caroulse-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用する。[/ja] </td>
+            <td>Update the layout of the carousel. Used when adding ons-carousel-items dynamically to the carousel or to automatically adjust the size.</td>
           </tr>
           
           <span class="anchor" id="isDisabled()-isDisabled()"></span>

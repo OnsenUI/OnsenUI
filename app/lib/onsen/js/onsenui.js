@@ -1,4 +1,4 @@
-/*! onsenui - v1.2.0-dev - 2014-10-28 */
+/*! onsenui - v1.2.0-beta - 2014-10-31 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -11035,9 +11035,10 @@ limitations under the License.
       },
 
       _shouldCollapse: function() {
-        var orientation = this._getOrientation();
-
-        var c = this._scope.collapse.trim();
+        var c = 'portrait';
+        if (typeof this._scope.collapse === 'string') {
+          c = this._scope.collapse.trim();
+        }
         
         if (c == 'portrait') {
           return $onsGlobal.orientation.isPortrait();
@@ -11626,7 +11627,7 @@ limitations under the License.
  * @id alert-dialog 
  * @name ons-alert-dialog
  * @description 
- *  [en]Alert dialog that is displayed on top of current screen.[/en]
+ *  [en]Alert dialog that is displayed on top of the current screen.[/en]
  *  [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
  * @param var 
  *  [en]Variable name to refer this alert dialog.[/en]
@@ -11659,7 +11660,7 @@ limitations under the License.
  *  [en]Destroy the alert dialog and remove it from the DOM tree.[/en]
  *  [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
  * @property setCancelable(cancelable)
- *  [en]Set whether the dialog can be canceled by the user when it is shown.[/en]
+ *  [en]Define whether the dialog can be canceled by the user when it is shown.[/en]
  *  [ja]アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
  * @property isCancelable()
  *  [en]Returns whether the dialog is cancelable or not.[/en]
@@ -11732,33 +11733,27 @@ limitations under the License.
 
             $onsen.declareVarAttribute(attrs, alertDialog);
             $onsen.aliasStack.register('ons.alertDialog', alertDialog);
-
             $onsen.addModifierMethods(alertDialog, 'alert-dialog--*', element);
 
             if (titleElement.length) {
               $onsen.addModifierMethods(alertDialog, 'alert-dialog-title--*', titleElement);
             }
-
             if (contentElement.length) {
               $onsen.addModifierMethods(alertDialog, 'alert-dialog-content--*', contentElement);
             }
-
             if ($onsen.isAndroid()) {
               alertDialog.addModifier('android');
             }
 
             element.data('ons-alert-dialog', alertDialog);
-
             scope.$on('$destroy', function() {
               alertDialog._events = undefined;
               $onsen.removeModifierMethods(alertDialog);
               element.data('ons-alert-dialog', undefined);
               $onsen.aliasStack.unregister('ons.alertDialog', alertDialog);
-
               element = null;
             });
           },
-
           post: function(scope, element) {
             $onsen.fireComponentEvent(element[0], 'init');
           }
@@ -11828,7 +11823,6 @@ limitations under the License.
           ComponentCleaner.onDestroy(scope, function() {
             ComponentCleaner.destroyScope(scope);
             ComponentCleaner.destroyAttributes(attrs);
-
             element = null;
             scope = null;
             attrs = null;
@@ -11873,7 +11867,6 @@ limitations under the License.
       // Do not use isolated scope and template's ng-transclde.
       transclude: false,
       scope: false,
-
       compile: function(element, attrs) {
         var modifierTemplater = $onsen.generateModifierTemplater(attrs),
           inline = typeof attrs.inline !== 'undefined';
@@ -11891,7 +11884,6 @@ limitations under the License.
             var bottomToolbar = new GenericView(scope, element, attrs);
             
             $onsen.declareVarAttribute(attrs, bottomToolbar);
-
             $onsen.aliasStack.register('ons.bottomToolbar', bottomToolbar);
             element.data('ons-bottomToolbar', bottomToolbar);
 
@@ -11949,7 +11941,7 @@ limitations under the License.
  *    [en]Return whether the spinner is visible or not.[/en]
  *    [ja]ボタンにスピナーは表示されているかどうかを返します。[/ja]
  * @property setSpinAnimation(animation)
- *    [en]Set spin animation. Possible values are slide-left (default), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in. [/en]
+ *    [en]Set spin animation. Possible values are slide-left (default), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in.[/en]
  *    [ja]スピナーを表示する場合のアニメーションを指定します。スピナーを表示する次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
  * @property setDisabled(disabled)
  *    [en]Disable or enable the button.[/en]
@@ -11980,7 +11972,6 @@ limitations under the License.
         var button = new ButtonView(scope, element, attrs);
         
         $onsen.declareVarAttribute(attrs, button);
-
         $onsen.aliasStack.register('ons.button', button);
         element.data('ons-button', button);
 
@@ -12058,15 +12049,100 @@ limitations under the License.
  * @ngdoc directive
  * @id carousel
  * @name ons-carousel
- * @param modifier
+ *
+ * @description
+ *   [en]Carousel component.[/en]
+ *   [ja]カルーセルを表示できるコンポーネント。[/ja]
+ *
  * @param direction
+ *    [en]The direction of the carousel. Can be either "horizontal" or "vertical". Default is "horizontal".[/en]
+ *    [ja]カルーセルの方向を指定します。horizontalかverticalを指定できます。デフォルトはhorizontalです。[/ja]
+ * @param fullscreen
+ *    [en]If this attribute is set the carousel will cover the whole screen.[/en]
+ *    [ja]この属性があると、absoluteポジションを使ってカルーセルが自動的に画面いっぱいに広がります。[/ja]
+ * @param var
+ *    [en]Variable name to refer this carousel.[/en]
+ *    [ja]このカルーセルを参照するための変数名を指定します。[/ja]
+ * @param overscrollable
+ *    [en]If this attribute is set the carousel will be scrollable over the edge. It will bounce back when released.[/en]
+ *    [ja]この属性がある時、タッチやドラッグで端までスクロールした時に、バウンドするような効果が当たります。[/ja]
  * @param item-width
- * @param 
+ *    [en]ons-carousel-item's width. Only works when the direction is set to "horizontal".[/en]
+ *    [ja]ons-carousel-itemの幅を指定します。direction属性にhorizontalを指定した時のみ有効です。[/ja]
+ * @param item-height
+ *    [en]ons-carousel-item's height. Only works when the direction is set to "vertical".[/en]
+ *    [ja]ons-carousel-itemの高さを指定します。direction属性にverticalを指定した時のみ有効です。[/ja]
+ * @param auto-scroll
+ *    [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
+ *    [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
+ * @param swipable
+ *    [en]If this attribute is set the carousel can be scrolled by drag or swipe.[/en]
+ *    [ja]この属性がある時、カルーセルをスワイプやドラッグで移動できるようになります。[/ja]
+ * @param disabled
+ *    [en]If this attribute is set the carousel is disabled.[/en]
+ *    [ja]この属性がある時、dargやtouchやswipeで受け付けなくなります。[/ja]
+ * @param initial-index
+ *    [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
+ *    [ja]最初に表示するons-carousel-itemを0始まりのインデックスで指定します。デフォルトは0です。[/ja]
+ *
+ * @property next()
+ *    [en]Show next ons-carousel item.[/en]
+ *    [ja]次のons-carousel-itemを表示する。[/ja] 
+ * @property prev()
+ *    [en]Show previous ons-carousel item.[/en]
+ *    [ja]前のons-carousel-itemを表示する。[/ja] 
+ * @property first()
+ *    [en]Show first ons-carousel item.[/en]
+ *    [ja]最初のons-carousel-itemを表示する。[/ja] 
+ * @property last()
+ *    [en]Show last ons-carousel item.[/en]
+ *    [ja]最後のons-carousel-itemを表示する。[/ja] 
+ * @property setSwipable(swipable)
+ *    [en]Set whether the carousel is swipable or not.[/en]
+ *    [ja]swipable属性があるかどうかを設定する。[/ja] 
+ * @property isSwipable()
+ *    [en]Returns whether the carousel is swipable or not.[/en]
+ *    [ja]swiapble属性があるかどうかを返す。[/ja] 
+ * @property setActiveCarouselItemIndex(index)
+ *    [en]Specify the index of the ons-carousel-item to show.[/en]
+ *    [ja]表示するons-carousel-itemをindexで指定する。[/ja] 
+ * @property getActiveCarouselItemIndex()
+ *    [en]Returns the index of the currently visible ons-carousel-item.[/en]
+ *    [ja]現在表示されているons-carousel-itemのindexを返す。[/ja] 
+ * @property setAutoScrollEnabled(enabled)
+ *    [en]Enable or disable "auto-scroll" attribute.[/en]
+ *    [ja]auto-scroll属性があるかどうかを設定する。[/ja] 
+ * @property isAutoScrollEnabled()
+ *    [en]Returns whether the "auto-scroll" attribute is set or not.[/en]
+ *    [ja]auto-scroll属性があるかどうかを返す。[/ja] 
+ * @property setOverscrollable(overscrollable)
+ *    [en]Set whether the carousel is overscrollabe or not.[/en]
+ *    [ja]overscroll属性があるかどうかを設定する。[/ja] 
+ * @property isOverscrollable()
+ *    [en]Returns whether the carousel is overscrollabe or not.[/en]
+ *    [ja]overscroll属性があるかどうかを返す。[/ja] 
+ * @property on(eventName,listener)
+ *  [en]Add an event listener. Preset events are "postchange" and "refresh".[/en]
+ *  [ja]イベントリスナーを追加します。"postchange"か"refresh"を指定できます。[/ja]
+ * @property refresh()
+ *    [en]Update the layout of the carousel. Used when adding ons-carousel-items dynamically to the carousel or to automatically adjust the size.[/en]
+ *    [ja]レイアウトや内部の状態を最新のものに更新する。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用する。[/ja] 
+ * @property isDisabled()
+ *    [en]Returns whether the dialog is disabled or enabled.[/en]
+ *    [ja]disabled属性があるかどうかを返す。[/ja] 
+ * @property setDisabled(disabled)
+ *    [en]Disable or enable the dialog.[/en]
+ *    [ja]disabled属性があるかどうかを設定する。[/ja] 
+ *
  * @example
- * <ons-carousel>
- *   <ons-carousel-item>Header Text</ons-carousel-item>
- *   <ons-carousel-cover>Header Text</ons-carousel-cover>
- * </ons-carousel>
+ *   <ons-carousel style="width: 100%; height: 200px">
+ *     <ons-carousel-item>
+ *      ...
+ *     </ons-carousel-item>
+ *     <ons-carousel-item>
+ *      ...
+ *     </ons-carousel-item>
+ *   </ons-carousel>
  */
 (function() {
   'use strict';
@@ -12348,26 +12424,22 @@ limitations under the License.
               angular.element(element[0].querySelector('.dialog')).append(clone);
             });
 
-
             var dialog = new DialogView(scope, element, attrs);
-
             scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+            
             $onsen.addModifierMethods(dialog, 'dialog--*', angular.element(element[0].querySelector('.dialog')));
-
             $onsen.declareVarAttribute(attrs, dialog);
             $onsen.aliasStack.register('ons.dialog', dialog);
+            
             element.data('ons-dialog', dialog);
-
             scope.$on('$destroy', function() {
               dialog._events = undefined;
               $onsen.removeModifierMethods(dialog);
               element.data('ons-dialog', undefined);
               $onsen.aliasStack.unregister('ons.dialog', dialog);
-
               element = null;
             });
           },
-
           post: function(scope, element) {
             $onsen.fireComponentEvent(element[0], 'init');
           }
@@ -12499,7 +12571,7 @@ limitations under the License.
  *    [en]The degree to rotate the icon. Valid values are 90, 180, or 270.[/en]
  *    [ja]アイコンを回転して表示します。90, 180, 270から指定できます。[/ja]
  * @param flip
- *    [en]Flip the icon. Valid values are horizontal and vertical.[/en]
+ *    [en]Flip the icon. Valid values are "horizontal" and "vertical".[/en]
  *    [ja]アイコンを反転します。horizontalもしくはverticalを指定できます。[/ja]
  * @param fixed-width
  *    [en]When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are true, false. Default is false.[/en]
@@ -12898,7 +12970,7 @@ limitations under the License.
  * @id list
  * @name ons-list
  * @description
- *    [en]Component to defines a list, and the container for ons-list-item(s).[/en]
+ *    [en]Component to define a list, and the container for ons-list-item(s).[/en]
  *    [ja]リストを表現するためのコンポーネント。ons-list-itemのコンテナとして使用します。[/ja]
  * @param modifier
  * @seealso ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]
@@ -12926,14 +12998,12 @@ limitations under the License.
       // Do not use isolated scope and template's ng-transclude.
       replace: false,
       transclude: false,
-
       compile: function(element, attrs) {
      
         return function(scope, element, attrs) {
           var list = new GenericView(scope, element, attrs);
           
           $onsen.declareVarAttribute(attrs, list);
-
           $onsen.aliasStack.register('ons.list', list);
           element.data('ons-list', list);
 
@@ -12951,7 +13021,6 @@ limitations under the License.
           element.addClass(templater('list--*'));
          
           $onsen.addModifierMethods(list, 'list--*', element);
-
           $onsen.fireComponentEvent(element[0], 'init'); 
         };
       }
@@ -12993,7 +13062,7 @@ limitations under the License.
       replace: false,
       transclude: false,
 
-      compile: function(elem, attrs, transcludeFn) {
+      compile: function() {
         return function(scope, element, attrs) {
           var listHeader = new GenericView(scope, element, attrs);
 
@@ -13011,10 +13080,10 @@ limitations under the License.
           });
          
           var templater = $onsen.generateModifierTemplater(attrs);
-          elem.addClass('list__header ons-list-header-inner');
-          elem.addClass(templater('list__header--*'));
+          element.addClass('list__header ons-list-header-inner');
+          element.addClass(templater('list__header--*'));
 
-          $onsen.addModifierMethods(listHeader, 'list__header--*', elem);
+          $onsen.addModifierMethods(listHeader, 'list__header--*', element);
 
           $onsen.fireComponentEvent(element[0], 'init');
         };
@@ -13092,10 +13161,10 @@ limitations under the License.
  * @name ons-loading-placeholder
  * @description
  *    [en]Display a placeholder while the content is loading.[/en]
- *    [ja][/ja]
+ *    [ja]Onsen UIが読み込まれるまでに表示するプレースホルダーを表現します。[/ja]
  * @param ons-loading-placeholder 
  *    [en]The url of the page to load.[/en]
- *    [ja][/ja]
+ *    [ja]読み込むページのURLを指定します。[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
  * <div ons-loading-placeholder="page.html">
@@ -13122,14 +13191,14 @@ limitations under the License.
           setImmediate(function() { 
             var div = document.createElement('div');
             div.innerHTML = html.trim();
-            
+
             var newElement = angular.element(div);
             newElement.css('display', 'none');
 
             element.append(newElement);
             ons.compile(newElement[0]);
 
-            element.children()[0].remove();
+            angular.element(element.children()[0]).remove();
             newElement.css('display', 'block');
           });
         });
@@ -13390,7 +13459,7 @@ limitations under the License.
  *  [en]Allows you to specify custom behavior when the back button is pressed.[/en]
  *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
  * @param ng-device-backbutton
- *  [en]Allows you to specify custom behavior with AngularJS expresion when the back button is pressed.[/en]
+ *  [en]Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.[/en]
  *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
  * @property getDeviceBackButtonHandler()
  *  [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
@@ -13693,7 +13762,7 @@ limitations under the License.
             scope.arrowPosition = 'bottom';
           },
           post: function(scope, element) {
-            $onsen.fireComponentEvent(element[0], "init");
+            $onsen.fireComponentEvent(element[0], 'init');
           }
         };
       }
@@ -13907,7 +13976,7 @@ limitations under the License.
  *  [en]Slide the above layer to hide the layer behind.[/en]
  *  [ja]メニューページを非表示にします。[/ja]
  * @property toggleMenu([options])
- *  [en]Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.[/en]
+ *  [en]Slide the above layer to reveal the layer behind if it is currently hidden, otherwise, hide the layer behind.[/en]
  *  [ja]現在の状況に合わせて、メニューページを表示もしくは非表示にします。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Preset events are preopen, preclose, postopen and postclose.[/en]
@@ -13958,7 +14027,7 @@ limitations under the License.
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclude.
       transclude: false,
-      scope: false,
+      scope: true,
 
       compile: function(element, attrs) {
         var main = element[0].querySelector('.main'),
@@ -14012,14 +14081,13 @@ limitations under the License.
  * @id split-view
  * @name ons-split-view
  * @description
- *  [en]Divides the screen into left and right section.[/en]
+ *  [en]Divides the screen into a left and right section.[/en]
  *  [ja]画面を左右に分割します。[/ja]
- *
  * @param main-page
  *  [en]The url of the page on the right.[/en]
  *  [ja]右側に表示するページのURLを指定します。[/ja]
  * @param main-page-width
- *  [en]Main page's width percentage. The width of secondary page take the remaining percentage.[/en]
+ *  [en]Main page width percentage. The secondary page width will be the remaining percentage.[/en]
  *  [ja]右側のページの幅をパーセント単位で指定します。[/ja]
  * @param secondary-page
  *  [en]The url of the page on the left.[/en]
@@ -14030,10 +14098,15 @@ limitations under the License.
  * @param var 
  *  [en]Variable name to refer this split view.[/en]
  *  [ja]JavaScriptからスプリットビューコンポーネントにアクセスするための変数を定義します。[/ja]
- *
- * @property setMainPage(pageUrl) Show the page specified in pageUrl in the right section
- * @property setSecondaryPage(pageUrl) Show the page specified in pageUrl in the left section
- * @property update() Trigger an 'update' event and try to determine if the split behaviour should be changed.
+ * @property setMainPage(pageUrl) 
+ *  [en]Show the page specified in pageUrl in the right section[/en]
+ *  [ja]指定したURLをメインページを読み込みます。[/ja]
+ * @property setSecondaryPage(pageUrl) 
+ *  [en]Show the page specified in pageUrl in the left section[/en]
+ *  [ja]指定したURLを左のページの読み込みます。[/ja]
+ * @property update() 
+ *  [en]Trigger an 'update' event and try to determine if the split behaviour should be changed.[/en]
+ *  [ja]splitモードを変えるべきかどうかを判断するための'update'イベントを発火します。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Preset events are presplit, postsplit, precollapse and postcollapse.[/en]
  *  [ja]イベントリスナーを追加します。presplit, postsplit, precollapse, postcollapse, updateを指定できます。[/ja]
@@ -14057,7 +14130,6 @@ limitations under the License.
     return {
       restrict: 'E',
       replace: false,
-
       transclude: false,
       scope: {
         secondaryPage: '@',
@@ -14783,7 +14855,7 @@ limitations under the License.
     return {
       restrict: 'E',
       transclude: true,
-      scope: false,
+      scope: {},
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
         pre: function(scope, element, attrs) {
