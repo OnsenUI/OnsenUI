@@ -29,7 +29,9 @@ var-popover-radius = 8px
     <div class="popover-mask"></div>
     <div class="popover popover--up" style="bottom:20px;left:50px;">
       <div class="popover__bottom-arrow"></div>
-      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      <div class="popover__content">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
     </div>
 */
 .popover-mask
@@ -48,10 +50,16 @@ var-popover-radius = 8px
   position absolute
   width 220px
   min-height 100px
+
+.popover__content
   background-color var-popover-background-color
   border-radius var-popover-radius
   box-shadow 0 2px 16px rgba(0, 0, 0, 0.1)
   color var-popover-text-color
+  overflow hidden
+
+.popover__content > *
+  overflow hidden
 
 popover-arrow()
   content ''
@@ -102,7 +110,9 @@ popover-arrow()
     <div class="popover-mask"></div>
     <div class="popover popover--down" style="top:20px;left:50px;">
       <div class="popover__top-arrow"></div>
-      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      <div class="popover__content">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
     </div>
 */
 
@@ -113,7 +123,9 @@ popover-arrow()
     <div class="popover-mask"></div>
     <div class="popover popover--left" style="top:20px;right:20px;">
       <div class="popover__right-arrow"></div>
-      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      <div class="popover__content">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
     </div>
 */
 
@@ -124,7 +136,9 @@ popover-arrow()
     <div class="popover-mask"></div>
     <div class="popover popover--right" style="top:20px;left:20px;">
       <div class="popover__left-arrow"></div>
-      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      <div class="popover__content">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
     </div>
 */
 
@@ -133,10 +147,12 @@ popover-arrow()
   use: Popover
   markup:
     <div class="popover-mask"></div>
-    <div class="popover popover--up popover--android" style="top:10px;right:10px;">
-      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+    <div class="popover popover--up popover" style="top:10px;right:10px;">
+      <div class="popover__content popover__content--android">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
     </div>
 */
-.popover--android
+.popover__content--android
   border-radius 2px
 
