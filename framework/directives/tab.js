@@ -3,10 +3,10 @@
  * @id tabbar_item
  * @name ons-tab
  * @description
- *  [en]Represents a tab inside tabbar. Each ons-tabbar-item represents a page.[/en]
+ *  [en]Represents a tab inside tabbar. Each ons-tab represents a page.[/en]
  *  [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。[/ja]
  * @param page
- *  [en]The page that this ons-tabbar-item points to.[/en]
+ *  [en]The page that this ons-tab points to.[/en]
  *  [ja]ons-tabが参照するページへのURLを指定します。[/ja]
  * @param icon
  *  [en]The icon name of the tab. Can specify the same icon name as ons-icon. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.[/en]
