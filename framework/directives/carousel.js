@@ -28,7 +28,7 @@
  * @param auto-scroll
  *    [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
  *    [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
- * @param swipable
+ * @param swipeable
  *    [en]If this attribute is set the carousel can be scrolled by drag or swipe.[/en]
  *    [ja]この属性がある時、カルーセルをスワイプやドラッグで移動できるようになります。[/ja]
  * @param disabled
@@ -50,11 +50,11 @@
  * @property last()
  *    [en]Show last ons-carousel item.[/en]
  *    [ja]最後のons-carousel-itemを表示する。[/ja] 
- * @property setSwipable(swipable)
- *    [en]Set whether the carousel is swipable or not.[/en]
- *    [ja]swipable属性があるかどうかを設定する。[/ja] 
- * @property isSwipable()
- *    [en]Returns whether the carousel is swipable or not.[/en]
+ * @property setSwipeable(swipeable)
+ *    [en]Set whether the carousel is swipeable or not.[/en]
+ *    [ja]swipeable属性があるかどうかを設定する。[/ja] 
+ * @property isSwipeable()
+ *    [en]Returns whether the carousel is swipeable or not.[/en]
  *    [ja]swiapble属性があるかどうかを返す。[/ja] 
  * @property setActiveCarouselItemIndex(index)
  *    [en]Specify the index of the ons-carousel-item to show.[/en]

@@ -222,21 +222,21 @@ limitations under the License.
       },
 
       /**
-       * @param {Boolean} swipable
+       * @param {Boolean} swipeable
        */
-      setSwipable: function(swipable) {
-        if (swipable) {
-          this._element[0].setAttribute('swipable', '');
+      setSwipeable: function(swipeable) {
+        if (swipeable) {
+          this._element[0].setAttribute('swipeable', '');
         } else {
-          this._element[0].removeAttribute('swipable');
+          this._element[0].removeAttribute('swipeable');
         }
       },
 
       /**
        * @return {Boolean}
        */
-      isSwipable: function() {
-        return this._element[0].hasAttribute('swipable');
+      isSwipeable: function() {
+        return this._element[0].hasAttribute('swipeable');
       },
 
       /**
