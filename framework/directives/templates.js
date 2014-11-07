@@ -55,6 +55,7 @@ app.run(['$templateCache', function($templateCache) {
   $templateCache.put('templates/popover.tpl',
     '<div class="popover-mask"></div>\n' +
     '<div class="popover popover--{{ direction }} {{ modifierTemplater(\'popover--*\') }}">\n' +
+    '  <div class="popover__content {{ modifierTemplater(\'popover__content--*\') }}"></div>\n' +
     '  <div class="popover__{{ arrowPosition }}-arrow"></div>\n' +
     '</div>\n' +
     '');
