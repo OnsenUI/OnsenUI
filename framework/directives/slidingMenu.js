@@ -11,11 +11,11 @@
  * @param main-page
  *  [en]The url of the page to be set to the right side.[/en]
  *  [ja]右に位置するメインページのURLを指定します。[/ja]
- * @param swipable
+ * @param swipeable
  *  [en]Whether to enable swipe interaction.[/en]
  *  [ja]スワイプ操作を有効にする場合に指定します。[/ja]
  * @param swipe-target-width
- *  [en]The width of swipable area calculated from the left (in pixel). Use this to enable swipe only when the finger touch on the screen edge.[/en]
+ *  [en]The width of swipeable area calculated from the left (in pixel). Use this to enable swipe only when the finger touch on the screen edge.[/en]
  *  [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]
  * @param max-slide-distance
  *  [en]How far the menu page will slide open. Can specify both in px and %. eg. 90%, 200px[/en]
@@ -51,8 +51,8 @@
  * @property getDeviceBackButtonHandler()
  *  [en]Retrieve the back-button handler.[/en]
  *  [ja]ons-sliding-menuに紐付いているバックボタンハンドラを取得します。[/ja]
- * @property setSwipable(swipable)
- *  [en]Set swipable or not.[/en]
+ * @property setSwipeable(swipeable)
+ *  [en]Set swipeable or not.[/en]
  *  [ja]スワイプで開閉するかどうかを設定する。[/ja]
  * @codepen IDvFJ
  * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
