@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v1.2.0-beta
+v1.2.0
 ----
 
  * ons-screen: Removed.
