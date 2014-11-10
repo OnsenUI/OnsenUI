@@ -169,7 +169,6 @@
             $onsen.declareVarAttribute(attrs, toolbar);
         
             $onsen.aliasStack.register('ons.toolbar', toolbar);
-            element.data('ons-toolbar', toolbar);
 
             scope.$on('$destroy', function() {
               toolbar._events = undefined;
@@ -192,6 +191,8 @@
             if (pageView && !inline) {
               pageView.registerToolbar(element);
             }
+
+            element.data('ons-toolbar', toolbar);
           },
           post: function(scope, element, attrs) {
             $onsen.fireComponentEvent(element[0], 'init');  
