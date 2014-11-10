@@ -85,7 +85,7 @@
         return { 
           pre: function(scope, element, attrs) {
             transclude(scope, function(clone) {
-              angular.element(element[0].querySelector('.popover')).append(clone);
+              angular.element(element[0].querySelector('.popover__content')).append(clone);
             });
 
             var popover = new PopoverView(scope, element, attrs);
@@ -105,6 +105,7 @@
 
             scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
             $onsen.addModifierMethods(popover, 'popover--*', angular.element(element[0].querySelector('.popover'))); 
+            $onsen.addModifierMethods(popover, 'popover__content--*', angular.element(element[0].querySelector('.popover__content'))); 
 
             if ($onsen.isAndroid()) {
               setImmediate(function() {

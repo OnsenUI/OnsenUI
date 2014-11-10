@@ -99,10 +99,10 @@ limitations under the License.
         var el = angular.element(this._element[0].querySelector('.popover')),
           pos = target.getBoundingClientRect(),
           own = el[0].getBoundingClientRect(),
-          arrow = angular.element(el.children()[0]),
+          arrow = angular.element(el.children()[1]),
           offset = 14,
           margin = 6,
-          radius = parseInt(window.getComputedStyle(el[0]).borderRadius);
+          radius = parseInt(window.getComputedStyle(el[0].querySelector('.popover__content')).borderRadius);
 
         arrow.css({
           top: '',
