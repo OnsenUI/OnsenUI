@@ -12,13 +12,13 @@
  *  [en]The appearance of the dialog.[/en]
  *  [ja]ダイアログの表現を指定します。[/ja]
  * @param cancelable
- *  [en]If this attribute is set the dialog can be closed by tapping the background or pressing the back button.[/en] 
+ *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en] 
  *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
  * @param disabled
  *  [en]If this attribute is set the dialog is disabled.[/en]
  *  [ja]この属性がある時、アラートダイアログはdisabled状態になります。[/ja]
  * @param animation
- *  [en]The animation used when showing an hiding the dialog. Can be either "none" or "default".[/en]
+ *  [en]The animation used when showing and hiding the dialog. Can be either "none" or "default".[/en]
  *  [ja]ダイアログを表示する際のアニメーション名を指定します。[/ja]
  * @param mask-color
  *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
@@ -36,7 +36,7 @@
  *  [en]Destroy the alert dialog and remove it from the DOM tree.[/en]
  *  [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
  * @property setCancelable(cancelable)
- *  [en]Define whether the dialog can be canceled by the user when it is shown.[/en]
+ *  [en]Define whether the dialog can be canceled by the user or not.[/en]
  *  [ja]アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
  * @property isCancelable()
  *  [en]Returns whether the dialog is cancelable or not.[/en]

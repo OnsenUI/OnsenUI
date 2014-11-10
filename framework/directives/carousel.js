@@ -69,16 +69,16 @@
  *    [en]Returns whether the "auto-scroll" attribute is set or not.[/en]
  *    [ja]auto-scroll属性があるかどうかを返す。[/ja] 
  * @property setOverscrollable(overscrollable)
- *    [en]Set whether the carousel is overscrollabe or not.[/en]
+ *    [en]Set whether the carousel is overscrollable or not.[/en]
  *    [ja]overscroll属性があるかどうかを設定する。[/ja] 
  * @property isOverscrollable()
- *    [en]Returns whether the carousel is overscrollabe or not.[/en]
+ *    [en]Returns whether the carousel is overscrollable or not.[/en]
  *    [ja]overscroll属性があるかどうかを返す。[/ja] 
  * @property on(eventName,listener)
- *  [en]Add an event listener. Preset events are "postchange" and "refresh".[/en]
- *  [ja]イベントリスナーを追加します。"postchange"か"refresh"を指定できます。[/ja]
+ *    [en]Add an event listener. Preset events are "postchange" and "refresh".[/en]
+ *    [ja]イベントリスナーを追加します。"postchange"か"refresh"を指定できます。[/ja]
  * @property refresh()
- *    [en]Update the layout of the carousel. Used when adding ons-carousel-items dynamically to the carousel or to automatically adjust the size.[/en]
+ *    [en]Update the layout of the carousel. Used when adding ons-carousel-items dynamically or to automatically adjust the size.[/en]
  *    [ja]レイアウトや内部の状態を最新のものに更新する。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用する。[/ja] 
  * @property isDisabled()
  *    [en]Returns whether the dialog is disabled or enabled.[/en]

@@ -51,7 +51,7 @@
 *  [en]Returns whether the popover is disabled or enabled.[/en]
 *  [ja]このポップオーバーがdisabled状態かどうかを返します。[/ja]
 * @property on(eventName,listener)
-*  [en]Add an event listener. Preset events are preshow, postshow, prehide and posthide.[/en]
+*  [en]Add an event listener. Preset events are "preshow", "postshow", "prehide" and "posthide".[/en]
 *  [ja]イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。[/ja]
 * @example
 * <script>
