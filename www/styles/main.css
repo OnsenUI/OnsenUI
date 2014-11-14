@@ -366,31 +366,96 @@ div#content-container > header > div:nth-child(2) {
   width: 600px;
 }
 div#header-monaca {
-  background-color: #3a3a3a;
+  background-color: rgba(38, 38, 38, 0.9);
   height: 48px;
 }
-div#header-monaca:hover {
-  opacity: 0.8;
+div#header-monaca-inner {
+  width: 100%;
+  margin: 0px auto;
+  position: relative;
 }
-div#header-monaca #header-monaca-inner {
-  margin: 0px 0px 0px 44px;
-}
-div#header-monaca img {
-  margin-top: 9px;
+div#header-monaca-inner img {
+  margin-top: 12px;
+  margin-left: 42px;
   float: left;
 }
-div#header-monaca img:hover {
-  opacity: 1.0;
+div#header-monaca-inner a,
+div#header-monaca-inner a:link,
+div#header-monaca-inner a:visited,
+div#header-monaca-inner a:hover {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
 }
-div#header-monaca a {
-  text-decoration: none !important;
+div#header-monaca-inner a:hover {
+  color: #80d4ff;
 }
-div#header-monaca span {
-  color: #cbcbcb;
+ul#header-monaca-navi {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 800px;
+  padding: 0;
+  margin: 0;
+  font-size: 0px;
+  text-align: right;
+  height: 48px;
+}
+ul#header-monaca-navi > li {
+  margin: 0;
+  padding: 0 20px;
+  display: inline-block;
+  position: relative;
+  left: 0px;
+  top: 0px;
+  height: 48px;
+  line-height: 48px;
+  list-style: none;
+  text-align: left;
+}
+ul#header-monaca-navi > li:hover {
+  background-color: #2c2c2c;
+  height: 48px;
+}
+ul#header-monaca-navi > li:hover > ul {
   display: block;
-  font-size: 13px;
-  margin: 19px 0px 0px 15px;
-  float: left;
+}
+ul.header-monaca-navi-sub-menu {
+  display: none;
+  z-index: 2;
+  position: absolute;
+  top: 48px;
+  left: 0px;
+  padding: 10px 0 10px 0;
+  margin: 0;
+  background-color: #2c2c2c;
+}
+ul.header-monaca-navi-sub-menu li {
+  list-style: none;
+  min-width: 240px;
+  padding: 0;
+  margin: 0;
+  background-color: #2c2c2c;
+}
+ul.header-monaca-navi-sub-menu a,
+ul.header-monaca-navi-sub-menu a:link,
+ul.header-monaca-navi-sub-menu a:hover,
+ul.header-monaca-navi-sub-menu a:visited {
+  padding: 0 30px;
+  line-height: 38px;
+  height: 38px;
+  width: 100%;
+  font-size: 15px !important;
+  box-sizing: border-box;
+  display: block !important;
+}
+ul.header-monaca-navi-sub-menu a:hover {
+  background-color: #383838;
+  color: #80d4ff;
+}
+ul#header-monaca-navi > li:last-child ul.header-monaca-navi-sub-menu {
+  right: 0px;
+  left: auto;
 }
 div#customizer-panel {
   position: absolute;
