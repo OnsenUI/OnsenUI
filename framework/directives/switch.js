@@ -27,7 +27,7 @@
  *  [en]Get inner input[type=checkbox] element.[/en]
  *  [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]
  * @property on(eventName,listener)
- *  [en]Add an event listener. Possible event name is change.[/en]
+ *  [en]Add an event listener. Possible event name is "change".[/en]
  *  [ja]イベントリスナーを追加します。changeイベントを使用できます。[/ja]
  * @guide UsingFormComponents [en]Using form components[/en][ja]フォームを使う[/ja]
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]

@@ -12,10 +12,10 @@
  *  [en]Variable name to refer this tabbar.[/en]
  *  [ja]JavaScriptからコンポーネントにアクセスするための変数名を指定します。[/ja]
  * @param animation
- *  [en]Animation name. Preset values are none/fade.[/en]
+ *  [en]Animation name. Preset values are "none" and "fade". Default is "none".[/en]
  *  [ja]ページ読み込み時のアニメーションを指定します。noneもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
  * @param position
- *  [en]Tabbar's position. Preset values are bottom/top.[/en]
+ *  [en]Tabbar's position. Preset values are "bottom" and "top". Default is "bottom".[/en]
  *  [ja]タブバーの位置を指定します。bottomもしくはtopを選択できます。デフォルトはbottomです。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Possible events are prechange, postchange and reactive. See the guide for more details.[/en]

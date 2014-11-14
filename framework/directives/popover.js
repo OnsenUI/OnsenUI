@@ -51,7 +51,7 @@
 *  [en]Returns whether the popover is disabled or enabled.[/en]
 *  [ja]このポップオーバーがdisabled状態かどうかを返します。[/ja]
 * @property on(eventName,listener)
-*  [en]Add an event listener. Preset events are preshow, postshow, prehide and posthide.[/en]
+*  [en]Add an event listener. Preset events are "preshow", "postshow", "prehide" and "posthide".[/en]
 *  [ja]イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。[/ja]
 * @example
 * <script>
@@ -85,7 +85,7 @@
         return { 
           pre: function(scope, element, attrs) {
             transclude(scope, function(clone) {
-              angular.element(element[0].querySelector('.popover')).append(clone);
+              angular.element(element[0].querySelector('.popover__content')).append(clone);
             });
 
             var popover = new PopoverView(scope, element, attrs);
@@ -105,6 +105,7 @@
 
             scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
             $onsen.addModifierMethods(popover, 'popover--*', angular.element(element[0].querySelector('.popover'))); 
+            $onsen.addModifierMethods(popover, 'popover__content--*', angular.element(element[0].querySelector('.popover__content'))); 
 
             if ($onsen.isAndroid()) {
               setImmediate(function() {

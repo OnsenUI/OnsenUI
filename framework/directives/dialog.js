@@ -18,7 +18,7 @@
  *  [en]If this attribute is set the dialog is disabled.[/en]
  *  [ja]この属性がある時、ダイアログはdisabled状態になります。[/ja]
  * @param animation
- *  [en]The animation used when showing an hiding the dialog. Can be either "none" or "default".[/en]
+ *  [en]The animation used when showing and hiding the dialog. Can be either "none" or "default".[/en]
  *  [ja]ダイアログを表示する際のアニメーション名を指定します。[/ja]
  * @param mask-color
  *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
@@ -39,7 +39,7 @@
  *  [en]Retrieve the back button handler for overriding the default behavior.[/en]
  *  [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
  * @property setCancelable(cancelable)
- *  [en]Set whether the dialog can be canceled by the user when it is shown.[/en]
+ *  [en]Set whether the dialog can be canceled by the user or not.[/en]
  *  [ja]ダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
  * @property isCancelable()
  *  [en]Returns whether the dialog is cancelable or not.[/en]

@@ -12,7 +12,7 @@
  *    [en]The sizes of the icon. Valid values are lg, 2x, 3x, 4x, 5x, or in pixels.[/en]
  *    [ja]アイコンのサイズを指定します。値は、lg, 2x, 3x, 4x, 5xもしくはピクセル単位で指定できます。[/ja]
  * @param rotate
- *    [en]The degree to rotate the icon. Valid values are 90, 180, or 270.[/en]
+ *    [en]Number of degrees to rotate the icon. Valid values are 90, 180, or 270.[/en]
  *    [ja]アイコンを回転して表示します。90, 180, 270から指定できます。[/ja]
  * @param flip
  *    [en]Flip the icon. Valid values are "horizontal" and "vertical".[/en]

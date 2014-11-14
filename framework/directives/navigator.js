@@ -18,16 +18,16 @@
  *  [en]Insert the specified pageUrl into the page stack with specified index.[/en]
  *  [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
  * @property popPage()
- *  [en]Pops current page from the page stack. One previous page will be displayed.[/en]
+ *  [en]Pops the current page from the page stack. The previous page will be displayed.[/en]
  *  [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
  * @property resetToPage(pageUrl,options)
- *  [en]Clears page stack and add the specified pageUrl to the page stack.[/en]
+ *  [en]Clears page stack and adds the specified pageUrl to the page stack.[/en]
  *  [ja]ページスタックをリセットし、指定したページを表示します。[/ja]
  * @property getCurrentPage()
  *  [en]Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method.[/en]
  *  [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
  * @property getPages()
- *  [en]Retrieve the entire page stacks of the navigator.[/en]
+ *  [en]Retrieve the entire page stack of the navigator.[/en]
  *  [ja]ナビゲーターの持つページスタックの一覧を取得します。[/ja]
  * @property getDeviceBackButtonHandler()
  *  [en]Retrieve the back button handler for overriding the default behavior.[/en]

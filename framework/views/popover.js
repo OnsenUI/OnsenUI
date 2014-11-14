@@ -99,17 +99,27 @@ limitations under the License.
         var el = angular.element(this._element[0].querySelector('.popover')),
           pos = target.getBoundingClientRect(),
           own = el[0].getBoundingClientRect(),
-          arrow = angular.element(el.children()[0]),
+          arrow = angular.element(el.children()[1]),
           offset = 14,
-          margin = 6;
+          margin = 6,
+          radius = parseInt(window.getComputedStyle(el[0].querySelector('.popover__content')).borderRadius);
 
         arrow.css({
           top: '',
           left: ''
         });
 
+        // This is the difference between the side and the hypothenuse of the arrow.
+        var diff = (function(x) {
+          return (x / 2) * Math.sqrt(2) - x / 2;
+        })(parseInt(window.getComputedStyle(arrow[0]).width));
+
+        // This is the limit for the arrow. If it's moved further than this it's outside the popover.
+        var limit = margin + radius + diff;
+
         this._setDirection(direction);
- 
+
+        // Position popover next to the target.
         if (['left', 'right'].indexOf(direction) > -1) {
           if (direction == 'left') {
             el.css('left', (pos.right - pos.width - own.width - offset) + 'px');
@@ -126,23 +136,24 @@ limitations under the License.
           el.css('left', (pos.right - pos.width / 2 - own.width / 2) + 'px');
         }
 
-        pos = el[0].getBoundingClientRect();
+        own = el[0].getBoundingClientRect();
 
+        // Keep popover inside window and arrow inside popover.
         if (['left', 'right'].indexOf(direction) > -1) {
-          if (pos.top < margin) {
-            arrow.css('top', (pos.height / 2 + pos.top - margin) + 'px');
+          if (own.top < margin) {
+            arrow.css('top', Math.max(own.height / 2 + own.top - margin, limit)  + 'px');
             el.css('top', margin + 'px');
-          } else if (pos.bottom > window.innerHeight - margin) {
-            arrow.css('top', (pos.height / 2 - (window.innerHeight - pos.bottom) + margin) + 'px');
-            el.css('top', (window.innerHeight - pos.height - margin) + 'px');
+          } else if (own.bottom > window.innerHeight - margin) {
+            arrow.css('top', Math.min(own.height / 2 - (window.innerHeight - own.bottom) + margin, own.height - limit) + 'px');
+            el.css('top', (window.innerHeight - own.height - margin) + 'px');
           }
         } else {
-        if (pos.left < margin) {
-            arrow.css('left', (pos.width / 2 + pos.left - margin) + 'px');
+        if (own.left < margin) {
+            arrow.css('left', Math.max(own.width / 2 + own.left - margin, limit) + 'px');
             el.css('left', margin + 'px');
-          } else if (pos.right > window.innerWidth - margin) {
-            arrow.css('left', (pos.width / 2 - (window.innerWidth - pos.right) + margin) + 'px');
-            el.css('left', (window.innerWidth - pos.width - margin) + 'px');
+          } else if (own.right > window.innerWidth - margin) {
+            arrow.css('left', Math.min(own.width / 2 - (window.innerWidth - own.right) + margin, own.width - limit) + 'px');
+            el.css('left', (window.innerWidth - own.width - margin) + 'px');
           }
         }
       },

@@ -191,7 +191,7 @@ limitations under the License.
         }.bind(this));
 
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
-        attrs.$observe('swipable', this._onSwipableChanged.bind(this));
+        attrs.$observe('swipeable', this._onSwipeableChanged.bind(this));
 
         window.addEventListener('resize', this._onWindowResize.bind(this));
 
@@ -273,16 +273,16 @@ limitations under the License.
         return animator.copy();
       },
 
-      _onSwipableChanged: function(swipable) {
-        swipable = swipable === '' || swipable === undefined || swipable == 'true';
+      _onSwipeableChanged: function(swipeable) {
+        swipeable = swipeable === '' || swipeable === undefined || swipeable == 'true';
 
-        this.setSwipable(swipable);
+        this.setSwipeable(swipeable);
       },
 
       /**
        * @param {Boolean} enabled
        */
-      setSwipable: function(enabled) {
+      setSwipeable: function(enabled) {
         if (enabled) {
           this._activateHammer();
         } else {

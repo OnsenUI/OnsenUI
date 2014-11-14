@@ -1,4 +1,4 @@
-/*! onsenui - v1.2.0-beta - 2014-10-31 */
+/*! onsenui - v1.2.0 - 2014-11-10 */
 /**
  * @license AngularJS v1.3.0
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -29558,6 +29558,7 @@ app.run(['$templateCache', function($templateCache) {
   $templateCache.put('templates/popover.tpl',
     '<div class="popover-mask"></div>\n' +
     '<div class="popover popover--{{ direction }} {{ modifierTemplater(\'popover--*\') }}">\n' +
+    '  <div class="popover__content {{ modifierTemplater(\'popover__content--*\') }}"></div>\n' +
     '  <div class="popover__{{ arrowPosition }}-arrow"></div>\n' +
     '</div>\n' +
     '');
@@ -31161,21 +31162,21 @@ limitations under the License.
       },
 
       /**
-       * @param {Boolean} swipable
+       * @param {Boolean} swipeable
        */
-      setSwipable: function(swipable) {
-        if (swipable) {
-          this._element[0].setAttribute('swipable', '');
+      setSwipeable: function(swipeable) {
+        if (swipeable) {
+          this._element[0].setAttribute('swipeable', '');
         } else {
-          this._element[0].removeAttribute('swipable');
+          this._element[0].removeAttribute('swipeable');
         }
       },
 
       /**
        * @return {Boolean}
        */
-      isSwipable: function() {
-        return this._element[0].hasAttribute('swipable');
+      isSwipeable: function() {
+        return this._element[0].hasAttribute('swipeable');
       },
 
       /**
@@ -34529,17 +34530,27 @@ limitations under the License.
         var el = angular.element(this._element[0].querySelector('.popover')),
           pos = target.getBoundingClientRect(),
           own = el[0].getBoundingClientRect(),
-          arrow = angular.element(el.children()[0]),
+          arrow = angular.element(el.children()[1]),
           offset = 14,
-          margin = 6;
+          margin = 6,
+          radius = parseInt(window.getComputedStyle(el[0].querySelector('.popover__content')).borderRadius);
 
         arrow.css({
           top: '',
           left: ''
         });
 
+        // This is the difference between the side and the hypothenuse of the arrow.
+        var diff = (function(x) {
+          return (x / 2) * Math.sqrt(2) - x / 2;
+        })(parseInt(window.getComputedStyle(arrow[0]).width));
+
+        // This is the limit for the arrow. If it's moved further than this it's outside the popover.
+        var limit = margin + radius + diff;
+
         this._setDirection(direction);
- 
+
+        // Position popover next to the target.
         if (['left', 'right'].indexOf(direction) > -1) {
           if (direction == 'left') {
             el.css('left', (pos.right - pos.width - own.width - offset) + 'px');
@@ -34556,23 +34567,24 @@ limitations under the License.
           el.css('left', (pos.right - pos.width / 2 - own.width / 2) + 'px');
         }
 
-        pos = el[0].getBoundingClientRect();
+        own = el[0].getBoundingClientRect();
 
+        // Keep popover inside window and arrow inside popover.
         if (['left', 'right'].indexOf(direction) > -1) {
-          if (pos.top < margin) {
-            arrow.css('top', (pos.height / 2 + pos.top - margin) + 'px');
+          if (own.top < margin) {
+            arrow.css('top', Math.max(own.height / 2 + own.top - margin, limit)  + 'px');
             el.css('top', margin + 'px');
-          } else if (pos.bottom > window.innerHeight - margin) {
-            arrow.css('top', (pos.height / 2 - (window.innerHeight - pos.bottom) + margin) + 'px');
-            el.css('top', (window.innerHeight - pos.height - margin) + 'px');
+          } else if (own.bottom > window.innerHeight - margin) {
+            arrow.css('top', Math.min(own.height / 2 - (window.innerHeight - own.bottom) + margin, own.height - limit) + 'px');
+            el.css('top', (window.innerHeight - own.height - margin) + 'px');
           }
         } else {
-        if (pos.left < margin) {
-            arrow.css('left', (pos.width / 2 + pos.left - margin) + 'px');
+        if (own.left < margin) {
+            arrow.css('left', Math.max(own.width / 2 + own.left - margin, limit) + 'px');
             el.css('left', margin + 'px');
-          } else if (pos.right > window.innerWidth - margin) {
-            arrow.css('left', (pos.width / 2 - (window.innerWidth - pos.right) + margin) + 'px');
-            el.css('left', (window.innerWidth - pos.width - margin) + 'px');
+          } else if (own.right > window.innerWidth - margin) {
+            arrow.css('left', Math.min(own.width / 2 - (window.innerWidth - own.right) + margin, own.width - limit) + 'px');
+            el.css('left', (window.innerWidth - own.width - margin) + 'px');
           }
         }
       },
@@ -35833,7 +35845,7 @@ limitations under the License.
         }.bind(this));
 
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
-        attrs.$observe('swipable', this._onSwipableChanged.bind(this));
+        attrs.$observe('swipeable', this._onSwipeableChanged.bind(this));
 
         window.addEventListener('resize', this._onWindowResize.bind(this));
 
@@ -35915,16 +35927,16 @@ limitations under the License.
         return animator.copy();
       },
 
-      _onSwipableChanged: function(swipable) {
-        swipable = swipable === '' || swipable === undefined || swipable == 'true';
+      _onSwipeableChanged: function(swipeable) {
+        swipeable = swipeable === '' || swipeable === undefined || swipeable == 'true';
 
-        this.setSwipable(swipable);
+        this.setSwipeable(swipeable);
       },
 
       /**
        * @param {Boolean} enabled
        */
-      setSwipable: function(enabled) {
+      setSwipeable: function(enabled) {
         if (enabled) {
           this._activateHammer();
         } else {
@@ -37220,13 +37232,13 @@ limitations under the License.
  *  [en]The appearance of the dialog.[/en]
  *  [ja]ダイアログの表現を指定します。[/ja]
  * @param cancelable
- *  [en]If this attribute is set the dialog can be closed by tapping the background or pressing the back button.[/en] 
+ *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en] 
  *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
  * @param disabled
  *  [en]If this attribute is set the dialog is disabled.[/en]
  *  [ja]この属性がある時、アラートダイアログはdisabled状態になります。[/ja]
  * @param animation
- *  [en]The animation used when showing an hiding the dialog. Can be either "none" or "default".[/en]
+ *  [en]The animation used when showing and hiding the dialog. Can be either "none" or "default".[/en]
  *  [ja]ダイアログを表示する際のアニメーション名を指定します。[/ja]
  * @param mask-color
  *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
@@ -37244,7 +37256,7 @@ limitations under the License.
  *  [en]Destroy the alert dialog and remove it from the DOM tree.[/en]
  *  [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
  * @property setCancelable(cancelable)
- *  [en]Define whether the dialog can be canceled by the user when it is shown.[/en]
+ *  [en]Define whether the dialog can be canceled by the user or not.[/en]
  *  [ja]アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
  * @property isCancelable()
  *  [en]Returns whether the dialog is cancelable or not.[/en]
@@ -37659,7 +37671,7 @@ limitations under the License.
  * @param auto-scroll
  *    [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
  *    [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
- * @param swipable
+ * @param swipeable
  *    [en]If this attribute is set the carousel can be scrolled by drag or swipe.[/en]
  *    [ja]この属性がある時、カルーセルをスワイプやドラッグで移動できるようになります。[/ja]
  * @param disabled
@@ -37681,11 +37693,11 @@ limitations under the License.
  * @property last()
  *    [en]Show last ons-carousel item.[/en]
  *    [ja]最後のons-carousel-itemを表示する。[/ja] 
- * @property setSwipable(swipable)
- *    [en]Set whether the carousel is swipable or not.[/en]
- *    [ja]swipable属性があるかどうかを設定する。[/ja] 
- * @property isSwipable()
- *    [en]Returns whether the carousel is swipable or not.[/en]
+ * @property setSwipeable(swipeable)
+ *    [en]Set whether the carousel is swipeable or not.[/en]
+ *    [ja]swipeable属性があるかどうかを設定する。[/ja] 
+ * @property isSwipeable()
+ *    [en]Returns whether the carousel is swipeable or not.[/en]
  *    [ja]swiapble属性があるかどうかを返す。[/ja] 
  * @property setActiveCarouselItemIndex(index)
  *    [en]Specify the index of the ons-carousel-item to show.[/en]
@@ -37700,16 +37712,16 @@ limitations under the License.
  *    [en]Returns whether the "auto-scroll" attribute is set or not.[/en]
  *    [ja]auto-scroll属性があるかどうかを返す。[/ja] 
  * @property setOverscrollable(overscrollable)
- *    [en]Set whether the carousel is overscrollabe or not.[/en]
+ *    [en]Set whether the carousel is overscrollable or not.[/en]
  *    [ja]overscroll属性があるかどうかを設定する。[/ja] 
  * @property isOverscrollable()
- *    [en]Returns whether the carousel is overscrollabe or not.[/en]
+ *    [en]Returns whether the carousel is overscrollable or not.[/en]
  *    [ja]overscroll属性があるかどうかを返す。[/ja] 
  * @property on(eventName,listener)
- *  [en]Add an event listener. Preset events are "postchange" and "refresh".[/en]
- *  [ja]イベントリスナーを追加します。"postchange"か"refresh"を指定できます。[/ja]
+ *    [en]Add an event listener. Preset events are "postchange" and "refresh".[/en]
+ *    [ja]イベントリスナーを追加します。"postchange"か"refresh"を指定できます。[/ja]
  * @property refresh()
- *    [en]Update the layout of the carousel. Used when adding ons-carousel-items dynamically to the carousel or to automatically adjust the size.[/en]
+ *    [en]Update the layout of the carousel. Used when adding ons-carousel-items dynamically or to automatically adjust the size.[/en]
  *    [ja]レイアウトや内部の状態を最新のものに更新する。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用する。[/ja] 
  * @property isDisabled()
  *    [en]Returns whether the dialog is disabled or enabled.[/en]
@@ -37805,7 +37817,7 @@ limitations under the License.
  *    [en]Represents a column in the grid system. Use with ons-row to layout components.[/en]
  *    [ja]グリッドシステムにて列を定義します。ons-rowとともに使用し、コンポーネントの配置に使用します。[/ja]
  * @param align
- *    [en]Vertical align the column. Valid values are top, center, and bottom.[/en]
+ *    [en]Vertical alignment of the column. Valid values are "top", "center", and "bottom".[/en]
  *    [ja]縦の配置を指定します。次の値から選択してください: top, center, bottom[/ja]
  *
  * @param width
@@ -37931,7 +37943,7 @@ limitations under the License.
  *  [en]If this attribute is set the dialog is disabled.[/en]
  *  [ja]この属性がある時、ダイアログはdisabled状態になります。[/ja]
  * @param animation
- *  [en]The animation used when showing an hiding the dialog. Can be either "none" or "default".[/en]
+ *  [en]The animation used when showing and hiding the dialog. Can be either "none" or "default".[/en]
  *  [ja]ダイアログを表示する際のアニメーション名を指定します。[/ja]
  * @param mask-color
  *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
@@ -37952,7 +37964,7 @@ limitations under the License.
  *  [en]Retrieve the back button handler for overriding the default behavior.[/en]
  *  [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
  * @property setCancelable(cancelable)
- *  [en]Set whether the dialog can be canceled by the user when it is shown.[/en]
+ *  [en]Set whether the dialog can be canceled by the user or not.[/en]
  *  [ja]ダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
  * @property isCancelable()
  *  [en]Returns whether the dialog is cancelable or not.[/en]
@@ -38152,7 +38164,7 @@ limitations under the License.
  *    [en]The sizes of the icon. Valid values are lg, 2x, 3x, 4x, 5x, or in pixels.[/en]
  *    [ja]アイコンのサイズを指定します。値は、lg, 2x, 3x, 4x, 5xもしくはピクセル単位で指定できます。[/ja]
  * @param rotate
- *    [en]The degree to rotate the icon. Valid values are 90, 180, or 270.[/en]
+ *    [en]Number of degrees to rotate the icon. Valid values are 90, 180, or 270.[/en]
  *    [ja]アイコンを回転して表示します。90, 180, 270から指定できます。[/ja]
  * @param flip
  *    [en]Flip the icon. Valid values are "horizontal" and "vertical".[/en]
@@ -38341,10 +38353,10 @@ limitations under the License.
  * @id if-platform
  * @name ons-if-platform
  * @description
- *    [en]Conditionally display content depending on the platform / browser. Valid values are ios, android, blackberry, chrome, safari, firefox, and opera.[/en]
+ *    [en]Conditionally display content depending on the platform / browser. Valid values are "ios", "android", "blackberry", "chrome", "safari", "firefox", and "opera".[/en]
  *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaを指定できます。[/ja]
  * @param ons-if-platform
- *    [en]Either opera, firefox, safari, chrome, ie, android, blackberry, ios or windows.[/en]
+ *    [en]Either "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".[/en]
  *    [ja]opera, firefox, safari, chrome, ie, android, blackberry, ios, windowsから指定します。[/ja]
  * @seealso ons-if-orientation [en]ons-if-orientation component[/en][ja]ons-if-orientationコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
@@ -38682,7 +38694,7 @@ limitations under the License.
  * @name ons-list-item
  * @param modifier
  * @description
- *    [en]Component that represents each item in the list. Must be put inside ons-list component.[/en]
+ *    [en]Component that represents each item in the list. Must be put inside the ons-list component.[/en]
  *    [ja]リストの各要素を表現するためのコンポーネント。ons-listコンポーネントと共に使用します。[/ja]
  * @seealso ons-list [en]ons-list component[/en][ja]ons-listコンポーネント[/ja]
  * @seealso ons-list-header [en]ons-list-header component[/en][ja]ons-list-headerコンポーネント[/ja]
@@ -38797,22 +38809,22 @@ limitations under the License.
  * @id modal
  * @name ons-modal
  * @description 
- *  [en]Modal component that mask current screen. Underlying components are not noticed from any events while the modal component is shown.[/en]
+ *  [en]Modal component that masks current screen. Underlying components are not subject to any events while the modal component is shown.[/en]
  *  [ja]画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、モーダルが表示されている間はイベント通知が行われません。[/ja]
  * @param var 
  *  [en]Variable name to refer this modal.[/en]
  *  [ja]このコンポーネントを参照するための変数名を指定します。[/ja]
  * @property toggle()
- *  [en]Toggle modal view visibility.[/en]
+ *  [en]Toggle modal visibility.[/en]
  *  [ja]モーダルの表示を切り替えます。[/ja]
  * @property show()
- *  [en]Show modal view.[/en]
+ *  [en]Show modal.[/en]
  *  [ja]モーダルを表示します。[/ja]
  * @property hide()
- *  [en]Hide modal view.[/en]
+ *  [en]Hide modal.[/en]
  *  [ja]モーダルを非表示にします。[/ja]
  * @property getDeviceBackButtonHandler()
- *  [en]Retrieve the back-button handler.[/en]
+ *  [en]Retrieve the back button handler.[/en]
  *  [ja]ons-modalに紐付いているバックボタンハンドラを取得します。[/ja]
  * @guide UsingModal [en]Using ons-modal component[/en][ja]モーダルの使い方[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
@@ -38916,16 +38928,16 @@ limitations under the License.
  *  [en]Insert the specified pageUrl into the page stack with specified index.[/en]
  *  [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
  * @property popPage()
- *  [en]Pops current page from the page stack. One previous page will be displayed.[/en]
+ *  [en]Pops the current page from the page stack. The previous page will be displayed.[/en]
  *  [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
  * @property resetToPage(pageUrl,options)
- *  [en]Clears page stack and add the specified pageUrl to the page stack.[/en]
+ *  [en]Clears page stack and adds the specified pageUrl to the page stack.[/en]
  *  [ja]ページスタックをリセットし、指定したページを表示します。[/ja]
  * @property getCurrentPage()
  *  [en]Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method.[/en]
  *  [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
  * @property getPages()
- *  [en]Retrieve the entire page stacks of the navigator.[/en]
+ *  [en]Retrieve the entire page stack of the navigator.[/en]
  *  [ja]ナビゲーターの持つページスタックの一覧を取得します。[/ja]
  * @property getDeviceBackButtonHandler()
  *  [en]Retrieve the back button handler for overriding the default behavior.[/en]
@@ -39281,7 +39293,7 @@ limitations under the License.
 *  [en]Returns whether the popover is disabled or enabled.[/en]
 *  [ja]このポップオーバーがdisabled状態かどうかを返します。[/ja]
 * @property on(eventName,listener)
-*  [en]Add an event listener. Preset events are preshow, postshow, prehide and posthide.[/en]
+*  [en]Add an event listener. Preset events are "preshow", "postshow", "prehide" and "posthide".[/en]
 *  [ja]イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。[/ja]
 * @example
 * <script>
@@ -39315,7 +39327,7 @@ limitations under the License.
         return { 
           pre: function(scope, element, attrs) {
             transclude(scope, function(clone) {
-              angular.element(element[0].querySelector('.popover')).append(clone);
+              angular.element(element[0].querySelector('.popover__content')).append(clone);
             });
 
             var popover = new PopoverView(scope, element, attrs);
@@ -39335,6 +39347,7 @@ limitations under the License.
 
             scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
             $onsen.addModifierMethods(popover, 'popover--*', angular.element(element[0].querySelector('.popover'))); 
+            $onsen.addModifierMethods(popover, 'popover__content--*', angular.element(element[0].querySelector('.popover__content'))); 
 
             if ($onsen.isAndroid()) {
               setImmediate(function() {
@@ -39526,16 +39539,16 @@ limitations under the License.
  *  [en]Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.[/en]
  *  [ja]スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。[/ja]
  * @param menu-page
- *  [en]The url of the page to be set to the left side.[/en]
+ *  [en]The url of the menu page.[/en]
  *  [ja]左に位置するメニューページのURLを指定します。[/ja]
  * @param main-page
- *  [en]The url of the page to be set to the right side.[/en]
+ *  [en]The url of the main page.[/en]
  *  [ja]右に位置するメインページのURLを指定します。[/ja]
- * @param swipable
+ * @param swipeable
  *  [en]Whether to enable swipe interaction.[/en]
  *  [ja]スワイプ操作を有効にする場合に指定します。[/ja]
  * @param swipe-target-width
- *  [en]The width of swipable area calculated from the left (in pixel). Use this to enable swipe only when the finger touch on the screen edge.[/en]
+ *  [en]The width of swipeable area calculated from the left (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]
  *  [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]
  * @param max-slide-distance
  *  [en]How far the menu page will slide open. Can specify both in px and %. eg. 90%, 200px[/en]
@@ -39544,7 +39557,7 @@ limitations under the License.
  *  [en]Variable name to refer this sliding menu.[/en]
  *  [ja]JavaScriptから操作するための変数名を指定します。[/ja]
  * @param side
- *  [en]Specify which side of the screen the menu page is located on. Possible values are left and right.[/en]
+ *  [en]Specify which side of the screen the menu page is located on. Possible values are "left" and "right".[/en]
  *  [ja]menu-pageで指定されたページが画面のどちら側から表示されるかを指定します。leftもしくはrightのいずれかを指定できます。[/ja]
  *
  * @property setMainPage(pageUrl,[options])
@@ -39571,8 +39584,8 @@ limitations under the License.
  * @property getDeviceBackButtonHandler()
  *  [en]Retrieve the back-button handler.[/en]
  *  [ja]ons-sliding-menuに紐付いているバックボタンハンドラを取得します。[/ja]
- * @property setSwipable(swipable)
- *  [en]Set swipable or not.[/en]
+ * @property setSwipeable(swipeable)
+ *  [en]Specify if the menu should be swipeable or not.[/en]
  *  [ja]スワイプで開閉するかどうかを設定する。[/ja]
  * @codepen IDvFJ
  * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
@@ -39680,7 +39693,7 @@ limitations under the License.
  *  [en]Specify the collapse behavior. Valid values are portrait, landscape, width ##px or a media query. "portrait" or "landscape" means the view will collapse when device is in landscape or portrait orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px. If the value is a media query, the view will collapse when the media query is true.[/en]
  *  [ja]左側のページを非表示にする条件を指定します。portrait, landscape、width ##pxもしくはメディアクエリの指定が可能です。portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。width ##pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。メディアクエリを指定すると、指定したクエリに適合している場合に適用されます。[/ja]
  * @param var 
- *  [en]Variable name to refer this split view.[/en]
+ *  [en]Variable name to refer to this split view.[/en]
  *  [ja]JavaScriptからスプリットビューコンポーネントにアクセスするための変数を定義します。[/ja]
  * @property setMainPage(pageUrl) 
  *  [en]Show the page specified in pageUrl in the right section[/en]
@@ -39799,7 +39812,7 @@ limitations under the License.
  *  [en]Get inner input[type=checkbox] element.[/en]
  *  [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]
  * @property on(eventName,listener)
- *  [en]Add an event listener. Possible event name is change.[/en]
+ *  [en]Add an event listener. Possible event name is "change".[/en]
  *  [ja]イベントリスナーを追加します。changeイベントを使用できます。[/ja]
  * @guide UsingFormComponents [en]Using form components[/en][ja]フォームを使う[/ja]
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
@@ -39892,10 +39905,10 @@ limitations under the License.
  * @id tabbar_item
  * @name ons-tab
  * @description
- *  [en]Represents a tab inside tabbar. Each ons-tabbar-item represents a page.[/en]
+ *  [en]Represents a tab inside tabbar. Each ons-tab represents a page.[/en]
  *  [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。[/ja]
  * @param page
- *  [en]The page that this ons-tabbar-item points to.[/en]
+ *  [en]The page that this ons-tab points to.[/en]
  *  [ja]ons-tabが参照するページへのURLを指定します。[/ja]
  * @param icon
  *  [en]The icon name of the tab. Can specify the same icon name as ons-icon. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.[/en]
@@ -40059,8 +40072,8 @@ limitations under the License.
  * @id tabbar
  * @name ons-tabbar
  * @description
- *  [en]A component to display a tab bar on the bottom of a page. Used with ons-tabbar-item to manage pages using tabs.[/en]
- *  [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabbar-itemと組み合わせて使うことで、ページを管理できます。[/ja]
+ *  [en]A component to display a tab bar on the bottom of a page. Used with ons-tab to manage pages using tabs.[/en]
+ *  [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabと組み合わせて使うことで、ページを管理できます。[/ja]
  * @param hide-tabs
  *  [en]Whether to hide the tabs. Valid values are true/false.[/en]
  *  [ja]タブを非表示にする場合に指定します。trueもしくはfalseを指定できます。[/ja]
@@ -40068,10 +40081,10 @@ limitations under the License.
  *  [en]Variable name to refer this tabbar.[/en]
  *  [ja]JavaScriptからコンポーネントにアクセスするための変数名を指定します。[/ja]
  * @param animation
- *  [en]Animation name. Preset values are none/fade.[/en]
+ *  [en]Animation name. Preset values are "none" and "fade". Default is "none".[/en]
  *  [ja]ページ読み込み時のアニメーションを指定します。noneもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
  * @param position
- *  [en]Tabbar's position. Preset values are bottom/top.[/en]
+ *  [en]Tabbar's position. Preset values are "bottom" and "top". Default is "bottom".[/en]
  *  [ja]タブバーの位置を指定します。bottomもしくはtopを選択できます。デフォルトはbottomです。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Possible events are prechange, postchange and reactive. See the guide for more details.[/en]
@@ -40090,7 +40103,7 @@ limitations under the License.
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
- * @seealso ons-tabbar-item [en]ons-tabbar-item component[/en][ja]ons-tabbar-itemコンポーネント[/ja]
+ * @seealso ons-tab [en]ons-tab component[/en][ja]ons-tabコンポーネント[/ja]
  * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
  * @example
  * <ons-tabbar>
@@ -40216,6 +40229,9 @@ limitations under the License.
  * @param inline
  *  [en]Display the toolbar as an inline element.[/en]
  *  [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]
+ * @param modifier
+ *  [en]The appearance of the toolbar.[/en]
+ *  [ja]ツールバーの表現を指定します。[/ja]
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-bottom-toolbar [en]ons-bottom-toolbar component[/en][ja]ons-bottom-toolbarコンポーネント[/ja]
@@ -40377,7 +40393,6 @@ limitations under the License.
             $onsen.declareVarAttribute(attrs, toolbar);
         
             $onsen.aliasStack.register('ons.toolbar', toolbar);
-            element.data('ons-toolbar', toolbar);
 
             scope.$on('$destroy', function() {
               toolbar._events = undefined;
@@ -40400,6 +40415,8 @@ limitations under the License.
             if (pageView && !inline) {
               pageView.registerToolbar(element);
             }
+
+            element.data('ons-toolbar', toolbar);
           },
           post: function(scope, element, attrs) {
             $onsen.fireComponentEvent(element[0], 'init');  

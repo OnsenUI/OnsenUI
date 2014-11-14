@@ -8,6 +8,9 @@
  * @param inline
  *  [en]Display the toolbar as an inline element.[/en]
  *  [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]
+ * @param modifier
+ *  [en]The appearance of the toolbar.[/en]
+ *  [ja]ツールバーの表現を指定します。[/ja]
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-bottom-toolbar [en]ons-bottom-toolbar component[/en][ja]ons-bottom-toolbarコンポーネント[/ja]
@@ -169,7 +172,6 @@
             $onsen.declareVarAttribute(attrs, toolbar);
         
             $onsen.aliasStack.register('ons.toolbar', toolbar);
-            element.data('ons-toolbar', toolbar);
 
             scope.$on('$destroy', function() {
               toolbar._events = undefined;
@@ -192,6 +194,8 @@
             if (pageView && !inline) {
               pageView.registerToolbar(element);
             }
+
+            element.data('ons-toolbar', toolbar);
           },
           post: function(scope, element, attrs) {
             $onsen.fireComponentEvent(element[0], 'init');  
