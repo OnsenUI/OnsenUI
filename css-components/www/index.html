@@ -28,16 +28,42 @@
 
     <div id="loading"><div id="loading-message"><img src="/images/loading.gif" width="24" height="24"> Loading...</div></div>
 
-    <a href="http://monaca.mobi">
-      <div id="header-monaca">
-        <div id="header-monaca-inner">
-          <img src="/images/monaca-logo.png">
-          <span>
-            Faster. Easier. PhoneGap/Cordova development environment.
-          </span>
-        </div>
+    <div id="header-monaca">
+      <div id="header-monaca-inner">
+        <a href="http://monaca.io"><img src="/images/header-monaca-logo.png"></a>
+
+        <ul id="header-monaca-navi">
+          <li><a href="#">Products</a>
+            <ul class="header-monaca-navi-sub-menu">
+              <li><a href="http://en.monaca.io/cloud.html">Monaca Cloud</a></li>
+              <li><a href="http://en.monaca.io/enterprise.html">Monaca Enterprise</a></li>
+              <li><a href="http://en.monaca.io/debugger.html">Monaca Debugger</a></li>
+              <li><a href="http://en.monaca.io/localkit.html">Monaca Localkit</a></li>
+              <li><a href="http://monaca.mobi/en/academic/">Monaca Academic Plan</a></li>
+              <li><a href="http://en.monaca.io/kidozen.html">KidoZen</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="http://monaca.mobi/en/support/index">Support</a>
+            <!--
+            <ul class="header-monaca-navi-sub-menu">
+              <li><a href="http://en.monaca.io/support.html">Support Plan</a></li>
+              <li><a href="http://monaca.mobi/en/training/index">Training</a></li>
+              <li><a href="http://monaca.mobi/en/support/index">Support Index</a></li>
+            </ul>
+            -->
+          </li>
+          <li>
+            <a href="http://monaca.mobi/en/showcase">Showcase</a>
+            <!--
+            <ul class="header-monaca-navi-sub-menu">
+              <li><a href="http://monaca.mobi/en/showcase">Showcase</a></li>
+            </ul>
+            -->
+          </li>
+        </ul>
       </div>
-    </a>
+    </div>
 
     <div id="content-container" ng-cloak>
 
@@ -50,8 +76,8 @@
           <li><a href="http://onsen.io/guide/getting_started.html">Getting Started</a></li>
           <li><a href="http://onsen.io/guide/components.html">Components</a></li>
           <li><a href="http://onsen.io/guide/overview.html">Guide</a></li>
-          <li ng-class="{current : location.path() === '/patterns'}"><a href="http://components.onsen.io/patterns">Patterns</a></li>
-          <li ng-class="{current : location.path() === '/'}"><a href="http://components.onsen.io/">Themes</a></li>
+          <li ng-class="{current : location.path() === '/patterns'}"><a href="/patterns">Patterns</a></li>
+          <li ng-class="{current : location.path() === '/'}"><a href="/">Themes</a></li>
           <li><a href="http://onsen.io/forum.html">Forum</a></li>
           <li><a href="http://onsen.io/blog/">Blog</a></li>
 
