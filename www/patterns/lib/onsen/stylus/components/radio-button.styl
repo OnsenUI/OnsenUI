@@ -19,12 +19,21 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
+<<<<<<< HEAD
 var-radio-button-background-active = rgba(0, 0, 0, 0)
 var-radio-button-indicator-color = $highlight-color
 
 var-radio-button-background = transparent
 var-radio-button-border = 3px solid var-radio-button-indicator-color
 var-radio-button-size = 24px
+=======
+var-radio-button-background-active := rgba(0, 0, 0, 0)
+var-radio-button-indicator-color := #1284ff
+
+var-radio-button-background = transparent
+var-radio-button-border = 3px solid var-radio-button-indicator-color
+var-size--radio-button = 24px
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 /*! topdoc
   name: Radio Button
@@ -98,14 +107,23 @@ radio-button--disabled()
 .radio-button
   radio-button__label()
   hide-input-parent()
+<<<<<<< HEAD
   line-height var-radio-button-size
+=======
+  line-height var-size--radio-button
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   text-align left
   margin 10px 0
 
 .radio-button__checkmark:before
   radio-button--before()
+<<<<<<< HEAD
   width var-checkbox-size
   height var-checkbox-size
+=======
+  width var-size--checkbox
+  height var-size--checkbox
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   background transparent
   border none
   border-radius var-border-radius--checkbox
@@ -114,16 +132,23 @@ radio-button--disabled()
 .radio-button__checkmark
   radio-button()
   position relative
+<<<<<<< HEAD
   width var-radio-button-size
   height var-radio-button-size
   background var-radio-button-background
   pointer-events: none
+=======
+  width var-size--radio-button
+  height var-size--radio-button
+  background var-radio-button-background
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 .radio-button > input[type="radio"]:checked + .radio-button__checkmark
   background var-radio-button-background-active
 
 .radio-button__checkmark:after
   radio-button--after()
+<<<<<<< HEAD
   top var-checkmark-top
   left var-checkmark-left
   opacity 0
@@ -136,6 +161,20 @@ radio-button--disabled()
   border-right none
   border-radius var-checkmark-border-radius
   transform rotate(-45deg)
+=======
+  top var-top--checkmark
+  left var-left--checkmark
+  opacity 0
+  width var-width--checkmark__tail
+  height var-height--checkmark__foot
+  background transparent
+  border var-radio-button-border
+  border-width var-border-width--checkmark
+  border-top none
+  border-right none
+  border-radius var-border-radius--checkmark
+  transform var-transform--checkmark
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 .radio-button > input[type="radio"]:disabled + .radio-button__checkmark
   radio-button--disabled()
