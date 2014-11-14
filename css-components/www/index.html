@@ -28,6 +28,17 @@
 
     <div id="loading"><div id="loading-message"><img src="/images/loading.gif" width="24" height="24"> Loading...</div></div>
 
+    <a href="http://monaca.mobi">
+      <div id="header-monaca">
+        <div id="header-monaca-inner">
+          <img src="/images/monaca-logo.png">
+          <span>
+            Faster. Easier. PhoneGap/Cordova development environment.
+          </span>
+        </div>
+      </div>
+    </a>
+
     <div id="content-container" ng-cloak>
 
       <header class="global-header">
@@ -43,6 +54,7 @@
           <li ng-class="{current : location.path() === '/'}"><a href="http://components.onsen.io/">Themes</a></li>
           <li><a href="http://onsen.io/forum.html">Forum</a></li>
           <li><a href="http://onsen.io/blog/">Blog</a></li>
+
         </ul>
 
       </header>
@@ -147,6 +159,9 @@
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
+
+    <!-- build:js /scripts/minified.js -->
+
     <!-- vendor lib -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/vendor/ZeroClipboard.min.js"></script>

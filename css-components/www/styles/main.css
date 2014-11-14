@@ -219,7 +219,7 @@ click-to-download-btn:active {
 div#content-container {
   position: absolute;
   min-width: 1200px;
-  top: 0px;
+  top: 48px;
   right: 0px;
   left: 0px;
   bottom: 0px;
@@ -364,6 +364,33 @@ div#content-container > header > div:nth-child(2) {
   line-height: 82px;
   padding-right: 16px;
   width: 600px;
+}
+div#header-monaca {
+  background-color: #3a3a3a;
+  height: 48px;
+}
+div#header-monaca:hover {
+  opacity: 0.8;
+}
+div#header-monaca #header-monaca-inner {
+  margin: 0px 0px 0px 44px;
+}
+div#header-monaca img {
+  margin-top: 9px;
+  float: left;
+}
+div#header-monaca img:hover {
+  opacity: 1.0;
+}
+div#header-monaca a {
+  text-decoration: none !important;
+}
+div#header-monaca span {
+  color: #cbcbcb;
+  display: block;
+  font-size: 13px;
+  margin: 19px 0px 0px 15px;
+  float: left;
 }
 div#customizer-panel {
   position: absolute;

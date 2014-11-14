@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*! onsenui - v1.2.0 - 2014-11-10 */
+=======
+/*! onsenui - v1.1.4 - 2014-09-22 */
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -3918,6 +3922,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 })();
 
 (function(module) {
+<<<<<<< HEAD
 try { app = angular.module('templates-main'); }
 catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
@@ -3939,10 +3944,22 @@ app.run(['$templateCache', function($templateCache) {
     '<span class="label ons-button-inner"></span>\n' +
     '<span class="spinner button__spinner {{modifierTemplater(\'button--*__spinner\')}}"></span>\n' +
     '');
+=======
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("templates/back_button.tpl",
+    "<span class=\"toolbar-button--quiet {{modifierTemplater('toolbar-button--quiet--*')}}\" ng-click=\"$root.ons.findParentComponentUntil('ons-navigator', $event).popPage()\" style=\"height: 44px; line-height: 0; padding: 0; position: relative;\">\n" +
+    "  <i class=\"ion-ios7-arrow-back ons-back-button__icon\" style=\"vertical-align: top; background-color: transparent; height: 44px; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; width: 16px; display: inline-block; padding-top: 1px;\"></i><span style=\"vertical-align: top; display: inline-block; line-height: 44px; height: 44px;\" class=\"back-button__label\"></span>\n" +
+    "</span>\n" +
+    "");
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 }]);
 })();
 
 (function(module) {
+<<<<<<< HEAD
 try { app = angular.module('templates-main'); }
 catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
@@ -3952,10 +3969,21 @@ app.run(['$templateCache', function($templateCache) {
     '<div class="dialog {{ modifierTemplater(\'dialog--*\') }}"></div>\n' +
     '</div>\n' +
     '');
+=======
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("templates/button.tpl",
+    "<span class=\"label ons-button-inner\"></span>\n" +
+    "<span class=\"spinner button__spinner {{modifierTemplater('button--*__spinner')}}\"></span>\n" +
+    "");
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 }]);
 })();
 
 (function(module) {
+<<<<<<< HEAD
 try { app = angular.module('templates-main'); }
 catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
@@ -3963,10 +3991,20 @@ app.run(['$templateCache', function($templateCache) {
   $templateCache.put('templates/icon.tpl',
     '<i class="fa fa-{{icon}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}" ng-class="sizeClass" ng-style="style"></i>\n' +
     '');
+=======
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("templates/icon.tpl",
+    "<i class=\"fa fa-{{icon}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}\" ng-class=\"sizeClass\" ng-style=\"style\"></i>\n" +
+    "");
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 }]);
 })();
 
 (function(module) {
+<<<<<<< HEAD
 try { app = angular.module('templates-main'); }
 catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
@@ -3978,10 +4016,20 @@ app.run(['$templateCache', function($templateCache) {
     '  <div class="popover__{{ arrowPosition }}-arrow"></div>\n' +
     '</div>\n' +
     '');
+=======
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("templates/row.tpl",
+    "<div class=\"row row-{{align}} ons-row-inner\"></div>\n" +
+    "");
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 }]);
 })();
 
 (function(module) {
+<<<<<<< HEAD
 try { app = angular.module('templates-main'); }
 catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
@@ -3989,10 +4037,20 @@ app.run(['$templateCache', function($templateCache) {
   $templateCache.put('templates/row.tpl',
     '<div class="row row-{{align}} ons-row-inner"></div>\n' +
     '');
+=======
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("templates/screen.tpl",
+    "<div class=\"ons-screen\"></div>\n" +
+    "");
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 }]);
 })();
 
 (function(module) {
+<<<<<<< HEAD
 try { app = angular.module('templates-main'); }
 catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
@@ -4001,10 +4059,21 @@ app.run(['$templateCache', function($templateCache) {
     '<div class="onsen-sliding-menu__menu ons-sliding-menu-inner"></div>\n' +
     '<div class="onsen-sliding-menu__main ons-sliding-menu-inner"></div>\n' +
     '');
+=======
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("templates/sliding_menu.tpl",
+    "<div class=\"onsen-sliding-menu__behind ons-sliding-menu-inner\"></div>\n" +
+    "<div class=\"onsen-sliding-menu__above ons-sliding-menu-inner\"></div>\n" +
+    "");
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 }]);
 })();
 
 (function(module) {
+<<<<<<< HEAD
 try { app = angular.module('templates-main'); }
 catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
@@ -4013,10 +4082,21 @@ app.run(['$templateCache', function($templateCache) {
     '<div class="onsen-split-view__secondary full-screen ons-split-view-inner"></div>\n' +
     '<div class="onsen-split-view__main full-screen ons-split-view-inner"></div>\n' +
     '');
+=======
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("templates/split_view.tpl",
+    "<div class=\"onsen-split-view__secondary full-screen ons-split-view-inner\"></div>\n" +
+    "<div class=\"onsen-split-view__main full-screen ons-split-view-inner\"></div>\n" +
+    "");
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 }]);
 })();
 
 (function(module) {
+<<<<<<< HEAD
 try { app = angular.module('templates-main'); }
 catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
@@ -4027,10 +4107,23 @@ app.run(['$templateCache', function($templateCache) {
     '  <div class="switch__toggle {{modifierTemplater(\'switch--*__toggle\')}}"></div>\n' +
     '</label>\n' +
     '');
+=======
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("templates/switch.tpl",
+    "<label class=\"switch {{modifierTemplater('switch--*')}}\">\n" +
+    "  <input type=\"checkbox\" class=\"switch__input {{modifierTemplater('switch--*__input')}}\" ng-model=\"model\">\n" +
+    "  <div class=\"switch__toggle {{modifierTemplater('switch--*__toggle')}}\"></div>\n" +
+    "</label>\n" +
+    "");
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 }]);
 })();
 
 (function(module) {
+<<<<<<< HEAD
 try { app = angular.module('templates-main'); }
 catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
@@ -4040,10 +4133,22 @@ app.run(['$templateCache', function($templateCache) {
     '<button class="tab-bar__button tab-bar-inner {{tabbarModifierTemplater(\'tab-bar--*__button\')}} {{modifierTemplater(\'tab-bar__button--*\')}}" ng-click="tryToChange()">\n' +
     '</button>\n' +
     '');
+=======
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("templates/tab.tpl",
+    "<input type=\"radio\" name=\"tab-bar-{{tabbarId}}\" style=\"display: none\">\n" +
+    "<button class=\"tab-bar__button tab-bar-inner {{tabbarModifierTemplater('tab-bar--*__button')}} {{modifierTemplater('tab-bar__button--*')}}\" ng-click=\"tryToChange()\">\n" +
+    "</button>\n" +
+    "");
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 }]);
 })();
 
 (function(module) {
+<<<<<<< HEAD
 try { app = angular.module('templates-main'); }
 catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
@@ -4052,10 +4157,21 @@ app.run(['$templateCache', function($templateCache) {
     '<div class="ons-tab-bar__content tab-bar__content"></div>\n' +
     '<div ng-hide="hideTabs" class="tab-bar ons-tab-bar__footer {{modifierTemplater(\'tab-bar--*\')}} ons-tabbar-inner"></div>\n' +
     '');
+=======
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("templates/tab_bar.tpl",
+    "<div class=\"ons-tab-bar__content tab-bar__content\"></div>\n" +
+    "<div ng-hide=\"hideTabs\" class=\"tab-bar ons-tab-bar__footer {{modifierTemplater('tab-bar--*')}} ons-tabbar-inner\"></div>\n" +
+    "");
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 }]);
 })();
 
 (function(module) {
+<<<<<<< HEAD
 try { app = angular.module('templates-main'); }
 catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
@@ -4063,6 +4179,15 @@ app.run(['$templateCache', function($templateCache) {
   $templateCache.put('templates/toolbar_button.tpl',
     '<span class="toolbar-button {{modifierTemplater(\'toolbar-button--*\')}} navigation-bar__line-height" ng-transclude></span>\n' +
     '');
+=======
+try { app = angular.module("templates-main"); }
+catch(err) { app = angular.module("templates-main", []); }
+app.run(["$templateCache", function($templateCache) {
+  "use strict";
+  $templateCache.put("templates/toolbar_button.tpl",
+    "<span class=\"toolbar-button {{modifierTemplater('toolbar-button--quiet--*')}} navigation-bar__line-height\" ng-transclude></span>\n" +
+    "");
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 }]);
 })();
 
@@ -4195,7 +4320,10 @@ window.ons = (function(){
 
   // JS Global facade for Onsen UI.
   var ons = createOnsenFacade();
+<<<<<<< HEAD
   initKeyboardEvents();
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   waitDeviceReady();
   waitOnsenUILoad();
   initAngularModule();
@@ -4227,19 +4355,27 @@ window.ons = (function(){
         throw new Error('Invalid initialization state.');
       }
 
+<<<<<<< HEAD
       if (document.querySelector('ons-alert-dialog')) {
         console.warn('Invalid usage of <ons-alert-dialog>.');
       }
 
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       $rootScope.$on('$ons-ready', unlockOnsenUI);
     }]);
   }
 
   function initAngularModule() {
     module.value('$onsGlobal', ons);
+<<<<<<< HEAD
     module.run(['$compile', '$rootScope', '$onsen', '$q', function($compile, $rootScope, $onsen, $q) {
       ons._onsenService = $onsen;
       ons._qService = $q;
+=======
+    module.run(['$compile', '$rootScope', '$onsen', function($compile, $rootScope, $onsen) {
+      ons._onsenService = $onsen;
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
       $rootScope.ons = window.ons;
       $rootScope.console = window.console;
@@ -4249,6 +4385,7 @@ window.ons = (function(){
     }]);
   }
 
+<<<<<<< HEAD
   function initKeyboardEvents() {
     ons.softwareKeyboard = new MicroEvent();
     ons.softwareKeyboard._visible = false;
@@ -4295,6 +4432,8 @@ window.ons = (function(){
     });
   }
 
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   function createOnsenFacade() {
     var ons = {
 
@@ -4311,6 +4450,7 @@ window.ons = (function(){
       /**
        * Bootstrap this document as a Onsen UI application.
        *
+<<<<<<< HEAD
        * @param {String} [name] optional name
        * @param {Array} [deps] optional dependency modules
        */
@@ -4326,10 +4466,19 @@ window.ons = (function(){
 
         deps = ['onsen'].concat(angular.isArray(deps) ? deps : []);
         var module = angular.module(name, deps);
+=======
+       * If you want use your AngularJS module, use "ng-app" directive and "angular.module()" manually.
+       *
+       * @param {Array} [deps] dependency modules
+       */
+      bootstrap : function(deps) {
+        deps = ['onsen'].concat(angular.isArray(deps) ? deps : []);
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
         var doc = window.document;
         if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
           doc.addEventListener('DOMContentLoaded', function() {
+<<<<<<< HEAD
             angular.bootstrap(doc.documentElement, [name]);
           }, false);
         } else if (doc.documentElement) {
@@ -4339,6 +4488,15 @@ window.ons = (function(){
         }
 
         return module;
+=======
+            angular.bootstrap(doc.documentElement, deps);
+          }, false);
+        } else if (doc.documentElement) {
+          angular.bootstrap(doc.documentElement, deps);
+        } else {
+          throw new Error('Invalid state');
+        }
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       },
 
       /**
@@ -4473,11 +4631,16 @@ window.ons = (function(){
        * @return {Boolean}
        */
       isWebView: function() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
           throw new Error('isWebView() method is available after dom contents loaded.');
         }
 
         return !!(window.cordova || window.phonegap || window.PhoneGap);
+<<<<<<< HEAD
       },
 
       /**
@@ -4711,6 +4874,11 @@ window.ons = (function(){
     };
     return ons;
   }
+=======
+      }
+    };
+    return ons;
+  }
 
 })();
 
@@ -4732,6 +4900,144 @@ limitations under the License.
 */
 
 (function() {
+  'use strict;';
+
+  var module = angular.module('onsen');
+
+  module.factory('FadeTransitionAnimator', ['NavigatorTransitionAnimator', function(NavigatorTransitionAnimator) {
+
+    /**
+     * Fade-in screen transition.
+     */
+    var FadeTransitionAnimator = NavigatorTransitionAnimator.extend({
+
+      /**
+       * @param {Object} enterPage
+       * @param {Object} leavePage
+       * @param {Function} callback
+       */
+      push: function(enterPage, leavePage, callback) {
+
+        animit.runAll(
+
+          animit(enterPage.getPageView().getContentElement())
+            .queue({
+              css: {
+                transform: 'translate3D(0, 0, 0)',
+                opacity: 0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(0, 0, 0)',
+                opacity: 1
+              },
+              duration: 0.4,
+              timing: 'linear'
+            })
+            .resetStyle()
+            .queue(function(done) {
+              callback();
+              done();
+            }),
+
+          animit(enterPage.getPageView().getToolbarElement())
+            .queue({
+              css: {
+                transform: 'translate3D(0, 0, 0)',
+                opacity: 0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(0, 0, 0)',
+                opacity: 1
+              },
+              duration: 0.4,
+              timing: 'linear'
+            })
+            .resetStyle()
+        );
+
+      },
+
+      /**
+       * @param {Object} enterPage
+       * @param {Object} leavePage
+       * @param {Function} done
+       */
+      pop: function(enterPage, leavePage, callback) {
+        animit.runAll(
+
+          animit(leavePage.getPageView().getContentElement())
+            .queue({
+              css: {
+                transform: 'translate3D(0, 0, 0)',
+                opacity: 1
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(0, 0, 0)',
+                opacity: 0
+              },
+              duration: 0.4,
+              timing: 'linear'
+            })
+            .queue(function(done) {
+              callback();
+              done();
+            }),
+
+          animit(leavePage.getPageView().getToolbarElement())
+            .queue({
+              css: {
+                transform: 'translate3D(0, 0, 0)',
+                opacity: 1
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(0, 0, 0)',
+                opacity: 0
+              },
+              duration: 0.4,
+              timing: 'linear'
+            })
+
+        );
+      }
+    });
+
+    return FadeTransitionAnimator;
+  }]);
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
+
+})();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function() {
+<<<<<<< HEAD
   'use strict';
 
   var module = angular.module('onsen');
@@ -4843,10 +5149,66 @@ limitations under the License.
               callback();
             }.bind(this));
           }.bind(this));
+=======
+  'use strict;';
+
+  var module = angular.module('onsen');
+
+  module.factory('IOSSlideTransitionAnimator', ['NavigatorTransitionAnimator', 'PageView', function(NavigatorTransitionAnimator, PageView) {
+
+    /**
+     * Slide animator for navigator transition like iOS's screen slide transition.
+     */
+    var IOSSlideTransitionAnimator = NavigatorTransitionAnimator.extend({
+
+      /** Black mask */
+      backgroundMask : angular.element(
+        '<div style="position: absolute; width: 100%;' +
+        'height: 100%; background-color: black; opacity: 0;"></div>'
+      ),
+
+      _decompose: function(page) {
+        var elements = [];
+
+        var left = page.getPageView().getToolbarLeftItemsElement();
+        var right = page.getPageView().getToolbarRightItemsElement();
+
+        var other = []
+          .concat(left.children.length === 0 ? left : excludeBackButtonLabel(left.children))
+          .concat(right.children.length === 0 ? right : excludeBackButtonLabel(right.children));
+
+
+        var pageLabels = [
+          page.getPageView().getToolbarCenterItemsElement(),
+          page.getPageView().getToolbarBackButtonLabelElement()
+        ];
+
+        return {
+          pageLabels: pageLabels,
+          other: other,
+          content: page.getPageView().getContentElement(),
+          toolbar: page.getPageView().getToolbarElement(),
+          bottomToolbar: page.getPageView().getBottomToolbarElement()
+        };
+
+        function excludeBackButtonLabel(elements) {
+          var result = [];
+
+          for (var i = 0; i < elements.length; i++) {
+            if (elements[i].nodeName.toLowerCase() === 'ons-back-button') {
+              result.push(elements[i].querySelector('.ons-back-button__icon'));
+            } else {
+              result.push(elements[i]);
+            }
+          }
+
+          return result;
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         }
       },
 
       /**
+<<<<<<< HEAD
        * True if alert dialog is visible.
        *
        * @return {Boolean}
@@ -7656,12 +8018,451 @@ limitations under the License.
   }]);
 })();
 
+=======
+       * @param {Object} enterPage
+       * @param {Object} leavePage
+       * @param {Function} callback
+       */
+      push: function(enterPage, leavePage, callback) {
+        var mask = this.backgroundMask.remove();
+        leavePage.element[0].parentNode.insertBefore(mask[0], leavePage.element[0].nextSibling);
+
+        var enterPageDecomposition = this._decompose(enterPage);
+        var leavePageDecomposition = this._decompose(leavePage);
+
+        var delta = (function() {
+          var rect = leavePage.element[0].getBoundingClientRect();
+          return Math.round(((rect.right - rect.left) / 2) * 0.6);
+        })();
+
+        var maskClear = animit(mask[0])
+          .queue({
+            opacity: 0,
+            transform: 'translate3d(0, 0, 0)'
+          })
+          .queue({
+            opacity: 0.1
+          }, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .resetStyle()
+          .queue(function(done) {
+            mask.remove();
+            done();
+          });
+
+        var bothPageHasToolbar =
+          enterPage.getPageView().hasToolbarElement() &&
+          leavePage.getPageView().hasToolbarElement();
+
+        var isToolbarNothing = 
+          !enterPage.getPageView().hasToolbarElement() &&
+          !leavePage.getPageView().hasToolbarElement();
+
+        if (bothPageHasToolbar) {
+          animit.runAll(
+
+            maskClear,
+
+            animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar])
+              .queue({
+                css: {
+                  transform: 'translate3D(100%, 0px, 0px)',
+                },
+                duration: 0
+              })
+              .queue({
+                css: {
+                  transform: 'translate3D(0px, 0px, 0px)',
+                },
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .resetStyle(),
+
+            animit(enterPageDecomposition.toolbar)
+              .queue({
+                css: {
+                  background: 'none',
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                  borderColor: 'rgba(0, 0, 0, 0)'
+                },
+                duration: 0
+              })
+              .wait(0.3)
+              .resetStyle({
+                duration: 0.1,
+                transition:
+                  'background-color 0.1s linear, ' + 
+                  'border-color 0.1s linear'
+              }),
+
+            animit(enterPageDecomposition.pageLabels)
+              .queue({
+                css: {
+                  transform: 'translate3d(' + delta + 'px, 0, 0)',
+                  opacity: 0
+                },
+                duration: 0
+              })
+              .queue({
+                css: {
+                  transform: 'translate3d(0, 0, 0)',
+                  opacity: 1.0
+                },
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .resetStyle(),
+
+            animit(enterPageDecomposition.other)
+              .queue({
+                css: {opacity: 0},
+                duration: 0
+              })
+              .queue({
+                css: {opacity: 1},
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .resetStyle(),
+
+            animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar])
+              .queue({
+                css: {
+                  transform: 'translate3D(0, 0, 0)',
+                },
+                duration: 0
+              })
+              .queue({
+                css: {
+                  transform: 'translate3D(-25%, 0px, 0px)',
+                },
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .resetStyle()
+              .queue(function(done) {
+                callback();
+                done();
+              }),
+
+            animit(leavePageDecomposition.pageLabels)
+              .queue({
+                css: {
+                  transform: 'translate3d(0, 0, 0)',
+                  opacity: 1.0
+                },
+                duration: 0
+              })
+              .queue({
+                css: {
+                  transform: 'translate3d(-' + delta + 'px, 0, 0)',
+                  opacity: 0,
+                },
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .resetStyle(),
+
+            animit(leavePageDecomposition.other)
+              .queue({
+                css: {opacity: 1},
+                duration: 0
+              })
+              .queue({
+                css: {opacity: 0},
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .resetStyle()
+
+          );
+
+        } else {
+
+          animit.runAll(
+
+            maskClear,
+
+            animit(enterPage.element[0])
+              .queue({
+                css: {
+                  transform: 'translate3D(100%, 0px, 0px)',
+                },
+                duration: 0
+              })
+              .queue({
+                css: {
+                  transform: 'translate3D(0px, 0px, 0px)',
+                },
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .resetStyle(),
+
+            animit(leavePage.element[0])
+              .queue({
+                css: {
+                  transform: 'translate3D(0, 0, 0)'
+                },
+                duration: 0
+              })
+              .queue({
+                css: {
+                  transform: 'translate3D(-25%, 0px, 0px)'
+                },
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .resetStyle()
+              .queue(function(done) {
+                callback();
+                done();
+              })
+          );
+
+        }
+      },
+
+      /**
+       * @param {Object} enterPage
+       * @param {Object} leavePage
+       * @param {Function} done
+       */
+      pop: function(enterPage, leavePage, done) {
+        var mask = this.backgroundMask.remove();
+        enterPage.element[0].parentNode.insertBefore(mask[0], enterPage.element[0].nextSibling);
+
+        var enterPageDecomposition = this._decompose(enterPage);
+        var leavePageDecomposition = this._decompose(leavePage);
+
+        var delta = (function() {
+          var rect = leavePage.element[0].getBoundingClientRect();
+          return Math.round(((rect.right - rect.left) / 2) * 0.6);
+        })();
+
+        var maskClear = animit(mask[0])
+          .queue({
+            opacity: 0.1,
+            transform: 'translate3d(0, 0, 0)'
+          })
+          .queue({
+            opacity: 0
+          }, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .resetStyle()
+          .queue(function(done) {
+            mask.remove();
+            done();
+          });
+
+
+        var bothPageHasToolbar =
+          enterPage.getPageView().hasToolbarElement() &&
+          leavePage.getPageView().hasToolbarElement();
+
+        var isToolbarNothing = 
+          !enterPage.getPageView().hasToolbarElement() &&
+          !leavePage.getPageView().hasToolbarElement();
+
+        if (bothPageHasToolbar || isToolbarNothing) {
+          animit.runAll(
+
+            maskClear,
+
+            animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar])
+              .queue({
+                css: {
+                  transform: 'translate3D(-25%, 0px, 0px)',
+                  opacity: 0.9
+                },
+                duration: 0
+              })
+              .queue({
+                css: {
+                  transform: 'translate3D(0px, 0px, 0px)',
+                  opacity: 1.0
+                },
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .resetStyle(),
+
+            animit(enterPageDecomposition.pageLabels)
+              .queue({
+                css: {
+                  transform: 'translate3d(-' + delta + 'px, 0, 0)',
+                  opacity: 0
+                },
+                duration: 0
+              })
+              .queue({
+                css: {
+                  transform: 'translate3d(0, 0, 0)',
+                  opacity: 1.0
+                },
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .resetStyle(),
+
+            animit(enterPageDecomposition.toolbar)
+              .queue({
+                css: {
+                  transform: 'translate3d(0, 0, 0)',
+                  opacity: 1.0
+                },
+                duration: 0
+              })
+              .queue({
+                css: {
+                  transform: 'translate3d(0, 0, 0)',
+                  opacity: 1.0
+                },
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .resetStyle(),
+
+            animit(enterPageDecomposition.other)
+              .queue({
+                css: {opacity: 0},
+                duration: 0
+              })
+              .queue({
+                css: {opacity: 1},
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .resetStyle(),
+
+            animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar])
+              .queue({
+                css: {
+                  transform: 'translate3D(0px, 0px, 0px)'
+                },
+                duration: 0
+              })
+              .queue({
+                css: {
+                  transform: 'translate3D(100%, 0px, 0px)'
+                },
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .wait(0)
+              .queue(function(finish) {
+                done();
+                finish();
+              }),
+
+            animit(leavePageDecomposition.other)
+              .queue({
+                css: {
+                  transform: 'translate3d(0, 0, 0)',
+                  opacity: 1
+                },
+                duration: 0
+              })
+              .queue({
+                css: {
+                  transform: 'translate3d(0, 0, 0)',
+                  opacity: 0,
+                },
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              }),
+
+            animit(leavePageDecomposition.toolbar)
+              .queue({
+                css: {
+                  background: 'none',
+                  backgroundColor: 'rgba(0, 0, 0, 0)',
+                  borderColor: 'rgba(0, 0, 0, 0)'
+                },
+                duration: 0
+              }),
+
+            animit(leavePageDecomposition.pageLabels)
+              .queue({
+                css: {
+                  transform: 'translate3d(0, 0, 0)',
+                  opacity: 1.0
+                },
+                duration: 0
+              })
+              .queue({
+                css: {
+                  transform: 'translate3d(' + delta + 'px, 0, 0)',
+                  opacity: 0,
+                },
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+          );
+        } else {
+
+          animit.runAll(
+
+            maskClear,
+
+            animit(enterPage.element[0])
+              .queue({
+                css: {
+                  transform: 'translate3D(-25%, 0px, 0px)',
+                  opacity: 0.9
+                },
+                duration: 0
+              })
+              .queue({
+                css: {
+                  transform: 'translate3D(0px, 0px, 0px)',
+                  opacity: 1.0
+                },
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .resetStyle(),
+
+            animit(leavePage.element[0])
+              .queue({
+                css: {
+                  transform: 'translate3D(0px, 0px, 0px)'
+                },
+                duration: 0
+              })
+              .queue({
+                css: {
+                  transform: 'translate3D(100%, 0px, 0px)'
+                },
+                duration: 0.4,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .queue(function(finish) {
+                done();
+                finish();
+              })
+          );
+        }
+      }
+    });
+
+    return IOSSlideTransitionAnimator;
+  }]);
+
+})();
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 /*
 Copyright 2013-2014 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
+<<<<<<< HEAD
 You may obtain a copy of the License at
 
    http://www.apache.org/licenses/LICENSE-2.0
@@ -7965,6 +8766,205 @@ limitations under the License.
           done();
           throw new Error('Page is not found: ' + page);
         }.bind(this));
+=======
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function() {
+  'use strict;';
+
+  var module = angular.module('onsen');
+
+  module.factory('LiftTransitionAnimator', ['NavigatorTransitionAnimator', function(NavigatorTransitionAnimator) {
+
+    /**
+     * Lift screen transition.
+     */
+    var LiftTransitionAnimator = NavigatorTransitionAnimator.extend({
+
+      /** Black mask */
+      backgroundMask : angular.element(
+        '<div style="position: absolute; width: 100%;' +
+        'height: 100%; background-color: black;"></div>'
+      ),
+
+      /**
+       * @param {Object} enterPage
+       * @param {Object} leavePage
+       * @param {Function} callback
+       */
+      push: function(enterPage, leavePage, callback) {
+        var mask = this.backgroundMask.remove();
+        leavePage.element[0].parentNode.insertBefore(mask[0], leavePage.element[0]);
+
+        var maskClear = animit(mask[0])
+          .wait(0.6)
+          .queue(function(done) {
+            mask.remove();
+            done();
+          });
+
+        animit.runAll(
+
+          maskClear,
+
+          animit(enterPage.element[0])
+            .queue({
+              css: {
+                transform: 'translate3D(0, 100%, 0)',
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(0, 0, 0)',
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .wait(0.2)
+            .resetStyle()
+            .queue(function(done) {
+              callback();
+              done();
+            }),
+
+          animit(leavePage.element[0])
+            .queue({
+              css: {
+                transform: 'translate3D(0, 0, 0)',
+                opacity: 1.0
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(0, -10%, 0)',
+                opacity: 0.9
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+        );
+
+      },
+
+      /**
+       * @param {Object} enterPage
+       * @param {Object} leavePage
+       * @param {Function} callback
+       */
+      pop: function(enterPage, leavePage, callback) {
+        var mask = this.backgroundMask.remove();
+        enterPage.element[0].parentNode.insertBefore(mask[0], enterPage.element[0]);
+
+        animit.runAll(
+
+          animit(mask[0])
+            .wait(0.4)
+            .queue(function(done) {
+              mask.remove();
+              done();
+            }),
+
+          animit(enterPage.element[0])
+            .queue({
+              css: {
+                transform: 'translate3D(0, -10%, 0)',
+                opacity: 0.9
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(0, 0, 0)',
+                opacity: 1.0
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .resetStyle()
+            .wait(0.4)
+            .queue(function(done) {
+              callback();
+              done();
+            }),
+
+          animit(leavePage.element[0])
+            .queue({
+              css: {
+                transform: 'translate3D(0, 0, 0)'
+              },
+              duration: 0
+            })
+            .queue({
+              css: {
+                transform: 'translate3D(0, 100%, 0)'
+              },
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            
+        );
+      }
+    });
+
+    return LiftTransitionAnimator;
+  }]);
+
+})();
+
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function() {
+  'use strict;';
+
+  var module = angular.module('onsen');
+
+  module.factory('ModalView', ['$onsen', function($onsen) {
+
+    var ModalView = Class.extend({
+      _element: undefined,
+      _scope: undefined,
+
+      /**
+       * @param {Object} scope
+       * @param {jqLite} element
+       */
+      init: function(scope, element) {
+        this._scope = scope;
+        this._element = element;
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
+        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+
+        this.hide();
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       },
 
       getDeviceBackButtonHandler: function() {
@@ -7972,6 +8972,7 @@ limitations under the License.
       },
 
       /**
+<<<<<<< HEAD
        * @param {Object} options pushPage()'s options parameter
        */
       _getAnimatorOption: function(options) {
@@ -8589,6 +9590,63 @@ you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
    http://www.apache.org/licenses/LICENSE-2.0
+=======
+       * Show modal view.
+       */
+      show: function() {
+        this._element.css('display', 'table');
+      },
+
+      _isVisible: function() {
+        return this._element[0].clientWidth > 0;
+      },
+
+      _onDeviceBackButton: function() {
+        // Do nothing and stop device-backbutton handler chain.
+        return;
+      },
+
+      /**
+       * Hide modal view.
+       */
+      hide: function() {
+        this._element.css('display', 'none');
+      },
+
+      /**
+       * Toggle modal view visibility.
+       */
+      toggle: function() {
+        if (this._isVisible()) {
+          return this.hide.apply(this, arguments);
+        } else {
+          return this.show.apply(this, arguments);
+        }
+      },
+
+      _destroy: function() {
+        this.emit('destroy', {page: this});
+
+        this._deviceBackButtonHandler.destroy();
+
+        this._element = this._scope = null;
+      }
+    });
+    MicroEvent.mixin(ModalView);
+
+    return ModalView;
+  }]);
+})();
+
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -8603,6 +9661,646 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
+  var NavigatorPageObject = Class.extend({
+    /**
+     * @param {Object} params
+     * @param {Object} params.page
+     * @param {Object} params.element
+     * @param {Object} params.pageScope
+     * @param {Object} params.options
+     * @param {Object} params.navigator
+     */
+    init: function(params) {
+      this.page = params.page;
+      this.name = params.page;
+      this.element = params.element;
+      this.pageScope = params.pageScope;
+      this.options = params.options;
+      this.navigator = params.navigator;
+    },
+
+    /**
+     * @return {PageView}
+     */
+    getPageView: function() {
+      if (!this._pageView) {
+        this._pageView = this.element.inheritedData('ons-page');
+        if (!this._pageView) {
+          throw new Error('Fail to fetch PageView from ons-page element.');
+        }
+      }
+      return this._pageView;
+    },
+
+    destroy: function() {
+      this.pageScope.$destroy();
+
+      this.element.remove();
+      this._pageView = null;
+      this.element = null;
+      this.pageScope = null;
+      this.options = null;
+
+      var index = this.navigator.pages.indexOf(this);
+      if (index !== -1) {
+        this.navigator.pages.splice(index, 1);
+      }
+
+      this.navigator = null;
+    }
+  });
+
+  module.factory('NavigatorView', ['$http', '$parse', '$templateCache', '$compile', '$onsen', '$timeout', 'SimpleSlideTransitionAnimator', 'NavigatorTransitionAnimator', 'LiftTransitionAnimator', 'NullTransitionAnimator', 'IOSSlideTransitionAnimator', 'FadeTransitionAnimator', function($http, $parse, $templateCache, $compile, $onsen, $timeout,
+    SimpleSlideTransitionAnimator, NavigatorTransitionAnimator, LiftTransitionAnimator,
+    NullTransitionAnimator, IOSSlideTransitionAnimator, FadeTransitionAnimator) {
+
+    /**
+     * Manages the page navigation backed by page stack.
+     *
+     * @class NavigatorView
+     */
+    var NavigatorView = Class.extend({
+
+      /**
+       * @member jqLite Object
+       */
+      _element: undefined,
+
+      /**
+       * @member {Array}
+       */
+      pages: undefined,
+
+      /**
+       * @member {Object}
+       */
+      _scope: undefined,
+
+      /**
+       * @member {DoorLock}
+       */
+      _doorLock: undefined,
+
+      /**
+       * @member {Boolean}
+       */
+      _profiling: false,
+
+      /**
+       * @param {Object} options
+       * @param options.element jqLite Object to manage with navigator
+       * @param options.scope Angular.js scope object
+       */
+      init: function(options) {
+        options = options || options;
+
+        this._element = options.element || angular.element(window.document.body);
+        this._scope = options.scope || this._element.scope();
+        this._doorLock = new DoorLock();
+        this.pages = [];
+
+        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+        this._scope.$on('$destroy', this._destroy.bind(this));
+      },
+
+      _destroy: function() {
+        this.emit('destroy', {navigator: this});
+
+        this.pages.forEach(function(page) {
+          page.destroy();
+        });
+
+        this._deviceBackButtonHandler.destroy();
+        this._deviceBackButtonHandler = null;
+      },
+
+      _onDeviceBackButton: function(event) {
+        if (this.pages.length > 1) {
+          this.popPage();
+        } else {
+          event.callParentHandler();
+        }
+      },
+
+      /**
+       * @param element jqLite Object
+       * @return jqLite Object
+       */
+      _normalizePageElement: function(element) {
+        for (var i = 0; i < element.length; i++) {
+          if (element[i].nodeType === 1) {
+            return angular.element(element[i]);
+          }
+        }
+
+        throw new Error('invalid state');
+      },
+
+
+      _createPageElementAndLinkFunction : function(templateHTML, pageScope, done) {
+        var div = document.createElement('div');
+        div.innerHTML = templateHTML.trim();
+        var pageElement = angular.element(div);
+
+        var hasPage = div.childElementCount === 1 &&
+          div.childNodes[0].nodeName.toLowerCase() === 'ons-page';
+        if (hasPage) {
+          pageElement = angular.element(div.childNodes[0]);
+        } else {
+          throw new Error('You can not supply no "ons-page" element to "ons-navigator".');
+        }
+
+        var link = $compile(pageElement);
+        return {
+          element: pageElement,
+          link: function() {
+            link(pageScope);
+            safeApply(pageScope);
+          }
+        };
+
+        function safeApply(scope) {
+          var phase = scope.$root.$$phase;
+          if (phase !== '$apply' && phase !== '$digest') {
+            scope.$apply();
+          }
+        }
+      },
+
+      /**
+       * Insert page object that has the specified pageUrl into the page stack and
+       * if options object is specified, apply the options.
+       *
+       * @param {Number} index
+       * @param {String} page
+       * @param {Object} [options]
+       * @param {String/NavigatorTransitionAnimator} [options.animation]
+       */
+      insertPage: function(index, page, options) {
+        options = options || {};
+
+        if (options && typeof options != 'object') {
+          throw new Error('options must be an object. You supplied ' + options);
+        }
+
+        if (this.pages.length === 0) {
+          return this.pushPage.apply(this, arguments);
+        }
+
+        this._doorLock.waitUnlock(function() {
+          var unlock = this._doorLock.lock();
+
+          $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
+
+            var pageScope = this._createPageScope();
+            var object = this._createPageElementAndLinkFunction(templateHTML, pageScope);
+            var element = object.element;
+            var link = object.link;
+
+            element = this._normalizePageElement(element);
+
+            var pageObject = this._createPageObject(page, element, pageScope, options);
+
+            if (this.pages.length > 0) {
+              index = normalizeIndex(index);
+
+              this._element[0].insertBefore(element[0], this.pages[index] ? this.pages[index].element[0] : null);
+              this.pages.splice(index, 0, pageObject);
+              link();
+
+              setTimeout(function() {
+                if (this.getCurrentPage() !== pageObject) {
+                  element.css('display', 'none');
+                }
+                unlock();
+                element = null;
+              }.bind(this), 1000 / 60);
+
+            } else {
+              this._element.append(element);
+              this.pages.push(pageObject);
+              link();
+              unlock();
+              element = null;
+            }
+          }.bind(this), function() {
+            unlock();
+            throw new Error('Page is not found: ' + page);
+          });
+        }.bind(this));
+
+        var normalizeIndex = function(index) {
+          if (index < 0) {
+            index = this.pages.length + index;
+          }
+          return index;
+        }.bind(this);
+      },
+
+      /**
+       * Pushes the specified pageUrl into the page stack and
+       * if options object is specified, apply the options.
+       *
+       * @param {String} page
+       * @param {Object} [options]
+       * @param {String/NavigatorTransitionAnimator} [options.animation]
+       * @param {Function} [options.onTransitionEnd]
+       */
+      pushPage: function(page, options) {
+        if (this._profiling) {
+          console.time('pushPage');
+        }
+
+        options = options || {};
+
+        if (options && typeof options != 'object') {
+          throw new Error('options must be an object. You supplied ' + options);
+        }
+
+        if (this._emitPrePushEvent()) {
+          return;
+        }
+
+        this._doorLock.waitUnlock(function() {
+          this._pushPage(page, options);
+        }.bind(this));
+      },
+
+      _pushPage: function(page, options) {
+        var unlock = this._doorLock.lock();
+        var done = function() {
+          unlock();
+          if (this._profiling) {
+            console.timeEnd('pushPage');
+          }
+        };
+
+        $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
+          var pageScope = this._createPageScope();
+          var object = this._createPageElementAndLinkFunction(templateHTML, pageScope);
+
+          setImmediate(function() {
+            this._pushPageDOM(page, object.element, object.link, pageScope, options, done);
+            object = null;
+          }.bind(this));
+        }.bind(this), function() {
+          done();
+          throw new Error('Page is not found: ' + page);
+        }.bind(this));
+      },
+
+      getDeviceBackButtonHandler: function() {
+        return this._deviceBackButtonHandler;
+      },
+
+      /**
+       * @param {Object} options pushPage()'s options parameter
+       */
+      _getAnimatorOption: function(options) {
+        var animator = null;
+
+        if (options.animation instanceof NavigatorTransitionAnimator) {
+          return options.animation;
+        }
+
+        if (typeof options.animation === 'string') {
+          animator = NavigatorView._transitionAnimatorDict[options.animation];
+        }
+
+        if (!animator && this._element.attr('animation')) {
+          animator = NavigatorView._transitionAnimatorDict[this._element.attr('animation')];
+        }
+
+        if (!animator) {
+          animator = NavigatorView._transitionAnimatorDict['default'];
+        }
+
+        if (!(animator instanceof NavigatorTransitionAnimator)) {
+          throw new Error('"animator" is not an instance of NavigatorTransitionAnimator.');
+        }
+
+        return animator;
+      },
+
+
+      _createPageScope: function() {
+         return this._scope.$new();
+      },
+
+      /**
+       * @param {String} page
+       * @param {jqLite} element
+       * @param {Object} pageScope
+       * @param {Object} options
+       */
+      _createPageObject: function(page, element, pageScope, options) {
+        options.animator = this._getAnimatorOption(options);
+
+        return new NavigatorPageObject({
+          page: page,
+          element: element,
+          pageScope: pageScope,
+          options: options,
+          navigator: this
+        });
+      },
+
+      /**
+       * @param {String} page Page name.
+       * @param {Object} element
+       * @param {Function} link
+       * @param {Object} pageScope
+       * @param {Object} options
+       * @param {Function} [unlock]
+       */
+      _pushPageDOM: function(page, element, link, pageScope, options, unlock) {
+        if (this._profiling) {
+          console.time('pushPageDOM');
+        }
+
+        unlock = unlock || function() {};
+        options = options || {};
+        element = this._normalizePageElement(element);
+
+        var pageObject = this._createPageObject(page, element, pageScope, options);
+
+        var event = {
+          enterPage: pageObject,
+          leavePage: this.pages[this.pages.length - 1],
+          navigator: this
+        };
+
+        this.pages.push(pageObject);
+
+        var done = function() {
+          if (this.pages[this.pages.length - 2]) {
+            this.pages[this.pages.length - 2].element.css('display', 'none');
+          }
+
+          if (this._profiling) {
+            console.timeEnd('pushPageDOM');
+          }
+
+          unlock();
+
+          this.emit('postpush', event);
+
+          if (typeof options.onTransitionEnd === 'function') {
+            options.onTransitionEnd();
+          }
+          element = null;
+        }.bind(this);
+
+        if (this.pages.length > 1) {
+          var leavePage = this.pages.slice(-2)[0];
+          var enterPage = this.pages.slice(-1)[0];
+
+          this._element.append(element);
+          link();
+          options.animator.push(enterPage, leavePage, done);
+          element = null;
+        } else {
+          this._element.append(element);
+          link();
+          done();
+          element = null;
+        }
+      },
+
+      /**
+       * @return {Boolean} Whether if event is canceled.
+       */
+      _emitPrePushEvent: function() {
+        var isCanceled = false;
+        var prePushEvent = {
+          navigator: this,
+          currentPage: this.getCurrentPage(),
+          cancel: function() {
+            isCanceled = true;
+          }
+        };
+
+        this.emit('prepush', prePushEvent);
+
+        return isCanceled;
+      },
+
+      /**
+       * @return {Boolean} Whether if event is canceled.
+       */
+      _emitPrePopEvent: function() {
+        var isCanceled = false;
+        var prePopEvent = {
+          navigator: this,
+          currentPage: this.getCurrentPage(),
+          cancel: function() {
+            isCanceled = true;
+          }
+        };
+
+        this.emit('prepop', prePopEvent);
+
+        return isCanceled;
+      },
+
+      /**
+       * Pops current page from the page stack.
+       * @param {Object} [options]
+       * @param {Function} [options.onTransitionEnd]
+       */
+      popPage: function(options) {
+        options = options || {};
+
+        if (this.pages.length <= 1) {
+          throw new Error('NavigatorView\'s page stack is empty.');
+        }
+
+        if (this._emitPrePopEvent()) {
+          return;
+        }
+
+        this._doorLock.waitUnlock(function() {
+          this._popPage(options);
+        }.bind(this));
+      },
+
+      _popPage: function(options) {
+        var unlock = this._doorLock.lock();
+
+        var leavePage = this.pages.pop();
+
+        if (this.pages[this.pages.length - 1]) {
+          this.pages[this.pages.length - 1].element.css('display', 'block');
+        }
+
+        var enterPage = this.pages[this.pages.length -1];
+
+        var event = {
+          leavePage: leavePage,
+          enterPage: this.pages[this.pages.length - 1],
+          navigator: this
+        };
+
+        var callback = function() {
+          leavePage.destroy();
+          unlock();
+          this.emit('postpop', event);
+          event.leavePage = null;
+
+          if (typeof options.onTransitionEnd === 'function') {
+            options.onTransitionEnd();
+          }
+        }.bind(this);
+
+        leavePage.options.animator.pop(enterPage, leavePage, callback);
+      },
+
+      /**
+       * Clears page stack and add the specified pageUrl to the page stack.
+       * If options object is specified, apply the options.
+       * the options object include all the attributes of this navigator.
+       *
+       * @param {String} page
+       * @param {Object} [options]
+       */
+      resetToPage: function(page, options) {
+        options = options || {};
+
+        if (!options.animator && !options.animation) {
+          options.animation = 'none';
+        }
+
+        var onTransitionEnd = options.onTransitionEnd || function() {};
+        var self = this;
+
+        options.onTransitionEnd = function() {
+          while (self.pages.length > 1) {
+            self.pages.shift().destroy();
+          }
+          onTransitionEnd();
+        };
+
+        this.pushPage(page, options);
+      },
+
+      /**
+       * Get current page's navigator item.
+       *
+       * Use this method to access options passed by pushPage() or resetToPage() method.
+       * eg. ons.navigator.getCurrentPage().options
+       *
+       * @return {Object} 
+       */
+      getCurrentPage: function() {
+        return this.pages[this.pages.length - 1];
+      },
+
+      /**
+       * Retrieve the entire page stages of the navigator.
+       *
+       * @return {Array}
+       */
+      getPages: function() {
+        return this.pages;
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      canPopPage: function() {
+        return this.pages.length > 1;
+      }
+    });
+
+    // Preset transition animators.
+    NavigatorView._transitionAnimatorDict = {
+      'default': $onsen.isAndroid() ? new SimpleSlideTransitionAnimator() : new IOSSlideTransitionAnimator(),
+      'slide': $onsen.isAndroid() ? new SimpleSlideTransitionAnimator() : new IOSSlideTransitionAnimator(),
+      'lift': new LiftTransitionAnimator(),
+      'fade': new FadeTransitionAnimator(),
+      'none': new NullTransitionAnimator()
+    };
+
+    /**
+     * @param {String} name
+     * @param {NavigatorTransitionAnimator} animator
+     */
+    NavigatorView.registerTransitionAnimator = function(name, animator) {
+      if (!(animator instanceof NavigatorTransitionAnimator)) {
+        throw new Error('"animator" param must be an instance of NavigatorTransitionAnimator');
+      }
+
+      this._transitionAnimatorDict[name] = animator;
+    };
+
+    MicroEvent.mixin(NavigatorView);
+
+    return NavigatorView;
+  }]);
+})();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function() {
+  'use strict;';
+
+  var module = angular.module('onsen');
+
+  module.factory('NavigatorTransitionAnimator', function() {
+    var NavigatorTransitionAnimator = Class.extend({
+      push: function(enterPage, leavePage, callback) {
+        callback();
+      },
+
+      pop: function(enterPage, leavePage, callback) {
+        callback();
+      }
+    });
+
+    return NavigatorTransitionAnimator;
+  });
+})();
+
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function() {
+  'use strict;';
+
+  var module = angular.module('onsen');
+
+<<<<<<< HEAD
   module.factory('PageView', ['$onsen', '$parse', function($onsen, $parse) {
 
     var PageView = Class.extend({
@@ -8844,6 +10542,16 @@ limitations under the License.
   }]);
 })();
 
+=======
+  /**
+   * Null animator do screen transition with no animations.
+   */
+  module.factory('NullTransitionAnimator', ['NavigatorTransitionAnimator', function(NavigatorTransitionAnimator) {
+    var NullTransitionAnimator = NavigatorTransitionAnimator.extend({});
+    return NullTransitionAnimator;
+  }]);
+})();
+
 
 /*
 Copyright 2013-2014 ASIAL CORPORATION
@@ -8862,6 +10570,255 @@ limitations under the License.
 
 */
 
+(function() {
+  'use strict';
+  var module = angular.module('onsen');
+
+  module.factory('OverlaySlidingMenuAnimator', ['SlidingMenuAnimator', function(SlidingMenuAnimator) {
+
+    var OverlaySlidingMenuAnimator = SlidingMenuAnimator.extend({
+
+      _blackMask: undefined,
+
+      _isRight: false,
+      _element: false,
+      _menuPage: false,
+      _mainPage: false,
+      _width: false,
+
+      /**
+       * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
+       * @param {jqLite} mainPage
+       * @param {jqLite} menuPage
+       * @param {Object} options
+       * @param {String} options.width "width" style value
+       * @param {Boolean} options.isRight
+       */
+      setup: function(element, mainPage, menuPage, options) {
+        options = options || {};
+        this._width = options.width || '90%';
+        this._isRight = !!options.isRight;
+        this._element = element;
+        this._mainPage = mainPage;
+        this._menuPage = menuPage;
+
+        menuPage.css('box-shadow', '0px 0 10px 0px rgba(0, 0, 0, 0.2)');
+        menuPage.css({
+          width: options.width,
+          display: 'none',
+          zIndex: 2
+        });
+        mainPage.css({zIndex: 1});
+
+        if (this._isRight) {
+          menuPage.css({
+            right: '-' + options.width,
+            left: 'auto'
+          });
+        } else {
+          menuPage.css({
+            right: 'auto',
+            left: '-' + options.width
+          });
+        }
+
+        this._blackMask = angular.element('<div></div>').css({
+          backgroundColor: 'black',
+          top: '0px',
+          left: '0px',
+          right: '0px',
+          bottom: '0px',
+          position: 'absolute',
+          display: 'none',
+          zIndex: 0
+        });
+
+        element.prepend(this._blackMask);
+      },
+
+      /**
+       * @param {Object} options
+       * @param {String} options.width
+       */
+      onResized: function(options) {
+        this._menuPage.css('width', options.width);
+
+        if (this._isRight) {
+          this._menuPage.css({
+            right: '-' + options.width,
+            left: 'auto'
+          });
+        } else {
+          this._menuPage.css({
+            right: 'auto',
+            left: '-' + options.width
+          });
+        }
+
+        if (options.isOpened) {
+          var max = this._menuPage[0].clientWidth;
+          var menuStyle = this._generateMenuPageStyle(max);
+          animit(this._menuPage[0]).queue(menuStyle).play();
+        }
+      },
+
+      /**
+       */
+      destroy: function() {
+        if (this._blackMask) {
+          this._blackMask.remove();
+          this._blackMask = null;
+        }
+
+        this._mainPage.removeAttr('style');
+        this._menuPage.removeAttr('style');
+
+        this._element = this._mainPage = this._menuPage = null;
+      },
+
+      /**
+       * @param {Function} callback
+       */
+      openMenu: function(callback) {
+
+        this._menuPage.css('display', 'block');
+        this._blackMask.css('display', 'block');
+
+        var max = this._menuPage[0].clientWidth;
+        var menuStyle = this._generateMenuPageStyle(max);
+        var mainPageStyle = this._generateMainPageStyle(max);
+
+        setTimeout(function() {
+
+          animit(this._mainPage[0])
+          .queue(mainPageStyle, {
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .queue(function(done) {
+              callback();
+              done();
+            })
+            .play();
+
+          animit(this._menuPage[0])
+            .queue(menuStyle, {
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .play();
+
+        }.bind(this), 1000 / 60);
+      },
+
+      /**
+       * @param {Function} callback
+       */
+      closeMenu: function(callback) {
+        this._blackMask.css({display: 'block'});
+
+        var menuPageStyle = this._generateMenuPageStyle(0);
+        var mainPageStyle = this._generateMainPageStyle(0);
+
+        setTimeout(function() {
+
+          animit(this._mainPage[0])
+            .queue(mainPageStyle, {
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .queue(function(done) {
+              this._menuPage.css('display', 'none');
+              callback();
+              done();
+            }.bind(this))
+            .play();
+
+          animit(this._menuPage[0])
+            .queue(menuPageStyle, {
+              duration: 0.4,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .play();
+
+        }.bind(this), 1000 / 60);
+      },
+
+      /**
+       * @param {Object} options
+       * @param {Number} options.distance
+       * @param {Number} options.maxDistance
+       */
+      translateMenu: function(options) {
+
+        this._menuPage.css('display', 'block');
+        this._blackMask.css({display: 'block'});
+
+        var menuPageStyle = this._generateMenuPageStyle(Math.min(options.maxDistance, options.distance));
+        var mainPageStyle = this._generateMainPageStyle(Math.min(options.maxDistance, options.distance));
+        delete mainPageStyle.opacity;
+
+        animit(this._menuPage[0])
+          .queue(menuPageStyle)
+          .play();
+
+        if (Object.keys(mainPageStyle).length > 0) {
+          animit(this._mainPage[0])
+            .queue(mainPageStyle)
+            .play();
+        }
+      },
+
+      _generateMenuPageStyle: function(distance) {
+        var max = this._menuPage[0].clientWidth;
+
+        var x = this._isRight ? -distance : distance;
+        var transform = 'translate3d(' + x + 'px, 0, 0)';
+
+        return {
+          transform: transform,
+          'box-shadow': distance === 0 ? 'none' : '0px 0 10px 0px rgba(0, 0, 0, 0.2)'
+        };
+      },
+
+      _generateMainPageStyle: function(distance) {
+        var max = this._menuPage[0].clientWidth;
+        var opacity = 1 - (0.1 * distance / max);
+
+        return {
+          opacity: opacity
+        };
+      },
+
+      copy: function() {
+        return new OverlaySlidingMenuAnimator();
+      }
+    });
+
+    return OverlaySlidingMenuAnimator;
+  }]);
+
+})();
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+<<<<<<< HEAD
 (function(){
   'use strict';
   var module = angular.module('onsen');
@@ -9236,6 +11193,237 @@ limitations under the License.
 
     return PopoverAnimator; 
   });
+=======
+(function() {
+  'use strict;';
+
+  var module = angular.module('onsen');
+
+  module.factory('PageView', ['$onsen', '$parse', function($onsen, $parse) {
+
+    var PageView = Class.extend({
+      _registeredToolbarElement : false,
+      _registeredBottomToolbarElement : false,
+
+      _nullElement : window.document.createElement('div'),
+
+      _toolbarElement : null,
+      _bottomToolbarElement : null,
+
+      init: function(scope, element, attrs) {
+        this._scope = scope;
+        this._element = element;
+        this._attrs = attrs;
+
+        this._registeredToolbarElement = false;
+        this._registeredBottomToolbarElement = false;
+
+        this._nullElement = window.document.createElement('div');
+
+        this._toolbarElement = angular.element(this._nullElement);
+        this._bottomToolbarElement = angular.element(this._nullElement);
+
+        this._clearListener = scope.$on('$destroy', this._destroy.bind(this));
+        this._userDeviceBackButtonListener = angular.noop;
+
+        if (this._attrs.ngDeviceBackbutton || this._attrs.onDeviceBackbutton) {
+          this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+        }
+      },
+
+      _onDeviceBackButton: function($event) {
+        this._userDeviceBackButtonListener($event);
+
+        // ng-device-backbutton
+        if (this._attrs.ngDeviceBackbutton) {
+          $parse(this._attrs.ngDeviceBackbutton)(this._scope, {$event: $event});
+        }
+
+        // on-device-backbutton
+        /* jshint ignore:start */
+        if (this._attrs.onDeviceBackbutton) {
+          var lastEvent = window.$event;
+          window.$event = $event;
+          new Function(this._attrs.onDeviceBackbutton)();
+          window.$event = lastEvent;
+        }
+        /* jshint ignore:end */
+      },
+
+      /**
+       * @param {Function} callback
+       */
+      setDeviceBackButtonHandler: function(callback) {
+        if (!this._deviceBackButtonHandler) {
+          this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+        }
+
+        this._userDeviceBackButtonListener = callback;
+      },
+
+      /**
+       * @return {Object/null}
+       */
+      getDeviceBackButtonHandler: function() {
+        return this._deviceBackButtonHandler || null;
+      },
+
+      /**
+       * Register toolbar element to this page.
+       *
+       * @param {jqLite} element
+       */
+      registerToolbar: function(element) {
+        if (this._registeredToolbarElement) {
+          throw new Error('This page\'s toolbar is already registered.');
+        }
+
+        angular.element(this.getContentElement()).attr('no-status-bar-fill', '');
+
+        element.remove();
+        var statusFill = this._element[0].querySelector('.page__status-bar-fill');
+        if (statusFill) {
+          angular.element(statusFill).after(element);
+        } else {
+          this._element.prepend(element);
+        }
+
+        this._toolbarElement = element;
+        this._registeredToolbarElement = true;
+      },
+
+      /**
+       * Register toolbar element to this page.
+       *
+       * @param {jqLite} element
+       */
+      registerBottomToolbar: function(element) {
+        if (this._registeredBottomToolbarElement) {
+          throw new Error('This page\'s bottom-toolbar is already registered.');
+        }
+
+        element.remove();
+
+        this._bottomToolbarElement = element;
+        this._registeredBottomToolbarElement = true;
+
+        var fill = angular.element(document.createElement('div'));
+        fill.addClass('page__bottom-bar-fill');
+        fill.css({width: '0px', height: '0px'});
+
+        this._element.prepend(fill);
+        this._element.append(element);
+      },
+
+      /**
+       * @param {jqLite} element
+       */
+      registerExtraElement: function(element) {
+        if (!this._extraElement) {
+          this._extraElement = angular.element('<div></div>');
+          this._extraElement.addClass('page__extra');
+          this._extraElement.css({
+            'z-index': '10001'
+          });
+          this._element.append(this._extraElement);
+        }
+        this._extraElement.append(element.remove());
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      hasToolbarElement : function() {
+        return !!this._registeredToolbarElement;
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      hasBottomToolbarElement : function() {
+        return !!this._registeredBottomToolbarElement;
+      },
+
+      /**
+       * @return {HTMLElement}
+       */
+      getContentElement : function() {
+        for (var i = 0; i < this._element.length; i++) {
+          if (this._element[i].querySelector) {
+            var content = this._element[i].querySelector('.page__content');
+            if (content) {
+              return content;
+            }
+          }
+        }
+        throw Error('fail to get ".page__content" element.');
+      },
+
+      /**
+       * @return {HTMLElement}
+       */
+      getToolbarElement : function() {
+        return this._toolbarElement[0] || this._nullElement;
+      },
+
+      /**
+       * @return {HTMLElement}
+       */
+      getBottomToolbarElement : function() {
+        return this._bottomToolbarElement[0] || this._nullElement;
+      },
+
+      /**
+       * @return {HTMLElement}
+       */
+      getToolbarLeftItemsElement : function() {
+        return this._toolbarElement[0].querySelector('.left') || this._nullElement;
+      },
+
+      /**
+       * @return {HTMLElement}
+       */
+      getToolbarCenterItemsElement : function() {
+        return this._toolbarElement[0].querySelector('.center') || this._nullElement;
+      },
+
+      /**
+       * @return {HTMLElement}
+       */
+      getToolbarRightItemsElement : function() {
+        return this._toolbarElement[0].querySelector('.right') || this._nullElement;
+      },
+
+      /**
+       * @return {HTMLElement}
+       */
+      getToolbarBackButtonLabelElement : function() {
+        return this._toolbarElement[0].querySelector('ons-back-button .back-button__label') || this._nullElement;
+      },
+
+      _destroy: function() {
+        this.emit('destroy', {page: this});
+
+        if (this._deviceBackButtonHandler) {
+          this._deviceBackButtonHandler.destroy();
+          this._deviceBackButtonHandler = null;
+        }
+
+        this._element = null;
+        this._toolbarElement = null;
+        this._nullElement = null;
+        this._bottomToolbarElement = null;
+        this._extraElement = null;
+        this._scope = null;
+
+        this._clearListener();
+      }
+    });
+    MicroEvent.mixin(PageView);
+
+    return PageView;
+  }]);
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 })();
 
 
@@ -9269,8 +11457,12 @@ limitations under the License.
       _menuPage: undefined,
       _mainPage: undefined,
       _width: undefined,
+<<<<<<< HEAD
       _duration: false,
       
+=======
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
        * @param {jqLite} mainPage
@@ -9288,7 +11480,10 @@ limitations under the License.
 
         this._isRight = !!options.isRight;
         this._width = options.width || '90%';
+<<<<<<< HEAD
         this._duration = 0.4;
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
         menuPage.css({
           width: options.width,
@@ -9349,10 +11544,15 @@ limitations under the License.
 
       /**
        * @param {Function} callback
+<<<<<<< HEAD
        * @param {Boolean} instant
        */
       openMenu: function(callback, instant) {
         var duration = instant === true ? 0.0 : this._duration;        
+=======
+       */
+      openMenu: function(callback) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
         this._menuPage.css('display', 'block');
 
@@ -9367,7 +11567,11 @@ limitations under the License.
             .queue({
               transform: aboveTransform
             }, {
+<<<<<<< HEAD
               duration: duration,
+=======
+              duration: 0.4,
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .queue(function(done) {
@@ -9378,7 +11582,11 @@ limitations under the License.
 
           animit(this._menuPage[0])
             .queue(behindStyle, {
+<<<<<<< HEAD
               duration: duration,
+=======
+              duration: 0.4,
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .play();
@@ -9388,10 +11596,15 @@ limitations under the License.
 
       /**
        * @param {Function} callback
+<<<<<<< HEAD
        * @param {Boolean} instant
        */
       closeMenu: function(callback, instant) {
         var duration = instant === true ? 0.0 : this._duration;        
+=======
+       */
+      closeMenu: function(callback) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
         var aboveTransform = this._generateAbovePageTransform(0);
         var behindStyle = this._generateBehindPageStyle(0);
@@ -9402,7 +11615,11 @@ limitations under the License.
             .queue({
               transform: aboveTransform
             }, {
+<<<<<<< HEAD
               duration: duration,
+=======
+              duration: 0.4,
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .queue({
@@ -9417,7 +11634,11 @@ limitations under the License.
 
           animit(this._menuPage[0])
             .queue(behindStyle, {
+<<<<<<< HEAD
               duration: duration,
+=======
+              duration: 0.4,
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .queue(function(done) {
@@ -9509,7 +11730,10 @@ limitations under the License.
       _menuPage: undefined,
       _element: undefined,
       _mainPage: undefined,
+<<<<<<< HEAD
       _duration: undefined,
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
@@ -9525,7 +11749,10 @@ limitations under the License.
         this._mainPage = mainPage;
         this._isRight = !!options.isRight;
         this._width = options.width || '90%';
+<<<<<<< HEAD
         this._duration = 0.4;
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
         mainPage.css({
           boxShadow: '0px 0 10px 0px rgba(0, 0, 0, 0.2)'
@@ -9609,11 +11836,17 @@ limitations under the License.
 
       /**
        * @param {Function} callback
+<<<<<<< HEAD
        * @param {Boolean} instant
        */
       openMenu: function(callback, instant) {
         var duration = instant === true ? 0.0 : this._duration;        
         
+=======
+       */
+      openMenu: function(callback) {
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         this._menuPage.css('display', 'block');
         this._blackMask.css('display', 'block');
 
@@ -9628,7 +11861,11 @@ limitations under the License.
             .queue({
               transform: aboveTransform
             }, {
+<<<<<<< HEAD
               duration: duration,
+=======
+              duration: 0.4,
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .queue(function(done) {
@@ -9639,7 +11876,11 @@ limitations under the License.
 
           animit(this._menuPage[0])
             .queue(behindStyle, {
+<<<<<<< HEAD
               duration: duration,
+=======
+              duration: 0.4,
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .play();
@@ -9649,11 +11890,16 @@ limitations under the License.
 
       /**
        * @param {Function} callback
+<<<<<<< HEAD
        * @param {Boolean} instant
        */
       closeMenu: function(callback, instant) {
         var duration = instant === true ? 0.0 : this._duration;        
 
+=======
+       */
+      closeMenu: function(callback) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         this._blackMask.css('display', 'block');
 
         var aboveTransform = this._generateAbovePageTransform(0);
@@ -9665,7 +11911,11 @@ limitations under the License.
             .queue({
               transform: aboveTransform
             }, {
+<<<<<<< HEAD
               duration: duration,
+=======
+              duration: 0.4,
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .queue({
@@ -9680,7 +11930,11 @@ limitations under the License.
 
           animit(this._menuPage[0])
             .queue(behindStyle, {
+<<<<<<< HEAD
               duration: duration,
+=======
+              duration: 0.4,
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
             .queue(function(done) {
@@ -9899,6 +12153,7 @@ limitations under the License.
             })
             .queue({
               css: {
+<<<<<<< HEAD
                 transform: 'translate3D(0px, 0px, 0px)',
                 opacity: 1.0
               },
@@ -10006,10 +12261,15 @@ limitations under the License.
             .queue({
               css: {
                 transform: 'translate3D(-50%, -50%, 0)',
+=======
+                transform: 'translate3D(0px, 0px, 0px)',
+                opacity: 1.0
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
               },
               duration: this.duration,
               timing: this.timing
             })
+<<<<<<< HEAD
             .resetStyle()
             .queue(function(done) {
               callback();
@@ -10042,27 +12302,51 @@ limitations under the License.
             .queue({
               css: {
                 transform: 'translate3D(-50%, -50%, 0)'
+=======
+            .resetStyle(),
+
+          animit(leavePage.element[0])
+            .queue({
+              css: {
+                transform: 'translate3D(0px, 0px, 0px)'
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
               },
               duration: 0
             })
             .queue({
               css: {
+<<<<<<< HEAD
                 transform: 'translate3D(-50%, -350%, 0)'
+=======
+                transform: 'translate3D(100%, 0px, 0px)'
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
               },
               duration: this.duration,
               timing: this.timing
             })
+<<<<<<< HEAD
             .resetStyle()
             .queue(function(done) {
               callback();
               done();
             })
 
+=======
+            .wait(0.2)
+            .queue(function(finish) {
+              done();
+              finish();
+            })
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         );
       }
     });
 
+<<<<<<< HEAD
     return SlideDialogAnimator;
+=======
+    return SimpleSlideTransitionAnimator;
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   }]);
 
 })();
@@ -10141,6 +12425,7 @@ limitations under the License.
       return !this.isClosed() && this._distance < this._maxDistance / 2;
     },
 
+<<<<<<< HEAD
     openOrClose: function(options) {
       if (this.shouldOpen()) {
         this.open(options);
@@ -10155,17 +12440,42 @@ limitations under the License.
       if (!this.isClosed()) {
         this._distance = 0;
         this.emit('close', options);
+=======
+    openOrClose: function(callback) {
+      if (this.shouldOpen()) {
+        this.open(callback);
+      } else if (this.shouldClose()) {
+        this.close(callback);
+      }
+    },
+
+    close: function(callback) {
+      callback = callback || function() {};
+
+      if (!this.isClosed()) {
+        this._distance = 0;
+        this.emit('close', {callback: callback});
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       } else {
         callback();
       }
     },
 
+<<<<<<< HEAD
     open: function(options) {
       var callback = options.callback || function() {};
 
       if (!this.isOpened()) {
         this._distance = this._maxDistance;
         this.emit('open', options);
+=======
+    open: function(callback) {
+      callback = callback || function() {};
+
+      if (!this.isOpened()) {
+        this._distance = this._maxDistance;
+        this.emit('open', {callback: callback});
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       } else {
         callback();
       }
@@ -10223,6 +12533,10 @@ limitations under the License.
   });
   MicroEvent.mixin(SlidingMenuViewModel);
 
+<<<<<<< HEAD
+=======
+  var MAIN_PAGE_RATIO = 0.9;
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   module.factory('SlidingMenuView', ['$onsen', '$compile', 'SlidingMenuAnimator', 'RevealSlidingMenuAnimator', 'PushSlidingMenuAnimator', 'OverlaySlidingMenuAnimator', function($onsen, $compile, SlidingMenuAnimator, RevealSlidingMenuAnimator, 
                                              PushSlidingMenuAnimator, OverlaySlidingMenuAnimator) {
 
@@ -10231,8 +12545,13 @@ limitations under the License.
       _attrs: undefined,
 
       _element: undefined,
+<<<<<<< HEAD
       _menuPage: undefined,
       _mainPage: undefined,
+=======
+      _behindPage: undefined,
+      _abovePage: undefined,
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
       _doorLock: undefined,
 
@@ -10243,8 +12562,13 @@ limitations under the License.
         this._attrs = attrs;
         this._element = element;
 
+<<<<<<< HEAD
         this._menuPage = angular.element(element[0].querySelector('.onsen-sliding-menu__menu'));
         this._mainPage = angular.element(element[0].querySelector('.onsen-sliding-menu__main'));
+=======
+        this._behindPage = angular.element(element[0].querySelector('.onsen-sliding-menu__behind'));
+        this._abovePage = angular.element(element[0].querySelector('.onsen-sliding-menu__above'));
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
         this._doorLock = new DoorLock();
 
@@ -10254,6 +12578,7 @@ limitations under the License.
         this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
         this._logic.on('translate', this._translate.bind(this));
         this._logic.on('open', function(options) {
+<<<<<<< HEAD
           this._open(options);
         }.bind(this));
         this._logic.on('close', function(options) {
@@ -10262,6 +12587,16 @@ limitations under the License.
 
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
         attrs.$observe('swipeable', this._onSwipeableChanged.bind(this));
+=======
+          this._open(options.callback);
+        }.bind(this));
+        this._logic.on('close', function(options) {
+          this._close(options.callback);
+        }.bind(this));
+
+        attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
+        attrs.$observe('swipable', this._onSwipableChanged.bind(this));
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
         window.addEventListener('resize', this._onWindowResize.bind(this));
 
@@ -10270,10 +12605,20 @@ limitations under the License.
 
         if (attrs.mainPage) {
           this.setMainPage(attrs.mainPage);
+<<<<<<< HEAD
+=======
+        } else if (attrs.abovePage) {
+          this.setMainPage(attrs.abovePage);
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         }
 
         if (attrs.menuPage) {
           this.setMenuPage(attrs.menuPage);
+<<<<<<< HEAD
+=======
+        } else if (attrs.behindPage) {
+          this.setMenuPage(attrs.behindPage);
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         }
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
@@ -10284,13 +12629,22 @@ limitations under the License.
           var maxDistance = this._normalizeMaxSlideDistanceAttr();
           this._logic.setMaxDistance(maxDistance);
 
+<<<<<<< HEAD
           this._menuPage.css({opacity: 1});
+=======
+          this._behindPage.css({opacity: 1});
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
           this._animator = this._getAnimatorOption();
           this._animator.setup(
             this._element,
+<<<<<<< HEAD
             this._mainPage,
             this._menuPage,
+=======
+            this._abovePage,
+            this._behindPage,
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
             {
               isRight: this._isRightMenu,
               width: this._attrs.maxSlideDistance || '90%'
@@ -10315,7 +12669,11 @@ limitations under the License.
         }
       },
 
+<<<<<<< HEAD
       _refreshMenuPageWidth: function() {
+=======
+      _refreshBehindPageWidth: function() {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
 
         if (this._animator) {
@@ -10343,16 +12701,27 @@ limitations under the License.
         return animator.copy();
       },
 
+<<<<<<< HEAD
       _onSwipeableChanged: function(swipeable) {
         swipeable = swipeable === '' || swipeable === undefined || swipeable == 'true';
 
         this.setSwipeable(swipeable);
+=======
+      _onSwipableChanged: function(swipable) {
+        swipable = swipable === '' || swipable === undefined || swipable == 'true';
+
+        this.setSwipable(swipable);
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       },
 
       /**
        * @param {Boolean} enabled
        */
+<<<<<<< HEAD
       setSwipeable: function(enabled) {
+=======
+      setSwipable: function(enabled) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         if (enabled) {
           this._activateHammer();
         } else {
@@ -10362,12 +12731,20 @@ limitations under the License.
 
       _onWindowResize: function() {
         this._recalculateMAX();
+<<<<<<< HEAD
         this._refreshMenuPageWidth();
+=======
+        this._refreshBehindPageWidth();
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       },
 
       _onMaxSlideDistanceChanged: function() {
         this._recalculateMAX();
+<<<<<<< HEAD
         this._refreshMenuPageWidth();
+=======
+        this._refreshBehindPageWidth();
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       },
 
       /**
@@ -10377,13 +12754,21 @@ limitations under the License.
         var maxDistance = this._attrs.maxSlideDistance;
 
         if (!('maxSlideDistance' in this._attrs)) {
+<<<<<<< HEAD
           maxDistance = 0.9 * this._mainPage[0].clientWidth;
+=======
+          maxDistance = 0.9 * this._abovePage[0].clientWidth;
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         } else if (typeof maxDistance == 'string') {
           if (maxDistance.indexOf('px', maxDistance.length - 2) !== -1) {
             maxDistance = parseInt(maxDistance.replace('px', ''), 10);
           } else if (maxDistance.indexOf('%', maxDistance.length - 1) > 0) {
             maxDistance = maxDistance.replace('%', '');
+<<<<<<< HEAD
             maxDistance = parseFloat(maxDistance) / 100 * this._mainPage[0].clientWidth;
+=======
+            maxDistance = parseFloat(maxDistance) / 100 * this._abovePage[0].clientWidth;
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
           }
         } else {
           throw new Error('invalid state');
@@ -10412,12 +12797,20 @@ limitations under the License.
         this._hammertime = new Hammer(this._element[0]);
       },
 
+<<<<<<< HEAD
       _appendMainPage: function(pageUrl, templateHTML) {
+=======
+      _appendAbovePage: function(pageUrl, templateHTML) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         var pageScope = this._scope.$parent.$new();
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
+<<<<<<< HEAD
         this._mainPage.append(pageContent);
+=======
+        this._abovePage.append(pageContent);
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
         if (this._currentPageElement) {
           this._currentPageElement.remove();
@@ -10434,22 +12827,39 @@ limitations under the License.
       /**
        * @param {String}
        */
+<<<<<<< HEAD
       _appendMenuPage: function(templateHTML) {
+=======
+      _appendBehindPage: function(templateHTML) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         var pageScope = this._scope.$parent.$new();
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
+<<<<<<< HEAD
         this._menuPage.append(pageContent);
 
         if (this._currentMenuPageScope) {
           this._currentMenuPageScope.$destroy();
           this._currentMenuPageElement.remove();
+=======
+        this._behindPage.append(pageContent);
+
+        if (this._currentBehindPageScope) {
+          this._currentBehindPageScope.$destroy();
+          this._currentBehindPageElement.remove();
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         }
 
         link(pageScope);
 
+<<<<<<< HEAD
         this._currentMenuPageElement = pageContent;
         this._currentMenuPageScope = pageScope;
+=======
+        this._currentBehindPageElement = pageContent;
+        this._currentBehindPageScope = pageScope;
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       },
 
       /**
@@ -10465,7 +12875,11 @@ limitations under the License.
 
           var self = this;
           $onsen.getPageHTMLAsync(page).then(function(html) {
+<<<<<<< HEAD
             self._appendMenuPage(angular.element(html));
+=======
+            self._appendBehindPage(angular.element(html));
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
             if (options.closeMenu) {
               self.close();
             }
@@ -10478,6 +12892,13 @@ limitations under the License.
         }
       },
 
+<<<<<<< HEAD
+=======
+      setBehindPage: function() {
+        return this.setMenuPage.apply(this, arguments);
+      },
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       /**
        * @param {String} pageUrl
        * @param {Object} options
@@ -10503,7 +12924,11 @@ limitations under the License.
         if (pageUrl) {
           var self = this;
           $onsen.getPageHTMLAsync(pageUrl).then(function(html) {
+<<<<<<< HEAD
             self._appendMainPage(pageUrl, html);
+=======
+            self._appendAbovePage(pageUrl, html);
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
             done();
           }, function() {
             throw new Error('Page is not found: ' + page);
@@ -10513,6 +12938,13 @@ limitations under the License.
         }
       },
 
+<<<<<<< HEAD
+=======
+      setAbovePage: function(pageUrl, options) {
+        return this.setMainPage.apply(this, arguments);
+      },
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       _handleEvent: function(event) {
 
         if (this._doorLock.isLocked()) {
@@ -10622,7 +13054,11 @@ limitations under the License.
         }
 
         var targetWidth = event.gesture.startEvent._swipeTargetWidth;
+<<<<<<< HEAD
         return this._isRightMenu ? this._mainPage[0].clientWidth - x < targetWidth : x < targetWidth;
+=======
+        return this._isRightMenu ? this._abovePage[0].clientWidth - x < targetWidth : x < targetWidth;
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       },
 
       _getSwipeTargetWidth: function() {
@@ -10634,7 +13070,11 @@ limitations under the License.
 
         var width = parseInt(targetWidth, 10);
         if (width < 0 || !targetWidth) {
+<<<<<<< HEAD
           return this._mainPage[0].clientWidth;
+=======
+          return this._abovePage[0].clientWidth;
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         } else {
           return width;
         }
@@ -10647,6 +13087,7 @@ limitations under the License.
       /**
        * Close sliding-menu page.
        *
+<<<<<<< HEAD
        * @param {Object} options 
        */
       close: function(options) {
@@ -10665,11 +13106,33 @@ limitations under the License.
             unlock = this._doorLock.lock(),
             instant = options.animation == 'none';
 
+=======
+       * @param {Function} callback
+       */
+      close: function(callback) {
+        callback = callback || function() {};
+
+        this.emit('preclose');
+
+        this._doorLock.waitUnlock(function() {
+          this._logic.close(callback);
+        }.bind(this));
+      },
+
+      _close: function(callback) {
+        callback = callback || function() {};
+
+        var unlock = this._doorLock.lock();
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         this._animator.closeMenu(function() {
           unlock();
           this.emit('postclose');
           callback();
+<<<<<<< HEAD
         }.bind(this), instant);
+=======
+        }.bind(this));
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       },
 
       openMenu: function() {
@@ -10679,15 +13142,23 @@ limitations under the License.
       /**
        * Open sliding-menu page.
        *
+<<<<<<< HEAD
        * @param {Object} options 
        */
       open: function(options) {
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
+=======
+       * @param {Function} callback
+       */
+      open: function(callback) {
+        callback = callback || function() {};
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
         this.emit('preopen');
 
         this._doorLock.waitUnlock(function() {
+<<<<<<< HEAD
           this._logic.open(options);
         }.bind(this));
       },
@@ -10696,22 +13167,43 @@ limitations under the License.
         var callback = options.callback || function() {},
             unlock = this._doorLock.lock(),
             instant = options.animation == 'none';
+=======
+          this._logic.open(callback);
+        }.bind(this));
+      },
+
+      _open: function(callback) {
+        callback = callback || function() {};
+        var unlock = this._doorLock.lock();
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
         this._animator.openMenu(function() {
           unlock();
           this.emit('postopen');
           callback();
+<<<<<<< HEAD
         }.bind(this), instant);
+=======
+        }.bind(this));
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       },
 
       /**
        * Toggle sliding-menu page.
        */
+<<<<<<< HEAD
       toggle: function(options) {
         if (this._logic.isClosed()) {
           this.open(options);
         } else {
           this.close(options);
+=======
+      toggle: function(callback) {
+        if (this._logic.isClosed()) {
+          this.open(callback);
+        } else {
+          this.close(callback);
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         }
       },
 
@@ -10862,7 +13354,11 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
+<<<<<<< HEAD
   module.factory('SplitView', ['$compile', 'RevealSlidingMenuAnimator', '$onsen', '$onsGlobal', function($compile, RevealSlidingMenuAnimator, $onsen, $onsGlobal) {
+=======
+  module.factory('SplitView', ['$compile', 'RevealSlidingMenuAnimator', '$onsen', function($compile, RevealSlidingMenuAnimator, $onsen) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
     var SPLIT_MODE = 0;
     var COLLAPSE_MODE = 1;
     var MAIN_PAGE_RATIO = 0.9;
@@ -10877,6 +13373,7 @@ limitations under the License.
         this._element = element;
         this._scope = scope;
 
+<<<<<<< HEAD
         this._mainPage = angular.element(element[0].querySelector('.onsen-split-view__main'));
         this._secondaryPage = angular.element(element[0].querySelector('.onsen-split-view__secondary'));
 
@@ -10888,6 +13385,28 @@ limitations under the License.
         this._doCollapse = false;
 
         $onsGlobal.orientation.on('change', this._onResize.bind(this));
+=======
+        this._abovePage = angular.element(element[0].querySelector('.onsen-split-view__main'));
+        this._behindPage = angular.element(element[0].querySelector('.onsen-split-view__secondary'));
+
+        this._previousX = 0;
+        this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+        this._currentX = 0;
+        this._startX = 0;
+        this._mode = SPLIT_MODE;
+        this._doorLock = new DoorLock();
+
+        this._hammertime = new Hammer(this._element[0]);
+        this._boundHammerEvent = this._handleEvent.bind(this);
+
+        scope.$watch('swipable', this._onSwipableChanged.bind(this));
+
+        if ($onsen.isIOS()) {
+          window.addEventListener('orientationchange', this._onResize.bind(this));
+        } else {
+          window.addEventListener('resize', this._onResize.bind(this));
+        }
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
         this._animator = new RevealSlidingMenuAnimator();
 
@@ -10921,6 +13440,7 @@ limitations under the License.
         var pageScope = this._scope.$parent.$new();
         var pageContent = $compile(templateHTML)(pageScope);
 
+<<<<<<< HEAD
         this._secondaryPage.append(pageContent);
 
         if (this._currentSecondaryPageElement) {
@@ -10930,6 +13450,17 @@ limitations under the License.
 
         this._currentSecondaryPageElement = pageContent;
         this._currentSecondaryPageScope = pageScope;
+=======
+        this._behindPage.append(pageContent);
+
+        if (this._currentBehindPageElement) {
+          this._currentBehindPageElement.remove();
+          this._currentBehindPageScope.$destroy();
+        }
+
+        this._currentBehindPageElement = pageContent;
+        this._currentBehindPageScope = pageScope;
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       },
 
       /**
@@ -10939,7 +13470,11 @@ limitations under the License.
         var pageScope = this._scope.$parent.$new();
         var pageContent = $compile(templateHTML)(pageScope);
 
+<<<<<<< HEAD
         this._mainPage.append(pageContent);
+=======
+        this._abovePage.append(pageContent);
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
         if (this._currentPage) {
           this._currentPage.remove();
@@ -10986,11 +13521,16 @@ limitations under the License.
 
         if (lastMode === COLLAPSE_MODE && this._mode === COLLAPSE_MODE) {
           this._animator.onResized({
+<<<<<<< HEAD
             isOpened: false,
+=======
+            isOpened: this._currentX > 0,
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
             width: '90%'
           });
         }
 
+<<<<<<< HEAD
         this._max = this._mainPage[0].clientWidth * MAIN_PAGE_RATIO;
       },
 
@@ -11065,6 +13605,56 @@ limitations under the License.
         } else {
           var mq = window.matchMedia(c);
           return mq.matches;
+=======
+        this._max = this._abovePage[0].clientWidth * MAIN_PAGE_RATIO;
+      },
+
+      _considerChangingCollapse: function() {
+        if (this._shouldCollapse()) {
+          this._activateCollapseMode();
+        } else {
+          this._activateSplitMode();
+        }
+      },
+
+      _shouldCollapse: function() {
+        var orientation = window.orientation;
+
+        if (orientation === undefined) {
+          orientation = window.innerWidth > window.innerHeight ? 90 : 0;
+        }
+
+        switch (this._scope.collapse) {
+          case undefined:
+          case 'none':
+            return false;
+
+          case 'portrait':
+            return orientation === 180 || orientation === 0;
+
+          case 'landscape':
+            return orientation == 90 || orientation == -90;
+
+          default:
+            // by width
+            if (this._scope.collapse === undefined) {
+              return false;
+            } 
+
+            var widthToken;
+            if (this._scope.collapse.indexOf('width') >= 0) {
+              var tokens = this._scope.collapse.split(' ');
+              widthToken = tokens[tokens.length - 1];
+            } else {
+              widthToken = this._scope.collapse;
+            }
+
+            if (widthToken.indexOf('px') > 0) {
+              widthToken = widthToken.substr(0, widthToken.length - 2);
+            }
+
+            return isNumber(widthToken) && window.innerWidth < widthToken;
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         }
       },
 
@@ -11074,6 +13664,7 @@ limitations under the License.
             this._scope.mainPageWidth = '70';
           }
 
+<<<<<<< HEAD
           var secondarySize = 100 - this._scope.mainPageWidth.replace('%', '');
           this._secondaryPage.css({
             width: secondarySize + '%',
@@ -11133,10 +13724,44 @@ limitations under the License.
           );
 
           this._fireEvent('postcollapse');
+=======
+          var behindSize = 100 - this._scope.mainPageWidth.replace('%', '');
+          this._behindPage.css({
+            width: behindSize + '%',
+            opacity: 1
+          });
+
+          this._abovePage.css({
+            width: this._scope.mainPageWidth + '%'
+          });
+
+          this._abovePage.css('left', behindSize + '%');
+          this._currentX = this._behindPage[0].clientWidth;
+        }
+      },
+
+      _activateCollapseMode: function() {
+        if (this._mode !== COLLAPSE_MODE) {
+          this._behindPage.attr('style', '');
+          this._abovePage.attr('style', '');
+
+          this._mode = COLLAPSE_MODE;
+
+          this._onSwipableChanged(this._scope.swipable);
+
+          this._animator.setup(
+            this._element,
+            this._abovePage,
+            this._behindPage,
+            {isRight: false, width: '90%'}
+          );
+          this._currentX = this._startX = 0;
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         }
       },
 
       _activateSplitMode: function() {
+<<<<<<< HEAD
         if (this._mode !== SPLIT_MODE) {
           this._fireEvent('presplit');
 
@@ -11149,6 +13774,146 @@ limitations under the License.
           this._setSize();
        
           this._fireEvent('postsplit');
+=======
+        this._animator.destroy();
+
+        this._behindPage.attr('style', '');
+        this._abovePage.attr('style', '');
+
+        this._mode = SPLIT_MODE;
+        this._setSize();
+        this._deactivateHammer();
+      },
+
+      _activateHammer: function() {
+        this._hammertime.on('dragleft dragright swipeleft swiperight release', this._boundHammerEvent);
+      },
+
+      _deactivateHammer: function() {
+        this._hammertime.off('dragleft dragright swipeleft swiperight release', this._boundHammerEvent);
+      },
+
+      _onSwipableChanged: function(swipable) {
+        swipable = swipable === '' || swipable === undefined || swipable == 'true';
+
+        if (swipable) {
+          this._activateHammer();
+        } else {
+          this._deactivateHammer();
+        }
+      },
+
+      _handleEvent: function(event) {
+        if (this._doorLock.isLocked()) {
+          return;
+        }
+
+        switch (event.type) {
+          case 'dragleft':
+          case 'dragright':
+            event.preventDefault();
+            event.gesture.preventDefault();
+            var deltaX = event.gesture.deltaX;
+
+            this._currentX = this._startX + deltaX;
+            if (this._currentX >= 0) {
+              this._translate(this._currentX);
+            }
+            break;
+
+          case 'swipeleft':
+            event.gesture.preventDefault();
+            this.close();
+            break;
+
+          case 'swiperight':
+            event.gesture.preventDefault();
+            this.open();
+            break;
+
+          case 'release':
+            if (this._currentX > this._max / 2) {
+              this.open();
+            } else {
+              this.close();
+            }
+            break;
+        }
+      },
+
+      _onTransitionEnd: function() {
+        this._scope.$root.$broadcast(ON_PAGE_READY); //make sure children can do something before the parent.
+      },
+
+      close: function(callback) {
+        callback = callback || function() {};
+
+        if (this._mode === SPLIT_MODE) {
+          callback();
+          return;
+        } else if (this._mode === COLLAPSE_MODE) {
+          this._startX = 0;
+
+          if (this._currentX !== 0) {
+            var self = this;
+            this._doorLock.waitUnlock(function() {
+              var unlock = self._doorLock.lock();
+              self._currentX = 0;
+
+              self._animator.closeMenu(function() {
+                unlock();
+                self._onTransitionEnd();
+                callback();
+              });
+            });
+          }
+        }
+      },
+
+      open: function(callback) {
+        callback = callback || function() {};
+
+        if (this._mode === SPLIT_MODE) {
+          callback();
+          return;
+        } else if (this._mode === COLLAPSE_MODE) {
+          this._startX = this._max;
+
+          if (this._currentX != this._max) {
+            var self = this;
+            this._doorLock.waitUnlock(function() {
+              var unlock = self._doorLock.lock();
+              self._currentX = self._max;
+
+              self._animator.openMenu(function() {
+                unlock();
+                self._onTransitionEnd();
+                callback();
+              });
+            });
+          }
+        }
+      },
+
+      toggle: function(callback) {
+        if (this._startX === 0) {
+          this.open(callback);
+        } else {
+          this.close(callback);
+        }
+      },
+
+      _translate: function(x) {
+        if (this._mode === COLLAPSE_MODE) {
+          this._currentX = x;
+
+          var options = {
+            distance: x,
+            maxDistance: this._max
+          };
+
+          this._animator.translateMenu(options);
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         }
       },
 
@@ -11243,7 +14008,11 @@ limitations under the License.
       /**
        * @return {HTMLElement}
        */
+<<<<<<< HEAD
       getCheckboxElement: function() {
+=======
+      getCheckboxElemenet: function() {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         return this._checkbox[0];
       }
     });
@@ -11411,6 +14180,7 @@ limitations under the License.
         options = options || {};
         var previousTabItem = this._tabItems[this.getActiveTabIndex()];
         var selectedTabItem = this._tabItems[index];
+<<<<<<< HEAD
 
         if(typeof selectedTabItem.noReload !== 'undefined' && 
             index == this.getActiveTabIndex()) {
@@ -11421,6 +14191,8 @@ limitations under the License.
           return false;
         }
 
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         var needLoad = selectedTabItem.page && !options.keepPage;
 
         if (!selectedTabItem) {
@@ -11636,6 +14408,7 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+<<<<<<< HEAD
  * @id alert-dialog 
  * @name ons-alert-dialog
  * @description 
@@ -11778,6 +14551,8 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  * @id back_button
  * @name ons-back-button
  * @description
@@ -11794,7 +14569,11 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
+<<<<<<< HEAD
   module.directive('onsBackButton', ['$onsen', '$compile', 'GenericView', 'ComponentCleaner', function($onsen, $compile, GenericView, ComponentCleaner) {
+=======
+  module.directive('onsBackButton', ['$onsen', '$compile', 'ComponentCleaner', function($onsen, $compile, ComponentCleaner) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
     return {
       restrict: 'E',
       replace: false,
@@ -11807,6 +14586,7 @@ limitations under the License.
 
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
+<<<<<<< HEAD
           var backButton = new GenericView(scope, element, attrs);
           
           $onsen.declareVarAttribute(attrs, backButton);
@@ -11826,6 +14606,10 @@ limitations under the License.
 
           $onsen.addModifierMethods(backButton, 'toolbar-button--*', element.children());
 
+=======
+          scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
           transclude(scope, function(clonedElement) {
             if (clonedElement[0]) {
               element[0].querySelector('.back-button__label').appendChild(clonedElement[0]);
@@ -11835,13 +14619,20 @@ limitations under the License.
           ComponentCleaner.onDestroy(scope, function() {
             ComponentCleaner.destroyScope(scope);
             ComponentCleaner.destroyAttributes(attrs);
+<<<<<<< HEAD
+=======
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
             element = null;
             scope = null;
             attrs = null;
           });
+<<<<<<< HEAD
         },
         post: function(scope, element) {
           $onsen.fireComponentEvent(element[0], 'init');
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         }
       }
     };
@@ -11855,9 +14646,12 @@ limitations under the License.
  * @description
  * [en]Toolbar component that is positioned at the bottom of the page. Has same functionality as the ons-toolbar component.[/en]
  * [ja]ページ下部に配置されるツールバー用コンポーネント。機能的にはons-toolbarと同様です。[/ja]
+<<<<<<< HEAD
  * @param inline
  *  [en]Display the toolbar as an inline element.[/en]
  *  [ja]ツールバーをインラインに置きます。スクロール領域内にそのままツールバーが表示されます。[/ja]
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @example
@@ -11870,7 +14664,11 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
+<<<<<<< HEAD
   module.directive('onsBottomToolbar', ['$onsen', 'GenericView', function($onsen, GenericView) {
+=======
+  module.directive('onsBottomToolbar', ['$onsen', function($onsen) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
     return {
       restrict: 'E',
       replace: false,
@@ -11879,6 +14677,7 @@ limitations under the License.
       // Do not use isolated scope and template's ng-transclde.
       transclude: false,
       scope: false,
+<<<<<<< HEAD
       compile: function(element, attrs) {
         var modifierTemplater = $onsen.generateModifierTemplater(attrs),
           inline = typeof attrs.inline !== 'undefined';
@@ -11916,6 +14715,26 @@ limitations under the License.
           },
           post: function(scope, element, attrs) {
             $onsen.fireComponentEvent(element[0], 'init');
+=======
+
+      compile: function(element, attrs) {
+
+        var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+        element.addClass('bottom-bar');
+        element.addClass(modifierTemplater('bottom-bar--*'));
+        element.css({'z-index': 0});
+
+        return {
+          pre: function(scope, element, attrs) {
+            // modifier
+            scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+            var pageView = element.inheritedData('ons-page');
+            if (pageView) {
+              pageView.registerBottomToolbar(element);
+            }
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
           }
         };
       }
@@ -11939,6 +14758,7 @@ limitations under the License.
  *    [ja]ボタンにスピナーを表示する場合は指定してください。[/ja]
  * @param animation
  *    [en]The animation when the button transitions to and from the spinner. Possible values are slide-left (default), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in.[/en]
+<<<<<<< HEAD
  *    [ja]スピナーを表示する場合のアニメーションを指定します。次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
  * @param disabled
  *    [en]Specify if button should be disabled.[/en]
@@ -11961,6 +14781,12 @@ limitations under the License.
  * @property isDisabled()
  *    [en]Returns whether the button is disabled or enabled.[/en]
  *    [ja]このボタンがdisabled状態かどうかを返します。[/ja] 
+=======
+ *    [ja]スピナーを表示する場合のアニメーションを指定します。次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in[/ja]
+ * @param disabled
+ *    [en]Specify if button should be disabled.[/en]
+ *    [ja]ボタンを無効化する場合は指定してください。[/ja]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  * @codepen hLayx
  * @guide Button [en]Guide for ons-button[/en][ja]ons-buttonの使い方[/ja]
  * @guide OverridingCSSstyles [en]More details about modifier attribute[/en][ja]modifier属性の使い方[/ja]
@@ -11971,7 +14797,11 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
+<<<<<<< HEAD
   module.directive('onsButton', ['$onsen', 'ButtonView', function($onsen, ButtonView) {
+=======
+  module.directive('onsButton', ['$onsen', function($onsen) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
     return {
       restrict: 'E',
       replace: false,
@@ -11981,6 +14811,7 @@ limitations under the License.
       },
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs, _, transclude) {
+<<<<<<< HEAD
         var button = new ButtonView(scope, element, attrs);
         
         $onsen.declareVarAttribute(attrs, button);
@@ -11996,14 +14827,22 @@ limitations under the License.
         });
         var initialAnimation = 'slide-left';
         
+=======
+        var initialAnimation = 'slide-left';
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         element.addClass('button effeckt-button');
         element.addClass(scope.modifierTemplater('button--*'));
         element.addClass(initialAnimation);
 
+<<<<<<< HEAD
         $onsen.addModifierMethods(button, 'button--*', element); 
 
         transclude(scope.$parent, function(cloned) {
+=======
+        transclude(scope, function(cloned) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
           angular.element(element[0].querySelector('.ons-button-inner')).append(cloned);
         });
 
@@ -12050,8 +14889,11 @@ limitations under the License.
 
           scope = element = attrs = null;
         });
+<<<<<<< HEAD
         
         $onsen.fireComponentEvent(element[0], 'init');
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       }
     };
   }]);
@@ -12059,6 +14901,7 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+<<<<<<< HEAD
  * @id carousel
  * @name ons-carousel
  *
@@ -12227,13 +15070,19 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  * @id col
  * @name ons-col
  * @description
  *    [en]Represents a column in the grid system. Use with ons-row to layout components.[/en]
  *    [ja]グリッドシステムにて列を定義します。ons-rowとともに使用し、コンポーネントの配置に使用します。[/ja]
  * @param align
+<<<<<<< HEAD
  *    [en]Vertical alignment of the column. Valid values are "top", "center", and "bottom".[/en]
+=======
+ *    [en]Vertical align the column. Valid values are top, center, and bottom.[/en]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *    [ja]縦の配置を指定します。次の値から選択してください: top, center, bottom[/ja]
  *
  * @param width
@@ -12330,8 +15179,11 @@ limitations under the License.
               element.removeAttr('style');
             }
           }
+<<<<<<< HEAD
 
           $onsen.fireComponentEvent(element[0], 'init');
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         };
       }
     };
@@ -12339,6 +15191,7 @@ limitations under the License.
 })();
 
 
+<<<<<<< HEAD
 /**
  * @ngdoc directive
  * @id dialog 
@@ -12462,6 +15315,8 @@ limitations under the License.
 
 })();
 
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 (function() {
   'use strict';
 
@@ -12529,7 +15384,11 @@ limitations under the License.
       compile: function(element, attrs) {
         return function link(scope, element, attrs, controller, transclude) {
 
+<<<<<<< HEAD
           transclude(scope.$parent, function(cloned) {
+=======
+          transclude(scope.$parent.$new(), function(cloned) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
             element.append(cloned);
           });
 
@@ -12553,8 +15412,11 @@ limitations under the License.
               scope[attr]({$event: event});
             }
           }
+<<<<<<< HEAD
        
           $onsen.fireComponentEvent(element[0], 'init');
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         };
       }
     };
@@ -12580,6 +15442,7 @@ limitations under the License.
  *    [en]The sizes of the icon. Valid values are lg, 2x, 3x, 4x, 5x, or in pixels.[/en]
  *    [ja]アイコンのサイズを指定します。値は、lg, 2x, 3x, 4x, 5xもしくはピクセル単位で指定できます。[/ja]
  * @param rotate
+<<<<<<< HEAD
  *    [en]Number of degrees to rotate the icon. Valid values are 90, 180, or 270.[/en]
  *    [ja]アイコンを回転して表示します。90, 180, 270から指定できます。[/ja]
  * @param flip
@@ -12588,6 +15451,16 @@ limitations under the License.
  * @param fixed-width
  *    [en]When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are true, false. Default is false.[/en]
  *    [ja]等幅にするかどうかを指定します。trueもしくはfalseを指定できます。デフォルトはfalseです。[/ja]
+=======
+ *    [en]The degree to rotate the icon. Valid values are 90, 180, or 270.[/en]
+ *    [ja]アイコンを回転して表示します。90, 180, 270から指定できます。[/ja]
+ * @param flip
+ *    [en]Flip the icon. Valid values are horizontal and vertical.[/en]
+ *    [ja]アイコンを反転します。horizontalもしくはverticalを指定できます。[/ja]
+ * @param fixed-width
+ *    [en]When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are true, false. Default is true.[/en]
+ *    [ja]等幅にするかどうかを指定します。trueもしくはfalseを指定できます。デフォルトはtrueです。[/ja]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  * @param spin
  *    [en]Whether to spin the icon. Valid values are true and false.[/en]
  *    [ja]アイコンを回転するかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
@@ -12603,7 +15476,11 @@ limitations under the License.
 
   function cleanClassAttribute(element) {
     var classList = ('' + element.attr('class')).split(/ +/).filter(function(classString) {
+<<<<<<< HEAD
       return classString !== 'fa' && classString.substring(0, 3) !== 'fa-' && classString.substring(0, 4) !== 'ion-';
+=======
+      return classString !== 'fa' && classString.substring(0, 3) !== 'fa-';
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
     });
 
     element.attr('class', classList.join(' '));
@@ -12635,6 +15512,29 @@ limitations under the License.
       classList.push('fa-lg');
     }
     
+<<<<<<< HEAD
+=======
+    // rotate
+    if (attrs.rotate === '90' || attrs.rotate === '180' || attrs.rotate === '270') {
+      classList.push('ons-icon--rotate-' + attrs.rotate);
+    }
+
+    // flip
+    if (attrs.flip === 'horizontal' || attrs.flip === 'vertical') {
+      classList.push('ons-icon--flip-' + attrs.flip);
+    }
+
+    // fixed-width
+    if (attrs.fixedWidth !== 'false') {
+      classList.push('ons-icon--fw');
+    }
+
+    // spin
+    if (attrs.spin === 'true') {
+      classList.push('ons-icon--spin');
+    }
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
     return {
       'class': classList.join(' '),
       'style': style
@@ -12679,8 +15579,11 @@ limitations under the License.
           });
           element = scope = attrs = null;
         });
+<<<<<<< HEAD
       
         $onsen.fireComponentEvent(element[0], 'init');
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       }
     };
   }]);
@@ -12769,15 +15672,26 @@ limitations under the License.
  * @id if-platform
  * @name ons-if-platform
  * @description
+<<<<<<< HEAD
  *    [en]Conditionally display content depending on the platform / browser. Valid values are "ios", "android", "blackberry", "chrome", "safari", "firefox", and "opera".[/en]
  *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaを指定できます。[/ja]
  * @param ons-if-platform
  *    [en]Either "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".[/en]
+=======
+ *    [en]Conditionally display content depending on the platform / browser. Valid values are ios, android, blackberry, chrome, safari, firefox, and opera.[/en]
+ *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaを指定できます。[/ja]
+ * @param ons-if-platform
+ *    [en]Either opera, firefox, safari, chrome, ie, android, blackberry, ios or windows.[/en]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *    [ja]opera, firefox, safari, chrome, ie, android, blackberry, ios, windowsから指定します。[/ja]
  * @seealso ons-if-orientation [en]ons-if-orientation component[/en][ja]ons-if-orientationコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
+<<<<<<< HEAD
  * <div ons-if-platform="android">
+=======
+ * <div if-platform="android">
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *   ...
  * </div>
  */
@@ -12883,6 +15797,7 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+<<<<<<< HEAD
  * @id keyboard-active
  * @name keyboard-active
  * @description
@@ -12983,6 +15898,12 @@ limitations under the License.
  * @name ons-list
  * @description
  *    [en]Component to define a list, and the container for ons-list-item(s).[/en]
+=======
+ * @id list
+ * @name ons-list
+ * @description
+ *    [en]Component to defines a list, and the container for ons-list-item(s).[/en]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *    [ja]リストを表現するためのコンポーネント。ons-list-itemのコンテナとして使用します。[/ja]
  * @param modifier
  * @seealso ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]
@@ -13001,7 +15922,11 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
+<<<<<<< HEAD
   module.directive('onsList', ['$onsen', 'GenericView', function($onsen, GenericView) {
+=======
+  module.directive('onsList', ['$onsen', function($onsen) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
     return {
       restrict: 'E',
       scope: false,
@@ -13010,6 +15935,7 @@ limitations under the License.
       // Do not use isolated scope and template's ng-transclude.
       replace: false,
       transclude: false,
+<<<<<<< HEAD
       compile: function(element, attrs) {
      
         return function(scope, element, attrs) {
@@ -13035,6 +15961,14 @@ limitations under the License.
           $onsen.addModifierMethods(list, 'list--*', element);
           $onsen.fireComponentEvent(element[0], 'init'); 
         };
+=======
+
+      compile: function(element, attrs) {
+        var templater = $onsen.generateModifierTemplater(attrs);
+
+        element.addClass('list ons-list-inner');
+        element.addClass(templater('list--*'));
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       }
     };
   }]);
@@ -13047,6 +15981,7 @@ limitations under the License.
  * @name ons-list-header
  * @param modifier
  * @description
+<<<<<<< HEAD
  *    [en]Header element for list items. Must be put inside ons-list component.[/en]
  *    [ja]リスト要素に使用するヘッダー用コンポーネント。ons-listと共に使用します。[/ja]
  * @seealso ons-list [en]ons-list component[/en][ja]ons-listコンポーネント[/ja]
@@ -13114,6 +16049,12 @@ limitations under the License.
  *    [ja]リストの各要素を表現するためのコンポーネント。ons-listコンポーネントと共に使用します。[/ja]
  * @seealso ons-list [en]ons-list component[/en][ja]ons-listコンポーネント[/ja]
  * @seealso ons-list-header [en]ons-list-header component[/en][ja]ons-list-headerコンポーネント[/ja]
+=======
+ *    [en]Header element for list items. Must be put inside ons-list component.[/en]
+ *    [ja]リスト要素に使用するヘッダー用コンポーネント。ons-listと共に使用します。[/ja]
+ * @seealso ons-list [en]ons-list component[/en][ja]ons-listコンポーネント[/ja]
+ * @seealso ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
  * @codepen yxcCt
  * @example
@@ -13128,7 +16069,11 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
+<<<<<<< HEAD
   module.directive('onsListItem', ['$onsen', 'GenericView', function($onsen, GenericView) {
+=======
+  module.directive('onsListHeader', ['$onsen', function($onsen) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
     return {
       restrict: 'E',
 
@@ -13137,6 +16082,7 @@ limitations under the License.
       replace: false,
       transclude: false,
 
+<<<<<<< HEAD
       compile: function() {
         return function(scope, element, attrs) {
           var listItem = new GenericView(scope, element, attrs);
@@ -13162,6 +16108,12 @@ limitations under the License.
 
           $onsen.fireComponentEvent(element[0], 'init');
         };
+=======
+      compile: function(elem, attrs, transcludeFn) {
+        var templater = $onsen.generateModifierTemplater(attrs);
+        elem.addClass('list__header ons-list-header-inner');
+        elem.addClass(templater('list__header--*'));
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       }
     };
   }]);
@@ -13169,6 +16121,7 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+<<<<<<< HEAD
  * @id loading-placeholder 
  * @name ons-loading-placeholder
  * @description
@@ -13184,10 +16137,31 @@ limitations under the License.
  * </div>
  */
 (function(){
+=======
+ * @id list-item
+ * @name ons-list-item
+ * @param modifier
+ * @description
+ *    [en]Component that represents each item in the list. Must be put inside ons-list component.[/en]
+ *    [ja]リストの各要素を表現するためのコンポーネント。ons-listコンポーネントと共に使用します。[/ja]
+ * @seealso ons-list [en]ons-list component[/en][ja]ons-listコンポーネント[/ja]
+ * @seealso ons-list-header [en]ons-list-header component[/en][ja]ons-list-headerコンポーネント[/ja]
+ * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
+ * @codepen yxcCt
+ * @example
+ * <ons-list>
+ *   <ons-list-header>Header Text</ons-list-header>
+ *   <ons-list-item>Item</ons-list-item>
+ *   <ons-list-item>Item</ons-list-item>
+ * </ons-list>
+ */
+(function() {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   'use strict';
 
   var module = angular.module('onsen');
 
+<<<<<<< HEAD
   module.directive('onsLoadingPlaceholder', ['$onsen', '$compile', function($onsen, $compile) {
     return {
       restrict: 'A',
@@ -13215,22 +16189,46 @@ limitations under the License.
           });
         });
       }    
+=======
+  module.directive('onsListItem', ['$onsen', function($onsen) {
+    return {
+      restrict: 'E',
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      replace: false,
+      transclude: false,
+
+      compile: function(elem, attrs, transcludeFn) {
+        var templater = $onsen.generateModifierTemplater(attrs);
+        elem.addClass('list__item ons-list-item-inner');
+        elem.addClass(templater('list__item--*'));
+      }
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
     };
   }]);
 })();
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 /**
  * @ngdoc directive
  * @id modal
  * @name ons-modal
  * @description 
+<<<<<<< HEAD
  *  [en]Modal component that masks current screen. Underlying components are not subject to any events while the modal component is shown.[/en]
+=======
+ *  [en]Modal component that mask current screen. Underlying components are not noticed from any events while the modal component is shown.[/en]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *  [ja]画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、モーダルが表示されている間はイベント通知が行われません。[/ja]
  * @param var 
  *  [en]Variable name to refer this modal.[/en]
  *  [ja]このコンポーネントを参照するための変数名を指定します。[/ja]
  * @property toggle()
+<<<<<<< HEAD
  *  [en]Toggle modal visibility.[/en]
  *  [ja]モーダルの表示を切り替えます。[/ja]
  * @property show()
@@ -13241,6 +16239,18 @@ limitations under the License.
  *  [ja]モーダルを非表示にします。[/ja]
  * @property getDeviceBackButtonHandler()
  *  [en]Retrieve the back button handler.[/en]
+=======
+ *  [en]Toggle modal view visibility.[/en]
+ *  [ja]モーダルの表示を切り替えます。[/ja]
+ * @property show()
+ *  [en]Show modal view.[/en]
+ *  [ja]モーダルを表示します。[/ja]
+ * @property hide()
+ *  [en]Hide modal view.[/en]
+ *  [ja]モーダルを非表示にします。[/ja]
+ * @property getDeviceBackButtonHandler()
+ *  [en]Retrieve the back-button handler.[/en]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *  [ja]ons-modalに紐付いているバックボタンハンドラを取得します。[/ja]
  * @guide UsingModal [en]Using ons-modal component[/en][ja]モーダルの使い方[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
@@ -13280,24 +16290,35 @@ limitations under the License.
 
             var modal = new ModalView(scope, element);
 
+<<<<<<< HEAD
             $onsen.addModifierMethods(modal, 'modal--*', element);
             $onsen.addModifierMethods(modal, 'modal--*__content', element.children());
 
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
             $onsen.declareVarAttribute(attrs, modal);
 
             $onsen.aliasStack.register('ons.modal', modal);
             element.data('ons-modal', modal);
 
             scope.$on('$destroy', function() {
+<<<<<<< HEAD
               modal._events = undefined;
               $onsen.removeModifierMethods(modal);
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
               element.data('ons-modal', undefined);
               $onsen.aliasStack.unregister('ons.modal', modal);
             });
           },
 
+<<<<<<< HEAD
           post: function(scope, element) {
             $onsen.fireComponentEvent(element[0], 'init');
+=======
+          post: function() {
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
           }
         };
       }
@@ -13344,16 +16365,27 @@ limitations under the License.
  *  [en]Insert the specified pageUrl into the page stack with specified index.[/en]
  *  [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
  * @property popPage()
+<<<<<<< HEAD
  *  [en]Pops the current page from the page stack. The previous page will be displayed.[/en]
  *  [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
  * @property resetToPage(pageUrl,options)
  *  [en]Clears page stack and adds the specified pageUrl to the page stack.[/en]
+=======
+ *  [en]Pops current page from the page stack. One previous page will be displayed.[/en]
+ *  [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
+ * @property resetToPage(pageUrl,options)
+ *  [en]Clears page stack and add the specified pageUrl to the page stack.[/en]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *  [ja]ページスタックをリセットし、指定したページを表示します。[/ja]
  * @property getCurrentPage()
  *  [en]Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method.[/en]
  *  [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
  * @property getPages()
+<<<<<<< HEAD
  *  [en]Retrieve the entire page stack of the navigator.[/en]
+=======
+ *  [en]Retrieve the entire page stacks of the navigator.[/en]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *  [ja]ナビゲーターの持つページスタックの一覧を取得します。[/ja]
  * @property getDeviceBackButtonHandler()
  *  [en]Retrieve the back button handler for overriding the default behavior.[/en]
@@ -13392,7 +16424,10 @@ limitations under the License.
  *   </ons-page>
  * </ons-template>
  */
+<<<<<<< HEAD
 
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 (function() {
   'use strict';
   var module = angular.module('onsen');
@@ -13407,7 +16442,10 @@ limitations under the License.
       scope: true,
 
       compile: function(element) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         var html = $onsen.normalizePageHTML(element.html());
         element.contents().remove();
 
@@ -13438,15 +16476,21 @@ limitations under the License.
             element.data('ons-navigator', navigator);
 
             scope.$on('$destroy', function() {
+<<<<<<< HEAD
               navigator._events = undefined;
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
               element.data('ons-navigator', undefined);
               $onsen.aliasStack.unregister('ons.navigator', navigator);
               element = null;
             });
+<<<<<<< HEAD
 
           },
           post: function(scope, element, attrs) {
             $onsen.fireComponentEvent(element[0], 'init');
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
           }
         };
       }
@@ -13471,7 +16515,11 @@ limitations under the License.
  *  [en]Allows you to specify custom behavior when the back button is pressed.[/en]
  *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
  * @param ng-device-backbutton
+<<<<<<< HEAD
  *  [en]Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.[/en]
+=======
+ *  [en]Allows you to specify custom behavior with AngularJS expresion when the back button is pressed.[/en]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
  * @property getDeviceBackButtonHandler()
  *  [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
@@ -13515,7 +16563,10 @@ limitations under the License.
         if (i++ < 5)  {
           if (isAttached(element)) {
             fillStatusBar(element);
+<<<<<<< HEAD
             $onsen.fireComponentEvent(element, 'init');
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
             fireActualPageInitEvent(element);
           } else {
             setImmediate(f);
@@ -13560,15 +16611,21 @@ limitations under the License.
       $onsen.aliasStack.register('ons.page', page);
       element.data('ons-page', page);
 
+<<<<<<< HEAD
       var modifierTemplater = $onsen.generateModifierTemplater(attrs),
           template = 'page--*';
       element.addClass('page ' + modifierTemplater(template));
       $onsen.addModifierMethods(page, template, element);
+=======
+      var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+      element.addClass('page ' + modifierTemplater('page--*'));
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
       var pageContent = angular.element(element[0].querySelector('.page__content'));
       pageContent.addClass(modifierTemplater('page--*__content'));
       pageContent = null;
 
+<<<<<<< HEAD
       var pageBackground = angular.element(element[0].querySelector('.page__background'));
       pageBackground.addClass(modifierTemplater('page--*__background'));
       pageBackground = null;
@@ -13576,6 +16633,9 @@ limitations under the License.
       $onsen.cleaner.onDestroy(scope, function() {
         page._events = undefined;
         $onsen.removeModifierMethods(page);
+=======
+      $onsen.cleaner.onDestroy(scope, function() {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         element.data('ons-page', undefined);
         $onsen.aliasStack.unregister('ons.page', page);
 
@@ -13598,12 +16658,17 @@ limitations under the License.
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
       transclude: false,
+<<<<<<< HEAD
       scope: false,
+=======
+      scope: true,
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
       compile: function(element) {
         var children = element.children().remove();
 
         var content = angular.element('<div class="page__content ons-page-inner"></div>').append(children);
+<<<<<<< HEAD
         var background = angular.element('<div class="page__background"></div>');
 
         if (element.attr('style')) {
@@ -13613,6 +16678,14 @@ limitations under the License.
 
         element.append(background);
 
+=======
+
+        if (element.attr('style')) {
+          content.attr('style', element.attr('style'));
+          element.attr('style', '');
+        }
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         if (Modernizr.csstransforms3d) {
           element.append(content);
         } else {
@@ -13644,7 +16717,10 @@ limitations under the License.
         }
 
         content = null;
+<<<<<<< HEAD
         background = null;
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         children = null;
 
         return {
@@ -13657,6 +16733,7 @@ limitations under the License.
 })();
 
 /**
+<<<<<<< HEAD
 * @ngdoc directive
 * @id popover 
 * @name ons-popover 
@@ -13727,11 +16804,34 @@ limitations under the License.
 * </script>
 */
 
+=======
+ * @ngdoc directive
+ * @id row
+ * @name ons-row
+ * @description
+ *  [en]Represents a row in the grid system. Use with ons-col to layout components.[/en]
+ *  [ja]グリッドシステムにて行を定義します。ons-colとともに使用し、コンポーネントの配置に使用します。[/ja]
+ * @param align
+ *  [en]Short hand attribute for aligning vertically. Valid values are top, bottom, and center.[/en]
+ *  [ja]縦に整列するために指定します。top、bottom、centerのいずれかを指定できます。[/ja]
+ *  [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.[/en]
+ *  [ja]Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。[/ja]
+ * @codepen GgujC {wide}
+ * @guide Layouting [en]Layouting guide[/en][ja]レイアウト調整[/ja]
+ * @seealso ons-col [en]ons-col component[/en][ja]ons-colコンポーネント[/ja]
+ * @example
+ * <ons-row>
+ *   <ons-col width="50px"><ons-icon icon="fa-twitter"></ons-icon></ons-col>
+ *   <ons-col>Text</ons-col>
+ * </ons-row>
+ */
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 (function(){
   'use strict';
 
   var module = angular.module('onsen');
 
+<<<<<<< HEAD
   module.directive('onsPopover', ['$onsen', 'PopoverView', function($onsen, PopoverView) {
     return {
       restrict: 'E',
@@ -13776,40 +16876,7 @@ limitations under the License.
           },
           post: function(scope, element) {
             $onsen.fireComponentEvent(element[0], 'init');
-          }
-        };
-      }
-    };
-  }]);
-})();
-
-
-/**
- * @ngdoc directive
- * @id row
- * @name ons-row
- * @description
- *  [en]Represents a row in the grid system. Use with ons-col to layout components.[/en]
- *  [ja]グリッドシステムにて行を定義します。ons-colとともに使用し、コンポーネントの配置に使用します。[/ja]
- * @param align
- *  [en]Short hand attribute for aligning vertically. Valid values are top, bottom, and center.[/en]
- *  [ja]縦に整列するために指定します。top、bottom、centerのいずれかを指定できます。[/ja]
- *  [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.[/en]
- *  [ja]Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。[/ja]
- * @codepen GgujC {wide}
- * @guide Layouting [en]Layouting guide[/en][ja]レイアウト調整[/ja]
- * @seealso ons-col [en]ons-col component[/en][ja]ons-colコンポーネント[/ja]
- * @example
- * <ons-row>
- *   <ons-col width="50px"><ons-icon icon="fa-twitter"></ons-icon></ons-col>
- *   <ons-col>Text</ons-col>
- * </ons-row>
- */
-(function(){
-  'use strict';
-
-  var module = angular.module('onsen');
-
+=======
   module.directive('onsRow', ['$onsen', '$timeout', function($onsen, $timeout) {
     return {
       restrict: 'E',
@@ -13836,9 +16903,8 @@ limitations under the License.
               element.removeClass('row-bottom row-center row-top');
               element.addClass('row-' + align);
             }
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
           }
-        
-          $onsen.fireComponentEvent(element[0], 'init');
         };
       }
     };
@@ -13846,6 +16912,360 @@ limitations under the License.
 })();
 
 
+/**
+ * @ngdoc directive
+<<<<<<< HEAD
+ * @id row
+ * @name ons-row
+ * @description
+ *  [en]Represents a row in the grid system. Use with ons-col to layout components.[/en]
+ *  [ja]グリッドシステムにて行を定義します。ons-colとともに使用し、コンポーネントの配置に使用します。[/ja]
+ * @param align
+ *  [en]Short hand attribute for aligning vertically. Valid values are top, bottom, and center.[/en]
+ *  [ja]縦に整列するために指定します。top、bottom、centerのいずれかを指定できます。[/ja]
+ *  [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.[/en]
+ *  [ja]Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。[/ja]
+ * @codepen GgujC {wide}
+ * @guide Layouting [en]Layouting guide[/en][ja]レイアウト調整[/ja]
+ * @seealso ons-col [en]ons-col component[/en][ja]ons-colコンポーネント[/ja]
+ * @example
+ * <ons-row>
+ *   <ons-col width="50px"><ons-icon icon="fa-twitter"></ons-icon></ons-col>
+ *   <ons-col>Text</ons-col>
+ * </ons-row>
+ */
+(function(){
+  'use strict';
+
+  var module = angular.module('onsen');
+
+  module.directive('onsRow', ['$onsen', '$timeout', function($onsen, $timeout) {
+=======
+ * @id screen
+ * @name ons-screen
+ * @description
+ * The root element. This is usually put inside <body> tag.
+ * @param page The root page of this screen element
+ * @param var Variable name to refer this screen.
+ * @property presentPage(pageUrl) Presents a page
+ * @property dismissPage() Dismisses the page that was presented
+ * @demoURL
+ * OnsenUI/demo/screen/
+ */
+(function() {
+  'use strict';
+  var module = angular.module('onsen');
+
+  var TransitionAnimator = Class.extend({
+    push: function(enterPage, leavePage, callback) {
+      callback();
+    }, 
+
+    pop: function(enterPage, leavePage, callback) {
+      callback();
+    }
+  });
+
+  var ModalTransitionAnimator = TransitionAnimator.extend({
+
+    /** Black mask */
+    backgroundMask : angular.element(
+      '<div style="position: absolute; width: 100%;' +
+      'height: 100%; background-color: black;"></div>'
+    ),
+
+    push: function(enterPage, leavePage, callback) {
+      var mask = this.backgroundMask.remove();
+      leavePage.pageElement[0].parentNode.insertBefore(mask[0], leavePage.pageElement[0]);
+
+      animit.runAll(
+
+        animit(mask[0])
+          .wait(0.4)
+          .queue(function(done) {
+            mask.remove();
+            done();
+          }),
+        
+        animit(enterPage.pageElement[0])
+          .queue({
+            transform: 'translate3D(0, 100%, 0)'
+          })
+          .queue({
+            transform: 'translate3D(0, 0, 0)'
+          }, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .resetStyle()
+          .queue(function(done) {
+            callback();
+            done();
+          }),
+
+        animit(leavePage.pageElement[0])
+          .queue({
+            transform: 'translate3D(0, 0, 0)',
+            opacity: 1.0
+          })
+          .queue({
+            transform: 'translate3D(0, -10%, 0)',
+            opacity: 0.9
+          }, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .resetStyle()
+      );
+    },
+
+    pop: function(enterPage, leavePage, callback) {
+
+      var mask = this.backgroundMask.remove();
+      enterPage.pageElement[0].parentNode.insertBefore(mask[0], enterPage.pageElement[0]);
+
+      animit.runAll(
+
+        animit(mask[0])
+          .wait(0.4)
+          .queue(function(done) {
+            mask.remove();
+            done();
+          }),
+
+        animit(enterPage.pageElement[0])
+          .queue({
+            transform: 'translate3D(0, -10%, 0)',
+            opacity: 0.9
+          })
+          .queue({
+            transform: 'translate3D(0, 0, 0)',
+            opacity: 1.0
+          }, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .resetStyle()
+          .queue(function(done) {
+            callback();
+            done();
+          }),
+
+        animit(leavePage.pageElement[0])
+          .queue({
+            transform: 'translate3D(0, 0, 0)'
+          })
+          .queue({
+            transform: 'translate3D(0, 100%, 0)'
+          }, {
+            duration: 0.4,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+      );
+    }
+  });
+
+  module.service('Screen', ['$compile', '$onsen', function($compile, $onsen) {
+    var TRANSITION_END = 'webkitTransitionEnd transitionend msTransitionEnd oTransitionEnd';
+    var TRANSITION_START = 'webkitAnimationStart animationStart msAnimationStart oAnimationStart';
+
+    var Screen = Class.extend({
+
+      init: function(scope, element, attrs) {
+        this.screenItems = [];
+        this.scope = scope;
+        this.element = element;
+        this.attrs = attrs;
+
+        this._doorLock = new DoorLock();
+        this.attachMethods();
+
+        if (scope.page) {
+          this.resetToPage(scope.page);
+        }
+      },
+
+      isEmpty: function() {
+        return this.screenItems.length < 1;
+      },
+
+      compilePageEl: function(pageEl, pageScope){
+        var compiledPage = $compile(pageEl)(pageScope);
+        return compiledPage;
+      },
+
+      createPageScope: function(){
+        var pageScope = this.scope.$new();
+        return pageScope;
+      },
+
+      /**
+       * @param {String} pageUrl
+       * @param {DOMElement} element This element is must be ons-page element.
+       * @param {Object} pageScope
+       * @param {Function} [callback]
+       */
+      _presentPageDOM: function(pageUrl, compiledPage, pageScope, callback) {
+        callback = callback || function() {};
+
+        var screenItem = {
+          pageUrl: pageUrl,
+          pageElement: compiledPage,
+          pageScope: pageScope,
+          destroy: function() {
+            this.pageElement.remove();
+            this.pageScope.$destroy();
+          }
+        };
+
+        // create stack context.
+        compiledPage.css('z-index', 0);
+
+        this.screenItems.push(screenItem);
+
+        if (this.screenItems.length > 1) {
+
+          var enterPage = screenItem;
+          var leavePage = this.screenItems[this.screenItems.length - 2];
+
+          new ModalTransitionAnimator().push(enterPage, leavePage, function() {
+            leavePage.pageElement.css({display: 'none'});
+            callback();
+          });
+          this.element.append(compiledPage);
+        } else {
+          this.element.append(compiledPage);
+          callback();
+        }
+      },
+
+      presentPage: function(page) {
+        var self = this;
+
+        this._doorLock.waitUnlock(function() {
+          var unlock = self._doorLock.lock();
+
+          $onsen.getPageHTMLAsync(page).then(function(html) {
+            var pageContent = angular.element(html.trim());
+            var pageScope = self.createPageScope();
+            var compiledPage = self.compilePageEl(pageContent, pageScope);
+
+            self._presentPageDOM(page, compiledPage, pageScope, unlock);
+          }, function() {
+            unlock();
+            throw new Error('Page is not found: ' + page);
+          });
+        });
+      },
+
+      dismissPage: function(){
+        if (this.screenItems.length < 2) {
+          return;
+        }
+
+        var self = this;
+        this._doorLock.waitUnlock(function() {
+          var unlock = self._doorLock.lock();
+
+          var leavePage = self.screenItems.pop();
+          var enterPage = self.screenItems[self.screenItems.length - 1];
+
+          enterPage.pageElement.css({display: 'block'});
+
+          new ModalTransitionAnimator().pop(enterPage, leavePage, function() {
+            leavePage.destroy();
+            unlock();
+          });
+        });
+      },
+
+      resetToPage: function(page){
+        this.scope.presentPage(page);
+        for (var i = 0; i < this.screenItems.length - 1; i++) {
+          this.screenItems[i].destroy();
+        }
+      },
+
+      attachMethods: function() {
+        this.scope.presentPage = this.presentPage.bind(this);
+        this.scope.resetToPage = this.resetToPage.bind(this);
+        this.scope.dismissPage = this.dismissPage.bind(this);
+      }
+    });
+
+    return Screen;
+  }]);
+
+  module.directive('onsScreen', ['$compile', 'Screen', '$onsen', function($compile, Screen, $onsen) {
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
+    return {
+      restrict: 'E',
+      replace: false,
+
+      // NOTE: This element must coexists with ng-controller.
+      // Do not use isolated scope and template's ng-transclude.
+      transclude: false,
+<<<<<<< HEAD
+      scope: false,
+
+      compile: function(element, attrs) {
+        element.addClass('row ons-row-inner');
+
+        return function(scope, element, attrs) {
+          attrs.$observe('align', function(align) {
+            update();
+          });
+
+          update();
+
+          function update() {
+            var align = ('' + attrs.align).trim();
+            if (align === 'top' || align === 'center' || align === 'bottom') {
+              element.removeClass('row-bottom row-center row-top');
+              element.addClass('row-' + align);
+            }
+          }
+        
+          $onsen.fireComponentEvent(element[0], 'init');
+        };
+=======
+      scope: true,
+
+      compile: function(element, attrs, transclude) {
+        var html = $onsen.normalizePageHTML(element.html().trim());
+        element.contents().remove();
+
+        return function(scope, element, attrs) {
+          var screen = new Screen(scope, element, attrs);
+          $onsen.declareVarAttribute(attrs, screen);
+
+          if (!attrs.page) {
+            var pageScope = screen.createPageScope();
+
+            var compiled = $compile(angular.element(html))(pageScope);
+            screen._presentPageDOM('', compiled, pageScope);
+          }
+
+          $onsen.aliasStack.register('ons.screen', screen);
+          element.data('ons-screen', screen);
+
+          scope.$on('$destroy', function(){
+            element.data('ons-screen', undefined);
+            $onsen.aliasStack.register('ons.screen', screen);
+          });
+        };
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
+      }
+    };
+  }]);
+})();
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 /**
  * @ngdoc directive
  * @id scroller
@@ -13939,8 +17359,11 @@ limitations under the License.
 
             }, 500);
           }
+<<<<<<< HEAD
         
           $onsen.fireComponentEvent(element[0], 'init');
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         };
       }
     };
@@ -13954,6 +17377,7 @@ limitations under the License.
  * @description
  *  [en]Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.[/en]
  *  [ja]スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。[/ja]
+<<<<<<< HEAD
  * @param menu-page
  *  [en]The url of the menu page.[/en]
  *  [ja]左に位置するメニューページのURLを指定します。[/ja]
@@ -13969,12 +17393,34 @@ limitations under the License.
  * @param max-slide-distance
  *  [en]How far the menu page will slide open. Can specify both in px and %. eg. 90%, 200px[/en]
  *  [ja]menu-pageで指定されたページの表示幅を指定します。ピクセルもしくは%の両方で指定できます（例: 90%, 200px）[/ja]
+=======
+ * @param behind-page
+ *  [en]The url of the page to be set to the behind layer.[/en]
+ *  [ja]後方のレイヤーにセットされたページのURLを指定します。[/ja]
+ * @param above-page
+ *  [en]The url of the page to be set to the above layer.[/en]
+ *  [ja]前方のレイヤーにセットされたページのURLを指定します。[/ja]
+ * @param swipable
+ *  [en]Whether to enable swipe interaction.[/en]
+ *  [ja]スワイプ操作を有効にする場合に指定します。[/ja]
+ * @param swipe-target-width
+ *  [en]The width of swipable area calculated from the left (in pixel). Use this to enable swipe only when the finger touch on the screen edge.[/en]
+ *  [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]
+ * @param max-slide-distance
+ *  [en]How far the behind page will slide open. Can specify both in px and %. eg. 90%, 200px[/en]
+ *  [ja]behind-pageで指定されたページの表示幅を指定します。ピクセルもしくは%の両方で指定できます（例: 90%, 200px）[/ja]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  * @param var
  *  [en]Variable name to refer this sliding menu.[/en]
  *  [ja]JavaScriptから操作するための変数名を指定します。[/ja]
  * @param side
+<<<<<<< HEAD
  *  [en]Specify which side of the screen the menu page is located on. Possible values are "left" and "right".[/en]
  *  [ja]menu-pageで指定されたページが画面のどちら側から表示されるかを指定します。leftもしくはrightのいずれかを指定できます。[/ja]
+=======
+ *  [en]Specify which side of the screen the behind page is located on. Possible values are left and right.[/en]
+ *  [ja]behind-pageで指定されたページが画面のどちら側から表示されるかを指定します。leftもしくはrightのいずれかを指定できます。[/ja]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *
  * @property setMainPage(pageUrl,[options])
  *  [en]Show the page specified in pageUrl in the main contents pane.[/en]
@@ -13982,6 +17428,7 @@ limitations under the License.
  * @property setMenuPage(pageUrl,[options])
  *  [en]Show the page specified in pageUrl in the side menu pane.[/en]
  *  [ja]メニュー部分に表示されるページをpageUrlに指定します。[/ja]
+<<<<<<< HEAD
  * @property openMenu([options])
  *  [en]Slide the above layer to reveal the layer behind.[/en]
  *  [ja]メニューページを表示します。[/ja]
@@ -13990,6 +17437,22 @@ limitations under the License.
  *  [ja]メニューページを非表示にします。[/ja]
  * @property toggleMenu([options])
  *  [en]Slide the above layer to reveal the layer behind if it is currently hidden, otherwise, hide the layer behind.[/en]
+=======
+ * @property setAbovePage(pageUrl)
+ *  [en][Deprecated]Show the page specified in pageUrl in the above layer.[/en]
+ *  [ja][非推奨]上部に表示されるページをpageUrlに指定します。[/ja]
+ * @property setBehindPage(pageUrl)
+ *  [en][Deprecated]Show the page specified in pageUrl in the behind layer.[/en]
+ *  [ja][非推奨]下部に表示されるページをpageUrlに指定します。[/ja]
+ * @property openMenu()
+ *  [en]Slide the above layer to reveal the layer behind.[/en]
+ *  [ja]メニューページを表示します。[/ja]
+ * @property closeMenu()
+ *  [en]Slide the above layer to hide the layer behind.[/en]
+ *  [ja]メニューページを非表示にします。[/ja]
+ * @property toggleMenu()
+ *  [en]Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind.[/en]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *  [ja]現在の状況に合わせて、メニューページを表示もしくは非表示にします。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Preset events are preopen, preclose, postopen and postclose.[/en]
@@ -14000,9 +17463,12 @@ limitations under the License.
  * @property getDeviceBackButtonHandler()
  *  [en]Retrieve the back-button handler.[/en]
  *  [ja]ons-sliding-menuに紐付いているバックボタンハンドラを取得します。[/ja]
+<<<<<<< HEAD
  * @property setSwipeable(swipeable)
  *  [en]Specify if the menu should be swipeable or not.[/en]
  *  [ja]スワイプで開閉するかどうかを設定する。[/ja]
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  * @codepen IDvFJ
  * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
  * @guide UsingSlidingMenu [en]Using sliding menu[/en][ja]スライディングメニューを使う[/ja]
@@ -14042,6 +17508,7 @@ limitations under the License.
       transclude: false,
       scope: true,
 
+<<<<<<< HEAD
       compile: function(element, attrs) {
         var main = element[0].querySelector('.main'),
             menu = element[0].querySelector('.menu');
@@ -14084,6 +17551,26 @@ limitations under the License.
 
           $onsen.fireComponentEvent(element[0], 'init');
         };
+=======
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/sliding_menu.tpl',
+
+      link: function(scope, element, attrs) {
+
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
+
+        var slidingMenu = new SlidingMenuView(scope, element, attrs);
+
+        $onsen.aliasStack.register('ons.slidingMenu', slidingMenu);
+        $onsen.declareVarAttribute(attrs, slidingMenu);
+        element.data('ons-sliding-menu', slidingMenu);
+
+        scope.$on('$destroy', function(){
+          element.data('ons-sliding-menu', undefined);
+          $onsen.aliasStack.unregister('ons.slidingMenu', slidingMenu);
+        });
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       }
     };
   }]);
@@ -14094,18 +17581,29 @@ limitations under the License.
  * @id split-view
  * @name ons-split-view
  * @description
+<<<<<<< HEAD
  *  [en]Divides the screen into a left and right section.[/en]
  *  [ja]画面を左右に分割します。[/ja]
+=======
+ *  [en]Divides the screen into left and right section. This component can also act as sliding menu which can be controlled by collapse attribute.[/en]
+ *  [ja]画面を左右に分割します。collapse属性を用いることで、スライディングメニューとしての使い方もできます。[/ja]
+ *
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  * @param main-page
  *  [en]The url of the page on the right.[/en]
  *  [ja]右側に表示するページのURLを指定します。[/ja]
  * @param main-page-width
+<<<<<<< HEAD
  *  [en]Main page width percentage. The secondary page width will be the remaining percentage.[/en]
+=======
+ *  [en]Main page's width percentage. The width of secondary page take the remaining percentage.[/en]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *  [ja]右側のページの幅をパーセント単位で指定します。[/ja]
  * @param secondary-page
  *  [en]The url of the page on the left.[/en]
  *  [ja]左側に表示するページのURLを指定します。[/ja]
  * @param collapse
+<<<<<<< HEAD
  *  [en]Specify the collapse behavior. Valid values are portrait, landscape, width ##px or a media query. "portrait" or "landscape" means the view will collapse when device is in landscape or portrait orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px. If the value is a media query, the view will collapse when the media query is true.[/en]
  *  [ja]左側のページを非表示にする条件を指定します。portrait, landscape、width ##pxもしくはメディアクエリの指定が可能です。portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。width ##pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。メディアクエリを指定すると、指定したクエリに適合している場合に適用されます。[/ja]
  * @param var 
@@ -14123,6 +17621,19 @@ limitations under the License.
  * @property on(eventName,listener)
  *  [en]Add an event listener. Preset events are presplit, postsplit, precollapse and postcollapse.[/en]
  *  [ja]イベントリスナーを追加します。presplit, postsplit, precollapse, postcollapse, updateを指定できます。[/ja]
+=======
+ *  [en]Specify the collapse behavior. Valid values are portrait, landscape, width ##px. "portrait" or "landscape" means the view will collapse when device is in landscape or portrait orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px.[/en]
+ *  [ja]左側のページを非表示にする条件を指定します。portrait, landscapeもしくはwidth ##pxの指定が可能です。portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。width ##pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。[/ja]
+ * @param var 
+ *  [en]Variable name to refer this split view.[/en]
+ *  [ja]JavaScriptからスプリットビューコンポーネントにアクセスするための変数を定義します。[/ja]
+ *
+ * @property setMainPage(pageUrl) Show the page specified in pageUrl in the right section
+ * @property setSecondaryPage(pageUrl) Show the page specified in pageUrl in the left section
+ * @property open() [Deprecated] Reveal the secondary page if the view is in collapse mode
+ * @property close() [Deprecated] hide the secondary page if the view is in collapse mode
+ * @property toggle() [Deprecated] Reveal the secondary page if it is currently hidden, otherwies, reveal it
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  * @codepen nKqfv {wide}
  * @guide Usingonssplitviewcomponent [en]Using ons-split-view.[/en][ja]ons-split-viewコンポーネントを使う[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
@@ -14143,11 +17654,16 @@ limitations under the License.
     return {
       restrict: 'E',
       replace: false,
+<<<<<<< HEAD
+=======
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       transclude: false,
       scope: {
         secondaryPage: '@',
         mainPage: '@',
         collapse: '@',
+<<<<<<< HEAD
         mainPageWidth: '@'
       },
 
@@ -14194,6 +17710,29 @@ limitations under the License.
 
           $onsen.fireComponentEvent(element[0], 'init');
         };
+=======
+        swipable: '@',
+        mainPageWidth: '@'
+      },
+
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/split_view.tpl',
+      link: function(scope, element, attrs) {
+
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
+
+        var splitView = new SplitView(scope, element, attrs);
+        $onsen.declareVarAttribute(attrs, splitView);
+
+        element.data('ons-split-view', splitView);
+        $onsen.aliasStack.register('ons.splitView', splitView);
+
+        scope.$on('$destroy', function() {
+          element.data('ons-split-view', undefined);
+          $onsen.aliasStack.unregister('ons.splitView', splitView);
+        });
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       }
     };
   }]);
@@ -14228,7 +17767,11 @@ limitations under the License.
  *  [en]Get inner input[type=checkbox] element.[/en]
  *  [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]
  * @property on(eventName,listener)
+<<<<<<< HEAD
  *  [en]Add an event listener. Possible event name is "change".[/en]
+=======
+ *  [en]Add an event listener. Possible event name is change.[/en]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *  [ja]イベントリスナーを追加します。changeイベントを使用できます。[/ja]
  * @guide UsingFormComponents [en]Using form components[/en][ja]フォームを使う[/ja]
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
@@ -14240,7 +17783,11 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
+<<<<<<< HEAD
   module.directive('onsSwitch', ['$onsen', '$parse', 'SwitchView', function($onsen, $parse, SwitchView) {
+=======
+  module.directive('onsSwitch', ['$onsen', 'SwitchView', function($onsen, SwitchView) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
     return {
       restrict: 'E',
       replace: false,
@@ -14259,6 +17806,7 @@ limitations under the License.
           var checkbox = angular.element(element[0].querySelector('input[type=checkbox]'));
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+<<<<<<< HEAD
 
           var label = element.children(),
               input = angular.element(label.children()[0]),
@@ -14268,6 +17816,8 @@ limitations under the License.
           $onsen.addModifierMethods(switchView, 'switch--*__input', input);
           $onsen.addModifierMethods(switchView, 'switch--*__toggle', toggle);
           
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
           attrs.$observe('checked', function(checked) {
             scope.model = !!element.attr('checked');
           });
@@ -14279,17 +17829,27 @@ limitations under the License.
           });
 
           if (attrs.ngModel) {
+<<<<<<< HEAD
             var set = $parse(attrs.ngModel).assign;
 
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
             scope.$parent.$watch(attrs.ngModel, function(value) {
               scope.model = value;
             });
 
             scope.$watch('model', function(model) {
+<<<<<<< HEAD
               set(scope.$parent, model);
             });
 
             set(scope.$parent, !!element.attr('checked'));
+=======
+              scope.$parent[attrs.ngModel] = model;
+            });
+
+            scope.$parent[attrs.ngModel] = !!element.attr('checked');
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
           }
 
           $onsen.declareVarAttribute(attrs, switchView);
@@ -14297,8 +17857,11 @@ limitations under the License.
           $onsen.aliasStack.register('ons.switch', switchView);
 
           $onsen.cleaner.onDestroy(scope, function() {
+<<<<<<< HEAD
             switchView._events = undefined;
             $onsen.removeModifierMethods(switchView);
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
             element.data('ons-switch', undefined);
             $onsen.aliasStack.unregister('ons.switch', switchView);
             $onsen.clearComponent({
@@ -14308,8 +17871,11 @@ limitations under the License.
             });
             checkbox = element = attrs = scope = null;
           });
+<<<<<<< HEAD
         
           $onsen.fireComponentEvent(element[0], 'init');
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         };
       }
     };
@@ -14321,10 +17887,17 @@ limitations under the License.
  * @id tabbar_item
  * @name ons-tab
  * @description
+<<<<<<< HEAD
  *  [en]Represents a tab inside tabbar. Each ons-tab represents a page.[/en]
  *  [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。[/ja]
  * @param page
  *  [en]The page that this ons-tab points to.[/en]
+=======
+ *  [en]Represents a tab inside tabbar. Each ons-tabbar-item represents a page.[/en]
+ *  [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。[/ja]
+ * @param page
+ *  [en]The page that this ons-tabbar-item points to.[/en]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *  [ja]ons-tabが参照するページへのURLを指定します。[/ja]
  * @param icon
  *  [en]The icon name of the tab. Can specify the same icon name as ons-icon. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.[/en]
@@ -14338,9 +17911,12 @@ limitations under the License.
  * @param active
  *  [en]Set whether this item should be active or not. Valid values are true and false.[/en]
  *  [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
+<<<<<<< HEAD
  * @param no-reload
  *  [en]Set if the page shouldn't be reloaded when clicking on the same tab twice.[/en]
  *  [jp]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/jp]
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  * @codepen pGuDL
  * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
@@ -14398,8 +17974,12 @@ limitations under the License.
         active: '@',
         icon: '@',
         activeIcon: '@',
+<<<<<<< HEAD
         label: '@',
         noReload: '@'
+=======
+        label: '@'
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       },
 
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab.tpl',
@@ -14408,6 +17988,10 @@ limitations under the License.
         element.addClass('tab-bar__item');
 
         return function(scope, element, attrs, controller, transclude) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
           var tabbarView = element.inheritedData('ons-tabbar');
           if (!tabbarView) {
             throw new Error('This ons-tab element is must be child of ons-tabbar element.');
@@ -14416,7 +18000,11 @@ limitations under the License.
           element.addClass(tabbarView._scope.modifierTemplater('tab-bar--*__item'));
           element.addClass(tabbarView._scope.modifierTemplater('tab-bar__item--*'));
 
+<<<<<<< HEAD
           transclude(scope.$parent, function(cloned) {
+=======
+          transclude(function(cloned) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
             var wrapper = angular.element(element[0].querySelector('.tab-bar-inner'));
 
             if (attrs.icon || attrs.label || !cloned[0]) {
@@ -14474,8 +18062,11 @@ limitations under the License.
           if (scope.active) {
             tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
           }
+<<<<<<< HEAD
         
           $onsen.fireComponentEvent(element[0], 'init');
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         };
       }
     };
@@ -14488,8 +18079,13 @@ limitations under the License.
  * @id tabbar
  * @name ons-tabbar
  * @description
+<<<<<<< HEAD
  *  [en]A component to display a tab bar on the bottom of a page. Used with ons-tab to manage pages using tabs.[/en]
  *  [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabと組み合わせて使うことで、ページを管理できます。[/ja]
+=======
+ *  [en]A component to display a tab bar on the bottom of a page. Used with ons-tabbar-item to manage pages using tabs.[/en]
+ *  [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabbar-itemと組み合わせて使うことで、ページを管理できます。[/ja]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  * @param hide-tabs
  *  [en]Whether to hide the tabs. Valid values are true/false.[/en]
  *  [ja]タブを非表示にする場合に指定します。trueもしくはfalseを指定できます。[/ja]
@@ -14497,6 +18093,7 @@ limitations under the License.
  *  [en]Variable name to refer this tabbar.[/en]
  *  [ja]JavaScriptからコンポーネントにアクセスするための変数名を指定します。[/ja]
  * @param animation
+<<<<<<< HEAD
  *  [en]Animation name. Preset values are "none" and "fade". Default is "none".[/en]
  *  [ja]ページ読み込み時のアニメーションを指定します。noneもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
  * @param position
@@ -14504,6 +18101,15 @@ limitations under the License.
  *  [ja]タブバーの位置を指定します。bottomもしくはtopを選択できます。デフォルトはbottomです。[/ja]
  * @property on(eventName,listener)
  *  [en]Add an event listener. Possible events are prechange, postchange and reactive. See the guide for more details.[/en]
+=======
+ *  [en]Animation name. Preset values are none/fade.[/en]
+ *  [ja]ページ読み込み時のアニメーションを指定します。noneもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
+ * @param position
+ *  [en]Tabbar's position. Preset values are bottom/top.[/en]
+ *  [ja]タブバーの位置を指定します。bottomもしくはtopを選択できます。デフォルトはbottomです。[/ja]
+ * @property on(eventName,listener)
+ *  [en]Add an event listener. Possible events are prechange and postchange. See the guide for more details.[/en]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。詳細はガイドを参照してください。[/ja]
  * @property setActiveTab(index,[options])
  *  [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
@@ -14519,7 +18125,11 @@ limitations under the License.
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
+<<<<<<< HEAD
  * @seealso ons-tab [en]ons-tab component[/en][ja]ons-tabコンポーネント[/ja]
+=======
+ * @seealso ons-tabbar-item [en]ons-tabbar-item component[/en][ja]ons-tabbar-itemコンポーネント[/ja]
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
  * @example
  * <ons-tabbar>
@@ -14577,7 +18187,10 @@ limitations under the License.
         });
 
         var tabbarView = new TabbarView(scope, element, attrs);
+<<<<<<< HEAD
         $onsen.addModifierMethods(tabbarView, 'tab-bar--*', angular.element(element.children()[1]));
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
         scope.tabbarId = tabbarView._tabbarId;
 
@@ -14590,6 +18203,7 @@ limitations under the License.
         });
 
         scope.$on('$destroy', function() {
+<<<<<<< HEAD
           tabbarView._events = undefined;
           $onsen.removeModifierMethods(tabbarView);
           element.data('ons-tabbar', undefined);
@@ -14597,6 +18211,11 @@ limitations under the License.
         });
       
         $onsen.fireComponentEvent(element[0], 'init');
+=======
+          element.data('ons-tabbar', undefined);
+          $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
+        });
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       }
     };
   }]);
@@ -14629,7 +18248,10 @@ limitations under the License.
       terminal: true,
       compile: function(element) {
         $templateCache.put(element.attr('id'), element.remove().html());
+<<<<<<< HEAD
         $onsen.fireComponentEvent(element[0], 'init');
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
       }
     };
   }]);
@@ -14642,12 +18264,15 @@ limitations under the License.
  * @description
  *  [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]
  *  [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
+<<<<<<< HEAD
  * @param inline
  *  [en]Display the toolbar as an inline element.[/en]
  *  [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]
  * @param modifier
  *  [en]The appearance of the toolbar.[/en]
  *  [ja]ツールバーの表現を指定します。[/ja]
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-bottom-toolbar [en]ons-bottom-toolbar component[/en][ja]ons-bottom-toolbarコンポーネント[/ja]
@@ -14667,7 +18292,11 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
+<<<<<<< HEAD
   function ensureLeftContainer(element, modifierTemplater) {
+=======
+  function ensureLeftContainer(element) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
     var container = element[0].querySelector('.left');
 
     if (!container) {
@@ -14680,14 +18309,22 @@ limitations under the License.
       container.innerHTML = '&nbsp;';
     }
 
+<<<<<<< HEAD
     angular.element(container)
       .addClass('navigation-bar__left')
       .addClass(modifierTemplater('navigation-bar--*__left'));
+=======
+    angular.element(container).addClass('navigation-bar__left');
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
     return container;
   }
 
+<<<<<<< HEAD
   function ensureCenterContainer(element, modifierTemplater) {
+=======
+  function ensureCenterContainer(element) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
     var container = element[0].querySelector('.center');
 
     if (!container) {
@@ -14700,13 +18337,21 @@ limitations under the License.
     }
 
     angular.element(container)
+<<<<<<< HEAD
       .addClass('navigation-bar__title navigation-bar__center')
       .addClass(modifierTemplater('navigation-bar--*__center'));
+=======
+      .addClass('navigation-bar__title navigation-bar__center');
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
     return container;
   }
 
+<<<<<<< HEAD
   function ensureRightContainer(element, modifierTemplater) {
+=======
+  function ensureRightContainer(element) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
     var container = element[0].querySelector('.right');
 
     if (!container) {
@@ -14719,9 +18364,13 @@ limitations under the License.
       container.innerHTML = '&nbsp;';
     }
 
+<<<<<<< HEAD
     angular.element(container)
       .addClass('navigation-bar__right')
       .addClass(modifierTemplater('navigation-bar--*__right'));
+=======
+    angular.element(container).addClass('navigation-bar__right');
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
     return container;
   }
@@ -14753,6 +18402,7 @@ limitations under the License.
     return hasCenter && !hasOther;
   }
 
+<<<<<<< HEAD
   function ensureToolbarItemElements(element, modifierTemplater) {
     var center;
     if (hasCenterClassElementOnly(element)) {
@@ -14763,6 +18413,18 @@ limitations under the License.
       center = ensureCenterContainer(element, modifierTemplater);
       var left = ensureLeftContainer(element, modifierTemplater);
       var right = ensureRightContainer(element, modifierTemplater);
+=======
+  function ensureToolbarItemElements(element) {
+    var center;
+    if (hasCenterClassElementOnly(element)) {
+      center = ensureCenterContainer(element);
+      element.contents().remove();
+      element.append(center);
+    } else {
+      center = ensureCenterContainer(element);
+      var left = ensureLeftContainer(element);
+      var right = ensureRightContainer(element);
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
       element.contents().remove();
       element.append(angular.element([left, center, right]));
@@ -14772,13 +18434,18 @@ limitations under the License.
   /**
    * Toolbar directive.
    */
+<<<<<<< HEAD
   module.directive('onsToolbar', ['$onsen', 'GenericView', function($onsen, GenericView) {
+=======
+  module.directive('onsToolbar', ['$onsen', function($onsen) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
     return {
       restrict: 'E',
       replace: false,
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
+<<<<<<< HEAD
       scope: false, 
       transclude: false,
 
@@ -14836,6 +18503,33 @@ limitations under the License.
           },
           post: function(scope, element, attrs) {
             $onsen.fireComponentEvent(element[0], 'init');  
+=======
+      scope: true, 
+      transclude: false,
+
+      compile: function(element, attrs) {
+
+        var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+        element.addClass('navigation-bar');
+        element.addClass(modifierTemplater('navigation-bar--*'));
+        element.css({
+          'position': 'absolute',
+          'z-index': '10000',
+          'left': '0px',
+          'right': '0px',
+          'top': '0px'
+        });
+        ensureToolbarItemElements(element);
+
+        return {
+          pre: function(scope, element, attrs) {
+            var pageView = element.inheritedData('ons-page');
+
+            if (pageView) {
+              pageView.registerToolbar(element);
+            }
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
           }
         };
       }
@@ -14868,6 +18562,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
+<<<<<<< HEAD
   module.directive('onsToolbarButton', ['$onsen', 'GenericView', function($onsen, GenericView) {
     return {
       restrict: 'E',
@@ -14893,15 +18588,29 @@ limitations under the License.
 
           var modifierTemplater = $onsen.generateModifierTemplater(attrs);
           
+=======
+  module.directive('onsToolbarButton', ['$onsen', function($onsen) {
+    return {
+      restrict: 'E',
+      transclude: true,
+      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
+      link: {
+        pre: function(scope, element, attrs) {
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+<<<<<<< HEAD
           $onsen.addModifierMethods(toolbarButton, 'toolbar-button--*', element.children());
 
           element.children('span').addClass(modifierTemplater('toolbar-button--*'));
             
+=======
+
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
           $onsen.cleaner.onDestroy(scope, function() {
             $onsen.clearComponent({
               scope: scope,
@@ -14910,9 +18619,12 @@ limitations under the License.
             });
             scope = element = attrs = null;
           });
+<<<<<<< HEAD
         },
         post: function(scope, element, attrs) {
           $onsen.fireComponentEvent(element[0], 'init');
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
         }
       }
     };
@@ -15502,7 +19214,11 @@ limitations under the License.
         normalizePageHTML: function(html) {
           html = ('' + html).trim();
 
+<<<<<<< HEAD
           if (!html.match(/^<(ons-page|ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
+=======
+          if (!html.match(/^<ons-page/)) {
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
             html = '<ons-page>' + html + '</ons-page>';
           }
           
@@ -15513,12 +19229,19 @@ limitations under the License.
          * Create modifier templater function. The modifier templater generate css classes binded modifier name.
          *
          * @param {Object} attrs
+<<<<<<< HEAD
          * @param {Array} [modifiers] an array of appendix modifier
          * @return {Function} 
          */
         generateModifierTemplater: function(attrs, modifiers) {
           var attrModifiers = attrs && typeof attrs.modifier === 'string' ? attrs.modifier.trim().split(/ +/) : [];
           modifiers = angular.isArray(modifiers) ? attrModifiers.concat(modifiers) : attrModifiers;
+=======
+         * @return {Function} 
+         */
+        generateModifierTemplater: function(attrs) {
+          var modifiers = attrs && typeof attrs.modifier === 'string' ? attrs.modifier.trim().split(/ +/) : [];
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
           /**
            * @return {String} template eg. 'ons-button--*', 'ons-button--*__item'
@@ -15532,6 +19255,7 @@ limitations under the License.
         },
 
         /**
+<<<<<<< HEAD
          * Add modifier methods to view object.
          *
          * @param {Object} view object
@@ -15610,6 +19334,8 @@ limitations under the License.
         },
 
         /**
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
          * Define a variable to JavaScript global scope and AngularJS scope as 'var' attribute name.
          *
          * @param {Object} attrs
@@ -15660,6 +19386,7 @@ limitations under the License.
         })(),
 
         /**
+<<<<<<< HEAD
          * Fire a named event for a component. The view object, if it exists, is attached to event.component.
          *
          * @param {HTMLElement} [dom]
@@ -15675,6 +19402,8 @@ limitations under the License.
         },
 
         /**
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
          * Define a variable to JavaScript global scope and AngularJS scope.
          *
          * Util.defineVar('foo', 'foo-value');
@@ -16320,6 +20049,7 @@ limitations under the License.
 
 */
 
+<<<<<<< HEAD
 window.ons.notification = (function() {
   var createAlertDialog = function(title, message, buttonLabels, primaryButtonIndex, modifier, animation, callback, messageIsHTML, cancelable, promptDialog, autofocus, placeholder) {
     var dialogEl = angular.element('<ons-alert-dialog>'),
@@ -16561,6 +20291,8 @@ limitations under the License.
 
 */
 
+=======
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 window.ons.orientation = (function() {
   return create()._init();
 
@@ -16613,11 +20345,19 @@ window.ons.orientation = (function() {
           };
         } else if (window.orientation % 180 === 0) {
           this._isPortrait = function() {
+<<<<<<< HEAD
             return Math.abs(window.orientation % 180) === 0 ? isPortrait : !isPortrait;
           };
         } else {
           this._isPortrait = function() {
             return Math.abs(window.orientation % 180) === 90 ? isPortrait : !isPortrait;
+=======
+            return window.orientation % 180 === 0 ? isPortrait : !isPortrait;
+          };
+        } else {
+          this._isPortrait = function() {
+            return window.orientation % 180 === 90 ? isPortrait : !isPortrait;
+>>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
           };
         }
       },

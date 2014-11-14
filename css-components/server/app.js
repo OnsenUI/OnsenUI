@@ -121,7 +121,7 @@ module.exports = function(middlewares, fn) {
     var basePath = __dirname + '/download_template/';
 
     archive.bulk([{
-      expand: true, 
+      expand: true,
       cwd: basePath,
       src: ['**'],
       dest: ''
