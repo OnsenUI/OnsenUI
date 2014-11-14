@@ -87,8 +87,6 @@
             scope.$watch('model', function(model) {
               set(scope.$parent, model);
             });
-
-            set(scope.$parent, !!element.attr('checked'));
           }
 
           $onsen.declareVarAttribute(attrs, switchView);
