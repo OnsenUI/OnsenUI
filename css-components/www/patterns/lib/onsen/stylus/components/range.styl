@@ -16,7 +16,6 @@ limitations under the License.
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
-<<<<<<< HEAD
 var-range-track-background-color = $border-color
 var-range-track-background-color-active = $highlight-color
 var-range-thumb-background-color = #fff
@@ -27,17 +26,6 @@ var-range-thumb-border := 1px solid var-range-thumb-border-color
 var-range-border := none
 var-range-track-height := 2px
 var-range-thumb-width  := var-thumb-size
-=======
-var-range-track-background-color := #ccc
-var-range-track-background-color-active := #1284ff
-var-range-thumb-background-color := #fff
-var-range-thumb-border-color := #ddd
-var-border-radius--range := 3px
-var-range-thumb-border := 1px solid var-range-thumb-border-color
-var-border--range := none
-var-height--range__track := 2px
-var-width--range__thumb  := var-thumb-size
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 /*! topdoc
   name: Range
@@ -89,17 +77,10 @@ range--disabled()
 .range
   range()
   border-radius var-border-radius
-<<<<<<< HEAD
   border var-range-border
   height var-range-track-height
   border-radius var-border-radius--large
   border-radius var-range-border-radius
-=======
-  border var-border--range
-  height var-height--range__track
-  border-radius var-border-radius--large
-  border-radius var-border-radius--range
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
   background-image linear-gradient(var-range-track-background-color, var-range-track-background-color)
   background-position left center
@@ -112,11 +93,7 @@ range--disabled()
   position relative
   border none
   background-color var-range-track-background-color
-<<<<<<< HEAD
   height var-range-track-height
-=======
-  height var-height--range__track
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   border-radius var-round-border
   box-shadow none
   top 0
@@ -126,13 +103,8 @@ range--disabled()
 .range::-webkit-slider-thumb
   range__thumb--webkit()
   position relative
-<<<<<<< HEAD
   height var-range-thumb-width
   width var-range-thumb-width
-=======
-  height var-width--range__thumb
-  width var-width--range__thumb
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   background-color var-range-thumb-background-color
   border var-range-thumb-border
   border-radius var-round-border
@@ -144,13 +116,8 @@ range--disabled()
 .range::-moz-range-thumb
   range__thumb()
   position relative
-<<<<<<< HEAD
   height var-range-thumb-width
   width var-range-thumb-width
-=======
-  height var-width--range__thumb
-  width var-width--range__thumb
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   background-color var-range-thumb-background-color
   border var-range-thumb-border
   border-radius var-round-border

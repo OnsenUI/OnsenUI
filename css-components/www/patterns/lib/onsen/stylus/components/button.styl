@@ -19,7 +19,6 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
-<<<<<<< HEAD
 var-button-background-color = $highlight-color
 var-button-color = white
 var-button-cta-background-color = $second-highlight-color
@@ -34,30 +33,6 @@ var-button-line-height = 32px
 var-button-large-line-height = 36px
 var-button-active-opacity = 0.2
 var-button-border-radius = 3px
-=======
-var-background-color__button := #1284ff
-var-color__button := white
-var-background-color--cta := #4CDA64
-var-quiet-button-color := #1284ff
-
-var-text-shadow--cta = none
-var-border__button--quiet = none
-var-quiet-button-background = transparent
-var-color--button--active = var-color__button
-var-background-color--down__button = var-background-color__button
-var-background-color--quiet-active = transparent
-var-box-shadow--cta = none
-var-box-shadow--cta--down = none
-var-background-color--cta--down = var-background-color--cta
-var-color--cta = white
-var-color--cta--down = white
-var-padding--button--large = 4px 12px
-var-padding--button = 4px 10px
-var-line-height--button = 32px
-var-line-height--button--large = 36px
-var-active-button-opacity = 0.2
-var-border-radius__button = 3px
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 /*! topdoc
   name: Button
@@ -89,7 +64,6 @@ button()
   ellipsis()
   height auto
   text-decoration none
-<<<<<<< HEAD
   padding var-button-padding
   font-size var-font-size
   line-height var-button-line-height
@@ -108,31 +82,6 @@ button--active()
   background-color var-button-background-color
   transition none
   opacity var-button-active-opacity
-=======
-  padding var-padding--button
-  font-size var-font-size
-  line-height var-line-height--button
-  letter-spacing var-letter-spacing
-  color var-color__button
-  text-shadow var-text-shadow
-  vertical-align middle
-  background-color var-background-color__button
-  box-shadow var-box-shadow
-  border 0px solid currentColor
-  border-radius var-border-radius__button
-  transition none
-
-button--focus()
-  box-shadow none
-  outline 0
-
-button--active()
-  background-color var-background-color--down__button
-  box-shadow var-box-shadow--down
-  color var-color--button--active
-  transition none
-  opacity var-active-button-opacity
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 .button
   button()
@@ -160,7 +109,6 @@ button--active()
 */
 .button--outline
   background-color transparent
-<<<<<<< HEAD
   border 1px solid var-button-background-color
   color var-button-background-color
 
@@ -172,19 +120,6 @@ button--active()
 
 .button--outline:hover
   border 1px solid var-button-background-color
-=======
-  border 1px solid var-background-color__button
-  color var-background-color__button
-
-.button--outline:active
-  background-color mylighten(var-background-color__button)
-  border 1px solid var-background-color__button
-  color var-background-color__button
-  opacity 1
-
-.button--outline:hover
-  border 1px solid var-background-color__button
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   transition 0
 
 /*! topdoc
@@ -217,13 +152,8 @@ button--active()
 .button--quiet
   button()
   button--quiet()
-<<<<<<< HEAD
   background transparent
   color var-button-quiet-color
-=======
-  background var-quiet-button-background
-  color var-quiet-button-color
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   border none
 
 .button--quiet:disabled,
@@ -238,21 +168,11 @@ button--active()
   button--focus()
 
 .button--quiet:active
-<<<<<<< HEAD
   background-color transparent
   border none
   transition none
   opacity var-button-active-opacity
   color var-button-quiet-color
-=======
-  text-shadow var-text-shadow
-  background-color var-background-color--quiet-active
-  border none
-  box-shadow var-box-shadow--down
-  transition none
-  opacity var-active-button-opacity
-  color var-quiet-button-color
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 /*! topdoc
   name: Call To Action Button
@@ -265,15 +185,8 @@ button--active()
 .button--cta
   button()
   border none
-<<<<<<< HEAD
   background-color var-button-cta-background-color
   color var-button-cta-color
-=======
-  background-color var-background-color--cta
-  box-shadow var-box-shadow--cta
-  color var-color--cta
-  text-shadow var-text-shadow--cta
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 .button--cta:hover
   button--hover()
@@ -282,18 +195,10 @@ button--active()
   button--focus()
 
 .button--cta:active
-<<<<<<< HEAD
   color var-button-cat-color
   background-color var-button-cta-background-color
   transition none
   opacity var-button-active-opacity
-=======
-  color var-color--cta--down
-  background-color var-background-color--cta--down
-  box-shadow var-box-shadow--cta--down
-  transition none
-  opacity var-active-button-opacity
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 .button--cta:disabled,
 .button--cta[disabled]
@@ -311,13 +216,8 @@ button--active()
 .button--large
   font-size var-font-size--large
   font-weight var-font-weight--large
-<<<<<<< HEAD
   line-height var-button-large-line-height
   padding var-button-large-padding
-=======
-  line-height var-line-height--button--large
-  padding var-padding--button--large
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   display block
   width 100%
   text-align center
@@ -347,32 +247,18 @@ button--active()
   button()
   font-size var-font-size--large
   font-weight var-font-weight--large
-<<<<<<< HEAD
   line-height var-button-large-line-height
   padding var-button-large-padding
   display block
   width 100%
   button--quiet()
   color var-button-quiet-color
-=======
-  line-height var-line-height--button--large
-  padding var-padding--button--large
-  display block
-  width 100%
-  button--quiet()
-  color var-quiet-button-color
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   text-align center
 
 .button--large--quiet:active
   transition none
-<<<<<<< HEAD
   opacity var-button-active-opacity
   color var-button-quiet-color
-=======
-  opacity var-active-button-opacity
-  color var-quiet-button-color
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   button--quiet()
 
 .button--large--quiet:disabled,
@@ -396,23 +282,12 @@ button--active()
 .button--large--cta
   button()
   border none
-<<<<<<< HEAD
   background-color var-button-cta-background-color
   color var-button-cta-color
   font-size var-font-size--large
   font-weight var-font-weight--large
   line-height var-button-large-line-height
   padding var-button-large-padding
-=======
-  background-color var-background-color--cta
-  box-shadow var-box-shadow--cta
-  color var-color--cta
-  text-shadow var-text-shadow--cta
-  font-size var-font-size--large
-  font-weight var-font-weight--large
-  line-height var-line-height--button--large
-  padding var-padding--button--large
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   width 100%
   text-align center
   display block
@@ -424,18 +299,10 @@ button--active()
   button--focus()
 
 .button--large--cta:active
-<<<<<<< HEAD
   color var-button-cta-color
   background-color var-button-cta-background-color
   transition none
   opacity var-button-active-opacity
-=======
-  color var-color--cta--down
-  background-color var-background-color--cta--down
-  box-shadow var-box-shadow--cta--down
-  transition none
-  opacity var-active-button-opacity
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 .button--large--cta:disabled,
 .button--large--cta[disabled]

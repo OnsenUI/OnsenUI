@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-/*! onsenui - v1.2.0 - 2014-11-10 */
-=======
-/*! onsenui - v1.1.4 - 2014-09-22 */
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
+/*! onsenui - v1.2.0 - 2014-11-14 */
 /*
 Copyright 2013-2014 ASIAL CORPORATION
 
@@ -24,11 +20,7 @@ limitations under the License.
 @import url("ionicons/css/ionicons.min.css");
 
 /* cutsom elements */
-<<<<<<< HEAD
 ons-page, ons-navigator,
-=======
-ons-page, ons-screen, ons-navigator,
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 ons-split-view, ons-sliding-menu, ons-tabbar,
 ons-gesture-detector {
   display: block;
@@ -41,12 +33,9 @@ ons-tabbar {
   left: 0;
   bottom: 0;
   right: 0;
-<<<<<<< HEAD
 }
 
 ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
-=======
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   z-index: 2;
 }
 
@@ -64,12 +53,8 @@ input, textarea {
   -webkit-user-select: auto;
 }
 
-<<<<<<< HEAD
 .page,
 .page__content {
-=======
-.page {
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   background-color: transparent !important;
   background: transparent !important;
 }
@@ -79,11 +64,7 @@ input, textarea {
 }
 
 ons-toolbar ~ .page__content {
-<<<<<<< HEAD
   top: 44px;
-=======
-  padding-top: 44px;
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 }
 
 .page__status-bar-fill ~ ons-toolbar {
@@ -97,12 +78,8 @@ ons-toolbar ~ .page__content {
 }
 
 .page__status-bar-fill ~ ons-toolbar ~ .page__content {
-<<<<<<< HEAD
   top: 64px;
   padding-top: 0px;
-=======
-  padding-top: 64px;
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 }
 
 .page__content {
@@ -112,11 +89,7 @@ ons-toolbar ~ .page__content {
 }
 
 .page__bottom-bar-fill ~ .page__content {
-<<<<<<< HEAD
   bottom: 44px;
-=======
-  margin-bottom: 44px;
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 }
 
 .page__content::-webkit-scrollbar {
@@ -131,7 +104,6 @@ ons-toolbar ~ .page__content {
   padding-top: 22px;
 }
 
-<<<<<<< HEAD
 ons-dialog[disabled] > .dialog,
 ons-alert-dialog[disabled],
 ons-popover[disabled] {
@@ -191,8 +163,6 @@ ons-carousel[disabled] {
   opacity: 0.75;
 }
 
-=======
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 .effeckt-button {
   position: relative;
   font-family: inherit;
@@ -742,11 +712,7 @@ limitations under the License.
   vertical-align: -25%;
 }
 
-<<<<<<< HEAD
 ons-icon[spin="true"] {
-=======
-.ons-icon--spin {
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   -webkit-animation: ons-icon-spin 2s infinite linear;
   -moz-animation: ons-icon-spin 2s infinite linear;
   -o-animation: ons-icon-spin 2s infinite linear;
@@ -801,11 +767,7 @@ ons-icon[spin="true"] {
   }
 }
 
-<<<<<<< HEAD
 .ons-icon[rotate="90"] {
-=======
-.ons-icon--rotate-90 {
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
@@ -813,11 +775,7 @@ ons-icon[spin="true"] {
   transform: rotate(90deg);
 }
 
-<<<<<<< HEAD
 .ons-icon[rotate="180"] {
-=======
-.ons-icon--rotate-180 {
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   -webkit-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
@@ -825,11 +783,7 @@ ons-icon[spin="true"] {
   transform: rotate(180deg);
 }
 
-<<<<<<< HEAD
 .ons-icon[rotate="270"] {
-=======
-.ons-icon--rotate-270 {
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   -webkit-transform: rotate(270deg);
   -moz-transform: rotate(270deg);
   -ms-transform: rotate(270deg);
@@ -837,11 +791,7 @@ ons-icon[spin="true"] {
   transform: rotate(270deg);
 }
 
-<<<<<<< HEAD
 ons-icon[flip="horizontal"] {
-=======
-.ons-icon--flip-horizontal {
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   -webkit-transform: scale(-1, 1);
   -moz-transform: scale(-1, 1);
   -ms-transform: scale(-1, 1);
@@ -849,11 +799,7 @@ ons-icon[flip="horizontal"] {
   transform: scale(-1, 1);
 }
 
-<<<<<<< HEAD
 ons-icon[flip="vertical"] {
-=======
-.ons-icon--flip-vertical {
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   -webkit-transform: scale(1, -1);
   -moz-transform: scale(1, -1);
   -ms-transform: scale(1, -1);
@@ -861,11 +807,7 @@ ons-icon[flip="vertical"] {
   transform: scale(1, -1);
 }
 
-<<<<<<< HEAD
 ons-icon[fixed-width="true"] {
-=======
-.ons-icon--fw {
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   width: 1.28571429em;
   text-align: center;
 }
@@ -947,34 +889,19 @@ ons-sliding-menu {
   z-index: 0;
 }
 
-<<<<<<< HEAD
 .onsen-sliding-menu__menu,
 .onsen-sliding-menu__main {
-=======
-.onsen-sliding-menu__behind,
-.onsen-sliding-menu__above {
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   position: absolute;
   top: 0px;
   left: 0px;
   bottom: 0px;
   right: 0px;
   z-index: 0;
-<<<<<<< HEAD
-=======
-}
-
-.onsen-sliding-menu__above {
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   margin: 0;
   padding: 0;
 }
 
-<<<<<<< HEAD
 .onsen-sliding-menu__menu {
-=======
-.onsen-sliding-menu__behind {
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   opacity: 0;
 }
 

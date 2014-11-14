@@ -19,7 +19,6 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
-<<<<<<< HEAD
 var-list-background-color = $list-background-color
 var-list-header-background-color = $list-header-background-color
 var-list-header-color = $text-color
@@ -41,39 +40,6 @@ var-list-header-text-shadow = none
 
 var-list-border-top = 1px solid var-list-item-separator-color
 var-list-border-bottom = 1px solid var-list-item-separator-color
-=======
-var-background-color--list := #fff
-var-background-color--list-header := #f0eff4
-var-color--list-header := #1F1F21
-var-color--list-item := #1F1F21
-var-background-color--list-item := #fff
-var-background-color--list-item--active := #D9D9D9
-var-list-item-separator-color := #ddd
-
-var-padding--list = 0
-var-font-size--list-header = 15px
-var-list-border = 1px solid var-list-item-separator-color
-
-var-margin--list-item = 0 0 0 0
-var-padding--list-item = 0 10px 0 10px
-var-padding--list-header = 0 0 0 10px
-var-padding-left--list-item--first = 10px
-var-padding-left--list-item--last = 10px
-var-margin--list-item--first = 0
-var-margin--list-item--last = 0
-var-min-height--list-item = 44px
-var-min-height--list-header = 24px
-var-text-shadow--list-header = none
-var-font-weight--list-header = var-font-weight--large
-
-var-border-top--list = 1px solid var-list-item-separator-color
-var-border-bottom--list = 1px solid var-list-item-separator-color
-
-var-border-top--list-item--2 = 1px solid var-list-item-separator-color
-var-border-bottom--list-item = 1px solid var-list-item-separator-color
-
-var-border-top--list-item = none
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 
 /*! topdoc
@@ -90,11 +56,7 @@ var-border-top--list-item = none
     </ul>
 */
 
-<<<<<<< HEAD
 retina-list-item-border(color = var-list-item-separator-color)
-=======
-retina-list-item-border(color = var-tab-bar-border-color)
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   +retina-query()
     border-bottom none
     background-size 100% 1px
@@ -149,7 +111,6 @@ list__item()
 
 .list__header
   list__header()
-<<<<<<< HEAD
   padding var-list-header-padding
   font-size var-list-header-font-size
   font-weight var-list-header-font-weight
@@ -159,17 +120,6 @@ list__item()
   border-top none
   border-bottom none
   min-height var-list-header-min-height
-=======
-  padding var-padding--list-header
-  font-size var-font-size--list-header
-  font-weight var-font-weight--list-header
-  background-color var-background-color--list-header
-  color var-color--list-header
-  text-shadow var-text-shadow--list-header
-  border-top none
-  border-bottom none
-  min-height var-min-height--list-header
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   line-height @min-height
 
 .list__header:first-child
@@ -177,24 +127,15 @@ list__item()
 
 .list
   list()
-<<<<<<< HEAD
   padding var-list-padding
   background-color var-list-background-color
   border-top var-list-border-top
   border-bottom var-list-border-bottom
   background-color var-list-background-color
-=======
-  padding var-padding--list
-  background-color var-background-color--list
-  border-top var-border-top--list
-  border-bottom var-border-bottom--list
-  background-color var-background-color--list
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   retina-list-border()
 
 .list__item
   list__item()
-<<<<<<< HEAD
   padding var-list-item-padding
   margin var-list-item-margin
   border-top none
@@ -203,33 +144,16 @@ list__item()
   background-color transparent
   min-height var-list-item-min-height
   line-height var-list-item-min-height
-=======
-  padding var-padding--list-item
-  margin var-margin--list-item
-  border-top none
-  border-bottom var-list-border
-  color var-color--list-item
-  background-color transparent
-  min-height var-min-height--list-item
-  line-height var-min-height--list-item
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 .list__item--no-padding
   padding 0
 
 .list__item__line-height,
 .list__item--line-height
-<<<<<<< HEAD
   line-height var-list-item-min-height
 
 .list__item_active:active
   background-color var-list-item-active-background-color
-=======
-  line-height var-min-height--list-item
-
-.list__item_active:active
-  background-color var-background-color--list-item--active
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   transition none
 
 .list__item:first-child
@@ -262,11 +186,7 @@ list__item()
  */
 
 .list--noborder
-<<<<<<< HEAD
   background-color var-list-background-color
-=======
-  background-color var-background-color--list
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   border-top none
   border-bottom none
   background-image none
@@ -308,11 +228,7 @@ list__item()
   transition background-color 0.2s linear
 
 .list__item--tappable:active
-<<<<<<< HEAD
   background-color var-list-item-active-background-color
-=======
-  background-color var-background-color--list-item--active
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   transition none
 
 .list__item--tappable:hover
@@ -366,11 +282,7 @@ list__item()
   overflow hidden
 
 .list__item--chevron:active
-<<<<<<< HEAD
   background-color var-list-item-active-background-color
-=======
-  background-color var-background-color--list-item--active
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   transition none
 
 .list__item--chevron:hover
@@ -443,11 +355,7 @@ list__item()
   height 100%
   padding 0
   margin 0
-<<<<<<< HEAD
   line-height var-list-item-min-height
-=======
-  line-height var-min-height--list-item
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 .radio-button--list-item__checkmark
   margin-top 10px
@@ -479,11 +387,7 @@ list__item()
   height 100%
   padding 0
   margin 0
-<<<<<<< HEAD
   line-height var-list-item-min-height
-=======
-  line-height var-min-height--list-item
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 .checkbox--list-item__checkmark
   margin-top 10px
