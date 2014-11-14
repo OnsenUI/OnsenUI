@@ -46,7 +46,7 @@ gulp.task('build', function(done) {
 // clean
 ////////////////////////////////////////
 gulp.task('clean', function (cb) {
-  rimraf('www.prod/**/*', cb);
+  require('rimraf')('www.prod/**/*', cb);
 });
 
 ////////////////////////////////////////
