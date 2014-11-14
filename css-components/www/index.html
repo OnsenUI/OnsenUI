@@ -39,7 +39,8 @@
           <li><a href="http://onsen.io/guide/getting_started.html">Getting Started</a></li>
           <li><a href="http://onsen.io/guide/components.html">Components</a></li>
           <li><a href="http://onsen.io/guide/overview.html">Guide</a></li>
-          <li class="current"><a href="http://components.onsen.io/">Themes</a></li>
+          <li ng-class="{current : location.path() === '/patterns'}"><a href="http://components.onsen.io/patterns">Patterns</a></li>
+          <li ng-class="{current : location.path() === '/'}"><a href="http://components.onsen.io/">Themes</a></li>
           <li><a href="http://onsen.io/forum.html">Forum</a></li>
           <li><a href="http://onsen.io/blog/">Blog</a></li>
         </ul>
