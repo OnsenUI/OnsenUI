@@ -19,7 +19,6 @@
 // NOTE: You can't use @extend that break component independent and topdoc parsing.
 
 // internal variables
-<<<<<<< HEAD
 var-background-color-checked--checkbox = $highlight-color // background color active
 var-checkbox-border-color = $highlight-color // boder color
 var-checkbox-border-color-active = $highlight-color // boder color active
@@ -37,32 +36,6 @@ var-checkbox-size = 24px
 var-border--checkmark--noborder = 3px solid var-checkbox-border-color
 var-checkbox-border-radius = 16px
 var-checkmark-border-radius = 0px
-=======
-var-background-color-checked--checkbox := #1284ff
-var-checkbox-border-color := #1284ff
-var-checkbox-border-color-active := var-checkbox-border-color
-var-checkmark-color := #fff
-
-var-height--checkmark__foot = 6px
-var-transform--checkmark = rotate(-45deg)
-var-background-color--checkmark = transparent
-var-border--checkbox = 1px solid var-checkbox-border-color
-var-border--checkbox--active = 1px solid var-checkbox-border-color-active
-var-border--checkbox--focus = 1px solid var-checkbox-border-color-active
-var-background-color--down--checkbox = var-background-color--checkmark
-var-background-color--before--checkbox = var-background-color-checked--checkbox
-var-border--checkmark = 3px solid var-checkmark-color
-var-border--checkmark--active = 3px solid var-checkmark-color
-var-width--checkmark__tail = 12px
-var-border-width--checkmark = 2px
-var-top--checkmark = 6px
-var-left--checkmark = 5px
-var-size--checkbox = 24px
-var-size--checkmark = 16px
-var-border--checkmark--noborder = 3px solid var-checkbox-border-color
-var-border-radius--checkbox = 16px
-var-border-radius--checkmark = 0px
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 
 /*! topdoc
@@ -115,21 +88,13 @@ checkbox--after()
 
 .checkbox
   checkbox__label()
-<<<<<<< HEAD
   line-height var-checkbox-size
-=======
-  line-height var-size--checkbox
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   margin 10px 0
 
 .checkbox > .checkbox__checkmark
   checkbox()
-<<<<<<< HEAD
   height var-checkbox-size
   pointer-events none
-=======
-  height var-size--checkbox
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 .checkbox > input[type="checkbox"]
   hide-input()
@@ -141,11 +106,7 @@ checkbox--after()
 
 .checkbox > input[type="checkbox"]:checked + .checkbox__checkmark:before
   background var-background-color--before--checkbox
-<<<<<<< HEAD
   border var-checkbox-border
-=======
-  border var-border--checkbox
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 .checkbox > input[type="checkbox"]:checked + .checkbox__checkmark:after
   opacity 1
@@ -153,36 +114,22 @@ checkbox--after()
 .checkbox > .checkbox__checkmark:before
   checkbox--before()
   reset-box-model()
-<<<<<<< HEAD
   width var-checkbox-size
   height var-checkbox-size
   background transparent
   border var-checkbox-border
   border-radius var-checkbox-border-radius
-=======
-  width var-size--checkbox
-  height var-size--checkbox
-  background var-background-color--checkmark
-  border var-border--checkbox
-  border-radius var-border-radius--checkbox
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   box-shadow var-box-shadow
   left 0
 
 .checkbox > .checkbox__checkmark
   checkbox()
-<<<<<<< HEAD
   width var-checkbox-size
   height var-checkbox-size
-=======
-  width var-size--checkbox
-  height var-size--checkbox
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 // checkmark's line
 .checkbox > .checkbox__checkmark:after
   checkbox--after()
-<<<<<<< HEAD
   top var-checkmark-top
   left var-checkmark-left
   width var-checkmark-tail-width
@@ -194,19 +141,6 @@ checkbox--after()
   border-right none
   border-radius var-checkmark-border-radius
   transform rotate(-45deg)
-=======
-  top var-top--checkmark
-  left var-left--checkmark
-  width var-width--checkmark__tail
-  height var-height--checkmark__foot
-  background transparent
-  border var-border--checkmark
-  border-width var-border-width--checkmark
-  border-top none
-  border-right none
-  border-radius var-border-radius--checkmark
-  transform var-transform--checkmark
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   opacity 0
 
 .checkbox > input[type="checkbox"]:focus + .checkbox__checkmark:before
@@ -247,11 +181,7 @@ checkbox--after()
 
 .checkbox--noborder
   checkbox__label()
-<<<<<<< HEAD
   line-height var-checkbox-size
-=======
-  line-height var-size--checkbox
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   margin 10px 0
   hide-input-parent()
 
@@ -259,11 +189,7 @@ checkbox--after()
   inline-block()
   reset-cursor()
   reset-box-model()
-<<<<<<< HEAD
   height var-checkbox-size
-=======
-  height var-size--checkbox
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   background transparent
 
 .checkbox--noborder > input[type="checkbox"]
@@ -281,38 +207,24 @@ checkbox--after()
 .checkbox--noborder > .checkbox__checkmark:before
   content ''
   position absolute
-<<<<<<< HEAD
   width var-checkbox-size
   height var-checkbox-size
   background transparent
   border none
   border-radius var-checkbox-border-radius
-=======
-  width var-size--checkbox
-  height var-size--checkbox
-  background transparent
-  border none
-  border-radius var-border-radius--checkbox
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   left 0
 
 .checkbox--noborder > .checkbox__checkmark
   inline-block()
   reset-cursor()
   reset-box-model()
-<<<<<<< HEAD
   width var-checkbox-size
   height var-checkbox-size
-=======
-  width var-size--checkbox
-  height var-size--checkbox
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
   border none
 
 .checkbox--noborder > .checkbox__checkmark:after
   content ''
   position absolute
-<<<<<<< HEAD
   top var-checkmark-top
   left var-checkmark-left
   opacity 0
@@ -325,20 +237,6 @@ checkbox--after()
   border-right none
   border-radius var-checkmark-border-radius
   transform rotate(-45deg)
-=======
-  top var-top--checkmark
-  left var-left--checkmark
-  opacity 0
-  width var-width--checkmark__tail
-  height var-height--checkmark__foot
-  background transparent
-  border var-border--checkmark--noborder
-  border-width var-border-width--checkmark
-  border-top none
-  border-right none
-  border-radius var-border-radius--checkmark
-  transform var-transform--checkmark
->>>>>>> ce11382e68c3d96512ee16ed1829dad3f20eb9c0
 
 .checkbox--noborder > input[type="checkbox"]:focus + .checkbox__checkmark:before
   border none
