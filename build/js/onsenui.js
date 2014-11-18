@@ -16360,8 +16360,8 @@ window.ons.notification = (function() {
       footerEl.addClass('alert-dialog-footer--one');
     }
 
-    var createButton = function(i) {
-      var buttonEl = angular.element('<button>').addClass('alert-dialog-button').text(buttonLabels[i]);
+    var createButton = function(text, cancel) {
+      var buttonEl = angular.element('<button>').addClass('alert-dialog-button').text(text);
       
       if (i == primaryButtonIndex) {
         buttonEl.addClass('alert-dialog-button--primal');
@@ -16374,10 +16374,12 @@ window.ons.notification = (function() {
       buttonEl.on('click', function() {
         alertDialog.hide({
           callback: function() {
-            if (promptDialog) {
-              callback(inputEl.val());
-            } else {
-              callback(i);
+            if(cancel!==true){
+          	    if (promptDialog) {
+	              callback(inputEl.val());
+	            } else {
+	              callback(i);
+	            }
             }
             alertDialog.destroy();
             alertDialog = null;
@@ -16388,10 +16390,15 @@ window.ons.notification = (function() {
       footerEl.append(buttonEl);
       buttonEl = null;
     };
-    for (var i = 0; i < buttonLabels.length; i++) {
-      createButton(i);
+    if (cancelable !== undefined && cancelable !== "" && cancelable !== false){
+    	if(cancelable===true)
+    		cancelable = "Cancel";
+    	createButton(cancelable, true);
     }
-
+    for (var i = 0; i < buttonLabels.length; i++) {    	
+      createButton(buttonLabels[i], false);
+    }
+/*
     if (cancelable) {
       alertDialog.setCancelable(cancelable);
       alertDialog.on('cancel', function() {
@@ -16407,7 +16414,7 @@ window.ons.notification = (function() {
         });
       });
     }
-
+*/
     alertDialog.show({
       callback: function() {
         if(promptDialog && autofocus) {
