@@ -160,7 +160,7 @@ window.ons.notification = (function() {
      */
     confirm: function(options) {
       var defaults = {
-        buttonLabels: ['Cancel', 'OK'],
+        buttonLabels: ['OK'],
         primaryButtonIndex: 1,
         animation: 'default',
         title: 'Confirm',
