@@ -55,8 +55,8 @@ window.ons.notification = (function() {
       footerEl.addClass('alert-dialog-footer--one');
     }
 
-    var createButton = function(i) {
-      var buttonEl = angular.element('<button>').addClass('alert-dialog-button').text(buttonLabels[i]);
+    var createButton = function(buttonLabel, cancel) {
+      var buttonEl = angular.element('<button>').addClass('alert-dialog-button').text(buttonLabel);
       
       if (i == primaryButtonIndex) {
         buttonEl.addClass('alert-dialog-button--primal');
@@ -69,11 +69,15 @@ window.ons.notification = (function() {
       buttonEl.on('click', function() {
         alertDialog.hide({
           callback: function() {
-            if (promptDialog) {
-              callback(inputEl.val());
-            } else {
-              callback(i);
-            }
+             if(cancel !== true){
+               if (promptDialog) {
+                 callback(inputEl.val());
+               } else {
+                 callback(i);
+               }
+             }else{
+                callback(false);
+             }
             alertDialog.destroy();
             alertDialog = null;
             inputEl = null;
@@ -83,24 +87,16 @@ window.ons.notification = (function() {
       footerEl.append(buttonEl);
       buttonEl = null;
     };
-    for (var i = 0; i < buttonLabels.length; i++) {
-      createButton(i);
+    
+    if (cancelable !== undefined && cancelable !== "" && cancelable !== false){
+    	if(cancelable === true){
+    		cancelable = "Cancel";
+    	}
+    	createButton(cancelable, true);
     }
-
-    if (cancelable) {
-      alertDialog.setCancelable(cancelable);
-      alertDialog.on('cancel', function() {
-        if(promptDialog) {
-          callback(null);
-        } else {
-          callback(-1);
-        }
-        setTimeout(function() {
-          alertDialog.destroy();
-          alertDialog = null;
-          inputEl = null;
-        });
-      });
+    
+    for (var i = 0; i < buttonLabels.length; i++) {
+      createButton(buttonLabels[i]);
     }
 
     alertDialog.show({
@@ -206,7 +202,7 @@ window.ons.notification = (function() {
      */
     prompt: function(options) {
       var defaults = {
-        buttonLabel: 'OK',
+        buttonLabels: ['OK'],
         animation: 'default',
         title: 'Alert',
         placeholder: '',
@@ -223,7 +219,7 @@ window.ons.notification = (function() {
       createAlertDialog(
         options.title,
         options.message || options.messageHTML,
-        [options.buttonLabel],
+        options.buttonLabels,
         0,
         options.modifier,
         options.animation,
