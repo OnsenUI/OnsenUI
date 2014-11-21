@@ -26,7 +26,7 @@
 * @param mask-color
 *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
 *  [ja]背景のマスクの色を指定します。デフォルトは"rgba(0, 0, 0, 0.2)"です。[/ja]
-* @property show(target, options)
+* @property show(target,options)
 *  [en]Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..[/en]
 *  [ja]対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。[/ja]
 * @property hide()
@@ -53,6 +53,7 @@
 * @property on(eventName,listener)
 *  [en]Add an event listener. Preset events are "preshow", "postshow", "prehide" and "posthide".[/en]
 *  [ja]イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。[/ja]
+* @codepen ZYYRKo
 * @example
 * <script>
 * ons.ready(function() {
