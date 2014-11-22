@@ -90,7 +90,7 @@ We will happily accept contributions to Onsen UI. It can be both fixes for bugs 
 
 The basic workflow when making contributions is the following:
 
-* [Fork](https://github.com/OnsenUI/OnsenUI/form) the repository
+* [Fork](https://github.com/OnsenUI/OnsenUI/fork) the repository
 * Commit your changes
 * Make a [pull request](https://help.github.com/articles/using-pull-requests) to **master** branch.
 
