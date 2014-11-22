@@ -9,7 +9,7 @@
 *  [en]Variable name to refer this popover.[/en]
 *  [ja]このポップオーバーを参照するための名前を指定します。[/ja]
 * @param modifier
-*  [en]The appearance of the popover.[g/en]
+*  [en]The appearance of the popover.[/en]
 *  [ja]ポップオーバーの表現を指定します。[/ja]
 * @param direction
 *  [en]A space separated list of directions. If more than one will be chosen automatically. Valid directions are "up", "down", "left" and "right".[/en]
