@@ -7,6 +7,7 @@ v1.2.1
 
  * ons-switch: Fixed [#318](https://github.com/OnsenUI/OnsenUI/issues/318).
  * css-components: Fixed [#318](https://github.com/OnsenUI/OnsenUI/issues/323).
+ * css-components: Fixed [#331](https://github.com/OnsenUI/OnsenUI/issues/331).
 
 v1.2.0
 ----
