@@ -11,6 +11,9 @@
  * @param modifier
  *  [en]The appearance of the toolbar.[/en]
  *  [ja]ツールバーの表現を指定します。[/ja]
+ * @param fixed-style
+ *  [en]By default the center element will be left-aligned on Android and center-aligned on iOS. Use this attribute to override this behavior so it's always displayed in the center.[/en]
+ *  [ja]中央揃え要素は、デフォルトとしてAndroidでは左配置、iOSでは中央配置です。この属性を使用すると、要素はAndroidとiOSともに中央配置となります。[/ja]
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-bottom-toolbar [en]ons-bottom-toolbar component[/en][ja]ons-bottom-toolbarコンポーネント[/ja]
