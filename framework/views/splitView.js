@@ -217,7 +217,14 @@ limitations under the License.
           if (num.indexOf('px') >= 0) {
             num = num.substr(0,num.length-2);
           }
-          return isNumber(num) && window.innerWidth < num;
+       
+          var width = window.innerWidth;
+          
+          if ($onsen.isAndroid()) {
+            width = screen.width;
+          }
+
+          return isNumber(num) && width < num;
         } else {
           var mq = window.matchMedia(c);
           return mq.matches;

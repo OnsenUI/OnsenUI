@@ -84,12 +84,30 @@ Run gulp task to develop Onsen UI itself with livereload.
 
 Access [http://0.0.0.0:8000/demo/index.html](http://0.0.0.0:8000/demo/index.html) and your code changes will be reloaded.
 
-## Contributing
+## How to contribute
 
-* Fill out the CLA [here](https://docs.google.com/forms/d/1ldg4_QReI2hC12HvF1OuDhW1QromvXat6kA4Uhdsw2M/viewform)
-* Fork the repo
+We will happily accept contributions to Onsen UI. It can be both fixes for bugs or typos or even new features that extend Onsen UI.
+
+The basic workflow when making contributions is the following:
+
+* [Fork](https://github.com/OnsenUI/OnsenUI/fork) the repository
 * Commit your changes
 * Make a [pull request](https://help.github.com/articles/using-pull-requests) to **master** branch.
+
+After you've made a pull request we will review it. If everything is fine and we like the change the contribution will be pulled into the main Onsen UI repository. In the case where there are some issues with the code or we disagree with how it's been implemented we will describe the issues in the comments so they can be corrected.
+
+### Code style
+
+There are some things to keep in mind when making code contributions to Onsen UI. The code must adhere to the general code style used.
+
+Here is a list of some rules that should be followed:
+
+* Code should be properly indented. Onsen UI uses two-space indentation in both HTML and JavaScript. Please don't use tabs for indentation.
+* Separate binary operators with spaces: `var x = 1+1` is incorrect, it should be written as: `var x = 1 + 1`.
+* `if`, `while`, `for`, etc. should be separated from the paranthesis with a space.
+* Use easy-to-understand and logical naming for your variables and method names, especially for variables and methods that are exposed to the user.
+* Internal APIs should be preceded by an underscore.
+* Use single quotes for strings in JavaScript and double quotes for attributes in HTML.
 
 ## Getting support
 

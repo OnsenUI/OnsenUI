@@ -271,7 +271,7 @@ limitations under the License.
         var max = this._calculateMaxScroll();
 
         this._scroll = Math.max(0, Math.min(max, scroll));
-        this._scrollTo(this._scroll, {animate: options.animation !== 'none'});
+        this._scrollTo(this._scroll, {animate: options.animation !== 'none', callback: options.callback});
 
         this._tryFirePostChangeEvent();
       },
@@ -528,13 +528,13 @@ limitations under the License.
               duration: 0.3,
               timing: 'cubic-bezier(.1, .7, .1, 1)'
             })
-            .play();
+            .play(options.callback);
         } else {
           animit(this._getCarouselItemElements())
             .queue({
               transform: this._generateScrollTransform(normalizeScroll(scroll))
             })
-            .play();
+            .play(options.callback);
         }
 
         function normalizeScroll(scroll) {

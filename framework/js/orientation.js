@@ -85,15 +85,7 @@ window.ons.orientation = (function() {
 
       // Run on not mobile browser.
       _onResize: function() {
-        if ('_lastScreenIsPortraitOrNot' in this) {
-          if (this.isPortrait() !== this._lastScreenIsPortraitOrNot) {
-            this.emit('change', {isPortrait: this.isPortrait()});
-          }
-        } else {
-          this.emit('change', {isPortrait: this.isPortrait()});
-        }
-
-        this._lastScreenIsPortraitOrNot = this.isPortrait();
+        this.emit('change', {isPortrait: this.isPortrait()});
       }
     };
 

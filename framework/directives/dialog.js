@@ -56,6 +56,7 @@
  * @property on(eventName,listener)
  *  [en]Add an event listener. Preset events are preshow, postshow, prehide and posthide.[/en]
  *  [ja]イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。[/ja]
+ * @codepen zxxaGa
  * @example
  * <script>
  *   ons.ready(function() {

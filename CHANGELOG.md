@@ -2,6 +2,16 @@
 CHANGELOG
 ====
 
+v1.2.1
+----
+
+ * ons-switch: Fixed [#318](https://github.com/OnsenUI/OnsenUI/issues/318).
+ * css-components: Fixed [#323](https://github.com/OnsenUI/OnsenUI/issues/323).
+ * css-components: Fixed [#331](https://github.com/OnsenUI/OnsenUI/issues/331).
+ * ons-split-view: Fixed issue where split view mode didn't update on Android.
+ * ons-carousel: Fixed [#341](https://github.com/OnsenUI/OnsenUI/issues/341).
+ * ons-split-view: Fixed [#340](https://github.com/OnsenUI/OnsenUI/issues/340). Now emits orientation change event every time the window is resized for desktop browsers.
+
 v1.2.0
 ----
 

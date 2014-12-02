@@ -86,7 +86,7 @@
  * @property setDisabled(disabled)
  *    [en]Disable or enable the dialog.[/en]
  *    [ja]disabled属性があるかどうかを設定する。[/ja] 
- *
+ * @codepen xbbzOQ
  * @example
  *   <ons-carousel style="width: 100%; height: 200px">
  *     <ons-carousel-item>
