@@ -501,6 +501,7 @@ h6 {
   name: Navigation Bar with Outline Button
   use: Toolbar Button, Navigation Bar
   markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="navigation-bar">
       <div class="navigation-bar__left">
         <span class="toolbar-button--outline navigation-bar__line-height">
@@ -552,6 +553,7 @@ h6 {
   float: left;
   text-align: left;
   width: auto;
+  max-width: 50%;
 }
 .navigation-bar--android__right {
   float: right;
@@ -590,6 +592,52 @@ h6 {
   class: navigation-bar--transparent
   use: Toolbar Button, Navigation Bar
   markup:
+    <div class="navigation-bar navigation-bar--transparent">
+      <div class="navigation-bar__left">
+        <span class="toolbar-button--quiet navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+      <div class="navigation-bar__center">
+        Navigation Bar
+      </div>
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--quiet navigation-bar__line-height">Label</span>
+      </div>
+    </div>
+*/
+.navigation-bar--transparent {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+}
+/* topdoc
+  name: Navigation Bar with Outline Button
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
+    <div class="navigation-bar">
+      <div class="navigation-bar__left">
+        <span class="toolbar-button--outline navigation-bar__line-height">
+          <i class="ion-navicon" style="font-size:32px; vertical-align:-6px;"></i>
+        </span>
+      </div>
+
+      <div class="navigation-bar__center">
+        Title
+      </div>
+
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--outline navigation-bar__line-height">Button</span>
+      </div>
+    </div>
+*/
+/* topdoc
+  name: Transparent Navigation Bar
+  class: navigation-bar--transparent
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="navigation-bar navigation-bar--transparent">
       <div class="navigation-bar__left">
         <span class="toolbar-button--quiet navigation-bar__line-height">
@@ -1396,6 +1444,7 @@ h6 {
   modifiers:
     :disabled: Disabled state
   markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="tab-bar">
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-a" checked="checked">
@@ -1633,6 +1682,7 @@ h6 {
   modifiers:
     :disabled: Disabled state
   markup:
+    <!-- Prerequisite=This example use ionicons(http://ionicons.com) to display icons. -->
     <div class="tab-bar">
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-b" checked="checked">
@@ -1822,6 +1872,7 @@ h6 {
     :disabled: Disabled state
     :focus: Focused
   markup:
+    <!-- Prerequisite=This example use font-awesome(http://fortawesome.github.io/Font-Awesome/) to display icons. -->
     <button class="toolbar-button">
       <i class="fa fa-bell" style="font-size:17px"></i> Label
     </button>
@@ -2054,8 +2105,8 @@ h6 {
   opacity: 0;
 }
 .checkbox > input[type="checkbox"]:focus + .checkbox__checkmark:before {
-  -webkit-box-shadow: var-box-shadow--cta;
-  box-shadow: var-box-shadow--cta;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .checkbox > input[type="checkbox"]:disabled + .checkbox__checkmark {
   opacity: 0.3;
@@ -2224,8 +2275,8 @@ h6 {
 }
 .checkbox--noborder > input[type="checkbox"]:focus + .checkbox__checkmark:before {
   border: none;
-  -webkit-box-shadow: var-box-shadow--cta;
-  box-shadow: var-box-shadow--cta;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .checkbox--noborder > input[type="checkbox"]:disabled + .checkbox__checkmark {
   opacity: 0.3;
@@ -2323,8 +2374,8 @@ h6 {
   height: 24px;
   background: transparent;
   border: none;
-  -webkit-border-radius: var-border-radius--checkbox;
-  border-radius: var-border-radius--checkbox;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
   left: 0;
 }
 .radio-button__checkmark {
@@ -2984,7 +3035,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: #87888f;
 }
 .text-input:invalid {
-  border: 1px solid var-input-invalid-border-color;
+  border: 1px solid #424242;
   color: #fff;
 }
 /* topdoc
@@ -3052,7 +3103,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-color: transparent;
 }
 .text-input--transparent:invalid {
-  border: 1px solid var-input-invalid-border-color;
+  border: 1px solid #424242;
   color: #fff;
   border: none;
   background-color: transparent;
@@ -3124,11 +3175,11 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-color: transparent;
 }
 .text-input--underbar:invalid {
-  border: 1px solid var-input-invalid-border-color;
+  border: 1px solid #424242;
   color: #fff;
   border: none;
   background-color: transparent;
-  border-bottom: 1px solid var-input-invalid-border-color;
+  border-bottom: 1px solid #424242;
 }
 /* topdoc
   name: Textarea
@@ -3161,7 +3212,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   resize: none;
   outline: none;
   padding: 5px 5px 5px 5px;
-  font-size: var-font-size--text-input;
+  font-size: 15px;
   font-weight: 400;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -3216,7 +3267,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   padding: 5px 5px 5px 5px;
   padding-left: 0;
   padding-right: 0;
-  font-size: var-font-size--text-input;
+  font-size: 15px;
   font-weight: 400;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -3635,7 +3686,9 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     <div class="popover-mask"></div>
     <div class="popover popover--up" style="bottom:20px;left:50px;">
       <div class="popover__bottom-arrow"></div>
-      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      <div class="popover__content">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
     </div>
 */
 .popover-mask {
@@ -3672,12 +3725,19 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   position: absolute;
   width: 220px;
   min-height: 100px;
+}
+.popover__content {
   background-color: #000;
   -webkit-border-radius: 8px;
   border-radius: 8px;
   -webkit-box-shadow: 0 2px 16px rgba(0,0,0,0.1);
   box-shadow: 0 2px 16px rgba(0,0,0,0.1);
   color: #fff;
+  overflow: hidden;
+  min-height: 100px;
+}
+.popover__content > * {
+  overflow: hidden;
 }
 .popover__bottom-arrow {
   content: '';
@@ -3794,7 +3854,9 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     <div class="popover-mask"></div>
     <div class="popover popover--down" style="top:20px;left:50px;">
       <div class="popover__top-arrow"></div>
-      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      <div class="popover__content">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
     </div>
 */
 /* topdoc
@@ -3804,7 +3866,9 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     <div class="popover-mask"></div>
     <div class="popover popover--left" style="top:20px;right:20px;">
       <div class="popover__right-arrow"></div>
-      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      <div class="popover__content">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
     </div>
 */
 /* topdoc
@@ -3814,7 +3878,9 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     <div class="popover-mask"></div>
     <div class="popover popover--right" style="top:20px;left:20px;">
       <div class="popover__left-arrow"></div>
-      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      <div class="popover__content">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
     </div>
 */
 /* topdoc
@@ -3822,11 +3888,13 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   use: Popover
   markup:
     <div class="popover-mask"></div>
-    <div class="popover popover--up popover--android" style="top:10px;right:10px;">
-      <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+    <div class="popover popover--up popover" style="top:10px;right:10px;">
+      <div class="popover__content popover__content--android">
+        <div style="text-align:center;opacity:0.4;margin-top:40px">Content</div>
+      </div>
     </div>
 */
-.popover--android {
+.popover__content--android {
   -webkit-border-radius: 2px;
   border-radius: 2px;
 }
@@ -3908,4 +3976,5 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   vertical-align: middle;
   text-align: center;
   color: #fff;
+  white-space: normal;
 }
