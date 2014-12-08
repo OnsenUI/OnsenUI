@@ -240,24 +240,6 @@ limitations under the License.
       },
 
       /**
-       * @param {Boolean} draggable
-       */
-      setDraggable: function(draggable) {
-        if (draggable) {
-          this._element[0].setAttribute('draggable', '');
-        } else {
-          this._element[0].removeAttribute('draggable');
-        }
-      },
-
-      /**
-       * @return {Boolean}
-       */
-      isDraggable: function() {
-        return this._element[0].hasAttribute('draggable');
-      },
-
-      /**
        * @param {Number} index
        * @param {Object} [options]
        * @param {Function} [options.callback]
@@ -414,6 +396,10 @@ limitations under the License.
       },
 
       _onDrag: function(event) {
+        if (!this.isSwipeable()) {
+          return;
+        }
+
         this._lastDragEvent = event;
 
         var scroll = this._scroll - this._getScrollDelta(event);
