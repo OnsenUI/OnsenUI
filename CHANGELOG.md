@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v1.2.2
+----
+ * ons-carousel: Fixed [#358](https://github.com/OnsenUI/OnsenUI/issues/358). Breaks compatibility with 1.2.1, `'swipeable'` attribute must be added to `<ons-carousel>` tags to made them touch swipeable.
+
 v1.2.1
 ----
 
