@@ -1,8 +1,12 @@
 # Onsen UI
 
-Onsen UI is a Custom Elements-Based HTML5 UI Framework for BuildingYour Mobile Front End.
+The best place to start with Onsen UI is our [Getting Started](http://onsen.io/guide/getting_started.html) page.
 
-Onsen UI makes building applications simple basing on the concept of Web Components. Applications can be build using **HTML tags** web developers already know. It is built on top of heroic [AngularJS](http://angularjs.org/) and performance craving [Topcoat](http://topcoat.io/).
+https://cloud.githubusercontent.com/assets/9889313/5350569/eec8b870-7efb-11e4-90af-2f4d505e09a8.png
+
+Built on top of [AngularJS](http://angularjs.org/) and [Topcoat](http://topcoat.io/), Onsen UI is open source, free and open for all. Onsen UI is designed and implemented to deliver unprecedented user experience for your apps. Applications can be built using **HTML tags** web developers already know and love. We love AngularJS and all the power it brings. But we've also added support for JQuery so developers less familiar with AngularJS can take advantage of Onsen UI, too.
+
+Onsen UI also includes Onsen CSS Components, a free resource of UI templates with "theme roller" functionality. Developers can pick and choose, grab the code they need, and they're off and running. And they can create their own templates and submit to Onsen UI to be included with other templates available. 
 
 [Monaca IDE] fully supports Onsen UI plugin.
 
@@ -28,11 +32,11 @@ Click [Here](http://onsen.io/guide/components.html) to see Onsen UI in action!
 
 ## Getting Started Using Templates
 
-See [getting started](http://onsen.io/getting_started/) page.
+See the [Onsen UI Getting Started](http://onsen.io/getting_started/) page.
 
 ## Getting Started Using Monaca
 
-See the [Onsen UI Getting Started Page].
+See the [Onsen UI Getting Started Page] and scroll down to the Using Onsen UI with Monaca section. 
 
 ## How to build
 
@@ -74,7 +78,7 @@ The files will be built and copied into **build**, **demo/lib/onsen/**, and **ap
 
 ## Documentation
 
-See the current [Onsen UI docs].
+See the current [Onsen UI docs](http://onsen.io/guide/overview.html).
 
 ## Developing Onsen UI
 
