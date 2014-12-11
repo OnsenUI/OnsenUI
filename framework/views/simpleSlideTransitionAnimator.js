@@ -30,7 +30,7 @@ limitations under the License.
 
       /** Black mask */
       backgroundMask : angular.element(
-        '<div style="position: absolute; width: 100%;' +
+        '<div style="z-index: 2; position: absolute; width: 100%;' +
         'height: 100%; background-color: black; opacity: 0;"></div>'
       ),
 
