@@ -21,7 +21,7 @@ Onsen UI is tested with the following browsers and mobile OS.
 
 ## Demo
 
-Click [Here](http://onsen.io/guide/components.html) to see Onsen UI in action!
+[Click here](http://onsen.io/guide/components.html) to see Onsen UI in action!
 
 ## What's Included
 
