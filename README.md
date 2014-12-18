@@ -42,33 +42,43 @@ See the [Onsen UI Getting Started Page] and scroll down to the Using Onsen UI wi
 
 * Clone this repository
 
-        $ git clone https://github.com/monaca/OnsenUI.git
+```bash
+$ git clone https://github.com/monaca/OnsenUI.git
+```
 
 * Open the terminal from OnsenUI directory
 
-        $ cd OnsenUI
+```bash
+$ cd OnsenUI
+```
 
 * Install dependencies using [npm](http://nodejs.org/download/)
 
-        $ npm install
+```bash
+$ npm install
+```
 
 * Install gulp (globally)
 
-        $ [sudo] npm install -g gulp
+```bash
+$ [sudo] npm install -g gulp
+```
 
 * Type gulp to start building
 
-        gulp build
+```bash
+$ gulp build
+```
 
 The files will be built and copied into **build**, **demo/lib/onsen/**, and **app/lib/onsen/** folder.
 
 ## Running Demo
 
-        $ npm install
-
-        $ [sudo] npm install -g gulp
-
-        $ gulp serve
+```bash
+$ npm install
+$ [sudo] npm install -g gulp
+$ gulp serve
+```
 
 * Then navigate your browser to [http://0.0.0.0:8000/demo/index.html](http://0.0.0.0:8000/demo/index.html)
 
