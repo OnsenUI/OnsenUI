@@ -1,4 +1,4 @@
-/*! onsenui - v1.2.1 - 2014-12-01 */
+/*! onsenui - v1.2.1 - 2014-12-18 */
 /**
  * @license AngularJS v1.3.0
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -31975,24 +31975,6 @@ limitations under the License.
       },
 
       /**
-       * @param {Boolean} draggable
-       */
-      setDraggable: function(draggable) {
-        if (draggable) {
-          this._element[0].setAttribute('draggable', '');
-        } else {
-          this._element[0].removeAttribute('draggable');
-        }
-      },
-
-      /**
-       * @return {Boolean}
-       */
-      isDraggable: function() {
-        return this._element[0].hasAttribute('draggable');
-      },
-
-      /**
        * @param {Number} index
        * @param {Object} [options]
        * @param {Function} [options.callback]
@@ -32149,6 +32131,10 @@ limitations under the License.
       },
 
       _onDrag: function(event) {
+        if (!this.isSwipeable()) {
+          return;
+        }
+
         this._lastDragEvent = event;
 
         var scroll = this._scroll - this._getScrollDelta(event);
@@ -34507,16 +34493,15 @@ limitations under the License.
        */
       popPage: function(options) {
         options = options || {};
-
-        if (this.pages.length <= 1) {
-          throw new Error('NavigatorView\'s page stack is empty.');
-        }
-
-        if (this._emitPrePopEvent()) {
-          return;
-        }
-
+        
         this._doorLock.waitUnlock(function() {
+          if (this.pages.length <= 1) {
+            throw new Error('NavigatorView\'s page stack is empty.');
+          }
+
+          if (this._emitPrePopEvent()) {
+            return;
+          }
           this._popPage(options);
         }.bind(this));
       },
@@ -36158,7 +36143,7 @@ limitations under the License.
 
       /** Black mask */
       backgroundMask : angular.element(
-        '<div style="position: absolute; width: 100%;' +
+        '<div style="z-index: 2; position: absolute; width: 100%;' +
         'height: 100%; background-color: black; opacity: 0;"></div>'
       ),
 
@@ -38578,6 +38563,16 @@ limitations under the License.
               $onsen.aliasStack.unregister('ons.carousel', carousel);
               element = null;
             });
+
+            // Refresh carousel when carousel items are added or removed.
+            scope.$watch(
+              function () { 
+                return element.find('ons-carousel-item').length; 
+              },
+              function () {
+                carousel.refresh();
+              }
+            );
 
             $onsen.fireComponentEvent(element[0], 'init');
           });
