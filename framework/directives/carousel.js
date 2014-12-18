@@ -36,7 +36,7 @@
  *    [ja]この属性がある時、dargやtouchやswipeで受け付けなくなります。[/ja]
  * @param initial-index
  *    [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
- *    [ja]最初に表示するons-carousel-itemを0始まりのインデックスで指定します。デフォルトは0です。[/en]
+ *    [ja]最初に表示するons-carousel-itemを0始まりのインデックスで指定します。デフォルトは0です。[/ja]
  * @param auto-refresh
  *    [en]When this attribute is set the carousel will automatically refresh when the number of child nodes change.[/en]
  *    [ja]この属性がある時、子要素の数が変わるとカルーセルは自動的に更新されます。[/ja]
