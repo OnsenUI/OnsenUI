@@ -118,9 +118,6 @@
         element.addClass(templater('carousel--*'));
 
         return function(scope, element, attrs) {
-
-
-
           setImmediate(function() {
             var carousel = new CarouselView(scope, element, attrs);
 
