@@ -133,6 +133,16 @@
               element = null;
             });
 
+            // Refresh carousel when carousel items are added or removed.
+            scope.$watch(
+              function () { 
+                return element.find('ons-carousel-item').length; 
+              },
+              function () {
+                carousel.refresh();
+              }
+            );
+
             $onsen.fireComponentEvent(element[0], 'init');
           });
         };
