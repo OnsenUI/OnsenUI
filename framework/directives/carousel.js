@@ -118,6 +118,9 @@
         element.addClass(templater('carousel--*'));
 
         return function(scope, element, attrs) {
+
+
+
           setImmediate(function() {
             var carousel = new CarouselView(scope, element, attrs);
 
@@ -132,6 +135,16 @@
               $onsen.aliasStack.unregister('ons.carousel', carousel);
               element = null;
             });
+
+            // Refresh carousel when carousel items are added or removed.
+            scope.$watch(
+              function () { 
+                return element.find('ons-carousel-item').length; 
+              },
+              function () {
+                carousel.refresh();
+              }
+            );
 
             $onsen.fireComponentEvent(element[0], 'init');
           });
