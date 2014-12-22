@@ -60,6 +60,7 @@
   -webkit-align-items: center;
   -moz-align-items: center;
   align-items: center;
+  text-align: inherit;
 }
 
 /* .col-* vertically aligns an individual .col */
@@ -79,7 +80,8 @@
   -webkit-align-self: center;
   -moz-align-self: center;
   -ms-flex-item-align: center;
-  align-self: center; }
+  text-align: inherit;
+}
 
 /* Column Offsets */
 .col-offset-10 {
