@@ -1,15 +1,23 @@
+---
+page: 'component-detail'
+title: 'ons-popover'
+name: 'ons-popover'
+collection: 'components'
+reference: true
+---
 <div class="directive-container" id="module:directives.directive:ons-popover">
-  <div>
-    <section class="description">
-      <p>A component that displays a popover next to an element.</p>
-    </section>
+  <h2>ons-popover</h2>
 
-    <span class="anchor" id="ons-popover-attributes"></span>
+  <section class="description">
+    <p>A component that displays a popover next to an element.</p>
+  </section>
 
-    
-      <section>
-        <h4>Example</h4>
-        <pre><code class="xml">&lt;script&gt;
+  <span class="anchor" id="ons-popover-attributes"></span>
+
+  
+    <section>
+      <h4>Example</h4>
+      <pre><code class="xml">&lt;script&gt;
 ons.ready(function() {
   ons.createPopover(&#39;popover.html&#39;).then(function(popover) {
     popover.show(&#39;#mybutton&#39;);   
@@ -22,144 +30,139 @@ ons.ready(function() {
     &lt;p style=&quot;text-align: center; opacity: 0.5;&quot;&gt;This popover will choose which side it&#39;s displayed on automatically.&lt;/p&gt;
   &lt;/ons-popover&gt;
 &lt;/script&gt;</code></pre>
-      </section>
-    
+    </section>
+  
 
-    
-      <section>
-        <h4>Attributes</h4>
-        <table>
-          <tbody>
-            
-            <span class="anchor" id="ons-popover-var"></span>
-            <tr ng-repeat="attribute in directive.attributes">
-              <td class="attribute-name">var</td>
-              <td>Variable name to refer this popover.</td>
-            </tr>
-            
-            <span class="anchor" id="ons-popover-modifier"></span>
-            <tr ng-repeat="attribute in directive.attributes">
-              <td class="attribute-name">modifier</td>
-              <td>The appearance of the popover.</td>
-            </tr>
-            
-            <span class="anchor" id="ons-popover-direction"></span>
-            <tr ng-repeat="attribute in directive.attributes">
-              <td class="attribute-name">direction</td>
-              <td>A space separated list of directions. If more than one will be chosen automatically. Valid directions are &quot;up&quot;, &quot;down&quot;, &quot;left&quot; and &quot;right&quot;.</td>
-            </tr>
-            
-            <span class="anchor" id="ons-popover-cancelable"></span>
-            <tr ng-repeat="attribute in directive.attributes">
-              <td class="attribute-name">cancelable</td>
-              <td>If this attribute is set the popover can be closed by tapping the background or pressing the back button.</td>
-            </tr>
-            
-            <span class="anchor" id="ons-popover-disabled"></span>
-            <tr ng-repeat="attribute in directive.attributes">
-              <td class="attribute-name">disabled</td>
-              <td>If this attribute is set the popover is disabled.</td>
-            </tr>
-            
-            <span class="anchor" id="ons-popover-animation"></span>
-            <tr ng-repeat="attribute in directive.attributes">
-              <td class="attribute-name">animation</td>
-              <td>The animation used when showing an hiding the popover. Can be either &quot;none&quot; or &quot;fade&quot;.</td>
-            </tr>
-            
-            <span class="anchor" id="ons-popover-mask-color"></span>
-            <tr ng-repeat="attribute in directive.attributes">
-              <td class="attribute-name">mask-color</td>
-              <td>Color of the background mask. Default is &quot;rgba(0, 0, 0, 0.2)&quot;.</td>
-            </tr>
-            
-          </tbody>
-        </table>
-      </section>
-    
-
-    <span class="anchor" id="ons-popover-methods"></span>
-    
+  
     <section>
-      <h4>Methods</h4>
+      <h4>Attributes</h4>
       <table>
         <tbody>
           
-          <span class="anchor" id="show(target,options)-show(target,options)"></span>
-          <tr ng-repeat="method in directive.methods">
-            <td><code>show(target,options)</code></td>
-            <td>Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..</td>
-          </tr>
-          
-          <span class="anchor" id="hide()-hide()"></span>
-          <tr ng-repeat="method in directive.methods">
-            <td><code>hide()</code></td>
-            <td>Close the popover.</td>
-          </tr>
-          
-          <span class="anchor" id="isShown()-isShown()"></span>
-          <tr ng-repeat="method in directive.methods">
-            <td><code>isShown()</code></td>
-            <td>Returns whether the popover is visible or not.</td>
-          </tr>
-          
-          <span class="anchor" id="destroy()-destroy()"></span>
-          <tr ng-repeat="method in directive.methods">
-            <td><code>destroy()</code></td>
-            <td>Destroy the popover and remove it from the DOM tree.</td>
-          </tr>
-          
-          <span class="anchor" id="setCancelable(cancelable)-setCancelable(cancelable)"></span>
-          <tr ng-repeat="method in directive.methods">
-            <td><code>setCancelable(cancelable)</code></td>
-            <td>Set whether the popover can be canceled by the user when it is shown.</td>
-          </tr>
-          
-          <span class="anchor" id="isCancelable()-isCancelable()"></span>
-          <tr ng-repeat="method in directive.methods">
-            <td><code>isCancelable()</code></td>
-            <td>Returns whether the popover is cancelable or not.</td>
-          </tr>
-          
-          <span class="anchor" id="setDisabled(disabled)-setDisabled(disabled)"></span>
-          <tr ng-repeat="method in directive.methods">
-            <td><code>setDisabled(disabled)</code></td>
-            <td>Disable or enable the popover.</td>
-          </tr>
-          
-          <span class="anchor" id="isDisabled()-isDisabled()"></span>
-          <tr ng-repeat="method in directive.methods">
-            <td><code>isDisabled()</code></td>
-            <td>Returns whether the popover is disabled or enabled.</td>
-          </tr>
-          
-          <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
-          <tr ng-repeat="method in directive.methods">
-            <td><code>on(eventName,listener)</code></td>
-            <td>Add an event listener. Preset events are &quot;preshow&quot;, &quot;postshow&quot;, &quot;prehide&quot; and &quot;posthide&quot;.</td>
-          </tr>
-          
+          <span class="anchor" id="ons-popover-var"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">var</td>
+            <td>Variable name to refer this popover.</td>
+          </tr> 
+          <span class="anchor" id="ons-popover-modifier"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">modifier</td>
+            <td>The appearance of the popover.</td>
+          </tr> 
+          <span class="anchor" id="ons-popover-direction"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">direction</td>
+            <td>A space separated list of directions. If more than one will be chosen automatically. Valid directions are &quot;up&quot;, &quot;down&quot;, &quot;left&quot; and &quot;right&quot;.</td>
+          </tr> 
+          <span class="anchor" id="ons-popover-cancelable"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">cancelable</td>
+            <td>If this attribute is set the popover can be closed by tapping the background or pressing the back button.</td>
+          </tr> 
+          <span class="anchor" id="ons-popover-disabled"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">disabled</td>
+            <td>If this attribute is set the popover is disabled.</td>
+          </tr> 
+          <span class="anchor" id="ons-popover-animation"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">animation</td>
+            <td>The animation used when showing an hiding the popover. Can be either &quot;none&quot; or &quot;fade&quot;.</td>
+          </tr> 
+          <span class="anchor" id="ons-popover-mask-color"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">mask-color</td>
+            <td>Color of the background mask. Default is &quot;rgba(0, 0, 0, 0.2)&quot;.</td>
+          </tr> 
         </tbody>
       </table>
     </section>
-    
+  
 
-    
+  <span class="anchor" id="ons-popover-methods"></span>
+  
+  <section>
+    <h4>Methods</h4>
+    <table>
+      <tbody>
+        
+        <span class="anchor" id="show(target,options)-show(target,options)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>show(target,options)</code></td>
+          <td>Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..</td>
+        </tr>
+        
+        <span class="anchor" id="hide()-hide()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>hide()</code></td>
+          <td>Close the popover.</td>
+        </tr>
+        
+        <span class="anchor" id="isShown()-isShown()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>isShown()</code></td>
+          <td>Returns whether the popover is visible or not.</td>
+        </tr>
+        
+        <span class="anchor" id="destroy()-destroy()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>destroy()</code></td>
+          <td>Destroy the popover and remove it from the DOM tree.</td>
+        </tr>
+        
+        <span class="anchor" id="setCancelable(cancelable)-setCancelable(cancelable)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>setCancelable(cancelable)</code></td>
+          <td>Set whether the popover can be canceled by the user when it is shown.</td>
+        </tr>
+        
+        <span class="anchor" id="isCancelable()-isCancelable()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>isCancelable()</code></td>
+          <td>Returns whether the popover is cancelable or not.</td>
+        </tr>
+        
+        <span class="anchor" id="setDisabled(disabled)-setDisabled(disabled)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>setDisabled(disabled)</code></td>
+          <td>Disable or enable the popover.</td>
+        </tr>
+        
+        <span class="anchor" id="isDisabled()-isDisabled()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>isDisabled()</code></td>
+          <td>Returns whether the popover is disabled or enabled.</td>
+        </tr>
+        
+        <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>on(eventName,listener)</code></td>
+          <td>Add an event listener. Preset events are &quot;preshow&quot;, &quot;postshow&quot;, &quot;prehide&quot; and &quot;posthide&quot;.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
 
-    
-    <h4>Sample</h4>
+  
 
-    
-    <div style="height: 480px; width: 320px;" class="codepen-wrapper">
-    
-      <p data-height="480" data-theme-id="7186" data-slug-hash="ZYYRKo" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/ZYYRKo/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
-    </div>
+  
+  <h4>Sample</h4>
 
-    <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/ZYYRKo" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
-    
-
-    
-
+  
+  <div style="height: 480px; width: 320px;" class="codepen-wrapper">
+  
+    <p data-height="480" data-theme-id="7186" data-slug-hash="ZYYRKo" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/ZYYRKo/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
   </div>
 
+  <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/ZYYRKo" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
+  
+
+  
+
 </div>
+
+<script src="/vendor/highlight.min.js"></script>
+<script src="/scripts/codepen.js"></script>
+
