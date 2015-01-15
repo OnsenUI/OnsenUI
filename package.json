@@ -23,8 +23,6 @@
     "connect-livereload": "~0.3.2",
     "csv": "*",
     "dateformat": "~1.0.7-1.2.3",
-    "dgeni": "^0.3.0",
-    "dgeni-packages": "^0.9.3",
     "event-stream": "~3.1.0",
     "gulp-autoprefixer": "0.0.6",
     "gulp-clean": "~0.2.4",
@@ -52,6 +50,8 @@
     "gulp-shell": "^0.2.4",
     "topdoc": "~0.4.0",
     "gulp-load-plugins": "^0.6.0",
-    "gulp": "^3.8.7"
+    "gulp": "^3.8.7",
+    "dgeni": "^0.4.1",
+    "dgeni-packages": "^0.10.8"
   }
 }

@@ -338,7 +338,10 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
 gulp.task('build-doc-ja', function(done) {
   njglobals.rootUrl = '/';
   njglobals.lang = 'ja';
-  dgeni.generator('docs/dgeni.conf.js')().then(done);
+
+  new dgeni([require('./docs/package.js')]).generate().then(function() {
+    done();
+  });
 });
 
 ////////////////////////////////////////
@@ -347,7 +350,10 @@ gulp.task('build-doc-ja', function(done) {
 gulp.task('build-doc-en', function(done) {
   njglobals.rootUrl = '/';
   njglobals.lang = 'en';
-  dgeni.generator('docs/dgeni.conf.js')().then(done);
+
+  new dgeni([require('./docs/package.js')]).generate().then(function() {
+    done();
+  });
 })
 
 ////////////////////////////////////////

@@ -11,8 +11,8 @@ module.exports = [
     docProperty: 'seealsos',
     transforms: function(doc, tag, value) {
       return {
-        name: value.split(" ")[0],
-        description: value.split(" ").slice(1).join(" ")
+        name: value.split(' ')[0],
+        description: value.split(' ').slice(1).join(' ')
       };
     }
   },
@@ -22,8 +22,8 @@ module.exports = [
     docProperty: 'guides',
     transforms: function(doc, tag, value) {
       return {
-        name: value.split(" ", 2)[0],
-        description: value.split(" ").slice(1).join(" ")
+        name: value.split(' ', 2)[0],
+        description: value.split(' ').slice(1).join(' ')
       };
     }
   },
@@ -31,7 +31,7 @@ module.exports = [
     name: 'codepen',
     transforms: function(doc, tag, value) {
       return {
-        id: value.split(" ", 2)[0],
+        id: value.split(' ', 2)[0],
         isWide: !!value.match(/\{wide}/)
       };
     }
