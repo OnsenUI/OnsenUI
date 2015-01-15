@@ -1,0 +1,169 @@
+---
+page: 'component-detail'
+title: 'ons-alert-dialog'
+name: 'ons-alert-dialog'
+collection: 'components'
+reference: true
+---
+<div class="directive-container" id="alert-dialog">
+  <h2>ons-alert-dialog</h2>
+
+  <section class="description">
+    <p>現在のスクリーンにアラートダイアログを表示します。</p>
+  </section>
+
+  <span class="anchor" id="ons-alert-dialog-attributes"></span>
+
+  
+    <section>
+      <h4>例</h4>
+      <pre><code class="xml">&lt;script&gt;
+  ons.ready(function() {
+    ons.createAlertDialog(&#39;alert.html&#39;).then(function(alertDialog) {
+      alertDialog.show();   
+    });
+  });
+&lt;/script&gt;
+
+&lt;script type=&quot;text/ons-template&quot; id=&quot;alert.html&quot;&gt;
+  &lt;ons-alert-dialog animation=&quot;default&quot; cancelable&gt;
+    &lt;div class=&quot;alert-dialog-title&quot;&gt;Warning!&lt;/div&gt;
+    &lt;div class=&quot;alert-dialog-content&quot;&gt;
+     An error has occurred!
+    &lt;/div&gt;
+    &lt;div class=&quot;alert-dialog-footer&quot;&gt;
+      &lt;button class=&quot;alert-dialog-button&quot;&gt;OK&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/ons-alert-dialog&gt;  
+&lt;/script&gt;</code></pre>
+    </section>
+  
+
+  
+    <section>
+      <h4>属性</h4>
+      <table>
+        <tbody>
+          
+          <span class="anchor" id="ons-alert-dialog-var"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">var</td>
+            <td>このアラートダイアログを参照するための名前を指定します。</td>
+          </tr> 
+          <span class="anchor" id="ons-alert-dialog-modifier"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">modifier</td>
+            <td>ダイアログの表現を指定します。</td>
+          </tr> 
+          <span class="anchor" id="ons-alert-dialog-cancelable"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">cancelable</td>
+            <td>この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。</td>
+          </tr> 
+          <span class="anchor" id="ons-alert-dialog-disabled"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">disabled</td>
+            <td>この属性がある時、アラートダイアログはdisabled状態になります。</td>
+          </tr> 
+          <span class="anchor" id="ons-alert-dialog-animation"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">animation</td>
+            <td>ダイアログを表示する際のアニメーション名を指定します。</td>
+          </tr> 
+          <span class="anchor" id="ons-alert-dialog-mask-color"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">mask-color</td>
+            <td>背景のマスクの色を指定します。デフォルトは&quot;rgba(0, 0, 0, 0.2)&quot;です。</td>
+          </tr> 
+        </tbody>
+      </table>
+    </section>
+  
+
+  <span class="anchor" id="ons-alert-dialog-methods"></span>
+  
+  <section>
+    <h4>メソッド</h4>
+    <table>
+      <tbody>
+        
+        <span class="anchor" id="show(options)-show(options)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>show(options)</code></td>
+          <td>ダイアログを開きます。</td>
+        </tr>
+        
+        <span class="anchor" id="hide(options)-hide(options)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>hide(options)</code></td>
+          <td>ダイアログを閉じます。</td>
+        </tr>
+        
+        <span class="anchor" id="isShown()-isShown()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>isShown()</code></td>
+          <td>ダイアログが表示されているかどうかを返します。</td>
+        </tr>
+        
+        <span class="anchor" id="destroy()-destroy()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>destroy()</code></td>
+          <td>ダイアログを破棄して、DOMツリーから取り除きます。</td>
+        </tr>
+        
+        <span class="anchor" id="setCancelable(cancelable)-setCancelable(cancelable)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>setCancelable(cancelable)</code></td>
+          <td>アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。</td>
+        </tr>
+        
+        <span class="anchor" id="isCancelable()-isCancelable()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>isCancelable()</code></td>
+          <td>このアラートダイアログがキャンセル可能かどうかを返します。</td>
+        </tr>
+        
+        <span class="anchor" id="setDisabled(disabled)-setDisabled(disabled)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>setDisabled(disabled)</code></td>
+          <td>このアラートダイアログをdisabled状態にするかどうかを設定します。</td>
+        </tr>
+        
+        <span class="anchor" id="isDisabled()-isDisabled()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>isDisabled()</code></td>
+          <td>このアラートダイアログがdisabled状態かどうかを返します。</td>
+        </tr>
+        
+        <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>on(eventName,listener)</code></td>
+          <td>イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+
+  
+
+  
+  <h4>サンプル</h4>
+
+  
+  <div style="height: 480px; width: 320px;" class="codepen-wrapper">
+  
+    <p data-height="480" data-theme-id="7186" data-slug-hash="Qwwxyp" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/Qwwxyp/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+  </div>
+
+  <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/Qwwxyp" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
+  
+
+  
+
+</div>
+
+<script src="/vendor/highlight.min.js"></script>
+<script src="/scripts/codepen.js"></script>
+

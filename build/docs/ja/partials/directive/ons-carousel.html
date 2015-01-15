@@ -1,0 +1,225 @@
+---
+page: 'component-detail'
+title: 'ons-carousel'
+name: 'ons-carousel'
+collection: 'components'
+reference: true
+---
+<div class="directive-container" id="carousel">
+  <h2>ons-carousel</h2>
+
+  <section class="description">
+    <p>カルーセルを表示できるコンポーネント。</p>
+  </section>
+
+  <span class="anchor" id="ons-carousel-attributes"></span>
+
+  
+    <section>
+      <h4>例</h4>
+      <pre><code class="xml">&lt;ons-carousel style=&quot;width: 100%; height: 200px&quot;&gt;
+    &lt;ons-carousel-item&gt;
+     ...
+    &lt;/ons-carousel-item&gt;
+    &lt;ons-carousel-item&gt;
+     ...
+    &lt;/ons-carousel-item&gt;
+  &lt;/ons-carousel&gt;</code></pre>
+    </section>
+  
+
+  
+    <section>
+      <h4>属性</h4>
+      <table>
+        <tbody>
+          
+          <span class="anchor" id="ons-carousel-direction"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">direction</td>
+            <td>カルーセルの方向を指定します。horizontalかverticalを指定できます。デフォルトはhorizontalです。</td>
+          </tr> 
+          <span class="anchor" id="ons-carousel-fullscreen"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">fullscreen</td>
+            <td>この属性があると、absoluteポジションを使ってカルーセルが自動的に画面いっぱいに広がります。</td>
+          </tr> 
+          <span class="anchor" id="ons-carousel-var"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">var</td>
+            <td>このカルーセルを参照するための変数名を指定します。</td>
+          </tr> 
+          <span class="anchor" id="ons-carousel-overscrollable"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">overscrollable</td>
+            <td>この属性がある時、タッチやドラッグで端までスクロールした時に、バウンドするような効果が当たります。</td>
+          </tr> 
+          <span class="anchor" id="ons-carousel-item-width"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">item-width</td>
+            <td>ons-carousel-itemの幅を指定します。direction属性にhorizontalを指定した時のみ有効です。</td>
+          </tr> 
+          <span class="anchor" id="ons-carousel-item-height"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">item-height</td>
+            <td>ons-carousel-itemの高さを指定します。direction属性にverticalを指定した時のみ有効です。</td>
+          </tr> 
+          <span class="anchor" id="ons-carousel-auto-scroll"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">auto-scroll</td>
+            <td>この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。</td>
+          </tr> 
+          <span class="anchor" id="ons-carousel-swipeable"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">swipeable</td>
+            <td>この属性がある時、カルーセルをスワイプやドラッグで移動できるようになります。</td>
+          </tr> 
+          <span class="anchor" id="ons-carousel-disabled"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">disabled</td>
+            <td>この属性がある時、dargやtouchやswipeで受け付けなくなります。</td>
+          </tr> 
+          <span class="anchor" id="ons-carousel-initial-index"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">initial-index</td>
+            <td>最初に表示するons-carousel-itemを0始まりのインデックスで指定します。デフォルトは0です。</td>
+          </tr> 
+          <span class="anchor" id="ons-carousel-auto-refresh"></span>
+          <tr ng-repeat="attribute in directive.attributes">
+            <td class="attribute-name">auto-refresh</td>
+            <td>この属性がある時、子要素の数が変わるとカルーセルは自動的に更新されます。</td>
+          </tr> 
+        </tbody>
+      </table>
+    </section>
+  
+
+  <span class="anchor" id="ons-carousel-methods"></span>
+  
+  <section>
+    <h4>メソッド</h4>
+    <table>
+      <tbody>
+        
+        <span class="anchor" id="next()-next()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>next()</code></td>
+          <td>次のons-carousel-itemを表示する。</td>
+        </tr>
+        
+        <span class="anchor" id="prev()-prev()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>prev()</code></td>
+          <td>前のons-carousel-itemを表示する。</td>
+        </tr>
+        
+        <span class="anchor" id="first()-first()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>first()</code></td>
+          <td>最初のons-carousel-itemを表示する。</td>
+        </tr>
+        
+        <span class="anchor" id="last()-last()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>last()</code></td>
+          <td>最後のons-carousel-itemを表示する。</td>
+        </tr>
+        
+        <span class="anchor" id="setSwipeable(swipeable)-setSwipeable(swipeable)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>setSwipeable(swipeable)</code></td>
+          <td>swipeable属性があるかどうかを設定する。</td>
+        </tr>
+        
+        <span class="anchor" id="isSwipeable()-isSwipeable()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>isSwipeable()</code></td>
+          <td>swiapble属性があるかどうかを返す。</td>
+        </tr>
+        
+        <span class="anchor" id="setActiveCarouselItemIndex(index)-setActiveCarouselItemIndex(index)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>setActiveCarouselItemIndex(index)</code></td>
+          <td>表示するons-carousel-itemをindexで指定する。</td>
+        </tr>
+        
+        <span class="anchor" id="getActiveCarouselItemIndex()-getActiveCarouselItemIndex()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>getActiveCarouselItemIndex()</code></td>
+          <td>現在表示されているons-carousel-itemのindexを返す。</td>
+        </tr>
+        
+        <span class="anchor" id="setAutoScrollEnabled(enabled)-setAutoScrollEnabled(enabled)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>setAutoScrollEnabled(enabled)</code></td>
+          <td>auto-scroll属性があるかどうかを設定する。</td>
+        </tr>
+        
+        <span class="anchor" id="isAutoScrollEnabled()-isAutoScrollEnabled()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>isAutoScrollEnabled()</code></td>
+          <td>auto-scroll属性があるかどうかを返す。</td>
+        </tr>
+        
+        <span class="anchor" id="setOverscrollable(overscrollable)-setOverscrollable(overscrollable)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>setOverscrollable(overscrollable)</code></td>
+          <td>overscroll属性があるかどうかを設定する。</td>
+        </tr>
+        
+        <span class="anchor" id="isOverscrollable()-isOverscrollable()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>isOverscrollable()</code></td>
+          <td>overscroll属性があるかどうかを返す。</td>
+        </tr>
+        
+        <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>on(eventName,listener)</code></td>
+          <td>イベントリスナーを追加します。&quot;postchange&quot;か&quot;refresh&quot;を指定できます。</td>
+        </tr>
+        
+        <span class="anchor" id="refresh()-refresh()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>refresh()</code></td>
+          <td>レイアウトや内部の状態を最新のものに更新する。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用する。</td>
+        </tr>
+        
+        <span class="anchor" id="isDisabled()-isDisabled()"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>isDisabled()</code></td>
+          <td>disabled属性があるかどうかを返す。</td>
+        </tr>
+        
+        <span class="anchor" id="setDisabled(disabled)-setDisabled(disabled)"></span>
+        <tr ng-repeat="method in directive.methods">
+          <td><code>setDisabled(disabled)</code></td>
+          <td>disabled属性があるかどうかを設定する。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+
+  
+
+  
+  <h4>サンプル</h4>
+
+  
+  <div style="height: 480px; width: 320px;" class="codepen-wrapper">
+  
+    <p data-height="480" data-theme-id="7186" data-slug-hash="xbbzOQ" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/xbbzOQ/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+  </div>
+
+  <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/xbbzOQ" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
+  
+
+  
+
+</div>
+
+<script src="/vendor/highlight.min.js"></script>
+<script src="/scripts/codepen.js"></script>
+
