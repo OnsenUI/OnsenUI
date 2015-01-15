@@ -85,7 +85,7 @@ reference: true
       {% endif %}
       {% if doc.seealsos %}
         {% for seealso in doc.seealsos %}
-          <li class="seealso"><a href="#{$ seealso.name $}">{$ seealso.description | lang $}</a></li>
+          <li class="seealso"><a href="{$ seealso.name $}.html">{$ seealso.description | lang $}</a></li>
         {% endfor %}
       {% endif %}
     </ul>
