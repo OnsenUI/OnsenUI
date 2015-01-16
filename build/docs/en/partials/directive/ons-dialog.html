@@ -6,17 +6,31 @@ collection: 'components'
 reference: true
 ---
 <div class="directive-container" id="dialog">
+
   <h2>ons-dialog</h2>
+
+  <a class="directive-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/dialog.js">View This Code</a>
 
   <section class="description">
     <p>Dialog that is displayed on top of current screen.</p>
   </section>
 
-  <span class="anchor" id="ons-dialog-attributes"></span>
+  <ul class="directive-quick-navi">
+    
+    <li><a href="#usage">Usage</a></li>
+    
+    
+    <li><a href="#example">Live Example</a></li>
+    
+    
+    
+    
+    
+  </ul>
 
   
     <section>
-      <h4>Example</h4>
+      <h3 id="usage">Usage</h3>
       <pre><code class="xml">&lt;script&gt;
   ons.ready(function() {
     ons.createDialog(&#39;dialog.html&#39;).then(function(dialog) {
@@ -34,128 +48,10 @@ reference: true
   
 
   
-    <section>
-      <h4>Attributes</h4>
-      <table>
-        <tbody>
-          
-          <span class="anchor" id="ons-dialog-var"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">var</td>
-            <td>Variable name to refer this dialog.</td>
-          </tr> 
-          <span class="anchor" id="ons-dialog-modifier"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">modifier</td>
-            <td>The appearance of the dialog.</td>
-          </tr> 
-          <span class="anchor" id="ons-dialog-cancelable"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">cancelable</td>
-            <td>If this attribute is set the dialog can be closed by tapping the background or pressing the back button.</td>
-          </tr> 
-          <span class="anchor" id="ons-dialog-disabled"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">disabled</td>
-            <td>If this attribute is set the dialog is disabled.</td>
-          </tr> 
-          <span class="anchor" id="ons-dialog-animation"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">animation</td>
-            <td>The animation used when showing and hiding the dialog. Can be either &quot;none&quot; or &quot;default&quot;.</td>
-          </tr> 
-          <span class="anchor" id="ons-dialog-mask-color"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">mask-color</td>
-            <td>Color of the background mask. Default is &quot;rgba(0, 0, 0, 0.2)&quot;.</td>
-          </tr> 
-        </tbody>
-      </table>
-    </section>
-  
 
-  <span class="anchor" id="ons-dialog-methods"></span>
+  <!-- codepen -->
   
-  <section>
-    <h4>Methods</h4>
-    <table>
-      <tbody>
-        
-        <span class="anchor" id="show(options)-show(options)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>show(options)</code></td>
-          <td>Show the dialog.</td>
-        </tr>
-        
-        <span class="anchor" id="hide(options)-hide(options)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>hide(options)</code></td>
-          <td>Hide the dialog.</td>
-        </tr>
-        
-        <span class="anchor" id="isShown()-isShown()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>isShown()</code></td>
-          <td>Returns whether the dialog is visible or not.</td>
-        </tr>
-        
-        <span class="anchor" id="destroy()-destroy()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>destroy()</code></td>
-          <td>Destroy the dialog and remove it from the DOM tree.</td>
-        </tr>
-        
-        <span class="anchor" id="getDeviceBackButtonHandler()-getDeviceBackButtonHandler()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>getDeviceBackButtonHandler()</code></td>
-          <td>Retrieve the back button handler for overriding the default behavior.</td>
-        </tr>
-        
-        <span class="anchor" id="setCancelable(cancelable)-setCancelable(cancelable)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>setCancelable(cancelable)</code></td>
-          <td>Set whether the dialog can be canceled by the user or not.</td>
-        </tr>
-        
-        <span class="anchor" id="isCancelable()-isCancelable()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>isCancelable()</code></td>
-          <td>Returns whether the dialog is cancelable or not.</td>
-        </tr>
-        
-        <span class="anchor" id="setDisabled(disabled)-setDisabled(disabled)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>setDisabled(disabled)</code></td>
-          <td>Disable or enable the dialog.</td>
-        </tr>
-        
-        <span class="anchor" id="isDisabled()-isDisabled()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>isDisabled()</code></td>
-          <td>Returns whether the dialog is disabled or enabled.</td>
-        </tr>
-        
-        <span class="anchor" id="getDeviceBackButtonHandler()-getDeviceBackButtonHandler()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>getDeviceBackButtonHandler()</code></td>
-          <td>Retrieve the back button handler for overriding the default behavior.</td>
-        </tr>
-        
-        <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>on(eventName,listener)</code></td>
-          <td>Add an event listener. Preset events are preshow, postshow, prehide and posthide.</td>
-        </tr>
-        
-      </tbody>
-    </table>
-  </section>
-  
-
-  
-
-  
-  <h4>Sample</h4>
+  <h3 id="example">Live Example</h3>
 
   
   <div style="height: 480px; width: 320px;" class="codepen-wrapper">
@@ -167,6 +63,25 @@ reference: true
   
 
   
+
+  <!-- attributes -->
+  
+
+  <!-- methods summary -->
+  
+  <!-- end methods summary -->
+
+  <!-- events summary -->
+  
+  <!-- end events summary -->
+
+  <!-- methods details -->
+  
+  <!-- end methods -->
+
+  <!-- events -->
+  
+  <!-- end events -->
 
 </div>
 

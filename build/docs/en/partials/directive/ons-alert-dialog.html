@@ -6,17 +6,37 @@ collection: 'components'
 reference: true
 ---
 <div class="directive-container" id="alert-dialog">
+
   <h2>ons-alert-dialog</h2>
+
+  <a class="directive-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/alertDialog.js">View This Code</a>
 
   <section class="description">
     <p>Alert dialog that is displayed on top of the current screen.</p>
   </section>
 
-  <span class="anchor" id="ons-alert-dialog-attributes"></span>
+  <ul class="directive-quick-navi">
+    
+    <li><a href="#usage">Usage</a></li>
+    
+    
+    <li><a href="#example">Live Example</a></li>
+    
+    
+    <li><a href="#attributes">Attributes</a></li>
+    
+    
+    <li><a href="#methods-summary">Methods</a></li>
+    
+    
+    <li><a href="#events-summary">Events</a></li>
+    
+    
+  </ul>
 
   
     <section>
-      <h4>Example</h4>
+      <h3 id="usage">Usage</h3>
       <pre><code class="xml">&lt;script&gt;
   ons.ready(function() {
     ons.createAlertDialog(&#39;alert.html&#39;).then(function(alertDialog) {
@@ -40,116 +60,10 @@ reference: true
   
 
   
-    <section>
-      <h4>Attributes</h4>
-      <table>
-        <tbody>
-          
-          <span class="anchor" id="ons-alert-dialog-var"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">var</td>
-            <td>Variable name to refer this alert dialog.</td>
-          </tr> 
-          <span class="anchor" id="ons-alert-dialog-modifier"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">modifier</td>
-            <td>The appearance of the dialog.</td>
-          </tr> 
-          <span class="anchor" id="ons-alert-dialog-cancelable"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">cancelable</td>
-            <td>If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.</td>
-          </tr> 
-          <span class="anchor" id="ons-alert-dialog-disabled"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">disabled</td>
-            <td>If this attribute is set the dialog is disabled.</td>
-          </tr> 
-          <span class="anchor" id="ons-alert-dialog-animation"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">animation</td>
-            <td>The animation used when showing and hiding the dialog. Can be either &quot;none&quot; or &quot;default&quot;.</td>
-          </tr> 
-          <span class="anchor" id="ons-alert-dialog-mask-color"></span>
-          <tr ng-repeat="attribute in directive.attributes">
-            <td class="attribute-name">mask-color</td>
-            <td>Color of the background mask. Default is &quot;rgba(0, 0, 0, 0.2)&quot;.</td>
-          </tr> 
-        </tbody>
-      </table>
-    </section>
-  
 
-  <span class="anchor" id="ons-alert-dialog-methods"></span>
+  <!-- codepen -->
   
-  <section>
-    <h4>Methods</h4>
-    <table>
-      <tbody>
-        
-        <span class="anchor" id="show(options)-show(options)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>show(options)</code></td>
-          <td>Show the alert dialog.</td>
-        </tr>
-        
-        <span class="anchor" id="hide(options)-hide(options)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>hide(options)</code></td>
-          <td>Hide the alert dialog.</td>
-        </tr>
-        
-        <span class="anchor" id="isShown()-isShown()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>isShown()</code></td>
-          <td>Returns whether the dialog is visible or not.</td>
-        </tr>
-        
-        <span class="anchor" id="destroy()-destroy()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>destroy()</code></td>
-          <td>Destroy the alert dialog and remove it from the DOM tree.</td>
-        </tr>
-        
-        <span class="anchor" id="setCancelable(cancelable)-setCancelable(cancelable)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>setCancelable(cancelable)</code></td>
-          <td>Define whether the dialog can be canceled by the user or not.</td>
-        </tr>
-        
-        <span class="anchor" id="isCancelable()-isCancelable()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>isCancelable()</code></td>
-          <td>Returns whether the dialog is cancelable or not.</td>
-        </tr>
-        
-        <span class="anchor" id="setDisabled(disabled)-setDisabled(disabled)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>setDisabled(disabled)</code></td>
-          <td>Disable or enable the alert dialog.</td>
-        </tr>
-        
-        <span class="anchor" id="isDisabled()-isDisabled()"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>isDisabled()</code></td>
-          <td>Returns whether the dialog is disabled or enabled.</td>
-        </tr>
-        
-        <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
-        <tr ng-repeat="method in directive.methods">
-          <td><code>on(eventName,listener)</code></td>
-          <td>Add an event listener. Preset events are preshow, postshow, prehide and posthide.</td>
-        </tr>
-        
-      </tbody>
-    </table>
-  </section>
-  
-
-  
-
-  
-  <h4>Sample</h4>
+  <h3 id="example">Live Example</h3>
 
   
   <div style="height: 480px; width: 320px;" class="codepen-wrapper">
@@ -161,6 +75,673 @@ reference: true
   
 
   
+
+  <!-- attributes -->
+  
+  <section>
+    <h3 id="attributes">Attributes</h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default Value</th>
+          <th></th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td class="attribute-name" id="ons-alert-dialog-var">var</td>
+          <td class="attribute-type">
+            <code>{String}</code>
+          </td>
+          <td class="attribute-default">
+            
+          </td>
+          <td class="attribute-required">
+            
+            Optional
+            
+          </td>
+          <td>Variable name to refer this alert dialog.</td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-alert-dialog-modifier">modifier</td>
+          <td class="attribute-type">
+            <code>{String}</code>
+          </td>
+          <td class="attribute-default">
+            
+          </td>
+          <td class="attribute-required">
+            
+            Optional
+            
+          </td>
+          <td>The appearance of the dialog.</td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-alert-dialog-cancelable">cancelable</td>
+          <td class="attribute-type">
+            
+          </td>
+          <td class="attribute-default">
+            
+          </td>
+          <td class="attribute-required">
+            
+            Optional
+            
+          </td>
+          <td>If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.</td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-alert-dialog-disabled">disabled</td>
+          <td class="attribute-type">
+            
+          </td>
+          <td class="attribute-default">
+            
+          </td>
+          <td class="attribute-required">
+            
+            Optional
+            
+          </td>
+          <td>If this attribute is set the dialog is disabled.</td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-alert-dialog-animation">animation</td>
+          <td class="attribute-type">
+            <code>{String}</code>
+          </td>
+          <td class="attribute-default">
+            <code>default</code>
+          </td>
+          <td class="attribute-required">
+            
+            Optional
+            
+          </td>
+          <td>The animation used when showing and hiding the dialog. Can be either &quot;none&quot; or &quot;default&quot;.</td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-alert-dialog-mask-color">mask-color</td>
+          <td class="attribute-type">
+            <code>{String}</code>
+          </td>
+          <td class="attribute-default">
+            <code>rgba(0, 0, 0, 0.2)</code>
+          </td>
+          <td class="attribute-required">
+            
+            Optional
+            
+          </td>
+          <td>Color of the background mask. Default is &quot;rgba(0, 0, 0, 0.2)&quot;.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+
+  <!-- methods summary -->
+  
+  <section>
+    <h3 id="methods-summary">Methods Summary</h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Signature</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#method-show">show([options])</a></td>
+          <td>Show the alert dialog.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-hide">hide([options])</a></td>
+          <td>Hide the alert dialog.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-isShown">isShown()</a></td>
+          <td>Returns whether the dialog is visible or not.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-destroy">destroy()</a></td>
+          <td>Destroy the alert dialog and remove it from the DOM tree.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-setCancelable">setCancelable(cancelable)</a></td>
+          <td>Define whether the dialog can be canceled by the user or not.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-isCancelable">isCancelable()</a></td>
+          <td>Returns whether the dialog is cancelable or not.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-setDisabled">setDisabled(disabled)</a></td>
+          <td>Disable or enable the alert dialog.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-isDisabled">isDisabled()</a></td>
+          <td>Returns whether the dialog is disabled or enabled.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-on">on(eventName, listener)</a></td>
+          <td>Add an event listener. Preset events are preshow, postshow, prehide and posthide.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+  <!-- end methods summary -->
+
+  <!-- events summary -->
+  
+  <section>
+    <h3 id="events-summary">Events Summary</h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#event-preshow">preshow</a></td>
+          <td>[en][/en]
+[ja]アラートダイアログが表示される直前に発火します。[/ja]</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#event-postshow">postshow</a></td>
+          <td>[en][/en]
+[ja]アラートダイアログが表示された直後に発火します。[/ja]</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#event-prehide">prehide</a></td>
+          <td>[en][/en]
+[ja]アラートダイアログが隠れる直前に発火します。[/ja]</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#event-posthide">posthide</a></td>
+          <td>[en][/en]
+[ja]アラートダイアログが隠れた後に発火します。[/ja]</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+  <!-- end events summary -->
+
+  <!-- methods details -->
+  
+  <h3>Methods</h3>
+  
+  <h4 id="method-show">show([options])</h4>
+
+  <p>Show the alert dialog.</p>
+
+  
+
+  
+  <!-- method parameter -->
+  <h5>Parameters</h5>
+
+  <table>
+    <thead>
+      <tr>
+        
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><code>options</code></td>
+        <td>{Object}</td>
+        <td></td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <!-- end method parameter -->
+  
+
+  
+  <h4 id="method-hide">hide([options])</h4>
+
+  <p>Hide the alert dialog.</p>
+
+  
+
+  
+  <!-- method parameter -->
+  <h5>Parameters</h5>
+
+  <table>
+    <thead>
+      <tr>
+        
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><code>options</code></td>
+        <td>{Object}</td>
+        <td></td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <!-- end method parameter -->
+  
+
+  
+  <h4 id="method-isShown">isShown()</h4>
+
+  <p>Returns whether the dialog is visible or not.</p>
+
+  
+  <!-- method parameter -->
+  <h5>Returns</h5>
+  <table>
+    <thead>
+      <tr>
+        
+        <th>Type</th>
+        <th>Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{Boolean}</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+  
+
+  
+  <h4 id="method-destroy">destroy()</h4>
+
+  <p>Destroy the alert dialog and remove it from the DOM tree.</p>
+
+  
+
+  
+
+  
+  <h4 id="method-setCancelable">setCancelable(cancelable)</h4>
+
+  <p>Define whether the dialog can be canceled by the user or not.</p>
+
+  
+
+  
+  <!-- method parameter -->
+  <h5>Parameters</h5>
+
+  <table>
+    <thead>
+      <tr>
+        
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><code>cancelable</code></td>
+        <td>{Boolean}</td>
+        <td></td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <!-- end method parameter -->
+  
+
+  
+  <h4 id="method-isCancelable">isCancelable()</h4>
+
+  <p>Returns whether the dialog is cancelable or not.</p>
+
+  
+  <!-- method parameter -->
+  <h5>Returns</h5>
+  <table>
+    <thead>
+      <tr>
+        
+        <th>Type</th>
+        <th>Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{Boolean}</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+  
+
+  
+  <h4 id="method-setDisabled">setDisabled(disabled)</h4>
+
+  <p>Disable or enable the alert dialog.</p>
+
+  
+
+  
+  <!-- method parameter -->
+  <h5>Parameters</h5>
+
+  <table>
+    <thead>
+      <tr>
+        
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><code>disabled</code></td>
+        <td>{Boolean}</td>
+        <td></td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <!-- end method parameter -->
+  
+
+  
+  <h4 id="method-isDisabled">isDisabled()</h4>
+
+  <p>Returns whether the dialog is disabled or enabled.</p>
+
+  
+  <!-- method parameter -->
+  <h5>Returns</h5>
+  <table>
+    <thead>
+      <tr>
+        
+        <th>Type</th>
+        <th>Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{Boolean}</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+  
+
+  
+  <h4 id="method-on">on(eventName, listener)</h4>
+
+  <p>Add an event listener. Preset events are preshow, postshow, prehide and posthide.</p>
+
+  
+
+  
+  <!-- method parameter -->
+  <h5>Parameters</h5>
+
+  <table>
+    <thead>
+      <tr>
+        
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><code>eventName</code></td>
+        <td>{String}</td>
+        <td></td>
+      </tr>
+      
+      <tr>
+        <td><code>listener</code></td>
+        <td>{Function}</td>
+        <td></td>
+      </tr>
+      
+    </tbody>
+  </table>
+  <!-- end method parameter -->
+  
+
+  
+
+  
+  <!-- end methods -->
+
+  <!-- events -->
+  
+  <h4>Events</h4>
+  
+  <h5 id="event-preshow">preshow</h5>
+
+  <p>[en][/en]
+[ja]アラートダイアログが表示される直前に発火します。[/ja]</p>
+
+  <h6>Parameters</h6>
+
+  <table>
+    <thead>
+      <tr>
+        
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><code>event</code></td>
+        <td>{Object}</td>
+        <td>Event object.</td>
+      </tr>
+      
+      <tr>
+        <td><code>event.alertDialog</code></td>
+        <td>{Object}</td>
+        <td></td>
+      </tr>
+      
+      <tr>
+        <td><code>event.cancel</code></td>
+        <td>{Function}</td>
+        <td></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+  
+  <h5 id="event-postshow">postshow</h5>
+
+  <p>[en][/en]
+[ja]アラートダイアログが表示された直後に発火します。[/ja]</p>
+
+  <h6>Parameters</h6>
+
+  <table>
+    <thead>
+      <tr>
+        
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><code>event</code></td>
+        <td>{Object}</td>
+        <td>Event object.</td>
+      </tr>
+      
+      <tr>
+        <td><code>event.alertDialog</code></td>
+        <td>{Object}</td>
+        <td></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+  
+  <h5 id="event-prehide">prehide</h5>
+
+  <p>[en][/en]
+[ja]アラートダイアログが隠れる直前に発火します。[/ja]</p>
+
+  <h6>Parameters</h6>
+
+  <table>
+    <thead>
+      <tr>
+        
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><code>event</code></td>
+        <td>{Object}</td>
+        <td>Event object.</td>
+      </tr>
+      
+      <tr>
+        <td><code>event.alertDialog</code></td>
+        <td>{Object}</td>
+        <td></td>
+      </tr>
+      
+      <tr>
+        <td><code>event.cancel</code></td>
+        <td>{Function}</td>
+        <td></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+  
+  <h5 id="event-posthide">posthide</h5>
+
+  <p>[en][/en]
+[ja]アラートダイアログが隠れた後に発火します。[/ja]</p>
+
+  <h6>Parameters</h6>
+
+  <table>
+    <thead>
+      <tr>
+        
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      
+      <tr>
+        <td><code>event</code></td>
+        <td>{Object}</td>
+        <td>Event object.</td>
+      </tr>
+      
+      <tr>
+        <td><code>event.alertDialog</code></td>
+        <td>{Object}</td>
+        <td></td>
+      </tr>
+      
+    </tbody>
+  </table>
+
+  
+
+  
+  <!-- end events -->
 
 </div>
 
