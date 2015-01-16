@@ -27,14 +27,14 @@
       compile: function(element, attrs) {
         var content = element.addClass('ons-scroller').children().remove();
         
-        var wrapper = angular.element('<div></div>');
-        wrapper.addClass('ons-scroller__content ons-scroller-inner');
-        element.append(wrapper);
-
         return function(scope, element, attrs, controller, transclude) {
           if (attrs.ngController) {
             throw new Error('"ons-scroller" can\'t accept "ng-controller" directive.');
           }
+
+          var wrapper = angular.element('<div></div>');
+          wrapper.addClass('ons-scroller__content ons-scroller-inner');
+          element.append(wrapper);
 
           transclude(scope.$parent, function(cloned) {
             wrapper.append(cloned);
