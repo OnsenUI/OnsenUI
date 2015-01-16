@@ -1,0 +1,300 @@
+---
+page: 'component-detail'
+title: '{$ doc.name $}'
+name: '{$ doc.name $}'
+collection: 'components'
+reference: true
+---
+<div class="directive-container" id="{$ doc.id $}">
+
+  <h2>{$ doc.name $}</h2>
+
+  <a class="directive-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/{$ doc.fileInfo.baseName | e $}.js">View This Code</a>
+
+  <section class="description">
+    <p>{$ doc.description | lang | e $}</p>
+  </section>
+
+  <ul class="directive-quick-navi">
+    {% if doc.examples[0] %}
+    <li><a href="#usage">Usage</a></li>
+    {% endif %}
+    {% if doc.codepen %}
+    <li><a href="#example">Live Example</a></li>
+    {% endif %}
+    {% if doc.attributes.length > 0 %}
+    <li><a href="#attributes">Attributes</a></li>
+    {% endif %}
+    {% if doc.methods.length > 0 %}
+    <li><a href="#methods-summary">Methods</a></li>
+    {% endif %}
+    {% if doc.events.length > 0 %}
+    <li><a href="#events-summary">Events</a></li>
+    {% endif %}
+    {% if doc.guides or doc.seealsos %}
+    <li><a href="#seealso">See Also</a></li>
+    {% endif %}
+  </ul>
+
+  {% if doc.examples[0] %}
+    <section>
+      <h3 id="usage">Usage</h3>
+      <pre><code class="xml">{$ doc.examples[0] | e $}</code></pre>
+    </section>
+  {% endif %}
+
+  {% if doc.note %}
+  <section class="note">
+    <p>{% if lang == "en" %}Note{% else %}注意{% endif %}: {$ doc.note | lang $}</p>
+  </section>
+  {% endif %}
+
+  <!-- codepen -->
+  {% if doc.codepen %}
+  <h3 id="example">{% if lang == "en" %}Live Example{% else %}実例{% endif %}</h3>
+
+  {% if doc.codepen.isWide %}
+  <div style="height: 480px; width: 100%;" class="codepen-wrapper">
+  {% else %}
+  <div style="height: 480px; width: 320px;" class="codepen-wrapper">
+  {% endif %}
+    <p data-height="480" data-theme-id="7186" data-slug-hash="{$ doc.codepen.id $}" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/{$ doc.codepen.id $}/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+  </div>
+
+  <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/{$ doc.codepen.id $}" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
+  {% endif %}
+
+  {% if doc.guides or doc.seealsos %}
+  <h3 id="seealso">{% if lang == "en" %}See also{% else %}関連情報{% endif %}</h3>
+  <ul class="seealso">
+    {% if doc.guides %}
+      {% for guide in doc.guides %}
+        <li class="guide"><a href="/guide/overview.html#{$ guide.name $}">{$ guide.description | lang $}</a></li>
+      {% endfor %}
+    {% endif %}
+    {% if doc.seealsos %}
+      {% for seealso in doc.seealsos %}
+        <li class="seealso"><a href="{$ seealso.name $}.html">{$ seealso.description | lang $}</a></li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+  {% endif %}
+
+  <!-- attributes -->
+  {% if doc.attributes.length > 0 %}
+  <section>
+    <h3 id="attributes">{% if lang == "en" %}Attributes{% else %}属性{% endif %}</h3>
+    <table>
+      <thead>
+        <tr>
+          {% if lang == "en" %}
+          <th>Name</th>
+          <th>Type</th>
+          <th>Default Value</th>
+          <th></th>
+          <th>Description</th>
+          {% else %}
+          <th>名前</th>
+          <th>型</th>
+          <th>デフォルト値</th>
+          <th></th>
+          <th>概要</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for attribute in doc.attributes %}
+        <tr>
+          <td class="attribute-name" id="{$ doc.name $}-{$ attribute.name $}">{$ attribute.name | e $}</td>
+          <td class="attribute-type">
+            {% if attribute.type %}<code>{{$ attribute.type.typeExpression | e $}}</code>{% endif %}
+          </td>
+          <td class="attribute-default">
+            {% if attribute.default %}<code>{$ attribute.default | e $}</code>{% endif %}
+          </td>
+          <td class="attribute-required">
+            {% if attribute.required %}
+            {% if lang == "en" %}Required{% else %}必須{% endif %}
+            {% else %}
+            {% if lang == "en" %}Optional{% else %}Optional{% endif %}
+            {% endif %}
+          </td>
+          <td>{$ attribute.description | lang | e $}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  {% endif %}
+
+  <!-- methods summary -->
+  {% if doc.methods.length > 0 %}
+  <section>
+    <h3 id="methods-summary">{% if lang == "en" %}Methods Summary{% else %}メソッド概要{% endif %}</h3>
+    <table>
+      <thead>
+        <tr>
+          {% if lang == "en" %}
+          <th>Signature</th>
+          <th>Description</th>
+          {% else %}
+          <th>シグネチャ</th>
+          <th>概要</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for method in doc.methods %}
+        <tr>
+          <td><a href="#method-{$ method.name $}">{$ method.signature | e $}</a></td>
+          <td>{$ method.description | lang | e $}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  {% endif %}
+  <!-- end methods summary -->
+
+  <!-- events summary -->
+  {% if doc.events.length > 0 %}
+  <section>
+    <h3 id="events-summary">{% if lang == "en" %}Events Summary{% else %}イベント概要{% endif %}</h3>
+    <table>
+      <thead>
+        <tr>
+          {% if lang == "en" %}
+          <th>Name</th>
+          <th>Description</th>
+          {% else %}
+          <th>名前</th>
+          <th>概要</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in doc.events %}
+        <tr>
+          <td><a href="#event-{$ event.name $}">{$ event.name | e $}</a></td>
+          <td>{$ event.description | lang | e $}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  {% endif %}
+  <!-- end events summary -->
+
+  <!-- methods details -->
+  {% if doc.methods.length > 0 %}
+  <h3>{% if lang == "en" %}Methods{% else %}メソッド{% endif %}</h3>
+  {% for method in doc.methods %}
+  <h4 id="method-{$ method.name $}">{$ method.signature $}</h4>
+
+  <p>{$ method.description | lang | e $}</p>
+
+  {% if method.returns %}
+  <!-- method parameter -->
+  <h5>{% if lang == "en" %}Returns{% else %}返り値{% endif %}</h5>
+  <table>
+    <thead>
+      <tr>
+        {% if lang == "en" %}
+        <th>Type</th>
+        <th>Description</th>
+        {% else %}
+        <th>型</th>
+        <th>概要</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{% if method.returns %}{{$ method.returns.typeExpression | e $}}{% endif %}</td>
+        <td>{$ method.returns.description | lang | e $}</td>
+      </tr>
+    </tbody>
+  </table>
+  {% endif %}
+
+  {% if method.params %}
+  <!-- method parameter -->
+  <h5>{% if lang == "en" %}Parameters{% else %}パラメーター{% endif %}</h5>
+
+  <table>
+    <thead>
+      <tr>
+        {% if lang == "en" %}
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        {% else %}
+        <th>名前</th>
+        <th>型</th>
+        <th>概要</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for param in method.params %}
+      <tr>
+        <td><code>{$ param.name | e $}</code></td>
+        <td>{{$ param.typeExpression | e $}}</td>
+        <td>{$ param.description | lang | e $}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <!-- end method parameter -->
+  {% endif %}
+
+  {% endfor %}
+
+  {% endif %}
+  <!-- end methods -->
+
+  <!-- events -->
+  {% if doc.events.length > 0 %}
+  <h4>{% if lang == "en" %}Events{% else %}イベント{% endif %}</h4>
+  {% for event in doc.events %}
+  <h5 id="event-{$ event.name $}">{$ event.name $}</h5>
+
+  <p>{$ event.description | lang | e $}</p>
+
+  <h6>{% if lang == "en" %}Parameters{% else %}パラメーター{% endif %}</h6>
+
+  <table>
+    <thead>
+      <tr>
+        {% if lang == "en" %}
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        {% else %}
+        <th>名前</th>
+        <th>型</th>
+        <th>概要</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for param in event.params %}
+      <tr>
+        <td><code>{$ param.name | e $}</code></td>
+        <td>{{$ param.typeExpression | e $}}</td>
+        <td>{$ param.description | lang | e $}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% endfor %}
+
+  {% endif %}
+  <!-- end events -->
+
+</div>
+
+<script src="/vendor/highlight.min.js"></script>
+<script src="/scripts/codepen.js"></script>
+

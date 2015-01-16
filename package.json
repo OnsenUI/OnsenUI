@@ -52,6 +52,7 @@
     "gulp-load-plugins": "^0.6.0",
     "gulp": "^3.8.7",
     "dgeni": "^0.4.1",
-    "dgeni-packages": "^0.10.8"
+    "dgeni-packages": "^0.10.8",
+    "extend": "^2.0.0"
   }
 }

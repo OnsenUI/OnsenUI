@@ -1,10 +1,42 @@
 var extractName = require('./extract-name');
+var extend = require('extend');
 
 module.exports = [
-  { name: 'demoURL' },
-  { name: 'example' },
-  { name: 'id' },
-  { name: 'note' },
+  {name: 'example'},
+  {name: 'id'},
+  {name: 'note'},
+  {name: 'default'},
+  {
+    name: 'type',
+    transforms: function(doc, tag, value) {
+      return tag.typeExpression;
+    }
+  },
+  {
+    name: 'signature',
+    transforms: function(doc, tag, value) {
+      doc.tags.tagsByName.obj.name = extend(
+        {},
+        doc.tags.tagsByName.obj.signature,
+        {tagName: 'name'}
+      );
+
+      return value;
+    },
+    priority: 100
+  },
+  {
+    name: 'optional',
+    transforms: function(doc, tag, value) {
+      return true;
+    }
+  },
+  {
+    name: 'required',
+    transforms: function(doc, tag, value) {
+      return true;
+    }
+  },
   {
     name: 'seealso',
     multi: true,
