@@ -46,6 +46,11 @@
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
+          var navigator = ons.findParentComponentUntil('ons-navigator', element);
+          scope.$watch(function() { return navigator.pages.length }, function(nbrOfPages) {
+            scope.showBackButton = nbrOfPages > 1;
+          });
+
           $onsen.addModifierMethods(backButton, 'toolbar-button--*', element.children());
 
           transclude(scope, function(clonedElement) {
