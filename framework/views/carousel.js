@@ -411,7 +411,6 @@ limitations under the License.
 
       _onDragEnd: function(event) {
         this._scroll = this._scroll - this._getScrollDelta(event);
-        this._tryFirePostChangeEvent();
 
         if (this._isOverScroll(this._scroll)) {
           this._scrollToKillOverScroll();
