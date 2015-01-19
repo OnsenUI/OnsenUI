@@ -11,6 +11,7 @@ v1.2.2-dev
  * ons-back-button: Automatically hide back button when there is only one page in the stack.
  * ons-scroller: Fixed [#389](https://github.com/OnsenUI/OnsenUI/issues/389).
  * ons-button: Fixed broken isDisabled() method.
+ * ons-icon: Updated Ionicons to version 2.0.1.
 
 v1.2.1
 ----
