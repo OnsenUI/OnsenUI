@@ -13,6 +13,7 @@ v1.2.2-dev
  * ons-button: Fixed broken isDisabled() method.
  * ons-icon: Updated Ionicons to version 2.0.1.
  * ons-carousel: Fixed [#369](https://github.com/OnsenUI/OnsenUI/issues/369).
+ * ons-popover: Fixed [#367](https://github.com/OnsenUI/OnsenUI/issues/367).
 
 v1.2.1
 ----
