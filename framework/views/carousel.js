@@ -599,7 +599,7 @@ limitations under the License.
         this._layoutCarouselItems();
 
         if (this._lastState && this._lastState.width > 0) {
-          this._scroll = this._scroll / this._lastState.width * this._getCarouselItemSize() * this._getCarouselItemCount();
+          this._scroll = Math.min(this._scroll, this._getCarouselItemSize() * (this._getCarouselItemCount() - 1));
           this._scrollTo(this._scroll);
         }
 
