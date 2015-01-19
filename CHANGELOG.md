@@ -10,6 +10,7 @@ v1.2.2-dev
  * ons-carousel: Added 'auto-refresh' attribute to automatically refresh carousel when items are added or removed in AngularJS.
  * ons-back-button: Automatically hide back button when there is only one page in the stack.
  * ons-scroller: Fixed [#389](https://github.com/OnsenUI/OnsenUI/issues/389).
+ * ons-button: Fixed broken isDisabled() method.
 
 v1.2.1
 ----
