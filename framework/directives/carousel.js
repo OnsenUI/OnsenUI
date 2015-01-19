@@ -121,35 +121,37 @@
         element.addClass(templater('carousel--*'));
 
         return function(scope, element, attrs) {
-          setImmediate(function() {
-            var carousel = new CarouselView(scope, element, attrs);
+          var carousel = new CarouselView(scope, element, attrs);
 
-            $onsen.aliasStack.register('ons.carousel', carousel);
-            element.data('ons-carousel', carousel);
+          $onsen.aliasStack.register('ons.carousel', carousel);
+          element.data('ons-carousel', carousel);
 
-            $onsen.declareVarAttribute(attrs, carousel);
+          $onsen.declareVarAttribute(attrs, carousel);
 
-            scope.$on('$destroy', function() {
-              carousel._events = undefined;
-              element.data('ons-carousel', undefined);
-              $onsen.aliasStack.unregister('ons.carousel', carousel);
-              element = null;
-            });
-
-            if (element[0].hasAttribute('auto-refresh')) {
-              // Refresh carousel when items are added or removed.
-              scope.$watch(
-                function () { 
-                  return element[0].childNodes.length; 
-                },
-                function () {
-                  carousel.refresh();
-                }
-              );
-            }
-
-            $onsen.fireComponentEvent(element[0], 'init');
+          scope.$on('$destroy', function() {
+            carousel._events = undefined;
+            element.data('ons-carousel', undefined);
+            $onsen.aliasStack.unregister('ons.carousel', carousel);
+            element = null;
           });
+
+          if (element[0].hasAttribute('auto-refresh')) {
+            // Refresh carousel when items are added or removed.
+            scope.$watch(
+              function () { 
+                return element[0].childNodes.length; 
+              },
+              function () {
+                carousel.refresh();
+              }
+            );
+          }
+
+          setImmediate(function() {
+            carousel.refresh();
+          });
+
+          $onsen.fireComponentEvent(element[0], 'init');
         };
       },
 

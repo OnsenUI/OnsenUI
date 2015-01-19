@@ -15,6 +15,7 @@ v1.2.2-dev
  * ons-carousel: Fixed [#369](https://github.com/OnsenUI/OnsenUI/issues/369).
  * ons-popover: Fixed [#367](https://github.com/OnsenUI/OnsenUI/issues/367).
  * ons-carousel: Fixed [#365](https://github.com/OnsenUI/OnsenUI/issues/365).
+ * ons-carousel: Fixed [#398](https://github.com/OnsenUI/OnsenUI/issues/398).
 
 v1.2.1
 ----
