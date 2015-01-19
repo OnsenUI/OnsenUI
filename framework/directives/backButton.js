@@ -47,7 +47,7 @@
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
           var navigator = ons.findParentComponentUntil('ons-navigator', element);
-          scope.$watch(function() { return navigator.pages.length }, function(nbrOfPages) {
+          scope.$watch(function() { return navigator.pages.length; }, function(nbrOfPages) {
             scope.showBackButton = nbrOfPages > 1;
           });
 
