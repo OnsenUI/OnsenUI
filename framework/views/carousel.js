@@ -260,12 +260,12 @@ limitations under the License.
           return 0.5;
         }
 
-        var ratio = parseFloat(attr);
-        if (ratio < 0.0 || ratio > 1.0) {
+        var scrollRatio = parseFloat(attr);
+        if (scrollRatio < 0.0 || scrollRatio > 1.0) {
           throw new Error('Invalid ratio.');
         }
 
-        return isNaN(ratio) ? 0.5 : ratio;
+        return isNaN(ratio) ? 0.5 : scrollRatio;
       },
 
       /**
@@ -481,7 +481,7 @@ limitations under the License.
           var duration = 0.3;
           var scrollDelta = duration * 100 * velocity;
           var scroll = this._scroll + (this._getScrollDelta(this._lastDragEvent) > 0 ? -scrollDelta : scrollDelta);
-          scroll = this._normalizeScrollPosition(scroll)
+          scroll = this._normalizeScrollPosition(scroll);
 
           this._scroll = scroll;
 
