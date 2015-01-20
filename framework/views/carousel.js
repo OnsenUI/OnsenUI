@@ -413,7 +413,25 @@ limitations under the License.
         this._scroll = this._scroll - this._getScrollDelta(event);
 
         if (this._isOverScroll(this._scroll)) {
-          this._scrollToKillOverScroll();
+          var waitForAction = false;
+
+          this.emit('overscroll', {
+            carousel: this,
+            activeIndex: this.getActiveCarouselItemIndex(),
+            direction: this._getOverScrollDirection(),
+            waitToReturn: function(promise) {
+              waitForAction = true;
+              promise.then(
+                function() {
+                  this._scrollToKillOverScroll();
+                }.bind(this)
+              );
+            }.bind(this)
+          });
+
+          if (!waitForAction) {
+            this._scrollToKillOverScroll();
+          }
         } else if (this._lastDragEvent !== null) {
           this._startMomemtumScroll(event);
         }
@@ -549,6 +567,25 @@ limitations under the License.
         return false;
       },
 
+      _getOverScrollDirection: function() {
+        if (this._isVertical()) {
+          if (this._scroll <= 0) {
+            return 'up';
+          }
+          else {
+            return 'down';
+          }
+        }
+        else {
+          if (this._scroll <= 0) {
+            return 'left';
+          }
+          else {
+            return 'right';
+          }
+        }
+      },
+
       _scrollToKillOverScroll: function() {
         var duration = 0.4;
         
@@ -598,8 +635,14 @@ limitations under the License.
         this._layoutCarouselItems();
 
         if (this._lastState && this._lastState.width > 0) {
-          this._scroll = Math.min(this._scroll, this._getCarouselItemSize() * (this._getCarouselItemCount() - 1));
-          this._scrollTo(this._scroll);
+          var scroll = this._scroll;
+
+          if (this._isOverScroll(scroll)) {
+            this._scrollToKillOverScroll();
+          }
+          else {
+            this._scrollTo(scroll);
+          }
         }
 
         this._saveLastState();

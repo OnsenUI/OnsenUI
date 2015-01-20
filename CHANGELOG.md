@@ -16,6 +16,7 @@ v1.2.2-dev
  * ons-popover: Fixed [#367](https://github.com/OnsenUI/OnsenUI/issues/367).
  * ons-carousel: Fixed [#365](https://github.com/OnsenUI/OnsenUI/issues/365).
  * ons-carousel: Fixed [#398](https://github.com/OnsenUI/OnsenUI/issues/398).
+ * ons-carousel: Fixed [#353](https://github.com/OnsenUI/OnsenUI/issues/353). Added `overscroll` event and `event.waitToReturn(promise)` method.
 
 v1.2.1
 ----

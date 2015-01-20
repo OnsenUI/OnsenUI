@@ -9,7 +9,48 @@
 
   <script src="../../build/js/angular/angular.js"></script>    
   <script src="../../build/js/onsenui.js"></script>    
-  <script src="../app.js"></script>  
+
+  <script>
+    var randomColor = function() {
+      return '#' + (function co(lor){   return (lor +=
+          [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'][Math.floor(Math.random()*16)])
+            && (lor.length == 6) ?  lor : co(lor); })('');
+    };
+
+    angular.module('myApp', ['onsen'])
+
+    .controller('DynamicCarouselController', function($scope, $q) {
+      $scope.$watch('carousel', function(carousel) {
+        carousel.on('overscroll', function(event) {
+          var deferred = $q.defer();
+
+          event.waitToReturn(deferred.promise);
+
+          setTimeout(function() {
+            if (event.direction === 'left') {
+              $scope.items.unshift(randomColor());
+            }
+            else {
+              $scope.items.push(randomColor());
+            }
+
+            deferred.resolve();
+
+          }, 1000);
+        });
+      });
+
+      $scope.items = [randomColor(), randomColor(), randomColor()];
+
+      $scope.add = function() {
+        $scope.items.push(randomColor());
+      };
+
+      $scope.remove = function() {
+        $scope.items.pop();
+      };
+    });
+  </script>
 
   <style>
     ons-carousel-item {
@@ -51,6 +92,7 @@
         <ons-list-item ng-click="navi.pushPage('example2.html')" modifier="chevron">Example2</ons-list-item>
         <ons-list-item ng-click="navi.pushPage('example3.html')" modifier="chevron">Example3</ons-list-item>
         <ons-list-item ng-click="navi.pushPage('example4.html')" modifier="chevron">Example4</ons-list-item>
+        <ons-list-item ng-click="navi.pushPage('example5.html')" modifier="chevron">Example5</ons-list-item>
       </ons-list>
 
     </ons-page>
@@ -182,5 +224,23 @@
     </ons-carousel>
   </ons-template>
 
+  <ons-template id="example5.html">
+    <ons-page ng-controller="DynamicCarouselController">
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">Dynamic carousel</div>
+        <div class="right">
+          <ons-toolbar-button ng-click="add()">Add</ons-toolbar-button>
+          <ons-toolbar-button ng-click="remove()">Remove</ons-toolbar-button>
+        </div>
+      </ons-toolbar>
+
+      <ons-carousel var="carousel" auto-refresh swipeable overscrollable style="height: 50%; width: 100%;" item-width="40%">
+        <ons-carousel-item ng-repeat="item in items" ng-attr-style="background-color: {{ item }}">
+          {{ item }}   
+        </ons-carousel-item>
+      </ons-carousel>
+    </ons-page>
+  </ons-template>
 </body>
 </html>

@@ -142,7 +142,9 @@
                 return element[0].childNodes.length; 
               },
               function () {
-                carousel.refresh();
+                setImmediate(function() {
+                  carousel.refresh();
+                });
               }
             );
           }
