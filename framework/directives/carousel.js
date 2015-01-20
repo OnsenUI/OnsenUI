@@ -28,6 +28,9 @@
  * @param auto-scroll
  *    [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
  *    [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
+ * @param auto-scroll-ratio
+ *    [en]A number between 0.0 and 1.0 that specifies how much the user must drag the carousel in order for it to auto scroll to the next item.[en]
+ *    [ja][/ja]
  * @param swipeable
  *    [en]If this attribute is set the carousel can be scrolled by drag or swipe.[/en]
  *    [ja]この属性がある時、カルーセルをスワイプやドラッグで移動できるようになります。[/ja]
@@ -71,6 +74,12 @@
  * @property isAutoScrollEnabled()
  *    [en]Returns whether the "auto-scroll" attribute is set or not.[/en]
  *    [ja]auto-scroll属性があるかどうかを返す。[/ja] 
+ * @property setAutoScrollRatio(ratio)
+ *    [en]Set the auto scroll ratio. Must be a value between 0.0 and 1.0.[/en]
+ *    [ja][/ja]
+ * @property getAutoScrollRatio()
+ *    [en]Returns the current auto scroll ratio.[/en]
+ *    [ja][/ja]
  * @property setOverscrollable(overscrollable)
  *    [en]Set whether the carousel is overscrollable or not.[/en]
  *    [ja]overscroll属性があるかどうかを設定する。[/ja] 
