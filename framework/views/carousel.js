@@ -524,10 +524,8 @@ limitations under the License.
           var lastScroll = this._lastActiveIndex * size,
             scrollRatio = Math.abs(scroll - lastScroll) / size;
 
-          if (arr[0] === lastScroll && scrollRatio >= this.getAutoScrollRatio()) {
-            if (arr.length > 1) {
-              return arr[1];
-            }
+          if (scrollRatio < this.getAutoScrollRatio()) {
+            return lastScroll;
           }
 
           return arr[0];
