@@ -362,3 +362,14 @@ gulp.task('build-doc-en', function(done) {
 gulp.task('build-docs', function(done) {
   runSequence('build-doc-ja', 'build-doc-en', done);
 });
+
+////////////////////////////////////////
+// watch-docs
+////////////////////////////////////////
+gulp.task('watch-docs', ['build-docs'], function(done) {
+  gulp.watch([
+    './docs/**/*',
+    './framework/directive/*.js',
+    './framework/js/*.js',
+  ], ['build-docs']);
+});

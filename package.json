@@ -53,6 +53,7 @@
     "gulp": "^3.8.7",
     "dgeni": "^0.4.1",
     "dgeni-packages": "^0.10.8",
-    "extend": "^2.0.0"
+    "extend": "^2.0.0",
+    "globby": "^1.1.0"
   }
 }

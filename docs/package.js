@@ -12,7 +12,7 @@ module.exports = new Package('ons-docs', [jsdoc, nunjucks, ngdoc])
   readFilesProcessor.basePath = path.resolve(__dirname, '..');
   readFilesProcessor.sourceFiles = [
     {
-      include: 'framework/directives/*.js',
+      include: 'framework/{directives,js}/*.js',
       basePath: path.resolve(__dirname, 'framework')
     }
   ];
@@ -21,7 +21,7 @@ module.exports = new Package('ons-docs', [jsdoc, nunjucks, ngdoc])
     path.resolve(__dirname, 'templates')
   );
 
-  templateFinder.templatePatterns.unshift('component.template.html');
+  templateFinder.templatePatterns.unshift('${ doc.docType }.template.html');
 
   var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
   writeFilesProcessor.outputFolder = 'build/docs/' + njglobals.lang;
@@ -42,11 +42,13 @@ module.exports = new Package('ons-docs', [jsdoc, nunjucks, ngdoc])
     $runBefore: ['processing-docs'],
     $process: function(docs) {
       var directives = [];
+      var objects = [];
       var dict = {
         event: [],
         attribute: [],
         method: []
       };
+
 
       docs.forEach(function(doc) {
         var path = doc.fileInfo.filePath;
@@ -59,8 +61,14 @@ module.exports = new Package('ons-docs', [jsdoc, nunjucks, ngdoc])
             dict[type][path] = [];
           }
           dict[type][path].push(doc);
-        } else {
-          console.log(doc);
+
+        } else if (type === 'object') {
+          objects.push(doc);
+        }
+
+        if (type === 'method') {
+          var matches = doc.name.match(/^ *([a-zA-Z0-9_]+)/);
+          doc.name = matches[1];
         }
       });
 
@@ -69,17 +77,15 @@ module.exports = new Package('ons-docs', [jsdoc, nunjucks, ngdoc])
         directive.events = dict['event'][path] || [];
         directive.methods = dict['method'][path] || [];
         directive.attributes = dict['attribute'][path] || [];
-
-        directive.methods.map(function(method) {
-          var matches = method.name.match(/^ *([a-zA-Z0-9_]+)/);
-          method.name = matches[1];
-
-          return method;
-        });
       });
 
+      objects.forEach(function(object) {
+        var path = object.fileInfo.filePath;
+        object.methods = dict['method'][path] || [];
+        object.events = dict['event'][path] || [];
+      });
 
-      return directives;
+      return directives.concat(objects);
     }
   };
 });
