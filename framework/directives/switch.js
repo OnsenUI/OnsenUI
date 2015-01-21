@@ -84,8 +84,11 @@
               scope.model = value;
             });
 
-            scope.$watch('model', function(model) {
-              set(scope.$parent, model);
+            scope.$watch('model', function(to, from) {
+              set(scope.$parent, to);
+              if (to !== from) {
+                scope.$eval(attrs.ngChange);
+              }
             });
           }
 
