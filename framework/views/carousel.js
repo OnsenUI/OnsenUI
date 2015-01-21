@@ -139,6 +139,7 @@ limitations under the License.
         this._bindedOnDrag = this._onDrag.bind(this);
         this._bindedOnDragEnd = this._onDragEnd.bind(this);
         this._bindedOnResize = this._onResize.bind(this);
+        this._bindedStopPropagation = this._stopPropagation.bind(this);
 
         this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
 
@@ -405,6 +406,7 @@ limitations under the License.
 
         this._hammer.on('drag', this._bindedOnDrag);
         this._hammer.on('dragend', this._bindedOnDragEnd);
+        this._hammer.on(this._getTouchEvents(), this._bindedStopPropagation);
 
         angular.element(window).on('resize', this._bindedOnResize);
       },
@@ -466,6 +468,23 @@ limitations under the License.
         }
         this._lastDragEvent = null;
         event.gesture.preventDefault();
+      },
+
+      _stopPropagation: function(event) {
+        if (this.isSwipeable()) {
+          event.stopPropagation();
+        }
+      },
+
+      _getTouchEvents: function() {
+        var EVENTS = [
+          'drag', 'dragstart', 'dragend',
+          'dragup', 'dragdown', 'dragleft', 
+          'dragright', 'swipe', 'swipeup',
+          'swipedown', 'swipeleft', 'swiperight'
+        ];
+
+        return EVENTS.join(' ');
       },
 
       /**
@@ -707,6 +726,7 @@ limitations under the License.
 
         this._hammer.off('drag', this._bindedOnDrag);
         this._hammer.off('dragend', this._bindedOnDragEnd);
+        this._hammer.off(this._getTouchEvents(), this._bindedStopPropagation);
 
         angular.element(window).off('resize', this._bindedOnResize);
 

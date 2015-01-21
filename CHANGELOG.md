@@ -18,6 +18,7 @@ v1.2.2-dev
  * ons-carousel: Fixed [#398](https://github.com/OnsenUI/OnsenUI/issues/398).
  * ons-carousel: Fixed [#353](https://github.com/OnsenUI/OnsenUI/issues/353). Added `overscroll` event and `event.waitToReturn(promise)` method.
  * ons-carousel: Fixed [#352](https://github.com/OnsenUI/OnsenUI/issues/352). Added `auto-scroll-ratio` attribute and related methods.
+ * ons-carousel: When carousel is swipeable it doesn't propagate touch events to parent.
 
 v1.2.1
 ----
