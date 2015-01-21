@@ -266,7 +266,7 @@ limitations under the License.
           throw new Error('Invalid ratio.');
         }
 
-        return isNaN(ratio) ? 0.5 : scrollRatio;
+        return isNaN(scrollRatio) ? 0.5 : scrollRatio;
       },
 
       /**
@@ -540,11 +540,20 @@ limitations under the License.
             return left - right;
           });
 
+          arr = arr.filter(function(item, pos) {
+            return !pos || item != arr[pos - 1];
+          });
+
           var lastScroll = this._lastActiveIndex * size,
             scrollRatio = Math.abs(scroll - lastScroll) / size;
 
-          if (scrollRatio < this.getAutoScrollRatio()) {
+          if (scrollRatio <= this.getAutoScrollRatio()) {
             return lastScroll;
+          }
+          else if (scrollRatio > this.getAutoScrollRatio() && scrollRatio < 1.0) {
+            if (arr[0] === lastScroll && arr.length > 1) {
+              return arr[1];
+            }
           }
 
           return arr[0];
