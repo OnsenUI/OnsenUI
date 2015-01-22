@@ -30,7 +30,8 @@
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
         pre: function(scope, element, attrs) {
-          var toolbarButton = new GenericView(scope, element, attrs);
+          var toolbarButton = new GenericView(scope, element, attrs),
+            innerElement = element[0].querySelector('.toolbar-button');
 
           $onsen.declareVarAttribute(attrs, toolbarButton);
 
@@ -50,6 +51,17 @@
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
+
+          attrs.$observe('ngDisabled', function() {
+            scope.$parent.$watch(attrs.ngDisabled, function(value) {
+              if (value) {
+                innerElement.setAttribute('disabled', '');
+              }
+              else {
+                innerElement.removeAttribute('disabled');
+              }
+            });
+          });
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
           $onsen.addModifierMethods(toolbarButton, 'toolbar-button--*', element.children());

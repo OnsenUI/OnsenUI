@@ -21,6 +21,8 @@ v1.2.2-dev
  * ons-carousel: When carousel is swipeable it doesn not propagate touch events to parent.
  * ons-switch: Added `ngChange` directive.
  * ons-navigator: Navigator will raise an error if pushPage() or popPage() are called when a push or pop already is in progress. This fixed issue [#349](https://github.com/OnsenUI/OnsenUI/issues/349).
+ * ons-button: Fixed so it can be used with `ngDisabled`.
+ * ons-toolbar-button: Fixed so it can be used with `ngDisabled`. This fixes issue [#321](https://github.com/OnsenUI/issues/321).
 
 v1.2.1
 ----

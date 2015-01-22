@@ -115,6 +115,17 @@
           }
         });
 
+        attrs.$observe('ngDisabled', function() {
+          scope.$parent.$watch(attrs.ngDisabled, function(value) {
+            if (value) {
+              element[0].setAttribute('disabled', '');
+            }
+            else {
+              element[0].removeAttribute('disabled');
+            }
+          });
+        });
+
         $onsen.cleaner.onDestroy(scope, function() {
           $onsen.clearComponent({
             scope: scope,
