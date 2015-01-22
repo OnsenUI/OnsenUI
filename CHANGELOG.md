@@ -20,6 +20,7 @@ v1.2.2-dev
  * ons-carousel: Fixed [#352](https://github.com/OnsenUI/OnsenUI/issues/352). Added `auto-scroll-ratio` attribute and related methods.
  * ons-carousel: When carousel is swipeable it doesn not propagate touch events to parent.
  * ons-switch: Added `ngChange` directive.
+ * ons-navigator: Navigator will raise an error if pushPage() or popPage() are called when a push or pop already is in progress. This fixed issue [#349](https://github.com/OnsenUI/OnsenUI/issues/349).
 
 v1.2.1
 ----

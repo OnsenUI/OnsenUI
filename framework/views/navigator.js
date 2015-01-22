@@ -106,6 +106,16 @@ limitations under the License.
       _profiling: false,
 
       /**
+       * @member {Boolean}
+       */
+      _pushing: false,
+
+      /**
+       * @member {Boolean}
+       */
+      _popping: false,
+
+      /**
        * @param {Object} options
        * @param options.element jqLite Object to manage with navigator
        * @param options.scope Angular.js scope object
@@ -155,6 +165,17 @@ limitations under the License.
         throw new Error('invalid state');
       },
 
+      _safeApply: function(scope, fn) {
+        var phase = scope.$root.$$phase;
+
+        fn = fn || function() {};
+        if (phase !== '$apply' && phase !== '$digest') {
+          scope.$apply(fn);
+        }
+        else {
+          fn.apply(this);
+        }
+      },
 
       _createPageElementAndLinkFunction : function(templateHTML, pageScope, done) {
         var div = document.createElement('div');
@@ -174,16 +195,10 @@ limitations under the License.
           element: pageElement,
           link: function() {
             link(pageScope);
-            safeApply(pageScope);
-          }
+            this._safeApply(pageScope);
+          }.bind(this)
         };
 
-        function safeApply(scope) {
-          var phase = scope.$root.$$phase;
-          if (phase !== '$apply' && phase !== '$digest') {
-            scope.$apply();
-          }
-        }
       },
 
       /**
@@ -268,6 +283,10 @@ limitations under the License.
       pushPage: function(page, options) {
         if (this._profiling) {
           console.time('pushPage');
+        }
+
+        if (this._pushing) {
+          throw new Error('Can\'t push page when push is in progress.');
         }
 
         options = options || {};
@@ -402,6 +421,7 @@ limitations under the License.
 
           unlock();
 
+          this._pushing = false;
           this.emit('postpush', event);
 
           if (typeof options.onTransitionEnd === 'function') {
@@ -439,6 +459,7 @@ limitations under the License.
           }
         };
 
+        this._pushing = true;
         this.emit('prepush', prePushEvent);
 
         return isCanceled;
@@ -457,6 +478,7 @@ limitations under the License.
           }
         };
 
+        this._popping = true;
         this.emit('prepop', prePopEvent);
 
         return isCanceled;
@@ -470,6 +492,10 @@ limitations under the License.
       popPage: function(options) {
         options = options || {};
         
+        if (this._popping) {
+          throw new Error('Can\'t pop page when pop is in progress.');
+        }
+
         this._doorLock.waitUnlock(function() {
           if (this.pages.length <= 1) {
             throw new Error('NavigatorView\'s page stack is empty.');
@@ -502,6 +528,8 @@ limitations under the License.
         var callback = function() {
           leavePage.destroy();
           unlock();
+
+          this._popping = false;
           this.emit('postpop', event);
           event.leavePage = null;
 
