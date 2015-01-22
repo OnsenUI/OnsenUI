@@ -29,6 +29,9 @@ reference: true
     {% if doc.attributes.length > 0 %}
     <li><a href="#attributes">{$ '[en]Attributes[/en][ja]属性[/ja]' | lang $}</a></li>
     {% endif %}
+    {% if doc.modifiers.length > 0 %}
+    <li><a href="#modifiers">{$ '[en]Preset Modifiers[/en][ja]プリセットのmodifier[/ja]' | lang $}</a></li>
+    {% endif %}
     {% if doc.methods.length > 0 %}
     <li><a href="#methods-summary">{$ '[en]Methods[/en][ja]メソッド[/ja]' | lang $}</a></li>
     {% endif %}
@@ -134,6 +137,37 @@ reference: true
             <span style="font-size: 12px">{% if lang == "en" %}Optional{% else %}Optional{% endif %}</span>
             {% endif %}
           </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  {% endif %}
+
+  <!-- modifiers -->
+  {% if doc.modifiers.length > 0 %}
+  <section>
+    <h3 id="modifiers">
+      {% if lang == "en" %}Preset Modifiers{% else %}プリセットのmodifier{% endif %}
+      <a href="#modifiers" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          {% if lang == "en" %}
+          <th>Modifier</th>
+          <th>Description</th>
+          {% else %}
+          <th>Modifier名</th>
+          <th>概要</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for modifier in doc.modifiers %}
+        <tr>
+          <td class="modifier-name" id="{$ doc.name $}-{$ modifier.name $}">{$ modifier.name | e $}</td>
+          <td>{$ modifier.description | lang | e $}</td>
         </tr>
         {% endfor %}
       </tbody>

@@ -67,5 +67,17 @@ module.exports = [
         isWide: !!value.match(/\{wide}/)
       };
     }
+  },
+  {
+    name: 'modifier',
+    multi: true,
+    docProperty: 'modifiers',
+    transforms: function(doc, tag, value) {
+      var matches = value.match(/^ *([-_a-zA-Z0-9]+) *((.|\r|\n)*)/);
+      return {
+        name: matches[1],
+        description: matches[2]
+      };
+    }
   }
 ];
