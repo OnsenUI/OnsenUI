@@ -89,14 +89,6 @@
         // if animation is not specified -> default is slide-left
         scope.item.animation = initialAnimation;
 
-        attrs.$observe('disabled', function(disabled) {
-          if (disabled === 'true') {
-            element.attr('disabled', true);
-          } else {
-            element.attr('disabled', false);
-          }
-        });
-
         scope.$watch('animation', function(newAnimation) {
           if (newAnimation) {
             if (scope.item.animation) {
@@ -115,17 +107,6 @@
           }
         });
 
-        attrs.$observe('ngDisabled', function() {
-          scope.$parent.$watch(attrs.ngDisabled, function(value) {
-            if (value) {
-              element[0].setAttribute('disabled', '');
-            }
-            else {
-              element[0].removeAttribute('disabled');
-            }
-          });
-        });
-
         $onsen.cleaner.onDestroy(scope, function() {
           $onsen.clearComponent({
             scope: scope,
@@ -135,7 +116,7 @@
 
           scope = element = attrs = null;
         });
-        
+
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };
