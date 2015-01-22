@@ -10,16 +10,22 @@ module.exports = {
 
     // Parse string
     if (str.indexOf('[' + lang + ']') == -1) {
-      // Change to English if the specified locale is not found
-      lang = 'en';
+
+      if (lang === 'ja') {
+        // Change to English if the specified locale is not found
+        lang = 'en';
+      } else {
+        return '';
+      }
     }
 
     // Pull out part of string
-    var regex = new RegExp('\\[' + lang + '\\](.+)\\[/' + lang + '\\]');
+    var regex = lang === 'en' ?  /\[en]((.|\r|\n)*)\[\/en]/m : /\[ja]((.|\r|\n)*)\[\/ja]/m;
     var match;
     if (match = regex.exec(str)) {
       return match[1];
     }
+
     return str;
   }
 };

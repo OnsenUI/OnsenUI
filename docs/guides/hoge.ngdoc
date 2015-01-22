@@ -1,0 +1,18 @@
+@ngdoc overview
+@name [ja]ほげ[/ja][en]Hoge[/en]
+@id hoge
+@description
+
+[en]
+## What does it do?
+
+The `$location` service parses the URL in the browser address bar (based on [`window.location`](https://developer.mozilla.org/en/window.location)) and makes the URL available to
+your application. Changes to the URL in the address bar are reflected into the `$location` service and
+changes to `$location` are reflected into the browser address bar.
+[/en]
+[ja]
+## What does it do?
+
+だった。
+[/ja]
+

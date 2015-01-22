@@ -2,33 +2,24 @@
 page: 'reference-detail'
 title: '{$ doc.name $}'
 name: '{$ doc.name $}'
-collection: 'components'
+collection: 'objects'
 reference: true
 ---
-<div class="reference-container" id="{$ doc.id $}">
-
-  <h2>{$ doc.name $}</h2>
+<div id="{$ doc.id $}">
 
   <div class="reference-github-links">
-    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/{$ doc.fileInfo.baseName | e $}.js">View Source</a>
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/js/{$ doc.fileInfo.baseName | e $}.js">View Source</a>
 
-    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/edit/master/framework/directives/{$ doc.fileInfo.baseName | e $}.js">Improve this doc</a>
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/edit/master/framework/js/{$ doc.fileInfo.baseName | e $}.js">Improve this doc</a>
   </div>
+
+  <h2>{$ doc.name $}</h2>
 
   <section class="description">
     <p>{$ doc.description | lang | e $}</p>
   </section>
 
   <ul class="reference-quick-navi">
-    {% if doc.examples[0] %}
-    <li><a href="#usage">{$ '[en]Usage[/en][ja]使い方[/ja]' | lang $}</a></li>
-    {% endif %}
-    {% if doc.codepen %}
-    <li><a href="#example">{$ '[en]Live Example[/en][ja]実例[/ja]' | lang $}</a></li>
-    {% endif %}
-    {% if doc.attributes.length > 0 %}
-    <li><a href="#attributes">{$ '[en]Attributes[/en][ja]属性[/ja]' | lang $}</a></li>
-    {% endif %}
     {% if doc.methods.length > 0 %}
     <li><a href="#methods-summary">{$ '[en]Methods[/en][ja]メソッド[/ja]' | lang $}</a></li>
     {% endif %}
@@ -41,40 +32,10 @@ reference: true
     <li><a href="#discussion">{$ '[en]Discussion[/en][ja]議論[/ja]' | lang $}</a></li>
   </ul>
 
-  {% if doc.examples[0] %}
-    <section>
-      <h3 id="usage">
-        {$ '[en]Usage[/en][ja]使い方[/ja]' | lang $}
-        <a href="#usage" class="reference-loop-anchor">#</a>
-      </h3>
-      <pre><code class="xml">{$ doc.examples[0] | e $}</code></pre>
-    </section>
-  {% endif %}
-
   {% if doc.note %}
-  <section class="note" id="node">
+  <section class="note">
     <p>{% if lang == "en" %}Note{% else %}注意{% endif %}: {$ doc.note | lang $}</p>
   </section>
-  {% endif %}
-
-  <!-- codepen -->
-  {% if doc.codepen %}
-  <h3 id="example">
-    {% if lang == "en" %}Live Example{% else %}実例{% endif %}
-    <a href="#example" class="reference-loop-anchor">#</a>
-  </h3>
-
-  {% if doc.codepen.isWide %}
-  <div style="height: 480px; width: 100%;" class="codepen-wrapper">
-  {% else %}
-  <div style="height: 480px; width: 320px;" class="codepen-wrapper">
-  {% endif %}
-    <p data-height="480" data-theme-id="11531" data-slug-hash="{$ doc.codepen.id $}" data-default-tab="result" data-user="onsen" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/{$ doc.codepen.id $}/'>Alert, confirm and prompt dialogs</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
-    <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-
-  </div>
-
-  <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/{$ doc.codepen.id $}" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
   {% endif %}
 
   {% if doc.guides or doc.seealsos %}
@@ -94,51 +55,6 @@ reference: true
       {% endfor %}
     {% endif %}
   </ul>
-  {% endif %}
-
-  <!-- attributes -->
-  {% if doc.attributes.length > 0 %}
-  <section>
-    <h3 id="attributes">
-      {% if lang == "en" %}Attributes{% else %}属性{% endif %}
-      <a href="#attributes" class="reference-loop-anchor">#</a>
-    </h3>
-    <table>
-      <thead>
-        <tr>
-          {% if lang == "en" %}
-          <th>Name</th>
-          <th>Type<br>Default Value</th>
-          <th>Description</th>
-          {% else %}
-          <th>名前</th>
-          <th>型 / デフォルト値</th>
-          <th>概要</th>
-          {% endif %}
-        </tr>
-      </thead>
-      <tbody>
-        {% for attribute in doc.attributes %}
-        <tr>
-          <td class="attribute-name" id="{$ doc.name $}-{$ attribute.name $}">{$ attribute.name | e $}</td>
-          <td>
-            {% if attribute.type %}<span class="value-type">{$ attribute.type.typeExpression | e $}</span>{% endif %}
-            {% if attribute.default %}<br><span class="default-value" style="color: green">{$ attribute.default | e $}</span>{% endif %}
-          </td>
-          <td>
-            {$ attribute.description | lang | e $}
-
-            {% if attribute.required %}
-            <span style="font-size: 12px;">{% if lang == "en" %}Required{% else %}必須{% endif %}</span>
-            {% else %}
-            <span style="font-size: 12px">{% if lang == "en" %}Optional{% else %}Optional{% endif %}</span>
-            {% endif %}
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </section>
   {% endif %}
 
   <!-- methods summary -->
@@ -253,6 +169,7 @@ reference: true
     <!-- end method parameter -->
     {% endif %}
   </section>
+
   {% endfor %}
 
   {% endif %}
@@ -297,7 +214,6 @@ reference: true
       </tbody>
     </table>
   </section>
-
   {% endfor %}
 
   {% endif %}
@@ -312,7 +228,7 @@ reference: true
   <div id="disqus_thread"></div>
   <script type="text/javascript">
       /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-  var disqus_shortname = 'onsenui{% if lang == "ja" %}-ja{% endif %}'; // required: replace example with your forum shortname
+      var disqus_shortname = 'onsenui{% if lang == "ja" %}-ja{% endif %}'; // required: replace example with your forum shortname
 
       /* * * DON'T EDIT BELOW THIS LINE * * */
       (function() {
@@ -325,5 +241,3 @@ reference: true
   <!-- end disqus -->
 
 </div>
-
-<script src="/vendor/highlight.min.js"></script>
