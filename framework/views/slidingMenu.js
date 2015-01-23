@@ -175,6 +175,7 @@ limitations under the License.
 
         this._menuPage = angular.element(element[0].querySelector('.onsen-sliding-menu__menu'));
         this._mainPage = angular.element(element[0].querySelector('.onsen-sliding-menu__main'));
+        this._mainPageHammer = new Hammer(this._mainPage[0]);
 
         this._doorLock = new DoorLock();
 
@@ -262,7 +263,7 @@ limitations under the License.
 
         this._deviceBackButtonHandler.destroy();
 
-        this._mainPage.off('click', this._bindedCloseMenu);
+        this._mainPageHammer.off('click', this._bindedCloseMenu);
         this._element = this._scope = this._attrs = null;
       },
 
@@ -586,7 +587,7 @@ limitations under the License.
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
        
-        this._mainPage.off('click', this._bindedCloseMenu);
+        this._mainPageHammer.off('tap', this._bindedCloseMenu);
         this.emit('preclose');
 
         this._doorLock.waitUnlock(function() {
@@ -634,7 +635,7 @@ limitations under the License.
         this._animator.openMenu(function() {
           unlock();
 
-          this._mainPage.on('click', this._bindedCloseMenu);
+          this._mainPageHammer.on('tap', this._bindedCloseMenu);
           this.emit('postopen');
           callback();
         }.bind(this), instant);
