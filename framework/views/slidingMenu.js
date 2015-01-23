@@ -179,6 +179,7 @@ limitations under the License.
         this._doorLock = new DoorLock();
 
         this._isRightMenu = attrs.side === 'right';
+        this._bindedCloseMenu = this.closeMenu.bind(this);
 
         var maxDistance = this._normalizeMaxSlideDistanceAttr();
         this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
@@ -260,6 +261,8 @@ limitations under the License.
         this.emit('destroy', {slidingMenu: this});
 
         this._deviceBackButtonHandler.destroy();
+
+        this._mainPage.off('click', this._bindedCloseMenu);
         this._element = this._scope = this._attrs = null;
       },
 
@@ -582,7 +585,8 @@ limitations under the License.
       close: function(options) {
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
-        
+       
+        this._mainPage.off('click', this._bindedCloseMenu);
         this.emit('preclose');
 
         this._doorLock.waitUnlock(function() {
@@ -629,6 +633,8 @@ limitations under the License.
 
         this._animator.openMenu(function() {
           unlock();
+
+          this._mainPage.on('click', this._bindedCloseMenu);
           this.emit('postopen');
           callback();
         }.bind(this), instant);
