@@ -24,6 +24,7 @@ v1.2.2-dev
  * ons-button: Fixed so it can be used with `ngDisabled`.
  * ons-toolbar-button: Fixed so it can be used with `ngDisabled`. This fixes issue [#321](https://github.com/OnsenUI/issues/321).
  * ons-carousel: Fixed unresponsive carousel drag event for Android.
+ * ons-carousel: Fixed [#401](https://github.com/OnsenUI/OnsenUI/issues/401).
 
 v1.2.1
 ----

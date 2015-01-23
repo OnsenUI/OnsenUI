@@ -159,7 +159,7 @@ limitations under the License.
       _saveLastState: function() {
         this._lastState = {
           elementSize: this._getCarouselItemSize(),
-          caroulseElementCount: this._getCarouselItemCount(),
+          carouselElementCount: this._getCarouselItemCount(),
           width: this._getCarouselItemSize() * this._getCarouselItemCount()
         };
       },
@@ -697,6 +697,11 @@ limitations under the License.
        * Refresh carousel item layout.
        */
       refresh: function() {
+        // Bug fix
+        if (this._getCarouselItemSize() === 0) {
+          return;
+        }
+
         this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
         this._layoutCarouselItems();
 
@@ -705,9 +710,9 @@ limitations under the License.
 
           if (this._isOverScroll(scroll)) {
             this._scrollToKillOverScroll();
-          }
+          } 
           else {
-            this._scrollTo(scroll);
+            this,_scrollTo(scroll);
           }
         }
 
