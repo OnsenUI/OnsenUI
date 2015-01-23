@@ -402,7 +402,9 @@ limitations under the License.
       },
 
       _prepareEventListeners: function() {
-        this._hammer = new Hammer(this._element[0]);
+        this._hammer = new Hammer(this._element[0], {
+          dragMinDistance: 1
+        });
 
         this._hammer.on('drag', this._bindedOnDrag);
         this._hammer.on('dragend', this._bindedOnDragEnd);

@@ -23,6 +23,7 @@ v1.2.2-dev
  * ons-navigator: Navigator will raise an error if pushPage() or popPage() are called when a push or pop already is in progress. This fixed issue [#349](https://github.com/OnsenUI/OnsenUI/issues/349).
  * ons-button: Fixed so it can be used with `ngDisabled`.
  * ons-toolbar-button: Fixed so it can be used with `ngDisabled`. This fixes issue [#321](https://github.com/OnsenUI/issues/321).
+ * ons-carousel: Fixed unresponsive carousel drag event for Android.
 
 v1.2.1
 ----
