@@ -26,6 +26,7 @@ v1.2.2-dev
  * ons-carousel: Fixed unresponsive carousel drag event for Android.
  * ons-carousel: Fixed [#401](https://github.com/OnsenUI/OnsenUI/issues/401).
  * ons-sliding-menu: Clicking outside the menu when it is open will now close it.
+ * ons-sliding-menu: Fixed [#319](https://github.com/OnsenUI/OnsenUI/issues/319).
 
 v1.2.1
 ----

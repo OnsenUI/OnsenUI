@@ -264,6 +264,7 @@ limitations under the License.
         this._deviceBackButtonHandler.destroy();
 
         this._mainPageHammer.off('click', this._bindedCloseMenu);
+        this._mainPage.children().css('pointer-events', '');
         this._element = this._scope = this._attrs = null;
       },
 
@@ -636,6 +637,7 @@ limitations under the License.
           unlock();
 
           this._mainPageHammer.on('tap', this._bindedCloseMenu);
+          this._mainPage.children().css('pointer-events', 'none');
           this.emit('postopen');
           callback();
         }.bind(this), instant);
