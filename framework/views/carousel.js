@@ -712,7 +712,7 @@ limitations under the License.
             this._scrollToKillOverScroll();
           } 
           else {
-            this,_scrollTo(scroll);
+            this._scrollTo(scroll);
           }
         }
 
