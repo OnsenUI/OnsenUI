@@ -175,12 +175,16 @@ limitations under the License.
 
         this._menuPage = angular.element(element[0].querySelector('.onsen-sliding-menu__menu'));
         this._mainPage = angular.element(element[0].querySelector('.onsen-sliding-menu__main'));
-        this._mainPageHammer = new Hammer(this._mainPage[0]);
+
 
         this._doorLock = new DoorLock();
 
         this._isRightMenu = attrs.side === 'right';
-        this._bindedCloseMenu = this.closeMenu.bind(this);
+
+        // Close menu on tap event.
+        this._mainPageHammer = new Hammer(this._mainPage[0]);
+        this._bindedOnTap = this._onTap.bind(this);
+        this._mainPageHammer.on('tap', this._bindedOnTap);
 
         var maxDistance = this._normalizeMaxSlideDistanceAttr();
         this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
@@ -247,6 +251,12 @@ limitations under the License.
         }
       },
 
+      _onTap: function() {
+        if (this.isMenuOpened()) {
+          this.closeMenu();
+        }
+      },
+
       _refreshMenuPageWidth: function() {
         var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
 
@@ -263,8 +273,7 @@ limitations under the License.
 
         this._deviceBackButtonHandler.destroy();
 
-        this._mainPageHammer.off('click', this._bindedCloseMenu);
-        this._mainPage.children().css('pointer-events', '');
+        this._mainPageHammer.off('tap', this._bindedOnTap);
         this._element = this._scope = this._attrs = null;
       },
 
@@ -588,7 +597,6 @@ limitations under the License.
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
        
-        this._mainPageHammer.off('tap', this._bindedCloseMenu);
         this.emit('preclose');
 
         this._doorLock.waitUnlock(function() {
@@ -603,6 +611,8 @@ limitations under the License.
 
         this._animator.closeMenu(function() {
           unlock();
+
+          this._mainPage.children().css('pointer-events', '');
           this.emit('postclose');
           callback();
         }.bind(this), instant);
@@ -636,7 +646,6 @@ limitations under the License.
         this._animator.openMenu(function() {
           unlock();
 
-          this._mainPageHammer.on('tap', this._bindedCloseMenu);
           this._mainPage.children().css('pointer-events', 'none');
           this.emit('postopen');
           callback();
