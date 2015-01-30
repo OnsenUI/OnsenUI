@@ -22,7 +22,10 @@
  *  [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
  * @param no-reload
  *  [en]Set if the page shouldn't be reloaded when clicking on the same tab twice.[/en]
- *  [jp]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/jp]
+ *  [ja]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/ja]
+ * @param persistent
+ *  [en]Set to make the tab content persistent. If this attribute it set the DOM will not be destroyed when navigating to another tab.[/en]
+ *  [ja][/ja]
  * @codepen pGuDL
  * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
@@ -81,7 +84,8 @@
         icon: '@',
         activeIcon: '@',
         label: '@',
-        noReload: '@'
+        noReload: '@',
+        persistent: '@'
       },
 
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab.tpl',
@@ -140,6 +144,10 @@
 
             angular.element(element[0].querySelectorAll('[ons-tab-inactive]')).css('display', 'inherit');
             angular.element(element[0].querySelectorAll('[ons-tab-active]')).css('display', 'none');
+          };
+
+          scope.isPersistent = function() {
+            return typeof scope.persistent != 'undefined';
           };
 
           /**
