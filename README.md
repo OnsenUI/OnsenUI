@@ -8,7 +8,7 @@ Built on top of [AngularJS](http://angularjs.org/) and [Topcoat](http://topcoat.
 
 Onsen UI also includes Onsen CSS Components, a free resource of UI templates with "theme roller" functionality. Developers can pick and choose, grab the code they need, and they're off and running. And they can create their own templates and submit to Onsen UI to be included with other templates available. 
 
-[Monaca IDE] fully supports Onsen UI plugin.
+Our [Monaca IDE] fully supports Onsen UI plugin.
 
 ## Browser Support
 
@@ -84,7 +84,7 @@ $ gulp serve
 
 ## Developing your app
 
-[Monaca IDE] makes it super easy to create Onsen UI project, but if you want to use other IDEs, we provide project templates for you in the `project_templates` folder. You will see the instruction on how to run the project there.
+Our [Monaca IDE] makes it super easy to create Onsen UI project, but if you want to use other IDEs, we provide project templates for you in the `project_templates` folder. You will see the instruction on how to run the project there.
 
 ## Documentation
 
