@@ -184,7 +184,6 @@ limitations under the License.
         // Close menu on tap event.
         this._mainPageHammer = new Hammer(this._mainPage[0]);
         this._bindedOnTap = this._onTap.bind(this);
-        this._mainPageHammer.on('tap', this._bindedOnTap);
 
         var maxDistance = this._normalizeMaxSlideDistanceAttr();
         this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
@@ -613,6 +612,7 @@ limitations under the License.
           unlock();
 
           this._mainPage.children().css('pointer-events', '');
+          this._mainPageHammer.off('tap', this._bindedOnTap);
           this.emit('postclose');
           callback();
         }.bind(this), instant);
@@ -647,6 +647,7 @@ limitations under the License.
           unlock();
 
           this._mainPage.children().css('pointer-events', 'none');
+          this._mainPageHammer.on('tap', this._bindedOnTap);
           this.emit('postopen');
           callback();
         }.bind(this), instant);
