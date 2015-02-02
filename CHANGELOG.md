@@ -27,6 +27,7 @@ v1.2.2-dev
  * ons-carousel: Fixed [#401](https://github.com/OnsenUI/OnsenUI/issues/401).
  * ons-sliding-menu: Clicking outside the menu when it is open will now close it.
  * ons-sliding-menu: Fixed [#319](https://github.com/OnsenUI/OnsenUI/issues/319).
+ * ons-pull-hook: Implemented `<ons-pull-hook>` component.
 
 v1.2.1
 ----
