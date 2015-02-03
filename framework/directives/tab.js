@@ -25,7 +25,7 @@
  *  [ja]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/ja]
  * @param persistent
  *  [en]Set to make the tab content persistent. If this attribute it set the DOM will not be destroyed when navigating to another tab.[/en]
- *  [ja][/ja]
+ *  [ja]このタブで読み込んだページを永続化します。この属性があるとき、別のタブのページに切り替えても、読み込んだページのDOM要素は破棄されずに単に非表示になります。[/ja]
  * @codepen pGuDL
  * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
