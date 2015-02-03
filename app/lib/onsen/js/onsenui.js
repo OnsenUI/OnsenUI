@@ -12295,9 +12295,9 @@ limitations under the License.
           }
         } else {
           if (this._scope.hideTabs) {
-            this._tabbarElement.css('bottom', '0px');
+            this._contentElement.css('bottom', '0px');
           } else {
-            this._tabbarElement.css('bottom', '');
+            this._contentElement.css('bottom', '');
           }
         }
       },
