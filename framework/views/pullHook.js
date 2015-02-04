@@ -122,7 +122,7 @@ limitations under the License.
 
           setImmediate(function() {
             this._setState(this.STATE_ACTION);
-            this._translateTo(this._getHeight(), { animate: true });
+            this._translateTo(this._getHeight(), {animate: true});
 
             this._waitForAction(this._onDone.bind(this));
           }.bind(this));
@@ -156,12 +156,12 @@ limitations under the License.
           if (scroll > this._getHeight()) {
             this._setState(this.STATE_ACTION);
 
-            this._translateTo(this._getHeight(), { animate: true });
+            this._translateTo(this._getHeight(), {animate: true});
 
             this._waitForAction(this._onDone.bind(this));
           }
           else {
-            this._translateTo(0, { animate: true });
+            this._translateTo(0, {animate: true});
           }
         }
       },
@@ -179,7 +179,7 @@ limitations under the License.
       },
 
       _onDone: function(done) {
-        this._translateTo(0, { animate: true });
+        this._translateTo(0, {animate: true});
         this._setState(this.STATE_INITIAL);
       },
 
