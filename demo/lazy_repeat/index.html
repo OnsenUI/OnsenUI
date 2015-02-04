@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Lazy Repeat | Onsen UI</title>  
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/angular/angular.js"></script>    
+  <script src="../../build/js/onsenui.js"></script>    
+
+  <script>
+    var app = angular.module('myApp', ['onsen']);
+
+    app.controller('MyCtrl', function($scope) {
+      $scope.items = [1,2,3,4,5,6,7,8];
+
+      $scope.MyDelegate = {
+        configureItemScope : function(index, itemScope) {
+          itemScope.item = $scope.items[index];
+        },
+        calculateItemHeight : function(index) {
+          return 50;
+        },
+        countItems : function() {
+          return $scope.items.length;
+        }
+      };
+    });
+
+  </script>
+
+</head>
+
+<body ng-controller="MyCtrl"> 
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Lazy Repeat</div>
+    </ons-toolbar>
+
+    <ons-list>
+      <ons-list-item ons-lazy-repeat="MyDelegate">
+        {{ item }}
+      </ons-list-item>
+    </ons-list>
+  
+</body>
+</html>
