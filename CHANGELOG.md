@@ -29,6 +29,7 @@ v1.2.2-dev
  * ons-sliding-menu: Fixed [#319](https://github.com/OnsenUI/OnsenUI/issues/319).
  * ons-tab: Implemented `persistent` attributed to prevent tab content from being destroyed when navigating to another tab.
  * ons-tabbar: Fixed broken `hide-tabs` attribute. ([atakayama](https://github.com/atakayama))
+ * ons-pull-hook: Implemented `<ons-pull-hook>` component.
 
 v1.2.1
 ----
