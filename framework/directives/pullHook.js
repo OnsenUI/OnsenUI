@@ -89,13 +89,11 @@
             var pullHook = new PullHookView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, pullHook);
-            $onsen.aliasStack.register('ons.pullHook', pullHook);
             element.data('ons-pull-hook', pullHook);
 
             scope.$on('$destroy', function() {
               pullHook._events = undefined;
               element.data('ons-pull-hook', undefined);
-              $onsen.aliasStack.unregister('ons.pullHook', pullHook);
               scope = element = attrs = null;
             });
           },

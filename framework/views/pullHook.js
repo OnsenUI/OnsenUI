@@ -179,22 +179,12 @@ limitations under the License.
       },
 
       _onDone: function(done) {
-        this._safeApply();
-
         this._translateTo(0, { animate: true });
         this._setState(this.STATE_INITIAL);
       },
 
-      _safeApply: function() {
-        var phase = this._scope.$root.$$phase;
-
-        if (phase !== '$apply' && phase !== '$digest') {
-          this._scope.$apply();
-        }
-      },
-
       _getHeight: function() {
-        return parseInt(this._element[0].getAttribute('height') || '64');
+        return parseInt(this._element[0].getAttribute('height') || '64', 10);
       },
 
       setHeight: function(height) {
@@ -208,7 +198,7 @@ limitations under the License.
       },
 
       _getThresholdHeight: function() {
-        return parseInt(this._element[0].getAttribute('threshold-height') || '96');
+        return parseInt(this._element[0].getAttribute('threshold-height') || '96', 10);
       },
 
       _thresholdHeightEnabled: function() {
@@ -218,7 +208,10 @@ limitations under the License.
 
       _setState: function(state, noEvent) {
         var oldState = this._getState();
-        this._element[0].setAttribute('state', state);
+
+        this._scope.$evalAsync(function() {
+          this._element[0].setAttribute('state', state);
+        }.bind(this));
 
         if (!noEvent && oldState !== this._getState()) {
           this.emit('changestate', {
@@ -226,7 +219,6 @@ limitations under the License.
             pullHook: this
           });
         }
-        this._safeApply();
       },
 
       _getState: function() {
