@@ -7,6 +7,35 @@
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
+  <style>
+    .item {
+      padding: 10px;
+      line-height: 1;
+    }
+    .item-thum {
+      background-color: #ccc;
+      width: 50px;
+      height: 50px;
+      border-radius: 4px;
+    }
+    .item-title {
+      font-size: 15px;
+      font-weight: 500;
+    }
+    .item-desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.3;
+      margin: 4px 0 0 0;
+      padding: 0 30px 0 0;
+    }
+    .item-label {
+      font-size: 12px;
+      color: #999;
+      float: right;
+    }
+  </style>
+
   <script src="../../build/js/angular/angular.js"></script>    
   <script src="../../build/js/onsenui.js"></script>    
 
@@ -14,22 +43,30 @@
     var app = angular.module('myApp', ['onsen']);
 
     app.controller('MyCtrl', function($scope) {
-      $scope.items = [1,2,3,4,5,6,7,8];
-
       $scope.MyDelegate = {
         configureItemScope : function(index, itemScope) {
-          itemScope.item = $scope.items[index];
+          console.log("Created item #" + index);
+          itemScope.item = {
+            title: 'Item #' + (index + 1),
+            label: '',
+            desc: 'Bla bla bla bla...',
+            rand: Math.random()
+          };
         },
         calculateItemHeight : function(index) {
-          return 50;
+          return 71;
         },
         countItems : function() {
-          return $scope.items.length;
+          return 10000000;  
+        },
+        destroyItemScope: function(index, scope) {
+          console.log("Destroyed item #" + index);
         }
       };
     });
 
   </script>
+
 
 </head>
 
@@ -37,11 +74,25 @@
   <ons-page>
     <ons-toolbar>
       <div class="center">Lazy Repeat</div>
+      <div class="right">
+        <ons-toolbar-button ng-click="addElement()">Add element</ons-toolbar-button>
+      </div>
     </ons-toolbar>
 
     <ons-list>
-      <ons-list-item ons-lazy-repeat="MyDelegate">
-        {{ item }}
+      <ons-list-item modifier="chevron" class="item" ons-lazy-repeat="MyDelegate">
+        <ons-row>
+          <ons-col width="60px"> 
+            <img ng-src="http://lorempixel.com/40/40/?{{item.rand}}" class="item-thum"></img>
+          </ons-col>
+          <ons-col>
+            <header>
+              <span class="item-title">{{item.title}}</span>
+              <span class="item-label">{{item.label}}</span>
+            </header>
+            <p class="item-desc">{{item.desc}}</p>
+          </ons-col>
+        </ons-row>                          
       </ons-list-item>
     </ons-list>
   
