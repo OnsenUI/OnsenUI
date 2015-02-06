@@ -24,7 +24,7 @@ div#content-container > header {
   .gnav {
     position: absolute;
     top: 0;
-    right: 20px;
+    right: 12px;
     height: 84px;
     line-height: 84px;
     margin: 0;
@@ -50,14 +50,15 @@ div#content-container > header {
         }
       }
       a {
-        font-family: 'pragmatica-web', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-weight: 300;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-weight: 500;
+
         &:link, &:visited, &:active {
           color: #666;
           text-decoration: none;
         }
         &:hover {
-          color: #ff3f2b;
+          color: #666;
           text-decoration: underline;
         }
       }
@@ -76,103 +77,5 @@ div#content-container > header {
     padding-right: 16px;
     width: 600px;
   }
-}
-
-div#header-monaca {
-  background-color: rgba(38, 38, 38, 0.9);
-  height: 48px;
-}
-
-div#header-monaca-inner {
-  width: 100%;
-  margin: 0px auto;
-  position: relative;
-
-  img {
-    margin-top: 12px;
-    margin-left: 42px;
-    float: left;
-  }
-
-  a, a:link, a:visited, a:hover {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-  }
-  a:hover {
-    color: #80d4ff;
-  }
-}
-
-ul#header-monaca-navi {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 800px;
-  padding: 0;
-  margin: 0;
-  font-size: 0px;
-  text-align: right;
-  height: 48px;
-
-  > li {
-    margin: 0;
-    padding: 0 20px;
-    display: inline-block;
-    position: relative;
-    left: 0px;
-    top: 0px;
-    height: 48px;
-    line-height: 48px;
-    list-style: none;
-    text-align: left;
-
-    &:hover {
-      background-color: #2c2c2c;
-      height: 48px;
-      > ul {
-        display: block;
-      }
-    }
-  }
-}
-
-ul.header-monaca-navi-sub-menu {
-  display: none;
-  z-index: 2;
-  position: absolute;
-  top: 48px;
-  left: 0px;
-  padding: 10px 0 10px 0;
-  margin: 0;
-  background-color: #2c2c2c;
-
-  li {
-    list-style: none;
-    min-width: 240px;
-    padding: 0;
-    margin: 0;
-    background-color: #2c2c2c;
-  }
-
-  a, a:link, a:hover, a:visited {
-    padding: 0 30px;
-    line-height: 38px;
-    height: 38px;
-    width: 100%;
-    font-size: 15px !important;
-    box-sizing: border-box;
-    display: block !important;
-  }
-
-  a:hover {
-    background-color: #383838;
-    color: #80d4ff;
-  }
-}
-
-ul#header-monaca-navi > li:last-child ul.header-monaca-navi-sub-menu {
-  right: 0px;
-  left: auto;
 }
 
