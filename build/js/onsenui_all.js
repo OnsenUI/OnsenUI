@@ -1,4 +1,4 @@
-/*! onsenui - v1.2.1 - 2014-12-01 */
+/*! onsenui - v1.2.1 - 2015-02-06 */
 /**
  * @license AngularJS v1.3.0
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -30302,8 +30302,19 @@ catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/back_button.tpl',
-    '<span class="toolbar-button--quiet {{modifierTemplater(\'toolbar-button--*\')}}" ng-click="$root.ons.findParentComponentUntil(\'ons-navigator\', $event).popPage()" style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">\n' +
-    '  <i class="ion-ios7-arrow-back ons-back-button__icon" style="vertical-align: top; background-color: transparent; height: 44px; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; width: 16px; display: inline-block; padding-top: 1px;"></i><span style="vertical-align: top; display: inline-block; line-height: 44px; height: 44px;" class="back-button__label"></span>\n' +
+    '<span \n' +
+    '  class="toolbar-button--quiet {{modifierTemplater(\'toolbar-button--*\')}}" \n' +
+    '  ng-click="$root.ons.findParentComponentUntil(\'ons-navigator\', $event).popPage()" \n' +
+    '  ng-show="showBackButton"\n' +
+    '  style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">\n' +
+    '  \n' +
+    '  <i \n' +
+    '    class="ion-ios-arrow-back ons-back-button__icon" \n' +
+    '    style="vertical-align: top; background-color: transparent; height: 44px; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; width: 16px; display: inline-block; padding-top: 1px;"></i>\n' +
+    '\n' +
+    '  <span \n' +
+    '    style="vertical-align: top; display: inline-block; line-height: 44px; height: 44px;" \n' +
+    '    class="back-button__label"></span>\n' +
     '</span>\n' +
     '');
 }]);
@@ -31708,7 +31719,7 @@ limitations under the License.
        * Returns whether the button is disabled or not.
        */
       isDisabled: function() {
-        return this._attrs.disabled;
+        return this._element[0].hasAttribute('disabled');
       },
 
       /**
@@ -31874,6 +31885,7 @@ limitations under the License.
         this._bindedOnDrag = this._onDrag.bind(this);
         this._bindedOnDragEnd = this._onDragEnd.bind(this);
         this._bindedOnResize = this._onResize.bind(this);
+        this._bindedStopPropagation = this._stopPropagation.bind(this);
 
         this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
 
@@ -31893,7 +31905,7 @@ limitations under the License.
       _saveLastState: function() {
         this._lastState = {
           elementSize: this._getCarouselItemSize(),
-          caroulseElementCount: this._getCarouselItemCount(),
+          carouselElementCount: this._getCarouselItemCount(),
           width: this._getCarouselItemSize() * this._getCarouselItemCount()
         };
       },
@@ -31975,21 +31987,32 @@ limitations under the License.
       },
 
       /**
-       * @param {Boolean} draggable
+       * @param {Number} ratio
        */
-      setDraggable: function(draggable) {
-        if (draggable) {
-          this._element[0].setAttribute('draggable', '');
-        } else {
-          this._element[0].removeAttribute('draggable');
+      setAutoScrollRatio: function(ratio) {
+        if (ratio < 0.0 || ratio > 1.0) {
+          throw new Error('Invalid ratio.');
         }
+
+        this._element[0].setAttribute('auto-scroll-ratio', ratio);
       },
 
       /**
-       * @return {Boolean}
+       * @return {Number}
        */
-      isDraggable: function() {
-        return this._element[0].hasAttribute('draggable');
+      getAutoScrollRatio: function(ratio) {
+        var attr = this._element[0].getAttribute('auto-scroll-ratio');
+
+        if (!attr) {
+          return 0.5;
+        }
+
+        var scrollRatio = parseFloat(attr);
+        if (scrollRatio < 0.0 || scrollRatio > 1.0) {
+          throw new Error('Invalid ratio.');
+        }
+
+        return isNaN(scrollRatio) ? 0.5 : scrollRatio;
       },
 
       /**
@@ -32125,10 +32148,13 @@ limitations under the License.
       },
 
       _prepareEventListeners: function() {
-        this._hammer = new Hammer(this._element[0]);
+        this._hammer = new Hammer(this._element[0], {
+          dragMinDistance: 1
+        });
 
         this._hammer.on('drag', this._bindedOnDrag);
         this._hammer.on('dragend', this._bindedOnDragEnd);
+        this._hammer.on(this._getTouchEvents(), this._bindedStopPropagation);
 
         angular.element(window).on('resize', this._bindedOnResize);
       },
@@ -32149,6 +32175,10 @@ limitations under the License.
       },
 
       _onDrag: function(event) {
+        if (!this.isSwipeable()) {
+          return;
+        }
+
         this._lastDragEvent = event;
 
         var scroll = this._scroll - this._getScrollDelta(event);
@@ -32160,15 +32190,49 @@ limitations under the License.
 
       _onDragEnd: function(event) {
         this._scroll = this._scroll - this._getScrollDelta(event);
-        this._tryFirePostChangeEvent();
 
         if (this._isOverScroll(this._scroll)) {
-          this._scrollToKillOverScroll();
+          var waitForAction = false;
+
+          this.emit('overscroll', {
+            carousel: this,
+            activeIndex: this.getActiveCarouselItemIndex(),
+            direction: this._getOverScrollDirection(),
+            waitToReturn: function(promise) {
+              waitForAction = true;
+              promise.then(
+                function() {
+                  this._scrollToKillOverScroll();
+                }.bind(this)
+              );
+            }.bind(this)
+          });
+
+          if (!waitForAction) {
+            this._scrollToKillOverScroll();
+          }
         } else if (this._lastDragEvent !== null) {
           this._startMomemtumScroll(event);
         }
         this._lastDragEvent = null;
         event.gesture.preventDefault();
+      },
+
+      _stopPropagation: function(event) {
+        if (this.isSwipeable()) {
+          event.stopPropagation();
+        }
+      },
+
+      _getTouchEvents: function() {
+        var EVENTS = [
+          'drag', 'dragstart', 'dragend',
+          'dragup', 'dragdown', 'dragleft', 
+          'dragright', 'swipe', 'swipeup',
+          'swipedown', 'swipeleft', 'swiperight'
+        ];
+
+        return EVENTS.join(' ');
       },
 
       /**
@@ -32223,6 +32287,22 @@ limitations under the License.
 
             return left - right;
           });
+
+          arr = arr.filter(function(item, pos) {
+            return !pos || item != arr[pos - 1];
+          });
+
+          var lastScroll = this._lastActiveIndex * size,
+            scrollRatio = Math.abs(scroll - lastScroll) / size;
+
+          if (scrollRatio <= this.getAutoScrollRatio()) {
+            return lastScroll;
+          }
+          else if (scrollRatio > this.getAutoScrollRatio() && scrollRatio < 1.0) {
+            if (arr[0] === lastScroll && arr.length > 1) {
+              return arr[1];
+            }
+          }
 
           return arr[0];
         } else {
@@ -32299,6 +32379,25 @@ limitations under the License.
         return false;
       },
 
+      _getOverScrollDirection: function() {
+        if (this._isVertical()) {
+          if (this._scroll <= 0) {
+            return 'up';
+          }
+          else {
+            return 'down';
+          }
+        }
+        else {
+          if (this._scroll <= 0) {
+            return 'left';
+          }
+          else {
+            return 'right';
+          }
+        }
+      },
+
       _scrollToKillOverScroll: function() {
         var duration = 0.4;
         
@@ -32344,12 +32443,23 @@ limitations under the License.
        * Refresh carousel item layout.
        */
       refresh: function() {
+        // Bug fix
+        if (this._getCarouselItemSize() === 0) {
+          return;
+        }
+
         this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
         this._layoutCarouselItems();
 
         if (this._lastState && this._lastState.width > 0) {
-          this._scroll = this._scroll / this._lastState.width * this._getCarouselItemSize() * this._getCarouselItemCount();
-          this._scrollTo(this._scroll);
+          var scroll = this._scroll;
+
+          if (this._isOverScroll(scroll)) {
+            this._scrollToKillOverScroll();
+          } 
+          else {
+            this._scrollTo(scroll);
+          }
         }
 
         this._saveLastState();
@@ -32378,6 +32488,7 @@ limitations under the License.
 
         this._hammer.off('drag', this._bindedOnDrag);
         this._hammer.off('dragend', this._bindedOnDragEnd);
+        this._hammer.off(this._getTouchEvents(), this._bindedStopPropagation);
 
         angular.element(window).off('resize', this._bindedOnResize);
 
@@ -34144,6 +34255,16 @@ limitations under the License.
       _profiling: false,
 
       /**
+       * @member {Boolean}
+       */
+      _pushing: false,
+
+      /**
+       * @member {Boolean}
+       */
+      _popping: false,
+
+      /**
        * @param {Object} options
        * @param options.element jqLite Object to manage with navigator
        * @param options.scope Angular.js scope object
@@ -34193,6 +34314,17 @@ limitations under the License.
         throw new Error('invalid state');
       },
 
+      _safeApply: function(scope, fn) {
+        var phase = scope.$root.$$phase;
+
+        fn = fn || function() {};
+        if (phase !== '$apply' && phase !== '$digest') {
+          scope.$apply(fn);
+        }
+        else {
+          fn.apply(this);
+        }
+      },
 
       _createPageElementAndLinkFunction : function(templateHTML, pageScope, done) {
         var div = document.createElement('div');
@@ -34212,16 +34344,10 @@ limitations under the License.
           element: pageElement,
           link: function() {
             link(pageScope);
-            safeApply(pageScope);
-          }
+            this._safeApply(pageScope);
+          }.bind(this)
         };
 
-        function safeApply(scope) {
-          var phase = scope.$root.$$phase;
-          if (phase !== '$apply' && phase !== '$digest') {
-            scope.$apply();
-          }
-        }
       },
 
       /**
@@ -34306,6 +34432,10 @@ limitations under the License.
       pushPage: function(page, options) {
         if (this._profiling) {
           console.time('pushPage');
+        }
+
+        if (this._pushing) {
+          throw new Error('Can\'t push page when push is in progress.');
         }
 
         options = options || {};
@@ -34440,6 +34570,7 @@ limitations under the License.
 
           unlock();
 
+          this._pushing = false;
           this.emit('postpush', event);
 
           if (typeof options.onTransitionEnd === 'function') {
@@ -34477,6 +34608,7 @@ limitations under the License.
           }
         };
 
+        this._pushing = true;
         this.emit('prepush', prePushEvent);
 
         return isCanceled;
@@ -34495,6 +34627,7 @@ limitations under the License.
           }
         };
 
+        this._popping = true;
         this.emit('prepop', prePopEvent);
 
         return isCanceled;
@@ -34507,16 +34640,19 @@ limitations under the License.
        */
       popPage: function(options) {
         options = options || {};
-
-        if (this.pages.length <= 1) {
-          throw new Error('NavigatorView\'s page stack is empty.');
-        }
-
-        if (this._emitPrePopEvent()) {
-          return;
+        
+        if (this._popping) {
+          throw new Error('Can\'t pop page when pop is in progress.');
         }
 
         this._doorLock.waitUnlock(function() {
+          if (this.pages.length <= 1) {
+            throw new Error('NavigatorView\'s page stack is empty.');
+          }
+
+          if (this._emitPrePopEvent()) {
+            return;
+          }
           this._popPage(options);
         }.bind(this));
       },
@@ -34541,6 +34677,8 @@ limitations under the License.
         var callback = function() {
           leavePage.destroy();
           unlock();
+
+          this._popping = false;
           this.emit('postpop', event);
           event.leavePage = null;
 
@@ -35635,6 +35773,332 @@ limitations under the License.
 
 */
 
+(function(){
+  'use strict';
+  var module = angular.module('onsen');
+
+  module.factory('PullHookView', ['$onsen', '$parse', function($onsen, $parse) {
+
+    var PullHookView = Class.extend({
+
+      STATE_INITIAL: 'initial',
+      STATE_PREACTION: 'preaction',
+      STATE_ACTION: 'action',
+
+      /**
+       * @param {Object} scope
+       * @param {jqLite} element
+       * @param {Object} attrs
+       */
+      init: function(scope, element, attrs) {
+        this._element = element;
+        this._scope = scope;
+        this._attrs = attrs;
+
+        this._scrollElement = this._createScrollElement();
+        this._pageElement = this._scrollElement.parent();
+
+        if (!this._pageElement.hasClass('page__content')) {
+          throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> element.');
+        }
+
+        this._currentTranslation = 0;
+
+        this._createEventListeners();
+        this._setState(this.STATE_INITIAL, true);
+        this._setStyle();
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
+      },
+
+      _createScrollElement: function() {
+        var scrollElement = angular.element('<div>')
+          .addClass('scroll');
+
+        var pageElement = this._element.parent(),
+          children = pageElement.children();
+
+        pageElement.append(scrollElement);
+        scrollElement.append(children);
+
+        return scrollElement; 
+      },
+
+      _setStyle: function() {
+        var h = this._getHeight();
+
+        this._element.css({
+          top: '-' + h + 'px',
+          height: h + 'px',
+          lineHeight: h + 'px'
+        });
+      },
+    
+      _onScroll: function(event) {
+        var el = this._pageElement[0];
+
+        // Don't allow scrolling outside view.
+        el.scrollTop = Math.max(0, el.scrollTop);
+      },
+
+      _generateTranslationTransform: function(scroll) {
+        return 'translate3d(0px, ' + scroll + 'px, 0px)';
+      },
+
+      _onDrag: function(event) {
+        if (this.isDisabled()) {
+          return;
+        }
+
+        // Hack to make it work on Android 4.4 WebView. Scrolls manually near the top of the page so
+        // there will be no inertial scroll when scrolling down. Allowing default scrolling will
+        // kill all 'touchmove' events.
+        var el = this._pageElement[0];
+        el.scrollTop = this._startScroll - event.gesture.deltaY;
+        if (el.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
+          event.gesture.preventDefault();
+        }
+
+        if (this._currentTranslation === 0 && this._getCurrentScroll() === 0) {
+          this._transitionDragLength = event.gesture.deltaY;
+
+          var direction = event.gesture.interimDirection;
+          if (direction === 'down') {
+            this._transitionDragLength -= 1;
+          }
+          else {
+            this._transitionDragLength += 1;
+          }
+        }
+
+        var scroll = event.gesture.deltaY - this._startScroll;
+
+        scroll = Math.max(scroll, 0);
+
+        if (this._thresholdHeightEnabled() && scroll >= this._getThresholdHeight()) {
+          event.gesture.stopDetect();
+
+          setImmediate(function() {
+            this._setState(this.STATE_ACTION);
+            this._translateTo(this._getHeight(), {animate: true});
+
+            this._waitForAction(this._onDone.bind(this));
+          }.bind(this));
+        }
+        else if (scroll >= this._getHeight()) {
+          this._setState(this.STATE_PREACTION);
+        }
+        else {
+          this._setState(this.STATE_INITIAL);
+        }
+  
+        this._translateTo(scroll);
+      },
+
+      _onDragStart: function(event) {
+        if (this.isDisabled()) {
+          return;
+        }
+
+        this._startScroll = this._getCurrentScroll();
+      },
+
+      _onDragEnd: function(event) {
+        if (this.isDisabled()) {
+          return;
+        }
+
+        if (this._currentTranslation > 0) {
+          var scroll = this._currentTranslation;
+
+          if (scroll > this._getHeight()) {
+            this._setState(this.STATE_ACTION);
+
+            this._translateTo(this._getHeight(), {animate: true});
+
+            this._waitForAction(this._onDone.bind(this));
+          }
+          else {
+            this._translateTo(0, {animate: true});
+          }
+        }
+      },
+
+      _waitForAction: function(done) {
+        if (this._attrs.ngAction) {
+          this._scope.$eval(this._attrs.ngAction, {$done: done});
+        }
+        else if (this._attrs.onAction) {
+          eval(this._attrs.onAction);
+        }
+        else {
+          done();
+        }
+      },
+
+      _onDone: function(done) {
+        this._translateTo(0, {animate: true});
+        this._setState(this.STATE_INITIAL);
+      },
+
+      _getHeight: function() {
+        return parseInt(this._element[0].getAttribute('height') || '64', 10);
+      },
+
+      setHeight: function(height) {
+        this._element[0].setAttribute('height', height + 'px');
+
+        this._setStyle();
+      },
+
+      setThresholdHeight: function(thresholdHeight) {
+        this._element[0].setAttribute('threshold-height', thresholdHeight + 'px');
+      },
+
+      _getThresholdHeight: function() {
+        return parseInt(this._element[0].getAttribute('threshold-height') || '96', 10);
+      },
+
+      _thresholdHeightEnabled: function() {
+        var th = this._getThresholdHeight();
+        return th > 0 && th >= this._getHeight();
+      },
+
+      _setState: function(state, noEvent) {
+        var oldState = this._getState();
+
+        this._scope.$evalAsync(function() {
+          this._element[0].setAttribute('state', state);
+        }.bind(this));
+
+        if (!noEvent && oldState !== this._getState()) {
+          this.emit('changestate', {
+            state: state,
+            pullHook: this
+          });
+        }
+      },
+
+      _getState: function() {
+        return this._element[0].getAttribute('state');
+      },
+
+      getCurrentState: function() {
+        return this._getState();
+      },
+
+      _getCurrentScroll: function() {
+        return this._pageElement[0].scrollTop;
+      },
+
+      isDisabled: function() {
+        return this._element[0].hasAttribute('disabled');
+      },
+
+      setDisabled: function(disabled) {
+        if (disabled) {
+          this._element[0].setAttribute('disabled', '');
+        }
+        else {
+          this._element[0].removeAttribute('disabled');
+        }
+      },
+
+      _translateTo: function(scroll, options) {
+        options = options || {};
+    
+        this._currentTranslation = scroll;
+
+        if (options.animate) {
+          animit(this._scrollElement[0])
+            .queue({
+              transform: this._generateTranslationTransform(scroll)
+            }, {
+              duration: 0.3,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .play(options.callback);
+        }
+        else {
+          animit(this._scrollElement[0])
+            .queue({
+              transform: this._generateTranslationTransform(scroll)
+            })
+            .play(options.callback);
+        }
+      },
+
+      _getMinimumScroll: function() {
+        var scrollHeight = this._scrollElement[0].getBoundingClientRect().height,
+          pageHeight = this._pageElement[0].getBoundingClientRect().height;
+
+        if (scrollHeight > pageHeight) {
+          return -(scrollHeight - pageHeight);
+        }
+        else {
+          return 0;
+        }
+
+      },
+
+      _createEventListeners: function() {
+        var element = this._scrollElement.parent();
+
+        this._hammer = new Hammer(element[0], {
+          dragMinDistance: 1,
+          dragDistanceCorrection: false
+        });
+
+        // Event listeners
+        this._bindedOnDrag = this._onDrag.bind(this);
+        this._bindedOnDragStart = this._onDragStart.bind(this);
+        this._bindedOnDragEnd = this._onDragEnd.bind(this);
+        this._bindedOnScroll = this._onScroll.bind(this);
+        
+        // Bind listeners
+        this._hammer.on('drag', this._bindedOnDrag);
+        this._hammer.on('dragstart', this._bindedOnDragStart);
+        this._hammer.on('dragend', this._bindedOnDragEnd);
+        element.on('scroll', this._bindedOnScroll);
+      },
+
+      _destroyEventListeners: function() {
+        var element = this._scrollElement[0].parentNode;
+
+        this._hammer.off('drag', this._bindedOnDrag);
+        this._hammer.off('dragstart', this._bindedOnDragStart);
+        this._hammer.off('dragend', this._bindedOnDragEnd);
+        element.off('scroll', this._bindedOnScroll);
+      },
+
+      _destroy: function() {
+        this._destroyEventListeners();
+        this._element = this._scope = this._attrs = null;
+      }
+    });
+
+    MicroEvent.mixin(PullHookView);
+    return PullHookView;
+  }]);
+})();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
 (function() {
   'use strict';
   var module = angular.module('onsen');
@@ -36158,7 +36622,7 @@ limitations under the License.
 
       /** Black mask */
       backgroundMask : angular.element(
-        '<div style="position: absolute; width: 100%;' +
+        '<div style="z-index: 2; position: absolute; width: 100%;' +
         'height: 100%; background-color: black; opacity: 0;"></div>'
       ),
 
@@ -36625,9 +37089,14 @@ limitations under the License.
         this._menuPage = angular.element(element[0].querySelector('.onsen-sliding-menu__menu'));
         this._mainPage = angular.element(element[0].querySelector('.onsen-sliding-menu__main'));
 
+
         this._doorLock = new DoorLock();
 
         this._isRightMenu = attrs.side === 'right';
+
+        // Close menu on tap event.
+        this._mainPageHammer = new Hammer(this._mainPage[0]);
+        this._bindedOnTap = this._onTap.bind(this);
 
         var maxDistance = this._normalizeMaxSlideDistanceAttr();
         this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
@@ -36694,6 +37163,12 @@ limitations under the License.
         }
       },
 
+      _onTap: function() {
+        if (this.isMenuOpened()) {
+          this.closeMenu();
+        }
+      },
+
       _refreshMenuPageWidth: function() {
         var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
 
@@ -36709,6 +37184,8 @@ limitations under the License.
         this.emit('destroy', {slidingMenu: this});
 
         this._deviceBackButtonHandler.destroy();
+
+        this._mainPageHammer.off('tap', this._bindedOnTap);
         this._element = this._scope = this._attrs = null;
       },
 
@@ -37031,7 +37508,7 @@ limitations under the License.
       close: function(options) {
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
-        
+       
         this.emit('preclose');
 
         this._doorLock.waitUnlock(function() {
@@ -37046,6 +37523,9 @@ limitations under the License.
 
         this._animator.closeMenu(function() {
           unlock();
+
+          this._mainPage.children().css('pointer-events', '');
+          this._mainPageHammer.off('tap', this._bindedOnTap);
           this.emit('postclose');
           callback();
         }.bind(this), instant);
@@ -37078,6 +37558,9 @@ limitations under the License.
 
         this._animator.openMenu(function() {
           unlock();
+
+          this._mainPage.children().css('pointer-events', 'none');
+          this._mainPageHammer.on('tap', this._bindedOnTap);
           this.emit('postopen');
           callback();
         }.bind(this), instant);
@@ -37833,11 +38316,26 @@ limitations under the License.
         selectedTabItem.setActive();
 
         if (needLoad) {
-          this._loadPage(selectedTabItem.page, {
+          var removeElement = true;
+
+          if (previousTabItem && previousTabItem.isPersistent()) {
+              removeElement = false;
+              previousTabItem._pageElement = this._currentPageElement;
+          }
+
+          var params = {
             callback: function() {
               this.emit('postchange', {index: index, tabItem: selectedTabItem});
-            }.bind(this)
-          });
+            }.bind(this),
+            _removeElement: removeElement
+          };
+
+          if (selectedTabItem.isPersistent() && selectedTabItem._pageElement) {
+            this._loadPersistentPageDOM(selectedTabItem._pageElement, params);
+          }
+          else {
+            this._loadPage(selectedTabItem.page, params);
+          }
         }
 
         for (var i = 0; i < this._tabItems.length; i++) {
@@ -37879,9 +38377,9 @@ limitations under the License.
           }
         } else {
           if (this._scope.hideTabs) {
-            this._tabbarElement.css('bottom', '0px');
+            this._contentElement.css('bottom', '0px');
           } else {
-            this._tabbarElement.css('bottom', '');
+            this._contentElement.css('bottom', '');
           }
         }
       },
@@ -37928,7 +38426,7 @@ limitations under the License.
         $onsen.getPageHTMLAsync(page).then(function(html) {
           var pageElement = angular.element(html.trim());
 
-          this._loadPageDOM(page, pageElement, options);
+          this._loadPageDOM(pageElement, options);
 
         }.bind(this), function() {
           throw new Error('Page is not found: ' + page);
@@ -37936,12 +38434,49 @@ limitations under the License.
       },
 
       /**
-       * @param {String} page
+       * @param {jqLite} element
+       * @param {Object} scope
+       * @param {Object} options
+       * @param {Object} options.animation
+       */
+      _switchPage: function(element, scope, options) {
+        if (this._currentPageElement) {
+          var oldPageElement = this._currentPageElement;
+          var oldPageScope = this._currentPageScope;
+
+          this._currentPageElement = element;
+          this._currentPageScope = scope;
+
+          this._getAnimatorOption(options).apply(element, oldPageElement, function() {
+            if (options._removeElement) {
+              oldPageElement.remove();
+              oldPageScope.$destroy();
+            }
+            else {
+              oldPageElement.css('display', 'none');
+            }
+
+            if (options.callback instanceof Function) {
+              options.callback();
+            }
+          });
+
+        } else {
+          this._currentPageElement = element;
+          this._currentPageScope = scope;
+
+          if (options.callback instanceof Function) {
+            options.callback();
+          }
+        } 
+      },
+
+      /**
        * @param {jqLite} element
        * @param {Object} options
        * @param {Object} options.animation
        */
-      _loadPageDOM: function(page, element, options) {
+      _loadPageDOM: function(element, options) {
         options = options || {};
         var pageScope = this._scope.$parent.$new();
         var link = $compile(element);
@@ -37950,30 +38485,19 @@ limitations under the License.
         var pageContent = link(pageScope);
         pageScope.$evalAsync();
 
-        if (this._currentPageElement) {
-          var oldPageElement = this._currentPageElement;
-          var oldPageScope = this._currentPageScope;
+        this._switchPage(pageContent, pageScope, options);
+      },
 
-          this._currentPageElement = pageContent;
-          this._currentPageScope = pageScope;
+      /**
+       * @param {jqLite} element
+       * @param {Object} options
+       * @param {Object} options.animation
+       */
+      _loadPersistentPageDOM: function(element, options) {
+        options = options || {};
 
-          this._getAnimatorOption(options).apply(pageContent, oldPageElement, function() {
-            oldPageElement.remove();
-            oldPageScope.$destroy();
-
-            if (options.callback instanceof Function) {
-              options.callback();
-            }
-          });
-
-        } else {
-          this._currentPageElement = pageContent;
-          this._currentPageScope = pageScope;
-
-          if (options.callback instanceof Function) {
-            options.callback();
-          }
-        }
+        element.css('display', 'block');
+        this._switchPage(element, element.scope(), options); 
       },
 
       /**
@@ -38211,6 +38735,11 @@ limitations under the License.
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
+          var navigator = ons.findParentComponentUntil('ons-navigator', element);
+          scope.$watch(function() { return navigator.pages.length; }, function(nbrOfPages) {
+            scope.showBackButton = nbrOfPages > 1;
+          });
+
           $onsen.addModifierMethods(backButton, 'toolbar-button--*', element.children());
 
           transclude(scope, function(clonedElement) {
@@ -38402,14 +38931,6 @@ limitations under the License.
         // if animation is not specified -> default is slide-left
         scope.item.animation = initialAnimation;
 
-        attrs.$observe('disabled', function(disabled) {
-          if (disabled === 'true') {
-            element.attr('disabled', true);
-          } else {
-            element.attr('disabled', false);
-          }
-        });
-
         scope.$watch('animation', function(newAnimation) {
           if (newAnimation) {
             if (scope.item.animation) {
@@ -38437,7 +38958,7 @@ limitations under the License.
 
           scope = element = attrs = null;
         });
-        
+
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };
@@ -38474,6 +38995,9 @@ limitations under the License.
  * @param auto-scroll
  *    [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
  *    [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
+ * @param auto-scroll-ratio
+ *    [en]A number between 0.0 and 1.0 that specifies how much the user must drag the carousel in order for it to auto scroll to the next item.[en]
+ *    [ja][/ja]
  * @param swipeable
  *    [en]If this attribute is set the carousel can be scrolled by drag or swipe.[/en]
  *    [ja]この属性がある時、カルーセルをスワイプやドラッグで移動できるようになります。[/ja]
@@ -38483,6 +39007,9 @@ limitations under the License.
  * @param initial-index
  *    [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
  *    [ja]最初に表示するons-carousel-itemを0始まりのインデックスで指定します。デフォルトは0です。[/ja]
+ * @param auto-refresh
+ *    [en]When this attribute is set the carousel will automatically refresh when the number of child nodes change.[/en]
+ *    [ja]この属性がある時、子要素の数が変わるとカルーセルは自動的に更新されます。[/ja]
  *
  * @property next()
  *    [en]Show next ons-carousel item.[/en]
@@ -38514,6 +39041,12 @@ limitations under the License.
  * @property isAutoScrollEnabled()
  *    [en]Returns whether the "auto-scroll" attribute is set or not.[/en]
  *    [ja]auto-scroll属性があるかどうかを返す。[/ja] 
+ * @property setAutoScrollRatio(ratio)
+ *    [en]Set the auto scroll ratio. Must be a value between 0.0 and 1.0.[/en]
+ *    [ja][/ja]
+ * @property getAutoScrollRatio()
+ *    [en]Returns the current auto scroll ratio.[/en]
+ *    [ja][/ja]
  * @property setOverscrollable(overscrollable)
  *    [en]Set whether the carousel is overscrollable or not.[/en]
  *    [ja]overscroll属性があるかどうかを設定する。[/ja] 
@@ -38521,8 +39054,8 @@ limitations under the License.
  *    [en]Returns whether the carousel is overscrollable or not.[/en]
  *    [ja]overscroll属性があるかどうかを返す。[/ja] 
  * @property on(eventName,listener)
- *    [en]Add an event listener. Preset events are "postchange" and "refresh".[/en]
- *    [ja]イベントリスナーを追加します。"postchange"か"refresh"を指定できます。[/ja]
+ *    [en]Add an event listener. Preset events are "postchange", "overscroll" and "refresh".[/en]
+ *    [ja]イベントリスナーを追加します。"postchange"か"overscroll"か"refresh"を指定できます。[/ja]
  * @property refresh()
  *    [en]Update the layout of the carousel. Used when adding ons-carousel-items dynamically or to automatically adjust the size.[/en]
  *    [ja]レイアウトや内部の状態を最新のものに更新する。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用する。[/ja] 
@@ -38564,23 +39097,39 @@ limitations under the License.
         element.addClass(templater('carousel--*'));
 
         return function(scope, element, attrs) {
-          setImmediate(function() {
-            var carousel = new CarouselView(scope, element, attrs);
+          var carousel = new CarouselView(scope, element, attrs);
 
-            $onsen.aliasStack.register('ons.carousel', carousel);
-            element.data('ons-carousel', carousel);
+          $onsen.aliasStack.register('ons.carousel', carousel);
+          element.data('ons-carousel', carousel);
 
-            $onsen.declareVarAttribute(attrs, carousel);
+          $onsen.declareVarAttribute(attrs, carousel);
 
-            scope.$on('$destroy', function() {
-              carousel._events = undefined;
-              element.data('ons-carousel', undefined);
-              $onsen.aliasStack.unregister('ons.carousel', carousel);
-              element = null;
-            });
-
-            $onsen.fireComponentEvent(element[0], 'init');
+          scope.$on('$destroy', function() {
+            carousel._events = undefined;
+            element.data('ons-carousel', undefined);
+            $onsen.aliasStack.unregister('ons.carousel', carousel);
+            element = null;
           });
+
+          if (element[0].hasAttribute('auto-refresh')) {
+            // Refresh carousel when items are added or removed.
+            scope.$watch(
+              function () { 
+                return element[0].childNodes.length; 
+              },
+              function () {
+                setImmediate(function() {
+                  carousel.refresh();
+                });
+              }
+            );
+          }
+
+          setImmediate(function() {
+            carousel.refresh();
+          });
+
+          $onsen.fireComponentEvent(element[0], 'init');
         };
       },
 
@@ -39088,7 +39637,7 @@ limitations under the License.
  * @seealso ons-if-platform [en]ons-if-platform component[/en][ja]ons-if-platformコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
- * <div if-orientation="portrait">
+ * <div ons-if-orientation="portrait">
  *   ...
  * </div>
  */
@@ -40175,6 +40724,115 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+ * @id pull-hook 
+ * @name ons-pull-hook
+ * @description
+ *   [en]Component that adds "pull-to-refresh" to an <ons-page> element.[/en]
+ *   [ja]ons-page要素以下でいわゆるpull to refreshを実装するためのコンポーネントです。[/ja]
+ * @param var
+ *   [en]Variable name to refer to this component.[/en]
+ *   [ja]このコンポーネントを参照する名前を指定します。[/ja]
+ * @param disabled
+ *   [en]If this attribute is set the "pull-to-refresh" functionality is disabled.[/en]
+ *   [ja]この属性がある時、disabled状態になりアクションが実行されなくなります[/ja]
+ * @param ng-action
+ *   [en]Use to specify custom behavior when the page is pulled down. A `$done` function is available to tell the component that the action is completed.[/en]
+ *   [ja]pull downしたときの振る舞いを指定します。アクションが完了した時には`$done`関数を呼び出します。[/ja]
+ * @param on-action
+ *   [en]Same as `ng-action` but can be used without AngularJS. A function called `done` is available to call when action is complete.[/en]
+ *   [ja]ng-actionと同じですが、AngularJS無しで利用する場合に利用できます。アクションが完了した時には`$done`関数を呼び出します。[/ja]
+ * @param height
+ *   [en]Specify the height of the component. When pulled down further than this value it will switch to the "preaction" state. The default value is "64px".[/en]
+ *   [ja]コンポーネントの高さを指定します。この高さ以上にpull downすると"preaction"状態に移行します。デフォルトの値は"64px"です。[/ja]
+ * @param threshold-height
+ *   [en]Specify the threshold height. The component automatically switches to the "action" state when pulled further than this value. The default value is "96px". A negative value or a value less than the height will disable this property.[/en]
+ *   [ja]閾値となる高さを指定します。この値で指定した高さよりもpull downすると、このコンポーネントは自動的に"action"状態に移行します。[/ja]
+ * @property setDisabled(disabled)
+ *   [en]Disable or enable the component.[/en]
+ *   [ja]disabled状態にするかどうかを設定できます。[/ja]
+ * @property isDisabled()
+ *   [en]Returns whether the component is disabled or enabled.[/en]
+ *   [ja]dsiabled状態になっているかを得ることが出来ます。[/ja]
+ * @property setHeight(height)
+ *   [en]Specify the height.[/en]
+ *   [ja]高さを指定できます。[/ja]
+ * @property setThresholdHeight(thresholdHeight)
+ *   [en]Specify the threshold height.[/en]
+ *   [ja]閾値となる高さを指定できます。[/ja]
+ * @property on(eventName,listener)
+ *  [en]Add an event listener to listen for the "changestate" event.[/en]
+ *  [ja]イベントリスナーを指定できます。[/ja]
+ * @example
+ * <script>
+ *   ons.bootstrap()
+ *
+ *   .controller('MyController', function($scope, $timeout) {
+ *     $scope.items = [3, 2 ,1];
+ *
+ *     $scope.load = function($done) {
+ *       $timeout(function() {
+ *         $scope.items.unshift($scope.items.length + 1);
+ *         $done();
+ *       }, 1000);
+ *     };
+ *   });
+ * </script>
+ *
+ * <ons-page ng-controller="MyController">
+ *   <ons-pull-hook var="loaded" ng-action="load($done)">
+ *     <span ng-switch="loader.getCurrentState()">
+ *       <span ng-switch-when="initial">Pull down to refresh</span>
+ *       <span ng-switch-when="preaction">Release to refresh</span>
+ *       <span ng-switch-when="action">Loading data. Please wait...</span>
+ *     </span>
+ *   </ons-pull-hook>
+ *   <ons-list>
+ *     <ons-list-item ng-repeat="item in items">
+ *       Item #{{ item }}
+ *     </ons-list-item>
+ *   </ons-list>
+ * </ons-page>
+ */
+
+(function() {
+  'use strict';
+
+  var module = angular.module('onsen');
+
+  /**
+   * Pull hook directive.
+   */
+  module.directive('onsPullHook', ['$onsen', 'PullHookView', function($onsen, PullHookView) {
+    return {
+      restrict: 'E',
+      replace: false,
+      scope: true,
+      compile: function(element, attrs) {
+        return {
+          pre: function(scope, element, attrs) {
+            var pullHook = new PullHookView(scope, element, attrs);
+
+            $onsen.declareVarAttribute(attrs, pullHook);
+            element.data('ons-pull-hook', pullHook);
+
+            scope.$on('$destroy', function() {
+              pullHook._events = undefined;
+              element.data('ons-pull-hook', undefined);
+              scope = element = attrs = null;
+            });
+          },
+          post: function(scope, element) {
+            $onsen.fireComponentEvent(element[0], 'init');
+          }
+        };
+      }
+    };
+  }]);
+
+})();
+
+/**
+ * @ngdoc directive
  * @id row
  * @name ons-row
  * @description
@@ -40264,14 +40922,14 @@ limitations under the License.
       compile: function(element, attrs) {
         var content = element.addClass('ons-scroller').children().remove();
         
-        var wrapper = angular.element('<div></div>');
-        wrapper.addClass('ons-scroller__content ons-scroller-inner');
-        element.append(wrapper);
-
         return function(scope, element, attrs, controller, transclude) {
           if (attrs.ngController) {
             throw new Error('"ons-scroller" can\'t accept "ng-controller" directive.');
           }
+
+          var wrapper = angular.element('<div></div>');
+          wrapper.addClass('ons-scroller__content ons-scroller-inner');
+          element.append(wrapper);
 
           transclude(scope.$parent, function(cloned) {
             wrapper.append(cloned);
@@ -40674,8 +41332,11 @@ limitations under the License.
               scope.model = value;
             });
 
-            scope.$watch('model', function(model) {
-              set(scope.$parent, model);
+            scope.$watch('model', function(to, from) {
+              set(scope.$parent, to);
+              if (to !== from) {
+                scope.$eval(attrs.ngChange);
+              }
             });
           }
 
@@ -40727,7 +41388,10 @@ limitations under the License.
  *  [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
  * @param no-reload
  *  [en]Set if the page shouldn't be reloaded when clicking on the same tab twice.[/en]
- *  [jp]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/jp]
+ *  [ja]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/ja]
+ * @param persistent
+ *  [en]Set to make the tab content persistent. If this attribute it set the DOM will not be destroyed when navigating to another tab.[/en]
+ *  [ja]このタブで読み込んだページを永続化します。この属性があるとき、別のタブのページに切り替えても、読み込んだページのDOM要素は破棄されずに単に非表示になります。[/ja]
  * @codepen pGuDL
  * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
@@ -40786,7 +41450,8 @@ limitations under the License.
         icon: '@',
         activeIcon: '@',
         label: '@',
-        noReload: '@'
+        noReload: '@',
+        persistent: '@'
       },
 
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab.tpl',
@@ -40845,6 +41510,10 @@ limitations under the License.
 
             angular.element(element[0].querySelectorAll('[ons-tab-inactive]')).css('display', 'inherit');
             angular.element(element[0].querySelectorAll('[ons-tab-active]')).css('display', 'none');
+          };
+
+          scope.isPersistent = function() {
+            return typeof scope.persistent != 'undefined';
           };
 
           /**
@@ -41241,7 +41910,12 @@ limitations under the License.
  * @description
  *  [en]Button component for ons-toolbar and ons-bottom-toolbar.[/en]
  *  [ja]ons-toolbarあるいはons-bottom-toolbarに設置できるボタン用コンポーネントです。[/ja]
- * @param modifier [en]Specify modifier name to specify custom styles.[/en][ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+ * @param modifier 
+ *  [en]Specify modifier name to specify custom styles.[/en]
+ *  [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+ * @param disabled
+ *  [en]Specify if button should be disabled.[/en]
+ *  [ja]ボタンを無効化する場合は指定してください。[/ja]
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
@@ -41266,7 +41940,8 @@ limitations under the License.
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
         pre: function(scope, element, attrs) {
-          var toolbarButton = new GenericView(scope, element, attrs);
+          var toolbarButton = new GenericView(scope, element, attrs),
+            innerElement = element[0].querySelector('.toolbar-button');
 
           $onsen.declareVarAttribute(attrs, toolbarButton);
 
@@ -41286,6 +41961,15 @@ limitations under the License.
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
+
+          attrs.$observe('disabled', function(value) {
+            if (value === false || typeof value === 'undefined') {
+              innerElement.removeAttribute('disabled');
+            }
+            else {
+              innerElement.setAttribute('disabled', 'disabled');
+            }
+          });
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
           $onsen.addModifierMethods(toolbarButton, 'toolbar-button--*', element.children());
