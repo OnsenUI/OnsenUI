@@ -433,6 +433,11 @@ limitations under the License.
           return;
         }
 
+        var direction = event.gesture.direction;
+        if ((this._isVertical() && (direction === 'left' || direction === 'right')) || (!this._isVertical() && (direction === 'up' || direction === 'down'))) {
+          return;
+        }
+
         this._lastDragEvent = event;
 
         var scroll = this._scroll - this._getScrollDelta(event);
