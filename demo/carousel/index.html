@@ -126,6 +126,7 @@
         <ons-list-item ng-click="navi.pushPage('example4.html')" modifier="chevron">Example4</ons-list-item>
         <ons-list-item ng-click="navi.pushPage('example5.html')" modifier="chevron">Example5</ons-list-item>
         <ons-list-item ng-click="navi.pushPage('example6.html')" modifier="chevron">Example6</ons-list-item>
+        <ons-list-item ng-click="navi.pushPage('example7.html')" modifier="chevron">Example7</ons-list-item>
       </ons-list>
 
     </ons-page>
@@ -313,6 +314,18 @@
         </ons-carousel-item>
       </ons-carousel>
     </ons-page>
+  </ons-template>
+
+  <ons-template id="example7.html">
+    <ons-carousel swipeable overscrollable auto-scroll style="height: 100%; width: 100%;">
+      <ons-carousel-item ng-repeat="i in [0,1]">
+        <ons-list>  
+          <ons-list-item ng-repeat="j in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
+            Item #{{ j + i * 21 }}
+          </ons-list-item>
+        </ons-list>
+      </ons-carousel-item>
+    </ons-carousel-item>
   </ons-template>
 
 </body>

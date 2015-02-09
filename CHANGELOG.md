@@ -31,6 +31,7 @@ v1.2.2-dev
  * ons-tabbar: Fixed broken `hide-tabs` attribute. ([atakayama](https://github.com/atakayama))
  * ons-pull-hook: Implemented `<ons-pull-hook>` component.
  * ons-carousel: Fixed [#359](https://github.com/OnsenUI/OnsenUI/issues/359).
+ * ons-carousel: Fixed [#380](https://github.com/OnsenUI/OnsenUI/issues/380).
 
 v1.2.1
 ----
