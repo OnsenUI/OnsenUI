@@ -79,7 +79,7 @@ limitations under the License.
       _onScroll: function(event) {
         var el = this._pageElement[0];
 
-        if (el.scrollTop < 0 ){
+        if (el.scrollTop < 0) {
           el.scrollTop = 0;
         }
       },
