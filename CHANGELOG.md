@@ -30,6 +30,8 @@ v1.2.2-dev
  * ons-tab: Implemented `persistent` attributed to prevent tab content from being destroyed when navigating to another tab.
  * ons-tabbar: Fixed broken `hide-tabs` attribute. ([atakayama](https://github.com/atakayama))
  * ons-pull-hook: Implemented `<ons-pull-hook>` component.
+ * core: Removed the alias stack so variables like `ons.navigator` and `ons.slidingMenu` can not be used anymore.
+ * core: Added `ons.componentBase` variable. All component variables are attached to this variable if it is truthy. Can be changed to avoid polluting the global scope. Default is `window`.
 
 v1.2.1
 ----

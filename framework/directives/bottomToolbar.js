@@ -46,14 +46,12 @@
             var bottomToolbar = new GenericView(scope, element, attrs);
             
             $onsen.declareVarAttribute(attrs, bottomToolbar);
-            $onsen.aliasStack.register('ons.bottomToolbar', bottomToolbar);
             element.data('ons-bottomToolbar', bottomToolbar);
 
             scope.$on('$destroy', function() {
               bottomToolbar._events = undefined;
               $onsen.removeModifierMethods(bottomToolbar);
               element.data('ons-bottomToolbar', undefined);
-              $onsen.aliasStack.unregister('ons.bottomToolbar', bottomToolbar);
               element = null;
             });
 
