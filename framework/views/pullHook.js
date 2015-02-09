@@ -79,8 +79,9 @@ limitations under the License.
       _onScroll: function(event) {
         var el = this._pageElement[0];
 
-        // Don't allow scrolling outside view.
-        el.scrollTop = Math.max(0, el.scrollTop);
+        if (el.scrollTop < 0 ){
+          el.scrollTop = 0;
+        }
       },
 
       _generateTranslationTransform: function(scroll) {

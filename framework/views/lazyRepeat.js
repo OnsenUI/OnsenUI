@@ -104,6 +104,24 @@ limitations under the License.
       
       _renderElement: function(item) {
         if (this._isRendered(item.index)) {
+          // Update content even if it's already added to DOM
+          // to account for changes within the list.
+          var currentItem = this._renderedElements[item.index];
+
+          if (this._delegate.configureItemScope) {
+            this._delegate.configureItemScope(item.index, currentItem.scope);
+          }
+          else if (this._delegate.createItemContent) {
+            var newContent = angular.element(this._delegate.createItemContent(item.index)),
+              oldContent = currentItem.element.children();
+
+            if (newContent.html() !== oldContent.html()) {
+              currentItem.element
+                .append(newContent);
+              oldContent.remove();
+            }
+          }
+
           return;
         }
 
@@ -197,14 +215,14 @@ limitations under the License.
           cnt = this._countItems();
 
         var startIndex = this._calculateStartIndex(topPosition);
-        startIndex = Math.max(startIndex - 10, 0);
+        startIndex = Math.max(startIndex - 30, 0);
 
         if (startIndex > 0) {
           topPosition += this._itemHeightSum[startIndex - 1];
         }
 
         var items = [];
-        for (var i = startIndex; i < cnt && topPosition < 2 * window.innerHeight; i++) {
+        for (var i = startIndex; i < cnt && topPosition < 4 * window.innerHeight; i++) {
           var h = this._getItemHeight();
 
           if (i >= this._itemHeightSum.length) {
