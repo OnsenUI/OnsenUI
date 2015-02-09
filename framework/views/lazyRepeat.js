@@ -179,8 +179,15 @@ limitations under the License.
 
         element.element.remove();
         element.scope.$destroy();
+        element.element = element.scope = null;
 
         delete this._renderedElements[i];
+      },
+
+      _removeAllElements: function() {
+        for (var key in this._renderedElements) {
+          this._removeElement(key);
+        }
       },
 
       _calculateStartIndex: function(current) {
@@ -273,7 +280,8 @@ limitations under the License.
       
       _destroy: function() {
         this._removeEventListeners(); 
-        this._element = this._scope = this._attrs = null;
+        this._removeAllElements();
+        this._parentElement = this._renderedElements = this._element = this._scope = this._attrs = null;
       }
     });
 
