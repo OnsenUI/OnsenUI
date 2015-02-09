@@ -32,6 +32,7 @@ v1.2.2-dev
  * ons-pull-hook: Implemented `<ons-pull-hook>` component.
  * ons-carousel: Fixed [#359](https://github.com/OnsenUI/OnsenUI/issues/359).
  * ons-carousel: Fixed [#380](https://github.com/OnsenUI/OnsenUI/issues/380).
+ * ons-sliding-menu: Fixed [#382](https://github.com/OnsenUI/OnsenUI/issues/382).
 
 v1.2.1
 ----
