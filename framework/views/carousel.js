@@ -147,6 +147,8 @@ limitations under the License.
         this._layoutCarouselItems();
         this._setupInitialIndex();
 
+        this._attrs.$observe('direction', this._onDirectionChange.bind(this));
+
         this._scope.$on('$destroy', this._destroy.bind(this));
 
         this._saveLastState();
@@ -154,6 +156,21 @@ limitations under the License.
 
       _onResize: function() {
         this.refresh();
+      },
+
+      _onDirectionChange: function() {
+         if (this._isVertical()) {
+          this._element.css({
+            overflowX: 'auto',
+            overflowY: ''
+          });
+        }
+        else {
+          this._element.css({
+            overflowX: '',
+            overflowY: 'auto'
+          });
+        }
       },
 
       _saveLastState: function() {
@@ -430,6 +447,11 @@ limitations under the License.
 
       _onDrag: function(event) {
         if (!this.isSwipeable()) {
+          return;
+        }
+
+        var direction = event.gesture.direction;
+        if ((this._isVertical() && (direction === 'left' || direction === 'right')) || (!this._isVertical() && (direction === 'up' || direction === 'down'))) {
           return;
         }
 
