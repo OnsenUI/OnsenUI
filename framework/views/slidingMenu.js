@@ -615,6 +615,13 @@ limitations under the License.
 
           this._mainPage.children().css('pointer-events', '');
           this._mainPageHammer.off('tap', this._bindedOnTap);
+
+          // iOS fix to stop scrolling.
+          var pageContent = this._mainPage[0].querySelector('.page__content');
+          if (pageContent) {
+            angular.element(pageContent).removeClass('noscroll');
+          }
+
           this.emit('postclose');
           callback();
         }.bind(this), instant);
@@ -650,7 +657,16 @@ limitations under the License.
 
           this._mainPage.children().css('pointer-events', 'none');
           this._mainPageHammer.on('tap', this._bindedOnTap);
+
+          // iOS fix to stop scrolling.
+          var pageContent = this._mainPage[0].querySelector('.page__content');
+          if (pageContent) {
+            angular.element(pageContent).addClass('noscroll');
+          }
+
           this.emit('postopen');
+
+
           callback();
         }.bind(this), instant);
       },
