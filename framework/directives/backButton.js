@@ -33,14 +33,12 @@
           
           $onsen.declareVarAttribute(attrs, backButton);
 
-          $onsen.aliasStack.register('ons.backButton', backButton);
           element.data('ons-back-button', backButton);
 
           scope.$on('$destroy', function() {
             backButton._events = undefined;
             $onsen.removeModifierMethods(backButton);
             element.data('ons-back-button', undefined);
-            $onsen.aliasStack.unregister('ons.backButton', backButton);
             element = null;
           });
 

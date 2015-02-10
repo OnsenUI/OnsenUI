@@ -94,13 +94,11 @@
 
           $onsen.declareVarAttribute(attrs, switchView);
           element.data('ons-switch', switchView);
-          $onsen.aliasStack.register('ons.switch', switchView);
 
           $onsen.cleaner.onDestroy(scope, function() {
             switchView._events = undefined;
             $onsen.removeModifierMethods(switchView);
             element.data('ons-switch', undefined);
-            $onsen.aliasStack.unregister('ons.switch', switchView);
             $onsen.clearComponent({
               element : element,
               scope : scope,

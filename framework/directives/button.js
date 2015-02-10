@@ -58,14 +58,12 @@
         var button = new ButtonView(scope, element, attrs);
         
         $onsen.declareVarAttribute(attrs, button);
-        $onsen.aliasStack.register('ons.button', button);
         element.data('ons-button', button);
 
         scope.$on('$destroy', function() {
           button._events = undefined;
           $onsen.removeModifierMethods(button);
           element.data('ons-button', undefined);
-          $onsen.aliasStack.unregister('ons.button', button);
           element = null;
         });
         var initialAnimation = 'slide-left';

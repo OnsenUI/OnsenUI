@@ -37,14 +37,12 @@
           var list = new GenericView(scope, element, attrs);
           
           $onsen.declareVarAttribute(attrs, list);
-          $onsen.aliasStack.register('ons.list', list);
           element.data('ons-list', list);
 
           scope.$on('$destroy', function() {
             list._events = undefined;
             $onsen.removeModifierMethods(list);
             element.data('ons-list', undefined);
-            $onsen.aliasStack.unregister('ons.list', list);
             element = null;
           });
 

@@ -101,14 +101,12 @@
             
             $onsen.addModifierMethods(dialog, 'dialog--*', angular.element(element[0].querySelector('.dialog')));
             $onsen.declareVarAttribute(attrs, dialog);
-            $onsen.aliasStack.register('ons.dialog', dialog);
             
             element.data('ons-dialog', dialog);
             scope.$on('$destroy', function() {
               dialog._events = undefined;
               $onsen.removeModifierMethods(dialog);
               element.data('ons-dialog', undefined);
-              $onsen.aliasStack.unregister('ons.dialog', dialog);
               element = null;
             });
           },

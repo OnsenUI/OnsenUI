@@ -123,14 +123,12 @@
             slidingMenu._appendMenuPage(menuHtml);
           }
 
-          $onsen.aliasStack.register('ons.slidingMenu', slidingMenu);
           $onsen.declareVarAttribute(attrs, slidingMenu);
           element.data('ons-sliding-menu', slidingMenu);
 
           scope.$on('$destroy', function(){
             slidingMenu._events = undefined;
             element.data('ons-sliding-menu', undefined);
-            $onsen.aliasStack.unregister('ons.slidingMenu', slidingMenu);
           });
 
           $onsen.fireComponentEvent(element[0], 'init');
