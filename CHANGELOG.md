@@ -31,6 +31,7 @@ v1.2.2-dev
  * ons-pull-hook: Implemented `<ons-pull-hook>` component.
  * core: Removed the alias stack so variables like `ons.navigator` and `ons.slidingMenu` can not be used anymore.
  * core: Added `ons.componentBase` variable. All component variables are attached to this variable if it is truthy. Can be changed to avoid polluting the global scope. Default is `window`.
+ * ons-lazy-repeat: Implemented `<ons-lazy-repeat>` component.
  * ons-carousel: Fixed [#359](https://github.com/OnsenUI/OnsenUI/issues/359).
  * ons-carousel: Fixed [#380](https://github.com/OnsenUI/OnsenUI/issues/380).
  * ons-sliding-menu: Fixed [#382](https://github.com/OnsenUI/OnsenUI/issues/382).
