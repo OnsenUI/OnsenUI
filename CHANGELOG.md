@@ -20,7 +20,6 @@ v1.2.2-dev
  * ons-carousel: Fixed [#352](https://github.com/OnsenUI/OnsenUI/issues/352). Added `auto-scroll-ratio` attribute and related methods.
  * ons-carousel: When carousel is swipeable it doesn not propagate touch events to parent.
  * ons-switch: Added `ngChange` directive.
- * ons-navigator: Navigator will raise an error if pushPage() or popPage() are called when a push or pop already is in progress. This fixed issue [#349](https://github.com/OnsenUI/OnsenUI/issues/349).
  * ons-button: Fixed so it can be used with `ngDisabled`.
  * ons-toolbar-button: Fixed so it can be used with `ngDisabled`. This fixes issue [#321](https://github.com/OnsenUI/issues/321).
  * ons-carousel: Fixed unresponsive carousel drag event for Android.
@@ -31,6 +30,9 @@ v1.2.2-dev
  * ons-tabbar: Fixed broken `hide-tabs` attribute. ([atakayama](https://github.com/atakayama))
  * ons-pull-hook: Implemented `<ons-pull-hook>` component.
  * ons-lazy-repeat: Implemented `<ons-lazy-repeat>` component.
+ * ons-carousel: Fixed [#359](https://github.com/OnsenUI/OnsenUI/issues/359).
+ * ons-carousel: Fixed [#380](https://github.com/OnsenUI/OnsenUI/issues/380).
+ * ons-sliding-menu: Fixed [#382](https://github.com/OnsenUI/OnsenUI/issues/382).
 
 v1.2.1
 ----
