@@ -198,7 +198,8 @@ limitations under the License.
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
         attrs.$observe('swipeable', this._onSwipeableChanged.bind(this));
 
-        window.addEventListener('resize', this._onWindowResize.bind(this));
+        this._bindedOnWindowResize = this._onWindowResize.bind(this);
+        window.addEventListener('resize', this._bindedOnWindowResize);
 
         this._boundHandleEvent = this._handleEvent.bind(this);
         this._bindEvents();
@@ -271,6 +272,7 @@ limitations under the License.
         this.emit('destroy', {slidingMenu: this});
 
         this._deviceBackButtonHandler.destroy();
+        window.removeEventListener('resize', this._bindedOnWindowResize);
 
         this._mainPageHammer.off('tap', this._bindedOnTap);
         this._element = this._scope = this._attrs = null;
