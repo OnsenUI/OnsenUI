@@ -45,6 +45,10 @@
     app.controller('MyCtrl', function($scope) {
       $scope.MyDelegate = {
         configureItemScope : function(index, itemScope) {
+          if (itemScope.item) {
+            return;
+          }
+
           console.log("Created item #" + index);
           itemScope.item = {
             title: 'Item #' + (index + 1),
