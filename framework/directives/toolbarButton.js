@@ -40,14 +40,12 @@
 
           $onsen.declareVarAttribute(attrs, toolbarButton);
 
-          $onsen.aliasStack.register('ons.toolbarButton', toolbarButton);
           element.data('ons-toolbar-button', toolbarButton);
 
           scope.$on('$destroy', function() {
             toolbarButton._events = undefined;
             $onsen.removeModifierMethods(toolbarButton);
             element.data('ons-toolbar-button', undefined);
-            $onsen.aliasStack.unregister('ons.toolbarButton', toolbarButton);
             element = null;
           });
 

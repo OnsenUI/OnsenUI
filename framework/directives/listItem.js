@@ -37,14 +37,12 @@
 
           $onsen.declareVarAttribute(attrs, listItem);
 
-          $onsen.aliasStack.register('ons.listItem', listItem);
           element.data('ons-list-item', listItem);
 
           scope.$on('$destroy', function() {
             listItem._events = undefined;
             $onsen.removeModifierMethods(listItem);
             element.data('ons-list-item', undefined);
-            $onsen.aliasStack.unregister('ons.listItem', listItem);
             element = null;
           });
 

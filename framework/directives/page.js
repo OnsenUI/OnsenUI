@@ -101,7 +101,6 @@
 
       $onsen.declareVarAttribute(attrs, page);
 
-      $onsen.aliasStack.register('ons.page', page);
       element.data('ons-page', page);
 
       var modifierTemplater = $onsen.generateModifierTemplater(attrs),
@@ -121,7 +120,6 @@
         page._events = undefined;
         $onsen.removeModifierMethods(page);
         element.data('ons-page', undefined);
-        $onsen.aliasStack.unregister('ons.page', page);
 
         $onsen.clearComponent({
           element: element,

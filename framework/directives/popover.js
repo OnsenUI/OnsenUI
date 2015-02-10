@@ -92,7 +92,6 @@
             var popover = new PopoverView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, popover);
-            $onsen.aliasStack.register('ons.popover', popover);
 
             element.data('ons-popover', popover);
 
@@ -100,7 +99,6 @@
               popover._events = undefined;
               $onsen.removeModifierMethods(popover);
               element.data('ons-popover', undefined);
-              $onsen.aliasStack.unregister('ons.popover', popover);
               element = null;
             });
 

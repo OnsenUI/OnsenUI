@@ -26,7 +26,6 @@ limitations under the License.
   module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner, DeviceBackButtonHandler) {
 
     var unlockerDict = createUnlockerDict();
-    var aliasStack = createAliasStack();
     var $onsen = createOnsenService();
 
     return $onsen;
@@ -35,8 +34,6 @@ limitations under the License.
       return {
 
         DIRECTIVE_TEMPLATE_URL: 'templates',
-
-        aliasStack: aliasStack,
 
         cleaner: ComponentCleaner,
 
@@ -384,7 +381,10 @@ limitations under the License.
             container[names[names.length - 1]] = object;
           }
 
-          set($window, names, object);
+          if (ons.componentBase) {
+            set(ons.componentBase, names, object);
+          }
+
           set($rootScope, names, object);
         }
       };
@@ -454,55 +454,6 @@ limitations under the License.
           } else {
             callback();
           }
-        }
-      };
-    }
-
-    function createAliasStack() {
-      /**
-       * Global object stack manager.
-       *
-       * e.g. "ons.screen", "ons.navigator"
-       */
-      return {
-        _stackDict : {},
-
-        /**
-         * @param {String} name
-         * @param {Object} object
-         */
-        register: function(name, object) {
-          this._getStack(name).push(object);
-          
-          $onsen._defineVar(name, object);
-        },
-
-        /**
-         * @param {String} name
-         * @param {Object} target
-         */
-        unregister: function(name, target) {
-          var stack = this._getStack(name);
-
-          var index = stack.indexOf(target);
-          if (index === -1) {
-            throw new Error('no such object: ' + target);
-          }
-          stack.splice(index, 1);
-
-          var obj = stack.length > 0 ? stack[stack.length - 1] : null;
-          $onsen._defineVar(name, obj);
-        },
-
-        /**
-         * @param {String} name
-         */
-        _getStack: function(name) {
-          if (!this._stackDict[name]) {
-            this._stackDict[name] = [];
-          }
-
-          return this._stackDict[name];
         }
       };
     }
