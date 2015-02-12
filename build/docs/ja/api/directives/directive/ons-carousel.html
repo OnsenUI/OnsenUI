@@ -68,6 +68,13 @@
               <td>この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。</td>
             </tr>
             
+            <span class="anchor" id="ons-carousel-auto-scroll-ratio"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">auto-scroll-ratio</td>
+              <td>[en]A number between 0.0 and 1.0 that specifies how much the user must drag the carousel in order for it to auto scroll to the next item.[en]
+   [ja][/ja]</td>
+            </tr>
+            
             <span class="anchor" id="ons-carousel-swipeable"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">swipeable</td>
@@ -84,6 +91,12 @@
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">initial-index</td>
               <td>最初に表示するons-carousel-itemを0始まりのインデックスで指定します。デフォルトは0です。</td>
+            </tr>
+            
+            <span class="anchor" id="ons-carousel-auto-refresh"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">auto-refresh</td>
+              <td>この属性がある時、子要素の数が変わるとカルーセルは自動的に更新されます。</td>
             </tr>
             
           </tbody>
@@ -158,6 +171,20 @@
             <td>auto-scroll属性があるかどうかを返す。</td>
           </tr>
           
+          <span class="anchor" id="setAutoScrollRatio(ratio)-setAutoScrollRatio(ratio)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setAutoScrollRatio(ratio)</code></td>
+            <td>[en]Set the auto scroll ratio. Must be a value between 0.0 and 1.0.[/en]
+   [ja][/ja]</td>
+          </tr>
+          
+          <span class="anchor" id="getAutoScrollRatio()-getAutoScrollRatio()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>getAutoScrollRatio()</code></td>
+            <td>[en]Returns the current auto scroll ratio.[/en]
+   [ja][/ja]</td>
+          </tr>
+          
           <span class="anchor" id="setOverscrollable(overscrollable)-setOverscrollable(overscrollable)"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>setOverscrollable(overscrollable)</code></td>
@@ -173,7 +200,7 @@
           <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>on(eventName,listener)</code></td>
-            <td>イベントリスナーを追加します。&quot;postchange&quot;か&quot;refresh&quot;を指定できます。</td>
+            <td>イベントリスナーを追加します。&quot;postchange&quot;か&quot;overscroll&quot;か&quot;refresh&quot;を指定できます。</td>
           </tr>
           
           <span class="anchor" id="refresh()-refresh()"></span>

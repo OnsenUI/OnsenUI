@@ -1,0 +1,76 @@
+<div class="directive-container" id="module:directives.directive:ons-lazy-repeat">
+  <div>
+    <section class="description">
+      <p>Using this component a list with millions of items can be rendered without a drop in performance. It does that by &quot;lazily&quot; loading elements into the DOM when they come into view and removing items from the DOM when they are not visible.</p>
+    </section>
+
+    <span class="anchor" id="ons-lazy-repeat-attributes"></span>
+
+    
+      <section>
+        <h4>Example</h4>
+        <pre><code class="xml">&lt;script&gt;
+  ons.bootstrap()
+
+  .controller(&#39;MyController&#39;, function($scope) {
+    $scope.MyDelegate = {
+      countItems: function() {
+        // Return number of items.
+        return 1000000;
+      },
+
+      calculateItemHeight: function(index) {
+        // Return the height of an item in pixels.
+        return 45;
+      },
+
+      configureItemScope: function(index, itemScope) {
+        // Initialize scope
+        itemScope.item = &#39;Item #&#39; + (index + 1);
+      },
+
+      destroyItemScope: function(index, itemScope) {
+        // Optional method that is called when an item is unloaded.
+        console.log(&#39;Destroyed item with index: &#39; + index);
+      }
+    };
+  });
+&lt;/script&gt;
+
+&lt;ons-list ng-controller=&quot;MyController&quot;&gt;
+  &lt;ons-list-item ons-lazy-repeat=&quot;MyDelegate&quot;`&gt;
+    {{ item }}
+  &lt;/ons-list-item&gt;
+&lt;/ons-list&gt;</code></pre>
+      </section>
+    
+
+    
+      <section>
+        <h4>Attributes</h4>
+        <table>
+          <tbody>
+            
+            <span class="anchor" id="ons-lazy-repeat-ons-lazy-repeat"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">ons-lazy-repeat</td>
+              <td>A delegate object, can be either an object attached to the scope (when using AngularJS) or a normal JavaScript variable.</td>
+            </tr>
+            
+          </tbody>
+        </table>
+      </section>
+    
+
+    <span class="anchor" id="ons-lazy-repeat-methods"></span>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+</div>

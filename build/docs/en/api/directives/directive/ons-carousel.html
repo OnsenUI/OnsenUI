@@ -68,6 +68,13 @@
               <td>If this attribute is set the carousel will be automatically scrolled to the closest item border when released.</td>
             </tr>
             
+            <span class="anchor" id="ons-carousel-auto-scroll-ratio"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">auto-scroll-ratio</td>
+              <td>[en]A number between 0.0 and 1.0 that specifies how much the user must drag the carousel in order for it to auto scroll to the next item.[en]
+   [ja][/ja]</td>
+            </tr>
+            
             <span class="anchor" id="ons-carousel-swipeable"></span>
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">swipeable</td>
@@ -84,6 +91,12 @@
             <tr ng-repeat="attribute in directive.attributes">
               <td class="attribute-name">initial-index</td>
               <td>Specify the index of the ons-carousel-item to show initially. Default is 0.</td>
+            </tr>
+            
+            <span class="anchor" id="ons-carousel-auto-refresh"></span>
+            <tr ng-repeat="attribute in directive.attributes">
+              <td class="attribute-name">auto-refresh</td>
+              <td>When this attribute is set the carousel will automatically refresh when the number of child nodes change.</td>
             </tr>
             
           </tbody>
@@ -158,6 +171,18 @@
             <td>Returns whether the &quot;auto-scroll&quot; attribute is set or not.</td>
           </tr>
           
+          <span class="anchor" id="setAutoScrollRatio(ratio)-setAutoScrollRatio(ratio)"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>setAutoScrollRatio(ratio)</code></td>
+            <td>Set the auto scroll ratio. Must be a value between 0.0 and 1.0.</td>
+          </tr>
+          
+          <span class="anchor" id="getAutoScrollRatio()-getAutoScrollRatio()"></span>
+          <tr ng-repeat="method in directive.methods">
+            <td><code>getAutoScrollRatio()</code></td>
+            <td>Returns the current auto scroll ratio.</td>
+          </tr>
+          
           <span class="anchor" id="setOverscrollable(overscrollable)-setOverscrollable(overscrollable)"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>setOverscrollable(overscrollable)</code></td>
@@ -173,7 +198,7 @@
           <span class="anchor" id="on(eventName,listener)-on(eventName,listener)"></span>
           <tr ng-repeat="method in directive.methods">
             <td><code>on(eventName,listener)</code></td>
-            <td>Add an event listener. Preset events are &quot;postchange&quot; and &quot;refresh&quot;.</td>
+            <td>Add an event listener. Preset events are &quot;postchange&quot;, &quot;overscroll&quot; and &quot;refresh&quot;.</td>
           </tr>
           
           <span class="anchor" id="refresh()-refresh()"></span>
