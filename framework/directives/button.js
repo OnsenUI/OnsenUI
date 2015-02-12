@@ -2,6 +2,9 @@
  * @ngdoc directive
  * @id button
  * @name ons-button
+ * @modifier light 
+ * [en]hoge[/en]
+ * [ja]hoge[/ja]
  * @description
  *    [en]Button component. If you want to place a button in a toolbar, use ons-toolbar-button or ons-back-button instead.[/en]
  *    [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、ons-toolbar-buttonもしくはons-back-buttonコンポーネントを使用してください。[/ja]
