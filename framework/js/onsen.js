@@ -15,6 +15,47 @@ limitations under the License.
 
 */
 
+/**
+ * @ngdoc object
+ * @name ons
+ * @category util
+ * @category fuga
+ * @description 
+ * [ja]Onsen UIで利用できるグローバルなオブジェクトです。このオブジェクトは、AngularJSのスコープから参照することができます。 [/ja]
+ * [en]A global object for using Onsen UI.[/en]
+ */
+
+/**
+ * @ngdoc method
+ * @signature ready(callback)
+ * @description 
+ * [ja]アプリの初期化に利用するメソッドです。渡された関数を、Onsen UIの初期化が終了している時点で必ず呼びます。[/ja]
+ * [en][/en]
+ * @param {Function} callback
+ * @return {void}
+ */
+
+/**
+ * @ngdoc method
+ * @signature createPopOver(pageUrl)
+ * @description 
+ * [ja]ポップオーバーのインスタンスを作成します。[/ja]
+ * [en][/en]
+ * @param {String} pageUrl
+ * @return {Promise}
+ */
+
+/**
+ * @ngdoc method
+ * @signature bootstrap([moduleName, [dependencies]])
+ * @description 
+ * [ja]Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます[/ja]
+ * [en][/en]
+ * @param {String} [moduleName] [ja]Angular.jsでのモジュール名[/ja]
+ * @param {Array} [dependencies] [ja]依存するAngular.jsのモジュール名の配列[/ja]
+ * @return {void}
+ */
+
 window.ons = (function(){
   'use strict';
 
