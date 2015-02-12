@@ -95,6 +95,10 @@ ons-toolbar ~ .page__content {
   display: none;
 }
 
+.page__content.noscroll {
+  overflow: hidden; 
+}
+
 .tab-bar__status-bar-fill ~ .tab-bar--top__content {
   top: 71px;
 }
@@ -109,3 +113,12 @@ ons-popover[disabled] {
   pointer-events: none;
   opacity: 0.75;
 }
+
+ons-pull-hook {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+

@@ -4,8 +4,19 @@ catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/back_button.tpl',
-    '<span class="toolbar-button--quiet {{modifierTemplater(\'toolbar-button--*\')}}" ng-click="$root.ons.findParentComponentUntil(\'ons-navigator\', $event).popPage()" style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">\n' +
-    '  <i class="ion-ios7-arrow-back ons-back-button__icon" style="vertical-align: top; background-color: transparent; height: 44px; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; width: 16px; display: inline-block; padding-top: 1px;"></i><span style="vertical-align: top; display: inline-block; line-height: 44px; height: 44px;" class="back-button__label"></span>\n' +
+    '<span \n' +
+    '  class="toolbar-button--quiet {{modifierTemplater(\'toolbar-button--*\')}}" \n' +
+    '  ng-click="$root.ons.findParentComponentUntil(\'ons-navigator\', $event).popPage()" \n' +
+    '  ng-show="showBackButton"\n' +
+    '  style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">\n' +
+    '  \n' +
+    '  <i \n' +
+    '    class="ion-ios-arrow-back ons-back-button__icon" \n' +
+    '    style="vertical-align: top; background-color: transparent; height: 44px; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; width: 16px; display: inline-block; padding-top: 1px;"></i>\n' +
+    '\n' +
+    '  <span \n' +
+    '    style="vertical-align: top; display: inline-block; line-height: 44px; height: 44px;" \n' +
+    '    class="back-button__label"></span>\n' +
     '</span>\n' +
     '');
 }]);

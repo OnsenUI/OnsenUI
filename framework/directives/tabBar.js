@@ -96,7 +96,6 @@
 
         scope.tabbarId = tabbarView._tabbarId;
 
-        $onsen.aliasStack.register('ons.tabbar', tabbarView);
         element.data('ons-tabbar', tabbarView);
         $onsen.declareVarAttribute(attrs, tabbarView);
 
@@ -108,7 +107,6 @@
           tabbarView._events = undefined;
           $onsen.removeModifierMethods(tabbarView);
           element.data('ons-tabbar', undefined);
-          $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
         });
       
         $onsen.fireComponentEvent(element[0], 'init');

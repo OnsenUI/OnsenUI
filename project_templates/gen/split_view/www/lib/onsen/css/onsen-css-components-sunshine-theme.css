@@ -1708,14 +1708,14 @@ h6 {
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-b">
         <button class="tab-bar__button">
-          <i class="tab-bar__icon ion-ios7-cloud-outline"></i>
+          <i class="tab-bar__icon ion-ios-cloud-outline"></i>
         </button>
       </label>
 
       <label class="tab-bar__item">
         <input type="radio" name="tab-bar-b">
         <button class="tab-bar__button">
-          <i class="tab-bar__icon ion-ios7-pie"></i>
+          <i class="tab-bar__icon ion-ios-pie"></i>
         </button>
       </label>
     </div>
@@ -2105,8 +2105,8 @@ h6 {
   opacity: 0;
 }
 .checkbox > input[type="checkbox"]:focus + .checkbox__checkmark:before {
-  -webkit-box-shadow: var-box-shadow--cta;
-  box-shadow: var-box-shadow--cta;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .checkbox > input[type="checkbox"]:disabled + .checkbox__checkmark {
   opacity: 0.3;
@@ -2275,8 +2275,8 @@ h6 {
 }
 .checkbox--noborder > input[type="checkbox"]:focus + .checkbox__checkmark:before {
   border: none;
-  -webkit-box-shadow: var-box-shadow--cta;
-  box-shadow: var-box-shadow--cta;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .checkbox--noborder > input[type="checkbox"]:disabled + .checkbox__checkmark {
   opacity: 0.3;
@@ -2374,8 +2374,8 @@ h6 {
   height: 24px;
   background: transparent;
   border: none;
-  -webkit-border-radius: var-border-radius--checkbox;
-  border-radius: var-border-radius--checkbox;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
   left: 0;
 }
 .radio-button__checkmark {
@@ -3035,7 +3035,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: #999;
 }
 .text-input:invalid {
-  border: 1px solid var-input-invalid-border-color;
+  border: 1px solid #ddd;
   color: #333;
 }
 /* topdoc
@@ -3103,7 +3103,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-color: transparent;
 }
 .text-input--transparent:invalid {
-  border: 1px solid var-input-invalid-border-color;
+  border: 1px solid #ddd;
   color: #333;
   border: none;
   background-color: transparent;
@@ -3175,11 +3175,11 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-color: transparent;
 }
 .text-input--underbar:invalid {
-  border: 1px solid var-input-invalid-border-color;
+  border: 1px solid #ddd;
   color: #333;
   border: none;
   background-color: transparent;
-  border-bottom: 1px solid var-input-invalid-border-color;
+  border-bottom: 1px solid #ddd;
 }
 /* topdoc
   name: Textarea
@@ -3212,7 +3212,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   resize: none;
   outline: none;
   padding: 5px 5px 5px 5px;
-  font-size: var-font-size--text-input;
+  font-size: 15px;
   font-weight: 400;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -3267,7 +3267,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   padding: 5px 5px 5px 5px;
   padding-left: 0;
   padding-right: 0;
-  font-size: var-font-size--text-input;
+  font-size: 15px;
   font-weight: 400;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -3735,6 +3735,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   color: #1f1f21;
   overflow: hidden;
   min-height: 100px;
+  height: 100%;
 }
 .popover__content > * {
   overflow: hidden;

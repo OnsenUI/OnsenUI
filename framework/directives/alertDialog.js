@@ -243,7 +243,6 @@
             var alertDialog = new AlertDialogView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, alertDialog);
-            $onsen.aliasStack.register('ons.alertDialog', alertDialog);
             $onsen.addModifierMethods(alertDialog, 'alert-dialog--*', element);
 
             if (titleElement.length) {
@@ -261,7 +260,6 @@
               alertDialog._events = undefined;
               $onsen.removeModifierMethods(alertDialog);
               element.data('ons-alert-dialog', undefined);
-              $onsen.aliasStack.unregister('ons.alertDialog', alertDialog);
               element = null;
             });
           },

@@ -61,14 +61,12 @@
         var button = new ButtonView(scope, element, attrs);
         
         $onsen.declareVarAttribute(attrs, button);
-        $onsen.aliasStack.register('ons.button', button);
         element.data('ons-button', button);
 
         scope.$on('$destroy', function() {
           button._events = undefined;
           $onsen.removeModifierMethods(button);
           element.data('ons-button', undefined);
-          $onsen.aliasStack.unregister('ons.button', button);
           element = null;
         });
         var initialAnimation = 'slide-left';
@@ -91,14 +89,6 @@
         scope.item = {};
         // if animation is not specified -> default is slide-left
         scope.item.animation = initialAnimation;
-
-        attrs.$observe('disabled', function(disabled) {
-          if (disabled === 'true') {
-            element.attr('disabled', true);
-          } else {
-            element.attr('disabled', false);
-          }
-        });
 
         scope.$watch('animation', function(newAnimation) {
           if (newAnimation) {
@@ -127,7 +117,7 @@
 
           scope = element = attrs = null;
         });
-        
+
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };

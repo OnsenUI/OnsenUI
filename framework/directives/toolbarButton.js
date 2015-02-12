@@ -5,7 +5,12 @@
  * @description
  *  [en]Button component for ons-toolbar and ons-bottom-toolbar.[/en]
  *  [ja]ons-toolbarあるいはons-bottom-toolbarに設置できるボタン用コンポーネントです。[/ja]
- * @param modifier [en]Specify modifier name to specify custom styles.[/en][ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+ * @param modifier 
+ *  [en]Specify modifier name to specify custom styles.[/en]
+ *  [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+ * @param disabled
+ *  [en]Specify if button should be disabled.[/en]
+ *  [ja]ボタンを無効化する場合は指定してください。[/ja]
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
@@ -30,18 +35,17 @@
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
         pre: function(scope, element, attrs) {
-          var toolbarButton = new GenericView(scope, element, attrs);
+          var toolbarButton = new GenericView(scope, element, attrs),
+            innerElement = element[0].querySelector('.toolbar-button');
 
           $onsen.declareVarAttribute(attrs, toolbarButton);
 
-          $onsen.aliasStack.register('ons.toolbarButton', toolbarButton);
           element.data('ons-toolbar-button', toolbarButton);
 
           scope.$on('$destroy', function() {
             toolbarButton._events = undefined;
             $onsen.removeModifierMethods(toolbarButton);
             element.data('ons-toolbar-button', undefined);
-            $onsen.aliasStack.unregister('ons.toolbarButton', toolbarButton);
             element = null;
           });
 
@@ -50,6 +54,15 @@
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
+
+          attrs.$observe('disabled', function(value) {
+            if (value === false || typeof value === 'undefined') {
+              innerElement.removeAttribute('disabled');
+            }
+            else {
+              innerElement.setAttribute('disabled', 'disabled');
+            }
+          });
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
           $onsen.addModifierMethods(toolbarButton, 'toolbar-button--*', element.children());

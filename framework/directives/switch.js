@@ -84,20 +84,21 @@
               scope.model = value;
             });
 
-            scope.$watch('model', function(model) {
-              set(scope.$parent, model);
+            scope.$watch('model', function(to, from) {
+              set(scope.$parent, to);
+              if (to !== from) {
+                scope.$eval(attrs.ngChange);
+              }
             });
           }
 
           $onsen.declareVarAttribute(attrs, switchView);
           element.data('ons-switch', switchView);
-          $onsen.aliasStack.register('ons.switch', switchView);
 
           $onsen.cleaner.onDestroy(scope, function() {
             switchView._events = undefined;
             $onsen.removeModifierMethods(switchView);
             element.data('ons-switch', undefined);
-            $onsen.aliasStack.unregister('ons.switch', switchView);
             $onsen.clearComponent({
               element : element,
               scope : scope,

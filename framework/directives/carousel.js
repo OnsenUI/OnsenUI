@@ -28,6 +28,9 @@
  * @param auto-scroll
  *    [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
  *    [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
+ * @param auto-scroll-ratio
+ *    [en]A number between 0.0 and 1.0 that specifies how much the user must drag the carousel in order for it to auto scroll to the next item.[en]
+ *    [ja][/ja]
  * @param swipeable
  *    [en]If this attribute is set the carousel can be scrolled by drag or swipe.[/en]
  *    [ja]この属性がある時、カルーセルをスワイプやドラッグで移動できるようになります。[/ja]
@@ -71,6 +74,12 @@
  * @property isAutoScrollEnabled()
  *    [en]Returns whether the "auto-scroll" attribute is set or not.[/en]
  *    [ja]auto-scroll属性があるかどうかを返す。[/ja] 
+ * @property setAutoScrollRatio(ratio)
+ *    [en]Set the auto scroll ratio. Must be a value between 0.0 and 1.0.[/en]
+ *    [ja][/ja]
+ * @property getAutoScrollRatio()
+ *    [en]Returns the current auto scroll ratio.[/en]
+ *    [ja][/ja]
  * @property setOverscrollable(overscrollable)
  *    [en]Set whether the carousel is overscrollable or not.[/en]
  *    [ja]overscroll属性があるかどうかを設定する。[/ja] 
@@ -78,8 +87,8 @@
  *    [en]Returns whether the carousel is overscrollable or not.[/en]
  *    [ja]overscroll属性があるかどうかを返す。[/ja] 
  * @property on(eventName,listener)
- *    [en]Add an event listener. Preset events are "postchange" and "refresh".[/en]
- *    [ja]イベントリスナーを追加します。"postchange"か"refresh"を指定できます。[/ja]
+ *    [en]Add an event listener. Preset events are "postchange", "overscroll" and "refresh".[/en]
+ *    [ja]イベントリスナーを追加します。"postchange"か"overscroll"か"refresh"を指定できます。[/ja]
  * @property refresh()
  *    [en]Update the layout of the carousel. Used when adding ons-carousel-items dynamically or to automatically adjust the size.[/en]
  *    [ja]レイアウトや内部の状態を最新のものに更新する。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用する。[/ja] 
@@ -121,35 +130,37 @@
         element.addClass(templater('carousel--*'));
 
         return function(scope, element, attrs) {
-          setImmediate(function() {
-            var carousel = new CarouselView(scope, element, attrs);
+          var carousel = new CarouselView(scope, element, attrs);
 
-            $onsen.aliasStack.register('ons.carousel', carousel);
-            element.data('ons-carousel', carousel);
+          element.data('ons-carousel', carousel);
 
-            $onsen.declareVarAttribute(attrs, carousel);
+          $onsen.declareVarAttribute(attrs, carousel);
 
-            scope.$on('$destroy', function() {
-              carousel._events = undefined;
-              element.data('ons-carousel', undefined);
-              $onsen.aliasStack.unregister('ons.carousel', carousel);
-              element = null;
-            });
-
-            if (element[0].hasAttribute('auto-refresh')) {
-              // Refresh carousel when items are added or removed.
-              scope.$watch(
-                function () { 
-                  return element[0].childNodes.length; 
-                },
-                function () {
-                  carousel.refresh();
-                }
-              );
-            }
-
-            $onsen.fireComponentEvent(element[0], 'init');
+          scope.$on('$destroy', function() {
+            carousel._events = undefined;
+            element.data('ons-carousel', undefined);
+            element = null;
           });
+
+          if (element[0].hasAttribute('auto-refresh')) {
+            // Refresh carousel when items are added or removed.
+            scope.$watch(
+              function () { 
+                return element[0].childNodes.length; 
+              },
+              function () {
+                setImmediate(function() {
+                  carousel.refresh();
+                });
+              }
+            );
+          }
+
+          setImmediate(function() {
+            carousel.refresh();
+          });
+
+          $onsen.fireComponentEvent(element[0], 'init');
         };
       },
 

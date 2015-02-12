@@ -8,6 +8,36 @@ v1.2.2-dev
  * ons-navigator: Fixed [#350](https://github.com/OnsenUI/OnsenUI/issues/350).
  * ons-navigator: Fixed broken Android slide animation.
  * ons-carousel: Added 'auto-refresh' attribute to automatically refresh carousel when items are added or removed in AngularJS.
+ * ons-back-button: Automatically hide back button when there is only one page in the stack.
+ * ons-scroller: Fixed [#389](https://github.com/OnsenUI/OnsenUI/issues/389).
+ * ons-button: Fixed broken isDisabled() method.
+ * ons-icon: Updated Ionicons to version 2.0.1.
+ * ons-carousel: Fixed [#369](https://github.com/OnsenUI/OnsenUI/issues/369).
+ * ons-popover: Fixed [#367](https://github.com/OnsenUI/OnsenUI/issues/367).
+ * ons-carousel: Fixed [#365](https://github.com/OnsenUI/OnsenUI/issues/365).
+ * ons-carousel: Fixed [#398](https://github.com/OnsenUI/OnsenUI/issues/398).
+ * ons-carousel: Fixed [#353](https://github.com/OnsenUI/OnsenUI/issues/353). Added `overscroll` event and `event.waitToReturn(promise)` method.
+ * ons-carousel: Fixed [#352](https://github.com/OnsenUI/OnsenUI/issues/352). Added `auto-scroll-ratio` attribute and related methods.
+ * ons-carousel: When carousel is swipeable it doesn not propagate touch events to parent.
+ * ons-switch: Added `ngChange` directive.
+ * ons-button: Fixed so it can be used with `ngDisabled`.
+ * ons-toolbar-button: Fixed so it can be used with `ngDisabled`. This fixes issue [#321](https://github.com/OnsenUI/issues/321).
+ * ons-carousel: Fixed unresponsive carousel drag event for Android.
+ * ons-carousel: Fixed [#401](https://github.com/OnsenUI/OnsenUI/issues/401).
+ * ons-sliding-menu: Clicking outside the menu when it is open will now close it.
+ * ons-sliding-menu: Fixed [#319](https://github.com/OnsenUI/OnsenUI/issues/319).
+ * ons-tab: Implemented `persistent` attributed to prevent tab content from being destroyed when navigating to another tab.
+ * ons-tabbar: Fixed broken `hide-tabs` attribute. ([atakayama](https://github.com/atakayama))
+ * ons-pull-hook: Implemented `<ons-pull-hook>` component.
+ * core: Removed the alias stack so variables like `ons.navigator` and `ons.slidingMenu` can not be used anymore.
+ * core: Added `ons.componentBase` variable. All component variables are attached to this variable if it is truthy. Can be changed to avoid polluting the global scope. Default is `window`.
+ * ons-lazy-repeat: Implemented `<ons-lazy-repeat>` component.
+ * ons-carousel: Fixed [#359](https://github.com/OnsenUI/OnsenUI/issues/359).
+ * ons-carousel: Fixed [#380](https://github.com/OnsenUI/OnsenUI/issues/380).
+ * ons-sliding-menu: Fixed [#382](https://github.com/OnsenUI/OnsenUI/issues/382).
+ * ons-popover: Fixed [#416](https://github.com/OnsenUI/OnsenUI/issues/416).
+ * ons-sliding-menu: Main page not scrollable on iOS when menu is open.
+ * ons-modal: Background not scrollable on iOS.
 
 v1.2.1
 ----

@@ -177,6 +177,10 @@ window.ons = (function(){
 
       _unlockersDict: {},
 
+      // Object to attach component variables to when using the var="..." attribute.
+      // Can be set to null to avoid polluting the global scope.
+      componentBase: window,
+
       /**
        * Bootstrap this document as a Onsen UI application.
        *

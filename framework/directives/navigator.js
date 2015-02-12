@@ -108,13 +108,11 @@
               pageElement = null;
             }
 
-            $onsen.aliasStack.register('ons.navigator', navigator);
             element.data('ons-navigator', navigator);
 
             scope.$on('$destroy', function() {
               navigator._events = undefined;
               element.data('ons-navigator', undefined);
-              $onsen.aliasStack.unregister('ons.navigator', navigator);
               element = null;
             });
 

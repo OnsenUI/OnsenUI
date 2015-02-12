@@ -176,9 +176,14 @@ limitations under the License.
         this._menuPage = angular.element(element[0].querySelector('.onsen-sliding-menu__menu'));
         this._mainPage = angular.element(element[0].querySelector('.onsen-sliding-menu__main'));
 
+
         this._doorLock = new DoorLock();
 
         this._isRightMenu = attrs.side === 'right';
+
+        // Close menu on tap event.
+        this._mainPageHammer = new Hammer(this._mainPage[0]);
+        this._bindedOnTap = this._onTap.bind(this);
 
         var maxDistance = this._normalizeMaxSlideDistanceAttr();
         this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
@@ -193,7 +198,8 @@ limitations under the License.
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
         attrs.$observe('swipeable', this._onSwipeableChanged.bind(this));
 
-        window.addEventListener('resize', this._onWindowResize.bind(this));
+        this._bindedOnWindowResize = this._onWindowResize.bind(this);
+        window.addEventListener('resize', this._bindedOnWindowResize);
 
         this._boundHandleEvent = this._handleEvent.bind(this);
         this._bindEvents();
@@ -245,6 +251,12 @@ limitations under the License.
         }
       },
 
+      _onTap: function() {
+        if (this.isMenuOpened()) {
+          this.closeMenu();
+        }
+      },
+
       _refreshMenuPageWidth: function() {
         var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
 
@@ -260,6 +272,9 @@ limitations under the License.
         this.emit('destroy', {slidingMenu: this});
 
         this._deviceBackButtonHandler.destroy();
+        window.removeEventListener('resize', this._bindedOnWindowResize);
+
+        this._mainPageHammer.off('tap', this._bindedOnTap);
         this._element = this._scope = this._attrs = null;
       },
 
@@ -582,7 +597,7 @@ limitations under the License.
       close: function(options) {
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
-        
+       
         this.emit('preclose');
 
         this._doorLock.waitUnlock(function() {
@@ -597,6 +612,16 @@ limitations under the License.
 
         this._animator.closeMenu(function() {
           unlock();
+
+          this._mainPage.children().css('pointer-events', '');
+          this._mainPageHammer.off('tap', this._bindedOnTap);
+
+          // iOS fix to stop scrolling.
+          var pageContent = this._mainPage[0].querySelector('.page__content');
+          if (pageContent) {
+            angular.element(pageContent).removeClass('noscroll');
+          }
+
           this.emit('postclose');
           callback();
         }.bind(this), instant);
@@ -629,7 +654,19 @@ limitations under the License.
 
         this._animator.openMenu(function() {
           unlock();
+
+          this._mainPage.children().css('pointer-events', 'none');
+          this._mainPageHammer.on('tap', this._bindedOnTap);
+
+          // iOS fix to stop scrolling.
+          var pageContent = this._mainPage[0].querySelector('.page__content');
+          if (pageContent) {
+            angular.element(pageContent).addClass('noscroll');
+          }
+
           this.emit('postopen');
+
+
           callback();
         }.bind(this), instant);
       },

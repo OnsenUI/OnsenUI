@@ -174,13 +174,11 @@
 
             $onsen.declareVarAttribute(attrs, toolbar);
         
-            $onsen.aliasStack.register('ons.toolbar', toolbar);
 
             scope.$on('$destroy', function() {
               toolbar._events = undefined;
               $onsen.removeModifierMethods(toolbar);
               element.data('ons-toolbar', undefined);
-              $onsen.aliasStack.unregister('ons.toolbar', toolbar);
               element = null;
             });
 

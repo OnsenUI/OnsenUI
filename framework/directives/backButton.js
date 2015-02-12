@@ -33,18 +33,21 @@
           
           $onsen.declareVarAttribute(attrs, backButton);
 
-          $onsen.aliasStack.register('ons.backButton', backButton);
           element.data('ons-back-button', backButton);
 
           scope.$on('$destroy', function() {
             backButton._events = undefined;
             $onsen.removeModifierMethods(backButton);
             element.data('ons-back-button', undefined);
-            $onsen.aliasStack.unregister('ons.backButton', backButton);
             element = null;
           });
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+          var navigator = ons.findParentComponentUntil('ons-navigator', element);
+          scope.$watch(function() { return navigator.pages.length; }, function(nbrOfPages) {
+            scope.showBackButton = nbrOfPages > 1;
+          });
 
           $onsen.addModifierMethods(backButton, 'toolbar-button--*', element.children());
 
