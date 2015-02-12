@@ -33,7 +33,7 @@
  * @ngdoc event
  * @name preshow
  * @description
- * [en][/en]
+ * [en]Fired just before the alert dialog is displayed.[/en]
  * [ja]アラートダイアログが表示される直前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.alertDialog
@@ -44,7 +44,7 @@
  * @ngdoc event
  * @name postshow
  * @description
- * [en][/en]
+ * [en]Fired just after the alert dialog is displayed.[/en]
  * [ja]アラートダイアログが表示された直後に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.alertDialog
@@ -54,7 +54,7 @@
  * @ngdoc event
  * @name prehide
  * @description
- * [en][/en]
+ * [en]Fired just before the alert dialog is hidden.[/en]
  * [ja]アラートダイアログが隠れる直前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.alertDialog
@@ -65,12 +65,11 @@
  * @ngdoc event
  * @name posthide
  * @description
- * [en][/en]
+ * [en]Fired just after the alert dialog is hidden.[/en]
  * [ja]アラートダイアログが隠れた後に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.alertDialog
  */
-
 
 /**
  * @ngdoc attribute
@@ -129,19 +128,23 @@
 /**
  * @ngdoc method
  * @signature show([options])
+ * @param {Object} [options]
+ * @param {String} [options.animation]
+ * @param {Function} [options.callback]
  * @description
  *  [en]Show the alert dialog.[/en]
  *  [ja]ダイアログを開きます。[/ja]
- * @param {Object} options
  */
 
 /**
  * @ngdoc method
  * @signature hide([options])
+ * @param {Object} [options]
+ * @param {String} [options.animation]
+ * @param {Function} [options.callback]
  * @description
  *  [en]Hide the alert dialog.[/en]
  *  [ja]ダイアログを閉じます。[/ja]
- * @param {Object} options
  */
 
 /**
@@ -201,10 +204,30 @@
  * @ngdoc method
  * @signature on(eventName, listener)
  * @description
- *  [en]Add an event listener. Preset events are preshow, postshow, prehide and posthide.[/en]
- *  [ja]イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。[/ja]
+ *  [en]Add an event listener.[/en]
+ *  [ja]イベントリスナーを追加します。[/ja]
  * @param {String} eventName
  * @param {Function} listener
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja][/ja]
+ * @param {String} eventName
+ * @param {Function} listener
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja][/ja]
+ * @param {String} eventName
+ * @param {Function} [listener]
  */
 
 (function() {

@@ -5,9 +5,6 @@
  * @description
  *    [en]Conditionally display content depending on screen orientation. Valid values are portrait and landscape. Different from other components, this component is used as attribute in any element.[/en]
  *    [ja]画面の向きに応じてコンテンツの制御を行います。portraitもしくはlandscapeを指定できます。すべての要素の属性に使用できます。[/ja]
- * @param ons-if-orientation
- *    [en]Either portrait or landscape.[/en]
- *    [ja]portraitもしくはlandscapeを指定します。[/ja]
  * @seealso ons-if-platform [en]ons-if-platform component[/en][ja]ons-if-platformコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
@@ -15,6 +12,16 @@
  *   ...
  * </div>
  */
+
+/**
+ * @ngdoc attribute
+ * @name ons-if-orientation
+ * @type {String}
+ * @description
+ *   [en]Either "portrait" or "landscape".[/en]
+ *   [ja]portraitもしくはlandscapeを指定します。[/ja]
+ */
+
 (function(){
   'use strict';
 

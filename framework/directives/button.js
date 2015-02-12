@@ -2,48 +2,125 @@
  * @ngdoc directive
  * @id button
  * @name ons-button
- * @modifier light 
- * [en]hoge[/en]
- * [ja]hoge[/ja]
+ * @modifier outline 
+ *   [en]Button with outline and transparent background[/en]
+ *   [ja][/ja]
+ * @modifier light
+ *   [en]Button that doesn't stand out.[/en]
+ *   [ja][/ja]
+ * @modifier quiet
+ *   [en]Button with no outline and or background..[/en]
+ *   [ja][/ja]
+ * @modifier cta
+ *   [en]Button that really stands out.[/en]
+ *   [ja][/ja]
+ * @modifier large
+ *   [en]Large button that covers the width of the screen.[/en]
+ *   [ja][/ja]
+ * @modifier large--quiet
+ *   [en]Large quiet button.[/en]
+ *   [ja][/ja]
+ * @modifier large--cta
+ *   [en]Large call to action button.[/en]
+ *   [ja][/ja]
  * @description
- *    [en]Button component. If you want to place a button in a toolbar, use ons-toolbar-button or ons-back-button instead.[/en]
- *    [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、ons-toolbar-buttonもしくはons-back-buttonコンポーネントを使用してください。[/ja]
- * @param modifier
- *    [en]The appearance of the button. Predefined modifiers are quiet, light, large, large--quiet, cta, and large--cta.[/en]
- *    [ja]ボタンの表現を指定します。次の値からも選択できます: quiet, light, large, large--quiet, cta, large--cta[/ja]
- * @param should-spin
- *    [en]Specify if the button should have a spinner.[/en]
- *    [ja]ボタンにスピナーを表示する場合は指定してください。[/ja]
- * @param animation
- *    [en]The animation when the button transitions to and from the spinner. Possible values are slide-left (default), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in.[/en]
- *    [ja]スピナーを表示する場合のアニメーションを指定します。次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
- * @param disabled
- *    [en]Specify if button should be disabled.[/en]
- *    [ja]ボタンを無効化する場合は指定してください。[/ja]
- * @property startSpin()
- *    [en]Show spinner on the button.[/en]
- *    [ja]ボタンにスピナーを表示します。[/ja]
- * @property stopSpin()
- *    [en]Remove spinner from button.[/en]
- *    [ja]ボタンのスピナーを除きます。[/ja]
- * @property isSpinning()
- *    [en]Return whether the spinner is visible or not.[/en]
- *    [ja]ボタンにスピナーは表示されているかどうかを返します。[/ja]
- * @property setSpinAnimation(animation)
- *    [en]Set spin animation. Possible values are slide-left (default), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in.[/en]
- *    [ja]スピナーを表示する場合のアニメーションを指定します。スピナーを表示する次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
- * @property setDisabled(disabled)
- *    [en]Disable or enable the button.[/en]
- *    [ja]このボタンをdisabled状態にするかどうかを設定します。[/ja]
- * @property isDisabled()
- *    [en]Returns whether the button is disabled or enabled.[/en]
- *    [ja]このボタンがdisabled状態かどうかを返します。[/ja] 
+ *   [en]Button component. If you want to place a button in a toolbar, use ons-toolbar-button or ons-back-button instead.[/en]
+ *   [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、ons-toolbar-buttonもしくはons-back-buttonコンポーネントを使用してください。[/ja]
  * @codepen hLayx
  * @guide Button [en]Guide for ons-button[/en][ja]ons-buttonの使い方[/ja]
  * @guide OverridingCSSstyles [en]More details about modifier attribute[/en][ja]modifier属性の使い方[/ja]
  * @example
- *   <ons-button>Tap Me</ons-button>
+ *   <ons-button modifier="large--cta">
+ *     Tap Me
+ *   </ons-button>
  */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *  [en]The appearance of the button.[/en]
+ *  [ja]ボタンの表現を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name should-spin 
+ * @type {Boolean}
+ * @description
+ *  [en]Specify if the button should have a spinner. [/en]
+ *  [ja]ボタンにスピナーを表示する場合は指定してください。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name animation 
+ * @type {String}
+ * @description 
+ *   [en]The animation when the button transitions to and from the spinner. Possible values are "slide-left" (default), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in".[/en]
+ *   [ja]スピナーを表示する場合のアニメーションを指定します。次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name disabled 
+ * @description 
+ *   [en]Specify if button should be disabled.[/en]
+ *   [ja]ボタンを無効化する場合は指定してください。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature startSpin()
+ * @description
+ *   [en]Show spinner on the button.[/en]
+ *   [ja]ボタンにスピナーを表示します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature stopSpin()
+ * @description
+ *   [en]Remove spinner from button.[/en]
+ *   [ja]ボタンのスピナーを除きます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isSpinning()
+ * @return {Boolean}
+ * @description
+ *   [en]Return whether the spinner is visible or not.[/en]
+ *   [ja]ボタンにスピナーは表示されているかどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setSpinAnimation(animation)
+ * @description
+ *   [en]Set spin animation. Possible values are "slide-left" (default), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in".[/en]
+ *   [ja]スピナーを表示する場合のアニメーションを指定します。スピナーを表示する次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
+ * @param {String} animation
+ */
+
+/**
+ * @ngdoc method
+ * @signature setDisabled(disabled)
+ * @description
+ *   [en]Disable or enable the button.[/en]
+ *   [ja]このボタンをdisabled状態にするかどうかを設定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isDisabled()
+ * @return {Boolean}
+ * @description
+ *   [en]Returns whether the button is disabled or enabled.[/en]
+ *   [ja]このボタンがdisabled状態かどうかを返します。[/ja] 
+ */
+
 (function(){
   'use strict';
   var module = angular.module('onsen');

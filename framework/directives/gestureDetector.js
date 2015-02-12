@@ -3,11 +3,11 @@
  * @id gestureDetector
  * @name ons-gesture-detector
  * @description
- *    [en]Component to detect finger gestures within the wrapped element. See the guide for more details.[/en]
- *    [ja]要素内のジェスチャー操作を検知します。詳しくはガイドを参照してください。[/ja]
+ *   [en]Component to detect finger gestures within the wrapped element. See the guide for more details.[/en]
+ *   [ja]要素内のジェスチャー操作を検知します。詳しくはガイドを参照してください。[/ja]
  * @guide DetectingFingerGestures
- *  [en]Detecting finger gestures[/en]
- *  [ja]ジェスチャー操作を検知する[/ja]
+ *   [en]Detecting finger gestures[/en]
+ *   [ja]ジェスチャー操作を検知する[/ja]
  * @example
  * <ons-gesture-detector>
  *   ...
