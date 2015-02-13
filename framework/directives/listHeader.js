@@ -2,7 +2,6 @@
  * @ngdoc directive
  * @id list-header
  * @name ons-list-header
- * @param modifier
  * @description
  *    [en]Header element for list items. Must be put inside ons-list component.[/en]
  *    [ja]リスト要素に使用するヘッダー用コンポーネント。ons-listと共に使用します。[/ja]
@@ -17,6 +16,16 @@
  *   <ons-list-item>Item</ons-list-item>
  * </ons-list>
  */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *  [en]The appearance of the list header.[/en]
+ *  [ja]ヘッダーの表現を指定します。[/ja]
+ */
+
 (function() {
   'use strict';
 

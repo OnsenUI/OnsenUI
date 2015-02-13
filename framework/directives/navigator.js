@@ -5,36 +5,6 @@
  * @description
  *  [en]A component that provides page stack management and navigation. This component does not have a visible content.[/en]
  *  [ja]ページスタックの管理とナビゲーション機能を提供するコンポーネント。画面上への出力はありません。[/ja]
- * @param page
- *  [en]First page to show when navigator is initialized.[/en]
- *  [ja]ナビゲーターが初期化された時に表示するページを指定します。[/ja]
- * @param var
- *  [en]Variable name to refer this navigator.[/en]
- *  [ja]ナビゲーターを参照するための変数を指定します。[/ja]
- * @property pushPage(pageUrl,options)
- *  [en]Pushes the specified pageUrl into the page stack.[/en]
- *  [ja]指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。[/ja]
- * @property insertPage(index,pageUrl,options)
- *  [en]Insert the specified pageUrl into the page stack with specified index.[/en]
- *  [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
- * @property popPage()
- *  [en]Pops the current page from the page stack. The previous page will be displayed.[/en]
- *  [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
- * @property resetToPage(pageUrl,options)
- *  [en]Clears page stack and adds the specified pageUrl to the page stack.[/en]
- *  [ja]ページスタックをリセットし、指定したページを表示します。[/ja]
- * @property getCurrentPage()
- *  [en]Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method.[/en]
- *  [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
- * @property getPages()
- *  [en]Retrieve the entire page stack of the navigator.[/en]
- *  [ja]ナビゲーターの持つページスタックの一覧を取得します。[/ja]
- * @property getDeviceBackButtonHandler()
- *  [en]Retrieve the back button handler for overriding the default behavior.[/en]
- *  [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
- * @property on(eventName,listener)
- *  [en]Add an event listener. Preset events are prepop, prepush, postpop and postpush.[/en]
- *  [ja]イベントリスナーを追加します。prepop, prepush, postpop, postpushを指定できます。[/ja]
  * @codepen yrhtv
  * @guide PageNavigation [en]Guide for page navigation[/en][ja]ページナビゲーションの概要[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
@@ -65,6 +35,191 @@
  *     </p>
  *   </ons-page>
  * </ons-template>
+ */
+
+/**
+ * @ngdoc event
+ * @name prepush
+ * @description
+ *   [en]Fired just before a page is pushed.[/en]
+ *   [ja][/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.navigator
+ * @param {Object} event.currentPage
+ * @param {Function} event.cancel
+ *   [en]Call this function to cancel the push.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name prepop
+ * @description
+ *   [en]Fired just before a page is popped.[/en]
+ *   [ja][/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.navigator
+ * @param {Object} event.currentPage
+ * @param {Function} event.cancel
+ *   [en]Call this function to cancel the pop.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name postpush
+ * @description
+ *   [en]Fired just after a page is pushed.[/en]
+ *   [ja][/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.navigator
+ * @param {Object} event.enterPage
+ * @param {Object} event.leavePage
+ */
+
+/**
+ * @ngdoc event
+ * @name postpop
+ * @description
+ *   [en]Fired just after a page is popped.[/en]
+ *   [ja][/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.navigator
+ * @param {Object} event.enterPage
+ * @param {Object} event.leavePage
+ */
+
+/**
+ * @ngdoc attribute
+ * @name page
+ * @type {String}
+ * @description
+ *   [en]First page to show when navigator is initialized.[/en]
+ *   [ja]ナビゲーターが初期化された時に表示するページを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *  [en]Variable name to refer this navigator.[/en]
+ *  [ja]このナビゲーターを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature pushPage(pageUrl, [options])
+ * @param {String} pageUrl
+ * @param {Object} [options]
+ * @param {String} [options.animation]
+ * @param {Function} [options.onTransitionEnd]
+ * @description
+ *   [en]Pushes the specified pageUrl into the page stack.[/en]
+ *   [ja]指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature insertPage(index, pageUrl, [options])
+ * @param {Number} index
+ * @param {String} pageUrl
+ * @param {Object} [options]
+ * @param {String} [options.animation]
+ * @description
+ *   [en]Insert the specified pageUrl into the page stack with specified index.[/en]
+ *   [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature insertPage(index, pageUrl, [options])
+ * @param {Number} index
+ * @param {String} pageUrl
+ * @param {Object} [options]
+ * @param {String} [options.animation]
+ * @description
+ *   [en]Insert the specified pageUrl into the page stack with specified index.[/en]
+ *   [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature popPage([options])
+ * @param {Object} [options]
+ * @param {Function} [options.onTransitionEnd]
+ * @description
+ *   [en]Pops the current page from the page stack. The previous page will be displayed.[/en]
+ *   [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature resetToPage(pageUrl, [options])
+ * @param {String} pageUrl
+ * @param {Object} [options]
+ * @param {String} [options.animation]
+ * @param {Function} [options.onTransitionEnd]
+ * @description
+ *   [en]Clears page stack and adds the specified pageUrl to the page stack.[/en]
+ *   [ja]ページスタックをリセットし、指定したページを表示します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getCurrentPage()
+ * @return {Number}
+ * @description
+ *   [en]Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method.[/en]
+ *   [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getPages()
+ * @return {List}
+ * @description
+ *   [en]Retrieve the entire page stack of the navigator.[/en]
+ *   [ja]ナビゲーターの持つページスタックの一覧を取得します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getDeviceBackButtonHandler()
+ * @return {Object}
+ * @description
+ *   [en]Retrieve the back button handler for overriding the default behavior.[/en]
+ *   [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature on(eventName, listener)
+ * @description
+ *  [en]Add an event listener.[/en]
+ *  [ja]イベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ * @param {Function} listener
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja][/ja]
+ * @param {String} eventName
+ * @param {Function} listener
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja][/ja]
+ * @param {String} eventName
+ * @param {Function} [listener]
  */
 
 (function() {

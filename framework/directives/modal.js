@@ -5,21 +5,6 @@
  * @description 
  *  [en]Modal component that masks current screen. Underlying components are not subject to any events while the modal component is shown.[/en]
  *  [ja]画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、モーダルが表示されている間はイベント通知が行われません。[/ja]
- * @param var 
- *  [en]Variable name to refer this modal.[/en]
- *  [ja]このコンポーネントを参照するための変数名を指定します。[/ja]
- * @property toggle()
- *  [en]Toggle modal visibility.[/en]
- *  [ja]モーダルの表示を切り替えます。[/ja]
- * @property show()
- *  [en]Show modal.[/en]
- *  [ja]モーダルを表示します。[/ja]
- * @property hide()
- *  [en]Hide modal.[/en]
- *  [ja]モーダルを非表示にします。[/ja]
- * @property getDeviceBackButtonHandler()
- *  [en]Retrieve the back button handler.[/en]
- *  [ja]ons-modalに紐付いているバックボタンハンドラを取得します。[/ja]
  * @guide UsingModal [en]Using ons-modal component[/en][ja]モーダルの使い方[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @codepen devIg
@@ -28,6 +13,49 @@
  *   ...
  * </ons-modal>
  */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *   [en]Variable name to refer this modal.[/en]
+ *   [ja]このモーダルを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature toggle()
+ * @description
+ *   [en]Toggle modal visibility.[/en]
+ *   [ja]モーダルの表示を切り替えます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature show()
+ * @description
+ *   [en]Show modal.[/en]
+ *   [ja]モーダルを表示します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature hide()
+ * @description
+ *   [en]Hide modal.[/en]
+ *   [ja]モーダルを非表示にします。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getDeviceBackButtonHandler()
+ * @return {Object}
+ * @description
+ *   [en]Retrieve the back button handler.[/en]
+ *   [ja]ons-modalに紐付いているバックボタンハンドラを取得します。[/ja]
+ */
+
 (function() {
   'use strict';
 

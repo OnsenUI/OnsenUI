@@ -5,21 +5,6 @@
  * @description
  *  [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
  *  [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
- * @param var
- *  [en]Variable name to refer this page.[/en]
- *  [ja]このページを参照するための変数名を指定します。[/ja]
- * @param modifier
- *  [en]Specify modifier name to specify custom styles.[/en]
- *  [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
- * @param on-device-backbutton
- *  [en]Allows you to specify custom behavior when the back button is pressed.[/en]
- *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
- * @param ng-device-backbutton
- *  [en]Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.[/en]
- *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
- * @property getDeviceBackButtonHandler()
- *  [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
- *  [ja]バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
  * @guide ManagingMultiplePages
  *  [en]Managing multiple pages[/en]
  *  [ja]複数のページを管理する[/ja]
@@ -44,6 +29,52 @@
  *   ...
  * </ons-page>
  */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *   [en]Variable name to refer this page.[/en]
+ *   [ja]このページを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *   [en]Specify modifier name to specify custom styles.[/en]
+ *   [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name on-device-backbutton
+ * @type {Expression}
+ * @description
+ *   [en]Allows you to specify custom behavior when the back button is pressed.[/en]
+ *   [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ng-device-backbutton
+ * @type {Expression}
+ * @description
+ *   [en]Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.[/en]
+ *   [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getDeviceBackButtonHandler()
+ * @return {Object}
+ * @description
+ *   [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
+ *   [ja]バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
+ */
+
 (function() {
   'use strict';
 
