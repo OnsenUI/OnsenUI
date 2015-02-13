@@ -113,7 +113,7 @@ limitations under the License.
           }
           else if (this._delegate.createItemContent) {
             var oldContent = currentItem.element.children(),
-              newContent = angular.element(this._delegate.createItemContent(item.index, oldContent[0])),
+              newContent = angular.element(this._delegate.createItemContent(item.index, oldContent[0]));
 
             if (newContent.html() !== oldContent.html()) {
               currentItem.element

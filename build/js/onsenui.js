@@ -1,4 +1,4 @@
-/*! onsenui - v1.2.1 - 2015-02-12 */
+/*! onsenui - v1.2.1 - 2015-02-13 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -8446,8 +8446,8 @@ limitations under the License.
             this._delegate.configureItemScope(item.index, currentItem.scope);
           }
           else if (this._delegate.createItemContent) {
-            var newContent = angular.element(this._delegate.createItemContent(item.index)),
-              oldContent = currentItem.element.children();
+            var oldContent = currentItem.element.children(),
+              newContent = angular.element(this._delegate.createItemContent(item.index, oldContent[0]));
 
             if (newContent.html() !== oldContent.html()) {
               currentItem.element
