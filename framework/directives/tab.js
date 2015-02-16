@@ -5,27 +5,6 @@
  * @description
  *  [en]Represents a tab inside tabbar. Each ons-tab represents a page.[/en]
  *  [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。[/ja]
- * @param page
- *  [en]The page that this ons-tab points to.[/en]
- *  [ja]ons-tabが参照するページへのURLを指定します。[/ja]
- * @param icon
- *  [en]The icon name of the tab. Can specify the same icon name as ons-icon. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.[/en]
- *  [ja]アイコン名を指定します。ons-iconと同じアイコン名を指定できます。個別にアイコンをカスタマイズする場合は、background-imageなどのCSSスタイルを用いて指定できます。[/ja]
- * @param active-icon
- *  [en]The icon name of the tab when active.[/en]
- *  [ja]アクティブの際のアイコン名を指定します。[/ja]
- * @param label
- *  [en]The label of the tab item.[/en]
- *  [ja]アイコン下に表示されるラベルを指定します。[/ja]
- * @param active
- *  [en]Set whether this item should be active or not. Valid values are true and false.[/en]
- *  [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
- * @param no-reload
- *  [en]Set if the page shouldn't be reloaded when clicking on the same tab twice.[/en]
- *  [ja]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/ja]
- * @param persistent
- *  [en]Set to make the tab content persistent. If this attribute it set the DOM will not be destroyed when navigating to another tab.[/en]
- *  [ja]このタブで読み込んだページを永続化します。この属性があるとき、別のタブのページに切り替えても、読み込んだページのDOM要素は破棄されずに単に非表示になります。[/ja]
  * @codepen pGuDL
  * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
@@ -60,6 +39,69 @@
  *   ...
  * </ons-template>
  */
+
+/**
+ * @ngdoc attribute
+ * @name page
+ * @type {String}
+ * @description
+ *   [en]The page that this ons-tab points to.[/en]
+ *   [ja]ons-tabが参照するページへのURLを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name icon
+ * @type {String}
+ * @description
+ *   [en]The icon name for the tab. Can specify the same icon name as ons-icon. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.[/en]
+ *   [ja]アイコン名を指定します。ons-iconと同じアイコン名を指定できます。個別にアイコンをカスタマイズする場合は、background-imageなどのCSSスタイルを用いて指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name active-icon
+ * @type {String}
+ * @description
+ *   [en]The name of the icon when the tab is active.[/en]
+ *   [ja]アクティブの際のアイコン名を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name label
+ * @type {String}
+ * @description
+ *   [en]The label of the tab item.[/en]
+ *   [ja]アイコン下に表示されるラベルを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name active
+ * @type {Boolean}
+ * @default false
+ * @description
+ *   [en]Set whether this item should be active or not. Valid values are true and false.[/en]
+ *   [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name no-reload
+ * @description
+ *   [en]Set if the page shouldn't be reloaded when clicking on the same tab twice.[/en]
+ *   [ja]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name persistent
+ * @description
+ *   [en]Set to make the tab content persistent. If this attribute it set the DOM will not be destroyed when navigating to another tab.[/en]
+ *   [ja]このタブで読み込んだページを永続化します。この属性があるとき、別のタブのページに切り替えても、読み込んだページのDOM要素は破棄されずに単に非表示になります。[/ja]
+ */
+
 (function() {
   'use strict';
   var module = angular.module('onsen');

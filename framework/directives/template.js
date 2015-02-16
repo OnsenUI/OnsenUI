@@ -9,9 +9,9 @@
  *  [en]Defining multiple pages in single html[/en]
  *  [ja]複数のページを1つのHTMLに記述する[/ja]
  * @example
- * <ons-template id="foobar.html">
- *   ...
- * </ons-template>
+ *   <ons-template id="foobar.html">
+ *     ...
+ *   </ons-template>
  */
 (function(){
   'use strict';

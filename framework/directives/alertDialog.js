@@ -3,9 +3,12 @@
  * @ngdoc directive
  * @id alert-dialog 
  * @name ons-alert-dialog
+ * @modifier android
+ *   [en]Display an Android style alert dialog.[/en]
+ *   [ja][/ja]
  * @description 
- * [en]Alert dialog that is displayed on top of the current screen.[/en]
- * [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
+ *   [en]Alert dialog that is displayed on top of the current screen.[/en]
+ *   [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
  * @codepen Qwwxyp
  * @example
  * <script>

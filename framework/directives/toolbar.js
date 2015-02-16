@@ -2,32 +2,63 @@
  * @ngdoc directive
  * @id toolbar
  * @name ons-toolbar
+ * @modifier transparent
+ *   [en]Transparent toolbar[/en]
+ *   [ja][/ja]
+ * @modifier android
+ *   [en]Android style toolbar. Title is left-aligned.[/en]
+ *   [ja][/ja]
  * @description
  *  [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]
  *  [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
- * @param inline
- *  [en]Display the toolbar as an inline element.[/en]
- *  [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]
- * @param modifier
- *  [en]The appearance of the toolbar.[/en]
- *  [ja]ツールバーの表現を指定します。[/ja]
- * @param fixed-style
- *  [en]By default the center element will be left-aligned on Android and center-aligned on iOS. Use this attribute to override this behavior so it's always displayed in the center.[/en]
- *  [ja]中央揃え要素は、デフォルトとしてAndroidでは左配置、iOSでは中央配置です。この属性を使用すると、要素はAndroidとiOSともに中央配置となります。[/ja]
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-bottom-toolbar [en]ons-bottom-toolbar component[/en][ja]ons-bottom-toolbarコンポーネント[/ja]
  * @seealso ons-back-button [en]ons-back-button component[/en][ja]ons-back-buttonコンポーネント[/ja]
  * @seealso ons-toolbar-button [en]ons-toolbar-button component[/en][ja]ons-toolbar-buttonコンポーネント[/ja]
  * @example 
- * <ons-page>
- *   <ons-toolbar>
- *     <div class="left"><ons-back-button>Back</ons-back-button></div>
- *     <div class="center">Title</div>
- *     <div class="right">Label</div>
- *   </ons-toolbar>
- * </ons-page>
+ *   <ons-page>
+ *     <ons-toolbar>
+ *       <div class="left"><ons-back-button>Back</ons-back-button></div>
+ *       <div class="center">Title</div>
+ *       <div class="right">Label</div>
+ *     </ons-toolbar>
+ *   </ons-page>
  */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *  [en]Variable name to refer this toolbar.[/en]
+ *  [ja]このツールバーを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name inline
+ * @description
+ *   [en]Display the toolbar as an inline element.[/en]
+ *   [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @description
+ *   [en]The appearance of the toolbar.[/en]
+ *   [ja]ツールバーの表現を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name fixed-style
+ * @description
+ *   [en]By default the center element will be left-aligned on Android and center-aligned on iOS. Use this attribute to override this behavior so it's always displayed in the center.[/en]
+ *   [ja]中央揃え要素は、デフォルトとしてAndroidでは左配置、iOSでは中央配置です。この属性を使用すると、要素はAndroidとiOSともに中央配置となります。[/ja]
+ */
+
 (function() {
   'use strict';
 
