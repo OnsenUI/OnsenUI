@@ -16,16 +16,6 @@ limitations under the License.
 */
 
 /**
- * @ngdoc event
- * @name change
- * @description
- *   [en]Fired when orientation changes.[/en]
- *   [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
- * @param {Boolean} event.isPortrait
- */
-
-/**
  * @ngdoc object
  * @name ons.orientation
  * @category util
@@ -33,6 +23,16 @@ limitations under the License.
  * @description 
  *   [en]Utility methods for orientation detection.[/en]
  *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name change
+ * @description
+ *   [en]Fired when orientation changes.[/en]
+ *   [ja][/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Boolean} event.isPortrait
  */
 
 /**
