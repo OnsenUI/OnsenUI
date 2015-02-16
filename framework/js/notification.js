@@ -15,6 +15,68 @@ limitations under the License.
 
 */
 
+/**
+ * @ngdoc object
+ * @name ons.notification
+ * @category util
+ * @category fuga
+ * @description 
+ *   [en]Utility methods to create different kinds of dialogs.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature alert(options)
+ * @param {Object} options
+ * @param {String} [options.message]
+ * @param {String} [options.messageHTML]
+ * @param {String} [options.buttonLabel]
+ * @param {String} [options.animation]
+ * @param {String} [options.title]
+ * @param {String} [options.modifier]
+ * @param {Function} [options.callback]
+ * @description 
+ *   [en]Display an alert dialog. Must specify eiether <code>message</code> or <code>messageHTML</code>.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature confirm(options)
+ * @param {Object} options
+ * @param {String} [options.message]
+ * @param {String} [options.messageHTML]
+ * @param {Array} [options.buttonLabels]
+ * @param {Number} [options.primaryButtonIndex]
+ * @param {Boolean} [options.cancelable]
+ * @param {String} [options.animation]
+ * @param {String} [options.title]
+ * @param {String} [options.modifier]
+ * @param {Function} [options.callback]
+ * @description 
+ *   [en]Display an confirmation dialog. Must specify either <code>message</code> or <code>messageHTML</code>.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature prompt(options)
+ * @param {Object} options
+ * @param {String} [options.message]
+ * @param {String} [options.messageHTML]
+ * @param {Array} [options.buttonLabels]
+ * @param {Number} [options.primaryButtonIndex]
+ * @param {Boolean} [options.cancelable]
+ * @param {String} [options.animation]
+ * @param {String} [options.title]
+ * @param {String} [options.modifier]
+ * @param {Function} [options.callback]
+ * @description 
+ *   [en]Display an confirmation dialog. Must specify either <code>message</code> or <code>messageHTML</code>.[/en]
+ *   [ja][/ja]
+ */
+
 window.ons.notification = (function() {
   var createAlertDialog = function(title, message, buttonLabels, primaryButtonIndex, modifier, animation, callback, messageIsHTML, cancelable, promptDialog, autofocus, placeholder) {
     var dialogEl = angular.element('<ons-alert-dialog>'),

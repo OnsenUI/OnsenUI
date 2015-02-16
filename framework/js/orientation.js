@@ -15,6 +15,74 @@ limitations under the License.
 
 */
 
+/**
+ * @ngdoc event
+ * @name change
+ * @description
+ *   [en]Fired when orientation changes.[/en]
+ *   [ja][/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Boolean} event.isPortrait
+ */
+
+/**
+ * @ngdoc object
+ * @name ons.orientation
+ * @category util
+ * @category fuga
+ * @description 
+ *   [en]Utility methods for orientation detection.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isPortrait()
+ * @return {Boolean}
+ * @description 
+ *   [en]Returns whether the current screen is portrait or not.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isLandscape()
+ * @return {Boolean}
+ * @description 
+ *   [en]Returns whether the current screen is landscape or not.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature on(eventName, listener)
+ * @description
+ *  [en]Add an event listener.[/en]
+ *  [ja]イベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ * @param {Function} listener
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja][/ja]
+ * @param {String} eventName
+ * @param {Function} listener
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja][/ja]
+ * @param {String} eventName
+ * @param {Function} [listener]
+ */
+
 window.ons.orientation = (function() {
   return create()._init();
 
