@@ -645,7 +645,8 @@ limitations under the License.
       },
 
       _calculateMaxScroll: function() {
-        return this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
+        var max = this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
+        return max < 0 ? 0 : max;
       },
 
       _isOverScroll: function(scroll) {

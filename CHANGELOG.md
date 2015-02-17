@@ -36,6 +36,7 @@ v1.2.2-dev
  * ons-carousel: Fixed [#380](https://github.com/OnsenUI/OnsenUI/issues/380).
  * ons-sliding-menu: Fixed [#382](https://github.com/OnsenUI/OnsenUI/issues/382).
  * ons-popover: Fixed [#416](https://github.com/OnsenUI/OnsenUI/issues/416).
+ * ons-carousel: Fixed strange behavior when carousel was smaller than container.
 
 v1.2.1
 ----
