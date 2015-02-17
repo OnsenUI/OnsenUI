@@ -45,9 +45,6 @@ limitations under the License.
 
         this._scope.$watch(
           function() {
-            return this._countItems();
-          }.bind(this),
-          function() {
             this._render();
           }.bind(this)
         );
