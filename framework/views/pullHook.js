@@ -40,8 +40,8 @@ limitations under the License.
         this._scrollElement = this._createScrollElement();
         this._pageElement = this._scrollElement.parent();
 
-        if (!this._pageElement.hasClass('page__content')) {
-          throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> element.');
+        if (!this._pageElement.hasClass('page__content') && !this._pageElement.hasClass('ons-scroller__content')) {
+          throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> or an <ons-scroller> element.');
         }
 
         this._currentTranslation = 0;
@@ -172,6 +172,7 @@ limitations under the License.
           this._scope.$eval(this._attrs.ngAction, {$done: done});
         }
         else if (this._attrs.onAction) {
+          /*jshint evil:true */
           eval(this._attrs.onAction);
         }
         else {
