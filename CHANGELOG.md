@@ -36,8 +36,6 @@ v1.2.2-dev
  * ons-carousel: Fixed [#380](https://github.com/OnsenUI/OnsenUI/issues/380).
  * ons-sliding-menu: Fixed [#382](https://github.com/OnsenUI/OnsenUI/issues/382).
  * ons-popover: Fixed [#416](https://github.com/OnsenUI/OnsenUI/issues/416).
- * ons-sliding-menu: Main page not scrollable on iOS when menu is open.
- * ons-modal: Background not scrollable on iOS.
 
 v1.2.1
 ----

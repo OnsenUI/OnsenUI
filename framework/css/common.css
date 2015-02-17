@@ -95,10 +95,6 @@ ons-toolbar ~ .page__content {
   display: none;
 }
 
-.page__content.noscroll {
-  overflow: hidden; 
-}
-
 .tab-bar__status-bar-fill ~ .tab-bar--top__content {
   top: 71px;
 }
