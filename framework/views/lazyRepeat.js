@@ -183,7 +183,9 @@ limitations under the License.
 
       _removeAllElements: function() {
         for (var key in this._renderedElements) {
-          this._removeElement(key);
+          if (this._removeElement.hasOwnProperty(key)) {
+            this._removeElement(key);
+          }
         }
       },
 
