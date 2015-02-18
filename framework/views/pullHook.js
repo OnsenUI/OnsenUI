@@ -93,6 +93,11 @@ limitations under the License.
           return;
         }
 
+        // Ignore when dragging left and right.
+        if (event.gesture.direction === 'left' || event.gesture.direction === 'right') {
+          return;
+        }
+
         // Hack to make it work on Android 4.4 WebView. Scrolls manually near the top of the page so
         // there will be no inertial scroll when scrolling down. Allowing default scrolling will
         // kill all 'touchmove' events.
@@ -134,7 +139,8 @@ limitations under the License.
         else {
           this._setState(this.STATE_INITIAL);
         }
-  
+ 
+        event.stopPropagation();
         this._translateTo(scroll);
       },
 
