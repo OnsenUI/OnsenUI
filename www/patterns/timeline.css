@@ -1,6 +1,5 @@
 .reply-notification {
   position: absolute;
-  right: 18px;
   top: 28px;
   font-size: 10px;
   font-weight: 600;
@@ -8,6 +7,7 @@
   line-height: 13px;
   padding: 0 4px;
   min-width: 13px;
+  margin-left: 18px;
 }
 
 .tab-icon {
