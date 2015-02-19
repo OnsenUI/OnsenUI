@@ -37,6 +37,7 @@ v1.2.2-dev
  * ons-sliding-menu: Fixed [#382](https://github.com/OnsenUI/OnsenUI/issues/382).
  * ons-popover: Fixed [#416](https://github.com/OnsenUI/OnsenUI/issues/416).
  * ons-carousel: Fixed strange behavior when carousel was smaller than container.
+ * ons-split-view: Fixed bug where split view did not update correctly on some Android devices.
 
 v1.2.1
 ----
