@@ -12,7 +12,7 @@
     <script>
       ons.bootstrap();
       ons.ready(function() {
-        menu.openMenu();
+        menu.openMenuMenu();
       });
     </script>
 
@@ -26,7 +26,7 @@
       <ons-page>
         <ons-toolbar>
           <div class="left">
-            <ons-toolbar-button ng-click="ons.slidingMenu.toggle()">
+            <ons-toolbar-button ng-click="menu.toggleMenu()">
               <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
             </ons-toolbar-button>
           </div>
@@ -40,24 +40,24 @@
       <ons-page modifier="menu-page">
         <ons-toolbar modifier="transparent">
           <div class="right">
-            <ons-toolbar-button class="menu-close" ng-click="menu.close()">
+            <ons-toolbar-button class="menu-closeMenu" ng-click="menu.closeMenu()">
               </ons-icon>Close
             </ons-toolbar-button>
           </div>
         </ons-toolbar>
 
         <ons-list class="menu-list">
-          <ons-list-item class="menu-item" ng-click="menu.close()">
+          <ons-list-item class="menu-item" ng-click="menu.closeMenu()">
             <ons-icon icon="fa-plus"></ons-icon>
             New Post
           </ons-list-item>
 
-          <ons-list-item class="menu-item" ng-click="menu.close()">
+          <ons-list-item class="menu-item" ng-click="menu.closeMenu()">
             <ons-icon icon="fa-bookmark"></ons-icon>
             Bookmark
           </ons-list-item>
 
-          <ons-list-item class="menu-item" ng-click="menu.close()">
+          <ons-list-item class="menu-item" ng-click="menu.closeMenu()">
             <ons-icon icon="fa-twitter"></ons-icon>
             Official Twitter
           </ons-list-item>
@@ -66,16 +66,16 @@
         <br>
 
         <ons-list class="bottom-menu-list">
-          <ons-list-item class="bottom-menu-item" ng-click="menu.close()">
+          <ons-list-item class="bottom-menu-item" ng-click="menu.closeMenu()">
             Settings
             <div class="notification menu-notification">3</div>
           </ons-list-item>
 
-          <ons-list-item class="bottom-menu-item" ng-click="menu.close()">
+          <ons-list-item class="bottom-menu-item" ng-click="menu.closeMenu()">
             Help
           </ons-list-item>
 
-          <ons-list-item class="bottom-menu-item" ng-click="menu.close()">
+          <ons-list-item class="bottom-menu-item" ng-click="menu.closeMenu()">
             Send feedback
           </ons-list-item>
         </ons-list>
