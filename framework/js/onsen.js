@@ -32,7 +32,8 @@ limitations under the License.
  *   [ja]アプリの初期化に利用するメソッドです。渡された関数を、Onsen UIの初期化が終了している時点で必ず呼びます。[/ja]
  *   [en]Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized.[/en]
  * @param {Function} callback
- * @return {void}
+ *   [en]Function that executes after Onsen UI has been initialized.[/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -48,7 +49,7 @@ limitations under the License.
  *   [en]List of AngularJS module dependencies.[/en]
  *   [ja]依存するAngular.jsのモジュール名の配列[/ja]
  * @return {Object}
- *   [en]Returns an AngularJS module object.[/en]
+ *   [en]An AngularJS module object.[/en]
  *   [ja][/ja]
  */
 
@@ -72,10 +73,13 @@ limitations under the License.
  * @ngdoc method
  * @signature findParentComponentUntil(name, [dom])
  * @param {String} name
+ *   [en]Name of component, i.e. 'ons-page'.[/en]
  * @param {Object|jqLite|HTMLElement} [dom]
  *   [en]$event, jqLite or HTMLElement object.[/en]
  *   [ja][/ja]
  * @return {Object}
+ *   [en]Component object. Will return null if no component was found.[/en]
+ *   [ja][/ja]
  * @description 
  *   [en]Find parent component object of <code>dom</code> element.[/en]
  *   [ja][/ja]
@@ -88,7 +92,11 @@ limitations under the License.
  *   [en]CSS selector[/en]
  *   [ja]CSSセレクター[/ja]
  * @param {HTMLElement} [dom]
+ *   [en]DOM element to search from.[/en]
+ *   [ja][/ja]
  * @return {Object}
+ *   [en]Component object. Will return null if no component was found.[/en]
+ *   [ja][/ja]
  * @description 
  *   [en]Find component object using CSS selector.[/en]
  *   [ja][/ja]
@@ -98,6 +106,8 @@ limitations under the License.
  * @ngdoc method
  * @signature setDefaultDeviceBackButtonListener(listener)
  * @param {Function} listener 
+ *   [en]Function that executes when device back button is pressed.[/en]
+ *   [ja][/ja]
  * @description 
  *   [en]Set default handler for device back button.[/en]
  *   [ja][/ja]
@@ -123,57 +133,74 @@ limitations under the License.
  * @ngdoc method
  * @signature isReady()
  * @return {Boolean}
+ *   [en]Will be true if Onsen UI is initialized.[/en]
+ *   [ja][/ja]
  * @description 
- * [en]Returns true if Onsen UI is initialized.[/en]
- * [ja][/ja]
+ *   [en]Returns true if Onsen UI is initialized.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc method
  * @signature compile(dom)
  * @param {HTMLElement} dom
+ *   [en]Element to compile.[/en]
+ *   [ja][/ja]
  * @description 
- * [en]Compile Onsen UI components.[/en]
- * [ja][/ja]
+ *   [en]Compile Onsen UI components.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc method
  * @signature isWebView()
  * @return {Boolean}
+ *   [en]Will be true if the app is running in Cordova.[/en]
+ *   [ja][/ja]
  * @description 
- * [en]Returns true if running inside Cordova.[/en]
- * [ja][/ja]
+ *   [en]Returns true if running inside Cordova.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc method
  * @signature createAlertDialog(page)
  * @param {String} page
+ *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-alert-dialog> component.[/en]
+ *   [ja][/ja]
  * @return {Promise}
+ *   [en]Promise object that resolves to the alert dialog component object.[/en]
+ *   [ja][/ja]
  * @description 
- * [en]Create a alert dialog instance from a template.[/en]
- * [ja][/ja]
+ *   [en]Create a alert dialog instance from a template.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc method
  * @signature createDialog(page)
  * @param {String} page
+ *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
  * @return {Promise}
+ *   [en]Promise object that resolves to the dialog component object.[/en]
+ *   [ja][/ja]
  * @description 
- * [en]Create a dialog instance from a template.[/en]
- * [ja][/ja]
+ *   [en]Create a dialog instance from a template.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc method
  * @signature createPopover(page)
  * @param {String} page
+ *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
+ *   [ja][/ja]
  * @return {Promise}
+ *   [en]Promise object that resolves to the popover component object.[/en]
+ *   [ja][/ja]
  * @description 
- * [en]Create a popover instance from a template.[/en]
- * [ja][/ja]
+ *   [en]Create a popover instance from a template.[/en]
+ *   [ja][/ja]
  */
 
 window.ons = (function(){
