@@ -41,8 +41,12 @@ limitations under the License.
  * @description 
  *   [ja]Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます[/ja]
  *   [en]Initialize Onsen UI. Can be used to load Onsen UI without using the <code>ng-app</code> attribute from AngularJS.[/en]
- * @param {String} [moduleName] [ja]Angular.jsでのモジュール名[/ja]
- * @param {Array} [dependencies] [ja]依存するAngular.jsのモジュール名の配列[/ja]
+ * @param {String} [moduleName] 
+ *   [en]AngularJS module name.[/en]
+ *   [ja]Angular.jsでのモジュール名[/ja]
+ * @param {Array} [dependencies] 
+ *   [en]List of AngularJS module dependencies.[/en]
+ *   [ja]依存するAngular.jsのモジュール名の配列[/ja]
  * @return {Object}
  *   [en]Returns an AngularJS module object.[/en]
  *   [ja][/ja]
@@ -52,7 +56,7 @@ limitations under the License.
  * @ngdoc method
  * @signature enableAutoStatusBarFill()
  * @description 
- *   [en]Enabled status bar fill feature on iOS7 and above.[/en]
+ *   [en]Enable status bar fill feature on iOS7 and above.[/en]
  *   [ja][/ja]
  */
 
@@ -60,7 +64,7 @@ limitations under the License.
  * @ngdoc method
  * @signature enableAutoStatusBarFill()
  * @description 
- *   [en]Disabled status bar fill feature on iOS7 and above.[/en]
+ *   [en]Disable status bar fill feature on iOS7 and above.[/en]
  *   [ja][/ja]
  */
 
@@ -109,9 +113,9 @@ limitations under the License.
 
 /**
  * @ngdoc method
- * @signature disableDeviceBackButtonHandler()
+ * @signature enableDeviceBackButtonHandler()
  * @description 
- * [en]Disable device back button event handler.[/en]
+ * [en]Enable device back button event handler.[/en]
  * [ja][/ja]
  */
 

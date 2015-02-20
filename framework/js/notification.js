@@ -37,7 +37,7 @@ limitations under the License.
  * @param {String} [options.modifier]
  * @param {Function} [options.callback]
  * @description 
- *   [en]Display an alert dialog. Must specify eiether <code>message</code> or <code>messageHTML</code>.[/en]
+ *   [en]Display an alert dialog to show the user a message. The content of the message can be either simple text or HTML. Must specify either <code>message</code> or <code>messageHTML</code>.[/en]
  *   [ja][/ja]
  */
 
@@ -55,7 +55,7 @@ limitations under the License.
  * @param {String} [options.modifier]
  * @param {Function} [options.callback]
  * @description 
- *   [en]Display an confirmation dialog. Must specify either <code>message</code> or <code>messageHTML</code>.[/en]
+ *   [en]Display a dialog to ask the user for confirmation. The default button labels are "Cancel" and "OK" but they can be customized. Must specify either <code>message</code> or <code>messageHTML</code>.[/en]
  *   [ja][/ja]
  */
 
@@ -73,7 +73,7 @@ limitations under the License.
  * @param {String} [options.modifier]
  * @param {Function} [options.callback]
  * @description 
- *   [en]Display an confirmation dialog. Must specify either <code>message</code> or <code>messageHTML</code>.[/en]
+ *   [en]Display a dialog with a prompt to ask the user a question. Must specify either <code>message</code> or <code>messageHTML</code>.[/en]
  *   [ja][/ja]
  */
 
