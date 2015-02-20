@@ -30,9 +30,9 @@
  * @guide Button [en]Guide for ons-button[/en][ja]ons-buttonの使い方[/ja]
  * @guide OverridingCSSstyles [en]More details about modifier attribute[/en][ja]modifier属性の使い方[/ja]
  * @example
- *   <ons-button modifier="large--cta">
- *     Tap Me
- *   </ons-button>
+ * <ons-button modifier="large--cta">
+ *   Tap Me
+ * </ons-button>
  */
 
 /**

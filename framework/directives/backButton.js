@@ -10,7 +10,9 @@
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @guide Returningfromapage [en]Returning from a page[/en][ja]一つ前のページに戻る[/ja]
  * @example
- *   <ons-back-button>Back</ons-back-button>
+ * <ons-back-button>
+ *   Back
+ * </ons-back-button>
  */
 (function(){
   'use strict';

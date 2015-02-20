@@ -10,6 +10,18 @@
  *   [en]Alert dialog that is displayed on top of the current screen.[/en]
  *   [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
  * @codepen Qwwxyp
+ * @guide UsingAlert
+ *   [en]Learn how to use the alert dialog.[/en]
+ *   [ja][/ja]
+ * @seealso ons-dialog
+ *   [en]ons-dialog component[/en]
+ *   [ja]ons-dialogコンポーネント[/ja]
+ * @seealso ons-popover
+ *   [en]ons-popover component[/en]
+ *   [ja]ons-dialogコンポーネント[/ja]
+ * @seealso ons.notification
+ *   [en]Using ons.notification utility functions.[/en]
+ *   [ja][/ja]
  * @example
  * <script>
  *   ons.ready(function() {
@@ -23,7 +35,7 @@
  *   <ons-alert-dialog animation="default" cancelable>
  *     <div class="alert-dialog-title">Warning!</div>
  *     <div class="alert-dialog-content">
- *      An error has occurred!
+ *       An error has occurred!
  *     </div>
  *     <div class="alert-dialog-footer">
  *       <button class="alert-dialog-button">OK</button>

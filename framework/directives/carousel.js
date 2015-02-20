@@ -2,21 +2,22 @@
  * @ngdoc directive
  * @id carousel
  * @name ons-carousel
- *
  * @description
  *   [en]Carousel component.[/en]
  *   [ja]カルーセルを表示できるコンポーネント。[/ja]
- *
  * @codepen xbbzOQ
+ * @guide UsingCarousel
+ *   [en]Learn how to use the carousel component.[/en]
+ *   [ja][/ja]
  * @example
- *   <ons-carousel style="width: 100%; height: 200px">
- *     <ons-carousel-item>
- *      ...
- *     </ons-carousel-item>
- *     <ons-carousel-item>
- *      ...
- *     </ons-carousel-item>
- *   </ons-carousel>
+ * <ons-carousel style="width: 100%; height: 200px">
+ *   <ons-carousel-item>
+ *    ...
+ *   </ons-carousel-item>
+ *   <ons-carousel-item>
+ *    ...
+ *   </ons-carousel-item>
+ * </ons-carousel>
  */
 
 /**
