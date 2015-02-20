@@ -47,10 +47,10 @@
       replace: false,
       transclude: false,
       compile: function(element, attrs) {
-     
+
         return function(scope, element, attrs) {
           var list = new GenericView(scope, element, attrs);
-          
+
           $onsen.declareVarAttribute(attrs, list);
           element.data('ons-list', list);
 
@@ -65,9 +65,9 @@
 
           element.addClass('list ons-list-inner');
           element.addClass(templater('list--*'));
-         
+
           $onsen.addModifierMethods(list, 'list--*', element);
-          $onsen.fireComponentEvent(element[0], 'init'); 
+          $onsen.fireComponentEvent(element[0], 'init');
         };
       }
     };

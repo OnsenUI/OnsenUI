@@ -73,7 +73,7 @@
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
-      scope: false, 
+      scope: false,
       transclude: false,
 
       compile: function(element, attrs) {

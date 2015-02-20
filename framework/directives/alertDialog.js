@@ -1,12 +1,12 @@
 
 /**
  * @ngdoc directive
- * @id alert-dialog 
+ * @id alert-dialog
  * @name ons-alert-dialog
  * @modifier android
  *   [en]Display an Android style alert dialog.[/en]
  *   [ja][/ja]
- * @description 
+ * @description
  *   [en]Alert dialog that is displayed on top of the current screen.[/en]
  *   [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
  * @codepen Qwwxyp
@@ -26,7 +26,7 @@
  * <script>
  *   ons.ready(function() {
  *     ons.createAlertDialog('alert.html').then(function(alertDialog) {
- *       alertDialog.show();   
+ *       alertDialog.show();
  *     });
  *   });
  * </script>
@@ -40,7 +40,7 @@
  *     <div class="alert-dialog-footer">
  *       <button class="alert-dialog-button">OK</button>
  *     </div>
- *   </ons-alert-dialog>  
+ *   </ons-alert-dialog>
  * </script>
  */
 
@@ -54,7 +54,7 @@
  * @param {Object} event.alertDialog
  *   [en]Alert dialog object.[/en]
  *   [ja]アラートダイアログのオブジェクト。[/ja]
- * @param {Function} event.cancel 
+ * @param {Function} event.cancel
  *   [en]Execute to stop the dialog from shoring.[/en]
  *   [ja][/ja]
  */
@@ -81,7 +81,7 @@
  * @param {Object} event.alertDialog
  *   [en]Alert dialog object.[/en]
  *   [ja]アラートダイアログのオブジェクト。[/ja]
- * @param {Function} event.cancel 
+ * @param {Function} event.cancel
  *   [en]Execute to stop the dialog from hiding.[/en]
  *   [ja][/ja]
  */
@@ -120,7 +120,7 @@
  * @ngdoc attribute
  * @name cancelable
  * @description
- *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en] 
+ *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en]
  *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
  */
 
@@ -308,9 +308,9 @@
 
       compile: function(element, attrs) {
         var modifierTemplater = $onsen.generateModifierTemplater(attrs);
- 
+
         element.addClass('alert-dialog ' + modifierTemplater('alert-dialog--*'));
-       
+
         var titleElement = angular.element(element[0].querySelector('.alert-dialog-title')),
           contentElement = angular.element(element[0].querySelector('.alert-dialog-content'));
 

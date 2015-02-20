@@ -62,7 +62,7 @@
         return {
           pre: function(scope, element, attrs) {
             var bottomToolbar = new GenericView(scope, element, attrs);
-            
+
             $onsen.declareVarAttribute(attrs, bottomToolbar);
             element.data('ons-bottomToolbar', bottomToolbar);
 

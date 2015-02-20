@@ -45,34 +45,54 @@
  * @ngdoc event
  * @name prechange
  * @description
- * [en]Fires just before the tab is changed.[/en]
- * [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fires just before the tab is changed.[/en]
+ *   [ja][/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja][/ja]
  * @param {Number} event.index
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Object} event.tabItem
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Function} event.cancel
- */ 
+ *   [en][/en]
+ *   [ja][/ja]
+ */
 
 /**
  * @ngdoc event
  * @name postchange
  * @description
- * [en]Fires just after the tab is changed.[/en]
- * [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fires just after the tab is changed.[/en]
+ *   [ja][/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja][/ja]
  * @param {Number} event.index
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Object} event.tabItem
- */ 
+ *   [en][/en]
+ *   [ja][/ja]
+ */
 
 /**
  * @ngdoc event
  * @name reactive
  * @description
- * [en]Fires if the already open tab is tapped again.[/en]
- * [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fires if the already open tab is tapped again.[/en]
+ *   [ja][/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja][/ja]
  * @param {Number} event.index
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Object} event.tabItem
+ *   [en][/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -118,10 +138,16 @@
  * @ngdoc method
  * @signature setActiveTab(index, [options])
  * @param {Number} index
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Object} [options]
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Boolean} [options.keepPage]
+ *   [en][/en]
+ *   [ja][/ja]
  * @return {Boolean}
- *   [en]Returns <code>true</code> if successful.[/en]
+ *   [en]Returns true if successful.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
@@ -132,6 +158,8 @@
  * @ngdoc method
  * @signature getActiveTabIndex()
  * @return {Number}
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Returns tab index on current active tab. If active tab is not found, returns -1.[/en]
  *   [ja]現在アクティブになっているタブのインデックスを返します。現在アクティブなタブがない場合には-1を返します。[/ja]
@@ -141,6 +169,8 @@
  * @ngdoc method
  * @signature loadPage(url)
  * @param {String} url
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Displays a new page without changing the active index.[/en]
  *   [ja]現在のアクティブなインデックスを変更せずに、新しいページを表示します。[/ja]
@@ -232,7 +262,7 @@
           $onsen.removeModifierMethods(tabbarView);
           element.data('ons-tabbar', undefined);
         });
-      
+
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };

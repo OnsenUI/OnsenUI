@@ -16,7 +16,7 @@
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  * @seealso ons-back-button [en]ons-back-button component[/en][ja]ons-back-buttonコンポーネント[/ja]
  * @seealso ons-toolbar-button [en]ons-toolbar-button component[/en][ja]ons-toolbar-buttonコンポーネント[/ja]
- * @example 
+ * @example
  *   <ons-toolbar>
  *     <div class="left"><ons-toolbar-button>Button</ons-toolbar-button></div>
  *     <div class="center">Title</div>
@@ -77,7 +77,7 @@
           });
 
           var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-          
+
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
@@ -95,7 +95,7 @@
           $onsen.addModifierMethods(toolbarButton, 'toolbar-button--*', element.children());
 
           element.children('span').addClass(modifierTemplater('toolbar-button--*'));
-            
+
           $onsen.cleaner.onDestroy(scope, function() {
             $onsen.clearComponent({
               scope: scope,

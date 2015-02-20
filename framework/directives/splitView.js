@@ -9,24 +9,32 @@
  * @guide Usingonssplitviewcomponent [en]Using ons-split-view.[/en][ja]ons-split-viewコンポーネントを使う[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @example
- * <ons-split-view 
- *   secondary-page="secondary.html" 
- *   main-page="main.html" 
- *   main-page-width="70%" 
+ * <ons-split-view
+ *   secondary-page="secondary.html"
+ *   main-page="main.html"
+ *   main-page-width="70%"
  *   collapse="portrait">
  * </ons-split-view>
  */
 
 /**
  * @ngdoc event
- * @name update 
+ * @name update
  * @description
- * [en]Fired when the split view is updated.[/en]
- * [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fired when the split view is updated.[/en]
+ *   [ja][/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja][/ja]
  * @param {Object} event.splitView
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Boolean} event.shouldCollapse
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {String} event.currentMode
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Function} event.split
  *   [en]Call to force split.[/en]
  *   [ja][/ja]
@@ -34,55 +42,91 @@
  *   [en]Call to force collapse.[/en]
  *   [ja][/ja]
  * @param {Number} event.width
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {String} event.orientation
+ *   [en][/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc event
  * @name presplit
  * @description
- * [en]Fired just before the view is split.[/en]
- * [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fired just before the view is split.[/en]
+ *   [ja][/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja][/ja]
  * @param {Object} event.splitView
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Number} event.width
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {String} event.orientation
+ *   [en][/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc event
  * @name postsplit
  * @description
- * [en]Fired just after the view is split.[/en]
- * [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fired just after the view is split.[/en]
+ *   [ja][/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja][/ja]
  * @param {Object} event.splitView
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Number} event.width
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {String} event.orientation
+ *   [en][/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc event
  * @name precollapse
  * @description
- * [en]Fired just before the view is collapsed.[/en]
- * [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fired just before the view is collapsed.[/en]
+ *   [ja][/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja][/ja]
  * @param {Object} event.splitView
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Number} event.width
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {String} event.orientation
+ *   [en][/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc event
  * @name postcollapse
  * @description
- * [en]Fired just after the view is collapsed.[/en]
- * [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fired just after the view is collapsed.[/en]
+ *   [ja][/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja][/ja]
  * @param {Object} event.splitView
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Number} event.width
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {String} event.orientation
+ *   [en][/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -134,6 +178,8 @@
  * @ngdoc method
  * @signature setMainPage(pageUrl)
  * @param {String} pageUrl
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Show the page specified in pageUrl in the right section[/en]
  *   [ja]指定したURLをメインページを読み込みます。[/ja]
@@ -143,6 +189,8 @@
  * @ngdoc method
  * @signature setSecondaryPage(pageUrl)
  * @param {String} pageUrl
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Show the page specified in pageUrl in the left section[/en]
  *   [ja]指定したURLを左のページの読み込みます。[/ja]

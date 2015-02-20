@@ -1,6 +1,6 @@
 /**
  * @ngdoc directive
- * @id lazy-repeat 
+ * @id lazy-repeat
  * @name ons-lazy-repeat
  * @description 
  *   [en]Using this component a list with millions of items can be rendered without a drop in performance. It does that by "lazily" loading elements into the DOM when they come into view and removing items from the DOM when they are not visible.[/en]
@@ -65,7 +65,7 @@
       transclude: 'element',
       compile: function(element, attrs, linker) {
         return function(scope, element, attrs) {
-          var lazyRepeat = new LazyRepeatView(scope, element, attrs, linker);     
+          var lazyRepeat = new LazyRepeatView(scope, element, attrs, linker);
 
           scope.$on('$destroy', function() {
             scope = element = attrs = linker = null;

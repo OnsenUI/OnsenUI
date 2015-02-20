@@ -109,9 +109,9 @@
   module.directive('onsTab', tab);
   module.directive('onsTabbarItem', tab); // for BC
 
-  var defaultInnerTemplate = 
+  var defaultInnerTemplate =
     '<div ng-if="icon != undefined" class="tab-bar__icon">' +
-      '<ons-icon icon="{{tabIcon}}" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>' + 
+      '<ons-icon icon="{{tabIcon}}" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>' +
     '</div>' +
     '<div ng-if="label" class="tab-bar__label">{{label}}</div>';
 
@@ -206,7 +206,7 @@
           if (scope.active) {
             tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
           }
-        
+
           $onsen.fireComponentEvent(element[0], 'init');
         };
       }

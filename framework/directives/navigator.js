@@ -300,7 +300,7 @@
         return {
           pre: function(scope, element, attrs, controller) {
             var navigator = new NavigatorView({
-              scope: scope, 
+              scope: scope,
               element: element
             });
 

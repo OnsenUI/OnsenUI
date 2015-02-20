@@ -2,7 +2,7 @@
  * @ngdoc directive
  * @id button
  * @name ons-button
- * @modifier outline 
+ * @modifier outline
  *   [en]Button with outline and transparent background[/en]
  *   [ja][/ja]
  * @modifier light
@@ -46,7 +46,7 @@
 
 /**
  * @ngdoc attribute
- * @name should-spin 
+ * @name should-spin
  * @type {Boolean}
  * @description
  *  [en]Specify if the button should have a spinner. [/en]
@@ -55,17 +55,17 @@
 
 /**
  * @ngdoc attribute
- * @name animation 
+ * @name animation
  * @type {String}
- * @description 
+ * @description
  *   [en]The animation when the button transitions to and from the spinner. Possible values are "slide-left" (default), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in".[/en]
  *   [ja]スピナーを表示する場合のアニメーションを指定します。次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
  */
 
 /**
  * @ngdoc attribute
- * @name disabled 
- * @description 
+ * @name disabled
+ * @description
  *   [en]Specify if button should be disabled.[/en]
  *   [ja]ボタンを無効化する場合は指定してください。[/ja]
  */
@@ -124,7 +124,7 @@
  *   [ja][/ja]
  * @description
  *   [en]Returns whether the button is disabled or enabled.[/en]
- *   [ja]このボタンがdisabled状態かどうかを返します。[/ja] 
+ *   [ja]このボタンがdisabled状態かどうかを返します。[/ja]
  */
 
 (function(){
@@ -142,7 +142,7 @@
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs, _, transclude) {
         var button = new ButtonView(scope, element, attrs);
-        
+
         $onsen.declareVarAttribute(attrs, button);
         element.data('ons-button', button);
 
@@ -153,13 +153,13 @@
           element = null;
         });
         var initialAnimation = 'slide-left';
-        
+
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         element.addClass('button effeckt-button');
         element.addClass(scope.modifierTemplater('button--*'));
         element.addClass(initialAnimation);
 
-        $onsen.addModifierMethods(button, 'button--*', element); 
+        $onsen.addModifierMethods(button, 'button--*', element);
 
         transclude(scope.$parent, function(cloned) {
           angular.element(element[0].querySelector('.ons-button-inner')).append(cloned);

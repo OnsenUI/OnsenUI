@@ -16,7 +16,7 @@
  * @seealso ons-bottom-toolbar [en]ons-bottom-toolbar component[/en][ja]ons-bottom-toolbarコンポーネント[/ja]
  * @seealso ons-back-button [en]ons-back-button component[/en][ja]ons-back-buttonコンポーネント[/ja]
  * @seealso ons-toolbar-button [en]ons-toolbar-button component[/en][ja]ons-toolbar-buttonコンポーネント[/ja]
- * @example 
+ * @example
  *   <ons-page>
  *     <ons-toolbar>
  *       <div class="left"><ons-back-button>Back</ons-back-button></div>
@@ -176,7 +176,7 @@
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
-      scope: false, 
+      scope: false,
       transclude: false,
 
       compile: function(element, attrs) {
@@ -204,7 +204,7 @@
             var toolbar = new GenericView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, toolbar);
-        
+
 
             scope.$on('$destroy', function() {
               toolbar._events = undefined;
@@ -230,7 +230,7 @@
             element.data('ons-toolbar', toolbar);
           },
           post: function(scope, element, attrs) {
-            $onsen.fireComponentEvent(element[0], 'init');  
+            $onsen.fireComponentEvent(element[0], 'init');
           }
         };
       }
