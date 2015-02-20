@@ -89,10 +89,14 @@
  * @ngdoc method
  * @signature on(eventName, listener)
  * @description
- *  [en]Add an event listener.[/en]
- *  [ja]イベントリスナーを追加します。[/ja]
+ *   [en]Add an event listener.[/en]
+ *   [ja]イベントリスナーを追加します。[/ja]
  * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja][/ja]
  * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -102,7 +106,11 @@
  *  [en]Add an event listener that's only triggered once.[/en]
  *  [ja][/ja]
  * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja][/ja]
  * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -112,7 +120,11 @@
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
  *  [ja][/ja]
  * @param {String} eventName
- * @param {Function} [listener]
+ *   [en]Name of the event.[/en]
+ *   [ja][/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja][/ja]
  */
 
 (function(){
