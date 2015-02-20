@@ -1,4 +1,4 @@
-/*! onsenui - v1.2.1 - 2014-12-01 */
+/*! onsenui - v1.2.1 - 2015-02-12 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -4718,8 +4718,19 @@ catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/back_button.tpl',
-    '<span class="toolbar-button--quiet {{modifierTemplater(\'toolbar-button--*\')}}" ng-click="$root.ons.findParentComponentUntil(\'ons-navigator\', $event).popPage()" style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">\n' +
-    '  <i class="ion-ios7-arrow-back ons-back-button__icon" style="vertical-align: top; background-color: transparent; height: 44px; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; width: 16px; display: inline-block; padding-top: 1px;"></i><span style="vertical-align: top; display: inline-block; line-height: 44px; height: 44px;" class="back-button__label"></span>\n' +
+    '<span \n' +
+    '  class="toolbar-button--quiet {{modifierTemplater(\'toolbar-button--*\')}}" \n' +
+    '  ng-click="$root.ons.findParentComponentUntil(\'ons-navigator\', $event).popPage()" \n' +
+    '  ng-show="showBackButton"\n' +
+    '  style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">\n' +
+    '  \n' +
+    '  <i \n' +
+    '    class="ion-ios-arrow-back ons-back-button__icon" \n' +
+    '    style="vertical-align: top; background-color: transparent; height: 44px; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; width: 16px; display: inline-block; padding-top: 1px;"></i>\n' +
+    '\n' +
+    '  <span \n' +
+    '    style="vertical-align: top; display: inline-block; line-height: 44px; height: 44px;" \n' +
+    '    class="back-button__label"></span>\n' +
     '</span>\n' +
     '');
 }]);
@@ -5102,6 +5113,10 @@ window.ons = (function(){
       },
 
       _unlockersDict: {},
+
+      // Object to attach component variables to when using the var="..." attribute.
+      // Can be set to null to avoid polluting the global scope.
+      componentBase: window,
 
       /**
        * Bootstrap this document as a Onsen UI application.
@@ -6124,7 +6139,7 @@ limitations under the License.
        * Returns whether the button is disabled or not.
        */
       isDisabled: function() {
-        return this._attrs.disabled;
+        return this._element[0].hasAttribute('disabled');
       },
 
       /**
@@ -6290,12 +6305,15 @@ limitations under the License.
         this._bindedOnDrag = this._onDrag.bind(this);
         this._bindedOnDragEnd = this._onDragEnd.bind(this);
         this._bindedOnResize = this._onResize.bind(this);
+        this._bindedStopPropagation = this._stopPropagation.bind(this);
 
         this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
 
         this._prepareEventListeners();
         this._layoutCarouselItems();
         this._setupInitialIndex();
+
+        this._attrs.$observe('direction', this._onDirectionChange.bind(this));
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
@@ -6306,10 +6324,25 @@ limitations under the License.
         this.refresh();
       },
 
+      _onDirectionChange: function() {
+         if (this._isVertical()) {
+          this._element.css({
+            overflowX: 'auto',
+            overflowY: ''
+          });
+        }
+        else {
+          this._element.css({
+            overflowX: '',
+            overflowY: 'auto'
+          });
+        }
+      },
+
       _saveLastState: function() {
         this._lastState = {
           elementSize: this._getCarouselItemSize(),
-          caroulseElementCount: this._getCarouselItemCount(),
+          carouselElementCount: this._getCarouselItemCount(),
           width: this._getCarouselItemSize() * this._getCarouselItemCount()
         };
       },
@@ -6391,21 +6424,32 @@ limitations under the License.
       },
 
       /**
-       * @param {Boolean} draggable
+       * @param {Number} ratio
        */
-      setDraggable: function(draggable) {
-        if (draggable) {
-          this._element[0].setAttribute('draggable', '');
-        } else {
-          this._element[0].removeAttribute('draggable');
+      setAutoScrollRatio: function(ratio) {
+        if (ratio < 0.0 || ratio > 1.0) {
+          throw new Error('Invalid ratio.');
         }
+
+        this._element[0].setAttribute('auto-scroll-ratio', ratio);
       },
 
       /**
-       * @return {Boolean}
+       * @return {Number}
        */
-      isDraggable: function() {
-        return this._element[0].hasAttribute('draggable');
+      getAutoScrollRatio: function(ratio) {
+        var attr = this._element[0].getAttribute('auto-scroll-ratio');
+
+        if (!attr) {
+          return 0.5;
+        }
+
+        var scrollRatio = parseFloat(attr);
+        if (scrollRatio < 0.0 || scrollRatio > 1.0) {
+          throw new Error('Invalid ratio.');
+        }
+
+        return isNaN(scrollRatio) ? 0.5 : scrollRatio;
       },
 
       /**
@@ -6541,10 +6585,13 @@ limitations under the License.
       },
 
       _prepareEventListeners: function() {
-        this._hammer = new Hammer(this._element[0]);
+        this._hammer = new Hammer(this._element[0], {
+          dragMinDistance: 1
+        });
 
         this._hammer.on('drag', this._bindedOnDrag);
         this._hammer.on('dragend', this._bindedOnDragEnd);
+        this._hammer.on(this._getTouchEvents(), this._bindedStopPropagation);
 
         angular.element(window).on('resize', this._bindedOnResize);
       },
@@ -6565,6 +6612,15 @@ limitations under the License.
       },
 
       _onDrag: function(event) {
+        if (!this.isSwipeable()) {
+          return;
+        }
+
+        var direction = event.gesture.direction;
+        if ((this._isVertical() && (direction === 'left' || direction === 'right')) || (!this._isVertical() && (direction === 'up' || direction === 'down'))) {
+          return;
+        }
+
         this._lastDragEvent = event;
 
         var scroll = this._scroll - this._getScrollDelta(event);
@@ -6576,15 +6632,49 @@ limitations under the License.
 
       _onDragEnd: function(event) {
         this._scroll = this._scroll - this._getScrollDelta(event);
-        this._tryFirePostChangeEvent();
 
         if (this._isOverScroll(this._scroll)) {
-          this._scrollToKillOverScroll();
+          var waitForAction = false;
+
+          this.emit('overscroll', {
+            carousel: this,
+            activeIndex: this.getActiveCarouselItemIndex(),
+            direction: this._getOverScrollDirection(),
+            waitToReturn: function(promise) {
+              waitForAction = true;
+              promise.then(
+                function() {
+                  this._scrollToKillOverScroll();
+                }.bind(this)
+              );
+            }.bind(this)
+          });
+
+          if (!waitForAction) {
+            this._scrollToKillOverScroll();
+          }
         } else if (this._lastDragEvent !== null) {
           this._startMomemtumScroll(event);
         }
         this._lastDragEvent = null;
         event.gesture.preventDefault();
+      },
+
+      _stopPropagation: function(event) {
+        if (this.isSwipeable()) {
+          event.stopPropagation();
+        }
+      },
+
+      _getTouchEvents: function() {
+        var EVENTS = [
+          'drag', 'dragstart', 'dragend',
+          'dragup', 'dragdown', 'dragleft', 
+          'dragright', 'swipe', 'swipeup',
+          'swipedown', 'swipeleft', 'swiperight'
+        ];
+
+        return EVENTS.join(' ');
       },
 
       /**
@@ -6639,6 +6729,22 @@ limitations under the License.
 
             return left - right;
           });
+
+          arr = arr.filter(function(item, pos) {
+            return !pos || item != arr[pos - 1];
+          });
+
+          var lastScroll = this._lastActiveIndex * size,
+            scrollRatio = Math.abs(scroll - lastScroll) / size;
+
+          if (scrollRatio <= this.getAutoScrollRatio()) {
+            return lastScroll;
+          }
+          else if (scrollRatio > this.getAutoScrollRatio() && scrollRatio < 1.0) {
+            if (arr[0] === lastScroll && arr.length > 1) {
+              return arr[1];
+            }
+          }
 
           return arr[0];
         } else {
@@ -6715,6 +6821,25 @@ limitations under the License.
         return false;
       },
 
+      _getOverScrollDirection: function() {
+        if (this._isVertical()) {
+          if (this._scroll <= 0) {
+            return 'up';
+          }
+          else {
+            return 'down';
+          }
+        }
+        else {
+          if (this._scroll <= 0) {
+            return 'left';
+          }
+          else {
+            return 'right';
+          }
+        }
+      },
+
       _scrollToKillOverScroll: function() {
         var duration = 0.4;
         
@@ -6760,12 +6885,23 @@ limitations under the License.
        * Refresh carousel item layout.
        */
       refresh: function() {
+        // Bug fix
+        if (this._getCarouselItemSize() === 0) {
+          return;
+        }
+
         this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
         this._layoutCarouselItems();
 
         if (this._lastState && this._lastState.width > 0) {
-          this._scroll = this._scroll / this._lastState.width * this._getCarouselItemSize() * this._getCarouselItemCount();
-          this._scrollTo(this._scroll);
+          var scroll = this._scroll;
+
+          if (this._isOverScroll(scroll)) {
+            this._scrollToKillOverScroll();
+          } 
+          else {
+            this._scrollTo(scroll);
+          }
         }
 
         this._saveLastState();
@@ -6794,6 +6930,7 @@ limitations under the License.
 
         this._hammer.off('drag', this._bindedOnDrag);
         this._hammer.off('dragend', this._bindedOnDragEnd);
+        this._hammer.off(this._getTouchEvents(), this._bindedStopPropagation);
 
         angular.element(window).off('resize', this._bindedOnResize);
 
@@ -8212,6 +8349,297 @@ limitations under the License.
 
 */
 
+(function(){
+  'use strict';
+  var module = angular.module('onsen');
+
+  module.factory('LazyRepeatView', ['$onsen', '$document', '$compile', function($onsen, $document, $compile) {
+
+    var LazyRepeatView = Class.extend({
+
+      /**
+       * @param {Object} scope
+       * @param {jqLite} element
+       * @param {Object} attrs
+       */
+      init: function(scope, element, attrs, linker) {
+        this._element = element;
+        this._scope = scope;
+        this._attrs = attrs;
+        this._linker = linker;
+
+        this._parentElement = element.parent();
+        this._itemHeightSum = [];
+        this._maxIndex = 0;
+
+        this._delegate = this._getDelegate();
+
+        this._renderedElements = {};
+        this._addEventListeners();
+
+        this._scope.$watch(
+          function() {
+            return this._countItems();
+          }.bind(this),
+          function() {
+            this._render();
+          }.bind(this)
+        );
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
+        this._render();
+      },
+
+      _getDelegate: function() {
+        var delegate = this._scope.$eval(this._attrs.onsLazyRepeat);
+
+        if (typeof delegate === 'undefined') {
+          /*jshint evil:true */
+          delegate = eval(this._attrs.onsLazyRepeat);
+        }
+
+        return delegate;
+      },
+
+      _countItems: function() {
+        return this._delegate.countItems();
+      },
+
+      _getItemHeight: function(i) {
+        return this._delegate.calculateItemHeight(i);
+      },
+      
+      _getTopOffset: function() {
+        return this._parentElement[0].getBoundingClientRect().top;
+      },
+
+      _render: function() {
+        var items = this._getItemsInView(),
+          keep = {};
+
+        this._parentElement.css('height', this._itemHeightSum[this._maxIndex] + 'px');
+
+        for (var i = 0, l = items.length; i < l; i ++) {
+          var _item = items[i];
+          this._renderElement(_item);
+          keep[_item.index] = true;
+        }
+
+        for (var key in this._renderedElements) {
+          if (this._renderedElements.hasOwnProperty(key) && !keep.hasOwnProperty(key)) {
+            this._removeElement(key);
+          }
+        }
+      },
+
+      _isRendered: function(i) {
+        return this._renderedElements.hasOwnProperty(i);
+      },
+      
+      _renderElement: function(item) {
+        if (this._isRendered(item.index)) {
+          // Update content even if it's already added to DOM
+          // to account for changes within the list.
+          var currentItem = this._renderedElements[item.index];
+
+          if (this._delegate.configureItemScope) {
+            this._delegate.configureItemScope(item.index, currentItem.scope);
+          }
+          else if (this._delegate.createItemContent) {
+            var newContent = angular.element(this._delegate.createItemContent(item.index)),
+              oldContent = currentItem.element.children();
+
+            if (newContent.html() !== oldContent.html()) {
+              currentItem.element
+                .append(newContent);
+              oldContent.remove();
+            }
+          }
+
+          return;
+        }
+
+        var childScope = this._scope.$new();
+        this._addSpecialProperties(item.index, childScope);
+
+        this._linker(childScope, function(clone) {
+          if (this._delegate.configureItemScope) {
+            this._delegate.configureItemScope(item.index, childScope);
+          }
+          else if (this._delegate.createItemContent) {
+            clone.append(this._delegate.createItemContent(item.index));
+          }
+
+          this._parentElement.append(clone);
+          clone.removeAttr('ons-lazy-repeat');
+
+          clone.css({
+            position: 'absolute',
+            top: item.top + 'px',
+            left: '0px',
+            right: '0px',
+            display: 'none'
+          });
+
+          var element = {
+            element: clone,
+            scope: childScope
+          };
+
+          $compile(clone)(childScope);
+ 
+          // Don't show elements before they are finished rendering.
+          this._scope.$evalAsync(function() {
+            clone.css('display', 'block');
+          });
+
+          this._renderedElements[item.index] = element;
+        }.bind(this));
+      },
+
+      _removeElement: function(i) {
+        if (!this._isRendered(i)) {
+          return;
+        }
+
+        var element = this._renderedElements[i];
+
+        if (this._delegate.destroyItemScope) {
+          this._delegate.destroyItemScope(i, element.scope);
+        }
+        else if (this._delegate.destroyItemContent) {
+          this._delegate.destroyItemContent(i, element.element.children()[0]);
+        }
+
+        element.element.remove();
+        element.scope.$destroy();
+        element.element = element.scope = null;
+
+        delete this._renderedElements[i];
+      },
+
+      _removeAllElements: function() {
+        for (var key in this._renderedElements) {
+          this._removeElement(key);
+        }
+      },
+
+      _calculateStartIndex: function(current) {
+        var start = 0,
+          end = this._maxIndex;
+
+        // Binary search for index at top of screen so
+        // we can speed up rendering.
+        while (true) {
+          var middle = Math.floor((start + end) / 2),
+            value = current + this._itemHeightSum[middle];
+
+          if (end < start) {
+            return 0;
+          }
+          else if (value >= 0 && value - this._getItemHeight(middle) < 0) {
+            return middle;
+          }
+          else if (isNaN(value) || value >= 0) {
+            end = middle - 1;
+          }
+          else {
+            start = middle + 1;
+          }
+
+        }
+      },
+
+      _getItemsInView: function() {
+        var topOffset = this._getTopOffset(),
+          topPosition = topOffset,
+          cnt = this._countItems();
+
+        var startIndex = this._calculateStartIndex(topPosition);
+        startIndex = Math.max(startIndex - 30, 0);
+
+        if (startIndex > 0) {
+          topPosition += this._itemHeightSum[startIndex - 1];
+        }
+
+        var items = [];
+        for (var i = startIndex; i < cnt && topPosition < 4 * window.innerHeight; i++) {
+          var h = this._getItemHeight();
+
+          if (i >= this._itemHeightSum.length) {
+            this._itemHeightSum = this._itemHeightSum.concat(new Array(100));
+          }
+
+          if (i > 0) {
+            this._itemHeightSum[i] = this._itemHeightSum[i - 1] + h;
+          }
+          else {
+            this._itemHeightSum[i] = h;
+          }
+
+          this._maxIndex = Math.max(i, this._maxIndex);
+
+          items.push({
+            index: i,
+            top: topPosition - topOffset
+          });
+
+          topPosition += h;
+        }
+
+        return items;
+      },
+
+      _addSpecialProperties: function(i, scope) {
+        scope.$index = i;
+        scope.$first = i === 0;
+        scope.$last = i === this._countItems() - 1;
+        scope.$middle = !scope.$first && !scope.$last;
+        scope.$even = i % 2 === 0;
+        scope.$odd = !scope.$even;
+      },
+
+      _onScroll: function() {
+        this._render();
+      },
+
+      _addEventListeners: function() {
+        this._bindedOnScroll = this._onScroll.bind(this); 
+        $document[0].addEventListener('scroll', this._bindedOnScroll, true);
+      },
+
+      _removeEventListeners: function() {
+        $document[0].removeEventListener('scroll', this._bindedOnScroll, true);
+      },
+      
+      _destroy: function() {
+        this._removeEventListeners(); 
+        this._removeAllElements();
+        this._parentElement = this._renderedElements = this._element = this._scope = this._attrs = null;
+      }
+    });
+
+    return LazyRepeatView;
+  }]);
+})();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
 (function() {
   'use strict;';
 
@@ -8379,7 +8807,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('ModalView', ['$onsen', function($onsen) {
+  module.factory('ModalView', ['$onsen', '$rootScope', function($onsen, $rootScope) {
 
     var ModalView = Class.extend({
       _element: undefined,
@@ -8392,6 +8820,11 @@ limitations under the License.
       init: function(scope, element) {
         this._scope = scope;
         this._element = element;
+
+        var pageView = $rootScope.ons.findParentComponentUntil('ons-page', this._element);
+        if (pageView) {
+          this._pageContent = angular.element(pageView._element[0].querySelector('.page__content'));
+        }
 
         this._scope.$on('$destroy', this._destroy.bind(this));
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
@@ -8408,6 +8841,10 @@ limitations under the License.
        */
       show: function() {
         this._element.css('display', 'table');
+
+        if (this._pageContent) {
+          this._pageContent.addClass('noscroll');
+        }
       },
 
       _isVisible: function() {
@@ -8424,6 +8861,10 @@ limitations under the License.
        */
       hide: function() {
         this._element.css('display', 'none');
+
+        if (this._pageContent) {
+          this._pageContent.removeClass('noscroll');
+        }
       },
 
       /**
@@ -8923,16 +9364,15 @@ limitations under the License.
        */
       popPage: function(options) {
         options = options || {};
-
-        if (this.pages.length <= 1) {
-          throw new Error('NavigatorView\'s page stack is empty.');
-        }
-
-        if (this._emitPrePopEvent()) {
-          return;
-        }
-
+        
         this._doorLock.waitUnlock(function() {
+          if (this.pages.length <= 1) {
+            throw new Error('NavigatorView\'s page stack is empty.');
+          }
+
+          if (this._emitPrePopEvent()) {
+            return;
+          }
           this._popPage(options);
         }.bind(this));
       },
@@ -9699,12 +10139,17 @@ limitations under the License.
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
 
-        this._onResize = function() {
-          if (this._currentTarget) {
-            this._positionPopover(this._currentTarget);
-          }
+        this._onChange = function() {
+          setImmediate(function() {
+            if (this._currentTarget) {
+              this._positionPopover(this._currentTarget);
+            }
+          }.bind(this));
         }.bind(this);
-        window.addEventListener('resize', this._onResize, false);
+
+        this._popover[0].addEventListener('DOMNodeInserted', this._onChange, false);
+        this._popover[0].addEventListener('DOMNodeRemoved', this._onChange, false);
+        window.addEventListener('resize', this._onChange, false);
       },
 
       _onDeviceBackButton: function(event) {
@@ -9935,9 +10380,11 @@ limitations under the License.
         this._element.remove();
         
         this._deviceBackButtonHandler.destroy();
-        window.removeEventListener('resize', this._onResize, false);
+        this._popover[0].removeEventListener('DOMNodeInserted', this._onChange, false);
+        this._popover[0].removeEventListener('DOMNodeRemoved', this._onChange, false);
+        window.removeEventListener('resize', this._onChange, false);
 
-        this._onResize = this._deviceBackButtonHandler = this._mask = this._popover = this._element = this._scope = null;
+        this._onChange = this._deviceBackButtonHandler = this._mask = this._popover = this._element = this._scope = null;
       },
 
       /**
@@ -10033,6 +10480,333 @@ limitations under the License.
   });
 })();
 
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function(){
+  'use strict';
+  var module = angular.module('onsen');
+
+  module.factory('PullHookView', ['$onsen', '$parse', function($onsen, $parse) {
+
+    var PullHookView = Class.extend({
+
+      STATE_INITIAL: 'initial',
+      STATE_PREACTION: 'preaction',
+      STATE_ACTION: 'action',
+
+      /**
+       * @param {Object} scope
+       * @param {jqLite} element
+       * @param {Object} attrs
+       */
+      init: function(scope, element, attrs) {
+        this._element = element;
+        this._scope = scope;
+        this._attrs = attrs;
+
+        this._scrollElement = this._createScrollElement();
+        this._pageElement = this._scrollElement.parent();
+
+        if (!this._pageElement.hasClass('page__content')) {
+          throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> element.');
+        }
+
+        this._currentTranslation = 0;
+
+        this._createEventListeners();
+        this._setState(this.STATE_INITIAL, true);
+        this._setStyle();
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
+      },
+
+      _createScrollElement: function() {
+        var scrollElement = angular.element('<div>')
+          .addClass('scroll');
+
+        var pageElement = this._element.parent(),
+          children = pageElement.children();
+
+        pageElement.append(scrollElement);
+        scrollElement.append(children);
+
+        return scrollElement; 
+      },
+
+      _setStyle: function() {
+        var h = this._getHeight();
+
+        this._element.css({
+          top: '-' + h + 'px',
+          height: h + 'px',
+          lineHeight: h + 'px'
+        });
+      },
+    
+      _onScroll: function(event) {
+        var el = this._pageElement[0];
+
+        if (el.scrollTop < 0) {
+          el.scrollTop = 0;
+        }
+      },
+
+      _generateTranslationTransform: function(scroll) {
+        return 'translate3d(0px, ' + scroll + 'px, 0px)';
+      },
+
+      _onDrag: function(event) {
+        if (this.isDisabled()) {
+          return;
+        }
+
+        // Hack to make it work on Android 4.4 WebView. Scrolls manually near the top of the page so
+        // there will be no inertial scroll when scrolling down. Allowing default scrolling will
+        // kill all 'touchmove' events.
+        var el = this._pageElement[0];
+        el.scrollTop = this._startScroll - event.gesture.deltaY;
+        if (el.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
+          event.gesture.preventDefault();
+        }
+
+        if (this._currentTranslation === 0 && this._getCurrentScroll() === 0) {
+          this._transitionDragLength = event.gesture.deltaY;
+
+          var direction = event.gesture.interimDirection;
+          if (direction === 'down') {
+            this._transitionDragLength -= 1;
+          }
+          else {
+            this._transitionDragLength += 1;
+          }
+        }
+
+        var scroll = event.gesture.deltaY - this._startScroll;
+
+        scroll = Math.max(scroll, 0);
+
+        if (this._thresholdHeightEnabled() && scroll >= this._getThresholdHeight()) {
+          event.gesture.stopDetect();
+
+          setImmediate(function() {
+            this._setState(this.STATE_ACTION);
+            this._translateTo(this._getHeight(), {animate: true});
+
+            this._waitForAction(this._onDone.bind(this));
+          }.bind(this));
+        }
+        else if (scroll >= this._getHeight()) {
+          this._setState(this.STATE_PREACTION);
+        }
+        else {
+          this._setState(this.STATE_INITIAL);
+        }
+  
+        this._translateTo(scroll);
+      },
+
+      _onDragStart: function(event) {
+        if (this.isDisabled()) {
+          return;
+        }
+
+        this._startScroll = this._getCurrentScroll();
+      },
+
+      _onDragEnd: function(event) {
+        if (this.isDisabled()) {
+          return;
+        }
+
+        if (this._currentTranslation > 0) {
+          var scroll = this._currentTranslation;
+
+          if (scroll > this._getHeight()) {
+            this._setState(this.STATE_ACTION);
+
+            this._translateTo(this._getHeight(), {animate: true});
+
+            this._waitForAction(this._onDone.bind(this));
+          }
+          else {
+            this._translateTo(0, {animate: true});
+          }
+        }
+      },
+
+      _waitForAction: function(done) {
+        if (this._attrs.ngAction) {
+          this._scope.$eval(this._attrs.ngAction, {$done: done});
+        }
+        else if (this._attrs.onAction) {
+          eval(this._attrs.onAction);
+        }
+        else {
+          done();
+        }
+      },
+
+      _onDone: function(done) {
+        this._translateTo(0, {animate: true});
+        this._setState(this.STATE_INITIAL);
+      },
+
+      _getHeight: function() {
+        return parseInt(this._element[0].getAttribute('height') || '64', 10);
+      },
+
+      setHeight: function(height) {
+        this._element[0].setAttribute('height', height + 'px');
+
+        this._setStyle();
+      },
+
+      setThresholdHeight: function(thresholdHeight) {
+        this._element[0].setAttribute('threshold-height', thresholdHeight + 'px');
+      },
+
+      _getThresholdHeight: function() {
+        return parseInt(this._element[0].getAttribute('threshold-height') || '96', 10);
+      },
+
+      _thresholdHeightEnabled: function() {
+        var th = this._getThresholdHeight();
+        return th > 0 && th >= this._getHeight();
+      },
+
+      _setState: function(state, noEvent) {
+        var oldState = this._getState();
+
+        this._scope.$evalAsync(function() {
+          this._element[0].setAttribute('state', state);
+        }.bind(this));
+
+        if (!noEvent && oldState !== this._getState()) {
+          this.emit('changestate', {
+            state: state,
+            pullHook: this
+          });
+        }
+      },
+
+      _getState: function() {
+        return this._element[0].getAttribute('state');
+      },
+
+      getCurrentState: function() {
+        return this._getState();
+      },
+
+      _getCurrentScroll: function() {
+        return this._pageElement[0].scrollTop;
+      },
+
+      isDisabled: function() {
+        return this._element[0].hasAttribute('disabled');
+      },
+
+      setDisabled: function(disabled) {
+        if (disabled) {
+          this._element[0].setAttribute('disabled', '');
+        }
+        else {
+          this._element[0].removeAttribute('disabled');
+        }
+      },
+
+      _translateTo: function(scroll, options) {
+        options = options || {};
+    
+        this._currentTranslation = scroll;
+
+        if (options.animate) {
+          animit(this._scrollElement[0])
+            .queue({
+              transform: this._generateTranslationTransform(scroll)
+            }, {
+              duration: 0.3,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .play(options.callback);
+        }
+        else {
+          animit(this._scrollElement[0])
+            .queue({
+              transform: this._generateTranslationTransform(scroll)
+            })
+            .play(options.callback);
+        }
+      },
+
+      _getMinimumScroll: function() {
+        var scrollHeight = this._scrollElement[0].getBoundingClientRect().height,
+          pageHeight = this._pageElement[0].getBoundingClientRect().height;
+
+        if (scrollHeight > pageHeight) {
+          return -(scrollHeight - pageHeight);
+        }
+        else {
+          return 0;
+        }
+
+      },
+
+      _createEventListeners: function() {
+        var element = this._scrollElement.parent();
+
+        this._hammer = new Hammer(element[0], {
+          dragMinDistance: 1,
+          dragDistanceCorrection: false
+        });
+
+        // Event listeners
+        this._bindedOnDrag = this._onDrag.bind(this);
+        this._bindedOnDragStart = this._onDragStart.bind(this);
+        this._bindedOnDragEnd = this._onDragEnd.bind(this);
+        this._bindedOnScroll = this._onScroll.bind(this);
+        
+        // Bind listeners
+        this._hammer.on('drag', this._bindedOnDrag);
+        this._hammer.on('dragstart', this._bindedOnDragStart);
+        this._hammer.on('dragend', this._bindedOnDragEnd);
+        element.on('scroll', this._bindedOnScroll);
+      },
+
+      _destroyEventListeners: function() {
+        var element = this._scrollElement[0].parentNode;
+
+        this._hammer.off('drag', this._bindedOnDrag);
+        this._hammer.off('dragstart', this._bindedOnDragStart);
+        this._hammer.off('dragend', this._bindedOnDragEnd);
+        element.off('scroll', this._bindedOnScroll);
+      },
+
+      _destroy: function() {
+        this._destroyEventListeners();
+        this._element = this._scope = this._attrs = null;
+      }
+    });
+
+    MicroEvent.mixin(PullHookView);
+    return PullHookView;
+  }]);
+})();
 
 /*
 Copyright 2013-2014 ASIAL CORPORATION
@@ -10574,7 +11348,7 @@ limitations under the License.
 
       /** Black mask */
       backgroundMask : angular.element(
-        '<div style="position: absolute; width: 100%;' +
+        '<div style="z-index: 2; position: absolute; width: 100%;' +
         'height: 100%; background-color: black; opacity: 0;"></div>'
       ),
 
@@ -11041,9 +11815,14 @@ limitations under the License.
         this._menuPage = angular.element(element[0].querySelector('.onsen-sliding-menu__menu'));
         this._mainPage = angular.element(element[0].querySelector('.onsen-sliding-menu__main'));
 
+
         this._doorLock = new DoorLock();
 
         this._isRightMenu = attrs.side === 'right';
+
+        // Close menu on tap event.
+        this._mainPageHammer = new Hammer(this._mainPage[0]);
+        this._bindedOnTap = this._onTap.bind(this);
 
         var maxDistance = this._normalizeMaxSlideDistanceAttr();
         this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
@@ -11058,7 +11837,8 @@ limitations under the License.
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
         attrs.$observe('swipeable', this._onSwipeableChanged.bind(this));
 
-        window.addEventListener('resize', this._onWindowResize.bind(this));
+        this._bindedOnWindowResize = this._onWindowResize.bind(this);
+        window.addEventListener('resize', this._bindedOnWindowResize);
 
         this._boundHandleEvent = this._handleEvent.bind(this);
         this._bindEvents();
@@ -11110,6 +11890,12 @@ limitations under the License.
         }
       },
 
+      _onTap: function() {
+        if (this.isMenuOpened()) {
+          this.closeMenu();
+        }
+      },
+
       _refreshMenuPageWidth: function() {
         var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
 
@@ -11125,6 +11911,9 @@ limitations under the License.
         this.emit('destroy', {slidingMenu: this});
 
         this._deviceBackButtonHandler.destroy();
+        window.removeEventListener('resize', this._bindedOnWindowResize);
+
+        this._mainPageHammer.off('tap', this._bindedOnTap);
         this._element = this._scope = this._attrs = null;
       },
 
@@ -11447,7 +12236,7 @@ limitations under the License.
       close: function(options) {
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
-        
+       
         this.emit('preclose');
 
         this._doorLock.waitUnlock(function() {
@@ -11462,6 +12251,9 @@ limitations under the License.
 
         this._animator.closeMenu(function() {
           unlock();
+
+          this._mainPage.children().css('pointer-events', '');
+          this._mainPageHammer.off('tap', this._bindedOnTap);
           this.emit('postclose');
           callback();
         }.bind(this), instant);
@@ -11494,7 +12286,742 @@ limitations under the License.
 
         this._animator.openMenu(function() {
           unlock();
+
+          this._mainPage.children().css('pointer-events', 'none');
+          this._mainPageHammer.on('tap', this._bindedOnTap);
           this.emit('postopen');
+          callback();
+        }.bind(this), instant);
+      },
+
+      /**
+       * Toggle sliding-menu page.
+       */
+      toggle: function(options) {
+        if (this._logic.isClosed()) {
+          this.open(options);
+        } else {
+          this.close(options);
+        }
+      },
+
+      /**
+       * Toggle sliding-menu page.
+       */
+      toggleMenu: function() {
+        return this.toggle.apply(this, arguments);
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      isMenuOpened: function() {
+        return this._logic.isOpened();
+      },
+
+      /**
+       * @param {Object} event
+       */
+      _translate: function(event) {
+        this._animator.translateMenu(event);
+      }
+    });
+
+    // Preset sliding menu animators.
+    SlidingMenuView._animatorDict = {
+      'default': new RevealSlidingMenuAnimator(),
+      'overlay': new OverlaySlidingMenuAnimator(),
+      'reveal': new RevealSlidingMenuAnimator(),
+      'push': new PushSlidingMenuAnimator()
+    };
+
+    /**
+     * @param {String} name
+     * @param {NavigatorTransitionAnimator} animator
+     */
+    SlidingMenuView.registerSlidingMenuAnimator = function(name, animator) {
+      if (!(animator instanceof SlidingMenuAnimator)) {
+        throw new Error('"animator" param must be an instance of SlidingMenuAnimator');
+      }
+
+      this._animatorDict[name] = animator;
+    };
+
+    MicroEvent.mixin(SlidingMenuView);
+
+    return SlidingMenuView;
+  }]);
+})();
+
+/*
+Copyright 2013-2014 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function() {
+  'use strict';
+  var module = angular.module('onsen');
+
+  var SlidingMenuViewModel = Class.extend({
+
+    /**
+     * @member Number
+     */
+    _distance: 0,
+
+    /**
+     * @member Number
+     */
+    _maxDistance: undefined,
+
+    /**
+     * @param {Object} options
+     * @param {Number} maxDistance
+     */
+    init: function(options) {
+      if (!angular.isNumber(options.maxDistance)) {
+        throw new Error('options.maxDistance must be number');
+      }
+
+      this.setMaxDistance(options.maxDistance);
+    },
+
+    /**
+     * @param {Number} maxDistance
+     */
+    setMaxDistance: function(maxDistance) {
+      if (maxDistance <= 0) {
+        throw new Error('maxDistance must be greater then zero.');
+      }
+
+      if (this.isOpened()) {
+        this._distance = maxDistance;
+      }
+      this._maxDistance = maxDistance;
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    shouldOpen: function() {
+      return !this.isOpened() && this._distance >= this._maxDistance / 2;
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    shouldClose: function() {
+      return !this.isClosed() && this._distance < this._maxDistance / 2;
+    },
+
+    openOrClose: function(options) {
+      if (this.shouldOpen()) {
+        this.open(options);
+      } else if (this.shouldClose()) {
+        this.close(options);
+      }
+    },
+
+    close: function(options) {
+      var callback = options.callback || function() {};
+
+      if (!this.isClosed()) {
+        this._distance = 0;
+        this.emit('close', options);
+      } else {
+        callback();
+      }
+    },
+
+    open: function(options) {
+      var callback = options.callback || function() {};
+
+      if (!this.isOpened()) {
+        this._distance = this._maxDistance;
+        this.emit('open', options);
+      } else {
+        callback();
+      }
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isClosed: function() {
+      return this._distance === 0;
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isOpened: function() {
+      return this._distance === this._maxDistance;
+    },
+
+    /**
+     * @return {Number}
+     */
+    getX: function() {
+      return this._distance;
+    },
+
+    /**
+     * @return {Number}
+     */
+    getMaxDistance: function() {
+      return this._maxDistance;
+    },
+
+    /**
+     * @param {Number} x
+     */
+    translate: function(x) {
+      this._distance = Math.max(1, Math.min(this._maxDistance - 1, x));
+
+      var options = {
+        distance: this._distance,
+        maxDistance: this._maxDistance
+      };
+
+      this.emit('translate', options);
+    },
+
+    toggle: function() {
+      if (this.isClosed()) {
+        this.open();
+      } else {
+        this.close();
+      }
+    }
+  });
+  MicroEvent.mixin(SlidingMenuViewModel);
+
+  module.factory('SlidingMenuView', ['$onsen', '$compile', 'SlidingMenuAnimator', 'RevealSlidingMenuAnimator', 'PushSlidingMenuAnimator', 'OverlaySlidingMenuAnimator', function($onsen, $compile, SlidingMenuAnimator, RevealSlidingMenuAnimator, 
+                                             PushSlidingMenuAnimator, OverlaySlidingMenuAnimator) {
+
+    var SlidingMenuView = Class.extend({
+      _scope: undefined,
+      _attrs: undefined,
+
+      _element: undefined,
+      _menuPage: undefined,
+      _mainPage: undefined,
+
+      _doorLock: undefined,
+
+      _isRightMenu: false,
+
+      init: function(scope, element, attrs) {
+        this._scope = scope;
+        this._attrs = attrs;
+        this._element = element;
+
+        this._menuPage = angular.element(element[0].querySelector('.onsen-sliding-menu__menu'));
+        this._mainPage = angular.element(element[0].querySelector('.onsen-sliding-menu__main'));
+
+
+        this._doorLock = new DoorLock();
+
+        this._isRightMenu = attrs.side === 'right';
+
+        // Close menu on tap event.
+        this._mainPageHammer = new Hammer(this._mainPage[0]);
+        this._bindedOnTap = this._onTap.bind(this);
+
+        var maxDistance = this._normalizeMaxSlideDistanceAttr();
+        this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
+        this._logic.on('translate', this._translate.bind(this));
+        this._logic.on('open', function(options) {
+          this._open(options);
+        }.bind(this));
+        this._logic.on('close', function(options) {
+          this._close(options);
+        }.bind(this));
+
+        attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
+        attrs.$observe('swipeable', this._onSwipeableChanged.bind(this));
+
+        this._bindedOnWindowResize = this._onWindowResize.bind(this);
+        window.addEventListener('resize', this._bindedOnWindowResize);
+
+        this._boundHandleEvent = this._handleEvent.bind(this);
+        this._bindEvents();
+
+        if (attrs.mainPage) {
+          this.setMainPage(attrs.mainPage);
+        }
+
+        if (attrs.menuPage) {
+          this.setMenuPage(attrs.menuPage);
+        }
+
+        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+
+        var unlock = this._doorLock.lock();
+
+        window.setTimeout(function() {
+          var maxDistance = this._normalizeMaxSlideDistanceAttr();
+          this._logic.setMaxDistance(maxDistance);
+
+          this._menuPage.css({opacity: 1});
+
+          this._animator = this._getAnimatorOption();
+          this._animator.setup(
+            this._element,
+            this._mainPage,
+            this._menuPage,
+            {
+              isRight: this._isRightMenu,
+              width: this._attrs.maxSlideDistance || '90%'
+            }
+          );
+
+          unlock();
+        }.bind(this), 400);
+
+        scope.$on('$destroy', this._destroy.bind(this));
+      },
+
+      getDeviceBackButtonHandler: function() {
+        return this._deviceBackButtonHandler;
+      },
+
+      _onDeviceBackButton: function(event) {
+        if (this.isMenuOpened()) {
+          this.closeMenu();
+        } else {
+          event.callParentHandler();
+        }
+      },
+
+      _onTap: function() {
+        if (this.isMenuOpened()) {
+          this.closeMenu();
+        }
+      },
+
+      _refreshMenuPageWidth: function() {
+        var width = ('maxSlideDistance' in this._attrs) ? this._attrs.maxSlideDistance : '90%';
+
+        if (this._animator) {
+          this._animator.onResized({
+            isOpened: this._logic.isOpened(),
+            width: width
+          });
+        }
+      },
+
+      _destroy: function() {
+        this.emit('destroy', {slidingMenu: this});
+
+        this._deviceBackButtonHandler.destroy();
+        window.removeEventListener('resize', this._bindedOnWindowResize);
+
+        this._mainPageHammer.off('tap', this._bindedOnTap);
+        this._element = this._scope = this._attrs = null;
+      },
+
+      _getAnimatorOption: function() {
+        var animator = SlidingMenuView._animatorDict[this._attrs.type];
+
+        if (!(animator instanceof SlidingMenuAnimator)) {
+          animator = SlidingMenuView._animatorDict['default'];
+        }
+
+        return animator.copy();
+      },
+
+      _onSwipeableChanged: function(swipeable) {
+        swipeable = swipeable === '' || swipeable === undefined || swipeable == 'true';
+
+        this.setSwipeable(swipeable);
+      },
+
+      /**
+       * @param {Boolean} enabled
+       */
+      setSwipeable: function(enabled) {
+        if (enabled) {
+          this._activateHammer();
+        } else {
+          this._deactivateHammer();
+        }
+      },
+
+      _onWindowResize: function() {
+        this._recalculateMAX();
+        this._refreshMenuPageWidth();
+      },
+
+      _onMaxSlideDistanceChanged: function() {
+        this._recalculateMAX();
+        this._refreshMenuPageWidth();
+      },
+
+      /**
+       * @return {Number}
+       */
+      _normalizeMaxSlideDistanceAttr: function() {
+        var maxDistance = this._attrs.maxSlideDistance;
+
+        if (!('maxSlideDistance' in this._attrs)) {
+          maxDistance = 0.9 * this._mainPage[0].clientWidth;
+        } else if (typeof maxDistance == 'string') {
+          if (maxDistance.indexOf('px', maxDistance.length - 2) !== -1) {
+            maxDistance = parseInt(maxDistance.replace('px', ''), 10);
+          } else if (maxDistance.indexOf('%', maxDistance.length - 1) > 0) {
+            maxDistance = maxDistance.replace('%', '');
+            maxDistance = parseFloat(maxDistance) / 100 * this._mainPage[0].clientWidth;
+          }
+        } else {
+          throw new Error('invalid state');
+        }
+
+        return maxDistance;
+      },
+
+      _recalculateMAX: function() {
+        var maxDistance = this._normalizeMaxSlideDistanceAttr();
+
+        if (maxDistance) {
+          this._logic.setMaxDistance(parseInt(maxDistance, 10));
+        }
+      },
+
+      _activateHammer: function(){
+        this._hammertime.on('touch dragleft dragright swipeleft swiperight release', this._boundHandleEvent);
+      },
+
+      _deactivateHammer: function(){
+        this._hammertime.off('touch dragleft dragright swipeleft swiperight release', this._boundHandleEvent);
+      },
+
+      _bindEvents: function() {
+        this._hammertime = new Hammer(this._element[0]);
+      },
+
+      _appendMainPage: function(pageUrl, templateHTML) {
+        var pageScope = this._scope.$parent.$new();
+        var pageContent = angular.element(templateHTML);
+        var link = $compile(pageContent);
+
+        this._mainPage.append(pageContent);
+
+        if (this._currentPageElement) {
+          this._currentPageElement.remove();
+          this._currentPageScope.$destroy();
+        }
+
+        link(pageScope);
+
+        this._currentPageElement = pageContent;
+        this._currentPageScope = pageScope;
+        this._currentPageUrl = pageUrl;
+      },
+
+      /**
+       * @param {String}
+       */
+      _appendMenuPage: function(templateHTML) {
+        var pageScope = this._scope.$parent.$new();
+        var pageContent = angular.element(templateHTML);
+        var link = $compile(pageContent);
+
+        this._menuPage.append(pageContent);
+
+        if (this._currentMenuPageScope) {
+          this._currentMenuPageScope.$destroy();
+          this._currentMenuPageElement.remove();
+        }
+
+        link(pageScope);
+
+        this._currentMenuPageElement = pageContent;
+        this._currentMenuPageScope = pageScope;
+      },
+
+      /**
+       * @param {String} page
+       * @param {Object} options
+       * @param {Boolean} [options.closeMenu]
+       * @param {Boolean} [options.callback]
+       */
+      setMenuPage: function(page, options) {
+        if (page) {
+          options = options || {};
+          options.callback = options.callback || function() {};
+
+          var self = this;
+          $onsen.getPageHTMLAsync(page).then(function(html) {
+            self._appendMenuPage(angular.element(html));
+            if (options.closeMenu) {
+              self.close();
+            }
+            options.callback();
+          }, function() {
+            throw new Error('Page is not found: ' + page);
+          });
+        } else {
+          throw new Error('cannot set undefined page');
+        }
+      },
+
+      /**
+       * @param {String} pageUrl
+       * @param {Object} options
+       * @param {Boolean} [options.closeMenu]
+       * @param {Boolean} [options.callback]
+       */
+      setMainPage: function(pageUrl, options) {
+        options = options || {};
+        options.callback = options.callback || function() {};
+
+        var done = function() {
+          if (options.closeMenu) {
+            this.close();
+          }
+          options.callback();
+        }.bind(this);
+
+        if (this.currentPageUrl === pageUrl) {
+          done();
+          return;
+        }
+
+        if (pageUrl) {
+          var self = this;
+          $onsen.getPageHTMLAsync(pageUrl).then(function(html) {
+            self._appendMainPage(pageUrl, html);
+            done();
+          }, function() {
+            throw new Error('Page is not found: ' + page);
+          });
+        } else {
+          throw new Error('cannot set undefined page');
+        }
+      },
+
+      _handleEvent: function(event) {
+
+        if (this._doorLock.isLocked()) {
+          return;
+        }
+
+        if (this._isInsideIgnoredElement(event.target)){
+          event.gesture.stopDetect();
+        }
+
+        switch (event.type) {
+
+          case 'touch':
+            if (this._logic.isClosed()) {
+              if (!this._isInsideSwipeTargetArea(event)) {
+                event.gesture.stopDetect();
+              }
+            }
+
+            break;
+
+          case 'dragleft':
+          case 'dragright':
+            event.gesture.preventDefault();
+
+            var deltaX = event.gesture.deltaX;
+            var deltaDistance = this._isRightMenu ? -deltaX : deltaX;
+
+            var startEvent = event.gesture.startEvent;
+
+            if (!('isOpened' in startEvent)) {
+              startEvent.isOpened = this._logic.isOpened();
+            }
+
+            if (deltaDistance < 0 && this._logic.isClosed()) {
+              break;
+            }
+
+            if (deltaDistance > 0 && this._logic.isOpened()) {
+              break;
+            }
+
+            var distance = startEvent.isOpened ?
+              deltaDistance + this._logic.getMaxDistance() : deltaDistance;
+
+            this._logic.translate(distance);
+
+            break;
+
+          case 'swipeleft':
+            event.gesture.preventDefault();
+
+            if (this._isRightMenu) {
+              this.open();
+            } else {
+              this.close();
+            }
+
+            event.gesture.stopDetect();
+            break;
+
+          case 'swiperight':
+            event.gesture.preventDefault();
+
+            if (this._isRightMenu) {
+              this.close();
+            } else {
+              this.open();
+            }
+
+            event.gesture.stopDetect();
+            break;
+
+          case 'release':
+            this._lastDistance = null;
+
+            if (this._logic.shouldOpen()) {
+              this.open();
+            } else if (this._logic.shouldClose()) {
+              this.close();
+            }
+
+            break;
+        }
+      },
+
+      /**
+       * @param {jqLite} element
+       * @return {Boolean}
+       */
+      _isInsideIgnoredElement: function(element) {
+        do {
+          if (element.getAttribute && element.getAttribute('sliding-menu-ignore')) {
+            return true;
+          }
+          element = element.parentNode;
+        } while (element);
+
+        return false;
+      },
+
+      _isInsideSwipeTargetArea: function(event) {
+        var x = event.gesture.center.pageX;
+
+        if (!('_swipeTargetWidth' in event.gesture.startEvent)) {
+          event.gesture.startEvent._swipeTargetWidth = this._getSwipeTargetWidth();
+        }
+
+        var targetWidth = event.gesture.startEvent._swipeTargetWidth;
+        return this._isRightMenu ? this._mainPage[0].clientWidth - x < targetWidth : x < targetWidth;
+      },
+
+      _getSwipeTargetWidth: function() {
+        var targetWidth = this._attrs.swipeTargetWidth;
+
+        if (typeof targetWidth == 'string') {
+          targetWidth = targetWidth.replace('px', '');
+        }
+
+        var width = parseInt(targetWidth, 10);
+        if (width < 0 || !targetWidth) {
+          return this._mainPage[0].clientWidth;
+        } else {
+          return width;
+        }
+      },
+
+      closeMenu: function() {
+        return this.close.apply(this, arguments);
+      },
+
+      /**
+       * Close sliding-menu page.
+       *
+       * @param {Object} options 
+       */
+      close: function(options) {
+        options = options || {};
+        options = typeof options == 'function' ? {callback: options} : options;
+       
+        this.emit('preclose');
+
+        this._doorLock.waitUnlock(function() {
+          this._logic.close(options);
+        }.bind(this));
+      },
+
+      _close: function(options) {
+        var callback = options.callback || function() {},
+            unlock = this._doorLock.lock(),
+            instant = options.animation == 'none';
+
+        this._animator.closeMenu(function() {
+          unlock();
+
+          this._mainPage.children().css('pointer-events', '');
+          this._mainPageHammer.off('tap', this._bindedOnTap);
+
+          // iOS fix to stop scrolling.
+          var pageContent = this._mainPage[0].querySelector('.page__content');
+          if (pageContent) {
+            angular.element(pageContent).removeClass('noscroll');
+          }
+
+          this.emit('postclose');
+          callback();
+        }.bind(this), instant);
+      },
+
+      openMenu: function() {
+        return this.open.apply(this, arguments);
+      },
+
+      /**
+       * Open sliding-menu page.
+       *
+       * @param {Object} options 
+       */
+      open: function(options) {
+        options = options || {};
+        options = typeof options == 'function' ? {callback: options} : options;
+
+        this.emit('preopen');
+
+        this._doorLock.waitUnlock(function() {
+          this._logic.open(options);
+        }.bind(this));
+      },
+
+      _open: function(options) {
+        var callback = options.callback || function() {},
+            unlock = this._doorLock.lock(),
+            instant = options.animation == 'none';
+
+        this._animator.openMenu(function() {
+          unlock();
+
+          this._mainPage.children().css('pointer-events', 'none');
+          this._mainPageHammer.on('tap', this._bindedOnTap);
+
+          // iOS fix to stop scrolling.
+          var pageContent = this._mainPage[0].querySelector('.page__content');
+          if (pageContent) {
+            angular.element(pageContent).addClass('noscroll');
+          }
+
+          this.emit('postopen');
+
+
           callback();
         }.bind(this), instant);
       },
@@ -12249,11 +13776,26 @@ limitations under the License.
         selectedTabItem.setActive();
 
         if (needLoad) {
-          this._loadPage(selectedTabItem.page, {
+          var removeElement = true;
+
+          if (previousTabItem && previousTabItem.isPersistent()) {
+              removeElement = false;
+              previousTabItem._pageElement = this._currentPageElement;
+          }
+
+          var params = {
             callback: function() {
               this.emit('postchange', {index: index, tabItem: selectedTabItem});
-            }.bind(this)
-          });
+            }.bind(this),
+            _removeElement: removeElement
+          };
+
+          if (selectedTabItem.isPersistent() && selectedTabItem._pageElement) {
+            this._loadPersistentPageDOM(selectedTabItem._pageElement, params);
+          }
+          else {
+            this._loadPage(selectedTabItem.page, params);
+          }
         }
 
         for (var i = 0; i < this._tabItems.length; i++) {
@@ -12295,9 +13837,9 @@ limitations under the License.
           }
         } else {
           if (this._scope.hideTabs) {
-            this._tabbarElement.css('bottom', '0px');
+            this._contentElement.css('bottom', '0px');
           } else {
-            this._tabbarElement.css('bottom', '');
+            this._contentElement.css('bottom', '');
           }
         }
       },
@@ -12344,7 +13886,7 @@ limitations under the License.
         $onsen.getPageHTMLAsync(page).then(function(html) {
           var pageElement = angular.element(html.trim());
 
-          this._loadPageDOM(page, pageElement, options);
+          this._loadPageDOM(pageElement, options);
 
         }.bind(this), function() {
           throw new Error('Page is not found: ' + page);
@@ -12352,12 +13894,49 @@ limitations under the License.
       },
 
       /**
-       * @param {String} page
+       * @param {jqLite} element
+       * @param {Object} scope
+       * @param {Object} options
+       * @param {Object} options.animation
+       */
+      _switchPage: function(element, scope, options) {
+        if (this._currentPageElement) {
+          var oldPageElement = this._currentPageElement;
+          var oldPageScope = this._currentPageScope;
+
+          this._currentPageElement = element;
+          this._currentPageScope = scope;
+
+          this._getAnimatorOption(options).apply(element, oldPageElement, function() {
+            if (options._removeElement) {
+              oldPageElement.remove();
+              oldPageScope.$destroy();
+            }
+            else {
+              oldPageElement.css('display', 'none');
+            }
+
+            if (options.callback instanceof Function) {
+              options.callback();
+            }
+          });
+
+        } else {
+          this._currentPageElement = element;
+          this._currentPageScope = scope;
+
+          if (options.callback instanceof Function) {
+            options.callback();
+          }
+        } 
+      },
+
+      /**
        * @param {jqLite} element
        * @param {Object} options
        * @param {Object} options.animation
        */
-      _loadPageDOM: function(page, element, options) {
+      _loadPageDOM: function(element, options) {
         options = options || {};
         var pageScope = this._scope.$parent.$new();
         var link = $compile(element);
@@ -12366,30 +13945,19 @@ limitations under the License.
         var pageContent = link(pageScope);
         pageScope.$evalAsync();
 
-        if (this._currentPageElement) {
-          var oldPageElement = this._currentPageElement;
-          var oldPageScope = this._currentPageScope;
+        this._switchPage(pageContent, pageScope, options);
+      },
 
-          this._currentPageElement = pageContent;
-          this._currentPageScope = pageScope;
+      /**
+       * @param {jqLite} element
+       * @param {Object} options
+       * @param {Object} options.animation
+       */
+      _loadPersistentPageDOM: function(element, options) {
+        options = options || {};
 
-          this._getAnimatorOption(options).apply(pageContent, oldPageElement, function() {
-            oldPageElement.remove();
-            oldPageScope.$destroy();
-
-            if (options.callback instanceof Function) {
-              options.callback();
-            }
-          });
-
-        } else {
-          this._currentPageElement = pageContent;
-          this._currentPageScope = pageScope;
-
-          if (options.callback instanceof Function) {
-            options.callback();
-          }
-        }
+        element.css('display', 'block');
+        this._switchPage(element, element.scope(), options); 
       },
 
       /**
@@ -12547,7 +14115,6 @@ limitations under the License.
             var alertDialog = new AlertDialogView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, alertDialog);
-            $onsen.aliasStack.register('ons.alertDialog', alertDialog);
             $onsen.addModifierMethods(alertDialog, 'alert-dialog--*', element);
 
             if (titleElement.length) {
@@ -12565,7 +14132,6 @@ limitations under the License.
               alertDialog._events = undefined;
               $onsen.removeModifierMethods(alertDialog);
               element.data('ons-alert-dialog', undefined);
-              $onsen.aliasStack.unregister('ons.alertDialog', alertDialog);
               element = null;
             });
           },
@@ -12614,18 +14180,21 @@ limitations under the License.
           
           $onsen.declareVarAttribute(attrs, backButton);
 
-          $onsen.aliasStack.register('ons.backButton', backButton);
           element.data('ons-back-button', backButton);
 
           scope.$on('$destroy', function() {
             backButton._events = undefined;
             $onsen.removeModifierMethods(backButton);
             element.data('ons-back-button', undefined);
-            $onsen.aliasStack.unregister('ons.backButton', backButton);
             element = null;
           });
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+          var navigator = ons.findParentComponentUntil('ons-navigator', element);
+          scope.$watch(function() { return navigator.pages.length; }, function(nbrOfPages) {
+            scope.showBackButton = nbrOfPages > 1;
+          });
 
           $onsen.addModifierMethods(backButton, 'toolbar-button--*', element.children());
 
@@ -12699,14 +14268,12 @@ limitations under the License.
             var bottomToolbar = new GenericView(scope, element, attrs);
             
             $onsen.declareVarAttribute(attrs, bottomToolbar);
-            $onsen.aliasStack.register('ons.bottomToolbar', bottomToolbar);
             element.data('ons-bottomToolbar', bottomToolbar);
 
             scope.$on('$destroy', function() {
               bottomToolbar._events = undefined;
               $onsen.removeModifierMethods(bottomToolbar);
               element.data('ons-bottomToolbar', undefined);
-              $onsen.aliasStack.unregister('ons.bottomToolbar', bottomToolbar);
               element = null;
             });
 
@@ -12787,14 +14354,12 @@ limitations under the License.
         var button = new ButtonView(scope, element, attrs);
         
         $onsen.declareVarAttribute(attrs, button);
-        $onsen.aliasStack.register('ons.button', button);
         element.data('ons-button', button);
 
         scope.$on('$destroy', function() {
           button._events = undefined;
           $onsen.removeModifierMethods(button);
           element.data('ons-button', undefined);
-          $onsen.aliasStack.unregister('ons.button', button);
           element = null;
         });
         var initialAnimation = 'slide-left';
@@ -12817,14 +14382,6 @@ limitations under the License.
         scope.item = {};
         // if animation is not specified -> default is slide-left
         scope.item.animation = initialAnimation;
-
-        attrs.$observe('disabled', function(disabled) {
-          if (disabled === 'true') {
-            element.attr('disabled', true);
-          } else {
-            element.attr('disabled', false);
-          }
-        });
 
         scope.$watch('animation', function(newAnimation) {
           if (newAnimation) {
@@ -12853,7 +14410,7 @@ limitations under the License.
 
           scope = element = attrs = null;
         });
-        
+
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };
@@ -12890,6 +14447,9 @@ limitations under the License.
  * @param auto-scroll
  *    [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
  *    [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
+ * @param auto-scroll-ratio
+ *    [en]A number between 0.0 and 1.0 that specifies how much the user must drag the carousel in order for it to auto scroll to the next item.[en]
+ *    [ja][/ja]
  * @param swipeable
  *    [en]If this attribute is set the carousel can be scrolled by drag or swipe.[/en]
  *    [ja]この属性がある時、カルーセルをスワイプやドラッグで移動できるようになります。[/ja]
@@ -12899,6 +14459,9 @@ limitations under the License.
  * @param initial-index
  *    [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
  *    [ja]最初に表示するons-carousel-itemを0始まりのインデックスで指定します。デフォルトは0です。[/ja]
+ * @param auto-refresh
+ *    [en]When this attribute is set the carousel will automatically refresh when the number of child nodes change.[/en]
+ *    [ja]この属性がある時、子要素の数が変わるとカルーセルは自動的に更新されます。[/ja]
  *
  * @property next()
  *    [en]Show next ons-carousel item.[/en]
@@ -12930,6 +14493,12 @@ limitations under the License.
  * @property isAutoScrollEnabled()
  *    [en]Returns whether the "auto-scroll" attribute is set or not.[/en]
  *    [ja]auto-scroll属性があるかどうかを返す。[/ja] 
+ * @property setAutoScrollRatio(ratio)
+ *    [en]Set the auto scroll ratio. Must be a value between 0.0 and 1.0.[/en]
+ *    [ja][/ja]
+ * @property getAutoScrollRatio()
+ *    [en]Returns the current auto scroll ratio.[/en]
+ *    [ja][/ja]
  * @property setOverscrollable(overscrollable)
  *    [en]Set whether the carousel is overscrollable or not.[/en]
  *    [ja]overscroll属性があるかどうかを設定する。[/ja] 
@@ -12937,8 +14506,8 @@ limitations under the License.
  *    [en]Returns whether the carousel is overscrollable or not.[/en]
  *    [ja]overscroll属性があるかどうかを返す。[/ja] 
  * @property on(eventName,listener)
- *    [en]Add an event listener. Preset events are "postchange" and "refresh".[/en]
- *    [ja]イベントリスナーを追加します。"postchange"か"refresh"を指定できます。[/ja]
+ *    [en]Add an event listener. Preset events are "postchange", "overscroll" and "refresh".[/en]
+ *    [ja]イベントリスナーを追加します。"postchange"か"overscroll"か"refresh"を指定できます。[/ja]
  * @property refresh()
  *    [en]Update the layout of the carousel. Used when adding ons-carousel-items dynamically or to automatically adjust the size.[/en]
  *    [ja]レイアウトや内部の状態を最新のものに更新する。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用する。[/ja] 
@@ -12980,23 +14549,37 @@ limitations under the License.
         element.addClass(templater('carousel--*'));
 
         return function(scope, element, attrs) {
-          setImmediate(function() {
-            var carousel = new CarouselView(scope, element, attrs);
+          var carousel = new CarouselView(scope, element, attrs);
 
-            $onsen.aliasStack.register('ons.carousel', carousel);
-            element.data('ons-carousel', carousel);
+          element.data('ons-carousel', carousel);
 
-            $onsen.declareVarAttribute(attrs, carousel);
+          $onsen.declareVarAttribute(attrs, carousel);
 
-            scope.$on('$destroy', function() {
-              carousel._events = undefined;
-              element.data('ons-carousel', undefined);
-              $onsen.aliasStack.unregister('ons.carousel', carousel);
-              element = null;
-            });
-
-            $onsen.fireComponentEvent(element[0], 'init');
+          scope.$on('$destroy', function() {
+            carousel._events = undefined;
+            element.data('ons-carousel', undefined);
+            element = null;
           });
+
+          if (element[0].hasAttribute('auto-refresh')) {
+            // Refresh carousel when items are added or removed.
+            scope.$watch(
+              function () { 
+                return element[0].childNodes.length; 
+              },
+              function () {
+                setImmediate(function() {
+                  carousel.refresh();
+                });
+              }
+            );
+          }
+
+          setImmediate(function() {
+            carousel.refresh();
+          });
+
+          $onsen.fireComponentEvent(element[0], 'init');
         };
       },
 
@@ -13245,14 +14828,12 @@ limitations under the License.
             
             $onsen.addModifierMethods(dialog, 'dialog--*', angular.element(element[0].querySelector('.dialog')));
             $onsen.declareVarAttribute(attrs, dialog);
-            $onsen.aliasStack.register('ons.dialog', dialog);
             
             element.data('ons-dialog', dialog);
             scope.$on('$destroy', function() {
               dialog._events = undefined;
               $onsen.removeModifierMethods(dialog);
               element.data('ons-dialog', undefined);
-              $onsen.aliasStack.unregister('ons.dialog', dialog);
               element = null;
             });
           },
@@ -13504,7 +15085,7 @@ limitations under the License.
  * @seealso ons-if-platform [en]ons-if-platform component[/en][ja]ons-if-platformコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
- * <div if-orientation="portrait">
+ * <div ons-if-orientation="portrait">
  *   ...
  * </div>
  */
@@ -13783,6 +15364,78 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+ * @id lazy-repeat 
+ * @name ons-lazy-repeat
+ * @description 
+ *  [en]Using this component a list with millions of items can be rendered without a drop in performance. It does that by "lazily" loading elements into the DOM when they come into view and removing items from the DOM when they are not visible.[/en]
+ *  [ja]このコンポーネント内で描画されるアイテムのDOM要素の読み込みは、画面に見えそうになった時まで自動的に遅延され、画面から見えなくなった場合にはその要素は動的にアンロードされます。このコンポーネントを使うことで、パフォーマンスを劣化させること無しに巨大な数の要素を描画できます。[/ja]
+ * @param ons-lazy-repeat
+ *  [en]A delegate object, can be either an object attached to the scope (when using AngularJS) or a normal JavaScript variable.[/en]
+ *  [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。AngularJSのスコープの変数名や、通常のJavaScriptの変数名を指定します。[/ja]
+ * @example
+ * <script>
+ *   ons.bootstrap()
+ *
+ *   .controller('MyController', function($scope) {
+ *     $scope.MyDelegate = {
+ *       countItems: function() {
+ *         // Return number of items.
+ *         return 1000000;
+ *       },
+ *
+ *       calculateItemHeight: function(index) {
+ *         // Return the height of an item in pixels.
+ *         return 45;
+ *       },
+ *
+ *       configureItemScope: function(index, itemScope) {
+ *         // Initialize scope
+ *         itemScope.item = 'Item #' + (index + 1);
+ *       },
+ *
+ *       destroyItemScope: function(index, itemScope) {
+ *         // Optional method that is called when an item is unloaded.
+ *         console.log('Destroyed item with index: ' + index);
+ *       }
+ *     };
+ *   });
+ * </script>
+ *
+ * <ons-list ng-controller="MyController">
+ *   <ons-list-item ons-lazy-repeat="MyDelegate"`>
+ *     {{ item }}
+ *   </ons-list-item>
+ * </ons-list>
+ */
+(function() {
+  'use strict';
+
+  var module = angular.module('onsen');
+
+  /**
+   * Lazy repeat directive.
+   */
+  module.directive('onsLazyRepeat', ['$onsen', 'LazyRepeatView', function($onsen, LazyRepeatView) {
+    return {
+      restrict: 'A',
+      replace: false,
+      transclude: 'element',
+      compile: function(element, attrs, linker) {
+        return function(scope, element, attrs) {
+          var lazyRepeat = new LazyRepeatView(scope, element, attrs, linker);     
+
+          scope.$on('$destroy', function() {
+            scope = element = attrs = linker = null;
+          });
+        };
+      }
+    };
+  }]);
+
+})();
+
+/**
+ * @ngdoc directive
  * @id list
  * @name ons-list
  * @description
@@ -13820,14 +15473,12 @@ limitations under the License.
           var list = new GenericView(scope, element, attrs);
           
           $onsen.declareVarAttribute(attrs, list);
-          $onsen.aliasStack.register('ons.list', list);
           element.data('ons-list', list);
 
           scope.$on('$destroy', function() {
             list._events = undefined;
             $onsen.removeModifierMethods(list);
             element.data('ons-list', undefined);
-            $onsen.aliasStack.unregister('ons.list', list);
             element = null;
           });
 
@@ -13884,14 +15535,12 @@ limitations under the License.
 
           $onsen.declareVarAttribute(attrs, listHeader);
 
-          $onsen.aliasStack.register('ons.listHeader', listHeader);
           element.data('ons-listHeader', listHeader);
 
           scope.$on('$destroy', function() {
             listHeader._events = undefined;
             $onsen.removeModifierMethods(listHeader);
             element.data('ons-listHeader', undefined);
-            $onsen.aliasStack.unregister('ons.listHeader', listHeader);
             element = null;
           });
          
@@ -13947,14 +15596,12 @@ limitations under the License.
 
           $onsen.declareVarAttribute(attrs, listItem);
 
-          $onsen.aliasStack.register('ons.listItem', listItem);
           element.data('ons-list-item', listItem);
 
           scope.$on('$destroy', function() {
             listItem._events = undefined;
             $onsen.removeModifierMethods(listItem);
             element.data('ons-list-item', undefined);
-            $onsen.aliasStack.unregister('ons.listItem', listItem);
             element = null;
           });
 
@@ -14089,14 +15736,12 @@ limitations under the License.
 
             $onsen.declareVarAttribute(attrs, modal);
 
-            $onsen.aliasStack.register('ons.modal', modal);
             element.data('ons-modal', modal);
 
             scope.$on('$destroy', function() {
               modal._events = undefined;
               $onsen.removeModifierMethods(modal);
               element.data('ons-modal', undefined);
-              $onsen.aliasStack.unregister('ons.modal', modal);
             });
           },
 
@@ -14238,13 +15883,11 @@ limitations under the License.
               pageElement = null;
             }
 
-            $onsen.aliasStack.register('ons.navigator', navigator);
             element.data('ons-navigator', navigator);
 
             scope.$on('$destroy', function() {
               navigator._events = undefined;
               element.data('ons-navigator', undefined);
-              $onsen.aliasStack.unregister('ons.navigator', navigator);
               element = null;
             });
 
@@ -14361,7 +16004,6 @@ limitations under the License.
 
       $onsen.declareVarAttribute(attrs, page);
 
-      $onsen.aliasStack.register('ons.page', page);
       element.data('ons-page', page);
 
       var modifierTemplater = $onsen.generateModifierTemplater(attrs),
@@ -14381,7 +16023,6 @@ limitations under the License.
         page._events = undefined;
         $onsen.removeModifierMethods(page);
         element.data('ons-page', undefined);
-        $onsen.aliasStack.unregister('ons.page', page);
 
         $onsen.clearComponent({
           element: element,
@@ -14554,7 +16195,6 @@ limitations under the License.
             var popover = new PopoverView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, popover);
-            $onsen.aliasStack.register('ons.popover', popover);
 
             element.data('ons-popover', popover);
 
@@ -14562,7 +16202,6 @@ limitations under the License.
               popover._events = undefined;
               $onsen.removeModifierMethods(popover);
               element.data('ons-popover', undefined);
-              $onsen.aliasStack.unregister('ons.popover', popover);
               element = null;
             });
 
@@ -14588,6 +16227,115 @@ limitations under the License.
   }]);
 })();
 
+
+/**
+ * @ngdoc directive
+ * @id pull-hook 
+ * @name ons-pull-hook
+ * @description
+ *   [en]Component that adds "pull-to-refresh" to an <ons-page> element.[/en]
+ *   [ja]ons-page要素以下でいわゆるpull to refreshを実装するためのコンポーネントです。[/ja]
+ * @param var
+ *   [en]Variable name to refer to this component.[/en]
+ *   [ja]このコンポーネントを参照する名前を指定します。[/ja]
+ * @param disabled
+ *   [en]If this attribute is set the "pull-to-refresh" functionality is disabled.[/en]
+ *   [ja]この属性がある時、disabled状態になりアクションが実行されなくなります[/ja]
+ * @param ng-action
+ *   [en]Use to specify custom behavior when the page is pulled down. A `$done` function is available to tell the component that the action is completed.[/en]
+ *   [ja]pull downしたときの振る舞いを指定します。アクションが完了した時には`$done`関数を呼び出します。[/ja]
+ * @param on-action
+ *   [en]Same as `ng-action` but can be used without AngularJS. A function called `done` is available to call when action is complete.[/en]
+ *   [ja]ng-actionと同じですが、AngularJS無しで利用する場合に利用できます。アクションが完了した時には`$done`関数を呼び出します。[/ja]
+ * @param height
+ *   [en]Specify the height of the component. When pulled down further than this value it will switch to the "preaction" state. The default value is "64px".[/en]
+ *   [ja]コンポーネントの高さを指定します。この高さ以上にpull downすると"preaction"状態に移行します。デフォルトの値は"64px"です。[/ja]
+ * @param threshold-height
+ *   [en]Specify the threshold height. The component automatically switches to the "action" state when pulled further than this value. The default value is "96px". A negative value or a value less than the height will disable this property.[/en]
+ *   [ja]閾値となる高さを指定します。この値で指定した高さよりもpull downすると、このコンポーネントは自動的に"action"状態に移行します。[/ja]
+ * @property setDisabled(disabled)
+ *   [en]Disable or enable the component.[/en]
+ *   [ja]disabled状態にするかどうかを設定できます。[/ja]
+ * @property isDisabled()
+ *   [en]Returns whether the component is disabled or enabled.[/en]
+ *   [ja]dsiabled状態になっているかを得ることが出来ます。[/ja]
+ * @property setHeight(height)
+ *   [en]Specify the height.[/en]
+ *   [ja]高さを指定できます。[/ja]
+ * @property setThresholdHeight(thresholdHeight)
+ *   [en]Specify the threshold height.[/en]
+ *   [ja]閾値となる高さを指定できます。[/ja]
+ * @property on(eventName,listener)
+ *  [en]Add an event listener to listen for the "changestate" event.[/en]
+ *  [ja]イベントリスナーを指定できます。[/ja]
+ * @example
+ * <script>
+ *   ons.bootstrap()
+ *
+ *   .controller('MyController', function($scope, $timeout) {
+ *     $scope.items = [3, 2 ,1];
+ *
+ *     $scope.load = function($done) {
+ *       $timeout(function() {
+ *         $scope.items.unshift($scope.items.length + 1);
+ *         $done();
+ *       }, 1000);
+ *     };
+ *   });
+ * </script>
+ *
+ * <ons-page ng-controller="MyController">
+ *   <ons-pull-hook var="loaded" ng-action="load($done)">
+ *     <span ng-switch="loader.getCurrentState()">
+ *       <span ng-switch-when="initial">Pull down to refresh</span>
+ *       <span ng-switch-when="preaction">Release to refresh</span>
+ *       <span ng-switch-when="action">Loading data. Please wait...</span>
+ *     </span>
+ *   </ons-pull-hook>
+ *   <ons-list>
+ *     <ons-list-item ng-repeat="item in items">
+ *       Item #{{ item }}
+ *     </ons-list-item>
+ *   </ons-list>
+ * </ons-page>
+ */
+
+(function() {
+  'use strict';
+
+  var module = angular.module('onsen');
+
+  /**
+   * Pull hook directive.
+   */
+  module.directive('onsPullHook', ['$onsen', 'PullHookView', function($onsen, PullHookView) {
+    return {
+      restrict: 'E',
+      replace: false,
+      scope: true,
+      compile: function(element, attrs) {
+        return {
+          pre: function(scope, element, attrs) {
+            var pullHook = new PullHookView(scope, element, attrs);
+
+            $onsen.declareVarAttribute(attrs, pullHook);
+            element.data('ons-pull-hook', pullHook);
+
+            scope.$on('$destroy', function() {
+              pullHook._events = undefined;
+              element.data('ons-pull-hook', undefined);
+              scope = element = attrs = null;
+            });
+          },
+          post: function(scope, element) {
+            $onsen.fireComponentEvent(element[0], 'init');
+          }
+        };
+      }
+    };
+  }]);
+
+})();
 
 /**
  * @ngdoc directive
@@ -14680,14 +16428,14 @@ limitations under the License.
       compile: function(element, attrs) {
         var content = element.addClass('ons-scroller').children().remove();
         
-        var wrapper = angular.element('<div></div>');
-        wrapper.addClass('ons-scroller__content ons-scroller-inner');
-        element.append(wrapper);
-
         return function(scope, element, attrs, controller, transclude) {
           if (attrs.ngController) {
             throw new Error('"ons-scroller" can\'t accept "ng-controller" directive.');
           }
+
+          var wrapper = angular.element('<div></div>');
+          wrapper.addClass('ons-scroller__content ons-scroller-inner');
+          element.append(wrapper);
 
           transclude(scope.$parent, function(cloned) {
             wrapper.append(cloned);
@@ -14877,14 +16625,12 @@ limitations under the License.
             slidingMenu._appendMenuPage(menuHtml);
           }
 
-          $onsen.aliasStack.register('ons.slidingMenu', slidingMenu);
           $onsen.declareVarAttribute(attrs, slidingMenu);
           element.data('ons-sliding-menu', slidingMenu);
 
           scope.$on('$destroy', function(){
             slidingMenu._events = undefined;
             element.data('ons-sliding-menu', undefined);
-            $onsen.aliasStack.unregister('ons.slidingMenu', slidingMenu);
           });
 
           $onsen.fireComponentEvent(element[0], 'init');
@@ -14989,12 +16735,10 @@ limitations under the License.
           $onsen.declareVarAttribute(attrs, splitView);
 
           element.data('ons-split-view', splitView);
-          $onsen.aliasStack.register('ons.splitView', splitView);
 
           scope.$on('$destroy', function() {
             splitView._events = undefined;
             element.data('ons-split-view', undefined);
-            $onsen.aliasStack.unregister('ons.splitView', splitView);
           });
 
           $onsen.fireComponentEvent(element[0], 'init');
@@ -15090,20 +16834,21 @@ limitations under the License.
               scope.model = value;
             });
 
-            scope.$watch('model', function(model) {
-              set(scope.$parent, model);
+            scope.$watch('model', function(to, from) {
+              set(scope.$parent, to);
+              if (to !== from) {
+                scope.$eval(attrs.ngChange);
+              }
             });
           }
 
           $onsen.declareVarAttribute(attrs, switchView);
           element.data('ons-switch', switchView);
-          $onsen.aliasStack.register('ons.switch', switchView);
 
           $onsen.cleaner.onDestroy(scope, function() {
             switchView._events = undefined;
             $onsen.removeModifierMethods(switchView);
             element.data('ons-switch', undefined);
-            $onsen.aliasStack.unregister('ons.switch', switchView);
             $onsen.clearComponent({
               element : element,
               scope : scope,
@@ -15143,7 +16888,10 @@ limitations under the License.
  *  [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
  * @param no-reload
  *  [en]Set if the page shouldn't be reloaded when clicking on the same tab twice.[/en]
- *  [jp]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/jp]
+ *  [ja]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/ja]
+ * @param persistent
+ *  [en]Set to make the tab content persistent. If this attribute it set the DOM will not be destroyed when navigating to another tab.[/en]
+ *  [ja]このタブで読み込んだページを永続化します。この属性があるとき、別のタブのページに切り替えても、読み込んだページのDOM要素は破棄されずに単に非表示になります。[/ja]
  * @codepen pGuDL
  * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
@@ -15202,7 +16950,8 @@ limitations under the License.
         icon: '@',
         activeIcon: '@',
         label: '@',
-        noReload: '@'
+        noReload: '@',
+        persistent: '@'
       },
 
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab.tpl',
@@ -15261,6 +17010,10 @@ limitations under the License.
 
             angular.element(element[0].querySelectorAll('[ons-tab-inactive]')).css('display', 'inherit');
             angular.element(element[0].querySelectorAll('[ons-tab-active]')).css('display', 'none');
+          };
+
+          scope.isPersistent = function() {
+            return typeof scope.persistent != 'undefined';
           };
 
           /**
@@ -15384,7 +17137,6 @@ limitations under the License.
 
         scope.tabbarId = tabbarView._tabbarId;
 
-        $onsen.aliasStack.register('ons.tabbar', tabbarView);
         element.data('ons-tabbar', tabbarView);
         $onsen.declareVarAttribute(attrs, tabbarView);
 
@@ -15396,7 +17148,6 @@ limitations under the License.
           tabbarView._events = undefined;
           $onsen.removeModifierMethods(tabbarView);
           element.data('ons-tabbar', undefined);
-          $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
         });
       
         $onsen.fireComponentEvent(element[0], 'init');
@@ -15614,13 +17365,11 @@ limitations under the License.
 
             $onsen.declareVarAttribute(attrs, toolbar);
         
-            $onsen.aliasStack.register('ons.toolbar', toolbar);
 
             scope.$on('$destroy', function() {
               toolbar._events = undefined;
               $onsen.removeModifierMethods(toolbar);
               element.data('ons-toolbar', undefined);
-              $onsen.aliasStack.unregister('ons.toolbar', toolbar);
               element = null;
             });
 
@@ -15657,7 +17406,12 @@ limitations under the License.
  * @description
  *  [en]Button component for ons-toolbar and ons-bottom-toolbar.[/en]
  *  [ja]ons-toolbarあるいはons-bottom-toolbarに設置できるボタン用コンポーネントです。[/ja]
- * @param modifier [en]Specify modifier name to specify custom styles.[/en][ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+ * @param modifier 
+ *  [en]Specify modifier name to specify custom styles.[/en]
+ *  [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+ * @param disabled
+ *  [en]Specify if button should be disabled.[/en]
+ *  [ja]ボタンを無効化する場合は指定してください。[/ja]
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
@@ -15682,18 +17436,17 @@ limitations under the License.
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
         pre: function(scope, element, attrs) {
-          var toolbarButton = new GenericView(scope, element, attrs);
+          var toolbarButton = new GenericView(scope, element, attrs),
+            innerElement = element[0].querySelector('.toolbar-button');
 
           $onsen.declareVarAttribute(attrs, toolbarButton);
 
-          $onsen.aliasStack.register('ons.toolbarButton', toolbarButton);
           element.data('ons-toolbar-button', toolbarButton);
 
           scope.$on('$destroy', function() {
             toolbarButton._events = undefined;
             $onsen.removeModifierMethods(toolbarButton);
             element.data('ons-toolbar-button', undefined);
-            $onsen.aliasStack.unregister('ons.toolbarButton', toolbarButton);
             element = null;
           });
 
@@ -15702,6 +17455,15 @@ limitations under the License.
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
+
+          attrs.$observe('disabled', function(value) {
+            if (value === false || typeof value === 'undefined') {
+              innerElement.removeAttribute('disabled');
+            }
+            else {
+              innerElement.setAttribute('disabled', 'disabled');
+            }
+          });
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
           $onsen.addModifierMethods(toolbarButton, 'toolbar-button--*', element.children());
@@ -16150,7 +17912,6 @@ limitations under the License.
   module.factory('$onsen', ['$rootScope', '$window', '$cacheFactory', '$document', '$templateCache', '$http', '$q', '$onsGlobal', 'ComponentCleaner', 'DeviceBackButtonHandler', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner, DeviceBackButtonHandler) {
 
     var unlockerDict = createUnlockerDict();
-    var aliasStack = createAliasStack();
     var $onsen = createOnsenService();
 
     return $onsen;
@@ -16159,8 +17920,6 @@ limitations under the License.
       return {
 
         DIRECTIVE_TEMPLATE_URL: 'templates',
-
-        aliasStack: aliasStack,
 
         cleaner: ComponentCleaner,
 
@@ -16508,7 +18267,10 @@ limitations under the License.
             container[names[names.length - 1]] = object;
           }
 
-          set($window, names, object);
+          if (ons.componentBase) {
+            set(ons.componentBase, names, object);
+          }
+
           set($rootScope, names, object);
         }
       };
@@ -16578,55 +18340,6 @@ limitations under the License.
           } else {
             callback();
           }
-        }
-      };
-    }
-
-    function createAliasStack() {
-      /**
-       * Global object stack manager.
-       *
-       * e.g. "ons.screen", "ons.navigator"
-       */
-      return {
-        _stackDict : {},
-
-        /**
-         * @param {String} name
-         * @param {Object} object
-         */
-        register: function(name, object) {
-          this._getStack(name).push(object);
-          
-          $onsen._defineVar(name, object);
-        },
-
-        /**
-         * @param {String} name
-         * @param {Object} target
-         */
-        unregister: function(name, target) {
-          var stack = this._getStack(name);
-
-          var index = stack.indexOf(target);
-          if (index === -1) {
-            throw new Error('no such object: ' + target);
-          }
-          stack.splice(index, 1);
-
-          var obj = stack.length > 0 ? stack[stack.length - 1] : null;
-          $onsen._defineVar(name, obj);
-        },
-
-        /**
-         * @param {String} name
-         */
-        _getStack: function(name) {
-          if (!this._stackDict[name]) {
-            this._stackDict[name] = [];
-          }
-
-          return this._stackDict[name];
         }
       };
     }

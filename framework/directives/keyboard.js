@@ -3,14 +3,8 @@
  * @id ons-keyboard-active
  * @name ons-keyboard-active
  * @description
- *    [en]Conditionally display content depending on if the software keyboard is visible or hidden. This component requires cordova and that the com.ionic.keyboard plugin is installed.[/en]
- *    [ja]ソフトウェアキーボードが表示されているかどうかで、コンテンツを表示するかどうかを切り替えることが出来ます。このコンポーネントは、Cordovaやcom.ionic.keyboardプラグインを必要とします。[/ja]
- * @param ons-keyboard-active
- *    [en]The content of tags with this attribute will be visible when the software keyboard is open.[/en]
- *    [ja]この属性がついた要素は、ソフトウェアキーボードが表示された時に初めて表示されます。[/ja]
- * @param ons-keyboard-inactive
- *    [en]The content of tags with this attribute will be visible when the software keyboard is hidden.[/en]
- *    [ja]この属性がついた要素は、ソフトウェアキーボードが隠れている時のみ表示されます。[/ja]
+ *   [en]Conditionally display content depending on if the software keyboard is visible or hidden. This component requires cordova and that the com.ionic.keyboard plugin is installed.[/en]
+ *   [ja]ソフトウェアキーボードが表示されているかどうかで、コンテンツを表示するかどうかを切り替えることが出来ます。このコンポーネントは、Cordovaやcom.ionic.keyboardプラグインを必要とします。[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
  * <div ons-keyboard-active>
@@ -20,6 +14,23 @@
  *   There is also a component that does the opposite.
  * </div>
  */
+
+/**
+ * @ngdoc attribute
+ * @name ons-keyboard-active
+ * @description
+ *   [en]The content of tags with this attribute will be visible when the software keyboard is open.[/en]
+ *   [ja]この属性がついた要素は、ソフトウェアキーボードが表示された時に初めて表示されます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-keyboard-inactive
+ * @description
+ *   [en]The content of tags with this attribute will be visible when the software keyboard is hidden.[/en]
+ *   [ja]この属性がついた要素は、ソフトウェアキーボードが隠れている時のみ表示されます。[/ja]
+ */
+
 (function() {
   'use strict';
 
@@ -38,7 +49,7 @@
         var onHide = function() {
           element.css('display', dispHide);
         };
-       
+
         var onInit = function(e) {
           if (e.visible) {
             onShow();

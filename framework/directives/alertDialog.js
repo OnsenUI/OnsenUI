@@ -1,17 +1,32 @@
 
 /**
  * @ngdoc directive
- * @id alert-dialog 
+ * @id alert-dialog
  * @name ons-alert-dialog
- * @description 
- * [en]Alert dialog that is displayed on top of the current screen.[/en]
- * [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
+ * @modifier android
+ *   [en]Display an Android style alert dialog.[/en]
+ *   [ja][/ja]
+ * @description
+ *   [en]Alert dialog that is displayed on top of the current screen.[/en]
+ *   [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
  * @codepen Qwwxyp
+ * @guide UsingAlert
+ *   [en]Learn how to use the alert dialog.[/en]
+ *   [ja][/ja]
+ * @seealso ons-dialog
+ *   [en]ons-dialog component[/en]
+ *   [ja]ons-dialogコンポーネント[/ja]
+ * @seealso ons-popover
+ *   [en]ons-popover component[/en]
+ *   [ja]ons-dialogコンポーネント[/ja]
+ * @seealso ons.notification
+ *   [en]Using ons.notification utility functions.[/en]
+ *   [ja][/ja]
  * @example
  * <script>
  *   ons.ready(function() {
  *     ons.createAlertDialog('alert.html').then(function(alertDialog) {
- *       alertDialog.show();   
+ *       alertDialog.show();
  *     });
  *   });
  * </script>
@@ -20,12 +35,12 @@
  *   <ons-alert-dialog animation="default" cancelable>
  *     <div class="alert-dialog-title">Warning!</div>
  *     <div class="alert-dialog-content">
- *      An error has occurred!
+ *       An error has occurred!
  *     </div>
  *     <div class="alert-dialog-footer">
  *       <button class="alert-dialog-button">OK</button>
  *     </div>
- *   </ons-alert-dialog>  
+ *   </ons-alert-dialog>
  * </script>
  */
 
@@ -33,44 +48,55 @@
  * @ngdoc event
  * @name preshow
  * @description
- * [en][/en]
- * [ja]アラートダイアログが表示される直前に発火します。[/ja]
+ *   [en]Fired just before the alert dialog is displayed.[/en]
+ *   [ja]アラートダイアログが表示される直前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.alertDialog
- * @param {Function} event.cancel 
+ *   [en]Alert dialog object.[/en]
+ *   [ja]アラートダイアログのオブジェクト。[/ja]
+ * @param {Function} event.cancel
+ *   [en]Execute to stop the dialog from shoring.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc event
  * @name postshow
  * @description
- * [en][/en]
- * [ja]アラートダイアログが表示された直後に発火します。[/ja]
+ *   [en]Fired just after the alert dialog is displayed.[/en]
+ *   [ja]アラートダイアログが表示された直後に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.alertDialog
+ *   [en]Alert dialog object.[/en]
+ *   [ja]アラートダイアログのオブジェクト。[/ja]
  */
 
 /**
  * @ngdoc event
  * @name prehide
  * @description
- * [en][/en]
- * [ja]アラートダイアログが隠れる直前に発火します。[/ja]
+ *   [en]Fired just before the alert dialog is hidden.[/en]
+ *   [ja]アラートダイアログが隠れる直前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.alertDialog
- * @param {Function} event.cancel 
+ *   [en]Alert dialog object.[/en]
+ *   [ja]アラートダイアログのオブジェクト。[/ja]
+ * @param {Function} event.cancel
+ *   [en]Execute to stop the dialog from hiding.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc event
  * @name posthide
  * @description
- * [en][/en]
+ * [en]Fired just after the alert dialog is hidden.[/en]
  * [ja]アラートダイアログが隠れた後に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.alertDialog
+ *   [en]Alert dialog object.[/en]
+ *   [ja]アラートダイアログのオブジェクト。[/ja]
  */
-
 
 /**
  * @ngdoc attribute
@@ -94,7 +120,7 @@
  * @ngdoc attribute
  * @name cancelable
  * @description
- *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en] 
+ *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en]
  *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
  */
 
@@ -129,82 +155,140 @@
 /**
  * @ngdoc method
  * @signature show([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja][/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "fade", "slide" and "none".[/en]
+ *   [ja][/ja]
+ * @param {Function} [options.callback]
+ *   [en]Function to execute after the dialog has been revealed.[/en]
+ *   [ja][/ja]
  * @description
- *  [en]Show the alert dialog.[/en]
- *  [ja]ダイアログを開きます。[/ja]
- * @param {Object} options
+ *   [en]Show the alert dialog.[/en]
+ *   [ja]ダイアログを開きます。[/ja]
  */
 
 /**
  * @ngdoc method
  * @signature hide([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja][/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "fade", "slide" and "none".[/en]
+ *   [ja][/ja]
+ * @param {Function} [options.callback]
+ *   [en]Function to execute after the dialog has been hidden.[/en]
+ *   [ja][/ja]
  * @description
- *  [en]Hide the alert dialog.[/en]
- *  [ja]ダイアログを閉じます。[/ja]
- * @param {Object} options
+ *   [en]Hide the alert dialog.[/en]
+ *   [ja]ダイアログを閉じます。[/ja]
  */
 
 /**
  * @ngdoc method
  * @signature isShown()
  * @description
- *  [en]Returns whether the dialog is visible or not.[/en]
- *  [ja]ダイアログが表示されているかどうかを返します。[/ja]
+ *   [en]Returns whether the dialog is visible or not.[/en]
+ *   [ja]ダイアログが表示されているかどうかを返します。[/ja]
  * @return {Boolean}
+ *   [en]Will be true if the dialog is currently visible.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc method
  * @signature destroy()
  * @description
- *  [en]Destroy the alert dialog and remove it from the DOM tree.[/en]
- *  [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
+ *   [en]Destroy the alert dialog and remove it from the DOM tree.[/en]
+ *   [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
  */
 
 /**
  * @ngdoc method
  * @signature setCancelable(cancelable)
  * @description
- *  [en]Define whether the dialog can be canceled by the user or not.[/en]
- *  [ja]アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
+ *   [en]Define whether the dialog can be canceled by the user or not.[/en]
+ *   [ja]アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
  * @param {Boolean} cancelable
+ *   [en]If true the dialog will be cancelable.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc method
  * @signature isCancelable()
  * @description
- *  [en]Returns whether the dialog is cancelable or not.[/en]
- *  [ja]このアラートダイアログがキャンセル可能かどうかを返します。[/ja]
+ *   [en]Returns whether the dialog is cancelable or not.[/en]
+ *   [ja]このアラートダイアログがキャンセル可能かどうかを返します。[/ja]
  * @return {Boolean}
+ *   [en]Will be true if the dialog is cancelable.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc method
  * @signature setDisabled(disabled)
  * @description
- *  [en]Disable or enable the alert dialog.[/en]
- *  [ja]このアラートダイアログをdisabled状態にするかどうかを設定します。[/ja]
+ *   [en]Disable or enable the alert dialog.[/en]
+ *   [ja]このアラートダイアログをdisabled状態にするかどうかを設定します。[/ja]
  * @param {Boolean} disabled
+ *   [en]If true the dialog will be disabled.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc method
  * @signature isDisabled()
  * @description
- *  [en]Returns whether the dialog is disabled or enabled.[/en]
- *  [ja]このアラートダイアログがdisabled状態かどうかを返します。[/ja]
+ *   [en]Returns whether the dialog is disabled or enabled.[/en]
+ *   [ja]このアラートダイアログがdisabled状態かどうかを返します。[/ja]
  * @return {Boolean}
+ *   [en]Will be true if the dialog is disabled.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc method
  * @signature on(eventName, listener)
  * @description
- *  [en]Add an event listener. Preset events are preshow, postshow, prehide and posthide.[/en]
- *  [ja]イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。[/ja]
+ *   [en]Add an event listener.[/en]
+ *   [ja]イベントリスナーを追加します。[/ja]
  * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja][/ja]
  * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja][/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja][/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja][/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja][/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja][/ja]
  */
 
 (function() {
@@ -224,9 +308,9 @@
 
       compile: function(element, attrs) {
         var modifierTemplater = $onsen.generateModifierTemplater(attrs);
- 
+
         element.addClass('alert-dialog ' + modifierTemplater('alert-dialog--*'));
-       
+
         var titleElement = angular.element(element[0].querySelector('.alert-dialog-title')),
           contentElement = angular.element(element[0].querySelector('.alert-dialog-content'));
 
@@ -243,7 +327,6 @@
             var alertDialog = new AlertDialogView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, alertDialog);
-            $onsen.aliasStack.register('ons.alertDialog', alertDialog);
             $onsen.addModifierMethods(alertDialog, 'alert-dialog--*', element);
 
             if (titleElement.length) {
@@ -261,7 +344,6 @@
               alertDialog._events = undefined;
               $onsen.removeModifierMethods(alertDialog);
               element.data('ons-alert-dialog', undefined);
-              $onsen.aliasStack.unregister('ons.alertDialog', alertDialog);
               element = null;
             });
           },

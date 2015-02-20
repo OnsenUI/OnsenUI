@@ -79,7 +79,7 @@ limitations under the License.
        * Returns whether the button is disabled or not.
        */
       isDisabled: function() {
-        return this._attrs.disabled;
+        return this._element[0].hasAttribute('disabled');
       },
 
       /**

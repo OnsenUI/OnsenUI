@@ -146,6 +146,8 @@ limitations under the License.
         this._layoutCarouselItems();
         this._setupInitialIndex();
 
+        this._attrs.$observe('direction', this._onDirectionChange.bind(this));
+
         this._scope.$on('$destroy', this._destroy.bind(this));
 
         this._saveLastState();
@@ -155,10 +157,25 @@ limitations under the License.
         this.refresh();
       },
 
+      _onDirectionChange: function() {
+         if (this._isVertical()) {
+          this._element.css({
+            overflowX: 'auto',
+            overflowY: ''
+          });
+        }
+        else {
+          this._element.css({
+            overflowX: '',
+            overflowY: 'auto'
+          });
+        }
+      },
+
       _saveLastState: function() {
         this._lastState = {
           elementSize: this._getCarouselItemSize(),
-          caroulseElementCount: this._getCarouselItemCount(),
+          carouselElementCount: this._getCarouselItemCount(),
           width: this._getCarouselItemSize() * this._getCarouselItemCount()
         };
       },
@@ -237,6 +254,35 @@ limitations under the License.
        */
       isSwipeable: function() {
         return this._element[0].hasAttribute('swipeable');
+      },
+
+      /**
+       * @param {Number} ratio
+       */
+      setAutoScrollRatio: function(ratio) {
+        if (ratio < 0.0 || ratio > 1.0) {
+          throw new Error('Invalid ratio.');
+        }
+
+        this._element[0].setAttribute('auto-scroll-ratio', ratio);
+      },
+
+      /**
+       * @return {Number}
+       */
+      getAutoScrollRatio: function(ratio) {
+        var attr = this._element[0].getAttribute('auto-scroll-ratio');
+
+        if (!attr) {
+          return 0.5;
+        }
+
+        var scrollRatio = parseFloat(attr);
+        if (scrollRatio < 0.0 || scrollRatio > 1.0) {
+          throw new Error('Invalid ratio.');
+        }
+
+        return isNaN(scrollRatio) ? 0.5 : scrollRatio;
       },
 
       /**
@@ -372,9 +418,11 @@ limitations under the License.
       },
 
       _prepareEventListeners: function() {
-        this._hammer = new Hammer(this._element[0]);
+        this._hammer = new Hammer(this._element[0], {
+          dragMinDistance: 1
+        });
 
-        this._hammer.on('drag', this._bindedOnDrag);
+        this._hammer.on('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
         this._hammer.on('dragend', this._bindedOnDragEnd);
 
         angular.element(window).on('resize', this._bindedOnResize);
@@ -400,6 +448,13 @@ limitations under the License.
           return;
         }
 
+        var direction = event.gesture.direction;
+        if ((this._isVertical() && (direction === 'left' || direction === 'right')) || (!this._isVertical() && (direction === 'up' || direction === 'down'))) {
+          return;
+        }
+
+        event.stopPropagation();
+
         this._lastDragEvent = event;
 
         var scroll = this._scroll - this._getScrollDelta(event);
@@ -410,16 +465,54 @@ limitations under the License.
       },
 
       _onDragEnd: function(event) {
+        if (!this.isSwipeable()) {
+          return;
+        }
+
+        var direction = event.gesture.direction;
+        if ((this._isVertical() && (direction === 'left' || direction === 'right')) || (!this._isVertical() && (direction === 'up' || direction === 'down'))) {
+          return;
+        }
+
+        event.stopPropagation();
         this._scroll = this._scroll - this._getScrollDelta(event);
-        this._tryFirePostChangeEvent();
 
         if (this._isOverScroll(this._scroll)) {
-          this._scrollToKillOverScroll();
+          var waitForAction = false;
+
+          this.emit('overscroll', {
+            carousel: this,
+            activeIndex: this.getActiveCarouselItemIndex(),
+            direction: this._getOverScrollDirection(),
+            waitToReturn: function(promise) {
+              waitForAction = true;
+              promise.then(
+                function() {
+                  this._scrollToKillOverScroll();
+                }.bind(this)
+              );
+            }.bind(this)
+          });
+
+          if (!waitForAction) {
+            this._scrollToKillOverScroll();
+          }
         } else if (this._lastDragEvent !== null) {
           this._startMomemtumScroll(event);
         }
         this._lastDragEvent = null;
         event.gesture.preventDefault();
+      },
+
+      _getTouchEvents: function() {
+        var EVENTS = [
+          'drag', 'dragstart', 'dragend',
+          'dragup', 'dragdown', 'dragleft', 
+          'dragright', 'swipe', 'swipeup',
+          'swipedown', 'swipeleft', 'swiperight'
+        ];
+
+        return EVENTS.join(' ');
       },
 
       /**
@@ -474,6 +567,22 @@ limitations under the License.
 
             return left - right;
           });
+
+          arr = arr.filter(function(item, pos) {
+            return !pos || item != arr[pos - 1];
+          });
+
+          var lastScroll = this._lastActiveIndex * size,
+            scrollRatio = Math.abs(scroll - lastScroll) / size;
+
+          if (scrollRatio <= this.getAutoScrollRatio()) {
+            return lastScroll;
+          }
+          else if (scrollRatio > this.getAutoScrollRatio() && scrollRatio < 1.0) {
+            if (arr[0] === lastScroll && arr.length > 1) {
+              return arr[1];
+            }
+          }
 
           return arr[0];
         } else {
@@ -540,7 +649,8 @@ limitations under the License.
       },
 
       _calculateMaxScroll: function() {
-        return this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
+        var max = this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
+        return max < 0 ? 0 : max;
       },
 
       _isOverScroll: function(scroll) {
@@ -548,6 +658,25 @@ limitations under the License.
           return true;
         }
         return false;
+      },
+
+      _getOverScrollDirection: function() {
+        if (this._isVertical()) {
+          if (this._scroll <= 0) {
+            return 'up';
+          }
+          else {
+            return 'down';
+          }
+        }
+        else {
+          if (this._scroll <= 0) {
+            return 'left';
+          }
+          else {
+            return 'right';
+          }
+        }
       },
 
       _scrollToKillOverScroll: function() {
@@ -595,12 +724,27 @@ limitations under the License.
        * Refresh carousel item layout.
        */
       refresh: function() {
+        // Bug fix
+        if (this._getCarouselItemSize() === 0) {
+          return;
+        }
+
         this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
         this._layoutCarouselItems();
 
         if (this._lastState && this._lastState.width > 0) {
-          this._scroll = this._scroll / this._lastState.width * this._getCarouselItemSize() * this._getCarouselItemCount();
-          this._scrollTo(this._scroll);
+          var scroll = this._scroll;
+
+          if (this._isOverScroll(scroll)) {
+            this._scrollToKillOverScroll();
+          } 
+          else {
+            if (this.isAutoScrollEnabled()) {
+              scroll = this._normalizeScrollPosition(scroll);
+            }
+
+            this._scrollTo(scroll);
+          }
         }
 
         this._saveLastState();
@@ -627,7 +771,7 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy', {navigator: this});
 
-        this._hammer.off('drag', this._bindedOnDrag);
+        this._hammer.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
         this._hammer.off('dragend', this._bindedOnDragEnd);
 
         angular.element(window).off('resize', this._bindedOnResize);

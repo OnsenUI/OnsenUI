@@ -6,11 +6,22 @@
  *   [en]Back button component for ons-toolbar. Can be used with ons-navigator to provide back button support.[/en]
  *   [ja]ons-toolbarに配置できる「戻るボタン」用コンポーネント。ons-navigatorと共に使用し、ページを1つ前に戻る動作を行います。[/ja]
  * @codepen aHmGL
- * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
- * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
- * @guide Returningfromapage [en]Returning from a page[/en][ja]一つ前のページに戻る[/ja]
+ * @seealso ons-toolbar 
+ *   [en]ons-toolbar component[/en]
+ *   [ja]ons-toolbarコンポーネント[/ja]
+ * @seealso ons-navigator
+ *   [en]ons-navigator component[/en]
+ *   [ja]ons-navigatorコンポーネント[/en]
+ * @guide Addingatoolbar 
+ *   [en]Adding a toolbar[/en]
+ *   [ja]ツールバーの追加[/ja]
+ * @guide Returningfromapage 
+ *   [en]Returning from a page[/en]
+ *   [ja]一つ前のページに戻る[/ja]
  * @example
- *   <ons-back-button>Back</ons-back-button>
+ * <ons-back-button>
+ *   Back
+ * </ons-back-button>
  */
 (function(){
   'use strict';
@@ -30,21 +41,24 @@
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
           var backButton = new GenericView(scope, element, attrs);
-          
+
           $onsen.declareVarAttribute(attrs, backButton);
 
-          $onsen.aliasStack.register('ons.backButton', backButton);
           element.data('ons-back-button', backButton);
 
           scope.$on('$destroy', function() {
             backButton._events = undefined;
             $onsen.removeModifierMethods(backButton);
             element.data('ons-back-button', undefined);
-            $onsen.aliasStack.unregister('ons.backButton', backButton);
             element = null;
           });
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+          var navigator = ons.findParentComponentUntil('ons-navigator', element);
+          scope.$watch(function() { return navigator.pages.length; }, function(nbrOfPages) {
+            scope.showBackButton = nbrOfPages > 1;
+          });
 
           $onsen.addModifierMethods(backButton, 'toolbar-button--*', element.children());
 

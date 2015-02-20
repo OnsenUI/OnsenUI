@@ -192,11 +192,26 @@ limitations under the License.
         selectedTabItem.setActive();
 
         if (needLoad) {
-          this._loadPage(selectedTabItem.page, {
+          var removeElement = true;
+
+          if (previousTabItem && previousTabItem.isPersistent()) {
+              removeElement = false;
+              previousTabItem._pageElement = this._currentPageElement;
+          }
+
+          var params = {
             callback: function() {
               this.emit('postchange', {index: index, tabItem: selectedTabItem});
-            }.bind(this)
-          });
+            }.bind(this),
+            _removeElement: removeElement
+          };
+
+          if (selectedTabItem.isPersistent() && selectedTabItem._pageElement) {
+            this._loadPersistentPageDOM(selectedTabItem._pageElement, params);
+          }
+          else {
+            this._loadPage(selectedTabItem.page, params);
+          }
         }
 
         for (var i = 0; i < this._tabItems.length; i++) {
@@ -238,9 +253,9 @@ limitations under the License.
           }
         } else {
           if (this._scope.hideTabs) {
-            this._tabbarElement.css('bottom', '0px');
+            this._contentElement.css('bottom', '0px');
           } else {
-            this._tabbarElement.css('bottom', '');
+            this._contentElement.css('bottom', '');
           }
         }
       },
@@ -287,7 +302,7 @@ limitations under the License.
         $onsen.getPageHTMLAsync(page).then(function(html) {
           var pageElement = angular.element(html.trim());
 
-          this._loadPageDOM(page, pageElement, options);
+          this._loadPageDOM(pageElement, options);
 
         }.bind(this), function() {
           throw new Error('Page is not found: ' + page);
@@ -295,12 +310,49 @@ limitations under the License.
       },
 
       /**
-       * @param {String} page
+       * @param {jqLite} element
+       * @param {Object} scope
+       * @param {Object} options
+       * @param {Object} options.animation
+       */
+      _switchPage: function(element, scope, options) {
+        if (this._currentPageElement) {
+          var oldPageElement = this._currentPageElement;
+          var oldPageScope = this._currentPageScope;
+
+          this._currentPageElement = element;
+          this._currentPageScope = scope;
+
+          this._getAnimatorOption(options).apply(element, oldPageElement, function() {
+            if (options._removeElement) {
+              oldPageElement.remove();
+              oldPageScope.$destroy();
+            }
+            else {
+              oldPageElement.css('display', 'none');
+            }
+
+            if (options.callback instanceof Function) {
+              options.callback();
+            }
+          });
+
+        } else {
+          this._currentPageElement = element;
+          this._currentPageScope = scope;
+
+          if (options.callback instanceof Function) {
+            options.callback();
+          }
+        } 
+      },
+
+      /**
        * @param {jqLite} element
        * @param {Object} options
        * @param {Object} options.animation
        */
-      _loadPageDOM: function(page, element, options) {
+      _loadPageDOM: function(element, options) {
         options = options || {};
         var pageScope = this._scope.$parent.$new();
         var link = $compile(element);
@@ -309,30 +361,19 @@ limitations under the License.
         var pageContent = link(pageScope);
         pageScope.$evalAsync();
 
-        if (this._currentPageElement) {
-          var oldPageElement = this._currentPageElement;
-          var oldPageScope = this._currentPageScope;
+        this._switchPage(pageContent, pageScope, options);
+      },
 
-          this._currentPageElement = pageContent;
-          this._currentPageScope = pageScope;
+      /**
+       * @param {jqLite} element
+       * @param {Object} options
+       * @param {Object} options.animation
+       */
+      _loadPersistentPageDOM: function(element, options) {
+        options = options || {};
 
-          this._getAnimatorOption(options).apply(pageContent, oldPageElement, function() {
-            oldPageElement.remove();
-            oldPageScope.$destroy();
-
-            if (options.callback instanceof Function) {
-              options.callback();
-            }
-          });
-
-        } else {
-          this._currentPageElement = pageContent;
-          this._currentPageScope = pageScope;
-
-          if (options.callback instanceof Function) {
-            options.callback();
-          }
-        }
+        element.css('display', 'block');
+        this._switchPage(element, element.scope(), options); 
       },
 
       /**

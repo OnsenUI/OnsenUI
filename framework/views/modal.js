@@ -20,7 +20,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('ModalView', function($onsen) {
+  module.factory('ModalView', function($onsen, $rootScope) {
 
     var ModalView = Class.extend({
       _element: undefined,
@@ -33,6 +33,11 @@ limitations under the License.
       init: function(scope, element) {
         this._scope = scope;
         this._element = element;
+
+        var pageView = $rootScope.ons.findParentComponentUntil('ons-page', this._element);
+        if (pageView) {
+          this._pageContent = angular.element(pageView._element[0].querySelector('.page__content'));
+        }
 
         this._scope.$on('$destroy', this._destroy.bind(this));
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));

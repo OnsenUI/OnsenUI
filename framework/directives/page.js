@@ -3,38 +3,23 @@
  * @id page
  * @name ons-page
  * @description
- *  [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
- *  [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
- * @param var
- *  [en]Variable name to refer this page.[/en]
- *  [ja]このページを参照するための変数名を指定します。[/ja]
- * @param modifier
- *  [en]Specify modifier name to specify custom styles.[/en]
- *  [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
- * @param on-device-backbutton
- *  [en]Allows you to specify custom behavior when the back button is pressed.[/en]
- *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
- * @param ng-device-backbutton
- *  [en]Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.[/en]
- *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
- * @property getDeviceBackButtonHandler()
- *  [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
- *  [ja]バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
+ *   [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
+ *   [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
  * @guide ManagingMultiplePages
- *  [en]Managing multiple pages[/en]
- *  [ja]複数のページを管理する[/ja]
+ *   [en]Managing multiple pages[/en]
+ *   [ja]複数のページを管理する[/ja]
  * @guide Pageinitevent
- *  [en]Event for page initialization[/en]
- *  [ja]ページ初期化のイベント[/ja]
+ *   [en]Event for page initialization[/en]
+ *   [ja]ページ初期化のイベント[/ja]
  * @guide HandlingBackButton
- *  [en]Handling back button[/en]
- *  [ja]バックボタンに対応する[/ja]
+ *   [en]Handling back button[/en]
+ *   [ja]バックボタンに対応する[/ja]
  * @guide OverridingCSSstyles
- *  [en]Overriding CSS styles[/en]
- *  [ja]CSSスタイルのオーバーライド[/ja]
+ *   [en]Overriding CSS styles[/en]
+ *   [ja]CSSスタイルのオーバーライド[/ja]
  * @guide DefiningMultiplePagesinSingleHTML
- *  [en]Defining multiple pages in single html[/en]
- *  [ja]複数のページを1つのHTMLに記述する[/ja]
+ *   [en]Defining multiple pages in single html[/en]
+ *   [ja]複数のページを1つのHTMLに記述する[/ja]
  * @example
  * <ons-page>
  *   <ons-toolbar>
@@ -44,6 +29,54 @@
  *   ...
  * </ons-page>
  */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *   [en]Variable name to refer this page.[/en]
+ *   [ja]このページを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *   [en]Specify modifier name to specify custom styles.[/en]
+ *   [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name on-device-backbutton
+ * @type {Expression}
+ * @description
+ *   [en]Allows you to specify custom behavior when the back button is pressed.[/en]
+ *   [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ng-device-backbutton
+ * @type {Expression}
+ * @description
+ *   [en]Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.[/en]
+ *   [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getDeviceBackButtonHandler()
+ * @return {Object}
+ *   [en]Device back button handler.[/en]
+ *   [ja][/ja]
+ * @description
+ *   [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
+ *   [ja]バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
+ */
+
 (function() {
   'use strict';
 
@@ -73,9 +106,9 @@
     }
 
     function fireActualPageInitEvent(element) {
-      var event = document.createEvent('HTMLEvents');    
+      var event = document.createEvent('HTMLEvents');
       event.initEvent('pageinit', true, true);
-      element.dispatchEvent(event);    
+      element.dispatchEvent(event);
     }
 
     function fillStatusBar(element) {
@@ -101,7 +134,6 @@
 
       $onsen.declareVarAttribute(attrs, page);
 
-      $onsen.aliasStack.register('ons.page', page);
       element.data('ons-page', page);
 
       var modifierTemplater = $onsen.generateModifierTemplater(attrs),
@@ -121,7 +153,6 @@
         page._events = undefined;
         $onsen.removeModifierMethods(page);
         element.data('ons-page', undefined);
-        $onsen.aliasStack.unregister('ons.page', page);
 
         $onsen.clearComponent({
           element: element,

@@ -138,7 +138,15 @@ limitations under the License.
 
       _onResize: function() {
         var lastMode = this._mode;
-        this._considerChangingCollapse();
+
+        if ($onsen.isAndroid()) {
+          setTimeout(function() {
+            this._considerChangingCollapse();
+          }.bind(this), 200);
+        }
+        else {
+          this._considerChangingCollapse();
+        }
 
         if (lastMode === COLLAPSE_MODE && this._mode === COLLAPSE_MODE) {
           this._animator.onResized({
@@ -151,14 +159,16 @@ limitations under the License.
       },
 
       _considerChangingCollapse: function() {
-        if (this._shouldCollapse() && this._mode !== COLLAPSE_MODE) {
+        var should = this._shouldCollapse();
+
+        if (should && this._mode !== COLLAPSE_MODE) {
           this._fireUpdateEvent();
           if (this._doSplit) {
             this._activateSplitMode();
           } else {
             this._activateCollapseMode();
           }
-        } else if (!this._shouldCollapse() && this._mode === COLLAPSE_MODE) {
+        } else if (!should && this._mode === COLLAPSE_MODE) {
           this._fireUpdateEvent();
           if (this._doCollapse) {
             this._activateCollapseMode();
@@ -173,13 +183,15 @@ limitations under the License.
       update: function() {
         this._fireUpdateEvent();
 
+        var should = this._shouldCollapse();
+
         if (this._doSplit) {
           this._activateSplitMode(); 
         } else if (this._doCollapse) {
           this._activateCollapseMode(); 
-        } else if (this._shouldCollapse()) {
+        } else if (should) {
           this._activateCollapseMode();
-        } else if (!this._shouldCollapse()) {
+        } else if (!should) {
           this._activateSplitMode();
         }
 

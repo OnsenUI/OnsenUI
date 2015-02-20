@@ -109,3 +109,12 @@ ons-popover[disabled] {
   pointer-events: none;
   opacity: 0.75;
 }
+
+ons-pull-hook {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+

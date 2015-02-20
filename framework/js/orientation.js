@@ -15,6 +15,92 @@ limitations under the License.
 
 */
 
+/**
+ * @ngdoc object
+ * @name ons.orientation
+ * @category util
+ * @category fuga
+ * @description 
+ *   [en]Utility methods for orientation detection.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name change
+ * @description
+ *   [en]Fired when the device orientation changes.[/en]
+ *   [ja][/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Boolean} event.isPortrait
+ *   [en]Will be true if the current orientation is portrait mode.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isPortrait()
+ * @return {Boolean}
+ *   [en]Will be true if the current orientation is portrait mode.[/en]
+ *   [ja][/ja]
+ * @description 
+ *   [en]Returns whether the current screen orientation is portrait or not.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isLandscape()
+ * @return {Boolean}
+ *   [en]Will be true if the current orientation is landscape mode.[/en]
+ *   [ja][/ja]
+ * @description 
+ *   [en]Returns whether the current screen orientation is landscape or not.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature on(eventName, listener)
+ * @description
+ *   [en]Add an event listener.[/en]
+ *   [ja]イベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja][/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja][/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja][/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja][/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja][/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja][/ja]
+ */
+
 window.ons.orientation = (function() {
   return create()._init();
 
@@ -54,11 +140,11 @@ window.ons.orientation = (function() {
       },
 
       _onDOMContentLoaded: function() {
-        this._installIsPortraintImplementation();
+        this._installIsPortraitImplementation();
         this.emit('change', {isPortrait: this.isPortrait()});
       },
 
-      _installIsPortraintImplementation: function() {
+      _installIsPortraitImplementation: function() {
         var isPortrait = window.innerWidth < window.innerHeight;
 
         if (!('orientation' in window)) {

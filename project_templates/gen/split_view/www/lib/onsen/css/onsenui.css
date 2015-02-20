@@ -1,4 +1,4 @@
-/*! onsenui - v1.2.1 - 2014-12-01 */
+/*! onsenui - v1.2.1 - 2015-02-12 */
 /*
 Copyright 2013-2014 ASIAL CORPORATION
 
@@ -96,6 +96,10 @@ ons-toolbar ~ .page__content {
   display: none;
 }
 
+.page__content.noscroll {
+  overflow: hidden; 
+}
+
 .tab-bar__status-bar-fill ~ .tab-bar--top__content {
   top: 71px;
 }
@@ -110,6 +114,15 @@ ons-popover[disabled] {
   pointer-events: none;
   opacity: 0.75;
 }
+
+ons-pull-hook {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+
 
 /*
 Copyright 2013-2014 ASIAL CORPORATION
@@ -617,6 +630,7 @@ ons-carousel[disabled] {
   -moz-align-items: center;
   -moz-box-align: center;
   align-items: center;
+  text-align: inherit;
 }
 
 /* .col-* vertically aligns an individual .col */
@@ -636,7 +650,8 @@ ons-carousel[disabled] {
   -webkit-align-self: center;
   -moz-align-self: center;
   -ms-flex-item-align: center;
-  align-self: center; }
+  text-align: inherit;
+}
 
 /* Column Offsets */
 .col-offset-10 {

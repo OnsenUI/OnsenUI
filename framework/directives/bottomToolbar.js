@@ -3,18 +3,36 @@
  * @id bottom_toolbar
  * @name ons-bottom-toolbar
  * @description
- * [en]Toolbar component that is positioned at the bottom of the page. Has same functionality as the ons-toolbar component.[/en]
- * [ja]ページ下部に配置されるツールバー用コンポーネント。機能的にはons-toolbarと同様です。[/ja]
- * @param inline
- *  [en]Display the toolbar as an inline element.[/en]
- *  [ja]ツールバーをインラインに置きます。スクロール領域内にそのままツールバーが表示されます。[/ja]
+ *   [en]Toolbar component that is positioned at the bottom of the page. Has same functionality as the ons-toolbar component.[/en]
+ *   [ja]ページ下部に配置されるツールバー用コンポーネント。機能的にはons-toolbarと同様です。[/ja]
+ * @modifier transparent
+ *   [en]Make the toolbar transparent.[/en]
+ *   [ja][/ja]
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
  * @example
  * <ons-bottom-toolbar>
- *  <div style="text-align: center; line-height: 44px">Text</div>
+ *   <div style="text-align: center; line-height: 44px">Text</div>
  * </ons-bottom-toolbar>
  */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *   [en]The appearance of the toolbar.[/en]
+ *   [ja]ツールバーの表現を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name inline
+ * @description
+ *   [en]Display the toolbar as an inline element.[/en]
+ *   [ja]ツールバーをインラインに置きます。スクロール領域内にそのままツールバーが表示されます。[/ja]
+ */
+
 (function(){
   'use strict';
 
@@ -44,16 +62,14 @@
         return {
           pre: function(scope, element, attrs) {
             var bottomToolbar = new GenericView(scope, element, attrs);
-            
+
             $onsen.declareVarAttribute(attrs, bottomToolbar);
-            $onsen.aliasStack.register('ons.bottomToolbar', bottomToolbar);
             element.data('ons-bottomToolbar', bottomToolbar);
 
             scope.$on('$destroy', function() {
               bottomToolbar._events = undefined;
               $onsen.removeModifierMethods(bottomToolbar);
               element.data('ons-bottomToolbar', undefined);
-              $onsen.aliasStack.unregister('ons.bottomToolbar', bottomToolbar);
               element = null;
             });
 

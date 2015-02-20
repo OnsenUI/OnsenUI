@@ -57,12 +57,17 @@ limitations under the License.
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
 
-        this._onResize = function() {
-          if (this._currentTarget) {
-            this._positionPopover(this._currentTarget);
-          }
+        this._onChange = function() {
+          setImmediate(function() {
+            if (this._currentTarget) {
+              this._positionPopover(this._currentTarget);
+            }
+          }.bind(this));
         }.bind(this);
-        window.addEventListener('resize', this._onResize, false);
+
+        this._popover[0].addEventListener('DOMNodeInserted', this._onChange, false);
+        this._popover[0].addEventListener('DOMNodeRemoved', this._onChange, false);
+        window.addEventListener('resize', this._onChange, false);
       },
 
       _onDeviceBackButton: function(event) {
@@ -293,9 +298,11 @@ limitations under the License.
         this._element.remove();
         
         this._deviceBackButtonHandler.destroy();
-        window.removeEventListener('resize', this._onResize, false);
+        this._popover[0].removeEventListener('DOMNodeInserted', this._onChange, false);
+        this._popover[0].removeEventListener('DOMNodeRemoved', this._onChange, false);
+        window.removeEventListener('resize', this._onChange, false);
 
-        this._onResize = this._deviceBackButtonHandler = this._mask = this._popover = this._element = this._scope = null;
+        this._onChange = this._deviceBackButtonHandler = this._mask = this._popover = this._element = this._scope = null;
       },
 
       /**

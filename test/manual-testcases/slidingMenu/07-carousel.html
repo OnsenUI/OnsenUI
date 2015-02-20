@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../build/js/angular/angular.js"></script>    
+    <script src="../../../build/js/onsenui.js"></script>    
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      ons.bootstrap();
+    </script>
+
+    <style>
+
+    </style>
+  </head>
+  <body>
+
+    <ons-sliding-menu main-page="page1.html" menu-page="menu.html" side="left" var="menu" max-slide-distance="180px">
+    </ons-sliding-menu>
+
+    <script type="text/ons-template" id="page1.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">Carousel</div>
+          <div class="left">
+            <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+
+        <p style="text-align: center;">When sliding the carousel the sliding menu shouldn't open!</p>
+    
+        <ons-carousel var="carousel" swipeable style="margin-top: 5px; height: 200px;" overscrollable auto-scroll item-width="200px">
+          <ons-carousel-item ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]">
+            <div style="background-color: #ccc; width: 190px; height: 190px; margin: 5px; border-radius: 6px;"></div>
+          </ons-carousel-item>
+        </ons-carousel>
+
+      </ons-page>
+    </script>
+
+    <script type="text/ons-template" id="menu.html">
+      <ons-list>
+        <ons-list-item ng-repeat="i in [1,2,3,4]" modifier="chevron">
+          Item #{{ i }}
+        </ons-list-item>
+      </ons-list>
+    </script>
+
+  </body>
+</html>

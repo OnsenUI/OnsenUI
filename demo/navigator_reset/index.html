@@ -15,7 +15,7 @@
 
 <body>    
 
-  <ons-navigator>
+  <ons-navigator var="navi">
     <ons-page>
       <ons-toolbar>
         <div class="center">Page 1</div>
@@ -23,10 +23,10 @@
 
       <div style="text-align: center">
         <h1>Page 1</h1>
-        <ons-button ng-click="ons.navigator.pushPage('page2.html', { title: 'Page 2' })">Push Page 2</ons-button>
+        <ons-button ng-click="navi.pushPage('page2.html', { title: 'Page 2' })">Push Page 2</ons-button>
 
         <h1>Pop</h1>
-        <ons-button ng-click="ons.navigator.popPage()">Pop Page
+        <ons-button ng-click="navi.popPage()">Pop Page
         </ons-button>
       </div>
     </ons-page>

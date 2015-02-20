@@ -21,39 +21,186 @@ limitations under the License.
  * @category util
  * @category fuga
  * @description 
- * [ja]Onsen UIで利用できるグローバルなオブジェクトです。このオブジェクトは、AngularJSのスコープから参照することができます。 [/ja]
- * [en]A global object for using Onsen UI.[/en]
+ *   [ja]Onsen UIで利用できるグローバルなオブジェクトです。このオブジェクトは、AngularJSのスコープから参照することができます。 [/ja]
+ *   [en]A global object that's used in Onsen UI. This object can be reached from the AngularJS scope.[/en]
  */
 
 /**
  * @ngdoc method
  * @signature ready(callback)
  * @description 
- * [ja]アプリの初期化に利用するメソッドです。渡された関数を、Onsen UIの初期化が終了している時点で必ず呼びます。[/ja]
- * [en][/en]
+ *   [ja]アプリの初期化に利用するメソッドです。渡された関数を、Onsen UIの初期化が終了している時点で必ず呼びます。[/ja]
+ *   [en]Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized.[/en]
  * @param {Function} callback
- * @return {void}
- */
-
-/**
- * @ngdoc method
- * @signature createPopOver(pageUrl)
- * @description 
- * [ja]ポップオーバーのインスタンスを作成します。[/ja]
- * [en][/en]
- * @param {String} pageUrl
- * @return {Promise}
+ *   [en]Function that executes after Onsen UI has been initialized.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc method
  * @signature bootstrap([moduleName, [dependencies]])
  * @description 
- * [ja]Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます[/ja]
- * [en][/en]
- * @param {String} [moduleName] [ja]Angular.jsでのモジュール名[/ja]
- * @param {Array} [dependencies] [ja]依存するAngular.jsのモジュール名の配列[/ja]
- * @return {void}
+ *   [ja]Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます[/ja]
+ *   [en]Initialize Onsen UI. Can be used to load Onsen UI without using the <code>ng-app</code> attribute from AngularJS.[/en]
+ * @param {String} [moduleName] 
+ *   [en]AngularJS module name.[/en]
+ *   [ja]Angular.jsでのモジュール名[/ja]
+ * @param {Array} [dependencies] 
+ *   [en]List of AngularJS module dependencies.[/en]
+ *   [ja]依存するAngular.jsのモジュール名の配列[/ja]
+ * @return {Object}
+ *   [en]An AngularJS module object.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature enableAutoStatusBarFill()
+ * @description 
+ *   [en]Enable status bar fill feature on iOS7 and above.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature enableAutoStatusBarFill()
+ * @description 
+ *   [en]Disable status bar fill feature on iOS7 and above.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature findParentComponentUntil(name, [dom])
+ * @param {String} name
+ *   [en]Name of component, i.e. 'ons-page'.[/en]
+ * @param {Object|jqLite|HTMLElement} [dom]
+ *   [en]$event, jqLite or HTMLElement object.[/en]
+ *   [ja][/ja]
+ * @return {Object}
+ *   [en]Component object. Will return null if no component was found.[/en]
+ *   [ja][/ja]
+ * @description 
+ *   [en]Find parent component object of <code>dom</code> element.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature findComponent(selector, [dom])
+ * @param {String} selector
+ *   [en]CSS selector[/en]
+ *   [ja]CSSセレクター[/ja]
+ * @param {HTMLElement} [dom]
+ *   [en]DOM element to search from.[/en]
+ *   [ja][/ja]
+ * @return {Object}
+ *   [en]Component object. Will return null if no component was found.[/en]
+ *   [ja][/ja]
+ * @description 
+ *   [en]Find component object using CSS selector.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setDefaultDeviceBackButtonListener(listener)
+ * @param {Function} listener 
+ *   [en]Function that executes when device back button is pressed.[/en]
+ *   [ja][/ja]
+ * @description 
+ *   [en]Set default handler for device back button.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature disableDeviceBackButtonHandler()
+ * @description 
+ * [en]Disable device back button event handler.[/en]
+ * [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature enableDeviceBackButtonHandler()
+ * @description 
+ * [en]Enable device back button event handler.[/en]
+ * [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isReady()
+ * @return {Boolean}
+ *   [en]Will be true if Onsen UI is initialized.[/en]
+ *   [ja][/ja]
+ * @description 
+ *   [en]Returns true if Onsen UI is initialized.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature compile(dom)
+ * @param {HTMLElement} dom
+ *   [en]Element to compile.[/en]
+ *   [ja][/ja]
+ * @description 
+ *   [en]Compile Onsen UI components.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isWebView()
+ * @return {Boolean}
+ *   [en]Will be true if the app is running in Cordova.[/en]
+ *   [ja][/ja]
+ * @description 
+ *   [en]Returns true if running inside Cordova.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature createAlertDialog(page)
+ * @param {String} page
+ *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-alert-dialog> component.[/en]
+ *   [ja][/ja]
+ * @return {Promise}
+ *   [en]Promise object that resolves to the alert dialog component object.[/en]
+ *   [ja][/ja]
+ * @description 
+ *   [en]Create a alert dialog instance from a template.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature createDialog(page)
+ * @param {String} page
+ *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
+ * @return {Promise}
+ *   [en]Promise object that resolves to the dialog component object.[/en]
+ *   [ja][/ja]
+ * @description 
+ *   [en]Create a dialog instance from a template.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature createPopover(page)
+ * @param {String} page
+ *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
+ *   [ja][/ja]
+ * @return {Promise}
+ *   [en]Promise object that resolves to the popover component object.[/en]
+ *   [ja][/ja]
+ * @description 
+ *   [en]Create a popover instance from a template.[/en]
+ *   [ja][/ja]
  */
 
 window.ons = (function(){
@@ -177,6 +324,10 @@ window.ons = (function(){
 
       _unlockersDict: {},
 
+      // Object to attach component variables to when using the var="..." attribute.
+      // Can be set to null to avoid polluting the global scope.
+      componentBase: window,
+
       /**
        * Bootstrap this document as a Onsen UI application.
        *
@@ -221,7 +372,7 @@ window.ons = (function(){
       },
 
       /**
-       * Disabled status bar fill feature on iOS7 and above.
+       * Disable status bar fill feature on iOS7 and above.
        */
       disableAutoStatusBarFill: function() {
         if (this.isReady()) {
@@ -497,85 +648,6 @@ window.ons = (function(){
 
           return deferred.promise;
         });
-      },
-
-      platform: {
-        /**
-         * @return {Boolean}
-         */
-        isWebView: function() {
-          return ons.isWebView();
-        },
-        /**
-         * @return {Boolean}
-         */
-        isIOS: function() {
-          return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-        },
-        /**
-         * @return {Boolean}
-         */
-        isAndroid: function() {
-          return /Android/i.test(navigator.userAgent);
-        },
-        /**
-         * @return {Boolean}
-         */
-        isIPhone: function() {
-          return /iPhone/i.test(navigator.userAgent);
-        },
-        /**
-         * @return {Boolean}
-         */
-        isIPad: function() {
-          return /iPad/i.test(navigator.userAgent);
-        },
-        /**
-         * @return {Boolean}
-         */
-        isBlackBerry: function() {
-          return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
-        },
-        /**
-         * @return {Boolean}
-         */
-        isOpera: function() {
-          return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
-        },
-        /**
-         * @return {Boolean}
-         */
-        isFirefox: function() {
-          return (typeof InstallTrigger !== 'undefined');
-        },
-        /**
-         * @return {Boolean}
-         */
-        isSafari: function() {
-          return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0);
-        },
-        /**
-         * @return {Boolean}
-         */
-        isChrome: function() {
-          return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0));
-        },
-        /**
-         * @return {Boolean}
-         */
-        isIE: function() {
-          return false || !!document.documentMode;
-        },
-        /**
-         * @return {Boolean}
-         */
-        isIOS7above: function() {
-          if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-            var ver = (navigator.userAgent.match(/\b[0-9]+_[0-9]+(?:_[0-9]+)?\b/)||[''])[0].replace(/_/g,'.');
-            return (parseInt(ver.split('.')[0]) >= 7);
-          }
-          return false;
-        }
       }
     };
     return ons;
