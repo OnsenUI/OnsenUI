@@ -39,7 +39,11 @@
  * [ja]ダイアログが表示される直前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.dialog
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {Function} event.cancel 
+ *   [en]Execute this function to stop the dialog from being shown.[/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -50,6 +54,8 @@
  * [ja]ダイアログが表示された直後に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.dialog
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  */
 
 /**
@@ -60,7 +66,11 @@
  * [ja]ダイアログが隠れる直前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.dialog
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {Function} event.cancel 
+ *   [en]Execute this function to stop the dialog from being hidden.[/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -71,6 +81,8 @@
  * [ja]ダイアログが隠れた後に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.dialog
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  */
 
 /**
@@ -131,8 +143,14 @@
  * @ngdoc method
  * @signature show([options])
  * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja][/ja]
  * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
+ *   [ja][/ja]
  * @param {Function} [options.callback]
+ *   [en]This function is called after the dialog has been revealed.[/en]
+ *   [ja][/ja]
  * @description
  *  [en]Show the dialog.[/en]
  *  [ja]ダイアログを開きます。[/ja]
@@ -142,20 +160,28 @@
  * @ngdoc method
  * @signature hide([options])
  * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja][/ja]
  * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
+ *   [ja][/ja]
  * @param {Function} [options.callback]
+ *   [en]This functions is called after the dialog has been hidden.[/en]
+ *   [ja][/ja]
  * @description
- *  [en]Hide the dialog.[/en]
- *  [ja]ダイアログを閉じます。[/ja]
+ *   [en]Hide the dialog.[/en]
+ *   [ja]ダイアログを閉じます。[/ja]
  */
 
 /**
  * @ngdoc method
  * @signature isShown()
  * @description
- *  [en]Returns whether the dialog is visible or not.[/en]
- *  [ja]ダイアログが表示されているかどうかを返します。[/ja]
+ *   [en]Returns whether the dialog is visible or not.[/en]
+ *   [ja]ダイアログが表示されているかどうかを返します。[/ja]
  * @return {Boolean}
+ *   [en]Will be true if the dialog is visible.[/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -170,45 +196,55 @@
  * @ngdoc method
  * @signature getDeviceBackButtonHandler()
  * @return {Object}
+ *   [en]Device back button handler.[/en]
+ *   [ja][/ja]
  * @description
- *  [en]Retrieve the back button handler for overriding the default behavior.[/en]
- *  [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
+ *   [en]Retrieve the back button handler for overriding the default behavior.[/en]
+ *   [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
  */
 
 /**
  * @ngdoc method
  * @signature setCancelable(cancelable)
  * @param {Boolean} cancelable
+ *   [en]If true the dialog will be cancelable.[/en]
+ *   [ja][/ja]
  * @description
- *  [en]Define whether the dialog can be canceled by the user or not.[/en]
- *  [ja]ダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
+ *   [en]Define whether the dialog can be canceled by the user or not.[/en]
+ *   [ja]ダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
  */
 
 /**
  * @ngdoc method
  * @signature isCancelable()
  * @description
- *  [en]Returns whether the dialog is cancelable or not.[/en]
- *  [ja]このダイアログがキャンセル可能かどうかを返します。[/ja]
+ *   [en]Returns whether the dialog is cancelable or not.[/en]
+ *   [ja]このダイアログがキャンセル可能かどうかを返します。[/ja]
  * @return {Boolean}
+ *   [en]Will be true if the dialog is cancelable.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc method
  * @signature setDisabled(disabled)
  * @description
- *  [en]Disable or enable the dialog.[/en]
- *  [ja]このダイアログをdisabled状態にするかどうかを設定します。[/ja]
+ *   [en]Disable or enable the dialog.[/en]
+ *   [ja]このダイアログをdisabled状態にするかどうかを設定します。[/ja]
  * @param {Boolean} disabled
+ *   [en]If true the dialog will be disabled.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc method
  * @signature isDisabled()
  * @description
- *  [en]Returns whether the dialog is disabled or enabled.[/en]
- *  [ja]このダイアログがdisabled状態かどうかを返します。[/ja]
+ *   [en]Returns whether the dialog is disabled or enabled.[/en]
+ *   [ja]このダイアログがdisabled状態かどうかを返します。[/ja]
  * @return {Boolean}
+ *   [en]Will be true if the dialog is disabled.[/en]
+ *   [ja][/ja]
  */
 
 /**

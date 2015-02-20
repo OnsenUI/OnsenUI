@@ -90,6 +90,8 @@
  * @ngdoc method
  * @signature isSpinning()
  * @return {Boolean}
+ *   [en]Will be true if the button is spinning.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Return whether the spinner is visible or not.[/en]
  *   [ja]ボタンにスピナーは表示されているかどうかを返します。[/ja]
@@ -102,6 +104,8 @@
  *   [en]Set spin animation. Possible values are "slide-left" (default), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in".[/en]
  *   [ja]スピナーを表示する場合のアニメーションを指定します。スピナーを表示する次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
  * @param {String} animation
+ *   [en]Animation name.[/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -116,6 +120,8 @@
  * @ngdoc method
  * @signature isDisabled()
  * @return {Boolean}
+ *   [en]Will be true if the button is disabled.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Returns whether the button is disabled or enabled.[/en]
  *   [ja]このボタンがdisabled状態かどうかを返します。[/ja] 

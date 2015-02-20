@@ -10,61 +10,73 @@
  *  [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]
  * @codepen ZYYRKo
  * @example
- *   <script>
- *   ons.ready(function() {
- *     ons.createPopover('popover.html').then(function(popover) {
- *       popover.show('#mybutton');   
- *     });
+ * <script>
+ * ons.ready(function() {
+ *   ons.createPopover('popover.html').then(function(popover) {
+ *     popover.show('#mybutton');   
  *   });
- *   </script>
+ * });
+ * </script>
  *
- *   <script type="text/ons-template" id="popover.html">
- *     <ons-popover cancelable>
- *       <p style="text-align: center; opacity: 0.5;">This popover will choose which side it's displayed on automatically.</p>
- *     </ons-popover>
- *   </script>
+ * <script type="text/ons-template" id="popover.html">
+ *   <ons-popover cancelable>
+ *     <p style="text-align: center; opacity: 0.5;">This popover will choose which side it's displayed on automatically.</p>
+ *   </ons-popover>
+ * </script>
  */
 
 /**
  * @ngdoc event
  * @name preshow
  * @description
- * [en]Fired just before the popover is displayed.[/en]
- * [ja]ポップオーバーが表示される直前に発火します。[/ja]
+ *   [en]Fired just before the popover is displayed.[/en]
+ *   [ja]ポップオーバーが表示される直前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.popover
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {Function} event.cancel 
+ *   [en]Call this function to stop the popover from being shown.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc event
  * @name postshow
  * @description
- * [en]Fired just after the popover is displayed.[/en]
- * [ja]ポップオーバーが表示された直後に発火します。[/ja]
+ *   [en]Fired just after the popover is displayed.[/en]
+ *   [ja]ポップオーバーが表示された直後に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.popover
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  */
 
 /**
  * @ngdoc event
  * @name prehide
  * @description
- * [en]Fired just before the popover is hidden.[/en]
- * [ja]ポップオーバーが隠れる直前に発火します。[/ja]
+ *   [en]Fired just before the popover is hidden.[/en]
+ *   [ja]ポップオーバーが隠れる直前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.popover
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {Function} event.cancel 
+ *   [en]Call this function to stop the popover from being hidden.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc event
  * @name posthide
  * @description
- * [en]Fired just after the popover is hidden.[/en]
- * [ja]ポップオーバーが隠れた後に発火します。[/ja]
+ *   [en]Fired just after the popover is hidden.[/en]
+ *   [ja]ポップオーバーが隠れた後に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.popover
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  */
 
 
@@ -133,8 +145,14 @@
  * @ngdoc method
  * @signature show(target, [options])
  * @param {String|Event|HTMLElement} target
+ *   [en]Target element. Can be either a CSS selector, an event object or a DOM element.[/en]
+ *   [ja][/ja]
  * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja][/ja]
  * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "fade" and "none".[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..[/en]
  *   [ja]対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。[/ja]
@@ -144,7 +162,11 @@
  * @ngdoc method
  * @signature hide([options])
  * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja][/ja]
  * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "fade" and "none".[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Close the popover.[/en]
  *   [ja]ポップオーバーを閉じます。[/ja]
@@ -154,6 +176,8 @@
  * @ngdoc method
  * @signature isShown()
  * @return {Boolean}
+ *   [en]Will be true if the popover is visible.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Returns whether the popover is visible or not.[/en]
  *   [ja]ポップオーバーが表示されているかどうかを返します。[/ja]
@@ -171,6 +195,8 @@
  * @ngdoc method
  * @signature setCancelable(cancelable)
  * @param {Boolean} cancelable
+ *   [en]If true the popover will be cancelable.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Set whether the popover can be canceled by the user when it is shown.[/en]
  *   [ja]ポップオーバーを表示した際に、ユーザがそのポップオーバーをキャンセルできるかどうかを指定します。[/ja]
@@ -180,6 +206,8 @@
  * @ngdoc method
  * @signature isCancelable()
  * @return {Boolean}
+ *   [en]Will be true if the popover is cancelable.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Returns whether the popover is cancelable or not.[/en]
  *   [ja]このポップオーバーがキャンセル可能かどうかを返します。[/ja]
@@ -189,6 +217,8 @@
  * @ngdoc method
  * @signature setDisabled(disabled)
  * @param {Boolean} disabled
+ *   [en]If true the popover will be disabled.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Disable or enable the popover.[/en]
  *   [ja]このポップオーバーをdisabled状態にするかどうかを設定します。[/ja]
@@ -198,6 +228,7 @@
  * @ngdoc method
  * @signature isDisabled() 
  * @return {Boolean}
+ *   [en][/
  * @description
  *   [en]Returns whether the popover is disabled or enabled.[/en]
  *   [ja]このポップオーバーがdisabled状態かどうかを返します。[/ja]

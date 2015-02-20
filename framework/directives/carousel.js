@@ -197,6 +197,8 @@
  * @ngdoc method
  * @signature setSwipeable(swipeable)
  * @param {Booelan} swipeable
+ *   [en]If value is true the carousel will be swipeable.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Set whether the carousel is swipeable or not.[/en]
  *   [ja]swipeable属性があるかどうかを設定する。[/ja] 
@@ -206,6 +208,8 @@
  * @ngdoc method
  * @signature isSwipeable()
  * @return {Boolean}
+ *   [en]Will be true if the carousel is swipeable.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Returns whether the carousel is swipeable or not.[/en]
  *   [ja]swiapble属性があるかどうかを返す。[/ja] 
@@ -215,6 +219,8 @@
  * @ngdoc method
  * @signature setActiveCarouselItemIndex(index)
  * @param {Number} index
+ *   [en]The index that the carousel should be set to.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Specify the index of the ons-carousel-item to show.[/en]
  *   [ja]表示するons-carousel-itemをindexで指定する。[/ja] 
@@ -224,6 +230,8 @@
  * @ngdoc method
  * @signature getActiveCarouselItemIndex(index)
  * @return {Number}
+ *   [en]The current carousel item index.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Returns the index of the currently visible ons-carousel-item.[/en]
  *   [ja]現在表示されているons-carousel-itemのindexを返す。[/ja] 
@@ -233,6 +241,8 @@
  * @ngdoc method
  * @signature setAutoScrollEnabled(enabled)
  * @param {Boolean} enabled
+ *   [en]If true auto scroll will be enabled.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Enable or disable "auto-scroll" attribute.[/en]
  *   [ja]auto-scroll属性があるかどうかを設定する。[/ja] 
@@ -242,6 +252,8 @@
  * @ngdoc method
  * @signature isAutoScrollEnabled()
  * @return {Boolean}
+ *   [en]Will be true if auto scroll is enabled.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Returns whether the "auto-scroll" attribute is set or not.[/en]
  *   [ja]auto-scroll属性があるかどうかを返す。[/ja] 
@@ -251,6 +263,8 @@
  * @ngdoc method
  * @signature setAutoScrollRatio(ratio)
  * @param {Number} ratio
+ *   [en]The desired ratio.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Set the auto scroll ratio. Must be a value between 0.0 and 1.0.[/en]
  *   [ja][/ja]
@@ -260,6 +274,8 @@
  * @ngdoc method
  * @signature getAutoScrollRatio(ratio)
  * @return {Number}
+ *   [en]The current auto scroll ratio.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Returns the current auto scroll ratio.[/en]
  *   [ja][/ja]
@@ -269,6 +285,8 @@
  * @ngdoc method
  * @signature setOverscrollable(overscrollable)
  * @param {Boolean}
+ *   [en]If true the carousel will be overscrollable.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Set whether the carousel is overscrollable or not.[/en]
  *   [ja]overscroll属性があるかどうかを設定する。[/ja] 
@@ -278,6 +296,8 @@
  * @ngdoc method
  * @signature isOverscrollable()
  * @return {Boolean}
+ *   [en]Whether the carousel is overscrollable or not.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Returns whether the carousel is overscrollable or not.[/en]
  *   [ja]overscroll属性があるかどうかを返す。[/ja] 
@@ -295,6 +315,8 @@
  * @ngdoc method
  * @signature isDisabled()
  * @return {Boolean}
+ *   [en]Whether the carousel is disabled or not.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Returns whether the dialog is disabled or enabled.[/en]
  *   [ja]disabled属性があるかどうかを返す。[/ja] 
@@ -304,6 +326,8 @@
  * @ngdoc method
  * @signature setDisabled(disabled)
  * @param {Boolean}
+ *   [en]If true the carousel will be disabled.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Disable or enable the dialog.[/en]
  *   [ja]disabled属性があるかどうかを設定する。[/ja] 

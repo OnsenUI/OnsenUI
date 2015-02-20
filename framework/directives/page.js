@@ -3,23 +3,23 @@
  * @id page
  * @name ons-page
  * @description
- *  [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
- *  [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
+ *   [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
+ *   [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
  * @guide ManagingMultiplePages
- *  [en]Managing multiple pages[/en]
- *  [ja]複数のページを管理する[/ja]
+ *   [en]Managing multiple pages[/en]
+ *   [ja]複数のページを管理する[/ja]
  * @guide Pageinitevent
- *  [en]Event for page initialization[/en]
- *  [ja]ページ初期化のイベント[/ja]
+ *   [en]Event for page initialization[/en]
+ *   [ja]ページ初期化のイベント[/ja]
  * @guide HandlingBackButton
- *  [en]Handling back button[/en]
- *  [ja]バックボタンに対応する[/ja]
+ *   [en]Handling back button[/en]
+ *   [ja]バックボタンに対応する[/ja]
  * @guide OverridingCSSstyles
- *  [en]Overriding CSS styles[/en]
- *  [ja]CSSスタイルのオーバーライド[/ja]
+ *   [en]Overriding CSS styles[/en]
+ *   [ja]CSSスタイルのオーバーライド[/ja]
  * @guide DefiningMultiplePagesinSingleHTML
- *  [en]Defining multiple pages in single html[/en]
- *  [ja]複数のページを1つのHTMLに記述する[/ja]
+ *   [en]Defining multiple pages in single html[/en]
+ *   [ja]複数のページを1つのHTMLに記述する[/ja]
  * @example
  * <ons-page>
  *   <ons-toolbar>
@@ -70,6 +70,8 @@
  * @ngdoc method
  * @signature getDeviceBackButtonHandler()
  * @return {Object}
+ *   [en]Device back button handler.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
  *   [ja]バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]

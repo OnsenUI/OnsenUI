@@ -28,8 +28,8 @@
  * @name modifier
  * @type {String}
  * @description
- *  [en]The appearance of the list item.[/en]
- *  [ja]各要素の表現を指定します。[/ja]
+ *   [en]The appearance of the list item.[/en]
+ *   [ja]各要素の表現を指定します。[/ja]
  */
 
 (function() {

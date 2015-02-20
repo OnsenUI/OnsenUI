@@ -3,14 +3,19 @@
  * @id navigator
  * @name ons-navigator
  * @description
- *  [en]A component that provides page stack management and navigation. This component does not have a visible content.[/en]
- *  [ja]ページスタックの管理とナビゲーション機能を提供するコンポーネント。画面上への出力はありません。[/ja]
+ *   [en]A component that provides page stack management and navigation. This component does not have a visible content.[/en]
+ *   [ja]ページスタックの管理とナビゲーション機能を提供するコンポーネント。画面上への出力はありません。[/ja]
  * @codepen yrhtv
  * @guide PageNavigation [en]Guide for page navigation[/en][ja]ページナビゲーションの概要[/ja]
  * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
- * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
+ * @seealso ons-toolbar 
+ *   [en]ons-toolbar component[/en]
+ *   [ja]ons-toolbarコンポーネント[/ja]
+ * @seealso ons-back-button
+ *   [en]ons-back-button component[/en]
+ *   [ja]ons-back-buttonコンポーネント[/ja]
  * @example
  * <ons-navigator animation="slide" var="app.navi">
  *   <ons-page>
@@ -45,7 +50,11 @@
  *   [ja][/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.navigator
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {Object} event.currentPage
+ *   [en]Current page object.[/en]
+ *   [ja][/ja]
  * @param {Function} event.cancel
  *   [en]Call this function to cancel the push.[/en]
  *   [ja][/ja]
@@ -59,7 +68,11 @@
  *   [ja][/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.navigator
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {Object} event.currentPage
+ *   [en]Current page object.[/en]
+ *   [ja][/ja]
  * @param {Function} event.cancel
  *   [en]Call this function to cancel the pop.[/en]
  *   [ja][/ja]
@@ -73,8 +86,14 @@
  *   [ja][/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.navigator
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {Object} event.enterPage
+ *   [en]Object of the next page.[/en]
+ *   [ja][/ja]
  * @param {Object} event.leavePage
+ *   [en]Object of the previous page.[/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -85,8 +104,14 @@
  *   [ja][/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.navigator
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {Object} event.enterPage
+ *   [en]Object of the next page.[/en]
+ *   [ja][/ja]
  * @param {Object} event.leavePage
+ *   [en]Object of the previous page.[/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -111,9 +136,17 @@
  * @ngdoc method
  * @signature pushPage(pageUrl, [options])
  * @param {String} pageUrl
+ *   [en]Page URL. Can be either a HTML document or a <ons-template>.[/en]
+ *   [ja][/ja]
  * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja][/ja]
  * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+ *   [ja][/ja]
  * @param {Function} [options.onTransitionEnd]
+ *   [en]Function that is called when the transition has ended.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Pushes the specified pageUrl into the page stack.[/en]
  *   [ja]指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。[/ja]
@@ -124,20 +157,14 @@
  * @signature insertPage(index, pageUrl, [options])
  * @param {Number} index
  * @param {String} pageUrl
+ *   [en]Page URL. Can be either a HTML document or a <ons-template>.[/en]
+ *   [ja][/ja]
  * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja][/ja]
  * @param {String} [options.animation]
- * @description
- *   [en]Insert the specified pageUrl into the page stack with specified index.[/en]
- *   [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature insertPage(index, pageUrl, [options])
- * @param {Number} index
- * @param {String} pageUrl
- * @param {Object} [options]
- * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Insert the specified pageUrl into the page stack with specified index.[/en]
  *   [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
@@ -147,7 +174,11 @@
  * @ngdoc method
  * @signature popPage([options])
  * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja][/ja]
  * @param {Function} [options.onTransitionEnd]
+ *   [en]Function that is called when the transition has ended.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Pops the current page from the page stack. The previous page will be displayed.[/en]
  *   [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
@@ -157,9 +188,17 @@
  * @ngdoc method
  * @signature resetToPage(pageUrl, [options])
  * @param {String} pageUrl
+ *   [en]Page URL. Can be either a HTML document or an <ons-template>.[/en]
+ *   [ja][/ja]
  * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja][/ja]
  * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+ *   [ja][/ja]
  * @param {Function} [options.onTransitionEnd]
+ *   [en]Function that is called when the transition has ended.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Clears page stack and adds the specified pageUrl to the page stack.[/en]
  *   [ja]ページスタックをリセットし、指定したページを表示します。[/ja]
@@ -168,7 +207,9 @@
 /**
  * @ngdoc method
  * @signature getCurrentPage()
- * @return {Number}
+ * @return {Object}
+ *   [en]Current page object.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method.[/en]
  *   [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
@@ -178,6 +219,8 @@
  * @ngdoc method
  * @signature getPages()
  * @return {List}
+ *   [en]List of page objects.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Retrieve the entire page stack of the navigator.[/en]
  *   [ja]ナビゲーターの持つページスタックの一覧を取得します。[/ja]
@@ -187,6 +230,8 @@
  * @ngdoc method
  * @signature getDeviceBackButtonHandler()
  * @return {Object}
+ *   [en]Device back button handler.[/en]
+ *   [ja][/ja]
  * @description
  *   [en]Retrieve the back button handler for overriding the default behavior.[/en]
  *   [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
