@@ -24,6 +24,7 @@ limitations under the License.
  *   [en]Utility methods to create different kinds of dialogs.[/en]
  *   [ja][/ja]
  * @example
+ * <script>
  *   ons.notification.alert({
  *     message: 'Hello, world!'
  *   });
@@ -43,6 +44,7 @@ limitations under the License.
  *       });
  *     });
  *   });
+ * </script>
  */
 
 /**

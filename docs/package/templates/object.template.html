@@ -20,6 +20,9 @@ reference: true
   </section>
 
   <ul class="reference-quick-navi">
+    {% if doc.examples[0] %}
+    <li><a href="#usage">{$ '[en]Usage[/en][ja]使い方[/ja]' | lang $}</a></li>
+    {% endif %}
     {% if doc.methods.length > 0 %}
     <li><a href="#methods-summary">{$ '[en]Methods[/en][ja]メソッド[/ja]' | lang $}</a></li>
     {% endif %}
@@ -31,6 +34,16 @@ reference: true
     {% endif %}
     <li><a href="#discussion">{$ '[en]Discussion[/en][ja]議論[/ja]' | lang $}</a></li>
   </ul>
+
+  {% if doc.examples[0] %}
+    <section>
+      <h3 id="usage">
+        {$ '[en]Usage[/en][ja]使い方[/ja]' | lang $}
+        <a href="#usage" class="reference-loop-anchor">#</a>
+      </h3>
+      <pre><code class="xml">{$ doc.examples[0] | e $}</code></pre>
+    </section>
+  {% endif %}
 
   {% if doc.note %}
   <section class="note">
