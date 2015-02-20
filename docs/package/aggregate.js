@@ -19,6 +19,9 @@ module.exports = function aggregate() {
         var type = doc.docType;
 
         if (type === 'directive') {
+          if (!doc.categories) {
+            console.log('WARN: @category is not presented in ' + doc.name);
+          }
           directives.push(doc);
         } else if (type === 'event' || type === 'method' || type === 'attribute') {
           if (!dict[type][path]) {
@@ -27,6 +30,9 @@ module.exports = function aggregate() {
           dict[type][path].push(doc);
 
         } else if (type === 'object') {
+          if (!doc.categories) {
+            console.log('WARN: @category is not presented in ' + doc.name);
+          }
           objects.push(doc);
         } else if (type === 'overview') {
           overviews.push(doc);

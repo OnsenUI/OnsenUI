@@ -13,6 +13,14 @@ module.exports = [
     }
   },
   {
+    name: 'category',
+    multi: true,
+    docProperty: 'categories',
+    transforms: function(doc, tag, value) {
+      return ('' + value).trim();
+    }
+  },
+  {
     name: 'signature',
     transforms: function(doc, tag, value) {
       doc.tags.tagsByName.obj.name = extend(

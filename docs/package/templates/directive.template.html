@@ -4,8 +4,10 @@ title: '{$ doc.name $}'
 name: '{$ doc.name $}'
 collection: 'components'
 reference: true
----
-<div class="reference-container" id="{$ doc.id $}">
+docCategory: 'js'
+{% if doc.categories %}componentCategory: {$ doc.categories $}
+{% endif %}---
+<div class="reference-container" id="{$ doc.name $}">
 
   <div class="reference-github-links">
     <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/{$ doc.fileInfo.baseName | e $}.js">View Source</a>

@@ -369,7 +369,7 @@ gulp.task('build-docs', function(done) {
 gulp.task('watch-docs', ['build-docs'], function(done) {
   gulp.watch([
     './docs/**/*',
-    './framework/directive/*.js',
+    './framework/directives/*.js',
     './framework/js/*.js',
   ], ['build-docs']);
 });
