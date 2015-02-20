@@ -19,7 +19,6 @@ limitations under the License.
  * @ngdoc object
  * @name ons
  * @category util
- * @category fuga
  * @description 
  *   [ja]Onsen UIで利用できるグローバルなオブジェクトです。このオブジェクトは、AngularJSのスコープから参照することができます。 [/ja]
  *   [en]A global object that's used in Onsen UI. This object can be reached from the AngularJS scope.[/en]

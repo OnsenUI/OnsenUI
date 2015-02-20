@@ -19,7 +19,6 @@ limitations under the License.
  * @ngdoc object
  * @name ons.platform
  * @category util
- * @category fuga
  * @description 
  *   [en]Utility methods to detect current platform.[/en]
  *   [ja][/ja]

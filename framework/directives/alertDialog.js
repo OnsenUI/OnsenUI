@@ -22,6 +22,7 @@
  * @seealso ons.notification
  *   [en]Using ons.notification utility functions.[/en]
  *   [ja][/ja]
+ * @category alert
  * @example
  * <script>
  *   ons.ready(function() {

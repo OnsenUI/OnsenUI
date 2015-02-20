@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id toolbar_button
  * @name ons-toolbar-button
+ * @category toolbar
  * @modifier quiet
  *   [en]A button that doesn't stand out.[/en]
  *   [ja][/ja]

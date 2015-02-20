@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id toolbar
  * @name ons-toolbar
+ * @category toolbar
  * @modifier transparent
  *   [en]Transparent toolbar[/en]
  *   [ja][/ja]

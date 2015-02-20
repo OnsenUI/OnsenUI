@@ -19,7 +19,6 @@ limitations under the License.
  * @ngdoc object
  * @name ons.orientation
  * @category util
- * @category fuga
  * @description 
  *   [en]Utility methods for orientation detection.[/en]
  *   [ja][/ja]

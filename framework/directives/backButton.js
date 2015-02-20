@@ -18,6 +18,7 @@
  * @guide Returningfromapage 
  *   [en]Returning from a page[/en]
  *   [ja]一つ前のページに戻る[/ja]
+ * @category toolbar
  * @example
  * <ons-back-button>
  *   Back
