@@ -1916,7 +1916,8 @@ h6 {
   transition: none;
   opacity: 0.2;
 }
-.toolbar-button:disabled {
+.toolbar-button:disabled,
+.toolbar-button[disabled] {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;

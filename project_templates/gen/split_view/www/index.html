@@ -24,6 +24,7 @@
 <body>    
   
   <ons-split-view 
+    var="splitView"
     secondary-page="secondary.html" 
     main-page="page1.html" 
     main-page-width="70%" 
@@ -69,15 +70,15 @@
 
         <ons-list-item
           modifier="chevron"
-          ng-click="ons.splitView.toggle();
-            ons.splitView.setMainPage('page1.html');">
+          ng-click="splitView.toggle();
+            splitView.setMainPage('page1.html');">
           <i class="fa fa-home fa-lg" style="color: #666"></i>
           &nbsp; Page 1
         </ons-list-item>
 
         <ons-list-item 
           modifier="chevron"
-          ng-click="ons.splitView.toggle(); ons.splitView.setMainPage('page2.html');">
+          ng-click="splitView.toggle(); splitView.setMainPage('page2.html');">
           <i class="fa fa-gear fa-lg" style="color: #666"></i>
           &nbsp; Page 2
         </ons-list-item>
