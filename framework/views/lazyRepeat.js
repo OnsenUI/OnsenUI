@@ -45,9 +45,6 @@ limitations under the License.
 
         this._scope.$watch(
           function() {
-            return this._countItems();
-          }.bind(this),
-          function() {
             this._render();
           }.bind(this)
         );
@@ -112,8 +109,8 @@ limitations under the License.
             this._delegate.configureItemScope(item.index, currentItem.scope);
           }
           else if (this._delegate.createItemContent) {
-            var newContent = angular.element(this._delegate.createItemContent(item.index)),
-              oldContent = currentItem.element.children();
+            var oldContent = currentItem.element.children(),
+              newContent = angular.element(this._delegate.createItemContent(item.index, oldContent[0]));
 
             if (newContent.html() !== oldContent.html()) {
               currentItem.element
@@ -186,7 +183,9 @@ limitations under the License.
 
       _removeAllElements: function() {
         for (var key in this._renderedElements) {
-          this._removeElement(key);
+          if (this._removeElement.hasOwnProperty(key)) {
+            this._removeElement(key);
+          }
         }
       },
 

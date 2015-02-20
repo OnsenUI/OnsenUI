@@ -139,7 +139,6 @@ limitations under the License.
         this._bindedOnDrag = this._onDrag.bind(this);
         this._bindedOnDragEnd = this._onDragEnd.bind(this);
         this._bindedOnResize = this._onResize.bind(this);
-        this._bindedStopPropagation = this._stopPropagation.bind(this);
 
         this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
 
@@ -423,9 +422,8 @@ limitations under the License.
           dragMinDistance: 1
         });
 
-        this._hammer.on('drag', this._bindedOnDrag);
+        this._hammer.on('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
         this._hammer.on('dragend', this._bindedOnDragEnd);
-        this._hammer.on(this._getTouchEvents(), this._bindedStopPropagation);
 
         angular.element(window).on('resize', this._bindedOnResize);
       },
@@ -455,6 +453,8 @@ limitations under the License.
           return;
         }
 
+        event.stopPropagation();
+
         this._lastDragEvent = event;
 
         var scroll = this._scroll - this._getScrollDelta(event);
@@ -465,6 +465,16 @@ limitations under the License.
       },
 
       _onDragEnd: function(event) {
+        if (!this.isSwipeable()) {
+          return;
+        }
+
+        var direction = event.gesture.direction;
+        if ((this._isVertical() && (direction === 'left' || direction === 'right')) || (!this._isVertical() && (direction === 'up' || direction === 'down'))) {
+          return;
+        }
+
+        event.stopPropagation();
         this._scroll = this._scroll - this._getScrollDelta(event);
 
         if (this._isOverScroll(this._scroll)) {
@@ -492,12 +502,6 @@ limitations under the License.
         }
         this._lastDragEvent = null;
         event.gesture.preventDefault();
-      },
-
-      _stopPropagation: function(event) {
-        if (this.isSwipeable()) {
-          event.stopPropagation();
-        }
       },
 
       _getTouchEvents: function() {
@@ -645,7 +649,8 @@ limitations under the License.
       },
 
       _calculateMaxScroll: function() {
-        return this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
+        var max = this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
+        return max < 0 ? 0 : max;
       },
 
       _isOverScroll: function(scroll) {
@@ -734,6 +739,10 @@ limitations under the License.
             this._scrollToKillOverScroll();
           } 
           else {
+            if (this.isAutoScrollEnabled()) {
+              scroll = this._normalizeScrollPosition(scroll);
+            }
+
             this._scrollTo(scroll);
           }
         }
@@ -762,9 +771,8 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy', {navigator: this});
 
-        this._hammer.off('drag', this._bindedOnDrag);
+        this._hammer.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
         this._hammer.off('dragend', this._bindedOnDragEnd);
-        this._hammer.off(this._getTouchEvents(), this._bindedStopPropagation);
 
         angular.element(window).off('resize', this._bindedOnResize);
 

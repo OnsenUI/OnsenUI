@@ -1,4 +1,4 @@
-/*! onsenui - v1.2.1 - 2015-02-12 */
+/*! onsenui - v1.2.1 - 2015-02-17 */
 /**
  * @license AngularJS v1.3.0
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -32395,7 +32395,8 @@ limitations under the License.
       },
 
       _calculateMaxScroll: function() {
-        return this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
+        var max = this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
+        return max < 0 ? 0 : max;
       },
 
       _isOverScroll: function(scroll) {
@@ -33963,9 +33964,6 @@ limitations under the License.
 
         this._scope.$watch(
           function() {
-            return this._countItems();
-          }.bind(this),
-          function() {
             this._render();
           }.bind(this)
         );
@@ -34030,8 +34028,8 @@ limitations under the License.
             this._delegate.configureItemScope(item.index, currentItem.scope);
           }
           else if (this._delegate.createItemContent) {
-            var newContent = angular.element(this._delegate.createItemContent(item.index)),
-              oldContent = currentItem.element.children();
+            var oldContent = currentItem.element.children(),
+              newContent = angular.element(this._delegate.createItemContent(item.index, oldContent[0]));
 
             if (newContent.html() !== oldContent.html()) {
               currentItem.element
@@ -34425,10 +34423,6 @@ limitations under the License.
        */
       show: function() {
         this._element.css('display', 'table');
-
-        if (this._pageContent) {
-          this._pageContent.addClass('noscroll');
-        }
       },
 
       _isVisible: function() {
@@ -34445,10 +34439,6 @@ limitations under the License.
        */
       hide: function() {
         this._element.css('display', 'none');
-
-        if (this._pageContent) {
-          this._pageContent.removeClass('noscroll');
-        }
       },
 
       /**
@@ -36107,8 +36097,8 @@ limitations under the License.
         this._scrollElement = this._createScrollElement();
         this._pageElement = this._scrollElement.parent();
 
-        if (!this._pageElement.hasClass('page__content')) {
-          throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> element.');
+        if (!this._pageElement.hasClass('page__content') && !this._pageElement.hasClass('ons-scroller__content')) {
+          throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> or an <ons-scroller> element.');
         }
 
         this._currentTranslation = 0;
@@ -36239,6 +36229,7 @@ limitations under the License.
           this._scope.$eval(this._attrs.ngAction, {$done: done});
         }
         else if (this._attrs.onAction) {
+          /*jshint evil:true */
           eval(this._attrs.onAction);
         }
         else {
@@ -38293,7 +38284,9 @@ limitations under the License.
       },
 
       _bindEvents: function() {
-        this._hammertime = new Hammer(this._element[0]);
+        this._hammertime = new Hammer(this._element[0], {
+          dragMinDistance: 1
+        });
       },
 
       _appendMainPage: function(pageUrl, templateHTML) {
@@ -38555,12 +38548,6 @@ limitations under the License.
           this._mainPage.children().css('pointer-events', '');
           this._mainPageHammer.off('tap', this._bindedOnTap);
 
-          // iOS fix to stop scrolling.
-          var pageContent = this._mainPage[0].querySelector('.page__content');
-          if (pageContent) {
-            angular.element(pageContent).removeClass('noscroll');
-          }
-
           this.emit('postclose');
           callback();
         }.bind(this), instant);
@@ -38597,14 +38584,7 @@ limitations under the License.
           this._mainPage.children().css('pointer-events', 'none');
           this._mainPageHammer.on('tap', this._bindedOnTap);
 
-          // iOS fix to stop scrolling.
-          var pageContent = this._mainPage[0].querySelector('.page__content');
-          if (pageContent) {
-            angular.element(pageContent).addClass('noscroll');
-          }
-
           this.emit('postopen');
-
 
           callback();
         }.bind(this), instant);

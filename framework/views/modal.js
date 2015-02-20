@@ -54,10 +54,6 @@ limitations under the License.
        */
       show: function() {
         this._element.css('display', 'table');
-
-        if (this._pageContent) {
-          this._pageContent.addClass('noscroll');
-        }
       },
 
       _isVisible: function() {
@@ -74,10 +70,6 @@ limitations under the License.
        */
       hide: function() {
         this._element.css('display', 'none');
-
-        if (this._pageContent) {
-          this._pageContent.removeClass('noscroll');
-        }
       },
 
       /**

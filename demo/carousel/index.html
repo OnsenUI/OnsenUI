@@ -317,15 +317,21 @@
   </ons-template>
 
   <ons-template id="example7.html">
-    <ons-carousel swipeable overscrollable auto-scroll style="height: 100%; width: 100%;">
-      <ons-carousel-item ng-repeat="i in [0,1]">
-        <ons-list>  
-          <ons-list-item ng-repeat="j in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
-            Item #{{ j + i * 21 }}
-          </ons-list-item>
-        </ons-list>
+    <ons-page>
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">Example7</div>
+      </ons-toolbar>
+      <ons-carousel swipeable overscrollable auto-scroll style="height: 100%; width: 100%;">
+        <ons-carousel-item ng-repeat="i in [0,1]">
+          <ons-list>  
+            <ons-list-item ng-repeat="j in [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
+              Item #{{ j + i * 21 }}
+            </ons-list-item>
+          </ons-list>
+        </ons-carousel-item>
       </ons-carousel-item>
-    </ons-carousel-item>
+    </ons-page>
   </ons-template>
 
 </body>
