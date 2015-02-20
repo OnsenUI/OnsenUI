@@ -41,11 +41,17 @@
  * @ngdoc event
  * @name changestate
  * @description
- * [en]Fired when the state is changed. The state can be either "initial", "preaction" or "action".[en]
- * [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fired when the state is changed. The state can be either "initial", "preaction" or "action".[en]
+ *   [ja][/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja][/ja]
  * @param {Object} event.pullHook
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {String} event.state
+ *   [en][/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -105,6 +111,8 @@
  * @ngdoc method
  * @signature setDisabled(disabled)
  * @param {Boolean} disabled
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Disable or enable the component.[/en]
  *   [ja]disabled状態にするかどうかを設定できます。[/ja]
@@ -114,6 +122,8 @@
  * @ngdoc method
  * @signature isDisabled()
  * @return {Boolean}
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Returns whether the component is disabled or enabled.[/en]
  *   [ja]dsiabled状態になっているかを得ることが出来ます。[/ja]
@@ -123,6 +133,8 @@
  * @ngdoc method
  * @signature setHeight(height)
  * @param {Number} height
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Specify the height.[/en]
  *   [ja]高さを指定できます。[/ja]
@@ -132,6 +144,8 @@
  * @ngdoc method
  * @signature setThresholdHeight(thresholdHeight)
  * @param {Number} thresholdHeight
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Specify the threshold height.[/en]
  *   [ja]閾値となる高さを指定できます。[/ja]

@@ -3,8 +3,8 @@
  * @id sliding_menu
  * @name ons-sliding-menu
  * @description
- *  [en]Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.[/en]
- *  [ja]スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。[/ja]
+ *   [en]Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.[/en]
+ *   [ja]スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。[/ja]
  * @codepen IDvFJ
  * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
  * @guide UsingSlidingMenu [en]Using sliding menu[/en][ja]スライディングメニューを使う[/ja]
@@ -35,36 +35,44 @@
  * @ngdoc event
  * @name preopen
  * @description
- * [en]Fired just before the sliding menu is opened.[/en]
- * [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fired just before the sliding menu is opened.[/en]
+ *   [ja][/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc event
  * @name postopen
  * @description
- * [en]Fired just after the sliding menu is opened.[/en]
- * [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fired just after the sliding menu is opened.[/en]
+ *   [ja][/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc event
  * @name preclose
  * @description
- * [en]Fired just before the sliding menu is closed.[/en]
- * [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fired just before the sliding menu is closed.[/en]
+ *   [ja][/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc event
  * @name postopen
  * @description
- * [en]Fired just after the sliding menu is closed.[/en]
- * [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fired just after the sliding menu is closed.[/en]
+ *   [ja][/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -134,9 +142,17 @@
  * @ngdoc method
  * @signature setMainPage(pageUrl, [options])
  * @param {String} pageUrl
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Object} [options]
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Boolean} [options.closeMenu]
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Function} [options.callback]
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Show the page specified in pageUrl in the main contents pane.[/en]
  *   [ja]中央部分に表示されるページをpageUrlに指定します。[/ja]
@@ -146,9 +162,17 @@
  * @ngdoc method
  * @signature setMenuPage(pageUrl, [options])
  * @param {String} pageUrl
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Object} [options]
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Boolean} [options.closeMenu]
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Function} [options.callback]
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Show the page specified in pageUrl in the side menu pane.[/en]
  *   [ja]メニュー部分に表示されるページをpageUrlに指定します。[/ja]
@@ -158,8 +182,14 @@
  * @ngdoc method
  * @signature openMenu([options])
  * @param {Object} [options]
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {String} [options.animation]
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Function} [options.callback]
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Slide the above layer to reveal the layer behind.[/en]
  *   [ja]メニューページを表示します。[/ja]
@@ -169,8 +199,14 @@
  * @ngdoc method
  * @signature closeMenu([options])
  * @param {Object} [options]
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {String} [options.animation]
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Function} [options.callback]
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Slide the above layer to hide the layer behind.[/en]
  *   [ja]メニューページを非表示にします。[/ja]
@@ -180,8 +216,14 @@
  * @ngdoc method
  * @signature toggleMenu([options])
  * @param {Object} [options]
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {String} [options.animation]
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Function} [options.callback]
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Slide the above layer to reveal the layer behind if it is currently hidden, otherwise, hide the layer behind.[/en]
  *   [ja]現在の状況に合わせて、メニューページを表示もしくは非表示にします。[/ja]
@@ -191,6 +233,8 @@
  * @ngdoc method
  * @signature isMenuOpened()
  * @return {Boolean}
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Returns true if the menu page is open, otherwise false.[/en]
  *   [ja]メニューページが開いている場合はtrue、そうでない場合はfalseを返します。[/ja]
@@ -200,6 +244,8 @@
  * @ngdoc method
  * @signature getDeviceBackButtonHandler()
  * @return {Object}
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Retrieve the back-button handler.[/en]
  *   [ja]ons-sliding-menuに紐付いているバックボタンハンドラを取得します。[/ja]
@@ -209,6 +255,8 @@
  * @ngdoc method
  * @signature setSwipeable(swipeable)
  * @param {Boolean} swipeable
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Specify if the menu should be swipeable or not.[/en]
  *   [ja]スワイプで開閉するかどうかを設定する。[/ja]

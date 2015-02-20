@@ -16,12 +16,20 @@
  * @ngdoc event
  * @name change
  * @description
- * [en]Fired when the value is changed.[en]
- * [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fired when the value is changed.[en]
+ *   [ja][/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja][/ja]
  * @param {Object} event.switch
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Boolean} event.value
+ *   [en][/en]
+ *   [ja][/ja]
  * @param {Boolean} event.isInteractive
+ *   [en][/en]
+ *   [ja][/ja]
  */
 
 /**
@@ -62,6 +70,8 @@
  * @ngdoc method
  * @signature isChecked()
  * @return {Boolean}
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Returns true if the switch is ON.[/en]
  *   [ja]スイッチがONの場合にtrueを返します。[/ja]
@@ -71,6 +81,8 @@
  * @ngdoc method
  * @signature setChecked(checked)
  * @param {Boolean} checked
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Set the value of the switch. isChecked can be either true or false.[/en]
  *   [ja]スイッチの値を指定します。isCheckedにはtrueもしくはfalseを指定します。[/ja]
@@ -80,6 +92,8 @@
  * @ngdoc method
  * @signature getCheckboxElement()
  * @return {HTMLElement}
+ *   [en][/en]
+ *   [ja][/ja]
  * @description
  *   [en]Get inner input[type=checkbox] element.[/en]
  *   [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]
@@ -103,8 +117,8 @@
  * @ngdoc method
  * @signature once(eventName, listener)
  * @description
- *  [en]Add an event listener that's only triggered once.[/en]
- *  [ja][/ja]
+ *   [en]Add an event listener that's only triggered once.[/en]
+ *   [ja][/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
  *   [ja][/ja]
@@ -117,8 +131,8 @@
  * @ngdoc method
  * @signature off(eventName, [listener])
  * @description
- *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
- *  [ja][/ja]
+ *   [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *   [ja][/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
  *   [ja][/ja]
