@@ -3,8 +3,8 @@
  * @id tabbar
  * @name ons-tabbar
  * @description
- *  [en]A component to display a tab bar on the bottom of a page. Used with ons-tab to manage pages using tabs.[/en]
- *  [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabと組み合わせて使うことで、ページを管理できます。[/ja]
+ *   [en]A component to display a tab bar on the bottom of a page. Used with ons-tab to manage pages using tabs.[/en]
+ *   [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabと組み合わせて使うことで、ページを管理できます。[/ja]
  * @codepen pGuDL
  * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
@@ -51,13 +51,13 @@
  *   [en]Event object.[/en]
  *   [ja][/ja]
  * @param {Number} event.index
- *   [en][/en]
+ *   [en]Current index.[/en]
  *   [ja][/ja]
  * @param {Object} event.tabItem
- *   [en][/en]
+ *   [en]Tab item object.[/en]
  *   [ja][/ja]
  * @param {Function} event.cancel
- *   [en][/en]
+ *   [en]Call this function to cancel the change event.[/en]
  *   [ja][/ja]
  */
 
@@ -71,10 +71,10 @@
  *   [en]Event object.[/en]
  *   [ja][/ja]
  * @param {Number} event.index
- *   [en][/en]
+ *   [en]Current index.[/en]
  *   [ja][/ja]
  * @param {Object} event.tabItem
- *   [en][/en]
+ *   [en]Tab item object.[/en]
  *   [ja][/ja]
  */
 
@@ -88,10 +88,10 @@
  *   [en]Event object.[/en]
  *   [ja][/ja]
  * @param {Number} event.index
- *   [en][/en]
+ *   [en]Current index.[/en]
  *   [ja][/ja]
  * @param {Object} event.tabItem
- *   [en][/en]
+ *   [en]Tab item object.[/en]
  *   [ja][/ja]
  */
 
@@ -138,16 +138,16 @@
  * @ngdoc method
  * @signature setActiveTab(index, [options])
  * @param {Number} index
- *   [en][/en]
+ *   [en]Tab index.[/en]
  *   [ja][/ja]
  * @param {Object} [options]
- *   [en][/en]
+ *   [en]Parameter object.[/en]
  *   [ja][/ja]
  * @param {Boolean} [options.keepPage]
- *   [en][/en]
+ *   [en]If true the page will not be changed.[/en]
  *   [ja][/ja]
  * @return {Boolean}
- *   [en]Returns true if successful.[/en]
+ *   [en]Will be true if the change was successful.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
@@ -158,7 +158,7 @@
  * @ngdoc method
  * @signature getActiveTabIndex()
  * @return {Number}
- *   [en][/en]
+ *   [en]The index of the currently active tab.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Returns tab index on current active tab. If active tab is not found, returns -1.[/en]
@@ -169,7 +169,7 @@
  * @ngdoc method
  * @signature loadPage(url)
  * @param {String} url
- *   [en][/en]
+ *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Displays a new page without changing the active index.[/en]

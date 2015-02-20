@@ -142,16 +142,16 @@
  * @ngdoc method
  * @signature setMainPage(pageUrl, [options])
  * @param {String} pageUrl
- *   [en][/en]
+ *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
  *   [ja][/ja]
  * @param {Object} [options]
- *   [en][/en]
+ *   [en]Parameter object.[/en]
  *   [ja][/ja]
  * @param {Boolean} [options.closeMenu]
- *   [en][/en]
+ *   [en]If true the menu will be closed.[/en]
  *   [ja][/ja]
  * @param {Function} [options.callback]
- *   [en][/en]
+ *   [en]Function that is executed after the page has been set.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Show the page specified in pageUrl in the main contents pane.[/en]
@@ -162,16 +162,16 @@
  * @ngdoc method
  * @signature setMenuPage(pageUrl, [options])
  * @param {String} pageUrl
- *   [en][/en]
+ *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
  *   [ja][/ja]
  * @param {Object} [options]
- *   [en][/en]
+ *   [en]Parameter object.[/en]
  *   [ja][/ja]
  * @param {Boolean} [options.closeMenu]
- *   [en][/en]
+ *   [en]If true the menu will be closed after the menu page has been set.[/en]
  *   [ja][/ja]
  * @param {Function} [options.callback]
- *   [en][/en]
+ *   [en]This function will be executed after the menu page has been set.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Show the page specified in pageUrl in the side menu pane.[/en]
@@ -182,13 +182,13 @@
  * @ngdoc method
  * @signature openMenu([options])
  * @param {Object} [options]
- *   [en][/en]
+ *   [en]Parameter object.[/en]
  *   [ja][/ja]
  * @param {String} [options.animation]
- *   [en][/en]
+ *   [en]Animation name. Available animations are "overlay", "reveal" and "push".[/en]
  *   [ja][/ja]
  * @param {Function} [options.callback]
- *   [en][/en]
+ *   [en]This function will be called after the menu has been opened.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Slide the above layer to reveal the layer behind.[/en]
@@ -199,13 +199,13 @@
  * @ngdoc method
  * @signature closeMenu([options])
  * @param {Object} [options]
- *   [en][/en]
+ *   [en]Parameter object.[/en]
  *   [ja][/ja]
  * @param {String} [options.animation]
- *   [en][/en]
+ *   [en]Animation name. Available animations are "overlay", "reveal" and "push".[/en]
  *   [ja][/ja]
  * @param {Function} [options.callback]
- *   [en][/en]
+ *   [en]This function will be called after the menu has been opened.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Slide the above layer to hide the layer behind.[/en]
@@ -216,13 +216,13 @@
  * @ngdoc method
  * @signature toggleMenu([options])
  * @param {Object} [options]
- *   [en][/en]
+ *   [en]Parameter object.[/en]
  *   [ja][/ja]
  * @param {String} [options.animation]
- *   [en][/en]
+ *   [en]Animation name. Available animations are "overlay", "reveal" and "push".[/en]
  *   [ja][/ja]
  * @param {Function} [options.callback]
- *   [en][/en]
+ *   [en]This function will be called after the menu has been opened or closed.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Slide the above layer to reveal the layer behind if it is currently hidden, otherwise, hide the layer behind.[/en]
@@ -233,7 +233,7 @@
  * @ngdoc method
  * @signature isMenuOpened()
  * @return {Boolean}
- *   [en][/en]
+ *   [en]Will be true if the menu is currently open.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Returns true if the menu page is open, otherwise false.[/en]
@@ -244,7 +244,7 @@
  * @ngdoc method
  * @signature getDeviceBackButtonHandler()
  * @return {Object}
- *   [en][/en]
+ *   [en]Device back button handler.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Retrieve the back-button handler.[/en]
@@ -255,7 +255,7 @@
  * @ngdoc method
  * @signature setSwipeable(swipeable)
  * @param {Boolean} swipeable
- *   [en][/en]
+ *   [en]If true the menu will be swipeable.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Specify if the menu should be swipeable or not.[/en]

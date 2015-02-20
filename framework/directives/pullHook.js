@@ -47,10 +47,10 @@
  *   [en]Event object.[/en]
  *   [ja][/ja]
  * @param {Object} event.pullHook
- *   [en][/en]
- *   [ja][/ja]
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {String} event.state
- *   [en][/en]
+ *   [en]Current state.[/en]
  *   [ja][/ja]
  */
 
@@ -111,7 +111,7 @@
  * @ngdoc method
  * @signature setDisabled(disabled)
  * @param {Boolean} disabled
- *   [en][/en]
+ *   [en]If true the pull hook will be disabled.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Disable or enable the component.[/en]
@@ -122,7 +122,7 @@
  * @ngdoc method
  * @signature isDisabled()
  * @return {Boolean}
- *   [en][/en]
+ *   [en]Will be true if the pull hook is disabled.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Returns whether the component is disabled or enabled.[/en]
@@ -133,7 +133,7 @@
  * @ngdoc method
  * @signature setHeight(height)
  * @param {Number} height
- *   [en][/en]
+ *   [en]Desired height.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Specify the height.[/en]
@@ -144,7 +144,7 @@
  * @ngdoc method
  * @signature setThresholdHeight(thresholdHeight)
  * @param {Number} thresholdHeight
- *   [en][/en]
+ *   [en]Desired threshold height.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Specify the threshold height.[/en]

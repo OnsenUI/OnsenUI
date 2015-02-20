@@ -17,11 +17,11 @@
  * @seealso ons-back-button [en]ons-back-button component[/en][ja]ons-back-buttonコンポーネント[/ja]
  * @seealso ons-toolbar-button [en]ons-toolbar-button component[/en][ja]ons-toolbar-buttonコンポーネント[/ja]
  * @example
- *   <ons-toolbar>
- *     <div class="left"><ons-toolbar-button>Button</ons-toolbar-button></div>
- *     <div class="center">Title</div>
- *     <div class="right"><ons-toolbar-button><ons-icon icon="ion-navion" size="28px"></ons-icon></ons-toolbar-button></div>
- *   </ons-toolbar>
+ * <ons-toolbar>
+ *   <div class="left"><ons-toolbar-button>Button</ons-toolbar-button></div>
+ *   <div class="center">Title</div>
+ *   <div class="right"><ons-toolbar-button><ons-icon icon="ion-navion" size="28px"></ons-icon></ons-toolbar-button></div>
+ * </ons-toolbar>
  */
 
 /**

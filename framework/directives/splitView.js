@@ -27,13 +27,13 @@
  *   [en]Event object.[/en]
  *   [ja][/ja]
  * @param {Object} event.splitView
- *   [en][/en]
+ *   [en]Split view object.[/en]
  *   [ja][/ja]
  * @param {Boolean} event.shouldCollapse
- *   [en][/en]
+ *   [en]True if the view should collapse.[/en]
  *   [ja][/ja]
  * @param {String} event.currentMode
- *   [en][/en]
+ *   [en]Current mode.[/en]
  *   [ja][/ja]
  * @param {Function} event.split
  *   [en]Call to force split.[/en]
@@ -42,10 +42,10 @@
  *   [en]Call to force collapse.[/en]
  *   [ja][/ja]
  * @param {Number} event.width
- *   [en][/en]
+ *   [en]Current width.[/en]
  *   [ja][/ja]
  * @param {String} event.orientation
- *   [en][/en]
+ *   [en]Current orientation.[/en]
  *   [ja][/ja]
  */
 
@@ -59,13 +59,13 @@
  *   [en]Event object.[/en]
  *   [ja][/ja]
  * @param {Object} event.splitView
- *   [en][/en]
+ *   [en]Split view object.[/en]
  *   [ja][/ja]
  * @param {Number} event.width
- *   [en][/en]
+ *   [en]Current width.[/en]
  *   [ja][/ja]
  * @param {String} event.orientation
- *   [en][/en]
+ *   [en]Current orientation.[/en]
  *   [ja][/ja]
  */
 
@@ -79,13 +79,13 @@
  *   [en]Event object.[/en]
  *   [ja][/ja]
  * @param {Object} event.splitView
- *   [en][/en]
+ *   [en]Split view object.[/en]
  *   [ja][/ja]
  * @param {Number} event.width
- *   [en][/en]
+ *   [en]Current width.[/en]
  *   [ja][/ja]
  * @param {String} event.orientation
- *   [en][/en]
+ *   [en]Current orientation.[/en]
  *   [ja][/ja]
  */
 
@@ -99,13 +99,13 @@
  *   [en]Event object.[/en]
  *   [ja][/ja]
  * @param {Object} event.splitView
- *   [en][/en]
+ *   [en]Split view object.[/en]
  *   [ja][/ja]
  * @param {Number} event.width
- *   [en][/en]
+ *   [en]Current width.[/en]
  *   [ja][/ja]
  * @param {String} event.orientation
- *   [en][/en]
+ *   [en]Current orientation.[/en]
  *   [ja][/ja]
  */
 
@@ -119,13 +119,13 @@
  *   [en]Event object.[/en]
  *   [ja][/ja]
  * @param {Object} event.splitView
- *   [en][/en]
+ *   [en]Split view object.[/en]
  *   [ja][/ja]
  * @param {Number} event.width
- *   [en][/en]
+ *   [en]Current width.[/en]
  *   [ja][/ja]
  * @param {String} event.orientation
- *   [en][/en]
+ *   [en]Current orientation.[/en]
  *   [ja][/ja]
  */
 
@@ -178,7 +178,7 @@
  * @ngdoc method
  * @signature setMainPage(pageUrl)
  * @param {String} pageUrl
- *   [en][/en]
+ *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Show the page specified in pageUrl in the right section[/en]
@@ -189,7 +189,7 @@
  * @ngdoc method
  * @signature setSecondaryPage(pageUrl)
  * @param {String} pageUrl
- *   [en][/en]
+ *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Show the page specified in pageUrl in the left section[/en]

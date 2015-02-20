@@ -9,7 +9,7 @@
  * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
  * @seealso ons-button [en]ons-button component[/en][ja]ons-buttonコンポーネント[/ja]
  * @example
- *   <ons-switch checked></ons-switch>
+ * <ons-switch checked></ons-switch>
  */
 
 /**
@@ -22,13 +22,13 @@
  *   [en]Event object.[/en]
  *   [ja][/ja]
  * @param {Object} event.switch
- *   [en][/en]
+ *   [en]Switch object.[/en]
  *   [ja][/ja]
  * @param {Boolean} event.value
- *   [en][/en]
+ *   [en]Current value.[/en]
  *   [ja][/ja]
  * @param {Boolean} event.isInteractive
- *   [en][/en]
+ *   [en]True if the change was triggered by the user clicking on the switch.[/en]
  *   [ja][/ja]
  */
 
@@ -70,7 +70,7 @@
  * @ngdoc method
  * @signature isChecked()
  * @return {Boolean}
- *   [en][/en]
+ *   [en]Will be true if the switch is on.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Returns true if the switch is ON.[/en]
@@ -81,7 +81,7 @@
  * @ngdoc method
  * @signature setChecked(checked)
  * @param {Boolean} checked
- *   [en][/en]
+ *   [en]If true the switch will be set to on.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Set the value of the switch. isChecked can be either true or false.[/en]
@@ -92,7 +92,7 @@
  * @ngdoc method
  * @signature getCheckboxElement()
  * @return {HTMLElement}
- *   [en][/en]
+ *   [en]The underlying checkbox element.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Get inner input[type=checkbox] element.[/en]

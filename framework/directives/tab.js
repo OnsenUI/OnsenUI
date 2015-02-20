@@ -3,8 +3,8 @@
  * @id tabbar_item
  * @name ons-tab
  * @description
- *  [en]Represents a tab inside tabbar. Each ons-tab represents a page.[/en]
- *  [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。[/ja]
+ *   [en]Represents a tab inside tabbar. Each ons-tab represents a page.[/en]
+ *   [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。[/ja]
  * @codepen pGuDL
  * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
  * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]

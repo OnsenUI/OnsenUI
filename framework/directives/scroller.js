@@ -6,9 +6,9 @@
  *   [en]Makes the content inside this tag scrollable.[/en]
  *   [ja][/ja]
  * @example
- *   <ons-scroller style="height: 200px; width: 100%">
- *     ...
- *   </ons-scroller>
+ * <ons-scroller style="height: 200px; width: 100%">
+ *   ...
+ * </ons-scroller>
  */
 (function() {
   'use strict';
