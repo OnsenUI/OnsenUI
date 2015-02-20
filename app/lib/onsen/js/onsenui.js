@@ -1,4 +1,4 @@
-/*! onsenui - v1.2.1 - 2015-02-17 */
+/*! onsenui - v1.2.2-beta - 2015-02-20 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -6305,7 +6305,6 @@ limitations under the License.
         this._bindedOnDrag = this._onDrag.bind(this);
         this._bindedOnDragEnd = this._onDragEnd.bind(this);
         this._bindedOnResize = this._onResize.bind(this);
-        this._bindedStopPropagation = this._stopPropagation.bind(this);
 
         this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
 
@@ -6589,9 +6588,8 @@ limitations under the License.
           dragMinDistance: 1
         });
 
-        this._hammer.on('drag', this._bindedOnDrag);
+        this._hammer.on('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
         this._hammer.on('dragend', this._bindedOnDragEnd);
-        this._hammer.on(this._getTouchEvents(), this._bindedStopPropagation);
 
         angular.element(window).on('resize', this._bindedOnResize);
       },
@@ -6621,6 +6619,8 @@ limitations under the License.
           return;
         }
 
+        event.stopPropagation();
+
         this._lastDragEvent = event;
 
         var scroll = this._scroll - this._getScrollDelta(event);
@@ -6631,6 +6631,16 @@ limitations under the License.
       },
 
       _onDragEnd: function(event) {
+        if (!this.isSwipeable()) {
+          return;
+        }
+
+        var direction = event.gesture.direction;
+        if ((this._isVertical() && (direction === 'left' || direction === 'right')) || (!this._isVertical() && (direction === 'up' || direction === 'down'))) {
+          return;
+        }
+
+        event.stopPropagation();
         this._scroll = this._scroll - this._getScrollDelta(event);
 
         if (this._isOverScroll(this._scroll)) {
@@ -6658,12 +6668,6 @@ limitations under the License.
         }
         this._lastDragEvent = null;
         event.gesture.preventDefault();
-      },
-
-      _stopPropagation: function(event) {
-        if (this.isSwipeable()) {
-          event.stopPropagation();
-        }
       },
 
       _getTouchEvents: function() {
@@ -6901,6 +6905,10 @@ limitations under the License.
             this._scrollToKillOverScroll();
           } 
           else {
+            if (this.isAutoScrollEnabled()) {
+              scroll = this._normalizeScrollPosition(scroll);
+            }
+
             this._scrollTo(scroll);
           }
         }
@@ -6929,9 +6937,8 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy', {navigator: this});
 
-        this._hammer.off('drag', this._bindedOnDrag);
+        this._hammer.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
         this._hammer.off('dragend', this._bindedOnDragEnd);
-        this._hammer.off(this._getTouchEvents(), this._bindedStopPropagation);
 
         angular.element(window).off('resize', this._bindedOnResize);
 
@@ -8518,7 +8525,9 @@ limitations under the License.
 
       _removeAllElements: function() {
         for (var key in this._renderedElements) {
-          this._removeElement(key);
+          if (this._removeElement.hasOwnProperty(key)) {
+            this._removeElement(key);
+          }
         }
       },
 
@@ -10566,6 +10575,11 @@ limitations under the License.
           return;
         }
 
+        // Ignore when dragging left and right.
+        if (event.gesture.direction === 'left' || event.gesture.direction === 'right') {
+          return;
+        }
+
         // Hack to make it work on Android 4.4 WebView. Scrolls manually near the top of the page so
         // there will be no inertial scroll when scrolling down. Allowing default scrolling will
         // kill all 'touchmove' events.
@@ -10607,7 +10621,8 @@ limitations under the License.
         else {
           this._setState(this.STATE_INITIAL);
         }
-  
+ 
+        event.stopPropagation();
         this._translateTo(scroll);
       },
 
@@ -13284,7 +13299,15 @@ limitations under the License.
 
       _onResize: function() {
         var lastMode = this._mode;
-        this._considerChangingCollapse();
+
+        if ($onsen.isAndroid()) {
+          setTimeout(function() {
+            this._considerChangingCollapse();
+          }.bind(this), 200);
+        }
+        else {
+          this._considerChangingCollapse();
+        }
 
         if (lastMode === COLLAPSE_MODE && this._mode === COLLAPSE_MODE) {
           this._animator.onResized({
@@ -13297,14 +13320,16 @@ limitations under the License.
       },
 
       _considerChangingCollapse: function() {
-        if (this._shouldCollapse() && this._mode !== COLLAPSE_MODE) {
+        var should = this._shouldCollapse();
+
+        if (should && this._mode !== COLLAPSE_MODE) {
           this._fireUpdateEvent();
           if (this._doSplit) {
             this._activateSplitMode();
           } else {
             this._activateCollapseMode();
           }
-        } else if (!this._shouldCollapse() && this._mode === COLLAPSE_MODE) {
+        } else if (!should && this._mode === COLLAPSE_MODE) {
           this._fireUpdateEvent();
           if (this._doCollapse) {
             this._activateCollapseMode();
@@ -13319,13 +13344,15 @@ limitations under the License.
       update: function() {
         this._fireUpdateEvent();
 
+        var should = this._shouldCollapse();
+
         if (this._doSplit) {
           this._activateSplitMode(); 
         } else if (this._doCollapse) {
           this._activateCollapseMode(); 
-        } else if (this._shouldCollapse()) {
+        } else if (should) {
           this._activateCollapseMode();
-        } else if (!this._shouldCollapse()) {
+        } else if (!should) {
           this._activateSplitMode();
         }
 
