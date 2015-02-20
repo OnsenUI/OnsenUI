@@ -51,7 +51,7 @@
  * @param {Number} event.index
  * @param {Object} event.tabItem
  * @param {Function} event.cancel
- */ 
+ */
 
 /**
  * @ngdoc event
@@ -62,7 +62,7 @@
  * @param {Object} event [en]Event object.[/en]
  * @param {Number} event.index
  * @param {Object} event.tabItem
- */ 
+ */
 
 /**
  * @ngdoc event
@@ -232,7 +232,7 @@
           $onsen.removeModifierMethods(tabbarView);
           element.data('ons-tabbar', undefined);
         });
-      
+
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };

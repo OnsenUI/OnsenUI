@@ -104,9 +104,9 @@
     }
 
     function fireActualPageInitEvent(element) {
-      var event = document.createEvent('HTMLEvents');    
+      var event = document.createEvent('HTMLEvents');
       event.initEvent('pageinit', true, true);
-      element.dispatchEvent(event);    
+      element.dispatchEvent(event);
     }
 
     function fillStatusBar(element) {

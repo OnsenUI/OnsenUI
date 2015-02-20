@@ -1,6 +1,6 @@
 /**
  * @ngdoc directive
- * @id loading-placeholder 
+ * @id loading-placeholder
  * @name ons-loading-placeholder
  * @description
  *   [en]Display a placeholder while the content is loading.[/en]
@@ -36,9 +36,9 @@
         if (!attrs.onsLoadingPlaceholder.length) {
           throw Error('Must define page to load.');
         }
-        
+
         $onsen.getPageHTMLAsync(attrs.onsLoadingPlaceholder).then(function(html) {
-          setImmediate(function() { 
+          setImmediate(function() {
             var div = document.createElement('div');
             div.innerHTML = html.trim();
 
@@ -52,7 +52,7 @@
             newElement.css('display', 'block');
           });
         });
-      }    
+      }
     };
   });
 })();

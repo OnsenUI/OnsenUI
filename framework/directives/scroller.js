@@ -27,7 +27,7 @@
 
       compile: function(element, attrs) {
         var content = element.addClass('ons-scroller').children().remove();
-        
+
         return function(scope, element, attrs, controller, transclude) {
           if (attrs.ngController) {
             throw new Error('"ons-scroller" can\'t accept "ng-controller" directive.');
@@ -92,7 +92,7 @@
 
             }, 500);
           }
-        
+
           $onsen.fireComponentEvent(element[0], 'init');
         };
       }

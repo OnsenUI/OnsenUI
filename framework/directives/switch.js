@@ -52,7 +52,7 @@
 
 /**
  * @ngdoc attribute
- * @name checked 
+ * @name checked
  * @description
  *   [en]Whether the switch is checked.[/en]
  *   [ja]スイッチがONの状態にするときに指定します。[/ja]
@@ -158,7 +158,7 @@
           $onsen.addModifierMethods(switchView, 'switch--*', label);
           $onsen.addModifierMethods(switchView, 'switch--*__input', input);
           $onsen.addModifierMethods(switchView, 'switch--*__toggle', toggle);
-          
+
           attrs.$observe('checked', function(checked) {
             scope.model = !!element.attr('checked');
           });
@@ -198,7 +198,7 @@
             });
             checkbox = element = attrs = scope = null;
           });
-        
+
           $onsen.fireComponentEvent(element[0], 'init');
         };
       }

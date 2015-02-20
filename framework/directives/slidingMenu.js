@@ -286,7 +286,7 @@
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
-          
+
           element.append(angular.element('<div></div>').addClass('onsen-sliding-menu__menu ons-sliding-menu-inner'));
           element.append(angular.element('<div></div>').addClass('onsen-sliding-menu__main ons-sliding-menu-inner'));
 

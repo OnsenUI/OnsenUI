@@ -49,7 +49,7 @@
         var onHide = function() {
           element.css('display', dispHide);
         };
-       
+
         var onInit = function(e) {
           if (e.visible) {
             onShow();

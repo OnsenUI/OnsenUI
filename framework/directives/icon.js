@@ -8,17 +8,17 @@
  * @codepen xAhvg
  * @guide UsingIcons [en]Using icons[/en][ja]アイコンを使う[/ja]
  * @example
- * <ons-icon 
- *   icon="fa-twitter" 
- *   size="20px" 
- *   fixed-width="false" 
+ * <ons-icon
+ *   icon="fa-twitter"
+ *   size="20px"
+ *   fixed-width="false"
  *   style="color: red">
  * </ons-icon>
  */
 
 /**
  * @ngdoc attribute
- * @name icon 
+ * @name icon
  * @type {String}
  * @description
  *   [en]The icon name. `fa-` prefix for Font Awesome, `ion-` prefix for Ionicons icons. See all icons at http://fontawesome.io/icons/ and http://ionicons.com.[/en]
@@ -38,7 +38,7 @@
  * @ngdoc attribute
  * @name rotate
  * @type {Number}
- * @description 
+ * @description
  *   [en]Number of degrees to rotate the icon. Valid values are 90, 180, or 270.[/en]
  *   [ja]アイコンを回転して表示します。90, 180, 270から指定できます。[/ja]
  */
@@ -61,10 +61,10 @@
  *  [en]When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are true, false. Default is false.[/en]
  *  [ja]等幅にするかどうかを指定します。trueもしくはfalseを指定できます。デフォルトはfalseです。[/ja]
  */
- 
+
 /**
  * @ngdoc attribute
- * @name spin 
+ * @name spin
  * @type {Boolean}
  * @default false
  * @description
@@ -110,7 +110,7 @@
     } else {
       classList.push('fa-lg');
     }
-    
+
     return {
       'class': classList.join(' '),
       'style': style
@@ -155,7 +155,7 @@
           });
           element = scope = attrs = null;
         });
-      
+
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };

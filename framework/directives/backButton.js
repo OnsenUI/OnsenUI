@@ -32,7 +32,7 @@
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
           var backButton = new GenericView(scope, element, attrs);
-          
+
           $onsen.declareVarAttribute(attrs, backButton);
 
           element.data('ons-back-button', backButton);

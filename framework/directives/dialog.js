@@ -1,8 +1,8 @@
 /**
  * @ngdoc directive
- * @id dialog 
+ * @id dialog
  * @name ons-dialog
- * @description 
+ * @description
  *  [en]Dialog that is displayed on top of current screen.[/en]
  *  [ja]現在のスクリーンにダイアログを表示します。[/ja]
  * @codepen zxxaGa
@@ -27,7 +27,7 @@
  * <script type="text/ons-template" id="dialog.html">
  *   <ons-dialog cancelable>
  *     ...
- *   </ons-dialog>  
+ *   </ons-dialog>
  * </script>
  */
 
@@ -39,7 +39,7 @@
  * [ja]ダイアログが表示される直前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.dialog
- * @param {Function} event.cancel 
+ * @param {Function} event.cancel
  */
 
 /**
@@ -60,7 +60,7 @@
  * [ja]ダイアログが隠れる直前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.dialog
- * @param {Function} event.cancel 
+ * @param {Function} event.cancel
  */
 
 /**
@@ -95,7 +95,7 @@
  * @ngdoc attribute
  * @name cancelable
  * @description
- *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en] 
+ *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en]
  *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
  */
 
@@ -278,10 +278,10 @@
 
             var dialog = new DialogView(scope, element, attrs);
             scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-            
+
             $onsen.addModifierMethods(dialog, 'dialog--*', angular.element(element[0].querySelector('.dialog')));
             $onsen.declareVarAttribute(attrs, dialog);
-            
+
             element.data('ons-dialog', dialog);
             scope.$on('$destroy', function() {
               dialog._events = undefined;

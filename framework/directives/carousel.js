@@ -28,7 +28,7 @@
  * [ja][/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.carousel
- * @param {Number} event.activeIndex 
+ * @param {Number} event.activeIndex
  * @param {Number} event.lastActiveIndex
  */
 
@@ -166,7 +166,7 @@
  * @signature next()
  * @description
  *   [en]Show next ons-carousel item.[/en]
- *   [ja]次のons-carousel-itemを表示する。[/ja] 
+ *   [ja]次のons-carousel-itemを表示する。[/ja]
  */
 
 /**
@@ -174,7 +174,7 @@
  * @signature prev()
  * @description
  *   [en]Show previous ons-carousel item.[/en]
- *   [ja]前のons-carousel-itemを表示する。[/ja] 
+ *   [ja]前のons-carousel-itemを表示する。[/ja]
  */
 
 /**
@@ -182,7 +182,7 @@
  * @signature first()
  * @description
  *   [en]Show first ons-carousel item.[/en]
- *   [ja]最初のons-carousel-itemを表示する。[/ja] 
+ *   [ja]最初のons-carousel-itemを表示する。[/ja]
  */
 
 /**
@@ -190,7 +190,7 @@
  * @signature last()
  * @description
  *   [en]Show last ons-carousel item.[/en]
- *   [ja]最後のons-carousel-itemを表示する。[/ja] 
+ *   [ja]最後のons-carousel-itemを表示する。[/ja]
  */
 
 /**
@@ -199,7 +199,7 @@
  * @param {Booelan} swipeable
  * @description
  *   [en]Set whether the carousel is swipeable or not.[/en]
- *   [ja]swipeable属性があるかどうかを設定する。[/ja] 
+ *   [ja]swipeable属性があるかどうかを設定する。[/ja]
  */
 
 /**
@@ -208,7 +208,7 @@
  * @return {Boolean}
  * @description
  *   [en]Returns whether the carousel is swipeable or not.[/en]
- *   [ja]swiapble属性があるかどうかを返す。[/ja] 
+ *   [ja]swiapble属性があるかどうかを返す。[/ja]
  */
 
 /**
@@ -217,7 +217,7 @@
  * @param {Number} index
  * @description
  *   [en]Specify the index of the ons-carousel-item to show.[/en]
- *   [ja]表示するons-carousel-itemをindexで指定する。[/ja] 
+ *   [ja]表示するons-carousel-itemをindexで指定する。[/ja]
  */
 
 /**
@@ -226,7 +226,7 @@
  * @return {Number}
  * @description
  *   [en]Returns the index of the currently visible ons-carousel-item.[/en]
- *   [ja]現在表示されているons-carousel-itemのindexを返す。[/ja] 
+ *   [ja]現在表示されているons-carousel-itemのindexを返す。[/ja]
  */
 
 /**
@@ -235,7 +235,7 @@
  * @param {Boolean} enabled
  * @description
  *   [en]Enable or disable "auto-scroll" attribute.[/en]
- *   [ja]auto-scroll属性があるかどうかを設定する。[/ja] 
+ *   [ja]auto-scroll属性があるかどうかを設定する。[/ja]
  */
 
 /**
@@ -244,7 +244,7 @@
  * @return {Boolean}
  * @description
  *   [en]Returns whether the "auto-scroll" attribute is set or not.[/en]
- *   [ja]auto-scroll属性があるかどうかを返す。[/ja] 
+ *   [ja]auto-scroll属性があるかどうかを返す。[/ja]
  */
 
 /**
@@ -271,7 +271,7 @@
  * @param {Boolean}
  * @description
  *   [en]Set whether the carousel is overscrollable or not.[/en]
- *   [ja]overscroll属性があるかどうかを設定する。[/ja] 
+ *   [ja]overscroll属性があるかどうかを設定する。[/ja]
  */
 
 /**
@@ -280,7 +280,7 @@
  * @return {Boolean}
  * @description
  *   [en]Returns whether the carousel is overscrollable or not.[/en]
- *   [ja]overscroll属性があるかどうかを返す。[/ja] 
+ *   [ja]overscroll属性があるかどうかを返す。[/ja]
  */
 
 /**
@@ -288,7 +288,7 @@
  * @signature refresh()
  * @description
  *   [en]Update the layout of the carousel. Used when adding ons-carousel-items dynamically or to automatically adjust the size.[/en]
- *   [ja]レイアウトや内部の状態を最新のものに更新する。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用する。[/ja] 
+ *   [ja]レイアウトや内部の状態を最新のものに更新する。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用する。[/ja]
  */
 
 /**
@@ -297,7 +297,7 @@
  * @return {Boolean}
  * @description
  *   [en]Returns whether the dialog is disabled or enabled.[/en]
- *   [ja]disabled属性があるかどうかを返す。[/ja] 
+ *   [ja]disabled属性があるかどうかを返す。[/ja]
  */
 
 /**
@@ -306,7 +306,7 @@
  * @param {Boolean}
  * @description
  *   [en]Disable or enable the dialog.[/en]
- *   [ja]disabled属性があるかどうかを設定する。[/ja] 
+ *   [ja]disabled属性があるかどうかを設定する。[/ja]
  */
 
 /**
@@ -387,8 +387,8 @@
           if (element[0].hasAttribute('auto-refresh')) {
             // Refresh carousel when items are added or removed.
             scope.$watch(
-              function () { 
-                return element[0].childNodes.length; 
+              function () {
+                return element[0].childNodes.length;
               },
               function () {
                 setImmediate(function() {

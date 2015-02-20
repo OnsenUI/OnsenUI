@@ -1,6 +1,6 @@
 /**
  * @ngdoc directive
- * @id pull-hook 
+ * @id pull-hook
  * @name ons-pull-hook
  * @description
  *   [en]Component that adds "pull-to-refresh" to an <ons-page> element.[/en]
@@ -45,7 +45,7 @@
  * [ja][/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.pullHook
- * @param {String} event.state 
+ * @param {String} event.state
  */
 
 /**

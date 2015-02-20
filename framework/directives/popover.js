@@ -1,7 +1,7 @@
 /**
  * @ngdoc directive
- * @id popover 
- * @name ons-popover 
+ * @id popover
+ * @name ons-popover
  * @modifier android
  *   [en]Display an Android style popover.[/en]
  *   [ja][/ja]
@@ -13,7 +13,7 @@
  *   <script>
  *   ons.ready(function() {
  *     ons.createPopover('popover.html').then(function(popover) {
- *       popover.show('#mybutton');   
+ *       popover.show('#mybutton');
  *     });
  *   });
  *   </script>
@@ -33,7 +33,7 @@
  * [ja]ポップオーバーが表示される直前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.popover
- * @param {Function} event.cancel 
+ * @param {Function} event.cancel
  */
 
 /**
@@ -54,7 +54,7 @@
  * [ja]ポップオーバーが隠れる直前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.popover
- * @param {Function} event.cancel 
+ * @param {Function} event.cancel
  */
 
 /**
@@ -99,7 +99,7 @@
  * @ngdoc attribute
  * @name cancelable
  * @description
- *   [en]If this attribute is set the popover can be closed by tapping the background or by pressing the back button.[/en] 
+ *   [en]If this attribute is set the popover can be closed by tapping the background or by pressing the back button.[/en]
  *   [ja]この属性があると、ポップオーバーが表示された時に、背景やバックボタンをタップした時にをポップオーバー閉じます。[/ja]
  */
 
@@ -196,7 +196,7 @@
 
 /**
  * @ngdoc method
- * @signature isDisabled() 
+ * @signature isDisabled()
  * @return {Boolean}
  * @description
  *   [en]Returns whether the popover is disabled or enabled.[/en]
@@ -258,7 +258,7 @@
       scope: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/popover.tpl',
       compile: function(element, attrs, transclude) {
-        return { 
+        return {
           pre: function(scope, element, attrs) {
             transclude(scope, function(clone) {
               angular.element(element[0].querySelector('.popover__content')).append(clone);
@@ -278,8 +278,8 @@
             });
 
             scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-            $onsen.addModifierMethods(popover, 'popover--*', angular.element(element[0].querySelector('.popover'))); 
-            $onsen.addModifierMethods(popover, 'popover__content--*', angular.element(element[0].querySelector('.popover__content'))); 
+            $onsen.addModifierMethods(popover, 'popover--*', angular.element(element[0].querySelector('.popover')));
+            $onsen.addModifierMethods(popover, 'popover__content--*', angular.element(element[0].querySelector('.popover__content')));
 
             if ($onsen.isAndroid()) {
               setImmediate(function() {

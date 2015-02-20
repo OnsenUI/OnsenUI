@@ -54,7 +54,7 @@
             element.data('ons-listHeader', undefined);
             element = null;
           });
-         
+
           var templater = $onsen.generateModifierTemplater(attrs);
           element.addClass('list__header ons-list-header-inner');
           element.addClass(templater('list__header--*'));
