@@ -8,7 +8,12 @@
  * @codepen xAhvg
  * @guide UsingIcons [en]Using icons[/en][ja]アイコンを使う[/ja]
  * @example
- *   <ons-icon icon="fa-twitter" size="20px" fixed-width="false" style="color: red"></ons-icon>
+ * <ons-icon 
+ *   icon="fa-twitter" 
+ *   size="20px" 
+ *   fixed-width="false" 
+ *   style="color: red">
+ * </ons-icon>
  */
 
 /**

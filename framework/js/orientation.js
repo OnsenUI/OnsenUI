@@ -33,6 +33,8 @@ limitations under the License.
  *   [ja][/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Boolean} event.isPortrait
+ *   [en]Will be true if the current orientation is portrait mode.[/en]
+ *   [ja][/ja]
  */
 
 /**

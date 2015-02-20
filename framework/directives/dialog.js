@@ -6,6 +6,15 @@
  *  [en]Dialog that is displayed on top of current screen.[/en]
  *  [ja]現在のスクリーンにダイアログを表示します。[/ja]
  * @codepen zxxaGa
+ * @guide UsingDialog
+ *   [en]Learn how to use the dialog component.[/en]
+ *   [ja][/ja]
+ * @seealso ons-alert-dialog
+ *   [en]ons-alert-dialog component[/en]
+ *   [ja]ons-alert-dialogコンポーネント[/ja]
+ * @seealso ons-popover
+ *   [en]ons-popover component[/en]
+ *   [ja]ons-popoverコンポーネント[/ja]
  * @example
  * <script>
  *   ons.ready(function() {
