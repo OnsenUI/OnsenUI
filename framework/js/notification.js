@@ -21,7 +21,7 @@ limitations under the License.
  * @category util
  * @category fuga
  * @description 
- *   [en]Utility methods to create different kinds of dialogs.[/en]
+ *   [en]Utility methods to create different kinds of dialogs. There are three methods available: alert, confirm and prompt.[/en]
  *   [ja][/ja]
  * @example
  * <script>
