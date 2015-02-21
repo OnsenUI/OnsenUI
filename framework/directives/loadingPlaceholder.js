@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id loading-placeholder
  * @name ons-loading-placeholder
+ * @category util
  * @description
  *   [en]Display a placeholder while the content is loading.[/en]
  *   [ja]Onsen UIが読み込まれるまでに表示するプレースホルダーを表現します。[/ja]

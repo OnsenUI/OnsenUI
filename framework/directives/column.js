@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id col
  * @name ons-col
+ * @category grid
  * @description
  *   [en]Represents a column in the grid system. Use with ons-row to layout components.[/en]
  *   [ja]グリッドシステムにて列を定義します。ons-rowとともに使用し、コンポーネントの配置に使用します。[/ja]

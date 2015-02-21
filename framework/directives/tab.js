@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id tabbar_item
  * @name ons-tab
+ * @category tabbar
  * @description
  *   [en]Represents a tab inside tabbar. Each ons-tab represents a page.[/en]
  *   [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。[/ja]

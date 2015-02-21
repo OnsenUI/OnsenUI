@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id list
  * @name ons-list
+ * @category list
  * @modifier inset
  *   [en]Inset list that doesn't cover the whole width of the parent.[/en]
  *   [ja][/ja]

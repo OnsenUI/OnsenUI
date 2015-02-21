@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id navigator
  * @name ons-navigator
+ * @category navigation
  * @description
  *   [en]A component that provides page stack management and navigation. This component does not have a visible content.[/en]
  *   [ja]ページスタックの管理とナビゲーション機能を提供するコンポーネント。画面上への出力はありません。[/ja]

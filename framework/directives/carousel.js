@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id carousel
  * @name ons-carousel
+ * @category carousel
  * @description
  *   [en]Carousel component.[/en]
  *   [ja]カルーセルを表示できるコンポーネント。[/ja]

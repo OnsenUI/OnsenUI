@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id list-header
  * @name ons-list-header
+ * @category list
  * @description
  *   [en]Header element for list items. Must be put inside ons-list component.[/en]
  *   [ja]リスト要素に使用するヘッダー用コンポーネント。ons-listと共に使用します。[/ja]

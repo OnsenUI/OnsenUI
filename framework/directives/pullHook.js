@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id pull-hook
  * @name ons-pull-hook
+ * @category control
  * @description
  *   [en]Component that adds "pull-to-refresh" to an <ons-page> element.[/en]
  *   [ja]ons-page要素以下でいわゆるpull to refreshを実装するためのコンポーネントです。[/ja]

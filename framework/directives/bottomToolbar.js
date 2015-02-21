@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id bottom_toolbar
  * @name ons-bottom-toolbar
+ * @category toolbar
  * @description
  *   [en]Toolbar component that is positioned at the bottom of the page. Has same functionality as the ons-toolbar component.[/en]
  *   [ja]ページ下部に配置されるツールバー用コンポーネント。機能的にはons-toolbarと同様です。[/ja]
@@ -10,7 +11,6 @@
  *   [ja][/ja]
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
- * @category toolbar
  * @example
  * <ons-bottom-toolbar>
  *   <div style="text-align: center; line-height: 44px">Text</div>

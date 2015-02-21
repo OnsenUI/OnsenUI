@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id scroller
  * @name ons-scroller
+ * @category basis
  * @description
  *   [en]Makes the content inside this tag scrollable.[/en]
  *   [ja][/ja]

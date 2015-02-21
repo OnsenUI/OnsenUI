@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id list-item
  * @name ons-list-item
+ * @category list
  * @modifier tappable
  *   [en]Made the list item change appearance when it's tapped.[/en]
  *   [ja][/ja]

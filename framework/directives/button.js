@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id button
  * @name ons-button
+ * @category button
  * @modifier outline
  *   [en]Button with outline and transparent background[/en]
  *   [ja][/ja]
@@ -83,7 +84,7 @@
  * @signature stopSpin()
  * @description
  *   [en]Remove spinner from button.[/en]
- *   [ja]ボタンのスピナーを除きます。[/ja]
+ *   [ja]ボタンのスピナーを隠します。[/ja]
  */
 
 /**
@@ -94,7 +95,7 @@
  *   [ja][/ja]
  * @description
  *   [en]Return whether the spinner is visible or not.[/en]
- *   [ja]ボタンにスピナーは表示されているかどうかを返します。[/ja]
+ *   [ja]ボタン内にスピナーが表示されているかどうかを返します。[/ja]
  */
 
 /**

@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id icon
  * @name ons-icon
+ * @category icon
  * @description
  *   [en]Displays an icon. Font Awesome and Ionicon icons are supported.[/en]
  *   [ja]アイコンを表示するコンポーネントです。Font AwesomeもしくはIoniconsから選択できます。[/ja]

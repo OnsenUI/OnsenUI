@@ -3,6 +3,7 @@
  * @ngdoc directive
  * @id alert-dialog
  * @name ons-alert-dialog
+ * @category alert
  * @modifier android
  *   [en]Display an Android style alert dialog.[/en]
  *   [ja][/ja]
@@ -22,7 +23,6 @@
  * @seealso ons.notification
  *   [en]Using ons.notification utility functions.[/en]
  *   [ja][/ja]
- * @category alert
  * @example
  * <script>
  *   ons.ready(function() {

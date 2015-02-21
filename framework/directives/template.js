@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id template
  * @name ons-template
+ * @category util
  * @description
  *   [en]Define a separate HTML fragment and use as a template.[/en]
  *   [ja]テンプレートとして使用するためのHTMLフラグメントを定義します。[/ja]

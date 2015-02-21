@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id ons-keyboard-active
  * @name ons-keyboard-active
+ * @category keyboard
  * @description
  *   [en]Conditionally display content depending on if the software keyboard is visible or hidden. This component requires cordova and that the com.ionic.keyboard plugin is installed.[/en]
  *   [ja]ソフトウェアキーボードが表示されているかどうかで、コンテンツを表示するかどうかを切り替えることが出来ます。このコンポーネントは、Cordovaやcom.ionic.keyboardプラグインを必要とします。[/ja]

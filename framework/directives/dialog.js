@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id dialog
  * @name ons-dialog
+ * @category dialog
  * @description
  *  [en]Dialog that is displayed on top of current screen.[/en]
  *  [ja]現在のスクリーンにダイアログを表示します。[/ja]

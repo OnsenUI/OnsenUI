@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id split-view
  * @name ons-split-view
+ * @category control
  * @description
  *  [en]Divides the screen into a left and right section.[/en]
  *  [ja]画面を左右に分割します。[/ja]

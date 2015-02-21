@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id popover
  * @name ons-popover
+ * @category popover
  * @modifier android
  *   [en]Display an Android style popover.[/en]
  *   [ja][/ja]

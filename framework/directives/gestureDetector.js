@@ -2,6 +2,7 @@
  * @ngdoc directive
  * @id gestureDetector
  * @name ons-gesture-detector
+ * @category gesture
  * @description
  *   [en]Component to detect finger gestures within the wrapped element. See the guide for more details.[/en]
  *   [ja]要素内のジェスチャー操作を検知します。詳しくはガイドを参照してください。[/ja]
