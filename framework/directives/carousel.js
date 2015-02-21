@@ -9,7 +9,7 @@
  * @codepen xbbzOQ
  * @guide UsingCarousel
  *   [en]Learn how to use the carousel component.[/en]
- *   [ja][/ja]
+ *   [ja]carouselコンポーネントの使い方[/ja]
  * @example
  * <ons-carousel style="width: 100%; height: 200px">
  *   <ons-carousel-item>
@@ -26,7 +26,7 @@
  * @name postchange
  * @description
  * [en]Fired just after the current carousel item has changed..[/en]
- * [ja][/ja]
+ * [ja]現在表示しているカルーセルの要素が変わった時に発火する。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.carousel
  * @param {Number} event.activeIndex
@@ -38,7 +38,7 @@
  * @name refresh
  * @description
  * [en]Fired when the carousel has been refreshed.[/en]
- * [ja][/ja]
+ * [ja]カルーセルが更新された時に発火する。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.carousel
  */
@@ -48,16 +48,16 @@
  * @name overscroll
  * @description
  * [en]Fired when the carousel has been overscrolled.[/en]
- * [ja][/ja]
+ * [ja]カルーセルがオーバースクロールした時に発火する。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.carousel
  * @param {Number} event.activeIndex
  * @param {String} event.direction
  *   [en]Can be one of either "up", "down", "left" or "right".[/en]
- *   [ja][/ja]
+ *   [ja]オーバースクロールされた方向が得られる。"up", "down", "left", "right"のいずれかの方向が渡される。[/ja]
  * @param {Function} event.waitToReturn
  *   [en]Takes a <code>Promise</code> object as an argument. The carousel will not scroll back until the promise has been resolved or rejected.[/en]
- *   [ja][/ja]
+ *   [ja]この関数はPromiseオブジェクトを引数として受け取る。渡したPromiseオブジェクトがresolveされるかrejectされるまで、カルーセルはスクロールバックしない。[/ja]
  */
 
 /**
@@ -66,7 +66,7 @@
  * @type {String}
  * @description
  *   [en]The direction of the carousel. Can be either "horizontal" or "vertical". Default is "horizontal".[/en]
- *   [ja]カルーセルの方向を指定します。horizontalかverticalを指定できます。デフォルトはhorizontalです。[/ja]
+ *   [ja]カルーセルの方向を指定する。"horizontal"か"vertical"を指定できる。デフォルトは"horizontal"。[/ja]
  */
 
 /**
@@ -74,7 +74,7 @@
  * @name fullscreen
  * @description
  *   [en]If this attribute is set the carousel will cover the whole screen.[/en]
- *   [ja]この属性があると、absoluteポジションを使ってカルーセルが自動的に画面いっぱいに広がります。[/ja]
+ *   [ja]この属性があると、absoluteポジションを使ってカルーセルが自動的に画面いっぱいに広がる。[/ja]
  */
 
 /**
@@ -83,15 +83,15 @@
  * @type {String}
  * @description
  *   [en]Variable name to refer this carousel.[/en]
- *   [ja]このカルーセルを参照するための変数名を指定します。[/ja]
+ *   [ja]このカルーセルを参照するための変数名を指定する。[/ja]
  */
 
 /**
  * @ngdoc attribute
  * @name overscrollable
  * @description
- *    [en]If this attribute is set the carousel will be scrollable over the edge. It will bounce back when released.[/en]
- *    [ja]この属性がある時、タッチやドラッグで端までスクロールした時に、バウンドするような効果が当たります。[/ja]
+ *   [en]If this attribute is set the carousel will be scrollable over the edge. It will bounce back when released.[/en]
+ *   [ja]この属性がある時、タッチやドラッグで端までスクロールした時に、バウンドするような効果が当たる。[/ja]
  */
 
 /**
@@ -100,7 +100,7 @@
  * @type {String}
  * @description
  *    [en]ons-carousel-item's width. Only works when the direction is set to "horizontal".[/en]
- *    [ja]ons-carousel-itemの幅を指定します。direction属性にhorizontalを指定した時のみ有効です。[/ja]
+ *    [ja]ons-carousel-itemの幅を指定する。direction属性に"horizontal"を指定した時のみ有効になる。[/ja]
  */
 
 /**
@@ -109,7 +109,7 @@
  * @type {String}
  * @description
  *   [en]ons-carousel-item's height. Only works when the direction is set to "vertical".[/en]
- *   [ja]ons-carousel-itemの高さを指定します。direction属性にverticalを指定した時のみ有効です。[/ja]
+ *   [ja]ons-carousel-itemの高さを指定する。direction属性に"vertical"を指定した時のみ有効になる。[/ja]
  */
 
 /**
@@ -117,7 +117,7 @@
  * @name auto-scroll
  * @description
  *   [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
- *   [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
+ *   [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになる。[/ja]
  */
 
 /**
@@ -126,7 +126,7 @@
  * @type {Number}
  * @description
  *    [en]A number between 0.0 and 1.0 that specifies how much the user must drag the carousel in order for it to auto scroll to the next item.[en]
- *    [ja][/ja]
+ *    [ja]0.0から1.0までの値を指定する。カルーセルの要素をどれぐらいの割合までドラッグすると次の要素に自動的にスクロールするかを指定する。[/ja]
  */
 
 /**
@@ -134,7 +134,7 @@
  * @name swipeable
  * @description
  *   [en]If this attribute is set the carousel can be scrolled by drag or swipe.[/en]
- *   [ja]この属性がある時、カルーセルをスワイプやドラッグで移動できるようになります。[/ja]
+ *   [ja]この属性がある時、カルーセルをスワイプやドラッグで移動できるようになる。[/ja]
  */
 
 /**
@@ -142,7 +142,7 @@
  * @name disabled
  * @description
  *   [en]If this attribute is set the carousel is disabled.[/en]
- *   [ja]この属性がある時、dargやtouchやswipeで受け付けなくなります。[/ja]
+ *   [ja]この属性がある時、dragやtouchやswipeを受け付けなくなる。[/ja]
  */
 
 /**
@@ -151,7 +151,7 @@
  * @type {Number}
  * @description
  *   [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
- *   [ja]最初に表示するons-carousel-itemを0始まりのインデックスで指定します。デフォルトは0です。[/ja]
+ *   [ja]最初に表示するons-carousel-itemを0始まりのインデックスで指定する。デフォルトは0。[/ja]
  */
 
 /**
@@ -159,7 +159,7 @@
  * @name auto-refresh
  * @description
  *   [en]When this attribute is set the carousel will automatically refresh when the number of child nodes change.[/en]
- *   [ja]この属性がある時、子要素の数が変わるとカルーセルは自動的に更新されます。[/ja]
+ *   [ja]この属性がある時、子要素の数が変わるとカルーセルは自動的に更新される。[/ja]
  */
 
 /**
@@ -199,10 +199,10 @@
  * @signature setSwipeable(swipeable)
  * @param {Booelan} swipeable
  *   [en]If value is true the carousel will be swipeable.[/en]
- *   [ja][/ja]
+ *   [ja]swipeableにする場合にはtrueを指定する。[/ja]
  * @description
  *   [en]Set whether the carousel is swipeable or not.[/en]
- *   [ja]swipeable属性があるかどうかを設定する。[/ja]
+ *   [ja]swipeできるかどうかを指定する。[/ja]
  */
 
 /**
@@ -210,7 +210,7 @@
  * @signature isSwipeable()
  * @return {Boolean}
  *   [en]Will be true if the carousel is swipeable.[/en]
- *   [ja][/ja]
+ *   [ja]swipeableであればtrueを返す。[/ja]
  * @description
  *   [en]Returns whether the carousel is swipeable or not.[/en]
  *   [ja]swiapble属性があるかどうかを返す。[/ja]
@@ -221,7 +221,7 @@
  * @signature setActiveCarouselItemIndex(index)
  * @param {Number} index
  *   [en]The index that the carousel should be set to.[/en]
- *   [ja][/ja]
+ *   [ja]carousel要素のインデックスを指定する。[/ja]
  * @description
  *   [en]Specify the index of the ons-carousel-item to show.[/en]
  *   [ja]表示するons-carousel-itemをindexで指定する。[/ja]
@@ -232,10 +232,10 @@
  * @signature getActiveCarouselItemIndex(index)
  * @return {Number}
  *   [en]The current carousel item index.[/en]
- *   [ja][/ja]
+ *   [ja]現在のカルーセル要素のインデックスが返される。[/ja]
  * @description
  *   [en]Returns the index of the currently visible ons-carousel-item.[/en]
- *   [ja]現在表示されているons-carousel-itemのindexを返す。[/ja]
+ *   [ja]現在表示されているons-carousel-item要素のインデックスを返す。[/ja]
  */
 
 /**
@@ -243,7 +243,7 @@
  * @signature setAutoScrollEnabled(enabled)
  * @param {Boolean} enabled
  *   [en]If true auto scroll will be enabled.[/en]
- *   [ja][/ja]
+ *   [ja]オートスクロールを有効にする場合にはtrueを渡す。[/ja]
  * @description
  *   [en]Enable or disable "auto-scroll" attribute.[/en]
  *   [ja]auto-scroll属性があるかどうかを設定する。[/ja]
@@ -254,7 +254,7 @@
  * @signature isAutoScrollEnabled()
  * @return {Boolean}
  *   [en]Will be true if auto scroll is enabled.[/en]
- *   [ja][/ja]
+ *   [ja]オートスクロールが有効であればtrueを返す。[/ja]
  * @description
  *   [en]Returns whether the "auto-scroll" attribute is set or not.[/en]
  *   [ja]auto-scroll属性があるかどうかを返す。[/ja]
@@ -265,10 +265,10 @@
  * @signature setAutoScrollRatio(ratio)
  * @param {Number} ratio
  *   [en]The desired ratio.[/en]
- *   [ja][/ja]
+ *   [ja]オートスクロールするのに必要な0.0から1.0までのratio値を指定する。[/ja]
  * @description
  *   [en]Set the auto scroll ratio. Must be a value between 0.0 and 1.0.[/en]
- *   [ja][/ja]
+ *   [ja]オートスクロールするのに必要なratio値を指定する。0.0から1.0を必ず指定しなければならない。[/ja]
  */
 
 /**
@@ -276,10 +276,10 @@
  * @signature getAutoScrollRatio(ratio)
  * @return {Number}
  *   [en]The current auto scroll ratio.[/en]
- *   [ja][/ja]
+ *   [ja]現在のオートスクロールのratio値。[/ja]
  * @description
  *   [en]Returns the current auto scroll ratio.[/en]
- *   [ja][/ja]
+ *   [ja]現在のオートスクロールのratio値を返す。[/ja]
  */
 
 /**
@@ -287,7 +287,7 @@
  * @signature setOverscrollable(overscrollable)
  * @param {Boolean}
  *   [en]If true the carousel will be overscrollable.[/en]
- *   [ja][/ja]
+ *   [ja]overscrollできるかどうかを指定する。[/ja]
  * @description
  *   [en]Set whether the carousel is overscrollable or not.[/en]
  *   [ja]overscroll属性があるかどうかを設定する。[/ja]
@@ -298,7 +298,7 @@
  * @signature isOverscrollable()
  * @return {Boolean}
  *   [en]Whether the carousel is overscrollable or not.[/en]
- *   [ja][/ja]
+ *   [ja]overscrollできればtrueを返す。[/ja]
  * @description
  *   [en]Returns whether the carousel is overscrollable or not.[/en]
  *   [ja]overscroll属性があるかどうかを返す。[/ja]
@@ -317,7 +317,7 @@
  * @signature isDisabled()
  * @return {Boolean}
  *   [en]Whether the carousel is disabled or not.[/en]
- *   [ja][/ja]
+ *   [ja]disabled状態になっていればtrueを返す。[/ja]
  * @description
  *   [en]Returns whether the dialog is disabled or enabled.[/en]
  *   [ja]disabled属性があるかどうかを返す。[/ja]
@@ -328,7 +328,7 @@
  * @signature setDisabled(disabled)
  * @param {Boolean}
  *   [en]If true the carousel will be disabled.[/en]
- *   [ja][/ja]
+ *   [ja]disabled状態にする場合にはtrueを指定する。[/ja]
  * @description
  *   [en]Disable or enable the dialog.[/en]
  *   [ja]disabled属性があるかどうかを設定する。[/ja]
@@ -342,10 +342,10 @@
  *   [ja]イベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定する。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定する。[/ja]
  */
 
 /**
@@ -356,10 +356,10 @@
  *  [ja][/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定する。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定する。[/ja]
  */
 
 /**
@@ -367,13 +367,13 @@
  * @signature off(eventName, [listener])
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
- *  [ja][/ja]
+ *  [ja]イベントリスナーを削除する。もしイベントリスナーが指定されなかった場合には、そのイベントのリスナが全て削除される。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定する。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定する。[/ja]
  */
 
 (function() {

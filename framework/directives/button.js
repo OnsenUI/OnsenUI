@@ -5,28 +5,28 @@
  * @category button
  * @modifier outline
  *   [en]Button with outline and transparent background[/en]
- *   [ja][/ja]
+ *   [ja]アウトラインを持ったボタンを表示する。[/ja]
  * @modifier light
  *   [en]Button that doesn't stand out.[/en]
- *   [ja][/ja]
+ *   [ja]目立たないボタンを表示する。[/ja]
  * @modifier quiet
  *   [en]Button with no outline and or background..[/en]
- *   [ja][/ja]
+ *   [ja]枠線や背景が無い文字だけのボタンを表示する。[/ja]
  * @modifier cta
  *   [en]Button that really stands out.[/en]
- *   [ja][/ja]
+ *   [ja]目立つボタンを表示する。[/ja]
  * @modifier large
  *   [en]Large button that covers the width of the screen.[/en]
- *   [ja][/ja]
+ *   [ja]横いっぱいに広がる大きなボタンを表示する。[/ja]
  * @modifier large--quiet
  *   [en]Large quiet button.[/en]
- *   [ja][/ja]
+ *   [ja]横いっぱいに広がるquietボタンを表示する。[/ja]
  * @modifier large--cta
  *   [en]Large call to action button.[/en]
- *   [ja][/ja]
+ *   [ja]横いっぱいに広がるctaボタンを表示する。[/ja]
  * @description
  *   [en]Button component. If you want to place a button in a toolbar, use ons-toolbar-button or ons-back-button instead.[/en]
- *   [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、ons-toolbar-buttonもしくはons-back-buttonコンポーネントを使用してください。[/ja]
+ *   [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、ons-toolbar-buttonもしくはons-back-buttonコンポーネントを使用する。[/ja]
  * @codepen hLayx
  * @guide Button [en]Guide for ons-button[/en][ja]ons-buttonの使い方[/ja]
  * @guide OverridingCSSstyles [en]More details about modifier attribute[/en][ja]modifier属性の使い方[/ja]
@@ -42,7 +42,7 @@
  * @type {String}
  * @description
  *  [en]The appearance of the button.[/en]
- *  [ja]ボタンの表現を指定します。[/ja]
+ *  [ja]ボタンの表現を指定する。[/ja]
  */
 
 /**
@@ -51,7 +51,7 @@
  * @type {Boolean}
  * @description
  *  [en]Specify if the button should have a spinner. [/en]
- *  [ja]ボタンにスピナーを表示する場合は指定してください。[/ja]
+ *  [ja]ボタンにスピナーを表示する場合に指定する。[/ja]
  */
 
 /**
@@ -60,7 +60,7 @@
  * @type {String}
  * @description
  *   [en]The animation when the button transitions to and from the spinner. Possible values are "slide-left" (default), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in".[/en]
- *   [ja]スピナーを表示する場合のアニメーションを指定します。次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
+ *   [ja]スピナーを表示する場合のアニメーションを指定する。"slide-left" (デフォルト), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in"のいずれかを指定する。[/ja]
  */
 
 /**
@@ -68,7 +68,7 @@
  * @name disabled
  * @description
  *   [en]Specify if button should be disabled.[/en]
- *   [ja]ボタンを無効化する場合は指定してください。[/ja]
+ *   [ja]ボタンを無効化する場合は指定する。[/ja]
  */
 
 /**
@@ -76,7 +76,7 @@
  * @signature startSpin()
  * @description
  *   [en]Show spinner on the button.[/en]
- *   [ja]ボタンにスピナーを表示します。[/ja]
+ *   [ja]ボタンにスピナーを表示する。[/ja]
  */
 
 /**
@@ -84,7 +84,7 @@
  * @signature stopSpin()
  * @description
  *   [en]Remove spinner from button.[/en]
- *   [ja]ボタンのスピナーを隠します。[/ja]
+ *   [ja]ボタンのスピナーを隠す。[/ja]
  */
 
 /**
@@ -92,10 +92,10 @@
  * @signature isSpinning()
  * @return {Boolean}
  *   [en]Will be true if the button is spinning.[/en]
- *   [ja][/ja]
+ *   [ja]spinしているかどうかを返す。[/ja]
  * @description
  *   [en]Return whether the spinner is visible or not.[/en]
- *   [ja]ボタン内にスピナーが表示されているかどうかを返します。[/ja]
+ *   [ja]ボタン内にスピナーが表示されているかどうかを返す。[/ja]
  */
 
 /**
@@ -103,10 +103,10 @@
  * @signature setSpinAnimation(animation)
  * @description
  *   [en]Set spin animation. Possible values are "slide-left" (default), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in".[/en]
- *   [ja]スピナーを表示する場合のアニメーションを指定します。スピナーを表示する次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
+ *   [ja]スピナーを表示する場合のアニメーションを指定する。"slide-left" (デフォルト), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in"のいずれかを指定する。[/ja]
  * @param {String} animation
  *   [en]Animation name.[/en]
- *   [ja][/ja]
+ *   [ja]アニメーション名を指定する。[/ja]
  */
 
 /**
@@ -114,7 +114,7 @@
  * @signature setDisabled(disabled)
  * @description
  *   [en]Disable or enable the button.[/en]
- *   [ja]このボタンをdisabled状態にするかどうかを設定します。[/ja]
+ *   [ja]このボタンをdisabled状態にするかどうかを設定する。[/ja]
  */
 
 /**
@@ -122,10 +122,10 @@
  * @signature isDisabled()
  * @return {Boolean}
  *   [en]Will be true if the button is disabled.[/en]
- *   [ja][/ja]
+ *   [ja]ボタンがdisabled状態になっているかどうかを返す。[/ja]
  * @description
  *   [en]Returns whether the button is disabled or enabled.[/en]
- *   [ja]このボタンがdisabled状態かどうかを返します。[/ja]
+ *   [ja]このボタンがdisabled状態かどうかを返す。[/ja]
  */
 
 (function(){
