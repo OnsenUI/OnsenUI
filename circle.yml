@@ -1,0 +1,16 @@
+machine:
+  node:
+    version: 0.10.32
+dependencies:
+  override:
+    - npm install
+    - cd css-components; npm install
+test:
+  override:
+    - echo "Add tests!"
+deployment:
+  tasks:
+    branch: master
+    commands:
+      - npm install -g gulp
+      - ./scripts/nightly.sh $CIRCLE_BUILD_NUM $CIRCLE_SHA1 $CIRCLE_ARTIFACTS
