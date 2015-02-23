@@ -189,7 +189,6 @@ limitations under the License.
  *   [en]Create a dialog instance from a template.[/en]
  *   [ja]テンプレートからダイアログのインスタンスを生成します。[/ja]
  */
- */
 
 /**
  * @ngdoc method
