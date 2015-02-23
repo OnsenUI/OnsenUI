@@ -15,6 +15,10 @@
  *     画面から見えなくなった場合にはその要素は動的にアンロードされます。
  *     このコンポーネントを使うことで、パフォーマンスを劣化させること無しに巨大な数の要素を描画できます。
  *   [/ja]
+ * @codepen QwrGBm
+ * @guide UsingLazyRepeat 
+ *   [en]How to use Lazy Repeat[/en]
+ *   [ja]レイジーリピートの使い方[/ja]
  * @example
  * <script>
  *   ons.bootstrap()
