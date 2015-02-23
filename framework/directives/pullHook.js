@@ -6,6 +6,10 @@
  * @description
  *   [en]Component that adds "pull-to-refresh" to an <ons-page> element.[/en]
  *   [ja]ons-page要素以下でいわゆるpull to refreshを実装するためのコンポーネントです。[/ja]
+ * @codepen WbJogM
+ * @guide UsingPullHook 
+ *   [en]How to use Pull Hook[/en]
+ *   [ja][/ja]
  * @example
  * <script>
  *   ons.bootstrap()
