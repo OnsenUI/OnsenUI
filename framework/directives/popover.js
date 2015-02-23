@@ -5,7 +5,7 @@
  * @category popover
  * @modifier android
  *   [en]Display an Android style popover.[/en]
- *   [ja][/ja]
+ *   [ja]Androidライクなポップオーバーを表示します。[/ja]
  * @description
  *  [en]A component that displays a popover next to an element.[/en]
  *  [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]
@@ -38,7 +38,7 @@
  *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {Function} event.cancel 
  *   [en]Call this function to stop the popover from being shown.[/en]
- *   [ja][/ja]
+ *   [ja]この関数を呼び出すと、ポップオーバーの表示がキャンセルされます。[/ja]
  */
 
 /**
@@ -65,7 +65,7 @@
  *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {Function} event.cancel 
  *   [en]Call this function to stop the popover from being hidden.[/en]
- *   [ja][/ja]
+ *   [ja]この関数を呼び出すと、ポップオーバーが隠れる処理をキャンセルします。[/ja]
  */
 
 /**
@@ -104,8 +104,15 @@
  * @name direction
  * @type {String}
  * @description
- *  [en]A space separated list of directions. If more than one direction is specified, it will be chosen automatically. Valid directions are "up", "down", "left" and "right".[/en]
- *  [ja]ポップオーバーを表示する方向を空白区切りで複数指定できます。指定できる方向は、"up", "down", "left", "right"の4つです。複数指定された場合、対象とする要素に合わせて指定した値から自動的に選択されます。[/ja]
+ *  [en]
+ *    A space separated list of directions. If more than one direction is specified,
+ *    it will be chosen automatically. Valid directions are "up", "down", "left" and "right".
+ *  [/en]
+ *  [ja]
+ *    ポップオーバーを表示する方向を空白区切りで複数指定できます。
+ *    指定できる方向は、"up", "down", "left", "right"の4つです。空白区切りで複数指定することもできます。
+ *    複数指定された場合、対象とする要素に合わせて指定した値から自動的に選択されます。
+ *  [/ja]
  */
 
 /**
@@ -147,13 +154,13 @@
  * @signature show(target, [options])
  * @param {String|Event|HTMLElement} target
  *   [en]Target element. Can be either a CSS selector, an event object or a DOM element.[/en]
- *   [ja][/ja]
+ *   [ja]ポップオーバーのターゲットとなる要素を指定します。CSSセレクタかeventオブジェクトかDOM要素のいずれかを渡せます。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
- *   [ja][/ja]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "fade" and "none".[/en]
- *   [ja][/ja]
+ *   [ja]アニメーション名を指定します。"fade"もしくは"none"を指定できます。[/ja]
  * @description
  *   [en]Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..[/en]
  *   [ja]対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。[/ja]
@@ -164,10 +171,10 @@
  * @signature hide([options])
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
- *   [ja][/ja]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "fade" and "none".[/en]
- *   [ja][/ja]
+ *   [ja]アニメーション名を指定します。"fade"もしくは"none"を指定できます。[/ja]
  * @description
  *   [en]Close the popover.[/en]
  *   [ja]ポップオーバーを閉じます。[/ja]
@@ -178,7 +185,7 @@
  * @signature isShown()
  * @return {Boolean}
  *   [en]Will be true if the popover is visible.[/en]
- *   [ja][/ja]
+ *   [ja]ポップオーバーが表示されている場合にtrueとなります。[/ja]
  * @description
  *   [en]Returns whether the popover is visible or not.[/en]
  *   [ja]ポップオーバーが表示されているかどうかを返します。[/ja]
@@ -197,7 +204,7 @@
  * @signature setCancelable(cancelable)
  * @param {Boolean} cancelable
  *   [en]If true the popover will be cancelable.[/en]
- *   [ja][/ja]
+ *   [ja]ポップオーバーがキャンセル可能にしたい場合にtrueを指定します。[/ja]
  * @description
  *   [en]Set whether the popover can be canceled by the user when it is shown.[/en]
  *   [ja]ポップオーバーを表示した際に、ユーザがそのポップオーバーをキャンセルできるかどうかを指定します。[/ja]
@@ -208,7 +215,7 @@
  * @signature isCancelable()
  * @return {Boolean}
  *   [en]Will be true if the popover is cancelable.[/en]
- *   [ja][/ja]
+ *   [ja]ポップオーバーがキャンセル可能であればtrueとなります。[/ja]
  * @description
  *   [en]Returns whether the popover is cancelable or not.[/en]
  *   [ja]このポップオーバーがキャンセル可能かどうかを返します。[/ja]
@@ -219,7 +226,7 @@
  * @signature setDisabled(disabled)
  * @param {Boolean} disabled
  *   [en]If true the popover will be disabled.[/en]
- *   [ja][/ja]
+ *   [ja]ポップオーバーをdisabled状態にしたい場合にはtrueを指定します。[/ja]
  * @description
  *   [en]Disable or enable the popover.[/en]
  *   [ja]このポップオーバーをdisabled状態にするかどうかを設定します。[/ja]
@@ -229,7 +236,8 @@
  * @ngdoc method
  * @signature isDisabled()
  * @return {Boolean}
- *   [en][/
+ *   [en]Will be true if the popover is disabled.[/en]
+ *   [ja]ポップオーバーがdisabled状態であればtrueとなります。[/ja]
  * @description
  *   [en]Returns whether the popover is disabled or enabled.[/en]
  *   [ja]このポップオーバーがdisabled状態かどうかを返します。[/ja]
@@ -243,10 +251,10 @@
  *   [ja]イベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 /**
@@ -254,13 +262,13 @@
  * @signature once(eventName, listener)
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
- *  [ja][/ja]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 /**
@@ -268,13 +276,13 @@
  * @signature off(eventName, [listener])
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
- *  [ja][/ja]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]削除するイベントリスナーを指定します。[/ja]
  */
 
 (function(){

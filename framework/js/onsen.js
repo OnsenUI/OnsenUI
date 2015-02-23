@@ -28,18 +28,18 @@ limitations under the License.
  * @ngdoc method
  * @signature ready(callback)
  * @description 
- *   [ja]アプリの初期化に利用するメソッドです。渡された関数を、Onsen UIの初期化が終了している時点で必ず呼びます。[/ja]
+ *   [ja]アプリの初期化に利用するメソッドです。渡された関数は、Onsen UIの初期化が終了している時点で必ず呼ばれます。[/ja]
  *   [en]Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized.[/en]
  * @param {Function} callback
  *   [en]Function that executes after Onsen UI has been initialized.[/en]
- *   [ja][/ja]
+ *   [ja]Onsen UIが初期化が完了した後に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 /**
  * @ngdoc method
  * @signature bootstrap([moduleName, [dependencies]])
  * @description 
- *   [ja]Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます[/ja]
+ *   [ja]Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます。[/ja]
  *   [en]Initialize Onsen UI. Can be used to load Onsen UI without using the <code>ng-app</code> attribute from AngularJS.[/en]
  * @param {String} [moduleName] 
  *   [en]AngularJS module name.[/en]
@@ -49,7 +49,7 @@ limitations under the License.
  *   [ja]依存するAngular.jsのモジュール名の配列[/ja]
  * @return {Object}
  *   [en]An AngularJS module object.[/en]
- *   [ja][/ja]
+ *   [ja]AngularJSのModuleオブジェクトを表します。[/ja]
  */
 
 /**
@@ -57,7 +57,7 @@ limitations under the License.
  * @signature enableAutoStatusBarFill()
  * @description 
  *   [en]Enable status bar fill feature on iOS7 and above.[/en]
- *   [ja][/ja]
+ *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を有効にします。[/ja]
  */
 
 /**
@@ -65,7 +65,7 @@ limitations under the License.
  * @signature enableAutoStatusBarFill()
  * @description 
  *   [en]Disable status bar fill feature on iOS7 and above.[/en]
- *   [ja][/ja]
+ *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を無効にします。[/ja]
  */
 
 /**
@@ -73,15 +73,16 @@ limitations under the License.
  * @signature findParentComponentUntil(name, [dom])
  * @param {String} name
  *   [en]Name of component, i.e. 'ons-page'.[/en]
+ *   [ja]コンポーネント名を指定します。例えばons-pageなどを指定します。[/ja]
  * @param {Object|jqLite|HTMLElement} [dom]
  *   [en]$event, jqLite or HTMLElement object.[/en]
- *   [ja][/ja]
+ *   [ja]$eventオブジェクト、jqLiteオブジェクト、HTMLElementオブジェクトのいずれかを指定できます。[/ja]
  * @return {Object}
  *   [en]Component object. Will return null if no component was found.[/en]
- *   [ja][/ja]
+ *   [ja]コンポーネントのオブジェクトを返します。もしコンポーネントが見つからなかった場合にはnullを返します。[/ja]
  * @description 
  *   [en]Find parent component object of <code>dom</code> element.[/en]
- *   [ja][/ja]
+ *   [ja]指定されたdom引数の親要素をたどってコンポーネントを検索します。[/ja]
  */
 
 /**
@@ -89,16 +90,16 @@ limitations under the License.
  * @signature findComponent(selector, [dom])
  * @param {String} selector
  *   [en]CSS selector[/en]
- *   [ja]CSSセレクター[/ja]
+ *   [ja]CSSセレクターを指定します。[/ja]
  * @param {HTMLElement} [dom]
  *   [en]DOM element to search from.[/en]
- *   [ja][/ja]
+ *   [ja]検索対象とするDOM要素を指定します。[/ja]
  * @return {Object}
  *   [en]Component object. Will return null if no component was found.[/en]
- *   [ja][/ja]
+ *   [ja]コンポーネントのオブジェクトを返します。もしコンポーネントが見つからなかった場合にはnullを返します。[/ja]
  * @description 
  *   [en]Find component object using CSS selector.[/en]
- *   [ja][/ja]
+ *   [ja]CSSセレクタを使ってコンポーネントのオブジェクトを検索します。[/ja]
  */
 
 /**
@@ -106,10 +107,10 @@ limitations under the License.
  * @signature setDefaultDeviceBackButtonListener(listener)
  * @param {Function} listener 
  *   [en]Function that executes when device back button is pressed.[/en]
- *   [ja][/ja]
+ *   [ja]デバイスのバックボタンが押された時に実行される関数オブジェクトを指定します。[/ja]
  * @description 
  *   [en]Set default handler for device back button.[/en]
- *   [ja][/ja]
+ *   [ja]デバイスのバックボタンのためのデフォルトのハンドラを設定します。[/ja]
  */
 
 /**
@@ -117,7 +118,7 @@ limitations under the License.
  * @signature disableDeviceBackButtonHandler()
  * @description 
  * [en]Disable device back button event handler.[/en]
- * [ja][/ja]
+ * [ja]デバイスのバックボタンのイベントを受け付けないようにします。[/ja]
  */
 
 /**
@@ -125,7 +126,7 @@ limitations under the License.
  * @signature enableDeviceBackButtonHandler()
  * @description 
  * [en]Enable device back button event handler.[/en]
- * [ja][/ja]
+ * [ja]デバイスのバックボタンのイベントを受け付けるようにします。[/ja]
  */
 
 /**
@@ -133,10 +134,10 @@ limitations under the License.
  * @signature isReady()
  * @return {Boolean}
  *   [en]Will be true if Onsen UI is initialized.[/en]
- *   [ja][/ja]
+ *   [ja]初期化されているかどうかを返します。[/ja]
  * @description 
  *   [en]Returns true if Onsen UI is initialized.[/en]
- *   [ja][/ja]
+ *   [ja]Onsen UIがすでに初期化されているかどうかを返すメソッドです。[/ja]
  */
 
 /**
@@ -144,10 +145,10 @@ limitations under the License.
  * @signature compile(dom)
  * @param {HTMLElement} dom
  *   [en]Element to compile.[/en]
- *   [ja][/ja]
+ *   [ja]コンパイルする要素を指定します。[/ja]
  * @description 
  *   [en]Compile Onsen UI components.[/en]
- *   [ja][/ja]
+ *   [ja]通常のHTMLの要素をOnsen UIのコンポーネントにコンパイルします。[/ja]
  */
 
 /**
@@ -155,10 +156,10 @@ limitations under the License.
  * @signature isWebView()
  * @return {Boolean}
  *   [en]Will be true if the app is running in Cordova.[/en]
- *   [ja][/ja]
+ *   [ja]Cordovaで実行されている場合にtrueになります。[/ja]
  * @description 
  *   [en]Returns true if running inside Cordova.[/en]
- *   [ja][/ja]
+ *   [ja]Cordovaで実行されているかどうかを返すメソッドです。[/ja]
  */
 
 /**
@@ -166,13 +167,13 @@ limitations under the License.
  * @signature createAlertDialog(page)
  * @param {String} page
  *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-alert-dialog> component.[/en]
- *   [ja][/ja]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the alert dialog component object.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
  * @description 
  *   [en]Create a alert dialog instance from a template.[/en]
- *   [ja][/ja]
+ *   [ja]テンプレートからアラートダイアログのインスタンスを生成します。[/ja]
  */
 
 /**
@@ -180,12 +181,13 @@ limitations under the License.
  * @signature createDialog(page)
  * @param {String} page
  *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the dialog component object.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
  * @description 
  *   [en]Create a dialog instance from a template.[/en]
- *   [ja][/ja]
+ *   [ja]テンプレートからダイアログのインスタンスを生成します。[/ja]
  */
 
 /**
@@ -193,13 +195,13 @@ limitations under the License.
  * @signature createPopover(page)
  * @param {String} page
  *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
- *   [ja][/ja]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the popover component object.[/en]
- *   [ja][/ja]
+ *   [ja]ポップオーバーのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
  * @description 
  *   [en]Create a popover instance from a template.[/en]
- *   [ja][/ja]
+ *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
  */
 
 window.ons = (function(){

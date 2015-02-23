@@ -7,11 +7,21 @@
  *   [en]Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.[/en]
  *   [ja]スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。[/ja]
  * @codepen IDvFJ
- * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
- * @guide UsingSlidingMenu [en]Using sliding menu[/en][ja]スライディングメニューを使う[/ja]
- * @guide EventHandling [en]Using events[/en][ja]イベントの利用[/ja]
- * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
- * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-page
+ *   [en]ons-page component[/en]
+ *   [ja]ons-pageコンポーネント[/ja]
+ * @guide UsingSlidingMenu
+ *   [en]Using sliding menu[/en]
+ *   [ja]スライディングメニューを使う[/ja]
+ * @guide EventHandling
+ *   [en]Using events[/en]
+ *   [ja]イベントの利用[/ja]
+ * @guide CallingComponentAPIsfromJavaScript
+ *   [en]Using navigator from JavaScript[/en]
+ *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML
+ *   [en]Defining multiple pages in single html[/en]
+ *   [ja]複数のページを1つのHTMLに記述する[/ja]
  * @example
  * <ons-sliding-menu var="app.menu" main-page="page.html" menu-page="menu.html" max-slide-distance="200px" type="reveal" side="left">
  * </ons-sliding-menu>
@@ -37,10 +47,10 @@
  * @name preopen
  * @description
  *   [en]Fired just before the sliding menu is opened.[/en]
- *   [ja][/ja]
+ *   [ja]スライディングメニューが開く前に発火します。[/ja]
  * @param {Object} event
  *   [en]Event object.[/en]
- *   [ja][/ja]
+ *   [ja]イベントオブジェクトです。[/ja]
  */
 
 /**
@@ -48,10 +58,10 @@
  * @name postopen
  * @description
  *   [en]Fired just after the sliding menu is opened.[/en]
- *   [ja][/ja]
+ *   [ja]スライディングメニューが開き終わった後に発火します。[/ja]
  * @param {Object} event
  *   [en]Event object.[/en]
- *   [ja][/ja]
+ *   [ja]イベントオブジェクトです。[/ja]
  */
 
 /**
@@ -59,10 +69,10 @@
  * @name preclose
  * @description
  *   [en]Fired just before the sliding menu is closed.[/en]
- *   [ja][/ja]
+ *   [ja]スライディングメニューが閉じる前に発火します。[/ja]
  * @param {Object} event
  *   [en]Event object.[/en]
- *   [ja][/ja]
+ *   [ja]イベントオブジェクトです。[/ja]
  */
 
 /**
@@ -70,10 +80,10 @@
  * @name postopen
  * @description
  *   [en]Fired just after the sliding menu is closed.[/en]
- *   [ja][/ja]
+ *   [ja]スライディングメニューが閉じ終わった後に発火します。[/ja]
  * @param {Object} event
  *   [en]Event object.[/en]
- *   [ja][/ja]
+ *   [ja]イベントオブジェクトです。[/ja]
  */
 
 /**
@@ -144,16 +154,16 @@
  * @signature setMainPage(pageUrl, [options])
  * @param {String} pageUrl
  *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
- *   [ja][/ja]
+ *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
- *   [ja][/ja]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {Boolean} [options.closeMenu]
  *   [en]If true the menu will be closed.[/en]
- *   [ja][/ja]
+ *   [ja]trueを指定すると、開いているメニューを閉じます。[/ja]
  * @param {Function} [options.callback]
  *   [en]Function that is executed after the page has been set.[/en]
- *   [ja][/ja]
+ *   [ja]ページが読み込まれた後に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Show the page specified in pageUrl in the main contents pane.[/en]
  *   [ja]中央部分に表示されるページをpageUrlに指定します。[/ja]
@@ -164,16 +174,16 @@
  * @signature setMenuPage(pageUrl, [options])
  * @param {String} pageUrl
  *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
- *   [ja][/ja]
+ *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
- *   [ja][/ja]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {Boolean} [options.closeMenu]
  *   [en]If true the menu will be closed after the menu page has been set.[/en]
- *   [ja][/ja]
+ *   [ja]trueを指定すると、開いているメニューを閉じます。[/ja]
  * @param {Function} [options.callback]
  *   [en]This function will be executed after the menu page has been set.[/en]
- *   [ja][/ja]
+ *   [ja]メニューページが読み込まれた後に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Show the page specified in pageUrl in the side menu pane.[/en]
  *   [ja]メニュー部分に表示されるページをpageUrlに指定します。[/ja]
@@ -184,13 +194,10 @@
  * @signature openMenu([options])
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
- *   [ja][/ja]
- * @param {String} [options.animation]
- *   [en]Animation name. Available animations are "overlay", "reveal" and "push".[/en]
- *   [ja][/ja]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {Function} [options.callback]
  *   [en]This function will be called after the menu has been opened.[/en]
- *   [ja][/ja]
+ *   [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Slide the above layer to reveal the layer behind.[/en]
  *   [ja]メニューページを表示します。[/ja]
@@ -201,13 +208,10 @@
  * @signature closeMenu([options])
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
- *   [ja][/ja]
- * @param {String} [options.animation]
- *   [en]Animation name. Available animations are "overlay", "reveal" and "push".[/en]
- *   [ja][/ja]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {Function} [options.callback]
- *   [en]This function will be called after the menu has been opened.[/en]
- *   [ja][/ja]
+ *   [en]This function will be called after the menu has been closed.[/en]
+ *   [ja]メニューが閉じられた後に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Slide the above layer to hide the layer behind.[/en]
  *   [ja]メニューページを非表示にします。[/ja]
@@ -218,13 +222,10 @@
  * @signature toggleMenu([options])
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
- *   [ja][/ja]
- * @param {String} [options.animation]
- *   [en]Animation name. Available animations are "overlay", "reveal" and "push".[/en]
- *   [ja][/ja]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {Function} [options.callback]
  *   [en]This function will be called after the menu has been opened or closed.[/en]
- *   [ja][/ja]
+ *   [ja]メニューが開き終わった後か、閉じ終わった後に呼び出される関数オブジェクトです。[/ja]
  * @description
  *   [en]Slide the above layer to reveal the layer behind if it is currently hidden, otherwise, hide the layer behind.[/en]
  *   [ja]現在の状況に合わせて、メニューページを表示もしくは非表示にします。[/ja]
@@ -235,7 +236,7 @@
  * @signature isMenuOpened()
  * @return {Boolean}
  *   [en]Will be true if the menu is currently open.[/en]
- *   [ja][/ja]
+ *   [ja]メニューが開いていればtrueとなります。[/ja]
  * @description
  *   [en]Returns true if the menu page is open, otherwise false.[/en]
  *   [ja]メニューページが開いている場合はtrue、そうでない場合はfalseを返します。[/ja]
@@ -257,7 +258,7 @@
  * @signature setSwipeable(swipeable)
  * @param {Boolean} swipeable
  *   [en]If true the menu will be swipeable.[/en]
- *   [ja][/ja]
+ *   [ja]スワイプで開閉できるようにする場合にはtrueを指定します。[/ja]
  * @description
  *   [en]Specify if the menu should be swipeable or not.[/en]
  *   [ja]スワイプで開閉するかどうかを設定する。[/ja]
@@ -271,10 +272,10 @@
  *   [ja]イベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 /**
@@ -282,13 +283,13 @@
  * @signature once(eventName, listener)
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
- *  [ja][/ja]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 /**
@@ -296,13 +297,13 @@
  * @signature off(eventName, [listener])
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
- *  [ja][/ja]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]削除するイベントリスナーを指定します。[/ja]
  */
 
 (function() {

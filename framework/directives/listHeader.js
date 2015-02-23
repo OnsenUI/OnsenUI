@@ -6,7 +6,9 @@
  * @description
  *   [en]Header element for list items. Must be put inside ons-list component.[/en]
  *   [ja]リスト要素に使用するヘッダー用コンポーネント。ons-listと共に使用します。[/ja]
- * @seealso ons-list [en]ons-list component[/en][ja]ons-listコンポーネント[/ja]
+ * @seealso ons-list
+ *   [en]ons-list component[/en]
+ *   [ja]ons-listコンポーネント[/ja]
  * @seealso ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]
  * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
  * @codepen yxcCt

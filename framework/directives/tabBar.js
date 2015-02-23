@@ -7,12 +7,24 @@
  *   [en]A component to display a tab bar on the bottom of a page. Used with ons-tab to manage pages using tabs.[/en]
  *   [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabと組み合わせて使うことで、ページを管理できます。[/ja]
  * @codepen pGuDL
- * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
- * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
- * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
- * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
- * @seealso ons-tab [en]ons-tab component[/en][ja]ons-tabコンポーネント[/ja]
- * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
+ * @guide UsingTabBar
+ *   [en]Using tab bar[/en]
+ *   [ja]タブバーを使う[/ja]
+ * @guide EventHandling
+ *   [en]Event handling descriptions[/en]
+ *   [ja]イベント処理の使い方[/ja]
+ * @guide CallingComponentAPIsfromJavaScript
+ *   [en]Using navigator from JavaScript[/en]
+ *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML
+ *   [en]Defining multiple pages in single html[/en]
+ *   [ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-tab
+ *   [en]ons-tab component[/en]
+ *   [ja]ons-tabコンポーネント[/ja]
+ * @seealso ons-page
+ *   [en]ons-page component[/en]
+ *   [ja]ons-pageコンポーネント[/ja]
  * @example
  * <ons-tabbar>
  *   <ons-tab page="home.html" active="true">
@@ -47,19 +59,19 @@
  * @name prechange
  * @description
  *   [en]Fires just before the tab is changed.[/en]
- *   [ja][/ja]
+ *   [ja]アクティブなタブが変わる前に発火します。[/ja]
  * @param {Object} event
  *   [en]Event object.[/en]
- *   [ja][/ja]
+ *   [ja]イベントオブジェクト。[/ja]
  * @param {Number} event.index
  *   [en]Current index.[/en]
- *   [ja][/ja]
+ *   [ja]現在アクティブになっているons-tabのインデックスを返します。[/ja]
  * @param {Object} event.tabItem
  *   [en]Tab item object.[/en]
- *   [ja][/ja]
+ *   [ja]tabItemオブジェクト。[/ja]
  * @param {Function} event.cancel
  *   [en]Call this function to cancel the change event.[/en]
- *   [ja][/ja]
+ *   [ja]この関数を呼び出すと、アクティブなタブの変更がキャンセルされます。[/ja]
  */
 
 /**
@@ -67,16 +79,16 @@
  * @name postchange
  * @description
  *   [en]Fires just after the tab is changed.[/en]
- *   [ja][/ja]
+ *   [ja]アクティブなタブが変わった後に発火します。[/ja]
  * @param {Object} event
  *   [en]Event object.[/en]
- *   [ja][/ja]
+ *   [ja]イベントオブジェクト。[/ja]
  * @param {Number} event.index
  *   [en]Current index.[/en]
- *   [ja][/ja]
+ *   [ja]現在アクティブになっているons-tabのインデックスを返します。[/ja]
  * @param {Object} event.tabItem
  *   [en]Tab item object.[/en]
- *   [ja][/ja]
+ *   [ja]tabItemオブジェクト。[/ja]
  */
 
 /**
@@ -84,16 +96,16 @@
  * @name reactive
  * @description
  *   [en]Fires if the already open tab is tapped again.[/en]
- *   [ja][/ja]
+ *   [ja]すでにアクティブになっているタブがもう一度タップやクリックされた場合に発火します。[/ja]
  * @param {Object} event
  *   [en]Event object.[/en]
- *   [ja][/ja]
+ *   [ja]イベントオブジェクト。[/ja]
  * @param {Number} event.index
  *   [en]Current index.[/en]
- *   [ja][/ja]
+ *   [ja]現在アクティブになっているons-tabのインデックスを返します。[/ja]
  * @param {Object} event.tabItem
  *   [en]Tab item object.[/en]
- *   [ja][/ja]
+ *   [ja]tabItemオブジェクト。[/ja]
  */
 
 /**
@@ -122,7 +134,7 @@
  * @default none
  * @description
  *   [en]Animation name. Preset values are "none" and "fade". Default is "none".[/en]
- *   [ja]ページ読み込み時のアニメーションを指定します。noneもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
+ *   [ja]ページ読み込み時のアニメーションを指定します。"none"もしくは"fade"を選択できます。デフォルトは"none"です。[/ja]
  */
 
 /**
@@ -132,7 +144,7 @@
  * @default bottom
  * @description
  *   [en]Tabbar's position. Preset values are "bottom" and "top". Default is "bottom".[/en]
- *   [ja]タブバーの位置を指定します。bottomもしくはtopを選択できます。デフォルトはbottomです。[/ja]
+ *   [ja]タブバーの位置を指定します。"bottom"もしくは"top"を選択できます。デフォルトは"bottom"です。[/ja]
  */
 
 /**
@@ -140,16 +152,16 @@
  * @signature setActiveTab(index, [options])
  * @param {Number} index
  *   [en]Tab index.[/en]
- *   [ja][/ja]
+ *   [ja]タブのインデックスを指定します。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
- *   [ja][/ja]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {Boolean} [options.keepPage]
  *   [en]If true the page will not be changed.[/en]
- *   [ja][/ja]
+ *   [ja]タブバーが現在表示しているpageを変えない場合にはtrueを指定します。[/ja]
  * @return {Boolean}
  *   [en]Will be true if the change was successful.[/en]
- *   [ja][/ja]
+ *   [ja]変更が成功した場合にtrueを返します。[/ja]
  * @description
  *   [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
  *   [ja]指定したインデックスのタブを表示します。アニメーションなどのオプションを指定できます。[/ja]
@@ -160,7 +172,7 @@
  * @signature getActiveTabIndex()
  * @return {Number}
  *   [en]The index of the currently active tab.[/en]
- *   [ja][/ja]
+ *   [ja]現在アクティブになっているタブのインデックスを返します。[/ja]
  * @description
  *   [en]Returns tab index on current active tab. If active tab is not found, returns -1.[/en]
  *   [ja]現在アクティブになっているタブのインデックスを返します。現在アクティブなタブがない場合には-1を返します。[/ja]
@@ -171,7 +183,7 @@
  * @signature loadPage(url)
  * @param {String} url
  *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
- *   [ja][/ja]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したid属性の値を利用できます。[/ja]
  * @description
  *   [en]Displays a new page without changing the active index.[/en]
  *   [ja]現在のアクティブなインデックスを変更せずに、新しいページを表示します。[/ja]
@@ -185,10 +197,10 @@
  *   [ja]イベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 /**
@@ -196,13 +208,13 @@
  * @signature once(eventName, listener)
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
- *  [ja][/ja]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 /**
@@ -210,13 +222,13 @@
  * @signature off(eventName, [listener])
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
- *  [ja][/ja]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]削除するイベントリスナーを指定します。[/ja]
  */
 
 (function() {

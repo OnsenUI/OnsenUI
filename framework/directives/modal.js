@@ -4,10 +4,20 @@
  * @name ons-modal
  * @category modal
  * @description 
- *   [en]Modal component that masks current screen. Underlying components are not subject to any events while the modal component is shown.[/en]
- *   [ja]画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、モーダルが表示されている間はイベント通知が行われません。[/ja]
- * @guide UsingModal [en]Using ons-modal component[/en][ja]モーダルの使い方[/ja]
- * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ *   [en]
+ *     Modal component that masks current screen.
+ *     Underlying components are not subject to any events while the modal component is shown.
+ *   [/en]
+ *   [ja]
+ *     画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、
+ *     モーダルが表示されている間はイベント通知が行われません。
+ *   [/ja]
+ * @guide UsingModal
+ *   [en]Using ons-modal component[/en]
+ *   [ja]モーダルの使い方[/ja]
+ * @guide CallingComponentAPIsfromJavaScript
+ *   [en]Using navigator from JavaScript[/en]
+ *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @codepen devIg
  * @example
  * <ons-modal>

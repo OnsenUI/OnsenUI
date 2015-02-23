@@ -6,9 +6,15 @@
  * @description
  *  [en]Switch component.[/en]
  *  [ja]スイッチを表示するコンポーネントです。[/ja]
- * @guide UsingFormComponents [en]Using form components[/en][ja]フォームを使う[/ja]
- * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
- * @seealso ons-button [en]ons-button component[/en][ja]ons-buttonコンポーネント[/ja]
+ * @guide UsingFormComponents
+ *   [en]Using form components[/en]
+ *   [ja]フォームを使う[/ja]
+ * @guide EventHandling
+ *   [en]Event handling descriptions[/en]
+ *   [ja]イベント処理の使い方[/ja]
+ * @seealso ons-button
+ *   [en]ons-button component[/en]
+ *   [ja]ons-buttonコンポーネント[/ja]
  * @example
  * <ons-switch checked></ons-switch>
  */
@@ -18,19 +24,19 @@
  * @name change
  * @description
  *   [en]Fired when the value is changed.[en]
- *   [ja][/ja]
+ *   [ja]ON/OFFが変わった時に発火します。[/ja]
  * @param {Object} event
  *   [en]Event object.[/en]
- *   [ja][/ja]
+ *   [ja]イベントオブジェクト。[/ja]
  * @param {Object} event.switch
  *   [en]Switch object.[/en]
- *   [ja][/ja]
+ *   [ja]イベントが発火したSwitchオブジェクトを返します。[/ja]
  * @param {Boolean} event.value
  *   [en]Current value.[/en]
- *   [ja][/ja]
+ *   [ja]現在の値を返します。[/ja]
  * @param {Boolean} event.isInteractive
  *   [en]True if the change was triggered by the user clicking on the switch.[/en]
- *   [ja][/ja]
+ *   [ja]タップやクリックなどのユーザの操作によって変わった場合にはtrueを返します。[/ja]
  */
 
 /**
@@ -72,7 +78,7 @@
  * @signature isChecked()
  * @return {Boolean}
  *   [en]Will be true if the switch is on.[/en]
- *   [ja][/ja]
+ *   [ja]ONになっている場合にはtrueになります。[/ja]
  * @description
  *   [en]Returns true if the switch is ON.[/en]
  *   [ja]スイッチがONの場合にtrueを返します。[/ja]
@@ -83,7 +89,7 @@
  * @signature setChecked(checked)
  * @param {Boolean} checked
  *   [en]If true the switch will be set to on.[/en]
- *   [ja][/ja]
+ *   [ja]ONにしたい場合にはtrueを指定します。[/ja]
  * @description
  *   [en]Set the value of the switch. isChecked can be either true or false.[/en]
  *   [ja]スイッチの値を指定します。isCheckedにはtrueもしくはfalseを指定します。[/ja]
@@ -94,7 +100,7 @@
  * @signature getCheckboxElement()
  * @return {HTMLElement}
  *   [en]The underlying checkbox element.[/en]
- *   [ja][/ja]
+ *   [ja]コンポーネント内部のcheckbox要素になります。[/ja]
  * @description
  *   [en]Get inner input[type=checkbox] element.[/en]
  *   [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]
@@ -108,38 +114,38 @@
  *   [ja]イベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 /**
  * @ngdoc method
  * @signature once(eventName, listener)
  * @description
- *   [en]Add an event listener that's only triggered once.[/en]
- *   [ja][/ja]
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 /**
  * @ngdoc method
  * @signature off(eventName, [listener])
  * @description
- *   [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
- *   [ja][/ja]
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]削除するイベントリスナーを指定します。[/ja]
  */
 
 (function(){

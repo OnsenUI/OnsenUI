@@ -9,7 +9,7 @@
  * @codepen zxxaGa
  * @guide UsingDialog
  *   [en]Learn how to use the dialog component.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログコンポーネントの使い方[/ja]
  * @seealso ons-alert-dialog
  *   [en]ons-alert-dialog component[/en]
  *   [ja]ons-alert-dialogコンポーネント[/ja]
@@ -44,7 +44,7 @@
  *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {Function} event.cancel 
  *   [en]Execute this function to stop the dialog from being shown.[/en]
- *   [ja][/ja]
+ *   [ja]この関数を実行すると、ダイアログの表示がキャンセルされます。[/ja]
  */
 
 /**
@@ -71,7 +71,7 @@
  *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {Function} event.cancel 
  *   [en]Execute this function to stop the dialog from being hidden.[/en]
- *   [ja][/ja]
+ *   [ja]この関数を実行すると、ダイアログの非表示がキャンセルされます。[/ja]
  */
 
 /**
@@ -127,7 +127,7 @@
  * @default default
  * @description
  *  [en]The animation used when showing and hiding the dialog. Can be either "none" or "default".[/en]
- *  [ja]ダイアログを表示する際のアニメーション名を指定します。デフォルトでは"none"か"default"が指定できます。[/ja]
+ *  [ja]ダイアログを表示する際のアニメーション名を指定します。"none"もしくは"default"を指定できます。[/ja]
  */
 
 /**
@@ -137,7 +137,7 @@
  * @default rgba(0, 0, 0, 0.2)
  * @description
  *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
- *  [ja]背景のマスクの色を指定します。デフォルトは"rgba(0, 0, 0, 0.2)"です。[/ja]
+ *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
  */
 
 /**
@@ -145,13 +145,13 @@
  * @signature show([options])
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
- *   [ja][/ja]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
- *   [ja][/ja]
+ *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
  * @param {Function} [options.callback]
  *   [en]This function is called after the dialog has been revealed.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログが表示され終わった後に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
  *  [en]Show the dialog.[/en]
  *  [ja]ダイアログを開きます。[/ja]
@@ -162,13 +162,13 @@
  * @signature hide([options])
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
- *   [ja][/ja]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
- *   [ja][/ja]
+ *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定できます。[/ja]
  * @param {Function} [options.callback]
  *   [en]This functions is called after the dialog has been hidden.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログが隠れた後に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Hide the dialog.[/en]
  *   [ja]ダイアログを閉じます。[/ja]
@@ -182,7 +182,7 @@
  *   [ja]ダイアログが表示されているかどうかを返します。[/ja]
  * @return {Boolean}
  *   [en]Will be true if the dialog is visible.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログが表示されている場合にtrueを返します。[/ja]
  */
 
 /**
@@ -209,7 +209,7 @@
  * @signature setCancelable(cancelable)
  * @param {Boolean} cancelable
  *   [en]If true the dialog will be cancelable.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログをキャンセル可能にする場合trueを指定します。[/ja]
  * @description
  *   [en]Define whether the dialog can be canceled by the user or not.[/en]
  *   [ja]ダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
@@ -267,7 +267,7 @@
  * @signature once(eventName, listener)
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
- *  [ja][/ja]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
  *   [ja][/ja]
@@ -281,7 +281,7 @@
  * @signature off(eventName, [listener])
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
- *  [ja][/ja]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合、そのイベントに紐付けられている全てのイベントリスナーが削除されます。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
  *   [ja][/ja]

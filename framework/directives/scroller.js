@@ -5,7 +5,7 @@
  * @category basis
  * @description
  *   [en]Makes the content inside this tag scrollable.[/en]
- *   [ja][/ja]
+ *   [ja]要素内をスクロール可能にします。[/ja]
  * @example
  * <ons-scroller style="height: 200px; width: 100%">
  *   ...

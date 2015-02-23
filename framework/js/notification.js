@@ -20,8 +20,8 @@ limitations under the License.
  * @name ons.notification
  * @category alert
  * @description 
- *   [en]Utility methods to create different kinds of dialogs. There are three methods available: alert, confirm and prompt.[/en]
- *   [ja][/ja]
+ *   [en]Utility methods to create different kinds of alert dialogs. There are three methods available: alert, confirm and prompt.[/en]
+ *   [ja]いくつかの種類のアラートダイアログを作成するためのユーティリティメソッドを収めたオブジェクトです。[/ja]
  * @example
  * <script>
  *   ons.notification.alert({
@@ -51,31 +51,39 @@ limitations under the License.
  * @signature alert(options)
  * @param {Object} options
  *   [en]Parameter object.[/en]
- *   [ja][/ja]
+ *   [ja]オプションを指定するオブジェクトです。[/ja]
  * @param {String} [options.message]
  *   [en]Alert message.[/en]
- *   [ja][/ja]
+ *   [ja]アラートダイアログに表示する文字列を指定します。[/ja]
  * @param {String} [options.messageHTML]
  *   [en]Alert message in HTML.[/en]
- *   [ja][/ja]
+ *   [ja]アラートダイアログに表示するHTMLを指定します。[/ja]
  * @param {String} [options.buttonLabel]
  *   [en]Label for confirmation button. Default is "OK".[/en]
- *   [ja][/ja]
+ *   [ja]確認ボタンのラベルを指定します。"OK"がデフォルトです。[/ja]
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
- *   [ja][/ja]
+ *   [ja]アラートダイアログを表示する際のアニメーション名を指定します。"none", "fade", "slide"のいずれかを指定できます。[/ja]
  * @param {String} [options.title]
  *   [en]Dialog title. Default is "Alert".[/en]
- *   [ja][/ja]
+ *   [ja]アラートダイアログの上部に表示するタイトルを指定します。"Alert"がデフォルトです。[/ja]
  * @param {String} [options.modifier]
  *   [en]Modifier for the dialog.[/en]
- *   [ja][/ja]
+ *   [ja]アラートダイアログのmodifier属性の値を指定します。[/ja]
  * @param {Function} [options.callback]
  *   [en]Function that executes after dialog has been closed.[/en]
- *   [ja][/ja]
+ *   [ja]アラートダイアログが閉じられた時に呼び出される関数オブジェクトを指定します。[/ja]
  * @description 
- *   [en]Display an alert dialog to show the user a message. The content of the message can be either simple text or HTML. Must specify either message or messageHTML.[/en]
- *   [ja][/ja]
+ *   [en]
+ *     Display an alert dialog to show the user a message.
+ *     The content of the message can be either simple text or HTML.
+ *     Must specify either message or messageHTML.
+ *   [/en]
+ *   [ja]
+ *     ユーザーへメッセージを見せるためのアラートダイアログを表示します。
+ *     表示するメッセージは、テキストかもしくはHTMLを指定できます。
+ *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
+ *   [/ja]
  */
 
 /**
@@ -85,34 +93,49 @@ limitations under the License.
  *   [en]Parameter object.[/en]
  * @param {String} [options.message]
  *   [en]Confirmation question.[/en]
- *   [ja][/ja]
+ *   [ja]確認ダイアログに表示するメッセージを指定します。[/ja]
  * @param {String} [options.messageHTML]
  *   [en]Dialog content in HTML.[/en]
- *   [ja][/ja]
+ *   [ja]確認ダイアログに表示するHTMLを指定します。[/ja]
  * @param {Array} [options.buttonLabels]
- *   [en]Labels for the buttons. Default is "Cancel" and "OK".[/en]
- *   [ja][/ja]
+ *   [en]Labels for the buttons. Default is ["Cancel", "OK"].[/en]
+ *   [ja]ボタンのラベルの配列を指定します。["Cancel", "OK"]がデフォルトです。[/ja]
  * @param {Number} [options.primaryButtonIndex]
  *   [en]Index of primary button. Default is 1.[/en]
- *   [ja][/ja]
+ *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]
  * @param {Boolean} [options.cancelable]
  *   [en]Whether the dialog is cancelable or not. Default is false.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログがキャンセル可能かどうかを指定します。[/ja]
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
- *   [ja][/ja]
+ *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
  * @param {String} [options.title]
  *   [en]Dialog title. Default is "Confirm".[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログのタイトルを指定します。"Confirm"がデフォルトです。[/ja]
  * @param {String} [options.modifier]
  *   [en]Modifier for the dialog.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログのmodifier属性の値を指定します。[/ja]
  * @param {Function} [options.callback]
- *   [en]Function that executes after the dialog has been closed. Argument for the function is the index of the button that was pressed or -1 if the dialog was canceled.[/en]
- *   [ja][/ja]
+ *   [en]
+ *     Function that executes after the dialog has been closed.
+ *     Argument for the function is the index of the button that was pressed or -1 if the dialog was canceled.
+ *   [/en]
+ *   [ja]
+ *     ダイアログが閉じられた後に呼び出される関数オブジェクトを指定します。
+ *     この関数の引数として、押されたボタンのインデックス値が渡されます。
+ *     もしダイアログがキャンセルされた場合には-1が渡されます。
+ *   [/ja]
  * @description 
- *   [en]Display a dialog to ask the user for confirmation. The default button labels are "Cancel" and "OK" but they can be customized. Must specify either message or messageHTML.[/en]
- *   [ja][/ja]
+ *   [en]
+ *     Display a dialog to ask the user for confirmation.
+ *     The default button labels are "Cancel" and "OK" but they can be customized.
+ *     Must specify either message or messageHTML.
+ *   [/en]
+ *   [ja]
+ *     ユーザに確認を促すダイアログを表示します。
+ *     デオルとのボタンラベルは、"Cancel"と"OK"ですが、これはこのメソッドの引数でカスタマイズできます。
+ *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
+ *   [/ja]
  */
 
 /**
@@ -120,37 +143,49 @@ limitations under the License.
  * @signature prompt(options)
  * @param {Object} options
  *   [en]Parameter object.[/en]
- *   [ja][/ja]
+ *   [ja]オプションを指定するオブジェクトです。[/ja]
  * @param {String} [options.message]
  *   [en]Prompt question.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログに表示するメッセージを指定します。[/ja]
  * @param {String} [options.messageHTML]
  *   [en]Dialog content in HTML.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログに表示するHTMLを指定します。[/ja]
  * @param {Array} [options.buttonLabels]
  *   [en]Labels for the buttons. Default is "Cancel" and "OK".[/en]
- *   [ja][/ja]
+ *   [ja]ボタンのラベルの配列を指定します。デフォルトは ["Cancel", "OK"] です。[/ja]
  * @param {Number} [options.primaryButtonIndex]
  *   [en]Index of primary button. Default is 1.[/en]
- *   [ja][/ja]
+ *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]
  * @param {Boolean} [options.cancelable]
  *   [en]Whether the dialog is cancelable or not. Default is false.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログがキャンセル可能かどうかを指定します。デフォルトは false です。[/ja]
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
- *   [ja][/ja]
+ *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
  * @param {String} [options.title]
  *   [en]Dialog title. Default is "Alert".[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログのタイトルを指定します。デフォルトは "Alert" です。[/ja]
  * @param {String} [options.modifier]
  *   [en]Modifier for the dialog.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログのmodifier属性の値を指定します。[/ja]
  * @param {Function} [options.callback]
- *   [en]Function that executes after the dialog has been closed. Argument for the function is the value of the input field or null if the dialog was canceled.[/en]
- *   [ja][/ja]
+ *   [en]
+ *     Function that executes after the dialog has been closed.
+ *     Argument for the function is the value of the input field or null if the dialog was canceled.
+ *   [/en]
+ *   [ja]
+ *     ダイアログが閉じられた後に実行される関数オブジェクトを指定します。
+ *     関数の引数として、インプット要素の中の値が渡されます。ダイアログがキャンセルされた場合には、nullが渡されます。
+ *   [/ja]
  * @description 
- *   [en]Display a dialog with a prompt to ask the user a question. Must specify either message or messageHTML.[/en]
- *   [ja][/ja]
+ *   [en]
+ *     Display a dialog with a prompt to ask the user a question. 
+ *     Must specify either message or messageHTML.
+ *   [/en]
+ *   [ja]
+ *     ユーザーに入力を促すダイアログを表示します。
+ *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
+ *   [/ja]
  */
 
 window.ons.notification = (function() {

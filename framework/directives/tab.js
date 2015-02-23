@@ -5,13 +5,26 @@
  * @category tabbar
  * @description
  *   [en]Represents a tab inside tabbar. Each ons-tab represents a page.[/en]
- *   [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。[/ja]
+ *   [ja]
+ *     タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。
+ *     ons-tab要素の中には、タブに表示されるコンテンツを直接記述することが出来ます。
+ *   [/ja]
  * @codepen pGuDL
- * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
- * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
- * @seealso ons-tabbar [en]ons-tabbar component[/en][ja]ons-tabbarコンポーネント[/ja]
- * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
- * @seealso ons-icon [en]ons-icon component[/en][ja]ons-iconコンポーネント[/ja]
+ * @guide UsingTabBar
+ *   [en]Using tab bar[/en]
+ *   [ja]タブバーを使う[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML
+ *   [en]Defining multiple pages in single html[/en]
+ *   [ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-tabbar
+ *   [en]ons-tabbar component[/en]
+ *   [ja]ons-tabbarコンポーネント[/ja]
+ * @seealso ons-page
+ *   [en]ons-page component[/en]
+ *   [ja]ons-pageコンポーネント[/ja]
+ * @seealso ons-icon
+ *   [en]ons-icon component[/en]
+ *   [ja]ons-iconコンポーネント[/ja]
  * @example
  * <ons-tabbar>
  *   <ons-tab page="home.html" active="true">
@@ -55,8 +68,14 @@
  * @name icon
  * @type {String}
  * @description
- *   [en]The icon name for the tab. Can specify the same icon name as ons-icon. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.[/en]
- *   [ja]アイコン名を指定します。ons-iconと同じアイコン名を指定できます。個別にアイコンをカスタマイズする場合は、background-imageなどのCSSスタイルを用いて指定できます。[/ja]
+ *   [en]
+ *     The icon name for the tab. Can specify the same icon name as ons-icon.
+ *     If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.
+ *   [/en]
+ *   [ja]
+ *     アイコン名を指定します。ons-iconと同じアイコン名を指定できます。
+ *     個別にアイコンをカスタマイズする場合は、background-imageなどのCSSスタイルを用いて指定できます。
+ *   [/ja]
  */
 
 /**
@@ -99,8 +118,15 @@
  * @ngdoc attribute
  * @name persistent
  * @description
- *   [en]Set to make the tab content persistent. If this attribute it set the DOM will not be destroyed when navigating to another tab.[/en]
- *   [ja]このタブで読み込んだページを永続化します。この属性があるとき、別のタブのページに切り替えても、読み込んだページのDOM要素は破棄されずに単に非表示になります。[/ja]
+ *   [en]
+ *     Set to make the tab content persistent.
+ *     If this attribute it set the DOM will not be destroyed when navigating to another tab.
+ *   [/en]
+ *   [ja]
+ *     このタブで読み込んだページを永続化します。
+ *     この属性があるとき、別のタブのページに切り替えても、
+ *     読み込んだページのDOM要素は破棄されずに単に非表示になります。
+ *   [/ja]
  */
 
 (function() {

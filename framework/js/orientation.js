@@ -21,7 +21,7 @@ limitations under the License.
  * @category util
  * @description 
  *   [en]Utility methods for orientation detection.[/en]
- *   [ja][/ja]
+ *   [ja]画面のオリエンテーション検知のためのユーティリティメソッドを収めているオブジェクトです。[/ja]
  */
 
 /**
@@ -29,11 +29,13 @@ limitations under the License.
  * @name change
  * @description
  *   [en]Fired when the device orientation changes.[/en]
- *   [ja][/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [ja]デバイスのオリエンテーションが変化した際に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクトです。[/ja]
  * @param {Boolean} event.isPortrait
  *   [en]Will be true if the current orientation is portrait mode.[/en]
- *   [ja][/ja]
+ *   [ja]現在のオリエンテーションがportraitの場合にtrueを返します。[/ja]
  */
 
 /**
@@ -41,10 +43,10 @@ limitations under the License.
  * @signature isPortrait()
  * @return {Boolean}
  *   [en]Will be true if the current orientation is portrait mode.[/en]
- *   [ja][/ja]
+ *   [ja]オリエンテーションがportraitモードの場合にtrueになります。[/ja]
  * @description 
  *   [en]Returns whether the current screen orientation is portrait or not.[/en]
- *   [ja][/ja]
+ *   [ja]オリエンテーションがportraitモードかどうかを返します。[/ja]
  */
 
 /**
@@ -52,10 +54,10 @@ limitations under the License.
  * @signature isLandscape()
  * @return {Boolean}
  *   [en]Will be true if the current orientation is landscape mode.[/en]
- *   [ja][/ja]
+ *   [ja]オリエンテーションがlandscapeモードの場合にtrueになります。[/ja]
  * @description 
  *   [en]Returns whether the current screen orientation is landscape or not.[/en]
- *   [ja][/ja]
+ *   [ja]オリエンテーションがlandscapeモードかどうかを返します。[/ja]
  */
 
 /**
@@ -66,10 +68,10 @@ limitations under the License.
  *   [ja]イベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 /**
@@ -77,13 +79,13 @@ limitations under the License.
  * @signature once(eventName, listener)
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
- *  [ja][/ja]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 /**
@@ -91,13 +93,13 @@ limitations under the License.
  * @signature off(eventName, [listener])
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
- *  [ja][/ja]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]削除するイベントリスナーを指定します。[/ja]
  */
 
 window.ons.orientation = (function() {
