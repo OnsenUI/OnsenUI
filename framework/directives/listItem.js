@@ -5,16 +5,22 @@
  * @category list
  * @modifier tappable
  *   [en]Made the list item change appearance when it's tapped.[/en]
- *   [ja][/ja]
+ *   [ja]タップやクリックした時に効果が表示されるようになります。[/ja]
  * @modifier chevron
  *   [en]Display a chevron at the right end of the list item and make it change appearance when tapped.[/en]
- *   [ja][/ja]
+ *   [ja]要素の右側に右矢印が表示されます。また、タップやクリックした時に効果が表示されるようになります。[/ja]
  * @description
  *   [en]Component that represents each item in the list. Must be put inside the ons-list component.[/en]
- *   [ja]リストの各要素を表現するためのコンポーネント。ons-listコンポーネントと共に使用します。[/ja]
- * @seealso ons-list [en]ons-list component[/en][ja]ons-listコンポーネント[/ja]
- * @seealso ons-list-header [en]ons-list-header component[/en][ja]ons-list-headerコンポーネント[/ja]
- * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
+ *   [ja]リストの各要素を表現するためのコンポーネントです。ons-listコンポーネントと共に使用します。[/ja]
+ * @seealso ons-list
+ *   [en]ons-list component[/en]
+ *   [ja]ons-listコンポーネント[/ja]
+ * @seealso ons-list-header
+ *   [en]ons-list-header component[/en]
+ *   [ja]ons-list-headerコンポーネント[/ja]
+ * @guide UsingList 
+ *   [en]Using lists[/en]
+ *   [ja]リストを使う[/ja]
  * @codepen yxcCt
  * @example
  * <ons-list>

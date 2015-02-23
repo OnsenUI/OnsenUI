@@ -5,18 +5,24 @@
  * @category toolbar
  * @modifier transparent
  *   [en]Transparent toolbar[/en]
- *   [ja][/ja]
+ *   [ja]透明な背景を持つツールバーを表示します。[/ja]
  * @modifier android
  *   [en]Android style toolbar. Title is left-aligned.[/en]
- *   [ja][/ja]
+ *   [ja]Androidライクなツールバーを表示します。タイトルが左に寄ります。[/ja]
  * @description
  *   [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]
  *   [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
- * @seealso ons-bottom-toolbar [en]ons-bottom-toolbar component[/en][ja]ons-bottom-toolbarコンポーネント[/ja]
- * @seealso ons-back-button [en]ons-back-button component[/en][ja]ons-back-buttonコンポーネント[/ja]
- * @seealso ons-toolbar-button [en]ons-toolbar-button component[/en][ja]ons-toolbar-buttonコンポーネント[/ja]
+ * @seealso ons-bottom-toolbar
+ *   [en]ons-bottom-toolbar component[/en]
+ *   [ja]ons-bottom-toolbarコンポーネント[/ja]
+ * @seealso ons-back-button
+ *   [en]ons-back-button component[/en]
+ *   [ja]ons-back-buttonコンポーネント[/ja]
+ * @seealso ons-toolbar-button
+ *   [en]ons-toolbar-button component[/en]
+ *   [ja]ons-toolbar-buttonコンポーネント[/ja]
  * @example
  * <ons-page>
  *   <ons-toolbar>
@@ -56,8 +62,14 @@
  * @ngdoc attribute
  * @name fixed-style
  * @description
- *   [en]By default the center element will be left-aligned on Android and center-aligned on iOS. Use this attribute to override this behavior so it's always displayed in the center.[/en]
- *   [ja]中央揃え要素は、デフォルトとしてAndroidでは左配置、iOSでは中央配置です。この属性を使用すると、要素はAndroidとiOSともに中央配置となります。[/ja]
+ *   [en]
+ *     By default the center element will be left-aligned on Android and center-aligned on iOS.
+ *     Use this attribute to override this behavior so it's always displayed in the center.
+ *   [/en]
+ *   [ja]
+ *     このコンポーネントは、Androidではタイトルを左寄せ、iOSでは中央配置します。
+ *     この属性を使用すると、要素はAndroidとiOSともに中央配置となります。
+ *   [/ja]
  */
 
 (function() {

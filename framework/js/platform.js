@@ -21,7 +21,7 @@ limitations under the License.
  * @category util
  * @description 
  *   [en]Utility methods to detect current platform.[/en]
- *   [ja][/ja]
+ *   [ja]現在実行されているプラットフォームを検知するためのユーティリティメソッドを収めたオブジェクトです。[/ja]
  */
 
 /**
@@ -29,7 +29,7 @@ limitations under the License.
  * @signature isWebView()
  * @description 
  *   [en]Returns whether app is running in Cordova.[/en]
- *   [ja][/ja]
+ *   [ja]Cordova内で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 
@@ -38,7 +38,7 @@ limitations under the License.
  * @signature isIOS()
  * @description 
  *   [en]Returns whether the OS is iOS.[/en]
- *   [ja][/ja]
+ *   [ja]iOS上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 
@@ -47,7 +47,7 @@ limitations under the License.
  * @signature isAndroid()
  * @description 
  *   [en]Returns whether the OS is Android.[/en]
- *   [ja][/ja]
+ *   [ja]Android上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 
@@ -56,7 +56,7 @@ limitations under the License.
  * @signature isIPhone()
  * @description 
  *   [en]Returns whether the device is iPhone.[/en]
- *   [ja][/ja]
+ *   [ja]iPhone上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 
@@ -65,7 +65,7 @@ limitations under the License.
  * @signature isIPad()
  * @description 
  *   [en]Returns whether the device is iPad.[/en]
- *   [ja][/ja]
+ *   [ja]iPad上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 
@@ -74,7 +74,7 @@ limitations under the License.
  * @signature isBlackBerry()
  * @description 
  *   [en]Returns whether the device is BlackBerry.[/en]
- *   [ja][/ja]
+ *   [ja]BlackBerry上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 
@@ -83,7 +83,7 @@ limitations under the License.
  * @signature isOpera()
  * @description 
  *   [en]Returns whether the browser is Opera.[/en]
- *   [ja][/ja]
+ *   [ja]Opera上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 
@@ -92,7 +92,7 @@ limitations under the License.
  * @signature isFirefox()
  * @description 
  *   [en]Returns whether the browser is Firefox.[/en]
- *   [ja][/ja]
+ *   [ja]Firefox上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 
@@ -101,7 +101,7 @@ limitations under the License.
  * @signature isSafari()
  * @description 
  *   [en]Returns whether the browser is Safari.[/en]
- *   [ja][/ja]
+ *   [ja]Safari上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 
@@ -110,7 +110,7 @@ limitations under the License.
  * @signature isChrome()
  * @description 
  *   [en]Returns whether the browser is Chrome.[/en]
- *   [ja][/ja]
+ *   [ja]Chrome上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 
@@ -119,7 +119,7 @@ limitations under the License.
  * @signature isIE()
  * @description 
  *   [en]Returns whether the browser is Internet Explorer.[/en]
- *   [ja][/ja]
+ *   [ja]Internet Explorer上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 
@@ -128,7 +128,7 @@ limitations under the License.
  * @signature isIOS7above()
  * @description 
  *   [en]Returns whether the iOS version is 7 or above.[/en]
- *   [ja][/ja]
+ *   [ja]iOS7以上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 

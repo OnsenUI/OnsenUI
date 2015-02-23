@@ -623,6 +623,12 @@ limitations under the License.
         }.bind(this), instant);
       },
 
+      /**
+       * Open sliding-menu page.
+       *
+       * @param {Object} [options]
+       * @param {Function} [options.callback]
+       */
       openMenu: function() {
         return this.open.apply(this, arguments);
       },
@@ -630,7 +636,8 @@ limitations under the License.
       /**
        * Open sliding-menu page.
        *
-       * @param {Object} options 
+       * @param {Object} [options]
+       * @param {Function} [options.callback]
        */
       open: function(options) {
         options = options || {};
@@ -662,6 +669,8 @@ limitations under the License.
 
       /**
        * Toggle sliding-menu page.
+       * @param {Object} [options]
+       * @param {Function} [options.callback]
        */
       toggle: function(options) {
         if (this._logic.isClosed()) {

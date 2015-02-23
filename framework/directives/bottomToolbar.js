@@ -5,10 +5,10 @@
  * @category toolbar
  * @description
  *   [en]Toolbar component that is positioned at the bottom of the page.[/en]
- *   [ja]ページ下部に配置されるツールバー用コンポーネント。[/ja]
+ *   [ja]ページ下部に配置されるツールバー用コンポーネントです。[/ja]
  * @modifier transparent
  *   [en]Make the toolbar transparent.[/en]
- *   [ja]ツールバーの背景を透明にする。[/ja]
+ *   [ja]ツールバーの背景を透明にして表示します。[/ja]
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
  * @guide Addingatoolbar
  *   [en]Adding a toolbar[/en]
@@ -25,7 +25,7 @@
  * @type {String}
  * @description
  *   [en]The appearance of the toolbar.[/en]
- *   [ja]ツールバーの見た目の表現を指定する。[/ja]
+ *   [ja]ツールバーの見た目の表現を指定します。[/ja]
  */
 
 /**
@@ -33,7 +33,7 @@
  * @name inline
  * @description
  *   [en]Display the toolbar as an inline element.[/en]
- *   [ja]ツールバーをインラインに置く。スクロール領域内にそのままツールバーが表示される。[/ja]
+ *   [ja]この属性があると、ツールバーを画面下部ではなくスクロール領域内にそのまま表示します。[/ja]
  */
 
 (function(){

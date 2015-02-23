@@ -6,10 +6,10 @@
  * @category alert
  * @modifier android
  *   [en]Display an Android style alert dialog.[/en]
- *   [ja]Androidライクなスタイルを表示する。[/ja]
+ *   [ja]Androidライクなスタイルを表示します。[/ja]
  * @description
  *   [en]Alert dialog that is displayed on top of the current screen.[/en]
- *   [ja]現在のスクリーンにアラートダイアログを表示する。[/ja]
+ *   [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
  * @codepen Qwwxyp
  * @guide UsingAlert
  *   [en]Learn how to use the alert dialog.[/en]
@@ -22,7 +22,7 @@
  *   [ja]ons-dialogコンポーネント[/ja]
  * @seealso ons.notification
  *   [en]Using ons.notification utility functions.[/en]
- *   [ja]アラートダイアログを表示するには、ons.notificationオブジェクトのメソッドを使うこともできる。[/ja]
+ *   [ja]アラートダイアログを表示するには、ons.notificationオブジェクトのメソッドを使うこともできます。[/ja]
  * @example
  * <script>
  *   ons.ready(function() {
@@ -50,14 +50,14 @@
  * @name preshow
  * @description
  *   [en]Fired just before the alert dialog is displayed.[/en]
- *   [ja]アラートダイアログが表示される直前に発火する。[/ja]
+ *   [ja]アラートダイアログが表示される直前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.alertDialog
  *   [en]Alert dialog object.[/en]
  *   [ja]アラートダイアログのオブジェクト。[/ja]
  * @param {Function} event.cancel
  *   [en]Execute to stop the dialog from shoring.[/en]
- *   [ja]この関数を実行すると、アラートダイアログの表示を止める。[/ja]
+ *   [ja]この関数を実行すると、アラートダイアログの表示を止めます。[/ja]
  */
 
 /**
@@ -65,7 +65,7 @@
  * @name postshow
  * @description
  *   [en]Fired just after the alert dialog is displayed.[/en]
- *   [ja]アラートダイアログが表示された直後に発火する。[/ja]
+ *   [ja]アラートダイアログが表示された直後に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.alertDialog
  *   [en]Alert dialog object.[/en]
@@ -77,14 +77,14 @@
  * @name prehide
  * @description
  *   [en]Fired just before the alert dialog is hidden.[/en]
- *   [ja]アラートダイアログが隠れる直前に発火する。[/ja]
+ *   [ja]アラートダイアログが隠れる直前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.alertDialog
  *   [en]Alert dialog object.[/en]
  *   [ja]アラートダイアログのオブジェクト。[/ja]
  * @param {Function} event.cancel
  *   [en]Execute to stop the dialog from hiding.[/en]
- *   [ja]この関数を実行すると、アラートダイアログが閉じようとするのを止める。[/ja]
+ *   [ja]この関数を実行すると、アラートダイアログが閉じようとするのを止めます。[/ja]
  */
 
 /**
@@ -92,7 +92,7 @@
  * @name posthide
  * @description
  * [en]Fired just after the alert dialog is hidden.[/en]
- * [ja]アラートダイアログが隠れた後に発火する。[/ja]
+ * [ja]アラートダイアログが隠れた後に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.alertDialog
  *   [en]Alert dialog object.[/en]
@@ -105,7 +105,7 @@
  * @type {String}
  * @description
  *  [en]Variable name to refer this alert dialog.[/en]
- *  [ja]このアラートダイアログを参照するための名前を指定する。[/ja]
+ *  [ja]このアラートダイアログを参照するための名前を指定します。[/ja]
  */
 
 /**
@@ -114,7 +114,7 @@
  * @type {String}
  * @description
  *  [en]The appearance of the dialog.[/en]
- *  [ja]ダイアログの見た目を指定する。[/ja]
+ *  [ja]ダイアログの見た目を指定します。[/ja]
  */
 
 /**
@@ -122,7 +122,7 @@
  * @name cancelable
  * @description
  *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en]
- *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じる。[/ja]
+ *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
  */
 
 /**
@@ -130,7 +130,7 @@
  * @name disabled
  * @description
  *  [en]If this attribute is set the dialog is disabled.[/en]
- *  [ja]この属性がある時、アラートダイアログはdisabled状態になる。[/ja]
+ *  [ja]この属性がある時、アラートダイアログはdisabled状態になります。[/ja]
  */
 
 /**
@@ -140,7 +140,7 @@
  * @default default
  * @description
  *  [en]The animation used when showing and hiding the dialog. Can be either "none" or "default".[/en]
- *  [ja]ダイアログを表示する際のアニメーション名を指定します。デフォルトでは"none"か"default"が指定できる。[/ja]
+ *  [ja]ダイアログを表示する際のアニメーション名を指定します。デフォルトでは"none"か"default"が指定できます。[/ja]
  */
 
 /**
@@ -150,7 +150,7 @@
  * @default rgba(0, 0, 0, 0.2)
  * @description
  *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
- *  [ja]背景のマスクの色を指定する。デフォルトは"rgba(0, 0, 0, 0.2)"。[/ja]
+ *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
  */
 
 /**
@@ -161,13 +161,13 @@
  *   [ja]オプションを指定するオブジェクトです。[/ja]
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "fade", "slide" and "none".[/en]
- *   [ja]アニメーション名を指定する。指定できるのは、"fade", "slide"もしくは"none"。[/ja]
+ *   [ja]アニメーション名を指定します。指定できるのは、"fade", "slide", "none"のいずれかです。[/ja]
  * @param {Function} [options.callback]
  *   [en]Function to execute after the dialog has been revealed.[/en]
- *   [ja]ダイアログが表示され終わった時に呼び出されるコールバックを指定する。[/ja]
+ *   [ja]ダイアログが表示され終わった時に呼び出されるコールバックを指定します。[/ja]
  * @description
  *   [en]Show the alert dialog.[/en]
- *   [ja]ダイアログを開く。[/ja]
+ *   [ja]ダイアログを表示します。[/ja]
  */
 
 /**
@@ -178,13 +178,13 @@
  *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "fade", "slide" and "none".[/en]
- *   [ja]アニメーション名を指定する。指定できるのは、"fade", "slide", "none"のいずれか。[/ja]
+ *   [ja]アニメーション名を指定します。"fade", "slide", "none"のいずれかを指定します。[/ja]
  * @param {Function} [options.callback]
  *   [en]Function to execute after the dialog has been hidden.[/en]
- *   [ja]このダイアログが閉じた時に呼び出されるコールバックを指定する。[/ja]
+ *   [ja]このダイアログが閉じた時に呼び出されるコールバックを指定します。[/ja]
  * @description
  *   [en]Hide the alert dialog.[/en]
- *   [ja]ダイアログを閉じる。[/ja]
+ *   [ja]ダイアログを閉じます。[/ja]
  */
 
 /**
@@ -192,10 +192,10 @@
  * @signature isShown()
  * @description
  *   [en]Returns whether the dialog is visible or not.[/en]
- *   [ja]ダイアログが表示されているかどうかを返す。[/ja]
+ *   [ja]ダイアログが表示されているかどうかを返します。[/ja]
  * @return {Boolean}
  *   [en]Will be true if the dialog is currently visible.[/en]
- *   [ja]ダイアログが表示されていればtrueを返す。[/ja]
+ *   [ja]ダイアログが表示されていればtrueを返します。[/ja]
  */
 
 /**
@@ -203,7 +203,7 @@
  * @signature destroy()
  * @description
  *   [en]Destroy the alert dialog and remove it from the DOM tree.[/en]
- *   [ja]ダイアログを破棄して、DOMツリーから取り除く。[/ja]
+ *   [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
  */
 
 /**
@@ -211,10 +211,10 @@
  * @signature setCancelable(cancelable)
  * @description
  *   [en]Define whether the dialog can be canceled by the user or not.[/en]
- *   [ja]アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定する。[/ja]
+ *   [ja]アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
  * @param {Boolean} cancelable
  *   [en]If true the dialog will be cancelable.[/en]
- *   [ja]キャンセルできるかどうかを真偽値で指定する。[/ja]
+ *   [ja]キャンセルできるかどうかを真偽値で指定します。[/ja]
  */
 
 /**
@@ -222,10 +222,10 @@
  * @signature isCancelable()
  * @description
  *   [en]Returns whether the dialog is cancelable or not.[/en]
- *   [ja]このアラートダイアログがキャンセル可能かどうかを返す。[/ja]
+ *   [ja]このアラートダイアログがキャンセル可能かどうかを返します。[/ja]
  * @return {Boolean}
  *   [en]Will be true if the dialog is cancelable.[/en]
- *   [ja]キャンセル可能であればtrueを返す。[/ja]
+ *   [ja]キャンセル可能であればtrueを返します。[/ja]
  */
 
 /**
@@ -233,10 +233,10 @@
  * @signature setDisabled(disabled)
  * @description
  *   [en]Disable or enable the alert dialog.[/en]
- *   [ja]このアラートダイアログをdisabled状態にするかどうかを設定する。[/ja]
+ *   [ja]このアラートダイアログをdisabled状態にするかどうかを設定します。[/ja]
  * @param {Boolean} disabled
  *   [en]If true the dialog will be disabled.[/en]
- *   [ja]disabled状態にするかどうかを真偽値で指定する。[/ja]
+ *   [ja]disabled状態にするかどうかを真偽値で指定します。[/ja]
  */
 
 /**
@@ -244,10 +244,10 @@
  * @signature isDisabled()
  * @description
  *   [en]Returns whether the dialog is disabled or enabled.[/en]
- *   [ja]このアラートダイアログがdisabled状態かどうかを返す。[/ja]
+ *   [ja]このアラートダイアログがdisabled状態かどうかを返します。[/ja]
  * @return {Boolean}
  *   [en]Will be true if the dialog is disabled.[/en]
- *   [ja]disabled状態であればtrueを返す。[/ja]
+ *   [ja]disabled状態であればtrueを返します。[/ja]
  */
 
 /**
@@ -255,13 +255,13 @@
  * @signature on(eventName, listener)
  * @description
  *   [en]Add an event listener.[/en]
- *   [ja]イベントリスナーを追加する。[/ja]
+ *   [ja]イベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja]イベント名を指定する。[/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja]イベントが発火された際に呼び出されるコールバックを指定する。[/ja]
+ *   [ja]イベントが発火された際に呼び出されるコールバックを指定します。[/ja]
  */
 
 /**
@@ -269,13 +269,13 @@
  * @signature once(eventName, listener)
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
- *  [ja]一度だけ呼び出されるイベントリスナーを追加する。[/ja]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja]イベント名を指定する。[/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja]イベントが発火した際に呼び出されるコールバックを指定する。[/ja]
+ *   [ja]イベントが発火した際に呼び出されるコールバックを指定します。[/ja]
  */
 
 /**
@@ -283,13 +283,13 @@
  * @signature off(eventName, [listener])
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
- *  [ja]イベントリスナーを削除する。もしlistenerパラメータが指定されなかった場合、そのイベントのリスナーが全て削除される。[/ja]
+ *  [ja]イベントリスナーを削除します。もしlistenerパラメータが指定されなかった場合、そのイベントのリスナーが全て削除されます。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja]イベント名を指定する。[/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja]削除するイベントリスナーの関数オブジェクトを渡す。[/ja]
+ *   [ja]削除するイベントリスナーの関数オブジェクトを渡します。[/ja]
  */
 
 (function() {

@@ -8,7 +8,7 @@
  *   [ja]要素内のジェスチャー操作を検知します。詳しくはガイドを参照してください。[/ja]
  * @guide DetectingFingerGestures
  *   [en]Detecting finger gestures[/en]
- *   [ja]ジェスチャー操作を検知する[/ja]
+ *   [ja]ジェスチャー操作の検知[/ja]
  * @example
  * <ons-gesture-detector>
  *   ...

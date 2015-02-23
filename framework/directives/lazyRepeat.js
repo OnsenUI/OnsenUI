@@ -5,8 +5,16 @@
  * @category control
  * @category list
  * @description 
- *   [en]Using this component a list with millions of items can be rendered without a drop in performance. It does that by "lazily" loading elements into the DOM when they come into view and removing items from the DOM when they are not visible.[/en]
- *   [ja]このコンポーネント内で描画されるアイテムのDOM要素の読み込みは、画面に見えそうになった時まで自動的に遅延され、画面から見えなくなった場合にはその要素は動的にアンロードされます。このコンポーネントを使うことで、パフォーマンスを劣化させること無しに巨大な数の要素を描画できます。[/ja]
+ *   [en]
+ *     Using this component a list with millions of items can be rendered without a drop in performance.
+ *     It does that by "lazily" loading elements into the DOM when they come into view and
+ *     removing items from the DOM when they are not visible.
+ *   [/en]
+ *   [ja]
+ *     このコンポーネント内で描画されるアイテムのDOM要素の読み込みは、画面に見えそうになった時まで自動的に遅延され、
+ *     画面から見えなくなった場合にはその要素は動的にアンロードされます。
+ *     このコンポーネントを使うことで、パフォーマンスを劣化させること無しに巨大な数の要素を描画できます。
+ *   [/ja]
  * @example
  * <script>
  *   ons.bootstrap()
