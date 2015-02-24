@@ -18,8 +18,8 @@ docCategory: 'js'
 
   <h2>{$ doc.name $}</h2>
 
-  <section class="description">
-    <p>{$ doc.description | lang | e $}</p>
+  <section class="reference-description">
+    <p>{$ doc.description | lang $}</p>
   </section>
 
   <ul class="reference-quick-navi">
@@ -49,7 +49,7 @@ docCategory: 'js'
   {% endif %}
 
   {% if doc.note %}
-  <section class="note">
+  <section class="reference-note">
     <p>{% if lang == "en" %}Note{% else %}注意{% endif %}: {$ doc.note | lang $}</p>
   </section>
   {% endif %}
@@ -59,6 +59,7 @@ docCategory: 'js'
     {% if lang == "en" %}See also{% else %}関連情報{% endif %}
     <a href="#seealso" class="reference-loop-anchor">#</a>
   </h3>
+
   <ul class="seealso">
     {% if doc.guides %}
       {% for guide in doc.guides %}
@@ -96,7 +97,7 @@ docCategory: 'js'
         {% for method in doc.methods %}
         <tr>
           <td><a href="#method-{$ method.name $}">{$ method.signature | e $}</a></td>
-          <td>{$ method.description | lang | e $}</td>
+          <td>{$ method.description | lang $}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -128,7 +129,7 @@ docCategory: 'js'
         {% for event in doc.events %}
         <tr>
           <td><a href="#event-{$ event.name $}">{$ event.name | e $}</a></td>
-          <td>{$ event.description | lang | e $}</td>
+          <td>{$ event.description | lang $}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -148,10 +149,10 @@ docCategory: 'js'
       <a href="#method-{$ method.name $}" class="reference-loop-anchor">#</a>
     </h4>
 
-    <p>{$ method.description | lang | e $}</p>
+    <p>{$ method.description | lang $}</p>
 
     {% if method.returns and method.returns.description %}
-    <p>{% if lang == "en" %}Returns{% else %}返り値{% endif %}: {$ method.returns.description | lang | e $}</p>
+    <p>{% if lang == "en" %}Returns{% else %}返り値{% endif %}: {$ method.returns.description | lang $}</p>
     {% endif %}
 
     {% if method.params %}
@@ -177,7 +178,7 @@ docCategory: 'js'
         <tr>
           <td><span class="parameter-name">{$ param.name | e $}</span></td>
           <td class="value-type">{$ param.typeExpression | e $}</td>
-          <td>{$ param.description | lang | e $}</td>
+          <td>{$ param.description | lang $}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -201,7 +202,7 @@ docCategory: 'js'
       <a href="#event-{$ event.name $}" class="reference-loop-anchor">#</a>
     </h4>
 
-    <p>{$ event.description | lang | e $}</p>
+    <p>{$ event.description | lang $}</p>
 
     <h5>{% if lang == "en" %}Parameters{% else %}パラメーター{% endif %}</h5>
 
@@ -224,7 +225,7 @@ docCategory: 'js'
         <tr>
           <td><span class="parameter-name">{$ param.name | e $}</span></td>
           <td class="value-type">{$ param.typeExpression | e $}</td>
-          <td>{$ param.description | lang | e $}</td>
+          <td>{$ param.description | lang $}</td>
         </tr>
         {% endfor %}
       </tbody>
