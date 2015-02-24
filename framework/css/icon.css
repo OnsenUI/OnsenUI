@@ -36,31 +36,21 @@ ons-icon[spin="true"] {
 }
 
 @-moz-keyframes ons-icon-spin {
-  0% {
-    -moz-transform: rotate(0deg);
-  }
   100% {
-    -moz-transform: rotate(359deg);
+    -moz-transform: rotate3d(0, 0, 1, 360deg);
   }
 }
 
 @-webkit-keyframes ons-icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
   100% {
-    -webkit-transform: rotate(359deg);
+    -webkit-transform: rotate3d(0, 0, 1, 360deg);
   }
 }
 
 @keyframes ons-icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
   100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
+    -webkit-transform: rotate3d(0, 0, 1, 360deg);
+    transform: rotate3d(0, 0, 1, 360deg);
   }
 }
 
