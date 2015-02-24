@@ -19,6 +19,7 @@ limitations under the License.
  * @ngdoc object
  * @name ons.notification
  * @category alert
+ * @codepen Qwwxyp
  * @description 
  *   [en]Utility methods to create different kinds of alert dialogs. There are three methods available: alert, confirm and prompt.[/en]
  *   [ja]いくつかの種類のアラートダイアログを作成するためのユーティリティメソッドを収めたオブジェクトです。[/ja]
