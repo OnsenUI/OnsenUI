@@ -38,6 +38,7 @@ limitations under the License.
         this._itemHeightSum = [];
         this._maxIndex = 0;
 
+        this._doorLock = new DoorLock();
         this._delegate = this._getDelegate();
 
         this._renderedElements = {};
@@ -50,7 +51,7 @@ limitations under the License.
         );
 
         this._scope.$on('$destroy', this._destroy.bind(this));
-        this._render();
+        this._onChange();
       },
 
       _getDelegate: function() {
@@ -264,17 +265,31 @@ limitations under the License.
         scope.$odd = !scope.$even;
       },
 
-      _onScroll: function() {
-        this._render();
+      _onChange: function() {
+        if (this._doorLock._waitList.length > 0) {
+          return;
+        }
+
+        this._doorLock.waitUnlock(function() {
+          var unlock = this._doorLock.lock();
+
+          setTimeout(function() {
+            unlock();
+          }, 200);
+
+          this._render();
+        }.bind(this));
       },
 
       _addEventListeners: function() {
-        this._bindedOnScroll = this._onScroll.bind(this); 
-        $document[0].addEventListener('scroll', this._bindedOnScroll, true);
+        this._bindedOnChange = this._onChange.bind(this); 
+        $document[0].addEventListener('scroll', this._bindedOnChange, true);
+        $document[0].addEventListener('resize', this._bindedOnChange, true);
       },
 
       _removeEventListeners: function() {
-        $document[0].removeEventListener('scroll', this._bindedOnScroll, true);
+        $document[0].removeEventListener('scroll', this._bindedOnChange, true);
+        $document[0].removeEventListener('resize', this._bindedOnChange, true);
       },
       
       _destroy: function() {
