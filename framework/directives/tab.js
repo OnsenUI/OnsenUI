@@ -59,8 +59,8 @@
  * @name page
  * @type {String}
  * @description
- *   [en]The page that this ons-tab points to.[/en]
- *   [ja]ons-tabが参照するページへのURLを指定します。[/ja]
+ *   [en]The page that this <code>&lt;ons-tab&gt;</code> points to.[/en]
+ *   [ja]<code>&lt;ons-tab&gt;</code>が参照するページへのURLを指定します。[/ja]
  */
 
 /**
@@ -69,11 +69,11 @@
  * @type {String}
  * @description
  *   [en]
- *     The icon name for the tab. Can specify the same icon name as ons-icon.
+ *     The icon name for the tab. Can specify the same icon name as <code>&lt;ons-icon&gt;</code>.
  *     If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.
  *   [/en]
  *   [ja]
- *     アイコン名を指定します。ons-iconと同じアイコン名を指定できます。
+ *     アイコン名を指定します。<code>&lt;ons-icon&gt;</code>と同じアイコン名を指定できます。
  *     個別にアイコンをカスタマイズする場合は、background-imageなどのCSSスタイルを用いて指定できます。
  *   [/ja]
  */

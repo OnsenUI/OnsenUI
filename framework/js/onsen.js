@@ -62,7 +62,7 @@ limitations under the License.
 
 /**
  * @ngdoc method
- * @signature enableAutoStatusBarFill()
+ * @signature disableAutoStatusBarFill()
  * @description 
  *   [en]Disable status bar fill feature on iOS7 and above.[/en]
  *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を無効にします。[/ja]

@@ -46,7 +46,7 @@
  * @ngdoc event
  * @name changestate
  * @description
- *   [en]Fired when the state is changed. The state can be either "initial", "preaction" or "action".[en]
+ *   [en]Fired when the state is changed. The state can be either "initial", "preaction" or "action".[/en]
  *   [ja]コンポーネントの状態が変わった場合に発火します。状態は、"initial", "preaction", "action"のいずれかです。[/ja]
  * @param {Object} event
  *   [en]Event object.[/en]
@@ -81,8 +81,8 @@
  * @name ng-action
  * @type {Expression}
  * @description
- *   [en]Use to specify custom behavior when the page is pulled down. A `$done` function is available to tell the component that the action is completed.[/en]
- *   [ja]pull downしたときの振る舞いを指定します。アクションが完了した時には`$done`関数を呼び出します。[/ja]
+ *   [en]Use to specify custom behavior when the page is pulled down. A <code>$done</code> function is available to tell the component that the action is completed.[/en]
+ *   [ja]pull downしたときの振る舞いを指定します。アクションが完了した時には<code>$done</code>関数を呼び出します。[/ja]
  */
 
 /**
@@ -90,8 +90,8 @@
  * @name on-action
  * @type {Expression}
  * @description
- *   [en]Same as `ng-action` but can be used without AngularJS. A function called `done` is available to call when action is complete.[/en]
- *   [ja]ng-actionと同じですが、AngularJS無しで利用する場合に利用できます。アクションが完了した時には`done`関数を呼び出します。[/ja]
+ *   [en]Same as <code>ng-action</code> but can be used without AngularJS. A function called <code>done</code> is available to call when action is complete.[/en]
+ *   [ja]<code>ng-action</code>と同じですが、AngularJS無しで利用する場合に利用できます。アクションが完了した時には<code>done</code>関数を呼び出します。[/ja]
  */
 
 /**

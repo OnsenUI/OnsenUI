@@ -17,9 +17,6 @@ VERSION=$(getVersion $DIR/../package.json)
 DATE=`date +%Y%m%d`
 DESTINATION_DIR=$3
 
-# Remove version suffix.
-VERSION=${VERSION%-*}
-
 BUILD_VERSION="$VERSION-build.$BUILD_NUMBER"
 
 $DIR/bump.sh $BUILD_VERSION
