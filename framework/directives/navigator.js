@@ -145,7 +145,7 @@
  * @ngdoc method
  * @signature pushPage(pageUrl, [options])
  * @param {String} pageUrl
- *   [en]Page URL. Can be either a HTML document or a <ons-template>.[/en]
+ *   [en]Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>.[/en]
  *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
@@ -165,8 +165,10 @@
  * @ngdoc method
  * @signature insertPage(index, pageUrl, [options])
  * @param {Number} index
+ *   [en]The index where it should be inserted.[/en]
+ *   [ja][/ja]
  * @param {String} pageUrl
- *   [en]Page URL. Can be either a HTML document or a <ons-template>.[/en]
+ *   [en]Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>.[/en]
  *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
@@ -197,7 +199,7 @@
  * @ngdoc method
  * @signature resetToPage(pageUrl, [options])
  * @param {String} pageUrl
- *   [en]Page URL. Can be either a HTML document or an <ons-template>.[/en]
+ *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
  *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]

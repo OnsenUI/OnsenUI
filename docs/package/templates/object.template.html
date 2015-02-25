@@ -26,6 +26,9 @@ docCategory: 'js'
     {% if doc.examples[0] %}
     <li><a href="#usage">{$ '[en]Usage[/en][ja]使い方[/ja]' | lang $}</a></li>
     {% endif %}
+    {% if doc.codepen %}
+    <li><a href="#example">{$ '[en]Live Example[/en][ja]実例[/ja]' | lang $}</a></li>
+    {% endif %}
     {% if doc.methods.length > 0 %}
     <li><a href="#methods-summary">{$ '[en]Methods[/en][ja]メソッド[/ja]' | lang $}</a></li>
     {% endif %}
@@ -52,6 +55,25 @@ docCategory: 'js'
   <section class="reference-note">
     <p>{% if lang == "en" %}Note{% else %}注意{% endif %}: {$ doc.note | lang $}</p>
   </section>
+  {% endif %}
+
+  {% if doc.codepen %}
+  <h3 id="example">
+    {% if lang == "en" %}Live Example{% else %}実例{% endif %}
+    <a href="#example" class="reference-loop-anchor">#</a>
+  </h3>
+
+  {% if doc.codepen.isWide %}
+  <div style="height: 480px; width: 100%;" class="codepen-wrapper">
+  {% else %}
+  <div style="height: 480px; width: 320px;" class="codepen-wrapper">
+  {% endif %}
+    <p data-height="480" data-theme-id="11531" data-slug-hash="{$ doc.codepen.id $}" data-default-tab="result" data-user="onsen" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/{$ doc.codepen.id $}/'>Alert, confirm and prompt dialogs</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+  </div>
+
+  <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/{$ doc.codepen.id $}" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
   {% endif %}
 
   {% if doc.guides or doc.seealsos %}

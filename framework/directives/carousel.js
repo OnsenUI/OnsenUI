@@ -25,7 +25,7 @@
  * @ngdoc event
  * @name postchange
  * @description
- * [en]Fired just after the current carousel item has changed..[/en]
+ * [en]Fired just after the current carousel item has changed.[/en]
  * [ja]現在表示しているカルーセルの要素が変わった時に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.carousel
@@ -125,7 +125,7 @@
  * @name auto-scroll-ratio
  * @type {Number}
  * @description
- *    [en]A number between 0.0 and 1.0 that specifies how much the user must drag the carousel in order for it to auto scroll to the next item.[en]
+ *    [en]A number between 0.0 and 1.0 that specifies how much the user must drag the carousel in order for it to auto scroll to the next item.[/en]
  *    [ja]0.0から1.0までの値を指定します。カルーセルの要素をどれぐらいの割合までドラッグすると次の要素に自動的にスクロールするかを指定します。[/ja]
  */
 
@@ -285,7 +285,7 @@
 /**
  * @ngdoc method
  * @signature setOverscrollable(overscrollable)
- * @param {Boolean}
+ * @param {Boolean} overscrollable
  *   [en]If true the carousel will be overscrollable.[/en]
  *   [ja]overscrollできるかどうかを指定します。[/ja]
  * @description
@@ -326,7 +326,7 @@
 /**
  * @ngdoc method
  * @signature setDisabled(disabled)
- * @param {Boolean}
+ * @param {Boolean} disabled
  *   [en]If true the carousel will be disabled.[/en]
  *   [ja]disabled状態にする場合にはtrueを指定します。[/ja]
  * @description

@@ -23,7 +23,7 @@
  * @ngdoc event
  * @name change
  * @description
- *   [en]Fired when the value is changed.[en]
+ *   [en]Fired when the value is changed.[/en]
  *   [ja]ON/OFFが変わった時に発火します。[/ja]
  * @param {Object} event
  *   [en]Event object.[/en]

@@ -176,15 +176,15 @@
  * @type {String}
  * @description
  *   [en]
- *     Specify the collapse behavior. Valid values are portrait, landscape, width ##px or a media query.
+ *     Specify the collapse behavior. Valid values are portrait, landscape, width #px or a media query.
  *     "portrait" or "landscape" means the view will collapse when device is in landscape or portrait orientation.
- *     "width ##px" means the view will collapse when the window width is smaller than the specified ##px.
+ *     "width #px" means the view will collapse when the window width is smaller than the specified #px.
  *     If the value is a media query, the view will collapse when the media query is true.
  *   [/en]
  *   [ja]
- *     左側のページを非表示にする条件を指定します。portrait, landscape、width ##pxもしくはメディアクエリの指定が可能です。
+ *     左側のページを非表示にする条件を指定します。portrait, landscape、width #pxもしくはメディアクエリの指定が可能です。
  *     portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。
- *     width ##pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。
+ *     width #pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。
  *     メディアクエリを指定すると、指定したクエリに適合している場合に適用されます。
  *   [/ja]
  */

@@ -469,13 +469,11 @@ limitations under the License.
           return;
         }
 
-        var direction = event.gesture.direction;
-        if ((this._isVertical() && (direction === 'left' || direction === 'right')) || (!this._isVertical() && (direction === 'up' || direction === 'down'))) {
-          return;
-        }
-
-        event.stopPropagation();
         this._scroll = this._scroll - this._getScrollDelta(event);
+
+        if (this._getScrollDelta(event) !== 0) {
+          event.stopPropagation();
+        }
 
         if (this._isOverScroll(this._scroll)) {
           var waitForAction = false;

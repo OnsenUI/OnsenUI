@@ -182,8 +182,8 @@
  * @ngdoc method
  * @signature loadPage(url)
  * @param {String} url
- *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したid属性の値を利用できます。[/ja]
+ *   [en]Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
+ *   [ja]pageのURLか、もしくは<code>&lt;ons-template&gt;</code>で宣言したid属性の値を利用できます。[/ja]
  * @description
  *   [en]Displays a new page without changing the active index.[/en]
  *   [ja]現在のアクティブなインデックスを変更せずに、新しいページを表示します。[/ja]
