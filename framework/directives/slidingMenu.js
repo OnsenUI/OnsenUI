@@ -153,7 +153,7 @@
  * @ngdoc method
  * @signature setMainPage(pageUrl, [options])
  * @param {String} pageUrl
- *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
+ *   [en]Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
  *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
@@ -173,7 +173,7 @@
  * @ngdoc method
  * @signature setMenuPage(pageUrl, [options])
  * @param {String} pageUrl
- *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
+ *   [en]Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
  *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
