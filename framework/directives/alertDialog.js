@@ -56,7 +56,7 @@
  *   [en]Alert dialog object.[/en]
  *   [ja]アラートダイアログのオブジェクト。[/ja]
  * @param {Function} event.cancel
- *   [en]Execute to stop the dialog from shoring.[/en]
+ *   [en]Execute to stop the dialog from showing.[/en]
  *   [ja]この関数を実行すると、アラートダイアログの表示を止めます。[/ja]
  */
 
