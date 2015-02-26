@@ -25,33 +25,51 @@
  * @ngdoc event
  * @name postchange
  * @description
- * [en]Fired just after the current carousel item has changed.[/en]
- * [ja]現在表示しているカルーセルの要素が変わった時に発火します。[/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fired just after the current carousel item has changed.[/en]
+ *   [ja]現在表示しているカルーセルの要素が変わった時に発火します。[/ja]
+ * @param {Object} event 
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクトです。[/ja]
  * @param {Object} event.carousel
+ *   [en]Carousel object.[/en]
+ *   [ja]イベントが発火したCarouselオブジェクトです。[/ja]
  * @param {Number} event.activeIndex
+ *   [en]Current active index.[/en]
+ *   [ja][/ja]
  * @param {Number} event.lastActiveIndex
+ *   [en]Previous active index.[/en]
+ *   [ja][/ja]
  */
 
 /**
  * @ngdoc event
  * @name refresh
  * @description
- * [en]Fired when the carousel has been refreshed.[/en]
- * [ja]カルーセルが更新された時に発火します。[/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fired when the carousel has been refreshed.[/en]
+ *   [ja]カルーセルが更新された時に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクトです。[/ja]
  * @param {Object} event.carousel
+ *   [en]Carousel object.[/en]
+ *   [ja]イベントが発火したCarouselオブジェクトです。[/ja]
  */
 
 /**
  * @ngdoc event
  * @name overscroll
  * @description
- * [en]Fired when the carousel has been overscrolled.[/en]
- * [ja]カルーセルがオーバースクロールした時に発火します。[/ja]
- * @param {Object} event [en]Event object.[/en]
+ *   [en]Fired when the carousel has been overscrolled.[/en]
+ *   [ja]カルーセルがオーバースクロールした時に発火します。[/ja]
+ * @param {Object} event 
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクトです。[/ja]
  * @param {Object} event.carousel
+ *   [en]Fired when the carousel has been refreshed.[/en]
+ *   [ja]カルーセルが更新された時に発火します。[/ja]
  * @param {Number} event.activeIndex
+ *   [en]Current active index.[/en]
+ *   [ja][/ja]
  * @param {String} event.direction
  *   [en]Can be one of either "up", "down", "left" or "right".[/en]
  *   [ja]オーバースクロールされた方向が得られます。"up", "down", "left", "right"のいずれかの方向が渡されます。[/ja]
