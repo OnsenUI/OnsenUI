@@ -3,7 +3,7 @@
  * @ngdoc directive
  * @id alert-dialog
  * @name ons-alert-dialog
- * @category alert
+ * @category dialog
  * @modifier android
  *   [en]Display an Android style alert dialog.[/en]
  *   [ja]Androidライクなスタイルを表示します。[/ja]

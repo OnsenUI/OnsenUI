@@ -2,7 +2,7 @@
  * @ngdoc directive
  * @id switch
  * @name ons-switch
- * @category switch
+ * @category input
  * @description
  *  [en]Switch component.[/en]
  *  [ja]スイッチを表示するコンポーネントです。[/ja]
