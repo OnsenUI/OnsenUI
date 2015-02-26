@@ -194,7 +194,7 @@
  *   [en]Returns whether the dialog is visible or not.[/en]
  *   [ja]ダイアログが表示されているかどうかを返します。[/ja]
  * @return {Boolean}
- *   [en]Will be true if the dialog is currently visible.[/en]
+ *   [en]true if the dialog is currently visible.[/en]
  *   [ja]ダイアログが表示されていればtrueを返します。[/ja]
  */
 
@@ -224,7 +224,7 @@
  *   [en]Returns whether the dialog is cancelable or not.[/en]
  *   [ja]このアラートダイアログがキャンセル可能かどうかを返します。[/ja]
  * @return {Boolean}
- *   [en]Will be true if the dialog is cancelable.[/en]
+ *   [en]true if the dialog is cancelable.[/en]
  *   [ja]キャンセル可能であればtrueを返します。[/ja]
  */
 
@@ -246,7 +246,7 @@
  *   [en]Returns whether the dialog is disabled or enabled.[/en]
  *   [ja]このアラートダイアログがdisabled状態かどうかを返します。[/ja]
  * @return {Boolean}
- *   [en]Will be true if the dialog is disabled.[/en]
+ *   [en]true if the dialog is disabled.[/en]
  *   [ja]disabled状態であればtrueを返します。[/ja]
  */
 

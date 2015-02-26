@@ -160,7 +160,7 @@
  *   [en]If true the page will not be changed.[/en]
  *   [ja]タブバーが現在表示しているpageを変えない場合にはtrueを指定します。[/ja]
  * @return {Boolean}
- *   [en]Will be true if the change was successful.[/en]
+ *   [en]true if the change was successful.[/en]
  *   [ja]変更が成功した場合にtrueを返します。[/ja]
  * @description
  *   [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
