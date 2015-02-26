@@ -1,21 +1,27 @@
 ---
-page: 'component-detail'
+page: 'reference-detail'
 title: 'ons-list-header'
 name: 'ons-list-header'
 collection: 'components'
 reference: true
+docCategory: 'js'
+componentCategory: list
 ---
-<div class="directive-container" id="list-header">
+<div class="reference-container" id="ons-list-header">
+
+  <div class="reference-github-links">
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/listHeader.js">View Source</a>
+
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/edit/master/framework/directives/listHeader.js">Improve this doc</a>
+  </div>
 
   <h2>ons-list-header</h2>
-
-  <a class="directive-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/listHeader.js">View This Code</a>
 
   <section class="description">
     <p>Header element for list items. Must be put inside ons-list component.</p>
   </section>
 
-  <ul class="directive-quick-navi">
+  <ul class="reference-quick-navi">
     
     <li><a href="#usage">Usage</a></li>
     
@@ -23,16 +29,23 @@ reference: true
     <li><a href="#example">Live Example</a></li>
     
     
+    <li><a href="#attributes">Attributes</a></li>
+    
+    
     
     
     
     <li><a href="#seealso">See Also</a></li>
     
+    <li><a href="#discussion">Discussion</a></li>
   </ul>
 
   
     <section>
-      <h3 id="usage">Usage</h3>
+      <h3 id="usage">
+        Usage
+        <a href="#usage" class="reference-loop-anchor">#</a>
+      </h3>
       <pre><code class="xml">&lt;ons-list&gt;
   &lt;ons-list-header&gt;Header Text&lt;/ons-list-header&gt;
   &lt;ons-list-item&gt;Item&lt;/ons-list-item&gt;
@@ -45,19 +58,27 @@ reference: true
 
   <!-- codepen -->
   
-  <h3 id="example">Live Example</h3>
+  <h3 id="example">
+    Live Example
+    <a href="#example" class="reference-loop-anchor">#</a>
+  </h3>
 
   
   <div style="height: 480px; width: 320px;" class="codepen-wrapper">
   
-    <p data-height="480" data-theme-id="7186" data-slug-hash="yxcCt" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/yxcCt/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    <p data-height="480" data-theme-id="11531" data-slug-hash="yxcCt" data-default-tab="result" data-user="onsen" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/yxcCt/'>Alert, confirm and prompt dialogs</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
   </div>
 
   <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/yxcCt" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
   
 
   
-  <h3 id="seealso">See also</h3>
+  <h3 id="seealso">
+    See also
+    <a href="#seealso" class="reference-loop-anchor">#</a>
+  </h3>
   <ul class="seealso">
     
       
@@ -66,7 +87,8 @@ reference: true
     
     
       
-        <li class="seealso"><a href="ons-list.html">ons-list component</a></li>
+        <li class="seealso"><a href="ons-list
+.html">ons-list component</a></li>
       
         <li class="seealso"><a href="ons-list-item.html">ons-list-item component</a></li>
       
@@ -75,6 +97,45 @@ reference: true
   
 
   <!-- attributes -->
+  
+  <section>
+    <h3 id="attributes">
+      Attributes
+      <a href="#attributes" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type<br>Default Value</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td class="attribute-name" id="ons-list-header-modifier">modifier</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            The appearance of the list header.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+
+  <!-- modifiers -->
   
 
   <!-- methods summary -->
@@ -93,8 +154,27 @@ reference: true
   
   <!-- end events -->
 
+  <!-- disqus -->
+  <h3 id="discussion">
+    Discussion
+    <a href="#discussion" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'onsenui'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <!-- end disqus -->
+
 </div>
 
 <script src="/vendor/highlight.min.js"></script>
-<script src="/scripts/codepen.js"></script>
-

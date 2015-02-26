@@ -1,21 +1,27 @@
 ---
-page: 'component-detail'
+page: 'reference-detail'
 title: 'ons-tabbar'
 name: 'ons-tabbar'
 collection: 'components'
 reference: true
+docCategory: 'js'
+componentCategory: navigation
 ---
-<div class="directive-container" id="tabbar">
+<div class="reference-container" id="ons-tabbar">
+
+  <div class="reference-github-links">
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/tabBar.js">View Source</a>
+
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/edit/master/framework/directives/tabBar.js">Improve this doc</a>
+  </div>
 
   <h2>ons-tabbar</h2>
-
-  <a class="directive-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/tabBar.js">View This Code</a>
 
   <section class="description">
     <p>A component to display a tab bar on the bottom of a page. Used with ons-tab to manage pages using tabs.</p>
   </section>
 
-  <ul class="directive-quick-navi">
+  <ul class="reference-quick-navi">
     
     <li><a href="#usage">Usage</a></li>
     
@@ -23,16 +29,27 @@ reference: true
     <li><a href="#example">Live Example</a></li>
     
     
+    <li><a href="#attributes">Attributes</a></li>
     
+    
+    
+    <li><a href="#methods-summary">Methods</a></li>
+    
+    
+    <li><a href="#events-summary">Events</a></li>
     
     
     <li><a href="#seealso">See Also</a></li>
     
+    <li><a href="#discussion">Discussion</a></li>
   </ul>
 
   
     <section>
-      <h3 id="usage">Usage</h3>
+      <h3 id="usage">
+        Usage
+        <a href="#usage" class="reference-loop-anchor">#</a>
+      </h3>
       <pre><code class="xml">&lt;ons-tabbar&gt;
   &lt;ons-tab page=&quot;home.html&quot; active=&quot;true&quot;&gt;
     &lt;ons-icon icon=&quot;ion-home&quot;&gt;&lt;/ons-icon&gt;
@@ -66,36 +83,50 @@ reference: true
 
   <!-- codepen -->
   
-  <h3 id="example">Live Example</h3>
+  <h3 id="example">
+    Live Example
+    <a href="#example" class="reference-loop-anchor">#</a>
+  </h3>
 
   
   <div style="height: 480px; width: 320px;" class="codepen-wrapper">
   
-    <p data-height="480" data-theme-id="7186" data-slug-hash="pGuDL" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/pGuDL/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    <p data-height="480" data-theme-id="11531" data-slug-hash="pGuDL" data-default-tab="result" data-user="onsen" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/pGuDL/'>Alert, confirm and prompt dialogs</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
   </div>
 
   <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/pGuDL" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
   
 
   
-  <h3 id="seealso">See also</h3>
+  <h3 id="seealso">
+    See also
+    <a href="#seealso" class="reference-loop-anchor">#</a>
+  </h3>
   <ul class="seealso">
     
       
-        <li class="guide"><a href="/guide/overview.html#UsingTabBar">Using tab bar</a></li>
+        <li class="guide"><a href="/guide/overview.html#UsingTabBar
+">Using tab bar</a></li>
       
-        <li class="guide"><a href="/guide/overview.html#EventHandling">Event handling descriptions</a></li>
+        <li class="guide"><a href="/guide/overview.html#EventHandling
+">Event handling descriptions</a></li>
       
-        <li class="guide"><a href="/guide/overview.html#CallingComponentAPIsfromJavaScript">Using navigator from JavaScript</a></li>
+        <li class="guide"><a href="/guide/overview.html#CallingComponentAPIsfromJavaScript
+">Using navigator from JavaScript</a></li>
       
-        <li class="guide"><a href="/guide/overview.html#DefiningMultiplePagesinSingleHTML">Defining multiple pages in single html</a></li>
+        <li class="guide"><a href="/guide/overview.html#DefiningMultiplePagesinSingleHTML
+">Defining multiple pages in single html</a></li>
       
     
     
       
-        <li class="seealso"><a href="ons-tab.html">ons-tab component</a></li>
+        <li class="seealso"><a href="ons-tab
+.html">ons-tab component</a></li>
       
-        <li class="seealso"><a href="ons-page.html">ons-page component</a></li>
+        <li class="seealso"><a href="ons-page
+.html">ons-page component</a></li>
       
     
   </ul>
@@ -103,25 +134,605 @@ reference: true
 
   <!-- attributes -->
   
+  <section>
+    <h3 id="attributes">
+      Attributes
+      <a href="#attributes" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type<br>Default Value</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td class="attribute-name" id="ons-tabbar-var">var</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            Variable name to refer this tab bar.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-tabbar-hide-tabs">hide-tabs</td>
+          <td>
+            <span class="value-type">Boolean</span>
+            <br><span class="default-value" style="color: green">false</span>
+          </td>
+          <td>
+            Whether to hide the tabs. Valid values are true/false.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-tabbar-animation">animation</td>
+          <td>
+            <span class="value-type">String</span>
+            <br><span class="default-value" style="color: green">none</span>
+          </td>
+          <td>
+            Animation name. Preset values are "none" and "fade". Default is "none".
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-tabbar-position">position</td>
+          <td>
+            <span class="value-type">String</span>
+            <br><span class="default-value" style="color: green">bottom</span>
+          </td>
+          <td>
+            Tabbar's position. Preset values are "bottom" and "top". Default is "bottom".
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+
+  <!-- modifiers -->
+  
 
   <!-- methods summary -->
+  
+  <section>
+    <h3 id="methods-summary">
+      Methods Summary
+      <a href="#methods-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Signature</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#method-setActiveTab">setActiveTab(index, [options])</a></td>
+          <td>Show specified tab page. Animations and other options can be specified by the second parameter.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-getActiveTabIndex">getActiveTabIndex()</a></td>
+          <td>Returns tab index on current active tab. If active tab is not found, returns -1.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-loadPage">loadPage(url)</a></td>
+          <td>Displays a new page without changing the active index.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-on">on(eventName, listener)</a></td>
+          <td>Add an event listener.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-once">once(eventName, listener)</a></td>
+          <td>Add an event listener that's only triggered once.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-off">off(eventName, [listener])</a></td>
+          <td>Remove an event listener. If the listener is not specified all listeners for the event type will be removed.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
   
   <!-- end methods summary -->
 
   <!-- events summary -->
   
+  <section>
+    <h3 id="events-summary">
+      Events Summary
+      <a href="#events-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#event-prechange">prechange</a></td>
+          <td>Fires just before the tab is changed.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#event-postchange">postchange</a></td>
+          <td>Fires just after the tab is changed.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#event-reactive">reactive</a></td>
+          <td>Fires if the already open tab is tapped again.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
   <!-- end events summary -->
 
   <!-- methods details -->
+  
+  <h3>Methods</h3>
+  
+  <section class="method-detail">
+    <h4 id="method-setActiveTab">
+      setActiveTab(index, [options])<span class="value-type">: Boolean</span>
+
+      <a href="#method-setActiveTab" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Show specified tab page. Animations and other options can be specified by the second parameter.</p>
+
+    
+    <p>Returns: true if the change was successful.</p>
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">index</span></td>
+          <td class="value-type">Number</td>
+          <td>Tab index.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>Parameter object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.keepPage</span></td>
+          <td class="value-type">Boolean</td>
+          <td>If true the page will not be changed.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-getActiveTabIndex">
+      getActiveTabIndex()<span class="value-type">: Number</span>
+
+      <a href="#method-getActiveTabIndex" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Returns tab index on current active tab. If active tab is not found, returns -1.</p>
+
+    
+    <p>Returns: The index of the currently active tab.</p>
+    
+
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-loadPage">
+      loadPage(url)
+
+      <a href="#method-loadPage" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Displays a new page without changing the active index.</p>
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">url</span></td>
+          <td class="value-type">String</td>
+          <td>Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-on">
+      on(eventName, listener)
+
+      <a href="#method-on" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Add an event listener.</p>
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">eventName</span></td>
+          <td class="value-type">String</td>
+          <td>Name of the event.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">listener</span></td>
+          <td class="value-type">Function</td>
+          <td>Function to execute when the event is triggered.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-once">
+      once(eventName, listener)
+
+      <a href="#method-once" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Add an event listener that's only triggered once.</p>
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">eventName</span></td>
+          <td class="value-type">String</td>
+          <td>Name of the event.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">listener</span></td>
+          <td class="value-type">Function</td>
+          <td>Function to execute when the event is triggered.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-off">
+      off(eventName, [listener])
+
+      <a href="#method-off" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Remove an event listener. If the listener is not specified all listeners for the event type will be removed.</p>
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">eventName</span></td>
+          <td class="value-type">String</td>
+          <td>Name of the event.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">listener</span></td>
+          <td class="value-type">Function</td>
+          <td>Function to execute when the event is triggered.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+
   
   <!-- end methods -->
 
   <!-- events -->
   
+  <h3>Events</h3>
+  
+  <section class="event-detail">
+    <h4 id="event-prechange">
+      prechange
+      <a href="#event-prechange" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Fires just before the tab is changed.</p>
+
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td>Event object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.index</span></td>
+          <td class="value-type">Number</td>
+          <td>Current index.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.tabItem</span></td>
+          <td class="value-type">Object</td>
+          <td>Tab item object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.cancel</span></td>
+          <td class="value-type">Function</td>
+          <td>Call this function to cancel the change event.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+  <section class="event-detail">
+    <h4 id="event-postchange">
+      postchange
+      <a href="#event-postchange" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Fires just after the tab is changed.</p>
+
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td>Event object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.index</span></td>
+          <td class="value-type">Number</td>
+          <td>Current index.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.tabItem</span></td>
+          <td class="value-type">Object</td>
+          <td>Tab item object.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+  <section class="event-detail">
+    <h4 id="event-reactive">
+      reactive
+      <a href="#event-reactive" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Fires if the already open tab is tapped again.</p>
+
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td>Event object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.index</span></td>
+          <td class="value-type">Number</td>
+          <td>Current index.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.tabItem</span></td>
+          <td class="value-type">Object</td>
+          <td>Tab item object.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+
+  
   <!-- end events -->
+
+  <!-- disqus -->
+  <h3 id="discussion">
+    Discussion
+    <a href="#discussion" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'onsenui'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <!-- end disqus -->
 
 </div>
 
 <script src="/vendor/highlight.min.js"></script>
-<script src="/scripts/codepen.js"></script>
-

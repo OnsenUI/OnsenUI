@@ -1,38 +1,53 @@
 ---
-page: 'component-detail'
+page: 'reference-detail'
 title: 'ons-toolbar'
 name: 'ons-toolbar'
 collection: 'components'
 reference: true
+docCategory: 'js'
+componentCategory: toolbar
 ---
-<div class="directive-container" id="toolbar">
+<div class="reference-container" id="ons-toolbar">
+
+  <div class="reference-github-links">
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/toolbar.js">View Source</a>
+
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/edit/master/framework/directives/toolbar.js">Improve this doc</a>
+  </div>
 
   <h2>ons-toolbar</h2>
-
-  <a class="directive-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/toolbar.js">View This Code</a>
 
   <section class="description">
     <p>ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。</p>
   </section>
 
-  <ul class="directive-quick-navi">
+  <ul class="reference-quick-navi">
     
-    <li><a href="#usage">Usage</a></li>
-    
-    
-    <li><a href="#example">Live Example</a></li>
+    <li><a href="#usage">使い方</a></li>
     
     
+    <li><a href="#example">実例</a></li>
+    
+    
+    <li><a href="#attributes">属性</a></li>
+    
+    
+    <li><a href="#modifiers">プリセットのmodifier</a></li>
     
     
     
-    <li><a href="#seealso">See Also</a></li>
     
+    <li><a href="#seealso">関連情報</a></li>
+    
+    <li><a href="#discussion">議論</a></li>
   </ul>
 
   
     <section>
-      <h3 id="usage">Usage</h3>
+      <h3 id="usage">
+        使い方
+        <a href="#usage" class="reference-loop-anchor">#</a>
+      </h3>
       <pre><code class="xml">&lt;ons-page&gt;
   &lt;ons-toolbar&gt;
     &lt;div class=&quot;left&quot;&gt;&lt;ons-back-button&gt;Back&lt;/ons-back-button&gt;&lt;/div&gt;
@@ -47,19 +62,27 @@ reference: true
 
   <!-- codepen -->
   
-  <h3 id="example">実例</h3>
+  <h3 id="example">
+    実例
+    <a href="#example" class="reference-loop-anchor">#</a>
+  </h3>
 
   
   <div style="height: 480px; width: 320px;" class="codepen-wrapper">
   
-    <p data-height="480" data-theme-id="7186" data-slug-hash="aHmGL" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/aHmGL/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    <p data-height="480" data-theme-id="11531" data-slug-hash="aHmGL" data-default-tab="result" data-user="onsen" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/aHmGL/'>Alert, confirm and prompt dialogs</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
   </div>
 
   <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/aHmGL" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
   
 
   
-  <h3 id="seealso">関連情報</h3>
+  <h3 id="seealso">
+    関連情報
+    <a href="#seealso" class="reference-loop-anchor">#</a>
+  </h3>
   <ul class="seealso">
     
       
@@ -68,17 +91,137 @@ reference: true
     
     
       
-        <li class="seealso"><a href="ons-bottom-toolbar.html">ons-bottom-toolbarコンポーネント</a></li>
+        <li class="seealso"><a href="ons-bottom-toolbar
+.html">ons-bottom-toolbarコンポーネント</a></li>
       
-        <li class="seealso"><a href="ons-back-button.html">ons-back-buttonコンポーネント</a></li>
+        <li class="seealso"><a href="ons-back-button
+.html">ons-back-buttonコンポーネント</a></li>
       
-        <li class="seealso"><a href="ons-toolbar-button.html">ons-toolbar-buttonコンポーネント</a></li>
+        <li class="seealso"><a href="ons-toolbar-button
+.html">ons-toolbar-buttonコンポーネント</a></li>
       
     
   </ul>
   
 
   <!-- attributes -->
+  
+  <section>
+    <h3 id="attributes">
+      属性
+      <a href="#attributes" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型 / デフォルト値</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td class="attribute-name" id="ons-toolbar-var">var</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            このツールバーを参照するための名前を指定します。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-toolbar-inline">inline</td>
+          <td>
+            
+            
+          </td>
+          <td>
+            ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-toolbar-modifier">modifier</td>
+          <td>
+            
+            
+          </td>
+          <td>
+            ツールバーの表現を指定します。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-toolbar-fixed-style">fixed-style</td>
+          <td>
+            
+            
+          </td>
+          <td>
+            
+    このコンポーネントは、Androidではタイトルを左寄せ、iOSでは中央配置します。
+    この属性を使用すると、要素はAndroidとiOSともに中央配置となります。
+  
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+
+  <!-- modifiers -->
+  
+  <section>
+    <h3 id="modifiers">
+      プリセットのmodifier
+      <a href="#modifiers" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Modifier名</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td class="modifier-name" id="ons-toolbar-transparent">transparent</td>
+          <td>透明な背景を持つツールバーを表示します。</td>
+        </tr>
+        
+        <tr>
+          <td class="modifier-name" id="ons-toolbar-android">android</td>
+          <td>Androidライクなツールバーを表示します。タイトルが左に寄ります。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
   
 
   <!-- methods summary -->
@@ -97,8 +240,27 @@ reference: true
   
   <!-- end events -->
 
+  <!-- disqus -->
+  <h3 id="discussion">
+    議論
+    <a href="#discussion" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'onsenui-ja'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <!-- end disqus -->
+
 </div>
 
 <script src="/vendor/highlight.min.js"></script>
-<script src="/scripts/codepen.js"></script>
-

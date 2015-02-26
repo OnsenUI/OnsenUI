@@ -1,0 +1,664 @@
+---
+page: 'reference-detail'
+title: 'ons'
+name: 'ons'
+collection: 'objects'
+reference: true
+docCategory: 'js'
+componentCategory: util
+---
+
+<div id="ons">
+
+  <div class="reference-github-links">
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/js/onsen.js">View Source</a>
+
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/edit/master/framework/js/onsen.js">Improve this doc</a>
+  </div>
+
+  <h2>ons</h2>
+
+  <section class="reference-description">
+    <p>A global object that's used in Onsen UI. This object can be reached from the AngularJS scope.</p>
+  </section>
+
+  <ul class="reference-quick-navi">
+    
+    
+    
+    <li><a href="#methods-summary">Methods</a></li>
+    
+    
+    
+    <li><a href="#discussion">Discussion</a></li>
+  </ul>
+
+  
+
+  
+
+  
+
+  
+
+  <!-- methods summary -->
+  
+  <section>
+    <h3 id="methods-summary">
+      Methods Summary
+      <a href="#methods-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Signature</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#method-ready">ready(callback)</a></td>
+          <td>Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-bootstrap">bootstrap([moduleName, [dependencies]])</a></td>
+          <td>Initialize Onsen UI. Can be used to load Onsen UI without using the <code>ng-app</code> attribute from AngularJS.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-enableAutoStatusBarFill">enableAutoStatusBarFill()</a></td>
+          <td>Enable status bar fill feature on iOS7 and above.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-disableAutoStatusBarFill">disableAutoStatusBarFill()</a></td>
+          <td>Disable status bar fill feature on iOS7 and above.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-findParentComponentUntil">findParentComponentUntil(name, [dom])</a></td>
+          <td>Find parent component object of <code>dom</code> element.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-findComponent">findComponent(selector, [dom])</a></td>
+          <td>Find component object using CSS selector.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-setDefaultDeviceBackButtonListener">setDefaultDeviceBackButtonListener(listener)</a></td>
+          <td>Set default handler for device back button.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-disableDeviceBackButtonHandler">disableDeviceBackButtonHandler()</a></td>
+          <td>Disable device back button event handler.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-enableDeviceBackButtonHandler">enableDeviceBackButtonHandler()</a></td>
+          <td>Enable device back button event handler.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-isReady">isReady()</a></td>
+          <td>Returns true if Onsen UI is initialized.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-compile">compile(dom)</a></td>
+          <td>Compile Onsen UI components.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-isWebView">isWebView()</a></td>
+          <td>Returns true if running inside Cordova.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-createAlertDialog">createAlertDialog(page)</a></td>
+          <td>Create a alert dialog instance from a template.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-createDialog">createDialog(page)</a></td>
+          <td>Create a dialog instance from a template.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-createPopover">createPopover(page)</a></td>
+          <td>Create a popover instance from a template.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+  <!-- end methods summary -->
+
+  <!-- events summary -->
+  
+  <!-- end events summary -->
+
+  <!-- methods details -->
+  
+  <h3>Methods</h3>
+  
+  <section class="method-detail">
+    <h4 id="method-ready">
+      ready(callback)
+
+      <a href="#method-ready" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized.</p>
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">callback</span></td>
+          <td class="value-type">Function</td>
+          <td>Function that executes after Onsen UI has been initialized.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-bootstrap">
+      bootstrap([moduleName, [dependencies]])<span class="value-type">: Object</span>
+
+      <a href="#method-bootstrap" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Initialize Onsen UI. Can be used to load Onsen UI without using the <code>ng-app</code> attribute from AngularJS.</p>
+
+    
+    <p>Returns: An AngularJS module object.</p>
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">moduleName</span></td>
+          <td class="value-type">String</td>
+          <td>AngularJS module name.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">dependencies</span></td>
+          <td class="value-type">Array</td>
+          <td>List of AngularJS module dependencies.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-enableAutoStatusBarFill">
+      enableAutoStatusBarFill()
+
+      <a href="#method-enableAutoStatusBarFill" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Enable status bar fill feature on iOS7 and above.</p>
+
+    
+
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-disableAutoStatusBarFill">
+      disableAutoStatusBarFill()
+
+      <a href="#method-disableAutoStatusBarFill" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Disable status bar fill feature on iOS7 and above.</p>
+
+    
+
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-findParentComponentUntil">
+      findParentComponentUntil(name, [dom])<span class="value-type">: Object</span>
+
+      <a href="#method-findParentComponentUntil" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Find parent component object of <code>dom</code> element.</p>
+
+    
+    <p>Returns: Component object. Will return null if no component was found.</p>
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">name</span></td>
+          <td class="value-type">String</td>
+          <td>Name of component, i.e. 'ons-page'.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">dom</span></td>
+          <td class="value-type">Object|jqLite|HTMLElement</td>
+          <td>$event, jqLite or HTMLElement object.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-findComponent">
+      findComponent(selector, [dom])<span class="value-type">: Object</span>
+
+      <a href="#method-findComponent" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Find component object using CSS selector.</p>
+
+    
+    <p>Returns: Component object. Will return null if no component was found.</p>
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">selector</span></td>
+          <td class="value-type">String</td>
+          <td>CSS selector</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">dom</span></td>
+          <td class="value-type">HTMLElement</td>
+          <td>DOM element to search from.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-setDefaultDeviceBackButtonListener">
+      setDefaultDeviceBackButtonListener(listener)
+
+      <a href="#method-setDefaultDeviceBackButtonListener" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Set default handler for device back button.</p>
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">listener</span></td>
+          <td class="value-type">Function</td>
+          <td>Function that executes when device back button is pressed.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-disableDeviceBackButtonHandler">
+      disableDeviceBackButtonHandler()
+
+      <a href="#method-disableDeviceBackButtonHandler" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Disable device back button event handler.</p>
+
+    
+
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-enableDeviceBackButtonHandler">
+      enableDeviceBackButtonHandler()
+
+      <a href="#method-enableDeviceBackButtonHandler" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Enable device back button event handler.</p>
+
+    
+
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-isReady">
+      isReady()<span class="value-type">: Boolean</span>
+
+      <a href="#method-isReady" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Returns true if Onsen UI is initialized.</p>
+
+    
+    <p>Returns: Will be true if Onsen UI is initialized.</p>
+    
+
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-compile">
+      compile(dom)
+
+      <a href="#method-compile" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Compile Onsen UI components.</p>
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">dom</span></td>
+          <td class="value-type">HTMLElement</td>
+          <td>Element to compile.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-isWebView">
+      isWebView()<span class="value-type">: Boolean</span>
+
+      <a href="#method-isWebView" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Returns true if running inside Cordova.</p>
+
+    
+    <p>Returns: Will be true if the app is running in Cordova.</p>
+    
+
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-createAlertDialog">
+      createAlertDialog(page)<span class="value-type">: Promise</span>
+
+      <a href="#method-createAlertDialog" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Create a alert dialog instance from a template.</p>
+
+    
+    <p>Returns: Promise object that resolves to the alert dialog component object.</p>
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">page</span></td>
+          <td class="value-type">String</td>
+          <td>Page name. Can be either an HTML file or an <ons-template> containing a <ons-alert-dialog> component.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-createDialog">
+      createDialog(page)<span class="value-type">: Promise</span>
+
+      <a href="#method-createDialog" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Create a dialog instance from a template.</p>
+
+    
+    <p>Returns: Promise object that resolves to the dialog component object.</p>
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">page</span></td>
+          <td class="value-type">String</td>
+          <td>Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-createPopover">
+      createPopover(page)<span class="value-type">: Promise</span>
+
+      <a href="#method-createPopover" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Create a popover instance from a template.</p>
+
+    
+    <p>Returns: Promise object that resolves to the popover component object.</p>
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">page</span></td>
+          <td class="value-type">String</td>
+          <td>Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+
+  
+  <!-- end methods -->
+
+  <!-- events -->
+  
+  <!-- end events -->
+
+  <!-- disqus -->
+  <h3 id="discussion">
+    Discussion
+    <a href="#discussion" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+      var disqus_shortname = 'onsenui'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <!-- end disqus -->
+
+</div>

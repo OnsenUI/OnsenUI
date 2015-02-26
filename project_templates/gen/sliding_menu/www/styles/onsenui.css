@@ -1,4 +1,4 @@
-/*! onsenui - v1.2.2-beta - 2015-02-20 */
+/*! onsenui - v1.2.2 - 2015-02-26 */
 /*
 Copyright 2013-2014 ASIAL CORPORATION
 
@@ -733,50 +733,32 @@ ons-icon[spin="true"] {
 }
 
 @-moz-keyframes ons-icon-spin {
-  0% {
-    -moz-transform: rotate(0deg);
-  }
   100% {
-    -moz-transform: rotate(359deg);
+    -moz-transform: rotate3d(0, 0, 1, 360deg);
   }
 }
 
 @-webkit-keyframes ons-icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
   100% {
-    -webkit-transform: rotate(359deg);
+    -webkit-transform: rotate3d(0, 0, 1, 360deg);
   }
 }
 
 @-o-keyframes ons-icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
   100% {
-    -webkit-transform: rotate(359deg);
-    -o-transform: rotate(359deg);
-    transform: rotate(359deg);
+    -webkit-transform: rotate3d(0, 0, 1, 360deg);
+    -o-transform: rotate3d(0, 0, 1, 360deg);
+    transform: rotate3d(0, 0, 1, 360deg);
   }
 }
 
 @keyframes ons-icon-spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
   100% {
-    -webkit-transform: rotate(359deg);
-    -moz-transform: rotate(359deg);
-    -ms-transform: rotate(359deg);
-    -o-transform: rotate(359deg);
-    transform: rotate(359deg);
+    -webkit-transform: rotate3d(0, 0, 1, 360deg);
+    -moz-transform: rotate3d(0, 0, 1, 360deg);
+    -ms-transform: rotate3d(0, 0, 1, 360deg);
+    -o-transform: rotate3d(0, 0, 1, 360deg);
+    transform: rotate3d(0, 0, 1, 360deg);
   }
 }
 

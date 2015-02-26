@@ -1,36 +1,51 @@
 ---
-page: 'component-detail'
+page: 'reference-detail'
 title: 'ons-page'
 name: 'ons-page'
 collection: 'components'
 reference: true
+docCategory: 'js'
+componentCategory: base
 ---
-<div class="directive-container" id="page">
+<div class="reference-container" id="ons-page">
+
+  <div class="reference-github-links">
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/page.js">View Source</a>
+
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/edit/master/framework/directives/page.js">Improve this doc</a>
+  </div>
 
   <h2>ons-page</h2>
-
-  <a class="directive-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/page.js">View This Code</a>
 
   <section class="description">
     <p>Should be used as root component of each page. The content inside page component is scrollable.</p>
   </section>
 
-  <ul class="directive-quick-navi">
+  <ul class="reference-quick-navi">
     
     <li><a href="#usage">Usage</a></li>
     
     
     
+    <li><a href="#attributes">Attributes</a></li>
+    
+    
+    
+    <li><a href="#methods-summary">Methods</a></li>
     
     
     
     <li><a href="#seealso">See Also</a></li>
     
+    <li><a href="#discussion">Discussion</a></li>
   </ul>
 
   
     <section>
-      <h3 id="usage">Usage</h3>
+      <h3 id="usage">
+        Usage
+        <a href="#usage" class="reference-loop-anchor">#</a>
+      </h3>
       <pre><code class="xml">&lt;ons-page&gt;
   &lt;ons-toolbar&gt;
     &lt;div class=&quot;center&quot;&gt;Title&lt;/div&gt;
@@ -47,7 +62,10 @@ reference: true
   
 
   
-  <h3 id="seealso">See also</h3>
+  <h3 id="seealso">
+    See also
+    <a href="#seealso" class="reference-loop-anchor">#</a>
+  </h3>
   <ul class="seealso">
     
       
@@ -73,8 +91,117 @@ reference: true
 
   <!-- attributes -->
   
+  <section>
+    <h3 id="attributes">
+      Attributes
+      <a href="#attributes" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type<br>Default Value</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-var">var</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            Variable name to refer this page.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-modifier">modifier</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            Specify modifier name to specify custom styles.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-on-device-backbutton">on-device-backbutton</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior when the back button is pressed.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-ng-device-backbutton">ng-device-backbutton</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+
+  <!-- modifiers -->
+  
 
   <!-- methods summary -->
+  
+  <section>
+    <h3 id="methods-summary">
+      Methods Summary
+      <a href="#methods-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Signature</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#method-getDeviceBackButtonHandler">getDeviceBackButtonHandler()</a></td>
+          <td>Get the associated back button handler. This method may return null if no handler is assigned.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
   
   <!-- end methods summary -->
 
@@ -84,14 +211,53 @@ reference: true
 
   <!-- methods details -->
   
+  <h3>Methods</h3>
+  
+  <section class="method-detail">
+    <h4 id="method-getDeviceBackButtonHandler">
+      getDeviceBackButtonHandler()<span class="value-type">: Object</span>
+
+      <a href="#method-getDeviceBackButtonHandler" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Get the associated back button handler. This method may return null if no handler is assigned.</p>
+
+    
+    <p>Returns: Device back button handler.</p>
+    
+
+    
+  </section>
+  
+
+  
   <!-- end methods -->
 
   <!-- events -->
   
   <!-- end events -->
 
+  <!-- disqus -->
+  <h3 id="discussion">
+    Discussion
+    <a href="#discussion" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'onsenui'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <!-- end disqus -->
+
 </div>
 
 <script src="/vendor/highlight.min.js"></script>
-<script src="/scripts/codepen.js"></script>
-

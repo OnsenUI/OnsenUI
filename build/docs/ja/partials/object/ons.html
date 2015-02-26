@@ -1,0 +1,664 @@
+---
+page: 'reference-detail'
+title: 'ons'
+name: 'ons'
+collection: 'objects'
+reference: true
+docCategory: 'js'
+componentCategory: util
+---
+
+<div id="ons">
+
+  <div class="reference-github-links">
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/js/onsen.js">View Source</a>
+
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/edit/master/framework/js/onsen.js">Improve this doc</a>
+  </div>
+
+  <h2>ons</h2>
+
+  <section class="reference-description">
+    <p>Onsen UIで利用できるグローバルなオブジェクトです。このオブジェクトは、AngularJSのスコープから参照することができます。 </p>
+  </section>
+
+  <ul class="reference-quick-navi">
+    
+    
+    
+    <li><a href="#methods-summary">メソッド</a></li>
+    
+    
+    
+    <li><a href="#discussion">議論</a></li>
+  </ul>
+
+  
+
+  
+
+  
+
+  
+
+  <!-- methods summary -->
+  
+  <section>
+    <h3 id="methods-summary">
+      メソッド概要
+      <a href="#methods-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>シグネチャ</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#method-ready">ready(callback)</a></td>
+          <td>アプリの初期化に利用するメソッドです。渡された関数は、Onsen UIの初期化が終了している時点で必ず呼ばれます。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-bootstrap">bootstrap([moduleName, [dependencies]])</a></td>
+          <td>Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-enableAutoStatusBarFill">enableAutoStatusBarFill()</a></td>
+          <td>iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を有効にします。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-disableAutoStatusBarFill">disableAutoStatusBarFill()</a></td>
+          <td>iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を無効にします。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-findParentComponentUntil">findParentComponentUntil(name, [dom])</a></td>
+          <td>指定されたdom引数の親要素をたどってコンポーネントを検索します。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-findComponent">findComponent(selector, [dom])</a></td>
+          <td>CSSセレクタを使ってコンポーネントのオブジェクトを検索します。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-setDefaultDeviceBackButtonListener">setDefaultDeviceBackButtonListener(listener)</a></td>
+          <td>デバイスのバックボタンのためのデフォルトのハンドラを設定します。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-disableDeviceBackButtonHandler">disableDeviceBackButtonHandler()</a></td>
+          <td>デバイスのバックボタンのイベントを受け付けないようにします。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-enableDeviceBackButtonHandler">enableDeviceBackButtonHandler()</a></td>
+          <td>デバイスのバックボタンのイベントを受け付けるようにします。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-isReady">isReady()</a></td>
+          <td>Onsen UIがすでに初期化されているかどうかを返すメソッドです。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-compile">compile(dom)</a></td>
+          <td>通常のHTMLの要素をOnsen UIのコンポーネントにコンパイルします。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-isWebView">isWebView()</a></td>
+          <td>Cordovaで実行されているかどうかを返すメソッドです。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-createAlertDialog">createAlertDialog(page)</a></td>
+          <td>テンプレートからアラートダイアログのインスタンスを生成します。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-createDialog">createDialog(page)</a></td>
+          <td>テンプレートからダイアログのインスタンスを生成します。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-createPopover">createPopover(page)</a></td>
+          <td>テンプレートからポップオーバーのインスタンスを生成します。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+  <!-- end methods summary -->
+
+  <!-- events summary -->
+  
+  <!-- end events summary -->
+
+  <!-- methods details -->
+  
+  <h3>メソッド</h3>
+  
+  <section class="method-detail">
+    <h4 id="method-ready">
+      ready(callback)
+
+      <a href="#method-ready" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>アプリの初期化に利用するメソッドです。渡された関数は、Onsen UIの初期化が終了している時点で必ず呼ばれます。</p>
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">callback</span></td>
+          <td class="value-type">Function</td>
+          <td>Onsen UIが初期化が完了した後に呼び出される関数オブジェクトを指定します。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-bootstrap">
+      bootstrap([moduleName, [dependencies]])<span class="value-type">: Object</span>
+
+      <a href="#method-bootstrap" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます。</p>
+
+    
+    <p>返り値: AngularJSのModuleオブジェクトを表します。</p>
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">moduleName</span></td>
+          <td class="value-type">String</td>
+          <td>Angular.jsでのモジュール名</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">dependencies</span></td>
+          <td class="value-type">Array</td>
+          <td>依存するAngular.jsのモジュール名の配列</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-enableAutoStatusBarFill">
+      enableAutoStatusBarFill()
+
+      <a href="#method-enableAutoStatusBarFill" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を有効にします。</p>
+
+    
+
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-disableAutoStatusBarFill">
+      disableAutoStatusBarFill()
+
+      <a href="#method-disableAutoStatusBarFill" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を無効にします。</p>
+
+    
+
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-findParentComponentUntil">
+      findParentComponentUntil(name, [dom])<span class="value-type">: Object</span>
+
+      <a href="#method-findParentComponentUntil" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>指定されたdom引数の親要素をたどってコンポーネントを検索します。</p>
+
+    
+    <p>返り値: コンポーネントのオブジェクトを返します。もしコンポーネントが見つからなかった場合にはnullを返します。</p>
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">name</span></td>
+          <td class="value-type">String</td>
+          <td>コンポーネント名を指定します。例えばons-pageなどを指定します。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">dom</span></td>
+          <td class="value-type">Object|jqLite|HTMLElement</td>
+          <td>$eventオブジェクト、jqLiteオブジェクト、HTMLElementオブジェクトのいずれかを指定できます。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-findComponent">
+      findComponent(selector, [dom])<span class="value-type">: Object</span>
+
+      <a href="#method-findComponent" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>CSSセレクタを使ってコンポーネントのオブジェクトを検索します。</p>
+
+    
+    <p>返り値: コンポーネントのオブジェクトを返します。もしコンポーネントが見つからなかった場合にはnullを返します。</p>
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">selector</span></td>
+          <td class="value-type">String</td>
+          <td>CSSセレクターを指定します。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">dom</span></td>
+          <td class="value-type">HTMLElement</td>
+          <td>検索対象とするDOM要素を指定します。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-setDefaultDeviceBackButtonListener">
+      setDefaultDeviceBackButtonListener(listener)
+
+      <a href="#method-setDefaultDeviceBackButtonListener" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>デバイスのバックボタンのためのデフォルトのハンドラを設定します。</p>
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">listener</span></td>
+          <td class="value-type">Function</td>
+          <td>デバイスのバックボタンが押された時に実行される関数オブジェクトを指定します。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-disableDeviceBackButtonHandler">
+      disableDeviceBackButtonHandler()
+
+      <a href="#method-disableDeviceBackButtonHandler" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>デバイスのバックボタンのイベントを受け付けないようにします。</p>
+
+    
+
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-enableDeviceBackButtonHandler">
+      enableDeviceBackButtonHandler()
+
+      <a href="#method-enableDeviceBackButtonHandler" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>デバイスのバックボタンのイベントを受け付けるようにします。</p>
+
+    
+
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-isReady">
+      isReady()<span class="value-type">: Boolean</span>
+
+      <a href="#method-isReady" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Onsen UIがすでに初期化されているかどうかを返すメソッドです。</p>
+
+    
+    <p>返り値: 初期化されているかどうかを返します。</p>
+    
+
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-compile">
+      compile(dom)
+
+      <a href="#method-compile" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>通常のHTMLの要素をOnsen UIのコンポーネントにコンパイルします。</p>
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">dom</span></td>
+          <td class="value-type">HTMLElement</td>
+          <td>コンパイルする要素を指定します。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-isWebView">
+      isWebView()<span class="value-type">: Boolean</span>
+
+      <a href="#method-isWebView" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Cordovaで実行されているかどうかを返すメソッドです。</p>
+
+    
+    <p>返り値: Cordovaで実行されている場合にtrueになります。</p>
+    
+
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-createAlertDialog">
+      createAlertDialog(page)<span class="value-type">: Promise</span>
+
+      <a href="#method-createAlertDialog" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>テンプレートからアラートダイアログのインスタンスを生成します。</p>
+
+    
+    <p>返り値: ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。</p>
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">page</span></td>
+          <td class="value-type">String</td>
+          <td>pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-createDialog">
+      createDialog(page)<span class="value-type">: Promise</span>
+
+      <a href="#method-createDialog" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>テンプレートからダイアログのインスタンスを生成します。</p>
+
+    
+    <p>返り値: ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。</p>
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">page</span></td>
+          <td class="value-type">String</td>
+          <td>pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-createPopover">
+      createPopover(page)<span class="value-type">: Promise</span>
+
+      <a href="#method-createPopover" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>テンプレートからポップオーバーのインスタンスを生成します。</p>
+
+    
+    <p>返り値: ポップオーバーのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。</p>
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">page</span></td>
+          <td class="value-type">String</td>
+          <td>pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+
+  
+  <!-- end methods -->
+
+  <!-- events -->
+  
+  <!-- end events -->
+
+  <!-- disqus -->
+  <h3 id="discussion">
+    議論
+    <a href="#discussion" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+      var disqus_shortname = 'onsenui-ja'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <!-- end disqus -->
+
+</div>

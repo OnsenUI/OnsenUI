@@ -1,21 +1,30 @@
 ---
-page: 'component-detail'
+page: 'reference-detail'
 title: 'ons-modal'
 name: 'ons-modal'
 collection: 'components'
 reference: true
+docCategory: 'js'
+componentCategory: modal
 ---
-<div class="directive-container" id="modal">
+<div class="reference-container" id="ons-modal">
+
+  <div class="reference-github-links">
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/modal.js">View Source</a>
+
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/edit/master/framework/directives/modal.js">Improve this doc</a>
+  </div>
 
   <h2>ons-modal</h2>
 
-  <a class="directive-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/modal.js">View This Code</a>
-
   <section class="description">
-    <p>Modal component that masks current screen. Underlying components are not subject to any events while the modal component is shown.</p>
+    <p>
+    Modal component that masks current screen.
+    Underlying components are not subject to any events while the modal component is shown.
+  </p>
   </section>
 
-  <ul class="directive-quick-navi">
+  <ul class="reference-quick-navi">
     
     <li><a href="#usage">Usage</a></li>
     
@@ -23,16 +32,25 @@ reference: true
     <li><a href="#example">Live Example</a></li>
     
     
+    <li><a href="#attributes">Attributes</a></li>
+    
+    
+    
+    <li><a href="#methods-summary">Methods</a></li>
     
     
     
     <li><a href="#seealso">See Also</a></li>
     
+    <li><a href="#discussion">Discussion</a></li>
   </ul>
 
   
     <section>
-      <h3 id="usage">Usage</h3>
+      <h3 id="usage">
+        Usage
+        <a href="#usage" class="reference-loop-anchor">#</a>
+      </h3>
       <pre><code class="xml">&lt;ons-modal&gt;
   ...
 &lt;/ons-modal&gt;</code></pre>
@@ -43,25 +61,35 @@ reference: true
 
   <!-- codepen -->
   
-  <h3 id="example">Live Example</h3>
+  <h3 id="example">
+    Live Example
+    <a href="#example" class="reference-loop-anchor">#</a>
+  </h3>
 
   
   <div style="height: 480px; width: 320px;" class="codepen-wrapper">
   
-    <p data-height="480" data-theme-id="7186" data-slug-hash="devIg" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/devIg/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    <p data-height="480" data-theme-id="11531" data-slug-hash="devIg" data-default-tab="result" data-user="onsen" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/devIg/'>Alert, confirm and prompt dialogs</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
   </div>
 
   <div class="codepen-open-link-wrapper"><a href="http://s.codepen.io/onsen/fullembedgrid/devIg" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
   
 
   
-  <h3 id="seealso">See also</h3>
+  <h3 id="seealso">
+    See also
+    <a href="#seealso" class="reference-loop-anchor">#</a>
+  </h3>
   <ul class="seealso">
     
       
-        <li class="guide"><a href="/guide/overview.html#UsingModal">Using ons-modal component</a></li>
+        <li class="guide"><a href="/guide/overview.html#UsingModal
+">Using ons-modal component</a></li>
       
-        <li class="guide"><a href="/guide/overview.html#CallingComponentAPIsfromJavaScript">Using navigator from JavaScript</a></li>
+        <li class="guide"><a href="/guide/overview.html#CallingComponentAPIsfromJavaScript
+">Using navigator from JavaScript</a></li>
       
     
     
@@ -70,8 +98,87 @@ reference: true
 
   <!-- attributes -->
   
+  <section>
+    <h3 id="attributes">
+      Attributes
+      <a href="#attributes" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type<br>Default Value</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td class="attribute-name" id="ons-modal-var">var</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            Variable name to refer this modal.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+
+  <!-- modifiers -->
+  
 
   <!-- methods summary -->
+  
+  <section>
+    <h3 id="methods-summary">
+      Methods Summary
+      <a href="#methods-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Signature</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#method-toggle">toggle()</a></td>
+          <td>Toggle modal visibility.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-show">show()</a></td>
+          <td>Show modal.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-hide">hide()</a></td>
+          <td>Hide modal.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-getDeviceBackButtonHandler">getDeviceBackButtonHandler()</a></td>
+          <td>Retrieve the back button handler.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
   
   <!-- end methods summary -->
 
@@ -81,14 +188,95 @@ reference: true
 
   <!-- methods details -->
   
+  <h3>Methods</h3>
+  
+  <section class="method-detail">
+    <h4 id="method-toggle">
+      toggle()
+
+      <a href="#method-toggle" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Toggle modal visibility.</p>
+
+    
+
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-show">
+      show()
+
+      <a href="#method-show" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Show modal.</p>
+
+    
+
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-hide">
+      hide()
+
+      <a href="#method-hide" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Hide modal.</p>
+
+    
+
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-getDeviceBackButtonHandler">
+      getDeviceBackButtonHandler()<span class="value-type">: Object</span>
+
+      <a href="#method-getDeviceBackButtonHandler" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Retrieve the back button handler.</p>
+
+    
+    <p>Returns: Device back button handler.</p>
+    
+
+    
+  </section>
+  
+
+  
   <!-- end methods -->
 
   <!-- events -->
   
   <!-- end events -->
 
+  <!-- disqus -->
+  <h3 id="discussion">
+    Discussion
+    <a href="#discussion" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'onsenui'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <!-- end disqus -->
+
 </div>
 
 <script src="/vendor/highlight.min.js"></script>
-<script src="/scripts/codepen.js"></script>
-
