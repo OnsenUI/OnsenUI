@@ -2,7 +2,7 @@
  * @ngdoc directive
  * @id button
  * @name ons-button
- * @category input
+ * @category form
  * @modifier outline
  *   [en]Button with outline and transparent background[/en]
  *   [ja]アウトラインを持ったボタンを表示します。[/ja]
