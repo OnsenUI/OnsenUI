@@ -127,7 +127,7 @@
  * @ngdoc method
  * @signature isDisabled()
  * @return {Boolean}
- *   [en]Will be true if the pull hook is disabled.[/en]
+ *   [en]true if the pull hook is disabled.[/en]
  *   [ja][/ja]
  * @description
  *   [en]Returns whether the component is disabled or enabled.[/en]

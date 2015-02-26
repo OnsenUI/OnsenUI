@@ -91,7 +91,7 @@
  * @ngdoc method
  * @signature isSpinning()
  * @return {Boolean}
- *   [en]Will be true if the button is spinning.[/en]
+ *   [en]true if the button is spinning.[/en]
  *   [ja]spinしているかどうかを返します。[/ja]
  * @description
  *   [en]Return whether the spinner is visible or not.[/en]
@@ -121,7 +121,7 @@
  * @ngdoc method
  * @signature isDisabled()
  * @return {Boolean}
- *   [en]Will be true if the button is disabled.[/en]
+ *   [en]true if the button is disabled.[/en]
  *   [ja]ボタンがdisabled状態になっているかどうかを返します。[/ja]
  * @description
  *   [en]Returns whether the button is disabled or enabled.[/en]

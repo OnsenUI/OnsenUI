@@ -184,7 +184,7 @@
  * @ngdoc method
  * @signature isShown()
  * @return {Boolean}
- *   [en]Will be true if the popover is visible.[/en]
+ *   [en]true if the popover is visible.[/en]
  *   [ja]ポップオーバーが表示されている場合にtrueとなります。[/ja]
  * @description
  *   [en]Returns whether the popover is visible or not.[/en]
@@ -214,7 +214,7 @@
  * @ngdoc method
  * @signature isCancelable()
  * @return {Boolean}
- *   [en]Will be true if the popover is cancelable.[/en]
+ *   [en]true if the popover is cancelable.[/en]
  *   [ja]ポップオーバーがキャンセル可能であればtrueとなります。[/ja]
  * @description
  *   [en]Returns whether the popover is cancelable or not.[/en]
@@ -236,7 +236,7 @@
  * @ngdoc method
  * @signature isDisabled()
  * @return {Boolean}
- *   [en]Will be true if the popover is disabled.[/en]
+ *   [en]true if the popover is disabled.[/en]
  *   [ja]ポップオーバーがdisabled状態であればtrueとなります。[/ja]
  * @description
  *   [en]Returns whether the popover is disabled or enabled.[/en]

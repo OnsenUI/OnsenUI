@@ -209,7 +209,7 @@
  * @ngdoc method
  * @signature isSwipeable()
  * @return {Boolean}
- *   [en]Will be true if the carousel is swipeable.[/en]
+ *   [en]true if the carousel is swipeable.[/en]
  *   [ja]swipeableであればtrueを返します。[/ja]
  * @description
  *   [en]Returns whether the carousel is swipeable or not.[/en]
@@ -253,7 +253,7 @@
  * @ngdoc method
  * @signature isAutoScrollEnabled()
  * @return {Boolean}
- *   [en]Will be true if auto scroll is enabled.[/en]
+ *   [en]true if auto scroll is enabled.[/en]
  *   [ja]オートスクロールが有効であればtrueを返します。[/ja]
  * @description
  *   [en]Returns whether the "auto-scroll" attribute is set or not.[/en]

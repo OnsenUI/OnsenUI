@@ -235,7 +235,7 @@
  * @ngdoc method
  * @signature isMenuOpened()
  * @return {Boolean}
- *   [en]Will be true if the menu is currently open.[/en]
+ *   [en]true if the menu is currently open.[/en]
  *   [ja]メニューが開いていればtrueとなります。[/ja]
  * @description
  *   [en]Returns true if the menu page is open, otherwise false.[/en]

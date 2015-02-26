@@ -77,7 +77,7 @@
  * @ngdoc method
  * @signature isChecked()
  * @return {Boolean}
- *   [en]Will be true if the switch is on.[/en]
+ *   [en]true if the switch is on.[/en]
  *   [ja]ONになっている場合にはtrueになります。[/ja]
  * @description
  *   [en]Returns true if the switch is ON.[/en]
