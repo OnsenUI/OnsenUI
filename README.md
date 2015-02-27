@@ -38,6 +38,12 @@ See the [Onsen UI Getting Started](http://onsen.io/getting_started/) page.
 
 See the [Onsen UI Getting Started Page] and scroll down to the Using Onsen UI with Monaca section. 
 
+## Download the latest build
+
+A new build is generated every time the code changes. It can be downloaded on [this page](http://onsen.io/download.html#latest-build).
+
+Please use this with caution. However, we are very grateful if people try it out so we can find bugs and things to improve before the sharp releases.
+
 ## How to build
 
 * Clone this repository
@@ -97,6 +103,14 @@ Run gulp task to develop Onsen UI itself with livereload.
     gulp serve
 
 Access [http://0.0.0.0:8000/demo/index.html](http://0.0.0.0:8000/demo/index.html) and your code changes will be reloaded.
+
+## Current Roadmap
+
+Please see the following file for information about upcoming releases and what will be included.
+
+* [Onsen UI Roadmap](https://github.com/OnsenUI/OnsenUI/blob/master/ROADMAP.md)
+
+Please tell us if you have any suggestions for features that you would like to see included.
 
 ## How to contribute
 
