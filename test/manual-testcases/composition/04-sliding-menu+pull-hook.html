@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../build/js/angular/angular.js"></script>    
+    <script src="../../../build/js/onsenui.js"></script>    
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      var app = ons.bootstrap()
+
+      .controller('TestController', function($scope) {
+        $scope.items = [5,4,3,2,1];
+
+        $scope.load = function($done) {
+          setTimeout(function() {
+            $done();
+          }, 1000);
+        };
+      });
+
+    </script>
+  </head>
+  <body ng-controller="TestController">
+    <ons-page>
+      <ons-sliding-menu main-page="page1.html" menu-page="menu.html" swipe-target-width="200" side="left" var="menu">
+      </ons-sliding-menu>
+    </ons-page>
+
+    <script type="text/ons-template" id="page1.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">Page 1</div>
+          <div class="left">
+            <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+
+        <ons-pull-hook ng-action="load($done)">
+          Pull to refresh! 
+        </ons-pull-hook>
+
+        <ons-list>
+          <ons-list-item ng-repeat="item in items">
+            Item #{{ item }}
+          </ons-list-item>
+        </ons-list>
+
+      </ons-page>
+    </script>
+
+    <script type="text/ons-template" id="menu.html">
+    </script>
+
+  </body>
+</html>

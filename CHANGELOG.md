@@ -4,6 +4,7 @@ CHANGELOG
 
 v1.2.3-dev
 ----
+ * ons-sliding-menu: Fixed [#464](https://github.com/OnsenUI/OnsenUI/issues/464).
 
 v1.2.2
 ----

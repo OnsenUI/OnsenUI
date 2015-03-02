@@ -471,18 +471,13 @@ limitations under the License.
         }
 
         switch (event.type) {
-
-          case 'touch':
-            if (this._logic.isClosed()) {
-              if (!this._isInsideSwipeTargetArea(event)) {
-                event.gesture.stopDetect();
-              }
-            }
-
-            break;
-
           case 'dragleft':
           case 'dragright':
+
+            if (this._logic.isClosed() && !this._isInsideSwipeTargetArea(event)) {
+              return;
+            }
+
             event.gesture.preventDefault();
 
             var deltaX = event.gesture.deltaX;
