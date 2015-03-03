@@ -5,6 +5,8 @@ CHANGELOG
 v1.2.3-dev
 ----
  * ons-sliding-menu: Fixed [#464](https://github.com/OnsenUI/OnsenUI/issues/464).
+ * ons-pull-hook: Fixed [#467](https://github.com/OnsenUI/OnsenUI/issues/467).
+ * ons-pull-hook: Fixed issue where a error was thrown if the pull hook was destroyed before `$done()` was called.
 
 v1.2.2
 ----
