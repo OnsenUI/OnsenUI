@@ -187,8 +187,11 @@ limitations under the License.
       },
 
       _onDone: function(done) {
-        this._translateTo(0, {animate: true});
-        this._setState(this.STATE_INITIAL);
+        // Check if the pull hook still exists.
+        if (this._element) {
+          this._translateTo(0, {animate: true});
+          this._setState(this.STATE_INITIAL);
+        }
       },
 
       _getHeight: function() {
@@ -313,7 +316,7 @@ limitations under the License.
       },
 
       _destroyEventListeners: function() {
-        var element = this._scrollElement[0].parentNode;
+        var element = this._scrollElement.parent();
 
         this._hammer.off('drag', this._bindedOnDrag);
         this._hammer.off('dragstart', this._bindedOnDragStart);
