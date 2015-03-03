@@ -2,12 +2,9 @@ machine:
   node:
     version: 0.10.32
 dependencies:
-  override:
+  pre:
     - npm install
     - cd css-components; npm install
-test:
-  override:
-    - echo "Add tests!"
 deployment:
   tasks:
     branch: master

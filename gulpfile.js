@@ -29,6 +29,7 @@ var browserSync = require('browser-sync');
 var gulpIf = require('gulp-if');
 var dgeni = require('dgeni');
 var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
+var os = require('os');
 
 ////////////////////////////////////////
 // browser-sync
@@ -372,4 +373,58 @@ gulp.task('watch-docs', ['build-docs'], function(done) {
     './framework/directives/*.js',
     './framework/js/*.js',
   ], ['build-docs']);
+});
+
+////////////////////////////////////////
+// webdriver-update
+////////////////////////////////////////
+gulp.task('webdriver-update', $.protractor.webdriver_update);
+
+////////////////////////////////////////
+// webdriver-download
+////////////////////////////////////////
+gulp.task('webdriver-download', function() {
+  var chromeDriverUrl,
+    platform = os.platform();
+
+  if (platform === 'linux') {
+    chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.12/chromedriver_linux64.zip'; 
+  }
+  else if (platform === 'darwin') {
+    chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.14/chromedriver_mac32.zip';
+  }
+
+  var selenium = $.download('https://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar')
+    .pipe(gulp.dest(__dirname + '/.selenium'));
+
+  var chromedriver = $.download(chromeDriverUrl)
+    .pipe($.unzip())
+    .pipe($.chmod(755))
+    .pipe(gulp.dest(__dirname + '/.selenium'));
+
+  return merge(selenium, chromedriver);
+});
+
+
+////////////////////////////////////////
+// test
+////////////////////////////////////////
+gulp.task('test', ['webdriver-download', 'prepare'], function() {
+  var port = 8081;
+
+  $.connect.server({
+    root: __dirname,
+    port: port
+  });
+
+  return gulp.src(['test/e2e/**/*.js'])
+    .pipe($.protractor.protractor({
+      configFile: 'protractor.conf.js',
+      args: ['--baseUrl', 'http://127.0.0.1:' + port]
+    })).on('error', function(e) {
+      console.log(e)
+      $.connect.serverClose();
+    }).on('end', function() {
+      $.connect.serverClose();
+    });
 });
