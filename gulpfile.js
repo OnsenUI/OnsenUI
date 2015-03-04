@@ -30,6 +30,7 @@ var gulpIf = require('gulp-if');
 var dgeni = require('dgeni');
 var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
 var os = require('os');
+var fs = require('fs');
 
 ////////////////////////////////////////
 // browser-sync
@@ -80,6 +81,7 @@ gulp.task('clean', function() {
     'build',
     'app/lib/onsen/',
     'project_templates/gen/',
+    '.selenium/'
   ], {read: false}).pipe($.clean());
 });
 
@@ -387,6 +389,13 @@ gulp.task('webdriver-download', function() {
   var chromeDriverUrl,
     platform = os.platform();
 
+  var destDir = __dirname + '/.selenium/';
+
+  // Only download once.
+  if (fs.existsSync(destDir + '/chromedriver')) {
+    return gulp.src('');
+  }
+  
   if (platform === 'linux') {
     chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.12/chromedriver_linux64.zip'; 
   }
@@ -395,12 +404,12 @@ gulp.task('webdriver-download', function() {
   }
 
   var selenium = $.download('https://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar')
-    .pipe(gulp.dest(__dirname + '/.selenium'));
+    .pipe(gulp.dest(destDir));
 
   var chromedriver = $.download(chromeDriverUrl)
     .pipe($.unzip())
     .pipe($.chmod(755))
-    .pipe(gulp.dest(__dirname + '/.selenium'));
+    .pipe(gulp.dest(destDir));
 
   return merge(selenium, chromedriver);
 });

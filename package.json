@@ -34,7 +34,7 @@
     "globby": "^1.1.0",
     "gulp": "^3.8.7",
     "gulp-autoprefixer": "0.0.6",
-    "gulp-cached": "0.0.3",
+    "gulp-cached": "^1.0.2",
     "gulp-chmod": "^1.2.0",
     "gulp-clean": "~0.2.4",
     "gulp-concat": "~2.2.0",
