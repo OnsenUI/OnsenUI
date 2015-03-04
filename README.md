@@ -1,4 +1,6 @@
-# Onsen UI [![Circle CI](https://circleci.com/gh/OnsenUI/OnsenUI.svg?style=svg)](https://circleci.com/gh/OnsenUI/OnsenUI)
+# Onsen UI 
+
+[![Circle CI](https://circleci.com/gh/OnsenUI/OnsenUI.svg?style=svg)](https://circleci.com/gh/OnsenUI/OnsenUI)
 
 The best place to start with Onsen UI is our [Getting Started](http://onsen.io/guide/getting_started.html) page.
 
@@ -87,6 +89,17 @@ $ gulp serve
 ```
 
 * Then navigate your browser to [http://0.0.0.0:8000/demo/index.html](http://0.0.0.0:8000/demo/index.html)
+
+## Running the test suite
+
+Onsen UI has end-to-end testing using Protractor. Use the following command to run the tests:
+
+```bash
+$ npm install
+$ npm test
+```
+
+It will take some time the because it will download a stand-alone Selenium Server and a Chrome webdriver the first time it's executed.
 
 ## Developing your app
 
