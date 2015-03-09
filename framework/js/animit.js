@@ -361,7 +361,7 @@ window.animit = (function(){
 
           elements.forEach(function(element) {
             // force to update rendering
-            element.getBoundingClientRect();
+            element.offsetHeight;
           });
 
           if (window.requestAnimationFrame) {
