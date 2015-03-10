@@ -8,6 +8,7 @@ v1.2.3-dev
  * ons-pull-hook: Fixed [#467](https://github.com/OnsenUI/OnsenUI/issues/467).
  * ons-pull-hook: Fixed issue where a error was thrown if the pull hook was destroyed before `$done()` was called.
  * core: Added end-to-end testing with Protractor.
+ * ons-alert-dialog: Fixed [#478](https://github.com/OnsenUI/OnsenUI/issues/478).
 
 v1.2.2
 ----

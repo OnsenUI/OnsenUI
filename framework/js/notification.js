@@ -231,7 +231,7 @@ window.ons.notification = (function() {
 
     var createButton = function(i) {
       var buttonEl = angular.element('<button>').addClass('alert-dialog-button').text(buttonLabels[i]);
-      
+
       if (i == primaryButtonIndex) {
         buttonEl.addClass('alert-dialog-button--primal');
       }
@@ -241,6 +241,8 @@ window.ons.notification = (function() {
       }
 
       buttonEl.on('click', function() {
+        buttonEl.off('click');
+
         alertDialog.hide({
           callback: function() {
             if (promptDialog) {
@@ -249,14 +251,13 @@ window.ons.notification = (function() {
               callback(i);
             }
             alertDialog.destroy();
-            alertDialog = null;
-            inputEl = null;
+            alertDialog = inputEl = buttonEl = null;
           }
         });
       });
       footerEl.append(buttonEl);
-      buttonEl = null;
     };
+
     for (var i = 0; i < buttonLabels.length; i++) {
       createButton(i);
     }
@@ -306,7 +307,7 @@ window.ons.notification = (function() {
         title: 'Alert',
         callback: function() {}
       };
-    
+
       options = angular.extend({}, defaults, options);
       if (!options.message && !options.messageHTML) {
         throw new Error('Alert dialog must contain a message.');
@@ -393,7 +394,7 @@ window.ons.notification = (function() {
       if (!options.message && !options.messageHTML) {
         throw new Error('Prompt dialog must contain a message.');
       }
-      
+
       createAlertDialog(
         options.title,
         options.message || options.messageHTML,
