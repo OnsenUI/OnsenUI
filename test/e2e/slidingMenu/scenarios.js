@@ -29,7 +29,6 @@
           return button.getLocation();
         })
         .then(function(newLocation) {
-          console.error(newLocation, oldLocation);
           return newLocation.x !== oldLocation.x;
         });
       });
