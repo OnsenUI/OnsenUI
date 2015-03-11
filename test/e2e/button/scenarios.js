@@ -2,29 +2,30 @@
   'use strict';
 
   var path = '/test/e2e/button/index.html';
-  
-
 
   describe('ons-button', function() {  
+
     var EC = protractor.ExpectedConditions;
 
     it('should have an element', function() {
+
       browser.get(path);
-        browser.waitForAngular();
+      browser.waitForAngular();
 
-        var button = element(by.css('ons-button'));
-        browser.wait(EC.presenceOf(button), 1000);
+      var button = element(by.css('ons-button'));
 
-        expect(button.isPresent()).toBeTruthy();
+      //Waits 1000ms for the ons-botton loading
+      browser.wait(EC.presenceOf(button), 1000);
 
-      
-      
+      expect(button.isPresent()).toBeTruthy();
+
     });
     
     it('should have ng-click or on-click attribute', function() {
+
         var button = element(by.css('ons-button'));
         
-        expect(button.getAttribute('ng-click').isPresent()).toBeTruthy();
+        expect(button.getAttribute('ng-click').isPresent() || button.getAttribute('on-click').isPresent()).toBeTruthy();
         
     });
 
@@ -32,8 +33,9 @@
       
       var button = element(by.css('ons-button'));
       var input = element(by.css('input'));
+
       button.click();
-      console.log(element(by.model('data')));
+      
       expect(input.getAttribute('value')).toEqual('true');
 
     });
