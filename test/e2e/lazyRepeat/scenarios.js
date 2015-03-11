@@ -2,7 +2,8 @@
   'use strict';
 
   describe('lazy repeat', function() {
-    var path = '/test/e2e/lazyRepeat/index.html';
+    var path = '/test/e2e/lazyRepeat/index.html',
+      EC = protractor.ExpectedConditions;
 
     it('should remove elements when scrolling', function() {
       browser.get(path);
@@ -14,7 +15,8 @@
       // Scroll down to bottom.
       browser.executeScript('document.querySelector(".page__content").scrollTop = 100000;');
 
-      browser.waitForAngular();
+      browser.wait(EC.stalenessOf(firstItem));
+
       expect(firstItem.isPresent()).not.toBeTruthy();
     });
   });
