@@ -4,7 +4,7 @@
   var path = '/test/e2e/button/index.html',
     EC = protractor.ExpectedConditions;
 
-  describe('ons-button', function() {
+  describe('button', function() {
 
     it('should have an element', function() {
       browser.get(path);

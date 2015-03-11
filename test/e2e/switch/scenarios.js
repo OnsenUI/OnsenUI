@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('tabbar', function() {
+  describe('switch', function() {
     var path = '/test/e2e/switch/index.html';
 
     it('should have an element', function() {

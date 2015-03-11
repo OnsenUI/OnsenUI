@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('tabbar', function() {
+  describe('popover', function() {
     var path = '/test/e2e/popover/index.html';
 
     it('should be displayed when clicking the button', function() {
