@@ -1,4 +1,4 @@
-/*! onsenui - v1.2.2 - 2015-02-26 */
+/*! onsenui - v1.2.3-dev - 2015-03-11 */
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -4873,7 +4873,7 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -4977,7 +4977,7 @@ window.DoorLock = (function() {
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -5635,7 +5635,7 @@ window.ons = (function(){
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -5898,7 +5898,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -6034,7 +6034,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -6169,7 +6169,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -6275,7 +6275,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -7061,7 +7061,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -7320,7 +7320,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -7359,7 +7359,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -7483,7 +7483,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -7619,7 +7619,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -7661,7 +7661,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -7795,7 +7795,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -7926,7 +7926,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -8449,7 +8449,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -8754,7 +8754,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -8916,7 +8916,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -9016,7 +9016,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -9616,7 +9616,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -9654,7 +9654,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -9686,7 +9686,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -9939,7 +9939,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -10203,7 +10203,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -10566,7 +10566,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -10604,7 +10604,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -10792,8 +10792,11 @@ limitations under the License.
       },
 
       _onDone: function(done) {
-        this._translateTo(0, {animate: true});
-        this._setState(this.STATE_INITIAL);
+        // Check if the pull hook still exists.
+        if (this._element) {
+          this._translateTo(0, {animate: true});
+          this._setState(this.STATE_INITIAL);
+        }
       },
 
       _getHeight: function() {
@@ -10918,7 +10921,7 @@ limitations under the License.
       },
 
       _destroyEventListeners: function() {
-        var element = this._scrollElement[0].parentNode;
+        var element = this._scrollElement.parent();
 
         this._hammer.off('drag', this._bindedOnDrag);
         this._hammer.off('dragstart', this._bindedOnDragStart);
@@ -10938,7 +10941,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -11176,7 +11179,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -11447,7 +11450,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -11636,7 +11639,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -11767,7 +11770,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -12239,18 +12242,13 @@ limitations under the License.
         }
 
         switch (event.type) {
-
-          case 'touch':
-            if (this._logic.isClosed()) {
-              if (!this._isInsideSwipeTargetArea(event)) {
-                event.gesture.stopDetect();
-              }
-            }
-
-            break;
-
           case 'dragleft':
           case 'dragright':
+
+            if (this._logic.isClosed() && !this._isInsideSwipeTargetArea(event)) {
+              return;
+            }
+
             event.gesture.preventDefault();
 
             var deltaX = event.gesture.deltaX;
@@ -12497,7 +12495,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -12576,7 +12574,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -12923,7 +12921,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -13006,7 +13004,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19459,7 +19457,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19588,7 +19586,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19856,7 +19854,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20318,7 +20316,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20794,7 +20792,7 @@ window.animit = (function(){
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21026,7 +21024,7 @@ window.ons.notification = (function() {
 
     var createButton = function(i) {
       var buttonEl = angular.element('<button>').addClass('alert-dialog-button').text(buttonLabels[i]);
-      
+
       if (i == primaryButtonIndex) {
         buttonEl.addClass('alert-dialog-button--primal');
       }
@@ -21036,6 +21034,8 @@ window.ons.notification = (function() {
       }
 
       buttonEl.on('click', function() {
+        buttonEl.off('click');
+
         alertDialog.hide({
           callback: function() {
             if (promptDialog) {
@@ -21044,14 +21044,13 @@ window.ons.notification = (function() {
               callback(i);
             }
             alertDialog.destroy();
-            alertDialog = null;
-            inputEl = null;
+            alertDialog = inputEl = buttonEl = null;
           }
         });
       });
       footerEl.append(buttonEl);
-      buttonEl = null;
     };
+
     for (var i = 0; i < buttonLabels.length; i++) {
       createButton(i);
     }
@@ -21101,7 +21100,7 @@ window.ons.notification = (function() {
         title: 'Alert',
         callback: function() {}
       };
-    
+
       options = angular.extend({}, defaults, options);
       if (!options.message && !options.messageHTML) {
         throw new Error('Alert dialog must contain a message.');
@@ -21188,7 +21187,7 @@ window.ons.notification = (function() {
       if (!options.message && !options.messageHTML) {
         throw new Error('Prompt dialog must contain a message.');
       }
-      
+
       createAlertDialog(
         options.title,
         options.message || options.messageHTML,
@@ -21209,7 +21208,7 @@ window.ons.notification = (function() {
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21394,7 +21393,7 @@ window.ons.orientation = (function() {
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21635,7 +21634,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
