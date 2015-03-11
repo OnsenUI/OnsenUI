@@ -19,10 +19,10 @@
       expect(button.isPresent()).toBeTruthy();
     });
     
-    it('should have ng-click or on-click attribute', function() {
-        var button = element(by.css('ons-button'));
+    it('should have ng-click attribute', function() {
+      var button = element(by.css('ons-button'));
         
-        expect(button.getAttribute('ng-click').isPresent() || button.getAttribute('on-click').isPresent()).toBeTruthy();
+      expect(button.getAttribute('ng-click').isPresent()).toBeTruthy();
     });
 
     it('should display a text when clicking the button', function() {
