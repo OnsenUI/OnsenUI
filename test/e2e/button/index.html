@@ -7,7 +7,6 @@
 
     <script src="../../../build/js/angular/angular.js"></script>
     <script src="../../../build/js/onsenui.js"></script>
-    <script src="../vendor/jquery.js"></script>
     <script>
       angular.module('myApp', ['onsen'])
       .controller('DemoController', function($scope) {
@@ -26,7 +25,6 @@
 
       <div style="text-align: center" class="content-padded" ng-controller="DemoController">
         <ons-button id="btn" ng-click="checkClick()">Click</ons-button>
-        <br>
         <input ng-model="data">
       </div>
     </ons-page>

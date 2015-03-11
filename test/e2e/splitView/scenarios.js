@@ -11,8 +11,7 @@
 
     it('should collapse when width is under 500px', function() {
       var win = browser.driver.manage().window(),
-        secondaryPage = element(by.css('.onsen-split-view__secondary')),
-        origSize = {};
+        secondaryPage = element(by.css('.onsen-split-view__secondary'));
 
       win.setSize(1000, 1000);
       expect(secondaryPage.isDisplayed()).toBeTruthy();
