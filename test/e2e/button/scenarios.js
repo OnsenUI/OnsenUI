@@ -33,7 +33,5 @@
       
       expect(input.getAttribute('value')).toEqual('true');
     });
-
-
   });
 })();
