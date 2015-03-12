@@ -2,16 +2,14 @@
   'use strict';
 
   describe('back-button', function() {
-    var path = '/test/e2e/backButton/index.html';
-    var EC = protractor.ExpectedConditions;
+    var path = '/test/e2e/backButton/index.html',
+      EC = protractor.ExpectedConditions;
 
-    it('should exist', function() {
+    it('should be displayed after pushing a page', function() {
       browser.get(path);
       browser.waitForAngular();
 
       var button = element(by.css('ons-button'));
-
-      //Waits for the ons-botton loading
       browser.wait(EC.presenceOf(button));
 
       button.click();
@@ -24,21 +22,19 @@
       var page1 = element(by.id('page1'));
       var page2 = element(by.id('page2'));
 
-      var button = element(by.css('ons-button'));
-      button.click();
-
-      //Waits for page1 to be fully loaded
+      element(by.css('ons-button')).click();
       browser.wait(EC.visibilityOf(page2));
       browser.wait(EC.invisibilityOf(page1));
+
+      // Check that page2 was created and that it's displayed.
       expect((page2).isDisplayed()).toBeTruthy();
       expect((page1).isDisplayed()).not.toBeTruthy();
       expect((page1).isPresent()).toBeTruthy();
 
-      var backButton = element(by.css('ons-back-button'));
-      backButton.click();
-
-      //Waits for page2 to get destroyed
+      element(by.css('ons-back-button')).click();
       browser.wait(EC.stalenessOf(page2));
+
+      // Check that page2 was destroyed.
       expect((page1).isDisplayed()).toBeTruthy();
       expect((page2).isPresent()).not.toBeTruthy();
     });

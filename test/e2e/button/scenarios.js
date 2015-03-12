@@ -5,24 +5,21 @@
     EC = protractor.ExpectedConditions;
 
   describe('button', function() {
-
     it('should have an element', function() {
       browser.get(path);
       browser.waitForAngular();
 
       var button = element(by.css('ons-button'));
-
-      // Waits 1000ms for the ons-button loading
-      browser.wait(EC.presenceOf(button), 1000);
+      browser.wait(EC.presenceOf(button));
 
       expect(button.isPresent()).toBeTruthy();
     });
 
     it('should display a text when clicking the button', function() {
-      var button = element(by.css('ons-button')),
-        input = element(by.css('input'));
+      var input = element(by.css('input'));
 
-      button.click();
+      expect(input.getAttribute('value')).not.toEqual('true');
+      element(by.css('ons-button')).click();
       expect(input.getAttribute('value')).toEqual('true');
     });
   });

@@ -8,7 +8,6 @@
       browser.get(path);
 
       var elements = element.all(by.css('ons-list-item'));
-
       expect(elements.count()).toBe(3);
 
       browser.actions()
@@ -19,7 +18,6 @@
         .perform();
 
       browser.waitForAngular();
-
       expect(elements.count()).toBe(4);
     });
 

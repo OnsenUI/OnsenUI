@@ -9,7 +9,6 @@
       browser.get(path);
 
       var alertDialog = element(by.css('ons-alert-dialog'));
-
       browser.wait(EC.presenceOf(alertDialog));
 
       expect(alertDialog.isDisplayed()).not.toBeTruthy();

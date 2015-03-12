@@ -9,7 +9,6 @@
       browser.get(path);
 
       var dialog = element(by.css('ons-dialog'));
-
       browser.wait(EC.presenceOf(dialog));
 
       expect(dialog.isDisplayed()).not.toBeTruthy();

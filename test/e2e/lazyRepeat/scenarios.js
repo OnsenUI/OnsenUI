@@ -9,14 +9,13 @@
       browser.get(path);
 
       var firstItem = element(by.id('item1'));
-
       expect(firstItem.isPresent()).toBeTruthy();
 
       // Scroll down to bottom.
       browser.executeScript('document.querySelector(".page__content").scrollTop = 100000;');
 
+      // Check that the first element is removed.
       browser.wait(EC.stalenessOf(firstItem));
-
       expect(firstItem.isPresent()).not.toBeTruthy();
     });
   });

@@ -2,20 +2,18 @@
   'use strict';
 
   describe('popover', function() {
-    var path = '/test/e2e/popover/index.html';
+    var path = '/test/e2e/popover/index.html',
+      EC = protractor.ExpectedConditions;
 
     it('should be displayed when clicking the button', function() {
       browser.get(path);
 
-      var popover = element(by.css('ons-popover')),
-        button = element(by.css('ons-button'));
+      var popover = element(by.css('ons-popover'));
 
-      browser.wait(function() {
-        return browser.isElementPresent(popover);
-      });
+      browser.wait(EC.presenceOf(popover));
 
       expect(popover.isDisplayed()).not.toBeTruthy();
-      button.click();
+      element(by.css('ons-button')).click();
       expect(popover.isDisplayed()).toBeTruthy();
     });
   });
