@@ -2,7 +2,7 @@
   'use strict';
 
   describe('back-button', function() {
-    var path = '/test/e2e/back-button/index.html';
+    var path = '/test/e2e/backButton/index.html';
     var EC = protractor.ExpectedConditions;
 
     it('should exist', function() {
