@@ -8,7 +8,7 @@
     it('should be displayed when clicking the button', function() {
       browser.get(path);
 
-      var alertDialog = element(by.css('ons-alert-dialog')),
+      var alertDialog = element(by.css('ons-alert-dialog'));
 
       browser.wait(EC.presenceOf(alertDialog));
 
