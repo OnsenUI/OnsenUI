@@ -395,12 +395,15 @@ gulp.task('webdriver-download', function() {
   if (fs.existsSync(destDir + '/chromedriver')) {
     return gulp.src('');
   }
-  
+
   if (platform === 'linux') {
     chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.12/chromedriver_linux64.zip'; 
   }
   else if (platform === 'darwin') {
     chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.14/chromedriver_mac32.zip';
+  }
+  else {
+    chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.14/chromedriver_win32.zip';
   }
 
   var selenium = $.download('https://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar')
