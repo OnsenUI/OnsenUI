@@ -14,7 +14,6 @@
       //Waits for the ons-navigator loading
       browser.wait(EC.presenceOf(navi));
 
-      
       expect(navi.isDisplayed()).toBeTruthy();
     });
 
@@ -29,6 +28,7 @@
 
       //Waits for page1 to be fully loaded
       browser.wait(EC.visibilityOf(page2));
+      browser.wait(EC.invisibilityOf(page1));
       expect((page2).isDisplayed()).toBeTruthy();
       expect((page1).isDisplayed()).not.toBeTruthy();
       expect((page1).isPresent()).toBeTruthy();
