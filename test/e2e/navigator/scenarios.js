@@ -18,21 +18,13 @@
       expect(navi.isDisplayed()).toBeTruthy();
     });
 
-    it('should have "var" attribute', function() {
-      browser.get(path);
-
-      var navi = element(by.css('ons-navigator'));
-
-      expect((navi.getAttribute('var')).isPresent()).toBeTruthy();
-    });
-
     it('should switch page when a button is clicked', function() {
       browser.get(path);
 
       var page1 = element(by.id('page1'));
       var page2 = element(by.id('page2'));
 
-      var button = element(by.css('ons-button'));
+      var button = element(by.id('btn1'));
       button.click();
 
       //Waits for page1 to be fully loaded
@@ -41,7 +33,7 @@
       expect((page1).isDisplayed()).not.toBeTruthy();
       expect((page1).isPresent()).toBeTruthy();
 
-      var backButton = element(by.css('ons-back-button'));
+      var backButton = element(by.id('btn2'));
       backButton.click();
 
       //Waits for page2 to get destroyed

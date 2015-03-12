@@ -17,20 +17,17 @@
         <div style="text-align: center;">
           <p>Page 1</p>
           <br>
-          <ons-button id="btn" onclick="myNavigator.pushPage('page2.html')">Push</ons-button>
+          <ons-button id="btn1" onclick="myNavigator.pushPage('page2.html')">Push</ons-button>
         </div>
       </ons-page>
     </ons-navigator>
 
     <ons-template id="page2.html">
       <ons-page id="page2">
-        <ons-toolbar>
-          <div class="left">
-            <ons-back-button>Back</ons-back-button>
-          </div>
-        </ons-toolbar>
         <div style="text-align: center;">
           <p>Page 2</p>
+          <br>
+          <ons-button id="btn2" onclick="myNavigator.popPage()">Pop Page</ons-button>        
         </div>
       </ons-page>
     </ons-template>
