@@ -48,7 +48,7 @@
  * </script>
  *
  * <ons-list ng-controller="MyController">
- *   <ons-list-item ons-lazy-repeat="MyDelegate"`>
+ *   <ons-list-item ons-lazy-repeat="MyDelegate">
  *     {{ item }}
  *   </ons-list-item>
  * </ons-list>
