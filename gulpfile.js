@@ -31,6 +31,7 @@ var dgeni = require('dgeni');
 var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
 var os = require('os');
 var fs = require('fs');
+var argv = require('yargs').argv;
 
 ////////////////////////////////////////
 // browser-sync
@@ -397,12 +398,15 @@ gulp.task('webdriver-download', function() {
   if (fs.existsSync(destDir + '/chromedriver')) {
     return gulp.src('');
   }
-  
+
   if (platform === 'linux') {
     chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.12/chromedriver_linux64.zip'; 
   }
   else if (platform === 'darwin') {
     chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.14/chromedriver_mac32.zip';
+  }
+  else {
+    chromeDriverUrl = 'http://chromedriver.storage.googleapis.com/2.14/chromedriver_win32.zip';
   }
 
   var selenium = $.download('https://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar')
@@ -428,14 +432,26 @@ gulp.task('test', ['webdriver-download', 'prepare'], function() {
     port: port
   });
 
-  return gulp.src(['test/e2e/**/*.js'])
-    .pipe($.protractor.protractor({
-      configFile: 'protractor.conf.js',
-      args: ['--baseUrl', 'http://127.0.0.1:' + port]
-    })).on('error', function(e) {
+  var conf = {
+    configFile: 'protractor.conf.js',
+    args: [
+      '--baseUrl', 'http://127.0.0.1:' + port,
+      '--seleniumServerJar', __dirname + '/.selenium/selenium-server-standalone-2.45.0.jar',
+      '--chromeDriver', __dirname + '/.selenium/chromedriver'
+    ]
+  };
+
+  var specs = argv.specs ?
+    argv.specs.split(',').map(function(s) { return s.trim(); }) :
+    ['test/e2e/**/*.js'];
+
+  return gulp.src(specs)
+    .pipe($.protractor.protractor(conf))
+    .on('error', function(e) {
       console.log(e)
       $.connect.serverClose();
-    }).on('end', function() {
+    })
+    .on('end', function() {
       $.connect.serverClose();
     });
 });

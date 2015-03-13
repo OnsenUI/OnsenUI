@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../build/js/angular/angular.js"></script>
+    <script src="../../../build/js/onsenui.js"></script>
+    <script>
+      ons.bootstrap()
+
+      .controller('TestController', function($scope) {
+        $scope.Delegate = {
+          configureItemScope: function(index, scope) {
+            scope.number = index + 1;
+          },
+          calculateItemHeight: function() {
+            return 45;
+          },
+          countItems: function() {
+            return 100000;
+          }
+        };
+
+        $scope.nbrOfTimesClicked = 0;
+        $scope.click = function($event) {
+          $scope.nbrOfTimesClicked++;
+        };
+      });
+    </script>
+  </head>
+  <body>
+    <ons-page ng-controller="TestController">
+      <ons-toolbar>
+        <div class="center">You clicked <span id="times-clicked">{{ nbrOfTimesClicked }}</span> times.</div>
+      </ons-toolbar>
+      <ons-list>
+        <ons-list-item modifier="tappable" ons-lazy-repeat="Delegate">
+          <div ng-click="click($event)" id="item{{number}}">Item #{{number}}</div>
+        </ons-list-item>
+      </ons-list>
+    </ons-page>
+  </body>
+</html>

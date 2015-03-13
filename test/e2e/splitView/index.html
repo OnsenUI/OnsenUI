@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../build/js/angular/angular.js"></script>
+    <script src="../../../build/js/onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+    </script>
+  </head>
+  <body>
+    <ons-split-view
+      secondary-page="secondary.html"
+      main-page="main.html"
+      collapse="width 500px">
+    </ons-split-view>
+
+    <ons-template id="main.html">
+      <ons-page>
+        <div id="main">main page</div>
+      </ons-page>
+    </ons-template>
+
+    <ons-template id="secondary.html">
+      <ons-page>
+        <div id="secondary">secondary page</div>
+      </ons-page>
+    </ons-template>
+  </body>
+</html>

@@ -7,7 +7,6 @@
 
     <script src="../../../build/js/angular/angular.js"></script>    
     <script src="../../../build/js/onsenui.js"></script>    
-    <script src="../vendor/jquery.js"></script>    
     <script>
       ons.bootstrap();
     </script>
@@ -44,10 +43,10 @@
 
     <script type="text/ons-template" id="menu.html">
       <ons-list>
-        <ons-list-item modifier="chevron" ng-click="menu.setAbovePage('page1.html', {closeMenu: true})">
+        <ons-list-item modifier="chevron" ng-click="menu.setMainPage('page1.html', {closeMenu: true})">
           page1.html
         </ons-list-item>
-        <ons-list-item modifier="chevron" ng-click="menu.setAbovePage('page2.html', {closeMenu: true})">
+        <ons-list-item modifier="chevron" ng-click="menu.setMainPage('page2.html', {closeMenu: true})">
           page1.html
         </ons-list-item>
       </ons-list>

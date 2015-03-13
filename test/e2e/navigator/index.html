@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../build/js/angular/angular.js"></script>
+    <script src="../../../build/js/onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+    </script>
+  </head>
+  <body>
+    <ons-navigator title="Navigator" var="myNavigator">
+      <ons-page id="page1">
+        <div style="text-align: center;">
+          <p>Page 1</p>
+          <br>
+          <ons-button id="btn1" onclick="myNavigator.pushPage('page2.html')">Push</ons-button>
+        </div>
+      </ons-page>
+    </ons-navigator>
+
+    <ons-template id="page2.html">
+      <ons-page id="page2">
+        <div style="text-align: center;">
+          <p>Page 2</p>
+          <br>
+          <ons-button id="btn2" onclick="myNavigator.popPage()">Pop Page</ons-button>        
+        </div>
+      </ons-page>
+    </ons-template>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+(function() {
+  'use strict';
+
+  describe('tabbar', function() {
+    var path = '/test/e2e/tabbar/index.html';
+
+    it('should have an element', function() {
+      browser.get(path);
+      expect(element(by.css('ons-tabbar')).isPresent()).toBeTruthy();
+    });
+
+    it('should switch page when a tab is clicked', function() {
+      browser.get(path);
+
+      var tabs  = [
+        element(by.css('ons-tab[label="Page 1"]')),
+        element(by.css('ons-tab[label="Page 2"]'))
+      ];
+
+      tabs[0].click();
+      expect(element(by.id('page1')).isPresent()).toBe(true);
+      expect(element(by.id('page2')).isPresent()).not.toBe(true);
+
+      tabs[1].click();
+      expect(element(by.id('page2')).isPresent()).toBe(true);
+      expect(element(by.id('page1')).isPresent()).not.toBe(true);
+    });
+  });
+})();
