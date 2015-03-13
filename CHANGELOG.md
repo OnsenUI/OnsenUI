@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v1.2.3-dev
+v1.3.0-dev
 ----
  * ons-sliding-menu: Fixed [#464](https://github.com/OnsenUI/OnsenUI/issues/464).
  * ons-pull-hook: Fixed [#467](https://github.com/OnsenUI/OnsenUI/issues/467).
