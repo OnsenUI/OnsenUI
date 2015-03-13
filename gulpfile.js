@@ -128,7 +128,6 @@ gulp.task('prepare', ['html2js'], function() {
 
     // onsenui.js
     gulp.src([
-      'framework/lib/winstore-jscompat.js',
       'framework/lib/*.js',
       'framework/directives/templates.js',
       'framework/js/doorlock.js',
@@ -148,7 +147,6 @@ gulp.task('prepare', ['html2js'], function() {
 
     // onsenui_all.js
     gulp.src([
-      'framework/lib/winstore-jscompat.js',
       'framework/lib/angular/angular.js',
       'framework/lib/*.js',
       'framework/directives/templates.js',
