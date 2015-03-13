@@ -56,6 +56,8 @@ input, textarea {
 .page__content {
   background-color: transparent !important;
   background: transparent !important;
+  -ms-touch-action: none;  	
+  touch-action: none !important;
 }
 
 .page__status-bar-fill ~ .page__content {
