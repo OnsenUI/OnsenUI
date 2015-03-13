@@ -2,9 +2,9 @@
     function Viewport() {
 
         this.PRE_IOS7_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
-        this.IOS7_VIEWPORT = "width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no";
+        this.IOS7_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
         this.DEFAULT_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
-        
+
         this.ensureViewportElement();
         this.platform = {};
         this.platform.name = this.getPlatformName();
@@ -19,7 +19,7 @@
             this.viewportElement = document.createElement('meta');
             this.viewportElement.name = "viewport";
             document.head.appendChild(this.viewportElement);
-        }        
+        }
     },
 
     Viewport.prototype.setup = function() {
