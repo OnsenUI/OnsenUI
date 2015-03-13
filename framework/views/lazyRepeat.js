@@ -135,7 +135,6 @@ limitations under the License.
           }
 
           this._parentElement.append(clone);
-          clone.removeAttr('ons-lazy-repeat');
 
           clone.css({
             position: 'absolute',
