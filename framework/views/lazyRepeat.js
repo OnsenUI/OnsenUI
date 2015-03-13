@@ -150,8 +150,6 @@ limitations under the License.
             scope: childScope
           };
 
-          $compile(clone)(childScope);
- 
           // Don't show elements before they are finished rendering.
           this._scope.$evalAsync(function() {
             clone.css('display', 'block');

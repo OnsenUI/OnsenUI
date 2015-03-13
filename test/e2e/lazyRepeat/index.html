@@ -22,14 +22,22 @@
             return 100000;
           }
         };
+
+        $scope.nbrOfTimesClicked = 0;
+        $scope.click = function($event) {
+          $scope.nbrOfTimesClicked++;
+        };
       });
     </script>
   </head>
   <body>
     <ons-page ng-controller="TestController">
+      <ons-toolbar>
+        <div class="center">You clicked <span id="times-clicked">{{ nbrOfTimesClicked }}</span> times.</div>
+      </ons-toolbar>
       <ons-list>
-        <ons-list-item ons-lazy-repeat="Delegate">
-          <span id="item{{number}}">Item #{{number}}</span>
+        <ons-list-item modifier="tappable" ons-lazy-repeat="Delegate">
+          <div ng-click="click($event)" id="item{{number}}">Item #{{number}}</div>
         </ons-list-item>
       </ons-list>
     </ons-page>
