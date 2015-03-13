@@ -62,6 +62,7 @@
     "prompt": "*",
     "run-sequence": "~0.3.6",
     "topdoc": "~0.4.0",
-    "topdoc-theme": "~0.2.7"
+    "topdoc-theme": "~0.2.7",
+    "yargs": "^3.5.4"
   }
 }

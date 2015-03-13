@@ -96,10 +96,16 @@ Onsen UI has end-to-end testing using Protractor. Use the following command to r
 
 ```bash
 $ npm install
-$ npm test
+$ gulp test
 ```
 
 It will take some time the because it will download a stand-alone Selenium Server and a Chrome webdriver the first time it's executed.
+
+To run a single test or a group of tests use the `--specs` parameter and provide a comma-separated list of spec files:
+
+```bash
+$ gulp test --specs test/e2e/lazyRepeat/scenarios.js
+```
 
 ## Developing your app
 
