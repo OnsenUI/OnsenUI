@@ -19,7 +19,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('LazyRepeatView', function($onsen, $document, $compile) {
+  module.factory('LazyRepeatView', function($onsen, $document) {
 
     var LazyRepeatView = Class.extend({
 
@@ -150,8 +150,6 @@ limitations under the License.
             scope: childScope
           };
 
-          $compile(clone)(childScope);
- 
           // Don't show elements before they are finished rendering.
           this._scope.$evalAsync(function() {
             clone.css('display', 'block');
