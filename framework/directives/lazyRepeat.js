@@ -75,6 +75,7 @@
     return {
       restrict: 'A',
       replace: false,
+      priority: 1,
       transclude: 'element',
       compile: function(element, attrs, linker) {
         return function(scope, element, attrs) {
