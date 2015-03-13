@@ -19,7 +19,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('LazyRepeatView', function($onsen, $document, $compile) {
+  module.factory('LazyRepeatView', function($onsen, $document) {
 
     var LazyRepeatView = Class.extend({
 
