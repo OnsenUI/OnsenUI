@@ -299,7 +299,8 @@ limitations under the License.
 
         this._hammer = new Hammer(element[0], {
           dragMinDistance: 1,
-          dragDistanceCorrection: false
+          dragDistanceCorrection: false,
+          behavior: {touchAction: 'none'}
         });
 
         // Event listeners
