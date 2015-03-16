@@ -159,6 +159,9 @@
  * @param {Boolean} [options.keepPage]
  *   [en]If true the page will not be changed.[/en]
  *   [ja]タブバーが現在表示しているpageを変えない場合にはtrueを指定します。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定します。"fade", "none"のいずれかを指定できます。[/ja]
  * @return {Boolean}
  *   [en]true if the change was successful.[/en]
  *   [ja]変更が成功した場合にtrueを返します。[/ja]

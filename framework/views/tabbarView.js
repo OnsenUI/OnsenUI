@@ -150,6 +150,7 @@ limitations under the License.
        * @param {Number} index
        * @param {Object} [options]
        * @param {Boolean} [options.keepPage]
+       * @param {String} [options.animation]
        * @return {Boolean} success or not
        */
       setActiveTab: function(index, options) {
@@ -205,6 +206,9 @@ limitations under the License.
             }.bind(this),
             _removeElement: removeElement
           };
+          if (options.animation) {
+              params.animation = options.animation;
+          }
 
           if (selectedTabItem.isPersistent() && selectedTabItem._pageElement) {
             this._loadPersistentPageDOM(selectedTabItem._pageElement, params);
