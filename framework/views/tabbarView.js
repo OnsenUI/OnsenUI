@@ -411,7 +411,7 @@ limitations under the License.
         throw new Error('"animator" param must be an instance of TabbarAnimator');
       }
 
-      this._transitionAnimatorDict[name] = animator;
+      this._animatorDict[name] = animator;
     };
 
 
