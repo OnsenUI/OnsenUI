@@ -395,7 +395,7 @@ gulp.task('webdriver-download', function() {
   var destDir = __dirname + '/.selenium/';
 
   // Only download once.
-  if (fs.existsSync(destDir + '/chromedriver')) {
+  if (fs.existsSync(destDir + '/chromedriver') || fs.existsSync(destDir + '/chromedriver.exe')) {
     return gulp.src('');
   }
 
