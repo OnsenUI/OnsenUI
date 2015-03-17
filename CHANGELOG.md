@@ -11,6 +11,8 @@ v1.3.0-dev
  * ons-alert-dialog: Fixed [#478](https://github.com/OnsenUI/OnsenUI/issues/478).
  * ons-pull-hook: Fixed [#498](https://github.com/OnsenUI/OnsenUI/issues/498).
  * ons-navigator: Blocks events on pages while animation is running. This fixes [#457](https://github.com/OnsenUI/OnsenUI/issues/457) and also fixes the issue where pages were pushed/popped twice when tapping quickly.
+ * ons-alert-dialog: Fixed [#511](https://github.com/OnsenUI/OnsenUI/issues/511).
+ * ons-alert-dialog: Fixed [#512](https://github.com/OnsenUI/OnsenUI/issues/512).
 
 v1.2.2
 ----
