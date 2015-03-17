@@ -143,6 +143,10 @@ The basic workflow when making contributions is the following:
 
 After you've made a pull request we will review it. If everything is fine and we like the change the contribution will be pulled into the main Onsen UI repository. In the case where there are some issues with the code or we disagree with how it's been implemented we will describe the issues in the comments so they can be corrected.
 
+## Contributors
+
+Please see the [list of contributors](/OnsenUI/OnsenUI/blob/master/CONTRIBUTORS.md)
+
 ### Code style
 
 There are some things to keep in mind when making code contributions to Onsen UI. The code must adhere to the general code style used.
