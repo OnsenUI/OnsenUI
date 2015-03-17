@@ -260,7 +260,7 @@ gulp.task('prepare-project-templates', function(done) {
 });
 
 ////////////////////////////////////////
-// compress
+// compress-project-templates
 ////////////////////////////////////////
 gulp.task('compress-project-templates', function() {
   var names = [
@@ -288,6 +288,21 @@ gulp.task('compress-project-templates', function() {
 });
 
 ////////////////////////////////////////
+// compress-distribution-package
+////////////////////////////////////////
+gulp.task('compress-distribution-package', function() {
+  var src = [
+    __dirname + '/build/**',
+    '!' + __dirname + '/build/docs/**',
+    '!' + __dirname + '/build/stylus/**'
+  ];
+
+  return gulp.src(src)
+    .pipe($.zip('onsenui.zip'))
+    .pipe(gulp.dest(__dirname + '/build'));
+});
+
+////////////////////////////////////////
 // build
 ////////////////////////////////////////
 gulp.task('build', function(done) {
@@ -299,6 +314,7 @@ gulp.task('build', function(done) {
     'prepare-project-templates',
     'prepare-css-components',
     'compress-project-templates',
+    'compress-distribution-package',
     done
   );
 });
