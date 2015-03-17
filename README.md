@@ -145,7 +145,7 @@ After you've made a pull request we will review it. If everything is fine and we
 
 ## Contributors
 
-Please see the [list of contributors](/OnsenUI/OnsenUI/blob/master/CONTRIBUTORS.md)
+Please see the full [list of contributors](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTORS.md).
 
 ### Code style
 

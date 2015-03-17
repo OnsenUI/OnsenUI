@@ -1,7 +1,7 @@
 Contributors
 ============
 
-The project was originally created by [Kruy Vanna](https://github.com/kruyvanna). Mao Takahashi created the logo and the project name was contributed by Khourn Khemry
+The project was originally created by [Kruy Vanna](https://github.com/kruyvanna). Mao Takahashi created the logo and the project name was contributed by Khourn Khemry.
 
 List of code contributors (in no particular order):
 
