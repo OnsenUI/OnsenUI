@@ -164,10 +164,16 @@ limitations under the License.
 
 /**
  * @ngdoc method
- * @signature createAlertDialog(page)
+ * @signature createAlertDialog(page, [options])
  * @param {String} page
  *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-alert-dialog> component.[/en]
  *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Object} [options.parentScope]
+ *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
+ *   [ja][/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the alert dialog component object.[/en]
  *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
@@ -198,10 +204,16 @@ limitations under the License.
 
 /**
  * @ngdoc method
- * @signature createPopover(page)
+ * @signature createPopover(page, [options])
  * @param {String} page
  *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
  *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Object} [options.parentScope]
+ *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
+ *   [ja][/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the popover component object.[/en]
  *   [ja]ポップオーバーのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
