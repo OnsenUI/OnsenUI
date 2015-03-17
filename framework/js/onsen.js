@@ -178,10 +178,16 @@ limitations under the License.
 
 /**
  * @ngdoc method
- * @signature createDialog(page)
+ * @signature createDialog(page, [options])
  * @param {String} page
  *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
  *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Object} [options.parentScope]
+ *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
+ *   [ja][/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the dialog component object.[/en]
  *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
@@ -503,6 +509,8 @@ window.ons = (function(){
 
       /**
        * @param {String} page
+       * @param {Object} [options]
+       * @param {Object} [options.parentScope]
        * @return {Promise}
        */
       createAlertDialog: function(page) {
@@ -512,7 +520,7 @@ window.ons = (function(){
 
         var alertDialog = angular.element('<ons-alert-dialog>'),
           $onsen = this._getOnsenService();
-        
+
         angular.element(document.body).append(angular.element(alertDialog));
 
         return $onsen.getPageHTMLAsync(page).then(function(html) {
@@ -527,8 +535,14 @@ window.ons = (function(){
             alertDialog.attr(attrs[i].name, attrs[i].value); 
           }
           alertDialog.html(el.html());
-          ons.compile(alertDialog[0]);
-      
+
+          if (options.parentScope) {
+            ons.$compile(alertDialog)(options.parentScope.$new());
+          }
+          else {
+            ons.compile(alertDialog[0]);
+          }
+
           if (el.attr('disabled')) {
             alertDialog.attr('disabled', 'disabled');
           }
@@ -539,9 +553,13 @@ window.ons = (function(){
 
       /**
       * @param {String} page
+      * @param {Object} [options]
+      * @param {Object} [options.parentScope]
       * @return {Promise}
       */
-      createDialog: function(page) {
+      createDialog: function(page, options) {
+        options = options || {};
+
         if (!page) {
           throw new Error('Page url must be defined.');
         }
@@ -563,7 +581,13 @@ window.ons = (function(){
             dialog.attr(attrs[i].name, attrs[i].value); 
           }
           dialog.html(el.html());
-          ons.compile(dialog[0]);
+
+          if (options.parentScope) {
+            ons.$compile(dialog)(options.parentScope.$new());
+          }
+          else {
+            ons.compile(dialog[0]);
+          }
 
           if (el.attr('disabled')) {
             dialog.attr('disabled', 'disabled');
@@ -596,6 +620,8 @@ window.ons = (function(){
 
       /**
        * @param {String} page
+       * @param {Object} [options]
+       * @param {Object} [options.parentScope]
        * @return {Promise}
        */
       createPopover: function(page) {
@@ -605,7 +631,7 @@ window.ons = (function(){
 
         var popover = angular.element('<ons-popover>'),
           $onsen = this._getOnsenService();
-        
+
         angular.element(document.body).append(angular.element(popover));
 
         return $onsen.getPageHTMLAsync(page).then(function(html) {
@@ -620,8 +646,14 @@ window.ons = (function(){
             popover.attr(attrs[i].name, attrs[i].value); 
           }
           popover.html(el.html());
-          ons.compile(popover[0]);
-      
+
+          if (options.parentScope) {
+            ons.$compile(popover)(options.parentScope.$new());
+          }
+          else {
+            ons.compile(popover[0]);
+          }
+
           if (el.attr('disabled')) {
             popover.attr('disabled', 'disabled');
           }
