@@ -525,7 +525,9 @@ window.ons = (function(){
        * @param {Object} [options.parentScope]
        * @return {Promise}
        */
-      createAlertDialog: function(page) {
+      createAlertDialog: function(page, options) {
+        options = options || {};
+
         if (!page) {
           throw new Error('Page url must be defined.');
         }
@@ -636,7 +638,9 @@ window.ons = (function(){
        * @param {Object} [options.parentScope]
        * @return {Promise}
        */
-      createPopover: function(page) {
+      createPopover: function(page, options) {
+        options = options || {};
+
         if (!page) {
           throw new Error('Page url must be defined.');
         }
