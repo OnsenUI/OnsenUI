@@ -36,7 +36,19 @@ limitations under the License.
       this.pageScope = params.pageScope;
       this.options = params.options;
       this.navigator = params.navigator;
+
+      // Block events while page is being animated to stop scrolling, pressing buttons, etc.
+      this._blockEvents = function(event) {
+        if (this.navigator._isPopping || this.navigator._isPushing) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }.bind(this);
+
+      this.element.on(this._pointerEvents, this._blockEvents);
     },
+
+    _pointerEvents: 'touchstart touchend touchmove click',
 
     /**
      * @return {PageView}
@@ -54,9 +66,11 @@ limitations under the License.
     destroy: function() {
       this.pageScope.$destroy();
 
+      this.element.off(this._pointerEvents, this._blockEvents);
       this.element.remove();
-      this._pageView = null;
       this.element = null;
+
+      this._pageView = null;
       this.pageScope = null;
       this.options = null;
 
@@ -118,6 +132,8 @@ limitations under the License.
         this._doorLock = new DoorLock();
         this.pages = [];
 
+        this._isPopping = this._isPushing = false;
+
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
         this._scope.$on('$destroy', this._destroy.bind(this));
       },
@@ -154,7 +170,6 @@ limitations under the License.
 
         throw new Error('invalid state');
       },
-
 
       _createPageElementAndLinkFunction : function(templateHTML, pageScope, done) {
         var div = document.createElement('div');
@@ -400,6 +415,7 @@ limitations under the License.
             console.timeEnd('pushPageDOM');
           }
 
+          this._isPushing = false;
           unlock();
 
           this.emit('postpush', event);
@@ -409,6 +425,8 @@ limitations under the License.
           }
           element = null;
         }.bind(this);
+
+        this._isPushing = true;
 
         if (this.pages.length > 1) {
           var leavePage = this.pages.slice(-2)[0];
@@ -501,8 +519,11 @@ limitations under the License.
 
         var callback = function() {
           leavePage.destroy();
+
+          this._isPopping = false;
           unlock();
           this.emit('postpop', event);
+
           event.leavePage = null;
 
           if (typeof options.onTransitionEnd === 'function') {
@@ -510,6 +531,7 @@ limitations under the License.
           }
         }.bind(this);
 
+        this._isPopping = true;
         leavePage.options.animator.pop(enterPage, leavePage, callback);
       },
 
