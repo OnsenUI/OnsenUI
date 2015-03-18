@@ -11,25 +11,34 @@
       ons.bootstrap()
 
       .controller('TestController', function($scope) {
+        $scope.person = {
+          name: 'Andreas'
+        };
+
         ons.ready(function() {
-          ons.createDialog('dialog.html').then(function(dialog) {
+          ons.createDialog('dialog.html', {parentScope: $scope}).then(function(dialog) {
             $scope.dialog = dialog;
           });
         });
 
         $scope.show = function() {
+          $scope.$evalAsync();
+
           $scope.dialog.show();
         };
       });
     </script>
   </head>
-  <body ng-controller="TestController">
-    <ons-page>
+  <body>
+    <ons-page ng-controller="TestController">
       <ons-button ng-click="show()">Show dialog</ons-button>
+      <p id="name">Hello there, {{ person.name }}!</p>
     </ons-page>
 
     <ons-template id="dialog.html">
-      <ons-dialog var="dialog">
+      <ons-dialog var="dialog" cancelable>
+        <p>What's your name?</p>
+        <input ng-model="person.name">
       </ons-dialog>
     </ons-template>
   </body>

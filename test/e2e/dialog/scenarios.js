@@ -15,5 +15,11 @@
       element(by.css('ons-button')).click();
       expect(dialog.isDisplayed()).toBeTruthy();
     });
+
+    it('should bind to the parent scope', function() {
+      expect(element(by.id('name')).getText()).toBe('Hello there, Andreas!');
+      element(by.model('person.name')).sendKeys(Array(10).join(protractor.Key.BACK_SPACE) + 'Anatoo');
+      expect(element(by.id('name')).getText()).toBe('Hello there, Anatoo!');
+    });
   });
 })();
