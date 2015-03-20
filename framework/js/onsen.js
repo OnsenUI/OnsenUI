@@ -285,6 +285,7 @@ window.ons = (function(){
     });
   }
 
+  //Change the default touchAction of Hammer.js, needed for Windows Phone app
   function changeHammerDefault() {
     Hammer.defaults.behavior.touchAction = 'none';
   }
