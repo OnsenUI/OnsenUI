@@ -234,6 +234,7 @@ window.ons = (function(){
   waitDeviceReady();
   waitOnsenUILoad();
   initAngularModule();
+  changeHammerDefault();
 
   return ons;
 
@@ -282,6 +283,10 @@ window.ons = (function(){
 
       ons.$compile = $compile;
     });
+  }
+
+  function changeHammerDefault() {
+    Hammer.defaults.behavior.touchAction = 'none';
   }
 
   function initKeyboardEvents() {
