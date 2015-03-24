@@ -17,6 +17,8 @@
       </ons-tab>
       <ons-tab label="Page 2" page="page2.html">
       </ons-tab>
+      <ons-tab label="Page 3" page="page3.html" persistent>
+      </ons-tab>
     </ons-tabbar>
 
     <ons-template id="page1.html">
@@ -30,10 +32,23 @@
     <ons-template id="page2.html">
       <ons-page>
         <div id="page2">
-          <p style="text-align: center;">Page 2</p>
+          <p style="text-align: center;">
+            Page 2
+            <input id="page2-input" type="text">
+          </p>
         </div>
       </ons-page>
     </ons-template>
 
+    <ons-template id="page3.html">
+      <ons-page>
+        <div id="page3">
+          <p style="text-align: center;">
+            Page 3
+            <input id="page3-input" type="text">
+          </p>
+        </div>
+      </ons-page>
+    </ons-template>
   </body>
 </html>
