@@ -291,7 +291,7 @@
 
 /**
  * @ngdoc method
- * @signature getAutoScrollRatio(ratio)
+ * @signature getAutoScrollRatio()
  * @return {Number}
  *   [en]The current auto scroll ratio.[/en]
  *   [ja]現在のオートスクロールのratio値。[/ja]
