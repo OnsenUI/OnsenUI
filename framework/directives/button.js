@@ -117,7 +117,7 @@
  *   [ja]このボタンをdisabled状態にするかどうかを設定します。[/ja]
  * @param {String} disabled
  *   [en]If true the button will be disabled.[/en]
- *   [ja][/ja]
+ *   [ja]disabled状態にするかどうかを真偽値で指定します。[/ja]
  */
 
 /**
