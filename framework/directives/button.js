@@ -115,6 +115,9 @@
  * @description
  *   [en]Disable or enable the button.[/en]
  *   [ja]このボタンをdisabled状態にするかどうかを設定します。[/ja]
+ * @param {String} disabled
+ *   [en]If true the button will be disabled.[/en]
+ *   [ja][/ja]
  */
 
 /**
