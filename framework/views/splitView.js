@@ -139,14 +139,7 @@ limitations under the License.
       _onResize: function() {
         var lastMode = this._mode;
 
-        if ($onsen.isAndroid()) {
-          setTimeout(function() {
-            this._considerChangingCollapse();
-          }.bind(this), 200);
-        }
-        else {
-          this._considerChangingCollapse();
-        }
+        this._considerChangingCollapse();
 
         if (lastMode === COLLAPSE_MODE && this._mode === COLLAPSE_MODE) {
           this._animator.onResized({
@@ -219,7 +212,7 @@ limitations under the License.
         if (typeof this._scope.collapse === 'string') {
           c = this._scope.collapse.trim();
         }
-        
+
         if (c == 'portrait') {
           return $onsGlobal.orientation.isPortrait();
         } else if (c == 'landscape') {
@@ -229,12 +222,8 @@ limitations under the License.
           if (num.indexOf('px') >= 0) {
             num = num.substr(0,num.length-2);
           }
-       
+
           var width = window.innerWidth;
-          
-          if ($onsen.isAndroid()) {
-            width = screen.width;
-          }
 
           return isNumber(num) && width < num;
         } else {

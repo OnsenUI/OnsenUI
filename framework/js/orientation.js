@@ -164,10 +164,27 @@ window.ons.orientation = (function() {
       },
 
       _onOrientationChange: function() {
-        // We use setImmediate because window's dimention information is not updated on "orientationchange" in some cases.
-        setImmediate(function() {
-          this.emit('change', {isPortrait: this.isPortrait()});
-        }.bind(this));
+        var isPortrait = this._isPortrait();
+
+        // Wait for the dimensions to change because
+        // of Android inconsistency.
+        var nIter = 0;
+        var interval = setInterval(function() {
+          nIter++;
+
+          var w = window.innerWidth,
+            h = window.innerHeight;
+
+          if ((isPortrait && w <= h) ||
+             (!isPortrait && w >= h)) {
+            this.emit('change', {isPortrait: isPortrait});
+            clearInterval(interval);
+          }
+          else if (nIter === 50) {
+            this.emit('change', {isPortrait: isPortrait});
+            clearInterval(interval);
+          }
+        }.bind(this), 20);
       },
 
       // Run on not mobile browser.
