@@ -51,6 +51,9 @@
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -62,6 +65,9 @@
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -73,6 +79,9 @@
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -84,6 +93,9 @@
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -342,6 +354,8 @@
 
           var slidingMenu = new SlidingMenuView(scope, element, attrs);
 
+          $onsen.registerEventHandlers(slidingMenu, 'preopen preclose postopen postclose');
+
           if (mainHtml && !attrs.mainPage) {
             slidingMenu._appendMainPage(null, mainHtml);
           }
@@ -354,6 +368,7 @@
           element.data('ons-sliding-menu', slidingMenu);
 
           scope.$on('$destroy', function(){
+            $onsen.unregisterEventHandlers(slidingMenu, 'preopen preclose postopen postclose');
             slidingMenu._events = undefined;
             element.data('ons-sliding-menu', undefined);
           });

@@ -2,7 +2,8 @@
   'use strict';
 
   describe('sliding menu', function() {
-    var path = '/test/e2e/slidingMenu/index.html';
+    var path = '/test/e2e/slidingMenu/index.html',
+      EC = protractor.ExpectedConditions;
 
     it('should have an element', function() {
       browser.get(path);
@@ -34,6 +35,25 @@
       });
 
       expect(locationBefore).not.toEqual(button.getLocation());
+    });
+
+    describe('event handlers', function() {
+      var path = '/test/e2e/slidingMenu/events.html';
+
+      it('should trigger events', function() {
+        browser.get(path);
+
+        var button = element(by.id('open-menu'));
+        expect(button.isDisplayed()).toBeTruthy();
+
+        button.click();
+        browser.wait(EC.invisibilityOf(button));
+        expect(button.isDisplayed()).not.toBeTruthy();
+
+        element(by.id('close-menu')).click();
+        browser.wait(EC.visibilityOf(button));
+        expect(button.isDisplayed()).toBeTruthy();
+      });
     });
   });
 })();

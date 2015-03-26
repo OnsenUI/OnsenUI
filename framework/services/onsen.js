@@ -303,6 +303,41 @@ limitations under the License.
           }
         },
 
+        _registerEventHandler: function(component, eventName) {
+          var capitalizedEventName = eventName.charAt(0).toUpperCase() + eventName.slice(1);
+
+          component.on(eventName, function(event) {
+            var handler = component._attrs['ng' + capitalizedEventName];
+            if (handler) {
+              component._scope.$evalAsync(handler, {$event: event});
+            }
+          });
+        },
+
+        /**
+         * Register event handlers for attributes.
+         *
+         * @param {Object} component
+         * @param {String} eventNames
+         */
+        registerEventHandlers: function(component, eventNames) {
+          eventNames = eventNames.trim().split(/\s+/);
+
+          for (var i = 0, l = eventNames.length; i < l; i ++) {
+            var eventName = eventNames[i];
+            this._registerEventHandler(component, eventName);
+          }
+        },
+
+        /**
+         * Unregister attribute event handlers.
+         *
+         * @param {Object} component
+         * @param {String} eventNames
+         */
+        unregisterEventHandlers: function(component, eventNames) {
+        },
+
         /**
          * @return {Boolean}
          */
