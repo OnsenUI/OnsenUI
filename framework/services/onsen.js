@@ -330,15 +330,6 @@ limitations under the License.
         },
 
         /**
-         * Unregister attribute event handlers.
-         *
-         * @param {Object} component
-         * @param {String} eventNames
-         */
-        unregisterEventHandlers: function(component, eventNames) {
-        },
-
-        /**
          * @return {Boolean}
          */
         isAndroid: function() {

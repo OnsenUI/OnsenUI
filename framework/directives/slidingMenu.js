@@ -368,7 +368,6 @@
           element.data('ons-sliding-menu', slidingMenu);
 
           scope.$on('$destroy', function(){
-            $onsen.unregisterEventHandlers(slidingMenu, 'preopen preclose postopen postclose');
             slidingMenu._events = undefined;
             element.data('ons-sliding-menu', undefined);
           });

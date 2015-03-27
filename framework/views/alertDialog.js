@@ -32,6 +32,8 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
+        this._attrs = attrs;
+
         this._element.css({
           display: 'none',
           zIndex: 20001
@@ -151,7 +153,7 @@ limitations under the License.
 
         this._scope.$destroy();
 
-        this._deviceBackButtonHandler = this._element = this._mask = null;
+        this._deviceBackButtonHandler = this._scope = this._attrs = this._element = this._mask = null;
       },
 
       /**
