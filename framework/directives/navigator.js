@@ -19,7 +19,7 @@
  * @guide DefiningMultiplePagesinSingleHTML
  *   [en]Defining multiple pages in single html[/en]
  *   [ja]複数のページを1つのHTMLに記述する[/ja]
- * @seealso ons-toolbar 
+ * @seealso ons-toolbar
  *   [en]ons-toolbar component[/en]
  *   [ja]ons-toolbarコンポーネント[/ja]
  * @seealso ons-back-button
@@ -187,6 +187,9 @@
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
  *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
  * @param {Function} [options.onTransitionEnd]
  *   [en]Function that is called when the transition has ended.[/en]
  *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
