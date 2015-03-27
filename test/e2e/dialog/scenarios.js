@@ -12,7 +12,7 @@
       browser.wait(EC.presenceOf(dialog));
 
       expect(dialog.isDisplayed()).not.toBeTruthy();
-      element(by.css('ons-button')).click();
+      element(by.id('open-dialog')).click();
       expect(dialog.isDisplayed()).toBeTruthy();
     });
 
@@ -20,6 +20,21 @@
       expect(element(by.id('name')).getText()).toBe('Hello there, Andreas!');
       element(by.model('person.name')).sendKeys(Array(10).join(protractor.Key.BACK_SPACE) + 'Anatoo');
       expect(element(by.id('name')).getText()).toBe('Hello there, Anatoo!');
+    });
+
+    it('should emit events', function() {
+      browser.get(path);
+
+      var button = element(by.id('open-dialog'));
+      expect(button.isDisplayed()).toBeTruthy();
+
+      button.click();
+      browser.wait(EC.invisibilityOf(button));
+      expect(button.isDisplayed()).not.toBeTruthy();
+
+      element(by.id('close-dialog')).click();
+      browser.wait(EC.visibilityOf(button));
+      expect(button.isDisplayed()).toBeTruthy();
     });
   });
 })();

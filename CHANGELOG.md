@@ -19,6 +19,7 @@ v1.3.0-dev
  * ons-sliding-menu: Added event handler attributes.
  * ons-alert-dialog: Added event handler attributes.
  * ons-carousel: Added event handler attributes.
+ * ons-dialog: Added event handler attributes.
 
 v1.2.2
 ----

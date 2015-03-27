@@ -318,6 +318,7 @@
 
             $onsen.addModifierMethods(dialog, 'dialog--*', angular.element(element[0].querySelector('.dialog')));
             $onsen.declareVarAttribute(attrs, dialog);
+            $onsen.registerEventHandlers(dialog, 'preshow prehide postshow posthide');
 
             element.data('ons-dialog', dialog);
             scope.$on('$destroy', function() {

@@ -32,6 +32,7 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
+        this._attrs = attrs;
 
         this._element.css('display', 'none');
 
@@ -158,7 +159,7 @@ limitations under the License.
 
         this._scope.$destroy();
 
-        this._deviceBackButtonHandler = this._element = this._dialog = this._mask = null;
+        this._deviceBackButtonHandler = this._scope = this._attrs = this._element = this._dialog = this._mask = null;
       },
 
       /**
