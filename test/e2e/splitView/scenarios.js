@@ -22,5 +22,18 @@
       win.setSize(1000, 1000);
       expect(secondaryPage.isDisplayed()).toBeTruthy();
     });
+
+    it('should emit events', function() {
+      var win = browser.driver.manage().window(),
+        state = element(by.id('state'));
+
+      win.setSize(1000, 1000);
+      win.setSize(400, 400);
+
+      expect(state.getText()).toBe('collapse');
+
+      win.setSize(1000, 1000);
+      expect(state.getText()).toBe('split');
+    });
   });
 })();
