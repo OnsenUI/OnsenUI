@@ -310,12 +310,10 @@
 
         return {
           pre: function(scope, element, attrs, controller) {
-            var navigator = new NavigatorView({
-              scope: scope,
-              element: element
-            });
+            var navigator = new NavigatorView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, navigator);
+            $onsen.registerEventHandlers(navigator, 'prepush prepop postpush postpop');
 
             if (attrs.page) {
               navigator.pushPage(attrs.page, {});
