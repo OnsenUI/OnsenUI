@@ -16,7 +16,8 @@ v1.3.0-dev
  * core: `ons.createDialog`, `ons.createPopover` and `ons.createAlertDialog` can now be supplied with a scope object in order to specify the parent scope of the element. This makes data binding much easier.
  * ons-tabbar: Fixed [#530](https://github.com/OnsenUI/OnsenUI/issues/530).
  * ons-split-view: Fixed [#525](https://github.com/OnsenUI/OnsenUI/issues/525).
- * core: Added event handler attributes for `<ons-sliding-menu>`.
+ * ons-sliding-menu: Added event handler attributes.
+ * ons-alert-dialog: Added event handler attributes.
 
 v1.2.2
 ----
