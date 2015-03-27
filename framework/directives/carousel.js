@@ -419,6 +419,7 @@
 
           element.data('ons-carousel', carousel);
 
+          $onsen.registerEventHandlers(carousel, 'postchange refresh overscroll');
           $onsen.declareVarAttribute(attrs, carousel);
 
           scope.$on('$destroy', function() {

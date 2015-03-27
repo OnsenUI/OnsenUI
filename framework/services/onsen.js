@@ -309,7 +309,9 @@ limitations under the License.
           component.on(eventName, function(event) {
             var handler = component._attrs['ng' + capitalizedEventName];
             if (handler) {
-              component._scope.$evalAsync(handler, {$event: event});
+              component._scope.$evalAsync(function() {
+                component._scope.$eval(handler, {$event: event});
+              });
             }
           });
         },

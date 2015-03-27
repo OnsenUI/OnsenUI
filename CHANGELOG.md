@@ -18,6 +18,7 @@ v1.3.0-dev
  * ons-split-view: Fixed [#525](https://github.com/OnsenUI/OnsenUI/issues/525).
  * ons-sliding-menu: Added event handler attributes.
  * ons-alert-dialog: Added event handler attributes.
+ * ons-carousel: Added event handler attributes.
 
 v1.2.2
 ----
