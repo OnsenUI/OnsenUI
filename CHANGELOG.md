@@ -21,6 +21,7 @@ v1.3.0-dev
  * ons-carousel: Added event handler attributes.
  * ons-dialog: Added event handler attributes.
  * ons-navigator: Added event handler attributes.
+ * ons-popover: Added event handler attributes.
 
 v1.2.2
 ----

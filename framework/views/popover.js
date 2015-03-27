@@ -31,10 +31,11 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._element = element;
         this._scope = scope;
+        this._attrs = attrs;
 
         this._mask = angular.element(this._element[0].querySelector('.popover-mask'));
         this._popover = angular.element(this._element[0].querySelector('.popover'));
-        
+
         this._mask.css('z-index', 20000);
         this._popover.css('z-index', 20001);
         this._element.css('display', 'none');

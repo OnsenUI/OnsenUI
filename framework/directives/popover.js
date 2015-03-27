@@ -307,6 +307,7 @@
             var popover = new PopoverView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, popover);
+            $onsen.registerEventHandlers(popover, 'preshow prehide postshow posthide');
 
             element.data('ons-popover', popover);
 
