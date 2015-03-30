@@ -40,7 +40,7 @@
     </ons-page>
 
     <ons-template id="dialog.html">
-      <ons-dialog var="dialog" ng-preshow="data.visible = true" ng-posthide="data.visible = false" cancelable>
+      <ons-dialog var="dialog" ons-preshow="data.visible = true" ons-posthide="data.visible = false" cancelable>
         <p>What's your name?</p>
         <input ng-model="person.name">
         <ons-button id="close-dialog" ng-click="dialog.hide()">Close</ons-button>

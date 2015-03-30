@@ -307,7 +307,7 @@ limitations under the License.
           var capitalizedEventName = eventName.charAt(0).toUpperCase() + eventName.slice(1);
 
           component.on(eventName, function(event) {
-            var handler = component._attrs['ng' + capitalizedEventName];
+            var handler = component._attrs['ons' + capitalizedEventName];
             if (handler) {
               component._scope.$eval(handler, {$event: event});
               component._scope.$evalAsync();

@@ -22,7 +22,7 @@
   </head>
   <body>
     <ons-page ng-controller="TestController">
-      <ons-pull-hook ng-init="state = 'initial'" ng-changestate="state = $event.state" ng-action="load($done)" threshold-height="-1px">
+      <ons-pull-hook ng-init="state = 'initial'" ons-changestate="state = $event.state" ng-action="load($done)" threshold-height="-1px">
         <span id="current-state">{{ state }}</span>
       </ons-pull-hook>
       <ons-list>
