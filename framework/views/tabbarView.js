@@ -158,9 +158,8 @@ limitations under the License.
         var previousTabItem = this._tabItems[this.getActiveTabIndex()];
         var selectedTabItem = this._tabItems[index];
 
-        if(typeof selectedTabItem.noReload !== 'undefined' ||
-            typeof selectedTabItem.isPersistent() &&
-            index == this.getActiveTabIndex()) {
+        if((typeof selectedTabItem.noReload !== 'undefined' || typeof selectedTabItem.isPersistent()) &&
+            index === this.getActiveTabIndex()) {
           this.emit('reactive', {
             index: index,
             tabItem: selectedTabItem,
