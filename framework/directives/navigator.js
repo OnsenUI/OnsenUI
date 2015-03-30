@@ -200,6 +200,26 @@
 
 /**
  * @ngdoc method
+ * @signature replacePage(pageUrl, [options])
+ * @param {String} pageUrl
+ *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @param {Function} [options.onTransitionEnd]
+ *   [en]Function that is called when the transition has ended.[/en]
+ *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Replaces the current page with the specified one.[/en]
+ *   [ja]現在表示中のページをを指定したページに置き換えます。[/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature resetToPage(pageUrl, [options])
  * @param {String} pageUrl
  *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
