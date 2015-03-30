@@ -155,7 +155,7 @@
  * @type {String}
  * @description
  *   [en]Sliding menu animator. Possible values are reveal (default), push and overlay.[/en]
- *   [ja][/ja]
+ *   [ja]スライディングメニューのアニメーションです。"reveal"（デフォルト）、"push"、"overlay"のいずれかを指定できます。[/ja]
  */
 
 /**
