@@ -16,6 +16,8 @@ v1.3.0-dev
  * core: `ons.createDialog`, `ons.createPopover` and `ons.createAlertDialog` can now be supplied with a scope object in order to specify the parent scope of the element. This makes data binding much easier.
  * ons-tabbar: Fixed [#530](https://github.com/OnsenUI/OnsenUI/issues/530).
  * ons-split-view: Fixed [#525](https://github.com/OnsenUI/OnsenUI/issues/525).
+ * ons-navigator: Added `animation` option to `popPage()`.
+ * ons-navigator: Added `replacePage()` method.
 
 v1.2.2
 ----
