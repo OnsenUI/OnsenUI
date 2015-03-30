@@ -536,6 +536,27 @@ limitations under the License.
       },
 
       /**
+       * Replaces the current page with the specified one.
+       *
+       * @param {String} page
+       * @param {Object} [options]
+       */
+      replacePage: function(page, options) {
+        options = options || {};
+
+        var onTransitionEnd = options.onTransitionEnd || function() {};
+
+        options.onTransitionEnd = function() {
+          if (this.pages.length > 1) {
+            this.pages[this.pages.length - 2].destroy();
+          }
+          onTransitionEnd();
+        }.bind(this);
+
+        this.pushPage(page, options);
+      },
+
+      /**
        * Clears page stack and add the specified pageUrl to the page stack.
        * If options object is specified, apply the options.
        * the options object include all the attributes of this navigator.
