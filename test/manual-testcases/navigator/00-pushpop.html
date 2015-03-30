@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
     <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
 
-    <script src="../../../build/js/angular/angular.js"></script>    
-    <script src="../../../build/js/onsenui.js"></script>    
+    <script src="../../../build/js/angular/angular.js"></script>
+    <script src="../../../build/js/onsenui.js"></script>
     <script>
       ons.bootstrap();
 
@@ -54,9 +54,31 @@
     <script type="text/ons-template" id="page.html">
       <ons-toolbar>
         <div class="left"><ons-back-button>Back</ons-back-button></div>
-        <div class="center">Page</div>
+
       </ons-toolbar>
+
+      <p>Transition Animations</p>
+
+      <ons-list-item modifier="chevron" ng-click="navi.popPage()">
+        pop(default)
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron" ng-click="navi.popPage({animation: 'slide'})">
+        pop(slide)
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron" ng-click="navi.popPage({animation: 'lift'})">
+        pop(lift)
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron" ng-click="navi.popPage({animation: 'fade'})">
+        pop(fade)
+      </ons-list-item>
+
+      <ons-list-item modifier="chevron" ng-click="navi.popPage({animation: 'none'})">
+        pop(none)
+      </ons-list-item>
     </script>
-   
+
   </body>
 </html>
