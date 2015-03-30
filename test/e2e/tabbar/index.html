@@ -8,23 +8,33 @@
     <script src="../../../build/js/angular/angular.js"></script>
     <script src="../../../build/js/onsenui.js"></script>
     <script>
-      ons.bootstrap();
+      ons.bootstrap()
+
+      .controller('TestController', function($scope) {
+        $scope.label = 'My label';
+
+        $scope.toggleTabs = function() {
+          $scope.hideTabs = !$scope.hideTabs;
+        }
+      });
     </script>
   </head>
   <body>
-    <ons-tabbar>
-      <ons-tab label="Page 1" page="page1.html" active="true">
+    <ons-tabbar hide-tabs="hideTabs" ng-controller="TestController" ng-init="reactive = 0" ng-reactive="reactive = reactive + 1">
+      <ons-tab id="tab1" label="{{ label }}" page="page1.html" active="true">
       </ons-tab>
-      <ons-tab label="Page 2" page="page2.html">
+      <ons-tab id="tab2" label="Page 2" page="page2.html">
       </ons-tab>
-      <ons-tab label="Page 3" page="page3.html" persistent>
+      <ons-tab id="tab3" label="Page 3" page="page3.html" persistent>
       </ons-tab>
     </ons-tabbar>
 
     <ons-template id="page1.html">
       <ons-page>
-        <div id="page1">
-          <p style="text-align: center;">Page 1</p>
+        <div id="page1" style="text-align: center;">
+          <p>Page 1</p>
+          <p>This tab has been reactivated <span id="times-reactivated">{{ reactive }}</span> times.</p>
+          <p><ons-button id="toggle-tabbar" ng-click="toggleTabs()">Toggle tabs</ons-button></p>
         </div>
       </ons-page>
     </ons-template>

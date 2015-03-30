@@ -222,8 +222,6 @@ limitations under the License.
           if (this._tabItems[i] != selectedTabItem) {
             this._tabItems[i].setInactive();
           } else {
-            this._triggerActiveTabChanged(i, selectedTabItem);
-
             if (!needLoad) {
               this.emit('postchange', {index: index, tabItem: selectedTabItem});
             }
@@ -231,13 +229,6 @@ limitations under the License.
         }
 
         return true;
-      },
-
-      _triggerActiveTabChanged: function(index, tabItem){
-        this._scope.onActiveTabChanged({
-          $index: index,
-          $tabItem: tabItem
-        });
       },
 
       /**
@@ -358,11 +349,12 @@ limitations under the License.
        */
       _loadPageDOM: function(element, options) {
         options = options || {};
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var link = $compile(element);
 
         this._contentElement.append(element);
         var pageContent = link(pageScope);
+
         pageScope.$evalAsync();
 
         this._switchPage(pageContent, pageScope, options);
@@ -377,7 +369,7 @@ limitations under the License.
         options = options || {};
 
         element.css('display', 'block');
-        this._switchPage(element, element.scope(), options); 
+        this._switchPage(element, element.scope(), options);
       },
 
       /**
@@ -417,7 +409,6 @@ limitations under the License.
 
       this._animatorDict[name] = animator;
     };
-
 
     return TabbarView;
   });

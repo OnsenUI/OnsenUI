@@ -4,17 +4,18 @@
   describe('tabbar', function() {
     var path = '/test/e2e/tabbar/index.html';
 
-    it('should have an element', function() {
+    beforeEach(function() {
       browser.get(path);
+    });
+
+    it('should have an element', function() {
       expect(element(by.css('ons-tabbar')).isPresent()).toBeTruthy();
     });
 
     it('should switch page when a tab is clicked', function() {
-      browser.get(path);
-
       var tabs  = [
-        element(by.css('ons-tab[label="Page 1"]')),
-        element(by.css('ons-tab[label="Page 2"]'))
+        element(by.id('tab1')),
+        element(by.id('tab2'))
       ];
 
       tabs[0].click();
@@ -27,11 +28,9 @@
     });
 
     it('should reload non-persistent tabs', function() {
-      browser.get(path);
-
       var tabs = [
-        element(by.css('ons-tab[label="Page 1"]')),
-        element(by.css('ons-tab[label="Page 2"]'))
+        element(by.id('tab1')),
+        element(by.id('tab2'))
       ];
 
       var input = element(by.id('page2-input'));
@@ -45,11 +44,9 @@
     });
 
     it('should not reload persistent tabs', function() {
-      browser.get(path);
-
       var tabs = [
-        element(by.css('ons-tab[label="Page 1"]')),
-        element(by.css('ons-tab[label="Page 3"]'))
+        element(by.id('tab1')),
+        element(by.id('tab3'))
       ];
 
       var input = element(by.id('page3-input'));
@@ -63,15 +60,47 @@
     });
 
     it('should not hide persistent tabs when tapped twice (issue #530)', function() {
-      browser.get(path);
-
-      var tab = element(by.css('ons-tab[label="Page 3"]'));
+      var tab = element(by.id('tab3'));
       var page3 = element(by.id('page3'));
 
       tab.click();
       expect(page3.isDisplayed()).toBeTruthy();
       tab.click();
       expect(page3.isDisplayed()).toBeTruthy();
+    });
+
+    it('should pass down its scope to tabs', function() {
+      expect(element(by.id('tab1')).getAttribute('label')).toBe('My label');
+    });
+
+    it('should emit events', function() {
+      var tabs = [
+        element(by.id('tab1')),
+        element(by.id('tab2'))
+      ];
+
+      var timesReactivated = element(by.id('times-reactivated'));
+
+      expect(timesReactivated.getText()).toBe('0');
+      tabs[0].click();
+      expect(timesReactivated.getText()).toBe('1');
+
+      tabs[1].click();
+      tabs[0].click();
+      expect(timesReactivated.getText()).toBe('1');
+
+      tabs[0].click();
+      expect(timesReactivated.getText()).toBe('2');
+    });
+
+    it('should be possible to hide tabs', function() {
+      var tabBar = element(by.css('.tab-bar'));
+
+      expect(tabBar.isDisplayed()).toBeTruthy();
+      element(by.id('toggle-tabbar')).click();
+      expect(tabBar.isDisplayed()).not.toBeTruthy();
+      element(by.id('toggle-tabbar')).click();
+      expect(tabBar.isDisplayed()).toBeTruthy();
     });
   });
 })();

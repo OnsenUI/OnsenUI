@@ -243,15 +243,9 @@
       restrict: 'E',
       replace: false,
       transclude: true,
-      scope: {
-        onActiveTabChanged: '&'
-      },
+      scope: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
       link: function(scope, element, attrs, controller, transclude) {
-
-        if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controller directive.');
-        }
 
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         scope.selectedTabItem = {source: ''};
@@ -263,13 +257,14 @@
 
         var tabbarView = new TabbarView(scope, element, attrs);
         $onsen.addModifierMethods(tabbarView, 'tab-bar--*', angular.element(element.children()[1]));
+        $onsen.registerEventHandlers(tabbarView, 'reactive prechange postchange');
 
         scope.tabbarId = tabbarView._tabbarId;
 
         element.data('ons-tabbar', tabbarView);
         $onsen.declareVarAttribute(attrs, tabbarView);
 
-        transclude(function(cloned) {
+        transclude(scope, function(cloned) {
           angular.element(element[0].querySelector('.ons-tabbar-inner')).append(cloned);
         });
 

@@ -24,6 +24,7 @@ v1.3.0-dev
  * ons-popover: Added event handler attributes.
  * ons-pull-hook: Added event handler attributes.
  * ons-split-view: Added event handler attributes.
+ * ons-tabbar: Added event handler attributes.
 
 v1.2.2
 ----
