@@ -162,6 +162,15 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name type
+ * @type {String}
+ * @description
+ *   [en]Sliding menu animator. Possible values are reveal (default), push and overlay.[/en]
+ *   [ja]スライディングメニューのアニメーションです。"reveal"（デフォルト）、"push"、"overlay"のいずれかを指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature setMainPage(pageUrl, [options])
  * @param {String} pageUrl

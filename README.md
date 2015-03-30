@@ -51,7 +51,7 @@ Please use this with caution. However, we are very grateful if people try it out
 * Clone this repository
 
 ```bash
-$ git clone https://github.com/monaca/OnsenUI.git
+$ git clone https://github.com/OnsenUI/OnsenUI.git
 ```
 
 * Open the terminal from OnsenUI directory
