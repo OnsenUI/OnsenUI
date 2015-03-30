@@ -336,8 +336,9 @@ limitations under the License.
 
       /**
        * @param {Object} options pushPage()'s options parameter
+       * @param {NavigatorTransitionAnimator} [defaultAnimator]
        */
-      _getAnimatorOption: function(options) {
+      _getAnimatorOption: function(options, defaultAnimator) {
         var animator = null;
 
         if (options.animation instanceof NavigatorTransitionAnimator) {
@@ -353,7 +354,7 @@ limitations under the License.
         }
 
         if (!animator) {
-          animator = NavigatorView._transitionAnimatorDict['default'];
+          animator = defaultAnimator || NavigatorView._transitionAnimatorDict['default'];
         }
 
         if (!(animator instanceof NavigatorTransitionAnimator)) {
@@ -494,7 +495,7 @@ limitations under the License.
        */
       popPage: function(options) {
         options = options || {};
-        
+
         this._doorLock.waitUnlock(function() {
           if (this.pages.length <= 1) {
             throw new Error('NavigatorView\'s page stack is empty.');
@@ -539,7 +540,9 @@ limitations under the License.
         }.bind(this);
 
         this._isPopping = true;
-        leavePage.options.animator.pop(enterPage, leavePage, callback);
+
+        var animator = this._getAnimatorOption(options, leavePage.options.animator);
+        animator.pop(enterPage, leavePage, callback);
       },
 
       /**
@@ -576,7 +579,7 @@ limitations under the License.
        * Use this method to access options passed by pushPage() or resetToPage() method.
        * eg. ons.navigator.getCurrentPage().options
        *
-       * @return {Object} 
+       * @return {Object}
        */
       getCurrentPage: function() {
         return this.pages[this.pages.length - 1];
