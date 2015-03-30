@@ -336,7 +336,7 @@
             var navigator = new NavigatorView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, navigator);
-            $onsen.registerEventHandlers(navigator, 'prepush prepop postpush postpop');
+            $onsen.registerEventHandlers(navigator, 'prepush prepop postpush postpop destroy');
 
             if (attrs.page) {
               navigator.pushPage(attrs.page, {});

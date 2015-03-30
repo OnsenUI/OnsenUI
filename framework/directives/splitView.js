@@ -309,7 +309,7 @@
           }
 
           $onsen.declareVarAttribute(attrs, splitView);
-          $onsen.registerEventHandlers(splitView, 'update presplit precollapse postsplit postcollapse');
+          $onsen.registerEventHandlers(splitView, 'update presplit precollapse postsplit postcollapse destroy');
 
           element.data('ons-split-view', splitView);
 

@@ -318,7 +318,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {splitView: this});
+        this.emit('destroy');
 
         this._element = null;
         this._scope = null;

@@ -55,6 +55,8 @@ limitations under the License.
         }
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
       /**
@@ -153,6 +155,12 @@ limitations under the License.
        * Destroy dialog.
        */
       destroy: function() {
+        this._scope.$destroy();
+      },
+
+      _destroy: function() {
+        this.emit('destroy');
+
         this._element.remove();
         this._deviceBackButtonHandler.destroy();
         this._mask.off();

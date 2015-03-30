@@ -144,7 +144,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {navigator: this});
+        this.emit('destroy');
 
         this.pages.forEach(function(page) {
           page.destroy();

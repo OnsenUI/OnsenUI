@@ -384,7 +384,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {tabbar: this});
+        this.emit('destroy');
 
         this._element = this._scope = this._attrs = null;
       }

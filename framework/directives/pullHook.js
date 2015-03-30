@@ -217,7 +217,7 @@
             var pullHook = new PullHookView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, pullHook);
-            $onsen.registerEventHandlers(pullHook, 'changestate');
+            $onsen.registerEventHandlers(pullHook, 'changestate destroy');
             element.data('ons-pull-hook', pullHook);
 
             scope.$on('$destroy', function() {

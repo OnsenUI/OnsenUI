@@ -269,7 +269,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {slidingMenu: this});
+        this.emit('destroy');
 
         this._deviceBackButtonHandler.destroy();
         window.removeEventListener('resize', this._bindedOnWindowResize);

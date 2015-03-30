@@ -363,7 +363,7 @@
 
           var slidingMenu = new SlidingMenuView(scope, element, attrs);
 
-          $onsen.registerEventHandlers(slidingMenu, 'preopen preclose postopen postclose');
+          $onsen.registerEventHandlers(slidingMenu, 'preopen preclose postopen postclose destroy');
 
           if (mainHtml && !attrs.mainPage) {
             slidingMenu._appendMainPage(null, mainHtml);

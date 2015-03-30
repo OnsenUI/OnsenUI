@@ -257,7 +257,7 @@
 
         var tabbarView = new TabbarView(scope, element, attrs);
         $onsen.addModifierMethods(tabbarView, 'tab-bar--*', angular.element(element.children()[1]));
-        $onsen.registerEventHandlers(tabbarView, 'reactive prechange postchange');
+        $onsen.registerEventHandlers(tabbarView, 'reactive prechange postchange destroy');
 
         scope.tabbarId = tabbarView._tabbarId;
 
