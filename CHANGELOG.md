@@ -14,6 +14,8 @@ v1.3.0-dev
  * ons-alert-dialog: Fixed [#511](https://github.com/OnsenUI/OnsenUI/issues/511).
  * ons-alert-dialog: Fixed [#512](https://github.com/OnsenUI/OnsenUI/issues/512).
  * core: `ons.createDialog`, `ons.createPopover` and `ons.createAlertDialog` can now be supplied with a scope object in order to specify the parent scope of the element. This makes data binding much easier.
+ * ons-loading-placeholder: Fixed [#541](https://github.com/OnsenUI/OnsenUI/issues/541).
+ * ons-loading-placeholder: The component can now be used anywhere.
 
 v1.2.2
 ----

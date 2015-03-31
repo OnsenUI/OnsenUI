@@ -41,8 +41,14 @@
         setImmediate(function() {
           $onsen.getPageHTMLAsync(attrs.onsLoadingPlaceholder).then(function(html) {
 
+            // Remove page tag.
+            html = html
+              .trim()
+              .replace(/^<ons-page>/, '')
+              .replace(/<\/ons-page>$/, '');
+
             var div = document.createElement('div');
-            div.innerHTML = html.trim();
+            div.innerHTML = html;
 
             var newElement = angular.element(div);
             newElement.css('display', 'none');
