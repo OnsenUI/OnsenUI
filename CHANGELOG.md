@@ -4,6 +4,7 @@ CHANGELOG
 
 v1.3.0-dev
 ----
+ * ons-sliding-menu: Fixed [#544](https://github.com/OnsenUI/OnsenUI/issues/544).
  * ons-sliding-menu: Fixed [#464](https://github.com/OnsenUI/OnsenUI/issues/464).
  * ons-pull-hook: Fixed [#467](https://github.com/OnsenUI/OnsenUI/issues/467).
  * ons-pull-hook: Fixed issue where a error was thrown if the pull hook was destroyed before `$done()` was called.
@@ -25,6 +26,9 @@ v1.3.0-dev
  * ons-pull-hook: Added event handler attributes.
  * ons-split-view: Added event handler attributes.
  * ons-tabbar: Added event handler attributes.
+ * ons-split-view: Fixed [#552](https://github.com/OnsenUI/OnsenUI/issues/552).
+ * ons-navigator: Added `animation` option to `popPage()`.
+ * ons-navigator: Added `replacePage()` method.
 
 v1.2.2
 ----
