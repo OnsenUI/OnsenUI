@@ -142,6 +142,51 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-prepush
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prepush" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prepop
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prepop" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postpush
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postpush" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postpop
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postpop" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature pushPage(pageUrl, [options])
  * @param {String} pageUrl

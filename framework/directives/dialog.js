@@ -141,6 +141,51 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-preshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prehide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-posthide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature show([options])
  * @param {Object} [options]

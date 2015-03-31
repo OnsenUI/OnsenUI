@@ -190,6 +190,60 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-update
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "update" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-presplit
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "presplit" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-precollapse
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "precollapse" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postsplit
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postsplit" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postcollapse
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postcollapse" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature setMainPage(pageUrl)
  * @param {String} pageUrl

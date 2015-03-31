@@ -148,6 +148,42 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-reactive
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "reactive" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prechange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prechange" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postchange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature setActiveTab(index, [options])
  * @param {Number} index

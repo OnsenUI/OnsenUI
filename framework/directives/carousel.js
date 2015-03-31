@@ -181,6 +181,42 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-postchange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "posotchange" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-refresh
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "refresh" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-overscroll
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "overscroll" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature next()
  * @description

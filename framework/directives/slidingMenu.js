@@ -171,6 +171,51 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-preopen
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preopen" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-preclose
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preclose" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postopen
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postopen" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postclose
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postclose" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja][/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature setMainPage(pageUrl, [options])
  * @param {String} pageUrl
