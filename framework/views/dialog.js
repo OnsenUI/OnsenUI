@@ -46,12 +46,14 @@ limitations under the License.
         this._visible = false;
         this._doorLock = new DoorLock();
 
-        this._animation = DialogView._animatorDict[typeof attrs.animation !== 'undefined' ? 
+        var Animator = DialogView._animatorDict[typeof attrs.animation !== 'undefined' ?
           attrs.animation : 'default'];
 
-        if (!this._animation) {
+        if (!Animator) {
           throw new Error('No such animation: ' + attrs.animation);
         }
+
+        this._animation = new Animator();
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
       },
@@ -79,7 +81,7 @@ limitations under the License.
           dialog: this,
           cancel: function() { cancel = true; }
         });
-        
+
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
             var unlock = this._doorLock.lock(),
@@ -89,9 +91,9 @@ limitations under the License.
             this._mask.css('opacity', 1);
 
             if (options.animation) {
-              animation = DialogView._animatorDict[options.animation];
+              animation = new DialogView._animatorDict[options.animation]();
             }
-            
+
             animation.show(this, function() {
               this._visible = true;
               unlock();
@@ -113,7 +115,7 @@ limitations under the License.
         options = options || {};
         var cancel = false,
           callback = options.callback || function() {};
-        
+
         this.emit('prehide', {
           dialog: this,
           cancel: function() { cancel = true; }
@@ -125,7 +127,7 @@ limitations under the License.
               animation = this._animation;
 
             if (options.animation) {
-              animation = DialogView._animatorDict[options.animation];
+              animation = new DialogView._animatorDict[options.animation]();
             }
 
             animation.hide(this, function() {
@@ -164,7 +166,7 @@ limitations under the License.
       /**
        * Disable or enable dialog.
        *
-       * @param {Boolean} 
+       * @param {Boolean}
        */
       setDisabled: function(disabled) {
         if (typeof disabled !== 'boolean') {
@@ -188,14 +190,14 @@ limitations under the License.
       },
 
       /**
-       * Make dialog cancelable or uncancelable. 
+       * Make dialog cancelable or uncancelable.
        *
        * @param {Boolean}
        */
       setCancelable: function(cancelable) {
         if (typeof cancelable !== 'boolean') {
-          throw new Error('Argument must be a boolean.'); 
-        }  
+          throw new Error('Argument must be a boolean.');
+        }
 
         if (cancelable) {
           this._element.attr('cancelable', true);
@@ -233,21 +235,21 @@ limitations under the License.
     });
 
     DialogView._animatorDict = {
-      'default': $onsen.isAndroid() ? new AndroidDialogAnimator() : new IOSDialogAnimator(),
-      'fade': $onsen.isAndroid() ? new AndroidDialogAnimator() : new IOSDialogAnimator(),
-      'slide': new SlideDialogAnimator(),
-      'none': new DialogAnimator()
+      'default': $onsen.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+      'fade': $onsen.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+      'slide': SlideDialogAnimator,
+      'none': DialogAnimator
     };
 
     /**
      * @param {String} name
-     * @param {DialogAnimator} animator
+     * @param {Function} Animator
      */
-    DialogView.registerAnimator = function(name, animator) {
-      if (!(animator instanceof DialogAnimator)) {
-        throw new Error('"animator" param must be an instance of DialogAnimator');
+    DialogView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof DialogAnimator)) {
+        throw new Error('"Animator" param must inherit DialogAnimator');
       }
-      this._animatorDict[name] = animator;
+      this._animatorDict[name] = Animator;
     };
 
     MicroEvent.mixin(DialogView);
@@ -255,4 +257,3 @@ limitations under the License.
     return DialogView;
   });
 })();
-

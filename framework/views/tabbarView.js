@@ -348,7 +348,7 @@ limitations under the License.
           if (options.callback instanceof Function) {
             options.callback();
           }
-        } 
+        }
       },
 
       /**
@@ -377,7 +377,7 @@ limitations under the License.
         options = options || {};
 
         element.css('display', 'block');
-        this._switchPage(element, element.scope(), options); 
+        this._switchPage(element, element.scope(), options);
       },
 
       /**
@@ -388,7 +388,8 @@ limitations under the License.
       _getAnimatorOption: function(options) {
         var animationAttr = this._element.attr('animation') || 'default';
 
-        return TabbarView._animatorDict[options.animation || animationAttr] || TabbarView._animatorDict['default'];
+        var Animator = TabbarView._animatorDict[options.animation || animationAttr] || TabbarView._animatorDict['default'];
+        return new Animator();
       },
 
       _destroy: function() {
@@ -401,21 +402,21 @@ limitations under the License.
 
     // Preset transition animators.
     TabbarView._animatorDict = {
-      'default': new TabbarNoneAnimator(),
-      'none': new TabbarNoneAnimator(),
-      'fade': new TabbarFadeAnimator()
+      'default': TabbarNoneAnimator,
+      'none': TabbarNoneAnimator,
+      'fade': TabbarFadeAnimator
     };
 
     /**
      * @param {String} name
-     * @param {NavigatorTransitionAnimator} animator
+     * @param {Function} Animator
      */
-    TabbarView.registerAnimator = function(name, animator) {
-      if (!(animator instanceof TabbarAnimator)) {
-        throw new Error('"animator" param must be an instance of TabbarAnimator');
+    TabbarView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof TabbarAnimator)) {
+        throw new Error('"Animator" param must inherit TabbarAnimator');
       }
 
-      this._animatorDict[name] = animator;
+      this._animatorDict[name] = Animator;
     };
 
 

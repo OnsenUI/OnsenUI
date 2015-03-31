@@ -153,7 +153,7 @@ limitations under the License.
   });
   MicroEvent.mixin(SlidingMenuViewModel);
 
-  module.factory('SlidingMenuView', function($onsen, $compile, SlidingMenuAnimator, RevealSlidingMenuAnimator, 
+  module.factory('SlidingMenuView', function($onsen, $compile, SlidingMenuAnimator, RevealSlidingMenuAnimator,
                                              PushSlidingMenuAnimator, OverlaySlidingMenuAnimator) {
 
     var SlidingMenuView = Class.extend({
@@ -279,13 +279,8 @@ limitations under the License.
       },
 
       _getAnimatorOption: function() {
-        var animator = SlidingMenuView._animatorDict[this._attrs.type];
-
-        if (!(animator instanceof SlidingMenuAnimator)) {
-          animator = SlidingMenuView._animatorDict['default'];
-        }
-
-        return animator.copy();
+        var Animator = SlidingMenuView._animatorDict[this._attrs.type] || SlidingMenuView._animatorDict['default'];
+        return new Animator();
       },
 
       _onSwipeableChanged: function(swipeable) {
@@ -589,12 +584,12 @@ limitations under the License.
       /**
        * Close sliding-menu page.
        *
-       * @param {Object} options 
+       * @param {Object} options
        */
       close: function(options) {
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
-       
+
         this.emit('preclose');
 
         this._doorLock.waitUnlock(function() {
@@ -699,22 +694,22 @@ limitations under the License.
 
     // Preset sliding menu animators.
     SlidingMenuView._animatorDict = {
-      'default': new RevealSlidingMenuAnimator(),
-      'overlay': new OverlaySlidingMenuAnimator(),
-      'reveal': new RevealSlidingMenuAnimator(),
-      'push': new PushSlidingMenuAnimator()
+      'default': RevealSlidingMenuAnimator,
+      'overlay': OverlaySlidingMenuAnimator,
+      'reveal': RevealSlidingMenuAnimator,
+      'push': PushSlidingMenuAnimator
     };
 
     /**
      * @param {String} name
-     * @param {NavigatorTransitionAnimator} animator
+     * @param {Function} Animator
      */
-    SlidingMenuView.registerSlidingMenuAnimator = function(name, animator) {
-      if (!(animator instanceof SlidingMenuAnimator)) {
-        throw new Error('"animator" param must be an instance of SlidingMenuAnimator');
+    SlidingMenuView.registerSlidingMenuAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof SlidingMenuAnimator)) {
+        throw new Error('"Animator" param must inherit SlidingMenuAnimator');
       }
 
-      this._animatorDict[name] = animator;
+      this._animatorDict[name] = Animator;
     };
 
     MicroEvent.mixin(SlidingMenuView);

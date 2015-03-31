@@ -338,16 +338,21 @@ limitations under the License.
           return options.animation;
         }
 
+        var Animator = null;
+
         if (typeof options.animation === 'string') {
-          animator = NavigatorView._transitionAnimatorDict[options.animation];
+          Animator = NavigatorView._transitionAnimatorDict[options.animation];
         }
 
-        if (!animator && this._element.attr('animation')) {
-          animator = NavigatorView._transitionAnimatorDict[this._element.attr('animation')];
+        if (!Animator && this._element.attr('animation')) {
+          Animator = NavigatorView._transitionAnimatorDict[this._element.attr('animation')];
         }
 
-        if (!animator) {
-          animator = defaultAnimator || NavigatorView._transitionAnimatorDict['default'];
+        if (!Animator && defaultAnimator) {
+          animator = defaultAnimator;
+        } else {
+          Animator = Animator || NavigatorView._transitionAnimatorDict['default'];
+          animator = new Animator();
         }
 
         if (!(animator instanceof NavigatorTransitionAnimator)) {
@@ -618,24 +623,24 @@ limitations under the License.
 
     // Preset transition animators.
     NavigatorView._transitionAnimatorDict = {
-      'default': $onsen.isAndroid() ? new SimpleSlideTransitionAnimator() : new IOSSlideTransitionAnimator(),
-      'slide': $onsen.isAndroid() ? new SimpleSlideTransitionAnimator() : new IOSSlideTransitionAnimator(),
-      'simpleslide': new SimpleSlideTransitionAnimator(),
-      'lift': new LiftTransitionAnimator(),
-      'fade': new FadeTransitionAnimator(),
-      'none': new NullTransitionAnimator()
+      'default': $onsen.isAndroid() ? SimpleSlideTransitionAnimator : IOSSlideTransitionAnimator,
+      'slide': $onsen.isAndroid() ? SimpleSlideTransitionAnimator : IOSSlideTransitionAnimator,
+      'simpleslide': SimpleSlideTransitionAnimator,
+      'lift': LiftTransitionAnimator,
+      'fade': FadeTransitionAnimator,
+      'none': NullTransitionAnimator
     };
 
     /**
      * @param {String} name
-     * @param {NavigatorTransitionAnimator} animator
+     * @param {Function} Animator
      */
-    NavigatorView.registerTransitionAnimator = function(name, animator) {
-      if (!(animator instanceof NavigatorTransitionAnimator)) {
-        throw new Error('"animator" param must be an instance of NavigatorTransitionAnimator');
+    NavigatorView.registerTransitionAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof NavigatorTransitionAnimator)) {
+        throw new Error('"Animator" param must inherit NavigatorTransitionAnimator');
       }
 
-      this._transitionAnimatorDict[name] = animator;
+      this._transitionAnimatorDict[name] = Animator;
     };
 
     MicroEvent.mixin(NavigatorView);
