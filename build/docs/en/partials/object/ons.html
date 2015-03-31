@@ -120,17 +120,17 @@ componentCategory: util
         </tr>
         
         <tr>
-          <td><a href="#method-createAlertDialog">createAlertDialog(page)</a></td>
+          <td><a href="#method-createAlertDialog">createAlertDialog(page, [options])</a></td>
           <td>Create a alert dialog instance from a template.</td>
         </tr>
         
         <tr>
-          <td><a href="#method-createDialog">createDialog(page)</a></td>
+          <td><a href="#method-createDialog">createDialog(page, [options])</a></td>
           <td>Create a dialog instance from a template.</td>
         </tr>
         
         <tr>
-          <td><a href="#method-createPopover">createPopover(page)</a></td>
+          <td><a href="#method-createPopover">createPopover(page, [options])</a></td>
           <td>Create a popover instance from a template.</td>
         </tr>
         
@@ -508,7 +508,7 @@ componentCategory: util
   
   <section class="method-detail">
     <h4 id="method-createAlertDialog">
-      createAlertDialog(page)<span class="value-type">: Promise</span>
+      createAlertDialog(page, [options])<span class="value-type">: Promise</span>
 
       <a href="#method-createAlertDialog" class="reference-loop-anchor">#</a>
     </h4>
@@ -541,6 +541,18 @@ componentCategory: util
           <td>Page name. Can be either an HTML file or an <ons-template> containing a <ons-alert-dialog> component.</td>
         </tr>
         
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>Parameter object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.parentScope</span></td>
+          <td class="value-type">Object</td>
+          <td>Parent scope of the dialog. Used to bind models and access scope methods from the dialog.</td>
+        </tr>
+        
       </tbody>
     </table>
     <!-- end method parameter -->
@@ -550,7 +562,7 @@ componentCategory: util
   
   <section class="method-detail">
     <h4 id="method-createDialog">
-      createDialog(page)<span class="value-type">: Promise</span>
+      createDialog(page, [options])<span class="value-type">: Promise</span>
 
       <a href="#method-createDialog" class="reference-loop-anchor">#</a>
     </h4>
@@ -583,6 +595,18 @@ componentCategory: util
           <td>Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.</td>
         </tr>
         
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>Parameter object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.parentScope</span></td>
+          <td class="value-type">Object</td>
+          <td>Parent scope of the dialog. Used to bind models and access scope methods from the dialog.</td>
+        </tr>
+        
       </tbody>
     </table>
     <!-- end method parameter -->
@@ -592,7 +616,7 @@ componentCategory: util
   
   <section class="method-detail">
     <h4 id="method-createPopover">
-      createPopover(page)<span class="value-type">: Promise</span>
+      createPopover(page, [options])<span class="value-type">: Promise</span>
 
       <a href="#method-createPopover" class="reference-loop-anchor">#</a>
     </h4>
@@ -623,6 +647,18 @@ componentCategory: util
           <td><span class="parameter-name">page</span></td>
           <td class="value-type">String</td>
           <td>Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>Parameter object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.parentScope</span></td>
+          <td class="value-type">Object</td>
+          <td>Parent scope of the dialog. Used to bind models and access scope methods from the dialog.</td>
         </tr>
         
       </tbody>

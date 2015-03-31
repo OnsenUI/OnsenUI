@@ -21,7 +21,7 @@ angular.module('app').controller('ComponentsController', function ($scope) {
   $scope.updateVarNamesHighlight = function() {
     var result = {};
 
-    var dicts = $scope.components.filter(function(component) {
+    $scope.components.filter(function(component) {
       return component.checked;
     }).map(function(component) {
       return component.varNameDict;
