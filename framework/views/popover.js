@@ -19,7 +19,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('PopoverView', function($onsen, PopoverAnimator, FadePopoverAnimator) {
+  module.factory('PopoverView', function($parse, $onsen, AnimationChooser, PopoverAnimator, FadePopoverAnimator) {
 
     var PopoverView = Class.extend({
 
@@ -48,14 +48,13 @@ limitations under the License.
         this._visible = false;
         this._doorLock = new DoorLock();
 
-        var Animator = PopoverView._animatorDict[typeof attrs.animation !== 'undefined' ?
-          attrs.animation : 'fade'];
-
-        if (!Animator) {
-          throw new Error('No such animation: ' + attrs.animation);
-        }
-
-        this._animation = new Animator();
+        this._animationChooser = new AnimationChooser({
+          animators: PopoverView._animatorDict,
+          baseClass: PopoverAnimator,
+          baseClassName: 'PopoverAnimator',
+          defaultAnimation: attrs.animation || 'fade',
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
 
@@ -223,19 +222,15 @@ limitations under the License.
 
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
             this._element.css('display', 'block');
 
             this._currentTarget = target;
             this._positionPopover(target);
 
-            if (options.animation) {
-              animation = new PopoverView._animatorDict[options.animation]();
-            }
-
-            animation.show(this, function() {
+            var animator = this._animationChooser.newAnimator(options);
+            animator.show(this, function() {
               this._visible = true;
               this._positionPopover(target);
               unlock();
@@ -262,14 +257,10 @@ limitations under the License.
 
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
-            if (options.animation) {
-              animation = new PopoverView._animatorDict[options.animation]();
-            }
-
-            animation.hide(this, function() {
+            var animator = this._animationChooser.newAnimator(options);
+            animator.hide(this, function() {
               this._element.css('display', 'none');
               this._visible = false;
               unlock();

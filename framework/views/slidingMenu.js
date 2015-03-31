@@ -153,7 +153,7 @@ limitations under the License.
   });
   MicroEvent.mixin(SlidingMenuViewModel);
 
-  module.factory('SlidingMenuView', function($onsen, $compile, SlidingMenuAnimator, RevealSlidingMenuAnimator,
+  module.factory('SlidingMenuView', function($onsen, $compile, $parse, AnimationChooser, SlidingMenuAnimator, RevealSlidingMenuAnimator,
                                              PushSlidingMenuAnimator, OverlaySlidingMenuAnimator) {
 
     var SlidingMenuView = Class.extend({
@@ -222,7 +222,14 @@ limitations under the License.
 
           this._menuPage.css({opacity: 1});
 
-          this._animator = this._getAnimatorOption();
+          var animationChooser = new AnimationChooser({
+            animators: SlidingMenuView._animatorDict,
+            baseClass: SlidingMenuAnimator,
+            baseClassName: 'SlidingMenuAnimator',
+            defaultAnimation: attrs.animation,
+            defaultAnimationOptions: $parse(attrs.animationOptions)()
+          });
+          this._animator = animationChooser.newAnimator();
           this._animator.setup(
             this._element,
             this._mainPage,
@@ -276,11 +283,6 @@ limitations under the License.
 
         this._mainPageHammer.off('tap', this._bindedOnTap);
         this._element = this._scope = this._attrs = null;
-      },
-
-      _getAnimatorOption: function() {
-        var Animator = SlidingMenuView._animatorDict[this._attrs.type] || SlidingMenuView._animatorDict['default'];
-        return new Animator();
       },
 
       _onSwipeableChanged: function(swipeable) {

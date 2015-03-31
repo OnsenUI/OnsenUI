@@ -83,7 +83,7 @@ limitations under the License.
     }
   });
 
-  module.factory('NavigatorView', function($http, $parse, $templateCache, $compile, $onsen, $timeout,
+  module.factory('NavigatorView', function($http, $parse, $templateCache, $compile, $onsen, $timeout, AnimationChooser,
     SimpleSlideTransitionAnimator, NavigatorTransitionAnimator, LiftTransitionAnimator,
     NullTransitionAnimator, IOSSlideTransitionAnimator, FadeTransitionAnimator) {
 
@@ -136,6 +136,12 @@ limitations under the License.
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
         this._scope.$on('$destroy', this._destroy.bind(this));
+
+        this._animationChooser = new AnimationChooser({
+          animators: NavigatorView._transitionAnimatorDict,
+          baseClass: NavigatorTransitionAnimator,
+          baseClassName: 'NavigatorTransitionAnimator'
+        });
       },
 
       _destroy: function() {
@@ -327,42 +333,6 @@ limitations under the License.
         return this._deviceBackButtonHandler;
       },
 
-      /**
-       * @param {Object} options pushPage()'s options parameter
-       * @param {NavigatorTransitionAnimator} [defaultAnimator]
-       */
-      _getAnimatorOption: function(options, defaultAnimator) {
-        var animator = null;
-
-        if (options.animation instanceof NavigatorTransitionAnimator) {
-          return options.animation;
-        }
-
-        var Animator = null;
-
-        if (typeof options.animation === 'string') {
-          Animator = NavigatorView._transitionAnimatorDict[options.animation];
-        }
-
-        if (!Animator && this._element.attr('animation')) {
-          Animator = NavigatorView._transitionAnimatorDict[this._element.attr('animation')];
-        }
-
-        if (!Animator && defaultAnimator) {
-          animator = defaultAnimator;
-        } else {
-          Animator = Animator || NavigatorView._transitionAnimatorDict['default'];
-          animator = new Animator();
-        }
-
-        if (!(animator instanceof NavigatorTransitionAnimator)) {
-          throw new Error('"animator" is not an instance of NavigatorTransitionAnimator.');
-        }
-
-        return animator;
-      },
-
-
       _createPageScope: function() {
          return this._scope.$new();
       },
@@ -374,7 +344,7 @@ limitations under the License.
        * @param {Object} options
        */
       _createPageObject: function(page, element, pageScope, options) {
-        options.animator = this._getAnimatorOption(options);
+        options.animator = this._animationChooser.newAnimator(options);
 
         return new NavigatorPageObject({
           page: page,
@@ -539,7 +509,7 @@ limitations under the License.
 
         this._isPopping = true;
 
-        var animator = this._getAnimatorOption(options, leavePage.options.animator);
+        var animator = this._animationChooser.newAnimator(options, leavePage.options.animator);
         animator.pop(enterPage, leavePage, callback);
       },
 

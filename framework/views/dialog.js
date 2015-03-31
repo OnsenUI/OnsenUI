@@ -20,7 +20,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('DialogView', function($onsen, DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator) {
+  module.factory('DialogView', function($parse, $onsen, AnimationChooser, DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator) {
 
     var DialogView = Class.extend({
 
@@ -46,14 +46,13 @@ limitations under the License.
         this._visible = false;
         this._doorLock = new DoorLock();
 
-        var Animator = DialogView._animatorDict[typeof attrs.animation !== 'undefined' ?
-          attrs.animation : 'default'];
-
-        if (!Animator) {
-          throw new Error('No such animation: ' + attrs.animation);
-        }
-
-        this._animation = new Animator();
+        this._animationChooser = new AnimationChooser({
+          animators: DialogView._animatorDict,
+          baseClass: DialogAnimator,
+          baseClassName: 'DialogAnimator',
+          defaultAnimation: attrs.animation,
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
       },
@@ -90,11 +89,9 @@ limitations under the License.
             this._element.css('display', 'block');
             this._mask.css('opacity', 1);
 
-            if (options.animation) {
-              animation = new DialogView._animatorDict[options.animation]();
-            }
+            var animator = this._animationChooser.newAnimator(options);
 
-            animation.show(this, function() {
+            animator.show(this, function() {
               this._visible = true;
               unlock();
               this.emit('postshow', {dialog: this});
@@ -123,14 +120,11 @@ limitations under the License.
 
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
-            if (options.animation) {
-              animation = new DialogView._animatorDict[options.animation]();
-            }
+            var animator = this._animationChooser.newAnimator(options);
 
-            animation.hide(this, function() {
+            animator.hide(this, function() {
               this._element.css('display', 'none');
               this._visible = false;
               unlock();

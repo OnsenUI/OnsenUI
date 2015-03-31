@@ -20,7 +20,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('AlertDialogView', function($onsen, DialogAnimator, SlideDialogAnimator, AndroidAlertDialogAnimator, IOSAlertDialogAnimator) {
+  module.factory('AlertDialogView', function($parse, $onsen, AnimationChooser, DialogAnimator, SlideDialogAnimator, AndroidAlertDialogAnimator, IOSAlertDialogAnimator) {
 
     var AlertDialogView = Class.extend({
 
@@ -41,13 +41,13 @@ limitations under the License.
         this._visible = false;
         this._doorLock = new DoorLock();
 
-        var Animator = AlertDialogView._animatorDict[typeof attrs.animation !== 'undefined' ?
-          attrs.animation : 'default'];
-
-        if (!Animator) {
-          throw new Error('No such animation: ' + attrs.animation);
-        }
-        this._animation = new Animator();
+        this._animationChooser = new AnimationChooser({
+          animators: AlertDialogView._animatorDict,
+          baseClass: DialogAnimator,
+          baseClassName: 'DialogAnimator',
+          defaultAnimation: attrs.animation,
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
         this._createMask(attrs.maskColor);
@@ -72,18 +72,14 @@ limitations under the License.
 
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
             this._mask.css('display', 'block');
             this._mask.css('opacity', 1);
             this._element.css('display', 'block');
 
-            if (options.animation) {
-              animation = new AlertDialogView._animatorDict[options.animation]();
-            }
-
-            animation.show(this, function() {
+            var animator = this._animationChooser.newAnimator(options);
+            animator.show(this, function() {
               this._visible = true;
               unlock();
               this.emit('postshow', {alertDialog: this});
@@ -112,14 +108,10 @@ limitations under the License.
 
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
-            if (options.animation) {
-              animation = new AlertDialogView._animatorDict[options.animation]();
-            }
-
-            animation.hide(this, function() {
+            var animator = this._animationChooser.newAnimator(options);
+            animator.hide(this, function() {
               this._element.css('display', 'none');
               this._mask.css('display', 'none');
               this._visible = false;

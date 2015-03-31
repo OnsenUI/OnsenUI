@@ -95,7 +95,7 @@ limitations under the License.
     return TabbarFadeAnimator;
   });
 
-  module.factory('TabbarView', function($onsen, $compile, TabbarAnimator, TabbarNoneAnimator, TabbarFadeAnimator) {
+  module.factory('TabbarView', function($onsen, $compile, $parse, AnimationChooser, TabbarAnimator, TabbarNoneAnimator, TabbarFadeAnimator) {
     var TabbarView = Class.extend({
       _tabbarId: undefined,
 
@@ -117,6 +117,14 @@ limitations under the License.
         if (this._hasTopTabbar()) {
           this._prepareForTopTabbar();
         }
+
+        this._animationChooser = new AnimationChooser({
+          animators: TabbarView._animatorDict,
+          baseClass: TabbarAnimator,
+          baseClassName: 'TabbarAnimator',
+          defaultAnimation: attrs.animation,
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
       },
 
       _prepareForTopTabbar: function() {
@@ -327,7 +335,7 @@ limitations under the License.
           this._currentPageElement = element;
           this._currentPageScope = scope;
 
-          this._getAnimatorOption(options).apply(element, oldPageElement, function() {
+          this._animationChooser.newAnimator(options).apply(element, oldPageElement, function() {
             if (options._removeElement) {
               oldPageElement.remove();
               oldPageScope.$destroy();
@@ -378,18 +386,6 @@ limitations under the License.
 
         element.css('display', 'block');
         this._switchPage(element, element.scope(), options);
-      },
-
-      /**
-       * @param {Object} options
-       * @param {String} [options.animation]
-       * @return {TabbarAnimator}
-       */
-      _getAnimatorOption: function(options) {
-        var animationAttr = this._element.attr('animation') || 'default';
-
-        var Animator = TabbarView._animatorDict[options.animation || animationAttr] || TabbarView._animatorDict['default'];
-        return new Animator();
       },
 
       _destroy: function() {
