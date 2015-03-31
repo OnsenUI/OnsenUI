@@ -4,6 +4,7 @@ CHANGELOG
 
 v1.3.0-dev
 ----
+ * ons-sliding-menu: Fixed [#544](https://github.com/OnsenUI/OnsenUI/issues/544).
  * ons-sliding-menu: Fixed [#464](https://github.com/OnsenUI/OnsenUI/issues/464).
  * ons-pull-hook: Fixed [#467](https://github.com/OnsenUI/OnsenUI/issues/467).
  * ons-pull-hook: Fixed issue where a error was thrown if the pull hook was destroyed before `$done()` was called.
@@ -16,6 +17,11 @@ v1.3.0-dev
  * core: `ons.createDialog`, `ons.createPopover` and `ons.createAlertDialog` can now be supplied with a scope object in order to specify the parent scope of the element. This makes data binding much easier.
  * ons-loading-placeholder: Fixed [#541](https://github.com/OnsenUI/OnsenUI/issues/541).
  * ons-loading-placeholder: The component can now be used anywhere.
+ * ons-tabbar: Fixed [#530](https://github.com/OnsenUI/OnsenUI/issues/530).
+ * ons-split-view: Fixed [#525](https://github.com/OnsenUI/OnsenUI/issues/525).
+ * ons-split-view: Fixed [#552](https://github.com/OnsenUI/OnsenUI/issues/552).
+ * ons-navigator: Added `animation` option to `popPage()`.
+ * ons-navigator: Added `replacePage()` method.
 
 v1.2.2
 ----

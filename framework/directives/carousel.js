@@ -247,7 +247,7 @@
 
 /**
  * @ngdoc method
- * @signature getActiveCarouselItemIndex(index)
+ * @signature getActiveCarouselItemIndex()
  * @return {Number}
  *   [en]The current carousel item index.[/en]
  *   [ja]現在表示しているカルーセル要素のインデックスが返されます。[/ja]
@@ -291,7 +291,7 @@
 
 /**
  * @ngdoc method
- * @signature getAutoScrollRatio(ratio)
+ * @signature getAutoScrollRatio()
  * @return {Number}
  *   [en]The current auto scroll ratio.[/en]
  *   [ja]現在のオートスクロールのratio値。[/ja]
