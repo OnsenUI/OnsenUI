@@ -372,9 +372,8 @@
           pre: function(scope, element, attrs) {
             var alertDialog = new AlertDialogView(scope, element, attrs);
 
-            $onsen.registerEventHandlers(alertDialog, 'preshow prehide postshow posthide destroy');
-
             $onsen.declareVarAttribute(attrs, alertDialog);
+            $onsen.registerEventHandlers(alertDialog, 'preshow prehide postshow posthide destroy');
             $onsen.addModifierMethods(alertDialog, 'alert-dialog--*', element);
 
             if (titleElement.length) {
