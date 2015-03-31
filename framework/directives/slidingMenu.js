@@ -176,7 +176,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preopen" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"preopen"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -185,7 +185,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preclose" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"preclose"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -194,7 +194,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postopen" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"postopen"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -203,7 +203,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postclose" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"postclose"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -212,7 +212,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**

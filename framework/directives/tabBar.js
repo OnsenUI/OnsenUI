@@ -153,7 +153,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "reactive" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"reactive"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -162,7 +162,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prechange" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"prechange"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -171,7 +171,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"postchange"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -180,7 +180,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**

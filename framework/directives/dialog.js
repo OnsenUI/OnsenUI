@@ -146,7 +146,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"preshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -155,7 +155,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"prehide"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -164,7 +164,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"postshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -173,7 +173,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"posthide"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -182,7 +182,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**

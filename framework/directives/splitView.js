@@ -195,7 +195,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "update" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"update"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -204,7 +204,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "presplit" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"presplit"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -213,7 +213,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "precollapse" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"precollapse"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -222,7 +222,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postsplit" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"postsplit"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -231,7 +231,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postcollapse" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"postcollapse"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -240,7 +240,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**

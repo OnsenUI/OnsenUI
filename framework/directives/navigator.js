@@ -147,7 +147,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prepush" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"prepush"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -156,7 +156,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prepop" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"prepop"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -165,7 +165,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postpush" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"postpush"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -174,7 +174,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postpop" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"postpop"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -183,7 +183,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**

@@ -186,7 +186,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "posotchange" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"posotchange"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -195,7 +195,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "refresh" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"refresh"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -204,7 +204,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "overscroll" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"overscroll"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -213,7 +213,7 @@
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
- *  [ja][/ja]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
