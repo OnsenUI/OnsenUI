@@ -35,7 +35,8 @@ limitations under the License.
       ),
 
       timing: 'cubic-bezier(.1, .7, .4, 1)',
-      duration: 0.3, 
+      duration: 0.3,
+      delay: 0,
       blackMaskOpacity: 0.4,
 
       init: function(options) {
@@ -61,6 +62,7 @@ limitations under the License.
               opacity: 0,
               transform: 'translate3d(0, 0, 0)'
             })
+            .wait(this.delay)
             .queue({
               opacity: this.blackMaskOpacity
             }, {
@@ -80,6 +82,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -96,6 +99,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(-45%, 0px, 0px)'
@@ -128,6 +132,7 @@ limitations under the License.
               opacity: this.blackMaskOpacity,
               transform: 'translate3d(0, 0, 0)'
             })
+            .wait(this.delay)
             .queue({
               opacity: 0
             }, {
@@ -148,6 +153,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0px, 0px, 0px)',
@@ -165,6 +171,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(100%, 0px, 0px)'
@@ -185,4 +192,3 @@ limitations under the License.
   });
 
 })();
-

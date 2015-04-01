@@ -27,6 +27,10 @@ limitations under the License.
      */
     var FadeTransitionAnimator = NavigatorTransitionAnimator.extend({
 
+      duration: 0.4,
+      timing: 'linear',
+      delay: 0,
+
       /**
        * @param {Object} enterPage
        * @param {Object} leavePage
@@ -44,13 +48,14 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
                 opacity: 1
               },
-              duration: 0.4,
-              timing: 'linear'
+              duration: this.duration,
+              timing: this.timing
             })
             .resetStyle()
             .queue(function(done) {
@@ -66,13 +71,14 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
                 opacity: 1
               },
-              duration: 0.4,
-              timing: 'linear'
+              duration: this.duration,
+              timing: this.timing
             })
             .resetStyle()
         );

@@ -27,6 +27,10 @@ limitations under the License.
      */
     var IOSSlideTransitionAnimator = NavigatorTransitionAnimator.extend({
 
+      duration: 0.4,
+      timing: 'cubic-bezier(.1, .7, .1, 1)',
+      delay: 0,
+
       /** Black mask */
       backgroundMask : angular.element(
         '<div style="position: absolute; width: 100%;' +
@@ -107,11 +111,12 @@ limitations under the License.
             opacity: 0,
             transform: 'translate3d(0, 0, 0)'
           })
+          .wait(this.delay)
           .queue({
             opacity: 0.1
           }, {
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
+            duration: this.duration,
+            timing: this.timing
           })
           .resetStyle()
           .queue(function(done) {
@@ -136,12 +141,13 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(0px, 0px, 0px)',
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -154,11 +160,11 @@ limitations under the License.
                 },
                 duration: 0
               })
-              .wait(0.3)
+              .wait(this.delay + 0.3)
               .resetStyle({
                 duration: 0.1,
                 transition:
-                  'background-color 0.1s linear, ' + 
+                  'background-color 0.1s linear, ' +
                   'border-color 0.1s linear'
               }),
 
@@ -170,13 +176,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3d(0, 0, 0)',
                   opacity: 1.0
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -185,10 +192,11 @@ limitations under the License.
                 css: {opacity: 0},
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {opacity: 1},
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -199,12 +207,13 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(-25%, 0px, 0px)',
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle()
               .queue(function(done) {
@@ -222,13 +231,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3d(-' + delta + 'px, 0, 0)',
                   opacity: 0,
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -237,10 +247,11 @@ limitations under the License.
                 css: {opacity: 1},
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {opacity: 0},
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle()
 
@@ -259,12 +270,13 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(0px, 0px, 0px)',
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -275,12 +287,13 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(-25%, 0px, 0px)'
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle()
               .queue(function(done) {
@@ -314,11 +327,12 @@ limitations under the License.
             opacity: 0.1,
             transform: 'translate3d(0, 0, 0)'
           })
+          .wait(this.delay)
           .queue({
             opacity: 0
           }, {
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
+            duration: this.duration,
+            timing: this.timing
           })
           .resetStyle()
           .queue(function(done) {
@@ -345,13 +359,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(0px, 0px, 0px)',
                   opacity: 1.0
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -363,13 +378,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3d(0, 0, 0)',
                   opacity: 1.0
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -381,13 +397,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3d(0, 0, 0)',
                   opacity: 1.0
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -396,10 +413,11 @@ limitations under the License.
                 css: {opacity: 0},
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {opacity: 1},
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -410,12 +428,13 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(100%, 0px, 0px)'
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .wait(0)
               .queue(function(finish) {
@@ -433,13 +452,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3d(0, 0, 0)',
                   opacity: 0,
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               }),
 
             animit(leavePageDecomposition.toolbar)
@@ -460,13 +480,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3d(' + delta + 'px, 0, 0)',
                   opacity: 0,
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
           );
         } else {
@@ -483,13 +504,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(0px, 0px, 0px)',
                   opacity: 1.0
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -500,12 +522,13 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(100%, 0px, 0px)'
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .queue(function(finish) {
                 done();
