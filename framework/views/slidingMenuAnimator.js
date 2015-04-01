@@ -21,7 +21,20 @@ limitations under the License.
 
   module.factory('SlidingMenuAnimator', function() {
     return Class.extend({
-      
+
+      duration: 0.4,
+      timing: 'cubic-bezier(.1, .7, .1, 1)',
+
+      /**
+       * @param {Object} options
+       * @param {String} options.timing
+       * @param {Number} options.duration
+       */
+      init: function(options) {
+        this.timing = options.timing || this.timing;
+        this.duration = options.duration !== undefined ? options.duration : this.duration;
+      },
+
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
        * @param {jqLite} mainPage
