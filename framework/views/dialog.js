@@ -32,6 +32,7 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
+        this._attrs = attrs;
 
         this._element.css('display', 'none');
 
@@ -54,6 +55,8 @@ limitations under the License.
         }
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
       /**
@@ -152,13 +155,19 @@ limitations under the License.
        * Destroy dialog.
        */
       destroy: function() {
+        this._scope.$destroy();
+      },
+
+      _destroy: function() {
+        this.emit('destroy');
+
         this._element.remove();
         this._deviceBackButtonHandler.destroy();
         this._mask.off();
 
         this._scope.$destroy();
 
-        this._deviceBackButtonHandler = this._element = this._dialog = this._mask = null;
+        this._deviceBackButtonHandler = this._scope = this._attrs = this._element = this._dialog = this._mask = null;
       },
 
       /**

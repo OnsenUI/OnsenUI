@@ -113,6 +113,15 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-changestate
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "changestate" event is fired.[/en]
+ *  [ja]"changestate"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature setDisabled(disabled)
  * @param {Boolean} disabled
@@ -217,6 +226,7 @@
             var pullHook = new PullHookView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, pullHook);
+            $onsen.registerEventHandlers(pullHook, 'changestate destroy');
             element.data('ons-pull-hook', pullHook);
 
             scope.$on('$destroy', function() {

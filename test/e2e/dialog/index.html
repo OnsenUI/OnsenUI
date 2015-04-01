@@ -11,6 +11,10 @@
       ons.bootstrap()
 
       .controller('TestController', function($scope) {
+        $scope.data = {
+          visible: false
+        };
+
         $scope.person = {
           name: 'Andreas'
         };
@@ -27,18 +31,26 @@
           $scope.dialog.show();
         };
       });
+
+      document.addEventListener('ons-dialog:preshow', function(event) {
+        document.getElementById('event-triggered').innerHTML = 'Event triggered!';
+      });
     </script>
   </head>
   <body>
     <ons-page ng-controller="TestController">
-      <ons-button ng-click="show()">Show dialog</ons-button>
+      <ons-button id="open-dialog" ng-show="!data.visible" ng-click="show()">Show dialog</ons-button>
       <p id="name">Hello there, {{ person.name }}!</p>
+
+
+      <p id="event-triggered"></p>
     </ons-page>
 
     <ons-template id="dialog.html">
-      <ons-dialog var="dialog" cancelable>
+      <ons-dialog var="dialog" ons-preshow="data.visible = true" ons-posthide="data.visible = false" cancelable>
         <p>What's your name?</p>
         <input ng-model="person.name">
+        <ons-button id="close-dialog" ng-click="dialog.hide()">Close</ons-button>
       </ons-dialog>
     </ons-template>
   </body>

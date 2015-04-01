@@ -1,4 +1,4 @@
-/*! onsenui - v1.3.0-dev - 2015-03-31 */
+/*! onsenui - v1.3.0-beta - 2015-04-01 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -5966,6 +5966,8 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
+        this._attrs = attrs;
+
         this._element.css({
           display: 'none',
           zIndex: 20001
@@ -5984,6 +5986,8 @@ limitations under the License.
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
         this._createMask(attrs.maskColor);
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
       /**
@@ -6077,15 +6081,19 @@ limitations under the License.
        * Destroy alert dialog.
        */
       destroy: function() {
+        this._scope.$destroy();
+      },
+
+      _destroy: function() {
+        this.emit('destroy');
+
         this._mask.off();
-  
+
         this._element.remove();
         this._mask.remove();
         this._deviceBackButtonHandler.destroy();
 
-        this._scope.$destroy();
-
-        this._deviceBackButtonHandler = this._element = this._mask = null;
+        this._deviceBackButtonHandler = this._scope = this._attrs = this._element = this._mask = null;
       },
 
       /**
@@ -7341,7 +7349,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {navigator: this});
+        this.emit('destroy');
 
         this._hammer.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
         this._hammer.off('dragend', this._bindedOnDragEnd);
@@ -7392,6 +7400,7 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
+        this._attrs = attrs;
 
         this._element.css('display', 'none');
 
@@ -7414,6 +7423,8 @@ limitations under the License.
         }
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
       /**
@@ -7512,13 +7523,19 @@ limitations under the License.
        * Destroy dialog.
        */
       destroy: function() {
+        this._scope.$destroy();
+      },
+
+      _destroy: function() {
+        this.emit('destroy');
+
         this._element.remove();
         this._deviceBackButtonHandler.destroy();
         this._mask.off();
 
         this._scope.$destroy();
 
-        this._deviceBackButtonHandler = this._element = this._dialog = this._mask = null;
+        this._deviceBackButtonHandler = this._scope = this._attrs = this._element = this._dialog = this._mask = null;
       },
 
       /**
@@ -9407,9 +9424,14 @@ limitations under the License.
     var NavigatorView = Class.extend({
 
       /**
-       * @member jqLite Object
+       * @member {jqLite} Object
        */
       _element: undefined,
+
+      /**
+       * @member {Object} Object
+       */
+      _attrs: undefined,
 
       /**
        * @member {Array}
@@ -9432,15 +9454,15 @@ limitations under the License.
       _profiling: false,
 
       /**
-       * @param {Object} options
-       * @param options.element jqLite Object to manage with navigator
-       * @param options.scope Angular.js scope object
+       * @param {Object} scope
+       * @param {jqLite} element jqLite Object to manage with navigator
+       * @param {Object} attrs
        */
-      init: function(options) {
-        options = options || options;
+      init: function(scope, element, attrs) {
 
-        this._element = options.element || angular.element(window.document.body);
-        this._scope = options.scope || this._element.scope();
+        this._element = element || angular.element(window.document.body);
+        this._scope = scope || this._element.scope();
+        this._attrs = attrs;
         this._doorLock = new DoorLock();
         this.pages = [];
 
@@ -9451,7 +9473,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {navigator: this});
+        this.emit('destroy');
 
         this.pages.forEach(function(page) {
           page.destroy();
@@ -9459,6 +9481,8 @@ limitations under the License.
 
         this._deviceBackButtonHandler.destroy();
         this._deviceBackButtonHandler = null;
+
+        this._element = this._scope = this._attrs = null;
       },
 
       _onDeviceBackButton: function(event) {
@@ -10576,10 +10600,11 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._element = element;
         this._scope = scope;
+        this._attrs = attrs;
 
         this._mask = angular.element(this._element[0].querySelector('.popover-mask'));
         this._popover = angular.element(this._element[0].querySelector('.popover'));
-        
+
         this._mask.css('z-index', 20000);
         this._popover.css('z-index', 20001);
         this._element.css('display', 'none');
@@ -10613,6 +10638,8 @@ limitations under the License.
         this._popover[0].addEventListener('DOMNodeInserted', this._onChange, false);
         this._popover[0].addEventListener('DOMNodeRemoved', this._onChange, false);
         window.addEventListener('resize', this._onChange, false);
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
       _onDeviceBackButton: function(event) {
@@ -10836,16 +10863,20 @@ limitations under the License.
        */
       destroy: function() {
         this._scope.$destroy();
+      },
+
+      _destroy: function() {
+        this.emit('destroy');
+
+        this._deviceBackButtonHandler.destroy();
+        this._popover[0].removeEventListener('DOMNodeInserted', this._onChange, false);
+        this._popover[0].removeEventListener('DOMNodeRemoved', this._onChange, false);
+        window.removeEventListener('resize', this._onChange, false);
 
         this._mask.off();
         this._mask.remove();
         this._popover.remove();
         this._element.remove();
-        
-        this._deviceBackButtonHandler.destroy();
-        this._popover[0].removeEventListener('DOMNodeInserted', this._onChange, false);
-        this._popover[0].removeEventListener('DOMNodeRemoved', this._onChange, false);
-        window.removeEventListener('resize', this._onChange, false);
 
         this._onChange = this._deviceBackButtonHandler = this._mask = this._popover = this._element = this._scope = null;
       },
@@ -11168,14 +11199,14 @@ limitations under the License.
 
         this._scope.$evalAsync(function() {
           this._element[0].setAttribute('state', state);
-        }.bind(this));
 
-        if (!noEvent && oldState !== this._getState()) {
-          this.emit('changestate', {
-            state: state,
-            pullHook: this
-          });
-        }
+          if (!noEvent && oldState !== this._getState()) {
+            this.emit('changestate', {
+              state: state,
+              pullHook: this
+            });
+          }
+        }.bind(this));
       },
 
       _getState: function() {
@@ -11205,7 +11236,7 @@ limitations under the License.
 
       _translateTo: function(scroll, options) {
         options = options || {};
-    
+
         this._currentTranslation = scroll;
 
         if (options.animate) {
@@ -11253,7 +11284,7 @@ limitations under the License.
         this._bindedOnDragStart = this._onDragStart.bind(this);
         this._bindedOnDragEnd = this._onDragEnd.bind(this);
         this._bindedOnScroll = this._onScroll.bind(this);
-        
+
         // Bind listeners
         this._hammer.on('drag', this._bindedOnDrag);
         this._hammer.on('dragstart', this._bindedOnDragStart);
@@ -11271,6 +11302,7 @@ limitations under the License.
       },
 
       _destroy: function() {
+        this.emit('destroy');
         this._destroyEventListeners();
         this._element = this._scope = this._attrs = null;
       }
@@ -12381,7 +12413,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {slidingMenu: this});
+        this.emit('destroy');
 
         this._deviceBackButtonHandler.destroy();
         window.removeEventListener('resize', this._bindedOnWindowResize);
@@ -12472,7 +12504,7 @@ limitations under the License.
       },
 
       _appendMainPage: function(pageUrl, templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
@@ -12494,7 +12526,7 @@ limitations under the License.
        * @param {String}
        */
       _appendMenuPage: function(templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
@@ -12706,8 +12738,10 @@ limitations under the License.
       close: function(options) {
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
-       
-        this.emit('preclose');
+
+        this.emit('preclose', {
+          slidingMenu: this
+        });
 
         this._doorLock.waitUnlock(function() {
           this._logic.close(options);
@@ -12725,7 +12759,10 @@ limitations under the License.
           this._mainPage.children().css('pointer-events', '');
           this._mainPageHammer.off('tap', this._bindedOnTap);
 
-          this.emit('postclose');
+          this.emit('postclose', {
+            slidingMenu: this
+          });
+
           callback();
         }.bind(this), instant);
       },
@@ -12750,7 +12787,9 @@ limitations under the License.
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
 
-        this.emit('preopen');
+        this.emit('preopen', {
+          slidingMenu: this
+        });
 
         this._doorLock.waitUnlock(function() {
           this._logic.open(options);
@@ -12768,7 +12807,9 @@ limitations under the License.
           this._mainPage.children().css('pointer-events', 'none');
           this._mainPageHammer.on('tap', this._bindedOnTap);
 
-          this.emit('postopen');
+          this.emit('postopen', {
+            slidingMenu: this
+          });
 
           callback();
         }.bind(this), instant);
@@ -12943,11 +12984,12 @@ limitations under the License.
 
     var SplitView = Class.extend({
 
-      init: function(scope, element) {
+      init: function(scope, element, attrs) {
         element.addClass('onsen-sliding-menu');
 
         this._element = element;
         this._scope = scope;
+        this._attrs = attrs;
 
         this._mainPage = angular.element(element[0].querySelector('.onsen-split-view__main'));
         this._secondaryPage = angular.element(element[0].querySelector('.onsen-split-view__secondary'));
@@ -12990,7 +13032,7 @@ limitations under the License.
        * @param {String} templateHTML
        */
       _appendSecondPage: function(templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = $compile(templateHTML)(pageScope);
 
         this._secondaryPage.append(pageContent);
@@ -13008,7 +13050,7 @@ limitations under the License.
        * @param {String} templateHTML
        */
       _appendMainPage: function(templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = $compile(templateHTML)(pageScope);
 
         this._mainPage.append(pageContent);
@@ -13233,7 +13275,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {splitView: this});
+        this.emit('destroy');
 
         this._element = null;
         this._scope = null;
@@ -13557,8 +13599,6 @@ limitations under the License.
           if (this._tabItems[i] != selectedTabItem) {
             this._tabItems[i].setInactive();
           } else {
-            this._triggerActiveTabChanged(i, selectedTabItem);
-
             if (!needLoad) {
               this.emit('postchange', {index: index, tabItem: selectedTabItem});
             }
@@ -13566,13 +13606,6 @@ limitations under the License.
         }
 
         return true;
-      },
-
-      _triggerActiveTabChanged: function(index, tabItem){
-        this._scope.onActiveTabChanged({
-          $index: index,
-          $tabItem: tabItem
-        });
       },
 
       /**
@@ -13693,11 +13726,12 @@ limitations under the License.
        */
       _loadPageDOM: function(element, options) {
         options = options || {};
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var link = $compile(element);
 
         this._contentElement.append(element);
         var pageContent = link(pageScope);
+
         pageScope.$evalAsync();
 
         this._switchPage(pageContent, pageScope, options);
@@ -13712,7 +13746,7 @@ limitations under the License.
         options = options || {};
 
         element.css('display', 'block');
-        this._switchPage(element, element.scope(), options); 
+        this._switchPage(element, element.scope(), options);
       },
 
       /**
@@ -13727,7 +13761,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {tabbar: this});
+        this.emit('destroy');
 
         this._element = this._scope = this._attrs = null;
       }
@@ -13752,7 +13786,6 @@ limitations under the License.
 
       this._animatorDict[name] = animator;
     };
-
 
     return TabbarView;
   }]);
@@ -13912,6 +13945,51 @@ limitations under the License.
  * @description
  *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
  *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-preshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
+ *  [ja]"preshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prehide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
+ *  [ja]"prehide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
+ *  [ja]"postshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-posthide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
+ *  [ja]"posthide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -14089,6 +14167,7 @@ limitations under the License.
             var alertDialog = new AlertDialogView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, alertDialog);
+            $onsen.registerEventHandlers(alertDialog, 'preshow prehide postshow posthide destroy');
             $onsen.addModifierMethods(alertDialog, 'alert-dialog--*', element);
 
             if (titleElement.length) {
@@ -14697,6 +14776,42 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-postchange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
+ *  [ja]"postchange"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-refresh
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "refresh" event is fired.[/en]
+ *  [ja]"refresh"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-overscroll
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "overscroll" event is fired.[/en]
+ *  [ja]"overscroll"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature next()
  * @description
@@ -14935,6 +15050,7 @@ limitations under the License.
 
           element.data('ons-carousel', carousel);
 
+          $onsen.registerEventHandlers(carousel, 'postchange refresh overscroll destroy');
           $onsen.declareVarAttribute(attrs, carousel);
 
           scope.$on('$destroy', function() {
@@ -15263,6 +15379,51 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-preshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
+ *  [ja]"preshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prehide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
+ *  [ja]"prehide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
+ *  [ja]"postshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-posthide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
+ *  [ja]"posthide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature show([options])
  * @param {Object} [options]
@@ -15440,6 +15601,7 @@ limitations under the License.
 
             $onsen.addModifierMethods(dialog, 'dialog--*', angular.element(element[0].querySelector('.dialog')));
             $onsen.declareVarAttribute(attrs, dialog);
+            $onsen.registerEventHandlers(dialog, 'preshow prehide postshow posthide destroy');
 
             element.data('ons-dialog', dialog);
             scope.$on('$destroy', function() {
@@ -16429,10 +16591,17 @@ limitations under the License.
           throw Error('Must define page to load.');
         }
 
-        $onsen.getPageHTMLAsync(attrs.onsLoadingPlaceholder).then(function(html) {
-          setImmediate(function() {
+        setImmediate(function() {
+          $onsen.getPageHTMLAsync(attrs.onsLoadingPlaceholder).then(function(html) {
+
+            // Remove page tag.
+            html = html
+              .trim()
+              .replace(/^<ons-page>/, '')
+              .replace(/<\/ons-page>$/, '');
+
             var div = document.createElement('div');
-            div.innerHTML = html.trim();
+            div.innerHTML = html;
 
             var newElement = angular.element(div);
             newElement.css('display', 'none');
@@ -16440,7 +16609,13 @@ limitations under the License.
             element.append(newElement);
             ons.compile(newElement[0]);
 
-            angular.element(element.children()[0]).remove();
+            for (var i = element[0].childNodes.length - 1; i >= 0; i--){
+              var e = element[0].childNodes[i];
+              if (e !== div) {
+                e.remove();
+              }
+            }
+
             newElement.css('display', 'block');
           });
         });
@@ -16737,6 +16912,51 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-prepush
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prepush" event is fired.[/en]
+ *  [ja]"prepush"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prepop
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prepop" event is fired.[/en]
+ *  [ja]"prepop"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postpush
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postpush" event is fired.[/en]
+ *  [ja]"postpush"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postpop
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postpop" event is fired.[/en]
+ *  [ja]"postpop"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature pushPage(pageUrl, [options])
  * @param {String} pageUrl
@@ -16928,12 +17148,10 @@ limitations under the License.
 
         return {
           pre: function(scope, element, attrs, controller) {
-            var navigator = new NavigatorView({
-              scope: scope,
-              element: element
-            });
+            var navigator = new NavigatorView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, navigator);
+            $onsen.registerEventHandlers(navigator, 'prepush prepop postpush postpop destroy');
 
             if (attrs.page) {
               navigator.pushPage(attrs.page, {});
@@ -17353,6 +17571,51 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-preshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
+ *  [ja]"preshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prehide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
+ *  [ja]"prehide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
+ *  [ja]"postshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-posthide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
+ *  [ja]"posthide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature show(target, [options])
  * @param {String|Event|HTMLElement} target
@@ -17510,6 +17773,7 @@ limitations under the License.
             var popover = new PopoverView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, popover);
+            $onsen.registerEventHandlers(popover, 'preshow prehide postshow posthide destroy');
 
             element.data('ons-popover', popover);
 
@@ -17658,6 +17922,15 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-changestate
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "changestate" event is fired.[/en]
+ *  [ja]"changestate"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature setDisabled(disabled)
  * @param {Boolean} disabled
@@ -17762,6 +18035,7 @@ limitations under the License.
             var pullHook = new PullHookView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, pullHook);
+            $onsen.registerEventHandlers(pullHook, 'changestate destroy');
             element.data('ons-pull-hook', pullHook);
 
             scope.$on('$destroy', function() {
@@ -18011,6 +18285,9 @@ limitations under the License.
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -18022,6 +18299,9 @@ limitations under the License.
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -18033,6 +18313,9 @@ limitations under the License.
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -18044,6 +18327,9 @@ limitations under the License.
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -18116,6 +18402,51 @@ limitations under the License.
  * @description
  *   [en]Sliding menu animator. Possible values are reveal (default), push and overlay.[/en]
  *   [ja]スライディングメニューのアニメーションです。"reveal"（デフォルト）、"push"、"overlay"のいずれかを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-preopen
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preopen" event is fired.[/en]
+ *  [ja]"preopen"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-preclose
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preclose" event is fired.[/en]
+ *  [ja]"preclose"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postopen
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postopen" event is fired.[/en]
+ *  [ja]"postopen"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postclose
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postclose" event is fired.[/en]
+ *  [ja]"postclose"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -18310,6 +18641,8 @@ limitations under the License.
           element.append(angular.element('<div></div>').addClass('onsen-sliding-menu__main ons-sliding-menu-inner'));
 
           var slidingMenu = new SlidingMenuView(scope, element, attrs);
+
+          $onsen.registerEventHandlers(slidingMenu, 'preopen preclose postopen postclose destroy');
 
           if (mainHtml && !attrs.mainPage) {
             slidingMenu._appendMainPage(null, mainHtml);
@@ -18526,6 +18859,60 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-update
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "update" event is fired.[/en]
+ *  [ja]"update"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-presplit
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "presplit" event is fired.[/en]
+ *  [ja]"presplit"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-precollapse
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "precollapse" event is fired.[/en]
+ *  [ja]"precollapse"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postsplit
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postsplit" event is fired.[/en]
+ *  [ja]"postsplit"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postcollapse
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postcollapse" event is fired.[/en]
+ *  [ja]"postcollapse"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature setMainPage(pageUrl)
  * @param {String} pageUrl
@@ -18645,6 +19032,7 @@ limitations under the License.
           }
 
           $onsen.declareVarAttribute(attrs, splitView);
+          $onsen.registerEventHandlers(splitView, 'update presplit precollapse postsplit postcollapse destroy');
 
           element.data('ons-split-view', splitView);
 
@@ -19283,6 +19671,42 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-reactive
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "reactive" event is fired.[/en]
+ *  [ja]"reactive"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prechange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prechange" event is fired.[/en]
+ *  [ja]"prechange"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postchange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
+ *  [ja]"postchange"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature setActiveTab(index, [options])
  * @param {Number} index
@@ -19378,15 +19802,9 @@ limitations under the License.
       restrict: 'E',
       replace: false,
       transclude: true,
-      scope: {
-        onActiveTabChanged: '&'
-      },
+      scope: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
       link: function(scope, element, attrs, controller, transclude) {
-
-        if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controller directive.');
-        }
 
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         scope.selectedTabItem = {source: ''};
@@ -19398,13 +19816,14 @@ limitations under the License.
 
         var tabbarView = new TabbarView(scope, element, attrs);
         $onsen.addModifierMethods(tabbarView, 'tab-bar--*', angular.element(element.children()[1]));
+        $onsen.registerEventHandlers(tabbarView, 'reactive prechange postchange destroy');
 
         scope.tabbarId = tabbarView._tabbarId;
 
         element.data('ons-tabbar', tabbarView);
         $onsen.declareVarAttribute(attrs, tabbarView);
 
-        transclude(function(cloned) {
+        transclude(scope, function(cloned) {
           angular.element(element[0].querySelector('.ons-tabbar-inner')).append(cloned);
         });
 
@@ -20531,6 +20950,35 @@ limitations under the License.
           }
         },
 
+        _registerEventHandler: function(component, eventName) {
+          var capitalizedEventName = eventName.charAt(0).toUpperCase() + eventName.slice(1);
+
+          component.on(eventName, function(event) {
+            $onsen.fireComponentEvent(component._element[0], eventName, event);
+
+            var handler = component._attrs['ons' + capitalizedEventName];
+            if (handler) {
+              component._scope.$eval(handler, {$event: event});
+              component._scope.$evalAsync();
+            }
+          });
+        },
+
+        /**
+         * Register event handlers for attributes.
+         *
+         * @param {Object} component
+         * @param {String} eventNames
+         */
+        registerEventHandlers: function(component, eventNames) {
+          eventNames = eventNames.trim().split(/\s+/);
+
+          for (var i = 0, l = eventNames.length; i < l; i ++) {
+            var eventName = eventNames[i];
+            this._registerEventHandler(component, eventName);
+          }
+        },
+
         /**
          * @return {Boolean}
          */
@@ -20572,12 +21020,21 @@ limitations under the License.
          * @param {HTMLElement} [dom]
          * @param {String} event name
          */
-        fireComponentEvent: function(dom, eventName) {
+        fireComponentEvent: function(dom, eventName, data) {
+          data = data || {};
+
           var event = document.createEvent('HTMLEvents');
 
-          event.component = dom ? 
+          for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+              event[key] = data[key];
+            }
+          }
+
+          event.component = dom ?
             angular.element(dom).data(dom.nodeName.toLowerCase()) || null : null;
           event.initEvent(dom.nodeName.toLowerCase() + ':' + eventName, true, true);
+
           dom.dispatchEvent(event);
         },
 

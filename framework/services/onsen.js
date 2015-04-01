@@ -303,6 +303,35 @@ limitations under the License.
           }
         },
 
+        _registerEventHandler: function(component, eventName) {
+          var capitalizedEventName = eventName.charAt(0).toUpperCase() + eventName.slice(1);
+
+          component.on(eventName, function(event) {
+            $onsen.fireComponentEvent(component._element[0], eventName, event);
+
+            var handler = component._attrs['ons' + capitalizedEventName];
+            if (handler) {
+              component._scope.$eval(handler, {$event: event});
+              component._scope.$evalAsync();
+            }
+          });
+        },
+
+        /**
+         * Register event handlers for attributes.
+         *
+         * @param {Object} component
+         * @param {String} eventNames
+         */
+        registerEventHandlers: function(component, eventNames) {
+          eventNames = eventNames.trim().split(/\s+/);
+
+          for (var i = 0, l = eventNames.length; i < l; i ++) {
+            var eventName = eventNames[i];
+            this._registerEventHandler(component, eventName);
+          }
+        },
+
         /**
          * @return {Boolean}
          */
@@ -344,12 +373,21 @@ limitations under the License.
          * @param {HTMLElement} [dom]
          * @param {String} event name
          */
-        fireComponentEvent: function(dom, eventName) {
+        fireComponentEvent: function(dom, eventName, data) {
+          data = data || {};
+
           var event = document.createEvent('HTMLEvents');
 
-          event.component = dom ? 
+          for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+              event[key] = data[key];
+            }
+          }
+
+          event.component = dom ?
             angular.element(dom).data(dom.nodeName.toLowerCase()) || null : null;
           event.initEvent(dom.nodeName.toLowerCase() + ':' + eventName, true, true);
+
           dom.dispatchEvent(event);
         },
 

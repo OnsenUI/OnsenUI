@@ -190,6 +190,60 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-update
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "update" event is fired.[/en]
+ *  [ja]"update"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-presplit
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "presplit" event is fired.[/en]
+ *  [ja]"presplit"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-precollapse
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "precollapse" event is fired.[/en]
+ *  [ja]"precollapse"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postsplit
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postsplit" event is fired.[/en]
+ *  [ja]"postsplit"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postcollapse
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postcollapse" event is fired.[/en]
+ *  [ja]"postcollapse"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature setMainPage(pageUrl)
  * @param {String} pageUrl
@@ -309,6 +363,7 @@
           }
 
           $onsen.declareVarAttribute(attrs, splitView);
+          $onsen.registerEventHandlers(splitView, 'update presplit precollapse postsplit postcollapse destroy');
 
           element.data('ons-split-view', splitView);
 

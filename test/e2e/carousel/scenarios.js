@@ -2,7 +2,8 @@
   'use strict';
 
   describe('carousel', function() {
-    var path = '/test/e2e/carousel/index.html';
+    var path = '/test/e2e/carousel/index.html',
+      EC = protractor.ExpectedConditions;
 
     describe('prev() and next() methods', function() {
       var initialPosition;
@@ -36,6 +37,22 @@
         });
 
         expect(initialPosition).toEqual(carouselItem.getLocation());
+      });
+
+      it('should emit events when changing', function() {
+        browser.get(path);
+
+        var currentIndex = element(by.id('current-index'));
+
+        expect(currentIndex.getText()).toBe('0');
+
+        element(by.id('next')).click();
+        browser.wait(EC.textToBePresentInElement(currentIndex, '1'));
+        expect(currentIndex.getText()).toBe('1');
+
+        element(by.id('prev')).click();
+        browser.wait(EC.textToBePresentInElement(currentIndex, '0'));
+        expect(currentIndex.getText()).toBe('0');
       });
     });
   });
