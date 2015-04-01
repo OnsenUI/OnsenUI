@@ -13,16 +13,44 @@
 
   </head>
   <body>
-    <ons-navigator var="navigator">
-      <ons-button ng-click="navigator.pushPage('page.html', {animationOptions: {duration: 1, delay: 1, timing: 'ease-in'}})">
-        Push
-      </ons-button>
+
+    <ons-navigator var="navigator" animation="default"
+      animation="fade"
+      animation-options="{delay: 1, duration: 1, timing: 'ease-in'}">
+
+      <ons-toolbar>
+        <div class="center">Navigator (default animation: 'fade')</div>
+      </ons-toolbar>
+
+      <ons-list>
+        <ons-list-item modifier="chevron" ng-click="navigator.pushPage('page.html')">
+          push(default)
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="navigator.pushPage('page.html', {animation: 'slide'})">
+          push(slide)
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="navigator.pushPage('page.html', {animation: 'lift'})">
+          push(lift)
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="navigator.pushPage('page.html', {animation: 'fade'})">
+          push(fade)
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" ng-click="navigator.pushPage('page.html', {animation: 'none'})">
+          push(none)
+        </ons-list-item>
+      </ons-list>
     </ons-navigator>
 
     <script type="text/ons-template" id="page.html">
-      <ons-button ng-click="navigator.popPage({animationOptions: {duration: 1, delay: 1, timing: 'ease-in'}})">
-        Pop
-      </ons-button>
+      <ons-list>
+        <ons-list-item modifier="chevron" ng-click="navigator.popPage()">
+          push(default)
+        </ons-list-item>
+      </ons-list>
     </script>
   </body>
 </html>
