@@ -185,8 +185,8 @@
  * @name ons-postchange
  * @type {Expression}
  * @description
- *  [en]Allows you to specify custom behavior when the "posotchange" event is fired.[/en]
- *  [ja]"posotchange"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
+ *  [ja]"postchange"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
