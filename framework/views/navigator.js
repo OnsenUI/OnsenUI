@@ -614,7 +614,7 @@ limitations under the License.
      * @param {String} name
      * @param {Function} Animator
      */
-    NavigatorView.registerTransitionAnimator = function(name, Animator) {
+    NavigatorView.registerAnimator = function(name, Animator) {
       if (!(Animator.prototype instanceof NavigatorTransitionAnimator)) {
         throw new Error('"Animator" param must inherit NavigatorTransitionAnimator');
       }

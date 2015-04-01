@@ -715,7 +715,7 @@ limitations under the License.
      * @param {String} name
      * @param {Function} Animator
      */
-    SlidingMenuView.registerSlidingMenuAnimator = function(name, Animator) {
+    SlidingMenuView.registerAnimator = function(name, Animator) {
       if (!(Animator.prototype instanceof SlidingMenuAnimator)) {
         throw new Error('"Animator" param must inherit SlidingMenuAnimator');
       }
