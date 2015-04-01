@@ -29,14 +29,7 @@ limitations under the License.
     var IOSDialogAnimator = DialogAnimator.extend({
 
       timing: 'ease-in-out',
-      duration: 0.3, 
-
-      init: function(options) {
-        options = options || {};
-
-        this.timing = options.timing || this.timing;
-        this.duration = options.duration !== undefined ? options.duration : this.duration;
-      },
+      duration: 0.3,
 
       /**
        * @param {Object} dialog
@@ -51,6 +44,7 @@ limitations under the License.
             .queue({
               opacity: 0
             })
+            .wait(this.delay)
             .queue({
               opacity: 1.0
             }, {
@@ -65,6 +59,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3d(-50%, -50%, 0)'
@@ -81,7 +76,7 @@ limitations under the License.
       },
 
       /**
-       * @param {Object} dialog 
+       * @param {Object} dialog
        * @param {Function} callback
        */
       hide: function(dialog, callback) {
@@ -93,6 +88,7 @@ limitations under the License.
             .queue({
               opacity: 1.0
             })
+            .wait(this.delay)
             .queue({
               opacity: 0
             }, {
@@ -107,6 +103,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3d(-50%, 300%, 0)'
@@ -128,4 +125,3 @@ limitations under the License.
   });
 
 })();
-

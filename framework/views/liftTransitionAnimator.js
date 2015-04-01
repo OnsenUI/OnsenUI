@@ -27,6 +27,10 @@ limitations under the License.
      */
     var LiftTransitionAnimator = NavigatorTransitionAnimator.extend({
 
+      duration: 0.4,
+      timing: 'cubic-bezier(.1, .7, .1, 1)',
+      delay: 0,
+
       /** Black mask */
       backgroundMask : angular.element(
         '<div style="position: absolute; width: 100%;' +
@@ -60,12 +64,13 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
               },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              duration: this.duration,
+              timing: this.timing
             })
             .wait(0.2)
             .resetStyle()
@@ -82,13 +87,14 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, -10%, 0)',
                 opacity: 0.9
               },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              duration: this.duration,
+              timing: this.timing
             })
         );
 
@@ -120,13 +126,14 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
                 opacity: 1.0
               },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              duration: this.duration,
+              timing: this.timing
             })
             .resetStyle()
             .wait(0.4)
@@ -142,14 +149,15 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 100%, 0)'
               },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              duration: this.duration,
+              timing: this.timing
             })
-            
+
         );
       }
     });
@@ -158,4 +166,3 @@ limitations under the License.
   });
 
 })();
-

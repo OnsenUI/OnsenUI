@@ -20,7 +20,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('DialogView', function($onsen, DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator) {
+  module.factory('DialogView', function($parse, $onsen, AnimationChooser, DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator) {
 
     var DialogView = Class.extend({
 
@@ -47,12 +47,13 @@ limitations under the License.
         this._visible = false;
         this._doorLock = new DoorLock();
 
-        this._animation = DialogView._animatorDict[typeof attrs.animation !== 'undefined' ? 
-          attrs.animation : 'default'];
-
-        if (!this._animation) {
-          throw new Error('No such animation: ' + attrs.animation);
-        }
+        this._animationChooser = new AnimationChooser({
+          animators: DialogView._animatorDict,
+          baseClass: DialogAnimator,
+          baseClassName: 'DialogAnimator',
+          defaultAnimation: attrs.animation,
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
 
@@ -82,20 +83,17 @@ limitations under the License.
           dialog: this,
           cancel: function() { cancel = true; }
         });
-        
+
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
             this._element.css('display', 'block');
             this._mask.css('opacity', 1);
 
-            if (options.animation) {
-              animation = DialogView._animatorDict[options.animation];
-            }
-            
-            animation.show(this, function() {
+            var animator = this._animationChooser.newAnimator(options);
+
+            animator.show(this, function() {
               this._visible = true;
               unlock();
               this.emit('postshow', {dialog: this});
@@ -116,7 +114,7 @@ limitations under the License.
         options = options || {};
         var cancel = false,
           callback = options.callback || function() {};
-        
+
         this.emit('prehide', {
           dialog: this,
           cancel: function() { cancel = true; }
@@ -124,14 +122,11 @@ limitations under the License.
 
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
-            if (options.animation) {
-              animation = DialogView._animatorDict[options.animation];
-            }
+            var animator = this._animationChooser.newAnimator(options);
 
-            animation.hide(this, function() {
+            animator.hide(this, function() {
               this._element.css('display', 'none');
               this._visible = false;
               unlock();
@@ -173,7 +168,7 @@ limitations under the License.
       /**
        * Disable or enable dialog.
        *
-       * @param {Boolean} 
+       * @param {Boolean}
        */
       setDisabled: function(disabled) {
         if (typeof disabled !== 'boolean') {
@@ -197,14 +192,14 @@ limitations under the License.
       },
 
       /**
-       * Make dialog cancelable or uncancelable. 
+       * Make dialog cancelable or uncancelable.
        *
        * @param {Boolean}
        */
       setCancelable: function(cancelable) {
         if (typeof cancelable !== 'boolean') {
-          throw new Error('Argument must be a boolean.'); 
-        }  
+          throw new Error('Argument must be a boolean.');
+        }
 
         if (cancelable) {
           this._element.attr('cancelable', true);
@@ -242,21 +237,21 @@ limitations under the License.
     });
 
     DialogView._animatorDict = {
-      'default': $onsen.isAndroid() ? new AndroidDialogAnimator() : new IOSDialogAnimator(),
-      'fade': $onsen.isAndroid() ? new AndroidDialogAnimator() : new IOSDialogAnimator(),
-      'slide': new SlideDialogAnimator(),
-      'none': new DialogAnimator()
+      'default': $onsen.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+      'fade': $onsen.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+      'slide': SlideDialogAnimator,
+      'none': DialogAnimator
     };
 
     /**
      * @param {String} name
-     * @param {DialogAnimator} animator
+     * @param {Function} Animator
      */
-    DialogView.registerAnimator = function(name, animator) {
-      if (!(animator instanceof DialogAnimator)) {
-        throw new Error('"animator" param must be an instance of DialogAnimator');
+    DialogView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof DialogAnimator)) {
+        throw new Error('"Animator" param must inherit DialogAnimator');
       }
-      this._animatorDict[name] = animator;
+      this._animatorDict[name] = Animator;
     };
 
     MicroEvent.mixin(DialogView);
@@ -264,4 +259,3 @@ limitations under the License.
     return DialogView;
   });
 })();
-

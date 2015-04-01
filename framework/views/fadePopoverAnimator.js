@@ -28,18 +28,8 @@ limitations under the License.
     */
     var FadePopoverAnimator = PopoverAnimator.extend({
 
-      timing: 'cubic-bezier(.1, .7, .4, 1)',
-      duration: 0.2, 
-
-      init: function(options) {
-        options = options || {};
-
-        this.timing = options.timing || this.timing;
-        this.duration = options.duration !== undefined ? options.duration : this.duration;
-      },
-
       /**
-      * @param {Object} popover 
+      * @param {Object} popover
       * @param {Function} callback
       */
       show: function(popover, callback) {
@@ -51,8 +41,9 @@ limitations under the License.
           .queue({
             opacity: 0
           })
+          .wait(this.delay)
           .queue({
-            opacity: 1.0 
+            opacity: 1.0
           }, {
             duration: this.duration,
             timing: this.timing
@@ -63,9 +54,10 @@ limitations under the License.
             transform: 'scale3d(1.3, 1.3, 1.0)',
             opacity: 0
           })
+          .wait(this.delay)
           .queue({
             transform: 'scale3d(1.0, 1.0,  1.0)',
-            opacity: 1.0 
+            opacity: 1.0
           }, {
             duration: this.duration,
             timing: this.timing
@@ -79,7 +71,7 @@ limitations under the License.
       },
 
       /**
-      * @param {Object} popover 
+      * @param {Object} popover
       * @param {Function} callback
       */
       hide: function(popover, callback) {
@@ -91,8 +83,9 @@ limitations under the License.
           .queue({
             opacity: 1.0
           })
+          .wait(this.delay)
           .queue({
-            opacity: 0 
+            opacity: 0
           }, {
             duration: this.duration,
             timing: this.timing
@@ -102,8 +95,9 @@ limitations under the License.
           .queue({
             opacity: 1.0
           })
+          .wait(this.delay)
           .queue({
-            opacity: 0 
+            opacity: 0
           }, {
             duration: this.duration,
             timing: this.timing
@@ -121,4 +115,3 @@ limitations under the License.
   });
 
 })();
-

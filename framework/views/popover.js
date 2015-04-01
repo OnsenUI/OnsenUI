@@ -19,7 +19,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('PopoverView', function($onsen, PopoverAnimator, FadePopoverAnimator) {
+  module.factory('PopoverView', function($parse, $onsen, AnimationChooser, PopoverAnimator, FadePopoverAnimator) {
 
     var PopoverView = Class.extend({
 
@@ -49,12 +49,13 @@ limitations under the License.
         this._visible = false;
         this._doorLock = new DoorLock();
 
-        this._animation = PopoverView._animatorDict[typeof attrs.animation !== 'undefined' ? 
-          attrs.animation : 'fade'];
-
-        if (!this._animation) {
-          throw new Error('No such animation: ' + attrs.animation);
-        }
+        this._animationChooser = new AnimationChooser({
+          animators: PopoverView._animatorDict,
+          baseClass: PopoverAnimator,
+          baseClassName: 'PopoverAnimator',
+          defaultAnimation: attrs.animation || 'fade',
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
 
@@ -97,7 +98,7 @@ limitations under the License.
         } else {
           throw new Error('Invalid direction.');
         }
-      
+
         if (!this._scope.$$phase) {
           this._scope.$apply();
         }
@@ -184,7 +185,7 @@ limitations under the License.
           down: window.innerHeight - position.bottom
         };
 
-        var orderedDirections = Object.keys(scores).sort(function(a, b) {return -(scores[a] - scores[b]);}); 
+        var orderedDirections = Object.keys(scores).sort(function(a, b) {return -(scores[a] - scores[b]);});
         for (var i = 0, l = orderedDirections.length; i < l; i++) {
           var direction = orderedDirections[i];
           if (directions.indexOf(direction) > -1) {
@@ -209,13 +210,13 @@ limitations under the License.
         } else if (target instanceof Event) {
           target = target.target;
         }
-      
+
         if (!target) {
          throw new Error('Target undefined');
         }
 
         options = options || {};
-        
+
         var cancel = false;
         this.emit('preshow', {
           popover: this,
@@ -224,19 +225,15 @@ limitations under the License.
 
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
             this._element.css('display', 'block');
 
             this._currentTarget = target;
             this._positionPopover(target);
 
-            if (options.animation) {
-              animation = PopoverView._animatorDict[options.animation];
-            }
-
-            animation.show(this, function() {
+            var animator = this._animationChooser.newAnimator(options);
+            animator.show(this, function() {
               this._visible = true;
               this._positionPopover(target);
               unlock();
@@ -263,14 +260,10 @@ limitations under the License.
 
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
-            if (options.animation) {
-              animation = PopoverView._animatorDict[options.animation];
-            }
-
-            animation.hide(this, function() {
+            var animator = this._animationChooser.newAnimator(options);
+            animator.hide(this, function() {
               this._element.css('display', 'none');
               this._visible = false;
               unlock();
@@ -319,7 +312,7 @@ limitations under the License.
        */
       setCancelable: function(cancelable) {
         if (typeof cancelable !== 'boolean') {
-          throw new Error('Argument must be a boolean.');  
+          throw new Error('Argument must be a boolean.');
         }
 
         if (cancelable) {
@@ -347,19 +340,19 @@ limitations under the License.
     });
 
     PopoverView._animatorDict = {
-      'fade': new FadePopoverAnimator(),
-      'none': new PopoverAnimator()
+      'fade': FadePopoverAnimator,
+      'none': PopoverAnimator
     };
 
     /**
      * @param {String} name
-     * @param {PopoverAnimator} animator
+     * @param {Function} Animator
      */
-    PopoverView.registerAnimator = function(name, animator) {
-      if (!(animator instanceof PopoverAnimator)) {
-        throw new Error('"animator" param must be an instance of PopoverAnimator');
+    PopoverView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof PopoverAnimator)) {
+        throw new Error('"Animator" param must inherit PopoverAnimator');
       }
-      this._animatorDict[name] = animator;
+      this._animatorDict[name] = Animator;
     };
 
     MicroEvent.mixin(PopoverView);
