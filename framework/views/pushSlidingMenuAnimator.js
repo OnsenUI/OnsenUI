@@ -110,6 +110,7 @@ limitations under the License.
        */
       openMenu: function(callback, instant) {
         var duration = instant === true ? 0.0 : this.duration;
+        var delay = instant === true ? 0.0 : this.delay;
 
         this._menuPage.css('display', 'block');
 
@@ -121,6 +122,7 @@ limitations under the License.
         setTimeout(function() {
 
           animit(this._mainPage[0])
+            .wait(delay)
             .queue({
               transform: aboveTransform
             }, {
@@ -134,6 +136,7 @@ limitations under the License.
             .play();
 
           animit(this._menuPage[0])
+            .wait(delay)
             .queue(behindStyle, {
               duration: duration,
               timing: this.timing
@@ -149,6 +152,7 @@ limitations under the License.
        */
       closeMenu: function(callback, instant) {
         var duration = instant === true ? 0.0 : this.duration;
+        var delay = instant === true ? 0.0 : this.delay;
 
         var aboveTransform = this._generateAbovePageTransform(0);
         var behindStyle = this._generateBehindPageStyle(0);
@@ -156,6 +160,7 @@ limitations under the License.
         setTimeout(function() {
 
           animit(this._mainPage[0])
+            .wait(delay)
             .queue({
               transform: aboveTransform
             }, {
@@ -173,6 +178,7 @@ limitations under the License.
             .play();
 
           animit(this._menuPage[0])
+            .wait(delay)
             .queue(behindStyle, {
               duration: duration,
               timing: this.timing
