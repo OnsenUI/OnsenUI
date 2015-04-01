@@ -23,6 +23,21 @@ limitations under the License.
   module.factory('TabbarAnimator', function() {
 
     var TabbarAnimator = Class.extend({
+
+      /**
+       * @param {Object} options
+       * @param {String} options.timing
+       * @param {Number} options.duration
+       * @param {Number} options.delay
+       */
+      init: function(options) {
+        options = options || {};
+
+        this.timing = options.timing || this.timing;
+        this.duration = options.duration !== undefined ? options.duration : this.duration;
+        this.delay = options.delay !== undefined ? options.delay : this.delay;
+      },
+
       /**
        * @param {jqLite} enterPage
        * @param {jqLite} leavePage
@@ -53,6 +68,11 @@ limitations under the License.
   module.factory('TabbarFadeAnimator', function(TabbarAnimator) {
 
     var TabbarFadeAnimator = TabbarAnimator.extend({
+
+      timing: 'linear',
+      duration: 0.4,
+      delay: 0,
+
       /**
        * @param {jqLite} enterPage
        * @param {jqLite} leavePage
@@ -64,12 +84,13 @@ limitations under the License.
               transform: 'translate3D(0, 0, 0)',
               opacity: 0
             })
+            .wait(this.delay)
             .queue({
               transform: 'translate3D(0, 0, 0)',
               opacity: 1
             }, {
-              duration: 0.4,
-              timing: 'linear'
+              duration: this.duration,
+              timing: this.timing
             })
             .resetStyle()
             .queue(function(callback) {
@@ -81,12 +102,13 @@ limitations under the License.
               transform: 'translate3D(0, 0, 0)',
               opacity: 1
             })
+            .wait(this.delay)
             .queue({
               transform: 'translate3D(0, 0, 0)',
               opacity: 0
             }, {
-              duration: 0.4,
-              timing: 'linear'
+              duration: this.duration,
+              timing: this.timing
             })
         );
       }
