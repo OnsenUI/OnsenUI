@@ -1,6 +1,6 @@
-/*! onsenui - v1.2.2 - 2015-02-26 */
+/*! onsenui - v1.3.0-beta - 2015-04-01 */
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -57,6 +57,7 @@ input, textarea {
 .page__content {
   background-color: transparent !important;
   background: transparent !important;
+  -ms-touch-action: none;
 }
 
 .page__status-bar-fill ~ .page__content {
@@ -121,7 +122,7 @@ ons-pull-hook {
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -695,7 +696,7 @@ ons-carousel[disabled] {
 }
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -733,32 +734,50 @@ ons-icon[spin="true"] {
 }
 
 @-moz-keyframes ons-icon-spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
   100% {
-    -moz-transform: rotate3d(0, 0, 1, 360deg);
+    -moz-transform: rotate(359deg);
   }
 }
 
 @-webkit-keyframes ons-icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
   100% {
-    -webkit-transform: rotate3d(0, 0, 1, 360deg);
+    -webkit-transform: rotate(359deg);
   }
 }
 
 @-o-keyframes ons-icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
   100% {
-    -webkit-transform: rotate3d(0, 0, 1, 360deg);
-    -o-transform: rotate3d(0, 0, 1, 360deg);
-    transform: rotate3d(0, 0, 1, 360deg);
+    -webkit-transform: rotate(359deg);
+    -o-transform: rotate(359deg);
+    transform: rotate(359deg);
   }
 }
 
 @keyframes ons-icon-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
   100% {
-    -webkit-transform: rotate3d(0, 0, 1, 360deg);
-    -moz-transform: rotate3d(0, 0, 1, 360deg);
-    -ms-transform: rotate3d(0, 0, 1, 360deg);
-    -o-transform: rotate3d(0, 0, 1, 360deg);
-    transform: rotate3d(0, 0, 1, 360deg);
+    -webkit-transform: rotate(359deg);
+    -moz-transform: rotate(359deg);
+    -ms-transform: rotate(359deg);
+    -o-transform: rotate(359deg);
+    transform: rotate(359deg);
   }
 }
 
@@ -830,7 +849,7 @@ ons-icon[fixed-width="true"] {
 }
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -858,7 +877,7 @@ limitations under the License.
 }
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -880,7 +899,6 @@ ons-sliding-menu {
   right: 0px;
   top: 0px;
   bottom: 0px;
-  overflow: hidden;
   z-index: 0;
 }
 
@@ -902,7 +920,7 @@ ons-sliding-menu {
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -941,4 +959,5 @@ ons-split-view {
   bottom: 0px;
   right: 0px;
   z-index: 0;
+  overflow-x: hidden; 
 }

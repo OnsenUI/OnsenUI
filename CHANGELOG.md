@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v1.3.0-dev
+v1.3.0-beta
 ----
  * ons-sliding-menu: Fixed [#544](https://github.com/OnsenUI/OnsenUI/issues/544).
  * ons-sliding-menu: Fixed [#464](https://github.com/OnsenUI/OnsenUI/issues/464).
