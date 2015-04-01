@@ -12,11 +12,12 @@
     </script>
   </head>
   <body>
-    <ons-navigator title="Navigator" var="myNavigator">
+    <ons-navigator title="Navigator" var="myNavigator" ng-init="pops = 0; pushes = 0" ons-postpop="pops = pops + 1" ons-postpush="pushes = pushes + 1">
       <ons-page id="page1">
         <div style="text-align: center;">
           <p>Page 1</p>
           <br>
+          <p>Pops: <span id="pops">{{ pops }}</span>, pushes: <span id="pushes">{{ pushes }}</span></p>
           <ons-button id="btn1" onclick="myNavigator.pushPage('page2.html')">Push</ons-button>
         </div>
       </ons-page>
@@ -25,7 +26,7 @@
     <ons-template id="page2.html">
       <ons-page id="page2">
         <div style="text-align: center;">
-          <p>Page 2</p>
+          <p>Page 3</p>
           <br>
           <ons-button id="btn2" onclick="myNavigator.popPage()">Pop Page</ons-button>
           <ons-button id="btn3" onclick="myNavigator.replacePage('page3.html')">Replace Page</ons-button>

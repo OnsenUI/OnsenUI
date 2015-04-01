@@ -8,8 +8,28 @@
     <script src="../../../build/js/angular/angular.js"></script>
     <script src="../../../build/js/onsenui.js"></script>
     <script>
-      ons.bootstrap();
+      ons.bootstrap()
+
+      .controller('CarouselController', function($scope) {
+          $scope.currentIndex = 0;
+
+          $scope.changed = function($event) {
+            $scope.currentIndex = $event.activeIndex;
+          };
+      });
     </script>
+
+    <style>
+      ons-carousel-cover {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        width: initial;
+        height: initial;
+        color: white;
+        transform: translate(-50%, 0);
+      }
+    </style>
   </head>
   <body>
     <ons-toolbar>
@@ -20,9 +40,10 @@
         <ons-toolbar-button id="next" ng-click="carousel.next()">Next</ons-toolbar-button>
       </div>
     </ons-toolbar>
-    <ons-carousel fullscreen var="carousel">
+    <ons-carousel ng-controller="CarouselController" ons-postchange="changed($event)" fullscreen var="carousel">
       <ons-carousel-item id="firstItem" style="background-color: red;"></ons-carousel-item>
       <ons-carousel-item style="background-color: blue;"></ons-carousel-item>
+      <ons-carousel-cover>The current index is: <span id="current-index">{{ currentIndex }}</span></ons-carousel-cover>
     </ons-carousel>
   </body>
 </html>

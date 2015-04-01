@@ -15,36 +15,34 @@
           visible: false
         };
 
-        $scope.person = {
-          name: 'Andreas'
-        };
-
         ons.ready(function() {
-          ons.createDialog('dialog.html', {parentScope: $scope}).then(function(dialog) {
+          ons.createAlertDialog('dialog.html', {parentScope: $scope}).then(function(dialog) {
             $scope.dialog = dialog;
           });
         });
 
         $scope.show = function() {
-          $scope.$evalAsync();
-
           $scope.dialog.show();
         };
       });
     </script>
   </head>
-  <body>
-    <ons-page ng-controller="TestController">
-      <ons-button id="open-dialog" ng-show="!data.visible" ng-click="show()">Show dialog</ons-button>
-      <p id="name">Hello there, {{ person.name }}!</p>
+  <body ng-controller="TestController">
+    <ons-page>
+      <ons-button id="show-alert-dialog" ng-click="show()">Show dialog</ons-button>
+      <p ng-show="data.visible" id="alert-dialog-visible">Alert dialog is visible.</p>
     </ons-page>
 
     <ons-template id="dialog.html">
-      <ons-dialog var="dialog" ons-preshow="data.visible = true" ons-posthide="data.visible = false" cancelable>
-        <p>What's your name?</p>
-        <input ng-model="person.name">
-        <ons-button id="close-dialog" ng-click="dialog.hide()">Close</ons-button>
-      </ons-dialog>
+      <ons-alert-dialog var="dialog" ons-preshow="data.visible = true" ons-posthide="data.visible = false">
+        <div class="alert-dialog-title"><strong style="color: #ff3333">Critical Alert!</strong></div>
+        <div class="alert-dialog-content">
+          An error has occurred!
+        </div>
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button" ng-click="dialog.hide();">OK</button>
+        </div>
+      </ons-alert-dialog>
     </ons-template>
   </body>
 </html>

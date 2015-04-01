@@ -31,10 +31,11 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._element = element;
         this._scope = scope;
+        this._attrs = attrs;
 
         this._mask = angular.element(this._element[0].querySelector('.popover-mask'));
         this._popover = angular.element(this._element[0].querySelector('.popover'));
-        
+
         this._mask.css('z-index', 20000);
         this._popover.css('z-index', 20001);
         this._element.css('display', 'none');
@@ -68,6 +69,8 @@ limitations under the License.
         this._popover[0].addEventListener('DOMNodeInserted', this._onChange, false);
         this._popover[0].addEventListener('DOMNodeRemoved', this._onChange, false);
         window.addEventListener('resize', this._onChange, false);
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
       _onDeviceBackButton: function(event) {
@@ -291,16 +294,20 @@ limitations under the License.
        */
       destroy: function() {
         this._scope.$destroy();
+      },
+
+      _destroy: function() {
+        this.emit('destroy');
+
+        this._deviceBackButtonHandler.destroy();
+        this._popover[0].removeEventListener('DOMNodeInserted', this._onChange, false);
+        this._popover[0].removeEventListener('DOMNodeRemoved', this._onChange, false);
+        window.removeEventListener('resize', this._onChange, false);
 
         this._mask.off();
         this._mask.remove();
         this._popover.remove();
         this._element.remove();
-        
-        this._deviceBackButtonHandler.destroy();
-        this._popover[0].removeEventListener('DOMNodeInserted', this._onChange, false);
-        this._popover[0].removeEventListener('DOMNodeRemoved', this._onChange, false);
-        window.removeEventListener('resize', this._onChange, false);
 
         this._onChange = this._deviceBackButtonHandler = this._mask = this._popover = this._element = this._scope = null;
       },

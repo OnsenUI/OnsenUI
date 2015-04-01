@@ -15,12 +15,15 @@
     <ons-split-view
       secondary-page="secondary.html"
       main-page="main.html"
-      collapse="width 500px">
+      collapse="width 500px"
+      ons-postcollapse="state ='collapse'"
+      ons-postsplit="state = 'split'">
     </ons-split-view>
 
     <ons-template id="main.html">
       <ons-page>
         <div id="main">main page</div>
+        <p>State: <span id="state">{{ state }}</span></p>
       </ons-page>
     </ons-template>
 

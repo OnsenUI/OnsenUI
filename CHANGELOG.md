@@ -19,6 +19,15 @@ v1.3.0-dev
  * ons-loading-placeholder: The component can now be used anywhere.
  * ons-tabbar: Fixed [#530](https://github.com/OnsenUI/OnsenUI/issues/530).
  * ons-split-view: Fixed [#525](https://github.com/OnsenUI/OnsenUI/issues/525).
+ * ons-sliding-menu: Added event handler attributes.
+ * ons-alert-dialog: Added event handler attributes.
+ * ons-carousel: Added event handler attributes.
+ * ons-dialog: Added event handler attributes.
+ * ons-navigator: Added event handler attributes.
+ * ons-popover: Added event handler attributes.
+ * ons-pull-hook: Added event handler attributes.
+ * ons-split-view: Added event handler attributes.
+ * ons-tabbar: Added event handler attributes.
  * ons-split-view: Fixed [#552](https://github.com/OnsenUI/OnsenUI/issues/552).
  * ons-navigator: Added `animation` option to `popPage()`.
  * ons-navigator: Added `replacePage()` method.

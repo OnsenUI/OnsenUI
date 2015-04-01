@@ -303,6 +303,33 @@ limitations under the License.
           }
         },
 
+        _registerEventHandler: function(component, eventName) {
+          var capitalizedEventName = eventName.charAt(0).toUpperCase() + eventName.slice(1);
+
+          component.on(eventName, function(event) {
+            var handler = component._attrs['ons' + capitalizedEventName];
+            if (handler) {
+              component._scope.$eval(handler, {$event: event});
+              component._scope.$evalAsync();
+            }
+          });
+        },
+
+        /**
+         * Register event handlers for attributes.
+         *
+         * @param {Object} component
+         * @param {String} eventNames
+         */
+        registerEventHandlers: function(component, eventNames) {
+          eventNames = eventNames.trim().split(/\s+/);
+
+          for (var i = 0, l = eventNames.length; i < l; i ++) {
+            var eventName = eventNames[i];
+            this._registerEventHandler(component, eventName);
+          }
+        },
+
         /**
          * @return {Boolean}
          */

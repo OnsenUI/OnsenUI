@@ -148,6 +148,42 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-reactive
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "reactive" event is fired.[/en]
+ *  [ja]"reactive"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prechange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prechange" event is fired.[/en]
+ *  [ja]"prechange"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postchange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
+ *  [ja]"postchange"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature setActiveTab(index, [options])
  * @param {Number} index
@@ -243,15 +279,9 @@
       restrict: 'E',
       replace: false,
       transclude: true,
-      scope: {
-        onActiveTabChanged: '&'
-      },
+      scope: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
       link: function(scope, element, attrs, controller, transclude) {
-
-        if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controller directive.');
-        }
 
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         scope.selectedTabItem = {source: ''};
@@ -263,13 +293,14 @@
 
         var tabbarView = new TabbarView(scope, element, attrs);
         $onsen.addModifierMethods(tabbarView, 'tab-bar--*', angular.element(element.children()[1]));
+        $onsen.registerEventHandlers(tabbarView, 'reactive prechange postchange destroy');
 
         scope.tabbarId = tabbarView._tabbarId;
 
         element.data('ons-tabbar', tabbarView);
         $onsen.declareVarAttribute(attrs, tabbarView);
 
-        transclude(function(cloned) {
+        transclude(scope, function(cloned) {
           angular.element(element[0].querySelector('.ons-tabbar-inner')).append(cloned);
         });
 

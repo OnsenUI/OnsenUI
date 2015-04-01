@@ -142,6 +142,51 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-prepush
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prepush" event is fired.[/en]
+ *  [ja]"prepush"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prepop
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prepop" event is fired.[/en]
+ *  [ja]"prepop"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postpush
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postpush" event is fired.[/en]
+ *  [ja]"postpush"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postpop
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postpop" event is fired.[/en]
+ *  [ja]"postpop"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature pushPage(pageUrl, [options])
  * @param {String} pageUrl
@@ -333,12 +378,10 @@
 
         return {
           pre: function(scope, element, attrs, controller) {
-            var navigator = new NavigatorView({
-              scope: scope,
-              element: element
-            });
+            var navigator = new NavigatorView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, navigator);
+            $onsen.registerEventHandlers(navigator, 'prepush prepop postpush postpop destroy');
 
             if (attrs.page) {
               navigator.pushPage(attrs.page, {});

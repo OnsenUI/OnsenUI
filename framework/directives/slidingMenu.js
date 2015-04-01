@@ -51,6 +51,9 @@
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -62,6 +65,9 @@
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -73,6 +79,9 @@
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -84,6 +93,9 @@
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -156,6 +168,51 @@
  * @description
  *   [en]Sliding menu animator. Possible values are reveal (default), push and overlay.[/en]
  *   [ja]スライディングメニューのアニメーションです。"reveal"（デフォルト）、"push"、"overlay"のいずれかを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-preopen
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preopen" event is fired.[/en]
+ *  [ja]"preopen"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-preclose
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preclose" event is fired.[/en]
+ *  [ja]"preclose"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postopen
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postopen" event is fired.[/en]
+ *  [ja]"postopen"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postclose
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postclose" event is fired.[/en]
+ *  [ja]"postclose"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -350,6 +407,8 @@
           element.append(angular.element('<div></div>').addClass('onsen-sliding-menu__main ons-sliding-menu-inner'));
 
           var slidingMenu = new SlidingMenuView(scope, element, attrs);
+
+          $onsen.registerEventHandlers(slidingMenu, 'preopen preclose postopen postclose destroy');
 
           if (mainHtml && !attrs.mainPage) {
             slidingMenu._appendMainPage(null, mainHtml);
