@@ -33,6 +33,8 @@ limitations under the License.
        * @param {Number} options.delay
        */
       init: function(options) {
+        options = options || {};
+
         this.timing = options.timing || this.timing;
         this.duration = options.duration !== undefined ? options.duration : this.duration;
         this.delay = options.delay !== undefined ? options.delay : this.delay;
