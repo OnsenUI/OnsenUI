@@ -62,11 +62,12 @@ limitations under the License.
         if (typeof options.animation === 'string') {
           Animator = this._animators[options.animation];
         }
-        Animator = Animator || this._animators[this._animation];
 
         if (!Animator && defaultAnimator) {
           animator = defaultAnimator;
         } else {
+          Animator = Animator || this._animators[this._animation];
+
           var animationOpts = angular.extend({}, this._animationOptions, options.animationOptions || {});
           animator = new Animator(animationOpts);
         }
