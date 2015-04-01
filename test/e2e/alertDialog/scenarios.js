@@ -15,5 +15,26 @@
       element(by.css('ons-button')).click();
       expect(alertDialog.isDisplayed()).toBeTruthy();
     });
+
+    describe('events', function() {
+      var path = '/test/e2e/alertDialog/events.html';
+
+      it('should trigger events', function() {
+        browser.get(path);
+
+        var alertDialog = element(by.css('ons-alert-dialog')),
+          isVisible = element(by.id('alert-dialog-visible')).isDisplayed;
+
+        expect(isVisible()).not.toBeTruthy();
+
+        element(by.id('show-alert-dialog')).click();
+        browser.wait(EC.visibilityOf(alertDialog));
+        expect(isVisible()).toBeTruthy();
+
+        element(by.css('button.alert-dialog-button')).click();
+        browser.wait(EC.invisibilityOf(alertDialog));
+        expect(isVisible()).not.toBeTruthy();
+      });
+    });
   });
 })();

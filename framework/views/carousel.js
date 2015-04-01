@@ -767,7 +767,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {navigator: this});
+        this.emit('destroy');
 
         this._hammer.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
         this._hammer.off('dragend', this._bindedOnDragEnd);

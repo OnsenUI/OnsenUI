@@ -181,6 +181,42 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-postchange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
+ *  [ja]"postchange"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-refresh
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "refresh" event is fired.[/en]
+ *  [ja]"refresh"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-overscroll
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "overscroll" event is fired.[/en]
+ *  [ja]"overscroll"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature next()
  * @description
@@ -419,6 +455,7 @@
 
           element.data('ons-carousel', carousel);
 
+          $onsen.registerEventHandlers(carousel, 'postchange refresh overscroll destroy');
           $onsen.declareVarAttribute(attrs, carousel);
 
           scope.$on('$destroy', function() {

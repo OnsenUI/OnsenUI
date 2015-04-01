@@ -21,5 +21,6 @@ List of code contributors (in no particular order):
 * [Tincoboekestij](https://github.com/Tincoboekestij)
 * [Atsushi Takayama](https://github.com/atakayama)
 * [Shingo Kumagai](https://github.com/shingo-kumagai)
+* [David Zumbrunnen](https://github.com/zumbrunnen)
 
 Please add yourself if you're not on this list but feel that you should be.

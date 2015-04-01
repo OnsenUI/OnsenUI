@@ -222,14 +222,14 @@ limitations under the License.
 
         this._scope.$evalAsync(function() {
           this._element[0].setAttribute('state', state);
-        }.bind(this));
 
-        if (!noEvent && oldState !== this._getState()) {
-          this.emit('changestate', {
-            state: state,
-            pullHook: this
-          });
-        }
+          if (!noEvent && oldState !== this._getState()) {
+            this.emit('changestate', {
+              state: state,
+              pullHook: this
+            });
+          }
+        }.bind(this));
       },
 
       _getState: function() {
@@ -259,7 +259,7 @@ limitations under the License.
 
       _translateTo: function(scroll, options) {
         options = options || {};
-    
+
         this._currentTranslation = scroll;
 
         if (options.animate) {
@@ -307,7 +307,7 @@ limitations under the License.
         this._bindedOnDragStart = this._onDragStart.bind(this);
         this._bindedOnDragEnd = this._onDragEnd.bind(this);
         this._bindedOnScroll = this._onScroll.bind(this);
-        
+
         // Bind listeners
         this._hammer.on('drag', this._bindedOnDrag);
         this._hammer.on('dragstart', this._bindedOnDragStart);
@@ -325,6 +325,7 @@ limitations under the License.
       },
 
       _destroy: function() {
+        this.emit('destroy');
         this._destroyEventListeners();
         this._element = this._scope = this._attrs = null;
       }

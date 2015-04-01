@@ -95,9 +95,14 @@ limitations under the License.
     var NavigatorView = Class.extend({
 
       /**
-       * @member jqLite Object
+       * @member {jqLite} Object
        */
       _element: undefined,
+
+      /**
+       * @member {Object} Object
+       */
+      _attrs: undefined,
 
       /**
        * @member {Array}
@@ -120,15 +125,15 @@ limitations under the License.
       _profiling: false,
 
       /**
-       * @param {Object} options
-       * @param options.element jqLite Object to manage with navigator
-       * @param options.scope Angular.js scope object
+       * @param {Object} scope
+       * @param {jqLite} element jqLite Object to manage with navigator
+       * @param {Object} attrs
        */
-      init: function(options) {
-        options = options || options;
+      init: function(scope, element, attrs) {
 
-        this._element = options.element || angular.element(window.document.body);
-        this._scope = options.scope || this._element.scope();
+        this._element = element || angular.element(window.document.body);
+        this._scope = scope || this._element.scope();
+        this._attrs = attrs;
         this._doorLock = new DoorLock();
         this.pages = [];
 
@@ -145,7 +150,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {navigator: this});
+        this.emit('destroy');
 
         this.pages.forEach(function(page) {
           page.destroy();
@@ -153,6 +158,8 @@ limitations under the License.
 
         this._deviceBackButtonHandler.destroy();
         this._deviceBackButtonHandler = null;
+
+        this._element = this._scope = this._attrs = null;
       },
 
       _onDeviceBackButton: function(event) {

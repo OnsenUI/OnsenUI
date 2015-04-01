@@ -276,7 +276,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {slidingMenu: this});
+        this.emit('destroy');
 
         this._deviceBackButtonHandler.destroy();
         window.removeEventListener('resize', this._bindedOnWindowResize);
@@ -357,7 +357,7 @@ limitations under the License.
       },
 
       _appendMainPage: function(pageUrl, templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
@@ -379,7 +379,7 @@ limitations under the License.
        * @param {String}
        */
       _appendMenuPage: function(templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
@@ -592,7 +592,9 @@ limitations under the License.
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
 
-        this.emit('preclose');
+        this.emit('preclose', {
+          slidingMenu: this
+        });
 
         this._doorLock.waitUnlock(function() {
           this._logic.close(options);
@@ -610,7 +612,10 @@ limitations under the License.
           this._mainPage.children().css('pointer-events', '');
           this._mainPageHammer.off('tap', this._bindedOnTap);
 
-          this.emit('postclose');
+          this.emit('postclose', {
+            slidingMenu: this
+          });
+
           callback();
         }.bind(this), instant);
       },
@@ -635,7 +640,9 @@ limitations under the License.
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
 
-        this.emit('preopen');
+        this.emit('preopen', {
+          slidingMenu: this
+        });
 
         this._doorLock.waitUnlock(function() {
           this._logic.open(options);
@@ -653,7 +660,9 @@ limitations under the License.
           this._mainPage.children().css('pointer-events', 'none');
           this._mainPageHammer.on('tap', this._bindedOnTap);
 
-          this.emit('postopen');
+          this.emit('postopen', {
+            slidingMenu: this
+          });
 
           callback();
         }.bind(this), instant);

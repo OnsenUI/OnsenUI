@@ -120,17 +120,17 @@ componentCategory: util
         </tr>
         
         <tr>
-          <td><a href="#method-createAlertDialog">createAlertDialog(page)</a></td>
+          <td><a href="#method-createAlertDialog">createAlertDialog(page, [options])</a></td>
           <td>テンプレートからアラートダイアログのインスタンスを生成します。</td>
         </tr>
         
         <tr>
-          <td><a href="#method-createDialog">createDialog(page)</a></td>
+          <td><a href="#method-createDialog">createDialog(page, [options])</a></td>
           <td>テンプレートからダイアログのインスタンスを生成します。</td>
         </tr>
         
         <tr>
-          <td><a href="#method-createPopover">createPopover(page)</a></td>
+          <td><a href="#method-createPopover">createPopover(page, [options])</a></td>
           <td>テンプレートからポップオーバーのインスタンスを生成します。</td>
         </tr>
         
@@ -508,7 +508,7 @@ componentCategory: util
   
   <section class="method-detail">
     <h4 id="method-createAlertDialog">
-      createAlertDialog(page)<span class="value-type">: Promise</span>
+      createAlertDialog(page, [options])<span class="value-type">: Promise</span>
 
       <a href="#method-createAlertDialog" class="reference-loop-anchor">#</a>
     </h4>
@@ -541,6 +541,18 @@ componentCategory: util
           <td>pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。</td>
         </tr>
         
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>オプションを指定するオブジェクト。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.parentScope</span></td>
+          <td class="value-type">Object</td>
+          <td>ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。</td>
+        </tr>
+        
       </tbody>
     </table>
     <!-- end method parameter -->
@@ -550,7 +562,7 @@ componentCategory: util
   
   <section class="method-detail">
     <h4 id="method-createDialog">
-      createDialog(page)<span class="value-type">: Promise</span>
+      createDialog(page, [options])<span class="value-type">: Promise</span>
 
       <a href="#method-createDialog" class="reference-loop-anchor">#</a>
     </h4>
@@ -583,6 +595,18 @@ componentCategory: util
           <td>pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。</td>
         </tr>
         
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>オプションを指定するオブジェクト。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.parentScope</span></td>
+          <td class="value-type">Object</td>
+          <td>ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。</td>
+        </tr>
+        
       </tbody>
     </table>
     <!-- end method parameter -->
@@ -592,7 +616,7 @@ componentCategory: util
   
   <section class="method-detail">
     <h4 id="method-createPopover">
-      createPopover(page)<span class="value-type">: Promise</span>
+      createPopover(page, [options])<span class="value-type">: Promise</span>
 
       <a href="#method-createPopover" class="reference-loop-anchor">#</a>
     </h4>
@@ -623,6 +647,18 @@ componentCategory: util
           <td><span class="parameter-name">page</span></td>
           <td class="value-type">String</td>
           <td>pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>オプションを指定するオブジェクト。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.parentScope</span></td>
+          <td class="value-type">Object</td>
+          <td>ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。</td>
         </tr>
         
       </tbody>

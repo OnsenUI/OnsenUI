@@ -17,6 +17,7 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  -ms-touch-action: none;
 }
 * {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -1863,6 +1864,9 @@ h6 {
   min-width: 19px;
   line-height: 19px;
   font-weight: 400;
+}
+.notification:empty {
+  display: none;
 }
 /* topdoc
   name: Toolbar Button

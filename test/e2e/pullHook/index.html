@@ -9,26 +9,25 @@
     <script src="../../../build/js/onsenui.js"></script>
     <script>
       ons.bootstrap()
-      .controller('TestController', function($scope) {
+      .controller('TestController', function($scope, $timeout) {
         $scope.items = [0, 1, 2];
         $scope.load = function($done) {
-          $scope.items.push($scope.items.length);
-          $done();
+          $timeout(function() {
+            $scope.items.push($scope.items.length);
+            $done();
+          }, 400);
         };
       });
     </script>
   </head>
   <body>
     <ons-page ng-controller="TestController">
-      <ons-pull-hook ng-action="load($done)" threshold-height="-1px">
-        Pull to refresh
+      <ons-pull-hook ng-init="state = 'initial'" ons-changestate="state = $event.state" ng-action="load($done)" threshold-height="-1px">
+        <span id="current-state">{{ state }}</span>
       </ons-pull-hook>
       <ons-list>
         <ons-list-item ng-repeat="item in items">{{ item }}</ons-list-item>
       </ons-list>
-
-      <ons-bottom-toolbar>
-      </ons-bottom-toolbar>
     </ons-page>
   </body>
 </html>

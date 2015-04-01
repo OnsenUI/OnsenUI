@@ -13,8 +13,24 @@
       browser.wait(EC.presenceOf(popover));
 
       expect(popover.isDisplayed()).not.toBeTruthy();
-      element(by.css('ons-button')).click();
+      element(by.id('show-popover')).click();
       expect(popover.isDisplayed()).toBeTruthy();
+    });
+
+    it('should emit events', function() {
+      browser.get(path);
+
+      var timesShown = element(by.id('times-shown')),
+        popover = element(by.css('ons-popover'));
+
+      expect(timesShown.getText()).toBe('0');
+      element(by.id('show-popover')).click();
+
+      browser.wait(EC.visibilityOf(popover));
+      element(by.id('hide-popover')).click();
+
+      browser.wait(EC.invisibilityOf(popover));
+      expect(timesShown.getText()).toBe('1');
     });
   });
 })();

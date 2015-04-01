@@ -5,7 +5,7 @@
   module.controller('AppController', function($scope, $data) {
     $scope.doSomething = function() {
       setTimeout(function() {
-        alert('tappaed');
+        alert('tapped');
       }, 100);
     };
   });

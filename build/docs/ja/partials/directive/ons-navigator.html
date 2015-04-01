@@ -119,7 +119,8 @@ componentCategory: navigation
     
     
       
-        <li class="seealso"><a href="ons-toolbar.html">ons-toolbarコンポーネント</a></li>
+        <li class="seealso"><a href="ons-toolbar
+.html">ons-toolbarコンポーネント</a></li>
       
         <li class="seealso"><a href="ons-back-button
 .html">ons-back-buttonコンポーネント</a></li>
@@ -177,6 +178,81 @@ componentCategory: navigation
           </td>
         </tr>
         
+        <tr>
+          <td class="attribute-name" id="ons-navigator-ons-prepush">ons-prepush</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            "prepush"イベントが発火された時の挙動を独自に指定できます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-navigator-ons-prepop">ons-prepop</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            "prepop"イベントが発火された時の挙動を独自に指定できます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-navigator-ons-postpush">ons-postpush</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            "postpush"イベントが発火された時の挙動を独自に指定できます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-navigator-ons-postpop">ons-postpop</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            "postpop"イベントが発火された時の挙動を独自に指定できます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-navigator-ons-destroy">ons-destroy</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            "destroy"イベントが発火された時の挙動を独自に指定できます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
       </tbody>
     </table>
   </section>
@@ -216,6 +292,11 @@ componentCategory: navigation
         <tr>
           <td><a href="#method-popPage">popPage([options])</a></td>
           <td>現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-replacePage">replacePage(pageUrl, [options])</a></td>
+          <td>現在表示中のページをを指定したページに置き換えます。</td>
         </tr>
         
         <tr>
@@ -452,6 +533,69 @@ componentCategory: navigation
           <td><span class="parameter-name">options</span></td>
           <td class="value-type">Object</td>
           <td>オプションを指定するオブジェクト。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animation</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.onTransitionEnd</span></td>
+          <td class="value-type">Function</td>
+          <td>このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-replacePage">
+      replacePage(pageUrl, [options])
+
+      <a href="#method-replacePage" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>現在表示中のページをを指定したページに置き換えます。</p>
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">pageUrl</span></td>
+          <td class="value-type">String</td>
+          <td>pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>オプションを指定するオブジェクト。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animation</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。</td>
         </tr>
         
         <tr>

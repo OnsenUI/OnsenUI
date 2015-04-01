@@ -119,7 +119,8 @@ componentCategory: navigation
     
     
       
-        <li class="seealso"><a href="ons-toolbar.html">ons-toolbar component</a></li>
+        <li class="seealso"><a href="ons-toolbar
+.html">ons-toolbar component</a></li>
       
         <li class="seealso"><a href="ons-back-button
 .html">ons-back-button component</a></li>
@@ -177,6 +178,81 @@ componentCategory: navigation
           </td>
         </tr>
         
+        <tr>
+          <td class="attribute-name" id="ons-navigator-ons-prepush">ons-prepush</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior when the "prepush" event is fired.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-navigator-ons-prepop">ons-prepop</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior when the "prepop" event is fired.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-navigator-ons-postpush">ons-postpush</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior when the "postpush" event is fired.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-navigator-ons-postpop">ons-postpop</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior when the "postpop" event is fired.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-navigator-ons-destroy">ons-destroy</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Allows you to specify custom behavior when the "destroy" event is fired.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
       </tbody>
     </table>
   </section>
@@ -216,6 +292,11 @@ componentCategory: navigation
         <tr>
           <td><a href="#method-popPage">popPage([options])</a></td>
           <td>Pops the current page from the page stack. The previous page will be displayed.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-replacePage">replacePage(pageUrl, [options])</a></td>
+          <td>Replaces the current page with the specified one.</td>
         </tr>
         
         <tr>
@@ -452,6 +533,69 @@ componentCategory: navigation
           <td><span class="parameter-name">options</span></td>
           <td class="value-type">Object</td>
           <td>Parameter object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animation</span></td>
+          <td class="value-type">String</td>
+          <td>Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.onTransitionEnd</span></td>
+          <td class="value-type">Function</td>
+          <td>Function that is called when the transition has ended.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-replacePage">
+      replacePage(pageUrl, [options])
+
+      <a href="#method-replacePage" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Replaces the current page with the specified one.</p>
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">pageUrl</span></td>
+          <td class="value-type">String</td>
+          <td>Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>Parameter object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animation</span></td>
+          <td class="value-type">String</td>
+          <td>Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".</td>
         </tr>
         
         <tr>

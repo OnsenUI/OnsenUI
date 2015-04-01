@@ -38,10 +38,17 @@
           throw Error('Must define page to load.');
         }
 
-        $onsen.getPageHTMLAsync(attrs.onsLoadingPlaceholder).then(function(html) {
-          setImmediate(function() {
+        setImmediate(function() {
+          $onsen.getPageHTMLAsync(attrs.onsLoadingPlaceholder).then(function(html) {
+
+            // Remove page tag.
+            html = html
+              .trim()
+              .replace(/^<ons-page>/, '')
+              .replace(/<\/ons-page>$/, '');
+
             var div = document.createElement('div');
-            div.innerHTML = html.trim();
+            div.innerHTML = html;
 
             var newElement = angular.element(div);
             newElement.css('display', 'none');
@@ -49,7 +56,13 @@
             element.append(newElement);
             ons.compile(newElement[0]);
 
-            angular.element(element.children()[0]).remove();
+            for (var i = element[0].childNodes.length - 1; i >= 0; i--){
+              var e = element[0].childNodes[i];
+              if (e !== div) {
+                e.remove();
+              }
+            }
+
             newElement.css('display', 'block');
           });
         });

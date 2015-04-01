@@ -154,6 +154,51 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-preshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
+ *  [ja]"preshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prehide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
+ *  [ja]"prehide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
+ *  [ja]"postshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-posthide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
+ *  [ja]"posthide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature show([options])
  * @param {Object} [options]
@@ -328,6 +373,7 @@
             var alertDialog = new AlertDialogView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, alertDialog);
+            $onsen.registerEventHandlers(alertDialog, 'preshow prehide postshow posthide destroy');
             $onsen.addModifierMethods(alertDialog, 'alert-dialog--*', element);
 
             if (titleElement.length) {

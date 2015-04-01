@@ -27,11 +27,12 @@ limitations under the License.
 
     var SplitView = Class.extend({
 
-      init: function(scope, element) {
+      init: function(scope, element, attrs) {
         element.addClass('onsen-sliding-menu');
 
         this._element = element;
         this._scope = scope;
+        this._attrs = attrs;
 
         this._mainPage = angular.element(element[0].querySelector('.onsen-split-view__main'));
         this._secondaryPage = angular.element(element[0].querySelector('.onsen-split-view__secondary'));
@@ -74,7 +75,7 @@ limitations under the License.
        * @param {String} templateHTML
        */
       _appendSecondPage: function(templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = $compile(templateHTML)(pageScope);
 
         this._secondaryPage.append(pageContent);
@@ -92,7 +93,7 @@ limitations under the License.
        * @param {String} templateHTML
        */
       _appendMainPage: function(templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = $compile(templateHTML)(pageScope);
 
         this._mainPage.append(pageContent);
@@ -317,7 +318,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {splitView: this});
+        this.emit('destroy');
 
         this._element = null;
         this._scope = null;
