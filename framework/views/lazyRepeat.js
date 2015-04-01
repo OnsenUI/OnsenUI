@@ -19,7 +19,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('LazyRepeatView', function($onsen, $document) {
+  module.factory('LazyRepeatView', function($onsen, $document, $compile) {
 
     var LazyRepeatView = Class.extend({
 
@@ -44,11 +44,7 @@ limitations under the License.
         this._renderedElements = {};
         this._addEventListeners();
 
-        this._scope.$watch(
-          function() {
-            this._render();
-          }.bind(this)
-        );
+        this._scope.$watch(this._onChange.bind(this));
 
         this._scope.$on('$destroy', this._destroy.bind(this));
         this._onChange();
@@ -109,16 +105,6 @@ limitations under the License.
           if (this._delegate.configureItemScope) {
             this._delegate.configureItemScope(item.index, currentItem.scope);
           }
-          else if (this._delegate.createItemContent) {
-            var oldContent = currentItem.element.children(),
-              newContent = angular.element(this._delegate.createItemContent(item.index, oldContent[0]));
-
-            if (newContent.html() !== oldContent.html()) {
-              currentItem.element
-                .append(newContent);
-              oldContent.remove();
-            }
-          }
 
           return;
         }
@@ -132,6 +118,7 @@ limitations under the License.
           }
           else if (this._delegate.createItemContent) {
             clone.append(this._delegate.createItemContent(item.index));
+            $compile(clone[0].firstChild)(childScope);
           }
 
           this._parentElement.append(clone);
