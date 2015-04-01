@@ -101,13 +101,14 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
                 opacity: 0
               },
-              duration: 0.4,
-              timing: 'linear'
+              duration: this.duration,
+              timing: this.timing
             })
             .queue(function(done) {
               callback();
@@ -122,13 +123,14 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
                 opacity: 0
               },
-              duration: 0.4,
-              timing: 'linear'
+              duration: this.duration,
+              timing: this.timing
             })
 
         );
