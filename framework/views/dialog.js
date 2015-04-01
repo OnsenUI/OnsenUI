@@ -83,8 +83,7 @@ limitations under the License.
 
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
             this._element.css('display', 'block');
             this._mask.css('opacity', 1);
