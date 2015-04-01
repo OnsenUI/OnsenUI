@@ -145,7 +145,9 @@ limitations under the License.
         this._animationChooser = new AnimationChooser({
           animators: NavigatorView._transitionAnimatorDict,
           baseClass: NavigatorTransitionAnimator,
-          baseClassName: 'NavigatorTransitionAnimator'
+          baseClassName: 'NavigatorTransitionAnimator',
+          defaultAnimation: attrs.animation,
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
         });
       },
 
