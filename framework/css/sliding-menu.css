@@ -22,6 +22,7 @@ ons-sliding-menu {
   top: 0px;
   bottom: 0px;
   z-index: 0;
+  overflow-x: hidden;
 }
 
 .onsen-sliding-menu__menu,
