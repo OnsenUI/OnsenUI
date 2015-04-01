@@ -22,6 +22,15 @@ limitations under the License.
 
   module.factory('AnimationChooser', function() {
     var AnimationChooser = Class.extend({
+
+      /**
+       * @param {Object} opts
+       * @param {Object} opts.animators The dictionary for animator classes
+       * @param {Function} opts.baseClass The base class of animators
+       * @param {String} opts.baseClassName The name of the base class of animators
+       * @param {String} opts.defaultAnimation The default animation name
+       * @param {Object} opts.defaultAnimationOptions The default animation options
+       */
       init: function(opts) {
         this._animators = opts.animators;
         this._baseClass = opts.baseClass;
@@ -34,6 +43,11 @@ limitations under the License.
         }
       },
 
+      /**
+       * @param {Object} options The animation options
+       * @param {Object} defaultAnimator The default animator instance
+       * @return {Object} An animator instance
+       */
       newAnimator: function(options, defaultAnimator) {
         options = options || {};
 
