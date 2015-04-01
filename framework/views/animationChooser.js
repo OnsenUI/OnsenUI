@@ -53,7 +53,7 @@ limitations under the License.
         if (!Animator && defaultAnimator) {
           animator = defaultAnimator;
         } else {
-          var animationOpts = angular.extend({}, this._animationOptions, options.animationrOptions || {});
+          var animationOpts = angular.extend({}, this._animationOptions, options.animationOptions || {});
           animator = new Animator(animationOpts);
         }
 
