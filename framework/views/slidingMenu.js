@@ -595,13 +595,15 @@ limitations under the License.
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
 
-        this.emit('preclose', {
-          slidingMenu: this
-        });
+        if (!this._logic.isClosed()) {
+          this.emit('preclose', {
+            slidingMenu: this
+          });
 
-        this._doorLock.waitUnlock(function() {
-          this._logic.close(options);
-        }.bind(this));
+          this._doorLock.waitUnlock(function() {
+            this._logic.close(options);
+          }.bind(this));
+        }
       },
 
       _close: function(options) {
