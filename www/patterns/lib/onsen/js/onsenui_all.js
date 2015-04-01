@@ -1,4 +1,178 @@
-/*! onsenui - v1.2.2 - 2015-02-26 */
+/*! onsenui - v1.3.0-beta - 2015-04-01 */
+// Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
+// JavaScript Dynamic Content shim for Windows Store apps
+(function () {
+
+    if (window.MSApp && MSApp.execUnsafeLocalFunction) {
+
+        // Some nodes will have an "attributes" property which shadows the Node.prototype.attributes property
+        //  and means we don't actually see the attributes of the Node (interestingly the VS debug console
+        //  appears to suffer from the same issue).
+        //
+        var Element_setAttribute = Object.getOwnPropertyDescriptor(Element.prototype, "setAttribute").value;
+        var Element_removeAttribute = Object.getOwnPropertyDescriptor(Element.prototype, "removeAttribute").value;
+        var HTMLElement_insertAdjacentHTMLPropertyDescriptor = Object.getOwnPropertyDescriptor(HTMLElement.prototype, "insertAdjacentHTML");
+        var Node_get_attributes = Object.getOwnPropertyDescriptor(Node.prototype, "attributes").get;
+        var Node_get_childNodes = Object.getOwnPropertyDescriptor(Node.prototype, "childNodes").get;
+        var detectionDiv = document.createElement("div");
+
+        function getAttributes(element) {
+            return Node_get_attributes.call(element);
+        }
+
+        function setAttribute(element, attribute, value) {
+            try {
+                Element_setAttribute.call(element, attribute, value);
+            } catch (e) {
+                // ignore
+            }
+        }
+
+        function removeAttribute(element, attribute) {
+            Element_removeAttribute.call(element, attribute);
+        }
+
+        function childNodes(element) {
+            return Node_get_childNodes.call(element);
+        }
+
+        function empty(element) {
+            while (element.childNodes.length) {
+                element.removeChild(element.lastChild);
+            }
+        }
+
+        function insertAdjacentHTML(element, position, html) {
+            HTMLElement_insertAdjacentHTMLPropertyDescriptor.value.call(element, position, html);
+        }
+
+        function inUnsafeMode() {
+            var isUnsafe = true;
+            try {
+                detectionDiv.innerHTML = "<test/>";
+            }
+            catch (ex) {
+                isUnsafe = false;
+            }
+
+            return isUnsafe;
+        }
+
+        function cleanse(html, targetElement) {
+            var cleaner = document.implementation.createHTMLDocument("cleaner");
+            empty(cleaner.documentElement);
+            MSApp.execUnsafeLocalFunction(function () {
+                insertAdjacentHTML(cleaner.documentElement, "afterbegin", html);
+            });
+
+            var scripts = cleaner.documentElement.querySelectorAll("script");
+            Array.prototype.forEach.call(scripts, function (script) {
+                switch (script.type.toLowerCase()) {
+                    case "":
+                        script.type = "text/inert";
+                        break;
+                    case "text/javascript":
+                    case "text/ecmascript":
+                    case "text/x-javascript":
+                    case "text/jscript":
+                    case "text/livescript":
+                    case "text/javascript1.1":
+                    case "text/javascript1.2":
+                    case "text/javascript1.3":
+                        script.type = "text/inert-" + script.type.slice("text/".length);
+                        break;
+                    case "application/javascript":
+                    case "application/ecmascript":
+                    case "application/x-javascript":
+                        script.type = "application/inert-" + script.type.slice("application/".length);
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+
+            function cleanseAttributes(element) {
+                var attributes = getAttributes(element);
+                if (attributes && attributes.length) {
+                    // because the attributes collection is live it is simpler to queue up the renames
+                    var events;
+                    for (var i = 0, len = attributes.length; i < len; i++) {
+                        var attribute = attributes[i];
+                        var name = attribute.name;
+                        if ((name[0] === "o" || name[0] === "O") &&
+                            (name[1] === "n" || name[1] === "N")) {
+                            events = events || [];
+                            events.push({ name: attribute.name, value: attribute.value });
+                        }
+                    }
+                    if (events) {
+                        for (var i = 0, len = events.length; i < len; i++) {
+                            var attribute = events[i];
+                            removeAttribute(element, attribute.name);
+                            setAttribute(element, "x-" + attribute.name, attribute.value);
+                        }
+                    }
+                }
+                var children = childNodes(element);
+                for (var i = 0, len = children.length; i < len; i++) {
+                    cleanseAttributes(children[i]);
+                }
+            }
+            cleanseAttributes(cleaner.documentElement);
+
+            var cleanedNodes = [];
+
+            if (targetElement.tagName === 'HTML') {
+                cleanedNodes = Array.prototype.slice.call(document.adoptNode(cleaner.documentElement).childNodes);
+            } else {
+                if (cleaner.head) {
+                    cleanedNodes = cleanedNodes.concat(Array.prototype.slice.call(document.adoptNode(cleaner.head).childNodes));
+                }
+                if (cleaner.body) {
+                    cleanedNodes = cleanedNodes.concat(Array.prototype.slice.call(document.adoptNode(cleaner.body).childNodes));
+                }
+            }
+
+            return cleanedNodes;
+        }
+
+        function cleansePropertySetter(property, setter) {
+            var propertyDescriptor = Object.getOwnPropertyDescriptor(HTMLElement.prototype, property);
+            var originalSetter = propertyDescriptor.set;
+            Object.defineProperty(HTMLElement.prototype, property, {
+                get: propertyDescriptor.get,
+                set: function (value) {
+                    if(window.WinJS && window.WinJS._execUnsafe && inUnsafeMode()) {
+                        originalSetter.call(this, value);
+                    } else {
+                        var that = this;
+                        var nodes = cleanse(value, that);
+                        MSApp.execUnsafeLocalFunction(function () {
+                            setter(propertyDescriptor, that, nodes);
+                        });
+                    }
+                },
+                enumerable: propertyDescriptor.enumerable,
+                configurable: propertyDescriptor.configurable,
+            });
+        }
+        cleansePropertySetter("innerHTML", function (propertyDescriptor, target, elements) {
+            empty(target);
+            for (var i = 0, len = elements.length; i < len; i++) {
+                target.appendChild(elements[i]);
+            }
+        });
+        cleansePropertySetter("outerHTML", function (propertyDescriptor, target, elements) {
+            for (var i = 0, len = elements.length; i < len; i++) {
+                target.insertAdjacentElement("afterend", elements[i]);
+            }
+            target.parentNode.removeChild(target);
+        });
+
+    }
+
+}());
 /**
  * @license AngularJS v1.3.0
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -25647,778 +25821,848 @@ var styleDirective = valueFn({
     return Class;
   };
 })();
-/**
- * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
- *
- * @version 1.0.0
- * @codingstandard ftlabs-jsv2
- * @copyright The Financial Times Limited [All Rights Reserved]
- * @license MIT License (see LICENSE.txt)
- */
-
-/*jslint browser:true, node:true*/
-/*global define, Event, Node*/
-
-
-/**
- * Instantiate fast-clicking listeners on the specificed layer.
- *
- * @constructor
- * @param {Element} layer The layer to listen on
- */
-function FastClick(layer) {
+;(function () {
 	'use strict';
-	var oldOnClick;
+
+	/**
+	 * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
+	 *
+	 * @codingstandard ftlabs-jsv2
+	 * @copyright The Financial Times Limited [All Rights Reserved]
+	 * @license MIT License (see LICENSE.txt)
+	 */
+
+	/*jslint browser:true, node:true*/
+	/*global define, Event, Node*/
 
 
 	/**
-	 * Whether a click is currently being tracked.
+	 * Instantiate fast-clicking listeners on the specified layer.
+	 *
+	 * @constructor
+	 * @param {Element} layer The layer to listen on
+	 * @param {Object} [options={}] The options to override the defaults
+	 */
+	function FastClick(layer, options) {
+		var oldOnClick;
+
+		options = options || {};
+
+		/**
+		 * Whether a click is currently being tracked.
+		 *
+		 * @type boolean
+		 */
+		this.trackingClick = false;
+
+
+		/**
+		 * Timestamp for when click tracking started.
+		 *
+		 * @type number
+		 */
+		this.trackingClickStart = 0;
+
+
+		/**
+		 * The element being tracked for a click.
+		 *
+		 * @type EventTarget
+		 */
+		this.targetElement = null;
+
+
+		/**
+		 * X-coordinate of touch start event.
+		 *
+		 * @type number
+		 */
+		this.touchStartX = 0;
+
+
+		/**
+		 * Y-coordinate of touch start event.
+		 *
+		 * @type number
+		 */
+		this.touchStartY = 0;
+
+
+		/**
+		 * ID of the last touch, retrieved from Touch.identifier.
+		 *
+		 * @type number
+		 */
+		this.lastTouchIdentifier = 0;
+
+
+		/**
+		 * Touchmove boundary, beyond which a click will be cancelled.
+		 *
+		 * @type number
+		 */
+		this.touchBoundary = options.touchBoundary || 10;
+
+
+		/**
+		 * The FastClick layer.
+		 *
+		 * @type Element
+		 */
+		this.layer = layer;
+
+		/**
+		 * The minimum time between tap(touchstart and touchend) events
+		 *
+		 * @type number
+		 */
+		this.tapDelay = options.tapDelay || 200;
+
+		/**
+		 * The maximum time for a tap
+		 *
+		 * @type number
+		 */
+		this.tapTimeout = options.tapTimeout || 700;
+
+		if (FastClick.notNeeded(layer)) {
+			return;
+		}
+
+		// Some old versions of Android don't have Function.prototype.bind
+		function bind(method, context) {
+			return function() { return method.apply(context, arguments); };
+		}
+
+
+		var methods = ['onMouse', 'onClick', 'onTouchStart', 'onTouchMove', 'onTouchEnd', 'onTouchCancel'];
+		var context = this;
+		for (var i = 0, l = methods.length; i < l; i++) {
+			context[methods[i]] = bind(context[methods[i]], context);
+		}
+
+		// Set up event handlers as required
+		if (deviceIsAndroid) {
+			layer.addEventListener('mouseover', this.onMouse, true);
+			layer.addEventListener('mousedown', this.onMouse, true);
+			layer.addEventListener('mouseup', this.onMouse, true);
+		}
+
+		layer.addEventListener('click', this.onClick, true);
+		layer.addEventListener('touchstart', this.onTouchStart, false);
+		layer.addEventListener('touchmove', this.onTouchMove, false);
+		layer.addEventListener('touchend', this.onTouchEnd, false);
+		layer.addEventListener('touchcancel', this.onTouchCancel, false);
+
+		// Hack is required for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
+		// which is how FastClick normally stops click events bubbling to callbacks registered on the FastClick
+		// layer when they are cancelled.
+		if (!Event.prototype.stopImmediatePropagation) {
+			layer.removeEventListener = function(type, callback, capture) {
+				var rmv = Node.prototype.removeEventListener;
+				if (type === 'click') {
+					rmv.call(layer, type, callback.hijacked || callback, capture);
+				} else {
+					rmv.call(layer, type, callback, capture);
+				}
+			};
+
+			layer.addEventListener = function(type, callback, capture) {
+				var adv = Node.prototype.addEventListener;
+				if (type === 'click') {
+					adv.call(layer, type, callback.hijacked || (callback.hijacked = function(event) {
+						if (!event.propagationStopped) {
+							callback(event);
+						}
+					}), capture);
+				} else {
+					adv.call(layer, type, callback, capture);
+				}
+			};
+		}
+
+		// If a handler is already declared in the element's onclick attribute, it will be fired before
+		// FastClick's onClick handler. Fix this by pulling out the user-defined handler function and
+		// adding it as listener.
+		if (typeof layer.onclick === 'function') {
+
+			// Android browser on at least 3.2 requires a new reference to the function in layer.onclick
+			// - the old one won't work if passed to addEventListener directly.
+			oldOnClick = layer.onclick;
+			layer.addEventListener('click', function(event) {
+				oldOnClick(event);
+			}, false);
+			layer.onclick = null;
+		}
+	}
+
+	/**
+	* Windows Phone 8.1 fakes user agent string to look like Android and iPhone.
+	*
+	* @type boolean
+	*/
+	var deviceIsWindowsPhone = navigator.userAgent.indexOf("Windows Phone") >= 0;
+
+	/**
+	 * Android requires exceptions.
 	 *
 	 * @type boolean
 	 */
-	this.trackingClick = false;
+	var deviceIsAndroid = navigator.userAgent.indexOf('Android') > 0 && !deviceIsWindowsPhone;
 
 
 	/**
-	 * Timestamp for when when click tracking started.
+	 * iOS requires exceptions.
 	 *
-	 * @type number
+	 * @type boolean
 	 */
-	this.trackingClickStart = 0;
+	var deviceIsIOS = /iP(ad|hone|od)/.test(navigator.userAgent) && !deviceIsWindowsPhone;
 
 
 	/**
-	 * The element being tracked for a click.
+	 * iOS 4 requires an exception for select elements.
 	 *
-	 * @type EventTarget
+	 * @type boolean
 	 */
-	this.targetElement = null;
+	var deviceIsIOS4 = deviceIsIOS && (/OS 4_\d(_\d)?/).test(navigator.userAgent);
 
 
 	/**
-	 * X-coordinate of touch start event.
+	 * iOS 6.0-7.* requires the target element to be manually derived
 	 *
-	 * @type number
+	 * @type boolean
 	 */
-	this.touchStartX = 0;
-
+	var deviceIsIOSWithBadTarget = deviceIsIOS && (/OS [6-7]_\d/).test(navigator.userAgent);
 
 	/**
-	 * Y-coordinate of touch start event.
+	 * BlackBerry requires exceptions.
 	 *
-	 * @type number
+	 * @type boolean
 	 */
-	this.touchStartY = 0;
-
+	var deviceIsBlackBerry10 = navigator.userAgent.indexOf('BB10') > 0;
 
 	/**
-	 * ID of the last touch, retrieved from Touch.identifier.
+	 * Determine whether a given element requires a native click.
 	 *
-	 * @type number
+	 * @param {EventTarget|Element} target Target DOM element
+	 * @returns {boolean} Returns true if the element needs a native click
 	 */
-	this.lastTouchIdentifier = 0;
+	FastClick.prototype.needsClick = function(target) {
+		switch (target.nodeName.toLowerCase()) {
 
-
-	/**
-	 * Touchmove boundary, beyond which a click will be cancelled.
-	 *
-	 * @type number
-	 */
-	this.touchBoundary = 10;
-
-
-	/**
-	 * The FastClick layer.
-	 *
-	 * @type Element
-	 */
-	this.layer = layer;
-
-	if (FastClick.notNeeded(layer)) {
-		return;
-	}
-
-	// Some old versions of Android don't have Function.prototype.bind
-	function bind(method, context) {
-		return function() { return method.apply(context, arguments); };
-	}
-
-	// Set up event handlers as required
-	if (deviceIsAndroid) {
-		layer.addEventListener('mouseover', bind(this.onMouse, this), true);
-		layer.addEventListener('mousedown', bind(this.onMouse, this), true);
-		layer.addEventListener('mouseup', bind(this.onMouse, this), true);
-	}
-
-	layer.addEventListener('click', bind(this.onClick, this), true);
-	layer.addEventListener('touchstart', bind(this.onTouchStart, this), false);
-	layer.addEventListener('touchmove', bind(this.onTouchMove, this), false);
-	layer.addEventListener('touchend', bind(this.onTouchEnd, this), false);
-	layer.addEventListener('touchcancel', bind(this.onTouchCancel, this), false);
-
-	// Hack is required for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
-	// which is how FastClick normally stops click events bubbling to callbacks registered on the FastClick
-	// layer when they are cancelled.
-	if (!Event.prototype.stopImmediatePropagation) {
-		layer.removeEventListener = function(type, callback, capture) {
-			var rmv = Node.prototype.removeEventListener;
-			if (type === 'click') {
-				rmv.call(layer, type, callback.hijacked || callback, capture);
-			} else {
-				rmv.call(layer, type, callback, capture);
-			}
-		};
-
-		layer.addEventListener = function(type, callback, capture) {
-			var adv = Node.prototype.addEventListener;
-			if (type === 'click') {
-				adv.call(layer, type, callback.hijacked || (callback.hijacked = function(event) {
-					if (!event.propagationStopped) {
-						callback(event);
-					}
-				}), capture);
-			} else {
-				adv.call(layer, type, callback, capture);
-			}
-		};
-	}
-
-	// If a handler is already declared in the element's onclick attribute, it will be fired before
-	// FastClick's onClick handler. Fix this by pulling out the user-defined handler function and
-	// adding it as listener.
-	if (typeof layer.onclick === 'function') {
-
-		// Android browser on at least 3.2 requires a new reference to the function in layer.onclick
-		// - the old one won't work if passed to addEventListener directly.
-		oldOnClick = layer.onclick;
-		layer.addEventListener('click', function(event) {
-			oldOnClick(event);
-		}, false);
-		layer.onclick = null;
-	}
-}
-
-
-/**
- * Android requires exceptions.
- *
- * @type boolean
- */
-var deviceIsAndroid = navigator.userAgent.indexOf('Android') > 0;
-
-
-/**
- * iOS requires exceptions.
- *
- * @type boolean
- */
-var deviceIsIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
-
-
-/**
- * iOS 4 requires an exception for select elements.
- *
- * @type boolean
- */
-var deviceIsIOS4 = deviceIsIOS && (/OS 4_\d(_\d)?/).test(navigator.userAgent);
-
-
-/**
- * iOS 6.0(+?) requires the target element to be manually derived
- *
- * @type boolean
- */
-var deviceIsIOSWithBadTarget = deviceIsIOS && (/OS ([6-9]|\d{2})_\d/).test(navigator.userAgent);
-
-
-/**
- * Determine whether a given element requires a native click.
- *
- * @param {EventTarget|Element} target Target DOM element
- * @returns {boolean} Returns true if the element needs a native click
- */
-FastClick.prototype.needsClick = function(target) {
-	'use strict';
-	switch (target.nodeName.toLowerCase()) {
-
-	// Don't send a synthetic click to disabled inputs (issue #62)
-	case 'button':
-	case 'select':
-	case 'textarea':
-		if (target.disabled) {
-			return true;
-		}
-
-		break;
-	case 'input':
-
-		// File inputs need real clicks on iOS 6 due to a browser bug (issue #68)
-		if ((deviceIsIOS && target.type === 'file') || target.disabled) {
-			return true;
-		}
-
-		break;
-	case 'label':
-	case 'video':
-		return true;
-	}
-
-	return (/\bneedsclick\b/).test(target.className);
-};
-
-
-/**
- * Determine whether a given element requires a call to focus to simulate click into element.
- *
- * @param {EventTarget|Element} target Target DOM element
- * @returns {boolean} Returns true if the element requires a call to focus to simulate native click.
- */
-FastClick.prototype.needsFocus = function(target) {
-	'use strict';
-	switch (target.nodeName.toLowerCase()) {
-	case 'textarea':
-		return true;
-	case 'select':
-		return !deviceIsAndroid;
-	case 'input':
-		switch (target.type) {
+		// Don't send a synthetic click to disabled inputs (issue #62)
 		case 'button':
-		case 'checkbox':
-		case 'file':
-		case 'image':
-		case 'radio':
-		case 'submit':
-			return false;
-		}
-
-		// No point in attempting to focus disabled inputs
-		return !target.disabled && !target.readOnly;
-	default:
-		return (/\bneedsfocus\b/).test(target.className);
-	}
-};
-
-
-/**
- * Send a click event to the specified element.
- *
- * @param {EventTarget|Element} targetElement
- * @param {Event} event
- */
-FastClick.prototype.sendClick = function(targetElement, event) {
-	'use strict';
-	var clickEvent, touch;
-
-	// On some Android devices activeElement needs to be blurred otherwise the synthetic click will have no effect (#24)
-	if (document.activeElement && document.activeElement !== targetElement) {
-		document.activeElement.blur();
-	}
-
-	touch = event.changedTouches[0];
-
-	// Synthesise a click event, with an extra attribute so it can be tracked
-	clickEvent = document.createEvent('MouseEvents');
-	clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
-	clickEvent.forwardedTouchEvent = true;
-	targetElement.dispatchEvent(clickEvent);
-};
-
-FastClick.prototype.determineEventType = function(targetElement) {
-	'use strict';
-
-	//Issue #159: Android Chrome Select Box does not open with a synthetic click event
-	if (deviceIsAndroid && targetElement.tagName.toLowerCase() === 'select') {
-		return 'mousedown';
-	}
-
-	return 'click';
-};
-
-
-/**
- * @param {EventTarget|Element} targetElement
- */
-FastClick.prototype.focus = function(targetElement) {
-	'use strict';
-	var length;
-
-	// Issue #160: on iOS 7, some input elements (e.g. date datetime) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just check the type instead. Filed as Apple bug #15122724.
-	if (deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time') {
-		length = targetElement.value.length;
-		targetElement.setSelectionRange(length, length);
-	} else {
-		targetElement.focus();
-	}
-};
-
-
-/**
- * Check whether the given target element is a child of a scrollable layer and if so, set a flag on it.
- *
- * @param {EventTarget|Element} targetElement
- */
-FastClick.prototype.updateScrollParent = function(targetElement) {
-	'use strict';
-	var scrollParent, parentElement;
-
-	scrollParent = targetElement.fastClickScrollParent;
-
-	// Attempt to discover whether the target element is contained within a scrollable layer. Re-check if the
-	// target element was moved to another parent.
-	if (!scrollParent || !scrollParent.contains(targetElement)) {
-		parentElement = targetElement;
-		do {
-			if (parentElement.scrollHeight > parentElement.offsetHeight) {
-				scrollParent = parentElement;
-				targetElement.fastClickScrollParent = parentElement;
-				break;
+		case 'select':
+		case 'textarea':
+			if (target.disabled) {
+				return true;
 			}
 
-			parentElement = parentElement.parentElement;
-		} while (parentElement);
-	}
+			break;
+		case 'input':
 
-	// Always update the scroll top tracker if possible.
-	if (scrollParent) {
-		scrollParent.fastClickLastScrollTop = scrollParent.scrollTop;
-	}
-};
+			// File inputs need real clicks on iOS 6 due to a browser bug (issue #68)
+			if ((deviceIsIOS && target.type === 'file') || target.disabled) {
+				return true;
+			}
 
-
-/**
- * @param {EventTarget} targetElement
- * @returns {Element|EventTarget}
- */
-FastClick.prototype.getTargetElementFromEventTarget = function(eventTarget) {
-	'use strict';
-
-	// On some older browsers (notably Safari on iOS 4.1 - see issue #56) the event target may be a text node.
-	if (eventTarget.nodeType === Node.TEXT_NODE) {
-		return eventTarget.parentNode;
-	}
-
-	return eventTarget;
-};
-
-
-/**
- * On touch start, record the position and scroll offset.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onTouchStart = function(event) {
-	'use strict';
-	var targetElement, touch, selection;
-
-	// Ignore multiple touches, otherwise pinch-to-zoom is prevented if both fingers are on the FastClick element (issue #111).
-	if (event.targetTouches.length > 1) {
-		return true;
-	}
-
-	targetElement = this.getTargetElementFromEventTarget(event.target);
-	touch = event.targetTouches[0];
-
-	if (deviceIsIOS) {
-
-		// Only trusted events will deselect text on iOS (issue #49)
-		selection = window.getSelection();
-		if (selection.rangeCount && !selection.isCollapsed) {
+			break;
+		case 'label':
+		case 'iframe': // iOS8 homescreen apps can prevent events bubbling into frames
+		case 'video':
 			return true;
 		}
 
-		if (!deviceIsIOS4) {
+		return (/\bneedsclick\b/).test(target.className);
+	};
 
-			// Weird things happen on iOS when an alert or confirm dialog is opened from a click event callback (issue #23):
-			// when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
-			// with the same identifier as the touch event that previously triggered the click that triggered the alert.
-			// Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
-			// immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
-			if (touch.identifier === this.lastTouchIdentifier) {
-				event.preventDefault();
+
+	/**
+	 * Determine whether a given element requires a call to focus to simulate click into element.
+	 *
+	 * @param {EventTarget|Element} target Target DOM element
+	 * @returns {boolean} Returns true if the element requires a call to focus to simulate native click.
+	 */
+	FastClick.prototype.needsFocus = function(target) {
+		switch (target.nodeName.toLowerCase()) {
+		case 'textarea':
+			return true;
+		case 'select':
+			return !deviceIsAndroid;
+		case 'input':
+			switch (target.type) {
+			case 'button':
+			case 'checkbox':
+			case 'file':
+			case 'image':
+			case 'radio':
+			case 'submit':
 				return false;
 			}
 
-			this.lastTouchIdentifier = touch.identifier;
-
-			// If the target element is a child of a scrollable layer (using -webkit-overflow-scrolling: touch) and:
-			// 1) the user does a fling scroll on the scrollable layer
-			// 2) the user stops the fling scroll with another tap
-			// then the event.target of the last 'touchend' event will be the element that was under the user's finger
-			// when the fling scroll was started, causing FastClick to send a click event to that layer - unless a check
-			// is made to ensure that a parent layer was not scrolled before sending a synthetic click (issue #42).
-			this.updateScrollParent(targetElement);
+			// No point in attempting to focus disabled inputs
+			return !target.disabled && !target.readOnly;
+		default:
+			return (/\bneedsfocus\b/).test(target.className);
 		}
-	}
-
-	this.trackingClick = true;
-	this.trackingClickStart = event.timeStamp;
-	this.targetElement = targetElement;
-
-	this.touchStartX = touch.pageX;
-	this.touchStartY = touch.pageY;
-
-	// Prevent phantom clicks on fast double-tap (issue #36)
-	if ((event.timeStamp - this.lastClickTime) < 200) {
-		event.preventDefault();
-	}
-
-	return true;
-};
+	};
 
 
-/**
- * Based on a touchmove event object, check whether the touch has moved past a boundary since it started.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.touchHasMoved = function(event) {
-	'use strict';
-	var touch = event.changedTouches[0], boundary = this.touchBoundary;
+	/**
+	 * Send a click event to the specified element.
+	 *
+	 * @param {EventTarget|Element} targetElement
+	 * @param {Event} event
+	 */
+	FastClick.prototype.sendClick = function(targetElement, event) {
+		var clickEvent, touch;
 
-	if (Math.abs(touch.pageX - this.touchStartX) > boundary || Math.abs(touch.pageY - this.touchStartY) > boundary) {
-		return true;
-	}
+		// On some Android devices activeElement needs to be blurred otherwise the synthetic click will have no effect (#24)
+		if (document.activeElement && document.activeElement !== targetElement) {
+			document.activeElement.blur();
+		}
 
-	return false;
-};
-
-
-/**
- * Update the last position.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onTouchMove = function(event) {
-	'use strict';
-	if (!this.trackingClick) {
-		return true;
-	}
-
-	// If the touch has moved, cancel the click tracking
-	if (this.targetElement !== this.getTargetElementFromEventTarget(event.target) || this.touchHasMoved(event)) {
-		this.trackingClick = false;
-		this.targetElement = null;
-	}
-
-	return true;
-};
-
-
-/**
- * Attempt to find the labelled control for the given label element.
- *
- * @param {EventTarget|HTMLLabelElement} labelElement
- * @returns {Element|null}
- */
-FastClick.prototype.findControl = function(labelElement) {
-	'use strict';
-
-	// Fast path for newer browsers supporting the HTML5 control attribute
-	if (labelElement.control !== undefined) {
-		return labelElement.control;
-	}
-
-	// All browsers under test that support touch events also support the HTML5 htmlFor attribute
-	if (labelElement.htmlFor) {
-		return document.getElementById(labelElement.htmlFor);
-	}
-
-	// If no for attribute exists, attempt to retrieve the first labellable descendant element
-	// the list of which is defined here: http://www.w3.org/TR/html5/forms.html#category-label
-	return labelElement.querySelector('button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea');
-};
-
-
-/**
- * On touch end, determine whether to send a click event at once.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onTouchEnd = function(event) {
-	'use strict';
-	var forElement, trackingClickStart, targetTagName, scrollParent, touch, targetElement = this.targetElement;
-
-	if (!this.trackingClick) {
-		return true;
-	}
-
-	// Prevent phantom clicks on fast double-tap (issue #36)
-	if ((event.timeStamp - this.lastClickTime) < 200) {
-		this.cancelNextClick = true;
-		return true;
-	}
-
-	// Reset to prevent wrong click cancel on input (issue #156).
-	this.cancelNextClick = false;
-
-	this.lastClickTime = event.timeStamp;
-
-	trackingClickStart = this.trackingClickStart;
-	this.trackingClick = false;
-	this.trackingClickStart = 0;
-
-	// On some iOS devices, the targetElement supplied with the event is invalid if the layer
-	// is performing a transition or scroll, and has to be re-detected manually. Note that
-	// for this to function correctly, it must be called *after* the event target is checked!
-	// See issue #57; also filed as rdar://13048589 .
-	if (deviceIsIOSWithBadTarget) {
 		touch = event.changedTouches[0];
 
-		// In certain cases arguments of elementFromPoint can be negative, so prevent setting targetElement to null
-		targetElement = document.elementFromPoint(touch.pageX - window.pageXOffset, touch.pageY - window.pageYOffset) || targetElement;
-		targetElement.fastClickScrollParent = this.targetElement.fastClickScrollParent;
-	}
+		// Synthesise a click event, with an extra attribute so it can be tracked
+		clickEvent = document.createEvent('MouseEvents');
+		clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
+		clickEvent.forwardedTouchEvent = true;
+		targetElement.dispatchEvent(clickEvent);
+	};
 
-	targetTagName = targetElement.tagName.toLowerCase();
-	if (targetTagName === 'label') {
-		forElement = this.findControl(targetElement);
-		if (forElement) {
-			this.focus(targetElement);
-			if (deviceIsAndroid) {
-				return false;
+	FastClick.prototype.determineEventType = function(targetElement) {
+
+		//Issue #159: Android Chrome Select Box does not open with a synthetic click event
+		if (deviceIsAndroid && targetElement.tagName.toLowerCase() === 'select') {
+			return 'mousedown';
+		}
+
+		return 'click';
+	};
+
+
+	/**
+	 * @param {EventTarget|Element} targetElement
+	 */
+	FastClick.prototype.focus = function(targetElement) {
+		var length;
+
+		// Issue #160: on iOS 7, some input elements (e.g. date datetime month) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just check the type instead. Filed as Apple bug #15122724.
+		if (deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time' && targetElement.type !== 'month') {
+			length = targetElement.value.length;
+			targetElement.setSelectionRange(length, length);
+		} else {
+			targetElement.focus();
+		}
+	};
+
+
+	/**
+	 * Check whether the given target element is a child of a scrollable layer and if so, set a flag on it.
+	 *
+	 * @param {EventTarget|Element} targetElement
+	 */
+	FastClick.prototype.updateScrollParent = function(targetElement) {
+		var scrollParent, parentElement;
+
+		scrollParent = targetElement.fastClickScrollParent;
+
+		// Attempt to discover whether the target element is contained within a scrollable layer. Re-check if the
+		// target element was moved to another parent.
+		if (!scrollParent || !scrollParent.contains(targetElement)) {
+			parentElement = targetElement;
+			do {
+				if (parentElement.scrollHeight > parentElement.offsetHeight) {
+					scrollParent = parentElement;
+					targetElement.fastClickScrollParent = parentElement;
+					break;
+				}
+
+				parentElement = parentElement.parentElement;
+			} while (parentElement);
+		}
+
+		// Always update the scroll top tracker if possible.
+		if (scrollParent) {
+			scrollParent.fastClickLastScrollTop = scrollParent.scrollTop;
+		}
+	};
+
+
+	/**
+	 * @param {EventTarget} targetElement
+	 * @returns {Element|EventTarget}
+	 */
+	FastClick.prototype.getTargetElementFromEventTarget = function(eventTarget) {
+
+		// On some older browsers (notably Safari on iOS 4.1 - see issue #56) the event target may be a text node.
+		if (eventTarget.nodeType === Node.TEXT_NODE) {
+			return eventTarget.parentNode;
+		}
+
+		return eventTarget;
+	};
+
+
+	/**
+	 * On touch start, record the position and scroll offset.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onTouchStart = function(event) {
+		var targetElement, touch, selection;
+
+		// Ignore multiple touches, otherwise pinch-to-zoom is prevented if both fingers are on the FastClick element (issue #111).
+		if (event.targetTouches.length > 1) {
+			return true;
+		}
+
+		targetElement = this.getTargetElementFromEventTarget(event.target);
+		touch = event.targetTouches[0];
+
+		if (deviceIsIOS) {
+
+			// Only trusted events will deselect text on iOS (issue #49)
+			selection = window.getSelection();
+			if (selection.rangeCount && !selection.isCollapsed) {
+				return true;
 			}
 
-			targetElement = forElement;
+			if (!deviceIsIOS4) {
+
+				// Weird things happen on iOS when an alert or confirm dialog is opened from a click event callback (issue #23):
+				// when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
+				// with the same identifier as the touch event that previously triggered the click that triggered the alert.
+				// Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
+				// immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
+				// Issue 120: touch.identifier is 0 when Chrome dev tools 'Emulate touch events' is set with an iOS device UA string,
+				// which causes all touch events to be ignored. As this block only applies to iOS, and iOS identifiers are always long,
+				// random integers, it's safe to to continue if the identifier is 0 here.
+				if (touch.identifier && touch.identifier === this.lastTouchIdentifier) {
+					event.preventDefault();
+					return false;
+				}
+
+				this.lastTouchIdentifier = touch.identifier;
+
+				// If the target element is a child of a scrollable layer (using -webkit-overflow-scrolling: touch) and:
+				// 1) the user does a fling scroll on the scrollable layer
+				// 2) the user stops the fling scroll with another tap
+				// then the event.target of the last 'touchend' event will be the element that was under the user's finger
+				// when the fling scroll was started, causing FastClick to send a click event to that layer - unless a check
+				// is made to ensure that a parent layer was not scrolled before sending a synthetic click (issue #42).
+				this.updateScrollParent(targetElement);
+			}
 		}
-	} else if (this.needsFocus(targetElement)) {
 
-		// Case 1: If the touch started a while ago (best guess is 100ms based on tests for issue #36) then focus will be triggered anyway. Return early and unset the target element reference so that the subsequent click will be allowed through.
-		// Case 2: Without this exception for input elements tapped when the document is contained in an iframe, then any inputted text won't be visible even though the value attribute is updated as the user types (issue #37).
-		if ((event.timeStamp - trackingClickStart) > 100 || (deviceIsIOS && window.top !== window && targetTagName === 'input')) {
-			this.targetElement = null;
-			return false;
-		}
+		this.trackingClick = true;
+		this.trackingClickStart = event.timeStamp;
+		this.targetElement = targetElement;
 
-		this.focus(targetElement);
-		this.sendClick(targetElement, event);
+		this.touchStartX = touch.pageX;
+		this.touchStartY = touch.pageY;
 
-		// Select elements need the event to go through on iOS 4, otherwise the selector menu won't open.
-		if (!deviceIsIOS4 || targetTagName !== 'select') {
-			this.targetElement = null;
+		// Prevent phantom clicks on fast double-tap (issue #36)
+		if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
 			event.preventDefault();
 		}
 
-		return false;
-	}
+		return true;
+	};
 
-	if (deviceIsIOS && !deviceIsIOS4) {
 
-		// Don't send a synthetic click event if the target element is contained within a parent layer that was scrolled
-		// and this tap is being used to stop the scrolling (usually initiated by a fling - issue #42).
-		scrollParent = targetElement.fastClickScrollParent;
-		if (scrollParent && scrollParent.fastClickLastScrollTop !== scrollParent.scrollTop) {
+	/**
+	 * Based on a touchmove event object, check whether the touch has moved past a boundary since it started.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.touchHasMoved = function(event) {
+		var touch = event.changedTouches[0], boundary = this.touchBoundary;
+
+		if (Math.abs(touch.pageX - this.touchStartX) > boundary || Math.abs(touch.pageY - this.touchStartY) > boundary) {
 			return true;
 		}
-	}
-
-	// Prevent the actual click from going though - unless the target node is marked as requiring
-	// real clicks or if it is in the whitelist in which case only non-programmatic clicks are permitted.
-	if (!this.needsClick(targetElement)) {
-		event.preventDefault();
-		this.sendClick(targetElement, event);
-	}
-
-	return false;
-};
-
-
-/**
- * On touch cancel, stop tracking the click.
- *
- * @returns {void}
- */
-FastClick.prototype.onTouchCancel = function() {
-	'use strict';
-	this.trackingClick = false;
-	this.targetElement = null;
-};
-
-
-/**
- * Determine mouse events which should be permitted.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onMouse = function(event) {
-	'use strict';
-
-	// If a target element was never set (because a touch event was never fired) allow the event
-	if (!this.targetElement) {
-		return true;
-	}
-
-	if (event.forwardedTouchEvent) {
-		return true;
-	}
-
-	// Programmatically generated events targeting a specific element should be permitted
-	if (!event.cancelable) {
-		return true;
-	}
-
-	// Derive and check the target element to see whether the mouse event needs to be permitted;
-	// unless explicitly enabled, prevent non-touch click events from triggering actions,
-	// to prevent ghost/doubleclicks.
-	if (!this.needsClick(this.targetElement) || this.cancelNextClick) {
-
-		// Prevent any user-added listeners declared on FastClick element from being fired.
-		if (event.stopImmediatePropagation) {
-			event.stopImmediatePropagation();
-		} else {
-
-			// Part of the hack for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
-			event.propagationStopped = true;
-		}
-
-		// Cancel the event
-		event.stopPropagation();
-		event.preventDefault();
 
 		return false;
-	}
-
-	// If the mouse event is permitted, return true for the action to go through.
-	return true;
-};
+	};
 
 
-/**
- * On actual clicks, determine whether this is a touch-generated click, a click action occurring
- * naturally after a delay after a touch (which needs to be cancelled to avoid duplication), or
- * an actual click which should be permitted.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onClick = function(event) {
-	'use strict';
-	var permitted;
+	/**
+	 * Update the last position.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onTouchMove = function(event) {
+		if (!this.trackingClick) {
+			return true;
+		}
 
-	// It's possible for another FastClick-like library delivered with third-party code to fire a click event before FastClick does (issue #44). In that case, set the click-tracking flag back to false and return early. This will cause onTouchEnd to return early.
-	if (this.trackingClick) {
-		this.targetElement = null;
+		// If the touch has moved, cancel the click tracking
+		if (this.targetElement !== this.getTargetElementFromEventTarget(event.target) || this.touchHasMoved(event)) {
+			this.trackingClick = false;
+			this.targetElement = null;
+		}
+
+		return true;
+	};
+
+
+	/**
+	 * Attempt to find the labelled control for the given label element.
+	 *
+	 * @param {EventTarget|HTMLLabelElement} labelElement
+	 * @returns {Element|null}
+	 */
+	FastClick.prototype.findControl = function(labelElement) {
+
+		// Fast path for newer browsers supporting the HTML5 control attribute
+		if (labelElement.control !== undefined) {
+			return labelElement.control;
+		}
+
+		// All browsers under test that support touch events also support the HTML5 htmlFor attribute
+		if (labelElement.htmlFor) {
+			return document.getElementById(labelElement.htmlFor);
+		}
+
+		// If no for attribute exists, attempt to retrieve the first labellable descendant element
+		// the list of which is defined here: http://www.w3.org/TR/html5/forms.html#category-label
+		return labelElement.querySelector('button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea');
+	};
+
+
+	/**
+	 * On touch end, determine whether to send a click event at once.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onTouchEnd = function(event) {
+		var forElement, trackingClickStart, targetTagName, scrollParent, touch, targetElement = this.targetElement;
+
+		if (!this.trackingClick) {
+			return true;
+		}
+
+		// Prevent phantom clicks on fast double-tap (issue #36)
+		if ((event.timeStamp - this.lastClickTime) < this.tapDelay) {
+			this.cancelNextClick = true;
+			return true;
+		}
+
+		if ((event.timeStamp - this.trackingClickStart) > this.tapTimeout) {
+			return true;
+		}
+
+		// Reset to prevent wrong click cancel on input (issue #156).
+		this.cancelNextClick = false;
+
+		this.lastClickTime = event.timeStamp;
+
+		trackingClickStart = this.trackingClickStart;
 		this.trackingClick = false;
-		return true;
-	}
+		this.trackingClickStart = 0;
 
-	// Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
-	if (event.target.type === 'submit' && event.detail === 0) {
-		return true;
-	}
+		// On some iOS devices, the targetElement supplied with the event is invalid if the layer
+		// is performing a transition or scroll, and has to be re-detected manually. Note that
+		// for this to function correctly, it must be called *after* the event target is checked!
+		// See issue #57; also filed as rdar://13048589 .
+		if (deviceIsIOSWithBadTarget) {
+			touch = event.changedTouches[0];
 
-	permitted = this.onMouse(event);
+			// In certain cases arguments of elementFromPoint can be negative, so prevent setting targetElement to null
+			targetElement = document.elementFromPoint(touch.pageX - window.pageXOffset, touch.pageY - window.pageYOffset) || targetElement;
+			targetElement.fastClickScrollParent = this.targetElement.fastClickScrollParent;
+		}
 
-	// Only unset targetElement if the click is not permitted. This will ensure that the check for !targetElement in onMouse fails and the browser's click doesn't go through.
-	if (!permitted) {
-		this.targetElement = null;
-	}
-
-	// If clicks are permitted, return true for the action to go through.
-	return permitted;
-};
-
-
-/**
- * Remove all FastClick's event listeners.
- *
- * @returns {void}
- */
-FastClick.prototype.destroy = function() {
-	'use strict';
-	var layer = this.layer;
-
-	if (deviceIsAndroid) {
-		layer.removeEventListener('mouseover', this.onMouse, true);
-		layer.removeEventListener('mousedown', this.onMouse, true);
-		layer.removeEventListener('mouseup', this.onMouse, true);
-	}
-
-	layer.removeEventListener('click', this.onClick, true);
-	layer.removeEventListener('touchstart', this.onTouchStart, false);
-	layer.removeEventListener('touchmove', this.onTouchMove, false);
-	layer.removeEventListener('touchend', this.onTouchEnd, false);
-	layer.removeEventListener('touchcancel', this.onTouchCancel, false);
-};
-
-
-/**
- * Check whether FastClick is needed.
- *
- * @param {Element} layer The layer to listen on
- */
-FastClick.notNeeded = function(layer) {
-	'use strict';
-	var metaViewport;
-	var chromeVersion;
-
-	// Devices that don't support touch don't need FastClick
-	if (typeof window.ontouchstart === 'undefined') {
-		return true;
-	}
-
-	// Chrome version - zero for other browsers
-	chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
-
-	if (chromeVersion) {
-
-		if (deviceIsAndroid) {
-			metaViewport = document.querySelector('meta[name=viewport]');
-
-			if (metaViewport) {
-				// Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
-				if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
-					return true;
+		targetTagName = targetElement.tagName.toLowerCase();
+		if (targetTagName === 'label') {
+			forElement = this.findControl(targetElement);
+			if (forElement) {
+				this.focus(targetElement);
+				if (deviceIsAndroid) {
+					return false;
 				}
-				// Chrome 32 and above with width=device-width or less don't need FastClick
-				if (chromeVersion > 31 && window.innerWidth <= window.screen.width) {
-					return true;
-				}
+
+				targetElement = forElement;
+			}
+		} else if (this.needsFocus(targetElement)) {
+
+			// Case 1: If the touch started a while ago (best guess is 100ms based on tests for issue #36) then focus will be triggered anyway. Return early and unset the target element reference so that the subsequent click will be allowed through.
+			// Case 2: Without this exception for input elements tapped when the document is contained in an iframe, then any inputted text won't be visible even though the value attribute is updated as the user types (issue #37).
+			if ((event.timeStamp - trackingClickStart) > 100 || (deviceIsIOS && window.top !== window && targetTagName === 'input')) {
+				this.targetElement = null;
+				return false;
 			}
 
-		// Chrome desktop doesn't need FastClick (issue #15)
-		} else {
+			this.focus(targetElement);
+			this.sendClick(targetElement, event);
+
+			// Select elements need the event to go through on iOS 4, otherwise the selector menu won't open.
+			// Also this breaks opening selects when VoiceOver is active on iOS6, iOS7 (and possibly others)
+			if (!deviceIsIOS || targetTagName !== 'select') {
+				this.targetElement = null;
+				event.preventDefault();
+			}
+
+			return false;
+		}
+
+		if (deviceIsIOS && !deviceIsIOS4) {
+
+			// Don't send a synthetic click event if the target element is contained within a parent layer that was scrolled
+			// and this tap is being used to stop the scrolling (usually initiated by a fling - issue #42).
+			scrollParent = targetElement.fastClickScrollParent;
+			if (scrollParent && scrollParent.fastClickLastScrollTop !== scrollParent.scrollTop) {
+				return true;
+			}
+		}
+
+		// Prevent the actual click from going though - unless the target node is marked as requiring
+		// real clicks or if it is in the whitelist in which case only non-programmatic clicks are permitted.
+		if (!this.needsClick(targetElement)) {
+			event.preventDefault();
+			this.sendClick(targetElement, event);
+		}
+
+		return false;
+	};
+
+
+	/**
+	 * On touch cancel, stop tracking the click.
+	 *
+	 * @returns {void}
+	 */
+	FastClick.prototype.onTouchCancel = function() {
+		this.trackingClick = false;
+		this.targetElement = null;
+	};
+
+
+	/**
+	 * Determine mouse events which should be permitted.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onMouse = function(event) {
+
+		// If a target element was never set (because a touch event was never fired) allow the event
+		if (!this.targetElement) {
 			return true;
 		}
-	}
 
-	// IE10 with -ms-touch-action: none, which disables double-tap-to-zoom (issue #97)
-	if (layer.style.msTouchAction === 'none') {
+		if (event.forwardedTouchEvent) {
+			return true;
+		}
+
+		// Programmatically generated events targeting a specific element should be permitted
+		if (!event.cancelable) {
+			return true;
+		}
+
+		// Derive and check the target element to see whether the mouse event needs to be permitted;
+		// unless explicitly enabled, prevent non-touch click events from triggering actions,
+		// to prevent ghost/doubleclicks.
+		if (!this.needsClick(this.targetElement) || this.cancelNextClick) {
+
+			// Prevent any user-added listeners declared on FastClick element from being fired.
+			if (event.stopImmediatePropagation) {
+				event.stopImmediatePropagation();
+			} else {
+
+				// Part of the hack for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
+				event.propagationStopped = true;
+			}
+
+			// Cancel the event
+			event.stopPropagation();
+			event.preventDefault();
+
+			return false;
+		}
+
+		// If the mouse event is permitted, return true for the action to go through.
 		return true;
+	};
+
+
+	/**
+	 * On actual clicks, determine whether this is a touch-generated click, a click action occurring
+	 * naturally after a delay after a touch (which needs to be cancelled to avoid duplication), or
+	 * an actual click which should be permitted.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onClick = function(event) {
+		var permitted;
+
+		// It's possible for another FastClick-like library delivered with third-party code to fire a click event before FastClick does (issue #44). In that case, set the click-tracking flag back to false and return early. This will cause onTouchEnd to return early.
+		if (this.trackingClick) {
+			this.targetElement = null;
+			this.trackingClick = false;
+			return true;
+		}
+
+		// Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
+		if (event.target.type === 'submit' && event.detail === 0) {
+			return true;
+		}
+
+		permitted = this.onMouse(event);
+
+		// Only unset targetElement if the click is not permitted. This will ensure that the check for !targetElement in onMouse fails and the browser's click doesn't go through.
+		if (!permitted) {
+			this.targetElement = null;
+		}
+
+		// If clicks are permitted, return true for the action to go through.
+		return permitted;
+	};
+
+
+	/**
+	 * Remove all FastClick's event listeners.
+	 *
+	 * @returns {void}
+	 */
+	FastClick.prototype.destroy = function() {
+		var layer = this.layer;
+
+		if (deviceIsAndroid) {
+			layer.removeEventListener('mouseover', this.onMouse, true);
+			layer.removeEventListener('mousedown', this.onMouse, true);
+			layer.removeEventListener('mouseup', this.onMouse, true);
+		}
+
+		layer.removeEventListener('click', this.onClick, true);
+		layer.removeEventListener('touchstart', this.onTouchStart, false);
+		layer.removeEventListener('touchmove', this.onTouchMove, false);
+		layer.removeEventListener('touchend', this.onTouchEnd, false);
+		layer.removeEventListener('touchcancel', this.onTouchCancel, false);
+	};
+
+
+	/**
+	 * Check whether FastClick is needed.
+	 *
+	 * @param {Element} layer The layer to listen on
+	 */
+	FastClick.notNeeded = function(layer) {
+		var metaViewport;
+		var chromeVersion;
+		var blackberryVersion;
+		var firefoxVersion;
+
+		// Devices that don't support touch don't need FastClick
+		if (typeof window.ontouchstart === 'undefined') {
+			return true;
+		}
+
+		// Chrome version - zero for other browsers
+		chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
+
+		if (chromeVersion) {
+
+			if (deviceIsAndroid) {
+				metaViewport = document.querySelector('meta[name=viewport]');
+
+				if (metaViewport) {
+					// Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
+					if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
+						return true;
+					}
+					// Chrome 32 and above with width=device-width or less don't need FastClick
+					if (chromeVersion > 31 && document.documentElement.scrollWidth <= window.outerWidth) {
+						return true;
+					}
+				}
+
+			// Chrome desktop doesn't need FastClick (issue #15)
+			} else {
+				return true;
+			}
+		}
+
+		if (deviceIsBlackBerry10) {
+			blackberryVersion = navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/);
+
+			// BlackBerry 10.3+ does not require Fastclick library.
+			// https://github.com/ftlabs/fastclick/issues/251
+			if (blackberryVersion[1] >= 10 && blackberryVersion[2] >= 3) {
+				metaViewport = document.querySelector('meta[name=viewport]');
+
+				if (metaViewport) {
+					// user-scalable=no eliminates click delay.
+					if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
+						return true;
+					}
+					// width=device-width (or less than device-width) eliminates click delay.
+					if (document.documentElement.scrollWidth <= window.outerWidth) {
+						return true;
+					}
+				}
+			}
+		}
+
+		// IE10 with -ms-touch-action: none or manipulation, which disables double-tap-to-zoom (issue #97)
+		if (layer.style.msTouchAction === 'none' || layer.style.touchAction === 'manipulation') {
+			return true;
+		}
+
+		// Firefox version - zero for other browsers
+		firefoxVersion = +(/Firefox\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
+
+		if (firefoxVersion >= 27) {
+			// Firefox 27+ does not have tap delay if the content is not zoomable - https://bugzilla.mozilla.org/show_bug.cgi?id=922896
+
+			metaViewport = document.querySelector('meta[name=viewport]');
+			if (metaViewport && (metaViewport.content.indexOf('user-scalable=no') !== -1 || document.documentElement.scrollWidth <= window.outerWidth)) {
+				return true;
+			}
+		}
+
+		// IE11: prefixed -ms-touch-action is no longer supported and it's recomended to use non-prefixed version
+		// http://msdn.microsoft.com/en-us/library/windows/apps/Hh767313.aspx
+		if (layer.style.touchAction === 'none' || layer.style.touchAction === 'manipulation') {
+			return true;
+		}
+
+		return false;
+	};
+
+
+	/**
+	 * Factory method for creating a FastClick object
+	 *
+	 * @param {Element} layer The layer to listen on
+	 * @param {Object} [options={}] The options to override the defaults
+	 */
+	FastClick.attach = function(layer, options) {
+		return new FastClick(layer, options);
+	};
+
+
+	if (typeof define === 'function' && typeof define.amd === 'object' && define.amd) {
+
+		// AMD. Register as an anonymous module.
+		define(function() {
+			return FastClick;
+		});
+	} else if (typeof module !== 'undefined' && module.exports) {
+		module.exports = FastClick.attach;
+		module.exports.FastClick = FastClick;
+	} else {
+		window.FastClick = FastClick;
 	}
+}());
 
-	return false;
-};
-
-
-/**
- * Factory method for creating a FastClick object
- *
- * @param {Element} layer The layer to listen on
- */
-FastClick.attach = function(layer) {
-	'use strict';
-	return new FastClick(layer);
-};
-
-
-if (typeof define !== 'undefined' && define.amd) {
-
-	// AMD. Register as an anonymous module.
-	define(function() {
-		'use strict';
-		return FastClick;
-	});
-} else if (typeof module !== 'undefined' && module.exports) {
-	module.exports = FastClick.attach;
-	module.exports.FastClick = FastClick;
-} else {
-	window.FastClick = FastClick;
-}
 /*! Hammer.JS - v1.1.3 - 2014-05-20
  * http://eightmedia.github.io/hammer.js
  *
@@ -30231,9 +30475,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     function Viewport() {
 
         this.PRE_IOS7_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
-        this.IOS7_VIEWPORT = "width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no";
+        this.IOS7_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
         this.DEFAULT_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
-        
+
         this.ensureViewportElement();
         this.platform = {};
         this.platform.name = this.getPlatformName();
@@ -30248,7 +30492,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             this.viewportElement = document.createElement('meta');
             this.viewportElement.name = "viewport";
             document.head.appendChild(this.viewportElement);
-        }        
+        }
     },
 
     Viewport.prototype.setup = function() {
@@ -30457,7 +30701,7 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -30561,7 +30805,7 @@ window.DoorLock = (function() {
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -30726,10 +30970,16 @@ limitations under the License.
 
 /**
  * @ngdoc method
- * @signature createAlertDialog(page)
+ * @signature createAlertDialog(page, [options])
  * @param {String} page
  *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-alert-dialog> component.[/en]
  *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Object} [options.parentScope]
+ *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
+ *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。[/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the alert dialog component object.[/en]
  *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
@@ -30740,10 +30990,16 @@ limitations under the License.
 
 /**
  * @ngdoc method
- * @signature createDialog(page)
+ * @signature createDialog(page, [options])
  * @param {String} page
  *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
  *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Object} [options.parentScope]
+ *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
+ *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。[/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the dialog component object.[/en]
  *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
@@ -30754,10 +31010,16 @@ limitations under the License.
 
 /**
  * @ngdoc method
- * @signature createPopover(page)
+ * @signature createPopover(page, [options])
  * @param {String} page
  *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
  *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Object} [options.parentScope]
+ *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
+ *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。[/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the popover component object.[/en]
  *   [ja]ポップオーバーのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
@@ -30778,6 +31040,7 @@ window.ons = (function(){
   waitDeviceReady();
   waitOnsenUILoad();
   initAngularModule();
+  changeHammerDefault();
 
   return ons;
 
@@ -30826,6 +31089,11 @@ window.ons = (function(){
 
       ons.$compile = $compile;
     }]);
+  }
+
+  //Change the default touchAction of Hammer.js, needed for Windows Phone app
+  function changeHammerDefault() {
+    Hammer.defaults.behavior.touchAction = 'none';
   }
 
   function initKeyboardEvents() {
@@ -31065,16 +31333,20 @@ window.ons = (function(){
 
       /**
        * @param {String} page
+       * @param {Object} [options]
+       * @param {Object} [options.parentScope]
        * @return {Promise}
        */
-      createAlertDialog: function(page) {
+      createAlertDialog: function(page, options) {
+        options = options || {};
+
         if (!page) {
           throw new Error('Page url must be defined.');
         }
 
         var alertDialog = angular.element('<ons-alert-dialog>'),
           $onsen = this._getOnsenService();
-        
+
         angular.element(document.body).append(angular.element(alertDialog));
 
         return $onsen.getPageHTMLAsync(page).then(function(html) {
@@ -31089,8 +31361,14 @@ window.ons = (function(){
             alertDialog.attr(attrs[i].name, attrs[i].value); 
           }
           alertDialog.html(el.html());
-          ons.compile(alertDialog[0]);
-      
+
+          if (options.parentScope) {
+            ons.$compile(alertDialog)(options.parentScope.$new());
+          }
+          else {
+            ons.compile(alertDialog[0]);
+          }
+
           if (el.attr('disabled')) {
             alertDialog.attr('disabled', 'disabled');
           }
@@ -31101,9 +31379,13 @@ window.ons = (function(){
 
       /**
       * @param {String} page
+      * @param {Object} [options]
+      * @param {Object} [options.parentScope]
       * @return {Promise}
       */
-      createDialog: function(page) {
+      createDialog: function(page, options) {
+        options = options || {};
+
         if (!page) {
           throw new Error('Page url must be defined.');
         }
@@ -31125,7 +31407,13 @@ window.ons = (function(){
             dialog.attr(attrs[i].name, attrs[i].value); 
           }
           dialog.html(el.html());
-          ons.compile(dialog[0]);
+
+          if (options.parentScope) {
+            ons.$compile(dialog)(options.parentScope.$new());
+          }
+          else {
+            ons.compile(dialog[0]);
+          }
 
           if (el.attr('disabled')) {
             dialog.attr('disabled', 'disabled');
@@ -31158,16 +31446,20 @@ window.ons = (function(){
 
       /**
        * @param {String} page
+       * @param {Object} [options]
+       * @param {Object} [options.parentScope]
        * @return {Promise}
        */
-      createPopover: function(page) {
+      createPopover: function(page, options) {
+        options = options || {};
+
         if (!page) {
           throw new Error('Page url must be defined.');
         }
 
         var popover = angular.element('<ons-popover>'),
           $onsen = this._getOnsenService();
-        
+
         angular.element(document.body).append(angular.element(popover));
 
         return $onsen.getPageHTMLAsync(page).then(function(html) {
@@ -31182,8 +31474,14 @@ window.ons = (function(){
             popover.attr(attrs[i].name, attrs[i].value); 
           }
           popover.html(el.html());
-          ons.compile(popover[0]);
-      
+
+          if (options.parentScope) {
+            ons.$compile(popover)(options.parentScope.$new());
+          }
+          else {
+            ons.compile(popover[0]);
+          }
+
           if (el.attr('disabled')) {
             popover.attr('disabled', 'disabled');
           }
@@ -31219,7 +31517,7 @@ window.ons = (function(){
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -31252,6 +31550,8 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
+        this._attrs = attrs;
+
         this._element.css({
           display: 'none',
           zIndex: 20001
@@ -31270,6 +31570,8 @@ limitations under the License.
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
         this._createMask(attrs.maskColor);
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
       /**
@@ -31363,15 +31665,19 @@ limitations under the License.
        * Destroy alert dialog.
        */
       destroy: function() {
+        this._scope.$destroy();
+      },
+
+      _destroy: function() {
+        this.emit('destroy');
+
         this._mask.off();
-  
+
         this._element.remove();
         this._mask.remove();
         this._deviceBackButtonHandler.destroy();
 
-        this._scope.$destroy();
-
-        this._deviceBackButtonHandler = this._element = this._mask = null;
+        this._deviceBackButtonHandler = this._scope = this._attrs = this._element = this._mask = null;
       },
 
       /**
@@ -31482,7 +31788,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -31618,7 +31924,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -31753,7 +32059,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -31859,7 +32165,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -32627,7 +32933,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {navigator: this});
+        this.emit('destroy');
 
         this._hammer.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
         this._hammer.off('dragend', this._bindedOnDragEnd);
@@ -32645,7 +32951,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -32678,6 +32984,7 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
+        this._attrs = attrs;
 
         this._element.css('display', 'none');
 
@@ -32700,6 +33007,8 @@ limitations under the License.
         }
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
       /**
@@ -32798,13 +33107,19 @@ limitations under the License.
        * Destroy dialog.
        */
       destroy: function() {
+        this._scope.$destroy();
+      },
+
+      _destroy: function() {
+        this.emit('destroy');
+
         this._element.remove();
         this._deviceBackButtonHandler.destroy();
         this._mask.off();
 
         this._scope.$destroy();
 
-        this._deviceBackButtonHandler = this._element = this._dialog = this._mask = null;
+        this._deviceBackButtonHandler = this._scope = this._attrs = this._element = this._dialog = this._mask = null;
       },
 
       /**
@@ -32904,7 +33219,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -32943,7 +33258,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -33067,7 +33382,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -33203,7 +33518,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -33245,7 +33560,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -33379,7 +33694,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -33510,7 +33825,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -34033,7 +34348,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -34053,7 +34368,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('LazyRepeatView', ['$onsen', '$document', '$compile', function($onsen, $document, $compile) {
+  module.factory('LazyRepeatView', ['$onsen', '$document', function($onsen, $document) {
 
     var LazyRepeatView = Class.extend({
 
@@ -34169,7 +34484,6 @@ limitations under the License.
           }
 
           this._parentElement.append(clone);
-          clone.removeAttr('ons-lazy-repeat');
 
           clone.css({
             position: 'absolute',
@@ -34184,8 +34498,6 @@ limitations under the License.
             scope: childScope
           };
 
-          $compile(clone)(childScope);
- 
           // Don't show elements before they are finished rendering.
           this._scope.$evalAsync(function() {
             clone.css('display', 'block');
@@ -34338,7 +34650,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -34500,7 +34812,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -34600,7 +34912,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -34637,7 +34949,19 @@ limitations under the License.
       this.pageScope = params.pageScope;
       this.options = params.options;
       this.navigator = params.navigator;
+
+      // Block events while page is being animated to stop scrolling, pressing buttons, etc.
+      this._blockEvents = function(event) {
+        if (this.navigator._isPopping || this.navigator._isPushing) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }.bind(this);
+
+      this.element.on(this._pointerEvents, this._blockEvents);
     },
+
+    _pointerEvents: 'touchstart touchend touchmove click',
 
     /**
      * @return {PageView}
@@ -34655,9 +34979,11 @@ limitations under the License.
     destroy: function() {
       this.pageScope.$destroy();
 
+      this.element.off(this._pointerEvents, this._blockEvents);
       this.element.remove();
-      this._pageView = null;
       this.element = null;
+
+      this._pageView = null;
       this.pageScope = null;
       this.options = null;
 
@@ -34682,9 +35008,14 @@ limitations under the License.
     var NavigatorView = Class.extend({
 
       /**
-       * @member jqLite Object
+       * @member {jqLite} Object
        */
       _element: undefined,
+
+      /**
+       * @member {Object} Object
+       */
+      _attrs: undefined,
 
       /**
        * @member {Array}
@@ -34707,24 +35038,26 @@ limitations under the License.
       _profiling: false,
 
       /**
-       * @param {Object} options
-       * @param options.element jqLite Object to manage with navigator
-       * @param options.scope Angular.js scope object
+       * @param {Object} scope
+       * @param {jqLite} element jqLite Object to manage with navigator
+       * @param {Object} attrs
        */
-      init: function(options) {
-        options = options || options;
+      init: function(scope, element, attrs) {
 
-        this._element = options.element || angular.element(window.document.body);
-        this._scope = options.scope || this._element.scope();
+        this._element = element || angular.element(window.document.body);
+        this._scope = scope || this._element.scope();
+        this._attrs = attrs;
         this._doorLock = new DoorLock();
         this.pages = [];
+
+        this._isPopping = this._isPushing = false;
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
         this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
       _destroy: function() {
-        this.emit('destroy', {navigator: this});
+        this.emit('destroy');
 
         this.pages.forEach(function(page) {
           page.destroy();
@@ -34732,6 +35065,8 @@ limitations under the License.
 
         this._deviceBackButtonHandler.destroy();
         this._deviceBackButtonHandler = null;
+
+        this._element = this._scope = this._attrs = null;
       },
 
       _onDeviceBackButton: function(event) {
@@ -34755,7 +35090,6 @@ limitations under the License.
 
         throw new Error('invalid state');
       },
-
 
       _createPageElementAndLinkFunction : function(templateHTML, pageScope, done) {
         var div = document.createElement('div');
@@ -34915,8 +35249,9 @@ limitations under the License.
 
       /**
        * @param {Object} options pushPage()'s options parameter
+       * @param {NavigatorTransitionAnimator} [defaultAnimator]
        */
-      _getAnimatorOption: function(options) {
+      _getAnimatorOption: function(options, defaultAnimator) {
         var animator = null;
 
         if (options.animation instanceof NavigatorTransitionAnimator) {
@@ -34932,7 +35267,7 @@ limitations under the License.
         }
 
         if (!animator) {
-          animator = NavigatorView._transitionAnimatorDict['default'];
+          animator = defaultAnimator || NavigatorView._transitionAnimatorDict['default'];
         }
 
         if (!(animator instanceof NavigatorTransitionAnimator)) {
@@ -35001,6 +35336,7 @@ limitations under the License.
             console.timeEnd('pushPageDOM');
           }
 
+          this._isPushing = false;
           unlock();
 
           this.emit('postpush', event);
@@ -35010,6 +35346,8 @@ limitations under the License.
           }
           element = null;
         }.bind(this);
+
+        this._isPushing = true;
 
         if (this.pages.length > 1) {
           var leavePage = this.pages.slice(-2)[0];
@@ -35070,7 +35408,7 @@ limitations under the License.
        */
       popPage: function(options) {
         options = options || {};
-        
+
         this._doorLock.waitUnlock(function() {
           if (this.pages.length <= 1) {
             throw new Error('NavigatorView\'s page stack is empty.');
@@ -35102,8 +35440,11 @@ limitations under the License.
 
         var callback = function() {
           leavePage.destroy();
+
+          this._isPopping = false;
           unlock();
           this.emit('postpop', event);
+
           event.leavePage = null;
 
           if (typeof options.onTransitionEnd === 'function') {
@@ -35111,7 +35452,31 @@ limitations under the License.
           }
         }.bind(this);
 
-        leavePage.options.animator.pop(enterPage, leavePage, callback);
+        this._isPopping = true;
+
+        var animator = this._getAnimatorOption(options, leavePage.options.animator);
+        animator.pop(enterPage, leavePage, callback);
+      },
+
+      /**
+       * Replaces the current page with the specified one.
+       *
+       * @param {String} page
+       * @param {Object} [options]
+       */
+      replacePage: function(page, options) {
+        options = options || {};
+
+        var onTransitionEnd = options.onTransitionEnd || function() {};
+
+        options.onTransitionEnd = function() {
+          if (this.pages.length > 1) {
+            this.pages[this.pages.length - 2].destroy();
+          }
+          onTransitionEnd();
+        }.bind(this);
+
+        this.pushPage(page, options);
       },
 
       /**
@@ -35148,7 +35513,7 @@ limitations under the License.
        * Use this method to access options passed by pushPage() or resetToPage() method.
        * eg. ons.navigator.getCurrentPage().options
        *
-       * @return {Object} 
+       * @return {Object}
        */
       getCurrentPage: function() {
         return this.pages[this.pages.length - 1];
@@ -35200,7 +35565,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -35238,7 +35603,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -35270,7 +35635,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -35523,7 +35888,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -35787,7 +36152,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -35819,10 +36184,11 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._element = element;
         this._scope = scope;
+        this._attrs = attrs;
 
         this._mask = angular.element(this._element[0].querySelector('.popover-mask'));
         this._popover = angular.element(this._element[0].querySelector('.popover'));
-        
+
         this._mask.css('z-index', 20000);
         this._popover.css('z-index', 20001);
         this._element.css('display', 'none');
@@ -35856,6 +36222,8 @@ limitations under the License.
         this._popover[0].addEventListener('DOMNodeInserted', this._onChange, false);
         this._popover[0].addEventListener('DOMNodeRemoved', this._onChange, false);
         window.addEventListener('resize', this._onChange, false);
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
       _onDeviceBackButton: function(event) {
@@ -36079,16 +36447,20 @@ limitations under the License.
        */
       destroy: function() {
         this._scope.$destroy();
+      },
+
+      _destroy: function() {
+        this.emit('destroy');
+
+        this._deviceBackButtonHandler.destroy();
+        this._popover[0].removeEventListener('DOMNodeInserted', this._onChange, false);
+        this._popover[0].removeEventListener('DOMNodeRemoved', this._onChange, false);
+        window.removeEventListener('resize', this._onChange, false);
 
         this._mask.off();
         this._mask.remove();
         this._popover.remove();
         this._element.remove();
-        
-        this._deviceBackButtonHandler.destroy();
-        this._popover[0].removeEventListener('DOMNodeInserted', this._onChange, false);
-        this._popover[0].removeEventListener('DOMNodeRemoved', this._onChange, false);
-        window.removeEventListener('resize', this._onChange, false);
 
         this._onChange = this._deviceBackButtonHandler = this._mask = this._popover = this._element = this._scope = null;
       },
@@ -36150,7 +36522,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -36188,7 +36560,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -36376,8 +36748,11 @@ limitations under the License.
       },
 
       _onDone: function(done) {
-        this._translateTo(0, {animate: true});
-        this._setState(this.STATE_INITIAL);
+        // Check if the pull hook still exists.
+        if (this._element) {
+          this._translateTo(0, {animate: true});
+          this._setState(this.STATE_INITIAL);
+        }
       },
 
       _getHeight: function() {
@@ -36408,14 +36783,14 @@ limitations under the License.
 
         this._scope.$evalAsync(function() {
           this._element[0].setAttribute('state', state);
-        }.bind(this));
 
-        if (!noEvent && oldState !== this._getState()) {
-          this.emit('changestate', {
-            state: state,
-            pullHook: this
-          });
-        }
+          if (!noEvent && oldState !== this._getState()) {
+            this.emit('changestate', {
+              state: state,
+              pullHook: this
+            });
+          }
+        }.bind(this));
       },
 
       _getState: function() {
@@ -36445,7 +36820,7 @@ limitations under the License.
 
       _translateTo: function(scroll, options) {
         options = options || {};
-    
+
         this._currentTranslation = scroll;
 
         if (options.animate) {
@@ -36493,7 +36868,7 @@ limitations under the License.
         this._bindedOnDragStart = this._onDragStart.bind(this);
         this._bindedOnDragEnd = this._onDragEnd.bind(this);
         this._bindedOnScroll = this._onScroll.bind(this);
-        
+
         // Bind listeners
         this._hammer.on('drag', this._bindedOnDrag);
         this._hammer.on('dragstart', this._bindedOnDragStart);
@@ -36502,7 +36877,7 @@ limitations under the License.
       },
 
       _destroyEventListeners: function() {
-        var element = this._scrollElement[0].parentNode;
+        var element = this._scrollElement.parent();
 
         this._hammer.off('drag', this._bindedOnDrag);
         this._hammer.off('dragstart', this._bindedOnDragStart);
@@ -36511,6 +36886,7 @@ limitations under the License.
       },
 
       _destroy: function() {
+        this.emit('destroy');
         this._destroyEventListeners();
         this._element = this._scope = this._attrs = null;
       }
@@ -36522,7 +36898,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -36760,7 +37136,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -37031,7 +37407,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -37220,7 +37596,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -37351,7 +37727,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -37621,7 +37997,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {slidingMenu: this});
+        this.emit('destroy');
 
         this._deviceBackButtonHandler.destroy();
         window.removeEventListener('resize', this._bindedOnWindowResize);
@@ -37712,7 +38088,7 @@ limitations under the License.
       },
 
       _appendMainPage: function(pageUrl, templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
@@ -37734,7 +38110,7 @@ limitations under the License.
        * @param {String}
        */
       _appendMenuPage: function(templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
@@ -37823,18 +38199,13 @@ limitations under the License.
         }
 
         switch (event.type) {
-
-          case 'touch':
-            if (this._logic.isClosed()) {
-              if (!this._isInsideSwipeTargetArea(event)) {
-                event.gesture.stopDetect();
-              }
-            }
-
-            break;
-
           case 'dragleft':
           case 'dragright':
+
+            if (this._logic.isClosed() && !this._isInsideSwipeTargetArea(event)) {
+              return;
+            }
+
             event.gesture.preventDefault();
 
             var deltaX = event.gesture.deltaX;
@@ -37951,8 +38322,10 @@ limitations under the License.
       close: function(options) {
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
-       
-        this.emit('preclose');
+
+        this.emit('preclose', {
+          slidingMenu: this
+        });
 
         this._doorLock.waitUnlock(function() {
           this._logic.close(options);
@@ -37970,7 +38343,10 @@ limitations under the License.
           this._mainPage.children().css('pointer-events', '');
           this._mainPageHammer.off('tap', this._bindedOnTap);
 
-          this.emit('postclose');
+          this.emit('postclose', {
+            slidingMenu: this
+          });
+
           callback();
         }.bind(this), instant);
       },
@@ -37995,7 +38371,9 @@ limitations under the License.
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
 
-        this.emit('preopen');
+        this.emit('preopen', {
+          slidingMenu: this
+        });
 
         this._doorLock.waitUnlock(function() {
           this._logic.open(options);
@@ -38013,7 +38391,9 @@ limitations under the License.
           this._mainPage.children().css('pointer-events', 'none');
           this._mainPageHammer.on('tap', this._bindedOnTap);
 
-          this.emit('postopen');
+          this.emit('postopen', {
+            slidingMenu: this
+          });
 
           callback();
         }.bind(this), instant);
@@ -38081,7 +38461,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -38160,7 +38540,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -38188,11 +38568,12 @@ limitations under the License.
 
     var SplitView = Class.extend({
 
-      init: function(scope, element) {
+      init: function(scope, element, attrs) {
         element.addClass('onsen-sliding-menu');
 
         this._element = element;
         this._scope = scope;
+        this._attrs = attrs;
 
         this._mainPage = angular.element(element[0].querySelector('.onsen-split-view__main'));
         this._secondaryPage = angular.element(element[0].querySelector('.onsen-split-view__secondary'));
@@ -38235,7 +38616,7 @@ limitations under the License.
        * @param {String} templateHTML
        */
       _appendSecondPage: function(templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = $compile(templateHTML)(pageScope);
 
         this._secondaryPage.append(pageContent);
@@ -38253,7 +38634,7 @@ limitations under the License.
        * @param {String} templateHTML
        */
       _appendMainPage: function(templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = $compile(templateHTML)(pageScope);
 
         this._mainPage.append(pageContent);
@@ -38300,14 +38681,7 @@ limitations under the License.
       _onResize: function() {
         var lastMode = this._mode;
 
-        if ($onsen.isAndroid()) {
-          setTimeout(function() {
-            this._considerChangingCollapse();
-          }.bind(this), 200);
-        }
-        else {
-          this._considerChangingCollapse();
-        }
+        this._considerChangingCollapse();
 
         if (lastMode === COLLAPSE_MODE && this._mode === COLLAPSE_MODE) {
           this._animator.onResized({
@@ -38380,7 +38754,7 @@ limitations under the License.
         if (typeof this._scope.collapse === 'string') {
           c = this._scope.collapse.trim();
         }
-        
+
         if (c == 'portrait') {
           return $onsGlobal.orientation.isPortrait();
         } else if (c == 'landscape') {
@@ -38390,12 +38764,8 @@ limitations under the License.
           if (num.indexOf('px') >= 0) {
             num = num.substr(0,num.length-2);
           }
-       
+
           var width = window.innerWidth;
-          
-          if ($onsen.isAndroid()) {
-            width = screen.width;
-          }
 
           return isNumber(num) && width < num;
         } else {
@@ -38489,7 +38859,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {splitView: this});
+        this.emit('destroy');
 
         this._element = null;
         this._scope = null;
@@ -38507,7 +38877,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -38590,7 +38960,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -38741,6 +39111,7 @@ limitations under the License.
        * @param {Number} index
        * @param {Object} [options]
        * @param {Boolean} [options.keepPage]
+       * @param {String} [options.animation]
        * @return {Boolean} success or not
        */
       setActiveTab: function(index, options) {
@@ -38748,12 +39119,12 @@ limitations under the License.
         var previousTabItem = this._tabItems[this.getActiveTabIndex()];
         var selectedTabItem = this._tabItems[index];
 
-        if(typeof selectedTabItem.noReload !== 'undefined' && 
-            index == this.getActiveTabIndex()) {
+        if((typeof selectedTabItem.noReload !== 'undefined' || typeof selectedTabItem.isPersistent()) &&
+            index === this.getActiveTabIndex()) {
           this.emit('reactive', {
             index: index,
             tabItem: selectedTabItem,
-          }); 
+          });
           return false;
         }
 
@@ -38796,6 +39167,9 @@ limitations under the License.
             }.bind(this),
             _removeElement: removeElement
           };
+          if (options.animation) {
+              params.animation = options.animation;
+          }
 
           if (selectedTabItem.isPersistent() && selectedTabItem._pageElement) {
             this._loadPersistentPageDOM(selectedTabItem._pageElement, params);
@@ -38809,8 +39183,6 @@ limitations under the License.
           if (this._tabItems[i] != selectedTabItem) {
             this._tabItems[i].setInactive();
           } else {
-            this._triggerActiveTabChanged(i, selectedTabItem);
-
             if (!needLoad) {
               this.emit('postchange', {index: index, tabItem: selectedTabItem});
             }
@@ -38818,13 +39190,6 @@ limitations under the License.
         }
 
         return true;
-      },
-
-      _triggerActiveTabChanged: function(index, tabItem){
-        this._scope.onActiveTabChanged({
-          $index: index,
-          $tabItem: tabItem
-        });
       },
 
       /**
@@ -38945,11 +39310,12 @@ limitations under the License.
        */
       _loadPageDOM: function(element, options) {
         options = options || {};
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var link = $compile(element);
 
         this._contentElement.append(element);
         var pageContent = link(pageScope);
+
         pageScope.$evalAsync();
 
         this._switchPage(pageContent, pageScope, options);
@@ -38964,7 +39330,7 @@ limitations under the License.
         options = options || {};
 
         element.css('display', 'block');
-        this._switchPage(element, element.scope(), options); 
+        this._switchPage(element, element.scope(), options);
       },
 
       /**
@@ -38979,7 +39345,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {tabbar: this});
+        this.emit('destroy');
 
         this._element = this._scope = this._attrs = null;
       }
@@ -39002,9 +39368,8 @@ limitations under the License.
         throw new Error('"animator" param must be an instance of TabbarAnimator');
       }
 
-      this._transitionAnimatorDict[name] = animator;
+      this._animatorDict[name] = animator;
     };
-
 
     return TabbarView;
   }]);
@@ -39164,6 +39529,51 @@ limitations under the License.
  * @description
  *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
  *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-preshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
+ *  [ja]"preshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prehide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
+ *  [ja]"prehide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
+ *  [ja]"postshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-posthide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
+ *  [ja]"posthide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -39341,6 +39751,7 @@ limitations under the License.
             var alertDialog = new AlertDialogView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, alertDialog);
+            $onsen.registerEventHandlers(alertDialog, 'preshow prehide postshow posthide destroy');
             $onsen.addModifierMethods(alertDialog, 'alert-dialog--*', element);
 
             if (titleElement.length) {
@@ -39670,6 +40081,9 @@ limitations under the License.
  * @description
  *   [en]Disable or enable the button.[/en]
  *   [ja]このボタンをdisabled状態にするかどうかを設定します。[/ja]
+ * @param {String} disabled
+ *   [en]If true the button will be disabled.[/en]
+ *   [ja]disabled状態にするかどうかを真偽値で指定します。[/ja]
  */
 
 /**
@@ -39946,6 +40360,42 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-postchange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
+ *  [ja]"postchange"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-refresh
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "refresh" event is fired.[/en]
+ *  [ja]"refresh"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-overscroll
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "overscroll" event is fired.[/en]
+ *  [ja]"overscroll"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature next()
  * @description
@@ -40012,7 +40462,7 @@ limitations under the License.
 
 /**
  * @ngdoc method
- * @signature getActiveCarouselItemIndex(index)
+ * @signature getActiveCarouselItemIndex()
  * @return {Number}
  *   [en]The current carousel item index.[/en]
  *   [ja]現在表示しているカルーセル要素のインデックスが返されます。[/ja]
@@ -40056,7 +40506,7 @@ limitations under the License.
 
 /**
  * @ngdoc method
- * @signature getAutoScrollRatio(ratio)
+ * @signature getAutoScrollRatio()
  * @return {Number}
  *   [en]The current auto scroll ratio.[/en]
  *   [ja]現在のオートスクロールのratio値。[/ja]
@@ -40184,6 +40634,7 @@ limitations under the License.
 
           element.data('ons-carousel', carousel);
 
+          $onsen.registerEventHandlers(carousel, 'postchange refresh overscroll destroy');
           $onsen.declareVarAttribute(attrs, carousel);
 
           scope.$on('$destroy', function() {
@@ -40512,6 +40963,51 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-preshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
+ *  [ja]"preshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prehide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
+ *  [ja]"prehide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
+ *  [ja]"postshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-posthide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
+ *  [ja]"posthide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature show([options])
  * @param {Object} [options]
@@ -40689,6 +41185,7 @@ limitations under the License.
 
             $onsen.addModifierMethods(dialog, 'dialog--*', angular.element(element[0].querySelector('.dialog')));
             $onsen.declareVarAttribute(attrs, dialog);
+            $onsen.registerEventHandlers(dialog, 'preshow prehide postshow posthide destroy');
 
             element.data('ons-dialog', dialog);
             scope.$on('$destroy', function() {
@@ -41355,7 +41852,7 @@ limitations under the License.
  * </script>
  *
  * <ons-list ng-controller="MyController">
- *   <ons-list-item ons-lazy-repeat="MyDelegate"`>
+ *   <ons-list-item ons-lazy-repeat="MyDelegate">
  *     {{ item }}
  *   </ons-list-item>
  * </ons-list>
@@ -41382,6 +41879,7 @@ limitations under the License.
     return {
       restrict: 'A',
       replace: false,
+      priority: 1000,
       transclude: 'element',
       compile: function(element, attrs, linker) {
         return function(scope, element, attrs) {
@@ -41677,10 +42175,17 @@ limitations under the License.
           throw Error('Must define page to load.');
         }
 
-        $onsen.getPageHTMLAsync(attrs.onsLoadingPlaceholder).then(function(html) {
-          setImmediate(function() {
+        setImmediate(function() {
+          $onsen.getPageHTMLAsync(attrs.onsLoadingPlaceholder).then(function(html) {
+
+            // Remove page tag.
+            html = html
+              .trim()
+              .replace(/^<ons-page>/, '')
+              .replace(/<\/ons-page>$/, '');
+
             var div = document.createElement('div');
-            div.innerHTML = html.trim();
+            div.innerHTML = html;
 
             var newElement = angular.element(div);
             newElement.css('display', 'none');
@@ -41688,7 +42193,13 @@ limitations under the License.
             element.append(newElement);
             ons.compile(newElement[0]);
 
-            angular.element(element.children()[0]).remove();
+            for (var i = element[0].childNodes.length - 1; i >= 0; i--){
+              var e = element[0].childNodes[i];
+              if (e !== div) {
+                e.remove();
+              }
+            }
+
             newElement.css('display', 'block');
           });
         });
@@ -41862,7 +42373,7 @@ limitations under the License.
  * @guide DefiningMultiplePagesinSingleHTML
  *   [en]Defining multiple pages in single html[/en]
  *   [ja]複数のページを1つのHTMLに記述する[/ja]
- * @seealso ons-toolbar 
+ * @seealso ons-toolbar
  *   [en]ons-toolbar component[/en]
  *   [ja]ons-toolbarコンポーネント[/ja]
  * @seealso ons-back-button
@@ -41985,6 +42496,51 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-prepush
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prepush" event is fired.[/en]
+ *  [ja]"prepush"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prepop
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prepop" event is fired.[/en]
+ *  [ja]"prepop"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postpush
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postpush" event is fired.[/en]
+ *  [ja]"postpush"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postpop
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postpop" event is fired.[/en]
+ *  [ja]"postpop"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature pushPage(pageUrl, [options])
  * @param {String} pageUrl
@@ -42030,12 +42586,35 @@ limitations under the License.
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
  *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
  * @param {Function} [options.onTransitionEnd]
  *   [en]Function that is called when the transition has ended.[/en]
  *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Pops the current page from the page stack. The previous page will be displayed.[/en]
  *   [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature replacePage(pageUrl, [options])
+ * @param {String} pageUrl
+ *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @param {Function} [options.onTransitionEnd]
+ *   [en]Function that is called when the transition has ended.[/en]
+ *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Replaces the current page with the specified one.[/en]
+ *   [ja]現在表示中のページをを指定したページに置き換えます。[/ja]
  */
 
 /**
@@ -42153,12 +42732,10 @@ limitations under the License.
 
         return {
           pre: function(scope, element, attrs, controller) {
-            var navigator = new NavigatorView({
-              scope: scope,
-              element: element
-            });
+            var navigator = new NavigatorView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, navigator);
+            $onsen.registerEventHandlers(navigator, 'prepush prepop postpush postpop destroy');
 
             if (attrs.page) {
               navigator.pushPage(attrs.page, {});
@@ -42578,6 +43155,51 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-preshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
+ *  [ja]"preshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prehide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
+ *  [ja]"prehide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
+ *  [ja]"postshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-posthide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
+ *  [ja]"posthide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature show(target, [options])
  * @param {String|Event|HTMLElement} target
@@ -42735,6 +43357,7 @@ limitations under the License.
             var popover = new PopoverView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, popover);
+            $onsen.registerEventHandlers(popover, 'preshow prehide postshow posthide destroy');
 
             element.data('ons-popover', popover);
 
@@ -42883,6 +43506,15 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-changestate
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "changestate" event is fired.[/en]
+ *  [ja]"changestate"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature setDisabled(disabled)
  * @param {Boolean} disabled
@@ -42987,6 +43619,7 @@ limitations under the License.
             var pullHook = new PullHookView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, pullHook);
+            $onsen.registerEventHandlers(pullHook, 'changestate destroy');
             element.data('ons-pull-hook', pullHook);
 
             scope.$on('$destroy', function() {
@@ -43236,6 +43869,9 @@ limitations under the License.
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -43247,6 +43883,9 @@ limitations under the License.
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -43258,6 +43897,9 @@ limitations under the License.
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -43269,6 +43911,9 @@ limitations under the License.
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
  */
 
 /**
@@ -43332,6 +43977,60 @@ limitations under the License.
  * @description
  *   [en]Specify which side of the screen the menu page is located on. Possible values are "left" and "right".[/en]
  *   [ja]menu-pageで指定されたページが画面のどちら側から表示されるかを指定します。leftもしくはrightのいずれかを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name type
+ * @type {String}
+ * @description
+ *   [en]Sliding menu animator. Possible values are reveal (default), push and overlay.[/en]
+ *   [ja]スライディングメニューのアニメーションです。"reveal"（デフォルト）、"push"、"overlay"のいずれかを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-preopen
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preopen" event is fired.[/en]
+ *  [ja]"preopen"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-preclose
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preclose" event is fired.[/en]
+ *  [ja]"preclose"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postopen
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postopen" event is fired.[/en]
+ *  [ja]"postopen"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postclose
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postclose" event is fired.[/en]
+ *  [ja]"postclose"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -43526,6 +44225,8 @@ limitations under the License.
           element.append(angular.element('<div></div>').addClass('onsen-sliding-menu__main ons-sliding-menu-inner'));
 
           var slidingMenu = new SlidingMenuView(scope, element, attrs);
+
+          $onsen.registerEventHandlers(slidingMenu, 'preopen preclose postopen postclose destroy');
 
           if (mainHtml && !attrs.mainPage) {
             slidingMenu._appendMainPage(null, mainHtml);
@@ -43742,6 +44443,60 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-update
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "update" event is fired.[/en]
+ *  [ja]"update"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-presplit
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "presplit" event is fired.[/en]
+ *  [ja]"presplit"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-precollapse
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "precollapse" event is fired.[/en]
+ *  [ja]"precollapse"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postsplit
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postsplit" event is fired.[/en]
+ *  [ja]"postsplit"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postcollapse
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postcollapse" event is fired.[/en]
+ *  [ja]"postcollapse"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature setMainPage(pageUrl)
  * @param {String} pageUrl
@@ -43861,6 +44616,7 @@ limitations under the License.
           }
 
           $onsen.declareVarAttribute(attrs, splitView);
+          $onsen.registerEventHandlers(splitView, 'update presplit precollapse postsplit postcollapse destroy');
 
           element.data('ons-split-view', splitView);
 
@@ -44499,6 +45255,42 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name ons-reactive
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "reactive" event is fired.[/en]
+ *  [ja]"reactive"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prechange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prechange" event is fired.[/en]
+ *  [ja]"prechange"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postchange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
+ *  [ja]"postchange"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature setActiveTab(index, [options])
  * @param {Number} index
@@ -44510,6 +45302,9 @@ limitations under the License.
  * @param {Boolean} [options.keepPage]
  *   [en]If true the page will not be changed.[/en]
  *   [ja]タブバーが現在表示しているpageを変えない場合にはtrueを指定します。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定します。"fade", "none"のいずれかを指定できます。[/ja]
  * @return {Boolean}
  *   [en]true if the change was successful.[/en]
  *   [ja]変更が成功した場合にtrueを返します。[/ja]
@@ -44591,15 +45386,9 @@ limitations under the License.
       restrict: 'E',
       replace: false,
       transclude: true,
-      scope: {
-        onActiveTabChanged: '&'
-      },
+      scope: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
       link: function(scope, element, attrs, controller, transclude) {
-
-        if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controller directive.');
-        }
 
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         scope.selectedTabItem = {source: ''};
@@ -44611,13 +45400,14 @@ limitations under the License.
 
         var tabbarView = new TabbarView(scope, element, attrs);
         $onsen.addModifierMethods(tabbarView, 'tab-bar--*', angular.element(element.children()[1]));
+        $onsen.registerEventHandlers(tabbarView, 'reactive prechange postchange destroy');
 
         scope.tabbarId = tabbarView._tabbarId;
 
         element.data('ons-tabbar', tabbarView);
         $onsen.declareVarAttribute(attrs, tabbarView);
 
-        transclude(function(cloned) {
+        transclude(scope, function(cloned) {
           angular.element(element[0].querySelector('.ons-tabbar-inner')).append(cloned);
         });
 
@@ -45043,7 +45833,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -45172,7 +45962,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -45440,7 +46230,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -45744,6 +46534,35 @@ limitations under the License.
           }
         },
 
+        _registerEventHandler: function(component, eventName) {
+          var capitalizedEventName = eventName.charAt(0).toUpperCase() + eventName.slice(1);
+
+          component.on(eventName, function(event) {
+            $onsen.fireComponentEvent(component._element[0], eventName, event);
+
+            var handler = component._attrs['ons' + capitalizedEventName];
+            if (handler) {
+              component._scope.$eval(handler, {$event: event});
+              component._scope.$evalAsync();
+            }
+          });
+        },
+
+        /**
+         * Register event handlers for attributes.
+         *
+         * @param {Object} component
+         * @param {String} eventNames
+         */
+        registerEventHandlers: function(component, eventNames) {
+          eventNames = eventNames.trim().split(/\s+/);
+
+          for (var i = 0, l = eventNames.length; i < l; i ++) {
+            var eventName = eventNames[i];
+            this._registerEventHandler(component, eventName);
+          }
+        },
+
         /**
          * @return {Boolean}
          */
@@ -45785,12 +46604,21 @@ limitations under the License.
          * @param {HTMLElement} [dom]
          * @param {String} event name
          */
-        fireComponentEvent: function(dom, eventName) {
+        fireComponentEvent: function(dom, eventName, data) {
+          data = data || {};
+
           var event = document.createEvent('HTMLEvents');
 
-          event.component = dom ? 
+          for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+              event[key] = data[key];
+            }
+          }
+
+          event.component = dom ?
             angular.element(dom).data(dom.nodeName.toLowerCase()) || null : null;
           event.initEvent(dom.nodeName.toLowerCase() + ':' + eventName, true, true);
+
           dom.dispatchEvent(event);
         },
 
@@ -45902,7 +46730,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -46264,7 +47092,7 @@ window.animit = (function(){
 
           elements.forEach(function(element) {
             // force to update rendering
-            element.getBoundingClientRect();
+            element.offsetHeight;
           });
 
           if (window.requestAnimationFrame) {
@@ -46378,7 +47206,7 @@ window.animit = (function(){
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -46530,9 +47358,9 @@ limitations under the License.
  * @param {String} [options.messageHTML]
  *   [en]Dialog content in HTML.[/en]
  *   [ja]ダイアログに表示するHTMLを指定します。[/ja]
- * @param {Array} [options.buttonLabels]
- *   [en]Labels for the buttons. Default is "Cancel" and "OK".[/en]
- *   [ja]ボタンのラベルの配列を指定します。デフォルトは ["Cancel", "OK"] です。[/ja]
+ * @param {String} [options.buttonLabel]
+ *   [en]Label for confirmation button. Default is "OK".[/en]
+ *   [ja]確認ボタンのラベルを指定します。"OK"がデフォルトです。[/ja]
  * @param {Number} [options.primaryButtonIndex]
  *   [en]Index of primary button. Default is 1.[/en]
  *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]
@@ -46610,7 +47438,7 @@ window.ons.notification = (function() {
 
     var createButton = function(i) {
       var buttonEl = angular.element('<button>').addClass('alert-dialog-button').text(buttonLabels[i]);
-      
+
       if (i == primaryButtonIndex) {
         buttonEl.addClass('alert-dialog-button--primal');
       }
@@ -46620,6 +47448,8 @@ window.ons.notification = (function() {
       }
 
       buttonEl.on('click', function() {
+        buttonEl.off('click');
+
         alertDialog.hide({
           callback: function() {
             if (promptDialog) {
@@ -46628,14 +47458,13 @@ window.ons.notification = (function() {
               callback(i);
             }
             alertDialog.destroy();
-            alertDialog = null;
-            inputEl = null;
+            alertDialog = inputEl = buttonEl = null;
           }
         });
       });
       footerEl.append(buttonEl);
-      buttonEl = null;
     };
+
     for (var i = 0; i < buttonLabels.length; i++) {
       createButton(i);
     }
@@ -46685,7 +47514,7 @@ window.ons.notification = (function() {
         title: 'Alert',
         callback: function() {}
       };
-    
+
       options = angular.extend({}, defaults, options);
       if (!options.message && !options.messageHTML) {
         throw new Error('Alert dialog must contain a message.');
@@ -46772,7 +47601,7 @@ window.ons.notification = (function() {
       if (!options.message && !options.messageHTML) {
         throw new Error('Prompt dialog must contain a message.');
       }
-      
+
       createAlertDialog(
         options.title,
         options.message || options.messageHTML,
@@ -46793,7 +47622,7 @@ window.ons.notification = (function() {
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -46958,10 +47787,27 @@ window.ons.orientation = (function() {
       },
 
       _onOrientationChange: function() {
-        // We use setImmediate because window's dimention information is not updated on "orientationchange" in some cases.
-        setImmediate(function() {
-          this.emit('change', {isPortrait: this.isPortrait()});
-        }.bind(this));
+        var isPortrait = this._isPortrait();
+
+        // Wait for the dimensions to change because
+        // of Android inconsistency.
+        var nIter = 0;
+        var interval = setInterval(function() {
+          nIter++;
+
+          var w = window.innerWidth,
+            h = window.innerHeight;
+
+          if ((isPortrait && w <= h) ||
+             (!isPortrait && w >= h)) {
+            this.emit('change', {isPortrait: isPortrait});
+            clearInterval(interval);
+          }
+          else if (nIter === 50) {
+            this.emit('change', {isPortrait: isPortrait});
+            clearInterval(interval);
+          }
+        }.bind(this), 20);
       },
 
       // Run on not mobile browser.
@@ -46978,7 +47824,7 @@ window.ons.orientation = (function() {
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -47219,7 +48065,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
