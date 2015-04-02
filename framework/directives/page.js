@@ -72,7 +72,7 @@
  * @signature getDeviceBackButtonHandler()
  * @return {Object}
  *   [en]Device back button handler.[/en]
- *   [ja][/ja]
+ *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
  * @description
  *   [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
  *   [ja]バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
