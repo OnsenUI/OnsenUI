@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  describe('navigator with sliding menu', function() {
+  describe('navigator with split view', function() {
     var path = '/test/e2e/composition/navigator+splitView.html',
       EC = protractor.ExpectedConditions;
 
@@ -16,6 +16,7 @@
 
       pushPage.click();
       browser.wait(EC.visibilityOf(popPage));
+      browser.wait(EC.invisibilityOf(pushPage));
       expect(popPage.isDisplayed()).toBeTruthy();
       expect(pushPage.isDisplayed()).not.toBeTruthy();
 
