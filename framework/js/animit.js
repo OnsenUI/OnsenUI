@@ -360,7 +360,7 @@ window.animit = (function(){
           });
 
           if (elements.length) {
-          //  elements[0].offsetHeight;
+            elements[0].offsetHeight;
           }
 
           if (window.requestAnimationFrame) {
