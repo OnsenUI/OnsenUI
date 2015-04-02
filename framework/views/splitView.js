@@ -50,12 +50,12 @@ limitations under the License.
 
         this._element.css('display', 'none');
 
-        if (scope.mainPage) {
-          this.setMainPage(scope.mainPage);
+        if (attrs.mainPage) {
+          this.setMainPage(attrs.mainPage);
         }
 
-        if (scope.secondaryPage) {
-          this.setSecondaryPage(scope.secondaryPage);
+        if (attrs.secondaryPage) {
+          this.setSecondaryPage(attrs.secondaryPage);
         }
 
         var unlock = this._doorLock.lock();
@@ -210,8 +210,8 @@ limitations under the License.
 
       _shouldCollapse: function() {
         var c = 'portrait';
-        if (typeof this._scope.collapse === 'string') {
-          c = this._scope.collapse.trim();
+        if (typeof this._attrs.collapse === 'string') {
+          c = this._attrs.collapse.trim();
         }
 
         if (c == 'portrait') {
@@ -235,18 +235,18 @@ limitations under the License.
 
       _setSize: function() {
         if (this._mode === SPLIT_MODE) {
-          if (!this._scope.mainPageWidth) {
-            this._scope.mainPageWidth = '70';
+          if (!this._attrs.mainPageWidth) {
+            this._attrs.mainPageWidth = '70';
           }
 
-          var secondarySize = 100 - this._scope.mainPageWidth.replace('%', '');
+          var secondarySize = 100 - this._attrs.mainPageWidth.replace('%', '');
           this._secondaryPage.css({
             width: secondarySize + '%',
             opacity: 1
           });
 
           this._mainPage.css({
-            width: this._scope.mainPageWidth + '%'
+            width: this._attrs.mainPageWidth + '%'
           });
 
           this._mainPage.css('left', secondarySize + '%');

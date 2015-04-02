@@ -33,19 +33,23 @@ limitations under the License.
       },
 
       _getElementSize: function() {
-        return this._element[0].getBoundingClientRect().height;
+        if (!this._currentElementSize) {
+          this._currentElementSize = this._element[0].getBoundingClientRect().height;
+        }
+
+        return this._currentElementSize;
       },
 
       _generateScrollTransform: function(scroll) {
         return 'translate3d(0px, ' + -scroll + 'px, 0px)';
       },
-      
+
       _layoutCarouselItems: function() {
         var children = this._getCarouselItemElements();
 
         var sizeAttr = this._getCarouselItemSizeAttr();
         var sizeInfo = this._decomposeSizeString(sizeAttr);
-        
+
         for (var i = 0; i < children.length; i++) {
           angular.element(children[i]).css({
             position: 'absolute',
@@ -70,7 +74,11 @@ limitations under the License.
       },
 
       _getElementSize: function() {
-        return this._element[0].getBoundingClientRect().width;
+        if (!this._currentElementSize) {
+          this._currentElementSize = this._element[0].getBoundingClientRect().width;
+        }
+
+        return this._currentElementSize;
       },
 
       _generateScrollTransform: function(scroll) {
@@ -465,6 +473,9 @@ limitations under the License.
       },
 
       _onDragEnd: function(event) {
+        this._currentElementSize = undefined;
+        this._carouselItemElements = undefined;
+
         if (!this.isSwipeable()) {
           return;
         }
@@ -592,16 +603,16 @@ limitations under the License.
        * @return {Array}
        */
       _getCarouselItemElements: function() {
-        var items = [];
-        var children = this._element.children();
-
-        for (var i = 0; i < children.length; i++) {
-          if (children[i].nodeName.toLowerCase() === 'ons-carousel-item') {
-            items.push(children[i]);
-          }
+        if (this._carouselItemElements && this._carouselItemElements.length) {
+          return this._carouselItemElements;
         }
 
-        return items;
+        var nodeList = this._element[0].querySelectorAll('ons-carousel-item');
+
+        this._carouselItemElements = [];
+        for (var i = nodeList.length; i--; this._carouselItemElements.unshift(nodeList[i]));
+
+        return this._carouselItemElements;
       },
 
       /**

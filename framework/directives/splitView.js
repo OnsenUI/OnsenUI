@@ -325,12 +325,7 @@
       restrict: 'E',
       replace: false,
       transclude: false,
-      scope: {
-        secondaryPage: '@',
-        mainPage: '@',
-        collapse: '@',
-        mainPageWidth: '@'
-      },
+      scope: true,
 
       compile: function(element, attrs) {
         var mainPage = element[0].querySelector('.main-page'),

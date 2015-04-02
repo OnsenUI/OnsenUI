@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../build/js/angular/angular.js"></script>
+    <script src="../../../build/js/onsenui.js"></script>
+    <script>
+      angular.module('myApp', ['onsen'])
+      .controller('DemoController', function($scope) {
+        $scope.checkClick = function() {
+          $scope.data = true;
+        };
+        $scope.data = false;
+      });
+    </script>
+  </head>
+  <body>
+    <ons-navigator var="navi">
+      <ons-page>
+        <ons-split-view
+          main-page="main.html"
+          secondary-page="menu.html">
+        </ons-split-view>
+      </ons-page>
+    </ons-navigator>
+
+    <ons-template id="main.html">
+      <ons-toolbar>
+        <div class="center">Main page</div>
+      </ons-toolbar>
+
+      <p style="text-align: center;">
+        <ons-button id="push-page" ng-click="navi.pushPage('page2.html')">Go to page 2</ons-button>
+      </p>
+    </ons-template>
+
+    <ons-template id="menu.html">
+      <ons-list>
+        <ons-list-item modifier="tappable">Option A</ons-list-item>
+        <ons-list-item modifier="tappable">Option B</ons-list-item>
+      </ons-list>
+    </ons-template>
+
+    <ons-template id="page2.html">
+      <ons-toolbar>
+        <div class="left"><ons-back-button>Back</ons-back-button></div>
+        <div class="center">Page 2</div>
+      </ons-toolbar>
+
+      <p style="text-align: center;">
+        <ons-button id="pop-page" ng-click="navi.popPage()">Return to page 1</ons-button>
+      </p>
+    </ons-template>
+  </body>
+</html>
