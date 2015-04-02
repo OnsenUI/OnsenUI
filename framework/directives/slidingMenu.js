@@ -86,7 +86,7 @@
 
 /**
  * @ngdoc event
- * @name postopen
+ * @name postclose
  * @description
  *   [en]Fired just after the sliding menu is closed.[/en]
  *   [ja]スライディングメニューが閉じ終わった後に発火します。[/ja]
