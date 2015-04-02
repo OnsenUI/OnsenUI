@@ -59,7 +59,7 @@
             for (var i = element[0].childNodes.length - 1; i >= 0; i--){
               var e = element[0].childNodes[i];
               if (e !== div) {
-                e.remove();
+                element[0].removeChild(e)
               }
             }
 
