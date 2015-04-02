@@ -117,10 +117,10 @@
  *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {Object} event.enterPage
  *   [en]Object of the next page.[/en]
- *   [ja][/ja]
+ *   [ja]popされて表示されるページのオブジェクト。[/ja]
  * @param {Object} event.leavePage
  *   [en]Object of the previous page.[/en]
- *   [ja][/ja]
+ *   [ja]popされて消えるページのオブジェクト。[/ja]
  */
 
 /**
@@ -211,7 +211,7 @@
  * @signature insertPage(index, pageUrl, [options])
  * @param {Number} index
  *   [en]The index where it should be inserted.[/en]
- *   [ja][/ja]
+ *   [ja]スタックに挿入する位置のインデックスを指定します。[/ja]
  * @param {String} pageUrl
  *   [en]Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>.[/en]
  *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
@@ -310,7 +310,7 @@
  * @signature getDeviceBackButtonHandler()
  * @return {Object}
  *   [en]Device back button handler.[/en]
- *   [ja][/ja]
+ *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
  * @description
  *   [en]Retrieve the back button handler for overriding the default behavior.[/en]
  *   [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]

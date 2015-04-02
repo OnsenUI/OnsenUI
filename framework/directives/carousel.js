@@ -35,10 +35,10 @@
  *   [ja]イベントが発火したCarouselオブジェクトです。[/ja]
  * @param {Number} event.activeIndex
  *   [en]Current active index.[/en]
- *   [ja][/ja]
+ *   [ja]現在アクティブになっている要素のインデックス。[/ja]
  * @param {Number} event.lastActiveIndex
  *   [en]Previous active index.[/en]
- *   [ja][/ja]
+ *   [ja]以前アクティブだった要素のインデックス。[/ja]
  */
 
 /**
@@ -69,7 +69,7 @@
  *   [ja]カルーセルが更新された時に発火します。[/ja]
  * @param {Number} event.activeIndex
  *   [en]Current active index.[/en]
- *   [ja][/ja]
+ *   [ja]現在アクティブになっている要素のインデックス。[/ja]
  * @param {String} event.direction
  *   [en]Can be one of either "up", "down", "left" or "right".[/en]
  *   [ja]オーバースクロールされた方向が得られます。"up", "down", "left", "right"のいずれかの方向が渡されます。[/ja]
@@ -407,7 +407,7 @@
  * @signature once(eventName, listener)
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
- *  [ja][/ja]
+ *  [ja]一度だけ呼び出されるイベントリスナを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
  *   [ja]イベント名を指定します。[/ja]

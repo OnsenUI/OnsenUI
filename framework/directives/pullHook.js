@@ -9,7 +9,7 @@
  * @codepen WbJogM
  * @guide UsingPullHook 
  *   [en]How to use Pull Hook[/en]
- *   [ja][/ja]
+ *   [ja]プルフックを使う[/ja]
  * @example
  * <script>
  *   ons.bootstrap()
@@ -126,7 +126,7 @@
  * @signature setDisabled(disabled)
  * @param {Boolean} disabled
  *   [en]If true the pull hook will be disabled.[/en]
- *   [ja][/ja]
+ *   [ja]trueを指定すると、プルフックがdisabled状態になります。[/ja]
  * @description
  *   [en]Disable or enable the component.[/en]
  *   [ja]disabled状態にするかどうかを設定できます。[/ja]
@@ -137,7 +137,7 @@
  * @signature isDisabled()
  * @return {Boolean}
  *   [en]true if the pull hook is disabled.[/en]
- *   [ja][/ja]
+ *   [ja]プルフックがdisabled状態の場合、trueを返します。[/ja]
  * @description
  *   [en]Returns whether the component is disabled or enabled.[/en]
  *   [ja]dsiabled状態になっているかを得ることが出来ます。[/ja]
@@ -148,7 +148,7 @@
  * @signature setHeight(height)
  * @param {Number} height
  *   [en]Desired height.[/en]
- *   [ja][/ja]
+ *   [ja]要素の高さを指定します。[/ja]
  * @description
  *   [en]Specify the height.[/en]
  *   [ja]高さを指定できます。[/ja]
@@ -159,7 +159,7 @@
  * @signature setThresholdHeight(thresholdHeight)
  * @param {Number} thresholdHeight
  *   [en]Desired threshold height.[/en]
- *   [ja][/ja]
+ *   [ja]プルフックのアクションを起こす閾値となる高さを指定します。[/ja]
  * @description
  *   [en]Specify the threshold height.[/en]
  *   [ja]閾値となる高さを指定できます。[/ja]
