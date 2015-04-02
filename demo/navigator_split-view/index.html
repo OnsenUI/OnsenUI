@@ -27,6 +27,8 @@
         <div class="center">Navigator</div>
       </ons-toolbar>
 
+      <p>Nav: {{myNaviagator}}</p>
+
       <div style="text-align: center">
         <br>
         <ons-button modifier="light"
@@ -42,6 +44,7 @@
       <ons-list>
         <ons-list-item modifier="chevron" ng-click="myNavigator.pushPage('page1.html');">FooBar</ons-list-item>
       </ons-list>
+      <p>Nav: {{ myNavigator }}</p>
     </ons-page>
   </ons-template>
 
@@ -57,7 +60,7 @@
         <ons-button modifier="light"
           ng-click="myNavigator.pushPage('page1.html', {title: 'Page'})">
           Push Page
-          </ons-button>
+        </ons-button>
 
         <ons-button modifier="light"
           ng-click="myNavigator.popPage()">
