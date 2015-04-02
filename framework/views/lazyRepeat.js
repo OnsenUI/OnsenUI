@@ -212,6 +212,11 @@ limitations under the License.
           topPosition += this._itemHeightSum[startIndex - 1];
         }
 
+        if (cnt < this._itemHeightSum.length){
+          this._itemHeightSum = new Array(cnt)
+          this._maxIndex = cnt - 1
+        }
+
         var items = [];
         for (var i = startIndex; i < cnt && topPosition < 4 * window.innerHeight; i++) {
           var h = this._getItemHeight();
@@ -266,18 +271,18 @@ limitations under the License.
       },
 
       _addEventListeners: function() {
-        this._bindedOnChange = this._onChange.bind(this); 
-        $document[0].addEventListener('scroll', this._bindedOnChange, true);
-        $document[0].addEventListener('resize', this._bindedOnChange, true);
+        this._boundOnChange = this._onChange.bind(this);
+        $document[0].addEventListener('scroll', this._boundOnChange, true);
+        $document[0].addEventListener('resize', this._boundOnChange, true);
       },
 
       _removeEventListeners: function() {
-        $document[0].removeEventListener('scroll', this._bindedOnChange, true);
-        $document[0].removeEventListener('resize', this._bindedOnChange, true);
+        $document[0].removeEventListener('scroll', this._boundOnChange, true);
+        $document[0].removeEventListener('resize', this._boundOnChange, true);
       },
-      
+
       _destroy: function() {
-        this._removeEventListeners(); 
+        this._removeEventListeners();
         this._removeAllElements();
         this._parentElement = this._renderedElements = this._element = this._scope = this._attrs = null;
       }
