@@ -55,6 +55,10 @@ limitations under the License.
           display: 'none',
           zIndex: 2
         });
+
+        // Fix for transparent menu page on iOS8.
+        menuPage.css('-webkit-transform', 'translate3d(0px, 0px, 0px)');
+
         mainPage.css({zIndex: 1});
 
         if (this._isRight) {

@@ -32,6 +32,7 @@ v1.3.0-beta
  * ons-navigator: Added `animation` option to `popPage()`.
  * ons-navigator: Added `replacePage()` method.
  * ons-lazy-repeat: Improved behavior when items are removed.
+ * ons-sliding-menu: Fixed [#577](https://github.com/OnsenUI/OnsenUI/issues/577).
 
 v1.2.2
 ----

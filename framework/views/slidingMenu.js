@@ -176,7 +176,6 @@ limitations under the License.
         this._menuPage = angular.element(element[0].querySelector('.onsen-sliding-menu__menu'));
         this._mainPage = angular.element(element[0].querySelector('.onsen-sliding-menu__main'));
 
-
         this._doorLock = new DoorLock();
 
         this._isRightMenu = attrs.side === 'right';
