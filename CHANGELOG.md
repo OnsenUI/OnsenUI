@@ -31,6 +31,7 @@ v1.3.0-beta
  * ons-split-view: Fixed [#552](https://github.com/OnsenUI/OnsenUI/issues/552).
  * ons-navigator: Added `animation` option to `popPage()`.
  * ons-navigator: Added `replacePage()` method.
+ * ons-lazy-repeat: Improved behavior when items are removed.
 
 v1.2.2
 ----
