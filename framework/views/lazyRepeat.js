@@ -213,8 +213,8 @@ limitations under the License.
         }
 
         if (cnt < this._itemHeightSum.length){
-          this._itemHeightSum = new Array(cnt)
-          this._maxIndex = cnt - 1
+          this._itemHeightSum = new Array(cnt);
+          this._maxIndex = cnt - 1;
         }
 
         var items = [];
