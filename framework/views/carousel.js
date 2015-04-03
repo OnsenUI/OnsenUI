@@ -610,7 +610,9 @@ limitations under the License.
         var nodeList = this._element[0].querySelectorAll('ons-carousel-item');
 
         this._carouselItemElements = [];
-        for (var i = nodeList.length; i--; this._carouselItemElements.unshift(nodeList[i]));
+        for (var i = nodeList.length; i--; ) {
+          this._carouselItemElements.unshift(nodeList[i]);
+        }
 
         return this._carouselItemElements;
       },
