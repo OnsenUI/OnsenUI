@@ -10,7 +10,7 @@ ons-row {
   box-sizing: border-box;
 }
 
-ons-row[vertical-align="top"] {
+ons-row[vertical-align="top"], ons-row[align="top"] {
   -webkit-box-align: start;
   box-align: start;
   -ms-flex-align: start;
@@ -19,7 +19,7 @@ ons-row[vertical-align="top"] {
   align-items: flex-start;
 }
 
-ons-row[vertical-align="bottom"] {
+ons-row[vertical-align="bottom"], ons-row[align="bottom"] {
   -webkit-box-align: end;
   box-align: end;
   -ms-flex-align: end;
@@ -28,7 +28,7 @@ ons-row[vertical-align="bottom"] {
   align-items: flex-end;
 }
 
-ons-row[vertical-align="center"] {
+ons-row[vertical-align="center"], ons-row[align="center"] {
   -webkit-box-align: center;
   box-align: center;
   -ms-flex-align: center;
@@ -54,20 +54,20 @@ ons-col {
   box-sizing: border-box;
 }
 
-ons-col[vertical-align="top"] {
+ons-col[vertical-align="top"], ons-col[align="top"] {
   -webkit-align-self: flex-start;
   -moz-align-self: flex-start;
   -ms-flex-item-align: start;
   align-self: flex-start;
 }
 
-ons-col[vertical-align="bottom"] {
+ons-col[vertical-align="bottom"], ons-col[align="bottom"] {
   -webkit-align-self: flex-end;
   -moz-align-self: flex-end;
   -ms-flex-item-align: end;
   align-self: flex-end; }
 
-ons-col[vertical-align="center"] {
+ons-col[vertical-align="center"], ons-col[align="center"] {
   -webkit-align-self: center;
   -moz-align-self: center;
   -ms-flex-item-align: center;
