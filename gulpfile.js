@@ -66,6 +66,7 @@ gulp.task('jshint', function() {
     'framework/js/*.js',
     'framework/directives/*.js',
     'framework/services/*.js',
+    'framework/elements/*.js',
     'framework/views/*.js'
   ])
     .pipe($.cached('js'))
@@ -130,6 +131,7 @@ gulp.task('prepare', ['html2js'], function() {
     gulp.src([
       'framework/lib/winstore-jscompat.js',
       'framework/lib/*.js',
+      'framework/elements/*.js',
       'framework/directives/templates.js',
       'framework/js/doorlock.js',
       'framework/js/onsen.js',
@@ -151,6 +153,7 @@ gulp.task('prepare', ['html2js'], function() {
       'framework/lib/winstore-jscompat.js',
       'framework/lib/angular/angular.js',
       'framework/lib/*.js',
+      'framework/elements/*.js',
       'framework/directives/templates.js',
       'framework/js/doorlock.js',
       'framework/js/onsen.js',

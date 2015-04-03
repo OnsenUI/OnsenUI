@@ -1,13 +1,4 @@
-/**
- * Grid
- * --------------------------------------------------
- * Using flexbox for the grid, inspired by Philip Walton:
- * http://philipwalton.github.io/solved-by-flexbox/demos/grids/
- * By default each .col within a .row will evenly take up
- * available width, and the height of each .col with take
- * up the height of the tallest .col in the same .row.
- */
-.row {
+ons-row {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -19,11 +10,39 @@
   box-sizing: border-box;
 }
 
-.row + .row {
+ons-row[vertical-align="top"] {
+  -webkit-box-align: start;
+  box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  align-items: flex-start;
+}
+
+ons-row[vertical-align="bottom"] {
+  -webkit-box-align: end;
+  box-align: end;
+  -ms-flex-align: end;
+  -webkit-align-items: flex-end;
+  -moz-align-items: flex-end;
+  align-items: flex-end;
+}
+
+ons-row[vertical-align="center"] {
+  -webkit-box-align: center;
+  box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  text-align: inherit;
+}
+
+ons-row + ons-row {
   padding-top: 0;
 }
 
-.col {
+ons-col {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   -moz-box-flex: 1;
@@ -35,95 +54,23 @@
   box-sizing: border-box;
 }
 
-/* Vertically Align Columns */
-/* .row-* vertically aligns every .col in the .row */
-.row-top {
-  -webkit-box-align: start;
-  box-align: start;
-  -ms-flex-align: start;
-  -webkit-align-items: flex-start;
-  -moz-align-items: flex-start;
-  align-items: flex-start;
-}
-
-.row-bottom {
-  -webkit-box-align: end;
-  box-align: end;
-  -ms-flex-align: end;
-  -webkit-align-items: flex-end;
-  -moz-align-items: flex-end;
-  align-items: flex-end;
-}
-
-.row-center {
-  -webkit-box-align: center;
-  box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  align-items: center;
-  text-align: inherit;
-}
-
-/* .col-* vertically aligns an individual .col */
-.col-top {
+ons-col[vertical-align="top"] {
   -webkit-align-self: flex-start;
   -moz-align-self: flex-start;
   -ms-flex-item-align: start;
-  align-self: flex-start; }
+  align-self: flex-start;
+}
 
-.col-bottom {
+ons-col[vertical-align="bottom"] {
   -webkit-align-self: flex-end;
   -moz-align-self: flex-end;
   -ms-flex-item-align: end;
   align-self: flex-end; }
 
-.col-center {
+ons-col[vertical-align="center"] {
   -webkit-align-self: center;
   -moz-align-self: center;
   -ms-flex-item-align: center;
   text-align: inherit;
 }
 
-/* Column Offsets */
-.col-offset-10 {
-  margin-left: 10%; }
-
-.col-offset-20 {
-  margin-left: 20%; }
-
-.col-offset-25 {
-  margin-left: 25%; }
-
-.col-offset-33, .col-offset-34 {
-  margin-left: 33.3333%; }
-
-.col-offset-50 {
-  margin-left: 50%; }
-
-.col-offset-66, .col-offset-67 {
-  margin-left: 66.6666%; }
-
-.col-offset-75 {
-  margin-left: 75%; }
-
-.col-offset-80 {
-  margin-left: 80%; }
-
-.col-offset-90 {
-  margin-left: 90%; }
-
-.row--fit > .col {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-  -moz-box-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-}
-.row--100 > .col {
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 100%;
-  -moz-box-flex: 0;
-  -ms-flex: 0 0 100%;
-  flex: 0 0 100%;
-}
