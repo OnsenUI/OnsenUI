@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../build/js/angular/angular.js"></script>
+    <script src="../../../build/js/onsenui.js"></script>
+    <script>
+      angular.module('myApp', ['onsen'])
+      .controller('TestController', function($scope) {
+        ons.createDialog('dialog.html', {parentScope: $scope})
+        .then(function(dialog) {
+          dialog.show();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <ons-navigator var="navi">
+      <p style="text-align: center;">
+        <ons-button id="push-page" ng-click="navi.pushPage('page2.html')">Go to page 2</ons-button>
+      </p>
+    </ons-navigator>
+
+    <ons-template id="page2.html">
+      <ons-page ng-controller="TestController">
+        <p style="text-align: center;">
+          <ons-button id="pop-page" ng-click="navi.popPage()">Go back</ons-button>
+        </p>
+      </ons-page>
+    </ons-template>
+
+    <ons-template id="dialog.html">
+      <ons-dialog var="dialog">
+        <p style="text-align: center;">
+          <ons-button id='hide-dialog' ng-click="dialog.hide()">Hide</ons-button>
+        </p>
+      </ons-dialog>
+    </ons-template>
+  </body>
+</html>
