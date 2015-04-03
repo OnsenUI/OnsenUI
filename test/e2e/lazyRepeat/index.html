@@ -11,15 +11,21 @@
       ons.bootstrap()
 
       .controller('TestController', function($scope) {
+        $scope.items = [];
+
+        for (var i = 1; i <= 1000; i++) {
+          $scope.items.push(i);
+        }
+
         $scope.Delegate = {
           configureItemScope: function(index, scope) {
-            scope.number = index + 1;
+            scope.number = $scope.items[index];
           },
           calculateItemHeight: function() {
             return 45;
           },
           countItems: function() {
-            return 100000;
+            return $scope.items.length;
           }
         };
 
@@ -37,7 +43,10 @@
       </ons-toolbar>
       <ons-list>
         <ons-list-item modifier="tappable" ons-lazy-repeat="Delegate">
-          <div ng-click="click($event)" id="item{{number}}">Item #{{number}}</div>
+          <div ng-click="click($event)" id="item-{{number}}">
+            <span id="item-{{number}}-text">Item #{{number}}</span>
+            <ons-button id="remove-{{ number }}" ng-click="items.splice($index, 1)">Remove</ons-button>
+          </div>
         </ons-list-item>
       </ons-list>
     </ons-page>
