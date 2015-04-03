@@ -35,6 +35,12 @@ limitations under the License.
         this._linker = linker;
 
         this._parentElement = element.parent();
+        this._pageContent = this._findPageContent();
+
+        if (!this._pageContent) {
+          throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> object.');
+        }
+
         this._itemHeightSum = [];
         this._maxIndex = 0;
 
@@ -270,14 +276,31 @@ limitations under the License.
         }.bind(this));
       },
 
+      _findPageContent: function() {
+        var e = this._element[0];
+
+        while(e.parentNode) {
+          e = e.parentNode;
+
+          if (e.className) {
+            if (e.className.split(/\s+/).indexOf('page__content') >= 0) {
+              break;
+            }
+          }
+        }
+
+        return e;
+      },
+
       _addEventListeners: function() {
         this._boundOnChange = this._onChange.bind(this);
-        $document[0].addEventListener('scroll', this._boundOnChange, true);
+
+        this._pageContent.addEventListener('scroll', this._boundOnChange, true);
         $document[0].addEventListener('resize', this._boundOnChange, true);
       },
 
       _removeEventListeners: function() {
-        $document[0].removeEventListener('scroll', this._boundOnChange, true);
+        this._pageContent.removeEventListener('scroll', this._boundOnChange, true);
         $document[0].removeEventListener('resize', this._boundOnChange, true);
       },
 
