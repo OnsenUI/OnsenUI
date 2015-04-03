@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v1.3.0-beta
+v1.3.0
 ----
  * ons-sliding-menu: Fixed [#544](https://github.com/OnsenUI/OnsenUI/issues/544).
  * ons-sliding-menu: Fixed [#464](https://github.com/OnsenUI/OnsenUI/issues/464).
@@ -33,6 +33,7 @@ v1.3.0-beta
  * ons-navigator: Added `replacePage()` method.
  * ons-lazy-repeat: Improved behavior when items are removed.
  * ons-sliding-menu: Fixed [#577](https://github.com/OnsenUI/OnsenUI/issues/577).
+ * core: Windows Universal (Windows Phone 8.1, Windows 8.1 and IE 11)  partial support.
 
 v1.2.2
 ----

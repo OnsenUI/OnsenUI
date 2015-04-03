@@ -1,4 +1,4 @@
-/*! onsenui - v1.3.0-beta - 2015-04-02 */
+/*! onsenui - v1.3.0 - 2015-04-03 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -31069,10 +31069,6 @@ window.ons = (function(){
         throw new Error('Invalid initialization state.');
       }
 
-      if (document.querySelector('ons-alert-dialog')) {
-        console.warn('Invalid usage of <ons-alert-dialog>.');
-      }
-
       $rootScope.$on('$ons-ready', unlockOnsenUI);
     }]);
   }
@@ -32776,7 +32772,9 @@ limitations under the License.
         var nodeList = this._element[0].querySelectorAll('ons-carousel-item');
 
         this._carouselItemElements = [];
-        for (var i = nodeList.length; i--; this._carouselItemElements.unshift(nodeList[i]));
+        for (var i = nodeList.length; i--; ) {
+          this._carouselItemElements.unshift(nodeList[i]);
+        }
 
         return this._carouselItemElements;
       },
@@ -33127,8 +33125,6 @@ limitations under the License.
         this._element.remove();
         this._deviceBackButtonHandler.destroy();
         this._mask.off();
-
-        this._scope.$destroy();
 
         this._deviceBackButtonHandler = this._scope = this._attrs = this._element = this._dialog = this._mask = null;
       },
@@ -34395,6 +34391,12 @@ limitations under the License.
         this._linker = linker;
 
         this._parentElement = element.parent();
+        this._pageContent = this._findPageContent();
+
+        if (!this._pageContent) {
+          throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> object.');
+        }
+
         this._itemHeightSum = [];
         this._maxIndex = 0;
 
@@ -34572,6 +34574,11 @@ limitations under the License.
           topPosition += this._itemHeightSum[startIndex - 1];
         }
 
+        if (cnt < this._itemHeightSum.length){
+          this._itemHeightSum = new Array(cnt);
+          this._maxIndex = cnt - 1;
+        }
+
         var items = [];
         for (var i = startIndex; i < cnt && topPosition < 4 * window.innerHeight; i++) {
           var h = this._getItemHeight();
@@ -34625,19 +34632,36 @@ limitations under the License.
         }.bind(this));
       },
 
+      _findPageContent: function() {
+        var e = this._element[0];
+
+        while(e.parentNode) {
+          e = e.parentNode;
+
+          if (e.className) {
+            if (e.className.split(/\s+/).indexOf('page__content') >= 0) {
+              break;
+            }
+          }
+        }
+
+        return e;
+      },
+
       _addEventListeners: function() {
-        this._bindedOnChange = this._onChange.bind(this); 
-        $document[0].addEventListener('scroll', this._bindedOnChange, true);
-        $document[0].addEventListener('resize', this._bindedOnChange, true);
+        this._boundOnChange = this._onChange.bind(this);
+
+        this._pageContent.addEventListener('scroll', this._boundOnChange, true);
+        $document[0].addEventListener('resize', this._boundOnChange, true);
       },
 
       _removeEventListeners: function() {
-        $document[0].removeEventListener('scroll', this._bindedOnChange, true);
-        $document[0].removeEventListener('resize', this._bindedOnChange, true);
+        this._pageContent.removeEventListener('scroll', this._boundOnChange, true);
+        $document[0].removeEventListener('resize', this._boundOnChange, true);
       },
-      
+
       _destroy: function() {
-        this._removeEventListeners(); 
+        this._removeEventListeners();
         this._removeAllElements();
         this._parentElement = this._renderedElements = this._element = this._scope = this._attrs = null;
       }
@@ -35069,7 +35093,7 @@ limitations under the License.
 
       _onDeviceBackButton: function(event) {
         if (this.pages.length > 1) {
-          this.popPage();
+          this._scope.$evalAsync(this.popPage.bind(this));
         } else {
           event.callParentHandler();
         }
@@ -35689,6 +35713,10 @@ limitations under the License.
           display: 'none',
           zIndex: 2
         });
+
+        // Fix for transparent menu page on iOS8.
+        menuPage.css('-webkit-transform', 'translate3d(0px, 0px, 0px)');
+
         mainPage.css({zIndex: 1});
 
         if (this._isRight) {
@@ -37901,7 +37929,6 @@ limitations under the License.
 
         this._menuPage = angular.element(element[0].querySelector('.onsen-sliding-menu__menu'));
         this._mainPage = angular.element(element[0].querySelector('.onsen-sliding-menu__main'));
-
 
         this._doorLock = new DoorLock();
 
