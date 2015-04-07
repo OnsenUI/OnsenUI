@@ -15,10 +15,4 @@ limitations under the License.
 
 */
 
-(function() {
-  'use strict';
-
-  if (!window.OnsRowElement) {
-    window.OnsRowElement = document.registerElement('ons-row');
-  }
-})();
+window.OnsRowElement = window.OnsRowElement ? window.OnsRowElement : document.registerElement('ons-row');
