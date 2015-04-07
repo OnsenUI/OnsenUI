@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../build/js/angular/angular.js"></script>
+    <script src="../../../build/js/onsenui.js"></script>
+    <script>
+      ons.bootstrap();
+    </script>
+
+  </head>
+  <body>
+
+    <ons-sliding-menu
+      main-page="page.html" menu-page="menu.html" side="left" var="menu"
+      animation-options="{duration: 1, delay: 1, timing: 'ease-in'}">
+    </ons-sliding-menu>
+
+    <script type="text/ons-template" id="menu.html">
+    </script>
+    <script type="text/ons-template" id="page.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="left">
+            <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+      </ons-page>
+    </script>
+  </body>
+</html>
