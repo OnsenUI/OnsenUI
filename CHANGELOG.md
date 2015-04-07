@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v1.3.1-dev
+----
+ * core: Added more customizable animations.
+
 v1.3.0
 ----
  * ons-sliding-menu: Fixed [#544](https://github.com/OnsenUI/OnsenUI/issues/544).
