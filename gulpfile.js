@@ -27,11 +27,13 @@ var runSequence = require('run-sequence');
 var dateformat = require('dateformat');
 var browserSync = require('browser-sync');
 var gulpIf = require('gulp-if');
+var babel = require('gulp-babel');
 var dgeni = require('dgeni');
 var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
 var os = require('os');
 var fs = require('fs');
 var argv = require('yargs').argv;
+var filter = require('gulp-filter');
 
 ////////////////////////////////////////
 // browser-sync
@@ -125,22 +127,28 @@ gulp.task('minify-js', function() {
 // prepare
 ////////////////////////////////////////
 gulp.task('prepare', ['html2js'], function() {
+
+  var onlyES6;
+
   return merge(
 
     // onsenui.js
     gulp.src([
       'framework/lib/winstore-jscompat.js',
-      'framework/lib/*.js',
-      'framework/elements/*.js',
+      'framework/lib/*.{es6,js}',
+      'framework/elements/*.{es6,js}',
       'framework/directives/templates.js',
       'framework/js/doorlock.js',
       'framework/js/onsen.js',
-      'framework/views/*.js',
-      'framework/directives/*.js',
-      'framework/services/*.js',
-      'framework/js/*.js'
+      'framework/views/*.{es6,js}',
+      'framework/directives/*.{es6,js}',
+      'framework/services/*.{es6,js}',
+      'framework/js/*.{es6,js}'
     ])
       .pipe($.plumber())
+      .pipe(onlyES6 = filter('*.es6'))
+      .pipe(babel({modules: 'ignore'}))
+      .pipe(onlyES6.restore())
       .pipe($.ngAnnotate({add: true, single_quotes: true}))
       .pipe($.concat('onsenui.js'))            
       .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
@@ -152,17 +160,20 @@ gulp.task('prepare', ['html2js'], function() {
     gulp.src([
       'framework/lib/winstore-jscompat.js',
       'framework/lib/angular/angular.js',
-      'framework/lib/*.js',
-      'framework/elements/*.js',
+      'framework/lib/*.{es6,js}',
+      'framework/elements/*.{es6,js}',
       'framework/directives/templates.js',
       'framework/js/doorlock.js',
       'framework/js/onsen.js',
-      'framework/views/*.js',
-      'framework/directives/*.js',
-      'framework/services/*.js',
-      'framework/js/*.js'
+      'framework/views/*.{es6,js}',
+      'framework/directives/*.{es6,js}',
+      'framework/services/*.{es6,js}',
+      'framework/js/*.{es6,js}'
     ])
       .pipe($.plumber())
+      .pipe(onlyES6 = filter('*.es6'))
+      .pipe(babel({modules: 'ignore'}))
+      .pipe(onlyES6.restore())
       .pipe($.ngAnnotate({add: true, single_quotes: true}))
       .pipe($.concat('onsenui_all.js'))
       .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))

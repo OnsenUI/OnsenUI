@@ -1,10 +1,8 @@
-(function() {
+{
   'use strict';
 
   // fastclick
-  window.addEventListener('load', function() {
-    FastClick.attach(document.body);
-  }, false);
+  window.addEventListener('load', () => FastClick.attach(document.body), false);
 
   // viewport.js
   new Viewport().setup();
@@ -20,4 +18,4 @@
   if (window.jQuery && angular.element === window.jQuery) {
     console.warn('Onsen UI require jqLite. Load jQuery after loading AngularJS to fix this error. jQuery may break Onsen UI behavior.');
   }
-})();
+};
