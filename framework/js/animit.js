@@ -359,10 +359,9 @@ window.animit = (function(){
             });
           });
 
-          elements.forEach(function(element) {
-            // force to update rendering
-            element.offsetHeight;
-          });
+          if (elements.length) {
+            elements[0].offsetHeight;
+          }
 
           if (window.requestAnimationFrame) {
             requestAnimationFrame(callback);

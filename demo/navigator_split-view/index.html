@@ -6,20 +6,20 @@
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-  <script src="../../build/js/angular/angular.js"></script>    
-  <script src="../../build/js/onsenui.js"></script>    
-  <script src="../app.js"></script>  
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../app.js"></script>
 
 </head>
 
-<body>    
+<body>
 
   <ons-navigator var="myNavigator">
     <ons-page>
     <ons-split-view main-page="main.html" secondary-page="menu.html" main-page-width="70%">
     </ons-split-view>
     </ons-page>
-  </ons-navigator>  
+  </ons-navigator>
 
   <ons-template id="main.html">
     <ons-page>
@@ -57,7 +57,7 @@
         <ons-button modifier="light"
           ng-click="myNavigator.pushPage('page1.html', {title: 'Page'})">
           Push Page
-          </ons-button>
+        </ons-button>
 
         <ons-button modifier="light"
           ng-click="myNavigator.popPage()">
@@ -66,6 +66,6 @@
       </div>
     </ons-page>
   </ons-template>
-  
+
 </body>
 </html>

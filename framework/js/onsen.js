@@ -263,10 +263,6 @@ window.ons = (function(){
         throw new Error('Invalid initialization state.');
       }
 
-      if (document.querySelector('ons-alert-dialog')) {
-        console.warn('Invalid usage of <ons-alert-dialog>.');
-      }
-
       $rootScope.$on('$ons-ready', unlockOnsenUI);
     });
   }

@@ -162,8 +162,6 @@ limitations under the License.
         this._deviceBackButtonHandler.destroy();
         this._mask.off();
 
-        this._scope.$destroy();
-
         this._deviceBackButtonHandler = this._scope = this._attrs = this._element = this._dialog = this._mask = null;
       },
 

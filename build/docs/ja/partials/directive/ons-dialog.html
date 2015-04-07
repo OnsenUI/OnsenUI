@@ -372,12 +372,12 @@ componentCategory: dialog
         
         <tr>
           <td><a href="#method-once">once(eventName, listener)</a></td>
-          <td>一度だけ呼び出されるイベントリスナーを追加します。</td>
+          <td>一度だけ呼び出されるイベントリスナを追加します。</td>
         </tr>
         
         <tr>
           <td><a href="#method-off">off(eventName, [listener])</a></td>
-          <td>イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合、そのイベントに紐付けられている全てのイベントリスナーが削除されます。</td>
+          <td>イベントリスナーを削除します。もしイベントリスナーが指定されなかった場合には、そのイベントに紐付いているイベントリスナーが全て削除されます。</td>
         </tr>
         
       </tbody>
@@ -576,7 +576,7 @@ componentCategory: dialog
     <p>バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。</p>
 
     
-    <p>返り値: </p>
+    <p>返り値: デバイスのバックボタンハンドラを返します。</p>
     
 
     
@@ -631,7 +631,7 @@ componentCategory: dialog
     <p>このダイアログがキャンセル可能かどうかを返します。</p>
 
     
-    <p>返り値: </p>
+    <p>返り値: ダイアログがキャンセル可能な場合trueを返します。</p>
     
 
     
@@ -667,7 +667,7 @@ componentCategory: dialog
         <tr>
           <td><span class="parameter-name">disabled</span></td>
           <td class="value-type">Boolean</td>
-          <td></td>
+          <td>trueを指定するとダイアログをdisabled状態になります。</td>
         </tr>
         
       </tbody>
@@ -686,7 +686,7 @@ componentCategory: dialog
     <p>このダイアログがdisabled状態かどうかを返します。</p>
 
     
-    <p>返り値: </p>
+    <p>返り値: ダイアログがdisabled状態の場合trueを返します。</p>
     
 
     
@@ -722,13 +722,13 @@ componentCategory: dialog
         <tr>
           <td><span class="parameter-name">eventName</span></td>
           <td class="value-type">String</td>
-          <td></td>
+          <td>イベント名を指定します。</td>
         </tr>
         
         <tr>
           <td><span class="parameter-name">listener</span></td>
           <td class="value-type">Function</td>
-          <td></td>
+          <td>イベントが発火した際に呼び出される関数オブジェクトを指定します。</td>
         </tr>
         
       </tbody>
@@ -744,7 +744,7 @@ componentCategory: dialog
       <a href="#method-once" class="reference-loop-anchor">#</a>
     </h4>
 
-    <p>一度だけ呼び出されるイベントリスナーを追加します。</p>
+    <p>一度だけ呼び出されるイベントリスナを追加します。</p>
 
     
 
@@ -767,13 +767,13 @@ componentCategory: dialog
         <tr>
           <td><span class="parameter-name">eventName</span></td>
           <td class="value-type">String</td>
-          <td></td>
+          <td>イベント名を指定します。</td>
         </tr>
         
         <tr>
           <td><span class="parameter-name">listener</span></td>
           <td class="value-type">Function</td>
-          <td></td>
+          <td>イベントが発火した際に呼び出される関数オブジェクトを指定します。</td>
         </tr>
         
       </tbody>
@@ -789,7 +789,7 @@ componentCategory: dialog
       <a href="#method-off" class="reference-loop-anchor">#</a>
     </h4>
 
-    <p>イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合、そのイベントに紐付けられている全てのイベントリスナーが削除されます。</p>
+    <p>イベントリスナーを削除します。もしイベントリスナーが指定されなかった場合には、そのイベントに紐付いているイベントリスナーが全て削除されます。</p>
 
     
 
@@ -812,13 +812,13 @@ componentCategory: dialog
         <tr>
           <td><span class="parameter-name">eventName</span></td>
           <td class="value-type">String</td>
-          <td></td>
+          <td>イベント名を指定します。</td>
         </tr>
         
         <tr>
           <td><span class="parameter-name">listener</span></td>
           <td class="value-type">Function</td>
-          <td></td>
+          <td>イベントが発火した際に呼び出される関数オブジェクトを指定します。</td>
         </tr>
         
       </tbody>

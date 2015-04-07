@@ -166,7 +166,7 @@ limitations under the License.
 
       _onDeviceBackButton: function(event) {
         if (this.pages.length > 1) {
-          this.popPage();
+          this._scope.$evalAsync(this.popPage.bind(this));
         } else {
           event.callParentHandler();
         }

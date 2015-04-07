@@ -258,7 +258,7 @@
  * @signature getDeviceBackButtonHandler()
  * @return {Object}
  *   [en]Device back button handler.[/en]
- *   [ja][/ja]
+ *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
  * @description
  *   [en]Retrieve the back button handler for overriding the default behavior.[/en]
  *   [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
@@ -283,7 +283,7 @@
  *   [ja]このダイアログがキャンセル可能かどうかを返します。[/ja]
  * @return {Boolean}
  *   [en]true if the dialog is cancelable.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログがキャンセル可能な場合trueを返します。[/ja]
  */
 
 /**
@@ -294,7 +294,7 @@
  *   [ja]このダイアログをdisabled状態にするかどうかを設定します。[/ja]
  * @param {Boolean} disabled
  *   [en]If true the dialog will be disabled.[/en]
- *   [ja][/ja]
+ *   [ja]trueを指定するとダイアログをdisabled状態になります。[/ja]
  */
 
 /**
@@ -305,7 +305,7 @@
  *   [ja]このダイアログがdisabled状態かどうかを返します。[/ja]
  * @return {Boolean}
  *   [en]true if the dialog is disabled.[/en]
- *   [ja][/ja]
+ *   [ja]ダイアログがdisabled状態の場合trueを返します。[/ja]
  */
 
 /**
@@ -316,10 +316,10 @@
  *   [ja]イベントリスナーを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 /**
@@ -327,13 +327,13 @@
  * @signature once(eventName, listener)
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
- *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
+ *  [ja]一度だけ呼び出されるイベントリスナを追加します。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 /**
@@ -341,13 +341,13 @@
  * @signature off(eventName, [listener])
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
- *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合、そのイベントに紐付けられている全てのイベントリスナーが削除されます。[/ja]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーが指定されなかった場合には、そのイベントに紐付いているイベントリスナーが全て削除されます。[/ja]
  * @param {String} eventName
  *   [en]Name of the event.[/en]
- *   [ja][/ja]
+ *   [ja]イベント名を指定します。[/ja]
  * @param {Function} listener
  *   [en]Function to execute when the event is triggered.[/en]
- *   [ja][/ja]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 (function() {

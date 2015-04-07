@@ -19,7 +19,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('LazyRepeatView', function($onsen, $document) {
+  module.factory('LazyRepeatView', function($onsen, $document, $compile) {
 
     var LazyRepeatView = Class.extend({
 
@@ -35,6 +35,12 @@ limitations under the License.
         this._linker = linker;
 
         this._parentElement = element.parent();
+        this._pageContent = this._findPageContent();
+
+        if (!this._pageContent) {
+          throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> object.');
+        }
+
         this._itemHeightSum = [];
         this._maxIndex = 0;
 
@@ -44,11 +50,7 @@ limitations under the License.
         this._renderedElements = {};
         this._addEventListeners();
 
-        this._scope.$watch(
-          function() {
-            this._render();
-          }.bind(this)
-        );
+        this._scope.$watch(this._onChange.bind(this));
 
         this._scope.$on('$destroy', this._destroy.bind(this));
         this._onChange();
@@ -109,16 +111,6 @@ limitations under the License.
           if (this._delegate.configureItemScope) {
             this._delegate.configureItemScope(item.index, currentItem.scope);
           }
-          else if (this._delegate.createItemContent) {
-            var oldContent = currentItem.element.children(),
-              newContent = angular.element(this._delegate.createItemContent(item.index, oldContent[0]));
-
-            if (newContent.html() !== oldContent.html()) {
-              currentItem.element
-                .append(newContent);
-              oldContent.remove();
-            }
-          }
 
           return;
         }
@@ -132,6 +124,7 @@ limitations under the License.
           }
           else if (this._delegate.createItemContent) {
             clone.append(this._delegate.createItemContent(item.index));
+            $compile(clone[0].firstChild)(childScope);
           }
 
           this._parentElement.append(clone);
@@ -225,6 +218,11 @@ limitations under the License.
           topPosition += this._itemHeightSum[startIndex - 1];
         }
 
+        if (cnt < this._itemHeightSum.length){
+          this._itemHeightSum = new Array(cnt);
+          this._maxIndex = cnt - 1;
+        }
+
         var items = [];
         for (var i = startIndex; i < cnt && topPosition < 4 * window.innerHeight; i++) {
           var h = this._getItemHeight();
@@ -278,19 +276,36 @@ limitations under the License.
         }.bind(this));
       },
 
+      _findPageContent: function() {
+        var e = this._element[0];
+
+        while(e.parentNode) {
+          e = e.parentNode;
+
+          if (e.className) {
+            if (e.className.split(/\s+/).indexOf('page__content') >= 0) {
+              break;
+            }
+          }
+        }
+
+        return e;
+      },
+
       _addEventListeners: function() {
-        this._bindedOnChange = this._onChange.bind(this); 
-        $document[0].addEventListener('scroll', this._bindedOnChange, true);
-        $document[0].addEventListener('resize', this._bindedOnChange, true);
+        this._boundOnChange = this._onChange.bind(this);
+
+        this._pageContent.addEventListener('scroll', this._boundOnChange, true);
+        $document[0].addEventListener('resize', this._boundOnChange, true);
       },
 
       _removeEventListeners: function() {
-        $document[0].removeEventListener('scroll', this._bindedOnChange, true);
-        $document[0].removeEventListener('resize', this._bindedOnChange, true);
+        this._pageContent.removeEventListener('scroll', this._boundOnChange, true);
+        $document[0].removeEventListener('resize', this._boundOnChange, true);
       },
-      
+
       _destroy: function() {
-        this._removeEventListeners(); 
+        this._removeEventListeners();
         this._removeAllElements();
         this._parentElement = this._renderedElements = this._element = this._scope = this._attrs = null;
       }

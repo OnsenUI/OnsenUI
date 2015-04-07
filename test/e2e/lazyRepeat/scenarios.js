@@ -5,10 +5,16 @@
     var path = '/test/e2e/lazyRepeat/index.html',
       EC = protractor.ExpectedConditions;
 
-    it('should remove elements when scrolling', function() {
+    beforeEach(function() {
       browser.get(path);
+      browser.waitForAngular();
 
-      var firstItem = element(by.id('item1'));
+      var firstItem = element(by.id('item-1'));
+      browser.wait(EC.visibilityOf(firstItem));
+    });
+
+    it('should remove elements when scrolling', function() {
+      var firstItem = element(by.id('item-1'));
       expect(firstItem.isPresent()).toBeTruthy();
 
       // Scroll down to bottom.
@@ -20,18 +26,25 @@
     });
 
     it('should correctly compile the inner elements', function() {
-      browser.get(path);
-      expect(element(by.id('item1')).getText()).toBe('Item #1');
+      expect(element(by.id('item-1-text')).getText()).toBe('Item #1');
     });
 
     it('should only trigger a click event once for child elements (Issue #498)', function() {
-      browser.get(path);
-
       var timesClicked = element(by.id('times-clicked'));
 
       expect(timesClicked.getText()).toBe('0');
-      element(by.id('item1')).click();
+      element(by.id('item-1')).click();
       expect(timesClicked.getText()).toBe('1');
+    });
+
+    it('should be possible to remove items from the list', function() {
+      var secondElement = element(by.id('item-2'));
+
+      expect(secondElement.isDisplayed()).toBeTruthy();
+
+      element(by.id('remove-2')).click();
+      browser.wait(EC.stalenessOf(secondElement));
+      expect(secondElement.isPresent()).not.toBeTruthy();
     });
   });
 })();

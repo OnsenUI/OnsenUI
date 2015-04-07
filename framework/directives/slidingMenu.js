@@ -86,7 +86,7 @@
 
 /**
  * @ngdoc event
- * @name postopen
+ * @name postclose
  * @description
  *   [en]Fired just after the sliding menu is closed.[/en]
  *   [ja]スライディングメニューが閉じ終わった後に発火します。[/ja]
@@ -313,7 +313,7 @@
  * @signature getDeviceBackButtonHandler()
  * @return {Object}
  *   [en]Device back button handler.[/en]
- *   [ja][/ja]
+ *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
  * @description
  *   [en]Retrieve the back-button handler.[/en]
  *   [ja]ons-sliding-menuに紐付いているバックボタンハンドラを取得します。[/ja]

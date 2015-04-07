@@ -63,7 +63,7 @@
  * @signature getDeviceBackButtonHandler()
  * @return {Object}
  *   [en]Device back button handler.[/en]
- *   [ja][/ja]
+ *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
  * @description
  *   [en]Retrieve the back button handler.[/en]
  *   [ja]ons-modalに紐付いているバックボタンハンドラを取得します。[/ja]

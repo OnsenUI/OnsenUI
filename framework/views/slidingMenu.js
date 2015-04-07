@@ -176,7 +176,6 @@ limitations under the License.
         this._menuPage = angular.element(element[0].querySelector('.onsen-sliding-menu__menu'));
         this._mainPage = angular.element(element[0].querySelector('.onsen-sliding-menu__main'));
 
-
         this._doorLock = new DoorLock();
 
         this._isRightMenu = attrs.side === 'right';
@@ -592,13 +591,15 @@ limitations under the License.
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
 
-        this.emit('preclose', {
-          slidingMenu: this
-        });
+        if (!this._logic.isClosed()) {
+          this.emit('preclose', {
+            slidingMenu: this
+          });
 
-        this._doorLock.waitUnlock(function() {
-          this._logic.close(options);
-        }.bind(this));
+          this._doorLock.waitUnlock(function() {
+            this._logic.close(options);
+          }.bind(this));
+        }
       },
 
       _close: function(options) {

@@ -11,15 +11,9 @@
       var module = angular.module('my-app', ['onsen']);
 
       module.controller('SecondPageController', function($scope) {
-        console.log("init controller");
         var rect = document.querySelector('#p').getBoundingClientRect();
-        var rectString = JSON.stringify(rect);
-
-        var detachedRectString = JSON.stringify(document.createElement('div').getBoundingClientRect());
-
-        alert(rectString !== detachedRectString ? 'OK: ' + rectString : 'NG: ' + rectString);
+        alert(rect.width === 0 ? 'NG' : 'OK');
       });
-      
     </script>
 
     <style>
