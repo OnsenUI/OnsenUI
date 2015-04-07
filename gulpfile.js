@@ -59,7 +59,9 @@ gulp.task('core', function() {
   // ons-core.js
   return gulp.src([
     'core/vendor/*.js',
+    'core/lib/*.{es6,js}',
     'core/elements/*.{es6,js}',
+    'core/*.{es6,js}'
   ])
     .pipe($.plumber())
     .pipe(onlyES6 = filter('*.es6'))
@@ -86,6 +88,8 @@ gulp.task('html2js', function() {
 gulp.task('jshint', function() {
   gulp.src([
     'core/elements/*.js',
+    'core/lib/*.js',
+    'core/*.js',
     'framework/js/*.js',
     'framework/directives/*.js',
     'framework/services/*.js',
@@ -368,7 +372,8 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   gulp.watch(['framework/templates/*.tpl'], ['html2js']);
 
   var watched = [
-    'core/*/*',
+    'core/*.{js,es6}',
+    'core/*/*.{js,es6}',
     'framework/*/*',
     'css-components/components-src/dist/*.css'
   ];
