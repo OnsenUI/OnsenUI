@@ -181,6 +181,7 @@ limitations under the License.
        * @param {Object} [options]
        * @param {Boolean} [options.keepPage]
        * @param {String} [options.animation]
+       * @param {Object} [options.animationOptions]
        * @return {Boolean} success or not
        */
       setActiveTab: function(index, options) {
@@ -338,7 +339,8 @@ limitations under the License.
        * @param {jqLite} element
        * @param {Object} scope
        * @param {Object} options
-       * @param {Object} options.animation
+       * @param {String} [options.animation]
+       * @param {Object} [options.animationOptions]
        */
       _switchPage: function(element, scope, options) {
         if (this._currentPageElement) {

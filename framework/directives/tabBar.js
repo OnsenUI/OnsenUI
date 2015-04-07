@@ -139,6 +139,15 @@
 
 /**
  * @ngdoc attribute
+ * @name animation-options
+ * @type {Expression}
+ * @description
+ *  [en][/en]
+ *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+ */
+
+/**
+ * @ngdoc attribute
  * @name position
  * @type {String}
  * @default bottom
@@ -198,6 +207,9 @@
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "fade" and "none".[/en]
  *   [ja]アニメーション名を指定します。"fade", "none"のいずれかを指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en][/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @return {Boolean}
  *   [en]true if the change was successful.[/en]
  *   [ja]変更が成功した場合にtrueを返します。[/ja]

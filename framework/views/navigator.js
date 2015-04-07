@@ -293,6 +293,7 @@ limitations under the License.
        * @param {String} page
        * @param {Object} [options]
        * @param {String/NavigatorTransitionAnimator} [options.animation]
+       * @param {Object} [options.animationOptions]
        * @param {Function} [options.onTransitionEnd]
        */
       pushPage: function(page, options) {
@@ -467,7 +468,10 @@ limitations under the License.
 
       /**
        * Pops current page from the page stack.
+       *
        * @param {Object} [options]
+       * @param {String} [options.animation]
+       * @param {Object} [options.animationOptions]
        * @param {Function} [options.onTransitionEnd]
        */
       popPage: function(options) {

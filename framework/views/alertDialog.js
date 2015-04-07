@@ -62,6 +62,7 @@ limitations under the License.
        *
        * @param {Object} [options]
        * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
        * @param {Function} [options.callback] callback after dialog is shown
        */
       show: function(options) {
@@ -98,6 +99,7 @@ limitations under the License.
        *
        * @param {Object} [options]
        * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
        * @param {Function} [options.callback] callback after dialog is hidden
        */
       hide: function(options) {

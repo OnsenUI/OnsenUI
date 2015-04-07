@@ -203,6 +203,7 @@ limitations under the License.
        * @param {Event} [target] event
        * @param {Object} [options] options
        * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
        */
       show: function(target, options) {
         if (typeof target === 'string') {
@@ -248,6 +249,7 @@ limitations under the License.
        *
        * @param {Object} [options] options
        * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
        */
       hide: function(options) {
         options = options || {};

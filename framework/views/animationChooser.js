@@ -44,7 +44,9 @@ limitations under the License.
       },
 
       /**
-       * @param {Object} options The animation options
+       * @param {Object} options
+       * @param {String} [options.animation] The animation name
+       * @param {Object} [options.animationOptions] The animation options
        * @param {Object} defaultAnimator The default animator instance
        * @return {Object} An animator instance
        */
