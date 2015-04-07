@@ -18,12 +18,6 @@ limitations under the License.
 {
   'use strict';
 
-  if (!window.OnsColElement) {
-    window.OnsColElement = document.registerElement('ons-col', {
-      prototype: ColumnElement.prototype
-    });
-  }
-
   class ColumnElement extends HTMLElement {
 
     createdCallback() {
@@ -55,4 +49,9 @@ limitations under the License.
     }
   }
 
+  if (!window.OnsColElement) {
+    window.OnsColElement = document.registerElement('ons-col', {
+      prototype: ColumnElement.prototype
+    });
+  }
 };
