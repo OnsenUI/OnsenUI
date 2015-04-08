@@ -84,7 +84,7 @@
       restrict: 'E',
       replace: false,
       scope: false,
-      link: function(scope, element, attrs, _, transclude) {
+      link: function(scope, element, attrs) {
         var button = new ButtonView(element);
 
         $onsen.declareVarAttribute(attrs, button);
@@ -102,16 +102,6 @@
         element.addClass(modifierTemplater('button--*'));
 
         $onsen.addModifierMethods(button, 'button--*', element);
-
-        transclude(scope.$parent, function(cloned) {
-          angular.element(element[0].querySelector('.ons-button-inner')).append(cloned);
-        });
-
-        if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controller directive.');
-        }
-
-        scope.item = {};
 
         $onsen.cleaner.onDestroy(scope, function() {
           $onsen.clearComponent({
