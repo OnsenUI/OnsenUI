@@ -76,7 +76,7 @@ limitations under the License.
       },
 
       _getTopOffset: function() {
-        if (typeof this !== "undefined" && this !== null) {
+        if (typeof this._parentElement !== "undefined" && this._parentElement !== null) {
           return this._parentElement[0].getBoundingClientRect().top;
         }
         else return 0;
