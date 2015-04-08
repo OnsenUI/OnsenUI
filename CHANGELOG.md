@@ -4,7 +4,8 @@ CHANGELOG
 
 v1.3.1-dev
 ----
- * core: Added more customizable animations.
+ * core: Added more customizable animations. 
+ * core: [BC Break] Changed interfaces for registering custom animators on `ons-navigator`, `ons-dialog`, `ons-alert-dialog`, `ons-dialog`, `ons-sliding-menu`, `ons-popover` and `ons-tabbar`.
 
 v1.3.0
 ----
