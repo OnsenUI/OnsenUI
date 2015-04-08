@@ -19,62 +19,17 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('ButtonView', function($onsen) {
+  module.factory('ButtonView', function() {
 
     var ButtonView = Class.extend({
 
       /**
-       * @param {Object} scope
        * @param {jqLite} element
-       * @param {Object} attrs
        */
-      init: function(scope, element, attrs) {
+      init: function(element) {
         this._element = element;
-        this._scope = scope;
-        this._attrs = attrs;
       },
 
-      /**
-       * Start spinning.
-       */
-      startSpin: function() {
-        this._attrs.$set('shouldSpin', 'true');
-      },
-
-      /**
-       * Stop spinning.
-       */
-      stopSpin: function() {
-        this._attrs.$set('shouldSpin', 'false');
-      },
-
-      /**
-       * Returns whether button is spinning or not.
-       */
-      isSpinning: function() {
-        return this._attrs.shouldSpin === 'true';
-      },
-
-      /**
-       * Set spin animation.
-       *
-       * @param {String} animation type
-       */
-      setSpinAnimation: function(animation) {
-        this._scope.$apply(function() {
-          var animations = ['slide-left', 'slide-right', 'slide-up',
-            'slide-down', 'expand-left', 'expand-right', 'expand-up',
-            'expand-down', 'zoom-out', 'zoom-in'];
-
-          if (animations.indexOf(animation) < 0) {
-            console.warn('Animation ' + animation + 'doesn\'t exist.');
-            animation = 'slide-left';
-          }
-
-          this._scope.animation = animation;
-        }.bind(this));
-      },
-  
       /**
        * Returns whether the button is disabled or not.
        */
@@ -98,6 +53,7 @@ limitations under the License.
       }
 
     });
+
     MicroEvent.mixin(ButtonView);
 
     return ButtonView;
