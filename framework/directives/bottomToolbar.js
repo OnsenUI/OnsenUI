@@ -54,13 +54,7 @@
         var modifierTemplater = $onsen.generateModifierTemplater(attrs),
           inline = typeof attrs.inline !== 'undefined';
 
-        element.addClass('bottom-bar');
         element.addClass(modifierTemplater('bottom-bar--*'));
-        element.css({'z-index': 0});
-
-        if (inline) {
-          element.css('position', 'static');
-        }
 
         return {
           pre: function(scope, element, attrs) {
