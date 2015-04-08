@@ -74,9 +74,12 @@ limitations under the License.
       _getItemHeight: function(i) {
         return this._delegate.calculateItemHeight(i);
       },
-      
+
       _getTopOffset: function() {
-        return this._parentElement[0].getBoundingClientRect().top;
+        if (typeof this._parentElement !== "undefined" && this._parentElement !== null) {
+          return this._parentElement[0].getBoundingClientRect().top;
+        }
+        else return 0;
       },
 
       _render: function() {
@@ -101,7 +104,7 @@ limitations under the License.
       _isRendered: function(i) {
         return this._renderedElements.hasOwnProperty(i);
       },
-      
+
       _renderElement: function(item) {
         if (this._isRendered(item.index)) {
           // Update content even if it's already added to DOM
