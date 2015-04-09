@@ -47,66 +47,10 @@
 
 /**
  * @ngdoc attribute
- * @name should-spin
- * @type {Boolean}
- * @description
- *  [en]Specify if the button should have a spinner. [/en]
- *  [ja]ボタンにスピナーを表示する場合に指定します。[/ja]
- */
-
-/**
- * @ngdoc attribute
- * @name animation
- * @type {String}
- * @description
- *   [en]The animation when the button transitions to and from the spinner. Possible values are "slide-left" (default), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in".[/en]
- *   [ja]スピナーを表示する場合のアニメーションを指定します。"slide-left" (デフォルト), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in"のいずれかを指定します。[/ja]
- */
-
-/**
- * @ngdoc attribute
  * @name disabled
  * @description
  *   [en]Specify if button should be disabled.[/en]
  *   [ja]ボタンを無効化する場合は指定します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature startSpin()
- * @description
- *   [en]Show spinner on the button.[/en]
- *   [ja]ボタンにスピナーを表示します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature stopSpin()
- * @description
- *   [en]Remove spinner from button.[/en]
- *   [ja]ボタンのスピナーを隠します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature isSpinning()
- * @return {Boolean}
- *   [en]true if the button is spinning.[/en]
- *   [ja]spinしているかどうかを返します。[/ja]
- * @description
- *   [en]Return whether the spinner is visible or not.[/en]
- *   [ja]ボタン内にスピナーが表示されているかどうかを返します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature setSpinAnimation(animation)
- * @description
- *   [en]Set spin animation. Possible values are "slide-left" (default), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in".[/en]
- *   [ja]スピナーを表示する場合のアニメーションを指定します。"slide-left" (デフォルト), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in"のいずれかを指定します。[/ja]
- * @param {String} animation
- *   [en]Animation name.[/en]
- *   [ja]アニメーション名を指定します。[/ja]
  */
 
 /**
@@ -139,13 +83,9 @@
     return {
       restrict: 'E',
       replace: false,
-      transclude: true,
-      scope: {
-        animation: '@',
-      },
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
-      link: function(scope, element, attrs, _, transclude) {
-        var button = new ButtonView(scope, element, attrs);
+      scope: false,
+      link: function(scope, element, attrs) {
+        var button = new ButtonView(element);
 
         $onsen.declareVarAttribute(attrs, button);
         element.data('ons-button', button);
@@ -156,44 +96,12 @@
           element.data('ons-button', undefined);
           element = null;
         });
-        var initialAnimation = 'slide-left';
 
-        scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-        element.addClass('button effeckt-button');
-        element.addClass(scope.modifierTemplater('button--*'));
-        element.addClass(initialAnimation);
+        var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+        element.addClass('button');
+        element.addClass(modifierTemplater('button--*'));
 
         $onsen.addModifierMethods(button, 'button--*', element);
-
-        transclude(scope.$parent, function(cloned) {
-          angular.element(element[0].querySelector('.ons-button-inner')).append(cloned);
-        });
-
-        if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controller directive.');
-        }
-
-        scope.item = {};
-        // if animation is not specified -> default is slide-left
-        scope.item.animation = initialAnimation;
-
-        scope.$watch('animation', function(newAnimation) {
-          if (newAnimation) {
-            if (scope.item.animation) {
-              element.removeClass(scope.item.animation);
-            }
-            scope.item.animation = newAnimation;
-            element.addClass(scope.item.animation);
-          }
-        });
-
-        attrs.$observe('shouldSpin', function(shouldSpin) {
-          if (shouldSpin === 'true') {
-            element.attr('data-loading', true);
-          } else {
-            element.removeAttr('data-loading');
-          }
-        });
 
         $onsen.cleaner.onDestroy(scope, function() {
           $onsen.clearComponent({

@@ -16,17 +16,13 @@
  */
 (function(){
   'use strict';
-  var module = angular.module('onsen');
 
-  module.directive('onsTemplate', function($onsen, $templateCache) {
+  angular.module('onsen').directive('onsTemplate', function($templateCache) {
     return {
       restrict: 'E',
-      transclude: false,
-      priority: 1000,
       terminal: true,
       compile: function(element) {
-        $templateCache.put(element.attr('id'), element.remove().html());
-        $onsen.fireComponentEvent(element[0], 'init');
+        $templateCache.put(element.attr('id'), element[0].template);
       }
     };
   });

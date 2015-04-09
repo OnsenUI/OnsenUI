@@ -19,6 +19,13 @@ limitations under the License.
 window.DoorLock = (() => {
   'use strict';
 
+  var generateId = (function() {
+    var i = 0;
+    return function() {
+      return i++;
+    };
+  })();
+
   /**
    * Door locking system.
    *
@@ -44,7 +51,7 @@ window.DoorLock = (() => {
       var unlock = function() {
         self._unlock(unlock);
       };
-      unlock.id = DoorLock.generateId();
+      unlock.id = generateId();
       this._lockList.push(unlock);
       this._log('lock: ' + (unlock.id));
 
@@ -93,13 +100,6 @@ window.DoorLock = (() => {
       return this._lockList.length > 0;
     }
   }
-
-  DoorLock.generateId = (function() {
-    var i = 0;
-    return function() {
-      return i++;
-    };
-  })();
 
   return DoorLock;
 })();

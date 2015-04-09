@@ -15,13 +15,4 @@ limitations under the License.
 
 */
 
-ons-scroller {
-  display: block;
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;   
-  -ms-overflow-style: none;
-}
-
-ons-scroller::-webkit-scrollbar {
-  display: none;
-}
+window.OnsScrollerElement = window.OnsScrollerElement ? window.OnsScrollerElement : document.registerElement('ons-scroller');

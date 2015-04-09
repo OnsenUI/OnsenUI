@@ -63,13 +63,10 @@
   module.directive('onsToolbarButton', function($onsen, GenericView) {
     return {
       restrict: 'E',
-      transclude: true,
-      scope: {},
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
+      scope: false,
       link: {
         pre: function(scope, element, attrs) {
-          var toolbarButton = new GenericView(scope, element, attrs),
-            innerElement = element[0].querySelector('.toolbar-button');
+          var toolbarButton = new GenericView(scope, element, attrs);
 
           $onsen.declareVarAttribute(attrs, toolbarButton);
 
@@ -83,24 +80,9 @@
           });
 
           var modifierTemplater = $onsen.generateModifierTemplater(attrs);
+          element.addClass(modifierTemplater('toolbar-button--*'));
 
-          if (attrs.ngController) {
-            throw new Error('This element can\'t accept ng-controller directive.');
-          }
-
-          attrs.$observe('disabled', function(value) {
-            if (value === false || typeof value === 'undefined') {
-              innerElement.removeAttribute('disabled');
-            }
-            else {
-              innerElement.setAttribute('disabled', 'disabled');
-            }
-          });
-
-          scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-          $onsen.addModifierMethods(toolbarButton, 'toolbar-button--*', element.children());
-
-          element.children('span').addClass(modifierTemplater('toolbar-button--*'));
+          $onsen.addModifierMethods(toolbarButton, 'toolbar-button--*', element);
 
           $onsen.cleaner.onDestroy(scope, function() {
             $onsen.clearComponent({

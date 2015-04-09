@@ -15,13 +15,19 @@ limitations under the License.
 
 */
 
-ons-scroller {
-  display: block;
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch;   
-  -ms-overflow-style: none;
-}
+{
+  'use strict';
 
-ons-scroller::-webkit-scrollbar {
-  display: none;
-}
+  class ToolbarButtonElement extends HTMLElement {
+    createdCallback() {
+      this.classList.add('toolbar-button');
+      this.classList.add('navigation-bar__line-height');
+    }
+  }
+
+  if (!window.OnsToolbarButton) {
+    window.OnsToolbarButton = document.registerElement('ons-toolbar-button', {
+      prototype: ToolbarButtonElement.prototype
+    });
+  }
+};

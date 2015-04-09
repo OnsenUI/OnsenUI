@@ -15,10 +15,22 @@ limitations under the License.
 
 */
 
-(function() {
+{
   'use strict';
 
-  if (!window.OnsRowElement) {
-    window.OnsRowElement = document.registerElement('ons-row');
+  class TemplateElement extends HTMLElement {
+    createdCallback() {
+      this.template = this.innerHTML;
+
+      while (this.firstChild) {
+        this.removeChild(this.firstChild);
+      }
+    }
   }
-})();
+
+  if (!window.OnsTemplate) {
+    window.OnsTemplate = document.registerElement('ons-template', {
+      prototype: TemplateElement.prototype
+    });
+  }
+};

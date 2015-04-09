@@ -51,6 +51,28 @@ gulp.task('browser-sync', function() {
 });
 
 ////////////////////////////////////////
+// core
+////////////////////////////////////////
+gulp.task('core', function() {
+  var onlyES6 = filter('*.es6');
+
+  // ons-core.js
+  return gulp.src([
+    'core/vendor/*.js',
+    'core/lib/*.{es6,js}',
+    'core/elements/*.{es6,js}',
+    'core/*.{es6,js}'
+  ])
+    .pipe($.plumber())
+    .pipe(onlyES6 = filter('*.es6'))
+    .pipe(babel({modules: 'ignore'}))
+    .pipe(onlyES6.restore())
+    .pipe($.concat('ons-core.js'))            
+    .pipe($.header('/*! ons-core.js for Onsen UI v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+    .pipe(gulp.dest('build/js/'));
+});
+
+////////////////////////////////////////
 // html2js
 ////////////////////////////////////////
 gulp.task('html2js', function() {
@@ -65,6 +87,9 @@ gulp.task('html2js', function() {
 ////////////////////////////////////////
 gulp.task('jshint', function() {
   gulp.src([
+    'core/elements/*.js',
+    'core/lib/*.js',
+    'core/*.js',
     'framework/js/*.js',
     'framework/directives/*.js',
     'framework/services/*.js',
@@ -126,7 +151,7 @@ gulp.task('minify-js', function() {
 ////////////////////////////////////////
 // prepare
 ////////////////////////////////////////
-gulp.task('prepare', ['html2js'], function() {
+gulp.task('prepare', ['html2js', 'core'], function() {
 
   var onlyES6;
 
@@ -134,9 +159,9 @@ gulp.task('prepare', ['html2js'], function() {
 
     // onsenui.js
     gulp.src([
+      'build/js/ons-core.js',
       'framework/lib/winstore-jscompat.js',
       'framework/lib/*.{es6,js}',
-      'framework/elements/*.{es6,js}',
       'framework/directives/templates.js',
       'framework/js/doorlock.es6',
       'framework/js/onsen.js',
@@ -158,10 +183,10 @@ gulp.task('prepare', ['html2js'], function() {
 
     // onsenui_all.js
     gulp.src([
+      'build/js/ons-core.js',
       'framework/lib/winstore-jscompat.js',
       'framework/lib/angular/angular.js',
       'framework/lib/*.{es6,js}',
-      'framework/elements/*.{es6,js}',
       'framework/directives/templates.js',
       'framework/js/doorlock.es6',
       'framework/js/onsen.js',
@@ -347,6 +372,8 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   gulp.watch(['framework/templates/*.tpl'], ['html2js']);
 
   var watched = [
+    'core/*.{js,es6}',
+    'core/*/*.{js,es6}',
     'framework/*/*',
     'css-components/components-src/dist/*.css'
   ];

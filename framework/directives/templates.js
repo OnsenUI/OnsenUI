@@ -27,33 +27,10 @@ try { app = angular.module('templates-main'); }
 catch(err) { app = angular.module('templates-main', []); }
 app.run(['$templateCache', function($templateCache) {
   'use strict';
-  $templateCache.put('templates/button.tpl',
-    '<span class="label ons-button-inner"></span>\n' +
-    '<span class="spinner button__spinner {{modifierTemplater(\'button--*__spinner\')}}"></span>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
-  'use strict';
   $templateCache.put('templates/dialog.tpl',
     '<div class="dialog-mask"></div>\n' +
     '<div class="dialog {{ modifierTemplater(\'dialog--*\') }}"></div>\n' +
     '</div>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
-  'use strict';
-  $templateCache.put('templates/icon.tpl',
-    '<i class="fa fa-{{icon}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}" ng-class="sizeClass" ng-style="style"></i>\n' +
     '');
 }]);
 })();
@@ -69,17 +46,6 @@ app.run(['$templateCache', function($templateCache) {
     '  <div class="popover__content {{ modifierTemplater(\'popover__content--*\') }}"></div>\n' +
     '  <div class="popover__{{ arrowPosition }}-arrow"></div>\n' +
     '</div>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
-  'use strict';
-  $templateCache.put('templates/row.tpl',
-    '<div class="row row-{{align}} ons-row-inner"></div>\n' +
     '');
 }]);
 })();
@@ -143,17 +109,6 @@ app.run(['$templateCache', function($templateCache) {
   $templateCache.put('templates/tab_bar.tpl',
     '<div class="ons-tab-bar__content tab-bar__content"></div>\n' +
     '<div ng-hide="hideTabs" class="tab-bar ons-tab-bar__footer {{modifierTemplater(\'tab-bar--*\')}} ons-tabbar-inner"></div>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
-  'use strict';
-  $templateCache.put('templates/toolbar_button.tpl',
-    '<span class="toolbar-button {{modifierTemplater(\'toolbar-button--*\')}} navigation-bar__line-height" ng-transclude></span>\n' +
     '');
 }]);
 })();
