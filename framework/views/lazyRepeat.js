@@ -76,10 +76,11 @@ limitations under the License.
       },
 
       _getTopOffset: function() {
-        if (typeof this._parentElement !== "undefined" && this._parentElement !== null) {
+        if (typeof this._parentElement !== 'undefined' && this._parentElement !== null) {
           return this._parentElement[0].getBoundingClientRect().top;
+        } else {
+          return 0;
         }
-        else return 0;
       },
 
       _render: function() {
