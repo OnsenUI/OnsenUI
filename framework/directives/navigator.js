@@ -187,6 +187,25 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name animation
+ * @type {String}
+ * @default default
+ * @description
+ *  [en]Specify the transition animation. Use one of "slide", "simpleslide", "fade", "lift", "none" and "default".[/en]
+ *  [ja]画面遷移する際のアニメーションを指定します。"slide", "simpleslide", "fade", "lift", "none", "default"のいずれかを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name animation-options
+ * @type {Expression}
+ * @description
+ *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+ *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature pushPage(pageUrl, [options])
  * @param {String} pageUrl
@@ -198,6 +217,9 @@
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
  *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @param {Function} [options.onTransitionEnd]
  *   [en]Function that is called when the transition has ended.[/en]
  *   [ja]pushPage()による画面遷移が終了した時に呼び出される関数オブジェクトを指定します。[/ja]
@@ -235,6 +257,9 @@
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
  *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @param {Function} [options.onTransitionEnd]
  *   [en]Function that is called when the transition has ended.[/en]
  *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
@@ -255,6 +280,9 @@
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
  *   [ja]アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @param {Function} [options.onTransitionEnd]
  *   [en]Function that is called when the transition has ended.[/en]
  *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]

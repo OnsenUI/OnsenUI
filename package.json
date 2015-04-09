@@ -63,6 +63,8 @@
     "run-sequence": "~0.3.6",
     "topdoc": "~0.4.0",
     "topdoc-theme": "~0.2.7",
-    "yargs": "^3.5.4"
+    "yargs": "^3.5.4",
+    "gulp-babel": "^5.0.0",
+    "gulp-filter": "^2.0.2"
   }
 }

@@ -132,6 +132,15 @@
 
 /**
  * @ngdoc attribute
+ * @name animation-options
+ * @type {Expression}
+ * @description
+ *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+ *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+ */
+
+/**
+ * @ngdoc attribute
  * @name mask-color
  * @type {String}
  * @default rgba(0, 0, 0, 0.2)
@@ -194,6 +203,9 @@
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
  *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @param {Function} [options.callback]
  *   [en]This function is called after the dialog has been revealed.[/en]
  *   [ja]ダイアログが表示され終わった後に呼び出される関数オブジェクトを指定します。[/ja]
@@ -211,6 +223,9 @@
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
  *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @param {Function} [options.callback]
  *   [en]This functions is called after the dialog has been hidden.[/en]
  *   [ja]ダイアログが隠れた後に呼び出される関数オブジェクトを指定します。[/ja]

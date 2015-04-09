@@ -23,6 +23,21 @@ limitations under the License.
   module.factory('TabbarAnimator', function() {
 
     var TabbarAnimator = Class.extend({
+
+      /**
+       * @param {Object} options
+       * @param {String} options.timing
+       * @param {Number} options.duration
+       * @param {Number} options.delay
+       */
+      init: function(options) {
+        options = options || {};
+
+        this.timing = options.timing || this.timing;
+        this.duration = options.duration !== undefined ? options.duration : this.duration;
+        this.delay = options.delay !== undefined ? options.delay : this.delay;
+      },
+
       /**
        * @param {jqLite} enterPage
        * @param {jqLite} leavePage
@@ -53,6 +68,11 @@ limitations under the License.
   module.factory('TabbarFadeAnimator', function(TabbarAnimator) {
 
     var TabbarFadeAnimator = TabbarAnimator.extend({
+
+      timing: 'linear',
+      duration: 0.4,
+      delay: 0,
+
       /**
        * @param {jqLite} enterPage
        * @param {jqLite} leavePage
@@ -64,12 +84,13 @@ limitations under the License.
               transform: 'translate3D(0, 0, 0)',
               opacity: 0
             })
+            .wait(this.delay)
             .queue({
               transform: 'translate3D(0, 0, 0)',
               opacity: 1
             }, {
-              duration: 0.4,
-              timing: 'linear'
+              duration: this.duration,
+              timing: this.timing
             })
             .resetStyle()
             .queue(function(callback) {
@@ -81,12 +102,13 @@ limitations under the License.
               transform: 'translate3D(0, 0, 0)',
               opacity: 1
             })
+            .wait(this.delay)
             .queue({
               transform: 'translate3D(0, 0, 0)',
               opacity: 0
             }, {
-              duration: 0.4,
-              timing: 'linear'
+              duration: this.duration,
+              timing: this.timing
             })
         );
       }
@@ -95,7 +117,7 @@ limitations under the License.
     return TabbarFadeAnimator;
   });
 
-  module.factory('TabbarView', function($onsen, $compile, TabbarAnimator, TabbarNoneAnimator, TabbarFadeAnimator) {
+  module.factory('TabbarView', function($onsen, $compile, $parse, AnimationChooser, TabbarAnimator, TabbarNoneAnimator, TabbarFadeAnimator) {
     var TabbarView = Class.extend({
       _tabbarId: undefined,
 
@@ -117,6 +139,14 @@ limitations under the License.
         if (this._hasTopTabbar()) {
           this._prepareForTopTabbar();
         }
+
+        this._animationChooser = new AnimationChooser({
+          animators: TabbarView._animatorDict,
+          baseClass: TabbarAnimator,
+          baseClassName: 'TabbarAnimator',
+          defaultAnimation: attrs.animation,
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
       },
 
       _prepareForTopTabbar: function() {
@@ -151,6 +181,7 @@ limitations under the License.
        * @param {Object} [options]
        * @param {Boolean} [options.keepPage]
        * @param {String} [options.animation]
+       * @param {Object} [options.animationOptions]
        * @return {Boolean} success or not
        */
       setActiveTab: function(index, options) {
@@ -308,7 +339,8 @@ limitations under the License.
        * @param {jqLite} element
        * @param {Object} scope
        * @param {Object} options
-       * @param {Object} options.animation
+       * @param {String} [options.animation]
+       * @param {Object} [options.animationOptions]
        */
       _switchPage: function(element, scope, options) {
         if (this._currentPageElement) {
@@ -318,7 +350,7 @@ limitations under the License.
           this._currentPageElement = element;
           this._currentPageScope = scope;
 
-          this._getAnimatorOption(options).apply(element, oldPageElement, function() {
+          this._animationChooser.newAnimator(options).apply(element, oldPageElement, function() {
             if (options._removeElement) {
               oldPageElement.remove();
               oldPageScope.$destroy();
@@ -339,7 +371,7 @@ limitations under the License.
           if (options.callback instanceof Function) {
             options.callback();
           }
-        } 
+        }
       },
 
       /**
@@ -393,21 +425,21 @@ limitations under the License.
 
     // Preset transition animators.
     TabbarView._animatorDict = {
-      'default': new TabbarNoneAnimator(),
-      'none': new TabbarNoneAnimator(),
-      'fade': new TabbarFadeAnimator()
+      'default': TabbarNoneAnimator,
+      'none': TabbarNoneAnimator,
+      'fade': TabbarFadeAnimator
     };
 
     /**
      * @param {String} name
-     * @param {NavigatorTransitionAnimator} animator
+     * @param {Function} Animator
      */
-    TabbarView.registerAnimator = function(name, animator) {
-      if (!(animator instanceof TabbarAnimator)) {
-        throw new Error('"animator" param must be an instance of TabbarAnimator');
+    TabbarView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof TabbarAnimator)) {
+        throw new Error('"Animator" param must inherit TabbarAnimator');
       }
 
-      this._animatorDict[name] = animator;
+      this._animatorDict[name] = Animator;
     };
 
     return TabbarView;

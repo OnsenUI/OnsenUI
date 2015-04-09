@@ -142,6 +142,15 @@
 
 /**
  * @ngdoc attribute
+ * @name animation-options
+ * @type {Expression}
+ * @description
+ *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+ *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+ */
+
+/**
+ * @ngdoc attribute
  * @name mask-color
  * @type {Color}
  * @description
@@ -206,6 +215,9 @@
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "fade" and "none".[/en]
  *   [ja]アニメーション名を指定します。"fade"もしくは"none"を指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @description
  *   [en]Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..[/en]
  *   [ja]対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。[/ja]
@@ -220,6 +232,9 @@
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "fade" and "none".[/en]
  *   [ja]アニメーション名を指定します。"fade"もしくは"none"を指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @description
  *   [en]Close the popover.[/en]
  *   [ja]ポップオーバーを閉じます。[/ja]

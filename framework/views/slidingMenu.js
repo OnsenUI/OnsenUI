@@ -153,7 +153,7 @@ limitations under the License.
   });
   MicroEvent.mixin(SlidingMenuViewModel);
 
-  module.factory('SlidingMenuView', function($onsen, $compile, SlidingMenuAnimator, RevealSlidingMenuAnimator, 
+  module.factory('SlidingMenuView', function($onsen, $compile, $parse, AnimationChooser, SlidingMenuAnimator, RevealSlidingMenuAnimator,
                                              PushSlidingMenuAnimator, OverlaySlidingMenuAnimator) {
 
     var SlidingMenuView = Class.extend({
@@ -221,7 +221,14 @@ limitations under the License.
 
           this._menuPage.css({opacity: 1});
 
-          this._animator = this._getAnimatorOption();
+          var animationChooser = new AnimationChooser({
+            animators: SlidingMenuView._animatorDict,
+            baseClass: SlidingMenuAnimator,
+            baseClassName: 'SlidingMenuAnimator',
+            defaultAnimation: attrs.animation,
+            defaultAnimationOptions: $parse(attrs.animationOptions)()
+          });
+          this._animator = animationChooser.newAnimator();
           this._animator.setup(
             this._element,
             this._mainPage,
@@ -275,16 +282,6 @@ limitations under the License.
 
         this._mainPageHammer.off('tap', this._bindedOnTap);
         this._element = this._scope = this._attrs = null;
-      },
-
-      _getAnimatorOption: function() {
-        var animator = SlidingMenuView._animatorDict[this._attrs.type];
-
-        if (!(animator instanceof SlidingMenuAnimator)) {
-          animator = SlidingMenuView._animatorDict['default'];
-        }
-
-        return animator.copy();
       },
 
       _onSwipeableChanged: function(swipeable) {
@@ -596,7 +593,7 @@ limitations under the License.
       /**
        * Close sliding-menu page.
        *
-       * @param {Object} options 
+       * @param {Object} options
        */
       close: function(options) {
         options = options || {};
@@ -717,22 +714,22 @@ limitations under the License.
 
     // Preset sliding menu animators.
     SlidingMenuView._animatorDict = {
-      'default': new RevealSlidingMenuAnimator(),
-      'overlay': new OverlaySlidingMenuAnimator(),
-      'reveal': new RevealSlidingMenuAnimator(),
-      'push': new PushSlidingMenuAnimator()
+      'default': RevealSlidingMenuAnimator,
+      'overlay': OverlaySlidingMenuAnimator,
+      'reveal': RevealSlidingMenuAnimator,
+      'push': PushSlidingMenuAnimator
     };
 
     /**
      * @param {String} name
-     * @param {NavigatorTransitionAnimator} animator
+     * @param {Function} Animator
      */
-    SlidingMenuView.registerSlidingMenuAnimator = function(name, animator) {
-      if (!(animator instanceof SlidingMenuAnimator)) {
-        throw new Error('"animator" param must be an instance of SlidingMenuAnimator');
+    SlidingMenuView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof SlidingMenuAnimator)) {
+        throw new Error('"Animator" param must inherit SlidingMenuAnimator');
       }
 
-      this._animatorDict[name] = animator;
+      this._animatorDict[name] = Animator;
     };
 
     MicroEvent.mixin(SlidingMenuView);

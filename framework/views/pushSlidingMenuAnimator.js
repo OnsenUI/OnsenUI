@@ -28,8 +28,7 @@ limitations under the License.
       _menuPage: undefined,
       _mainPage: undefined,
       _width: undefined,
-      _duration: false,
-      
+
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
        * @param {jqLite} mainPage
@@ -47,7 +46,6 @@ limitations under the License.
 
         this._isRight = !!options.isRight;
         this._width = options.width || '90%';
-        this._duration = 0.4;
 
         menuPage.css({
           width: options.width,
@@ -111,7 +109,8 @@ limitations under the License.
        * @param {Boolean} instant
        */
       openMenu: function(callback, instant) {
-        var duration = instant === true ? 0.0 : this._duration;        
+        var duration = instant === true ? 0.0 : this.duration;
+        var delay = instant === true ? 0.0 : this.delay;
 
         this._menuPage.css('display', 'block');
 
@@ -123,11 +122,12 @@ limitations under the License.
         setTimeout(function() {
 
           animit(this._mainPage[0])
+            .wait(delay)
             .queue({
               transform: aboveTransform
             }, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .queue(function(done) {
               callback();
@@ -136,9 +136,10 @@ limitations under the License.
             .play();
 
           animit(this._menuPage[0])
+            .wait(delay)
             .queue(behindStyle, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .play();
 
@@ -150,7 +151,8 @@ limitations under the License.
        * @param {Boolean} instant
        */
       closeMenu: function(callback, instant) {
-        var duration = instant === true ? 0.0 : this._duration;        
+        var duration = instant === true ? 0.0 : this.duration;
+        var delay = instant === true ? 0.0 : this.delay;
 
         var aboveTransform = this._generateAbovePageTransform(0);
         var behindStyle = this._generateBehindPageStyle(0);
@@ -158,11 +160,12 @@ limitations under the License.
         setTimeout(function() {
 
           animit(this._mainPage[0])
+            .wait(delay)
             .queue({
               transform: aboveTransform
             }, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .queue({
               transform: 'translate3d(0, 0, 0)'
@@ -175,9 +178,10 @@ limitations under the License.
             .play();
 
           animit(this._menuPage[0])
+            .wait(delay)
             .queue(behindStyle, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .queue(function(done) {
               done();

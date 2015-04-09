@@ -83,7 +83,7 @@ limitations under the License.
     }
   });
 
-  module.factory('NavigatorView', function($http, $parse, $templateCache, $compile, $onsen, $timeout,
+  module.factory('NavigatorView', function($http, $parse, $templateCache, $compile, $onsen, $timeout, AnimationChooser,
     SimpleSlideTransitionAnimator, NavigatorTransitionAnimator, LiftTransitionAnimator,
     NullTransitionAnimator, IOSSlideTransitionAnimator, FadeTransitionAnimator) {
 
@@ -141,6 +141,14 @@ limitations under the License.
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
         this._scope.$on('$destroy', this._destroy.bind(this));
+
+        this._animationChooser = new AnimationChooser({
+          animators: NavigatorView._transitionAnimatorDict,
+          baseClass: NavigatorTransitionAnimator,
+          baseClassName: 'NavigatorTransitionAnimator',
+          defaultAnimation: attrs.animation,
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
       },
 
       _destroy: function() {
@@ -285,6 +293,7 @@ limitations under the License.
        * @param {String} page
        * @param {Object} [options]
        * @param {String/NavigatorTransitionAnimator} [options.animation]
+       * @param {Object} [options.animationOptions]
        * @param {Function} [options.onTransitionEnd]
        */
       pushPage: function(page, options) {
@@ -334,37 +343,6 @@ limitations under the License.
         return this._deviceBackButtonHandler;
       },
 
-      /**
-       * @param {Object} options pushPage()'s options parameter
-       * @param {NavigatorTransitionAnimator} [defaultAnimator]
-       */
-      _getAnimatorOption: function(options, defaultAnimator) {
-        var animator = null;
-
-        if (options.animation instanceof NavigatorTransitionAnimator) {
-          return options.animation;
-        }
-
-        if (typeof options.animation === 'string') {
-          animator = NavigatorView._transitionAnimatorDict[options.animation];
-        }
-
-        if (!animator && this._element.attr('animation')) {
-          animator = NavigatorView._transitionAnimatorDict[this._element.attr('animation')];
-        }
-
-        if (!animator) {
-          animator = defaultAnimator || NavigatorView._transitionAnimatorDict['default'];
-        }
-
-        if (!(animator instanceof NavigatorTransitionAnimator)) {
-          throw new Error('"animator" is not an instance of NavigatorTransitionAnimator.');
-        }
-
-        return animator;
-      },
-
-
       _createPageScope: function() {
          return this._scope.$new();
       },
@@ -376,7 +354,7 @@ limitations under the License.
        * @param {Object} options
        */
       _createPageObject: function(page, element, pageScope, options) {
-        options.animator = this._getAnimatorOption(options);
+        options.animator = this._animationChooser.newAnimator(options);
 
         return new NavigatorPageObject({
           page: page,
@@ -490,7 +468,10 @@ limitations under the License.
 
       /**
        * Pops current page from the page stack.
+       *
        * @param {Object} [options]
+       * @param {String} [options.animation]
+       * @param {Object} [options.animationOptions]
        * @param {Function} [options.onTransitionEnd]
        */
       popPage: function(options) {
@@ -541,7 +522,7 @@ limitations under the License.
 
         this._isPopping = true;
 
-        var animator = this._getAnimatorOption(options, leavePage.options.animator);
+        var animator = this._animationChooser.newAnimator(options, leavePage.options.animator);
         animator.pop(enterPage, leavePage, callback);
       },
 
@@ -625,24 +606,24 @@ limitations under the License.
 
     // Preset transition animators.
     NavigatorView._transitionAnimatorDict = {
-      'default': $onsen.isAndroid() ? new SimpleSlideTransitionAnimator() : new IOSSlideTransitionAnimator(),
-      'slide': $onsen.isAndroid() ? new SimpleSlideTransitionAnimator() : new IOSSlideTransitionAnimator(),
-      'simpleslide': new SimpleSlideTransitionAnimator(),
-      'lift': new LiftTransitionAnimator(),
-      'fade': new FadeTransitionAnimator(),
-      'none': new NullTransitionAnimator()
+      'default': $onsen.isAndroid() ? SimpleSlideTransitionAnimator : IOSSlideTransitionAnimator,
+      'slide': $onsen.isAndroid() ? SimpleSlideTransitionAnimator : IOSSlideTransitionAnimator,
+      'simpleslide': SimpleSlideTransitionAnimator,
+      'lift': LiftTransitionAnimator,
+      'fade': FadeTransitionAnimator,
+      'none': NullTransitionAnimator
     };
 
     /**
      * @param {String} name
-     * @param {NavigatorTransitionAnimator} animator
+     * @param {Function} Animator
      */
-    NavigatorView.registerTransitionAnimator = function(name, animator) {
-      if (!(animator instanceof NavigatorTransitionAnimator)) {
-        throw new Error('"animator" param must be an instance of NavigatorTransitionAnimator');
+    NavigatorView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof NavigatorTransitionAnimator)) {
+        throw new Error('"Animator" param must inherit NavigatorTransitionAnimator');
       }
 
-      this._transitionAnimatorDict[name] = animator;
+      this._transitionAnimatorDict[name] = Animator;
     };
 
     MicroEvent.mixin(NavigatorView);
