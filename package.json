@@ -63,7 +63,7 @@
     "lodash": "^3.6.0",
     "prompt": "*",
     "run-sequence": "^1.0.2",
-    "topdoc": "~0.4.0"
+    "topdoc": "~0.4.0",
     "yargs": "^3.5.4"
   }
 }
