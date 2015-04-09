@@ -82,7 +82,7 @@ gulp.task('core', function() {
 // core-test
 ////////////////////////////////////////
 gulp.task('core-test', ['core'], function() {
-  return gulp.src(['core/*/*.js', 'core/test/testcases/**/*.js'])
+  return gulp.src(['build/js/ons-core.js', 'core/**/*.spec.js'])
     .pipe(karma({
       configFile: 'core/test/karma.conf.js',
       action: 'run'
