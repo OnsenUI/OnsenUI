@@ -224,8 +224,8 @@ gulp.task('prepare', ['html2js', 'core'], function() {
 
     // onsenui.css
     gulp.src([
-      'framework/css/common.css',
-      'framework/css/*.css'
+      'core/css/common.css',
+      'core/css/*.css'
     ])
       .pipe($.concat('onsenui.css'))
       .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2', 'ios 6'))
@@ -240,12 +240,12 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       .pipe(gulp.dest('build/js/angular/')),
 
     // font-awesome fle copy
-    gulp.src('framework/css/font_awesome/**/*')
+    gulp.src('core/css/font_awesome/**/*')
       .pipe(gulp.dest('build/css/font_awesome/'))
       .pipe(gulp.dest('app/lib/onsen/css/font_awesome/')),
 
     // ionicons file copy
-    gulp.src('framework/css/ionicons/**/*')
+    gulp.src('core/css/ionicons/**/*')
       .pipe(gulp.dest('build/css/ionicons/'))
       .pipe(gulp.dest('app/lib/onsen/css/ionicons/')),
 
