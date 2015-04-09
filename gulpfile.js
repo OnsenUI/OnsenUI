@@ -43,8 +43,8 @@ gulp.task('browser-sync', function() {
   browserSync({
     server: {
       baseDir: __dirname + '/',
-      directory: true,
-      index: 'index.html'
+      index: 'index.html',
+      directory: true
     },
     watchOptions: {
       debounceDelay: 300
@@ -67,7 +67,7 @@ gulp.task('core', function() {
     'core/lib/*.{es6,js}',
     'core/elements/*.{es6,js}',
     'core/*.{es6,js}',
-    '!*.spec.js'
+    '!core/**/*.spec.js'
   ])
     .pipe($.plumber())
     .pipe(onlyES6 = filter('*.es6'))

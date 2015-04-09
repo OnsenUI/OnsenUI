@@ -211,6 +211,51 @@ limitations under the License.
         },
 
         /**
+         * Add modifier methods to view object for custom elements.
+         *
+         * @param {Object} view object
+         * @param {jqLite} element 
+         */
+        addModifierMethodsForCustomElements: function(view, element) {
+          var methods = {
+            hasModifier: function(needle) {
+              var tokens = ModifierUtil.split(element.attr('modifier'));
+
+              return ModifierUtil.split(needle).some(function(needle) {
+                return tokens.indexOf(needle) != -1;
+              });
+            },
+
+            removeModifier: function(modifier) {
+              modifier = ModifierUtil.split(modifier).filter(function(token) {
+                return token !== modifier;
+              }).join(' ');
+              element.attr('modifier', modifier);
+            },
+
+            addModifier: function(modifier) {
+              element.attr('modifier', element.attr('modifier') + ' ' + modifier);
+            },
+
+            setModifier: function(modifier) {
+              element.attr('modifier', modifier);
+            },
+
+            toggleModifier: function(modifier) {
+              if (this.hasModifier(modifier)) {
+                this.addModifier(modifier);
+              } else {
+                this.removeModifier(modifier);
+              }
+            }
+          };
+
+          for (var method in methods) {
+            view[method] = methods[method];
+          }
+        },
+
+        /**
          * Add modifier methods to view object.
          *
          * @param {Object} view object

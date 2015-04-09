@@ -67,24 +67,17 @@
       link: {
         pre: function(scope, element, attrs) {
           var toolbarButton = new GenericView(scope, element, attrs);
-
+          element.data('ons-toolbar-button', toolbarButton);
           $onsen.declareVarAttribute(attrs, toolbarButton);
 
-          element.data('ons-toolbar-button', toolbarButton);
+          $onsen.addModifierMethodsForCustomElements(toolbarButton, element);
 
-          scope.$on('$destroy', function() {
+          $onsen.cleaner.onDestroy(scope, function() {
             toolbarButton._events = undefined;
             $onsen.removeModifierMethods(toolbarButton);
             element.data('ons-toolbar-button', undefined);
             element = null;
-          });
 
-          var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-          element.addClass(modifierTemplater('toolbar-button--*'));
-
-          $onsen.addModifierMethods(toolbarButton, 'toolbar-button--*', element);
-
-          $onsen.cleaner.onDestroy(scope, function() {
             $onsen.clearComponent({
               scope: scope,
               attrs: attrs,

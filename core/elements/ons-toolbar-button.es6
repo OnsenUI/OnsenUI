@@ -18,10 +18,30 @@ limitations under the License.
 {
   'use strict';
 
+  var scheme = {'' : 'toolbar-button--*'};
+
   class ToolbarButtonElement extends HTMLElement {
+
     createdCallback() {
       this.classList.add('toolbar-button');
       this.classList.add('navigation-bar__line-height');
+
+      ModifierUtil.initModifier({
+        modifier: this.getAttribute('modifier'), 
+        element: this, 
+        scheme: scheme
+      });
+    }
+
+    attributeChangedCallback(name, last, current) {
+      if (name === 'modifier') {
+        return ModifierUtil.onModifierChanged({
+          last: last, 
+          current: current, 
+          element: this, 
+          scheme: scheme
+        });
+      }
     }
   }
 
