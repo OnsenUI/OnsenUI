@@ -5,6 +5,7 @@ CHANGELOG
 v1.3.1-dev
 ----
  * core: Added more customizable animations.
+ * ons-sliding-menu: Fixed [#584](https://github.com/OnsenUI/OnsenUI/issues/584).
 
 v1.3.0
 ----
