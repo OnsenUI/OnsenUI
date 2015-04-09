@@ -28,6 +28,10 @@
       return dict;
     }, {});
 
+    function titlize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
     return {
       restrict: 'E',
       scope: scopeDef,
@@ -38,17 +42,25 @@
       transclude: true,
 
       compile: function(element, attrs) {
-        return function link(scope, element, attrs, controller, transclude) {
+        return function link(scope, element, attrs, _, transclude) {
 
           transclude(scope.$parent, function(cloned) {
             element.append(cloned);
           });
 
-          var hammer = new Hammer(element[0]);
-          hammer.on(EVENTS.join(' '), handleEvent);
+          var handler = function(event) {
+            var attr = 'ng' + titlize(event.type);
+
+            if (attr in scopeDef) {
+              scope[attr]({$event: event});
+            }
+          };
+
+          var hammer = element[0]._hammer;
+          hammer.on(EVENTS.join(' '), handler);
 
           $onsen.cleaner.onDestroy(scope, function() {
-            hammer.off(EVENTS.join(' '), handleEvent);
+            hammer.off(EVENTS.join(' '), handler);
             $onsen.clearComponent({
               scope: scope,
               element: element,
@@ -57,22 +69,10 @@
             hammer.element = scope = element = attrs = null;
           });
 
-          function handleEvent(event) {
-            var attr = 'ng' + titlize(event.type);
-
-            if (attr in scopeDef) {
-              scope[attr]({$event: event});
-            }
-          }
-
           $onsen.fireComponentEvent(element[0], 'init');
         };
       }
     };
-
-    function titlize(str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    }
   });
 })();
 
