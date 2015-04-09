@@ -39,14 +39,18 @@ var filter = require('gulp-filter');
 // browser-sync
 ////////////////////////////////////////
 gulp.task('browser-sync', function() {
-  browserSync.init(null, {
+  browserSync({
     server: {
       baseDir: __dirname + '/',
-      directory: true
+      directory: true,
+      index: 'index.html'
     },
+    watchOptions: {
+      debounceDelay: 300
+    }
     ghostMode: false,
-    debounce: 200,
-    notify: false
+    notify: false,
+    reloadDelay: 300
   });
 });
 
