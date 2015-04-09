@@ -47,7 +47,7 @@ gulp.task('browser-sync', function() {
     },
     watchOptions: {
       debounceDelay: 300
-    }
+    },
     ghostMode: false,
     notify: false,
     reloadDelay: 300
