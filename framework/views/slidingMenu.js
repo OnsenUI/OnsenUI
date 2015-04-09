@@ -506,6 +506,10 @@ limitations under the License.
           case 'swipeleft':
             event.gesture.preventDefault();
 
+            if (this._logic.isClosed() && !this._isInsideSwipeTargetArea(event)) {
+              return;
+            }
+
             if (this._isRightMenu) {
               this.open();
             } else {
@@ -517,6 +521,10 @@ limitations under the License.
 
           case 'swiperight':
             event.gesture.preventDefault();
+
+            if (this._logic.isClosed() && !this._isInsideSwipeTargetArea(event)) {
+              return;
+            }
 
             if (this._isRightMenu) {
               this.close();
