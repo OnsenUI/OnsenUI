@@ -64,6 +64,13 @@
     "prompt": "*",
     "run-sequence": "^1.0.2",
     "topdoc": "~0.4.0",
-    "yargs": "^3.5.4"
+    "yargs": "^3.5.4",
+    "karma": "^0.12.31",
+    "mocha": "^2.2.4",
+    "karma-mocha": "^0.1.10",
+    "karma-chrome-launcher": "^0.1.7",
+    "chai": "^2.2.0",
+    "karma-chai": "^0.1.0",
+    "gulp-karma": "0.0.4"
   }
 }

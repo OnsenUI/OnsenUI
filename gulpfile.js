@@ -34,6 +34,7 @@ var os = require('os');
 var fs = require('fs');
 var argv = require('yargs').argv;
 var filter = require('gulp-filter');
+var karma = require('gulp-karma');
 
 ////////////////////////////////////////
 // browser-sync
@@ -65,7 +66,8 @@ gulp.task('core', function() {
     'core/vendor/*.js',
     'core/lib/*.{es6,js}',
     'core/elements/*.{es6,js}',
-    'core/*.{es6,js}'
+    'core/*.{es6,js}',
+    '!*.spec.js'
   ])
     .pipe($.plumber())
     .pipe(onlyES6 = filter('*.es6'))
@@ -74,6 +76,20 @@ gulp.task('core', function() {
     .pipe($.concat('ons-core.js'))            
     .pipe($.header('/*! ons-core.js for Onsen UI v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
     .pipe(gulp.dest('build/js/'));
+});
+
+////////////////////////////////////////
+// core-test
+////////////////////////////////////////
+gulp.task('core-test', ['core'], function() {
+  return gulp.src(['core/*/*.js', 'core/test/testcases/**/*.js'])
+    .pipe(karma({
+      configFile: 'core/test/karma.conf.js',
+      action: 'run'
+    }))
+    .on('error', function(err) {
+      throw err;
+    });
 });
 
 ////////////////////////////////////////
@@ -485,7 +501,7 @@ gulp.task('webdriver-download', function() {
 ////////////////////////////////////////
 // test
 ////////////////////////////////////////
-gulp.task('test', ['webdriver-download', 'prepare'], function() {
+gulp.task('test', ['webdriver-download', 'prepare', 'core-test'], function() {
   var port = 8081;
 
   $.connect.server({
