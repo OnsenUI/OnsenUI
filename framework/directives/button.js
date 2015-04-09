@@ -90,26 +90,21 @@
         $onsen.declareVarAttribute(attrs, button);
         element.data('ons-button', button);
 
-        scope.$on('$destroy', function() {
-          button._events = undefined;
-          $onsen.removeModifierMethods(button);
-          element.data('ons-button', undefined);
-          element = null;
-        });
-
         var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-        element.addClass('button');
         element.addClass(modifierTemplater('button--*'));
 
         $onsen.addModifierMethods(button, 'button--*', element);
 
         $onsen.cleaner.onDestroy(scope, function() {
+          button._events = undefined;
+          $onsen.removeModifierMethods(button);
+          element.data('ons-button', undefined);
+
           $onsen.clearComponent({
             scope: scope,
             attrs: attrs,
             element: element
           });
-
           scope = element = attrs = null;
         });
 
