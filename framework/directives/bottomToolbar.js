@@ -51,10 +51,7 @@
       transclude: false,
       scope: false,
       compile: function(element, attrs) {
-        var modifierTemplater = $onsen.generateModifierTemplater(attrs),
-          inline = typeof attrs.inline !== 'undefined';
-
-        element.addClass(modifierTemplater('bottom-bar--*'));
+        var inline = typeof attrs.inline !== 'undefined';
 
         return {
           pre: function(scope, element, attrs) {
@@ -70,13 +67,14 @@
               element = null;
             });
 
-            $onsen.addModifierMethods(bottomToolbar, 'bottom-bar--*', element);
+            $onsen.addModifierMethodsForCustomElements(bottomToolbar, element);
 
             var pageView = element.inheritedData('ons-page');
             if (pageView && !inline) {
               pageView.registerBottomToolbar(element);
             }
           },
+
           post: function(scope, element, attrs) {
             $onsen.fireComponentEvent(element[0], 'init');
           }
