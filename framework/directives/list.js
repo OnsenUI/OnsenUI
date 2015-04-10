@@ -42,9 +42,7 @@
 (function() {
   'use strict';
 
-  var module = angular.module('onsen');
-
-  module.directive('onsList', function($onsen, GenericView) {
+  angular.module('onsen').directive('onsList', function($onsen, GenericView) {
     return {
       restrict: 'E',
       scope: false,
@@ -53,29 +51,22 @@
       // Do not use isolated scope and template's ng-transclude.
       replace: false,
       transclude: false,
-      compile: function(element, attrs) {
 
-        return function(scope, element, attrs) {
-          var list = new GenericView(scope, element, attrs);
+      link: function(scope, element, attrs) {
+        var list = new GenericView(scope, element, attrs);
 
-          $onsen.declareVarAttribute(attrs, list);
-          element.data('ons-list', list);
+        $onsen.declareVarAttribute(attrs, list);
+        element.data('ons-list', list);
 
-          scope.$on('$destroy', function() {
-            list._events = undefined;
-            $onsen.removeModifierMethods(list);
-            element.data('ons-list', undefined);
-            element = null;
-          });
+        scope.$on('$destroy', function() {
+          list._events = undefined;
+          $onsen.removeModifierMethods(list);
+          element.data('ons-list', undefined);
+          element = null;
+        });
 
-          var templater = $onsen.generateModifierTemplater(attrs);
-
-          element.addClass('list ons-list-inner');
-          element.addClass(templater('list--*'));
-
-          $onsen.addModifierMethods(list, 'list--*', element);
-          $onsen.fireComponentEvent(element[0], 'init');
-        };
+        $onsen.addModifierMethodsForCustomElements(list, element);
+        $onsen.fireComponentEvent(element[0], 'init');
       }
     };
   });
