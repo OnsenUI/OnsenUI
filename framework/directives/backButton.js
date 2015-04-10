@@ -72,9 +72,7 @@
           ComponentCleaner.onDestroy(scope, function() {
             ComponentCleaner.destroyScope(scope);
             ComponentCleaner.destroyAttributes(attrs);
-            element = null;
-            scope = null;
-            attrs = null;
+            element = scope = attrs = null;
           });
         },
         post: function(scope, element) {
