@@ -20,7 +20,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('ModalView', function($onsen, $rootScope) {
+  module.factory('ModalView', function($onsen, $rootScope, $parse, AnimationChooser, ModalAnimator, FadeModalAnimator) {
 
     var ModalView = Class.extend({
       _element: undefined,
@@ -29,8 +29,9 @@ limitations under the License.
       /**
        * @param {Object} scope
        * @param {jqLite} element
+       * @param {Object} attrs
        */
-      init: function(scope, element) {
+      init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
 
@@ -41,8 +42,17 @@ limitations under the License.
 
         this._scope.$on('$destroy', this._destroy.bind(this));
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+        this._doorLock = new DoorLock();
 
-        this.hide();
+        this._animationChooser = new AnimationChooser({
+          animators: ModalView._animatorDict,
+          baseClass: ModalAnimator,
+          baseClassName: 'ModalAnimator',
+          defaultAnimation: attrs.animation,
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
+
+        this.hide({animation: 'none'});
       },
 
       getDeviceBackButtonHandler: function() {
@@ -51,9 +61,27 @@ limitations under the License.
 
       /**
        * Show modal view.
+       *
+       * @param {Object} [options]
+       * @param {String} [options.animation] animation type
+       * @param {Objhect} [options.animationOptions] animation options
+       * @param {Function} [options.callback] callback after modal is shown
        */
-      show: function() {
-        this._element.css('display', 'table');
+      show: function(options) {
+        options = options || {};
+
+        var callback = options.callback || function() {};
+
+        this._doorLock.waitUnlock(function() {
+          var unlock = this._doorLock.lock(),
+            animator = this._animationChooser.newAnimator(options);
+
+          this._element.css('display', 'table');
+          animator.show(this, function() {
+            unlock();
+            callback();
+          });
+        }.bind(this));
       },
 
       _isVisible: function() {
@@ -67,13 +95,36 @@ limitations under the License.
 
       /**
        * Hide modal view.
+       *
+       * @param {Object} [options]
+       * @param {String} [options.animation] animation type
+       * @param {Objhect} [options.animationOptions] animation options
+       * @param {Function} [options.callback] callback after modal is hidden
        */
-      hide: function() {
-        this._element.css('display', 'none');
+      hide: function(options) {
+        options = options || {};
+
+        var callback = options.callback || function() {};
+
+        this._doorLock.waitUnlock(function() {
+          var unlock = this._doorLock.lock(),
+            animator = this._animationChooser.newAnimator(options);
+
+          animator.hide(this, function() {
+            this._element.css('display', 'none');
+            unlock();
+            callback();
+          }.bind(this));
+        }.bind(this));
       },
 
       /**
-       * Toggle modal view visibility.
+       * Toggle modal view.
+       *
+       * @param {Object} [options]
+       * @param {String} [options.animation] animation type
+       * @param {Objhect} [options.animationOptions] animation options
+       * @param {Function} [options.callback] callback after modal is toggled
        */
       toggle: function() {
         if (this._isVisible()) {
@@ -91,6 +142,24 @@ limitations under the License.
         this._element = this._scope = null;
       }
     });
+
+    ModalView._animatorDict = {
+      'default': ModalAnimator,
+      'fade': FadeModalAnimator,
+      'none': ModalAnimator
+    };
+
+    /**
+     * @param {String} name
+     * @param {Function} Animator
+     */
+    ModalView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof ModalAnimator)) {
+        throw new Error('"Animator" param must inherit DialogAnimator');
+      }
+      this._animatorDict[name] = Animator;
+    };
+
     MicroEvent.mixin(ModalView);
 
     return ModalView;
