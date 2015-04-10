@@ -297,7 +297,7 @@ limitations under the License.
       _createEventListeners: function() {
         var element = this._scrollElement.parent();
 
-        this._hammer = new Hammer(element[0], {
+        this._gestureDetector = new GestureDetector(element[0], {
           dragMinDistance: 1,
           dragDistanceCorrection: false
         });
@@ -309,18 +309,18 @@ limitations under the License.
         this._bindedOnScroll = this._onScroll.bind(this);
 
         // Bind listeners
-        this._hammer.on('drag', this._bindedOnDrag);
-        this._hammer.on('dragstart', this._bindedOnDragStart);
-        this._hammer.on('dragend', this._bindedOnDragEnd);
+        this._gestureDetector.on('drag', this._bindedOnDrag);
+        this._gestureDetector.on('dragstart', this._bindedOnDragStart);
+        this._gestureDetector.on('dragend', this._bindedOnDragEnd);
         element.on('scroll', this._bindedOnScroll);
       },
 
       _destroyEventListeners: function() {
         var element = this._scrollElement.parent();
 
-        this._hammer.off('drag', this._bindedOnDrag);
-        this._hammer.off('dragstart', this._bindedOnDragStart);
-        this._hammer.off('dragend', this._bindedOnDragEnd);
+        this._gestureDetector.off('drag', this._bindedOnDrag);
+        this._gestureDetector.off('dragstart', this._bindedOnDragStart);
+        this._gestureDetector.off('dragend', this._bindedOnDragEnd);
         element.off('scroll', this._bindedOnScroll);
       },
 

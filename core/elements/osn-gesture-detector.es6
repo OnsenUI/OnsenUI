@@ -20,7 +20,7 @@ limitations under the License.
 
   class GestureDetectorElement extends HTMLElement {
     createdCallback() {
-      this._hammer = new Hammer(this);
+      this._gestureDetector = new GestureDetector(this);
     }
   }
 

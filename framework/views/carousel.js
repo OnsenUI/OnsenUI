@@ -426,12 +426,12 @@ limitations under the License.
       },
 
       _prepareEventListeners: function() {
-        this._hammer = new Hammer(this._element[0], {
+        this._gestureDetector = new GestureDetector(this._element[0], {
           dragMinDistance: 1
         });
 
-        this._hammer.on('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
-        this._hammer.on('dragend', this._bindedOnDragEnd);
+        this._gestureDetector.on('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
+        this._gestureDetector.on('dragend', this._bindedOnDragEnd);
 
         angular.element(window).on('resize', this._bindedOnResize);
       },
@@ -782,8 +782,8 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy');
 
-        this._hammer.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
-        this._hammer.off('dragend', this._bindedOnDragEnd);
+        this._gestureDetector.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
+        this._gestureDetector.off('dragend', this._bindedOnDragEnd);
 
         angular.element(window).off('resize', this._bindedOnResize);
 
