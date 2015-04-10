@@ -48,7 +48,6 @@
           var listHeader = new GenericView(scope, element, attrs);
 
           $onsen.declareVarAttribute(attrs, listHeader);
-
           element.data('ons-listHeader', listHeader);
 
           scope.$on('$destroy', function() {
@@ -58,12 +57,7 @@
             element = null;
           });
 
-          var templater = $onsen.generateModifierTemplater(attrs);
-          element.addClass('list__header ons-list-header-inner');
-          element.addClass(templater('list__header--*'));
-
-          $onsen.addModifierMethods(listHeader, 'list__header--*', element);
-
+          $onsen.addModifierMethodsForCustomElements(listHeader, element);
           $onsen.fireComponentEvent(element[0], 'init');
         };
       }
