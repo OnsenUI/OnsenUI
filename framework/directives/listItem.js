@@ -68,11 +68,7 @@
             element = null;
           });
 
-          var templater = $onsen.generateModifierTemplater(attrs);
-          element.addClass('list__item ons-list-item-inner');
-          element.addClass(templater('list__item--*'));
-
-          $onsen.addModifierMethods(listItem, 'list__item--*', element);
+          $onsen.addModifierMethodsForCustomElements(listItem, element);
 
           $onsen.fireComponentEvent(element[0], 'init');
         };
