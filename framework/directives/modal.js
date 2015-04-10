@@ -97,7 +97,7 @@
               page.registerExtraElement(element);
             }
 
-            var modal = new ModalView(scope, element);
+            var modal = new ModalView(scope, element, attrs);
 
             $onsen.addModifierMethods(modal, 'modal--*', element);
             $onsen.addModifierMethods(modal, 'modal--*__content', element.children());
