@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-{
+(() => {
   'use strict';
 
   var scheme = {'' : 'toolbar-button--*'};
@@ -26,21 +26,12 @@ limitations under the License.
       this.classList.add('toolbar-button');
       this.classList.add('navigation-bar__line-height');
 
-      ModifierUtil.initModifier({
-        modifier: this.getAttribute('modifier'), 
-        element: this, 
-        scheme: scheme
-      });
+      ModifierUtil.initModifier(this, scheme);
     }
 
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
-        return ModifierUtil.onModifierChanged({
-          last: last, 
-          current: current, 
-          element: this, 
-          scheme: scheme
-        });
+        return ModifierUtil.onModifierChanged(last, current, this, scheme);
       }
     }
   }
@@ -50,4 +41,4 @@ limitations under the License.
       prototype: ToolbarButtonElement.prototype
     });
   }
-};
+})();

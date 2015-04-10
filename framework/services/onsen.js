@@ -220,16 +220,20 @@ limitations under the License.
           var methods = {
             hasModifier: function(needle) {
               var tokens = ModifierUtil.split(element.attr('modifier'));
+              needle = typeof needle === 'string' ? needle.trim() : '';
 
               return ModifierUtil.split(needle).some(function(needle) {
                 return tokens.indexOf(needle) != -1;
               });
             },
 
-            removeModifier: function(modifier) {
-              modifier = ModifierUtil.split(modifier).filter(function(token) {
-                return token !== modifier;
+            removeModifier: function(needle) {
+              needle = typeof needle === 'string' ? needle.trim() : '';
+
+              var modifier = ModifierUtil.split(element.attr('modifier')).filter(function(token) {
+                return token !== needle;
               }).join(' ');
+
               element.attr('modifier', modifier);
             },
 
@@ -243,9 +247,9 @@ limitations under the License.
 
             toggleModifier: function(modifier) {
               if (this.hasModifier(modifier)) {
-                this.addModifier(modifier);
-              } else {
                 this.removeModifier(modifier);
+              } else {
+                this.addModifier(modifier);
               }
             }
           };

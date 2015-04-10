@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-{
+(() => {
   'use strict';
 
   class IconElement extends HTMLElement {
@@ -97,4 +97,4 @@ limitations under the License.
       prototype: IconElement.prototype
     });
   }
-};
+})();

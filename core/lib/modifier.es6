@@ -85,33 +85,29 @@ window.ModifierUtil = (() => {
 
 
     /**
-     * @param {Object} params
-     * @param {String} params.last
-     * @param {String} params.current
-     * @param {HTMLElement} params.element
-     * @param {Object} params.scheme
+     * @param {String} last
+     * @param {String} current
+     * @param {HTMLElement} element
+     * @param {Object} scheme
      */
-    static onModifierChanged(params) {
-      var diff = ModifierUtil.diff(params.last, params.current);
-
-      return ModifierUtil.applyDiffToElement(diff, params.element, params.scheme);
+    static onModifierChanged(last, current, element, scheme) {
+      return ModifierUtil.applyDiffToElement(ModifierUtil.diff(last, current), element, scheme);
     }
 
     /**
-     * @param {Object} params
-     * @param {String} params.modifier
-     * @param {HTMLElement} params.element
-     * @param {Object} params.scheme
+     * @param {HTMLElement} element
+     * @param {Object} scheme
      */
-    static initModifier(params) {
-      if (typeof params.modifier !== 'string') {
+    static initModifier(element, scheme) {
+      var modifier = element.getAttribute('modifier');
+      if (typeof modifier !== 'string') {
         return;
       }
 
       return ModifierUtil.applyDiffToElement({
         removed: [],
-        added: ModifierUtil.split(params.modifier)
-      }, params.element, params.scheme);
+        added: ModifierUtil.split(modifier)
+      }, element, scheme);
     }
 
     static split(modifier) {

@@ -90,10 +90,7 @@
         $onsen.declareVarAttribute(attrs, button);
         element.data('ons-button', button);
 
-        var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-        element.addClass(modifierTemplater('button--*'));
-
-        $onsen.addModifierMethods(button, 'button--*', element);
+        $onsen.addModifierMethodsForCustomElements(button, element);
 
         $onsen.cleaner.onDestroy(scope, function() {
           button._events = undefined;

@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-{
+(() => {
   'use strict';
 
   class TemplateElement extends HTMLElement {
@@ -33,4 +33,4 @@ limitations under the License.
       prototype: TemplateElement.prototype
     });
   }
-};
+})();

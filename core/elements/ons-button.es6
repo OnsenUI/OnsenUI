@@ -15,16 +15,23 @@ limitations under the License.
 
 */
 
-{
+(() => {
   'use strict';
+
+  var scheme = {'' : 'button--*'};
 
   class ButtonElement extends HTMLElement {
 
     createdCallback() {
       this.classList.add('button');
+
+      ModifierUtil.initModifier(this, scheme);
     }
 
     attributeChangedCallback(name, last, current) {
+      if (name === 'modifier') {
+        return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      }
     }
   }
 
@@ -33,4 +40,4 @@ limitations under the License.
       prototype: ButtonElement.prototype
     });
   }
-};
+})();

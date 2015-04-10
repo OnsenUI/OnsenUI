@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-{
+(() => {
   'use strict';
 
   class GestureDetectorElement extends HTMLElement {
@@ -29,4 +29,4 @@ limitations under the License.
       prototype: GestureDetectorElement.prototype
     });
   }
-};
+})();

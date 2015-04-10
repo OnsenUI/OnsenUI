@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-{
+(() => {
   'use strict';
 
   class ColumnElement extends HTMLElement {
@@ -54,4 +54,4 @@ limitations under the License.
       prototype: ColumnElement.prototype
     });
   }
-};
+})();
