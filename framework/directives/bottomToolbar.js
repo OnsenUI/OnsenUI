@@ -39,48 +39,29 @@
 (function(){
   'use strict';
 
-  var module = angular.module('onsen');
-
-  module.directive('onsBottomToolbar', function($onsen, GenericView) {
+  angular.module('onsen').directive('onsBottomToolbar', function($onsen, GenericView) {
     return {
       restrict: 'E',
-      replace: false,
+      link: {
+        pre: function(scope, element, attrs) {
+          var bottomToolbar = new GenericView(scope, element, attrs, {
+            viewKey: 'ons-bottomToolbar'
+          });
 
-      // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
-      transclude: false,
-      scope: false,
-      compile: function(element, attrs) {
-        var inline = typeof attrs.inline !== 'undefined';
+          var inline = typeof attrs.inline !== 'undefined';
+          var pageView = element.inheritedData('ons-page');
 
-        return {
-          pre: function(scope, element, attrs) {
-            var bottomToolbar = new GenericView(scope, element, attrs);
-
-            $onsen.declareVarAttribute(attrs, bottomToolbar);
-            element.data('ons-bottomToolbar', bottomToolbar);
-
-            scope.$on('$destroy', function() {
-              bottomToolbar._events = undefined;
-              $onsen.removeModifierMethods(bottomToolbar);
-              element.data('ons-bottomToolbar', undefined);
-              element = null;
-            });
-
-            $onsen.addModifierMethodsForCustomElements(bottomToolbar, element);
-
-            var pageView = element.inheritedData('ons-page');
-            if (pageView && !inline) {
-              pageView.registerBottomToolbar(element);
-            }
-          },
-
-          post: function(scope, element, attrs) {
-            $onsen.fireComponentEvent(element[0], 'init');
+          if (pageView && !inline) {
+            pageView.registerBottomToolbar(element);
           }
-        };
+        },
+
+        post: function(scope, element, attrs) {
+          $onsen.fireComponentEvent(element[0], 'init');
+        }
       }
     };
   });
+
 })();
 

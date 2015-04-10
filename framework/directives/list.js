@@ -45,30 +45,14 @@
   angular.module('onsen').directive('onsList', function($onsen, GenericView) {
     return {
       restrict: 'E',
-      scope: false,
-
-      // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclude.
-      replace: false,
-      transclude: false,
-
       link: function(scope, element, attrs) {
-        var list = new GenericView(scope, element, attrs);
-
-        $onsen.declareVarAttribute(attrs, list);
-        element.data('ons-list', list);
-
-        scope.$on('$destroy', function() {
-          list._events = undefined;
-          $onsen.removeModifierMethods(list);
-          element.data('ons-list', undefined);
-          element = null;
+        new GenericView(scope, element, attrs, {
+          viewKey: 'ons-list'
         });
 
-        $onsen.addModifierMethodsForCustomElements(list, element);
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };
   });
-})();
 
+})();

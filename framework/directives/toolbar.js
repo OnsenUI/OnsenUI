@@ -214,19 +214,12 @@
 
         return {
           pre: function(scope, element, attrs) {
-            var toolbar = new GenericView(scope, element, attrs);
-
-            $onsen.declareVarAttribute(attrs, toolbar);
-
-
-            scope.$on('$destroy', function() {
-              toolbar._events = undefined;
-              $onsen.removeModifierMethods(toolbar);
-              element.data('ons-toolbar', undefined);
-              element = null;
+            var toolbar = new GenericView(scope, element, attrs, {
+              viewKey: 'ons-toolbar',
+              directiveOnly: true,
+              modifierTemplater: 'navigation-bar--*'
             });
 
-            $onsen.addModifierMethods(toolbar, 'navigation-bar--*', element);
             angular.forEach(['left', 'center', 'right'], function(position) {
               var el = element[0].querySelector('.navigation-bar__' + position);
               if (el) {
@@ -239,8 +232,6 @@
             if (pageView && !inline) {
               pageView.registerToolbar(element);
             }
-
-            element.data('ons-toolbar', toolbar);
           },
           post: function(scope, element, attrs) {
             $onsen.fireComponentEvent(element[0], 'init');

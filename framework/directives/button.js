@@ -77,36 +77,39 @@
 
 (function(){
   'use strict';
-  var module = angular.module('onsen');
 
-  module.directive('onsButton', function($onsen, ButtonView) {
+  angular.module('onsen').directive('onsButton', function($onsen, GenericView) {
     return {
       restrict: 'E',
-      replace: false,
-      scope: false,
       link: function(scope, element, attrs) {
-        var button = new ButtonView(element);
-
-        $onsen.declareVarAttribute(attrs, button);
-        element.data('ons-button', button);
-
-        $onsen.addModifierMethodsForCustomElements(button, element);
-
-        $onsen.cleaner.onDestroy(scope, function() {
-          button._events = undefined;
-          $onsen.removeModifierMethods(button);
-          element.data('ons-button', undefined);
-
-          $onsen.clearComponent({
-            scope: scope,
-            attrs: attrs,
-            element: element
-          });
-          scope = element = attrs = null;
+        var button = new GenericView(element, scope, attrs, {
+          viewKey: 'ons-button'
         });
+
+        button.isDisabled = isDisabled;
+        button.setDisabled = setDisabled;
 
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };
   });
+
+  /**
+   * Returns whether the button is disabled or not.
+   */
+  function isDisabled() {
+    return this._element[0].hasAttribute('disabled');
+  }
+
+  /**
+   * Disabled or enable button.
+   */
+  function setDisabled(disabled) {
+    if (disabled) {
+      this._element[0].setAttribute('disabled', '');
+    } else {
+      this._element[0].removeAttribute('disabled');
+    }
+  }
+
 })();

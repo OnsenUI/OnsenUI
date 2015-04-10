@@ -17,9 +17,8 @@ limitations under the License.
 
 (function(){
   'use strict';
-  var module = angular.module('onsen');
 
-  module.factory('GenericView', function($onsen) {
+  angular.module('onsen').factory('GenericView', function($onsen) {
 
     var GenericView = Class.extend({
 
@@ -27,12 +26,52 @@ limitations under the License.
        * @param {Object} scope
        * @param {jqLite} element
        * @param {Object} attrs
+       * @param {Object} [options]
+       * @param {String} [options.viewKey]
+       * @param {Boolean} [options.directiveOnly]
+       * @param {String} [options.modifierTemplate]
        */
-      init: function(scope, element, attrs) {
+      init: function(scope, element, attrs, options) {
+        var self = this;
+        options = {};
+
         this._element = element;
         this._scope = scope;
+        this._attrs = attrs;
+
+        if (options.viewKey) {
+          $onsen.declareVarAttribute(attrs, button);
+          element.data(options.viewKey, button);
+        }
+
+        if (options.directiveOnly) {
+          if (!options.modifierTemplate) {
+            throw new Error('options.modifierTemplate is undefined.');
+          }
+          $onsen.addModifierMethods(this, options.modifierTemplate, element);
+        } else {
+          $onsen.addModifierMethodsForCustomElements(this, element);
+        }
+
+        $onsen.cleaner.onDestroy(scope, function() {
+          self._events = undefined;
+          $onsen.removeModifierMethods(button);
+
+          if (options.viewKey) {
+            element.data(options.viewKey, undefined);
+          }
+
+          $onsen.clearComponent({
+            scope: scope,
+            attrs: attrs,
+            element: element
+          });
+
+          self = element = this._element = this._scope = scope = this._attrs = attrs = options = null;
+        });
       }
     });
+
     MicroEvent.mixin(GenericView);
 
     return GenericView;
