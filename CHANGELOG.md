@@ -10,7 +10,7 @@ v1.3.1-dev
  * core: Removed unneeded iScroll library.
  * ons-scroller: [BC Break] Removed undocumented attributes and simplified DOM structure in ons-scroller elements.
  * ons-button: [BC Break] Removed animation feature and related attributes.
- * ons-modal: Added animations.
+ * ons-modal: Added animations and animation options.
 
 v1.3.0
 ----

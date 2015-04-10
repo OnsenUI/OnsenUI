@@ -35,8 +35,36 @@
  */
 
 /**
+ * @ngdoc attribute
+ * @name animation
+ * @type {String}
+ * @default default
+ * @description
+ *  [en]The animation used when showing and hiding the modal. Can be either "none" or "fade".[/en]
+ *  [ja]モーダルを表示する際のアニメーション名を指定します。"none"もしくは"fade"を指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name animation-options
+ * @type {Expression}
+ * @description
+ *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+ *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+ */
+
+/**
  * @ngdoc method
- * @signature toggle()
+ * @signature toggle([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none" and "fade".[/en]
+ *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @description
  *   [en]Toggle modal visibility.[/en]
  *   [ja]モーダルの表示を切り替えます。[/ja]
@@ -44,7 +72,16 @@
 
 /**
  * @ngdoc method
- * @signature show()
+ * @signature show([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none" and "fade".[/en]
+ *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @description
  *   [en]Show modal.[/en]
  *   [ja]モーダルを表示します。[/ja]
@@ -52,7 +89,16 @@
 
 /**
  * @ngdoc method
- * @signature hide()
+ * @signature hide([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none" and "fade".[/en]
+ *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @description
  *   [en]Hide modal.[/en]
  *   [ja]モーダルを非表示にします。[/ja]
