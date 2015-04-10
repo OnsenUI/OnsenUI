@@ -31,7 +31,7 @@ limitations under the License.
     }
 
     _update() {
-      this._cleanClassAttribute(this);
+      this._cleanClassAttribute();
 
       var builded = this._buildClassAndStyle(this);
 

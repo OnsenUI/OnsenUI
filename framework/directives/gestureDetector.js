@@ -56,17 +56,17 @@
             }
           };
 
-          var hammer = element[0]._hammer;
-          hammer.on(EVENTS.join(' '), handler);
+          var gestureDetector = element[0]._gestureDetector;
+          gestureDetector.on(EVENTS.join(' '), handler);
 
           $onsen.cleaner.onDestroy(scope, function() {
-            hammer.off(EVENTS.join(' '), handler);
+            gestureDetector.off(EVENTS.join(' '), handler);
             $onsen.clearComponent({
               scope: scope,
               element: element,
               attrs: attrs
             });
-            hammer.element = scope = element = attrs = null;
+            gestureDetector.element = scope = element = attrs = null;
           });
 
           $onsen.fireComponentEvent(element[0], 'init');

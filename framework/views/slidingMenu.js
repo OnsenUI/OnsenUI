@@ -181,7 +181,7 @@ limitations under the License.
         this._isRightMenu = attrs.side === 'right';
 
         // Close menu on tap event.
-        this._mainPageHammer = new Hammer(this._mainPage[0]);
+        this._mainPageGestureDetector = new GestureDetector(this._mainPage[0]);
         this._bindedOnTap = this._onTap.bind(this);
 
         var maxDistance = this._normalizeMaxSlideDistanceAttr();
@@ -280,7 +280,7 @@ limitations under the License.
         this._deviceBackButtonHandler.destroy();
         window.removeEventListener('resize', this._bindedOnWindowResize);
 
-        this._mainPageHammer.off('tap', this._bindedOnTap);
+        this._mainPageGestureDetector.off('tap', this._bindedOnTap);
         this._element = this._scope = this._attrs = null;
       },
 
@@ -295,9 +295,9 @@ limitations under the License.
        */
       setSwipeable: function(enabled) {
         if (enabled) {
-          this._activateHammer();
+          this._activateGestureDetector();
         } else {
-          this._deactivateHammer();
+          this._deactivateGestureDetector();
         }
       },
 
@@ -341,16 +341,16 @@ limitations under the License.
         }
       },
 
-      _activateHammer: function(){
-        this._hammertime.on('touch dragleft dragright swipeleft swiperight release', this._boundHandleEvent);
+      _activateGestureDetector: function(){
+        this._gestureDetector.on('touch dragleft dragright swipeleft swiperight release', this._boundHandleEvent);
       },
 
-      _deactivateHammer: function(){
-        this._hammertime.off('touch dragleft dragright swipeleft swiperight release', this._boundHandleEvent);
+      _deactivateGestureDetector: function(){
+        this._gestureDetector.off('touch dragleft dragright swipeleft swiperight release', this._boundHandleEvent);
       },
 
       _bindEvents: function() {
-        this._hammertime = new Hammer(this._element[0], {
+        this._gestureDetector = new GestureDetector(this._element[0], {
           dragMinDistance: 1
         });
       },
@@ -619,7 +619,7 @@ limitations under the License.
           unlock();
 
           this._mainPage.children().css('pointer-events', '');
-          this._mainPageHammer.off('tap', this._bindedOnTap);
+          this._mainPageGestureDetector.off('tap', this._bindedOnTap);
 
           this.emit('postclose', {
             slidingMenu: this
@@ -667,7 +667,7 @@ limitations under the License.
           unlock();
 
           this._mainPage.children().css('pointer-events', 'none');
-          this._mainPageHammer.on('tap', this._bindedOnTap);
+          this._mainPageGestureDetector.on('tap', this._bindedOnTap);
 
           this.emit('postopen', {
             slidingMenu: this

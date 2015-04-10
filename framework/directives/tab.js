@@ -138,7 +138,7 @@
 
   var defaultInnerTemplate =
     '<div ng-if="icon != undefined" class="tab-bar__icon">' +
-      '<ons-icon icon="{{tabIcon}}" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>' +
+      '<ons-icon ng-attr-icon="{{tabIcon}}" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>' +
     '</div>' +
     '<div ng-if="label" class="tab-bar__label">{{label}}</div>';
 
