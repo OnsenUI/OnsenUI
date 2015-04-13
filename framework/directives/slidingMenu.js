@@ -154,7 +154,7 @@
 
 /**
  * @ngdoc attribute
- * @name direction
+ * @name side
  * @type {String}
  * @description
  *   [en]Specify which side of the screen the menu page is located on. Possible values are "left" and "right".[/en]
