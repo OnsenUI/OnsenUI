@@ -196,7 +196,7 @@ limitations under the License.
         if (hasPage) {
           pageElement = angular.element(div.childNodes[0]);
         } else {
-          throw new Error('You can not supply no "ons-page" element to "ons-navigator".');
+          throw new Error('You must supply an "ons-page" element to "ons-navigator".');
         }
 
         var link = $compile(pageElement);
