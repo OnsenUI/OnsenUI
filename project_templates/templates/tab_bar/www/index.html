@@ -22,9 +22,7 @@
 
     angular.module('app').controller('AppController', function($scope) {
       $scope.doSomething = function() {
-        setTimeout(function() {
-          alert('tapped');
-        }, 100);
+        ons.notification.alert({message: 'Hello, World!'});
       };
     });
   </script>

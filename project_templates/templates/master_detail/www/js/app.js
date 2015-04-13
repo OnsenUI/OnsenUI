@@ -4,9 +4,7 @@
 
   module.controller('AppController', function($scope, $data) {
     $scope.doSomething = function() {
-      setTimeout(function() {
-        alert('tapped');
-      }, 100);
+      ons.notification.alert({message: 'Hello, World!'});
     };
   });
 

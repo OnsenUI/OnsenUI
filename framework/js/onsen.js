@@ -222,21 +222,19 @@ limitations under the License.
  *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
  */
 
-window.ons = (function(){
+(function(ons){
   'use strict';
 
   var module = angular.module('onsen', ['templates-main']);
   angular.module('onsen.directives', ['onsen']); // for BC
 
   // JS Global facade for Onsen UI.
-  var ons = createOnsenFacade();
+  initOnsenFacade();
   initKeyboardEvents();
   waitDeviceReady();
   waitOnsenUILoad();
   initAngularModule();
   changeGestureDetectorDefault();
-
-  return ons;
 
   function waitDeviceReady() {
     var unlockDeviceReady = ons._readyLock.lock();
@@ -332,8 +330,8 @@ window.ons = (function(){
     });
   }
 
-  function createOnsenFacade() {
-    var ons = {
+  function initOnsenFacade() {
+    var object = {
 
       _readyLock: new DoorLock(),
 
@@ -701,7 +699,10 @@ window.ons = (function(){
         });
       }
     };
-    return ons;
+
+    for (var key in object) {
+      ons[key] = object[key];
+    }
   }
 
-})();
+})(window.ons = window.ons || {});
