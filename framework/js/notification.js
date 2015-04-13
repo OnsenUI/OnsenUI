@@ -178,6 +178,9 @@ limitations under the License.
  *     ダイアログが閉じられた後に実行される関数オブジェクトを指定します。
  *     関数の引数として、インプット要素の中の値が渡されます。ダイアログがキャンセルされた場合には、nullが渡されます。
  *   [/ja]
+ * @param {Boolean} [options.submitOnEnter]
+ *   [en]Submit automatically when enter is pressed. Default is "true".[/en]
+ *   [ja][/ja]
  * @description 
  *   [en]
  *     Display a dialog with a prompt to ask the user a question. 
