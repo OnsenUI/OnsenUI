@@ -29,4 +29,4 @@ pushd $DIR/../
 gulp build
 popd
 
-mv $DIR/../project_templates/onsen_master_detail.zip $DESTINATION_DIR/onsenui-$BUILD_VERSION.$BUILD_NUMBER_$DATE+$COMMIT_HASH.zip
+mv $DIR/../build/onsenui.zip $DESTINATION_DIR/onsenui-$BUILD_VERSION.$BUILD_NUMBER_$DATE+$COMMIT_HASH.zip
