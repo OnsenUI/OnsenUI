@@ -43,6 +43,7 @@ limitations under the License.
       }
     }
   };
+
   util.init();
 
   /**
@@ -100,12 +101,12 @@ limitations under the License.
     };
 
     /**
-     * @param {jqLite} element
+     * @param {HTMLElement} element
      * @param {Function} callback
      */
     this.create = function(element, callback) {
-      if (!(element instanceof angular.element().constructor)) {
-        throw new Error('element must be an instance of jqLite');
+      if (!(element instanceof HTMLElement)) {
+        throw new Error('element must be an instance of HTMLElement');
       }
 
       if (!(callback instanceof Function)) {
@@ -117,7 +118,7 @@ limitations under the License.
         _element: element,
 
         disable: function() {
-          this._element.data('device-backbutton-handler', null);
+          this._element.dataset.deviceBackButtonHandler = undefined;
         },
 
         setListener: function(callback) {
@@ -125,15 +126,15 @@ limitations under the License.
         },
 
         enable: function() {
-          this._element.data('device-backbutton-handler', this);
+          this._element.dataset.deviceBackButtonHandler = this;
         },
 
         isEnabled: function() {
-          return this._element.data('device-backbutton-handler') === this;
+          return this._element.dataset.deviceBackButtonHandler === this;
         },
 
         destroy: function() {
-          this._element.data('device-backbutton-handler', null);
+          this._element.dataset.deviceBackButtonHandler = undefined;
           this._callback = this._element = null;
         }
       };
@@ -153,22 +154,22 @@ limitations under the License.
       //this._dumpTree(tree);
       //this._dumpParents(element);
 
-      var handler = element.data('device-backbutton-handler');
+      var handler = element.dataset.deviceBackButtonHandler;
       handler._callback(createEvent(element));
 
       function createEvent(element) {
         return {
           _element: element,
           callParentHandler: function() {
-            var parent = this._element.parent();
+            var parent = this._element.parentNode;
             var hander = null;
 
-            while (parent[0]) {
-              handler = parent.data('device-backbutton-handler');
+            while (parent) {
+              handler = parent.dataset.deviceBackButtonHandler;
               if (handler) {
                 return handler._callback(createEvent(parent));
               }
-              parent = parent.parent();
+              parent = parent.parentNode;
             }
           }
         };
@@ -176,9 +177,9 @@ limitations under the License.
     };
 
     this._dumpParents = function(element) {
-      while(element[0]) {
-        console.log(element[0].nodeName.toLowerCase() + '.' + element.attr('class'));
-        element = element.parent();
+      while (element) {
+        console.log(element.nodeName.toLowerCase() + '.' + element.getAttribute('class'));
+        element = element.parentNode;
       }
     };
 
@@ -186,25 +187,23 @@ limitations under the License.
      * @return {Object}
      */
     this._captureTree = function() {
-      return createTree(angular.element(document.body));
+      return createTree(document.body);
 
       function createTree(element) {
         return {
           element: element,
-          children: Array.prototype.concat.apply([], Array.prototype.map.call(element.children(), function(child) {
-            child = angular.element(child);
-
-            if (child[0].style.display === 'none') {
+          children: Array.prototype.concat.apply([], Array.prototype.map.call(element.childNodes, function(child) {
+            if (child.style.display === 'none') {
               return [];
             }
 
-            if (child.children().length === 0 && !child.data('device-backbutton-handler')) {
+            if (!child.firstChild && !child.dataset.deviceBackButtonHandler) {
               return [];
             }
 
             var result = createTree(child);
 
-            if (result.children.length === 0 && !child.data('device-backbutton-handler')) {
+            if (result.firstChild === 0 && !child.dataset.deviceBackButtonHandler) {
               return [];
             }
 
@@ -219,7 +218,7 @@ limitations under the License.
 
       function _dump(node, level) {
         var pad = new Array(level + 1).join('  ');
-        console.log(pad + node.element[0].nodeName.toLowerCase());
+        console.log(pad + node.element.nodeName.toLowerCase());
         node.children.forEach(function(node) {
           _dump(node, level + 1);
         });
@@ -228,7 +227,7 @@ limitations under the License.
 
     /**
      * @param {Object} tree
-     * @return {jqLite}
+     * @return {HTMLElement}
      */
     this._findHandlerLeafElement = function(tree) {
       return find(tree);
@@ -249,8 +248,8 @@ limitations under the License.
             return right;
           }
 
-          var leftZ = parseInt(window.getComputedStyle(left[0], '').zIndex, 10);
-          var rightZ = parseInt(window.getComputedStyle(right[0], '').zIndex, 10);
+          var leftZ = parseInt(window.getComputedStyle(left, '').zIndex, 10);
+          var rightZ = parseInt(window.getComputedStyle(right, '').zIndex, 10);
 
           if (!isNaN(leftZ) && !isNaN(rightZ)) {
             return leftZ > rightZ ? left : right;

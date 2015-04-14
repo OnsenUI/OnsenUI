@@ -38,7 +38,7 @@ limitations under the License.
 
         DeviceBackButtonHandler: DeviceBackButtonHandler,
 
-        _defaultDeviceBackButtonHandler: DeviceBackButtonHandler.create(angular.element(document.body), function() {
+        _defaultDeviceBackButtonHandler: DeviceBackButtonHandler.create(window.document.body, function() {
           navigator.app.exitApp();
         }),
 
