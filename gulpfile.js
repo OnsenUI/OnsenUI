@@ -138,20 +138,7 @@ gulp.task('clean', function() {
 ////////////////////////////////////////
 gulp.task('minify-js', function() {
   return merge(
-    gulp.src('build/js/onsenui.js')
-      .pipe($.uglify({
-        mangle: false,
-        preserveComments: function(node, comment) {
-          return comment.line === 1;
-        }
-      }))
-      .pipe($.rename(function(path) {
-        path.extname = '.min.js';
-      }))
-      .pipe(gulp.dest('build/js/'))
-      .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
-      .pipe(gulp.dest('app/lib/onsen/js')),
-    gulp.src('build/js/onsenui_all.js')
+    gulp.src('build/js/{onsenui,onsenui_all,ons-core}.js')
       .pipe($.uglify({
         mangle: false,
         preserveComments: function(node, comment) {
