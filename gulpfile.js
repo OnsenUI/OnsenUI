@@ -129,7 +129,6 @@ gulp.task('clean', function() {
     '.tmp',
     'build',
     'app/lib/onsen/',
-    'project_templates/gen/',
     '.selenium/'
   ], {read: false}).pipe($.clean());
 });
@@ -285,68 +284,6 @@ gulp.task('prepare-css-components', ['prepare'], function() {
 });
 
 ////////////////////////////////////////
-// prepare-project-templates
-////////////////////////////////////////
-gulp.task('prepare-project-templates', function(done) {
-  var names = [
-    'master_detail',
-    'sliding_menu',
-    'tab_bar',
-    'split_view'
-  ];
-
-  gulp.src('build/css/*.css')
-    .pipe(gulp.dest('project_templates/base/www/styles/'))
-    .on('end', function() {
-
-      gulp.src(['build/**', '!build/docs', '!build/docs/**'])
-        .pipe(gulp.dest('app/lib/onsen'))
-        .pipe(gulp.dest('project_templates/base/www/lib/onsen/'))
-        .on('end', function() {
-          gulp.src(['project_templates/base/**/*', '!project_templates/base/node_modules/**/*'], {dot: true})
-            .pipe(gulp.dest('project_templates/gen/master_detail'))
-            .pipe(gulp.dest('project_templates/gen/sliding_menu'))
-            .pipe(gulp.dest('project_templates/gen/tab_bar'))
-            .pipe(gulp.dest('project_templates/gen/split_view'))
-            .on('end', function() {
-              gulp.src(['project_templates/templates/**/*'])
-                .pipe(gulp.dest('project_templates/gen/'))
-                .on('end', done);
-            });
-
-        });
-    });
-});
-
-////////////////////////////////////////
-// compress-project-templates
-////////////////////////////////////////
-gulp.task('compress-project-templates', function() {
-  var names = [
-    'master_detail',
-    'sliding_menu',
-    'tab_bar',
-    'split_view'
-  ];
-
-  var streams = names.map(function(name) {
-    var src = [
-      __dirname + '/project_templates/gen/' + name + '/**/*',
-      '!.DS_Store',
-      '!node_modules'
-    ];
-
-    var stream = gulp.src(src, {cwd : __dirname + '/project_templates', dot: true})
-      .pipe($.zip('onsen_' + name + '.zip'))
-      .pipe(gulp.dest(__dirname + '/project_templates'));
-
-    return stream;
-  });
-
-  return merge.apply(null, streams);
-});
-
-////////////////////////////////////////
 // compress-distribution-package
 ////////////////////////////////////////
 gulp.task('compress-distribution-package', function() {
@@ -370,9 +307,7 @@ gulp.task('build', function(done) {
     'prepare',
     'minify-js',
     'build-docs',
-    'prepare-project-templates',
     'prepare-css-components',
-    'compress-project-templates',
     'compress-distribution-package',
     done
   );
