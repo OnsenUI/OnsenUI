@@ -178,6 +178,9 @@ limitations under the License.
  *     ダイアログが閉じられた後に実行される関数オブジェクトを指定します。
  *     関数の引数として、インプット要素の中の値が渡されます。ダイアログがキャンセルされた場合には、nullが渡されます。
  *   [/ja]
+ * @param {Boolean} [options.submitOnEnter]
+ *   [en]Submit automatically when enter is pressed. Default is "true".[/en]
+ *   [ja][/ja]
  * @description 
  *   [en]
  *     Display a dialog with a prompt to ask the user a question. 
@@ -190,7 +193,7 @@ limitations under the License.
  */
 
 window.ons.notification = (function() {
-  var createAlertDialog = function(title, message, buttonLabels, primaryButtonIndex, modifier, animation, callback, messageIsHTML, cancelable, promptDialog, autofocus, placeholder) {
+  var createAlertDialog = function(title, message, buttonLabels, primaryButtonIndex, modifier, animation, callback, messageIsHTML, cancelable, promptDialog, autofocus, placeholder, submitOnEnter) {
     var dialogEl = angular.element('<ons-alert-dialog>'),
       titleEl = angular.element('<div>').addClass('alert-dialog-title').text(title),
       messageEl = angular.element('<div>').addClass('alert-dialog-content'),
@@ -217,6 +220,21 @@ window.ons.notification = (function() {
         .attr('placeholder', placeholder)
         .css({width: '100%', marginTop: '10px'});
       messageEl.append(inputEl);
+
+      if (submitOnEnter) {
+        inputEl.on('keypress', function(event) {
+          if (event.keyCode === 13) {
+            alertDialog.hide({
+              callback: function() {
+                callback(inputEl.val());
+                alertDialog.destroy();
+                alertDialog = null;
+                inputEl = null;
+              }
+            });
+          }
+        });
+      }
     }
 
     dialogEl.append(footerEl);
@@ -388,6 +406,7 @@ window.ons.notification = (function() {
         callback: function() {},
         cancelable: false,
         autofocus: true,
+        submitOnEnter: true
       };
 
       options = angular.extend({}, defaults, options);
@@ -407,7 +426,8 @@ window.ons.notification = (function() {
         options.cancelable,
         true,
         options.autofocus,
-        options.placeholder
+        options.placeholder,
+        options.submitOnEnter
       );
     }
   };

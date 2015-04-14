@@ -11,6 +11,7 @@ v1.3.1-dev
  * ons-scroller: [BC Break] Removed undocumented attributes and simplified DOM structure in ons-scroller elements.
  * ons-button: [BC Break] Removed animation feature and related attributes.
  * ons-modal: Added animations and animation options.
+ * ons-alert-dialog: Added `submitOnEnter` parameter for `ons.notification.prompt()`.
 
 v1.3.0
 ----
