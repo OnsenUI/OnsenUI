@@ -276,12 +276,6 @@ limitations under the License.
 
       _onsenService: null,
 
-      _config: {
-        autoStatusBarFill: true
-      },
-
-      _unlockersDict: {},
-
       // Object to attach component variables to when using the var="..." attribute.
       // Can be set to null to avoid polluting the global scope.
       componentBase: window,
@@ -317,26 +311,6 @@ limitations under the License.
         }
 
         return module;
-      },
-
-      /**
-       * Enable status bar fill feature on iOS7 and above.
-       */
-      enableAutoStatusBarFill: function() {
-        if (this.isReady()) {
-          throw new Error('This method must be called before ons.isReady() is true.');
-        }
-        this._config.autoStatusBarFill = true;
-      },
-
-      /**
-       * Disable status bar fill feature on iOS7 and above.
-       */
-      disableAutoStatusBarFill: function() {
-        if (this.isReady()) {
-          throw new Error('This method must be called before ons.isReady() is true.');
-        }
-        this._config.autoStatusBarFill = false;
       },
 
       /**

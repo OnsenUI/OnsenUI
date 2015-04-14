@@ -19,6 +19,8 @@ limitations under the License.
   'use strict';
 
   ons._readyLock = new DoorLock();
+  ons._config = {autoStatusBarFill: true};
+
   waitDeviceReady();
 
   /**
@@ -48,6 +50,26 @@ limitations under the License.
     } else {
       ons._readyLock.waitUnlock(callback);
     }
+  };
+
+  /**
+   * Enable status bar fill feature on iOS7 and above.
+   */
+  ons.enableAutoStatusBarFill = () => {
+    if (this.isReady()) {
+      throw new Error('This method must be called before ons.isReady() is true.');
+    }
+    this._config.autoStatusBarFill = true;
+  };
+
+  /**
+   * Disable status bar fill feature on iOS7 and above.
+   */
+  ons.disableAutoStatusBarFill = () => {
+    if (this.isReady()) {
+      throw new Error('This method must be called before ons.isReady() is true.');
+    }
+    this._config.autoStatusBarFill = false;
   };
 
   function waitDeviceReady() {

@@ -25,7 +25,6 @@ limitations under the License.
    */
   module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner, DeviceBackButtonHandler) {
 
-    var unlockerDict = createUnlockerDict();
     var $onsen = createOnsenService();
 
     return $onsen;
@@ -105,38 +104,6 @@ limitations under the License.
               ComponentCleaner.destroyElement(element);
             });
           }
-        },
-
-        /**
-         * Find first ancestor of el with tagName
-         * or undefined if not found
-         *
-         * @param {jqLite} element
-         * @param {String} tagName
-         */
-        upTo : function(el, tagName) {
-          tagName = tagName.toLowerCase();
-
-          do {
-            if (!el) {
-              return null;
-            }
-            el = el.parentNode;
-            if (el.tagName.toLowerCase() == tagName) {
-              return el;
-            }
-          } while (el.parentNode);
-
-          return null;
-        },
-
-
-        /**
-         * @param {Array} dependencies
-         * @param {Function} callback
-         */
-        waitForVariables: function(dependencies, callback) {
-          unlockerDict.addCallback(dependencies, callback);
         },
 
         /**
@@ -348,7 +315,6 @@ limitations under the License.
             var varName = attrs['var'];
 
             this._defineVar(varName, object);
-            unlockerDict.unlockVarName(varName);
           }
         },
 
@@ -477,72 +443,5 @@ limitations under the License.
       };
     }
 
-    function createUnlockerDict() {
-
-      return {
-        _unlockersDict: {},
-
-        _unlockedVarDict: {},
-
-        /**
-         * @param {String} name
-         * @param {Function} unlocker
-         */
-        _addVarLock: function (name, unlocker) {
-          if (!(unlocker instanceof Function)) {
-            throw new Error('unlocker argument must be an instance of Function.');
-          }
-
-          if (this._unlockersDict[name]) {
-            this._unlockersDict[name].push(unlocker);
-          } else {
-            this._unlockersDict[name] = [unlocker];
-          }
-        },
-
-        /**
-         * @param {String} varName
-         */
-        unlockVarName: function(varName) {
-          var unlockers = this._unlockersDict[varName];
-
-          if (unlockers) {
-            unlockers.forEach(function(unlock) {
-              unlock();
-            });
-          }
-          this._unlockedVarDict[varName] = true;
-        },
-
-        /**
-         * @param {Array} dependencies an array of var name
-         * @param {Function} callback
-         */
-        addCallback: function(dependencies, callback) {
-          if (!(callback instanceof Function)) {
-            throw new Error('callback argument must be an instance of Function.');
-          }
-
-          var doorLock = new DoorLock();
-          var self = this;
-
-          dependencies.forEach(function(varName) {
-
-            if (!self._unlockedVarDict[varName]) {
-              // wait for variable declaration
-              var unlock = doorLock.lock();
-              self._addVarLock(varName, unlock);
-            }
-
-          });
-
-          if (doorLock.isLocked()) {
-            doorLock.waitUnlock(callback);
-          } else {
-            callback();
-          }
-        }
-      };
-    }
   });
 })();
