@@ -18,9 +18,10 @@ limitations under the License.
 (function(){
   'use strict';
 
+
   var util = {
     init: function() {
-      this.ready = false;
+      this._ready = false;
     },
 
     addBackButtonListener: function(fn) {
@@ -46,12 +47,56 @@ limitations under the License.
 
   util.init();
 
+  var HandlerRepository = {
+    _store: {},
+
+    _genId: (function() {
+      var i = 0;
+      return function() {
+        return i++;
+      };
+    }),
+
+    set: function(element, handler) {
+      if (element.dataset.deviceBackButtonHandlerId) {
+        this.remove(element);
+      }
+      var id = element.dataset.deviceBackButtonHandlerId = HandlerRepository._genId();
+      this._store[id] = handler;
+    },
+
+    remove: function(element) {
+      if (element.dataset.deviceBackButtonHandlerId) {
+        delete this._store[element.dataset.deviceBackButtonHandlerId];
+        delete element.dataset.deviceBackButtonHandlerId;
+      }
+    },
+
+    get: function(element) {
+      var id = element.dataset.deviceBackButtonHandlerId;
+
+      if (!this._store[id]) {
+        throw new Error();
+      }
+
+      return this._store[id];
+    },
+
+    has: function(element) {
+      var id = element.dataset.deviceBackButtonHandlerId;
+
+      return !!this._store[id];
+    }
+  };
+
   /**
    * Internal service class for framework implementation.
    */
   angular.module('onsen').service('DeviceBackButtonHandler', function() {
 
     this._init = function() {
+      this._bindedCallback = this._callback.bind(this);
+
       if (window.ons.isWebView()) {
         window.document.addEventListener('deviceready', function() {
           util._ready = true;
@@ -59,8 +104,6 @@ limitations under the License.
       } else {
         util._ready = true;
       }
-
-      this._bindedCallback = this._callback.bind(this);
 
       this.enable();
     };
@@ -118,7 +161,7 @@ limitations under the License.
         _element: element,
 
         disable: function() {
-          this._element.dataset.deviceBackButtonHandler = undefined;
+          HandlerRepository.remove(element);
         },
 
         setListener: function(callback) {
@@ -126,15 +169,15 @@ limitations under the License.
         },
 
         enable: function() {
-          this._element.dataset.deviceBackButtonHandler = this;
+          HandlerRepository.set(element, this);
         },
 
         isEnabled: function() {
-          return this._element.dataset.deviceBackButtonHandler === this;
+          return HandlerRepository.get(element) === this;
         },
 
         destroy: function() {
-          this._element.dataset.deviceBackButtonHandler = undefined;
+          HandlerRepository.remove(element);
           this._callback = this._element = null;
         }
       };
@@ -149,12 +192,12 @@ limitations under the License.
      */
     this._dispatchDeviceBackButtonEvent = function(event) {
       var tree = this._captureTree();
-      var element = this._findHandlerLeafElement(tree);
-
       //this._dumpTree(tree);
+
+      var element = this._findHandlerLeafElement(tree);
       //this._dumpParents(element);
 
-      var handler = element.dataset.deviceBackButtonHandler;
+      var handler = HandlerRepository.get(element);
       handler._callback(createEvent(element));
 
       function createEvent(element) {
@@ -165,7 +208,7 @@ limitations under the License.
             var hander = null;
 
             while (parent) {
-              handler = parent.dataset.deviceBackButtonHandler;
+              handler = HandlerRepository.get(parent);
               if (handler) {
                 return handler._callback(createEvent(parent));
               }
@@ -192,24 +235,33 @@ limitations under the License.
       function createTree(element) {
         return {
           element: element,
-          children: Array.prototype.concat.apply([], Array.prototype.map.call(element.childNodes, function(child) {
-            if (child.style.display === 'none') {
+          children: Array.prototype.concat.apply([], arrayOf(element.children).map(function(childElement) {
+
+            if (childElement.style.display === 'none') {
               return [];
             }
 
-            if (!child.firstChild && !child.dataset.deviceBackButtonHandler) {
+            if (childElement.children.length === 0 && !HandlerRepository.has(childElement)) {
               return [];
             }
 
-            var result = createTree(child);
+            var result = createTree(childElement);
 
-            if (result.firstChild === 0 && !child.dataset.deviceBackButtonHandler) {
+            if (result.children.length === 0 && !HandlerRepository.has(result.element)) {
               return [];
             }
 
             return [result];
           }))
         };
+      }
+
+      function arrayOf(target) {
+        var result = [];
+        for (var i = 0; i < target.length; i++) {
+          result.push(target[i]);
+        }
+        return result;
       }
     };
 
@@ -244,7 +296,7 @@ limitations under the License.
         return node.children.map(function(childNode) {
           return childNode.element;
         }).reduce(function(left, right) {
-          if (left === null) {
+          if (!left) {
             return right;
           }
 
