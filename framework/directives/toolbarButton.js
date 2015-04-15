@@ -35,7 +35,7 @@
  * @name var
  * @type {String}
  * @description
- *   [en]Variable name to refer this buttom.[/en]
+ *   [en]Variable name to refer this button.[/en]
  *   [ja]このボタンを参照するための名前を指定します。[/ja]
  */
 

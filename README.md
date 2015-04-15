@@ -176,7 +176,7 @@ Here is a list of some rules that should be followed:
 
 * Code should be properly indented. Onsen UI uses two-space indentation in both HTML and JavaScript. Please don't use tabs for indentation.
 * Separate binary operators with spaces: `var x = 1+1` is incorrect, it should be written as: `var x = 1 + 1`.
-* `if`, `while`, `for`, etc. should be separated from the paranthesis with a space.
+* `if`, `while`, `for`, etc. should be separated from the parenthesis with a space.
 * Use easy-to-understand and logical naming for your variables and method names, especially for variables and methods that are exposed to the user.
 * Internal APIs should be preceded by an underscore.
 * Use single quotes for strings in JavaScript and double quotes for attributes in HTML.

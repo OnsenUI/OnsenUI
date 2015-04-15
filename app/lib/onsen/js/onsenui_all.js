@@ -2894,7 +2894,7 @@ function jqLiteRemove(element, keepData) {
 function jqLiteDocumentLoaded(action, win) {
   win = win || window;
   if (win.document.readyState === 'complete') {
-    // Force the action to be run async for consistent behaviour
+    // Force the action to be run async for consistent behavior
     // from the action's point of view
     // i.e. it will definitely not be in a $apply
     win.setTimeout(action);
@@ -4093,7 +4093,7 @@ function annotate(fn, strictDi, name) {
  * @description
  *
  * Register a **service decorator** with the {@link auto.$injector $injector}. A service decorator
- * intercepts the creation of a service, allowing it to override or modify the behaviour of the
+ * intercepts the creation of a service, allowing it to override or modify the behavior of the
  * service. The object returned by the decorator may be the original service, or a new service
  * object which replaces or wraps and delegates to the original service.
  *
@@ -5972,8 +5972,8 @@ function $TemplateCacheProvider() {
  * #### `multiElement`
  * When this property is set to true, the HTML compiler will collect DOM nodes between
  * nodes with the attributes `directive-name-start` and `directive-name-end`, and group them
- * together as the directive elements. It is recomended that this feature be used on directives
- * which are not strictly behavioural (such as {@link ngClick}), and which
+ * together as the directive elements. It is recommended that this feature be used on directives
+ * which are not strictly behavioral (such as {@link ngClick}), and which
  * do not manipulate or replace child nodes (such as {@link ngInclude}).
  *
  * #### `priority`
@@ -6305,7 +6305,7 @@ function $TemplateCacheProvider() {
  * content and the `scope` is the newly created transclusion scope, to which the clone is bound.
  *
  * <div class="alert alert-info">
- * **Best Practice**: Always provide a `cloneFn` (clone attach function) when you call a translude function
+ * **Best Practice**: Always provide a `cloneFn` (clone attach function) when you call a transclude function
  * since you then get a fresh clone of the original DOM and also have access to the new transclusion scope.
  * </div>
  *
@@ -6337,7 +6337,7 @@ function $TemplateCacheProvider() {
  * </div>
  *
  * The built-in DOM manipulation directives, such as {@link ngIf}, {@link ngSwitch} and {@link ngRepeat}
- * automatically destroy their transluded clones as necessary so you do not need to worry about this if
+ * automatically destroy their transcluded clones as necessary so you do not need to worry about this if
  * you are simply using {@link ngTransclude} to inject the transclusion into your directive.
  *
  *
@@ -8780,7 +8780,7 @@ function $HttpProvider() {
    * significant performance improvement for bigger applications that make many HTTP requests
    * concurrently (common during application bootstrap).
    *
-   * Defaults to false. If no value is specifed, returns the current configured value.
+   * Defaults to false. If no value is specified, returns the current configured value.
    *
    * @param {boolean=} value If true, when requests are loaded, they will schedule a deferred
    *    "apply" on the next tick, giving time for subsequent requests in a roughly ~10ms window
@@ -9410,7 +9410,7 @@ function $HttpProvider() {
 
         defHeaders = extend({}, defHeaders.common, defHeaders[lowercase(config.method)]);
 
-        // using for-in instead of forEach to avoid unecessary iteration after header has been found
+        // using for-in instead of forEach to avoid unnecessary iteration after header has been found
         defaultHeadersIteration:
         for (defHeaderName in defHeaders) {
           lowercaseDefHeaderName = lowercase(defHeaderName);
@@ -20645,7 +20645,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * If the new `value` is an object (rather than a string or a number), we should make a copy of the
    * object before passing it to `$setViewValue`.  This is because `ngModel` does not perform a deep
    * watch of objects, it only looks for a change of identity. If you only change the property of
-   * the object then ngModel will not realise that the object has changed and will not invoke the
+   * the object then ngModel will not realize that the object has changed and will not invoke the
    * `$parsers` and `$validators` pipelines.
    *
    * For this reason, you should not change properties of the copy once it has been passed to
@@ -21131,7 +21131,7 @@ var minlengthDirective = function() {
  * delimiter is a comma followed by a space - equivalent to `ng-list=", "`. You can specify a custom
  * delimiter as the value of the `ngList` attribute - for example, `ng-list=" | "`.
  *
- * The behaviour of the directive is affected by the use of the `ngTrim` attribute.
+ * The behavior of the directive is affected by the use of the `ngTrim` attribute.
  * * If `ngTrim` is set to `"false"` then whitespace around both the separator and each
  *   list item is respected. This implies that the user of the directive is responsible for
  *   dealing with whitespace but also allows you to use whitespace as a delimiter, such as a
@@ -23471,7 +23471,7 @@ var ngIncludeDirective = ['$templateRequest', '$anchorScroll', '$animate', '$sce
               // Note: This will also link all children of ng-include that were contained in the original
               // html. If that content contains controllers, ... they could pollute/change the scope.
               // However, using ng-include on an element with additional content does not make sense...
-              // Note: We can't remove them in the cloneAttchFn of $transclude as that
+              // Note: We can't remove them in the cloneAttachFn of $transclude as that
               // function is called before linking the content, which would apply child
               // directives to non existing elements.
               var clone = $transclude(newScope, function(clone) {
@@ -26124,7 +26124,7 @@ var styleDirective = valueFn({
 
 		touch = event.changedTouches[0];
 
-		// Synthesise a click event, with an extra attribute so it can be tracked
+		// Synthesize a click event, with an extra attribute so it can be tracked
 		clickEvent = document.createEvent('MouseEvents');
 		clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
 		clickEvent.forwardedTouchEvent = true;
@@ -26236,7 +26236,7 @@ var styleDirective = valueFn({
 				// when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
 				// with the same identifier as the touch event that previously triggered the click that triggered the alert.
 				// Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
-				// immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
+				// immediately preceding touch event (issue #52), so this fix is unavailable on that platform.
 				// Issue 120: touch.identifier is 0 when Chrome dev tools 'Emulate touch events' is set with an iOS device UA string,
 				// which causes all touch events to be ignored. As this block only applies to iOS, and iOS identifiers are always long,
 				// random integers, it's safe to to continue if the identifier is 0 here.
@@ -26510,7 +26510,7 @@ var styleDirective = valueFn({
 			return true;
 		}
 
-		// Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
+		// Very odd behavior on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
 		if (event.target.type === 'submit' && event.detail === 0) {
 			return true;
 		}
@@ -26628,7 +26628,7 @@ var styleDirective = valueFn({
 			}
 		}
 
-		// IE11: prefixed -ms-touch-action is no longer supported and it's recomended to use non-prefixed version
+		// IE11: prefixed -ms-touch-action is no longer supported and it's recommended to use non-prefixed version
 		// http://msdn.microsoft.com/en-us/library/windows/apps/Hh767313.aspx
 		if (layer.style.touchAction === 'none' || layer.style.touchAction === 'manipulation') {
 			return true;
@@ -27136,7 +27136,7 @@ var Utils = Hammer.utils = {
     },
 
     /**
-     * do a small comparision to get the direction between two touches.
+     * do a small comparison to get the direction between two touches.
      * @method getDirection
      * @param {Touch} touch1
      * @param {Touch} touch2
@@ -27442,7 +27442,7 @@ var Event = Hammer.event = {
 
         // after there are still touches on the screen,
         // we just want to trigger a MOVE event. so change the START or END to a MOVE
-        // but only after detection has been started, the first time we actualy want a START
+        // but only after detection has been started, the first time we actually want a START
         if(changedLength > 0 && this.started) {
             triggerType = EVENT_MOVE;
         }
@@ -27700,7 +27700,7 @@ var PointerEvent = Hammer.PointerEvent = {
  * @static
  */
 var Detection = Hammer.detection = {
-    // contains all registred Hammer.gestures in the correct order
+    // contains all registered Hammer.gestures in the correct order
     gestures: [],
 
     // data of the current Hammer.gesture detection session
@@ -27967,7 +27967,7 @@ Hammer.Instance = function(element, options) {
 
     this.options = Utils.extend(Utils.extend({}, Hammer.defaults), options || {});
 
-    // add some css to the element to prevent the browser from doing its native behavoir
+    // add some css to the element to prevent the browser from doing its native behavior
     if(this.options.behavior) {
         Utils.toggleBehavior(this.element, this.options.behavior, true);
     }
@@ -29730,7 +29730,7 @@ return IScroll;
  * 
  * - pure javascript - server compatible, browser compatible
  * - dont rely on the browser doms
- * - super simple - you get it immediatly, no mistery, no magic involved
+ * - super simple - you get it immediately, no mystery, no magic involved
  *
  * - create a MicroEventDebug with goodies to debug
  *   - make it safer to use
@@ -32170,7 +32170,7 @@ You may obtain a copy of the License at
    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
-:qaistributed under the License is distributed on an "AS IS" BASIS,
+distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
@@ -32669,7 +32669,7 @@ limitations under the License.
             this._scrollToKillOverScroll();
           }
         } else if (this._lastDragEvent !== null) {
-          this._startMomemtumScroll(event);
+          this._startMomentumScroll(event);
         }
         this._lastDragEvent = null;
         event.gesture.preventDefault();
@@ -32693,7 +32693,7 @@ limitations under the License.
         return this._element[0].hasAttribute('overscrollable');
       },
 
-      _startMomemtumScroll: function(event) {
+      _startMomentumScroll: function(event) {
         if (this._lastDragEvent !== null) {
           var velocity = this._getScrollVelocity(this._lastDragEvent);
           var duration = 0.3;
@@ -39945,7 +39945,7 @@ limitations under the License.
       replace: false,
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       transclude: false,
       scope: false,
       compile: function(element, attrs) {
@@ -40341,7 +40341,7 @@ limitations under the License.
  * @name auto-scroll
  * @description
  *   [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
- *   [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
+ *   [ja]この属性がある時、一番近いcarousel-itemの境界まで自動的にスクロールするようになります。[/ja]
  */
 
 /**
@@ -40371,7 +40371,7 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
- * @name intial-index
+ * @name initial-index
  * @type {Number}
  * @description
  *   [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
@@ -40457,7 +40457,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature setSwipeable(swipeable)
- * @param {Booelan} swipeable
+ * @param {Boolean} swipeable
  *   [en]If value is true the carousel will be swipeable.[/en]
  *   [ja]swipeableにする場合にはtrueを指定します。[/ja]
  * @description
@@ -40473,7 +40473,7 @@ limitations under the License.
  *   [ja]swipeableであればtrueを返します。[/ja]
  * @description
  *   [en]Returns whether the carousel is swipeable or not.[/en]
- *   [ja]swiapble属性があるかどうかを返します。[/ja]
+ *   [ja]swipeable属性があるかどうかを返します。[/ja]
  */
 
 /**
@@ -42321,7 +42321,7 @@ limitations under the License.
       replace: false,
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       scope: false,
       transclude: false,
 
@@ -42970,7 +42970,7 @@ limitations under the License.
       restrict: 'E',
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       transclude: false,
       scope: false,
 
@@ -43011,7 +43011,7 @@ limitations under the License.
           scroller.on('scrollStart', function(e) {
             var scrolled = scroller.y - offset;
             if (scrolled < (scroller.maxScrollY + 40)) {
-              // TODO: find a better way to know when content is upated so we can refresh
+              // TODO: find a better way to know when content is updated so we can refresh
               scroller.refresh();
             }
           });
@@ -43560,7 +43560,7 @@ limitations under the License.
  *   [ja]プルフックがdisabled状態の場合、trueを返します。[/ja]
  * @description
  *   [en]Returns whether the component is disabled or enabled.[/en]
- *   [ja]dsiabled状態になっているかを得ることが出来ます。[/ja]
+ *   [ja]disabled状態になっているかを得ることが出来ます。[/ja]
  */
 
 /**
@@ -43785,7 +43785,7 @@ limitations under the License.
             wrapper = null;
           });
 
-          // inifinte scroll
+          // infinite scroll
           var scrollWrapper;
 
           scrollWrapper = element[0];
@@ -43818,7 +43818,7 @@ limitations under the License.
               iScroll.on('scrollStart', function(e) {
                 var scrolled = iScroll.y - offset;
                 if (scrolled < (iScroll.maxScrollY + 40)) {
-                  // TODO: find a better way to know when content is upated so we can refresh
+                  // TODO: find a better way to know when content is updated so we can refresh
                   iScroll.refresh();
                 }
               });
@@ -44549,7 +44549,7 @@ limitations under the License.
  * @ngdoc method
  * @signature update()
  * @description
- *   [en]Trigger an 'update' event and try to determine if the split behaviour should be changed.[/en]
+ *   [en]Trigger an 'update' event and try to determine if the split behavior should be changed.[/en]
  *   [ja]splitモードを変えるべきかどうかを判断するための'update'イベントを発火します。[/ja]
  */
 
@@ -45669,7 +45669,7 @@ limitations under the License.
       replace: false,
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       scope: false,
       transclude: false,
 
@@ -45770,7 +45770,7 @@ limitations under the License.
  * @name var
  * @type {String}
  * @description
- *   [en]Variable name to refer this buttom.[/en]
+ *   [en]Variable name to refer this button.[/en]
  *   [ja]このボタンを参照するための名前を指定します。[/ja]
  */
 

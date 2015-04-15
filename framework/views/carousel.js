@@ -8,7 +8,7 @@ You may obtain a copy of the License at
    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
-:qaistributed under the License is distributed on an "AS IS" BASIS,
+distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
@@ -507,7 +507,7 @@ limitations under the License.
             this._scrollToKillOverScroll();
           }
         } else if (this._lastDragEvent !== null) {
-          this._startMomemtumScroll(event);
+          this._startMomentumScroll(event);
         }
         this._lastDragEvent = null;
         event.gesture.preventDefault();
@@ -531,7 +531,7 @@ limitations under the License.
         return this._element[0].hasAttribute('overscrollable');
       },
 
-      _startMomemtumScroll: function(event) {
+      _startMomentumScroll: function(event) {
         if (this._lastDragEvent !== null) {
           var velocity = this._getScrollVelocity(this._lastDragEvent);
           var duration = 0.3;

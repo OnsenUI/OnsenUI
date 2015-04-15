@@ -540,7 +540,7 @@
 
 		touch = event.changedTouches[0];
 
-		// Synthesise a click event, with an extra attribute so it can be tracked
+		// Synthesize a click event, with an extra attribute so it can be tracked
 		clickEvent = document.createEvent('MouseEvents');
 		clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
 		clickEvent.forwardedTouchEvent = true;
@@ -652,7 +652,7 @@
 				// when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
 				// with the same identifier as the touch event that previously triggered the click that triggered the alert.
 				// Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
-				// immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
+				// immediately preceding touch event (issue #52), so this fix is unavailable on that platform.
 				// Issue 120: touch.identifier is 0 when Chrome dev tools 'Emulate touch events' is set with an iOS device UA string,
 				// which causes all touch events to be ignored. As this block only applies to iOS, and iOS identifiers are always long,
 				// random integers, it's safe to to continue if the identifier is 0 here.
@@ -926,7 +926,7 @@
 			return true;
 		}
 
-		// Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
+		// Very odd behavior on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
 		if (event.target.type === 'submit' && event.detail === 0) {
 			return true;
 		}
@@ -1044,7 +1044,7 @@
 			}
 		}
 
-		// IE11: prefixed -ms-touch-action is no longer supported and it's recomended to use non-prefixed version
+		// IE11: prefixed -ms-touch-action is no longer supported and it's recommended to use non-prefixed version
 		// http://msdn.microsoft.com/en-us/library/windows/apps/Hh767313.aspx
 		if (layer.style.touchAction === 'none' || layer.style.touchAction === 'manipulation') {
 			return true;
@@ -1552,7 +1552,7 @@ var Utils = Hammer.utils = {
     },
 
     /**
-     * do a small comparision to get the direction between two touches.
+     * do a small comparison to get the direction between two touches.
      * @method getDirection
      * @param {Touch} touch1
      * @param {Touch} touch2
@@ -1858,7 +1858,7 @@ var Event = Hammer.event = {
 
         // after there are still touches on the screen,
         // we just want to trigger a MOVE event. so change the START or END to a MOVE
-        // but only after detection has been started, the first time we actualy want a START
+        // but only after detection has been started, the first time we actually want a START
         if(changedLength > 0 && this.started) {
             triggerType = EVENT_MOVE;
         }
@@ -2116,7 +2116,7 @@ var PointerEvent = Hammer.PointerEvent = {
  * @static
  */
 var Detection = Hammer.detection = {
-    // contains all registred Hammer.gestures in the correct order
+    // contains all registered Hammer.gestures in the correct order
     gestures: [],
 
     // data of the current Hammer.gesture detection session
@@ -2383,7 +2383,7 @@ Hammer.Instance = function(element, options) {
 
     this.options = Utils.extend(Utils.extend({}, Hammer.defaults), options || {});
 
-    // add some css to the element to prevent the browser from doing its native behavoir
+    // add some css to the element to prevent the browser from doing its native behavior
     if(this.options.behavior) {
         Utils.toggleBehavior(this.element, this.options.behavior, true);
     }
@@ -4146,7 +4146,7 @@ return IScroll;
  * 
  * - pure javascript - server compatible, browser compatible
  * - dont rely on the browser doms
- * - super simple - you get it immediatly, no mistery, no magic involved
+ * - super simple - you get it immediately, no mystery, no magic involved
  *
  * - create a MicroEventDebug with goodies to debug
  *   - make it safer to use
@@ -6586,7 +6586,7 @@ You may obtain a copy of the License at
    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
-:qaistributed under the License is distributed on an "AS IS" BASIS,
+distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
@@ -7085,7 +7085,7 @@ limitations under the License.
             this._scrollToKillOverScroll();
           }
         } else if (this._lastDragEvent !== null) {
-          this._startMomemtumScroll(event);
+          this._startMomentumScroll(event);
         }
         this._lastDragEvent = null;
         event.gesture.preventDefault();
@@ -7109,7 +7109,7 @@ limitations under the License.
         return this._element[0].hasAttribute('overscrollable');
       },
 
-      _startMomemtumScroll: function(event) {
+      _startMomentumScroll: function(event) {
         if (this._lastDragEvent !== null) {
           var velocity = this._getScrollVelocity(this._lastDragEvent);
           var duration = 0.3;
@@ -14361,7 +14361,7 @@ limitations under the License.
       replace: false,
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       transclude: false,
       scope: false,
       compile: function(element, attrs) {
@@ -14757,7 +14757,7 @@ limitations under the License.
  * @name auto-scroll
  * @description
  *   [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
- *   [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
+ *   [ja]この属性がある時、一番近いcarousel-itemの境界まで自動的にスクロールするようになります。[/ja]
  */
 
 /**
@@ -14787,7 +14787,7 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
- * @name intial-index
+ * @name initial-index
  * @type {Number}
  * @description
  *   [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
@@ -14873,7 +14873,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature setSwipeable(swipeable)
- * @param {Booelan} swipeable
+ * @param {Boolean} swipeable
  *   [en]If value is true the carousel will be swipeable.[/en]
  *   [ja]swipeableにする場合にはtrueを指定します。[/ja]
  * @description
@@ -14889,7 +14889,7 @@ limitations under the License.
  *   [ja]swipeableであればtrueを返します。[/ja]
  * @description
  *   [en]Returns whether the carousel is swipeable or not.[/en]
- *   [ja]swiapble属性があるかどうかを返します。[/ja]
+ *   [ja]swipeable属性があるかどうかを返します。[/ja]
  */
 
 /**
@@ -16737,7 +16737,7 @@ limitations under the License.
       replace: false,
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       scope: false,
       transclude: false,
 
@@ -17386,7 +17386,7 @@ limitations under the License.
       restrict: 'E',
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       transclude: false,
       scope: false,
 
@@ -17427,7 +17427,7 @@ limitations under the License.
           scroller.on('scrollStart', function(e) {
             var scrolled = scroller.y - offset;
             if (scrolled < (scroller.maxScrollY + 40)) {
-              // TODO: find a better way to know when content is upated so we can refresh
+              // TODO: find a better way to know when content is updated so we can refresh
               scroller.refresh();
             }
           });
@@ -17976,7 +17976,7 @@ limitations under the License.
  *   [ja]プルフックがdisabled状態の場合、trueを返します。[/ja]
  * @description
  *   [en]Returns whether the component is disabled or enabled.[/en]
- *   [ja]dsiabled状態になっているかを得ることが出来ます。[/ja]
+ *   [ja]disabled状態になっているかを得ることが出来ます。[/ja]
  */
 
 /**
@@ -18201,7 +18201,7 @@ limitations under the License.
             wrapper = null;
           });
 
-          // inifinte scroll
+          // infinite scroll
           var scrollWrapper;
 
           scrollWrapper = element[0];
@@ -18234,7 +18234,7 @@ limitations under the License.
               iScroll.on('scrollStart', function(e) {
                 var scrolled = iScroll.y - offset;
                 if (scrolled < (iScroll.maxScrollY + 40)) {
-                  // TODO: find a better way to know when content is upated so we can refresh
+                  // TODO: find a better way to know when content is updated so we can refresh
                   iScroll.refresh();
                 }
               });
@@ -18965,7 +18965,7 @@ limitations under the License.
  * @ngdoc method
  * @signature update()
  * @description
- *   [en]Trigger an 'update' event and try to determine if the split behaviour should be changed.[/en]
+ *   [en]Trigger an 'update' event and try to determine if the split behavior should be changed.[/en]
  *   [ja]splitモードを変えるべきかどうかを判断するための'update'イベントを発火します。[/ja]
  */
 
@@ -20085,7 +20085,7 @@ limitations under the License.
       replace: false,
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       scope: false,
       transclude: false,
 
@@ -20186,7 +20186,7 @@ limitations under the License.
  * @name var
  * @type {String}
  * @description
- *   [en]Variable name to refer this buttom.[/en]
+ *   [en]Variable name to refer this button.[/en]
  *   [ja]このボタンを参照するための名前を指定します。[/ja]
  */
 

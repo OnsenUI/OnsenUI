@@ -64,7 +64,7 @@ limitations under the License.
        *
        * @param {Object} [options]
        * @param {String} [options.animation] animation type
-       * @param {Objhect} [options.animationOptions] animation options
+       * @param {Object} [options.animationOptions] animation options
        * @param {Function} [options.callback] callback after modal is shown
        */
       show: function(options) {
@@ -98,7 +98,7 @@ limitations under the License.
        *
        * @param {Object} [options]
        * @param {String} [options.animation] animation type
-       * @param {Objhect} [options.animationOptions] animation options
+       * @param {Object} [options.animationOptions] animation options
        * @param {Function} [options.callback] callback after modal is hidden
        */
       hide: function(options) {
@@ -123,7 +123,7 @@ limitations under the License.
        *
        * @param {Object} [options]
        * @param {String} [options.animation] animation type
-       * @param {Objhect} [options.animationOptions] animation options
+       * @param {Object} [options.animationOptions] animation options
        * @param {Function} [options.callback] callback after modal is toggled
        */
       toggle: function() {

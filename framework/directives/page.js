@@ -172,7 +172,7 @@
       restrict: 'E',
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       transclude: false,
       scope: false,
 
@@ -213,7 +213,7 @@
           scroller.on('scrollStart', function(e) {
             var scrolled = scroller.y - offset;
             if (scrolled < (scroller.maxScrollY + 40)) {
-              // TODO: find a better way to know when content is upated so we can refresh
+              // TODO: find a better way to know when content is updated so we can refresh
               scroller.refresh();
             }
           });
