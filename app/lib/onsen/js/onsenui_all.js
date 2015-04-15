@@ -27967,7 +27967,7 @@ Hammer.Instance = function(element, options) {
 
     this.options = Utils.extend(Utils.extend({}, Hammer.defaults), options || {});
 
-    // add some css to the element to prevent the browser from doing its native behavoir
+    // add some css to the element to prevent the browser from doing its native behavior
     if(this.options.behavior) {
         Utils.toggleBehavior(this.element, this.options.behavior, true);
     }
