@@ -139,7 +139,7 @@ limitations under the License.
 
         this._isPopping = this._isPushing = false;
 
-        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element[0], this._onDeviceBackButton.bind(this));
         this._scope.$on('$destroy', this._destroy.bind(this));
 
         this._animationChooser = new AnimationChooser({

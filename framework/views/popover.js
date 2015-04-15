@@ -57,7 +57,7 @@ limitations under the License.
           defaultAnimationOptions: $parse(attrs.animationOptions)()
         });
 
-        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element[0], this._onDeviceBackButton.bind(this));
 
         this._onChange = function() {
           setImmediate(function() {

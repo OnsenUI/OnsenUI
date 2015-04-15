@@ -48,7 +48,7 @@ limitations under the License.
         this._userDeviceBackButtonListener = angular.noop;
 
         if (this._attrs.ngDeviceBackbutton || this._attrs.onDeviceBackbutton) {
-          this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+          this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element[0], this._onDeviceBackButton.bind(this));
         }
       },
 
@@ -76,7 +76,7 @@ limitations under the License.
        */
       setDeviceBackButtonHandler: function(callback) {
         if (!this._deviceBackButtonHandler) {
-          this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+          this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element[0], this._onDeviceBackButton.bind(this));
         }
 
         this._userDeviceBackButtonListener = callback;
