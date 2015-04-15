@@ -211,7 +211,7 @@ limitations under the License.
           this.setMenuPage(attrs.menuPage);
         }
 
-        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element[0], this._onDeviceBackButton.bind(this));
+        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
 
         var unlock = this._doorLock.lock();
 

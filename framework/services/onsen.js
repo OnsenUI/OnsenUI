@@ -23,7 +23,7 @@ limitations under the License.
   /**
    * Internal service class for framework implementation.
    */
-  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner, DeviceBackButtonHandler) {
+  module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner) {
 
     var $onsen = createOnsenService();
 
@@ -36,9 +36,9 @@ limitations under the License.
 
         cleaner: ComponentCleaner,
 
-        DeviceBackButtonHandler: DeviceBackButtonHandler,
+        DeviceBackButtonHandler: $onsGlobal._deviceBackButtonDispatcher,
 
-        _defaultDeviceBackButtonHandler: DeviceBackButtonHandler.create(window.document.body, function() {
+        _defaultDeviceBackButtonHandler: $onsGlobal._deviceBackButtonDispatcher.createHandler(window.document.body, function() {
           navigator.app.exitApp();
         }),
 

@@ -41,7 +41,7 @@ limitations under the License.
         }
 
         this._scope.$on('$destroy', this._destroy.bind(this));
-        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element[0], this._onDeviceBackButton.bind(this));
+        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
         this._doorLock = new DoorLock();
 
         this._animationChooser = new AnimationChooser({
