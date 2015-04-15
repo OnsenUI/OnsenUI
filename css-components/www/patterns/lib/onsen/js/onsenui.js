@@ -17427,7 +17427,7 @@ limitations under the License.
           scroller.on('scrollStart', function(e) {
             var scrolled = scroller.y - offset;
             if (scrolled < (scroller.maxScrollY + 40)) {
-              // TODO: find a better way to know when content is upated so we can refresh
+              // TODO: find a better way to know when content is updated so we can refresh
               scroller.refresh();
             }
           });
@@ -18234,7 +18234,7 @@ limitations under the License.
               iScroll.on('scrollStart', function(e) {
                 var scrolled = iScroll.y - offset;
                 if (scrolled < (iScroll.maxScrollY + 40)) {
-                  // TODO: find a better way to know when content is upated so we can refresh
+                  // TODO: find a better way to know when content is updated so we can refresh
                   iScroll.refresh();
                 }
               });
