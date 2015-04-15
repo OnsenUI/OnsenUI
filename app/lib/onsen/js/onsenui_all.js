@@ -27442,7 +27442,7 @@ var Event = Hammer.event = {
 
         // after there are still touches on the screen,
         // we just want to trigger a MOVE event. so change the START or END to a MOVE
-        // but only after detection has been started, the first time we actualy want a START
+        // but only after detection has been started, the first time we actually want a START
         if(changedLength > 0 && this.started) {
             triggerType = EVENT_MOVE;
         }
