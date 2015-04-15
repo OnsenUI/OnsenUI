@@ -18,7 +18,7 @@ limitations under the License.
 (() => {
   'use strict';
 
-  class IconElement extends HTMLElement {
+  class IconElement extends ons._BaseElement {
 
     createdCallback() {
       this._update();

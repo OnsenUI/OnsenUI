@@ -20,7 +20,7 @@ limitations under the License.
 
   var scheme = {'': 'list__header--*'};
 
-  class ListHeaderElement extends HTMLElement {
+  class ListHeaderElement extends ons._BaseElement {
     createdCallback() {
       this.classList.add('list__header');
       ModifierUtil.initModifier(this, scheme);

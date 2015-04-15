@@ -18,7 +18,7 @@ limitations under the License.
 (() => {
   'use strict';
 
-  class ColumnElement extends HTMLElement {
+  class ColumnElement extends ons._BaseElement {
 
     createdCallback() {
       if (this.getAttribute('width')) {

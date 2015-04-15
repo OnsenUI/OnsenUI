@@ -20,7 +20,7 @@ limitations under the License.
 
   var scheme = {'' : 'toolbar-button--*'};
 
-  class ToolbarButtonElement extends HTMLElement {
+  class ToolbarButtonElement extends ons._BaseElement {
 
     createdCallback() {
       this.classList.add('toolbar-button');

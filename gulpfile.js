@@ -63,10 +63,11 @@ gulp.task('core', function() {
 
   // ons-core.js
   return gulp.src([
+    'core/vendor/winstore-jscompat.js',
     'core/vendor/*.js',
     'core/lib/*.{es6,js}',
-    'core/elements/*.{es6,js}',
     'core/*.{es6,js}',
+    'core/elements/*.{es6,js}',
     '!core/**/*.spec.js'
   ])
     .pipe($.plumber())
