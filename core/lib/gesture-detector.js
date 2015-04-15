@@ -952,7 +952,7 @@ var PointerEvent = GestureDetector.PointerEvent = {
  * @static
  */
 var Detection = GestureDetector.detection = {
-  // contains all registred GestureDetector.gestures in the correct order
+  // contains all registered GestureDetector.gestures in the correct order
   gestures: [],
 
   // data of the current GestureDetector.gesture detection session

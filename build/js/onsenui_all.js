@@ -27700,7 +27700,7 @@ var PointerEvent = Hammer.PointerEvent = {
  * @static
  */
 var Detection = Hammer.detection = {
-    // contains all registred Hammer.gestures in the correct order
+    // contains all registered Hammer.gestures in the correct order
     gestures: [],
 
     // data of the current Hammer.gesture detection session
