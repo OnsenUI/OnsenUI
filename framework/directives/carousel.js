@@ -251,7 +251,7 @@
 /**
  * @ngdoc method
  * @signature setSwipeable(swipeable)
- * @param {Booelan} swipeable
+ * @param {Boolean} swipeable
  *   [en]If value is true the carousel will be swipeable.[/en]
  *   [ja]swipeableにする場合にはtrueを指定します。[/ja]
  * @description
