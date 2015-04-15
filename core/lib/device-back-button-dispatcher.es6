@@ -318,7 +318,7 @@ limitations under the License.
     }
   }
 
-  ons.deviceBackButtonDispatcher = new DevicebackButtonDispatcher();
+  ons._deviceBackButtonDispatcher = new DevicebackButtonDispatcher();
 
   window.addEventListener('DOMContentLoaded', function() {
     ons._deviceBackButtonDispatcher.enable();

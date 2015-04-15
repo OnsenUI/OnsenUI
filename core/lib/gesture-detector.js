@@ -2070,7 +2070,7 @@ GestureDetector.Instance.prototype = {
     // browser export
   } else {
     window.ons = window.ons || {};
-    window.ons._GestureDetector = GestureDetector;
+    window.ons.GestureDetector = GestureDetector;
   }
 
 })(window);
