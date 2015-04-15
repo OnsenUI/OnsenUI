@@ -82,7 +82,7 @@
     return {
       restrict: 'E',
       link: function(scope, element, attrs) {
-        var button = new GenericView(element, scope, attrs, {
+        var button = new GenericView(scope, element, attrs, {
           viewKey: 'ons-button'
         });
 
