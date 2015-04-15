@@ -17976,7 +17976,7 @@ limitations under the License.
  *   [ja]プルフックがdisabled状態の場合、trueを返します。[/ja]
  * @description
  *   [en]Returns whether the component is disabled or enabled.[/en]
- *   [ja]dsiabled状態になっているかを得ることが出来ます。[/ja]
+ *   [ja]disabled状態になっているかを得ることが出来ます。[/ja]
  */
 
 /**
