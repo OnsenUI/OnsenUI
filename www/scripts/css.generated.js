@@ -518,7 +518,7 @@ var Compressed = require('./lib/compress');
 var Identity = require('./lib/identity');
 
 /**
- * Stringfy the given AST `node`.
+ * Stringify the given AST `node`.
  *
  * Options:
  *
@@ -1489,7 +1489,7 @@ define(function (require, exports, module) {
    *
    *   - version: Which version of the source map spec this map is following.
    *   - sources: An array of URLs to the original source files.
-   *   - names: An array of identifiers which can be referrenced by individual mappings.
+   *   - names: An array of identifiers which can be referenced by individual mappings.
    *   - sourceRoot: Optional. The URL root from which all sources are relative.
    *   - sourcesContent: Optional. An array of contents of the original source files.
    *   - mappings: A string of base64 VLQs which contain the actual mappings.
@@ -1801,7 +1801,7 @@ define(function (require, exports, module) {
   /**
    * Returns the original source content. The only argument is the url of the
    * original source file. Returns null if no original source content is
-   * availible.
+   * available.
    */
   SourceMapConsumer.prototype.sourceContentFor =
     function SourceMapConsumer_sourceContentFor(aSource) {
@@ -2805,7 +2805,7 @@ define(function (require, exports, module) {
   /**
    * Normalizes a path, or the path portion of a URL:
    *
-   * - Replaces consequtive slashes with one slash.
+   * - Replaces consecutive slashes with one slash.
    * - Removes unnecessary '.' parts.
    * - Removes unnecessary '<dir>/..' parts.
    *
