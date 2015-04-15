@@ -43785,7 +43785,7 @@ limitations under the License.
             wrapper = null;
           });
 
-          // inifinte scroll
+          // infinite scroll
           var scrollWrapper;
 
           scrollWrapper = element[0];
