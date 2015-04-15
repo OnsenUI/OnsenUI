@@ -423,7 +423,12 @@ gulp.task('webdriver-download', function() {
 ////////////////////////////////////////
 // test
 ////////////////////////////////////////
-gulp.task('test', ['webdriver-download', 'prepare', 'core-test'], function() {
+gulp.task('test', ['core-test', 'e2e-test']);
+
+////////////////////////////////////////
+// e2e-test
+////////////////////////////////////////
+gulp.task('e2e-test', ['webdriver-download', 'prepare'], function() {
   var port = 8081;
 
   $.connect.server({
