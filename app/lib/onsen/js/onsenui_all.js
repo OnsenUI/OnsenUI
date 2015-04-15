@@ -40473,7 +40473,7 @@ limitations under the License.
  *   [ja]swipeableであればtrueを返します。[/ja]
  * @description
  *   [en]Returns whether the carousel is swipeable or not.[/en]
- *   [ja]swiapble属性があるかどうかを返します。[/ja]
+ *   [ja]swipeable属性があるかどうかを返します。[/ja]
  */
 
 /**
