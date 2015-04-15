@@ -1801,7 +1801,7 @@ define(function (require, exports, module) {
   /**
    * Returns the original source content. The only argument is the url of the
    * original source file. Returns null if no original source content is
-   * availible.
+   * available.
    */
   SourceMapConsumer.prototype.sourceContentFor =
     function SourceMapConsumer_sourceContentFor(aSource) {
