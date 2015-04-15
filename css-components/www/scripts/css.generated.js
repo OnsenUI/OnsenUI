@@ -2805,7 +2805,7 @@ define(function (require, exports, module) {
   /**
    * Normalizes a path, or the path portion of a URL:
    *
-   * - Replaces consequtive slashes with one slash.
+   * - Replaces consecutive slashes with one slash.
    * - Removes unnecessary '.' parts.
    * - Removes unnecessary '<dir>/..' parts.
    *
