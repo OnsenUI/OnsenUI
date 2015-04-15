@@ -297,7 +297,7 @@ limitations under the License.
       _createEventListeners: function() {
         var element = this._scrollElement.parent();
 
-        this._gestureDetector = new GestureDetector(element[0], {
+        this._gestureDetector = new ons.GestureDetector(element[0], {
           dragMinDistance: 1,
           dragDistanceCorrection: false
         });

@@ -181,7 +181,7 @@ limitations under the License.
         this._isRightMenu = attrs.side === 'right';
 
         // Close menu on tap event.
-        this._mainPageGestureDetector = new GestureDetector(this._mainPage[0]);
+        this._mainPageGestureDetector = new ons.GestureDetector(this._mainPage[0]);
         this._bindedOnTap = this._onTap.bind(this);
 
         var maxDistance = this._normalizeMaxSlideDistanceAttr();
@@ -350,7 +350,7 @@ limitations under the License.
       },
 
       _bindEvents: function() {
-        this._gestureDetector = new GestureDetector(this._element[0], {
+        this._gestureDetector = new ons.GestureDetector(this._element[0], {
           dragMinDistance: 1
         });
       },

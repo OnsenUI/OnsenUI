@@ -2069,7 +2069,8 @@ GestureDetector.Instance.prototype = {
     module.exports = GestureDetector;
     // browser export
   } else {
-    window.GestureDetector = GestureDetector;
+    window.ons = window.ons || {};
+    window.ons._GestureDetector = GestureDetector;
   }
 
 })(window);

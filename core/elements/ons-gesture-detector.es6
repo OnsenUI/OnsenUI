@@ -20,7 +20,7 @@ limitations under the License.
 
   class GestureDetectorElement extends HTMLElement {
     createdCallback() {
-      this._gestureDetector = new GestureDetector(this);
+      this._gestureDetector = new ons.GestureDetector(this);
     }
   }
 

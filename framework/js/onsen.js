@@ -268,7 +268,7 @@ limitations under the License.
 
   // Change the default touchAction of GestureDetector, needed for Windows Phone app
   function changeGestureDetectorDefault() {
-    GestureDetector.defaults.behavior.touchAction = 'none';
+    ons.GestureDetector.defaults.behavior.touchAction = 'none';
   }
 
   function initOnsenFacade() {

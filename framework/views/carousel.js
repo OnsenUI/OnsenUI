@@ -426,7 +426,7 @@ limitations under the License.
       },
 
       _prepareEventListeners: function() {
-        this._gestureDetector = new GestureDetector(this._element[0], {
+        this._gestureDetector = new ons.GestureDetector(this._element[0], {
           dragMinDistance: 1
         });
 
