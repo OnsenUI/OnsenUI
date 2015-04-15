@@ -64,6 +64,24 @@
       });
     });
 
+    describe('backbutton handler', function () {
+      it('should work on \'backbutton\' event', function() {
+        var page1 = element(by.id('page1'));
+        var page2 = element(by.id('page2'));
+
+        element(by.id('btn1')).click();
+        browser.wait(EC.visibilityOf(page2));
+        browser.wait(EC.invisibilityOf(page1));
+
+        element(by.id('btn4-device-backbutton')).click();
+        browser.wait(EC.stalenessOf(page2));
+
+        // Check that page2 was destroyed.
+        expect((page1).isDisplayed()).toBeTruthy();
+        expect((page2).isPresent()).not.toBeTruthy();
+      });
+    });
+
     it('should emit events', function() {
       browser.get(path);
 
