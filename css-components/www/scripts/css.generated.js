@@ -1489,7 +1489,7 @@ define(function (require, exports, module) {
    *
    *   - version: Which version of the source map spec this map is following.
    *   - sources: An array of URLs to the original source files.
-   *   - names: An array of identifiers which can be referrenced by individual mappings.
+   *   - names: An array of identifiers which can be referenced by individual mappings.
    *   - sourceRoot: Optional. The URL root from which all sources are relative.
    *   - sourcesContent: Optional. An array of contents of the original source files.
    *   - mappings: A string of base64 VLQs which contain the actual mappings.
