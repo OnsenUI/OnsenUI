@@ -14757,7 +14757,7 @@ limitations under the License.
  * @name auto-scroll
  * @description
  *   [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
- *   [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
+ *   [ja]この属性がある時、一番近いcarousel-itemの境界まで自動的にスクロールするようになります。[/ja]
  */
 
 /**
