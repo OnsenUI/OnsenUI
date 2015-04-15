@@ -926,7 +926,7 @@
 			return true;
 		}
 
-		// Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
+		// Very odd behavior on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
 		if (event.target.type === 'submit' && event.detail === 0) {
 			return true;
 		}
@@ -18965,7 +18965,7 @@ limitations under the License.
  * @ngdoc method
  * @signature update()
  * @description
- *   [en]Trigger an 'update' event and try to determine if the split behaviour should be changed.[/en]
+ *   [en]Trigger an 'update' event and try to determine if the split behavior should be changed.[/en]
  *   [ja]splitモードを変えるべきかどうかを判断するための'update'イベントを発火します。[/ja]
  */
 
