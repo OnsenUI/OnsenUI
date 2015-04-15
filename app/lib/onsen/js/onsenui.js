@@ -14361,7 +14361,7 @@ limitations under the License.
       replace: false,
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       transclude: false,
       scope: false,
       compile: function(element, attrs) {
@@ -16737,7 +16737,7 @@ limitations under the License.
       replace: false,
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       scope: false,
       transclude: false,
 
@@ -17386,7 +17386,7 @@ limitations under the License.
       restrict: 'E',
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       transclude: false,
       scope: false,
 
@@ -20085,7 +20085,7 @@ limitations under the License.
       replace: false,
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       scope: false,
       transclude: false,
 
