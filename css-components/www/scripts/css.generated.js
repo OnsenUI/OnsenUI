@@ -518,7 +518,7 @@ var Compressed = require('./lib/compress');
 var Identity = require('./lib/identity');
 
 /**
- * Stringfy the given AST `node`.
+ * Stringify the given AST `node`.
  *
  * Options:
  *
