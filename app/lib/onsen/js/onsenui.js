@@ -7085,7 +7085,7 @@ limitations under the License.
             this._scrollToKillOverScroll();
           }
         } else if (this._lastDragEvent !== null) {
-          this._startMomemtumScroll(event);
+          this._startMomentumScroll(event);
         }
         this._lastDragEvent = null;
         event.gesture.preventDefault();
@@ -7109,7 +7109,7 @@ limitations under the License.
         return this._element[0].hasAttribute('overscrollable');
       },
 
-      _startMomemtumScroll: function(event) {
+      _startMomentumScroll: function(event) {
         if (this._lastDragEvent !== null) {
           var velocity = this._getScrollVelocity(this._lastDragEvent);
           var duration = 0.3;
