@@ -20645,7 +20645,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * If the new `value` is an object (rather than a string or a number), we should make a copy of the
    * object before passing it to `$setViewValue`.  This is because `ngModel` does not perform a deep
    * watch of objects, it only looks for a change of identity. If you only change the property of
-   * the object then ngModel will not realise that the object has changed and will not invoke the
+   * the object then ngModel will not realize that the object has changed and will not invoke the
    * `$parsers` and `$validators` pipelines.
    *
    * For this reason, you should not change properties of the copy once it has been passed to
