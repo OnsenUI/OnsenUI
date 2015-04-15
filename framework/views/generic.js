@@ -40,8 +40,8 @@ limitations under the License.
         this._attrs = attrs;
 
         if (options.viewKey) {
-          $onsen.declareVarAttribute(attrs, button);
-          element.data(options.viewKey, button);
+          $onsen.declareVarAttribute(attrs, this);
+          element.data(options.viewKey, this);
         }
 
         if (options.directiveOnly) {
@@ -55,7 +55,7 @@ limitations under the License.
 
         $onsen.cleaner.onDestroy(scope, function() {
           self._events = undefined;
-          $onsen.removeModifierMethods(button);
+          $onsen.removeModifierMethods(self);
 
           if (options.viewKey) {
             element.data(options.viewKey, undefined);
@@ -67,7 +67,7 @@ limitations under the License.
             element: element
           });
 
-          self = element = this._element = this._scope = scope = this._attrs = attrs = options = null;
+          self = element = self._element = self._scope = scope = self._attrs = attrs = options = null;
         });
       }
     });
