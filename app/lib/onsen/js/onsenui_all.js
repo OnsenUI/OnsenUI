@@ -27136,7 +27136,7 @@ var Utils = Hammer.utils = {
     },
 
     /**
-     * do a small comparision to get the direction between two touches.
+     * do a small comparison to get the direction between two touches.
      * @method getDirection
      * @param {Touch} touch1
      * @param {Touch} touch2
