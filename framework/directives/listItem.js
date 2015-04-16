@@ -46,7 +46,7 @@
     return {
       restrict: 'E',
       link: function(scope, element, attrs) {
-        new GenericView(scope, element, attrs, {
+        var view = new GenericView(scope, element, attrs, {
           viewKey: 'ons-list-item'
         });
 
