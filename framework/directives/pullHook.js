@@ -116,7 +116,7 @@
  * @ngdoc attribute
  * @name fixed-content
  * @description
- *   [en]If this attribute is set the content of the page will not scroll when pulling.[/en]
+ *   [en]If this attribute is set the content of the page will not move when pulling.[/en]
  *   [ja][/ja]
  */
 
