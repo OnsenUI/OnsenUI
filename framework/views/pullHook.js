@@ -252,6 +252,10 @@ limitations under the License.
         return this._element[0].hasAttribute('disabled');
       },
 
+      _isContentFixed: function() {
+        return this._element[0].hasAttribute('fixed-content');
+      },
+
       setDisabled: function(disabled) {
         if (disabled) {
           this._element[0].setAttribute('disabled', '');
@@ -268,22 +272,24 @@ limitations under the License.
           this._currentTranslation = scroll;
         }.bind(this));
 
-        if (options.animate) {
-          animit(this._scrollElement[0])
-            .queue({
-              transform: this._generateTranslationTransform(scroll)
-            }, {
-              duration: 0.3,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
-            })
-            .play(options.callback);
-        }
-        else {
-          animit(this._scrollElement[0])
-            .queue({
-              transform: this._generateTranslationTransform(scroll)
-            })
-            .play(options.callback);
+        if (!this._isContentFixed()) {
+          if (options.animate) {
+            animit(this._scrollElement[0])
+              .queue({
+                transform: this._generateTranslationTransform(scroll)
+              }, {
+                duration: 0.3,
+                timing: 'cubic-bezier(.1, .7, .1, 1)'
+              })
+              .play(options.callback);
+          }
+          else {
+            animit(this._scrollElement[0])
+              .queue({
+                transform: this._generateTranslationTransform(scroll)
+              })
+              .play(options.callback);
+          }
         }
       },
 
