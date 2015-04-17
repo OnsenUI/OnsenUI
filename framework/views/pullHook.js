@@ -63,11 +63,11 @@ limitations under the License.
         pageElement.append(scrollElement);
         scrollElement.append(children);
 
-        return scrollElement; 
+        return scrollElement;
       },
 
       _setStyle: function() {
-        var h = this._getHeight();
+        var h = this.getHeight();
 
         this._element.css({
           top: '-' + h + 'px',
@@ -75,7 +75,7 @@ limitations under the License.
           lineHeight: h + 'px'
         });
       },
-    
+
       _onScroll: function(event) {
         var el = this._pageElement[0];
 
@@ -123,23 +123,23 @@ limitations under the License.
 
         scroll = Math.max(scroll, 0);
 
-        if (this._thresholdHeightEnabled() && scroll >= this._getThresholdHeight()) {
+        if (this._thresholdHeightEnabled() && scroll >= this.getThresholdHeight()) {
           event.gesture.stopDetect();
 
           setImmediate(function() {
             this._setState(this.STATE_ACTION);
-            this._translateTo(this._getHeight(), {animate: true});
+            this._translateTo(this.getHeight(), {animate: true});
 
             this._waitForAction(this._onDone.bind(this));
           }.bind(this));
         }
-        else if (scroll >= this._getHeight()) {
+        else if (scroll >= this.getHeight()) {
           this._setState(this.STATE_PREACTION);
         }
         else {
           this._setState(this.STATE_INITIAL);
         }
- 
+
         event.stopPropagation();
         this._translateTo(scroll);
       },
@@ -160,10 +160,10 @@ limitations under the License.
         if (this._currentTranslation > 0) {
           var scroll = this._currentTranslation;
 
-          if (scroll > this._getHeight()) {
+          if (scroll > this.getHeight()) {
             this._setState(this.STATE_ACTION);
 
-            this._translateTo(this._getHeight(), {animate: true});
+            this._translateTo(this.getHeight(), {animate: true});
 
             this._waitForAction(this._onDone.bind(this));
           }
@@ -194,7 +194,7 @@ limitations under the License.
         }
       },
 
-      _getHeight: function() {
+      getHeight: function() {
         return parseInt(this._element[0].getAttribute('height') || '64', 10);
       },
 
@@ -208,13 +208,13 @@ limitations under the License.
         this._element[0].setAttribute('threshold-height', thresholdHeight + 'px');
       },
 
-      _getThresholdHeight: function() {
+      getThresholdHeight: function() {
         return parseInt(this._element[0].getAttribute('threshold-height') || '96', 10);
       },
 
       _thresholdHeightEnabled: function() {
-        var th = this._getThresholdHeight();
-        return th > 0 && th >= this._getHeight();
+        var th = this.getThresholdHeight();
+        return th > 0 && th >= this.getHeight();
       },
 
       _setState: function(state, noEvent) {
@@ -244,6 +244,10 @@ limitations under the License.
         return this._pageElement[0].scrollTop;
       },
 
+      getPullDistance: function() {
+        return this._currentTranslation;
+      },
+
       isDisabled: function() {
         return this._element[0].hasAttribute('disabled');
       },
@@ -260,7 +264,9 @@ limitations under the License.
       _translateTo: function(scroll, options) {
         options = options || {};
 
-        this._currentTranslation = scroll;
+        this._scope.$evalAsync(function() {
+          this._currentTranslation = scroll;
+        }.bind(this));
 
         if (options.animate) {
           animit(this._scrollElement[0])
