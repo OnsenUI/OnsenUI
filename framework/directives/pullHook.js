@@ -117,7 +117,7 @@
  * @name fixed-content
  * @description
  *   [en]If this attribute is set the content of the page will not move when pulling.[/en]
- *   [ja][/ja]
+ *   [ja]この属性がある時、プルフックが引き出されている時にもコンテンツは動きません。[/ja]
  */
 
 /**
