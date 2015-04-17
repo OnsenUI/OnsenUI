@@ -19,7 +19,7 @@
  * @name ons-if-platform
  * @type {String}
  * @description
- *   [en]Either "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".[/en]
+ *   [en]One or multiple space separated values: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".[/en]
  *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "windows"のいずれかを指定します。[/ja]
  */
 
@@ -63,7 +63,8 @@
           });
 
           function update() {
-            if (attrs.onsIfPlatform.toLowerCase() === platform.toLowerCase()) {
+            var userPlatforms = attrs.onsIfPlatform.toLowerCase().trim().split(/\s+/);
+            if (userPlatforms.indexOf(platform.toLowerCase()) >= 0) {
               element.css('display', 'block');
             } else {
               element.css('display', 'none');
