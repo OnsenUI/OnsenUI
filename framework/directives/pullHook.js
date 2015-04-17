@@ -148,7 +148,7 @@
  * @signature getHeight()
  * @description
  *   [en]Returns the height of the pull hook in pixels.[/en]
- *   [ja][/ja]
+ *   [ja]プルフックの高さをピクセル数で返します。[/ja]
  */
 
 /**
@@ -167,7 +167,7 @@
  * @signature getThresholdHeight()
  * @description
  *   [en]Returns the height of the threshold in pixels.[/en]
- *   [ja][/ja]
+ *   [ja]閾値、となる高さをピクセル数で返します。[/ja]
  */
 
 /**
@@ -186,7 +186,7 @@
  * @signature getPullDistance()
  * @description
  *   [en]Returns the current number of pixels the pull hook has moved.[/en]
- *   [ja][/ja]
+ *   [ja]現在のプルフックが引き出された距離をピクセル数で返します。[/ja]
  */
 
 /**
@@ -194,7 +194,7 @@
  * @signature getCurrentState()
  * @description
  *   [en]Returns the current state of the element.[/en]
- *   [ja][/ja]
+ *   [ja]要素の現在の状態を返します。[/ja]
  */
 
 /**
