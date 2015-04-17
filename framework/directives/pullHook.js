@@ -145,6 +145,14 @@
 
 /**
  * @ngdoc method
+ * @signature getHeight()
+ * @description
+ *   [en]Returns the height of the pull hook in pixels.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature setHeight(height)
  * @param {Number} height
  *   [en]Desired height.[/en]
@@ -156,6 +164,14 @@
 
 /**
  * @ngdoc method
+ * @signature getThresholdHeight()
+ * @description
+ *   [en]Returns the height of the threshold in pixels.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature setThresholdHeight(thresholdHeight)
  * @param {Number} thresholdHeight
  *   [en]Desired threshold height.[/en]
@@ -163,6 +179,22 @@
  * @description
  *   [en]Specify the threshold height.[/en]
  *   [ja]閾値となる高さを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getPullDistance()
+ * @description
+ *   [en]Returns the current number of pixels the pull hook has moved.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getCurrentState()
+ * @description
+ *   [en]Returns the current state of the element.[/en]
+ *   [ja][/ja]
  */
 
 /**
