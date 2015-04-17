@@ -3,8 +3,11 @@
  * @id list-item
  * @name ons-list-item
  * @category list
+ * @modifier tight
+ *   [en]Remove the space above and below the item content.[/en]
+ *   [ja][/ja]
  * @modifier tappable
- *   [en]Made the list item change appearance when it's tapped.[/en]
+ *   [en]Make the list item change appearance when it's tapped.[/en]
  *   [ja]タップやクリックした時に効果が表示されるようになります。[/ja]
  * @modifier chevron
  *   [en]Display a chevron at the right end of the list item and make it change appearance when tapped.[/en]
@@ -18,7 +21,7 @@
  * @seealso ons-list-header
  *   [en]ons-list-header component[/en]
  *   [ja]ons-list-headerコンポーネント[/ja]
- * @guide UsingList 
+ * @guide UsingList
  *   [en]Using lists[/en]
  *   [ja]リストを使う[/ja]
  * @codepen yxcCt
