@@ -157,8 +157,8 @@ Please don't make changes directly to generated files like `onsenui.js` and `ons
 
 Components will generally have one "view" file and one "directive" file.
 
-* View files are located in `[/framework/views/](/OnsenUI/OnsenUI/tree/master/framework/views)`. The view file contains the logic of the component. This is often the place to look when making additions or fixes to a component.
-* Directive files are found in the `[/framework/directives/](/OnsenUI/OnsenUI/tree/master/framework/directives)` directory. These files define the AngularJS directives.
+* View files are located in [/framework/views/](/OnsenUI/OnsenUI/tree/master/framework/views). The view file contains the logic of the component. This is often the place to look when making additions or fixes to a component.
+* Directive files are found in the [/framework/directives/](/OnsenUI/OnsenUI/tree/master/framework/directives) directory. These files define the AngularJS directives.
 
 #### Style sheets
 
