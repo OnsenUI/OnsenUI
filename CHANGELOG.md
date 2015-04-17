@@ -13,6 +13,7 @@ v1.3.1-dev
  * ons-modal: Added animations and animation options.
  * ons-alert-dialog: Added `submitOnEnter` parameter for `ons.notification.prompt()`.
  * ons-pull-hook: Added `getPullDistance`, `getHeight`, `getThresholdHeight` methods.
+ * ons-pull-hook: Added `fixed-content` attribute.
 
 v1.3.0
 ----
