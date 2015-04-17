@@ -38,8 +38,6 @@ limitations under the License.
       ),
 
       _decompose: function(page) {
-        var elements = [];
-
         var left = page.getPageView().getToolbarLeftItemsElement();
         var right = page.getPageView().getToolbarRightItemsElement();
 
