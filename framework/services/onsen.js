@@ -222,7 +222,9 @@ limitations under the License.
           };
 
           for (var method in methods) {
-            view[method] = methods[method];
+            if (methods.hasOwnProperty(method)) {
+              view[method] = methods[method];
+            }
           }
         },
 

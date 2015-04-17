@@ -157,16 +157,16 @@ Please don't make changes directly to generated files like `onsenui.js` and `ons
 
 Components will generally have one "view" file and one "directive" file.
 
-* View files are located in `[/framework/views/](/OnsenUI/OnsenUI/tree/master/framework/views)`. The view file contains the logic of the component. This is often the place to look when making additions or fixes to a component.
-* Directive files are found in the `[/framework/directives/](/OnsenUI/OnsenUI/tree/master/framework/directives)` directory. These files define the AngularJS directives.
+* View files are located in [/framework/views/](https://github.com/OnsenUI/OnsenUI/tree/master/framework/views). The view file contains the logic of the component. This is often the place to look when making additions or fixes to a component.
+* Directive files are found in the [/framework/directives/](https://github.com/OnsenUI/OnsenUI/tree/master/framework/directives) directory. These files define the AngularJS directives.
 
 #### Style sheets
 
 Most of the style is defined in a separate project called `Onsen CSS Components` which is located [here](https://github.com/OnsenUI/OnsenUI/tree/master/css-components).
 
-Changes to the style should be made by editing the files in [this directory](/OnsenUI/OnsenUI/tree/master/css-components/components-src/stylus/components). These files will compile into the `onsen-css-components.css` file.
+Changes to the style should be made by editing the files in [this directory](https://github.com/OnsenUI/OnsenUI/tree/master/css-components/components-src/stylus/components). These files will compile into the `onsen-css-components.css` file.
 
-There is also a stylesheet that is specific to the custom elements called `onsenui.css`, this file is compiled from the files in [this directory](/OnsenUI/OnsenUI/tree/master/framework/css).
+There is also a stylesheet that is specific to the custom elements called `onsenui.css`, this file is compiled from the files in [this directory](https://github.com/OnsenUI/OnsenUI/tree/master/core/css).
 
 ### Code style
 

@@ -86,30 +86,29 @@
           viewKey: 'ons-button'
         });
 
-        button.isDisabled = isDisabled;
-        button.setDisabled = setDisabled;
+        /**
+         * Returns whether the button is disabled or not.
+         */
+        button.isDisabled = function() {
+          return this._element[0].hasAttribute('disabled');
+        };
+
+        /**
+         * Disabled or enable button.
+         */
+        button.setDisabled = function(disabled) {
+          if (disabled) {
+            this._element[0].setAttribute('disabled', '');
+          } else {
+            this._element[0].removeAttribute('disabled');
+          }
+        };
 
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };
   });
 
-  /**
-   * Returns whether the button is disabled or not.
-   */
-  function isDisabled() {
-    return this._element[0].hasAttribute('disabled');
-  }
 
-  /**
-   * Disabled or enable button.
-   */
-  function setDisabled(disabled) {
-    if (disabled) {
-      this._element[0].setAttribute('disabled', '');
-    } else {
-      this._element[0].removeAttribute('disabled');
-    }
-  }
 
 })();
