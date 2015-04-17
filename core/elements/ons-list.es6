@@ -20,7 +20,7 @@ limitations under the License.
 
   var scheme = {'': 'list--*'};
 
-  class ListElement extends HTMLElement {
+  class ListElement extends ons._BaseElement {
     createdCallback() {
       this.classList.add('list');
       ModifierUtil.initModifier(this, scheme);

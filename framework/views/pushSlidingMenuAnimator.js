@@ -220,8 +220,6 @@ limitations under the License.
       },
 
       _generateBehindPageStyle: function(distance) {
-        var max = this._menuPage[0].clientWidth;
-
         var behindX = this._isRight ? -distance : distance;
         var behindTransform = 'translate3d(' + behindX + 'px, 0, 0)';
 

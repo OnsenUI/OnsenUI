@@ -18,7 +18,7 @@ limitations under the License.
 (() => {
   'use strict';
 
-  class IconElement extends HTMLElement {
+  class IconElement extends ons._BaseElement {
 
     createdCallback() {
       this._update();
@@ -38,24 +38,25 @@ limitations under the License.
       for (let key in builded.style) {
         this.style[key] = builded.style[key];
       }
-      for (let className of builded.classList) {
+
+      builded.classList.forEach(className => {
         this.classList.add(className);
-      }
+      }.bind(this));
     }
 
     /**
      * Remove unneeded class value.
      */
     _cleanClassAttribute() {
+      var classList = this.classList;
+
       var removal = Array.apply(null, this.classList).filter(klass => {
         return klass === 'fa' || klass.indexOf('fa-') === 0 || klass.indexOf('ion-') === 0;
+      }).forEach(className => {
+        classList.remove(className);
       });
 
-      removal.push('ons-icon--ion');
-
-      for (let removalClass of removal) {
-        this.classList.remove(removalClass);
-      }
+      classList.remove('ons-icon--ion');
     }
 
     _buildClassAndStyle() {

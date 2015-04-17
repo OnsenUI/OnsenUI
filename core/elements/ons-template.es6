@@ -18,7 +18,7 @@ limitations under the License.
 (() => {
   'use strict';
 
-  class TemplateElement extends HTMLElement {
+  class TemplateElement extends ons._BaseElement {
     createdCallback() {
       this.template = this.innerHTML;
 

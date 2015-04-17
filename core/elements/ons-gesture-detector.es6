@@ -18,7 +18,7 @@ limitations under the License.
 (() => {
   'use strict';
 
-  class GestureDetectorElement extends HTMLElement {
+  class GestureDetectorElement extends ons._BaseElement {
     createdCallback() {
       this._gestureDetector = new ons.GestureDetector(this);
     }
