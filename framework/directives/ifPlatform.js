@@ -20,7 +20,7 @@
  * @type {String}
  * @description
  *   [en]One or multiple space separated values: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".[/en]
- *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "windows"のいずれかを指定します。[/ja]
+ *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "windows"のいずれか空白区切りで複数指定できます。[/ja]
  */
 
 (function() {
