@@ -63,7 +63,7 @@ limitations under the License.
         pageElement.append(scrollElement);
         scrollElement.append(children);
 
-        return scrollElement; 
+        return scrollElement;
       },
 
       _setStyle: function() {
@@ -75,7 +75,7 @@ limitations under the License.
           lineHeight: h + 'px'
         });
       },
-    
+
       _onScroll: function(event) {
         var el = this._pageElement[0];
 
@@ -139,7 +139,7 @@ limitations under the License.
         else {
           this._setState(this.STATE_INITIAL);
         }
- 
+
         event.stopPropagation();
         this._translateTo(scroll);
       },
@@ -264,7 +264,7 @@ limitations under the License.
       _translateTo: function(scroll, options) {
         options = options || {};
 
-        this._scope.$evalAsync(function(){
+        this._scope.$evalAsync(function() {
           this._currentTranslation = scroll;
         }.bind(this));
 
