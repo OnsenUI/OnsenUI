@@ -130,6 +130,36 @@ componentCategory: modal
           </td>
         </tr>
         
+        <tr>
+          <td class="attribute-name" id="ons-modal-animation">animation</td>
+          <td>
+            <span class="value-type">String</span>
+            <br><span class="default-value" style="color: green">default</span>
+          </td>
+          <td>
+            The animation used when showing and hiding the modal. Can be either "none" or "fade".
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-modal-animation-options">animation-options</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
       </tbody>
     </table>
   </section>
@@ -157,17 +187,17 @@ componentCategory: modal
       <tbody>
         
         <tr>
-          <td><a href="#method-toggle">toggle()</a></td>
+          <td><a href="#method-toggle">toggle([options])</a></td>
           <td>Toggle modal visibility.</td>
         </tr>
         
         <tr>
-          <td><a href="#method-show">show()</a></td>
+          <td><a href="#method-show">show([options])</a></td>
           <td>Show modal.</td>
         </tr>
         
         <tr>
-          <td><a href="#method-hide">hide()</a></td>
+          <td><a href="#method-hide">hide([options])</a></td>
           <td>Hide modal.</td>
         </tr>
         
@@ -192,7 +222,7 @@ componentCategory: modal
   
   <section class="method-detail">
     <h4 id="method-toggle">
-      toggle()
+      toggle([options])
 
       <a href="#method-toggle" class="reference-loop-anchor">#</a>
     </h4>
@@ -202,11 +232,48 @@ componentCategory: modal
     
 
     
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>Parameter object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animation</span></td>
+          <td class="value-type">String</td>
+          <td>Animation name. Available animations are "none" and "fade".</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animationOptions</span></td>
+          <td class="value-type">String</td>
+          <td>Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code></td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
   </section>
   
   <section class="method-detail">
     <h4 id="method-show">
-      show()
+      show([options])
 
       <a href="#method-show" class="reference-loop-anchor">#</a>
     </h4>
@@ -216,11 +283,48 @@ componentCategory: modal
     
 
     
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>Parameter object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animation</span></td>
+          <td class="value-type">String</td>
+          <td>Animation name. Available animations are "none" and "fade".</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animationOptions</span></td>
+          <td class="value-type">String</td>
+          <td>Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code></td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
   </section>
   
   <section class="method-detail">
     <h4 id="method-hide">
-      hide()
+      hide([options])
 
       <a href="#method-hide" class="reference-loop-anchor">#</a>
     </h4>
@@ -229,6 +333,43 @@ componentCategory: modal
 
     
 
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>Parameter object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animation</span></td>
+          <td class="value-type">String</td>
+          <td>Animation name. Available animations are "none" and "fade".</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animationOptions</span></td>
+          <td class="value-type">String</td>
+          <td>Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code></td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
     
   </section>
   

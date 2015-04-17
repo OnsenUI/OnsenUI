@@ -205,6 +205,21 @@ componentCategory: dialog
         </tr>
         
         <tr>
+          <td class="attribute-name" id="ons-dialog-animation-options">animation-options</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
           <td class="attribute-name" id="ons-dialog-mask-color">mask-color</td>
           <td>
             <span class="value-type">String</span>
@@ -474,6 +489,12 @@ componentCategory: dialog
         </tr>
         
         <tr>
+          <td><span class="parameter-name">options.animationOptions</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> </td>
+        </tr>
+        
+        <tr>
           <td><span class="parameter-name">options.callback</span></td>
           <td class="value-type">Function</td>
           <td>ダイアログが表示され終わった後に呼び出される関数オブジェクトを指定します。</td>
@@ -522,6 +543,12 @@ componentCategory: dialog
           <td><span class="parameter-name">options.animation</span></td>
           <td class="value-type">String</td>
           <td>アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定できます。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animationOptions</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> </td>
         </tr>
         
         <tr>
