@@ -130,6 +130,36 @@ componentCategory: modal
           </td>
         </tr>
         
+        <tr>
+          <td class="attribute-name" id="ons-modal-animation">animation</td>
+          <td>
+            <span class="value-type">String</span>
+            <br><span class="default-value" style="color: green">default</span>
+          </td>
+          <td>
+            モーダルを表示する際のアニメーション名を指定します。"none"もしくは"fade"を指定できます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-modal-animation-options">animation-options</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
       </tbody>
     </table>
   </section>
@@ -157,17 +187,17 @@ componentCategory: modal
       <tbody>
         
         <tr>
-          <td><a href="#method-toggle">toggle()</a></td>
+          <td><a href="#method-toggle">toggle([options])</a></td>
           <td>モーダルの表示を切り替えます。</td>
         </tr>
         
         <tr>
-          <td><a href="#method-show">show()</a></td>
+          <td><a href="#method-show">show([options])</a></td>
           <td>モーダルを表示します。</td>
         </tr>
         
         <tr>
-          <td><a href="#method-hide">hide()</a></td>
+          <td><a href="#method-hide">hide([options])</a></td>
           <td>モーダルを非表示にします。</td>
         </tr>
         
@@ -192,7 +222,7 @@ componentCategory: modal
   
   <section class="method-detail">
     <h4 id="method-toggle">
-      toggle()
+      toggle([options])
 
       <a href="#method-toggle" class="reference-loop-anchor">#</a>
     </h4>
@@ -202,11 +232,48 @@ componentCategory: modal
     
 
     
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>オプションを指定するオブジェクト。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animation</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション名を指定します。"none", "fade"のいずれかを指定します。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animationOptions</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> </td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
   </section>
   
   <section class="method-detail">
     <h4 id="method-show">
-      show()
+      show([options])
 
       <a href="#method-show" class="reference-loop-anchor">#</a>
     </h4>
@@ -216,11 +283,48 @@ componentCategory: modal
     
 
     
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>オプションを指定するオブジェクト。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animation</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション名を指定します。"none", "fade"のいずれかを指定します。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animationOptions</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> </td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
   </section>
   
   <section class="method-detail">
     <h4 id="method-hide">
-      hide()
+      hide([options])
 
       <a href="#method-hide" class="reference-loop-anchor">#</a>
     </h4>
@@ -229,6 +333,43 @@ componentCategory: modal
 
     
 
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>オプションを指定するオブジェクト。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animation</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション名を指定します。"none", "fade"のいずれかを指定します。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animationOptions</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> </td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
     
   </section>
   

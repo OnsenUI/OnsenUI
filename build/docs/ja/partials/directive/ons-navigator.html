@@ -253,6 +253,36 @@ componentCategory: navigation
           </td>
         </tr>
         
+        <tr>
+          <td class="attribute-name" id="ons-navigator-animation">animation</td>
+          <td>
+            <span class="value-type">String</span>
+            <br><span class="default-value" style="color: green">default</span>
+          </td>
+          <td>
+            画面遷移する際のアニメーションを指定します。"slide", "simpleslide", "fade", "lift", "none", "default"のいずれかを指定できます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-navigator-animation-options">animation-options</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
       </tbody>
     </table>
   </section>
@@ -434,6 +464,12 @@ componentCategory: navigation
         </tr>
         
         <tr>
+          <td><span class="parameter-name">options.animationOptions</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> </td>
+        </tr>
+        
+        <tr>
           <td><span class="parameter-name">options.onTransitionEnd</span></td>
           <td class="value-type">Function</td>
           <td>pushPage()による画面遷移が終了した時に呼び出される関数オブジェクトを指定します。</td>
@@ -542,6 +578,12 @@ componentCategory: navigation
         </tr>
         
         <tr>
+          <td><span class="parameter-name">options.animationOptions</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> </td>
+        </tr>
+        
+        <tr>
           <td><span class="parameter-name">options.onTransitionEnd</span></td>
           <td class="value-type">Function</td>
           <td>このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。</td>
@@ -596,6 +638,12 @@ componentCategory: navigation
           <td><span class="parameter-name">options.animation</span></td>
           <td class="value-type">String</td>
           <td>アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animationOptions</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> </td>
         </tr>
         
         <tr>

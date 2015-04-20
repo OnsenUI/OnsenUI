@@ -3,7 +3,7 @@
  * 
  * - pure javascript - server compatible, browser compatible
  * - dont rely on the browser doms
- * - super simple - you get it immediatly, no mistery, no magic involved
+ * - super simple - you get it immediately, no mystery, no magic involved
  *
  * - create a MicroEventDebug with goodies to debug
  *   - make it safer to use

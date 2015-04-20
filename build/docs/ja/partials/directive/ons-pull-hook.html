@@ -110,7 +110,8 @@ componentCategory: control
   <ul class="seealso">
     
       
-        <li class="guide"><a href="/guide/overview.html#UsingPullHook">プルフックを使う</a></li>
+        <li class="guide"><a href="/guide/overview.html#UsingPullHook
+">プルフックを使う</a></li>
       
     
     
@@ -227,6 +228,21 @@ componentCategory: control
         </tr>
         
         <tr>
+          <td class="attribute-name" id="ons-pull-hook-fixed-content">fixed-content</td>
+          <td>
+            
+            
+          </td>
+          <td>
+            この属性がある時、プルフックが引き出されている時にもコンテンツは動きません。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
           <td class="attribute-name" id="ons-pull-hook-ons-changestate">ons-changestate</td>
           <td>
             <span class="value-type">Expression</span>
@@ -274,7 +290,12 @@ componentCategory: control
         
         <tr>
           <td><a href="#method-isDisabled">isDisabled()</a></td>
-          <td>dsiabled状態になっているかを得ることが出来ます。</td>
+          <td>disabled状態になっているかを得ることが出来ます。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-getHeight">getHeight()</a></td>
+          <td>プルフックの高さをピクセル数で返します。</td>
         </tr>
         
         <tr>
@@ -283,8 +304,23 @@ componentCategory: control
         </tr>
         
         <tr>
+          <td><a href="#method-getThresholdHeight">getThresholdHeight()</a></td>
+          <td>閾値、となる高さをピクセル数で返します。</td>
+        </tr>
+        
+        <tr>
           <td><a href="#method-setThresholdHeight">setThresholdHeight(thresholdHeight)</a></td>
           <td>閾値となる高さを指定できます。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-getPullDistance">getPullDistance()</a></td>
+          <td>現在のプルフックが引き出された距離をピクセル数で返します。</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-getCurrentState">getCurrentState()</a></td>
+          <td>要素の現在の状態を返します。</td>
         </tr>
         
         <tr>
@@ -387,10 +423,24 @@ componentCategory: control
       <a href="#method-isDisabled" class="reference-loop-anchor">#</a>
     </h4>
 
-    <p>dsiabled状態になっているかを得ることが出来ます。</p>
+    <p>disabled状態になっているかを得ることが出来ます。</p>
 
     
     <p>返り値: プルフックがdisabled状態の場合、trueを返します。</p>
+    
+
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-getHeight">
+      getHeight()
+
+      <a href="#method-getHeight" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>プルフックの高さをピクセル数で返します。</p>
+
     
 
     
@@ -436,6 +486,20 @@ componentCategory: control
   </section>
   
   <section class="method-detail">
+    <h4 id="method-getThresholdHeight">
+      getThresholdHeight()
+
+      <a href="#method-getThresholdHeight" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>閾値、となる高さをピクセル数で返します。</p>
+
+    
+
+    
+  </section>
+  
+  <section class="method-detail">
     <h4 id="method-setThresholdHeight">
       setThresholdHeight(thresholdHeight)
 
@@ -471,6 +535,34 @@ componentCategory: control
       </tbody>
     </table>
     <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-getPullDistance">
+      getPullDistance()
+
+      <a href="#method-getPullDistance" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>現在のプルフックが引き出された距離をピクセル数で返します。</p>
+
+    
+
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-getCurrentState">
+      getCurrentState()
+
+      <a href="#method-getCurrentState" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>要素の現在の状態を返します。</p>
+
+    
+
     
   </section>
   
