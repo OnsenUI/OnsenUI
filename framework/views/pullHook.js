@@ -252,12 +252,24 @@ limitations under the License.
         return this._element[0].hasAttribute('disabled');
       },
 
+      _isContentFixed: function() {
+        return this._element[0].hasAttribute('fixed-content');
+      },
+
       setDisabled: function(disabled) {
         if (disabled) {
           this._element[0].setAttribute('disabled', '');
         }
         else {
           this._element[0].removeAttribute('disabled');
+        }
+      },
+
+      _getScrollableElement: function() {
+        if (this._isContentFixed()) {
+          return this._element[0];
+        } else {
+          return this._scrollElement[0];
         }
       },
 
@@ -269,7 +281,7 @@ limitations under the License.
         }.bind(this));
 
         if (options.animate) {
-          animit(this._scrollElement[0])
+          animit(this._getScrollableElement())
             .queue({
               transform: this._generateTranslationTransform(scroll)
             }, {
@@ -279,7 +291,7 @@ limitations under the License.
             .play(options.callback);
         }
         else {
-          animit(this._scrollElement[0])
+          animit(this._getScrollableElement())
             .queue({
               transform: this._generateTranslationTransform(scroll)
             })
