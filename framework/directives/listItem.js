@@ -4,7 +4,7 @@
  * @name ons-list-item
  * @category list
  * @modifier tight
- *   [en]Remove the space above and below the item content.[/en]
+ *   [en]Remove the space above and below the item content. This is useful for multi-line content.[/en]
  *   [ja][/ja]
  * @modifier tappable
  *   [en]Make the list item change appearance when it's tapped.[/en]
