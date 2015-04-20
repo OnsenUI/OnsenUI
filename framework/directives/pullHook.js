@@ -7,7 +7,7 @@
  *   [en]Component that adds "pull-to-refresh" to an <ons-page> element.[/en]
  *   [ja]ons-page要素以下でいわゆるpull to refreshを実装するためのコンポーネントです。[/ja]
  * @codepen WbJogM
- * @guide UsingPullHook 
+ * @guide UsingPullHook
  *   [en]How to use Pull Hook[/en]
  *   [ja]プルフックを使う[/ja]
  * @example
@@ -145,6 +145,14 @@
 
 /**
  * @ngdoc method
+ * @signature getHeight()
+ * @description
+ *   [en]Returns the height of the pull hook in pixels.[/en]
+ *   [ja]プルフックの高さをピクセル数で返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature setHeight(height)
  * @param {Number} height
  *   [en]Desired height.[/en]
@@ -156,6 +164,14 @@
 
 /**
  * @ngdoc method
+ * @signature getThresholdHeight()
+ * @description
+ *   [en]Returns the height of the threshold in pixels.[/en]
+ *   [ja]閾値、となる高さをピクセル数で返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature setThresholdHeight(thresholdHeight)
  * @param {Number} thresholdHeight
  *   [en]Desired threshold height.[/en]
@@ -163,6 +179,22 @@
  * @description
  *   [en]Specify the threshold height.[/en]
  *   [ja]閾値となる高さを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getPullDistance()
+ * @description
+ *   [en]Returns the current number of pixels the pull hook has moved.[/en]
+ *   [ja]現在のプルフックが引き出された距離をピクセル数で返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getCurrentState()
+ * @description
+ *   [en]Returns the current state of the element.[/en]
+ *   [ja]要素の現在の状態を返します。[/ja]
  */
 
 /**
