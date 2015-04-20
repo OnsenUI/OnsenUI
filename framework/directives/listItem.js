@@ -5,7 +5,7 @@
  * @category list
  * @modifier tight
  *   [en]Remove the space above and below the item content. This is useful for multi-line content.[/en]
- *   [ja][/ja]
+ *   [ja]行間のスペースを取り除きます。複数行の内容をリストで扱う場合に便利です。[/ja]
  * @modifier tappable
  *   [en]Make the list item change appearance when it's tapped.[/en]
  *   [ja]タップやクリックした時に効果が表示されるようになります。[/ja]
