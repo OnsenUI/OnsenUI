@@ -19,18 +19,21 @@ limitations under the License.
   'use strict';
 
   ons.platform = {
+
     /**
      * All elements will be rendered as if the app was running on this platform.
      * @type {String}
      */
-    _renderPlatform: '',
+    _renderPlatform: null,
+
     /**
-     * Sets the platform used to render the elements.
+     * Sets the platform used to render the elements. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", or "ios"
      * @param  {string} platform Name of the platform
      */
     select: function (platform) {
       ons.platform._renderPlatform = platform.trim().toLowerCase();
     },
+
     /**
      * @return {Boolean}
      */
