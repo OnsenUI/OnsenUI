@@ -13,6 +13,7 @@ v1.3.1-dev
  * ons-modal: Added animations and animation options.
  * ons-alert-dialog: Added `submitOnEnter` parameter for `ons.notification.prompt()`.
  * ons-list-item: Added `tight` modifier.
+ * ons-pull-hook: Added `getPullDistance`, `getHeight`, `getThresholdHeight` methods.
 
 v1.3.0
 ----
