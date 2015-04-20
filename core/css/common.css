@@ -117,5 +117,6 @@ ons-pull-hook {
   right: 0;
   margin: auto;
   text-align: center;
+  z-index: 20002;
 }
 
