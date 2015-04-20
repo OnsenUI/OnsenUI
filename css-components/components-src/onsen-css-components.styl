@@ -65,8 +65,8 @@ var-background-color--switch__label--checked = #4CD964; // background color acti
 
 var-switch-thumb-background-color = #fff
 
-var-swtich-thumb-border-color = #ddd
-var-swtich-thumb-border-color-active = #4CD964
+var-switch-thumb-border-color = #ddd
+var-switch-thumb-border-color-active = #4CD964
 
 
 ////////////////////////////////////////
@@ -341,7 +341,7 @@ var-list-text-color = var-theme-ios7-text-black
 var-tab-bar-background-color = var-titlebar-background
 var-key-color = #25b5c2
 var-secondary-color = var-list-background-color
-var-auxilary-color = #b3b3b3
+var-auxiliary-color = #b3b3b3
 var-notification-color = #fff
 var-cta-background-color = #4a9cd2
 var-list-item-active-color = #b6dedd
@@ -422,8 +422,8 @@ var-search-input-background-color--focus = #e7e3e0
 
 // var-switch-thumb-background-color = #fff
 
-// var-swtich-thumb-border-color = #ddd
-// var-swtich-thumb-border-color-active = #4CD964
+// var-switch-thumb-border-color = #ddd
+// var-switch-thumb-border-color-active = #4CD964
 
 
 ////////////////////////////////////////
@@ -1647,7 +1647,7 @@ button--quiet()
   height 28px
   width 28px
   background-color var-switch-thumb-background-color
-  border 1px solid var-swtich-thumb-border-color
+  border 1px solid var-switch-thumb-border-color
   left 0
   top 1px
   transition var-transition--switch__toggle
@@ -1668,7 +1668,7 @@ button--quiet()
 .topcoat-switch__input:checked + .topcoat-switch__toggle:before
   margin-left 0px
   transform translate3d(19px, 0px, 0px)
-  border-color var-swtich-thumb-border-color-active
+  border-color var-switch-thumb-border-color-active
 
 .topcoat-switch__input:active + .topcoat-switch__toggle
   box-shadow var-box-shadow
@@ -2046,7 +2046,7 @@ navigation-bar__title()
   font-size 16px
   line-height var-line-height--tab-bar__button
   margin 0
-  pading 0
+  padding 0
 
 .topcoat-tab-bar__button
   color var-color--tab-bar__button

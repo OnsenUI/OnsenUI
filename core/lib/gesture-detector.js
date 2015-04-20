@@ -388,7 +388,7 @@ var Utils = GestureDetector.utils = {
   },
 
   /**
-   * do a small comparision to get the direction between two touches.
+   * do a small comparison to get the direction between two touches.
    * @method getDirection
    * @param {Touch} touch1
    * @param {Touch} touch2
@@ -694,7 +694,7 @@ var Event = GestureDetector.event = {
 
     // after there are still touches on the screen,
     // we just want to trigger a MOVE event. so change the START or END to a MOVE
-    // but only after detection has been started, the first time we actualy want a START
+    // but only after detection has been started, the first time we actually want a START
     if(changedLength > 0 && this.started) {
       triggerType = EVENT_MOVE;
     }
@@ -952,7 +952,7 @@ var PointerEvent = GestureDetector.PointerEvent = {
  * @static
  */
 var Detection = GestureDetector.detection = {
-  // contains all registred GestureDetector.gestures in the correct order
+  // contains all registered GestureDetector.gestures in the correct order
   gestures: [],
 
   // data of the current GestureDetector.gesture detection session
@@ -1219,7 +1219,7 @@ GestureDetector.Instance = function(element, options) {
 
   this.options = Utils.extend(Utils.extend({}, GestureDetector.defaults), options || {});
 
-  // add some css to the element to prevent the browser from doing its native behavoir
+  // add some css to the element to prevent the browser from doing its native behavior
   if(this.options.behavior) {
     Utils.toggleBehavior(this.element, this.options.behavior, true);
   }

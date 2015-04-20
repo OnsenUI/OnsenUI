@@ -8,7 +8,7 @@ var VALID_KEYS = [
   // "var-view-background",
   // "var-key-color",
   // "var-secondary-color",
-  // "var-auxilary-color"
+  // "var-auxiliary-color"
 ];
 
 function validate(variables){

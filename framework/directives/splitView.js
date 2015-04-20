@@ -269,7 +269,7 @@
  * @ngdoc method
  * @signature update()
  * @description
- *   [en]Trigger an 'update' event and try to determine if the split behaviour should be changed.[/en]
+ *   [en]Trigger an 'update' event and try to determine if the split behavior should be changed.[/en]
  *   [ja]splitモードを変えるべきかどうかを判断するための'update'イベントを発火します。[/ja]
  */
 
