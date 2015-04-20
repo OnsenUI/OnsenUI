@@ -16,6 +16,7 @@ v1.3.1-dev
  * ons-if-platform: Supports multiple space separated values.
  * ons-pull-hook: Added `getPullDistance`, `getHeight`, `getThresholdHeight` methods.
  * ons-pull-hook: Added `fixed-content` attribute.
+ * onse.platform: Added `select` method to force a rendering platform.
 
 v1.3.0
 ----
