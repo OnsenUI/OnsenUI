@@ -12,6 +12,10 @@ v1.3.1-dev
  * ons-button: [BC Break] Removed animation feature and related attributes.
  * ons-modal: Added animations and animation options.
  * ons-alert-dialog: Added `submitOnEnter` parameter for `ons.notification.prompt()`.
+ * ons-list-item: Added `tight` modifier.
+ * ons-if-platform: Supports multiple space separated values.
+ * ons-pull-hook: Added `getPullDistance`, `getHeight`, `getThresholdHeight` methods.
+ * ons-pull-hook: Added `fixed-content` attribute.
 
 v1.3.0
 ----

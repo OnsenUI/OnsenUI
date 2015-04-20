@@ -1,4 +1,4 @@
-/*! onsenui - v1.3.1-dev - 2015-04-17 */
+/*! onsenui - v1.3.1-dev - 2015-04-20 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -118,6 +118,7 @@ ons-pull-hook {
   right: 0;
   margin: auto;
   text-align: center;
+  z-index: 20002;
 }
 
 

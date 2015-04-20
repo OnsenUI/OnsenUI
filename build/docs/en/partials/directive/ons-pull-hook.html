@@ -110,7 +110,8 @@ componentCategory: control
   <ul class="seealso">
     
       
-        <li class="guide"><a href="/guide/overview.html#UsingPullHook">How to use Pull Hook</a></li>
+        <li class="guide"><a href="/guide/overview.html#UsingPullHook
+">How to use Pull Hook</a></li>
       
     
     
@@ -227,6 +228,21 @@ componentCategory: control
         </tr>
         
         <tr>
+          <td class="attribute-name" id="ons-pull-hook-fixed-content">fixed-content</td>
+          <td>
+            
+            
+          </td>
+          <td>
+            If this attribute is set the content of the page will not move when pulling.
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+          </td>
+        </tr>
+        
+        <tr>
           <td class="attribute-name" id="ons-pull-hook-ons-changestate">ons-changestate</td>
           <td>
             <span class="value-type">Expression</span>
@@ -278,13 +294,33 @@ componentCategory: control
         </tr>
         
         <tr>
+          <td><a href="#method-getHeight">getHeight()</a></td>
+          <td>Returns the height of the pull hook in pixels.</td>
+        </tr>
+        
+        <tr>
           <td><a href="#method-setHeight">setHeight(height)</a></td>
           <td>Specify the height.</td>
         </tr>
         
         <tr>
+          <td><a href="#method-getThresholdHeight">getThresholdHeight()</a></td>
+          <td>Returns the height of the threshold in pixels.</td>
+        </tr>
+        
+        <tr>
           <td><a href="#method-setThresholdHeight">setThresholdHeight(thresholdHeight)</a></td>
           <td>Specify the threshold height.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-getPullDistance">getPullDistance()</a></td>
+          <td>Returns the current number of pixels the pull hook has moved.</td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-getCurrentState">getCurrentState()</a></td>
+          <td>Returns the current state of the element.</td>
         </tr>
         
         <tr>
@@ -397,6 +433,20 @@ componentCategory: control
   </section>
   
   <section class="method-detail">
+    <h4 id="method-getHeight">
+      getHeight()
+
+      <a href="#method-getHeight" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Returns the height of the pull hook in pixels.</p>
+
+    
+
+    
+  </section>
+  
+  <section class="method-detail">
     <h4 id="method-setHeight">
       setHeight(height)
 
@@ -436,6 +486,20 @@ componentCategory: control
   </section>
   
   <section class="method-detail">
+    <h4 id="method-getThresholdHeight">
+      getThresholdHeight()
+
+      <a href="#method-getThresholdHeight" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Returns the height of the threshold in pixels.</p>
+
+    
+
+    
+  </section>
+  
+  <section class="method-detail">
     <h4 id="method-setThresholdHeight">
       setThresholdHeight(thresholdHeight)
 
@@ -471,6 +535,34 @@ componentCategory: control
       </tbody>
     </table>
     <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-getPullDistance">
+      getPullDistance()
+
+      <a href="#method-getPullDistance" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Returns the current number of pixels the pull hook has moved.</p>
+
+    
+
+    
+  </section>
+  
+  <section class="method-detail">
+    <h4 id="method-getCurrentState">
+      getCurrentState()
+
+      <a href="#method-getCurrentState" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Returns the current state of the element.</p>
+
+    
+
     
   </section>
   

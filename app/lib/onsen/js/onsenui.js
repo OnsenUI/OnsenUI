@@ -1,5 +1,5 @@
-/*! onsenui - v1.3.1-dev - 2015-04-17 */
-/*! ons-core.js for Onsen UI v1.3.1-dev - 2015-04-17 */
+/*! onsenui - v1.3.1-dev - 2015-04-20 */
+/*! ons-core.js for Onsen UI v1.3.1-dev - 2015-04-20 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -10089,8 +10089,6 @@ limitations under the License.
       ),
 
       _decompose: function(page) {
-        var elements = [];
-
         var left = page.getPageView().getToolbarLeftItemsElement();
         var right = page.getPageView().getToolbarRightItemsElement();
 
@@ -12258,8 +12256,6 @@ limitations under the License.
       },
 
       _generateMenuPageStyle: function(distance) {
-        var max = this._menuPage[0].clientWidth;
-
         var x = this._isRight ? -distance : distance;
         var transform = 'translate3d(' + x + 'px, 0, 0)';
 
@@ -13038,11 +13034,11 @@ limitations under the License.
         pageElement.append(scrollElement);
         scrollElement.append(children);
 
-        return scrollElement; 
+        return scrollElement;
       },
 
       _setStyle: function() {
-        var h = this._getHeight();
+        var h = this.getHeight();
 
         this._element.css({
           top: '-' + h + 'px',
@@ -13050,7 +13046,7 @@ limitations under the License.
           lineHeight: h + 'px'
         });
       },
-    
+
       _onScroll: function(event) {
         var el = this._pageElement[0];
 
@@ -13098,23 +13094,23 @@ limitations under the License.
 
         scroll = Math.max(scroll, 0);
 
-        if (this._thresholdHeightEnabled() && scroll >= this._getThresholdHeight()) {
+        if (this._thresholdHeightEnabled() && scroll >= this.getThresholdHeight()) {
           event.gesture.stopDetect();
 
           setImmediate(function() {
             this._setState(this.STATE_ACTION);
-            this._translateTo(this._getHeight(), {animate: true});
+            this._translateTo(this.getHeight(), {animate: true});
 
             this._waitForAction(this._onDone.bind(this));
           }.bind(this));
         }
-        else if (scroll >= this._getHeight()) {
+        else if (scroll >= this.getHeight()) {
           this._setState(this.STATE_PREACTION);
         }
         else {
           this._setState(this.STATE_INITIAL);
         }
- 
+
         event.stopPropagation();
         this._translateTo(scroll);
       },
@@ -13135,10 +13131,10 @@ limitations under the License.
         if (this._currentTranslation > 0) {
           var scroll = this._currentTranslation;
 
-          if (scroll > this._getHeight()) {
+          if (scroll > this.getHeight()) {
             this._setState(this.STATE_ACTION);
 
-            this._translateTo(this._getHeight(), {animate: true});
+            this._translateTo(this.getHeight(), {animate: true});
 
             this._waitForAction(this._onDone.bind(this));
           }
@@ -13169,7 +13165,7 @@ limitations under the License.
         }
       },
 
-      _getHeight: function() {
+      getHeight: function() {
         return parseInt(this._element[0].getAttribute('height') || '64', 10);
       },
 
@@ -13183,13 +13179,13 @@ limitations under the License.
         this._element[0].setAttribute('threshold-height', thresholdHeight + 'px');
       },
 
-      _getThresholdHeight: function() {
+      getThresholdHeight: function() {
         return parseInt(this._element[0].getAttribute('threshold-height') || '96', 10);
       },
 
       _thresholdHeightEnabled: function() {
-        var th = this._getThresholdHeight();
-        return th > 0 && th >= this._getHeight();
+        var th = this.getThresholdHeight();
+        return th > 0 && th >= this.getHeight();
       },
 
       _setState: function(state, noEvent) {
@@ -13219,8 +13215,16 @@ limitations under the License.
         return this._pageElement[0].scrollTop;
       },
 
+      getPullDistance: function() {
+        return this._currentTranslation;
+      },
+
       isDisabled: function() {
         return this._element[0].hasAttribute('disabled');
+      },
+
+      _isContentFixed: function() {
+        return this._element[0].hasAttribute('fixed-content');
       },
 
       setDisabled: function(disabled) {
@@ -13232,13 +13236,23 @@ limitations under the License.
         }
       },
 
+      _getScrollableElement: function() {
+        if (this._isContentFixed()) {
+          return this._element[0];
+        } else {
+          return this._scrollElement[0];
+        }
+      },
+
       _translateTo: function(scroll, options) {
         options = options || {};
 
-        this._currentTranslation = scroll;
+        this._scope.$evalAsync(function() {
+          this._currentTranslation = scroll;
+        }.bind(this));
 
         if (options.animate) {
-          animit(this._scrollElement[0])
+          animit(this._getScrollableElement())
             .queue({
               transform: this._generateTranslationTransform(scroll)
             }, {
@@ -13248,7 +13262,7 @@ limitations under the License.
             .play(options.callback);
         }
         else {
-          animit(this._scrollElement[0])
+          animit(this._getScrollableElement())
             .queue({
               transform: this._generateTranslationTransform(scroll)
             })
@@ -13533,8 +13547,6 @@ limitations under the License.
       },
 
       _generateBehindPageStyle: function(distance) {
-        var max = this._menuPage[0].clientWidth;
-
         var behindX = this._isRight ? -distance : distance;
         var behindTransform = 'translate3d(' + behindX + 'px, 0, 0)';
 
@@ -17774,7 +17786,7 @@ limitations under the License.
  * @category util
  * @description
  *    [en]Conditionally display content depending on the platform / browser. Valid values are "ios", "android", "blackberry", "chrome", "safari", "firefox", and "opera".[/en]
- *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaを指定できます。[/ja]
+ *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaのいずれかの値を空白区切りで複数指定できます。[/ja]
  * @seealso ons-if-orientation [en]ons-if-orientation component[/en][ja]ons-if-orientationコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
@@ -17788,8 +17800,8 @@ limitations under the License.
  * @name ons-if-platform
  * @type {String}
  * @description
- *   [en]Either "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".[/en]
- *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "windows"のいずれかを指定します。[/ja]
+ *   [en]One or multiple space separated values: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".[/en]
+ *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "windows"のいずれか空白区切りで複数指定できます。[/ja]
  */
 
 (function() {
@@ -17832,7 +17844,8 @@ limitations under the License.
           });
 
           function update() {
-            if (attrs.onsIfPlatform.toLowerCase() === platform.toLowerCase()) {
+            var userPlatforms = attrs.onsIfPlatform.toLowerCase().trim().split(/\s+/);
+            if (userPlatforms.indexOf(platform.toLowerCase()) >= 0) {
               element.css('display', 'block');
             } else {
               element.css('display', 'none');
@@ -18214,8 +18227,11 @@ limitations under the License.
  * @id list-item
  * @name ons-list-item
  * @category list
+ * @modifier tight
+ *   [en]Remove the space above and below the item content. This is useful for multi-line content.[/en]
+ *   [ja]行間のスペースを取り除きます。複数行の内容をリストで扱う場合に便利です。[/ja]
  * @modifier tappable
- *   [en]Made the list item change appearance when it's tapped.[/en]
+ *   [en]Make the list item change appearance when it's tapped.[/en]
  *   [ja]タップやクリックした時に効果が表示されるようになります。[/ja]
  * @modifier chevron
  *   [en]Display a chevron at the right end of the list item and make it change appearance when tapped.[/en]
@@ -18229,7 +18245,7 @@ limitations under the License.
  * @seealso ons-list-header
  *   [en]ons-list-header component[/en]
  *   [ja]ons-list-headerコンポーネント[/ja]
- * @guide UsingList 
+ * @guide UsingList
  *   [en]Using lists[/en]
  *   [ja]リストを使う[/ja]
  * @codepen yxcCt
@@ -19621,7 +19637,7 @@ limitations under the License.
  *   [en]Component that adds "pull-to-refresh" to an <ons-page> element.[/en]
  *   [ja]ons-page要素以下でいわゆるpull to refreshを実装するためのコンポーネントです。[/ja]
  * @codepen WbJogM
- * @guide UsingPullHook 
+ * @guide UsingPullHook
  *   [en]How to use Pull Hook[/en]
  *   [ja]プルフックを使う[/ja]
  * @example
@@ -19728,6 +19744,14 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
+ * @name fixed-content
+ * @description
+ *   [en]If this attribute is set the content of the page will not move when pulling.[/en]
+ *   [ja]この属性がある時、プルフックが引き出されている時にもコンテンツは動きません。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
  * @name ons-changestate
  * @type {Expression}
  * @description
@@ -19759,6 +19783,14 @@ limitations under the License.
 
 /**
  * @ngdoc method
+ * @signature getHeight()
+ * @description
+ *   [en]Returns the height of the pull hook in pixels.[/en]
+ *   [ja]プルフックの高さをピクセル数で返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature setHeight(height)
  * @param {Number} height
  *   [en]Desired height.[/en]
@@ -19770,6 +19802,14 @@ limitations under the License.
 
 /**
  * @ngdoc method
+ * @signature getThresholdHeight()
+ * @description
+ *   [en]Returns the height of the threshold in pixels.[/en]
+ *   [ja]閾値、となる高さをピクセル数で返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature setThresholdHeight(thresholdHeight)
  * @param {Number} thresholdHeight
  *   [en]Desired threshold height.[/en]
@@ -19777,6 +19817,22 @@ limitations under the License.
  * @description
  *   [en]Specify the threshold height.[/en]
  *   [ja]閾値となる高さを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getPullDistance()
+ * @description
+ *   [en]Returns the current number of pixels the pull hook has moved.[/en]
+ *   [ja]現在のプルフックが引き出された距離をピクセル数で返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getCurrentState()
+ * @description
+ *   [en]Returns the current state of the element.[/en]
+ *   [ja]要素の現在の状態を返します。[/ja]
  */
 
 /**

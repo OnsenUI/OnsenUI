@@ -5,7 +5,7 @@
  * @category util
  * @description
  *    [en]Conditionally display content depending on the platform / browser. Valid values are "ios", "android", "blackberry", "chrome", "safari", "firefox", and "opera".[/en]
- *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaを指定できます。[/ja]
+ *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaのいずれかの値を空白区切りで複数指定できます。[/ja]
  * @seealso ons-if-orientation [en]ons-if-orientation component[/en][ja]ons-if-orientationコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
@@ -19,8 +19,8 @@
  * @name ons-if-platform
  * @type {String}
  * @description
- *   [en]Either "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".[/en]
- *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "windows"のいずれかを指定します。[/ja]
+ *   [en]One or multiple space separated values: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".[/en]
+ *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "windows"のいずれか空白区切りで複数指定できます。[/ja]
  */
 
 (function() {
@@ -63,7 +63,8 @@
           });
 
           function update() {
-            if (attrs.onsIfPlatform.toLowerCase() === platform.toLowerCase()) {
+            var userPlatforms = attrs.onsIfPlatform.toLowerCase().trim().split(/\s+/);
+            if (userPlatforms.indexOf(platform.toLowerCase()) >= 0) {
               element.css('display', 'block');
             } else {
               element.css('display', 'none');

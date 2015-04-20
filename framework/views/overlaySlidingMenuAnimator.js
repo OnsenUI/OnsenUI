@@ -230,8 +230,6 @@ limitations under the License.
       },
 
       _generateMenuPageStyle: function(distance) {
-        var max = this._menuPage[0].clientWidth;
-
         var x = this._isRight ? -distance : distance;
         var transform = 'translate3d(' + x + 'px, 0, 0)';
 
