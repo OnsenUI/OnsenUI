@@ -199,7 +199,15 @@ limitations under the License.
           throw new Error('You must supply an "ons-page" element to "ons-navigator".');
         }
 
+        var safeApply = function(scope) {
+          var phase = scope.$root.$$phase;
+          if (phase !== '$apply' && phase !== '$digest') {
+            scope.$apply();
+          }
+        };
+
         var link = $compile(pageElement);
+
         return {
           element: pageElement,
           link: function() {
@@ -207,13 +215,6 @@ limitations under the License.
             safeApply(pageScope);
           }
         };
-
-        function safeApply(scope) {
-          var phase = scope.$root.$$phase;
-          if (phase !== '$apply' && phase !== '$digest') {
-            scope.$apply();
-          }
-        }
       },
 
       /**
@@ -235,6 +236,13 @@ limitations under the License.
         if (this.pages.length === 0) {
           return this.pushPage.apply(this, arguments);
         }
+
+        var normalizeIndex = function(index) {
+          if (index < 0) {
+            index = this.pages.length + index;
+          }
+          return index;
+        }.bind(this);
 
         this._doorLock.waitUnlock(function() {
           var unlock = this._doorLock.lock();
@@ -277,13 +285,6 @@ limitations under the License.
             throw new Error('Page is not found: ' + page);
           });
         }.bind(this));
-
-        var normalizeIndex = function(index) {
-          if (index < 0) {
-            index = this.pages.length + index;
-          }
-          return index;
-        }.bind(this);
       },
 
       /**

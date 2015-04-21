@@ -36,7 +36,9 @@ limitations under the License.
       var builded = this._buildClassAndStyle(this);
 
       for (let key in builded.style) {
-        this.style[key] = builded.style[key];
+        if (builded.style.hasOwnProperty(key)) {
+          this.style[key] = builded.style[key];
+        }
       }
 
       builded.classList.forEach(className => {
@@ -50,7 +52,7 @@ limitations under the License.
     _cleanClassAttribute() {
       var classList = this.classList;
 
-      var removal = Array.apply(null, this.classList).filter(klass => {
+      Array.apply(null, this.classList).filter(klass => {
         return klass === 'fa' || klass.indexOf('fa-') === 0 || klass.indexOf('ion-') === 0;
       }).forEach(className => {
         classList.remove(className);

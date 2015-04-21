@@ -79,7 +79,7 @@
       transclude: 'element',
       compile: function(element, attrs, linker) {
         return function(scope, element, attrs) {
-          var lazyRepeat = new LazyRepeatView(scope, element, attrs, linker);
+          var lazyRepeat = new LazyRepeatView(scope, element, attrs, linker); // jshint ignore:line
 
           scope.$on('$destroy', function() {
             scope = element = attrs = linker = null;

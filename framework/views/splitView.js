@@ -23,8 +23,6 @@ limitations under the License.
     var COLLAPSE_MODE = 1;
     var MAIN_PAGE_RATIO = 0.9;
 
-    var ON_PAGE_READY = 'onPageReady';
-
     var SplitView = Class.extend({
 
       init: function(scope, element, attrs) {

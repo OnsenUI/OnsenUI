@@ -28,9 +28,6 @@ window.ModifierUtil = (() => {
       last = makeDict(('' + last).trim());
       current = makeDict(('' + current).trim());
 
-      var added = [];
-      var removed = [];
-
       var removed = Object.keys(last).reduce((result, token) => {
         if (!current[token]) {
           result.push(token);
@@ -76,13 +73,14 @@ window.ModifierUtil = (() => {
      */
     static applyDiffToElement(diff, element, scheme) {
       for (let selector in scheme) {
-        let targetElements = selector === '' ? [element] : element.querySelectorAll(selector);
-        targetElements.forEach(targetElement => {
-          ModifierUtil.applyDiffToClassList(diff, targetElement.classList, scheme[selector])
-        });
+        if (scheme.hasOwnProperty(selector)) {
+          let targetElements = selector === '' ? [element] : element.querySelectorAll(selector);
+          targetElements.forEach(targetElement => {
+            ModifierUtil.applyDiffToClassList(diff, targetElement.classList, scheme[selector]);
+          });
+        }
       }
     }
-
 
     /**
      * @param {String} last
