@@ -41,6 +41,7 @@
     "regexp"        : true,     // Prohibit `.` and `[^...]` in regular expressions.    
     "trailing"      : true,     // Prohibit trailing whitespaces.
     "expr"          : true,    // Tolerate `ExpressionStatement` as Programs.
+    "unused"        : "vars", // Prohibit unused variables.
     
     // == Relaxing Options ================================================
     //

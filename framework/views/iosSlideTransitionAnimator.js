@@ -41,10 +41,23 @@ limitations under the License.
         var left = page.getPageView().getToolbarLeftItemsElement();
         var right = page.getPageView().getToolbarRightItemsElement();
 
+        var excludeBackButtonLabel = function(elements) {
+          var result = [];
+
+          for (var i = 0; i < elements.length; i++) {
+            if (elements[i].nodeName.toLowerCase() === 'ons-back-button') {
+              result.push(elements[i].querySelector('.ons-back-button__icon'));
+            } else {
+              result.push(elements[i]);
+            }
+          }
+
+          return result;
+        };
+
         var other = []
           .concat(left.children.length === 0 ? left : excludeBackButtonLabel(left.children))
           .concat(right.children.length === 0 ? right : excludeBackButtonLabel(right.children));
-
 
         var pageLabels = [
           page.getPageView().getToolbarCenterItemsElement(),
@@ -59,20 +72,6 @@ limitations under the License.
           toolbar: page.getPageView().getToolbarElement(),
           bottomToolbar: page.getPageView().getBottomToolbarElement()
         };
-
-        function excludeBackButtonLabel(elements) {
-          var result = [];
-
-          for (var i = 0; i < elements.length; i++) {
-            if (elements[i].nodeName.toLowerCase() === 'ons-back-button') {
-              result.push(elements[i].querySelector('.ons-back-button__icon'));
-            } else {
-              result.push(elements[i]);
-            }
-          }
-
-          return result;
-        }
       },
 
       _shouldAnimateToolbar: function(enterPage, leavePage) {

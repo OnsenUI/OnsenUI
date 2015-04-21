@@ -49,7 +49,7 @@
     return {
       restrict: 'E',
       link: function(scope, element, attrs) {
-        var view = new GenericView(scope, element, attrs, {
+        var view = new GenericView(scope, element, attrs, { // jshint ignore:line
           viewKey: 'ons-list-item'
         });
 

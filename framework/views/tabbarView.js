@@ -41,6 +41,7 @@ limitations under the License.
       /**
        * @param {jqLite} enterPage
        * @param {jqLite} leavePage
+       * @param {Function} done
        */
       apply: function(enterPage, leavePage, done) {
         throw new Error('This method must be implemented.');
@@ -56,6 +57,7 @@ limitations under the License.
       /**
        * @param {jqLite} enterPage
        * @param {jqLite} leavePage
+       * @param {Function} done
        */
       apply: function(enterPage, leavePage, done) {
         done();

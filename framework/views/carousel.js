@@ -626,6 +626,21 @@ limitations under the License.
         var self = this;
         var isOverscrollable = this.isOverscrollable();
 
+        var normalizeScroll = function(scroll) {
+          var ratio = 0.35;
+
+          if (scroll < 0) {
+            return isOverscrollable ? Math.round(scroll * ratio) : 0;
+          }
+
+          var maxScroll = self._calculateMaxScroll();
+          if (maxScroll < scroll) {
+            return isOverscrollable ? maxScroll + Math.round((scroll - maxScroll) * ratio) : maxScroll;
+          }
+
+          return scroll;
+        };
+
         if (options.animate) {
           animit(this._getCarouselItemElements())
             .queue({
@@ -641,21 +656,6 @@ limitations under the License.
               transform: this._generateScrollTransform(normalizeScroll(scroll))
             })
             .play(options.callback);
-        }
-
-        function normalizeScroll(scroll) {
-          var ratio = 0.35;
-
-          if (scroll < 0) {
-            return isOverscrollable ? Math.round(scroll * ratio) : 0;
-          }
-
-          var maxScroll = self._calculateMaxScroll();
-          if (maxScroll < scroll) {
-            return isOverscrollable ? maxScroll + Math.round((scroll - maxScroll) * ratio) : maxScroll;
-          }
-
-          return scroll;
         }
       },
 

@@ -19,7 +19,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('SwitchView', function($onsen) {
+  module.factory('SwitchView', function() {
 
     var SwitchView = Class.extend({
 
@@ -33,7 +33,7 @@ limitations under the License.
         this._checkbox = angular.element(element[0].querySelector('input[type=checkbox]'));
         this._scope = scope;
 
-        attrs.$observe('disabled', function(disabled) {
+        attrs.$observe('disabled', function() {
           if (!!element.attr('disabled')) {
             this._checkbox.attr('disabled', 'disabled');
           } else {
@@ -41,7 +41,7 @@ limitations under the License.
           }
         }.bind(this));
 
-        this._checkbox.on('change', function(event) {
+        this._checkbox.on('change', function() {
           this.emit('change', {'switch': this, value: this._checkbox[0].checked, isInteractive: true});
         }.bind(this));
       },

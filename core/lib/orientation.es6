@@ -16,9 +16,7 @@ limitations under the License.
 */
 
 (ons => {
-  ons.orientation = create()._init();
-
-  function create() {
+  var create = () => {
     var obj = {
       // actual implementation to detect if whether current screen is portrait or not
       _isPortrait: false,
@@ -109,5 +107,7 @@ limitations under the License.
     MicroEvent.mixin(obj);
 
     return obj;
-  }
+  };
+
+  ons.orientation = create()._init();
 })(window.ons = window.ons || {});

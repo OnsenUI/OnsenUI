@@ -104,9 +104,9 @@ gulp.task('html2js', function() {
 });
 
 ////////////////////////////////////////
-// jshint
+// jshint-vanilla
 ////////////////////////////////////////
-gulp.task('jshint', function() {
+gulp.task('jshint-vanilla', function() {
   gulp.src([
     'core/elements/*.js',
     'core/lib/*.js',
@@ -121,6 +121,30 @@ gulp.task('jshint', function() {
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'));
 });
+
+/////////////////0///////////////////////
+// jshint-es6
+////////////////////////////////////////
+gulp.task('jshint-es6', function() {
+  gulp.src([
+    'core/elements/*.es6',
+    'core/lib/*.es6',
+    'core/*.es6',
+    'framework/js/*.es6',
+    'framework/directives/*.es6',
+    'framework/services/*.es6',
+    'framework/elements/*.es6',
+    'framework/views/*.es6'
+  ])
+    .pipe($.cached('es6'))
+    .pipe($.jshint({esnext: true}))
+    .pipe($.jshint.reporter('jshint-stylish'));
+});
+
+/////////////////0///////////////////////
+// jshint
+////////////////////////////////////////
+gulp.task('jshint', ['jshint-vanilla', 'jshint-es6']);
 
 ////////////////////////////////////////
 // clean

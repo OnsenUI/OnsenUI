@@ -21,9 +21,24 @@
   "scripts": {
     "test": "gulp test"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OnsenUI/OnsenUI"
+  },
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/OnsenUI/OnsenUI/issues"
+  },
+  "homepage": "http://onsen.io/",
   "devDependencies": {
     "browser-sync": "^2.5.3",
     "canonical-path": "0.0.2",
+    "chai": "^2.2.0",
     "connect-livereload": "^0.5.3",
     "csv": "*",
     "dateformat": "~1.0.7-1.2.3",
@@ -46,7 +61,8 @@
     "gulp-header": "^1.2.2",
     "gulp-html2js": "^0.2.0",
     "gulp-if": "^1.2.1",
-    "gulp-jshint": "^1.6.1",
+    "gulp-jshint": "^1.10.0",
+    "gulp-karma": "0.0.4",
     "gulp-load-plugins": "^0.9.0",
     "gulp-minify-css": "^1.0.0",
     "gulp-ng-annotate": "^0.5.2",
@@ -60,17 +76,15 @@
     "gulp-util": "^3.0.4",
     "gulp-zip": "^3.0.2",
     "jshint-stylish": "^1.0.1",
+    "karma": "^0.12.31",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-mocha": "^0.1.10",
     "lodash": "^3.6.0",
+    "mocha": "^2.2.4",
     "prompt": "*",
     "run-sequence": "^1.0.2",
     "topdoc": "~0.4.0",
-    "yargs": "^3.5.4",
-    "karma": "^0.12.31",
-    "mocha": "^2.2.4",
-    "karma-mocha": "^0.1.10",
-    "karma-chrome-launcher": "^0.1.7",
-    "chai": "^2.2.0",
-    "karma-chai": "^0.1.0",
-    "gulp-karma": "0.0.4"
+    "yargs": "^3.5.4"
   }
 }
