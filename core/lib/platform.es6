@@ -27,8 +27,8 @@ limitations under the License.
     _renderPlatform: null,
 
     /**
-     * Sets the platform used to render the elements. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", or "ios"
-     * @param  {string} platform Name of the platform
+     * Sets the platform used to render the elements. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", or "ios".
+     * @param  {string} platform Name of the platform.
      */
     select: function (platform) {
       ons.platform._renderPlatform = platform.trim().toLowerCase();
@@ -45,10 +45,10 @@ limitations under the License.
      * @return {Boolean}
      */
     isIOS: function() {
-      if (!ons.platform._renderPlatform) {
-        return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-      } else {
+      if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'ios';
+      } else {
+        return /iPhone|iPad|iPod/i.test(navigator.userAgent);
       }
     },
 
@@ -56,10 +56,10 @@ limitations under the License.
      * @return {Boolean}
      */
     isAndroid: function() {
-      if (!ons.platform._renderPlatform) {
-        return /Android/i.test(navigator.userAgent);
-      } else {
+      if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'android';
+      } else {
+        return /Android/i.test(navigator.userAgent);
       }
     },
 
@@ -81,10 +81,10 @@ limitations under the License.
      * @return {Boolean}
      */
     isBlackBerry: function() {
-      if (!ons.platform._renderPlatform) {
-        return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
-      } else {
+      if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'blackberry';
+      } else {
+        return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
       }
     },
 
@@ -92,10 +92,10 @@ limitations under the License.
      * @return {Boolean}
      */
     isOpera: function() {
-      if (!ons.platform._renderPlatform) {
-        return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
-      } else {
+      if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'opera';
+      } else {
+        return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
       }
     },
 
@@ -103,10 +103,10 @@ limitations under the License.
      * @return {Boolean}
      */
     isFirefox: function() {
-      if (!ons.platform._renderPlatform) {
-        return (typeof InstallTrigger !== 'undefined');
-      } else {
+      if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'firefox';
+      } else {
+        return (typeof InstallTrigger !== 'undefined');
       }
     },
 
@@ -114,10 +114,10 @@ limitations under the License.
      * @return {Boolean}
      */
     isSafari: function() {
-      if (!ons.platform._renderPlatform) {
-        return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0);
-      } else {
+      if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'safari';
+      } else {
+        return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0);
       }
     },
 
@@ -125,10 +125,10 @@ limitations under the License.
      * @return {Boolean}
      */
     isChrome: function() {
-      if (!ons.platform._renderPlatform) {
-        return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0));
-      } else {
+      if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'chrome';
+      } else {
+        return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0));
       }
     },
 
@@ -136,10 +136,10 @@ limitations under the License.
      * @return {Boolean}
      */
     isIE: function() {
-      if (!ons.platform._renderPlatform) {
-        return false || !!document.documentMode;
-      } else {
+      if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'ie';
+      } else {
+        return false || !!document.documentMode;
       }
     },
 
