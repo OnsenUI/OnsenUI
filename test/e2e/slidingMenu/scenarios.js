@@ -5,14 +5,16 @@
     var path = '/test/e2e/slidingMenu/index.html',
       EC = protractor.ExpectedConditions;
 
-    it('should have an element', function() {
+    beforeEach(function() {
       browser.get(path);
+      browser.waitForAngular();
+    });
+
+    it('should have an element', function() {
       expect(element(by.css('ons-sliding-menu')).isPresent()).toBeTruthy();
     });
 
     it('should open when clicking the button', function() {
-      browser.get(path);
-
       var button = element(by.css('ons-toolbar-button'));
 
       // Get location before clicking the button.
@@ -35,6 +37,10 @@
       });
 
       expect(locationBefore).not.toEqual(button.getLocation());
+    });
+
+    it('should pass down scope to pages', function() {
+      expect(element(by.id('name')).getText()).toBe('Andreas');
     });
 
     describe('event handlers', function() {

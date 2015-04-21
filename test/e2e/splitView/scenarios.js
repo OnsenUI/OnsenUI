@@ -4,8 +4,12 @@
   describe('split view', function() {
     var path = '/test/e2e/splitView/index.html';
 
-    it('should have an element', function() {
+    beforeEach(function() {
       browser.get(path);
+      browser.waitForAngular();
+    });
+
+    it('should have an element', function() {
       expect(element(by.css('ons-split-view')).isPresent()).toBeTruthy();
     });
 
@@ -34,6 +38,10 @@
 
       win.setSize(1000, 1000);
       expect(state.getText()).toBe('split');
+    });
+
+    it('should pass down scope', function() {
+      expect(element(by.id('name')).getText()).toBe('Andreas');
     });
   });
 })();

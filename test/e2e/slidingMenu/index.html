@@ -5,15 +5,21 @@
     <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
     <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
 
-    <script src="../../../build/js/angular/angular.js"></script>    
-    <script src="../../../build/js/onsenui.js"></script>    
+    <script src="../../../build/js/angular/angular.js"></script>
+    <script src="../../../build/js/onsenui.js"></script>
     <script>
-      ons.bootstrap();
+      ons.bootstrap()
+
+      .controller('SlidingMenuController', function($scope) {
+        $scope.data = {
+          name: 'Andreas'
+        };
+      });
     </script>
   </head>
   <body>
 
-    <ons-sliding-menu main-page="page1.html" menu-page="menu.html" side="right" var="menu"></ons-sliding-menu>
+    <ons-sliding-menu ng-controller="SlidingMenuController" main-page="page1.html" menu-page="menu.html" side="right" var="menu"></ons-sliding-menu>
 
     <script type="text/ons-template" id="page1.html">
       <ons-page>
@@ -25,6 +31,8 @@
         </ons-toolbar>
 
         <h1 style="text-align: center">Page1</h1>
+
+        <p style="text-align: center">Hello, <span id="name">{{ data.name }}</span></p>
       </ons-page>
     </script>
 
@@ -35,6 +43,8 @@
           <div class="right">
             <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
           </div>
+
+
         </ons-toolbar>
 
         <h1 style="text-align: center">Page2</h1>
@@ -44,10 +54,10 @@
     <script type="text/ons-template" id="menu.html">
       <ons-list>
         <ons-list-item modifier="chevron" ng-click="menu.setMainPage('page1.html', {closeMenu: true})">
-          page1.html
+          Page 1
         </ons-list-item>
         <ons-list-item modifier="chevron" ng-click="menu.setMainPage('page2.html', {closeMenu: true})">
-          page1.html
+          Page 2
         </ons-list-item>
       </ons-list>
     </script>
