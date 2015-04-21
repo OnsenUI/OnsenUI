@@ -1,4 +1,5 @@
-/*! onsenui - v1.3.0 - 2015-04-03 */
+/*! onsenui - v1.3.1-dev - 2015-04-20 */
+/*! ons-core.js for Onsen UI v1.3.1-dev - 2015-04-20 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -173,6 +174,655 @@
     }
 
 }());
+/**
+ * @license
+ * Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+ * This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+ * The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+ * The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+ * Code distributed by Google as part of the polymer project is also
+ * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+ */
+// @version 0.6.0
+if (typeof WeakMap === "undefined") {
+  (function() {
+    var defineProperty = Object.defineProperty;
+    var counter = Date.now() % 1e9;
+    var WeakMap = function() {
+      this.name = "__st" + (Math.random() * 1e9 >>> 0) + (counter++ + "__");
+    };
+    WeakMap.prototype = {
+      set: function(key, value) {
+        var entry = key[this.name];
+        if (entry && entry[0] === key) entry[1] = value; else defineProperty(key, this.name, {
+          value: [ key, value ],
+          writable: true
+        });
+        return this;
+      },
+      get: function(key) {
+        var entry;
+        return (entry = key[this.name]) && entry[0] === key ? entry[1] : undefined;
+      },
+      "delete": function(key) {
+        var entry = key[this.name];
+        if (!entry || entry[0] !== key) return false;
+        entry[0] = entry[1] = undefined;
+        return true;
+      },
+      has: function(key) {
+        var entry = key[this.name];
+        if (!entry) return false;
+        return entry[0] === key;
+      }
+    };
+    window.WeakMap = WeakMap;
+  })();
+}
+
+window.CustomElements = window.CustomElements || {
+  flags: {}
+};
+
+(function(scope) {
+  var flags = scope.flags;
+  var modules = [];
+  var addModule = function(module) {
+    modules.push(module);
+  };
+  var initializeModules = function() {
+    modules.forEach(function(module) {
+      module(scope);
+    });
+  };
+  scope.addModule = addModule;
+  scope.initializeModules = initializeModules;
+  scope.hasNative = Boolean(document.registerElement);
+  scope.useNative = !flags.register && scope.hasNative && !window.ShadowDOMPolyfill && (!window.HTMLImports || HTMLImports.useNative);
+})(CustomElements);
+
+CustomElements.addModule(function(scope) {
+  var IMPORT_LINK_TYPE = window.HTMLImports ? HTMLImports.IMPORT_LINK_TYPE : "none";
+  function forSubtree(node, cb) {
+    findAllElements(node, function(e) {
+      if (cb(e)) {
+        return true;
+      }
+      forRoots(e, cb);
+    });
+    forRoots(node, cb);
+  }
+  function findAllElements(node, find, data) {
+    var e = node.firstElementChild;
+    if (!e) {
+      e = node.firstChild;
+      while (e && e.nodeType !== Node.ELEMENT_NODE) {
+        e = e.nextSibling;
+      }
+    }
+    while (e) {
+      if (find(e, data) !== true) {
+        findAllElements(e, find, data);
+      }
+      e = e.nextElementSibling;
+    }
+    return null;
+  }
+  function forRoots(node, cb) {
+    var root = node.shadowRoot;
+    while (root) {
+      forSubtree(root, cb);
+      root = root.olderShadowRoot;
+    }
+  }
+  var processingDocuments;
+  function forDocumentTree(doc, cb) {
+    processingDocuments = [];
+    _forDocumentTree(doc, cb);
+    processingDocuments = null;
+  }
+  function _forDocumentTree(doc, cb) {
+    doc = wrap(doc);
+    if (processingDocuments.indexOf(doc) >= 0) {
+      return;
+    }
+    processingDocuments.push(doc);
+    var imports = doc.querySelectorAll("link[rel=" + IMPORT_LINK_TYPE + "]");
+    for (var i = 0, l = imports.length, n; i < l && (n = imports[i]); i++) {
+      if (n.import) {
+        _forDocumentTree(n.import, cb);
+      }
+    }
+    cb(doc);
+  }
+  scope.forDocumentTree = forDocumentTree;
+  scope.forSubtree = forSubtree;
+});
+
+CustomElements.addModule(function(scope) {
+  var flags = scope.flags;
+  var forSubtree = scope.forSubtree;
+  var forDocumentTree = scope.forDocumentTree;
+  function addedNode(node) {
+    return added(node) || addedSubtree(node);
+  }
+  function added(node) {
+    if (scope.upgrade(node)) {
+      return true;
+    }
+    attached(node);
+  }
+  function addedSubtree(node) {
+    forSubtree(node, function(e) {
+      if (added(e)) {
+        return true;
+      }
+    });
+  }
+  function attachedNode(node) {
+    attached(node);
+    if (inDocument(node)) {
+      forSubtree(node, function(e) {
+        attached(e);
+      });
+    }
+  }
+  var hasPolyfillMutations = !window.MutationObserver || window.MutationObserver === window.JsMutationObserver;
+  scope.hasPolyfillMutations = hasPolyfillMutations;
+  var isPendingMutations = false;
+  var pendingMutations = [];
+  function deferMutation(fn) {
+    pendingMutations.push(fn);
+    if (!isPendingMutations) {
+      isPendingMutations = true;
+      setTimeout(takeMutations);
+    }
+  }
+  function takeMutations() {
+    isPendingMutations = false;
+    var $p = pendingMutations;
+    for (var i = 0, l = $p.length, p; i < l && (p = $p[i]); i++) {
+      p();
+    }
+    pendingMutations = [];
+  }
+  function attached(element) {
+    if (hasPolyfillMutations) {
+      deferMutation(function() {
+        _attached(element);
+      });
+    } else {
+      _attached(element);
+    }
+  }
+  function _attached(element) {
+    if (element.__upgraded__ && (element.attachedCallback || element.detachedCallback)) {
+      if (!element.__attached && inDocument(element)) {
+        element.__attached = true;
+        if (element.attachedCallback) {
+          element.attachedCallback();
+        }
+      }
+    }
+  }
+  function detachedNode(node) {
+    detached(node);
+    forSubtree(node, function(e) {
+      detached(e);
+    });
+  }
+  function detached(element) {
+    if (hasPolyfillMutations) {
+      deferMutation(function() {
+        _detached(element);
+      });
+    } else {
+      _detached(element);
+    }
+  }
+  function _detached(element) {
+    if (element.__upgraded__ && (element.attachedCallback || element.detachedCallback)) {
+      if (element.__attached && !inDocument(element)) {
+        element.__attached = false;
+        if (element.detachedCallback) {
+          element.detachedCallback();
+        }
+      }
+    }
+  }
+  function inDocument(element) {
+    var p = element;
+    var doc = wrap(document);
+    while (p) {
+      if (p == doc) {
+        return true;
+      }
+      p = p.parentNode || p.nodeType === Node.DOCUMENT_FRAGMENT_NODE && p.host;
+    }
+  }
+  function watchShadow(node) {
+    if (node.shadowRoot && !node.shadowRoot.__watched) {
+      flags.dom && console.log("watching shadow-root for: ", node.localName);
+      var root = node.shadowRoot;
+      while (root) {
+        observe(root);
+        root = root.olderShadowRoot;
+      }
+    }
+  }
+  function handler(mutations) {
+    if (flags.dom) {
+      var mx = mutations[0];
+      if (mx && mx.type === "childList" && mx.addedNodes) {
+        if (mx.addedNodes) {
+          var d = mx.addedNodes[0];
+          while (d && d !== document && !d.host) {
+            d = d.parentNode;
+          }
+          var u = d && (d.URL || d._URL || d.host && d.host.localName) || "";
+          u = u.split("/?").shift().split("/").pop();
+        }
+      }
+      console.group("mutations (%d) [%s]", mutations.length, u || "");
+    }
+    mutations.forEach(function(mx) {
+      if (mx.type === "childList") {
+        forEach(mx.addedNodes, function(n) {
+          if (!n.localName) {
+            return;
+          }
+          addedNode(n);
+        });
+        forEach(mx.removedNodes, function(n) {
+          if (!n.localName) {
+            return;
+          }
+          detachedNode(n);
+        });
+      }
+    });
+    flags.dom && console.groupEnd();
+  }
+  function takeRecords(node) {
+    node = wrap(node);
+    if (!node) {
+      node = wrap(document);
+    }
+    while (node.parentNode) {
+      node = node.parentNode;
+    }
+    var observer = node.__observer;
+    if (observer) {
+      handler(observer.takeRecords());
+      takeMutations();
+    }
+  }
+  var forEach = Array.prototype.forEach.call.bind(Array.prototype.forEach);
+  function observe(inRoot) {
+    if (inRoot.__observer) {
+      return;
+    }
+    var observer = new MutationObserver(handler);
+    observer.observe(inRoot, {
+      childList: true,
+      subtree: true
+    });
+    inRoot.__observer = observer;
+  }
+  function upgradeDocument(doc) {
+    doc = wrap(doc);
+    flags.dom && console.group("upgradeDocument: ", doc.baseURI.split("/").pop());
+    addedNode(doc);
+    observe(doc);
+    flags.dom && console.groupEnd();
+  }
+  function upgradeDocumentTree(doc) {
+    forDocumentTree(doc, upgradeDocument);
+  }
+  var originalCreateShadowRoot = Element.prototype.createShadowRoot;
+  if (originalCreateShadowRoot) {
+    Element.prototype.createShadowRoot = function() {
+      var root = originalCreateShadowRoot.call(this);
+      CustomElements.watchShadow(this);
+      return root;
+    };
+  }
+  scope.watchShadow = watchShadow;
+  scope.upgradeDocumentTree = upgradeDocumentTree;
+  scope.upgradeSubtree = addedSubtree;
+  scope.upgradeAll = addedNode;
+  scope.attachedNode = attachedNode;
+  scope.takeRecords = takeRecords;
+});
+
+CustomElements.addModule(function(scope) {
+  var flags = scope.flags;
+  function upgrade(node) {
+    if (!node.__upgraded__ && node.nodeType === Node.ELEMENT_NODE) {
+      var is = node.getAttribute("is");
+      var definition = scope.getRegisteredDefinition(is || node.localName);
+      if (definition) {
+        if (is && definition.tag == node.localName) {
+          return upgradeWithDefinition(node, definition);
+        } else if (!is && !definition.extends) {
+          return upgradeWithDefinition(node, definition);
+        }
+      }
+    }
+  }
+  function upgradeWithDefinition(element, definition) {
+    flags.upgrade && console.group("upgrade:", element.localName);
+    if (definition.is) {
+      element.setAttribute("is", definition.is);
+    }
+    implementPrototype(element, definition);
+    element.__upgraded__ = true;
+    created(element);
+    scope.attachedNode(element);
+    scope.upgradeSubtree(element);
+    flags.upgrade && console.groupEnd();
+    return element;
+  }
+  function implementPrototype(element, definition) {
+    if (Object.__proto__) {
+      element.__proto__ = definition.prototype;
+    } else {
+      customMixin(element, definition.prototype, definition.native);
+      element.__proto__ = definition.prototype;
+    }
+  }
+  function customMixin(inTarget, inSrc, inNative) {
+    var used = {};
+    var p = inSrc;
+    while (p !== inNative && p !== HTMLElement.prototype) {
+      var keys = Object.getOwnPropertyNames(p);
+      for (var i = 0, k; k = keys[i]; i++) {
+        if (!used[k]) {
+          Object.defineProperty(inTarget, k, Object.getOwnPropertyDescriptor(p, k));
+          used[k] = 1;
+        }
+      }
+      p = Object.getPrototypeOf(p);
+    }
+  }
+  function created(element) {
+    if (element.createdCallback) {
+      element.createdCallback();
+    }
+  }
+  scope.upgrade = upgrade;
+  scope.upgradeWithDefinition = upgradeWithDefinition;
+  scope.implementPrototype = implementPrototype;
+});
+
+CustomElements.addModule(function(scope) {
+  var upgradeDocumentTree = scope.upgradeDocumentTree;
+  var upgrade = scope.upgrade;
+  var upgradeWithDefinition = scope.upgradeWithDefinition;
+  var implementPrototype = scope.implementPrototype;
+  var useNative = scope.useNative;
+  function register(name, options) {
+    var definition = options || {};
+    if (!name) {
+      throw new Error("document.registerElement: first argument `name` must not be empty");
+    }
+    if (name.indexOf("-") < 0) {
+      throw new Error("document.registerElement: first argument ('name') must contain a dash ('-'). Argument provided was '" + String(name) + "'.");
+    }
+    if (isReservedTag(name)) {
+      throw new Error("Failed to execute 'registerElement' on 'Document': Registration failed for type '" + String(name) + "'. The type name is invalid.");
+    }
+    if (getRegisteredDefinition(name)) {
+      throw new Error("DuplicateDefinitionError: a type with name '" + String(name) + "' is already registered");
+    }
+    if (!definition.prototype) {
+      definition.prototype = Object.create(HTMLElement.prototype);
+    }
+    definition.__name = name.toLowerCase();
+    definition.lifecycle = definition.lifecycle || {};
+    definition.ancestry = ancestry(definition.extends);
+    resolveTagName(definition);
+    resolvePrototypeChain(definition);
+    overrideAttributeApi(definition.prototype);
+    registerDefinition(definition.__name, definition);
+    definition.ctor = generateConstructor(definition);
+    definition.ctor.prototype = definition.prototype;
+    definition.prototype.constructor = definition.ctor;
+    if (scope.ready) {
+      upgradeDocumentTree(document);
+    }
+    return definition.ctor;
+  }
+  function overrideAttributeApi(prototype) {
+    if (prototype.setAttribute._polyfilled) {
+      return;
+    }
+    var setAttribute = prototype.setAttribute;
+    prototype.setAttribute = function(name, value) {
+      changeAttribute.call(this, name, value, setAttribute);
+    };
+    var removeAttribute = prototype.removeAttribute;
+    prototype.removeAttribute = function(name) {
+      changeAttribute.call(this, name, null, removeAttribute);
+    };
+    prototype.setAttribute._polyfilled = true;
+  }
+  function changeAttribute(name, value, operation) {
+    name = name.toLowerCase();
+    var oldValue = this.getAttribute(name);
+    operation.apply(this, arguments);
+    var newValue = this.getAttribute(name);
+    if (this.attributeChangedCallback && newValue !== oldValue) {
+      this.attributeChangedCallback(name, oldValue, newValue);
+    }
+  }
+  function isReservedTag(name) {
+    for (var i = 0; i < reservedTagList.length; i++) {
+      if (name === reservedTagList[i]) {
+        return true;
+      }
+    }
+  }
+  var reservedTagList = [ "annotation-xml", "color-profile", "font-face", "font-face-src", "font-face-uri", "font-face-format", "font-face-name", "missing-glyph" ];
+  function ancestry(extnds) {
+    var extendee = getRegisteredDefinition(extnds);
+    if (extendee) {
+      return ancestry(extendee.extends).concat([ extendee ]);
+    }
+    return [];
+  }
+  function resolveTagName(definition) {
+    var baseTag = definition.extends;
+    for (var i = 0, a; a = definition.ancestry[i]; i++) {
+      baseTag = a.is && a.tag;
+    }
+    definition.tag = baseTag || definition.__name;
+    if (baseTag) {
+      definition.is = definition.__name;
+    }
+  }
+  function resolvePrototypeChain(definition) {
+    if (!Object.__proto__) {
+      var nativePrototype = HTMLElement.prototype;
+      if (definition.is) {
+        var inst = document.createElement(definition.tag);
+        var expectedPrototype = Object.getPrototypeOf(inst);
+        if (expectedPrototype === definition.prototype) {
+          nativePrototype = expectedPrototype;
+        }
+      }
+      var proto = definition.prototype, ancestor;
+      while (proto && proto !== nativePrototype) {
+        ancestor = Object.getPrototypeOf(proto);
+        proto.__proto__ = ancestor;
+        proto = ancestor;
+      }
+      definition.native = nativePrototype;
+    }
+  }
+  function instantiate(definition) {
+    return upgradeWithDefinition(domCreateElement(definition.tag), definition);
+  }
+  var registry = {};
+  function getRegisteredDefinition(name) {
+    if (name) {
+      return registry[name.toLowerCase()];
+    }
+  }
+  function registerDefinition(name, definition) {
+    registry[name] = definition;
+  }
+  function generateConstructor(definition) {
+    return function() {
+      return instantiate(definition);
+    };
+  }
+  var HTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
+  function createElementNS(namespace, tag, typeExtension) {
+    if (namespace === HTML_NAMESPACE) {
+      return createElement(tag, typeExtension);
+    } else {
+      return domCreateElementNS(namespace, tag);
+    }
+  }
+  function createElement(tag, typeExtension) {
+    var definition = getRegisteredDefinition(typeExtension || tag);
+    if (definition) {
+      if (tag == definition.tag && typeExtension == definition.is) {
+        return new definition.ctor();
+      }
+      if (!typeExtension && !definition.is) {
+        return new definition.ctor();
+      }
+    }
+    var element;
+    if (typeExtension) {
+      element = createElement(tag);
+      element.setAttribute("is", typeExtension);
+      return element;
+    }
+    element = domCreateElement(tag);
+    if (tag.indexOf("-") >= 0) {
+      implementPrototype(element, HTMLElement);
+    }
+    return element;
+  }
+  function cloneNode(deep) {
+    var n = domCloneNode.call(this, deep);
+    upgrade(n);
+    return n;
+  }
+  var domCreateElement = document.createElement.bind(document);
+  var domCreateElementNS = document.createElementNS.bind(document);
+  var domCloneNode = Node.prototype.cloneNode;
+  var isInstance;
+  if (!Object.__proto__ && !useNative) {
+    isInstance = function(obj, ctor) {
+      var p = obj;
+      while (p) {
+        if (p === ctor.prototype) {
+          return true;
+        }
+        p = p.__proto__;
+      }
+      return false;
+    };
+  } else {
+    isInstance = function(obj, base) {
+      return obj instanceof base;
+    };
+  }
+  document.registerElement = register;
+  document.createElement = createElement;
+  document.createElementNS = createElementNS;
+  Node.prototype.cloneNode = cloneNode;
+  scope.registry = registry;
+  scope.instanceof = isInstance;
+  scope.reservedTagList = reservedTagList;
+  scope.getRegisteredDefinition = getRegisteredDefinition;
+  document.register = document.registerElement;
+});
+
+(function(scope) {
+  var useNative = scope.useNative;
+  var initializeModules = scope.initializeModules;
+  var isIE11OrOlder = /Trident/.test(navigator.userAgent);
+  if (isIE11OrOlder) {
+    (function() {
+      var importNode = document.importNode;
+      document.importNode = function() {
+        var n = importNode.apply(document, arguments);
+        if (n.nodeType == n.DOCUMENT_FRAGMENT_NODE) {
+          var f = document.createDocumentFragment();
+          f.appendChild(n);
+          return f;
+        } else {
+          return n;
+        }
+      };
+    })();
+  }
+  if (useNative) {
+    var nop = function() {};
+    scope.watchShadow = nop;
+    scope.upgrade = nop;
+    scope.upgradeAll = nop;
+    scope.upgradeDocumentTree = nop;
+    scope.upgradeSubtree = nop;
+    scope.takeRecords = nop;
+    scope.instanceof = function(obj, base) {
+      return obj instanceof base;
+    };
+  } else {
+    initializeModules();
+  }
+  var upgradeDocumentTree = scope.upgradeDocumentTree;
+  if (!window.wrap) {
+    if (window.ShadowDOMPolyfill) {
+      window.wrap = ShadowDOMPolyfill.wrapIfNeeded;
+      window.unwrap = ShadowDOMPolyfill.unwrapIfNeeded;
+    } else {
+      window.wrap = window.unwrap = function(node) {
+        return node;
+      };
+    }
+  }
+  function bootstrap() {
+    upgradeDocumentTree(wrap(document));
+    if (window.HTMLImports) {
+      HTMLImports.__importsParsingHook = function(elt) {
+        upgradeDocumentTree(wrap(elt.import));
+      };
+    }
+    CustomElements.ready = true;
+    setTimeout(function() {
+      CustomElements.readyTime = Date.now();
+      if (window.HTMLImports) {
+        CustomElements.elapsed = CustomElements.readyTime - HTMLImports.readyTime;
+      }
+      document.dispatchEvent(new CustomEvent("WebComponentsReady", {
+        bubbles: true
+      }));
+    });
+  }
+  if (isIE11OrOlder && typeof window.CustomEvent !== "function") {
+    window.CustomEvent = function(inType, params) {
+      params = params || {};
+      var e = document.createEvent("CustomEvent");
+      e.initCustomEvent(inType, Boolean(params.bubbles), Boolean(params.cancelable), params.detail);
+      return e;
+    };
+    window.CustomEvent.prototype = window.Event.prototype;
+  }
+  if (document.readyState === "complete" || scope.flags.eager) {
+    bootstrap();
+  } else if (document.readyState === "interactive" && !window.attachEvent && (!window.HTMLImports || window.HTMLImports.ready)) {
+    bootstrap();
+  } else {
+    var loadEvent = window.HTMLImports && !HTMLImports.ready ? "HTMLImportsLoaded" : "DOMContentLoaded";
+    window.addEventListener(loadEvent, bootstrap);
+  }
+})(window.CustomElements);
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -540,7 +1190,7 @@
 
 		touch = event.changedTouches[0];
 
-		// Synthesise a click event, with an extra attribute so it can be tracked
+		// Synthesize a click event, with an extra attribute so it can be tracked
 		clickEvent = document.createEvent('MouseEvents');
 		clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
 		clickEvent.forwardedTouchEvent = true;
@@ -652,7 +1302,7 @@
 				// when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
 				// with the same identifier as the touch event that previously triggered the click that triggered the alert.
 				// Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
-				// immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
+				// immediately preceding touch event (issue #52), so this fix is unavailable on that platform.
 				// Issue 120: touch.identifier is 0 when Chrome dev tools 'Emulate touch events' is set with an iOS device UA string,
 				// which causes all touch events to be ignored. As this block only applies to iOS, and iOS identifiers are always long,
 				// random integers, it's safe to to continue if the identifier is 0 here.
@@ -926,7 +1576,7 @@
 			return true;
 		}
 
-		// Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
+		// Very odd behavior on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
 		if (event.target.type === 'submit' && event.detail === 0) {
 			return true;
 		}
@@ -1044,7 +1694,7 @@
 			}
 		}
 
-		// IE11: prefixed -ms-touch-action is no longer supported and it's recomended to use non-prefixed version
+		// IE11: prefixed -ms-touch-action is no longer supported and it's recommended to use non-prefixed version
 		// http://msdn.microsoft.com/en-us/library/windows/apps/Hh767313.aspx
 		if (layer.style.touchAction === 'none' || layer.style.touchAction === 'manipulation') {
 			return true;
@@ -1079,3074 +1729,12 @@
 	}
 }());
 
-/*! Hammer.JS - v1.1.3 - 2014-05-20
- * http://eightmedia.github.io/hammer.js
- *
- * Copyright (c) 2014 Jorik Tangelder <j.tangelder@gmail.com>;
- * Licensed under the MIT license */
-
-(function(window, undefined) {
-  'use strict';
-
-/**
- * @main
- * @module hammer
- *
- * @class Hammer
- * @static
- */
-
-/**
- * Hammer, use this to create instances
- * ````
- * var hammertime = new Hammer(myElement);
- * ````
- *
- * @method Hammer
- * @param {HTMLElement} element
- * @param {Object} [options={}]
- * @return {Hammer.Instance}
- */
-var Hammer = function Hammer(element, options) {
-    return new Hammer.Instance(element, options || {});
-};
-
-/**
- * version, as defined in package.json
- * the value will be set at each build
- * @property VERSION
- * @final
- * @type {String}
- */
-Hammer.VERSION = '1.1.3';
-
-/**
- * default settings.
- * more settings are defined per gesture at `/gestures`. Each gesture can be disabled/enabled
- * by setting it's name (like `swipe`) to false.
- * You can set the defaults for all instances by changing this object before creating an instance.
- * @example
- * ````
- *  Hammer.defaults.drag = false;
- *  Hammer.defaults.behavior.touchAction = 'pan-y';
- *  delete Hammer.defaults.behavior.userSelect;
- * ````
- * @property defaults
- * @type {Object}
- */
-Hammer.defaults = {
-    /**
-     * this setting object adds styles and attributes to the element to prevent the browser from doing
-     * its native behavior. The css properties are auto prefixed for the browsers when needed.
-     * @property defaults.behavior
-     * @type {Object}
-     */
-    behavior: {
-        /**
-         * Disables text selection to improve the dragging gesture. When the value is `none` it also sets
-         * `onselectstart=false` for IE on the element. Mainly for desktop browsers.
-         * @property defaults.behavior.userSelect
-         * @type {String}
-         * @default 'none'
-         */
-        userSelect: 'none',
-
-        /**
-         * Specifies whether and how a given region can be manipulated by the user (for instance, by panning or zooming).
-         * Used by Chrome 35> and IE10>. By default this makes the element blocking any touch event.
-         * @property defaults.behavior.touchAction
-         * @type {String}
-         * @default: 'pan-y'
-         */
-        touchAction: 'pan-y',
-
-        /**
-         * Disables the default callout shown when you touch and hold a touch target.
-         * On iOS, when you touch and hold a touch target such as a link, Safari displays
-         * a callout containing information about the link. This property allows you to disable that callout.
-         * @property defaults.behavior.touchCallout
-         * @type {String}
-         * @default 'none'
-         */
-        touchCallout: 'none',
-
-        /**
-         * Specifies whether zooming is enabled. Used by IE10>
-         * @property defaults.behavior.contentZooming
-         * @type {String}
-         * @default 'none'
-         */
-        contentZooming: 'none',
-
-        /**
-         * Specifies that an entire element should be draggable instead of its contents.
-         * Mainly for desktop browsers.
-         * @property defaults.behavior.userDrag
-         * @type {String}
-         * @default 'none'
-         */
-        userDrag: 'none',
-
-        /**
-         * Overrides the highlight color shown when the user taps a link or a JavaScript
-         * clickable element in Safari on iPhone. This property obeys the alpha value, if specified.
-         *
-         * If you don't specify an alpha value, Safari on iPhone applies a default alpha value
-         * to the color. To disable tap highlighting, set the alpha value to 0 (invisible).
-         * If you set the alpha value to 1.0 (opaque), the element is not visible when tapped.
-         * @property defaults.behavior.tapHighlightColor
-         * @type {String}
-         * @default 'rgba(0,0,0,0)'
-         */
-        tapHighlightColor: 'rgba(0,0,0,0)'
-    }
-};
-
-/**
- * hammer document where the base events are added at
- * @property DOCUMENT
- * @type {HTMLElement}
- * @default window.document
- */
-Hammer.DOCUMENT = document;
-
-/**
- * detect support for pointer events
- * @property HAS_POINTEREVENTS
- * @type {Boolean}
- */
-Hammer.HAS_POINTEREVENTS = navigator.pointerEnabled || navigator.msPointerEnabled;
-
-/**
- * detect support for touch events
- * @property HAS_TOUCHEVENTS
- * @type {Boolean}
- */
-Hammer.HAS_TOUCHEVENTS = ('ontouchstart' in window);
-
-/**
- * detect mobile browsers
- * @property IS_MOBILE
- * @type {Boolean}
- */
-Hammer.IS_MOBILE = /mobile|tablet|ip(ad|hone|od)|android|silk/i.test(navigator.userAgent);
-
-/**
- * detect if we want to support mouseevents at all
- * @property NO_MOUSEEVENTS
- * @type {Boolean}
- */
-Hammer.NO_MOUSEEVENTS = (Hammer.HAS_TOUCHEVENTS && Hammer.IS_MOBILE) || Hammer.HAS_POINTEREVENTS;
-
-/**
- * interval in which Hammer recalculates current velocity/direction/angle in ms
- * @property CALCULATE_INTERVAL
- * @type {Number}
- * @default 25
- */
-Hammer.CALCULATE_INTERVAL = 25;
-
-/**
- * eventtypes per touchevent (start, move, end) are filled by `Event.determineEventTypes` on `setup`
- * the object contains the DOM event names per type (`EVENT_START`, `EVENT_MOVE`, `EVENT_END`)
- * @property EVENT_TYPES
- * @private
- * @writeOnce
- * @type {Object}
- */
-var EVENT_TYPES = {};
-
-/**
- * direction strings, for safe comparisons
- * @property DIRECTION_DOWN|LEFT|UP|RIGHT
- * @final
- * @type {String}
- * @default 'down' 'left' 'up' 'right'
- */
-var DIRECTION_DOWN = Hammer.DIRECTION_DOWN = 'down';
-var DIRECTION_LEFT = Hammer.DIRECTION_LEFT = 'left';
-var DIRECTION_UP = Hammer.DIRECTION_UP = 'up';
-var DIRECTION_RIGHT = Hammer.DIRECTION_RIGHT = 'right';
-
-/**
- * pointertype strings, for safe comparisons
- * @property POINTER_MOUSE|TOUCH|PEN
- * @final
- * @type {String}
- * @default 'mouse' 'touch' 'pen'
- */
-var POINTER_MOUSE = Hammer.POINTER_MOUSE = 'mouse';
-var POINTER_TOUCH = Hammer.POINTER_TOUCH = 'touch';
-var POINTER_PEN = Hammer.POINTER_PEN = 'pen';
-
-/**
- * eventtypes
- * @property EVENT_START|MOVE|END|RELEASE|TOUCH
- * @final
- * @type {String}
- * @default 'start' 'change' 'move' 'end' 'release' 'touch'
- */
-var EVENT_START = Hammer.EVENT_START = 'start';
-var EVENT_MOVE = Hammer.EVENT_MOVE = 'move';
-var EVENT_END = Hammer.EVENT_END = 'end';
-var EVENT_RELEASE = Hammer.EVENT_RELEASE = 'release';
-var EVENT_TOUCH = Hammer.EVENT_TOUCH = 'touch';
-
-/**
- * if the window events are set...
- * @property READY
- * @writeOnce
- * @type {Boolean}
- * @default false
- */
-Hammer.READY = false;
-
-/**
- * plugins namespace
- * @property plugins
- * @type {Object}
- */
-Hammer.plugins = Hammer.plugins || {};
-
-/**
- * gestures namespace
- * see `/gestures` for the definitions
- * @property gestures
- * @type {Object}
- */
-Hammer.gestures = Hammer.gestures || {};
-
-/**
- * setup events to detect gestures on the document
- * this function is called when creating an new instance
- * @private
- */
-function setup() {
-    if(Hammer.READY) {
-        return;
-    }
-
-    // find what eventtypes we add listeners to
-    Event.determineEventTypes();
-
-    // Register all gestures inside Hammer.gestures
-    Utils.each(Hammer.gestures, function(gesture) {
-        Detection.register(gesture);
-    });
-
-    // Add touch events on the document
-    Event.onTouch(Hammer.DOCUMENT, EVENT_MOVE, Detection.detect);
-    Event.onTouch(Hammer.DOCUMENT, EVENT_END, Detection.detect);
-
-    // Hammer is ready...!
-    Hammer.READY = true;
-}
-
-/**
- * @module hammer
- *
- * @class Utils
- * @static
- */
-var Utils = Hammer.utils = {
-    /**
-     * extend method, could also be used for cloning when `dest` is an empty object.
-     * changes the dest object
-     * @method extend
-     * @param {Object} dest
-     * @param {Object} src
-     * @param {Boolean} [merge=false]  do a merge
-     * @return {Object} dest
-     */
-    extend: function extend(dest, src, merge) {
-        for(var key in src) {
-            if(!src.hasOwnProperty(key) || (dest[key] !== undefined && merge)) {
-                continue;
-            }
-            dest[key] = src[key];
-        }
-        return dest;
-    },
-
-    /**
-     * simple addEventListener wrapper
-     * @method on
-     * @param {HTMLElement} element
-     * @param {String} type
-     * @param {Function} handler
-     */
-    on: function on(element, type, handler) {
-        element.addEventListener(type, handler, false);
-    },
-
-    /**
-     * simple removeEventListener wrapper
-     * @method off
-     * @param {HTMLElement} element
-     * @param {String} type
-     * @param {Function} handler
-     */
-    off: function off(element, type, handler) {
-        element.removeEventListener(type, handler, false);
-    },
-
-    /**
-     * forEach over arrays and objects
-     * @method each
-     * @param {Object|Array} obj
-     * @param {Function} iterator
-     * @param {any} iterator.item
-     * @param {Number} iterator.index
-     * @param {Object|Array} iterator.obj the source object
-     * @param {Object} context value to use as `this` in the iterator
-     */
-    each: function each(obj, iterator, context) {
-        var i, len;
-
-        // native forEach on arrays
-        if('forEach' in obj) {
-            obj.forEach(iterator, context);
-        // arrays
-        } else if(obj.length !== undefined) {
-            for(i = 0, len = obj.length; i < len; i++) {
-                if(iterator.call(context, obj[i], i, obj) === false) {
-                    return;
-                }
-            }
-        // objects
-        } else {
-            for(i in obj) {
-                if(obj.hasOwnProperty(i) &&
-                    iterator.call(context, obj[i], i, obj) === false) {
-                    return;
-                }
-            }
-        }
-    },
-
-    /**
-     * find if a string contains the string using indexOf
-     * @method inStr
-     * @param {String} src
-     * @param {String} find
-     * @return {Boolean} found
-     */
-    inStr: function inStr(src, find) {
-        return src.indexOf(find) > -1;
-    },
-
-    /**
-     * find if a array contains the object using indexOf or a simple polyfill
-     * @method inArray
-     * @param {String} src
-     * @param {String} find
-     * @return {Boolean|Number} false when not found, or the index
-     */
-    inArray: function inArray(src, find) {
-        if(src.indexOf) {
-            var index = src.indexOf(find);
-            return (index === -1) ? false : index;
-        } else {
-            for(var i = 0, len = src.length; i < len; i++) {
-                if(src[i] === find) {
-                    return i;
-                }
-            }
-            return false;
-        }
-    },
-
-    /**
-     * convert an array-like object (`arguments`, `touchlist`) to an array
-     * @method toArray
-     * @param {Object} obj
-     * @return {Array}
-     */
-    toArray: function toArray(obj) {
-        return Array.prototype.slice.call(obj, 0);
-    },
-
-    /**
-     * find if a node is in the given parent
-     * @method hasParent
-     * @param {HTMLElement} node
-     * @param {HTMLElement} parent
-     * @return {Boolean} found
-     */
-    hasParent: function hasParent(node, parent) {
-        while(node) {
-            if(node == parent) {
-                return true;
-            }
-            node = node.parentNode;
-        }
-        return false;
-    },
-
-    /**
-     * get the center of all the touches
-     * @method getCenter
-     * @param {Array} touches
-     * @return {Object} center contains `pageX`, `pageY`, `clientX` and `clientY` properties
-     */
-    getCenter: function getCenter(touches) {
-        var pageX = [],
-            pageY = [],
-            clientX = [],
-            clientY = [],
-            min = Math.min,
-            max = Math.max;
-
-        // no need to loop when only one touch
-        if(touches.length === 1) {
-            return {
-                pageX: touches[0].pageX,
-                pageY: touches[0].pageY,
-                clientX: touches[0].clientX,
-                clientY: touches[0].clientY
-            };
-        }
-
-        Utils.each(touches, function(touch) {
-            pageX.push(touch.pageX);
-            pageY.push(touch.pageY);
-            clientX.push(touch.clientX);
-            clientY.push(touch.clientY);
-        });
-
-        return {
-            pageX: (min.apply(Math, pageX) + max.apply(Math, pageX)) / 2,
-            pageY: (min.apply(Math, pageY) + max.apply(Math, pageY)) / 2,
-            clientX: (min.apply(Math, clientX) + max.apply(Math, clientX)) / 2,
-            clientY: (min.apply(Math, clientY) + max.apply(Math, clientY)) / 2
-        };
-    },
-
-    /**
-     * calculate the velocity between two points. unit is in px per ms.
-     * @method getVelocity
-     * @param {Number} deltaTime
-     * @param {Number} deltaX
-     * @param {Number} deltaY
-     * @return {Object} velocity `x` and `y`
-     */
-    getVelocity: function getVelocity(deltaTime, deltaX, deltaY) {
-        return {
-            x: Math.abs(deltaX / deltaTime) || 0,
-            y: Math.abs(deltaY / deltaTime) || 0
-        };
-    },
-
-    /**
-     * calculate the angle between two coordinates
-     * @method getAngle
-     * @param {Touch} touch1
-     * @param {Touch} touch2
-     * @return {Number} angle
-     */
-    getAngle: function getAngle(touch1, touch2) {
-        var x = touch2.clientX - touch1.clientX,
-            y = touch2.clientY - touch1.clientY;
-
-        return Math.atan2(y, x) * 180 / Math.PI;
-    },
-
-    /**
-     * do a small comparision to get the direction between two touches.
-     * @method getDirection
-     * @param {Touch} touch1
-     * @param {Touch} touch2
-     * @return {String} direction matches `DIRECTION_LEFT|RIGHT|UP|DOWN`
-     */
-    getDirection: function getDirection(touch1, touch2) {
-        var x = Math.abs(touch1.clientX - touch2.clientX),
-            y = Math.abs(touch1.clientY - touch2.clientY);
-
-        if(x >= y) {
-            return touch1.clientX - touch2.clientX > 0 ? DIRECTION_LEFT : DIRECTION_RIGHT;
-        }
-        return touch1.clientY - touch2.clientY > 0 ? DIRECTION_UP : DIRECTION_DOWN;
-    },
-
-    /**
-     * calculate the distance between two touches
-     * @method getDistance
-     * @param {Touch}touch1
-     * @param {Touch} touch2
-     * @return {Number} distance
-     */
-    getDistance: function getDistance(touch1, touch2) {
-        var x = touch2.clientX - touch1.clientX,
-            y = touch2.clientY - touch1.clientY;
-
-        return Math.sqrt((x * x) + (y * y));
-    },
-
-    /**
-     * calculate the scale factor between two touchLists
-     * no scale is 1, and goes down to 0 when pinched together, and bigger when pinched out
-     * @method getScale
-     * @param {Array} start array of touches
-     * @param {Array} end array of touches
-     * @return {Number} scale
-     */
-    getScale: function getScale(start, end) {
-        // need two fingers...
-        if(start.length >= 2 && end.length >= 2) {
-            return this.getDistance(end[0], end[1]) / this.getDistance(start[0], start[1]);
-        }
-        return 1;
-    },
-
-    /**
-     * calculate the rotation degrees between two touchLists
-     * @method getRotation
-     * @param {Array} start array of touches
-     * @param {Array} end array of touches
-     * @return {Number} rotation
-     */
-    getRotation: function getRotation(start, end) {
-        // need two fingers
-        if(start.length >= 2 && end.length >= 2) {
-            return this.getAngle(end[1], end[0]) - this.getAngle(start[1], start[0]);
-        }
-        return 0;
-    },
-
-    /**
-     * find out if the direction is vertical   *
-     * @method isVertical
-     * @param {String} direction matches `DIRECTION_UP|DOWN`
-     * @return {Boolean} is_vertical
-     */
-    isVertical: function isVertical(direction) {
-        return direction == DIRECTION_UP || direction == DIRECTION_DOWN;
-    },
-
-    /**
-     * set css properties with their prefixes
-     * @param {HTMLElement} element
-     * @param {String} prop
-     * @param {String} value
-     * @param {Boolean} [toggle=true]
-     * @return {Boolean}
-     */
-    setPrefixedCss: function setPrefixedCss(element, prop, value, toggle) {
-        var prefixes = ['', 'Webkit', 'Moz', 'O', 'ms'];
-        prop = Utils.toCamelCase(prop);
-
-        for(var i = 0; i < prefixes.length; i++) {
-            var p = prop;
-            // prefixes
-            if(prefixes[i]) {
-                p = prefixes[i] + p.slice(0, 1).toUpperCase() + p.slice(1);
-            }
-
-            // test the style
-            if(p in element.style) {
-                element.style[p] = (toggle == null || toggle) && value || '';
-                break;
-            }
-        }
-    },
-
-    /**
-     * toggle browser default behavior by setting css properties.
-     * `userSelect='none'` also sets `element.onselectstart` to false
-     * `userDrag='none'` also sets `element.ondragstart` to false
-     *
-     * @method toggleBehavior
-     * @param {HtmlElement} element
-     * @param {Object} props
-     * @param {Boolean} [toggle=true]
-     */
-    toggleBehavior: function toggleBehavior(element, props, toggle) {
-        if(!props || !element || !element.style) {
-            return;
-        }
-
-        // set the css properties
-        Utils.each(props, function(value, prop) {
-            Utils.setPrefixedCss(element, prop, value, toggle);
-        });
-
-        var falseFn = toggle && function() {
-            return false;
-        };
-
-        // also the disable onselectstart
-        if(props.userSelect == 'none') {
-            element.onselectstart = falseFn;
-        }
-        // and disable ondragstart
-        if(props.userDrag == 'none') {
-            element.ondragstart = falseFn;
-        }
-    },
-
-    /**
-     * convert a string with underscores to camelCase
-     * so prevent_default becomes preventDefault
-     * @param {String} str
-     * @return {String} camelCaseStr
-     */
-    toCamelCase: function toCamelCase(str) {
-        return str.replace(/[_-]([a-z])/g, function(s) {
-            return s[1].toUpperCase();
-        });
-    }
-};
-
-
-/**
- * @module hammer
- */
-/**
- * @class Event
- * @static
- */
-var Event = Hammer.event = {
-    /**
-     * when touch events have been fired, this is true
-     * this is used to stop mouse events
-     * @property prevent_mouseevents
-     * @private
-     * @type {Boolean}
-     */
-    preventMouseEvents: false,
-
-    /**
-     * if EVENT_START has been fired
-     * @property started
-     * @private
-     * @type {Boolean}
-     */
-    started: false,
-
-    /**
-     * when the mouse is hold down, this is true
-     * @property should_detect
-     * @private
-     * @type {Boolean}
-     */
-    shouldDetect: false,
-
-    /**
-     * simple event binder with a hook and support for multiple types
-     * @method on
-     * @param {HTMLElement} element
-     * @param {String} type
-     * @param {Function} handler
-     * @param {Function} [hook]
-     * @param {Object} hook.type
-     */
-    on: function on(element, type, handler, hook) {
-        var types = type.split(' ');
-        Utils.each(types, function(type) {
-            Utils.on(element, type, handler);
-            hook && hook(type);
-        });
-    },
-
-    /**
-     * simple event unbinder with a hook and support for multiple types
-     * @method off
-     * @param {HTMLElement} element
-     * @param {String} type
-     * @param {Function} handler
-     * @param {Function} [hook]
-     * @param {Object} hook.type
-     */
-    off: function off(element, type, handler, hook) {
-        var types = type.split(' ');
-        Utils.each(types, function(type) {
-            Utils.off(element, type, handler);
-            hook && hook(type);
-        });
-    },
-
-    /**
-     * the core touch event handler.
-     * this finds out if we should to detect gestures
-     * @method onTouch
-     * @param {HTMLElement} element
-     * @param {String} eventType matches `EVENT_START|MOVE|END`
-     * @param {Function} handler
-     * @return onTouchHandler {Function} the core event handler
-     */
-    onTouch: function onTouch(element, eventType, handler) {
-        var self = this;
-
-        var onTouchHandler = function onTouchHandler(ev) {
-            var srcType = ev.type.toLowerCase(),
-                isPointer = Hammer.HAS_POINTEREVENTS,
-                isMouse = Utils.inStr(srcType, 'mouse'),
-                triggerType;
-
-            // if we are in a mouseevent, but there has been a touchevent triggered in this session
-            // we want to do nothing. simply break out of the event.
-            if(isMouse && self.preventMouseEvents) {
-                return;
-
-            // mousebutton must be down
-            } else if(isMouse && eventType == EVENT_START && ev.button === 0) {
-                self.preventMouseEvents = false;
-                self.shouldDetect = true;
-            } else if(isPointer && eventType == EVENT_START) {
-                self.shouldDetect = (ev.buttons === 1 || PointerEvent.matchType(POINTER_TOUCH, ev));
-            // just a valid start event, but no mouse
-            } else if(!isMouse && eventType == EVENT_START) {
-                self.preventMouseEvents = true;
-                self.shouldDetect = true;
-            }
-
-            // update the pointer event before entering the detection
-            if(isPointer && eventType != EVENT_END) {
-                PointerEvent.updatePointer(eventType, ev);
-            }
-
-            // we are in a touch/down state, so allowed detection of gestures
-            if(self.shouldDetect) {
-                triggerType = self.doDetect.call(self, ev, eventType, element, handler);
-            }
-
-            // ...and we are done with the detection
-            // so reset everything to start each detection totally fresh
-            if(triggerType == EVENT_END) {
-                self.preventMouseEvents = false;
-                self.shouldDetect = false;
-                PointerEvent.reset();
-            // update the pointerevent object after the detection
-            }
-
-            if(isPointer && eventType == EVENT_END) {
-                PointerEvent.updatePointer(eventType, ev);
-            }
-        };
-
-        this.on(element, EVENT_TYPES[eventType], onTouchHandler);
-        return onTouchHandler;
-    },
-
-    /**
-     * the core detection method
-     * this finds out what hammer-touch-events to trigger
-     * @method doDetect
-     * @param {Object} ev
-     * @param {String} eventType matches `EVENT_START|MOVE|END`
-     * @param {HTMLElement} element
-     * @param {Function} handler
-     * @return {String} triggerType matches `EVENT_START|MOVE|END`
-     */
-    doDetect: function doDetect(ev, eventType, element, handler) {
-        var touchList = this.getTouchList(ev, eventType);
-        var touchListLength = touchList.length;
-        var triggerType = eventType;
-        var triggerChange = touchList.trigger; // used by fakeMultitouch plugin
-        var changedLength = touchListLength;
-
-        // at each touchstart-like event we want also want to trigger a TOUCH event...
-        if(eventType == EVENT_START) {
-            triggerChange = EVENT_TOUCH;
-        // ...the same for a touchend-like event
-        } else if(eventType == EVENT_END) {
-            triggerChange = EVENT_RELEASE;
-
-            // keep track of how many touches have been removed
-            changedLength = touchList.length - ((ev.changedTouches) ? ev.changedTouches.length : 1);
-        }
-
-        // after there are still touches on the screen,
-        // we just want to trigger a MOVE event. so change the START or END to a MOVE
-        // but only after detection has been started, the first time we actualy want a START
-        if(changedLength > 0 && this.started) {
-            triggerType = EVENT_MOVE;
-        }
-
-        // detection has been started, we keep track of this, see above
-        this.started = true;
-
-        // generate some event data, some basic information
-        var evData = this.collectEventData(element, triggerType, touchList, ev);
-
-        // trigger the triggerType event before the change (TOUCH, RELEASE) events
-        // but the END event should be at last
-        if(eventType != EVENT_END) {
-            handler.call(Detection, evData);
-        }
-
-        // trigger a change (TOUCH, RELEASE) event, this means the length of the touches changed
-        if(triggerChange) {
-            evData.changedLength = changedLength;
-            evData.eventType = triggerChange;
-
-            handler.call(Detection, evData);
-
-            evData.eventType = triggerType;
-            delete evData.changedLength;
-        }
-
-        // trigger the END event
-        if(triggerType == EVENT_END) {
-            handler.call(Detection, evData);
-
-            // ...and we are done with the detection
-            // so reset everything to start each detection totally fresh
-            this.started = false;
-        }
-
-        return triggerType;
-    },
-
-    /**
-     * we have different events for each device/browser
-     * determine what we need and set them in the EVENT_TYPES constant
-     * the `onTouch` method is bind to these properties.
-     * @method determineEventTypes
-     * @return {Object} events
-     */
-    determineEventTypes: function determineEventTypes() {
-        var types;
-        if(Hammer.HAS_POINTEREVENTS) {
-            if(window.PointerEvent) {
-                types = [
-                    'pointerdown',
-                    'pointermove',
-                    'pointerup pointercancel lostpointercapture'
-                ];
-            } else {
-                types = [
-                    'MSPointerDown',
-                    'MSPointerMove',
-                    'MSPointerUp MSPointerCancel MSLostPointerCapture'
-                ];
-            }
-        } else if(Hammer.NO_MOUSEEVENTS) {
-            types = [
-                'touchstart',
-                'touchmove',
-                'touchend touchcancel'
-            ];
-        } else {
-            types = [
-                'touchstart mousedown',
-                'touchmove mousemove',
-                'touchend touchcancel mouseup'
-            ];
-        }
-
-        EVENT_TYPES[EVENT_START] = types[0];
-        EVENT_TYPES[EVENT_MOVE] = types[1];
-        EVENT_TYPES[EVENT_END] = types[2];
-        return EVENT_TYPES;
-    },
-
-    /**
-     * create touchList depending on the event
-     * @method getTouchList
-     * @param {Object} ev
-     * @param {String} eventType
-     * @return {Array} touches
-     */
-    getTouchList: function getTouchList(ev, eventType) {
-        // get the fake pointerEvent touchlist
-        if(Hammer.HAS_POINTEREVENTS) {
-            return PointerEvent.getTouchList();
-        }
-
-        // get the touchlist
-        if(ev.touches) {
-            if(eventType == EVENT_MOVE) {
-                return ev.touches;
-            }
-
-            var identifiers = [];
-            var concat = [].concat(Utils.toArray(ev.touches), Utils.toArray(ev.changedTouches));
-            var touchList = [];
-
-            Utils.each(concat, function(touch) {
-                if(Utils.inArray(identifiers, touch.identifier) === false) {
-                    touchList.push(touch);
-                }
-                identifiers.push(touch.identifier);
-            });
-
-            return touchList;
-        }
-
-        // make fake touchList from mouse position
-        ev.identifier = 1;
-        return [ev];
-    },
-
-    /**
-     * collect basic event data
-     * @method collectEventData
-     * @param {HTMLElement} element
-     * @param {String} eventType matches `EVENT_START|MOVE|END`
-     * @param {Array} touches
-     * @param {Object} ev
-     * @return {Object} ev
-     */
-    collectEventData: function collectEventData(element, eventType, touches, ev) {
-        // find out pointerType
-        var pointerType = POINTER_TOUCH;
-        if(Utils.inStr(ev.type, 'mouse') || PointerEvent.matchType(POINTER_MOUSE, ev)) {
-            pointerType = POINTER_MOUSE;
-        } else if(PointerEvent.matchType(POINTER_PEN, ev)) {
-            pointerType = POINTER_PEN;
-        }
-
-        return {
-            center: Utils.getCenter(touches),
-            timeStamp: Date.now(),
-            target: ev.target,
-            touches: touches,
-            eventType: eventType,
-            pointerType: pointerType,
-            srcEvent: ev,
-
-            /**
-             * prevent the browser default actions
-             * mostly used to disable scrolling of the browser
-             */
-            preventDefault: function() {
-                var srcEvent = this.srcEvent;
-                srcEvent.preventManipulation && srcEvent.preventManipulation();
-                srcEvent.preventDefault && srcEvent.preventDefault();
-            },
-
-            /**
-             * stop bubbling the event up to its parents
-             */
-            stopPropagation: function() {
-                this.srcEvent.stopPropagation();
-            },
-
-            /**
-             * immediately stop gesture detection
-             * might be useful after a swipe was detected
-             * @return {*}
-             */
-            stopDetect: function() {
-                return Detection.stopDetect();
-            }
-        };
-    }
-};
-
-
-/**
- * @module hammer
- *
- * @class PointerEvent
- * @static
- */
-var PointerEvent = Hammer.PointerEvent = {
-    /**
-     * holds all pointers, by `identifier`
-     * @property pointers
-     * @type {Object}
-     */
-    pointers: {},
-
-    /**
-     * get the pointers as an array
-     * @method getTouchList
-     * @return {Array} touchlist
-     */
-    getTouchList: function getTouchList() {
-        var touchlist = [];
-        // we can use forEach since pointerEvents only is in IE10
-        Utils.each(this.pointers, function(pointer) {
-            touchlist.push(pointer);
-        });
-        return touchlist;
-    },
-
-    /**
-     * update the position of a pointer
-     * @method updatePointer
-     * @param {String} eventType matches `EVENT_START|MOVE|END`
-     * @param {Object} pointerEvent
-     */
-    updatePointer: function updatePointer(eventType, pointerEvent) {
-        if(eventType == EVENT_END || (eventType != EVENT_END && pointerEvent.buttons !== 1)) {
-            delete this.pointers[pointerEvent.pointerId];
-        } else {
-            pointerEvent.identifier = pointerEvent.pointerId;
-            this.pointers[pointerEvent.pointerId] = pointerEvent;
-        }
-    },
-
-    /**
-     * check if ev matches pointertype
-     * @method matchType
-     * @param {String} pointerType matches `POINTER_MOUSE|TOUCH|PEN`
-     * @param {PointerEvent} ev
-     */
-    matchType: function matchType(pointerType, ev) {
-        if(!ev.pointerType) {
-            return false;
-        }
-
-        var pt = ev.pointerType,
-            types = {};
-
-        types[POINTER_MOUSE] = (pt === (ev.MSPOINTER_TYPE_MOUSE || POINTER_MOUSE));
-        types[POINTER_TOUCH] = (pt === (ev.MSPOINTER_TYPE_TOUCH || POINTER_TOUCH));
-        types[POINTER_PEN] = (pt === (ev.MSPOINTER_TYPE_PEN || POINTER_PEN));
-        return types[pointerType];
-    },
-
-    /**
-     * reset the stored pointers
-     * @method reset
-     */
-    reset: function resetList() {
-        this.pointers = {};
-    }
-};
-
-
-/**
- * @module hammer
- *
- * @class Detection
- * @static
- */
-var Detection = Hammer.detection = {
-    // contains all registred Hammer.gestures in the correct order
-    gestures: [],
-
-    // data of the current Hammer.gesture detection session
-    current: null,
-
-    // the previous Hammer.gesture session data
-    // is a full clone of the previous gesture.current object
-    previous: null,
-
-    // when this becomes true, no gestures are fired
-    stopped: false,
-
-    /**
-     * start Hammer.gesture detection
-     * @method startDetect
-     * @param {Hammer.Instance} inst
-     * @param {Object} eventData
-     */
-    startDetect: function startDetect(inst, eventData) {
-        // already busy with a Hammer.gesture detection on an element
-        if(this.current) {
-            return;
-        }
-
-        this.stopped = false;
-
-        // holds current session
-        this.current = {
-            inst: inst, // reference to HammerInstance we're working for
-            startEvent: Utils.extend({}, eventData), // start eventData for distances, timing etc
-            lastEvent: false, // last eventData
-            lastCalcEvent: false, // last eventData for calculations.
-            futureCalcEvent: false, // last eventData for calculations.
-            lastCalcData: {}, // last lastCalcData
-            name: '' // current gesture we're in/detected, can be 'tap', 'hold' etc
-        };
-
-        this.detect(eventData);
-    },
-
-    /**
-     * Hammer.gesture detection
-     * @method detect
-     * @param {Object} eventData
-     * @return {any}
-     */
-    detect: function detect(eventData) {
-        if(!this.current || this.stopped) {
-            return;
-        }
-
-        // extend event data with calculations about scale, distance etc
-        eventData = this.extendEventData(eventData);
-
-        // hammer instance and instance options
-        var inst = this.current.inst,
-            instOptions = inst.options;
-
-        // call Hammer.gesture handlers
-        Utils.each(this.gestures, function triggerGesture(gesture) {
-            // only when the instance options have enabled this gesture
-            if(!this.stopped && inst.enabled && instOptions[gesture.name]) {
-                gesture.handler.call(gesture, eventData, inst);
-            }
-        }, this);
-
-        // store as previous event event
-        if(this.current) {
-            this.current.lastEvent = eventData;
-        }
-
-        if(eventData.eventType == EVENT_END) {
-            this.stopDetect();
-        }
-
-        return eventData;
-    },
-
-    /**
-     * clear the Hammer.gesture vars
-     * this is called on endDetect, but can also be used when a final Hammer.gesture has been detected
-     * to stop other Hammer.gestures from being fired
-     * @method stopDetect
-     */
-    stopDetect: function stopDetect() {
-        // clone current data to the store as the previous gesture
-        // used for the double tap gesture, since this is an other gesture detect session
-        this.previous = Utils.extend({}, this.current);
-
-        // reset the current
-        this.current = null;
-        this.stopped = true;
-    },
-
-    /**
-     * calculate velocity, angle and direction
-     * @method getVelocityData
-     * @param {Object} ev
-     * @param {Object} center
-     * @param {Number} deltaTime
-     * @param {Number} deltaX
-     * @param {Number} deltaY
-     */
-    getCalculatedData: function getCalculatedData(ev, center, deltaTime, deltaX, deltaY) {
-        var cur = this.current,
-            recalc = false,
-            calcEv = cur.lastCalcEvent,
-            calcData = cur.lastCalcData;
-
-        if(calcEv && ev.timeStamp - calcEv.timeStamp > Hammer.CALCULATE_INTERVAL) {
-            center = calcEv.center;
-            deltaTime = ev.timeStamp - calcEv.timeStamp;
-            deltaX = ev.center.clientX - calcEv.center.clientX;
-            deltaY = ev.center.clientY - calcEv.center.clientY;
-            recalc = true;
-        }
-
-        if(ev.eventType == EVENT_TOUCH || ev.eventType == EVENT_RELEASE) {
-            cur.futureCalcEvent = ev;
-        }
-
-        if(!cur.lastCalcEvent || recalc) {
-            calcData.velocity = Utils.getVelocity(deltaTime, deltaX, deltaY);
-            calcData.angle = Utils.getAngle(center, ev.center);
-            calcData.direction = Utils.getDirection(center, ev.center);
-
-            cur.lastCalcEvent = cur.futureCalcEvent || ev;
-            cur.futureCalcEvent = ev;
-        }
-
-        ev.velocityX = calcData.velocity.x;
-        ev.velocityY = calcData.velocity.y;
-        ev.interimAngle = calcData.angle;
-        ev.interimDirection = calcData.direction;
-    },
-
-    /**
-     * extend eventData for Hammer.gestures
-     * @method extendEventData
-     * @param {Object} ev
-     * @return {Object} ev
-     */
-    extendEventData: function extendEventData(ev) {
-        var cur = this.current,
-            startEv = cur.startEvent,
-            lastEv = cur.lastEvent || startEv;
-
-        // update the start touchlist to calculate the scale/rotation
-        if(ev.eventType == EVENT_TOUCH || ev.eventType == EVENT_RELEASE) {
-            startEv.touches = [];
-            Utils.each(ev.touches, function(touch) {
-                startEv.touches.push({
-                    clientX: touch.clientX,
-                    clientY: touch.clientY
-                });
-            });
-        }
-
-        var deltaTime = ev.timeStamp - startEv.timeStamp,
-            deltaX = ev.center.clientX - startEv.center.clientX,
-            deltaY = ev.center.clientY - startEv.center.clientY;
-
-        this.getCalculatedData(ev, lastEv.center, deltaTime, deltaX, deltaY);
-
-        Utils.extend(ev, {
-            startEvent: startEv,
-
-            deltaTime: deltaTime,
-            deltaX: deltaX,
-            deltaY: deltaY,
-
-            distance: Utils.getDistance(startEv.center, ev.center),
-            angle: Utils.getAngle(startEv.center, ev.center),
-            direction: Utils.getDirection(startEv.center, ev.center),
-            scale: Utils.getScale(startEv.touches, ev.touches),
-            rotation: Utils.getRotation(startEv.touches, ev.touches)
-        });
-
-        return ev;
-    },
-
-    /**
-     * register new gesture
-     * @method register
-     * @param {Object} gesture object, see `gestures/` for documentation
-     * @return {Array} gestures
-     */
-    register: function register(gesture) {
-        // add an enable gesture options if there is no given
-        var options = gesture.defaults || {};
-        if(options[gesture.name] === undefined) {
-            options[gesture.name] = true;
-        }
-
-        // extend Hammer default options with the Hammer.gesture options
-        Utils.extend(Hammer.defaults, options, true);
-
-        // set its index
-        gesture.index = gesture.index || 1000;
-
-        // add Hammer.gesture to the list
-        this.gestures.push(gesture);
-
-        // sort the list by index
-        this.gestures.sort(function(a, b) {
-            if(a.index < b.index) {
-                return -1;
-            }
-            if(a.index > b.index) {
-                return 1;
-            }
-            return 0;
-        });
-
-        return this.gestures;
-    }
-};
-
-
-/**
- * @module hammer
- */
-
-/**
- * create new hammer instance
- * all methods should return the instance itself, so it is chainable.
- *
- * @class Instance
- * @constructor
- * @param {HTMLElement} element
- * @param {Object} [options={}] options are merged with `Hammer.defaults`
- * @return {Hammer.Instance}
- */
-Hammer.Instance = function(element, options) {
-    var self = this;
-
-    // setup HammerJS window events and register all gestures
-    // this also sets up the default options
-    setup();
-
-    /**
-     * @property element
-     * @type {HTMLElement}
-     */
-    this.element = element;
-
-    /**
-     * @property enabled
-     * @type {Boolean}
-     * @protected
-     */
-    this.enabled = true;
-
-    /**
-     * options, merged with the defaults
-     * options with an _ are converted to camelCase
-     * @property options
-     * @type {Object}
-     */
-    Utils.each(options, function(value, name) {
-        delete options[name];
-        options[Utils.toCamelCase(name)] = value;
-    });
-
-    this.options = Utils.extend(Utils.extend({}, Hammer.defaults), options || {});
-
-    // add some css to the element to prevent the browser from doing its native behavoir
-    if(this.options.behavior) {
-        Utils.toggleBehavior(this.element, this.options.behavior, true);
-    }
-
-    /**
-     * event start handler on the element to start the detection
-     * @property eventStartHandler
-     * @type {Object}
-     */
-    this.eventStartHandler = Event.onTouch(element, EVENT_START, function(ev) {
-        if(self.enabled && ev.eventType == EVENT_START) {
-            Detection.startDetect(self, ev);
-        } else if(ev.eventType == EVENT_TOUCH) {
-            Detection.detect(ev);
-        }
-    });
-
-    /**
-     * keep a list of user event handlers which needs to be removed when calling 'dispose'
-     * @property eventHandlers
-     * @type {Array}
-     */
-    this.eventHandlers = [];
-};
-
-Hammer.Instance.prototype = {
-    /**
-     * bind events to the instance
-     * @method on
-     * @chainable
-     * @param {String} gestures multiple gestures by splitting with a space
-     * @param {Function} handler
-     * @param {Object} handler.ev event object
-     */
-    on: function onEvent(gestures, handler) {
-        var self = this;
-        Event.on(self.element, gestures, handler, function(type) {
-            self.eventHandlers.push({ gesture: type, handler: handler });
-        });
-        return self;
-    },
-
-    /**
-     * unbind events to the instance
-     * @method off
-     * @chainable
-     * @param {String} gestures
-     * @param {Function} handler
-     */
-    off: function offEvent(gestures, handler) {
-        var self = this;
-
-        Event.off(self.element, gestures, handler, function(type) {
-            var index = Utils.inArray({ gesture: type, handler: handler });
-            if(index !== false) {
-                self.eventHandlers.splice(index, 1);
-            }
-        });
-        return self;
-    },
-
-    /**
-     * trigger gesture event
-     * @method trigger
-     * @chainable
-     * @param {String} gesture
-     * @param {Object} [eventData]
-     */
-    trigger: function triggerEvent(gesture, eventData) {
-        // optional
-        if(!eventData) {
-            eventData = {};
-        }
-
-        // create DOM event
-        var event = Hammer.DOCUMENT.createEvent('Event');
-        event.initEvent(gesture, true, true);
-        event.gesture = eventData;
-
-        // trigger on the target if it is in the instance element,
-        // this is for event delegation tricks
-        var element = this.element;
-        if(Utils.hasParent(eventData.target, element)) {
-            element = eventData.target;
-        }
-
-        element.dispatchEvent(event);
-        return this;
-    },
-
-    /**
-     * enable of disable hammer.js detection
-     * @method enable
-     * @chainable
-     * @param {Boolean} state
-     */
-    enable: function enable(state) {
-        this.enabled = state;
-        return this;
-    },
-
-    /**
-     * dispose this hammer instance
-     * @method dispose
-     * @return {Null}
-     */
-    dispose: function dispose() {
-        var i, eh;
-
-        // undo all changes made by stop_browser_behavior
-        Utils.toggleBehavior(this.element, this.options.behavior, false);
-
-        // unbind all custom event handlers
-        for(i = -1; (eh = this.eventHandlers[++i]);) {
-            Utils.off(this.element, eh.gesture, eh.handler);
-        }
-
-        this.eventHandlers = [];
-
-        // unbind the start event listener
-        Event.off(this.element, EVENT_TYPES[EVENT_START], this.eventStartHandler);
-
-        return null;
-    }
-};
-
-
-/**
- * @module gestures
- */
-/**
- * Move with x fingers (default 1) around on the page.
- * Preventing the default browser behavior is a good way to improve feel and working.
- * ````
- *  hammertime.on("drag", function(ev) {
- *    console.log(ev);
- *    ev.gesture.preventDefault();
- *  });
- * ````
- *
- * @class Drag
- * @static
- */
-/**
- * @event drag
- * @param {Object} ev
- */
-/**
- * @event dragstart
- * @param {Object} ev
- */
-/**
- * @event dragend
- * @param {Object} ev
- */
-/**
- * @event drapleft
- * @param {Object} ev
- */
-/**
- * @event dragright
- * @param {Object} ev
- */
-/**
- * @event dragup
- * @param {Object} ev
- */
-/**
- * @event dragdown
- * @param {Object} ev
- */
-
-/**
- * @param {String} name
- */
-(function(name) {
-    var triggered = false;
-
-    function dragGesture(ev, inst) {
-        var cur = Detection.current;
-
-        // max touches
-        if(inst.options.dragMaxTouches > 0 &&
-            ev.touches.length > inst.options.dragMaxTouches) {
-            return;
-        }
-
-        switch(ev.eventType) {
-            case EVENT_START:
-                triggered = false;
-                break;
-
-            case EVENT_MOVE:
-                // when the distance we moved is too small we skip this gesture
-                // or we can be already in dragging
-                if(ev.distance < inst.options.dragMinDistance &&
-                    cur.name != name) {
-                    return;
-                }
-
-                var startCenter = cur.startEvent.center;
-
-                // we are dragging!
-                if(cur.name != name) {
-                    cur.name = name;
-                    if(inst.options.dragDistanceCorrection && ev.distance > 0) {
-                        // When a drag is triggered, set the event center to dragMinDistance pixels from the original event center.
-                        // Without this correction, the dragged distance would jumpstart at dragMinDistance pixels instead of at 0.
-                        // It might be useful to save the original start point somewhere
-                        var factor = Math.abs(inst.options.dragMinDistance / ev.distance);
-                        startCenter.pageX += ev.deltaX * factor;
-                        startCenter.pageY += ev.deltaY * factor;
-                        startCenter.clientX += ev.deltaX * factor;
-                        startCenter.clientY += ev.deltaY * factor;
-
-                        // recalculate event data using new start point
-                        ev = Detection.extendEventData(ev);
-                    }
-                }
-
-                // lock drag to axis?
-                if(cur.lastEvent.dragLockToAxis ||
-                    ( inst.options.dragLockToAxis &&
-                        inst.options.dragLockMinDistance <= ev.distance
-                        )) {
-                    ev.dragLockToAxis = true;
-                }
-
-                // keep direction on the axis that the drag gesture started on
-                var lastDirection = cur.lastEvent.direction;
-                if(ev.dragLockToAxis && lastDirection !== ev.direction) {
-                    if(Utils.isVertical(lastDirection)) {
-                        ev.direction = (ev.deltaY < 0) ? DIRECTION_UP : DIRECTION_DOWN;
-                    } else {
-                        ev.direction = (ev.deltaX < 0) ? DIRECTION_LEFT : DIRECTION_RIGHT;
-                    }
-                }
-
-                // first time, trigger dragstart event
-                if(!triggered) {
-                    inst.trigger(name + 'start', ev);
-                    triggered = true;
-                }
-
-                // trigger events
-                inst.trigger(name, ev);
-                inst.trigger(name + ev.direction, ev);
-
-                var isVertical = Utils.isVertical(ev.direction);
-
-                // block the browser events
-                if((inst.options.dragBlockVertical && isVertical) ||
-                    (inst.options.dragBlockHorizontal && !isVertical)) {
-                    ev.preventDefault();
-                }
-                break;
-
-            case EVENT_RELEASE:
-                if(triggered && ev.changedLength <= inst.options.dragMaxTouches) {
-                    inst.trigger(name + 'end', ev);
-                    triggered = false;
-                }
-                break;
-
-            case EVENT_END:
-                triggered = false;
-                break;
-        }
-    }
-
-    Hammer.gestures.Drag = {
-        name: name,
-        index: 50,
-        handler: dragGesture,
-        defaults: {
-            /**
-             * minimal movement that have to be made before the drag event gets triggered
-             * @property dragMinDistance
-             * @type {Number}
-             * @default 10
-             */
-            dragMinDistance: 10,
-
-            /**
-             * Set dragDistanceCorrection to true to make the starting point of the drag
-             * be calculated from where the drag was triggered, not from where the touch started.
-             * Useful to avoid a jerk-starting drag, which can make fine-adjustments
-             * through dragging difficult, and be visually unappealing.
-             * @property dragDistanceCorrection
-             * @type {Boolean}
-             * @default true
-             */
-            dragDistanceCorrection: true,
-
-            /**
-             * set 0 for unlimited, but this can conflict with transform
-             * @property dragMaxTouches
-             * @type {Number}
-             * @default 1
-             */
-            dragMaxTouches: 1,
-
-            /**
-             * prevent default browser behavior when dragging occurs
-             * be careful with it, it makes the element a blocking element
-             * when you are using the drag gesture, it is a good practice to set this true
-             * @property dragBlockHorizontal
-             * @type {Boolean}
-             * @default false
-             */
-            dragBlockHorizontal: false,
-
-            /**
-             * same as `dragBlockHorizontal`, but for vertical movement
-             * @property dragBlockVertical
-             * @type {Boolean}
-             * @default false
-             */
-            dragBlockVertical: false,
-
-            /**
-             * dragLockToAxis keeps the drag gesture on the axis that it started on,
-             * It disallows vertical directions if the initial direction was horizontal, and vice versa.
-             * @property dragLockToAxis
-             * @type {Boolean}
-             * @default false
-             */
-            dragLockToAxis: false,
-
-            /**
-             * drag lock only kicks in when distance > dragLockMinDistance
-             * This way, locking occurs only when the distance has become large enough to reliably determine the direction
-             * @property dragLockMinDistance
-             * @type {Number}
-             * @default 25
-             */
-            dragLockMinDistance: 25
-        }
-    };
-})('drag');
-
-/**
- * @module gestures
- */
-/**
- * trigger a simple gesture event, so you can do anything in your handler.
- * only usable if you know what your doing...
- *
- * @class Gesture
- * @static
- */
-/**
- * @event gesture
- * @param {Object} ev
- */
-Hammer.gestures.Gesture = {
-    name: 'gesture',
-    index: 1337,
-    handler: function releaseGesture(ev, inst) {
-        inst.trigger(this.name, ev);
-    }
-};
-
-/**
- * @module gestures
- */
-/**
- * Touch stays at the same place for x time
- *
- * @class Hold
- * @static
- */
-/**
- * @event hold
- * @param {Object} ev
- */
-
-/**
- * @param {String} name
- */
-(function(name) {
-    var timer;
-
-    function holdGesture(ev, inst) {
-        var options = inst.options,
-            current = Detection.current;
-
-        switch(ev.eventType) {
-            case EVENT_START:
-                clearTimeout(timer);
-
-                // set the gesture so we can check in the timeout if it still is
-                current.name = name;
-
-                // set timer and if after the timeout it still is hold,
-                // we trigger the hold event
-                timer = setTimeout(function() {
-                    if(current && current.name == name) {
-                        inst.trigger(name, ev);
-                    }
-                }, options.holdTimeout);
-                break;
-
-            case EVENT_MOVE:
-                if(ev.distance > options.holdThreshold) {
-                    clearTimeout(timer);
-                }
-                break;
-
-            case EVENT_RELEASE:
-                clearTimeout(timer);
-                break;
-        }
-    }
-
-    Hammer.gestures.Hold = {
-        name: name,
-        index: 10,
-        defaults: {
-            /**
-             * @property holdTimeout
-             * @type {Number}
-             * @default 500
-             */
-            holdTimeout: 500,
-
-            /**
-             * movement allowed while holding
-             * @property holdThreshold
-             * @type {Number}
-             * @default 2
-             */
-            holdThreshold: 2
-        },
-        handler: holdGesture
-    };
-})('hold');
-
-/**
- * @module gestures
- */
-/**
- * when a touch is being released from the page
- *
- * @class Release
- * @static
- */
-/**
- * @event release
- * @param {Object} ev
- */
-Hammer.gestures.Release = {
-    name: 'release',
-    index: Infinity,
-    handler: function releaseGesture(ev, inst) {
-        if(ev.eventType == EVENT_RELEASE) {
-            inst.trigger(this.name, ev);
-        }
-    }
-};
-
-/**
- * @module gestures
- */
-/**
- * triggers swipe events when the end velocity is above the threshold
- * for best usage, set `preventDefault` (on the drag gesture) to `true`
- * ````
- *  hammertime.on("dragleft swipeleft", function(ev) {
- *    console.log(ev);
- *    ev.gesture.preventDefault();
- *  });
- * ````
- *
- * @class Swipe
- * @static
- */
-/**
- * @event swipe
- * @param {Object} ev
- */
-/**
- * @event swipeleft
- * @param {Object} ev
- */
-/**
- * @event swiperight
- * @param {Object} ev
- */
-/**
- * @event swipeup
- * @param {Object} ev
- */
-/**
- * @event swipedown
- * @param {Object} ev
- */
-Hammer.gestures.Swipe = {
-    name: 'swipe',
-    index: 40,
-    defaults: {
-        /**
-         * @property swipeMinTouches
-         * @type {Number}
-         * @default 1
-         */
-        swipeMinTouches: 1,
-
-        /**
-         * @property swipeMaxTouches
-         * @type {Number}
-         * @default 1
-         */
-        swipeMaxTouches: 1,
-
-        /**
-         * horizontal swipe velocity
-         * @property swipeVelocityX
-         * @type {Number}
-         * @default 0.6
-         */
-        swipeVelocityX: 0.6,
-
-        /**
-         * vertical swipe velocity
-         * @property swipeVelocityY
-         * @type {Number}
-         * @default 0.6
-         */
-        swipeVelocityY: 0.6
-    },
-
-    handler: function swipeGesture(ev, inst) {
-        if(ev.eventType == EVENT_RELEASE) {
-            var touches = ev.touches.length,
-                options = inst.options;
-
-            // max touches
-            if(touches < options.swipeMinTouches ||
-                touches > options.swipeMaxTouches) {
-                return;
-            }
-
-            // when the distance we moved is too small we skip this gesture
-            // or we can be already in dragging
-            if(ev.velocityX > options.swipeVelocityX ||
-                ev.velocityY > options.swipeVelocityY) {
-                // trigger swipe events
-                inst.trigger(this.name, ev);
-                inst.trigger(this.name + ev.direction, ev);
-            }
-        }
-    }
-};
-
-/**
- * @module gestures
- */
-/**
- * Single tap and a double tap on a place
- *
- * @class Tap
- * @static
- */
-/**
- * @event tap
- * @param {Object} ev
- */
-/**
- * @event doubletap
- * @param {Object} ev
- */
-
-/**
- * @param {String} name
- */
-(function(name) {
-    var hasMoved = false;
-
-    function tapGesture(ev, inst) {
-        var options = inst.options,
-            current = Detection.current,
-            prev = Detection.previous,
-            sincePrev,
-            didDoubleTap;
-
-        switch(ev.eventType) {
-            case EVENT_START:
-                hasMoved = false;
-                break;
-
-            case EVENT_MOVE:
-                hasMoved = hasMoved || (ev.distance > options.tapMaxDistance);
-                break;
-
-            case EVENT_END:
-                if(!Utils.inStr(ev.srcEvent.type, 'cancel') && ev.deltaTime < options.tapMaxTime && !hasMoved) {
-                    // previous gesture, for the double tap since these are two different gesture detections
-                    sincePrev = prev && prev.lastEvent && ev.timeStamp - prev.lastEvent.timeStamp;
-                    didDoubleTap = false;
-
-                    // check if double tap
-                    if(prev && prev.name == name &&
-                        (sincePrev && sincePrev < options.doubleTapInterval) &&
-                        ev.distance < options.doubleTapDistance) {
-                        inst.trigger('doubletap', ev);
-                        didDoubleTap = true;
-                    }
-
-                    // do a single tap
-                    if(!didDoubleTap || options.tapAlways) {
-                        current.name = name;
-                        inst.trigger(current.name, ev);
-                    }
-                }
-                break;
-        }
-    }
-
-    Hammer.gestures.Tap = {
-        name: name,
-        index: 100,
-        handler: tapGesture,
-        defaults: {
-            /**
-             * max time of a tap, this is for the slow tappers
-             * @property tapMaxTime
-             * @type {Number}
-             * @default 250
-             */
-            tapMaxTime: 250,
-
-            /**
-             * max distance of movement of a tap, this is for the slow tappers
-             * @property tapMaxDistance
-             * @type {Number}
-             * @default 10
-             */
-            tapMaxDistance: 10,
-
-            /**
-             * always trigger the `tap` event, even while double-tapping
-             * @property tapAlways
-             * @type {Boolean}
-             * @default true
-             */
-            tapAlways: true,
-
-            /**
-             * max distance between two taps
-             * @property doubleTapDistance
-             * @type {Number}
-             * @default 20
-             */
-            doubleTapDistance: 20,
-
-            /**
-             * max time between two taps
-             * @property doubleTapInterval
-             * @type {Number}
-             * @default 300
-             */
-            doubleTapInterval: 300
-        }
-    };
-})('tap');
-
-/**
- * @module gestures
- */
-/**
- * when a touch is being touched at the page
- *
- * @class Touch
- * @static
- */
-/**
- * @event touch
- * @param {Object} ev
- */
-Hammer.gestures.Touch = {
-    name: 'touch',
-    index: -Infinity,
-    defaults: {
-        /**
-         * call preventDefault at touchstart, and makes the element blocking by disabling the scrolling of the page,
-         * but it improves gestures like transforming and dragging.
-         * be careful with using this, it can be very annoying for users to be stuck on the page
-         * @property preventDefault
-         * @type {Boolean}
-         * @default false
-         */
-        preventDefault: false,
-
-        /**
-         * disable mouse events, so only touch (or pen!) input triggers events
-         * @property preventMouse
-         * @type {Boolean}
-         * @default false
-         */
-        preventMouse: false
-    },
-    handler: function touchGesture(ev, inst) {
-        if(inst.options.preventMouse && ev.pointerType == POINTER_MOUSE) {
-            ev.stopDetect();
-            return;
-        }
-
-        if(inst.options.preventDefault) {
-            ev.preventDefault();
-        }
-
-        if(ev.eventType == EVENT_TOUCH) {
-            inst.trigger('touch', ev);
-        }
-    }
-};
-
-/**
- * @module gestures
- */
-/**
- * User want to scale or rotate with 2 fingers
- * Preventing the default browser behavior is a good way to improve feel and working. This can be done with the
- * `preventDefault` option.
- *
- * @class Transform
- * @static
- */
-/**
- * @event transform
- * @param {Object} ev
- */
-/**
- * @event transformstart
- * @param {Object} ev
- */
-/**
- * @event transformend
- * @param {Object} ev
- */
-/**
- * @event pinchin
- * @param {Object} ev
- */
-/**
- * @event pinchout
- * @param {Object} ev
- */
-/**
- * @event rotate
- * @param {Object} ev
- */
-
-/**
- * @param {String} name
- */
-(function(name) {
-    var triggered = false;
-
-    function transformGesture(ev, inst) {
-        switch(ev.eventType) {
-            case EVENT_START:
-                triggered = false;
-                break;
-
-            case EVENT_MOVE:
-                // at least multitouch
-                if(ev.touches.length < 2) {
-                    return;
-                }
-
-                var scaleThreshold = Math.abs(1 - ev.scale);
-                var rotationThreshold = Math.abs(ev.rotation);
-
-                // when the distance we moved is too small we skip this gesture
-                // or we can be already in dragging
-                if(scaleThreshold < inst.options.transformMinScale &&
-                    rotationThreshold < inst.options.transformMinRotation) {
-                    return;
-                }
-
-                // we are transforming!
-                Detection.current.name = name;
-
-                // first time, trigger dragstart event
-                if(!triggered) {
-                    inst.trigger(name + 'start', ev);
-                    triggered = true;
-                }
-
-                inst.trigger(name, ev); // basic transform event
-
-                // trigger rotate event
-                if(rotationThreshold > inst.options.transformMinRotation) {
-                    inst.trigger('rotate', ev);
-                }
-
-                // trigger pinch event
-                if(scaleThreshold > inst.options.transformMinScale) {
-                    inst.trigger('pinch', ev);
-                    inst.trigger('pinch' + (ev.scale < 1 ? 'in' : 'out'), ev);
-                }
-                break;
-
-            case EVENT_RELEASE:
-                if(triggered && ev.changedLength < 2) {
-                    inst.trigger(name + 'end', ev);
-                    triggered = false;
-                }
-                break;
-        }
-    }
-
-    Hammer.gestures.Transform = {
-        name: name,
-        index: 45,
-        defaults: {
-            /**
-             * minimal scale factor, no scale is 1, zoomin is to 0 and zoomout until higher then 1
-             * @property transformMinScale
-             * @type {Number}
-             * @default 0.01
-             */
-            transformMinScale: 0.01,
-
-            /**
-             * rotation in degrees
-             * @property transformMinRotation
-             * @type {Number}
-             * @default 1
-             */
-            transformMinRotation: 1
-        },
-
-        handler: transformGesture
-    };
-})('transform');
-
-/**
- * @module hammer
- */
-
-// AMD export
-if(typeof define == 'function' && define.amd) {
-    define(function() {
-        return Hammer;
-    });
-// commonjs export
-} else if(typeof module !== 'undefined' && module.exports) {
-    module.exports = Hammer;
-// browser export
-} else {
-    window.Hammer = Hammer;
-}
-
-})(window);
-/*! iScroll v5.0.6 ~ (c) 2008-2013 Matteo Spinelli ~ http://cubiq.org/license */
-var IScroll = (function (window, document, Math) {
-var rAF = window.requestAnimationFrame	||
-	window.webkitRequestAnimationFrame	||
-	window.mozRequestAnimationFrame		||
-	window.oRequestAnimationFrame		||
-	window.msRequestAnimationFrame		||
-	function (callback) { window.setTimeout(callback, 1000 / 60); };
-
-var utils = (function () {
-	var me = {};
-
-	var _elementStyle = document.createElement('div').style;
-	var _vendor = (function () {
-		var vendors = ['t', 'webkitT', 'MozT', 'msT', 'OT'],
-			transform,
-			i = 0,
-			l = vendors.length;
-
-		for ( ; i < l; i++ ) {
-			transform = vendors[i] + 'ransform';
-			if ( transform in _elementStyle ) return vendors[i].substr(0, vendors[i].length-1);
-		}
-
-		return false;
-	})();
-
-	function _prefixStyle (style) {
-		if ( _vendor === false ) return false;
-		if ( _vendor === '' ) return style;
-		return _vendor + style.charAt(0).toUpperCase() + style.substr(1);
-	}
-
-	me.getTime = Date.now || function getTime () { return new Date().getTime(); };
-
-	me.extend = function (target, obj) {
-		for ( var i in obj ) {
-			target[i] = obj[i];
-		}
-	};
-
-	me.addEvent = function (el, type, fn, capture) {
-		el.addEventListener(type, fn, !!capture);
-	};
-
-	me.removeEvent = function (el, type, fn, capture) {
-		el.removeEventListener(type, fn, !!capture);
-	};
-
-	me.momentum = function (current, start, time, lowerMargin, wrapperSize) {
-		var distance = current - start,
-			speed = Math.abs(distance) / time,
-			destination,
-			duration,
-			deceleration = 0.0006;
-
-		destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
-		duration = speed / deceleration;
-
-		if ( destination < lowerMargin ) {
-			destination = wrapperSize ? lowerMargin - ( wrapperSize / 2.5 * ( speed / 8 ) ) : lowerMargin;
-			distance = Math.abs(destination - current);
-			duration = distance / speed;
-		} else if ( destination > 0 ) {
-			destination = wrapperSize ? wrapperSize / 2.5 * ( speed / 8 ) : 0;
-			distance = Math.abs(current) + destination;
-			duration = distance / speed;
-		}
-
-		return {
-			destination: Math.round(destination),
-			duration: duration
-		};
-	};
-
-	var _transform = _prefixStyle('transform');
-
-	me.extend(me, {
-		hasTransform: _transform !== false,
-		hasPerspective: _prefixStyle('perspective') in _elementStyle,
-		hasTouch: 'ontouchstart' in window,
-		hasPointer: navigator.msPointerEnabled,
-		hasTransition: _prefixStyle('transition') in _elementStyle
-	});
-
-	me.isAndroidBrowser = /Android/.test(window.navigator.appVersion) && /Version\/\d/.test(window.navigator.appVersion);
-
-	me.extend(me.style = {}, {
-		transform: _transform,
-		transitionTimingFunction: _prefixStyle('transitionTimingFunction'),
-		transitionDuration: _prefixStyle('transitionDuration'),
-		transformOrigin: _prefixStyle('transformOrigin')
-	});
-
-	me.hasClass = function (e, c) {
-		var re = new RegExp("(^|\\s)" + c + "(\\s|$)");
-		return re.test(e.className);
-	};
-
-	me.addClass = function (e, c) {
-		if ( me.hasClass(e, c) ) {
-			return;
-		}
-
-		var newclass = e.className.split(' ');
-		newclass.push(c);
-		e.className = newclass.join(' ');
-	};
-
-	me.removeClass = function (e, c) {
-		if ( !me.hasClass(e, c) ) {
-			return;
-		}
-
-		var re = new RegExp("(^|\\s)" + c + "(\\s|$)", 'g');
-		e.className = e.className.replace(re, ' ');
-	};
-
-	me.offset = function (el) {
-		var left = -el.offsetLeft,
-			top = -el.offsetTop;
-
-		// jshint -W084
-		while (el = el.offsetParent) {
-			left -= el.offsetLeft;
-			top -= el.offsetTop;
-		}
-		// jshint +W084
-
-		return {
-			left: left,
-			top: top
-		};
-	};
-
-	me.preventDefaultException = function (el, exceptions) {
-		for ( var i in exceptions ) {
-			if ( exceptions[i].test(el[i]) ) {
-				return true;
-			}
-		}
-
-		return false;
-	};
-
-	me.extend(me.eventType = {}, {
-		touchstart: 1,
-		touchmove: 1,
-		touchend: 1,
-
-		mousedown: 2,
-		mousemove: 2,
-		mouseup: 2,
-
-		MSPointerDown: 3,
-		MSPointerMove: 3,
-		MSPointerUp: 3
-	});
-
-	me.extend(me.ease = {}, {
-		quadratic: {
-			style: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-			fn: function (k) {
-				return k * ( 2 - k );
-			}
-		},
-		circular: {
-			style: 'cubic-bezier(0.1, 0.57, 0.1, 1)',	// Not properly "circular" but this looks better, it should be (0.075, 0.82, 0.165, 1)
-			fn: function (k) {
-				return Math.sqrt( 1 - ( --k * k ) );
-			}
-		},
-		back: {
-			style: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-			fn: function (k) {
-				var b = 4;
-				return ( k = k - 1 ) * k * ( ( b + 1 ) * k + b ) + 1;
-			}
-		},
-		bounce: {
-			style: '',
-			fn: function (k) {
-				if ( ( k /= 1 ) < ( 1 / 2.75 ) ) {
-					return 7.5625 * k * k;
-				} else if ( k < ( 2 / 2.75 ) ) {
-					return 7.5625 * ( k -= ( 1.5 / 2.75 ) ) * k + 0.75;
-				} else if ( k < ( 2.5 / 2.75 ) ) {
-					return 7.5625 * ( k -= ( 2.25 / 2.75 ) ) * k + 0.9375;
-				} else {
-					return 7.5625 * ( k -= ( 2.625 / 2.75 ) ) * k + 0.984375;
-				}
-			}
-		},
-		elastic: {
-			style: '',
-			fn: function (k) {
-				var f = 0.22,
-					e = 0.4;
-
-				if ( k === 0 ) { return 0; }
-				if ( k == 1 ) { return 1; }
-
-				return ( e * Math.pow( 2, - 10 * k ) * Math.sin( ( k - f / 4 ) * ( 2 * Math.PI ) / f ) + 1 );
-			}
-		}
-	});
-
-	me.tap = function (e, eventName) {
-		var ev = document.createEvent('Event');
-		ev.initEvent(eventName, true, true);
-		ev.pageX = e.pageX;
-		ev.pageY = e.pageY;
-		e.target.dispatchEvent(ev);
-	};
-
-	me.click = function (e) {
-		var target = e.target,
-			ev;
-
-		if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA') {
-			ev = document.createEvent('MouseEvents');
-			ev.initMouseEvent('click', true, true, e.view, 1,
-				target.screenX, target.screenY, target.clientX, target.clientY,
-				e.ctrlKey, e.altKey, e.shiftKey, e.metaKey,
-				0, null);
-
-			ev._constructed = true;
-			target.dispatchEvent(ev);
-		}
-	};
-
-	return me;
-})();
-
-function IScroll (el, options) {
-	this.wrapper = typeof el == 'string' ? document.querySelector(el) : el;
-	this.scroller = this.wrapper.children[0];
-	this.scrollerStyle = this.scroller.style;		// cache style for better performance
-
-	this.options = {
-
-// INSERT POINT: OPTIONS 
-
-		startX: 0,
-		startY: 0,
-		scrollY: true,
-		directionLockThreshold: 5,
-		momentum: true,
-
-		bounce: true,
-		bounceTime: 600,
-		bounceEasing: '',
-
-		preventDefault: true,
-		preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/ },
-
-		HWCompositing: true,
-		useTransition: true,
-		useTransform: true
-	};
-
-	for ( var i in options ) {
-		this.options[i] = options[i];
-	}
-
-	// Normalize options
-	this.translateZ = this.options.HWCompositing && utils.hasPerspective ? ' translateZ(0)' : '';
-
-	this.options.useTransition = utils.hasTransition && this.options.useTransition;
-	this.options.useTransform = utils.hasTransform && this.options.useTransform;
-
-	this.options.eventPassthrough = this.options.eventPassthrough === true ? 'vertical' : this.options.eventPassthrough;
-	this.options.preventDefault = !this.options.eventPassthrough && this.options.preventDefault;
-
-	// If you want eventPassthrough I have to lock one of the axes
-	this.options.scrollY = this.options.eventPassthrough == 'vertical' ? false : this.options.scrollY;
-	this.options.scrollX = this.options.eventPassthrough == 'horizontal' ? false : this.options.scrollX;
-
-	// With eventPassthrough we also need lockDirection mechanism
-	this.options.freeScroll = this.options.freeScroll && !this.options.eventPassthrough;
-	this.options.directionLockThreshold = this.options.eventPassthrough ? 0 : this.options.directionLockThreshold;
-
-	this.options.bounceEasing = typeof this.options.bounceEasing == 'string' ? utils.ease[this.options.bounceEasing] || utils.ease.circular : this.options.bounceEasing;
-
-	this.options.resizePolling = this.options.resizePolling === undefined ? 60 : this.options.resizePolling;
-
-	if ( this.options.tap === true ) {
-		this.options.tap = 'tap';
-	}
-
-// INSERT POINT: NORMALIZATION
-
-	// Some defaults	
-	this.x = 0;
-	this.y = 0;
-	this.directionX = 0;
-	this.directionY = 0;
-	this._events = {};
-
-// INSERT POINT: DEFAULTS
-
-	this._init();
-	this.refresh();
-
-	this.scrollTo(this.options.startX, this.options.startY);
-	this.enable();
-}
-
-IScroll.prototype = {
-	version: '5.0.6',
-
-	_init: function () {
-		this._initEvents();
-
-// INSERT POINT: _init
-
-	},
-
-	destroy: function () {
-		this._initEvents(true);
-
-		this._execEvent('destroy');
-	},
-
-	_transitionEnd: function (e) {
-		if ( e.target != this.scroller ) {
-			return;
-		}
-
-		this._transitionTime(0);
-		if ( !this.resetPosition(this.options.bounceTime) ) {
-			this._execEvent('scrollEnd');
-		}
-	},
-
-	_start: function (e) {
-		// React to left mouse button only
-		if ( utils.eventType[e.type] != 1 ) {
-			if ( e.button !== 0 ) {
-				return;
-			}
-		}
-
-		if ( !this.enabled || (this.initiated && utils.eventType[e.type] !== this.initiated) ) {
-			return;
-		}
-
-		if ( this.options.preventDefault && !utils.isAndroidBrowser && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
-			e.preventDefault();		// This seems to break default Android browser
-		}
-
-		var point = e.touches ? e.touches[0] : e,
-			pos;
-
-		this.initiated	= utils.eventType[e.type];
-		this.moved		= false;
-		this.distX		= 0;
-		this.distY		= 0;
-		this.directionX = 0;
-		this.directionY = 0;
-		this.directionLocked = 0;
-
-		this._transitionTime();
-
-		this.isAnimating = false;
-		this.startTime = utils.getTime();
-
-		if ( this.options.useTransition && this.isInTransition ) {
-			pos = this.getComputedPosition();
-
-			this._translate(Math.round(pos.x), Math.round(pos.y));
-			this._execEvent('scrollEnd');
-			this.isInTransition = false;
-		}
-
-		this.startX    = this.x;
-		this.startY    = this.y;
-		this.absStartX = this.x;
-		this.absStartY = this.y;
-		this.pointX    = point.pageX;
-		this.pointY    = point.pageY;
-
-		this._execEvent('beforeScrollStart');
-	},
-
-	_move: function (e) {
-		if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
-			return;
-		}
-
-		if ( this.options.preventDefault ) {	// increases performance on Android? TODO: check!
-			e.preventDefault();
-		}
-
-		var point		= e.touches ? e.touches[0] : e,
-			deltaX		= point.pageX - this.pointX,
-			deltaY		= point.pageY - this.pointY,
-			timestamp	= utils.getTime(),
-			newX, newY,
-			absDistX, absDistY;
-
-		this.pointX		= point.pageX;
-		this.pointY		= point.pageY;
-
-		this.distX		+= deltaX;
-		this.distY		+= deltaY;
-		absDistX		= Math.abs(this.distX);
-		absDistY		= Math.abs(this.distY);
-
-		// We need to move at least 10 pixels for the scrolling to initiate
-		if ( timestamp - this.endTime > 300 && (absDistX < 10 && absDistY < 10) ) {
-			return;
-		}
-
-		// If you are scrolling in one direction lock the other
-		if ( !this.directionLocked && !this.options.freeScroll ) {
-			if ( absDistX > absDistY + this.options.directionLockThreshold ) {
-				this.directionLocked = 'h';		// lock horizontally
-			} else if ( absDistY >= absDistX + this.options.directionLockThreshold ) {
-				this.directionLocked = 'v';		// lock vertically
-			} else {
-				this.directionLocked = 'n';		// no lock
-			}
-		}
-
-		if ( this.directionLocked == 'h' ) {
-			if ( this.options.eventPassthrough == 'vertical' ) {
-				e.preventDefault();
-			} else if ( this.options.eventPassthrough == 'horizontal' ) {
-				this.initiated = false;
-				return;
-			}
-
-			deltaY = 0;
-		} else if ( this.directionLocked == 'v' ) {
-			if ( this.options.eventPassthrough == 'horizontal' ) {
-				e.preventDefault();
-			} else if ( this.options.eventPassthrough == 'vertical' ) {
-				this.initiated = false;
-				return;
-			}
-
-			deltaX = 0;
-		}
-
-		deltaX = this.hasHorizontalScroll ? deltaX : 0;
-		deltaY = this.hasVerticalScroll ? deltaY : 0;
-
-		newX = this.x + deltaX;
-		newY = this.y + deltaY;
-
-		// Slow down if outside of the boundaries
-		if ( newX > 0 || newX < this.maxScrollX ) {
-			newX = this.options.bounce ? this.x + deltaX / 3 : newX > 0 ? 0 : this.maxScrollX;
-		}
-		if ( newY > 0 || newY < this.maxScrollY ) {
-			newY = this.options.bounce ? this.y + deltaY / 3 : newY > 0 ? 0 : this.maxScrollY;
-		}
-
-		this.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
-		this.directionY = deltaY > 0 ? -1 : deltaY < 0 ? 1 : 0;
-
-		if ( !this.moved ) {
-			this._execEvent('scrollStart');
-		}
-
-		this.moved = true;
-
-		this._translate(newX, newY);
-
-/* REPLACE START: _move */
-
-		if ( timestamp - this.startTime > 300 ) {
-			this.startTime = timestamp;
-			this.startX = this.x;
-			this.startY = this.y;
-		}
-
-/* REPLACE END: _move */
-
-	},
-
-	_end: function (e) {
-		if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
-			return;
-		}
-
-		if ( this.options.preventDefault && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
-			e.preventDefault();
-		}
-
-		var point = e.changedTouches ? e.changedTouches[0] : e,
-			momentumX,
-			momentumY,
-			duration = utils.getTime() - this.startTime,
-			newX = Math.round(this.x),
-			newY = Math.round(this.y),
-			distanceX = Math.abs(newX - this.startX),
-			distanceY = Math.abs(newY - this.startY),
-			time = 0,
-			easing = '';
-
-		this.scrollTo(newX, newY);	// ensures that the last position is rounded
-
-		this.isInTransition = 0;
-		this.initiated = 0;
-		this.endTime = utils.getTime();
-
-		// reset if we are outside of the boundaries
-		if ( this.resetPosition(this.options.bounceTime) ) {
-			return;
-		}
-
-		// we scrolled less than 10 pixels
-		if ( !this.moved ) {
-			if ( this.options.tap ) {
-				utils.tap(e, this.options.tap);
-			}
-
-			if ( this.options.click ) {
-				utils.click(e);
-			}
-
-			return;
-		}
-
-		if ( this._events.flick && duration < 200 && distanceX < 100 && distanceY < 100 ) {
-			this._execEvent('flick');
-			return;
-		}
-
-		// start momentum animation if needed
-		if ( this.options.momentum && duration < 300 ) {
-			momentumX = this.hasHorizontalScroll ? utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0) : { destination: newX, duration: 0 };
-			momentumY = this.hasVerticalScroll ? utils.momentum(this.y, this.startY, duration, this.maxScrollY, this.options.bounce ? this.wrapperHeight : 0) : { destination: newY, duration: 0 };
-			newX = momentumX.destination;
-			newY = momentumY.destination;
-			time = Math.max(momentumX.duration, momentumY.duration);
-			this.isInTransition = 1;
-		}
-
-// INSERT POINT: _end
-
-		if ( newX != this.x || newY != this.y ) {
-			// change easing function when scroller goes out of the boundaries
-			if ( newX > 0 || newX < this.maxScrollX || newY > 0 || newY < this.maxScrollY ) {
-				easing = utils.ease.quadratic;
-			}
-
-			this.scrollTo(newX, newY, time, easing);
-			return;
-		}
-
-		this._execEvent('scrollEnd');
-	},
-
-	_resize: function () {
-		var that = this;
-
-		clearTimeout(this.resizeTimeout);
-
-		this.resizeTimeout = setTimeout(function () {
-			that.refresh();
-		}, this.options.resizePolling);
-	},
-
-	resetPosition: function (time) {
-		var x = this.x,
-			y = this.y;
-
-		time = time || 0;
-
-		if ( !this.hasHorizontalScroll || this.x > 0 ) {
-			x = 0;
-		} else if ( this.x < this.maxScrollX ) {
-			x = this.maxScrollX;
-		}
-
-		if ( !this.hasVerticalScroll || this.y > 0 ) {
-			y = 0;
-		} else if ( this.y < this.maxScrollY ) {
-			y = this.maxScrollY;
-		}
-
-		if ( x == this.x && y == this.y ) {
-			return false;
-		}
-
-		this.scrollTo(x, y, time, this.options.bounceEasing);
-
-		return true;
-	},
-
-	disable: function () {
-		this.enabled = false;
-	},
-
-	enable: function () {
-		this.enabled = true;
-	},
-
-	refresh: function () {
-		var rf = this.wrapper.offsetHeight;		// Force reflow
-
-		this.wrapperWidth	= this.wrapper.clientWidth;
-		this.wrapperHeight	= this.wrapper.clientHeight;
-
-/* REPLACE START: refresh */
-
-		this.scrollerWidth	= this.scroller.offsetWidth;
-		this.scrollerHeight	= this.scroller.offsetHeight;
-
-/* REPLACE END: refresh */
-
-		this.maxScrollX		= this.wrapperWidth - this.scrollerWidth;
-		this.maxScrollY		= this.wrapperHeight - this.scrollerHeight;
-
-		this.hasHorizontalScroll	= this.options.scrollX && this.maxScrollX < 0;
-		this.hasVerticalScroll		= this.options.scrollY && this.maxScrollY < 0;
-
-		if ( !this.hasHorizontalScroll ) {
-			this.maxScrollX = 0;
-			this.scrollerWidth = this.wrapperWidth;
-		}
-
-		if ( !this.hasVerticalScroll ) {
-			this.maxScrollY = 0;
-			this.scrollerHeight = this.wrapperHeight;
-		}
-
-		this.endTime = 0;
-		this.directionX = 0;
-		this.directionY = 0;
-
-		this.wrapperOffset = utils.offset(this.wrapper);
-
-		this._execEvent('refresh');
-
-		this.resetPosition();
-
-// INSERT POINT: _refresh
-
-	},
-
-	on: function (type, fn) {
-		if ( !this._events[type] ) {
-			this._events[type] = [];
-		}
-
-		this._events[type].push(fn);
-	},
-
-	_execEvent: function (type) {
-		if ( !this._events[type] ) {
-			return;
-		}
-
-		var i = 0,
-			l = this._events[type].length;
-
-		if ( !l ) {
-			return;
-		}
-
-		for ( ; i < l; i++ ) {
-			this._events[type][i].call(this);
-		}
-	},
-
-	scrollBy: function (x, y, time, easing) {
-		x = this.x + x;
-		y = this.y + y;
-		time = time || 0;
-
-		this.scrollTo(x, y, time, easing);
-	},
-
-	scrollTo: function (x, y, time, easing) {
-		easing = easing || utils.ease.circular;
-
-		if ( !time || (this.options.useTransition && easing.style) ) {
-			this._transitionTimingFunction(easing.style);
-			this._transitionTime(time);
-			this._translate(x, y);
-		} else {
-			this._animate(x, y, time, easing.fn);
-		}
-	},
-
-	scrollToElement: function (el, time, offsetX, offsetY, easing) {
-		el = el.nodeType ? el : this.scroller.querySelector(el);
-
-		if ( !el ) {
-			return;
-		}
-
-		var pos = utils.offset(el);
-
-		pos.left -= this.wrapperOffset.left;
-		pos.top  -= this.wrapperOffset.top;
-
-		// if offsetX/Y are true we center the element to the screen
-		if ( offsetX === true ) {
-			offsetX = Math.round(el.offsetWidth / 2 - this.wrapper.offsetWidth / 2);
-		}
-		if ( offsetY === true ) {
-			offsetY = Math.round(el.offsetHeight / 2 - this.wrapper.offsetHeight / 2);
-		}
-
-		pos.left -= offsetX || 0;
-		pos.top  -= offsetY || 0;
-
-		pos.left = pos.left > 0 ? 0 : pos.left < this.maxScrollX ? this.maxScrollX : pos.left;
-		pos.top  = pos.top  > 0 ? 0 : pos.top  < this.maxScrollY ? this.maxScrollY : pos.top;
-
-		time = time === undefined || time === null || time === 'auto' ? Math.max(Math.abs(this.x-pos.left), Math.abs(this.y-pos.top)) : time;
-
-		this.scrollTo(pos.left, pos.top, time, easing);
-	},
-
-	_transitionTime: function (time) {
-		time = time || 0;
-		this.scrollerStyle[utils.style.transitionDuration] = time + 'ms';
-
-// INSERT POINT: _transitionTime
-
-	},
-
-	_transitionTimingFunction: function (easing) {
-		this.scrollerStyle[utils.style.transitionTimingFunction] = easing;
-
-// INSERT POINT: _transitionTimingFunction
-
-	},
-
-	_translate: function (x, y) {
-		if ( this.options.useTransform ) {
-
-/* REPLACE START: _translate */
-
-			this.scrollerStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.translateZ;
-
-/* REPLACE END: _translate */
-
-		} else {
-			x = Math.round(x);
-			y = Math.round(y);
-			this.scrollerStyle.left = x + 'px';
-			this.scrollerStyle.top = y + 'px';
-		}
-
-		this.x = x;
-		this.y = y;
-
-// INSERT POINT: _translate
-
-	},
-
-	_initEvents: function (remove) {
-		var eventType = remove ? utils.removeEvent : utils.addEvent,
-			target = this.options.bindToWrapper ? this.wrapper : window;
-
-		eventType(window, 'orientationchange', this);
-		eventType(window, 'resize', this);
-
-		if ( this.options.click ) {
-			eventType(this.wrapper, 'click', this, true);
-		}
-
-		if ( !this.options.disableMouse ) {
-			eventType(this.wrapper, 'mousedown', this);
-			eventType(target, 'mousemove', this);
-			eventType(target, 'mousecancel', this);
-			eventType(target, 'mouseup', this);
-		}
-
-		if ( utils.hasPointer && !this.options.disablePointer ) {
-			eventType(this.wrapper, 'MSPointerDown', this);
-			eventType(target, 'MSPointerMove', this);
-			eventType(target, 'MSPointerCancel', this);
-			eventType(target, 'MSPointerUp', this);
-		}
-
-		if ( utils.hasTouch && !this.options.disableTouch ) {
-			eventType(this.wrapper, 'touchstart', this);
-			eventType(target, 'touchmove', this);
-			eventType(target, 'touchcancel', this);
-			eventType(target, 'touchend', this);
-		}
-
-		eventType(this.scroller, 'transitionend', this);
-		eventType(this.scroller, 'webkitTransitionEnd', this);
-		eventType(this.scroller, 'oTransitionEnd', this);
-		eventType(this.scroller, 'MSTransitionEnd', this);
-	},
-
-	getComputedPosition: function () {
-		var matrix = window.getComputedStyle(this.scroller, null),
-			x, y;
-
-		if ( this.options.useTransform ) {
-			matrix = matrix[utils.style.transform].split(')')[0].split(', ');
-			x = +(matrix[12] || matrix[4]);
-			y = +(matrix[13] || matrix[5]);
-		} else {
-			x = +matrix.left.replace(/[^-\d]/g, '');
-			y = +matrix.top.replace(/[^-\d]/g, '');
-		}
-
-		return { x: x, y: y };
-	},
-
-	_animate: function (destX, destY, duration, easingFn) {
-		var that = this,
-			startX = this.x,
-			startY = this.y,
-			startTime = utils.getTime(),
-			destTime = startTime + duration;
-
-		function step () {
-			var now = utils.getTime(),
-				newX, newY,
-				easing;
-
-			if ( now >= destTime ) {
-				that.isAnimating = false;
-				that._translate(destX, destY);
-
-				if ( !that.resetPosition(that.options.bounceTime) ) {
-					that._execEvent('scrollEnd');
-				}
-
-				return;
-			}
-
-			now = ( now - startTime ) / duration;
-			easing = easingFn(now);
-			newX = ( destX - startX ) * easing + startX;
-			newY = ( destY - startY ) * easing + startY;
-			that._translate(newX, newY);
-
-			if ( that.isAnimating ) {
-				rAF(step);
-			}
-		}
-
-		this.isAnimating = true;
-		step();
-	},
-	handleEvent: function (e) {
-		switch ( e.type ) {
-			case 'touchstart':
-			case 'MSPointerDown':
-			case 'mousedown':
-				this._start(e);
-				break;
-			case 'touchmove':
-			case 'MSPointerMove':
-			case 'mousemove':
-				this._move(e);
-				break;
-			case 'touchend':
-			case 'MSPointerUp':
-			case 'mouseup':
-			case 'touchcancel':
-			case 'MSPointerCancel':
-			case 'mousecancel':
-				this._end(e);
-				break;
-			case 'orientationchange':
-			case 'resize':
-				this._resize();
-				break;
-			case 'transitionend':
-			case 'webkitTransitionEnd':
-			case 'oTransitionEnd':
-			case 'MSTransitionEnd':
-				this._transitionEnd(e);
-				break;
-			case 'DOMMouseScroll':
-			case 'mousewheel':
-				this._wheel(e);
-				break;
-			case 'keydown':
-				this._key(e);
-				break;
-			case 'click':
-				if ( !e._constructed ) {
-					e.preventDefault();
-					e.stopPropagation();
-				}
-				break;
-		}
-	}
-};
-IScroll.ease = utils.ease;
-
-return IScroll;
-
-})(window, document, Math);
 /**
  * MicroEvent - to make any js object an event emitter (server or browser)
  * 
  * - pure javascript - server compatible, browser compatible
  * - dont rely on the browser doms
- * - super simple - you get it immediatly, no mistery, no magic involved
+ * - super simple - you get it immediately, no mystery, no magic involved
  *
  * - create a MicroEventDebug with goodies to debug
  *   - make it safer to use
@@ -4956,10 +2544,4395 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     window.Viewport = Viewport;
 })();
 
+'use strict';
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function (ons) {
+  'use strict';
+
+  var util = {
+    _ready: false,
+
+    _domContentLoaded: false,
+
+    _onDOMContentLoaded: function _onDOMContentLoaded() {
+      util._domContentLoaded = true;
+
+      if (ons.isWebView()) {
+        window.document.addEventListener('deviceready', function () {
+          util._ready = true;
+        }, false);
+      } else {
+        util._ready = true;
+      }
+    },
+
+    addBackButtonListener: function addBackButtonListener(fn) {
+      if (!this._domContentLoaded) {
+        throw new Error('This method is available after DOMContentLoaded');
+      }
+
+      if (this._ready) {
+        window.document.addEventListener('backbutton', fn, false);
+      } else {
+        window.document.addEventListener('deviceready', function () {
+          window.document.addEventListener('backbutton', fn, false);
+        });
+      }
+    },
+
+    removeBackButtonListener: function removeBackButtonListener(fn) {
+      if (!this._domContentLoaded) {
+        throw new Error('This method is available after DOMContentLoaded');
+      }
+
+      if (this._ready) {
+        window.document.removeEventListener('backbutton', fn, false);
+      } else {
+        window.document.addEventListener('deviceready', function () {
+          window.document.removeEventListener('backbutton', fn, false);
+        });
+      }
+    }
+  };
+  window.addEventListener('DOMContentLoaded', function () {
+    return util._onDOMContentLoaded();
+  }, false);
+
+  var HandlerRepository = {
+    _store: {},
+
+    _genId: function _genId() {
+      var i = 0;
+      return function () {
+        return i++;
+      };
+    },
+
+    set: function set(element, handler) {
+      if (element.dataset.deviceBackButtonHandlerId) {
+        this.remove(element);
+      }
+      var id = element.dataset.deviceBackButtonHandlerId = HandlerRepository._genId();
+      this._store[id] = handler;
+    },
+
+    remove: function remove(element) {
+      if (element.dataset.deviceBackButtonHandlerId) {
+        delete this._store[element.dataset.deviceBackButtonHandlerId];
+        delete element.dataset.deviceBackButtonHandlerId;
+      }
+    },
+
+    get: function get(element) {
+      var id = element.dataset.deviceBackButtonHandlerId;
+
+      if (!this._store[id]) {
+        throw new Error();
+      }
+
+      return this._store[id];
+    },
+
+    has: function has(element) {
+      var id = element.dataset.deviceBackButtonHandlerId;
+
+      return !!this._store[id];
+    }
+  };
+
+  var DevicebackButtonDispatcher = (function () {
+    function DevicebackButtonDispatcher() {
+      _classCallCheck(this, DevicebackButtonDispatcher);
+
+      this._isEnabled = false;
+      this._bindedCallback = this._callback.bind(this);
+    }
+
+    _createClass(DevicebackButtonDispatcher, [{
+      key: 'enable',
+
+      /**
+       * Enable to handle 'backbutton' events.
+       */
+      value: function enable() {
+        if (!this._isEnabled) {
+          util.addBackButtonListener(this._bindedCallback);
+          this._isEnabled = true;
+        }
+      }
+    }, {
+      key: 'disable',
+
+      /**
+       * Disable to handle 'backbutton' events.
+       */
+      value: function disable() {
+        if (this._isEnabled) {
+          util.removeBackButtonListener(this._bindedCallback);
+          this._isEnabled = false;
+        }
+      }
+    }, {
+      key: 'fireDeviceBackButtonEvent',
+
+      /**
+       * Fire a 'backbutton' event manually.
+       */
+      value: function fireDeviceBackButtonEvent() {
+        var event = document.createEvent('Event');
+        event.initEvent('backbutton', true, true);
+        document.dispatchEvent(event);
+      }
+    }, {
+      key: '_callback',
+      value: function _callback() {
+        this._dispatchDeviceBackButtonEvent();
+      }
+    }, {
+      key: 'createHandler',
+
+      /**
+       * @param {HTMLElement} element
+       * @param {Function} callback
+       */
+      value: function createHandler(element, callback) {
+        if (!(element instanceof HTMLElement)) {
+          throw new Error('element must be an instance of HTMLElement');
+        }
+
+        if (!(callback instanceof Function)) {
+          throw new Error('callback must be an instance of Function');
+        }
+
+        var handler = {
+          _callback: callback,
+          _element: element,
+
+          disable: function disable() {
+            HandlerRepository.remove(element);
+          },
+
+          setListener: function setListener(callback) {
+            this._callback = callback;
+          },
+
+          enable: function enable() {
+            HandlerRepository.set(element, this);
+          },
+
+          isEnabled: function isEnabled() {
+            return HandlerRepository.get(element) === this;
+          },
+
+          destroy: function destroy() {
+            HandlerRepository.remove(element);
+            this._callback = this._element = null;
+          }
+        };
+
+        handler.enable();
+
+        return handler;
+      }
+    }, {
+      key: '_dispatchDeviceBackButtonEvent',
+
+      /**
+       * @param {Object} event
+       */
+      value: function _dispatchDeviceBackButtonEvent(event) {
+        var tree = this._captureTree();
+        //this._dumpTree(tree);
+
+        var element = this._findHandlerLeafElement(tree);
+        //this._dumpParents(element);
+
+        var handler = HandlerRepository.get(element);
+        handler._callback(createEvent(element));
+
+        function createEvent(element) {
+          return {
+            _element: element,
+            callParentHandler: function callParentHandler() {
+              var parent = this._element.parentNode;
+              var hander = null;
+
+              while (parent) {
+                handler = HandlerRepository.get(parent);
+                if (handler) {
+                  return handler._callback(createEvent(parent));
+                }
+                parent = parent.parentNode;
+              }
+            }
+          };
+        }
+      }
+    }, {
+      key: '_dumpParents',
+      value: function _dumpParents(element) {
+        while (element) {
+          console.log(element.nodeName.toLowerCase() + '.' + element.getAttribute('class'));
+          element = element.parentNode;
+        }
+      }
+    }, {
+      key: '_captureTree',
+
+      /**
+       * @return {Object}
+       */
+      value: function _captureTree() {
+        return createTree(document.body);
+
+        function createTree(element) {
+          return {
+            element: element,
+            children: Array.prototype.concat.apply([], arrayOf(element.children).map(function (childElement) {
+
+              if (childElement.style.display === 'none') {
+                return [];
+              }
+
+              if (childElement.children.length === 0 && !HandlerRepository.has(childElement)) {
+                return [];
+              }
+
+              var result = createTree(childElement);
+
+              if (result.children.length === 0 && !HandlerRepository.has(result.element)) {
+                return [];
+              }
+
+              return [result];
+            }))
+          };
+        }
+
+        function arrayOf(target) {
+          var result = [];
+          for (var i = 0; i < target.length; i++) {
+            result.push(target[i]);
+          }
+          return result;
+        }
+      }
+    }, {
+      key: '_dumpTree',
+      value: function _dumpTree(node) {
+        _dump(node, 0);
+
+        function _dump(node, level) {
+          var pad = new Array(level + 1).join('  ');
+          console.log(pad + node.element.nodeName.toLowerCase());
+          node.children.forEach(function (node) {
+            _dump(node, level + 1);
+          });
+        }
+      }
+    }, {
+      key: '_findHandlerLeafElement',
+
+      /**
+       * @param {Object} tree
+       * @return {HTMLElement}
+       */
+      value: function _findHandlerLeafElement(tree) {
+        return find(tree);
+
+        function find(_x) {
+          var _again = true;
+
+          _function: while (_again) {
+            _again = false;
+            var node = _x;
+
+            if (node.children.length === 0) {
+              return node.element;
+            }
+
+            if (node.children.length === 1) {
+              _x = node.children[0];
+              _again = true;
+              continue _function;
+            }
+
+            return node.children.map(function (childNode) {
+              return childNode.element;
+            }).reduce(function (left, right) {
+              if (!left) {
+                return right;
+              }
+
+              var leftZ = parseInt(window.getComputedStyle(left, '').zIndex, 10);
+              var rightZ = parseInt(window.getComputedStyle(right, '').zIndex, 10);
+
+              if (!isNaN(leftZ) && !isNaN(rightZ)) {
+                return leftZ > rightZ ? left : right;
+              }
+
+              throw new Error('Capturing backbutton-handler is failure.');
+            }, null);
+          }
+        }
+      }
+    }]);
+
+    return DevicebackButtonDispatcher;
+  })();
+
+  ons._deviceBackButtonDispatcher = new DevicebackButtonDispatcher();
+
+  window.addEventListener('DOMContentLoaded', function () {
+    ons._deviceBackButtonDispatcher.enable();
+  });
+})(window.ons = window.ons || {});
+'use strict';
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+window.DoorLock = (function () {
+  'use strict';
+
+  var generateId = (function () {
+    var i = 0;
+    return function () {
+      return i++;
+    };
+  })();
+
+  /**
+   * Door locking system.
+   *
+   * @param {Object} [options]
+   * @param {Function} [options.log]
+   */
+
+  var DoorLock = (function () {
+    function DoorLock(options) {
+      _classCallCheck(this, DoorLock);
+
+      options = options || {};
+      this._lockList = [];
+      this._waitList = [];
+      this._log = options.log || function () {};
+    }
+
+    _createClass(DoorLock, [{
+      key: 'lock',
+
+      /**
+       * Register a lock.
+       *
+       * @return {Function} Callback for unlocking.
+       */
+      value: function lock() {
+        var self = this;
+        var unlock = (function (_unlock) {
+          function unlock() {
+            return _unlock.apply(this, arguments);
+          }
+
+          unlock.toString = function () {
+            return _unlock.toString();
+          };
+
+          return unlock;
+        })(function () {
+          self._unlock(unlock);
+        });
+        unlock.id = generateId();
+        this._lockList.push(unlock);
+        this._log('lock: ' + unlock.id);
+
+        return unlock;
+      }
+    }, {
+      key: '_unlock',
+      value: function _unlock(fn) {
+        var index = this._lockList.indexOf(fn);
+        if (index === -1) {
+          throw new Error('This function is not registered in the lock list.');
+        }
+
+        this._lockList.splice(index, 1);
+        this._log('unlock: ' + fn.id);
+
+        this._tryToFreeWaitList();
+      }
+    }, {
+      key: '_tryToFreeWaitList',
+      value: function _tryToFreeWaitList() {
+        while (!this.isLocked() && this._waitList.length > 0) {
+          this._waitList.shift()();
+        }
+      }
+    }, {
+      key: 'waitUnlock',
+
+      /**
+       * Register a callback for waiting unlocked door.
+       *
+       * @params {Function} callback Callback on unlocking the door completely.
+       */
+      value: function waitUnlock(callback) {
+        if (!(callback instanceof Function)) {
+          throw new Error('The callback param must be a function.');
+        }
+
+        if (this.isLocked()) {
+          this._waitList.push(callback);
+        } else {
+          callback();
+        }
+      }
+    }, {
+      key: 'isLocked',
+
+      /**
+       * @return {Boolean}
+       */
+      value: function isLocked() {
+        return this._lockList.length > 0;
+      }
+    }]);
+
+    return DoorLock;
+  })();
+
+  return DoorLock;
+})();
+'use strict';
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+window.ModifierUtil = (function () {
+  'use strict';
+
+  var ModifierUtil = (function () {
+    function ModifierUtil() {
+      _classCallCheck(this, ModifierUtil);
+    }
+
+    _createClass(ModifierUtil, null, [{
+      key: 'diff',
+
+      /**
+       * @param {String} last
+       * @param {String} current
+       */
+      value: function diff(last, current) {
+        last = makeDict(('' + last).trim());
+        current = makeDict(('' + current).trim());
+
+        var added = [];
+        var removed = [];
+
+        var removed = Object.keys(last).reduce(function (result, token) {
+          if (!current[token]) {
+            result.push(token);
+          }
+          return result;
+        }, []);
+
+        var added = Object.keys(current).reduce(function (result, token) {
+          if (!last[token]) {
+            result.push(token);
+          }
+          return result;
+        }, []);
+
+        return { added: added, removed: removed };
+
+        function makeDict(modifier) {
+          var dict = {};
+          ModifierUtil.split(modifier).forEach(function (token) {
+            return dict[token] = token;
+          });
+          return dict;
+        }
+      }
+    }, {
+      key: 'applyDiffToClassList',
+
+      /**
+       * @param {Object} diff
+       * @param {Object} classList
+       * @param {String} template
+       */
+      value: function applyDiffToClassList(diff, classList, template) {
+        diff.added.map(function (modifier) {
+          return template.replace(/\*/g, modifier);
+        }).forEach(function (klass) {
+          return classList.add(klass);
+        });
+
+        diff.removed.map(function (modifier) {
+          return template.replace(/\*/g, modifier);
+        }).forEach(function (klass) {
+          return classList.remove(klass);
+        });
+      }
+    }, {
+      key: 'applyDiffToElement',
+
+      /**
+       * @param {Object} diff
+       * @param {HTMLElement} element
+       * @param {Object} scheme
+       */
+      value: function applyDiffToElement(diff, element, scheme) {
+        var _loop = function (selector) {
+          var targetElements = selector === '' ? [element] : element.querySelectorAll(selector);
+          targetElements.forEach(function (targetElement) {
+            ModifierUtil.applyDiffToClassList(diff, targetElement.classList, scheme[selector]);
+          });
+        };
+
+        for (var selector in scheme) {
+          _loop(selector);
+        }
+      }
+    }, {
+      key: 'onModifierChanged',
+
+      /**
+       * @param {String} last
+       * @param {String} current
+       * @param {HTMLElement} element
+       * @param {Object} scheme
+       */
+      value: function onModifierChanged(last, current, element, scheme) {
+        return ModifierUtil.applyDiffToElement(ModifierUtil.diff(last, current), element, scheme);
+      }
+    }, {
+      key: 'initModifier',
+
+      /**
+       * @param {HTMLElement} element
+       * @param {Object} scheme
+       */
+      value: function initModifier(element, scheme) {
+        var modifier = element.getAttribute('modifier');
+        if (typeof modifier !== 'string') {
+          return;
+        }
+
+        return ModifierUtil.applyDiffToElement({
+          removed: [],
+          added: ModifierUtil.split(modifier)
+        }, element, scheme);
+      }
+    }, {
+      key: 'split',
+      value: function split(modifier) {
+        if (typeof modifier !== 'string') {
+          return [];
+        }
+
+        return modifier.trim().split(/ +/).filter(function (token) {
+          return token !== '';
+        });
+      }
+    }]);
+
+    return ModifierUtil;
+  })();
+
+  return ModifierUtil;
+})();
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+'use strict';
+
+(function (ons) {
+  'use strict';
+
+  ons._readyLock = new DoorLock();
+  ons._config = { autoStatusBarFill: true };
+
+  waitDeviceReady();
+
+  /**
+   * @return {Boolean}
+   */
+  ons.isReady = function () {
+    return !ons._readyLock.isLocked();
+  };
+
+  /**
+   * @return {Boolean}
+   */
+  ons.isWebView = function () {
+    if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
+      throw new Error('isWebView() method is available after dom contents loaded.');
+    }
+
+    return !!(window.cordova || window.phonegap || window.PhoneGap);
+  };
+
+  /**
+   * @param {Function} callback
+   */
+  ons.ready = function (callback) {
+    if (ons.isReady()) {
+      callback();
+    } else {
+      ons._readyLock.waitUnlock(callback);
+    }
+  };
+
+  /**
+   * Enable status bar fill feature on iOS7 and above.
+   */
+  ons.enableAutoStatusBarFill = function () {
+    if (undefined.isReady()) {
+      throw new Error('This method must be called before ons.isReady() is true.');
+    }
+    undefined._config.autoStatusBarFill = true;
+  };
+
+  /**
+   * Disable status bar fill feature on iOS7 and above.
+   */
+  ons.disableAutoStatusBarFill = function () {
+    if (undefined.isReady()) {
+      throw new Error('This method must be called before ons.isReady() is true.');
+    }
+    undefined._config.autoStatusBarFill = false;
+  };
+
+  function waitDeviceReady() {
+    var unlockDeviceReady = ons._readyLock.lock();
+    window.addEventListener('DOMContentLoaded', function () {
+      if (ons.isWebView()) {
+        window.document.addEventListener('deviceready', unlockDeviceReady, false);
+      } else {
+        unlockDeviceReady();
+      }
+    }, false);
+  }
+})(window.ons = window.ons || {});
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+'use strict';
+
+(function (ons) {
+  ons.orientation = create()._init();
+
+  function create() {
+    var obj = {
+      // actual implementation to detect if whether current screen is portrait or not
+      _isPortrait: false,
+
+      /**
+       * @return {Boolean}
+       */
+      isPortrait: function isPortrait() {
+        return this._isPortrait();
+      },
+
+      /**
+       * @return {Boolean}
+       */
+      isLandscape: function isLandscape() {
+        return !this.isPortrait();
+      },
+
+      _init: function _init() {
+        document.addEventListener('DOMContentLoaded', this._onDOMContentLoaded.bind(this), false);
+
+        if ('orientation' in window) {
+          window.addEventListener('orientationchange', this._onOrientationChange.bind(this), false);
+        } else {
+          window.addEventListener('resize', this._onResize.bind(this), false);
+        }
+
+        this._isPortrait = function () {
+          return window.innerHeight > window.innerWidth;
+        };
+
+        return this;
+      },
+
+      _onDOMContentLoaded: function _onDOMContentLoaded() {
+        this._installIsPortraitImplementation();
+        this.emit('change', { isPortrait: this.isPortrait() });
+      },
+
+      _installIsPortraitImplementation: function _installIsPortraitImplementation() {
+        var isPortrait = window.innerWidth < window.innerHeight;
+
+        if (!('orientation' in window)) {
+          this._isPortrait = function () {
+            return window.innerHeight > window.innerWidth;
+          };
+        } else if (window.orientation % 180 === 0) {
+          this._isPortrait = function () {
+            return Math.abs(window.orientation % 180) === 0 ? isPortrait : !isPortrait;
+          };
+        } else {
+          this._isPortrait = function () {
+            return Math.abs(window.orientation % 180) === 90 ? isPortrait : !isPortrait;
+          };
+        }
+      },
+
+      _onOrientationChange: function _onOrientationChange() {
+        var isPortrait = this._isPortrait();
+
+        // Wait for the dimensions to change because
+        // of Android inconsistency.
+        var nIter = 0;
+        var interval = setInterval((function () {
+          nIter++;
+
+          var w = window.innerWidth,
+              h = window.innerHeight;
+
+          if (isPortrait && w <= h || !isPortrait && w >= h) {
+            this.emit('change', { isPortrait: isPortrait });
+            clearInterval(interval);
+          } else if (nIter === 50) {
+            this.emit('change', { isPortrait: isPortrait });
+            clearInterval(interval);
+          }
+        }).bind(this), 20);
+      },
+
+      // Run on not mobile browser.
+      _onResize: function _onResize() {
+        this.emit('change', { isPortrait: this.isPortrait() });
+      }
+    };
+
+    MicroEvent.mixin(obj);
+
+    return obj;
+  }
+})(window.ons = window.ons || {});
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+'use strict';
+
+(function (ons) {
+  'use strict';
+
+  ons.platform = {
+
+    /**
+     * @return {Boolean}
+     */
+    isWebView: function isWebView() {
+      return ons.isWebView();
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isIOS: function isIOS() {
+      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isAndroid: function isAndroid() {
+      return /Android/i.test(navigator.userAgent);
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isIPhone: function isIPhone() {
+      return /iPhone/i.test(navigator.userAgent);
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isIPad: function isIPad() {
+      return /iPad/i.test(navigator.userAgent);
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isBlackBerry: function isBlackBerry() {
+      return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isOpera: function isOpera() {
+      return !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isFirefox: function isFirefox() {
+      return typeof InstallTrigger !== 'undefined';
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isSafari: function isSafari() {
+      return Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isChrome: function isChrome() {
+      return !!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isIE: function isIE() {
+      return false || !!document.documentMode;
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isIOS7above: function isIOS7above() {
+      if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        var ver = (navigator.userAgent.match(/\b[0-9]+_[0-9]+(?:_[0-9]+)?\b/) || [''])[0].replace(/_/g, '.');
+        return parseInt(ver.split('.')[0]) >= 7;
+      }
+      return false;
+    }
+  };
+})(window.ons = window.ons || {});
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+'use strict';
+
+(function (ons) {
+  'use strict';
+
+  ons.softwareKeyboard = new MicroEvent();
+  ons.softwareKeyboard._visible = false;
+
+  var onShow = function onShow() {
+    ons.softwareKeyboard._visible = true;
+    ons.softwareKeyboard.emit('show');
+  };
+
+  var onHide = function onHide() {
+    ons.softwareKeyboard._visible = false;
+    ons.softwareKeyboard.emit('hide');
+  };
+
+  var bindEvents = function bindEvents() {
+    if (typeof Keyboard !== 'undefined') {
+      // https://github.com/martinmose/cordova-keyboard/blob/95f3da3a38d8f8e1fa41fbf40145352c13535a00/README.md
+      Keyboard.onshow = onShow;
+      Keyboard.onhide = onHide;
+      ons.softwareKeyboard.emit('init', { visible: Keyboard.isVisible });
+
+      return true;
+    } else if (typeof cordova.plugins !== 'undefined' && typeof cordova.plugins.Keyboard !== 'undefined') {
+      // https://github.com/driftyco/ionic-plugins-keyboard/blob/ca27ecf/README.md
+      window.addEventListener('native.keyboardshow', onShow);
+      window.addEventListener('native.keyboardhide', onHide);
+      ons.softwareKeyboard.emit('init', { visible: cordova.plugins.Keyboard.isVisible });
+
+      return true;
+    }
+
+    return false;
+  };
+
+  var noPluginError = function noPluginError() {
+    console.warn('ons-keyboard: Cordova Keyboard plugin is not present.');
+  };
+
+  document.addEventListener('deviceready', function () {
+    if (!bindEvents()) {
+      if (document.querySelector('[ons-keyboard-active]') || document.querySelector('[ons-keyboard-inactive]')) {
+        noPluginError();
+      }
+
+      ons.softwareKeyboard.on = noPluginError;
+    }
+  });
+})(window.ons = window.ons || {});
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+
+/**
+ * Minimal animation library for managing css transition on mobile browsers.
+ */
+window.animit = (function(){
+  'use strict';
+
+  /**
+   * @param {HTMLElement} element
+   */
+  var Animit = function(element) {
+    if (!(this instanceof Animit)) {
+      return new Animit(element);
+    }
+
+    if (element instanceof HTMLElement) {
+      this.elements = [element];
+    } else if (Object.prototype.toString.call(element) === '[object Array]') {
+      this.elements = element;
+    } else {
+      throw new Error('First argument must be an array or an instance of HTMLElement.');
+    }
+
+    this.transitionQueue = [];
+    this.lastStyleAttributeDict = [];
+
+    var self = this;
+    this.elements.forEach(function(element, index) {
+      if (!element.hasAttribute('data-animit-orig-style')) {
+        self.lastStyleAttributeDict[index] = element.getAttribute('style');
+        element.setAttribute('data-animit-orig-style', self.lastStyleAttributeDict[index] || '');
+      } else {
+        self.lastStyleAttributeDict[index] = element.getAttribute('data-animit-orig-style');
+      }
+    });
+  };
+
+  Animit.prototype = {
+
+    /**
+     * @property {Array}
+     */
+    transitionQueue: undefined,
+
+    /**
+     * @property {HTMLElement}
+     */
+    element: undefined,
+
+    /**
+     * Start animation sequence with passed animations.
+     *
+     * @param {Function} callback
+     */
+    play: function(callback) {
+      if (typeof callback === 'function') {
+        this.transitionQueue.push(function(done) {
+          callback();
+          done();
+        });
+      }
+
+      this.startAnimation();
+
+      return this;
+    },
+
+    /**
+     * Queue transition animations or other function.
+     *
+     * e.g. animit(elt).queue({color: 'red'})
+     * e.g. animit(elt).queue({color: 'red'}, {duration: 0.4})
+     * e.g. animit(elt).queue({css: {color: 'red'}, duration: 0.2})
+     *
+     * @param {Object|Animit.Transition|Function} transition
+     * @param {Object} [options]
+     */
+    queue: function(transition, options) {
+      var queue = this.transitionQueue;
+
+      if (transition && options) {
+        options.css = transition;
+        transition = new Animit.Transition(options);
+      }
+
+      if (!(transition instanceof Function || transition instanceof Animit.Transition)) {
+        if (transition.css) {
+          transition = new Animit.Transition(transition);
+        } else {
+          transition = new Animit.Transition({
+            css: transition
+          });
+        }
+      }
+
+      if (transition instanceof Function) {
+        queue.push(transition);
+      } else if (transition instanceof Animit.Transition) {
+        queue.push(transition.build());
+      } else {
+        throw new Error('Invalid arguments');
+      }
+
+      return this;
+    },
+
+    /**
+     * Queue transition animations.
+     *
+     * @param {Float} seconds
+     */
+    wait: function(seconds) {
+      var self = this;
+      this.transitionQueue.push(function(done) {
+        setTimeout(done, 1000 * seconds);
+      });
+
+      return this;
+    },
+
+    /**
+     * Reset element's style.
+     *
+     * @param {Object} [options]
+     * @param {Float} [options.duration]
+     * @param {String} [options.timing]
+     * @param {String} [options.transition]
+     */
+    resetStyle: function(options) {
+      options = options || {};
+      var self = this;
+
+      if (options.transition && !options.duration) {
+        throw new Error('"options.duration" is required when "options.transition" is enabled.');
+      }
+
+      if (options.transition || (options.duration && options.duration > 0)) {
+        var transitionValue = options.transition || ('all ' + options.duration + 's ' + (options.timing || 'linear'));
+        var transitionStyle = 'transition: ' + transitionValue + '; -' + Animit.prefix + '-transition: ' + transitionValue + ';';
+
+        this.transitionQueue.push(function(done) {
+          var elements = this.elements;
+
+          // transition and style settings
+          elements.forEach(function(element, index) {
+            element.style[Animit.prefix + 'Transition'] = transitionValue;
+            element.style.transition = transitionValue;
+
+            var styleValue = (self.lastStyleAttributeDict[index] ? self.lastStyleAttributeDict[index] + '; ' : '') + transitionStyle;
+            element.setAttribute('style', styleValue);
+          });
+
+          // add "transitionend" event handler
+          var removeListeners = util.addOnTransitionEnd(elements[0], function() {
+            clearTimeout(timeoutId);
+            reset();
+            done();
+          });
+
+          // for fail safe.
+          var timeoutId = setTimeout(function() {
+            removeListeners();
+            reset();
+            done();
+          }, options.duration * 1000 * 1.4);
+        });
+      } else {
+        this.transitionQueue.push(function(done) {
+          reset();
+          done();
+        });
+      }
+
+      return this;
+
+      function reset() {
+        // Clear transition animation settings.
+        self.elements.forEach(function(element, index) {
+          element.style[Animit.prefix + 'Transition'] = 'none';
+          element.style.transition = 'none';
+
+          if (self.lastStyleAttributeDict[index]) {
+            element.setAttribute('style', self.lastStyleAttributeDict[index]);
+          } else {
+            element.setAttribute('style', '');
+            element.removeAttribute('style');
+          }
+        });
+      }
+    },
+
+    /**
+     * Start animation sequence.
+     */
+    startAnimation: function() {
+      this._dequeueTransition();
+
+      return this;
+    },
+
+    _dequeueTransition: function() {
+      var transition = this.transitionQueue.shift();
+      if (this._currentTransition) {
+        throw new Error('Current transition exists.');
+      }
+      this._currentTransition = transition;
+      var self = this;
+      var called = false;
+
+      var done = function() {
+        if (!called) {
+          called = true;
+          self._currentTransition = undefined;
+          self._dequeueTransition();
+        } else {
+          throw new Error('Invalid state: This callback is called twice.');
+        }
+      };
+
+      if (transition) {
+        transition.call(this, done);
+      }
+    }
+
+  };
+
+  Animit.cssPropertyDict = (function() {
+    var styles = window.getComputedStyle(document.documentElement, '');
+    var dict = {};
+    var a = 'A'.charCodeAt(0);
+    var z = 'z'.charCodeAt(0);
+
+    for (var key in styles) {
+      if (styles.hasOwnProperty(key)) {
+        var char = key.charCodeAt(0);
+        if (a <= key.charCodeAt(0) && z >= key.charCodeAt(0)) {
+          if (key !== 'cssText' && key !== 'parentText' && key !== 'length') {
+            dict[key] = true;
+          }
+        }
+      }
+    }
+
+    return dict;
+  })();
+
+  Animit.hasCssProperty = function(name) {
+    return !!Animit.cssPropertyDict[name];
+  };
+
+  /**
+   * Vendor prefix for css property.
+   */
+  Animit.prefix = (function() {
+    var styles = window.getComputedStyle(document.documentElement, ''),
+      pre = (Array.prototype.slice
+        .call(styles)
+        .join('') 
+        .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+      )[1];
+    return pre;
+  })();
+
+  /**
+   * @param {Animit} arguments
+   */
+  Animit.runAll = function(/* arguments... */) {
+    for (var i = 0; i < arguments.length; i++) {
+      arguments[i].play();
+    }
+  };
+
+
+  /**
+   * @param {Object} options
+   * @param {Float} [options.duration]
+   * @param {String} [options.property]
+   * @param {String} [options.timing]
+   */
+  Animit.Transition = function(options) {
+    this.options = options || {};
+    this.options.duration = this.options.duration || 0;
+    this.options.timing = this.options.timing || 'linear';
+    this.options.css = this.options.css || {};
+    this.options.property = this.options.property || 'all';
+  };
+
+  Animit.Transition.prototype = {
+
+    /**
+     * @param {HTMLElement} element
+     * @return {Function}
+     */
+    build: function() {
+
+      if (Object.keys(this.options.css).length === 0) {
+        throw new Error('options.css is required.');
+      }
+
+      var css = createActualCssProps(this.options.css);
+
+      if (this.options.duration > 0) {
+        var transitionValue = util.buildTransitionValue(this.options);
+        var self = this;
+
+        return function(callback) {
+          var elements = this.elements;
+          var timeout = self.options.duration * 1000 * 1.4;
+
+          var removeListeners = util.addOnTransitionEnd(elements[0], function() {
+            clearTimeout(timeoutId);
+            callback();
+          });
+
+          var timeoutId = setTimeout(function() {
+            removeListeners();
+            callback();
+          }, timeout);
+
+          elements.forEach(function(element, index) {
+            element.style[Animit.prefix + 'Transition'] = transitionValue;
+            element.style.transition = transitionValue;
+
+            Object.keys(css).forEach(function(name) {
+              element.style[name] = css[name];
+            });
+          });
+
+        };
+      }
+
+      if (this.options.duration <= 0) {
+        return function(callback) {
+          var elements = this.elements;
+
+          elements.forEach(function(element, index) {
+            element.style[Animit.prefix + 'Transition'] = 'none';
+            element.transition = 'none';
+
+            Object.keys(css).forEach(function(name) {
+              element.style[name] = css[name];
+            });
+          });
+
+          if (elements.length) {
+            elements[0].offsetHeight;
+          }
+
+          if (window.requestAnimationFrame) {
+            requestAnimationFrame(callback);
+          } else {
+            setTimeout(callback, 1000 / 30);
+          }
+        };
+      }
+
+      function createActualCssProps(css) {
+        var result = {};
+
+        Object.keys(css).forEach(function(name) {
+          var value = css[name];
+          name = util.normalizeStyleName(name);
+          var prefixed = Animit.prefix + util.capitalize(name);
+
+          if (Animit.cssPropertyDict[name]) {
+            result[name] = value;
+          } else if (Animit.cssPropertyDict[prefixed]) {
+            result[prefixed] = value;
+          } else {
+            result[prefixed] = value;
+            result[name] = value;
+          }
+        });
+
+        return result;
+      }
+
+    }
+  };
+
+  var util = {
+    /**
+     * Normalize style property name.
+     */
+    normalizeStyleName: function(name) {
+      name = name.replace(/-[a-zA-Z]/g, function(all) {
+        return all.slice(1).toUpperCase();
+      });
+
+      return name.charAt(0).toLowerCase() + name.slice(1);
+    },
+
+    // capitalize string
+    capitalize : function(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    },
+
+    /**
+     * @param {Object} params
+     * @param {String} params.property
+     * @param {Float} params.duration
+     * @param {String} params.timing
+     */
+    buildTransitionValue: function(params) {
+      params.property = params.property || 'all';
+      params.duration = params.duration || 0.4;
+      params.timing = params.timing || 'linear';
+
+      var props = params.property.split(/ +/);
+
+      return props.map(function(prop) {
+        return prop + ' ' + params.duration + 's ' + params.timing;
+      }).join(', ');
+    },
+
+    /**
+     * Add an event handler on "transitionend" event.
+     */
+    addOnTransitionEnd: function(element, callback) {
+      if (!element) {
+        return function() {};
+      }
+
+      var fn = function(event) {
+        if (element == event.target) {
+          event.stopPropagation();
+          removeListeners();
+
+          callback();
+        }
+      };
+
+      var removeListeners = function() {
+        util._transitionEndEvents.forEach(function(eventName) {
+          element.removeEventListener(eventName, fn);
+        });
+      };
+
+      util._transitionEndEvents.forEach(function(eventName) {
+        element.addEventListener(eventName, fn, false);
+      });
+
+      return removeListeners;
+    },
+
+    _transitionEndEvents: (function() {
+      if (Animit.prefix === 'webkit' || Animit.prefix === 'o' || Animit.prefix === 'moz' || Animit.prefix === 'ms') {
+        return [Animit.prefix + 'TransitionEnd', 'transitionend'];
+      }
+
+      return ['transitionend'];
+    })()
+
+  };
+
+  return Animit;
+})();
+
+/*
+ * Gesture detector library that forked from github.com/EightMedia/hammer.js.
+ */
+
+(function(window) {
+  'use strict';
+
+/**
+ * @param {HTMLElement} element
+ * @param {Object} [options={}]
+ * @return {GestureDetector.Instance}
+ */
+var GestureDetector = function GestureDetector(element, options) {
+  return new GestureDetector.Instance(element, options || {});
+};
+
+/**
+ * default settings.
+ * more settings are defined per gesture at `/gestures`. Each gesture can be disabled/enabled
+ * by setting it's name (like `swipe`) to false.
+ * You can set the defaults for all instances by changing this object before creating an instance.
+ * @example
+ * ````
+ *  GestureDetector.defaults.drag = false;
+ *  GestureDetector.defaults.behavior.touchAction = 'pan-y';
+ *  delete GestureDetector.defaults.behavior.userSelect;
+ * ````
+ * @property defaults
+ * @type {Object}
+ */
+GestureDetector.defaults = {
+  behavior: {
+    userSelect: 'none',
+    touchAction: 'pan-y',
+    touchCallout: 'none',
+    contentZooming: 'none',
+    userDrag: 'none',
+    tapHighlightColor: 'rgba(0,0,0,0)'
+  }
+};
+
+/**
+ * GestureDetector document where the base events are added at
+ * @property DOCUMENT
+ * @type {HTMLElement}
+ * @default window.document
+ */
+GestureDetector.DOCUMENT = document;
+
+/**
+ * detect support for pointer events
+ * @property HAS_POINTEREVENTS
+ * @type {Boolean}
+ */
+GestureDetector.HAS_POINTEREVENTS = navigator.pointerEnabled || navigator.msPointerEnabled;
+
+/**
+ * detect support for touch events
+ * @property HAS_TOUCHEVENTS
+ * @type {Boolean}
+ */
+GestureDetector.HAS_TOUCHEVENTS = ('ontouchstart' in window);
+
+/**
+ * detect mobile browsers
+ * @property IS_MOBILE
+ * @type {Boolean}
+ */
+GestureDetector.IS_MOBILE = /mobile|tablet|ip(ad|hone|od)|android|silk/i.test(navigator.userAgent);
+
+/**
+ * detect if we want to support mouseevents at all
+ * @property NO_MOUSEEVENTS
+ * @type {Boolean}
+ */
+GestureDetector.NO_MOUSEEVENTS = (GestureDetector.HAS_TOUCHEVENTS && GestureDetector.IS_MOBILE) || GestureDetector.HAS_POINTEREVENTS;
+
+/**
+ * interval in which GestureDetector recalculates current velocity/direction/angle in ms
+ * @property CALCULATE_INTERVAL
+ * @type {Number}
+ * @default 25
+ */
+GestureDetector.CALCULATE_INTERVAL = 25;
+
+/**
+ * eventtypes per touchevent (start, move, end) are filled by `Event.determineEventTypes` on `setup`
+ * the object contains the DOM event names per type (`EVENT_START`, `EVENT_MOVE`, `EVENT_END`)
+ * @property EVENT_TYPES
+ * @private
+ * @writeOnce
+ * @type {Object}
+ */
+var EVENT_TYPES = {};
+
+/**
+ * direction strings, for safe comparisons
+ * @property DIRECTION_DOWN|LEFT|UP|RIGHT
+ * @final
+ * @type {String}
+ * @default 'down' 'left' 'up' 'right'
+ */
+var DIRECTION_DOWN = GestureDetector.DIRECTION_DOWN = 'down';
+var DIRECTION_LEFT = GestureDetector.DIRECTION_LEFT = 'left';
+var DIRECTION_UP = GestureDetector.DIRECTION_UP = 'up';
+var DIRECTION_RIGHT = GestureDetector.DIRECTION_RIGHT = 'right';
+
+/**
+ * pointertype strings, for safe comparisons
+ * @property POINTER_MOUSE|TOUCH|PEN
+ * @final
+ * @type {String}
+ * @default 'mouse' 'touch' 'pen'
+ */
+var POINTER_MOUSE = GestureDetector.POINTER_MOUSE = 'mouse';
+var POINTER_TOUCH = GestureDetector.POINTER_TOUCH = 'touch';
+var POINTER_PEN = GestureDetector.POINTER_PEN = 'pen';
+
+/**
+ * eventtypes
+ * @property EVENT_START|MOVE|END|RELEASE|TOUCH
+ * @final
+ * @type {String}
+ * @default 'start' 'change' 'move' 'end' 'release' 'touch'
+ */
+var EVENT_START = GestureDetector.EVENT_START = 'start';
+var EVENT_MOVE = GestureDetector.EVENT_MOVE = 'move';
+var EVENT_END = GestureDetector.EVENT_END = 'end';
+var EVENT_RELEASE = GestureDetector.EVENT_RELEASE = 'release';
+var EVENT_TOUCH = GestureDetector.EVENT_TOUCH = 'touch';
+
+/**
+ * if the window events are set...
+ * @property READY
+ * @writeOnce
+ * @type {Boolean}
+ * @default false
+ */
+GestureDetector.READY = false;
+
+/**
+ * plugins namespace
+ * @property plugins
+ * @type {Object}
+ */
+GestureDetector.plugins = GestureDetector.plugins || {};
+
+/**
+ * gestures namespace
+ * see `/gestures` for the definitions
+ * @property gestures
+ * @type {Object}
+ */
+GestureDetector.gestures = GestureDetector.gestures || {};
+
+/**
+ * setup events to detect gestures on the document
+ * this function is called when creating an new instance
+ * @private
+ */
+function setup() {
+  if(GestureDetector.READY) {
+    return;
+  }
+
+  // find what eventtypes we add listeners to
+  Event.determineEventTypes();
+
+  // Register all gestures inside GestureDetector.gestures
+  Utils.each(GestureDetector.gestures, function(gesture) {
+    Detection.register(gesture);
+  });
+
+  // Add touch events on the document
+  Event.onTouch(GestureDetector.DOCUMENT, EVENT_MOVE, Detection.detect);
+  Event.onTouch(GestureDetector.DOCUMENT, EVENT_END, Detection.detect);
+
+  // GestureDetector is ready...!
+  GestureDetector.READY = true;
+}
+
+/**
+ * @module GestureDetector
+ *
+ * @class Utils
+ * @static
+ */
+var Utils = GestureDetector.utils = {
+  /**
+   * extend method, could also be used for cloning when `dest` is an empty object.
+   * changes the dest object
+   * @method extend
+   * @param {Object} dest
+   * @param {Object} src
+   * @param {Boolean} [merge=false]  do a merge
+   * @return {Object} dest
+   */
+  extend: function extend(dest, src, merge) {
+    for (var key in src) {
+      if (src.hasOwnProperty(key) && (dest[key] === undefined || merge)) {
+        dest[key] = src[key];
+      }
+    }
+    return dest;
+  },
+
+  /**
+   * simple addEventListener wrapper
+   * @method on
+   * @param {HTMLElement} element
+   * @param {String} type
+   * @param {Function} handler
+   */
+  on: function on(element, type, handler) {
+    element.addEventListener(type, handler, false);
+  },
+
+  /**
+   * simple removeEventListener wrapper
+   * @method off
+   * @param {HTMLElement} element
+   * @param {String} type
+   * @param {Function} handler
+   */
+  off: function off(element, type, handler) {
+    element.removeEventListener(type, handler, false);
+  },
+
+  /**
+   * forEach over arrays and objects
+   * @method each
+   * @param {Object|Array} obj
+   * @param {Function} iterator
+   * @param {any} iterator.item
+   * @param {Number} iterator.index
+   * @param {Object|Array} iterator.obj the source object
+   * @param {Object} context value to use as `this` in the iterator
+   */
+  each: function each(obj, iterator, context) {
+    var i, len;
+
+    // native forEach on arrays
+    if('forEach' in obj) {
+      obj.forEach(iterator, context);
+      // arrays
+    } else if(obj.length !== undefined) {
+      for(i = 0, len = obj.length; i < len; i++) {
+        if(iterator.call(context, obj[i], i, obj) === false) {
+          return;
+        }
+      }
+      // objects
+    } else {
+      for(i in obj) {
+        if(obj.hasOwnProperty(i) &&
+          iterator.call(context, obj[i], i, obj) === false) {
+          return;
+        }
+      }
+    }
+  },
+
+  /**
+   * find if a string contains the string using indexOf
+   * @method inStr
+   * @param {String} src
+   * @param {String} find
+   * @return {Boolean} found
+   */
+  inStr: function inStr(src, find) {
+    return src.indexOf(find) > -1;
+  },
+
+  /**
+   * find if a array contains the object using indexOf or a simple polyfill
+   * @method inArray
+   * @param {String} src
+   * @param {String} find
+   * @return {Boolean|Number} false when not found, or the index
+   */
+  inArray: function inArray(src, find) {
+    if(src.indexOf) {
+      var index = src.indexOf(find);
+      return (index === -1) ? false : index;
+    } else {
+      for(var i = 0, len = src.length; i < len; i++) {
+        if(src[i] === find) {
+          return i;
+        }
+      }
+      return false;
+    }
+  },
+
+  /**
+   * convert an array-like object (`arguments`, `touchlist`) to an array
+   * @method toArray
+   * @param {Object} obj
+   * @return {Array}
+   */
+  toArray: function toArray(obj) {
+    return Array.prototype.slice.call(obj, 0);
+  },
+
+  /**
+   * find if a node is in the given parent
+   * @method hasParent
+   * @param {HTMLElement} node
+   * @param {HTMLElement} parent
+   * @return {Boolean} found
+   */
+  hasParent: function hasParent(node, parent) {
+    while(node) {
+      if(node == parent) {
+        return true;
+      }
+      node = node.parentNode;
+    }
+    return false;
+  },
+
+  /**
+   * get the center of all the touches
+   * @method getCenter
+   * @param {Array} touches
+   * @return {Object} center contains `pageX`, `pageY`, `clientX` and `clientY` properties
+   */
+  getCenter: function getCenter(touches) {
+    var pageX = [],
+        pageY = [],
+        clientX = [],
+        clientY = [],
+        min = Math.min,
+        max = Math.max;
+
+    // no need to loop when only one touch
+    if(touches.length === 1) {
+      return {
+        pageX: touches[0].pageX,
+        pageY: touches[0].pageY,
+        clientX: touches[0].clientX,
+        clientY: touches[0].clientY
+      };
+    }
+
+    Utils.each(touches, function(touch) {
+      pageX.push(touch.pageX);
+      pageY.push(touch.pageY);
+      clientX.push(touch.clientX);
+      clientY.push(touch.clientY);
+    });
+
+    return {
+      pageX: (min.apply(Math, pageX) + max.apply(Math, pageX)) / 2,
+      pageY: (min.apply(Math, pageY) + max.apply(Math, pageY)) / 2,
+      clientX: (min.apply(Math, clientX) + max.apply(Math, clientX)) / 2,
+      clientY: (min.apply(Math, clientY) + max.apply(Math, clientY)) / 2
+    };
+  },
+
+  /**
+   * calculate the velocity between two points. unit is in px per ms.
+   * @method getVelocity
+   * @param {Number} deltaTime
+   * @param {Number} deltaX
+   * @param {Number} deltaY
+   * @return {Object} velocity `x` and `y`
+   */
+  getVelocity: function getVelocity(deltaTime, deltaX, deltaY) {
+    return {
+      x: Math.abs(deltaX / deltaTime) || 0,
+      y: Math.abs(deltaY / deltaTime) || 0
+    };
+  },
+
+  /**
+   * calculate the angle between two coordinates
+   * @method getAngle
+   * @param {Touch} touch1
+   * @param {Touch} touch2
+   * @return {Number} angle
+   */
+  getAngle: function getAngle(touch1, touch2) {
+    var x = touch2.clientX - touch1.clientX,
+        y = touch2.clientY - touch1.clientY;
+
+    return Math.atan2(y, x) * 180 / Math.PI;
+  },
+
+  /**
+   * do a small comparison to get the direction between two touches.
+   * @method getDirection
+   * @param {Touch} touch1
+   * @param {Touch} touch2
+   * @return {String} direction matches `DIRECTION_LEFT|RIGHT|UP|DOWN`
+   */
+  getDirection: function getDirection(touch1, touch2) {
+    var x = Math.abs(touch1.clientX - touch2.clientX),
+        y = Math.abs(touch1.clientY - touch2.clientY);
+
+    if(x >= y) {
+      return touch1.clientX - touch2.clientX > 0 ? DIRECTION_LEFT : DIRECTION_RIGHT;
+    }
+    return touch1.clientY - touch2.clientY > 0 ? DIRECTION_UP : DIRECTION_DOWN;
+  },
+
+  /**
+   * calculate the distance between two touches
+   * @method getDistance
+   * @param {Touch}touch1
+   * @param {Touch} touch2
+   * @return {Number} distance
+   */
+  getDistance: function getDistance(touch1, touch2) {
+    var x = touch2.clientX - touch1.clientX,
+        y = touch2.clientY - touch1.clientY;
+
+    return Math.sqrt((x * x) + (y * y));
+  },
+
+  /**
+   * calculate the scale factor between two touchLists
+   * no scale is 1, and goes down to 0 when pinched together, and bigger when pinched out
+   * @method getScale
+   * @param {Array} start array of touches
+   * @param {Array} end array of touches
+   * @return {Number} scale
+   */
+  getScale: function getScale(start, end) {
+    // need two fingers...
+    if(start.length >= 2 && end.length >= 2) {
+      return this.getDistance(end[0], end[1]) / this.getDistance(start[0], start[1]);
+    }
+    return 1;
+  },
+
+  /**
+   * calculate the rotation degrees between two touchLists
+   * @method getRotation
+   * @param {Array} start array of touches
+   * @param {Array} end array of touches
+   * @return {Number} rotation
+   */
+  getRotation: function getRotation(start, end) {
+    // need two fingers
+    if(start.length >= 2 && end.length >= 2) {
+      return this.getAngle(end[1], end[0]) - this.getAngle(start[1], start[0]);
+    }
+    return 0;
+  },
+
+  /**
+   * find out if the direction is vertical   *
+   * @method isVertical
+   * @param {String} direction matches `DIRECTION_UP|DOWN`
+   * @return {Boolean} is_vertical
+   */
+  isVertical: function isVertical(direction) {
+    return direction == DIRECTION_UP || direction == DIRECTION_DOWN;
+  },
+
+  /**
+   * set css properties with their prefixes
+   * @param {HTMLElement} element
+   * @param {String} prop
+   * @param {String} value
+   * @param {Boolean} [toggle=true]
+   * @return {Boolean}
+   */
+  setPrefixedCss: function setPrefixedCss(element, prop, value, toggle) {
+    var prefixes = ['', 'Webkit', 'Moz', 'O', 'ms'];
+    prop = Utils.toCamelCase(prop);
+
+    for(var i = 0; i < prefixes.length; i++) {
+      var p = prop;
+      // prefixes
+      if(prefixes[i]) {
+        p = prefixes[i] + p.slice(0, 1).toUpperCase() + p.slice(1);
+      }
+
+      // test the style
+      if(p in element.style) {
+        element.style[p] = (toggle === null || toggle) && value || '';
+        break;
+      }
+    }
+  },
+
+  /**
+   * toggle browser default behavior by setting css properties.
+   * `userSelect='none'` also sets `element.onselectstart` to false
+   * `userDrag='none'` also sets `element.ondragstart` to false
+   *
+   * @method toggleBehavior
+   * @param {HtmlElement} element
+   * @param {Object} props
+   * @param {Boolean} [toggle=true]
+   */
+  toggleBehavior: function toggleBehavior(element, props, toggle) {
+    if(!props || !element || !element.style) {
+      return;
+    }
+
+    // set the css properties
+    Utils.each(props, function(value, prop) {
+      Utils.setPrefixedCss(element, prop, value, toggle);
+    });
+
+    var falseFn = toggle && function() {
+      return false;
+    };
+
+    // also the disable onselectstart
+    if(props.userSelect == 'none') {
+      element.onselectstart = falseFn;
+    }
+    // and disable ondragstart
+    if(props.userDrag == 'none') {
+      element.ondragstart = falseFn;
+    }
+  },
+
+  /**
+   * convert a string with underscores to camelCase
+   * so prevent_default becomes preventDefault
+   * @param {String} str
+   * @return {String} camelCaseStr
+   */
+  toCamelCase: function toCamelCase(str) {
+    return str.replace(/[_-]([a-z])/g, function(s) {
+      return s[1].toUpperCase();
+    });
+  }
+};
+
+
+/**
+ * @module GestureDetector
+ */
+/**
+ * @class Event
+ * @static
+ */
+var Event = GestureDetector.event = {
+  /**
+   * when touch events have been fired, this is true
+   * this is used to stop mouse events
+   * @property prevent_mouseevents
+   * @private
+   * @type {Boolean}
+   */
+  preventMouseEvents: false,
+
+  /**
+   * if EVENT_START has been fired
+   * @property started
+   * @private
+   * @type {Boolean}
+   */
+  started: false,
+
+  /**
+   * when the mouse is hold down, this is true
+   * @property should_detect
+   * @private
+   * @type {Boolean}
+   */
+  shouldDetect: false,
+
+  /**
+   * simple event binder with a hook and support for multiple types
+   * @method on
+   * @param {HTMLElement} element
+   * @param {String} type
+   * @param {Function} handler
+   * @param {Function} [hook]
+   * @param {Object} hook.type
+   */
+  on: function on(element, type, handler, hook) {
+    var types = type.split(' ');
+    Utils.each(types, function(type) {
+      Utils.on(element, type, handler);
+      hook && hook(type);
+    });
+  },
+
+  /**
+   * simple event unbinder with a hook and support for multiple types
+   * @method off
+   * @param {HTMLElement} element
+   * @param {String} type
+   * @param {Function} handler
+   * @param {Function} [hook]
+   * @param {Object} hook.type
+   */
+  off: function off(element, type, handler, hook) {
+    var types = type.split(' ');
+    Utils.each(types, function(type) {
+      Utils.off(element, type, handler);
+      hook && hook(type);
+    });
+  },
+
+  /**
+   * the core touch event handler.
+   * this finds out if we should to detect gestures
+   * @method onTouch
+   * @param {HTMLElement} element
+   * @param {String} eventType matches `EVENT_START|MOVE|END`
+   * @param {Function} handler
+   * @return onTouchHandler {Function} the core event handler
+   */
+  onTouch: function onTouch(element, eventType, handler) {
+    var self = this;
+
+    var onTouchHandler = function onTouchHandler(ev) {
+      var srcType = ev.type.toLowerCase(),
+          isPointer = GestureDetector.HAS_POINTEREVENTS,
+          isMouse = Utils.inStr(srcType, 'mouse'),
+          triggerType;
+
+      // if we are in a mouseevent, but there has been a touchevent triggered in this session
+      // we want to do nothing. simply break out of the event.
+      if(isMouse && self.preventMouseEvents) {
+        return;
+
+        // mousebutton must be down
+      } else if(isMouse && eventType == EVENT_START && ev.button === 0) {
+        self.preventMouseEvents = false;
+        self.shouldDetect = true;
+      } else if(isPointer && eventType == EVENT_START) {
+        self.shouldDetect = (ev.buttons === 1 || PointerEvent.matchType(POINTER_TOUCH, ev));
+        // just a valid start event, but no mouse
+      } else if(!isMouse && eventType == EVENT_START) {
+        self.preventMouseEvents = true;
+        self.shouldDetect = true;
+      }
+
+      // update the pointer event before entering the detection
+      if(isPointer && eventType != EVENT_END) {
+        PointerEvent.updatePointer(eventType, ev);
+      }
+
+      // we are in a touch/down state, so allowed detection of gestures
+      if(self.shouldDetect) {
+        triggerType = self.doDetect.call(self, ev, eventType, element, handler);
+      }
+
+      // ...and we are done with the detection
+      // so reset everything to start each detection totally fresh
+      if(triggerType == EVENT_END) {
+        self.preventMouseEvents = false;
+        self.shouldDetect = false;
+        PointerEvent.reset();
+        // update the pointerevent object after the detection
+      }
+
+      if(isPointer && eventType == EVENT_END) {
+        PointerEvent.updatePointer(eventType, ev);
+      }
+    };
+
+    this.on(element, EVENT_TYPES[eventType], onTouchHandler);
+    return onTouchHandler;
+  },
+
+  /**
+   * the core detection method
+   * this finds out what GestureDetector-touch-events to trigger
+   * @method doDetect
+   * @param {Object} ev
+   * @param {String} eventType matches `EVENT_START|MOVE|END`
+   * @param {HTMLElement} element
+   * @param {Function} handler
+   * @return {String} triggerType matches `EVENT_START|MOVE|END`
+   */
+  doDetect: function doDetect(ev, eventType, element, handler) {
+    var touchList = this.getTouchList(ev, eventType);
+    var touchListLength = touchList.length;
+    var triggerType = eventType;
+    var triggerChange = touchList.trigger; // used by fakeMultitouch plugin
+    var changedLength = touchListLength;
+
+    // at each touchstart-like event we want also want to trigger a TOUCH event...
+    if(eventType == EVENT_START) {
+      triggerChange = EVENT_TOUCH;
+      // ...the same for a touchend-like event
+    } else if(eventType == EVENT_END) {
+      triggerChange = EVENT_RELEASE;
+
+      // keep track of how many touches have been removed
+      changedLength = touchList.length - ((ev.changedTouches) ? ev.changedTouches.length : 1);
+    }
+
+    // after there are still touches on the screen,
+    // we just want to trigger a MOVE event. so change the START or END to a MOVE
+    // but only after detection has been started, the first time we actually want a START
+    if(changedLength > 0 && this.started) {
+      triggerType = EVENT_MOVE;
+    }
+
+    // detection has been started, we keep track of this, see above
+    this.started = true;
+
+    // generate some event data, some basic information
+    var evData = this.collectEventData(element, triggerType, touchList, ev);
+
+    // trigger the triggerType event before the change (TOUCH, RELEASE) events
+    // but the END event should be at last
+    if(eventType != EVENT_END) {
+      handler.call(Detection, evData);
+    }
+
+    // trigger a change (TOUCH, RELEASE) event, this means the length of the touches changed
+    if(triggerChange) {
+      evData.changedLength = changedLength;
+      evData.eventType = triggerChange;
+
+      handler.call(Detection, evData);
+
+      evData.eventType = triggerType;
+      delete evData.changedLength;
+    }
+
+    // trigger the END event
+    if(triggerType == EVENT_END) {
+      handler.call(Detection, evData);
+
+      // ...and we are done with the detection
+      // so reset everything to start each detection totally fresh
+      this.started = false;
+    }
+
+    return triggerType;
+  },
+
+  /**
+   * we have different events for each device/browser
+   * determine what we need and set them in the EVENT_TYPES constant
+   * the `onTouch` method is bind to these properties.
+   * @method determineEventTypes
+   * @return {Object} events
+   */
+  determineEventTypes: function determineEventTypes() {
+    var types;
+    if(GestureDetector.HAS_POINTEREVENTS) {
+      if(window.PointerEvent) {
+        types = [
+          'pointerdown',
+          'pointermove',
+          'pointerup pointercancel lostpointercapture'
+        ];
+      } else {
+        types = [
+          'MSPointerDown',
+          'MSPointerMove',
+          'MSPointerUp MSPointerCancel MSLostPointerCapture'
+        ];
+      }
+    } else if(GestureDetector.NO_MOUSEEVENTS) {
+      types = [
+        'touchstart',
+        'touchmove',
+        'touchend touchcancel'
+      ];
+    } else {
+      types = [
+        'touchstart mousedown',
+        'touchmove mousemove',
+        'touchend touchcancel mouseup'
+      ];
+    }
+
+    EVENT_TYPES[EVENT_START] = types[0];
+    EVENT_TYPES[EVENT_MOVE] = types[1];
+    EVENT_TYPES[EVENT_END] = types[2];
+    return EVENT_TYPES;
+  },
+
+  /**
+   * create touchList depending on the event
+   * @method getTouchList
+   * @param {Object} ev
+   * @param {String} eventType
+   * @return {Array} touches
+   */
+  getTouchList: function getTouchList(ev, eventType) {
+    // get the fake pointerEvent touchlist
+    if(GestureDetector.HAS_POINTEREVENTS) {
+      return PointerEvent.getTouchList();
+    }
+
+    // get the touchlist
+    if(ev.touches) {
+      if(eventType == EVENT_MOVE) {
+        return ev.touches;
+      }
+
+      var identifiers = [];
+      var concat = [].concat(Utils.toArray(ev.touches), Utils.toArray(ev.changedTouches));
+      var touchList = [];
+
+      Utils.each(concat, function(touch) {
+        if(Utils.inArray(identifiers, touch.identifier) === false) {
+          touchList.push(touch);
+        }
+        identifiers.push(touch.identifier);
+      });
+
+      return touchList;
+    }
+
+    // make fake touchList from mouse position
+    ev.identifier = 1;
+    return [ev];
+  },
+
+  /**
+   * collect basic event data
+   * @method collectEventData
+   * @param {HTMLElement} element
+   * @param {String} eventType matches `EVENT_START|MOVE|END`
+   * @param {Array} touches
+   * @param {Object} ev
+   * @return {Object} ev
+   */
+  collectEventData: function collectEventData(element, eventType, touches, ev) {
+    // find out pointerType
+    var pointerType = POINTER_TOUCH;
+    if(Utils.inStr(ev.type, 'mouse') || PointerEvent.matchType(POINTER_MOUSE, ev)) {
+      pointerType = POINTER_MOUSE;
+    } else if(PointerEvent.matchType(POINTER_PEN, ev)) {
+      pointerType = POINTER_PEN;
+    }
+
+    return {
+      center: Utils.getCenter(touches),
+      timeStamp: Date.now(),
+      target: ev.target,
+      touches: touches,
+      eventType: eventType,
+      pointerType: pointerType,
+      srcEvent: ev,
+
+      /**
+       * prevent the browser default actions
+       * mostly used to disable scrolling of the browser
+       */
+      preventDefault: function() {
+        var srcEvent = this.srcEvent;
+        srcEvent.preventManipulation && srcEvent.preventManipulation();
+        srcEvent.preventDefault && srcEvent.preventDefault();
+      },
+
+      /**
+       * stop bubbling the event up to its parents
+       */
+      stopPropagation: function() {
+        this.srcEvent.stopPropagation();
+      },
+
+      /**
+       * immediately stop gesture detection
+       * might be useful after a swipe was detected
+       * @return {*}
+       */
+      stopDetect: function() {
+        return Detection.stopDetect();
+      }
+    };
+  }
+};
+
+
+/**
+ * @module GestureDetector
+ *
+ * @class PointerEvent
+ * @static
+ */
+var PointerEvent = GestureDetector.PointerEvent = {
+  /**
+   * holds all pointers, by `identifier`
+   * @property pointers
+   * @type {Object}
+   */
+  pointers: {},
+
+  /**
+   * get the pointers as an array
+   * @method getTouchList
+   * @return {Array} touchlist
+   */
+  getTouchList: function getTouchList() {
+    var touchlist = [];
+    // we can use forEach since pointerEvents only is in IE10
+    Utils.each(this.pointers, function(pointer) {
+      touchlist.push(pointer);
+    });
+    return touchlist;
+  },
+
+  /**
+   * update the position of a pointer
+   * @method updatePointer
+   * @param {String} eventType matches `EVENT_START|MOVE|END`
+   * @param {Object} pointerEvent
+   */
+  updatePointer: function updatePointer(eventType, pointerEvent) {
+    if(eventType == EVENT_END || (eventType != EVENT_END && pointerEvent.buttons !== 1)) {
+      delete this.pointers[pointerEvent.pointerId];
+    } else {
+      pointerEvent.identifier = pointerEvent.pointerId;
+      this.pointers[pointerEvent.pointerId] = pointerEvent;
+    }
+  },
+
+  /**
+   * check if ev matches pointertype
+   * @method matchType
+   * @param {String} pointerType matches `POINTER_MOUSE|TOUCH|PEN`
+   * @param {PointerEvent} ev
+   */
+  matchType: function matchType(pointerType, ev) {
+    if(!ev.pointerType) {
+      return false;
+    }
+
+    var pt = ev.pointerType,
+        types = {};
+
+    types[POINTER_MOUSE] = (pt === (ev.MSPOINTER_TYPE_MOUSE || POINTER_MOUSE));
+    types[POINTER_TOUCH] = (pt === (ev.MSPOINTER_TYPE_TOUCH || POINTER_TOUCH));
+    types[POINTER_PEN] = (pt === (ev.MSPOINTER_TYPE_PEN || POINTER_PEN));
+    return types[pointerType];
+  },
+
+  /**
+   * reset the stored pointers
+   * @method reset
+   */
+  reset: function resetList() {
+    this.pointers = {};
+  }
+};
+
+
+/**
+ * @module GestureDetector
+ *
+ * @class Detection
+ * @static
+ */
+var Detection = GestureDetector.detection = {
+  // contains all registered GestureDetector.gestures in the correct order
+  gestures: [],
+
+  // data of the current GestureDetector.gesture detection session
+  current: null,
+
+  // the previous GestureDetector.gesture session data
+  // is a full clone of the previous gesture.current object
+  previous: null,
+
+  // when this becomes true, no gestures are fired
+  stopped: false,
+
+  /**
+   * start GestureDetector.gesture detection
+   * @method startDetect
+   * @param {GestureDetector.Instance} inst
+   * @param {Object} eventData
+   */
+  startDetect: function startDetect(inst, eventData) {
+    // already busy with a GestureDetector.gesture detection on an element
+    if(this.current) {
+      return;
+    }
+
+    this.stopped = false;
+
+    // holds current session
+    this.current = {
+      inst: inst, // reference to GestureDetectorInstance we're working for
+      startEvent: Utils.extend({}, eventData), // start eventData for distances, timing etc
+      lastEvent: false, // last eventData
+      lastCalcEvent: false, // last eventData for calculations.
+      futureCalcEvent: false, // last eventData for calculations.
+      lastCalcData: {}, // last lastCalcData
+      name: '' // current gesture we're in/detected, can be 'tap', 'hold' etc
+    };
+
+    this.detect(eventData);
+  },
+
+  /**
+   * GestureDetector.gesture detection
+   * @method detect
+   * @param {Object} eventData
+   * @return {any}
+   */
+  detect: function detect(eventData) {
+    if(!this.current || this.stopped) {
+      return;
+    }
+
+    // extend event data with calculations about scale, distance etc
+    eventData = this.extendEventData(eventData);
+
+    // GestureDetector instance and instance options
+    var inst = this.current.inst,
+        instOptions = inst.options;
+
+    // call GestureDetector.gesture handlers
+    Utils.each(this.gestures, function triggerGesture(gesture) {
+      // only when the instance options have enabled this gesture
+      if(!this.stopped && inst.enabled && instOptions[gesture.name]) {
+        gesture.handler.call(gesture, eventData, inst);
+      }
+    }, this);
+
+    // store as previous event event
+    if(this.current) {
+      this.current.lastEvent = eventData;
+    }
+
+    if(eventData.eventType == EVENT_END) {
+      this.stopDetect();
+    }
+
+    return eventData;
+  },
+
+  /**
+   * clear the GestureDetector.gesture vars
+   * this is called on endDetect, but can also be used when a final GestureDetector.gesture has been detected
+   * to stop other GestureDetector.gestures from being fired
+   * @method stopDetect
+   */
+  stopDetect: function stopDetect() {
+    // clone current data to the store as the previous gesture
+    // used for the double tap gesture, since this is an other gesture detect session
+    this.previous = Utils.extend({}, this.current);
+
+    // reset the current
+    this.current = null;
+    this.stopped = true;
+  },
+
+  /**
+   * calculate velocity, angle and direction
+   * @method getVelocityData
+   * @param {Object} ev
+   * @param {Object} center
+   * @param {Number} deltaTime
+   * @param {Number} deltaX
+   * @param {Number} deltaY
+   */
+  getCalculatedData: function getCalculatedData(ev, center, deltaTime, deltaX, deltaY) {
+    var cur = this.current,
+        recalc = false,
+        calcEv = cur.lastCalcEvent,
+        calcData = cur.lastCalcData;
+
+    if(calcEv && ev.timeStamp - calcEv.timeStamp > GestureDetector.CALCULATE_INTERVAL) {
+      center = calcEv.center;
+      deltaTime = ev.timeStamp - calcEv.timeStamp;
+      deltaX = ev.center.clientX - calcEv.center.clientX;
+      deltaY = ev.center.clientY - calcEv.center.clientY;
+      recalc = true;
+    }
+
+    if(ev.eventType == EVENT_TOUCH || ev.eventType == EVENT_RELEASE) {
+      cur.futureCalcEvent = ev;
+    }
+
+    if(!cur.lastCalcEvent || recalc) {
+      calcData.velocity = Utils.getVelocity(deltaTime, deltaX, deltaY);
+      calcData.angle = Utils.getAngle(center, ev.center);
+      calcData.direction = Utils.getDirection(center, ev.center);
+
+      cur.lastCalcEvent = cur.futureCalcEvent || ev;
+      cur.futureCalcEvent = ev;
+    }
+
+    ev.velocityX = calcData.velocity.x;
+    ev.velocityY = calcData.velocity.y;
+    ev.interimAngle = calcData.angle;
+    ev.interimDirection = calcData.direction;
+  },
+
+  /**
+   * extend eventData for GestureDetector.gestures
+   * @method extendEventData
+   * @param {Object} ev
+   * @return {Object} ev
+   */
+  extendEventData: function extendEventData(ev) {
+    var cur = this.current,
+        startEv = cur.startEvent,
+        lastEv = cur.lastEvent || startEv;
+
+    // update the start touchlist to calculate the scale/rotation
+    if(ev.eventType == EVENT_TOUCH || ev.eventType == EVENT_RELEASE) {
+      startEv.touches = [];
+      Utils.each(ev.touches, function(touch) {
+        startEv.touches.push({
+          clientX: touch.clientX,
+          clientY: touch.clientY
+        });
+      });
+    }
+
+    var deltaTime = ev.timeStamp - startEv.timeStamp,
+        deltaX = ev.center.clientX - startEv.center.clientX,
+        deltaY = ev.center.clientY - startEv.center.clientY;
+
+    this.getCalculatedData(ev, lastEv.center, deltaTime, deltaX, deltaY);
+
+    Utils.extend(ev, {
+      startEvent: startEv,
+
+      deltaTime: deltaTime,
+      deltaX: deltaX,
+      deltaY: deltaY,
+
+      distance: Utils.getDistance(startEv.center, ev.center),
+      angle: Utils.getAngle(startEv.center, ev.center),
+      direction: Utils.getDirection(startEv.center, ev.center),
+      scale: Utils.getScale(startEv.touches, ev.touches),
+      rotation: Utils.getRotation(startEv.touches, ev.touches)
+    });
+
+    return ev;
+  },
+
+  /**
+   * register new gesture
+   * @method register
+   * @param {Object} gesture object, see `gestures/` for documentation
+   * @return {Array} gestures
+   */
+  register: function register(gesture) {
+    // add an enable gesture options if there is no given
+    var options = gesture.defaults || {};
+    if(options[gesture.name] === undefined) {
+      options[gesture.name] = true;
+    }
+
+    // extend GestureDetector default options with the GestureDetector.gesture options
+    Utils.extend(GestureDetector.defaults, options, true);
+
+    // set its index
+    gesture.index = gesture.index || 1000;
+
+    // add GestureDetector.gesture to the list
+    this.gestures.push(gesture);
+
+    // sort the list by index
+    this.gestures.sort(function(a, b) {
+      if(a.index < b.index) {
+        return -1;
+      }
+      if(a.index > b.index) {
+        return 1;
+      }
+      return 0;
+    });
+
+    return this.gestures;
+  }
+};
+
+
+/**
+ * @module GestureDetector
+ */
+
+/**
+ * create new GestureDetector instance
+ * all methods should return the instance itself, so it is chainable.
+ *
+ * @class Instance
+ * @constructor
+ * @param {HTMLElement} element
+ * @param {Object} [options={}] options are merged with `GestureDetector.defaults`
+ * @return {GestureDetector.Instance}
+ */
+GestureDetector.Instance = function(element, options) {
+  var self = this;
+
+  // setup GestureDetectorJS window events and register all gestures
+  // this also sets up the default options
+  setup();
+
+  /**
+   * @property element
+   * @type {HTMLElement}
+   */
+  this.element = element;
+
+  /**
+   * @property enabled
+   * @type {Boolean}
+   * @protected
+   */
+  this.enabled = true;
+
+  /**
+   * options, merged with the defaults
+   * options with an _ are converted to camelCase
+   * @property options
+   * @type {Object}
+   */
+  Utils.each(options, function(value, name) {
+    delete options[name];
+    options[Utils.toCamelCase(name)] = value;
+  });
+
+  this.options = Utils.extend(Utils.extend({}, GestureDetector.defaults), options || {});
+
+  // add some css to the element to prevent the browser from doing its native behavior
+  if(this.options.behavior) {
+    Utils.toggleBehavior(this.element, this.options.behavior, true);
+  }
+
+  /**
+   * event start handler on the element to start the detection
+   * @property eventStartHandler
+   * @type {Object}
+   */
+  this.eventStartHandler = Event.onTouch(element, EVENT_START, function(ev) {
+    if(self.enabled && ev.eventType == EVENT_START) {
+      Detection.startDetect(self, ev);
+    } else if(ev.eventType == EVENT_TOUCH) {
+      Detection.detect(ev);
+    }
+  });
+
+  /**
+   * keep a list of user event handlers which needs to be removed when calling 'dispose'
+   * @property eventHandlers
+   * @type {Array}
+   */
+  this.eventHandlers = [];
+};
+
+GestureDetector.Instance.prototype = {
+  /**
+   * bind events to the instance
+   * @method on
+   * @chainable
+   * @param {String} gestures multiple gestures by splitting with a space
+   * @param {Function} handler
+   * @param {Object} handler.ev event object
+   */
+  on: function onEvent(gestures, handler) {
+    var self = this;
+    Event.on(self.element, gestures, handler, function(type) {
+      self.eventHandlers.push({ gesture: type, handler: handler });
+    });
+    return self;
+  },
+
+  /**
+   * unbind events to the instance
+   * @method off
+   * @chainable
+   * @param {String} gestures
+   * @param {Function} handler
+   */
+  off: function offEvent(gestures, handler) {
+    var self = this;
+
+    Event.off(self.element, gestures, handler, function(type) {
+      var index = Utils.inArray({ gesture: type, handler: handler });
+      if(index !== false) {
+        self.eventHandlers.splice(index, 1);
+      }
+    });
+    return self;
+  },
+
+  /**
+   * trigger gesture event
+   * @method trigger
+   * @chainable
+   * @param {String} gesture
+   * @param {Object} [eventData]
+   */
+  trigger: function triggerEvent(gesture, eventData) {
+    // optional
+    if(!eventData) {
+      eventData = {};
+    }
+
+    // create DOM event
+    var event = GestureDetector.DOCUMENT.createEvent('Event');
+    event.initEvent(gesture, true, true);
+    event.gesture = eventData;
+
+    // trigger on the target if it is in the instance element,
+    // this is for event delegation tricks
+    var element = this.element;
+    if(Utils.hasParent(eventData.target, element)) {
+      element = eventData.target;
+    }
+
+    element.dispatchEvent(event);
+    return this;
+  },
+
+  /**
+   * enable of disable GestureDetector.js detection
+   * @method enable
+   * @chainable
+   * @param {Boolean} state
+   */
+  enable: function enable(state) {
+    this.enabled = state;
+    return this;
+  },
+
+  /**
+   * dispose this GestureDetector instance
+   * @method dispose
+   * @return {Null}
+   */
+  dispose: function dispose() {
+    var i, eh;
+
+    // undo all changes made by stop_browser_behavior
+    Utils.toggleBehavior(this.element, this.options.behavior, false);
+
+    // unbind all custom event handlers
+    for(i = -1; (eh = this.eventHandlers[++i]);) {
+      Utils.off(this.element, eh.gesture, eh.handler);
+    }
+
+    this.eventHandlers = [];
+
+    // unbind the start event listener
+    Event.off(this.element, EVENT_TYPES[EVENT_START], this.eventStartHandler);
+
+    return null;
+  }
+};
+
+
+/**
+ * @module gestures
+ */
+/**
+ * Move with x fingers (default 1) around on the page.
+ * Preventing the default browser behavior is a good way to improve feel and working.
+ * ````
+ *  GestureDetectortime.on("drag", function(ev) {
+ *    console.log(ev);
+ *    ev.gesture.preventDefault();
+ *  });
+ * ````
+ *
+ * @class Drag
+ * @static
+ */
+/**
+ * @event drag
+ * @param {Object} ev
+ */
+/**
+ * @event dragstart
+ * @param {Object} ev
+ */
+/**
+ * @event dragend
+ * @param {Object} ev
+ */
+/**
+ * @event drapleft
+ * @param {Object} ev
+ */
+/**
+ * @event dragright
+ * @param {Object} ev
+ */
+/**
+ * @event dragup
+ * @param {Object} ev
+ */
+/**
+ * @event dragdown
+ * @param {Object} ev
+ */
+
+/**
+ * @param {String} name
+ */
+(function(name) {
+  var triggered = false;
+
+  function dragGesture(ev, inst) {
+    var cur = Detection.current;
+
+    // max touches
+    if(inst.options.dragMaxTouches > 0 &&
+      ev.touches.length > inst.options.dragMaxTouches) {
+      return;
+    }
+
+    switch(ev.eventType) {
+    case EVENT_START:
+      triggered = false;
+      break;
+
+    case EVENT_MOVE:
+      // when the distance we moved is too small we skip this gesture
+      // or we can be already in dragging
+      if(ev.distance < inst.options.dragMinDistance &&
+        cur.name != name) {
+        return;
+      }
+
+      var startCenter = cur.startEvent.center;
+
+      // we are dragging!
+      if(cur.name != name) {
+        cur.name = name;
+        if(inst.options.dragDistanceCorrection && ev.distance > 0) {
+          // When a drag is triggered, set the event center to dragMinDistance pixels from the original event center.
+          // Without this correction, the dragged distance would jumpstart at dragMinDistance pixels instead of at 0.
+          // It might be useful to save the original start point somewhere
+          var factor = Math.abs(inst.options.dragMinDistance / ev.distance);
+          startCenter.pageX += ev.deltaX * factor;
+          startCenter.pageY += ev.deltaY * factor;
+          startCenter.clientX += ev.deltaX * factor;
+          startCenter.clientY += ev.deltaY * factor;
+
+          // recalculate event data using new start point
+          ev = Detection.extendEventData(ev);
+        }
+      }
+
+      // lock drag to axis?
+      if(cur.lastEvent.dragLockToAxis ||
+        ( inst.options.dragLockToAxis &&
+          inst.options.dragLockMinDistance <= ev.distance
+        )) {
+          ev.dragLockToAxis = true;
+        }
+
+        // keep direction on the axis that the drag gesture started on
+        var lastDirection = cur.lastEvent.direction;
+        if(ev.dragLockToAxis && lastDirection !== ev.direction) {
+          if(Utils.isVertical(lastDirection)) {
+            ev.direction = (ev.deltaY < 0) ? DIRECTION_UP : DIRECTION_DOWN;
+          } else {
+            ev.direction = (ev.deltaX < 0) ? DIRECTION_LEFT : DIRECTION_RIGHT;
+          }
+        }
+
+        // first time, trigger dragstart event
+        if(!triggered) {
+          inst.trigger(name + 'start', ev);
+          triggered = true;
+        }
+
+        // trigger events
+        inst.trigger(name, ev);
+        inst.trigger(name + ev.direction, ev);
+
+        var isVertical = Utils.isVertical(ev.direction);
+
+        // block the browser events
+        if((inst.options.dragBlockVertical && isVertical) ||
+          (inst.options.dragBlockHorizontal && !isVertical)) {
+          ev.preventDefault();
+        }
+        break;
+
+      case EVENT_RELEASE:
+        if(triggered && ev.changedLength <= inst.options.dragMaxTouches) {
+          inst.trigger(name + 'end', ev);
+          triggered = false;
+        }
+        break;
+
+      case EVENT_END:
+        triggered = false;
+        break;
+      }
+    }
+
+    GestureDetector.gestures.Drag = {
+      name: name,
+      index: 50,
+      handler: dragGesture,
+      defaults: {
+        /**
+         * minimal movement that have to be made before the drag event gets triggered
+         * @property dragMinDistance
+         * @type {Number}
+         * @default 10
+         */
+        dragMinDistance: 10,
+
+        /**
+         * Set dragDistanceCorrection to true to make the starting point of the drag
+         * be calculated from where the drag was triggered, not from where the touch started.
+         * Useful to avoid a jerk-starting drag, which can make fine-adjustments
+         * through dragging difficult, and be visually unappealing.
+         * @property dragDistanceCorrection
+         * @type {Boolean}
+         * @default true
+         */
+        dragDistanceCorrection: true,
+
+        /**
+         * set 0 for unlimited, but this can conflict with transform
+         * @property dragMaxTouches
+         * @type {Number}
+         * @default 1
+         */
+        dragMaxTouches: 1,
+
+        /**
+         * prevent default browser behavior when dragging occurs
+         * be careful with it, it makes the element a blocking element
+         * when you are using the drag gesture, it is a good practice to set this true
+         * @property dragBlockHorizontal
+         * @type {Boolean}
+         * @default false
+         */
+        dragBlockHorizontal: false,
+
+        /**
+         * same as `dragBlockHorizontal`, but for vertical movement
+         * @property dragBlockVertical
+         * @type {Boolean}
+         * @default false
+         */
+        dragBlockVertical: false,
+
+        /**
+         * dragLockToAxis keeps the drag gesture on the axis that it started on,
+         * It disallows vertical directions if the initial direction was horizontal, and vice versa.
+         * @property dragLockToAxis
+         * @type {Boolean}
+         * @default false
+         */
+        dragLockToAxis: false,
+
+        /**
+         * drag lock only kicks in when distance > dragLockMinDistance
+         * This way, locking occurs only when the distance has become large enough to reliably determine the direction
+         * @property dragLockMinDistance
+         * @type {Number}
+         * @default 25
+         */
+        dragLockMinDistance: 25
+      }
+    };
+  })('drag');
+
+  /**
+   * @module gestures
+   */
+  /**
+   * trigger a simple gesture event, so you can do anything in your handler.
+   * only usable if you know what your doing...
+   *
+   * @class Gesture
+   * @static
+   */
+  /**
+   * @event gesture
+   * @param {Object} ev
+   */
+  GestureDetector.gestures.Gesture = {
+    name: 'gesture',
+    index: 1337,
+    handler: function releaseGesture(ev, inst) {
+      inst.trigger(this.name, ev);
+    }
+  };
+
+  /**
+   * @module gestures
+   */
+  /**
+   * Touch stays at the same place for x time
+   *
+   * @class Hold
+   * @static
+   */
+  /**
+   * @event hold
+   * @param {Object} ev
+   */
+
+  /**
+   * @param {String} name
+   */
+  (function(name) {
+    var timer;
+
+    function holdGesture(ev, inst) {
+      var options = inst.options,
+          current = Detection.current;
+
+      switch(ev.eventType) {
+      case EVENT_START:
+        clearTimeout(timer);
+
+        // set the gesture so we can check in the timeout if it still is
+        current.name = name;
+
+        // set timer and if after the timeout it still is hold,
+        // we trigger the hold event
+        timer = setTimeout(function() {
+          if(current && current.name == name) {
+            inst.trigger(name, ev);
+          }
+        }, options.holdTimeout);
+        break;
+
+      case EVENT_MOVE:
+        if(ev.distance > options.holdThreshold) {
+          clearTimeout(timer);
+        }
+        break;
+
+      case EVENT_RELEASE:
+        clearTimeout(timer);
+        break;
+      }
+    }
+
+    GestureDetector.gestures.Hold = {
+      name: name,
+      index: 10,
+      defaults: {
+        /**
+         * @property holdTimeout
+         * @type {Number}
+         * @default 500
+         */
+        holdTimeout: 500,
+
+        /**
+         * movement allowed while holding
+         * @property holdThreshold
+         * @type {Number}
+         * @default 2
+         */
+        holdThreshold: 2
+      },
+      handler: holdGesture
+    };
+  })('hold');
+
+  /**
+   * @module gestures
+   */
+  /**
+   * when a touch is being released from the page
+   *
+   * @class Release
+   * @static
+   */
+  /**
+   * @event release
+   * @param {Object} ev
+   */
+  GestureDetector.gestures.Release = {
+    name: 'release',
+    index: Infinity,
+    handler: function releaseGesture(ev, inst) {
+      if(ev.eventType == EVENT_RELEASE) {
+        inst.trigger(this.name, ev);
+      }
+    }
+  };
+
+  /**
+   * @module gestures
+   */
+  /**
+   * triggers swipe events when the end velocity is above the threshold
+   * for best usage, set `preventDefault` (on the drag gesture) to `true`
+   * ````
+   *  GestureDetectortime.on("dragleft swipeleft", function(ev) {
+   *    console.log(ev);
+   *    ev.gesture.preventDefault();
+   *  });
+   * ````
+   *
+   * @class Swipe
+   * @static
+   */
+  /**
+   * @event swipe
+   * @param {Object} ev
+   */
+  /**
+   * @event swipeleft
+   * @param {Object} ev
+   */
+  /**
+   * @event swiperight
+   * @param {Object} ev
+   */
+  /**
+   * @event swipeup
+   * @param {Object} ev
+   */
+  /**
+   * @event swipedown
+   * @param {Object} ev
+   */
+  GestureDetector.gestures.Swipe = {
+    name: 'swipe',
+    index: 40,
+    defaults: {
+      /**
+       * @property swipeMinTouches
+       * @type {Number}
+       * @default 1
+       */
+      swipeMinTouches: 1,
+
+      /**
+       * @property swipeMaxTouches
+       * @type {Number}
+       * @default 1
+       */
+      swipeMaxTouches: 1,
+
+      /**
+       * horizontal swipe velocity
+       * @property swipeVelocityX
+       * @type {Number}
+       * @default 0.6
+       */
+      swipeVelocityX: 0.6,
+
+      /**
+       * vertical swipe velocity
+       * @property swipeVelocityY
+       * @type {Number}
+       * @default 0.6
+       */
+      swipeVelocityY: 0.6
+    },
+
+    handler: function swipeGesture(ev, inst) {
+      if(ev.eventType == EVENT_RELEASE) {
+        var touches = ev.touches.length,
+            options = inst.options;
+
+        // max touches
+        if(touches < options.swipeMinTouches ||
+          touches > options.swipeMaxTouches) {
+          return;
+        }
+
+        // when the distance we moved is too small we skip this gesture
+        // or we can be already in dragging
+        if(ev.velocityX > options.swipeVelocityX ||
+          ev.velocityY > options.swipeVelocityY) {
+          // trigger swipe events
+          inst.trigger(this.name, ev);
+          inst.trigger(this.name + ev.direction, ev);
+        }
+      }
+    }
+  };
+
+  /**
+   * @module gestures
+   */
+  /**
+   * Single tap and a double tap on a place
+   *
+   * @class Tap
+   * @static
+   */
+  /**
+   * @event tap
+   * @param {Object} ev
+   */
+  /**
+   * @event doubletap
+   * @param {Object} ev
+   */
+
+  /**
+   * @param {String} name
+   */
+  (function(name) {
+    var hasMoved = false;
+
+    function tapGesture(ev, inst) {
+      var options = inst.options,
+          current = Detection.current,
+          prev = Detection.previous,
+          sincePrev,
+          didDoubleTap;
+
+      switch(ev.eventType) {
+      case EVENT_START:
+        hasMoved = false;
+        break;
+
+      case EVENT_MOVE:
+        hasMoved = hasMoved || (ev.distance > options.tapMaxDistance);
+        break;
+
+      case EVENT_END:
+        if(!Utils.inStr(ev.srcEvent.type, 'cancel') && ev.deltaTime < options.tapMaxTime && !hasMoved) {
+          // previous gesture, for the double tap since these are two different gesture detections
+          sincePrev = prev && prev.lastEvent && ev.timeStamp - prev.lastEvent.timeStamp;
+          didDoubleTap = false;
+
+          // check if double tap
+          if(prev && prev.name == name &&
+            (sincePrev && sincePrev < options.doubleTapInterval) &&
+            ev.distance < options.doubleTapDistance) {
+            inst.trigger('doubletap', ev);
+            didDoubleTap = true;
+          }
+
+          // do a single tap
+          if(!didDoubleTap || options.tapAlways) {
+            current.name = name;
+            inst.trigger(current.name, ev);
+          }
+        }
+        break;
+      }
+    }
+
+    GestureDetector.gestures.Tap = {
+      name: name,
+      index: 100,
+      handler: tapGesture,
+      defaults: {
+        /**
+         * max time of a tap, this is for the slow tappers
+         * @property tapMaxTime
+         * @type {Number}
+         * @default 250
+         */
+        tapMaxTime: 250,
+
+        /**
+         * max distance of movement of a tap, this is for the slow tappers
+         * @property tapMaxDistance
+         * @type {Number}
+         * @default 10
+         */
+        tapMaxDistance: 10,
+
+        /**
+         * always trigger the `tap` event, even while double-tapping
+         * @property tapAlways
+         * @type {Boolean}
+         * @default true
+         */
+        tapAlways: true,
+
+        /**
+         * max distance between two taps
+         * @property doubleTapDistance
+         * @type {Number}
+         * @default 20
+         */
+        doubleTapDistance: 20,
+
+        /**
+         * max time between two taps
+         * @property doubleTapInterval
+         * @type {Number}
+         * @default 300
+         */
+        doubleTapInterval: 300
+      }
+    };
+  })('tap');
+
+  /**
+   * @module gestures
+   */
+  /**
+   * when a touch is being touched at the page
+   *
+   * @class Touch
+   * @static
+   */
+  /**
+   * @event touch
+   * @param {Object} ev
+   */
+  GestureDetector.gestures.Touch = {
+    name: 'touch',
+    index: -Infinity,
+    defaults: {
+      /**
+       * call preventDefault at touchstart, and makes the element blocking by disabling the scrolling of the page,
+       * but it improves gestures like transforming and dragging.
+       * be careful with using this, it can be very annoying for users to be stuck on the page
+       * @property preventDefault
+       * @type {Boolean}
+       * @default false
+       */
+      preventDefault: false,
+
+      /**
+       * disable mouse events, so only touch (or pen!) input triggers events
+       * @property preventMouse
+       * @type {Boolean}
+       * @default false
+       */
+      preventMouse: false
+    },
+    handler: function touchGesture(ev, inst) {
+      if(inst.options.preventMouse && ev.pointerType == POINTER_MOUSE) {
+        ev.stopDetect();
+        return;
+      }
+
+      if(inst.options.preventDefault) {
+        ev.preventDefault();
+      }
+
+      if(ev.eventType == EVENT_TOUCH) {
+        inst.trigger('touch', ev);
+      }
+    }
+  };
+
+  /**
+   * @module gestures
+   */
+  /**
+   * User want to scale or rotate with 2 fingers
+   * Preventing the default browser behavior is a good way to improve feel and working. This can be done with the
+   * `preventDefault` option.
+   *
+   * @class Transform
+   * @static
+   */
+  /**
+   * @event transform
+   * @param {Object} ev
+   */
+  /**
+   * @event transformstart
+   * @param {Object} ev
+   */
+  /**
+   * @event transformend
+   * @param {Object} ev
+   */
+  /**
+   * @event pinchin
+   * @param {Object} ev
+   */
+  /**
+   * @event pinchout
+   * @param {Object} ev
+   */
+  /**
+   * @event rotate
+   * @param {Object} ev
+   */
+
+  /**
+   * @param {String} name
+   */
+  (function(name) {
+    var triggered = false;
+
+    function transformGesture(ev, inst) {
+      switch(ev.eventType) {
+      case EVENT_START:
+        triggered = false;
+        break;
+
+      case EVENT_MOVE:
+        // at least multitouch
+        if(ev.touches.length < 2) {
+          return;
+        }
+
+        var scaleThreshold = Math.abs(1 - ev.scale);
+        var rotationThreshold = Math.abs(ev.rotation);
+
+        // when the distance we moved is too small we skip this gesture
+        // or we can be already in dragging
+        if(scaleThreshold < inst.options.transformMinScale &&
+          rotationThreshold < inst.options.transformMinRotation) {
+          return;
+        }
+
+        // we are transforming!
+        Detection.current.name = name;
+
+        // first time, trigger dragstart event
+        if(!triggered) {
+          inst.trigger(name + 'start', ev);
+          triggered = true;
+        }
+
+        inst.trigger(name, ev); // basic transform event
+
+        // trigger rotate event
+        if(rotationThreshold > inst.options.transformMinRotation) {
+          inst.trigger('rotate', ev);
+        }
+
+        // trigger pinch event
+        if(scaleThreshold > inst.options.transformMinScale) {
+          inst.trigger('pinch', ev);
+          inst.trigger('pinch' + (ev.scale < 1 ? 'in' : 'out'), ev);
+        }
+        break;
+
+      case EVENT_RELEASE:
+        if(triggered && ev.changedLength < 2) {
+          inst.trigger(name + 'end', ev);
+          triggered = false;
+        }
+        break;
+      }
+    }
+
+    GestureDetector.gestures.Transform = {
+      name: name,
+      index: 45,
+      defaults: {
+        /**
+         * minimal scale factor, no scale is 1, zoomin is to 0 and zoomout until higher then 1
+         * @property transformMinScale
+         * @type {Number}
+         * @default 0.01
+         */
+        transformMinScale: 0.01,
+
+        /**
+         * rotation in degrees
+         * @property transformMinRotation
+         * @type {Number}
+         * @default 1
+         */
+        transformMinRotation: 1
+      },
+
+      handler: transformGesture
+    };
+  })('transform');
+
+  // AMD export
+  if(typeof define == 'function' && define.amd) {
+    define(function() {
+      return GestureDetector;
+    });
+    // commonjs export
+  } else if(typeof module !== 'undefined' && module.exports) {
+    module.exports = GestureDetector;
+    // browser export
+  } else {
+    window.ons = window.ons || {};
+    window.ons.GestureDetector = GestureDetector;
+  }
+
+})(window);
+
+'use strict';
+
+(function (ons) {
+
+  // fastclick
+  window.addEventListener('load', function () {
+    return FastClick.attach(document.body);
+  }, false);
+
+  // viewport.js
+  new Viewport().setup();
+
+  // modernize
+  Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function (elem, rule) {
+    Modernizr.addTest('overflowtouch', window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
+  });
+
+  // BaseElement
+  if (typeof HTMLElement !== 'function') {
+    ons._BaseElement = function () {};
+    ons._BaseElement.prototype = document.createElement('div');
+  } else {
+    ons._BaseElement = HTMLElement;
+  }
+})(window.ons = window.ons || {});
+'use strict';
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var scheme = { '': 'bottom-bar--*' };
+
+  var BottomToolbarElement = (function (_ons$_BaseElement) {
+    function BottomToolbarElement() {
+      _classCallCheck(this, BottomToolbarElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(BottomToolbarElement, _ons$_BaseElement);
+
+    _createClass(BottomToolbarElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this.classList.add('bottom-bar');
+        this.style.zIndex = '0';
+        this._update();
+
+        ModifierUtil.initModifier(this, scheme);
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'inline') {
+          this._update();
+        } else if (name === 'modifier') {
+          return ModifierUtil.onModifierChanged(last, current, this, scheme);
+        }
+      }
+    }, {
+      key: '_update',
+      value: function _update() {
+        var inline = typeof this.getAttribute('inline') === 'string';
+
+        this.style.position = inline ? 'static' : 'absolute';
+      }
+    }]);
+
+    return BottomToolbarElement;
+  })(ons._BaseElement);
+
+  if (!window.OnsBottomToolbar) {
+    window.OnsBottomToolbar = document.registerElement('ons-bottom-toolbar', {
+      prototype: BottomToolbarElement.prototype
+    });
+  }
+})();
+'use strict';
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var scheme = { '': 'button--*' };
+
+  var ButtonElement = (function (_ons$_BaseElement) {
+    function ButtonElement() {
+      _classCallCheck(this, ButtonElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(ButtonElement, _ons$_BaseElement);
+
+    _createClass(ButtonElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this.classList.add('button');
+
+        ModifierUtil.initModifier(this, scheme);
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'modifier') {
+          return ModifierUtil.onModifierChanged(last, current, this, scheme);
+        }
+      }
+    }]);
+
+    return ButtonElement;
+  })(ons._BaseElement);
+
+  if (!window.OnsButtonElement) {
+    window.OnsButtonElement = document.registerElement('ons-button', {
+      prototype: ButtonElement.prototype
+    });
+  }
+})();
+'use strict';
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var ColumnElement = (function (_ons$_BaseElement) {
+    function ColumnElement() {
+      _classCallCheck(this, ColumnElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(ColumnElement, _ons$_BaseElement);
+
+    _createClass(ColumnElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        if (this.getAttribute('width')) {
+          this._updateWidth();
+        }
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'width') {
+          this._updateWidth();
+        }
+      }
+    }, {
+      key: '_updateWidth',
+      value: function _updateWidth() {
+        var width = this.getAttribute('width');
+        if (typeof width === 'string') {
+          width = ('' + width).trim();
+          width = width.match(/^\d+$/) ? width + '%' : width;
+
+          this.style.webkitBoxFlex = '0';
+          this.style.webkitFlex = '0 0 ' + width;
+          this.style.mozBoxFlex = '0';
+          this.style.mozFlex = '0 0 ' + width;
+          this.style.msFlex = '0 0 ' + width;
+          this.style.flex = '0 0 ' + width;
+          this.style.maxWidth = width;
+        }
+      }
+    }]);
+
+    return ColumnElement;
+  })(ons._BaseElement);
+
+  if (!window.OnsColElement) {
+    window.OnsColElement = document.registerElement('ons-col', {
+      prototype: ColumnElement.prototype
+    });
+  }
+})();
+'use strict';
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var GestureDetectorElement = (function (_ons$_BaseElement) {
+    function GestureDetectorElement() {
+      _classCallCheck(this, GestureDetectorElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(GestureDetectorElement, _ons$_BaseElement);
+
+    _createClass(GestureDetectorElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this._gestureDetector = new ons.GestureDetector(this);
+      }
+    }]);
+
+    return GestureDetectorElement;
+  })(ons._BaseElement);
+
+  if (!window.OnsGestureDetector) {
+    window.OnsGestureDetector = document.registerElement('ons-gesture-detector', {
+      prototype: GestureDetectorElement.prototype
+    });
+  }
+})();
+'use strict';
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var IconElement = (function (_ons$_BaseElement) {
+    function IconElement() {
+      _classCallCheck(this, IconElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(IconElement, _ons$_BaseElement);
+
+    _createClass(IconElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this._update();
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (['icon', 'size'].indexOf(name) !== -1) {
+          this._update();
+        }
+      }
+    }, {
+      key: '_update',
+      value: function _update() {
+        var _this = this;
+
+        this._cleanClassAttribute();
+
+        var builded = this._buildClassAndStyle(this);
+
+        for (var key in builded.style) {
+          this.style[key] = builded.style[key];
+        }
+
+        builded.classList.forEach((function (className) {
+          _this.classList.add(className);
+        }).bind(this));
+      }
+    }, {
+      key: '_cleanClassAttribute',
+
+      /**
+       * Remove unneeded class value.
+       */
+      value: function _cleanClassAttribute() {
+        var classList = this.classList;
+
+        var removal = Array.apply(null, this.classList).filter(function (klass) {
+          return klass === 'fa' || klass.indexOf('fa-') === 0 || klass.indexOf('ion-') === 0;
+        }).forEach(function (className) {
+          classList.remove(className);
+        });
+
+        classList.remove('ons-icon--ion');
+      }
+    }, {
+      key: '_buildClassAndStyle',
+      value: function _buildClassAndStyle() {
+        var classList = ['ons-icon'];
+        var style = {};
+
+        // icon
+        var iconName = '' + this.getAttribute('icon');
+        if (iconName.indexOf('ion-') === 0) {
+          classList.push(iconName);
+          classList.push('ons-icon--ion');
+        } else if (iconName.indexOf('fa-') === 0) {
+          classList.push(iconName);
+          classList.push('fa');
+        } else {
+          classList.push('fa');
+          classList.push('fa-' + iconName);
+        }
+
+        // size
+        var size = '' + this.getAttribute('size');
+        if (size.match(/^[1-5]x|lg$/)) {
+          classList.push('fa-' + size);
+        } else if (typeof size === 'string') {
+          style.fontSize = size;
+        } else {
+          classList.push('fa-lg');
+        }
+
+        return {
+          classList: classList,
+          style: style
+        };
+      }
+    }]);
+
+    return IconElement;
+  })(ons._BaseElement);
+
+  if (!window.OnsIconElement) {
+    window.OnsIconElement = document.registerElement('ons-icon', {
+      prototype: IconElement.prototype
+    });
+  }
+})();
+'use strict';
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var scheme = { '': 'list__header--*' };
+
+  var ListHeaderElement = (function (_ons$_BaseElement) {
+    function ListHeaderElement() {
+      _classCallCheck(this, ListHeaderElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(ListHeaderElement, _ons$_BaseElement);
+
+    _createClass(ListHeaderElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this.classList.add('list__header');
+        ModifierUtil.initModifier(this, scheme);
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'modifier') {
+          return ModifierUtil.onModifierChanged(last, current, this, scheme);
+        }
+      }
+    }]);
+
+    return ListHeaderElement;
+  })(ons._BaseElement);
+
+  if (!window.OnsListHeader) {
+    window.OnsListHeader = document.registerElement('ons-list-header', {
+      prototype: ListHeaderElement.prototype
+    });
+  }
+})();
+'use strict';
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var scheme = { '': 'list__item--*' };
+
+  var ListItemElement = (function (_ons$_BaseElement) {
+    function ListItemElement() {
+      _classCallCheck(this, ListItemElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(ListItemElement, _ons$_BaseElement);
+
+    _createClass(ListItemElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this.classList.add('list__item');
+        ModifierUtil.initModifier(this, scheme);
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'modifier') {
+          return ModifierUtil.onModifierChanged(last, current, this, scheme);
+        }
+      }
+    }]);
+
+    return ListItemElement;
+  })(ons._BaseElement);
+
+  if (!window.OnsListItem) {
+    window.OnsListItem = document.registerElement('ons-list-item', {
+      prototype: ListItemElement.prototype
+    });
+  }
+})();
+'use strict';
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var scheme = { '': 'list--*' };
+
+  var ListElement = (function (_ons$_BaseElement) {
+    function ListElement() {
+      _classCallCheck(this, ListElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(ListElement, _ons$_BaseElement);
+
+    _createClass(ListElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this.classList.add('list');
+        ModifierUtil.initModifier(this, scheme);
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'modifier') {
+          return ModifierUtil.onModifierChanged(last, current, this, scheme);
+        }
+      }
+    }]);
+
+    return ListElement;
+  })(ons._BaseElement);
+
+  if (!window.OnsList) {
+    window.OnsList = document.registerElement('ons-list', {
+      prototype: ListElement.prototype
+    });
+  }
+})();
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+'use strict';
+
+window.OnsRowElement = window.OnsRowElement ? window.OnsRowElement : document.registerElement('ons-row');
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+'use strict';
+
+window.OnsScrollerElement = window.OnsScrollerElement ? window.OnsScrollerElement : document.registerElement('ons-scroller');
+'use strict';
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var TemplateElement = (function (_ons$_BaseElement) {
+    function TemplateElement() {
+      _classCallCheck(this, TemplateElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(TemplateElement, _ons$_BaseElement);
+
+    _createClass(TemplateElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this.template = this.innerHTML;
+
+        while (this.firstChild) {
+          this.removeChild(this.firstChild);
+        }
+      }
+    }]);
+
+    return TemplateElement;
+  })(ons._BaseElement);
+
+  if (!window.OnsTemplate) {
+    window.OnsTemplate = document.registerElement('ons-template', {
+      prototype: TemplateElement.prototype
+    });
+  }
+})();
+'use strict';
+
+var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var scheme = { '': 'toolbar-button--*' };
+
+  var ToolbarButtonElement = (function (_ons$_BaseElement) {
+    function ToolbarButtonElement() {
+      _classCallCheck(this, ToolbarButtonElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(ToolbarButtonElement, _ons$_BaseElement);
+
+    _createClass(ToolbarButtonElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this.classList.add('toolbar-button');
+        this.classList.add('navigation-bar__line-height');
+
+        ModifierUtil.initModifier(this, scheme);
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'modifier') {
+          return ModifierUtil.onModifierChanged(last, current, this, scheme);
+        }
+      }
+    }]);
+
+    return ToolbarButtonElement;
+  })(ons._BaseElement);
+
+  if (!window.OnsToolbarButton) {
+    window.OnsToolbarButton = document.registerElement('ons-toolbar-button', {
+      prototype: ToolbarButtonElement.prototype
+    });
+  }
+})();
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/back_button.tpl',
     '<span \n' +
@@ -4981,21 +6954,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
-  'use strict';
-  $templateCache.put('templates/button.tpl',
-    '<span class="label ons-button-inner"></span>\n' +
-    '<span class="spinner button__spinner {{modifierTemplater(\'button--*__spinner\')}}"></span>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/dialog.tpl',
     '<div class="dialog-mask"></div>\n' +
@@ -5006,20 +6967,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
-  'use strict';
-  $templateCache.put('templates/icon.tpl',
-    '<i class="fa fa-{{icon}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}" ng-class="sizeClass" ng-style="style"></i>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/popover.tpl',
     '<div class="popover-mask"></div>\n' +
@@ -5032,20 +6982,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
-  'use strict';
-  $templateCache.put('templates/row.tpl',
-    '<div class="row row-{{align}} ons-row-inner"></div>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/sliding_menu.tpl',
     '<div class="onsen-sliding-menu__menu ons-sliding-menu-inner"></div>\n' +
@@ -5055,9 +6994,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/split_view.tpl',
     '<div class="onsen-split-view__secondary full-screen ons-split-view-inner"></div>\n' +
@@ -5067,9 +7006,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/switch.tpl',
     '<label class="switch {{modifierTemplater(\'switch--*\')}}">\n' +
@@ -5081,9 +7020,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/tab.tpl',
     '<input type="radio" name="tab-bar-{{tabbarId}}" style="display: none">\n' +
@@ -5094,130 +7033,15 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/tab_bar.tpl',
     '<div class="ons-tab-bar__content tab-bar__content"></div>\n' +
     '<div ng-hide="hideTabs" class="tab-bar ons-tab-bar__footer {{modifierTemplater(\'tab-bar--*\')}} ons-tabbar-inner"></div>\n' +
     '');
 }]);
-})();
-
-(function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
-  'use strict';
-  $templateCache.put('templates/toolbar_button.tpl',
-    '<span class="toolbar-button {{modifierTemplater(\'toolbar-button--*\')}} navigation-bar__line-height" ng-transclude></span>\n' +
-    '');
-}]);
-})();
-
-/*
-Copyright 2013-2015 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
-window.DoorLock = (function() {
-  /**
-   * Door locking system.
-   *
-   * @param {Object} [options]
-   * @param {Function} [options.log]
-   */
-  var DoorLock = function(options) {
-    options = options || {};
-    this._lockList = [];
-    this._waitList = [];
-    this._log = options.log || function() {};
-  };
-
-  DoorLock.generateId = (function() {
-    var i = 0;
-    return function() {
-      return i++;
-    };
-  })();
-
-  DoorLock.prototype = {
-    /**
-     * Register a lock.
-     *
-     * @return {Function} Callback for unlocking.
-     */
-    lock: function() {
-      var self = this;
-      var unlock = function() {
-        self._unlock(unlock);
-      };
-      unlock.id = DoorLock.generateId();
-      this._lockList.push(unlock);
-      this._log('lock: ' + (unlock.id));
-
-      return unlock;
-    },
-
-    _unlock: function(fn) {
-      var index = this._lockList.indexOf(fn);
-      if (index === -1) {
-        throw new Error('This function is not registered in the lock list.');
-      }
-
-      this._lockList.splice(index, 1);
-      this._log('unlock: ' + fn.id);
-
-      this._tryToFreeWaitList();
-    },
-
-    _tryToFreeWaitList: function() {
-      while (!this.isLocked() && this._waitList.length > 0) {
-        this._waitList.shift()();
-      }
-    },
-
-    /**
-     * Register a callback for waiting unlocked door.
-     *
-     * @params {Function} callback Callback on unlocking the door completely.
-     */
-    waitUnlock: function(callback) {
-      if (!(callback instanceof Function)) {
-        throw new Error('The callback param must be a function.');
-      }
-
-      if (this.isLocked()) {
-        this._waitList.push(callback);
-      } else {
-        callback();
-      }
-    },
-
-    /**
-     * @return {Boolean}
-     */
-    isLocked: function() {
-      return this._lockList.length > 0;
-    }
-  };
-
-  return DoorLock;
-
 })();
 
 /*
@@ -5444,32 +7268,17 @@ limitations under the License.
  *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
  */
 
-window.ons = (function(){
+(function(ons){
   'use strict';
 
   var module = angular.module('onsen', ['templates-main']);
   angular.module('onsen.directives', ['onsen']); // for BC
 
   // JS Global facade for Onsen UI.
-  var ons = createOnsenFacade();
-  initKeyboardEvents();
-  waitDeviceReady();
+  initOnsenFacade();
   waitOnsenUILoad();
   initAngularModule();
-  changeHammerDefault();
-
-  return ons;
-
-  function waitDeviceReady() {
-    var unlockDeviceReady = ons._readyLock.lock();
-    window.addEventListener('DOMContentLoaded', function() {
-      if (ons.isWebView()) {
-        window.document.addEventListener('deviceready', unlockDeviceReady, false);
-      } else {
-        unlockDeviceReady();
-      }
-    }, false);
-  }
+  changeGestureDetectorDefault();
 
   function waitOnsenUILoad() {
     var unlockOnsenUI = ons._readyLock.lock();
@@ -5503,69 +7312,15 @@ window.ons = (function(){
     }]);
   }
 
-  //Change the default touchAction of Hammer.js, needed for Windows Phone app
-  function changeHammerDefault() {
-    Hammer.defaults.behavior.touchAction = 'none';
+  // Change the default touchAction of GestureDetector, needed for Windows Phone app
+  function changeGestureDetectorDefault() {
+    ons.GestureDetector.defaults.behavior.touchAction = 'none';
   }
 
-  function initKeyboardEvents() {
-    ons.softwareKeyboard = new MicroEvent();
-    ons.softwareKeyboard._visible = false;
-
-    var onShow = function() {
-      ons.softwareKeyboard._visible = true;
-      ons.softwareKeyboard.emit('show');
-    },
-        onHide = function() {
-      ons.softwareKeyboard._visible = false;
-      ons.softwareKeyboard.emit('hide');
-    };
-
-    var bindEvents = function() {
-      if (typeof Keyboard !== 'undefined') {
-        // https://github.com/martinmose/cordova-keyboard/blob/95f3da3a38d8f8e1fa41fbf40145352c13535a00/README.md
-        Keyboard.onshow = onShow;
-        Keyboard.onhide = onHide;
-        ons.softwareKeyboard.emit('init', {visible: Keyboard.isVisible});
-        return true;
-      } else if (typeof cordova.plugins !== 'undefined' && typeof cordova.plugins.Keyboard !== 'undefined') {
-        // https://github.com/driftyco/ionic-plugins-keyboard/blob/ca27ecf/README.md
-        window.addEventListener('native.keyboardshow', onShow);
-        window.addEventListener('native.keyboardhide', onHide);
-        ons.softwareKeyboard.emit('init', {visible: cordova.plugins.Keyboard.isVisible});
-        return true;
-      }
-      return false;
-    };
-
-    var noPluginError = function() {
-      console.warn('ons-keyboard: Cordova Keyboard plugin is not present.');
-    };
-
-    document.addEventListener('deviceready', function() {
-      if (!bindEvents()) {
-        if (document.querySelector('[ons-keyboard-active]') || 
-          document.querySelector('[ons-keyboard-inactive]')) {
-          noPluginError();
-        }
-
-        ons.softwareKeyboard.on = noPluginError;
-      }
-    });
-  }
-
-  function createOnsenFacade() {
-    var ons = {
-
-      _readyLock: new DoorLock(),
+  function initOnsenFacade() {
+    var object = {
 
       _onsenService: null,
-
-      _config: {
-        autoStatusBarFill: true
-      },
-
-      _unlockersDict: {},
 
       // Object to attach component variables to when using the var="..." attribute.
       // Can be set to null to avoid polluting the global scope.
@@ -5602,26 +7357,6 @@ window.ons = (function(){
         }
 
         return module;
-      },
-
-      /**
-       * Enable status bar fill feature on iOS7 and above.
-       */
-      enableAutoStatusBarFill: function() {
-        if (this.isReady()) {
-          throw new Error('This method must be called before ons.isReady() is true.');
-        }
-        this._config.autoStatusBarFill = true;
-      },
-
-      /**
-       * Disable status bar fill feature on iOS7 and above.
-       */
-      disableAutoStatusBarFill: function() {
-        if (this.isReady()) {
-          throw new Error('This method must be called before ons.isReady() is true.');
-        }
-        this._config.autoStatusBarFill = false;
       },
 
       /**
@@ -5676,13 +7411,6 @@ window.ons = (function(){
       },
 
       /**
-       * @return {Boolean}
-       */
-      isReady: function() {
-        return !ons._readyLock.isLocked();
-      },
-
-      /**
        * @param {HTMLElement} dom
        */
       compile : function(dom) {
@@ -5708,39 +7436,6 @@ window.ons = (function(){
         }
 
         return this._onsenService;
-      },
-
-      /**
-       * @param {Array} [dependencies]
-       * @param {Function} callback
-       */
-      ready : function(/* dependencies, */callback) {
-        if (callback instanceof Function) {
-          if (ons.isReady()) {
-            callback();
-          } else {
-            ons._readyLock.waitUnlock(callback);
-          }
-        } else if (angular.isArray(callback) && arguments[1] instanceof Function) {
-          var dependencies = callback;
-          callback = arguments[1];
-
-          ons.ready(function() {
-            var $onsen = ons._getOnsenService();
-            $onsen.waitForVariables(dependencies, callback);
-          });
-        }
-      },
-
-      /**
-       * @return {Boolean}
-       */
-      isWebView: function() {
-        if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
-          throw new Error('isWebView() method is available after dom contents loaded.');
-        }
-
-        return !!(window.cordova || window.phonegap || window.PhoneGap);
       },
 
       /**
@@ -5923,10 +7618,15 @@ window.ons = (function(){
         });
       }
     };
-    return ons;
+
+    for (var key in object) {
+      if (object.hasOwnProperty(key)) {
+        ons[key] = object[key];
+      }
+    }
   }
 
-})();
+})(window.ons = window.ons || {});
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -5950,7 +7650,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('AlertDialogView', ['$onsen', 'DialogAnimator', 'SlideDialogAnimator', 'AndroidAlertDialogAnimator', 'IOSAlertDialogAnimator', function($onsen, DialogAnimator, SlideDialogAnimator, AndroidAlertDialogAnimator, IOSAlertDialogAnimator) {
+  module.factory('AlertDialogView', ['$parse', '$onsen', 'AnimationChooser', 'DialogAnimator', 'SlideDialogAnimator', 'AndroidAlertDialogAnimator', 'IOSAlertDialogAnimator', function($parse, $onsen, AnimationChooser, DialogAnimator, SlideDialogAnimator, AndroidAlertDialogAnimator, IOSAlertDialogAnimator) {
 
     var AlertDialogView = Class.extend({
 
@@ -5973,14 +7673,15 @@ limitations under the License.
         this._visible = false;
         this._doorLock = new DoorLock();
 
-        this._animation = AlertDialogView._animatorDict[typeof attrs.animation !== 'undefined' ? 
-          attrs.animation : 'default'];
+        this._animationChooser = new AnimationChooser({
+          animators: AlertDialogView._animatorDict,
+          baseClass: DialogAnimator,
+          baseClassName: 'DialogAnimator',
+          defaultAnimation: attrs.animation,
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
 
-        if (!this._animation) {
-          throw new Error('No such animation: ' + attrs.animation);
-        }
-
-        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
         this._createMask(attrs.maskColor);
 
         this._scope.$on('$destroy', this._destroy.bind(this));
@@ -5991,6 +7692,7 @@ limitations under the License.
        *
        * @param {Object} [options]
        * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
        * @param {Function} [options.callback] callback after dialog is shown
        */
       show: function(options) {
@@ -6002,21 +7704,17 @@ limitations under the License.
           alertDialog: this,
           cancel: function() { cancel = true; }
         });
-        
+
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
             this._mask.css('display', 'block');
             this._mask.css('opacity', 1);
             this._element.css('display', 'block');
-            
-            if (options.animation) {
-              animation = AlertDialogView._animatorDict[options.animation];
-            }
-            
-            animation.show(this, function() {
+
+            var animator = this._animationChooser.newAnimator(options);
+            animator.show(this, function() {
               this._visible = true;
               unlock();
               this.emit('postshow', {alertDialog: this});
@@ -6031,13 +7729,14 @@ limitations under the License.
        *
        * @param {Object} [options]
        * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
        * @param {Function} [options.callback] callback after dialog is hidden
        */
       hide: function(options) {
         options = options || {};
         var cancel = false,
           callback = options.callback || function() {};
-        
+
         this.emit('prehide', {
           alertDialog: this,
           cancel: function() { cancel = true; }
@@ -6045,14 +7744,10 @@ limitations under the License.
 
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
-            if (options.animation) {
-              animation = AlertDialogView._animatorDict[options.animation];
-            }
-
-            animation.hide(this, function() {
+            var animator = this._animationChooser.newAnimator(options);
+            animator.hide(this, function() {
               this._element.css('display', 'none');
               this._mask.css('display', 'none');
               this._visible = false;
@@ -6095,7 +7790,7 @@ limitations under the License.
       /**
        * Disable or enable alert dialog.
        *
-       * @param {Boolean} 
+       * @param {Boolean}
        */
       setDisabled: function(disabled) {
         if (typeof disabled !== 'boolean') {
@@ -6119,14 +7814,14 @@ limitations under the License.
       },
 
       /**
-       * Make alert dialog cancelable or uncancelable. 
+       * Make alert dialog cancelable or uncancelable.
        *
        * @param {Boolean}
        */
       setCancelable: function(cancelable) {
         if (typeof cancelable !== 'boolean') {
-          throw new Error('Argument must be a boolean.'); 
-        }  
+          throw new Error('Argument must be a boolean.');
+        }
 
         if (cancelable) {
           this._element.attr('cancelable', true);
@@ -6164,7 +7859,7 @@ limitations under the License.
         });
 
         this._mask.on('click', this._cancel.bind(this));
- 
+
         if (color) {
           this._mask.css('background-color', color);
         }
@@ -6174,21 +7869,21 @@ limitations under the License.
     });
 
     AlertDialogView._animatorDict = {
-      'default': $onsen.isAndroid() ? new AndroidAlertDialogAnimator() : new IOSAlertDialogAnimator(),
-      'fade': $onsen.isAndroid() ? new AndroidAlertDialogAnimator() : new IOSAlertDialogAnimator(),
-      'slide': new SlideDialogAnimator(),
-      'none': new DialogAnimator()
+      'default': $onsen.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
+      'fade': $onsen.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
+      'slide': SlideDialogAnimator,
+      'none': DialogAnimator
     };
 
     /**
      * @param {String} name
-     * @param {DialogAnimator} animator
+     * @param {Function} Animator
      */
-    AlertDialogView.registerAnimator = function(name, animator) {
-      if (!(animator instanceof DialogAnimator)) {
-        throw new Error('"animator" param must be an instance of DialogAnimator');
+    AlertDialogView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof DialogAnimator)) {
+        throw new Error('"Animator" param must inherit DialogAnimator');
       }
-      this._animatorDict[name] = animator;
+      this._animatorDict[name] = Animator;
     };
 
     MicroEvent.mixin(AlertDialogView);
@@ -6196,7 +7891,6 @@ limitations under the License.
     return AlertDialogView;
   }]);
 })();
-
 
 
 /*
@@ -6229,14 +7923,7 @@ limitations under the License.
     var AndroidAlertDialogAnimator = DialogAnimator.extend({
 
       timing: 'cubic-bezier(.1, .7, .4, 1)',
-      duration: 0.2, 
-
-      init: function(options) {
-        options = options || {};
-
-        this.timing = options.timing || this.timing;
-        this.duration = options.duration !== undefined ? options.duration : this.duration;
-      },
+      duration: 0.2,
 
       /**
        * @param {Object} dialog
@@ -6251,6 +7938,7 @@ limitations under the License.
             .queue({
               opacity: 0
             })
+            .wait(this.delay)
             .queue({
               opacity: 1.0
             }, {
@@ -6266,6 +7954,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3d(-50%, -50%, 0) scale3d(1.0, 1.0, 1.0)',
@@ -6283,7 +7972,7 @@ limitations under the License.
       },
 
       /**
-       * @param {Object} dialog 
+       * @param {Object} dialog
        * @param {Function} callback
        */
       hide: function(dialog, callback) {
@@ -6295,6 +7984,7 @@ limitations under the License.
             .queue({
               opacity: 1.0
             })
+            .wait(this.delay)
             .queue({
               opacity: 0
             }, {
@@ -6310,6 +8000,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3d(-50%, -50%, 0) scale3d(0.9, 0.9, 1.0)',
@@ -6332,7 +8023,6 @@ limitations under the License.
   }]);
 
 })();
-
 
 
 /*
@@ -6365,14 +8055,7 @@ limitations under the License.
     var AndroidDialogAnimator = DialogAnimator.extend({
 
       timing: 'ease-in-out',
-      duration: 0.3, 
-
-      init: function(options) {
-        options = options || {};
-
-        this.timing = options.timing || this.timing;
-        this.duration = options.duration !== undefined ? options.duration : this.duration;
-      },
+      duration: 0.3,
 
       /**
        * @param {Object} dialog
@@ -6387,6 +8070,7 @@ limitations under the License.
             .queue({
               opacity: 0
             })
+            .wait(this.delay)
             .queue({
               opacity: 1.0
             }, {
@@ -6402,6 +8086,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3d(-50%, -50%, 0)',
@@ -6419,7 +8104,7 @@ limitations under the License.
       },
 
       /**
-       * @param {Object} dialog 
+       * @param {Object} dialog
        * @param {Function} callback
        */
       hide: function(dialog, callback) {
@@ -6431,6 +8116,7 @@ limitations under the License.
             .queue({
               opacity: 1.0
             })
+            .wait(this.delay)
             .queue({
               opacity: 0
             }, {
@@ -6446,6 +8132,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3d(-50%, -60%, 0)',
@@ -6469,7 +8156,6 @@ limitations under the License.
 
 })();
 
-
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -6487,93 +8173,75 @@ limitations under the License.
 
 */
 
-(function(){
+(function() {
   'use strict';
+
   var module = angular.module('onsen');
 
-  module.factory('ButtonView', ['$onsen', function($onsen) {
-
-    var ButtonView = Class.extend({
+  module.factory('AnimationChooser', function() {
+    var AnimationChooser = Class.extend({
 
       /**
-       * @param {Object} scope
-       * @param {jqLite} element
-       * @param {Object} attrs
+       * @param {Object} opts
+       * @param {Object} opts.animators The dictionary for animator classes
+       * @param {Function} opts.baseClass The base class of animators
+       * @param {String} opts.baseClassName The name of the base class of animators
+       * @param {String} opts.defaultAnimation The default animation name
+       * @param {Object} opts.defaultAnimationOptions The default animation options
        */
-      init: function(scope, element, attrs) {
-        this._element = element;
-        this._scope = scope;
-        this._attrs = attrs;
+      init: function(opts) {
+        this._animators = opts.animators;
+        this._baseClass = opts.baseClass;
+        this._baseClassName = opts.baseClassName || opts.baseClass.name;
+        this._animation = opts.defaultAnimation || 'default';
+        this._animationOptions = opts.defaultAnimationOptions || {};
+
+        if (!this._animators[this._animation]) {
+          throw new Error('No such animation: ' + this._animation);
+        }
       },
 
       /**
-       * Start spinning.
+       * @param {Object} options
+       * @param {String} [options.animation] The animation name
+       * @param {Object} [options.animationOptions] The animation options
+       * @param {Object} defaultAnimator The default animator instance
+       * @return {Object} An animator instance
        */
-      startSpin: function() {
-        this._attrs.$set('shouldSpin', 'true');
-      },
+      newAnimator: function(options, defaultAnimator) {
+        options = options || {};
 
-      /**
-       * Stop spinning.
-       */
-      stopSpin: function() {
-        this._attrs.$set('shouldSpin', 'false');
-      },
+        var animator = null;
 
-      /**
-       * Returns whether button is spinning or not.
-       */
-      isSpinning: function() {
-        return this._attrs.shouldSpin === 'true';
-      },
-
-      /**
-       * Set spin animation.
-       *
-       * @param {String} animation type
-       */
-      setSpinAnimation: function(animation) {
-        this._scope.$apply(function() {
-          var animations = ['slide-left', 'slide-right', 'slide-up',
-            'slide-down', 'expand-left', 'expand-right', 'expand-up',
-            'expand-down', 'zoom-out', 'zoom-in'];
-
-          if (animations.indexOf(animation) < 0) {
-            console.warn('Animation ' + animation + 'doesn\'t exist.');
-            animation = 'slide-left';
-          }
-
-          this._scope.animation = animation;
-        }.bind(this));
-      },
-  
-      /**
-       * Returns whether the button is disabled or not.
-       */
-      isDisabled: function() {
-        return this._element[0].hasAttribute('disabled');
-      },
-
-      /**
-       * Disabled or enable button.
-       */
-      setDisabled: function(disabled) {
-        if (typeof disabled !== 'boolean') {
-          throw new Error('Argument must be a boolean.');
+        if (options.animation instanceof this._baseClass) {
+          return options.animation;
         }
 
-        if (disabled) {
-          this._element[0].setAttribute('disabled', '');
+        var Animator = null;
+
+        if (typeof options.animation === 'string') {
+          Animator = this._animators[options.animation];
+        }
+
+        if (!Animator && defaultAnimator) {
+          animator = defaultAnimator;
         } else {
-          this._element[0].removeAttribute('disabled');
+          Animator = Animator || this._animators[this._animation];
+
+          var animationOpts = angular.extend({}, this._animationOptions, options.animationOptions || {});
+          animator = new Animator(animationOpts);
         }
+
+        if (!(animator instanceof this._baseClass)) {
+          throw new Error('"animator" is not an instance of ' + this._baseClassName + '.');
+        }
+
+        return animator;
       }
-
     });
-    MicroEvent.mixin(ButtonView);
+    return AnimationChooser;
+  });
 
-    return ButtonView;
-  }]);
 })();
 
 /*
@@ -6586,7 +8254,7 @@ You may obtain a copy of the License at
    http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
-:qaistributed under the License is distributed on an "AS IS" BASIS,
+distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
@@ -7004,12 +8672,12 @@ limitations under the License.
       },
 
       _prepareEventListeners: function() {
-        this._hammer = new Hammer(this._element[0], {
+        this._gestureDetector = new ons.GestureDetector(this._element[0], {
           dragMinDistance: 1
         });
 
-        this._hammer.on('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
-        this._hammer.on('dragend', this._bindedOnDragEnd);
+        this._gestureDetector.on('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
+        this._gestureDetector.on('dragend', this._bindedOnDragEnd);
 
         angular.element(window).on('resize', this._bindedOnResize);
       },
@@ -7085,7 +8753,7 @@ limitations under the License.
             this._scrollToKillOverScroll();
           }
         } else if (this._lastDragEvent !== null) {
-          this._startMomemtumScroll(event);
+          this._startMomentumScroll(event);
         }
         this._lastDragEvent = null;
         event.gesture.preventDefault();
@@ -7109,7 +8777,7 @@ limitations under the License.
         return this._element[0].hasAttribute('overscrollable');
       },
 
-      _startMomemtumScroll: function(event) {
+      _startMomentumScroll: function(event) {
         if (this._lastDragEvent !== null) {
           var velocity = this._getScrollVelocity(this._lastDragEvent);
           var duration = 0.3;
@@ -7360,8 +9028,8 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy');
 
-        this._hammer.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
-        this._hammer.off('dragend', this._bindedOnDragEnd);
+        this._gestureDetector.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
+        this._gestureDetector.off('dragend', this._bindedOnDragEnd);
 
         angular.element(window).off('resize', this._bindedOnResize);
 
@@ -7397,7 +9065,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('DialogView', ['$onsen', 'DialogAnimator', 'IOSDialogAnimator', 'AndroidDialogAnimator', 'SlideDialogAnimator', function($onsen, DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator) {
+  module.factory('DialogView', ['$parse', '$onsen', 'AnimationChooser', 'DialogAnimator', 'IOSDialogAnimator', 'AndroidDialogAnimator', 'SlideDialogAnimator', function($parse, $onsen, AnimationChooser, DialogAnimator, IOSDialogAnimator, AndroidDialogAnimator, SlideDialogAnimator) {
 
     var DialogView = Class.extend({
 
@@ -7424,14 +9092,15 @@ limitations under the License.
         this._visible = false;
         this._doorLock = new DoorLock();
 
-        this._animation = DialogView._animatorDict[typeof attrs.animation !== 'undefined' ? 
-          attrs.animation : 'default'];
+        this._animationChooser = new AnimationChooser({
+          animators: DialogView._animatorDict,
+          baseClass: DialogAnimator,
+          baseClassName: 'DialogAnimator',
+          defaultAnimation: attrs.animation,
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
 
-        if (!this._animation) {
-          throw new Error('No such animation: ' + attrs.animation);
-        }
-
-        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
 
         this._scope.$on('$destroy', this._destroy.bind(this));
       },
@@ -7448,6 +9117,7 @@ limitations under the License.
        *
        * @param {Object} [options]
        * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
        * @param {Function} [options.callback] callback after dialog is shown
        */
       show: function(options) {
@@ -7459,20 +9129,17 @@ limitations under the License.
           dialog: this,
           cancel: function() { cancel = true; }
         });
-        
+
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
             this._element.css('display', 'block');
             this._mask.css('opacity', 1);
 
-            if (options.animation) {
-              animation = DialogView._animatorDict[options.animation];
-            }
-            
-            animation.show(this, function() {
+            var animator = this._animationChooser.newAnimator(options);
+
+            animator.show(this, function() {
               this._visible = true;
               unlock();
               this.emit('postshow', {dialog: this});
@@ -7487,13 +9154,14 @@ limitations under the License.
        *
        * @param {Object} [options]
        * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
        * @param {Function} [options.callback] callback after dialog is hidden
        */
       hide: function(options) {
         options = options || {};
         var cancel = false,
           callback = options.callback || function() {};
-        
+
         this.emit('prehide', {
           dialog: this,
           cancel: function() { cancel = true; }
@@ -7501,14 +9169,11 @@ limitations under the License.
 
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
-            if (options.animation) {
-              animation = DialogView._animatorDict[options.animation];
-            }
+            var animator = this._animationChooser.newAnimator(options);
 
-            animation.hide(this, function() {
+            animator.hide(this, function() {
               this._element.css('display', 'none');
               this._visible = false;
               unlock();
@@ -7548,7 +9213,7 @@ limitations under the License.
       /**
        * Disable or enable dialog.
        *
-       * @param {Boolean} 
+       * @param {Boolean}
        */
       setDisabled: function(disabled) {
         if (typeof disabled !== 'boolean') {
@@ -7572,14 +9237,14 @@ limitations under the License.
       },
 
       /**
-       * Make dialog cancelable or uncancelable. 
+       * Make dialog cancelable or uncancelable.
        *
        * @param {Boolean}
        */
       setCancelable: function(cancelable) {
         if (typeof cancelable !== 'boolean') {
-          throw new Error('Argument must be a boolean.'); 
-        }  
+          throw new Error('Argument must be a boolean.');
+        }
 
         if (cancelable) {
           this._element.attr('cancelable', true);
@@ -7617,21 +9282,21 @@ limitations under the License.
     });
 
     DialogView._animatorDict = {
-      'default': $onsen.isAndroid() ? new AndroidDialogAnimator() : new IOSDialogAnimator(),
-      'fade': $onsen.isAndroid() ? new AndroidDialogAnimator() : new IOSDialogAnimator(),
-      'slide': new SlideDialogAnimator(),
-      'none': new DialogAnimator()
+      'default': $onsen.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+      'fade': $onsen.isAndroid() ? AndroidDialogAnimator : IOSDialogAnimator,
+      'slide': SlideDialogAnimator,
+      'none': DialogAnimator
     };
 
     /**
      * @param {String} name
-     * @param {DialogAnimator} animator
+     * @param {Function} Animator
      */
-    DialogView.registerAnimator = function(name, animator) {
-      if (!(animator instanceof DialogAnimator)) {
-        throw new Error('"animator" param must be an instance of DialogAnimator');
+    DialogView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof DialogAnimator)) {
+        throw new Error('"Animator" param must inherit DialogAnimator');
       }
-      this._animatorDict[name] = animator;
+      this._animatorDict[name] = Animator;
     };
 
     MicroEvent.mixin(DialogView);
@@ -7639,7 +9304,6 @@ limitations under the License.
     return DialogView;
   }]);
 })();
-
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -7665,6 +9329,23 @@ limitations under the License.
 
   module.factory('DialogAnimator', function() {
     var DialogAnimator = Class.extend({
+
+      delay: 0,
+
+      /**
+       * @param {Object} options
+       * @param {String} options.timing
+       * @param {Number} options.duration
+       * @param {Number} options.delay
+       */
+      init: function(options) {
+        options = options || {};
+
+        this.timing = options.timing || this.timing;
+        this.duration = options.duration !== undefined ? options.duration : this.duration;
+        this.delay = options.delay !== undefined ? options.delay : this.delay;
+      },
+
       show: function(dialog, callback) {
         callback();
       },
@@ -7678,6 +9359,95 @@ limitations under the License.
   });
 })();
 
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function() {
+  'use strict;';
+
+  var module = angular.module('onsen');
+
+  module.factory('FadeModalAnimator', ['ModalAnimator', function(ModalAnimator) {
+
+    /**
+     * iOS style animator for dialog.
+     */
+    var FadeModalAnimator = ModalAnimator.extend({
+
+      timing: 'ease-in-out',
+      duration: 0.3,
+      delay: 0,
+
+      /**
+       * @param {Object} modal
+       * @param {Function} callback
+       */
+      show: function(modal, callback) {
+        callback = callback ? callback : function() {};
+
+        animit(modal._element[0])
+          .queue({
+            opacity: 0
+          })
+          .wait(this.delay)
+          .queue({
+            opacity: 1.0
+          }, {
+            duration: this.duration,
+            timing: this.timing
+          })
+          .queue(function(done) {
+            callback();
+            done();
+          })
+          .play();
+      },
+
+      /**
+       * @param {Object} modal
+       * @param {Function} callback
+       */
+      hide: function(modal, callback) {
+        callback = callback ? callback : function() {};
+
+        animit(modal._element[0])
+          .queue({
+            opacity: 1
+          })
+          .wait(this.delay)
+          .queue({
+            opacity: 0
+          }, {
+            duration: this.duration,
+            timing: this.timing
+          })
+          .queue(function(done) {
+            callback();
+            done();
+          })
+          .play();
+      }
+    });
+
+    return FadeModalAnimator;
+  }]);
+
+})();
 
 
 /*
@@ -7709,18 +9479,8 @@ limitations under the License.
     */
     var FadePopoverAnimator = PopoverAnimator.extend({
 
-      timing: 'cubic-bezier(.1, .7, .4, 1)',
-      duration: 0.2, 
-
-      init: function(options) {
-        options = options || {};
-
-        this.timing = options.timing || this.timing;
-        this.duration = options.duration !== undefined ? options.duration : this.duration;
-      },
-
       /**
-      * @param {Object} popover 
+      * @param {Object} popover
       * @param {Function} callback
       */
       show: function(popover, callback) {
@@ -7732,8 +9492,9 @@ limitations under the License.
           .queue({
             opacity: 0
           })
+          .wait(this.delay)
           .queue({
-            opacity: 1.0 
+            opacity: 1.0
           }, {
             duration: this.duration,
             timing: this.timing
@@ -7744,9 +9505,10 @@ limitations under the License.
             transform: 'scale3d(1.3, 1.3, 1.0)',
             opacity: 0
           })
+          .wait(this.delay)
           .queue({
             transform: 'scale3d(1.0, 1.0,  1.0)',
-            opacity: 1.0 
+            opacity: 1.0
           }, {
             duration: this.duration,
             timing: this.timing
@@ -7760,7 +9522,7 @@ limitations under the License.
       },
 
       /**
-      * @param {Object} popover 
+      * @param {Object} popover
       * @param {Function} callback
       */
       hide: function(popover, callback) {
@@ -7772,8 +9534,9 @@ limitations under the License.
           .queue({
             opacity: 1.0
           })
+          .wait(this.delay)
           .queue({
-            opacity: 0 
+            opacity: 0
           }, {
             duration: this.duration,
             timing: this.timing
@@ -7783,8 +9546,9 @@ limitations under the License.
           .queue({
             opacity: 1.0
           })
+          .wait(this.delay)
           .queue({
-            opacity: 0 
+            opacity: 0
           }, {
             duration: this.duration,
             timing: this.timing
@@ -7802,7 +9566,6 @@ limitations under the License.
   }]);
 
 })();
-
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -7833,6 +9596,10 @@ limitations under the License.
      */
     var FadeTransitionAnimator = NavigatorTransitionAnimator.extend({
 
+      duration: 0.4,
+      timing: 'linear',
+      delay: 0,
+
       /**
        * @param {Object} enterPage
        * @param {Object} leavePage
@@ -7850,13 +9617,14 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
                 opacity: 1
               },
-              duration: 0.4,
-              timing: 'linear'
+              duration: this.duration,
+              timing: this.timing
             })
             .resetStyle()
             .queue(function(done) {
@@ -7872,13 +9640,14 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
                 opacity: 1
               },
-              duration: 0.4,
-              timing: 'linear'
+              duration: this.duration,
+              timing: this.timing
             })
             .resetStyle()
         );
@@ -7901,13 +9670,14 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
                 opacity: 0
               },
-              duration: 0.4,
-              timing: 'linear'
+              duration: this.duration,
+              timing: this.timing
             })
             .queue(function(done) {
               callback();
@@ -7922,13 +9692,14 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
                 opacity: 0
               },
-              duration: 0.4,
-              timing: 'linear'
+              duration: this.duration,
+              timing: this.timing
             })
 
         );
@@ -7959,9 +9730,8 @@ limitations under the License.
 
 (function(){
   'use strict';
-  var module = angular.module('onsen');
 
-  module.factory('GenericView', ['$onsen', function($onsen) {
+  angular.module('onsen').factory('GenericView', ['$onsen', function($onsen) {
 
     var GenericView = Class.extend({
 
@@ -7969,12 +9739,52 @@ limitations under the License.
        * @param {Object} scope
        * @param {jqLite} element
        * @param {Object} attrs
+       * @param {Object} [options]
+       * @param {String} [options.viewKey]
+       * @param {Boolean} [options.directiveOnly]
+       * @param {String} [options.modifierTemplate]
        */
-      init: function(scope, element, attrs) {
+      init: function(scope, element, attrs, options) {
+        var self = this;
+        options = {};
+
         this._element = element;
         this._scope = scope;
+        this._attrs = attrs;
+
+        if (options.viewKey) {
+          $onsen.declareVarAttribute(attrs, this);
+          element.data(options.viewKey, this);
+        }
+
+        if (options.directiveOnly) {
+          if (!options.modifierTemplate) {
+            throw new Error('options.modifierTemplate is undefined.');
+          }
+          $onsen.addModifierMethods(this, options.modifierTemplate, element);
+        } else {
+          $onsen.addModifierMethodsForCustomElements(this, element);
+        }
+
+        $onsen.cleaner.onDestroy(scope, function() {
+          self._events = undefined;
+          $onsen.removeModifierMethods(self);
+
+          if (options.viewKey) {
+            element.data(options.viewKey, undefined);
+          }
+
+          $onsen.clearComponent({
+            scope: scope,
+            attrs: attrs,
+            element: element
+          });
+
+          self = element = self._element = self._scope = scope = self._attrs = attrs = options = null;
+        });
       }
     });
+
     MicroEvent.mixin(GenericView);
 
     return GenericView;
@@ -8012,14 +9822,7 @@ limitations under the License.
     var IOSAlertDialogAnimator = DialogAnimator.extend({
 
       timing: 'cubic-bezier(.1, .7, .4, 1)',
-      duration: 0.2, 
-
-      init: function(options) {
-        options = options || {};
-
-        this.timing = options.timing || this.timing;
-        this.duration = options.duration !== undefined ? options.duration : this.duration;
-      },
+      duration: 0.2,
 
       /**
        * @param {Object} dialog
@@ -8034,6 +9837,7 @@ limitations under the License.
             .queue({
               opacity: 0
             })
+            .wait(this.delay)
             .queue({
               opacity: 1.0
             }, {
@@ -8049,6 +9853,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3d(-50%, -50%, 0) scale3d(1.0, 1.0, 1.0)',
@@ -8066,7 +9871,7 @@ limitations under the License.
       },
 
       /**
-       * @param {Object} dialog 
+       * @param {Object} dialog
        * @param {Function} callback
        */
       hide: function(dialog, callback) {
@@ -8078,6 +9883,7 @@ limitations under the License.
             .queue({
               opacity: 1.0
             })
+            .wait(this.delay)
             .queue({
               opacity: 0
             }, {
@@ -8092,6 +9898,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 opacity: 0.0
@@ -8113,7 +9920,6 @@ limitations under the License.
   }]);
 
 })();
-
 
 
 /*
@@ -8146,14 +9952,7 @@ limitations under the License.
     var IOSDialogAnimator = DialogAnimator.extend({
 
       timing: 'ease-in-out',
-      duration: 0.3, 
-
-      init: function(options) {
-        options = options || {};
-
-        this.timing = options.timing || this.timing;
-        this.duration = options.duration !== undefined ? options.duration : this.duration;
-      },
+      duration: 0.3,
 
       /**
        * @param {Object} dialog
@@ -8168,6 +9967,7 @@ limitations under the License.
             .queue({
               opacity: 0
             })
+            .wait(this.delay)
             .queue({
               opacity: 1.0
             }, {
@@ -8182,6 +9982,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3d(-50%, -50%, 0)'
@@ -8198,7 +9999,7 @@ limitations under the License.
       },
 
       /**
-       * @param {Object} dialog 
+       * @param {Object} dialog
        * @param {Function} callback
        */
       hide: function(dialog, callback) {
@@ -8210,6 +10011,7 @@ limitations under the License.
             .queue({
               opacity: 1.0
             })
+            .wait(this.delay)
             .queue({
               opacity: 0
             }, {
@@ -8224,6 +10026,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3d(-50%, 300%, 0)'
@@ -8245,7 +10048,6 @@ limitations under the License.
   }]);
 
 })();
-
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -8276,6 +10078,10 @@ limitations under the License.
      */
     var IOSSlideTransitionAnimator = NavigatorTransitionAnimator.extend({
 
+      duration: 0.4,
+      timing: 'cubic-bezier(.1, .7, .1, 1)',
+      delay: 0,
+
       /** Black mask */
       backgroundMask : angular.element(
         '<div style="position: absolute; width: 100%;' +
@@ -8283,8 +10089,6 @@ limitations under the License.
       ),
 
       _decompose: function(page) {
-        var elements = [];
-
         var left = page.getPageView().getToolbarLeftItemsElement();
         var right = page.getPageView().getToolbarRightItemsElement();
 
@@ -8356,11 +10160,12 @@ limitations under the License.
             opacity: 0,
             transform: 'translate3d(0, 0, 0)'
           })
+          .wait(this.delay)
           .queue({
             opacity: 0.1
           }, {
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
+            duration: this.duration,
+            timing: this.timing
           })
           .resetStyle()
           .queue(function(done) {
@@ -8385,12 +10190,13 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(0px, 0px, 0px)',
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -8403,11 +10209,11 @@ limitations under the License.
                 },
                 duration: 0
               })
-              .wait(0.3)
+              .wait(this.delay + 0.3)
               .resetStyle({
                 duration: 0.1,
                 transition:
-                  'background-color 0.1s linear, ' + 
+                  'background-color 0.1s linear, ' +
                   'border-color 0.1s linear'
               }),
 
@@ -8419,13 +10225,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3d(0, 0, 0)',
                   opacity: 1.0
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -8434,10 +10241,11 @@ limitations under the License.
                 css: {opacity: 0},
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {opacity: 1},
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -8448,12 +10256,13 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(-25%, 0px, 0px)',
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle()
               .queue(function(done) {
@@ -8471,13 +10280,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3d(-' + delta + 'px, 0, 0)',
                   opacity: 0,
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -8486,10 +10296,11 @@ limitations under the License.
                 css: {opacity: 1},
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {opacity: 0},
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle()
 
@@ -8508,12 +10319,13 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(0px, 0px, 0px)',
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -8524,12 +10336,13 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(-25%, 0px, 0px)'
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle()
               .queue(function(done) {
@@ -8563,11 +10376,12 @@ limitations under the License.
             opacity: 0.1,
             transform: 'translate3d(0, 0, 0)'
           })
+          .wait(this.delay)
           .queue({
             opacity: 0
           }, {
-            duration: 0.4,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
+            duration: this.duration,
+            timing: this.timing
           })
           .resetStyle()
           .queue(function(done) {
@@ -8594,13 +10408,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(0px, 0px, 0px)',
                   opacity: 1.0
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -8612,13 +10427,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3d(0, 0, 0)',
                   opacity: 1.0
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -8630,13 +10446,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3d(0, 0, 0)',
                   opacity: 1.0
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -8645,10 +10462,11 @@ limitations under the License.
                 css: {opacity: 0},
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {opacity: 1},
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -8659,12 +10477,13 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(100%, 0px, 0px)'
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .wait(0)
               .queue(function(finish) {
@@ -8682,13 +10501,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3d(0, 0, 0)',
                   opacity: 0,
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               }),
 
             animit(leavePageDecomposition.toolbar)
@@ -8709,13 +10529,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3d(' + delta + 'px, 0, 0)',
                   opacity: 0,
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
           );
         } else {
@@ -8732,13 +10553,14 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(0px, 0px, 0px)',
                   opacity: 1.0
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .resetStyle(),
 
@@ -8749,12 +10571,13 @@ limitations under the License.
                 },
                 duration: 0
               })
+              .wait(this.delay)
               .queue({
                 css: {
                   transform: 'translate3D(100%, 0px, 0px)'
                 },
-                duration: 0.4,
-                timing: 'cubic-bezier(.1, .7, .1, 1)'
+                duration: this.duration,
+                timing: this.timing
               })
               .queue(function(finish) {
                 done();
@@ -8846,9 +10669,13 @@ limitations under the License.
       _getItemHeight: function(i) {
         return this._delegate.calculateItemHeight(i);
       },
-      
+
       _getTopOffset: function() {
-        return this._parentElement[0].getBoundingClientRect().top;
+        if (typeof this._parentElement !== 'undefined' && this._parentElement !== null) {
+          return this._parentElement[0].getBoundingClientRect().top;
+        } else {
+          return 0;
+        }
       },
 
       _render: function() {
@@ -8873,7 +10700,7 @@ limitations under the License.
       _isRendered: function(i) {
         return this._renderedElements.hasOwnProperty(i);
       },
-      
+
       _renderElement: function(item) {
         if (this._isRendered(item.index)) {
           // Update content even if it's already added to DOM
@@ -9116,6 +10943,10 @@ limitations under the License.
      */
     var LiftTransitionAnimator = NavigatorTransitionAnimator.extend({
 
+      duration: 0.4,
+      timing: 'cubic-bezier(.1, .7, .1, 1)',
+      delay: 0,
+
       /** Black mask */
       backgroundMask : angular.element(
         '<div style="position: absolute; width: 100%;' +
@@ -9149,12 +10980,13 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
               },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              duration: this.duration,
+              timing: this.timing
             })
             .wait(0.2)
             .resetStyle()
@@ -9171,13 +11003,14 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, -10%, 0)',
                 opacity: 0.9
               },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              duration: this.duration,
+              timing: this.timing
             })
         );
 
@@ -9209,13 +11042,14 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
                 opacity: 1.0
               },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              duration: this.duration,
+              timing: this.timing
             })
             .resetStyle()
             .wait(0.4)
@@ -9231,14 +11065,15 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 100%, 0)'
               },
-              duration: 0.4,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              duration: this.duration,
+              timing: this.timing
             })
-            
+
         );
       }
     });
@@ -9247,7 +11082,6 @@ limitations under the License.
   }]);
 
 })();
-
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -9271,7 +11105,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('ModalView', ['$onsen', '$rootScope', function($onsen, $rootScope) {
+  module.factory('ModalView', ['$onsen', '$rootScope', '$parse', 'AnimationChooser', 'ModalAnimator', 'FadeModalAnimator', function($onsen, $rootScope, $parse, AnimationChooser, ModalAnimator, FadeModalAnimator) {
 
     var ModalView = Class.extend({
       _element: undefined,
@@ -9280,8 +11114,9 @@ limitations under the License.
       /**
        * @param {Object} scope
        * @param {jqLite} element
+       * @param {Object} attrs
        */
-      init: function(scope, element) {
+      init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
 
@@ -9291,9 +11126,18 @@ limitations under the License.
         }
 
         this._scope.$on('$destroy', this._destroy.bind(this));
-        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
+        this._doorLock = new DoorLock();
 
-        this.hide();
+        this._animationChooser = new AnimationChooser({
+          animators: ModalView._animatorDict,
+          baseClass: ModalAnimator,
+          baseClassName: 'ModalAnimator',
+          defaultAnimation: attrs.animation,
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
+
+        this.hide({animation: 'none'});
       },
 
       getDeviceBackButtonHandler: function() {
@@ -9302,9 +11146,27 @@ limitations under the License.
 
       /**
        * Show modal view.
+       *
+       * @param {Object} [options]
+       * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
+       * @param {Function} [options.callback] callback after modal is shown
        */
-      show: function() {
-        this._element.css('display', 'table');
+      show: function(options) {
+        options = options || {};
+
+        var callback = options.callback || function() {};
+
+        this._doorLock.waitUnlock(function() {
+          var unlock = this._doorLock.lock(),
+            animator = this._animationChooser.newAnimator(options);
+
+          this._element.css('display', 'table');
+          animator.show(this, function() {
+            unlock();
+            callback();
+          });
+        }.bind(this));
       },
 
       _isVisible: function() {
@@ -9318,13 +11180,36 @@ limitations under the License.
 
       /**
        * Hide modal view.
+       *
+       * @param {Object} [options]
+       * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
+       * @param {Function} [options.callback] callback after modal is hidden
        */
-      hide: function() {
-        this._element.css('display', 'none');
+      hide: function(options) {
+        options = options || {};
+
+        var callback = options.callback || function() {};
+
+        this._doorLock.waitUnlock(function() {
+          var unlock = this._doorLock.lock(),
+            animator = this._animationChooser.newAnimator(options);
+
+          animator.hide(this, function() {
+            this._element.css('display', 'none');
+            unlock();
+            callback();
+          }.bind(this));
+        }.bind(this));
       },
 
       /**
-       * Toggle modal view visibility.
+       * Toggle modal view.
+       *
+       * @param {Object} [options]
+       * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
+       * @param {Function} [options.callback] callback after modal is toggled
        */
       toggle: function() {
         if (this._isVisible()) {
@@ -9342,12 +11227,84 @@ limitations under the License.
         this._element = this._scope = null;
       }
     });
+
+    ModalView._animatorDict = {
+      'default': ModalAnimator,
+      'fade': FadeModalAnimator,
+      'none': ModalAnimator
+    };
+
+    /**
+     * @param {String} name
+     * @param {Function} Animator
+     */
+    ModalView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof ModalAnimator)) {
+        throw new Error('"Animator" param must inherit DialogAnimator');
+      }
+      this._animatorDict[name] = Animator;
+    };
+
     MicroEvent.mixin(ModalView);
 
     return ModalView;
   }]);
 })();
 
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function() {
+  'use strict;';
+
+  var module = angular.module('onsen');
+
+  module.factory('ModalAnimator', function() {
+    var ModalAnimator = Class.extend({
+
+      delay: 0,
+
+      /**
+       * @param {Object} options
+       * @param {String} options.timing
+       * @param {Number} options.duration
+       * @param {Number} options.delay
+       */
+      init: function(options) {
+        options = options || {};
+
+        this.timing = options.timing || this.timing;
+        this.duration = options.duration !== undefined ? options.duration : this.duration;
+        this.delay = options.delay !== undefined ? options.delay : this.delay;
+      },
+
+      show: function(modal, callback) {
+        callback();
+      },
+
+      hide: function(modal, callback) {
+        callback();
+      }
+    });
+
+    return ModalAnimator;
+  });
+})();
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -9434,7 +11391,7 @@ limitations under the License.
     }
   });
 
-  module.factory('NavigatorView', ['$http', '$parse', '$templateCache', '$compile', '$onsen', '$timeout', 'SimpleSlideTransitionAnimator', 'NavigatorTransitionAnimator', 'LiftTransitionAnimator', 'NullTransitionAnimator', 'IOSSlideTransitionAnimator', 'FadeTransitionAnimator', function($http, $parse, $templateCache, $compile, $onsen, $timeout,
+  module.factory('NavigatorView', ['$http', '$parse', '$templateCache', '$compile', '$onsen', '$timeout', 'AnimationChooser', 'SimpleSlideTransitionAnimator', 'NavigatorTransitionAnimator', 'LiftTransitionAnimator', 'NullTransitionAnimator', 'IOSSlideTransitionAnimator', 'FadeTransitionAnimator', function($http, $parse, $templateCache, $compile, $onsen, $timeout, AnimationChooser,
     SimpleSlideTransitionAnimator, NavigatorTransitionAnimator, LiftTransitionAnimator,
     NullTransitionAnimator, IOSSlideTransitionAnimator, FadeTransitionAnimator) {
 
@@ -9490,8 +11447,16 @@ limitations under the License.
 
         this._isPopping = this._isPushing = false;
 
-        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
         this._scope.$on('$destroy', this._destroy.bind(this));
+
+        this._animationChooser = new AnimationChooser({
+          animators: NavigatorView._transitionAnimatorDict,
+          baseClass: NavigatorTransitionAnimator,
+          baseClassName: 'NavigatorTransitionAnimator',
+          defaultAnimation: attrs.animation,
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
       },
 
       _destroy: function() {
@@ -9539,7 +11504,7 @@ limitations under the License.
         if (hasPage) {
           pageElement = angular.element(div.childNodes[0]);
         } else {
-          throw new Error('You can not supply no "ons-page" element to "ons-navigator".');
+          throw new Error('You must supply an "ons-page" element to "ons-navigator".');
         }
 
         var link = $compile(pageElement);
@@ -9636,6 +11601,7 @@ limitations under the License.
        * @param {String} page
        * @param {Object} [options]
        * @param {String/NavigatorTransitionAnimator} [options.animation]
+       * @param {Object} [options.animationOptions]
        * @param {Function} [options.onTransitionEnd]
        */
       pushPage: function(page, options) {
@@ -9685,37 +11651,6 @@ limitations under the License.
         return this._deviceBackButtonHandler;
       },
 
-      /**
-       * @param {Object} options pushPage()'s options parameter
-       * @param {NavigatorTransitionAnimator} [defaultAnimator]
-       */
-      _getAnimatorOption: function(options, defaultAnimator) {
-        var animator = null;
-
-        if (options.animation instanceof NavigatorTransitionAnimator) {
-          return options.animation;
-        }
-
-        if (typeof options.animation === 'string') {
-          animator = NavigatorView._transitionAnimatorDict[options.animation];
-        }
-
-        if (!animator && this._element.attr('animation')) {
-          animator = NavigatorView._transitionAnimatorDict[this._element.attr('animation')];
-        }
-
-        if (!animator) {
-          animator = defaultAnimator || NavigatorView._transitionAnimatorDict['default'];
-        }
-
-        if (!(animator instanceof NavigatorTransitionAnimator)) {
-          throw new Error('"animator" is not an instance of NavigatorTransitionAnimator.');
-        }
-
-        return animator;
-      },
-
-
       _createPageScope: function() {
          return this._scope.$new();
       },
@@ -9727,7 +11662,7 @@ limitations under the License.
        * @param {Object} options
        */
       _createPageObject: function(page, element, pageScope, options) {
-        options.animator = this._getAnimatorOption(options);
+        options.animator = this._animationChooser.newAnimator(options);
 
         return new NavigatorPageObject({
           page: page,
@@ -9841,7 +11776,10 @@ limitations under the License.
 
       /**
        * Pops current page from the page stack.
+       *
        * @param {Object} [options]
+       * @param {String} [options.animation]
+       * @param {Object} [options.animationOptions]
        * @param {Function} [options.onTransitionEnd]
        */
       popPage: function(options) {
@@ -9892,7 +11830,7 @@ limitations under the License.
 
         this._isPopping = true;
 
-        var animator = this._getAnimatorOption(options, leavePage.options.animator);
+        var animator = this._animationChooser.newAnimator(options, leavePage.options.animator);
         animator.pop(enterPage, leavePage, callback);
       },
 
@@ -9976,24 +11914,24 @@ limitations under the License.
 
     // Preset transition animators.
     NavigatorView._transitionAnimatorDict = {
-      'default': $onsen.isAndroid() ? new SimpleSlideTransitionAnimator() : new IOSSlideTransitionAnimator(),
-      'slide': $onsen.isAndroid() ? new SimpleSlideTransitionAnimator() : new IOSSlideTransitionAnimator(),
-      'simpleslide': new SimpleSlideTransitionAnimator(),
-      'lift': new LiftTransitionAnimator(),
-      'fade': new FadeTransitionAnimator(),
-      'none': new NullTransitionAnimator()
+      'default': $onsen.isAndroid() ? SimpleSlideTransitionAnimator : IOSSlideTransitionAnimator,
+      'slide': $onsen.isAndroid() ? SimpleSlideTransitionAnimator : IOSSlideTransitionAnimator,
+      'simpleslide': SimpleSlideTransitionAnimator,
+      'lift': LiftTransitionAnimator,
+      'fade': FadeTransitionAnimator,
+      'none': NullTransitionAnimator
     };
 
     /**
      * @param {String} name
-     * @param {NavigatorTransitionAnimator} animator
+     * @param {Function} Animator
      */
-    NavigatorView.registerTransitionAnimator = function(name, animator) {
-      if (!(animator instanceof NavigatorTransitionAnimator)) {
-        throw new Error('"animator" param must be an instance of NavigatorTransitionAnimator');
+    NavigatorView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof NavigatorTransitionAnimator)) {
+        throw new Error('"Animator" param must inherit NavigatorTransitionAnimator');
       }
 
-      this._transitionAnimatorDict[name] = animator;
+      this._transitionAnimatorDict[name] = Animator;
     };
 
     MicroEvent.mixin(NavigatorView);
@@ -10026,6 +11964,21 @@ limitations under the License.
 
   module.factory('NavigatorTransitionAnimator', function() {
     var NavigatorTransitionAnimator = Class.extend({
+
+      /**
+       * @param {Object} options
+       * @param {String} options.timing
+       * @param {Number} options.duration
+       * @param {Number} options.delay
+       */
+      init: function(options) {
+        options = options || {};
+
+        this.timing = options.timing || this.timing;
+        this.duration = options.duration !== undefined ? options.duration : this.duration;
+        this.delay = options.delay !== undefined ? options.delay : this.delay;
+      },
+
       push: function(enterPage, leavePage, callback) {
         callback();
       },
@@ -10038,7 +11991,6 @@ limitations under the License.
     return NavigatorTransitionAnimator;
   });
 })();
-
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -10104,7 +12056,6 @@ limitations under the License.
       _menuPage: false,
       _mainPage: false,
       _width: false,
-      _duration: false,
 
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
@@ -10121,7 +12072,6 @@ limitations under the License.
         this._element = element;
         this._mainPage = mainPage;
         this._menuPage = menuPage;
-        this._duration = 0.4;
 
         menuPage.css('box-shadow', '0px 0 10px 0px rgba(0, 0, 0, 0.2)');
         menuPage.css({
@@ -10206,8 +12156,9 @@ limitations under the License.
        * @param {Boolean} instant
        */
       openMenu: function(callback, instant) {
-        var duration = instant === true ? 0.0 : this._duration;        
-        
+        var duration = instant === true ? 0.0 : this.duration;
+        var delay = instant === true ? 0.0 : this.delay;
+
         this._menuPage.css('display', 'block');
         this._blackMask.css('display', 'block');
 
@@ -10218,9 +12169,10 @@ limitations under the License.
         setTimeout(function() {
 
           animit(this._mainPage[0])
-          .queue(mainPageStyle, {
+            .wait(delay)
+            .queue(mainPageStyle, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .queue(function(done) {
               callback();
@@ -10229,9 +12181,10 @@ limitations under the License.
             .play();
 
           animit(this._menuPage[0])
+            .wait(delay)
             .queue(menuStyle, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .play();
 
@@ -10243,7 +12196,9 @@ limitations under the License.
        * @param {Boolean} instant
        */
       closeMenu: function(callback, instant) {
-        var duration = instant === true ? 0.0 : this._duration;
+        var duration = instant === true ? 0.0 : this.duration;
+        var delay = instant === true ? 0.0 : this.delay;
+
         this._blackMask.css({display: 'block'});
 
         var menuPageStyle = this._generateMenuPageStyle(0);
@@ -10252,9 +12207,10 @@ limitations under the License.
         setTimeout(function() {
 
           animit(this._mainPage[0])
+            .wait(delay)
             .queue(mainPageStyle, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .queue(function(done) {
               this._menuPage.css('display', 'none');
@@ -10264,9 +12220,10 @@ limitations under the License.
             .play();
 
           animit(this._menuPage[0])
+            .wait(delay)
             .queue(menuPageStyle, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .play();
 
@@ -10299,8 +12256,6 @@ limitations under the License.
       },
 
       _generateMenuPageStyle: function(distance) {
-        var max = this._menuPage[0].clientWidth;
-
         var x = this._isRight ? -distance : distance;
         var transform = 'translate3d(' + x + 'px, 0, 0)';
 
@@ -10379,7 +12334,7 @@ limitations under the License.
         this._userDeviceBackButtonListener = angular.noop;
 
         if (this._attrs.ngDeviceBackbutton || this._attrs.onDeviceBackbutton) {
-          this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+          this._deviceBackButtonHandler = ons._deviceBackButtonHandler.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
         }
       },
 
@@ -10407,7 +12362,7 @@ limitations under the License.
        */
       setDeviceBackButtonHandler: function(callback) {
         if (!this._deviceBackButtonHandler) {
-          this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+          this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
         }
 
         this._userDeviceBackButtonListener = callback;
@@ -10614,7 +12569,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('PopoverView', ['$onsen', 'PopoverAnimator', 'FadePopoverAnimator', function($onsen, PopoverAnimator, FadePopoverAnimator) {
+  module.factory('PopoverView', ['$parse', '$onsen', 'AnimationChooser', 'PopoverAnimator', 'FadePopoverAnimator', function($parse, $onsen, AnimationChooser, PopoverAnimator, FadePopoverAnimator) {
 
     var PopoverView = Class.extend({
 
@@ -10644,14 +12599,15 @@ limitations under the License.
         this._visible = false;
         this._doorLock = new DoorLock();
 
-        this._animation = PopoverView._animatorDict[typeof attrs.animation !== 'undefined' ? 
-          attrs.animation : 'fade'];
+        this._animationChooser = new AnimationChooser({
+          animators: PopoverView._animatorDict,
+          baseClass: PopoverAnimator,
+          baseClassName: 'PopoverAnimator',
+          defaultAnimation: attrs.animation || 'fade',
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
 
-        if (!this._animation) {
-          throw new Error('No such animation: ' + attrs.animation);
-        }
-
-        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
 
         this._onChange = function() {
           setImmediate(function() {
@@ -10692,7 +12648,7 @@ limitations under the License.
         } else {
           throw new Error('Invalid direction.');
         }
-      
+
         if (!this._scope.$$phase) {
           this._scope.$apply();
         }
@@ -10779,7 +12735,7 @@ limitations under the License.
           down: window.innerHeight - position.bottom
         };
 
-        var orderedDirections = Object.keys(scores).sort(function(a, b) {return -(scores[a] - scores[b]);}); 
+        var orderedDirections = Object.keys(scores).sort(function(a, b) {return -(scores[a] - scores[b]);});
         for (var i = 0, l = orderedDirections.length; i < l; i++) {
           var direction = orderedDirections[i];
           if (directions.indexOf(direction) > -1) {
@@ -10797,6 +12753,7 @@ limitations under the License.
        * @param {Event} [target] event
        * @param {Object} [options] options
        * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
        */
       show: function(target, options) {
         if (typeof target === 'string') {
@@ -10804,13 +12761,13 @@ limitations under the License.
         } else if (target instanceof Event) {
           target = target.target;
         }
-      
+
         if (!target) {
          throw new Error('Target undefined');
         }
 
         options = options || {};
-        
+
         var cancel = false;
         this.emit('preshow', {
           popover: this,
@@ -10819,19 +12776,15 @@ limitations under the License.
 
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
             this._element.css('display', 'block');
 
             this._currentTarget = target;
             this._positionPopover(target);
 
-            if (options.animation) {
-              animation = PopoverView._animatorDict[options.animation];
-            }
-
-            animation.show(this, function() {
+            var animator = this._animationChooser.newAnimator(options);
+            animator.show(this, function() {
               this._visible = true;
               this._positionPopover(target);
               unlock();
@@ -10846,6 +12799,7 @@ limitations under the License.
        *
        * @param {Object} [options] options
        * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
        */
       hide: function(options) {
         options = options || {};
@@ -10858,14 +12812,10 @@ limitations under the License.
 
         if (!cancel) {
           this._doorLock.waitUnlock(function() {
-            var unlock = this._doorLock.lock(),
-              animation = this._animation;
+            var unlock = this._doorLock.lock();
 
-            if (options.animation) {
-              animation = PopoverView._animatorDict[options.animation];
-            }
-
-            animation.hide(this, function() {
+            var animator = this._animationChooser.newAnimator(options);
+            animator.hide(this, function() {
               this._element.css('display', 'none');
               this._visible = false;
               unlock();
@@ -10914,7 +12864,7 @@ limitations under the License.
        */
       setCancelable: function(cancelable) {
         if (typeof cancelable !== 'boolean') {
-          throw new Error('Argument must be a boolean.');  
+          throw new Error('Argument must be a boolean.');
         }
 
         if (cancelable) {
@@ -10942,19 +12892,19 @@ limitations under the License.
     });
 
     PopoverView._animatorDict = {
-      'fade': new FadePopoverAnimator(),
-      'none': new PopoverAnimator()
+      'fade': FadePopoverAnimator,
+      'none': PopoverAnimator
     };
 
     /**
      * @param {String} name
-     * @param {PopoverAnimator} animator
+     * @param {Function} Animator
      */
-    PopoverView.registerAnimator = function(name, animator) {
-      if (!(animator instanceof PopoverAnimator)) {
-        throw new Error('"animator" param must be an instance of PopoverAnimator');
+    PopoverView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof PopoverAnimator)) {
+        throw new Error('"Animator" param must inherit PopoverAnimator');
       }
-      this._animatorDict[name] = animator;
+      this._animatorDict[name] = Animator;
     };
 
     MicroEvent.mixin(PopoverView);
@@ -10987,6 +12937,25 @@ limitations under the License.
 
   module.factory('PopoverAnimator', function() {
     var PopoverAnimator = Class.extend({
+
+      timing: 'cubic-bezier(.1, .7, .4, 1)',
+      duration: 0.2,
+      delay: 0,
+
+      /**
+       * @param {Object} options
+       * @param {String} options.timing
+       * @param {Number} options.duration
+       * @param {Number} options.delay
+       */
+      init: function(options) {
+        options = options || {};
+
+        this.timing = options.timing || this.timing;
+        this.duration = options.duration !== undefined ? options.duration : this.duration;
+        this.delay = options.delay !== undefined ? options.delay : this.delay;
+      },
+
       show: function(popover, callback) {
         callback();
       },
@@ -10996,10 +12965,9 @@ limitations under the License.
       }
     });
 
-    return PopoverAnimator; 
+    return PopoverAnimator;
   });
 })();
-
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -11066,11 +13034,11 @@ limitations under the License.
         pageElement.append(scrollElement);
         scrollElement.append(children);
 
-        return scrollElement; 
+        return scrollElement;
       },
 
       _setStyle: function() {
-        var h = this._getHeight();
+        var h = this.getHeight();
 
         this._element.css({
           top: '-' + h + 'px',
@@ -11078,7 +13046,7 @@ limitations under the License.
           lineHeight: h + 'px'
         });
       },
-    
+
       _onScroll: function(event) {
         var el = this._pageElement[0];
 
@@ -11126,23 +13094,23 @@ limitations under the License.
 
         scroll = Math.max(scroll, 0);
 
-        if (this._thresholdHeightEnabled() && scroll >= this._getThresholdHeight()) {
+        if (this._thresholdHeightEnabled() && scroll >= this.getThresholdHeight()) {
           event.gesture.stopDetect();
 
           setImmediate(function() {
             this._setState(this.STATE_ACTION);
-            this._translateTo(this._getHeight(), {animate: true});
+            this._translateTo(this.getHeight(), {animate: true});
 
             this._waitForAction(this._onDone.bind(this));
           }.bind(this));
         }
-        else if (scroll >= this._getHeight()) {
+        else if (scroll >= this.getHeight()) {
           this._setState(this.STATE_PREACTION);
         }
         else {
           this._setState(this.STATE_INITIAL);
         }
- 
+
         event.stopPropagation();
         this._translateTo(scroll);
       },
@@ -11163,10 +13131,10 @@ limitations under the License.
         if (this._currentTranslation > 0) {
           var scroll = this._currentTranslation;
 
-          if (scroll > this._getHeight()) {
+          if (scroll > this.getHeight()) {
             this._setState(this.STATE_ACTION);
 
-            this._translateTo(this._getHeight(), {animate: true});
+            this._translateTo(this.getHeight(), {animate: true});
 
             this._waitForAction(this._onDone.bind(this));
           }
@@ -11197,7 +13165,7 @@ limitations under the License.
         }
       },
 
-      _getHeight: function() {
+      getHeight: function() {
         return parseInt(this._element[0].getAttribute('height') || '64', 10);
       },
 
@@ -11211,13 +13179,13 @@ limitations under the License.
         this._element[0].setAttribute('threshold-height', thresholdHeight + 'px');
       },
 
-      _getThresholdHeight: function() {
+      getThresholdHeight: function() {
         return parseInt(this._element[0].getAttribute('threshold-height') || '96', 10);
       },
 
       _thresholdHeightEnabled: function() {
-        var th = this._getThresholdHeight();
-        return th > 0 && th >= this._getHeight();
+        var th = this.getThresholdHeight();
+        return th > 0 && th >= this.getHeight();
       },
 
       _setState: function(state, noEvent) {
@@ -11247,8 +13215,16 @@ limitations under the License.
         return this._pageElement[0].scrollTop;
       },
 
+      getPullDistance: function() {
+        return this._currentTranslation;
+      },
+
       isDisabled: function() {
         return this._element[0].hasAttribute('disabled');
+      },
+
+      _isContentFixed: function() {
+        return this._element[0].hasAttribute('fixed-content');
       },
 
       setDisabled: function(disabled) {
@@ -11260,13 +13236,23 @@ limitations under the License.
         }
       },
 
+      _getScrollableElement: function() {
+        if (this._isContentFixed()) {
+          return this._element[0];
+        } else {
+          return this._scrollElement[0];
+        }
+      },
+
       _translateTo: function(scroll, options) {
         options = options || {};
 
-        this._currentTranslation = scroll;
+        this._scope.$evalAsync(function() {
+          this._currentTranslation = scroll;
+        }.bind(this));
 
         if (options.animate) {
-          animit(this._scrollElement[0])
+          animit(this._getScrollableElement())
             .queue({
               transform: this._generateTranslationTransform(scroll)
             }, {
@@ -11276,7 +13262,7 @@ limitations under the License.
             .play(options.callback);
         }
         else {
-          animit(this._scrollElement[0])
+          animit(this._getScrollableElement())
             .queue({
               transform: this._generateTranslationTransform(scroll)
             })
@@ -11300,7 +13286,7 @@ limitations under the License.
       _createEventListeners: function() {
         var element = this._scrollElement.parent();
 
-        this._hammer = new Hammer(element[0], {
+        this._gestureDetector = new ons.GestureDetector(element[0], {
           dragMinDistance: 1,
           dragDistanceCorrection: false
         });
@@ -11312,18 +13298,18 @@ limitations under the License.
         this._bindedOnScroll = this._onScroll.bind(this);
 
         // Bind listeners
-        this._hammer.on('drag', this._bindedOnDrag);
-        this._hammer.on('dragstart', this._bindedOnDragStart);
-        this._hammer.on('dragend', this._bindedOnDragEnd);
+        this._gestureDetector.on('drag', this._bindedOnDrag);
+        this._gestureDetector.on('dragstart', this._bindedOnDragStart);
+        this._gestureDetector.on('dragend', this._bindedOnDragEnd);
         element.on('scroll', this._bindedOnScroll);
       },
 
       _destroyEventListeners: function() {
         var element = this._scrollElement.parent();
 
-        this._hammer.off('drag', this._bindedOnDrag);
-        this._hammer.off('dragstart', this._bindedOnDragStart);
-        this._hammer.off('dragend', this._bindedOnDragEnd);
+        this._gestureDetector.off('drag', this._bindedOnDrag);
+        this._gestureDetector.off('dragstart', this._bindedOnDragStart);
+        this._gestureDetector.off('dragend', this._bindedOnDragEnd);
         element.off('scroll', this._bindedOnScroll);
       },
 
@@ -11369,8 +13355,7 @@ limitations under the License.
       _menuPage: undefined,
       _mainPage: undefined,
       _width: undefined,
-      _duration: false,
-      
+
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
        * @param {jqLite} mainPage
@@ -11388,7 +13373,6 @@ limitations under the License.
 
         this._isRight = !!options.isRight;
         this._width = options.width || '90%';
-        this._duration = 0.4;
 
         menuPage.css({
           width: options.width,
@@ -11452,7 +13436,8 @@ limitations under the License.
        * @param {Boolean} instant
        */
       openMenu: function(callback, instant) {
-        var duration = instant === true ? 0.0 : this._duration;        
+        var duration = instant === true ? 0.0 : this.duration;
+        var delay = instant === true ? 0.0 : this.delay;
 
         this._menuPage.css('display', 'block');
 
@@ -11464,11 +13449,12 @@ limitations under the License.
         setTimeout(function() {
 
           animit(this._mainPage[0])
+            .wait(delay)
             .queue({
               transform: aboveTransform
             }, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .queue(function(done) {
               callback();
@@ -11477,9 +13463,10 @@ limitations under the License.
             .play();
 
           animit(this._menuPage[0])
+            .wait(delay)
             .queue(behindStyle, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .play();
 
@@ -11491,7 +13478,8 @@ limitations under the License.
        * @param {Boolean} instant
        */
       closeMenu: function(callback, instant) {
-        var duration = instant === true ? 0.0 : this._duration;        
+        var duration = instant === true ? 0.0 : this.duration;
+        var delay = instant === true ? 0.0 : this.delay;
 
         var aboveTransform = this._generateAbovePageTransform(0);
         var behindStyle = this._generateBehindPageStyle(0);
@@ -11499,11 +13487,12 @@ limitations under the License.
         setTimeout(function() {
 
           animit(this._mainPage[0])
+            .wait(delay)
             .queue({
               transform: aboveTransform
             }, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .queue({
               transform: 'translate3d(0, 0, 0)'
@@ -11516,9 +13505,10 @@ limitations under the License.
             .play();
 
           animit(this._menuPage[0])
+            .wait(delay)
             .queue(behindStyle, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .queue(function(done) {
               done();
@@ -11557,8 +13547,6 @@ limitations under the License.
       },
 
       _generateBehindPageStyle: function(distance) {
-        var max = this._menuPage[0].clientWidth;
-
         var behindX = this._isRight ? -distance : distance;
         var behindTransform = 'translate3d(' + behindX + 'px, 0, 0)';
 
@@ -11609,7 +13597,6 @@ limitations under the License.
       _menuPage: undefined,
       _element: undefined,
       _mainPage: undefined,
-      _duration: undefined,
 
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
@@ -11625,7 +13612,6 @@ limitations under the License.
         this._mainPage = mainPage;
         this._isRight = !!options.isRight;
         this._width = options.width || '90%';
-        this._duration = 0.4;
 
         mainPage.css({
           boxShadow: '0px 0 10px 0px rgba(0, 0, 0, 0.2)'
@@ -11712,8 +13698,9 @@ limitations under the License.
        * @param {Boolean} instant
        */
       openMenu: function(callback, instant) {
-        var duration = instant === true ? 0.0 : this._duration;        
-        
+        var duration = instant === true ? 0.0 : this.duration;
+        var delay = instant === true ? 0.0 : this.delay;
+
         this._menuPage.css('display', 'block');
         this._blackMask.css('display', 'block');
 
@@ -11725,11 +13712,12 @@ limitations under the License.
         setTimeout(function() {
 
           animit(this._mainPage[0])
+            .wait(delay)
             .queue({
               transform: aboveTransform
             }, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .queue(function(done) {
               callback();
@@ -11738,9 +13726,10 @@ limitations under the License.
             .play();
 
           animit(this._menuPage[0])
+            .wait(delay)
             .queue(behindStyle, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .play();
 
@@ -11752,7 +13741,8 @@ limitations under the License.
        * @param {Boolean} instant
        */
       closeMenu: function(callback, instant) {
-        var duration = instant === true ? 0.0 : this._duration;        
+        var duration = instant === true ? 0.0 : this.duration;
+        var delay = instant === true ? 0.0 : this.delay;
 
         this._blackMask.css('display', 'block');
 
@@ -11762,11 +13752,12 @@ limitations under the License.
         setTimeout(function() {
 
           animit(this._mainPage[0])
+            .wait(delay)
             .queue({
               transform: aboveTransform
             }, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .queue({
               transform: 'translate3d(0, 0, 0)'
@@ -11779,9 +13770,10 @@ limitations under the License.
             .play();
 
           animit(this._menuPage[0])
+            .wait(delay)
             .queue(behindStyle, {
               duration: duration,
-              timing: 'cubic-bezier(.1, .7, .1, 1)'
+              timing: this.timing
             })
             .queue(function(done) {
               done();
@@ -11884,7 +13876,8 @@ limitations under the License.
       ),
 
       timing: 'cubic-bezier(.1, .7, .4, 1)',
-      duration: 0.3, 
+      duration: 0.3,
+      delay: 0,
       blackMaskOpacity: 0.4,
 
       init: function(options) {
@@ -11910,6 +13903,7 @@ limitations under the License.
               opacity: 0,
               transform: 'translate3d(0, 0, 0)'
             })
+            .wait(this.delay)
             .queue({
               opacity: this.blackMaskOpacity
             }, {
@@ -11929,6 +13923,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -11945,6 +13940,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(-45%, 0px, 0px)'
@@ -11977,6 +13973,7 @@ limitations under the License.
               opacity: this.blackMaskOpacity,
               transform: 'translate3d(0, 0, 0)'
             })
+            .wait(this.delay)
             .queue({
               opacity: 0
             }, {
@@ -11997,6 +13994,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(0px, 0px, 0px)',
@@ -12014,6 +14012,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(100%, 0px, 0px)'
@@ -12034,7 +14033,6 @@ limitations under the License.
   }]);
 
 })();
-
 
 
 /*
@@ -12067,14 +14065,7 @@ limitations under the License.
     var SlideDialogAnimator = DialogAnimator.extend({
 
       timing: 'cubic-bezier(.1, .7, .4, 1)',
-      duration: 0.2, 
-
-      init: function(options) {
-        options = options || {};
-
-        this.timing = options.timing || this.timing;
-        this.duration = options.duration !== undefined ? options.duration : this.duration;
-      },
+      duration: 0.2,
 
       /**
        * @param {Object} dialog
@@ -12089,6 +14080,7 @@ limitations under the License.
             .queue({
               opacity: 0
             })
+            .wait(this.delay)
             .queue({
               opacity: 1.0
             }, {
@@ -12103,6 +14095,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(-50%, -50%, 0)',
@@ -12119,7 +14112,7 @@ limitations under the License.
       },
 
       /**
-       * @param {Object} dialog 
+       * @param {Object} dialog
        * @param {Function} callback
        */
       hide: function(dialog, callback) {
@@ -12131,6 +14124,7 @@ limitations under the License.
             .queue({
               opacity: 1.0
             })
+            .wait(this.delay)
             .queue({
               opacity: 0
             }, {
@@ -12145,6 +14139,7 @@ limitations under the License.
               },
               duration: 0
             })
+            .wait(this.delay)
             .queue({
               css: {
                 transform: 'translate3D(-50%, -350%, 0)'
@@ -12166,7 +14161,6 @@ limitations under the License.
   }]);
 
 })();
-
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -12323,7 +14317,7 @@ limitations under the License.
   });
   MicroEvent.mixin(SlidingMenuViewModel);
 
-  module.factory('SlidingMenuView', ['$onsen', '$compile', 'SlidingMenuAnimator', 'RevealSlidingMenuAnimator', 'PushSlidingMenuAnimator', 'OverlaySlidingMenuAnimator', function($onsen, $compile, SlidingMenuAnimator, RevealSlidingMenuAnimator, 
+  module.factory('SlidingMenuView', ['$onsen', '$compile', '$parse', 'AnimationChooser', 'SlidingMenuAnimator', 'RevealSlidingMenuAnimator', 'PushSlidingMenuAnimator', 'OverlaySlidingMenuAnimator', function($onsen, $compile, $parse, AnimationChooser, SlidingMenuAnimator, RevealSlidingMenuAnimator,
                                              PushSlidingMenuAnimator, OverlaySlidingMenuAnimator) {
 
     var SlidingMenuView = Class.extend({
@@ -12351,7 +14345,7 @@ limitations under the License.
         this._isRightMenu = attrs.side === 'right';
 
         // Close menu on tap event.
-        this._mainPageHammer = new Hammer(this._mainPage[0]);
+        this._mainPageGestureDetector = new ons.GestureDetector(this._mainPage[0]);
         this._bindedOnTap = this._onTap.bind(this);
 
         var maxDistance = this._normalizeMaxSlideDistanceAttr();
@@ -12381,7 +14375,7 @@ limitations under the License.
           this.setMenuPage(attrs.menuPage);
         }
 
-        this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
 
         var unlock = this._doorLock.lock();
 
@@ -12391,7 +14385,14 @@ limitations under the License.
 
           this._menuPage.css({opacity: 1});
 
-          this._animator = this._getAnimatorOption();
+          var animationChooser = new AnimationChooser({
+            animators: SlidingMenuView._animatorDict,
+            baseClass: SlidingMenuAnimator,
+            baseClassName: 'SlidingMenuAnimator',
+            defaultAnimation: attrs.animation,
+            defaultAnimationOptions: $parse(attrs.animationOptions)()
+          });
+          this._animator = animationChooser.newAnimator();
           this._animator.setup(
             this._element,
             this._mainPage,
@@ -12443,18 +14444,8 @@ limitations under the License.
         this._deviceBackButtonHandler.destroy();
         window.removeEventListener('resize', this._bindedOnWindowResize);
 
-        this._mainPageHammer.off('tap', this._bindedOnTap);
+        this._mainPageGestureDetector.off('tap', this._bindedOnTap);
         this._element = this._scope = this._attrs = null;
-      },
-
-      _getAnimatorOption: function() {
-        var animator = SlidingMenuView._animatorDict[this._attrs.type];
-
-        if (!(animator instanceof SlidingMenuAnimator)) {
-          animator = SlidingMenuView._animatorDict['default'];
-        }
-
-        return animator.copy();
       },
 
       _onSwipeableChanged: function(swipeable) {
@@ -12468,9 +14459,9 @@ limitations under the License.
        */
       setSwipeable: function(enabled) {
         if (enabled) {
-          this._activateHammer();
+          this._activateGestureDetector();
         } else {
-          this._deactivateHammer();
+          this._deactivateGestureDetector();
         }
       },
 
@@ -12514,16 +14505,16 @@ limitations under the License.
         }
       },
 
-      _activateHammer: function(){
-        this._hammertime.on('touch dragleft dragright swipeleft swiperight release', this._boundHandleEvent);
+      _activateGestureDetector: function(){
+        this._gestureDetector.on('touch dragleft dragright swipeleft swiperight release', this._boundHandleEvent);
       },
 
-      _deactivateHammer: function(){
-        this._hammertime.off('touch dragleft dragright swipeleft swiperight release', this._boundHandleEvent);
+      _deactivateGestureDetector: function(){
+        this._gestureDetector.off('touch dragleft dragright swipeleft swiperight release', this._boundHandleEvent);
       },
 
       _bindEvents: function() {
-        this._hammertime = new Hammer(this._element[0], {
+        this._gestureDetector = new ons.GestureDetector(this._element[0], {
           dragMinDistance: 1
         });
       },
@@ -12676,6 +14667,10 @@ limitations under the License.
           case 'swipeleft':
             event.gesture.preventDefault();
 
+            if (this._logic.isClosed() && !this._isInsideSwipeTargetArea(event)) {
+              return;
+            }
+
             if (this._isRightMenu) {
               this.open();
             } else {
@@ -12687,6 +14682,10 @@ limitations under the License.
 
           case 'swiperight':
             event.gesture.preventDefault();
+
+            if (this._logic.isClosed() && !this._isInsideSwipeTargetArea(event)) {
+              return;
+            }
 
             if (this._isRightMenu) {
               this.close();
@@ -12758,7 +14757,7 @@ limitations under the License.
       /**
        * Close sliding-menu page.
        *
-       * @param {Object} options 
+       * @param {Object} options
        */
       close: function(options) {
         options = options || {};
@@ -12784,7 +14783,7 @@ limitations under the License.
           unlock();
 
           this._mainPage.children().css('pointer-events', '');
-          this._mainPageHammer.off('tap', this._bindedOnTap);
+          this._mainPageGestureDetector.off('tap', this._bindedOnTap);
 
           this.emit('postclose', {
             slidingMenu: this
@@ -12832,7 +14831,7 @@ limitations under the License.
           unlock();
 
           this._mainPage.children().css('pointer-events', 'none');
-          this._mainPageHammer.on('tap', this._bindedOnTap);
+          this._mainPageGestureDetector.on('tap', this._bindedOnTap);
 
           this.emit('postopen', {
             slidingMenu: this
@@ -12879,22 +14878,22 @@ limitations under the License.
 
     // Preset sliding menu animators.
     SlidingMenuView._animatorDict = {
-      'default': new RevealSlidingMenuAnimator(),
-      'overlay': new OverlaySlidingMenuAnimator(),
-      'reveal': new RevealSlidingMenuAnimator(),
-      'push': new PushSlidingMenuAnimator()
+      'default': RevealSlidingMenuAnimator,
+      'overlay': OverlaySlidingMenuAnimator,
+      'reveal': RevealSlidingMenuAnimator,
+      'push': PushSlidingMenuAnimator
     };
 
     /**
      * @param {String} name
-     * @param {NavigatorTransitionAnimator} animator
+     * @param {Function} Animator
      */
-    SlidingMenuView.registerSlidingMenuAnimator = function(name, animator) {
-      if (!(animator instanceof SlidingMenuAnimator)) {
-        throw new Error('"animator" param must be an instance of SlidingMenuAnimator');
+    SlidingMenuView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof SlidingMenuAnimator)) {
+        throw new Error('"Animator" param must inherit SlidingMenuAnimator');
       }
 
-      this._animatorDict[name] = animator;
+      this._animatorDict[name] = Animator;
     };
 
     MicroEvent.mixin(SlidingMenuView);
@@ -12926,7 +14925,25 @@ limitations under the License.
 
   module.factory('SlidingMenuAnimator', function() {
     return Class.extend({
-      
+
+      delay: 0,
+      duration: 0.4,
+      timing: 'cubic-bezier(.1, .7, .1, 1)',
+
+      /**
+       * @param {Object} options
+       * @param {String} options.timing
+       * @param {Number} options.duration
+       * @param {Number} options.delay
+       */
+      init: function(options) {
+        options = options || {};
+
+        this.timing = options.timing || this.timing;
+        this.duration = options.duration !== undefined ? options.duration : this.duration;
+        this.delay = options.delay !== undefined ? options.delay : this.delay;
+      },
+
       /**
        * @param {jqLite} element "ons-sliding-menu" or "ons-split-view" element
        * @param {jqLite} mainPage
@@ -13427,6 +15444,21 @@ limitations under the License.
   module.factory('TabbarAnimator', function() {
 
     var TabbarAnimator = Class.extend({
+
+      /**
+       * @param {Object} options
+       * @param {String} options.timing
+       * @param {Number} options.duration
+       * @param {Number} options.delay
+       */
+      init: function(options) {
+        options = options || {};
+
+        this.timing = options.timing || this.timing;
+        this.duration = options.duration !== undefined ? options.duration : this.duration;
+        this.delay = options.delay !== undefined ? options.delay : this.delay;
+      },
+
       /**
        * @param {jqLite} enterPage
        * @param {jqLite} leavePage
@@ -13457,6 +15489,11 @@ limitations under the License.
   module.factory('TabbarFadeAnimator', ['TabbarAnimator', function(TabbarAnimator) {
 
     var TabbarFadeAnimator = TabbarAnimator.extend({
+
+      timing: 'linear',
+      duration: 0.4,
+      delay: 0,
+
       /**
        * @param {jqLite} enterPage
        * @param {jqLite} leavePage
@@ -13468,12 +15505,13 @@ limitations under the License.
               transform: 'translate3D(0, 0, 0)',
               opacity: 0
             })
+            .wait(this.delay)
             .queue({
               transform: 'translate3D(0, 0, 0)',
               opacity: 1
             }, {
-              duration: 0.4,
-              timing: 'linear'
+              duration: this.duration,
+              timing: this.timing
             })
             .resetStyle()
             .queue(function(callback) {
@@ -13485,12 +15523,13 @@ limitations under the License.
               transform: 'translate3D(0, 0, 0)',
               opacity: 1
             })
+            .wait(this.delay)
             .queue({
               transform: 'translate3D(0, 0, 0)',
               opacity: 0
             }, {
-              duration: 0.4,
-              timing: 'linear'
+              duration: this.duration,
+              timing: this.timing
             })
         );
       }
@@ -13499,7 +15538,7 @@ limitations under the License.
     return TabbarFadeAnimator;
   }]);
 
-  module.factory('TabbarView', ['$onsen', '$compile', 'TabbarAnimator', 'TabbarNoneAnimator', 'TabbarFadeAnimator', function($onsen, $compile, TabbarAnimator, TabbarNoneAnimator, TabbarFadeAnimator) {
+  module.factory('TabbarView', ['$onsen', '$compile', '$parse', 'AnimationChooser', 'TabbarAnimator', 'TabbarNoneAnimator', 'TabbarFadeAnimator', function($onsen, $compile, $parse, AnimationChooser, TabbarAnimator, TabbarNoneAnimator, TabbarFadeAnimator) {
     var TabbarView = Class.extend({
       _tabbarId: undefined,
 
@@ -13521,6 +15560,14 @@ limitations under the License.
         if (this._hasTopTabbar()) {
           this._prepareForTopTabbar();
         }
+
+        this._animationChooser = new AnimationChooser({
+          animators: TabbarView._animatorDict,
+          baseClass: TabbarAnimator,
+          baseClassName: 'TabbarAnimator',
+          defaultAnimation: attrs.animation,
+          defaultAnimationOptions: $parse(attrs.animationOptions)()
+        });
       },
 
       _prepareForTopTabbar: function() {
@@ -13555,6 +15602,7 @@ limitations under the License.
        * @param {Object} [options]
        * @param {Boolean} [options.keepPage]
        * @param {String} [options.animation]
+       * @param {Object} [options.animationOptions]
        * @return {Boolean} success or not
        */
       setActiveTab: function(index, options) {
@@ -13712,7 +15760,8 @@ limitations under the License.
        * @param {jqLite} element
        * @param {Object} scope
        * @param {Object} options
-       * @param {Object} options.animation
+       * @param {String} [options.animation]
+       * @param {Object} [options.animationOptions]
        */
       _switchPage: function(element, scope, options) {
         if (this._currentPageElement) {
@@ -13722,7 +15771,7 @@ limitations under the License.
           this._currentPageElement = element;
           this._currentPageScope = scope;
 
-          this._getAnimatorOption(options).apply(element, oldPageElement, function() {
+          this._animationChooser.newAnimator(options).apply(element, oldPageElement, function() {
             if (options._removeElement) {
               oldPageElement.remove();
               oldPageScope.$destroy();
@@ -13743,7 +15792,7 @@ limitations under the License.
           if (options.callback instanceof Function) {
             options.callback();
           }
-        } 
+        }
       },
 
       /**
@@ -13797,21 +15846,21 @@ limitations under the License.
 
     // Preset transition animators.
     TabbarView._animatorDict = {
-      'default': new TabbarNoneAnimator(),
-      'none': new TabbarNoneAnimator(),
-      'fade': new TabbarFadeAnimator()
+      'default': TabbarNoneAnimator,
+      'none': TabbarNoneAnimator,
+      'fade': TabbarFadeAnimator
     };
 
     /**
      * @param {String} name
-     * @param {NavigatorTransitionAnimator} animator
+     * @param {Function} Animator
      */
-    TabbarView.registerAnimator = function(name, animator) {
-      if (!(animator instanceof TabbarAnimator)) {
-        throw new Error('"animator" param must be an instance of TabbarAnimator');
+    TabbarView.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof TabbarAnimator)) {
+        throw new Error('"Animator" param must inherit TabbarAnimator');
       }
 
-      this._animatorDict[name] = animator;
+      this._animatorDict[name] = Animator;
     };
 
     return TabbarView;
@@ -13966,6 +16015,16 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
+ * @name animation-options
+ * @type {Expression}
+ * @description
+ *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+ *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+ */
+
+
+/**
+ * @ngdoc attribute
  * @name mask-color
  * @type {String}
  * @default rgba(0, 0, 0, 0.2)
@@ -14028,6 +16087,9 @@ limitations under the License.
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "fade", "slide" and "none".[/en]
  *   [ja]アニメーション名を指定します。指定できるのは、"fade", "slide", "none"のいずれかです。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @param {Function} [options.callback]
  *   [en]Function to execute after the dialog has been revealed.[/en]
  *   [ja]ダイアログが表示され終わった時に呼び出されるコールバックを指定します。[/ja]
@@ -14045,6 +16107,9 @@ limitations under the License.
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "fade", "slide" and "none".[/en]
  *   [ja]アニメーション名を指定します。"fade", "slide", "none"のいずれかを指定します。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @param {Function} [options.callback]
  *   [en]Function to execute after the dialog has been hidden.[/en]
  *   [ja]このダイアログが閉じた時に呼び出されるコールバックを指定します。[/ja]
@@ -14299,9 +16364,7 @@ limitations under the License.
           ComponentCleaner.onDestroy(scope, function() {
             ComponentCleaner.destroyScope(scope);
             ComponentCleaner.destroyAttributes(attrs);
-            element = null;
-            scope = null;
-            attrs = null;
+            element = scope = attrs = null;
           });
         },
         post: function(scope, element) {
@@ -14353,57 +16416,30 @@ limitations under the License.
 (function(){
   'use strict';
 
-  var module = angular.module('onsen');
-
-  module.directive('onsBottomToolbar', ['$onsen', 'GenericView', function($onsen, GenericView) {
+  angular.module('onsen').directive('onsBottomToolbar', ['$onsen', 'GenericView', function($onsen, GenericView) {
     return {
       restrict: 'E',
-      replace: false,
+      link: {
+        pre: function(scope, element, attrs) {
+          var bottomToolbar = new GenericView(scope, element, attrs, {
+            viewKey: 'ons-bottomToolbar'
+          });
 
-      // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
-      transclude: false,
-      scope: false,
-      compile: function(element, attrs) {
-        var modifierTemplater = $onsen.generateModifierTemplater(attrs),
-          inline = typeof attrs.inline !== 'undefined';
+          var inline = typeof attrs.inline !== 'undefined';
+          var pageView = element.inheritedData('ons-page');
 
-        element.addClass('bottom-bar');
-        element.addClass(modifierTemplater('bottom-bar--*'));
-        element.css({'z-index': 0});
-
-        if (inline) {
-          element.css('position', 'static');
-        }
-
-        return {
-          pre: function(scope, element, attrs) {
-            var bottomToolbar = new GenericView(scope, element, attrs);
-
-            $onsen.declareVarAttribute(attrs, bottomToolbar);
-            element.data('ons-bottomToolbar', bottomToolbar);
-
-            scope.$on('$destroy', function() {
-              bottomToolbar._events = undefined;
-              $onsen.removeModifierMethods(bottomToolbar);
-              element.data('ons-bottomToolbar', undefined);
-              element = null;
-            });
-
-            $onsen.addModifierMethods(bottomToolbar, 'bottom-bar--*', element);
-
-            var pageView = element.inheritedData('ons-page');
-            if (pageView && !inline) {
-              pageView.registerBottomToolbar(element);
-            }
-          },
-          post: function(scope, element, attrs) {
-            $onsen.fireComponentEvent(element[0], 'init');
+          if (pageView && !inline) {
+            pageView.registerBottomToolbar(element);
           }
-        };
+        },
+
+        post: function(scope, element, attrs) {
+          $onsen.fireComponentEvent(element[0], 'init');
+        }
       }
     };
   }]);
+
 })();
 
 
@@ -14456,66 +16492,10 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
- * @name should-spin
- * @type {Boolean}
- * @description
- *  [en]Specify if the button should have a spinner. [/en]
- *  [ja]ボタンにスピナーを表示する場合に指定します。[/ja]
- */
-
-/**
- * @ngdoc attribute
- * @name animation
- * @type {String}
- * @description
- *   [en]The animation when the button transitions to and from the spinner. Possible values are "slide-left" (default), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in".[/en]
- *   [ja]スピナーを表示する場合のアニメーションを指定します。"slide-left" (デフォルト), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in"のいずれかを指定します。[/ja]
- */
-
-/**
- * @ngdoc attribute
  * @name disabled
  * @description
  *   [en]Specify if button should be disabled.[/en]
  *   [ja]ボタンを無効化する場合は指定します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature startSpin()
- * @description
- *   [en]Show spinner on the button.[/en]
- *   [ja]ボタンにスピナーを表示します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature stopSpin()
- * @description
- *   [en]Remove spinner from button.[/en]
- *   [ja]ボタンのスピナーを隠します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature isSpinning()
- * @return {Boolean}
- *   [en]true if the button is spinning.[/en]
- *   [ja]spinしているかどうかを返します。[/ja]
- * @description
- *   [en]Return whether the spinner is visible or not.[/en]
- *   [ja]ボタン内にスピナーが表示されているかどうかを返します。[/ja]
- */
-
-/**
- * @ngdoc method
- * @signature setSpinAnimation(animation)
- * @description
- *   [en]Set spin animation. Possible values are "slide-left" (default), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in".[/en]
- *   [ja]スピナーを表示する場合のアニメーションを指定します。"slide-left" (デフォルト), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in"のいずれかを指定します。[/ja]
- * @param {String} animation
- *   [en]Animation name.[/en]
- *   [ja]アニメーション名を指定します。[/ja]
  */
 
 /**
@@ -14542,82 +16522,40 @@ limitations under the License.
 
 (function(){
   'use strict';
-  var module = angular.module('onsen');
 
-  module.directive('onsButton', ['$onsen', 'ButtonView', function($onsen, ButtonView) {
+  angular.module('onsen').directive('onsButton', ['$onsen', 'GenericView', function($onsen, GenericView) {
     return {
       restrict: 'E',
-      replace: false,
-      transclude: true,
-      scope: {
-        animation: '@',
-      },
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
-      link: function(scope, element, attrs, _, transclude) {
-        var button = new ButtonView(scope, element, attrs);
-
-        $onsen.declareVarAttribute(attrs, button);
-        element.data('ons-button', button);
-
-        scope.$on('$destroy', function() {
-          button._events = undefined;
-          $onsen.removeModifierMethods(button);
-          element.data('ons-button', undefined);
-          element = null;
-        });
-        var initialAnimation = 'slide-left';
-
-        scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-        element.addClass('button effeckt-button');
-        element.addClass(scope.modifierTemplater('button--*'));
-        element.addClass(initialAnimation);
-
-        $onsen.addModifierMethods(button, 'button--*', element);
-
-        transclude(scope.$parent, function(cloned) {
-          angular.element(element[0].querySelector('.ons-button-inner')).append(cloned);
+      link: function(scope, element, attrs) {
+        var button = new GenericView(scope, element, attrs, {
+          viewKey: 'ons-button'
         });
 
-        if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controller directive.');
-        }
+        /**
+         * Returns whether the button is disabled or not.
+         */
+        button.isDisabled = function() {
+          return this._element[0].hasAttribute('disabled');
+        };
 
-        scope.item = {};
-        // if animation is not specified -> default is slide-left
-        scope.item.animation = initialAnimation;
-
-        scope.$watch('animation', function(newAnimation) {
-          if (newAnimation) {
-            if (scope.item.animation) {
-              element.removeClass(scope.item.animation);
-            }
-            scope.item.animation = newAnimation;
-            element.addClass(scope.item.animation);
-          }
-        });
-
-        attrs.$observe('shouldSpin', function(shouldSpin) {
-          if (shouldSpin === 'true') {
-            element.attr('data-loading', true);
+        /**
+         * Disabled or enable button.
+         */
+        button.setDisabled = function(disabled) {
+          if (disabled) {
+            this._element[0].setAttribute('disabled', '');
           } else {
-            element.removeAttr('data-loading');
+            this._element[0].removeAttribute('disabled');
           }
-        });
-
-        $onsen.cleaner.onDestroy(scope, function() {
-          $onsen.clearComponent({
-            scope: scope,
-            attrs: attrs,
-            element: element
-          });
-
-          scope = element = attrs = null;
-        });
+        };
 
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };
   }]);
+
+
+
 })();
 
 /**
@@ -14757,7 +16695,7 @@ limitations under the License.
  * @name auto-scroll
  * @description
  *   [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
- *   [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
+ *   [ja]この属性がある時、一番近いcarousel-itemの境界まで自動的にスクロールするようになります。[/ja]
  */
 
 /**
@@ -14787,7 +16725,7 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
- * @name intial-index
+ * @name initial-index
  * @type {Number}
  * @description
  *   [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
@@ -14873,7 +16811,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature setSwipeable(swipeable)
- * @param {Booelan} swipeable
+ * @param {Boolean} swipeable
  *   [en]If value is true the carousel will be swipeable.[/en]
  *   [ja]swipeableにする場合にはtrueを指定します。[/ja]
  * @description
@@ -14889,7 +16827,7 @@ limitations under the License.
  *   [ja]swipeableであればtrueを返します。[/ja]
  * @description
  *   [en]Returns whether the carousel is swipeable or not.[/en]
- *   [ja]swiapble属性があるかどうかを返します。[/ja]
+ *   [ja]swipeable属性があるかどうかを返します。[/ja]
  */
 
 /**
@@ -15175,94 +17113,6 @@ limitations under the License.
  *   [ja]カラムの横幅を指定する。パーセントもしくはピクセルで指定します（10%や50px）。[/ja]
  */
 
-(function(){
-  'use strict';
-
-  var module = angular.module('onsen');
-
-  module.directive('onsCol', ['$timeout', '$onsen', function($timeout, $onsen) {
-    return {
-      restrict: 'E',
-      replace: false,
-
-      // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclude.
-      transclude: false,
-      scope: false,
-
-      compile: function(element, attrs, transclude) {
-        element.addClass('col ons-col-inner');
-
-        return function(scope, element, attrs) {
-
-          attrs.$observe('align', function(align) {
-            updateAlign(align);
-          });
-
-          attrs.$observe('width', function(width) {
-            updateWidth(width);
-          });
-
-          // For BC
-          attrs.$observe('size', function(size) {
-            if (!attrs.width) {
-              updateWidth(size);
-            }
-          });
-
-          updateAlign(attrs.align);
-
-          if (attrs.size && !attrs.width) {
-            updateWidth(attrs.size);
-          } else {
-            updateWidth(attrs.width);
-          }
-
-          $onsen.cleaner.onDestroy(scope, function() {
-            $onsen.clearComponent({
-              scope: scope,
-              element: element,
-              attrs: attrs
-            });
-            element = attrs = scope = null;
-          });
-
-          function updateAlign(align) {
-            if (align === 'top' || align === 'center' || align === 'bottom') {
-              element.removeClass('col-top col-center col-bottom');
-              element.addClass('col-' + align);
-            } else {
-              element.removeClass('col-top col-center col-bottom');
-            }
-          }
-
-          function updateWidth(width) {
-            if (typeof width  === 'string') {
-              width = ('' + width).trim();
-              width = width.match(/^\d+$/) ? width + '%' : width;
-
-              element.css({
-                '-webkit-box-flex': '0',
-                '-webkit-flex': '0 0 ' + width,
-                '-moz-box-flex': '0',
-                '-moz-flex': '0 0 ' + width,
-                '-ms-flex': '0 0 ' + width,
-                'flex': '0 0 ' + width,
-                'max-width': width
-              });
-            } else {
-              element.removeAttr('style');
-            }
-          }
-
-          $onsen.fireComponentEvent(element[0], 'init');
-        };
-      }
-    };
-  }]);
-})();
-
-
 /**
  * @ngdoc directive
  * @id dialog
@@ -15397,6 +17247,15 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
+ * @name animation-options
+ * @type {Expression}
+ * @description
+ *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+ *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+ */
+
+/**
+ * @ngdoc attribute
  * @name mask-color
  * @type {String}
  * @default rgba(0, 0, 0, 0.2)
@@ -15459,6 +17318,9 @@ limitations under the License.
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
  *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @param {Function} [options.callback]
  *   [en]This function is called after the dialog has been revealed.[/en]
  *   [ja]ダイアログが表示され終わった後に呼び出される関数オブジェクトを指定します。[/ja]
@@ -15476,6 +17338,9 @@ limitations under the License.
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
  *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @param {Function} [options.callback]
  *   [en]This functions is called after the dialog has been hidden.[/en]
  *   [ja]ダイアログが隠れた後に呼び出される関数オブジェクトを指定します。[/ja]
@@ -15704,6 +17569,10 @@ limitations under the License.
       return dict;
     }, {});
 
+    function titlize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
     return {
       restrict: 'E',
       scope: scopeDef,
@@ -15714,41 +17583,37 @@ limitations under the License.
       transclude: true,
 
       compile: function(element, attrs) {
-        return function link(scope, element, attrs, controller, transclude) {
+        return function link(scope, element, attrs, _, transclude) {
 
           transclude(scope.$parent, function(cloned) {
             element.append(cloned);
           });
 
-          var hammer = new Hammer(element[0]);
-          hammer.on(EVENTS.join(' '), handleEvent);
-
-          $onsen.cleaner.onDestroy(scope, function() {
-            hammer.off(EVENTS.join(' '), handleEvent);
-            $onsen.clearComponent({
-              scope: scope,
-              element: element,
-              attrs: attrs
-            });
-            hammer.element = scope = element = attrs = null;
-          });
-
-          function handleEvent(event) {
+          var handler = function(event) {
             var attr = 'ng' + titlize(event.type);
 
             if (attr in scopeDef) {
               scope[attr]({$event: event});
             }
-          }
+          };
+
+          var gestureDetector = element[0]._gestureDetector;
+          gestureDetector.on(EVENTS.join(' '), handler);
+
+          $onsen.cleaner.onDestroy(scope, function() {
+            gestureDetector.off(EVENTS.join(' '), handler);
+            $onsen.clearComponent({
+              scope: scope,
+              element: element,
+              attrs: attrs
+            });
+            gestureDetector.element = scope = element = attrs = null;
+          });
 
           $onsen.fireComponentEvent(element[0], 'init');
         };
       }
     };
-
-    function titlize(str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    }
   }]);
 })();
 
@@ -15827,96 +17692,6 @@ limitations under the License.
  *   [en]Specify whether the icon should be spinning. Valid values are true and false.[/en]
  *   [ja]アイコンを回転するかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
  */
-
-(function(){
-  'use strict';
-
-  var module = angular.module('onsen');
-
-  function cleanClassAttribute(element) {
-    var classList = ('' + element.attr('class')).split(/ +/).filter(function(classString) {
-      return classString !== 'fa' && classString.substring(0, 3) !== 'fa-' && classString.substring(0, 4) !== 'ion-';
-    });
-
-    element.attr('class', classList.join(' '));
-  }
-
-  function buildClassAndStyle(attrs) {
-    var classList = ['ons-icon'];
-    var style = {};
-
-    // icon
-    if (attrs.icon.indexOf('ion-') === 0) {
-      classList.push(attrs.icon);
-      classList.push('ons-icon--ion');
-    } else if (attrs.icon.indexOf('fa-') === 0) {
-      classList.push(attrs.icon);
-      classList.push('fa');
-    } else {
-      classList.push('fa');
-      classList.push('fa-' + attrs.icon);
-    }
-
-    // size
-    var size = '' + attrs.size;
-    if (size.match(/^[1-5]x|lg$/)) {
-      classList.push('fa-' + size);
-    } else if (typeof attrs.size === 'string') {
-      style['font-size'] = size;
-    } else {
-      classList.push('fa-lg');
-    }
-
-    return {
-      'class': classList.join(' '),
-      'style': style
-    };
-  }
-
-  module.directive('onsIcon', ['$onsen', function($onsen) {
-    return {
-      restrict: 'E',
-      replace: false,
-      transclude: false,
-      link: function(scope, element, attrs) {
-
-        if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controller directive.');
-        }
-
-        var update = function() {
-          cleanClassAttribute(element);
-
-          var builded = buildClassAndStyle(attrs);
-          element.css(builded.style);
-          element.addClass(builded['class']);
-        };
-
-        var builded = buildClassAndStyle(attrs);
-        element.css(builded.style);
-        element.addClass(builded['class']);
-
-        attrs.$observe('icon', update);
-        attrs.$observe('size', update);
-        attrs.$observe('fixedWidth', update);
-        attrs.$observe('rotate', update);
-        attrs.$observe('flip', update);
-        attrs.$observe('spin', update);
-
-        $onsen.cleaner.onDestroy(scope, function() {
-          $onsen.clearComponent({
-            scope: scope,
-            element: element,
-            attrs: attrs
-          });
-          element = scope = attrs = null;
-        });
-
-        $onsen.fireComponentEvent(element[0], 'init');
-      }
-    };
-  }]);
-})();
 
 
 /**
@@ -16011,7 +17786,7 @@ limitations under the License.
  * @category util
  * @description
  *    [en]Conditionally display content depending on the platform / browser. Valid values are "ios", "android", "blackberry", "chrome", "safari", "firefox", and "opera".[/en]
- *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaを指定できます。[/ja]
+ *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaのいずれかの値を空白区切りで複数指定できます。[/ja]
  * @seealso ons-if-orientation [en]ons-if-orientation component[/en][ja]ons-if-orientationコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
@@ -16025,8 +17800,8 @@ limitations under the License.
  * @name ons-if-platform
  * @type {String}
  * @description
- *   [en]Either "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".[/en]
- *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "windows"のいずれかを指定します。[/ja]
+ *   [en]One or multiple space separated values: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".[/en]
+ *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "windows"のいずれか空白区切りで複数指定できます。[/ja]
  */
 
 (function() {
@@ -16069,7 +17844,8 @@ limitations under the License.
           });
 
           function update() {
-            if (attrs.onsIfPlatform.toLowerCase() === platform.toLowerCase()) {
+            var userPlatforms = attrs.onsIfPlatform.toLowerCase().trim().split(/\s+/);
+            if (userPlatforms.indexOf(platform.toLowerCase()) >= 0) {
               element.css('display', 'block');
             } else {
               element.css('display', 'none');
@@ -16382,45 +18158,20 @@ limitations under the License.
 (function() {
   'use strict';
 
-  var module = angular.module('onsen');
-
-  module.directive('onsList', ['$onsen', 'GenericView', function($onsen, GenericView) {
+  angular.module('onsen').directive('onsList', ['$onsen', 'GenericView', function($onsen, GenericView) {
     return {
       restrict: 'E',
-      scope: false,
+      link: function(scope, element, attrs) {
+        var view = new GenericView(scope, element, attrs, {
+          viewKey: 'ons-list'
+        });
 
-      // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclude.
-      replace: false,
-      transclude: false,
-      compile: function(element, attrs) {
-
-        return function(scope, element, attrs) {
-          var list = new GenericView(scope, element, attrs);
-
-          $onsen.declareVarAttribute(attrs, list);
-          element.data('ons-list', list);
-
-          scope.$on('$destroy', function() {
-            list._events = undefined;
-            $onsen.removeModifierMethods(list);
-            element.data('ons-list', undefined);
-            element = null;
-          });
-
-          var templater = $onsen.generateModifierTemplater(attrs);
-
-          element.addClass('list ons-list-inner');
-          element.addClass(templater('list--*'));
-
-          $onsen.addModifierMethods(list, 'list--*', element);
-          $onsen.fireComponentEvent(element[0], 'init');
-        };
+        $onsen.fireComponentEvent(element[0], 'init');
       }
     };
   }]);
-})();
 
+})();
 
 /**
  * @ngdoc directive
@@ -16456,43 +18207,19 @@ limitations under the License.
 (function() {
   'use strict';
 
-  var module = angular.module('onsen');
-
-  module.directive('onsListHeader', ['$onsen', 'GenericView', function($onsen, GenericView) {
+  angular.module('onsen').directive('onsListHeader', ['$onsen', 'GenericView', function($onsen, GenericView) {
     return {
       restrict: 'E',
+      link: function(scope, element, attrs) {
+        var view = new GenericView(scope, element, attrs, {
+          viewKey: 'ons-listHeader'
+        });
 
-      // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclude.
-      replace: false,
-      transclude: false,
-
-      compile: function() {
-        return function(scope, element, attrs) {
-          var listHeader = new GenericView(scope, element, attrs);
-
-          $onsen.declareVarAttribute(attrs, listHeader);
-
-          element.data('ons-listHeader', listHeader);
-
-          scope.$on('$destroy', function() {
-            listHeader._events = undefined;
-            $onsen.removeModifierMethods(listHeader);
-            element.data('ons-listHeader', undefined);
-            element = null;
-          });
-
-          var templater = $onsen.generateModifierTemplater(attrs);
-          element.addClass('list__header ons-list-header-inner');
-          element.addClass(templater('list__header--*'));
-
-          $onsen.addModifierMethods(listHeader, 'list__header--*', element);
-
-          $onsen.fireComponentEvent(element[0], 'init');
-        };
+        $onsen.fireComponentEvent(element[0], 'init');
       }
     };
   }]);
+
 })();
 
 /**
@@ -16500,8 +18227,11 @@ limitations under the License.
  * @id list-item
  * @name ons-list-item
  * @category list
+ * @modifier tight
+ *   [en]Remove the space above and below the item content. This is useful for multi-line content.[/en]
+ *   [ja]行間のスペースを取り除きます。複数行の内容をリストで扱う場合に便利です。[/ja]
  * @modifier tappable
- *   [en]Made the list item change appearance when it's tapped.[/en]
+ *   [en]Make the list item change appearance when it's tapped.[/en]
  *   [ja]タップやクリックした時に効果が表示されるようになります。[/ja]
  * @modifier chevron
  *   [en]Display a chevron at the right end of the list item and make it change appearance when tapped.[/en]
@@ -16515,7 +18245,7 @@ limitations under the License.
  * @seealso ons-list-header
  *   [en]ons-list-header component[/en]
  *   [ja]ons-list-headerコンポーネント[/ja]
- * @guide UsingList 
+ * @guide UsingList
  *   [en]Using lists[/en]
  *   [ja]リストを使う[/ja]
  * @codepen yxcCt
@@ -16539,40 +18269,15 @@ limitations under the License.
 (function() {
   'use strict';
 
-  var module = angular.module('onsen');
-
-  module.directive('onsListItem', ['$onsen', 'GenericView', function($onsen, GenericView) {
+  angular.module('onsen').directive('onsListItem', ['$onsen', 'GenericView', function($onsen, GenericView) {
     return {
       restrict: 'E',
+      link: function(scope, element, attrs) {
+        var view = new GenericView(scope, element, attrs, {
+          viewKey: 'ons-list-item'
+        });
 
-      // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclude.
-      replace: false,
-      transclude: false,
-
-      compile: function() {
-        return function(scope, element, attrs) {
-          var listItem = new GenericView(scope, element, attrs);
-
-          $onsen.declareVarAttribute(attrs, listItem);
-
-          element.data('ons-list-item', listItem);
-
-          scope.$on('$destroy', function() {
-            listItem._events = undefined;
-            $onsen.removeModifierMethods(listItem);
-            element.data('ons-list-item', undefined);
-            element = null;
-          });
-
-          var templater = $onsen.generateModifierTemplater(attrs);
-          element.addClass('list__item ons-list-item-inner');
-          element.addClass(templater('list__item--*'));
-
-          $onsen.addModifierMethods(listItem, 'list__item--*', element);
-
-          $onsen.fireComponentEvent(element[0], 'init');
-        };
+        $onsen.fireComponentEvent(element[0], 'init');
       }
     };
   }]);
@@ -16689,8 +18394,36 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name animation
+ * @type {String}
+ * @default default
+ * @description
+ *  [en]The animation used when showing and hiding the modal. Can be either "none" or "fade".[/en]
+ *  [ja]モーダルを表示する際のアニメーション名を指定します。"none"もしくは"fade"を指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name animation-options
+ * @type {Expression}
+ * @description
+ *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+ *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+ */
+
+/**
  * @ngdoc method
- * @signature toggle()
+ * @signature toggle([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none" and "fade".[/en]
+ *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @description
  *   [en]Toggle modal visibility.[/en]
  *   [ja]モーダルの表示を切り替えます。[/ja]
@@ -16698,7 +18431,16 @@ limitations under the License.
 
 /**
  * @ngdoc method
- * @signature show()
+ * @signature show([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none" and "fade".[/en]
+ *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @description
  *   [en]Show modal.[/en]
  *   [ja]モーダルを表示します。[/ja]
@@ -16706,7 +18448,16 @@ limitations under the License.
 
 /**
  * @ngdoc method
- * @signature hide()
+ * @signature hide([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none" and "fade".[/en]
+ *   [ja]アニメーション名を指定します。"none", "fade"のいずれかを指定します。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @description
  *   [en]Hide modal.[/en]
  *   [ja]モーダルを非表示にします。[/ja]
@@ -16737,7 +18488,7 @@ limitations under the License.
       replace: false,
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       scope: false,
       transclude: false,
 
@@ -16751,7 +18502,7 @@ limitations under the License.
               page.registerExtraElement(element);
             }
 
-            var modal = new ModalView(scope, element);
+            var modal = new ModalView(scope, element, attrs);
 
             $onsen.addModifierMethods(modal, 'modal--*', element);
             $onsen.addModifierMethods(modal, 'modal--*__content', element.children());
@@ -16984,6 +18735,25 @@ limitations under the License.
  */
 
 /**
+ * @ngdoc attribute
+ * @name animation
+ * @type {String}
+ * @default default
+ * @description
+ *  [en]Specify the transition animation. Use one of "slide", "simpleslide", "fade", "lift", "none" and "default".[/en]
+ *  [ja]画面遷移する際のアニメーションを指定します。"slide", "simpleslide", "fade", "lift", "none", "default"のいずれかを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name animation-options
+ * @type {Expression}
+ * @description
+ *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+ *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+ */
+
+/**
  * @ngdoc method
  * @signature pushPage(pageUrl, [options])
  * @param {String} pageUrl
@@ -16995,6 +18765,9 @@ limitations under the License.
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
  *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @param {Function} [options.onTransitionEnd]
  *   [en]Function that is called when the transition has ended.[/en]
  *   [ja]pushPage()による画面遷移が終了した時に呼び出される関数オブジェクトを指定します。[/ja]
@@ -17032,6 +18805,9 @@ limitations under the License.
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
  *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @param {Function} [options.onTransitionEnd]
  *   [en]Function that is called when the transition has ended.[/en]
  *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
@@ -17052,6 +18828,9 @@ limitations under the License.
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
  *   [ja]アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @param {Function} [options.onTransitionEnd]
  *   [en]Function that is called when the transition has ended.[/en]
  *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
@@ -17386,7 +19165,7 @@ limitations under the License.
       restrict: 'E',
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       transclude: false,
       scope: false,
 
@@ -17427,7 +19206,7 @@ limitations under the License.
           scroller.on('scrollStart', function(e) {
             var scrolled = scroller.y - offset;
             if (scrolled < (scroller.maxScrollY + 40)) {
-              // TODO: find a better way to know when content is upated so we can refresh
+              // TODO: find a better way to know when content is updated so we can refresh
               scroller.refresh();
             }
           });
@@ -17590,6 +19369,15 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
+ * @name animation-options
+ * @type {Expression}
+ * @description
+ *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+ *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+ */
+
+/**
+ * @ngdoc attribute
  * @name mask-color
  * @type {Color}
  * @description
@@ -17654,6 +19442,9 @@ limitations under the License.
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "fade" and "none".[/en]
  *   [ja]アニメーション名を指定します。"fade"もしくは"none"を指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @description
  *   [en]Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..[/en]
  *   [ja]対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。[/ja]
@@ -17668,6 +19459,9 @@ limitations under the License.
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "fade" and "none".[/en]
  *   [ja]アニメーション名を指定します。"fade"もしくは"none"を指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @description
  *   [en]Close the popover.[/en]
  *   [ja]ポップオーバーを閉じます。[/ja]
@@ -17843,7 +19637,7 @@ limitations under the License.
  *   [en]Component that adds "pull-to-refresh" to an <ons-page> element.[/en]
  *   [ja]ons-page要素以下でいわゆるpull to refreshを実装するためのコンポーネントです。[/ja]
  * @codepen WbJogM
- * @guide UsingPullHook 
+ * @guide UsingPullHook
  *   [en]How to use Pull Hook[/en]
  *   [ja]プルフックを使う[/ja]
  * @example
@@ -17950,6 +19744,14 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
+ * @name fixed-content
+ * @description
+ *   [en]If this attribute is set the content of the page will not move when pulling.[/en]
+ *   [ja]この属性がある時、プルフックが引き出されている時にもコンテンツは動きません。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
  * @name ons-changestate
  * @type {Expression}
  * @description
@@ -17976,7 +19778,15 @@ limitations under the License.
  *   [ja]プルフックがdisabled状態の場合、trueを返します。[/ja]
  * @description
  *   [en]Returns whether the component is disabled or enabled.[/en]
- *   [ja]dsiabled状態になっているかを得ることが出来ます。[/ja]
+ *   [ja]disabled状態になっているかを得ることが出来ます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getHeight()
+ * @description
+ *   [en]Returns the height of the pull hook in pixels.[/en]
+ *   [ja]プルフックの高さをピクセル数で返します。[/ja]
  */
 
 /**
@@ -17992,6 +19802,14 @@ limitations under the License.
 
 /**
  * @ngdoc method
+ * @signature getThresholdHeight()
+ * @description
+ *   [en]Returns the height of the threshold in pixels.[/en]
+ *   [ja]閾値、となる高さをピクセル数で返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature setThresholdHeight(thresholdHeight)
  * @param {Number} thresholdHeight
  *   [en]Desired threshold height.[/en]
@@ -17999,6 +19817,22 @@ limitations under the License.
  * @description
  *   [en]Specify the threshold height.[/en]
  *   [ja]閾値となる高さを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getPullDistance()
+ * @description
+ *   [en]Returns the current number of pixels the pull hook has moved.[/en]
+ *   [ja]現在のプルフックが引き出された距離をピクセル数で返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getCurrentState()
+ * @description
+ *   [en]Returns the current state of the element.[/en]
+ *   [ja]要素の現在の状態を返します。[/ja]
  */
 
 /**
@@ -18097,8 +19931,8 @@ limitations under the License.
  *   [en]ons-col component[/en]
  *   [ja]ons-colコンポーネント[/ja]
  * @note
- *   [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.[/en]
- *   [ja]Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。[/ja]
+ *   [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-col, they may not be displayed correctly. You can use only one vertical-align.[/en]
+ *   [ja]Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-colを組み合わせてそれぞれのons-col要素のvertical-align属性の値に別々の値を指定すると、描画が崩れる場合があります。vertical-align属性の値には一つの値だけを指定できます。[/ja]
  * @example
  * <ons-row>
  *   <ons-col width="50px"><ons-icon icon="fa-twitter"></ons-icon></ons-col>
@@ -18115,47 +19949,6 @@ limitations under the License.
  *   [ja]縦に整列するために指定します。top、bottom、centerのいずれかを指定できます。[/ja]
  */
 
-(function(){
-  'use strict';
-
-  var module = angular.module('onsen');
-
-  module.directive('onsRow', ['$onsen', '$timeout', function($onsen, $timeout) {
-    return {
-      restrict: 'E',
-      replace: false,
-
-      // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclude.
-      transclude: false,
-      scope: false,
-
-      compile: function(element, attrs) {
-        element.addClass('row ons-row-inner');
-
-        return function(scope, element, attrs) {
-          attrs.$observe('align', function(align) {
-            update();
-          });
-
-          update();
-
-          function update() {
-            var align = ('' + attrs.align).trim();
-            if (align === 'top' || align === 'center' || align === 'bottom') {
-              element.removeClass('row-bottom row-center row-top');
-              element.addClass('row-' + align);
-            }
-          }
-
-          $onsen.fireComponentEvent(element[0], 'init');
-        };
-      }
-    };
-  }]);
-})();
-
-
 /**
  * @ngdoc directive
  * @id scroller
@@ -18169,95 +19962,6 @@ limitations under the License.
  *   ...
  * </ons-scroller>
  */
-(function() {
-  'use strict';
-  var module = angular.module('onsen');
-
-  module.directive('onsScroller', ['$onsen', '$timeout', function($onsen, $timeout) {
-    return {
-      restrict: 'E',
-      replace: false,
-      transclude: true,
-
-      scope: {
-        onScrolled: '&',
-        infinitScrollEnable: '='
-      },
-
-      compile: function(element, attrs) {
-        var content = element.addClass('ons-scroller').children().remove();
-
-        return function(scope, element, attrs, controller, transclude) {
-          if (attrs.ngController) {
-            throw new Error('"ons-scroller" can\'t accept "ng-controller" directive.');
-          }
-
-          var wrapper = angular.element('<div></div>');
-          wrapper.addClass('ons-scroller__content ons-scroller-inner');
-          element.append(wrapper);
-
-          transclude(scope.$parent, function(cloned) {
-            wrapper.append(cloned);
-            wrapper = null;
-          });
-
-          // inifinte scroll
-          var scrollWrapper;
-
-          scrollWrapper = element[0];
-          var offset = parseInt(attrs.threshold) || 10;
-
-          if (scope.onScrolled) {
-            scrollWrapper.addEventListener('scroll', function() {
-              if (scope.infinitScrollEnable) {
-                var scrollTopAndOffsetHeight = scrollWrapper.scrollTop + scrollWrapper.offsetHeight;
-                var scrollHeightMinusOffset = scrollWrapper.scrollHeight - offset;
-
-                if (scrollTopAndOffsetHeight >= scrollHeightMinusOffset) {
-                  scope.onScrolled();
-                }
-              }
-            });
-          }
-
-          // IScroll for Android
-          if (!Modernizr.csstransforms3d) {
-            $timeout(function() {
-              var iScroll = new IScroll(scrollWrapper, {
-                momentum: true,
-                bounce: true,
-                hScrollbar: false,
-                vScrollbar: false,
-                preventDefault: false
-              });
-
-              iScroll.on('scrollStart', function(e) {
-                var scrolled = iScroll.y - offset;
-                if (scrolled < (iScroll.maxScrollY + 40)) {
-                  // TODO: find a better way to know when content is upated so we can refresh
-                  iScroll.refresh();
-                }
-              });
-
-              if (scope.onScrolled) {
-                iScroll.on('scrollEnd', function(e) {
-                  var scrolled = iScroll.y - offset;
-                  if (scrolled < iScroll.maxScrollY) {
-                    // console.log('we are there!');
-                    scope.onScrolled();
-                  }
-                });
-              }
-
-            }, 500);
-          }
-
-          $onsen.fireComponentEvent(element[0], 'init');
-        };
-      }
-    };
-  }]);
-})();
 
 /**
  * @ngdoc directive
@@ -18415,7 +20119,7 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
- * @name direction
+ * @name side
  * @type {String}
  * @description
  *   [en]Specify which side of the screen the menu page is located on. Possible values are "left" and "right".[/en]
@@ -18965,7 +20669,7 @@ limitations under the License.
  * @ngdoc method
  * @signature update()
  * @description
- *   [en]Trigger an 'update' event and try to determine if the split behaviour should be changed.[/en]
+ *   [en]Trigger an 'update' event and try to determine if the split behavior should be changed.[/en]
  *   [ja]splitモードを変えるべきかどうかを判断するための'update'イベントを発火します。[/ja]
  */
 
@@ -19439,7 +21143,7 @@ limitations under the License.
 
   var defaultInnerTemplate =
     '<div ng-if="icon != undefined" class="tab-bar__icon">' +
-      '<ons-icon icon="{{tabIcon}}" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>' +
+      '<ons-icon ng-attr-icon="{{tabIcon}}" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>' +
     '</div>' +
     '<div ng-if="label" class="tab-bar__label">{{label}}</div>';
 
@@ -19684,6 +21388,15 @@ limitations under the License.
 
 /**
  * @ngdoc attribute
+ * @name animation-options
+ * @type {Expression}
+ * @description
+ *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+ *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+ */
+
+/**
+ * @ngdoc attribute
  * @name position
  * @type {String}
  * @default bottom
@@ -19743,6 +21456,9 @@ limitations under the License.
  * @param {String} [options.animation]
  *   [en]Animation name. Available animations are "fade" and "none".[/en]
  *   [ja]アニメーション名を指定します。"fade", "none"のいずれかを指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @return {Boolean}
  *   [en]true if the change was successful.[/en]
  *   [ja]変更が成功した場合にtrueを返します。[/ja]
@@ -19879,17 +21595,13 @@ limitations under the License.
  */
 (function(){
   'use strict';
-  var module = angular.module('onsen');
 
-  module.directive('onsTemplate', ['$onsen', '$templateCache', function($onsen, $templateCache) {
+  angular.module('onsen').directive('onsTemplate', ['$templateCache', function($templateCache) {
     return {
       restrict: 'E',
-      transclude: false,
-      priority: 1000,
       terminal: true,
       compile: function(element) {
-        $templateCache.put(element.attr('id'), element.remove().html());
-        $onsen.fireComponentEvent(element[0], 'init');
+        $templateCache.put(element.attr('id'), element[0].template);
       }
     };
   }]);
@@ -20085,7 +21797,7 @@ limitations under the License.
       replace: false,
 
       // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclde.
+      // Do not use isolated scope and template's ng-transclude.
       scope: false,
       transclude: false,
 
@@ -20111,19 +21823,12 @@ limitations under the License.
 
         return {
           pre: function(scope, element, attrs) {
-            var toolbar = new GenericView(scope, element, attrs);
-
-            $onsen.declareVarAttribute(attrs, toolbar);
-
-
-            scope.$on('$destroy', function() {
-              toolbar._events = undefined;
-              $onsen.removeModifierMethods(toolbar);
-              element.data('ons-toolbar', undefined);
-              element = null;
+            var toolbar = new GenericView(scope, element, attrs, {
+              viewKey: 'ons-toolbar',
+              directiveOnly: true,
+              modifierTemplater: 'navigation-bar--*'
             });
 
-            $onsen.addModifierMethods(toolbar, 'navigation-bar--*', element);
             angular.forEach(['left', 'center', 'right'], function(position) {
               var el = element[0].querySelector('.navigation-bar__' + position);
               if (el) {
@@ -20136,8 +21841,6 @@ limitations under the License.
             if (pageView && !inline) {
               pageView.registerToolbar(element);
             }
-
-            element.data('ons-toolbar', toolbar);
           },
           post: function(scope, element, attrs) {
             $onsen.fireComponentEvent(element[0], 'init');
@@ -20177,7 +21880,7 @@ limitations under the License.
  * <ons-toolbar>
  *   <div class="left"><ons-toolbar-button>Button</ons-toolbar-button></div>
  *   <div class="center">Title</div>
- *   <div class="right"><ons-toolbar-button><ons-icon icon="ion-navion" size="28px"></ons-icon></ons-toolbar-button></div>
+ *   <div class="right"><ons-toolbar-button><ons-icon icon="ion-navicon" size="28px"></ons-icon></ons-toolbar-button></div>
  * </ons-toolbar>
  */
 
@@ -20186,7 +21889,7 @@ limitations under the License.
  * @name var
  * @type {String}
  * @description
- *   [en]Variable name to refer this buttom.[/en]
+ *   [en]Variable name to refer this button.[/en]
  *   [ja]このボタンを参照するための名前を指定します。[/ja]
  */
 
@@ -20214,46 +21917,21 @@ limitations under the License.
   module.directive('onsToolbarButton', ['$onsen', 'GenericView', function($onsen, GenericView) {
     return {
       restrict: 'E',
-      transclude: true,
-      scope: {},
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
+      scope: false,
       link: {
         pre: function(scope, element, attrs) {
-          var toolbarButton = new GenericView(scope, element, attrs),
-            innerElement = element[0].querySelector('.toolbar-button');
-
+          var toolbarButton = new GenericView(scope, element, attrs);
+          element.data('ons-toolbar-button', toolbarButton);
           $onsen.declareVarAttribute(attrs, toolbarButton);
 
-          element.data('ons-toolbar-button', toolbarButton);
+          $onsen.addModifierMethodsForCustomElements(toolbarButton, element);
 
-          scope.$on('$destroy', function() {
+          $onsen.cleaner.onDestroy(scope, function() {
             toolbarButton._events = undefined;
             $onsen.removeModifierMethods(toolbarButton);
             element.data('ons-toolbar-button', undefined);
             element = null;
-          });
 
-          var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
-          if (attrs.ngController) {
-            throw new Error('This element can\'t accept ng-controller directive.');
-          }
-
-          attrs.$observe('disabled', function(value) {
-            if (value === false || typeof value === 'undefined') {
-              innerElement.removeAttribute('disabled');
-            }
-            else {
-              innerElement.setAttribute('disabled', 'disabled');
-            }
-          });
-
-          scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-          $onsen.addModifierMethods(toolbarButton, 'toolbar-button--*', element.children());
-
-          element.children('span').addClass(modifierTemplater('toolbar-button--*'));
-
-          $onsen.cleaner.onDestroy(scope, function() {
             $onsen.clearComponent({
               scope: scope,
               attrs: attrs,
@@ -20399,273 +22077,6 @@ limitations under the License.
   })();
 })();
 
-/*
-Copyright 2013-2015 ASIAL CORPORATION
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-(function(){
-  'use strict';
-
-  var util = {
-    init: function() {
-      this.ready = false;
-    },
-
-    addBackButtonListener: function(fn) {
-      if (this._ready) {
-        window.document.addEventListener('backbutton', fn, false);
-      } else {
-        window.document.addEventListener('deviceready', function() {
-          window.document.addEventListener('backbutton', fn, false);
-        });
-      }
-    },
-
-    removeBackButtonListener: function(fn) {
-      if (this._ready) {
-        window.document.removeEventListener('backbutton', fn, false);
-      } else {
-        window.document.addEventListener('deviceready', function() {
-          window.document.removeEventListener('backbutton', fn, false);
-        });
-      }
-    }
-  };
-  util.init();
-
-  /**
-   * Internal service class for framework implementation.
-   */
-  angular.module('onsen').service('DeviceBackButtonHandler', function() {
-
-    this._init = function() {
-      if (window.ons.isWebView()) {
-        window.document.addEventListener('deviceready', function() {
-          util._ready = true;
-        }, false);
-      } else {
-        util._ready = true;
-      }
-
-      this._bindedCallback = this._callback.bind(this);
-
-      this.enable();
-    };
-
-    this._isEnabled = false;
-
-    /**
-     * Enable to handle 'backbutton' events.
-     */
-    this.enable = function() {
-      if (!this._isEnabled) {
-        util.addBackButtonListener(this._bindedCallback);
-        this._isEnabled = true;
-      }
-    };
-
-    /**
-     * Disable to handle 'backbutton' events.
-     */
-    this.disable = function() {
-      if (this._isEnabled) {
-        util.removeBackButtonListener(this._bindedCallback);
-        this._isEnabled = false;
-      }
-    };
-
-    /**
-     * Fire a 'backbutton' event manually.
-     */
-    this.fireDeviceBackButtonEvent = function() {
-      var event = document.createEvent('Event');
-      event.initEvent('backbutton', true, true);
-      document.dispatchEvent(event);
-    };
-
-    this._callback = function() {
-      this._dispatchDeviceBackButtonEvent();
-    };
-
-    /**
-     * @param {jqLite} element
-     * @param {Function} callback
-     */
-    this.create = function(element, callback) {
-      if (!(element instanceof angular.element().constructor)) {
-        throw new Error('element must be an instance of jqLite');
-      }
-
-      if (!(callback instanceof Function)) {
-        throw new Error('callback must be an instance of Function');
-      }
-
-      var handler = {
-        _callback: callback,
-        _element: element,
-
-        disable: function() {
-          this._element.data('device-backbutton-handler', null);
-        },
-
-        setListener: function(callback) {
-          this._callback = callback;
-        },
-
-        enable: function() {
-          this._element.data('device-backbutton-handler', this);
-        },
-
-        isEnabled: function() {
-          return this._element.data('device-backbutton-handler') === this;
-        },
-
-        destroy: function() {
-          this._element.data('device-backbutton-handler', null);
-          this._callback = this._element = null;
-        }
-      };
-
-      handler.enable();
-
-      return handler;
-    };
-
-    /**
-     * @param {Object} event
-     */
-    this._dispatchDeviceBackButtonEvent = function(event) {
-      var tree = this._captureTree();
-      var element = this._findHandlerLeafElement(tree);
-
-      //this._dumpTree(tree);
-      //this._dumpParents(element);
-
-      var handler = element.data('device-backbutton-handler');
-      handler._callback(createEvent(element));
-
-      function createEvent(element) {
-        return {
-          _element: element,
-          callParentHandler: function() {
-            var parent = this._element.parent();
-            var hander = null;
-
-            while (parent[0]) {
-              handler = parent.data('device-backbutton-handler');
-              if (handler) {
-                return handler._callback(createEvent(parent));
-              }
-              parent = parent.parent();
-            }
-          }
-        };
-      }
-    };
-
-    this._dumpParents = function(element) {
-      while(element[0]) {
-        console.log(element[0].nodeName.toLowerCase() + '.' + element.attr('class'));
-        element = element.parent();
-      }
-    };
-
-    /**
-     * @return {Object}
-     */
-    this._captureTree = function() {
-      return createTree(angular.element(document.body));
-
-      function createTree(element) {
-        return {
-          element: element,
-          children: Array.prototype.concat.apply([], Array.prototype.map.call(element.children(), function(child) {
-            child = angular.element(child);
-
-            if (child[0].style.display === 'none') {
-              return [];
-            }
-
-            if (child.children().length === 0 && !child.data('device-backbutton-handler')) {
-              return [];
-            }
-
-            var result = createTree(child);
-
-            if (result.children.length === 0 && !child.data('device-backbutton-handler')) {
-              return [];
-            }
-
-            return [result];
-          }))
-        };
-      }
-    };
-
-    this._dumpTree = function(node) {
-      _dump(node, 0);
-
-      function _dump(node, level) {
-        var pad = new Array(level + 1).join('  ');
-        console.log(pad + node.element[0].nodeName.toLowerCase());
-        node.children.forEach(function(node) {
-          _dump(node, level + 1);
-        });
-      }
-    };
-
-    /**
-     * @param {Object} tree
-     * @return {jqLite}
-     */
-    this._findHandlerLeafElement = function(tree) {
-      return find(tree);
-
-      function find(node) {
-        if (node.children.length === 0) {
-          return node.element;
-        } 
-
-        if (node.children.length === 1) {
-          return find(node.children[0]);
-        }
-
-        return node.children.map(function(childNode) {
-          return childNode.element;
-        }).reduce(function(left, right) {
-          if (left === null) {
-            return right;
-          }
-
-          var leftZ = parseInt(window.getComputedStyle(left[0], '').zIndex, 10);
-          var rightZ = parseInt(window.getComputedStyle(right[0], '').zIndex, 10);
-
-          if (!isNaN(leftZ) && !isNaN(rightZ)) {
-            return leftZ > rightZ ? left : right;
-          }
-
-          throw new Error('Capturing backbutton-handler is failure.');
-        }, null);
-      }
-    };
-
-    this._init();
-  });
-
-})();
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -20692,9 +22103,8 @@ limitations under the License.
   /**
    * Internal service class for framework implementation.
    */
-  module.factory('$onsen', ['$rootScope', '$window', '$cacheFactory', '$document', '$templateCache', '$http', '$q', '$onsGlobal', 'ComponentCleaner', 'DeviceBackButtonHandler', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner, DeviceBackButtonHandler) {
+  module.factory('$onsen', ['$rootScope', '$window', '$cacheFactory', '$document', '$templateCache', '$http', '$q', '$onsGlobal', 'ComponentCleaner', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner) {
 
-    var unlockerDict = createUnlockerDict();
     var $onsen = createOnsenService();
 
     return $onsen;
@@ -20706,9 +22116,9 @@ limitations under the License.
 
         cleaner: ComponentCleaner,
 
-        DeviceBackButtonHandler: DeviceBackButtonHandler,
+        DeviceBackButtonHandler: $onsGlobal._deviceBackButtonDispatcher,
 
-        _defaultDeviceBackButtonHandler: DeviceBackButtonHandler.create(angular.element(document.body), function() {
+        _defaultDeviceBackButtonHandler: $onsGlobal._deviceBackButtonDispatcher.createHandler(window.document.body, function() {
           navigator.app.exitApp();
         }),
 
@@ -20774,38 +22184,6 @@ limitations under the License.
               ComponentCleaner.destroyElement(element);
             });
           }
-        },
-
-        /**
-         * Find first ancestor of el with tagName
-         * or undefined if not found
-         *
-         * @param {jqLite} element
-         * @param {String} tagName
-         */
-        upTo : function(el, tagName) {
-          tagName = tagName.toLowerCase();
-
-          do {
-            if (!el) {
-              return null;
-            }
-            el = el.parentNode;
-            if (el.tagName.toLowerCase() == tagName) {
-              return el;
-            }
-          } while (el.parentNode);
-
-          return null;
-        },
-
-
-        /**
-         * @param {Array} dependencies
-         * @param {Function} callback
-         */
-        waitForVariables: function(dependencies, callback) {
-          unlockerDict.addCallback(dependencies, callback);
         },
 
         /**
@@ -20877,6 +22255,57 @@ limitations under the License.
               return template.replace('*', modifier);
             }).join(' ');
           };
+        },
+
+        /**
+         * Add modifier methods to view object for custom elements.
+         *
+         * @param {Object} view object
+         * @param {jqLite} element 
+         */
+        addModifierMethodsForCustomElements: function(view, element) {
+          var methods = {
+            hasModifier: function(needle) {
+              var tokens = ModifierUtil.split(element.attr('modifier'));
+              needle = typeof needle === 'string' ? needle.trim() : '';
+
+              return ModifierUtil.split(needle).some(function(needle) {
+                return tokens.indexOf(needle) != -1;
+              });
+            },
+
+            removeModifier: function(needle) {
+              needle = typeof needle === 'string' ? needle.trim() : '';
+
+              var modifier = ModifierUtil.split(element.attr('modifier')).filter(function(token) {
+                return token !== needle;
+              }).join(' ');
+
+              element.attr('modifier', modifier);
+            },
+
+            addModifier: function(modifier) {
+              element.attr('modifier', element.attr('modifier') + ' ' + modifier);
+            },
+
+            setModifier: function(modifier) {
+              element.attr('modifier', modifier);
+            },
+
+            toggleModifier: function(modifier) {
+              if (this.hasModifier(modifier)) {
+                this.removeModifier(modifier);
+              } else {
+                this.addModifier(modifier);
+              }
+            }
+          };
+
+          for (var method in methods) {
+            if (methods.hasOwnProperty(method)) {
+              view[method] = methods[method];
+            }
+          }
         },
 
         /**
@@ -20968,7 +22397,6 @@ limitations under the License.
             var varName = attrs['var'];
 
             this._defineVar(varName, object);
-            unlockerDict.unlockVarName(varName);
           }
         },
 
@@ -21097,551 +22525,19 @@ limitations under the License.
       };
     }
 
-    function createUnlockerDict() {
-
-      return {
-        _unlockersDict: {},
-
-        _unlockedVarDict: {},
-
-        /**
-         * @param {String} name
-         * @param {Function} unlocker
-         */
-        _addVarLock: function (name, unlocker) {
-          if (!(unlocker instanceof Function)) {
-            throw new Error('unlocker argument must be an instance of Function.');
-          }
-
-          if (this._unlockersDict[name]) {
-            this._unlockersDict[name].push(unlocker);
-          } else {
-            this._unlockersDict[name] = [unlocker];
-          }
-        },
-
-        /**
-         * @param {String} varName
-         */
-        unlockVarName: function(varName) {
-          var unlockers = this._unlockersDict[varName];
-
-          if (unlockers) {
-            unlockers.forEach(function(unlock) {
-              unlock();
-            });
-          }
-          this._unlockedVarDict[varName] = true;
-        },
-
-        /**
-         * @param {Array} dependencies an array of var name
-         * @param {Function} callback
-         */
-        addCallback: function(dependencies, callback) {
-          if (!(callback instanceof Function)) {
-            throw new Error('callback argument must be an instance of Function.');
-          }
-
-          var doorLock = new DoorLock();
-          var self = this;
-
-          dependencies.forEach(function(varName) {
-
-            if (!self._unlockedVarDict[varName]) {
-              // wait for variable declaration
-              var unlock = doorLock.lock();
-              self._addVarLock(varName, unlock);
-            }
-
-          });
-
-          if (doorLock.isLocked()) {
-            doorLock.waitUnlock(callback);
-          } else {
-            callback();
-          }
-        }
-      };
-    }
   }]);
 })();
 
-/*
-Copyright 2013-2015 ASIAL CORPORATION
+'use strict';
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-   http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-*/
-
-
-/**
- * Minimal animation library for managing css transition on mobile browsers.
- */
-window.animit = (function(){
+{
   'use strict';
 
-  /**
-   * @param {HTMLElement} element
-   */
-  var Animit = function(element) {
-    if (!(this instanceof Animit)) {
-      return new Animit(element);
-    }
-
-    if (element instanceof HTMLElement) {
-      this.elements = [element];
-    } else if (Object.prototype.toString.call(element) === '[object Array]') {
-      this.elements = element;
-    } else {
-      throw new Error('First argument must be an array or an instance of HTMLElement.');
-    }
-
-    this.transitionQueue = [];
-    this.lastStyleAttributeDict = [];
-
-    var self = this;
-    this.elements.forEach(function(element, index) {
-      if (!element.hasAttribute('data-animit-orig-style')) {
-        self.lastStyleAttributeDict[index] = element.getAttribute('style');
-        element.setAttribute('data-animit-orig-style', self.lastStyleAttributeDict[index] || '');
-      } else {
-        self.lastStyleAttributeDict[index] = element.getAttribute('data-animit-orig-style');
-      }
-    });
-  };
-
-  Animit.prototype = {
-
-    /**
-     * @property {Array}
-     */
-    transitionQueue: undefined,
-
-    /**
-     * @property {HTMLElement}
-     */
-    element: undefined,
-
-    /**
-     * Start animation sequence with passed animations.
-     *
-     * @param {Function} callback
-     */
-    play: function(callback) {
-      if (typeof callback === 'function') {
-        this.transitionQueue.push(function(done) {
-          callback();
-          done();
-        });
-      }
-
-      this.startAnimation();
-
-      return this;
-    },
-
-    /**
-     * Queue transition animations or other function.
-     *
-     * e.g. animit(elt).queue({color: 'red'})
-     * e.g. animit(elt).queue({color: 'red'}, {duration: 0.4})
-     * e.g. animit(elt).queue({css: {color: 'red'}, duration: 0.2})
-     *
-     * @param {Object|Animit.Transition|Function} transition
-     * @param {Object} [options]
-     */
-    queue: function(transition, options) {
-      var queue = this.transitionQueue;
-
-      if (transition && options) {
-        options.css = transition;
-        transition = new Animit.Transition(options);
-      }
-
-      if (!(transition instanceof Function || transition instanceof Animit.Transition)) {
-        if (transition.css) {
-          transition = new Animit.Transition(transition);
-        } else {
-          transition = new Animit.Transition({
-            css: transition
-          });
-        }
-      }
-
-      if (transition instanceof Function) {
-        queue.push(transition);
-      } else if (transition instanceof Animit.Transition) {
-        queue.push(transition.build());
-      } else {
-        throw new Error('Invalid arguments');
-      }
-
-      return this;
-    },
-
-    /**
-     * Queue transition animations.
-     *
-     * @param {Float} seconds
-     */
-    wait: function(seconds) {
-      var self = this;
-      this.transitionQueue.push(function(done) {
-        setTimeout(done, 1000 * seconds);
-      });
-
-      return this;
-    },
-
-    /**
-     * Reset element's style.
-     *
-     * @param {Object} [options]
-     * @param {Float} [options.duration]
-     * @param {String} [options.timing]
-     * @param {String} [options.transition]
-     */
-    resetStyle: function(options) {
-      options = options || {};
-      var self = this;
-
-      if (options.transition && !options.duration) {
-        throw new Error('"options.duration" is required when "options.transition" is enabled.');
-      }
-
-      if (options.transition || (options.duration && options.duration > 0)) {
-        var transitionValue = options.transition || ('all ' + options.duration + 's ' + (options.timing || 'linear'));
-        var transitionStyle = 'transition: ' + transitionValue + '; -' + Animit.prefix + '-transition: ' + transitionValue + ';';
-
-        this.transitionQueue.push(function(done) {
-          var elements = this.elements;
-
-          // transition and style settings
-          elements.forEach(function(element, index) {
-            element.style[Animit.prefix + 'Transition'] = transitionValue;
-            element.style.transition = transitionValue;
-
-            var styleValue = (self.lastStyleAttributeDict[index] ? self.lastStyleAttributeDict[index] + '; ' : '') + transitionStyle;
-            element.setAttribute('style', styleValue);
-          });
-
-          // add "transitionend" event handler
-          var removeListeners = util.addOnTransitionEnd(elements[0], function() {
-            clearTimeout(timeoutId);
-            reset();
-            done();
-          });
-
-          // for fail safe.
-          var timeoutId = setTimeout(function() {
-            removeListeners();
-            reset();
-            done();
-          }, options.duration * 1000 * 1.4);
-        });
-      } else {
-        this.transitionQueue.push(function(done) {
-          reset();
-          done();
-        });
-      }
-
-      return this;
-
-      function reset() {
-        // Clear transition animation settings.
-        self.elements.forEach(function(element, index) {
-          element.style[Animit.prefix + 'Transition'] = 'none';
-          element.style.transition = 'none';
-
-          if (self.lastStyleAttributeDict[index]) {
-            element.setAttribute('style', self.lastStyleAttributeDict[index]);
-          } else {
-            element.setAttribute('style', '');
-            element.removeAttribute('style');
-          }
-        });
-      }
-    },
-
-    /**
-     * Start animation sequence.
-     */
-    startAnimation: function() {
-      this._dequeueTransition();
-
-      return this;
-    },
-
-    _dequeueTransition: function() {
-      var transition = this.transitionQueue.shift();
-      if (this._currentTransition) {
-        throw new Error('Current transition exists.');
-      }
-      this._currentTransition = transition;
-      var self = this;
-      var called = false;
-
-      var done = function() {
-        if (!called) {
-          called = true;
-          self._currentTransition = undefined;
-          self._dequeueTransition();
-        } else {
-          throw new Error('Invalid state: This callback is called twice.');
-        }
-      };
-
-      if (transition) {
-        transition.call(this, done);
-      }
-    }
-
-  };
-
-  Animit.cssPropertyDict = (function() {
-    var styles = window.getComputedStyle(document.documentElement, '');
-    var dict = {};
-    var a = 'A'.charCodeAt(0);
-    var z = 'z'.charCodeAt(0);
-
-    for (var key in styles) {
-      if (styles.hasOwnProperty(key)) {
-        var char = key.charCodeAt(0);
-        if (a <= key.charCodeAt(0) && z >= key.charCodeAt(0)) {
-          if (key !== 'cssText' && key !== 'parentText' && key !== 'length') {
-            dict[key] = true;
-          }
-        }
-      }
-    }
-
-    return dict;
-  })();
-
-  Animit.hasCssProperty = function(name) {
-    return !!Animit.cssPropertyDict[name];
-  };
-
-  /**
-   * Vendor prefix for css property.
-   */
-  Animit.prefix = (function() {
-    var styles = window.getComputedStyle(document.documentElement, ''),
-      pre = (Array.prototype.slice
-        .call(styles)
-        .join('') 
-        .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
-      )[1];
-    return pre;
-  })();
-
-  /**
-   * @param {Animit} arguments
-   */
-  Animit.runAll = function(/* arguments... */) {
-    for (var i = 0; i < arguments.length; i++) {
-      arguments[i].play();
-    }
-  };
-
-
-  /**
-   * @param {Object} options
-   * @param {Float} [options.duration]
-   * @param {String} [options.property]
-   * @param {String} [options.timing]
-   */
-  Animit.Transition = function(options) {
-    this.options = options || {};
-    this.options.duration = this.options.duration || 0;
-    this.options.timing = this.options.timing || 'linear';
-    this.options.css = this.options.css || {};
-    this.options.property = this.options.property || 'all';
-  };
-
-  Animit.Transition.prototype = {
-
-    /**
-     * @param {HTMLElement} element
-     * @return {Function}
-     */
-    build: function() {
-
-      if (Object.keys(this.options.css).length === 0) {
-        throw new Error('options.css is required.');
-      }
-
-      var css = createActualCssProps(this.options.css);
-
-      if (this.options.duration > 0) {
-        var transitionValue = util.buildTransitionValue(this.options);
-        var self = this;
-
-        return function(callback) {
-          var elements = this.elements;
-          var timeout = self.options.duration * 1000 * 1.4;
-
-          var removeListeners = util.addOnTransitionEnd(elements[0], function() {
-            clearTimeout(timeoutId);
-            callback();
-          });
-
-          var timeoutId = setTimeout(function() {
-            removeListeners();
-            callback();
-          }, timeout);
-
-          elements.forEach(function(element, index) {
-            element.style[Animit.prefix + 'Transition'] = transitionValue;
-            element.style.transition = transitionValue;
-
-            Object.keys(css).forEach(function(name) {
-              element.style[name] = css[name];
-            });
-          });
-
-        };
-      }
-
-      if (this.options.duration <= 0) {
-        return function(callback) {
-          var elements = this.elements;
-
-          elements.forEach(function(element, index) {
-            element.style[Animit.prefix + 'Transition'] = 'none';
-            element.transition = 'none';
-
-            Object.keys(css).forEach(function(name) {
-              element.style[name] = css[name];
-            });
-          });
-
-          if (elements.length) {
-            elements[0].offsetHeight;
-          }
-
-          if (window.requestAnimationFrame) {
-            requestAnimationFrame(callback);
-          } else {
-            setTimeout(callback, 1000 / 30);
-          }
-        };
-      }
-
-      function createActualCssProps(css) {
-        var result = {};
-
-        Object.keys(css).forEach(function(name) {
-          var value = css[name];
-          name = util.normalizeStyleName(name);
-          var prefixed = Animit.prefix + util.capitalize(name);
-
-          if (Animit.cssPropertyDict[name]) {
-            result[name] = value;
-          } else if (Animit.cssPropertyDict[prefixed]) {
-            result[prefixed] = value;
-          } else {
-            result[prefixed] = value;
-            result[name] = value;
-          }
-        });
-
-        return result;
-      }
-
-    }
-  };
-
-  var util = {
-    /**
-     * Normalize style property name.
-     */
-    normalizeStyleName: function(name) {
-      name = name.replace(/-[a-zA-Z]/g, function(all) {
-        return all.slice(1).toUpperCase();
-      });
-
-      return name.charAt(0).toLowerCase() + name.slice(1);
-    },
-
-    // capitalize string
-    capitalize : function(str) {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    },
-
-    /**
-     * @param {Object} params
-     * @param {String} params.property
-     * @param {Float} params.duration
-     * @param {String} params.timing
-     */
-    buildTransitionValue: function(params) {
-      params.property = params.property || 'all';
-      params.duration = params.duration || 0.4;
-      params.timing = params.timing || 'linear';
-
-      var props = params.property.split(/ +/);
-
-      return props.map(function(prop) {
-        return prop + ' ' + params.duration + 's ' + params.timing;
-      }).join(', ');
-    },
-
-    /**
-     * Add an event handler on "transitionend" event.
-     */
-    addOnTransitionEnd: function(element, callback) {
-      if (!element) {
-        return function() {};
-      }
-
-      var fn = function(event) {
-        if (element == event.target) {
-          event.stopPropagation();
-          removeListeners();
-
-          callback();
-        }
-      };
-
-      var removeListeners = function() {
-        util._transitionEndEvents.forEach(function(eventName) {
-          element.removeEventListener(eventName, fn);
-        });
-      };
-
-      util._transitionEndEvents.forEach(function(eventName) {
-        element.addEventListener(eventName, fn, false);
-      });
-
-      return removeListeners;
-    },
-
-    _transitionEndEvents: (function() {
-      if (Animit.prefix === 'webkit' || Animit.prefix === 'o' || Animit.prefix === 'moz' || Animit.prefix === 'ms') {
-        return [Animit.prefix + 'TransitionEnd', 'transitionend'];
-      }
-
-      return ['transitionend'];
-    })()
-
-  };
-
-  return Animit;
-})();
-
+  // confirm to use jqLite
+  if (window.jQuery && angular.element === window.jQuery) {
+    console.warn('Onsen UI require jqLite. Load jQuery after loading AngularJS to fix this error. jQuery may break Onsen UI behavior.');
+  }
+};
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -21822,6 +22718,9 @@ limitations under the License.
  *     ダイアログが閉じられた後に実行される関数オブジェクトを指定します。
  *     関数の引数として、インプット要素の中の値が渡されます。ダイアログがキャンセルされた場合には、nullが渡されます。
  *   [/ja]
+ * @param {Boolean} [options.submitOnEnter]
+ *   [en]Submit automatically when enter is pressed. Default is "true".[/en]
+ *   [ja][/ja]
  * @description 
  *   [en]
  *     Display a dialog with a prompt to ask the user a question. 
@@ -21834,7 +22733,7 @@ limitations under the License.
  */
 
 window.ons.notification = (function() {
-  var createAlertDialog = function(title, message, buttonLabels, primaryButtonIndex, modifier, animation, callback, messageIsHTML, cancelable, promptDialog, autofocus, placeholder) {
+  var createAlertDialog = function(title, message, buttonLabels, primaryButtonIndex, modifier, animation, callback, messageIsHTML, cancelable, promptDialog, autofocus, placeholder, submitOnEnter) {
     var dialogEl = angular.element('<ons-alert-dialog>'),
       titleEl = angular.element('<div>').addClass('alert-dialog-title').text(title),
       messageEl = angular.element('<div>').addClass('alert-dialog-content'),
@@ -21861,6 +22760,21 @@ window.ons.notification = (function() {
         .attr('placeholder', placeholder)
         .css({width: '100%', marginTop: '10px'});
       messageEl.append(inputEl);
+
+      if (submitOnEnter) {
+        inputEl.on('keypress', function(event) {
+          if (event.keyCode === 13) {
+            alertDialog.hide({
+              callback: function() {
+                callback(inputEl.val());
+                alertDialog.destroy();
+                alertDialog = null;
+                inputEl = null;
+              }
+            });
+          }
+        });
+      }
     }
 
     dialogEl.append(footerEl);
@@ -22032,6 +22946,7 @@ window.ons.notification = (function() {
         callback: function() {},
         cancelable: false,
         autofocus: true,
+        submitOnEnter: true
       };
 
       options = angular.extend({}, defaults, options);
@@ -22051,7 +22966,8 @@ window.ons.notification = (function() {
         options.cancelable,
         true,
         options.autofocus,
-        options.placeholder
+        options.placeholder,
+        options.submitOnEnter
       );
     }
   };
@@ -22161,104 +23077,6 @@ limitations under the License.
  *   [en]Function to execute when the event is triggered.[/en]
  *   [ja]削除するイベントリスナーを指定します。[/ja]
  */
-
-window.ons.orientation = (function() {
-  return create()._init();
-
-  function create() {
-    var obj = {
-      // actual implementation to detect if whether current screen is portrait or not
-      _isPortrait: false,
-
-      /**
-       * @return {Boolean}
-       */
-      isPortrait: function() {
-        return this._isPortrait();
-      },
-
-      /**
-       * @return {Boolean}
-       */
-      isLandscape: function() {
-        return !this.isPortrait();
-      },
-
-      _init: function() {
-        document.addEventListener('DOMContentLoaded', this._onDOMContentLoaded.bind(this), false);
-
-        if ('orientation' in window) {
-          window.addEventListener('orientationchange', this._onOrientationChange.bind(this), false);
-        } else {
-          window.addEventListener('resize', this._onResize.bind(this), false);
-        }
-
-        this._isPortrait = function() {
-          return window.innerHeight > window.innerWidth;
-        };
-
-        return this;
-      },
-
-      _onDOMContentLoaded: function() {
-        this._installIsPortraitImplementation();
-        this.emit('change', {isPortrait: this.isPortrait()});
-      },
-
-      _installIsPortraitImplementation: function() {
-        var isPortrait = window.innerWidth < window.innerHeight;
-
-        if (!('orientation' in window)) {
-          this._isPortrait = function() {
-            return window.innerHeight > window.innerWidth;
-          };
-        } else if (window.orientation % 180 === 0) {
-          this._isPortrait = function() {
-            return Math.abs(window.orientation % 180) === 0 ? isPortrait : !isPortrait;
-          };
-        } else {
-          this._isPortrait = function() {
-            return Math.abs(window.orientation % 180) === 90 ? isPortrait : !isPortrait;
-          };
-        }
-      },
-
-      _onOrientationChange: function() {
-        var isPortrait = this._isPortrait();
-
-        // Wait for the dimensions to change because
-        // of Android inconsistency.
-        var nIter = 0;
-        var interval = setInterval(function() {
-          nIter++;
-
-          var w = window.innerWidth,
-            h = window.innerHeight;
-
-          if ((isPortrait && w <= h) ||
-             (!isPortrait && w >= h)) {
-            this.emit('change', {isPortrait: isPortrait});
-            clearInterval(interval);
-          }
-          else if (nIter === 50) {
-            this.emit('change', {isPortrait: isPortrait});
-            clearInterval(interval);
-          }
-        }.bind(this), 20);
-      },
-
-      // Run on not mobile browser.
-      _onResize: function() {
-        this.emit('change', {isPortrait: this.isPortrait()});
-      }
-    };
-
-    MicroEvent.mixin(obj);
-
-    return obj;
-  }
-})();
-
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -22394,112 +23212,6 @@ limitations under the License.
  * @return {Boolean}
  */
 
-(function() {
-  'use strict';
-  window.ons.platform = {
-    /**
-    * @return {Boolean}
-    */
-    isWebView: function() {
-      return ons.isWebView();
-    },
-    /**
-    * @return {Boolean}
-    */
-    isIOS: function() {
-      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-    },
-    /**
-    * @return {Boolean}
-    */
-    isAndroid: function() {
-      return /Android/i.test(navigator.userAgent);
-    },
-    /**
-    * @return {Boolean}
-    */
-    isIPhone: function() {
-      return /iPhone/i.test(navigator.userAgent);
-    },
-    /**
-    * @return {Boolean}
-    */
-    isIPad: function() {
-      return /iPad/i.test(navigator.userAgent);
-    },
-    /**
-    * @return {Boolean}
-    */
-    isBlackBerry: function() {
-      return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
-    },
-    /**
-    * @return {Boolean}
-    */
-    isOpera: function() {
-      return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
-    },
-    /**
-    * @return {Boolean}
-    */
-    isFirefox: function() {
-      return (typeof InstallTrigger !== 'undefined');
-    },
-    /**
-    * @return {Boolean}
-    */
-    isSafari: function() {
-      return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0);
-    },
-    /**
-    * @return {Boolean}
-    */
-    isChrome: function() {
-      return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0));
-    },
-    /**
-    * @return {Boolean}
-    */
-    isIE: function() {
-      return false || !!document.documentMode;
-    },
-    /**
-    * @return {Boolean}
-    */
-    isIOS7above: function() {
-      if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        var ver = (navigator.userAgent.match(/\b[0-9]+_[0-9]+(?:_[0-9]+)?\b/)||[''])[0].replace(/_/g,'.');
-        return (parseInt(ver.split('.')[0]) >= 7);
-      }
-      return false;
-    }
-  };
-})();
-
-
-(function() {
-  'use strict';
-
-  // fastclick
-  window.addEventListener('load', function() {
-    FastClick.attach(document.body);
-  }, false);
-
-  // viewport.js
-  new Viewport().setup();
-
-  // modernize
-  Modernizr.testStyles('#modernizr { -webkit-overflow-scrolling:touch }', function(elem, rule) {
-    Modernizr.addTest(
-      'overflowtouch',
-      window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
-  });
-
-  // confirm to use jqLite
-  if (window.jQuery && angular.element === window.jQuery) {
-    console.warn('Onsen UI require jqLite. Load jQuery after loading AngularJS to fix this error. jQuery may break Onsen UI behavior.');
-  }
-})();
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION

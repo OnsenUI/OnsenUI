@@ -20,7 +20,7 @@ limitations under the License.
 
   var scheme = {'' : 'button--*'};
 
-  class ButtonElement extends HTMLElement {
+  class ButtonElement extends ons._BaseElement {
 
     createdCallback() {
       this.classList.add('button');

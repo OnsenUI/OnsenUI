@@ -213,6 +213,32 @@ list__item()
  */
 
 /*! topdoc
+  name: Tight List
+  class: list__item--tight
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tight">
+        Sed ut perspiciatis unde omnis iste laudantium, totam rem aperiam.
+      </li>
+       <li class="list__item list__item--tight">
+        Eaque ipsa quae ab illo inventore vitae dicta sunt explicabo.
+      </li>
+    </ul>
+ */
+
+.list__item--tight
+  transition background-color 0.2s linear
+  min-height inherit
+  line-height inherit
+
+.list__item--tight:active
+  transition none
+
+.list__item--tight:hover
+  transition none
+
+/*! topdoc
   name: Tappable List
   class: list__item--tappable
   use: List

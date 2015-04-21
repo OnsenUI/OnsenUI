@@ -127,7 +127,6 @@ window.animit = (function(){
      * @param {Float} seconds
      */
     wait: function(seconds) {
-      var self = this;
       this.transitionQueue.push(function(done) {
         setTimeout(done, 1000 * seconds);
       });
@@ -249,7 +248,6 @@ window.animit = (function(){
 
     for (var key in styles) {
       if (styles.hasOwnProperty(key)) {
-        var char = key.charCodeAt(0);
         if (a <= key.charCodeAt(0) && z >= key.charCodeAt(0)) {
           if (key !== 'cssText' && key !== 'parentText' && key !== 'length') {
             dict[key] = true;
@@ -334,7 +332,7 @@ window.animit = (function(){
             callback();
           }, timeout);
 
-          elements.forEach(function(element, index) {
+          elements.forEach(function(element) {
             element.style[Animit.prefix + 'Transition'] = transitionValue;
             element.style.transition = transitionValue;
 
@@ -350,7 +348,7 @@ window.animit = (function(){
         return function(callback) {
           var elements = this.elements;
 
-          elements.forEach(function(element, index) {
+          elements.forEach(function(element) {
             element.style[Animit.prefix + 'Transition'] = 'none';
             element.transition = 'none';
 

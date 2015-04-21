@@ -12,6 +12,13 @@ v1.3.1-dev
  * ons-button: [BC Break] Removed animation feature and related attributes.
  * ons-modal: Added animations and animation options.
  * ons-alert-dialog: Added `submitOnEnter` parameter for `ons.notification.prompt()`.
+ * ons-list-item: Added `tight` modifier.
+ * ons-if-platform: Supports multiple space separated values.
+ * ons-pull-hook: Added `getPullDistance`, `getHeight`, `getThresholdHeight` methods.
+ * ons-pull-hook: Added `fixed-content` attribute.
+ * ons.platform: Added `select` method to force a rendering platform.
+ * ons-sliding-menu: Now supports `ngController` directive.
+ * ons-split-view: Now support `ngController` directive.
 
 v1.3.0
 ----
@@ -130,7 +137,7 @@ v1.2.0
 v1.1.4
 ----
 
- * core: Fixed broken navigation-bar layout on runninng with iOS Cordova in some cases.
+ * core: Fixed broken navigation-bar layout on running with iOS Cordova in some cases.
  * css-components: Fixed [#217](https://github.com/OnsenUI/OnsenUI/issues/217).
 
 v1.1.3

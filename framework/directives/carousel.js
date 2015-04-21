@@ -135,7 +135,7 @@
  * @name auto-scroll
  * @description
  *   [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
- *   [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
+ *   [ja]この属性がある時、一番近いcarousel-itemの境界まで自動的にスクロールするようになります。[/ja]
  */
 
 /**
@@ -165,7 +165,7 @@
 
 /**
  * @ngdoc attribute
- * @name intial-index
+ * @name initial-index
  * @type {Number}
  * @description
  *   [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
@@ -251,7 +251,7 @@
 /**
  * @ngdoc method
  * @signature setSwipeable(swipeable)
- * @param {Booelan} swipeable
+ * @param {Boolean} swipeable
  *   [en]If value is true the carousel will be swipeable.[/en]
  *   [ja]swipeableにする場合にはtrueを指定します。[/ja]
  * @description
@@ -267,7 +267,7 @@
  *   [ja]swipeableであればtrueを返します。[/ja]
  * @description
  *   [en]Returns whether the carousel is swipeable or not.[/en]
- *   [ja]swiapble属性があるかどうかを返します。[/ja]
+ *   [ja]swipeable属性があるかどうかを返します。[/ja]
  */
 
 /**

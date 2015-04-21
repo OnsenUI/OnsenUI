@@ -20,7 +20,7 @@ limitations under the License.
 
   var scheme = {'': 'bottom-bar--*'};
 
-  class BottomToolbarElement extends HTMLElement {
+  class BottomToolbarElement extends ons._BaseElement {
 
     createdCallback() {
       this.classList.add('bottom-bar');

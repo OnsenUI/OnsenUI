@@ -3289,7 +3289,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   cursor: default;
   pointer-events: none;
 }
-.textarea--transpanret::-webkit-input-placeholder,
+.textarea--transparent::-webkit-input-placeholder,
 .textarea--transparent::-moz-placeholder,
 .textarea--transparent:-ms-input-placeholder {
   color: #ccc;

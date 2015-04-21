@@ -236,7 +236,7 @@ limitations under the License.
 
   function waitOnsenUILoad() {
     var unlockOnsenUI = ons._readyLock.lock();
-    module.run(function($compile, $rootScope, $onsen) {
+    module.run(function($compile, $rootScope) {
       // for initialization hook.
       if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
         window.addEventListener('DOMContentLoaded', function() {
@@ -268,7 +268,7 @@ limitations under the License.
 
   // Change the default touchAction of GestureDetector, needed for Windows Phone app
   function changeGestureDetectorDefault() {
-    GestureDetector.defaults.behavior.touchAction = 'none';
+    ons.GestureDetector.defaults.behavior.touchAction = 'none';
   }
 
   function initOnsenFacade() {

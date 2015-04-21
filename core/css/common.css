@@ -18,7 +18,7 @@ limitations under the License.
 @import url("font_awesome/css/font-awesome.min.css");
 @import url("ionicons/css/ionicons.min.css");
 
-/* cutsom elements */
+/* custom elements */
 ons-page, ons-navigator,
 ons-split-view, ons-sliding-menu, ons-tabbar,
 ons-gesture-detector {
@@ -117,5 +117,6 @@ ons-pull-hook {
   right: 0;
   margin: auto;
   text-align: center;
+  z-index: 20002;
 }
 
