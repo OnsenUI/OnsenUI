@@ -21,6 +21,20 @@ limitations under the License.
   ons.platform = {
 
     /**
+     * All elements will be rendered as if the app was running on this platform.
+     * @type {String}
+     */
+    _renderPlatform: null,
+
+    /**
+     * Sets the platform used to render the elements. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", or "ios".
+     * @param  {string} platform Name of the platform.
+     */
+    select: function (platform) {
+      ons.platform._renderPlatform = platform.trim().toLowerCase();
+    },
+
+    /**
      * @return {Boolean}
      */
     isWebView: function() {
@@ -31,14 +45,22 @@ limitations under the License.
      * @return {Boolean}
      */
     isIOS: function() {
-      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'ios';
+      } else {
+        return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      }
     },
 
     /**
      * @return {Boolean}
      */
     isAndroid: function() {
-      return /Android/i.test(navigator.userAgent);
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'android';
+      } else {
+        return /Android/i.test(navigator.userAgent);
+      }
     },
 
     /**
@@ -59,42 +81,66 @@ limitations under the License.
      * @return {Boolean}
      */
     isBlackBerry: function() {
-      return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'blackberry';
+      } else {
+        return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
+      }
     },
 
     /**
      * @return {Boolean}
      */
     isOpera: function() {
-      return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'opera';
+      } else {
+        return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
+      }
     },
 
     /**
      * @return {Boolean}
      */
     isFirefox: function() {
-      return (typeof InstallTrigger !== 'undefined');
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'firefox';
+      } else {
+        return (typeof InstallTrigger !== 'undefined');
+      }
     },
 
     /**
      * @return {Boolean}
      */
     isSafari: function() {
-      return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0);
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'safari';
+      } else {
+        return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0);
+      }
     },
 
     /**
      * @return {Boolean}
      */
     isChrome: function() {
-      return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0));
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'chrome';
+      } else {
+        return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0));
+      }
     },
 
     /**
      * @return {Boolean}
      */
     isIE: function() {
-      return false || !!document.documentMode;
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'ie';
+      } else {
+        return false || !!document.documentMode;
+      }
     },
 
     /**
