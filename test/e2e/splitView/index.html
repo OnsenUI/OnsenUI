@@ -8,13 +8,20 @@
     <script src="../../../build/js/angular/angular.js"></script>
     <script src="../../../build/js/onsenui.js"></script>
     <script>
-      ons.bootstrap();
+      ons.bootstrap()
+
+      .controller('SplitViewController', function($scope) {
+        $scope.data = {
+          name: 'Andreas'
+        };
+      });
     </script>
   </head>
   <body>
     <ons-split-view
       secondary-page="secondary.html"
       main-page="main.html"
+      ng-controller="SplitViewController"
       collapse="width 500px"
       ons-postcollapse="state ='collapse'"
       ons-postsplit="state = 'split'">
@@ -24,6 +31,8 @@
       <ons-page>
         <div id="main">main page</div>
         <p>State: <span id="state">{{ state }}</span></p>
+
+        <p>Hello, <span id="name">{{ data.name }}</span></p>
       </ons-page>
     </ons-template>
 

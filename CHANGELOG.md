@@ -17,6 +17,8 @@ v1.3.1-dev
  * ons-pull-hook: Added `getPullDistance`, `getHeight`, `getThresholdHeight` methods.
  * ons-pull-hook: Added `fixed-content` attribute.
  * ons.platform: Added `select` method to force a rendering platform.
+ * ons-sliding-menu: Now supports `ngController` directive.
+ * ons-split-view: Now support `ngController` directive.
 
 v1.3.0
 ----
