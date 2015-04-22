@@ -19,6 +19,7 @@ v1.3.1-dev
  * ons.platform: Added `select` method to force a rendering platform.
  * ons-sliding-menu: Now supports `ngController` directive.
  * ons-split-view: Now support `ngController` directive.
+ * ons-tabbar: Added `'slide'` animation.
 
 v1.3.0
 ----
