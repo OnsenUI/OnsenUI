@@ -43,7 +43,7 @@ limitations under the License.
        * @param {jqLite} leavePage
        * @param {Function} done
        */
-      apply: function(enterPage, leavePage, done) {
+      apply: function(enterPage, leavePage, enterIndex, leaveIndex, done) {
         throw new Error('This method must be implemented.');
       }
     });
@@ -59,7 +59,7 @@ limitations under the License.
        * @param {jqLite} leavePage
        * @param {Function} done
        */
-      apply: function(enterPage, leavePage, done) {
+      apply: function(enterPage, leavePage, enterIndex, leaveIndex, done) {
         done();
       }
     });
@@ -79,7 +79,7 @@ limitations under the License.
        * @param {jqLite} enterPage
        * @param {jqLite} leavePage
        */
-      apply: function(enterPage, leavePage, done) {
+      apply: function(enterPage, leavePage, enterIndex, leaveIndex, done) {
         animit.runAll(
           animit(enterPage[0])
             .queue({
@@ -119,7 +119,57 @@ limitations under the License.
     return TabbarFadeAnimator;
   });
 
-  module.factory('TabbarView', function($onsen, $compile, $parse, AnimationChooser, TabbarAnimator, TabbarNoneAnimator, TabbarFadeAnimator) {
+  module.factory('TabbarSlideAnimator', function(TabbarAnimator) {
+
+    var TabbarSlideAnimator = TabbarAnimator.extend({
+
+      timing: 'ease-in',
+      duration: 0.15,
+      delay: 0,
+
+      /**
+       * @param {jqLite} enterPage
+       * @param {jqLite} leavePage
+       */
+      apply: function(enterPage, leavePage, enterIndex, leaveIndex, done) {
+        var sgn = enterIndex > leaveIndex;
+
+        animit.runAll(
+          animit(enterPage[0])
+            .queue({
+              transform: 'translate3D(' + (sgn ? '' : '-') + '100%, 0, 0)',
+            })
+            .wait(this.delay)
+            .queue({
+              transform: 'translate3D(0, 0, 0)',
+            }, {
+              duration: this.duration,
+              timing: this.timing
+            })
+            .resetStyle()
+            .queue(function(callback) {
+              done();
+              callback();
+            }),
+          animit(leavePage[0])
+            .queue({
+              transform: 'translate3D(0, 0, 0)',
+            })
+            .wait(this.delay)
+            .queue({
+              transform: 'translate3D(' + (sgn ? '-' : '') + '100%, 0, 0)',
+            }, {
+              duration: this.duration,
+              timing: this.timing
+            })
+        );
+      }
+    });
+
+    return TabbarSlideAnimator;
+  });
+
+  module.factory('TabbarView', function($onsen, $compile, $parse, AnimationChooser, TabbarAnimator, TabbarNoneAnimator, TabbarFadeAnimator, TabbarSlideAnimator) {
     var TabbarView = Class.extend({
       _tabbarId: undefined,
 
@@ -188,8 +238,11 @@ limitations under the License.
        */
       setActiveTab: function(index, options) {
         options = options || {};
-        var previousTabItem = this._tabItems[this.getActiveTabIndex()];
-        var selectedTabItem = this._tabItems[index];
+
+        var previousTabItem = this._tabItems[this.getActiveTabIndex()],
+          selectedTabItem = this._tabItems[index],
+          previousTabIndex = this.getActiveTabIndex(),
+          selectedTabIndex = index;
 
         if((typeof selectedTabItem.noReload !== 'undefined' || typeof selectedTabItem.isPersistent()) &&
             index === this.getActiveTabIndex()) {
@@ -237,10 +290,13 @@ limitations under the License.
             callback: function() {
               this.emit('postchange', {index: index, tabItem: selectedTabItem});
             }.bind(this),
+            previousTabIndex: previousTabIndex,
+            selectedTabIndex: selectedTabIndex,
             _removeElement: removeElement
           };
+
           if (options.animation) {
-              params.animation = options.animation;
+            params.animation = options.animation;
           }
 
           if (selectedTabItem.isPersistent() && selectedTabItem._pageElement) {
@@ -352,7 +408,7 @@ limitations under the License.
           this._currentPageElement = element;
           this._currentPageScope = scope;
 
-          this._animationChooser.newAnimator(options).apply(element, oldPageElement, function() {
+          this._animationChooser.newAnimator(options).apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
             if (options._removeElement) {
               oldPageElement.remove();
               oldPageScope.$destroy();
@@ -429,7 +485,8 @@ limitations under the License.
     TabbarView._animatorDict = {
       'default': TabbarNoneAnimator,
       'none': TabbarNoneAnimator,
-      'fade': TabbarFadeAnimator
+      'fade': TabbarFadeAnimator,
+      'slide': TabbarSlideAnimator
     };
 
     /**

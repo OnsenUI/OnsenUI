@@ -133,8 +133,8 @@
  * @type {String}
  * @default none
  * @description
- *   [en]Animation name. Preset values are "none" and "fade". Default is "none".[/en]
- *   [ja]ページ読み込み時のアニメーションを指定します。"none"もしくは"fade"を選択できます。デフォルトは"none"です。[/ja]
+ *   [en]Animation name. Preset values are "none", "slide" and "fade". Default is "none".[/en]
+ *   [ja]ページ読み込み時のアニメーションを指定します。"none"、"fade"、"slide"のいずれかを選択できます。デフォルトは"none"です。[/ja]
  */
 
 /**
@@ -205,8 +205,8 @@
  *   [en]If true the page will not be changed.[/en]
  *   [ja]タブバーが現在表示しているpageを変えない場合にはtrueを指定します。[/ja]
  * @param {String} [options.animation]
- *   [en]Animation name. Available animations are "fade" and "none".[/en]
- *   [ja]アニメーション名を指定します。"fade", "none"のいずれかを指定できます。[/ja]
+ *   [en]Animation name. Available animations are "fade", "slide" and "none".[/en]
+ *   [ja]アニメーション名を指定します。"fade"、"slide"、"none"のいずれかを指定できます。[/ja]
  * @param {String} [options.animationOptions]
  *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
  *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
