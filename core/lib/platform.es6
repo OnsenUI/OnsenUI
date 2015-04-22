@@ -27,7 +27,7 @@ limitations under the License.
     _renderPlatform: null,
 
     /**
-     * Sets the platform used to render the elements. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", or "ios".
+     * Sets the platform used to render the elements. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".
      * @param  {string} platform Name of the platform.
      */
     select: function (platform) {
@@ -60,6 +60,17 @@ limitations under the License.
         return ons.platform._renderPlatform === 'android';
       } else {
         return /Android/i.test(navigator.userAgent);
+      }
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isWP: function() {
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'wp';
+      } else {
+        return /Windows Phone|IEMobile|WPDesktop/i.test(navigator.userAgent);
       }
     },
 
