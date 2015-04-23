@@ -43,4 +43,3 @@ Here is a list of some rules that should be followed:
 * Use easy-to-understand and logical naming for your variables and method names, especially for variables and methods that are exposed to the user.
 * Internal APIs should be preceded by an underscore.
 * Use single quotes for strings in JavaScript and double quotes for attributes in HTML.
-
