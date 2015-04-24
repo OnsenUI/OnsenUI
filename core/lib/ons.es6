@@ -59,34 +59,34 @@ limitations under the License.
    * Enable status bar fill feature on iOS7 and above.
    */
   ons.enableAutoStatusBarFill = () => {
-    if (this.isReady()) {
+    if (ons.isReady()) {
       throw new Error('This method must be called before ons.isReady() is true.');
     }
-    this._config.autoStatusBarFill = true;
+    ons._config.autoStatusBarFill = true;
   };
 
   /**
    * Disable status bar fill feature on iOS7 and above.
    */
   ons.disableAutoStatusBarFill = () => {
-    if (this.isReady()) {
+    if (ons.isReady()) {
       throw new Error('This method must be called before ons.isReady() is true.');
     }
-    this._config.autoStatusBarFill = false;
+    ons._config.autoStatusBarFill = false;
   };
 
   /**
    * Disable animations.
    */
   ons.disableAnimations = () => {
-    this._config.animationsDisabled = true;
+    ons._config.animationsDisabled = true;
   };
 
   /**
    * Enable animations.
    */
   ons.enableAnimations = () => {
-    this._config.animationsDisabled = false;
+    ons._config.animationsDisabled = false;
   };
 
   function waitDeviceReady() {
