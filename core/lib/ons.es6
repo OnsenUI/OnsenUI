@@ -19,7 +19,10 @@ limitations under the License.
   'use strict';
 
   ons._readyLock = new DoorLock();
-  ons._config = {autoStatusBarFill: true};
+  ons._config = {
+    autoStatusBarFill: true,
+    animationsDisabled: false
+  };
 
   waitDeviceReady();
 
@@ -70,6 +73,20 @@ limitations under the License.
       throw new Error('This method must be called before ons.isReady() is true.');
     }
     this._config.autoStatusBarFill = false;
+  };
+
+  /**
+   * Disable animations.
+   */
+  ons.disableAnimations = () => {
+    this._config.animationsDisabled = true;
+  };
+
+  /**
+   * Enable animations.
+   */
+  ons.enableAnimations = () => {
+    this._config.animationsDisabled = false;
   };
 
   function waitDeviceReady() {

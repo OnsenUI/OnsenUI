@@ -20,6 +20,7 @@ v1.3.1-dev
  * ons-sliding-menu: Now supports `ngController` directive.
  * ons-split-view: Now support `ngController` directive.
  * ons-tabbar: Added `'slide'` animation.
+ * ons: Added `disableAnimations` and `enableAnimations` to control animations display.
 
 v1.3.0
 ----
