@@ -73,7 +73,7 @@ limitations under the License.
  * @signature disableAnimations()
  * @description
  *   [en]Disable all animations. Could be handy for testing and older devices.[/en]
- *   [ja][/ja]
+ *   [ja]アニメーションを全て無効にします。テストの際に便利です。[/ja]
  */
 
 /**
@@ -81,7 +81,7 @@ limitations under the License.
  * @signature enableAnimations()
  * @description
  *   [en]Enable animations (default).[/en]
- *   [ja][/ja]
+ *   [ja]アニメーションを有効にします。[/ja]
  */
 
 /**
