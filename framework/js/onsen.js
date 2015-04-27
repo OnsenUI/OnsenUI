@@ -70,6 +70,22 @@ limitations under the License.
 
 /**
  * @ngdoc method
+ * @signature disableAnimations()
+ * @description
+ *   [en]Disable all animations. Could be handy for testing and older devices.[/en]
+ *   [ja]アニメーションを全て無効にします。テストの際に便利です。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature enableAnimations()
+ * @description
+ *   [en]Enable animations (default).[/en]
+ *   [ja]アニメーションを有効にします。[/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature findParentComponentUntil(name, [dom])
  * @param {String} name
  *   [en]Name of component, i.e. 'ons-page'.[/en]
