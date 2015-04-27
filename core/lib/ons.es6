@@ -76,14 +76,14 @@ limitations under the License.
   };
 
   /**
-   * Disable animations.
+   * Disable all animations. Could be handy for testing and older devices.
    */
   ons.disableAnimations = () => {
     ons._config.animationsDisabled = true;
   };
 
   /**
-   * Enable animations.
+   * Enable animations (default).
    */
   ons.enableAnimations = () => {
     ons._config.animationsDisabled = false;
