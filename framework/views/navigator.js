@@ -296,6 +296,7 @@ limitations under the License.
        * @param {String/NavigatorTransitionAnimator} [options.animation]
        * @param {Object} [options.animationOptions]
        * @param {Function} [options.onTransitionEnd]
+       * @param {Boolean} [options.cancelIfRunning]
        */
       pushPage: function(page, options) {
         if (this._profiling) {
@@ -303,6 +304,10 @@ limitations under the License.
         }
 
         options = options || {};
+
+        if (options.cancelIfRunning && this._isPushing) {
+          return;
+        }
 
         if (options && typeof options != 'object') {
           throw new Error('options must be an object. You supplied ' + options);
@@ -474,9 +479,14 @@ limitations under the License.
        * @param {String} [options.animation]
        * @param {Object} [options.animationOptions]
        * @param {Function} [options.onTransitionEnd]
+       * @param {Boolean} [options.cancelIfRunning]
        */
       popPage: function(options) {
         options = options || {};
+
+        if (options.cancelIfRunning && this._isPopping) {
+          return;
+        }
 
         this._doorLock.waitUnlock(function() {
           if (this.pages.length <= 1) {
