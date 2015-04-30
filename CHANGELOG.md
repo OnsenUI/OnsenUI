@@ -22,6 +22,7 @@ v1.3.1-dev
  * ons-tabbar: Added `'slide'` animation.
  * ons-navigator: Fixed [#628](https://github.com/OnsenUI/OnsenUI/issues/628).
  * ons: Added `disableAnimations` and `enableAnimations` to control animations display.
+ * ons-page: Fixed scrolling on Windows Phone. Fixed [#618](https://github.com/OnsenUI/OnsenUI/618).
 
 v1.3.0
 ----
