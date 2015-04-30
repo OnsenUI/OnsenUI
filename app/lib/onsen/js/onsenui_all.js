@@ -1,5 +1,5 @@
-/*! onsenui - v1.3.1-dev - 2015-04-30 */
-/*! ons-core.js for Onsen UI v1.3.1-dev - 2015-04-30 */
+/*! onsenui - v1.3.2-dev - 2015-04-30 */
+/*! ons-core.js for Onsen UI v1.3.2-dev - 2015-04-30 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
