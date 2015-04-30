@@ -21,6 +21,7 @@ v1.3.1-dev
  * ons-split-view: Now support `ngController` directive.
  * ons-tabbar: Added `'slide'` animation.
  * ons-navigator: Fixed [#628](https://github.com/OnsenUI/OnsenUI/issues/628).
+ * ons: Added `disableAnimations` and `enableAnimations` to control animations display.
 
 v1.3.0
 ----
