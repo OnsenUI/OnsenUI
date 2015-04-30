@@ -56,7 +56,6 @@ input, textarea {
 .page__content {
   background-color: transparent !important;
   background: transparent !important;
-  -ms-touch-action: none;
 }
 
 .page__status-bar-fill ~ .page__content {
@@ -86,6 +85,7 @@ ons-toolbar ~ .page__content {
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   z-index: 0;
+  -ms-touch-action: pan-y;
 }
 
 .page__bottom-bar-fill ~ .page__content {
