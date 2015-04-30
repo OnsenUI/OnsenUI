@@ -24,6 +24,7 @@ v1.3.2-dev
  * ons: Added `disableAnimations` and `enableAnimations` to control animations display.
 
 v1.3.1
+----
  * ons-page: Fixed scrolling on Windows Phone. Fixed [#618](https://github.com/OnsenUI/OnsenUI/618).
 
 v1.3.0
