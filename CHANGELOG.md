@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v1.3.1
+----
+ * Fixed scrolling in Windows Phone. Fixed [#618](https://github.com/OnsenUI/OnsenUI/issues/618).
+
 v1.3.0
 ----
  * ons-sliding-menu: Fixed [#544](https://github.com/OnsenUI/OnsenUI/issues/544).
