@@ -1,4 +1,4 @@
-/*! ons-core.js for Onsen UI v1.3.1-dev - 2015-04-20 */
+/*! ons-core.js for Onsen UI v1.3.1-dev - 2015-04-30 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -2775,7 +2775,6 @@ limitations under the License.
             _element: element,
             callParentHandler: function callParentHandler() {
               var parent = this._element.parentNode;
-              var hander = null;
 
               while (parent) {
                 handler = HandlerRepository.get(parent);
@@ -3083,9 +3082,6 @@ window.ModifierUtil = (function () {
         last = makeDict(('' + last).trim());
         current = makeDict(('' + current).trim());
 
-        var added = [];
-        var removed = [];
-
         var removed = Object.keys(last).reduce(function (result, token) {
           if (!current[token]) {
             result.push(token);
@@ -3141,10 +3137,12 @@ window.ModifierUtil = (function () {
        */
       value: function applyDiffToElement(diff, element, scheme) {
         var _loop = function (selector) {
-          var targetElements = selector === '' ? [element] : element.querySelectorAll(selector);
-          targetElements.forEach(function (targetElement) {
-            ModifierUtil.applyDiffToClassList(diff, targetElement.classList, scheme[selector]);
-          });
+          if (scheme.hasOwnProperty(selector)) {
+            var targetElements = selector === '' ? [element] : element.querySelectorAll(selector);
+            targetElements.forEach(function (targetElement) {
+              ModifierUtil.applyDiffToClassList(diff, targetElement.classList, scheme[selector]);
+            });
+          }
         };
 
         for (var selector in scheme) {
@@ -3222,7 +3220,10 @@ limitations under the License.
   'use strict';
 
   ons._readyLock = new DoorLock();
-  ons._config = { autoStatusBarFill: true };
+  ons._config = {
+    autoStatusBarFill: true,
+    animationsDisabled: false
+  };
 
   waitDeviceReady();
 
@@ -3259,20 +3260,34 @@ limitations under the License.
    * Enable status bar fill feature on iOS7 and above.
    */
   ons.enableAutoStatusBarFill = function () {
-    if (undefined.isReady()) {
+    if (ons.isReady()) {
       throw new Error('This method must be called before ons.isReady() is true.');
     }
-    undefined._config.autoStatusBarFill = true;
+    ons._config.autoStatusBarFill = true;
   };
 
   /**
    * Disable status bar fill feature on iOS7 and above.
    */
   ons.disableAutoStatusBarFill = function () {
-    if (undefined.isReady()) {
+    if (ons.isReady()) {
       throw new Error('This method must be called before ons.isReady() is true.');
     }
-    undefined._config.autoStatusBarFill = false;
+    ons._config.autoStatusBarFill = false;
+  };
+
+  /**
+   * Disable all animations. Could be handy for testing and older devices.
+   */
+  ons.disableAnimations = function () {
+    ons._config.animationsDisabled = true;
+  };
+
+  /**
+   * Enable animations (default).
+   */
+  ons.enableAnimations = function () {
+    ons._config.animationsDisabled = false;
   };
 
   function waitDeviceReady() {
@@ -3306,9 +3321,7 @@ limitations under the License.
 'use strict';
 
 (function (ons) {
-  ons.orientation = create()._init();
-
-  function create() {
+  var create = function create() {
     var obj = {
       // actual implementation to detect if whether current screen is portrait or not
       _isPortrait: false,
@@ -3397,7 +3410,9 @@ limitations under the License.
     MicroEvent.mixin(obj);
 
     return obj;
-  }
+  };
+
+  ons.orientation = create()._init();
 })(window.ons = window.ons || {});
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -3424,6 +3439,20 @@ limitations under the License.
   ons.platform = {
 
     /**
+     * All elements will be rendered as if the app was running on this platform.
+     * @type {String}
+     */
+    _renderPlatform: null,
+
+    /**
+     * Sets the platform used to render the elements. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".
+     * @param  {string} platform Name of the platform.
+     */
+    select: function select(platform) {
+      ons.platform._renderPlatform = platform.trim().toLowerCase();
+    },
+
+    /**
      * @return {Boolean}
      */
     isWebView: function isWebView() {
@@ -3434,14 +3463,33 @@ limitations under the License.
      * @return {Boolean}
      */
     isIOS: function isIOS() {
-      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'ios';
+      } else {
+        return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+      }
     },
 
     /**
      * @return {Boolean}
      */
     isAndroid: function isAndroid() {
-      return /Android/i.test(navigator.userAgent);
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'android';
+      } else {
+        return /Android/i.test(navigator.userAgent);
+      }
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isWP: function isWP() {
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'wp';
+      } else {
+        return /Windows Phone|IEMobile|WPDesktop/i.test(navigator.userAgent);
+      }
     },
 
     /**
@@ -3462,42 +3510,66 @@ limitations under the License.
      * @return {Boolean}
      */
     isBlackBerry: function isBlackBerry() {
-      return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'blackberry';
+      } else {
+        return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
+      }
     },
 
     /**
      * @return {Boolean}
      */
     isOpera: function isOpera() {
-      return !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'opera';
+      } else {
+        return !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+      }
     },
 
     /**
      * @return {Boolean}
      */
     isFirefox: function isFirefox() {
-      return typeof InstallTrigger !== 'undefined';
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'firefox';
+      } else {
+        return typeof InstallTrigger !== 'undefined';
+      }
     },
 
     /**
      * @return {Boolean}
      */
     isSafari: function isSafari() {
-      return Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'safari';
+      } else {
+        return Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+      }
     },
 
     /**
      * @return {Boolean}
      */
     isChrome: function isChrome() {
-      return !!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'chrome';
+      } else {
+        return !!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
+      }
     },
 
     /**
      * @return {Boolean}
      */
     isIE: function isIE() {
-      return false || !!document.documentMode;
+      if (ons.platform._renderPlatform) {
+        return ons.platform._renderPlatform === 'ie';
+      } else {
+        return false || !!document.documentMode;
+      }
     },
 
     /**
@@ -3710,7 +3782,6 @@ window.animit = (function(){
      * @param {Float} seconds
      */
     wait: function(seconds) {
-      var self = this;
       this.transitionQueue.push(function(done) {
         setTimeout(done, 1000 * seconds);
       });
@@ -3832,7 +3903,6 @@ window.animit = (function(){
 
     for (var key in styles) {
       if (styles.hasOwnProperty(key)) {
-        var char = key.charCodeAt(0);
         if (a <= key.charCodeAt(0) && z >= key.charCodeAt(0)) {
           if (key !== 'cssText' && key !== 'parentText' && key !== 'length') {
             dict[key] = true;
@@ -3917,7 +3987,7 @@ window.animit = (function(){
             callback();
           }, timeout);
 
-          elements.forEach(function(element, index) {
+          elements.forEach(function(element) {
             element.style[Animit.prefix + 'Transition'] = transitionValue;
             element.style.transition = transitionValue;
 
@@ -3933,7 +4003,7 @@ window.animit = (function(){
         return function(callback) {
           var elements = this.elements;
 
-          elements.forEach(function(element, index) {
+          elements.forEach(function(element) {
             element.style[Animit.prefix + 'Transition'] = 'none';
             element.transition = 'none';
 
@@ -6498,7 +6568,9 @@ limitations under the License.
         var builded = this._buildClassAndStyle(this);
 
         for (var key in builded.style) {
-          this.style[key] = builded.style[key];
+          if (builded.style.hasOwnProperty(key)) {
+            this.style[key] = builded.style[key];
+          }
         }
 
         builded.classList.forEach((function (className) {
@@ -6514,7 +6586,7 @@ limitations under the License.
       value: function _cleanClassAttribute() {
         var classList = this.classList;
 
-        var removal = Array.apply(null, this.classList).filter(function (klass) {
+        Array.apply(null, this.classList).filter(function (klass) {
           return klass === 'fa' || klass.indexOf('fa-') === 0 || klass.indexOf('ion-') === 0;
         }).forEach(function (className) {
           classList.remove(className);

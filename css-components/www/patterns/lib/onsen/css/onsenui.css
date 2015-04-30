@@ -1,4 +1,4 @@
-/*! onsenui - v1.3.1-dev - 2015-04-20 */
+/*! onsenui - v1.3.1-dev - 2015-04-30 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -57,7 +57,6 @@ input, textarea {
 .page__content {
   background-color: transparent !important;
   background: transparent !important;
-  -ms-touch-action: none;
 }
 
 .page__status-bar-fill ~ .page__content {
@@ -87,6 +86,7 @@ ons-toolbar ~ .page__content {
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   z-index: 0;
+  -ms-touch-action: pan-y;
 }
 
 .page__bottom-bar-fill ~ .page__content {
