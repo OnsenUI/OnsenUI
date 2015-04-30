@@ -1,4 +1,4 @@
-/*! onsenui - v1.3.0 - 2015-04-03 */
+/*! onsenui - v1.3.1 - 2015-04-30 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -30541,9 +30541,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/back_button.tpl',
     '<span \n' +
@@ -30565,9 +30565,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/button.tpl',
     '<span class="label ons-button-inner"></span>\n' +
@@ -30577,9 +30577,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/dialog.tpl',
     '<div class="dialog-mask"></div>\n' +
@@ -30590,9 +30590,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/icon.tpl',
     '<i class="fa fa-{{icon}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}" ng-class="sizeClass" ng-style="style"></i>\n' +
@@ -30601,9 +30601,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/popover.tpl',
     '<div class="popover-mask"></div>\n' +
@@ -30616,9 +30616,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/row.tpl',
     '<div class="row row-{{align}} ons-row-inner"></div>\n' +
@@ -30627,9 +30627,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/sliding_menu.tpl',
     '<div class="onsen-sliding-menu__menu ons-sliding-menu-inner"></div>\n' +
@@ -30639,9 +30639,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/split_view.tpl',
     '<div class="onsen-split-view__secondary full-screen ons-split-view-inner"></div>\n' +
@@ -30651,9 +30651,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/switch.tpl',
     '<label class="switch {{modifierTemplater(\'switch--*\')}}">\n' +
@@ -30665,9 +30665,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/tab.tpl',
     '<input type="radio" name="tab-bar-{{tabbarId}}" style="display: none">\n' +
@@ -30678,9 +30678,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/tab_bar.tpl',
     '<div class="ons-tab-bar__content tab-bar__content"></div>\n' +
@@ -30690,9 +30690,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/toolbar_button.tpl',
     '<span class="toolbar-button {{modifierTemplater(\'toolbar-button--*\')}} navigation-bar__line-height" ng-transclude></span>\n' +
