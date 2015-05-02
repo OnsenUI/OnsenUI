@@ -10,8 +10,71 @@
       browser.waitForAngular();
     });
 
-    it('should have an element', function() {
+     it('should have an element', function() {
       expect(element(by.css('ons-sliding-menu')).isPresent()).toBeTruthy();
+    });
+
+    it('should open when swipe', function() {
+      
+      var button = element(by.css('ons-toolbar-button'));
+
+      // Get location before clicking the button.
+      var locationBefore = button.getLocation();
+
+      browser.actions()
+      .mouseMove(element(by.css('.onsen-sliding-menu__main')), {x: 500, y: 100})
+      .mouseDown()
+      .mouseMove({x: -120, y: 0})
+      .mouseUp()
+      .perform();
+      browser.waitForAngular();
+       
+      browser.wait(function() {
+        var oldLocation;
+
+        return locationBefore.then(function(loc) {
+          oldLocation = loc;
+
+          return button.getLocation();
+        })
+        .then(function(newLocation) {
+          return newLocation.x !== oldLocation.x;
+        });
+      });
+
+      expect(locationBefore).not.toEqual(button.getLocation());
+    });
+
+    it('should close when swipe', function() {
+      var button = element(by.css('ons-toolbar-button'));
+      button.click();
+
+      // Get location before clicking the button.
+      var locationBefore = button.getLocation();
+
+      // Close the sliding menu using a swipe action
+      browser.actions()
+      .mouseMove(element(by.css('.onsen-sliding-menu__main')), {x: 300, y: 100})
+      .mouseDown()
+      .mouseMove({x: 120, y: 0})
+      .mouseUp()
+      .perform();
+      browser.waitForAngular();
+       
+      browser.wait(function() {
+        var oldLocation;
+
+        return locationBefore.then(function(loc) {
+          oldLocation = loc;
+
+          return button.getLocation();
+        })
+        .then(function(newLocation) {
+          return newLocation.x !== oldLocation.x;
+        });
+      });
+
+      expect(locationBefore).not.toEqual(button.getLocation());
     });
 
     it('should open when clicking the button', function() {
@@ -21,6 +84,42 @@
       var locationBefore = button.getLocation();
 
       button.click();
+      browser.waitForAngular();
+
+      browser.wait(function() {
+        var oldLocation;
+
+        return locationBefore.then(function(loc) {
+          oldLocation = loc;
+
+          return button.getLocation();
+        })
+        .then(function(newLocation) {
+          return newLocation.x !== oldLocation.x;
+        });
+      });
+
+      expect(locationBefore).not.toEqual(button.getLocation());
+    });
+
+    it('should close when clicking the page content', function() {
+      var button = element(by.css('ons-toolbar-button'));
+
+      // Get location before clicking the button.
+      var locationBefore = button.getLocation();
+
+      button.click();
+      browser.waitForAngular();
+
+      // Get location before clicking the button.
+      var locationBefore = button.getLocation();
+
+      // Close the sliding menu using a click action
+      browser.actions()
+      .mouseMove(element(by.css('.onsen-sliding-menu__main')), {x: 300, y: 100})
+      .mouseDown()
+      .mouseUp()
+      .perform();
       browser.waitForAngular();
 
       browser.wait(function() {
@@ -61,5 +160,6 @@
         expect(button.isDisplayed()).toBeTruthy();
       });
     });
+
   });
 })();
