@@ -10,7 +10,7 @@
       browser.waitForAngular();
     });
 
-     it('should have an element', function() {
+    it('should have an element', function() {
       expect(element(by.css('ons-sliding-menu')).isPresent()).toBeTruthy();
     });
 
