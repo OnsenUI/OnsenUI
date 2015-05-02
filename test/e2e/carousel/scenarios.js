@@ -7,6 +7,68 @@
 
     describe('prev() and next() methods', function() {
       var initialPosition;
+      var secondItemPosition;
+
+      it('should move the items when swiping left', function() {
+        browser.get(path);
+
+        var carouselItem = element(by.id('firstItem'));
+
+        // Store initial position.
+        initialPosition = carouselItem.getLocation();
+
+        // Swipe left
+        browser.actions()
+        .mouseMove(carouselItem, {x: 100, y: 100})
+        .mouseDown()
+        .mouseMove({x: -520, y: 0})
+        .mouseUp()
+        .perform();
+        browser.waitForAngular();
+        
+        browser.wait(function() {
+          return carouselItem.getLocation().then(function(loc) {
+            return loc.x !== 0;
+          });
+        });
+
+        expect(initialPosition).not.toEqual(carouselItem.getLocation());
+      });
+
+      it('should move the items when swiping right', function() {
+        browser.get(path);
+
+        var carouselItem = element(by.id('firstItem'));
+
+        // Swipe left
+        browser.actions()
+        .mouseMove(carouselItem, {x: 100, y: 100})
+        .mouseDown()
+        .mouseMove({x: -520, y: 0})
+        .mouseUp()
+        .perform();
+        browser.waitForAngular();
+
+        // Store the position of the second carousel item
+        secondItemPosition = carouselItem.getLocation();
+
+        // Swipe right
+        browser.actions()
+        .mouseMove(element(by.id('secondItem')), {x: 100, y: 100})
+        .mouseDown()
+        .mouseMove({x: 520, y: 0})
+        .mouseUp()
+        .perform();
+        browser.waitForAngular();
+        
+        browser.wait(function() {
+          return carouselItem.getLocation().then(function(loc) {
+            return loc.x !== 0;
+          });
+        });
+
+        expect(secondItemPosition).not.toEqual(carouselItem.getLocation());
+      });
 
       it('should move the items when clicking the "Next" button', function() {
         browser.get(path);
