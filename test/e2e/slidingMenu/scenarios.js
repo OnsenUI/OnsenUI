@@ -21,6 +21,18 @@
       // Get location before clicking the button.
       var locationBefore = button.getLocation();
 
+      
+
+      var browserSize = browser.driver.manage().window().getSize()
+
+      return browserSize.then(function(size) {
+        var browserWidth = size.width; 
+        var browserHeight = size.height;
+
+        console.log(browserWidth);
+        console.log(browserHeight);
+      })
+      
       browser.actions()
       .mouseMove(element(by.css('.onsen-sliding-menu__main')), {x: 500, y: 100})
       .mouseDown()
