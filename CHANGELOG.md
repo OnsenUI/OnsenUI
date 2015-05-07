@@ -22,6 +22,7 @@ v1.3.2-dev
  * ons-tabbar: Added `'slide'` animation.
  * ons-navigator: Fixed [#628](https://github.com/OnsenUI/OnsenUI/issues/628).
  * ons: Added `disableAnimations` and `enableAnimations` to control animations display.
+ * ons-lazy-repeat: Fixed issue where `$http` calls caused an infinite series of digest loops. Fixed [#621](https://github.com/OnsenUI/OnsenUI/issues/621).
 
 v1.3.1
 ----
