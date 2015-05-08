@@ -17,15 +17,10 @@
 
         $scope.postOpen = function() {
           $scope.data.status = 'open';
-          console.log($scope.data.status);
-          var div = document.createElement("div");
-          div.id = "myDiv";
-          document.body.appendChild(div);
         };
 
         $scope.postClose = function() {
             $scope.data.status = 'close';
-            console.log($scope.data.status);
         };
       });
     </script>
@@ -76,6 +71,8 @@
         </ons-list-item>
       </ons-list>
     </script>
+
+    <div id="my-div" style="width: 100px, height: 100px" ng-if="data.status =='open'"></div>
 
   </body>
 </html>

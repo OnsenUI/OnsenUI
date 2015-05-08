@@ -52,7 +52,7 @@
       button.click();
 
       // The div element is created only after the SlidingMenu is opened
-      var myDiv = element(by.id('myDiv'));
+      var myDiv = element(by.id('my-div'));
       browser.wait(EC.presenceOf(myDiv));
 
       // Get location before clicking the button.
@@ -60,12 +60,12 @@
 
       // Close the sliding menu using a swipe action
       browser.actions()
-      .mouseMove(element(by.css('ons-sliding-menu')), {x: 100, y: 100})
+      .mouseMove(myDiv, {x: 1, y: 1})
       .mouseDown()
-      .mouseMove({x: 400, y: 0})
+      .mouseMove({x: 800, y: 0})
       .mouseUp()
       .perform();
-      browser.waitForAngular();
+      browser.wait(EC.not(EC.presenceOf(myDiv)));
 
       browser.wait(function() {
         var oldLocation;
@@ -114,7 +114,7 @@
       button.click();
 
       // The div element is created only after the SlidingMenu is opened
-      var myDiv = element(by.id('myDiv'));
+      var myDiv = element(by.id('my-div'));
       browser.wait(EC.presenceOf(myDiv));
 
       // Get location before clicking the button.
@@ -122,11 +122,11 @@
 
       // Close the sliding menu using a click action
       browser.actions()
-      .mouseMove(element(by.id('myDiv')), {x: 1, y: 1})
+      .mouseMove(myDiv, {x: 1, y: 1})
       .mouseDown()
       .mouseUp()
       .perform();
-      browser.waitForAngular();
+      browser.wait(EC.not(EC.presenceOf(myDiv)));
 
       browser.wait(function() {
         var oldLocation;
