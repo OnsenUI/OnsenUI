@@ -15,32 +15,22 @@
     });
 
     it('should open when swipe', function() {
-      
-      var button = element(by.css('ons-toolbar-button'));
+      var button = element(by.css('ons-toolbar-button')),
+        slidingMenu = element(by.css('ons-sliding-menu'));
+
+      browser.wait(EC.presenceOf(button));
+      browser.wait(EC.presenceOf(slidingMenu));
 
       // Get location before clicking the button.
       var locationBefore = button.getLocation();
 
-      
-
-      var browserSize = browser.driver.manage().window().getSize()
-
-      return browserSize.then(function(size) {
-        var browserWidth = size.width; 
-        var browserHeight = size.height;
-
-        console.log(browserWidth);
-        console.log(browserHeight);
-      })
-      
       browser.actions()
-      .mouseMove(element(by.css('.onsen-sliding-menu__main')), {x: 500, y: 100})
+      .mouseMove(slidingMenu, {x: 500, y: 100})
       .mouseDown()
-      .mouseMove({x: -120, y: 0})
+      .mouseMove({x: -400, y: 0})
       .mouseUp()
       .perform();
-      browser.waitForAngular();
-       
+
       browser.wait(function() {
         var oldLocation;
 
@@ -61,18 +51,22 @@
       var button = element(by.css('ons-toolbar-button'));
       button.click();
 
+      // The div element is created only after the SlidingMenu is opened
+      var myDiv = element(by.id('myDiv'));
+      browser.wait(EC.presenceOf(myDiv));
+
       // Get location before clicking the button.
       var locationBefore = button.getLocation();
 
       // Close the sliding menu using a swipe action
       browser.actions()
-      .mouseMove(element(by.css('.onsen-sliding-menu__main')), {x: 300, y: 100})
+      .mouseMove(element(by.css('ons-sliding-menu')), {x: 100, y: 100})
       .mouseDown()
-      .mouseMove({x: 120, y: 0})
+      .mouseMove({x: 400, y: 0})
       .mouseUp()
       .perform();
       browser.waitForAngular();
-       
+
       browser.wait(function() {
         var oldLocation;
 
@@ -117,18 +111,18 @@
     it('should close when clicking the page content', function() {
       var button = element(by.css('ons-toolbar-button'));
 
-      // Get location before clicking the button.
-      var locationBefore = button.getLocation();
-
       button.click();
-      browser.waitForAngular();
+
+      // The div element is created only after the SlidingMenu is opened
+      var myDiv = element(by.id('myDiv'));
+      browser.wait(EC.presenceOf(myDiv));
 
       // Get location before clicking the button.
       var locationBefore = button.getLocation();
 
       // Close the sliding menu using a click action
       browser.actions()
-      .mouseMove(element(by.css('.onsen-sliding-menu__main')), {x: 300, y: 100})
+      .mouseMove(element(by.id('myDiv')), {x: 1, y: 1})
       .mouseDown()
       .mouseUp()
       .perform();
