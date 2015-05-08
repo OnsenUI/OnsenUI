@@ -137,7 +137,7 @@ Please see the full [list of contributors](https://github.com/OnsenUI/OnsenUI/bl
 
 ## How to contribute
 
-Please see our [document on contributing](https://github.com/OnsenUI/OnsenUI/blog/master/CONTRIBUTING.md).
+Please see our [document on contributing](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTING.md).
 
 ## Getting support
 
