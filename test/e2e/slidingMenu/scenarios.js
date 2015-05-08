@@ -65,7 +65,7 @@
       .mouseMove({x: 800, y: 0})
       .mouseUp()
       .perform();
-      browser.wait(EC.not(EC.presenceOf(myDiv)));
+      browser.wait(EC.stalenessOf(myDiv));
 
       browser.wait(function() {
         var oldLocation;
@@ -126,7 +126,7 @@
       .mouseDown()
       .mouseUp()
       .perform();
-      browser.wait(EC.not(EC.presenceOf(myDiv)));
+      browser.wait(EC.stalenessOf(myDiv));
 
       browser.wait(function() {
         var oldLocation;
