@@ -50,7 +50,8 @@ limitations under the License.
         this._renderedElements = {};
         this._addEventListeners();
 
-        this._scope.$watch(this._onChange.bind(this));
+        // Render when number of items change.
+        this._scope.$watch(this._countItems.bind(this), this._onChange.bind(this));
 
         this._scope.$on('$destroy', this._destroy.bind(this));
         this._onChange();

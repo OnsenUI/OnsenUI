@@ -19,8 +19,8 @@
  * @name ons-if-platform
  * @type {String}
  * @description
- *   [en]One or multiple space separated values: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".[/en]
- *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "windows"のいずれか空白区切りで複数指定できます。[/ja]
+ *   [en]One or multiple space separated values: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".[/en]
+ *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "wp"のいずれか空白区切りで複数指定できます。[/ja]
  */
 
 (function() {
@@ -86,8 +86,8 @@
             return 'ios';
           }
 
-          if (navigator.userAgent.match(/IEMobile/i)) {
-            return 'windows';
+          if (navigator.userAgent.match(/Windows Phone|IEMobile|WPDesktop/i)) {
+            return 'wp';
           }
 
           // Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)

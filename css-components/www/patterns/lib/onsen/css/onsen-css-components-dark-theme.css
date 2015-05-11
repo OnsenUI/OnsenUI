@@ -17,7 +17,6 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  -ms-touch-action: none;
 }
 * {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -2638,6 +2637,40 @@ h6 {
       </li>
     </ul>
  */
+/* topdoc
+  name: Tight List
+  class: list__item--tight
+  use: List
+  markup:
+    <ul class="list">
+      <li class="list__item list__item--tight">
+        Sed ut perspiciatis unde omnis iste laudantium, totam rem aperiam.
+      </li>
+       <li class="list__item list__item--tight">
+        Eaque ipsa quae ab illo inventore vitae dicta sunt explicabo.
+      </li>
+    </ul>
+ */
+.list__item--tight {
+  -webkit-transition: background-color 0.2s linear;
+  -moz-transition: background-color 0.2s linear;
+  -o-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
+  min-height: inherit;
+  line-height: inherit;
+}
+.list__item--tight:active {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.list__item--tight:hover {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
 /* topdoc
   name: Tappable List
   class: list__item--tappable

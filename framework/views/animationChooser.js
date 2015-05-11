@@ -70,7 +70,13 @@ limitations under the License.
         } else {
           Animator = Animator || this._animators[this._animation];
 
-          var animationOpts = angular.extend({}, this._animationOptions, options.animationOptions || {});
+          var animationOpts = angular.extend(
+            {},
+            this._animationOptions,
+            options.animationOptions || {},
+            ons._config.animationsDisabled ? {duration: 0, delay: 0} : {}
+          );
+
           animator = new Animator(animationOpts);
         }
 

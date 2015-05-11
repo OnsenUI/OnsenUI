@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../build/css/onsenui.css"/>
+    <link rel="stylesheet" href="../../../build/css/onsen-css-components.css"/>
+
+    <script src="../../../build/js/angular/angular.js"></script>    
+    <script src="../../../build/js/onsenui.js"></script>    
+    <script src="../vendor/jquery.js"></script>    
+    <script>
+      ons.bootstrap();
+    </script>
+  </head>
+  <body>
+    <ons-tabbar animation="slide">
+      <ons-tabbar-item label="Home" page="home.html" active="true"></ons-tabbar-item>
+      <ons-tabbar-item label="Play" page="play.html"></ons-tabbar-item>
+      <ons-tabbar-item label="Settings" page="settings.html"></ons-tabbar-item>
+    </ons-tabbar>
+
+    <ons-template id="home.html">
+      <ons-toolbar>
+        <div class="center">
+          Home
+        </div>
+      </ons-toolbar>
+    </ons-template>
+
+    <ons-template id="play.html">
+      <ons-toolbar>
+        <div class="center">
+          Play
+        </div>
+      </ons-toolbar>
+    </ons-template>
+
+    <ons-template id="settings.html">
+      <ons-toolbar>
+        <div class="center">
+          Settings
+        </div>
+      </ons-toolbar>
+    </ons-template>
+
+  </body>
+</html>

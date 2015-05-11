@@ -70,6 +70,22 @@ limitations under the License.
 
 /**
  * @ngdoc method
+ * @signature disableAnimations()
+ * @description
+ *   [en]Disable all animations. Could be handy for testing and older devices.[/en]
+ *   [ja]アニメーションを全て無効にします。テストの際に便利です。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature enableAnimations()
+ * @description
+ *   [en]Enable animations (default).[/en]
+ *   [ja]アニメーションを有効にします。[/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature findParentComponentUntil(name, [dom])
  * @param {String} name
  *   [en]Name of component, i.e. 'ons-page'.[/en]
@@ -220,6 +236,17 @@ limitations under the License.
  * @description 
  *   [en]Create a popover instance from a template.[/en]
  *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature resolveLoadingPlaceholder(page)
+ * @param {String} page
+ *   [en]Page name. Can be either an HTML file or an <ons-template> element.[/en]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @description
+ *   [en]If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.[/en]
+ *   [ja][/ja]
  */
 
 (function(ons){
@@ -557,11 +584,11 @@ limitations under the License.
                 childStyle = child.getAttribute('style'),
                 newStyle = (function(a, b) {
                 var c =
-                  (a.substr(-1) === ';' ? a : a + ';') + 
-                  (b.substr(-1) === ';' ? b : b + ';'); 
+                  (a.substr(-1) === ';' ? a : a + ';') +
+                  (b.substr(-1) === ';' ? b : b + ';');
                 return c;
               })(parentStyle, childStyle);
-  
+
               child.setAttribute('style', newStyle);
             }
 
@@ -570,6 +597,21 @@ limitations under the License.
 
           return deferred.promise;
         });
+      },
+
+      /**
+       * @param {String} page
+       */
+      resolveLoadingPlaceholder: function(page) {
+        var $onsen = this._getOnsenService();
+
+        if ($onsen.deferredLoadingPlaceholders && $onsen.deferredLoadingPlaceholders.length) {
+          var deferred = $onsen.deferredLoadingPlaceholders.pop();
+          deferred.resolve(page);
+        }
+        else {
+          throw new Error('No ons-loading-placeholder exists.');
+        }
       }
     };
 
