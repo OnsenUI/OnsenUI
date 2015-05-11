@@ -9,16 +9,26 @@
     <script src="../../../build/js/onsenui.js"></script>
     <script>
       ons.bootstrap()
-
       .controller('SlidingMenuController', function($scope) {
         $scope.data = {
-          name: 'Andreas'
+          name: 'Andreas',
+          status: 'close'
+        };
+
+        $scope.postOpen = function() {
+          $scope.data.status = 'open';
+        };
+
+        $scope.postClose = function() {
+            $scope.data.status = 'close';
         };
       });
     </script>
   </head>
-  <body>
-    <ons-sliding-menu ng-controller="SlidingMenuController" main-page="page1.html" menu-page="menu.html" side="right" var="menu"></ons-sliding-menu>
+
+  <body ng-controller="SlidingMenuController">
+
+    <ons-sliding-menu main-page="page1.html" menu-page="menu.html" side="right" ons-postopen="postOpen()" ons-postclose="postClose()" var="menu"></ons-sliding-menu>
 
     <ons-template id="page1.html">
       <ons-page>
@@ -32,6 +42,8 @@
         <h1 style="text-align: center">Page1</h1>
 
         <p style="text-align: center">Hello, <span id="name">{{ data.name }}</span></p>
+        <br>
+        <div id="menuStatus" style="text-align: center">The SlidingMenu is {{ data.status }}</div>
       </ons-page>
     </ons-template>
 
@@ -58,6 +70,8 @@
         </ons-list-item>
       </ons-list>
     </ons-template>
+
+    <div id="my-div" style="width: 100px, height: 100px" ng-if="data.status =='open'"></div>
 
   </body>
 </html>
