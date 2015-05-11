@@ -238,6 +238,17 @@ limitations under the License.
  *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
  */
 
+/**
+ * @ngdoc method
+ * @signature resolveLoadingPlaceholder(page)
+ * @param {String} page
+ *   [en]Page name. Can be either an HTML file or an <ons-template> element.[/en]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @description
+ *   [en]If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.[/en]
+ *   [ja][/ja]
+ */
+
 (function(ons){
   'use strict';
 
@@ -573,11 +584,11 @@ limitations under the License.
                 childStyle = child.getAttribute('style'),
                 newStyle = (function(a, b) {
                 var c =
-                  (a.substr(-1) === ';' ? a : a + ';') + 
-                  (b.substr(-1) === ';' ? b : b + ';'); 
+                  (a.substr(-1) === ';' ? a : a + ';') +
+                  (b.substr(-1) === ';' ? b : b + ';');
                 return c;
               })(parentStyle, childStyle);
-  
+
               child.setAttribute('style', newStyle);
             }
 
@@ -586,6 +597,21 @@ limitations under the License.
 
           return deferred.promise;
         });
+      },
+
+      /**
+       * @param {String} page
+       */
+      resolveLoadingPlaceholder: function(page) {
+        var $onsen = this._getOnsenService();
+
+        if ($onsen.deferredLoadingPlaceholders && $onsen.deferredLoadingPlaceholders.length) {
+          var deferred = $onsen.deferredLoadingPlaceholders.pop();
+          deferred.resolve(page);
+        }
+        else {
+          throw new Error('No ons-loading-placeholder exists.');
+        }
       }
     };
 

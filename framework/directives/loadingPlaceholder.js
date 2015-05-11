@@ -27,19 +27,42 @@
 
   var module = angular.module('onsen');
 
-  module.directive('onsLoadingPlaceholder', function($onsen, $compile) {
+  module.directive('onsLoadingPlaceholder', function($onsen, $compile, $q) {
+    var getPage = function(attrs) {
+      var deferred = $q.defer();
+
+      if (attrs.onsLoadingPlaceholder) {
+        deferred.resolve(attrs.onsLoadingPlaceholder);
+      }
+      else {
+        try {
+          $onsen.deferredLoadingPlaceholders.push(deferred);
+        }
+        catch (e) {
+          $onsen.deferredLoadingPlaceholders = [deferred];
+        }
+      }
+
+      return deferred.promise;
+    };
+
     return {
       restrict: 'A',
       replace: false,
       transclude: false,
       scope: false,
       compile: function(element, attrs) {
-        if (!attrs.onsLoadingPlaceholder.length) {
-          throw Error('Must define page to load.');
-        }
-
         setImmediate(function() {
-          $onsen.getPageHTMLAsync(attrs.onsLoadingPlaceholder).then(function(html) {
+          getPage(attrs).then(
+            function(page) {
+              console.log(page);
+              return $onsen.getPageHTMLAsync(page);
+            },
+            function(error) {
+              throw new Error('Unabled to resolve placeholder: ' + error);
+            }
+          )
+          .then(function(html) {
 
             // Remove page tag.
             html = html
