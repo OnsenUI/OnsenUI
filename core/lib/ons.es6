@@ -19,7 +19,10 @@ limitations under the License.
   'use strict';
 
   ons._readyLock = new DoorLock();
-  ons._config = {autoStatusBarFill: true};
+  ons._config = {
+    autoStatusBarFill: true,
+    animationsDisabled: false
+  };
 
   waitDeviceReady();
 
@@ -56,20 +59,34 @@ limitations under the License.
    * Enable status bar fill feature on iOS7 and above.
    */
   ons.enableAutoStatusBarFill = () => {
-    if (this.isReady()) {
+    if (ons.isReady()) {
       throw new Error('This method must be called before ons.isReady() is true.');
     }
-    this._config.autoStatusBarFill = true;
+    ons._config.autoStatusBarFill = true;
   };
 
   /**
    * Disable status bar fill feature on iOS7 and above.
    */
   ons.disableAutoStatusBarFill = () => {
-    if (this.isReady()) {
+    if (ons.isReady()) {
       throw new Error('This method must be called before ons.isReady() is true.');
     }
-    this._config.autoStatusBarFill = false;
+    ons._config.autoStatusBarFill = false;
+  };
+
+  /**
+   * Disable all animations. Could be handy for testing and older devices.
+   */
+  ons.disableAnimations = () => {
+    ons._config.animationsDisabled = true;
+  };
+
+  /**
+   * Enable animations (default).
+   */
+  ons.enableAnimations = () => {
+    ons._config.animationsDisabled = false;
   };
 
   function waitDeviceReady() {

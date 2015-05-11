@@ -22,7 +22,8 @@
       restrict: 'E',
       terminal: true,
       compile: function(element) {
-        $templateCache.put(element.attr('id'), element[0].template);
+        var content = element[0].template || element.html();
+        $templateCache.put(element.attr('id'), content);
       }
     };
   });

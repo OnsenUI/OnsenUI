@@ -9,19 +9,28 @@
     <script src="../../../build/js/onsenui.js"></script>
     <script>
       ons.bootstrap()
-
       .controller('SlidingMenuController', function($scope) {
         $scope.data = {
-          name: 'Andreas'
+          name: 'Andreas',
+          status: 'close'
+        };
+
+        $scope.postOpen = function() {
+          $scope.data.status = 'open';
+        };
+
+        $scope.postClose = function() {
+            $scope.data.status = 'close';
         };
       });
     </script>
   </head>
-  <body>
 
-    <ons-sliding-menu ng-controller="SlidingMenuController" main-page="page1.html" menu-page="menu.html" side="right" var="menu"></ons-sliding-menu>
+  <body ng-controller="SlidingMenuController">
 
-    <script type="text/ons-template" id="page1.html">
+    <ons-sliding-menu main-page="page1.html" menu-page="menu.html" side="right" ons-postopen="postOpen()" ons-postclose="postClose()" var="menu"></ons-sliding-menu>
+
+    <ons-template id="page1.html">
       <ons-page>
         <ons-toolbar>
           <div class="center">Page 1</div>
@@ -33,25 +42,25 @@
         <h1 style="text-align: center">Page1</h1>
 
         <p style="text-align: center">Hello, <span id="name">{{ data.name }}</span></p>
+        <br>
+        <div id="menuStatus" style="text-align: center">The SlidingMenu is {{ data.status }}</div>
       </ons-page>
-    </script>
+    </ons-template>
 
-    <script type="text/ons-template" id="page2.html">
+    <ons-template id="page2.html">
       <ons-page>
         <ons-toolbar>
           <div class="center">Page 2</div>
           <div class="right">
             <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
           </div>
-
-
         </ons-toolbar>
 
         <h1 style="text-align: center">Page2</h1>
       </ons-page>
-    </script>
+    </ons-template>
 
-    <script type="text/ons-template" id="menu.html">
+    <ons-template id="menu.html">
       <ons-list>
         <ons-list-item modifier="chevron" ng-click="menu.setMainPage('page1.html', {closeMenu: true})">
           Page 1
@@ -60,7 +69,9 @@
           Page 2
         </ons-list-item>
       </ons-list>
-    </script>
+    </ons-template>
+
+    <div id="my-div" style="width: 100px, height: 100px" ng-if="data.status =='open'"></div>
 
   </body>
 </html>
