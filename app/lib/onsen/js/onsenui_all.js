@@ -1,4 +1,4 @@
-/*! onsenui - v1.3.1 - 2015-04-30 */
+/*! onsenui - v1.3.2 - 2015-05-12 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -32823,7 +32823,7 @@ limitations under the License.
 
       _calculateMaxScroll: function() {
         var max = this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
-        return max < 0 ? 0 : max;
+        return Math.ceil(max < 0 ? 0 : max); // Need to return an integer value.
       },
 
       _isOverScroll: function(scroll) {

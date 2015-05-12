@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v1.3.2
+----
+ * Fixed postchange event for carousel on IE11. Fixed [#646](https://github.com/OnsenUI/OnsenUI/issues/646).
+
 v1.3.1
 ----
  * Fixed scrolling in Windows Phone. Fixed [#618](https://github.com/OnsenUI/OnsenUI/issues/618).
