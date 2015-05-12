@@ -2,7 +2,6 @@ var Q = require('q');
 var stylus = require('stylus');
 var fs = require('fs');
 var parseColor = require('color-parser');
-var mylighten = require('./mylighten');
 
 var VALID_KEYS = [
   // "var-view-background",
@@ -37,7 +36,6 @@ function compile(variables) {
 
   renderer.import(__dirname + '/../components-src/stylus/components/index.styl');
 
-  renderer.define('mylighten', mylighten);
   renderer.render(function(err, css) {
     if (err) {
       defer.reject(err);
