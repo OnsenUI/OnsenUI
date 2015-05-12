@@ -661,7 +661,7 @@ limitations under the License.
 
       _calculateMaxScroll: function() {
         var max = this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
-        return max < 0 ? 0 : max;
+        return Math.ceil(max < 0 ? 0 : max); // Need to return an integer value.
       },
 
       _isOverScroll: function(scroll) {
