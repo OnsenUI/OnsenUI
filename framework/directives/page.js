@@ -86,13 +86,11 @@
   module.directive('onsPage', function($onsen, PageView) {
 
     function firePageInitEvent(element) {
-
       // TODO: remove dirty fix
-      var i = 0;
-      var f = function() {
+      var i = 0, f = function() {
         if (i++ < 5)  {
           if (isAttached(element)) {
-            fillStatusBar(element);
+            element._tryToFillStatusBar();
             $onsen.fireComponentEvent(element, 'init');
             fireActualPageInitEvent(element);
           } else {
@@ -112,60 +110,11 @@
       element.dispatchEvent(event);
     }
 
-    function fillStatusBar(element) {
-      if ($onsen.shouldFillStatusBar(element)) {
-        // Adjustments for IOS7
-        var fill = angular.element(document.createElement('div'));
-        fill.addClass('page__status-bar-fill');
-        fill.css({width: '0px', height: '0px'});
-
-        angular.element(element).prepend(fill);
-      }
-    }
-
     function isAttached(element) {
       if (document.documentElement === element) {
         return true;
       }
       return element.parentNode ? isAttached(element.parentNode) : false;
-    }
-
-    function preLink(scope, element, attrs, controller, transclude) {
-      var page = new PageView(scope, element, attrs);
-
-      $onsen.declareVarAttribute(attrs, page);
-
-      element.data('ons-page', page);
-
-      var modifierTemplater = $onsen.generateModifierTemplater(attrs),
-          template = 'page--*';
-      element.addClass('page ' + modifierTemplater(template));
-      $onsen.addModifierMethods(page, template, element);
-
-      var pageContent = angular.element(element[0].querySelector('.page__content'));
-      pageContent.addClass(modifierTemplater('page--*__content'));
-      pageContent = null;
-
-      var pageBackground = angular.element(element[0].querySelector('.page__background'));
-      pageBackground.addClass(modifierTemplater('page--*__background'));
-      pageBackground = null;
-
-      $onsen.cleaner.onDestroy(scope, function() {
-        page._events = undefined;
-        $onsen.removeModifierMethods(page);
-        element.data('ons-page', undefined);
-
-        $onsen.clearComponent({
-          element: element,
-          scope: scope,
-          attrs: attrs
-        });
-        scope = element = attrs = null;
-      });
-    }
-
-    function postLink(scope, element, attrs) {
-      firePageInitEvent(element[0]);
     }
 
     return {
@@ -176,57 +125,31 @@
       transclude: false,
       scope: false,
 
-      compile: function(element) {
-        var children = element.children().remove();
+      link: {
+        pre: function(scope, element, attrs) {
+          var page = new PageView(scope, element, attrs);
 
-        var content = angular.element('<div class="page__content ons-page-inner"></div>').append(children);
-        var background = angular.element('<div class="page__background"></div>');
+          $onsen.declareVarAttribute(attrs, page);
+          element.data('ons-page', page);
+          $onsen.addModifierMethodsForCustomElements(page, element);
 
-        if (element.attr('style')) {
-          background.attr('style', element.attr('style'));
-          element.attr('style', '');
-        }
+          $onsen.cleaner.onDestroy(scope, function() {
+            page._events = undefined;
+            $onsen.removeModifierMethods(page);
+            element.data('ons-page', undefined);
 
-        element.append(background);
-
-        if (Modernizr.csstransforms3d) {
-          element.append(content);
-        } else {
-          content.css('overflow', 'visible');
-
-          var wrapper = angular.element('<div></div>');
-          wrapper.append(children);
-          content.append(wrapper);
-          element.append(content);
-          wrapper = null;
-
-          // IScroll for Android2
-          var scroller = new IScroll(content[0], {
-            momentum: true,
-            bounce: true,
-            hScrollbar: false,
-            vScrollbar: false,
-            preventDefault: false
+            $onsen.clearComponent({
+              element: element,
+              scope: scope,
+              attrs: attrs
+            });
+            scope = element = attrs = null;
           });
+        },
 
-          var offset = 10;
-          scroller.on('scrollStart', function(e) {
-            var scrolled = scroller.y - offset;
-            if (scrolled < (scroller.maxScrollY + 40)) {
-              // TODO: find a better way to know when content is updated so we can refresh
-              scroller.refresh();
-            }
-          });
+        post: function postLink(scope, element, attrs) {
+          firePageInitEvent(element[0]);
         }
-
-        content = null;
-        background = null;
-        children = null;
-
-        return {
-          pre: preLink,
-          post: postLink
-        };
       }
     };
   });
