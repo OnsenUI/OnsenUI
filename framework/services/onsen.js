@@ -62,7 +62,6 @@ limitations under the License.
             if (!(element instanceof HTMLElement)) {
               throw new Error('element must be an instance of HTMLElement');
             }
-            var debug = element.tagName === 'ONS-TABBAR' ? console.log.bind(console) : angular.noop;
 
             for (;;) {
               if (element.hasAttribute('no-status-bar-fill')) {
@@ -70,7 +69,6 @@ limitations under the License.
               }
 
               element = element.parentNode;
-              debug(element);
               if (!element || !element.hasAttribute) {
                 return true;
               }
