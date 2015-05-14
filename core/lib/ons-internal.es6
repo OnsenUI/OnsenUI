@@ -18,7 +18,7 @@ limitations under the License.
 ((ons) => {
   'use strict';
 
-  ons._internal = ons.internal || {};
+  ons._internal = ons._internal || {};
 
   ons._internal.nullElement = document.createElement('div');
 
