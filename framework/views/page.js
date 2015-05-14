@@ -74,13 +74,6 @@ limitations under the License.
       /**
        * @return {HTMLElement}
        */
-      getBackgroundElement : function() {
-        return this._element[0]._getBackgroundElement();
-      },
-
-      /**
-       * @return {HTMLElement}
-       */
       getToolbarElement : function() {
         return this._element[0]._findChild('ons-toolbar') || this._nullElement;
       },
