@@ -67,14 +67,14 @@ limitations under the License.
      * @return {Boolean}
      */
     isAndroidPhone: function() {
-        return /Mobile/i.test(navigator.userAgent);
+        return /Android/i.test(navigator.userAgent) && /Mobile/i.test(navigator.userAgent);
     },
 	
 	 /**
      * @return {Boolean}
      */
     isAndroidTablet: function() {
-        return !/Mobile/i.test(navigator.userAgent);
+        return /Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
     },
 
     /**
