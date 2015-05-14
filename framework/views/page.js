@@ -74,13 +74,6 @@ limitations under the License.
       /**
        * @return {HTMLElement}
        */
-      getContentElement : function() {
-        return this._element[0]._getContentElement();
-      },
-
-      /**
-       * @return {HTMLElement}
-       */
       getBackgroundElement : function() {
         return this._element[0]._getBackgroundElement();
       },

@@ -67,7 +67,7 @@ limitations under the License.
         return {
           pageLabels: pageLabels,
           other: other,
-          content: page.getPageView().getContentElement(),
+          content: page.getPageView()._element[0]._getContentElement(),
           background: page.getPageView().getBackgroundElement(),
           toolbar: page.getPageView().getToolbarElement(),
           bottomToolbar: page.getPageView().getBottomToolbarElement()
