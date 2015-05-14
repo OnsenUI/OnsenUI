@@ -58,25 +58,7 @@ limitations under the License.
          * @return {Boolean}
          */
         shouldFillStatusBar: function(element) {
-          if (this.isEnabledAutoStatusBarFill() && this.isWebView() && this.isIOS7Above()) {
-            if (!(element instanceof HTMLElement)) {
-              throw new Error('element must be an instance of HTMLElement');
-            }
-            var debug = element.tagName === 'ONS-TABBAR' ? console.log.bind(console) : angular.noop;
-
-            for (;;) {
-              if (element.hasAttribute('no-status-bar-fill')) {
-                return false;
-              }
-
-              element = element.parentNode;
-              debug(element);
-              if (!element || !element.hasAttribute) {
-                return true;
-              }
-            }
-          }
-          return false;
+          return $onsGlobal.shouldFillStatusBar(element);
         },
 
         /**
