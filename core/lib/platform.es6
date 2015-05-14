@@ -62,6 +62,20 @@ limitations under the License.
         return /Android/i.test(navigator.userAgent);
       }
     },
+	
+	 /**
+     * @return {Boolean}
+     */
+    isAndroidPhone: function() {
+        return /Mobile/i.test(navigator.userAgent);
+    },
+	
+	 /**
+     * @return {Boolean}
+     */
+    isAndroidTablet: function() {
+        return !/Mobile/i.test(navigator.userAgent);
+    },
 
     /**
      * @return {Boolean}
