@@ -33,7 +33,9 @@ limitations under the License.
         this._clearListener = scope.$on('$destroy', this._destroy.bind(this));
 
         this._userDeviceBackButtonListener = angular.noop;
-        this._element[0].setDeviceBackButtonHandler(this._onDeviceBackButton.bind(this));
+        if (this._attrs.ngDeviceBackbutton || this._attrs.onDeviceBackbutton) {
+          this._element[0].setDeviceBackButtonHandler(this._onDeviceBackButton.bind(this));
+        }
       },
 
       _onDeviceBackButton: function($event) {
