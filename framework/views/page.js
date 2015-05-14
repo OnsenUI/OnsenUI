@@ -72,13 +72,6 @@ limitations under the License.
       },
 
       /**
-       * @param {jqLite} element
-       */
-      registerExtraElement: function(element) {
-        this._element[0]._registerExtraElement(element[0]);
-      },
-
-      /**
        * @return {Boolean}
        */
       hasToolbarElement : function() {
