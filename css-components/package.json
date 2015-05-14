@@ -14,7 +14,7 @@
     "q": "~1.0.1",
     "rimraf": "^2.2.8",
     "static-favicon": "~1.0.0",
-    "stylus": "^0.43.1"
+    "stylus": "^0.51.1"
   },
   "private": true,
   "devDependencies": {

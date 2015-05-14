@@ -2,7 +2,6 @@
 var gulp = require('gulp');
 var pkg = require('./package.json');
 var appServer = require('./server/app');
-var mylighten = require('./server/mylighten');
 var merge = require('event-stream').merge;
 var gutil = require('gulp-util');
 var runSequence = require('run-sequence');
@@ -156,7 +155,7 @@ gulp.task('app-server', function() {
 ////////////////////////////////////////
 gulp.task('build-css-components', ['build-schemes'], function(done) {
   gulp.src('components-src/stylus/*-theme.styl')
-    .pipe($.stylus({errors: true, define: {mylighten: mylighten}}))
+    .pipe($.stylus({errors: true}))
     .pipe($.autoprefixer('> 1%', 'last 2 version', 'ff 12', 'ie 8', 'opera 12', 'chrome 12', 'safari 12', 'android 2'))
     .pipe($.rename(function(path) {
       path.dirname = '.';

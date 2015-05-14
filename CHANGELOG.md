@@ -25,6 +25,7 @@ v1.3.2-dev
  * ons-lazy-repeat: Fixed issue where `$http` calls caused an infinite series of digest loops. Fixed [#621](https://github.com/OnsenUI/OnsenUI/issues/621).
  * ons-loading-placeholder: Added `ons.resolveLoadingPlaceholder()` to delay resolving the placeholder.
  * ons-page: [BC Break] Removed undocumented several methods on `ons-page` component.
+ * css-components: Stylus components don't rely on custom functions anymore.
 
 v1.3.1
 ----
