@@ -72,15 +72,6 @@ limitations under the License.
       },
 
       /**
-       * Register toolbar element to this page.
-       *
-       * @param {jqLite} element
-       */
-      registerBottomToolbar: function(element) {
-        this._element[0]._registerBottomToolbar(element[0]);
-      },
-
-      /**
        * @param {jqLite} element
        */
       registerExtraElement: function(element) {
