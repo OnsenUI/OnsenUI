@@ -230,7 +230,7 @@
             var pageView = element.inheritedData('ons-page');
 
             if (pageView && !inline) {
-              pageView.registerToolbar(element);
+              pageView._element[0]._registerToolbar(element[0]);
             }
           },
           post: function(scope, element, attrs) {

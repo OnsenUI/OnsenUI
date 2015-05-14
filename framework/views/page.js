@@ -76,15 +76,6 @@ limitations under the License.
        *
        * @param {jqLite} element
        */
-      registerToolbar: function(element) {
-        this._element[0]._registerToolbar(element[0]);
-      },
-
-      /**
-       * Register toolbar element to this page.
-       *
-       * @param {jqLite} element
-       */
       registerBottomToolbar: function(element) {
         this._element[0]._registerBottomToolbar(element[0]);
       },
