@@ -38,6 +38,34 @@ limitations under the License.
       }
     }
 
+    /**
+     * @return {HTMLElement}
+     */
+    _getToolbarLeftItemsElement() {
+      return this.querySelector('.left') || ons._internal.nullElement;
+    }
+
+    /**
+     * @return {HTMLElement}
+     */
+    _getToolbarCenterItemsElement() {
+      return this.querySelector('.center') || ons._internal.nullElement;
+    }
+
+    /**
+     * @return {HTMLElement}
+     */
+    _getToolbarRightItemsElement() {
+      return this.querySelector('.right') || ons._internal.nullElement;
+    }
+
+    /**
+     * @return {HTMLElement}
+     */
+    _getToolbarBackButtonLabelElement() {
+      return this.querySelector('ons-back-button .back-button__label') || ons._internal.nullElement;
+    }
+
     _compile() {
       var shouldAppendAndroidModifier = ons.platform.isAndroid() && !this.hasAttribute('fixed-style');
       var inline = this.hasAttribute('inline');

@@ -24,6 +24,8 @@ limitations under the License.
     '.page__background': 'page--*__background'
   };
 
+  var nullToolbarElement = document.createElement('ons-toolbar');
+
   class PageElement extends ons._BaseElement {
 
     createdCallback() {
@@ -91,7 +93,7 @@ limitations under the License.
      * @return {HTMLElement}
      */
     _getToolbarElement() {
-      return ons._util.findChild(this, 'ons-toolbar') || ons._internal.nullElement;
+      return ons._util.findChild(this, 'ons-toolbar') || nullToolbarElement;
     }
 
     /**
