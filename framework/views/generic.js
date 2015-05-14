@@ -72,6 +72,10 @@ limitations under the License.
       }
     });
 
+    GenericView.register = function(scope, element, attrs, options) {
+      new GenericView(scope, element, attrs, options);
+    };
+
     MicroEvent.mixin(GenericView);
 
     return GenericView;
