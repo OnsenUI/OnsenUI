@@ -63,16 +63,16 @@ limitations under the License.
       }
     },
 	
-	 /**
-     * @return {Boolean}
-     */
+	/**
+	* @return {Boolean}
+	*/
     isAndroidPhone: function() {
         return /Android/i.test(navigator.userAgent) && /Mobile/i.test(navigator.userAgent);
     },
 	
-	 /**
-     * @return {Boolean}
-     */
+	/**
+	* @return {Boolean}
+	*/
     isAndroidTablet: function() {
         return /Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
     },
