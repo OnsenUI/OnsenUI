@@ -74,43 +74,29 @@ limitations under the License.
       /**
        * @return {HTMLElement}
        */
-      getToolbarElement : function() {
-        return this._element[0]._findChild('ons-toolbar') || this._nullElement;
-      },
-
-      /**
-       * @return {HTMLElement}
-       */
-      getBottomToolbarElement : function() {
-        return this._element[0]._findChild('ons-bottom-toolbar') || this._nullElement;
-      },
-
-      /**
-       * @return {HTMLElement}
-       */
       getToolbarLeftItemsElement : function() {
-        return this.getToolbarElement().querySelector('.left') || this._nullElement;
+        return this._element[0]._getToolbarElement().querySelector('.left') || this._nullElement;
       },
 
       /**
        * @return {HTMLElement}
        */
       getToolbarCenterItemsElement : function() {
-        return this.getToolbarElement().querySelector('.center') || this._nullElement;
+        return this._element[0]._getToolbarElement().querySelector('.center') || this._nullElement;
       },
 
       /**
        * @return {HTMLElement}
        */
       getToolbarRightItemsElement : function() {
-        return this.getToolbarElement().querySelector('.right') || this._nullElement;
+        return this._element[0]._getToolbarElement().querySelector('.right') || this._nullElement;
       },
 
       /**
        * @return {HTMLElement}
        */
       getToolbarBackButtonLabelElement : function() {
-        return this.getToolbarElement().querySelector('ons-back-button .back-button__label') || this._nullElement;
+        return this._element[0]._getToolbarElement().querySelector('ons-back-button .back-button__label') || this._nullElement;
       },
 
       _destroy: function() {

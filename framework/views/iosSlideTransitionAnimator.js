@@ -69,19 +69,19 @@ limitations under the License.
           other: other,
           content: page.element[0]._getContentElement(),
           background: page.element[0]._getBackgroundElement(),
-          toolbar: page.getPageView().getToolbarElement(),
-          bottomToolbar: page.getPageView().getBottomToolbarElement()
+          toolbar: page.element[0]._getToolbarElement(),
+          bottomToolbar: page.element[0]._getBottomToolbarElement()
         };
       },
 
       _shouldAnimateToolbar: function(enterPage, leavePage) {
         var bothPageHasToolbar =
-          enterPage.getPageView()._element[0]._hasToolbarElement() &&
-          leavePage.getPageView()._element[0]._hasToolbarElement();
+          enterPage.element[0]._hasToolbarElement() &&
+          leavePage.element[0]._hasToolbarElement();
 
         var noAndroidLikeToolbar =
-          !angular.element(enterPage.getPageView().getToolbarElement()).hasClass('navigation-bar--android') &&
-          !angular.element(leavePage.getPageView().getToolbarElement()).hasClass('navigation-bar--android');
+          !angular.element(enterPage.element[0]._getToolbarElement()).hasClass('navigation-bar--android') &&
+          !angular.element(leavePage.element[0]._getToolbarElement()).hasClass('navigation-bar--android');
 
         return bothPageHasToolbar && noAndroidLikeToolbar;
       },

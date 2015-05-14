@@ -63,7 +63,7 @@ limitations under the License.
               done();
             }),
 
-          animit(enterPage.getPageView().getToolbarElement())
+          animit(enterPage.element[0]._getToolbarElement())
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -115,7 +115,7 @@ limitations under the License.
               done();
             }),
 
-          animit(leavePage.getPageView().getToolbarElement())
+          animit(leavePage.element[0]._getToolbarElement())
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',

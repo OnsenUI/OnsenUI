@@ -80,6 +80,21 @@ limitations under the License.
     }
 
     /**
+     * @return {HTMLElement}
+     */
+    _getBottomToolbarElement() {
+      return this._findChild('ons-bottom-toolbar') || ons._internal.nullElement;
+    }
+
+
+    /**
+     * @return {HTMLElement}
+     */
+    _getToolbarElement() {
+      return this._findChild('ons-toolbar') || ons._internal.nullElement;
+    }
+
+    /**
      * Register toolbar element to this page.
      *
      * @param {HTMLElement} element

@@ -20,6 +20,8 @@ limitations under the License.
 
   ons._internal = ons.internal || {};
 
+  ons._internal.nullElement = document.createElement('div');
+
   /**
    * @return {Boolean}
    */
