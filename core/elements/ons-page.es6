@@ -62,6 +62,13 @@ limitations under the License.
     }
 
     /**
+     * @return {Boolean}
+     */
+    _hasToolbarElement() {
+      return !!this._findChild('ons-toolbar');
+    }
+
+    /**
      * @return {HTMLElement}
      */
     _getBackgroundElement() {

@@ -76,8 +76,8 @@ limitations under the License.
 
       _shouldAnimateToolbar: function(enterPage, leavePage) {
         var bothPageHasToolbar =
-          enterPage.getPageView().hasToolbarElement() &&
-          leavePage.getPageView().hasToolbarElement();
+          enterPage.getPageView()._element[0]._hasToolbarElement() &&
+          leavePage.getPageView()._element[0]._hasToolbarElement();
 
         var noAndroidLikeToolbar =
           !angular.element(enterPage.getPageView().getToolbarElement()).hasClass('navigation-bar--android') &&

@@ -74,13 +74,6 @@ limitations under the License.
       /**
        * @return {Boolean}
        */
-      hasToolbarElement : function() {
-        return !!this._element[0]._findChild('ons-toolbar');
-      },
-
-      /**
-       * @return {Boolean}
-       */
       hasBottomToolbarElement : function() {
         return !!this._element[0]._findChild('ons-bottom-toolbar');
       },
