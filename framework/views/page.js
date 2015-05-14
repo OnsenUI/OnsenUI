@@ -132,7 +132,7 @@ limitations under the License.
        * @return {HTMLElement}
        */
       getToolbarElement : function() {
-        return this._element[0].querySelector('ons-toolbar');
+        return this._element[0].querySelector('ons-toolbar') || this._nullElement;
       },
 
       /**
