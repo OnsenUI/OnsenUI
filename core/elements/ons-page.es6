@@ -33,10 +33,28 @@ limitations under the License.
     }
 
     /**
+     * @return {Object/null}
+     */
+    getDeviceBackButtonHandler() {
+      return this._deviceBackButtonHandler || null;
+    }
+
+    /**
+     * @param {Function} callback
+     */
+    setDeviceBackButtonHandler(callback) {
+      if (this._deviceBackButtonHandler) {
+        this._deviceBackButtonHandler.destroy();
+      }
+
+      this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, callback);
+    }
+
+    /**
      * @return {HTMLElement}
      */
     _getContentElement() {
-      var result = this.querySelector('.page__content');
+      var result = this._findChild('.page__content');
       if (result) {
         return result;
       }
@@ -47,7 +65,7 @@ limitations under the License.
      * @return {HTMLElement}
      */
     _getBackgroundElement() {
-      var result = this.querySelector('.page__background');
+      var result = this._findChild('.page__background');
       if (result) {
         return result;
       }
@@ -62,10 +80,10 @@ limitations under the License.
     _registerToolbar(element) {
       this._getContentElement().setAttribute('no-status-bar-fill', '');
 
-      if (this.querySelector('.page__status-bar-fill')) {
-        this.insertBefore(element, this.childNodes[1]);
+      if (this._findChild('.page__status-bar-fill')) {
+        this.insertBefore(element, this.children[1]);
       } else {
-        this.insertBefore(element, this.childNodes[0]);
+        this.insertBefore(element, this.children[0]);
       }
     }
 
@@ -75,13 +93,15 @@ limitations under the License.
      * @param {HTMLElement} element
      */
     _registerBottomToolbar(element) {
-      var fill = document.createElement('div');
-      fill.classList.add('page__bottom-bar-fill');
-      fill.style.width = '0px';
-      fill.style.height = '0px';
+      if (!this._findChild('.page__status-bar-fill')) {
+        var fill = document.createElement('div');
+        fill.classList.add('page__bottom-bar-fill');
+        fill.style.width = '0px';
+        fill.style.height = '0px';
 
-      this.insertBefore(fill, this.childNodes[0]);
-      this.insertBefore(element, null);
+        this.insertBefore(fill, this.children[0]);
+        this.insertBefore(element, null);
+      }
     }
 
     attributeChangedCallback(name, last, current) {
@@ -90,8 +110,26 @@ limitations under the License.
       }
     }
 
+    /**
+     * @param {String} query dot class name or node name.
+     * @return {HTMLElement}
+     */
+    _findChild(query) {
+      var match = query.substr(0, 1) === '.' ?
+        (node) => node.classList.contains(query.substr(1)) :
+        (node) => node.nodeName.toLowerCase() === query;
+      var node;
+      for (var i = 0; i < this.children.length; i++) {
+        node = this.children[i];
+        if (match(node)) {
+          return node;
+        }
+      }
+      return null;
+    }
+
     _compile() {
-      if (this.querySelector('.page__background') && this.querySelector('.page__content')) {
+      if (this._findChild('.page__background') && this._findChild('.page__content')) {
         return;
       }
 
@@ -117,7 +155,7 @@ limitations under the License.
     }
 
     _registerExtraElement(element) {
-      var extra = this.querySelector('.page__extra');
+      var extra = this._findChild('.page__extra');
       if (!extra) {
         extra = document.createElement('div');
         extra.classList.add('page__extra');
@@ -136,7 +174,7 @@ limitations under the License.
         fill.style.width = '0px';
         fill.style.height = '0px';
 
-        this.insertBefore(fill, this.childNodes[0]);
+        this.insertBefore(fill, this.children[0]);
       }
     }
   }

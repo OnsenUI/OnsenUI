@@ -31,11 +31,9 @@ limitations under the License.
         this._attrs = attrs;
 
         this._clearListener = scope.$on('$destroy', this._destroy.bind(this));
-        this._userDeviceBackButtonListener = angular.noop;
 
-        if (this._attrs.ngDeviceBackbutton || this._attrs.onDeviceBackbutton) {
-          this._deviceBackButtonHandler = ons._deviceBackButtonHandler.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
-        }
+        this._userDeviceBackButtonListener = angular.noop;
+        this._element[0].setDeviceBackButtonHandler(this._onDeviceBackButton.bind(this));
       },
 
       _onDeviceBackButton: function($event) {
@@ -61,10 +59,6 @@ limitations under the License.
        * @param {Function} callback
        */
       setDeviceBackButtonHandler: function(callback) {
-        if (!this._deviceBackButtonHandler) {
-          this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
-        }
-
         this._userDeviceBackButtonListener = callback;
       },
 
@@ -72,7 +66,7 @@ limitations under the License.
        * @return {Object/null}
        */
       getDeviceBackButtonHandler: function() {
-        return this._deviceBackButtonHandler || null;
+        return this._element[0].getDeviceBackButtonHandler();
       },
 
       /**
@@ -104,14 +98,14 @@ limitations under the License.
        * @return {Boolean}
        */
       hasToolbarElement : function() {
-        return !!this._element[0].querySelector('ons-toolbar');
+        return !!this._element[0]._findChild('ons-toolbar');
       },
 
       /**
        * @return {Boolean}
        */
       hasBottomToolbarElement : function() {
-        return !!this._element[0].querySelector('ons-bottom-toolbar');
+        return !!this._element[0]._findChild('ons-bottom-toolbar');
       },
 
       /**
@@ -132,14 +126,14 @@ limitations under the License.
        * @return {HTMLElement}
        */
       getToolbarElement : function() {
-        return this._element[0].querySelector('ons-toolbar') || this._nullElement;
+        return this._element[0]._findChild('ons-toolbar') || this._nullElement;
       },
 
       /**
        * @return {HTMLElement}
        */
       getBottomToolbarElement : function() {
-        return this._element[0].querySelector('ons-bottom-toolbar') || this._nullElement;
+        return this._element[0]._findChild('ons-bottom-toolbar') || this._nullElement;
       },
 
       /**
@@ -172,11 +166,6 @@ limitations under the License.
 
       _destroy: function() {
         this.emit('destroy', {page: this});
-
-        if (this._deviceBackButtonHandler) {
-          this._deviceBackButtonHandler.destroy();
-          this._deviceBackButtonHandler = null;
-        }
 
         this._element = null;
         this._nullElement = null;
