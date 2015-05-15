@@ -23,7 +23,7 @@ limitations under the License.
     '.page__content': 'page--*__content',
     '.page__background': 'page--*__background'
   };
-
+  var ModifierUtil = ons._internal.ModifierUtil;
   var nullToolbarElement = document.createElement('ons-toolbar');
 
   class PageElement extends ons._BaseElement {

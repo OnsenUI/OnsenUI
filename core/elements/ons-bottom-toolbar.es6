@@ -19,6 +19,7 @@ limitations under the License.
   'use strict';
 
   var scheme = {'': 'bottom-bar--*'};
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   class BottomToolbarElement extends ons._BaseElement {
 

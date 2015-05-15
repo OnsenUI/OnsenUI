@@ -19,6 +19,7 @@ limitations under the License.
   'use strict';
 
   var scheme = {'': 'list__item--*'};
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   class ListItemElement extends ons._BaseElement {
     createdCallback() {

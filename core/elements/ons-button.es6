@@ -19,6 +19,7 @@ limitations under the License.
   'use strict';
 
   var scheme = {'' : 'button--*'};
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   class ButtonElement extends ons._BaseElement {
 

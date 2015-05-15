@@ -24,6 +24,7 @@ limitations under the License.
     '.navigation-bar__center': 'navigation-bar--*__center',
     '.navigation-bar__right': 'navigation-bar--*__right'
   };
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   class ToolbarElement extends ons._BaseElement {
 
