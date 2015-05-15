@@ -52,7 +52,7 @@
           var pageView = element.inheritedData('ons-page');
 
           if (pageView && !inline) {
-            pageView.registerBottomToolbar(element);
+            pageView._element[0]._registerBottomToolbar(element[0]);
           }
         },
 

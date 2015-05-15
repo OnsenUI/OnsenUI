@@ -140,7 +140,7 @@
           pre: function(scope, element, attrs) {
             var page = element.inheritedData('ons-page');
             if (page) {
-              page.registerExtraElement(element);
+              page._element[0]._registerExtraElement(element[0]);
             }
 
             var modal = new ModalView(scope, element, attrs);

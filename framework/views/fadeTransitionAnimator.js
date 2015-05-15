@@ -40,7 +40,7 @@ limitations under the License.
 
         animit.runAll(
 
-          animit([enterPage.getPageView().getContentElement(), enterPage.getPageView().getBackgroundElement()])
+          animit([enterPage.element[0]._getContentElement(), enterPage.element[0]._getBackgroundElement()])
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -63,7 +63,7 @@ limitations under the License.
               done();
             }),
 
-          animit(enterPage.getPageView().getToolbarElement())
+          animit(enterPage.element[0]._getToolbarElement())
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -93,7 +93,7 @@ limitations under the License.
       pop: function(enterPage, leavePage, callback) {
         animit.runAll(
 
-          animit([leavePage.getPageView().getContentElement(), leavePage.getPageView().getBackgroundElement()])
+          animit([leavePage.element[0]._getContentElement(), leavePage.element[0]._getBackgroundElement()])
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -115,7 +115,7 @@ limitations under the License.
               done();
             }),
 
-          animit(leavePage.getPageView().getToolbarElement())
+          animit(leavePage.element[0]._getToolbarElement())
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',

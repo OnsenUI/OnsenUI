@@ -211,7 +211,7 @@ limitations under the License.
 
         var page = ons.findParentComponentUntil('ons-page', this._element[0]);
         if (page) {
-          this._element.css('top', window.getComputedStyle(page.getContentElement(), null).getPropertyValue('padding-top'));
+          this._element.css('top', window.getComputedStyle(page._element[0]._getContentElement(), null).getPropertyValue('padding-top'));
         }
 
         if ($onsen.shouldFillStatusBar(this._element[0])) {

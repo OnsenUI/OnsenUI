@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-(ons => {
+((ons) => {
   'use strict';
 
   ons._readyLock = new DoorLock();

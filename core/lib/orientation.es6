@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-(ons => {
+((ons) => {
   var create = () => {
     var obj = {
       // actual implementation to detect if whether current screen is portrait or not
