@@ -89,12 +89,7 @@
         return {
           pre: function(scope, element, attrs) {
             GenericView.register(scope, element, attrs, {viewKey: 'ons-toolbar'});
-
-            var pageView = element.inheritedData('ons-page');
-
-            if (pageView && !element[0].hasAttribute('inline')) {
-              pageView._element[0]._registerToolbar(element[0]);
-            }
+            element[0]._ensureNodePosition();
           },
           post: function(scope, element, attrs) {
             $onsen.fireComponentEvent(element[0], 'init');

@@ -38,6 +38,32 @@ limitations under the License.
       }
     }
 
+    attachedCallback() {
+      setImmediate(this._ensureNodePosition.bind(this));
+    }
+
+    _ensureNodePosition() {
+      if (!this.parentNode || this.hasAttribute('inline')) {
+        return;
+      }
+
+      if (this.parentNode.nodeName.toLowerCase() !== 'ons-page') {
+        var page = this;
+        for (;;) {
+          page = page.parentNode;
+
+          if (!page) {
+            return;
+          }
+
+          if (page.nodeName.toLowerCase() === 'ons-page') {
+            break;
+          }
+        }
+        page._registerToolbar(this);
+      }
+    }
+
     /**
      * @return {HTMLElement}
      */
