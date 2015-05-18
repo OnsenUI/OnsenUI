@@ -15,28 +15,29 @@ limitations under the License.
 
 */
 
-(() => {
+((ons) => {
   'use strict';
 
-  var scheme = {'': 'list--*'};
-  var ModifierUtil = ons._internal.ModifierUtil;
+  var util = ons._util = ons._util || {};
 
-  class ListElement extends ons._BaseElement {
-    createdCallback() {
-      this.classList.add('list');
-      ModifierUtil.initModifier(this, scheme);
-    }
+  /**
+   * @param {HTMLElement} element 
+   * @param {String} query dot class name or node name.
+   * @return {HTMLElement}
+   */
+  util.findChild = (element, query) => {
+    var match = query.substr(0, 1) === '.' ?
+      (node) => node.classList.contains(query.substr(1)) :
+      (node) => node.nodeName.toLowerCase() === query;
 
-    attributeChangedCallback(name, last, current) {
-      if (name === 'modifier') {
-        return ModifierUtil.onModifierChanged(last, current, this, scheme);
+    var node;
+    for (var i = 0; i < element.children.length; i++) {
+      node = element.children[i];
+      if (match(node)) {
+        return node;
       }
     }
-  }
+    return null;
+  };
 
-  if (!window.OnsList) {
-    window.OnsList = document.registerElement('ons-list', {
-      prototype: ListElement.prototype
-    });
-  }
-})();
+})(window.ons = window.ons || {});

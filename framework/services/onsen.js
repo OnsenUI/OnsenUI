@@ -26,6 +26,7 @@ limitations under the License.
   module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner) {
 
     var $onsen = createOnsenService();
+    var ModifierUtil = $onsGlobal._internal.ModifierUtil;
 
     return $onsen;
 

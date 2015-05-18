@@ -49,10 +49,7 @@
     return {
       restrict: 'E',
       link: function(scope, element, attrs) {
-        var view = new GenericView(scope, element, attrs, { // jshint ignore:line
-          viewKey: 'ons-list-item'
-        });
-
+        GenericView.register(scope, element, attrs, {viewKey: 'ons-list-item'});
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };
