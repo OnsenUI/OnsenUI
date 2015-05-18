@@ -51,7 +51,7 @@ limitations under the License.
  * @return {Boolean}
  */
 
- /**
+/**
  * @ngdoc method
  * @signature isAndroidPhone()
  * @description 
@@ -60,7 +60,7 @@ limitations under the License.
  * @return {Boolean}
  */
 
- /**
+/**
  * @ngdoc method
  * @signature isAndroidTablet()
  * @description 
