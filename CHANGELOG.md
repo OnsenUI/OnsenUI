@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v1.3.2-dev
+v1.3.3-dev
 ----
  * core: Added more customizable animations.
  * ons-sliding-menu: Fixed [#584](https://github.com/OnsenUI/OnsenUI/issues/584).
@@ -28,9 +28,13 @@ v1.3.2-dev
  * css-components: Stylus components don't rely on custom functions anymore.
  * ons-tabbar: Fixed [#661](https://github.com/OnsenUI/OnsenUI/issues/661).
 
+v1.3.2
+----
+ * ons-carousel: Fixed `postchange` event for carousel on IE11. Fixed [#646](https://github.com/OnsenUI/OnsenUI/issues/646).
+
 v1.3.1
 ----
- * ons-page: Fixed scrolling on Windows Phone. Fixed [#618](https://github.com/OnsenUI/OnsenUI/618).
+ * ons-page: Fixed scrolling on Windows Phone. Fixed [#618](https://github.com/OnsenUI/OnsenUI/issues/618).
 
 v1.3.0
 ----
