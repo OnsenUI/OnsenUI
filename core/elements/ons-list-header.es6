@@ -19,6 +19,7 @@ limitations under the License.
   'use strict';
 
   var scheme = {'': 'list__header--*'};
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   class ListHeaderElement extends ons._BaseElement {
     createdCallback() {

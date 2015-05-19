@@ -66,6 +66,20 @@ limitations under the License.
     /**
      * @return {Boolean}
      */
+    isAndroidPhone: function() {
+      return /Android/i.test(navigator.userAgent) && /Mobile/i.test(navigator.userAgent);
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isAndroidTablet: function() {
+      return /Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
+    },
+
+    /**
+     * @return {Boolean}
+     */
     isWP: function() {
       if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'wp';

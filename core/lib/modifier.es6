@@ -16,8 +16,9 @@ limitations under the License.
 */
 
 
-window.ModifierUtil = (() => {
+((ons) => {
   'use strict';
+
 
   class ModifierUtil {
     /**
@@ -117,5 +118,6 @@ window.ModifierUtil = (() => {
     }
   }
 
-  return ModifierUtil;
-})();
+  ons._internal = ons._internal || {};
+  ons._internal.ModifierUtil = ModifierUtil;
+})(window.ons = window.ons || {});

@@ -19,6 +19,7 @@ limitations under the License.
   'use strict';
 
   var scheme = {'' : 'toolbar-button--*'};
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   class ToolbarButtonElement extends ons._BaseElement {
 

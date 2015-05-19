@@ -27,8 +27,8 @@ limitations under the License.
        * @param {jqLite} element
        * @param {Object} attrs
        * @param {Object} [options]
-       * @param {String} [options.viewKey]
        * @param {Boolean} [options.directiveOnly]
+       * @param {Function} [options.onDestroy]
        * @param {String} [options.modifierTemplate]
        */
       init: function(scope, element, attrs, options) {
@@ -38,11 +38,6 @@ limitations under the License.
         this._element = element;
         this._scope = scope;
         this._attrs = attrs;
-
-        if (options.viewKey) {
-          $onsen.declareVarAttribute(attrs, this);
-          element.data(options.viewKey, this);
-        }
 
         if (options.directiveOnly) {
           if (!options.modifierTemplate) {
@@ -57,8 +52,8 @@ limitations under the License.
           self._events = undefined;
           $onsen.removeModifierMethods(self);
 
-          if (options.viewKey) {
-            element.data(options.viewKey, undefined);
+          if (options.onDestroy) {
+            options.onDestroy(self);
           }
 
           $onsen.clearComponent({
@@ -71,6 +66,35 @@ limitations under the License.
         });
       }
     });
+
+    /**
+     * @param {Object} scope
+     * @param {jqLite} element
+     * @param {Object} attrs
+     * @param {Object} options
+     * @param {String} options.viewKey
+     * @param {Boolean} [options.directiveOnly]
+     * @param {Function} [options.onDestroy]
+     * @param {String} [options.modifierTemplate]
+     */
+    GenericView.register = function(scope, element, attrs, options) {
+      var view = new GenericView(scope, element, attrs, options);
+
+      if (!options.viewKey) {
+        throw new Error('options.viewKey is required.');
+      }
+
+      $onsen.declareVarAttribute(attrs, view);
+      element.data(options.viewKey, view);
+
+      var destroy = options.onDestroy || angular.noop;
+      options.onDestroy = function(view) {
+        destroy(view);
+        element.data(options.viewKey, null);
+      };
+
+      return view;
+    };
 
     MicroEvent.mixin(GenericView);
 
