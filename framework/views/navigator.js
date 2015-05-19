@@ -478,6 +478,7 @@ limitations under the License.
        * @param {Object} [options]
        * @param {String} [options.animation]
        * @param {Object} [options.animationOptions]
+       * @param {Boolean} [options.refresh]
        * @param {Function} [options.onTransitionEnd]
        * @param {Boolean} [options.cancelIfRunning]
        */
@@ -496,13 +497,46 @@ limitations under the License.
           if (this._emitPrePopEvent()) {
             return;
           }
-          this._popPage(options);
+
+          var unlock = this._doorLock.lock();
+
+          if (options.refresh) {
+            var index = this.pages.length - 2;
+
+            $onsen.getPageHTMLAsync(this.pages[index].page).then(function(templateHTML) {
+
+              var pageScope = this._createPageScope();
+              var object = this._createPageElementAndLinkFunction(templateHTML, pageScope);
+              var element = object.element;
+              var link = object.link;
+
+              element = this._normalizePageElement(element);
+
+              var pageObject = this._createPageObject(this.pages[index].page, element, pageScope, options);
+
+              this._element[0].insertBefore(element[0], this.pages[index] ? this.pages[index].element[0] : null);
+              this.pages.splice(index, 0, pageObject);
+              link();
+
+              this.pages[index + 1].destroy();
+
+              this._popPage(options, unlock);
+
+            }.bind(this), function() {
+              unlock();
+              throw new Error('Page is not found');
+            });
+
+          } else {
+
+            this._popPage(options, unlock);
+
+          }
+
         }.bind(this));
       },
 
-      _popPage: function(options) {
-        var unlock = this._doorLock.lock();
-
+      _popPage: function(options, unlock) {
         var leavePage = this.pages.pop();
 
         if (this.pages[this.pages.length - 1]) {
