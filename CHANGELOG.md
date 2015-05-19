@@ -26,6 +26,7 @@ v1.3.2-dev
  * ons-loading-placeholder: Added `ons.resolveLoadingPlaceholder()` to delay resolving the placeholder.
  * ons-page: [BC Break] Removed undocumented several methods on `ons-page` component.
  * css-components: Stylus components don't rely on custom functions anymore.
+ * ons-tabbar: Fixed [#661](https://github.com/OnsenUI/OnsenUI/issues/661).
 
 v1.3.1
 ----
