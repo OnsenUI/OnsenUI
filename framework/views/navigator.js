@@ -503,6 +503,10 @@ limitations under the License.
           if (options.refresh) {
             var index = this.pages.length - 2;
 
+            if (!this.pages[index].page) {
+              throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
+            }
+
             $onsen.getPageHTMLAsync(this.pages[index].page).then(function(templateHTML) {
 
               var pageScope = this._createPageScope();
