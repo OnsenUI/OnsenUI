@@ -36,9 +36,10 @@ limitations under the License.
         animators: ModalElement._animatorDict,
         baseClass: ModalAnimator,
         baseClassName: 'ModalAnimator',
-        defaultAnimation: undefined, //attrs.animation,
-        defaultAnimationOptions: {}//$parse(attrs.animationOptions)()
+        defaultAnimation: this.getAttribute('animation'),
+        defaultAnimationOptions: JSON.parse(this.getAttribute('animation-options')) || {}
       });
+
       this._compile();
       ModifierUtil.initModifier(this, scheme);
 

@@ -27,9 +27,9 @@ limitations under the License.
   class FadeModalAnimator extends ModalAnimator {
 
     constructor(options) {
-      this.timing = 'ease-in-out';
-      this.duration = 0.3;
-      this.delay = 0;
+      options.timing = options.timing || 'linear';
+      options.duration = options.duration || '0.3';
+      options.delay = options.delay || 0;
 
       super(options);
     }
