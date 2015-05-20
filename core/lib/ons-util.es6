@@ -47,10 +47,12 @@ limitations under the License.
    */
   util.extend = (dst, ...args) => {
     for (var i = 0; i < args.length; i++) {
-      var keys = Object.keys(args[i]);
-      for (var j = 0; j < keys.length; j++) {
-        var key = keys[j];
-        dst[key] = args[i][key];
+      if (args[i]) {
+        var keys = Object.keys(args[i]);
+        for (var j = 0; j < keys.length; j++) {
+          var key = keys[j];
+          dst[key] = args[i][key];
+        }
       }
     }
 
