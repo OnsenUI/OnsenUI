@@ -508,7 +508,6 @@ limitations under the License.
             }
 
             $onsen.getPageHTMLAsync(this.pages[index].page).then(function(templateHTML) {
-
               var pageScope = this._createPageScope();
               var object = this._createPageElementAndLinkFunction(templateHTML, pageScope);
               var element = object.element;
