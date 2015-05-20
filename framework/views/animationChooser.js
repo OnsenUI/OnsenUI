@@ -15,4 +15,4 @@ limitations under the License.
 
 */
 
-angular.module('onsen').value('AnimationChooser', ons._internal.AnimationChooser);
+angular.module('onsen').value('AnimationChooser', ons._internal.AnimatorFactory);

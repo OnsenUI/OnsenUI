@@ -23,7 +23,7 @@ limitations under the License.
     'modal__content': 'modal--*__content'
   };
 
-  var AnimationChooser = ons._internal.AnimationChooser;
+  var AnimatorFactory = ons._internal.AnimatorFactory;
   var ModalAnimator = ons._internal.ModalAnimator;
   var FadeModalAnimator = ons._internal.FadeModalAnimator;
   var ModifierUtil = ons._internal.ModifierUtil;
@@ -32,12 +32,12 @@ limitations under the License.
 
     createdCallback() {
       this._doorLock = new DoorLock();
-      this._animationChooser = new AnimationChooser({
+      this._animatorFactory = new AnimatorFactory({
         animators: ModalElement._animatorDict,
         baseClass: ModalAnimator,
         baseClassName: 'ModalAnimator',
         defaultAnimation: this.getAttribute('animation'),
-        defaultAnimationOptions: JSON.parse(this.getAttribute('animation-options')) || {}
+        defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
       });
 
       this._compile();
@@ -128,7 +128,7 @@ limitations under the License.
 
       this._doorLock.waitUnlock(function() {
         var unlock = this._doorLock.lock(),
-          animator = this._animationChooser.newAnimator(options);
+          animator = this._animatorFactory.newAnimator(options);
 
         this.style.display = 'table';
         animator.show(this, function() {
@@ -169,7 +169,7 @@ limitations under the License.
 
       this._doorLock.waitUnlock(function() {
         var unlock = this._doorLock.lock(),
-          animator = this._animationChooser.newAnimator(options);
+          animator = this._animatorFactory.newAnimator(options);
 
         animator.hide(this, function() {
           this.style.display = 'none';

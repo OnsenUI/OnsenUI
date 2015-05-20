@@ -18,7 +18,7 @@ limitations under the License.
 ((ons) => {
   'use strict';
 
-  class AnimationChooser {
+  class AnimatorFactory {
 
     /**
      * @param {Object} opts
@@ -38,6 +38,25 @@ limitations under the License.
       if (!this._animators[this._animation]) {
         throw new Error('No such animation: ' + this._animation);
       }
+    }
+
+    /**
+     * @param {String} jsonString
+     * @return {Object/null}
+     */
+    static parseJSONSafely(jsonString) {
+      try {
+        return JSON.parse(jsonString);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    /**
+     * @param {Object} options
+     */
+    setAnimationOptions(options) {
+      this._animationOptions = options;
     }
 
     /**
@@ -67,7 +86,7 @@ limitations under the License.
       } else {
         Animator = Animator || this._animators[this._animation];
 
-        var animationOpts = angular.extend(
+        var animationOpts = ons._util.extend(
           {},
           this._animationOptions,
           options.animationOptions || {},
@@ -86,6 +105,6 @@ limitations under the License.
   }
 
   ons._internal = ons._internal || {};
-  ons._internal.AnimationChooser = AnimationChooser;
+  ons._internal.AnimatorFactory = AnimatorFactory;
 
 })(window.ons = window.ons || {});
