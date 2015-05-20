@@ -262,7 +262,7 @@
  *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
  * @param {Boolean} [options.refresh]
  *   [en]The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
- *   [ja][/ja]
+ *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
  * @param {Function} [options.onTransitionEnd]
  *   [en]Function that is called when the transition has ended.[/en]
  *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
