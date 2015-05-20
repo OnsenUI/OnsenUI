@@ -133,7 +133,7 @@
 
       link: {
         pre: function(scope, element, attrs) {
-          var modal = new ModalView(scope, element);
+          var modal = new ModalView(scope, element, attrs);
           $onsen.addModifierMethodsForCustomElements(modal, element);
 
           $onsen.declareVarAttribute(attrs, modal);

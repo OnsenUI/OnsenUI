@@ -42,8 +42,6 @@ limitations under the License.
 
       this._compile();
       ModifierUtil.initModifier(this, scheme);
-
-      this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
     }
 
     getDeviceBackButtonHandler() {
@@ -56,6 +54,7 @@ limitations under the License.
       }
 
       this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, callback);
+      this._onDeviceBackButton = callback;
     }
 
     _onDeviceBackButton() {
@@ -80,11 +79,14 @@ limitations under the License.
     }
 
     detachedCallback() {
-
+      if (this._deviceBackButtonHandler) {
+        this._deviceBackButtonHandler.destroy();
+      }
     }
 
     atachedCallback() {
       setImmediate(this._ensureNodePosition.bind(this));
+      this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
     }
 
     _ensureNodePosition() {

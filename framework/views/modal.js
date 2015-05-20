@@ -18,20 +18,18 @@ limitations under the License.
 (function() {
   'use strict;';
 
-  angular.module('onsen').factory('ModalView', function($onsen) {
+  angular.module('onsen').factory('ModalView', function($onsen, $parse) {
 
     var ModalView = Class.extend({
       _element: undefined,
       _scope: undefined,
 
-      /**
-       * @param {Object} scope
-       * @param {jqLite} element
-       */
-      init: function(scope, element) {
+      init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
         this._scope.$on('$destroy', this._destroy.bind(this));
+
+        element[0]._animatorFactory.setAnimationOptions($parse(attrs.animationOptions)());
       },
 
       getDeviceBackButtonHandler: function() {
@@ -57,7 +55,6 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy', {page: this});
 
-        this._deviceBackButtonHandler.destroy();
         this._events = this._element = this._scope = null;
       }
     });
