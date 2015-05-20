@@ -46,11 +46,11 @@ limitations under the License.
    * @returns {Object} Reference to `dst`.
    */
   util.extend = (dst, ...args) => {
-    for (var i = 1; i < args.length; i++) {
+    for (var i = 0; i < args.length; i++) {
       var keys = Object.keys(args[i]);
       for (var j = 0; j < keys.length; j++) {
         var key = keys[j];
-        dst[key] = argments[i][key];
+        dst[key] = args[i][key];
       }
     }
 
