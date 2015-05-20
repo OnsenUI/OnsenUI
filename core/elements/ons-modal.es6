@@ -182,9 +182,8 @@ limitations under the License.
     }
 
     attributeChangedCallback(name, last, current) {
-
-      if (name === 'width') {
-        this._updateWidth();
+      if (name === 'modifier') {
+        return ModifierUtil.onModifierChanged(last, current, this, scheme);
       }
     }
   }
