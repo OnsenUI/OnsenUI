@@ -118,12 +118,10 @@
 (function() {
   'use strict';
 
-  var module = angular.module('onsen');
-
   /**
    * Modal directive.
    */
-  module.directive('onsModal', function($onsen, ModalView) {
+  angular.module('onsen').directive('onsModal', function($onsen, ModalView) {
     return {
       restrict: 'E',
       replace: false,
@@ -133,56 +131,27 @@
       scope: false,
       transclude: false,
 
-      compile: function(element, attrs) {
-        compile(element, attrs);
+      link: {
+        pre: function(scope, element, attrs) {
+          var modal = new ModalView(scope, element);
+          $onsen.addModifierMethodsForCustomElements(modal, element);
 
-        return {
-          pre: function(scope, element, attrs) {
-            var page = element.inheritedData('ons-page');
-            if (page) {
-              page._element[0]._registerExtraElement(element[0]);
-            }
+          $onsen.declareVarAttribute(attrs, modal);
+          element.data('ons-modal', modal);
 
-            var modal = new ModalView(scope, element, attrs);
+          element[0]._ensureNodePosition();
 
-            $onsen.addModifierMethods(modal, 'modal--*', element);
-            $onsen.addModifierMethods(modal, 'modal--*__content', element.children());
+          scope.$on('$destroy', function() {
+            $onsen.removeModifierMethods(modal);
+            element.data('ons-modal', undefined);
+          });
+        },
 
-            $onsen.declareVarAttribute(attrs, modal);
-
-            element.data('ons-modal', modal);
-
-            scope.$on('$destroy', function() {
-              modal._events = undefined;
-              $onsen.removeModifierMethods(modal);
-              element.data('ons-modal', undefined);
-            });
-          },
-
-          post: function(scope, element) {
-            $onsen.fireComponentEvent(element[0], 'init');
-          }
-        };
+        post: function(scope, element) {
+          $onsen.fireComponentEvent(element[0], 'init');
+        }
       }
     };
-
-    function compile(element, attrs) {
-      var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
-      var html = element[0].innerHTML;
-      element[0].innerHTML = '';
-
-      var wrapper = angular.element('<div></div>');
-      wrapper.addClass('modal__content');
-      wrapper.addClass(modifierTemplater('modal--*__content'));
-
-      element.css('display', 'none');
-      element.addClass('modal');
-      element.addClass(modifierTemplater('modal--*'));
-
-      wrapper[0].innerHTML = html;
-      element.append(wrapper);
-    }
   });
 
 })();
