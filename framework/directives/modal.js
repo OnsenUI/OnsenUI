@@ -144,6 +144,7 @@
           scope.$on('$destroy', function() {
             $onsen.removeModifierMethods(modal);
             element.data('ons-modal', undefined);
+            modal = element = scope = attrs = null;
           });
         },
 
