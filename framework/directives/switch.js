@@ -151,7 +151,7 @@
 (function(){
   'use strict';
 
-  angular.module('onsen').directive('onsSwitch', function($onsen, $parse, SwitchView) {
+  angular.module('onsen').directive('onsSwitch', function($onsen, SwitchView) {
     return {
       restrict: 'E',
       replace: false,
@@ -164,21 +164,6 @@
 
         var switchView = new SwitchView(element, scope, attrs);
         $onsen.addModifierMethodsForCustomElements(switchView, element);
-
-        if (attrs.ngModel) {
-          var set = $parse(attrs.ngModel).assign;
-
-          scope.$parent.$watch(attrs.ngModel, function(value) {
-            scope.model = value;
-          });
-
-          scope.$watch('model', function(to, from) {
-            set(scope.$parent, to);
-            if (to !== from) {
-              scope.$eval(attrs.ngChange);
-            }
-          });
-        }
 
         $onsen.declareVarAttribute(attrs, switchView);
         element.data('ons-switch', switchView);
