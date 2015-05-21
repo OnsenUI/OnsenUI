@@ -33,14 +33,6 @@ limitations under the License.
         this._checkbox = angular.element(element[0].querySelector('input[type=checkbox]'));
         this._scope = scope;
 
-        attrs.$observe('disabled', function() {
-          if (!!element.attr('disabled')) {
-            this._checkbox.attr('disabled', 'disabled');
-          } else {
-            this._checkbox.removeAttr('disabled');
-          }
-        }.bind(this));
-
         this._checkbox.on('change', function() {
           this.emit('change', {'switch': this, value: this._checkbox[0].checked, isInteractive: true});
         }.bind(this));
@@ -50,14 +42,14 @@ limitations under the License.
        * @return {Boolean}
        */
       isChecked: function() {
-        return this._checkbox[0].checked;
+        return this._element[0].isChecked();
       },
 
       /**
        * @param {Boolean}
        */
       setChecked: function(isChecked) {
-        isChecked = !!isChecked;
+        return this._element[0].setChecked(isChecked);
 
         if (this._checkbox[0].checked != isChecked) {
           this._scope.model = isChecked;

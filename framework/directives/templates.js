@@ -79,20 +79,6 @@ try { module = angular.module('templates-main'); }
 catch(err) { module = angular.module('templates-main', []); }
 module.run(['$templateCache', function($templateCache) {
   'use strict';
-  $templateCache.put('templates/switch.tpl',
-    '<label class="switch {{modifierTemplater(\'switch--*\')}}">\n' +
-    '  <input type="checkbox" class="switch__input {{modifierTemplater(\'switch--*__input\')}}" ng-model="model">\n' +
-    '  <div class="switch__toggle {{modifierTemplater(\'switch--*__toggle\')}}"></div>\n' +
-    '</label>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try { module = angular.module('templates-main'); }
-catch(err) { module = angular.module('templates-main', []); }
-module.run(['$templateCache', function($templateCache) {
-  'use strict';
   $templateCache.put('templates/tab.tpl',
     '<input type="radio" name="tab-bar-{{tabbarId}}" style="display: none">\n' +
     '<button class="tab-bar__button tab-bar-inner {{tabbarModifierTemplater(\'tab-bar--*__button\')}} {{modifierTemplater(\'tab-bar__button--*\')}}" ng-click="tryToChange()">\n' +
