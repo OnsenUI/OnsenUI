@@ -23,7 +23,7 @@ limitations under the License.
   /**
    * @param {HTMLElement} element 
    * @param {String} query dot class name or node name.
-   * @return {HTMLElement}
+   * @return {HTMLElement/null}
    */
   util.findChild = (element, query) => {
     var match = query.substr(0, 1) === '.' ?
@@ -38,6 +38,27 @@ limitations under the License.
       }
     }
     return null;
+  };
+
+  /**
+   * @param {HTMLElement} element 
+   * @param {String} query dot class name or node name.
+   * @return {HTMLElement/null}
+   */
+  util.findParent = (element, query) => {
+    var match = query.substr(0, 1) === '.' ?
+      (node) => node.classList.contains(query.substr(1)) :
+      (node) => node.nodeName.toLowerCase() === query;
+
+    var parent = element.parentNode;
+    for (;;) {
+      if (!parent) {
+        return null;
+      }
+      if (match(parent)) {
+        return parent;
+      }
+    }
   };
 
   /*
