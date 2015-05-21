@@ -76,9 +76,9 @@ limitations under the License.
       for (let selector in scheme) {
         if (scheme.hasOwnProperty(selector)) {
           let targetElements = selector === '' ? [element] : element.querySelectorAll(selector);
-          targetElements.forEach(targetElement => {
-            ModifierUtil.applyDiffToClassList(diff, targetElement.classList, scheme[selector]);
-          });
+          for (let i = 0; i < targetElements.length; i++) {
+            ModifierUtil.applyDiffToClassList(diff, targetElements[i].classList, scheme[selector]);
+          }
         }
       }
     }

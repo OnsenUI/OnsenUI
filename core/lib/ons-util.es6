@@ -40,4 +40,23 @@ limitations under the License.
     return null;
   };
 
+  /*
+   * @param {Object} dst Destination object.
+   * @param {...Object} src Source object(s).
+   * @returns {Object} Reference to `dst`.
+   */
+  util.extend = (dst, ...args) => {
+    for (var i = 0; i < args.length; i++) {
+      if (args[i]) {
+        var keys = Object.keys(args[i]);
+        for (var j = 0; j < keys.length; j++) {
+          var key = keys[j];
+          dst[key] = args[i][key];
+        }
+      }
+    }
+
+    return dst;
+  };
+
 })(window.ons = window.ons || {});

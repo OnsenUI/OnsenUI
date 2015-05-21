@@ -150,78 +150,37 @@
 
 (function(){
   'use strict';
-  var module = angular.module('onsen');
 
-  module.directive('onsSwitch', function($onsen, $parse, SwitchView) {
+  angular.module('onsen').directive('onsSwitch', function($onsen, SwitchView) {
     return {
       restrict: 'E',
       replace: false,
-
-      transclude: false,
       scope: true,
 
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/switch.tpl',
-      compile: function(element) {
-        return function(scope, element, attrs) {
-          if (attrs.ngController) {
-            throw new Error('This element can\'t accept ng-controller directive.');
-          }
+      link: function(scope, element, attrs) {
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
 
-          var switchView = new SwitchView(element, scope, attrs);
-          var checkbox = angular.element(element[0].querySelector('input[type=checkbox]'));
+        var switchView = new SwitchView(element, scope, attrs);
+        $onsen.addModifierMethodsForCustomElements(switchView, element);
 
-          scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+        $onsen.declareVarAttribute(attrs, switchView);
+        element.data('ons-switch', switchView);
 
-          var label = element.children(),
-              input = angular.element(label.children()[0]),
-              toggle = angular.element(label.children()[1]);
-
-          $onsen.addModifierMethods(switchView, 'switch--*', label);
-          $onsen.addModifierMethods(switchView, 'switch--*__input', input);
-          $onsen.addModifierMethods(switchView, 'switch--*__toggle', toggle);
-
-          attrs.$observe('checked', function(checked) {
-            scope.model = !!element.attr('checked');
+        $onsen.cleaner.onDestroy(scope, function() {
+          switchView._events = undefined;
+          $onsen.removeModifierMethods(switchView);
+          element.data('ons-switch', undefined);
+          $onsen.clearComponent({
+            element : element,
+            scope : scope,
+            attrs : attrs
           });
+          checkbox = element = attrs = scope = null;
+        });
 
-          attrs.$observe('name', function(name) {
-            if (!!element.attr('name')) {
-              checkbox.attr('name', name);
-            }
-          });
-
-          if (attrs.ngModel) {
-            var set = $parse(attrs.ngModel).assign;
-
-            scope.$parent.$watch(attrs.ngModel, function(value) {
-              scope.model = value;
-            });
-
-            scope.$watch('model', function(to, from) {
-              set(scope.$parent, to);
-              if (to !== from) {
-                scope.$eval(attrs.ngChange);
-              }
-            });
-          }
-
-          $onsen.declareVarAttribute(attrs, switchView);
-          element.data('ons-switch', switchView);
-
-          $onsen.cleaner.onDestroy(scope, function() {
-            switchView._events = undefined;
-            $onsen.removeModifierMethods(switchView);
-            element.data('ons-switch', undefined);
-            $onsen.clearComponent({
-              element : element,
-              scope : scope,
-              attrs : attrs
-            });
-            checkbox = element = attrs = scope = null;
-          });
-
-          $onsen.fireComponentEvent(element[0], 'init');
-        };
+        $onsen.fireComponentEvent(element[0], 'init');
       }
     };
   });

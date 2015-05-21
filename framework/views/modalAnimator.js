@@ -15,39 +15,4 @@ limitations under the License.
 
 */
 
-(function() {
-  'use strict;';
-
-  var module = angular.module('onsen');
-
-  module.factory('ModalAnimator', function() {
-    var ModalAnimator = Class.extend({
-
-      delay: 0,
-
-      /**
-       * @param {Object} options
-       * @param {String} options.timing
-       * @param {Number} options.duration
-       * @param {Number} options.delay
-       */
-      init: function(options) {
-        options = options || {};
-
-        this.timing = options.timing || this.timing;
-        this.duration = options.duration !== undefined ? options.duration : this.duration;
-        this.delay = options.delay !== undefined ? options.delay : this.delay;
-      },
-
-      show: function(modal, callback) {
-        callback();
-      },
-
-      hide: function(modal, callback) {
-        callback();
-      }
-    });
-
-    return ModalAnimator;
-  });
-})();
+angular.module('onsen').value('ModalAnimator', ons._internal.ModalAnimator);

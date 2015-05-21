@@ -18,151 +18,54 @@ limitations under the License.
 (function() {
   'use strict;';
 
-  var module = angular.module('onsen');
-
-  module.factory('ModalView', function($onsen, $rootScope, $parse, AnimationChooser, ModalAnimator, FadeModalAnimator) {
+  angular.module('onsen').factory('ModalView', function($onsen, $parse) {
 
     var ModalView = Class.extend({
       _element: undefined,
       _scope: undefined,
 
-      /**
-       * @param {Object} scope
-       * @param {jqLite} element
-       * @param {Object} attrs
-       */
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
-
-        var pageView = $rootScope.ons.findParentComponentUntil('ons-page', this._element);
-        if (pageView) {
-          this._pageContent = angular.element(pageView._element[0].querySelector('.page__content'));
-        }
-
         this._scope.$on('$destroy', this._destroy.bind(this));
-        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
-        this._doorLock = new DoorLock();
 
-        this._animationChooser = new AnimationChooser({
-          animators: ModalView._animatorDict,
-          baseClass: ModalAnimator,
-          baseClassName: 'ModalAnimator',
-          defaultAnimation: attrs.animation,
-          defaultAnimationOptions: $parse(attrs.animationOptions)()
-        });
-
-        this.hide({animation: 'none'});
+        element[0]._animatorFactory.setAnimationOptions($parse(attrs.animationOptions)());
       },
 
       getDeviceBackButtonHandler: function() {
-        return this._deviceBackButtonHandler;
+        return this._element[0].getDeviceBackButtonHandler();
       },
 
-      /**
-       * Show modal view.
-       *
-       * @param {Object} [options]
-       * @param {String} [options.animation] animation type
-       * @param {Object} [options.animationOptions] animation options
-       * @param {Function} [options.callback] callback after modal is shown
-       */
+      setDeviceBackButtonHandler: function(callback) {
+        this._element[0].setDeviceBackButtonHandler(callback);
+      },
+
       show: function(options) {
-        options = options || {};
-
-        var callback = options.callback || function() {};
-
-        this._doorLock.waitUnlock(function() {
-          var unlock = this._doorLock.lock(),
-            animator = this._animationChooser.newAnimator(options);
-
-          this._element.css('display', 'table');
-          animator.show(this, function() {
-            unlock();
-            callback();
-          });
-        }.bind(this));
+        return this._element[0].show(options);
       },
 
-      _isVisible: function() {
-        return this._element[0].clientWidth > 0;
-      },
-
-      _onDeviceBackButton: function() {
-        // Do nothing and stop device-backbutton handler chain.
-        return;
-      },
-
-      /**
-       * Hide modal view.
-       *
-       * @param {Object} [options]
-       * @param {String} [options.animation] animation type
-       * @param {Object} [options.animationOptions] animation options
-       * @param {Function} [options.callback] callback after modal is hidden
-       */
       hide: function(options) {
-        options = options || {};
-
-        var callback = options.callback || function() {};
-
-        this._doorLock.waitUnlock(function() {
-          var unlock = this._doorLock.lock(),
-            animator = this._animationChooser.newAnimator(options);
-
-          animator.hide(this, function() {
-            this._element.css('display', 'none');
-            unlock();
-            callback();
-          }.bind(this));
-        }.bind(this));
+        return this._element[0].hide(options);
       },
 
-      /**
-       * Toggle modal view.
-       *
-       * @param {Object} [options]
-       * @param {String} [options.animation] animation type
-       * @param {Object} [options.animationOptions] animation options
-       * @param {Function} [options.callback] callback after modal is toggled
-       */
-      toggle: function() {
-        if (this._isVisible()) {
-          return this.hide.apply(this, arguments);
-        } else {
-          return this.show.apply(this, arguments);
-        }
+      toggle: function(options) {
+        return this._element[0].toggle(options);
       },
 
       _destroy: function() {
         this.emit('destroy', {page: this});
 
-        this._deviceBackButtonHandler.destroy();
-
-        this._element = this._scope = null;
+        this._events = this._element = this._scope = null;
       }
     });
 
-    ModalView._animatorDict = {
-      'default': ModalAnimator,
-      'fade': FadeModalAnimator,
-      'none': ModalAnimator
-    };
-
-    /**
-     * @param {String} name
-     * @param {Function} Animator
-     */
     ModalView.registerAnimator = function(name, Animator) {
-      if (!(Animator.prototype instanceof ModalAnimator)) {
-        throw new Error('"Animator" param must inherit DialogAnimator');
-      }
-      this._animatorDict[name] = Animator;
+      return window.OnsModalElement.registerAnimator(name, Animator);
     };
 
     MicroEvent.mixin(ModalView);
 
     return ModalView;
   });
-})();
 
+})();
