@@ -12,25 +12,28 @@
     </script>
   </head>
   <body>
-    <ons-navigator title="Navigator" var="myNavigator" ng-init="pops = 0; pushes = 0" ons-postpop="pops = pops + 1" ons-postpush="pushes = pushes + 1">
-      <ons-page id="page1">
+    <ons-navigator page="page1.html" title="Navigator" var="myNavigator" ng-init="pops = 0; pushes = 0" ons-postpop="pops = pops + 1" ons-postpush="pushes = pushes + 1"></ons-navigator>
+
+    <ons-template id="page1.html">
+      <ons-page id="page1" ng-init="status = 'init';">
         <div style="text-align: center;">
           <p>Page 1</p>
           <br>
-          <p>Pops: <span id="pops">{{ pops }}</span>, pushes: <span id="pushes">{{ pushes }}</span></p>
-          <ons-button id="btn1" onclick="myNavigator.pushPage('page2.html')">Push</ons-button>
+          <p>Pops: <span id="pops">{{ pops }}</span>, pushes: <span id="pushes">{{ pushes }}</span>, status: <span id="status">{{ status }}</p>
+          <ons-button id="btn1" ng-click="status = 'modified'; myNavigator.pushPage('page2.html')">Push</ons-button>
         </div>
       </ons-page>
-    </ons-navigator>
+    </ons-template>
 
     <ons-template id="page2.html">
       <ons-page id="page2">
         <div style="text-align: center;">
-          <p>Page 3</p>
+          <p>Page 2</p>
           <br>
-          <ons-button id="btn2" onclick="myNavigator.popPage()">Pop Page</ons-button>
-          <ons-button id="btn3" onclick="myNavigator.replacePage('page3.html')">Replace Page</ons-button>
-          <ons-button id="btn4-device-backbutton" onclick="ons._deviceBackButtonDispatcher.fireDeviceBackButtonEvent()">Fire 'backbutton' event.</ons-button>
+          <ons-button id="btn2" ng-click="myNavigator.popPage()">Pop Page</ons-button>
+          <ons-button id="btn3" ng-click="myNavigator.replacePage('page3.html')">Replace Page</ons-button>
+          <ons-button id="btn4-device-backbutton" ng-click="ons._deviceBackButtonDispatcher.fireDeviceBackButtonEvent()">Fire 'backbutton' event.</ons-button>
+          <ons-button id="btn5" ng-click="myNavigator.popPage({'refresh': true})">Pop and Refresh Page</ons-button>
         </div>
       </ons-page>
     </ons-template>
@@ -40,7 +43,7 @@
         <div style="text-align: center;">
           <p>Page 3</p>
           <br>
-          <ons-button id="btn4" onclick="myNavigator.popPage()">Pop Page</ons-button>
+          <ons-button id="btn4" ng-click="myNavigator.popPage()">Pop Page</ons-button>
         </div>
       </ons-page>
     </ons-template>
