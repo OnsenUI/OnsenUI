@@ -61,4 +61,75 @@ limitations under the License.
     return false;
   };
 
+  ons._internal.templateStore = {
+    _storage: {},
+
+    /**
+     * @param {String} key
+     * @return {String/null} template
+     */
+    get(key) {
+      return ons._internal.templateStore._storage[key] || null;
+    },
+
+    /**
+     * @param {String} key
+     * @param {String} template
+     */
+    set(key, template) {
+      ons._internal.templateStore._storage[key] = template;
+    }
+  };
+
+  document.addEventListener('templateLoaded', function(e) {
+    ons._internal.templateStore.set(e.templateId, e.template);
+  }, false);
+
+  document.addEventListener('DOMContentLoaded', function() {
+    register('script[type="text/ons-template"]');
+    register('script[type="text/template"]');
+    register('script[type="text/ng-template"]');
+
+    function register(query) {
+      var templates = document.querySelectorAll(query);
+      for (var i = 0; i < templates.length; i++) {
+        ons._internal.templateStore.set(templates[i].getAttribute('id'), templates[i].textContent);
+      }
+    }
+  }, false);
+
+  /**
+   * @param {String} page
+   * @param {Function} callback
+   */
+  ons._internal.getPageHTMLAsync = function(page, callback) {
+    var cache = ons._internal.templateStore.get(page);
+
+    if (cache) {
+      var html = typeof cache === 'string' ? cache : cache[1];
+      callback(null, normalizePageHTML(html), null);
+    } else {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', page, true);
+      xhr.onload = function(response) {
+        var html = xhr.responseText;
+        callback(null, normalizePageHTML(html), xhr);
+      };
+      xhr.onerror = function() {
+        callback(xhr.status, null, xhr);
+      };
+      xhr.send(null);
+    }
+
+    function normalizePageHTML(html) {
+      html = ('' + html).trim();
+
+      if (!html.match(/^<(ons-page|ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
+        html = '<ons-page>' + html + '</ons-page>';
+      }
+      
+      return html;
+    }
+  };
+
 })(window.ons = window.ons || {});
