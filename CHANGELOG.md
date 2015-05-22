@@ -28,6 +28,7 @@ v1.3.3-dev
  * css-components: Stylus components don't rely on custom functions anymore.
  * ons-tabbar: Fixed [#661](https://github.com/OnsenUI/OnsenUI/issues/661).
  * ons-navigator: Added `options.refresh` parameter for `popPage()`.
+ * ons-carousel: Carousel will now apply the specified padding to the items.
 
 v1.3.2
 ----
