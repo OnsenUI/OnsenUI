@@ -284,15 +284,14 @@
 
 (function() {
   'use strict';
-  var module = angular.module('onsen');
 
-  module.directive('onsTabbar', function($onsen, $compile, TabbarView) {
+  angular.module('onsen').directive('onsTabbar', function($onsen, $compile, TabbarView) {
     return {
       restrict: 'E',
+
       replace: false,
-      transclude: true,
       scope: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
+
       link: function(scope, element, attrs, controller, transclude) {
 
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
@@ -304,17 +303,13 @@
         });
 
         var tabbarView = new TabbarView(scope, element, attrs);
-        $onsen.addModifierMethods(tabbarView, 'tab-bar--*', angular.element(element.children()[1]));
+        $onsen.addModifierMethodsForCustomElements(tabbarView, element);
         $onsen.registerEventHandlers(tabbarView, 'reactive prechange postchange destroy');
 
-        scope.tabbarId = tabbarView._tabbarId;
+        scope.tabbarId = element[0].getTabbarId();
 
         element.data('ons-tabbar', tabbarView);
         $onsen.declareVarAttribute(attrs, tabbarView);
-
-        transclude(scope, function(cloned) {
-          angular.element(element[0].querySelector('.ons-tabbar-inner')).append(cloned);
-        });
 
         scope.$on('$destroy', function() {
           tabbarView._events = undefined;

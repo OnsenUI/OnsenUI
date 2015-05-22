@@ -171,8 +171,6 @@ limitations under the License.
 
   module.factory('TabbarView', function($onsen, $compile, $parse, AnimationChooser, TabbarAnimator, TabbarNoneAnimator, TabbarFadeAnimator, TabbarSlideAnimator) {
     var TabbarView = Class.extend({
-      _tabbarId: undefined,
-
       _tabItems: undefined,
 
       init: function(scope, element, attrs) {
@@ -180,17 +178,8 @@ limitations under the License.
         this._element = element;
         this._attrs = attrs;
 
-        this._tabbarId = Date.now();
-        this._tabItems = [];
-
-        this._contentElement = angular.element(element[0].querySelector('.ons-tab-bar__content'));
-        this._tabbarElement = angular.element(element[0].querySelector('.ons-tab-bar__footer'));
-
         this._scope.$on('$destroy', this._destroy.bind(this));
 
-        if (this._hasTopTabbar()) {
-          this._prepareForTopTabbar();
-        }
 
         this._animationChooser = new AnimationChooser({
           animators: TabbarView._animatorDict,
@@ -199,33 +188,6 @@ limitations under the License.
           defaultAnimation: attrs.animation,
           defaultAnimationOptions: $parse(attrs.animationOptions)()
         });
-      },
-
-      _prepareForTopTabbar: function() {
-        this._contentElement.attr('no-status-bar-fill', '');
-
-        setImmediate(function() {
-          this._contentElement.addClass('tab-bar--top__content');
-          this._tabbarElement.addClass('tab-bar--top');
-        }.bind(this));
-
-        var page = ons.findParentComponentUntil('ons-page', this._element[0]);
-        if (page) {
-          this._element.css('top', window.getComputedStyle(page._element[0]._getContentElement(), null).getPropertyValue('padding-top'));
-        }
-
-        if ($onsen.shouldFillStatusBar(this._element[0])) {
-          // Adjustments for IOS7
-          var fill = angular.element(document.createElement('div'));
-          fill.addClass('tab-bar__status-bar-fill');
-          fill.css({width: '0px', height: '0px'});
-
-          this._element.prepend(fill);
-        }
-      },
-
-      _hasTopTabbar: function() {
-        return this._attrs.position === 'top';
       },
 
       /**
@@ -324,46 +286,14 @@ limitations under the License.
        * @param {Boolean} visible
        */
       setTabbarVisibility: function(visible) {
-        this._scope.hideTabs = !visible;
-        this._onTabbarVisibilityChanged();
-      },
-
-      _onTabbarVisibilityChanged: function() {
-        if (this._hasTopTabbar()) {
-          if (this._scope.hideTabs) {
-            this._contentElement.css('top', '0px');
-          } else {
-            this._contentElement.css('top', '');
-          }
-        } else {
-          if (this._scope.hideTabs) {
-            this._contentElement.css('bottom', '0px');
-          } else {
-            this._contentElement.css('bottom', '');
-          }
-        }
-      },
-
-      /**
-       * @param {Object} tabItem
-       */
-      addTabItem: function(tabItem) {
-        this._tabItems.push(tabItem);
+        this._element[0].setTabbarVisibility(visible);
       },
 
       /**
        * @return {Number} When active tab is not found, returns -1.
        */
       getActiveTabIndex: function() {
-        var tabItem;
-        for (var i = 0; i < this._tabItems.length; i++) {
-          tabItem = this._tabItems[i];
-          if (tabItem.isActive()) {
-            return i;
-          }
-        }
-
-        return -1;
+        return this._element[0].getActiveTabIndex();
       },
 
       /**
