@@ -1,7 +1,7 @@
 
 describe('ons-button', function() {
   it('provide \'OnsButtonElement\' global variable', function() {
-    expect(!!window.OnsButtonElement).to.be.true;
+    expect(window.OnsButtonElement).to.be.ok;
   });
 
   it('provides modifier attribute', function() {
@@ -12,7 +12,7 @@ describe('ons-button', function() {
     element.setAttribute('modifier', ' foo bar');
     expect(element.classList.contains('button--foo')).to.be.true;
     expect(element.classList.contains('button--bar')).to.be.true;
-    expect(element.classList.contains('button--hoge')).to.not.be.true;
+    expect(element.classList.contains('button--hoge')).not.to.be.true;
 
     element.classList.add('button--piyo');
     element.setAttribute('modifier', 'fuga');
