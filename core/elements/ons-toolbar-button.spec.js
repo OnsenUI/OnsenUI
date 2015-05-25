@@ -1,7 +1,7 @@
 
 describe('ons-toolbar-button', function() {
   it('provide \'OnsToolbarButton\' global variable', function() {
-    expect(window.OnsToolbarButton).to.be.true;
+    expect(window.OnsToolbarButton).to.be.ok;
   });
 
   it('provides modifier attribute', function() {
