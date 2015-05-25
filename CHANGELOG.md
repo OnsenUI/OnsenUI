@@ -29,6 +29,7 @@ v1.3.3-dev
  * ons-tabbar: Fixed [#661](https://github.com/OnsenUI/OnsenUI/issues/661).
  * ons-navigator: Added `options.refresh` parameter for `popPage()`.
  * ons-carousel: Fixed [#651](https://github.com/OnsenUI/OnsenUI/issues/651).
+ * ons-lazy-repeat: Fixed [#678](https://github.com/OnsenUI/OnsenUI/issues/678).
 
 v1.3.2
 ----
