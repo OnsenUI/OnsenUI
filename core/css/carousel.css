@@ -43,6 +43,7 @@ ons-carousel[fullscreen] {
   right: 0px;
   left: 0px;
   bottom: 0px;
+  box-sizing: border-box;
 }
 
 ons-carousel[disabled] {
