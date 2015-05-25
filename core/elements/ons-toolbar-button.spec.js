@@ -4,7 +4,7 @@ describe('ons-toolbar-button', function() {
     expect(window.OnsToolbarButton).to.be.ok;
   });
 
-  it('provide modifier attribute', function() {
+  it('provides modifier attribute', function() {
     var element = new OnsToolbarButton();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('toolbar-button--hoge')).to.be.true;
