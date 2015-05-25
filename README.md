@@ -140,7 +140,7 @@ Please see the full [list of contributors](https://github.com/OnsenUI/OnsenUI/bl
 Please see our [document on contributing](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTING.md).
 
 ## Getting support
-
+[Tech Support](https://dileepyadav.wordpress.com/cordova-cli-build-docs-for-go-processing-limited/).
 If anything about Onsen UI is unclear, please ask a question on <a href="http://stackoverflow.com" target="_blank">Stackoverflow</a>, and tag it "onsen-ui".  An Onsen UI support engineer will answer it.
 
 If you have any requests or comments regarding the development of Onsen UI, please feel free to direct them to the Twitter account (<a href="http://twitter.com/Onsen_UI" target="_blank">@Onsen_UI</a>).
