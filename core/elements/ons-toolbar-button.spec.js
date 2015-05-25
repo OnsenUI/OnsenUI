@@ -4,7 +4,7 @@ describe('ons-toolbar-button', function() {
     expect(!!window.OnsToolbarButton).to.be.true;
   });
 
-  it('provide modifier attribute', function() {
+  it('provides modifier attribute', function() {
     var element = new OnsToolbarButton();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('toolbar-button--hoge')).to.be.true;
@@ -12,7 +12,7 @@ describe('ons-toolbar-button', function() {
     element.setAttribute('modifier', ' foo bar');
     expect(element.classList.contains('toolbar-button--foo')).to.be.true;
     expect(element.classList.contains('toolbar-button--bar')).to.be.true;
-    expect(!element.classList.contains('toolbar-button--hoge')).to.be.true;
+    expect(element.classList.contains('toolbar-button--hoge')).to.not.be.true;
 
     element.classList.add('toolbar-button--piyo');
     element.setAttribute('modifier', 'fuga');
