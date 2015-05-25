@@ -230,7 +230,7 @@ limitations under the License.
 
         var items = [];
         for (var i = startIndex; i < cnt && topPosition < 4 * window.innerHeight; i++) {
-          var h = this._getItemHeight();
+          var h = this._getItemHeight(i);
 
           if (i >= this._itemHeightSum.length) {
             this._itemHeightSum = this._itemHeightSum.concat(new Array(100));
