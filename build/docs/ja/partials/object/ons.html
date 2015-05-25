@@ -144,6 +144,11 @@ componentCategory: util
           <td>テンプレートからポップオーバーのインスタンスを生成します。</td>
         </tr>
         
+        <tr>
+          <td><a href="#method-resolveLoadingPlaceholder">resolveLoadingPlaceholder(page)</a></td>
+          <td>ons-loading-placeholderの属性値としてページが指定されていない場合は、ページロード前に呼ばれるons.resolveLoadingPlaceholder処理が行われるまで表示されません。</td>
+        </tr>
+        
       </tbody>
     </table>
   </section>
@@ -699,6 +704,46 @@ componentCategory: util
           <td><span class="parameter-name">options.parentScope</span></td>
           <td class="value-type">Object</td>
           <td>ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-resolveLoadingPlaceholder">
+      resolveLoadingPlaceholder(page)
+
+      <a href="#method-resolveLoadingPlaceholder" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>ons-loading-placeholderの属性値としてページが指定されていない場合は、ページロード前に呼ばれるons.resolveLoadingPlaceholder処理が行われるまで表示されません。</p>
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">page</span></td>
+          <td class="value-type">String</td>
+          <td>pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。</td>
         </tr>
         
       </tbody>

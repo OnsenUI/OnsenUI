@@ -1,5 +1,5 @@
-/*! onsenui - v1.3.2-dev - 2015-04-30 */
-/*! ons-core.js for Onsen UI v1.3.2-dev - 2015-04-30 */
+/*! onsenui - v1.3.3-dev - 2015-05-25 */
+/*! ons-core.js for Onsen UI v1.3.3-dev - 2015-05-25 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -2546,9 +2546,207 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function (ons) {
+  'use strict';
+
+  var ModalAnimator = (function () {
+
+    /**
+     * @param {Object} options
+     * @param {String} options.timing
+     * @param {Number} options.duration
+     * @param {Number} options.delay
+     */
+
+    function ModalAnimator(options) {
+      _classCallCheck(this, ModalAnimator);
+
+      this.delay = 0;
+      this.duration = 0.2;
+      options = options || {};
+
+      this.timing = options.timing || this.timing;
+      this.duration = options.duration !== undefined ? options.duration : this.duration;
+      this.delay = options.delay !== undefined ? options.delay : this.delay;
+    }
+
+    _createClass(ModalAnimator, [{
+      key: 'show',
+
+      /**
+       * @param {HTMLElement} modal
+       * @param {Function} callback
+       */
+      value: function show(modal, callback) {
+        callback();
+      }
+    }, {
+      key: 'hide',
+
+      /**
+       * @param {HTMLElement} modal
+       * @param {Function} callback
+       */
+      value: function hide(modal, callback) {
+        callback();
+      }
+    }]);
+
+    return ModalAnimator;
+  })();
+
+  ons._internal = ons._internal || {};
+  ons._internal.ModalAnimator = ModalAnimator;
+})(window.ons = window.ons || {});
+'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function (ons) {
+  'use strict';
+
+  var AnimatorFactory = (function () {
+
+    /**
+     * @param {Object} opts
+     * @param {Object} opts.animators The dictionary for animator classes
+     * @param {Function} opts.baseClass The base class of animators
+     * @param {String} opts.baseClassName The name of the base class of animators
+     * @param {String} opts.defaultAnimation The default animation name
+     * @param {Object} opts.defaultAnimationOptions The default animation options
+     */
+
+    function AnimatorFactory(opts) {
+      _classCallCheck(this, AnimatorFactory);
+
+      this._animators = opts.animators;
+      this._baseClass = opts.baseClass;
+      this._baseClassName = opts.baseClassName || opts.baseClass.name;
+      this._animation = opts.defaultAnimation || 'default';
+      this._animationOptions = opts.defaultAnimationOptions || {};
+
+      if (!this._animators[this._animation]) {
+        throw new Error('No such animation: ' + this._animation);
+      }
+    }
+
+    _createClass(AnimatorFactory, [{
+      key: 'setAnimationOptions',
+
+      /**
+       * @param {Object} options
+       */
+      value: function setAnimationOptions(options) {
+        this._animationOptions = options;
+      }
+    }, {
+      key: 'newAnimator',
+
+      /**
+       * @param {Object} options
+       * @param {String} [options.animation] The animation name
+       * @param {Object} [options.animationOptions] The animation options
+       * @param {Object} defaultAnimator The default animator instance
+       * @return {Object} An animator instance
+       */
+      value: function newAnimator(options, defaultAnimator) {
+        options = options || {};
+
+        var animator = null;
+
+        if (options.animation instanceof this._baseClass) {
+          return options.animation;
+        }
+
+        var Animator = null;
+
+        if (typeof options.animation === 'string') {
+          Animator = this._animators[options.animation];
+        }
+
+        if (!Animator && defaultAnimator) {
+          animator = defaultAnimator;
+        } else {
+          Animator = Animator || this._animators[this._animation];
+
+          var animationOpts = ons._util.extend({}, this._animationOptions, options.animationOptions || {}, ons._config.animationsDisabled ? { duration: 0, delay: 0 } : {});
+
+          animator = new Animator(animationOpts);
+        }
+
+        if (!(animator instanceof this._baseClass)) {
+          throw new Error('"animator" is not an instance of ' + this._baseClassName + '.');
+        }
+
+        return animator;
+      }
+    }], [{
+      key: 'parseJSONSafely',
+
+      /**
+       * @param {String} jsonString
+       * @return {Object/null}
+       */
+      value: function parseJSONSafely(jsonString) {
+        try {
+          return JSON.parse(jsonString);
+        } catch (e) {
+          return null;
+        }
+      }
+    }]);
+
+    return AnimatorFactory;
+  })();
+
+  ons._internal = ons._internal || {};
+  ons._internal.AnimatorFactory = AnimatorFactory;
+})(window.ons = window.ons || {});
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -2909,9 +3107,9 @@ limitations under the License.
 })(window.ons = window.ons || {});
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -2967,19 +3165,9 @@ window.DoorLock = (function () {
        */
       value: function lock() {
         var self = this;
-        var unlock = (function (_unlock) {
-          function unlock() {
-            return _unlock.apply(this, arguments);
-          }
-
-          unlock.toString = function () {
-            return _unlock.toString();
-          };
-
-          return unlock;
-        })(function () {
+        var unlock = function unlock() {
           self._unlock(unlock);
-        });
+        };
         unlock.id = generateId();
         this._lockList.push(unlock);
         this._log('lock: ' + unlock.id);
@@ -3043,9 +3231,15 @@ window.DoorLock = (function () {
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { desc = parent = getter = undefined; _again = false; var object = _x,
+    property = _x2,
+    receiver = _x3; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -3064,7 +3258,104 @@ limitations under the License.
 
 */
 
-window.ModifierUtil = (function () {
+(function (ons) {
+  'use strict';
+
+  var ModalAnimator = ons._internal.ModalAnimator;
+
+  /**
+   * iOS style animator for dialog.
+   */
+
+  var FadeModalAnimator = (function (_ModalAnimator) {
+    function FadeModalAnimator(options) {
+      _classCallCheck(this, FadeModalAnimator);
+
+      options.timing = options.timing || 'linear';
+      options.duration = options.duration || '0.3';
+      options.delay = options.delay || 0;
+
+      _get(Object.getPrototypeOf(FadeModalAnimator.prototype), 'constructor', this).call(this, options);
+    }
+
+    _inherits(FadeModalAnimator, _ModalAnimator);
+
+    _createClass(FadeModalAnimator, [{
+      key: 'show',
+
+      /**
+       * @param {HTMLElement} modal
+       * @param {Function} callback
+       */
+      value: function show(modal, callback) {
+        callback = callback ? callback : function () {};
+
+        animit(modal).queue({
+          opacity: 0
+        }).wait(this.delay).queue({
+          opacity: 1
+        }, {
+          duration: this.duration,
+          timing: this.timing
+        }).queue(function (done) {
+          callback();
+          done();
+        }).play();
+      }
+    }, {
+      key: 'hide',
+
+      /**
+       * @param {HTMLElement} modal
+       * @param {Function} callback
+       */
+      value: function hide(modal, callback) {
+        callback = callback ? callback : function () {};
+
+        animit(modal).queue({
+          opacity: 1
+        }).wait(this.delay).queue({
+          opacity: 0
+        }, {
+          duration: this.duration,
+          timing: this.timing
+        }).queue(function (done) {
+          callback();
+          done();
+        }).play();
+      }
+    }]);
+
+    return FadeModalAnimator;
+  })(ModalAnimator);
+
+  ons._internal = ons._internal || {};
+  ons._internal.FadeModalAnimator = FadeModalAnimator;
+})(window.ons = window.ons || {});
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function (ons) {
   'use strict';
 
   var ModifierUtil = (function () {
@@ -3137,17 +3428,13 @@ window.ModifierUtil = (function () {
        * @param {Object} scheme
        */
       value: function applyDiffToElement(diff, element, scheme) {
-        var _loop = function (selector) {
+        for (var selector in scheme) {
           if (scheme.hasOwnProperty(selector)) {
             var targetElements = selector === '' ? [element] : element.querySelectorAll(selector);
-            targetElements.forEach(function (targetElement) {
-              ModifierUtil.applyDiffToClassList(diff, targetElement.classList, scheme[selector]);
-            });
+            for (var i = 0; i < targetElements.length; i++) {
+              ModifierUtil.applyDiffToClassList(diff, targetElements[i].classList, scheme[selector]);
+            }
           }
-        };
-
-        for (var selector in scheme) {
-          _loop(selector);
         }
       }
     }, {
@@ -3196,8 +3483,9 @@ window.ModifierUtil = (function () {
     return ModifierUtil;
   })();
 
-  return ModifierUtil;
-})();
+  ons._internal = ons._internal || {};
+  ons._internal.ModifierUtil = ModifierUtil;
+})(window.ons = window.ons || {});
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -3220,87 +3508,48 @@ limitations under the License.
 (function (ons) {
   'use strict';
 
-  ons._readyLock = new DoorLock();
-  ons._config = {
-    autoStatusBarFill: true,
-    animationsDisabled: false
-  };
+  ons._internal = ons._internal || {};
 
-  waitDeviceReady();
+  ons._internal.nullElement = document.createElement('div');
 
   /**
    * @return {Boolean}
    */
-  ons.isReady = function () {
-    return !ons._readyLock.isLocked();
+  ons._internal.isEnabledAutoStatusBarFill = function () {
+    return !!ons._config.autoStatusBarFill;
   };
 
-  /**
-   * @return {Boolean}
-   */
-  ons.isWebView = function () {
+  ons._internal.waitDOMContentLoaded = function (callback) {
     if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
-      throw new Error('isWebView() method is available after dom contents loaded.');
-    }
-
-    return !!(window.cordova || window.phonegap || window.PhoneGap);
-  };
-
-  /**
-   * @param {Function} callback
-   */
-  ons.ready = function (callback) {
-    if (ons.isReady()) {
-      callback();
+      window.document.addEventListener('DOMContentLoaded', callback);
     } else {
-      ons._readyLock.waitUnlock(callback);
+      setImmediate(callback);
     }
   };
 
   /**
-   * Enable status bar fill feature on iOS7 and above.
+   * @param {HTMLElement} element
+   * @return {Boolean}
    */
-  ons.enableAutoStatusBarFill = function () {
-    if (ons.isReady()) {
-      throw new Error('This method must be called before ons.isReady() is true.');
-    }
-    ons._config.autoStatusBarFill = true;
-  };
-
-  /**
-   * Disable status bar fill feature on iOS7 and above.
-   */
-  ons.disableAutoStatusBarFill = function () {
-    if (ons.isReady()) {
-      throw new Error('This method must be called before ons.isReady() is true.');
-    }
-    ons._config.autoStatusBarFill = false;
-  };
-
-  /**
-   * Disable all animations. Could be handy for testing and older devices.
-   */
-  ons.disableAnimations = function () {
-    ons._config.animationsDisabled = true;
-  };
-
-  /**
-   * Enable animations (default).
-   */
-  ons.enableAnimations = function () {
-    ons._config.animationsDisabled = false;
-  };
-
-  function waitDeviceReady() {
-    var unlockDeviceReady = ons._readyLock.lock();
-    window.addEventListener('DOMContentLoaded', function () {
-      if (ons.isWebView()) {
-        window.document.addEventListener('deviceready', unlockDeviceReady, false);
-      } else {
-        unlockDeviceReady();
+  ons._internal.shouldFillStatusBar = function (element) {
+    if (ons._internal.isEnabledAutoStatusBarFill() && ons.platform.isWebView() && ons.platform.isIOS7Above()) {
+      if (!(element instanceof HTMLElement)) {
+        throw new Error('element must be an instance of HTMLElement');
       }
-    }, false);
-  }
+
+      for (;;) {
+        if (element.hasAttribute('no-status-bar-fill')) {
+          return false;
+        }
+
+        element = element.parentNode;
+        if (!element || !element.hasAttribute) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
 })(window.ons = window.ons || {});
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -3485,6 +3734,20 @@ limitations under the License.
     /**
      * @return {Boolean}
      */
+    isAndroidPhone: function isAndroidPhone() {
+      return /Android/i.test(navigator.userAgent) && /Mobile/i.test(navigator.userAgent);
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isAndroidTablet: function isAndroidTablet() {
+      return /Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
+    },
+
+    /**
+     * @return {Boolean}
+     */
     isWP: function isWP() {
       if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'wp';
@@ -3653,6 +3916,179 @@ limitations under the License.
       ons.softwareKeyboard.on = noPluginError;
     }
   });
+})(window.ons = window.ons || {});
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+'use strict';
+
+(function (ons) {
+  'use strict';
+
+  var util = ons._util = ons._util || {};
+
+  /**
+   * @param {HTMLElement} element 
+   * @param {String} query dot class name or node name.
+   * @return {HTMLElement}
+   */
+  util.findChild = function (element, query) {
+    var match = query.substr(0, 1) === '.' ? function (node) {
+      return node.classList.contains(query.substr(1));
+    } : function (node) {
+      return node.nodeName.toLowerCase() === query;
+    };
+
+    var node;
+    for (var i = 0; i < element.children.length; i++) {
+      node = element.children[i];
+      if (match(node)) {
+        return node;
+      }
+    }
+    return null;
+  };
+
+  /*
+   * @param {Object} dst Destination object.
+   * @param {...Object} src Source object(s).
+   * @returns {Object} Reference to `dst`.
+   */
+  util.extend = function (dst) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    for (var i = 0; i < args.length; i++) {
+      if (args[i]) {
+        var keys = Object.keys(args[i]);
+        for (var j = 0; j < keys.length; j++) {
+          var key = keys[j];
+          dst[key] = args[i][key];
+        }
+      }
+    }
+
+    return dst;
+  };
+})(window.ons = window.ons || {});
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+'use strict';
+
+(function (ons) {
+  'use strict';
+
+  ons._readyLock = new DoorLock();
+  ons._config = {
+    autoStatusBarFill: true,
+    animationsDisabled: false
+  };
+
+  waitDeviceReady();
+
+  /**
+   * @return {Boolean}
+   */
+  ons.isReady = function () {
+    return !ons._readyLock.isLocked();
+  };
+
+  /**
+   * @return {Boolean}
+   */
+  ons.isWebView = function () {
+    if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
+      throw new Error('isWebView() method is available after dom contents loaded.');
+    }
+
+    return !!(window.cordova || window.phonegap || window.PhoneGap);
+  };
+
+  /**
+   * @param {Function} callback
+   */
+  ons.ready = function (callback) {
+    if (ons.isReady()) {
+      callback();
+    } else {
+      ons._readyLock.waitUnlock(callback);
+    }
+  };
+
+  /**
+   * Enable status bar fill feature on iOS7 and above.
+   */
+  ons.enableAutoStatusBarFill = function () {
+    if (ons.isReady()) {
+      throw new Error('This method must be called before ons.isReady() is true.');
+    }
+    ons._config.autoStatusBarFill = true;
+  };
+
+  /**
+   * Disable status bar fill feature on iOS7 and above.
+   */
+  ons.disableAutoStatusBarFill = function () {
+    if (ons.isReady()) {
+      throw new Error('This method must be called before ons.isReady() is true.');
+    }
+    ons._config.autoStatusBarFill = false;
+  };
+
+  /**
+   * Disable all animations. Could be handy for testing and older devices.
+   */
+  ons.disableAnimations = function () {
+    ons._config.animationsDisabled = true;
+  };
+
+  /**
+   * Enable animations (default).
+   */
+  ons.enableAnimations = function () {
+    ons._config.animationsDisabled = false;
+  };
+
+  function waitDeviceReady() {
+    var unlockDeviceReady = ons._readyLock.lock();
+    window.addEventListener('DOMContentLoaded', function () {
+      if (ons.isWebView()) {
+        window.document.addEventListener('deviceready', unlockDeviceReady, false);
+      } else {
+        unlockDeviceReady();
+      }
+    }, false);
+  }
 })(window.ons = window.ons || {});
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -4326,7 +4762,7 @@ var Utils = GestureDetector.utils = {
    */
   extend: function extend(dest, src, merge) {
     for (var key in src) {
-      if (src.hasOwnProperty(key) && (dest[key] === undefined || merge)) {
+      if (src.hasOwnProperty(key) && (dest[key] === undefined || !merge)) {
         dest[key] = src[key];
       }
     }
@@ -6231,11 +6667,11 @@ GestureDetector.Instance.prototype = {
 })(window.ons = window.ons || {});
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6258,6 +6694,7 @@ limitations under the License.
   'use strict';
 
   var scheme = { '': 'bottom-bar--*' };
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   var BottomToolbarElement = (function (_ons$_BaseElement) {
     function BottomToolbarElement() {
@@ -6308,11 +6745,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6335,6 +6772,7 @@ limitations under the License.
   'use strict';
 
   var scheme = { '': 'button--*' };
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   var ButtonElement = (function (_ons$_BaseElement) {
     function ButtonElement() {
@@ -6374,11 +6812,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6455,11 +6893,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6510,11 +6948,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6642,11 +7080,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6669,6 +7107,7 @@ limitations under the License.
   'use strict';
 
   var scheme = { '': 'list__header--*' };
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   var ListHeaderElement = (function (_ons$_BaseElement) {
     function ListHeaderElement() {
@@ -6707,11 +7146,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6734,6 +7173,7 @@ limitations under the License.
   'use strict';
 
   var scheme = { '': 'list__item--*' };
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   var ListItemElement = (function (_ons$_BaseElement) {
     function ListItemElement() {
@@ -6772,11 +7212,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6799,6 +7239,7 @@ limitations under the License.
   'use strict';
 
   var scheme = { '': 'list--*' };
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   var ListElement = (function (_ons$_BaseElement) {
     function ListElement() {
@@ -6832,6 +7273,492 @@ limitations under the License.
   if (!window.OnsList) {
     window.OnsList = document.registerElement('ons-list', {
       prototype: ListElement.prototype
+    });
+  }
+})();
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var scheme = {
+    '': 'modal--*',
+    'modal__content': 'modal--*__content'
+  };
+
+  var AnimatorFactory = ons._internal.AnimatorFactory;
+  var ModalAnimator = ons._internal.ModalAnimator;
+  var FadeModalAnimator = ons._internal.FadeModalAnimator;
+  var ModifierUtil = ons._internal.ModifierUtil;
+
+  var ModalElement = (function (_ons$_BaseElement) {
+    function ModalElement() {
+      _classCallCheck(this, ModalElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(ModalElement, _ons$_BaseElement);
+
+    _createClass(ModalElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this._doorLock = new DoorLock();
+        this._animatorFactory = new AnimatorFactory({
+          animators: ModalElement._animatorDict,
+          baseClass: ModalAnimator,
+          baseClassName: 'ModalAnimator',
+          defaultAnimation: this.getAttribute('animation'),
+          defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
+        });
+
+        this._compile();
+        ModifierUtil.initModifier(this, scheme);
+      }
+    }, {
+      key: 'getDeviceBackButtonHandler',
+      value: function getDeviceBackButtonHandler() {
+        return this._deviceBackButtonHandler;
+      }
+    }, {
+      key: 'setDeviceBackButtonHandler',
+      value: function setDeviceBackButtonHandler(callback) {
+        if (this._deviceBackButtonHandler) {
+          this._deviceBackButtonHandler.destroy();
+        }
+
+        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, callback);
+        this._onDeviceBackButton = callback;
+      }
+    }, {
+      key: '_onDeviceBackButton',
+      value: function _onDeviceBackButton() {
+        // Do nothing and stop device-backbutton handler chain.
+        return;
+      }
+    }, {
+      key: '_compile',
+      value: function _compile() {
+        this.style.display = 'none';
+        this.classList.add('modal');
+
+        var wrapper = document.createElement('div');
+        wrapper.classList.add('modal__content');
+
+        while (this.childNodes[0]) {
+          var node = this.childNodes[0];
+          this.removeChild(node);
+          wrapper.insertBefore(node, null);
+        }
+
+        this.appendChild(wrapper);
+      }
+    }, {
+      key: 'detachedCallback',
+      value: function detachedCallback() {
+        if (this._deviceBackButtonHandler) {
+          this._deviceBackButtonHandler.destroy();
+        }
+      }
+    }, {
+      key: 'atachedCallback',
+      value: function atachedCallback() {
+        setImmediate(this._ensureNodePosition.bind(this));
+        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+      }
+    }, {
+      key: '_ensureNodePosition',
+      value: function _ensureNodePosition() {
+        if (!this.parentNode || this.hasAttribute('inline')) {
+          return;
+        }
+
+        if (this.parentNode.nodeName.toLowerCase() !== 'ons-page') {
+          var page = this;
+          for (;;) {
+            page = page.parentNode;
+
+            if (!page) {
+              return;
+            }
+
+            if (page.nodeName.toLowerCase() === 'ons-page') {
+              break;
+            }
+          }
+          page._registerExtraElement(this);
+        }
+      }
+    }, {
+      key: '_isVisible',
+      value: function _isVisible() {
+        return this.clientWidth > 0;
+      }
+    }, {
+      key: 'show',
+
+      /**
+       * Show modal view.
+       *
+       * @param {Object} [options]
+       * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
+       * @param {Function} [options.callback] callback after modal is shown
+       */
+      value: function show(options) {
+        options = options || {};
+
+        var callback = options.callback || function () {};
+
+        this._doorLock.waitUnlock((function () {
+          var unlock = this._doorLock.lock(),
+              animator = this._animatorFactory.newAnimator(options);
+
+          this.style.display = 'table';
+          animator.show(this, function () {
+            unlock();
+            callback();
+          });
+        }).bind(this));
+      }
+    }, {
+      key: 'toggle',
+
+      /**
+       * Toggle modal view.
+       *
+       * @param {Object} [options]
+       * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
+       * @param {Function} [options.callback] callback after modal is toggled
+       */
+      value: function toggle() {
+        if (this._isVisible()) {
+          return this.hide.apply(this, arguments);
+        } else {
+          return this.show.apply(this, arguments);
+        }
+      }
+    }, {
+      key: 'hide',
+
+      /**
+       * Hide modal view.
+       *
+       * @param {Object} [options]
+       * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
+       * @param {Function} [options.callback] callback after modal is hidden
+       */
+      value: function hide(options) {
+        options = options || {};
+
+        var callback = options.callback || function () {};
+
+        this._doorLock.waitUnlock((function () {
+          var unlock = this._doorLock.lock(),
+              animator = this._animatorFactory.newAnimator(options);
+
+          animator.hide(this, (function () {
+            this.style.display = 'none';
+            unlock();
+            callback();
+          }).bind(this));
+        }).bind(this));
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'modifier') {
+          return ModifierUtil.onModifierChanged(last, current, this, scheme);
+        }
+      }
+    }]);
+
+    return ModalElement;
+  })(ons._BaseElement);
+
+  ModalElement._animatorDict = {
+    'default': ModalAnimator,
+    'fade': FadeModalAnimator,
+    'none': ModalAnimator
+  };
+
+  /**
+   * @param {String} name
+   * @param {Function} Animator
+   */
+  ModalElement.registerAnimator = function (name, Animator) {
+    if (!(Animator.prototype instanceof ModalAnimator)) {
+      throw new Error('"Animator" param must inherit DialogAnimator');
+    }
+    ModalElement._animatorDict[name] = Animator;
+  };
+
+  if (!window.OnsModalElement) {
+    window.OnsModalElement = document.registerElement('ons-modal', {
+      prototype: ModalElement.prototype
+    });
+  }
+})();
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var scheme = {
+    '': 'page--*',
+    '.page__content': 'page--*__content',
+    '.page__background': 'page--*__background'
+  };
+  var ModifierUtil = ons._internal.ModifierUtil;
+  var nullToolbarElement = document.createElement('ons-toolbar');
+
+  var PageElement = (function (_ons$_BaseElement) {
+    function PageElement() {
+      _classCallCheck(this, PageElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(PageElement, _ons$_BaseElement);
+
+    _createClass(PageElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this.classList.add('page');
+        this._compile();
+        ModifierUtil.initModifier(this, scheme);
+      }
+    }, {
+      key: 'getDeviceBackButtonHandler',
+
+      /**
+       * @return {Object/null}
+       */
+      value: function getDeviceBackButtonHandler() {
+        return this._deviceBackButtonHandler || null;
+      }
+    }, {
+      key: 'setDeviceBackButtonHandler',
+
+      /**
+       * @param {Function} callback
+       */
+      value: function setDeviceBackButtonHandler(callback) {
+        if (this._deviceBackButtonHandler) {
+          this._deviceBackButtonHandler.destroy();
+        }
+
+        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, callback);
+      }
+    }, {
+      key: '_getContentElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getContentElement() {
+        var result = ons._util.findChild(this, '.page__content');
+        if (result) {
+          return result;
+        }
+        throw Error('fail to get ".page__content" element.');
+      }
+    }, {
+      key: '_hasToolbarElement',
+
+      /**
+       * @return {Boolean}
+       */
+      value: function _hasToolbarElement() {
+        return !!ons._util.findChild(this, 'ons-toolbar');
+      }
+    }, {
+      key: '_getBackgroundElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getBackgroundElement() {
+        var result = ons._util.findChild(this, '.page__background');
+        if (result) {
+          return result;
+        }
+        throw Error('fail to get ".page__background" element.');
+      }
+    }, {
+      key: '_getBottomToolbarElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getBottomToolbarElement() {
+        return ons._util.findChild(this, 'ons-bottom-toolbar') || ons._internal.nullElement;
+      }
+    }, {
+      key: '_getToolbarElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getToolbarElement() {
+        return ons._util.findChild(this, 'ons-toolbar') || nullToolbarElement;
+      }
+    }, {
+      key: '_registerToolbar',
+
+      /**
+       * Register toolbar element to this page.
+       *
+       * @param {HTMLElement} element
+       */
+      value: function _registerToolbar(element) {
+        this._getContentElement().setAttribute('no-status-bar-fill', '');
+
+        if (ons._util.findChild(this, '.page__status-bar-fill')) {
+          this.insertBefore(element, this.children[1]);
+        } else {
+          this.insertBefore(element, this.children[0]);
+        }
+      }
+    }, {
+      key: '_registerBottomToolbar',
+
+      /**
+       * Register toolbar element to this page.
+       *
+       * @param {HTMLElement} element
+       */
+      value: function _registerBottomToolbar(element) {
+        if (!ons._util.findChild(this, '.page__status-bar-fill')) {
+          var fill = document.createElement('div');
+          fill.classList.add('page__bottom-bar-fill');
+          fill.style.width = '0px';
+          fill.style.height = '0px';
+
+          this.insertBefore(fill, this.children[0]);
+          this.insertBefore(element, null);
+        }
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'modifier') {
+          return ModifierUtil.onModifierChanged(last, current, this, scheme);
+        }
+      }
+    }, {
+      key: '_compile',
+      value: function _compile() {
+        if (ons._util.findChild(this, '.page__background') && ons._util.findChild(this, '.page__content')) {
+          return;
+        }
+
+        var background = document.createElement('div');
+        background.classList.add('page__background');
+
+        var content = document.createElement('div');
+        content.classList.add('page__content');
+
+        while (this.childNodes[0]) {
+          var node = this.childNodes[0];
+          this.removeChild(node);
+          content.appendChild(node);
+        }
+
+        if (this.hasAttribute('style')) {
+          background.setAttribute('style', this.getAttribute('style'));
+          this.removeAttribute('style', null);
+        }
+
+        this.insertBefore(background, null);
+        this.insertBefore(content, null);
+      }
+    }, {
+      key: '_registerExtraElement',
+      value: function _registerExtraElement(element) {
+        var extra = ons._util.findChild(this, '.page__extra');
+        if (!extra) {
+          extra = document.createElement('div');
+          extra.classList.add('page__extra');
+          extra.style.zIndex = '10001';
+          this.insertBefore(extra, null);
+        }
+
+        extra.insertBefore(element, null);
+      }
+    }, {
+      key: '_tryToFillStatusBar',
+      value: function _tryToFillStatusBar() {
+        if (ons._internal.shouldFillStatusBar(this)) {
+          // Adjustments for IOS7
+          var fill = document.createElement('div');
+          fill.classList.add('page__status-bar-fill');
+          fill.style.width = '0px';
+          fill.style.height = '0px';
+
+          this.insertBefore(fill, this.children[0]);
+        }
+      }
+    }]);
+
+    return PageElement;
+  })(ons._BaseElement);
+
+  if (!window.OnsPageElement) {
+    window.OnsPageElement = document.registerElement('ons-page', {
+      prototype: PageElement.prototype
     });
   }
 })();
@@ -6877,11 +7804,164 @@ limitations under the License.
 window.OnsScrollerElement = window.OnsScrollerElement ? window.OnsScrollerElement : document.registerElement('ons-scroller');
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var scheme = {
+    '': 'switch--*',
+    'switch__input': 'switch--*__input',
+    'switch__toggle': 'switch--*__toggle'
+  };
+  var ModifierUtil = ons._internal.ModifierUtil;
+
+  var ExtendableLabelElement;
+  if (typeof HTMLLabelElement !== 'function') {
+    // for Safari
+    ExtendableLabelElement = function () {};
+    ExtendableLabelElement.prototype = document.createElement('label');
+  } else {
+    ExtendableLabelElement = HTMLLabelElement;
+  }
+
+  var generateId = (function () {
+    var i = 0;
+    return function () {
+      return 'ons-switch-id-' + i++;
+    };
+  })();
+
+  var SwitchElement = (function (_ExtendableLabelElement) {
+    function SwitchElement() {
+      _classCallCheck(this, SwitchElement);
+
+      if (_ExtendableLabelElement != null) {
+        _ExtendableLabelElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(SwitchElement, _ExtendableLabelElement);
+
+    _createClass(SwitchElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this._compile();
+        ModifierUtil.initModifier(this, scheme);
+
+        this._updateForCheckedAttribute();
+        this._updateForDisabledAttribute();
+      }
+    }, {
+      key: '_updateForCheckedAttribute',
+      value: function _updateForCheckedAttribute() {
+        if (this.hasAttribute('checked')) {
+          this._getCheckbox().checked = true;
+        } else {
+          this._getCheckbox().checked = false;
+        }
+      }
+    }, {
+      key: '_updateForDisabledAttribute',
+      value: function _updateForDisabledAttribute() {
+        if (this.hasAttribute('disabled')) {
+          this._getCheckbox().setAttribute('disabled', '');
+        } else {
+          this._getCheckbox().removeAttribute('disabled');
+        }
+      }
+    }, {
+      key: '_compile',
+      value: function _compile() {
+        this.classList.add('switch');
+        this.innerHTML = '\n        <input type="checkbox" checked class="switch__input">\n        <div class="switch__toggle"></div>\n      ';
+        this._getCheckbox().setAttribute('name', generateId());
+      }
+    }, {
+      key: 'detachedCallback',
+      value: function detachedCallback() {}
+    }, {
+      key: 'atachedCallback',
+      value: function atachedCallback() {}
+    }, {
+      key: '_isChecked',
+
+      /**
+       * @return {Boolean}
+       */
+      value: function _isChecked() {
+        return this._getCheckbox().checked;
+      }
+    }, {
+      key: '_setChecked',
+
+      /**
+       * @param {Boolean}
+       */
+      value: function _setChecked(isChecked) {
+        isChecked = !!isChecked;
+
+        var checkbox = this._getCheckbox();
+
+        if (checkbox.checked != isChecked) {
+          checkbox.checked = isChecked;
+        }
+      }
+    }, {
+      key: '_getCheckbox',
+      value: function _getCheckbox() {
+        return this.querySelector('input[type=checkbox]');
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'modifier') {
+          return ModifierUtil.onModifierChanged(last, current, this, scheme);
+        } else if (name === 'checked') {
+          this._updateForCheckedAttribute();
+        } else if (name === 'disabled') {
+          this._updateForDisabledAttribute();
+        }
+      }
+    }]);
+
+    return SwitchElement;
+  })(ExtendableLabelElement);
+
+  if (!window.OnsSwitchElement) {
+    window.OnsSwitchElement = document.registerElement('ons-switch', {
+      prototype: SwitchElement.prototype
+    });
+  }
+})();
+'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6936,11 +8016,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6963,6 +8043,7 @@ limitations under the License.
   'use strict';
 
   var scheme = { '': 'toolbar-button--*' };
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   var ToolbarButtonElement = (function (_ons$_BaseElement) {
     function ToolbarButtonElement() {
@@ -6998,6 +8079,222 @@ limitations under the License.
   if (!window.OnsToolbarButton) {
     window.OnsToolbarButton = document.registerElement('ons-toolbar-button', {
       prototype: ToolbarButtonElement.prototype
+    });
+  }
+})();
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var scheme = {
+    '': 'navigation-bar--*',
+    '.navigation-bar__left': 'navigation-bar--*__left',
+    '.navigation-bar__center': 'navigation-bar--*__center',
+    '.navigation-bar__right': 'navigation-bar--*__right'
+  };
+  var ModifierUtil = ons._internal.ModifierUtil;
+
+  var ToolbarElement = (function (_ons$_BaseElement) {
+    function ToolbarElement() {
+      _classCallCheck(this, ToolbarElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(ToolbarElement, _ons$_BaseElement);
+
+    _createClass(ToolbarElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this._compile();
+        ModifierUtil.initModifier(this, scheme);
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'modifier') {
+          return ModifierUtil.onModifierChanged(last, current, this, scheme);
+        }
+      }
+    }, {
+      key: 'attachedCallback',
+      value: function attachedCallback() {
+        setImmediate(this._ensureNodePosition.bind(this));
+      }
+    }, {
+      key: '_ensureNodePosition',
+      value: function _ensureNodePosition() {
+        if (!this.parentNode || this.hasAttribute('inline')) {
+          return;
+        }
+
+        if (this.parentNode.nodeName.toLowerCase() !== 'ons-page') {
+          var page = this;
+          for (;;) {
+            page = page.parentNode;
+
+            if (!page) {
+              return;
+            }
+
+            if (page.nodeName.toLowerCase() === 'ons-page') {
+              break;
+            }
+          }
+          page._registerToolbar(this);
+        }
+      }
+    }, {
+      key: '_getToolbarLeftItemsElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getToolbarLeftItemsElement() {
+        return this.querySelector('.left') || ons._internal.nullElement;
+      }
+    }, {
+      key: '_getToolbarCenterItemsElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getToolbarCenterItemsElement() {
+        return this.querySelector('.center') || ons._internal.nullElement;
+      }
+    }, {
+      key: '_getToolbarRightItemsElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getToolbarRightItemsElement() {
+        return this.querySelector('.right') || ons._internal.nullElement;
+      }
+    }, {
+      key: '_getToolbarBackButtonLabelElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getToolbarBackButtonLabelElement() {
+        return this.querySelector('ons-back-button .back-button__label') || ons._internal.nullElement;
+      }
+    }, {
+      key: '_compile',
+      value: function _compile() {
+        var shouldAppendAndroidModifier = ons.platform.isAndroid() && !this.hasAttribute('fixed-style');
+        var inline = this.hasAttribute('inline');
+
+        this.classList.add('navigation-bar');
+
+        if (shouldAppendAndroidModifier) {
+          this.classList.add('navigation-bar--android');
+        }
+
+        if (!inline) {
+          this.style.position = 'absolute';
+          this.style.zIndex = '10000';
+          this.style.left = '0px';
+          this.style.right = '0px';
+          this.style.top = '0px';
+        }
+
+        this._ensureToolbarItemElements();
+      }
+    }, {
+      key: '_ensureToolbarItemElements',
+      value: function _ensureToolbarItemElements() {
+
+        var hasCenterClassElementOnly = this.children.length === 1 && this.children[0].classList.contains('center');
+        var center;
+
+        for (var i = 0; i < this.childNodes.length; i++) {
+          // case of not element
+          if (this.childNodes[i].nodeType != 1) {
+            this.removeChild(this.childNodes[i]);
+          }
+        }
+
+        if (hasCenterClassElementOnly) {
+          center = this._ensureToolbarItemContainer('center');
+        } else {
+          center = this._ensureToolbarItemContainer('center');
+          var left = this._ensureToolbarItemContainer('left');
+          var right = this._ensureToolbarItemContainer('right');
+
+          if (this.children[0] !== left || this.children[1] !== center || this.children[2] !== right) {
+            if (left.parentNode) {
+              this.removeChild(left);
+            }
+            if (center.parentNode) {
+              this.removeChild(center);
+            }
+            if (right.parentNode) {
+              this.removeChild(right);
+            }
+
+            var fragment = document.createDocumentFragment();
+            fragment.appendChild(left);
+            fragment.appendChild(center);
+            fragment.appendChild(right);
+
+            this.appendChild(fragment);
+          }
+        }
+        center.classList.add('navigation-bar__title');
+      }
+    }, {
+      key: '_ensureToolbarItemContainer',
+      value: function _ensureToolbarItemContainer(name) {
+        var container = ons._util.findChild(this, '.' + name);
+
+        if (!container) {
+          container = document.createElement('div');
+          container.classList.add(name);
+        }
+
+        if (container.innerHTML.trim() === '') {
+          container.innerHTML = '&nbsp;';
+        }
+
+        container.classList.add('navigation-bar__' + name);
+        return container;
+      }
+    }]);
+
+    return ToolbarElement;
+  })(ons._BaseElement);
+
+  if (!window.OnsToolbarElement) {
+    window.OnsToolbarElement = document.registerElement('ons-toolbar', {
+      prototype: ToolbarElement.prototype
     });
   }
 })();
@@ -32666,20 +33963,6 @@ try { module = angular.module('templates-main'); }
 catch(err) { module = angular.module('templates-main', []); }
 module.run(['$templateCache', function($templateCache) {
   'use strict';
-  $templateCache.put('templates/switch.tpl',
-    '<label class="switch {{modifierTemplater(\'switch--*\')}}">\n' +
-    '  <input type="checkbox" class="switch__input {{modifierTemplater(\'switch--*__input\')}}" ng-model="model">\n' +
-    '  <div class="switch__toggle {{modifierTemplater(\'switch--*__toggle\')}}"></div>\n' +
-    '</label>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try { module = angular.module('templates-main'); }
-catch(err) { module = angular.module('templates-main', []); }
-module.run(['$templateCache', function($templateCache) {
-  'use strict';
   $templateCache.put('templates/tab.tpl',
     '<input type="radio" name="tab-bar-{{tabbarId}}" style="display: none">\n' +
     '<button class="tab-bar__button tab-bar-inner {{tabbarModifierTemplater(\'tab-bar--*__button\')}} {{modifierTemplater(\'tab-bar__button--*\')}}" ng-click="tryToChange()">\n' +
@@ -32938,6 +34221,17 @@ limitations under the License.
  * @description 
  *   [en]Create a popover instance from a template.[/en]
  *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature resolveLoadingPlaceholder(page)
+ * @param {String} page
+ *   [en]Page name. Can be either an HTML file or an <ons-template> element.[/en]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @description
+ *   [en]If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.[/en]
+ *   [ja]ons-loading-placeholderの属性値としてページが指定されていない場合は、ページロード前に呼ばれるons.resolveLoadingPlaceholder処理が行われるまで表示されません。[/ja]
  */
 
 (function(ons){
@@ -33275,11 +34569,11 @@ limitations under the License.
                 childStyle = child.getAttribute('style'),
                 newStyle = (function(a, b) {
                 var c =
-                  (a.substr(-1) === ';' ? a : a + ';') + 
-                  (b.substr(-1) === ';' ? b : b + ';'); 
+                  (a.substr(-1) === ';' ? a : a + ';') +
+                  (b.substr(-1) === ';' ? b : b + ';');
                 return c;
               })(parentStyle, childStyle);
-  
+
               child.setAttribute('style', newStyle);
             }
 
@@ -33288,6 +34582,21 @@ limitations under the License.
 
           return deferred.promise;
         });
+      },
+
+      /**
+       * @param {String} page
+       */
+      resolveLoadingPlaceholder: function(page) {
+        var $onsen = this._getOnsenService();
+
+        if ($onsen.deferredLoadingPlaceholders && $onsen.deferredLoadingPlaceholders.length) {
+          var deferred = $onsen.deferredLoadingPlaceholders.pop();
+          deferred.resolve(page);
+        }
+        else {
+          throw new Error('No ons-loading-placeholder exists.');
+        }
       }
     };
 
@@ -33845,82 +35154,7 @@ limitations under the License.
 
 */
 
-(function() {
-  'use strict';
-
-  var module = angular.module('onsen');
-
-  module.factory('AnimationChooser', function() {
-    var AnimationChooser = Class.extend({
-
-      /**
-       * @param {Object} opts
-       * @param {Object} opts.animators The dictionary for animator classes
-       * @param {Function} opts.baseClass The base class of animators
-       * @param {String} opts.baseClassName The name of the base class of animators
-       * @param {String} opts.defaultAnimation The default animation name
-       * @param {Object} opts.defaultAnimationOptions The default animation options
-       */
-      init: function(opts) {
-        this._animators = opts.animators;
-        this._baseClass = opts.baseClass;
-        this._baseClassName = opts.baseClassName || opts.baseClass.name;
-        this._animation = opts.defaultAnimation || 'default';
-        this._animationOptions = opts.defaultAnimationOptions || {};
-
-        if (!this._animators[this._animation]) {
-          throw new Error('No such animation: ' + this._animation);
-        }
-      },
-
-      /**
-       * @param {Object} options
-       * @param {String} [options.animation] The animation name
-       * @param {Object} [options.animationOptions] The animation options
-       * @param {Object} defaultAnimator The default animator instance
-       * @return {Object} An animator instance
-       */
-      newAnimator: function(options, defaultAnimator) {
-        options = options || {};
-
-        var animator = null;
-
-        if (options.animation instanceof this._baseClass) {
-          return options.animation;
-        }
-
-        var Animator = null;
-
-        if (typeof options.animation === 'string') {
-          Animator = this._animators[options.animation];
-        }
-
-        if (!Animator && defaultAnimator) {
-          animator = defaultAnimator;
-        } else {
-          Animator = Animator || this._animators[this._animation];
-
-          var animationOpts = angular.extend(
-            {},
-            this._animationOptions,
-            options.animationOptions || {},
-            ons._config.animationsDisabled ? {duration: 0, delay: 0} : {}
-          );
-
-          animator = new Animator(animationOpts);
-        }
-
-        if (!(animator instanceof this._baseClass)) {
-          throw new Error('"animator" is not an instance of ' + this._baseClassName + '.');
-        }
-
-        return animator;
-      }
-    });
-    return AnimationChooser;
-  });
-
-})();
+angular.module('onsen').value('AnimationChooser', ons._internal.AnimatorFactory);
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -33974,13 +35208,16 @@ limitations under the License.
         var sizeAttr = this._getCarouselItemSizeAttr();
         var sizeInfo = this._decomposeSizeString(sizeAttr);
 
+        var computedStyle = getComputedStyle(this._element[0]);
+        var totalWidth = this._element[0].getBoundingClientRect().width || 0;
+        var finalWidth = totalWidth - parseInt(computedStyle.paddingLeft, 10) - parseInt(computedStyle.paddingRight, 10);
+
         for (var i = 0; i < children.length; i++) {
           angular.element(children[i]).css({
             position: 'absolute',
             height: sizeAttr,
-            width: '100%',
+            width: finalWidth + 'px',
             visibility: 'visible',
-            left: '0px',
             top: (i * sizeInfo.number) + sizeInfo.unit
           });
         }
@@ -34014,13 +35251,16 @@ limitations under the License.
 
         var sizeAttr = this._getCarouselItemSizeAttr();
         var sizeInfo = this._decomposeSizeString(sizeAttr);
-        
+
+        var computedStyle = getComputedStyle(this._element[0]);
+        var totalHeight = this._element[0].getBoundingClientRect().height || 0;
+        var finalHeight = totalHeight - parseInt(computedStyle.paddingTop, 10) - parseInt(computedStyle.paddingBottom, 10);
+
         for (var i = 0; i < children.length; i++) {
           angular.element(children[i]).css({
             position: 'absolute',
             width: sizeAttr,
-            height: '100%',
-            top: '0px',
+            height: finalHeight + 'px',
             visibility: 'visible',
             left: (i * sizeInfo.number) + sizeInfo.unit
           });
@@ -34398,7 +35638,6 @@ limitations under the License.
 
       _onDragEnd: function(event) {
         this._currentElementSize = undefined;
-        this._carouselItemElements = undefined;
 
         if (!this.isSwipeable()) {
           return;
@@ -34527,18 +35766,14 @@ limitations under the License.
        * @return {Array}
        */
       _getCarouselItemElements: function() {
-        if (this._carouselItemElements && this._carouselItemElements.length) {
-          return this._carouselItemElements;
-        }
+        var nodeList = this._element[0].querySelectorAll('ons-carousel-item'),
+          rv = [];
 
-        var nodeList = this._element[0].querySelectorAll('ons-carousel-item');
-
-        this._carouselItemElements = [];
         for (var i = nodeList.length; i--; ) {
-          this._carouselItemElements.unshift(nodeList[i]);
+          rv.unshift(nodeList[i]);
         }
 
-        return this._carouselItemElements;
+        return rv;
       },
 
       /**
@@ -34585,7 +35820,7 @@ limitations under the License.
 
       _calculateMaxScroll: function() {
         var max = this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
-        return max < 0 ? 0 : max;
+        return Math.ceil(max < 0 ? 0 : max); // Need to return an integer value.
       },
 
       _isOverScroll: function(scroll) {
@@ -35055,77 +36290,7 @@ limitations under the License.
 
 */
 
-(function() {
-  'use strict;';
-
-  var module = angular.module('onsen');
-
-  module.factory('FadeModalAnimator', ['ModalAnimator', function(ModalAnimator) {
-
-    /**
-     * iOS style animator for dialog.
-     */
-    var FadeModalAnimator = ModalAnimator.extend({
-
-      timing: 'ease-in-out',
-      duration: 0.3,
-      delay: 0,
-
-      /**
-       * @param {Object} modal
-       * @param {Function} callback
-       */
-      show: function(modal, callback) {
-        callback = callback ? callback : function() {};
-
-        animit(modal._element[0])
-          .queue({
-            opacity: 0
-          })
-          .wait(this.delay)
-          .queue({
-            opacity: 1.0
-          }, {
-            duration: this.duration,
-            timing: this.timing
-          })
-          .queue(function(done) {
-            callback();
-            done();
-          })
-          .play();
-      },
-
-      /**
-       * @param {Object} modal
-       * @param {Function} callback
-       */
-      hide: function(modal, callback) {
-        callback = callback ? callback : function() {};
-
-        animit(modal._element[0])
-          .queue({
-            opacity: 1
-          })
-          .wait(this.delay)
-          .queue({
-            opacity: 0
-          }, {
-            duration: this.duration,
-            timing: this.timing
-          })
-          .queue(function(done) {
-            callback();
-            done();
-          })
-          .play();
-      }
-    });
-
-    return FadeModalAnimator;
-  }]);
-
-})();
+angular.module('onsen').value('FadeModalAnimator', ons._internal.FadeModalAnimator);
 
 
 /*
@@ -35287,7 +36452,7 @@ limitations under the License.
 
         animit.runAll(
 
-          animit([enterPage.getPageView().getContentElement(), enterPage.getPageView().getBackgroundElement()])
+          animit([enterPage.element[0]._getContentElement(), enterPage.element[0]._getBackgroundElement()])
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -35310,7 +36475,7 @@ limitations under the License.
               done();
             }),
 
-          animit(enterPage.getPageView().getToolbarElement())
+          animit(enterPage.element[0]._getToolbarElement())
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -35340,7 +36505,7 @@ limitations under the License.
       pop: function(enterPage, leavePage, callback) {
         animit.runAll(
 
-          animit([leavePage.getPageView().getContentElement(), leavePage.getPageView().getBackgroundElement()])
+          animit([leavePage.element[0]._getContentElement(), leavePage.element[0]._getBackgroundElement()])
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -35362,7 +36527,7 @@ limitations under the License.
               done();
             }),
 
-          animit(leavePage.getPageView().getToolbarElement())
+          animit(leavePage.element[0]._getToolbarElement())
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -35418,8 +36583,8 @@ limitations under the License.
        * @param {jqLite} element
        * @param {Object} attrs
        * @param {Object} [options]
-       * @param {String} [options.viewKey]
        * @param {Boolean} [options.directiveOnly]
+       * @param {Function} [options.onDestroy]
        * @param {String} [options.modifierTemplate]
        */
       init: function(scope, element, attrs, options) {
@@ -35429,11 +36594,6 @@ limitations under the License.
         this._element = element;
         this._scope = scope;
         this._attrs = attrs;
-
-        if (options.viewKey) {
-          $onsen.declareVarAttribute(attrs, this);
-          element.data(options.viewKey, this);
-        }
 
         if (options.directiveOnly) {
           if (!options.modifierTemplate) {
@@ -35448,8 +36608,8 @@ limitations under the License.
           self._events = undefined;
           $onsen.removeModifierMethods(self);
 
-          if (options.viewKey) {
-            element.data(options.viewKey, undefined);
+          if (options.onDestroy) {
+            options.onDestroy(self);
           }
 
           $onsen.clearComponent({
@@ -35462,6 +36622,35 @@ limitations under the License.
         });
       }
     });
+
+    /**
+     * @param {Object} scope
+     * @param {jqLite} element
+     * @param {Object} attrs
+     * @param {Object} options
+     * @param {String} options.viewKey
+     * @param {Boolean} [options.directiveOnly]
+     * @param {Function} [options.onDestroy]
+     * @param {String} [options.modifierTemplate]
+     */
+    GenericView.register = function(scope, element, attrs, options) {
+      var view = new GenericView(scope, element, attrs, options);
+
+      if (!options.viewKey) {
+        throw new Error('options.viewKey is required.');
+      }
+
+      $onsen.declareVarAttribute(attrs, view);
+      element.data(options.viewKey, view);
+
+      var destroy = options.onDestroy || angular.noop;
+      options.onDestroy = function(view) {
+        destroy(view);
+        element.data(options.viewKey, null);
+      };
+
+      return view;
+    };
 
     MicroEvent.mixin(GenericView);
 
@@ -35767,8 +36956,9 @@ limitations under the License.
       ),
 
       _decompose: function(page) {
-        var left = page.getPageView().getToolbarLeftItemsElement();
-        var right = page.getPageView().getToolbarRightItemsElement();
+        var toolbar = page.element[0]._getToolbarElement();
+        var left = toolbar._getToolbarLeftItemsElement();
+        var right = toolbar._getToolbarRightItemsElement();
 
         var excludeBackButtonLabel = function(elements) {
           var result = [];
@@ -35789,28 +36979,28 @@ limitations under the License.
           .concat(right.children.length === 0 ? right : excludeBackButtonLabel(right.children));
 
         var pageLabels = [
-          page.getPageView().getToolbarCenterItemsElement(),
-          page.getPageView().getToolbarBackButtonLabelElement()
+          toolbar._getToolbarCenterItemsElement(),
+          toolbar._getToolbarBackButtonLabelElement()
         ];
 
         return {
           pageLabels: pageLabels,
           other: other,
-          content: page.getPageView().getContentElement(),
-          background: page.getPageView().getBackgroundElement(),
-          toolbar: page.getPageView().getToolbarElement(),
-          bottomToolbar: page.getPageView().getBottomToolbarElement()
+          content: page.element[0]._getContentElement(),
+          background: page.element[0]._getBackgroundElement(),
+          toolbar: toolbar,
+          bottomToolbar: page.element[0]._getBottomToolbarElement()
         };
       },
 
       _shouldAnimateToolbar: function(enterPage, leavePage) {
         var bothPageHasToolbar =
-          enterPage.getPageView().hasToolbarElement() &&
-          leavePage.getPageView().hasToolbarElement();
+          enterPage.element[0]._hasToolbarElement() &&
+          leavePage.element[0]._hasToolbarElement();
 
         var noAndroidLikeToolbar =
-          !angular.element(enterPage.getPageView().getToolbarElement()).hasClass('navigation-bar--android') &&
-          !angular.element(leavePage.getPageView().getToolbarElement()).hasClass('navigation-bar--android');
+          !angular.element(enterPage.element[0]._getToolbarElement()).hasClass('navigation-bar--android') &&
+          !angular.element(leavePage.element[0]._getToolbarElement()).hasClass('navigation-bar--android');
 
         return bothPageHasToolbar && noAndroidLikeToolbar;
       },
@@ -36322,7 +37512,8 @@ limitations under the License.
         this._renderedElements = {};
         this._addEventListeners();
 
-        this._scope.$watch(this._onChange.bind(this));
+        // Render when number of items change.
+        this._scope.$watch(this._countItems.bind(this), this._onChange.bind(this));
 
         this._scope.$on('$destroy', this._destroy.bind(this));
         this._onChange();
@@ -36501,7 +37692,7 @@ limitations under the License.
 
         var items = [];
         for (var i = startIndex; i < cnt && topPosition < 4 * window.innerHeight; i++) {
-          var h = this._getItemHeight();
+          var h = this._getItemHeight(i);
 
           if (i >= this._itemHeightSum.length) {
             this._itemHeightSum = this._itemHeightSum.concat(new Array(100));
@@ -36780,154 +37971,57 @@ limitations under the License.
 (function() {
   'use strict;';
 
-  var module = angular.module('onsen');
-
-  module.factory('ModalView', ['$onsen', '$rootScope', '$parse', 'AnimationChooser', 'ModalAnimator', 'FadeModalAnimator', function($onsen, $rootScope, $parse, AnimationChooser, ModalAnimator, FadeModalAnimator) {
+  angular.module('onsen').factory('ModalView', ['$onsen', '$parse', function($onsen, $parse) {
 
     var ModalView = Class.extend({
       _element: undefined,
       _scope: undefined,
 
-      /**
-       * @param {Object} scope
-       * @param {jqLite} element
-       * @param {Object} attrs
-       */
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
-
-        var pageView = $rootScope.ons.findParentComponentUntil('ons-page', this._element);
-        if (pageView) {
-          this._pageContent = angular.element(pageView._element[0].querySelector('.page__content'));
-        }
-
         this._scope.$on('$destroy', this._destroy.bind(this));
-        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
-        this._doorLock = new DoorLock();
 
-        this._animationChooser = new AnimationChooser({
-          animators: ModalView._animatorDict,
-          baseClass: ModalAnimator,
-          baseClassName: 'ModalAnimator',
-          defaultAnimation: attrs.animation,
-          defaultAnimationOptions: $parse(attrs.animationOptions)()
-        });
-
-        this.hide({animation: 'none'});
+        element[0]._animatorFactory.setAnimationOptions($parse(attrs.animationOptions)());
       },
 
       getDeviceBackButtonHandler: function() {
-        return this._deviceBackButtonHandler;
+        return this._element[0].getDeviceBackButtonHandler();
       },
 
-      /**
-       * Show modal view.
-       *
-       * @param {Object} [options]
-       * @param {String} [options.animation] animation type
-       * @param {Object} [options.animationOptions] animation options
-       * @param {Function} [options.callback] callback after modal is shown
-       */
+      setDeviceBackButtonHandler: function(callback) {
+        this._element[0].setDeviceBackButtonHandler(callback);
+      },
+
       show: function(options) {
-        options = options || {};
-
-        var callback = options.callback || function() {};
-
-        this._doorLock.waitUnlock(function() {
-          var unlock = this._doorLock.lock(),
-            animator = this._animationChooser.newAnimator(options);
-
-          this._element.css('display', 'table');
-          animator.show(this, function() {
-            unlock();
-            callback();
-          });
-        }.bind(this));
+        return this._element[0].show(options);
       },
 
-      _isVisible: function() {
-        return this._element[0].clientWidth > 0;
-      },
-
-      _onDeviceBackButton: function() {
-        // Do nothing and stop device-backbutton handler chain.
-        return;
-      },
-
-      /**
-       * Hide modal view.
-       *
-       * @param {Object} [options]
-       * @param {String} [options.animation] animation type
-       * @param {Object} [options.animationOptions] animation options
-       * @param {Function} [options.callback] callback after modal is hidden
-       */
       hide: function(options) {
-        options = options || {};
-
-        var callback = options.callback || function() {};
-
-        this._doorLock.waitUnlock(function() {
-          var unlock = this._doorLock.lock(),
-            animator = this._animationChooser.newAnimator(options);
-
-          animator.hide(this, function() {
-            this._element.css('display', 'none');
-            unlock();
-            callback();
-          }.bind(this));
-        }.bind(this));
+        return this._element[0].hide(options);
       },
 
-      /**
-       * Toggle modal view.
-       *
-       * @param {Object} [options]
-       * @param {String} [options.animation] animation type
-       * @param {Object} [options.animationOptions] animation options
-       * @param {Function} [options.callback] callback after modal is toggled
-       */
-      toggle: function() {
-        if (this._isVisible()) {
-          return this.hide.apply(this, arguments);
-        } else {
-          return this.show.apply(this, arguments);
-        }
+      toggle: function(options) {
+        return this._element[0].toggle(options);
       },
 
       _destroy: function() {
         this.emit('destroy', {page: this});
 
-        this._deviceBackButtonHandler.destroy();
-
-        this._element = this._scope = null;
+        this._events = this._element = this._scope = null;
       }
     });
 
-    ModalView._animatorDict = {
-      'default': ModalAnimator,
-      'fade': FadeModalAnimator,
-      'none': ModalAnimator
-    };
-
-    /**
-     * @param {String} name
-     * @param {Function} Animator
-     */
     ModalView.registerAnimator = function(name, Animator) {
-      if (!(Animator.prototype instanceof ModalAnimator)) {
-        throw new Error('"Animator" param must inherit DialogAnimator');
-      }
-      this._animatorDict[name] = Animator;
+      return window.OnsModalElement.registerAnimator(name, Animator);
     };
 
     MicroEvent.mixin(ModalView);
 
     return ModalView;
   }]);
-})();
 
+})();
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -36946,42 +38040,7 @@ limitations under the License.
 
 */
 
-(function() {
-  'use strict;';
-
-  var module = angular.module('onsen');
-
-  module.factory('ModalAnimator', function() {
-    var ModalAnimator = Class.extend({
-
-      delay: 0,
-
-      /**
-       * @param {Object} options
-       * @param {String} options.timing
-       * @param {Number} options.duration
-       * @param {Number} options.delay
-       */
-      init: function(options) {
-        options = options || {};
-
-        this.timing = options.timing || this.timing;
-        this.duration = options.duration !== undefined ? options.duration : this.duration;
-        this.delay = options.delay !== undefined ? options.delay : this.delay;
-      },
-
-      show: function(modal, callback) {
-        callback();
-      },
-
-      hide: function(modal, callback) {
-        callback();
-      }
-    });
-
-    return ModalAnimator;
-  });
-})();
+angular.module('onsen').value('ModalAnimator', ons._internal.ModalAnimator);
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -37463,6 +38522,7 @@ limitations under the License.
        * @param {Object} [options]
        * @param {String} [options.animation]
        * @param {Object} [options.animationOptions]
+       * @param {Boolean} [options.refresh]
        * @param {Function} [options.onTransitionEnd]
        * @param {Boolean} [options.cancelIfRunning]
        */
@@ -37481,13 +38541,49 @@ limitations under the License.
           if (this._emitPrePopEvent()) {
             return;
           }
-          this._popPage(options);
+
+          var unlock = this._doorLock.lock();
+
+          if (options.refresh) {
+            var index = this.pages.length - 2;
+
+            if (!this.pages[index].page) {
+              throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
+            }
+
+            $onsen.getPageHTMLAsync(this.pages[index].page).then(function(templateHTML) {
+              var pageScope = this._createPageScope();
+              var object = this._createPageElementAndLinkFunction(templateHTML, pageScope);
+              var element = object.element;
+              var link = object.link;
+
+              element = this._normalizePageElement(element);
+
+              var pageObject = this._createPageObject(this.pages[index].page, element, pageScope, options);
+
+              this._element[0].insertBefore(element[0], this.pages[index] ? this.pages[index].element[0] : null);
+              this.pages.splice(index, 0, pageObject);
+              link();
+
+              this.pages[index + 1].destroy();
+
+              this._popPage(options, unlock);
+
+            }.bind(this), function() {
+              unlock();
+              throw new Error('Page is not found');
+            });
+
+          } else {
+
+            this._popPage(options, unlock);
+
+          }
+
         }.bind(this));
       },
 
-      _popPage: function(options) {
-        var unlock = this._doorLock.lock();
-
+      _popPage: function(options, unlock) {
         var leavePage = this.pages.pop();
 
         if (this.pages[this.pages.length - 1]) {
@@ -37997,32 +39093,18 @@ limitations under the License.
   module.factory('PageView', ['$onsen', '$parse', function($onsen, $parse) {
 
     var PageView = Class.extend({
-      _registeredToolbarElement : false,
-      _registeredBottomToolbarElement : false,
-
       _nullElement : window.document.createElement('div'),
-
-      _toolbarElement : null,
-      _bottomToolbarElement : null,
 
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
         this._attrs = attrs;
 
-        this._registeredToolbarElement = false;
-        this._registeredBottomToolbarElement = false;
-
-        this._nullElement = window.document.createElement('div');
-
-        this._toolbarElement = angular.element(this._nullElement);
-        this._bottomToolbarElement = angular.element(this._nullElement);
-
         this._clearListener = scope.$on('$destroy', this._destroy.bind(this));
-        this._userDeviceBackButtonListener = angular.noop;
 
+        this._userDeviceBackButtonListener = angular.noop;
         if (this._attrs.ngDeviceBackbutton || this._attrs.onDeviceBackbutton) {
-          this._deviceBackButtonHandler = ons._deviceBackButtonHandler.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
+          this._element[0].setDeviceBackButtonHandler(this._onDeviceBackButton.bind(this));
         }
       },
 
@@ -38049,10 +39131,6 @@ limitations under the License.
        * @param {Function} callback
        */
       setDeviceBackButtonHandler: function(callback) {
-        if (!this._deviceBackButtonHandler) {
-          this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
-        }
-
         this._userDeviceBackButtonListener = callback;
       },
 
@@ -38060,170 +39138,18 @@ limitations under the License.
        * @return {Object/null}
        */
       getDeviceBackButtonHandler: function() {
-        return this._deviceBackButtonHandler || null;
-      },
-
-      /**
-       * Register toolbar element to this page.
-       *
-       * @param {jqLite} element
-       */
-      registerToolbar: function(element) {
-        if (this._registeredToolbarElement) {
-          throw new Error('This page\'s toolbar is already registered.');
-        }
-
-        angular.element(this.getContentElement()).attr('no-status-bar-fill', '');
-
-        element.remove();
-        var statusFill = this._element[0].querySelector('.page__status-bar-fill');
-        if (statusFill) {
-          angular.element(statusFill).after(element);
-        } else {
-          this._element.prepend(element);
-        }
-
-        this._toolbarElement = element;
-        this._registeredToolbarElement = true;
-      },
-
-      /**
-       * Register toolbar element to this page.
-       *
-       * @param {jqLite} element
-       */
-      registerBottomToolbar: function(element) {
-        if (this._registeredBottomToolbarElement) {
-          throw new Error('This page\'s bottom-toolbar is already registered.');
-        }
-
-        element.remove();
-
-        this._bottomToolbarElement = element;
-        this._registeredBottomToolbarElement = true;
-
-        var fill = angular.element(document.createElement('div'));
-        fill.addClass('page__bottom-bar-fill');
-        fill.css({width: '0px', height: '0px'});
-
-        this._element.prepend(fill);
-        this._element.append(element);
-      },
-
-      /**
-       * @param {jqLite} element
-       */
-      registerExtraElement: function(element) {
-        if (!this._extraElement) {
-          this._extraElement = angular.element('<div></div>');
-          this._extraElement.addClass('page__extra');
-          this._extraElement.css({
-            'z-index': '10001'
-          });
-          this._element.append(this._extraElement);
-        }
-        this._extraElement.append(element.remove());
-      },
-
-      /**
-       * @return {Boolean}
-       */
-      hasToolbarElement : function() {
-        return !!this._registeredToolbarElement;
-      },
-
-      /**
-       * @return {Boolean}
-       */
-      hasBottomToolbarElement : function() {
-        return !!this._registeredBottomToolbarElement;
-      },
-
-      /**
-       * @return {HTMLElement}
-       */
-      getContentElement : function() {
-        for (var i = 0; i < this._element.length; i++) {
-          if (this._element[i].querySelector) {
-            var content = this._element[i].querySelector('.page__content');
-            if (content) {
-              return content;
-            }
-          }
-        }
-        throw Error('fail to get ".page__content" element.');
-      },
-
-      /**
-       * @return {HTMLElement}
-       */
-      getBackgroundElement : function() {
-        for (var i = 0; i < this._element.length; i++) {
-          if (this._element[i].querySelector) {
-            var content = this._element[i].querySelector('.page__background');
-            if (content) {
-              return content;
-            }
-          }
-        }
-        throw Error('fail to get ".page__background" element.');
-      },
-
-      /**
-       * @return {HTMLElement}
-       */
-      getToolbarElement : function() {
-        return this._toolbarElement[0] || this._nullElement;
-      },
-
-      /**
-       * @return {HTMLElement}
-       */
-      getBottomToolbarElement : function() {
-        return this._bottomToolbarElement[0] || this._nullElement;
-      },
-
-      /**
-       * @return {HTMLElement}
-       */
-      getToolbarLeftItemsElement : function() {
-        return this._toolbarElement[0].querySelector('.left') || this._nullElement;
-      },
-
-      /**
-       * @return {HTMLElement}
-       */
-      getToolbarCenterItemsElement : function() {
-        return this._toolbarElement[0].querySelector('.center') || this._nullElement;
-      },
-
-      /**
-       * @return {HTMLElement}
-       */
-      getToolbarRightItemsElement : function() {
-        return this._toolbarElement[0].querySelector('.right') || this._nullElement;
-      },
-
-      /**
-       * @return {HTMLElement}
-       */
-      getToolbarBackButtonLabelElement : function() {
-        return this._toolbarElement[0].querySelector('ons-back-button .back-button__label') || this._nullElement;
+        return this._element[0].getDeviceBackButtonHandler();
       },
 
       _destroy: function() {
         this.emit('destroy', {page: this});
 
-        if (this._deviceBackButtonHandler) {
-          this._deviceBackButtonHandler.destroy();
-          this._deviceBackButtonHandler = null;
+        if (this._element[0].getDeviceBackButtonHandler()) {
+          this._element[0].getDeviceBackButtonHandler().destroy();
         }
 
         this._element = null;
-        this._toolbarElement = null;
         this._nullElement = null;
-        this._bottomToolbarElement = null;
-        this._extraElement = null;
         this._scope = null;
 
         this._clearListener();
@@ -41041,9 +41967,8 @@ limitations under the License.
 
 (function(){
   'use strict';
-  var module = angular.module('onsen');
 
-  module.factory('SwitchView', function() {
+  angular.module('onsen').factory('SwitchView', ['$parse', function($parse) {
 
     var SwitchView = Class.extend({
 
@@ -41057,31 +41982,41 @@ limitations under the License.
         this._checkbox = angular.element(element[0].querySelector('input[type=checkbox]'));
         this._scope = scope;
 
-        attrs.$observe('disabled', function() {
-          if (!!element.attr('disabled')) {
-            this._checkbox.attr('disabled', 'disabled');
-          } else {
-            this._checkbox.removeAttr('disabled');
-          }
-        }.bind(this));
-
         this._checkbox.on('change', function() {
           this.emit('change', {'switch': this, value: this._checkbox[0].checked, isInteractive: true});
         }.bind(this));
+
+        if (attrs.ngModel) {
+          var set = $parse(attrs.ngModel).assign;
+
+          scope.$parent.$watch(attrs.ngModel, function(value) {
+            this.setChecked(!!value);
+          }.bind(this));
+
+          this._checkbox.on('change', function(e) {
+            set(scope.$parent, this.isChecked());
+
+            if (attrs.ngChange) {
+              scope.$eval(attrs.ngChange);
+            }
+
+            scope.$parent.$evalAsync();
+          }.bind(this));
+        }
       },
 
       /**
        * @return {Boolean}
        */
       isChecked: function() {
-        return this._checkbox[0].checked;
+        return this._element[0]._isChecked();
       },
 
       /**
        * @param {Boolean}
        */
       setChecked: function(isChecked) {
-        isChecked = !!isChecked;
+        return this._element[0]._setChecked(isChecked);
 
         if (this._checkbox[0].checked != isChecked) {
           this._scope.model = isChecked;
@@ -41102,7 +42037,7 @@ limitations under the License.
     MicroEvent.mixin(SwitchView);
 
     return SwitchView;
-  });
+  }]);
 })();
 
 /*
@@ -41318,7 +42253,7 @@ limitations under the License.
 
         var page = ons.findParentComponentUntil('ons-page', this._element[0]);
         if (page) {
-          this._element.css('top', window.getComputedStyle(page.getContentElement(), null).getPropertyValue('padding-top'));
+          this._element.css('top', window.getComputedStyle(page._element[0]._getContentElement(), null).getPropertyValue('padding-top'));
         }
 
         if ($onsen.shouldFillStatusBar(this._element[0])) {
@@ -41351,7 +42286,7 @@ limitations under the License.
           previousTabIndex = this.getActiveTabIndex(),
           selectedTabIndex = index;
 
-        if((typeof selectedTabItem.noReload !== 'undefined' || typeof selectedTabItem.isPersistent()) &&
+        if((typeof selectedTabItem.noReload !== 'undefined' || selectedTabItem.isPersistent()) &&
             index === this.getActiveTabIndex()) {
           this.emit('reactive', {
             index: index,
@@ -42078,16 +43013,11 @@ limitations under the License.
 
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
-          var backButton = new GenericView(scope, element, attrs);
-
-          $onsen.declareVarAttribute(attrs, backButton);
-
-          element.data('ons-back-button', backButton);
+          var backButton = GenericView.register(scope, element, attrs, {viewKey: 'ons-back-button'});
 
           scope.$on('$destroy', function() {
             backButton._events = undefined;
             $onsen.removeModifierMethods(backButton);
-            element.data('ons-back-button', undefined);
             element = null;
           });
 
@@ -42166,7 +43096,7 @@ limitations under the License.
       restrict: 'E',
       link: {
         pre: function(scope, element, attrs) {
-          var bottomToolbar = new GenericView(scope, element, attrs, { // jshint ignore:line
+          GenericView.register(scope, element, attrs, {
             viewKey: 'ons-bottomToolbar'
           });
 
@@ -42174,7 +43104,7 @@ limitations under the License.
           var pageView = element.inheritedData('ons-page');
 
           if (pageView && !inline) {
-            pageView.registerBottomToolbar(element);
+            pageView._element[0]._registerBottomToolbar(element[0]);
           }
         },
 
@@ -42272,7 +43202,7 @@ limitations under the License.
     return {
       restrict: 'E',
       link: function(scope, element, attrs) {
-        var button = new GenericView(scope, element, attrs, {
+        var button = GenericView.register(scope, element, attrs, {
           viewKey: 'ons-button'
         });
 
@@ -43907,10 +44837,7 @@ limitations under the License.
     return {
       restrict: 'E',
       link: function(scope, element, attrs) {
-        var view = new GenericView(scope, element, attrs, { // jshint ignore:line
-          viewKey: 'ons-list'
-        });
-
+        GenericView.register(scope, element, attrs, {viewKey: 'ons-list'});
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };
@@ -43956,10 +44883,7 @@ limitations under the License.
     return {
       restrict: 'E',
       link: function(scope, element, attrs) {
-        var view = new GenericView(scope, element, attrs, { // jshint ignore:line
-          viewKey: 'ons-listHeader'
-        });
-
+        GenericView.register(scope, element, attrs, {viewKey: 'ons-listHeader'});
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };
@@ -44018,10 +44942,7 @@ limitations under the License.
     return {
       restrict: 'E',
       link: function(scope, element, attrs) {
-        var view = new GenericView(scope, element, attrs, { // jshint ignore:line
-          viewKey: 'ons-list-item'
-        });
-
+        GenericView.register(scope, element, attrs, {viewKey: 'ons-list-item'});
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };
@@ -44057,19 +44978,42 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.directive('onsLoadingPlaceholder', ['$onsen', '$compile', function($onsen, $compile) {
+  module.directive('onsLoadingPlaceholder', ['$onsen', '$compile', '$q', function($onsen, $compile, $q) {
+    var getPage = function(attrs) {
+      var deferred = $q.defer();
+
+      if (attrs.onsLoadingPlaceholder) {
+        deferred.resolve(attrs.onsLoadingPlaceholder);
+      }
+      else {
+        try {
+          $onsen.deferredLoadingPlaceholders.push(deferred);
+        }
+        catch (e) {
+          $onsen.deferredLoadingPlaceholders = [deferred];
+        }
+      }
+
+      return deferred.promise;
+    };
+
     return {
       restrict: 'A',
       replace: false,
       transclude: false,
       scope: false,
       compile: function(element, attrs) {
-        if (!attrs.onsLoadingPlaceholder.length) {
-          throw Error('Must define page to load.');
-        }
-
         setImmediate(function() {
-          $onsen.getPageHTMLAsync(attrs.onsLoadingPlaceholder).then(function(html) {
+          getPage(attrs).then(
+            function(page) {
+              console.log(page);
+              return $onsen.getPageHTMLAsync(page);
+            },
+            function(error) {
+              throw new Error('Unabled to resolve placeholder: ' + error);
+            }
+          )
+          .then(function(html) {
 
             // Remove page tag.
             html = html
@@ -44222,12 +45166,10 @@ limitations under the License.
 (function() {
   'use strict';
 
-  var module = angular.module('onsen');
-
   /**
    * Modal directive.
    */
-  module.directive('onsModal', ['$onsen', 'ModalView', function($onsen, ModalView) {
+  angular.module('onsen').directive('onsModal', ['$onsen', 'ModalView', function($onsen, ModalView) {
     return {
       restrict: 'E',
       replace: false,
@@ -44237,56 +45179,28 @@ limitations under the License.
       scope: false,
       transclude: false,
 
-      compile: function(element, attrs) {
-        compile(element, attrs);
+      link: {
+        pre: function(scope, element, attrs) {
+          var modal = new ModalView(scope, element, attrs);
+          $onsen.addModifierMethodsForCustomElements(modal, element);
 
-        return {
-          pre: function(scope, element, attrs) {
-            var page = element.inheritedData('ons-page');
-            if (page) {
-              page.registerExtraElement(element);
-            }
+          $onsen.declareVarAttribute(attrs, modal);
+          element.data('ons-modal', modal);
 
-            var modal = new ModalView(scope, element, attrs);
+          element[0]._ensureNodePosition();
 
-            $onsen.addModifierMethods(modal, 'modal--*', element);
-            $onsen.addModifierMethods(modal, 'modal--*__content', element.children());
+          scope.$on('$destroy', function() {
+            $onsen.removeModifierMethods(modal);
+            element.data('ons-modal', undefined);
+            modal = element = scope = attrs = null;
+          });
+        },
 
-            $onsen.declareVarAttribute(attrs, modal);
-
-            element.data('ons-modal', modal);
-
-            scope.$on('$destroy', function() {
-              modal._events = undefined;
-              $onsen.removeModifierMethods(modal);
-              element.data('ons-modal', undefined);
-            });
-          },
-
-          post: function(scope, element) {
-            $onsen.fireComponentEvent(element[0], 'init');
-          }
-        };
+        post: function(scope, element) {
+          $onsen.fireComponentEvent(element[0], 'init');
+        }
       }
     };
-
-    function compile(element, attrs) {
-      var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
-      var html = element[0].innerHTML;
-      element[0].innerHTML = '';
-
-      var wrapper = angular.element('<div></div>');
-      wrapper.addClass('modal__content');
-      wrapper.addClass(modifierTemplater('modal--*__content'));
-
-      element.css('display', 'none');
-      element.addClass('modal');
-      element.addClass(modifierTemplater('modal--*'));
-
-      wrapper[0].innerHTML = html;
-      element.append(wrapper);
-    }
   }]);
 
 })();
@@ -44553,6 +45467,9 @@ limitations under the License.
  * @param {String} [options.animationOptions]
  *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
  *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+ * @param {Boolean} [options.refresh]
+ *   [en]The previous page will be refreshed (destroyed and created again) before popPage action.[/en]
+ *   [ja]popPageする前に、前にあるページを生成しなおして更新する場合にtrueを指定します。[/ja]
  * @param {Function} [options.onTransitionEnd]
  *   [en]Function that is called when the transition has ended.[/en]
  *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
@@ -44824,13 +45741,11 @@ limitations under the License.
   module.directive('onsPage', ['$onsen', 'PageView', function($onsen, PageView) {
 
     function firePageInitEvent(element) {
-
       // TODO: remove dirty fix
-      var i = 0;
-      var f = function() {
+      var i = 0, f = function() {
         if (i++ < 5)  {
           if (isAttached(element)) {
-            fillStatusBar(element);
+            element._tryToFillStatusBar();
             $onsen.fireComponentEvent(element, 'init');
             fireActualPageInitEvent(element);
           } else {
@@ -44850,60 +45765,11 @@ limitations under the License.
       element.dispatchEvent(event);
     }
 
-    function fillStatusBar(element) {
-      if ($onsen.shouldFillStatusBar(element)) {
-        // Adjustments for IOS7
-        var fill = angular.element(document.createElement('div'));
-        fill.addClass('page__status-bar-fill');
-        fill.css({width: '0px', height: '0px'});
-
-        angular.element(element).prepend(fill);
-      }
-    }
-
     function isAttached(element) {
       if (document.documentElement === element) {
         return true;
       }
       return element.parentNode ? isAttached(element.parentNode) : false;
-    }
-
-    function preLink(scope, element, attrs, controller, transclude) {
-      var page = new PageView(scope, element, attrs);
-
-      $onsen.declareVarAttribute(attrs, page);
-
-      element.data('ons-page', page);
-
-      var modifierTemplater = $onsen.generateModifierTemplater(attrs),
-          template = 'page--*';
-      element.addClass('page ' + modifierTemplater(template));
-      $onsen.addModifierMethods(page, template, element);
-
-      var pageContent = angular.element(element[0].querySelector('.page__content'));
-      pageContent.addClass(modifierTemplater('page--*__content'));
-      pageContent = null;
-
-      var pageBackground = angular.element(element[0].querySelector('.page__background'));
-      pageBackground.addClass(modifierTemplater('page--*__background'));
-      pageBackground = null;
-
-      $onsen.cleaner.onDestroy(scope, function() {
-        page._events = undefined;
-        $onsen.removeModifierMethods(page);
-        element.data('ons-page', undefined);
-
-        $onsen.clearComponent({
-          element: element,
-          scope: scope,
-          attrs: attrs
-        });
-        scope = element = attrs = null;
-      });
-    }
-
-    function postLink(scope, element, attrs) {
-      firePageInitEvent(element[0]);
     }
 
     return {
@@ -44914,57 +45780,31 @@ limitations under the License.
       transclude: false,
       scope: false,
 
-      compile: function(element) {
-        var children = element.children().remove();
+      link: {
+        pre: function(scope, element, attrs) {
+          var page = new PageView(scope, element, attrs);
 
-        var content = angular.element('<div class="page__content ons-page-inner"></div>').append(children);
-        var background = angular.element('<div class="page__background"></div>');
+          $onsen.declareVarAttribute(attrs, page);
+          element.data('ons-page', page);
+          $onsen.addModifierMethodsForCustomElements(page, element);
 
-        if (element.attr('style')) {
-          background.attr('style', element.attr('style'));
-          element.attr('style', '');
-        }
+          $onsen.cleaner.onDestroy(scope, function() {
+            page._events = undefined;
+            $onsen.removeModifierMethods(page);
+            element.data('ons-page', undefined);
 
-        element.append(background);
-
-        if (Modernizr.csstransforms3d) {
-          element.append(content);
-        } else {
-          content.css('overflow', 'visible');
-
-          var wrapper = angular.element('<div></div>');
-          wrapper.append(children);
-          content.append(wrapper);
-          element.append(content);
-          wrapper = null;
-
-          // IScroll for Android2
-          var scroller = new IScroll(content[0], {
-            momentum: true,
-            bounce: true,
-            hScrollbar: false,
-            vScrollbar: false,
-            preventDefault: false
+            $onsen.clearComponent({
+              element: element,
+              scope: scope,
+              attrs: attrs
+            });
+            scope = element = attrs = null;
           });
+        },
 
-          var offset = 10;
-          scroller.on('scrollStart', function(e) {
-            var scrolled = scroller.y - offset;
-            if (scrolled < (scroller.maxScrollY + 40)) {
-              // TODO: find a better way to know when content is updated so we can refresh
-              scroller.refresh();
-            }
-          });
+        post: function postLink(scope, element, attrs) {
+          firePageInitEvent(element[0]);
         }
-
-        content = null;
-        background = null;
-        children = null;
-
-        return {
-          pre: preLink,
-          post: postLink
-        };
       }
     };
   }]);
@@ -46663,78 +47503,37 @@ limitations under the License.
 
 (function(){
   'use strict';
-  var module = angular.module('onsen');
 
-  module.directive('onsSwitch', ['$onsen', '$parse', 'SwitchView', function($onsen, $parse, SwitchView) {
+  angular.module('onsen').directive('onsSwitch', ['$onsen', 'SwitchView', function($onsen, SwitchView) {
     return {
       restrict: 'E',
       replace: false,
-
-      transclude: false,
       scope: true,
 
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/switch.tpl',
-      compile: function(element) {
-        return function(scope, element, attrs) {
-          if (attrs.ngController) {
-            throw new Error('This element can\'t accept ng-controller directive.');
-          }
+      link: function(scope, element, attrs) {
+        if (attrs.ngController) {
+          throw new Error('This element can\'t accept ng-controller directive.');
+        }
 
-          var switchView = new SwitchView(element, scope, attrs);
-          var checkbox = angular.element(element[0].querySelector('input[type=checkbox]'));
+        var switchView = new SwitchView(element, scope, attrs);
+        $onsen.addModifierMethodsForCustomElements(switchView, element);
 
-          scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+        $onsen.declareVarAttribute(attrs, switchView);
+        element.data('ons-switch', switchView);
 
-          var label = element.children(),
-              input = angular.element(label.children()[0]),
-              toggle = angular.element(label.children()[1]);
-
-          $onsen.addModifierMethods(switchView, 'switch--*', label);
-          $onsen.addModifierMethods(switchView, 'switch--*__input', input);
-          $onsen.addModifierMethods(switchView, 'switch--*__toggle', toggle);
-
-          attrs.$observe('checked', function(checked) {
-            scope.model = !!element.attr('checked');
+        $onsen.cleaner.onDestroy(scope, function() {
+          switchView._events = undefined;
+          $onsen.removeModifierMethods(switchView);
+          element.data('ons-switch', undefined);
+          $onsen.clearComponent({
+            element : element,
+            scope : scope,
+            attrs : attrs
           });
+          checkbox = element = attrs = scope = null;
+        });
 
-          attrs.$observe('name', function(name) {
-            if (!!element.attr('name')) {
-              checkbox.attr('name', name);
-            }
-          });
-
-          if (attrs.ngModel) {
-            var set = $parse(attrs.ngModel).assign;
-
-            scope.$parent.$watch(attrs.ngModel, function(value) {
-              scope.model = value;
-            });
-
-            scope.$watch('model', function(to, from) {
-              set(scope.$parent, to);
-              if (to !== from) {
-                scope.$eval(attrs.ngChange);
-              }
-            });
-          }
-
-          $onsen.declareVarAttribute(attrs, switchView);
-          element.data('ons-switch', switchView);
-
-          $onsen.cleaner.onDestroy(scope, function() {
-            switchView._events = undefined;
-            $onsen.removeModifierMethods(switchView);
-            element.data('ons-switch', undefined);
-            $onsen.clearComponent({
-              element : element,
-              scope : scope,
-              attrs : attrs
-            });
-            checkbox = element = attrs = scope = null;
-          });
-
-          $onsen.fireComponentEvent(element[0], 'init');
-        };
+        $onsen.fireComponentEvent(element[0], 'init');
       }
     };
   }]);
@@ -47422,117 +48221,9 @@ limitations under the License.
 (function() {
   'use strict';
 
-  var module = angular.module('onsen');
-
-  function ensureLeftContainer(element, modifierTemplater) {
-    var container = element[0].querySelector('.left');
-
-    if (!container) {
-      container = document.createElement('div');
-      container.setAttribute('class', 'left');
-      container.innerHTML = '&nbsp;';
-    }
-
-    if (container.innerHTML.trim() === '') {
-      container.innerHTML = '&nbsp;';
-    }
-
-    angular.element(container)
-      .addClass('navigation-bar__left')
-      .addClass(modifierTemplater('navigation-bar--*__left'));
-
-    return container;
-  }
-
-  function ensureCenterContainer(element, modifierTemplater) {
-    var container = element[0].querySelector('.center');
-
-    if (!container) {
-      container = document.createElement('div');
-      container.setAttribute('class', 'center');
-    }
-
-    if (container.innerHTML.trim() === '') {
-      container.innerHTML = '&nbsp;';
-    }
-
-    angular.element(container)
-      .addClass('navigation-bar__title navigation-bar__center')
-      .addClass(modifierTemplater('navigation-bar--*__center'));
-
-    return container;
-  }
-
-  function ensureRightContainer(element, modifierTemplater) {
-    var container = element[0].querySelector('.right');
-
-    if (!container) {
-      container = document.createElement('div');
-      container.setAttribute('class', 'right');
-      container.innerHTML = '&nbsp;';
-    }
-
-    if (container.innerHTML.trim() === '') {
-      container.innerHTML = '&nbsp;';
-    }
-
-    angular.element(container)
-      .addClass('navigation-bar__right')
-      .addClass(modifierTemplater('navigation-bar--*__right'));
-
-    return container;
-  }
-
-  /**
-   * @param {jqLite} element
-   * @return {Boolean}
-   */
-  function hasCenterClassElementOnly(element) {
-    var hasCenter = false;
-    var hasOther = false;
-    var child, children = element.contents();
-
-    for (var i = 0; i < children.length; i++) {
-      child = angular.element(children[i]);
-
-      if (child.hasClass('center')) {
-        hasCenter = true;
-        continue;
-      }
-
-      if (child.hasClass('left') || child.hasClass('right')) {
-        hasOther = true;
-        continue;
-      }
-
-    }
-
-    return hasCenter && !hasOther;
-  }
-
-  function ensureToolbarItemElements(element, modifierTemplater) {
-    var center;
-    if (hasCenterClassElementOnly(element)) {
-      center = ensureCenterContainer(element, modifierTemplater);
-      element.contents().remove();
-      element.append(center);
-    } else {
-      center = ensureCenterContainer(element, modifierTemplater);
-      var left = ensureLeftContainer(element, modifierTemplater);
-      var right = ensureRightContainer(element, modifierTemplater);
-
-      element.contents().remove();
-      element.append(angular.element([left, center, right]));
-    }
-  }
-
-  /**
-   * Toolbar directive.
-   */
-  module.directive('onsToolbar', ['$onsen', 'GenericView', function($onsen, GenericView) {
+  angular.module('onsen').directive('onsToolbar', ['$onsen', 'GenericView', function($onsen, GenericView) {
     return {
       restrict: 'E',
-      replace: false,
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclude.
@@ -47540,45 +48231,11 @@ limitations under the License.
       transclude: false,
 
       compile: function(element, attrs) {
-        var shouldAppendAndroidModifier = ons.platform.isAndroid() && !element[0].hasAttribute('fixed-style');
-        var modifierTemplater = $onsen.generateModifierTemplater(attrs, shouldAppendAndroidModifier ? ['android'] : []),
-          inline = typeof attrs.inline !== 'undefined';
-
-        element.addClass('navigation-bar');
-        element.addClass(modifierTemplater('navigation-bar--*'));
-
-        if (!inline) {
-          element.css({
-            'position': 'absolute',
-            'z-index': '10000',
-            'left': '0px',
-            'right': '0px',
-            'top': '0px'
-          });
-        }
-
-        ensureToolbarItemElements(element, modifierTemplater);
 
         return {
           pre: function(scope, element, attrs) {
-            var toolbar = new GenericView(scope, element, attrs, {
-              viewKey: 'ons-toolbar',
-              directiveOnly: true,
-              modifierTemplater: 'navigation-bar--*'
-            });
-
-            angular.forEach(['left', 'center', 'right'], function(position) {
-              var el = element[0].querySelector('.navigation-bar__' + position);
-              if (el) {
-                $onsen.addModifierMethods(toolbar, 'navigation-bar--*__' + position, angular.element(el));
-              }
-            });
-
-            var pageView = element.inheritedData('ons-page');
-
-            if (pageView && !inline) {
-              pageView.registerToolbar(element);
-            }
+            GenericView.register(scope, element, attrs, {viewKey: 'ons-toolbar'});
+            element[0]._ensureNodePosition();
           },
           post: function(scope, element, attrs) {
             $onsen.fireComponentEvent(element[0], 'init');
@@ -47844,6 +48501,7 @@ limitations under the License.
   module.factory('$onsen', ['$rootScope', '$window', '$cacheFactory', '$document', '$templateCache', '$http', '$q', '$onsGlobal', 'ComponentCleaner', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner) {
 
     var $onsen = createOnsenService();
+    var ModifierUtil = $onsGlobal._internal.ModifierUtil;
 
     return $onsen;
 
@@ -47876,25 +48534,7 @@ limitations under the License.
          * @return {Boolean}
          */
         shouldFillStatusBar: function(element) {
-          if (this.isEnabledAutoStatusBarFill() && this.isWebView() && this.isIOS7Above()) {
-            if (!(element instanceof HTMLElement)) {
-              throw new Error('element must be an instance of HTMLElement');
-            }
-            var debug = element.tagName === 'ONS-TABBAR' ? console.log.bind(console) : angular.noop;
-
-            for (;;) {
-              if (element.hasAttribute('no-status-bar-fill')) {
-                return false;
-              }
-
-              element = element.parentNode;
-              debug(element);
-              if (!element || !element.hasAttribute) {
-                return true;
-              }
-            }
-          }
-          return false;
+          return $onsGlobal.shouldFillStatusBar(element);
         },
 
         /**
@@ -48866,6 +49506,24 @@ limitations under the License.
  * @description 
  *   [en]Returns whether the OS is Android.[/en]
  *   [ja]Android上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isAndroidPhone()
+ * @description 
+ *   [en]Returns whether the device is Android phone.[/en]
+ *   [ja]Android携帯上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isAndroidTablet()
+ * @description 
+ *   [en]Returns whether the device is Android tablet.[/en]
+ *   [ja]Androidタブレット上で実行されているかどうかを返します。[/ja]
  * @return {Boolean}
  */
 

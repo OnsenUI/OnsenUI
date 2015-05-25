@@ -144,6 +144,11 @@ componentCategory: util
           <td>Create a popover instance from a template.</td>
         </tr>
         
+        <tr>
+          <td><a href="#method-resolveLoadingPlaceholder">resolveLoadingPlaceholder(page)</a></td>
+          <td>If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.</td>
+        </tr>
+        
       </tbody>
     </table>
   </section>
@@ -699,6 +704,46 @@ componentCategory: util
           <td><span class="parameter-name">options.parentScope</span></td>
           <td class="value-type">Object</td>
           <td>Parent scope of the dialog. Used to bind models and access scope methods from the dialog.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-resolveLoadingPlaceholder">
+      resolveLoadingPlaceholder(page)
+
+      <a href="#method-resolveLoadingPlaceholder" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>If no page is defined for the `ons-loading-placeholder` attribute it will wait for this method being called before loading the page.</p>
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">page</span></td>
+          <td class="value-type">String</td>
+          <td>Page name. Can be either an HTML file or an <ons-template> element.</td>
         </tr>
         
       </tbody>
