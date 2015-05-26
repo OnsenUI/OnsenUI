@@ -42,7 +42,7 @@ limitations under the License.
    * @return {Boolean}
    */
   ons._internal.shouldFillStatusBar = (element) => {
-    if (ons._internal.isEnabledAutoStatusBarFill() && ons.platform.isWebView() && ons.platform.isIOS7Above()) {
+    if (ons._internal.isEnabledAutoStatusBarFill() && ons.platform.isWebView() && ons.platform.isIOS7above()) {
       if (!(element instanceof HTMLElement)) {
         throw new Error('element must be an instance of HTMLElement');
       }
