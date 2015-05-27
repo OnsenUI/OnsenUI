@@ -183,6 +183,11 @@ limitations under the License.
         this.insertBefore(fill, this.children[0]);
       }
     }
+
+    _hide() {
+      this.style.display = 'none';
+      ons._util.fireEvent(this, 'hide');
+    }
   }
 
   if (!window.OnsPageElement) {

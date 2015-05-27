@@ -414,7 +414,7 @@ limitations under the License.
               oldPageScope.$destroy();
             }
             else {
-              oldPageElement.css('display', 'none');
+              oldPageElement[0]._hide();
             }
 
             if (options.callback instanceof Function) {
