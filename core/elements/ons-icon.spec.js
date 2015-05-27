@@ -1,3 +1,4 @@
+
 describe('ons-icon', function() {
   it('provide \'OnsIconElement\' global variable', function() {
     expect(window.OnsIconElement).to.be.ok;
