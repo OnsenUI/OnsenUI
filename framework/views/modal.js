@@ -18,7 +18,12 @@ limitations under the License.
 (function() {
   'use strict;';
 
-  angular.module('onsen').factory('ModalView', function($onsen, $parse) {
+  var module = angular.module('modal');
+
+  module.value('ModalAnimator', ons._internal.ModalAnimator);
+  module.value('FadeModalAnimator', ons._internal.FadeModalAnimator);
+
+  module.factory('ModalView', function($onsen, $parse) {
 
     var ModalView = Class.extend({
       _element: undefined,
