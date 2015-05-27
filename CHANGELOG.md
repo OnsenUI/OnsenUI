@@ -31,6 +31,7 @@ v1.3.3-dev
  * ons-carousel: Carousel will now apply the specified padding to the items.
  * ons-carousel: Fixed [#651](https://github.com/OnsenUI/OnsenUI/issues/651).
  * ons-lazy-repeat: Fixed [#678](https://github.com/OnsenUI/OnsenUI/issues/678).
+ * ons-icon: Fixed [#687](https://github.com/OnsenUI/OnsenUI/issues/687).
 
 v1.3.2
 ----
