@@ -200,7 +200,7 @@ limitations under the License.
    */
   ModalElement.registerAnimator = function(name, Animator) {
     if (!(Animator.prototype instanceof ModalAnimator)) {
-      throw new Error('"Animator" param must inherit DialogAnimator');
+      throw new Error('"Animator" param must inherit ModalAnimator');
     }
     ModalElement._animatorDict[name] = Animator;
   };

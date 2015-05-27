@@ -18,7 +18,7 @@ limitations under the License.
 (function() {
   'use strict;';
 
-  var module = angular.module('modal');
+  var module = angular.module('onsen');
 
   module.value('ModalAnimator', ons._internal.ModalAnimator);
   module.value('FadeModalAnimator', ons._internal.FadeModalAnimator);
