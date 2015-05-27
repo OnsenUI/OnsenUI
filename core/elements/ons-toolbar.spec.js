@@ -65,8 +65,7 @@ describe('ons-toolbar', function() {
     var element = new OnsToolbarElement();
     element.setAttribute('inline', '');
 
-    if(element.hasAttribute('inline'))
-    {
+    if (element.hasAttribute('inline')) {
       expect(element.style.position).not.to.equal('absolute');
       expect(element.style.zIndex).not.to.equal('10000');
       expect(element.style.left).not.to.equal('0px');
@@ -78,7 +77,8 @@ describe('ons-toolbar', function() {
 
   it('recognizes Android platform', function() {
     var element = new OnsToolbarElement();
-    if(ons.platform.isAndroid() && !this.hasAttribute('fixed-style'))
+    if (ons.platform.isAndroid() && !this.hasAttribute('fixed-style')) {
       expect(element.classList.contains('navigation-bar--android')).to.be.true;
+    }
   });
 });
