@@ -95,4 +95,16 @@ limitations under the License.
     return dst;
   };
 
+  /**
+   * @param {Object} arrayLike
+   * @return {Array}
+   */
+  util.arrayFrom = (arrayLike) => {
+    var result = [];
+    for (var i = 0; i < arrayLike.length; i++) {
+      result.push(arrayLike[i]);
+    }
+    return result;
+  };
+
 })(window.ons = window.ons || {});
