@@ -410,7 +410,6 @@ limitations under the License.
 
           this._animationChooser.newAnimator(options).apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
             if (options._removeElement) {
-              oldPageElement.remove();
               oldPageScope.$destroy();
             }
             else {
