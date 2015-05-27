@@ -34,6 +34,13 @@ limitations under the License.
       ModifierUtil.initModifier(this, scheme);
     }
 
+    attachedCallback() {
+      if (!this._hasBeenAttachedBefore) {
+        this._hasBeenAttachedBefore = true;
+        ons._util.fireEvent(this, 'create');
+      }
+    }
+
     /**
      * @return {Object/null}
      */
