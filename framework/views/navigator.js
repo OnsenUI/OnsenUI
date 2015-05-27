@@ -543,8 +543,9 @@ limitations under the License.
       _popPage: function(options, unlock) {
         var leavePage = this.pages.pop();
 
-        if (this.pages[this.pages.length - 1]) {
-          this.pages[this.pages.length - 1].element.css('display', 'block');
+        var previousPage = this.pages[this.pages.length - 1];
+        if (previousPage) {
+          previousPage.element[0]._show();
         }
 
         var enterPage = this.pages[this.pages.length -1];

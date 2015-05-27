@@ -458,7 +458,7 @@ limitations under the License.
       _loadPersistentPageDOM: function(element, options) {
         options = options || {};
 
-        element.css('display', 'block');
+        element[0]._show();
         this._switchPage(element, element.scope(), options);
       },
 
