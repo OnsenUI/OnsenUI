@@ -32,6 +32,7 @@ v1.3.3-dev
  * ons-carousel: Fixed [#651](https://github.com/OnsenUI/OnsenUI/issues/651).
  * ons-lazy-repeat: Fixed [#678](https://github.com/OnsenUI/OnsenUI/issues/678).
  * ons-icon: Fixed [#687](https://github.com/OnsenUI/OnsenUI/issues/687).
+ * ons-navigator: Fixed [#691](https://github.com/OnsenUI/OnsenUI/issues/691).
 
 v1.3.2
 ----

@@ -233,8 +233,8 @@ limitations under the License.
           throw new Error('options must be an object. You supplied ' + options);
         }
 
-        if (this.pages.length === 0) {
-          return this.pushPage.apply(this, arguments);
+        if (index === this.pages.length) {
+          return this.pushPage.apply(this, [].slice.call(arguments, 1));
         }
 
         var normalizeIndex = function(index) {
