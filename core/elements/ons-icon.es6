@@ -82,6 +82,7 @@ limitations under the License.
       var size = '' + this.getAttribute('size');
       if (size.match(/^[1-5]x|lg$/)) {
         classList.push('fa-' + size);
+        this.removeAttribute('style');
       } else if (typeof size === 'string') {
         style.fontSize = size;
       } else {
