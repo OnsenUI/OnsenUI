@@ -21,7 +21,7 @@ limitations under the License.
   var util = ons._util = ons._util || {};
 
   /**
-   * @param {HTMLElement} element 
+   * @param {Element} element 
    * @param {String} query dot class name or node name.
    * @return {HTMLElement/null}
    */
@@ -41,7 +41,7 @@ limitations under the License.
   };
 
   /**
-   * @param {HTMLElement} element 
+   * @param {Element} element 
    * @param {String} query dot class name or node name.
    * @return {HTMLElement/null}
    */
@@ -59,6 +59,21 @@ limitations under the License.
         return parent;
       }
     }
+  };
+
+  /**
+   * @param {String} html
+   * @return {Element}
+   */
+  util.createElement = (html) => {
+    var wrapper = document.createElement('div');
+    wrapper.innerHTML = html;
+
+    if (wrapper.children.length > 1) {
+      throw new Error('"html" must be one wrapper element.');
+    }
+
+    return wrapper.children[0];
   };
 
   /*
