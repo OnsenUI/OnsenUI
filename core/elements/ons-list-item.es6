@@ -34,8 +34,8 @@ limitations under the License.
     }
   }
 
-  if (!window.OnsListItem) {
-    window.OnsListItem = document.registerElement('ons-list-item', {
+  if (!window.OnsListItemElement) {
+    window.OnsListItemElement = document.registerElement('ons-list-item', {
       prototype: ListItemElement.prototype
     });
   }
