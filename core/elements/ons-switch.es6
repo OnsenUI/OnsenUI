@@ -77,7 +77,7 @@ limitations under the License.
     detachedCallback() {
     }
 
-    atachedCallback() {
+    attachedCallback() {
     }
 
     /**

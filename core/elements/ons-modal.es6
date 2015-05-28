@@ -84,7 +84,7 @@ limitations under the License.
       }
     }
 
-    atachedCallback() {
+    attachedCallback() {
       setImmediate(this._ensureNodePosition.bind(this));
       this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
     }

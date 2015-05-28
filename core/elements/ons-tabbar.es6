@@ -375,7 +375,7 @@ limitations under the License.
     detachedCallback() {
     }
 
-    atachedCallback() {
+    attachedCallback() {
     }
 
     _ensureTabElements(wrapper) {
