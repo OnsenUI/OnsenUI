@@ -91,10 +91,10 @@ limitations under the License.
       
       content.setAttribute('no-status-bar-fill', '');
 
-      setImmediate(function() {
+      setImmediate(() => {
         content.classList.add('tab-bar--top__content');
         tabbar.classList.add('tab-bar--top');
-      }.bind(this));
+      });
 
       var page = ons._util.findParent(this, 'ons-page');
       if (page) {
@@ -132,15 +132,9 @@ limitations under the License.
      * @param {Object} [options.animation]
      */
     _loadPage(page, options) {
-
-      ons._internal.getPageHTMLAsync(page, (error, html) => {
-        if (error) {
-          throw new Error('Error: ' + error);
-        }
-        var pageElement = util.createElement(html.trim());
-
+      OnsTabElement.prototype._loadPageElement(page, pageElement => {
         this._loadPageDOM(pageElement, options);
-      }.bind(this));
+      });
     }
 
     /**
@@ -174,7 +168,14 @@ limitations under the License.
      * @return {Element/null}
      */
     _getCurrentPageElement() {
-      var page = this._getContentElement().children[0] || null;
+      var pages = this._getContentElement().children;
+      var page = null;
+      for (var i = 0; i < pages.length; i++) {
+        if (pages[i].style.display !== 'none') {
+          page = pages[i];
+          break;
+        }
+      }
 
       if (page && page.nodeName.toLowerCase() !== 'ons-page') {
         throw new Error('Invalid state: page element must be a "ons-page" element.');
@@ -204,7 +205,7 @@ limitations under the License.
               oldPageElement.parentNode.removeChild(oldPageElement);
             }
           } else {
-            oldPageElement.style.display = none;
+            oldPageElement.style.display = 'none';
           }
 
           if (options.callback instanceof Function) {
@@ -278,14 +279,13 @@ limitations under the License.
 
         if (previousTab && previousTab.isPersistent()) {
           removeElement = false;
-          previousTab._pageElement = this._currentPageElement;
         }
 
         var params = {
-          callback: function() {
+          callback: () => {
             // TODO
             //this.emit('postchange', {index: index, tabItem: selectedTab});
-          }.bind(this),
+          },
           previousTabIndex: previousTabIndex,
           selectedTabIndex: selectedTabIndex,
           _removeElement: removeElement
@@ -295,8 +295,10 @@ limitations under the License.
           params.animation = options.animation;
         }
 
-        if (selectedTab.isPersistent() && selectedTab._pageElement) {
-          this._loadPersistentPageDOM(selectedTab._pageElement, params);
+        if (selectedTab.isPersistent()) {
+          selectedTab.loadPageElement(pageElement => {
+            this._loadPersistentPageDOM(pageElement, params);
+          });
         } else {
           this._loadPage(selectedTab.getAttribute('page'), params);
         }
@@ -324,7 +326,8 @@ limitations under the License.
     _loadPersistentPageDOM(element, options) {
       options = options || {};
 
-      element.css('display', 'block');
+      element.style.display = 'block';
+      this._getContentElement().appendChild(element);
       this._switchPage(element, options);
     }
 

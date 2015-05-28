@@ -112,6 +112,38 @@ limitations under the License.
     }
 
     /**
+     * @param {Function} callback
+     */
+    loadPageElement(callback) {
+      if (this.isPersistent()) {
+        if (!this._pageElement) {
+          this._loadPageElement(this.getAttribute('page'), (element) => {
+            this._pageElement = element;
+            callback(element);
+          });
+        } else {
+          callback(this._pageElement);
+        }
+      } else {
+        this._pageElement = null;
+        this._loadPageElement(this.getAttribute('page'), callback);
+      }
+    }
+
+    /**
+     * @param {String} page
+     * @param {Function} callback
+     */
+    _loadPageElement(page, callback) {
+      ons._internal.getPageHTMLAsync(page, (error, html) => {
+        if (error) {
+          throw new Error('Error: ' + error);
+        }
+        callback(util.createElement(html.trim()));
+      });
+    }
+
+    /**
      * @return {Boolean}
      */
     isActive() {
