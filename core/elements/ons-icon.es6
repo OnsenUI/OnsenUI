@@ -41,9 +41,7 @@ limitations under the License.
         }
       }
 
-      builded.classList.forEach(className => {
-        this.classList.add(className);
-      }.bind(this));
+      builded.classList.forEach(className => this.classList.add(className));
     }
 
     /**

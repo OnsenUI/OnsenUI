@@ -90,8 +90,7 @@ limitations under the License.
              (!isPortrait && w >= h)) {
             this.emit('change', {isPortrait: isPortrait});
             clearInterval(interval);
-          }
-          else if (nIter === 50) {
+          } else if (nIter === 50) {
             this.emit('change', {isPortrait: isPortrait});
             clearInterval(interval);
           }

@@ -128,7 +128,7 @@ limitations under the License.
 
       var callback = options.callback || function() {};
 
-      this._doorLock.waitUnlock(function() {
+      this._doorLock.waitUnlock(() => {
         var unlock = this._doorLock.lock(),
           animator = this._animatorFactory.newAnimator(options);
 
@@ -137,7 +137,7 @@ limitations under the License.
           unlock();
           callback();
         });
-      }.bind(this));
+      });
     }
 
     /**
@@ -169,16 +169,16 @@ limitations under the License.
 
       var callback = options.callback || function() {};
 
-      this._doorLock.waitUnlock(function() {
+      this._doorLock.waitUnlock(() => {
         var unlock = this._doorLock.lock(),
           animator = this._animatorFactory.newAnimator(options);
 
-        animator.hide(this, function() {
+        animator.hide(this, () => {
           this.style.display = 'none';
           unlock();
           callback();
-        }.bind(this));
-      }.bind(this));
+        });
+      });
     }
 
     attributeChangedCallback(name, last, current) {
