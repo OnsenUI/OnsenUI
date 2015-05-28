@@ -33,6 +33,7 @@ v1.3.3-dev
  * ons-lazy-repeat: Fixed [#678](https://github.com/OnsenUI/OnsenUI/issues/678).
  * ons-navigator: Fixed [#691](https://github.com/OnsenUI/OnsenUI/issues/691).
  * ons-icon: Fixed [#687](https://github.com/OnsenUI/OnsenUI/issues/687).
+ * ons-icon: Fixed [#688](https://github.com/OnsenUI/OnsenUI/issues/688).
 
 v1.3.2
 ----
