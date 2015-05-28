@@ -26,11 +26,11 @@ limitations under the License.
         this.removeChild(this.firstChild);
       }
 
-      var event = new CustomEvent('templateLoaded');
+      var event = new CustomEvent('_templateloaded', {bubbles: true, cancelable: true});
       event.template = this.template;
       event.templateId = this.getAttribute('id');
 
-      window.document.dispatchEvent(event);
+      this.dispatchEvent(event);
     }
   }
 

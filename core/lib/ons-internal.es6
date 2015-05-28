@@ -81,8 +81,10 @@ limitations under the License.
     }
   };
 
-  document.addEventListener('templateLoaded', function(e) {
-    ons._internal.templateStore.set(e.templateId, e.template);
+  document.addEventListener('_templateloaded', function(e) {
+    if (e.target.nodeName.toLowerCase() === 'ons-template') {
+      ons._internal.templateStore.set(e.templateId, e.template);
+    }
   }, false);
 
   document.addEventListener('DOMContentLoaded', function() {
