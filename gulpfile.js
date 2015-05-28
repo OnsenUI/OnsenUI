@@ -95,6 +95,20 @@ gulp.task('core-test', ['core'], function() {
 });
 
 ////////////////////////////////////////
+// watch-core-test
+////////////////////////////////////////
+gulp.task('watch-core-test', function() {
+  return gulp.src(['build/js/ons-core.js', 'core/**/*.spec.js'])
+    .pipe(karma({
+      configFile: 'core/test/karma.conf.js',
+      action: 'watch'
+    }))
+    .on('error', function(err) {
+      throw err;
+    });
+});
+
+////////////////////////////////////////
 // html2js
 ////////////////////////////////////////
 gulp.task('html2js', function() {
