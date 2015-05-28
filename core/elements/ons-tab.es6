@@ -29,6 +29,11 @@ limitations under the License.
 
     createdCallback() {
       this._compile();
+      this._bindedOnClick = this._onClick.bind(this);
+    }
+
+    _onClick() {
+      this._tryToChange();
     }
 
     _compile() {
@@ -59,8 +64,6 @@ limitations under the License.
         button.appendChild(fragment);
       }
 
-      // set tabbar name
-      // set ng-click
       // set modifier templater
     }
 
@@ -69,8 +72,9 @@ limitations under the License.
     }
 
     _tryToChange() {
-      if (this.parentNode && this.parentNode.nodeName !== 'ons-tabbar') {
-        this.parentNode._setActiveTab(this);
+      var tabbar = this._findTabbarElement();
+      if (tabbar) {
+        tabbar.setActiveTab(this._findTabIndex());
       }
     }
 
@@ -78,41 +82,87 @@ limitations under the License.
       return this.classList.contains('tab-bar__item--default');
     }
 
-    _setActive() {
+    setActive() {
       var radio = util.findChild(this, 'input');
       radio.checked = true;
       this.classList.add('active');
-      this.querySelectorAll('[ons-tab-inactive]').style.display = 'none';
-      this.querySelectorAll('[ons-tab-active]').style.display = 'inherit';
+
+      util.arrayFrom(this.querySelectorAll('[ons-tab-inactive]'))
+        .forEach(element => element.style.display = 'none');
+      util.arrayFrom(this.querySelectorAll('[ons-tab-active]'))
+        .forEach(element => element.style.display = 'inherit');
     }
 
-    _setInactive() {
+    setInactive() {
       var radio = util.findChild(this, 'input');
       radio.checked = false;
       this.classList.remove('active');
-      this.querySelectorAll('[ons-tab-inactive]').style.display = 'inherit';
-      this.querySelectorAll('[ons-tab-active]').style.display = 'none';
+
+      util.arrayFrom(this.querySelectorAll('[ons-tab-inactive]'))
+        .forEach(element => element.style.display = 'inherit');
+      util.arrayFrom(this.querySelectorAll('[ons-tab-active]'))
+        .forEach(element => element.style.display = 'none');
     }
 
+    /**
+     * @return {Boolean}
+     */
+    isLoaded() {
+      return false;
+    }
+
+    /**
+     * @return {Boolean}
+     */
     isActive() {
       return this.classList.contains('active');
     }
 
+    /**
+     * @return {Boolean}
+     */
     canReload() {
       return !this.hasAttribute('no-reload');
     }
 
     detachedCallback() {
+      this.removeEventListener('click', this._bindedOnClick);
     }
 
-    atachedCallback() {
-      var tabbar = this.parentNode.parentNode;
-      if (tabbar.nodeName.toLowerCase() !== 'ons-tabbar') {
+    attachedCallback() {
+      this._ensureElementPosition();
+
+      if (this.hasAttribute('active')) {
+        var tabbar = this._findTabbarElement();
+        var tabIndex = this._findTabIndex();
+        setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
+      }
+
+      this.addEventListener('click', this._bindedOnClick);
+    }
+
+    _findTabbarElement() {
+      if (this.parentNode && this.parentNode.parentNode && this.parentNode.parentNode.nodeName.toLowerCase() === 'ons-tabbar') {
+        return this.parentNode.parentNode;
+      }
+      return null;
+    }
+
+    _findTabIndex() {
+      var elements = this.parentNode.children;
+      for (var i = 0; i < elements.length; i++) {
+        if (this === elements[i]) {
+          return i;
+        }
+      }
+
+      throw new Error('Invalid state: tab index is not found.');
+    }
+
+    _ensureElementPosition() {
+      if (!this._findTabbarElement()) {
         throw new Error('This ons-tab element is must be child of ons-tabbar element.');
       }
-    }
-
-    _ensureNodePosition() {
     }
 
     attributeChangedCallback(name, last, current) {
