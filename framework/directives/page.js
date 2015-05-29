@@ -127,6 +127,7 @@
 
       link: {
         pre: function(scope, element, attrs) {
+          CustomElements.upgrade(element[0]);
           var page = new PageView(scope, element, attrs);
 
           $onsen.declareVarAttribute(attrs, page);

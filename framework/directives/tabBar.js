@@ -294,6 +294,7 @@
 
       link: function(scope, element, attrs, controller, transclude) {
 
+        CustomElements.upgrade(element[0]);
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         scope.selectedTabItem = {source: ''};
 

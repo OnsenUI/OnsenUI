@@ -44,6 +44,7 @@
       restrict: 'E',
       link: {
         pre: function(scope, element, attrs) {
+          CustomElements.upgrade(element[0]);
           GenericView.register(scope, element, attrs, {
             viewKey: 'ons-bottomToolbar'
           });
