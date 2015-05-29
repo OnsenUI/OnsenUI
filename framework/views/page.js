@@ -72,13 +72,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-      	ons._util.fireEvent(this._element[0], 'destroy');
-
-        this.emit('destroy', {page: this});
-
-        if (this._element[0].getDeviceBackButtonHandler()) {
-          this._element[0].getDeviceBackButtonHandler().destroy();
-        }
+        this._element[0]._destroy();
 
         this._element = null;
         this._nullElement = null;

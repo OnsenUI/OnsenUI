@@ -200,6 +200,16 @@ limitations under the License.
       this.style.display = 'none';
       ons._util.fireEvent(this, 'hide');
     }
+
+    _destroy() {
+      ons._util.fireEvent(this, 'destroy');
+
+      if (this.getDeviceBackButtonHandler()) {
+        this.getDeviceBackButtonHandler().destroy();
+      }
+
+      this.remove();
+    }
   }
 
   if (!window.OnsPageElement) {
