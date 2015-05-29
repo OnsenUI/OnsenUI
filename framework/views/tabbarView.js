@@ -26,7 +26,6 @@ limitations under the License.
 
   module.factory('TabbarView', function($onsen, $compile, $parse) {
     var TabbarView = Class.extend({
-      _tabItems: undefined,
 
       init: function(scope, element, attrs) {
         if (element[0].nodeName.toLowerCase() !== 'ons-tabbar') {
@@ -37,7 +36,30 @@ limitations under the License.
         this._element = element;
         this._attrs = attrs;
 
+        this._bindedCompilePage = element[0]._compilePageHook.add(this._compilePage.bind(this));
+        this._bindedLinkPage = element[0]._linkPageHook.add(this._linkPage.bind(this));
+
+
         this._scope.$on('$destroy', this._destroy.bind(this));
+      },
+
+      _compilePage: function(next, pageElement) {
+        this._linkPage.link = $compile(pageElement);
+
+        next(pageElement);
+      },
+
+      _linkPage: function(next, pageElement) {
+        if (!this._linkPage.link) {
+          throw new Error('Invalid state');
+        }
+
+        var pageScope = this._scope.$new();
+        this._linkPage.link(pageScope);
+        this._linkPage.link = null;
+        pageScope.$evalAsync();
+
+        next(pageElement);
       },
 
       setActiveTab: function(index, options) {
@@ -58,6 +80,10 @@ limitations under the License.
 
       _destroy: function() {
         this.emit('destroy');
+
+        element[0]._compilePageHook.remove(this._bindedCompilePage);
+        element[0]._linkPageHook.remove(this._bindedLinkPage);
+
         this._element = this._scope = this._attrs = null;
       }
     });

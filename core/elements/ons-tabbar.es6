@@ -52,6 +52,9 @@ limitations under the License.
 
       this._compile();
       ModifierUtil.initModifier(this, scheme);
+
+      this._compilePageHook = new ons._internal.AsyncHook();
+      this._linkPageHook = new ons._internal.AsyncHook();
     }
 
     _compile() {
@@ -130,31 +133,29 @@ limitations under the License.
      * @param {String} page
      * @param {Object} [options]
      * @param {Object} [options.animation]
+     * @param {Object} [options.callback]
      */
     _loadPage(page, options) {
-      OnsTabElement.prototype._loadPageElement(page, pageElement => {
-        this._loadPageDOM(pageElement, options);
+      OnsTabElement.prototype._createPageElement(page, pageElement => {
+        this._loadPageDOMAsync(pageElement, options);
       });
     }
 
     /**
      * @param {Element} pageElement
-     * @param {Object} options
-     * @param {Object} options.animation
+     * @param {Object} [options]
+     * @param {Object} [options.animation]
+     * @param {Object} [options.callback]
      */
-    _loadPageDOM(pageElement, options) {
+    _loadPageDOMAsync(pageElement, options) {
       options = options || {};
 
-      //var pageScope = this._scope.$new();
-      //var link = $compile(element);
-
-      this._getContentElement().appendChild(pageElement);
-      //var pageContent = link(pageScope);
-
-      // TODO
-      //pageScope.$evalAsync();
-
-      this._switchPage(pageElement, options);
+      this._compilePageHook.run(pageElement => {
+        this._getContentElement().appendChild(pageElement);
+        this._linkPageHook.run(pageElement => {
+          this._switchPage(pageElement, options);
+        }, pageElement);
+      }, pageElement);
     }
 
     /**
@@ -188,6 +189,7 @@ limitations under the License.
      * @param {Element} element
      * @param {Object} options
      * @param {String} [options.animation]
+     * @param {Function} [options.callback]
      * @param {Object} [options.animationOptions]
      * @param {Boolean} options._removeElement
      * @param {Number} options.selectedTabIndex
@@ -296,9 +298,9 @@ limitations under the License.
         }
 
         if (selectedTab.isPersistent()) {
-          selectedTab.loadPageElement(pageElement => {
+          selectedTab._loadPageElement(pageElement => {
             this._loadPersistentPageDOM(pageElement, params);
-          });
+          }, {compile: this._compilePageHook, link: this._linkPageHook});
         } else {
           this._loadPage(selectedTab.getAttribute('page'), params);
         }
@@ -335,8 +337,8 @@ limitations under the License.
      * @param {Boolean} visible
      */
     setTabbarVisibility(visible) {
-      var position = this._hasTopTabbar() ? 'top' : 'bottom';
-      this._getContentElement().style[position] = visible ? '' : '0px';
+      this._getContentElement().style[this._hasTopTabbar() ? 'top' : 'bottom'] = visible ? '' : '0px';
+      this._getTabbarElement().style.display = visible ? '' : 'none';
     }
 
     _getContentElement() {
@@ -372,11 +374,9 @@ limitations under the License.
       return this._getTabbarElement().children[index];
     }
 
-    detachedCallback() {
-    }
+    detachedCallback() { }
 
-    attachedCallback() {
-    }
+    attachedCallback() { }
 
     _ensureTabElements(wrapper) {
       // ensure that all children are "ons-tab" element after compile.
@@ -389,6 +389,8 @@ limitations under the License.
     }
 
     attributeChangedCallback(name, last, current) {
+      // TODO
+      // modifier attribute
     }
   }
 

@@ -33,7 +33,10 @@ limitations under the License.
     }
 
     _onClick() {
-      this._tryToChange();
+      var tabbar = this._findTabbarElement();
+      if (tabbar) {
+        tabbar.setActiveTab(this._findTabIndex());
+      }
     }
 
     _compile() {
@@ -71,13 +74,6 @@ limitations under the License.
       return this.hasAttribute('persistent');
     }
 
-    _tryToChange() {
-      var tabbar = this._findTabbarElement();
-      if (tabbar) {
-        tabbar.setActiveTab(this._findTabIndex());
-      }
-    }
-
     _hasDefaultTemplate() {
       return this.classList.contains('tab-bar__item--default');
     }
@@ -113,20 +109,27 @@ limitations under the License.
 
     /**
      * @param {Function} callback
+     * @param {Object} hooks
+     * @param {Object} hooks.compile
+     * @param {Object} hooks.link
      */
-    loadPageElement(callback) {
+    _loadPageElement(callback, hooks) {
       if (this.isPersistent()) {
         if (!this._pageElement) {
-          this._loadPageElement(this.getAttribute('page'), (element) => {
-            this._pageElement = element;
-            callback(element);
+          this._createPageElement(this.getAttribute('page'), (element) => {
+            hooks.compile.run(element => {
+              hooks.link.run(element => {
+                this._pageElement = element;
+                callback(element);
+              }, element);
+            }, element);
           });
         } else {
           callback(this._pageElement);
         }
       } else {
         this._pageElement = null;
-        this._loadPageElement(this.getAttribute('page'), callback);
+        this._createPageElement(this.getAttribute('page'), callback);
       }
     }
 
@@ -134,7 +137,7 @@ limitations under the License.
      * @param {String} page
      * @param {Function} callback
      */
-    _loadPageElement(page, callback) {
+    _createPageElement(page, callback) {
       ons._internal.getPageHTMLAsync(page, (error, html) => {
         if (error) {
           throw new Error('Error: ' + error);
@@ -167,7 +170,9 @@ limitations under the License.
       if (this.hasAttribute('active')) {
         var tabbar = this._findTabbarElement();
         var tabIndex = this._findTabIndex();
-        setImmediate(() => tabbar.setActiveTab(tabIndex, {animation: 'none'}));
+        setImmediate(() => {
+          tabbar.setActiveTab(tabIndex, {animation: 'none'})
+        });
       }
 
       this.addEventListener('click', this._bindedOnClick);
@@ -199,6 +204,7 @@ limitations under the License.
 
     attributeChangedCallback(name, last, current) {
       // TODO: label
+      // TODO: icon
       // TODO: active
     }
   }

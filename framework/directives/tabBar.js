@@ -285,29 +285,28 @@
 (function() {
   'use strict';
 
-  angular.module('onsen').directive('onsTabbar', function($onsen, $compile, TabbarView) {
+  angular.module('onsen').directive('onsTabbar', function($onsen, $compile, $parse, TabbarView) {
     return {
       restrict: 'E',
 
       replace: false,
       scope: true,
 
-      link: function(scope, element, attrs, controller, transclude) {
+      link: function(scope, element, attrs, controller) {
 
         CustomElements.upgrade(element[0]);
-        scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-        scope.selectedTabItem = {source: ''};
 
-        attrs.$observe('hideTabs', function(hide) {
-          var visible = hide !== 'true';
-          tabbarView.setTabbarVisibility(visible);
+        scope.$watch(attrs.hideTabs, function(hide) {
+          if (typeof hide === 'string') {
+            hide = hide === 'true';
+          }
+          tabbarView.setTabbarVisibility(!hide);
         });
 
         var tabbarView = new TabbarView(scope, element, attrs);
         $onsen.addModifierMethodsForCustomElements(tabbarView, element);
-        $onsen.registerEventHandlers(tabbarView, 'reactive prechange postchange destroy');
 
-        scope.tabbarId = element[0].getTabbarId();
+        $onsen.registerEventHandlers(tabbarView, 'reactive prechange postchange destroy');
 
         element.data('ons-tabbar', tabbarView);
         $onsen.declareVarAttribute(attrs, tabbarView);
