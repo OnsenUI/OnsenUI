@@ -26,19 +26,21 @@ limitations under the License.
 
     /**
      * @param {Function} callback A function receive a function that receive result object and target object optinally
+     * @return {Function} pass-through callback parameter
      * @example
-     *   asyncHook.addCallback((next, target) => next(target + target));
+     *   asyncHook.add((next, target) => next(target + target));
      *   asyncHook.run(result => console.log(result), 2); // print 4
      */
-    addCallback(callback) {
+    add(callback) {
       this._callbacks.push(callback);
+      return callback;
     }
 
     /**
      * @param {Function} callback A function receive a function that receive result object and target object optinally
      * @return {Boolean}
      */
-    removeCallback(callback) {
+    remove(callback) {
       var index = this._callbacks.indexOf(callback);
       if (index !== -1) {
         this._callbacks.splice(index, 1);

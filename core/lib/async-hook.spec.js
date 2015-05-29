@@ -4,7 +4,7 @@ describe('AsyncHook', function() {
     expect(!!window.ons._internal.AsyncHook).to.equal(true);
   });
 
-  describe('.addCallback() and .removeCallback()', function() {
+  describe('.add() and .remove()', function() {
     var AsyncHook = ons._internal.AsyncHook;
 
     it('should work on basic testcases', function() {
@@ -12,11 +12,11 @@ describe('AsyncHook', function() {
       var callback;
 
       expect(hook._callbacks.length).to.equal(0);
-      hook.addCallback(callback = function(target, next) {
+      hook.add(callback = function(target, next) {
         next(target);
       });
       expect(hook._callbacks.length).to.equal(1);
-      hook.removeCallback(callback);
+      hook.remove(callback);
       expect(hook._callbacks.length).to.equal(0);
     });
   });
@@ -27,10 +27,10 @@ describe('AsyncHook', function() {
     it('should work on basic testcases', function(done) {
       var hook = new AsyncHook();
 
-      hook.addCallback(function(next, target) {
+      hook.add(function(next, target) {
         next(target + target);
       });
-      hook.addCallback(function(next, target) {
+      hook.add(function(next, target) {
         next(1 + target);
       });
       hook.run(function(result) {
@@ -51,10 +51,10 @@ describe('AsyncHook', function() {
     it('should work on no target', function(done) {
       var hook = new AsyncHook();
 
-      hook.addCallback(function(next) {
+      hook.add(function(next) {
         setTimeout(next, 20);
       });
-      hook.addCallback(function(next) {
+      hook.add(function(next) {
         setTimeout(next, 10);
       });
       hook.run(function() {
