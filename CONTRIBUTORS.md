@@ -6,6 +6,7 @@ The project was originally created by [Kruy Vanna](https://github.com/kruyvanna)
 List of code contributors (in no particular order):
 
 * [Mitsunori Kubota](https://github.com/anatoo)
+* [DILEEP YADAV](https://github.com/DILEEP-YADAV)
 * [Andreas Argelius](https://github.com/argelius)
 * [Masahiro Tanaka](https://github.com/masahirotanaka)
 * [Rob Taylor](https://github.com/OnsenUI/OnsenUI/graphs/contributors)
