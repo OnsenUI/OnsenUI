@@ -46,8 +46,8 @@ limitations under the License.
     }
   }
 
-  if (!window.OnsBottomToolbar) {
-    window.OnsBottomToolbar = document.registerElement('ons-bottom-toolbar', {
+  if (!window.OnsBottomToolbarElement) {
+    window.OnsBottomToolbarElement = document.registerElement('ons-bottom-toolbar', {
       prototype: BottomToolbarElement.prototype
     });
   }
