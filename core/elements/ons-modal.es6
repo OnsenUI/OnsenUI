@@ -112,7 +112,7 @@ limitations under the License.
     }
 
     _isVisible() {
-      return this.clientWidth > 0;
+      return this.style.display !== 'none';
     }
 
     /**
