@@ -67,14 +67,6 @@ limitations under the License.
        */
       setChecked: function(isChecked) {
         return this._element[0]._setChecked(isChecked);
-
-        if (this._checkbox[0].checked != isChecked) {
-          this._scope.model = isChecked;
-          this._checkbox[0].checked = isChecked;
-          this._scope.$evalAsync();
-
-          this.emit('change', {'switch': this, value: isChecked, isInteractive: false});
-        }
       },
 
       /**
