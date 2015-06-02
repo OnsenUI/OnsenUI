@@ -45,8 +45,30 @@ limitations under the License.
       this._compile();
       ModifierUtil.initModifier(this, scheme);
 
+      this._addAttributes();
       this._updateForCheckedAttribute();
       this._updateForDisabledAttribute();
+      this.attachedCallback.bind(this.onChangeListener);
+    }
+
+    _addAttributes() {
+      Object.defineProperty(this, 'checked', {
+        get: function() {
+          return this._getCheckbox().checked;
+        },
+        set: function(value) {
+          this._getCheckbox().checked = value;
+        }
+      });
+
+      Object.defineProperty(this, 'disabled', {
+        get: function() {
+          return this._getCheckbox().disabled;
+        },
+        set: function(value) {
+          this._getCheckbox().disabled = value;
+        }
+      });
     }
 
     _updateForCheckedAttribute() {
@@ -68,16 +90,34 @@ limitations under the License.
     _compile() {
       this.classList.add('switch');
       this.innerHTML = `
-        <input type="checkbox" checked class="switch__input">
+        <input type="checkbox" class="switch__input">
         <div class="switch__toggle"></div>
       `;
       this._getCheckbox().setAttribute('name', generateId());
     }
 
     detachedCallback() {
+      this._getCheckbox().removeEventListener('change', this.onChangeListener);
     }
 
-    atachedCallback() {
+    attachedCallback() {
+      this._getCheckbox().addEventListener('change', this.onChangeListener);
+    }
+
+    onChangeListener() {
+      if (this.checked !== true) {
+        this.parentNode.removeAttribute('checked');
+      }
+      else {
+        this.parentNode.setAttribute('checked', '');
+      }
+
+      if (this.disabled !== true) {
+        this.parentNode.removeAttribute('disabled');
+      }
+      else {
+        this.parentNode.setAttribute('disabled', '');
+      }
     }
 
     /**
