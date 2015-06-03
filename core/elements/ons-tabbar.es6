@@ -195,7 +195,6 @@ limitations under the License.
      */
     _switchPage(element, options) {
       if (this.getActiveTabIndex() !== -1) {
-        // TODO
         var oldPageElement = this._getContentElement().children.length > 1 ? this._getCurrentPageElement() : ons._internal.nullElement;
         var animator = this._animatorFactory.newAnimator(options);
         
@@ -242,25 +241,28 @@ limitations under the License.
       }
 
       if((selectedTab.hasAttribute('no-reload') || selectedTab.isPersistent()) && index === previousTabIndex) {
-        // TODO
-        /*
-        this.emit('reactive', {
-          index: index,
-          tabItem: selectedTabItem,
-        });*/
+        var event = new CustomEvent('reactive', {
+          bubbles: true,
+          detail: {
+            index: index,
+            tabItem: selectedTabItem
+          }
+        });
+        this.dispatchEvent(event);
+
         return false;
       }
 
       var canceled = false;
-      /*
-      this.emit('prechange', {
-        index: index,
-        tabItem: selectedTabItem,
-        cancel: function() {
-          canceled = true;
+
+      this.dispatchEvent(new CustomEvent('prechange', {
+        bubbles: true,
+        detail: {
+          index: index,
+          tabItem: selectedTab,
+          cancel: () => canceled = true
         }
-      });
-      */
+      }));
 
       if (canceled) {
         selectedTab.setInactive();
@@ -283,8 +285,17 @@ limitations under the License.
 
         var params = {
           callback: () => {
-            // TODO
-            //this.emit('postchange', {index: index, tabItem: selectedTab});
+            this.dispatchEvent(new CustomEvent('postchange', {
+              bubbles: true,
+              detail: {
+                index: index,
+                tabItem: selectedTab
+              }
+            }));
+
+            if (options.callback instanceof Function) {
+              callback();
+            }
           },
           previousTabIndex: previousTabIndex,
           selectedTabIndex: selectedTabIndex,
@@ -309,8 +320,13 @@ limitations under the License.
           tab.setInactive();
         } else {
           if (!needLoad) {
-            // TODO
-            // this.emit('postchange', {index: index, tabItem: selectedTabItem});
+            this.dispatchEvent(new CustomEvent('postchange', {
+              bubbles: true,
+              detail: {
+                index: index,
+                tabItem: selectedTab
+              }
+            }));
           }
         }
       });

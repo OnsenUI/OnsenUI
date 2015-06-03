@@ -43,8 +43,37 @@ limitations under the License.
           navigator.app.exitApp();
         }),
 
+        /**
+         * @return {Object}
+         */
         getDefaultDeviceBackButtonHandler: function() {
           return this._defaultDeviceBackButtonHandler;
+        },
+
+        /**
+         * @param {Object} view
+         * @param {Element} element
+         * @param {Array} eventNames
+         * @return {Function} A function that clear all event listeners
+         */
+        deriveEvents: function(view, element, eventNames) {
+          eventNames = [].concat(eventNames);
+          var listeners = [];
+
+          eventNames.forEach(function(eventName) {
+            var listener = function(event) {
+              view.emit(eventName, event.detail);
+            };
+            listeners.push(listener);
+            element.addEventListener(eventName, listener, false);
+          });
+
+          return function() {
+            eventNames.forEach(function(eventName, index) {
+              element.removeEventListener(eventName, listeners[index], false);
+            });
+            view = element = listeners = null;
+          };
         },
 
         /**

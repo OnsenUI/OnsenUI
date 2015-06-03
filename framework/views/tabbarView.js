@@ -32,6 +32,7 @@ limitations under the License.
           throw new Error('"element" parameter must be a "ons-tabbar" element.');
         }
 
+
         this._scope = scope;
         this._element = element;
         this._attrs = attrs;
@@ -42,6 +43,8 @@ limitations under the License.
           this._bindedCompilePage = element[0]._compilePageHook.add(this._compilePage.bind(this));
           this._bindedLinkPage = element[0]._linkPageHook.add(this._linkPage.bind(this));
         }.bind(this));
+
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['reactive', 'postchange', 'prechange']);
       },
 
       _compilePage: function(next, pageElement) {
@@ -84,6 +87,8 @@ limitations under the License.
 
         element[0]._compilePageHook.remove(this._bindedCompilePage);
         element[0]._linkPageHook.remove(this._bindedLinkPage);
+
+        this._clearDerivingEvents();
 
         this._element = this._scope = this._attrs = null;
       }
