@@ -147,10 +147,10 @@ Please see our [document on contributing](https://github.com/OnsenUI/OnsenUI/blo
 
 If anything about Onsen UI is unclear, please ask a question on <a href="http://stackoverflow.com" target="_blank">Stackoverflow</a>, and tag it "onsen-ui".  An Onsen UI support engineer will answer it.
 
-If you have any requests or comments regarding the development of Onsen UI, please feel free to direct them to the Twitter account (<a href="http://twitter.com/Onsen_UI" target="_blank">@Onsen_UI</a>).
+You can also join our [Gitter channel](https://gitter.im/OnsenUI/OnsenUI) if you want to talk about Onsen UI.
 
+If you have any requests or comments regarding the development of Onsen UI, please feel free to direct them to the Twitter account (<a href="http://twitter.com/Onsen_UI" target="_blank">@Onsen_UI</a>).
 
 [Onsen UI]:http://onsen.io/
 [Onsen UI Getting Started Page]:http://onsen.io/getting_started/
-[Monaca Forum]:http://monaca.mobi/forum
 [Monaca IDE]:http://monaca.mobi/
