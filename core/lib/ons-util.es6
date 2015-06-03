@@ -58,6 +58,7 @@ limitations under the License.
       if (match(parent)) {
         return parent;
       }
+      parent = parent.parentNode;
     }
   };
 
