@@ -86,15 +86,3 @@ module.run(['$templateCache', function($templateCache) {
     '');
 }]);
 })();
-
-(function(module) {
-try { module = angular.module('templates-main'); }
-catch(err) { module = angular.module('templates-main', []); }
-module.run(['$templateCache', function($templateCache) {
-  'use strict';
-  $templateCache.put('templates/tab_bar.tpl',
-    '<div class="ons-tab-bar__content tab-bar__content"></div>\n' +
-    '<div ng-hide="hideTabs" class="tab-bar ons-tab-bar__footer {{modifierTemplater(\'tab-bar--*\')}} ons-tabbar-inner"></div>\n' +
-    '');
-}]);
-})();
