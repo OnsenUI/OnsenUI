@@ -30,13 +30,8 @@ limitations under the License.
     createdCallback() {
       this._compile();
       this._bindedOnClick = this._onClick.bind(this);
-    }
 
-    _onClick() {
-      var tabbar = this._findTabbarElement();
-      if (tabbar) {
-        tabbar.setActiveTab(this._findTabIndex());
-      }
+      // set modifier templater
     }
 
     _compile() {
@@ -57,17 +52,58 @@ limitations under the License.
       var button = util.findChild(this, '.tab-bar__button');
 
       if (fragment.children.length === 0) {
-        button.innerHTML = `
-          <div class="tab-bar__icon">
-            <ons-icon icon="ion-cloud" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>
-          </div>
-          <div class="tab-bar__label">label</div>`;
-        this.classList.add('tab-bar__item--default');
+        this._hasDefaultTemplate = true;
+        this._updateDefaultTemplate();
       } else {
         button.appendChild(fragment);
+        this._hasDefaultTemplate = false;
+      }
+    }
+
+    _updateDefaultTemplate() {
+      if (!this._hasDefaultTemplate) {
+        return;
       }
 
-      // set modifier templater
+      var button = util.findChild(this, '.tab-bar__button');
+
+      button.innerHTML = `
+        <div class="tab-bar__icon">
+          <ons-icon icon="ion-cloud" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>
+        </div>
+        <div class="tab-bar__label">label</div>`;
+
+      var self = this;
+      var icon = this.getAttribute('icon');
+      var label = this.getAttribute('label');
+
+      if (typeof icon === 'string') {
+        getIconElement().setAttribute('icon', icon);
+      } else {
+        var wrapper = button.querySelector('.tab-bar__icon');
+        wrapper.parentNode.removeChild(wrapper);
+      }
+
+      if (typeof label === 'string') {
+        getLabelElement().textContent = label;
+      } else {
+        getLabelElement().parentNode.removeChild(getLabelElement());
+      }
+
+      function getLabelElement() {
+        return self.querySelector('.tab-bar__label');
+      }
+
+      function getIconElement() {
+        return self.querySelector('ons-icon');
+      }
+    }
+
+    _onClick() {
+      var tabbar = this._findTabbarElement();
+      if (tabbar) {
+        tabbar.setActiveTab(this._findTabIndex());
+      }
     }
 
     isPersistent() {
@@ -203,15 +239,20 @@ limitations under the License.
     }
 
     attributeChangedCallback(name, last, current) {
-      // TODO: label
-      // TODO: icon
-      // TODO: active
+      if (this._hasDefaultTemplate) {
+        if (name === 'icon' || name === 'label') {
+          this._updateDefaultTemplate();
+        }
+      }
     }
   }
 
   if (!window.OnsTabElement) {
     window.OnsTabElement = document.registerElement('ons-tab', {
       prototype: TabElement.prototype
+    });
+    document.registerElement('ons-tabbar-item', {
+      prototype: Object.create(TabElement.prototype)
     });
   }
 })();

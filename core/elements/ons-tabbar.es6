@@ -94,17 +94,15 @@ limitations under the License.
       
       content.setAttribute('no-status-bar-fill', '');
 
-      setImmediate(() => {
-        content.classList.add('tab-bar--top__content');
-        tabbar.classList.add('tab-bar--top');
-      });
+      content.classList.add('tab-bar--top__content');
+      tabbar.classList.add('tab-bar--top');
 
       var page = ons._util.findParent(this, 'ons-page');
       if (page) {
         this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top') + 'px';
       }
 
-      if (onsen._internal.shouldFillStatusBar(this)) {
+      if (ons._internal.shouldFillStatusBar(this)) {
         // Adjustments for IOS7
         var fill = document.createElement('div');
         fill.classList.add('tab-bar__status-bar-fill');

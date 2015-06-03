@@ -300,7 +300,9 @@
           if (typeof hide === 'string') {
             hide = hide === 'true';
           }
-          tabbarView.setTabbarVisibility(!hide);
+          if (element[0].setTabbarVisibility) {
+            element[0].setTabbarVisibility();
+          }
         });
 
         var tabbarView = new TabbarView(scope, element, attrs);

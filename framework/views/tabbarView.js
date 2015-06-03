@@ -36,11 +36,12 @@ limitations under the License.
         this._element = element;
         this._attrs = attrs;
 
-        this._bindedCompilePage = element[0]._compilePageHook.add(this._compilePage.bind(this));
-        this._bindedLinkPage = element[0]._linkPageHook.add(this._linkPage.bind(this));
-
-
         this._scope.$on('$destroy', this._destroy.bind(this));
+
+        setImmediate(function() {
+          this._bindedCompilePage = element[0]._compilePageHook.add(this._compilePage.bind(this));
+          this._bindedLinkPage = element[0]._linkPageHook.add(this._linkPage.bind(this));
+        }.bind(this));
       },
 
       _compilePage: function(next, pageElement) {
