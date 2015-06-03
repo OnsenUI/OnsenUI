@@ -19,8 +19,8 @@ limitations under the License.
   'use strict';
 
   var scheme = {
-    '': 'tab-bar--*',
-    'tab-bar__button': 'tab-bar--*__button'
+    '.tab-bar__content': 'tab-bar--*__content',
+    '.tab-bar': 'tab-bar--*'
   };
 
   var AnimatorFactory = ons._internal.AnimatorFactory;
@@ -387,8 +387,9 @@ limitations under the License.
     }
 
     attributeChangedCallback(name, last, current) {
-      // TODO
-      // modifier attribute
+      if (name === 'modifier') {
+        return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      }
     }
   }
 

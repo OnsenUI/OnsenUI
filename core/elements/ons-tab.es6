@@ -20,7 +20,7 @@ limitations under the License.
 
   var scheme = {
     '': 'tab-bar--*__item',
-    'tab-bar__button': 'tab-bar--*__button'
+    '.tab-bar__button': 'tab-bar--*__button'
   };
   var ModifierUtil = ons._internal.ModifierUtil;
   var util = ons._util;
@@ -31,7 +31,7 @@ limitations under the License.
       this._compile();
       this._bindedOnClick = this._onClick.bind(this);
 
-      // set modifier templater
+      ModifierUtil.initModifier(this, scheme);
     }
 
     _compile() {
@@ -243,6 +243,10 @@ limitations under the License.
         if (name === 'icon' || name === 'label') {
           this._updateDefaultTemplate();
         }
+      }
+
+      if (name === 'modifier') {
+        return ModifierUtil.onModifierChanged(last, current, this, scheme);
       }
     }
   }
