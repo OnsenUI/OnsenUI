@@ -43,3 +43,25 @@ Here is a list of some rules that should be followed:
 * Use easy-to-understand and logical naming for your variables and method names, especially for variables and methods that are exposed to the user.
 * Internal APIs should be preceded by an underscore.
 * Use single quotes for strings in JavaScript and double quotes for attributes in HTML.
+
+## Commit Message Format
+
+We follow rules similar to those of [AngularJS](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit) for commit messages.
+```
+<type>(<scope>): <subject>
+```
+**Type** should be one of these:
+* **feat**: A new feature
+* **fix**: A bug fix
+* **docs**: Documentation only changes
+* **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing
+  semi-colons, etc)
+* **refactor**: A code change that neither fixes a bug or adds a feature
+* **perf**: A code change that improves performance
+* **test**: Adding missing tests
+* **chore**: Changes to the build process or auxiliary tools and libraries such as documentation
+  generation
+
+**Scope** should contain, if applicable, the modified Onsen UI element such as *ons-navigator*, *ons-switch*, etc. It could also contain descriptive words like *core*, *dependencies*, etc.
+
+**Subject** reflects and summarizes the content of the commit.

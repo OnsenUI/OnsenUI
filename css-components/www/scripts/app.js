@@ -5,9 +5,11 @@ var app = angular.module('app', ['ngRoute', 'ngAnimate', 'pascalprecht.translate
 app.config(function($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
+      title : 'Theme Roller - Easily Customize CSS Components & Patterns',
       templateUrl: 'views/components.html'
     })
     .when('/patterns', {
+      title : 'Customize Page Patterns',
       templateUrl: 'views/overview.html'
     })
     .otherwise({
@@ -15,6 +17,14 @@ app.config(function($routeProvider, $locationProvider) {
     });
   $locationProvider.html5Mode(true);
 });
+
+app.run(['$rootScope', '$route', function($rootScope, $route) {
+  $rootScope.$on('$routeChangeSuccess', function(newVal, oldVal) {
+    if (oldVal !== newVal) {
+      document.title = $route.current.title + ' | Onsen';
+    }
+  });
+}]);
 
 // i18n settings
 

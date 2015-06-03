@@ -356,7 +356,7 @@ limitations under the License.
         /**
          * @return {Boolean}
          */
-        isIOS7Above: (function() {
+        isIOS7above: (function() {
           var ua = window.navigator.userAgent;
           var match = ua.match(/(iPad|iPhone|iPod touch);.*CPU.*OS (\d+)_(\d+)/i);
 

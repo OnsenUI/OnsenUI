@@ -197,7 +197,7 @@ var Utils = GestureDetector.utils = {
    */
   extend: function extend(dest, src, merge) {
     for (var key in src) {
-      if (src.hasOwnProperty(key) && (dest[key] === undefined || merge)) {
+      if (src.hasOwnProperty(key) && (dest[key] === undefined || !merge)) {
         dest[key] = src[key];
       }
     }

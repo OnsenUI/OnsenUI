@@ -50,13 +50,16 @@ limitations under the License.
         var sizeAttr = this._getCarouselItemSizeAttr();
         var sizeInfo = this._decomposeSizeString(sizeAttr);
 
+        var computedStyle = getComputedStyle(this._element[0]);
+        var totalWidth = this._element[0].getBoundingClientRect().width || 0;
+        var finalWidth = totalWidth - parseInt(computedStyle.paddingLeft, 10) - parseInt(computedStyle.paddingRight, 10);
+
         for (var i = 0; i < children.length; i++) {
           angular.element(children[i]).css({
             position: 'absolute',
             height: sizeAttr,
-            width: '100%',
+            width: finalWidth + 'px',
             visibility: 'visible',
-            left: '0px',
             top: (i * sizeInfo.number) + sizeInfo.unit
           });
         }
@@ -90,13 +93,16 @@ limitations under the License.
 
         var sizeAttr = this._getCarouselItemSizeAttr();
         var sizeInfo = this._decomposeSizeString(sizeAttr);
-        
+
+        var computedStyle = getComputedStyle(this._element[0]);
+        var totalHeight = this._element[0].getBoundingClientRect().height || 0;
+        var finalHeight = totalHeight - parseInt(computedStyle.paddingTop, 10) - parseInt(computedStyle.paddingBottom, 10);
+
         for (var i = 0; i < children.length; i++) {
           angular.element(children[i]).css({
             position: 'absolute',
             width: sizeAttr,
-            height: '100%',
-            top: '0px',
+            height: finalHeight + 'px',
             visibility: 'visible',
             left: (i * sizeInfo.number) + sizeInfo.unit
           });
@@ -474,7 +480,6 @@ limitations under the License.
 
       _onDragEnd: function(event) {
         this._currentElementSize = undefined;
-        this._carouselItemElements = undefined;
 
         if (!this.isSwipeable()) {
           return;
@@ -603,18 +608,14 @@ limitations under the License.
        * @return {Array}
        */
       _getCarouselItemElements: function() {
-        if (this._carouselItemElements && this._carouselItemElements.length) {
-          return this._carouselItemElements;
-        }
+        var nodeList = this._element[0].querySelectorAll('ons-carousel-item'),
+          rv = [];
 
-        var nodeList = this._element[0].querySelectorAll('ons-carousel-item');
-
-        this._carouselItemElements = [];
         for (var i = nodeList.length; i--; ) {
-          this._carouselItemElements.unshift(nodeList[i]);
+          rv.unshift(nodeList[i]);
         }
 
-        return this._carouselItemElements;
+        return rv;
       },
 
       /**

@@ -53,6 +53,24 @@ limitations under the License.
 
 /**
  * @ngdoc method
+ * @signature isAndroidPhone()
+ * @description 
+ *   [en]Returns whether the device is Android phone.[/en]
+ *   [ja]Android携帯上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isAndroidTablet()
+ * @description 
+ *   [en]Returns whether the device is Android tablet.[/en]
+ *   [ja]Androidタブレット上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
  * @signature isIPhone()
  * @description 
  *   [en]Returns whether the device is iPhone.[/en]

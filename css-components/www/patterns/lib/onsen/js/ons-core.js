@@ -1,4 +1,4 @@
-/*! ons-core.js for Onsen UI v1.3.2-dev - 2015-04-30 */
+/*! ons-core.js for Onsen UI v1.3.3-dev - 2015-05-25 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -2545,9 +2545,207 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function (ons) {
+  'use strict';
+
+  var ModalAnimator = (function () {
+
+    /**
+     * @param {Object} options
+     * @param {String} options.timing
+     * @param {Number} options.duration
+     * @param {Number} options.delay
+     */
+
+    function ModalAnimator(options) {
+      _classCallCheck(this, ModalAnimator);
+
+      this.delay = 0;
+      this.duration = 0.2;
+      options = options || {};
+
+      this.timing = options.timing || this.timing;
+      this.duration = options.duration !== undefined ? options.duration : this.duration;
+      this.delay = options.delay !== undefined ? options.delay : this.delay;
+    }
+
+    _createClass(ModalAnimator, [{
+      key: 'show',
+
+      /**
+       * @param {HTMLElement} modal
+       * @param {Function} callback
+       */
+      value: function show(modal, callback) {
+        callback();
+      }
+    }, {
+      key: 'hide',
+
+      /**
+       * @param {HTMLElement} modal
+       * @param {Function} callback
+       */
+      value: function hide(modal, callback) {
+        callback();
+      }
+    }]);
+
+    return ModalAnimator;
+  })();
+
+  ons._internal = ons._internal || {};
+  ons._internal.ModalAnimator = ModalAnimator;
+})(window.ons = window.ons || {});
+'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function (ons) {
+  'use strict';
+
+  var AnimatorFactory = (function () {
+
+    /**
+     * @param {Object} opts
+     * @param {Object} opts.animators The dictionary for animator classes
+     * @param {Function} opts.baseClass The base class of animators
+     * @param {String} opts.baseClassName The name of the base class of animators
+     * @param {String} opts.defaultAnimation The default animation name
+     * @param {Object} opts.defaultAnimationOptions The default animation options
+     */
+
+    function AnimatorFactory(opts) {
+      _classCallCheck(this, AnimatorFactory);
+
+      this._animators = opts.animators;
+      this._baseClass = opts.baseClass;
+      this._baseClassName = opts.baseClassName || opts.baseClass.name;
+      this._animation = opts.defaultAnimation || 'default';
+      this._animationOptions = opts.defaultAnimationOptions || {};
+
+      if (!this._animators[this._animation]) {
+        throw new Error('No such animation: ' + this._animation);
+      }
+    }
+
+    _createClass(AnimatorFactory, [{
+      key: 'setAnimationOptions',
+
+      /**
+       * @param {Object} options
+       */
+      value: function setAnimationOptions(options) {
+        this._animationOptions = options;
+      }
+    }, {
+      key: 'newAnimator',
+
+      /**
+       * @param {Object} options
+       * @param {String} [options.animation] The animation name
+       * @param {Object} [options.animationOptions] The animation options
+       * @param {Object} defaultAnimator The default animator instance
+       * @return {Object} An animator instance
+       */
+      value: function newAnimator(options, defaultAnimator) {
+        options = options || {};
+
+        var animator = null;
+
+        if (options.animation instanceof this._baseClass) {
+          return options.animation;
+        }
+
+        var Animator = null;
+
+        if (typeof options.animation === 'string') {
+          Animator = this._animators[options.animation];
+        }
+
+        if (!Animator && defaultAnimator) {
+          animator = defaultAnimator;
+        } else {
+          Animator = Animator || this._animators[this._animation];
+
+          var animationOpts = ons._util.extend({}, this._animationOptions, options.animationOptions || {}, ons._config.animationsDisabled ? { duration: 0, delay: 0 } : {});
+
+          animator = new Animator(animationOpts);
+        }
+
+        if (!(animator instanceof this._baseClass)) {
+          throw new Error('"animator" is not an instance of ' + this._baseClassName + '.');
+        }
+
+        return animator;
+      }
+    }], [{
+      key: 'parseJSONSafely',
+
+      /**
+       * @param {String} jsonString
+       * @return {Object/null}
+       */
+      value: function parseJSONSafely(jsonString) {
+        try {
+          return JSON.parse(jsonString);
+        } catch (e) {
+          return null;
+        }
+      }
+    }]);
+
+    return AnimatorFactory;
+  })();
+
+  ons._internal = ons._internal || {};
+  ons._internal.AnimatorFactory = AnimatorFactory;
+})(window.ons = window.ons || {});
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -2908,9 +3106,9 @@ limitations under the License.
 })(window.ons = window.ons || {});
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -2966,19 +3164,9 @@ window.DoorLock = (function () {
        */
       value: function lock() {
         var self = this;
-        var unlock = (function (_unlock) {
-          function unlock() {
-            return _unlock.apply(this, arguments);
-          }
-
-          unlock.toString = function () {
-            return _unlock.toString();
-          };
-
-          return unlock;
-        })(function () {
+        var unlock = function unlock() {
           self._unlock(unlock);
-        });
+        };
         unlock.id = generateId();
         this._lockList.push(unlock);
         this._log('lock: ' + unlock.id);
@@ -3042,9 +3230,15 @@ window.DoorLock = (function () {
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { desc = parent = getter = undefined; _again = false; var object = _x,
+    property = _x2,
+    receiver = _x3; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -3063,7 +3257,104 @@ limitations under the License.
 
 */
 
-window.ModifierUtil = (function () {
+(function (ons) {
+  'use strict';
+
+  var ModalAnimator = ons._internal.ModalAnimator;
+
+  /**
+   * iOS style animator for dialog.
+   */
+
+  var FadeModalAnimator = (function (_ModalAnimator) {
+    function FadeModalAnimator(options) {
+      _classCallCheck(this, FadeModalAnimator);
+
+      options.timing = options.timing || 'linear';
+      options.duration = options.duration || '0.3';
+      options.delay = options.delay || 0;
+
+      _get(Object.getPrototypeOf(FadeModalAnimator.prototype), 'constructor', this).call(this, options);
+    }
+
+    _inherits(FadeModalAnimator, _ModalAnimator);
+
+    _createClass(FadeModalAnimator, [{
+      key: 'show',
+
+      /**
+       * @param {HTMLElement} modal
+       * @param {Function} callback
+       */
+      value: function show(modal, callback) {
+        callback = callback ? callback : function () {};
+
+        animit(modal).queue({
+          opacity: 0
+        }).wait(this.delay).queue({
+          opacity: 1
+        }, {
+          duration: this.duration,
+          timing: this.timing
+        }).queue(function (done) {
+          callback();
+          done();
+        }).play();
+      }
+    }, {
+      key: 'hide',
+
+      /**
+       * @param {HTMLElement} modal
+       * @param {Function} callback
+       */
+      value: function hide(modal, callback) {
+        callback = callback ? callback : function () {};
+
+        animit(modal).queue({
+          opacity: 1
+        }).wait(this.delay).queue({
+          opacity: 0
+        }, {
+          duration: this.duration,
+          timing: this.timing
+        }).queue(function (done) {
+          callback();
+          done();
+        }).play();
+      }
+    }]);
+
+    return FadeModalAnimator;
+  })(ModalAnimator);
+
+  ons._internal = ons._internal || {};
+  ons._internal.FadeModalAnimator = FadeModalAnimator;
+})(window.ons = window.ons || {});
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function (ons) {
   'use strict';
 
   var ModifierUtil = (function () {
@@ -3136,17 +3427,13 @@ window.ModifierUtil = (function () {
        * @param {Object} scheme
        */
       value: function applyDiffToElement(diff, element, scheme) {
-        var _loop = function (selector) {
+        for (var selector in scheme) {
           if (scheme.hasOwnProperty(selector)) {
             var targetElements = selector === '' ? [element] : element.querySelectorAll(selector);
-            targetElements.forEach(function (targetElement) {
-              ModifierUtil.applyDiffToClassList(diff, targetElement.classList, scheme[selector]);
-            });
+            for (var i = 0; i < targetElements.length; i++) {
+              ModifierUtil.applyDiffToClassList(diff, targetElements[i].classList, scheme[selector]);
+            }
           }
-        };
-
-        for (var selector in scheme) {
-          _loop(selector);
         }
       }
     }, {
@@ -3195,8 +3482,9 @@ window.ModifierUtil = (function () {
     return ModifierUtil;
   })();
 
-  return ModifierUtil;
-})();
+  ons._internal = ons._internal || {};
+  ons._internal.ModifierUtil = ModifierUtil;
+})(window.ons = window.ons || {});
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -3219,87 +3507,48 @@ limitations under the License.
 (function (ons) {
   'use strict';
 
-  ons._readyLock = new DoorLock();
-  ons._config = {
-    autoStatusBarFill: true,
-    animationsDisabled: false
-  };
+  ons._internal = ons._internal || {};
 
-  waitDeviceReady();
+  ons._internal.nullElement = document.createElement('div');
 
   /**
    * @return {Boolean}
    */
-  ons.isReady = function () {
-    return !ons._readyLock.isLocked();
+  ons._internal.isEnabledAutoStatusBarFill = function () {
+    return !!ons._config.autoStatusBarFill;
   };
 
-  /**
-   * @return {Boolean}
-   */
-  ons.isWebView = function () {
+  ons._internal.waitDOMContentLoaded = function (callback) {
     if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
-      throw new Error('isWebView() method is available after dom contents loaded.');
-    }
-
-    return !!(window.cordova || window.phonegap || window.PhoneGap);
-  };
-
-  /**
-   * @param {Function} callback
-   */
-  ons.ready = function (callback) {
-    if (ons.isReady()) {
-      callback();
+      window.document.addEventListener('DOMContentLoaded', callback);
     } else {
-      ons._readyLock.waitUnlock(callback);
+      setImmediate(callback);
     }
   };
 
   /**
-   * Enable status bar fill feature on iOS7 and above.
+   * @param {HTMLElement} element
+   * @return {Boolean}
    */
-  ons.enableAutoStatusBarFill = function () {
-    if (ons.isReady()) {
-      throw new Error('This method must be called before ons.isReady() is true.');
-    }
-    ons._config.autoStatusBarFill = true;
-  };
-
-  /**
-   * Disable status bar fill feature on iOS7 and above.
-   */
-  ons.disableAutoStatusBarFill = function () {
-    if (ons.isReady()) {
-      throw new Error('This method must be called before ons.isReady() is true.');
-    }
-    ons._config.autoStatusBarFill = false;
-  };
-
-  /**
-   * Disable all animations. Could be handy for testing and older devices.
-   */
-  ons.disableAnimations = function () {
-    ons._config.animationsDisabled = true;
-  };
-
-  /**
-   * Enable animations (default).
-   */
-  ons.enableAnimations = function () {
-    ons._config.animationsDisabled = false;
-  };
-
-  function waitDeviceReady() {
-    var unlockDeviceReady = ons._readyLock.lock();
-    window.addEventListener('DOMContentLoaded', function () {
-      if (ons.isWebView()) {
-        window.document.addEventListener('deviceready', unlockDeviceReady, false);
-      } else {
-        unlockDeviceReady();
+  ons._internal.shouldFillStatusBar = function (element) {
+    if (ons._internal.isEnabledAutoStatusBarFill() && ons.platform.isWebView() && ons.platform.isIOS7Above()) {
+      if (!(element instanceof HTMLElement)) {
+        throw new Error('element must be an instance of HTMLElement');
       }
-    }, false);
-  }
+
+      for (;;) {
+        if (element.hasAttribute('no-status-bar-fill')) {
+          return false;
+        }
+
+        element = element.parentNode;
+        if (!element || !element.hasAttribute) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
 })(window.ons = window.ons || {});
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -3484,6 +3733,20 @@ limitations under the License.
     /**
      * @return {Boolean}
      */
+    isAndroidPhone: function isAndroidPhone() {
+      return /Android/i.test(navigator.userAgent) && /Mobile/i.test(navigator.userAgent);
+    },
+
+    /**
+     * @return {Boolean}
+     */
+    isAndroidTablet: function isAndroidTablet() {
+      return /Android/i.test(navigator.userAgent) && !/Mobile/i.test(navigator.userAgent);
+    },
+
+    /**
+     * @return {Boolean}
+     */
     isWP: function isWP() {
       if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'wp';
@@ -3652,6 +3915,179 @@ limitations under the License.
       ons.softwareKeyboard.on = noPluginError;
     }
   });
+})(window.ons = window.ons || {});
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+'use strict';
+
+(function (ons) {
+  'use strict';
+
+  var util = ons._util = ons._util || {};
+
+  /**
+   * @param {HTMLElement} element 
+   * @param {String} query dot class name or node name.
+   * @return {HTMLElement}
+   */
+  util.findChild = function (element, query) {
+    var match = query.substr(0, 1) === '.' ? function (node) {
+      return node.classList.contains(query.substr(1));
+    } : function (node) {
+      return node.nodeName.toLowerCase() === query;
+    };
+
+    var node;
+    for (var i = 0; i < element.children.length; i++) {
+      node = element.children[i];
+      if (match(node)) {
+        return node;
+      }
+    }
+    return null;
+  };
+
+  /*
+   * @param {Object} dst Destination object.
+   * @param {...Object} src Source object(s).
+   * @returns {Object} Reference to `dst`.
+   */
+  util.extend = function (dst) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    for (var i = 0; i < args.length; i++) {
+      if (args[i]) {
+        var keys = Object.keys(args[i]);
+        for (var j = 0; j < keys.length; j++) {
+          var key = keys[j];
+          dst[key] = args[i][key];
+        }
+      }
+    }
+
+    return dst;
+  };
+})(window.ons = window.ons || {});
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+'use strict';
+
+(function (ons) {
+  'use strict';
+
+  ons._readyLock = new DoorLock();
+  ons._config = {
+    autoStatusBarFill: true,
+    animationsDisabled: false
+  };
+
+  waitDeviceReady();
+
+  /**
+   * @return {Boolean}
+   */
+  ons.isReady = function () {
+    return !ons._readyLock.isLocked();
+  };
+
+  /**
+   * @return {Boolean}
+   */
+  ons.isWebView = function () {
+    if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
+      throw new Error('isWebView() method is available after dom contents loaded.');
+    }
+
+    return !!(window.cordova || window.phonegap || window.PhoneGap);
+  };
+
+  /**
+   * @param {Function} callback
+   */
+  ons.ready = function (callback) {
+    if (ons.isReady()) {
+      callback();
+    } else {
+      ons._readyLock.waitUnlock(callback);
+    }
+  };
+
+  /**
+   * Enable status bar fill feature on iOS7 and above.
+   */
+  ons.enableAutoStatusBarFill = function () {
+    if (ons.isReady()) {
+      throw new Error('This method must be called before ons.isReady() is true.');
+    }
+    ons._config.autoStatusBarFill = true;
+  };
+
+  /**
+   * Disable status bar fill feature on iOS7 and above.
+   */
+  ons.disableAutoStatusBarFill = function () {
+    if (ons.isReady()) {
+      throw new Error('This method must be called before ons.isReady() is true.');
+    }
+    ons._config.autoStatusBarFill = false;
+  };
+
+  /**
+   * Disable all animations. Could be handy for testing and older devices.
+   */
+  ons.disableAnimations = function () {
+    ons._config.animationsDisabled = true;
+  };
+
+  /**
+   * Enable animations (default).
+   */
+  ons.enableAnimations = function () {
+    ons._config.animationsDisabled = false;
+  };
+
+  function waitDeviceReady() {
+    var unlockDeviceReady = ons._readyLock.lock();
+    window.addEventListener('DOMContentLoaded', function () {
+      if (ons.isWebView()) {
+        window.document.addEventListener('deviceready', unlockDeviceReady, false);
+      } else {
+        unlockDeviceReady();
+      }
+    }, false);
+  }
 })(window.ons = window.ons || {});
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -4325,7 +4761,7 @@ var Utils = GestureDetector.utils = {
    */
   extend: function extend(dest, src, merge) {
     for (var key in src) {
-      if (src.hasOwnProperty(key) && (dest[key] === undefined || merge)) {
+      if (src.hasOwnProperty(key) && (dest[key] === undefined || !merge)) {
         dest[key] = src[key];
       }
     }
@@ -6230,11 +6666,11 @@ GestureDetector.Instance.prototype = {
 })(window.ons = window.ons || {});
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6257,6 +6693,7 @@ limitations under the License.
   'use strict';
 
   var scheme = { '': 'bottom-bar--*' };
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   var BottomToolbarElement = (function (_ons$_BaseElement) {
     function BottomToolbarElement() {
@@ -6307,11 +6744,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6334,6 +6771,7 @@ limitations under the License.
   'use strict';
 
   var scheme = { '': 'button--*' };
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   var ButtonElement = (function (_ons$_BaseElement) {
     function ButtonElement() {
@@ -6373,11 +6811,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6454,11 +6892,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6509,11 +6947,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6641,11 +7079,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6668,6 +7106,7 @@ limitations under the License.
   'use strict';
 
   var scheme = { '': 'list__header--*' };
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   var ListHeaderElement = (function (_ons$_BaseElement) {
     function ListHeaderElement() {
@@ -6706,11 +7145,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6733,6 +7172,7 @@ limitations under the License.
   'use strict';
 
   var scheme = { '': 'list__item--*' };
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   var ListItemElement = (function (_ons$_BaseElement) {
     function ListItemElement() {
@@ -6771,11 +7211,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6798,6 +7238,7 @@ limitations under the License.
   'use strict';
 
   var scheme = { '': 'list--*' };
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   var ListElement = (function (_ons$_BaseElement) {
     function ListElement() {
@@ -6831,6 +7272,492 @@ limitations under the License.
   if (!window.OnsList) {
     window.OnsList = document.registerElement('ons-list', {
       prototype: ListElement.prototype
+    });
+  }
+})();
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var scheme = {
+    '': 'modal--*',
+    'modal__content': 'modal--*__content'
+  };
+
+  var AnimatorFactory = ons._internal.AnimatorFactory;
+  var ModalAnimator = ons._internal.ModalAnimator;
+  var FadeModalAnimator = ons._internal.FadeModalAnimator;
+  var ModifierUtil = ons._internal.ModifierUtil;
+
+  var ModalElement = (function (_ons$_BaseElement) {
+    function ModalElement() {
+      _classCallCheck(this, ModalElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(ModalElement, _ons$_BaseElement);
+
+    _createClass(ModalElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this._doorLock = new DoorLock();
+        this._animatorFactory = new AnimatorFactory({
+          animators: ModalElement._animatorDict,
+          baseClass: ModalAnimator,
+          baseClassName: 'ModalAnimator',
+          defaultAnimation: this.getAttribute('animation'),
+          defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
+        });
+
+        this._compile();
+        ModifierUtil.initModifier(this, scheme);
+      }
+    }, {
+      key: 'getDeviceBackButtonHandler',
+      value: function getDeviceBackButtonHandler() {
+        return this._deviceBackButtonHandler;
+      }
+    }, {
+      key: 'setDeviceBackButtonHandler',
+      value: function setDeviceBackButtonHandler(callback) {
+        if (this._deviceBackButtonHandler) {
+          this._deviceBackButtonHandler.destroy();
+        }
+
+        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, callback);
+        this._onDeviceBackButton = callback;
+      }
+    }, {
+      key: '_onDeviceBackButton',
+      value: function _onDeviceBackButton() {
+        // Do nothing and stop device-backbutton handler chain.
+        return;
+      }
+    }, {
+      key: '_compile',
+      value: function _compile() {
+        this.style.display = 'none';
+        this.classList.add('modal');
+
+        var wrapper = document.createElement('div');
+        wrapper.classList.add('modal__content');
+
+        while (this.childNodes[0]) {
+          var node = this.childNodes[0];
+          this.removeChild(node);
+          wrapper.insertBefore(node, null);
+        }
+
+        this.appendChild(wrapper);
+      }
+    }, {
+      key: 'detachedCallback',
+      value: function detachedCallback() {
+        if (this._deviceBackButtonHandler) {
+          this._deviceBackButtonHandler.destroy();
+        }
+      }
+    }, {
+      key: 'atachedCallback',
+      value: function atachedCallback() {
+        setImmediate(this._ensureNodePosition.bind(this));
+        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
+      }
+    }, {
+      key: '_ensureNodePosition',
+      value: function _ensureNodePosition() {
+        if (!this.parentNode || this.hasAttribute('inline')) {
+          return;
+        }
+
+        if (this.parentNode.nodeName.toLowerCase() !== 'ons-page') {
+          var page = this;
+          for (;;) {
+            page = page.parentNode;
+
+            if (!page) {
+              return;
+            }
+
+            if (page.nodeName.toLowerCase() === 'ons-page') {
+              break;
+            }
+          }
+          page._registerExtraElement(this);
+        }
+      }
+    }, {
+      key: '_isVisible',
+      value: function _isVisible() {
+        return this.clientWidth > 0;
+      }
+    }, {
+      key: 'show',
+
+      /**
+       * Show modal view.
+       *
+       * @param {Object} [options]
+       * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
+       * @param {Function} [options.callback] callback after modal is shown
+       */
+      value: function show(options) {
+        options = options || {};
+
+        var callback = options.callback || function () {};
+
+        this._doorLock.waitUnlock((function () {
+          var unlock = this._doorLock.lock(),
+              animator = this._animatorFactory.newAnimator(options);
+
+          this.style.display = 'table';
+          animator.show(this, function () {
+            unlock();
+            callback();
+          });
+        }).bind(this));
+      }
+    }, {
+      key: 'toggle',
+
+      /**
+       * Toggle modal view.
+       *
+       * @param {Object} [options]
+       * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
+       * @param {Function} [options.callback] callback after modal is toggled
+       */
+      value: function toggle() {
+        if (this._isVisible()) {
+          return this.hide.apply(this, arguments);
+        } else {
+          return this.show.apply(this, arguments);
+        }
+      }
+    }, {
+      key: 'hide',
+
+      /**
+       * Hide modal view.
+       *
+       * @param {Object} [options]
+       * @param {String} [options.animation] animation type
+       * @param {Object} [options.animationOptions] animation options
+       * @param {Function} [options.callback] callback after modal is hidden
+       */
+      value: function hide(options) {
+        options = options || {};
+
+        var callback = options.callback || function () {};
+
+        this._doorLock.waitUnlock((function () {
+          var unlock = this._doorLock.lock(),
+              animator = this._animatorFactory.newAnimator(options);
+
+          animator.hide(this, (function () {
+            this.style.display = 'none';
+            unlock();
+            callback();
+          }).bind(this));
+        }).bind(this));
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'modifier') {
+          return ModifierUtil.onModifierChanged(last, current, this, scheme);
+        }
+      }
+    }]);
+
+    return ModalElement;
+  })(ons._BaseElement);
+
+  ModalElement._animatorDict = {
+    'default': ModalAnimator,
+    'fade': FadeModalAnimator,
+    'none': ModalAnimator
+  };
+
+  /**
+   * @param {String} name
+   * @param {Function} Animator
+   */
+  ModalElement.registerAnimator = function (name, Animator) {
+    if (!(Animator.prototype instanceof ModalAnimator)) {
+      throw new Error('"Animator" param must inherit DialogAnimator');
+    }
+    ModalElement._animatorDict[name] = Animator;
+  };
+
+  if (!window.OnsModalElement) {
+    window.OnsModalElement = document.registerElement('ons-modal', {
+      prototype: ModalElement.prototype
+    });
+  }
+})();
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var scheme = {
+    '': 'page--*',
+    '.page__content': 'page--*__content',
+    '.page__background': 'page--*__background'
+  };
+  var ModifierUtil = ons._internal.ModifierUtil;
+  var nullToolbarElement = document.createElement('ons-toolbar');
+
+  var PageElement = (function (_ons$_BaseElement) {
+    function PageElement() {
+      _classCallCheck(this, PageElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(PageElement, _ons$_BaseElement);
+
+    _createClass(PageElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this.classList.add('page');
+        this._compile();
+        ModifierUtil.initModifier(this, scheme);
+      }
+    }, {
+      key: 'getDeviceBackButtonHandler',
+
+      /**
+       * @return {Object/null}
+       */
+      value: function getDeviceBackButtonHandler() {
+        return this._deviceBackButtonHandler || null;
+      }
+    }, {
+      key: 'setDeviceBackButtonHandler',
+
+      /**
+       * @param {Function} callback
+       */
+      value: function setDeviceBackButtonHandler(callback) {
+        if (this._deviceBackButtonHandler) {
+          this._deviceBackButtonHandler.destroy();
+        }
+
+        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, callback);
+      }
+    }, {
+      key: '_getContentElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getContentElement() {
+        var result = ons._util.findChild(this, '.page__content');
+        if (result) {
+          return result;
+        }
+        throw Error('fail to get ".page__content" element.');
+      }
+    }, {
+      key: '_hasToolbarElement',
+
+      /**
+       * @return {Boolean}
+       */
+      value: function _hasToolbarElement() {
+        return !!ons._util.findChild(this, 'ons-toolbar');
+      }
+    }, {
+      key: '_getBackgroundElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getBackgroundElement() {
+        var result = ons._util.findChild(this, '.page__background');
+        if (result) {
+          return result;
+        }
+        throw Error('fail to get ".page__background" element.');
+      }
+    }, {
+      key: '_getBottomToolbarElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getBottomToolbarElement() {
+        return ons._util.findChild(this, 'ons-bottom-toolbar') || ons._internal.nullElement;
+      }
+    }, {
+      key: '_getToolbarElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getToolbarElement() {
+        return ons._util.findChild(this, 'ons-toolbar') || nullToolbarElement;
+      }
+    }, {
+      key: '_registerToolbar',
+
+      /**
+       * Register toolbar element to this page.
+       *
+       * @param {HTMLElement} element
+       */
+      value: function _registerToolbar(element) {
+        this._getContentElement().setAttribute('no-status-bar-fill', '');
+
+        if (ons._util.findChild(this, '.page__status-bar-fill')) {
+          this.insertBefore(element, this.children[1]);
+        } else {
+          this.insertBefore(element, this.children[0]);
+        }
+      }
+    }, {
+      key: '_registerBottomToolbar',
+
+      /**
+       * Register toolbar element to this page.
+       *
+       * @param {HTMLElement} element
+       */
+      value: function _registerBottomToolbar(element) {
+        if (!ons._util.findChild(this, '.page__status-bar-fill')) {
+          var fill = document.createElement('div');
+          fill.classList.add('page__bottom-bar-fill');
+          fill.style.width = '0px';
+          fill.style.height = '0px';
+
+          this.insertBefore(fill, this.children[0]);
+          this.insertBefore(element, null);
+        }
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'modifier') {
+          return ModifierUtil.onModifierChanged(last, current, this, scheme);
+        }
+      }
+    }, {
+      key: '_compile',
+      value: function _compile() {
+        if (ons._util.findChild(this, '.page__background') && ons._util.findChild(this, '.page__content')) {
+          return;
+        }
+
+        var background = document.createElement('div');
+        background.classList.add('page__background');
+
+        var content = document.createElement('div');
+        content.classList.add('page__content');
+
+        while (this.childNodes[0]) {
+          var node = this.childNodes[0];
+          this.removeChild(node);
+          content.appendChild(node);
+        }
+
+        if (this.hasAttribute('style')) {
+          background.setAttribute('style', this.getAttribute('style'));
+          this.removeAttribute('style', null);
+        }
+
+        this.insertBefore(background, null);
+        this.insertBefore(content, null);
+      }
+    }, {
+      key: '_registerExtraElement',
+      value: function _registerExtraElement(element) {
+        var extra = ons._util.findChild(this, '.page__extra');
+        if (!extra) {
+          extra = document.createElement('div');
+          extra.classList.add('page__extra');
+          extra.style.zIndex = '10001';
+          this.insertBefore(extra, null);
+        }
+
+        extra.insertBefore(element, null);
+      }
+    }, {
+      key: '_tryToFillStatusBar',
+      value: function _tryToFillStatusBar() {
+        if (ons._internal.shouldFillStatusBar(this)) {
+          // Adjustments for IOS7
+          var fill = document.createElement('div');
+          fill.classList.add('page__status-bar-fill');
+          fill.style.width = '0px';
+          fill.style.height = '0px';
+
+          this.insertBefore(fill, this.children[0]);
+        }
+      }
+    }]);
+
+    return PageElement;
+  })(ons._BaseElement);
+
+  if (!window.OnsPageElement) {
+    window.OnsPageElement = document.registerElement('ons-page', {
+      prototype: PageElement.prototype
     });
   }
 })();
@@ -6876,11 +7803,164 @@ limitations under the License.
 window.OnsScrollerElement = window.OnsScrollerElement ? window.OnsScrollerElement : document.registerElement('ons-scroller');
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var scheme = {
+    '': 'switch--*',
+    'switch__input': 'switch--*__input',
+    'switch__toggle': 'switch--*__toggle'
+  };
+  var ModifierUtil = ons._internal.ModifierUtil;
+
+  var ExtendableLabelElement;
+  if (typeof HTMLLabelElement !== 'function') {
+    // for Safari
+    ExtendableLabelElement = function () {};
+    ExtendableLabelElement.prototype = document.createElement('label');
+  } else {
+    ExtendableLabelElement = HTMLLabelElement;
+  }
+
+  var generateId = (function () {
+    var i = 0;
+    return function () {
+      return 'ons-switch-id-' + i++;
+    };
+  })();
+
+  var SwitchElement = (function (_ExtendableLabelElement) {
+    function SwitchElement() {
+      _classCallCheck(this, SwitchElement);
+
+      if (_ExtendableLabelElement != null) {
+        _ExtendableLabelElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(SwitchElement, _ExtendableLabelElement);
+
+    _createClass(SwitchElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this._compile();
+        ModifierUtil.initModifier(this, scheme);
+
+        this._updateForCheckedAttribute();
+        this._updateForDisabledAttribute();
+      }
+    }, {
+      key: '_updateForCheckedAttribute',
+      value: function _updateForCheckedAttribute() {
+        if (this.hasAttribute('checked')) {
+          this._getCheckbox().checked = true;
+        } else {
+          this._getCheckbox().checked = false;
+        }
+      }
+    }, {
+      key: '_updateForDisabledAttribute',
+      value: function _updateForDisabledAttribute() {
+        if (this.hasAttribute('disabled')) {
+          this._getCheckbox().setAttribute('disabled', '');
+        } else {
+          this._getCheckbox().removeAttribute('disabled');
+        }
+      }
+    }, {
+      key: '_compile',
+      value: function _compile() {
+        this.classList.add('switch');
+        this.innerHTML = '\n        <input type="checkbox" checked class="switch__input">\n        <div class="switch__toggle"></div>\n      ';
+        this._getCheckbox().setAttribute('name', generateId());
+      }
+    }, {
+      key: 'detachedCallback',
+      value: function detachedCallback() {}
+    }, {
+      key: 'atachedCallback',
+      value: function atachedCallback() {}
+    }, {
+      key: '_isChecked',
+
+      /**
+       * @return {Boolean}
+       */
+      value: function _isChecked() {
+        return this._getCheckbox().checked;
+      }
+    }, {
+      key: '_setChecked',
+
+      /**
+       * @param {Boolean}
+       */
+      value: function _setChecked(isChecked) {
+        isChecked = !!isChecked;
+
+        var checkbox = this._getCheckbox();
+
+        if (checkbox.checked != isChecked) {
+          checkbox.checked = isChecked;
+        }
+      }
+    }, {
+      key: '_getCheckbox',
+      value: function _getCheckbox() {
+        return this.querySelector('input[type=checkbox]');
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'modifier') {
+          return ModifierUtil.onModifierChanged(last, current, this, scheme);
+        } else if (name === 'checked') {
+          this._updateForCheckedAttribute();
+        } else if (name === 'disabled') {
+          this._updateForDisabledAttribute();
+        }
+      }
+    }]);
+
+    return SwitchElement;
+  })(ExtendableLabelElement);
+
+  if (!window.OnsSwitchElement) {
+    window.OnsSwitchElement = document.registerElement('ons-switch', {
+      prototype: SwitchElement.prototype
+    });
+  }
+})();
+'use strict';
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6935,11 +8015,11 @@ limitations under the License.
 })();
 'use strict';
 
-var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _inherits = function (subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; };
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 /*
 Copyright 2013-2015 ASIAL CORPORATION
@@ -6962,6 +8042,7 @@ limitations under the License.
   'use strict';
 
   var scheme = { '': 'toolbar-button--*' };
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   var ToolbarButtonElement = (function (_ons$_BaseElement) {
     function ToolbarButtonElement() {
@@ -6997,6 +8078,222 @@ limitations under the License.
   if (!window.OnsToolbarButton) {
     window.OnsToolbarButton = document.registerElement('ons-toolbar-button', {
       prototype: ToolbarButtonElement.prototype
+    });
+  }
+})();
+'use strict';
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function () {
+  'use strict';
+
+  var scheme = {
+    '': 'navigation-bar--*',
+    '.navigation-bar__left': 'navigation-bar--*__left',
+    '.navigation-bar__center': 'navigation-bar--*__center',
+    '.navigation-bar__right': 'navigation-bar--*__right'
+  };
+  var ModifierUtil = ons._internal.ModifierUtil;
+
+  var ToolbarElement = (function (_ons$_BaseElement) {
+    function ToolbarElement() {
+      _classCallCheck(this, ToolbarElement);
+
+      if (_ons$_BaseElement != null) {
+        _ons$_BaseElement.apply(this, arguments);
+      }
+    }
+
+    _inherits(ToolbarElement, _ons$_BaseElement);
+
+    _createClass(ToolbarElement, [{
+      key: 'createdCallback',
+      value: function createdCallback() {
+        this._compile();
+        ModifierUtil.initModifier(this, scheme);
+      }
+    }, {
+      key: 'attributeChangedCallback',
+      value: function attributeChangedCallback(name, last, current) {
+        if (name === 'modifier') {
+          return ModifierUtil.onModifierChanged(last, current, this, scheme);
+        }
+      }
+    }, {
+      key: 'attachedCallback',
+      value: function attachedCallback() {
+        setImmediate(this._ensureNodePosition.bind(this));
+      }
+    }, {
+      key: '_ensureNodePosition',
+      value: function _ensureNodePosition() {
+        if (!this.parentNode || this.hasAttribute('inline')) {
+          return;
+        }
+
+        if (this.parentNode.nodeName.toLowerCase() !== 'ons-page') {
+          var page = this;
+          for (;;) {
+            page = page.parentNode;
+
+            if (!page) {
+              return;
+            }
+
+            if (page.nodeName.toLowerCase() === 'ons-page') {
+              break;
+            }
+          }
+          page._registerToolbar(this);
+        }
+      }
+    }, {
+      key: '_getToolbarLeftItemsElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getToolbarLeftItemsElement() {
+        return this.querySelector('.left') || ons._internal.nullElement;
+      }
+    }, {
+      key: '_getToolbarCenterItemsElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getToolbarCenterItemsElement() {
+        return this.querySelector('.center') || ons._internal.nullElement;
+      }
+    }, {
+      key: '_getToolbarRightItemsElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getToolbarRightItemsElement() {
+        return this.querySelector('.right') || ons._internal.nullElement;
+      }
+    }, {
+      key: '_getToolbarBackButtonLabelElement',
+
+      /**
+       * @return {HTMLElement}
+       */
+      value: function _getToolbarBackButtonLabelElement() {
+        return this.querySelector('ons-back-button .back-button__label') || ons._internal.nullElement;
+      }
+    }, {
+      key: '_compile',
+      value: function _compile() {
+        var shouldAppendAndroidModifier = ons.platform.isAndroid() && !this.hasAttribute('fixed-style');
+        var inline = this.hasAttribute('inline');
+
+        this.classList.add('navigation-bar');
+
+        if (shouldAppendAndroidModifier) {
+          this.classList.add('navigation-bar--android');
+        }
+
+        if (!inline) {
+          this.style.position = 'absolute';
+          this.style.zIndex = '10000';
+          this.style.left = '0px';
+          this.style.right = '0px';
+          this.style.top = '0px';
+        }
+
+        this._ensureToolbarItemElements();
+      }
+    }, {
+      key: '_ensureToolbarItemElements',
+      value: function _ensureToolbarItemElements() {
+
+        var hasCenterClassElementOnly = this.children.length === 1 && this.children[0].classList.contains('center');
+        var center;
+
+        for (var i = 0; i < this.childNodes.length; i++) {
+          // case of not element
+          if (this.childNodes[i].nodeType != 1) {
+            this.removeChild(this.childNodes[i]);
+          }
+        }
+
+        if (hasCenterClassElementOnly) {
+          center = this._ensureToolbarItemContainer('center');
+        } else {
+          center = this._ensureToolbarItemContainer('center');
+          var left = this._ensureToolbarItemContainer('left');
+          var right = this._ensureToolbarItemContainer('right');
+
+          if (this.children[0] !== left || this.children[1] !== center || this.children[2] !== right) {
+            if (left.parentNode) {
+              this.removeChild(left);
+            }
+            if (center.parentNode) {
+              this.removeChild(center);
+            }
+            if (right.parentNode) {
+              this.removeChild(right);
+            }
+
+            var fragment = document.createDocumentFragment();
+            fragment.appendChild(left);
+            fragment.appendChild(center);
+            fragment.appendChild(right);
+
+            this.appendChild(fragment);
+          }
+        }
+        center.classList.add('navigation-bar__title');
+      }
+    }, {
+      key: '_ensureToolbarItemContainer',
+      value: function _ensureToolbarItemContainer(name) {
+        var container = ons._util.findChild(this, '.' + name);
+
+        if (!container) {
+          container = document.createElement('div');
+          container.classList.add(name);
+        }
+
+        if (container.innerHTML.trim() === '') {
+          container.innerHTML = '&nbsp;';
+        }
+
+        container.classList.add('navigation-bar__' + name);
+        return container;
+      }
+    }]);
+
+    return ToolbarElement;
+  })(ons._BaseElement);
+
+  if (!window.OnsToolbarElement) {
+    window.OnsToolbarElement = document.registerElement('ons-toolbar', {
+      prototype: ToolbarElement.prototype
     });
   }
 })();
