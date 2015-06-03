@@ -469,7 +469,7 @@ limitations under the License.
 
         event.stopPropagation();
 
-        this._lastDragEvent = event;
+        this._lastDragEvent = event || null;
 
         var scroll = this._scroll - this._getScrollDelta(event);
         this._scrollTo(scroll);
