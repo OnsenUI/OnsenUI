@@ -47,6 +47,12 @@ limitations under the License.
 
     set checked(value) {
       this._getCheckbox().checked = value;
+      if (this.checked) {
+        this.setAttribute('checked', '');
+      }
+      else {
+        this.removeAttribute('checked');
+      }
     }
 
     get disabled() {
@@ -55,6 +61,12 @@ limitations under the License.
 
     set disabled(value) {
       this._getCheckbox().disabled = value;
+      if (this.disabled) {
+        this.setAttribute('disabled', '');
+      }
+      else {
+        this.removeAttribute('disabled');
+      }
     }
 
     createdCallback() {
