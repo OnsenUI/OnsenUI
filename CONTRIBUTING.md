@@ -46,7 +46,7 @@ Here is a list of some rules that should be followed:
 
 ## Commit Message Format
 
-We follow similar rules to those of [AngularJS](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit) for commit messages.
+We follow rules similar to those of [AngularJS](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit) for commit messages.
 ```
 <type>(<scope>): <subject>
 ```
