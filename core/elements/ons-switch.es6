@@ -45,13 +45,12 @@ limitations under the License.
       this._compile();
       ModifierUtil.initModifier(this, scheme);
 
-      this._addAttributes();
+      this._addProperties();
       this._updateForCheckedAttribute();
       this._updateForDisabledAttribute();
-      this.attachedCallback.bind(this.onChangeListener);
     }
 
-    _addAttributes() {
+    _addProperties() {
       Object.defineProperty(this, 'checked', {
         get: function() {
           return this._getCheckbox().checked;
@@ -97,26 +96,19 @@ limitations under the License.
     }
 
     detachedCallback() {
-      this._getCheckbox().removeEventListener('change', this.onChangeListener);
+      this._getCheckbox().removeEventListener('change', this._onChangeListener);
     }
 
     attachedCallback() {
-      this._getCheckbox().addEventListener('change', this.onChangeListener);
+      this._getCheckbox().addEventListener('change', this._onChangeListener);
     }
 
-    onChangeListener() {
+    _onChangeListener() {
       if (this.checked !== true) {
         this.parentNode.removeAttribute('checked');
       }
       else {
         this.parentNode.setAttribute('checked', '');
-      }
-
-      if (this.disabled !== true) {
-        this.parentNode.removeAttribute('disabled');
-      }
-      else {
-        this.parentNode.setAttribute('disabled', '');
       }
     }
 
