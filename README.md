@@ -1,6 +1,10 @@
 # Onsen UI 
 
-[![Circle CI](https://circleci.com/gh/OnsenUI/OnsenUI.svg?style=svg)](https://circleci.com/gh/OnsenUI/OnsenUI) [![TypeScript definitions on DefinitelyTyped](http://definitelytyped.org/badges/standard-flat.svg)](http://definitelytyped.org)
+[![Circle CI](https://circleci.com/gh/OnsenUI/OnsenUI.svg?style=svg)](https://circleci.com/gh/OnsenUI/OnsenUI) 
+
+[![TypeScript definitions on DefinitelyTyped](http://definitelytyped.org/badges/standard-flat.svg)](http://definitelytyped.org)
+
+[![Join us on Gitter](https://img.shields.io/badge/gitter-join%20chat-1dce73.svg)](https://gitter.im/OnsenUI/OnsenUI)
 
 The best place to start with Onsen UI is our [Getting Started](http://onsen.io/guide/getting_started.html) page.
 
@@ -143,10 +147,10 @@ Please see our [document on contributing](https://github.com/OnsenUI/OnsenUI/blo
 
 If anything about Onsen UI is unclear, please ask a question on <a href="http://stackoverflow.com" target="_blank">Stackoverflow</a>, and tag it "onsen-ui".  An Onsen UI support engineer will answer it.
 
-If you have any requests or comments regarding the development of Onsen UI, please feel free to direct them to the Twitter account (<a href="http://twitter.com/Onsen_UI" target="_blank">@Onsen_UI</a>).
+You can also join our [Gitter channel](https://gitter.im/OnsenUI/OnsenUI) if you want to talk about Onsen UI.
 
+If you have any requests or comments regarding the development of Onsen UI, please feel free to direct them to the Twitter account (<a href="http://twitter.com/Onsen_UI" target="_blank">@Onsen_UI</a>).
 
 [Onsen UI]:http://onsen.io/
 [Onsen UI Getting Started Page]:http://onsen.io/getting_started/
-[Monaca Forum]:http://monaca.mobi/forum
 [Monaca IDE]:http://monaca.mobi/

@@ -1,10 +1,11 @@
 
 describe('modifier', function() {
-  it('provide \'ModifierUtil\' global variable', function() {
-    expect(!!window.ModifierUtil).to.equal(true);
+  it('provide \'ons._internal.ModifierUtil\' global variable', function() {
+    expect(!!window.ons._internal.ModifierUtil).to.equal(true);
   });
 
   describe('.diff()', function() {
+    var ModifierUtil = ons._internal.ModifierUtil;
     it('should calculate modifier diff', function() {
       var diff = ModifierUtil.diff('hoge', '');
       expect(diff.removed).to.eql(['hoge']);

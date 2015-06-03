@@ -26,6 +26,7 @@ limitations under the License.
   module.factory('$onsen', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner) {
 
     var $onsen = createOnsenService();
+    var ModifierUtil = $onsGlobal._internal.ModifierUtil;
 
     return $onsen;
 
@@ -355,7 +356,7 @@ limitations under the License.
         /**
          * @return {Boolean}
          */
-        isIOS7Above: (function() {
+        isIOS7above: (function() {
           var ua = window.navigator.userAgent;
           var match = ua.match(/(iPad|iPhone|iPod touch);.*CPU.*OS (\d+)_(\d+)/i);
 

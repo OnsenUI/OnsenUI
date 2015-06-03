@@ -41,16 +41,11 @@
 
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
-          var backButton = new GenericView(scope, element, attrs);
-
-          $onsen.declareVarAttribute(attrs, backButton);
-
-          element.data('ons-back-button', backButton);
+          var backButton = GenericView.register(scope, element, attrs, {viewKey: 'ons-back-button'});
 
           scope.$on('$destroy', function() {
             backButton._events = undefined;
             $onsen.removeModifierMethods(backButton);
-            element.data('ons-back-button', undefined);
             element = null;
           });
 

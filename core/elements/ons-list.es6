@@ -19,6 +19,7 @@ limitations under the License.
   'use strict';
 
   var scheme = {'': 'list--*'};
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   class ListElement extends ons._BaseElement {
     createdCallback() {
@@ -33,8 +34,8 @@ limitations under the License.
     }
   }
 
-  if (!window.OnsList) {
-    window.OnsList = document.registerElement('ons-list', {
+  if (!window.OnsListElement) {
+    window.OnsListElement = document.registerElement('ons-list', {
       prototype: ListElement.prototype
     });
   }

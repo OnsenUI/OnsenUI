@@ -19,6 +19,7 @@ limitations under the License.
   'use strict';
 
   var scheme = {'': 'list__header--*'};
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   class ListHeaderElement extends ons._BaseElement {
     createdCallback() {
@@ -33,8 +34,8 @@ limitations under the License.
     }
   }
 
-  if (!window.OnsListHeader) {
-    window.OnsListHeader = document.registerElement('ons-list-header', {
+  if (!window.OnsListHeaderElement) {
+    window.OnsListHeaderElement = document.registerElement('ons-list-header', {
       prototype: ListHeaderElement.prototype
     });
   }

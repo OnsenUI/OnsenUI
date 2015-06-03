@@ -38,8 +38,9 @@ limitations under the License.
       ),
 
       _decompose: function(page) {
-        var left = page.getPageView().getToolbarLeftItemsElement();
-        var right = page.getPageView().getToolbarRightItemsElement();
+        var toolbar = page.element[0]._getToolbarElement();
+        var left = toolbar._getToolbarLeftItemsElement();
+        var right = toolbar._getToolbarRightItemsElement();
 
         var excludeBackButtonLabel = function(elements) {
           var result = [];
@@ -60,8 +61,8 @@ limitations under the License.
           .concat(right.children.length === 0 ? right : excludeBackButtonLabel(right.children));
 
         var pageLabels = [
-          page.getPageView().getToolbarCenterItemsElement(),
-          page.getPageView().getToolbarBackButtonLabelElement()
+          toolbar._getToolbarCenterItemsElement(),
+          toolbar._getToolbarBackButtonLabelElement()
         ];
 
         return {
@@ -69,7 +70,7 @@ limitations under the License.
           other: other,
           content: page.element[0]._getContentElement(),
           background: page.element[0]._getBackgroundElement(),
-          toolbar: page.element[0]._getToolbarElement(),
+          toolbar: toolbar,
           bottomToolbar: page.element[0]._getBottomToolbarElement()
         };
       },

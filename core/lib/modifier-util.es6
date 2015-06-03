@@ -16,8 +16,9 @@ limitations under the License.
 */
 
 
-window.ModifierUtil = (() => {
+((ons) => {
   'use strict';
+
 
   class ModifierUtil {
     /**
@@ -75,9 +76,9 @@ window.ModifierUtil = (() => {
       for (let selector in scheme) {
         if (scheme.hasOwnProperty(selector)) {
           let targetElements = selector === '' ? [element] : element.querySelectorAll(selector);
-          targetElements.forEach(targetElement => {
-            ModifierUtil.applyDiffToClassList(diff, targetElement.classList, scheme[selector]);
-          });
+          for (let i = 0; i < targetElements.length; i++) {
+            ModifierUtil.applyDiffToClassList(diff, targetElements[i].classList, scheme[selector]);
+          }
         }
       }
     }
@@ -117,5 +118,6 @@ window.ModifierUtil = (() => {
     }
   }
 
-  return ModifierUtil;
-})();
+  ons._internal = ons._internal || {};
+  ons._internal.ModifierUtil = ModifierUtil;
+})(window.ons = window.ons || {});

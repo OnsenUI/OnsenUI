@@ -44,7 +44,7 @@
       restrict: 'E',
       link: {
         pre: function(scope, element, attrs) {
-          var bottomToolbar = new GenericView(scope, element, attrs, { // jshint ignore:line
+          GenericView.register(scope, element, attrs, {
             viewKey: 'ons-bottomToolbar'
           });
 

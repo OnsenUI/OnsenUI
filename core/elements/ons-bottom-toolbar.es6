@@ -19,6 +19,7 @@ limitations under the License.
   'use strict';
 
   var scheme = {'': 'bottom-bar--*'};
+  var ModifierUtil = ons._internal.ModifierUtil;
 
   class BottomToolbarElement extends ons._BaseElement {
 
@@ -45,8 +46,8 @@ limitations under the License.
     }
   }
 
-  if (!window.OnsBottomToolbar) {
-    window.OnsBottomToolbar = document.registerElement('ons-bottom-toolbar', {
+  if (!window.OnsBottomToolbarElement) {
+    window.OnsBottomToolbarElement = document.registerElement('ons-bottom-toolbar', {
       prototype: BottomToolbarElement.prototype
     });
   }
