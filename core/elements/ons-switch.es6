@@ -41,33 +41,28 @@ limitations under the License.
 
   class SwitchElement extends ExtendableLabelElement {
 
+    get checked() {
+      return this._getCheckbox().checked;
+    }
+
+    set checked(value) {
+      this._getCheckbox().checked = value;
+    }
+
+    get disabled() {
+      return this._getCheckbox().disabled;
+    }
+
+    set disabled(value) {
+      this._getCheckbox().disabled = value;
+    }
+
     createdCallback() {
       this._compile();
       ModifierUtil.initModifier(this, scheme);
 
-      this._addProperties();
       this._updateForCheckedAttribute();
       this._updateForDisabledAttribute();
-    }
-
-    _addProperties() {
-      Object.defineProperty(this, 'checked', {
-        get: function() {
-          return this._getCheckbox().checked;
-        },
-        set: function(value) {
-          this._getCheckbox().checked = value;
-        }
-      });
-
-      Object.defineProperty(this, 'disabled', {
-        get: function() {
-          return this._getCheckbox().disabled;
-        },
-        set: function(value) {
-          this._getCheckbox().disabled = value;
-        }
-      });
     }
 
     _updateForCheckedAttribute() {
