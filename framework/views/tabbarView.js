@@ -61,9 +61,10 @@ limitations under the License.
         var pageScope = this._scope.$new();
         this._linkPage.link(pageScope);
         this._linkPage.link = null;
-        pageScope.$evalAsync();
+        pageScope.$evalAsync(function() {
+          next(pageElement);
+        });
 
-        next(pageElement);
       },
 
       setActiveTab: function(index, options) {

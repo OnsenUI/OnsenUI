@@ -149,8 +149,8 @@ limitations under the License.
       options = options || {};
 
       this._compilePageHook.run(pageElement => {
-        this._getContentElement().appendChild(pageElement);
         this._linkPageHook.run(pageElement => {
+          this._getContentElement().appendChild(pageElement);
           this._switchPage(pageElement, options);
         }, pageElement);
       }, pageElement);
