@@ -469,7 +469,7 @@ limitations under the License.
 
         event.stopPropagation();
 
-        this._lastDragEvent = event || null;
+        this._lastDragEvent = event;
 
         var scroll = this._scroll - this._getScrollDelta(event);
         this._scrollTo(scroll);
@@ -511,7 +511,7 @@ limitations under the License.
           if (!waitForAction) {
             this._scrollToKillOverScroll();
           }
-        } else if (this._lastDragEvent !== null) {
+        } else if (this._lastDragEvent !== null && this._lastDragEvent !== undefined) {
           this._startMomentumScroll(event);
         }
         this._lastDragEvent = null;
