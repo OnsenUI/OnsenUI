@@ -36,11 +36,16 @@ limitations under the License.
 
     _compile() {
       var fragment = document.createDocumentFragment(); 
+      var hasChildren = false;
 
       while (this.childNodes[0]) {
         let node = this.childNodes[0];
         this.removeChild(node);
         fragment.appendChild(node);
+
+        if (node.nodeType == Node.ELEMENT_NODE) {
+          hasChildren = true;
+        }
       }
 
       var template = `
@@ -51,12 +56,12 @@ limitations under the License.
 
       var button = util.findChild(this, '.tab-bar__button');
 
-      if (fragment.children.length === 0) {
-        this._hasDefaultTemplate = true;
-        this._updateDefaultTemplate();
-      } else {
+      if (hasChildren) {
         button.appendChild(fragment);
         this._hasDefaultTemplate = false;
+      } else {
+        this._hasDefaultTemplate = true;
+        this._updateDefaultTemplate();
       }
     }
 
@@ -206,8 +211,9 @@ limitations under the License.
       if (this.hasAttribute('active')) {
         var tabbar = this._findTabbarElement();
         var tabIndex = this._findTabIndex();
+
         window.OnsTabbarElement.ready(tabbar, () => {
-          tabbar.setActiveTab(tabIndex, {animation: 'none'})
+          tabbar.setActiveTab(tabIndex, {animation: 'none'});
         });
       }
 
@@ -215,9 +221,14 @@ limitations under the License.
     }
 
     _findTabbarElement() {
-      if (this.parentNode && this.parentNode.parentNode && this.parentNode.parentNode.nodeName.toLowerCase() === 'ons-tabbar') {
+      if (this.parentNode && this.parentNode.nodeName.toLowerCase() === 'ons-tabbar') {
+        return this.parentNode;
+      }
+
+      if (this.parentNode.parentNode && this.parentNode.parentNode.nodeName.toLowerCase() === 'ons-tabbar') {
         return this.parentNode.parentNode;
       }
+
       return null;
     }
 
