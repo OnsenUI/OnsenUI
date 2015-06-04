@@ -41,6 +41,34 @@ limitations under the License.
 
   class SwitchElement extends ExtendableLabelElement {
 
+    get checked() {
+      return this._getCheckbox().checked;
+    }
+
+    set checked(value) {
+      this._getCheckbox().checked = value;
+      if (this.checked) {
+        this.setAttribute('checked', '');
+      }
+      else {
+        this.removeAttribute('checked');
+      }
+    }
+
+    get disabled() {
+      return this._getCheckbox().disabled;
+    }
+
+    set disabled(value) {
+      this._getCheckbox().disabled = value;
+      if (this.disabled) {
+        this.setAttribute('disabled', '');
+      }
+      else {
+        this.removeAttribute('disabled');
+      }
+    }
+
     createdCallback() {
       this._compile();
       ModifierUtil.initModifier(this, scheme);
@@ -68,16 +96,27 @@ limitations under the License.
     _compile() {
       this.classList.add('switch');
       this.innerHTML = `
-        <input type="checkbox" checked class="switch__input">
+        <input type="checkbox" class="switch__input">
         <div class="switch__toggle"></div>
       `;
       this._getCheckbox().setAttribute('name', generateId());
     }
 
     detachedCallback() {
+      this._getCheckbox().removeEventListener('change', this._onChangeListener);
     }
 
-    atachedCallback() {
+    attachedCallback() {
+      this._getCheckbox().addEventListener('change', this._onChangeListener);
+    }
+
+    _onChangeListener() {
+      if (this.checked !== true) {
+        this.parentNode.removeAttribute('checked');
+      }
+      else {
+        this.parentNode.setAttribute('checked', '');
+      }
     }
 
     /**
