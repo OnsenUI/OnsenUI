@@ -86,13 +86,13 @@
 
       compile: function(element, attrs) {
         CustomElements.upgrade(element[0]);
-        return {
-          pre: function(scope, element, attrs) {
-            GenericView.register(scope, element, attrs, {viewKey: 'ons-toolbar'});
-            element[0]._ensureNodePosition();
-            $onsen.fireComponentEvent(element[0], 'init');
-          }
-        };
+      },
+
+      link: function(scope, element, attrs) {
+        CustomElements.upgrade(element[0]);
+        GenericView.register(scope, element, attrs, {viewKey: 'ons-toolbar'});
+        element[0]._ensureNodePosition();
+        $onsen.fireComponentEvent(element[0], 'init');
       }
     };
   });
