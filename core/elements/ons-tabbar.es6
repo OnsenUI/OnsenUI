@@ -431,5 +431,9 @@ limitations under the License.
     window.OnsTabbarElement = document.registerElement('ons-tabbar', {
       prototype: TabbarElement.prototype
     });
+
+    window.OnsTabbarElement.ready = function(element, callback) {
+      setImmediate(callback);
+    };
   }
 })();

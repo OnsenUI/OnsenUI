@@ -206,7 +206,7 @@ limitations under the License.
       if (this.hasAttribute('active')) {
         var tabbar = this._findTabbarElement();
         var tabIndex = this._findTabIndex();
-        setImmediate(() => {
+        window.OnsTabbarElement.ready(tabbar, () => {
           tabbar.setActiveTab(tabIndex, {animation: 'none'})
         });
       }

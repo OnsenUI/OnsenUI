@@ -285,6 +285,20 @@
 (function() {
   'use strict';
 
+  var lastReady = window.OnsTabbarElement.ready;
+  // wait for AngularJS binding initilization.
+  window.OnsTabbarElement.ready = function(element, callback) {
+    if (angular.element(element).data('ons-tabbar')) {
+      lastReady(element, callback);
+    } else {
+      var listen = function() {
+        lastReady(element, callback);
+        element.removeEventListener('ons-tabbar:init', listen, false);
+      };
+      element.addEventListener('ons-tabbar:init', listen, false);
+    }
+  };
+
   angular.module('onsen').directive('onsTabbar', function($onsen, $compile, $parse, TabbarView) {
     return {
       restrict: 'E',
