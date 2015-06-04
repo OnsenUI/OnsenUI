@@ -32,7 +32,6 @@ limitations under the License.
           throw new Error('"element" parameter must be a "ons-tabbar" element.');
         }
 
-
         this._scope = scope;
         this._element = element;
         this._attrs = attrs;

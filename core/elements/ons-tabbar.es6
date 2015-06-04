@@ -240,12 +240,12 @@ limitations under the License.
         return false;
       }
 
-      if((selectedTab.hasAttribute('no-reload') || selectedTab.isPersistent()) && index === previousTabIndex) {
+      if ((selectedTab.hasAttribute('no-reload') || selectedTab.isPersistent()) && index === previousTabIndex) {
         var event = new CustomEvent('reactive', {
           bubbles: true,
           detail: {
             index: index,
-            tabItem: selectedTabItem
+            tabItem: selectedTab
           }
         });
         this.dispatchEvent(event);
