@@ -9,8 +9,8 @@ describe('ons-template', function() {
   });
 
   it('has a \'createdCallback()\' function', function() {
-    var div = document.createElement('div');
-    var message = 'hoge';
+    var div = document.createElement('div'),
+      message = 'hoge';
 
     div.innerHTML = `
       <ons-template>
