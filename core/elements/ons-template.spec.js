@@ -12,12 +12,7 @@ describe('ons-template', function() {
     var div = document.createElement('div'),
       message = 'hoge';
 
-    div.innerHTML = `
-      <ons-template>
-        <p>${message}</p>
-      </ons-template>
-    `;
-
+    div.innerHTML = '<ons-template>' + message + '</ons-template>';
     var element = div.querySelector('ons-template');
 
     expect(element.template).not.to.contain('fuga')
