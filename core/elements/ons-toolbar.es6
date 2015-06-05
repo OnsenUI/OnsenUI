@@ -31,6 +31,8 @@ limitations under the License.
     createdCallback() {
       this._compile();
       ModifierUtil.initModifier(this, scheme);
+
+      this._tryToEnsureNodePosition();
     }
 
     attributeChangedCallback(name, last, current) {
@@ -40,10 +42,10 @@ limitations under the License.
     }
 
     attachedCallback() {
-      setImmediate(this._ensureNodePosition.bind(this));
+      setImmediate(this._tryToEnsureNodePosition.bind(this));
     }
 
-    _ensureNodePosition() {
+    _tryToEnsureNodePosition() {
       if (!this.parentNode || this.hasAttribute('inline')) {
         return;
       }
