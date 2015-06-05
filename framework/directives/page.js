@@ -9,9 +9,9 @@
  * @guide ManagingMultiplePages
  *   [en]Managing multiple pages[/en]
  *   [ja]複数のページを管理する[/ja]
- * @guide Pageinitevent
- *   [en]Event for page initialization[/en]
- *   [ja]ページ初期化のイベント[/ja]
+ * @guide Pagelifecycle
+ *   [en]Page life cycle events[/en]
+ *   [ja]ページライフサイクルイベント[/ja]
  * @guide HandlingBackButton
  *   [en]Handling back button[/en]
  *   [ja]バックボタンに対応する[/ja]

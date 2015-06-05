@@ -59,4 +59,14 @@ limitations under the License.
     return dst;
   };
 
+  /*
+   * @param {HTMLElement} element.
+   * @param {String} event name.
+   */
+  util.fireEvent = (element, eventName) => {
+    var event = document.createEvent('Event');
+    event.initEvent(eventName, true, true);
+    element.dispatchEvent(event);
+  };
+
 })(window.ons = window.ons || {});

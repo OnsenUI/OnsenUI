@@ -410,11 +410,10 @@ limitations under the License.
 
           this._animationChooser.newAnimator(options).apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
             if (options._removeElement) {
-              oldPageElement.remove();
               oldPageScope.$destroy();
             }
             else {
-              oldPageElement.css('display', 'none');
+              oldPageElement[0]._hide();
             }
 
             if (options.callback instanceof Function) {
@@ -458,7 +457,7 @@ limitations under the License.
       _loadPersistentPageDOM: function(element, options) {
         options = options || {};
 
-        element.css('display', 'block');
+        element[0]._show();
         this._switchPage(element, element.scope(), options);
       },
 
