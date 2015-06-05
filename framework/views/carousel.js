@@ -511,7 +511,7 @@ limitations under the License.
           if (!waitForAction) {
             this._scrollToKillOverScroll();
           }
-        } else if (this._lastDragEvent !== null) {
+        } else {
           this._startMomentumScroll(event);
         }
         this._lastDragEvent = null;
@@ -537,7 +537,7 @@ limitations under the License.
       },
 
       _startMomentumScroll: function(event) {
-        if (this._lastDragEvent !== null) {
+        if (this._lastDragEvent) {
           var velocity = this._getScrollVelocity(this._lastDragEvent);
           var duration = 0.3;
           var scrollDelta = duration * 100 * velocity;
