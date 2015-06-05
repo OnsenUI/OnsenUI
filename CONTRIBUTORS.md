@@ -25,5 +25,6 @@ List of code contributors (in no particular order):
 * [Ryohei Ikegami](https://github.com/seanchas116)
 * [Dominique Rahm](https://github.com/d3orn)
 * [Kon Yuichi](https://github.com/konpyu)
+* [zack](https://github.com/zack24q)
 
 Please add yourself if you're not on this list but feel that you should be.
