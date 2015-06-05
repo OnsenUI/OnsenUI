@@ -9,7 +9,7 @@ describe('ons-template', function() {
   });
 
   it('has a \'createdCallback()\' function', function() {
-    var div = document.createElement('div'),
+    var div = document.createElement('div');
     var message = 'hoge';
 
     div.innerHTML = `
