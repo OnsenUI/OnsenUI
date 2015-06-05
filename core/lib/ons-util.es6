@@ -77,6 +77,17 @@ limitations under the License.
     return wrapper.children[0];
   };
 
+  /**
+   * @param {Element} element
+   * @return {Element}
+   */
+  util.removeElement = (element) => {
+    if (element.parentNode) {
+      element.parentNode.removeChild(element);
+    }
+    return element;
+  };
+
   /*
    * @param {Object} dst Destination object.
    * @param {...Object} src Source object(s).
