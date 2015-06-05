@@ -9,9 +9,9 @@ describe('ons-page', function() {
     expect(element.classList.contains('page')).to.be.true;
   });
 
-  it('creates the element and fires \'create\' event', function() {
+  it('creates the element and fires \'init\' event', function() {
     var spy = chai.spy();
-    document.addEventListener('create', spy);
+    document.addEventListener('init', spy);
     var element = new OnsPageElement();
     document.body.appendChild(element);
     expect(element.parentNode).to.be.ok;

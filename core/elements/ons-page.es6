@@ -35,10 +35,7 @@ limitations under the License.
     }
 
     attachedCallback() {
-      if (!this._hasBeenAttachedBefore) {
-        this._hasBeenAttachedBefore = true;
-        ons._util.fireEvent(this, 'create');
-      }
+      ons._util.fireEvent(this, 'init');
     }
 
     /**
