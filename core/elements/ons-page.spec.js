@@ -32,7 +32,7 @@ describe('ons-page', function() {
     var spy = chai.spy();
     document.addEventListener('hide', spy);
     var element = new OnsPageElement();
-    document.body.appendChild(element)
+    document.body.appendChild(element);
     element._hide();
     expect(element.style.display).to.equal('none');
     expect(spy).to.have.been.called.once;
@@ -42,7 +42,7 @@ describe('ons-page', function() {
     var spy = chai.spy();
     document.addEventListener('show', spy);
     var element = new OnsPageElement();
-    document.body.appendChild(element)
+    document.body.appendChild(element);
     element._show();
     expect(element.style.display).to.equal('block');
     expect(spy).to.have.been.called.once;
