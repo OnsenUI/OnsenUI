@@ -15,7 +15,7 @@ describe('ons-template', function() {
     div.innerHTML = '<ons-template>' + message + '</ons-template>';
     var element = div.querySelector('ons-template');
 
-    expect(element.template).not.to.contain('fuga')
+    expect(element.template).not.to.contain('fuga');
     expect(element.template).to.contain(message);
     expect(element.firstChild).not.to.be.ok;
   });
