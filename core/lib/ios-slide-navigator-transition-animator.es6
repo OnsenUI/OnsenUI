@@ -43,6 +43,7 @@ limitations under the License.
 
     _decompose(page) {
       var toolbar = page.element[0]._getToolbarElement();
+      CustomElements.upgrade(toolbar);
       var left = toolbar._getToolbarLeftItemsElement();
       var right = toolbar._getToolbarRightItemsElement();
 
