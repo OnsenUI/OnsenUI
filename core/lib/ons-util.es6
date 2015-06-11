@@ -106,7 +106,7 @@ limitations under the License.
       result.push(arrayLike[i]);
     }
     return result;
-  }
+  };
 
   /*
    * @param {HTMLElement} element.
