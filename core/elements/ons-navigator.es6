@@ -18,6 +18,72 @@ limitations under the License.
 (() => {
   'use strict';
 
+  class NavigatorPage {
+
+    /**
+     * @param {Object} params
+     * @param {Object} params.page
+     * @param {Object} params.element
+     * @param {Object} params.pageScope
+     * @param {Object} params.options
+     * @param {Object} params.navigator
+     */
+    constructor(params) {
+      this.page = params.page;
+      this.name = params.page;
+      this.element = params.element;
+      this.pageScope = params.pageScope;
+      this.options = params.options;
+      this.navigator = params.navigator;
+
+      // Block events while page is being animated to stop scrolling, pressing buttons, etc.
+      this._blockEvents = (event) => {
+        if (this.navigator._isPopping || this.navigator._isPushing) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      };
+
+      this.element.on(this._pointerEvents, this._blockEvents);
+    }
+
+    get _pointerEvents() {
+      return 'touchstart touchend touchmove click';
+    }
+
+    /**
+     * @return {PageView}
+     */
+    getPageView() {
+      if (!this._pageView) {
+        this._pageView = this.element.inheritedData('ons-page');
+        if (!this._pageView) {
+          throw new Error('Fail to fetch PageView from ons-page element.');
+        }
+      }
+      return this._pageView;
+    }
+
+    destroy() {
+      this.pageScope.$destroy();
+
+      this.element.off(this._pointerEvents, this._blockEvents);
+      this.element.remove();
+      this.element = null;
+
+      this._pageView = null;
+      this.pageScope = null;
+      this.options = null;
+
+      var index = this.navigator.pages.indexOf(this);
+      if (index !== -1) {
+        this.navigator.pages.splice(index, 1);
+      }
+
+      this.navigator = null;
+    }
+  }
+
   var scheme = {
   };
   var ModifierUtil = ons._internal.ModifierUtil;
@@ -42,4 +108,5 @@ limitations under the License.
       prototype: NavigatorElement.prototype
     });
   }
+  window.ons._internal.NavigatorPage = NavigatorPage;
 })();
