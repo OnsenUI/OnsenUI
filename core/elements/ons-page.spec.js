@@ -27,25 +27,5 @@ describe('ons-page', function() {
     expect(element.parentNode).to.not.be.ok;
     expect(spy).to.have.been.called.once;
   });
-
-  it('hides the element and fires \'hide\' event', function() {
-    var spy = chai.spy();
-    document.addEventListener('hide', spy);
-    var element = new OnsPageElement();
-    document.body.appendChild(element);
-    element._hide();
-    expect(element.style.display).to.equal('none');
-    expect(spy).to.have.been.called.once;
-  });
-
-  it('shows the element and fires \'show\' event', function() {
-    var spy = chai.spy();
-    document.addEventListener('show', spy);
-    var element = new OnsPageElement();
-    document.body.appendChild(element);
-    element._show();
-    expect(element.style.display).to.equal('block');
-    expect(spy).to.have.been.called.once;
-  });
 });
 
