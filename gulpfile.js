@@ -46,12 +46,12 @@ gulp.task('browser-sync', function() {
       index: 'index.html',
       directory: true
     },
+    files: [],
     watchOptions: {
-      debounceDelay: 300
+      //debounceDelay: 400
     },
     ghostMode: false,
-    notify: false,
-    reloadDelay: 300
+    notify: false
   });
 });
 
@@ -88,6 +88,20 @@ gulp.task('core-test', ['core'], function() {
     .pipe(karma({
       configFile: 'core/test/karma.conf.js',
       action: 'run'
+    }))
+    .on('error', function(err) {
+      throw err;
+    });
+});
+
+////////////////////////////////////////
+// watch-core-test
+////////////////////////////////////////
+gulp.task('watch-core-test', function() {
+  return gulp.src(['build/js/ons-core.js', 'core/**/*.spec.js'])
+    .pipe(karma({
+      configFile: 'core/test/karma.conf.js',
+      action: 'watch'
     }))
     .on('error', function(err) {
       throw err;
@@ -237,7 +251,6 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       .pipe(gulp.dest('build/js/'))
       .pipe(gulp.dest('app/lib/onsen/js')),
 
-
     // onsen-css-components
     gulp.src([
       'css-components/components-src/dist/*.css',
@@ -284,8 +297,9 @@ gulp.task('prepare', ['html2js', 'core'], function() {
     // auto prepare
     gulp.src('cordova-app/www/index.html')
       .pipe(gulpIf(CORDOVA_APP, $.shell(['cd cordova-app; cordova prepare'])))
-  );
-
+  ).on('end', function() {
+    browserSync.reload();
+  });
 });
 
 ////////////////////////////////////////
@@ -342,6 +356,7 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   var watched = [
     'core/*.{js,es6}',
     'core/*/*.{js,es6}',
+    '!core/*/*.spec.js',
     'framework/*/*',
     'css-components/components-src/dist/*.css'
   ];
@@ -351,12 +366,15 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   }
 
   gulp.watch(watched, {
-    debounceDelay: 400
+    debounceDelay: 100
   }, ['prepare', 'jshint']);
 
   // for livereload
   gulp.watch([
-    'app/**/*.{js,css,html}'
+    'app/*.{js,css,html}',
+    'app/*/*.{js,css,html}',
+    'demo/*/*.{js,css,html}',
+    'test/e2e/*/*.{js,css,html}'
   ]).on('change', function(changedFile) {
     gulp.src(changedFile.path)
       .pipe(browserSync.reload({stream: true, once: true}));

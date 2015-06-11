@@ -284,37 +284,46 @@
 
 (function() {
   'use strict';
-  var module = angular.module('onsen');
 
-  module.directive('onsTabbar', function($onsen, $compile, TabbarView) {
+  var lastReady = window.OnsTabbarElement.ready;
+  // wait for AngularJS binding initilization.
+  window.OnsTabbarElement.ready = function(element, callback) {
+    if (angular.element(element).data('ons-tabbar')) {
+      lastReady(element, callback);
+    } else {
+      var listen = function() {
+        lastReady(element, callback);
+        element.removeEventListener('ons-tabbar:init', listen, false);
+      };
+      element.addEventListener('ons-tabbar:init', listen, false);
+    }
+  };
+
+  angular.module('onsen').directive('onsTabbar', function($onsen, $compile, $parse, TabbarView) {
     return {
       restrict: 'E',
+
       replace: false,
-      transclude: true,
       scope: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
-      link: function(scope, element, attrs, controller, transclude) {
 
-        scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-        scope.selectedTabItem = {source: ''};
+      link: function(scope, element, attrs, controller) {
 
-        attrs.$observe('hideTabs', function(hide) {
-          var visible = hide !== 'true';
-          tabbarView.setTabbarVisibility(visible);
+        CustomElements.upgrade(element[0]);
+
+        scope.$watch(attrs.hideTabs, function(hide) {
+          if (typeof hide === 'string') {
+            hide = hide === 'true';
+          }
+          element[0].setTabbarVisibility(!hide);
         });
 
         var tabbarView = new TabbarView(scope, element, attrs);
-        $onsen.addModifierMethods(tabbarView, 'tab-bar--*', angular.element(element.children()[1]));
-        $onsen.registerEventHandlers(tabbarView, 'reactive prechange postchange destroy');
+        $onsen.addModifierMethodsForCustomElements(tabbarView, element);
 
-        scope.tabbarId = tabbarView._tabbarId;
+        $onsen.registerEventHandlers(tabbarView, 'reactive prechange postchange destroy');
 
         element.data('ons-tabbar', tabbarView);
         $onsen.declareVarAttribute(attrs, tabbarView);
-
-        transclude(scope, function(cloned) {
-          angular.element(element[0].querySelector('.ons-tabbar-inner')).append(cloned);
-        });
 
         scope.$on('$destroy', function() {
           tabbarView._events = undefined;

@@ -131,111 +131,17 @@
 
 (function() {
   'use strict';
-  var module = angular.module('onsen');
 
-  module.directive('onsTab', tab);
-  module.directive('onsTabbarItem', tab); // for BC
+  angular.module('onsen')
+    .directive('onsTab', tab)
+    .directive('onsTabbarItem', tab); // for BC
 
-  var defaultInnerTemplate =
-    '<div ng-if="icon != undefined" class="tab-bar__icon">' +
-      '<ons-icon ng-attr-icon="{{tabIcon}}" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>' +
-    '</div>' +
-    '<div ng-if="label" class="tab-bar__label">{{label}}</div>';
-
-  function tab($onsen, $compile) {
+  function tab($onsen) {
     return {
       restrict: 'E',
-      transclude: true,
-
-      scope: {
-        page: '@',
-        active: '@',
-        icon: '@',
-        activeIcon: '@',
-        label: '@',
-        noReload: '@',
-        persistent: '@'
-      },
-
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab.tpl',
-
-      compile: function(element, attrs) {
-        element.addClass('tab-bar__item');
-
-        return function(scope, element, attrs, controller, transclude) {
-          var tabbarView = element.inheritedData('ons-tabbar');
-          if (!tabbarView) {
-            throw new Error('This ons-tab element is must be child of ons-tabbar element.');
-          }
-
-          element.addClass(tabbarView._scope.modifierTemplater('tab-bar--*__item'));
-          element.addClass(tabbarView._scope.modifierTemplater('tab-bar__item--*'));
-
-          transclude(scope.$parent, function(cloned) {
-            var wrapper = angular.element(element[0].querySelector('.tab-bar-inner'));
-
-            if (attrs.icon || attrs.label || !cloned[0]) {
-              var innerElement = angular.element('<div>' + defaultInnerTemplate + '</div>').children();
-              wrapper.append(innerElement);
-              $compile(innerElement)(scope);
-            } else {
-              wrapper.append(cloned);
-            }
-          });
-
-          var radioButton = element[0].querySelector('input');
-
-          scope.tabbarModifierTemplater = tabbarView._scope.modifierTemplater;
-          scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-          scope.tabbarId = tabbarView._tabbarId;
-          scope.tabIcon = scope.icon;
-
-          tabbarView.addTabItem(scope);
-
-          // Make this tab active.
-          scope.setActive = function() {
-            element.addClass('active');
-            radioButton.checked = true;
-
-            if (scope.activeIcon) {
-              scope.tabIcon = scope.activeIcon;
-            }
-
-            angular.element(element[0].querySelectorAll('[ons-tab-inactive]')).css('display', 'none');
-            angular.element(element[0].querySelectorAll('[ons-tab-active]')).css('display', 'inherit');
-          };
-
-          // Make this tab inactive.
-          scope.setInactive = function() {
-            element.removeClass('active');
-            radioButton.checked = false;
-            scope.tabIcon = scope.icon;
-
-            angular.element(element[0].querySelectorAll('[ons-tab-inactive]')).css('display', 'inherit');
-            angular.element(element[0].querySelectorAll('[ons-tab-active]')).css('display', 'none');
-          };
-
-          scope.isPersistent = function() {
-            return typeof scope.persistent != 'undefined';
-          };
-
-          /**
-           * @return {Boolean}
-           */
-          scope.isActive = function() {
-            return element.hasClass('active');
-          };
-
-          scope.tryToChange = function() {
-            tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
-          };
-
-          if (scope.active) {
-            tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
-          }
-
-          $onsen.fireComponentEvent(element[0], 'init');
-        };
+      link: function(scope, element, attrs) {
+        CustomElements.upgrade(element[0]);
+        $onsen.fireComponentEvent(element[0], 'init');
       }
     };
   }

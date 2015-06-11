@@ -25,6 +25,12 @@ limitations under the License.
       while (this.firstChild) {
         this.removeChild(this.firstChild);
       }
+
+      var event = new CustomEvent('_templateloaded', {bubbles: true, cancelable: true});
+      event.template = this.template;
+      event.templateId = this.getAttribute('id');
+
+      this.dispatchEvent(event);
     }
   }
 

@@ -158,6 +158,8 @@
       scope: true,
 
       link: function(scope, element, attrs) {
+        CustomElements.upgrade(element[0]);
+
         if (attrs.ngController) {
           throw new Error('This element can\'t accept ng-controller directive.');
         }

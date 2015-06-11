@@ -84,7 +84,7 @@ limitations under the License.
       }
     }
 
-    atachedCallback() {
+    attachedCallback() {
       setImmediate(this._ensureNodePosition.bind(this));
       this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
     }
@@ -128,7 +128,7 @@ limitations under the License.
 
       var callback = options.callback || function() {};
 
-      this._doorLock.waitUnlock(function() {
+      this._doorLock.waitUnlock(() => {
         var unlock = this._doorLock.lock(),
           animator = this._animatorFactory.newAnimator(options);
 
@@ -137,7 +137,7 @@ limitations under the License.
           unlock();
           callback();
         });
-      }.bind(this));
+      });
     }
 
     /**
@@ -169,16 +169,16 @@ limitations under the License.
 
       var callback = options.callback || function() {};
 
-      this._doorLock.waitUnlock(function() {
+      this._doorLock.waitUnlock(() => {
         var unlock = this._doorLock.lock(),
           animator = this._animatorFactory.newAnimator(options);
 
-        animator.hide(this, function() {
+        animator.hide(this, () => {
           this.style.display = 'none';
           unlock();
           callback();
-        }.bind(this));
-      }.bind(this));
+        });
+      });
     }
 
     attributeChangedCallback(name, last, current) {
@@ -200,7 +200,7 @@ limitations under the License.
    */
   ModalElement.registerAnimator = function(name, Animator) {
     if (!(Animator.prototype instanceof ModalAnimator)) {
-      throw new Error('"Animator" param must inherit DialogAnimator');
+      throw new Error('"Animator" param must inherit ModalAnimator');
     }
     ModalElement._animatorDict[name] = Animator;
   };

@@ -125,31 +125,35 @@
       transclude: false,
       scope: false,
 
-      link: {
-        pre: function(scope, element, attrs) {
-          var page = new PageView(scope, element, attrs);
+      compile: function(element, attrs) {
+        CustomElements.upgrade(element[0]);
+        return {
+          pre: function(scope, element, attrs) {
+            CustomElements.upgrade(element[0]);
+            var page = new PageView(scope, element, attrs);
 
-          $onsen.declareVarAttribute(attrs, page);
-          element.data('ons-page', page);
-          $onsen.addModifierMethodsForCustomElements(page, element);
+            $onsen.declareVarAttribute(attrs, page);
+            element.data('ons-page', page);
+            $onsen.addModifierMethodsForCustomElements(page, element);
 
-          $onsen.cleaner.onDestroy(scope, function() {
-            page._events = undefined;
-            $onsen.removeModifierMethods(page);
-            element.data('ons-page', undefined);
+            $onsen.cleaner.onDestroy(scope, function() {
+              page._events = undefined;
+              $onsen.removeModifierMethods(page);
+              element.data('ons-page', undefined);
 
-            $onsen.clearComponent({
-              element: element,
-              scope: scope,
-              attrs: attrs
+              $onsen.clearComponent({
+                element: element,
+                scope: scope,
+                attrs: attrs
+              });
+              scope = element = attrs = null;
             });
-            scope = element = attrs = null;
-          });
-        },
+          },
 
-        post: function postLink(scope, element, attrs) {
-          firePageInitEvent(element[0]);
-        }
+          post: function postLink(scope, element, attrs) {
+            firePageInitEvent(element[0]);
+          }
+        };
       }
     };
   });

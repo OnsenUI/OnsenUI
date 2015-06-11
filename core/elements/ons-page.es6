@@ -149,10 +149,10 @@ limitations under the License.
       var content = document.createElement('div');
       content.classList.add('page__content');
 
+      var html = this.innerHTML;
+      content.innerHTML = html;
       while (this.childNodes[0]) {
-        var node = this.childNodes[0];
-        this.removeChild(node);
-        content.appendChild(node);
+        this.removeChild(this.childNodes[0]);
       }
 
       if (this.hasAttribute('style')) {
@@ -160,8 +160,11 @@ limitations under the License.
         this.removeAttribute('style', null);
       }
 
-      this.insertBefore(background, null);
-      this.insertBefore(content, null);
+      var fragment = document.createDocumentFragment();
+      fragment.appendChild(background);
+      fragment.appendChild(content);
+
+      this.appendChild(fragment);
     }
 
     _registerExtraElement(element) {

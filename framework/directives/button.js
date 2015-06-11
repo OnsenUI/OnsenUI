@@ -82,6 +82,7 @@
     return {
       restrict: 'E',
       link: function(scope, element, attrs) {
+        CustomElements.upgrade(element[0]);
         var button = GenericView.register(scope, element, attrs, {
           viewKey: 'ons-button'
         });

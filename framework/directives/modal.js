@@ -133,6 +133,7 @@
 
       link: {
         pre: function(scope, element, attrs) {
+          CustomElements.upgrade(element[0]);
           var modal = new ModalView(scope, element, attrs);
           $onsen.addModifierMethodsForCustomElements(modal, element);
 
