@@ -19,7 +19,7 @@ limitations under the License.
   'use strict';
 
   var NavigatorTransitionAnimator = ons._internal.NavigatorTransitionAnimator;
-
+  var util = ons._util;
 
   /**
    * Slide animator for navigator transition.
@@ -48,12 +48,12 @@ limitations under the License.
      * @param {Function} callback
      */
     push(enterPage, leavePage, callback) {
-      var mask = this.backgroundMask.remove();
-      leavePage.element[0].parentNode.insertBefore(mask[0], leavePage.element[0].nextSibling);
+      util.removeElement(this.backgroundMask);
+      leavePage.element.parentNode.insertBefore(this.backgroundMask, leavePage.element.nextSibling);
 
       animit.runAll(
 
-        animit(mask[0])
+        animit(this.backgroundMask)
           .queue({
             opacity: 0,
             transform: 'translate3d(0, 0, 0)'
@@ -71,7 +71,7 @@ limitations under the License.
             done();
           }),
 
-        animit(enterPage.element[0])
+        animit(enterPage.element)
           .queue({
             css: {
               transform: 'translate3D(100%, 0, 0)',
@@ -88,7 +88,7 @@ limitations under the License.
           })
           .resetStyle(),
 
-        animit(leavePage.element[0])
+        animit(leavePage.element)
           .queue({
             css: {
               transform: 'translate3D(0, 0, 0)'
@@ -118,12 +118,12 @@ limitations under the License.
      * @param {Function} done
      */
     pop(enterPage, leavePage, done) {
-      var mask = this.backgroundMask.remove();
-      enterPage.element[0].parentNode.insertBefore(mask[0], enterPage.element[0].nextSibling);
+      util.removeElement(this.backgroundMask);
+      enterPage.element.parentNode.insertBefore(this.backgroundMask, enterPage.element.nextSibling);
 
       animit.runAll(
 
-        animit(mask[0])
+        animit(this.backgroundMask)
           .queue({
             opacity: this.blackMaskOpacity,
             transform: 'translate3d(0, 0, 0)'
@@ -141,7 +141,7 @@ limitations under the License.
             done();
           }),
 
-        animit(enterPage.element[0])
+        animit(enterPage.element)
           .queue({
             css: {
               transform: 'translate3D(-45%, 0px, 0px)',
@@ -160,7 +160,7 @@ limitations under the License.
           })
           .resetStyle(),
 
-        animit(leavePage.element[0])
+        animit(leavePage.element)
           .queue({
             css: {
               transform: 'translate3D(0px, 0px, 0px)'

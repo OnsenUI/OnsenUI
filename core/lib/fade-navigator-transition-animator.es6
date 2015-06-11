@@ -19,6 +19,7 @@ limitations under the License.
   'use strict';
 
   var NavigatorTransitionAnimator = ons._internal.NavigatorTransitionAnimator;
+  var util = ons._util;
 
   /**
    * Fade-in screen transition.
@@ -45,7 +46,7 @@ limitations under the License.
 
       animit.runAll(
 
-        animit([enterPage.element[0]._getContentElement(), enterPage.element[0]._getBackgroundElement()])
+        animit([enterPage.element._getContentElement(), enterPage.element._getBackgroundElement()])
           .queue({
             css: {
               transform: 'translate3D(0, 0, 0)',
@@ -68,7 +69,7 @@ limitations under the License.
             done();
           }),
 
-        animit(enterPage.element[0]._getToolbarElement())
+        animit(enterPage.element._getToolbarElement())
           .queue({
             css: {
               transform: 'translate3D(0, 0, 0)',
@@ -98,7 +99,7 @@ limitations under the License.
     pop(enterPage, leavePage, callback) {
       animit.runAll(
 
-        animit([leavePage.element[0]._getContentElement(), leavePage.element[0]._getBackgroundElement()])
+        animit([leavePage.element._getContentElement(), leavePage.element._getBackgroundElement()])
           .queue({
             css: {
               transform: 'translate3D(0, 0, 0)',
@@ -120,7 +121,7 @@ limitations under the License.
             done();
           }),
 
-        animit(leavePage.element[0]._getToolbarElement())
+        animit(leavePage.element._getToolbarElement())
           .queue({
             css: {
               transform: 'translate3D(0, 0, 0)',

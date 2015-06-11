@@ -77,83 +77,31 @@ limitations under the License.
 
         this._isPopping = this._isPushing = false;
 
-        this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this._element[0], this._onDeviceBackButton.bind(this));
         this._scope.$on('$destroy', this._destroy.bind(this));
-
-        this._animationChooser = new AnimationChooser({
-          animators: NavigatorView._transitionAnimatorDict,
-          baseClass: NavigatorTransitionAnimator,
-          baseClassName: 'NavigatorTransitionAnimator',
-          defaultAnimation: attrs.animation,
-          defaultAnimationOptions: $parse(attrs.animationOptions)()
-        });
       },
 
       _destroy: function() {
         this.emit('destroy');
-
-        this.pages.forEach(function(page) {
-          page.destroy();
-        });
-
-        this._deviceBackButtonHandler.destroy();
-        this._deviceBackButtonHandler = null;
-
         this._element = this._scope = this._attrs = null;
       },
 
-      _onDeviceBackButton: function(event) {
-        if (this.pages.length > 1) {
-          this._scope.$evalAsync(this.popPage.bind(this));
-        } else {
-          event.callParentHandler();
+      /* TODO
+      var safeApply = function(scope) {
+        var phase = scope.$root.$$phase;
+        if (phase !== '$apply' && phase !== '$digest') {
+          scope.$apply();
         }
-      },
+      };
 
-      /**
-       * @param element jqLite Object
-       * @return jqLite Object
-       */
-      _normalizePageElement: function(element) {
-        for (var i = 0; i < element.length; i++) {
-          if (element[i].nodeType === 1) {
-            return angular.element(element[i]);
-          }
+      var link = $compile(pageElement);
+      return {
+        element: pageElement,
+        link: function() {
+          //link(pageScope);
+          //safeApply(pageScope);
         }
-
-        throw new Error('invalid state');
-      },
-
-      _createPageElementAndLinkFunction : function(templateHTML, pageScope, done) {
-        var div = document.createElement('div');
-        div.innerHTML = templateHTML.trim();
-        var pageElement = angular.element(div);
-
-        var hasPage = div.childElementCount === 1 &&
-          div.childNodes[0].nodeName.toLowerCase() === 'ons-page';
-        if (hasPage) {
-          pageElement = angular.element(div.childNodes[0]);
-        } else {
-          throw new Error('You must supply an "ons-page" element to "ons-navigator".');
-        }
-
-        var safeApply = function(scope) {
-          var phase = scope.$root.$$phase;
-          if (phase !== '$apply' && phase !== '$digest') {
-            scope.$apply();
-          }
-        };
-
-        var link = $compile(pageElement);
-
-        return {
-          element: pageElement,
-          link: function() {
-            link(pageScope);
-            safeApply(pageScope);
-          }
-        };
-      },
+      };
+      */
 
       /**
        * Insert page object that has the specified pageUrl into the page stack and
@@ -192,7 +140,7 @@ limitations under the License.
             var element = object.element;
             var link = object.link;
 
-            element = this._normalizePageElement(element);
+            element = element;
 
             var pageObject = this._createPageObject(page, element, pageScope, options);
 
@@ -237,141 +185,15 @@ limitations under the License.
        * @param {Boolean} [options.cancelIfRunning]
        */
       pushPage: function(page, options) {
-        if (this._profiling) {
-          console.time('pushPage');
-        }
-
-        options = options || {};
-
-        if (options.cancelIfRunning && this._isPushing) {
-          return;
-        }
-
-        if (options && typeof options != 'object') {
-          throw new Error('options must be an object. You supplied ' + options);
-        }
-
-        if (this._emitPrePushEvent()) {
-          return;
-        }
-
-        this._doorLock.waitUnlock(function() {
-          this._pushPage(page, options);
-        }.bind(this));
-      },
-
-      _pushPage: function(page, options) {
-        var unlock = this._doorLock.lock();
-        var done = function() {
-          unlock();
-          if (this._profiling) {
-            console.timeEnd('pushPage');
-          }
-        };
-
-        $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
-          var pageScope = this._createPageScope();
-          var object = this._createPageElementAndLinkFunction(templateHTML, pageScope);
-
-          setImmediate(function() {
-            this._pushPageDOM(page, object.element, object.link, pageScope, options, done);
-            object = null;
-          }.bind(this));
-        }.bind(this), function() {
-          done();
-          throw new Error('Page is not found: ' + page);
-        }.bind(this));
+        return this._element[0].pushPage(page, options);
       },
 
       getDeviceBackButtonHandler: function() {
-        return this._deviceBackButtonHandler;
+        return this._element[0].getDeviceBackButtonHandler;
       },
 
       _createPageScope: function() {
          return this._scope.$new();
-      },
-
-      /**
-       * @param {String} page
-       * @param {jqLite} element
-       * @param {Object} pageScope
-       * @param {Object} options
-       */
-      _createPageObject: function(page, element, pageScope, options) {
-        options.animator = this._animationChooser.newAnimator(options);
-
-        return new NavigatorPageObject({
-          page: page,
-          element: element,
-          pageScope: pageScope,
-          options: options,
-          navigator: this
-        });
-      },
-
-      /**
-       * @param {String} page Page name.
-       * @param {Object} element
-       * @param {Function} link
-       * @param {Object} pageScope
-       * @param {Object} options
-       * @param {Function} [unlock]
-       */
-      _pushPageDOM: function(page, element, link, pageScope, options, unlock) {
-        if (this._profiling) {
-          console.time('pushPageDOM');
-        }
-
-        unlock = unlock || function() {};
-        options = options || {};
-        element = this._normalizePageElement(element);
-
-        var pageObject = this._createPageObject(page, element, pageScope, options);
-
-        var event = {
-          enterPage: pageObject,
-          leavePage: this.pages[this.pages.length - 1],
-          navigator: this
-        };
-
-        this.pages.push(pageObject);
-
-        var done = function() {
-          if (this.pages[this.pages.length - 2]) {
-            this.pages[this.pages.length - 2].element.css('display', 'none');
-          }
-
-          if (this._profiling) {
-            console.timeEnd('pushPageDOM');
-          }
-
-          this._isPushing = false;
-          unlock();
-
-          this.emit('postpush', event);
-
-          if (typeof options.onTransitionEnd === 'function') {
-            options.onTransitionEnd();
-          }
-          element = null;
-        }.bind(this);
-
-        this._isPushing = true;
-
-        if (this.pages.length > 1) {
-          var leavePage = this.pages.slice(-2)[0];
-          var enterPage = this.pages.slice(-1)[0];
-
-          this._element.append(element);
-          link();
-          options.animator.push(enterPage, leavePage, done);
-          element = null;
-        } else {
-          this._element.append(element);
-          link();
-          done();
-          element = null;
-        }
       },
 
       /**
@@ -396,6 +218,7 @@ limitations under the License.
        * @return {Boolean} Whether if event is canceled.
        */
       _emitPrePopEvent: function() {
+        // TODO
         var isCanceled = false;
         var prePopEvent = {
           navigator: this,
@@ -421,95 +244,6 @@ limitations under the License.
        * @param {Boolean} [options.cancelIfRunning]
        */
       popPage: function(options) {
-        options = options || {};
-
-        if (options.cancelIfRunning && this._isPopping) {
-          return;
-        }
-
-        this._doorLock.waitUnlock(function() {
-          if (this.pages.length <= 1) {
-            throw new Error('NavigatorView\'s page stack is empty.');
-          }
-
-          if (this._emitPrePopEvent()) {
-            return;
-          }
-
-          var unlock = this._doorLock.lock();
-
-          if (options.refresh) {
-            var index = this.pages.length - 2;
-
-            if (!this.pages[index].page) {
-              throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
-            }
-
-            $onsen.getPageHTMLAsync(this.pages[index].page).then(function(templateHTML) {
-              var pageScope = this._createPageScope();
-              var object = this._createPageElementAndLinkFunction(templateHTML, pageScope);
-              var element = object.element;
-              var link = object.link;
-
-              element = this._normalizePageElement(element);
-
-              var pageObject = this._createPageObject(this.pages[index].page, element, pageScope, options);
-
-              this._element[0].insertBefore(element[0], this.pages[index] ? this.pages[index].element[0] : null);
-              this.pages.splice(index, 0, pageObject);
-              link();
-
-              this.pages[index + 1].destroy();
-
-              this._popPage(options, unlock);
-
-            }.bind(this), function() {
-              unlock();
-              throw new Error('Page is not found');
-            });
-
-          } else {
-
-            this._popPage(options, unlock);
-
-          }
-
-        }.bind(this));
-      },
-
-      _popPage: function(options, unlock) {
-        var leavePage = this.pages.pop();
-
-        if (this.pages[this.pages.length - 1]) {
-          this.pages[this.pages.length - 1].element.css('display', 'block');
-        }
-
-        var enterPage = this.pages[this.pages.length -1];
-
-        var event = {
-          leavePage: leavePage,
-          enterPage: this.pages[this.pages.length - 1],
-          navigator: this
-        };
-
-        var callback = function() {
-          leavePage.destroy();
-
-          this._isPopping = false;
-          unlock();
-          this.emit('postpop', event);
-
-          event.leavePage = null;
-
-          if (typeof options.onTransitionEnd === 'function') {
-            options.onTransitionEnd();
-          }
-        }.bind(this);
-
-        this._isPopping = true;
-
-        var animator = this._animationChooser.newAnimator(options, leavePage.options.animator);
-        animator.pop(enterPage, leavePage, callback);
       },
 
       /**
@@ -519,18 +253,7 @@ limitations under the License.
        * @param {Object} [options]
        */
       replacePage: function(page, options) {
-        options = options || {};
-
-        var onTransitionEnd = options.onTransitionEnd || function() {};
-
-        options.onTransitionEnd = function() {
-          if (this.pages.length > 1) {
-            this.pages[this.pages.length - 2].destroy();
-          }
-          onTransitionEnd();
-        }.bind(this);
-
-        this.pushPage(page, options);
+        return this._element[0].replacePage(page, options);
       },
 
       /**
@@ -542,23 +265,7 @@ limitations under the License.
        * @param {Object} [options]
        */
       resetToPage: function(page, options) {
-        options = options || {};
-
-        if (!options.animator && !options.animation) {
-          options.animation = 'none';
-        }
-
-        var onTransitionEnd = options.onTransitionEnd || function() {};
-        var self = this;
-
-        options.onTransitionEnd = function() {
-          while (self.pages.length > 1) {
-            self.pages.shift().destroy();
-          }
-          onTransitionEnd();
-        };
-
-        this.pushPage(page, options);
+        return this._element[0].resetToPage(page, options);
       },
 
       /**
@@ -570,6 +277,7 @@ limitations under the License.
        * @return {Object}
        */
       getCurrentPage: function() {
+        // TODO
         return this.pages[this.pages.length - 1];
       },
 
@@ -579,6 +287,7 @@ limitations under the License.
        * @return {Array}
        */
       getPages: function() {
+        // TODO
         return this.pages;
       },
 
@@ -586,31 +295,9 @@ limitations under the License.
        * @return {Boolean}
        */
       canPopPage: function() {
-        return this.pages.length > 1;
+        return this._element[0].canPopPage();
       }
     });
-
-    // Preset transition animators.
-    NavigatorView._transitionAnimatorDict = {
-      'default': $onsen.isAndroid() ? SimpleSlideTransitionAnimator : IOSSlideTransitionAnimator,
-      'slide': $onsen.isAndroid() ? SimpleSlideTransitionAnimator : IOSSlideTransitionAnimator,
-      'simpleslide': SimpleSlideTransitionAnimator,
-      'lift': LiftTransitionAnimator,
-      'fade': FadeTransitionAnimator,
-      'none': NullTransitionAnimator
-    };
-
-    /**
-     * @param {String} name
-     * @param {Function} Animator
-     */
-    NavigatorView.registerAnimator = function(name, Animator) {
-      if (!(Animator.prototype instanceof NavigatorTransitionAnimator)) {
-        throw new Error('"Animator" param must inherit NavigatorTransitionAnimator');
-      }
-
-      this._transitionAnimatorDict[name] = Animator;
-    };
 
     MicroEvent.mixin(NavigatorView);
 

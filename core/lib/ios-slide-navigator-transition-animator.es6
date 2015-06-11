@@ -42,7 +42,7 @@ limitations under the License.
     }
 
     _decompose(page) {
-      var toolbar = page.element[0]._getToolbarElement();
+      var toolbar = page.element._getToolbarElement();
       CustomElements.upgrade(toolbar);
       var left = toolbar._getToolbarLeftItemsElement();
       var right = toolbar._getToolbarRightItemsElement();
@@ -52,7 +52,10 @@ limitations under the License.
 
         for (var i = 0; i < elements.length; i++) {
           if (elements[i].nodeName.toLowerCase() === 'ons-back-button') {
-            result.push(elements[i].querySelector('.ons-back-button__icon'));
+            let iconElement = elements[i].querySelector('.ons-back-button__icon');
+            if (iconElement) {
+              result.push(iconElement);
+            }
           } else {
             result.push(elements[i]);
           }
@@ -73,20 +76,20 @@ limitations under the License.
       return {
         pageLabels: pageLabels,
         other: other,
-        content: page.element[0]._getContentElement(),
-        background: page.element[0]._getBackgroundElement(),
+        content: page.element._getContentElement(),
+        background: page.element._getBackgroundElement(),
         toolbar: toolbar,
-        bottomToolbar: page.element[0]._getBottomToolbarElement()
+        bottomToolbar: page.element._getBottomToolbarElement()
       };
     }
 
     _shouldAnimateToolbar(enterPage, leavePage) {
       var bothPageHasToolbar =
-        enterPage.element[0]._canAnimateToolbar() && leavePage.element[0]._canAnimateToolbar();
+        enterPage.element._canAnimateToolbar() && leavePage.element._canAnimateToolbar();
 
       var noAndroidLikeToolbar =
-        !angular.element(enterPage.element[0]._getToolbarElement()).hasClass('navigation-bar--android') &&
-        !angular.element(leavePage.element[0]._getToolbarElement()).hasClass('navigation-bar--android');
+        !angular.element(enterPage.element._getToolbarElement()).hasClass('navigation-bar--android') &&
+        !angular.element(leavePage.element._getToolbarElement()).hasClass('navigation-bar--android');
 
       return bothPageHasToolbar && noAndroidLikeToolbar;
     }
@@ -98,13 +101,13 @@ limitations under the License.
      */
     push(enterPage, leavePage, callback) {
       util.removeElement(this.backgroundMask);
-      leavePage.element[0].parentNode.insertBefore(this.backgroundMask, leavePage.element[0].nextSibling);
+      leavePage.element.parentNode.insertBefore(this.backgroundMask, leavePage.element.nextSibling);
 
       var enterPageDecomposition = this._decompose(enterPage);
       var leavePageDecomposition = this._decompose(leavePage);
 
       var delta = (() => {
-        var rect = leavePage.element[0].getBoundingClientRect();
+        var rect = leavePage.element.getBoundingClientRect();
         return Math.round(((rect.right - rect.left) / 2) * 0.6);
       })();
 
@@ -129,8 +132,8 @@ limitations under the License.
       var shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
 
       if (shouldAnimateToolbar) {
-        enterPage.element.css({zIndex: 'auto'});
-        leavePage.element.css({zIndex: 'auto'});
+        enterPage.element.style.zIndex = 'auto';
+        leavePage.element.style.zIndex = 'auto';
 
         animit.runAll(
 
@@ -219,8 +222,8 @@ limitations under the License.
             })
             .resetStyle()
             .queue(function(done) {
-              enterPage.element.css({zIndex: ''});
-              leavePage.element.css({zIndex: ''});
+              enterPage.element.style.zIndex = '';
+              leavePage.element.style.zIndex = '';
               callback();
               done();
             }),
@@ -261,14 +264,14 @@ limitations under the License.
 
       } else {
 
-        enterPage.element.css({zIndex: 'auto'});
-        leavePage.element.css({zIndex: 'auto'});
+        enterPage.element.style.zIndex = 'auto';
+        leavePage.element.style.zIndex = 'auto';
 
         animit.runAll(
 
           maskClear,
 
-          animit(enterPage.element[0])
+          animit(enterPage.element)
             .queue({
               css: {
                 transform: 'translate3D(100%, 0px, 0px)',
@@ -285,7 +288,7 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(leavePage.element[0])
+          animit(leavePage.element)
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)'
@@ -317,13 +320,13 @@ limitations under the License.
      */
     pop(enterPage, leavePage, done) {
       util.removeElement(this.backgroundMask);
-      enterPage.element[0].parentNode.insertBefore(this.backgroundMask, enterPage.element[0].nextSibling);
+      enterPage.element.parentNode.insertBefore(this.backgroundMask, enterPage.element.nextSibling);
 
       var enterPageDecomposition = this._decompose(enterPage);
       var leavePageDecomposition = this._decompose(leavePage);
 
       var delta = (function() {
-        var rect = leavePage.element[0].getBoundingClientRect();
+        var rect = leavePage.element.getBoundingClientRect();
         return Math.round(((rect.right - rect.left) / 2) * 0.6);
       })();
 
@@ -349,8 +352,8 @@ limitations under the License.
 
       if (shouldAnimateToolbar) {
 
-        enterPage.element.css({zIndex: 'auto'});
-        leavePage.element.css({zIndex: 'auto'});
+        enterPage.element.style.zIndex = '';
+        leavePage.element.style.zIndex = '';
 
         animit.runAll(
 
@@ -443,8 +446,8 @@ limitations under the License.
             })
             .wait(0)
             .queue(function(finish) {
-              enterPage.element.css({zIndex: ''});
-              leavePage.element.css({zIndex: ''});
+              enterPage.element.style.zIndex = '';
+              leavePage.element.style.zIndex = '';
               done();
               finish();
             }),
@@ -501,7 +504,7 @@ limitations under the License.
 
           maskClear,
 
-          animit(enterPage.element[0])
+          animit(enterPage.element)
             .queue({
               css: {
                 transform: 'translate3D(-25%, 0px, 0px)',
@@ -520,7 +523,7 @@ limitations under the License.
             })
             .resetStyle(),
 
-          animit(leavePage.element[0])
+          animit(leavePage.element)
             .queue({
               css: {
                 transform: 'translate3D(0px, 0px, 0px)'

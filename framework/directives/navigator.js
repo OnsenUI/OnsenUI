@@ -403,30 +403,25 @@
       scope: true,
 
       compile: function(element) {
-
-        var html = $onsen.normalizePageHTML(element.html());
-        element.contents().remove();
+        CustomElements.upgrade(element[0]);
 
         return {
           pre: function(scope, element, attrs, controller) {
+            CustomElements.upgrade(element[0]);
             var navigator = new NavigatorView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, navigator);
             $onsen.registerEventHandlers(navigator, 'prepush prepop postpush postpop destroy');
 
-            if (attrs.page) {
-              navigator.pushPage(attrs.page, {});
-            } else {
+            /* TODO
               var pageScope = navigator._createPageScope();
               var pageElement = angular.element(html);
               var linkScope = $compile(pageElement);
-              var link = function() {
-                linkScope(pageScope);
-              };
+              var link = function() { linkScope(pageScope); };
 
               navigator._pushPageDOM('', pageElement, link, pageScope, {});
-              pageElement = null;
             }
+            */
 
             element.data('ons-navigator', navigator);
 
