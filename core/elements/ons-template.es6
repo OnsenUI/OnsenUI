@@ -34,8 +34,8 @@ limitations under the License.
     }
   }
 
-  if (!window.OnsTemplate) {
-    window.OnsTemplate = document.registerElement('ons-template', {
+  if (!window.OnsTemplateElement) {
+    window.OnsTemplateElement = document.registerElement('ons-template', {
       prototype: TemplateElement.prototype
     });
   }

@@ -106,6 +106,16 @@ limitations under the License.
       result.push(arrayLike[i]);
     }
     return result;
+  }
+
+  /*
+   * @param {HTMLElement} element.
+   * @param {String} event name.
+   */
+  util.fireEvent = (element, eventName) => {
+    var event = document.createEvent('Event');
+    event.initEvent(eventName, true, true);
+    element.dispatchEvent(event);
   };
 
 })(window.ons = window.ons || {});

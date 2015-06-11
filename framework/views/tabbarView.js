@@ -82,6 +82,102 @@ limitations under the License.
         return this._element[0]._loadPage(page, options);
       },
 
+      /**
+       * @param {String} page
+       * @param {Object} [options]
+       * @param {Object} [options.animation]
+       */
+      _loadPage: function(page, options) {
+
+        $onsen.getPageHTMLAsync(page).then(function(html) {
+          var pageElement = angular.element(html.trim());
+
+          this._loadPageDOM(pageElement, options);
+
+        }.bind(this), function() {
+          throw new Error('Page is not found: ' + page);
+        });
+      },
+
+      /**
+       * @param {jqLite} element
+       * @param {Object} scope
+       * @param {Object} options
+       * @param {String} [options.animation]
+       * @param {Object} [options.animationOptions]
+       */
+      _switchPage: function(element, scope, options) {
+        if (this._currentPageElement) {
+          var oldPageElement = this._currentPageElement;
+          var oldPageScope = this._currentPageScope;
+
+          this._currentPageElement = element;
+          this._currentPageScope = scope;
+
+          this._animationChooser.newAnimator(options).apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
+            if (options._removeElement) {
+              oldPageScope.$destroy();
+            }
+            else {
+              oldPageElement[0]._hide();
+            }
+
+            if (options.callback instanceof Function) {
+              options.callback();
+            }
+          });
+
+        } else {
+          this._currentPageElement = element;
+          this._currentPageScope = scope;
+
+          if (options.callback instanceof Function) {
+            options.callback();
+          }
+        }
+      },
+
+      /**
+       * @param {jqLite} element
+       * @param {Object} options
+       * @param {Object} options.animation
+       */
+      _loadPageDOM: function(element, options) {
+        options = options || {};
+        var pageScope = this._scope.$new();
+        var link = $compile(element);
+
+        this._contentElement.append(element);
+        var pageContent = link(pageScope);
+
+        pageScope.$evalAsync();
+
+        this._switchPage(pageContent, pageScope, options);
+      },
+
+      /**
+       * @param {jqLite} element
+       * @param {Object} options
+       * @param {Object} options.animation
+       */
+      _loadPersistentPageDOM: function(element, options) {
+        options = options || {};
+
+        element[0]._show();
+        this._switchPage(element, element.scope(), options);
+      },
+
+      /**
+       * @param {Object} options
+       * @param {String} [options.animation]
+       * @return {TabbarAnimator}
+       */
+      _getAnimatorOption: function(options) {
+        var animationAttr = this._element.attr('animation') || 'default';
+
+        return TabbarView._animatorDict[options.animation || animationAttr] || TabbarView._animatorDict['default'];
+      },
+
       _destroy: function() {
         this.emit('destroy');
 
