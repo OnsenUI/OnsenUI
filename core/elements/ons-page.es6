@@ -193,11 +193,6 @@ limitations under the License.
       ons._util.fireEvent(this, 'show');
     }
 
-    _hide() {
-      this.style.display = 'none';
-      ons._util.fireEvent(this, 'hide');
-    }
-
     _destroy() {
       ons._util.fireEvent(this, 'destroy');
 
