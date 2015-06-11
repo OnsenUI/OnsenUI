@@ -103,7 +103,7 @@ limitations under the License.
       var enterPageDecomposition = this._decompose(enterPage);
       var leavePageDecomposition = this._decompose(leavePage);
 
-      var delta = (function() {
+      var delta = (() => {
         var rect = leavePage.element[0].getBoundingClientRect();
         return Math.round(((rect.right - rect.left) / 2) * 0.6);
       })();
@@ -260,6 +260,9 @@ limitations under the License.
         );
 
       } else {
+
+        enterPage.element.css({zIndex: 'auto'});
+        leavePage.element.css({zIndex: 'auto'});
 
         animit.runAll(
 
