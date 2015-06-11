@@ -149,10 +149,8 @@ limitations under the License.
       var content = document.createElement('div');
       content.classList.add('page__content');
 
-      var html = this.innerHTML;
-      content.innerHTML = html;
-      while (this.childNodes[0]) {
-        this.removeChild(this.childNodes[0]);
+      for (let child of ons._util.arrayFrom(this.childNodes)) {
+        content.appendChild(child);
       }
 
       if (this.hasAttribute('style')) {
