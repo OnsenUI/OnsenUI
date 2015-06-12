@@ -42,6 +42,7 @@ limitations under the License.
     }
 
     _decompose(page) {
+      CustomElements.upgrade(page.element);
       var toolbar = page.element._getToolbarElement();
       CustomElements.upgrade(toolbar);
       var left = toolbar._getToolbarLeftItemsElement();
@@ -305,6 +306,8 @@ limitations under the License.
             })
             .resetStyle()
             .queue(function(done) {
+              enterPage.element.style.zIndex = '';
+              leavePage.element.style.zIndex = '';
               callback();
               done();
             })
@@ -352,8 +355,8 @@ limitations under the License.
 
       if (shouldAnimateToolbar) {
 
-        enterPage.element.style.zIndex = '';
-        leavePage.element.style.zIndex = '';
+        enterPage.element.style.zIndex = 'auto';
+        leavePage.element.style.zIndex = 'auto';
 
         animit.runAll(
 
