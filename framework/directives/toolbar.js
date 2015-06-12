@@ -84,10 +84,11 @@
       scope: false,
       transclude: false,
 
-      compile: function(element, attrs) {
-
+      compile: function(element) {
+        CustomElements.upgrade(element[0]);
         return {
           pre: function(scope, element, attrs) {
+            CustomElements.upgrade(element[0]);
             GenericView.register(scope, element, attrs, {viewKey: 'ons-toolbar'});
             element[0]._ensureNodePosition();
           },

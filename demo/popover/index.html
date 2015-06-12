@@ -12,7 +12,7 @@
     <script src="../app.js"></script>  
 
     <script>
-      app.controller('MyController', function($scope) {
+      angular.module('myApp').controller('MyController', function($scope) {
         ons.ready(function() {
           ons.createPopover('popover.html').then(function(popover) {
             $scope.popover = popover;

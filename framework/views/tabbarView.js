@@ -20,360 +20,66 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('TabbarAnimator', function() {
+  module.value('TabbarNoneAnimator', ons._internal.TabbarNoneAnimator);
+  module.value('TabbarFadeAnimator', ons._internal.TabbarFadeAnimator);
+  module.value('TabbarSlideAnimator', ons._internal.TabbarSlideAnimator);
 
-    var TabbarAnimator = Class.extend({
-
-      /**
-       * @param {Object} options
-       * @param {String} options.timing
-       * @param {Number} options.duration
-       * @param {Number} options.delay
-       */
-      init: function(options) {
-        options = options || {};
-
-        this.timing = options.timing || this.timing;
-        this.duration = options.duration !== undefined ? options.duration : this.duration;
-        this.delay = options.delay !== undefined ? options.delay : this.delay;
-      },
-
-      /**
-       * @param {jqLite} enterPage
-       * @param {jqLite} leavePage
-       * @param {Function} done
-       */
-      apply: function(enterPage, leavePage, enterIndex, leaveIndex, done) {
-        throw new Error('This method must be implemented.');
-      }
-    });
-
-    return TabbarAnimator;
-  });
-
-  module.factory('TabbarNoneAnimator', function(TabbarAnimator) {
-
-    var TabbarNoneAnimator = TabbarAnimator.extend({
-      /**
-       * @param {jqLite} enterPage
-       * @param {jqLite} leavePage
-       * @param {Function} done
-       */
-      apply: function(enterPage, leavePage, enterIndex, leaveIndex, done) {
-        done();
-      }
-    });
-
-    return TabbarNoneAnimator;
-  });
-
-  module.factory('TabbarFadeAnimator', function(TabbarAnimator) {
-
-    var TabbarFadeAnimator = TabbarAnimator.extend({
-
-      timing: 'linear',
-      duration: 0.4,
-      delay: 0,
-
-      /**
-       * @param {jqLite} enterPage
-       * @param {jqLite} leavePage
-       */
-      apply: function(enterPage, leavePage, enterIndex, leaveIndex, done) {
-        animit.runAll(
-          animit(enterPage[0])
-            .queue({
-              transform: 'translate3D(0, 0, 0)',
-              opacity: 0
-            })
-            .wait(this.delay)
-            .queue({
-              transform: 'translate3D(0, 0, 0)',
-              opacity: 1
-            }, {
-              duration: this.duration,
-              timing: this.timing
-            })
-            .resetStyle()
-            .queue(function(callback) {
-              done();
-              callback();
-            }),
-          animit(leavePage[0])
-            .queue({
-              transform: 'translate3D(0, 0, 0)',
-              opacity: 1
-            })
-            .wait(this.delay)
-            .queue({
-              transform: 'translate3D(0, 0, 0)',
-              opacity: 0
-            }, {
-              duration: this.duration,
-              timing: this.timing
-            })
-        );
-      }
-    });
-
-    return TabbarFadeAnimator;
-  });
-
-  module.factory('TabbarSlideAnimator', function(TabbarAnimator) {
-
-    var TabbarSlideAnimator = TabbarAnimator.extend({
-
-      timing: 'ease-in',
-      duration: 0.15,
-      delay: 0,
-
-      /**
-       * @param {jqLite} enterPage
-       * @param {jqLite} leavePage
-       */
-      apply: function(enterPage, leavePage, enterIndex, leaveIndex, done) {
-        var sgn = enterIndex > leaveIndex;
-
-        animit.runAll(
-          animit(enterPage[0])
-            .queue({
-              transform: 'translate3D(' + (sgn ? '' : '-') + '100%, 0, 0)',
-            })
-            .wait(this.delay)
-            .queue({
-              transform: 'translate3D(0, 0, 0)',
-            }, {
-              duration: this.duration,
-              timing: this.timing
-            })
-            .resetStyle()
-            .queue(function(callback) {
-              done();
-              callback();
-            }),
-          animit(leavePage[0])
-            .queue({
-              transform: 'translate3D(0, 0, 0)',
-            })
-            .wait(this.delay)
-            .queue({
-              transform: 'translate3D(' + (sgn ? '-' : '') + '100%, 0, 0)',
-            }, {
-              duration: this.duration,
-              timing: this.timing
-            })
-        );
-      }
-    });
-
-    return TabbarSlideAnimator;
-  });
-
-  module.factory('TabbarView', function($onsen, $compile, $parse, AnimationChooser, TabbarAnimator, TabbarNoneAnimator, TabbarFadeAnimator, TabbarSlideAnimator) {
+  module.factory('TabbarView', function($onsen, $compile, $parse) {
     var TabbarView = Class.extend({
-      _tabbarId: undefined,
-
-      _tabItems: undefined,
 
       init: function(scope, element, attrs) {
+        if (element[0].nodeName.toLowerCase() !== 'ons-tabbar') {
+          throw new Error('"element" parameter must be a "ons-tabbar" element.');
+        }
+
         this._scope = scope;
         this._element = element;
         this._attrs = attrs;
 
-        this._tabbarId = Date.now();
-        this._tabItems = [];
-
-        this._contentElement = angular.element(element[0].querySelector('.ons-tab-bar__content'));
-        this._tabbarElement = angular.element(element[0].querySelector('.ons-tab-bar__footer'));
-
         this._scope.$on('$destroy', this._destroy.bind(this));
 
-        if (this._hasTopTabbar()) {
-          this._prepareForTopTabbar();
-        }
-
-        this._animationChooser = new AnimationChooser({
-          animators: TabbarView._animatorDict,
-          baseClass: TabbarAnimator,
-          baseClassName: 'TabbarAnimator',
-          defaultAnimation: attrs.animation,
-          defaultAnimationOptions: $parse(attrs.animationOptions)()
-        });
-      },
-
-      _prepareForTopTabbar: function() {
-        this._contentElement.attr('no-status-bar-fill', '');
-
         setImmediate(function() {
-          this._contentElement.addClass('tab-bar--top__content');
-          this._tabbarElement.addClass('tab-bar--top');
+          this._bindedCompilePage = element[0]._compilePageHook.add(this._compilePage.bind(this));
+          this._bindedLinkPage = element[0]._linkPageHook.add(this._linkPage.bind(this));
         }.bind(this));
 
-        var page = ons.findParentComponentUntil('ons-page', this._element[0]);
-        if (page) {
-          this._element.css('top', window.getComputedStyle(page._element[0]._getContentElement(), null).getPropertyValue('padding-top'));
-        }
-
-        if ($onsen.shouldFillStatusBar(this._element[0])) {
-          // Adjustments for IOS7
-          var fill = angular.element(document.createElement('div'));
-          fill.addClass('tab-bar__status-bar-fill');
-          fill.css({width: '0px', height: '0px'});
-
-          this._element.prepend(fill);
-        }
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['reactive', 'postchange', 'prechange']);
       },
 
-      _hasTopTabbar: function() {
-        return this._attrs.position === 'top';
+      _compilePage: function(next, pageElement) {
+        this._linkPage.link = $compile(pageElement);
+
+        next(pageElement);
       },
 
-      /**
-       * @param {Number} index
-       * @param {Object} [options]
-       * @param {Boolean} [options.keepPage]
-       * @param {String} [options.animation]
-       * @param {Object} [options.animationOptions]
-       * @return {Boolean} success or not
-       */
-      setActiveTab: function(index, options) {
-        options = options || {};
-
-        var previousTabItem = this._tabItems[this.getActiveTabIndex()],
-          selectedTabItem = this._tabItems[index],
-          previousTabIndex = this.getActiveTabIndex(),
-          selectedTabIndex = index;
-
-        if((typeof selectedTabItem.noReload !== 'undefined' || selectedTabItem.isPersistent()) &&
-            index === this.getActiveTabIndex()) {
-          this.emit('reactive', {
-            index: index,
-            tabItem: selectedTabItem,
-          });
-          return false;
+      _linkPage: function(next, pageElement) {
+        if (!this._linkPage.link) {
+          throw new Error('Invalid state');
         }
 
-        var needLoad = selectedTabItem.page && !options.keepPage;
-
-        if (!selectedTabItem) {
-          return false;
-        }
-
-        var canceled = false;
-        this.emit('prechange', {
-          index: index,
-          tabItem: selectedTabItem,
-          cancel: function() {
-            canceled = true;
-          }
+        var pageScope = this._scope.$new();
+        this._linkPage.link(pageScope);
+        this._linkPage.link = null;
+        pageScope.$evalAsync(function() {
+          next(pageElement);
         });
 
-        if (canceled) {
-          selectedTabItem.setInactive();
-          if (previousTabItem) {
-            previousTabItem.setActive();
-          }
-          return false;
-        }
-
-        selectedTabItem.setActive();
-
-        if (needLoad) {
-          var removeElement = true;
-
-          if (previousTabItem && previousTabItem.isPersistent()) {
-              removeElement = false;
-              previousTabItem._pageElement = this._currentPageElement;
-          }
-
-          var params = {
-            callback: function() {
-              this.emit('postchange', {index: index, tabItem: selectedTabItem});
-            }.bind(this),
-            previousTabIndex: previousTabIndex,
-            selectedTabIndex: selectedTabIndex,
-            _removeElement: removeElement
-          };
-
-          if (options.animation) {
-            params.animation = options.animation;
-          }
-
-          if (selectedTabItem.isPersistent() && selectedTabItem._pageElement) {
-            this._loadPersistentPageDOM(selectedTabItem._pageElement, params);
-          }
-          else {
-            this._loadPage(selectedTabItem.page, params);
-          }
-        }
-
-        for (var i = 0; i < this._tabItems.length; i++) {
-          if (this._tabItems[i] != selectedTabItem) {
-            this._tabItems[i].setInactive();
-          } else {
-            if (!needLoad) {
-              this.emit('postchange', {index: index, tabItem: selectedTabItem});
-            }
-          }
-        }
-
-        return true;
       },
 
-      /**
-       * @param {Boolean} visible
-       */
+      setActiveTab: function(index, options) {
+        return this._element[0].setActiveTab(index, options);
+      },
+
       setTabbarVisibility: function(visible) {
-        this._scope.hideTabs = !visible;
-        this._onTabbarVisibilityChanged();
+        this._element[0].setTabbarVisibility(visible);
       },
 
-      _onTabbarVisibilityChanged: function() {
-        if (this._hasTopTabbar()) {
-          if (this._scope.hideTabs) {
-            this._contentElement.css('top', '0px');
-          } else {
-            this._contentElement.css('top', '');
-          }
-        } else {
-          if (this._scope.hideTabs) {
-            this._contentElement.css('bottom', '0px');
-          } else {
-            this._contentElement.css('bottom', '');
-          }
-        }
-      },
-
-      /**
-       * @param {Object} tabItem
-       */
-      addTabItem: function(tabItem) {
-        this._tabItems.push(tabItem);
-      },
-
-      /**
-       * @return {Number} When active tab is not found, returns -1.
-       */
       getActiveTabIndex: function() {
-        var tabItem;
-        for (var i = 0; i < this._tabItems.length; i++) {
-          tabItem = this._tabItems[i];
-          if (tabItem.isActive()) {
-            return i;
-          }
-        }
-
-        return -1;
+        return this._element[0].getActiveTabIndex();
       },
 
-      /**
-       * @param {String} page
-       * @param {Object} [options]
-       * @param {Object} [options.animation]
-       * @param {Object} [options.callback]
-       */
       loadPage: function(page, options) {
-        return this._loadPage(page, options);
+        return this._element[0]._loadPage(page, options);
       },
 
       /**
@@ -410,11 +116,10 @@ limitations under the License.
 
           this._animationChooser.newAnimator(options).apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
             if (options._removeElement) {
-              oldPageElement.remove();
               oldPageScope.$destroy();
             }
             else {
-              oldPageElement.css('display', 'none');
+              oldPageElement[0]._hide();
             }
 
             if (options.callback instanceof Function) {
@@ -458,7 +163,7 @@ limitations under the License.
       _loadPersistentPageDOM: function(element, options) {
         options = options || {};
 
-        element.css('display', 'block');
+        element[0]._show();
         this._switchPage(element, element.scope(), options);
       },
 
@@ -476,29 +181,18 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy');
 
+        element[0]._compilePageHook.remove(this._bindedCompilePage);
+        element[0]._linkPageHook.remove(this._bindedLinkPage);
+
+        this._clearDerivingEvents();
+
         this._element = this._scope = this._attrs = null;
       }
     });
     MicroEvent.mixin(TabbarView);
 
-    // Preset transition animators.
-    TabbarView._animatorDict = {
-      'default': TabbarNoneAnimator,
-      'none': TabbarNoneAnimator,
-      'fade': TabbarFadeAnimator,
-      'slide': TabbarSlideAnimator
-    };
-
-    /**
-     * @param {String} name
-     * @param {Function} Animator
-     */
     TabbarView.registerAnimator = function(name, Animator) {
-      if (!(Animator.prototype instanceof TabbarAnimator)) {
-        throw new Error('"Animator" param must inherit TabbarAnimator');
-      }
-
-      this._animatorDict[name] = Animator;
+      return window.OnsTabbarElement.registerAnimator(name, Animator);
     };
 
     return TabbarView;

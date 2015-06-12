@@ -21,9 +21,9 @@ limitations under the License.
   var util = ons._util = ons._util || {};
 
   /**
-   * @param {HTMLElement} element 
+   * @param {Element} element 
    * @param {String} query dot class name or node name.
-   * @return {HTMLElement}
+   * @return {HTMLElement/null}
    */
   util.findChild = (element, query) => {
     var match = query.substr(0, 1) === '.' ?
@@ -38,6 +38,43 @@ limitations under the License.
       }
     }
     return null;
+  };
+
+  /**
+   * @param {Element} element 
+   * @param {String} query dot class name or node name.
+   * @return {HTMLElement/null}
+   */
+  util.findParent = (element, query) => {
+    var match = query.substr(0, 1) === '.' ?
+      (node) => node.classList.contains(query.substr(1)) :
+      (node) => node.nodeName.toLowerCase() === query;
+
+    var parent = element.parentNode;
+    for (;;) {
+      if (!parent) {
+        return null;
+      }
+      if (match(parent)) {
+        return parent;
+      }
+      parent = parent.parentNode;
+    }
+  };
+
+  /**
+   * @param {String} html
+   * @return {Element}
+   */
+  util.createElement = (html) => {
+    var wrapper = document.createElement('div');
+    wrapper.innerHTML = html;
+
+    if (wrapper.children.length > 1) {
+      throw new Error('"html" must be one wrapper element.');
+    }
+
+    return wrapper.children[0];
   };
 
   /*
@@ -57,6 +94,28 @@ limitations under the License.
     }
 
     return dst;
+  };
+
+  /**
+   * @param {Object} arrayLike
+   * @return {Array}
+   */
+  util.arrayFrom = (arrayLike) => {
+    var result = [];
+    for (var i = 0; i < arrayLike.length; i++) {
+      result.push(arrayLike[i]);
+    }
+    return result;
+  };
+
+  /*
+   * @param {HTMLElement} element.
+   * @param {String} event name.
+   */
+  util.fireEvent = (element, eventName) => {
+    var event = document.createEvent('Event');
+    event.initEvent(eventName, true, true);
+    element.dispatchEvent(event);
   };
 
 })(window.ons = window.ons || {});
