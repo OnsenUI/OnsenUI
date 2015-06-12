@@ -26,6 +26,8 @@ limitations under the License.
   var FadeNavigatorTransitionAnimator = ons._internal.FadeNavigatorTransitionAnimator;
   var NullNavigatorTransitionAnimator = ons._internal.NullNavigatorTransitionAnimator;
   var util = ons._util;
+  var AsyncHook = ons._internal.AsyncHook;
+  var NavigatorPage = ons._internal.NavigatorPage;
 
   class NavigatorElement extends ons._BaseElement {
 
@@ -38,6 +40,8 @@ limitations under the License.
 
       this._initialHTML = this.innerHTML;
       this.innerHTML = '';
+      this._compilePageHook = new AsyncHook();
+      this._linkPageHook = new AsyncHook();
 
       this._animatorFactory = new AnimatorFactory({
         animators: window.OnsNavigatorElement._transitionAnimatorDict,
@@ -46,19 +50,6 @@ limitations under the License.
         defaultAnimation: this.getAttribute('animation'),
         defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
       });
-
-      setImmediate(() => {
-        if (!this.getAttribute('page')) {
-          var element = util.createElement(this._initialHTML);
-
-          setTimeout(() => {
-            this._pushPageDOM('', element, {}, function() {});
-          }, 300);
-        } else {
-          this.pushPage(this.getAttribute('page'), {animation: 'none'});
-        }
-        this._initialHTML = false;
-      });
     }
 
     /**
@@ -66,6 +57,27 @@ limitations under the License.
      */
     canPopPage() {
       return this._pages.length > 1;
+    }
+
+    /**
+     * Replaces the current page with the specified one.
+     *
+     * @param {String} page
+     * @param {Object} [options]
+     */
+    replacePage(page, options) {
+      options = options || {};
+
+      var onTransitionEnd = options.onTransitionEnd || function() {};
+
+      options.onTransitionEnd = () => {
+        if (this._pages.length > 1) {
+          this._pages[this._pages.length - 2].destroy();
+        }
+        onTransitionEnd();
+      };
+
+      return this.pushPage(page, options);
     }
 
     /**
@@ -78,7 +90,6 @@ limitations under the License.
      * @param {Function} [options.onTransitionEnd]
      * @param {Boolean} [options.cancelIfRunning]
      */
-
     popPage(options) {
       options = options || {};
 
@@ -88,7 +99,7 @@ limitations under the License.
 
       this._doorLock.waitUnlock(() => {
         if (this._pages.length <= 1) {
-          throw new Error('NavigatorView\'s page stack is empty.');
+          throw new Error('ons-navigator\'s page stack is empty.');
         }
 
         if (this._emitPrePopEvent()) {
@@ -104,20 +115,19 @@ limitations under the License.
             throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
           }
 
-          $onsen.getPageHTMLAsync(this._pages[index].page, (error, templateHTML) => {
-            //var pageScope = this._createPageScope();
+          ons._internal.getPageHTMLAsync(this._pages[index].page, (error, templateHTML) => {
             var element = this._createPageElement(templateHTML);
             var pageObject = this._createPageObject(this._pages[index].page, element, options);
 
-            this.insertBefore(element, this._pages[index] ? this._pages[index] : null);
-            this._pages.splice(index, 0, pageObject);
-            // TODO
-            //link();
+            this._compilePageHook.run((element) => {
+              this._linkPageHook.run((element) => {
+                this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
+                this._pages.splice(index, 0, pageObject);
 
-            this._pages[index + 1].destroy();
-
-            this._popPage(options, unlock);
-
+                this._pages[index + 1].destroy();
+                this._popPage(options, unlock);
+              }, element);
+            }, element);
           });
 
         } else {
@@ -136,7 +146,8 @@ limitations under the License.
 
       var enterPage = this._pages[this._pages.length -1];
 
-      var event = {
+      // for "postpop" event
+      var eventDetail = {
         leavePage: leavePage,
         enterPage: this._pages[this._pages.length - 1],
         navigator: this
@@ -147,8 +158,12 @@ limitations under the License.
 
         this._isPopping = false;
         unlock();
-        // TODO
-        //this.emit('postpop', event);
+
+        var event = new CustomEvent('postpop', {
+          bubbles: true,
+          detail: eventDetail
+        });
+        this.dispatchEvent(event);
 
         event.leavePage = null;
 
@@ -192,59 +207,74 @@ limitations under the License.
         return index;
       };
 
-      // TODO
       this._doorLock.waitUnlock(() => {
         var unlock = this._doorLock.lock();
 
-        $onsen.getPageHTMLAsync(page, (error, templateHTML) => {
+        ons._internal.getPageHTMLAsync(page, (error, templateHTML) => {
           if (error) {
             unlock();
             throw new Error('Page is not found: ' + page);
           }
 
-          //var pageScope = this._createPageScope();
-          //var object = this._createPageElementAndLinkFunction(templateHTML, pageScope);
           var element = this._createPageElement(templateHTML);
-          //var link = object.link;
 
           var pageObject = this._createPageObject(page, element, options);
 
           if (this._pages.length > 0) {
             index = normalizeIndex(index);
 
-            this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
-            this._pages.splice(index, 0, pageObject);
-            //link();
+            this._compilePageHook.run(element => {
+              this._linkPageHook.run(element => {
+                this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
+                this._pages.splice(index, 0, pageObject);
 
-            setTimeout(() => {
-              if (this.getCurrentPage() !== pageObject) {
-                element.display = 'none';
-              }
-              unlock();
-              element = null;
-            }, 1000 / 60);
-
+                setTimeout(() => {
+                  if (this.getCurrentPage() !== pageObject) {
+                    element.display = 'none';
+                  }
+                  unlock();
+                  element = null;
+                }, 1000 / 60);
+              }, element);
+            }, element);
           } else {
-            this._element.append(element);
-            this._pages.push(pageObject);
-            link();
-            unlock();
-            element = null;
+            this._compilePageHook.run(element => {
+              this._linkPageHook.run(element => {
+                this._element.append(element);
+                this._pages.push(pageObject);
+                unlock();
+                element = null;
+              }, element);
+            }, element);
           }
         });
       });
     }
+
+    /**
+     * Get current page's navigator item.
+     *
+     * Use this method to access options passed by pushPage() or resetToPage() method.
+     * eg. ons.navigator.getCurrentPage().options
+     *
+     * @return {Object}
+     */
+    getCurrentPage() {
+      if (this._pages.length <= 0) {
+        throw new Error('Invalid state');
+      }
+      return this._pages[this._pages.length - 1];
+    }
     
     _destroy() {
-      // TODO
-      //this.emit('destroy');
-
       this._pages.forEach(function(page) {
         page.destroy();
       });
 
       this._deviceBackButtonHandler.destroy();
       this._deviceBackButtonHandler = null;
+      this._compilePageHook = null;
+      this._linkPageHook = null;
     }
 
     get pages() {
@@ -292,6 +322,19 @@ limitations under the License.
     }
 
     attachedCallback() {
+      window.OnsNavigatorElement.ready(this, () => {
+        this._linkPageHook.freeze();
+        this._compilePageHook.freeze();
+        
+        if (!this.getAttribute('page')) {
+          var element = util.createElement(this._initialHTML);
+
+          this._pushPageDOM('', element, {}, function() {});
+        } else {
+          this.pushPage(this.getAttribute('page'), {animation: 'none'});
+        }
+        this._initialHTML = false;
+      });
     }
 
     detachedCallback() {
@@ -355,7 +398,8 @@ limitations under the License.
 
       var pageObject = this._createPageObject(page, element, options);
 
-      var event = {
+      // for "postpush" event
+      var eventDetail = {
         enterPage: pageObject,
         leavePage: this._pages[this._pages.length - 1],
         navigator: this
@@ -371,8 +415,12 @@ limitations under the License.
         this._isPushing = false;
         unlock();
 
-        // TODO
-        //this.emit('postpush', event);
+        var event = new CustomEvent('postpush', {
+          bubbles: true,
+          detail: eventDetail
+        });
+        this.dispatchEvent(event);
+
 
         if (typeof options.onTransitionEnd === 'function') {
           options.onTransitionEnd();
@@ -382,30 +430,64 @@ limitations under the License.
 
       this._isPushing = true;
 
-      if (this._pages.length > 1) {
-        var leavePage = this._pages.slice(-2)[0];
-        var enterPage = this._pages.slice(-1)[0];
+      this._compilePageHook.run(element => {
+        this._linkPageHook.run(element => {
+          setTimeout(() => {
+            if (this._pages.length > 1) {
+              var leavePage = this._pages.slice(-2)[0];
+              var enterPage = this._pages.slice(-1)[0];
 
-        this.appendChild(element);
-        // TODO
-        //link();
-        options.animator.push(enterPage, leavePage, done);
-      } else {
-        this.appendChild(element);
-        // TODO
-        //link();
-        done();
-      }
+              this.appendChild(element);
+              options.animator.push(enterPage, leavePage, done);
+            } else {
+              this.appendChild(element);
+              done();
+            }
+          }, 1000 / 60);
+        }, element);
+      }, element);
     }
 
+    /**
+     * @return {Boolean} Whether if event is canceled.
+     */
     _emitPrePushEvent() {
-      // TODO
-      return false;
+      var isCanceled = false;
+      var event = new CustomEvent('prepush', {
+        bubbles: true,
+        detail: {
+          navigator: this,
+          currentPage: this._pages.length > 0 ? this.getCurrentPage() : undefined,
+          cancel: function() {
+            isCanceled = true;
+          }
+        }
+      });
+
+      this.dispatchEvent(event);
+
+      return isCanceled;
     }
 
+    /**
+     * @return {Boolean} Whether if event is canceled.
+     */
     _emitPrePopEvent() {
-      // TODO
-      return false;
+      var isCanceled = false;
+
+      var event = new CustomEvent('prepop', {
+        bubbles: true,
+        detail: {
+          navigator: this,
+          currentPage: this.getCurrentPage(),
+          cancel: function() {
+            isCanceled = true;
+          }
+        }
+      });
+      this.dispatchEvent(event);
+
+      return isCanceled;
     }
 
     /**
@@ -436,7 +518,7 @@ limitations under the License.
 
   }
 
-  if (!window.NavigatorElement) {
+  if (!window.OnsNavigatorElement) {
     window.OnsNavigatorElement = document.registerElement('ons-navigator', {
       prototype: NavigatorElement.prototype
     });
@@ -461,72 +543,9 @@ limitations under the License.
 
       this._transitionAnimatorDict[name] = Animator;
     };
+
+    window.OnsNavigatorElement.ready = function(element, done) {
+      done();
+    };
   }
-
-  class NavigatorPage {
-
-    /**
-     * @param {Object} params
-     * @param {Object} params.page
-     * @param {Object} params.element
-     * @param {Object} params.options
-     * @param {Object} params.navigator
-     */
-    constructor(params) {
-      this.page = params.page;
-      this.name = params.page;
-      this.element = params.element;
-      this.options = params.options;
-      this.navigator = params.navigator;
-
-      // Block events while page is being animated to stop scrolling, pressing buttons, etc.
-      this._blockEvents = (event) => {
-        if (this.navigator._isPopping || this.navigator._isPushing) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-      };
-
-      this._pointerEvents.forEach(event => this.element.addEventListener(event, this._blockEvents), false);
-    }
-
-    get _pointerEvents() {
-      return ['touchstart', 'touchend', 'touchmove', 'click'];
-    }
-
-    getDeviceBackButtonHandler() {
-      return this._deviceBackButtonHandler;
-    }
-
-    /**
-     * @return {PageView}
-     */
-    getPageView() {
-      if (!this._page) {
-        this._page = util.findParent('ons-page');
-        if (!this._page) {
-          throw new Error('Fail to fetch ons-page element.');
-        }
-      }
-      return this._page;
-    }
-
-    destroy() {
-      // TODO
-      //this.pageScope.$destroy();
-
-      this._pointerEvents.forEach(event => this.element.removeEventListener(event, this._blockEvents), false);
-      util.removeElement(this.element);
-
-
-      var index = this.navigator._pages.indexOf(this);
-      if (index !== -1) {
-        this.navigator._pages.splice(index, 1);
-      }
-
-      this.element = this._page = this.options = this.navigator = null;
-    }
-  }
-
-  window.ons._internal.NavigatorPage = NavigatorPage;
 })();

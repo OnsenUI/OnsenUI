@@ -52,7 +52,12 @@
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
 
           var navigator = ons.findParentComponentUntil('ons-navigator', element);
-          scope.$watch(function() { return navigator.pages.length; }, function(nbrOfPages) {
+          scope.$watch(function() { 
+            if (!navigator) {
+              navigator = ons.findParentComponentUntil('ons-navigator', element);
+            }
+            return navigator.pages ? navigator.pages.length : 0;
+          }, function(nbrOfPages) {
             scope.showBackButton = nbrOfPages > 1;
           });
 

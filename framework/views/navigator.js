@@ -19,7 +19,6 @@ limitations under the License.
   'use strict;';
 
   var module = angular.module('onsen');
-  var NavigatorPageObject = ons._internal.NavigatorPage;
 
   module.factory('NavigatorView', function($http, $parse, $compile, $onsen, $timeout, AnimationChooser,
     SimpleSlideTransitionAnimator, NavigatorTransitionAnimator, LiftTransitionAnimator,
@@ -43,24 +42,9 @@ limitations under the License.
       _attrs: undefined,
 
       /**
-       * @member {Array}
-       */
-      pages: undefined,
-
-      /**
        * @member {Object}
        */
       _scope: undefined,
-
-      /**
-       * @member {DoorLock}
-       */
-      _doorLock: undefined,
-
-      /**
-       * @member {Boolean}
-       */
-      _profiling: false,
 
       /**
        * @param {Object} scope
@@ -72,12 +56,34 @@ limitations under the License.
         this._element = element || angular.element(window.document.body);
         this._scope = scope || this._element.scope();
         this._attrs = attrs;
-        this._doorLock = new DoorLock();
-        this.pages = [];
 
-        this._isPopping = this._isPushing = false;
+        this._element[0]._compilePageHook.add(this._compilePage.bind(this));
+        this._element[0]._linkPageHook.add(this._linkPage.bind(this));
 
         this._scope.$on('$destroy', this._destroy.bind(this));
+
+        // TODO:
+        // deriving events
+      },
+
+      _compilePage: function(next, pageElement) {
+        this._linkPage.link = $compile(pageElement);
+
+        next(pageElement);
+      },
+
+      _linkPage: function(next, pageElement) {
+        if (!this._linkPage.link) {
+          throw new Error('Invalid state');
+        }
+
+        var pageScope = this._createPageScope();
+        this._linkPage.link(pageScope);
+        this._linkPage.link = null;
+
+        pageScope.$evalAsync(function() {
+          next(pageElement);
+        });
       },
 
       _destroy: function() {
@@ -100,90 +106,12 @@ limitations under the License.
           //link(pageScope);
           //safeApply(pageScope);
         }
-      };
-      */
+      }; */
 
-      /**
-       * Insert page object that has the specified pageUrl into the page stack and
-       * if options object is specified, apply the options.
-       *
-       * @param {Number} index
-       * @param {String} page
-       * @param {Object} [options]
-       * @param {String/NavigatorTransitionAnimator} [options.animation]
-       */
       insertPage: function(index, page, options) {
-        options = options || {};
-
-        if (options && typeof options != 'object') {
-          throw new Error('options must be an object. You supplied ' + options);
-        }
-
-        if (index === this.pages.length) {
-          return this.pushPage.apply(this, [].slice.call(arguments, 1));
-        }
-
-        var normalizeIndex = function(index) {
-          if (index < 0) {
-            index = this.pages.length + index;
-          }
-          return index;
-        }.bind(this);
-
-        this._doorLock.waitUnlock(function() {
-          var unlock = this._doorLock.lock();
-
-          $onsen.getPageHTMLAsync(page).then(function(templateHTML) {
-
-            var pageScope = this._createPageScope();
-            var object = this._createPageElementAndLinkFunction(templateHTML, pageScope);
-            var element = object.element;
-            var link = object.link;
-
-            element = element;
-
-            var pageObject = this._createPageObject(page, element, pageScope, options);
-
-            if (this.pages.length > 0) {
-              index = normalizeIndex(index);
-
-              this._element[0].insertBefore(element[0], this.pages[index] ? this.pages[index].element[0] : null);
-              this.pages.splice(index, 0, pageObject);
-              link();
-
-              setTimeout(function() {
-                if (this.getCurrentPage() !== pageObject) {
-                  element.css('display', 'none');
-                }
-                unlock();
-                element = null;
-              }.bind(this), 1000 / 60);
-
-            } else {
-              this._element.append(element);
-              this.pages.push(pageObject);
-              link();
-              unlock();
-              element = null;
-            }
-          }.bind(this), function() {
-            unlock();
-            throw new Error('Page is not found: ' + page);
-          });
-        }.bind(this));
+        return this._element[0].insertPage(index, page, options);
       },
 
-      /**
-       * Pushes the specified pageUrl into the page stack and
-       * if options object is specified, apply the options.
-       *
-       * @param {String} page
-       * @param {Object} [options]
-       * @param {String/NavigatorTransitionAnimator} [options.animation]
-       * @param {Object} [options.animationOptions]
-       * @param {Function} [options.onTransitionEnd]
-       * @param {Boolean} [options.cancelIfRunning]
-       */
       pushPage: function(page, options) {
         return this._element[0].pushPage(page, options);
       },
@@ -196,89 +124,22 @@ limitations under the License.
          return this._scope.$new();
       },
 
-      /**
-       * @return {Boolean} Whether if event is canceled.
-       */
-      _emitPrePushEvent: function() {
-        var isCanceled = false;
-        var prePushEvent = {
-          navigator: this,
-          currentPage: this.getCurrentPage(),
-          cancel: function() {
-            isCanceled = true;
-          }
-        };
-
-        this.emit('prepush', prePushEvent);
-
-        return isCanceled;
-      },
-
-      /**
-       * @return {Boolean} Whether if event is canceled.
-       */
-      _emitPrePopEvent: function() {
-        // TODO
-        var isCanceled = false;
-        var prePopEvent = {
-          navigator: this,
-          currentPage: this.getCurrentPage(),
-          cancel: function() {
-            isCanceled = true;
-          }
-        };
-
-        this.emit('prepop', prePopEvent);
-
-        return isCanceled;
-      },
-
-      /**
-       * Pops current page from the page stack.
-       *
-       * @param {Object} [options]
-       * @param {String} [options.animation]
-       * @param {Object} [options.animationOptions]
-       * @param {Boolean} [options.refresh]
-       * @param {Function} [options.onTransitionEnd]
-       * @param {Boolean} [options.cancelIfRunning]
-       */
       popPage: function(options) {
+        return this._element[0].popPage(options);
       },
 
-      /**
-       * Replaces the current page with the specified one.
-       *
-       * @param {String} page
-       * @param {Object} [options]
-       */
       replacePage: function(page, options) {
         return this._element[0].replacePage(page, options);
       },
 
-      /**
-       * Clears page stack and add the specified pageUrl to the page stack.
-       * If options object is specified, apply the options.
-       * the options object include all the attributes of this navigator.
-       *
-       * @param {String} page
-       * @param {Object} [options]
-       */
       resetToPage: function(page, options) {
         return this._element[0].resetToPage(page, options);
       },
 
-      /**
-       * Get current page's navigator item.
-       *
-       * Use this method to access options passed by pushPage() or resetToPage() method.
-       * eg. ons.navigator.getCurrentPage().options
-       *
-       * @return {Object}
-       */
       getCurrentPage: function() {
+        return this._element[0].getCurrentPage();
         // TODO
-        return this.pages[this.pages.length - 1];
+        //this.pages[this.pages.length - 1];
       },
 
       /**
@@ -287,8 +148,7 @@ limitations under the License.
        * @return {Array}
        */
       getPages: function() {
-        // TODO
-        return this.pages;
+        return this._element[0].pages;
       },
 
       /**
@@ -300,6 +160,15 @@ limitations under the License.
     });
 
     MicroEvent.mixin(NavigatorView);
+
+    Object.defineProperty(NavigatorView.prototype, 'pages', {
+      get: function () {
+        return this.getPages();
+      },
+      set: function() {
+        throw new Error();
+      }
+    });
 
     return NavigatorView;
   });

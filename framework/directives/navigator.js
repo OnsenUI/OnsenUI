@@ -391,9 +391,22 @@
 
 (function() {
   'use strict';
-  var module = angular.module('onsen');
 
-  module.directive('onsNavigator', function($compile, NavigatorView, $onsen) {
+  var lastReady = window.OnsNavigatorElement.ready;
+  // wait for AngularJS binding initilization.
+  window.OnsNavigatorElement.ready = function(element, callback) {
+    if (angular.element(element).data('ons-navigator')) {
+      lastReady(element, callback);
+    } else {
+      var listen = function() {
+        lastReady(element, callback);
+        element.removeEventListener('ons-navigator:init', listen, false);
+      };
+      element.addEventListener('ons-navigator:init', listen, false);
+    }
+  };
+
+  angular.module('onsen').directive('onsNavigator', function(NavigatorView, $onsen) {
     return {
       restrict: 'E',
 

@@ -33,6 +33,7 @@ limitations under the License.
       ModifierUtil.initModifier(this, scheme);
 
       this._tryToEnsureNodePosition();
+      setImmediate(() => this._tryToEnsureNodePosition());
     }
 
     attributeChangedCallback(name, last, current) {
@@ -42,7 +43,8 @@ limitations under the License.
     }
 
     attachedCallback() {
-      setImmediate(this._tryToEnsureNodePosition.bind(this));
+      this._tryToEnsureNodePosition();
+      setImmediate(() => this._tryToEnsureNodePosition());
     }
 
     _tryToEnsureNodePosition() {
