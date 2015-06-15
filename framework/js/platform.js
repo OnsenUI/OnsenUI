@@ -26,6 +26,17 @@ limitations under the License.
 
 /**
  * @ngdoc method
+ * @signature select(platform)
+ * @param  {string} platform Name of the platform.
+ *   [en]Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".[/en]
+ *   [ja][/ja]
+ * @description 
+ *   [en]Sets the platform used to render the elements. Useful for testing.[/en]
+ *   [ja][/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature isWebView()
  * @description 
  *   [en]Returns whether app is running in Cordova.[/en]
