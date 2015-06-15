@@ -88,7 +88,7 @@
     function firePageInitEvent(element) {
       // TODO: remove dirty fix
       var i = 0, f = function() {
-        if (i++ < 5)  {
+        if (i++ < 15)  {
           if (isAttached(element)) {
             element._tryToFillStatusBar();
             $onsen.fireComponentEvent(element, 'init');
