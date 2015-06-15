@@ -60,6 +60,9 @@ limitations under the License.
         this._element[0]._compilePageHook.add(this._compilePage.bind(this));
         this._element[0]._linkPageHook.add(this._linkPage.bind(this));
 
+        this._bindedOnPrepop = this._onPrepop.bind(this);
+        this._element.on('prepop', this._bindedOnPrepop);
+
         this._scope.$on('$destroy', this._destroy.bind(this));
 
         this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['prepush', 'postpush', 'prepop', 'postpop'], function(detail) {
@@ -68,6 +71,11 @@ limitations under the License.
           }
           return detail
         }.bind(this));
+      },
+
+      _onPrepop: function(event) {
+        var pages = event.detail.navigator.pages;
+        angular.element(pages[pages.length - 2].element).scope().$evalAsync();
       },
 
       _compilePage: function(next, pageElement) {
@@ -93,25 +101,8 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy');
         this._clearDerivingEvents();
-        this._element = this._scope = this._attrs = null;
+        this._bindedOnPrepop = this._element = this._scope = this._attrs = null;
       },
-
-      /* TODO
-      var safeApply = function(scope) {
-        var phase = scope.$root.$$phase;
-        if (phase !== '$apply' && phase !== '$digest') {
-          scope.$apply();
-        }
-      };
-
-      var link = $compile(pageElement);
-      return {
-        element: pageElement,
-        link: function() {
-          //link(pageScope);
-          //safeApply(pageScope);
-        }
-      }; */
 
       insertPage: function(index, page, options) {
         return this._element[0].insertPage(index, page, options);
@@ -143,8 +134,6 @@ limitations under the License.
 
       getCurrentPage: function() {
         return this._element[0].getCurrentPage();
-        // TODO
-        //this.pages[this.pages.length - 1];
       },
 
       /**

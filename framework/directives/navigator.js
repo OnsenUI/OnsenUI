@@ -426,16 +426,6 @@
             $onsen.declareVarAttribute(attrs, navigator);
             $onsen.registerEventHandlers(navigator, 'prepush prepop postpush postpop destroy');
 
-            /* TODO
-              var pageScope = navigator._createPageScope();
-              var pageElement = angular.element(html);
-              var linkScope = $compile(pageElement);
-              var link = function() { linkScope(pageScope); };
-
-              navigator._pushPageDOM('', pageElement, link, pageScope, {});
-            }
-            */
-
             element.data('ons-navigator', navigator);
 
             scope.$on('$destroy', function() {
