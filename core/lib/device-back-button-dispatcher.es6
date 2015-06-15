@@ -69,12 +69,10 @@ limitations under the License.
   var HandlerRepository = {
     _store: {},
 
-    _genId: function() {
+    _genId: (() => {
       var i = 0;
-      return function() {
-        return i++;
-      };
-    },
+      return () => i++;
+    })(),
 
     set: function(element, handler) {
       if (element.dataset.deviceBackButtonHandlerId) {
@@ -203,6 +201,7 @@ limitations under the License.
       //this._dumpParents(element);
 
       var handler = HandlerRepository.get(element);
+      console.log(handler);
       handler._callback(createEvent(element));
 
       function createEvent(element) {
