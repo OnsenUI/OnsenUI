@@ -34,6 +34,10 @@ limitations under the License.
       ModifierUtil.initModifier(this, scheme);
     }
 
+    attachedCallback() {
+      ons._util.fireEvent(this, 'init');
+    }
+
     /**
      * @return {Object/null}
      */
@@ -164,10 +168,8 @@ limitations under the License.
       var content = document.createElement('div');
       content.classList.add('page__content');
 
-      var html = this.innerHTML;
-      content.innerHTML = html;
       while (this.childNodes[0]) {
-        this.removeChild(this.childNodes[0]);
+        content.appendChild(this.childNodes[0]);
       }
 
       if (this.hasAttribute('style')) {
@@ -204,6 +206,26 @@ limitations under the License.
 
         this.insertBefore(fill, this.children[0]);
       }
+    }
+
+    _show() {
+      this.style.display = 'block';
+      ons._util.fireEvent(this, 'show');
+    }
+
+    _hide() {
+      this.style.display = 'none';
+      ons._util.fireEvent(this, 'hide');
+    }
+
+    _destroy() {
+      ons._util.fireEvent(this, 'destroy');
+
+      if (this.getDeviceBackButtonHandler()) {
+        this.getDeviceBackButtonHandler().destroy();
+      }
+
+      this.remove();
     }
   }
 

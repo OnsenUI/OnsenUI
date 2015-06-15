@@ -31,9 +31,12 @@ v1.3.3-dev
  * ons-carousel: Carousel will now apply the specified padding to the items.
  * ons-carousel: Fixed [#651](https://github.com/OnsenUI/OnsenUI/issues/651).
  * ons-lazy-repeat: Fixed [#678](https://github.com/OnsenUI/OnsenUI/issues/678).
- * ons-navigator: Fixed [#691](https://github.com/OnsenUI/OnsenUI/issues/691).
  * ons-icon: Fixed [#687](https://github.com/OnsenUI/OnsenUI/issues/687).
+ * ons-navigator: Fixed [#691](https://github.com/OnsenUI/OnsenUI/issues/691).
  * ons-icon: Fixed [#688](https://github.com/OnsenUI/OnsenUI/issues/688).
+ * ons-scroller: Fixed [#707](https://github.com/OnsenUI/OnsenUI/issues/707).
+ * ons-carousel: Fixed a random error when event was undefined.
+ * ons-page: Added page life cycle events.
 
 v1.3.2
 ----

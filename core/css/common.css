@@ -111,6 +111,10 @@ ons-popover[disabled] {
   opacity: 0.75;
 }
 
+ons-list-item[disabled] {
+   pointer-events: none;
+}
+
 ons-pull-hook {
   position: absolute;
   left: 0;
@@ -119,4 +123,3 @@ ons-pull-hook {
   text-align: center;
   z-index: 20002;
 }
-

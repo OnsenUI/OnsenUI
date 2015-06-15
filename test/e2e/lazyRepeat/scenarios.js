@@ -18,7 +18,18 @@
       expect(firstItem.isPresent()).toBeTruthy();
 
       // Scroll down to bottom.
-      browser.executeScript('document.querySelector(".page__content").scrollTop = 100000;');
+      browser.executeScript('document.querySelector(".page__content").scrollTop = 10000;');
+
+      // Fix for test on small screens.
+      browser.wait(function() {
+        var deferred = protractor.promise.defer();
+        setTimeout(function() {
+          deferred.fulfill(true);
+        }, 200);
+        return deferred.promise;
+      });
+
+      browser.executeScript('document.querySelector(".page__content").scrollTop = 10000;');
 
       // Check that the first element is removed.
       browser.wait(EC.stalenessOf(firstItem));
