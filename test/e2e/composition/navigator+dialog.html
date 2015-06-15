@@ -8,12 +8,12 @@
     <script src="../../../build/js/angular/angular.js"></script>
     <script src="../../../build/js/onsenui.js"></script>
     <script>
-      angular.module('myApp', ['onsen'])
-      .controller('TestController', function($scope) {
-        ons.createDialog('dialog.html', {parentScope: $scope})
-        .then(function(dialog) {
+      angular.module('myApp', ['onsen']).controller('TestController', function($scope) {
+        ons.createDialog('dialog.html', {parentScope: $scope}).then(function(dialog) {
           dialog.show();
+          $scope.dialog = dialog;
         });
+        
       });
     </script>
   </head>
@@ -27,7 +27,7 @@
     <ons-template id="page2.html">
       <ons-page ng-controller="TestController">
         <p style="text-align: center;">
-          <ons-button id="pop-page" ng-click="navi.popPage()">Go back</ons-button>
+          <ons-button id="pop-page" ng-click="dialog.destroy(); navi.popPage()">Go back</ons-button>
         </p>
       </ons-page>
     </ons-template>
