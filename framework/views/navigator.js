@@ -62,8 +62,12 @@ limitations under the License.
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
-        // TODO:
-        // deriving events
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['prepush', 'postpush', 'prepop', 'postpop'], function(detail) {
+          if (detail.navigator) {
+            detail.navigator = this;
+          }
+          return detail
+        }.bind(this));
       },
 
       _compilePage: function(next, pageElement) {
@@ -88,6 +92,7 @@ limitations under the License.
 
       _destroy: function() {
         this.emit('destroy');
+        this._clearDerivingEvents();
         this._element = this._scope = this._attrs = null;
       },
 
