@@ -101,7 +101,8 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy');
         this._clearDerivingEvents();
-        this._bindedOnPrepop = this._element = this._scope = this._attrs = null;
+        this._element.off('prepop', this._bindedOnPrepop);
+        this._element = this._scope = this._attrs = null;
       },
 
       insertPage: function(index, page, options) {
