@@ -224,13 +224,15 @@ limitations under the License.
 
             this._compilePageHook.run(element => {
               this._linkPageHook.run(element => {
-                this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
+                if (this._pages[index]) {
+                  element.style.display = 'none';
+                  this.insertBefore(element, this._pages[index].element);
+                } else {
+                  this.insertBefore(element, null);
+                }
                 this._pages.splice(index, 0, pageObject);
 
                 setTimeout(() => {
-                  if (this.getCurrentPage() !== pageObject) {
-                    element.display = 'none';
-                  }
                   unlock();
                   element = null;
                 }, 1000 / 60);
