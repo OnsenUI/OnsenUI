@@ -35,7 +35,6 @@ limitations under the License.
       this._doorLock = new DoorLock();
       this._pages = [];
       this._bindedOnDeviceBackButton = this._onDeviceBackButton.bind(this);
-      this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._bindedOnDeviceBackButton);
       this._isPushing = this._isPopping = false;
 
       this._initialHTML = this.innerHTML;
@@ -271,10 +270,6 @@ limitations under the License.
         page.destroy();
       });
 
-      this._deviceBackButtonHandler.destroy();
-      this._deviceBackButtonHandler = null;
-      this._compilePageHook = null;
-      this._linkPageHook = null;
     }
 
     get pages() {
@@ -320,25 +315,29 @@ limitations under the License.
     }
 
     attachedCallback() {
+      this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._bindedOnDeviceBackButton);
+
       window.OnsNavigatorElement.ready(this, () => {
-        this._linkPageHook.freeze();
-        this._compilePageHook.freeze();
-        
-        if (!this.getAttribute('page')) {
-          var html = this._initialHTML.match(/^\s*<ons-page/) ? this._initialHTML : '<ons-page>' + this._initialHTML + '</ons-page>';
-          var element = this._createPageElement(this._initialHTML);
+        if (this._pages.length == 0) {
+          this._linkPageHook.freeze();
+          this._compilePageHook.freeze();
 
-          this._pushPageDOM('', element, {}, function() {});
+          if (!this.getAttribute('page')) {
+            var html = (this._initialHTML || '').match(/^\s*<ons-page/) ? this._initialHTML : '<ons-page>' + this._initialHTML + '</ons-page>';
+            var element = this._createPageElement(this._initialHTML);
 
-        } else {
-          this.pushPage(this.getAttribute('page'), {animation: 'none'});
+            this._pushPageDOM('', element, {}, function() {});
+          } else {
+            this.pushPage(this.getAttribute('page'), {animation: 'none'});
+          }
+          this._initialHTML = false;
         }
-        this._initialHTML = false;
       });
     }
 
     detachedCallback() {
-      this._destroy();
+      this._deviceBackButtonHandler.destroy();
+      this._deviceBackButtonHandler = null;
     }
 
     /**
