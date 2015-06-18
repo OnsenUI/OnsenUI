@@ -91,7 +91,7 @@ limitations under the License.
 
       var content = ons._util.findChild(this, '.tab-bar__content');
       var tabbar = ons._util.findChild(this, '.tab-bar');
-      
+
       content.setAttribute('no-status-bar-fill', '');
 
       content.classList.add('tab-bar--top__content');
@@ -99,7 +99,7 @@ limitations under the License.
 
       var page = ons._util.findParent(this, 'ons-page');
       if (page) {
-        this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top') + 'px';
+        this.style.top = window.getComputedStyle(page._getContentElement(), null).getPropertyValue('padding-top');
       }
 
       if (ons._internal.shouldFillStatusBar(this)) {
@@ -197,7 +197,7 @@ limitations under the License.
       if (this.getActiveTabIndex() !== -1) {
         var oldPageElement = this._getContentElement().children.length > 1 ? this._getCurrentPageElement() : ons._internal.nullElement;
         var animator = this._animatorFactory.newAnimator(options);
-        
+
         animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
           if (options._removeElement) {
             if (oldPageElement.parentNode) {
@@ -228,7 +228,7 @@ limitations under the License.
      * @return {Boolean} success or not
      */
     setActiveTab(index, options) {
-      
+
       options = options || {};
 
       var previousTab = this._getTabElement(this.getActiveTabIndex()),
