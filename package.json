@@ -45,7 +45,7 @@
     "csv": "*",
     "dateformat": "~1.0.7-1.2.3",
     "dgeni": "^0.4.1",
-    "dgeni-packages": "^0.10.8",
+    "dgeni-packages": "0.10.14",
     "event-stream": "^3.3.0",
     "extend": "^2.0.0",
     "globby": "^2.0.0",
