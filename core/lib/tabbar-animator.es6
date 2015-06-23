@@ -116,11 +116,11 @@ limitations under the License.
      * @param {jqLite} enterPage
      * @param {jqLite} leavePage
      */
-    applyfunction(enterPage, leavePage, enterIndex, leaveIndex, done) {
+    apply(enterPage, leavePage, enterIndex, leaveIndex, done) {
       var sgn = enterIndex > leaveIndex;
 
       animit.runAll(
-        animit(enterPage[0])
+        animit(enterPage)
           .queue({
             transform: 'translate3D(' + (sgn ? '' : '-') + '100%, 0, 0)',
           })
@@ -136,7 +136,7 @@ limitations under the License.
             done();
             callback();
           }),
-        animit(leavePage[0])
+        animit(leavePage)
           .queue({
             transform: 'translate3D(0, 0, 0)',
           })

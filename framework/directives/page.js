@@ -94,7 +94,11 @@
             $onsen.fireComponentEvent(element, 'init');
             fireActualPageInitEvent(element);
           } else {
-            setImmediate(f);
+            if (i > 10) {
+              setTimeout(f, 1000 / 60);
+            } else {
+              setImmediate(f);
+            }
           }
         } else {
           throw new Error('Fail to fire "pageinit" event. Attach "ons-page" element to the document after initialization.');

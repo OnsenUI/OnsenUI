@@ -267,7 +267,7 @@ limitations under the License.
 
               setTimeout(function() {
                 if (this.getCurrentPage() !== pageObject) {
-                  element[0]._hide();
+                  element.css('display', 'none');
                 }
                 unlock();
                 element = null;
@@ -399,9 +399,8 @@ limitations under the License.
         this.pages.push(pageObject);
 
         var done = function() {
-          var previousPage = this.pages[this.pages.length - 2];
-          if (previousPage) {
-            previousPage.element[0]._hide();
+          if (this.pages[this.pages.length - 2]) {
+            this.pages[this.pages.length - 2].element.css('display', 'none');
           }
 
           if (this._profiling) {
@@ -543,9 +542,8 @@ limitations under the License.
       _popPage: function(options, unlock) {
         var leavePage = this.pages.pop();
 
-        var previousPage = this.pages[this.pages.length - 1];
-        if (previousPage) {
-          previousPage.element[0]._show();
+        if (this.pages[this.pages.length - 1]) {
+          this.pages[this.pages.length - 1].element.css('display', 'block');
         }
 
         var enterPage = this.pages[this.pages.length -1];

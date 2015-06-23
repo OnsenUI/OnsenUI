@@ -49,8 +49,7 @@ limitations under the License.
       this._getCheckbox().checked = value;
       if (this.checked) {
         this.setAttribute('checked', '');
-      }
-      else {
+      } else {
         this.removeAttribute('checked');
       }
     }
@@ -63,8 +62,7 @@ limitations under the License.
       this._getCheckbox().disabled = value;
       if (this.disabled) {
         this.setAttribute('disabled', '');
-      }
-      else {
+      } else {
         this.removeAttribute('disabled');
       }
     }
@@ -113,8 +111,7 @@ limitations under the License.
     _onChangeListener() {
       if (this.checked !== true) {
         this.parentNode.removeAttribute('checked');
-      }
-      else {
+      } else {
         this.parentNode.setAttribute('checked', '');
       }
     }
