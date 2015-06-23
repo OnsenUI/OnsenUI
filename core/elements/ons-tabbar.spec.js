@@ -125,4 +125,57 @@ describe('ons-tabbar', function() {
     expect(element.children[1].classList.contains('ons-tab-bar__footer')).to.be.true;
     expect(element.children[1].classList.contains('ons-tabbar-inner')).to.be.true;
   });
+
+  it('has active tab property', function(done) {
+    var div = document.createElement('div');
+    document.body.appendChild(div);
+    div.innerHTML = '<ons-template id="page1"></ons-template><ons-template id="page2"></ons-template>';
+    div.innerHTML += '<ons-tabbar id="myTabbar"><ons-tab id="tab1" page="page1"></ons-tab><ons-tab id="tab2" page="page2"></ons-tab></ons-tabbar>';
+
+    setImmediate(function() {
+      var element = document.getElementById('myTabbar');
+      expect(element.getActiveTabIndex()).to.equal(-1);
+
+      document.getElementById("tab1").click();
+      expect(element.getActiveTabIndex()).to.equal(0);
+
+      document.getElementById("tab2").click();
+      expect(element.getActiveTabIndex()).to.equal(1);
+
+      done();
+    });
+  });
+
+  it('has prechange event', function(done) {
+    var preChangePromise = new Promise(function(resolve, reject) {
+      document.body.addEventListener('prechange', resolve);
+    });
+
+    var div = document.createElement('div');
+    document.body.appendChild(div);
+    div.innerHTML = '<ons-template id="page1"></ons-template>';
+    div.innerHTML += '<ons-tabbar id="myTabbar"><ons-tab id="tab1" page="page1"></ons-tab></ons-tabbar>';
+
+    setImmediate(function() {
+      var element = document.getElementById('myTabbar');
+      element.setActiveTab(0);
+      done();
+    });
+    return expect(preChangePromise).to.eventually.be.fulfilled;
+  });
+
+  it('has postchange event', function() {
+    var postChangePromise = new Promise(function(resolve, reject) {
+      document.addEventListener('postchange', resolve);
+    });
+
+    var div = document.createElement('div');
+    document.body.appendChild(div);
+    div.innerHTML = '<ons-template id="page1"></ons-template>';
+    div.innerHTML += '<ons-tabbar id="myTabbar"><ons-tab id="tab1" page="page1"></ons-tab></ons-tabbar>';
+
+    var element = document.getElementById('myTabbar');
+    element.setActiveTab(0);
+    return expect(postChangePromise).to.eventually.be.fulfilled;
+  });
 })
