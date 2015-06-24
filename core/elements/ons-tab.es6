@@ -24,6 +24,20 @@ limitations under the License.
   };
   var ModifierUtil = ons._internal.ModifierUtil;
   var util = ons._util;
+  var templateSource = util.createElement(`
+    <div>
+      <input type="radio" style="display: none">
+      <button class="tab-bar__button tab-bar-inner"></button>
+    </div>
+  `);
+  var defaultInnerTemplateSource = util.createElement(`
+    <div>
+      <div class="tab-bar__icon">
+        <ons-icon icon="ion-cloud" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>
+      </div>
+      <div class="tab-bar__label">label</div>
+    </div>
+  `);
 
   class TabElement extends ons._BaseElement {
 
@@ -48,10 +62,10 @@ limitations under the License.
         }
       }
 
-      var template = `
-        <input type="radio" style="display: none">
-        <button class="tab-bar__button tab-bar-inner"></button>`;
-      this.innerHTML = template;
+      var template = templateSource.cloneNode(true);
+      while (template.children[0]) {
+        this.appendChild(template.children[0]);
+      }
       this.classList.add('tab-bar__item');
 
       var button = util.findChild(this, '.tab-bar__button');
@@ -72,11 +86,10 @@ limitations under the License.
 
       var button = util.findChild(this, '.tab-bar__button');
 
-      button.innerHTML = `
-        <div class="tab-bar__icon">
-          <ons-icon icon="ion-cloud" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>
-        </div>
-        <div class="tab-bar__label">label</div>`;
+      var template = defaultInnerTemplateSource.cloneNode(true);
+      while (template.children[0]) {
+        button.appendChild(template.children[0]);
+      }
 
       var self = this;
       var icon = this.getAttribute('icon');
