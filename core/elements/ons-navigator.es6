@@ -320,13 +320,13 @@ limitations under the License.
       this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._bindedOnDeviceBackButton);
 
       window.OnsNavigatorElement.ready(this, () => {
-        if (this._pages.length == 0) {
+        if (this._pages.length === 0) {
           this._linkPageHook.freeze();
           this._compilePageHook.freeze();
 
           if (!this.getAttribute('page')) {
             var html = (this._initialHTML || '').match(/^\s*<ons-page/) ? this._initialHTML : '<ons-page>' + this._initialHTML + '</ons-page>';
-            var element = this._createPageElement(this._initialHTML);
+            var element = this._createPageElement(html);
 
             this._pushPageDOM('', element, {}, function() {});
           } else {

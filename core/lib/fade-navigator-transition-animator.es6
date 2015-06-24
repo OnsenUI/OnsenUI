@@ -19,7 +19,6 @@ limitations under the License.
   'use strict';
 
   var NavigatorTransitionAnimator = ons._internal.NavigatorTransitionAnimator;
-  var util = ons._util;
 
   /**
    * Fade-in screen transition.

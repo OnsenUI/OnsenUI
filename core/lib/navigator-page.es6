@@ -15,7 +15,7 @@ limitations under the License.
 
 */
 
-(ons => {
+((ons) => {
   'use strict';
   var util = ons._util;
 
@@ -68,9 +68,6 @@ limitations under the License.
     }
 
     destroy() {
-      // TODO
-      //this.pageScope.$destroy();
-
       this._pointerEvents.forEach(event => this.element.removeEventListener(event, this._blockEvents), false);
       util.removeElement(this.element);
 
