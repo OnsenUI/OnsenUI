@@ -391,9 +391,22 @@
 
 (function() {
   'use strict';
-  var module = angular.module('onsen');
 
-  module.directive('onsNavigator', function($compile, NavigatorView, $onsen) {
+  var lastReady = window.OnsNavigatorElement.ready;
+  // wait for AngularJS binding initilization.
+  window.OnsNavigatorElement.ready = function(element, callback) {
+    if (angular.element(element).data('ons-navigator')) {
+      lastReady(element, callback);
+    } else {
+      var listen = function() {
+        lastReady(element, callback);
+        element.removeEventListener('ons-navigator:init', listen, false);
+      };
+      element.addEventListener('ons-navigator:init', listen, false);
+    }
+  };
+
+  angular.module('onsen').directive('onsNavigator', function(NavigatorView, $onsen) {
     return {
       restrict: 'E',
 
@@ -403,30 +416,15 @@
       scope: true,
 
       compile: function(element) {
-
-        var html = $onsen.normalizePageHTML(element.html());
-        element.contents().remove();
+        CustomElements.upgrade(element[0]);
 
         return {
           pre: function(scope, element, attrs, controller) {
+            CustomElements.upgrade(element[0]);
             var navigator = new NavigatorView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, navigator);
             $onsen.registerEventHandlers(navigator, 'prepush prepop postpush postpop destroy');
-
-            if (attrs.page) {
-              navigator.pushPage(attrs.page, {});
-            } else {
-              var pageScope = navigator._createPageScope();
-              var pageElement = angular.element(html);
-              var linkScope = $compile(pageElement);
-              var link = function() {
-                linkScope(pageScope);
-              };
-
-              navigator._pushPageDOM('', pageElement, link, pageScope, {});
-              pageElement = null;
-            }
 
             element.data('ons-navigator', navigator);
 

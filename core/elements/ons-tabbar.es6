@@ -55,6 +55,10 @@ limitations under the License.
 
       this._compilePageHook = new ons._internal.AsyncHook();
       this._linkPageHook = new ons._internal.AsyncHook();
+      window.OnsTabbarElement.ready(this, () => {
+        this._linkPageHook.freeze();
+        this._compilePageHook.freeze();
+      });
     }
 
     _compile() {
