@@ -57,9 +57,8 @@ limitations under the License.
     }
 
     createdCallback() {
-      this.style.display = 'none';
-
       this._compile();
+      this.style.display = 'none';
       ModifierUtil.initModifier(this, scheme);
 
       this._mask.style.zIndex = '20000';
@@ -220,6 +219,10 @@ limitations under the License.
     _compile() {
       var templateElement = templateSource.cloneNode(true);
       var content = templateElement.querySelector('.popover__content');
+      var style = this.getAttribute('style');
+      if (style) {
+        this.removeAttribute('style');
+      }
 
       while(this.children[0]) {
         content.appendChild(this.children[0]);
@@ -227,6 +230,10 @@ limitations under the License.
 
       while(templateElement.children[0]) {
         this.appendChild(templateElement.children[0]);
+      }
+
+      if (style) {
+        this._popover.setAttribute('style', style);
       }
     }
 
