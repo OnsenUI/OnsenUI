@@ -545,55 +545,28 @@ limitations under the License.
           throw new Error('Page url must be defined.');
         }
 
-        var popover = angular.element('<ons-popover>'),
-          $onsen = this._getOnsenService();
-
-        angular.element(document.body).append(angular.element(popover));
+        var $onsen = ons._getOnsenService();
 
         return $onsen.getPageHTMLAsync(page).then(function(html) {
           var div = document.createElement('div');
           div.innerHTML = html;
 
           var el = angular.element(div.querySelector('ons-popover'));
-
-          // Copy attributes and insert html.
-          var attrs = el.prop('attributes');
-          for (var i = 0, l = attrs.length; i < l; i++) {
-            popover.attr(attrs[i].name, attrs[i].value); 
-          }
-          popover.html(el.html());
-
-          if (options.parentScope) {
-            ons.$compile(popover)(options.parentScope.$new());
-          }
-          else {
-            ons.compile(popover[0]);
-          }
-
-          if (el.attr('disabled')) {
-            popover.attr('disabled', 'disabled');
-          }
+          CustomElements.upgrade(el[0]);
+          angular.element(document.body).append(el);
 
           var deferred = ons._qService.defer();
-
-          popover.on('ons-popover:init', function(e) {
-            // Copy "style" attribute from parent.
-            var child = popover[0].querySelector('.popover');
-            if (el[0].hasAttribute('style')) {
-              var parentStyle = el[0].getAttribute('style'),
-                childStyle = child.getAttribute('style'),
-                newStyle = (function(a, b) {
-                var c =
-                  (a.substr(-1) === ';' ? a : a + ';') +
-                  (b.substr(-1) === ';' ? b : b + ';');
-                return c;
-              })(parentStyle, childStyle);
-
-              child.setAttribute('style', newStyle);
-            }
-
+          var onload = function(e) {
+            el.off('ons-popover:init', onload);
             deferred.resolve(e.component);
-          });
+          };
+          el.on('ons-popover:init', onload);
+
+          if (options.parentScope) {
+            ons.$compile(el)(options.parentScope.$new());
+          } else {
+            ons.compile(el[0]);
+          }
 
           return deferred.promise;
         });

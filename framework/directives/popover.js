@@ -354,20 +354,18 @@
     return {
       restrict: 'E',
       replace: false,
-      transclude: true,
       scope: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/popover.tpl',
-      compile: function(element, attrs, transclude) {
+      compile: function(element, attrs) {
+        CustomElements.upgrade(element[0]);
         return {
           pre: function(scope, element, attrs) {
-            transclude(scope, function(clone) {
-              angular.element(element[0].querySelector('.popover__content')).append(clone);
-            });
+            CustomElements.upgrade(element[0]);
 
             var popover = new PopoverView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, popover);
             $onsen.registerEventHandlers(popover, 'preshow prehide postshow posthide destroy');
+            $onsen.addModifierMethodsForCustomElements(popover, element);
 
             element.data('ons-popover', popover);
 
@@ -378,18 +376,11 @@
               element = null;
             });
 
-            scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-            $onsen.addModifierMethods(popover, 'popover--*', angular.element(element[0].querySelector('.popover')));
-            $onsen.addModifierMethods(popover, 'popover__content--*', angular.element(element[0].querySelector('.popover__content')));
-
             if ($onsen.isAndroid()) {
               setImmediate(function() {
                 popover.addModifier('android');
               });
             }
-
-            scope.direction = 'up';
-            scope.arrowPosition = 'bottom';
           },
           post: function(scope, element) {
             $onsen.fireComponentEvent(element[0], 'init');
