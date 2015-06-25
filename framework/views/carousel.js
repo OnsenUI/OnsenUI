@@ -27,10 +27,6 @@ limitations under the License.
      */
     var CarouselView = Class.extend({
 
-      _element: undefined,
-      _scope: undefined,
-      _doorLock: undefined,
-
       /**
        * @param {Object} scope
        * @param {jqLite} element
@@ -43,6 +39,26 @@ limitations under the License.
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
+        this._clearDerivingMethods = $onsen.deriveMethods(this, element[0], [
+          'setSwipeable',
+          'isSwipeable',
+          'setAutoScrollRatio',
+          'getAutoScrollRatio',
+          'setActiveCarouselItemIndex',
+          'getActiveCarouselItemIndex',
+          'next',
+          'prev',
+          'setAutoScrollEnabled',
+          'isAutoScrollEnabled',
+          'setDisabled',
+          'isDisabled',
+          'setOverscrollable',
+          'isOverscrollable',
+          'refresh',
+          'first',
+          'last'
+        ]);
+
         this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['refresh', 'postchange', 'overscroll'], function(detail) {
           if (detail.carousel) {
             detail.carousel = this;
@@ -51,76 +67,11 @@ limitations under the License.
         }.bind(this));
       },
 
-      setSwipeable: function(swipeable) {
-        return this._element[0].setSwipeable(swipeable);
-      },
-
-      isSwipeable: function() {
-        return this._element[0].isSwipeable();
-      },
-
-      setAutoScrollRatio: function(ratio) {
-        return this._element[0].setAutoScrollRatio(ratio);
-      },
-
-      getAutoScrollRatio: function(ratio) {
-        return this._element[0].getAutoScrollRatio();
-      },
-
-      setActiveCarouselItemIndex: function(index, options) {
-        return this._element[0].setActiveCarouselItemIndex(index, options);
-      },
-
-      getActiveCarouselItemIndex: function() {
-        return this._element[0].getActiveCarouselItemIndex();
-      },
-
-      next: function(options) {
-        return this._element[0].next(options);
-      },
-
-      prev: function(options) {
-        return this._element[0].prev(options);
-      },
-
-      setAutoScrollEnabled: function(enabled) {
-        return this._element[0].setAutoScrollEnabled(enabled);
-      },
-
-      isAutoScrollEnabled: function(enabled) {
-        return this._element[0].isAutoScrollEnabled(enabled);
-      },
-
-      setDisabled: function(disabled) {
-        return this._element[0].setDisabled(disabled);
-      },
-
-      isDisabled: function() {
-        return this._element[0].isDisabled();
-      },
-
-      setOverscrollable: function(scrollable) {
-        return this._element[0].setOverscrollable(scrollable);
-      },
-
-      isOverscrollable: function() {
-        return this._element[0].isOverscrollable();
-      },
-
-      refresh: function() {
-        return this._element[0].refresh();
-      },
-
-      first: function() {
-        return this._element[0].first();
-      },
-
-      last: function() {
-        return this._element[0].last();
-      },
-
       _destroy: function() {
         this.emit('destroy');
+
+        this._clearDerivingEvents();
+        this._clearDerivingMethods();
 
         this._element = this._scope = this._attrs = null;
       }
