@@ -89,6 +89,46 @@ limitations under the License.
     ons._config.animationsDisabled = false;
   };
 
+  /**
+   * @param {String} page
+   * @param {Object} [options]
+   * @param {Function} [options.link]
+   * @return {Promise}
+   */
+  ons._createPopoverOriginal = function(page, options) {
+    options = options || {};
+
+    if (!page) {
+      throw new Error('Page url must be defined.');
+    }
+
+    return new Promise((resolve, reject) => {
+      ons._internal.getPageHTMLAsync(page, function(error, html) {
+        var div = ons._util.createElement('<div>' + html + '</div>');
+
+        var popover = div.querySelector('ons-popover');
+        if (!popover) {
+          throw new Error(`<ons-popover> element is not provided on "${page}" page.`);
+        }
+        CustomElements.upgrade(popover);
+        document.body.appendChild(popover);
+
+        if (options.link instanceof Function) {
+          options.link(popover);
+        }
+
+        resolve(popover);
+      });
+    });
+  };
+
+  /**
+   * @param {String} page
+   * @param {Object} [options]
+   * @return {Promise}
+   */
+  ons.createPopover = ons._createPopoverOriginal;
+
   function waitDeviceReady() {
     var unlockDeviceReady = ons._readyLock.lock();
     window.addEventListener('DOMContentLoaded', function() {

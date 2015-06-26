@@ -541,35 +541,15 @@ limitations under the License.
       createPopover: function(page, options) {
         options = options || {};
 
-        if (!page) {
-          throw new Error('Page url must be defined.');
-        }
-
-        var $onsen = ons._getOnsenService();
-
-        return $onsen.getPageHTMLAsync(page).then(function(html) {
-          var div = document.createElement('div');
-          div.innerHTML = html;
-
-          var el = angular.element(div.querySelector('ons-popover'));
-          CustomElements.upgrade(el[0]);
-          angular.element(document.body).append(el);
-
-          var deferred = ons._qService.defer();
-          var onload = function(e) {
-            el.off('ons-popover:init', onload);
-            deferred.resolve(e.component);
-          };
-          el.on('ons-popover:init', onload);
-
+        options.link = function(element) {
           if (options.parentScope) {
-            ons.$compile(el)(options.parentScope.$new());
+            ons.$compile(angular.element(element))(options.parentScope.$new());
           } else {
-            ons.compile(el[0]);
+            ons.compile(element);
           }
+        };
 
-          return deferred.promise;
-        });
+        return ons._createPopoverOriginal(page, options);
       },
 
       /**
