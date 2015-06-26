@@ -33,7 +33,7 @@ describe('ons-tabbar', function() {
     expect(element.getTabbarId()).to.be.ok;
   });
 
-  it('has \'position\' property', function(done) {
+  it('has \'position\' attribute', function(done) {
     var div = document.createElement('div');
     document.body.appendChild(div);
     div.innerHTML = '<ons-page><ons-tabbar id="top" position="top"></ons-tabbar>' + '<ons-tabbar id="bottom" position="bottom"></ons-tabbar></ons-page>';
@@ -117,7 +117,7 @@ describe('ons-tabbar', function() {
     expect(element.children[1].classList.contains('ons-tabbar-inner')).to.be.true;
   });
 
-  it('has active tab property', function(done) {
+  it('has \'setActiveTab\' method', function(done) {
     var div = document.createElement('div');
     document.body.appendChild(div);
     div.innerHTML = '<ons-template id="page1"></ons-template><ons-template id="page2"></ons-template>';
@@ -137,8 +137,8 @@ describe('ons-tabbar', function() {
     });
   });
 
-  it('has prechange event', function(done) {
-    var preChangePromise = new Promise(function(resolve, reject) {
+  it('has \'prechange\' event', function(done) {
+    var preChangePromise = new Promise(function(resolve) {
       document.body.addEventListener('prechange', resolve);
     });
 
@@ -155,8 +155,8 @@ describe('ons-tabbar', function() {
     return expect(preChangePromise).to.eventually.be.fulfilled;
   });
 
-  it('has postchange event', function() {
-    var postChangePromise = new Promise(function(resolve, reject) {
+  it('has \'postchange\' event', function() {
+    var postChangePromise = new Promise(function(resolve) {
       document.addEventListener('postchange', resolve);
     });
 
