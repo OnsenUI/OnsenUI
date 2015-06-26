@@ -113,7 +113,7 @@ $ gulp test --specs test/e2e/lazyRepeat/scenarios.js
 
 ## Developing your app
 
-Our [Monaca IDE] makes it super easy to create Onsen UI project, but if you want to use other IDEs, we provide project templates for you in the `project_templates` folder. You will see the instruction on how to run the project there.
+Our [Monaca IDE] makes it super easy to create Onsen UI project, but if you want to use other IDEs, we provide project templates for you in the [`project-templates`](https://github.com/OnsenUI/project-templates) repository. You will see the instruction on how to run the project there.
 
 ## Documentation
 
