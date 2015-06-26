@@ -28,15 +28,6 @@ describe('ons-tabbar', function() {
     expect(element.children[1].classList.contains('tab-bar--fuga')).to.be.true;
   });
 
-  it('accepts \'var\' attribute', function() {
-    var element = new OnsTabbarElement();
-
-    element.setAttribute('var', 'myVar');
-    expect((element).hasAttribute('var')).to.be.true;
-
-    expect(element.getAttribute('var')).to.equal('myVar');
-  });
-
   it('has a unique auto generated id', function() {
     var element = new OnsTabbarElement();
     expect(element.getTabbarId()).to.be.ok;
