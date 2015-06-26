@@ -549,7 +549,9 @@ limitations under the License.
           }
         };
 
-        return ons._createPopoverOriginal(page, options);
+        return ons._createPopoverOriginal(page, options).then(function(popover) {
+          return angular.element(popover).data('ons-popover');
+        });
       },
 
       /**
