@@ -484,15 +484,7 @@ limitations under the License.
      * @return {Array}
      */
     _getCarouselItemElements() {
-      // TODO Fix
-      var nodeList = this.querySelectorAll('ons-carousel-item'),
-        rv = [];
-
-      for (var i = nodeList.length; i--; ) {
-        rv.unshift(nodeList[i]);
-      }
-
-      return rv;
+      return ons._util.arrayFrom(this.querySelectorAll('ons-carousel-item'));
     }
 
     /**
