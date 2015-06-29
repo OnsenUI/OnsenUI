@@ -29,9 +29,9 @@ limitations under the License.
       this._scroll = 0;
       this._lastActiveIndex = 0;
 
-      this._bindedOnDrag = this._onDrag.bind(this);
-      this._bindedOnDragEnd = this._onDragEnd.bind(this);
-      this._bindedOnResize = this._onResize.bind(this);
+      this._boundOnDrag = this._onDrag.bind(this);
+      this._boundOnDragEnd = this._onDragEnd.bind(this);
+      this._boundOnResize = this._onResize.bind(this);
 
       this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
 
@@ -296,18 +296,18 @@ limitations under the License.
         dragMinDistance: 1
       });
 
-      this._gestureDetector.on('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
-      this._gestureDetector.on('dragend', this._bindedOnDragEnd);
+      this._gestureDetector.on('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._boundOnDrag);
+      this._gestureDetector.on('dragend', this._boundOnDragEnd);
 
-      window.addEventListener('resize', this._bindedOnResize, true);
+      window.addEventListener('resize', this._boundOnResize, true);
     }
 
     _removeEventListeners() {
-      this._gestureDetector.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
-      this._gestureDetector.off('dragend', this._bindedOnDragEnd);
+      this._gestureDetector.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._boundOnDrag);
+      this._gestureDetector.off('dragend', this._boundOnDragEnd);
       this._gestureDetector.dispose();
 
-      window.removeEventListener('resize', this._bindedOnResize, true);
+      window.removeEventListener('resize', this._boundOnResize, true);
     }
 
     _tryFirePostChangeEvent() {
@@ -393,7 +393,7 @@ limitations under the License.
     _getTouchEvents() {
       var EVENTS = [
         'drag', 'dragstart', 'dragend',
-        'dragup', 'dragdown', 'dragleft', 
+        'dragup', 'dragdown', 'dragleft',
         'dragright', 'swipe', 'swipeup',
         'swipedown', 'swipeleft', 'swiperight'
       ];
@@ -444,7 +444,7 @@ limitations under the License.
         var size = this._getCarouselItemSize();
 
         for (var i = 0; i < this._getCarouselItemCount(); i++) {
-          if (max >= i * size) { 
+          if (max >= i * size) {
             arr.push(i * size);
           }
         }
@@ -483,15 +483,7 @@ limitations under the License.
      * @return {Array}
      */
     _getCarouselItemElements() {
-      // TODO Fix
-      var nodeList = this.querySelectorAll('ons-carousel-item'),
-        rv = [];
-
-      for (var i = nodeList.length; i--; ) {
-        rv.unshift(nodeList[i]);
-      }
-
-      return rv;
+      return ons._util.arrayFrom(this.querySelectorAll('ons-carousel-item'));
     }
 
     /**
@@ -574,7 +566,7 @@ limitations under the License.
 
     _scrollToKillOverScroll() {
       var duration = 0.4;
-      
+
       if (this._scroll < 0) {
         animit(this._getCarouselItemElements())
           .queue({
@@ -630,7 +622,7 @@ limitations under the License.
 
         if (this._isOverScroll(scroll)) {
           this._scrollToKillOverScroll();
-        } 
+        }
         else {
           if (this.isAutoScrollEnabled()) {
             scroll = this._normalizeScrollPosition(scroll);

@@ -34,7 +34,7 @@ limitations under the License.
     createdCallback() {
       this._doorLock = new DoorLock();
       this._pages = [];
-      this._bindedOnDeviceBackButton = this._onDeviceBackButton.bind(this);
+      this._boundOnDeviceBackButton = this._onDeviceBackButton.bind(this);
       this._isPushing = this._isPopping = false;
 
       this._initialHTML = this.innerHTML;
@@ -317,7 +317,7 @@ limitations under the License.
     }
 
     attachedCallback() {
-      this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._bindedOnDeviceBackButton);
+      this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
 
       window.OnsNavigatorElement.ready(this, () => {
         if (this._pages.length === 0) {
@@ -476,11 +476,15 @@ limitations under the License.
     _emitPrePopEvent() {
       var isCanceled = false;
 
+      var leavePage = this.getCurrentPage();
       var event = new CustomEvent('prepop', {
         bubbles: true,
         detail: {
           navigator: this,
-          currentPage: this.getCurrentPage(),
+          // TODO: currentPage will be deprecated
+          currentPage: leavePage,
+          leavePage: leavePage,
+          enterPage: this._pages[this._pages.length - 2],
           cancel: function() {
             isCanceled = true;
           }

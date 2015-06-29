@@ -29,16 +29,10 @@ limitations under the License.
       ModifierUtil.initModifier(this, scheme);
     }
 
-    attachedCallback() {
-    }
-
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
       }
-    }
-
-    detachedCallback() {
     }
   }
 
