@@ -371,7 +371,7 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   }
 
   gulp.watch(watched, {
-    debounceDelay: 100
+    debounceDelay: 2000
   }, ['prepare', 'jshint']);
 
   // for livereload
