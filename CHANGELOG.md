@@ -37,6 +37,7 @@ v1.3.3-dev
  * ons-scroller: Fixed [#707](https://github.com/OnsenUI/OnsenUI/issues/707).
  * ons-carousel: Fixed a random error when event was undefined.
  * ons-page: Added page life cycle events.
+ * ons-list-item: Added `lock-on-drag` attribute to prevent vertical scrolling when user pans left or right.
 
 v1.3.2
 ----
