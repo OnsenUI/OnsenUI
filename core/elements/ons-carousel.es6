@@ -394,7 +394,7 @@ limitations under the License.
     _getTouchEvents() {
       var EVENTS = [
         'drag', 'dragstart', 'dragend',
-        'dragup', 'dragdown', 'dragleft', 
+        'dragup', 'dragdown', 'dragleft',
         'dragright', 'swipe', 'swipeup',
         'swipedown', 'swipeleft', 'swiperight'
       ];
@@ -445,7 +445,7 @@ limitations under the License.
         var size = this._getCarouselItemSize();
 
         for (var i = 0; i < this._getCarouselItemCount(); i++) {
-          if (max >= i * size) { 
+          if (max >= i * size) {
             arr.push(i * size);
           }
         }
@@ -567,7 +567,7 @@ limitations under the License.
 
     _scrollToKillOverScroll() {
       var duration = 0.4;
-      
+
       if (this._scroll < 0) {
         animit(this._getCarouselItemElements())
           .queue({
@@ -623,7 +623,7 @@ limitations under the License.
 
         if (this._isOverScroll(scroll)) {
           this._scrollToKillOverScroll();
-        } 
+        }
         else {
           if (this.isAutoScrollEnabled()) {
             scroll = this._normalizeScrollPosition(scroll);
