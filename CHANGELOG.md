@@ -37,6 +37,7 @@ v1.3.3-dev
  * ons-scroller: Fixed [#707](https://github.com/OnsenUI/OnsenUI/issues/707).
  * ons-carousel: Fixed a random error when event was undefined.
  * ons-page: Added page life cycle events.
+ * ons-navigator: Added 'leavePage' and 'enterPage' fields for 'prepop' event.
 
 v1.3.2
 ----
