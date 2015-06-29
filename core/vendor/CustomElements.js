@@ -935,7 +935,7 @@ window.CustomElements.addModule(function(scope) {
       }));
     });
   }
-  if (isIE11OrOlder && typeof window.CustomEvent !== "function") {
+  if (typeof window.CustomEvent !== "function") {
     window.CustomEvent = function(inType, params) {
       params = params || {};
       var e = document.createEvent("CustomEvent");
