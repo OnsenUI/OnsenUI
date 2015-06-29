@@ -115,6 +115,20 @@
  *   [ja]ons-modalに紐付いているバックボタンハンドラを取得します。[/ja]
  */
 
+/**
+ * @ngdoc method
+ * @signature registerAnimator(name, Animator)
+ * @param {String} name
+ *   [en]Name of the new animator.[/en]
+ *   [ja][/ja]
+ * @param {Class} Animator
+ *   [en]Extends ModalAnimator class and implements its custom properties. An example is `FadeModalAnimator`.[/en]
+ *   [ja][/ja]
+ * @description
+ *   [en]Register a new custom Animator for Modal under the specified name.[/en]
+ *   [ja][/ja]
+ */
+
 (function() {
   'use strict';
 
