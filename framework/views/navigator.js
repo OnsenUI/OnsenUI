@@ -69,7 +69,7 @@ limitations under the License.
           if (detail.navigator) {
             detail.navigator = this;
           }
-          return detail
+          return detail;
         }.bind(this));
       },
 
