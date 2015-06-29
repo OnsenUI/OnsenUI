@@ -88,13 +88,17 @@
     function firePageInitEvent(element) {
       // TODO: remove dirty fix
       var i = 0, f = function() {
-        if (i++ < 5)  {
+        if (i++ < 15)  {
           if (isAttached(element)) {
             element._tryToFillStatusBar();
             $onsen.fireComponentEvent(element, 'init');
             fireActualPageInitEvent(element);
           } else {
-            setImmediate(f);
+            if (i > 10) {
+              setTimeout(f, 1000 / 60);
+            } else {
+              setImmediate(f);
+            }
           }
         } else {
           throw new Error('Fail to fire "pageinit" event. Attach "ons-page" element to the document after initialization.');

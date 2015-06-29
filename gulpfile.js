@@ -65,7 +65,12 @@ gulp.task('core', function() {
   return gulp.src([
     'core/vendor/winstore-jscompat.js',
     'core/vendor/*.js',
+    'core/lib/animit.es6',
+    'core/lib/doorlock.es6',
+    'core/lib/ons.es6',
+    'core/lib/ons-util.es6',
     'core/lib/modal-animator.es6',
+    'core/lib/navigator-transition-animator.es6',
     'core/lib/*.{es6,js}',
     'core/*.{es6,js}',
     'core/elements/*.{es6,js}',

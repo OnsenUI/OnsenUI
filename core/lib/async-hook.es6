@@ -22,6 +22,7 @@ limitations under the License.
 
     constructor() {
       this._callbacks = [];
+      this._frozen = false;
     }
 
     /**
@@ -32,6 +33,9 @@ limitations under the License.
      *   asyncHook.run(result => console.log(result), 2); // print 4
      */
     add(callback) {
+      if (this._frozen) {
+        throw new Error('This hook is frozen.');
+      }
       this._callbacks.push(callback);
       return callback;
     }
@@ -41,6 +45,9 @@ limitations under the License.
      * @return {Boolean}
      */
     remove(callback) {
+      if (this._frozen) {
+        throw new Error('This hook is frozen.');
+      }
       var index = this._callbacks.indexOf(callback);
       if (index !== -1) {
         this._callbacks.splice(index, 1);
@@ -48,6 +55,13 @@ limitations under the License.
       } else {
         return false;
       }
+    }
+
+    /**
+     * Freeze this hook. AsyncHook deny add() and remove() operation after this method is invoked.
+     */
+    freeze() {
+      this._frozen = true;
     }
 
     /**

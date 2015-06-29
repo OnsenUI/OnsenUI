@@ -29,6 +29,20 @@ limitations under the License.
     return !!ons._config.autoStatusBarFill;
   };
 
+  /**
+   * @param {String} html
+   * @return {String}
+   */
+  ons._internal.normalizePageHTML = (html) => {
+    html = ('' + html).trim();
+
+    if (!html.match(/^<(ons-page|ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
+      html = '<ons-page>' + html + '</ons-page>';
+    }
+    
+    return html;
+  };
+
   ons._internal.waitDOMContentLoaded = (callback) => {
     if (document.readyState === 'loading' || document.readyState == 'uninitialized') {
       window.document.addEventListener('DOMContentLoaded', callback);

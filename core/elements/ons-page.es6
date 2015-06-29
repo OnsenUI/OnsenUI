@@ -75,6 +75,25 @@ limitations under the License.
     }
 
     /**
+     * @return {Boolean}
+     */
+    _canAnimateToolbar() {
+      var toolbar = ons._util.findChild(this, 'ons-toolbar');
+      if (toolbar) {
+        return true;
+      }
+
+      var elements = this._getContentElement().children;
+      for (var i = 0; i < elements.length; i++) {
+        if (elements[i].nodeName.toLowerCase() === 'ons-toolbar' && !elements[i].hasAttribute('inline')) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    /**
      * @return {HTMLElement}
      */
     _getBackgroundElement() {
@@ -187,16 +206,6 @@ limitations under the License.
 
         this.insertBefore(fill, this.children[0]);
       }
-    }
-
-    _show() {
-      this.style.display = 'block';
-      ons._util.fireEvent(this, 'show');
-    }
-
-    _hide() {
-      this.style.display = 'none';
-      ons._util.fireEvent(this, 'hide');
     }
 
     _destroy() {
