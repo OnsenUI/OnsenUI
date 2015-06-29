@@ -53,6 +53,27 @@ limitations under the License.
         /**
          * @param {Object} view
          * @param {Element} element
+         * @param {Array} methodNames
+         * @return {Function} A function that dispose all driving methods.
+         */
+        deriveMethods: function(view, element, methodNames) {
+          methodNames.forEach(function(methodName) {
+            view[methodName] = function() {
+              return element[methodName].apply(element, arguments);
+            };
+          });
+          
+          return function() {
+            methodNames.forEach(function(methodName) {
+              view[methodName] = null;
+            });
+            view = element = null;
+          };
+        },
+
+        /**
+         * @param {Object} view
+         * @param {Element} element
          * @param {Array} eventNames
          * @param {Function} [map]
          * @return {Function} A function that clear all event listeners
@@ -74,7 +95,7 @@ limitations under the License.
             eventNames.forEach(function(eventName, index) {
               element.removeEventListener(eventName, listeners[index], false);
             });
-            view = element = listeners = null;
+            view = element = listeners = map = null;
           };
         },
 
