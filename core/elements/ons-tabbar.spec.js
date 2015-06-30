@@ -36,7 +36,7 @@ describe('ons-tabbar', function() {
   it('has \'position\' attribute', function(done) {
     var div = document.createElement('div');
     document.body.appendChild(div);
-    div.innerHTML = '<ons-page><ons-tabbar id="top" position="top"></ons-tabbar>' + '<ons-tabbar id="bottom" position="bottom"></ons-tabbar></ons-page>';
+    div.innerHTML = '<ons-page><ons-tabbar id="top" position="top"></ons-tabbar><ons-tabbar id="bottom" position="bottom"></ons-tabbar></ons-page>';
 
     var topElement = document.getElementById('top');
     var bottomElement = document.getElementById('bottom');
@@ -64,7 +64,7 @@ describe('ons-tabbar', function() {
   it('can be set visible or invisible', function() {
     var div = document.createElement('div');
     document.body.appendChild(div);
-    div.innerHTML = '<ons-tabbar id="top" position="top"></ons-tabbar>' + '<ons-tabbar id="bottom" position="bottom"></ons-tabbar>';
+    div.innerHTML = '<ons-tabbar id="top" position="top"></ons-tabbar><ons-tabbar id="bottom" position="bottom"></ons-tabbar>';
 
     var topElement = document.getElementById('top');
     var bottomElement = document.getElementById('bottom');
@@ -88,6 +88,7 @@ describe('ons-tabbar', function() {
     expect(bottomElement._getContentElement().style.bottom).to.equal('');
     expect(bottomElement._getTabbarElement().style.display).to.equal('');
   });
+
 
   it('has accepts only \'ons-page\' as current page element', function() {
     var element = new OnsTabbarElement();
@@ -117,7 +118,7 @@ describe('ons-tabbar', function() {
     expect(element.children[1].classList.contains('ons-tabbar-inner')).to.be.true;
   });
 
-  it('has \'setActiveTab\' method', function(done) {
+  it('has active tab property', function(done) {
     var div = document.createElement('div');
     document.body.appendChild(div);
     div.innerHTML = '<ons-template id="page1"></ons-template><ons-template id="page2"></ons-template>';
@@ -137,15 +138,14 @@ describe('ons-tabbar', function() {
     });
   });
 
-  it('has \'prechange\' event', function(done) {
-    var preChangePromise = new Promise(function(resolve) {
+  it('has prechange event', function(done) {
+    var preChangePromise = new Promise(function(resolve, reject) {
       document.body.addEventListener('prechange', resolve);
     });
 
     var div = document.createElement('div');
     document.body.appendChild(div);
-    div.innerHTML = '<ons-template id="page1"></ons-template>';
-    div.innerHTML += '<ons-tabbar id="myTabbar"><ons-tab id="tab1" page="page1"></ons-tab></ons-tabbar>';
+    div.innerHTML = '<ons-template id="page1"></ons-template><ons-tabbar id="myTabbar"><ons-tab id="tab1" page="page1"></ons-tab></ons-tabbar>';
 
     setImmediate(function() {
       var element = document.getElementById('myTabbar');
@@ -155,18 +155,58 @@ describe('ons-tabbar', function() {
     return expect(preChangePromise).to.eventually.be.fulfilled;
   });
 
-  it('has \'postchange\' event', function() {
-    var postChangePromise = new Promise(function(resolve) {
+  it('has postchange event', function() {
+    var postChangePromise = new Promise(function(resolve, reject) {
       document.addEventListener('postchange', resolve);
     });
 
     var div = document.createElement('div');
     document.body.appendChild(div);
-    div.innerHTML = '<ons-template id="page1"></ons-template>';
-    div.innerHTML += '<ons-tabbar id="myTabbar"><ons-tab id="tab1" page="page1"></ons-tab></ons-tabbar>';
+    div.innerHTML = '<ons-template id="page1"></ons-template><ons-tabbar id="myTabbar"><ons-tab id="tab1" page="page1"></ons-tab></ons-tabbar>';
 
     var element = document.getElementById('myTabbar');
     element.setActiveTab(0);
     return expect(postChangePromise).to.eventually.be.fulfilled;
+  });
+
+  it('has reactive event', function() {
+    document.body.innerHTML='';
+    var reactivePromise = new Promise(function(resolve, reject) {
+      document.addEventListener('reactive', resolve);
+    });
+
+    var div = document.createElement('div');
+    document.body.appendChild(div);
+    div.innerHTML = '<ons-template id="page1"></ons-template><ons-tabbar id="myTabbar"><ons-tab no-reload id="tab1" page="page1"></ons-tab></ons-tabbar>';
+
+    setImmediate(function() {
+      var element = document.getElementById('myTabbar');
+      element.setActiveTab(0);
+      element.setActiveTab(0);
+    });
+    return expect(reactivePromise).to.eventually.be.fulfilled;
+  });
+
+  it('has loadPage method', function() {
+    document.body.innerHTML='';
+    var div = document.createElement('div');
+    document.body.appendChild(div);
+    div.innerHTML = '<ons-template id="page1"><ons-page id="p1"></ons-page></ons-template><ons-tabbar id="myTabbar"><ons-tab id="tab1" page="page1"></ons-tab></ons-tabbar>';
+
+    setImmediate(function() {
+      var element = document.getElementById('myTabbar');
+      expect(element.getActiveTabIndex()).to.equal(-1);
+      expect(document.getElementById('p1')).not.to.be.ok;;
+
+      var value = {
+        callback: function() {
+          expect(element.getActiveTabIndex()).not.to.equal(0);
+          expect(element.getActiveTabIndex()).to.equal(-1);
+          expect(document.getElementById('p1')).to.be.ok;
+        }
+      };
+
+      element.loadPage('page1', value);
+    });
   });
 })
