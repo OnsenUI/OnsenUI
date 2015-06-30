@@ -76,21 +76,33 @@
     it('should emit events', function() {
       var tabs = [
         element(by.id('tab1')),
-        element(by.id('tab2'))
+        element(by.id('tab2')),
+        element(by.id('tab3'))
       ];
 
       var timesReactivated = element(by.id('times-reactivated'));
 
       expect(timesReactivated.getText()).toBe('0');
+      tabs[2].click();
+      tabs[0].click();
+      expect(timesReactivated.getText()).toBe('0');
+
+
+      tabs[2].click();
+      tabs[2].click();
       tabs[0].click();
       expect(timesReactivated.getText()).toBe('1');
 
       tabs[1].click();
+      tabs[1].click();
       tabs[0].click();
       expect(timesReactivated.getText()).toBe('1');
 
+      tabs[2].click();
+      tabs[2].click();
+      tabs[2].click();
       tabs[0].click();
-      expect(timesReactivated.getText()).toBe('2');
+      expect(timesReactivated.getText()).toBe('3');
     });
 
     it('should be possible to hide tabs', function() {
