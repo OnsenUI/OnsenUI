@@ -11,6 +11,8 @@ v1.3.3
  * ons-lazy-repeat: Fix bug that caused infinite digest loops.
  * ons-tabbar: Fix broken `persistent` attribute.
  * ons-carousel: Fix bug where items were incorrectly cached.
+ * ons-scroller: Fixed [#707](https://github.com/OnsenUI/OnsenUI/issues/707).
+ * ons-carousel: Fixed a random error when event was undefined.
 
 v1.3.2
 ----
