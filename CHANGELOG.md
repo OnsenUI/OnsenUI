@@ -7,6 +7,7 @@ v1.3.3
  * ons-lazy-repeat: Fixed [#678](https://github.com/OnsenUI/OnsenUI/issues/678).
  * ons-navigator: Added `leavePage` and `enterPage` objects to prepop event.
  * ons-sliding-menu: Fixed broken `swipe-target-width` attribute.
+ * ons-back-button: Prevent popping page twice on double tap.
 
 v1.3.2
 ----
