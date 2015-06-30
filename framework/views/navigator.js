@@ -294,6 +294,10 @@ limitations under the License.
 
         options = options || {};
 
+        if (options.cancelIfRunning && this._isPushing) {
+          return;
+        }
+
         if (options && typeof options != 'object') {
           throw new Error('options must be an object. You supplied ' + options);
         }
@@ -498,6 +502,10 @@ limitations under the License.
        */
       popPage: function(options) {
         options = options || {};
+
+        if (options.cancelIfRunning && this._isPopping) {
+          return;
+        }
 
         this._doorLock.waitUnlock(function() {
           if (this.pages.length <= 1) {

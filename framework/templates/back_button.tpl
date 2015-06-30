@@ -1,6 +1,6 @@
 <span 
   class="toolbar-button--quiet {{modifierTemplater('toolbar-button--*')}}" 
-  ng-click="$root.ons.findParentComponentUntil('ons-navigator', $event).popPage()" 
+  ng-click="$root.ons.findParentComponentUntil('ons-navigator', $event).popPage({cancelIfRunning: true})"
   ng-show="showBackButton"
   style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">
   
