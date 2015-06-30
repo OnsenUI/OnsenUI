@@ -5,6 +5,7 @@ CHANGELOG
 v1.3.3
 ----
  * ons-lazy-repeat: Fixed [#678](https://github.com/OnsenUI/OnsenUI/issues/678).
+ * ons-navigator: Added `leavePage` and `enterPage` objects to prepop event.
 
 v1.3.2
 ----
