@@ -603,18 +603,14 @@ limitations under the License.
        * @return {Array}
        */
       _getCarouselItemElements: function() {
-        if (this._carouselItemElements && this._carouselItemElements.length) {
-          return this._carouselItemElements;
-        }
+        var nodeList = this._element[0].querySelectorAll('ons-carousel-item'),
+          rv = [];
 
-        var nodeList = this._element[0].querySelectorAll('ons-carousel-item');
-
-        this._carouselItemElements = [];
         for (var i = nodeList.length; i--; ) {
-          this._carouselItemElements.unshift(nodeList[i]);
+          rv.unshift(nodeList[i]);
         }
 
-        return this._carouselItemElements;
+        return rv;
       },
 
       /**
