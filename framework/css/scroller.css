@@ -15,13 +15,19 @@ limitations under the License.
 
 */
 
-.ons-scroller {
+ons-scroller {
   display: block;
+  height: 100%;
   overflow: scroll;
-  -webkit-overflow-scrolling: touch;   
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
 }
 
-.ons-scroller::-webkit-scrollbar,
-.ons-scroller__content::-webkit-scrollbar {
+ons-scroller::-webkit-scrollbar {
   display: none;
+}
+
+.ons-scroller__content {
+  height: 100%;
+  overflow: scroll;
 }
