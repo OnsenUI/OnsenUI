@@ -1,4 +1,4 @@
-/*! onsenui - v1.3.2 - 2015-05-12 */
+/*! onsenui - v1.3.3 - 2015-06-30 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -30548,7 +30548,7 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('templates/back_button.tpl',
     '<span \n' +
     '  class="toolbar-button--quiet {{modifierTemplater(\'toolbar-button--*\')}}" \n' +
-    '  ng-click="$root.ons.findParentComponentUntil(\'ons-navigator\', $event).popPage()" \n' +
+    '  ng-click="$root.ons.findParentComponentUntil(\'ons-navigator\', $event).popPage({cancelIfRunning: true})"\n' +
     '  ng-show="showBackButton"\n' +
     '  style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">\n' +
     '  \n' +
@@ -32765,18 +32765,14 @@ limitations under the License.
        * @return {Array}
        */
       _getCarouselItemElements: function() {
-        if (this._carouselItemElements && this._carouselItemElements.length) {
-          return this._carouselItemElements;
-        }
+        var nodeList = this._element[0].querySelectorAll('ons-carousel-item'),
+          rv = [];
 
-        var nodeList = this._element[0].querySelectorAll('ons-carousel-item');
-
-        this._carouselItemElements = [];
         for (var i = nodeList.length; i--; ) {
-          this._carouselItemElements.unshift(nodeList[i]);
+          rv.unshift(nodeList[i]);
         }
 
-        return this._carouselItemElements;
+        return rv;
       },
 
       /**
@@ -34406,7 +34402,7 @@ limitations under the License.
         this._renderedElements = {};
         this._addEventListeners();
 
-        this._scope.$watch(this._onChange.bind(this));
+        this._scope.$watch(this._countItems.bind(this), this._onChange.bind(this));
 
         this._scope.$on('$destroy', this._destroy.bind(this));
         this._onChange();
@@ -34581,7 +34577,7 @@ limitations under the License.
 
         var items = [];
         for (var i = startIndex; i < cnt && topPosition < 4 * window.innerHeight; i++) {
-          var h = this._getItemHeight();
+          var h = this._getItemHeight(i);
 
           if (i >= this._itemHeightSum.length) {
             this._itemHeightSum = this._itemHeightSum.concat(new Array(100));
@@ -35159,8 +35155,8 @@ limitations under the License.
           throw new Error('options must be an object. You supplied ' + options);
         }
 
-        if (this.pages.length === 0) {
-          return this.pushPage.apply(this, arguments);
+        if (index === this.pages.length) {
+          return this.pushPage.apply(this, [].slice.call(arguments, 1));
         }
 
         this._doorLock.waitUnlock(function() {
@@ -35228,6 +35224,10 @@ limitations under the License.
         }
 
         options = options || {};
+
+        if (options.cancelIfRunning && this._isPushing) {
+          return;
+        }
 
         if (options && typeof options != 'object') {
           throw new Error('options must be an object. You supplied ' + options);
@@ -35410,9 +35410,12 @@ limitations under the License.
        */
       _emitPrePopEvent: function() {
         var isCanceled = false;
+        var leavePage = this.getCurrentPage();
         var prePopEvent = {
           navigator: this,
-          currentPage: this.getCurrentPage(),
+          currentPage: leavePage,
+          leavePage: leavePage,
+          enterPage: this.pages[this.pages.length - 2],
           cancel: function() {
             isCanceled = true;
           }
@@ -35430,6 +35433,10 @@ limitations under the License.
        */
       popPage: function(options) {
         options = options || {};
+
+        if (options.cancelIfRunning && this._isPopping) {
+          return;
+        }
 
         this._doorLock.waitUnlock(function() {
           if (this.pages.length <= 1) {
@@ -38260,6 +38267,10 @@ limitations under the License.
           case 'swipeleft':
             event.gesture.preventDefault();
 
+            if (this._logic.isClosed() && !this._isInsideSwipeTargetArea(event)) {
+              return;
+            }
+
             if (this._isRightMenu) {
               this.open();
             } else {
@@ -38271,6 +38282,10 @@ limitations under the License.
 
           case 'swiperight':
             event.gesture.preventDefault();
+
+            if (this._logic.isClosed() && !this._isInsideSwipeTargetArea(event)) {
+              return;
+            }
 
             if (this._isRightMenu) {
               this.close();
@@ -39146,7 +39161,7 @@ limitations under the License.
         var previousTabItem = this._tabItems[this.getActiveTabIndex()];
         var selectedTabItem = this._tabItems[index];
 
-        if((typeof selectedTabItem.noReload !== 'undefined' || typeof selectedTabItem.isPersistent()) &&
+        if ((typeof selectedTabItem.noReload !== 'undefined' || selectedTabItem.isPersistent()) &&
             index === this.getActiveTabIndex()) {
           this.emit('reactive', {
             index: index,

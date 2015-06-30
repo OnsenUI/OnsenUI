@@ -11,6 +11,7 @@ v1.3.3
  * ons-lazy-repeat: Fix bug that caused infinite digest loops.
  * ons-tabbar: Fix broken `persistent` attribute.
  * ons-carousel: Fix bug where items were incorrectly cached.
+ * ons-navigator: Fix bug in `insertPage()` when pages are inserted on top.
 
 v1.3.2
 ----

@@ -6,7 +6,7 @@ module.run(['$templateCache', function($templateCache) {
   $templateCache.put('templates/back_button.tpl',
     '<span \n' +
     '  class="toolbar-button--quiet {{modifierTemplater(\'toolbar-button--*\')}}" \n' +
-    '  ng-click="$root.ons.findParentComponentUntil(\'ons-navigator\', $event).popPage()" \n' +
+    '  ng-click="$root.ons.findParentComponentUntil(\'ons-navigator\', $event).popPage({cancelIfRunning: true})"\n' +
     '  ng-show="showBackButton"\n' +
     '  style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">\n' +
     '  \n' +
