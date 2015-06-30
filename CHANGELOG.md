@@ -5,7 +5,6 @@ CHANGELOG
 v1.3.3-dev
 ----
  * core: Added more customizable animations.
- * ons-sliding-menu: Fixed [#584](https://github.com/OnsenUI/OnsenUI/issues/584).
  * core: [BC Break] Changed interfaces for registering custom animators on `ons-navigator`, `ons-dialog`, `ons-alert-dialog`, `ons-dialog`, `ons-sliding-menu`, `ons-popover` and `ons-tabbar`.
  * core: Removed unneeded iScroll library.
  * ons-scroller: [BC Break] Removed undocumented attributes and simplified DOM structure in ons-scroller elements.
@@ -20,24 +19,28 @@ v1.3.3-dev
  * ons-sliding-menu: Now supports `ngController` directive.
  * ons-split-view: Now support `ngController` directive.
  * ons-tabbar: Added `'slide'` animation.
- * ons-navigator: Fixed [#628](https://github.com/OnsenUI/OnsenUI/issues/628).
  * ons: Added `disableAnimations` and `enableAnimations` to control animations display.
- * ons-lazy-repeat: Fixed issue where `$http` calls caused an infinite series of digest loops. Fixed [#621](https://github.com/OnsenUI/OnsenUI/issues/621).
  * ons-loading-placeholder: Added `ons.resolveLoadingPlaceholder()` to delay resolving the placeholder.
  * ons-page: [BC Break] Removed undocumented several methods on `ons-page` component.
  * css-components: Stylus components don't rely on custom functions anymore.
- * ons-tabbar: Fixed [#661](https://github.com/OnsenUI/OnsenUI/issues/661).
  * ons-navigator: Added `options.refresh` parameter for `popPage()`.
  * ons-carousel: Carousel will now apply the specified padding to the items.
- * ons-carousel: Fixed [#651](https://github.com/OnsenUI/OnsenUI/issues/651).
- * ons-lazy-repeat: Fixed [#678](https://github.com/OnsenUI/OnsenUI/issues/678).
  * ons-icon: Fixed [#687](https://github.com/OnsenUI/OnsenUI/issues/687).
- * ons-navigator: Fixed [#691](https://github.com/OnsenUI/OnsenUI/issues/691).
  * ons-icon: Fixed [#688](https://github.com/OnsenUI/OnsenUI/issues/688).
+ * ons-page: Added page life cycle events.
+
+v1.3.3
+----
+ * ons-lazy-repeat: Fixed [#678](https://github.com/OnsenUI/OnsenUI/issues/678).
+ * ons-navigator: Added `leavePage` and `enterPage` objects to prepop event.
+ * ons-sliding-menu: Fixed broken `swipe-target-width` attribute.
+ * ons-back-button: Prevent popping page twice on double tap.
+ * ons-lazy-repeat: Fix bug that caused infinite digest loops.
+ * ons-tabbar: Fix broken `persistent` attribute.
+ * ons-carousel: Fix bug where items were incorrectly cached.
+ * ons-navigator: Fix bug in `insertPage()` when pages are inserted on top.
  * ons-scroller: Fixed [#707](https://github.com/OnsenUI/OnsenUI/issues/707).
  * ons-carousel: Fixed a random error when event was undefined.
- * ons-page: Added page life cycle events.
- * ons-navigator: Added 'leavePage' and 'enterPage' fields for 'prepop' event.
 
 v1.3.2
 ----
