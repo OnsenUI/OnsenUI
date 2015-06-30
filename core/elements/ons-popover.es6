@@ -36,7 +36,6 @@ limitations under the License.
     </div>
   `);
   var AnimatorFactory = ons._internal.AnimatorFactory;
-  var AsyncHook = ons._internal.AsyncHook;
 
   class PopoverElement extends ons._BaseElement {
 
