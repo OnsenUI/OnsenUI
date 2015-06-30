@@ -10,6 +10,7 @@ v1.3.3
  * ons-back-button: Prevent popping page twice on double tap.
  * ons-lazy-repeat: Fix bug that caused infinite digest loops.
  * ons-tabbar: Fix broken `persistent` attribute.
+ * ons-carousel: Fix bug where items were incorrectly cached.
 
 v1.3.2
 ----
