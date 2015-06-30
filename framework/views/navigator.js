@@ -475,9 +475,12 @@ limitations under the License.
        */
       _emitPrePopEvent: function() {
         var isCanceled = false;
+        var leavePage = this.getCurrentPage();
         var prePopEvent = {
           navigator: this,
-          currentPage: this.getCurrentPage(),
+          currentPage: leavePage,
+          leavePage: leavePage,
+          enterPage: this.pages[this.pages.length - 2],
           cancel: function() {
             isCanceled = true;
           }
