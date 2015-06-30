@@ -8,6 +8,7 @@ v1.3.3
  * ons-navigator: Added `leavePage` and `enterPage` objects to prepop event.
  * ons-sliding-menu: Fixed broken `swipe-target-width` attribute.
  * ons-back-button: Prevent popping page twice on double tap.
+ * ons-lazy-repeat: Fix bug that caused infinite digest loops.
 
 v1.3.2
 ----
