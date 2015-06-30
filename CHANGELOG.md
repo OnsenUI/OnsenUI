@@ -12,6 +12,8 @@ v1.3.3
  * ons-tabbar: Fix broken `persistent` attribute.
  * ons-carousel: Fix bug where items were incorrectly cached.
  * ons-navigator: Fix bug in `insertPage()` when pages are inserted on top.
+ * ons-scroller: Fixed [#707](https://github.com/OnsenUI/OnsenUI/issues/707).
+ * ons-carousel: Fixed a random error when event was undefined.
 
 v1.3.2
 ----
