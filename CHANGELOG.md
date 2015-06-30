@@ -38,6 +38,7 @@ v1.3.3-dev
  * ons-carousel: Fixed a random error when event was undefined.
  * ons-page: Added page life cycle events.
  * ons-list-item: Added `lock-on-drag` attribute to prevent vertical scrolling when user pans left or right.
+ * ons-navigator: Added 'leavePage' and 'enterPage' fields for 'prepop' event.
 
 v1.3.2
 ----

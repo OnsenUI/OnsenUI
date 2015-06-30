@@ -32,42 +32,33 @@
     return {
       restrict: 'E',
       replace: false,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/back_button.tpl',
 
-      // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclude.
-      transclude: true,
-      scope: true,
+      compile: function(element, attrs) {
+        CustomElements.upgrade(element[0]);
 
-      link: {
-        pre: function(scope, element, attrs, controller, transclude) {
-          var backButton = GenericView.register(scope, element, attrs, {viewKey: 'ons-back-button'});
+        return {
+          pre: function(scope, element, attrs, controller, transclude) {
+            CustomElements.upgrade(element[0]);
+            var button = GenericView.register(scope, element, attrs, {
+              viewKey: 'ons-back-button'
+            });
 
-          scope.$on('$destroy', function() {
-            backButton._events = undefined;
-            $onsen.removeModifierMethods(backButton);
-            element = null;
-          });
+            scope.$on('$destroy', function() {
+              backButton._events = undefined;
+              $onsen.removeModifierMethods(backButton);
+              element = null;
+            });
 
-          scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
-          $onsen.addModifierMethods(backButton, 'toolbar-button--*', element.children());
-
-          transclude(scope, function(clonedElement) {
-            if (clonedElement[0]) {
-              element[0].querySelector('.back-button__label').appendChild(clonedElement[0]);
-            }
-          });
-
-          ComponentCleaner.onDestroy(scope, function() {
-            ComponentCleaner.destroyScope(scope);
-            ComponentCleaner.destroyAttributes(attrs);
-            element = scope = attrs = null;
-          });
-        },
-        post: function(scope, element) {
-          $onsen.fireComponentEvent(element[0], 'init');
-        }
+            ComponentCleaner.onDestroy(scope, function() {
+              ComponentCleaner.destroyScope(scope);
+              ComponentCleaner.destroyAttributes(attrs);
+              element = scope = attrs = null;
+            });
+          },
+          post: function(scope, element) {
+            $onsen.fireComponentEvent(element[0], 'init');
+          }
+        };
       }
     };
   });

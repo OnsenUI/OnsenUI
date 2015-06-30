@@ -24,6 +24,12 @@ limitations under the License.
     'switch__toggle': 'switch--*__toggle'
   };
   var ModifierUtil = ons._internal.ModifierUtil;
+  var templateSource = ons._util.createElement(`
+    <div>
+      <input type="checkbox" class="switch__input">
+      <div class="switch__toggle"></div>
+    </div>
+  `);
 
   var ExtendableLabelElement;
   if (typeof HTMLLabelElement !== 'function') {
@@ -93,10 +99,10 @@ limitations under the License.
 
     _compile() {
       this.classList.add('switch');
-      this.innerHTML = `
-        <input type="checkbox" class="switch__input">
-        <div class="switch__toggle"></div>
-      `;
+      var template = templateSource.cloneNode(true);
+      while (template.children[0]) {
+        this.appendChild(template.children[0]);
+      }
       this._getCheckbox().setAttribute('name', generateId());
     }
 
