@@ -552,8 +552,10 @@ window.ons = (function(){
           }
           alertDialog.html(el.html());
 
+          var parentScope;
           if (options.parentScope) {
-            ons.$compile(alertDialog)(options.parentScope.$new());
+            parentScope = options.parentScope.$new();
+            ons.$compile(alertDialog)(parentScope);
           }
           else {
             ons.compile(alertDialog[0]);
@@ -561,6 +563,10 @@ window.ons = (function(){
 
           if (el.attr('disabled')) {
             alertDialog.attr('disabled', 'disabled');
+          }
+
+          if (parentScope) {
+            alertDialog.data('ons-alert-dialog')._parentScope = parentScope;
           }
 
           return  alertDialog.data('ons-alert-dialog');
