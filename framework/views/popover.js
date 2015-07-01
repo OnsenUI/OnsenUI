@@ -288,7 +288,12 @@ limitations under the License.
        * Destroy the popover and remove it from the DOM tree.
        */
       destroy: function() {
-        this._scope.$destroy();
+        if (this._parentScope) {
+          this._parentScope.$destroy();
+          this._parentScope = null;
+        } else {
+          this._scope.$destroy();
+        }
       },
 
       _destroy: function() {

@@ -450,8 +450,10 @@ limitations under the License.
           }
           alertDialog.html(el.html());
 
+          var parentScope;
           if (options.parentScope) {
-            ons.$compile(alertDialog)(options.parentScope.$new());
+            parentScope = options.parentScope.$new();
+            ons.$compile(alertDialog)(parentScope);
           }
           else {
             ons.compile(alertDialog[0]);
@@ -459,6 +461,10 @@ limitations under the License.
 
           if (el.attr('disabled')) {
             alertDialog.attr('disabled', 'disabled');
+          }
+
+          if (parentScope) {
+            alertDialog.data('ons-alert-dialog')._parentScope = parentScope;
           }
 
           return  alertDialog.data('ons-alert-dialog');
@@ -496,8 +502,10 @@ limitations under the License.
           }
           dialog.html(el.html());
 
+          var parentScope;
           if (options.parentScope) {
-            ons.$compile(dialog)(options.parentScope.$new());
+            parentScope = options.parentScope.$new();
+            ons.$compile(dialog)(parentScope);
           }
           else {
             ons.compile(dialog[0]);
@@ -523,6 +531,10 @@ limitations under the License.
               })(parentStyle, childStyle);
 
               child.setAttribute('style', newStyle);
+            }
+
+            if (parentScope) {
+              e.component._parentScope = parentScope;
             }
 
             deferred.resolve(e.component);
@@ -563,8 +575,10 @@ limitations under the License.
           }
           popover.html(el.html());
 
+          var parentScope;
           if (options.parentScope) {
-            ons.$compile(popover)(options.parentScope.$new());
+            parentScope = options.parentScope.$new();
+            ons.$compile(popover)(parentScope);
           }
           else {
             ons.compile(popover[0]);
@@ -590,6 +604,10 @@ limitations under the License.
               })(parentStyle, childStyle);
 
               child.setAttribute('style', newStyle);
+            }
+
+            if (parentScope) {
+              e.component._parentScope = parentScope;
             }
 
             deferred.resolve(e.component);
