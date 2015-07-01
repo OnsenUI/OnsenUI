@@ -42,6 +42,15 @@
  *   [ja]各要素の表現を指定します。[/ja]
  */
 
+/**
+ * @ngdoc attribute
+ * @name lock-on-drag
+ * @type {String}
+ * @description
+ *   [en]Prevent vertical scrolling when the user drags horizontally.[/en]
+ *   [ja][/ja]
+ */
+
 (function() {
   'use strict';
 

@@ -28,6 +28,7 @@ v1.3.4-dev
  * ons-icon: Fixed [#687](https://github.com/OnsenUI/OnsenUI/issues/687).
  * ons-icon: Fixed [#688](https://github.com/OnsenUI/OnsenUI/issues/688).
  * ons-page: Added page life cycle events.
+ * ons-list-item: Added `lock-on-drag` attribute to prevent vertical scrolling when user pans left or right.
 
 v1.3.3
 ----
