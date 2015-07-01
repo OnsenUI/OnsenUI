@@ -35,7 +35,10 @@ limitations under the License.
     }
 
     attachedCallback() {
-      ons._util.fireEvent(this, 'init');
+      var event = new CustomEvent('init', {
+        bubbles: true
+      });
+      this.dispatchEvent(event);
     }
 
     /**
@@ -209,7 +212,10 @@ limitations under the License.
     }
 
     _destroy() {
-      ons._util.fireEvent(this, 'destroy');
+      var event = new CustomEvent('destroy', {
+        bubbles: true
+      });
+      this.dispatchEvent(event);
 
       if (this.getDeviceBackButtonHandler()) {
         this.getDeviceBackButtonHandler().destroy();

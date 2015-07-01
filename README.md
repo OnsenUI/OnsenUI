@@ -20,8 +20,9 @@ Our [Monaca IDE] fully supports Onsen UI plugin.
 
 Onsen UI is tested with the following browsers and mobile OS.
 
- * Android4.0.2+
+ * Android 4.0.2+
  * iOS7+
+ * Windows Phone 8.1+
  * Google Chrome
  * Safari
 
