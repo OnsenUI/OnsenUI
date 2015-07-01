@@ -95,12 +95,12 @@ describe('ons-tabbar', function() {
     var page = new OnsPageElement();
     element._getContentElement().appendChild(page);
     expect(element._getCurrentPageElement().classList.contains('page')).to.be.true;
-    expect(element._getCurrentPageElement).not.to.throw('Invalid state: page element must be a "ons-page" element.');
+    expect(element._getCurrentPageElement.bind(element)).not.to.throw('Invalid state: page element must be a "ons-page" element.');
 
     element._getContentElement().removeChild(element._getContentElement().querySelector('ons-page'));
     var button = new OnsButtonElement;
     element._getContentElement().appendChild(button);
-    expect(element._getCurrentPageElement).to.throw('Invalid state: page element must be a "ons-page" element.');
+    expect(element._getCurrentPageElement.bind(element)).to.throw('Invalid state: page element must be a "ons-page" element.');
   });
 
   it('has two children by default', function() {
@@ -151,7 +151,7 @@ describe('ons-tabbar', function() {
       var element = document.getElementById('myTabbar');
       element.setActiveTab(0);
     });
-    
+
     return expect(preChangePromise).to.eventually.be.fulfilled;
   });
 
@@ -171,7 +171,7 @@ describe('ons-tabbar', function() {
 
   it('has reactive event', function() {
     document.body.innerHTML = '';
-    
+
     var reactivePromise = new Promise(function(resolve) {
       document.addEventListener('reactive', resolve);
     });
@@ -185,27 +185,27 @@ describe('ons-tabbar', function() {
       element.setActiveTab(0);
       element.setActiveTab(0);
     });
-    
+
     return expect(reactivePromise).to.eventually.be.fulfilled;
   });
 
   it('has loadPage method', function(done) {
     document.body.innerHTML = '';
-    
+
     var div = document.createElement('div');
-    div.innerHTML = '<ons-template id="page1"><ons-page id="p1"></ons-page></ons-template><ons-tabbar id="myTabbar"><ons-tab id="tab1" page="page1"></ons-tab></ons-tabbar>';
     document.body.appendChild(div);
+    div.innerHTML = '<ons-template id="page1"><ons-page id="p1"></ons-page></ons-template><ons-tabbar id="myTabbar"><ons-tab id="tab1" page="page1"></ons-tab></ons-tabbar>';
 
     setImmediate(function() {
       var element = document.getElementById('myTabbar');
       expect(element.getActiveTabIndex()).to.equal(-1);
-      expect(document.getElementById('p1')).not.to.be.ok;;
+      expect(document.getElementById('p1')).to.be.ok;;
 
       var value = {
         callback: function() {
           expect(element.getActiveTabIndex()).not.to.equal(0);
           expect(element.getActiveTabIndex()).to.equal(-1);
-          expect(document.getElementById('p1')).to.be.ok;
+          expect(document.getElementById('p1')).not.to.be.ok;
           done();
         }
       };
