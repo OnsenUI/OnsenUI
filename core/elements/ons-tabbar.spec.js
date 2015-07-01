@@ -98,7 +98,7 @@ describe('ons-tabbar', function() {
     expect(element._getCurrentPageElement.bind(element)).not.to.throw('Invalid state: page element must be a "ons-page" element.');
 
     element._getContentElement().removeChild(element._getContentElement().querySelector('ons-page'));
-    var button = new OnsButtonElement;
+    var button = new OnsButtonElement();
     element._getContentElement().appendChild(button);
     expect(element._getCurrentPageElement.bind(element)).to.throw('Invalid state: page element must be a "ons-page" element.');
   });
