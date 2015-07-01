@@ -375,6 +375,9 @@ limitations under the License.
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
       }
+      else if (name === 'direction') {
+        this._bindedOnChange();
+      }
     }
 
     /**
