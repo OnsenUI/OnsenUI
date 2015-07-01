@@ -223,11 +223,11 @@ limitations under the License.
         this.removeAttribute('style');
       }
 
-      while(this.children[0]) {
-        content.appendChild(this.children[0]);
+      while (this.childNodes[0]) {
+        content.appendChild(this.childNodes[0]);
       }
 
-      while(templateElement.children[0]) {
+      while (templateElement.children[0]) {
         this.appendChild(templateElement.children[0]);
       }
 
