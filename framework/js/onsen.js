@@ -598,8 +598,10 @@ window.ons = (function(){
           }
           dialog.html(el.html());
 
+          var parentScope;
           if (options.parentScope) {
-            ons.$compile(dialog)(options.parentScope.$new());
+            parentScope = options.parentScope.$new();
+            ons.$compile(dialog)(parentScope);
           }
           else {
             ons.compile(dialog[0]);
@@ -625,6 +627,10 @@ window.ons = (function(){
               })(parentStyle, childStyle);
 
               child.setAttribute('style', newStyle);
+            }
+
+            if (parentScope) {
+              e.component._parentScope = parentScope;
             }
 
             deferred.resolve(e.component);
