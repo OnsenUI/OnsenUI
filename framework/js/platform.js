@@ -29,10 +29,10 @@ limitations under the License.
  * @signature select(platform)
  * @param  {string} platform Name of the platform.
  *   [en]Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".[/en]
- *   [ja][/ja]
+ *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "wp"のいずれかを指定します。[/ja]
  * @description 
  *   [en]Sets the platform used to render the elements. Useful for testing.[/en]
- *   [ja][/ja]
+ *   [ja]要素を描画するために利用するプラットフォーム名を設定します。テストに便利です。[/ja]
  */
 
 /**
