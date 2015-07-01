@@ -130,14 +130,6 @@ limitations under the License.
       arrow.style.top = '';
       arrow.style.left = '';
 
-      // This is the difference between the side and the hypothenuse of the arrow.
-      var diff = (function(x) {
-        return (x / 2) * Math.sqrt(2) - x / 2;
-      })(parseInt(window.getComputedStyle(arrow).width));
-
-      // This is the limit for the arrow. If it's moved further than this it's outside the popover.
-      var limit = margin + radius + diff;
-
       this._setDirection(direction);
 
       // Position popover next to the target.
@@ -158,6 +150,14 @@ limitations under the License.
       }
 
       own = el.getBoundingClientRect();
+
+      // This is the difference between the side and the hypothenuse of the arrow.
+      var diff = (function(x) {
+        return (x / 2) * Math.sqrt(2) - x / 2;
+      })(parseInt(window.getComputedStyle(arrow).width));
+
+      // This is the limit for the arrow. If it's moved further than this it's outside the popover.
+      var limit = margin + radius + diff;
 
       // Keep popover inside window and arrow inside popover.
       if (['left', 'right'].indexOf(direction) > -1) {
@@ -283,7 +283,6 @@ limitations under the License.
           var animator = this._animatorFactory.newAnimator(options);
           animator.show(this, () => {
             this._visible = true;
-            this._positionPopover(target);
             unlock();
 
             var event = new CustomEvent('postshow', {
