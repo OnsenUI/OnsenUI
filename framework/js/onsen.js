@@ -575,8 +575,10 @@ limitations under the License.
           }
           popover.html(el.html());
 
+          var parentScope;
           if (options.parentScope) {
-            ons.$compile(popover)(options.parentScope.$new());
+            parentScope = options.parentScope.$new();
+            ons.$compile(popover)(parentScope);
           }
           else {
             ons.compile(popover[0]);
@@ -602,6 +604,10 @@ limitations under the License.
               })(parentStyle, childStyle);
 
               child.setAttribute('style', newStyle);
+            }
+
+            if (parentScope) {
+              e.component._parentScope = parentScope;
             }
 
             deferred.resolve(e.component);
