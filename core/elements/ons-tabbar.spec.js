@@ -128,10 +128,10 @@ describe('ons-tabbar', function() {
       var element = document.getElementById('myTabbar');
       expect(element.getActiveTabIndex()).to.equal(-1);
 
-      document.getElementById("tab1").click();
+      document.getElementById('tab1').click();
       expect(element.getActiveTabIndex()).to.equal(0);
 
-      document.getElementById("tab2").click();
+      document.getElementById('tab2').click();
       expect(element.getActiveTabIndex()).to.equal(1);
 
       done();
