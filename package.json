@@ -72,6 +72,7 @@
     "gulp-protractor": "0.0.12",
     "gulp-rename": "^1.2.0",
     "gulp-shell": "^0.4.0",
+    "gulp-sourcemaps": "^1.5.2",
     "gulp-stylus": "^2.0.1",
     "gulp-uglify": "^1.1.0",
     "gulp-unzip": "^0.1.3",
