@@ -677,8 +677,10 @@ window.ons = (function(){
           }
           popover.html(el.html());
 
+          var parentScope;
           if (options.parentScope) {
-            ons.$compile(popover)(options.parentScope.$new());
+            parentScope = options.parentScope.$new();
+            ons.$compile(popover)(parentScope);
           }
           else {
             ons.compile(popover[0]);
@@ -704,6 +706,10 @@ window.ons = (function(){
               })(parentStyle, childStyle);
   
               child.setAttribute('style', newStyle);
+            }
+
+            if (parentScope) {
+              e.component._parentScope = parentScope;
             }
 
             deferred.resolve(e.component);
