@@ -157,7 +157,7 @@ limitations under the License.
       })(parseInt(window.getComputedStyle(arrow).width));
 
       // This is the limit for the arrow. If it's moved further than this it's outside the popover.
-      var limit = margin + radius + diff;
+      var limit = margin + radius + diff + 2;
 
       // Keep popover inside window and arrow inside popover.
       if (['left', 'right'].indexOf(direction) > -1) {
