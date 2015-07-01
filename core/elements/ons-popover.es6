@@ -177,6 +177,9 @@ limitations under the License.
           el.style.left = (window.innerWidth - own.width - margin) + 'px';
         }
       }
+
+      // Prevent animit from restoring the style.
+      el.removeAttribute('data-animit-orig-style');
     }
 
     _positionPopover(target) {
