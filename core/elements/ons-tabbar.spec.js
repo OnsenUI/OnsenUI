@@ -177,8 +177,8 @@ describe('ons-tabbar', function() {
     });
 
     var div = document.createElement('div');
-    div.innerHTML = '<ons-template id="page1"></ons-template><ons-tabbar id="myTabbar"><ons-tab no-reload id="tab1" page="page1"></ons-tab></ons-tabbar>';
     document.body.appendChild(div);
+    div.innerHTML = '<ons-template id="page1"></ons-template><ons-tabbar id="myTabbar"><ons-tab no-reload id="tab1" page="page1"></ons-tab></ons-tabbar>';
 
     setImmediate(function() {
       var element = document.getElementById('myTabbar');
@@ -199,13 +199,12 @@ describe('ons-tabbar', function() {
     setImmediate(function() {
       var element = document.getElementById('myTabbar');
       expect(element.getActiveTabIndex()).to.equal(-1);
-      expect(document.getElementById('p1')).to.be.ok;;
+      expect(document.getElementById('p1')).not.to.be.ok;
 
       var value = {
         callback: function() {
-          expect(element.getActiveTabIndex()).not.to.equal(0);
           expect(element.getActiveTabIndex()).to.equal(-1);
-          expect(document.getElementById('p1')).not.to.be.ok;
+          expect(document.getElementById('p1')).to.be.ok;
           done();
         }
       };
@@ -213,4 +212,4 @@ describe('ons-tabbar', function() {
       element.loadPage('page1', value);
     });
   });
-})
+});
