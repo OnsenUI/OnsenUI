@@ -95,12 +95,12 @@ describe('ons-tabbar', function() {
     var page = new OnsPageElement();
     element._getContentElement().appendChild(page);
     expect(element._getCurrentPageElement().classList.contains('page')).to.be.true;
-    expect(function(){element._getCurrentPageElement()}).not.to.throw('Invalid state: page element must be a "ons-page" element.');
+    expect(element._getCurrentPageElement).not.to.throw('Invalid state: page element must be a "ons-page" element.');
 
     element._getContentElement().removeChild(element._getContentElement().querySelector('ons-page'));
     var button = new OnsButtonElement;
     element._getContentElement().appendChild(button);
-    expect(function(){element._getCurrentPageElement()}).to.throw('Invalid state: page element must be a "ons-page" element.');
+    expect(element._getCurrentPageElement).to.throw('Invalid state: page element must be a "ons-page" element.');
   });
 
   it('has two children by default', function() {
@@ -121,8 +121,8 @@ describe('ons-tabbar', function() {
   it('has active tab property', function(done) {
     var div = document.createElement('div');
     document.body.appendChild(div);
-    div.innerHTML = '<ons-template id="page1"></ons-template><ons-template id="page2"></ons-template>';
-    div.innerHTML += '<ons-tabbar id="myTabbar"><ons-tab id="tab1" page="page1"></ons-tab><ons-tab id="tab2" page="page2"></ons-tab></ons-tabbar>';
+    div.innerHTML = '<ons-template id="page1"></ons-template><ons-template id="page2"></ons-template>' +
+      '<ons-tabbar id="myTabbar"><ons-tab id="tab1" page="page1"></ons-tab><ons-tab id="tab2" page="page2"></ons-tab></ons-tabbar>';
 
     setImmediate(function() {
       var element = document.getElementById('myTabbar');
@@ -138,8 +138,8 @@ describe('ons-tabbar', function() {
     });
   });
 
-  it('has prechange event', function(done) {
-    var preChangePromise = new Promise(function(resolve, reject) {
+  it('has prechange event', function() {
+    var preChangePromise = new Promise(function(resolve) {
       document.body.addEventListener('prechange', resolve);
     });
 
@@ -150,13 +150,13 @@ describe('ons-tabbar', function() {
     setImmediate(function() {
       var element = document.getElementById('myTabbar');
       element.setActiveTab(0);
-      done();
     });
+    
     return expect(preChangePromise).to.eventually.be.fulfilled;
   });
 
   it('has postchange event', function() {
-    var postChangePromise = new Promise(function(resolve, reject) {
+    var postChangePromise = new Promise(function(resolve) {
       document.addEventListener('postchange', resolve);
     });
 
@@ -170,28 +170,31 @@ describe('ons-tabbar', function() {
   });
 
   it('has reactive event', function() {
-    document.body.innerHTML='';
-    var reactivePromise = new Promise(function(resolve, reject) {
+    document.body.innerHTML = '';
+    
+    var reactivePromise = new Promise(function(resolve) {
       document.addEventListener('reactive', resolve);
     });
 
     var div = document.createElement('div');
-    document.body.appendChild(div);
     div.innerHTML = '<ons-template id="page1"></ons-template><ons-tabbar id="myTabbar"><ons-tab no-reload id="tab1" page="page1"></ons-tab></ons-tabbar>';
+    document.body.appendChild(div);
 
     setImmediate(function() {
       var element = document.getElementById('myTabbar');
       element.setActiveTab(0);
       element.setActiveTab(0);
     });
+    
     return expect(reactivePromise).to.eventually.be.fulfilled;
   });
 
-  it('has loadPage method', function() {
-    document.body.innerHTML='';
+  it('has loadPage method', function(done) {
+    document.body.innerHTML = '';
+    
     var div = document.createElement('div');
-    document.body.appendChild(div);
     div.innerHTML = '<ons-template id="page1"><ons-page id="p1"></ons-page></ons-template><ons-tabbar id="myTabbar"><ons-tab id="tab1" page="page1"></ons-tab></ons-tabbar>';
+    document.body.appendChild(div);
 
     setImmediate(function() {
       var element = document.getElementById('myTabbar');
@@ -203,6 +206,7 @@ describe('ons-tabbar', function() {
           expect(element.getActiveTabIndex()).not.to.equal(0);
           expect(element.getActiveTabIndex()).to.equal(-1);
           expect(document.getElementById('p1')).to.be.ok;
+          done();
         }
       };
 
