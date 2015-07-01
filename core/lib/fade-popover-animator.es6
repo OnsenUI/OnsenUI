@@ -1,4 +1,3 @@
-
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -6,7 +5,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-http://www.apache.org/licenses/LICENSE-2.0
+   http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,28 +15,26 @@ limitations under the License.
 
 */
 
-(function() {
+((ons) => {
   'use strict';
 
-  var module = angular.module('onsen');
+  var PopoverAnimator = ons._internal.PopoverAnimator;
 
-  module.factory('FadePopoverAnimator', function(PopoverAnimator) {
+  class FadePopoverAnimator extends PopoverAnimator {
+    constructor(options) {
+      super(options);
+    }
 
     /**
-    * Fade animator for popover.
+    * @param {Object} popover
+    * @param {Function} callback
     */
-    var FadePopoverAnimator = PopoverAnimator.extend({
+    show(popover, callback) {
+      var pop = popover.querySelector('.popover'),
+      mask = popover.querySelector('.popover-mask');
 
-      /**
-      * @param {Object} popover
-      * @param {Function} callback
-      */
-      show: function(popover, callback) {
-        var pop = popover._element[0].querySelector('.popover'),
-        mask = popover._element[0].querySelector('.popover-mask');
-
-        animit.runAll(
-          animit(mask)
+      animit.runAll(
+        animit(mask)
           .queue({
             opacity: 0
           })
@@ -49,7 +46,7 @@ limitations under the License.
             timing: this.timing
           }),
 
-          animit(pop)
+        animit(pop)
           .queue({
             transform: 'scale3d(1.3, 1.3, 1.0)',
             opacity: 0
@@ -67,19 +64,19 @@ limitations under the License.
             callback();
             done();
           })
-        );
-      },
+      );
+    }
 
-      /**
-      * @param {Object} popover
-      * @param {Function} callback
-      */
-      hide: function(popover, callback) {
-        var pop = popover._element[0].querySelector('.popover'),
-          mask = popover._element[0].querySelector('.popover-mask');
+    /**
+    * @param {Object} popover
+    * @param {Function} callback
+    */
+    hide(popover, callback) {
+      var pop = popover.querySelector('.popover'),
+        mask = popover.querySelector('.popover-mask');
 
-        animit.runAll(
-          animit(mask)
+      animit.runAll(
+        animit(mask)
           .queue({
             opacity: 1.0
           })
@@ -91,7 +88,7 @@ limitations under the License.
             timing: this.timing
           }),
 
-          animit(pop)
+        animit(pop)
           .queue({
             opacity: 1.0
           })
@@ -107,11 +104,11 @@ limitations under the License.
             callback();
             done();
           })
-        );
-      }
-    });
+      );
+    }
+  }
 
-    return FadePopoverAnimator;
-  });
+  ons._internal = ons._internal || {};
+  ons._internal.FadePopoverAnimator = FadePopoverAnimator;
 
-})();
+})(window.ons = window.ons || {});

@@ -71,6 +71,7 @@ gulp.task('core', function() {
     'core/lib/ons-util.es6',
     'core/lib/modal-animator.es6',
     'core/lib/navigator-transition-animator.es6',
+    'core/lib/popover-animator.es6',
     'core/lib/*.{es6,js}',
     'core/*.{es6,js}',
     'core/elements/*.{es6,js}',

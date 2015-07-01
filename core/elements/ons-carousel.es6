@@ -18,7 +18,6 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var util = ons._util;
   var ModifierUtil = ons._internal.ModifierUtil;
   var scheme = {'': 'carousel--*'};
 
