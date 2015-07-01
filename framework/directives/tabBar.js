@@ -242,20 +242,6 @@
 
 /**
  * @ngdoc method
- * @signature registerAnimator(name, Animator)
- * @param {String} name
- *   [en]Name of the new animator.[/en]
- *   [ja][/ja]
- * @param {Class} Animator
- *   [en]Extends TabbarAnimator class and implements its custom properties. Examples are `TabbarNoneAnimator`, `TabbarFadeAnimator` and `TabbarSlideAnimator`.[/en]
- *   [ja][/ja]
- * @description
- *   [en]Register a new custom Animator for Tabbar under the specified name.[/en]
- *   [ja][/ja]
- */
-
-/**
- * @ngdoc method
  * @signature on(eventName, listener)
  * @description
  *   [en]Add an event listener.[/en]

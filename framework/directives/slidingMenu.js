@@ -332,20 +332,6 @@
 
 /**
  * @ngdoc method
- * @signature registerAnimator(name, Animator)
- * @param {String} name
- *   [en]Name of the new animator.[/en]
- *   [ja][/ja]
- * @param {Class} Animator
- *   [en]Extends SlidingMenuAnimator class and implements its custom properties. Examples are `revealSlidingMenuAnimator`, `overlaySlidingMenuAnimator` and `pushSlidingMenuAnimator`.[/en]
- *   [ja][/ja]
- * @description
- *   [en]Register a new custom Animator for Sliding Menu under the specified name.[/en]
- *   [ja][/ja]
- */
-
-/**
- * @ngdoc method
  * @signature on(eventName, listener)
  * @description
  *   [en]Add an event listener.[/en]

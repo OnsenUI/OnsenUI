@@ -313,20 +313,6 @@
 
 /**
  * @ngdoc method
- * @signature registerAnimator(name, Animator)
- * @param {String} name
- *   [en]Name of the new animator.[/en]
- *   [ja][/ja]
- * @param {Class} Animator
- *   [en]Extends AlertDialogAnimator class and implements its custom properties. Examples are `IOSAlertDialogAnimator` and `AndroidAlertDialogAnimator`.[/en]
- *   [ja][/ja]
- * @description
- *   [en]Register a new custom Animator for Alert Dialog under the specified name.[/en]
- *   [ja][/ja]
- */
-
-/**
- * @ngdoc method
  * @signature on(eventName, listener)
  * @description
  *   [en]Add an event listener.[/en]
