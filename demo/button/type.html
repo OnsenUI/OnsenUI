@@ -1,35 +1,54 @@
-<div class="page center">
-  <ons-scroller>
-    <section>
-      <h1 class="bg-gray no-margin">Types</h1>
-      <p></p>
-      <ons-button>Default</ons-button>
-      <p></p>
-      <ons-button type="large">large</ons-button>      
-      <p></p>
-      <ons-button type="quiet">quiet</ons-button>
-      <p></p>
-      <ons-button type="large--quiet">large--quiet</ons-button>
-      <p></p>
-      <ons-button type="cta">cta</ons-button>
-      <p></p>
-      <ons-button type="large--cta">large--cta</ons-button>
-    </section>
-    <section class="space-top40 padding-bottom70">
-      <h1 class="bg-gray">Disabled</h1>
-      <p></p>
-      <ons-button disabled="true">Default</ons-button>
-      <p></p>
-      <ons-button type="large" disabled="true">large</ons-button>
-      <p></p>
-      <ons-button type="quiet" disabled="true">quiet</ons-button>      
-      <p></p>
-      <ons-button type="large--quiet" disabled="true">large--quiet</ons-button>
-      <p></p>
-      <ons-button type="cta" disabled="true">cta</ons-button>
-      <p></p>
-      <ons-button type="large--cta" disabled="true">large--cta</ons-button>
-    </section>
-  
-  </ons-scroller>  
-</div>
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Button Demo | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+  <link rel="stylesheet" href="../../build/css/font_awesome/css/font-awesome.min.css">
+
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../app.js"></script>
+
+</head>
+
+<body>
+  <div class="page center">
+    <ons-scroller>
+      <section>
+        <h1 class="bg-gray no-margin">Modifiers</h1>
+        <p></p>
+        <ons-button>Default</ons-button>
+        <p></p>
+        <ons-button modifier="large">large</ons-button>
+        <p></p>
+        <ons-button modifier="quiet">quiet</ons-button>
+        <p></p>
+        <ons-button modifier="large--quiet">large--quiet</ons-button>
+        <p></p>
+        <ons-button modifier="cta">cta</ons-button>
+        <p></p>
+        <ons-button modifier="large--cta">large--cta</ons-button>
+      </section>
+      <section class="space-top40 padding-bottom70">
+        <h1 class="bg-gray">Disabled</h1>
+        <p></p>
+        <ons-button disabled="true">Default</ons-button>
+        <p></p>
+        <ons-button modifier="large" disabled="true">large</ons-button>
+        <p></p>
+        <ons-button modifier="quiet" disabled="true">quiet</ons-button>
+        <p></p>
+        <ons-button modifier="large--quiet" disabled="true">large--quiet</ons-button>
+        <p></p>
+        <ons-button modifier="cta" disabled="true">cta</ons-button>
+        <p></p>
+        <ons-button modifier="large--cta" disabled="true">large--cta</ons-button>
+      </section>
+
+    </ons-scroller>
+  </div>
+</body>
+</html>

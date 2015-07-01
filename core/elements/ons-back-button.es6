@@ -51,7 +51,7 @@ limitations under the License.
 
     createdCallback() {
       this._compile();
-      this._bindedOnClick = this._onClick.bind(this);
+      this._boundOnClick = this._onClick.bind(this);
       ModifierUtil.initModifier(this, scheme);
     }
 
@@ -75,7 +75,7 @@ limitations under the License.
     }
 
     attachedCallback() {
-      this.addEventListener('click', this._bindedOnClick, false);
+      this.addEventListener('click', this._boundOnClick, false);
     }
 
     attributeChangedCallback(name, last, current) {
@@ -85,7 +85,7 @@ limitations under the License.
     }
 
     detachedCallback() {
-      this.removeEventListener('click', this._bindedOnClick, false);
+      this.removeEventListener('click', this._boundOnClick, false);
     }
   }
 
