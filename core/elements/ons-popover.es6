@@ -69,8 +69,8 @@ limitations under the License.
 
       this._visible = false;
       this._doorLock = new DoorLock();
-      this._bindedOnChange = this._onChange.bind(this);
-      this._bindedCancel = this._cancel.bind(this);
+      this._boundOnChange = this._onChange.bind(this);
+      this._boundCancel = this._cancel.bind(this);
 
       this._animatorFactory = new AnimatorFactory({
         animators: window.OnsPopoverElement._animatorDict,
@@ -349,26 +349,26 @@ limitations under the License.
     }
 
     attachedCallback() {
-      this._mask.addEventListener('click', this._bindedCancel, false);
+      this._mask.addEventListener('click', this._boundCancel, false);
 
       this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
-      this._popover.addEventListener('DOMNodeInserted', this._bindedOnChange, false);
-      this._popover.addEventListener('DOMNodeRemoved', this._bindedOnChange, false);
+      this._popover.addEventListener('DOMNodeInserted', this._boundOnChange, false);
+      this._popover.addEventListener('DOMNodeRemoved', this._boundOnChange, false);
 
-      window.addEventListener('resize', this._bindedOnChange, false);
+      window.addEventListener('resize', this._boundOnChange, false);
     }
 
     detachedCallback() {
-      this._mask.removeEventListener('click', this._bindedCancel, false);
+      this._mask.removeEventListener('click', this._boundCancel, false);
 
       this._deviceBackButtonHandler.destroy();
       this._deviceBackButtonHandler = null;
 
-      this._popover.removeEventListener('DOMNodeInserted', this._bindedOnChange, false);
-      this._popover.removeEventListener('DOMNodeRemoved', this._bindedOnChange, false);
+      this._popover.removeEventListener('DOMNodeInserted', this._boundOnChange, false);
+      this._popover.removeEventListener('DOMNodeRemoved', this._boundOnChange, false);
 
-      window.removeEventListener('resize', this._bindedOnChange, false);
+      window.removeEventListener('resize', this._boundOnChange, false);
     }
 
     attributeChangedCallback(name, last, current) {
@@ -376,7 +376,7 @@ limitations under the License.
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
       }
       else if (name === 'direction') {
-        this._bindedOnChange();
+        this._boundOnChange();
       }
     }
 
