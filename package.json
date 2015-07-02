@@ -87,6 +87,7 @@
     "karma-chai-spies": "^0.1.1",
     "karma-chrome-launcher": "^0.1.7",
     "karma-coverage": "^0.4.2",
+    "karma-junit-reporter": "^0.2.2",
     "karma-mocha": "^0.1.10",
     "karma-webpack": "^1.5.1",
     "lodash": "^3.6.0",
