@@ -61,7 +61,7 @@ limitations under the License.
 
         this._onChange = function() {
           setImmediate(function() {
-            if (this._currentTarget) {
+            if (this._currentTarget && this._element) {
               this._positionPopover(this._currentTarget);
             }
           }.bind(this));
