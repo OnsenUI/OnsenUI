@@ -1,10 +1,9 @@
-
-describe('ons-toolbar', function() {
-  it('provide \'OnsToolbarElement\' global variable', function() {
+describe('ons-toolbar', () => {
+  it('provides \'OnsToolbarElement\' global variable', () => {
     expect(window.OnsToolbarElement).to.be.ok;
   });
 
-  it('provides modifier attribute', function() {
+  it('provides \'modifier\' attribute', () => {
     var element = new OnsToolbarElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('navigation-bar--hoge')).to.be.true;
@@ -35,7 +34,7 @@ describe('ons-toolbar', function() {
     expect(element.children[2].classList.contains('navigation-bar--piyo__right')).not.to.be.true;
   });
 
-  it('first child has left class value', function() {
+  it('first child has left class value', () => {
     var element = new OnsToolbarElement();
 
     expect(element.children[0].classList.contains('navigation-bar__left')).to.be.true;
@@ -43,7 +42,7 @@ describe('ons-toolbar', function() {
     expect(element.children[0].classList.contains('navigation-bar__right')).not.to.be.true;
   });
 
-  it('first second has center class value', function() {
+  it('first second has center class value', () => {
     var element = new OnsToolbarElement();
 
     expect(element.children[1].classList.contains('navigation-bar__left')).not.to.be.true;
@@ -51,7 +50,7 @@ describe('ons-toolbar', function() {
     expect(element.children[1].classList.contains('navigation-bar__right')).not.to.be.true;
   });
 
-  it('third child has right class value', function() {
+  it('third child has right class value', () => {
     var element = new OnsToolbarElement();
 
     expect(element.children[2].classList.contains('navigation-bar__left')).not.to.be.true;
@@ -61,7 +60,7 @@ describe('ons-toolbar', function() {
 
   /* Temporary commented due to behavior investigation
 
-  it('provides inline attribute', function() {
+  it('provides inline attribute', () => {
     var element = new OnsToolbarElement();
     element.setAttribute('inline', '');
 
@@ -75,7 +74,7 @@ describe('ons-toolbar', function() {
   });
   */
 
-  it('recognizes Android platform', function() {
+  it('recognizes Android platform', () => {
     var element = new OnsToolbarElement();
     if (ons.platform.isAndroid() && !this.hasAttribute('fixed-style')) {
       expect(element.classList.contains('navigation-bar--android')).to.be.true;

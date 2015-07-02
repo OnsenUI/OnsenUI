@@ -1,21 +1,21 @@
-describe('ons-bottom-toolbar', function() {
-  it('provide \'OnsBottomToolbarElement\' global variable', function() {
+describe('ons-bottom-toolbar', () => {
+  it('provides \'OnsBottomToolbarElement\' global variable', () => {
     expect(window.OnsBottomToolbarElement).to.be.ok;
   });
 
-  it('classList contains \'bottom-bar\' by default', function() {
+  it('classList contains \'bottom-bar\' by default', () => {
     var element = new OnsBottomToolbarElement();
     expect(element.classList.contains('bottom-bar')).to.be.true;
   });
 
-  it('default \'position\' is \'absolute\' and default \'z-index\' is \'0\'', function() {
+  it('default \'position\' is \'absolute\' and default \'z-index\' is \'0\'', () => {
     var element = new OnsBottomToolbarElement();
     expect(element.style.zIndex).to.equal('0');
     expect(element.style.position).to.equal('absolute');
     expect(element.style.position).not.to.equal('relative');
   });
 
-  it('provides \'modifier\' attribute', function() {
+  it('provides \'modifier\' attribute', () => {
     var element = new OnsBottomToolbarElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('bottom-bar--hoge')).to.be.true;
@@ -31,7 +31,7 @@ describe('ons-bottom-toolbar', function() {
     expect(element.classList.contains('bottom-bar--fuga')).to.be.true;
   });
 
-  it('provides \'inline\' attribute', function() {
+  it('provides \'inline\' attribute', () => {
     var element = new OnsBottomToolbarElement();
     element.setAttribute('inline', '');
     expect(element.style.position).to.equal('static');

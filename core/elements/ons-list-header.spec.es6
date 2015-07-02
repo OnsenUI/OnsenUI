@@ -1,14 +1,14 @@
-describe('ons-list-header', function() {
-  it('provides \'OnsHeaderListElement\' global variable', function() {
+describe('ons-list-header', () => {
+  it('provides \'OnsHeaderListElement\' global variable', () => {
     expect(window.OnsListHeaderElement).to.be.ok;
   });
 
-  it('classList contains \'list__header\' by default', function() {
+  it('classList contains \'list__header\' by default', () => {
   	var element = new OnsListHeaderElement();
   	expect(element.classList.contains('list__header')).to.be.true;
   });
 
-  it('provides modifier attribute', function() {
+  it('provides modifier attribute', () => {
     var element = new OnsListHeaderElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('list__header--hoge')).to.be.true;

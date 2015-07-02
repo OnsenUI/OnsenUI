@@ -1,10 +1,9 @@
-
-describe('ons-icon', function() {
-  it('provide \'OnsIconElement\' global variable', function() {
+describe('ons-icon', () => {
+  it('provides \'OnsIconElement\' global variable', () => {
     expect(window.OnsIconElement).to.be.ok;
   });
 
-  it('provides icon attribute', function() {
+  it('provides \'icon\' attribute', () => {
     var element = new OnsIconElement();
     element.setAttribute('icon', 'ion-navicon');
     expect(element.classList.contains('ion-navicon')).to.be.true;
@@ -18,7 +17,7 @@ describe('ons-icon', function() {
     expect(element.classList.contains('fa-twitter')).not.to.be.true;
   });
 
-  it('provides size attribute', function() {
+  it('provides \'size\' attribute', () => {
     var element = new OnsIconElement();
     element.setAttribute('size', '10px');
     expect(element.style.fontSize).to.equal('10px');

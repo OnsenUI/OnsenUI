@@ -1,10 +1,9 @@
-
-describe('ons-button', function() {
-  it('provide \'OnsButtonElement\' global variable', function() {
+describe('ons-button', () => {
+  it('provides \'OnsButtonElement\' global variable', () => {
     expect(window.OnsButtonElement).to.be.ok;
   });
 
-  it('provides modifier attribute', function() {
+  it('provides modifier attribute', () => {
     var element = new OnsButtonElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('button--hoge')).to.be.true;

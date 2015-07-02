@@ -1,10 +1,9 @@
-
-describe('ons-col', function() {
-  it('provide \'OnsColElement\' global variable', function() {
+describe('ons-col', () => {
+  it('provides \'OnsColElement\' global variable', () => {
     expect(window.OnsColElement).to.be.ok;
   });
 
-  it('provides width attribute', function() {
+  it('provides \'width\' attribute', () => {
     var element = new OnsColElement();
     element.setAttribute('width', '100px');
 

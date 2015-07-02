@@ -1,15 +1,14 @@
-
-describe('ons-page', function() {
-  it('provide \'OnsPageElement\' global variable', function() {
+describe('ons-page', () => {
+  it('provides \'OnsPageElement\' global variable', () => {
     expect(window.OnsPageElement).to.be.ok;
   });
 
-  it('has page class', function() {
+  it('has page class', () => {
     var element = new OnsPageElement();
     expect(element.classList.contains('page')).to.be.true;
   });
 
-  it('creates the element and fires \'init\' event', function() {
+  it('creates the element and fires \'init\' event', () => {
     var initPromise = new Promise(function(resolve, reject) {
       document.addEventListener('init', resolve);
     });
@@ -19,7 +18,7 @@ describe('ons-page', function() {
     return expect(initPromise).to.eventually.be.fulfilled;
   });
 
-  it('destroys the element and fires \'destroy\' event', function() {
+  it('destroys the element and fires \'destroy\' event', () => {
     var spy = chai.spy();
     document.addEventListener('destroy', spy);
     var element = new OnsPageElement();
