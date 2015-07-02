@@ -21,20 +21,17 @@ var CORDOVA_APP = false;
 
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
+var gulpIf = require('gulp-if');
 var pkg = require('./package.json');
 var merge = require('event-stream').merge;
 var runSequence = require('run-sequence');
 var dateformat = require('dateformat');
 var browserSync = require('browser-sync');
-var gulpIf = require('gulp-if');
-var babel = require('gulp-babel');
 var dgeni = require('dgeni');
 var njglobals = require('dgeni-packages/node_modules/nunjucks/src/globals');
 var os = require('os');
 var fs = require('fs');
 var argv = require('yargs').argv;
-var filter = require('gulp-filter');
-var karma = require('gulp-karma');
 
 ////////////////////////////////////////
 // browser-sync
@@ -59,7 +56,7 @@ gulp.task('browser-sync', function() {
 // core
 ////////////////////////////////////////
 gulp.task('core', function() {
-  var onlyES6 = filter('*.es6');
+  var onlyES6 = $.filter('*.es6');
 
   // ons-core.js
   return gulp.src([
@@ -78,8 +75,8 @@ gulp.task('core', function() {
     '!core/**/*.spec.js'
   ])
     .pipe($.plumber())
-    .pipe(onlyES6 = filter('*.es6'))
-    .pipe(babel({modules: 'ignore'}))
+    .pipe(onlyES6 = $.filter('*.es6'))
+    .pipe($.babel({modules: 'ignore'}))
     .pipe(onlyES6.restore())
     .pipe($.concat('ons-core.js'))            
     .pipe($.header('/*! ons-core.js for Onsen UI v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
@@ -91,7 +88,7 @@ gulp.task('core', function() {
 ////////////////////////////////////////
 gulp.task('core-test', ['core'], function() {
   return gulp.src(['build/js/ons-core.js', 'core/**/*.spec.js'])
-    .pipe(karma({
+    .pipe($.karma({
       configFile: 'core/test/karma.conf.js',
       action: 'run'
     }))
@@ -105,7 +102,7 @@ gulp.task('core-test', ['core'], function() {
 ////////////////////////////////////////
 gulp.task('watch-core-test', function() {
   return gulp.src(['build/js/ons-core.js', 'core/**/*.spec.js'])
-    .pipe(karma({
+    .pipe($.karma({
       configFile: 'core/test/karma.conf.js',
       action: 'watch'
     }))
@@ -144,9 +141,9 @@ gulp.task('jshint-vanilla', function() {
 });
 
 /////////////////0///////////////////////
-// jshint-es6
+// eshint
 ////////////////////////////////////////
-gulp.task('jshint-es6', function() {
+gulp.task('eshint', function() {
   gulp.src([
     'core/elements/*.es6',
     'core/lib/*.es6',
@@ -158,14 +155,15 @@ gulp.task('jshint-es6', function() {
     'framework/views/*.es6'
   ])
     .pipe($.cached('es6'))
-    .pipe($.jshint({esnext: true}))
-    .pipe($.jshint.reporter('jshint-stylish'));
+    .pipe($.eslint({useEslintrc: true}))
+    .pipe($.eslint.format())
+    .pipe($.eslint.failAfterError());
 });
 
 /////////////////0///////////////////////
 // jshint
 ////////////////////////////////////////
-gulp.task('jshint', ['jshint-vanilla', 'jshint-es6']);
+gulp.task('jshint', ['jshint-vanilla', 'eshint']);
 
 ////////////////////////////////////////
 // clean
@@ -223,8 +221,8 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       'framework/js/*.{es6,js}'
     ])
       .pipe($.plumber())
-      .pipe(onlyES6 = filter('*.es6'))
-      .pipe(babel({modules: 'ignore'}))
+      .pipe(onlyES6 = $.filter('*.es6'))
+      .pipe($.babel({modules: 'ignore'}))
       .pipe(onlyES6.restore())
       .pipe($.ngAnnotate({add: true, single_quotes: true}))
       .pipe($.concat('onsenui.js'))            
@@ -248,8 +246,8 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       'framework/js/*.{es6,js}'
     ])
       .pipe($.plumber())
-      .pipe(onlyES6 = filter('*.es6'))
-      .pipe(babel({modules: 'ignore'}))
+      .pipe(onlyES6 = $.filter('*.es6'))
+      .pipe($.babel({modules: 'ignore'}))
       .pipe(onlyES6.restore())
       .pipe($.ngAnnotate({add: true, single_quotes: true}))
       .pipe($.concat('onsenui_all.js'))
