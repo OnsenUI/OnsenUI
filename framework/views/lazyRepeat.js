@@ -19,7 +19,7 @@ limitations under the License.
   'use strict';
   var module = angular.module('onsen');
 
-  module.factory('LazyRepeatView', function($onsen, $document, $compile) {
+  module.factory('LazyRepeatView', function(AngularLazyRepeatDelegate) {
 
     var LazyRepeatView = Class.extend({
 
@@ -34,27 +34,16 @@ limitations under the License.
         this._attrs = attrs;
         this._linker = linker;
 
-        this._parentElement = element.parent();
-        this._pageContent = this._findPageContent();
+        var userDelegate = this._getDelegate();
+        var internalDelegate = new AngularLazyRepeatDelegate(element[0], userDelegate, element.scope());
 
-        if (!this._pageContent) {
-          throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> object.');
-        }
-
-        this._itemHeightSum = [];
-        this._maxIndex = 0;
-
-        this._doorLock = new DoorLock();
-        this._delegate = this._getDelegate();
-
-        this._renderedElements = {};
-        this._addEventListeners();
+        this._provider = new ons._internal.LazyRepeatProvider(element[0].parentNode, element[0], internalDelegate);
+        element.remove();
 
         // Render when number of items change.
-        this._scope.$watch(this._countItems.bind(this), this._onChange.bind(this));
+        this._scope.$watch(internalDelegate.countItems.bind(internalDelegate), this._provider._onChange.bind(this._provider));
 
         this._scope.$on('$destroy', this._destroy.bind(this));
-        this._onChange();
       },
 
       _getDelegate: function() {
@@ -68,251 +57,8 @@ limitations under the License.
         return delegate;
       },
 
-      _countItems: function() {
-        return this._delegate.countItems();
-      },
-
-      _getItemHeight: function(i) {
-        return this._delegate.calculateItemHeight(i);
-      },
-
-      _getTopOffset: function() {
-        if (typeof this._parentElement !== 'undefined' && this._parentElement !== null) {
-          return this._parentElement[0].getBoundingClientRect().top;
-        } else {
-          return 0;
-        }
-      },
-
-      _render: function() {
-        var items = this._getItemsInView(),
-          keep = {};
-
-        this._parentElement.css('height', this._itemHeightSum[this._maxIndex] + 'px');
-
-        for (var i = 0, l = items.length; i < l; i ++) {
-          var _item = items[i];
-          this._renderElement(_item);
-          keep[_item.index] = true;
-        }
-
-        for (var key in this._renderedElements) {
-          if (this._renderedElements.hasOwnProperty(key) && !keep.hasOwnProperty(key)) {
-            this._removeElement(key);
-          }
-        }
-      },
-
-      _isRendered: function(i) {
-        return this._renderedElements.hasOwnProperty(i);
-      },
-
-      _renderElement: function(item) {
-        if (this._isRendered(item.index)) {
-          // Update content even if it's already added to DOM
-          // to account for changes within the list.
-          var currentItem = this._renderedElements[item.index];
-
-          if (this._delegate.configureItemScope) {
-            this._delegate.configureItemScope(item.index, currentItem.scope);
-          }
-
-          return;
-        }
-
-        var childScope = this._scope.$new();
-        this._addSpecialProperties(item.index, childScope);
-
-        this._linker(childScope, function(clone) {
-          if (this._delegate.configureItemScope) {
-            this._delegate.configureItemScope(item.index, childScope);
-          }
-          else if (this._delegate.createItemContent) {
-            clone.append(this._delegate.createItemContent(item.index));
-            $compile(clone[0].firstChild)(childScope);
-          }
-
-          this._parentElement.append(clone);
-
-          clone.css({
-            position: 'absolute',
-            top: item.top + 'px',
-            left: '0px',
-            right: '0px',
-            display: 'none'
-          });
-
-          var element = {
-            element: clone,
-            scope: childScope
-          };
-
-          // Don't show elements before they are finished rendering.
-          this._scope.$evalAsync(function() {
-            clone.css('display', 'block');
-          });
-
-          this._renderedElements[item.index] = element;
-        }.bind(this));
-      },
-
-      _removeElement: function(i) {
-        if (!this._isRendered(i)) {
-          return;
-        }
-
-        var element = this._renderedElements[i];
-
-        if (this._delegate.destroyItemScope) {
-          this._delegate.destroyItemScope(i, element.scope);
-        }
-        else if (this._delegate.destroyItemContent) {
-          this._delegate.destroyItemContent(i, element.element.children()[0]);
-        }
-
-        element.element.remove();
-        element.scope.$destroy();
-        element.element = element.scope = null;
-
-        delete this._renderedElements[i];
-      },
-
-      _removeAllElements: function() {
-        for (var key in this._renderedElements) {
-          if (this._removeElement.hasOwnProperty(key)) {
-            this._removeElement(key);
-          }
-        }
-      },
-
-      _calculateStartIndex: function(current) {
-        var start = 0,
-          end = this._maxIndex;
-
-        // Binary search for index at top of screen so
-        // we can speed up rendering.
-        while (true) {
-          var middle = Math.floor((start + end) / 2),
-            value = current + this._itemHeightSum[middle];
-
-          if (end < start) {
-            return 0;
-          }
-          else if (value >= 0 && value - this._getItemHeight(middle) < 0) {
-            return middle;
-          }
-          else if (isNaN(value) || value >= 0) {
-            end = middle - 1;
-          }
-          else {
-            start = middle + 1;
-          }
-
-        }
-      },
-
-      _getItemsInView: function() {
-        var topOffset = this._getTopOffset(),
-          topPosition = topOffset,
-          cnt = this._countItems();
-
-        var startIndex = this._calculateStartIndex(topPosition);
-        startIndex = Math.max(startIndex - 30, 0);
-
-        if (startIndex > 0) {
-          topPosition += this._itemHeightSum[startIndex - 1];
-        }
-
-        if (cnt < this._itemHeightSum.length){
-          this._itemHeightSum = new Array(cnt);
-          this._maxIndex = cnt - 1;
-        }
-
-        var items = [];
-        for (var i = startIndex; i < cnt && topPosition < 4 * window.innerHeight; i++) {
-          var h = this._getItemHeight(i);
-
-          if (i >= this._itemHeightSum.length) {
-            this._itemHeightSum = this._itemHeightSum.concat(new Array(100));
-          }
-
-          if (i > 0) {
-            this._itemHeightSum[i] = this._itemHeightSum[i - 1] + h;
-          }
-          else {
-            this._itemHeightSum[i] = h;
-          }
-
-          this._maxIndex = Math.max(i, this._maxIndex);
-
-          items.push({
-            index: i,
-            top: topPosition - topOffset
-          });
-
-          topPosition += h;
-        }
-
-        return items;
-      },
-
-      _addSpecialProperties: function(i, scope) {
-        scope.$index = i;
-        scope.$first = i === 0;
-        scope.$last = i === this._countItems() - 1;
-        scope.$middle = !scope.$first && !scope.$last;
-        scope.$even = i % 2 === 0;
-        scope.$odd = !scope.$even;
-      },
-
-      _onChange: function() {
-        if (this._doorLock._waitList.length > 0) {
-          return;
-        }
-
-        this._doorLock.waitUnlock(function() {
-          var unlock = this._doorLock.lock();
-
-          setTimeout(function() {
-            unlock();
-          }, 200);
-
-          this._render();
-        }.bind(this));
-      },
-
-      _findPageContent: function() {
-        var e = this._element[0];
-
-        while(e.parentNode) {
-          e = e.parentNode;
-
-          if (e.className) {
-            if (e.className.split(/\s+/).indexOf('page__content') >= 0) {
-              break;
-            }
-          }
-        }
-
-        return e;
-      },
-
-      _addEventListeners: function() {
-        this._boundOnChange = this._onChange.bind(this);
-
-        this._pageContent.addEventListener('scroll', this._boundOnChange, true);
-        $document[0].addEventListener('resize', this._boundOnChange, true);
-      },
-
-      _removeEventListeners: function() {
-        this._pageContent.removeEventListener('scroll', this._boundOnChange, true);
-        $document[0].removeEventListener('resize', this._boundOnChange, true);
-      },
-
       _destroy: function() {
-        this._removeEventListeners();
-        this._removeAllElements();
-        this._parentElement = this._renderedElements = this._element = this._scope = this._attrs = null;
+        this._element = this._scope = this._attrs = this._linker = null;
       }
     });
 

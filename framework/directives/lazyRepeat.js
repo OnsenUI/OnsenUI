@@ -76,13 +76,14 @@
       restrict: 'A',
       replace: false,
       priority: 1000,
-      transclude: 'element',
-      compile: function(element, attrs, linker) {
+      terminal: true,
+
+      compile: function(element, attrs) {
         return function(scope, element, attrs) {
-          var lazyRepeat = new LazyRepeatView(scope, element, attrs, linker); // jshint ignore:line
+          var lazyRepeat = new LazyRepeatView(scope, element, attrs);
 
           scope.$on('$destroy', function() {
-            scope = element = attrs = linker = null;
+            scope = element = attrs = lazyRepeat = null;
           });
         };
       }
