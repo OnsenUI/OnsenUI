@@ -44,7 +44,12 @@ module.exports = function(config) {
         module: {
             preLoaders: [
                 {
+                  test: /spec\.es6$/,
+                  loader: 'babel'
+                },
+                {
                   test: /\.es6$/,
+                  exclude: /spec\.es6$/,
                   loader: 'isparta'
                 }
             ],
