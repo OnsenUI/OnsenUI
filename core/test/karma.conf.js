@@ -51,24 +51,15 @@ module.exports = function(config) {
         }
     },
 
-/*    babelPreprocessor: {
-      options: {
-        sourceMap: 'inline'
-      },
-      filename: function (file) {
-        console.log(file);
-        return file.originalPath.replace(/\.es6$/, '.js');
-      },
-      sourceFileName: function (file) {
-        return file.originalPath;
-      }
-    },*/
-
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress', 'coverage'],
 
+    coverageReporter: {
+      type: 'lcov',
+      dir: '../../coverage/'
+    },
 
     // web server port
     port: 9876,

@@ -4,4 +4,4 @@ node_modules
 .DS_Store
 .idea
 .selenium
-core/test/coverage
+/coverage
