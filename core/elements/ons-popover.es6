@@ -36,7 +36,6 @@ limitations under the License.
     </div>
   `);
   var AnimatorFactory = ons._internal.AnimatorFactory;
-  var AsyncHook = ons._internal.AsyncHook;
 
   class PopoverElement extends ons._BaseElement {
 
@@ -70,8 +69,8 @@ limitations under the License.
 
       this._visible = false;
       this._doorLock = new DoorLock();
-      this._bindedOnChange = this._onChange.bind(this);
-      this._bindedCancel = this._cancel.bind(this);
+      this._boundOnChange = this._onChange.bind(this);
+      this._boundCancel = this._cancel.bind(this);
 
       this._animatorFactory = new AnimatorFactory({
         animators: window.OnsPopoverElement._animatorDict,
@@ -131,14 +130,6 @@ limitations under the License.
       arrow.style.top = '';
       arrow.style.left = '';
 
-      // This is the difference between the side and the hypothenuse of the arrow.
-      var diff = (function(x) {
-        return (x / 2) * Math.sqrt(2) - x / 2;
-      })(parseInt(window.getComputedStyle(arrow).width));
-
-      // This is the limit for the arrow. If it's moved further than this it's outside the popover.
-      var limit = margin + radius + diff;
-
       this._setDirection(direction);
 
       // Position popover next to the target.
@@ -160,6 +151,14 @@ limitations under the License.
 
       own = el.getBoundingClientRect();
 
+      // This is the difference between the side and the hypothenuse of the arrow.
+      var diff = (function(x) {
+        return (x / 2) * Math.sqrt(2) - x / 2;
+      })(parseInt(window.getComputedStyle(arrow).width));
+
+      // This is the limit for the arrow. If it's moved further than this it's outside the popover.
+      var limit = margin + radius + diff + 2;
+
       // Keep popover inside window and arrow inside popover.
       if (['left', 'right'].indexOf(direction) > -1) {
         if (own.top < margin) {
@@ -178,6 +177,9 @@ limitations under the License.
           el.style.left = (window.innerWidth - own.width - margin) + 'px';
         }
       }
+
+      // Prevent animit from restoring the style.
+      el.removeAttribute('data-animit-orig-style');
     }
 
     _positionPopover(target) {
@@ -224,11 +226,11 @@ limitations under the License.
         this.removeAttribute('style');
       }
 
-      while(this.children[0]) {
-        content.appendChild(this.children[0]);
+      while (this.childNodes[0]) {
+        content.appendChild(this.childNodes[0]);
       }
 
-      while(templateElement.children[0]) {
+      while (templateElement.children[0]) {
         this.appendChild(templateElement.children[0]);
       }
 
@@ -284,7 +286,6 @@ limitations under the License.
           var animator = this._animatorFactory.newAnimator(options);
           animator.show(this, () => {
             this._visible = true;
-            this._positionPopover(target);
             unlock();
 
             var event = new CustomEvent('postshow', {
@@ -348,31 +349,34 @@ limitations under the License.
     }
 
     attachedCallback() {
-      this._mask.addEventListener('click', this._bindedCancel, false);
+      this._mask.addEventListener('click', this._boundCancel, false);
 
       this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._onDeviceBackButton.bind(this));
 
-      this._popover.addEventListener('DOMNodeInserted', this._bindedOnChange, false);
-      this._popover.addEventListener('DOMNodeRemoved', this._bindedOnChange, false);
+      this._popover.addEventListener('DOMNodeInserted', this._boundOnChange, false);
+      this._popover.addEventListener('DOMNodeRemoved', this._boundOnChange, false);
 
-      window.addEventListener('resize', this._bindedOnChange, false);
+      window.addEventListener('resize', this._boundOnChange, false);
     }
 
     detachedCallback() {
-      this._mask.removeEventListener('click', this._bindedCancel, false);
+      this._mask.removeEventListener('click', this._boundCancel, false);
 
       this._deviceBackButtonHandler.destroy();
       this._deviceBackButtonHandler = null;
 
-      this._popover.removeEventListener('DOMNodeInserted', this._bindedOnChange, false);
-      this._popover.removeEventListener('DOMNodeRemoved', this._bindedOnChange, false);
+      this._popover.removeEventListener('DOMNodeInserted', this._boundOnChange, false);
+      this._popover.removeEventListener('DOMNodeRemoved', this._boundOnChange, false);
 
-      window.removeEventListener('resize', this._bindedOnChange, false);
+      window.removeEventListener('resize', this._boundOnChange, false);
     }
 
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      }
+      else if (name === 'direction') {
+        this._boundOnChange();
       }
     }
 

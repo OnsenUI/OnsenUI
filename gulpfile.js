@@ -77,12 +77,14 @@ gulp.task('core', function() {
     'core/elements/*.{es6,js}',
     '!core/**/*.spec.js'
   ])
+    .pipe($.sourcemaps.init())
     .pipe($.plumber())
     .pipe(onlyES6 = filter('*.es6'))
     .pipe(babel({modules: 'ignore'}))
     .pipe(onlyES6.restore())
     .pipe($.concat('ons-core.js'))            
     .pipe($.header('/*! ons-core.js for Onsen UI v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest('build/js/'));
 });
 
@@ -90,7 +92,7 @@ gulp.task('core', function() {
 // core-test
 ////////////////////////////////////////
 gulp.task('core-test', ['core'], function() {
-  return gulp.src(['build/js/ons-core.js', 'core/**/*.spec.js'])
+  return gulp.src([])
     .pipe(karma({
       configFile: 'core/test/karma.conf.js',
       action: 'run'
