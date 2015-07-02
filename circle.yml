@@ -4,6 +4,7 @@ machine:
 dependencies:
   pre:
     - npm install
+    - npm install -g coveralls
     - cd css-components; npm install
 deployment:
   tasks:
@@ -15,6 +16,4 @@ test:
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex "./core/test/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
-general:
-  artifacts:
-    - ./coverage
+    - cat ./core/test/coverage/*/lcov.info | coveralls
