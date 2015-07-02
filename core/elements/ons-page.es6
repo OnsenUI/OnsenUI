@@ -35,7 +35,10 @@ limitations under the License.
     }
 
     attachedCallback() {
-      ons._util.fireEvent(this, 'init');
+      var event = new CustomEvent('init', {
+        bubbles: true
+      });
+      this.dispatchEvent(event);
     }
 
     /**
@@ -72,6 +75,25 @@ limitations under the License.
      */
     _hasToolbarElement() {
       return !!ons._util.findChild(this, 'ons-toolbar');
+    }
+
+    /**
+     * @return {Boolean}
+     */
+    _canAnimateToolbar() {
+      var toolbar = ons._util.findChild(this, 'ons-toolbar');
+      if (toolbar) {
+        return true;
+      }
+
+      var elements = this._getContentElement().children;
+      for (var i = 0; i < elements.length; i++) {
+        if (elements[i].nodeName.toLowerCase() === 'ons-toolbar' && !elements[i].hasAttribute('inline')) {
+          return true;
+        }
+      }
+
+      return false;
     }
 
     /**
@@ -189,18 +211,11 @@ limitations under the License.
       }
     }
 
-    _show() {
-      this.style.display = 'block';
-      ons._util.fireEvent(this, 'show');
-    }
-
-    _hide() {
-      this.style.display = 'none';
-      ons._util.fireEvent(this, 'hide');
-    }
-
     _destroy() {
-      ons._util.fireEvent(this, 'destroy');
+      var event = new CustomEvent('destroy', {
+        bubbles: true
+      });
+      this.dispatchEvent(event);
 
       if (this.getDeviceBackButtonHandler()) {
         this.getDeviceBackButtonHandler().destroy();

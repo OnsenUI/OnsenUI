@@ -119,7 +119,7 @@ limitations under the License.
               oldPageScope.$destroy();
             }
             else {
-              oldPageElement[0]._hide();
+              oldPageElement.css('display', 'none');
             }
 
             if (options.callback instanceof Function) {
@@ -163,7 +163,7 @@ limitations under the License.
       _loadPersistentPageDOM: function(element, options) {
         options = options || {};
 
-        element[0]._show();
+        element.css('display', 'block');
         this._switchPage(element, element.scope(), options);
       },
 

@@ -19,6 +19,19 @@ describe('AsyncHook', function() {
       hook.remove(callback);
       expect(hook._callbacks.length).to.equal(0);
     });
+
+    it('should raise an exception after freeze() is invoked', function() {
+      var hook = new AsyncHook();
+      hook.freeze();
+
+      expect(function() {
+        hook.add(function() {});
+      }).to.throw();
+
+      expect(function() {
+        hook.remove(function() {});
+      }).to.throw();
+    });
   });
 
   describe('.run()', function() {

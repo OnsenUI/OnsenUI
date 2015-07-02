@@ -65,18 +65,26 @@ gulp.task('core', function() {
   return gulp.src([
     'core/vendor/winstore-jscompat.js',
     'core/vendor/*.js',
+    'core/lib/animit.es6',
+    'core/lib/doorlock.es6',
+    'core/lib/ons.es6',
+    'core/lib/ons-util.es6',
     'core/lib/modal-animator.es6',
+    'core/lib/navigator-transition-animator.es6',
+    'core/lib/popover-animator.es6',
     'core/lib/*.{es6,js}',
     'core/*.{es6,js}',
     'core/elements/*.{es6,js}',
     '!core/**/*.spec.js'
   ])
+    .pipe($.sourcemaps.init())
     .pipe($.plumber())
     .pipe(onlyES6 = filter('*.es6'))
     .pipe(babel({modules: 'ignore'}))
     .pipe(onlyES6.restore())
     .pipe($.concat('ons-core.js'))            
     .pipe($.header('/*! ons-core.js for Onsen UI v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest('build/js/'));
 });
 
@@ -386,7 +394,7 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   }
 
   gulp.watch(watched, {
-    debounceDelay: 100
+    debounceDelay: 2000
   }, ['prepare', 'jshint']);
 
   // for livereload

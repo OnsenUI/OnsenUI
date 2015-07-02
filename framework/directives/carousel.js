@@ -446,11 +446,10 @@
       transclude: false,
 
       compile: function(element, attrs) {
-        var templater = $onsen.generateModifierTemplater(attrs);
-
-        element.addClass(templater('carousel--*'));
+        CustomElements.upgrade(element[0]);
 
         return function(scope, element, attrs) {
+          CustomElements.upgrade(element[0]);
           var carousel = new CarouselView(scope, element, attrs);
 
           element.data('ons-carousel', carousel);
@@ -489,27 +488,17 @@
     };
   });
 
-  module.directive('onsCarouselItem', function($onsen) {
+  module.directive('onsCarouselItem', function() {
     return {
       restrict: 'E',
-      replace: false,
-
-      // NOTE: This element must coexists with ng-controller.
-      // Do not use isolated scope and template's ng-transclude.
-      scope: false,
-      transclude: false,
-
       compile: function(element, attrs) {
-        var templater = $onsen.generateModifierTemplater(attrs);
-
-        element.addClass(templater('carousel-item--*'));
-        element.css('width', '100%');
-
+        CustomElements.upgrade(element[0]);
         return function(scope, element, attrs) {
+          CustomElements.upgrade(element[0]);
         };
-      },
-
+      }
     };
   });
+
 })();
 

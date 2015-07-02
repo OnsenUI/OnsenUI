@@ -77,6 +77,17 @@ limitations under the License.
     return wrapper.children[0];
   };
 
+  /**
+   * @param {Element} element
+   * @return {Element}
+   */
+  util.removeElement = (element) => {
+    if (element.parentNode) {
+      element.parentNode.removeChild(element);
+    }
+    return element;
+  };
+
   /*
    * @param {Object} dst Destination object.
    * @param {...Object} src Source object(s).
@@ -106,16 +117,6 @@ limitations under the License.
       result.push(arrayLike[i]);
     }
     return result;
-  };
-
-  /*
-   * @param {HTMLElement} element.
-   * @param {String} event name.
-   */
-  util.fireEvent = (element, eventName) => {
-    var event = document.createEvent('Event');
-    event.initEvent(eventName, true, true);
-    element.dispatchEvent(event);
   };
 
 })(window.ons = window.ons || {});
