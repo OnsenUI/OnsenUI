@@ -75,7 +75,7 @@ gulp.task('core', function() {
     'core/lib/*.{es6,js}',
     'core/*.{es6,js}',
     'core/elements/*.{es6,js}',
-    '!core/**/*.spec.js'
+    '!core/**/*.spec.{es6,js}',
   ])
     .pipe($.sourcemaps.init())
     .pipe($.plumber())
