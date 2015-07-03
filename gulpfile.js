@@ -349,6 +349,26 @@ gulp.task('build', function(done) {
 });
 
 ////////////////////////////////////////
+// dist
+////////////////////////////////////////
+gulp.task('dist', ['build'], function() {
+  gulp.src([
+    'build/**/*',
+    '!build/docs/**/*',
+    '!build/docs/',
+    '!build/js/angular/**/*',
+    '!build/js/angular/',
+    'bower.json',
+    'package.json',
+    '.npmignore',
+    'README.md',
+    'CHANGELOG.md',
+    'LICENSE'
+  ])
+  .pipe(gulp.dest('dist/'));
+});
+
+////////////////////////////////////////
 // default
 ////////////////////////////////////////
 gulp.task('default', function() {
