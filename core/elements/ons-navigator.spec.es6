@@ -118,6 +118,15 @@ describe('ons-navigator', () => {
     expect(page.page).to.be.an('string');
   });
 
+  it('provides \'canPopPage()\' method', () => {
+    let nav = new OnsNavigatorElement();
+    document.body.appendChild(nav);
+
+    expect(nav.canPopPage()).to.be.false;
+    nav.pushPage('hoge');
+    expect(nav.canPopPage()).to.be.true;
+  });
+
   it('provides \'pages\' property', () => {
     let nav = new OnsNavigatorElement();
     document.body.appendChild(nav);
@@ -233,4 +242,28 @@ describe('ons-navigator', () => {
     expect(content.innerHTML).to.equal('hoge');
   });
 
+  it('can refresh the previous page', (done) => {
+    let nav = new OnsNavigatorElement();
+    document.body.appendChild(nav);
+
+    nav.pushPage('hoge', {
+      onTransitionEnd: () => {
+        var content = nav.getCurrentPage().element._getContentElement();
+        content.innerHTML = 'piyo';
+
+        nav.pushPage('fuga', {
+          onTransitionEnd: () => {
+            nav.popPage({
+              refresh: true,
+              onTransitionEnd: () => {
+                var content = nav.getCurrentPage().element._getContentElement();
+                expect(content.innerHTML).to.equal('hoge');
+                done();
+              }
+            });
+          }
+        });
+      }
+    })
+  });
 });
