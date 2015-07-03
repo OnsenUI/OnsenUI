@@ -5,3 +5,5 @@ dist
 .DS_Store
 .idea
 .selenium
+/core/test/coverage
+/core/test/test-results.xml

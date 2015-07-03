@@ -1,14 +1,14 @@
-describe('ons-list-item', function() {
-  it('provides \'OnsItemListElement\' global variable', function() {
+describe('ons-list-item', () => {
+  it('provides \'OnsItemListElement\' global variable', () => {
     expect(window.OnsListItemElement).to.be.ok;
   });
 
-  it('classList contains \'list__item\' by default', function() {
+  it('classList contains \'list__item\' by default', () => {
   	var element = new OnsListItemElement();
   	expect(element.classList.contains('list__item')).to.be.true;
   });
 
-  it('provides modifier attribute', function() {
+  it('provides modifier attribute', () => {
     var element = new OnsListItemElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('list__item--hoge')).to.be.true;

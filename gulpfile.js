@@ -75,7 +75,7 @@ gulp.task('core', function() {
     'core/lib/*.{es6,js}',
     'core/*.{es6,js}',
     'core/elements/*.{es6,js}',
-    '!core/**/*.spec.js'
+    '!core/**/*.spec.{es6,js}',
   ])
     .pipe($.sourcemaps.init())
     .pipe($.plumber())
@@ -92,7 +92,7 @@ gulp.task('core', function() {
 // core-test
 ////////////////////////////////////////
 gulp.task('core-test', ['core'], function() {
-  return gulp.src(['build/js/ons-core.js', 'core/**/*.spec.js'])
+  return gulp.src([])
     .pipe(karma({
       configFile: 'core/test/karma.conf.js',
       action: 'run'

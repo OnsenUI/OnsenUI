@@ -1,10 +1,9 @@
-
-describe('ons-toolbar-button', function() {
-  it('provide \'OnsToolbarButton\' global variable', function() {
+describe('ons-toolbar-button', () => {
+  it('provides \'OnsToolbarButton\' global variable', () => {
     expect(window.OnsToolbarButton).to.be.ok;
   });
 
-  it('provides modifier attribute', function() {
+  it('provides modifier attribute', () => {
     var element = new OnsToolbarButton();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('toolbar-button--hoge')).to.be.true;
