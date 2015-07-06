@@ -277,6 +277,13 @@ limitations under the License.
     /**
      * @return {Boolean}
      */
+    isOverscrollable() {
+      return this.hasAttribute('overscrollable');
+    }
+
+    /**
+     * @return {Boolean}
+     */
     _isEnabledChangeEvent() {
       var elementSize = this._getElementSize();
       var carouselItemSize = this._getCarouselItemSize();
@@ -401,7 +408,6 @@ limitations under the License.
       return EVENTS.join(' ');
     }
 
-
     /**
      * @param {Object} trait
      */
@@ -484,13 +490,6 @@ limitations under the License.
      */
     _getCarouselItemElements() {
       return ons._util.arrayFrom(this.querySelectorAll('ons-carousel-item'));
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    isOverscrollable() {
-      return this.hasAttribute('overscrollable');
     }
 
     /**
@@ -667,7 +666,7 @@ limitations under the License.
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
-      } else if ('diration') {
+      } else if ('direction') {
         this._onDirectionChange();
       }
     }
@@ -764,7 +763,7 @@ limitations under the License.
 
 
   if (!window.OnsCarouselElement) {
-    window.OnsCaroselElement = document.registerElement('ons-carousel', {
+    window.OnsCarouselElement = document.registerElement('ons-carousel', {
       prototype: CarouselElement.prototype
     });
   }
