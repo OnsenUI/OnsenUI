@@ -764,7 +764,7 @@ limitations under the License.
 
 
   if (!window.OnsCarouselElement) {
-    window.OnsCaroselElement = document.registerElement('ons-carousel', {
+    window.OnsCarouselElement = document.registerElement('ons-carousel', {
       prototype: CarouselElement.prototype
     });
   }
