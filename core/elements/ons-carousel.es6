@@ -666,7 +666,7 @@ limitations under the License.
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
-      } else if ('diration') {
+      } else if ('direction') {
         this._onDirectionChange();
       }
     }
