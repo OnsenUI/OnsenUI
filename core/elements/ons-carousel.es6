@@ -397,17 +397,6 @@ limitations under the License.
       event.gesture.preventDefault();
     }
 
-    _getTouchEvents() {
-      var EVENTS = [
-        'drag', 'dragstart', 'dragend',
-        'dragup', 'dragdown', 'dragleft',
-        'dragright', 'swipe', 'swipeup',
-        'swipedown', 'swipeleft', 'swiperight'
-      ];
-
-      return EVENTS.join(' ');
-    }
-
     /**
      * @param {Object} trait
      */
