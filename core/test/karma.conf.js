@@ -25,7 +25,8 @@ module.exports = function(config) {
       '../../core/lib/popover-animator.es6',
       '../../core/lib/*.{es6,js}',
       '../../core/*.{es6,js}',
-      '../../core/elements/*.{es6,js}'
+      '../../core/elements/*.{es6,js}',
+      '../../build/css/onsenui.css'
     ],
 
     // list of files to exclude
