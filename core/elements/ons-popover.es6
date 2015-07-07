@@ -72,11 +72,16 @@ limitations under the License.
       this._boundOnChange = this._onChange.bind(this);
       this._boundCancel = this._cancel.bind(this);
 
-      this._animatorFactory = new AnimatorFactory({
+
+      this._animatorFactory = this._createAnimatorFactory();
+    }
+
+    _createAnimatorFactory() {
+      return new AnimatorFactory({
         animators: window.OnsPopoverElement._animatorDict,
         baseClass: PopoverAnimator,
         baseClassName: 'PopoverAnimator',
-        defaultAnimation: this.getAttribute('fade') || 'fade',
+        defaultAnimation: this.getAttribute('animation') || 'fade',
         defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options'))
       });
     }
@@ -262,6 +267,11 @@ limitations under the License.
 
       options = options || {};
 
+      if (options.animation &&
+        !(options.animation in window.OnsPopoverElement._animatorDict)) {
+        throw new Error(`Animator ${options.animation} is not registered.`);
+      }
+
       var canceled = false;
       var event = new CustomEvent('preshow', {
         bubbles: true,
@@ -377,6 +387,9 @@ limitations under the License.
       }
       else if (name === 'direction') {
         this._boundOnChange();
+      }
+      else if (name === 'animation' || name === 'animation-options') {
+        this._animatorFactory = this._createAnimatorFactory();
       }
     }
 
