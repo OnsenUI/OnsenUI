@@ -76,7 +76,7 @@ limitations under the License.
         animators: window.OnsPopoverElement._animatorDict,
         baseClass: PopoverAnimator,
         baseClassName: 'PopoverAnimator',
-        defaultAnimation: this.getAttribute('fade') || 'fade',
+        defaultAnimation: this.getAttribute('animation') || 'fade',
         defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options'))
       });
     }
