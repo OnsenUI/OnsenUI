@@ -72,7 +72,12 @@ limitations under the License.
       this._boundOnChange = this._onChange.bind(this);
       this._boundCancel = this._cancel.bind(this);
 
-      this._animatorFactory = new AnimatorFactory({
+
+      this._animatorFactory = this._createAnimatorFactory();
+    }
+
+    _createAnimatorFactory() {
+      return new AnimatorFactory({
         animators: window.OnsPopoverElement._animatorDict,
         baseClass: PopoverAnimator,
         baseClassName: 'PopoverAnimator',
@@ -382,6 +387,9 @@ limitations under the License.
       }
       else if (name === 'direction') {
         this._boundOnChange();
+      }
+      else if (name === 'animation' || name === 'animation-options') {
+        this._animatorFactory = this._createAnimatorFactory();
       }
     }
 
