@@ -262,6 +262,11 @@ limitations under the License.
 
       options = options || {};
 
+      if (options.animation &&
+        !(options.animation in window.OnsPopoverElement._animatorDict)) {
+        throw new Error(`Animator ${options.animation} is not registered.`);
+      }
+
       var canceled = false;
       var event = new CustomEvent('preshow', {
         bubbles: true,
