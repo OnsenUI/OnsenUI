@@ -46,6 +46,75 @@ describe('OnsPopoverElement', () => {
     expect(popover.style.display).to.equal('none');
   });
 
+  describe('#_mask', () => {
+    it('should be an HTMLElement', () =>
+      expect(popover._mask).to.be.an.instanceof(HTMLElement)
+    );
+  });
+
+  describe('#_popover', () => {
+    it('should be an HTMLElement', () =>
+      expect(popover._popover).to.be.an.instanceof(HTMLElement)
+    );
+  });
+
+  describe('#_content', () => {
+    it('should be an HTMLElement', () =>
+      expect(popover._content).to.be.an.instanceof(HTMLElement)
+    );
+  });
+
+  describe('#_arrow', () => {
+    it('should be an HTMLElement', () =>
+      expect(popover._arrow).to.be.an.instanceof(HTMLElement)
+    );
+  });
+
+  describe('#_onDeviceBackButton()', () => {
+    it('should hide the popover if it is cancelable', () => {
+      popover.setAttribute('animation', 'none');
+      popover.setAttribute('cancelable', '');
+
+      popover.show(target);
+      expect(popover.style.display).to.equal('block');
+
+      popover._onDeviceBackButton({callParentHandler: () => {}});
+      expect(popover.style.display).to.equal('none');
+    });
+
+    it('should not hide the popover if it is not cancelable', () => {
+      popover.setAttribute('animation', 'none');
+
+      popover.show(target);
+      expect(popover.style.display).to.equal('block');
+
+      popover._onDeviceBackButton({callParentHandler: () => {}});
+      expect(popover.style.display).to.equal('block');
+    });
+  });
+
+  describe('#_setDirection()', () => {
+    it('only accepts up, down, left, right', () => {
+      expect(() => popover._setDirection()).to.throw(Error);
+      expect(() => popover._setDirection('hoge')).to.throw(Error);
+      expect(() => popover._setDirection('up')).not.to.throw(Error);
+      expect(() => popover._setDirection('down')).not.to.throw(Error);
+      expect(() => popover._setDirection('left')).not.to.throw(Error);
+      expect(() => popover._setDirection('right')).not.to.throw(Error);
+    });
+
+    it('can set the direction', () => {
+      popover._setDirection('up');
+      expect(popover._popover.classList.contains('popover--up')).to.be.true;
+      popover._setDirection('down');
+      expect(popover._popover.classList.contains('popover--down')).to.be.true;
+      popover._setDirection('left');
+      expect(popover._popover.classList.contains('popover--left')).to.be.true;
+      popover._setDirection('right');
+      expect(popover._popover.classList.contains('popover--right')).to.be.true;
+    });
+  });
+
   describe('#show()', () => {
     it('requires a target', () => {
       expect(() => popover.show()).to.throw(Error);
@@ -263,6 +332,11 @@ describe('OnsPopoverElement', () => {
       popover.show(target, {animation: 'none'});
       expect(el.classList.contains('popover--right')).to.be.true;
     });
+  });
+
+  describe('\'mask-color\' attribute', () => {
+    let popover = ons._util.createElement('<ons-popover mask-color="red"></ons-popover>');
+    expect(popover._mask.style.backgroundColor).to.equal('red');
   });
 });
 
