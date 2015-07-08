@@ -46,7 +46,7 @@ limitations under the License.
     }
 
     _onDirectionChange() {
-     if (this._isVertical()) {
+      if (this._isVertical()) {
         this.style.overflowX = 'auto';
         this.style.overflowY = '';
       } else {
