@@ -64,7 +64,7 @@ limitations under the License.
       this._popover.style.zIndex = '20001';
 
       if (this.hasAttribute('mask-color')) {
-        this._mask.css('background-color', this.getAttribute('mask-color'));
+        this._mask.style.backgroundColor = this.getAttribute('mask-color');
       }
 
       this._visible = false;
