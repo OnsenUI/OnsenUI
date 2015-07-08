@@ -375,6 +375,31 @@ describe('OnsCarouselElement', () => {
     });
   });
 
+  describe('#_startMomentumScroll()', () => {
+    let ev;
+
+    beforeEach(() => {
+      ev = new CustomEvent('drag');
+      ev.gesture = {
+        direction: 'left',
+        deltaX: 0,
+        velocityX: 10,
+        preventDefault: () => {}
+      };
+    });
+
+    it('should change the scroll value', () => {
+      carousel.setSwipeable(true);
+
+      let scroll = carousel._scroll;
+
+      carousel._lastDragEvent = ev;
+      carousel._startMomentumScroll(ev);
+
+      expect(carousel._scroll).not.to.equal(scroll);
+    });
+  });
+
   describe('#first()', () => {
     it('sets the current index to 0', () => {
       carousel.setActiveCarouselItemIndex(2);
