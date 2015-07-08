@@ -36,6 +36,59 @@ describe('OnsCarouselElement', () => {
     expect(carousel.classList.contains('carousel--fuga')).to.be.true;
   });
 
+  describe('#_onResize()', () => {
+    it('fires \'refresh\' event', () => {
+      var promise = new Promise((resolve) =>
+        carousel.addEventListener('refresh', resolve)
+      );
+
+      carousel._onResize();
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+  });
+
+  describe('#_onDirectionChange()', () => {
+    it('is fired when the \'direction\' attribute is changed', () => {
+      let spy = chai.spy.on(carousel, '_onDirectionChange');
+      carousel.setAttribute('direction', 'vertical');
+      carousel.setAttribute('direction', 'horizontal');
+      expect(spy).to.have.been.called.twice;
+    });
+  });
+
+  describe('#_saveLastState()', () => {
+    it('saves the last state', () => {
+      delete carousel._lastState;
+      carousel._saveLastState();
+      expect(carousel._lastState).to.be.ok;
+    });
+  });
+
+  describe('#_getCarouselItemSize()', () => {
+    it('returns the \'item-width\' attribute if horizontal', () => {
+      carousel.setAttribute('direction', 'horizontal');
+      carousel.setAttribute('item-width', '10px');
+      expect(carousel._getCarouselItemSize()).to.equal(10);
+    });
+
+    it('returns the \'item-height\' attribute if vertical', () => {
+      carousel.setAttribute('direction', 'vertical');
+      carousel.setAttribute('item-height', '10px');
+      expect(carousel._getCarouselItemSize()).to.equal(10);
+    });
+  });
+
+  describe('#_getInitialIndex()', () => {
+    it('returns 0 by default', () => {
+      expect(carousel._getInitialIndex()).to.equal(0);
+    });
+
+    it('return the \'initial-index\' attribute', () => {
+      carousel.setAttribute('initial-index', '2');
+      expect(carousel._getInitialIndex()).to.equal(2);
+    });
+  });
+
   describe('#setSwipeable()', () => {
     it('can set the \'swipeable\' attribute', () => {
       expect(carousel.hasAttribute('swipeable')).to.be.false;
@@ -220,6 +273,17 @@ describe('OnsCarouselElement', () => {
     });
   });
 
+  describe('#_isEnabledChangeEvent()', () => {
+    it('should be true if auto scroll is enabled', () => {
+      carousel.setAutoScrollEnabled(true);
+      expect(carousel._isEnabledChangeEvent()).to.be.true;
+    });
+
+    it('should be false if auto scroll is not enabled', () => {
+      expect(carousel._isEnabledChangeEvent()).to.be.false;
+    });
+  });
+
   describe('#refresh()', () => {
     it('fires \'refresh\' event', () => {
       let promise = new Promise((resolve) =>
@@ -240,6 +304,74 @@ describe('OnsCarouselElement', () => {
       expect(item.style.position).not.to.equal('absolute');
       carousel.refresh();
       expect(item.style.position).to.equal('absolute');
+    });
+  });
+
+  describe('#_onDrag()', () => {
+    let ev;
+
+    beforeEach(() => {
+      ev = new CustomEvent('drag');
+      ev.gesture = {
+        direction: 'left',
+        deltaX: -10,
+        velocityX: -10,
+        preventDefault: () => {}
+      };
+    });
+
+    it('should not work if the carousel is not swipeable', () => {
+      carousel._onDrag(ev);
+      expect(carousel._lastDragEvent).not.to.be.ok;
+    });
+
+    it('should not work if the direction is vertical', () => {
+      ev.gesture.direction = 'up';
+      carousel._onDrag(ev);
+      expect(carousel._lastDragEvent).not.to.be.ok;
+    });
+
+    it('should work if carousel is swipeable and direction is horizontal', () => {
+      carousel.setAttribute('swipeable', '');
+      carousel._onDrag(ev);
+      expect(carousel._lastDragEvent).to.be.ok;
+    });
+  });
+
+  describe('#_onDragEnd()', () => {
+    let ev;
+
+    beforeEach(() => {
+      ev = new CustomEvent('drag');
+      ev.gesture = {
+        direction: 'left',
+        deltaX: -10,
+        velocityX: -10,
+        preventDefault: () => {}
+      };
+    });
+
+    it('should not work if carousel is not swipeable', () => {
+      carousel._onDragEnd(ev);
+      expect(carousel._scroll).to.equal(0);
+    });
+
+    it('should work if carousel is swipeable', () => {
+      carousel.setSwipeable(true);
+      carousel._onDragEnd(ev);
+      expect(carousel._scroll).to.not.equal(0);
+    });
+
+    it('should call \'_scrollToKillOverScroll\' if overscrolled', () => {
+      carousel.setOverscrollable(true);
+      carousel.setSwipeable(true);
+
+      ev.gesture.deltaX = 10;
+      ev.gesture.velocityX = 10;
+
+      let spy = chai.spy.on(carousel, '_scrollToKillOverScroll');
+      carousel._onDragEnd(ev);
+      expect(spy).to.be.called.once;
     });
   });
 
