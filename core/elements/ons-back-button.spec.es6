@@ -1,10 +1,10 @@
-describe('ons-back-button', () => {
-  it('provides \'OnsBackButton\' global variable', () => {
+describe('OnsBackButtonElement', () => {
+  it('exists', () => {
     expect(window.OnsBackButtonElement).to.be.ok;
   });
 
   it('provides \'modifier\' attribute', () => {
-    var element = new OnsBackButtonElement();
+    let element = new OnsBackButtonElement();
 
     element.setAttribute('modifier', 'hoge');
     expect(element.children[0].classList.contains('toolbar-button--hoge')).to.be.true;
@@ -20,8 +20,8 @@ describe('ons-back-button', () => {
     expect(element.children[0].classList.contains('toolbar-button--fuga')).to.be.true;
   });
 
-  it('has a default child', () => {
-    var element = new OnsBackButtonElement();
+  it('has a child', () => {
+    let element = new OnsBackButtonElement();
     document.body.appendChild(element);
 
     expect(element.children[0]).to.be.ok;
@@ -35,33 +35,32 @@ describe('ons-back-button', () => {
     expect(element.children[0].style.position).to.equal('relative');
   });
 
-  it('has an onClick() method', (done) => {
-    document.body.appendChild(ons._util.createElement (`
-      <div>
-        <ons-template id="page1">
-          <ons-page></ons-page>
-        </ons-template>
-        <ons-template id="page2">
-          <ons-page>
-            <ons-back-button>content</ons-back-button>
-          </ons-page>
-        </ons-template>
-        <ons-navigator page="page1"></ons-navigator>
+  describe('#_onClick()', () => {
+    it('will pop a page', () => {
+      let div = ons._util.createElement (`
+        <div>
+          <ons-template id="page1">
+            <ons-page></ons-page>
+          </ons-template>
+          <ons-template id="page2">
+            <ons-page>
+              <ons-back-button>content</ons-back-button>
+            </ons-page>
+          </ons-template>
+          <ons-navigator page="page1"></ons-navigator>
         </div>
-    `));
+      `);
 
-    var contentBefore;
-    setImmediate(() =>  {
-      var nav = document.querySelector('ons-navigator');
+      document.body.appendChild(div);
 
-      var listener = (event) => {
-        var contentAfter = nav.getCurrentPage();
-        expect(event).to.be.ok;
-        document.removeEventListener('postpop', listener);
-        done();
-      };
+      let nav = div.querySelector('ons-navigator');
 
-      nav.addEventListener('postpop', listener);
+      let promise = new Promise((resolve) => {
+        nav.addEventListener('postpop', () => {
+          div.remove();
+          resolve();
+        });
+      });
 
       nav.pushPage('page2', {
         onTransitionEnd: () => {
@@ -69,6 +68,8 @@ describe('ons-back-button', () => {
           element._onClick();
         }
       });
+
+      return expect(promise).to.eventually.be.fulfilled;
     });
   });
 });
