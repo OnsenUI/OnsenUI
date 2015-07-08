@@ -19,14 +19,12 @@ limitations under the License.
 (function() {
   'use strict;';
 
-  var module = angular.module('onsen');
-
-  module.factory('AndroidAlertDialogAnimator', function(DialogAnimator) {
+  angular.module('onsen').factory('AndroidAlertDialogAnimator', function(AlertDialogAnimator) {
 
     /**
      * Android style animator for alert dialog.
      */
-    var AndroidAlertDialogAnimator = DialogAnimator.extend({
+    var AndroidAlertDialogAnimator = AlertDialogAnimator.extend({
 
       timing: 'cubic-bezier(.1, .7, .4, 1)',
       duration: 0.2,

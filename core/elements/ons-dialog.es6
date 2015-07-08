@@ -290,9 +290,6 @@ limitations under the License.
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
       }
     }
-
-    destroy() {
-    }
   }
 
   if (!window.OnsDialogElement) {

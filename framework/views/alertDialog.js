@@ -20,7 +20,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('AlertDialogView', function($parse, $onsen, AnimationChooser, DialogAnimator, SlideDialogAnimator, AndroidAlertDialogAnimator, IOSAlertDialogAnimator) {
+  module.factory('AlertDialogView', function($parse, $onsen, AnimationChooser, AlertDialogAnimator, SlideDialogAnimator, AndroidAlertDialogAnimator, IOSAlertDialogAnimator) {
 
     var AlertDialogView = Class.extend({
 
@@ -45,8 +45,8 @@ limitations under the License.
 
         this._animationChooser = new AnimationChooser({
           animators: AlertDialogView._animatorDict,
-          baseClass: DialogAnimator,
-          baseClassName: 'DialogAnimator',
+          baseClass: AlertDialogAnimator,
+          baseClassName: 'AlertDialogAnimator',
           defaultAnimation: attrs.animation,
           defaultAnimationOptions: $parse(attrs.animationOptions)()
         });
@@ -242,7 +242,7 @@ limitations under the License.
       'default': $onsen.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
       'fade': $onsen.isAndroid() ? AndroidAlertDialogAnimator : IOSAlertDialogAnimator,
       'slide': SlideDialogAnimator,
-      'none': DialogAnimator
+      'none': AlertDialogAnimator
     };
 
     /**
@@ -250,8 +250,8 @@ limitations under the License.
      * @param {Function} Animator
      */
     AlertDialogView.registerAnimator = function(name, Animator) {
-      if (!(Animator.prototype instanceof DialogAnimator)) {
-        throw new Error('"Animator" param must inherit DialogAnimator');
+      if (!(Animator.prototype instanceof AlertDialogAnimator)) {
+        throw new Error('"Animator" param must inherit AlertDialogAnimator');
       }
       this._animatorDict[name] = Animator;
     };
