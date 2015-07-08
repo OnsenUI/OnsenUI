@@ -141,9 +141,9 @@ gulp.task('jshint-vanilla', function() {
 });
 
 /////////////////0///////////////////////
-// eshint
+// eslint
 ////////////////////////////////////////
-gulp.task('eshint', function() {
+gulp.task('eslint', function() {
   gulp.src([
     'core/elements/*.es6',
     'core/lib/*.es6',
@@ -163,7 +163,7 @@ gulp.task('eshint', function() {
 /////////////////0///////////////////////
 // jshint
 ////////////////////////////////////////
-gulp.task('jshint', ['jshint-vanilla', 'eshint']);
+gulp.task('jshint', ['jshint-vanilla', 'eslint']);
 
 ////////////////////////////////////////
 // clean
