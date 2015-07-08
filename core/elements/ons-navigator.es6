@@ -143,7 +143,7 @@ limitations under the License.
         this._pages[this._pages.length - 1].element.style.display = 'block';
       }
 
-      var enterPage = this._pages[this._pages.length -1];
+      var enterPage = this._pages[this._pages.length - 1];
 
       // for "postpop" event
       var eventDetail = {

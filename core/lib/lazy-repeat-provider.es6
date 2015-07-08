@@ -149,7 +149,7 @@ limitations under the License.
 
       this._wrapperElement.style.height = this._itemHeightSum[this._maxIndex] + 'px';
 
-      for (var i = 0, l = items.length; i < l; i ++) {
+      for (var i = 0, l = items.length; i < l; i++) {
         var _item = items[i];
         this._renderElement(_item);
         keep[_item.index] = true;
@@ -233,7 +233,7 @@ limitations under the License.
 
       // Binary search for index at top of screen so
       // we can speed up rendering.
-      while (true) {
+      for (;;) {
         var middle = Math.floor((start + end) / 2),
           value = current + this._itemHeightSum[middle];
 

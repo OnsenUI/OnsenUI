@@ -103,7 +103,7 @@ limitations under the License.
         return;
       }
 
-      return ModifierUtil.applyDiffToElement({
+      ModifierUtil.applyDiffToElement({
         removed: [],
         added: ModifierUtil.split(modifier)
       }, element, scheme);
