@@ -53,6 +53,8 @@ limitations under the License.
         this.style.overflowX = '';
         this.style.overflowY = 'auto';
       }
+
+      this.refresh();
     }
 
     _saveLastState() {
@@ -703,6 +705,7 @@ limitations under the License.
         children[i].style.width = finalWidth + 'px';
         children[i].style.visibility = 'visible';
         children[i].style.top = (i * sizeInfo.number) + sizeInfo.unit;
+        children[i].style.left = 0;
       }
     },
   };
@@ -745,6 +748,7 @@ limitations under the License.
         children[i].style.width = sizeAttr;
         children[i].style.visibility = 'visible';
         children[i].style.left = (i * sizeInfo.number) + sizeInfo.unit;
+        children[i].style.top = 0;
       }
     },
 
