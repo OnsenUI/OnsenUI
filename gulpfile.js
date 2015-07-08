@@ -156,8 +156,7 @@ gulp.task('eslint', function() {
   ])
     .pipe($.cached('es6'))
     .pipe($.eslint({useEslintrc: true}))
-    .pipe($.eslint.format())
-    .pipe($.eslint.failAfterError());
+    .pipe($.eslint.format());
 });
 
 /////////////////0///////////////////////
