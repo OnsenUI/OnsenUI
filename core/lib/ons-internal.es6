@@ -119,23 +119,25 @@ limitations under the License.
    * @param {Function} callback
    */
   ons._internal.getPageHTMLAsync = function(page, callback) {
-    var cache = ons._internal.templateStore.get(page);
+    setImmediate(() => {
+      var cache = ons._internal.templateStore.get(page);
 
-    if (cache) {
-      var html = typeof cache === 'string' ? cache : cache[1];
-      callback(null, normalizePageHTML(html), null);
-    } else {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', page, true);
-      xhr.onload = function(response) {
-        var html = xhr.responseText;
-        callback(null, normalizePageHTML(html), xhr);
-      };
-      xhr.onerror = function() {
-        callback(xhr.status, null, xhr);
-      };
-      xhr.send(null);
-    }
+      if (cache) {
+        var html = typeof cache === 'string' ? cache : cache[1];
+        callback(null, normalizePageHTML(html), null);
+      } else {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', page, true);
+        xhr.onload = function(response) {
+          var html = xhr.responseText;
+          callback(null, normalizePageHTML(html), xhr);
+        };
+        xhr.onerror = function() {
+          callback(xhr.status, null, xhr);
+        };
+        xhr.send(null);
+      }
+    });
 
     function normalizePageHTML(html) {
       html = ('' + html).trim();

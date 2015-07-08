@@ -438,9 +438,5 @@ limitations under the License.
       }
       this._animatorDict[name] = Animator;
     };
-
-    window.OnsPopoverElement.ready = function(element, callback) {
-      callback();
-    };
   }
 })();

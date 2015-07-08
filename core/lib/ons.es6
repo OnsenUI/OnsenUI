@@ -129,6 +129,47 @@ limitations under the License.
    */
   ons.createPopover = ons._createPopoverOriginal;
 
+  /**
+   * @param {String} page
+   * @param {Object} [options]
+   * @param {Function} [options.link]
+   * @return {Promise}
+   */
+  ons._createDialogOriginal = function(page, options) {
+    options = options || {};
+
+    if (!page) {
+      throw new Error('Page url must be defined.');
+    }
+
+    return new Promise((resolve, reject) => {
+      ons._internal.getPageHTMLAsync(page, function(error, html) {
+        var html = html.match(/<ons-dialog/gi) ? `<div>${html}</div>` : `<ons-dialog>${html}</ons-dialog>`;
+        var div = ons._util.createElement('<div>' + html + '</div>');
+
+        var dialog = div.querySelector('ons-dialog');
+        if (!dialog) {
+          throw new Error(`<ons-dialog> element is not provided on "${page}" page.`);
+        }
+        CustomElements.upgrade(dialog);
+        document.body.appendChild(dialog);
+
+        if (options.link instanceof Function) {
+          options.link(dialog);
+        }
+
+        resolve(dialog);
+      });
+    });
+  };
+
+  /**
+   * @param {String} page
+   * @param {Object} [options]
+   * @return {Promise}
+   */
+  ons.createDialog = ons._createDialogOriginal;
+
   function waitDeviceReady() {
     var unlockDeviceReady = ons._readyLock.lock();
     window.addEventListener('DOMContentLoaded', function() {

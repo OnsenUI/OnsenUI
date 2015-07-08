@@ -466,69 +466,24 @@ limitations under the License.
       },
 
       /**
-      * @param {String} page
-      * @param {Object} [options]
-      * @param {Object} [options.parentScope]
-      * @return {Promise}
-      */
+       * @param {String} page
+       * @param {Object} [options]
+       * @param {Object} [options.parentScope]
+       * @return {Promise}
+       */
       createDialog: function(page, options) {
         options = options || {};
 
-        if (!page) {
-          throw new Error('Page url must be defined.');
-        }
-
-        var dialog = angular.element('<ons-dialog>'),
-        $onsen = this._getOnsenService();
-
-        angular.element(document.body).append(angular.element(dialog));
-
-        return $onsen.getPageHTMLAsync(page).then(function(html) {
-          var div = document.createElement('div');
-          div.innerHTML = html;
-
-          var el = angular.element(div.querySelector('ons-dialog'));
-
-          // Copy attributes and insert html.
-          var attrs = el.prop('attributes');
-          for (var i = 0, l = attrs.length; i < l; i++) {
-            dialog.attr(attrs[i].name, attrs[i].value); 
-          }
-          dialog.html(el.html());
-
+        options.link = function(element) {
           if (options.parentScope) {
-            ons.$compile(dialog)(options.parentScope.$new());
+            ons.$compile(angular.element(element))(options.parentScope.$new());
+          } else {
+            ons.compile(element);
           }
-          else {
-            ons.compile(dialog[0]);
-          }
+        };
 
-          if (el.attr('disabled')) {
-            dialog.attr('disabled', 'disabled');
-          }
-
-          var deferred = ons._qService.defer();
-
-          dialog.on('ons-dialog:init', function(e) {
-            // Copy "style" attribute from parent.
-            var child = dialog[0].querySelector('.dialog');
-            if (el[0].hasAttribute('style')) {
-              var parentStyle = el[0].getAttribute('style'),
-              childStyle = child.getAttribute('style'),
-              newStyle = (function(a, b) {
-                var c =
-                (a.substr(-1) === ';' ? a : a + ';') + 
-                  (b.substr(-1) === ';' ? b : b + ';'); 
-                return c;
-              })(parentStyle, childStyle);
-
-              child.setAttribute('style', newStyle);
-            }
-
-            deferred.resolve(e.component);
-          });
-
-          return deferred.promise;
+        return ons._createDialogOriginal(page, options).then(function(dialog) {
+          return angular.element(dialog).data('ons-dialog');
         });
       },
 

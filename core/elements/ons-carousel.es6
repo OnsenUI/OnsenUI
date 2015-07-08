@@ -21,6 +21,90 @@ limitations under the License.
   var ModifierUtil = ons._internal.ModifierUtil;
   var scheme = {'': 'carousel--*'};
 
+  var VerticalModeTrait = {
+
+    _getScrollDelta: function(event) {
+      return event.gesture.deltaY;
+    },
+
+    _getScrollVelocity: function(event) {
+      return event.gesture.velocityY;
+    },
+
+    _getElementSize: function() {
+      if (!this._currentElementSize) {
+        this._currentElementSize = this.getBoundingClientRect().height;
+      }
+
+      return this._currentElementSize;
+    },
+
+    _generateScrollTransform: function(scroll) {
+      return 'translate3d(0px, ' + -scroll + 'px, 0px)';
+    },
+
+    _layoutCarouselItems: function() {
+      var children = this._getCarouselItemElements();
+
+      var sizeAttr = this._getCarouselItemSizeAttr();
+      var sizeInfo = this._decomposeSizeString(sizeAttr);
+
+      var computedStyle = window.getComputedStyle(this);
+      var totalWidth = this.getBoundingClientRect().width || 0;
+      var finalWidth = totalWidth - parseInt(computedStyle.paddingLeft, 10) - parseInt(computedStyle.paddingRight, 10);
+
+      for (var i = 0; i < children.length; i++) {
+        children[i].style.position = 'absolute';
+        children[i].style.height = sizeAttr;
+        children[i].style.width = finalWidth + 'px';
+        children[i].style.visibility = 'visible';
+        children[i].style.top = (i * sizeInfo.number) + sizeInfo.unit;
+      }
+    }
+  };
+
+  var HorizontalModeTrait = {
+
+    _getScrollDelta: function(event) {
+      return event.gesture.deltaX;
+    },
+
+    _getScrollVelocity: function(event) {
+      return event.gesture.velocityX;
+    },
+
+    _getElementSize: function() {
+      if (!this._currentElementSize) {
+        this._currentElementSize = this.getBoundingClientRect().width;
+      }
+
+      return this._currentElementSize;
+    },
+
+    _generateScrollTransform: function(scroll) {
+      return 'translate3d(' + -scroll + 'px, 0px, 0px)';
+    },
+
+    _layoutCarouselItems: function() {
+      var children = this._getCarouselItemElements();
+
+      var sizeAttr = this._getCarouselItemSizeAttr();
+      var sizeInfo = this._decomposeSizeString(sizeAttr);
+
+      var computedStyle = window.getComputedStyle(this);
+      var totalHeight = this.getBoundingClientRect().height || 0;
+      var finalHeight = totalHeight - parseInt(computedStyle.paddingTop, 10) - parseInt(computedStyle.paddingBottom, 10);
+
+      for (var i = 0; i < children.length; i++) {
+        children[i].style.position = 'absolute';
+        children[i].style.height = finalHeight + 'px';
+        children[i].style.width = sizeAttr;
+        children[i].style.visibility = 'visible';
+        children[i].style.left = (i * sizeInfo.number) + sizeInfo.unit;
+      }
+    }
+  };
+
   class CarouselElement extends ons._BaseElement {
 
     createdCallback() {
@@ -239,9 +323,9 @@ limitations under the License.
     }
 
     /**
-     * @param {Boolean} enabled
+     * @return {Boolean}
      */
-    isAutoScrollEnabled(enabled) {
+    isAutoScrollEnabled() {
       return this.hasAttribute('auto-scroll');
     }
 
@@ -676,91 +760,6 @@ limitations under the License.
       this._removeEventListeners();
     }
   }
-
-  var VerticalModeTrait = {
-
-    _getScrollDelta: function(event) {
-      return event.gesture.deltaY;
-    },
-
-    _getScrollVelocity: function(event) {
-      return event.gesture.velocityY;
-    },
-
-    _getElementSize: function() {
-      if (!this._currentElementSize) {
-        this._currentElementSize = this.getBoundingClientRect().height;
-      }
-
-      return this._currentElementSize;
-    },
-
-    _generateScrollTransform: function(scroll) {
-      return 'translate3d(0px, ' + -scroll + 'px, 0px)';
-    },
-
-    _layoutCarouselItems: function() {
-      var children = this._getCarouselItemElements();
-
-      var sizeAttr = this._getCarouselItemSizeAttr();
-      var sizeInfo = this._decomposeSizeString(sizeAttr);
-
-      var computedStyle = window.getComputedStyle(this);
-      var totalWidth = this.getBoundingClientRect().width || 0;
-      var finalWidth = totalWidth - parseInt(computedStyle.paddingLeft, 10) - parseInt(computedStyle.paddingRight, 10);
-
-      for (var i = 0; i < children.length; i++) {
-        children[i].style.position = 'absolute';
-        children[i].style.height = sizeAttr;
-        children[i].style.width = finalWidth + 'px';
-        children[i].style.visibility = 'visible';
-        children[i].style.top = (i * sizeInfo.number) + sizeInfo.unit;
-      }
-    },
-  };
-
-  var HorizontalModeTrait = {
-
-    _getScrollDelta: function(event) {
-      return event.gesture.deltaX;
-    },
-
-    _getScrollVelocity: function(event) {
-      return event.gesture.velocityX;
-    },
-
-    _getElementSize: function() {
-      if (!this._currentElementSize) {
-        this._currentElementSize = this.getBoundingClientRect().width;
-      }
-
-      return this._currentElementSize;
-    },
-
-    _generateScrollTransform: function(scroll) {
-      return 'translate3d(' + -scroll + 'px, 0px, 0px)';
-    },
-
-    _layoutCarouselItems: function() {
-      var children = this._getCarouselItemElements();
-
-      var sizeAttr = this._getCarouselItemSizeAttr();
-      var sizeInfo = this._decomposeSizeString(sizeAttr);
-
-      var computedStyle = window.getComputedStyle(this);
-      var totalHeight = this.getBoundingClientRect().height || 0;
-      var finalHeight = totalHeight - parseInt(computedStyle.paddingTop, 10) - parseInt(computedStyle.paddingBottom, 10);
-
-      for (var i = 0; i < children.length; i++) {
-        children[i].style.position = 'absolute';
-        children[i].style.height = finalHeight + 'px';
-        children[i].style.width = sizeAttr;
-        children[i].style.visibility = 'visible';
-        children[i].style.left = (i * sizeInfo.number) + sizeInfo.unit;
-      }
-    },
-
-  };
 
 
   if (!window.OnsCarouselElement) {

@@ -353,32 +353,23 @@
 (function() {
   'use strict';
 
-  var module = angular.module('onsen');
-
-  /**
-   * Dialog directive.
-   */
-  module.directive('onsDialog', function($onsen, DialogView) {
+  angular.module('onsen').directive('onsDialog', function($onsen, DialogView) {
     return {
       restrict: 'E',
       replace: false,
       scope: true,
-      transclude: true,
-      templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/dialog.tpl',
-      compile: function(element, attrs, transclude) {
-        element[0].setAttribute('no-status-bar-fill', '');
+      
+      compile: function(element, attrs) {
+        CustomElements.upgrade(element[0]);
+
         return {
           pre: function(scope, element, attrs) {
-            transclude(scope, function(clone) {
-              angular.element(element[0].querySelector('.dialog')).append(clone);
-            });
+            CustomElements.upgrade(element[0]);
 
             var dialog = new DialogView(scope, element, attrs);
-            scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
-            $onsen.addModifierMethods(dialog, 'dialog--*', angular.element(element[0].querySelector('.dialog')));
             $onsen.declareVarAttribute(attrs, dialog);
             $onsen.registerEventHandlers(dialog, 'preshow prehide postshow posthide destroy');
+            $onsen.addModifierMethodsForCustomElements(dialog, element);
 
             element.data('ons-dialog', dialog);
             scope.$on('$destroy', function() {
@@ -388,6 +379,7 @@
               element = null;
             });
           },
+
           post: function(scope, element) {
             $onsen.fireComponentEvent(element[0], 'init');
           }
