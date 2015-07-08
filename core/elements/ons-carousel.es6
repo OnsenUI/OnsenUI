@@ -392,7 +392,7 @@ limitations under the License.
           this._scrollToKillOverScroll();
         }
       } else {
-        this._startMomentumScroll(event);
+        this._startMomentumScroll();
       }
       this._lastDragEvent = null;
 
@@ -408,7 +408,7 @@ limitations under the License.
       }.bind(this));
     }
 
-    _startMomentumScroll(event) {
+    _startMomentumScroll() {
       if (this._lastDragEvent) {
         var velocity = this._getScrollVelocity(this._lastDragEvent);
         var duration = 0.3;
