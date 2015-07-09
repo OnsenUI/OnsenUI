@@ -21,7 +21,7 @@ limitations under the License.
   const util = ons._util = ons._util || {};
 
   /**
-   * @param {Element} element 
+   * @param {Element} element
    * @param {String} query dot class name or node name.
    * @return {HTMLElement/null}
    */
@@ -40,7 +40,7 @@ limitations under the License.
   };
 
   /**
-   * @param {Element} element 
+   * @param {Element} element
    * @param {String} query dot class name or node name.
    * @return {HTMLElement/null}
    */

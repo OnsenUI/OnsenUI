@@ -24,7 +24,7 @@ limitations under the License.
     <span
       class="toolbar-button--quiet"
       style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">
-      
+
       <i class="ion-ios-arrow-back ons-back-button__icon"
         style="
           vertical-align: top;

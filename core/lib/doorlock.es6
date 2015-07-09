@@ -33,7 +33,7 @@ window.DoorLock = (() => {
    * @param {Function} [options.log]
    */
   class DoorLock {
-    
+
     constructor(options) {
       options = options || {};
       this._lockList = [];

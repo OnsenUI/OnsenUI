@@ -39,7 +39,7 @@ limitations under the License.
     if (!html.match(/^<(ons-page|ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
       html = '<ons-page>' + html + '</ons-page>';
     }
-    
+
     return html;
   };
 
@@ -48,7 +48,7 @@ limitations under the License.
       window.document.addEventListener('DOMContentLoaded', callback);
     } else {
       setImmediate(callback);
-    } 
+    }
   };
 
   /**
@@ -145,7 +145,7 @@ limitations under the License.
       if (!html.match(/^<(ons-page|ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
         html = '<ons-page>' + html + '</ons-page>';
       }
-      
+
       return html;
     }
   };

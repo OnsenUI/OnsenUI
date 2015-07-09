@@ -57,7 +57,7 @@ limitations under the License.
 
   document.addEventListener('deviceready', () => {
     if (!bindEvents()) {
-      if (document.querySelector('[ons-keyboard-active]') || 
+      if (document.querySelector('[ons-keyboard-active]') ||
         document.querySelector('[ons-keyboard-inactive]')) {
         noPluginError();
       }
