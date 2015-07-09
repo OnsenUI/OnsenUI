@@ -192,10 +192,7 @@ limitations under the License.
      * @param {Function} callback
      */
     _createPageElement(page, callback) {
-      ons._internal.getPageHTMLAsync(page, (error, html) => {
-        if (error) {
-          throw new Error('Error: ' + error);
-        }
+      ons._internal.getPageHTMLAsync(page).then(html => {
         callback(util.createElement(html.trim()));
       });
     }

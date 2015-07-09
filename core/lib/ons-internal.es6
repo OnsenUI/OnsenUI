@@ -116,28 +116,38 @@ limitations under the License.
 
   /**
    * @param {String} page
-   * @param {Function} callback
+   * @return {Promise} 
    */
-  ons._internal.getPageHTMLAsync = function(page, callback) {
-    setImmediate(() => {
-      const cache = ons._internal.templateStore.get(page);
+  ons._internal.getTemplateHTMLAsync = function(page) {
+    return new Promise((resolve, reject) => {
+      setImmediate(() => {
+        const cache = ons._internal.templateStore.get(page);
 
-      if (cache) {
-        const html = typeof cache === 'string' ? cache : cache[1];
-        callback(null, normalizePageHTML(html), null);
-      } else {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', page, true);
-        xhr.onload = function(response) {
-          const html = xhr.responseText;
-          callback(null, normalizePageHTML(html), xhr);
-        };
-        xhr.onerror = function() {
-          callback(xhr.status, null, xhr);
-        };
-        xhr.send(null);
-      }
+        if (cache) {
+          const html = typeof cache === 'string' ? cache : cache[1];
+          resolve(html);
+        } else {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', page, true);
+          xhr.onload = function(response) {
+            const html = xhr.responseText;
+            resolve(html);
+          };
+          xhr.onerror = function() {
+            throw new Error(`The page is not found: ${page}`);
+          };
+          xhr.send(null);
+        }
+      });
     });
+  };
+
+  /**
+   * @param {String} page
+   * @return {Promise} 
+   */
+  ons._internal.getPageHTMLAsync = function(page) {
+    return ons._internal.getTemplateHTMLAsync(page).then(html => normalizePageHTML(html));
 
     function normalizePageHTML(html) {
       html = ('' + html).trim();

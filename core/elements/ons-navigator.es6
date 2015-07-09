@@ -114,7 +114,7 @@ limitations under the License.
             throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
           }
 
-          ons._internal.getPageHTMLAsync(this._pages[index].page, (error, templateHTML) => {
+          ons._internal.getPageHTMLAsync(this._pages[index].page).then(templateHTML => {
             const element = this._createPageElement(templateHTML);
             const pageObject = this._createPageObject(this._pages[index].page, element, options);
 
@@ -209,12 +209,7 @@ limitations under the License.
       this._doorLock.waitUnlock(() => {
         const unlock = this._doorLock.lock();
 
-        ons._internal.getPageHTMLAsync(page, (error, templateHTML) => {
-          if (error) {
-            unlock();
-            throw new Error('Page is not found: ' + page);
-          }
-
+        ons._internal.getPageHTMLAsync(page).then(templateHTML => {
           const element = this._createPageElement(templateHTML);
 
           const pageObject = this._createPageObject(page, element, options);
@@ -377,11 +372,7 @@ limitations under the License.
         unlock();
       };
 
-      ons._internal.getPageHTMLAsync(page, (error, templateHTML) => {
-        if (error) {
-          done();
-          throw new Error('Page is not found: ' + page);
-        }
+      ons._internal.getPageHTMLAsync(page).then(templateHTML => {
         this._pushPageDOM(page, this._createPageElement(templateHTML), options, done);
       });
     }
