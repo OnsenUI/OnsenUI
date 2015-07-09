@@ -18,15 +18,15 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var util = ons._util;
-  var ModifierUtil = ons._internal.ModifierUtil;
-  var scheme = {
+  const util = ons._util;
+  const ModifierUtil = ons._internal.ModifierUtil;
+  const scheme = {
     '.popover': 'popover--*',
     '.popover__content': 'popover__content--*'
   };
-  var PopoverAnimator = ons._internal.PopoverAnimator;
-  var FadePopoverAnimator = ons._internal.FadePopoverAnimator;
-  var templateSource = util.createElement(`
+  const PopoverAnimator = ons._internal.PopoverAnimator;
+  const FadePopoverAnimator = ons._internal.FadePopoverAnimator;
+  const templateSource = util.createElement(`
     <div>
       <div class="popover-mask"></div>
       <div class="popover">
@@ -35,8 +35,8 @@ limitations under the License.
       </div>
     </div>
   `);
-  var AnimatorFactory = ons._internal.AnimatorFactory;
-  var AsyncHook = ons._internal.AsyncHook;
+  const AnimatorFactory = ons._internal.AnimatorFactory;
+  const AsyncHook = ons._internal.AsyncHook;
 
   class PopoverElement extends ons._BaseElement {
 
@@ -91,7 +91,7 @@ limitations under the License.
     }
 
     _setDirection(direction) {
-      var arrowPosition;
+      let arrowPosition;
       if (direction === 'up') {
         arrowPosition = 'bottom';
       } else if (direction === 'left') {
@@ -104,14 +104,14 @@ limitations under the License.
         throw new Error('Invalid direction.');
       }
 
-      var popoverClassList = this._popover.classList;
+      const popoverClassList = this._popover.classList;
       popoverClassList.remove('popover--up');
       popoverClassList.remove('popover--down');
       popoverClassList.remove('popover--left');
       popoverClassList.remove('popover--right');
       popoverClassList.add('popover--' + direction);
 
-      var arrowClassList = this._arrow.classList;
+      const arrowClassList = this._arrow.classList;
       arrowClassList.remove('popover__top-arrow');
       arrowClassList.remove('popover__bottom-arrow');
       arrowClassList.remove('popover__left-arrow');
@@ -120,24 +120,24 @@ limitations under the License.
     }
 
     _positionPopoverByDirection(target, direction) {
-      var el = this._popover,
-        pos = target.getBoundingClientRect(),
-        own = el.getBoundingClientRect(),
-        arrow = el.children[1],
-        offset = 14,
-        margin = 6,
-        radius = parseInt(window.getComputedStyle(el.querySelector('.popover__content')).borderRadius);
+      const el = this._popover;
+      const pos = target.getBoundingClientRect();
+      let own = el.getBoundingClientRect();
+      const arrow = el.children[1];
+      const offset = 14;
+      const margin = 6;
+      const radius = parseInt(window.getComputedStyle(el.querySelector('.popover__content')).borderRadius);
 
       arrow.style.top = '';
       arrow.style.left = '';
 
       // This is the difference between the side and the hypothenuse of the arrow.
-      var diff = (function(x) {
+      const diff = (function(x) {
         return (x / 2) * Math.sqrt(2) - x / 2;
       })(parseInt(window.getComputedStyle(arrow).width));
 
       // This is the limit for the arrow. If it's moved further than this it's outside the popover.
-      var limit = margin + radius + diff;
+      const limit = margin + radius + diff;
 
       this._setDirection(direction);
 
@@ -170,7 +170,7 @@ limitations under the License.
           el.style.top = (window.innerHeight - own.height - margin) + 'px';
         }
       } else {
-      if (own.left < margin) {
+        if (own.left < margin) {
           arrow.style.left = Math.max(own.width / 2 + own.left - margin, limit) + 'px';
           el.style.left = margin + 'px';
         } else if (own.right > window.innerWidth - margin) {
@@ -181,26 +181,27 @@ limitations under the License.
     }
 
     _positionPopover(target) {
-      var directions;
-      if (!this.hasAttribute('direction')) {
-        directions = ['up', 'down', 'left', 'right'];
-      } else {
-        directions = this.getAttribute('direction').split(/\s+/);
-      }
+      const directions = (() => {
+        if (!this.hasAttribute('direction')) {
+          return ['up', 'down', 'left', 'right'];
+        } else {
+          return this.getAttribute('direction').split(/\s+/);
+        }
+      })();
 
-      var position = target.getBoundingClientRect();
+      const position = target.getBoundingClientRect();
 
       // The popover should be placed on the side with the most space.
-      var scores = {
+      const scores = {
         left: position.left,
         right: window.innerWidth - position.right,
         up: position.top,
         down: window.innerHeight - position.bottom
       };
 
-      var orderedDirections = Object.keys(scores).sort((a, b) => -(scores[a] - scores[b]));
-      for (var i = 0, l = orderedDirections.length; i < l; i++) {
-        var direction = orderedDirections[i];
+      const orderedDirections = Object.keys(scores).sort((a, b) => -(scores[a] - scores[b]));
+      for (let i = 0, l = orderedDirections.length; i < l; i++) {
+        const direction = orderedDirections[i];
         if (directions.indexOf(direction) > -1) {
           this._positionPopoverByDirection(target, direction);
           return;
@@ -217,9 +218,10 @@ limitations under the License.
     }
 
     _compile() {
-      var templateElement = templateSource.cloneNode(true);
-      var content = templateElement.querySelector('.popover__content');
-      var style = this.getAttribute('style');
+      const templateElement = templateSource.cloneNode(true);
+      const content = templateElement.querySelector('.popover__content');
+      const style = this.getAttribute('style');
+
       if (style) {
         this.removeAttribute('style');
       }
@@ -260,8 +262,8 @@ limitations under the License.
 
       options = options || {};
 
-      var canceled = false;
-      var event = new CustomEvent('preshow', {
+      let canceled = false;
+      const event = new CustomEvent('preshow', {
         bubbles: true,
         detail: {
           popover: this,
@@ -274,20 +276,20 @@ limitations under the License.
 
       if (!canceled) {
         this._doorLock.waitUnlock(() => {
-          var unlock = this._doorLock.lock();
+          const unlock = this._doorLock.lock();
 
           this.style.display = 'block';
 
           this._currentTarget = target;
           this._positionPopover(target);
 
-          var animator = this._animatorFactory.newAnimator(options);
+          const animator = this._animatorFactory.newAnimator(options);
           animator.show(this, () => {
             this._visible = true;
             this._positionPopover(target);
             unlock();
 
-            var event = new CustomEvent('postshow', {
+            const event = new CustomEvent('postshow', {
               bubbles: true,
               detail: {popover: this}
             });
@@ -307,8 +309,8 @@ limitations under the License.
     hide(options) {
       options = options || {};
 
-      var canceled = false;
-      var event = new CustomEvent('prehide', {
+      let canceled = false;
+      const event = new CustomEvent('prehide', {
         bubbles: true,
         detail: {
           popover: this,
@@ -321,14 +323,14 @@ limitations under the License.
 
       if (!canceled) {
         this._doorLock.waitUnlock(() => {
-          var unlock = this._doorLock.lock();
+          const unlock = this._doorLock.lock();
 
-          var animator = this._animatorFactory.newAnimator(options);
+          const animator = this._animatorFactory.newAnimator(options);
           animator.hide(this, () => {
             this.style.display = 'none';
             this._visible = false;
             unlock();
-            var event = new CustomEvent('posthide', {
+            const event = new CustomEvent('posthide', {
               bubbles: true,
               detail: {popover: this}
             });

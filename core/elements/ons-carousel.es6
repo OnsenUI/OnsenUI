@@ -18,10 +18,10 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var ModifierUtil = ons._internal.ModifierUtil;
-  var scheme = {'': 'carousel--*'};
+  const ModifierUtil = ons._internal.ModifierUtil;
+  const scheme = {'': 'carousel--*'};
 
-  var VerticalModeTrait = {
+  const VerticalModeTrait = {
 
     _getScrollDelta: function(event) {
       return event.gesture.deltaY;
@@ -44,16 +44,16 @@ limitations under the License.
     },
 
     _layoutCarouselItems: function() {
-      var children = this._getCarouselItemElements();
+      const children = this._getCarouselItemElements();
 
-      var sizeAttr = this._getCarouselItemSizeAttr();
-      var sizeInfo = this._decomposeSizeString(sizeAttr);
+      const sizeAttr = this._getCarouselItemSizeAttr();
+      const sizeInfo = this._decomposeSizeString(sizeAttr);
 
-      var computedStyle = window.getComputedStyle(this);
-      var totalWidth = this.getBoundingClientRect().width || 0;
-      var finalWidth = totalWidth - parseInt(computedStyle.paddingLeft, 10) - parseInt(computedStyle.paddingRight, 10);
+      const computedStyle = window.getComputedStyle(this);
+      const totalWidth = this.getBoundingClientRect().width || 0;
+      const finalWidth = totalWidth - parseInt(computedStyle.paddingLeft, 10) - parseInt(computedStyle.paddingRight, 10);
 
-      for (var i = 0; i < children.length; i++) {
+      for (let i = 0; i < children.length; i++) {
         children[i].style.position = 'absolute';
         children[i].style.height = sizeAttr;
         children[i].style.width = finalWidth + 'px';
@@ -63,7 +63,7 @@ limitations under the License.
     }
   };
 
-  var HorizontalModeTrait = {
+  const HorizontalModeTrait = {
 
     _getScrollDelta: function(event) {
       return event.gesture.deltaX;
@@ -86,16 +86,16 @@ limitations under the License.
     },
 
     _layoutCarouselItems: function() {
-      var children = this._getCarouselItemElements();
+      const children = this._getCarouselItemElements();
 
-      var sizeAttr = this._getCarouselItemSizeAttr();
-      var sizeInfo = this._decomposeSizeString(sizeAttr);
+      const sizeAttr = this._getCarouselItemSizeAttr();
+      const sizeInfo = this._decomposeSizeString(sizeAttr);
 
-      var computedStyle = window.getComputedStyle(this);
-      var totalHeight = this.getBoundingClientRect().height || 0;
-      var finalHeight = totalHeight - parseInt(computedStyle.paddingTop, 10) - parseInt(computedStyle.paddingBottom, 10);
+      const computedStyle = window.getComputedStyle(this);
+      const totalHeight = this.getBoundingClientRect().height || 0;
+      const finalHeight = totalHeight - parseInt(computedStyle.paddingTop, 10) - parseInt(computedStyle.paddingBottom, 10);
 
-      for (var i = 0; i < children.length; i++) {
+      for (let i = 0; i < children.length; i++) {
         children[i].style.position = 'absolute';
         children[i].style.height = finalHeight + 'px';
         children[i].style.width = sizeAttr;
@@ -151,9 +151,9 @@ limitations under the License.
      * @return {Number}
      */
     _getCarouselItemSize() {
-      var sizeAttr = this._getCarouselItemSizeAttr();
-      var sizeInfo = this._decomposeSizeString(sizeAttr);
-      var elementSize = this._getElementSize();
+      const sizeAttr = this._getCarouselItemSizeAttr();
+      const sizeInfo = this._decomposeSizeString(sizeAttr);
+      const elementSize = this._getElementSize();
 
       if (sizeInfo.unit === '%') {
         return Math.round(sizeInfo.number / 100 * elementSize);
@@ -168,7 +168,7 @@ limitations under the License.
      * @return {Number}
      */
     _getInitialIndex() {
-      var index = parseInt(this.getAttribute('initial-index'), 10);
+      const index = parseInt(this.getAttribute('initial-index'), 10);
 
       if (typeof index === 'number' && !isNaN(index)) {
         return Math.max(Math.min(index, this._getCarouselItemCount() - 1), 0);
@@ -181,8 +181,8 @@ limitations under the License.
      * @return {String}
      */
     _getCarouselItemSizeAttr() {
-      var attrName = 'item-' + (this._isVertical() ? 'height' : 'width');
-      var itemSizeAttr = ('' + this.getAttribute(attrName)).trim();
+      const attrName = 'item-' + (this._isVertical() ? 'height' : 'width');
+      const itemSizeAttr = ('' + this.getAttribute(attrName)).trim();
 
       return itemSizeAttr.match(/^\d+(px|%)$/) ? itemSizeAttr : '100%';
     }
@@ -191,7 +191,7 @@ limitations under the License.
      * @return {Object}
      */
     _decomposeSizeString(size) {
-      var matches = size.match(/^(\d+)(px|%)/);
+      const matches = size.match(/^(\d+)(px|%)/);
 
       return {
         number: parseInt(matches[1], 10),
@@ -238,13 +238,13 @@ limitations under the License.
      * @return {Number}
      */
     getAutoScrollRatio() {
-      var attr = this.getAttribute('auto-scroll-ratio');
+      const attr = this.getAttribute('auto-scroll-ratio');
 
       if (!attr) {
         return 0.5;
       }
 
-      var scrollRatio = parseFloat(attr);
+      const scrollRatio = parseFloat(attr);
       if (scrollRatio < 0.0 || scrollRatio > 1.0) {
         throw new Error('Invalid ratio.');
       }
@@ -262,8 +262,8 @@ limitations under the License.
       options = options || {};
 
       index = Math.max(0, Math.min(index, this._getCarouselItemCount() - 1));
-      var scroll = this._getCarouselItemSize() * index;
-      var max = this._calculateMaxScroll();
+      const scroll = this._getCarouselItemSize() * index;
+      const max = this._calculateMaxScroll();
 
       this._scroll = Math.max(0, Math.min(max, scroll));
       this._scrollTo(this._scroll, {animate: options.animation !== 'none', callback: options.callback});
@@ -275,15 +275,15 @@ limitations under the License.
      * @return {Number}
      */
     getActiveCarouselItemIndex() {
-      var scroll = this._scroll;
-      var count = this._getCarouselItemCount();
-      var size = this._getCarouselItemSize();
+      const scroll = this._scroll;
+      const count = this._getCarouselItemCount();
+      const size = this._getCarouselItemSize();
 
       if (scroll < 0) {
         return 0;
       }
 
-      for (var i = 0; i < count; i++) {
+      for (let i = 0; i < count; i++) {
         if (size * i <= scroll && size * (i + 1) > scroll) {
           return i;
         }
@@ -362,8 +362,8 @@ limitations under the License.
      * @return {Boolean}
      */
     _isEnabledChangeEvent() {
-      var elementSize = this._getElementSize();
-      var carouselItemSize = this._getCarouselItemSize();
+      const elementSize = this._getElementSize();
+      const carouselItemSize = this._getCarouselItemSize();
 
       return this.isAutoScrollEnabled() && elementSize === carouselItemSize;
     }
@@ -395,13 +395,13 @@ limitations under the License.
     }
 
     _tryFirePostChangeEvent() {
-      var currentIndex = this.getActiveCarouselItemIndex();
+      const currentIndex = this.getActiveCarouselItemIndex();
 
       if (this._lastActiveIndex !== currentIndex) {
-        var lastActiveIndex = this._lastActiveIndex;
+        const lastActiveIndex = this._lastActiveIndex;
         this._lastActiveIndex = currentIndex;
 
-        var event = new CustomEvent('postchange', {
+        const event = new CustomEvent('postchange', {
           bubbles: true,
           detail: {
             carousel: this,
@@ -418,7 +418,7 @@ limitations under the License.
         return;
       }
 
-      var direction = event.gesture.direction;
+      const direction = event.gesture.direction;
       if ((this._isVertical() && (direction === 'left' || direction === 'right')) || (!this._isVertical() && (direction === 'up' || direction === 'down'))) {
         return;
       }
@@ -427,7 +427,7 @@ limitations under the License.
 
       this._lastDragEvent = event;
 
-      var scroll = this._scroll - this._getScrollDelta(event);
+      const scroll = this._scroll - this._getScrollDelta(event);
       this._scrollTo(scroll);
       event.gesture.preventDefault();
 
@@ -448,8 +448,8 @@ limitations under the License.
       }
 
       if (this._isOverScroll(this._scroll)) {
-        var waitForAction = false;
-        var overscrollEvent = new CustomEvent('overscroll', {
+        let waitForAction = false;
+        const overscrollEvent = new CustomEvent('overscroll', {
           bubbles: true,
           detail: {
             carousel: this,
@@ -475,7 +475,7 @@ limitations under the License.
     }
 
     _getTouchEvents() {
-      var EVENTS = [
+      const EVENTS = [
         'drag', 'dragstart', 'dragend',
         'dragup', 'dragdown', 'dragleft',
         'dragright', 'swipe', 'swipeup',
@@ -497,11 +497,12 @@ limitations under the License.
 
     _startMomentumScroll(event) {
       if (this._lastDragEvent) {
-        var velocity = this._getScrollVelocity(this._lastDragEvent);
-        var duration = 0.3;
-        var scrollDelta = duration * 100 * velocity;
-        var scroll = this._scroll + (this._getScrollDelta(this._lastDragEvent) > 0 ? -scrollDelta : scrollDelta);
-        scroll = this._normalizeScrollPosition(scroll);
+        const velocity = this._getScrollVelocity(this._lastDragEvent);
+        const duration = 0.3;
+        const scrollDelta = duration * 100 * velocity;
+        const scroll = this._normalizeScrollPosition(
+          this._scroll + (this._getScrollDelta(this._lastDragEvent) > 0 ? -scrollDelta : scrollDelta)
+        );
 
         this._scroll = scroll;
 
@@ -521,13 +522,13 @@ limitations under the License.
     }
 
     _normalizeScrollPosition(scroll) {
-      var max = this._calculateMaxScroll();
+      const max = this._calculateMaxScroll();
 
       if (this.isAutoScrollEnabled()) {
-        var arr = [];
-        var size = this._getCarouselItemSize();
+        let arr = [];
+        const size = this._getCarouselItemSize();
 
-        for (var i = 0; i < this._getCarouselItemCount(); i++) {
+        for (let i = 0; i < this._getCarouselItemCount(); i++) {
           if (max >= i * size) {
             arr.push(i * size);
           }
@@ -545,13 +546,12 @@ limitations under the License.
           return !pos || item != arr[pos - 1];
         });
 
-        var lastScroll = this._lastActiveIndex * size,
-          scrollRatio = Math.abs(scroll - lastScroll) / size;
+        const lastScroll = this._lastActiveIndex * size;
+        const scrollRatio = Math.abs(scroll - lastScroll) / size;
 
         if (scrollRatio <= this.getAutoScrollRatio()) {
           return lastScroll;
-        }
-        else if (scrollRatio > this.getAutoScrollRatio() && scrollRatio < 1.0) {
+        } else if (scrollRatio > this.getAutoScrollRatio() && scrollRatio < 1.0) {
           if (arr[0] === lastScroll && arr.length > 1) {
             return arr[1];
           }
@@ -583,16 +583,16 @@ limitations under the License.
      */
     _scrollTo(scroll, options) {
       options = options || {};
-      var isOverscrollable = this.isOverscrollable();
+      const isOverscrollable = this.isOverscrollable();
 
-      var normalizeScroll = (scroll) => {
-        var ratio = 0.35;
+      const normalizeScroll = (scroll) => {
+        const ratio = 0.35;
 
         if (scroll < 0) {
           return isOverscrollable ? Math.round(scroll * ratio) : 0;
         }
 
-        var maxScroll = this._calculateMaxScroll();
+        const maxScroll = this._calculateMaxScroll();
         if (maxScroll < scroll) {
           return isOverscrollable ? maxScroll + Math.round((scroll - maxScroll) * ratio) : maxScroll;
         }
@@ -619,7 +619,7 @@ limitations under the License.
     }
 
     _calculateMaxScroll() {
-      var max = this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
+      const max = this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
       return Math.ceil(max < 0 ? 0 : max); // Need to return an integer value.
     }
 
@@ -649,7 +649,7 @@ limitations under the License.
     }
 
     _scrollToKillOverScroll() {
-      var duration = 0.4;
+      const duration = 0.4;
 
       if (this._scroll < 0) {
         animit(this._getCarouselItemElements())
@@ -664,7 +664,7 @@ limitations under the License.
         return;
       }
 
-      var maxScroll = this._calculateMaxScroll();
+      const maxScroll = this._calculateMaxScroll();
 
       if (maxScroll < this._scroll) {
         animit(this._getCarouselItemElements())
@@ -702,12 +702,11 @@ limitations under the License.
       this._layoutCarouselItems();
 
       if (this._lastState && this._lastState.width > 0) {
-        var scroll = this._scroll;
+        let scroll = this._scroll;
 
         if (this._isOverScroll(scroll)) {
           this._scrollToKillOverScroll();
-        }
-        else {
+        } else {
           if (this.isAutoScrollEnabled()) {
             scroll = this._normalizeScrollPosition(scroll);
           }
@@ -718,7 +717,7 @@ limitations under the License.
 
       this._saveLastState();
 
-      var event = new CustomEvent('refresh', {
+      const event = new CustomEvent('refresh', {
         bubbles: true,
         detail: {carousel: this}
       });

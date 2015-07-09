@@ -18,9 +18,9 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var util = ons._util;
-  var ModifierUtil = ons._internal.ModifierUtil;
-  var templateElement = util.createElement(`
+  const util = ons._util;
+  const ModifierUtil = ons._internal.ModifierUtil;
+  const templateElement = util.createElement(`
     <span
       class="toolbar-button--quiet"
       style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">
@@ -43,7 +43,7 @@ limitations under the License.
         class="back-button__label"></span>
     </span>
   `);
-  var scheme = {
+  const scheme = {
     '.toolbar-button--quiet': 'toolbar-button--*'
   };
 
@@ -56,8 +56,8 @@ limitations under the License.
     }
 
     _compile() {
-      var template = templateElement.cloneNode(true);
-      var inner = template.querySelector('.back-button__label');
+      const template = templateElement.cloneNode(true);
+      const inner = template.querySelector('.back-button__label');
       while (this.childNodes[0]) {
         inner.appendChild(this.childNodes[0]);
       }
@@ -68,7 +68,7 @@ limitations under the License.
     }
 
     _onClick() {
-      var navigator = util.findParent(this, 'ons-navigator');
+      const navigator = util.findParent(this, 'ons-navigator');
       if (navigator) {
         navigator.popPage({cancelIfRunning: true});
       }

@@ -69,13 +69,13 @@ limitations under the License.
     newAnimator(options, defaultAnimator) {
       options = options || {};
 
-      var animator = null;
+      let animator = null;
 
       if (options.animation instanceof this._baseClass) {
         return options.animation;
       }
 
-      var Animator = null;
+      let Animator = null;
 
       if (typeof options.animation === 'string') {
         Animator = this._animators[options.animation];
@@ -86,7 +86,7 @@ limitations under the License.
       } else {
         Animator = Animator || this._animators[this._animation];
 
-        var animationOpts = ons._util.extend(
+        const animationOpts = ons._util.extend(
           {},
           this._animationOptions,
           options.animationOptions || {},

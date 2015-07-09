@@ -18,16 +18,16 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var AnimatorFactory = ons._internal.AnimatorFactory;
-  var NavigatorTransitionAnimator = ons._internal.NavigatorTransitionAnimator;
-  var IOSSlideNavigatorTransitionAnimator = ons._internal.IOSSlideNavigatorTransitionAnimator;
-  var SimpleSlideNavigatorTransitionAnimator = ons._internal.SimpleSlideNavigatorTransitionAnimator;
-  var LiftNavigatorTransitionAnimator = ons._internal.LiftNavigatorTransitionAnimator;
-  var FadeNavigatorTransitionAnimator = ons._internal.FadeNavigatorTransitionAnimator;
-  var NullNavigatorTransitionAnimator = ons._internal.NullNavigatorTransitionAnimator;
-  var util = ons._util;
-  var AsyncHook = ons._internal.AsyncHook;
-  var NavigatorPage = ons._internal.NavigatorPage;
+  const AnimatorFactory = ons._internal.AnimatorFactory;
+  const NavigatorTransitionAnimator = ons._internal.NavigatorTransitionAnimator;
+  const IOSSlideNavigatorTransitionAnimator = ons._internal.IOSSlideNavigatorTransitionAnimator;
+  const SimpleSlideNavigatorTransitionAnimator = ons._internal.SimpleSlideNavigatorTransitionAnimator;
+  const LiftNavigatorTransitionAnimator = ons._internal.LiftNavigatorTransitionAnimator;
+  const FadeNavigatorTransitionAnimator = ons._internal.FadeNavigatorTransitionAnimator;
+  const NullNavigatorTransitionAnimator = ons._internal.NullNavigatorTransitionAnimator;
+  const util = ons._util;
+  const AsyncHook = ons._internal.AsyncHook;
+  const NavigatorPage = ons._internal.NavigatorPage;
 
   class NavigatorElement extends ons._BaseElement {
 
@@ -67,7 +67,7 @@ limitations under the License.
     replacePage(page, options) {
       options = options || {};
 
-      var onTransitionEnd = options.onTransitionEnd || function() {};
+      const onTransitionEnd = options.onTransitionEnd || function() {};
 
       options.onTransitionEnd = () => {
         if (this._pages.length > 1) {
@@ -105,18 +105,18 @@ limitations under the License.
           return;
         }
 
-        var unlock = this._doorLock.lock();
+        const unlock = this._doorLock.lock();
 
         if (options.refresh) {
-          var index = this.pages.length - 2;
+          const index = this.pages.length - 2;
 
           if (!this._pages[index].page) {
             throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
           }
 
           ons._internal.getPageHTMLAsync(this._pages[index].page, (error, templateHTML) => {
-            var element = this._createPageElement(templateHTML);
-            var pageObject = this._createPageObject(this._pages[index].page, element, options);
+            const element = this._createPageElement(templateHTML);
+            const pageObject = this._createPageObject(this._pages[index].page, element, options);
 
             this._compilePageHook.run((element) => {
               this._linkPageHook.run((element) => {
@@ -137,28 +137,28 @@ limitations under the License.
     }
 
     _popPage(options, unlock) {
-      var leavePage = this._pages.pop();
+      const leavePage = this._pages.pop();
 
       if (this._pages[this._pages.length - 1]) {
         this._pages[this._pages.length - 1].element.style.display = 'block';
       }
 
-      var enterPage = this._pages[this._pages.length - 1];
+      const enterPage = this._pages[this._pages.length - 1];
 
       // for "postpop" event
-      var eventDetail = {
+      const eventDetail = {
         leavePage: leavePage,
         enterPage: this._pages[this._pages.length - 1],
         navigator: this
       };
 
-      var callback = () => {
+      const callback = () => {
         leavePage.destroy();
 
         this._isPopping = false;
         unlock();
 
-        var event = new CustomEvent('postpop', {
+        const event = new CustomEvent('postpop', {
           bubbles: true,
           detail: eventDetail
         });
@@ -173,7 +173,7 @@ limitations under the License.
 
       this._isPopping = true;
 
-      var animator = this._animatorFactory.newAnimator(options, leavePage.options.animator);
+      const animator = this._animatorFactory.newAnimator(options, leavePage.options.animator);
       animator.pop(enterPage, leavePage, callback);
     }
 
@@ -199,7 +199,7 @@ limitations under the License.
         return this.pushPage.apply(this, [].slice.call(arguments, 1));
       }
 
-      var normalizeIndex = index => {
+      const normalizeIndex = index => {
         if (index < 0) {
           index = this.pages.length + index;
         }
@@ -207,7 +207,7 @@ limitations under the License.
       };
 
       this._doorLock.waitUnlock(() => {
-        var unlock = this._doorLock.lock();
+        const unlock = this._doorLock.lock();
 
         ons._internal.getPageHTMLAsync(page, (error, templateHTML) => {
           if (error) {
@@ -215,9 +215,9 @@ limitations under the License.
             throw new Error('Page is not found: ' + page);
           }
 
-          var element = this._createPageElement(templateHTML);
+          const element = this._createPageElement(templateHTML);
 
-          var pageObject = this._createPageObject(page, element, options);
+          const pageObject = this._createPageObject(page, element, options);
 
           if (this._pages.length > 0) {
             index = normalizeIndex(index);
@@ -266,7 +266,7 @@ limitations under the License.
       }
       return this._pages[this._pages.length - 1];
     }
-    
+
     _destroy() {
       this._pages.forEach(function(page) {
         page.destroy();
@@ -285,7 +285,7 @@ limitations under the License.
         event.callParentHandler();
       }
     }
-    
+
     /**
      * Clears page stack and add the specified pageUrl to the page stack.
      * If options object is specified, apply the options.
@@ -301,7 +301,7 @@ limitations under the License.
         options.animation = 'none';
       }
 
-      var onTransitionEnd = options.onTransitionEnd || function() {};
+      const onTransitionEnd = options.onTransitionEnd || function() {};
 
       options.onTransitionEnd = () => {
         while (this._pages.length > 1) {
@@ -325,8 +325,8 @@ limitations under the License.
           this._compilePageHook.freeze();
 
           if (!this.getAttribute('page')) {
-            var html = (this._initialHTML || '').match(/^\s*<ons-page/) ? this._initialHTML : '<ons-page>' + this._initialHTML + '</ons-page>';
-            var element = this._createPageElement(html);
+            const html = (this._initialHTML || '').match(/^\s*<ons-page/) ? this._initialHTML : '<ons-page>' + this._initialHTML + '</ons-page>';
+            const element = this._createPageElement(html);
 
             this._pushPageDOM('', element, {}, function() {});
           } else {
@@ -372,8 +372,8 @@ limitations under the License.
     }
 
     _pushPage(page, options) {
-      var unlock = this._doorLock.lock();
-      var done = function() {
+      const unlock = this._doorLock.lock();
+      const done = function() {
         unlock();
       };
 
@@ -397,10 +397,10 @@ limitations under the License.
       unlock = unlock || function() {};
       options = options || {};
 
-      var pageObject = this._createPageObject(page, element, options);
+      const pageObject = this._createPageObject(page, element, options);
 
       // for "postpush" event
-      var eventDetail = {
+      const eventDetail = {
         enterPage: pageObject,
         leavePage: this._pages[this._pages.length - 1],
         navigator: this
@@ -408,7 +408,7 @@ limitations under the License.
 
       this._pages.push(pageObject);
 
-      var done = function() {
+      const done = function() {
         if (this._pages[this._pages.length - 2]) {
           this._pages[this._pages.length - 2].element.style.display = 'none';
         }
@@ -416,7 +416,7 @@ limitations under the License.
         this._isPushing = false;
         unlock();
 
-        var event = new CustomEvent('postpush', {
+        const event = new CustomEvent('postpush', {
           bubbles: true,
           detail: eventDetail
         });
@@ -435,8 +435,8 @@ limitations under the License.
         this._linkPageHook.run(element => {
           setTimeout(() => {
             if (this._pages.length > 1) {
-              var leavePage = this._pages.slice(-2)[0];
-              var enterPage = this._pages.slice(-1)[0];
+              const leavePage = this._pages.slice(-2)[0];
+              const enterPage = this._pages.slice(-1)[0];
 
               this.appendChild(element);
               options.animator.push(enterPage, leavePage, done);
@@ -453,8 +453,8 @@ limitations under the License.
      * @return {Boolean} Whether if event is canceled.
      */
     _emitPrePushEvent() {
-      var isCanceled = false;
-      var event = new CustomEvent('prepush', {
+      let isCanceled = false;
+      const event = new CustomEvent('prepush', {
         bubbles: true,
         detail: {
           navigator: this,
@@ -474,10 +474,10 @@ limitations under the License.
      * @return {Boolean} Whether if event is canceled.
      */
     _emitPrePopEvent() {
-      var isCanceled = false;
+      let isCanceled = false;
 
-      var leavePage = this.getCurrentPage();
-      var event = new CustomEvent('prepop', {
+      const leavePage = this.getCurrentPage();
+      const event = new CustomEvent('prepop', {
         bubbles: true,
         detail: {
           navigator: this,
@@ -512,7 +512,7 @@ limitations under the License.
     }
 
     _createPageElement(templateHTML) {
-      var pageElement = util.createElement(ons._internal.normalizePageHTML('' + templateHTML));
+      const pageElement = util.createElement(ons._internal.normalizePageHTML('' + templateHTML));
 
       if (pageElement.nodeName.toLowerCase() !== 'ons-page') {
         throw new Error('You must supply an "ons-page" element to "ons-navigator".');
@@ -541,7 +541,7 @@ limitations under the License.
      * @param {String} name
      * @param {Function} Animator
      */
-    window.OnsNavigatorElement.registerAnimator = function(name, animator) {
+    window.OnsNavigatorElement.registerAnimator = function(name, Animator) {
       if (!(Animator.prototype instanceof NavigatorTransitionAnimator)) {
         throw new Error('"Animator" param must inherit NavigatorTransitionAnimator');
       }

@@ -104,9 +104,9 @@ limitations under the License.
 
     return new Promise((resolve, reject) => {
       ons._internal.getPageHTMLAsync(page, function(error, html) {
-        var div = ons._util.createElement('<div>' + html + '</div>');
+        const div = ons._util.createElement('<div>' + html + '</div>');
 
-        var popover = div.querySelector('ons-popover');
+        const popover = div.querySelector('ons-popover');
         if (!popover) {
           throw new Error(`<ons-popover> element is not provided on "${page}" page.`);
         }
@@ -144,10 +144,10 @@ limitations under the License.
 
     return new Promise((resolve, reject) => {
       ons._internal.getPageHTMLAsync(page, function(error, html) {
-        var html = html.match(/<ons-dialog/gi) ? `<div>${html}</div>` : `<ons-dialog>${html}</ons-dialog>`;
-        var div = ons._util.createElement('<div>' + html + '</div>');
+        html = html.match(/<ons-dialog/gi) ? `<div>${html}</div>` : `<ons-dialog>${html}</ons-dialog>`;
+        const div = ons._util.createElement('<div>' + html + '</div>');
 
-        var dialog = div.querySelector('ons-dialog');
+        const dialog = div.querySelector('ons-dialog');
         if (!dialog) {
           throw new Error(`<ons-dialog> element is not provided on "${page}" page.`);
         }
@@ -171,7 +171,7 @@ limitations under the License.
   ons.createDialog = ons._createDialogOriginal;
 
   function waitDeviceReady() {
-    var unlockDeviceReady = ons._readyLock.lock();
+    const unlockDeviceReady = ons._readyLock.lock();
     window.addEventListener('DOMContentLoaded', function() {
       if (ons.isWebView()) {
         window.document.addEventListener('deviceready', unlockDeviceReady, false);

@@ -48,7 +48,7 @@ limitations under the License.
       if (this._frozen) {
         throw new Error('This hook is frozen.');
       }
-      var index = this._callbacks.indexOf(callback);
+      const index = this._callbacks.indexOf(callback);
       if (index !== -1) {
         this._callbacks.splice(index, 1);
         return true;
@@ -69,8 +69,8 @@ limitations under the License.
      * @param {Object} [target]
      */
     run(callback, target) {
-      var i = 0;
-      var f = () => {
+      let i = 0;
+      const f = () => {
         if (i < this._callbacks.length) {
           this._callbacks[i]((newTarget) => {
             target = newTarget;

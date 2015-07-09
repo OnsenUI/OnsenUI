@@ -71,8 +71,8 @@ limitations under the License.
     _compile() {
       this.style.display = 'none';
 
-      var template = templateSource.cloneNode(true);
-      var dialog = template.children[1];
+      const template = templateSource.cloneNode(true);
+      const dialog = template.children[1];
 
       while (this.firstChild) {
         dialog.appendChild(this.firstChild);
@@ -122,8 +122,8 @@ limitations under the License.
      * @param {Function} [options.callback] callback after dialog is shown
      */
     show(options = {}) {
-      var cancel = false,
-        callback = options.callback || function() {};
+      let cancel = false;
+      const callback = options.callback || function() {};
 
       this.dispatchEvent(new CustomEvent('preshow', {
         bubbles: true,
@@ -137,12 +137,12 @@ limitations under the License.
 
       if (!cancel) {
         this._doorLock.waitUnlock(() => {
-          var unlock = this._doorLock.lock();
+          const unlock = this._doorLock.lock();
 
           this.style.display = 'block';
           this._mask.style.opacity = '1';
 
-          var animator = this._animatorFactory.newAnimator(options);
+          const animator = this._animatorFactory.newAnimator(options);
 
           animator.show(this, () => {
             this._visible = true;
@@ -168,8 +168,8 @@ limitations under the License.
      * @param {Function} [options.callback] callback after dialog is hidden
      */
     hide(options = {}) {
-      var cancel = false,
-        callback = options.callback || function() {};
+      let cancel = false;
+      const callback = options.callback || function() {};
 
       this.dispatchEvent(new CustomEvent('prehide', {
         bubbles: true,
@@ -183,9 +183,8 @@ limitations under the License.
 
       if (!cancel) {
         this._doorLock.waitUnlock(() => {
-          var unlock = this._doorLock.lock();
-
-          var animator = this._animatorFactory.newAnimator(options);
+          const unlock = this._doorLock.lock();
+          const animator = this._animatorFactory.newAnimator(options);
 
           animator.hide(this, () => {
             this.style.display = 'none';

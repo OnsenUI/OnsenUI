@@ -18,8 +18,8 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var ModifierUtil = ons._internal.ModifierUtil;
-  var scheme = {'': 'carousel-item--*'};
+  const ModifierUtil = ons._internal.ModifierUtil;
+  const scheme = {'': 'carousel-item--*'};
 
   class CarouselItemElement extends ons._BaseElement {
 

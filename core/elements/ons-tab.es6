@@ -18,19 +18,19 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var scheme = {
+  const scheme = {
     '': 'tab-bar--*__item',
     '.tab-bar__button': 'tab-bar--*__button'
   };
-  var ModifierUtil = ons._internal.ModifierUtil;
-  var util = ons._util;
-  var templateSource = util.createElement(`
+  const ModifierUtil = ons._internal.ModifierUtil;
+  const util = ons._util;
+  const templateSource = util.createElement(`
     <div>
       <input type="radio" style="display: none">
       <button class="tab-bar__button tab-bar-inner"></button>
     </div>
   `);
-  var defaultInnerTemplateSource = util.createElement(`
+  const defaultInnerTemplateSource = util.createElement(`
     <div>
       <div class="tab-bar__icon">
         <ons-icon icon="ion-cloud" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>
@@ -49,11 +49,11 @@ limitations under the License.
     }
 
     _compile() {
-      var fragment = document.createDocumentFragment(); 
-      var hasChildren = false;
+      const fragment = document.createDocumentFragment();
+      let hasChildren = false;
 
       while (this.childNodes[0]) {
-        let node = this.childNodes[0];
+        const node = this.childNodes[0];
         this.removeChild(node);
         fragment.appendChild(node);
 
@@ -62,13 +62,13 @@ limitations under the License.
         }
       }
 
-      var template = templateSource.cloneNode(true);
+      const template = templateSource.cloneNode(true);
       while (template.children[0]) {
         this.appendChild(template.children[0]);
       }
       this.classList.add('tab-bar__item');
 
-      var button = util.findChild(this, '.tab-bar__button');
+      const button = util.findChild(this, '.tab-bar__button');
 
       if (hasChildren) {
         button.appendChild(fragment);
@@ -84,21 +84,21 @@ limitations under the License.
         return;
       }
 
-      var button = util.findChild(this, '.tab-bar__button');
+      const button = util.findChild(this, '.tab-bar__button');
 
-      var template = defaultInnerTemplateSource.cloneNode(true);
+      const template = defaultInnerTemplateSource.cloneNode(true);
       while (template.children[0]) {
         button.appendChild(template.children[0]);
       }
 
-      var self = this;
-      var icon = this.getAttribute('icon');
-      var label = this.getAttribute('label');
+      const self = this;
+      const icon = this.getAttribute('icon');
+      const label = this.getAttribute('label');
 
       if (typeof icon === 'string') {
         getIconElement().setAttribute('icon', icon);
       } else {
-        var wrapper = button.querySelector('.tab-bar__icon');
+        const wrapper = button.querySelector('.tab-bar__icon');
         wrapper.parentNode.removeChild(wrapper);
       }
 
@@ -118,7 +118,7 @@ limitations under the License.
     }
 
     _onClick() {
-      var tabbar = this._findTabbarElement();
+      const tabbar = this._findTabbarElement();
       if (tabbar) {
         tabbar.setActiveTab(this._findTabIndex());
       }
@@ -133,7 +133,7 @@ limitations under the License.
     }
 
     setActive() {
-      var radio = util.findChild(this, 'input');
+      const radio = util.findChild(this, 'input');
       radio.checked = true;
       this.classList.add('active');
 
@@ -144,7 +144,7 @@ limitations under the License.
     }
 
     setInactive() {
-      var radio = util.findChild(this, 'input');
+      const radio = util.findChild(this, 'input');
       radio.checked = false;
       this.classList.remove('active');
 
@@ -222,8 +222,8 @@ limitations under the License.
       this._ensureElementPosition();
 
       if (this.hasAttribute('active')) {
-        var tabbar = this._findTabbarElement();
-        var tabIndex = this._findTabIndex();
+        const tabbar = this._findTabbarElement();
+        const tabIndex = this._findTabIndex();
 
         window.OnsTabbarElement.ready(tabbar, () => {
           tabbar.setActiveTab(tabIndex, {animation: 'none'});
@@ -246,8 +246,8 @@ limitations under the License.
     }
 
     _findTabIndex() {
-      var elements = this.parentNode.children;
-      for (var i = 0; i < elements.length; i++) {
+      const elements = this.parentNode.children;
+      for (let i = 0; i < elements.length; i++) {
         if (this === elements[i]) {
           return i;
         }

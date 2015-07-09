@@ -18,7 +18,7 @@ limitations under the License.
 ((ons) => {
   'use strict';
 
-  var util = ons._util = ons._util || {};
+  const util = ons._util = ons._util || {};
 
   /**
    * @param {Element} element 
@@ -26,13 +26,12 @@ limitations under the License.
    * @return {HTMLElement/null}
    */
   util.findChild = (element, query) => {
-    var match = query.substr(0, 1) === '.' ?
+    const match = query.substr(0, 1) === '.' ?
       (node) => node.classList.contains(query.substr(1)) :
       (node) => node.nodeName.toLowerCase() === query;
 
-    var node;
-    for (var i = 0; i < element.children.length; i++) {
-      node = element.children[i];
+    for (let i = 0; i < element.children.length; i++) {
+      const node = element.children[i];
       if (match(node)) {
         return node;
       }
@@ -46,11 +45,11 @@ limitations under the License.
    * @return {HTMLElement/null}
    */
   util.findParent = (element, query) => {
-    var match = query.substr(0, 1) === '.' ?
+    const match = query.substr(0, 1) === '.' ?
       (node) => node.classList.contains(query.substr(1)) :
       (node) => node.nodeName.toLowerCase() === query;
 
-    var parent = element.parentNode;
+    let parent = element.parentNode;
     for (;;) {
       if (!parent) {
         return null;
@@ -67,7 +66,7 @@ limitations under the License.
    * @return {Element}
    */
   util.createElement = (html) => {
-    var wrapper = document.createElement('div');
+    const wrapper = document.createElement('div');
     wrapper.innerHTML = html;
 
     if (wrapper.children.length > 1) {
@@ -94,11 +93,11 @@ limitations under the License.
    * @returns {Object} Reference to `dst`.
    */
   util.extend = (dst, ...args) => {
-    for (var i = 0; i < args.length; i++) {
+    for (let i = 0; i < args.length; i++) {
       if (args[i]) {
-        var keys = Object.keys(args[i]);
-        for (var j = 0; j < keys.length; j++) {
-          var key = keys[j];
+        const keys = Object.keys(args[i]);
+        for (let j = 0; j < keys.length; j++) {
+          const key = keys[j];
           dst[key] = args[i][key];
         }
       }
@@ -112,8 +111,8 @@ limitations under the License.
    * @return {Array}
    */
   util.arrayFrom = (arrayLike) => {
-    var result = [];
-    for (var i = 0; i < arrayLike.length; i++) {
+    const result = [];
+    for (let i = 0; i < arrayLike.length; i++) {
       result.push(arrayLike[i]);
     }
     return result;

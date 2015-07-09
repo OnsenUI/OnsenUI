@@ -107,8 +107,8 @@ limitations under the License.
     register('script[type="text/ng-template"]');
 
     function register(query) {
-      var templates = document.querySelectorAll(query);
-      for (var i = 0; i < templates.length; i++) {
+      const templates = document.querySelectorAll(query);
+      for (let i = 0; i < templates.length; i++) {
         ons._internal.templateStore.set(templates[i].getAttribute('id'), templates[i].textContent);
       }
     }
@@ -120,16 +120,16 @@ limitations under the License.
    */
   ons._internal.getPageHTMLAsync = function(page, callback) {
     setImmediate(() => {
-      var cache = ons._internal.templateStore.get(page);
+      const cache = ons._internal.templateStore.get(page);
 
       if (cache) {
-        var html = typeof cache === 'string' ? cache : cache[1];
+        const html = typeof cache === 'string' ? cache : cache[1];
         callback(null, normalizePageHTML(html), null);
       } else {
-        var xhr = new XMLHttpRequest();
+        const xhr = new XMLHttpRequest();
         xhr.open('GET', page, true);
         xhr.onload = function(response) {
-          var html = xhr.responseText;
+          const html = xhr.responseText;
           callback(null, normalizePageHTML(html), xhr);
         };
         xhr.onerror = function() {
