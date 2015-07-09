@@ -34,7 +34,7 @@
     "no-underscore-dangle": 0,
     "comma-dangle": 0,
     "no-extra-strict": 0,
-    "no-extra-parens": 1,
+    "no-extra-parens": 0,
     "no-lone-blocks": 1,
     "no-unused-expressions": 1,
     "no-trailing-spaces": 1,
@@ -43,7 +43,7 @@
     "no-redeclare": 0,
     "no-sequences": 2,
     "no-undef": 0,
-    "no-unused-vars": 1,
+    "no-unused-vars": 0,
     "key-spacing": [2, {
       "beforeColon": false,
       "afterColon": true
