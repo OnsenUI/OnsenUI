@@ -16,19 +16,7 @@ limitations under the License.
 
 */
 
-(function() {
-  'use strict;';
-
-  angular.module('onsen').factory('AlertDialogAnimator', function() {
-    return Class.extend({
-      show: function(dialog, callback) {
-        callback();
-      },
-
-      hide: function(dialog, callback) {
-        callback();
-      }
-    });
-  });
-
-})();
+angular.module('onsen')
+  .value('AlertDialogAnimator', ons._internal.AlertDialogAnimator)
+  .value('AndroidAlertDialogAnimator', ons._internal.AndroidAlertDialogAnimator)
+  .value('IOSAlertDialogAnimator', ons._internal.IOSAlertDialogAnimator);

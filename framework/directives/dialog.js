@@ -356,7 +356,6 @@
   angular.module('onsen').directive('onsDialog', function($onsen, DialogView) {
     return {
       restrict: 'E',
-      replace: false,
       scope: true,
       
       compile: function(element, attrs) {

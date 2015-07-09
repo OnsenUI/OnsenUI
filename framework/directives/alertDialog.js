@@ -356,12 +356,10 @@
 (function() {
   'use strict';
 
-  var module = angular.module('onsen');
-
   /**
    * Alert dialog directive.
    */
-  module.directive('onsAlertDialog', function($onsen, AlertDialogView) {
+  angular.module('onsen').directive('onsAlertDialog', function($onsen, AlertDialogView) {
     return {
       restrict: 'E',
       replace: false,
@@ -369,40 +367,19 @@
       transclude: false,
 
       compile: function(element, attrs) {
-        var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-
-        element.addClass('alert-dialog ' + modifierTemplater('alert-dialog--*'));
-
-        var titleElement = angular.element(element[0].querySelector('.alert-dialog-title')),
-          contentElement = angular.element(element[0].querySelector('.alert-dialog-content'));
-
-        if (titleElement.length) {
-          titleElement.addClass(modifierTemplater('alert-dialog-title--*'));
-        }
-
-        if (contentElement.length) {
-          contentElement.addClass(modifierTemplater('alert-dialog-content--*'));
-        }
+        CustomElements.upgrade(element[0]);
 
         return {
           pre: function(scope, element, attrs) {
+            CustomElements.upgrade(element[0]);
             var alertDialog = new AlertDialogView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, alertDialog);
             $onsen.registerEventHandlers(alertDialog, 'preshow prehide postshow posthide destroy');
-            $onsen.addModifierMethods(alertDialog, 'alert-dialog--*', element);
-
-            if (titleElement.length) {
-              $onsen.addModifierMethods(alertDialog, 'alert-dialog-title--*', titleElement);
-            }
-            if (contentElement.length) {
-              $onsen.addModifierMethods(alertDialog, 'alert-dialog-content--*', contentElement);
-            }
-            if ($onsen.isAndroid()) {
-              alertDialog.addModifier('android');
-            }
+            $onsen.addModifierMethodsForCustomElements(alertDialog, element);
 
             element.data('ons-alert-dialog', alertDialog);
+
             scope.$on('$destroy', function() {
               alertDialog._events = undefined;
               $onsen.removeModifierMethods(alertDialog);
