@@ -43,7 +43,7 @@ limitations under the License.
 
     createdCallback() {
       this._compile();
-      this._bindedOnClick = this._onClick.bind(this);
+      this._boundOnClick = this._onClick.bind(this);
 
       ModifierUtil.initModifier(this, scheme);
     }
@@ -215,7 +215,7 @@ limitations under the License.
     }
 
     detachedCallback() {
-      this.removeEventListener('click', this._bindedOnClick);
+      this.removeEventListener('click', this._boundOnClick, false);
     }
 
     attachedCallback() {
@@ -230,7 +230,7 @@ limitations under the License.
         });
       }
 
-      this.addEventListener('click', this._bindedOnClick);
+      this.addEventListener('click', this._boundOnClick, false);
     }
 
     _findTabbarElement() {

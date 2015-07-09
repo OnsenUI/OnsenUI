@@ -321,25 +321,25 @@ limitations under the License.
         });
 
         // Event listeners
-        this._bindedOnDrag = this._onDrag.bind(this);
-        this._bindedOnDragStart = this._onDragStart.bind(this);
-        this._bindedOnDragEnd = this._onDragEnd.bind(this);
-        this._bindedOnScroll = this._onScroll.bind(this);
+        this._boundOnDrag = this._onDrag.bind(this);
+        this._boundOnDragStart = this._onDragStart.bind(this);
+        this._boundOnDragEnd = this._onDragEnd.bind(this);
+        this._boundOnScroll = this._onScroll.bind(this);
 
         // Bind listeners
-        this._gestureDetector.on('drag', this._bindedOnDrag);
-        this._gestureDetector.on('dragstart', this._bindedOnDragStart);
-        this._gestureDetector.on('dragend', this._bindedOnDragEnd);
-        element.on('scroll', this._bindedOnScroll);
+        this._gestureDetector.on('drag', this._boundOnDrag);
+        this._gestureDetector.on('dragstart', this._boundOnDragStart);
+        this._gestureDetector.on('dragend', this._boundOnDragEnd);
+        element.on('scroll', this._boundOnScroll);
       },
 
       _destroyEventListeners: function() {
         var element = this._scrollElement.parent();
 
-        this._gestureDetector.off('drag', this._bindedOnDrag);
-        this._gestureDetector.off('dragstart', this._bindedOnDragStart);
-        this._gestureDetector.off('dragend', this._bindedOnDragEnd);
-        element.off('scroll', this._bindedOnScroll);
+        this._gestureDetector.off('drag', this._boundOnDrag);
+        this._gestureDetector.off('dragstart', this._boundOnDragStart);
+        this._gestureDetector.off('dragend', this._boundOnDragEnd);
+        element.off('scroll', this._boundOnScroll);
       },
 
       _destroy: function() {

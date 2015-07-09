@@ -109,7 +109,7 @@ limitations under the License.
   class DevicebackButtonDispatcher {
     constructor() {
       this._isEnabled = false;
-      this._bindedCallback = this._callback.bind(this);
+      this._boundCallback = this._callback.bind(this);
     }
 
 
@@ -118,7 +118,7 @@ limitations under the License.
      */
     enable() {
       if (!this._isEnabled) {
-        util.addBackButtonListener(this._bindedCallback);
+        util.addBackButtonListener(this._boundCallback);
         this._isEnabled = true;
       }
     }
@@ -128,7 +128,7 @@ limitations under the License.
      */
     disable() {
       if (this._isEnabled) {
-        util.removeBackButtonListener(this._bindedCallback);
+        util.removeBackButtonListener(this._boundCallback);
         this._isEnabled = false;
       }
     }

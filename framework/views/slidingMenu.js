@@ -182,7 +182,7 @@ limitations under the License.
 
         // Close menu on tap event.
         this._mainPageGestureDetector = new ons.GestureDetector(this._mainPage[0]);
-        this._bindedOnTap = this._onTap.bind(this);
+        this._boundOnTap = this._onTap.bind(this);
 
         var maxDistance = this._normalizeMaxSlideDistanceAttr();
         this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
@@ -197,8 +197,8 @@ limitations under the License.
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
         attrs.$observe('swipeable', this._onSwipeableChanged.bind(this));
 
-        this._bindedOnWindowResize = this._onWindowResize.bind(this);
-        window.addEventListener('resize', this._bindedOnWindowResize);
+        this._boundOnWindowResize = this._onWindowResize.bind(this);
+        window.addEventListener('resize', this._boundOnWindowResize);
 
         this._boundHandleEvent = this._handleEvent.bind(this);
         this._bindEvents();
@@ -282,9 +282,9 @@ limitations under the License.
         this.emit('destroy');
 
         this._deviceBackButtonHandler.destroy();
-        window.removeEventListener('resize', this._bindedOnWindowResize);
+        window.removeEventListener('resize', this._boundOnWindowResize);
 
-        this._mainPageGestureDetector.off('tap', this._bindedOnTap);
+        this._mainPageGestureDetector.off('tap', this._boundOnTap);
         this._element = this._scope = this._attrs = null;
       },
 
@@ -623,7 +623,7 @@ limitations under the License.
           unlock();
 
           this._mainPage.children().css('pointer-events', '');
-          this._mainPageGestureDetector.off('tap', this._bindedOnTap);
+          this._mainPageGestureDetector.off('tap', this._boundOnTap);
 
           this.emit('postclose', {
             slidingMenu: this
@@ -671,7 +671,7 @@ limitations under the License.
           unlock();
 
           this._mainPage.children().css('pointer-events', 'none');
-          this._mainPageGestureDetector.on('tap', this._bindedOnTap);
+          this._mainPageGestureDetector.on('tap', this._boundOnTap);
 
           this.emit('postopen', {
             slidingMenu: this
