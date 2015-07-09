@@ -88,9 +88,9 @@ limitations under the License.
       const bothPageHasToolbar =
         enterPage.element._canAnimateToolbar() && leavePage.element._canAnimateToolbar();
 
-      const noAndroidLikeToolbar =
-        !angular.element(enterPage.element._getToolbarElement()).hasClass('navigation-bar--android') &&
-        !angular.element(leavePage.element._getToolbarElement()).hasClass('navigation-bar--android');
+      var noAndroidLikeToolbar =
+        !enterPage.element._getToolbarElement().classList.contains('navigation-bar--android') &&
+        !leavePage.element._getToolbarElement().classList.contains('navigation-bar--android');
 
       return bothPageHasToolbar && noAndroidLikeToolbar;
     }

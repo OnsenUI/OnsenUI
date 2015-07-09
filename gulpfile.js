@@ -72,14 +72,16 @@ gulp.task('core', function() {
     'core/lib/*.{es6,js}',
     'core/*.{es6,js}',
     'core/elements/*.{es6,js}',
-    '!core/**/*.spec.js'
+    '!core/**/*.spec.{es6,js}',
   ])
+    .pipe($.sourcemaps.init())
     .pipe($.plumber())
     .pipe(onlyES6 = $.filter('*.es6'))
     .pipe($.babel({modules: 'ignore'}))
     .pipe(onlyES6.restore())
     .pipe($.concat('ons-core.js'))            
     .pipe($.header('/*! ons-core.js for Onsen UI v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest('build/js/'));
 });
 
@@ -341,6 +343,26 @@ gulp.task('build', function(done) {
     'compress-distribution-package',
     done
   );
+});
+
+////////////////////////////////////////
+// dist
+////////////////////////////////////////
+gulp.task('dist', ['build'], function() {
+  gulp.src([
+    'build/**/*',
+    '!build/docs/**/*',
+    '!build/docs/',
+    '!build/js/angular/**/*',
+    '!build/js/angular/',
+    'bower.json',
+    'package.json',
+    '.npmignore',
+    'README.md',
+    'CHANGELOG.md',
+    'LICENSE'
+  ])
+  .pipe(gulp.dest('dist/'));
 });
 
 ////////////////////////////////////////

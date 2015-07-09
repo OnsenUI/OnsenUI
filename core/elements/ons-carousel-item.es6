@@ -36,7 +36,7 @@ limitations under the License.
   }
 
   if (!window.OnsCarouselItemElement) {
-    window.OnsCaroselItemElement = document.registerElement('ons-carousel-item', {
+    window.OnsCarouselItemElement = document.registerElement('ons-carousel-item', {
       prototype: CarouselItemElement.prototype
     });
   }

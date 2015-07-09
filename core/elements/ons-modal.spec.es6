@@ -1,33 +1,33 @@
-describe('ons-modal', function() {
-  it('provides \'OnsModalElement\' global variable', function() {
+describe('ons-modal', () => {
+  it('provides \'OnsModalElement\' global variable', () => {
     expect(window.OnsModalElement).to.be.ok;
   });
 
-  it('classList contains \'modal\' by default', function() {
+  it('classList contains \'modal\' by default', () => {
     var element = new OnsModalElement();
     expect(element.classList.contains('modal')).to.be.true;
   });
 
-  it('children classList contains \'modal__content\' by default', function() {
+  it('children classList contains \'modal__content\' by default', () => {
     var element = new OnsModalElement();
     var wrapper = document.createElement('div');
     element.appendChild(wrapper);
     expect(element.children[0].classList.contains('modal__content')).to.be.true;
   });
 
-  it('doesn\'t display anything by default', function() {
+  it('doesn\'t display anything by default', () => {
     var element = new OnsModalElement();
     expect(element.style.display).to.equal('none');
   });
 
-  it('provides a \'show()\' method', function() {
+  it('provides a \'show()\' method', () => {
     var element = new OnsModalElement();
     expect(element.style.display).to.equal('none');
     element.show();
     expect(element.style.display).to.equal('table');
   });
 
-  it('provides a \'hide()\' method', function() {
+  it('provides a \'hide()\' method', () => {
     var element = new OnsModalElement();
     expect(element.style.display).to.equal('none');
     element.show();
@@ -36,7 +36,7 @@ describe('ons-modal', function() {
     expect(element.style.display).to.equal('none');
   });
 
-  it('provides a \'toggle()\' method', function() {
+  it('provides a \'toggle()\' method', () => {
     var element = new OnsModalElement();
     expect(element.style.display).to.equal('none');
     element.toggle();

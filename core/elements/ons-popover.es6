@@ -36,7 +36,6 @@ limitations under the License.
     </div>
   `);
   const AnimatorFactory = ons._internal.AnimatorFactory;
-  const AsyncHook = ons._internal.AsyncHook;
 
   class PopoverElement extends ons._BaseElement {
 
@@ -65,7 +64,7 @@ limitations under the License.
       this._popover.style.zIndex = '20001';
 
       if (this.hasAttribute('mask-color')) {
-        this._mask.css('background-color', this.getAttribute('mask-color'));
+        this._mask.style.backgroundColor = this.getAttribute('mask-color');
       }
 
       this._visible = false;
@@ -73,11 +72,16 @@ limitations under the License.
       this._boundOnChange = this._onChange.bind(this);
       this._boundCancel = this._cancel.bind(this);
 
-      this._animatorFactory = new AnimatorFactory({
+
+      this._animatorFactory = this._createAnimatorFactory();
+    }
+
+    _createAnimatorFactory() {
+      return new AnimatorFactory({
         animators: window.OnsPopoverElement._animatorDict,
         baseClass: PopoverAnimator,
         baseClassName: 'PopoverAnimator',
-        defaultAnimation: this.getAttribute('fade') || 'fade',
+        defaultAnimation: this.getAttribute('animation') || 'fade',
         defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options'))
       });
     }
@@ -131,14 +135,6 @@ limitations under the License.
       arrow.style.top = '';
       arrow.style.left = '';
 
-      // This is the difference between the side and the hypothenuse of the arrow.
-      const diff = (function(x) {
-        return (x / 2) * Math.sqrt(2) - x / 2;
-      })(parseInt(window.getComputedStyle(arrow).width));
-
-      // This is the limit for the arrow. If it's moved further than this it's outside the popover.
-      const limit = margin + radius + diff;
-
       this._setDirection(direction);
 
       // Position popover next to the target.
@@ -160,6 +156,15 @@ limitations under the License.
 
       own = el.getBoundingClientRect();
 
+      // This is the difference between the side and the hypothenuse of the arrow.
+      const diff = (function(x) {
+        return (x / 2) * Math.sqrt(2) - x / 2;
+      })(parseInt(window.getComputedStyle(arrow).width));
+
+      // This is the limit for the arrow. If it's moved further than this it's outside the popover.
+      const limit = margin + radius + diff + 2;
+
+
       // Keep popover inside window and arrow inside popover.
       if (['left', 'right'].indexOf(direction) > -1) {
         if (own.top < margin) {
@@ -178,6 +183,9 @@ limitations under the License.
           el.style.left = (window.innerWidth - own.width - margin) + 'px';
         }
       }
+
+      // Prevent animit from restoring the style.
+      el.removeAttribute('data-animit-orig-style');
     }
 
     _positionPopover(target) {
@@ -226,11 +234,11 @@ limitations under the License.
         this.removeAttribute('style');
       }
 
-      while(this.children[0]) {
-        content.appendChild(this.children[0]);
+      while (this.childNodes[0]) {
+        content.appendChild(this.childNodes[0]);
       }
 
-      while(templateElement.children[0]) {
+      while (templateElement.children[0]) {
         this.appendChild(templateElement.children[0]);
       }
 
@@ -262,6 +270,11 @@ limitations under the License.
 
       options = options || {};
 
+      if (options.animation &&
+        !(options.animation in window.OnsPopoverElement._animatorDict)) {
+        throw new Error(`Animator ${options.animation} is not registered.`);
+      }
+
       let canceled = false;
       const event = new CustomEvent('preshow', {
         bubbles: true,
@@ -286,7 +299,6 @@ limitations under the License.
           const animator = this._animatorFactory.newAnimator(options);
           animator.show(this, () => {
             this._visible = true;
-            this._positionPopover(target);
             unlock();
 
             const event = new CustomEvent('postshow', {
@@ -375,6 +387,12 @@ limitations under the License.
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      }
+      else if (name === 'direction') {
+        this._boundOnChange();
+      }
+      else if (name === 'animation' || name === 'animation-options') {
+        this._animatorFactory = this._createAnimatorFactory();
       }
     }
 

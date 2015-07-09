@@ -130,13 +130,15 @@ limitations under the License.
     }
 
     _onDirectionChange() {
-     if (this._isVertical()) {
+      if (this._isVertical()) {
         this.style.overflowX = 'auto';
         this.style.overflowY = '';
       } else {
         this.style.overflowX = '';
         this.style.overflowY = 'auto';
       }
+
+      this.refresh();
     }
 
     _saveLastState() {
@@ -361,6 +363,13 @@ limitations under the License.
     /**
      * @return {Boolean}
      */
+    isOverscrollable() {
+      return this.hasAttribute('overscrollable');
+    }
+
+    /**
+     * @return {Boolean}
+     */
     _isEnabledChangeEvent() {
       const elementSize = this._getElementSize();
       const carouselItemSize = this._getCarouselItemSize();
@@ -467,24 +476,12 @@ limitations under the License.
           this._scrollToKillOverScroll();
         }
       } else {
-        this._startMomentumScroll(event);
+        this._startMomentumScroll();
       }
       this._lastDragEvent = null;
 
       event.gesture.preventDefault();
     }
-
-    _getTouchEvents() {
-      const EVENTS = [
-        'drag', 'dragstart', 'dragend',
-        'dragup', 'dragdown', 'dragleft',
-        'dragright', 'swipe', 'swipeup',
-        'swipedown', 'swipeleft', 'swiperight'
-      ];
-
-      return EVENTS.join(' ');
-    }
-
 
     /**
      * @param {Object} trait
@@ -495,7 +492,7 @@ limitations under the License.
       }.bind(this));
     }
 
-    _startMomentumScroll(event) {
+    _startMomentumScroll() {
       if (this._lastDragEvent) {
         const velocity = this._getScrollVelocity(this._lastDragEvent);
         const duration = 0.3;
@@ -568,13 +565,6 @@ limitations under the License.
      */
     _getCarouselItemElements() {
       return ons._util.arrayFrom(this.querySelectorAll('ons-carousel-item'));
-    }
-
-    /**
-     * @return {Boolean}
-     */
-    isOverscrollable() {
-      return this.hasAttribute('overscrollable');
     }
 
     /**
@@ -724,14 +714,10 @@ limitations under the License.
       this.dispatchEvent(event);
     }
 
-    /**
-     */
     first() {
       this.setActiveCarouselItemIndex(0);
     }
 
-    /**
-     */
     last() {
       this.setActiveCarouselItemIndex(
         Math.max(this._getCarouselItemCount() - 1, 0)
@@ -762,7 +748,7 @@ limitations under the License.
 
 
   if (!window.OnsCarouselElement) {
-    window.OnsCaroselElement = document.registerElement('ons-carousel', {
+    window.OnsCarouselElement = document.registerElement('ons-carousel', {
       prototype: CarouselElement.prototype
     });
   }

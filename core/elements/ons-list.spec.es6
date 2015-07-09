@@ -1,14 +1,14 @@
-describe('ons-list', function() {
-  it('provides \'OnsListElement\' global variable', function() {
+describe('ons-list', () => {
+  it('provides \'OnsListElement\' global variable', () => {
     expect(window.OnsListElement).to.be.ok;
   });
 
-  it('classList contains \'list\' by default', function() {
+  it('classList contains \'list\' by default', () => {
   	var element = new OnsListElement();
   	expect(element.classList.contains('list')).to.be.true;
   });
 
-  it('provides modifier attribute', function() {
+  it('provides modifier attribute', () => {
     var element = new OnsListElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('list--hoge')).to.be.true;

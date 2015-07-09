@@ -26,14 +26,14 @@ limitations under the License.
      * @param {Function} done A function that take item object as parameter.
      */
     prepareItem(index, done) {
-      throw new Error('This is abstract method.');
+      throw new Error('This is an abstract method.');
     }
 
     /**
      * @return {Number}
      */
     countItems() {
-      throw new Error('This is abstract method.');
+      throw new Error('This is an abstract method.');
     }
 
     /**
@@ -42,14 +42,14 @@ limitations under the License.
      * @param {Element} item.element
      */
     updateItem(index, item) {
-      throw new Error('This is abstract method.');
+      throw new Error('This is an abstract method.');
     }
 
     /**
      * @return {Number}
      */
     calculateItemHeight(index) {
-      throw new Error('This is abstract method.');
+      throw new Error('This is an abstract method.');
     }
 
     /**
@@ -57,14 +57,14 @@ limitations under the License.
      * @param {Object} item
      */
     destroyItem(index, item) {
-      throw new Error('This is abstract method.');
+      throw new Error('This is an abstract method.');
     }
 
     /**
      * @return {void}
      */
     destroy() {
-      throw new Error('This is abstract method.');
+      throw new Error('This is an abstract method.');
     }
   }
 
@@ -98,7 +98,7 @@ limitations under the License.
       this._pageContent = util.findParent(wrapperElement, '.page__content');
 
       if (!this._pageContent) {
-        throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> object.');
+        throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> element.');
       }
 
       this._itemHeightSum = [];

@@ -1,24 +1,24 @@
-describe('ons-switch', function() {
-  it('provides \'OnsSwitchElement\' global variable', function() {
+describe('ons-switch', () => {
+  it('provides \'OnsSwitchElement\' global variable', () => {
     expect(window.OnsSwitchElement).to.be.ok;
   });
 
-  it('classList contains \'switch\' by default', function() {
+  it('classList contains \'switch\' by default', () => {
   	var element = new OnsSwitchElement();
   	expect(element.classList.contains('switch')).to.be.true;
   });
 
-  it('has a \'input\' child by default', function() {
+  it('has a \'input\' child by default', () => {
   	var element = new OnsSwitchElement();
   	expect(element.children[0].classList.contains('switch__input')).to.be.true;
   });
 
-  it('has a \'div\' child by default', function() {
+  it('has a \'div\' child by default', () => {
   	var element = new OnsSwitchElement();
   	expect(element.children[1].classList.contains('switch__toggle')).to.be.true;
   });
 
-  it('provides \'modifier\' attribute', function() {
+  it('provides \'modifier\' attribute', () => {
     var element = new OnsSwitchElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('switch--hoge')).to.be.true;
@@ -34,7 +34,7 @@ describe('ons-switch', function() {
     expect(element.classList.contains('switch--fuga')).to.be.true;
   });
 
-  it('provides \'checked\' attribute', function() {
+  it('provides \'checked\' attribute', () => {
   	var element = new OnsSwitchElement();
   	expect((element).hasAttribute('checked')).not.to.be.true;
 		element.checked = true;
@@ -43,7 +43,7 @@ describe('ons-switch', function() {
   	expect((element).hasAttribute('checked')).not.to.be.true;
   });
 
-  it('\'checked\' attribute accepts truthy and falsy values', function() {
+  it('\'checked\' attribute accepts truthy and falsy values', () => {
   	var element = new OnsSwitchElement();
   	expect((element).hasAttribute('checked')).not.to.be.true;
 		element.checked = 0;
@@ -68,7 +68,7 @@ describe('ons-switch', function() {
   	expect(element.checked).to.equal(true);
   });
 
-  it('provides \'disabled\' attribute', function() {
+  it('provides \'disabled\' attribute', () => {
   	var element = new OnsSwitchElement();
   	expect((element).hasAttribute('disabled')).not.to.be.true;
 		element.disabled = true;
@@ -77,7 +77,7 @@ describe('ons-switch', function() {
   	expect((element).hasAttribute('disabled')).not.to.be.true;
   });
 
-  it('\'disabled\' attribute accepts truthy and falsy values', function() {
+  it('\'disabled\' attribute accepts truthy and falsy values', () => {
   	var element = new OnsSwitchElement();
   	expect((element).hasAttribute('disabled')).not.to.be.true;
 		element.disabled = 0;
