@@ -20,8 +20,6 @@ class DummyLazyRepeatDelegate extends LazyRepeatDelegate {
   }
 
   destroyItem(index, item) {
-    item.element.remove();
-    item.element = undefined;
   }
 
   destroy() {
@@ -77,15 +75,17 @@ describe('LazyRepeatProvider', () => {
 
   beforeEach(() => {
     delegate = new DummyLazyRepeatDelegate();
-    template = document.createElement('div');
 
     page = ons._util.createElement(`
       <ons-page>
-        <div id="wrapper"></div>
+        <ons-list>
+          <ons-list-item></ons-list-item>
+        </ons-list>
       </ons-page>
     `);
 
-    wrapper = page.querySelector('#wrapper');
+    wrapper = page.querySelector('ons-list');
+    template = wrapper.querySelector('ons-list-item');
 
     document.body.appendChild(page);
 
@@ -137,7 +137,8 @@ describe('LazyRepeatProvider', () => {
 
   describe('#_getTopOffset()', () => {
     it('should return the top of the wrapper element', () => {
-      expect(provider._getTopOffset()).to.equal(wrapper.offsetTop);
+      var topOffset = provider._wrapperElement.getBoundingClientRect().top;
+      expect(provider._getTopOffset()).to.equal(topOffset);
     });
   });
 
@@ -168,7 +169,15 @@ describe('LazyRepeatProvider', () => {
   });
 
   describe('#_render()', () => {
-    // TODO: Write tests.
+    it('should remove items that are not in view', () => {
+      expect(provider._renderedItems.hasOwnProperty(0)).to.be.true;
+
+      var pageContent = page.querySelector('.page__content');
+      pageContent.scrollTop = 10000;
+
+      provider._render();
+      expect(provider._renderedItems.hasOwnProperty(0)).to.be.false;
+    });
   });
 
   describe('#_isRendered()', () => {
@@ -178,6 +187,42 @@ describe('LazyRepeatProvider', () => {
 
     it('should return false if an item is not rendered', () => {
       expect(provider._isRendered(1000)).to.be.false;
+    });
+  });
+
+  describe('#_renderElement()', () => {
+    it('should call \'updateItem()\' if it is already rendered', () => {
+      let spy = chai.spy.on(delegate, 'updateItem');
+      provider._renderElement({index: 0, top: 0});
+      expect(spy).to.be.called.once;
+    });
+
+    it('should call \'prepareItem()\' if it is not already rendered', () => {
+      let spy = chai.spy.on(delegate, 'prepareItem');
+      provider._renderElement({index: 1000, top: 0});
+      expect(spy).to.be.called.once;
+    });
+  });
+
+  describe('#_removeElement()', () => {
+    it('should not do anything if the element is not rendered', () => {
+      let spy = chai.spy.on(delegate, 'destroyItem');
+      provider._removeElement(1000);
+      expect(spy).not.to.have.been.called();
+    });
+
+    it('should call \'destroyItem()\' if the element is rendered', () => {
+      let spy = chai.spy.on(delegate, 'destroyItem');
+      provider._removeElement(0);
+      expect(spy).to.have.been.called.once;
+    });
+  });
+
+  describe('#_removeAllElements', () => {
+    it('should remove all elements', () => {
+      expect(Object.keys(provider._renderedItems).length).not.to.equal(0);
+      provider._removeAllElements();
+      expect(Object.keys(provider._renderedItems).length).to.equal(0);
     });
   });
 });
