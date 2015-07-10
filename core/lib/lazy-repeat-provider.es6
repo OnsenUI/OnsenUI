@@ -221,7 +221,7 @@ limitations under the License.
 
     _removeAllElements() {
       for (let key in this._renderedItems) {
-        if (this._removeElement.hasOwnProperty(key)) {
+        if (this._renderedItems.hasOwnProperty(key)) {
           this._removeElement(key);
         }
       }
