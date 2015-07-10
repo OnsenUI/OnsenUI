@@ -225,4 +225,12 @@ describe('LazyRepeatProvider', () => {
       expect(Object.keys(provider._renderedItems).length).to.equal(0);
     });
   });
+
+  describe('#destroy()', () => {
+    it('should call the \'destroy()\' method', () => {
+      var spy = chai.spy.on(delegate, 'destroy');
+      provider.destroy();
+      expect(spy).to.have.been.called.once;
+    });
+  });
 });
