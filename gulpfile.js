@@ -89,7 +89,7 @@ gulp.task('core', function() {
 // core-test
 ////////////////////////////////////////
 gulp.task('core-test', ['core'], function() {
-  return gulp.src(['build/js/ons-core.js', 'core/**/*.spec.js'])
+  return gulp.src([])
     .pipe($.karma({
       configFile: 'core/test/karma.conf.js',
       action: 'run'
@@ -103,7 +103,7 @@ gulp.task('core-test', ['core'], function() {
 // watch-core-test
 ////////////////////////////////////////
 gulp.task('watch-core-test', function() {
-  return gulp.src(['build/js/ons-core.js', 'core/**/*.spec.js'])
+  return gulp.src([])
     .pipe($.karma({
       configFile: 'core/test/karma.conf.js',
       action: 'watch'
