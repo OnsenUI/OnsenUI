@@ -166,6 +166,46 @@ limitations under the License.
    */
   ons.createDialog = ons._createDialogOriginal;
 
+  /**
+   * @param {String} page
+   * @param {Object} [options]
+   * @param {Function} [options.link]
+   * @return {Promise}
+   */
+  ons._createAlertDialogOriginal = function(page, options) {
+    options = options || {};
+
+    if (!page) {
+      throw new Error('Page url must be defined.');
+    }
+
+    return ons._internal.getPageHTMLAsync(page).then(html => {
+      html = html.match(/<ons-alert-dialog/gi) ? `<div>${html}</div>` : `<ons-alert-dialog>${html}</ons-alert-dialog>`;
+      const div = ons._util.createElement('<div>' + html + '</div>');
+
+      const alertDialog = div.querySelector('ons-alert-dialog');
+      if (!alertDialog) {
+        throw new Error(`<ons-alert-dialog> element is not provided on "${page}" page.`);
+      }
+      CustomElements.upgrade(alertDialog);
+      document.body.appendChild(alertDialog);
+
+      if (options.link instanceof Function) {
+        options.link(alertDialog);
+      }
+
+      return alertDialog;
+    });
+  };
+
+  /**
+   * @param {String} page
+   * @param {Object} [options]
+   * @param {Function} [options.link]
+   * @return {Promise}
+   */
+  ons.createAlertDialogOriginal = ons._createAlertDialogOriginal;
+
   function waitDeviceReady() {
     const unlockDeviceReady = ons._readyLock.lock();
     window.addEventListener('DOMContentLoaded', function() {

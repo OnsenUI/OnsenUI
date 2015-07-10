@@ -428,40 +428,16 @@ limitations under the License.
       createAlertDialog: function(page, options) {
         options = options || {};
 
-        if (!page) {
-          throw new Error('Page url must be defined.');
-        }
-
-        var alertDialog = angular.element('<ons-alert-dialog>'),
-          $onsen = this._getOnsenService();
-
-        angular.element(document.body).append(angular.element(alertDialog));
-
-        return $onsen.getPageHTMLAsync(page).then(function(html) {
-          var div = document.createElement('div');
-          div.innerHTML = html;
-
-          var el = angular.element(div.querySelector('ons-alert-dialog'));
-
-          // Copy attributes and insert html.
-          var attrs = el.prop('attributes');
-          for (var i = 0, l = attrs.length; i < l; i++) {
-            alertDialog.attr(attrs[i].name, attrs[i].value); 
-          }
-          alertDialog.html(el.html());
-
+        options.link = function(element) {
           if (options.parentScope) {
-            ons.$compile(alertDialog)(options.parentScope.$new());
+            ons.$compile(angular.element(element))(options.parentScope.$new());
+          } else {
+            ons.compile(element);
           }
-          else {
-            ons.compile(alertDialog[0]);
-          }
+        };
 
-          if (el.attr('disabled')) {
-            alertDialog.attr('disabled', 'disabled');
-          }
-
-          return  alertDialog.data('ons-alert-dialog');
+        return ons._createAlertDialogOriginal(page, options).then(function(alertDialog) {
+          return angular.element(alertDialog).data('ons-alert-dialog');
         });
       },
 
