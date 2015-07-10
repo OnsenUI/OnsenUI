@@ -150,7 +150,7 @@ describe('LazyRepeatProvider', () => {
 
       // Must wait 200ms since it's already called by constructor.
       setTimeout(() => {
-        expect(spy).to.be.called.once;
+        expect(spy).to.have.been.called.once;
         done();
       }, 200);
     });
@@ -162,7 +162,7 @@ describe('LazyRepeatProvider', () => {
       provider._onChange();
 
       setTimeout(() => {
-        expect(spy).to.be.called.once;
+        expect(spy).to.have.been.called.once;
         done();
       }, 200);
     });
@@ -194,13 +194,13 @@ describe('LazyRepeatProvider', () => {
     it('should call \'updateItem()\' if it is already rendered', () => {
       let spy = chai.spy.on(delegate, 'updateItem');
       provider._renderElement({index: 0, top: 0});
-      expect(spy).to.be.called.once;
+      expect(spy).to.have.been.called.once;
     });
 
     it('should call \'prepareItem()\' if it is not already rendered', () => {
       let spy = chai.spy.on(delegate, 'prepareItem');
       provider._renderElement({index: 1000, top: 0});
-      expect(spy).to.be.called.once;
+      expect(spy).to.have.been.called.once;
     });
   });
 
