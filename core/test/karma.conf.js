@@ -26,7 +26,8 @@ module.exports = function(config) {
       '../../core/lib/*.{es6,js}',
       '../../core/*.{es6,js}',
       '../../core/elements/*.{es6,js}',
-      '../../build/css/onsenui.css'
+      '../../build/css/onsenui.css',
+      '../../build/css/onsen-css-components.css'
     ],
 
     // list of files to exclude
