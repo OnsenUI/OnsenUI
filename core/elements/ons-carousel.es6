@@ -46,13 +46,15 @@ limitations under the License.
     }
 
     _onDirectionChange() {
-     if (this._isVertical()) {
+      if (this._isVertical()) {
         this.style.overflowX = 'auto';
         this.style.overflowY = '';
       } else {
         this.style.overflowX = '';
         this.style.overflowY = 'auto';
       }
+
+      this.refresh();
     }
 
     _saveLastState() {
@@ -390,7 +392,7 @@ limitations under the License.
           this._scrollToKillOverScroll();
         }
       } else {
-        this._startMomentumScroll(event);
+        this._startMomentumScroll();
       }
       this._lastDragEvent = null;
 
@@ -406,7 +408,7 @@ limitations under the License.
       }.bind(this));
     }
 
-    _startMomentumScroll(event) {
+    _startMomentumScroll() {
       if (this._lastDragEvent) {
         var velocity = this._getScrollVelocity(this._lastDragEvent);
         var duration = 0.3;
@@ -703,6 +705,7 @@ limitations under the License.
         children[i].style.width = finalWidth + 'px';
         children[i].style.visibility = 'visible';
         children[i].style.top = (i * sizeInfo.number) + sizeInfo.unit;
+        children[i].style.left = 0;
       }
     },
   };
@@ -745,6 +748,7 @@ limitations under the License.
         children[i].style.width = sizeAttr;
         children[i].style.visibility = 'visible';
         children[i].style.left = (i * sizeInfo.number) + sizeInfo.unit;
+        children[i].style.top = 0;
       }
     },
 

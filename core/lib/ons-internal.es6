@@ -128,8 +128,14 @@ limitations under the License.
       var xhr = new XMLHttpRequest();
       xhr.open('GET', page, true);
       xhr.onload = function(response) {
-        var html = xhr.responseText;
-        callback(null, normalizePageHTML(html), xhr);
+        var html = xhr.responseText,
+          error = null;
+
+        if (xhr.status >= 400 && xhr.status < 600) {
+          error = xhr.status;
+        }
+
+        callback(error, normalizePageHTML(html), xhr);
       };
       xhr.onerror = function() {
         callback(xhr.status, null, xhr);
