@@ -112,7 +112,7 @@ limitations under the License.
     }
 
     attachedCallback() {
-      this.getCheckbox().addEventListener('change', this._onChangeListener);
+      this._getCheckbox().addEventListener('change', this._onChangeListener);
     }
 
     _onChangeListener() {
