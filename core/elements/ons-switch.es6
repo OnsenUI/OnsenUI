@@ -58,6 +58,7 @@ limitations under the License.
       } else {
         this.removeAttribute('checked');
       }
+      this._updateForCheckedAttribute();
     }
 
     get disabled() {
@@ -111,14 +112,14 @@ limitations under the License.
     }
 
     attachedCallback() {
-      this._getCheckbox().addEventListener('change', this._onChangeListener);
+      this.addEventListener('change', this._onChangeListener);
     }
 
     _onChangeListener() {
       if (this.checked !== true) {
-        this.parentNode.removeAttribute('checked');
+        this.removeAttribute('checked');
       } else {
-        this.parentNode.setAttribute('checked', '');
+        this.setAttribute('checked', '');
       }
     }
 
