@@ -327,7 +327,7 @@ limitations under the License.
         var module = angular.module(name, deps);
 
         var doc = window.document;
-        if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
+        if (doc.readyState == 'loading' || doc.readyState == 'uninitialized' || doc.readyState == 'inactive') {
           doc.addEventListener('DOMContentLoaded', function() {
             angular.bootstrap(doc.documentElement, [name]);
           }, false);
