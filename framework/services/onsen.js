@@ -471,7 +471,7 @@ limitations under the License.
             container[names[names.length - 1]] = object;
 
             if (container[names[names.length -1]] !== object) {
-              throw new Error('You cannot set var="' + object._attrs.var + '" because it\'s already a \'window\' read-only attribute.');
+              throw new Error('Cannot set var="' + object._attrs.var + '" because it will overwrite a read-only variable.');
             }
           }
 
