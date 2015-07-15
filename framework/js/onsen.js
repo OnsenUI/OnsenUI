@@ -19,7 +19,7 @@ limitations under the License.
  * @ngdoc object
  * @name ons
  * @category util
- * @description 
+ * @description
  *   [ja]Onsen UIで利用できるグローバルなオブジェクトです。このオブジェクトは、AngularJSのスコープから参照することができます。 [/ja]
  *   [en]A global object that's used in Onsen UI. This object can be reached from the AngularJS scope.[/en]
  */
@@ -27,7 +27,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature ready(callback)
- * @description 
+ * @description
  *   [ja]アプリの初期化に利用するメソッドです。渡された関数は、Onsen UIの初期化が終了している時点で必ず呼ばれます。[/ja]
  *   [en]Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized.[/en]
  * @param {Function} callback
@@ -38,13 +38,13 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature bootstrap([moduleName, [dependencies]])
- * @description 
+ * @description
  *   [ja]Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます。[/ja]
  *   [en]Initialize Onsen UI. Can be used to load Onsen UI without using the <code>ng-app</code> attribute from AngularJS.[/en]
- * @param {String} [moduleName] 
+ * @param {String} [moduleName]
  *   [en]AngularJS module name.[/en]
  *   [ja]Angular.jsでのモジュール名[/ja]
- * @param {Array} [dependencies] 
+ * @param {Array} [dependencies]
  *   [en]List of AngularJS module dependencies.[/en]
  *   [ja]依存するAngular.jsのモジュール名の配列[/ja]
  * @return {Object}
@@ -55,7 +55,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature enableAutoStatusBarFill()
- * @description 
+ * @description
  *   [en]Enable status bar fill feature on iOS7 and above.[/en]
  *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を有効にします。[/ja]
  */
@@ -63,7 +63,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature disableAutoStatusBarFill()
- * @description 
+ * @description
  *   [en]Disable status bar fill feature on iOS7 and above.[/en]
  *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を無効にします。[/ja]
  */
@@ -96,7 +96,7 @@ limitations under the License.
  * @return {Object}
  *   [en]Component object. Will return null if no component was found.[/en]
  *   [ja]コンポーネントのオブジェクトを返します。もしコンポーネントが見つからなかった場合にはnullを返します。[/ja]
- * @description 
+ * @description
  *   [en]Find parent component object of <code>dom</code> element.[/en]
  *   [ja]指定されたdom引数の親要素をたどってコンポーネントを検索します。[/ja]
  */
@@ -113,7 +113,7 @@ limitations under the License.
  * @return {Object}
  *   [en]Component object. Will return null if no component was found.[/en]
  *   [ja]コンポーネントのオブジェクトを返します。もしコンポーネントが見つからなかった場合にはnullを返します。[/ja]
- * @description 
+ * @description
  *   [en]Find component object using CSS selector.[/en]
  *   [ja]CSSセレクタを使ってコンポーネントのオブジェクトを検索します。[/ja]
  */
@@ -121,10 +121,10 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature setDefaultDeviceBackButtonListener(listener)
- * @param {Function} listener 
+ * @param {Function} listener
  *   [en]Function that executes when device back button is pressed.[/en]
  *   [ja]デバイスのバックボタンが押された時に実行される関数オブジェクトを指定します。[/ja]
- * @description 
+ * @description
  *   [en]Set default handler for device back button.[/en]
  *   [ja]デバイスのバックボタンのためのデフォルトのハンドラを設定します。[/ja]
  */
@@ -132,7 +132,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature disableDeviceBackButtonHandler()
- * @description 
+ * @description
  * [en]Disable device back button event handler.[/en]
  * [ja]デバイスのバックボタンのイベントを受け付けないようにします。[/ja]
  */
@@ -140,7 +140,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature enableDeviceBackButtonHandler()
- * @description 
+ * @description
  * [en]Enable device back button event handler.[/en]
  * [ja]デバイスのバックボタンのイベントを受け付けるようにします。[/ja]
  */
@@ -151,7 +151,7 @@ limitations under the License.
  * @return {Boolean}
  *   [en]Will be true if Onsen UI is initialized.[/en]
  *   [ja]初期化されているかどうかを返します。[/ja]
- * @description 
+ * @description
  *   [en]Returns true if Onsen UI is initialized.[/en]
  *   [ja]Onsen UIがすでに初期化されているかどうかを返すメソッドです。[/ja]
  */
@@ -162,7 +162,7 @@ limitations under the License.
  * @param {HTMLElement} dom
  *   [en]Element to compile.[/en]
  *   [ja]コンパイルする要素を指定します。[/ja]
- * @description 
+ * @description
  *   [en]Compile Onsen UI components.[/en]
  *   [ja]通常のHTMLの要素をOnsen UIのコンポーネントにコンパイルします。[/ja]
  */
@@ -173,7 +173,7 @@ limitations under the License.
  * @return {Boolean}
  *   [en]Will be true if the app is running in Cordova.[/en]
  *   [ja]Cordovaで実行されている場合にtrueになります。[/ja]
- * @description 
+ * @description
  *   [en]Returns true if running inside Cordova.[/en]
  *   [ja]Cordovaで実行されているかどうかを返すメソッドです。[/ja]
  */
@@ -193,7 +193,7 @@ limitations under the License.
  * @return {Promise}
  *   [en]Promise object that resolves to the alert dialog component object.[/en]
  *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
- * @description 
+ * @description
  *   [en]Create a alert dialog instance from a template.[/en]
  *   [ja]テンプレートからアラートダイアログのインスタンスを生成します。[/ja]
  */
@@ -213,7 +213,7 @@ limitations under the License.
  * @return {Promise}
  *   [en]Promise object that resolves to the dialog component object.[/en]
  *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
- * @description 
+ * @description
  *   [en]Create a dialog instance from a template.[/en]
  *   [ja]テンプレートからダイアログのインスタンスを生成します。[/ja]
  */
@@ -233,7 +233,7 @@ limitations under the License.
  * @return {Promise}
  *   [en]Promise object that resolves to the popover component object.[/en]
  *   [ja]ポップオーバーのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
- * @description 
+ * @description
  *   [en]Create a popover instance from a template.[/en]
  *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
  */
@@ -327,7 +327,7 @@ limitations under the License.
         var module = angular.module(name, deps);
 
         var doc = window.document;
-        if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
+        if (doc.readyState == 'loading' || doc.readyState == 'uninitialized' || doc.readyState == 'interactive') {
           doc.addEventListener('DOMContentLoaded', function() {
             angular.bootstrap(doc.documentElement, [name]);
           }, false);
@@ -446,7 +446,7 @@ limitations under the License.
           // Copy attributes and insert html.
           var attrs = el.prop('attributes');
           for (var i = 0, l = attrs.length; i < l; i++) {
-            alertDialog.attr(attrs[i].name, attrs[i].value); 
+            alertDialog.attr(attrs[i].name, attrs[i].value);
           }
           alertDialog.html(el.html());
 
@@ -492,7 +492,7 @@ limitations under the License.
           // Copy attributes and insert html.
           var attrs = el.prop('attributes');
           for (var i = 0, l = attrs.length; i < l; i++) {
-            dialog.attr(attrs[i].name, attrs[i].value); 
+            dialog.attr(attrs[i].name, attrs[i].value);
           }
           dialog.html(el.html());
 
@@ -517,8 +517,8 @@ limitations under the License.
               childStyle = child.getAttribute('style'),
               newStyle = (function(a, b) {
                 var c =
-                (a.substr(-1) === ';' ? a : a + ';') + 
-                  (b.substr(-1) === ';' ? b : b + ';'); 
+                (a.substr(-1) === ';' ? a : a + ';') +
+                  (b.substr(-1) === ';' ? b : b + ';');
                 return c;
               })(parentStyle, childStyle);
 
