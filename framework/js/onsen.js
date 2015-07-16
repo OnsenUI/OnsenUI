@@ -460,15 +460,13 @@ limitations under the License.
      * @param {String} page
      */
     ons.resolveLoadingPlaceholder = function(page) {
-      var $onsen = this._getOnsenService();
+      return ons._resolveLoadingPlaceholderOriginal(page, function(element) {
+        ons.compile(element);
+      });
+    };
 
-      if ($onsen.deferredLoadingPlaceholders && $onsen.deferredLoadingPlaceholders.length) {
-        var deferred = $onsen.deferredLoadingPlaceholders.pop();
-        deferred.resolve(page);
-      }
-      else {
-        throw new Error('No ons-loading-placeholder exists.');
-      }
+    ons._setupLoadingPlaceHolders = function() {
+      // Do nothing
     };
   }
 

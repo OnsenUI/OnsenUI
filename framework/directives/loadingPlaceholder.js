@@ -25,72 +25,18 @@
 (function(){
   'use strict';
 
-  var module = angular.module('onsen');
-
-  module.directive('onsLoadingPlaceholder', function($onsen, $compile, $q) {
-    var getPage = function(attrs) {
-      var deferred = $q.defer();
-
-      if (attrs.onsLoadingPlaceholder) {
-        deferred.resolve(attrs.onsLoadingPlaceholder);
-      }
-      else {
-        try {
-          $onsen.deferredLoadingPlaceholders.push(deferred);
-        }
-        catch (e) {
-          $onsen.deferredLoadingPlaceholders = [deferred];
-        }
-      }
-
-      return deferred.promise;
-    };
-
+  angular.module('onsen').directive('onsLoadingPlaceholder', function() {
     return {
       restrict: 'A',
-      replace: false,
-      transclude: false,
-      scope: false,
-      compile: function(element, attrs) {
-        setImmediate(function() {
-          getPage(attrs).then(
-            function(page) {
-              console.log(page);
-              return $onsen.getPageHTMLAsync(page);
-            },
-            function(error) {
-              throw new Error('Unabled to resolve placeholder: ' + error);
-            }
-          )
-          .then(function(html) {
-
-            // Remove page tag.
-            html = html
-              .trim()
-              .replace(/^<ons-page>/, '')
-              .replace(/<\/ons-page>$/, '');
-
-            var div = document.createElement('div');
-            div.innerHTML = html;
-
-            var newElement = angular.element(div);
-            newElement.css('display', 'none');
-
-            element.append(newElement);
-            ons.compile(newElement[0]);
-
-            for (var i = element[0].childNodes.length - 1; i >= 0; i--){
-              var e = element[0].childNodes[i];
-              if (e !== div) {
-                element[0].removeChild(e);
-              }
-            }
-
-            newElement.css('display', 'block');
+      link: function(scope, element, attrs) {
+        CustomElements.upgrade(element[0]);
+        if (attrs.onsLoadingPlaceholder) {
+          ons._resolveLoadingPlaceholder(element[0], attrs.onsLoadingPlaceholder, function(contentElement) {
+            CustomElements.upgrade(contentElement);
+            ons.compile(contentElement);
           });
-        });
+        }
       }
     };
   });
 })();
-

@@ -10,6 +10,11 @@
     });
   }, false);
 
+  // setup loading placeholder
+  ons.ready(function() {
+    ons._setupLoadingPlaceHolders();
+  });
+
   // viewport.js
   new Viewport().setup();
 
