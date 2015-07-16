@@ -39,9 +39,7 @@ limitations under the License.
 
         DeviceBackButtonHandler: $onsGlobal._deviceBackButtonDispatcher,
 
-        _defaultDeviceBackButtonHandler: $onsGlobal._deviceBackButtonDispatcher.createHandler(window.document.body, function() {
-          navigator.app.exitApp();
-        }),
+        _defaultDeviceBackButtonHandler: $onsGlobal._defaultDeviceBackButtonHandler,
 
         /**
          * @return {Object}

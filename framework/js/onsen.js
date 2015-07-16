@@ -259,7 +259,6 @@ limitations under the License.
   initOnsenFacade();
   waitOnsenUILoad();
   initAngularModule();
-  changeGestureDetectorDefault();
 
   function waitOnsenUILoad() {
     var unlockOnsenUI = ons._readyLock.lock();
@@ -293,219 +292,184 @@ limitations under the License.
     });
   }
 
-  // Change the default touchAction of GestureDetector, needed for Windows Phone app
-  function changeGestureDetectorDefault() {
-    ons.GestureDetector.defaults.behavior.touchAction = 'none';
-  }
-
   function initOnsenFacade() {
-    var object = {
+    ons._onsenService = null;
 
-      _onsenService: null,
+    // Object to attach component variables to when using the var="..." attribute.
+    // Can be set to null to avoid polluting the global scope.
+    ons.componentBase = window;
 
-      // Object to attach component variables to when using the var="..." attribute.
-      // Can be set to null to avoid polluting the global scope.
-      componentBase: window,
-
-      /**
-       * Bootstrap this document as a Onsen UI application.
-       *
-       * @param {String} [name] optional name
-       * @param {Array} [deps] optional dependency modules
-       */
-      bootstrap : function(name, deps) {
-        if (angular.isArray(name)) {
-          deps = name;
-          name = undefined;
-        }
-
-        if (!name) {
-          name = 'myOnsenApp';
-        }
-
-        deps = ['onsen'].concat(angular.isArray(deps) ? deps : []);
-        var module = angular.module(name, deps);
-
-        var doc = window.document;
-        if (doc.readyState == 'loading' || doc.readyState == 'uninitialized' || doc.readyState == 'interactive') {
-          doc.addEventListener('DOMContentLoaded', function() {
-            angular.bootstrap(doc.documentElement, [name]);
-          }, false);
-        } else if (doc.documentElement) {
-          angular.bootstrap(doc.documentElement, [name]);
-        } else {
-          throw new Error('Invalid state');
-        }
-
-        return module;
-      },
-
-      /**
-       * @param {String} [name]
-       * @param {Object/jqLite/HTMLElement} dom $event object or jqLite object or HTMLElement object.
-       * @return {Object}
-       */
-      findParentComponentUntil: function(name, dom) {
-        var element;
-        if (dom instanceof HTMLElement) {
-          element = angular.element(dom);
-        } else if (dom instanceof angular.element) {
-          element = dom;
-        } else if (dom.target) {
-          element = angular.element(dom.target);
-        }
-
-        return element.inheritedData(name);
-      },
-
-      /**
-       * @param {Function} listener
-       */
-      setDefaultDeviceBackButtonListener: function(listener) {
-        this._getOnsenService().getDefaultDeviceBackButtonHandler().setListener(listener);
-      },
-
-      /**
-       * Disable this framework to handle cordova "backbutton" event.
-       */
-      disableDeviceBackButtonHandler: function() {
-        this._getOnsenService().DeviceBackButtonHandler.disable();
-      },
-
-      /**
-       * Enable this framework to handle cordova "backbutton" event.
-       */
-      enableDeviceBackButtonHandler: function() {
-        this._getOnsenService().DeviceBackButtonHandler.enable();
-      },
-
-      /**
-       * Find view object correspond dom element queried by CSS selector.
-       *
-       * @param {String} selector CSS selector
-       * @param {HTMLElement} [dom]
-       * @return {Object/void}
-       */
-      findComponent: function(selector, dom) {
-        var target = (dom ? dom : document).querySelector(selector);
-        return target ? angular.element(target).data(target.nodeName.toLowerCase()) || null : null;
-      },
-
-      /**
-       * @param {HTMLElement} dom
-       */
-      compile : function(dom) {
-        if (!ons.$compile) {
-          throw new Error('ons.$compile() is not ready. Wait for initialization with ons.ready().');
-        }
-
-        if (!(dom instanceof HTMLElement)) {
-          throw new Error('First argument must be an instance of HTMLElement.');
-        }
-
-        var scope = angular.element(dom).scope();
-        if (!scope) {
-          throw new Error('AngularJS Scope is null. Argument DOM element must be attached in DOM document.');
-        }
-
-        ons.$compile(dom)(scope);
-      },
-
-      _getOnsenService: function() {
-        if (!this._onsenService) {
-          throw new Error('$onsen is not loaded, wait for ons.ready().');
-        }
-
-        return this._onsenService;
-      },
-
-      /**
-       * @param {String} page
-       * @param {Object} [options]
-       * @param {Object} [options.parentScope]
-       * @return {Promise}
-       */
-      createAlertDialog: function(page, options) {
-        options = options || {};
-
-        options.link = function(element) {
-          if (options.parentScope) {
-            ons.$compile(angular.element(element))(options.parentScope.$new());
-          } else {
-            ons.compile(element);
-          }
-        };
-
-        return ons._createAlertDialogOriginal(page, options).then(function(alertDialog) {
-          return angular.element(alertDialog).data('ons-alert-dialog');
-        });
-      },
-
-      /**
-       * @param {String} page
-       * @param {Object} [options]
-       * @param {Object} [options.parentScope]
-       * @return {Promise}
-       */
-      createDialog: function(page, options) {
-        options = options || {};
-
-        options.link = function(element) {
-          if (options.parentScope) {
-            ons.$compile(angular.element(element))(options.parentScope.$new());
-          } else {
-            ons.compile(element);
-          }
-        };
-
-        return ons._createDialogOriginal(page, options).then(function(dialog) {
-          return angular.element(dialog).data('ons-dialog');
-        });
-      },
-
-      /**
-       * @param {String} page
-       * @param {Object} [options]
-       * @param {Object} [options.parentScope]
-       * @return {Promise}
-       */
-      createPopover: function(page, options) {
-        options = options || {};
-
-        options.link = function(element) {
-          if (options.parentScope) {
-            ons.$compile(angular.element(element))(options.parentScope.$new());
-          } else {
-            ons.compile(element);
-          }
-        };
-
-        return ons._createPopoverOriginal(page, options).then(function(popover) {
-          return angular.element(popover).data('ons-popover');
-        });
-      },
-
-      /**
-       * @param {String} page
-       */
-      resolveLoadingPlaceholder: function(page) {
-        var $onsen = this._getOnsenService();
-
-        if ($onsen.deferredLoadingPlaceholders && $onsen.deferredLoadingPlaceholders.length) {
-          var deferred = $onsen.deferredLoadingPlaceholders.pop();
-          deferred.resolve(page);
-        }
-        else {
-          throw new Error('No ons-loading-placeholder exists.');
-        }
+    /**
+     * Bootstrap this document as a Onsen UI application.
+     *
+     * @param {String} [name] optional name
+     * @param {Array} [deps] optional dependency modules
+     */
+    ons.bootstrap = function(name, deps) {
+      if (angular.isArray(name)) {
+        deps = name;
+        name = undefined;
       }
+
+      if (!name) {
+        name = 'myOnsenApp';
+      }
+
+      deps = ['onsen'].concat(angular.isArray(deps) ? deps : []);
+      var module = angular.module(name, deps);
+
+      var doc = window.document;
+      if (doc.readyState == 'loading' || doc.readyState == 'uninitialized' || doc.readyState == 'interactive') {
+        doc.addEventListener('DOMContentLoaded', function() {
+          angular.bootstrap(doc.documentElement, [name]);
+        }, false);
+      } else if (doc.documentElement) {
+        angular.bootstrap(doc.documentElement, [name]);
+      } else {
+        throw new Error('Invalid state');
+      }
+
+      return module;
     };
 
-    for (var key in object) {
-      if (object.hasOwnProperty(key)) {
-        ons[key] = object[key];
+    /**
+     * @param {String} [name]
+     * @param {Object/jqLite/HTMLElement} dom $event object or jqLite object or HTMLElement object.
+     * @return {Object}
+     */
+    ons.findParentComponentUntil = function(name, dom) {
+      var element;
+      if (dom instanceof HTMLElement) {
+        element = angular.element(dom);
+      } else if (dom instanceof angular.element) {
+        element = dom;
+      } else if (dom.target) {
+        element = angular.element(dom.target);
       }
-    }
+
+      return element.inheritedData(name);
+    };
+
+    /**
+     * Find view object correspond dom element queried by CSS selector.
+     *
+     * @param {String} selector CSS selector
+     * @param {HTMLElement} [dom]
+     * @return {Object/void}
+     */
+    ons.findComponent = function(selector, dom) {
+      var target = (dom ? dom : document).querySelector(selector);
+      return target ? angular.element(target).data(target.nodeName.toLowerCase()) || null : null;
+    };
+
+    /**
+     * @param {HTMLElement} dom
+     */
+    ons.compile = function(dom) {
+      if (!ons.$compile) {
+        throw new Error('ons.$compile() is not ready. Wait for initialization with ons.ready().');
+      }
+
+      if (!(dom instanceof HTMLElement)) {
+        throw new Error('First argument must be an instance of HTMLElement.');
+      }
+
+      var scope = angular.element(dom).scope();
+      if (!scope) {
+        throw new Error('AngularJS Scope is null. Argument DOM element must be attached in DOM document.');
+      }
+
+      ons.$compile(dom)(scope);
+    };
+
+    ons._getOnsenService = function() {
+      if (!this._onsenService) {
+        throw new Error('$onsen is not loaded, wait for ons.ready().');
+      }
+
+      return this._onsenService;
+    };
+
+    /**
+     * @param {String} page
+     * @param {Object} [options]
+     * @param {Object} [options.parentScope]
+     * @return {Promise}
+     */
+    ons.createAlertDialog = function(page, options) {
+      options = options || {};
+
+      options.link = function(element) {
+        if (options.parentScope) {
+          ons.$compile(angular.element(element))(options.parentScope.$new());
+        } else {
+          ons.compile(element);
+        }
+      };
+
+      return ons._createAlertDialogOriginal(page, options).then(function(alertDialog) {
+        return angular.element(alertDialog).data('ons-alert-dialog');
+      });
+    };
+
+    /**
+     * @param {String} page
+     * @param {Object} [options]
+     * @param {Object} [options.parentScope]
+     * @return {Promise}
+     */
+    ons.createDialog = function(page, options) {
+      options = options || {};
+
+      options.link = function(element) {
+        if (options.parentScope) {
+          ons.$compile(angular.element(element))(options.parentScope.$new());
+        } else {
+          ons.compile(element);
+        }
+      };
+
+      return ons._createDialogOriginal(page, options).then(function(dialog) {
+        return angular.element(dialog).data('ons-dialog');
+      });
+    };
+
+    /**
+     * @param {String} page
+     * @param {Object} [options]
+     * @param {Object} [options.parentScope]
+     * @return {Promise}
+     */
+    ons.createPopover = function(page, options) {
+      options = options || {};
+
+      options.link = function(element) {
+        if (options.parentScope) {
+          ons.$compile(angular.element(element))(options.parentScope.$new());
+        } else {
+          ons.compile(element);
+        }
+      };
+
+      return ons._createPopoverOriginal(page, options).then(function(popover) {
+        return angular.element(popover).data('ons-popover');
+      });
+    };
+
+    /**
+     * @param {String} page
+     */
+    ons.resolveLoadingPlaceholder = function(page) {
+      var $onsen = this._getOnsenService();
+
+      if ($onsen.deferredLoadingPlaceholders && $onsen.deferredLoadingPlaceholders.length) {
+        var deferred = $onsen.deferredLoadingPlaceholders.pop();
+        deferred.resolve(page);
+      }
+      else {
+        throw new Error('No ons-loading-placeholder exists.');
+      }
+    };
   }
 
 })(window.ons = window.ons || {});

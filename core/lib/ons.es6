@@ -56,6 +56,28 @@ limitations under the License.
   };
 
   /**
+   * @param {Function} listener
+   */
+  ons.setDefaultDeviceBackButtonListener = function(listener) {
+    ons._defaultDeviceBackButtonHandler.setListener(listener);
+  };
+
+  /**
+   * Disable this framework to handle cordova "backbutton" event.
+   */
+  ons.disableDeviceBackButtonHandler = function() {
+    ons._deviceBackButtonDispatcher.disable();
+  };
+
+  /**
+   * Enable this framework to handle cordova "backbutton" event.
+   */
+  ons.enableDeviceBackButtonHandler = function() {
+    ons._deviceBackButtonDispatcher.enable();
+  };
+
+
+  /**
    * Enable status bar fill feature on iOS7 and above.
    */
   ons.enableAutoStatusBarFill = () => {

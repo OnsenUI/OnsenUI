@@ -3,6 +3,13 @@
   // fastclick
   window.addEventListener('load', () => FastClick.attach(document.body), false);
 
+  // ons._defaultDeviceBackButtonHandler
+  window.addEventListener('DOMContentLoaded', () => {
+    ons._defaultDeviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(window.document.body, () => {
+      navigator.app.exitApp();
+    });
+  }, false);
+
   // viewport.js
   new Viewport().setup();
 
@@ -13,7 +20,6 @@
       window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
   });
 
-
   // BaseElement
   if (typeof HTMLElement !== 'function') {
     ons._BaseElement = () => {};
@@ -21,5 +27,8 @@
   } else {
     ons._BaseElement = HTMLElement;
   }
+
+  // Change the default touchAction of GestureDetector, needed for Windows Phone app
+  ons.GestureDetector.defaults.behavior.touchAction = 'none';
 
 })(window.ons = window.ons || {});
