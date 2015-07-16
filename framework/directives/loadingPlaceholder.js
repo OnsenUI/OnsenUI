@@ -31,9 +31,12 @@
       link: function(scope, element, attrs) {
         CustomElements.upgrade(element[0]);
         if (attrs.onsLoadingPlaceholder) {
-          ons._resolveLoadingPlaceholder(element[0], attrs.onsLoadingPlaceholder, function(contentElement) {
+          ons._resolveLoadingPlaceholder(element[0], attrs.onsLoadingPlaceholder, function(contentElement, done) {
             CustomElements.upgrade(contentElement);
             ons.compile(contentElement);
+            scope.$evalAsync(function() {
+              setImmediate(done);
+            });
           });
         }
       }

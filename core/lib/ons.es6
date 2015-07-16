@@ -266,7 +266,7 @@ limitations under the License.
   };
 
   ons._resolveLoadingPlaceholder = function(element, page, link) {
-    link = link || function() { };
+    link = link || function(element, done) { done(); };
     ons._internal.getPageHTMLAsync(page).then(html => {
 
       while (element.firstChild) {
@@ -278,8 +278,9 @@ limitations under the License.
 
       element.appendChild(contentElement);
 
-      link(contentElement);
-      contentElement.style.display = '';
+      link(contentElement, function() {
+        contentElement.style.display = '';
+      });
 
     }).catch(error => {
       throw new Error('Unabled to resolve placeholder: ' + error);
