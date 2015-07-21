@@ -250,19 +250,21 @@
 (function() {
   'use strict';
 
-  var module = angular.module('onsen');
 
   /**
    * Pull hook directive.
    */
-  module.directive('onsPullHook', function($onsen, PullHookView) {
+  angular.module('onsen').directive('onsPullHook', function($onsen, PullHookView) {
     return {
       restrict: 'E',
       replace: false,
       scope: true,
+
       compile: function(element, attrs) {
+        CustomElements.upgrade(element[0]);
         return {
           pre: function(scope, element, attrs) {
+            CustomElements.upgrade(element[0]);
             var pullHook = new PullHookView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, pullHook);
