@@ -69,10 +69,16 @@ limitations under the License.
     }
 
     _compile() {
+      const style = this.getAttribute('style');
+
       this.style.display = 'none';
 
       const template = templateSource.cloneNode(true);
       const dialog = template.children[1];
+
+      if (style) {
+        dialog.setAttribute('style', style);
+      }
 
       while (this.firstChild) {
         dialog.appendChild(this.firstChild);
