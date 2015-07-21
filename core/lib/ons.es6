@@ -56,6 +56,28 @@ limitations under the License.
   };
 
   /**
+   * @param {Function} listener
+   */
+  ons.setDefaultDeviceBackButtonListener = function(listener) {
+    ons._defaultDeviceBackButtonHandler.setListener(listener);
+  };
+
+  /**
+   * Disable this framework to handle cordova "backbutton" event.
+   */
+  ons.disableDeviceBackButtonHandler = function() {
+    ons._deviceBackButtonDispatcher.disable();
+  };
+
+  /**
+   * Enable this framework to handle cordova "backbutton" event.
+   */
+  ons.enableDeviceBackButtonHandler = function() {
+    ons._deviceBackButtonDispatcher.enable();
+  };
+
+
+  /**
    * Enable status bar fill feature on iOS7 and above.
    */
   ons.enableAutoStatusBarFill = () => {
@@ -206,9 +228,68 @@ limitations under the License.
    */
   ons.createAlertDialogOriginal = ons._createAlertDialogOriginal;
 
+  /**
+   * @param {String} page
+   * @param {Function} link
+   */
+  ons._resolveLoadingPlaceholderOriginal = function(page, link) {
+    const elements = ons._util.arrayFrom(window.document.querySelectorAll('[ons-loading-placeholder]'));
+
+    if (elements.length > 0) {
+      elements
+        .filter(element => !element.getAttribute('page'))
+        .forEach(element => {
+          element.setAttribute('ons-loading-placeholder', page);
+          ons._resolveLoadingPlaceholder(element, page, link);
+        });
+    } else {
+      throw new Error('No ons-loading-placeholder exists.');
+    }
+  };
+
+  /**
+   * @param {String} page
+   */
+  ons.resolveLoadingPlaceholder = ons._resolveLoadingPlaceholderOriginal;
+
+  ons._setupLoadingPlaceHolders = function() {
+    ons.ready(() => {
+      const elements = ons._util.arrayFrom(window.document.querySelectorAll('[ons-loading-placeholder]'));
+
+      elements.forEach(element => {
+        const page = element.getAttribute('ons-loading-placeholder');
+        if (typeof page === 'string') {
+          ons._resolveLoadingPlaceholder(element, page);
+        }
+      });
+    });
+  };
+
+  ons._resolveLoadingPlaceholder = function(element, page, link) {
+    link = link || function(element, done) { done(); };
+    ons._internal.getPageHTMLAsync(page).then(html => {
+
+      while (element.firstChild) {
+        element.removeChild(element.firstChild);
+      }
+
+      const contentElement = ons._util.createElement('<div>' + html + '</div>');
+      contentElement.style.display = 'none';
+
+      element.appendChild(contentElement);
+
+      link(contentElement, function() {
+        contentElement.style.display = '';
+      });
+
+    }).catch(error => {
+      throw new Error('Unabled to resolve placeholder: ' + error);
+    });
+  };
+
   function waitDeviceReady() {
     const unlockDeviceReady = ons._readyLock.lock();
-    window.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('DOMContentLoaded', () => {
       if (ons.isWebView()) {
         window.document.addEventListener('deviceready', unlockDeviceReady, false);
       } else {
