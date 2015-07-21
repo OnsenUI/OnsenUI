@@ -38,12 +38,14 @@ describe('ons-navigator', () => {
     nav.pushPage('hoge', {
       onTransitionEnd: () => {
         nav.insertPage(0, 'fuga');
-        expect(nav.pages.length).to.equal(3);
+        setImmediate(() => {
+          expect(nav.pages.length).to.equal(3);
 
-        let content = nav.pages[0].element._getContentElement();
-        expect(content.innerHTML).to.equal('fuga');
+          let content = nav.pages[0].element._getContentElement();
+          expect(content.innerHTML).to.equal('fuga');
 
-        done();
+          done();
+        });
       }
     });
   });
@@ -118,13 +120,15 @@ describe('ons-navigator', () => {
     expect(page.page).to.be.an('string');
   });
 
-  it('provides \'canPopPage()\' method', () => {
+  it('provides \'canPopPage()\' method', (done) => {
     let nav = new OnsNavigatorElement();
     document.body.appendChild(nav);
 
     expect(nav.canPopPage()).to.be.false;
-    nav.pushPage('hoge');
-    expect(nav.canPopPage()).to.be.true;
+    nav.pushPage('hoge', {onTransitionEnd: () => {
+      expect(nav.canPopPage()).to.be.true;
+      done();
+    }});
   });
 
   it('provides \'pages\' property', () => {
@@ -195,21 +199,24 @@ describe('ons-navigator', () => {
     return expect(promise).to.eventually.be.fulfilled;
   });
 
-  it('should be possible to cancel the \'prepush\' event', () => {
+  it('should be possible to cancel the \'prepush\' event', (done) => {
     let nav = new OnsNavigatorElement();
     document.body.appendChild(nav);
 
     expect(nav.pages.length).to.equal(1);
 
-    nav.pushPage('hoge');
-    expect(nav.pages.length).to.equal(2);
+    nav.pushPage('hoge', {onTransitionEnd: () => {
+      expect(nav.pages.length).to.equal(2);
 
-    nav.addEventListener('prepush', (event) => {
-      event.detail.cancel();
-    });
+      nav.addEventListener('prepush', (event) => {
+        event.detail.cancel();
+      });
 
-    nav.pushPage('hoge');
-    expect(nav.pages.length).to.equal(2);
+      nav.pushPage('hoge');
+      expect(nav.pages.length).to.equal(2);
+
+      done();
+    }});
   });
 
   it('should be possible to cancel the \'prepop\' event', (done) => {
@@ -232,14 +239,18 @@ describe('ons-navigator', () => {
     });
   });
 
-  it('provides \'page\' attribute', () => {
+  it('provides \'page\' attribute', (done) => {
     let nav = ons._util.createElement(`
       <ons-navigator page='hoge'></ons-navigator>
     `);
     document.body.appendChild(nav);
 
-    let content = nav.getCurrentPage().element._getContentElement();
-    expect(content.innerHTML).to.equal('hoge');
+    setImmediate(() => {
+      let content = nav.getCurrentPage().element._getContentElement();
+      expect(content.innerHTML).to.equal('hoge');
+
+      done();
+    });
   });
 
   it('can refresh the previous page', (done) => {

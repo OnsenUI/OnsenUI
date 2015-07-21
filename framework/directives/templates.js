@@ -3,19 +3,6 @@ try { module = angular.module('templates-main'); }
 catch(err) { module = angular.module('templates-main', []); }
 module.run(['$templateCache', function($templateCache) {
   'use strict';
-  $templateCache.put('templates/dialog.tpl',
-    '<div class="dialog-mask"></div>\n' +
-    '<div class="dialog {{ modifierTemplater(\'dialog--*\') }}"></div>\n' +
-    '</div>\n' +
-    '');
-}]);
-})();
-
-(function(module) {
-try { module = angular.module('templates-main'); }
-catch(err) { module = angular.module('templates-main', []); }
-module.run(['$templateCache', function($templateCache) {
-  'use strict';
   $templateCache.put('templates/sliding_menu.tpl',
     '<div class="onsen-sliding-menu__menu ons-sliding-menu-inner"></div>\n' +
     '<div class="onsen-sliding-menu__main ons-sliding-menu-inner"></div>\n' +

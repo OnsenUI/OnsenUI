@@ -18,20 +18,20 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var scheme = {
+  const scheme = {
     '': 'switch--*',
     'switch__input': 'switch--*__input',
     'switch__toggle': 'switch--*__toggle'
   };
-  var ModifierUtil = ons._internal.ModifierUtil;
-  var templateSource = ons._util.createElement(`
+  const ModifierUtil = ons._internal.ModifierUtil;
+  const templateSource = ons._util.createElement(`
     <div>
       <input type="checkbox" class="switch__input">
       <div class="switch__toggle"></div>
     </div>
   `);
 
-  var ExtendableLabelElement;
+  let ExtendableLabelElement;
   if (typeof HTMLLabelElement !== 'function') {
     // for Safari
     ExtendableLabelElement = () => {};
@@ -40,8 +40,8 @@ limitations under the License.
     ExtendableLabelElement = HTMLLabelElement;
   }
 
-  var generateId = (() => {
-    var i = 0;
+  const generateId = (() => {
+    let i = 0;
     return () => 'ons-switch-id-' + (i++);
   })();
 
@@ -100,7 +100,7 @@ limitations under the License.
 
     _compile() {
       this.classList.add('switch');
-      var template = templateSource.cloneNode(true);
+      const template = templateSource.cloneNode(true);
       while (template.children[0]) {
         this.appendChild(template.children[0]);
       }
@@ -136,7 +136,7 @@ limitations under the License.
     _setChecked(isChecked) {
       isChecked = !!isChecked;
 
-      var checkbox = this._getCheckbox();
+      const checkbox = this._getCheckbox();
 
       if (checkbox.checked != isChecked) {
         checkbox.checked = isChecked;

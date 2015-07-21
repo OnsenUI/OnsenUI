@@ -18,8 +18,8 @@ limitations under the License.
 ((ons) => {
   'use strict';
 
-  var NavigatorTransitionAnimator = ons._internal.NavigatorTransitionAnimator;
-  var util = ons._util;
+  const NavigatorTransitionAnimator = ons._internal.NavigatorTransitionAnimator;
+  const util = ons._util;
 
   /**
    * Slide animator for navigator transition like iOS's screen slide transition.
@@ -36,24 +36,24 @@ limitations under the License.
       super(options);
 
       this.backgroundMask = ons._util.createElement(`
-        <div style="position: absolute; width: 100%; height: 100%; 
+        <div style="position: absolute; width: 100%; height: 100%;
           background-color: black; opacity: 0;"></div>
       `);
     }
 
     _decompose(page) {
       CustomElements.upgrade(page.element);
-      var toolbar = page.element._getToolbarElement();
+      const toolbar = page.element._getToolbarElement();
       CustomElements.upgrade(toolbar);
-      var left = toolbar._getToolbarLeftItemsElement();
-      var right = toolbar._getToolbarRightItemsElement();
+      const left = toolbar._getToolbarLeftItemsElement();
+      const right = toolbar._getToolbarRightItemsElement();
 
-      var excludeBackButtonLabel = function(elements) {
-        var result = [];
+      const excludeBackButtonLabel = function(elements) {
+        const result = [];
 
-        for (var i = 0; i < elements.length; i++) {
+        for (let i = 0; i < elements.length; i++) {
           if (elements[i].nodeName.toLowerCase() === 'ons-back-button') {
-            let iconElement = elements[i].querySelector('.ons-back-button__icon');
+            const iconElement = elements[i].querySelector('.ons-back-button__icon');
             if (iconElement) {
               result.push(iconElement);
             }
@@ -65,11 +65,11 @@ limitations under the License.
         return result;
       };
 
-      var other = []
+      const other = []
         .concat(left.children.length === 0 ? left : excludeBackButtonLabel(left.children))
         .concat(right.children.length === 0 ? right : excludeBackButtonLabel(right.children));
 
-      var pageLabels = [
+      const pageLabels = [
         toolbar._getToolbarCenterItemsElement(),
         toolbar._getToolbarBackButtonLabelElement()
       ];
@@ -85,7 +85,7 @@ limitations under the License.
     }
 
     _shouldAnimateToolbar(enterPage, leavePage) {
-      var bothPageHasToolbar =
+      const bothPageHasToolbar =
         enterPage.element._canAnimateToolbar() && leavePage.element._canAnimateToolbar();
 
       var noAndroidLikeToolbar =
@@ -104,15 +104,15 @@ limitations under the License.
       util.removeElement(this.backgroundMask);
       leavePage.element.parentNode.insertBefore(this.backgroundMask, leavePage.element.nextSibling);
 
-      var enterPageDecomposition = this._decompose(enterPage);
-      var leavePageDecomposition = this._decompose(leavePage);
+      const enterPageDecomposition = this._decompose(enterPage);
+      const leavePageDecomposition = this._decompose(leavePage);
 
-      var delta = (() => {
-        var rect = leavePage.element.getBoundingClientRect();
+      const delta = (() => {
+        const rect = leavePage.element.getBoundingClientRect();
         return Math.round(((rect.right - rect.left) / 2) * 0.6);
       })();
 
-      var maskClear = animit(this.backgroundMask)
+      const maskClear = animit(this.backgroundMask)
         .queue({
           opacity: 0,
           transform: 'translate3d(0, 0, 0)'
@@ -130,7 +130,7 @@ limitations under the License.
           done();
         });
 
-      var shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
+      const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
 
       if (shouldAnimateToolbar) {
         enterPage.element.style.zIndex = 'auto';
@@ -325,15 +325,15 @@ limitations under the License.
       util.removeElement(this.backgroundMask);
       enterPage.element.parentNode.insertBefore(this.backgroundMask, enterPage.element.nextSibling);
 
-      var enterPageDecomposition = this._decompose(enterPage);
-      var leavePageDecomposition = this._decompose(leavePage);
+      const enterPageDecomposition = this._decompose(enterPage);
+      const leavePageDecomposition = this._decompose(leavePage);
 
-      var delta = (function() {
-        var rect = leavePage.element.getBoundingClientRect();
+      const delta = (function() {
+        const rect = leavePage.element.getBoundingClientRect();
         return Math.round(((rect.right - rect.left) / 2) * 0.6);
       })();
 
-      var maskClear = animit(this.backgroundMask)
+      const maskClear = animit(this.backgroundMask)
         .queue({
           opacity: 0.1,
           transform: 'translate3d(0, 0, 0)'
@@ -351,7 +351,7 @@ limitations under the License.
           done();
         });
 
-      var shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
+      const shouldAnimateToolbar = this._shouldAnimateToolbar(enterPage, leavePage);
 
       if (shouldAnimateToolbar) {
 

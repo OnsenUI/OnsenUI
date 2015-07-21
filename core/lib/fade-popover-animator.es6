@@ -18,7 +18,7 @@ limitations under the License.
 ((ons) => {
   'use strict';
 
-  var PopoverAnimator = ons._internal.PopoverAnimator;
+  const PopoverAnimator = ons._internal.PopoverAnimator;
 
   class FadePopoverAnimator extends PopoverAnimator {
     constructor(options) {
@@ -30,8 +30,8 @@ limitations under the License.
     * @param {Function} callback
     */
     show(popover, callback) {
-      var pop = popover.querySelector('.popover'),
-      mask = popover.querySelector('.popover-mask');
+      const pop = popover.querySelector('.popover');
+      const mask = popover.querySelector('.popover-mask');
 
       animit.runAll(
         animit(mask)
@@ -72,8 +72,8 @@ limitations under the License.
     * @param {Function} callback
     */
     hide(popover, callback) {
-      var pop = popover.querySelector('.popover'),
-        mask = popover.querySelector('.popover-mask');
+      const pop = popover.querySelector('.popover');
+      const mask = popover.querySelector('.popover-mask');
 
       animit.runAll(
         animit(mask)

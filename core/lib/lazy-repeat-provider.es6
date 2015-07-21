@@ -133,7 +133,7 @@ limitations under the License.
       }
 
       this._doorLock.waitUnlock(() => {
-        var unlock = this._doorLock.lock();
+        const unlock = this._doorLock.lock();
 
         setTimeout(function() {
           unlock();
@@ -144,18 +144,18 @@ limitations under the License.
     }
 
     _render() {
-      var items = this._getItemsInView(),
-        keep = {};
+      const items = this._getItemsInView();
+      const keep = {};
 
       this._wrapperElement.style.height = this._itemHeightSum[this._maxIndex] + 'px';
 
-      for (var i = 0, l = items.length; i < l; i ++) {
-        var _item = items[i];
+      for (let i = 0, l = items.length; i < l; i++) {
+        let _item = items[i];
         this._renderElement(_item);
         keep[_item.index] = true;
       }
 
-      for (var key in this._renderedItems) {
+      for (let key in this._renderedItems) {
         if (this._renderedItems.hasOwnProperty(key) && !keep.hasOwnProperty(key)) {
           this._removeElement(key);
         }
@@ -179,14 +179,14 @@ limitations under the License.
       if (this._isRendered(index)) {
         // Update content even if it's already added to DOM
         // to account for changes within the list.
-        var currentItem = this._renderedItems[index];
+        const currentItem = this._renderedItems[index];
         this._delegate.updateItem(index, currentItem);
         return;
       }
 
       this._delegate.prepareItem(index, (item) => {
 
-        var element = item.element;
+        const element = item.element;
 
         element.style.position = 'absolute';
         element.style.top = top + 'px';
@@ -207,7 +207,7 @@ limitations under the License.
         return;
       }
 
-      var item = this._renderedItems[index];
+      let item = this._renderedItems[index];
 
       this._delegate.destroyItem(index, item);
 
@@ -220,7 +220,7 @@ limitations under the License.
     }
 
     _removeAllElements() {
-      for (var key in this._renderedItems) {
+      for (let key in this._renderedItems) {
         if (this._renderedItems.hasOwnProperty(key)) {
           this._removeElement(key);
         }
@@ -228,36 +228,33 @@ limitations under the License.
     }
 
     _calculateStartIndex(current) {
-      var start = 0,
-        end = this._maxIndex;
+      let start = 0;
+      let end = this._maxIndex;
 
       // Binary search for index at top of screen so
       // we can speed up rendering.
-      while (true) {
-        var middle = Math.floor((start + end) / 2),
-          value = current + this._itemHeightSum[middle];
+      for (;;) {
+        const middle = Math.floor((start + end) / 2);
+        const value = current + this._itemHeightSum[middle];
 
         if (end < start) {
           return 0;
-        }
-        else if (value >= 0 && value - this._getItemHeight(middle) < 0) {
+        } else if (value >= 0 && value - this._getItemHeight(middle) < 0) {
           return middle;
-        }
-        else if (isNaN(value) || value >= 0) {
+        } else if (isNaN(value) || value >= 0) {
           end = middle - 1;
-        }
-        else {
+        } else {
           start = middle + 1;
         }
       }
     }
 
     _getItemsInView() {
-      var topOffset = this._getTopOffset(),
-        topPosition = topOffset,
-        cnt = this._countItems();
+      const topOffset = this._getTopOffset();
+      let topPosition = topOffset;
+      const cnt = this._countItems();
 
-      var startIndex = this._calculateStartIndex(topPosition);
+      let startIndex = this._calculateStartIndex(topPosition);
       startIndex = Math.max(startIndex - 30, 0);
 
       if (startIndex > 0) {
@@ -269,9 +266,9 @@ limitations under the License.
         this._maxIndex = cnt - 1;
       }
 
-      var items = [];
-      for (var i = startIndex; i < cnt && topPosition < 4 * window.innerHeight; i++) {
-        var h = this._getItemHeight(i);
+      const items = [];
+      for (let i = startIndex; i < cnt && topPosition < 4 * window.innerHeight; i++) {
+        const h = this._getItemHeight(i);
 
         if (i >= this._itemHeightSum.length) {
           this._itemHeightSum = this._itemHeightSum.concat(new Array(100));

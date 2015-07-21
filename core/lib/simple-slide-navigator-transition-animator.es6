@@ -18,8 +18,8 @@ limitations under the License.
 ((ons) => {
   'use strict';
 
-  var NavigatorTransitionAnimator = ons._internal.NavigatorTransitionAnimator;
-  var util = ons._util;
+  const NavigatorTransitionAnimator = ons._internal.NavigatorTransitionAnimator;
+  const util = ons._util;
 
   /**
    * Slide animator for navigator transition.
@@ -36,7 +36,7 @@ limitations under the License.
       super(options);
 
       this.backgroundMask = ons._util.createElement(`
-        <div style="position: absolute; width: 100%; height: 100%; 
+        <div style="position: absolute; width: 100%; height: 100%;
           background-color: black; opacity: 0;"></div>
       `);
       this.blackMaskOpacity = 0.4;

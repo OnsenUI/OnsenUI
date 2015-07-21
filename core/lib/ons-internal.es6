@@ -39,7 +39,7 @@ limitations under the License.
     if (!html.match(/^<(ons-page|ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
       html = '<ons-page>' + html + '</ons-page>';
     }
-    
+
     return html;
   };
 
@@ -48,7 +48,7 @@ limitations under the License.
       window.document.addEventListener('DOMContentLoaded', callback);
     } else {
       setImmediate(callback);
-    } 
+    }
   };
 
   /**
@@ -107,8 +107,8 @@ limitations under the License.
     register('script[type="text/ng-template"]');
 
     function register(query) {
-      var templates = document.querySelectorAll(query);
-      for (var i = 0; i < templates.length; i++) {
+      const templates = document.querySelectorAll(query);
+      for (let i = 0; i < templates.length; i++) {
         ons._internal.templateStore.set(templates[i].getAttribute('id'), templates[i].textContent);
       }
     }
@@ -116,26 +116,38 @@ limitations under the License.
 
   /**
    * @param {String} page
-   * @param {Function} callback
+   * @return {Promise} 
    */
-  ons._internal.getPageHTMLAsync = function(page, callback) {
-    var cache = ons._internal.templateStore.get(page);
+  ons._internal.getTemplateHTMLAsync = function(page) {
+    return new Promise((resolve, reject) => {
+      setImmediate(() => {
+        const cache = ons._internal.templateStore.get(page);
 
-    if (cache) {
-      var html = typeof cache === 'string' ? cache : cache[1];
-      callback(null, normalizePageHTML(html), null);
-    } else {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', page, true);
-      xhr.onload = function(response) {
-        var html = xhr.responseText;
-        callback(null, normalizePageHTML(html), xhr);
-      };
-      xhr.onerror = function() {
-        callback(xhr.status, null, xhr);
-      };
-      xhr.send(null);
-    }
+        if (cache) {
+          const html = typeof cache === 'string' ? cache : cache[1];
+          resolve(html);
+        } else {
+          const xhr = new XMLHttpRequest();
+          xhr.open('GET', page, true);
+          xhr.onload = function(response) {
+            const html = xhr.responseText;
+            resolve(html);
+          };
+          xhr.onerror = function() {
+            throw new Error(`The page is not found: ${page}`);
+          };
+          xhr.send(null);
+        }
+      });
+    });
+  };
+
+  /**
+   * @param {String} page
+   * @return {Promise} 
+   */
+  ons._internal.getPageHTMLAsync = function(page) {
+    return ons._internal.getTemplateHTMLAsync(page).then(html => normalizePageHTML(html));
 
     function normalizePageHTML(html) {
       html = ('' + html).trim();
@@ -143,7 +155,7 @@ limitations under the License.
       if (!html.match(/^<(ons-page|ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
         html = '<ons-page>' + html + '</ons-page>';
       }
-      
+
       return html;
     }
   };

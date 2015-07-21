@@ -18,13 +18,13 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var scheme = {
+  const scheme = {
     '': 'page--*',
     '.page__content': 'page--*__content',
     '.page__background': 'page--*__background'
   };
-  var ModifierUtil = ons._internal.ModifierUtil;
-  var nullToolbarElement = document.createElement('ons-toolbar');
+  const ModifierUtil = ons._internal.ModifierUtil;
+  const nullToolbarElement = document.createElement('ons-toolbar');
 
   class PageElement extends ons._BaseElement {
 
@@ -35,7 +35,7 @@ limitations under the License.
     }
 
     attachedCallback() {
-      var event = new CustomEvent('init', {
+      const event = new CustomEvent('init', {
         bubbles: true
       });
       this.dispatchEvent(event);
@@ -63,7 +63,7 @@ limitations under the License.
      * @return {HTMLElement}
      */
     _getContentElement() {
-      var result = ons._util.findChild(this, '.page__content');
+      const result = ons._util.findChild(this, '.page__content');
       if (result) {
         return result;
       }
@@ -81,13 +81,13 @@ limitations under the License.
      * @return {Boolean}
      */
     _canAnimateToolbar() {
-      var toolbar = ons._util.findChild(this, 'ons-toolbar');
+      const toolbar = ons._util.findChild(this, 'ons-toolbar');
       if (toolbar) {
         return true;
       }
 
-      var elements = this._getContentElement().children;
-      for (var i = 0; i < elements.length; i++) {
+      const elements = this._getContentElement().children;
+      for (let i = 0; i < elements.length; i++) {
         if (elements[i].nodeName.toLowerCase() === 'ons-toolbar' && !elements[i].hasAttribute('inline')) {
           return true;
         }
@@ -100,7 +100,7 @@ limitations under the License.
      * @return {HTMLElement}
      */
     _getBackgroundElement() {
-      var result = ons._util.findChild(this, '.page__background');
+      const result = ons._util.findChild(this, '.page__background');
       if (result) {
         return result;
       }
@@ -144,7 +144,7 @@ limitations under the License.
      */
     _registerBottomToolbar(element) {
       if (!ons._util.findChild(this, '.page__status-bar-fill')) {
-        var fill = document.createElement('div');
+        const fill = document.createElement('div');
         fill.classList.add('page__bottom-bar-fill');
         fill.style.width = '0px';
         fill.style.height = '0px';
@@ -165,10 +165,10 @@ limitations under the License.
         return;
       }
 
-      var background = document.createElement('div');
+      const background = document.createElement('div');
       background.classList.add('page__background');
 
-      var content = document.createElement('div');
+      const content = document.createElement('div');
       content.classList.add('page__content');
 
       while (this.childNodes[0]) {
@@ -180,7 +180,7 @@ limitations under the License.
         this.removeAttribute('style', null);
       }
 
-      var fragment = document.createDocumentFragment();
+      const fragment = document.createDocumentFragment();
       fragment.appendChild(background);
       fragment.appendChild(content);
 
@@ -188,7 +188,7 @@ limitations under the License.
     }
 
     _registerExtraElement(element) {
-      var extra = ons._util.findChild(this, '.page__extra');
+      let extra = ons._util.findChild(this, '.page__extra');
       if (!extra) {
         extra = document.createElement('div');
         extra.classList.add('page__extra');
@@ -202,7 +202,7 @@ limitations under the License.
     _tryToFillStatusBar() {
       if (ons._internal.shouldFillStatusBar(this)) {
         // Adjustments for IOS7
-        var fill = document.createElement('div');
+        const fill = document.createElement('div');
         fill.classList.add('page__status-bar-fill');
         fill.style.width = '0px';
         fill.style.height = '0px';
@@ -212,7 +212,7 @@ limitations under the License.
     }
 
     _destroy() {
-      var event = new CustomEvent('destroy', {
+      const event = new CustomEvent('destroy', {
         bubbles: true
       });
       this.dispatchEvent(event);

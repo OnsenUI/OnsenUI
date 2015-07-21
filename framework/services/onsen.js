@@ -191,7 +191,7 @@ limitations under the License.
         },
 
         /**
-         * Create modifier templater function. The modifier templater generate css classes binded modifier name.
+         * Create modifier templater function. The modifier templater generate css classes bound modifier name.
          *
          * @param {Object} attrs
          * @param {Array} [modifiers] an array of appendix modifier

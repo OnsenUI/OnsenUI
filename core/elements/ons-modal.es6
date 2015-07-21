@@ -18,15 +18,15 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var scheme = {
+  const scheme = {
     '': 'modal--*',
     'modal__content': 'modal--*__content'
   };
 
-  var AnimatorFactory = ons._internal.AnimatorFactory;
-  var ModalAnimator = ons._internal.ModalAnimator;
-  var FadeModalAnimator = ons._internal.FadeModalAnimator;
-  var ModifierUtil = ons._internal.ModifierUtil;
+  const AnimatorFactory = ons._internal.AnimatorFactory;
+  const ModalAnimator = ons._internal.ModalAnimator;
+  const FadeModalAnimator = ons._internal.FadeModalAnimator;
+  const ModifierUtil = ons._internal.ModifierUtil;
 
   class ModalElement extends ons._BaseElement {
 
@@ -66,7 +66,7 @@ limitations under the License.
       this.style.display = 'none';
       this.classList.add('modal');
 
-      var wrapper = document.createElement('div');
+      const wrapper = document.createElement('div');
       wrapper.classList.add('modal__content');
 
       while (this.childNodes[0]) {

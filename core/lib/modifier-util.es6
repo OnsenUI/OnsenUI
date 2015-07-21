@@ -29,14 +29,14 @@ limitations under the License.
       last = makeDict(('' + last).trim());
       current = makeDict(('' + current).trim());
 
-      var removed = Object.keys(last).reduce((result, token) => {
+      const removed = Object.keys(last).reduce((result, token) => {
         if (!current[token]) {
           result.push(token);
         }
         return result;
       }, []);
 
-      var added = Object.keys(current).reduce((result, token) => {
+      const added = Object.keys(current).reduce((result, token) => {
         if (!last[token]) {
           result.push(token);
         }
@@ -46,7 +46,7 @@ limitations under the License.
       return {added, removed};
 
       function makeDict(modifier) {
-        var dict = {};
+        const dict = {};
         ModifierUtil.split(modifier).forEach(token => dict[token] = token);
         return dict;
       }
@@ -98,12 +98,12 @@ limitations under the License.
      * @param {Object} scheme
      */
     static initModifier(element, scheme) {
-      var modifier = element.getAttribute('modifier');
+      const modifier = element.getAttribute('modifier');
       if (typeof modifier !== 'string') {
         return;
       }
 
-      return ModifierUtil.applyDiffToElement({
+      ModifierUtil.applyDiffToElement({
         removed: [],
         added: ModifierUtil.split(modifier)
       }, element, scheme);
