@@ -25,7 +25,27 @@ function validate(variables){
 
 function compile(variables) {
   var defer = Q.defer();
-  var renderer = stylus("");
+
+  var myalpha = function(color, alpha) {
+    if (color.string.indexOf('$') === 0) {
+      return color;
+    }
+    else {
+      color = color.rgba;
+      if (value) {
+        return stylus.functions.rgba(
+          new stylus.nodes.Unit(color.r),
+          new stylus.nodes.Unit(color.g),
+          new stylus.nodes.Unit(color.b),
+          value
+        );
+      }
+      return new stylus.nodes.Unit(color.a, '');
+    }
+  };
+
+  var renderer = stylus("")
+    .define('alpha', myalpha);
   
   for (var key in variables) {
     var hex = variables[key];

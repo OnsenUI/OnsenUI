@@ -3,7 +3,7 @@
 angular.module('app').factory('GeneratedCss', function($http, $rootScope, $timeout) {
 
   $timeout(function() {
-    $http.get('/onsen-css-components.css?' + generatedCss.toQueryParams()).then(function(response) {
+    $http.get('/onsen-css-components.css').then(function(response) {
       generatedCss.templateCss = response.data;
       generatedCss.onColorsChanged();
     });
