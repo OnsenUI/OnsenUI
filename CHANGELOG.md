@@ -2,6 +2,12 @@
 CHANGELOG
 ====
 
+v1.3.5
+----
+ * core: Updated to AngularJS version 1.4.3.
+ * core: Fixed [#777](https://github.com/OnsenUI/OnsenUI/issues/777).
+ * core: Fixed [#767](https://github.com/OnsenUI/OnsenUI/issues/767).
+
 v1.3.4
 ----
  * ons-dialog: Fixed a memory leak when using parentScope. Closes [#735](https://github.com/OnsenUI/OnsenUI/issues/735).
