@@ -65,8 +65,6 @@
     });
 
     it('should emit events', function() {
-      browser.get(path);
-
       var pops = element(by.id('pops')),
         pushes = element(by.id('pushes'));
 
