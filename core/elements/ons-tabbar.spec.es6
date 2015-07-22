@@ -156,101 +156,80 @@ describe('ons-tabbar', () => {
     });
   });
 
-  it('has \'prechange\' event', () => {
-    var preChangePromise = new Promise(function(resolve) {
-      document.body.addEventListener('prechange', resolve);
+  describe('events', () => {
+    let template, tabbar;
+
+    beforeEach(() => {
+      template = ons._util.createElement('<ons-template id="page1">Page1</ons-template>');
+      tabbar = ons._util.createElement(`
+        <ons-tabbar>
+          <ons-tab label="Page 1" page="page1" no-reload></ons-tab>
+        </ons-tabbar>
+      `);
+      document.body.appendChild(template);
+      document.body.appendChild(tabbar);
     });
 
-    var div = document.createElement('div');
-    document.body.appendChild(div);
-    div.innerHTML = `
-      <ons-template id="page1"></ons-template>
-      <ons-tabbar id="myTabbar">
-        <ons-tab id="tab1" page="page1"></ons-tab>
-      </ons-tabbar>
-    `;
-
-    setImmediate(() => {
-      var element = document.getElementById('myTabbar');
-      element.setActiveTab(0);
+    afterEach(() => {
+      template.remove();
+      tabbar.remove();
+      template = tabbar = null;
     });
 
-    return expect(preChangePromise).to.eventually.be.fulfilled;
+    it('fires \'prechange\' event', () => {
+      let promise = new Promise((resolve) => {
+        tabbar.addEventListener('prechange', resolve);
+      });
+      tabbar.setActiveTab(0);
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it('fires \'postchange\' event', () => {
+      let promise = new Promise((resolve) => {
+        tabbar.addEventListener('postchange', resolve);
+      });
+      tabbar.setActiveTab(0);
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it('fires \'reactive\' event', () => {
+      let promise = new Promise((resolve) => {
+        tabbar.addEventListener('reactive', resolve);
+      });
+      tabbar.setActiveTab(0);
+      tabbar.setActiveTab(0);
+      return expect(promise).to.eventually.be.fulfilled;
+    });
   });
 
-  it('has \'postchange\' event', () => {
-    var postChangePromise = new Promise(function(resolve) {
-      document.addEventListener('postchange', resolve);
+  describe('#loadPage()', () => {
+    let template, tabbar;
+
+    beforeEach(() => {
+      template = ons._util.createElement('<ons-template id="hoge">hogehoge</ons-template>');
+      tabbar = ons._util.createElement(`
+        <ons-tabbar>
+          <ons-tab label="Hoge"></ons-tab>
+        </ons-tabbar>
+      `);
+      document.body.appendChild(template);
+      document.body.appendChild(tabbar);
     });
 
-    var div = document.createElement('div');
-    document.body.appendChild(div);
-    div.innerHTML = `
-      <ons-template id="page1"></ons-template>
-      <ons-tabbar id="myTabbar">
-        <ons-tab id="tab1" page="page1">
-        </ons-tab>
-      </ons-tabbar>
-    `;
-
-    var element = document.getElementById('myTabbar');
-    element.setActiveTab(0);
-    return expect(postChangePromise).to.eventually.be.fulfilled;
-  });
-
-  it('has \'reactive\' event', () => {
-    document.body.innerHTML = '';
-
-    var reactivePromise = new Promise(function(resolve) {
-      document.addEventListener('reactive', resolve);
+    afterEach(() => {
+      template.remove();
+      tabbar.remove();
+      template = tabbar = null;
     });
 
-    var div = document.createElement('div');
-    document.body.appendChild(div);
-    div.innerHTML = `
-      <ons-template id="page1"></ons-template>
-      <ons-tabbar id="myTabbar">
-        <ons-tab no-reload id="tab1" page="page1"></ons-tab>
-      </ons-tabbar>
-    `;
-
-    setImmediate(() => {
-      var element = document.getElementById('myTabbar');
-      element.setActiveTab(0);
-      element.setActiveTab(0);
-    });
-
-    return expect(reactivePromise).to.eventually.be.fulfilled;
-  });
-
-  it('has \'loadPage\' method', function(done) {
-    document.body.innerHTML = '';
-
-    var div = document.createElement('div');
-    document.body.appendChild(div);
-    div.innerHTML = `
-      <ons-template id="page1">
-        <ons-page id="p1"></ons-page>
-      </ons-template>
-      <ons-tabbar id="myTabbar">
-        <ons-tab id="tab1" page="page1"></ons-tab>
-      </ons-tabbar>
-    `;
-
-    setImmediate(() => {
-      var element = document.getElementById('myTabbar');
-      expect(element.getActiveTabIndex()).to.equal(-1);
-      expect(document.getElementById('p1')).not.to.be.ok;
-
-      var value = {
-        callback: () => {
-          expect(element.getActiveTabIndex()).to.equal(-1);
-          expect(document.getElementById('p1')).to.be.ok;
+    it('loads a page', (done) => {
+      expect(tabbar.innerHTML.indexOf('hogehoge')).to.be.below(0);
+      tabbar.loadPage('hoge', {
+        callback: function() {
+          expect(tabbar.innerHTML.indexOf('hogehoge')).not.to.be.below(0);
           done();
         }
-      };
-
-      element.loadPage('page1', value);
+      });
     });
   });
 });
