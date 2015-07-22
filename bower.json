@@ -45,6 +45,7 @@
     "circle.yml",
     "ROADMAP.md",
     "protractor.conf.js",
-    "build/js/angular"
+    "build/js/angular",
+    "release.sh"
   ]
 }
