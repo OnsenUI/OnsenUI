@@ -26,8 +26,8 @@ function validate(variables){
 function compile(variables) {
   var defer = Q.defer();
 
-  var myalpha = function(color, alpha) {
-    if (color.string.indexOf('$') === 0) {
+  var myalpha = function(color, value) {
+    if (color.string && color.string.indexOf('$') === 0) {
       return color;
     }
     else {
