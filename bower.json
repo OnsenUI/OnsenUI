@@ -1,5 +1,5 @@
 {
-  "name": "onsenui",
+  "name": "OnsenUI",
   "homepage": "http://onsen.io",
   "authors": [
     "Kruy Vanna <kruyvanna@gmail.com>",
@@ -7,11 +7,11 @@
   ],
   "description": "Web Component inspired HTML5 UI framework for building modern mobile application",
   "main": [
-    "js/onsenui.js"
+    "build/js/onsenui.js"
   ],
   "styles": [
-    "css/onsenui.css",
-    "css/onsen-css-components.css"
+    "build/css/onsenui.css",
+    "build/css/onsen-css-components.css"
   ],
   "keywords": [
     "onsenui",
@@ -28,7 +28,23 @@
   },
   "license": "Apache License, Version 2.0",
   "ignore": [
-    ".npmignore",
-    "onsenui.zip"
+    "**/.*",
+    "app",
+    "demo",
+    "docs",
+    "package.json",
+    "css-components",
+    "node_modules",
+    "config",
+    "framework",
+    "project_templates",
+    "test",
+    "gulpfile.js",
+    "onsenui.zip",
+    "scripts",
+    "circle.yml",
+    "ROADMAP.md",
+    "protractor.conf.js",
+    "build/js/angular"
   ]
 }
