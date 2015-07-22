@@ -140,3 +140,62 @@ radio-button--disabled()
 .radio-button > input[type="radio"]:disabled + .radio-button__checkmark
   radio-button--disabled()
 
+
+/*! topdoc
+  name: Material-like Radio Button
+  use: Radio Button
+  modifiers:
+  markup:
+    <label class="radio-button radio-button--material">
+      <input type="radio" name="r" checked="checked">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+
+    <label class="radio-button radio-button--material">
+      <input type="radio" name="r">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+
+    <label class="radio-button radio-button--material">
+      <input type="radio" name="r">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+    
+    <label class="radio-button radio-button--material">
+      <input type="radio" name="r" disabled>
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+*/
+
+.radio-button--material .radio-button__checkmark:before
+  width var-checkbox-size
+  height var-checkbox-size
+  background transparent
+  border 2px solid #696969
+  border-radius 50%
+  transition transform 0.6s ease
+  
+.radio-button--material > input[type="radio"]:checked + .radio-button__checkmark:before
+  background transparent
+  border 2px solid $highlight-color
+  transition transform 0.6s ease
+  
+.radio-button--material > input[type="radio"]:checked + .radio-button__checkmark:after
+  opacity 1
+  transform scale(6)
+
+.radio-button--material .radio-button__checkmark:after
+  transition transform 0.6s ease
+  top 11px
+  left 11px
+  width 2px
+  height 2px
+  background $highlight-color
+  border none
+  border-radius 50%
+  transform none
+  
