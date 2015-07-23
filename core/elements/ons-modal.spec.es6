@@ -3,9 +3,9 @@ describe('OnsModalElement', () => {
 
   beforeEach(() => {
     element = ons._util.createElement(`
-      <ons-modal>
-      <div>Test 1</div>
-      <div>Test 2</div>
+    　<ons-modal>
+      　<div>Test 1</div>
+      　<div>Test 2</div>
       </ons-modal>
     `);
     document.body.appendChild(element);
