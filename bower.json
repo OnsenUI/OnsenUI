@@ -24,7 +24,7 @@
     "monaca"
   ],
   "dependencies": {
-    "angular": "~1.4.0"
+    "angular": "~1.4.3"
   },
   "license": "Apache License, Version 2.0",
   "ignore": [
