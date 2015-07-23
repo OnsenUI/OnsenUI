@@ -18,8 +18,8 @@ limitations under the License.
 ((ons) => {
   'use strict';
 
-  var NavigatorTransitionAnimator = ons._internal.NavigatorTransitionAnimator;
-  var util = ons._util;
+  const NavigatorTransitionAnimator = ons._internal.NavigatorTransitionAnimator;
+  const util = ons._util;
 
   /**
    * Lift screen transition.
@@ -36,7 +36,7 @@ limitations under the License.
       super(options);
 
       this.backgroundMask = ons._util.createElement(`
-        <div style="position: absolute; width: 100%; height: 100%; 
+        <div style="position: absolute; width: 100%; height: 100%;
           background-color: black;"></div>
       `);
     }
@@ -50,7 +50,7 @@ limitations under the License.
       util.removeElement(this.backgroundMask);
       leavePage.element.parentNode.insertBefore(this.backgroundMask, leavePage.element);
 
-      var maskClear = animit(this.bakckgroundMask)
+      const maskClear = animit(this.bakckgroundMask)
         .wait(0.6)
         .queue(function(done) {
           mask.remove();

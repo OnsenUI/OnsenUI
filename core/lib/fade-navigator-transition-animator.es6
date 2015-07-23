@@ -18,7 +18,7 @@ limitations under the License.
 ((ons) => {
   'use strict';
 
-  var NavigatorTransitionAnimator = ons._internal.NavigatorTransitionAnimator;
+  const NavigatorTransitionAnimator = ons._internal.NavigatorTransitionAnimator;
 
   /**
    * Fade-in screen transition.

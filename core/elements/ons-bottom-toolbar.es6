@@ -18,8 +18,8 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var scheme = {'': 'bottom-bar--*'};
-  var ModifierUtil = ons._internal.ModifierUtil;
+  const scheme = {'': 'bottom-bar--*'};
+  const ModifierUtil = ons._internal.ModifierUtil;
 
   class BottomToolbarElement extends ons._BaseElement {
 
@@ -40,7 +40,7 @@ limitations under the License.
     }
 
     _update() {
-      var inline = typeof this.getAttribute('inline') === 'string';
+      const inline = typeof this.getAttribute('inline') === 'string';
 
       this.style.position = inline ? 'static' : 'absolute';
     }

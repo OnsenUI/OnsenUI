@@ -60,8 +60,8 @@ limitations under the License.
         this._element[0]._compilePageHook.add(this._compilePage.bind(this));
         this._element[0]._linkPageHook.add(this._linkPage.bind(this));
 
-        this._bindedOnPrepop = this._onPrepop.bind(this);
-        this._element.on('prepop', this._bindedOnPrepop);
+        this._boundOnPrepop = this._onPrepop.bind(this);
+        this._element.on('prepop', this._boundOnPrepop);
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
@@ -101,7 +101,7 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy');
         this._clearDerivingEvents();
-        this._element.off('prepop', this._bindedOnPrepop);
+        this._element.off('prepop', this._boundOnPrepop);
         this._element = this._scope = this._attrs = null;
       },
 

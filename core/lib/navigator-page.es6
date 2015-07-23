@@ -17,7 +17,8 @@ limitations under the License.
 
 ((ons) => {
   'use strict';
-  var util = ons._util;
+
+  const util = ons._util;
 
   class NavigatorPage {
 
@@ -72,7 +73,7 @@ limitations under the License.
       util.removeElement(this.element);
 
 
-      var index = this.navigator._pages.indexOf(this);
+      const index = this.navigator._pages.indexOf(this);
       if (index !== -1) {
         this.navigator._pages.splice(index, 1);
       }

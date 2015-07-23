@@ -18,8 +18,8 @@ limitations under the License.
 (() => {
   'use strict';
 
-  var scheme = {'': 'list__header--*'};
-  var ModifierUtil = ons._internal.ModifierUtil;
+  const scheme = {'': 'list__header--*'};
+  const ModifierUtil = ons._internal.ModifierUtil;
 
   class ListHeaderElement extends ons._BaseElement {
     createdCallback() {

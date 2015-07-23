@@ -19,7 +19,7 @@ limitations under the License.
  * @ngdoc object
  * @name ons
  * @category util
- * @description 
+ * @description
  *   [ja]Onsen UIで利用できるグローバルなオブジェクトです。このオブジェクトは、AngularJSのスコープから参照することができます。 [/ja]
  *   [en]A global object that's used in Onsen UI. This object can be reached from the AngularJS scope.[/en]
  */
@@ -27,7 +27,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature ready(callback)
- * @description 
+ * @description
  *   [ja]アプリの初期化に利用するメソッドです。渡された関数は、Onsen UIの初期化が終了している時点で必ず呼ばれます。[/ja]
  *   [en]Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized.[/en]
  * @param {Function} callback
@@ -38,13 +38,13 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature bootstrap([moduleName, [dependencies]])
- * @description 
+ * @description
  *   [ja]Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます。[/ja]
  *   [en]Initialize Onsen UI. Can be used to load Onsen UI without using the <code>ng-app</code> attribute from AngularJS.[/en]
- * @param {String} [moduleName] 
+ * @param {String} [moduleName]
  *   [en]AngularJS module name.[/en]
  *   [ja]Angular.jsでのモジュール名[/ja]
- * @param {Array} [dependencies] 
+ * @param {Array} [dependencies]
  *   [en]List of AngularJS module dependencies.[/en]
  *   [ja]依存するAngular.jsのモジュール名の配列[/ja]
  * @return {Object}
@@ -55,7 +55,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature enableAutoStatusBarFill()
- * @description 
+ * @description
  *   [en]Enable status bar fill feature on iOS7 and above.[/en]
  *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を有効にします。[/ja]
  */
@@ -63,7 +63,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature disableAutoStatusBarFill()
- * @description 
+ * @description
  *   [en]Disable status bar fill feature on iOS7 and above.[/en]
  *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を無効にします。[/ja]
  */
@@ -96,7 +96,7 @@ limitations under the License.
  * @return {Object}
  *   [en]Component object. Will return null if no component was found.[/en]
  *   [ja]コンポーネントのオブジェクトを返します。もしコンポーネントが見つからなかった場合にはnullを返します。[/ja]
- * @description 
+ * @description
  *   [en]Find parent component object of <code>dom</code> element.[/en]
  *   [ja]指定されたdom引数の親要素をたどってコンポーネントを検索します。[/ja]
  */
@@ -113,7 +113,7 @@ limitations under the License.
  * @return {Object}
  *   [en]Component object. Will return null if no component was found.[/en]
  *   [ja]コンポーネントのオブジェクトを返します。もしコンポーネントが見つからなかった場合にはnullを返します。[/ja]
- * @description 
+ * @description
  *   [en]Find component object using CSS selector.[/en]
  *   [ja]CSSセレクタを使ってコンポーネントのオブジェクトを検索します。[/ja]
  */
@@ -121,10 +121,10 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature setDefaultDeviceBackButtonListener(listener)
- * @param {Function} listener 
+ * @param {Function} listener
  *   [en]Function that executes when device back button is pressed.[/en]
  *   [ja]デバイスのバックボタンが押された時に実行される関数オブジェクトを指定します。[/ja]
- * @description 
+ * @description
  *   [en]Set default handler for device back button.[/en]
  *   [ja]デバイスのバックボタンのためのデフォルトのハンドラを設定します。[/ja]
  */
@@ -132,7 +132,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature disableDeviceBackButtonHandler()
- * @description 
+ * @description
  * [en]Disable device back button event handler.[/en]
  * [ja]デバイスのバックボタンのイベントを受け付けないようにします。[/ja]
  */
@@ -140,7 +140,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature enableDeviceBackButtonHandler()
- * @description 
+ * @description
  * [en]Enable device back button event handler.[/en]
  * [ja]デバイスのバックボタンのイベントを受け付けるようにします。[/ja]
  */
@@ -151,7 +151,7 @@ limitations under the License.
  * @return {Boolean}
  *   [en]Will be true if Onsen UI is initialized.[/en]
  *   [ja]初期化されているかどうかを返します。[/ja]
- * @description 
+ * @description
  *   [en]Returns true if Onsen UI is initialized.[/en]
  *   [ja]Onsen UIがすでに初期化されているかどうかを返すメソッドです。[/ja]
  */
@@ -162,7 +162,7 @@ limitations under the License.
  * @param {HTMLElement} dom
  *   [en]Element to compile.[/en]
  *   [ja]コンパイルする要素を指定します。[/ja]
- * @description 
+ * @description
  *   [en]Compile Onsen UI components.[/en]
  *   [ja]通常のHTMLの要素をOnsen UIのコンポーネントにコンパイルします。[/ja]
  */
@@ -173,7 +173,7 @@ limitations under the License.
  * @return {Boolean}
  *   [en]Will be true if the app is running in Cordova.[/en]
  *   [ja]Cordovaで実行されている場合にtrueになります。[/ja]
- * @description 
+ * @description
  *   [en]Returns true if running inside Cordova.[/en]
  *   [ja]Cordovaで実行されているかどうかを返すメソッドです。[/ja]
  */
@@ -193,7 +193,7 @@ limitations under the License.
  * @return {Promise}
  *   [en]Promise object that resolves to the alert dialog component object.[/en]
  *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
- * @description 
+ * @description
  *   [en]Create a alert dialog instance from a template.[/en]
  *   [ja]テンプレートからアラートダイアログのインスタンスを生成します。[/ja]
  */
@@ -213,7 +213,7 @@ limitations under the License.
  * @return {Promise}
  *   [en]Promise object that resolves to the dialog component object.[/en]
  *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
- * @description 
+ * @description
  *   [en]Create a dialog instance from a template.[/en]
  *   [ja]テンプレートからダイアログのインスタンスを生成します。[/ja]
  */
@@ -233,7 +233,7 @@ limitations under the License.
  * @return {Promise}
  *   [en]Promise object that resolves to the popover component object.[/en]
  *   [ja]ポップオーバーのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
- * @description 
+ * @description
  *   [en]Create a popover instance from a template.[/en]
  *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
  */
@@ -259,7 +259,6 @@ limitations under the License.
   initOnsenFacade();
   waitOnsenUILoad();
   initAngularModule();
-  changeGestureDetectorDefault();
 
   function waitOnsenUILoad() {
     var unlockOnsenUI = ons._readyLock.lock();
@@ -293,288 +292,185 @@ limitations under the License.
     });
   }
 
-  // Change the default touchAction of GestureDetector, needed for Windows Phone app
-  function changeGestureDetectorDefault() {
-    ons.GestureDetector.defaults.behavior.touchAction = 'none';
-  }
-
   function initOnsenFacade() {
-    var object = {
+    ons._onsenService = null;
 
-      _onsenService: null,
+    // Object to attach component variables to when using the var="..." attribute.
+    // Can be set to null to avoid polluting the global scope.
+    ons.componentBase = window;
 
-      // Object to attach component variables to when using the var="..." attribute.
-      // Can be set to null to avoid polluting the global scope.
-      componentBase: window,
-
-      /**
-       * Bootstrap this document as a Onsen UI application.
-       *
-       * @param {String} [name] optional name
-       * @param {Array} [deps] optional dependency modules
-       */
-      bootstrap : function(name, deps) {
-        if (angular.isArray(name)) {
-          deps = name;
-          name = undefined;
-        }
-
-        if (!name) {
-          name = 'myOnsenApp';
-        }
-
-        deps = ['onsen'].concat(angular.isArray(deps) ? deps : []);
-        var module = angular.module(name, deps);
-
-        var doc = window.document;
-        if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
-          doc.addEventListener('DOMContentLoaded', function() {
-            angular.bootstrap(doc.documentElement, [name]);
-          }, false);
-        } else if (doc.documentElement) {
-          angular.bootstrap(doc.documentElement, [name]);
-        } else {
-          throw new Error('Invalid state');
-        }
-
-        return module;
-      },
-
-      /**
-       * @param {String} [name]
-       * @param {Object/jqLite/HTMLElement} dom $event object or jqLite object or HTMLElement object.
-       * @return {Object}
-       */
-      findParentComponentUntil: function(name, dom) {
-        var element;
-        if (dom instanceof HTMLElement) {
-          element = angular.element(dom);
-        } else if (dom instanceof angular.element) {
-          element = dom;
-        } else if (dom.target) {
-          element = angular.element(dom.target);
-        }
-
-        return element.inheritedData(name);
-      },
-
-      /**
-       * @param {Function} listener
-       */
-      setDefaultDeviceBackButtonListener: function(listener) {
-        this._getOnsenService().getDefaultDeviceBackButtonHandler().setListener(listener);
-      },
-
-      /**
-       * Disable this framework to handle cordova "backbutton" event.
-       */
-      disableDeviceBackButtonHandler: function() {
-        this._getOnsenService().DeviceBackButtonHandler.disable();
-      },
-
-      /**
-       * Enable this framework to handle cordova "backbutton" event.
-       */
-      enableDeviceBackButtonHandler: function() {
-        this._getOnsenService().DeviceBackButtonHandler.enable();
-      },
-
-      /**
-       * Find view object correspond dom element queried by CSS selector.
-       *
-       * @param {String} selector CSS selector
-       * @param {HTMLElement} [dom]
-       * @return {Object/void}
-       */
-      findComponent: function(selector, dom) {
-        var target = (dom ? dom : document).querySelector(selector);
-        return target ? angular.element(target).data(target.nodeName.toLowerCase()) || null : null;
-      },
-
-      /**
-       * @param {HTMLElement} dom
-       */
-      compile : function(dom) {
-        if (!ons.$compile) {
-          throw new Error('ons.$compile() is not ready. Wait for initialization with ons.ready().');
-        }
-
-        if (!(dom instanceof HTMLElement)) {
-          throw new Error('First argument must be an instance of HTMLElement.');
-        }
-
-        var scope = angular.element(dom).scope();
-        if (!scope) {
-          throw new Error('AngularJS Scope is null. Argument DOM element must be attached in DOM document.');
-        }
-
-        ons.$compile(dom)(scope);
-      },
-
-      _getOnsenService: function() {
-        if (!this._onsenService) {
-          throw new Error('$onsen is not loaded, wait for ons.ready().');
-        }
-
-        return this._onsenService;
-      },
-
-      /**
-       * @param {String} page
-       * @param {Object} [options]
-       * @param {Object} [options.parentScope]
-       * @return {Promise}
-       */
-      createAlertDialog: function(page, options) {
-        options = options || {};
-
-        if (!page) {
-          throw new Error('Page url must be defined.');
-        }
-
-        var alertDialog = angular.element('<ons-alert-dialog>'),
-          $onsen = this._getOnsenService();
-
-        angular.element(document.body).append(angular.element(alertDialog));
-
-        return $onsen.getPageHTMLAsync(page).then(function(html) {
-          var div = document.createElement('div');
-          div.innerHTML = html;
-
-          var el = angular.element(div.querySelector('ons-alert-dialog'));
-
-          // Copy attributes and insert html.
-          var attrs = el.prop('attributes');
-          for (var i = 0, l = attrs.length; i < l; i++) {
-            alertDialog.attr(attrs[i].name, attrs[i].value); 
-          }
-          alertDialog.html(el.html());
-
-          if (options.parentScope) {
-            ons.$compile(alertDialog)(options.parentScope.$new());
-          }
-          else {
-            ons.compile(alertDialog[0]);
-          }
-
-          if (el.attr('disabled')) {
-            alertDialog.attr('disabled', 'disabled');
-          }
-
-          return  alertDialog.data('ons-alert-dialog');
-        });
-      },
-
-      /**
-      * @param {String} page
-      * @param {Object} [options]
-      * @param {Object} [options.parentScope]
-      * @return {Promise}
-      */
-      createDialog: function(page, options) {
-        options = options || {};
-
-        if (!page) {
-          throw new Error('Page url must be defined.');
-        }
-
-        var dialog = angular.element('<ons-dialog>'),
-        $onsen = this._getOnsenService();
-
-        angular.element(document.body).append(angular.element(dialog));
-
-        return $onsen.getPageHTMLAsync(page).then(function(html) {
-          var div = document.createElement('div');
-          div.innerHTML = html;
-
-          var el = angular.element(div.querySelector('ons-dialog'));
-
-          // Copy attributes and insert html.
-          var attrs = el.prop('attributes');
-          for (var i = 0, l = attrs.length; i < l; i++) {
-            dialog.attr(attrs[i].name, attrs[i].value); 
-          }
-          dialog.html(el.html());
-
-          if (options.parentScope) {
-            ons.$compile(dialog)(options.parentScope.$new());
-          }
-          else {
-            ons.compile(dialog[0]);
-          }
-
-          if (el.attr('disabled')) {
-            dialog.attr('disabled', 'disabled');
-          }
-
-          var deferred = ons._qService.defer();
-
-          dialog.on('ons-dialog:init', function(e) {
-            // Copy "style" attribute from parent.
-            var child = dialog[0].querySelector('.dialog');
-            if (el[0].hasAttribute('style')) {
-              var parentStyle = el[0].getAttribute('style'),
-              childStyle = child.getAttribute('style'),
-              newStyle = (function(a, b) {
-                var c =
-                (a.substr(-1) === ';' ? a : a + ';') + 
-                  (b.substr(-1) === ';' ? b : b + ';'); 
-                return c;
-              })(parentStyle, childStyle);
-
-              child.setAttribute('style', newStyle);
-            }
-
-            deferred.resolve(e.component);
-          });
-
-          return deferred.promise;
-        });
-      },
-
-      /**
-       * @param {String} page
-       * @param {Object} [options]
-       * @param {Object} [options.parentScope]
-       * @return {Promise}
-       */
-      createPopover: function(page, options) {
-        options = options || {};
-
-        options.link = function(element) {
-          if (options.parentScope) {
-            ons.$compile(angular.element(element))(options.parentScope.$new());
-          } else {
-            ons.compile(element);
-          }
-        };
-
-        return ons._createPopoverOriginal(page, options).then(function(popover) {
-          return angular.element(popover).data('ons-popover');
-        });
-      },
-
-      /**
-       * @param {String} page
-       */
-      resolveLoadingPlaceholder: function(page) {
-        var $onsen = this._getOnsenService();
-
-        if ($onsen.deferredLoadingPlaceholders && $onsen.deferredLoadingPlaceholders.length) {
-          var deferred = $onsen.deferredLoadingPlaceholders.pop();
-          deferred.resolve(page);
-        }
-        else {
-          throw new Error('No ons-loading-placeholder exists.');
-        }
+    /**
+     * Bootstrap this document as a Onsen UI application.
+     *
+     * @param {String} [name] optional name
+     * @param {Array} [deps] optional dependency modules
+     */
+    ons.bootstrap = function(name, deps) {
+      if (angular.isArray(name)) {
+        deps = name;
+        name = undefined;
       }
+
+      if (!name) {
+        name = 'myOnsenApp';
+      }
+
+      deps = ['onsen'].concat(angular.isArray(deps) ? deps : []);
+      var module = angular.module(name, deps);
+
+      var doc = window.document;
+      if (doc.readyState == 'loading' || doc.readyState == 'uninitialized' || doc.readyState == 'interactive') {
+        doc.addEventListener('DOMContentLoaded', function() {
+          angular.bootstrap(doc.documentElement, [name]);
+        }, false);
+      } else if (doc.documentElement) {
+        angular.bootstrap(doc.documentElement, [name]);
+      } else {
+        throw new Error('Invalid state');
+      }
+
+      return module;
     };
 
-    for (var key in object) {
-      if (object.hasOwnProperty(key)) {
-        ons[key] = object[key];
+    /**
+     * @param {String} [name]
+     * @param {Object/jqLite/HTMLElement} dom $event object or jqLite object or HTMLElement object.
+     * @return {Object}
+     */
+    ons.findParentComponentUntil = function(name, dom) {
+      var element;
+      if (dom instanceof HTMLElement) {
+        element = angular.element(dom);
+      } else if (dom instanceof angular.element) {
+        element = dom;
+      } else if (dom.target) {
+        element = angular.element(dom.target);
       }
-    }
+
+      return element.inheritedData(name);
+    };
+
+    /**
+     * Find view object correspond dom element queried by CSS selector.
+     *
+     * @param {String} selector CSS selector
+     * @param {HTMLElement} [dom]
+     * @return {Object/void}
+     */
+    ons.findComponent = function(selector, dom) {
+      var target = (dom ? dom : document).querySelector(selector);
+      return target ? angular.element(target).data(target.nodeName.toLowerCase()) || null : null;
+    };
+
+    /**
+     * @param {HTMLElement} dom
+     */
+    ons.compile = function(dom) {
+      if (!ons.$compile) {
+        throw new Error('ons.$compile() is not ready. Wait for initialization with ons.ready().');
+      }
+
+      if (!(dom instanceof HTMLElement)) {
+        throw new Error('First argument must be an instance of HTMLElement.');
+      }
+
+      var scope = angular.element(dom).scope();
+      if (!scope) {
+        throw new Error('AngularJS Scope is null. Argument DOM element must be attached in DOM document.');
+      }
+
+      ons.$compile(dom)(scope);
+    };
+
+    ons._getOnsenService = function() {
+      if (!this._onsenService) {
+        throw new Error('$onsen is not loaded, wait for ons.ready().');
+      }
+
+      return this._onsenService;
+    };
+
+    /**
+     * @param {String} page
+     * @param {Object} [options]
+     * @param {Object} [options.parentScope]
+     * @return {Promise}
+     */
+    ons.createAlertDialog = function(page, options) {
+      options = options || {};
+
+      options.link = function(element) {
+        if (options.parentScope) {
+          ons.$compile(angular.element(element))(options.parentScope.$new());
+        } else {
+          ons.compile(element);
+        }
+      };
+
+      return ons._createAlertDialogOriginal(page, options).then(function(alertDialog) {
+        return angular.element(alertDialog).data('ons-alert-dialog');
+      });
+    };
+
+    /**
+     * @param {String} page
+     * @param {Object} [options]
+     * @param {Object} [options.parentScope]
+     * @return {Promise}
+     */
+    ons.createDialog = function(page, options) {
+      options = options || {};
+
+      options.link = function(element) {
+        if (options.parentScope) {
+          ons.$compile(angular.element(element))(options.parentScope.$new());
+        } else {
+          ons.compile(element);
+        }
+      };
+
+      return ons._createDialogOriginal(page, options).then(function(dialog) {
+        return angular.element(dialog).data('ons-dialog');
+      });
+    };
+
+    /**
+     * @param {String} page
+     * @param {Object} [options]
+     * @param {Object} [options.parentScope]
+     * @return {Promise}
+     */
+    ons.createPopover = function(page, options) {
+      options = options || {};
+
+      options.link = function(element) {
+        if (options.parentScope) {
+          ons.$compile(angular.element(element))(options.parentScope.$new());
+        } else {
+          ons.compile(element);
+        }
+      };
+
+      return ons._createPopoverOriginal(page, options).then(function(popover) {
+        return angular.element(popover).data('ons-popover');
+      });
+    };
+
+    /**
+     * @param {String} page
+     */
+    ons.resolveLoadingPlaceholder = function(page) {
+      return ons._resolveLoadingPlaceholderOriginal(page, function(element, done) {
+        ons.compile(element);
+        angular.element(element).scope().$evalAsync(function() {
+          setImmediate(done);
+        });
+      });
+    };
+
+    ons._setupLoadingPlaceHolders = function() {
+      // Do nothing
+    };
   }
 
 })(window.ons = window.ons || {});

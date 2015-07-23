@@ -39,9 +39,7 @@ limitations under the License.
 
         DeviceBackButtonHandler: $onsGlobal._deviceBackButtonDispatcher,
 
-        _defaultDeviceBackButtonHandler: $onsGlobal._deviceBackButtonDispatcher.createHandler(window.document.body, function() {
-          navigator.app.exitApp();
-        }),
+        _defaultDeviceBackButtonHandler: $onsGlobal._defaultDeviceBackButtonHandler,
 
         /**
          * @return {Object}
@@ -62,7 +60,7 @@ limitations under the License.
               return element[methodName].apply(element, arguments);
             };
           });
-          
+
           return function() {
             methodNames.forEach(function(methodName) {
               view[methodName] = null;
@@ -163,7 +161,7 @@ limitations under the License.
             deferred.resolve(this.normalizePageHTML(html));
 
             return deferred.promise;
-            
+
           } else {
             return $http({
               url: page,
@@ -186,16 +184,16 @@ limitations under the License.
           if (!html.match(/^<(ons-page|ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
             html = '<ons-page>' + html + '</ons-page>';
           }
-          
+
           return html;
         },
 
         /**
-         * Create modifier templater function. The modifier templater generate css classes binded modifier name.
+         * Create modifier templater function. The modifier templater generate css classes bound modifier name.
          *
          * @param {Object} attrs
          * @param {Array} [modifiers] an array of appendix modifier
-         * @return {Function} 
+         * @return {Function}
          */
         generateModifierTemplater: function(attrs, modifiers) {
           var attrModifiers = attrs && typeof attrs.modifier === 'string' ? attrs.modifier.trim().split(/ +/) : [];
@@ -216,7 +214,7 @@ limitations under the License.
          * Add modifier methods to view object for custom elements.
          *
          * @param {Object} view object
-         * @param {jqLite} element 
+         * @param {jqLite} element
          */
         addModifierMethodsForCustomElements: function(view, element) {
           var methods = {
@@ -268,7 +266,7 @@ limitations under the License.
          *
          * @param {Object} view object
          * @param {String} template
-         * @param {jqLite} element 
+         * @param {jqLite} element
          */
         addModifierMethods: function(view, template, element) {
           var _tr = function(modifier) {
@@ -285,7 +283,7 @@ limitations under the License.
             },
 
             addModifier: function(modifier) {
-              element.addClass(_tr(modifier)); 
+              element.addClass(_tr(modifier));
             },
 
             setModifier: function(modifier) {
@@ -306,7 +304,7 @@ limitations under the License.
             toggleModifier: function(modifier) {
               var cls = _tr(modifier);
               if (element.hasClass(cls)) {
-                element.removeClass(cls);  
+                element.removeClass(cls);
               } else {
                 element.addClass(cls);
               }
@@ -469,6 +467,10 @@ limitations under the License.
             }
 
             container[names[names.length - 1]] = object;
+
+            if (container[names[names.length -1]] !== object) {
+              throw new Error('Cannot set var="' + object._attrs.var + '" because it will overwrite a read-only variable.');
+            }
           }
 
           if (ons.componentBase) {

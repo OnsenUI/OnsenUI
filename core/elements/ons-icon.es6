@@ -33,7 +33,7 @@ limitations under the License.
     _update() {
       this._cleanClassAttribute();
 
-      var builded = this._buildClassAndStyle(this);
+      const builded = this._buildClassAndStyle(this);
 
       for (let key in builded.style) {
         if (builded.style.hasOwnProperty(key)) {
@@ -48,7 +48,7 @@ limitations under the License.
      * Remove unneeded class value.
      */
     _cleanClassAttribute() {
-      var classList = this.classList;
+      const classList = this.classList;
 
       Array.apply(null, this.classList).filter(klass => {
         return klass === 'fa' || klass.indexOf('fa-') === 0 || klass.indexOf('ion-') === 0;
@@ -60,11 +60,11 @@ limitations under the License.
     }
 
     _buildClassAndStyle() {
-      var classList = ['ons-icon'];
-      var style = {};
+      const classList = ['ons-icon'];
+      const style = {};
 
       // icon
-      var iconName = '' + this.getAttribute('icon');
+      const iconName = '' + this.getAttribute('icon');
       if (iconName.indexOf('ion-') === 0) {
         classList.push(iconName);
         classList.push('ons-icon--ion');
@@ -77,7 +77,7 @@ limitations under the License.
       }
 
       // size
-      var size = '' + this.getAttribute('size');
+      const size = '' + this.getAttribute('size');
       if (size.match(/^[1-5]x|lg$/)) {
         classList.push('fa-' + size);
         this.style.removeProperty('font-size');

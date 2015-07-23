@@ -173,7 +173,7 @@ limitations under the License.
      */
     isIOS7above: function() {
       if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        var ver = (navigator.userAgent.match(/\b[0-9]+_[0-9]+(?:_[0-9]+)?\b/)||[''])[0].replace(/_/g,'.');
+        const ver = (navigator.userAgent.match(/\b[0-9]+_[0-9]+(?:_[0-9]+)?\b/) || [''])[0].replace(/_/g, '.');
         return (parseInt(ver.split('.')[0]) >= 7);
       }
       return false;

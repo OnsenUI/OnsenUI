@@ -33,7 +33,7 @@ limitations under the License.
     }
 
     _updateWidth() {
-      var width = this.getAttribute('width');
+      let width = this.getAttribute('width');
       if (typeof width  === 'string') {
         width = ('' + width).trim();
         width = width.match(/^\d+$/) ? width + '%' : width;

@@ -19,7 +19,7 @@ limitations under the License.
   'use strict';
 
 
-  var util = {
+  const util = {
     _ready: false,
 
     _domContentLoaded: false,
@@ -66,11 +66,11 @@ limitations under the License.
   };
   window.addEventListener('DOMContentLoaded', () => util._onDOMContentLoaded(), false);
 
-  var HandlerRepository = {
+  const HandlerRepository = {
     _store: {},
 
     _genId: (() => {
-      var i = 0;
+      let i = 0;
       return () => i++;
     })(),
 
@@ -78,7 +78,7 @@ limitations under the License.
       if (element.dataset.deviceBackButtonHandlerId) {
         this.remove(element);
       }
-      var id = element.dataset.deviceBackButtonHandlerId = HandlerRepository._genId();
+      const id = element.dataset.deviceBackButtonHandlerId = HandlerRepository._genId();
       this._store[id] = handler;
     },
 
@@ -90,7 +90,7 @@ limitations under the License.
     },
 
     get: function(element) {
-      var id = element.dataset.deviceBackButtonHandlerId;
+      const id = element.dataset.deviceBackButtonHandlerId;
 
       if (!this._store[id]) {
         throw new Error();
@@ -100,7 +100,7 @@ limitations under the License.
     },
 
     has: function(element) {
-      var id = element.dataset.deviceBackButtonHandlerId;
+      const id = element.dataset.deviceBackButtonHandlerId;
 
       return !!this._store[id];
     }
@@ -109,7 +109,7 @@ limitations under the License.
   class DevicebackButtonDispatcher {
     constructor() {
       this._isEnabled = false;
-      this._bindedCallback = this._callback.bind(this);
+      this._boundCallback = this._callback.bind(this);
     }
 
 
@@ -118,7 +118,7 @@ limitations under the License.
      */
     enable() {
       if (!this._isEnabled) {
-        util.addBackButtonListener(this._bindedCallback);
+        util.addBackButtonListener(this._boundCallback);
         this._isEnabled = true;
       }
     }
@@ -128,7 +128,7 @@ limitations under the License.
      */
     disable() {
       if (this._isEnabled) {
-        util.removeBackButtonListener(this._bindedCallback);
+        util.removeBackButtonListener(this._boundCallback);
         this._isEnabled = false;
       }
     }
@@ -137,7 +137,7 @@ limitations under the License.
      * Fire a 'backbutton' event manually.
      */
     fireDeviceBackButtonEvent() {
-      var event = document.createEvent('Event');
+      const event = document.createEvent('Event');
       event.initEvent('backbutton', true, true);
       document.dispatchEvent(event);
     }
@@ -159,7 +159,7 @@ limitations under the License.
         throw new Error('callback must be an instance of Function');
       }
 
-      var handler = {
+      const handler = {
         _callback: callback,
         _element: element,
 
@@ -190,25 +190,21 @@ limitations under the License.
       return handler;
     }
 
-    /**
-     * @param {Object} event
-     */
-    _dispatchDeviceBackButtonEvent(event) {
-      var tree = this._captureTree();
+    _dispatchDeviceBackButtonEvent() {
+      const tree = this._captureTree();
       //this._dumpTree(tree);
 
-      var element = this._findHandlerLeafElement(tree);
+      const element = this._findHandlerLeafElement(tree);
       //this._dumpParents(element);
 
-      var handler = HandlerRepository.get(element);
-      console.log(handler);
+      let handler = HandlerRepository.get(element);
       handler._callback(createEvent(element));
 
       function createEvent(element) {
         return {
           _element: element,
           callParentHandler: function() {
-            var parent = this._element.parentNode;
+            let parent = this._element.parentNode;
 
             while (parent) {
               handler = HandlerRepository.get(parent);
@@ -248,7 +244,7 @@ limitations under the License.
               return [];
             }
 
-            var result = createTree(childElement);
+            const result = createTree(childElement);
 
             if (result.children.length === 0 && !HandlerRepository.has(result.element)) {
               return [];
@@ -260,8 +256,8 @@ limitations under the License.
       }
 
       function arrayOf(target) {
-        var result = [];
-        for (var i = 0; i < target.length; i++) {
+        const result = [];
+        for (let i = 0; i < target.length; i++) {
           result.push(target[i]);
         }
         return result;
@@ -272,7 +268,7 @@ limitations under the License.
       _dump(node, 0);
 
       function _dump(node, level) {
-        var pad = new Array(level + 1).join('  ');
+        const pad = new Array(level + 1).join('  ');
         console.log(pad + node.element.nodeName.toLowerCase());
         node.children.forEach(function(node) {
           _dump(node, level + 1);
@@ -290,7 +286,7 @@ limitations under the License.
       function find(node) {
         if (node.children.length === 0) {
           return node.element;
-        } 
+        }
 
         if (node.children.length === 1) {
           return find(node.children[0]);
@@ -303,8 +299,8 @@ limitations under the License.
             return right;
           }
 
-          var leftZ = parseInt(window.getComputedStyle(left, '').zIndex, 10);
-          var rightZ = parseInt(window.getComputedStyle(right, '').zIndex, 10);
+          const leftZ = parseInt(window.getComputedStyle(left, '').zIndex, 10);
+          const rightZ = parseInt(window.getComputedStyle(right, '').zIndex, 10);
 
           if (!isNaN(leftZ) && !isNaN(rightZ)) {
             return leftZ > rightZ ? left : right;

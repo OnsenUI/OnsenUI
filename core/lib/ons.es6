@@ -56,6 +56,28 @@ limitations under the License.
   };
 
   /**
+   * @param {Function} listener
+   */
+  ons.setDefaultDeviceBackButtonListener = function(listener) {
+    ons._defaultDeviceBackButtonHandler.setListener(listener);
+  };
+
+  /**
+   * Disable this framework to handle cordova "backbutton" event.
+   */
+  ons.disableDeviceBackButtonHandler = function() {
+    ons._deviceBackButtonDispatcher.disable();
+  };
+
+  /**
+   * Enable this framework to handle cordova "backbutton" event.
+   */
+  ons.enableDeviceBackButtonHandler = function() {
+    ons._deviceBackButtonDispatcher.enable();
+  };
+
+
+  /**
    * Enable status bar fill feature on iOS7 and above.
    */
   ons.enableAutoStatusBarFill = () => {
@@ -102,23 +124,21 @@ limitations under the License.
       throw new Error('Page url must be defined.');
     }
 
-    return new Promise((resolve, reject) => {
-      ons._internal.getPageHTMLAsync(page, function(error, html) {
-        var div = ons._util.createElement('<div>' + html + '</div>');
+    return ons._internal.getPageHTMLAsync(page).then(html => {
+      const div = ons._util.createElement('<div>' + html + '</div>');
 
-        var popover = div.querySelector('ons-popover');
-        if (!popover) {
-          throw new Error(`<ons-popover> element is not provided on "${page}" page.`);
-        }
-        CustomElements.upgrade(popover);
-        document.body.appendChild(popover);
+      const popover = div.querySelector('ons-popover');
+      if (!popover) {
+        throw new Error(`<ons-popover> element is not provided on "${page}" page.`);
+      }
+      CustomElements.upgrade(popover);
+      document.body.appendChild(popover);
 
-        if (options.link instanceof Function) {
-          options.link(popover);
-        }
+      if (options.link instanceof Function) {
+        options.link(popover);
+      }
 
-        resolve(popover);
-      });
+      return popover;
     });
   };
 
@@ -129,9 +149,147 @@ limitations under the License.
    */
   ons.createPopover = ons._createPopoverOriginal;
 
+  /**
+   * @param {String} page
+   * @param {Object} [options]
+   * @param {Function} [options.link]
+   * @return {Promise}
+   */
+  ons._createDialogOriginal = function(page, options) {
+    options = options || {};
+
+    if (!page) {
+      throw new Error('Page url must be defined.');
+    }
+
+    return ons._internal.getPageHTMLAsync(page).then(html => {
+      html = html.match(/<ons-dialog/gi) ? `<div>${html}</div>` : `<ons-dialog>${html}</ons-dialog>`;
+      const div = ons._util.createElement('<div>' + html + '</div>');
+
+      const dialog = div.querySelector('ons-dialog');
+      if (!dialog) {
+        throw new Error(`<ons-dialog> element is not provided on "${page}" page.`);
+      }
+      CustomElements.upgrade(dialog);
+      document.body.appendChild(dialog);
+
+      if (options.link instanceof Function) {
+        options.link(dialog);
+      }
+
+      return dialog;
+    });
+  };
+
+  /**
+   * @param {String} page
+   * @param {Object} [options]
+   * @return {Promise}
+   */
+  ons.createDialog = ons._createDialogOriginal;
+
+  /**
+   * @param {String} page
+   * @param {Object} [options]
+   * @param {Function} [options.link]
+   * @return {Promise}
+   */
+  ons._createAlertDialogOriginal = function(page, options) {
+    options = options || {};
+
+    if (!page) {
+      throw new Error('Page url must be defined.');
+    }
+
+    return ons._internal.getPageHTMLAsync(page).then(html => {
+      html = html.match(/<ons-alert-dialog/gi) ? `<div>${html}</div>` : `<ons-alert-dialog>${html}</ons-alert-dialog>`;
+      const div = ons._util.createElement('<div>' + html + '</div>');
+
+      const alertDialog = div.querySelector('ons-alert-dialog');
+      if (!alertDialog) {
+        throw new Error(`<ons-alert-dialog> element is not provided on "${page}" page.`);
+      }
+      CustomElements.upgrade(alertDialog);
+      document.body.appendChild(alertDialog);
+
+      if (options.link instanceof Function) {
+        options.link(alertDialog);
+      }
+
+      return alertDialog;
+    });
+  };
+
+  /**
+   * @param {String} page
+   * @param {Object} [options]
+   * @param {Function} [options.link]
+   * @return {Promise}
+   */
+  ons.createAlertDialogOriginal = ons._createAlertDialogOriginal;
+
+  /**
+   * @param {String} page
+   * @param {Function} link
+   */
+  ons._resolveLoadingPlaceholderOriginal = function(page, link) {
+    const elements = ons._util.arrayFrom(window.document.querySelectorAll('[ons-loading-placeholder]'));
+
+    if (elements.length > 0) {
+      elements
+        .filter(element => !element.getAttribute('page'))
+        .forEach(element => {
+          element.setAttribute('ons-loading-placeholder', page);
+          ons._resolveLoadingPlaceholder(element, page, link);
+        });
+    } else {
+      throw new Error('No ons-loading-placeholder exists.');
+    }
+  };
+
+  /**
+   * @param {String} page
+   */
+  ons.resolveLoadingPlaceholder = ons._resolveLoadingPlaceholderOriginal;
+
+  ons._setupLoadingPlaceHolders = function() {
+    ons.ready(() => {
+      const elements = ons._util.arrayFrom(window.document.querySelectorAll('[ons-loading-placeholder]'));
+
+      elements.forEach(element => {
+        const page = element.getAttribute('ons-loading-placeholder');
+        if (typeof page === 'string') {
+          ons._resolveLoadingPlaceholder(element, page);
+        }
+      });
+    });
+  };
+
+  ons._resolveLoadingPlaceholder = function(element, page, link) {
+    link = link || function(element, done) { done(); };
+    ons._internal.getPageHTMLAsync(page).then(html => {
+
+      while (element.firstChild) {
+        element.removeChild(element.firstChild);
+      }
+
+      const contentElement = ons._util.createElement('<div>' + html + '</div>');
+      contentElement.style.display = 'none';
+
+      element.appendChild(contentElement);
+
+      link(contentElement, function() {
+        contentElement.style.display = '';
+      });
+
+    }).catch(error => {
+      throw new Error('Unabled to resolve placeholder: ' + error);
+    });
+  };
+
   function waitDeviceReady() {
-    var unlockDeviceReady = ons._readyLock.lock();
-    window.addEventListener('DOMContentLoaded', function() {
+    const unlockDeviceReady = ons._readyLock.lock();
+    window.addEventListener('DOMContentLoaded', () => {
       if (ons.isWebView()) {
         window.document.addEventListener('deviceready', unlockDeviceReady, false);
       } else {

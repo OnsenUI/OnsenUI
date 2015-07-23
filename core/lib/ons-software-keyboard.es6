@@ -21,17 +21,17 @@ limitations under the License.
   ons.softwareKeyboard = new MicroEvent();
   ons.softwareKeyboard._visible = false;
 
-  var onShow = () => {
+  const onShow = () => {
     ons.softwareKeyboard._visible = true;
     ons.softwareKeyboard.emit('show');
   };
 
-  var onHide = () => {
+  const onHide = () => {
     ons.softwareKeyboard._visible = false;
     ons.softwareKeyboard.emit('hide');
   };
 
-  var bindEvents = () => {
+  const bindEvents = () => {
     if (typeof Keyboard !== 'undefined') {
       // https://github.com/martinmose/cordova-keyboard/blob/95f3da3a38d8f8e1fa41fbf40145352c13535a00/README.md
       Keyboard.onshow = onShow;
@@ -51,13 +51,13 @@ limitations under the License.
     return false;
   };
 
-  var noPluginError = () => {
+  const noPluginError = () => {
     console.warn('ons-keyboard: Cordova Keyboard plugin is not present.');
   };
 
   document.addEventListener('deviceready', () => {
     if (!bindEvents()) {
-      if (document.querySelector('[ons-keyboard-active]') || 
+      if (document.querySelector('[ons-keyboard-active]') ||
         document.querySelector('[ons-keyboard-inactive]')) {
         noPluginError();
       }

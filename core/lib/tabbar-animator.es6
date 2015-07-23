@@ -117,7 +117,7 @@ limitations under the License.
      * @param {jqLite} leavePage
      */
     apply(enterPage, leavePage, enterIndex, leaveIndex, done) {
-      var sgn = enterIndex > leaveIndex;
+      const sgn = enterIndex > leaveIndex;
 
       animit.runAll(
         animit(enterPage)

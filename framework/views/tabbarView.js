@@ -39,8 +39,8 @@ limitations under the License.
         this._scope.$on('$destroy', this._destroy.bind(this));
 
         setImmediate(function() {
-          this._bindedCompilePage = element[0]._compilePageHook.add(this._compilePage.bind(this));
-          this._bindedLinkPage = element[0]._linkPageHook.add(this._linkPage.bind(this));
+          this._boundCompilePage = element[0]._compilePageHook.add(this._compilePage.bind(this));
+          this._boundLinkPage = element[0]._linkPageHook.add(this._linkPage.bind(this));
         }.bind(this));
 
         this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['reactive', 'postchange', 'prechange']);
@@ -181,8 +181,8 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy');
 
-        element[0]._compilePageHook.remove(this._bindedCompilePage);
-        element[0]._linkPageHook.remove(this._bindedLinkPage);
+        element[0]._compilePageHook.remove(this._boundCompilePage);
+        element[0]._linkPageHook.remove(this._boundLinkPage);
 
         this._clearDerivingEvents();
 
