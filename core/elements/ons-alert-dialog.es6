@@ -23,7 +23,7 @@ limitations under the License.
   const scheme = {
     '': 'alert-dialog--*',
     '.alert-dialog-title': 'alert-dialog-title--*',
-    '.alert-dialog-content': 'alert-dialog-cotent--*'
+    '.alert-dialog-content': 'alert-dialog-content--*'
   };
   const AnimatorFactory = ons._internal.AnimatorFactory;
   const AndroidAlertDialogAnimator = ons._internal.AndroidAlertDialogAnimator;
@@ -34,11 +34,11 @@ limitations under the License.
   class AlertDialogElement extends ons._BaseElement {
 
     get _titleElement() {
-      return util.findElementeObject(this, '.alert-dialog-title');
+      return util.findChild(this, '.alert-dialog-title');
     }
 
     get _contentElement() {
-      return util.findElementeObject(this, '.alert-dialog-content');
+      return util.findChild(this, '.alert-dialog-content');
     }
 
     get _dialog() {
@@ -70,7 +70,8 @@ limitations under the License.
       this.classList.add('alert-dialog');
 
       if (ons.platform.isAndroid()) {
-        this.setAttribute('modifier', this.getAttribute('modifier') + ' android');
+        let modifier = this.hasAttribute('modifier') ? this.getAttribute('modifier') : '';
+        this.setAttribute('modifier', (modifier + ' android').trim());
       }
     }
 
@@ -254,7 +255,7 @@ limitations under the License.
       this._mask.style.display = 'none';
 
       if (color) {
-        this._mask.css('background-color', color);
+        this._mask.style.backgroundColor = color;
       }
 
       document.body.appendChild(this._mask);
