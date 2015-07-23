@@ -236,6 +236,10 @@ limitations under the License.
         }.bind(this), 400);
 
         scope.$on('$destroy', this._destroy.bind(this));
+
+        if (!attrs.swipeable) {
+          this.setSwipeable(true);
+        }
       },
 
       getDeviceBackButtonHandler: function() {
