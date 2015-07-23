@@ -255,7 +255,7 @@ limitations under the License.
       this._mask.style.display = 'none';
 
       if (color) {
-        this._mask.css('background-color', color);
+        this._mask.style.backgroundColor = color;
       }
 
       document.body.appendChild(this._mask);
