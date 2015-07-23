@@ -23,7 +23,7 @@ limitations under the License.
   const scheme = {
     '': 'alert-dialog--*',
     '.alert-dialog-title': 'alert-dialog-title--*',
-    '.alert-dialog-content': 'alert-dialog-cotent--*'
+    '.alert-dialog-content': 'alert-dialog-content--*'
   };
   const AnimatorFactory = ons._internal.AnimatorFactory;
   const AndroidAlertDialogAnimator = ons._internal.AndroidAlertDialogAnimator;
