@@ -33,7 +33,7 @@ limitations under the License.
     createdCallback() {
       this._doorLock = new DoorLock();
       this._animatorFactory = new AnimatorFactory({
-        animators: ModalElement._animatorDict,
+        animators: OnsModalElement._animatorDict,
         baseClass: ModalAnimator,
         baseClassName: 'ModalAnimator',
         defaultAnimation: this.getAttribute('animation'),
@@ -188,26 +188,26 @@ limitations under the License.
     }
   }
 
-  ModalElement._animatorDict = {
-    'default': ModalAnimator,
-    'fade': FadeModalAnimator,
-    'none': ModalAnimator
-  };
-
-  /**
-   * @param {String} name
-   * @param {Function} Animator
-   */
-  ModalElement.registerAnimator = function(name, Animator) {
-    if (!(Animator.prototype instanceof ModalAnimator)) {
-      throw new Error('"Animator" param must inherit ModalAnimator');
-    }
-    ModalElement._animatorDict[name] = Animator;
-  };
-
   if (!window.OnsModalElement) {
     window.OnsModalElement = document.registerElement('ons-modal', {
       prototype: ModalElement.prototype
     });
+
+    window.OnsModalElement._animatorDict = {
+      'default': ModalAnimator,
+      'fade': FadeModalAnimator,
+      'none': ModalAnimator
+    };
+
+    /**
+     * @param {String} name
+     * @param {Function} Animator
+     */
+    window.OnsModalElement.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof ModalAnimator)) {
+        throw new Error('"Animator" param must inherit ModalAnimator');
+      }
+      this._animatorDict[name] = Animator;
+    };
   }
 })();
