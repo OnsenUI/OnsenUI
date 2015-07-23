@@ -111,7 +111,7 @@ limitations under the License.
       }
     }
 
-    _isVisible() {
+    isShown() {
       return this.style.display !== 'none';
     }
 
@@ -149,7 +149,7 @@ limitations under the License.
      * @param {Function} [options.callback] callback after modal is toggled
      */
     toggle() {
-      if (this._isVisible()) {
+      if (this.isShown()) {
         return this.hide.apply(this, arguments);
       } else {
         return this.show.apply(this, arguments);

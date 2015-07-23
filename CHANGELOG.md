@@ -31,6 +31,7 @@ v1.3.5-dev
  * ons-list-item: Added `lock-on-drag` attribute to prevent vertical scrolling when user pans left or right.
  * core: Fixed [#777](https://github.com/OnsenUI/OnsenUI/issues/777).
  * core: Fixed [#767](https://github.com/OnsenUI/OnsenUI/issues/767).
+ * ons-modal: Added `isShown()` method.
 
 v1.3.4
 ----
