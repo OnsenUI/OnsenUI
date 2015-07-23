@@ -34,11 +34,11 @@ limitations under the License.
   class AlertDialogElement extends ons._BaseElement {
 
     get _titleElement() {
-      return util.findElementeObject(this, '.alert-dialog-title');
+      return util.findChild(this, '.alert-dialog-title');
     }
 
     get _contentElement() {
-      return util.findElementeObject(this, '.alert-dialog-content');
+      return util.findChild(this, '.alert-dialog-content');
     }
 
     get _dialog() {
