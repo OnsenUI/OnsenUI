@@ -70,7 +70,8 @@ limitations under the License.
       this.classList.add('alert-dialog');
 
       if (ons.platform.isAndroid()) {
-        this.setAttribute('modifier', this.getAttribute('modifier') + ' android');
+        let modifier = this.hasAttribute('modifier') ? this.getAttribute('modifier') : '';
+        this.setAttribute('modifier', (modifier + ' android').trim());
       }
     }
 
