@@ -30,7 +30,7 @@ limitations under the License.
  *   });
  *
  *   ons.notification.confirm({
- *     message: 'Are you ready?'
+ *     message: 'Are you ready?',
  *     callback: function(answer) {
  *       // Do something here.
  *     }
