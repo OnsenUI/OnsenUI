@@ -65,7 +65,7 @@ describe('OnsPullHookElement', () => {
   });
 
   describe('#_onScroll()', () => {
-    it('should reset the scroll if negative', () => {
+    it('resets the scroll if negative', () => {
       // This test only works on browsers that support negative scroll.
       page.scrollTop = -100;
       pullHook._onScroll();
@@ -74,19 +74,19 @@ describe('OnsPullHookElement', () => {
   });
 
   describe('#_generateTranslationTransform()', () => {
-    it('should return a string', () => {
+    it('returns a string', () => {
       let transform = pullHook._generateTranslationTransform(100);
       expect(transform).to.be.a('string');
     });
   });
 
   describe('#_onDrag()', () => {
-    it('should not do anything if disabled', () => {
+    it('does nothing if disabled', () => {
       pullHook.setAttribute('disabled', '');
       pullHook._onDrag();
     });
 
-    it('should not do anything if direction is horizontal', () => {
+    it('does nothing if direction is horizontal', () => {
       pullHook._onDrag({
         gesture: {
           direction: 'left'
@@ -94,7 +94,7 @@ describe('OnsPullHookElement', () => {
       });
     });
 
-    it('should translate the element', () => {
+    it('translates the element', () => {
       let spy = chai.spy.on(pullHook, '_translateTo');
 
       // Need to initiate the dragging.
@@ -104,7 +104,7 @@ describe('OnsPullHookElement', () => {
       expect(spy).to.have.been.called.with(10);
     });
 
-    it('should change the state', () => {
+    it('changes the state', () => {
       pullHook.setAttribute('height', 10);
       event.gesture.deltaY = 20;
 
@@ -114,7 +114,7 @@ describe('OnsPullHookElement', () => {
       expect(pullHook.getAttribute('state')).to.equal('preaction');
     });
 
-    it('should automatically bounce back if pull distance is higher than threshold', () => {
+    it('bounces back if pull distance is higher than threshold', () => {
       let spy = chai.spy.on(event.gesture, 'stopDetect');
 
       pullHook._onDragStart();
@@ -126,13 +126,13 @@ describe('OnsPullHookElement', () => {
   });
 
   describe('#_onDragStart()', () => {
-    it('should do nothing if the pull hook is disabled', () => {
+    it('does nothing if the pull hook is disabled', () => {
       pullHook.setAttribute('disabled', '');
       pullHook._onDragStart();
       expect(pullHook._startScroll).to.be.an('undefined');
     });
 
-    it('should save the current scroll', () => {
+    it('saves the current scroll', () => {
       pullHook._onDragStart();
       expect(pullHook._startScroll).to.equal(0);
     });
@@ -169,7 +169,7 @@ describe('OnsPullHookElement', () => {
   });
 
   describe('#setActionCallback()', () => {
-    it('should set a callback', () => {
+    it('sets a callback', () => {
       let cb = () => null;
 
       pullHook.setActionCallback(cb);
@@ -178,13 +178,13 @@ describe('OnsPullHookElement', () => {
   });
 
   describe('#_waitForAction()', () => {
-    it('should call the argument', () => {
+    it('calls the argument', () => {
       let spy = chai.spy();
       pullHook._waitForAction(spy);
       expect(spy).to.have.been.called.once;
     });
 
-    it('should call the callback if it exists', () =>{
+    it('calls the callback if it exists', () =>{
       let spy = chai.spy();
       pullHook.setActionCallback(spy);
       pullHook._waitForAction(() => null);
@@ -193,7 +193,7 @@ describe('OnsPullHookElement', () => {
   });
 
   describe('#_onDone()', () => {
-    it('should translate the pull hook', () => {
+    it('translates the pull hook', () => {
       let spy = chai.spy.on(pullHook, '_translateTo');
       pullHook._onDone();
       expect(spy).to.have.been.called.once;
@@ -201,23 +201,23 @@ describe('OnsPullHookElement', () => {
   });
 
   describe('#getHeight()', () => {
-    it('should return 64 by default', () => {
+    it('returns 64 by default', () => {
       expect(pullHook.getHeight()).to.equal(64);
     });
 
-    it('should return the height', () => {
+    it('returns the height', () => {
       pullHook.setAttribute('height', '100');
       expect(pullHook.getHeight()).to.equal(100);
     });
   });
 
   describe('#setHeight()', () => {
-    it('should set the height', () => {
+    it('sets the height', () => {
       pullHook.setHeight(100);
       expect(pullHook.getAttribute('height')).to.equal('100px');
     });
 
-    it('should call _setStyle()', () => {
+    it('calls _setStyle()', () => {
       let spy = chai.spy.on(pullHook, '_setStyle');
       pullHook.setHeight(100);
       expect(spy).to.have.been.called.once;
@@ -225,45 +225,45 @@ describe('OnsPullHookElement', () => {
   });
 
   describe('#setThresholdHeight()', () => {
-    it('should set threshold height', () => {
+    it('sets threshold height', () => {
       pullHook.setThresholdHeight(100);
       expect(pullHook.getAttribute('threshold-height')).to.equal('100px');
     });
   });
 
   describe('#getThresholdHeight()', () => {
-    it('should return 96 by default', () => {
+    it('returns 96 by default', () => {
       expect(pullHook.getThresholdHeight()).to.equal(96);
     });
 
-    it('should return threshold height', () => {
+    it('returns threshold height', () => {
       pullHook.setAttribute('threshold-height', '100');
       expect(pullHook.getThresholdHeight()).to.equal(100);
     });
   });
 
   describe('#_getState()', () => {
-    it('should return the state', () => {
+    it('returns the state', () => {
       pullHook.setAttribute('state', 'hoge');
       expect(pullHook._getState()).to.equal('hoge');
     });
   });
 
   describe('#getCurrentState()', () => {
-    it('should return the state', () => {
+    it('returns the state', () => {
       pullHook.setAttribute('state', 'hoge');
       expect(pullHook.getCurrentState()).to.equal('hoge');
     });
   });
 
   describe('#_getCurrentScroll()', () => {
-    it('should return the current page scroll', () => {
+    it('returns the current page scroll', () => {
       expect(pullHook._getCurrentScroll()).to.equal(page.scrollTop);
     });
   });
 
   describe('#getPullDistance()', () => {
-    it('should return the current translation', () => {
+    it('returns the current translation', () => {
       expect(pullHook.getPullDistance()).to.equal(0);
     });
   });
@@ -291,7 +291,7 @@ describe('OnsPullHookElement', () => {
   });
 
   describe('#setDisabled()', () => {
-    it('disabled the pull hook', () => {
+    it('disables the pull hook', () => {
       expect(pullHook.isDisabled()).to.be.false;
       pullHook.setDisabled(true);
       expect(pullHook.isDisabled()).to.be.true;
