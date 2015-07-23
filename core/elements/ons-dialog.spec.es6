@@ -247,7 +247,7 @@ describe('OnsDialogElement', () => {
     });
   });
 
-  describe('#registerAnimator', () => {
+  describe('#registerAnimator()', () => {
     it('throws an error if animator is not a DialogAnimator', () => {
       expect(() => window.OnsDialogElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
     });
