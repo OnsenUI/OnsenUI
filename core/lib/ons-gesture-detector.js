@@ -1658,6 +1658,75 @@ GestureDetector.Instance.prototype = {
     };
   })('hold');
 
+
+/**
+ * @param {String} name
+ */
+(function(name) {
+    var timer;
+
+    function pressGesture(ev, inst) {
+        var options = inst.options,
+            current = Detection.current;
+
+        switch(ev.eventType) {
+
+            case EVENT_START:
+                clearTimeout(timer);
+
+                // set the gesture so we can check in the timeout if it still is
+                current.name = name;
+
+                // set timer and if after the timeout it still is hold,
+                // we trigger the hold event
+                timer = setTimeout(function() {
+                    if(current && current.name == name) {
+                        inst.trigger(name, ev);
+                    }
+                }, options.pressTimeout);
+                break;
+
+            case EVENT_MOVE:
+                
+                if(ev.distance > options.pressThreshold) {
+                    clearTimeout(timer);
+                }
+                break;
+
+            case EVENT_RELEASE:
+                clearTimeout(timer);
+                break;
+        }
+    }
+
+    Hammer.gestures.Press = {
+        name: name,
+        index: 9,
+        defaults: {
+            /**
+             * @property pressTimeout
+             * @type {Number}
+             * @default 500
+             */
+            pressTimeout: 500,
+
+            /**
+             * movement allowed while holding
+             * @property pressThreshold
+             * @type {Number}
+             * @default 2
+             */
+            pressThreshold: 5
+        },
+        handler: pressGesture
+    };
+})('press');
+
+
+
+
+
+
   /**
    * @module gestures
    */
