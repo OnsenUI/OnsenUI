@@ -18,7 +18,7 @@
   'use strict';
 
   var EVENTS =
-    ('drag dragleft dragright dragup dragdown hold release swipe swipeleft swiperight ' +
+    ('drag dragleft dragright dragup dragdown hold press release swipe swipeleft swiperight ' +
       'swipeup swipedown tap doubletap touch transform pinch pinchin pinchout rotate').split(/ +/);
 
   angular.module('onsen').directive('onsGestureDetector', function($onsen) {
