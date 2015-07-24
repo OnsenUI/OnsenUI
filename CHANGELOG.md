@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v1.3.5-dev
+v1.3.7-dev
 ----
  * core: Added more customizable animations.
  * core: [BC Break] Changed interfaces for registering custom animators on `ons-navigator`, `ons-dialog`, `ons-alert-dialog`, `ons-dialog`, `ons-sliding-menu`, `ons-popover` and `ons-tabbar`.
@@ -29,9 +29,17 @@ v1.3.5-dev
  * ons-icon: Fixed [#688](https://github.com/OnsenUI/OnsenUI/issues/688).
  * ons-page: Added page life cycle events.
  * ons-list-item: Added `lock-on-drag` attribute to prevent vertical scrolling when user pans left or right.
- * core: Fixed [#777](https://github.com/OnsenUI/OnsenUI/issues/777).
- * core: Fixed [#767](https://github.com/OnsenUI/OnsenUI/issues/767).
  * ons-modal: Added `isShown()` method.
+
+v1.3.6
+----
+ * ons-sliding-menu: Fixed swipeable default behaviour related to AngularJS update.
+
+v1.3.5
+----
+* core: Updated AngularJS to version 1.4.3.
+* core: Fixed [#777](https://github.com/OnsenUI/OnsenUI/issues/777).
+* core: Fixed [#767](https://github.com/OnsenUI/OnsenUI/issues/767).
 
 v1.3.4
 ----
