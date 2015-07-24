@@ -144,6 +144,8 @@ limitations under the License.
     });
 
     titleElement = messageElement = footerElement = null;
+
+    return Promise.resolve(dialogElement);
   };
 
   ons.notification._alertOriginal = function(options) {
@@ -158,7 +160,8 @@ limitations under the License.
     if (!options.message && !options.messageHTML) {
       throw new Error('Alert dialog must contain a message.');
     }
-    ons.notification._createAlertDialog(
+
+    return ons.notification._createAlertDialog(
       options.title,
       options.message || options.messageHTML,
       [options.buttonLabel],
@@ -182,6 +185,7 @@ limitations under the License.
    * @param {String} [options.modifier]
    * @param {Function} [options.callback]
    * @param {Function} [options.compile]
+   * @return {Promise}
    */
   ons.notification.alert = ons.notification._alertOriginal;
 
@@ -201,7 +205,7 @@ limitations under the License.
       throw new Error('Confirm dialog must contain a message.');
     }
 
-    ons.notification._createAlertDialog(
+    return ons.notification._createAlertDialog(
       options.title,
       options.message || options.messageHTML,
       options.buttonLabels,
@@ -228,6 +232,7 @@ limitations under the License.
    * @param {String} [options.modifier]
    * @param {Function} [options.callback]
    * @param {Function} [options.compile]
+   * @return {Promise}
    */
   ons.notification.confirm = ons.notification._confirmOriginal;
 
@@ -248,7 +253,7 @@ limitations under the License.
       throw new Error('Prompt dialog must contain a message.');
     }
 
-    ons.notification._createAlertDialog(
+    return ons.notification._createAlertDialog(
       options.title,
       options.message || options.messageHTML,
       [options.buttonLabel],
@@ -279,6 +284,7 @@ limitations under the License.
    * @param {Function} [options.callback]
    * @param {Boolean} [options.autofocus]
    * @param {Function} [options.compile]
+   * @return {Promise}
    */
   ons.notification.prompt = ons.notification._promptOriginal;
 
