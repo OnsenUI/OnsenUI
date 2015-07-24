@@ -1,25 +1,33 @@
-describe('ons-switch', () => {
-  it('provides \'OnsSwitchElement\' global variable', () => {
+describe('OnsSwitchElement', () => {
+  let element;
+
+  beforeEach(() => {
+    element = new OnsSwitchElement();
+    document.body.appendChild(element);
+  });
+
+  afterEach(() => {
+    element.remove();
+    element = null;
+  });
+
+  it('exists', () => {
     expect(window.OnsSwitchElement).to.be.ok;
   });
 
   it('classList contains \'switch\' by default', () => {
-  	var element = new OnsSwitchElement();
   	expect(element.classList.contains('switch')).to.be.true;
   });
 
   it('has a \'input\' child by default', () => {
-  	var element = new OnsSwitchElement();
   	expect(element.children[0].classList.contains('switch__input')).to.be.true;
   });
 
   it('has a \'div\' child by default', () => {
-  	var element = new OnsSwitchElement();
   	expect(element.children[1].classList.contains('switch__toggle')).to.be.true;
   });
 
   it('provides \'modifier\' attribute', () => {
-    var element = new OnsSwitchElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('switch--hoge')).to.be.true;
 
@@ -34,71 +42,95 @@ describe('ons-switch', () => {
     expect(element.classList.contains('switch--fuga')).to.be.true;
   });
 
-  it('provides \'checked\' attribute', () => {
-  	var element = new OnsSwitchElement();
-  	expect((element).hasAttribute('checked')).not.to.be.true;
-		element.checked = true;
-  	expect((element).hasAttribute('checked')).to.be.true;
-  	element.checked = false;
-  	expect((element).hasAttribute('checked')).not.to.be.true;
+  describe('#checked', () => {
+    it('is a boolean', () => {
+      expect(element.checked).to.be.a('boolean');
+    });
+
+    it('adds the \'checked\' attribute when set to true', () => {
+      element.removeAttribute('checked');
+      element.checked = true;
+      expect(element.hasAttribute('checked')).to.be.true;
+    });
+
+    it('removes the \'checked\' attribute when set to false', () => {
+      element.setAttribute('checked', '');
+      expect(element.checked).to.be.true;
+      element.checked = false;
+      expect(element.hasAttribute('checked')).to.be.false;
+    });
+
+    it('accepts truthy and falsy values', () => {
+      element.checked = 1;
+      expect(element.checked).to.be.true;
+      element.checked = 0;
+      expect(element.checked).to.be.false;
+    });
   });
 
-  it('\'checked\' attribute accepts truthy and falsy values', () => {
-  	var element = new OnsSwitchElement();
-  	expect((element).hasAttribute('checked')).not.to.be.true;
-		element.checked = 0;
-  	expect(element.checked).to.equal(false);
-  	element.checked = 1;
-  	expect(element.checked).to.equal(true);
-  	element.checked = '';
-  	expect(element.checked).to.equal(false);
-  	element.checked = -1;
-  	expect(element.checked).to.equal(true);
-  	element.checked = null;
-  	expect(element.checked).to.equal(false);
-  	element.checked = {};
-  	expect(element.checked).to.equal(true);
-  	element.checked = undefined;
-  	expect(element.checked).to.equal(false);
-  	element.checked = [];
-  	expect(element.checked).to.equal(true);
-  	element.checked = NaN;
-  	expect(element.checked).to.equal(false);
-  	element.checked = 'this is a string';
-  	expect(element.checked).to.equal(true);
+  describe('#disabled', () => {
+    it('is a boolean', () => {
+      expect(element.disabled).to.be.a('boolean');
+    });
+
+    it('adds the \'disabled\' attribute when set to true', () => {
+      element.removeAttribute('disabled');
+      element.disabled = true;
+      expect(element.hasAttribute('disabled')).to.be.true;
+    });
+
+    it('removes the \'disabled\' attribute when set to false', () => {
+      element.setAttribute('disabled', '');
+      expect(element.disabled).to.be.true;
+      element.disabled = false;
+      expect(element.hasAttribute('disabled')).to.be.false;
+    });
+
+    it('accepts truthy and falsy values', () => {
+      element.disabled = 1;
+      expect(element.disabled).to.be.true;
+      element.disabled = 0;
+      expect(element.disabled).to.be.false;
+    });
   });
 
-  it('provides \'disabled\' attribute', () => {
-  	var element = new OnsSwitchElement();
-  	expect((element).hasAttribute('disabled')).not.to.be.true;
-		element.disabled = true;
-  	expect((element).hasAttribute('disabled')).to.be.true;
-  	element.disabled = false;
-  	expect((element).hasAttribute('disabled')).not.to.be.true;
+  describe('#_onChangeListener()', () => {
+    it('removes the \'checked\' attribute', () => {
+      element.checked = true;
+      element._onChangeListener();
+      expect(element.hasAttribute('checked')).to.be.true;
+    });
+
+    it('adds the \'checked\' attribute', () => {
+      element.checked = false;
+      element._onChangeListener();
+      expect(element.hasAttribute('checked')).to.be.false;
+    });
   });
 
-  it('\'disabled\' attribute accepts truthy and falsy values', () => {
-  	var element = new OnsSwitchElement();
-  	expect((element).hasAttribute('disabled')).not.to.be.true;
-		element.disabled = 0;
-  	expect(element.disabled).to.equal(false);
-  	element.disabled = 1;
-  	expect(element.disabled).to.equal(true);
-  	element.disabled = '';
-  	expect(element.disabled).to.equal(false);
-  	element.disabled = -1;
-  	expect(element.disabled).to.equal(true);
-  	element.disabled = null;
-  	expect(element.disabled).to.equal(false);
-  	element.disabled = {};
-  	expect(element.disabled).to.equal(true);
-  	element.disabled = undefined;
-  	expect(element.disabled).to.equal(false);
-  	element.disabled = [];
-  	expect(element.disabled).to.equal(true);
-  	element.disabled = NaN;
-  	expect(element.disabled).to.equal(false);
-  	element.disabled = 'this is a string';
-  	expect(element.disabled).to.equal(true);
+  describe('#_isChecked()', () => {
+    it('returns true if switch is on', () => {
+      element.checked = true;
+      expect(element._isChecked()).to.be.true;
+    });
+
+    it('returns false if switch is off', () => {
+      element.checked = false;
+      expect(element._isChecked()).to.be.false;
+    });
+  });
+
+  describe('#_setChecked()', () => {
+    it('sets the \'checked\' attribute to true', () => {
+      element.checked = false;
+      element._setChecked(true);
+      expect(element.checked).to.be.true;
+    });
+
+    it('sets the \'checked\' attribute to false', () => {
+      element.checked = true;
+      element._setChecked(false);
+      expect(element.checked).to.be.false;
+    });
   });
 });
