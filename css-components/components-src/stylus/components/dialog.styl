@@ -56,3 +56,32 @@ var-dialog-background-color = $dialog-background-color
   left 0
   bottom 0
   background-color rgba(0, 0, 0, 0.3)
+  
+
+/*! topdoc
+  name: Material-like Dialog
+  use: Dialog
+  markup:
+    <div class="dialog dialog--material">
+      <div class="page">
+        <div class="dialog-title">Title</div>
+        <div class="dialog-content" style="opacity:0.4;">Content<div class="dialog-content"/>
+      </div>
+    </div>
+*/
+
+.dialog--material
+  shadow-3()
+  border-radius 0px
+  text-align left
+
+.dialog--material .dialog-title
+  reset-font()
+  font-size var-font-size--large
+  font-weight var-font-weight--large
+  padding 20px
+  color var-alert-dialog-text-color
+  
+
+.dialog--material .dialog-content
+  padding 0px 20px 20px 20px
