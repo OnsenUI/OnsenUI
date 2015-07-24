@@ -195,16 +195,18 @@ limitations under the License.
         throw new Error('options must be an object. You supplied ' + options);
       }
 
-      if (index >= this.pages.length) {
-        return this.pushPage.apply(this, [].slice.call(arguments, 1));
-      }
-
       const normalizeIndex = index => {
         if (index < 0) {
-          index = this.pages.length + index;
+          index = Math.abs(this.pages.length + index) % this.pages.length;
         }
         return index;
       };
+
+      index = normalizeIndex(index);
+
+      if (index >= this.pages.length) {
+        return this.pushPage.apply(this, [].slice.call(arguments, 1));
+      }
 
       this._doorLock.waitUnlock(() => {
         const unlock = this._doorLock.lock();
@@ -213,8 +215,6 @@ limitations under the License.
           const element = this._createPageElement(templateHTML);
 
           const pageObject = this._createPageObject(page, element, options);
-
-          index = normalizeIndex(index);
 
           this._compilePageHook.run(element => {
             this._linkPageHook.run(element => {
