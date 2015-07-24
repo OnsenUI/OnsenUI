@@ -137,7 +137,7 @@ limitations under the License.
 
     dialogElement.show({
       callback: function() {
-        if (promptDialog && autofocus) {
+        if (inputElement && promptDialog && autofocus) {
           inputElement.focus();
         }
       }
