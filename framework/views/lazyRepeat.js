@@ -111,6 +111,10 @@ limitations under the License.
             this._delegate.configureItemScope(item.index, currentItem.scope);
           }
 
+          // Fix position.
+          var element = this._renderedElements[item.index].element;
+          element[0].style.top = top + 'px';
+
           return;
         }
 
@@ -205,21 +209,30 @@ limitations under the License.
         }
       },
 
+      _recalculateItemHeightSum() {
+        var sums = this._itemHeightSum;
+        for (var i = 0, sum = 0; i < Math.min(sums.length, this._countItems()); i++) {
+          sum += this._getItemHeight(i);
+          sums[i] = sum;
+        }
+      },
+
       _getItemsInView: function() {
         var topOffset = this._getTopOffset(),
           topPosition = topOffset,
           cnt = this._countItems();
+
+        if (cnt !== this._itemCount){
+          this._recalculateItemHeightSum();
+          this._maxIndex = cnt - 1;
+        }
+        this._itemCount = cnt;
 
         var startIndex = this._calculateStartIndex(topPosition);
         startIndex = Math.max(startIndex - 30, 0);
 
         if (startIndex > 0) {
           topPosition += this._itemHeightSum[startIndex - 1];
-        }
-
-        if (cnt < this._itemHeightSum.length){
-          this._itemHeightSum = new Array(cnt);
-          this._maxIndex = cnt - 1;
         }
 
         var items = [];
