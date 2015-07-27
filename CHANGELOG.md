@@ -2,6 +2,11 @@
 CHANGELOG
 ====
 
+v1.3.8
+----
+* ons-lazy-repeat: Recalculate heights when number of items change in order to support dynamic lists with variable height items.
+* ons-lazy-repeat: Don't wait to render to make the list more responsive.
+
 v1.3.7
 ----
 * core: Fixed [#632](https://github.com/OnsenUI/OnsenUI/issues/632).
