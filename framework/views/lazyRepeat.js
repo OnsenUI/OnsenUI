@@ -113,7 +113,7 @@ limitations under the License.
 
           // Fix position.
           var element = this._renderedElements[item.index].element;
-          element[0].style.top = top + 'px';
+          element[0].style.top = item.top + 'px';
 
           return;
         }
@@ -209,8 +209,9 @@ limitations under the License.
         }
       },
 
-      _recalculateItemHeightSum() {
+      _recalculateItemHeightSum: function() {
         var sums = this._itemHeightSum;
+
         for (var i = 0, sum = 0; i < Math.min(sums.length, this._countItems()); i++) {
           sum += this._getItemHeight(i);
           sums[i] = sum;
