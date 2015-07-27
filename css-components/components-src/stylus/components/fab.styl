@@ -1,0 +1,101 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.
+*
+* Licensed under the Apache License, Version 2.0 (the "License")
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-fab-width = 56px
+var-fab-height = 56px
+var-fab-line-height = 56px
+
+var-fab-mini-width = 40px
+var-fab-mini-height = 40px
+
+var-fab-background-color = $highlight-color
+var-fab-color = white
+var-fab-cta-background-color = $second-highlight-color
+var-border--fab-color = rgba(0, 0, 0, 0)
+var-fab-quiet-color = $highlight-color
+
+var-fab-cta-background-color = $second-highlight-color
+var-fab-cta-color = white
+var-fab-large-line-height = 36px
+var-fab-active-opacity = 0.2
+
+/*! topdoc
+  name: Fab
+  class: fab
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="fab">+</button>
+    <button class="fab" disabled>+</button>
+*/
+
+fab--disabled()
+  disabled()
+
+fab--hover()
+  transition none
+
+fab()
+  inline-block()
+  reset-box-model()
+  reset-base()
+  reset-font()
+  reset-cursor()
+  ellipsis()
+  width var-fab-width
+  height var-fab-height
+  text-decoration none
+  font-size var-font-size
+  line-height var-fab-line-height
+  letter-spacing var-letter-spacing
+  color var-fab-color
+  vertical-align middle
+  text-align center
+  background-color var-fab-background-color
+  border 0px solid currentColor
+  border-radius 50%
+  transition none
+
+fab--focus()
+  outline 0
+
+fab--active()
+  background-color var-fab-background-color
+  transition none
+  opacity var-fab-active-opacity
+
+.fab
+  fab()
+
+.fab:hover
+  fab--hover()
+
+.fab:active
+  fab--active()
+
+.fab:focus
+  fab--focus()
+
+.fab:disabled,
+.fab[disabled]
+  fab--disabled()
