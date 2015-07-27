@@ -43,7 +43,7 @@ limitations under the License.
       this._tabbarId = generateId();
 
       this._animatorFactory = new AnimatorFactory({
-        animators: TabbarElement._animatorDict,
+        animators: OnsTabbarElement._animatorDict,
         baseClass: TabbarAnimator,
         baseClassName: 'TabbarAnimator',
         defaultAnimation: this.getAttribute('animation'),
@@ -415,28 +415,28 @@ limitations under the License.
     }
   }
 
-  TabbarElement._animatorDict = {
-    'default': TabbarNoneAnimator,
-    'fade': TabbarFadeAnimator,
-    'slide': TabbarSlideAnimator,
-    'none': TabbarNoneAnimator
-  };
-
-  /**
-   * @param {String} name
-   * @param {Function} Animator
-   */
-  TabbarElement.registerAnimator = function(name, Animator) {
-    if (!(Animator.prototype instanceof TabbarAnimator)) {
-      throw new Error('"Animator" param must inherit TabbarAnimator');
-    }
-    TabbarElement._animatorDict[name] = Animator;
-  };
-
   if (!window.OnsTabbarElement) {
     window.OnsTabbarElement = document.registerElement('ons-tabbar', {
       prototype: TabbarElement.prototype
     });
+
+    window.OnsTabbarElement._animatorDict = {
+      'default': TabbarNoneAnimator,
+      'fade': TabbarFadeAnimator,
+      'slide': TabbarSlideAnimator,
+      'none': TabbarNoneAnimator
+    };
+
+    /**
+     * @param {String} name
+     * @param {Function} Animator
+     */
+    window.OnsTabbarElement.registerAnimator = function(name, Animator) {
+      if (!(Animator.prototype instanceof TabbarAnimator)) {
+        throw new Error('"Animator" param must inherit TabbarAnimator');
+      }
+      this._animatorDict[name] = Animator;
+    };
 
     window.OnsTabbarElement.ready = function(element, callback) {
       setImmediate(callback);
