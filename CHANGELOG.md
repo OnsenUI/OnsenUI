@@ -30,6 +30,7 @@ v1.3.7-dev
  * ons-page: Added page life cycle events.
  * ons-list-item: Added `lock-on-drag` attribute to prevent vertical scrolling when user pans left or right.
  * ons-modal: Added `isShown()` method.
+ * ons-navigator: Fixed `insertPage()` behaviour with high or low indexes.
 
 v1.3.6
 ----
