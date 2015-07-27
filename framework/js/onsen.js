@@ -234,7 +234,6 @@ window.ons = (function(){
   waitDeviceReady();
   waitOnsenUILoad();
   initAngularModule();
-  changeHammerDefault();
 
   return ons;
 
@@ -279,11 +278,6 @@ window.ons = (function(){
 
       ons.$compile = $compile;
     });
-  }
-
-  //Change the default touchAction of Hammer.js, needed for Windows Phone app
-  function changeHammerDefault() {
-    Hammer.defaults.behavior.touchAction = 'none';
   }
 
   function initKeyboardEvents() {
