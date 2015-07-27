@@ -300,7 +300,7 @@ limitations under the License.
             }));
 
             if (options.callback instanceof Function) {
-              callback();
+              options.callback();
             }
           },
           previousTabIndex: previousTabIndex,
