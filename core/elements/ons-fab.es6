@@ -34,6 +34,33 @@ limitations under the License.
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
       }
     }
+
+    /**
+     * Disable of enable fab.
+     *
+     * @param {Boolean}
+     */
+    setDisabled(disabled) {
+      if (typeof disabled !== 'boolean') {
+        throw new Error('Argument must be a boolean.');
+      }
+
+      if (disabled) {
+        this.setAttribute('disabled', '');
+      } else {
+        this.removeAttribute('disabled');
+      }
+    }
+
+    /**
+     * True if fab is disabled.
+     *
+     * @return {Boolean}
+     */
+    isDisabled() {
+      return this.hasAttribute('disabled');
+    }
+
   }
 
   if (!window.OnsFabElement) {

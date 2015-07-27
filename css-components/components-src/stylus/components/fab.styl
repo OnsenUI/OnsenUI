@@ -21,7 +21,6 @@
 // internal variables
 var-fab-width = 56px
 var-fab-height = 56px
-var-fab-line-height = 56px
 
 var-fab-mini-width = 40px
 var-fab-mini-height = 40px
@@ -66,7 +65,7 @@ fab()
   height var-fab-height
   text-decoration none
   font-size var-font-size
-  line-height var-fab-line-height
+  line-height var-fab-height
   letter-spacing var-letter-spacing
   color var-fab-color
   vertical-align middle
@@ -74,15 +73,15 @@ fab()
   background-color var-fab-background-color
   border 0px solid currentColor
   border-radius 50%
-  transition none
+  shadow-2()
 
 fab--focus()
   outline 0
 
 fab--active()
+  shadow-3()
   background-color var-fab-background-color
-  transition none
-  opacity var-fab-active-opacity
+  transition all 0.2s ease
 
 .fab
   fab()
@@ -99,3 +98,21 @@ fab--active()
 .fab:disabled,
 .fab[disabled]
   fab--disabled()
+
+
+/*! topdoc
+  name: Fab Mini
+  use: Fab
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="fab fab--mini">+</button>
+    <button class="fab fab--mini" disabled>+</button>
+*/
+
+.fab--mini
+  width var-fab-mini-width
+  height var-fab-mini-height
+  line-height var-fab-mini-height
