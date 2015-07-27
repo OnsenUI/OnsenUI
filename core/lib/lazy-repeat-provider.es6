@@ -103,7 +103,6 @@ limitations under the License.
 
       this._itemHeightSum = [];
       this._maxIndex = 0;
-      this._doorLock = new DoorLock();
       this._renderedItems = {};
 
       this._addEventListeners();
@@ -128,19 +127,7 @@ limitations under the License.
     }
 
     _onChange() {
-      if (this._doorLock._waitList.length > 0) {
-        return;
-      }
-
-      this._doorLock.waitUnlock(() => {
-        const unlock = this._doorLock.lock();
-
-        setTimeout(function() {
-          unlock();
-        }, 200);
-
-        this._render();
-      });
+      this._render();
     }
 
     _render() {
