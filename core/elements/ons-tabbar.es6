@@ -398,16 +398,6 @@ limitations under the License.
 
     attachedCallback() { }
 
-    _ensureTabElements(wrapper) {
-      // ensure that all children are "ons-tab" element after compile.
-
-      for (var i = 0; i < wrapper.children.length; i++) {
-        if (wrapper.children[i].nodeName.toLowerCase() !== 'ons-tab') {
-          throw new Error('children must be an element of "ons-tab" elements');
-        }
-      }
-    }
-
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
