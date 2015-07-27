@@ -237,7 +237,7 @@ limitations under the License.
 
       options = options || {};
 
-      var previousTab = this._getTabElement(this.getActiveTabIndex()),
+      var previousTab = this._getActiveTabElement(),
         selectedTab = this._getTabElement(index),
         previousTabIndex = this.getActiveTabIndex(),
         selectedTabIndex = index;
