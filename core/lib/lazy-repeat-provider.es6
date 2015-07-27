@@ -103,7 +103,6 @@ limitations under the License.
 
       this._itemHeightSum = [];
       this._maxIndex = 0;
-      this._doorLock = new DoorLock();
       this._renderedItems = {};
 
       this._addEventListeners();
@@ -128,19 +127,7 @@ limitations under the License.
     }
 
     _onChange() {
-      if (this._doorLock._waitList.length > 0) {
-        return;
-      }
-
-      this._doorLock.waitUnlock(() => {
-        const unlock = this._doorLock.lock();
-
-        setTimeout(function() {
-          unlock();
-        }, 200);
-
-        this._render();
-      });
+      this._render();
     }
 
     _render() {
@@ -181,6 +168,11 @@ limitations under the License.
         // to account for changes within the list.
         const currentItem = this._renderedItems[index];
         this._delegate.updateItem(index, currentItem);
+
+        // Fix position.
+        let element = this._renderedItems[index].element;
+        element.style.top = top + 'px';
+
         return;
       }
 
@@ -249,21 +241,30 @@ limitations under the License.
       }
     }
 
+    _recalculateItemHeightSum() {
+      let sums = this._itemHeightSum;
+      for (let i = 0, sum = 0; i < Math.min(sums.length, this._countItems()); i++) {
+        sum += this._getItemHeight(i);
+        sums[i] = sum;
+      }
+    }
+
     _getItemsInView() {
       const topOffset = this._getTopOffset();
       let topPosition = topOffset;
       const cnt = this._countItems();
+
+      if (cnt !== this._itemCount){
+        this._recalculateItemHeightSum();
+        this._maxIndex = cnt - 1;
+      }
+      this._itemCount = cnt;
 
       let startIndex = this._calculateStartIndex(topPosition);
       startIndex = Math.max(startIndex - 30, 0);
 
       if (startIndex > 0) {
         topPosition += this._itemHeightSum[startIndex - 1];
-      }
-
-      if (cnt < this._itemHeightSum.length){
-        this._itemHeightSum = new Array(cnt);
-        this._maxIndex = cnt - 1;
       }
 
       const items = [];

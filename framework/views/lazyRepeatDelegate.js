@@ -143,7 +143,7 @@ limitations under the License.
       },
 
       calculateItemHeight: function(index) {
-        return this._userDelegate.calculateItemHeight();
+        return this._userDelegate.calculateItemHeight(index);
       }
     });
 
