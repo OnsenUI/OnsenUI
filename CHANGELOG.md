@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v1.3.7
+----
+* core: Fixed [#632](https://github.com/OnsenUI/OnsenUI/issues/632).
+
 v1.3.6
 ----
  * ons-sliding-menu: Fixed swipeable default behaviour related to AngularJS update.
