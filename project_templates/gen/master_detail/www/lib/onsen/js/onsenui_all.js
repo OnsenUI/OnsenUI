@@ -1,4 +1,4 @@
-/*! onsenui - v1.3.7 - 2015-07-27 */
+/*! onsenui - v1.3.8 - 2015-07-27 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -37198,7 +37198,6 @@ limitations under the License.
         this._itemHeightSum = [];
         this._maxIndex = 0;
 
-        this._doorLock = new DoorLock();
         this._delegate = this._getDelegate();
 
         this._renderedElements = {};
@@ -37265,6 +37264,10 @@ limitations under the License.
           if (this._delegate.configureItemScope) {
             this._delegate.configureItemScope(item.index, currentItem.scope);
           }
+
+          // Fix position.
+          var element = this._renderedElements[item.index].element;
+          element[0].style.top = item.top + 'px';
 
           return;
         }
@@ -37360,21 +37363,31 @@ limitations under the License.
         }
       },
 
+      _recalculateItemHeightSum: function() {
+        var sums = this._itemHeightSum;
+
+        for (var i = 0, sum = 0; i < Math.min(sums.length, this._countItems()); i++) {
+          sum += this._getItemHeight(i);
+          sums[i] = sum;
+        }
+      },
+
       _getItemsInView: function() {
         var topOffset = this._getTopOffset(),
           topPosition = topOffset,
           cnt = this._countItems();
+
+        if (cnt !== this._itemCount){
+          this._recalculateItemHeightSum();
+          this._maxIndex = cnt - 1;
+        }
+        this._itemCount = cnt;
 
         var startIndex = this._calculateStartIndex(topPosition);
         startIndex = Math.max(startIndex - 30, 0);
 
         if (startIndex > 0) {
           topPosition += this._itemHeightSum[startIndex - 1];
-        }
-
-        if (cnt < this._itemHeightSum.length){
-          this._itemHeightSum = new Array(cnt);
-          this._maxIndex = cnt - 1;
         }
 
         var items = [];
@@ -37415,19 +37428,7 @@ limitations under the License.
       },
 
       _onChange: function() {
-        if (this._doorLock._waitList.length > 0) {
-          return;
-        }
-
-        this._doorLock.waitUnlock(function() {
-          var unlock = this._doorLock.lock();
-
-          setTimeout(function() {
-            unlock();
-          }, 200);
-
-          this._render();
-        }.bind(this));
+        this._render();
       },
 
       _findPageContent: function() {
