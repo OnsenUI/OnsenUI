@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v1.3.7-dev
+v1.3.8-dev
 ----
  * core: Added more customizable animations.
  * core: [BC Break] Changed interfaces for registering custom animators on `ons-navigator`, `ons-dialog`, `ons-alert-dialog`, `ons-dialog`, `ons-sliding-menu`, `ons-popover` and `ons-tabbar`.
@@ -30,6 +30,11 @@ v1.3.7-dev
  * ons-page: Added page life cycle events.
  * ons-list-item: Added `lock-on-drag` attribute to prevent vertical scrolling when user pans left or right.
  * ons-modal: Added `isShown()` method.
+ * ons-navigator: Fixed `insertPage()` behaviour with high or low indexes.
+
+v1.3.7
+----
+ * core: Fixed [#632](https://github.com/OnsenUI/OnsenUI/issues/632).
 
 v1.3.6
 ----

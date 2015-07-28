@@ -143,28 +143,10 @@ describe('LazyRepeatProvider', () => {
   });
 
   describe('#_onChange()', () => {
-    it('should call \'_render()\'', (done) => {
+    it('should call \'_render()\'', () => {
       let spy = chai.spy.on(provider, '_render');
-
       provider._onChange();
-
-      // Must wait 200ms since it's already called by constructor.
-      setTimeout(() => {
-        expect(spy).to.have.been.called.once;
-        done();
-      }, 200);
-    });
-
-    it('should only call \'_render()\' once every 200ms', (done) => {
-      let spy = chai.spy.on(provider, '_render');
-
-      provider._onChange();
-      provider._onChange();
-
-      setTimeout(() => {
-        expect(spy).to.have.been.called.once;
-        done();
-      }, 200);
+      expect(spy).to.have.been.called.once;
     });
   });
 
