@@ -48,6 +48,12 @@ describe('ons.platform', () => {
     });
   });
 
+  describe('#isAndroidTablet()', () => {
+    it('returns false if platform is not an Android Tablet', () => {
+      expect(ons.platform.isAndroidTablet()).to.be.false;
+    });
+  });
+
   describe('#isWP()', () => {
     it('returns false if platform is not WP', () => {
       expect(ons.platform.isWP()).to.be.false;
@@ -62,6 +68,12 @@ describe('ons.platform', () => {
   describe('#isIPhone()', () => {
     it('returns false if platform is iPhone', () => {
       expect(ons.platform.isIPhone()).to.be.false;
+    });
+  });
+
+  describe('#isIPad()', () => {
+    it('returns false if platform is iPad', () => {
+      expect(ons.platform.isIPad()).to.be.false;
     });
   });
 
