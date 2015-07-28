@@ -53,16 +53,12 @@ fab--disabled()
   shadow-0()
   disabled()
 
-fab--hover()
-  transition none
-
 fab()
   inline-block()
   reset-box-model()
   reset-base()
   reset-font()
   reset-cursor()
-  ellipsis()
   width var-fab-width
   height var-fab-height
   text-decoration none
@@ -76,6 +72,7 @@ fab()
   border 0px solid currentColor
   border-radius 50%
   shadow-2()
+  transition all 0.3s ease
 
 fab--focus()
   outline 0
@@ -96,11 +93,79 @@ fab--active()
 
 .fab:focus
   fab--focus()
+  
+.fab .fab-icon
+  overflow: hidden;
+  height: var-fab-height;
+  width: var-fab-width;
 
 .fab:disabled,
 .fab[disabled]
   fab--disabled()
+  
 
+/*! topdoc
+  name: Fab with items
+  use: Fab
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <div class="fab">+
+      <button class="fab fab-item">-</button>
+      <button class="fab fab-item">-</button>
+      <button class="fab fab-item">-</button>
+    </div>
+*/
+
+.fab .fab-item
+  width var-fab-mini-width
+  height var-fab-mini-height
+  shadow-2()
+  line-height var-fab-mini-height
+  position absolute
+  transform scale(0)
+  transition all 0.2s ease
+
+.fab .fab-item:nth-child(2)
+  margin-top: -106px;
+  margin-left: -20px;
+.fab .fab-item:nth-child(3)
+  margin-top: -156px;
+  margin-left: -20px;
+.fab .fab-item:nth-child(4)
+  margin-top: -206px;
+  margin-left: -20px;
+.fab .fab-item:nth-child(5)
+  margin-top: -256px;
+  margin-left: -20px;
+.fab .fab-item:nth-child(6)
+  margin-top: -306px;
+  margin-left: -20px;
+.fab .fab-item:nth-child(7)
+  margin-top: -356px;
+  margin-left: -20px;
+  
+
+.fab .fab-item--right.fab-item:nth-child(2)
+  margin-top: -44px;
+  margin-left: -80px;
+.fab .fab-item--right.fab-item:nth-child(3)
+  margin-top: -44px;
+  margin-left: -130px;
+.fab .fab-item--right.fab-item:nth-child(4)
+  margin-top: -44px;
+  margin-left: -180px;
+.fab .fab-item--right.fab-item:nth-child(5)
+  margin-top: -44px;
+  margin-left: -230px;
+.fab .fab-item--right.fab-item:nth-child(6)
+  margin-top: -44px;
+  margin-left: -280px;
+.fab .fab-item--right.fab-item:nth-child(7)
+  margin-top: -44px;
+  margin-left: -330px;
 
 /*! topdoc
   name: Fab Mini

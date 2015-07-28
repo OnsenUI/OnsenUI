@@ -24,8 +24,9 @@ limitations under the License.
   class FabElement extends ons._BaseElement {
 
     createdCallback() {
+      var shown = false;
       this.classList.add('fab');
-
+      this._boundOnClick = this._onClick.bind(this);
       ModifierUtil.initModifier(this, scheme);
     }
 
@@ -33,6 +34,63 @@ limitations under the License.
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
       }
+    }
+
+    attachedCallback() {
+      this.addEventListener('click', this._boundOnClick, false);
+    }
+
+    show() {
+      this.style.transform = 'scale(1)';
+    }
+
+    hide() {
+      console.log(this);
+      if (this.shown) {
+        this.hide_items();
+        setTimeout(() => {
+          this.style.transform = 'scale(0)';
+        }, 300);
+      } else {
+        this.style.transform = 'scale(0)';
+      }
+    }
+
+    show_items() {
+      if (!this.shown) {
+        for (var i = 1; i < this.children.length; i++) {
+          this.children[i].style.transform = 'scale(1)';
+        };
+        this.shown = true;
+      }
+    }
+
+    hide_items() {
+      if (this.shown) {
+        for (var i = 1; i < this.children.length; i++) {
+          this.children[i].style.transform = 'scale(0)';
+        };
+        this.shown = false;
+      }
+    }
+
+    _onClick(e) {
+      if (e.target.classList.contains('fab-icon') || ons._util.findParent(e.target, '.fab-icon')) {
+        if (ons._util.findChild(this, '.fab-item')) {
+          if (!this.shown) {
+            this.show_items();
+          } else {
+            this.hide_items();
+          }
+        }
+      };
+    }
+
+    isShown() {
+    }
+
+    isItemShown() {
+      return this.shown;
     }
 
     /**
