@@ -68,7 +68,7 @@ fab()
   color var-fab-color
   vertical-align middle
   text-align center
-  background-color var-fab-background-color
+  background-color alpha(var-fab-background-color, 1)
   border 0px solid currentColor
   border-radius 50%
   shadow-2()
@@ -79,7 +79,7 @@ fab--focus()
 
 fab--active()
   shadow-3()
-  background-color var-fab-background-color
+  background-color alpha(var-fab-background-color, 1)
   transition all 0.2s ease
 
 .fab
@@ -128,44 +128,30 @@ fab--active()
   transform scale(0)
   transition all 0.2s ease
 
-.fab .fab-item:nth-child(2)
-  margin-top: -106px;
-  margin-left: -20px;
-.fab .fab-item:nth-child(3)
-  margin-top: -156px;
-  margin-left: -20px;
-.fab .fab-item:nth-child(4)
-  margin-top: -206px;
-  margin-left: -20px;
-.fab .fab-item:nth-child(5)
-  margin-top: -256px;
-  margin-left: -20px;
-.fab .fab-item:nth-child(6)
-  margin-top: -306px;
-  margin-left: -20px;
-.fab .fab-item:nth-child(7)
-  margin-top: -356px;
-  margin-left: -20px;
-  
+.fab
+  for num in 2 3 4 5 6 7
+    .fab-item:nth-child({num})
+      margin-top -(6px + 50px * num)
+      margin-left -21px
+      
+.fab
+  for num in 2 3 4 5 6 7
+    .fab-item--bottom:nth-child({num})
+      margin-top (10px + 50px * (num - 2))
+      margin-left -21px
+      
+.fab
+  for num in 2 3 4 5 6 7
+    .fab-item--left:nth-child({num})
+      margin-left -(30px + 50px * (num - 1))
+      margin-top -48px
+      
+.fab
+  for num in 2 3 4 5 6 7
+    .fab-item--right:nth-child({num})
+      margin-left (40px + 50px * (num - 2))
+      margin-top -48px
 
-.fab .fab-item--right.fab-item:nth-child(2)
-  margin-top: -44px;
-  margin-left: -80px;
-.fab .fab-item--right.fab-item:nth-child(3)
-  margin-top: -44px;
-  margin-left: -130px;
-.fab .fab-item--right.fab-item:nth-child(4)
-  margin-top: -44px;
-  margin-left: -180px;
-.fab .fab-item--right.fab-item:nth-child(5)
-  margin-top: -44px;
-  margin-left: -230px;
-.fab .fab-item--right.fab-item:nth-child(6)
-  margin-top: -44px;
-  margin-left: -280px;
-.fab .fab-item--right.fab-item:nth-child(7)
-  margin-top: -44px;
-  margin-left: -330px;
 
 /*! topdoc
   name: Fab Mini
