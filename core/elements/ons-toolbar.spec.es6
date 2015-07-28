@@ -82,4 +82,32 @@ describe('OnsToolbarElement', () => {
       expect(element.classList.contains('navigation-bar--android')).to.be.true;
     }
   });
+
+  describe('#attachedCallbad()', () => {
+    it('does not register extra element when has no parent ons-page', () => {
+      var spy = chai.spy.on(element, '_registerToolbar');
+      document.body.appendChild(element);
+      expect(spy).to.not.have.been.called();
+    });
+  });
+
+  describe('#_compile()', () => {
+    it('adds Android class', () => {
+      ons.platform.select('android');
+      let element = new OnsToolbarElement();
+      expect(element.classList.contains('navigation-bar--android')).to.be.true;
+    });
+
+    it('removes non-element children', () => {
+      let element = ons._util.createElement('<ons-toolbar>Test1<div class="center">Test2</div></ons-toolbar>');
+      expect(element.childNodes[0].nodeValue).not.to.equal('Test1');
+    });
+
+    it('sorts its children depending on their class', () => {
+      let element = ons._util.createElement('<ons-toolbar><div class="center">Test2</div><div class="right">Test3</div><div class="left">Test1</div></ons-toolbar>');
+      expect(element.children[0].classList.contains('navigation-bar__left')).to.be.true;
+      expect(element.children[1].classList.contains('navigation-bar__center')).to.be.true;
+      expect(element.children[2].classList.contains('navigation-bar__right')).to.be.true;
+    });
+  });
 });
