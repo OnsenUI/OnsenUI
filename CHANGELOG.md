@@ -31,6 +31,7 @@ v1.3.8-dev
  * ons-list-item: Added `lock-on-drag` attribute to prevent vertical scrolling when user pans left or right.
  * ons-modal: Added `isShown()` method.
  * ons-navigator: Fixed `insertPage()` behaviour with high or low indexes.
+ * ons-tabbar: Fixed callback in `setActiveTab()` method.
 
 v1.3.7
 ----
