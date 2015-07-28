@@ -1,16 +1,22 @@
 describe('OnsTabbarElement', () => {
-  let element;
+  let element, template, template2;
 
   beforeEach(() => {
+    template = ons._util.createElement('<ons-template id="hoge">hogehoge</ons-template>');
+    template2 = ons._util.createElement('<ons-template id="fuga">fugafuga</ons-template>')
     element = new OnsTabbarElement();
+    document.body.appendChild(template);
+    document.body.appendChild(template2);
   });
 
   afterEach(() => {
+    template.remove();
+    template2.remove();
     element.remove();
-    element = null;
+    template = template2 = element = null;
   });
 
-  it('provides \'OnsTabbarElement\' global variable', () => {
+  it('should exist', () => {
     expect(window.OnsTabbarElement).to.be.ok;
   });
 
@@ -218,14 +224,12 @@ describe('OnsTabbarElement', () => {
 
   describe('#loadPage()', () => {
     it('loads a page', (done) => {
-      let template, element;
-      template = ons._util.createElement('<ons-template id="hoge">hogehoge</ons-template>');
+      let element;
       element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Hoge"></ons-tab>
         </ons-tabbar>
       `);
-      document.body.appendChild(template);
       document.body.appendChild(element);
 
       expect(element.innerHTML.indexOf('hogehoge')).to.be.below(0);
@@ -235,6 +239,113 @@ describe('OnsTabbarElement', () => {
           done();
         }
       });
+    });
+  });
+
+  describe('#setActiveTab()', () => {
+    it('loads a persistent tab', (done) => {
+      let element = ons._util.createElement(`
+        <ons-tabbar>
+          <ons-tab label="Hoge" page="hoge" persistent></ons-tab>
+        </ons-tabbar>
+      `);
+      document.body.appendChild(element);
+
+      var spy = chai.spy.on(element, '_loadPersistentPageDOM');
+      element.setActiveTab(0);
+
+      setImmediate(() => {
+        expect(spy).to.have.been.called.once;
+        done();
+      });
+    });
+
+    it('returns false if index does not exists', () => {
+      expect(element.setActiveTab(0)).to.be.false;
+    });
+
+    it('can be canceled', (done) => {
+      let element = ons._util.createElement(`
+        <ons-tabbar>
+          <ons-tab label="Hoge" page="hoge"></ons-tab>
+        </ons-tabbar>
+      `);
+
+      element.setActiveTab(0);
+
+      element.addEventListener('prechange', (event) => {
+        event.detail.cancel();
+        done();
+      });
+
+      expect(element.setActiveTab(0)).to.be.false;
+    });
+
+    it('does not remove persistent tabs', (done) => {
+      let element = ons._util.createElement(`
+        <ons-tabbar>
+          <ons-tab label="Hoge" page="hoge" persistent></ons-tab>
+          <ons-tab label="fuga" page="fuga" persistent></ons-tab>
+        </ons-tabbar>
+      `);
+
+      element.setActiveTab(0);
+
+      setImmediate(() => {
+        let tmp = element._getCurrentPageElement();
+        element.setActiveTab(1, {'callback': () => {
+          expect(tmp.style.display).to.equal('none');
+          done();
+        }, 'animation': 'none'});
+      });
+    });
+
+    it('keeps the page when option \'keepPage\' is true', (done) => {
+      let element = ons._util.createElement(`
+        <ons-tabbar>
+          <ons-tab label="Hoge" page="hoge" persistent active="true"></ons-tab>
+          <ons-tab label="fuga" page="fuga" persistent></ons-tab>
+        </ons-tabbar>
+      `);
+
+      var spy = chai.spy.on(element, '_switchPage');
+
+      element.addEventListener('postchange', (event) => {
+        expect(spy).not.to.have.been.called();
+        done();
+      });
+
+      element.setActiveTab(1, {'keepPage': true});
+    });
+
+  });
+
+  describe('#_compile()', () => {
+    it('fills status bar', () => {
+      var tmp = ons._internal.shouldFillStatusBar;
+      ons._internal.shouldFillStatusBar = () => { return true; };
+      let element = ons._util.createElement(`
+        <ons-tabbar position="top">
+        </ons-tabbar>
+      `);
+      ons._internal.shouldFillStatusBar = tmp;
+      expect(element._hasTopTabbar()).to.be.true;
+      expect(element.firstChild.className).to.equal('tab-bar__status-bar-fill');
+    });
+  });
+
+  describe('#registerAnimator()', () => {
+    it('throws an error if animator is not a TabbarAnimator', () => {
+      expect(() => window.OnsTabbarElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
+    });
+
+    it('registers a new animator', () => {
+      class MyAnimator extends ons._internal.TabbarAnimator {
+      }
+
+      expect(window.OnsTabbarElement._animatorDict.hoge).not.to.be.ok;
+      window.OnsTabbarElement.registerAnimator('hoge', MyAnimator);
+      expect(window.OnsTabbarElement._animatorDict.hoge).to.be.ok;
     });
   });
 });
