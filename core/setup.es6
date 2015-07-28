@@ -32,8 +32,4 @@
   } else {
     ons._BaseElement = HTMLElement;
   }
-
-  // Change the default touchAction of GestureDetector, needed for Windows Phone app
-  ons.GestureDetector.defaults.behavior.touchAction = 'none';
-
 })(window.ons = window.ons || {});
