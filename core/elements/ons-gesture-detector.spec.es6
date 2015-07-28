@@ -4,6 +4,6 @@ describe('OnsGestureDetectorElement', () => {
   });
 
   it('is correctly created', () => {
-    expect(new OnsGestureDetectorElement).to.be.ok;
+    expect(new OnsGestureDetectorElement()).to.be.ok;
   });
 });
