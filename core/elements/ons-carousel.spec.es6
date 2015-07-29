@@ -379,13 +379,18 @@ describe('OnsCarouselElement', () => {
     let ev;
 
     beforeEach(() => {
+      carousel.setAttribute('auto-scroll', '');
       ev = new CustomEvent('drag');
       ev.gesture = {
         direction: 'left',
         deltaX: 0,
-        velocityX: 10,
+        velocityX: 100000,
         preventDefault: () => {}
       };
+    });
+
+    afterEach(() => {
+      carousel.removeAttribute('auto-scroll');
     });
 
     it('should change the scroll value', () => {
