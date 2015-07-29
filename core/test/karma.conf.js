@@ -26,6 +26,7 @@ module.exports = function(config) {
       '../../core/lib/*.{es6,js}',
       '../../core/*.{es6,js}',
       '../../core/elements/*.{es6,js}',
+      '../../core/test/setup.es6',
       '../../build/css/onsenui.css',
       '../../build/css/onsen-css-components.css'
     ],
