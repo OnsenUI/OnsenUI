@@ -63,7 +63,7 @@ describe('ons.platform', () => {
       ons.platform.select('wp');
       expect(ons.platform.isWP()).to.be.true;
     });
-  })
+  });
 
   describe('#isIPhone()', () => {
     it('returns false if platform is iPhone', () => {

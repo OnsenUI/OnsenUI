@@ -16,15 +16,15 @@ describe('OnsSwitchElement', () => {
   });
 
   it('classList contains \'switch\' by default', () => {
-  	expect(element.classList.contains('switch')).to.be.true;
+    expect(element.classList.contains('switch')).to.be.true;
   });
 
   it('has a \'input\' child by default', () => {
-  	expect(element.children[0].classList.contains('switch__input')).to.be.true;
+    expect(element.children[0].classList.contains('switch__input')).to.be.true;
   });
 
   it('has a \'div\' child by default', () => {
-  	expect(element.children[1].classList.contains('switch__toggle')).to.be.true;
+    expect(element.children[1].classList.contains('switch__toggle')).to.be.true;
   });
 
   it('provides \'modifier\' attribute', () => {
