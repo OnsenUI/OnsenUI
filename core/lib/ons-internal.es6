@@ -116,7 +116,7 @@ limitations under the License.
 
   /**
    * @param {String} page
-   * @return {Promise} 
+   * @return {Promise}
    */
   ons._internal.getTemplateHTMLAsync = function(page) {
     return new Promise((resolve, reject) => {
@@ -144,7 +144,7 @@ limitations under the License.
 
   /**
    * @param {String} page
-   * @return {Promise} 
+   * @return {Promise}
    */
   ons._internal.getPageHTMLAsync = function(page) {
     return ons._internal.getTemplateHTMLAsync(page).then(html => normalizePageHTML(html));
