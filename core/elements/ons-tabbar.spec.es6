@@ -3,7 +3,7 @@ describe('OnsTabbarElement', () => {
 
   beforeEach(() => {
     template = ons._util.createElement('<ons-template id="hoge">hogehoge</ons-template>');
-    template2 = ons._util.createElement('<ons-template id="fuga">fugafuga</ons-template>')
+    template2 = ons._util.createElement('<ons-template id="fuga">fugafuga</ons-template>');
     element = new OnsTabbarElement();
     document.body.appendChild(template);
     document.body.appendChild(template2);

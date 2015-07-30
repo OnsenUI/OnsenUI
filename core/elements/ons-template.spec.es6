@@ -4,8 +4,8 @@ describe('ons-template', () => {
   });
 
   it('doesn\'t have any children', () => {
-  	var element = new OnsTemplateElement();
-  	expect(element.hasChildNodes()).not.to.be.true;
+    var element = new OnsTemplateElement();
+    expect(element.hasChildNodes()).not.to.be.true;
   });
 
   it('has a \'createdCallback()\' function', function(done) {

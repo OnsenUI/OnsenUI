@@ -31,13 +31,11 @@ describe('ons.notification', () => {
     it('accepts a \'messageHTML\' parameter', (done) => {
       let message = '<strong>hoge</strong>';
       ons.notification.alert({messageHTML: message})
-        .then(
-          (dialog) => {
-            expect(dialog.innerHTML.indexOf(message)).to.be.above(-1);
-            dialog.destroy();
-            done();
-          }
-        )
+        .then((dialog) => {
+          expect(dialog.innerHTML.indexOf(message)).to.be.above(-1);
+          dialog.destroy();
+          done();
+        });
     });
 
     it('displays an alert dialog', () => {
@@ -81,13 +79,11 @@ describe('ons.notification', () => {
     it('accepts a \'messageHTML\' parameter', (done) => {
       let message = '<strong>hoge</strong>';
       ons.notification.confirm({messageHTML: message})
-        .then(
-          (dialog) => {
-            expect(dialog.innerHTML.indexOf(message)).to.be.above(-1);
-            dialog.destroy();
-            done();
-          }
-        )
+        .then((dialog) => {
+          expect(dialog.innerHTML.indexOf(message)).to.be.above(-1);
+          dialog.destroy();
+          done();
+        });
     });
 
     it('displays an alert dialog', () => {
@@ -137,13 +133,11 @@ describe('ons.notification', () => {
     it('accepts a \'messageHTML\' parameter', (done) => {
       let message = '<strong>hoge</strong>';
       ons.notification.prompt({messageHTML: message})
-        .then(
-          (dialog) => {
-            expect(dialog.innerHTML.indexOf(message)).to.be.above(-1);
-            dialog.destroy();
-            done();
-          }
-        )
+        .then((dialog) => {
+          expect(dialog.innerHTML.indexOf(message)).to.be.above(-1);
+          dialog.destroy();
+          done();
+        });
     });
 
     it('displays an alert dialog', () => {
