@@ -128,10 +128,6 @@ limitations under the License.
       return this.hasAttribute('persistent');
     }
 
-    _hasDefaultTemplate() {
-      return this.classList.contains('tab-bar__item--default');
-    }
-
     setActive() {
       const radio = util.findChild(this, 'input');
       radio.checked = true;
@@ -249,8 +245,6 @@ limitations under the License.
           return i;
         }
       }
-
-      throw new Error('Invalid state: tab index is not found.');
     }
 
     _ensureElementPosition() {
