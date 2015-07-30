@@ -28,6 +28,17 @@ limitations under the License.
       this.classList.add('fab');
       this._boundOnClick = this._onClick.bind(this);
       ModifierUtil.initModifier(this, scheme);
+
+      var position = this.getAttribute('position');
+      if (position !== null) {
+        position = position.split(" ");
+        console.log(position);
+        for (let i = 0; i < position.length; i++) {
+          console.log(position[i]);
+          this.classList.add(position[i]);
+        };
+        this.classList.add('fixed');
+      };
     }
 
     attributeChangedCallback(name, last, current) {
@@ -60,6 +71,7 @@ limitations under the License.
       if (!this.shown) {
         for (var i = 1; i < this.children.length; i++) {
           this.children[i].style.transform = 'scale(1)';
+          this.children[i].style.transitionDelay = 25 * i + 'ms';
         };
         this.shown = true;
       }
@@ -69,6 +81,7 @@ limitations under the License.
       if (this.shown) {
         for (var i = 1; i < this.children.length; i++) {
           this.children[i].style.transform = 'scale(0)';
+          this.children[i].style.transitionDelay = 25 * (this.children.length - i) + 'ms';
         };
         this.shown = false;
       }

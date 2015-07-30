@@ -133,25 +133,41 @@ fab--active()
     .fab-item:nth-child({num})
       margin-top -(6px + 50px * num)
       margin-left -21px
+      transition-delay: 25ms * (num - 1);
       
 .fab
   for num in 2 3 4 5 6 7
     .fab-item--bottom:nth-child({num})
       margin-top (10px + 50px * (num - 2))
       margin-left -21px
+      transition-delay: 25ms * (num - 1);
       
 .fab
   for num in 2 3 4 5 6 7
     .fab-item--left:nth-child({num})
       margin-left -(30px + 50px * (num - 1))
       margin-top -48px
+      transition-delay: 25ms * (num - 1);
       
 .fab
   for num in 2 3 4 5 6 7
     .fab-item--right:nth-child({num})
       margin-left (40px + 50px * (num - 2))
       margin-top -48px
+      transition-delay: 25ms * (num - 1);
 
+.fab.fixed
+  position fixed
+
+.fab.right
+  right 10px
+.fab.top
+  top 10px
+.fab.left
+  left 10px
+.fab.bottom
+  bottom 10px
+  
 
 /*! topdoc
   name: Fab Mini
