@@ -172,12 +172,12 @@ describe('OnsTabElement', () => {
     });
   });
 
-  describe('#_hasDefaultTemplate()', () => {
+  describe('_hasDefaultTemplate property', () => {
     it('is, by defaut, true', () => {
       expect(element._hasDefaultTemplate).to.be.true;
     });
 
-  it('becomes false when one of the tab\'s children is a NODE', () => {
+  it('is false when one of the tab\'s children is a ELEMENT_NODE', () => {
       let tabbar = new OnsTabbarElement();
       document.body.appendChild(tabbar);
       element = ons._util.createElement(`
@@ -190,8 +190,41 @@ describe('OnsTabElement', () => {
     });
   });
 
-  describe('#setActive() method', () => {
-    it('will set the tab as active', function(done) {
+  describe('#_updateDefaultTemplate()', () => {
+    it('will return if there is not a default template', () => {
+      var spy = chai.spy.on(element, 'getAttribute');
+      element._hasDefaultTemplate = false;
+      element._updateDefaultTemplate();
+      expect(spy).not.to.have.been.called;
+    });
+  });
+
+  describe('#_loadPage()', () => {
+    it('returns the current tab _pageElement, if the tab has persistent attribute and a _pageElement', (done) => {
+      element = ons._util.createElement(`
+      　<ons-tab persistent>
+        </ons-tab>
+      `);
+
+      let myFunction = (value) => {
+        expect(value).to.equal(element._pageElement);
+        done();
+      };
+      element._pageElement = true;
+      element._loadPageElement(myFunction);
+    });
+
+    it('sets the tab _pageElement as null, if the tab doesn\'t has a persistent attribute', (done) => {
+      let myFunction = () => {
+        expect(element._pageElement).to.be.null;
+        done();
+      };
+      element._loadPageElement(myFunction);
+    });
+  });
+
+  describe('#setActive()', () => {
+    it('will set the tab as active', (done) => {
       let tabbar = new OnsTabbarElement();
 
       document.body.appendChild(tabbar);
