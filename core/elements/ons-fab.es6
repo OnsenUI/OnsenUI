@@ -32,9 +32,7 @@ limitations under the License.
       var position = this.getAttribute('position');
       if (position !== null) {
         position = position.split(" ");
-        console.log(position);
         for (let i = 0; i < position.length; i++) {
-          console.log(position[i]);
           this.classList.add(position[i]);
         };
         this.classList.add('fixed');
@@ -56,9 +54,8 @@ limitations under the License.
     }
 
     hide() {
-      console.log(this);
       if (this.shown) {
-        this.hide_items();
+        this.hideItems();
         setTimeout(() => {
           this.style.transform = 'scale(0)';
         }, 300);
@@ -67,7 +64,7 @@ limitations under the License.
       }
     }
 
-    show_items() {
+    showItems() {
       if (!this.shown) {
         for (var i = 1; i < this.children.length; i++) {
           this.children[i].style.transform = 'scale(1)';
@@ -77,7 +74,7 @@ limitations under the License.
       }
     }
 
-    hide_items() {
+    hideItems() {
       if (this.shown) {
         for (var i = 1; i < this.children.length; i++) {
           this.children[i].style.transform = 'scale(0)';
@@ -88,12 +85,12 @@ limitations under the License.
     }
 
     _onClick(e) {
-      if (e.target.classList.contains('fab-icon') || ons._util.findParent(e.target, '.fab-icon')) {
-        if (ons._util.findChild(this, '.fab-item')) {
+      if (e.target.classList.contains('fab__icon') || ons._util.findParent(e.target, '.fab__icon')) {
+        if (ons._util.findChild(this, '.fab__item')) {
           if (!this.shown) {
-            this.show_items();
+            this.showItems();
           } else {
-            this.hide_items();
+            this.hideItems();
           }
         }
       };

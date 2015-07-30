@@ -18,14 +18,14 @@ limitations under the License.
 (() => {
   'use strict';
 
-  const scheme = {'': 'fab-item--*'};
+  const scheme = {'': 'fab__item--*'};
   const ModifierUtil = ons._internal.ModifierUtil;
 
   class FabItemElement extends ons._BaseElement {
 
     createdCallback() {
       this.classList.add('fab');
-      this.classList.add('fab-item');
+      this.classList.add('fab__item');
 
       ModifierUtil.initModifier(this, scheme);
     }

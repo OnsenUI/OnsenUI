@@ -63,7 +63,7 @@ fab()
   height var-fab-height
   text-decoration none
   font-size var-font-size
-  line-height var-fab-height
+  line-height 56px
   letter-spacing var-letter-spacing
   color var-fab-color
   vertical-align middle
@@ -94,7 +94,7 @@ fab--active()
 .fab:focus
   fab--focus()
   
-.fab .fab-icon
+.fab__icon
   overflow: hidden;
   height: var-fab-height;
   width: var-fab-width;
@@ -113,45 +113,37 @@ fab--active()
     :focus: Focused
   markup:
     <div class="fab">+
-      <button class="fab fab-item">-</button>
-      <button class="fab fab-item">-</button>
-      <button class="fab fab-item">-</button>
+      <button class="fab fab__item">-</button>
+      <button class="fab fab__item">-</button>
+      <button class="fab fab__item">-</button>
     </div>
 */
 
-.fab .fab-item
+.fab__item
   width var-fab-mini-width
   height var-fab-mini-height
   shadow-2()
-  line-height var-fab-mini-height
+  line-height 36px
   position absolute
   transform scale(0)
   transition all 0.2s ease
+  z-index 101
 
-.fab
-  for num in 2 3 4 5 6 7
-    .fab-item:nth-child({num})
+.fab__item
+  for num in (2..7)
+    &:nth-child({num})
       margin-top -(6px + 50px * num)
       margin-left -21px
       transition-delay: 25ms * (num - 1);
-      
-.fab
-  for num in 2 3 4 5 6 7
-    .fab-item--bottom:nth-child({num})
+    &--bottom:nth-child({num})
       margin-top (10px + 50px * (num - 2))
       margin-left -21px
       transition-delay: 25ms * (num - 1);
-      
-.fab
-  for num in 2 3 4 5 6 7
-    .fab-item--left:nth-child({num})
+    &--left:nth-child({num})
       margin-left -(30px + 50px * (num - 1))
       margin-top -48px
       transition-delay: 25ms * (num - 1);
-      
-.fab
-  for num in 2 3 4 5 6 7
-    .fab-item--right:nth-child({num})
+    &--right:nth-child({num})
       margin-left (40px + 50px * (num - 2))
       margin-top -48px
       transition-delay: 25ms * (num - 1);
@@ -184,4 +176,4 @@ fab--active()
 .fab--mini
   width var-fab-mini-width
   height var-fab-mini-height
-  line-height var-fab-mini-height
+  line-height 36px
