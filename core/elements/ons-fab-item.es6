@@ -24,7 +24,6 @@ limitations under the License.
   class FabItemElement extends ons._BaseElement {
 
     createdCallback() {
-      this.classList.add('fab');
       this.classList.add('fab__item');
 
       ModifierUtil.initModifier(this, scheme);

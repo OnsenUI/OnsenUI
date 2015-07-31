@@ -72,7 +72,7 @@ fab()
   border 0px solid currentColor
   border-radius 50%
   shadow-2()
-  transition all 0.3s ease
+  transition all 0.2s ease-in-out
 
 fab--focus()
   outline 0
@@ -113,52 +113,83 @@ fab--active()
     :focus: Focused
   markup:
     <div class="fab">+
-      <button class="fab fab__item">-</button>
-      <button class="fab fab__item">-</button>
-      <button class="fab fab__item">-</button>
+      <button class="fab__item">-</button>
+      <button class="fab__item">-</button>
+      <button class="fab__item">-</button>
     </div>
 */
 
 .fab__item
+  fab()
   width var-fab-mini-width
   height var-fab-mini-height
-  shadow-2()
   line-height 36px
   position absolute
   transform scale(0)
-  transition all 0.2s ease
   z-index 101
 
 .fab__item
   for num in (2..7)
     &:nth-child({num})
-      margin-top -(6px + 50px * num)
+      margin-top -(56px * num)
       margin-left -21px
-      transition-delay: 25ms * (num - 1);
+      transition-delay: 50ms * (num - 1);
     &--bottom:nth-child({num})
-      margin-top (10px + 50px * (num - 2))
+      margin-top (16px + 56px * (num - 2))
       margin-left -21px
-      transition-delay: 25ms * (num - 1);
+      transition-delay: 50ms * (num - 1);
     &--left:nth-child({num})
-      margin-left -(30px + 50px * (num - 1))
+      margin-left -(28px + 56 * (num - 1))
       margin-top -48px
-      transition-delay: 25ms * (num - 1);
+      transition-delay: 50ms * (num - 1);
     &--right:nth-child({num})
-      margin-left (40px + 50px * (num - 2))
+      margin-left (44px + 56 * (num - 2))
       margin-top -48px
-      transition-delay: 25ms * (num - 1);
-
-.fab.fixed
+      transition-delay: 50ms * (num - 1);
+  
+.fab--top__right
+  top 20px;
+  bottom auto
+  right 20px;
+  left auto
   position fixed
-
-.fab.right
-  right 10px
-.fab.top
-  top 10px
-.fab.left
-  left 10px
-.fab.bottom
-  bottom 10px
+  
+.fab--bottom__right
+  top auto
+  bottom 20px;
+  right 20px;
+  left auto
+  position fixed
+  
+.fab--top__left
+  top 20px;
+  bottom auto
+  right auto
+  left 20px;
+  position fixed
+  
+.fab--bottom__left
+  top auto
+  bottom 20px;
+  right auto
+  left 20px;
+  position fixed
+  
+.fab--top__center
+  top 20px;
+  bottom auto
+  margin-left -28px
+  left 50%
+  right auto
+  position fixed
+  
+.fab--bottom__center
+  top auto
+  bottom 20px;
+  margin-left -28px
+  left 50%
+  right auto
+  position fixed
   
 
 /*! topdoc
@@ -169,11 +200,12 @@ fab--active()
     :disabled: Disabled state
     :focus: Focused
   markup:
-    <button class="fab fab--mini">+</button>
-    <button class="fab fab--mini" disabled>+</button>
+    <button class="fab--mini">+</button>
+    <button class="fab--mini" disabled>+</button>
 */
 
 .fab--mini
+  fab()
   width var-fab-mini-width
   height var-fab-mini-height
   line-height 36px

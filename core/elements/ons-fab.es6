@@ -29,19 +29,54 @@ limitations under the License.
       this._boundOnClick = this._onClick.bind(this);
       ModifierUtil.initModifier(this, scheme);
 
-      var position = this.getAttribute('position');
-      if (position !== null) {
-        position = position.split(" ");
-        for (let i = 0; i < position.length; i++) {
-          this.classList.add(position[i]);
-        };
-        this.classList.add('fixed');
-      };
+      this._updatePosition();
     }
 
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      }
+      if (name === 'position') {
+        this._updatePosition();
+      }
+    }
+
+    _updatePosition() {
+      let position = this.getAttribute('position');
+      this.classList.remove(
+        'fab--top__left', 
+        'fab--bottom__right', 
+        'fab--bottom__left', 
+        'fab--top__right', 
+        'fab--top__center', 
+        'fab--bottom__center');
+      switch(position) {
+        case 'top right':
+        case 'right top':
+          this.classList.add('fab--top__right');
+          break;
+        case 'top left':
+        case 'left top':
+          this.classList.add('fab--top__left');
+          break;
+        case 'bottom right':
+        case 'right bottom':
+          this.classList.add('fab--bottom__right');
+          break;
+        case 'bottom left':
+        case 'left bottom':
+          this.classList.add('fab--bottom__left');
+          break;
+        case 'center top':
+        case 'top center':
+          this.classList.add('fab--top__center');
+          break;
+        case 'center bottom':
+        case 'bottom center':
+          this.classList.add('fab--bottom__center');
+          break;
+        default:
+          break;
       }
     }
 
@@ -69,7 +104,7 @@ limitations under the License.
         for (var i = 1; i < this.children.length; i++) {
           this.children[i].style.transform = 'scale(1)';
           this.children[i].style.transitionDelay = 25 * i + 'ms';
-        };
+        }
         this.shown = true;
       }
     }
@@ -79,13 +114,13 @@ limitations under the License.
         for (var i = 1; i < this.children.length; i++) {
           this.children[i].style.transform = 'scale(0)';
           this.children[i].style.transitionDelay = 25 * (this.children.length - i) + 'ms';
-        };
+        }
         this.shown = false;
       }
     }
 
     _onClick(e) {
-      if (e.target.classList.contains('fab__icon') || ons._util.findParent(e.target, '.fab__icon')) {
+      if (e.target.classList.contains('fab__icon') || e.target.parentNode.classList.contains('fab__icon')) {
         if (ons._util.findChild(this, '.fab__item')) {
           if (!this.shown) {
             this.showItems();
@@ -93,7 +128,7 @@ limitations under the License.
             this.hideItems();
           }
         }
-      };
+      }
     }
 
     isShown() {
