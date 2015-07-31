@@ -4,8 +4,8 @@ describe('ons-list', () => {
   });
 
   it('classList contains \'list\' by default', () => {
-  	var element = new OnsListElement();
-  	expect(element.classList.contains('list')).to.be.true;
+    var element = new OnsListElement();
+    expect(element.classList.contains('list')).to.be.true;
   });
 
   it('provides modifier attribute', () => {

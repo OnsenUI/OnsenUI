@@ -3,9 +3,9 @@ describe('OnsModalElement', () => {
 
   beforeEach(() => {
     element = ons._util.createElement(`
-    　<ons-modal>
-      　<div>Test 1</div>
-      　<div>Test 2</div>
+      <ons-modal>
+        <div>Test 1</div>
+        <div>Test 2</div>
       </ons-modal>
     `);
     document.body.appendChild(element);
@@ -117,7 +117,7 @@ describe('OnsModalElement', () => {
   describe('#attributeChangedCallback()', () => {
     it('triggers \'onModifierChanged()\' method', () => {
       var spy = chai.spy.on(ons._internal.ModifierUtil, 'onModifierChanged');
-      element.attributeChangedCallback('modifier','fuga','piyo');
+      element.attributeChangedCallback('modifier', 'fuga', 'piyo');
       expect(spy).to.have.been.called.once;
     });
   });

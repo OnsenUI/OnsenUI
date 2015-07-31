@@ -10,7 +10,7 @@ describe('OnsListItemElement', () => {
   });
 
   it('classList contains \'list__item\' by default', () => {
-  	expect(listItem.classList.contains('list__item')).to.be.true;
+    expect(listItem.classList.contains('list__item')).to.be.true;
   });
 
   it('provides modifier attribute', () => {

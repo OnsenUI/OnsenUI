@@ -4,8 +4,8 @@ describe('ons-list-header', () => {
   });
 
   it('classList contains \'list__header\' by default', () => {
-  	var element = new OnsListHeaderElement();
-  	expect(element.classList.contains('list__header')).to.be.true;
+    var element = new OnsListHeaderElement();
+    expect(element.classList.contains('list__header')).to.be.true;
   });
 
   it('provides modifier attribute', () => {
