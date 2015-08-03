@@ -133,7 +133,7 @@ limitations under the License.
           this._popPage(options, unlock);
         }
 
-      }.bind(this));
+      });
     }
 
     _popPage(options, unlock) {
@@ -384,7 +384,7 @@ limitations under the License.
 
       this._pages.push(pageObject);
 
-      const done = function() {
+      const done = () => {
         if (this._pages[this._pages.length - 2]) {
           this._pages[this._pages.length - 2].element.style.display = 'none';
         }
@@ -403,7 +403,7 @@ limitations under the License.
           options.onTransitionEnd();
         }
         element = null;
-      }.bind(this);
+      };
 
       this._isPushing = true;
 
