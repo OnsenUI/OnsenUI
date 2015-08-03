@@ -39,7 +39,6 @@ limitations under the License.
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
       }
       if (name === 'material') {
-        console.log(current);
         if (current !== null) {
           RippleEffect.addRippleEffect(this);
         } else {
