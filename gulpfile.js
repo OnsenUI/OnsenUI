@@ -144,11 +144,11 @@ gulp.task('jshint-vanilla', function() {
     .pipe($.jshint.reporter('jshint-stylish'));
 });
 
-/////////////////0///////////////////////
+/////////////////////////////////////////
 // eslint
 ////////////////////////////////////////
 gulp.task('eslint', function() {
-  gulp.src([
+  return gulp.src([
     'core/elements/*.es6',
     'core/lib/*.es6',
     'core/*.es6',
@@ -163,7 +163,7 @@ gulp.task('eslint', function() {
     .pipe($.eslint.format());
 });
 
-/////////////////0///////////////////////
+/////////////////////////////////////////
 // jshint
 ////////////////////////////////////////
 gulp.task('jshint', ['jshint-vanilla', 'eslint']);

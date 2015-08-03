@@ -161,7 +161,7 @@ describe('OnsPageElement', () => {
   describe('#attributeChangedCallback()', () => {
     it('triggers \'onModifierChanged()\' method', () => {
       var spy = chai.spy.on(ons._internal.ModifierUtil, 'onModifierChanged');
-      element.attributeChangedCallback('modifier','fuga','piyo');
+      element.attributeChangedCallback('modifier', 'fuga', 'piyo');
       expect(spy).to.have.been.called.once;
     });
   });

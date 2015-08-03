@@ -49,6 +49,12 @@ describe('OnsPullHookElement', () => {
     page = pullHook = null;
   });
 
+  describe('#createdCallback()', () => {
+    it('throws an error if is not a descendant of ons-page or ons-scroller', () => {
+      expect(() => pullHook.createdCallback()).to.throw(Error);
+    });
+  });
+
   describe('#_createScrollElement()', () => {
     it('creates a scroll element', () => {
       let scrollElement = pullHook._createScrollElement();
@@ -82,21 +88,40 @@ describe('OnsPullHookElement', () => {
 
   describe('#_onDrag()', () => {
     it('does nothing if disabled', () => {
+      let spy = chai.spy.on(pullHook, '_translateTo');
+
       pullHook.setAttribute('disabled', '');
       pullHook._onDrag();
+
+      expect(spy).not.to.have.been.called();
     });
 
     it('does nothing if direction is horizontal', () => {
+      let spy = chai.spy.on(pullHook, '_translateTo');
+
       pullHook._onDrag({
         gesture: {
           direction: 'left'
         }
       });
+
+      expect(spy).not.to.have.been.called();
     });
 
     it('translates the element', () => {
       let spy = chai.spy.on(pullHook, '_translateTo');
 
+      // Need to initiate the dragging.
+      pullHook._onDragStart();
+      pullHook._onDrag(event);
+
+      expect(spy).to.have.been.called.with(10);
+    });
+
+    it('translates the element when interimDirection is not \'down\'', () => {
+      let spy = chai.spy.on(pullHook, '_translateTo');
+
+      event.gesture.interimDirection = 'up';
       // Need to initiate the dragging.
       pullHook._onDragStart();
       pullHook._onDrag(event);

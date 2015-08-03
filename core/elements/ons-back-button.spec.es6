@@ -37,7 +37,7 @@ describe('OnsBackButtonElement', () => {
 
   describe('#_onClick()', () => {
     it('will pop a page', () => {
-      let div = ons._util.createElement (`
+      let div = ons._util.createElement(`
         <div>
           <ons-template id="page1">
             <ons-page></ons-page>

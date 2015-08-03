@@ -332,7 +332,7 @@ describe('OnsNavigatorElement', () => {
   describe('#_createPageElement()', () => {
     it('throws an error when no ons-page is provided', () => {
       let tmp = ons._internal.normalizePageHTML;
-      ons._internal.normalizePageHTML = (html) => {return '<div>'+html+'</div>';};
+      ons._internal.normalizePageHTML = (html) => '<div>' + html + '</div>';
       expect(() => nav._createPageElement('Test')).to.throw(Error);
       ons._internal.normalizePageHTML = tmp;
     });
