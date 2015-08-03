@@ -44,7 +44,7 @@ limitations under the License.
       let eventType = e.type;
 
       if(ripple !== null) {
-        let size = Math.max(e.target.offsetWidth, e.target.offsetHeight);
+        let size = Math.max(el.offsetWidth, el.offsetHeight);
         ripple.style.width = size + 'px';
         ripple.style.height = size + 'px';
       } else {
@@ -69,22 +69,6 @@ limitations under the License.
       ripple.style.top = y + 'px';
       ripple.style.left = x + 'px';
       ripple.classList.add('animate');
-    }
-
-    static onMouseUp(e) {
-      let el = e.target;
-      if (!el.hasAttribute('material')) {
-        el = el.parentNode;
-      }
-
-      let ripple = el.querySelector('.ripple');
-
-      if(ripple !== null) {
-        setTimeout(function() {
-          ripple.classList.remove('animate');
-          ripple.classList.add('done');
-        }, 100);
-      }
     }
 
     static addRippleEffect(el) {
