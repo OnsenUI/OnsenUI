@@ -38,8 +38,13 @@ limitations under the License.
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
       }
-      if (this.hasAttribute('material')) {
-        RippleEffect.addRippleEffect(this);
+      if (name === 'material') {
+        console.log(current);
+        if (current !== null) {
+          RippleEffect.addRippleEffect(this);
+        } else {
+          RippleEffect.removeRippleEffect(this);
+        }
       }
     }
   }

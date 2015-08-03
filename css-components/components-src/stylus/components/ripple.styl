@@ -30,6 +30,9 @@
     <button material class="button" disabled>Button</button>
 */
 
+[material]:active
+  opacity 1
+  
 .ripple
   display block
   position absolute
@@ -40,20 +43,59 @@
 
 /*animation effect*/
 .ripple.animate
-  -webkit-animation ripple 0.65s linear
-  animation ripple 0.65s linear
+  -webkit-animation ripple 0.3s linear
+  animation ripple 0.3s linear
+  animation-fill-mode forwards
+  -webkit-animation-fill-mode forwards
+  
+.ripple.done
+  -webkit-animation rippleOut 0.2s linear
+  animation rippleOut 0.2s linear
+
+@-webkit-keyframes rippleOut {
+  0% {
+    opacity 1
+    -webkit-transform scale(2.5)
+    transform scale(2.5)
+  }
+  100% {
+    opacity 0
+    -webkit-transform scale(2.5)
+    transform scale(2.5)
+  }
+}
+
+@keyframes rippleOut { 
+  0% {
+    opacity 1
+    -webkit-transform scale(2.5)
+    transform scale(2.5)
+  }
+  100% {
+    opacity 0
+    -webkit-transform scale(2.5)
+    transform scale(2.5)
+  }
+}
+
 
 @-webkit-keyframes ripple {
+  0% {
+    -webkit-transform scale(0)
+    transform scale(0)
+  }
   100% {
-    opacity: 0;
     -webkit-transform: scale(2.5);
     transform: scale(2.5);
   }
 }
 
 @keyframes ripple { 
+  0% {
+    -webkit-transform scale(0)
+    transform scale(0)
+  }
   100% {
-    opacity: 0;
     -webkit-transform: scale(2.5);
     transform: scale(2.5);
   }
