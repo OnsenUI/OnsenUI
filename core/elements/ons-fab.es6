@@ -20,6 +20,7 @@ limitations under the License.
 
   const scheme = {'': 'fab--*'};
   const ModifierUtil = ons._internal.ModifierUtil;
+  const RippleEffect = ons._internal.RippleEffect;
 
   class FabElement extends ons._BaseElement {
 
@@ -30,6 +31,9 @@ limitations under the License.
       ModifierUtil.initModifier(this, scheme);
 
       this._updatePosition();
+      if (this.hasAttribute('material')) {
+        RippleEffect.addRippleEffect(this);
+      }
     }
 
     attributeChangedCallback(name, last, current) {
@@ -38,6 +42,13 @@ limitations under the License.
       }
       if (name === 'position') {
         this._updatePosition();
+      }
+      if (name === 'material') {
+        if (current !== null) {
+          RippleEffect.addRippleEffect(this);
+        } else {
+          RippleEffect.removeRippleEffect(this);
+        }
       }
     }
 
