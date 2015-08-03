@@ -1,0 +1,60 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.
+*
+* Licensed under the Apache License, Version 2.0 (the "License")
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+/*! topdoc
+  name: Button with ripple
+  use: Button
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button material class="button">Button</button>
+    <button material class="button" disabled>Button</button>
+*/
+
+.ripple
+  display block
+  position absolute
+  background rgba(255,255,255,.3)
+  border-radius 100%
+  -webkit-transform scale(0)
+  transform scale(0)
+
+/*animation effect*/
+.ripple.animate
+  -webkit-animation ripple 0.65s linear
+  animation ripple 0.65s linear
+
+@-webkit-keyframes ripple {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2.5);
+    transform: scale(2.5);
+  }
+}
+
+@keyframes ripple { 
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2.5);
+    transform: scale(2.5);
+  }
+}
