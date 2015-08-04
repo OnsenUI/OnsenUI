@@ -348,8 +348,9 @@ limitations under the License.
     _loadPersistentPageDOM(element, options) {
       options = options || {};
 
-      element.style.display = 'block';
-      this._getContentElement().appendChild(element);
+      if (!util.isAttached(element)) {
+        this._getContentElement().appendChild(element);
+      }
       this._switchPage(element, options);
     }
 

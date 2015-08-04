@@ -62,6 +62,20 @@ limitations under the License.
   };
 
   /**
+   * @param {Element} element
+   * @return {HTMLElement/null}
+   */
+  util.isAttached = (element) => {
+    while (document.documentElement !== element) {
+      element = element.parentNode;
+      if (!element) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  /**
    * @param {String} html
    * @return {Element}
    */
