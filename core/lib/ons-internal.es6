@@ -147,17 +147,7 @@ limitations under the License.
    * @return {Promise}
    */
   ons._internal.getPageHTMLAsync = function(page) {
-    return ons._internal.getTemplateHTMLAsync(page).then(html => normalizePageHTML(html));
-
-    function normalizePageHTML(html) {
-      html = ('' + html).trim();
-
-      if (!html.match(/^<(ons-page|ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
-        html = '<ons-page>' + html + '</ons-page>';
-      }
-
-      return html;
-    }
+    return ons._internal.getTemplateHTMLAsync(page).then(html => ons._internal.normalizePageHTML(html));
   };
 
 })(window.ons = window.ons || {});
