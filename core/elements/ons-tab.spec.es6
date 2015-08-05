@@ -47,42 +47,34 @@ describe('OnsTabElement', () => {
   });
 
   describe('persistent attribute', () => {
-    it('adds a persistent state to the tab', function(done) {
+    it('adds a persistent state to the tab', function() {
       let tabbar = new OnsTabbarElement();
 
       tabbar.appendChild(element);
       document.body.appendChild(tabbar);
+      expect(element.isPersistent()).not.to.be.true;
 
-      setImmediate(() => {
-        expect(element.isPersistent()).not.to.be.true;
+      element.setAttribute('persistent', '');
+      expect(element.isPersistent()).to.be.true;
 
-        element.setAttribute('persistent', '');
-        expect(element.isPersistent()).to.be.true;
-
-        element.removeAttribute('persistent');
-        expect(element.isPersistent()).not.to.be.true;
-        done();
-      });
+      element.removeAttribute('persistent');
+      expect(element.isPersistent()).not.to.be.true;
     });
   });
 
   describe('no-reload attribute', () => {
-    it('sets the tab as no-reloadable', function(done) {
+    it('sets the tab as no-reloadable', function() {
       let tabbar = new OnsTabbarElement();
 
       tabbar.appendChild(element);
       document.body.appendChild(tabbar);
+      expect(element.canReload()).to.be.true;
 
-      setImmediate(() => {
-        expect(element.canReload()).to.be.true;
+      element.setAttribute('no-reload', '');
+      expect(element.canReload()).not.to.be.true;
 
-        element.setAttribute('no-reload', '');
-        expect(element.canReload()).not.to.be.true;
-
-        element.removeAttribute('no-reload');
-        expect(element.canReload()).to.be.true;
-        done();
-      });
+      element.removeAttribute('no-reload');
+      expect(element.canReload()).to.be.true;
     });
   });
 
@@ -224,7 +216,7 @@ describe('OnsTabElement', () => {
   });
 
   describe('#setActive()', () => {
-    it('will set the tab as active', (done) => {
+    it('will set the tab as active', () => {
       let tabbar = new OnsTabbarElement();
 
       document.body.appendChild(tabbar);
@@ -233,19 +225,16 @@ describe('OnsTabElement', () => {
 
       let tab1 = tabbar.querySelector('#tab1');
       let tab2 = tabbar.querySelector('#tab2');
-      setImmediate(() => {
-        expect(tabbar.getActiveTabIndex()).to.equal(-1);
+      expect(tabbar.getActiveTabIndex()).to.equal(-1);
 
-        tab1.setActive();
-        expect(tabbar.getActiveTabIndex()).not.to.equal(-1);
-        expect(tabbar.getActiveTabIndex()).to.equal(0);
+      tab1.setActive();
+      expect(tabbar.getActiveTabIndex()).not.to.equal(-1);
+      expect(tabbar.getActiveTabIndex()).to.equal(0);
 
-        tab2.setActive();
-        tab1.classList.remove('active');
-        expect(tabbar.getActiveTabIndex()).not.to.equal(0);
-        expect(tabbar.getActiveTabIndex()).to.equal(1);
-        done();
-      });
+      tab2.setActive();
+      tab1.classList.remove('active');
+      expect(tabbar.getActiveTabIndex()).not.to.equal(0);
+      expect(tabbar.getActiveTabIndex()).to.equal(1);
     });
   });
 });
