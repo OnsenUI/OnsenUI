@@ -95,6 +95,7 @@ fab--active()
   fab--focus()
   
 .fab__icon
+  position relative
   overflow hidden
   height var-fab-height
   width var-fab-width
@@ -126,6 +127,7 @@ fab--active()
 
 .fab__item
   fab()
+  overflow hidden
   width var-fab-mini-width
   height var-fab-mini-height
   line-height 36px
@@ -214,3 +216,10 @@ fab--active()
   width var-fab-mini-width
   height var-fab-mini-height
   line-height 36px
+  
+
+.fab--mini
+  .fab__icon
+    width var-fab-mini-width
+    height var-fab-mini-height
+    line-height 36px

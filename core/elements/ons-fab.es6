@@ -18,48 +18,84 @@ limitations under the License.
 (() => {
   'use strict';
 
-  const scheme = {'': 'fab--*'};
+  const scheme = {
+    '': 'fab--*',
+    '.fab__icon': 'fab__icon--*'
+  };
   const ModifierUtil = ons._internal.ModifierUtil;
   const RippleEffect = ons._internal.RippleEffect;
 
   class FabElement extends ons._BaseElement {
 
     createdCallback() {
-      var shown = false;
-      this.classList.add('fab');
+      this._compile();
+      this._shown = false;
       this._boundOnClick = this._onClick.bind(this);
       ModifierUtil.initModifier(this, scheme);
+      this.classList.add('fab');
 
       this._updatePosition();
       if (this.hasAttribute('material')) {
-        RippleEffect.addRippleEffect(this);
+        this._addRippleEffect();
       }
+
+    }
+
+    _compile() {
+      var content = document.createElement('span');
+      content.classList.add('fab__icon');
+
+      let children = ons._util.arrayFrom(this.childNodes);
+
+      for (let i = 0; i < children.length; i++) {
+        let child = children[i];
+        if (child.nodeName.toLowerCase() !== 'ons-fab-item') {
+          content.appendChild(child);
+        }
+      }
+
+      this.insertBefore(content, this.firstChild);
     }
 
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
-      }
-      if (name === 'position') {
+      } else if (name === 'position') {
         this._updatePosition();
-      }
-      if (name === 'material') {
+      } else if (name === 'material') {
         if (current !== null) {
-          RippleEffect.addRippleEffect(this);
+          this._addRippleEffect();
         } else {
-          RippleEffect.removeRippleEffect(this);
+          this._removeRippleEffect();
         }
+      }
+    }
+
+    _addRippleEffect() {
+      this.firstElementChild.classList.add('fab__icon');
+      RippleEffect.addRippleEffect(this.firstElementChild);
+      let children = ons._util.arrayFrom(this.querySelectorAll('ons-fab-item'));
+      for (var i = 0; i < children.length; i++) {
+        children[i].setAttribute('material', '');
+      }
+    }
+
+    _removeRippleEffect() {
+      RippleEffect.removeRippleEffect(this.firstElementChild);
+      let children = ons._util.arrayFrom(this.querySelectorAll('ons-fab-item'));
+      for (var i = 0; i < children.length; i++) {
+        children[i].removeAttribute('material');
       }
     }
 
     _updatePosition() {
       let position = this.getAttribute('position');
       this.classList.remove(
-        'fab--top__left', 
-        'fab--bottom__right', 
-        'fab--bottom__left', 
-        'fab--top__right', 
-        'fab--top__center', 
+        'fab--top__left',
+        'fab--bottom__right',
+        'fab--bottom__left',
+        'fab--top__right',
+        'fab--top__center',
         'fab--bottom__center');
       switch(position) {
         case 'top right':
@@ -92,15 +128,20 @@ limitations under the License.
     }
 
     attachedCallback() {
-      this.addEventListener('click', this._boundOnClick, false);
+      this.querySelector('.fab__icon').addEventListener('click', this._boundOnClick, false);
     }
 
-    show() {
+    detachedCallback() {
+      this.querySelector('.fab__icon').removeEventListener('click', this._boundOnClick, false);
+    }
+
+
+    show(options = {}) {
       this.style.transform = 'scale(1)';
     }
 
-    hide() {
-      if (this.shown) {
+    hide(options = {}) {
+      if (this._shown) {
         this.hideItems();
         setTimeout(() => {
           this.style.transform = 'scale(0)';
@@ -111,29 +152,35 @@ limitations under the License.
     }
 
     showItems() {
-      if (!this.shown) {
-        for (var i = 1; i < this.children.length; i++) {
-          this.children[i].style.transform = 'scale(1)';
-          this.children[i].style.transitionDelay = 25 * i + 'ms';
+      if (!this._shown) {
+        let children = ons._util.arrayFrom(this.querySelectorAll('ons-fab-item'));
+        for (var i = 0; i < children.length; i++) {
+          children[i].style.transform = 'scale(1)';
+          children[i].style.webkitTransform = 'scale(1)';
+          children[i].style.transitionDelay = 25 * i + 'ms';
+          children[i].style.webkitTransitionDelay = 25 * i + 'ms';
         }
-        this.shown = true;
+        this._shown = true;
       }
     }
 
     hideItems() {
-      if (this.shown) {
-        for (var i = 1; i < this.children.length; i++) {
-          this.children[i].style.transform = 'scale(0)';
-          this.children[i].style.transitionDelay = 25 * (this.children.length - i) + 'ms';
+      if (this._shown) {
+        let children = ons._util.arrayFrom(this.querySelectorAll('ons-fab-item'));
+        for (var i = 0; i < children.length; i++) {
+          children[i].style.transform = 'scale(0)';
+          children[i].style.webkitTransform = 'scale(0)';
+          children[i].style.transitionDelay = 25 * (children.length - i) + 'ms';
+          children[i].style.webkitTransitionDelay = 25 * (children.length - i) + 'ms';
         }
-        this.shown = false;
+        this._shown = false;
       }
     }
 
     _onClick(e) {
       if (e.target.classList.contains('fab__icon') || e.target.parentNode.classList.contains('fab__icon')) {
         if (ons._util.findChild(this, '.fab__item')) {
-          if (!this.shown) {
+          if (!this._shown) {
             this.showItems();
           } else {
             this.hideItems();
@@ -146,7 +193,7 @@ limitations under the License.
     }
 
     isItemShown() {
-      return this.shown;
+      return this._shown;
     }
 
     /**

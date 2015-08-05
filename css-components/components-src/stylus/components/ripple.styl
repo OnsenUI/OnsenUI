@@ -40,6 +40,7 @@
   border-radius 100%
   -webkit-transform scale(0)
   transform scale(0)
+  pointer-events none
 
 /*animation effect*/
 .ripple.animate
@@ -48,9 +49,19 @@
   animation-fill-mode forwards
   -webkit-animation-fill-mode forwards
   
+.ripple.animate__center
+  -webkit-animation rippleCenter 0.1s linear
+  animation rippleCenter 0.1s linear
+  animation-fill-mode forwards
+  -webkit-animation-fill-mode forwards
+  
 .ripple.done
   -webkit-animation rippleOut 0.2s linear
   animation rippleOut 0.2s linear
+  
+.ripple.done__center
+  -webkit-animation rippleOutCenter 0.2s linear
+  animation rippleOutCenter 0.2s linear
 
 @-webkit-keyframes rippleOut {
   0% {
@@ -98,5 +109,70 @@
   100% {
     -webkit-transform: scale(2.5);
     transform: scale(2.5);
+  }
+}
+
+
+@-webkit-keyframes rippleCenter {
+  0% {
+    -webkit-transform scale(0)
+    transform scale(0)
+    top 0
+    left 0
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    top 0
+    left 0
+  }
+}
+
+@keyframes rippleCenter { 
+  0% {
+    -webkit-transform scale(0)
+    transform scale(0)
+    top 0
+    left 0
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    top 0
+    left 0
+  }
+}
+
+@-webkit-keyframes rippleOutCenter {
+  0% {
+    opacity 1
+    -webkit-transform scale(1)
+    transform scale(1)
+    top 0
+    left 0
+  }
+  100% {
+    opacity 0
+    -webkit-transform scale(1)
+    transform scale(1)
+    top 0
+    left 0
+  }
+}
+
+@keyframes rippleOutCenter { 
+  0% {
+    opacity 1
+    -webkit-transform scale(1)
+    transform scale(1)
+    top 0
+    left 0
+  }
+  100% {
+    opacity 0
+    -webkit-transform scale(1)
+    transform scale(1)
+    top 0
+    left 0
   }
 }

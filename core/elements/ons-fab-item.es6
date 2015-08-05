@@ -20,20 +20,44 @@ limitations under the License.
 
   const scheme = {'': 'fab__item--*'};
   const ModifierUtil = ons._internal.ModifierUtil;
+  const RippleEffect = ons._internal.RippleEffect;
 
   class FabItemElement extends ons._BaseElement {
 
     createdCallback() {
       this.classList.add('fab__item');
+      this._boundOnClick = this._onClick.bind(this);
 
       ModifierUtil.initModifier(this, scheme);
+      if (this.hasAttribute('material')) {
+        RippleEffect.addRippleEffect(this);
+      }
     }
 
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      } else if (name === 'material') {
+        if (current !== null) {
+          RippleEffect.addRippleEffect(this);
+        } else {
+          RippleEffect.removeRippleEffect(this);
+        }
       }
     }
+
+    attachedCallback() {
+      this.addEventListener('click', this._boundOnClick, false);
+    }
+
+    detachedCallback() {
+      this.removeEventListener('click', this._boundOnClick, false);
+    }
+
+    _onClick(e) {
+      e.stopPropagation();
+    }
+
   }
 
   if (!window.FabItemElement) {

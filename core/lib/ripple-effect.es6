@@ -22,26 +22,56 @@ limitations under the License.
 
     static onClick(e) {
       let el = e.target;
+      if (e.type === 'touchstart') {
+        e.preventDefault();
+      }
 
-      if (!el.hasAttribute('material')) {
+      while (!el.hasAttribute('material')) {
         el = el.parentNode;
+      }
+
+      let flag = true;
+      if (el.nodeName.toLowerCase() === 'ons-fab' ||
+        el.nodeName.toLowerCase() === 'ons-fab-item') {
+        flag = false;
       }
 
       let onMouseUp = (e) => {
         let ripple = el.querySelector('.ripple');
         if(ripple !== null) {
           setTimeout(function() {
-            ripple.classList.remove('animate');
-            ripple.classList.add('done');
+            if (flag) {
+              ripple.classList.remove('animate');
+              ripple.classList.add('done');
+            } else {
+              ripple.classList.remove('animate__center');
+              ripple.classList.add('done__center');
+            }
           }, 300);
         }
-        RippleEffect.removeMultiListener(document, 'mouseup', onMouseUp);
+        RippleEffect.removeMultiListener(document, 'mouseup touchend', onMouseUp);
       };
 
-      RippleEffect.addMultiListener(document, 'mouseup', onMouseUp);
+      RippleEffect.addMultiListener(document, 'mouseup touchend', onMouseUp);
 
       let ripple = el.querySelector('.ripple');
       let eventType = e.type;
+
+      if (flag) {
+        ripple.classList.remove('done');
+        ripple.classList.remove('animate');
+      } else {
+        ripple.classList.remove('animate__center');
+        ripple.classList.remove('done__center');
+      }
+
+      let x = e.clientX;
+      let y = e.clientY;
+      if(eventType == 'touchstart') {
+        x = e.changedTouches[0].clientX;
+        y = e.changedTouches[0].clientY;
+      }
+
 
       if(ripple !== null) {
         let size = Math.max(el.offsetWidth, el.offsetHeight);
@@ -51,16 +81,6 @@ limitations under the License.
         throw new Error('Ripple effect span not found');
       }
 
-      ripple.classList.remove('done');
-      ripple.classList.remove('animate');
-
-      let x = e.clientX;
-      let y = e.clientY;
-      if(eventType == 'touchstart') {
-        x = e.changedTouches[0].clientX;
-        y = e.changedTouches[0].clientY;
-      }
-
       let pos = el.getBoundingClientRect();
 
       x = x - pos.left - ripple.offsetWidth / 2;
@@ -68,7 +88,12 @@ limitations under the License.
 
       ripple.style.top = y + 'px';
       ripple.style.left = x + 'px';
-      ripple.classList.add('animate');
+
+      if (flag) {
+        ripple.classList.add('animate');
+      } else {
+        ripple.classList.add('animate__center');
+      }
     }
 
     static addRippleEffect(el) {
