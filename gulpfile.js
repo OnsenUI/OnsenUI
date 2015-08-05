@@ -385,6 +385,7 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
     'core/*/*.{js,es6}',
     '!core/*/*.spec.js',
     'framework/*/*',
+    'core/css/*.css',
     'css-components/components-src/dist/*.css'
   ];
 
