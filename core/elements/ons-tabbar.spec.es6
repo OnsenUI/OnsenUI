@@ -112,23 +112,23 @@ describe('OnsTabbarElement', () => {
       var topElement = document.getElementById('top');
       var bottomElement = document.getElementById('bottom');
 
-      expect(topElement._getContentElement().style.top).to.equal('');
+      expect(topElement._contentElement.style.top).to.equal('');
       expect(topElement._getTabbarElement().style.display).to.equal('');
-      expect(bottomElement._getContentElement().style.bottom).to.equal('');
+      expect(bottomElement._contentElement.style.bottom).to.equal('');
       expect(bottomElement._getTabbarElement().style.display).to.equal('');
 
       topElement.setTabbarVisibility(false);
       bottomElement.setTabbarVisibility(false);
-      expect(topElement._getContentElement().style.top).to.equal('0px');
+      expect(topElement._contentElement.style.top).to.equal('0px');
       expect(topElement._getTabbarElement().style.display).to.equal('none');
-      expect(bottomElement._getContentElement().style.bottom).to.equal('0px');
+      expect(bottomElement._contentElement.style.bottom).to.equal('0px');
       expect(bottomElement._getTabbarElement().style.display).to.equal('none');
 
       topElement.setTabbarVisibility(true);
       bottomElement.setTabbarVisibility(true);
-      expect(topElement._getContentElement().style.top).to.equal('');
+      expect(topElement._contentElement.style.top).to.equal('');
       expect(topElement._getTabbarElement().style.display).to.equal('');
-      expect(bottomElement._getContentElement().style.bottom).to.equal('');
+      expect(bottomElement._contentElement.style.bottom).to.equal('');
       expect(bottomElement._getTabbarElement().style.display).to.equal('');
     });
   });
@@ -137,13 +137,13 @@ describe('OnsTabbarElement', () => {
   describe('#_getCurrentPageElement()', () => {
     it('accepts only \'ons-page\' as current page element', () => {
       let page = new OnsPageElement();
-      element._getContentElement().appendChild(page);
+      element._contentElement.appendChild(page);
       expect(element._getCurrentPageElement().classList.contains('page')).to.be.true;
       expect(element._getCurrentPageElement.bind(element)).not.to.throw('Invalid state: page element must be a "ons-page" element.');
 
-      element._getContentElement().removeChild(element._getContentElement().querySelector('ons-page'));
+      element._contentElement.removeChild(element._contentElement.querySelector('ons-page'));
       let button = new OnsButtonElement();
-      element._getContentElement().appendChild(button);
+      element._contentElement.appendChild(button);
       expect(element._getCurrentPageElement.bind(element)).to.throw('Invalid state: page element must be a "ons-page" element.');
     });
   });
