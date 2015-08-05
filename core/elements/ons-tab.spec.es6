@@ -3,7 +3,7 @@ describe('OnsTabElement', () => {
 
   beforeEach(() => {
     element = ons._util.createElement(`
-    　<ons-tab>
+      <ons-tab>
       </ons-tab>
     `);
   });
@@ -56,7 +56,7 @@ describe('OnsTabElement', () => {
       setImmediate(() => {
         expect(element.isPersistent()).not.to.be.true;
 
-        element.setAttribute('persistent','');
+        element.setAttribute('persistent', '');
         expect(element.isPersistent()).to.be.true;
 
         element.removeAttribute('persistent');
@@ -76,7 +76,7 @@ describe('OnsTabElement', () => {
       setImmediate(() => {
         expect(element.canReload()).to.be.true;
 
-        element.setAttribute('no-reload','');
+        element.setAttribute('no-reload', '');
         expect(element.canReload()).not.to.be.true;
 
         element.removeAttribute('no-reload');
@@ -93,7 +93,7 @@ describe('OnsTabElement', () => {
       let tabbar = new OnsTabbarElement();
       document.body.appendChild(tabbar);
       element = ons._util.createElement(`
-      　<ons-tab active="true">
+        <ons-tab active="true">
           <div></div>
         </ons-tab>
       `);
@@ -110,11 +110,11 @@ describe('OnsTabElement', () => {
       document.body.appendChild(tabbar);
       expect(element.querySelector('ons-icon')).not.to.be.ok;
 
-      element.setAttribute('icon','ion-map');
+      element.setAttribute('icon', 'ion-map');
       expect(element.querySelector('ons-icon')).to.be.ok;
       expect(element.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-map');
 
-      element.setAttribute('icon','ion-home');
+      element.setAttribute('icon', 'ion-home');
       expect(element.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-home');
       expect(element.querySelector('ons-icon').getAttribute('icon')).not.to.equal('ion-map');
     });
@@ -128,11 +128,11 @@ describe('OnsTabElement', () => {
       document.body.appendChild(tabbar);
       expect(document.getElementsByClassName('tab-bar__label')[0]).not.to.be.ok;
 
-      element.setAttribute('label','text');
+      element.setAttribute('label', 'text');
       expect(document.getElementsByClassName('tab-bar__label')[0]).to.be.ok;
       expect(document.getElementsByClassName('tab-bar__label')[0].innerHTML).to.equal('text');
 
-      element.setAttribute('label','new text');
+      element.setAttribute('label', 'new text');
       expect(document.getElementsByClassName('tab-bar__label')[0].innerHTML).to.equal('new text');
       expect(document.getElementsByClassName('tab-bar__label')[0].innerHTML).not.to.equal('text');
     });
@@ -164,11 +164,11 @@ describe('OnsTabElement', () => {
 
   describe('parent', () => {
     it('should be a \'ons-tabbar\' element', () => {
-      expect(() => {element._ensureElementPosition()}).to.throw('This ons-tab element is must be child of ons-tabbar element.');
+      expect(() => element._ensureElementPosition()).to.throw('This ons-tab element is must be child of ons-tabbar element.');
 
       var parent = new OnsTabbarElement();
       parent.appendChild(element);
-      expect(() => {element._ensureElementPosition()}).not.to.throw('This ons-tab element is must be child of ons-tabbar element.');
+      expect(() => element._ensureElementPosition()).not.to.throw('This ons-tab element is must be child of ons-tabbar element.');
     });
   });
 
@@ -181,7 +181,7 @@ describe('OnsTabElement', () => {
       let tabbar = new OnsTabbarElement();
       document.body.appendChild(tabbar);
       element = ons._util.createElement(`
-      　<ons-tab active="true">
+        <ons-tab active="true">
           <div></div>
         </ons-tab>
       `);
@@ -202,7 +202,7 @@ describe('OnsTabElement', () => {
   describe('#_loadPage()', () => {
     it('returns the current tab _pageElement, if the tab has persistent attribute and a _pageElement', (done) => {
       element = ons._util.createElement(`
-      　<ons-tab persistent>
+        <ons-tab persistent>
         </ons-tab>
       `);
 
