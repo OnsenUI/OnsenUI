@@ -45,7 +45,7 @@ limitations under the License.
       var content = document.createElement('span');
       content.classList.add('fab__icon');
 
-      let children = ons._util.arrayFrom(this.childNodes);
+      const children = ons._util.arrayFrom(this.childNodes);
 
       for (let i = 0; i < children.length; i++) {
         let child = children[i];
@@ -74,22 +74,16 @@ limitations under the License.
     _addRippleEffect() {
       this.firstElementChild.classList.add('fab__icon');
       RippleEffect.addRippleEffect(this.firstElementChild);
-      let children = ons._util.arrayFrom(this.querySelectorAll('ons-fab-item'));
-      for (var i = 0; i < children.length; i++) {
-        children[i].setAttribute('material', '');
-      }
+      ons._util.arrayFrom(this.querySelectorAll('ons-fab-item')).forEach(element => element.setAttribute('material', ''));
     }
 
     _removeRippleEffect() {
       RippleEffect.removeRippleEffect(this.firstElementChild);
-      let children = ons._util.arrayFrom(this.querySelectorAll('ons-fab-item'));
-      for (var i = 0; i < children.length; i++) {
-        children[i].removeAttribute('material');
-      }
+      ons._util.arrayFrom(this.querySelectorAll('ons-fab-item')).forEach(element => element.removeAttribute('material'));
     }
 
     _updatePosition() {
-      let position = this.getAttribute('position');
+      const position = this.getAttribute('position');
       this.classList.remove(
         'fab--top__left',
         'fab--bottom__right',
@@ -153,7 +147,7 @@ limitations under the License.
 
     showItems() {
       if (!this._shown) {
-        let children = ons._util.arrayFrom(this.querySelectorAll('ons-fab-item'));
+        const children = ons._util.arrayFrom(this.querySelectorAll('ons-fab-item'));
         for (var i = 0; i < children.length; i++) {
           children[i].style.transform = 'scale(1)';
           children[i].style.webkitTransform = 'scale(1)';
@@ -166,7 +160,7 @@ limitations under the License.
 
     hideItems() {
       if (this._shown) {
-        let children = ons._util.arrayFrom(this.querySelectorAll('ons-fab-item'));
+        const children = ons._util.arrayFrom(this.querySelectorAll('ons-fab-item'));
         for (var i = 0; i < children.length; i++) {
           children[i].style.transform = 'scale(0)';
           children[i].style.webkitTransform = 'scale(0)';
@@ -187,9 +181,6 @@ limitations under the License.
           }
         }
       }
-    }
-
-    isShown() {
     }
 
     isItemShown() {

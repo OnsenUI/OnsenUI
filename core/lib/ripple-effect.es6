@@ -36,10 +36,33 @@ limitations under the License.
         flag = false;
       }
 
-      let onMouseUp = (e) => {
-        let ripple = el.querySelector('.ripple');
-        if(ripple !== null) {
-          setTimeout(function() {
+      const ripple = el.querySelector('.ripple');
+
+      let animationEnded = new Promise((resolve) => {
+        let onAnimationEnd = () => {
+          this.removeEventListener('webkitAnimationEnd', onAnimationEnd);
+          this.removeEventListener('animationend', onAnimationEnd);
+          resolve();
+        };
+
+        this.addEventListener('webkitAnimationEnd', onAnimationEnd);
+        this.addEventListener('animationend', onAnimationEnd);
+      });
+
+      let mouseReleased = new Promise((resolve) => {
+        let onMouseUp = () => {
+          document.removeEventListener('webkitAnimationEnd', onMouseUp);
+          document.removeEventListener('animationend', onMouseUp);
+          resolve();
+        };
+
+        document.addEventListener('mouseup', onMouseUp);
+        document.addEventListener('touchend', onMouseUp);
+      });
+
+      Promise.all([animationEnded, mouseReleased])
+        .then(
+          () => {
             if (flag) {
               ripple.classList.remove('animate');
               ripple.classList.add('done');
@@ -47,15 +70,10 @@ limitations under the License.
               ripple.classList.remove('animate__center');
               ripple.classList.add('done__center');
             }
-          }, 300);
-        }
-        RippleEffect.removeMultiListener(document, 'mouseup touchend', onMouseUp);
-      };
+          }
+        );
 
-      RippleEffect.addMultiListener(document, 'mouseup touchend', onMouseUp);
-
-      let ripple = el.querySelector('.ripple');
-      let eventType = e.type;
+      const eventType = e.type;
 
       if (flag) {
         ripple.classList.remove('done');
@@ -67,27 +85,27 @@ limitations under the License.
 
       let x = e.clientX;
       let y = e.clientY;
-      if(eventType == 'touchstart') {
+      if (eventType === 'touchstart') {
         x = e.changedTouches[0].clientX;
         y = e.changedTouches[0].clientY;
       }
 
+      const size = Math.max(el.offsetWidth, el.offsetHeight);
 
-      if(ripple !== null) {
-        let size = Math.max(el.offsetWidth, el.offsetHeight);
+      if (ripple !== null) {
         ripple.style.width = size + 'px';
         ripple.style.height = size + 'px';
       } else {
         throw new Error('Ripple effect span not found');
       }
 
-      let pos = el.getBoundingClientRect();
+      const pos = el.getBoundingClientRect();
 
-      x = x - pos.left - ripple.offsetWidth / 2;
-      y = y - pos.top - ripple.offsetHeight / 2;
+      x = x - pos.left - size / 2;
+      y = y - pos.top - size / 2;
 
-      ripple.style.top = y + 'px';
       ripple.style.left = x + 'px';
+      ripple.style.top = y + 'px';
 
       if (flag) {
         ripple.classList.add('animate');
@@ -97,7 +115,7 @@ limitations under the License.
     }
 
     static addRippleEffect(el) {
-      if(el.querySelector('.ripple') === null) {
+      if (el.querySelector('.ripple') === null) {
         var ripple = document.createElement('span');
         ripple.classList.add('ripple');
         el.insertBefore(ripple, el.firstChild);
