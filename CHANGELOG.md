@@ -32,6 +32,9 @@ v1.3.8-dev
  * ons-modal: Added `isShown()` method.
  * ons-navigator: Fixed `insertPage()` behaviour with high or low indexes.
  * ons-tabbar: Fixed callback in `setActiveTab()` method.
+ * ons-tabbar: persistent tabs only throw 'init' event once.
+ * core: every child element will be wrapped inside an ons-page.
+ * ons-page: added page lifecycle events API
 
 v1.3.7
 ----
