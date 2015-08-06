@@ -70,8 +70,7 @@ limitations under the License.
 
     destroy() {
       this._pointerEvents.forEach(event => this.element.removeEventListener(event, this._blockEvents), false);
-      util.removeElement(this.element);
-
+      this.element._destroy();
 
       const index = this.navigator._pages.indexOf(this);
       if (index !== -1) {
