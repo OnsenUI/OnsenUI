@@ -97,12 +97,12 @@ limitations under the License.
         this._mainPage.append(pageContent);
 
         if (this._currentPage) {
-          this._currentPage.remove();
           this._currentPageScope.$destroy();
         }
 
         this._currentPage = pageContent;
         this._currentPageScope = pageScope;
+        this._currentPage[0]._show();
       },
 
       /**
