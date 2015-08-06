@@ -29,6 +29,7 @@ limitations under the License.
   class PageElement extends ons._BaseElement {
 
     createdCallback() {
+      this._isShown = false;
       this.classList.add('page');
       this._compile();
       ModifierUtil.initModifier(this, scheme);
@@ -39,6 +40,24 @@ limitations under the License.
         bubbles: true
       });
       this.dispatchEvent(event);
+
+      if(!ons._util.hasAnyComponentAsParent(this)) {
+        this._show();
+      }
+    }
+
+    /**
+     * @return {boolean}
+     */
+    get isShown() {
+      return this._isShown;
+    }
+
+    /**
+     * @param {boolean}
+     */
+    set isShown(value) {
+      this._isShown = value;
     }
 
     /**
@@ -211,7 +230,35 @@ limitations under the License.
       }
     }
 
+    _show() {
+      if (!this.isShown) {
+        const event = new CustomEvent('show', {
+          bubbles: true
+        });
+        this.isShown = true;
+        this.dispatchEvent(event);
+
+        ons._util.propagateAction(this._getContentElement(), '_show');
+      }
+    }
+
+    _hide() {
+      if (this.isShown) {
+        const event = new CustomEvent('hide', {
+          bubbles: true
+        });
+        this.isShown = false;
+        this.dispatchEvent(event);
+
+        ons._util.propagateAction(this._getContentElement(), '_hide');
+      }
+    }
+
     _destroy() {
+      if (this.isShown) {
+        this._hide();
+      }
+
       const event = new CustomEvent('destroy', {
         bubbles: true
       });
@@ -220,6 +267,8 @@ limitations under the License.
       if (this.getDeviceBackButtonHandler()) {
         this.getDeviceBackButtonHandler().destroy();
       }
+
+      ons._util.propagateAction(this._getContentElement(), '_destroy');
 
       this.remove();
     }

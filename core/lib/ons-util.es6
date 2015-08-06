@@ -63,16 +63,45 @@ limitations under the License.
 
   /**
    * @param {Element} element
-   * @return {HTMLElement/null}
+   * @return {boolean}
    */
   util.isAttached = (element) => {
     while (document.documentElement !== element) {
-      element = element.parentNode;
       if (!element) {
         return false;
       }
+      element = element.parentNode;
     }
     return true;
+  };
+
+  /**
+   * @param {Element} element
+   * @return {boolean}
+   */
+  util.hasAnyComponentAsParent = (element) => {
+    while (element && document.documentElement !== element) {
+      element = element.parentNode;
+      if (element && element.nodeName.toLowerCase().match(/(ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  /**
+   * @param {Element} element
+   * @param {String} action to propagate
+   */
+  util.propagateAction = (element, action) => {
+    for (let i = 0; i < element.childNodes.length; i++) {
+      let child = element.childNodes[i];
+      if (child[action]) {
+        child[action]();
+      } else {
+        ons._util.propagateAction(child, action);
+      }
+    }
   };
 
   /**
