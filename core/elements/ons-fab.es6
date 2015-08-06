@@ -74,7 +74,7 @@ limitations under the License.
         'fab--top__right',
         'fab--top__center',
         'fab--bottom__center');
-      switch(position) {
+      switch (position) {
         case 'top right':
         case 'right top':
           this.classList.add('fab--top__right');

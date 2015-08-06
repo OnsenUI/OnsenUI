@@ -1,0 +1,52 @@
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+   http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+(() => {
+  'use strict';
+
+  const scheme = {
+    '': 'speed-dial--*',
+  };
+  const ModifierUtil = ons._internal.ModifierUtil;
+
+  class SpeedDialItemElement extends ons._BaseElement {
+
+    createdCallback() {
+      ModifierUtil.initModifier(this, scheme);
+      this.classList.add('fab');
+      this.classList.add('fab--mini');
+      this.classList.add('speed__dial__item');
+      this._boundOnClick = this._onClick.bind(this);
+    }
+
+    attachedCallback() {
+      this.addEventListener('click', this._boundOnClick, false);
+    }
+
+    detachedCallback() {
+      this.removeEventListener('click', this._boundOnClick, false);
+    }
+
+    _onClick(e) {
+      e.stopPropagation();
+    }
+
+
+  }
+
+  if (!window.OnsSpeedDialItemElement) {
+    window.OnsSpeedDialItemElement = document.registerElement('ons-speed-dial-item', {
+      prototype: SpeedDialItemElement.prototype
+    });
+  }
+})();
