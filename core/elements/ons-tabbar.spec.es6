@@ -184,6 +184,7 @@ describe('OnsTabbarElement', () => {
       element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Page 1" page="page1" no-reload></ons-tab>
+          <ons-tab label="Page 2" page="page1" no-reload></ons-tab>
         </ons-tabbar>
       `);
       document.body.appendChild(template);
@@ -212,6 +213,23 @@ describe('OnsTabbarElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
+    it('fires \'show\' event', () => {
+      let promise = new Promise((resolve) => {
+        element.addEventListener('show', resolve);
+      });
+      element.setActiveTab(0);
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it('fires \'hide\' event', () => {
+      let promise = new Promise((resolve) => {
+        element.addEventListener('hide', resolve);
+      });
+      element.setActiveTab(0);
+      element.setActiveTab(1);
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
     it('fires \'reactive\' event', () => {
       let promise = new Promise((resolve) => {
         element.addEventListener('reactive', resolve);
@@ -219,6 +237,71 @@ describe('OnsTabbarElement', () => {
       element.setActiveTab(0);
       element.setActiveTab(0);
       return expect(promise).to.eventually.be.fulfilled;
+    });
+  });
+
+  describe('propagate API', () => {
+    let template, element;
+
+    beforeEach(() => {
+      template = ons._util.createElement('<ons-template id="page1">Page1</ons-template>');
+      element = ons._util.createElement(`
+        <ons-tabbar>
+          <ons-tab label="Page 1" page="page1" no-reload></ons-tab>
+          <ons-tab label="Page 2" page="page1" no-reload></ons-tab>
+        </ons-tabbar>
+      `);
+      document.body.appendChild(template);
+      document.body.appendChild(element);
+    });
+
+    afterEach(() => {
+      template.remove();
+      element.remove();
+      template = element = null;
+    });
+
+    it('fires \'show\' event', (done) => {
+      element.setActiveTab(0);
+      setImmediate(() => {
+        let promise = new Promise((resolve) => {
+          element.addEventListener('show', () => {
+            resolve();
+            done();
+          });
+        });
+        element._hide();
+        element._show();
+        return expect(promise).to.eventually.be.fulfilled;
+      });
+    });
+
+    it('fires \'hide\' event', (done) => {
+      element.setActiveTab(0);
+      setImmediate(() => {
+        let promise = new Promise((resolve) => {
+          element.addEventListener('hide', () => {
+            resolve();
+            done();
+          });
+        });
+        element._hide();
+        return expect(promise).to.eventually.be.fulfilled;
+      });
+    });
+
+    it('fires \'destroy\' event', (done) => {
+      element.setActiveTab(0);
+      setImmediate(() => {
+        let promise = new Promise((resolve) => {
+          element.addEventListener('destroy', () => {
+            resolve();
+            done();
+          });
+        });
+        element._destroy();
+        return expect(promise).to.eventually.be.fulfilled;
+      });
     });
   });
 
