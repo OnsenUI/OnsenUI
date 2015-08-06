@@ -166,6 +166,26 @@ describe('OnsPageElement', () => {
     });
   });
 
+  describe('#_show()', () => {
+    it('fires \'show\' event', () => {
+      var spy = chai.spy();
+      document.addEventListener('show', spy);
+      document.body.appendChild(element);
+      element._show();
+      expect(spy).to.have.been.called.once;
+    });
+  });
+
+  describe('#_hide()', () => {
+    it('fires \'hide\' event', () => {
+      var spy = chai.spy();
+      document.addEventListener('hide', spy);
+      document.body.appendChild(element);
+      element._hide();
+      expect(spy).to.have.been.called.once;
+    });
+  });
+
   describe('#_compile()', () => {
     it('does not compile twice', () => {
       var formerLastChild = element.lastChild;
