@@ -206,13 +206,17 @@ limitations under the License.
         var animator = this._animatorFactory.newAnimator(options);
 
         animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
-          if (options._removeElement) {
-            if (oldPageElement.parentNode) {
-              oldPageElement.parentNode.removeChild(oldPageElement);
+          if (oldPageElement !== ons._internal.nullElement) {
+            if (options._removeElement) {
+              oldPageElement._destroy();
+            } else {
+              oldPageElement.style.display = 'none';
+              oldPageElement._hide();
             }
-          } else {
-            oldPageElement.style.display = 'none';
           }
+
+          element.style.display = 'block';
+          element._show();
 
           if (options.callback instanceof Function) {
             options.callback();
@@ -395,6 +399,28 @@ limitations under the License.
     detachedCallback() { }
 
     attachedCallback() { }
+
+    _show() {
+      let currentPageElement = this._getCurrentPageElement();
+      if (currentPageElement) {
+        currentPageElement._show();
+      }
+    }
+
+    _hide() {
+      let currentPageElement = this._getCurrentPageElement();
+      if (currentPageElement) {
+        currentPageElement._hide();
+      }
+    }
+
+    _destroy() {
+      let pages = this._contentElement.children;
+      for (let i = pages.length - 1; i >= 0; i--) {
+        pages[i]._destroy();
+      }
+      this.remove();
+    }
 
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
