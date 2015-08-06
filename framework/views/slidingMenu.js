@@ -367,7 +367,6 @@ limitations under the License.
         this._mainPage.append(pageContent);
 
         if (this._currentPageElement) {
-          this._currentPageElement.remove();
           this._currentPageScope.$destroy();
         }
 
@@ -376,6 +375,7 @@ limitations under the License.
         this._currentPageElement = pageContent;
         this._currentPageScope = pageScope;
         this._currentPageUrl = pageUrl;
+        this._currentPageElement[0]._show();
       },
 
       /**
