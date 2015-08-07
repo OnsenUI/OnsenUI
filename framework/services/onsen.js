@@ -182,7 +182,7 @@ limitations under the License.
           html = ('' + html).trim();
 
           if (!html.match(/^<ons-page/)) {
-            html = '<ons-page>' + html + '</ons-page>';
+            html = '<ons-page _muted>' + html + '</ons-page>';
           }
 
           return html;

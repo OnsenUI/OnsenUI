@@ -180,7 +180,7 @@ describe('OnsTabbarElement', () => {
     let template, element;
 
     beforeEach(() => {
-      template = ons._util.createElement('<ons-template id="page1">Page1</ons-template>');
+      template = ons._util.createElement('<ons-template id="page1"><ons-page>Page1</ons-page></ons-template>');
       element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Page 1" page="page1" no-reload></ons-tab>
@@ -244,7 +244,7 @@ describe('OnsTabbarElement', () => {
     let template, element;
 
     beforeEach(() => {
-      template = ons._util.createElement('<ons-template id="page1">Page1</ons-template>');
+      template = ons._util.createElement('<ons-template id="page1"><ons-page>Page1</ons-page></ons-template>');
       element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Page 1" page="page1" no-reload></ons-tab>

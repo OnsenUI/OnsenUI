@@ -29,17 +29,20 @@ limitations under the License.
   class PageElement extends ons._BaseElement {
 
     createdCallback() {
-      this._isShown = false;
       this.classList.add('page');
       this._compile();
       ModifierUtil.initModifier(this, scheme);
+      this._isShown = false;
+      this._isMuted = this.hasAttribute('_muted');
     }
 
     attachedCallback() {
-      const event = new CustomEvent('init', {
-        bubbles: true
-      });
-      this.dispatchEvent(event);
+      if (!this._isMuted) {
+        const event = new CustomEvent('init', {
+          bubbles: true
+        });
+        this.dispatchEvent(event);
+      }
 
       if(!ons._util.hasAnyComponentAsParent(this)) {
         this._show();
@@ -176,6 +179,8 @@ limitations under the License.
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      } else if (name === '_muted') {
+        this._isMuted = this.hasAttribute('_muted');
       }
     }
 
@@ -232,11 +237,14 @@ limitations under the License.
 
     _show() {
       if (!this.isShown) {
-        const event = new CustomEvent('show', {
-          bubbles: true
-        });
         this.isShown = true;
-        this.dispatchEvent(event);
+
+        if (!this._isMuted) {
+          const event = new CustomEvent('show', {
+            bubbles: true
+          });
+          this.dispatchEvent(event);
+        }
 
         ons._util.propagateAction(this._getContentElement(), '_show');
       }
@@ -244,25 +252,28 @@ limitations under the License.
 
     _hide() {
       if (this.isShown) {
-        const event = new CustomEvent('hide', {
-          bubbles: true
-        });
         this.isShown = false;
-        this.dispatchEvent(event);
+
+        if (!this._isMuted) {
+          const event = new CustomEvent('hide', {
+            bubbles: true
+          });
+          this.dispatchEvent(event);
+        }
 
         ons._util.propagateAction(this._getContentElement(), '_hide');
       }
     }
 
     _destroy() {
-      if (this.isShown) {
-        this._hide();
-      }
+      this._hide();
 
-      const event = new CustomEvent('destroy', {
-        bubbles: true
-      });
-      this.dispatchEvent(event);
+      if (!this._isMuted) {
+        const event = new CustomEvent('destroy', {
+          bubbles: true
+        });
+        this.dispatchEvent(event);
+      }
 
       if (this.getDeviceBackButtonHandler()) {
         this.getDeviceBackButtonHandler().destroy();

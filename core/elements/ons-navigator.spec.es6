@@ -2,8 +2,8 @@ describe('OnsNavigatorElement', () => {
   let nav;
 
   beforeEach(() => {
-    let tpl1 = ons._util.createElement(`<ons-template id="hoge">hoge</ons-template>`),
-      tpl2 = ons._util.createElement(`<ons-template id="fuga">fuga</ons-template>`);
+    let tpl1 = ons._util.createElement(`<ons-template id="hoge"><ons-page>hoge</ons-page></ons-template>`),
+      tpl2 = ons._util.createElement(`<ons-template id="fuga"><ons-page>fuga</ons-page></ons-template>`);
     document.body.appendChild(tpl1);
     document.body.appendChild(tpl2);
     nav = new OnsNavigatorElement();
