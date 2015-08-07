@@ -25,8 +25,7 @@ limitations under the License.
 
     createdCallback() {
       this.classList.add('ripple');
-      this._updateTarget();
-      this._updateCenter();
+      
       this._compile();
 
       ModifierUtil.initModifier(this, scheme);
@@ -34,7 +33,7 @@ limitations under the License.
 
     _compile() {
       this._wave = document.createElement('span');
-      this._wave.classList.add('wave');
+      this._wave.classList.add('ripple__wave');
       this.insertBefore(this._wave, this.children[0]);
 
       if (this.hasAttribute('color')) {
@@ -43,12 +42,13 @@ limitations under the License.
     }
 
     _updateTarget() {
-      if (this.hasAttribute('target') && this.getAttribute('target') === 'child') {
-          this._target = this.children[0];
-          this.style.display = 'inline-block';
-          this.style.position = 'relative';
+      if (this.hasAttribute('target') && this.getAttribute('target') === 'children') {
+        this._target = this;
+        this.style.display = 'inline-block';
+        this.style.position = 'relative';
       } else {
         this._target = this.parentNode;
+        this._target.style.position = 'relative';
         this.style.display = 'block';
         this.style.position = 'absolute';
       }
@@ -60,6 +60,10 @@ limitations under the License.
       } else {
         this._center = false;
       }
+      this._wave.classList.remove('ripple__wave--done-center');
+      this._wave.classList.remove('ripple__wave--animate-center');
+      this._wave.classList.remove('ripple__wave--done');
+      this._wave.classList.remove('ripple__wave--animate');
     }
 
     attributeChangedCallback(name, last, current) {
@@ -77,8 +81,8 @@ limitations under the License.
       }
       if (name === 'disabled') {
         if (this.isDisabled()) {
-          if (this.querySelector('.wave')) {
-            this.removeChild(this.querySelector('.wave'));
+          if (this.querySelector('.ripple__wave')) {
+            this.removeChild(this.querySelector('.ripple__wave'));
           }
         } else {
           this._compile();
@@ -87,16 +91,18 @@ limitations under the License.
     }
 
     _addListener() {
-      this._target.addEventListener('mousedown', this._onMouseDown.bind(this));
-      this._target.addEventListener('touchstart', this._onMouseDown.bind(this));
+      this.addEventListener('mousedown', this._onMouseDown.bind(this));
+      this.addEventListener('touchstart', this._onMouseDown.bind(this));
     }
 
     _removeListener() {
-      this._target.removeEventListener('mousedown', this._onMouseDown.bind(this));
-      this._target.removeEventListener('touchstart', this._onMouseDown.bind(this));
+      this.removeEventListener('mousedown', this._onMouseDown.bind(this));
+      this.removeEventListener('touchstart', this._onMouseDown.bind(this));
     }
 
     attachedCallback() {
+      this._updateCenter();
+      this._updateTarget();
       this._addListener();
     }
 
@@ -111,11 +117,11 @@ limitations under the License.
       const pos = el.getBoundingClientRect();
 
       if (this._center) {
-        wave.classList.remove('wave--done__center');
-        wave.classList.remove('wave--animate__center');
+        wave.classList.remove('ripple__wave--done-center');
+        wave.classList.remove('ripple__wave--animate-center');
       } else {
-        wave.classList.remove('wave--done');
-        wave.classList.remove('wave--animate');
+        wave.classList.remove('ripple__wave--done');
+        wave.classList.remove('ripple__wave--animate');
       }
 
       let animationEnded = new Promise((resolve) => {
@@ -144,11 +150,11 @@ limitations under the License.
         .then(
           () => {
             if (this._center) {
-              wave.classList.remove('wave--animate__center');
-              wave.classList.add('wave--done__center');
+              wave.classList.remove('ripple__wave--animate-center');
+              wave.classList.add('ripple__wave--done-center');
             } else {
-              wave.classList.remove('wave--animate');
-              wave.classList.add('wave--done');
+              wave.classList.remove('ripple__wave--animate');
+              wave.classList.add('ripple__wave--done');
             }
           }
         );
@@ -171,9 +177,6 @@ limitations under the License.
         sizeY = sizeY - parseFloat(window.getComputedStyle(el, null).getPropertyValue('border-top-width')) - parseFloat(window.getComputedStyle(el, null).getPropertyValue('border-bottom-width'));
       }
 
-
-      console.log(sizeX, sizeY);
-
       if (wave !== null) {
         wave.style.width = sizeX + 'px';
         wave.style.height = sizeY + 'px';
@@ -188,9 +191,9 @@ limitations under the License.
       wave.style.top = y + 'px';
 
       if (this._center) {
-        wave.classList.add('wave--animate__center');
+        wave.classList.add('ripple__wave--animate-center');
       } else {
-        wave.classList.add('wave--animate');
+        wave.classList.add('ripple__wave--animate');
       }
     }
 

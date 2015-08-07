@@ -26,7 +26,7 @@ limitations under the License.
   bottom: 0;
 }
   
-.wave {
+.ripple__wave {
   display: block;
   position: absolute;
   background: rgba(255,255,255,.3);
@@ -36,26 +36,26 @@ limitations under the License.
   pointer-events: none;
 }
 
-.wave--animate {
+.ripple__wave--animate {
   -webkit-animation: ripple 0.3s linear;
   animation: ripple 0.3s linear;
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
 }
   
-.wave--animate__center {
+.ripple__wave--animate-center {
   -webkit-animation: rippleCenter 0.1s linear;
   animation: rippleCenter 0.1s linear;
   animation-fill-mode: forwards;
   -webkit-animation-fill-mode: forwards;
 }
   
-.wave--done {
+.ripple__wave--done {
   -webkit-animation: rippleOut 0.2s linear;
   animation: rippleOut 0.2s linear;
 }
   
-.wave--done__center {
+.ripple__wave--done-center {
   -webkit-animation: rippleOutCenter 0.2s linear;
   animation: rippleOutCenter 0.2s linear;
 }
