@@ -25,9 +25,7 @@ limitations under the License.
 
     createdCallback() {
       this.classList.add('ripple');
-      
       this._compile();
-
       ModifierUtil.initModifier(this, scheme);
     }
 
@@ -48,7 +46,9 @@ limitations under the License.
         this.style.position = 'relative';
       } else {
         this._target = this.parentNode;
-        this._target.style.position = 'relative';
+        if (window.getComputedStyle(this._target).getPropertyValue('position') === 'static') {
+          this._target.style.position = 'relative';
+        }
         this.style.display = 'block';
         this.style.position = 'absolute';
       }
