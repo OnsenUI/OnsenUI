@@ -86,80 +86,71 @@ describe('ons', () => {
 
     it('calls the linking function', (done) => {
       let options = {};
-      options.link = () => {
-        expect(spy).to.have.been.called.once;
-        done();
-      };
+      options.link = () => { return; };
       var spy = chai.spy.on(options, 'link');
-      ons.createPopover('page.html', options);
+      ons.createPopover('page.html', options).then((element) => {
+        expect(spy).to.have.been.called.once;
+        element.remove();
+        done();
+      });
     });
 
-    it('returns a valid popover element', () => {
-      let promise = ons.createPopover('page.html');
-      return expect(promise).to.eventually.be.instanceof(OnsPopoverElement);
+    it('returns a valid popover element', (done) => {
+      ons.createPopover('page.html').then((element) => {
+        expect(element).to.be.instanceof(OnsPopoverElement);
+        element.remove();
+        done();
+      });
     });
   });
 
-  describe('#_createDialogOriginal()', () => {
+  describe('#createDialog()', () => {
     it('throws error when no page is provided', () => {
       expect(() => ons.createDialog(null)).to.throw(Error);
     });
 
     it('calls the linking function', (done) => {
       let options = {};
-      options.link = () => {
-        expect(spy).to.have.been.called.once;
-        done();
-      };
+      options.link = () => { return; };
       var spy = chai.spy.on(options, 'link');
-      ons.createDialog('page.html', options);
+      ons.createDialog('page.html', options).then((element) => {
+        expect(spy).to.have.been.called.once;
+        element.remove();
+        done();
+      });
     });
 
-    it('returns a valid dialog element', () => {
-      let promise = ons.createDialog('page.html');
-      return expect(promise).to.eventually.be.instanceof(OnsDialogElement);
+    it('returns a valid dialog element', (done) => {
+      ons.createDialog('page.html').then((element) => {
+        expect(element).to.be.instanceof(OnsDialogElement);
+        element.remove();
+        done();
+      });
     });
   });
 
-  describe('#_createAlertDialogOriginal()', () => {
+  describe('#createAlertDialog()', () => {
     it('throws error when no page is provided', () => {
-      expect(() => ons._createAlertDialogOriginal(null)).to.throw(Error);
+      expect(() => ons.createAlertDialog(null)).to.throw(Error);
     });
 
     it('calls the linking function', (done) => {
       let options = {};
-      options.link = () => {
-        expect(spy).to.have.been.called.once;
-        done();
-      };
+      options.link = () => { return; };
       var spy = chai.spy.on(options, 'link');
-      ons._createAlertDialogOriginal('page.html', options);
-    });
-
-    it('returns a valid alertDialog element', () => {
-      let promise = ons._createAlertDialogOriginal('page.html');
-      return expect(promise).to.eventually.be.instanceof(OnsAlertDialogElement);
-    });
-  });
-
-  describe('#_createAlertDialogOriginal()', () => {
-    it('throws error when no page is provided', () => {
-      expect(() => ons._createAlertDialogOriginal(null)).to.throw(Error);
-    });
-
-    it('calls the linking function', (done) => {
-      let options = {};
-      options.link = () => {
+      ons.createAlertDialog('page.html', options).then((element) => {
         expect(spy).to.have.been.called.once;
+        element.remove();
         done();
-      };
-      var spy = chai.spy.on(options, 'link');
-      ons._createAlertDialogOriginal('page.html', options);
+      });
     });
 
-    it('returns a valid alertDialog element', () => {
-      let promise = ons._createAlertDialogOriginal('page.html');
-      return expect(promise).to.eventually.be.instanceof(OnsAlertDialogElement);
+    it('returns a valid alertDialog element', (done) => {
+      ons.createAlertDialog('page.html').then((element) => {
+        expect(element).to.be.instanceof(OnsAlertDialogElement);
+        element.remove();
+        done();
+      });
     });
   });
 
@@ -170,6 +161,7 @@ describe('ons', () => {
       document.body.appendChild(e);
       ons.resolveLoadingPlaceholder();
       expect(e.getAttribute('ons-loading-placeholder')).to.equal('undefined');
+      e.remove();
     });
   });
 
@@ -181,6 +173,7 @@ describe('ons', () => {
       var spy = chai.spy.on(ons, '_resolveLoadingPlaceholder');
       ons._setupLoadingPlaceHolders();
       expect(spy).to.have.been.called.with(e, 'page.html');
+      e.remove();
     });
   });
 });
