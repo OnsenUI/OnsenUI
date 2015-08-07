@@ -75,16 +75,33 @@ limitations under the License.
       if (name === 'center') {
         this._updateCenter();
       }
+      if (name === 'disabled') {
+        if (this.isDisabled()) {
+          if (this.querySelector('.wave')) {
+            this.removeChild(this.querySelector('.wave'));
+          }
+        } else {
+          this._compile();
+        }
+      }
     }
 
-    attachedCallback() {
+    _addListener() {
       this._target.addEventListener('mousedown', this._onMouseDown.bind(this));
       this._target.addEventListener('touchstart', this._onMouseDown.bind(this));
     }
 
-    detachedCallback() {
+    _removeListener() {
       this._target.removeEventListener('mousedown', this._onMouseDown.bind(this));
       this._target.removeEventListener('touchstart', this._onMouseDown.bind(this));
+    }
+
+    attachedCallback() {
+      this._addListener();
+    }
+
+    detachedCallback() {
+      this._removeListener();
     }
 
     _onMouseDown(e) {
@@ -143,17 +160,29 @@ limitations under the License.
         y = e.changedTouches[0].clientY;
       }
 
-      const size = Math.max(el.offsetWidth, el.offsetHeight);
+      let sizeX, sizeY = 0;
+
+      if (!this._center) {
+        sizeX = sizeY = Math.max(el.offsetWidth, el.offsetHeight);
+      } else {
+        sizeX = el.offsetWidth;
+        sizeY = el.offsetHeight;
+        sizeX = sizeX - parseFloat(window.getComputedStyle(el, null).getPropertyValue('border-left-width')) - parseFloat(window.getComputedStyle(el, null).getPropertyValue('border-right-width'));
+        sizeY = sizeY - parseFloat(window.getComputedStyle(el, null).getPropertyValue('border-top-width')) - parseFloat(window.getComputedStyle(el, null).getPropertyValue('border-bottom-width'));
+      }
+
+
+      console.log(sizeX, sizeY);
 
       if (wave !== null) {
-        wave.style.width = size + 'px';
-        wave.style.height = size + 'px';
+        wave.style.width = sizeX + 'px';
+        wave.style.height = sizeY + 'px';
       } else {
         throw new Error('Ripple effect error');
       }
 
-      x = x - pos.left - size / 2;
-      y = y - pos.top - size / 2;
+      x = x - pos.left - sizeX / 2;
+      y = y - pos.top - sizeY / 2;
 
       wave.style.left = x + 'px';
       wave.style.top = y + 'px';
@@ -166,7 +195,7 @@ limitations under the License.
     }
 
     /**
-    * Disable of enable fab.
+    * Disable of enable ripple-effect.
     *
     * @param {Boolean}
     */
@@ -182,7 +211,7 @@ limitations under the License.
     }
 
     /**
-     * True if fab is disabled.
+     * True if ripple-effect is disabled.
      *
      * @return {Boolean}
      */
