@@ -106,10 +106,12 @@ limitations under the License.
 
     show(options = {}) {
       this.style.transform = 'scale(1)';
+      this.style.webkitTransform = 'scale(1)';
     }
 
     hide(options = {}) {
       this.style.transform = 'scale(0)';
+      this.style.webkitTransform = 'scale(0)';
     }
 
     /**
