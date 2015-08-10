@@ -196,7 +196,9 @@ limitations under the License.
           this.removeChild(this.querySelector('.ripple__wave'));
         }
       } else {
-        this._compile();
+        if (!this.querySelector('.ripple__wave')) {
+          this._compile();
+        }
       }
     }
 
