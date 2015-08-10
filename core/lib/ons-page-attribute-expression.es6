@@ -175,4 +175,9 @@ limitations under the License.
       return this._parseExpression(expression);
     }
   };
+
+  // Define default variables.
+  ons.pageAttributeExpression.defineVariable('mobileOS', ons.platform.getMobileOS());
+  ons.pageAttributeExpression.defineVariable('iOSDevice', ons.platform.getIOSDevice());
+  ons.pageAttributeExpression.defineVariable('runtime', window.cordova ? 'cordova' : 'browser');
 })(window.ons = window.ons || {});
