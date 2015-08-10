@@ -27,6 +27,8 @@ limitations under the License.
       this.classList.add('ripple');
       this._compile();
       ModifierUtil.initModifier(this, scheme);
+
+      this._boundOnClick = this._onMouseDown.bind(this);
     }
 
     _compile() {
@@ -80,29 +82,24 @@ limitations under the License.
         this._updateCenter();
       }
       if (name === 'disabled') {
-        if (this.isDisabled()) {
-          if (this.querySelector('.ripple__wave')) {
-            this.removeChild(this.querySelector('.ripple__wave'));
-          }
-        } else {
-          this._compile();
-        }
+        this._updateDisabled();
       }
     }
 
     _addListener() {
-      this.addEventListener('mousedown', this._onMouseDown.bind(this));
-      this.addEventListener('touchstart', this._onMouseDown.bind(this));
+      this.addEventListener('mousedown', this._boundOnClick);
+      this.addEventListener('touchstart', this._boundOnClick);
     }
 
     _removeListener() {
-      this.removeEventListener('mousedown', this._onMouseDown.bind(this));
-      this.removeEventListener('touchstart', this._onMouseDown.bind(this));
+      this.removeEventListener('mousedown', this._boundOnClick);
+      this.removeEventListener('touchstart', this._boundOnClick);
     }
 
     attachedCallback() {
       this._updateCenter();
       this._updateTarget();
+      this._updateDisabled();
       this._addListener();
     }
 
@@ -113,7 +110,7 @@ limitations under the License.
     _onMouseDown(e) {
       const eventType = e.type;
       const wave = this._wave;
-      let el = this._target;
+      const el = this._target;
       const pos = el.getBoundingClientRect();
 
       if (this._center) {
@@ -177,12 +174,8 @@ limitations under the License.
         sizeY = sizeY - parseFloat(window.getComputedStyle(el, null).getPropertyValue('border-top-width')) - parseFloat(window.getComputedStyle(el, null).getPropertyValue('border-bottom-width'));
       }
 
-      if (wave !== null) {
-        wave.style.width = sizeX + 'px';
-        wave.style.height = sizeY + 'px';
-      } else {
-        throw new Error('Ripple effect error');
-      }
+      wave.style.width = sizeX + 'px';
+      wave.style.height = sizeY + 'px';
 
       x = x - pos.left - sizeX / 2;
       y = y - pos.top - sizeY / 2;
@@ -194,6 +187,16 @@ limitations under the License.
         wave.classList.add('ripple__wave--animate-center');
       } else {
         wave.classList.add('ripple__wave--animate');
+      }
+    }
+
+    _updateDisabled() {
+      if (this.isDisabled()) {
+        if (this.querySelector('.ripple__wave')) {
+          this.removeChild(this.querySelector('.ripple__wave'));
+        }
+      } else {
+        this._compile();
       }
     }
 
