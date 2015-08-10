@@ -17,9 +17,18 @@ describe('OnsTabElement', () => {
     expect(window.OnsTabElement).to.be.ok;
   });
 
+  it('has a default template', () => {
+    expect(element.classList.contains('tab-bar__item')).to.be.true;
+    expect(element._hasDefaultTemplate).to.be.true;
+  });
+
   describe('modifier attribute', () => {
     it('modifies the classList of the tab', () => {
-      let parent = new OnsTabbarElement();
+      let parent = ons._util.createElement(`
+        <ons-tabbar>
+        </ons-tabbar>
+      `);
+
       document.body.appendChild(parent);
       parent.appendChild(element);
 
@@ -43,12 +52,17 @@ describe('OnsTabElement', () => {
       expect(element.children[1].classList.contains('tab-bar--piyo__button')).to.be.true;
       expect(element.classList.contains('tab-bar--fuga__item')).to.be.true;
       expect(element.children[1].classList.contains('tab-bar--fuga__button')).to.be.true;
+
+      document.body.removeChild(parent);
     });
   });
 
   describe('persistent attribute', () => {
     it('adds a persistent state to the tab', function() {
-      let tabbar = new OnsTabbarElement();
+      let tabbar = ons._util.createElement(`
+        <ons-tabbar>
+        </ons-tabbar>
+      `);
 
       tabbar.appendChild(element);
       document.body.appendChild(tabbar);
@@ -59,12 +73,17 @@ describe('OnsTabElement', () => {
 
       element.removeAttribute('persistent');
       expect(element.isPersistent()).not.to.be.true;
+
+      document.body.removeChild(tabbar);
     });
   });
 
   describe('no-reload attribute', () => {
     it('sets the tab as no-reloadable', function() {
-      let tabbar = new OnsTabbarElement();
+      let tabbar = ons._util.createElement(`
+        <ons-tabbar>
+        </ons-tabbar>
+      `);
 
       tabbar.appendChild(element);
       document.body.appendChild(tabbar);
@@ -75,6 +94,8 @@ describe('OnsTabElement', () => {
 
       element.removeAttribute('no-reload');
       expect(element.canReload()).to.be.true;
+
+      document.body.removeChild(tabbar);
     });
   });
 
@@ -82,7 +103,11 @@ describe('OnsTabElement', () => {
     it('sets whether a tab should be active or not', () => {
       expect(element.hasAttribute('active')).not.to.be.true;
 
-      let tabbar = new OnsTabbarElement();
+      let tabbar = ons._util.createElement(`
+        <ons-tabbar>
+        </ons-tabbar>
+      `);
+
       document.body.appendChild(tabbar);
       element = ons._util.createElement(`
         <ons-tab active="true">
@@ -91,12 +116,17 @@ describe('OnsTabElement', () => {
       `);
       tabbar.appendChild(element);
       expect(element.hasAttribute('active')).to.be.true;
+
+      document.body.removeChild(tabbar);
     });
   });
 
   describe('icon attribute', () => {
     it('sets icon name for the tab', () => {
-      let tabbar = new OnsTabbarElement();
+      let tabbar = ons._util.createElement(`
+        <ons-tabbar>
+        </ons-tabbar>
+      `);
 
       tabbar.appendChild(element);
       document.body.appendChild(tabbar);
@@ -109,12 +139,17 @@ describe('OnsTabElement', () => {
       element.setAttribute('icon', 'ion-home');
       expect(element.querySelector('ons-icon').getAttribute('icon')).to.equal('ion-home');
       expect(element.querySelector('ons-icon').getAttribute('icon')).not.to.equal('ion-map');
+
+      document.body.removeChild(tabbar);
     });
   });
 
   describe('label attribute', () => {
     it('sets label name for the tab', () => {
-      let tabbar = new OnsTabbarElement();
+      let tabbar = ons._util.createElement(`
+        <ons-tabbar>
+        </ons-tabbar>
+      `);
 
       tabbar.appendChild(element);
       document.body.appendChild(tabbar);
@@ -127,19 +162,13 @@ describe('OnsTabElement', () => {
       element.setAttribute('label', 'new text');
       expect(document.getElementsByClassName('tab-bar__label')[0].innerHTML).to.equal('new text');
       expect(document.getElementsByClassName('tab-bar__label')[0].innerHTML).not.to.equal('text');
-    });
-  });
 
-  describe('class', () => {
-    it('has defaut properties', () => {
-      expect(element.classList.contains('tab-bar__item')).to.be.true;
-      expect(element._hasDefaultTemplate).to.be.true;
+      document.body.removeChild(tabbar);
     });
   });
 
   describe('children', () => {
     it('are, by default, two', () => {
-
       expect(element.children[0]).to.be.ok;
       expect(element.children[1]).to.be.ok;
       expect(element.children[2]).not.to.be.ok;
@@ -155,22 +184,30 @@ describe('OnsTabElement', () => {
   });
 
   describe('parent', () => {
-    it('should be a \'ons-tabbar\' element', () => {
+    it('should be an \'ons-tabbar\' element', () => {
       expect(() => element._ensureElementPosition()).to.throw('This ons-tab element is must be child of ons-tabbar element.');
 
-      var parent = new OnsTabbarElement();
+      let parent = ons._util.createElement(`
+        <ons-tabbar>
+        </ons-tabbar>
+      `);
+
       parent.appendChild(element);
       expect(() => element._ensureElementPosition()).not.to.throw('This ons-tab element is must be child of ons-tabbar element.');
     });
   });
 
   describe('_hasDefaultTemplate property', () => {
-    it('is, by defaut, true', () => {
+    it('is, by default, true', () => {
       expect(element._hasDefaultTemplate).to.be.true;
     });
 
   it('is false when one of the tab\'s children is a ELEMENT_NODE', () => {
-      let tabbar = new OnsTabbarElement();
+      let tabbar = ons._util.createElement(`
+        <ons-tabbar>
+        </ons-tabbar>
+      `);
+
       document.body.appendChild(tabbar);
       element = ons._util.createElement(`
         <ons-tab active="true">
@@ -179,6 +216,8 @@ describe('OnsTabElement', () => {
       `);
       tabbar.appendChild(element);
       expect(element._hasDefaultTemplate).not.to.be.true;
+
+      document.body.removeChild(tabbar);
     });
   });
 
@@ -217,11 +256,23 @@ describe('OnsTabElement', () => {
 
   describe('#setActive()', () => {
     it('will set the tab as active', () => {
-      let tabbar = new OnsTabbarElement();
+      let tabbar = ons._util.createElement(`
+        <ons-tabbar>
+          <ons-tab id="tab1" page="page1"></ons-tab><ons-tab id="tab2" page="page2"></ons-tab>
+        </ons-tabbar>
+      `);
+
+      let template1 = ons._util.createElement(`
+        <ons-template id="page1"><ons-page></ons-page></ons-template>
+      `);
+
+      let template2 = ons._util.createElement(`
+        <ons-template id="page2"><ons-page></ons-page></ons-template>
+      `);
 
       document.body.appendChild(tabbar);
-      document.body.innerHTML += '<ons-template id="page1"><ons-page></ons-page></ons-template><ons-template id="page2"><ons-page></ons-page></ons-template>';
-      tabbar.children[1].innerHTML += '<ons-tab id="tab1" page="page1"></ons-tab><ons-tab id="tab2" page="page2"></ons-tab>';
+      document.body.appendChild(template1);
+      document.body.appendChild(template2);
 
       let tab1 = tabbar.querySelector('#tab1');
       let tab2 = tabbar.querySelector('#tab2');
@@ -235,6 +286,10 @@ describe('OnsTabElement', () => {
       tab1.classList.remove('active');
       expect(tabbar.getActiveTabIndex()).not.to.equal(0);
       expect(tabbar.getActiveTabIndex()).to.equal(1);
+
+      document.body.removeChild(tabbar);
+      document.body.removeChild(template1);
+      document.body.removeChild(template2);
     });
   });
 });
