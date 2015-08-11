@@ -106,7 +106,7 @@ limitations under the License.
     }
   };
 
-  class DevicebackButtonDispatcher {
+  class DeviceBackButtonDispatcher {
     constructor() {
       this._isEnabled = false;
       this._boundCallback = this._callback.bind(this);
@@ -312,7 +312,7 @@ limitations under the License.
     }
   }
 
-  ons._deviceBackButtonDispatcher = new DevicebackButtonDispatcher();
+  ons._deviceBackButtonDispatcher = new DeviceBackButtonDispatcher();
 
   window.addEventListener('DOMContentLoaded', function() {
     ons._deviceBackButtonDispatcher.enable();
