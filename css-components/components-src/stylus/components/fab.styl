@@ -1,0 +1,211 @@
+/**
+*
+* Copyright 2012 Adobe Systems Inc.
+*
+* Licensed under the Apache License, Version 2.0 (the "License")
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*
+*/
+
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-fab-width = 56px
+var-fab-height = 56px
+
+var-fab-mini-width = 40px
+var-fab-mini-height = 40px
+
+var-fab-background-color = $highlight-color
+var-fab-color = white
+var-fab-cta-background-color = $second-highlight-color
+var-border--fab-color = rgba(0, 0, 0, 0)
+var-fab-quiet-color = $highlight-color
+
+var-fab-cta-background-color = $second-highlight-color
+var-fab-cta-color = white
+var-fab-large-line-height = 36px
+var-fab-active-opacity = 0.2
+
+/*! topdoc
+  name: Fab
+  class: fab
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="fab">+</button>
+    <button class="fab" disabled>+</button>
+*/
+
+fab--disabled()
+  background-color alpha(black, 0.5)
+  shadow-0()
+  disabled()
+
+fab()
+  inline-block()
+  reset-box-model()
+  reset-base()
+  reset-font()
+  reset-cursor()
+  width var-fab-width
+  height var-fab-height
+  text-decoration none
+  font-size var-font-size
+  line-height 56px
+  letter-spacing var-letter-spacing
+  color var-fab-color
+  vertical-align middle
+  text-align center
+  background-color alpha(var-fab-background-color, 1)
+  border 0px solid currentColor
+  border-radius 50%
+  shadow-2()
+  transition all 0.2s ease-in-out
+
+fab--focus()
+  outline 0
+
+fab--active()
+  shadow-3()
+  background-color alpha(var-fab-background-color, 1)
+  transition all 0.2s ease
+
+.fab
+  fab()
+
+.fab:hover
+  fab--hover()
+
+.fab:active
+  fab--active()
+
+.fab:focus
+  fab--focus()
+  
+.fab__icon
+  overflow: hidden;
+  height: var-fab-height;
+  width: var-fab-width;
+
+.fab:disabled,
+.fab[disabled]
+  fab--disabled()
+  
+
+/*! topdoc
+  name: Fab with items
+  use: Fab
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <div class="fab">+
+      <button class="fab__item">-</button>
+      <button class="fab__item">-</button>
+      <button class="fab__item">-</button>
+    </div>
+*/
+
+.fab__item
+  fab()
+  width var-fab-mini-width
+  height var-fab-mini-height
+  line-height 36px
+  position absolute
+  transform scale(0)
+  z-index 101
+
+.fab__item
+  for num in (2..7)
+    &:nth-child({num})
+      margin-top -(56px * num)
+      margin-left -21px
+      transition-delay: 50ms * (num - 1);
+    &--bottom:nth-child({num})
+      margin-top (16px + 56px * (num - 2))
+      margin-left -21px
+      transition-delay: 50ms * (num - 1);
+    &--left:nth-child({num})
+      margin-left -(28px + 56 * (num - 1))
+      margin-top -48px
+      transition-delay: 50ms * (num - 1);
+    &--right:nth-child({num})
+      margin-left (44px + 56 * (num - 2))
+      margin-top -48px
+      transition-delay: 50ms * (num - 1);
+  
+.fab--top__right
+  top 20px;
+  bottom auto
+  right 20px;
+  left auto
+  position fixed
+  
+.fab--bottom__right
+  top auto
+  bottom 20px;
+  right 20px;
+  left auto
+  position fixed
+  
+.fab--top__left
+  top 20px;
+  bottom auto
+  right auto
+  left 20px;
+  position fixed
+  
+.fab--bottom__left
+  top auto
+  bottom 20px;
+  right auto
+  left 20px;
+  position fixed
+  
+.fab--top__center
+  top 20px;
+  bottom auto
+  margin-left -28px
+  left 50%
+  right auto
+  position fixed
+  
+.fab--bottom__center
+  top auto
+  bottom 20px;
+  margin-left -28px
+  left 50%
+  right auto
+  position fixed
+  
+
+/*! topdoc
+  name: Fab Mini
+  use: Fab
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="fab--mini">+</button>
+    <button class="fab--mini" disabled>+</button>
+*/
+
+.fab--mini
+  fab()
+  width var-fab-mini-width
+  height var-fab-mini-height
+  line-height 36px
