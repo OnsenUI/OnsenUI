@@ -260,3 +260,59 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   text-align left
   padding 8px 12px
 
+
+/*! topdoc
+  name: Material-like Alert Dialog with Title
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog alert-dialog--material">
+      <div class="alert-dialog-title">Alert</div>
+      
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button">OK</button>
+        <button class="alert-dialog-button">CANCEL</button>
+      </div>
+    </div>
+*/
+
+/*! topdoc
+  name: Material-like Alert Dialog without Title
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog alert-dialog--material">
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button">OK</button>
+        <button class="alert-dialog-button">CANCEL</button>
+      </div>
+    </div>
+*/
+
+.alert-dialog--material
+  border-radius 0px
+  padding-top 16px
+  shadow-3()
+  
+.alert-dialog--material .alert-dialog-title
+  text-align left
+  padding 0px 20px 14px 20px
+  
+.alert-dialog--material .alert-dialog-content
+  text-align left
+  padding 4px 20px 8px 20px
+  
+.alert-dialog--material .alert-dialog-footer .alert-dialog-button
+  display inline-block
+  width auto
+  min-width 70px
+  float right
+  background none
