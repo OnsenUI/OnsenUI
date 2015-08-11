@@ -90,6 +90,10 @@ limitations under the License.
     },
 
     get: function(element) {
+      if (!element.dataset.deviceBackButtonHandlerId) {
+        return undefined;
+      }
+
       const id = element.dataset.deviceBackButtonHandlerId;
 
       if (!this._store[id]) {
