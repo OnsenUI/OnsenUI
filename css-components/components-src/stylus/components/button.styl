@@ -80,8 +80,8 @@ button--focus()
 
 button--active()
   background-color var-button-background-color
-  transition none
   opacity var-button-active-opacity
+  transition none
 
 .button
   button()
@@ -307,3 +307,36 @@ button--active()
 .button--large--cta:disabled,
 .button--large--cta[disabled]
   button--disabled()
+
+
+
+//************ Material-like buttons ****************
+
+
+/*! topdoc
+  name: Material-like Button
+  use: Button
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="button button--material">BUTTON</button>
+    <button class="button button--material" disabled>DISABLED</button>
+*/
+
+.button--material
+  shadow-1()
+  min-width 120px
+  transition box-shadow 0.2s ease
+
+.button--material:active
+  shadow-2()
+  backgorund var-button-background-color
+  opacity 1
+  transition box-shadow 0.2s ease
+
+.button--material:disabled
+  background-color alpha(#000,0.2)
+  color alpha($text-color,0.4)
+  shadow-0()
