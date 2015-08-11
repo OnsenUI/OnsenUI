@@ -20,6 +20,7 @@ limitations under the License.
 
   const scheme = {'': 'button--*'};
   const ModifierUtil = ons._internal.ModifierUtil;
+  const RippleEffect = ons._internal.RippleEffect;
 
   class ButtonElement extends ons._BaseElement {
 
@@ -27,11 +28,22 @@ limitations under the License.
       this.classList.add('button');
 
       ModifierUtil.initModifier(this, scheme);
+
+      if (this.hasAttribute('material')) {
+        RippleEffect.addRippleEffect(this);
+      }
     }
 
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      }
+      if (name === 'material') {
+        if (current !== null) {
+          RippleEffect.addRippleEffect(this);
+        } else {
+          RippleEffect.removeRippleEffect(this);
+        }
       }
     }
   }
