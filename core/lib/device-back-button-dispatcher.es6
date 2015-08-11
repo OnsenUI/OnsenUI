@@ -196,10 +196,8 @@ limitations under the License.
 
     _dispatchDeviceBackButtonEvent() {
       const tree = this._captureTree();
-      //this._dumpTree(tree);
 
       const element = this._findHandlerLeafElement(tree);
-      //this._dumpParents(element);
 
       let handler = HandlerRepository.get(element);
       handler._callback(createEvent(element));
@@ -219,13 +217,6 @@ limitations under the License.
             }
           }
         };
-      }
-    }
-
-    _dumpParents(element) {
-      while (element) {
-        console.log(element.nodeName.toLowerCase() + '.' + element.getAttribute('class'));
-        element = element.parentNode;
       }
     }
 
@@ -265,18 +256,6 @@ limitations under the License.
           result.push(target[i]);
         }
         return result;
-      }
-    }
-
-    _dumpTree(node) {
-      _dump(node, 0);
-
-      function _dump(node, level) {
-        const pad = new Array(level + 1).join('  ');
-        console.log(pad + node.element.nodeName.toLowerCase());
-        node.children.forEach(function(node) {
-          _dump(node, level + 1);
-        });
       }
     }
 
