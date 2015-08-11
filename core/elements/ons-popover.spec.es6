@@ -338,5 +338,26 @@ describe('OnsPopoverElement', () => {
     let popover = ons._util.createElement('<ons-popover mask-color="red"></ons-popover>');
     expect(popover._mask.style.backgroundColor).to.equal('red');
   });
+
+  describe('\'style\' attribute', () => {
+    let popover = ons._util.createElement('<ons-popover style="background: blue">Test</ons-popover>');
+    expect(popover._popover.style.background).to.equal('blue');
+  });
+
+
+  describe('#registerAnimator()', () => {
+    it('throws an error if animator is not a PopoverAnimator', () => {
+      expect(() => window.OnsPopoverElement.registerAnimator('hoge', 'hoge')).to.throw(Error);
+    });
+
+    it('registers a new animator', () => {
+      class MyAnimator extends ons._internal.PopoverAnimator {
+      }
+
+      expect(window.OnsPopoverElement._animatorDict.hoge).not.to.be.ok;
+      window.OnsPopoverElement.registerAnimator('hoge', MyAnimator);
+      expect(window.OnsPopoverElement._animatorDict.hoge).to.be.ok;
+    });
+  });
 });
 

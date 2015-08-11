@@ -30,7 +30,7 @@ limitations under the License.
      * Sets the platform used to render the elements. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".
      * @param  {string} platform Name of the platform.
      */
-    select: function (platform) {
+    select: function(platform) {
       ons.platform._renderPlatform = platform.trim().toLowerCase();
     },
 

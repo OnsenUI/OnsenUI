@@ -36,7 +36,7 @@
     "no-extra-strict": 0,
     "no-extra-parens": 0,
     "no-lone-blocks": 1,
-    "no-unused-expressions": 1,
+    "no-unused-expressions": 0,
     "no-trailing-spaces": 1,
     "no-multi-spaces": 0,
     "no-shadow": 0,

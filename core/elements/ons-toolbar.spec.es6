@@ -1,10 +1,20 @@
-describe('ons-toolbar', () => {
-  it('provides \'OnsToolbarElement\' global variable', () => {
+describe('OnsToolbarElement', () => {
+  let element;
+
+  beforeEach(() => {
+    element = new OnsToolbarElement();
+  });
+
+  afterEach(() => {
+    element.remove();
+    element = null;
+  });
+
+  it('should exist', () => {
     expect(window.OnsToolbarElement).to.be.ok;
   });
 
   it('provides \'modifier\' attribute', () => {
-    var element = new OnsToolbarElement();
     element.setAttribute('modifier', 'hoge');
     expect(element.classList.contains('navigation-bar--hoge')).to.be.true;
 
@@ -34,25 +44,19 @@ describe('ons-toolbar', () => {
     expect(element.children[2].classList.contains('navigation-bar--piyo__right')).not.to.be.true;
   });
 
-  it('first child has left class value', () => {
-    var element = new OnsToolbarElement();
-
+  it('has \'left\' class value in its first child', () => {
     expect(element.children[0].classList.contains('navigation-bar__left')).to.be.true;
     expect(element.children[0].classList.contains('navigation-bar__center')).not.to.be.true;
     expect(element.children[0].classList.contains('navigation-bar__right')).not.to.be.true;
   });
 
-  it('first second has center class value', () => {
-    var element = new OnsToolbarElement();
-
+  it('has \'center\' class value in its second child', () => {
     expect(element.children[1].classList.contains('navigation-bar__left')).not.to.be.true;
     expect(element.children[1].classList.contains('navigation-bar__center')).to.be.true;
     expect(element.children[1].classList.contains('navigation-bar__right')).not.to.be.true;
   });
 
-  it('third child has right class value', () => {
-    var element = new OnsToolbarElement();
-
+  it('has \'right\' class value in its third child', () => {
     expect(element.children[2].classList.contains('navigation-bar__left')).not.to.be.true;
     expect(element.children[2].classList.contains('navigation-bar__center')).not.to.be.true;
     expect(element.children[2].classList.contains('navigation-bar__right')).to.be.true;
@@ -61,7 +65,6 @@ describe('ons-toolbar', () => {
   /* Temporary commented due to behavior investigation
 
   it('provides inline attribute', () => {
-    var element = new OnsToolbarElement();
     element.setAttribute('inline', '');
 
     if (element.hasAttribute('inline')) {
@@ -75,9 +78,36 @@ describe('ons-toolbar', () => {
   */
 
   it('recognizes Android platform', () => {
-    var element = new OnsToolbarElement();
     if (ons.platform.isAndroid() && !this.hasAttribute('fixed-style')) {
       expect(element.classList.contains('navigation-bar--android')).to.be.true;
     }
+  });
+
+  describe('#attachedCallbad()', () => {
+    it('does not register extra element when has no parent ons-page', () => {
+      var spy = chai.spy.on(element, '_registerToolbar');
+      document.body.appendChild(element);
+      expect(spy).to.not.have.been.called();
+    });
+  });
+
+  describe('#_compile()', () => {
+    it('adds Android class', () => {
+      ons.platform.select('android');
+      let element = new OnsToolbarElement();
+      expect(element.classList.contains('navigation-bar--android')).to.be.true;
+    });
+
+    it('removes non-element children', () => {
+      let element = ons._util.createElement('<ons-toolbar>Test1<div class="center">Test2</div></ons-toolbar>');
+      expect(element.childNodes[0].nodeValue).not.to.equal('Test1');
+    });
+
+    it('sorts its children depending on their class', () => {
+      let element = ons._util.createElement('<ons-toolbar><div class="center">Test2</div><div class="right">Test3</div><div class="left">Test1</div></ons-toolbar>');
+      expect(element.children[0].classList.contains('navigation-bar__left')).to.be.true;
+      expect(element.children[1].classList.contains('navigation-bar__center')).to.be.true;
+      expect(element.children[2].classList.contains('navigation-bar__right')).to.be.true;
+    });
   });
 });

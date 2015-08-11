@@ -106,6 +106,17 @@
 
 /**
  * @ngdoc method
+ * @signature isShown()
+ * @return {Boolean}
+ *   [en]true if the modal is visible.[/en]
+ *   [ja]モーダルが表示されている場合にtrueとなります。[/ja]
+ * @description
+ *   [en]Returns whether the modal is visible or not.[/en]
+ *   [ja]モーダルが表示されているかどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature getDeviceBackButtonHandler()
  * @return {Object}
  *   [en]Device back button handler.[/en]

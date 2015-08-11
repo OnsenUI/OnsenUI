@@ -195,16 +195,18 @@ limitations under the License.
         throw new Error('options must be an object. You supplied ' + options);
       }
 
-      if (index === this.pages.length) {
-        return this.pushPage.apply(this, [].slice.call(arguments, 1));
-      }
-
       const normalizeIndex = index => {
         if (index < 0) {
-          index = this.pages.length + index;
+          index = Math.abs(this.pages.length + index) % this.pages.length;
         }
         return index;
       };
+
+      index = normalizeIndex(index);
+
+      if (index >= this.pages.length) {
+        return this.pushPage.apply(this, [].slice.call(arguments, 1));
+      }
 
       this._doorLock.waitUnlock(() => {
         const unlock = this._doorLock.lock();
@@ -214,35 +216,18 @@ limitations under the License.
 
           const pageObject = this._createPageObject(page, element, options);
 
-          if (this._pages.length > 0) {
-            index = normalizeIndex(index);
+          this._compilePageHook.run(element => {
+            this._linkPageHook.run(element => {
+              element.style.display = 'none';
+              this.insertBefore(element, this._pages[index].element);
+              this._pages.splice(index, 0, pageObject);
 
-            this._compilePageHook.run(element => {
-              this._linkPageHook.run(element => {
-                if (this._pages[index]) {
-                  element.style.display = 'none';
-                  this.insertBefore(element, this._pages[index].element);
-                } else {
-                  this.insertBefore(element, null);
-                }
-                this._pages.splice(index, 0, pageObject);
-
-                setTimeout(() => {
-                  unlock();
-                  element = null;
-                }, 1000 / 60);
-              }, element);
-            }, element);
-          } else {
-            this._compilePageHook.run(element => {
-              this._linkPageHook.run(element => {
-                this._element.append(element);
-                this._pages.push(pageObject);
+              setTimeout(() => {
                 unlock();
                 element = null;
-              }, element);
+              }, 1000 / 60);
             }, element);
-          }
+          }, element);
         });
       });
     }
