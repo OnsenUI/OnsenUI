@@ -169,6 +169,10 @@ limitations under the License.
      * @return {Array}
      */
     evaluate: function(expression) {
+      if (!expression) {
+        return [];
+      }
+
       return this._parseExpression(expression);
     }
   };
