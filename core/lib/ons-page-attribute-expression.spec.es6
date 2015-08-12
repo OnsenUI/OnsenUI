@@ -3,7 +3,7 @@ describe('ons.pageAttributeExpression', () => {
 
   describe('#defineVariable()', () => {
     it('should define a variable', () => {
-      pae.defineVariable('hoge', 'fuga')
+      pae.defineVariable('hoge', 'fuga');
       expect(pae.getVariable('hoge')).to.equal('fuga');
       pae.removeVariable('hoge');
     });
