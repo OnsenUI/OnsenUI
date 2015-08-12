@@ -90,6 +90,10 @@ limitations under the License.
     },
 
     get: function(element) {
+      if (!element.dataset.deviceBackButtonHandlerId) {
+        return undefined;
+      }
+
       const id = element.dataset.deviceBackButtonHandlerId;
 
       if (!this._store[id]) {
@@ -106,7 +110,7 @@ limitations under the License.
     }
   };
 
-  class DevicebackButtonDispatcher {
+  class DeviceBackButtonDispatcher {
     constructor() {
       this._isEnabled = false;
       this._boundCallback = this._callback.bind(this);
@@ -192,10 +196,8 @@ limitations under the License.
 
     _dispatchDeviceBackButtonEvent() {
       const tree = this._captureTree();
-      //this._dumpTree(tree);
 
       const element = this._findHandlerLeafElement(tree);
-      //this._dumpParents(element);
 
       let handler = HandlerRepository.get(element);
       handler._callback(createEvent(element));
@@ -215,13 +217,6 @@ limitations under the License.
             }
           }
         };
-      }
-    }
-
-    _dumpParents(element) {
-      while (element) {
-        console.log(element.nodeName.toLowerCase() + '.' + element.getAttribute('class'));
-        element = element.parentNode;
       }
     }
 
@@ -264,18 +259,6 @@ limitations under the License.
       }
     }
 
-    _dumpTree(node) {
-      _dump(node, 0);
-
-      function _dump(node, level) {
-        const pad = new Array(level + 1).join('  ');
-        console.log(pad + node.element.nodeName.toLowerCase());
-        node.children.forEach(function(node) {
-          _dump(node, level + 1);
-        });
-      }
-    }
-
     /**
      * @param {Object} tree
      * @return {HTMLElement}
@@ -312,7 +295,7 @@ limitations under the License.
     }
   }
 
-  ons._deviceBackButtonDispatcher = new DevicebackButtonDispatcher();
+  ons._deviceBackButtonDispatcher = new DeviceBackButtonDispatcher();
 
   window.addEventListener('DOMContentLoaded', function() {
     ons._deviceBackButtonDispatcher.enable();
