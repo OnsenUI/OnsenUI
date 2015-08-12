@@ -179,5 +179,7 @@ limitations under the License.
   // Define default variables.
   ons.pageAttributeExpression.defineVariable('mobileOS', ons.platform.getMobileOS());
   ons.pageAttributeExpression.defineVariable('iOSDevice', ons.platform.getIOSDevice());
-  ons.pageAttributeExpression.defineVariable('runtime', window.cordova ? 'cordova' : 'browser');
+  ons.pageAttributeExpression.defineVariable('runtime', () => {
+    return ons.platform.isWebView() ? 'cordova' : 'browser';
+  });
 })(window.ons = window.ons || {});
