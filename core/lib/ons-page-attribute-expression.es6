@@ -120,9 +120,8 @@ limitations under the License.
       return tokens;
     },
     _replaceToken: function(token) {
-      const re = /^\${(.*?)}$/;
-
-      let match = token.match(re);
+      const re = /^\${(.*?)}$/,
+        match = token.match(re);
 
       if (match) {
         let name = match[1].trim(),
@@ -152,14 +151,12 @@ limitations under the License.
       return tokens.map(this._replaceToken.bind(this));
     },
     _parseExpression: function(expression) {
-      let parts = expression.split(',')
+      return expression.split(',')
         .map(
           function(part) {
             return part.trim();
           }
-        );
-
-      return parts
+        )
         .map(this._parsePart.bind(this))
         .map(this._replaceTokens.bind(this))
         .map((part) => part.join(''));
