@@ -25,6 +25,12 @@ limitations under the License.
     }
 
     _onClick(event) {
+      if (this.parentElement && this.parentElement.nodeName.toLowerCase() === 'ons-splitter') {
+        // close side menus
+        if (this.parentElement.closeRight() || this.parentElement.closeLeft()) {
+          this.style.display = 'none';
+        }
+      }
       event.stopPropagation();
     }
 

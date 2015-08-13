@@ -195,10 +195,20 @@ limitations under the License.
     }
 
     _onDeviceBackButton(handler) {
-      // TODO
-      //handler.callParentHandler();
-      // sliding-menuが出てる時は、menuを閉じる
-      // それ以外の時にはparentを呼ぶ
+      const left = this._getSideElement('left');
+      const right = this._getSideElement('right');
+
+      if (left.isOpened()) {
+        left.close();
+        return;
+      }
+
+      if (right.isOpened()) {
+        right.close();
+        return;
+      }
+
+      handler.callParentHandler();
     }
 
     attachedCallback() {
@@ -214,6 +224,13 @@ limitations under the License.
 
       // relayout on "resize"
       // TODO
+    }
+
+    /**
+     * @return {Object/null}
+     */
+    getDeviceBackButtonHandler() {
+      return this._deviceBackButtonHandler();
     }
 
     _assertChildren() {

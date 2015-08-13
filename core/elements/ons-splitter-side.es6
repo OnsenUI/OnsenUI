@@ -24,10 +24,15 @@ limitations under the License.
 
   class BaseMode {
     isOpened() {}
-    openMenu() {}
-    closeClose() {}
+    openMenu() {
+      return false;
+    }
+    closeMenu() {
+      return false;
+    }
     enterMode() {}
     exitMode() {}
+    handleGesture() {}
   }
 
   class SplitMode extends BaseMode {
@@ -56,6 +61,18 @@ limitations under the License.
         element.style.right = '0';
       }
     }
+
+    enterMode() {
+      this.layout();
+    }
+
+    exitMode() {
+      const element = this._element;
+
+      element.style.left = '';
+      element.style.right = '';
+      element.style.width = '';
+    }
   }
 
   class CollapseMode extends BaseMode {
@@ -68,124 +85,301 @@ limitations under the License.
       return 'opened';
     }
 
-    static get DRAGGING_STATE() {
-      return 'dragging';
-    }
-
-    static get OPENING_STATE() {
-      return 'opening';
-    }
-
-    static get CLOSING_STATE() {
-      return 'closing';
-    }
-
     constructor(element) {
       super();
 
       this._state = CollapseMode.CLOSED_STATE;
       this._distance = 0;
       this._element = element;
+      this._lock = new DoorLock();
+    }
 
-      this._boundOnDrag = this._onDrag.bind(this);
-      this._boundOnDragStart = this._onDragStart.bind(this);
-      this._boundOnDragEnd = this._onDragEnd.bind(this);
+    _isLocked() {
+      return this._lock.isLocked();
     }
 
     isOpened() {
       return this._state !== CollapseMode.CLOSED_STATE;
     }
 
+    handleGesture(event) {
+      if (this._isLocked()) {
+        return;
+      }
+
+      if (event.type === 'dragleft' || event.type === 'dragright') {
+        this._onDrag(event);
+      } else if (event.type === 'dragstart') {
+        this._onDragStart(event);
+      } else if (event.type === 'dragend') {
+        this._onDragEnd(event);
+      } else {
+        throw new Error('Invalid state');
+      }
+    }
+
+    _onDragStart(event) {
+      this._ignoreDrag = false;
+
+      if (this._element._swipeTargetWidth > 0) {
+        const distance = this._element._isLeftSide()
+          ? event.gesture.center.clientX
+          : window.innerWidth - event.gesture.center.clientX;
+        if (distance > this._element._swipeTargetWidth) {
+          this._ignoreDrag = true;
+        }
+      }
+    }
+
+    _onDrag(event) {
+      if (this._ignoreDrag) {
+        return;
+      }
+
+      event.gesture.preventDefault();
+
+      const deltaX = event.gesture.deltaX;
+      const deltaDistance = this._element._isLeftSide() ? deltaX : -deltaX;
+
+      const startEvent = event.gesture.startEvent;
+
+      if (!('isOpened' in startEvent)) {
+        startEvent.isOpened = this.isOpened();
+      }
+
+      if (deltaDistance < 0 && !this.isOpened()) {
+        return;
+      }
+
+      if (deltaDistance > 0 && this.isOpened()) {
+        return;
+      }
+
+      const width = this._element._getWidthInPixel();
+      const distance = startEvent.isOpened ? deltaDistance + width : deltaDistance;
+
+      this._translate(Math.min(width, distance));
+    }
+
+    /**
+     * @param {Number} distance
+     */
+    _translate(distance) {
+
+      const element = this._element;
+
+      if (element._isLeftSide()) {
+        element.style.transform = 'translateX(' + distance + 'px)';
+      } else {
+        element.style.transform = 'translateX(-' + distance + 'px)';
+      }
+
+      element.style.transition = '';
+    }
+
+    _onDragEnd(event) {
+      if (this._ignoreDrag) {
+        return;
+      }
+
+      const deltaX = event.gesture.deltaX;
+      const deltaDistance = this._element._isLeftSide() ? deltaX : -deltaX;
+      const width = this._element._getWidthInPixel();
+      const distance = event.gesture.startEvent.isOpened ? deltaDistance + width : deltaDistance;
+
+      const shouldOpen = distance > width / 2;
+
+      if (shouldOpen) {
+        this.openMenu({
+          withoutAnimation: distance >= width
+        });
+      } else {
+        this.closeMenu({
+          withoutAnimation: distance === 0
+        });
+      }
+    }
+
     layout() {
       const element = this._element;
       const mask = util.findChild(element.parentElement, 'ons-splitter-mask');
 
-      if (this._state === CollapseMode.CLOSED_STATE) {
-        this._layoutOnClosedState();
-      } else if (this._state === CollapseMode.OPENED_STATE) {
-        this._layoutOnOpenedState();
-      }
-    }
-
-    _layoutOnOpenedState() {
-      const element = this._element;
-      const mask = element.parentElement._getMaskElement();
-
-      if (element._isLeftSide()) {
-        element.style.webkitTransform = element.style.transform = 'translateX(100%)';
-        element.style.left = '0%';
-        element.style.right = 'auto';
-      } else {
-        element.style.webkitTransform = element.style.transform = 'translateX(-100%)';
-        element.style.left = '100%';
-        element.style.right = 'auto';
-      }
-
       element.style.width = element._getWidth();
-      mask.style.display = 'block';
-      mask.style.opacity = '1';
-    }
 
-    _layoutOnClosedState() {
-      const mask = this._element.parentElement._getMaskElement();
+      if (this._state === CollapseMode.CLOSED_STATE) {
 
-      this._element.style.display = 'none';
-      mask.style.display = 'none';
-      mask.style.opacity = '0';
-    }
+        animit(this._element)
+          .queue({tranform: 'translateX(0%)'})
+          .play();
 
-    _onDrag() {
-      console.log('on drag');
-      // TODO
-    }
+        mask.style.display = 'none';
 
-    _onDragStart() {
-      console.log('on drag start');
-      // TODO
-    }
+      } else if (this._state === CollapseMode.OPENED_STATE) {
 
-    _onDragEnd() {
-      console.log('on drag end');
-      // TODO
+        animit(this._element)
+          .queue({tranform: element._isLeftSide() ? 'translateX(100%)' : 'translateX(-100%)'})
+          .play();
+
+        mask.style.display = 'block';
+      } else {
+        throw new Error('Invalid state');
+      }
+
     }
 
     // enter collapse mode
     enterMode() {
-      this._addEventListeners();
       this._element.style.zIndex = 3;
+      this._element.style.display = 'block';
+
+      if (this._element._isLeftSide()) {
+        this._element.style.left = 'auto';
+        this._element.style.right = '100%';
+      } else {
+        this._element.style.left = '100%';
+        this._element.style.right = 'auto';
+      }
+
       this.layout();
     }
 
     // exit collapse mode
     exitMode() {
-      this._removeEventListeners();
       this._clearLayout();
-    }
-
-    _addEventListeners() {
-      // 
-    }
-
-    _removeEventListeners() {
-      //
     }
 
     _clearLayout() {
       this._element.style.zIndex = '';
-      this._element.style.right = 'auto';
-      this._element.style.left = 'auto';
-      this._element.style.webkitTransform = '';
-      this._element.style.transform = '';
+      this._element.style.right = '';
+      this._element.style.left = '';
+      this._element.style.transform = this._element.style.webkitTransform = '';
+      this._element.style.transition = this._element.style.webkitTransition = '';
+      this._element.style.width = '';
     }
 
+    /**
+     * @param {Object} [options]
+     * @param {Function} [options.callback]
+     * @param {Boolean} [options.withoutAnimation]
+     */
     openMenu(options = {}) {
-      this._state = CollapseMode.OPENED_STATE;
-      this.layout();
+      options.callback = options.callback instanceof Function ? options.callback : () => {};
+
+      if (this._isLocked()) {
+        setImmediate(options.callback);
+        return false;
+      }
+
+      if (options.withoutAnimation) {
+        this._state = CollapseMode.OPENED_STATE;
+        this.layout();
+      } else {
+        const unlock = this._lock.lock();
+        this._state = CollapseMode.OPENED_STATE;
+        this._runOpenAnimation(() => { 
+          this.layout();
+          unlock();
+          options.callback();
+        });
+      }
+
+      return true;
+    }
+
+    /**
+     * @param {Function} done
+     */
+    _runOpenAnimation(done) {
+      const tranform = this._element._isLeftSide() ? 'translate3d(100%, 0px, 0px)' : 'translate3d(-100%, 0px, 0px)';
+      const mask = this._element.parentElement._getMaskElement();
+
+      animit.runAll(
+        animit(this._element)
+          .queue({
+            transform: 'translate3d(0px, 0px, 0px)'
+          })
+          .queue({
+            transform: tranform
+          }, {
+            duration: 0.3,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .queue(callback => {
+            callback();
+            this._element.style.webkitTransition = '';
+            done();
+          }),
+
+        animit(mask)
+          .queue({
+            display: 'block',
+            opacity: '0',
+            delay: 0
+          })
+          .queue({
+            opacity: '1'
+          }, {
+            duration: 0.3,
+            timing: 'linear',
+          })
+      );
+    }
+
+    /**
+     * @param {Function} done
+     */
+    _runCloseAnimation(done) {
+      const mask = this._element.parentElement._getMaskElement();
+
+      animit.runAll(
+        animit(this._element)
+          .queue({
+            transform: 'translate3d(0px, 0px, 0px)'
+          }, {
+            duration: 0.3,
+            timing: 'cubic-bezier(.1, .7, .1, 1)'
+          })
+          .queue(callback => {
+            callback();
+            this._element.style.webkitTransition = '';
+            done();
+          }),
+
+        animit(mask)
+          .queue({
+            opacity: '0'
+          }, {
+            duration: 0.3,
+            timing: 'linear',
+          })
+          .queue({
+            display: 'none'
+          })
+      );
     }
 
     closeMenu(options = {}) {
-      this._state = CollapseMode.CLOSED_STATE;
-      this.layout();
+      if (this._isLocked()) {
+        setImmediate(options.callback);
+        return false;
+      }
+
+      options.callback = options.callback instanceof Function ? options.callback : () => {};
+
+      if (options.withoutAnimation) {
+        this._state = CollapseMode.CLOSED_STATE;
+        this.layout();
+      } else {
+        const unlock = this._lock.lock();
+        this._state = CollapseMode.CLOSED_STATE;
+        this._runCloseAnimation(() => {
+          this.layout();
+          unlock();
+          options.callback();
+        });
+      }
+
+      return true;
     }
   }
 
@@ -204,21 +398,20 @@ limitations under the License.
         return this._collapseMode;
       } else if (this._mode === SPLIT_MODE) {
         return this._splitMode;
-      } else {
-        return null;
       }
     }
 
     createdCallback() {
       this._mode = null;
       this._page = null;
-      this._attached = false;
-
-      this._boundOnOrientationChange = this._onOrientationChange.bind(this);
-      this._boundOnResize = this._onResize.bind(this);
 
       this._collapseMode = new CollapseMode(this);
       this._splitMode = new SplitMode(this);
+
+      this._boundOnOrientationChange = this._onOrientationChange.bind(this);
+      this._boundOnResize = this._onResize.bind(this);
+      this._boundHandleGesture = this._handleGesture.bind(this);
+
       this._cancelModeDetection = () => {};
 
       this._updateMode(SPLIT_MODE);
@@ -226,6 +419,8 @@ limitations under the License.
       this._updateForWidthAttribute();
       this._updateForSideAttribute();
       this._updateForCollapseAttribute();
+      this._updateForSwipeableAttribute();
+      this._updateForSwipeTargetWidthAttribute();
     }
 
     /**
@@ -246,6 +441,12 @@ limitations under the License.
       // mode change by screen orientation
       const considerOrientation = () => {
         // TODO
+        const register = () => {
+          
+        };
+        const cancel = () => {
+          
+        };
       };
 
       // mode change by media query
@@ -294,21 +495,31 @@ limitations under the License.
       }
 
       const lastMode = this._getModeStrategy();
-      this._mode = mode;
-      const currentMode = this._getModeStrategy();
-
-      if (lastMode !== null) {
+      
+      if (lastMode) {
         lastMode.exitMode();
       }
 
-      const event = new CustomEvent('modechange', {bubbles: true});
-      this.dispatchEvent(event);
+      this._mode = mode;
+      const currentMode = this._getModeStrategy();
 
       currentMode.enterMode();
+      this.setAttribute('mode', mode);
+
+      const event = new CustomEvent('modechange', {bubbles: true});
+      this.dispatchEvent(event);
     }
 
     _layout() {
       this._getModeStrategy().layout();
+    }
+
+    _updateForSwipeTargetWidthAttribute() {
+      if (this.hasAttribute('swipe-target-width')) {
+        this._swipeTargetWidth = Math.max(0, parseInt(this.getAttribute('swipe-target-width'), 10));
+      } else {
+        this._swipeTargetWidth = -1;
+      }
     }
 
     /**
@@ -328,7 +539,7 @@ limitations under the License.
       }
     }
 
-    _getWidthPixel() {
+    _getWidthInPixel() {
       const width = this._getWidth();
 
       const [, num, unit] = width.match(/^(\d+)(px|%)$/);
@@ -386,6 +597,7 @@ limitations under the License.
 
     /**
      * @param {Object} [options]
+     * @return {Boolean}
      */
     open(options = {}) {
       return this._getModeStrategy().openMenu(options);
@@ -393,6 +605,7 @@ limitations under the License.
 
     /**
      * @param {Object} [options]
+     * @return {Boolean}
      */
     close(options = {}) {
       return this._getModeStrategy().closeMenu(options);
@@ -400,6 +613,7 @@ limitations under the License.
 
     /**
      * @param {Object} [options]
+     * @return {Boolean}
      */
     toggle(options = {}) {
       const mode = this._getModeStrategy();
@@ -407,8 +621,19 @@ limitations under the License.
       return mode.isOpened() ? mode.closeMenu(options) : mode.openMenu(options);
     }
 
-    load(page) {
-      // TODO
+    /**
+     * @param {String} page
+     * @param {Object} [options]
+     * @param {Function} [options.callback]
+     */
+    load(page, options = {}) {
+      this._page = page;
+
+      options.callback = options.callback instanceof Function ? options.callback : () => {};
+      ons._internal.getPageHTMLAsync(page).then((html) => {
+        this.appendChild(util.createFragment(html));
+        options.callback();
+      });
     }
 
     /**
@@ -425,20 +650,21 @@ limitations under the License.
         this._updateForSideAttribute();
       } else if (name === 'collapse') {
         this._updateForCollapseAttribute();
+      } else if (name === 'swipeable') {
+        this._updateForSwipeableAttribute();
+      } else if (name === 'swipe-target-width') {
+        this._updateForSwipeTargetWidthAttribute();
       }
     }
 
-    attachedCallback() {
-      this._attached = true;
-      this._assertParent();
-
-      // relayout on "orientationchange"
-      // TODO
-      ons.orientation.on('change', this._boundOnOrientationChange);
-
-      // relayout on "resize"
-      // TODO
-      window.removeEventListener('resize', this._boundOnResize);
+    _updateForSwipeableAttribute() {
+      if (this._gestureDetector) {
+        if (this.isSwipeable()) {
+          this._gestureDetector.on('dragstart dragleft dragright dragend', this._boundHandleGesture);
+        } else {
+          this._gestureDetector.off('dragstart dragleft dragright dragend', this._boundHandleGesture);
+        }
+      }
     }
 
     _assertParent() {
@@ -448,26 +674,74 @@ limitations under the License.
       }
     }
 
-    detachedCallback() {
-      this._attached = false;
+    attachedCallback() {
+      this._assertParent();
 
-      ons.orientation.off('change', this._boundOnOrientationChange);
-      window.removeEventListener('resize', this._boundOnResize);
+      // relayout on "orientationchange"
+      ons.orientation.on('change', this._boundOnOrientationChange);
+
+      // relayout on "resize"
+      window.addEventListener('resize', this._boundOnResize);
+
+      this._gestureDetector = new ons.GestureDetector(this.parentElement, {dragMinDistance: 1});
+      this._updateForSwipeableAttribute();
+
+      if (this.hasAttribute('page')) {
+        OnsSplitterSideElement.ready(this, () => this.load(this.getAttribute('page')));
+      }
     }
 
-    _onOrientationChange() {
+    detachedCallback() {
+      ons.orientation.off('change', this._boundOnOrientationChange);
+      window.removeEventListener('resize', this._boundOnResize);
 
+      this._gestureDetector.dispose();
+      this._gestureDetector = null;
+      this._updateForSwipeableAttribute();
+    }
+
+    _handleGesture(event) {
+      return this._getModeStrategy().handleGesture(event);
+    }
+
+    /**
+     * @param {Object} info
+     * @param {Boolean} info.isPortrait
+     */
+    _onOrientationChange(info) {
+      const collapse = ('' + this.getAttribute('collapse')).trim();
+
+      if (collapse === 'portrait') {
+        if (info.isPortrait) {
+          this._updateMode(COLLAPSE_MODE);
+        } else {
+          this._updateMode(SPLIT_MODE);
+        } 
+      }
+
+      if (collapse === 'landscape') {
+        if (info.isPortrait) {
+          this._updateMode(SPLIT_MODE);
+        } else {
+          this._updateMode(COLLAPSE_MODE);
+        } 
+      }
     }
 
     _onResize() {
-
+      // TODO
     }
+
   }
 
   if (!window.OnsSplitterSideElement) {
     window.OnsSplitterSideElement = document.registerElement('ons-splitter-side', {
       prototype: SplitterSideElement.prototype
     });
+
+    window.OnsSplitterSideElement.ready = function(element, callback) {
+      setImmediate(callback);
+    };
   }
 
 })();

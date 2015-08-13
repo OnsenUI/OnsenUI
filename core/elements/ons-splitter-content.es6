@@ -22,23 +22,38 @@ limitations under the License.
 
   class SplitterContentElement extends ons._BaseElement {
 
+    get page() {
+      return this._page;
+    }
+
     createdCallback() {
+      this._page = null;
     }
 
     attributeChangedCallback(name, last, current) {
-      // TODO
     }
 
     /**
      * @param {String} page
      * @param {Object} [options]
+     * @param {Function} [options.callback]
      */
-    load(page, options) {
-      // TODO
+    load(page, options = {}) {
+      this._page = page;
+
+      options.callback = options.callback instanceof Function ? options.callback : () => {};
+      ons._internal.getPageHTMLAsync(page).then((html) => {
+        this.appendChild(util.createFragment(html));
+        options.callback();
+      });
     }
 
     attachedCallback() {
       this._assertParent();
+
+      if (this.hasAttribute('page')) {
+        OnsSplitterContentElement.ready(this, () => this.load(this.getAttribute('page')));
+      }
     }
 
     detachedCallback() {
@@ -56,6 +71,10 @@ limitations under the License.
     window.OnsSplitterContentElement = document.registerElement('ons-splitter-content', {
       prototype: SplitterContentElement.prototype
     });
+
+    window.OnsSplitterContentElement.ready = function(element, callback) {
+      setImmediate(callback);
+    };
   }
 
 })();

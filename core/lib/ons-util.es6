@@ -79,6 +79,22 @@ limitations under the License.
   };
 
   /**
+   * @param {String} html
+   * @return {HTMLFragment}
+   */
+  util.createFragment = (html) => {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = html;
+    const fragment = document.createDocumentFragment();
+
+    if (wrapper.firstChild) {
+      fragment.appendChild(wrapper.firstChild);
+    }
+
+    return fragment;
+  };
+
+  /**
    * @param {Element} element
    * @return {Element}
    */
