@@ -285,7 +285,8 @@ limitations under the License.
         return 0;
       }
 
-      for (let i = 0; i < count; i++) {
+      let i;
+      for (i = 0; i < count; i++) {
         if (size * i <= scroll && size * (i + 1) > scroll) {
           return i;
         }
