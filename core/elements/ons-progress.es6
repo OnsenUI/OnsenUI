@@ -41,7 +41,6 @@ limitations under the License.
   class ProgressElement extends ons._BaseElement {
 
     createdCallback() {
-
       if (this.hasAttribute('type') && this.getAttribute('type') === 'circular') {
         this._type = 'circular';
       } else {
@@ -58,21 +57,22 @@ limitations under the License.
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
       } else if (name === 'value' || name === 'secondary-value') {
         this._updateValue();
+      } else if (name === 'type') {
+        throw new Error('Can not change type attribute.');
       }
     }
 
     _updateValue() {
-      console.log('updating values');
       if (this._type === 'bar') {
         this._primary.style.width = (this.hasAttribute('value')) ? this.getAttribute('value') + '%' : '0%';
-        this._secondary.style.width = (this.hasAttribute('secondary-value')) ? this.getAttribute('secondary-value') + '%' : '0%';
+        this._secondary.style.width = this.hasAttribute('secondary-value') ? this.getAttribute('secondary-value') + '%' : '0%';
       } else {
         if (this.hasAttribute('value')) {
-          let per = this.getAttribute('value') * 160 * 0.01;
+          let per = Math.ceil(this.getAttribute('value') * 154 * 0.01);
           this._template.querySelector('.progress-circular__primary').style['stroke-dasharray'] = per + '%, 250%';
         }
         if (this.hasAttribute('secondary-value')) {
-          let per = this.getAttribute('secondary-value') * 160 * 0.01;
+          let per =  Math.ceil(this.getAttribute('secondary-value') * 154 * 0.01);
           this._template.querySelector('.progress-circular__secondary').style['stroke-dasharray'] = per + '%, 250%';
         }
       }
