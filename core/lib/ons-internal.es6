@@ -131,7 +131,12 @@ limitations under the License.
           xhr.open('GET', page, true);
           xhr.onload = function(response) {
             const html = xhr.responseText;
-            resolve(html);
+            if (xhr.status >= 400 && xhr.status < 600) {
+              reject(html);
+            }
+            else {
+              resolve(html);
+            }
           };
           xhr.onerror = function() {
             throw new Error(`The page is not found: ${page}`);
@@ -147,7 +152,30 @@ limitations under the License.
    * @return {Promise}
    */
   ons._internal.getPageHTMLAsync = function(page) {
-    return ons._internal.getTemplateHTMLAsync(page).then(html => normalizePageHTML(html));
+    let pages = ons.pageAttributeExpression.evaluate(page);
+
+    let getPage = (page) => {
+      if (typeof page !== 'string') {
+        return Promise.reject('Must specify a page.');
+      }
+
+      return ons._internal.getTemplateHTMLAsync(page)
+        .then(
+          function(html) {
+            return normalizePageHTML(html);
+          },
+          function(error) {
+            if (pages.length === 0) {
+              return Promise.reject(error);
+            }
+
+            return getPage(pages.shift());
+          }
+        )
+        .then(html => normalizePageHTML(html));
+    };
+
+    return getPage(pages.shift());
 
     function normalizePageHTML(html) {
       html = ('' + html).trim();
