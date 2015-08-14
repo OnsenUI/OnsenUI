@@ -23,11 +23,10 @@ limitations under the License.
 
     createdCallback() {
       this._compile();
-      this._shown = false;
       ModifierUtil.initModifier(this, scheme);
       this.classList.add('fab');
-
       this._updatePosition();
+      this.show();
     }
 
     _compile() {
@@ -150,7 +149,7 @@ limitations under the License.
      * @return {Boolean}
      */
     isShown() {
-      return this._shown;
+      return this.style.transform === 'scale(1)' && this.style.display !== 'none';
     }
 
     toggle() {
@@ -160,8 +159,6 @@ limitations under the License.
         this.show();
       }
     }
-
-
   }
 
   if (!window.OnsFabElement) {
