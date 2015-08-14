@@ -93,7 +93,7 @@ limitations under the License.
     }
 
     _updateDirection(direction) {
-      const children = this.children;
+      const children = this.items;
       for (let i = 0; i < children.length; i++) {
         children[i].style.transitionDelay = 25 * i + 'ms';
         children[i].style.webkitTransitionDelay = 25 * i + 'ms';
@@ -186,7 +186,7 @@ limitations under the License.
 
     showItems() {
       if (!this._itemShown) {
-        const children = this.children;
+        const children = this.items;
         for (let i = 0; i < children.length; i++) {
           children[i].style.transform = 'scale(1)';
           children[i].style.webkitTransform = 'scale(1)';
@@ -199,7 +199,7 @@ limitations under the License.
 
     hideItems() {
       if (this._itemShown) {
-        const children = this.children;
+        const children = this.items;
         for (let i = 0; i < children.length; i++) {
           children[i].style.transform = 'scale(0)';
           children[i].style.webkitTransform = 'scale(0)';
