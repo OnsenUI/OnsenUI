@@ -72,6 +72,10 @@ limitations under the License.
       this.removeEventListener('click', this._boundOnClick, false);
     }
 
+    get items() {
+      return ons._util.arrayFrom(this.querySelectorAll('ons-speed-dial-item'));
+    }
+
     _onClick(e) {
       this.toggleItems();
     }
@@ -89,7 +93,7 @@ limitations under the License.
     }
 
     _updateDirection(direction) {
-      const children = ons._util.arrayFrom(this.querySelectorAll('ons-speed-dial-item'));
+      const children = this.children;
       for (let i = 0; i < children.length; i++) {
         children[i].style.transitionDelay = 25 * i + 'ms';
         children[i].style.webkitTransitionDelay = 25 * i + 'ms';
@@ -182,7 +186,7 @@ limitations under the License.
 
     showItems() {
       if (!this._itemShown) {
-        const children = ons._util.arrayFrom(this.querySelectorAll('ons-speed-dial-item'));
+        const children = this.children;
         for (let i = 0; i < children.length; i++) {
           children[i].style.transform = 'scale(1)';
           children[i].style.webkitTransform = 'scale(1)';
@@ -195,7 +199,7 @@ limitations under the License.
 
     hideItems() {
       if (this._itemShown) {
-        const children = ons._util.arrayFrom(this.querySelectorAll('ons-speed-dial-item'));
+        const children = this.children;
         for (let i = 0; i < children.length; i++) {
           children[i].style.transform = 'scale(0)';
           children[i].style.webkitTransform = 'scale(0)';
