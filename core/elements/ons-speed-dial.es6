@@ -35,6 +35,10 @@ limitations under the License.
         this._updateDirection('up');
       }
       this._updatePosition();
+
+      if (this.hasAttribute('disabled')) {
+        this.setDisabled(true);
+      }
     }
 
     _compile() {
@@ -77,7 +81,9 @@ limitations under the License.
     }
 
     _onClick(e) {
-      this.toggleItems();
+      if (!this.isDisabled()) {
+        this.toggleItems();
+      }
     }
 
     _show() {
@@ -222,8 +228,11 @@ limitations under the License.
       }
 
       if (disabled) {
+        this.hideItems();
+        this.setAttribute('disabled', '');
         ons._util.arrayFrom(this.childNodes).forEach(element => (element.classList.contains('fab')) ? element.setAttribute('disabled', '') : true);
       } else {
+        this.removeAttribute('disabled');
         ons._util.arrayFrom(this.childNodes).forEach(element => (element.classList.contains('fab')) ? element.removeAttribute('disabled') : true);
       }
     }
