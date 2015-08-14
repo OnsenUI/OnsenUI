@@ -186,7 +186,7 @@ limitations under the License.
       this.hideItems();
       setTimeout(()=>{
         this.querySelector('ons-fab').hide();
-      }, 200)
+      }, 200);
       this._shown = false;
     }
 
