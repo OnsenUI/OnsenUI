@@ -171,9 +171,9 @@ describe('ons.pageAttributeExpression', () => {
         '${${hoge}}'
       ];
 
-      for (let i = 0; i < invalidArguments.length; i++) {
-        expect(() => pae.evaluate(invalidArguments[i])).to.throw(Error);
-      }
+      invalidArguments.forEach((argument) => {
+        expect(() => pae.evaluate(argument)).to.throw(Error);
+      });
     });
   });
 });
