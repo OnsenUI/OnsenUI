@@ -24,12 +24,10 @@ limitations under the License.
     createdCallback() {
       this._compile();
       this._shown = false;
-      this._inline = false;
       ModifierUtil.initModifier(this, scheme);
       this.classList.add('fab');
 
       this._updatePosition();
-      this._checkInline();
     }
 
     _compile() {
@@ -48,19 +46,16 @@ limitations under the License.
       if (name === 'position') {
         this._updatePosition();
       }
-      if (name === 'inline') {
-        this._checkInline();
-      }
     }
 
     _show() {
-      if (!this._inline) {
+      if (!this.isInline()) {
         this.show();
       }
     }
 
     _hide() {
-      if (!this._inline) {
+      if (!this.isInline()) {
         this.hide();
       }
     }
@@ -129,10 +124,6 @@ limitations under the License.
       } else {
         this.removeAttribute('disabled');
       }
-    }
-
-    _checkInline(inline) {
-      this._inline = this.hasAttribute('inline') ? true : false;
     }
 
     /**
