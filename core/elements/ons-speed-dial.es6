@@ -32,7 +32,7 @@ limitations under the License.
       if (this.hasAttribute('direction')) {
         this._updateDirection(this.getAttribute('direction'));
       } else {
-        this._updateDirection('top');
+        this._updateDirection('up');
       }
       this._updatePosition();
     }
@@ -99,13 +99,13 @@ limitations under the License.
         children[i].style.left = 'auto';
       }
       switch (direction) {
-        case 'top':
+        case 'up':
           for (let i = 0; i < children.length; i++) {
             children[i].style.bottom = 72 + 56 * i + 'px';
             children[i].style.right = '8px';
           }
           break;
-        case 'bottom':
+        case 'down':
           for (let i = 0; i < children.length; i++) {
             children[i].style.top = 72 + 56 * i + 'px';
             children[i].style.left = '8px';
@@ -124,7 +124,7 @@ limitations under the License.
           }
           break;
         default:
-          throw new Error('Argument must be one of top, bottom, left or right.');
+          throw new Error('Argument must be one of up, down, left or right.');
       }
     }
 
@@ -176,7 +176,7 @@ limitations under the License.
       this.hideItems();
       setTimeout(()=>{
         this.querySelector('ons-fab').hide();
-      }, 200);
+      }, 200)
       this._shown = false;
     }
 
