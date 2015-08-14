@@ -208,16 +208,16 @@ limitations under the License.
 
       if (this._state === CollapseMode.CLOSED_STATE) {
 
-        animit(this._element)
-          .queue({tranform: 'translateX(0%)'})
+        animit(element)
+          .queue({transform: 'translateX(0%)'})
           .play();
 
         mask.style.display = 'none';
 
       } else if (this._state === CollapseMode.OPENED_STATE) {
 
-        animit(this._element)
-          .queue({tranform: element._isLeftSide() ? 'translateX(100%)' : 'translateX(-100%)'})
+        animit(element)
+          .queue({transform: element._isLeftSide() ? 'translateX(100%)' : 'translateX(-100%)'})
           .play();
 
         mask.style.display = 'block';
@@ -249,37 +249,54 @@ limitations under the License.
     }
 
     _clearLayout() {
-      this._element.style.zIndex = '';
-      this._element.style.right = '';
-      this._element.style.left = '';
-      this._element.style.transform = this._element.style.webkitTransform = '';
-      this._element.style.transition = this._element.style.webkitTransition = '';
-      this._element.style.width = '';
+      const element = this._element;
+      const mask = util.findChild(element.parentElement, 'ons-splitter-mask');
+
+      element.style.zIndex = '';
+      element.style.right = '';
+      element.style.left = '';
+      element.style.transform = this._element.style.webkitTransform = '';
+      element.style.transition = this._element.style.webkitTransition = '';
+      element.style.width = '';
+
+      if (this._state === CollapseMode.OPENED_STATE) {
+        mask.style.display = 'none';
+      }
     }
 
     /**
      * @param {Object} [options]
      * @param {Function} [options.callback]
      * @param {Boolean} [options.withoutAnimation]
+     * @return {Boolean}
      */
     openMenu(options = {}) {
-      options.callback = options.callback instanceof Function ? options.callback : () => {};
-
       if (this._isLocked()) {
-        setImmediate(options.callback);
         return false;
       }
+
+      if (this._element._emitPreOpenEvent()) {
+        return false;
+      }
+
+      options.callback = options.callback instanceof Function ? options.callback : () => {};
+
+      const unlock = this._lock.lock();
+      const done = () => {
+        unlock();
+        this._element._emitPostOpenEvent();
+        options.callback();
+      };
 
       if (options.withoutAnimation) {
         this._state = CollapseMode.OPENED_STATE;
         this.layout();
+        done();
       } else {
-        const unlock = this._lock.lock();
         this._state = CollapseMode.OPENED_STATE;
-        this._runOpenAnimation(() => { 
+        this._runOpenAnimation(() => {
           this.layout();
-          unlock();
-          options.callback();
+          done();
         });
       }
 
@@ -358,24 +375,36 @@ limitations under the License.
       );
     }
 
+    /**
+     * @param {Object} [options]
+     */
     closeMenu(options = {}) {
       if (this._isLocked()) {
-        setImmediate(options.callback);
+        return false;
+      }
+
+      if (this._element._emitPreCloseEvent()) {
         return false;
       }
 
       options.callback = options.callback instanceof Function ? options.callback : () => {};
 
+      const unlock = this._lock.lock();
+      const done = () => {
+        unlock();
+        this._element._emitPostCloseEvent();
+        options.callback();
+      };
+
       if (options.withoutAnimation) {
         this._state = CollapseMode.CLOSED_STATE;
         this.layout();
+        done();
       } else {
-        const unlock = this._lock.lock();
         this._state = CollapseMode.CLOSED_STATE;
         this._runCloseAnimation(() => {
           this.layout();
-          unlock();
-          options.callback();
+          done();
         });
       }
 
@@ -430,23 +459,59 @@ limitations under the License.
       return this.hasAttribute('swipeable');
     }
 
+    _emitPostOpenEvent() {
+      this.dispatchEvent(new CustomEvent('postopen', {
+        bubbles: true,
+        detail: {side: this}
+      }));
+    }
+
+    _emitPostCloseEvent() {
+      this.dispatchEvent(new CustomEvent('postclose', {
+        bubbles: true,
+        detail: {side: this}
+      }));
+    }
+
+    /**
+     * @return {boolean} canceled or not
+     */
+    _emitPreOpenEvent() {
+      return this._emitCancelableEvent('preopen');
+    }
+
+    _emitCancelableEvent(name) {
+      let isCanceled = false;
+
+      const event = new CustomEvent(name, {
+        bubbles: true,
+        detail: {
+          side: this,
+          cancel: () => isCanceled = true
+        }
+      });
+
+      this.dispatchEvent(event);
+      return isCanceled;
+    }
+
+    /**
+     * @return {boolean}
+     */
+    _emitPreCloseEvent() {
+      return this._emitCancelableEvent('preclose');
+    }
+
     _updateForCollapseAttribute() {
       if (!this.hasAttribute('collapse')) {
         this._updateMode(SPLIT_MODE);
         return;
       }
 
-      const collapse = this.getAttribute('collapse');
+      const collapse = ('' + this.getAttribute('collapse')).trim();
 
       // mode change by screen orientation
       const considerOrientation = () => {
-        // TODO
-        const register = () => {
-          
-        };
-        const cancel = () => {
-          
-        };
       };
 
       // mode change by media query
@@ -495,7 +560,7 @@ limitations under the License.
       }
 
       const lastMode = this._getModeStrategy();
-      
+
       if (lastMode) {
         lastMode.exitMode();
       }
@@ -506,7 +571,13 @@ limitations under the License.
       currentMode.enterMode();
       this.setAttribute('mode', mode);
 
-      const event = new CustomEvent('modechange', {bubbles: true});
+      const event = new CustomEvent('modechange', {
+        bubbles: true,
+        detail: {
+          side: this,
+          mode: mode
+        }
+      });
       this.dispatchEvent(event);
     }
 
@@ -617,7 +688,7 @@ limitations under the License.
      */
     toggle(options = {}) {
       const mode = this._getModeStrategy();
-      
+
       return mode.isOpened() ? mode.closeMenu(options) : mode.openMenu(options);
     }
 
@@ -716,7 +787,7 @@ limitations under the License.
           this._updateMode(COLLAPSE_MODE);
         } else {
           this._updateMode(SPLIT_MODE);
-        } 
+        }
       }
 
       if (collapse === 'landscape') {
@@ -724,7 +795,7 @@ limitations under the License.
           this._updateMode(SPLIT_MODE);
         } else {
           this._updateMode(COLLAPSE_MODE);
-        } 
+        }
       }
     }
 
