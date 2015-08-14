@@ -49,13 +49,13 @@ limitations under the License.
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
       }
-      if (name === 'direction') {
+      else if (name === 'direction') {
         this._updateDirection(current);
       }
-      if (name === 'position') {
+      else if (name === 'position') {
         this._updatePosition();
       }
-      if (name === 'disabled') {
+      else if (name === 'disabled') {
         if (current !== null) {
           this.setDisabled(true);
         } else {
