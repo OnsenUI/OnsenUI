@@ -212,7 +212,7 @@ limitations under the License.
 
 
     /**
-     * Disable of enable fab.
+     * Disable of enable speed dial.
      *
      * @param {Boolean}
      */
@@ -229,7 +229,7 @@ limitations under the License.
     }
 
     /**
-     * True if fab is disabled.
+     * True if speed dial is disabled.
      *
      * @return {Boolean}
      */
@@ -238,7 +238,7 @@ limitations under the License.
     }
 
     /**
-     * True if fab is inline element.
+     * True if speed dial is an inline element.
      *
      * @return {Boolean}
      */
@@ -247,7 +247,7 @@ limitations under the License.
     }
 
     /**
-     * True if fab is shown
+     * True if speed dial is shown
      *
      * @return {Boolean}
      */
