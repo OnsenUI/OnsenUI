@@ -33,6 +33,8 @@ v1.3.8-dev
  * ons-navigator: Fixed `insertPage()` behaviour with high or low indexes.
  * ons-tabbar: Fixed callback in `setActiveTab()` method.
  * ons-fab: Implemented 'fab' component.
+ * core: Added page attribute expressions.
+ * ons-carousel: Fixed [#844](https://github.com/OnsenUI/OnsenUI/issues/844).
 
 v1.3.7
 ----
