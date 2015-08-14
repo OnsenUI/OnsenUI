@@ -105,7 +105,7 @@ limitations under the License.
             children[i].style.right = '8px';
           }
           break;
-        case 'down':
+        case 'bottom':
           for (let i = 0; i < children.length; i++) {
             children[i].style.top = 72 + 56 * i + 'px';
             children[i].style.left = '8px';
@@ -124,7 +124,7 @@ limitations under the License.
           }
           break;
         default:
-          throw new Error('Argument must be one from top / down / left / right.');
+          throw new Error('Argument must be one of top, bottom, left or right.');
       }
     }
 
