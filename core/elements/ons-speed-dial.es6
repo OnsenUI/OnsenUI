@@ -25,7 +25,6 @@ limitations under the License.
       this._compile();
       this._shown = false;
       this._itemShown = false;
-      this._inline = false;
       ModifierUtil.initModifier(this, scheme);
       this._boundOnClick = this._onClick.bind(this);
       this.classList.add('speed__dial');
@@ -36,7 +35,6 @@ limitations under the License.
         this._updateDirection('top');
       }
       this._updatePosition();
-      this._checkInline();
     }
 
     _compile() {
@@ -56,9 +54,6 @@ limitations under the License.
       }
       if (name === 'position') {
         this._updatePosition();
-      }
-      if (name === 'inline') {
-        this._checkInline();
       }
       if (name === 'disabled') {
         if (current !== null) {
@@ -82,13 +77,13 @@ limitations under the License.
     }
 
     _show() {
-      if (!this._inline) {
+      if (!this.isInline()) {
         this.show();
       }
     }
 
     _hide() {
-      if (!this._inline) {
+      if (!this.isInline()) {
         this.hide();
       }
     }
@@ -227,10 +222,6 @@ limitations under the License.
       } else {
         ons._util.arrayFrom(this.childNodes).forEach(element => (element.classList.contains('fab')) ? element.removeAttribute('disabled') : true);
       }
-    }
-
-    _checkInline(inline) {
-      this._inline = this.hasAttribute('inline') ? true : false;
     }
 
     /**
