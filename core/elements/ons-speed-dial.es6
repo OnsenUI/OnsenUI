@@ -23,7 +23,7 @@ limitations under the License.
 
     createdCallback() {
       this._compile();
-      this._shown = false;
+      this._shown = true;
       this._itemShown = false;
       ModifierUtil.initModifier(this, scheme);
       this._boundOnClick = this._onClick.bind(this);
@@ -261,7 +261,7 @@ limitations under the License.
      * @return {Boolean}
      */
     isShown() {
-      return this._shown;
+      return this._shown && this.style.display !== 'none';
     }
 
     isItemShown() {
