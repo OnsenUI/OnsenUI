@@ -15,7 +15,7 @@ limitations under the License.
   'use strict';
 
   const scheme = {
-    '': 'speed-dial--*',
+    '': 'speed-dial__item--*',
   };
   const ModifierUtil = ons._internal.ModifierUtil;
 
@@ -25,8 +25,14 @@ limitations under the License.
       ModifierUtil.initModifier(this, scheme);
       this.classList.add('fab');
       this.classList.add('fab--mini');
-      this.classList.add('speed__dial__item');
+      this.classList.add('speed-dial__item');
       this._boundOnClick = this._onClick.bind(this);
+    }
+
+    attributeChangedCallback(name, last, current) {
+      if (name === 'modifier') {
+        return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      }
     }
 
     attachedCallback() {
@@ -40,8 +46,6 @@ limitations under the License.
     _onClick(e) {
       e.stopPropagation();
     }
-
-
   }
 
   if (!window.OnsSpeedDialItemElement) {
