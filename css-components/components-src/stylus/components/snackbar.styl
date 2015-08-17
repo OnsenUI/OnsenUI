@@ -1,0 +1,51 @@
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-snackbar-background-color = $highlight-color
+var-snackbar-cta-background-color = $second-highlight-color
+
+/*! topdoc
+  name: snackbar
+  class: snackbar
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <div class="snackbar">snackbar</div>
+    <div class="snackbar" disabled>snackbar</div>
+*/
+
+
+.snackbar
+  reset-box-model()
+  reset-font()
+  text-align left
+  position fixed
+  display table
+  color white
+  font-size 14px
+  width 100%
+  min-height 48px
+  min-width 288px
+  padding 14px 24px
+  background-color #2b2b2b
+  bottom 0
+  left 0
+  transition transform 0.4s ease-out
+  visbility hidden
+  z-index 1000
+  box-shadow 0 2px 5px 0 rgba(0, 0, 0, 0.26)
+
+.snackbar__content
+  display table-cell
+  width 100%
+  vertical-align middle
+  padding-right 24px
+
+.snackbar__right
+  height 100%
+  display table-cell
+  vertical-align middle
+  text-align right
+
