@@ -48,7 +48,7 @@ describe('ons', () => {
   describe('#setDefaultDeviceBackButtonListener()', () => {
     it('changes the default callback', () => {
       let tmp = ons._defaultDeviceBackButtonHandler._callback;
-      ons.setDefaultDeviceBackButtonListener(() => {return;});
+      ons.setDefaultDeviceBackButtonListener(() => undefined);
       expect(tmp).not.to.equal(ons._defaultDeviceBackButtonHandler._callback);
       ons.setDefaultDeviceBackButtonListener(tmp);
     });
@@ -156,7 +156,7 @@ describe('ons', () => {
 
   describe('#resolveLoadingPlaceholder()', () => {
     it('resolves the placeholder', () => {
-      let e = document.createElement("div");
+      let e = document.createElement('div');
       e.setAttribute('ons-loading-placeholder', 'page.html');
       document.body.appendChild(e);
       ons.resolveLoadingPlaceholder();
@@ -167,7 +167,7 @@ describe('ons', () => {
 
   describe('#_setupLoadingPlaceHolders()', () => {
     it('resolves the placeholder', () => {
-      let e = document.createElement("div");
+      let e = document.createElement('div');
       e.setAttribute('ons-loading-placeholder', 'page.html');
       document.body.appendChild(e);
       var spy = chai.spy.on(ons, '_resolveLoadingPlaceholder');
