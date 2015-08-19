@@ -172,6 +172,14 @@ limitations under the License.
         this._currentTarget = target;
         this._visible = true;
         this._positionFloatingMenu(target);
+
+        // prevent ios background overscroll
+       document.querySelector('.page__content').classList.add('floating-menu__no-scroll');
+        const event = new CustomEvent('postshow', {
+          bubbles: true,
+          detail: {floatingMenu: this}
+        });
+        this.dispatchEvent(event);
       }
     }
 
@@ -195,6 +203,12 @@ limitations under the License.
         this._visible = false;
         this.addEventListener('webkitTransitionEnd', this._boundOnAnimation);
         this.addEventListener('transitionend', this._boundOnAnimation);
+
+        const event = new CustomEvent('posthide', {
+          bubbles: true,
+          detail: {floatingMenu: this}
+        });
+        this.dispatchEvent(event);
       }
     }
 
