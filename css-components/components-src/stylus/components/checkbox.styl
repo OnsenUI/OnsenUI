@@ -249,3 +249,53 @@ checkbox--after()
   background transparent
   box-shadow var-box-shadow
   border none
+
+
+
+/*! topdoc
+  name: Material-like Checkbox
+  use: Checkbox
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="checkbox checkbox--material">
+      <input type="checkbox">
+      <div class="checkbox__checkmark"></div>
+      OFF
+    </label>
+
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" checked="checked">
+      <div class="checkbox__checkmark"></div>
+      ON
+    </label>
+
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" checked="checked" disabled>
+      <div class="checkbox__checkmark"></div>
+      ON
+    </label>
+
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" disabled>
+      <div class="checkbox__checkmark"></div>
+      Disabled
+    </label>
+*/
+
+.checkbox--material > .checkbox__checkmark:before
+  border-radius 2px
+  
+.checkbox--material > input[type="checkbox"]:checked + .checkbox__checkmark:before
+  border var-background-color--before--checkbox
+  
+.checkbox--material > .checkbox__checkmark:before
+  border 3px solid rgba(0,0,0, 0.5)
+
+.checkbox--material > input[type="checkbox"]:disabled:checked + .checkbox__checkmark:before
+  background-color rgba(0,0,0,1)
+  
+.checkbox--material > input[type="checkbox"]:disabled:checked:active + .checkbox__checkmark:before
+  background-color rgba(0,0,0,1)
+  

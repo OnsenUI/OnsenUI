@@ -60,6 +60,7 @@ var-range-thumb-width  := var-thumb-size
       <input type="range" class="range" style="width:100%" value="90">
     </div>
 */
+
 range()
   reset-input()
   -webkit-appearance none
@@ -139,4 +140,116 @@ range--disabled()
 
 .range:disabled
   range--disabled()
+
+
+var-material-range-track-background-color = $border-color
+var-material-range-track-background-color-active = $second-highlight-color
+var-material-range-thumb-background-color = #fff
+var-material-range-thumb-border-color = $border-color
+
+var-material-range-border-radius := 3px
+var-material-range-thumb-border := 2px solid var-material-range-thumb-border-color
+var-material-range-border := none
+var-material-range-track-height := 2px
+var-material-range-thumb-width  := 14px
+
+/*! topdoc
+  name: Material-like Range
+  use: Range
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <input type="range" class="range range--material">
+    <input type="range" class="range range--material" disabled>
+  showcase:
+    <div class="navigation-bar">
+        <div class="navigation-bar__item center full">
+            <h1 class="navigation-bar__title">Range</h1>
+        </div>
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range range--material" style="width:100%" value="0">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range range--material" style="width:100%" value="30">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range range--material" style="width:100%" value="60">
+    </div>
+
+    <div style="padding:8px">
+      <input type="range" class="range range--material" style="width:100%" value="90">
+    </div>
+*/
+
+
+.range--material
+  border-radius var-material-border-radius
+  border var-material-range-border
+  height var-material-range-track-height
+  border-radius var-material-border-radius--large
+  border-radius var-material-range-border-radius
+
+  background-image linear-gradient(var-material-range-track-background-color, var-material-range-track-background-color)
+  background-position left center
+  height 30px
+    
+.range--material:focus
+  background-image linear-gradient(#b8b8b8, #b8b8b8)
+  
+.range--material:focus::-webkit-slider-thumb
+  border-color var-material-range-track-background-color-active
+  background-color var-material-range-track-background-color-active
+  
+.range--material:focus::-moz-range-thumb
+  border-color var-material-range-track-background-color-active
+  background-color var-material-range-track-background-color-active
+
+// when slider clicked
+.range--material:active::-webkit-slider-thumb
+  transform: scale(2, 2)
+  
+.range--material:active::-moz-range-thumb
+  transform: scale(2, 2)
+  
+.range--material:active::-webkit-slider-thumb:before
+  transform: scale(1)
+
+.range--material::-moz-range-track
+  background-color var-material-range-track-background-color
+  height var-material-range-track-height
+  border-radius var-material-round-border
+
+.range--material::-webkit-slider-thumb
+  height var-material-range-thumb-width
+  width var-material-range-thumb-width
+  background-color var-material-range-thumb-background-color
+  border var-material-range-thumb-border
+  border-radius var-material-round-border
+  transition transform 0.1s ease-out
+
+.range--material::-moz-range-thumb
+  height var-material-range-thumb-width
+  width var-material-range-thumb-width
+  background-color var-material-range-thumb-background-color
+  border var-material-range-thumb-border
+  border-radius var-material-round-border
+  transition transform 0.1s ease-out
+  
+.range--material::-webkit-slider-thumb:before
+  position absolute
+  top 4px
+  right 0px
+  left -1026px
+  width 1024px
+  height 2px
+  background-color var-material-range-track-background-color-active
+  content ''
+  margin 0
+  padding 0
 

@@ -28,6 +28,7 @@ var-switch-thumb-border-color-active = $switch-highlight-color
 var-switch-height = 32px
 var-switch-width = 51px
 
+
 /*! topdoc
   name: Switch
   class: switch
@@ -116,7 +117,57 @@ switch__toggle()
 
 .switch__input:not(:checked) + .switch__toggle:before
   transform translateX(0px)
-
+  
 .switch__input:disabled + .switch__toggle
   disabled()
 
+
+/*! topdoc
+  name: Material-like Switch
+  use: Switch
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input--material">
+      <div class="switch__toggle"></div>
+    </label>
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input--material" checked>
+      <div class="switch__toggle"></div>
+    </label>
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input--material" disabled>
+      <div class="switch__toggle"></div>
+    </label>
+*/
+
+.switch--material
+  height 18px
+  
+.switch--material .switch__toggle
+  background-color #696969
+
+.switch__input--material
+  hide-input()
+  margin-top -((30px-(var-switch-height))/2px)
+
+// switch toggle circle
+.switch--material .switch__toggle:before
+  background-color var-switch-thumb-border-color-active
+  left 0px
+  margin-top -7px
+
+.switch__input--material:checked + .switch__toggle
+  background-color alpha($switch-highlight-color, 0.5)
+
+.switch__input--material:checked + .switch__toggle:before
+  transform translateX(24px)
+
+.switch__input--material:not(:checked) + .switch__toggle:before
+  background-color #b8b8b8
+  transform translateX(0px)
+
+.switch__input--material:disabled + .switch__toggle
+  disabled()
