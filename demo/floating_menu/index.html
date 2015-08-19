@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp">
   <head>
     <meta charset="utf-8">
-    <title>Popover | Onsen UI</title>  
+    <title>Floating Menu | Onsen UI</title>  
     <link rel="stylesheet" href="../styles/app.css"/>
     <link rel="stylesheet" href="../../build/css/onsenui.css">
     <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
@@ -44,6 +44,23 @@
           <span id="top-right" ng-click="show('#top-right')" class="toolbar-button--outline navigation-bar__line-height">Button</span>
         </div>
       </div>
+
+    <ons-list>
+      <ons-list-header>Tappable List</ons-list-header>
+      <ons-list-item modifier="tappable">One</ons-list-item>
+      <ons-list-item modifier="tappable">Two</ons-list-item>
+      <ons-list-item modifier="tappable">Three</ons-list-item>
+
+      <ons-list-header>List with Chevron</ons-list-header>
+      <ons-list-item modifier="chevron">One</ons-list-item>
+      <ons-list-item modifier="chevron">Two</ons-list-item>
+      <ons-list-item modifier="chevron">Three</ons-list-item>
+      <ons-list-header>Normal List</ons-list-header>
+      <ons-list-item id="list1" ng-click="show('#list1')">One</ons-list-item>
+      <ons-list-item id="list2" ng-click="show('#list2')">Two</ons-list-item>
+      <ons-list-item id="list3" ng-click="show('#list3')">Three</ons-list-item>
+
+    </ons-list>
 
       <div style="text-align: center">
         <br />

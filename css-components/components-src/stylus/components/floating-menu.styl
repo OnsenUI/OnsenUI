@@ -33,8 +33,6 @@
   background-color #fff
   border-radius 2px
   overflow hidden
-  left 0
-  top 0
   max-height 0px
   transition max-height 0.4s ease
 
@@ -54,21 +52,3 @@
 .floating-menu__item:last-child
   border-bottom none
   padding-bottom 8px
-
-
-@-webkit-keyframes floating-menu__slide-down {
-  0% {
-    display: none; 
-    max-height: 0;
-  }
-
-  1% {
-    display: block ; 
-    max-height: 200px;
-  }
-
-  100% {
-    display: block ; 
-    max-height: 200px;
-  }
-}

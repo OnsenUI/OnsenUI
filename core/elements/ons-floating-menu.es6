@@ -57,7 +57,6 @@ limitations under the License.
       this._boundOnChange = this._onChange.bind(this);
       this._boundCancel = this._cancel.bind(this);
       this._boundOnAnimation = this._onAnimationEnd.bind(this);
-      this._boundOnAnimationOpen = this._onAnimationEndOpen.bind(this);
     }
 
     _onAnimationEnd() {
@@ -65,13 +64,6 @@ limitations under the License.
       this.removeEventListener('webkitTransitionEnd', this._boundOnAnimation);
       this.removeEventListener('transitionend', this._boundOnAnimation);
     }
-
-    _onAnimationEndOpen() {
-      this.style.display = 'block';
-      this.removeEventListener('webkitTransitionEnd', this._boundOnAnimationOpen);
-      this.removeEventListener('transitionend', this._boundOnAnimationOpen);
-    }
-
 
     _onDeviceBackButton(event) {
       if (this.isCancelable()) {
@@ -82,27 +74,53 @@ limitations under the License.
     }
 
     _positionFloatingMenu(target) {
-      var position = target.getBoundingClientRect();
-      var own = this._floatingMenu.getBoundingClientRect();
-      var newTop = position.top;
-      var newLeft = position.left;
-      var padding = 8;
+      const position = target.getBoundingClientRect();
+      const own = this._floatingMenu.getBoundingClientRect();
+      this._floatingMenu.style.maxHeight = '200px';
+      const padding = 8;
 
-      // Keep menu position inside window.
-      if (newTop < padding) {
-        newTop = padding;
-          }
-      if (newLeft < padding) {
-        newLeft = padding;
+      let newTop, newBottom, newLeft;
+      this._floatingMenu.style.top = 'auto';
+      this._floatingMenu.style.bottom = 'auto';
+
+      if (position.top > window.innerHeight / 2) {
+        newBottom = window.innerHeight - position.bottom;
+        newLeft = position.left;
+
+        if (newBottom < padding) {
+          newBottom = padding;
+        }
+        if (newLeft < padding) {
+          newLeft = padding;
+        }
+        if (window.innderHeight - newBottom > own.height + padding) {
+          newBottom = newBottom - padding;
+        }
+        if (window.innerWidth < newLeft + own.width + padding) {
+          newLeft = window.innerWidth - own.width - padding;
+        }
+        this._floatingMenu.style.bottom = newBottom + 'px';
+        this._floatingMenu.style.left = newLeft + 'px';
+        return;
+      } else {
+        newTop = position.top;
+        newLeft = position.left;
+
+        if (newTop < padding) {
+          newTop = padding;
+        }
+        if (newLeft < padding) {
+          newLeft = padding;
+        }
+        if (window.innerHeight < newTop + own.height + padding) {
+          newTop = window.innerHeight - own.height - padding;
+        }
+        if (window.innerWidth < newLeft + own.width + padding) {
+          newLeft = window.innerWidth - own.width - padding;
+        }
+        this._floatingMenu.style.top = newTop + 'px';
+        this._floatingMenu.style.left = newLeft + 'px';
       }
-      if (window.innerHeight < newTop + own.height + padding) {
-        newTop = window.innerHeight - own.height - padding;
-      }
-      if (window.innerWidth < newLeft + own.width + padding) {
-        newLeft = window.innerWidth - own.width - padding;
-      }
-      this._floatingMenu.style.top = newTop + 'px';
-      this._floatingMenu.style.left = newLeft + 'px';
     }
 
     _onChange() {
@@ -114,8 +132,8 @@ limitations under the License.
     }
 
     _compile() {
-       var templateElement = templateSource.cloneNode(true);
-       var content = templateElement.querySelector('.floating-menu');
+       let templateElement = templateSource.cloneNode(true);
+       let content = templateElement.querySelector('.floating-menu');
        while (this.childNodes[0]) {
          content.appendChild(this.childNodes[0]);
        }
@@ -124,16 +142,6 @@ limitations under the License.
        }
     }
 
-    /**
-     * Show floating menu.
-     *
-     * @param {HTMLElement} [target] target element
-     * @param {String} [target] css selector
-     * @param {Event} [target] event
-     * @param {Object} [options] options
-     * @param {String} [options.animation] animation type
-     * @param {Object} [options.animationOptions] animation options
-     */
     show(target, options) {
       if (typeof target === 'string') {
         target = document.querySelector(target);
@@ -161,22 +169,12 @@ limitations under the License.
 
       if (!canceled) {
         this.style.display = 'block';
-        this._floatingMenu.style.maxHeight = '200px';
         this._currentTarget = target;
-
-        this.addEventListener('webkitTransitionEnd', this._boundOnAnimationOpen);
-        this.addEventListener('transitionend', this._boundOnAnimationOpen);
+        this._visible = true;
         this._positionFloatingMenu(target);
       }
     }
 
-    /**
-     * Hide floating menu.
-     *
-     * @param {Object} [options] options
-     * @param {String} [options.animation] animation type
-     * @param {Object} [options.animationOptions] animation options
-     */
     hide(options) {
       options = options || {};
 
