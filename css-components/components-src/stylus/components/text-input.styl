@@ -22,6 +22,7 @@
 var-text-input-font-size = 15px
 var-text-input-height = 31px
 var-text-input-border-color = var-input-border-color
+var-text-highlight-color = $highlight-color // material
 
 /*! topdoc
   name: Text Input
@@ -156,4 +157,136 @@ text-input--invalid()
   border none
   background-color transparent
   border-bottom 1px solid var-input-invalid-border-color
+
+
+/*! topdoc
+  name: Material-like Text Input
+  class: material-text-input
+  markup:
+    <div class="text-input--material">      
+      <input type="text" placeholder="Name">
+      <span class="highlight"></span>
+      <span class="bar"></span>
+    </div>
+      
+    <div class="text-input--material">      
+      <input type="text" placeholder="Email" disabled>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+    </div>
+    
+*/
+
+.text-input--material 
+  position relative
+  margin 20px auto
+  width 200px
+  reset-font()
+  
+.text-input--material input
+  font-size var-text-input-font-size
+  padding 10px 10px 10px 5px
+  display block
+  width 100%
+  box-sizing border-box
+  background transparent
+  border none
+  border-bottom 1px solid #757575
+  
+.text-input--material input:focus
+  outline:none
+  
+.text-input--material input:disabled
+.text-input--material input:disabled ~ label
+  disabled()
+
+/* LABEL ======================================= */
+.text-input--material label
+  color #999 
+  font-size 18px
+  font-weight normal
+  position absolute
+  pointer-events none
+  left 5px
+  top 10px
+  transition all 0.2s ease
+
+/* active state */
+.text-input--material input:focus ~ label, input:valid ~ label
+  top -10px
+  font-size 14px
+  color var-text-highlight-color
+
+/* BOTTOM BARS ================================= */
+.text-input--material .bar
+  position relative 
+  display block
+  
+.text-input--material .bar:before
+.bar:after
+  content ''
+  height 2px 
+  width 0
+  //bottom 1px 
+  position absolute
+  background var-text-highlight-color 
+  transition all 0.2s ease
+  
+.text-input--material .bar:before
+  left 50%
+.text-input--material .bar:after
+  right 50% 
+
+/* active state */
+.text-input--material input:focus ~ .bar:before, input:focus ~ .bar:after
+  width 50%
+
+/* HIGHLIGHTER ================================== */
+.text-input--material .highlight
+  position absolute
+  height 60% 
+  width 100px 
+  top 25% 
+  left 0
+  pointer-events none
+  opacity 0.5
+
+/* active state */
+.text-input--material input:focus ~ .highlight
+  -webkit-animation inputHighlighter 0.3s ease
+  -moz-animation inputHighlighter 0.3s ease
+  animation inputHighlighter 0.3s ease
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+  from { background:var-text-highlight-color; }
+  to  { width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+  from { background:var-text-highlight-color; }
+  to  { width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+  from { background:var-text-highlight-color; }
+  to  { width:0; background:transparent; }
+}
+
+/*! topdoc
+  name: Material-like Multi-line Text Input
+  use: Material-like Text Input
+  markup:
+    <div class="text-input--material">      
+      <input type="text" required>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Name</label>
+    </div>
+      
+    <div class="text-input--material">      
+      <input type="text" required disabled>
+      <span class="highlight"></span>
+      <span class="bar"></span>
+      <label>Email</label>
+    </div>
+*/
 
