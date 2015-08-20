@@ -244,6 +244,8 @@ limitations under the License.
 
         scope.$on('$destroy', this._destroy.bind(this));
 
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['init', 'show', 'hide', 'destroy']);
+
         if (!attrs.swipeable) {
           this.setSwipeable(true);
         }
