@@ -25,6 +25,8 @@ limitations under the License.
     createdCallback() {
       this.classList.add('floating-menu__item');
       ModifierUtil.initModifier(this, scheme);
+
+      this._compile();
     }
 
     attributeChangedCallback(name, last, current) {
@@ -32,6 +34,13 @@ limitations under the License.
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
       }
     }
+
+    _compile() {
+      if (!this.hasAttribute('value')) {
+        this.setAttribute('value', this.innerText);
+      }
+    }
+
   }
 
   if (!window.OnsFloatingMenuItemElement) {

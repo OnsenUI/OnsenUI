@@ -57,6 +57,7 @@ limitations under the License.
       this._boundOnChange = this._onChange.bind(this);
       this._boundCancel = this._cancel.bind(this);
       this._boundOnAnimation = this._onAnimationEnd.bind(this);
+      this._boundOnItemClick = this._onItemClick.bind(this);
     }
 
     _onAnimationEnd() {
@@ -174,7 +175,7 @@ limitations under the License.
         this._positionFloatingMenu(target);
 
         // prevent ios background overscroll
-       document.querySelector('.page__content').classList.add('floating-menu__no-scroll');
+        document.querySelector('.page__content').classList.add('floating-menu__no-scroll');
         const event = new CustomEvent('postshow', {
           bubbles: true,
           detail: {floatingMenu: this}
@@ -204,6 +205,7 @@ limitations under the License.
         this.addEventListener('webkitTransitionEnd', this._boundOnAnimation);
         this.addEventListener('transitionend', this._boundOnAnimation);
 
+        document.querySelector('.page__content').classList.remove('floating-menu__no-scroll');
         const event = new CustomEvent('posthide', {
           bubbles: true,
           detail: {floatingMenu: this}
@@ -221,15 +223,31 @@ limitations under the License.
       return this._visible;
     }
 
+    _onItemClick(e) {
+      this._selected = e.target.getAttribute('value');
+      this.hide();
+      this.setAttribute('selected', this._selected);
+    }
+
+    getSelected() {
+      if (this.hasAttribute('selected')) {
+        return this.getAttribute('selected');
+      }
+      return null;
+    }
+
     attachedCallback() {
       window.addEventListener('resize', this._boundOnChange, false);
       this._mask.addEventListener('click', this._boundCancel, false);
+
+      ons._util.arrayFrom(this.childNodes).forEach(element => (element.nodeName.toLowerCase() !== 'ons-floating-menu-item') ? element.addEventListener('click', this._boundOnItemClick) : true);
     }
 
     detachedCallback() {
       window.removeEventListener('resize', this._boundOnChange, false);
       this._mask.removeEventListener('click', this._boundCancel, false);
 
+      ons._util.arrayFrom(this.childNodes).forEach(element => (element.nodeName.toLowerCase() !== 'ons-floating-menu-item') ? element.removeEventListener('click', this._boundOnItemClick) : true);
     }
 
     attributeChangedCallback(name, last, current) {
