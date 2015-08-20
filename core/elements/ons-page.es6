@@ -34,12 +34,16 @@ limitations under the License.
       ModifierUtil.initModifier(this, scheme);
       this._isShown = false;
       this._isMuted = this.hasAttribute('_muted');
+      this.eventDetail = {
+        page: this
+      };
     }
 
     attachedCallback() {
       if (!this._isMuted) {
         const event = new CustomEvent('init', {
-          bubbles: true
+          bubbles: true,
+          detail: this.eventDetail
         });
         this.dispatchEvent(event);
       }
@@ -241,7 +245,8 @@ limitations under the License.
 
         if (!this._isMuted) {
           const event = new CustomEvent('show', {
-            bubbles: true
+            bubbles: true,
+            detail: this.eventDetail
           });
           this.dispatchEvent(event);
         }
@@ -256,7 +261,8 @@ limitations under the License.
 
         if (!this._isMuted) {
           const event = new CustomEvent('hide', {
-            bubbles: true
+            bubbles: true,
+            detail: this.eventDetail
           });
           this.dispatchEvent(event);
         }
@@ -270,7 +276,8 @@ limitations under the License.
 
       if (!this._isMuted) {
         const event = new CustomEvent('destroy', {
-          bubbles: true
+          bubbles: true,
+          detail: this.eventDetail
         });
         this.dispatchEvent(event);
       }
