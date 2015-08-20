@@ -74,6 +74,7 @@
     "gulp-ng-annotate": "^0.5.2",
     "gulp-plumber": "^1.0.0",
     "gulp-protractor": "0.0.12",
+    "gulp-remember": "^0.3.0",
     "gulp-rename": "^1.2.0",
     "gulp-shell": "^0.4.0",
     "gulp-sourcemaps": "^1.5.2",

@@ -82,6 +82,7 @@ gulp.task('core', function() {
     .pipe(onlyES6 = $.filter('*.es6'))
     .pipe($.babel({modules: 'ignore'}))
     .pipe(onlyES6.restore())
+    .pipe($.remember('ons-core.js'))
     .pipe($.concat('ons-core.js'))            
     .pipe($.header('/*! ons-core.js for Onsen UI v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
     .pipe($.sourcemaps.write())
@@ -142,6 +143,7 @@ gulp.task('jshint-vanilla', function() {
   ])
     .pipe($.cached('jshint-vanilla'))
     .pipe($.jshint())
+    .pipe($.remember('jshint-vanilla'))
     .pipe($.jshint.reporter('jshint-stylish'));
 });
 
@@ -161,6 +163,7 @@ gulp.task('eslint', function() {
   ])
     .pipe($.cached('eslint'))
     .pipe($.eslint({useEslintrc: true}))
+    .pipe($.remember('eslint'))
     .pipe($.eslint.format());
 });
 
@@ -229,6 +232,7 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       .pipe(onlyES6 = $.filter('*.es6'))
       .pipe($.babel({modules: 'ignore'}))
       .pipe(onlyES6.restore())
+      .pipe($.remember('onsenui.js'))
       .pipe($.ngAnnotate({add: true, single_quotes: true}))
       .pipe($.concat('onsenui.js'))            
       .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
@@ -251,10 +255,11 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       'framework/js/*.{es6,js}'
     ])
       .pipe($.plumber())
-      .pipe($.cached('onsenui-all.js'))
+      .pipe($.cached('onsenui_all.js'))
       .pipe(onlyES6 = $.filter('*.es6'))
       .pipe($.babel({modules: 'ignore'}))
       .pipe(onlyES6.restore())
+      .pipe($.remember('onsenui_all.js'))
       .pipe($.ngAnnotate({add: true, single_quotes: true}))
       .pipe($.concat('onsenui_all.js'))
       .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
@@ -398,7 +403,7 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
 
   gulp.watch(watched, {
     debounceDelay: 300
-  }, ['prepare']);
+  }, ['jshint', 'prepare']);
 
   // for livereload
   gulp.watch([
