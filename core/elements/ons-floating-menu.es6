@@ -102,7 +102,6 @@ limitations under the License.
         }
         this._floatingMenu.style.bottom = newBottom + 'px';
         this._floatingMenu.style.left = newLeft + 'px';
-        return;
       } else {
         newTop = position.top;
         newLeft = position.left;
@@ -175,7 +174,7 @@ limitations under the License.
         this._positionFloatingMenu(target);
 
         // prevent ios background overscroll
-        document.querySelector('.page__content').classList.add('floating-menu__no-scroll');
+        util.findParent(this._currentTarget, '.page__content').classList.add('floating-menu__no-scroll');
         const event = new CustomEvent('postshow', {
           bubbles: true,
           detail: {floatingMenu: this}
@@ -205,7 +204,7 @@ limitations under the License.
         this.addEventListener('webkitTransitionEnd', this._boundOnAnimation);
         this.addEventListener('transitionend', this._boundOnAnimation);
 
-        document.querySelector('.page__content').classList.remove('floating-menu__no-scroll');
+        util.findParent(this._currentTarget, '.page__content').classList.remove('floating-menu__no-scroll');
         const event = new CustomEvent('posthide', {
           bubbles: true,
           detail: {floatingMenu: this}
