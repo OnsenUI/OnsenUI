@@ -66,6 +66,41 @@
  *   [en]Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.[/en]
  *   [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
  */
+/**
+ * @ngdoc attribute
+ * @name ons-init
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "init" event is fired.[/en]
+ *  [ja]"init"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-show
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "show" event is fired.[/en]
+ *  [ja]"show"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-hide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "hide" event is fired.[/en]
+ *  [ja]"hide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
 
 /**
  * @ngdoc method
@@ -137,6 +172,8 @@
             var page = new PageView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, page);
+            $onsen.registerEventHandlers(page, 'init show hide destroy');
+
             element.data('ons-page', page);
             $onsen.addModifierMethodsForCustomElements(page, element);
 
