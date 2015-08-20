@@ -32,6 +32,54 @@
  */
 
 /**
+ * @ngdoc event
+ * @name init
+ * @description
+ *   [en]Fired right after the page is attached.[/en]
+ *   [ja][/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.page
+ *   [en]Page object.[/en]
+ *   [ja]ページのオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name show
+ * @description
+ *   [en]Fired right after the page is shown.[/en]
+ *   [ja][/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.page
+ *   [en]Page object.[/en]
+ *   [ja]ページのオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name hide
+ * @description
+ *   [en]Fired right after the page is hidden.[/en]
+ *   [ja][/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.page
+ *   [en]Page object.[/en]
+ *   [ja]ページのオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name destroy
+ * @description
+ *   [en]Fired right before the page is destroyed.[/en]
+ *   [ja][/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.page
+ *   [en]Page object.[/en]
+ *   [ja]ページのオブジェクト。[/ja]
+ */
+
+/**
  * @ngdoc attribute
  * @name var
  * @type {String}
