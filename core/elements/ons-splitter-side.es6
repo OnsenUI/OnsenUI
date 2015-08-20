@@ -22,6 +22,87 @@ limitations under the License.
   const SPLIT_MODE = 'split';
   const COLLAPSE_MODE = 'collapse';
 
+  class CollapseDetection {
+    activate(element) {}
+    inactivate() {}
+  }
+
+  class OrientationCollapseDetection extends CollapseDetection {
+    /**
+     * @param {String} orientation
+     */
+    constructor(orientation) {
+      super();
+
+      if (orientation !== 'portrait' && orientation !== 'landscape') {
+        throw new Error(`Invalid orientation: ${orientation}`);
+      }
+
+      this._boundOnOrientationChange = this._onOrientationChange.bind(this);
+      this._targetOrientation = orientation;
+    }
+
+    activate(element) {
+      this._element = element;
+      ons.orientation.on('change', this._boundOnOrientationChange);
+      this._update(ons.orientation.isPortrait());
+    }
+
+    _onOrientationChange(info) {
+      this._update(info.isPortrait);
+    }
+
+    _update(isPortrait) {
+      if (isPortrait && this._targetOrientation === 'portrait') {
+        this._element._updateMode(COLLAPSE_MODE);
+      } else if (!isPortrait && this._targetOrientation === 'landscape') {
+        this._element._updateMode(COLLAPSE_MODE);
+      } else {
+        this._element._updateMode(SPLIT_MODE);
+      }
+    }
+
+    inactivate() {
+      this._element = null;
+      ons.orientation.off('change', this._boundOnOrientationChange);
+    }
+  }
+
+  class StaticCollapseDetection extends CollapseDetection {
+    activate(element) {
+      element._updateMode(COLLAPSE_MODE);
+    }
+  }
+
+  class MediaQueryCollapseDetection extends CollapseDetection {
+    /**
+     * @param {String} query
+     */
+    constructor(query) {
+      super();
+
+      this._mediaQueryString = query;
+      this._boundOnChange = this._onChange.bind(this);
+    }
+
+    _onChange(queryList) {
+      this._element._updateMode(queryList.matches ? COLLAPSE_MODE : SPLIT_MODE);
+    }
+
+    activate(element) {
+      this._element = element;
+      this._queryResult = window.matchMedia(this._mediaQueryString);
+      this._queryResult.addListener(this._boundOnChange);
+      this._onChange(this._queryResult);
+    }
+
+    inactivate() {
+      this._element = null;
+      this._queryResult.removeListener(this._boundOnChange);
+      this._queryResult = null;
+    }
+  }
+
   class BaseMode {
     isOpened() {}
     openMenu() {
@@ -422,6 +503,10 @@ limitations under the License.
       this._mode;
     }
 
+    _updateForAnimationOptionsAttribute() {
+      this._animationOptions = util.parseJSONObjectSafely(this.getAttribute('animation-options'), {});
+    }
+
     _getModeStrategy() {
       if (this._mode === COLLAPSE_MODE) {
         return this._collapseMode;
@@ -433,12 +518,12 @@ limitations under the License.
     createdCallback() {
       this._mode = null;
       this._page = null;
+      this._isAttached = false;
+      this._collapseStrategy = new CollapseDetection();
 
       this._collapseMode = new CollapseMode(this);
       this._splitMode = new SplitMode(this);
 
-      this._boundOnOrientationChange = this._onOrientationChange.bind(this);
-      this._boundOnResize = this._onResize.bind(this);
       this._boundHandleGesture = this._handleGesture.bind(this);
 
       this._cancelModeDetection = () => {};
@@ -450,6 +535,7 @@ limitations under the License.
       this._updateForCollapseAttribute();
       this._updateForSwipeableAttribute();
       this._updateForSwipeTargetWidthAttribute();
+      this._updateForAnimationOptionsAttribute();
     }
 
     /**
@@ -510,40 +596,25 @@ limitations under the License.
 
       const collapse = ('' + this.getAttribute('collapse')).trim();
 
-      // mode change by screen orientation
-      const considerOrientation = () => {
-      };
-
-      // mode change by media query
-      const considerMediaQuery = () => {
-        const query = window.matchMedia(collapse);
-        this._updateMode(query.matches ? COLLAPSE_MODE : SPLIT_MODE);
-
-        const listener = (queryList) => {
-          this._updateMode(queryList.matches ? COLLAPSE_MODE : SPLIT_MODE);
-        };
-
-        const register = () => query.addListener(listener);
-        const cancel = () => query.removeListener(listener);
-
-        this._updateCollapseStrategy(register, cancel);
-      };
-
-      if (collapse === 'landscape' || collapse === 'portrait') {
-        considerOrientation();
+      if (collapse === '') {
+        this._updateCollapseStrategy(new StaticCollapseDetection());
+      } else if (collapse === 'portrait' || collapse === 'landscape') {
+        this._updateCollapseStrategy(new OrientationCollapseDetection(collapse));
       } else {
-        considerMediaQuery();
+        this._updateCollapseStrategy(new MediaQueryCollapseDetection(collapse));
       }
     }
 
-    _updateCollapseStrategy(register, cancel = null) {
-      if (this._cancelModeDetection instanceof Function) {
-        this._cancelModeDetection();
+    /**
+     * @param {CollapseDetection} strategy
+     */
+    _updateCollapseStrategy(strategy) {
+      if (this._isAttached) {
+        this._collapseStrategy.inactivate();
+        strategy.activate(this);
       }
 
-      register();
-
-      this._cancelModeDetection = cancel || (() => {});
+      this._collapseStrategy = strategy;
     }
 
     /**
@@ -725,6 +796,8 @@ limitations under the License.
         this._updateForSwipeableAttribute();
       } else if (name === 'swipe-target-width') {
         this._updateForSwipeTargetWidthAttribute();
+      } else if (name === 'animation-options') {
+        this._updateForAnimationOptionsAttribute();
       }
     }
 
@@ -746,13 +819,9 @@ limitations under the License.
     }
 
     attachedCallback() {
+      this._isAttached = true;
+      this._collapseStrategy.activate(this);
       this._assertParent();
-
-      // relayout on "orientationchange"
-      ons.orientation.on('change', this._boundOnOrientationChange);
-
-      // relayout on "resize"
-      window.addEventListener('resize', this._boundOnResize);
 
       this._gestureDetector = new ons.GestureDetector(this.parentElement, {dragMinDistance: 1});
       this._updateForSwipeableAttribute();
@@ -763,44 +832,17 @@ limitations under the License.
     }
 
     detachedCallback() {
-      ons.orientation.off('change', this._boundOnOrientationChange);
-      window.removeEventListener('resize', this._boundOnResize);
+      this._isAttached = false;
+      this._collapseStrategy.inactivate();
 
       this._gestureDetector.dispose();
       this._gestureDetector = null;
+
       this._updateForSwipeableAttribute();
     }
 
     _handleGesture(event) {
       return this._getModeStrategy().handleGesture(event);
-    }
-
-    /**
-     * @param {Object} info
-     * @param {Boolean} info.isPortrait
-     */
-    _onOrientationChange(info) {
-      const collapse = ('' + this.getAttribute('collapse')).trim();
-
-      if (collapse === 'portrait') {
-        if (info.isPortrait) {
-          this._updateMode(COLLAPSE_MODE);
-        } else {
-          this._updateMode(SPLIT_MODE);
-        }
-      }
-
-      if (collapse === 'landscape') {
-        if (info.isPortrait) {
-          this._updateMode(SPLIT_MODE);
-        } else {
-          this._updateMode(COLLAPSE_MODE);
-        }
-      }
-    }
-
-    _onResize() {
-      // TODO
     }
 
   }

@@ -136,4 +136,21 @@ limitations under the License.
     return result;
   };
 
+  /**
+   * @param {String} jsonString
+   * @param {Object} [failSafe]
+   * @return {Object}
+   */
+  util.parseJSONObjectSafely = (jsonString, failSafe = {}) => {
+    try {
+      const result = JSON.parse('' + jsonString);
+      if (typeof result === 'object' && result !== null) {
+        return result;
+      }
+    } catch(e) {
+      return failSafe;
+    }
+    return failSafe;
+  };
+
 })(window.ons = window.ons || {});
