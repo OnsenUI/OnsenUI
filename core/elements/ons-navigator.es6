@@ -318,8 +318,7 @@ limitations under the License.
           this._compilePageHook.freeze();
 
           if (!this.getAttribute('page')) {
-            const html = (this._initialHTML || '').match(/^\s*<ons-page/) ? this._initialHTML : '<ons-page>' + this._initialHTML + '</ons-page>';
-            const element = this._createPageElement(html);
+            const element = this._createPageElement(this._initialHTML || '');
 
             this._pushPageDOM('', element, {}, function() {});
           } else {
@@ -506,7 +505,7 @@ limitations under the License.
     }
 
     _createPageElement(templateHTML) {
-      const pageElement = util.createElement(ons._internal.normalizePageHTML('' + templateHTML));
+      const pageElement = util.createElement(ons._internal.normalizePageHTML(templateHTML));
 
       if (pageElement.nodeName.toLowerCase() !== 'ons-page') {
         throw new Error('You must supply an "ons-page" element to "ons-navigator".');
