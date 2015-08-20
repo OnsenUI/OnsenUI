@@ -1,12 +1,10 @@
 # Onsen UI 
 
-[![Circle CI](https://circleci.com/gh/OnsenUI/OnsenUI.svg?style=svg)](https://circleci.com/gh/OnsenUI/OnsenUI) 
-
-[![Coverage Status](https://coveralls.io/repos/OnsenUI/OnsenUI/badge.svg?branch=master&service=github)](https://coveralls.io/github/OnsenUI/OnsenUI?branch=master)
-
+[![Join us on Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/OnsenUI/OnsenUI)
+[![StackOverflow](http://img.shields.io/badge/stackoverflow-onsen--ui-FF412D.svg )]( http://stackoverflow.com/questions/tagged/onsen-ui)
 [![TypeScript definitions on DefinitelyTyped](http://definitelytyped.org/badges/standard-flat.svg)](http://definitelytyped.org)
-
-[![Join us on Gitter](https://img.shields.io/badge/gitter-join%20chat-1dce73.svg)](https://gitter.im/OnsenUI/OnsenUI)
+[![Circle CI](https://circleci.com/gh/OnsenUI/OnsenUI.svg?style=svg)](https://circleci.com/gh/OnsenUI/OnsenUI) 
+[![Coverage Status](https://coveralls.io/repos/OnsenUI/OnsenUI/badge.svg?branch=master&service=github)](https://coveralls.io/github/OnsenUI/OnsenUI?branch=master)
 
 The best place to start with Onsen UI is our [Getting Started](http://onsen.io/guide/getting_started.html) page.
 
