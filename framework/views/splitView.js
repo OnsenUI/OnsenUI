@@ -67,6 +67,8 @@ limitations under the License.
         }.bind(this), 1000 / 60 * 2);
 
         scope.$on('$destroy', this._destroy.bind(this));
+
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['init', 'show', 'hide', 'destroy']);
       },
 
       /**
