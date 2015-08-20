@@ -43,7 +43,7 @@ limitations under the License.
           this._boundLinkPage = element[0]._linkPageHook.add(this._linkPage.bind(this));
         }.bind(this));
 
-        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['reactive', 'postchange', 'prechange']);
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['reactive', 'postchange', 'prechange', 'init', 'show', 'hide', 'destroy']);
       },
 
       _compilePage: function(next, pageElement) {
