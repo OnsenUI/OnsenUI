@@ -125,12 +125,10 @@ limitations under the License.
     }
 
     return ons._internal.getPageHTMLAsync(page).then(html => {
+      html = html.match(/<ons-popover/gi) ? `<div>${html}</div>` : `<ons-popover>${html}</ons-popover>`;
       const div = ons._util.createElement('<div>' + html + '</div>');
 
       const popover = div.querySelector('ons-popover');
-      if (!popover) {
-        throw new Error(`<ons-popover> element is not provided on "${page}" page.`);
-      }
       CustomElements.upgrade(popover);
       document.body.appendChild(popover);
 
@@ -167,9 +165,6 @@ limitations under the License.
       const div = ons._util.createElement('<div>' + html + '</div>');
 
       const dialog = div.querySelector('ons-dialog');
-      if (!dialog) {
-        throw new Error(`<ons-dialog> element is not provided on "${page}" page.`);
-      }
       CustomElements.upgrade(dialog);
       document.body.appendChild(dialog);
 
@@ -206,9 +201,6 @@ limitations under the License.
       const div = ons._util.createElement('<div>' + html + '</div>');
 
       const alertDialog = div.querySelector('ons-alert-dialog');
-      if (!alertDialog) {
-        throw new Error(`<ons-alert-dialog> element is not provided on "${page}" page.`);
-      }
       CustomElements.upgrade(alertDialog);
       document.body.appendChild(alertDialog);
 
@@ -226,7 +218,7 @@ limitations under the License.
    * @param {Function} [options.link]
    * @return {Promise}
    */
-  ons.createAlertDialogOriginal = ons._createAlertDialogOriginal;
+  ons.createAlertDialog = ons._createAlertDialogOriginal;
 
   /**
    * @param {String} page
