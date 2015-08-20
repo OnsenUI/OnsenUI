@@ -171,7 +171,6 @@ describe('OnsPageElement', () => {
       var spy = chai.spy();
       document.addEventListener('show', spy);
       document.body.appendChild(element);
-      element._show();
       expect(spy).to.have.been.called.once;
     });
   });

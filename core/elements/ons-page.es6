@@ -236,7 +236,7 @@ limitations under the License.
     }
 
     _show() {
-      if (!this.isShown) {
+      if (!this.isShown && ons._util.isAttached(this)) {
         this.isShown = true;
 
         if (!this._isMuted) {
