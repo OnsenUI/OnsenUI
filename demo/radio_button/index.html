@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Radio Button | Onsen UI</title>  
@@ -10,6 +10,9 @@
   <script src="../../build/js/angular/angular.js"></script>  
   <script src="../../build/js/onsenui.js"></script>    
   <script src="../app.js"></script>  
+  <script>
+    ons.bootstrap();
+  </script>
   
 </head>
 
@@ -46,8 +49,35 @@
           </label>
         </ons-list-item>
       </ons-list>
+      <br>
+      <ons-list>
+        <ons-list-item modifier="tappable">
+          <label class="radio-button radio-button--material" style="width:100%; height: 24px; display: block; margin: 0; padding: 10px 0;">
+            <input type="radio" name="level2" ng-model="selectedLevel2" value="easy">
+            <div class="radio-button__checkmark"></div>
+            Easy
+          </label>
+        </ons-list-item>
+
+        <ons-list-item modifier="tappable">
+          <label class="radio-button radio-button--material" style="width:100%; display: block; margin: 0; padding: 10px 0;">
+            <input type="radio" name="level2" ng-model="selectedLevel2" value="medium">
+            <div class="radio-button__checkmark"></div>
+            Medium
+          </label>
+        </ons-list-item>
+          
+        <ons-list-item modifier="tappable">
+          <label class="radio-button radio-button--material" style="width:100%; display: block; margin: 0; padding: 10px 0;">
+            <input type="radio" name="level2" ng-model="selectedLevel2" value="hard">
+            <div class="radio-button__checkmark"></div>
+            Hard
+          </label>
+        </ons-list-item>
+      </ons-list>
 
       <h3>{{selectedLevel}}</h3>
+      <h3>{{selectedLevel2}}</h3>
     </div>
   </ons-navigator>
   
