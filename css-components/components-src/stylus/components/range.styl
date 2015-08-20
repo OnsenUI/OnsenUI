@@ -140,3 +140,64 @@ range--disabled()
 .range:disabled
   range--disabled()
 
+
+/*! topdoc
+  name: Material-like Range
+  use: Range
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <input type="range" class="range range--material">
+    <input type="range" class="range range--material" disabled>
+*/
+
+var-material-range-track-height = 2px
+var-material-range-thumb-width  = 18px
+var-material-range-highlight-color-active = $second-highlight-color
+
+.range--material
+  background-image linear-gradient(#ddd, #ddd)
+  background-position center
+  background-size 100% 3px
+
+.range--material:focus
+  background-image: linear-gradient(#888, #888);
+
+.range--material::-webkit-slider-thumb
+  border 3px solid #dddddd
+  height var-material-range-thumb-width
+  width var-material-range-thumb-width
+  border-radius 100%
+  border-color var-material-range-highlight-color-active
+  background-color var-material-range-highlight-color-active
+  margin-top -1px
+
+.range--material::-moz-range-thumb
+  border 3px solid #dddddd
+  height var-material-range-thumb-width
+  width var-material-range-thumb-width
+  border-radius 100%
+  border-color var-material-range-highlight-color-active
+  background-color var-material-range-highlight-color-active
+
+.range--material:focus::-webkit-slider-thumb
+  border-color var-material-range-highlight-color-active
+  background-color var-material-range-highlight-color-active
+
+.range--material:focus::-moz-range-thumb
+  border-color var-material-range-highlight-color-active
+  background-color var-material-range-highlight-color-active
+
+.range--material::-moz-range-thumb:before
+  top 5px
+  height 3px
+  left -1025px
+  background-color var-material-range-highlight-color-active
+
+.range--material::-webkit-slider-thumb:before
+  top 5px
+  height 3px
+  left -1025px
+  background-color var-material-range-highlight-color-active
