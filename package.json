@@ -55,7 +55,7 @@
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-babel": "^5.1.0",
-    "gulp-cached": "^1.0.2",
+    "gulp-cached": "^1.1.0",
     "gulp-chmod": "^1.2.0",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.5.2",

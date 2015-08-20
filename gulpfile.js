@@ -76,6 +76,7 @@ gulp.task('core', function() {
     'core/elements/*.{es6,js}',
     '!core/**/*.spec.{es6,js}',
   ])
+    .pipe($.cached('ons-core.js'))
     .pipe($.sourcemaps.init())
     .pipe($.plumber())
     .pipe(onlyES6 = $.filter('*.es6'))
@@ -139,7 +140,7 @@ gulp.task('jshint-vanilla', function() {
     'framework/elements/*.js',
     'framework/views/*.js'
   ])
-    .pipe($.cached('js'))
+    .pipe($.cached('jshint-vanilla'))
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'));
 });
@@ -158,7 +159,7 @@ gulp.task('eslint', function() {
     'framework/elements/*.es6',
     'framework/views/*.es6'
   ])
-    .pipe($.cached('es6'))
+    .pipe($.cached('eslint'))
     .pipe($.eslint({useEslintrc: true}))
     .pipe($.eslint.format());
 });
@@ -224,6 +225,7 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       'framework/js/*.{es6,js}'
     ])
       .pipe($.plumber())
+      .pipe($.cached('onsenui.js'))
       .pipe(onlyES6 = $.filter('*.es6'))
       .pipe($.babel({modules: 'ignore'}))
       .pipe(onlyES6.restore())
@@ -249,6 +251,7 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       'framework/js/*.{es6,js}'
     ])
       .pipe($.plumber())
+      .pipe($.cached('onsenui-all.js'))
       .pipe(onlyES6 = $.filter('*.es6'))
       .pipe($.babel({modules: 'ignore'}))
       .pipe(onlyES6.restore())
@@ -394,8 +397,8 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   }
 
   gulp.watch(watched, {
-    debounceDelay: 2000
-  }, ['prepare', 'jshint']);
+    debounceDelay: 300
+  }, ['prepare']);
 
   // for livereload
   gulp.watch([
