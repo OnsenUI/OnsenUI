@@ -37,6 +37,8 @@ var-border--checkmark--noborder = 3px solid var-checkbox-border-color
 var-checkbox-border-radius = 16px
 var-checkmark-border-radius = 0px
 
+var-material-checkbox-size = 20px
+
 
 /*! topdoc
   name: Checkbox
@@ -249,3 +251,68 @@ checkbox--after()
   background transparent
   box-shadow var-box-shadow
   border none
+
+/*! topdoc
+  name: Material-like Checkbox
+  use: Checkbox
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="checkbox checkbox--material">
+      <input type="checkbox">
+      <div class="checkbox__checkmark"></div>
+      OFF
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" checked="checked">
+      <div class="checkbox__checkmark"></div>
+      ON
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" checked="checked" disabled>
+      <div class="checkbox__checkmark"></div>
+      ON
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" disabled>
+      <div class="checkbox__checkmark"></div>
+      Disabled
+    </label>
+*/
+
+.checkbox--material
+  line-height var-material-checkbox-size
+  
+.checkbox--material > .checkbox__checkmark
+  width var-material-checkbox-size
+  height var-material-checkbox-size
+
+.checkbox--material > .checkbox__checkmark:before
+  border-radius 2px
+  width var-material-checkbox-size
+  height var-material-checkbox-size
+
+.checkbox--material > .checkbox__checkmark:before
+  border 3px solid rgba(0,0,0, 0.5)
+
+.checkbox--material > input[type="checkbox"]:checked + .checkbox__checkmark:before
+  border none
+
+.checkbox--material > input[type="checkbox"] + .checkbox__checkmark:after
+  transition transform 0.3s ease
+  top 5px
+  left 3px
+  transform scale(0) rotate(-45deg)
+
+.checkbox--material > input[type="checkbox"]:checked + .checkbox__checkmark:after
+  top 5px
+  left 3px
+  transform scale(1) rotate(-45deg)
+
+.checkbox--material > input[type="checkbox"]:disabled:checked + .checkbox__checkmark:before
+  background-color rgba(0,0,0,1)
+  
+.checkbox--material > input[type="checkbox"]:disabled:checked:active + .checkbox__checkmark:before
+  background-color rgba(0,0,0,1)
+

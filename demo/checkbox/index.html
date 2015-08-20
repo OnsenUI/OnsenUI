@@ -46,6 +46,26 @@
       </ons-list-item>
     </ons-list>
 
+    <ons-list>      
+      <ons-list-header>Checkbox</ons-list-header>
+      <ons-list-item modifier="tappable">
+        <label class="checkbox checkbox--material" style="width: 100%; padding: 10px 0; margin: 0;">
+          <input type="checkbox" ng-model="c">
+          <div class="checkbox__checkmark"></div>
+          {{c ? 'YES' : 'NO'}}
+        </label>
+      </ons-list-item>
+
+      <ons-list-item modifier="tappable">
+        <label class="checkbox checkbox--material" style="width: 100%; padding: 10px 0; margin: 0;">
+          <input type="checkbox" ng-model="d" disabled>
+          <div class="checkbox__checkmark"></div>
+          {{d ? 'YES' : 'NO'}}
+        </label>
+      </ons-list-item>
+    </ons-list>
+
+
   </ons-page>
 
 </body>
