@@ -61,6 +61,7 @@ var-dialog-background-color = $dialog-background-color
   name: Material-like Dialog
   use: Dialog
   markup:
+    <div class="dialog-mask dialog--material-mask"></div>
     <div class="dialog dialog--material">
       <div class="page">
         <p style="text-align:center;margin-top:40px;opacity:0.4;">Content</p>
@@ -72,3 +73,6 @@ var-dialog-background-color = $dialog-background-color
   shadow-3()
   border-radius 0px
   text-align left
+
+.dialog-mask
+  background-color transparent
