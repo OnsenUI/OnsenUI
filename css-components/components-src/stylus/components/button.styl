@@ -307,3 +307,39 @@ button--active()
 .button--large--cta:disabled,
 .button--large--cta[disabled]
   button--disabled()
+
+/*! topdoc
+  name: Material-like Button
+  class: button--material
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="button button--material">BUTTON</button>
+    <button class="button button--material" disabled>DISABLED</button>
+*/
+
+.button--material
+  button()
+  shadow-1()
+  min-height 36px
+  line-height 36px
+  padding 0px 16px
+  transition box-shadow 0.2s ease
+  text-align center
+
+.button--material:active
+  shadow-3()
+  backgorund-color var-button-background-color
+  opacity 1
+
+.button--material:focus
+  button--focus()
+
+.button--material:disabled,
+.button--material[disabled]
+  background #eaeaea
+  color #a8a8a8
+  opacity 1
+  shadow-0()

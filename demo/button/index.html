@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Button Demo | Onsen UI</title>  
@@ -11,6 +11,9 @@
   <script src="../../build/js/angular/angular.js"></script>    
   <script src="../../build/js/onsenui.js"></script>    
   <script src="../app.js"></script>  
+  <script>
+    ons.bootstrap();
+  </script>
   
 </head>
 
@@ -23,6 +26,10 @@
 
     <section style="padding: 8px">
       <p></p>
+      <ons-button modifier="material">BUTTON</ons-button>
+      <ons-button modifier="material">BUTTON</ons-button>
+      <ons-button modifier="material" disabled>BUTTON</ons-button>
+
       <ons-button modifier="light">light</ons-button>
       <ons-button modifier="outline">outline</ons-button>
       <ons-button modifier="quiet">quiet</ons-button>
