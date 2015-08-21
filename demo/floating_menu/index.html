@@ -19,6 +19,8 @@
           });
         });
 
+        $scope.hogo = 'Angular';
+
         $scope.show = function(e) {
           $scope.floatingMenu.show(e);
         }
@@ -109,7 +111,7 @@
     <script type="text/ons-template" id="floatingMenu.html">
       <ons-floating-menu cancelable>
         <div style="text-align: center; opacity: 0.5;">
-          <ons-floating-menu-item>Maps</ons-floating-menu-item>
+          <ons-floating-menu-item>{{hogo}}</ons-floating-menu-item>
           <ons-floating-menu-item>Apps</ons-floating-menu-item>
           <ons-floating-menu-item>Flights</ons-floating-menu-item>
           <ons-floating-menu-item>Maps</ons-floating-menu-item>

@@ -458,6 +458,28 @@ limitations under the License.
 
     /**
      * @param {String} page
+     * @param {Object} [options]
+     * @param {Object} [options.parentScope]
+     * @return {Promise}
+     */
+    ons.createFloatingMenu = function(page, options) {
+      options = options || {};
+
+      options.link = function(element) {
+        if (options.parentScope) {
+          ons.$compile(angular.element(element))(options.parentScope.$new());
+        } else {
+          ons.compile(element);
+        }
+      };
+
+      return ons._createFloatingMenuOriginal(page, options).then(function(floatingMenu) {
+        return angular.element(floatingMenu).data('ons-floating-menu');
+      });
+    };
+
+    /**
+     * @param {String} page
      */
     ons.resolveLoadingPlaceholder = function(page) {
       return ons._resolveLoadingPlaceholderOriginal(page, function(element, done) {
