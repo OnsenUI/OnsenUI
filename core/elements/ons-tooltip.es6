@@ -172,17 +172,13 @@ limitations under the License.
     }
 
     _hasEvent(event) {
-      if (this.hasAttribute('on')) {
-        const events = this.getAttribute('on').split(' ');
-        for (var i = 0; i < events.length; i++) {
-          if (event === events[i]) {
-            return true;
-          }
+      const events = this.hasAttribute('on') ? this.getAttribute('on').split(/\s+/) : 'hover focus touch'.split(/\s+/);
+      for (var i = 0; i < events.length; i++) {
+        if (event === events[i]) {
+          return true;
         }
-        return false;
-      } else {
-        this.setAttribute('on', 'hover focus touch');
       }
+      return false;
     }
 
     attachedCallback() {
