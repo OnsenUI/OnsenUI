@@ -320,6 +320,8 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy');
 
+        this._clearDerivingEvents();
+
         this._element = null;
         this._scope = null;
       }
