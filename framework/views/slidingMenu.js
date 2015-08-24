@@ -283,6 +283,8 @@ limitations under the License.
       _destroy: function() {
         this.emit('destroy');
 
+        this._clearDerivingEvents();
+
         this._deviceBackButtonHandler.destroy();
         window.removeEventListener('resize', this._boundOnWindowResize);
 
