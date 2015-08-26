@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 (function() {
-  'use strict;';
+  'use strict';
 
   var module = angular.module('onsen');
 
