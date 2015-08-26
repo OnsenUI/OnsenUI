@@ -36,7 +36,7 @@
  * @name init
  * @description
  *   [en]Fired right after the page is attached.[/en]
- *   [ja][/ja]
+ *   [ja]ページがアタッチされた後に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.page
  *   [en]Page object.[/en]
@@ -48,7 +48,7 @@
  * @name show
  * @description
  *   [en]Fired right after the page is shown.[/en]
- *   [ja][/ja]
+ *   [ja]ページが表示された後に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.page
  *   [en]Page object.[/en]
@@ -60,7 +60,7 @@
  * @name hide
  * @description
  *   [en]Fired right after the page is hidden.[/en]
- *   [ja][/ja]
+ *   [ja]ページが隠れた後に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.page
  *   [en]Page object.[/en]
@@ -72,7 +72,7 @@
  * @name destroy
  * @description
  *   [en]Fired right before the page is destroyed.[/en]
- *   [ja][/ja]
+ *   [ja]ページが破棄される前に発火します。[/ja]
  * @param {Object} event [en]Event object.[/en]
  * @param {Object} event.page
  *   [en]Page object.[/en]
