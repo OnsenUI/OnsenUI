@@ -225,7 +225,7 @@ limitations under the License.
             animators: SlidingMenuView._animatorDict,
             baseClass: SlidingMenuAnimator,
             baseClassName: 'SlidingMenuAnimator',
-            defaultAnimation: attrs.animation,
+            defaultAnimation: attrs.type,
             defaultAnimationOptions: $parse(attrs.animationOptions)()
           });
           this._animator = animationChooser.newAnimator();
