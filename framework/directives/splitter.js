@@ -64,7 +64,7 @@
  *   [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Open right ons-splitter-side menu on collapse mode.[/en]
- *   [ja]右のcollapseモードになっているons-splitterside要素を開きます。[/ja]
+ *   [ja]右のcollapseモードになっているons-splitter-side要素を開きます。[/ja]
  */
 
 /**
@@ -78,7 +78,7 @@
  *   [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Open left ons-splitter-side menu on collapse mode.[/en]
- *   [ja]左のcollapseモードになっているons-splitterside要素を開きます。[/ja]
+ *   [ja]左のcollapseモードになっているons-splitter-side要素を開きます。[/ja]
  */
  
 /**
@@ -92,7 +92,7 @@
  *   [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Close right ons-splitter-side menu on collapse mode.[/en]
- *   [ja]右のcollapseモードになっているons-splitterside要素を閉じます。[/ja]
+ *   [ja]右のcollapseモードになっているons-splitter-side要素を閉じます。[/ja]
  */
 
 /**
@@ -106,7 +106,7 @@
  *   [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Close left ons-splitter-side menu on collapse mode.[/en]
- *   [ja]左のcollapseモードになっているons-splitterside要素を閉じます。[/ja]
+ *   [ja]左のcollapseモードになっているons-splitter-side要素を閉じます。[/ja]
  */
 
 /**
