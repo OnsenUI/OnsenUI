@@ -227,11 +227,9 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       'framework/js/*.{es6,js}'
     ])
       .pipe($.plumber())
-      .pipe($.cached('onsenui.js'))
       .pipe(onlyES6 = $.filter('*.es6'))
       .pipe($.babel({modules: 'ignore'}))
       .pipe(onlyES6.restore())
-      .pipe($.remember('onsenui.js'))
       .pipe($.ngAnnotate({add: true, single_quotes: true}))
       .pipe($.concat('onsenui.js'))            
       .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
@@ -252,11 +250,9 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       'framework/js/*.{es6,js}'
     ])
       .pipe($.plumber())
-      .pipe($.cached('onsenui_all.js'))
       .pipe(onlyES6 = $.filter('*.es6'))
       .pipe($.babel({modules: 'ignore'}))
       .pipe(onlyES6.restore())
-      .pipe($.remember('onsenui_all.js'))
       .pipe($.ngAnnotate({add: true, single_quotes: true}))
       .pipe($.concat('onsenui_all.js'))
       .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
