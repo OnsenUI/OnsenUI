@@ -17,9 +17,9 @@ limitations under the License.
 (function() {
   'use strict';
 
-  angular.module('onsen').factory('Splitter', function($onsen) {
+  angular.module('onsen').factory('SplitterSide', function($onsen) {
 
-    var Splitter = Class.extend({
+    var SplitterSide = Class.extend({
 
       init: function(scope, element, attrs) {
         this._element = element;
@@ -27,12 +27,23 @@ limitations under the License.
         this._attrs = attrs;
 
         this._clearDerivingMethods = $onsen.deriveMethods(this, this._element[0], [
-          'getDeviceBackButtonHandler',
-          'show',
-          'hide',
-          'isShown',
-          'destroy'
+          'isSwipeable',
+          'getCurrentMode',
+          'isOpened',
+          'open',
+          'close',
+          'toggle',
+          'load',
         ]);
+
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], [
+          'modechange', 'preopen', 'preclose', 'postopen', 'postclose'
+        ], function(detail) {
+          if (detail.side) {
+            detail.side = this;
+          }
+          return detail;
+        }.bind(this));
 
         scope.$on('$destroy', this._destroy.bind(this));
       },
@@ -41,13 +52,14 @@ limitations under the License.
         this.emit('destroy');
 
         this._clearDerivingMethods();
+        this._clearDerivingEvents();
 
         this._element = this._scope = this._attrs = null;
       }
     });
 
-    MicroEvent.mixin(Splitter);
+    MicroEvent.mixin(SplitterSide);
 
-    return Splitter;
+    return SplitterSide;
   });
 })();

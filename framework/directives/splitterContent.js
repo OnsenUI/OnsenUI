@@ -46,3 +46,35 @@
  *   [en]Show the page specified in pageUrl in the right section[/en]
  *   [ja]指定したURLをメインページを読み込みます。[/ja]
  */
+
+(function() {
+  'use strict';
+
+  angular.module('onsen').directive('onsSplitterContent', function($compile, SplitterContent, $onsen) {
+    return {
+      restrict: 'E',
+
+      compile: function(element, attrs) {
+        CustomElements.upgrade(element[0]);
+
+        return function(scope, element, attrs) {
+          CustomElements.upgrade(element[0]);
+
+          var view = new SplitterContent(scope, element, attrs);
+
+          $onsen.declareVarAttribute(attrs, view);
+          $onsen.registerEventHandlers(view, 'destroy');
+
+          element.data('ons-splitter-content', view);
+
+          scope.$on('$destroy', function() {
+            view._events = undefined;
+            element.data('ons-splitter-content', undefined);
+          });
+
+          $onsen.fireComponentEvent(element[0], 'init');
+        };
+      }
+    };
+  });
+})();

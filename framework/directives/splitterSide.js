@@ -24,6 +24,15 @@
  * @description
  *   [en]Fired just after the view's mode change.[/en]
  *   [ja]この要素のモードが変化した際に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.side
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
+ * @param {String} event.mode
+ *   [en]Current mode name. "collapse" or "split".[/en]
+ *   [ja]現在のモードを返します。[/ja]
  */
 
 /**
@@ -38,6 +47,9 @@
  * @param {Function} event.cancel
  *   [en]Call to cancel opening sliding-menu.[/en]
  *   [ja]スライディングメニューが開くのをキャンセルします。[/ja]
+ * @param {Object} event.side
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  */
 
 /**
@@ -49,6 +61,9 @@
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.side
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  */
 
 /**
@@ -60,6 +75,9 @@
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.side
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {Function} event.cancel
  *   [en]Call to cancel opening sliding-menu.[/en]
  *   [ja]スライディングメニューが閉じるのをキャンセルします。[/ja]
@@ -74,6 +92,9 @@
  * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.side
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
  */
 
 /**
@@ -240,3 +261,35 @@
  *   [en]Get current view's mode on the ons-splitter-side. Possible values are "collapse" or "split".[/en]
  *   [ja]このons-splitter-side要素の現在のモードを返します。"split"かもしくは"collapse"のどちらかです。[/ja]
  */
+
+(function() {
+  'use strict';
+
+  angular.module('onsen').directive('onsSplitterSide', function($compile, SplitterSide, $onsen) {
+    return {
+      restrict: 'E',
+
+      compile: function(element, attrs) {
+        CustomElements.upgrade(element[0]);
+
+        return function(scope, element, attrs) {
+          CustomElements.upgrade(element[0]);
+
+          var view = new SplitterSide(scope, element, attrs);
+
+          $onsen.declareVarAttribute(attrs, view);
+          $onsen.registerEventHandlers(view, 'destroy');
+
+          element.data('ons-splitter-side', view);
+
+          scope.$on('$destroy', function() {
+            view._events = undefined;
+            element.data('ons-splitter-side', undefined);
+          });
+
+          $onsen.fireComponentEvent(element[0], 'init');
+        };
+      }
+    };
+  });
+})();

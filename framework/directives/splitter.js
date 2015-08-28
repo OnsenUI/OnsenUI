@@ -22,20 +22,6 @@
  */
 
 /**
- * @ngdoc event
- * @name modechange
- * @description
- *   [en]Fired just after the view's mode change.[/en]
- *   [ja]状態が変化した際に発火します。[/ja]
- * @param {Object} event
- *   [en]Event object.[/en]
- *   [ja]イベントオブジェクト。[/ja]
- * @param {Object} event.splitter
- *   [en]Splitter view object.[/en]
- *   [ja]イベントが発火したSplitterオブジェクトです。[/ja]
- */
-
-/**
  * @ngdoc attribute
  * @name var
  * @type {String}
@@ -210,11 +196,8 @@
   'use strict';
 
   angular.module('onsen').directive('onsSplitter', function($compile, Splitter, $onsen) {
-
     return {
       restrict: 'E',
-      replace: false,
-      transclude: false,
       scope: true,
 
       compile: function(element, attrs) {
@@ -226,7 +209,7 @@
           var splitter = new Splitter(scope, element, attrs);
 
           $onsen.declareVarAttribute(attrs, splitter);
-          $onsen.registerEventHandlers(splitter, 'update presplit precollapse postsplit postcollapse destroy');
+          $onsen.registerEventHandlers(splitter, 'destroy');
 
           element.data('ons-splitter', splitter);
 
