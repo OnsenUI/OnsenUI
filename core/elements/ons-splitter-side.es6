@@ -133,6 +133,7 @@ limitations under the License.
     layout() {
       const element = this._element;
       element.style.width = element._getWidth();
+      element.style.zIndex = 4;
 
       if (element._isLeftSide()) {
         element.style.left = '0';
@@ -153,6 +154,7 @@ limitations under the License.
       element.style.left = '';
       element.style.right = '';
       element.style.width = '';
+      element.style.zIndex = '';
     }
   }
 
@@ -164,6 +166,10 @@ limitations under the License.
 
     static get OPENED_STATE() {
       return 'opened';
+    }
+
+    get _animator() {
+      return this._element._getAnimator();
     }
 
     constructor(element) {
@@ -239,23 +245,7 @@ limitations under the License.
       const width = this._element._getWidthInPixel();
       const distance = startEvent.isOpened ? deltaDistance + width : deltaDistance;
 
-      this._translate(Math.min(width, distance));
-    }
-
-    /**
-     * @param {Number} distance
-     */
-    _translate(distance) {
-
-      const element = this._element;
-
-      if (element._isLeftSide()) {
-        element.style.transform = 'translateX(' + distance + 'px)';
-      } else {
-        element.style.transform = 'translateX(-' + distance + 'px)';
-      }
-
-      element.style.transition = '';
+      this._animator.translate(Math.max(0, Math.min(width, distance)));
     }
 
     _onDragEnd(event) {
@@ -282,67 +272,25 @@ limitations under the License.
     }
 
     layout() {
-      const element = this._element;
-      const mask = util.findChild(element.parentElement, 'ons-splitter-mask');
-
-      element.style.width = element._getWidth();
-
       if (this._state === CollapseMode.CLOSED_STATE) {
-
-        animit(element)
-          .queue({transform: 'translateX(0%)'})
-          .play();
-
-        mask.style.display = 'none';
-
+        this._animator.layoutOnClose();
       } else if (this._state === CollapseMode.OPENED_STATE) {
-
-        animit(element)
-          .queue({transform: element._isLeftSide() ? 'translateX(100%)' : 'translateX(-100%)'})
-          .play();
-
-        mask.style.display = 'block';
+        this._animator.layoutOnOpen();
       } else {
         throw new Error('Invalid state');
       }
-
     }
 
     // enter collapse mode
     enterMode() {
-      this._element.style.zIndex = 3;
-      this._element.style.display = 'block';
-
-      if (this._element._isLeftSide()) {
-        this._element.style.left = 'auto';
-        this._element.style.right = '100%';
-      } else {
-        this._element.style.left = '100%';
-        this._element.style.right = 'auto';
-      }
+      this._animator.activate(this._element._getContentElement(), this._element, this._element._getMaskElement());
 
       this.layout();
     }
 
     // exit collapse mode
     exitMode() {
-      this._clearLayout();
-    }
-
-    _clearLayout() {
-      const element = this._element;
-      const mask = util.findChild(element.parentElement, 'ons-splitter-mask');
-
-      element.style.zIndex = '';
-      element.style.right = '';
-      element.style.left = '';
-      element.style.transform = this._element.style.webkitTransform = '';
-      element.style.transition = this._element.style.webkitTransition = '';
-      element.style.width = '';
-
-      if (this._state === CollapseMode.OPENED_STATE) {
-        mask.style.display = 'none';
-      }
+      this._animator.inactivate();
     }
 
     /**
@@ -375,85 +323,13 @@ limitations under the License.
         done();
       } else {
         this._state = CollapseMode.OPENED_STATE;
-        this._runOpenAnimation(() => {
+        this._animator.open(() => {
           this.layout();
           done();
         });
       }
 
       return true;
-    }
-
-    /**
-     * @param {Function} done
-     */
-    _runOpenAnimation(done) {
-      const tranform = this._element._isLeftSide() ? 'translate3d(100%, 0px, 0px)' : 'translate3d(-100%, 0px, 0px)';
-      const mask = this._element.parentElement._getMaskElement();
-
-      animit.runAll(
-        animit(this._element)
-          .queue({
-            transform: 'translate3d(0px, 0px, 0px)'
-          })
-          .queue({
-            transform: tranform
-          }, {
-            duration: 0.3,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .queue(callback => {
-            callback();
-            this._element.style.webkitTransition = '';
-            done();
-          }),
-
-        animit(mask)
-          .queue({
-            display: 'block',
-            opacity: '0',
-            delay: 0
-          })
-          .queue({
-            opacity: '1'
-          }, {
-            duration: 0.3,
-            timing: 'linear',
-          })
-      );
-    }
-
-    /**
-     * @param {Function} done
-     */
-    _runCloseAnimation(done) {
-      const mask = this._element.parentElement._getMaskElement();
-
-      animit.runAll(
-        animit(this._element)
-          .queue({
-            transform: 'translate3d(0px, 0px, 0px)'
-          }, {
-            duration: 0.3,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .queue(callback => {
-            callback();
-            this._element.style.webkitTransition = '';
-            done();
-          }),
-
-        animit(mask)
-          .queue({
-            opacity: '0'
-          }, {
-            duration: 0.3,
-            timing: 'linear',
-          })
-          .queue({
-            display: 'none'
-          })
-      );
     }
 
     /**
@@ -483,7 +359,7 @@ limitations under the License.
         done();
       } else {
         this._state = CollapseMode.CLOSED_STATE;
-        this._runCloseAnimation(() => {
+        this._animator.close(() => {
           this.layout();
           done();
         });
@@ -505,6 +381,14 @@ limitations under the License.
 
     _updateForAnimationOptionsAttribute() {
       this._animationOptions = util.parseJSONObjectSafely(this.getAttribute('animation-options'), {});
+    }
+
+    _getMaskElement() {
+      return util.findChild(this.parentElement, 'ons-splitter-mask');
+    }
+
+    _getContentElement() {
+      return util.findChild(this.parentElement, 'ons-splitter-content');
     }
 
     _getModeStrategy() {
@@ -530,12 +414,17 @@ limitations under the License.
 
       this._updateMode(SPLIT_MODE);
 
+      this._updateForAnimationAttribute();
       this._updateForWidthAttribute();
       this._updateForSideAttribute();
       this._updateForCollapseAttribute();
       this._updateForSwipeableAttribute();
       this._updateForSwipeTargetWidthAttribute();
       this._updateForAnimationOptionsAttribute();
+    }
+
+    _getAnimator() {
+      return this._animator;
     }
 
     /**
@@ -798,6 +687,22 @@ limitations under the License.
         this._updateForSwipeTargetWidthAttribute();
       } else if (name === 'animation-options') {
         this._updateForAnimationOptionsAttribute();
+      } else if (name === 'animation') {
+        this._updateForAnimationAttribute();
+      }
+    }
+
+    _updateForAnimationAttribute() {
+      const isActivated = this._animator && this._animator.isActivated();
+
+      if (isActivated) {
+        this._animator.inactivate();
+      }
+
+      this._animator = this._createAnimator();
+
+      if (isActivated) {
+        this._animator.activate(this._getContentElement(), this, this._getMaskElement());
       }
     }
 
@@ -845,6 +750,13 @@ limitations under the License.
       return this._getModeStrategy().handleGesture(event);
     }
 
+    _createAnimator() {
+      const animatorName = this.hasAttribute('animation') ? this.getAttribute('animation') : 'default';
+      const animatorDict = window.OnsSplitterElement._animatorDict;
+
+      const AnimatorClass = animatorDict[animatorName] ? animatorDict[animatorName] : animatorDict.default;
+      return new AnimatorClass();
+    }
   }
 
   if (!window.OnsSplitterSideElement) {

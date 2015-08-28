@@ -218,12 +218,6 @@ limitations under the License.
       this.addEventListener('modechange', this._boundOnModeChange, false);
 
       setImmediate(() => this._layout());
-
-      // relayout on "orientationchange"
-      // TODO
-
-      // relayout on "resize"
-      // TODO
     }
 
     /**
@@ -283,6 +277,20 @@ limitations under the License.
     window.OnsSplitterElement = document.registerElement('ons-splitter', {
       prototype: SplitterElement.prototype
     });
+
+    window.OnsSplitterElement._animatorDict = {
+      default: ons._internal.OverlaySplitterAnimator,
+      overlay: ons._internal.OverlaySplitterAnimator
+    };
+
+    window.OnsSplitterElement.registerAnimator = function(name, Animator) {
+      if (!(Animator instanceof ons._internal.SplitterAnimator)) {
+        throw new Error('Animator parameter must be an instance of SplitterAnimator.');
+      }
+      window.OnsSplitterElement._animatorDict[name] = Animator;
+    };
+
+    window.OnsSplitterElement.SplitterAnimator = ons._internal.SplitterAnimator;
   }
 
 })();

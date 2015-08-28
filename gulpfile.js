@@ -62,13 +62,14 @@ gulp.task('core', function() {
   return gulp.src([
     'core/vendor/winstore-jscompat.js',
     'core/vendor/*.js',
-    'core/lib/animit.es6',
+    'core/lib/animit.js',
     'core/lib/doorlock.es6',
     'core/lib/ons-gesture-detector.es6',
     'core/lib/device-back-button-dispatcher.es6',
     'core/lib/ons.es6',
     'core/lib/ons-util.es6',
     'core/lib/modal-animator.es6',
+    'core/lib/splitter-animator.es6',
     'core/lib/navigator-transition-animator.es6',
     'core/lib/popover-animator.es6',
     'core/lib/*.{es6,js}',
@@ -217,10 +218,8 @@ gulp.task('prepare', ['html2js', 'core'], function() {
     // onsenui.js
     gulp.src([
       'build/js/ons-core.js',
-      'framework/lib/winstore-jscompat.js',
       'framework/lib/*.{es6,js}',
       'framework/directives/templates.js',
-      'framework/js/doorlock.es6',
       'framework/js/onsen.js',
       'framework/views/*.{es6,js}',
       'framework/directives/*.{es6,js}',
@@ -243,11 +242,9 @@ gulp.task('prepare', ['html2js', 'core'], function() {
     // onsenui_all.js
     gulp.src([
       'build/js/ons-core.js',
-      'framework/lib/winstore-jscompat.js',
       'framework/lib/angular/angular.js',
       'framework/lib/*.{es6,js}',
       'framework/directives/templates.js',
-      'framework/js/doorlock.es6',
       'framework/js/onsen.js',
       'framework/views/*.{es6,js}',
       'framework/directives/*.{es6,js}',
