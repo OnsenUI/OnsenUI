@@ -5,7 +5,7 @@
  * @category control
  * @description
  *  [en][/en]
- *  [ja][/ja]
+ *  [ja]ons-splitter-side要素は、ons-splitter要素の子要素として利用します。[/ja]
  * @example
  * <ons-splitter>
  *   <ons-splitter-content>
