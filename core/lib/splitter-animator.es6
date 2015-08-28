@@ -28,7 +28,7 @@ limitations under the License.
       done();
     }
     close(done) {
-      done()
+      done();
     }
     activate(contentElement, sideElement, maskElement) {}
     inactivate() {}
@@ -76,7 +76,6 @@ limitations under the License.
       this._mask = maskElement;
 
       this._setupLayout();
-      console.log("reveal");
     }
 
     inactivate() {

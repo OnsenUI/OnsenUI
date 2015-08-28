@@ -133,7 +133,6 @@ limitations under the License.
     layout() {
       const element = this._element;
       element.style.width = element._getWidth();
-      element.style.zIndex = 4;
 
       if (element._isLeftSide()) {
         element.style.left = '0';
@@ -273,9 +272,13 @@ limitations under the License.
 
     layout() {
       if (this._state === CollapseMode.CLOSED_STATE) {
-        this._animator.layoutOnClose();
+        if (this._animator.isActivated()) {
+          this._animator.layoutOnClose();
+        }
       } else if (this._state === CollapseMode.OPENED_STATE) {
-        this._animator.layoutOnOpen();
+        if (this._animator.isActivated()) {
+          this._animator.layoutOnOpen();
+        }
       } else {
         throw new Error('Invalid state');
       }
@@ -640,16 +643,6 @@ limitations under the License.
      */
     close(options = {}) {
       return this._getModeStrategy().closeMenu(options);
-    }
-
-    /**
-     * @param {Object} [options]
-     * @return {Boolean}
-     */
-    toggle(options = {}) {
-      const mode = this._getModeStrategy();
-
-      return mode.isOpened() ? mode.closeMenu(options) : mode.openMenu(options);
     }
 
     /**
