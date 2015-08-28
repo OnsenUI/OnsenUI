@@ -23,32 +23,6 @@
 
 /**
  * @ngdoc event
- * @name update
- * @description
- *   [en]Fired when the split view is updated.[/en]
- *   [ja]split viewの状態が更新された際に発火します。[/ja]
- * @param {Object} event
- *   [en]Event object.[/en]
- *   [ja]イベントオブジェクトです。[/ja]
- * @param {Object} event.splitter
- *   [en]Split view object.[/en]
- *   [ja]イベントが発火したSplitterオブジェクトです。[/ja]
- * @param {Boolean} event.shouldCollapse
- *   [en]True if the view should collapse.[/en]
- *   [ja]collapse状態の場合にtrueになります。[/ja]
- * @param {String} event.currentMode
- *   [en]Current mode.[/en]
- *   [ja]現在のモード名を返します。"collapse"か"split"かのいずれかです。[/ja]
- * @param {Number} event.width
- *   [en]Current width.[/en]
- *   [ja]現在のSplitterのサイドの幅を返します。[/ja]
- * @param {String} event.orientation
- *   [en]Current orientation.[/en]
- *   [ja]現在の画面のオリエンテーションを返します。"portrait"かもしくは"landscape"です。 [/ja]
- */
-
-/**
- * @ngdoc event
  * @name modechange
  * @description
  *   [en]Fired just after the view's mode change.[/en]
@@ -77,6 +51,117 @@
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
  *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature openRight([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]This function will be called after the menu has been opened.[/en]
+ *   [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Open right ons-splitter-side menu on collapse mode.[/en]
+ *   [ja]右のcollapseモードになっているons-splitterside要素を開きます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature openLeft([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]This function will be called after the menu has been opened.[/en]
+ *   [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Open left ons-splitter-side menu on collapse mode.[/en]
+ *   [ja]左のcollapseモードになっているons-splitterside要素を開きます。[/ja]
+ */
+ 
+/**
+ * @ngdoc method
+ * @signature closeRight([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]This function will be called after the menu has been closed.[/en]
+ *   [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Close right ons-splitter-side menu on collapse mode.[/en]
+ *   [ja]右のcollapseモードになっているons-splitterside要素を閉じます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature closeLeft([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]This function will be called after the menu has been closed.[/en]
+ *   [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Close left ons-splitter-side menu on collapse mode.[/en]
+ *   [ja]左のcollapseモードになっているons-splitterside要素を閉じます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature loadContentPage(pageUrl)
+ * @param {String} pageUrl
+ *   [en]Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
+ *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
+ * @description
+ *   [en]Show the page specified in pageUrl in the ons-splitter-content pane.[/en]
+ *   [ja]ons-splitter-content用紙に表示されるページをpageUrlに指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature loadContentPage(pageUrl)
+ * @param {String} pageUrl
+ *   [en]Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
+ *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
+ * @description
+ *   [en]Show the page specified in pageUrl in the ons-splitter-content pane.[/en]
+ *   [ja]ons-splitter-content用紙に表示されるページをpageUrlに指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isLeftOpened()
+ * @return {Boolean}
+ *   [en]Whether the left ons-splitter-side on collapse mode is opened.[/en]
+ *   [ja]左のons-splitter-sideが開いているかどうかを返します。[/ja]
+ * @description
+ *   [en]Determines whether the left ons-splitter-side on collapse mode is opened.[/en]
+ *   [ja]左のons-splitter-side要素が開いているかどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isRightOpened()
+ * @return {Boolean}
+ *   [en]Whether the right ons-splitter-side on collapse mode is opened.[/en]
+ *   [ja]右のons-splitter-sideが開いているかどうかを返します。[/ja]
+ * @description
+ *   [en]Determines whether the right ons-splitter-side on collapse mode is opened.[/en]
+ *   [ja]右のons-splitter-side要素が開いているかどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getDeviceBackButtonHandler()
+ * @return {Object}
+ *   [en]Device back-button handler.[/en]
+ *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+ * @description
+ *   [en]Retrieve the back-button handler.[/en]
+ *   [ja]ons-splitter要素に紐付いているバックボタンハンドラを取得します。[/ja]
  */
 
 /**
