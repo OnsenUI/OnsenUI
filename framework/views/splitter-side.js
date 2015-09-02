@@ -75,6 +75,15 @@ limitations under the License.
 
     MicroEvent.mixin(SplitterSide);
 
+    Object.defineProperty(SplitterSide.prototype, 'page', {
+      get: function () {
+        return this._element[0].page;
+      },
+      set: function() {
+        throw new Error();
+      }
+    });
+
     return SplitterSide;
   });
 })();
