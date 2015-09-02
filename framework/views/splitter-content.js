@@ -17,7 +17,7 @@ limitations under the License.
 (function() {
   'use strict';
 
-  angular.module('onsen').factory('SplitterContent', function($onsen) {
+  angular.module('onsen').factory('SplitterContent', function($onsen, $compile) {
 
     var SplitterContent = Class.extend({
 
@@ -31,6 +31,21 @@ limitations under the License.
         ]);
 
         scope.$on('$destroy', this._destroy.bind(this));
+      },
+
+      _link: function(fragment, done) {
+        
+        var link = $compile(fragment);
+        var pageScope = this._createPageScope();
+        link(pageScope);
+
+        pageScope.$evalAsync(function() {
+          done(fragment);
+        });
+      },
+
+      _createPageScope: function() {
+         return this._scope.$new();
       },
 
       _destroy: function() {

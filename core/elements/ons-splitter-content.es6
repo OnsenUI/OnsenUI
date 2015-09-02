@@ -43,8 +43,10 @@ limitations under the License.
 
       options.callback = options.callback instanceof Function ? options.callback : () => {};
       ons._internal.getPageHTMLAsync(page).then((html) => {
-        this.appendChild(util.createFragment(html));
-        options.callback();
+        window.OnsSplitterContentElement.rewritables.link(this, util.createFragment(html), (fragment) => {
+          this.appendChild(fragment);
+          options.callback();
+        });
       });
     }
 
@@ -52,7 +54,7 @@ limitations under the License.
       this._assertParent();
 
       if (this.hasAttribute('page')) {
-        OnsSplitterContentElement.ready(this, () => this.load(this.getAttribute('page')));
+        window.OnsSplitterContentElement.rewritables.ready(this, () => this.load(this.getAttribute('page')));
       }
     }
 
@@ -72,8 +74,23 @@ limitations under the License.
       prototype: SplitterContentElement.prototype
     });
 
-    window.OnsSplitterContentElement.ready = function(element, callback) {
-      setImmediate(callback);
+    window.OnsSplitterContentElement.rewritables = {
+      /**
+       * @param {Element} splitterSideElement
+       * @param {Function} callback
+       */
+      ready(splitterSideElement, callback) {
+        setImmediate(callback);
+      },
+
+      /**
+       * @param {Element} splitterSideElement
+       * @param {HTMLFragment} target
+       * @param {Function} callback
+       */
+      link(splitterSideElement, target, callback) {
+        callback(target);
+      }
     };
   }
 
