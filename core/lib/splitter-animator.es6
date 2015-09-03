@@ -88,10 +88,11 @@ limitations under the License.
      * @param {Number} distance
      */
     translate(distance) {
-      const side = this._side;
-
-      side.style.transition = '';
-      side.style.transform = 'translateX(' + (side._isLeftSide() ? '' : '-') + distance + 'px)';
+      animit(this._side)
+        .queue({
+          transform: 'translate3d(' + (this._side._isLeftSide() ? '' : '-') + distance + 'px, 0px, 0px)'
+        })
+        .play();
     }
 
     _clearLayout() {
@@ -133,9 +134,6 @@ limitations under the License.
       animit.runAll(
         animit(this._side)
           .queue({
-            transform: 'translate3d(0px, 0px, 0px)'
-          })
-          .queue({
             transform: tranform
           }, {
             duration: 0.3,
@@ -148,9 +146,7 @@ limitations under the License.
 
         animit(this._mask)
           .queue({
-            display: 'block',
-            opacity: '0',
-            delay: 0
+            display: 'block'
           })
           .queue({
             opacity: '1'
