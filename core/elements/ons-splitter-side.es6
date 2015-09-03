@@ -310,7 +310,6 @@ limitations under the License.
       return util.arrayFrom(this._element.parentElement.children).filter(child => {
         return child.nodeName.toLowerCase() === 'ons-splitter-side' && this._element !== child;
       }).filter(side => {
-        console.log(side);
         return side.isOpened();
       }).length > 0;
     }
