@@ -56,7 +56,7 @@ limitations under the License.
     layoutOnOpen() {
       animit(this._side)
         .queue({
-          transform: 'translateX(' + (this._side._isLeftSide() ? '' : '-') + '100%)',
+          transform: 'translate3d(' + (this._side._isLeftSide() ? '' : '-') + '100%, 0px, 0px)',
           width: this._side._getWidth()
         })
         .play();
@@ -140,10 +140,6 @@ limitations under the License.
           }, {
             duration: 0.3,
             timing: 'cubic-bezier(.1, .7, .1, 1)'
-          })
-          .queue({
-            transition: '',
-            transform: ''
           })
           .queue(callback => {
             callback();
