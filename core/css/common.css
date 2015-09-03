@@ -124,6 +124,10 @@ ons-pull-hook {
   z-index: 20002;
 }
 
+ons-splitter {
+  overflow: hidden;
+}
+
 ons-splitter, ons-splitter-mask, ons-splitter-content, ons-splitter-side {
   display: block;
   position: absolute;
