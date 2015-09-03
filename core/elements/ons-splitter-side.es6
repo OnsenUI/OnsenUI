@@ -257,7 +257,10 @@ limitations under the License.
       const width = this._element._getWidthInPixel();
       const distance = event.gesture.startEvent.isOpened ? deltaDistance + width : deltaDistance;
 
-      const shouldOpen = distance > width / 2;
+      const direction = event.gesture.interimDirection;
+      const shouldOpen =
+        (this._element._isLeftSide() && direction === 'right') ||
+        (!this._element._isLeftSide() && direction === 'left');
 
       if (shouldOpen) {
         this.openMenu({
