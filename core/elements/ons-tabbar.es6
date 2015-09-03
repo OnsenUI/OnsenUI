@@ -51,6 +51,7 @@ limitations under the License.
       });
 
       this._compile();
+      this._contentElement = ons._util.findChild(this, '.tab-bar__content');
       ModifierUtil.initModifier(this, scheme);
 
       this._compilePageHook = new ons._internal.AsyncHook();
@@ -156,7 +157,7 @@ limitations under the License.
 
       this._compilePageHook.run(pageElement => {
         this._linkPageHook.run(pageElement => {
-          this._getContentElement().appendChild(pageElement);
+          this._contentElement.appendChild(pageElement);
           this._switchPage(pageElement, options);
         }, pageElement);
       }, pageElement);
@@ -173,7 +174,7 @@ limitations under the License.
      * @return {Element/null}
      */
     _getCurrentPageElement() {
-      var pages = this._getContentElement().children;
+      var pages = this._contentElement.children;
       var page = null;
       for (var i = 0; i < pages.length; i++) {
         if (pages[i].style.display !== 'none') {
@@ -201,17 +202,21 @@ limitations under the License.
      */
     _switchPage(element, options) {
       if (this.getActiveTabIndex() !== -1) {
-        var oldPageElement = this._getContentElement().children.length > 1 ? this._getCurrentPageElement() : ons._internal.nullElement;
+        var oldPageElement = this._contentElement.children.length > 1 ? this._getCurrentPageElement() : ons._internal.nullElement;
         var animator = this._animatorFactory.newAnimator(options);
 
         animator.apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
-          if (options._removeElement) {
-            if (oldPageElement.parentNode) {
-              oldPageElement.parentNode.removeChild(oldPageElement);
+          if (oldPageElement !== ons._internal.nullElement) {
+            if (options._removeElement) {
+              oldPageElement._destroy();
+            } else {
+              oldPageElement.style.display = 'none';
+              oldPageElement._hide();
             }
-          } else {
-            oldPageElement.style.display = 'none';
           }
+
+          element.style.display = 'block';
+          element._show();
 
           if (options.callback instanceof Function) {
             options.callback();
@@ -348,8 +353,9 @@ limitations under the License.
     _loadPersistentPageDOM(element, options) {
       options = options || {};
 
-      element.style.display = 'block';
-      this._getContentElement().appendChild(element);
+      if (!util.isAttached(element)) {
+        this._contentElement.appendChild(element);
+      }
       this._switchPage(element, options);
     }
 
@@ -357,12 +363,8 @@ limitations under the License.
      * @param {Boolean} visible
      */
     setTabbarVisibility(visible) {
-      this._getContentElement().style[this._hasTopTabbar() ? 'top' : 'bottom'] = visible ? '' : '0px';
+      this._contentElement.style[this._hasTopTabbar() ? 'top' : 'bottom'] = visible ? '' : '0px';
       this._getTabbarElement().style.display = visible ? '' : 'none';
-    }
-
-    _getContentElement() {
-      return ons._util.findChild(this, '.tab-bar__content');
     }
 
     /**
@@ -397,6 +399,28 @@ limitations under the License.
     detachedCallback() { }
 
     attachedCallback() { }
+
+    _show() {
+      let currentPageElement = this._getCurrentPageElement();
+      if (currentPageElement) {
+        currentPageElement._show();
+      }
+    }
+
+    _hide() {
+      let currentPageElement = this._getCurrentPageElement();
+      if (currentPageElement) {
+        currentPageElement._hide();
+      }
+    }
+
+    _destroy() {
+      let pages = this._contentElement.children;
+      for (let i = pages.length - 1; i >= 0; i--) {
+        pages[i]._destroy();
+      }
+      this.remove();
+    }
 
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {

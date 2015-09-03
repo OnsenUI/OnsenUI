@@ -65,7 +65,7 @@ limitations under the License.
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
-        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['prepush', 'postpush', 'prepop', 'postpop'], function(detail) {
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['prepush', 'postpush', 'prepop', 'postpop', 'init', 'show', 'hide', 'destroy'], function(detail) {
           if (detail.navigator) {
             detail.navigator = this;
           }

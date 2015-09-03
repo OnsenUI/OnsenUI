@@ -112,23 +112,23 @@ describe('OnsTabbarElement', () => {
       var topElement = document.getElementById('top');
       var bottomElement = document.getElementById('bottom');
 
-      expect(topElement._getContentElement().style.top).to.equal('');
+      expect(topElement._contentElement.style.top).to.equal('');
       expect(topElement._getTabbarElement().style.display).to.equal('');
-      expect(bottomElement._getContentElement().style.bottom).to.equal('');
+      expect(bottomElement._contentElement.style.bottom).to.equal('');
       expect(bottomElement._getTabbarElement().style.display).to.equal('');
 
       topElement.setTabbarVisibility(false);
       bottomElement.setTabbarVisibility(false);
-      expect(topElement._getContentElement().style.top).to.equal('0px');
+      expect(topElement._contentElement.style.top).to.equal('0px');
       expect(topElement._getTabbarElement().style.display).to.equal('none');
-      expect(bottomElement._getContentElement().style.bottom).to.equal('0px');
+      expect(bottomElement._contentElement.style.bottom).to.equal('0px');
       expect(bottomElement._getTabbarElement().style.display).to.equal('none');
 
       topElement.setTabbarVisibility(true);
       bottomElement.setTabbarVisibility(true);
-      expect(topElement._getContentElement().style.top).to.equal('');
+      expect(topElement._contentElement.style.top).to.equal('');
       expect(topElement._getTabbarElement().style.display).to.equal('');
-      expect(bottomElement._getContentElement().style.bottom).to.equal('');
+      expect(bottomElement._contentElement.style.bottom).to.equal('');
       expect(bottomElement._getTabbarElement().style.display).to.equal('');
     });
   });
@@ -137,13 +137,13 @@ describe('OnsTabbarElement', () => {
   describe('#_getCurrentPageElement()', () => {
     it('accepts only \'ons-page\' as current page element', () => {
       let page = new OnsPageElement();
-      element._getContentElement().appendChild(page);
+      element._contentElement.appendChild(page);
       expect(element._getCurrentPageElement().classList.contains('page')).to.be.true;
       expect(element._getCurrentPageElement.bind(element)).not.to.throw('Invalid state: page element must be a "ons-page" element.');
 
-      element._getContentElement().removeChild(element._getContentElement().querySelector('ons-page'));
+      element._contentElement.removeChild(element._contentElement.querySelector('ons-page'));
       let button = new OnsButtonElement();
-      element._getContentElement().appendChild(button);
+      element._contentElement.appendChild(button);
       expect(element._getCurrentPageElement.bind(element)).to.throw('Invalid state: page element must be a "ons-page" element.');
     });
   });
@@ -180,10 +180,11 @@ describe('OnsTabbarElement', () => {
     let template, element;
 
     beforeEach(() => {
-      template = ons._util.createElement('<ons-template id="page1">Page1</ons-template>');
+      template = ons._util.createElement('<ons-template id="page1"><ons-page>Page1</ons-page></ons-template>');
       element = ons._util.createElement(`
         <ons-tabbar>
           <ons-tab label="Page 1" page="page1" no-reload></ons-tab>
+          <ons-tab label="Page 2" page="page1" no-reload></ons-tab>
         </ons-tabbar>
       `);
       document.body.appendChild(template);
@@ -212,6 +213,23 @@ describe('OnsTabbarElement', () => {
       return expect(promise).to.eventually.be.fulfilled;
     });
 
+    it('fires \'show\' event', () => {
+      let promise = new Promise((resolve) => {
+        element.addEventListener('show', resolve);
+      });
+      element.setActiveTab(0);
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it('fires \'hide\' event', () => {
+      let promise = new Promise((resolve) => {
+        element.addEventListener('hide', resolve);
+      });
+      element.setActiveTab(0);
+      element.setActiveTab(1);
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
     it('fires \'reactive\' event', () => {
       let promise = new Promise((resolve) => {
         element.addEventListener('reactive', resolve);
@@ -219,6 +237,71 @@ describe('OnsTabbarElement', () => {
       element.setActiveTab(0);
       element.setActiveTab(0);
       return expect(promise).to.eventually.be.fulfilled;
+    });
+  });
+
+  describe('propagate API', () => {
+    let template, element;
+
+    beforeEach(() => {
+      template = ons._util.createElement('<ons-template id="page1"><ons-page>Page1</ons-page></ons-template>');
+      element = ons._util.createElement(`
+        <ons-tabbar>
+          <ons-tab label="Page 1" page="page1" no-reload></ons-tab>
+          <ons-tab label="Page 2" page="page1" no-reload></ons-tab>
+        </ons-tabbar>
+      `);
+      document.body.appendChild(template);
+      document.body.appendChild(element);
+    });
+
+    afterEach(() => {
+      template.remove();
+      element.remove();
+      template = element = null;
+    });
+
+    it('fires \'show\' event', (done) => {
+      element.setActiveTab(0);
+      setImmediate(() => {
+        let promise = new Promise((resolve) => {
+          element.addEventListener('show', () => {
+            resolve();
+            done();
+          });
+        });
+        element._hide();
+        element._show();
+        return expect(promise).to.eventually.be.fulfilled;
+      });
+    });
+
+    it('fires \'hide\' event', (done) => {
+      element.setActiveTab(0);
+      setImmediate(() => {
+        let promise = new Promise((resolve) => {
+          element.addEventListener('hide', () => {
+            resolve();
+            done();
+          });
+        });
+        element._hide();
+        return expect(promise).to.eventually.be.fulfilled;
+      });
+    });
+
+    it('fires \'destroy\' event', (done) => {
+      element.setActiveTab(0);
+      setImmediate(() => {
+        let promise = new Promise((resolve) => {
+          element.addEventListener('destroy', () => {
+            resolve();
+            done();
+          });
+        });
+        element._destroy();
+        return expect(promise).to.eventually.be.fulfilled;
+      });
     });
   });
 
