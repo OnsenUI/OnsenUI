@@ -193,6 +193,10 @@ limitations under the License.
         return;
       }
 
+      if (this._openedOtherSideMenu()) {
+        return;
+      }
+
       if (event.type === 'dragleft' || event.type === 'dragright') {
         this._onDrag(event);
       } else if (event.type === 'dragstart') {
@@ -300,6 +304,18 @@ limitations under the License.
     }
 
     /**
+     * @return {Boolean}
+     */
+    _openedOtherSideMenu() {
+      return util.arrayFrom(this._element.parentElement.children).filter(child => {
+        return child.nodeName.toLowerCase() === 'ons-splitter-side' && this._element !== child;
+      }).filter(side => {
+        console.log(side);
+        return side.isOpened();
+      }).length > 0;
+    }
+
+    /**
      * @param {Object} [options]
      * @param {Function} [options.callback]
      * @param {Boolean} [options.withoutAnimation]
@@ -307,6 +323,10 @@ limitations under the License.
      */
     openMenu(options = {}) {
       if (this._isLocked()) {
+        return false;
+      }
+
+      if (this._openedOtherSideMenu()) {
         return false;
       }
 
