@@ -134,8 +134,6 @@ limitations under the License.
       const items = this._getItemsInView();
       const keep = {};
 
-      this._wrapperElement.style.height = this._itemHeightSum[this._maxIndex] + 'px';
-
       for (let i = 0, l = items.length; i < l; i++) {
         let _item = items[i];
         this._renderElement(_item);
@@ -147,6 +145,13 @@ limitations under the License.
           this._removeElement(key);
         }
       }
+
+      this._wrapperElement.style.height = this._calculateListHeight() + 'px';
+    }
+
+    _calculateListHeight() {
+      let indices = Object.keys(this._renderedItems).map((n) => parseInt(n));
+      return this._itemHeightSum[indices.pop()] || 0;
     }
 
     /**

@@ -105,6 +105,13 @@ limitations under the License.
     /**
      * @return {Boolean}
      */
+    isIPod: function() {
+      return /iPod/i.test(navigator.userAgent);
+    },
+
+    /**
+     * @return {Boolean}
+     */
     isBlackBerry: function() {
       if (ons.platform._renderPlatform) {
         return ons.platform._renderPlatform === 'blackberry';
@@ -177,6 +184,42 @@ limitations under the License.
         return (parseInt(ver.split('.')[0]) >= 7);
       }
       return false;
+    },
+
+    /**
+     * @return {String}
+     */
+    getMobileOS: function() {
+      if (this.isAndroid()) {
+        return 'android';
+      }
+      else if (this.isIOS()) {
+        return 'ios';
+      }
+      else if (this.isWP()) {
+        return 'wp';
+      }
+      else {
+        return 'other';
+      }
+    },
+
+    /**
+     * @return {String}
+     */
+    getIOSDevice: function() {
+      if (this.isIPhone()) {
+        return 'iphone';
+      }
+      else if (this.isIPad()) {
+        return 'ipad';
+      }
+      else if (this.isIPod()) {
+        return 'ipod';
+      }
+      else {
+        return 'na';
+      }
     }
   };
 })(window.ons = window.ons || {});

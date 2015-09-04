@@ -375,17 +375,50 @@ describe('OnsCarouselElement', () => {
     });
   });
 
+  describe('#_getCarouselItemElements()', () => {
+    it('returns the carousel item elements', () => {
+      let rv = carousel._getCarouselItemElements();
+
+      expect(rv.length).to.equal(3);
+
+      for (let i = 0; i < rv.length; i++) {
+        expect(rv[i]).to.be.an.instanceof(OnsCarouselItemElement);
+      }
+    });
+
+    it('doesn\'t return the items in child carousels (issue #844)', () => {
+      let carousel = ons._util.createElement(`
+        <ons-carousel>
+          <ons-carousel-item>
+            <ons-carousel>
+              <ons-carousel-item>
+              </ons-carousel-item>
+            </ons-carousel>
+          </ons-carousel-item>
+        </ons-carousel>
+      `);
+
+      let rv = carousel._getCarouselItemElements();
+      expect(rv.length).to.equal(1);
+    });
+  });
+
   describe('#_startMomentumScroll()', () => {
     let ev;
 
     beforeEach(() => {
+      carousel.setAttribute('auto-scroll', '');
       ev = new CustomEvent('drag');
       ev.gesture = {
         direction: 'left',
         deltaX: 0,
-        velocityX: 10,
+        velocityX: 100000,
         preventDefault: () => {}
       };
+    });
+
+    afterEach(() => {
+      carousel.removeAttribute('auto-scroll');
     });
 
     it('should change the scroll value', () => {

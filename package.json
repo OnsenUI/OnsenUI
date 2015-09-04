@@ -95,7 +95,7 @@
     "karma-coverage": "^0.4.2",
     "karma-junit-reporter": "^0.2.2",
     "karma-mocha": "^0.1.10",
-    "karma-webpack": "^1.5.1",
+    "karma-webpack": "~1.6.0",
     "lodash": "^3.6.0",
     "mocha": "^2.2.4",
     "node-libs-browser": "^0.5.2",

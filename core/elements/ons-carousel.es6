@@ -285,7 +285,8 @@ limitations under the License.
         return 0;
       }
 
-      for (let i = 0; i < count; i++) {
+      let i;
+      for (i = 0; i < count; i++) {
         if (size * i <= scroll && size * (i + 1) > scroll) {
           return i;
         }
@@ -564,7 +565,8 @@ limitations under the License.
      * @return {Array}
      */
     _getCarouselItemElements() {
-      return ons._util.arrayFrom(this.querySelectorAll('ons-carousel-item'));
+      return ons._util.arrayFrom(this.children)
+        .filter((child) => child.nodeName.toLowerCase() === 'ons-carousel-item');
     }
 
     /**

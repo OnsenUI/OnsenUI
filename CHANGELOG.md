@@ -33,6 +33,10 @@ v1.3.8-dev
  * ons-navigator: Fixed `insertPage()` behaviour with high or low indexes.
  * ons-tabbar: Fixed callback in `setActiveTab()` method.
  * ons-splitter: Added `ons-splitter`, `ons-splitter-side`, `ons-splitter-content` and `ons-splitter-mask` custom elements.
+ * ons-fab: Implemented 'fab' component.
+ * core: Added page attribute expressions.
+ * ons-carousel: Fixed [#844](https://github.com/OnsenUI/OnsenUI/issues/844).
+ * ons-navigator: Fixed [#865](https://github.com/OnsenUI/OnsenUI/issues/865).
 
 v1.3.7
 ----

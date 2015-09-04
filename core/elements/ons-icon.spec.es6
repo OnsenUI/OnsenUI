@@ -1,5 +1,5 @@
-describe('ons-icon', () => {
-  it('provides \'OnsIconElement\' global variable', () => {
+describe('OnsIconElement', () => {
+  it('should exist', () => {
     expect(window.OnsIconElement).to.be.ok;
   });
 

@@ -45,7 +45,7 @@
  *     </ons-toolbar>
  *
  *     <p style="text-align: center">
- *       <ons-button modifier="light" ng-click="app.navi.popPage('page.html');">Pop</ons-button>
+ *       <ons-button modifier="light" ng-click="app.navi.popPage();">Pop</ons-button>
  *     </p>
  *   </ons-page>
  * </ons-template>
