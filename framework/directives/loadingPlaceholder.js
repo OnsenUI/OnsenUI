@@ -33,7 +33,7 @@
       replace: false,
       transclude: false,
       scope: false,
-      compile: function(element, attrs) {
+      link: function(scope, element, attrs) {
         if (!attrs.onsLoadingPlaceholder.length) {
           throw Error('Must define page to load.');
         }
@@ -54,7 +54,7 @@
             newElement.css('display', 'none');
 
             element.append(newElement);
-            ons.compile(newElement[0]);
+            $compile(newElement)(scope);
 
             for (var i = element[0].childNodes.length - 1; i >= 0; i--){
               var e = element[0].childNodes[i];
