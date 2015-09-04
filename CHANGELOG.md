@@ -6,6 +6,7 @@ v1.3.9
 ----
 * ons-carousel: Fixed [#844](https://github.com/OnsenUI/OnsenUI/issues/844).
 * ons-navigator: Fixed [#865](https://github.com/OnsenUI/OnsenUI/issues/865).
+* core: Fixed [#845](https://github.com/OnsenUI/OnsenUI/issues/845).
 
 v1.3.8
 ----
