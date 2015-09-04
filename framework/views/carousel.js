@@ -603,12 +603,16 @@ limitations under the License.
        * @return {Array}
        */
       _getCarouselItemElements: function() {
-        var nodeList = this._element[0].querySelectorAll('ons-carousel-item'),
+        var nodeList = this._element[0].children,
           rv = [];
 
         for (var i = nodeList.length; i--; ) {
           rv.unshift(nodeList[i]);
         }
+
+        rv = rv.filter(function(item) {
+          return item.nodeName.toLowerCase() === 'ons-carousel-item';
+        });
 
         return rv;
       },
