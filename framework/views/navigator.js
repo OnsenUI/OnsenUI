@@ -48,7 +48,7 @@ limitations under the License.
       this.element.on(this._pointerEvents, this._blockEvents);
     },
 
-    _pointerEvents: 'touchstart touchend touchmove click',
+    _pointerEvents: 'touchmove',
 
     /**
      * @return {PageView}
