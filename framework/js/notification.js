@@ -222,7 +222,8 @@ window.ons.notification = (function() {
     dialogEl.append(footerEl);
 
     angular.element(document.body).append(dialogEl);
-    ons.compile(dialogEl[0]);
+
+    ons.$compile(dialogEl)(dialogEl.injector().get('$rootScope'));
     var alertDialog = dialogEl.data('ons-alert-dialog');
 
     if (buttonLabels.length <= 2) {
