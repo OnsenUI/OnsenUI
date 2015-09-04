@@ -310,13 +310,13 @@ limitations under the License.
        * @param {Object} options
        * @param {Object} options.animation
        */
-      _switchPage: function(element, scope, options) {
+      _switchPage: function(element, options) {
         if (this._currentPageElement) {
           var oldPageElement = this._currentPageElement;
           var oldPageScope = this._currentPageScope;
 
           this._currentPageElement = element;
-          this._currentPageScope = scope;
+          this._currentPageScope = element.data('_scope');
 
           this._getAnimatorOption(options).apply(element, oldPageElement, function() {
             if (options._removeElement) {
@@ -334,7 +334,7 @@ limitations under the License.
 
         } else {
           this._currentPageElement = element;
-          this._currentPageScope = scope;
+          this._currentPageScope = element.data('_scope');
 
           if (options.callback instanceof Function) {
             options.callback();
@@ -357,7 +357,7 @@ limitations under the License.
 
         pageScope.$evalAsync();
 
-        this._switchPage(pageContent, pageScope, options);
+        this._switchPage(pageContent, options);
       },
 
       /**
@@ -369,7 +369,7 @@ limitations under the License.
         options = options || {};
 
         element.css('display', 'block');
-        this._switchPage(element, element.scope(), options);
+        this._switchPage(element, options);
       },
 
       /**

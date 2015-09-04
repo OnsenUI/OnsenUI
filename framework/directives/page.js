@@ -150,7 +150,10 @@
       pageBackground.addClass(modifierTemplater('page--*__background'));
       pageBackground = null;
 
+      element.data('_scope', scope);
+
       $onsen.cleaner.onDestroy(scope, function() {
+        element.data('_scope', undefined);
         page._events = undefined;
         $onsen.removeModifierMethods(page);
         element.data('ons-page', undefined);
