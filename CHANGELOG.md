@@ -5,6 +5,7 @@ CHANGELOG
 v1.3.9
 ----
 * ons-carousel: Fixed [#844](https://github.com/OnsenUI/OnsenUI/issues/844).
+* ons-navigator: Fixed [#865](https://github.com/OnsenUI/OnsenUI/issues/865).
 
 v1.3.8
 ----
