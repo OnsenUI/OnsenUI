@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v1.3.9
+----
+* ons-carousel: Fixed [#844](https://github.com/OnsenUI/OnsenUI/issues/844).
+
 v1.3.8
 ----
 * ons-lazy-repeat: Recalculate heights when number of items change in order to support dynamic lists with variable height items.
