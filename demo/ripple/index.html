@@ -13,81 +13,26 @@
   <script>
     ons.bootstrap();
   </script>
-  
 </head>
 
-<body>    
-  
-  <ons-navigator>
-    <ons-toolbar><ons-ripple color="#255"></ons-ripple>
+<body>
+  <ons-page>
+    <ons-toolbar><ons-ripple color="rgba(0, 0, 0, 0.3)"></ons-ripple>
       <div class="center">Ripple</div>
     </ons-toolbar>
 
-    <section style="text-align:center;">
-      <p></p>
+    <ons-list>
+      <ons-list-header>Normal List</ons-list-header>
+      <ons-list-item><ons-ripple color="#000"></ons-ripple>One</ons-list-item>
+      <ons-list-item><ons-ripple color="rgba(0, 0, 0, 0.3)"></ons-ripple>Two</ons-list-item>
+      <ons-list-item><ons-ripple color="rgba(219, 63, 49, 0.3)"></ons-ripple>Three</ons-list-item>
+      <ons-list-item><ons-ripple color="rgba(66, 133, 244, 0.3)"></ons-ripple>One</ons-list-item>
+    </ons-list>
 
-
-      <ons-list>
-        <ons-list-header>Normal List</ons-list-header>
-        <ons-list-item><ons-ripple color="#000"></ons-ripple>One</ons-list-item>
-        <ons-list-item><ons-ripple color="rgba(0,0,0,0.3)"></ons-ripple>Two</ons-list-item>
-        <ons-list-item><ons-ripple color="rgba(219,63,49,0.3)"></ons-ripple>Three</ons-list-item>
-        <ons-list-item><ons-ripple color="rgba(66,133,244,0.3)"></ons-ripple>One</ons-list-item>
-      </ons-list>
-
-      <section style="margin: 10px 0;">
-        <div>
-          <ons-ripple target='children'>
-            <button>Button</button>
-          </ons-ripple>
-        </div>
-
-        <div>
-          <ons-ripple target='children' disabled color="#000">
-              <textarea>test</textarea>
-              <textarea>test</textarea>
-          </ons-ripple>
-        </div>
-
-        <div>
-          <ons-ripple target='children' color="rgba(22,77,77,0.4)">
-            <input type="text" placeholder="text here">
-            <input type="text" placeholder="text here">
-            <input type="text" placeholder="text here">
-            <input type="text" placeholder="text here">
-            <input type="text" placeholder="text here">
-            <input type="text" placeholder="text here">
-          </ons-ripple>
-        </div>
-
-        <div>
-          <ons-ripple target='children'>
-            <ons-switch checked></ons-switch>
-          </ons-ripple>
-        </div>
-      </section>
-
-      <section style="padding: 10px;">
-        <ons-button modifier="light" style="border-radius:50%;"><ons-ripple center color="#000"></ons-ripple>light</ons-button>
-
-        <ons-button modifier="light"><ons-ripple center color="#000"></ons-ripple>light</ons-button>
-        <ons-button modifier="outline"><ons-ripple center></ons-ripple>outline</ons-button>
-        <ons-button modifier="outline"><ons-ripple></ons-ripple>outline</ons-button>
-        <ons-button modifier="quiet"><ons-ripple></ons-ripple>quiet</ons-button>
-        <ons-button><ons-ripple></ons-ripple>Default</ons-button>
-        <ons-button modifier="cta"><ons-ripple></ons-ripple>cta</ons-button>
-        <p></p>
-        <ons-button modifier="large--quiet"><ons-ripple></ons-ripple>large--quiet</ons-button>
-
-        <ons-button modifier="cta" disabled="true"><ons-ripple></ons-ripple>cta</ons-button>
-        <p></p>
-        <ons-button modifier="large--quiet" disabled="true"><ons-ripple></ons-ripple>large--quiet</ons-button>
-        <p></p>
-        <ons-button modifier="large" should-spin="true"><ons-ripple></ons-ripple>quiet</ons-button>   
-      </section>   
-    </section>
-    
-  </ons-navigator>
- 
+    <ons-ripple style="width: 100%; text-align: center;" target="children" color="rgba(0, 0, 0, 0.3)">
+      <p>Target</p>
+      <p>Children</p>
+    </ons-ripple>
+  </ons-page>
 </body>
 </html>
