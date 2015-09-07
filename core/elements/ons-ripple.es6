@@ -81,9 +81,6 @@ limitations under the License.
       if (name === 'center') {
         this._updateCenter();
       }
-      if (name === 'disabled') {
-        this._updateDisabled();
-      }
     }
 
     _isTouchDevice() {
@@ -111,7 +108,6 @@ limitations under the License.
     attachedCallback() {
       this._updateCenter();
       this._updateTarget();
-      this._updateDisabled();
       this._addListener();
     }
 
@@ -124,6 +120,10 @@ limitations under the License.
       const wave = this._wave;
       const el = this._target;
       const pos = el.getBoundingClientRect();
+
+      if (this.isDisabled()) {
+        return;
+      }
 
       if (this._center) {
         wave.classList.remove('ripple__wave--done-center');
@@ -199,18 +199,6 @@ limitations under the License.
         wave.classList.add('ripple__wave--animate-center');
       } else {
         wave.classList.add('ripple__wave--animate');
-      }
-    }
-
-    _updateDisabled() {
-      if (this.isDisabled()) {
-        if (this.querySelector('.ripple__wave')) {
-          this.removeChild(this.querySelector('.ripple__wave'));
-        }
-      } else {
-        if (!this.querySelector('.ripple__wave')) {
-          this._compile();
-        }
       }
     }
 
