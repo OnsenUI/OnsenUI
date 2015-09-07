@@ -246,6 +246,8 @@ describe('OnsTabElement', () => {
     });
 
     it('sets the tab _pageElement as null, if the tab doesn\'t has a persistent attribute', (done) => {
+      element.setAttribute('page', 'page1');
+
       let myFunction = () => {
         expect(element._pageElement).to.be.null;
         done();

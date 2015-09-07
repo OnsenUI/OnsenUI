@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 (function() {
-  'use strict;';
+  'use strict';
 
   var module = angular.module('onsen');
 
@@ -35,6 +35,7 @@ limitations under the License.
         this._scope = scope;
         this._element = element;
         this._attrs = attrs;
+        this._lastPageElement = null;
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
@@ -42,6 +43,11 @@ limitations under the License.
           this._boundCompilePage = element[0]._compilePageHook.add(this._compilePage.bind(this));
           this._boundLinkPage = element[0]._linkPageHook.add(this._linkPage.bind(this));
         }.bind(this));
+
+        this._boundOnPrechange = this._onPrechange.bind(this);
+        this._boundOnPostchange = this._onPostchange.bind(this);
+        this._element.on('prechange', this._boundOnPrechange);
+        this._element.on('postchange', this._boundOnPostchange);
 
         this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['reactive', 'postchange', 'prechange']);
       },
@@ -64,6 +70,16 @@ limitations under the License.
           next(pageElement);
         });
 
+      },
+
+      _onPrechange: function(event) {
+        this._lastPageElement = this._element[0]._getCurrentPageElement();
+      },
+
+      _onPostchange: function(event) {
+        if (this._lastPageElement && !this._lastPageElement.parentNode) {
+          angular.element(this._lastPageElement).scope().$destroy();
+        }
       },
 
       setActiveTab: function(index, options) {
@@ -183,6 +199,9 @@ limitations under the License.
 
         element[0]._compilePageHook.remove(this._boundCompilePage);
         element[0]._linkPageHook.remove(this._boundLinkPage);
+
+        element.off(this._boundOnPrechange);
+        element.off(this._boundOnPostchange);
 
         this._clearDerivingEvents();
 
