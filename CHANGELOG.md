@@ -36,6 +36,7 @@ v1.3.8-dev
  * core: Added page attribute expressions.
  * ons-carousel: Fixed [#844](https://github.com/OnsenUI/OnsenUI/issues/844).
  * ons-navigator: Fixed [#865](https://github.com/OnsenUI/OnsenUI/issues/865).
+ * ons-lazy-repeat: Added debouncing to increase performance on iOS.
 
 v1.3.7
 ----
