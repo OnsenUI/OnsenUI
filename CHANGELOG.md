@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v1.3.8-dev
+v2.0.0-dev
 ----
  * core: Added more customizable animations.
  * core: [BC Break] Changed interfaces for registering custom animators on `ons-navigator`, `ons-dialog`, `ons-alert-dialog`, `ons-dialog`, `ons-sliding-menu`, `ons-popover` and `ons-tabbar`.
@@ -34,9 +34,18 @@ v1.3.8-dev
  * ons-tabbar: Fixed callback in `setActiveTab()` method.
  * ons-fab: Implemented 'fab' component.
  * core: Added page attribute expressions.
- * ons-carousel: Fixed [#844](https://github.com/OnsenUI/OnsenUI/issues/844).
- * ons-navigator: Fixed [#865](https://github.com/OnsenUI/OnsenUI/issues/865).
- * ons-lazy-repeat: Added debouncing to increase performance on iOS.
+
+v1.3.9
+----
+* ons-carousel: Fixed [#844](https://github.com/OnsenUI/OnsenUI/issues/844).
+* ons-navigator: Fixed [#865](https://github.com/OnsenUI/OnsenUI/issues/865).
+* core: Fixed [#845](https://github.com/OnsenUI/OnsenUI/issues/845).
+* ons-lazy-repeat: Added debouncing to increase performance on iOS.
+
+v1.3.8
+----
+* ons-lazy-repeat: Recalculate heights when number of items change in order to support dynamic lists with variable height items.
+* ons-lazy-repeat: Don't wait to render to make the list more responsive.
 
 v1.3.7
 ----
