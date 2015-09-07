@@ -19,14 +19,11 @@ limitations under the License.
   'use strict';
 
   const scheme = {'': 'ripple--*'};
-  const ModifierUtil = ons._internal.ModifierUtil;
-
   class RippleElement extends ons._BaseElement {
 
     createdCallback() {
       this.classList.add('ripple');
       this._compile();
-      ModifierUtil.initModifier(this, scheme);
 
       this._boundOnClick = this._onMouseDown.bind(this);
     }
@@ -69,9 +66,6 @@ limitations under the License.
     }
 
     attributeChangedCallback(name, last, current) {
-      if (name === 'modifier') {
-        return ModifierUtil.onModifierChanged(last, current, this, scheme);
-      }
       if (name === 'target') {
         this._updateTarget();
       }
