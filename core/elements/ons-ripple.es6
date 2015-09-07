@@ -86,14 +86,26 @@ limitations under the License.
       }
     }
 
+    _isTouchDevice() {
+      return 'ontouchstart' in window || 'onmsgesturechange' in window;
+    }
+
     _addListener() {
-      this.addEventListener('mousedown', this._boundOnClick);
-      this.addEventListener('touchstart', this._boundOnClick);
+      if (this._isTouchDevice()) {
+        this.addEventListener('touchstart', this._boundOnClick);
+      }
+      else {
+        this.addEventListener('mousedown', this._boundOnClick);
+      }
     }
 
     _removeListener() {
-      this.removeEventListener('mousedown', this._boundOnClick);
-      this.removeEventListener('touchstart', this._boundOnClick);
+      if (this._isTouchDevice()) {
+        this.removeEventListener('touchstart', this._boundOnClick);
+      }
+      else {
+        this.removeEventListener('mousedown', this._boundOnClick);
+      }
     }
 
     attachedCallback() {
