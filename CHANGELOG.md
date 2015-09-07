@@ -8,6 +8,7 @@ v1.3.9
 * ons-navigator: Fixed [#865](https://github.com/OnsenUI/OnsenUI/issues/865).
 * core: Fixed [#845](https://github.com/OnsenUI/OnsenUI/issues/845).
 * ons-lazy-repeat: Added debouncing to increase performance on iOS.
+* core: FastClick patched to support setting the system clock back.
 
 v1.3.8
 ----
