@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Snackbar | Onsen UI</title>  
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/angular/angular.js"></script>    
+  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../app.js"></script>  
+
+  <script>
+    var app = angular.module('myApp', ['onsen']);
+
+    app.controller('MyCtrl', function($scope) {
+      ons.createAlertDialog('alert.html').then(function(alertDialog) {
+        $scope.alertDialog = alertDialog;
+      });
+      
+      $scope.fromTemplate = function() {
+        $scope.alertDialog.show();
+      };
+
+      $scope.close = function() {
+        if($scope.alertDialog && $scope.alertDialog.isShown()) {
+          $scope.alertDialog.hide(); 
+        }
+      };
+
+      $scope.alert = function() {
+        ons.notification.alert({message: "Hello, world!"});
+      };
+
+    });
+  </script>
+
+</head>
+
+<body ng-controller="MyCtrl"> 
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Snackbar</div>
+    </ons-toolbar>
+
+    <div style="text-align: center">
+      <br />
+      <ons-button onclick="document.querySelector('.snackbar1').show()">Alert</ons-button>
+      <ons-button onclick="document.querySelector('.snackbar2').show()">Alert 2</ons-button>
+
+
+      <ons-snackbar swipeable class="snackbar1" max-width="400px">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        <span class="right" onclick="alert('test')">ARCHIVE</span>
+      </ons-snackbar>
+
+      <ons-snackbar swipeable class="snackbar2">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        <span class="right" onclick="alert('test')">ARCHIVE</span>
+      </ons-snackbar>
+
+    </div>
+  </ons-page>
+
+  <script type="text/ons-template" id="alert.html">
+    <ons-snackbar>
+      … some text …
+      <span class="right" onclick="alert('test')">UNDO</span>
+    </ons-snackbar>
+  </script>
+  
+</body>
+</html>
