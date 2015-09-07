@@ -293,15 +293,55 @@ limitations under the License.
         return e;
       },
 
+      _debounce: function(func, wait, immediate) {
+        var timeout;
+        return function() {
+          var context = this, args = arguments;
+          var later = function() {
+            timeout = null;
+            if (!immediate) {
+              func.apply(context, args);
+            }
+          };
+          var callNow = immediate && !timeout;
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+          if (callNow) {
+            func.apply(context, args);
+          }
+        };
+      },
+
+      _doubleFireOnTouchend: function(){
+        this._render();
+        this._debounce(this._render.bind(this), 100);
+      },
+
       _addEventListeners: function() {
-        this._boundOnChange = this._onChange.bind(this);
+        if (ons.platform.isIOS()) {
+          this._boundOnChange = this._debounce(this._onChange.bind(this), 30);
+        } else {
+          this._boundOnChange = this._onChange.bind(this);
+        }
 
         this._pageContent.addEventListener('scroll', this._boundOnChange, true);
+
+        if (ons.platform.isIOS()) {
+          this._pageContent.addEventListener('touchmove', this._boundOnChange, true);
+          this._pageContent.addEventListener('touchend', this._doubleFireOnTouchend, true);
+        }
+
         $document[0].addEventListener('resize', this._boundOnChange, true);
       },
 
       _removeEventListeners: function() {
         this._pageContent.removeEventListener('scroll', this._boundOnChange, true);
+
+        if (ons.platform.isIOS()) {
+          this._pageContent.removeEventListener('touchmove', this._boundOnChange, true);
+          this._pageContent.removeEventListener('touchend', this._doubleFireOnTouchend, true);
+        }
+
         $document[0].removeEventListener('resize', this._boundOnChange, true);
       },
 
