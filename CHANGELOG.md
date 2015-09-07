@@ -120,6 +120,7 @@ v1.3.0
  * ons-lazy-repeat: Improved behavior when items are removed.
  * ons-sliding-menu: Fixed [#577](https://github.com/OnsenUI/OnsenUI/issues/577).
  * core: Windows Universal (Windows Phone 8.1, Windows 8.1 and IE 11)  partial support.
+ * core: FastClick library updated to 1.0.6. This adds support for iOS 8.4+, earlier versions of Onsen UI will not work with iOS 8.4+.
 
 v1.2.2
 ----
