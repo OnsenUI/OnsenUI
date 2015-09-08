@@ -33,8 +33,8 @@ limitations under the License.
   `);
   const circularTemplate = util.createElement(`
     <svg class="progress-circular">
-      <circle class="progress-circular__secondary" cx="50%" cy="50%" r="25%" fill="none" stroke-width="5%" stroke-miterlimit="10"/>
-      <circle class="progress-circular__primary" cx="50%" cy="50%" r="25%" fill="none" stroke-width="5%" stroke-miterlimit="10"/>
+      <circle class="progress-circular__secondary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10"/>
+      <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10"/>
     </svg>
   `);
 

@@ -17,8 +17,8 @@ limitations under the License.
 
 ons-progress[type="circular"] {
   display: inline-block;
-  width: 80px;
-  height: 80px;
+  width: 42px;
+  height: 42px;
 }
 
 ons-progress > svg.progress-circular {

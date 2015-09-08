@@ -10,7 +10,7 @@ var-progress-bar-secondary-color = alpha($second-highlight-color, 1)
   class: progres-circle
   markup:
     <svg class="progress-circular">
-      <circle class="progress-circular__primary" cx="50%" cy="50%" r="25%" fill="none" stroke-width="5%" stroke-miterlimit="10"/>
+      <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10"/>
     </svg>
 */
 
@@ -33,7 +33,7 @@ var-progress-bar-secondary-color = alpha($second-highlight-color, 1)
 
 .progress-circular--determinate > .progress-circular__primary
   animation none
-    
+
 .progress-circular--determinate > .progress-circular__secondary
   animation none
   stroke #e0e0e0
@@ -46,15 +46,15 @@ var-progress-bar-secondary-color = alpha($second-highlight-color, 1)
 
 @keyframes progress__dash {
   0% {
-    stroke-dasharray: 1%, 250%;
+    stroke-dasharray: 10%, 241.32%;
     stroke-dashoffset: 0%;
   }
   50% {
-    stroke-dasharray: 100%, 250%;
-    stroke-dashoffset: -48%;
+    stroke-dasharray: 201%, 50.322%;
+    stroke-dashoffset: -100.0%;
   }
   100% {
-    stroke-dasharray: 160%, 250%;
-    stroke-dashoffset: -155%;
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: -251.32%;
   }
 }
