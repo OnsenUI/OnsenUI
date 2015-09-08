@@ -85,12 +85,12 @@ limitations under the License.
         this._secondary.style.width = this.hasAttribute('secondary-value') ? this.getAttribute('secondary-value') + '%' : '0%';
       } else {
         if (this.hasAttribute('value')) {
-          let per = Math.ceil(this.getAttribute('value') * 154 * 0.01);
-          this._primary.style['stroke-dasharray'] = per + '%, 250%';
+          let per = Math.ceil(this.getAttribute('value') * 251.32 * 0.01);
+          this._primary.style['stroke-dasharray'] = per + '%, 251.32%';
         }
         if (this.hasAttribute('secondary-value')) {
-          let per =  Math.ceil(this.getAttribute('secondary-value') * 154 * 0.01);
-          this._secondary.style['stroke-dasharray'] = per + '%, 250%';
+          let per =  Math.ceil(this.getAttribute('secondary-value') * 251.32 * 0.01);
+          this._secondary.style['stroke-dasharray'] = per + '%, 251.32%';
         }
       }
     }
