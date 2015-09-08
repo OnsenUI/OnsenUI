@@ -25,7 +25,7 @@ limitations under the License.
   ons.notification._createAlertDialog = function(title, message,
     buttonLabels, primaryButtonIndex, modifier, animation, callback,
     messageIsHTML, cancelable, promptDialog, autofocus, placeholder,
-    submitOnEnter, compile) {
+    defaultValue, submitOnEnter, compile) {
 
     compile = compile || ((object) => object);
 
@@ -53,6 +53,7 @@ limitations under the License.
     if (promptDialog) {
       inputElement = util.createElement('<input class="text-input" type="text"></input>');
       inputElement.setAttribute('placeholder', placeholder);
+      inputElement.value = defaultValue;
       inputElement.style.width = '100%';
       inputElement.style.marginTop = '10px';
 
@@ -241,6 +242,7 @@ limitations under the License.
       buttonLabel: 'OK',
       animation: 'default',
       title: 'Alert',
+      defaultValue: '',
       placeholder: '',
       callback: function() {},
       cancelable: false,
@@ -266,6 +268,7 @@ limitations under the License.
       true,
       options.autofocus,
       options.placeholder,
+      options.defaultValue,
       options.submitOnEnter,
       options.compile
     );
@@ -279,10 +282,12 @@ limitations under the License.
    * @param {Boolean} [options.cancelable]
    * @param {String} [options.animation]
    * @param {String} [options.placeholder]
+   * @param {String} [options.defaultValue]
    * @param {String} [options.title]
    * @param {String} [options.modifier]
    * @param {Function} [options.callback]
    * @param {Boolean} [options.autofocus]
+   * @param {Boolean} [options.submitOnEnter]
    * @param {Function} [options.compile]
    * @return {Promise}
    */
