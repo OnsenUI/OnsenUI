@@ -15,6 +15,10 @@ limitations under the License.
 
  */
 
+ons-progress {
+  display: block;
+}
+
 ons-progress[type="circular"] {
   display: inline-block;
   width: 42px;
