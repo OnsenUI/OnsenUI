@@ -171,7 +171,7 @@ limitations under the License.
       options.animation,
       options.callback,
       !options.message ? true : false,
-      false, false, false,
+      false, false, false, '', '', false,
       options.compile
     );
   };
@@ -216,7 +216,7 @@ limitations under the License.
       options.callback,
       !options.message ? true : false,
       options.cancelable,
-      false, false,
+      false, false, '', '', false,
       options.compile
     );
   };
