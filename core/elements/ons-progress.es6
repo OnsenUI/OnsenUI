@@ -22,8 +22,12 @@ limitations under the License.
   const ModifierUtil = ons._internal.ModifierUtil;
 
   const scheme = {
-    'progress-bar': 'progress-progress--*',
-    'progress-circular': 'progress-circular--*'
+    '.progress-bar': 'progress-bar--*',
+    '.progress-circular': 'progress-circular--*',
+    '.progress-circular__primary': 'progress-circular__primary--*',
+    '.progress-circular__secondary': 'progress-circular__secondary--*',
+    '.progress-bar__primary': 'progress-bar__primary--*',
+    '.progress-bar__secondary': 'progress-bar__secondary--*'
   };
 
   const barTemplate = util.createElement(`
