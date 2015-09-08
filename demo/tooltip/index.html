@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../app.js"></script>  
+
+  <title>Tooltip Demo</title>
+
+  <script>
+  </script>
+  
+</head>
+
+<body>    
+  
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Tooltip</div>
+    </ons-toolbar>
+
+    <section style="text-align: center; padding-bottom: 100px;">
+      <br><br>
+
+      <h4>Touch only</h4>
+      <ons-icon
+      icon="fa-twitter"
+      size="30px">
+        <ons-tooltip on="touch">Tooltip</ons-tooltip>
+      </ons-icon>
+      <br><br><br><br>
+
+      <h4>All events with modifier="small", target="nextSibling"</h4>
+      <ons-tooltip modifier="small" target="nextSibling">Tooltip</ons-tooltip>
+      <ons-icon
+      icon="fa-facebook"
+      size="30px">
+      </ons-icon>
+      
+      <br><br><br><br>
+
+      <h4>Hover and Focus</h4>
+      <button>
+        test
+        <ons-tooltip on="hover focus">tst</ons-tooltip>
+      </button>
+      
+      <br><br><br>
+
+      <h4>All events with target="prevSibling"</h4>
+      <ons-button>test</ons-button>
+      <ons-tooltip target="prevSibling">tst</ons-tooltip>
+
+    </section>
+
+  </ons-page>
+
+</body>
+</html>

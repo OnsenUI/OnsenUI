@@ -1,0 +1,40 @@
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-textarea-color = var-input-text-color
+var-textarea-border = 1px solid var-input-border-color
+var-textarea-padding = 5px 5px 5px 5px
+var-textarea-box-shadow = none
+
+/*! topdoc
+  name: Tooltip
+  class: tooltip
+  modifiers:
+    :disabled: Disabled state
+  markup:
+    <div class="tooltip">tooltip text</div>
+  showcase:
+*/
+
+.tooltip
+  reset-box-model()
+  reset-font()
+  outline none
+  margin-top 24px
+  padding 9px 16px
+  display block
+  position absolute
+  background-color #616161
+  z-index 1002
+  color white
+  height 32px
+  font-size 14px
+  border-radius 2px
+  transition opacity 0.2s linear
+  pointer-events none
+  
+.tooltip--small
+  margin-top 14px
+  height 22px
+  padding 6px 8px
+  font-size 10px
