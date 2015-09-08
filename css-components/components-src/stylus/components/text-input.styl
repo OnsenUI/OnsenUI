@@ -160,12 +160,11 @@ text-input--invalid()
 
 
 /*! topdoc
-  name: Material-like Text Input
-  class: material-text-input
+  name: Material-like Input
+  class: text-input--material
   markup:
     <input class="text-input--material" placeholder="Username" type="text" required>
     <input class="text-input--material" placeholder="Password" type="password" required>
-    
 */
 
 .text-input--material
@@ -175,7 +174,6 @@ text-input--invalid()
   background-repeat no-repeat
   background-position center bottom
   background-color transparent
-  color var-text-highlight-color
   font-size var-text-input-font-size
   margin 20px 0px
   border none
@@ -185,7 +183,7 @@ text-input--invalid()
 
 .text-input--material:focus
   background-image linear-gradient(var-text-highlight-color, var-text-highlight-color), linear-gradient(var-text-input-border-color, var-text-input-border-color)
-  animation input-animate 0.3s forwards
+  animation material-input-animate 0.3s forwards
   background-size 0% 2px
 
 .text-input--material::-webkit-input-placeholder
@@ -227,7 +225,7 @@ text-input--invalid()
   color var-text-highlight-color
   transform translate3d(-10%, -100%, 0) scale3d(0.8, 0.8, 1)
 
-@keyframes input-animate
+@keyframes material-input-animate
   0%
     background-size 0% 2px, 100% 2px
   100%
