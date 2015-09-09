@@ -229,7 +229,7 @@ limitations under the License.
      * @return {Object/null}
      */
     getDeviceBackButtonHandler() {
-      return this._deviceBackButtonHandler();
+      return this._deviceBackButtonHandler;
     }
 
     _assertChildren() {

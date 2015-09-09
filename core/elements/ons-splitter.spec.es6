@@ -35,18 +35,18 @@ describe('ons-splitter', () => {
     });
   });
 
-  describe('#closeRight()', (done) => {
-    it('should close right ons-splitter-side', () => {
-      expect(splitter.isOpenRight()).to.be.equal(false);
+  describe('#closeRight()', () => {
+    it('should close right ons-splitter-side', (done) => {
+      expect(splitter.isRightOpened()).to.be.equal(false);
       expect(splitter.closeRight()).to.be.equal(false);
 
       expect(splitter.openRight({callback: () => {
-        expect(splitter.isOpenRight()).to.be.equal(true);
+        expect(splitter.isRightOpened()).to.be.equal(true);
         expect(splitter.closeRight({callback: () => {
-          expect(splitter.isOpenRight()).to.be.equal(false);
+          expect(splitter.isRightOpened()).to.be.equal(false);
           done();
-        })).to.be.equal(true);
-      })).to.be.equal(false);
+        }})).to.be.equal(true);
+      }})).to.be.equal(true);
     });
   });
 
@@ -62,4 +62,3 @@ describe('ons-splitter', () => {
     });
   });
 });
-
