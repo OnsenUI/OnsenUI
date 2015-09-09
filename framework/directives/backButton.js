@@ -39,7 +39,7 @@
         return {
           pre: function(scope, element, attrs, controller, transclude) {
             CustomElements.upgrade(element[0]);
-            GenericView.register(scope, element, attrs, {
+            var backButton = GenericView.register(scope, element, attrs, {
               viewKey: 'ons-back-button'
             });
 
