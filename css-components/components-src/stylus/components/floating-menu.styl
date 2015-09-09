@@ -1,0 +1,57 @@
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+
+/* topdoc
+  name: Floating Menu
+  class: floating menu
+  markup:
+    <div class="floating-menu" cancelable>
+        <div>
+          <div class="floating-menu__item">Show all notification</div>
+          <div class="floating-menu__item">Disable all notification</div>
+      </div>
+*/
+
+.floating-menu__mask
+  position absolute
+  left 0
+  right 0
+  top 0
+  bottom 0
+  z-index 20000
+  background-color transparent
+
+.floating-menu
+  reset-box-model()
+  reset-base()
+  reset-font()
+  reset-cursor()
+  shadow-2()
+  position absolute
+  z-index 20001
+  background-color #fff
+  border-radius 2px
+  overflow scroll
+  max-height 0px
+  transition max-height 0.4s ease
+
+.floating-menu__item
+  reset-font()
+  display flex
+  flex-direction row
+  align-items center
+  font-size 16px
+  line-height 24px
+  min-height 48px
+  padding 0 16px
+
+.floating-menu__item:first-child
+  padding-top 8px
+
+.floating-menu__item:last-child
+  border-bottom none
+  padding-bottom 8px
+
+.floating-menu__no-scroll
+  overflow hidden

@@ -153,6 +153,42 @@ limitations under the License.
    * @param {Function} [options.link]
    * @return {Promise}
    */
+  ons._createFloatingMenuOriginal = function(page, options) {
+    options = options || {};
+
+    if (!page) {
+      throw new Error('Page url must be defined.');
+    }
+
+    return ons._internal.getPageHTMLAsync(page).then(html => {
+      html = html.match(/<ons-floating-menu/gi) ? `<div>${html}</div>` : `<ons-floating-menu>${html}</ons-floating-menu>`;
+      const div = ons._util.createElement('<div>' + html + '</div>');
+
+      const floatingMenu = div.querySelector('ons-floating-menu');
+      CustomElements.upgrade(floatingMenu);
+      document.body.appendChild(floatingMenu);
+
+      if (options.link instanceof Function) {
+        options.link(floatingMenu);
+      }
+
+      return floatingMenu;
+    });
+  };
+
+  /**
+   * @param {String} page
+   * @param {Object} [options]
+   * @return {Promise}
+   */
+  ons.createFloatingMenu = ons._createFloatingMenuOriginal;
+
+  /**
+   * @param {String} page
+   * @param {Object} [options]
+   * @param {Function} [options.link]
+   * @return {Promise}
+   */
   ons._createDialogOriginal = function(page, options) {
     options = options || {};
 
