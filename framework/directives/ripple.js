@@ -5,7 +5,7 @@
  * @category form
  * @description
  *   [en]Adds a Material Design "ripple" effect to an element.[/en]
- *   [ja][/ja]
+ *   [ja]マテリアルデザインのリップル効果をDOM要素に追加します。[/ja]
  * @example
  * <ons-list>
  *   <ons-list-item>
@@ -25,7 +25,7 @@
  * @type {String}
  * @description
  *   [en]Color of the ripple effect.[/en]
- *   [ja][/ja]
+ *   [ja]リップルエフェクトの色を指定します。[/ja]
  */
 
 /**
@@ -33,7 +33,7 @@
  * @name center
  * @description
  *   [en]If this attribute is set, the effect will originate from the center.[/en]
- *   [ja][/ja]
+ *   [ja]この属性が設定された場合、その効果は要素の中央から始まります。[/ja]
  */
 
 /**
@@ -42,7 +42,7 @@
  * @type {String}
  * @description
  *   [en]If this attribute is set to children, the effect will be applied to the children of the component instead of the parent.[/en]
- *   [ja][/ja]
+ *   [ja]この属性に"children"を設定されたとき、リップルエフェクトはこのコンポーネントの子要素に適用されます。そうでなければ、親要素に適用されます。[/ja]
  */
 
 /**
@@ -50,7 +50,7 @@
  * @name disabled
  * @description
  *   [en]If this attribute is set, the ripple effect will be disabled.[/en]
- *   [ja][/ja]
+ *   [ja]この属性が設定された場合、リップルエフェクトは無効になります。[/ja]
  */
 
 (function() {
