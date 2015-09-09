@@ -54,16 +54,18 @@ limitations under the License.
       const left = this._getSideElement('left');
       const right = this._getSideElement('right');
 
-      if (left && left.getCurrentMode && left.getCurrentMode() === 'split') {
-        content.style.left = left._getWidth();
-      } else {
-        content.style.left = '0px';
-      }
+      if (content) {
+        if (left && left.getCurrentMode && left.getCurrentMode() === 'split') {
+          content.style.left = left._getWidth();
+        } else {
+          content.style.left = '0px';
+        }
 
-      if (right && right.getCurrentMode && right.getCurrentMode() === 'split') {
-        content.style.right = right._getWidth();
-      } else {
-        content.style.right = '0px';
+        if (right && right.getCurrentMode && right.getCurrentMode() === 'split') {
+          content.style.right = right._getWidth();
+        } else {
+          content.style.right = '0px';
+        }
       }
     }
 

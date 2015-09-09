@@ -171,9 +171,9 @@ limitations under the License.
             timing: 'cubic-bezier(.1, .7, .1, 1)'
           })
           .queue(callback => {
-            callback();
             this._side.style.webkitTransition = '';
             done();
+            callback();
           }),
 
         animit(this._mask)
