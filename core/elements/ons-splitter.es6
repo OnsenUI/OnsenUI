@@ -100,8 +100,9 @@ limitations under the License.
       const menu = this._getSideElement(side);
 
       if (menu) {
-        menu.open(options);
+        return menu.open(options);
       }
+      return false;
     }
 
     /**
@@ -126,12 +127,14 @@ limitations under the License.
       const menu = this._getSideElement(side);
 
       if (menu) {
-        menu.close(options);
+        return menu.close(options);
       }
+      return false;
     }
 
     /**
      * @param {Object} [options]
+     * @return {Boolean}
      */
     toggleLeft(options = {}) {
       return this._toggle('left', options);
@@ -139,6 +142,7 @@ limitations under the License.
 
     /**
      * @param {Object} [options]
+     * @return {Boolean}
      */
     toggleRight(options = {}) {
       return this._toggle('right', options);
@@ -148,8 +152,9 @@ limitations under the License.
       const menu = this._getSideElement(side);
 
       if (menu) {
-        menu.toggle(options);
+        return menu.toggle(options);
       }
+      return false;
     }
 
     /**
