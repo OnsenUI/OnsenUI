@@ -104,7 +104,9 @@ limitations under the License.
   }
 
   class BaseMode {
-    isOpened() {}
+    isOpened() {
+      return false;
+    }
     openMenu() {
       return false;
     }
@@ -361,6 +363,10 @@ limitations under the License.
      * @param {Object} [options]
      */
     closeMenu(options = {}) {
+      if (!this.isOpened()) {
+        return false;
+      }
+
       if (this._isLocked()) {
         return false;
       }
@@ -375,7 +381,7 @@ limitations under the License.
       const done = () => {
         unlock();
         this._element._emitPostCloseEvent();
-        options.callback();
+        setImmediate(options.callback);
       };
 
       if (options.withoutAnimation) {
@@ -708,6 +714,7 @@ limitations under the License.
         this._updateForAnimationAttribute();
       }
     }
+
 
     _updateForAnimationAttribute() {
       const isActivated = this._animator && this._animator.isActivated();
