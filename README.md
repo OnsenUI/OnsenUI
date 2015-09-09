@@ -2,8 +2,8 @@
 
 [![Join us on Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/OnsenUI/OnsenUI)
 [![StackOverflow](http://img.shields.io/badge/stackoverflow-onsen--ui-FF412D.svg )]( http://stackoverflow.com/questions/tagged/onsen-ui)
-[![TypeScript definitions on DefinitelyTyped](http://definitelytyped.org/badges/standard-flat.svg)](http://definitelytyped.org)
-[![Circle CI](https://circleci.com/gh/OnsenUI/OnsenUI.svg?style=svg)](https://circleci.com/gh/OnsenUI/OnsenUI) 
+[![TypeScript definitions on DefinitelyTyped](http://definitelytyped.org/badges/standard.svg)](https://github.com/borisyankov/DefinitelyTyped/tree/master/onsenui)
+[![Circle CI](https://circleci.com/gh/OnsenUI/OnsenUI.svg?style=shield)](https://circleci.com/gh/OnsenUI/OnsenUI) 
 [![Coverage Status](https://coveralls.io/repos/OnsenUI/OnsenUI/badge.svg?branch=master&service=github)](https://coveralls.io/github/OnsenUI/OnsenUI?branch=master)
 
 The best place to start with Onsen UI is our [Getting Started](http://onsen.io/guide/getting_started.html) page.
@@ -25,6 +25,8 @@ Onsen UI is tested with the following browsers and mobile OS.
  * Windows Phone 8.1+
  * Google Chrome
  * Safari
+
+For versions earlier than 1.3.0, iOS 8.4+ is not supported. In order to use these versions with iOS 8.4+ the included FastClick library must be manually updated to the latest version.
 
 ## Demo
 
