@@ -37,7 +37,7 @@ var-border--checkmark--noborder = 3px solid var-checkbox-border-color
 var-checkbox-border-radius = 16px
 var-checkmark-border-radius = 0px
 
-var-material-checkbox-size = 20px
+var-material-checkbox-size = 18px
 
 
 /*! topdoc
@@ -289,30 +289,32 @@ checkbox--after()
   height var-material-checkbox-size
 
 .checkbox--material__checkmark:before
-  border-radius 2px
-  width var-material-checkbox-size
-  height var-material-checkbox-size
-
-.checkbox--material__checkmark:before
-  border 3px solid rgba(0,0,0, 0.5)
+  border 2px solid rgba(0,0,0, 0.5)
 
 .checkbox--material__input:checked + .checkbox--material__checkmark:before
   border none
 
 .checkbox--material__input + .checkbox--material__checkmark:after
   transition transform 0.3s ease
-  top 5px
+  width 10px
+  height 5px
+  top 4px
   left 3px
   transform scale(0) rotate(-45deg)
 
 .checkbox--material__input:checked + .checkbox--material__checkmark:after
-  top 5px
+  top 4px
   left 3px
   transform scale(1) rotate(-45deg)
 
 .checkbox--material__input:disabled:checked + .checkbox--material__checkmark:before
   background-color rgba(0,0,0,1)
-  
+
 .checkbox--material__input:disabled:checked:active + .checkbox--material__checkmark:before
   background-color rgba(0,0,0,1)
 
+.checkbox--material__checkmark:before
+  border-radius 2px
+  border-color #212121
+  width var-material-checkbox-size
+  height var-material-checkbox-size
