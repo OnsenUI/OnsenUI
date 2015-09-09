@@ -715,7 +715,6 @@ limitations under the License.
       }
     }
 
-
     _updateForAnimationAttribute() {
       const isActivated = this._animator && this._animator.isActivated();
 
