@@ -8,7 +8,7 @@ describe('ons-util', function() {
 
   describe('#parseJSONObjectSafely', () => {
     it('should parse normal JSON', () => {
-      expect(util.parseJSONObjectSafely('{"hoge":"hoge"}')).to.deep.equal({hoge: "hoge"});
+      expect(util.parseJSONObjectSafely('{"hoge":"hoge"}')).to.deep.equal({hoge: 'hoge'});
     });
 
     it('should parse broken JSON', () => {
