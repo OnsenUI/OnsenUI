@@ -48,7 +48,7 @@ limitations under the License.
     }
 
     get _pointerEvents() {
-      return ['touchstart', 'touchend', 'touchmove', 'click'];
+      return ['touchmove'];
     }
 
     getDeviceBackButtonHandler() {
