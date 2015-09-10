@@ -49,8 +49,6 @@ limitations under the License.
         this._boundOnPostchange = this._onPostchange.bind(this);
         this._element.on('prechange', this._boundOnPrechange);
         this._element.on('postchange', this._boundOnPostchange);
-
-        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['reactive', 'postchange', 'prechange']);
       },
 
       _compilePage: function(next, pageElement) {
