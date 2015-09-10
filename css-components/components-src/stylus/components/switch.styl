@@ -166,13 +166,14 @@ switch__toggle()
   margin-top -5px
   width 20px
   height 20px
-  shadow-1()
+  shadow-2()
 
 .switch--material__input:checked + .switch--material__toggle
   background-color var-switch-material-background-color
 
 .switch--material__input:not(:checked) + .switch--material__toggle:before
   background-color #f1f1f1
+  shadow-1()
   transform translateX(0px)
 
 .switch--material__input:disabled + .switch--material__toggle
