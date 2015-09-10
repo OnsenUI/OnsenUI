@@ -1,0 +1,60 @@
+// NOTE: You can't use @extend that break component independent and topdoc parsing.
+
+// internal variables
+var-progress-bar-color = alpha($highlight-color, 1)
+var-progress-bar-secondary-color = alpha($second-highlight-color, 1)
+
+
+/*! topdoc
+  name: Progress Circle
+  class: progres-circle
+  markup:
+    <svg class="progress-circular">
+      <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10"/>
+    </svg>
+*/
+
+.progress-circular
+ animation progress__rotate 2s linear infinite
+ height 80px
+ position relative
+ width 80px
+
+.progress-circular__primary
+  stroke-dasharray 1,200
+  stroke-dashoffset 0
+  animation progress__dash 1.5s ease-in-out infinite
+  stroke var-progress-bar-color
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+
+.progress-circular--determinate
+  transform rotate(270deg)
+  animation none
+
+.progress-circular--determinate > .progress-circular__primary
+  animation none
+
+.progress-circular--determinate > .progress-circular__secondary
+  animation none
+  stroke #e0e0e0
+
+@keyframes progress__rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes progress__dash {
+  0% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: 0%;
+  }
+  50% {
+    stroke-dasharray: 201%, 50.322%;
+    stroke-dashoffset: -100.0%;
+  }
+  100% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: -251.32%;
+  }
+}
