@@ -84,7 +84,7 @@ describe('OnsRippleElement', () => {
 
       ripple._onMouseDown(e);
 
-      expect(ripple._wave.style.left).not.to.equal(previousLeft)
+      expect(ripple._wave.style.left).not.to.equal(previousLeft);
       expect(ripple._wave.style.top).not.to.equal(previousTop);
     });
   });
