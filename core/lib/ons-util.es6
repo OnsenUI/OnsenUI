@@ -22,13 +22,15 @@ limitations under the License.
 
   /**
    * @param {Element} element
-   * @param {String} query dot class name or node name.
+   * @param {String/Function} query dot class name or node name or matcher function.
    * @return {HTMLElement/null}
    */
   util.findChild = (element, query) => {
-    const match = query.substr(0, 1) === '.' ?
-      (node) => node.classList.contains(query.substr(1)) :
-      (node) => node.nodeName.toLowerCase() === query;
+    const match = query instanceof Function
+      ? query
+      : query.substr(0, 1) === '.' ?
+        (node) => node.classList.contains(query.substr(1)) :
+        (node) => node.nodeName.toLowerCase() === query;
 
     for (let i = 0; i < element.children.length; i++) {
       const node = element.children[i];
@@ -120,6 +122,22 @@ limitations under the License.
   };
 
   /**
+   * @param {String} html
+   * @return {HTMLFragment}
+   */
+  util.createFragment = (html) => {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = html;
+    const fragment = document.createDocumentFragment();
+
+    if (wrapper.firstChild) {
+      fragment.appendChild(wrapper.firstChild);
+    }
+
+    return fragment;
+  };
+
+  /**
    * @param {Element} element
    * @return {Element}
    */
@@ -159,6 +177,23 @@ limitations under the License.
       result.push(arrayLike[i]);
     }
     return result;
+  };
+
+  /**
+   * @param {String} jsonString
+   * @param {Object} [failSafe]
+   * @return {Object}
+   */
+  util.parseJSONObjectSafely = (jsonString, failSafe = {}) => {
+    try {
+      const result = JSON.parse('' + jsonString);
+      if (typeof result === 'object' && result !== null) {
+        return result;
+      }
+    } catch(e) {
+      return failSafe;
+    }
+    return failSafe;
   };
 
 })(window.ons = window.ons || {});
