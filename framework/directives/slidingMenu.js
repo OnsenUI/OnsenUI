@@ -421,7 +421,10 @@
           $onsen.declareVarAttribute(attrs, slidingMenu);
           element.data('ons-sliding-menu', slidingMenu);
 
-          scope.$on('$destroy', function(){
+          element.data('_scope', scope);
+
+          scope.$on('$destroy', function() {
+            element.data('_scope', undefined);
             slidingMenu._events = undefined;
             element.data('ons-sliding-menu', undefined);
           });

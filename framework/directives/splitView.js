@@ -361,8 +361,10 @@
           $onsen.registerEventHandlers(splitView, 'update presplit precollapse postsplit postcollapse destroy');
 
           element.data('ons-split-view', splitView);
+          element.data('_scope', scope);
 
           scope.$on('$destroy', function() {
+            element.data('_scope', undefined);
             splitView._events = undefined;
             element.data('ons-split-view', undefined);
           });

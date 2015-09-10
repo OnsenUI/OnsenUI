@@ -399,7 +399,10 @@
 
             element.data('ons-navigator', navigator);
 
+            element.data('_scope', scope);
+
             scope.$on('$destroy', function() {
+              element.data('_scope', undefined);
               navigator._events = undefined;
               element.data('ons-navigator', undefined);
               element = null;
