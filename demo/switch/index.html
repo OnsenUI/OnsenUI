@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>Switch Demo | Onsen UI</title>  
@@ -10,7 +10,10 @@
 
   <script src="../../build/js/angular/angular.js"></script>    
   <script src="../../build/js/onsenui.js"></script>    
-  <script src="../app.js"></script>  
+  <script src="../app.js"></script>
+  <script>
+    ons.bootstrap();
+  </script>
   
 </head>
 
@@ -50,6 +53,26 @@
         <div style="text-align: center; margin-top: 12px;"><ons-switch checked></ons-switch> <ons-switch></ons-switch></div>
       </ons-list-item>
     </ons-list>
+
+    <br>
+
+    <ons-list>
+      <ons-list-item style="height: 44px">
+        <div style="text-align: center; margin-top: 12px;"><ons-switch checked modifier="material"></ons-switch> <ons-switch></ons-switch></div>
+      </ons-list-item>
+    </ons-list>
+
+    <ons-list>
+      <ons-list-item style="height: 44px">
+        <div style="text-align: center; margin-top: 12px;">
+          <label class="switch switch--material">
+            <input type="checkbox" class="switch__input switch--material__input">
+            <div class="switch__toggle switch--material__toggle"><ons-ripple></ons-ripple></div>
+          </label>
+        </div>
+      </ons-list-item>
+    </ons-list>
+
 
     <ons-bottom-toolbar style="text-align: center; padding-top: 6px;">
       <ons-switch></ons-switch>
