@@ -44,7 +44,20 @@ limitations under the License.
       options.callback = options.callback instanceof Function ? options.callback : () => {};
       ons._internal.getPageHTMLAsync(page).then((html) => {
         window.OnsSplitterContentElement.rewritables.link(this, util.createFragment(html), (fragment) => {
+          while (this.childNodes[0]) {
+            if (this.childNodes[0]._hide instanceof Function) {
+              this.childNodes[0]._hide();
+            }
+            this.removeChild(this.childNodes[0]);
+          }
+
           this.appendChild(fragment);
+          util.arrayOf(fragment.children).forEach(child => {
+            if (child._show instanceof Function) {
+              child._show();
+            }
+          });
+
           options.callback();
         });
       });
@@ -59,6 +72,31 @@ limitations under the License.
     }
 
     detachedCallback() {
+    }
+
+    _show() {
+      util.arrayOf(this.children).forEach(child => {
+        if (child._show instanceof Function) {
+          child._show();
+        }
+      });
+    }
+
+    _hide() {
+      util.arrayOf(this.children).forEach(child => {
+        if (child._hide instanceof Function) {
+          child._hide();
+        }
+      });
+    }
+
+    _destroy() {
+      util.arrayOf(this.children).forEach(child => {
+        if (child._destroy instanceof Function) {
+          child._destroy();
+        }
+      });
+      this.remove();
     }
 
     _assertParent() {

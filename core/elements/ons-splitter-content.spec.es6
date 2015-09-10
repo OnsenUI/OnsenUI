@@ -25,6 +25,12 @@ describe('ons-splitter-content', () => {
     expect(window.OnsSplitterContentElement).to.be.ok;
   });
 
+  it('provides _hide(), _show(), _destroy() methods', () => {
+    expect(content._hide instanceof Function).to.be.ok;
+    expect(content._show instanceof Function).to.be.ok;
+    expect(content._destroy instanceof Function).to.be.ok;
+  });
+
   describe('child elements', ()=> {
     it('should pass though child nodes', () => {
       expect(content.innerHTML).to.be.equal('content');

@@ -24,6 +24,12 @@ describe('ons-splitter-side', () => {
     splitter = left = right = null;
   });
 
+  it('provides _hide(), _show(), _destroy() methods', () => {
+    expect(left._hide instanceof Function).to.be.ok;
+    expect(left._show instanceof Function).to.be.ok;
+    expect(left._destroy instanceof Function).to.be.ok;
+  });
+
   describe('#open()', () => {
     it('should open ons-splitter-side', () => {
       expect(right.open()).to.be.equal(true);
