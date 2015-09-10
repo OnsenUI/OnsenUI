@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Progress | Onsen UI</title>  
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/onsenui.js"></script>
+
+  <script>
+    ons.bootstrap();
+  </script>
+</head>
+
+<body>
+    <ons-page>
+      <ons-toolbar>
+        <div class="center">Progress</div>
+      </ons-toolbar>
+
+      <ons-progress value="10"></ons-progress>
+
+      <div style="margin: 20px auto; width: 320px;">
+        <p>Loading stuff...</p>
+        <ons-progress value="20" secondary-value="50"></ons-progress>
+      </div>
+
+      <ons-progress indeterminate></ons-progress>
+      <ons-progress type="circular" value="10"></ons-progress>
+      <ons-progress type="circular" value="20" secondary-value="50"></ons-progress>
+      <ons-progress type="circular" indeterminate></ons-progress>
+    </ons-page>
+</body>
+</html>
+
