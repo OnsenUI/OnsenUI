@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v1.3.10
+----
+* ons-tabbar: Fixed [#891](https://github.com/OnsenUI/OnsenUI/issues/891).
+
 v1.3.9
 ----
 * ons-carousel: Fixed [#844](https://github.com/OnsenUI/OnsenUI/issues/844).
