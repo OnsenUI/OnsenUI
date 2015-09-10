@@ -1,4 +1,4 @@
-/*! onsenui - v1.3.9 - 2015-09-07 */
+/*! onsenui - v1.3.9 - 2015-09-10 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -17287,7 +17287,10 @@ limitations under the License.
 
             element.data('ons-navigator', navigator);
 
+            element.data('_scope', scope);
+
             scope.$on('$destroy', function() {
+              element.data('_scope', undefined);
               navigator._events = undefined;
               element.data('ons-navigator', undefined);
               element = null;
@@ -18776,7 +18779,10 @@ limitations under the License.
           $onsen.declareVarAttribute(attrs, slidingMenu);
           element.data('ons-sliding-menu', slidingMenu);
 
-          scope.$on('$destroy', function(){
+          element.data('_scope', scope);
+
+          scope.$on('$destroy', function() {
+            element.data('_scope', undefined);
             slidingMenu._events = undefined;
             element.data('ons-sliding-menu', undefined);
           });
@@ -19151,8 +19157,10 @@ limitations under the License.
           $onsen.registerEventHandlers(splitView, 'update presplit precollapse postsplit postcollapse destroy');
 
           element.data('ons-split-view', splitView);
+          element.data('_scope', scope);
 
           scope.$on('$destroy', function() {
+            element.data('_scope', undefined);
             splitView._events = undefined;
             element.data('ons-split-view', undefined);
           });
