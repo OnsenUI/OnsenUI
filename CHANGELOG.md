@@ -37,6 +37,10 @@ v2.0.0-dev
  * ons.notification: Added `defaultValue`, `placeholder` and `autofocus` options to prompt.
  * ons-popover: Fixed [#880](https://github.com/OnsenUI/OnsenUI/issues/880).
 
+v1.3.10
+----
+* ons-tabbar: Fixed [#891](https://github.com/OnsenUI/OnsenUI/issues/891).
+
 v1.3.9
 ----
 * ons-carousel: Fixed [#844](https://github.com/OnsenUI/OnsenUI/issues/844).
