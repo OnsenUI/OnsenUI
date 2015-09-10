@@ -182,15 +182,14 @@ radio-button--disabled()
   border-radius 50%
   width var-material-radio-button-size
   height var-material-radio-button-size
-  transition transform 0.2s ease
+  transition border 0.2s ease
 
 .radio-button--material__checkmark:after
-  transition transform 0.2s ease
+  transition background 0.2s ease, transform 0.2s ease
   top 5px
   left 5px
   width 10px
   height 10px
-  background $highlight-color
   border none
   border-radius 50%
   transform scale(0)
@@ -198,8 +197,13 @@ radio-button--disabled()
 .radio-button--material__input:checked + .radio-button__checkmark:before
   background transparent
   border 2px solid $highlight-color
-  transition border 0.2s ease
+
+.radio-button--material__input + .radio-button__checkmark:after
+  background #696969
+  opacity 1
+  transform scale(0)
 
 .radio-button--material__input:checked + .radio-button__checkmark:after
   opacity 1
+  background $highlight-color
   transform scale(1)
