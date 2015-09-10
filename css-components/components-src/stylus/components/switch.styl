@@ -143,31 +143,36 @@ switch__toggle()
 */
 
 .switch--material
-  width 38px
-  height 26px
+  width 36px
+  height 20px
+  padding 0 10px
 
 .switch--material__toggle
-  background-color #696969
+  background-color #bdbdbd
   margin-top 5px
-  height 16px
+  height 14px
+
 
 .switch--material__input
   hide-input()
+
+.switch--material__input:checked + .switch--material__toggle:before
+  transform translateX(16px)
 
 // switch toggle circle
 .switch--material__toggle:before
   background-color var-switch-thumb-border-color-active
   left 0px
   margin-top -5px
-  width 22px
-  height 22px
+  width 20px
+  height 20px
   shadow-1()
 
 .switch--material__input:checked + .switch--material__toggle
   background-color var-switch-material-background-color
 
 .switch--material__input:not(:checked) + .switch--material__toggle:before
-  background-color #b8b8b8
+  background-color #f1f1f1
   transform translateX(0px)
 
 .switch--material__input:disabled + .switch--material__toggle
