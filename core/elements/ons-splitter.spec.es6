@@ -27,6 +27,41 @@ describe('ons-splitter', () => {
     expect(splitter._destroy instanceof Function).to.be.ok;
   });
 
+  describe('page lifecycle events propagation', () => {
+    it('should trigger "init" lifecyle event', (done) => {
+      const splitter = ons._util.createElement(`
+        <ons-splitter>
+          <ons-splitter-content><ons-page>content</ons-page></ons-splitter-content>
+        </ons-splitter>
+      `);
+
+      document.body.addEventListener('init', event => {
+        expect(event.target.nodeName.toLowerCase()).to.be.equal('ons-page');
+        splitter.remove();
+        done();
+      });
+
+      document.body.appendChild(splitter);
+    });
+
+    it('should trigger "show" lifecyle event', (done) => {
+      const splitter = ons._util.createElement(`
+        <ons-splitter>
+          <ons-splitter-content><ons-page>content</ons-page></ons-splitter-content>
+        </ons-splitter>
+      `);
+
+      document.body.addEventListener('show', (event) => {
+        expect(event.target.nodeName.toLowerCase()).to.be.equal('ons-page');
+        splitter.remove();
+        done();
+      });
+
+      document.body.appendChild(splitter);
+    });
+  });
+
+
   describe('#openRight()', () => {
     it('should open right ons-splitter-side', () => {
       expect(splitter.openRight()).to.be.equal(true);
