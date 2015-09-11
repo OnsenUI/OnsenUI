@@ -19,6 +19,8 @@ limitations under the License.
   'use strict';
 
   const util = ons._util;
+  const AnimatorFactory = ons._internal.AnimatorFactory;
+
   const SPLIT_MODE = 'split';
   const COLLAPSE_MODE = 'collapse';
 
@@ -435,6 +437,13 @@ limitations under the License.
       this._page = null;
       this._isAttached = false;
       this._collapseStrategy = new CollapseDetection();
+      this._animatorFactory = new AnimatorFactory({
+        animators: window.OnsSplitterElement._animatorDict,
+        baseClass: ons._internal.SplitterAnimator,
+        baseClassName: 'SplitterAnimator',
+        defaultAnimation: this.getAttribute('animation'),
+        defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
+      });
 
       this._collapseMode = new CollapseMode(this);
       this._splitMode = new SplitMode(this);
@@ -812,11 +821,10 @@ limitations under the License.
     }
 
     _createAnimator() {
-      const animatorName = this.hasAttribute('animation') ? this.getAttribute('animation') : 'default';
-      const animatorDict = window.OnsSplitterElement._animatorDict;
-
-      const AnimatorClass = animatorDict[animatorName] ? animatorDict[animatorName] : animatorDict.default;
-      return new AnimatorClass();
+      return this._animatorFactory.newAnimator({
+        animation: this.getAttribute('animation'),
+        animationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
+      });
     }
   }
 
