@@ -159,8 +159,7 @@ limitations under the License.
         this._isPopping = false;
         unlock();
 
-        util.triggerElementEvent(this, 'postpop', eventDetail);
-
+        const event = util.triggerElementEvent(this, 'postpop', eventDetail);
         event.leavePage = null;
 
         if (typeof options.onTransitionEnd === 'function') {
