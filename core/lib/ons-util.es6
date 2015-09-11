@@ -207,7 +207,7 @@ limitations under the License.
     const event = new CustomEvent(eventName, {
       bubbles: true,
       cancelable: true,
-      detail: eventDetail
+      detail: detail
     });
 
     Object.keys(detail).forEach(key => {
