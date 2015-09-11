@@ -113,7 +113,7 @@ limitations under the License.
       if (this.isCancelable()) {
         this.hide({
           callback: () => {
-            this.dispatchEvent(new CustomEvent('cancel', {bubbles: true}));
+            util.triggerElementEvent(this, 'cancel');
           }
         });
       }
@@ -131,15 +131,12 @@ limitations under the License.
       let cancel = false;
       const callback = options.callback || function() {};
 
-      this.dispatchEvent(new CustomEvent('preshow', {
-        bubbles: true,
-        detail: {
-          dialog: this,
-          cancel: function() {
-            cancel = true;
-          }
+      util.triggerElementEvent(this, 'preshow', {
+        dialog: this,
+        cancel: function() {
+          cancel = true;
         }
-      }));
+      });
 
       if (!cancel) {
         this._doorLock.waitUnlock(() => {
@@ -154,10 +151,7 @@ limitations under the License.
             this._visible = true;
             unlock();
 
-            this.dispatchEvent(new CustomEvent('postshow', {
-              bubbles: true,
-              detail: {dialog: this}
-            }));
+            util.triggerElementEvent(this, 'postshow', {dialog: this});
 
             callback();
           });
@@ -177,15 +171,12 @@ limitations under the License.
       let cancel = false;
       const callback = options.callback || function() {};
 
-      this.dispatchEvent(new CustomEvent('prehide', {
-        bubbles: true,
-        detail: {
-          dialog: this,
-          cancel: function() {
-            cancel = true;
-          }
+      util.triggerElementEvent(this, 'prehide', {
+        dialog: this,
+        cancel: function() {
+          cancel = true;
         }
-      }));
+      });
 
       if (!cancel) {
         this._doorLock.waitUnlock(() => {
@@ -196,10 +187,7 @@ limitations under the License.
             this.style.display = 'none';
             this._visible = false;
             unlock();
-            this.dispatchEvent(new CustomEvent('posthide', {
-              bubbles: true,
-              detail: {dialog: this}
-            }));
+            util.triggerElementEvent(this, 'posthide', {dialog: this});
             callback();
           });
         });

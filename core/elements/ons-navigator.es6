@@ -159,11 +159,7 @@ limitations under the License.
         this._isPopping = false;
         unlock();
 
-        const event = new CustomEvent('postpop', {
-          bubbles: true,
-          detail: eventDetail
-        });
-        this.dispatchEvent(event);
+        util.triggerElementEvent(this, 'postpop', eventDetail);
 
         event.leavePage = null;
 
@@ -404,12 +400,7 @@ limitations under the License.
         this._isPushing = false;
         unlock();
 
-        const event = new CustomEvent('postpush', {
-          bubbles: true,
-          detail: eventDetail
-        });
-        this.dispatchEvent(event);
-
+        util.triggerElementEvent(this, 'postpush', eventDetail);
 
         if (typeof options.onTransitionEnd === 'function') {
           options.onTransitionEnd();
@@ -447,18 +438,14 @@ limitations under the License.
      */
     _emitPrePushEvent() {
       let isCanceled = false;
-      const event = new CustomEvent('prepush', {
-        bubbles: true,
-        detail: {
-          navigator: this,
-          currentPage: this._pages.length > 0 ? this.getCurrentPage() : undefined,
-          cancel: function() {
-            isCanceled = true;
-          }
+
+      util.triggerElementEvent(this, 'prepush', {
+        navigator: this,
+        currentPage: this._pages.length > 0 ? this.getCurrentPage() : undefined,
+        cancel: function() {
+          isCanceled = true;
         }
       });
-
-      this.dispatchEvent(event);
 
       return isCanceled;
     }
@@ -470,20 +457,16 @@ limitations under the License.
       let isCanceled = false;
 
       const leavePage = this.getCurrentPage();
-      const event = new CustomEvent('prepop', {
-        bubbles: true,
-        detail: {
-          navigator: this,
-          // TODO: currentPage will be deprecated
-          currentPage: leavePage,
-          leavePage: leavePage,
-          enterPage: this._pages[this._pages.length - 2],
-          cancel: function() {
-            isCanceled = true;
-          }
+      util.triggerElementEvent(this, 'prepop', {
+        navigator: this,
+        // TODO: currentPage will be deprecated
+        currentPage: leavePage,
+        leavePage: leavePage,
+        enterPage: this._pages[this._pages.length - 2],
+        cancel: function() {
+          isCanceled = true;
         }
       });
-      this.dispatchEvent(event);
 
       return isCanceled;
     }
