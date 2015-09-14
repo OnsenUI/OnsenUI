@@ -30,13 +30,13 @@
  * @param {Object} event 
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
- * @param {Object} event.carousel
+ * @param {Object} event.details.carousel
  *   [en]Carousel object.[/en]
  *   [ja]イベントが発火したCarouselオブジェクトです。[/ja]
- * @param {Number} event.activeIndex
+ * @param {Number} event.details.activeIndex
  *   [en]Current active index.[/en]
  *   [ja]現在アクティブになっている要素のインデックス。[/ja]
- * @param {Number} event.lastActiveIndex
+ * @param {Number} event.details.lastActiveIndex
  *   [en]Previous active index.[/en]
  *   [ja]以前アクティブだった要素のインデックス。[/ja]
  */
