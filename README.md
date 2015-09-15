@@ -26,6 +26,8 @@ Onsen UI is tested with the following browsers and mobile OS.
  * Google Chrome
  * Safari
 
+For versions earlier than 1.3.0, iOS 8.4+ is not supported. In order to use these versions with iOS 8.4+ the included FastClick library must be manually updated to the latest version.
+
 ## Demo
 
 [Click here](http://onsen.io/guide/components.html) to see Onsen UI in action!

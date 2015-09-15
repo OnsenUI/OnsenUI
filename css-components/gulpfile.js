@@ -179,7 +179,7 @@ gulp.task('build-css-components', ['build-schemes'], function(done) {
 // build-css-topdoc
 ////////////////////////////////////////
 gulp.task('build-css-topdoc', ['build-css-components'], $.shell.task([
-  './node_modules/.bin/topdoc --source ./components-src/dist --destination ./www/testcases --template ./components-src/testcases-topdoc-template'
+  '"./node_modules/.bin/topdoc" --source "./components-src/dist" --destination "./www/testcases" --template "./components-src/testcases-topdoc-template"'
 ]));
 
 ////////////////////////////////////////
