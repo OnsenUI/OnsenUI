@@ -467,17 +467,11 @@ limitations under the License.
     }
 
     _emitPostOpenEvent() {
-      this.dispatchEvent(new CustomEvent('postopen', {
-        bubbles: true,
-        detail: {side: this}
-      }));
+      util.triggerElementEvent(this, 'postopen', {side: this});
     }
 
     _emitPostCloseEvent() {
-      this.dispatchEvent(new CustomEvent('postclose', {
-        bubbles: true,
-        detail: {side: this}
-      }));
+      util.triggerElementEvent(this, 'postclose', {side: this});
     }
 
     /**
@@ -490,15 +484,11 @@ limitations under the License.
     _emitCancelableEvent(name) {
       let isCanceled = false;
 
-      const event = new CustomEvent(name, {
-        bubbles: true,
-        detail: {
-          side: this,
-          cancel: () => isCanceled = true
-        }
+      util.triggerElementEvent(this, name, {
+        side: this,
+        cancel: () => isCanceled = true
       });
 
-      this.dispatchEvent(event);
       return isCanceled;
     }
 
@@ -563,14 +553,10 @@ limitations under the License.
       currentMode.enterMode();
       this.setAttribute('mode', mode);
 
-      const event = new CustomEvent('modechange', {
-        bubbles: true,
-        detail: {
-          side: this,
-          mode: mode
-        }
+      util.triggerElementEvent(this, 'modechange', {
+        side: this,
+        mode: mode
       });
-      this.dispatchEvent(event);
     }
 
     _layout() {

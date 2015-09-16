@@ -196,4 +196,27 @@ limitations under the License.
     return failSafe;
   };
 
+  /**
+   * @param {Element} element
+   * @param {String} eventName
+   * @param {Object} [detail]
+   * @return {CustomEvent}
+   */
+  util.triggerElementEvent = (target, eventName, detail = {}) => {
+
+    const event = new CustomEvent(eventName, {
+      bubbles: true,
+      cancelable: true,
+      detail: detail
+    });
+
+    Object.keys(detail).forEach(key => {
+      event[key] = detail[key];
+    });
+
+    target.dispatchEvent(event);
+
+    return event;
+  };
+
 })(window.ons = window.ons || {});

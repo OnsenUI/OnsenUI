@@ -25,6 +25,7 @@ limitations under the License.
   };
   const ModifierUtil = ons._internal.ModifierUtil;
   const nullToolbarElement = document.createElement('ons-toolbar');
+  const util = ons._util;
 
   class PageElement extends ons._BaseElement {
 
@@ -41,14 +42,10 @@ limitations under the License.
 
     attachedCallback() {
       if (!this._isMuted) {
-        const event = new CustomEvent('init', {
-          bubbles: true,
-          detail: this.eventDetail
-        });
-        this.dispatchEvent(event);
+        util.triggerElementEvent(this, 'init', this.eventDetail);
       }
 
-      if(!ons._util.hasAnyComponentAsParent(this)) {
+      if(!util.hasAnyComponentAsParent(this)) {
         this._show();
       }
     }
@@ -244,11 +241,7 @@ limitations under the License.
         this.isShown = true;
 
         if (!this._isMuted) {
-          const event = new CustomEvent('show', {
-            bubbles: true,
-            detail: this.eventDetail
-          });
-          this.dispatchEvent(event);
+          util.triggerElementEvent(this, 'show', this.eventDetail);
         }
 
         ons._util.propagateAction(this._getContentElement(), '_show');
@@ -260,11 +253,7 @@ limitations under the License.
         this.isShown = false;
 
         if (!this._isMuted) {
-          const event = new CustomEvent('hide', {
-            bubbles: true,
-            detail: this.eventDetail
-          });
-          this.dispatchEvent(event);
+          util.triggerElementEvent(this, 'hide', this.eventDetail);
         }
 
         ons._util.propagateAction(this._getContentElement(), '_hide');
@@ -275,11 +264,7 @@ limitations under the License.
       this._hide();
 
       if (!this._isMuted) {
-        const event = new CustomEvent('destroy', {
-          bubbles: true,
-          detail: this.eventDetail
-        });
-        this.dispatchEvent(event);
+        util.triggerElementEvent(this, 'destroy', this.eventDetail);
       }
 
       if (this.getDeviceBackButtonHandler()) {

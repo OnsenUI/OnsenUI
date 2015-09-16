@@ -252,28 +252,21 @@ limitations under the License.
       }
 
       if ((selectedTab.hasAttribute('no-reload') || selectedTab.isPersistent()) && index === previousTabIndex) {
-        var event = new CustomEvent('reactive', {
-          bubbles: true,
-          detail: {
-            index: index,
-            tabItem: selectedTab
-          }
+        util.triggerElementEvent(this, 'reactive', {
+          index: index,
+          tabItem: selectedTab
         });
-        this.dispatchEvent(event);
 
         return false;
       }
 
       var canceled = false;
 
-      this.dispatchEvent(new CustomEvent('prechange', {
-        bubbles: true,
-        detail: {
-          index: index,
-          tabItem: selectedTab,
-          cancel: () => canceled = true
-        }
-      }));
+      util.triggerElementEvent(this, 'prechange', {
+        index: index,
+        tabItem: selectedTab,
+        cancel: () => canceled = true
+      });
 
       if (canceled) {
         selectedTab.setInactive();
@@ -296,13 +289,10 @@ limitations under the License.
 
         var params = {
           callback: () => {
-            this.dispatchEvent(new CustomEvent('postchange', {
-              bubbles: true,
-              detail: {
-                index: index,
-                tabItem: selectedTab
-              }
-            }));
+            util.triggerElementEvent(this, 'postchange', {
+              index: index,
+              tabItem: selectedTab
+            });
 
             if (options.callback instanceof Function) {
               options.callback();
@@ -331,13 +321,10 @@ limitations under the License.
           tab.setInactive();
         } else {
           if (!needLoad) {
-            this.dispatchEvent(new CustomEvent('postchange', {
-              bubbles: true,
-              detail: {
-                index: index,
-                tabItem: selectedTab
-              }
-            }));
+            util.triggerElementEvent(this, 'postchange', {
+              index: index,
+              tabItem: selectedTab
+            });
           }
         }
       });
