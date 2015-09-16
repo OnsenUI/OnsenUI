@@ -124,6 +124,10 @@ limitations under the License.
         return this._element[0].pushPage(page, options);
       },
 
+      bringPageTop: function(item, options) {
+        return this._element[0].bringPageTop(item, options);
+      },
+
       getDeviceBackButtonHandler: function() {
         return this._element[0].getDeviceBackButtonHandler;
       },
