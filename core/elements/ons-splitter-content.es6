@@ -30,9 +30,6 @@ limitations under the License.
       this._page = null;
     }
 
-    attributeChangedCallback(name, last, current) {
-    }
-
     /**
      * @param {String} page
      * @param {Object} [options]
