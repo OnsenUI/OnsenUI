@@ -315,7 +315,7 @@ limitations under the License.
           if (!this.getAttribute('page')) {
             const element = this._createPageElement(this._initialHTML || '');
 
-            this._pushPageDOM('', element, {}, function() {});
+            this._pushPageDOM(this._createPageObject('', element, {}), function() {});
           } else {
             this.pushPage(this.getAttribute('page'), {animation: 'none'});
           }
@@ -365,39 +365,20 @@ limitations under the License.
       };
 
       ons._internal.getPageHTMLAsync(page).then(templateHTML => {
-        this._pushPageDOM(page, this._createPageElement(templateHTML), options, done);
+        const element = this._createPageElement(templateHTML);
+        this._pushPageDOM(this._createPageObject(page, element, options), done);
       });
     }
 
     /**
-     * @param {String} page Page name.
-     * @param {Object} element
-     * @param {Object} options
+     * @param {Object} pageObject
      * @param {Function} [unlock]
      */
-    _pushPageDOM(page, element, options, unlock) {
+   _pushPageDOM(pageObject, unlock) {
       unlock = unlock || function() {};
-      options = options || {};
 
-      let pageObject;
-      if (options.hasOwnProperty('_bringPageTop')) {
-
-        pageObject = this._pages.splice(options._bringPageTop, 1)[0];
-
-        page = pageObject.page;
-        element = pageObject.element;
-        element.style.display = 'block';
-        element.setAttribute('_skipinit', '');
-
-        delete options._bringPageTop;
-        options.animator = this._animatorFactory.newAnimator(options);
-        pageObject.options = options;
-
-      } else {
-
-        pageObject = this._createPageObject(page, element, options);
-
-      }
+      let element = pageObject.element;
+      let options = pageObject.options;
 
       // for "postpush" event
       const eventDetail = {
@@ -496,8 +477,13 @@ limitations under the License.
             unlock();
           };
 
-          options._bringPageTop = index;
-          this._pushPageDOM(null, null, options, done);
+          let pageObject = this._pages.splice(index, 1)[0];
+          pageObject.element.style.display = 'block';
+          pageObject.element.setAttribute('_skipinit', '');
+          options.animator = this._animatorFactory.newAnimator(options);
+          pageObject.options = options;
+
+          this._pushPageDOM(pageObject, done);
         });
       }
     }
