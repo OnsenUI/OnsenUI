@@ -32,6 +32,7 @@ v2.0.0-dev
  * ons-modal: Added `isShown()` method.
  * ons-navigator: Fixed `insertPage()` behaviour with high or low indexes.
  * ons-tabbar: Fixed callback in `setActiveTab()` method.
+ * ons-splitter: Added `ons-splitter`, `ons-splitter-side`, `ons-splitter-content` and `ons-splitter-mask` custom elements.
  * ons-fab: Implemented 'fab' component.
  * core: Added page attribute expressions.
  * ons.notification: Added `defaultValue`, `placeholder` and `autofocus` options to prompt.
