@@ -35,6 +35,7 @@ limitations under the License.
       ModifierUtil.initModifier(this, scheme);
       this._isShown = false;
       this._isMuted = this.hasAttribute('_muted');
+      this._skipInit = this.hasAttribute('_skipinit');
       this.eventDetail = {
         page: this
       };
@@ -42,7 +43,11 @@ limitations under the License.
 
     attachedCallback() {
       if (!this._isMuted) {
-        util.triggerElementEvent(this, 'init', this.eventDetail);
+        if (this._skipInit) {
+          this.removeAttribute('_skipinit');
+        } else {
+          util.triggerElementEvent(this, 'init', this.eventDetail);
+        }
       }
 
       if(!util.hasAnyComponentAsParent(this)) {
@@ -182,6 +187,8 @@ limitations under the License.
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
       } else if (name === '_muted') {
         this._isMuted = this.hasAttribute('_muted');
+      } else if (name === '_skipinit') {
+        this._skipInit = this.hasAttribute('_skipinit');
       }
     }
 
