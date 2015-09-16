@@ -51,8 +51,6 @@ limitations under the License.
   class OverlaySplitterAnimator extends SplitterAnimator {
 
     constructor(options = {}) {
-      console.log(options);
-
       options = ons._util.extend({
         timing: 'cubic-bezier(.1, .7, .1, 1)',
         duration: '0.3',
@@ -153,13 +151,13 @@ limitations under the License.
      * @param {Function} done
      */
     open(done) {
-      const tranform = this._side._isLeftSide() ? 'translate3d(100%, 0px, 0px)' : 'translate3d(-100%, 0px, 0px)';
+      const transform = this._side._isLeftSide() ? 'translate3d(100%, 0px, 0px)' : 'translate3d(-100%, 0px, 0px)';
 
       animit.runAll(
         animit(this._side)
           .wait(this._delay)
           .queue({
-            transform: tranform
+            transform: transform
           }, {
             duration: this._duration,
             timing: this._timing

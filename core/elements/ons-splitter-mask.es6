@@ -27,9 +27,8 @@ limitations under the License.
     _onClick(event) {
       if (this.parentElement && this.parentElement.nodeName.toLowerCase() === 'ons-splitter') {
         // close side menus
-        if (this.parentElement.closeRight() || this.parentElement.closeLeft()) {
-          this.style.display = 'none';
-        }
+        this.parentElement.closeRight();
+        this.parentElement.closeLeft();
       }
       event.stopPropagation();
     }
@@ -46,7 +45,7 @@ limitations under the License.
     }
   }
 
-  if (!window.OnsSplitterSideElement) {
+  if (!window.OnsSplitterMaskElement) {
     window.OnsSplitterMaskElement = document.registerElement('ons-splitter-mask', {
       prototype: SplitterMaskElement.prototype
     });

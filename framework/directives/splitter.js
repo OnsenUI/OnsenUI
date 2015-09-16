@@ -4,10 +4,10 @@
  * @name ons-splitter
  * @category control
  * @description
- *  [en][/en]
+ *  [en]A component that enables responsive layout by implementing both a two-column layout and a sliding menu layout.[/en]
  *  [ja]sliding-menuとsplit-view両方の機能を持つレイアウトです。[/ja]
  * @guide CallingComponentAPIsfromJavaScript
- *   [en]Using navigator from JavaScript[/en]
+ *   [en]Using components from JavaScript[/en]
  *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @example
  * <ons-splitter>
@@ -119,7 +119,7 @@
 
 /**
  * @ngdoc method
- * @signature isLeftOpened()
+ * @signature leftIsOpened()
  * @return {Boolean}
  *   [en]Whether the left ons-splitter-side on collapse mode is opened.[/en]
  *   [ja]左のons-splitter-sideが開いているかどうかを返します。[/ja]
@@ -130,7 +130,7 @@
 
 /**
  * @ngdoc method
- * @signature isRightOpened()
+ * @signature rightIsOpened()
  * @return {Boolean}
  *   [en]Whether the right ons-splitter-side on collapse mode is opened.[/en]
  *   [ja]右のons-splitter-sideが開いているかどうかを返します。[/ja]

@@ -4,7 +4,7 @@
  * @name ons-splitter-content
  * @category control
  * @description
- *  [en][/en]
+ *  [en]The "ons-splitter-content" element is used as a child element of "ons-splitter".[/en]
  *  [ja]ons-splitter-content要素は、ons-splitter要素の子要素として利用します。[/ja]
  * @example
  * <ons-splitter>
