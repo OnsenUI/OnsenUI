@@ -359,10 +359,6 @@ limitations under the License.
      * @param {Object} [options]
      */
     closeMenu(options = {}) {
-      if (!this.isOpened()) {
-        return false;
-      }
-
       if (this._isLocked()) {
         return false;
       }
