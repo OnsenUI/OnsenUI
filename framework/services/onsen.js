@@ -181,8 +181,8 @@ limitations under the License.
         normalizePageHTML: function(html) {
           html = ('' + html).trim();
 
-          if (!html.match(/^<(ons-page|ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
-            html = '<ons-page>' + html + '</ons-page>';
+          if (!html.match(/^<ons-page/)) {
+            html = '<ons-page _muted>' + html + '</ons-page>';
           }
 
           return html;

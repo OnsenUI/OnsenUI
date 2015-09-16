@@ -244,6 +244,8 @@ limitations under the License.
 
         scope.$on('$destroy', this._destroy.bind(this));
 
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['init', 'show', 'hide', 'destroy']);
+
         if (!attrs.swipeable) {
           this.setSwipeable(true);
         }
@@ -280,6 +282,8 @@ limitations under the License.
 
       _destroy: function() {
         this.emit('destroy');
+
+        this._clearDerivingEvents();
 
         this._deviceBackButtonHandler.destroy();
         window.removeEventListener('resize', this._boundOnWindowResize);
@@ -378,6 +382,7 @@ limitations under the License.
         this._currentPageElement = pageContent;
         this._currentPageScope = pageScope;
         this._currentPageUrl = pageUrl;
+        this._currentPageElement[0]._show();
       },
 
       /**

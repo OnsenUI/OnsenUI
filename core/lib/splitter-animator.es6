@@ -21,6 +21,17 @@ limitations under the License.
   const util = ons._util;
 
   class SplitterAnimator {
+    constructor(options = {}) {
+      options = ons._util.extend({
+        timing: 'linear',
+        duration: '0.3',
+        delay: '0'
+      }, options || {});
+
+      this._timing = options.timing;
+      this._duration = options.duration;
+      this._delay = options.delay;
+    }
     layoutOnOpen() {}
     layoutOnClose() {}
     translate(distance) {}
@@ -38,6 +49,17 @@ limitations under the License.
   }
 
   class OverlaySplitterAnimator extends SplitterAnimator {
+
+    constructor(options = {}) {
+      options = ons._util.extend({
+        timing: 'cubic-bezier(.1, .7, .1, 1)',
+        duration: '0.3',
+        delay: '0'
+      }, options || {});
+
+      super(options);
+    }
+
     isActivated() {
       return this._isActivated;
     }
@@ -133,11 +155,12 @@ limitations under the License.
 
       animit.runAll(
         animit(this._side)
+          .wait(this._delay)
           .queue({
             transform: transform
           }, {
-            duration: 0.3,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
+            duration: this._duration,
+            timing: this._timing
           })
           .queue(callback => {
             callback();
@@ -145,13 +168,14 @@ limitations under the License.
           }),
 
         animit(this._mask)
+          .wait(this._delay)
           .queue({
             display: 'block'
           })
           .queue({
             opacity: '1'
           }, {
-            duration: 0.3,
+            duration: this._duration,
             timing: 'linear',
           })
       );
@@ -164,11 +188,12 @@ limitations under the License.
 
       animit.runAll(
         animit(this._side)
+          .wait(this._delay)
           .queue({
             transform: 'translate3d(0px, 0px, 0px)'
           }, {
-            duration: 0.3,
-            timing: 'cubic-bezier(.1, .7, .1, 1)'
+            duration: this._duration,
+            timing: this._timing
           })
           .queue(callback => {
             this._side.style.webkitTransition = '';
@@ -177,10 +202,11 @@ limitations under the License.
           }),
 
         animit(this._mask)
+          .wait(this._delay)
           .queue({
             opacity: '0'
           }, {
-            duration: 0.3,
+            duration: this._duration,
             timing: 'linear',
           })
           .queue({

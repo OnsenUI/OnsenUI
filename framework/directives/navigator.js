@@ -179,11 +179,38 @@
 
 /**
  * @ngdoc attribute
+ * @name ons-init
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when a page's "init" event is fired.[/en]
+ *  [ja]ページの"init"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-show
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when a page's "show" event is fired.[/en]
+ *  [ja]ページの"show"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-hide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when a page's "hide" event is fired.[/en]
+ *  [ja]ページの"hide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
  * @name ons-destroy
  * @type {Expression}
  * @description
- *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
- *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ *  [en]Allows you to specify custom behavior when a page's "destroy" event is fired.[/en]
+ *  [ja]ページの"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -424,7 +451,7 @@
             var navigator = new NavigatorView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, navigator);
-            $onsen.registerEventHandlers(navigator, 'prepush prepop postpush postpop destroy');
+            $onsen.registerEventHandlers(navigator, 'prepush prepop postpush postpop init show hide destroy');
 
             element.data('ons-navigator', navigator);
 

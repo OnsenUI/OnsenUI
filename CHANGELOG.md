@@ -32,6 +32,9 @@ v2.0.0-dev
  * ons-modal: Added `isShown()` method.
  * ons-navigator: Fixed `insertPage()` behaviour with high or low indexes.
  * ons-tabbar: Fixed callback in `setActiveTab()` method.
+ * ons-tabbar: persistent tabs only throw 'init' event once.
+ * core: every child element will be wrapped inside an ons-page.
+ * ons-page: added page lifecycle events API
  * ons-splitter: Added `ons-splitter`, `ons-splitter-side`, `ons-splitter-content` and `ons-splitter-mask` custom elements.
  * ons-fab: Implemented 'fab' component.
  * core: Added page attribute expressions.

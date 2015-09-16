@@ -32,13 +32,39 @@ limitations under the License.
       this.classList.add('page');
       this._compile();
       ModifierUtil.initModifier(this, scheme);
+      this._isShown = false;
+      this._isMuted = this.hasAttribute('_muted');
+      this.eventDetail = {
+        page: this
+      };
     }
 
     attachedCallback() {
-      const event = new CustomEvent('init', {
-        bubbles: true
-      });
-      this.dispatchEvent(event);
+      if (!this._isMuted) {
+        const event = new CustomEvent('init', {
+          bubbles: true,
+          detail: this.eventDetail
+        });
+        this.dispatchEvent(event);
+      }
+
+      if(!ons._util.hasAnyComponentAsParent(this)) {
+        this._show();
+      }
+    }
+
+    /**
+     * @return {boolean}
+     */
+    get isShown() {
+      return this._isShown;
+    }
+
+    /**
+     * @param {boolean}
+     */
+    set isShown(value) {
+      this._isShown = value;
     }
 
     /**
@@ -157,6 +183,8 @@ limitations under the License.
     attributeChangedCallback(name, last, current) {
       if (name === 'modifier') {
         return ModifierUtil.onModifierChanged(last, current, this, scheme);
+      } else if (name === '_muted') {
+        this._isMuted = this.hasAttribute('_muted');
       }
     }
 
@@ -211,15 +239,54 @@ limitations under the License.
       }
     }
 
+    _show() {
+      if (!this.isShown && ons._util.isAttached(this)) {
+        this.isShown = true;
+
+        if (!this._isMuted) {
+          const event = new CustomEvent('show', {
+            bubbles: true,
+            detail: this.eventDetail
+          });
+          this.dispatchEvent(event);
+        }
+
+        ons._util.propagateAction(this._getContentElement(), '_show');
+      }
+    }
+
+    _hide() {
+      if (this.isShown) {
+        this.isShown = false;
+
+        if (!this._isMuted) {
+          const event = new CustomEvent('hide', {
+            bubbles: true,
+            detail: this.eventDetail
+          });
+          this.dispatchEvent(event);
+        }
+
+        ons._util.propagateAction(this._getContentElement(), '_hide');
+      }
+    }
+
     _destroy() {
-      const event = new CustomEvent('destroy', {
-        bubbles: true
-      });
-      this.dispatchEvent(event);
+      this._hide();
+
+      if (!this._isMuted) {
+        const event = new CustomEvent('destroy', {
+          bubbles: true,
+          detail: this.eventDetail
+        });
+        this.dispatchEvent(event);
+      }
 
       if (this.getDeviceBackButtonHandler()) {
         this.getDeviceBackButtonHandler().destroy();
       }
+
+      ons._util.propagateAction(this._getContentElement(), '_destroy');
 
       this.remove();
     }

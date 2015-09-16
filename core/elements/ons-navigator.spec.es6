@@ -2,8 +2,8 @@ describe('OnsNavigatorElement', () => {
   let nav;
 
   beforeEach(() => {
-    let tpl1 = ons._util.createElement(`<ons-template id="hoge">hoge</ons-template>`),
-      tpl2 = ons._util.createElement(`<ons-template id="fuga">fuga</ons-template>`);
+    let tpl1 = ons._util.createElement(`<ons-template id="hoge"><ons-page>hoge</ons-page></ons-template>`),
+      tpl2 = ons._util.createElement(`<ons-template id="fuga"><ons-page>fuga</ons-page></ons-template>`);
     document.body.appendChild(tpl1);
     document.body.appendChild(tpl2);
     nav = new OnsNavigatorElement();
@@ -106,6 +106,20 @@ describe('OnsNavigatorElement', () => {
       });
 
       nav.pushPage('hoge');
+
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it('emits \'hide\' event', (done) => {
+      let promise = new Promise((resolve) => {
+        nav.addEventListener('hide', (event) => { resolve(event); });
+      });
+
+      nav.pushPage('hoge', {
+        onTransitionEnd: () => nav.popPage({
+          onTransitionEnd: () => done()
+        })
+      });
 
       return expect(promise).to.eventually.be.fulfilled;
     });
@@ -260,6 +274,20 @@ describe('OnsNavigatorElement', () => {
 
       return expect(promise).to.eventually.be.fulfilled;
     });
+
+    it('emits \'show\' event', (done) => {
+      let promise = new Promise((resolve) => {
+        nav.addEventListener('show', (event) => { resolve(event); });
+      });
+
+      nav.pushPage('hoge', {
+        onTransitionEnd: () => nav.popPage({
+          onTransitionEnd: () => done()
+        })
+      });
+
+      return expect(promise).to.eventually.be.fulfilled;
+    });
   });
 
   describe('#replacePage()', () => {
@@ -355,6 +383,48 @@ describe('OnsNavigatorElement', () => {
       var spy = chai.spy.on(event, 'callParentHandler');
       nav._onDeviceBackButton(event);
       expect(spy).to.have.been.called.once;
+    });
+  });
+
+  describe('propagate API', () => {
+
+    it('fires \'show\' event', () => {
+      let promise = new Promise((resolve) => {
+        nav.addEventListener('show', (event) => resolve());
+      });
+
+      nav.pushPage('hoge', {
+        onTransitionEnd: () => {
+          nav._hide();
+          nav._show();
+        }
+      });
+
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it('fires \'hide\' event', () => {
+      let promise = new Promise((resolve) => {
+        nav.addEventListener('hide', () => resolve());
+      });
+
+      nav.pushPage('hoge', {
+        onTransitionEnd: () => nav._hide()
+      });
+
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it('fires \'destroy\' event', () => {
+      let promise = new Promise((resolve) => {
+        nav.addEventListener('destroy', () => resolve());
+      });
+
+      nav.pushPage('hoge', {
+        onTransitionEnd: () => nav._destroy()
+      });
+
+      return expect(promise).to.eventually.be.fulfilled;
     });
   });
 

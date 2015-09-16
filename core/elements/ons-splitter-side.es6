@@ -19,6 +19,8 @@ limitations under the License.
   'use strict';
 
   const util = ons._util;
+  const AnimatorFactory = ons._internal.AnimatorFactory;
+
   const SPLIT_MODE = 'split';
   const COLLAPSE_MODE = 'collapse';
 
@@ -427,6 +429,13 @@ limitations under the License.
       this._page = null;
       this._isAttached = false;
       this._collapseStrategy = new CollapseDetection();
+      this._animatorFactory = new AnimatorFactory({
+        animators: window.OnsSplitterElement._animatorDict,
+        baseClass: ons._internal.SplitterAnimator,
+        baseClassName: 'SplitterAnimator',
+        defaultAnimation: this.getAttribute('animation'),
+        defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
+      });
 
       this._collapseMode = new CollapseMode(this);
       this._splitMode = new SplitMode(this);
@@ -676,7 +685,20 @@ limitations under the License.
       options.callback = options.callback instanceof Function ? options.callback : () => {};
       ons._internal.getPageHTMLAsync(page).then((html) => {
         window.OnsSplitterSideElement.rewritables.link(this, util.createFragment(html), (fragment) => {
+          while (this.childNodes[0]) {
+            if (this.childNodes[0]._hide instanceof Function) {
+              this.childNodes[0]._hide();
+            }
+            this.removeChild(this.childNodes[0]);
+          }
+
           this.appendChild(fragment);
+          util.arrayOf(fragment.childNodes).forEach(node => {
+            if (node._show instanceof Function) {
+              node._show();
+            }
+          });
+
           options.callback();
         });
       });
@@ -765,12 +787,36 @@ limitations under the License.
       return this._getModeStrategy().handleGesture(event);
     }
 
-    _createAnimator() {
-      const animatorName = this.hasAttribute('animation') ? this.getAttribute('animation') : 'default';
-      const animatorDict = window.OnsSplitterElement._animatorDict;
+    _show() {
+      util.arrayOf(this.children).forEach(child => {
+        if (child._show instanceof Function) {
+          child._show();
+        }
+      });
+    }
 
-      const AnimatorClass = animatorDict[animatorName] ? animatorDict[animatorName] : animatorDict.default;
-      return new AnimatorClass();
+    _hide() {
+      util.arrayOf(this.children).forEach(child => {
+        if (child._hide instanceof Function) {
+          child._hide();
+        }
+      });
+    }
+
+    _destroy() {
+      util.arrayOf(this.children).forEach(child => {
+        if (child._destroy instanceof Function) {
+          child._destroy();
+        }
+      });
+      this.remove();
+    }
+
+    _createAnimator() {
+      return this._animatorFactory.newAnimator({
+        animation: this.getAttribute('animation'),
+        animationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
+      });
     }
   }
 

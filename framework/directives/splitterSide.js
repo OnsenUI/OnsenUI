@@ -99,6 +99,24 @@
 
 /**
  * @ngdoc attribute
+ * @name animation
+ * @type {String}
+ * @description
+ *  [en]Specify the animation. Use one of "overlay", and "default".[/en]
+ *  [ja]アニメーションを指定します。"overlay", "default"のいずれかを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name animation-options
+ * @type {Expression}
+ * @description
+ *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
+ *  [ja]アニメーション時のduration, timing, delayをオブジェクトリテラルで指定します。e.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/ja]
+ */
+
+/**
+ * @ngdoc attribute
  * @name ons-destroy
  * @type {Expression}
  * @description

@@ -278,6 +278,31 @@ limitations under the License.
 
       this.removeEventListener('modechange', this._boundOnModeChange, false);
     }
+
+    _show() {
+      util.arrayOf(this.children).forEach(child => {
+        if (child._show instanceof Function) {
+          child._show();
+        }
+      });
+    }
+
+    _hide() {
+      util.arrayOf(this.children).forEach(child => {
+        if (child._hide instanceof Function) {
+          child._hide();
+        }
+      });
+    }
+
+    _destroy() {
+      util.arrayOf(this.children).forEach(child => {
+        if (child._destroy instanceof Function) {
+          child._destroy();
+        }
+      });
+      this.remove();
+    }
   }
 
   if (!window.OnsSplitterElement) {

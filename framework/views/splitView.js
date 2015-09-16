@@ -67,6 +67,8 @@ limitations under the License.
         }.bind(this), 1000 / 60 * 2);
 
         scope.$on('$destroy', this._destroy.bind(this));
+
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['init', 'show', 'hide', 'destroy']);
       },
 
       /**
@@ -97,12 +99,12 @@ limitations under the License.
         this._mainPage.append(pageContent);
 
         if (this._currentPage) {
-          this._currentPage.remove();
           this._currentPageScope.$destroy();
         }
 
         this._currentPage = pageContent;
         this._currentPageScope = pageScope;
+        this._currentPage[0]._show();
       },
 
       /**
@@ -317,6 +319,8 @@ limitations under the License.
 
       _destroy: function() {
         this.emit('destroy');
+
+        this._clearDerivingEvents();
 
         this._element = null;
         this._scope = null;
