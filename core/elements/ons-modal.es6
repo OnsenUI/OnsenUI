@@ -27,6 +27,7 @@ limitations under the License.
   const ModalAnimator = ons._internal.ModalAnimator;
   const FadeModalAnimator = ons._internal.FadeModalAnimator;
   const ModifierUtil = ons._internal.ModifierUtil;
+  const util = ons._util;
 
   class ModalElement extends ons._BaseElement {
 
