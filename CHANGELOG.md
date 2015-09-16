@@ -40,6 +40,7 @@ v2.0.0-dev
  * core: Added page attribute expressions.
  * ons.notification: Added `defaultValue`, `placeholder` and `autofocus` options to prompt.
  * ons-popover: Fixed [#880](https://github.com/OnsenUI/OnsenUI/issues/880).
+ * ons-sliding-menu: Fixed [#879](https://github.com/OnsenUI/OnsenUI/issues/879)
 
 v1.3.10
 ----
