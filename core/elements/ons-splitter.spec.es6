@@ -25,7 +25,7 @@ describe('ons-splitter', () => {
     it('should open right ons-splitter-side', () => {
       expect(splitter.openRight()).to.be.equal(true);
       expect(splitter.openLeft()).to.be.equal(false);
-      expect(splitter.isRightOpened()).to.be.equal(true);
+      expect(splitter.rightIsOpened()).to.be.equal(true);
     });
   });
 
@@ -37,12 +37,12 @@ describe('ons-splitter', () => {
 
   describe('#closeRight()', () => {
     it('should close right ons-splitter-side', (done) => {
-      expect(splitter.isRightOpened()).to.be.equal(false);
+      expect(splitter.rightIsOpened()).to.be.equal(false);
 
       expect(splitter.openRight({callback: () => {
-        expect(splitter.isRightOpened()).to.be.equal(true);
+        expect(splitter.rightIsOpened()).to.be.equal(true);
         expect(splitter.closeRight({callback: () => {
-          expect(splitter.isRightOpened()).to.be.equal(false);
+          expect(splitter.rightIsOpened()).to.be.equal(false);
           done();
         }})).to.be.equal(true);
       }})).to.be.equal(true);
