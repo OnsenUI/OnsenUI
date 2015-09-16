@@ -387,6 +387,7 @@ limitations under the License.
         page = pageObject.page;
         element = pageObject.element;
         element.style.display = 'block';
+        element.setAttribute('_skipinit', '');
 
         delete options._bringPageTop;
         options.animator = this._animatorFactory.newAnimator(options);
