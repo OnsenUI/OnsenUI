@@ -51,8 +51,6 @@ limitations under the License.
   class OverlaySplitterAnimator extends SplitterAnimator {
 
     constructor(options = {}) {
-      console.log(options);
-
       options = ons._util.extend({
         timing: 'cubic-bezier(.1, .7, .1, 1)',
         duration: '0.3',
