@@ -55,8 +55,7 @@ limitations under the License.
         animators: OnsAlertDialogElement._animatorDict,
         baseClass: AlertDialogAnimator,
         baseClassName: 'AlertDialogAnimator',
-        defaultAnimation: this.getAttribute('animation'),
-        defaultAnimationOptions: AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+        defaultAnimation: this.getAttribute('animation')
       });
 
       this._visible = false;
