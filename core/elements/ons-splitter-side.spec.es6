@@ -1,6 +1,6 @@
 
-describe('ons-splitter-side', () => {
-  it('provides \'OnsSplitterSideElement\' global variable', () => {
+describe('OnsSplitterSideElement', () => {
+  it('exists', () => {
     expect(window.OnsSplitterSideElement).to.be.ok;
   });
 
@@ -32,14 +32,14 @@ describe('ons-splitter-side', () => {
 
   describe('#open()', () => {
     it('should open ons-splitter-side', () => {
-      expect(right.open()).to.be.equal(true);
-      expect(left.open()).to.be.equal(false);
+      expect(right.open()).to.be.true;
+      expect(left.open()).to.be.false;
     });
   });
 
   describe('#close()', () => {
     it('should close ons-splitter-side', (done) => {
-      expect(left.close()).to.be.equal(false);
+      expect(left.close()).to.be.false;
       right.open({callback: () => {
         right.close({callback: () => {
           done();
@@ -50,10 +50,10 @@ describe('ons-splitter-side', () => {
 
   describe('#isOpened()', () => {
     it('should return boolean', (done) => {
-      expect(right.isOpened()).to.be.equal(false);
-      expect(left.isOpened()).to.be.equal(false);
+      expect(right.isOpened()).to.be.false;
+      expect(left.isOpened()).to.be.false;
       right.open({callback: () => {
-        expect(right.isOpened()).to.be.equal(true);
+        expect(right.isOpened()).to.be.true;
         done();
       }});
     });
@@ -61,9 +61,9 @@ describe('ons-splitter-side', () => {
 
   describe('#toggle()', () => {
     it('toggle open or close state', (done) => {
-      expect(right.isOpened()).to.be.equal(false);
+      expect(right.isOpened()).to.be.false;
       right.toggle({callback: () => {
-        expect(right.isOpened()).to.be.equal(true);
+        expect(right.isOpened()).to.be.true;
         done();
       }});
     });

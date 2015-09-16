@@ -1,6 +1,6 @@
 
-describe('ons-splitter-mask', () => {
-  it('provides \'OnsSplitterMaskElement\' global variable', () => {
+describe('OnsSplitterMaskElement', () => {
+  it('exists', () => {
     expect(window.OnsSplitterMaskElement).to.be.ok;
   });
 

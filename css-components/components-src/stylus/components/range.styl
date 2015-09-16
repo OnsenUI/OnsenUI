@@ -140,3 +140,87 @@ range--disabled()
 .range:disabled
   range--disabled()
 
+
+/*! topdoc
+  name: Material Range
+  use: Range
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <input type="range" class="range range--material">
+    <input type="range" class="range range--material" disabled>
+*/
+
+var-material-range-track-height = 2px
+var-material-range-thumb-width  = 12px
+var-material-range-highlight-color = $second-highlight-color
+var-material-range-highlight-color-active = $second-highlight-color
+
+.range--material
+  background-image linear-gradient(#ddd, #ddd)
+  background-position center
+  background-size 100% 2px
+  overflow visible
+
+.range--material::-webkit-slider-thumb
+  top 1px
+  border 3px solid #dddddd
+  height var-material-range-thumb-width
+  width var-material-range-thumb-width
+  border-radius 100%
+  border-color var-material-range-highlight-color
+  background-color var-material-range-highlight-color
+  margin-top -1px
+
+.range--material::-moz-range-thumb
+  top 1px
+  border 3px solid #dddddd
+  height var-material-range-thumb-width
+  width var-material-range-thumb-width
+  border-radius 100%
+  border-color var-material-range-highlight-color
+  background-color var-material-range-highlight-color
+
+.range--material:focus::-webkit-slider-thumb
+  border-color var-material-range-highlight-color
+  background-color var-material-range-highlight-color
+
+.range--material:focus::-moz-range-thumb
+  border-color var-material-range-highlight-color
+  background-color var-material-range-highlight-color
+
+range--material--thumb--before()
+  display none
+
+.range--material::-moz-range-thumb:before
+  range--material--thumb--before()
+
+.range--material::-webkit-slider-thumb:before
+  range--material--thumb--before()
+
+range--material--thumb--after()
+  content ''
+  display block
+  border 0px
+  border-radius 100%
+  margin-top -3px
+  margin-left -3px
+  height var-material-range-thumb-width
+  width var-material-range-thumb-width
+  background-color var-material-range-highlight-color-active
+  opacity 0.2
+  transition transform 0.1s linear
+
+.range--material::-moz-range-thumb:after
+  range--material--thumb--after()
+
+.range--material::-webkit-slider-thumb:after
+  range--material--thumb--after()
+
+.range--material:active::-webkit-slider-thumb:after
+  transform scale(2.5)
+
+.range--material:active::-moz-range-thumb:after
+  transform scale(2.5)

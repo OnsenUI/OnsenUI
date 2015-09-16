@@ -153,13 +153,13 @@ limitations under the License.
      * @param {Function} done
      */
     open(done) {
-      const tranform = this._side._isLeftSide() ? 'translate3d(100%, 0px, 0px)' : 'translate3d(-100%, 0px, 0px)';
+      const transform = this._side._isLeftSide() ? 'translate3d(100%, 0px, 0px)' : 'translate3d(-100%, 0px, 0px)';
 
       animit.runAll(
         animit(this._side)
           .wait(this._delay)
           .queue({
-            transform: tranform
+            transform: transform
           }, {
             duration: this._duration,
             timing: this._timing

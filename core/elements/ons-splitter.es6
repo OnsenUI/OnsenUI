@@ -162,14 +162,14 @@ limitations under the License.
     /**
      * @return {Boolean}
      */
-    isLeftOpened() {
+    leftIsOpened() {
       return this._isOpened('left');
     }
 
     /**
      * @return {Boolean}
      */
-    isRightOpened() {
+    rightIsOpened() {
       return this._isOpened('right');
     }
 

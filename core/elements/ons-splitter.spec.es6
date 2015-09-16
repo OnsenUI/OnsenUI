@@ -1,5 +1,5 @@
-describe('ons-splitter', () => {
-  it('provides \'OnsSplitterElement\' global variable', () => {
+describe('OnsSplitterElement', () => {
+  it('exists', () => {
     expect(window.OnsSplitterElement).to.be.ok;
   });
 
@@ -64,36 +64,35 @@ describe('ons-splitter', () => {
 
   describe('#openRight()', () => {
     it('should open right ons-splitter-side', () => {
-      expect(splitter.openRight()).to.be.equal(true);
-      expect(splitter.openLeft()).to.be.equal(false);
-      expect(splitter.isRightOpened()).to.be.equal(true);
+      expect(splitter.openRight()).to.be.true;
+      expect(splitter.openLeft()).to.be.false;
+      expect(splitter.rightIsOpened()).to.be.true;
     });
   });
 
   describe('#openLeft()', () => {
     it('should return false on "split" mode with ons-splitter-side element', () => {
-      expect(splitter.openLeft()).to.be.equal(false);
+      expect(splitter.openLeft()).to.be.false;
     });
   });
 
   describe('#closeRight()', () => {
     it('should close right ons-splitter-side', (done) => {
-      expect(splitter.isRightOpened()).to.be.equal(false);
-      expect(splitter.closeRight()).to.be.equal(false);
+      expect(splitter.rightIsOpened()).to.be.false;
 
       expect(splitter.openRight({callback: () => {
-        expect(splitter.isRightOpened()).to.be.equal(true);
+        expect(splitter.rightIsOpened()).to.be.true;
         expect(splitter.closeRight({callback: () => {
-          expect(splitter.isRightOpened()).to.be.equal(false);
+          expect(splitter.rightIsOpened()).to.be.false;
           done();
-        }})).to.be.equal(true);
-      }})).to.be.equal(true);
+        }})).to.be.true;
+      }})).to.be.true;
     });
   });
 
   describe('#closeLeft()', () => {
     it('should return false on "split" mode with ons-splitter-side element', () => {
-      expect(splitter.openLeft()).to.be.equal(false);
+      expect(splitter.openLeft()).to.be.false;
     });
   });
 

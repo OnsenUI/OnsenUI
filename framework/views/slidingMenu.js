@@ -366,15 +366,18 @@ limitations under the License.
       _appendMainPage: function(pageUrl, templateHTML) {
         var pageScope = this._scope.$new();
         var pageContent = angular.element(templateHTML);
-        var link = $compile(pageContent);
-
         this._mainPage.append(pageContent);
 
-        if (this._currentPageElement) {
-          this._currentPageScope.$destroy();
-        }
+        $compile(pageContent)(pageScope);
 
-        link(pageScope);
+        if (this._currentPageElement) {
+          (function(element, scope) {
+            setTimeout(function() {
+              element.remove();
+              scope.$destroy();
+            }, 40)
+          })(this._currentPageElement, this._currentPageScope);
+        }
 
         this._currentPageElement = pageContent;
         this._currentPageScope = pageScope;

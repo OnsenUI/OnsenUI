@@ -50,7 +50,7 @@ limitations under the License.
       util.removeElement(this.backgroundMask);
       leavePage.element.parentNode.insertBefore(this.backgroundMask, leavePage.element);
 
-      const maskClear = animit(this.bakckgroundMask)
+      const maskClear = animit(this.backgroundMask)
         .wait(0.6)
         .queue(function(done) {
           mask.remove();
