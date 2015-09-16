@@ -50,10 +50,13 @@ limitations under the License.
           let result = JSON.parse(jsonString);
           if (typeof result === 'object' && result !== null) {
             return result;
+          } else {
+            console.error('"animation-options" attribute must be a JSON object string: ' + jsonString);
           }
         }
         return {};
       } catch (e) {
+        console.error('"animation-options" attribute must be a JSON object string: ' + jsonString);
         return {};
       }
     }
