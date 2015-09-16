@@ -369,11 +369,27 @@ limitations under the License.
      * @param {Function} [unlock]
      */
     _pushPageDOM(page, element, options, unlock) {
-
       unlock = unlock || function() {};
       options = options || {};
 
-      const pageObject = this._createPageObject(page, element, options);
+      let pageObject;
+      if (options.hasOwnProperty('_bringPageTop')) {
+
+        pageObject = this._pages.splice(options._bringPageTop, 1)[0];
+
+        page = pageObject.page;
+        element = pageObject.element;
+        element.style.display = 'block';
+
+        delete options._bringPageTop;
+        options.animator = this._animatorFactory.newAnimator(options);
+        pageObject.options = options;
+
+      } else {
+
+        pageObject = this._createPageObject(page, element, options);
+
+      }
 
       // for "postpush" event
       const eventDetail = {
@@ -423,6 +439,74 @@ limitations under the License.
           }, 1000 / 60);
         }, element);
       }, element);
+    }
+
+    /**
+     * Brings the given pageUrl or index to the top of the page stack
+     * if already exists or pushes the page into the stack if doesn't.
+     * If options object is specified, apply the options.
+     *
+     * @param {String|Number} item Page name or valid index.
+     * @param {Object} options
+     */
+    bringPageTop(item, options) {
+      options = options || {};
+
+      if (options && typeof options != 'object') {
+        throw new Error('options must be an object. You supplied ' + options);
+      }
+
+      if (options.cancelIfRunning && this._isPushing) {
+        return;
+      }
+
+      if (this._emitPrePushEvent()) {
+        return;
+      }
+
+
+      let index, page;
+      if (typeof item === 'string') {
+        page = item;
+        index = this._lastIndexOfPage(page);
+      } else if (typeof item === 'number' && item < this._pages.length) {
+        index = this._normalizeIndex(item);
+        page = this._pages[index].page;
+      } else {
+        throw new Error('First argument must be a page name or the index of an existing page. You supplied ' + item);
+      }
+
+
+      if (index < 0) {
+        // Fallback pushPage
+        this._doorLock.waitUnlock(() => this._pushPage(page, options));
+      } else if (index < this._pages.length - 1) { // Skip when page is already the top
+        // Bring to top
+        this._doorLock.waitUnlock(() => {
+          const unlock = this._doorLock.lock();
+          const done = function() {
+            unlock();
+          };
+
+          options._bringPageTop = index;
+          this._pushPageDOM(null, null, options, done);
+        });
+      }
+    }
+
+    /**
+     * @param {String} page
+     * @return {Number} Returns the last index at which the given page
+     * is found in the page-stack, or -1 if it is not present.
+     */
+    _lastIndexOfPage(page) {
+      let index;
+      for (index = this._pages.length - 1; index >= 0; index--) {
+        if (this._pages[index].page === page) {
+          break;
+        }
+      }
+      return index;
     }
 
     /**
