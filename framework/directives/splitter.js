@@ -119,7 +119,7 @@
 
 /**
  * @ngdoc method
- * @signature isLeftOpened()
+ * @signature leftIsOpened()
  * @return {Boolean}
  *   [en]Whether the left ons-splitter-side on collapse mode is opened.[/en]
  *   [ja]左のons-splitter-sideが開いているかどうかを返します。[/ja]
@@ -130,7 +130,7 @@
 
 /**
  * @ngdoc method
- * @signature isRightOpened()
+ * @signature rightIsOpened()
  * @return {Boolean}
  *   [en]Whether the right ons-splitter-side on collapse mode is opened.[/en]
  *   [ja]右のons-splitter-sideが開いているかどうかを返します。[/ja]
