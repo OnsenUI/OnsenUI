@@ -95,6 +95,11 @@ limitations under the License.
         return;
       }
 
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
+
       this._doorLock.waitUnlock(() => {
         if (this._pages.length <= 1) {
           throw new Error('ons-navigator\'s page stack is empty.');
@@ -339,6 +344,11 @@ limitations under the License.
      */
     pushPage(page, options) {
       options = options || {};
+
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
 
       if (options.cancelIfRunning && this._isPushing) {
         return;
