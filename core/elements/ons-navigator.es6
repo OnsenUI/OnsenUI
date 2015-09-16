@@ -195,14 +195,7 @@ limitations under the License.
         throw new Error('options must be an object. You supplied ' + options);
       }
 
-      const normalizeIndex = index => {
-        if (index < 0) {
-          index = Math.abs(this.pages.length + index) % this.pages.length;
-        }
-        return index;
-      };
-
-      index = normalizeIndex(index);
+      index = this._normalizeIndex(index);
 
       if (index >= this.pages.length) {
         return this.pushPage.apply(this, [].slice.call(arguments, 1));
@@ -230,6 +223,13 @@ limitations under the License.
           }, element);
         });
       });
+    }
+
+    _normalizeIndex(index) {
+      if (index < 0) {
+        index = Math.abs(this.pages.length + index) % this.pages.length;
+      }
+      return index;
     }
 
     /**
