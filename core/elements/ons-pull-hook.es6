@@ -220,14 +220,11 @@ limitations under the License.
       this.setAttribute('state', state);
 
       if (!noEvent && lastState !== this._getState()) {
-        this.dispatchEvent(new CustomEvent('changestate', {
-          bubbles: true,
-          detail: {
-            pullHook: this,
-            state: state,
-            lastState: lastState
-          }
-        }));
+        util.triggerElementEvent(this, 'changestate', {
+          pullHook: this,
+          state: state,
+          lastState: lastState
+        });
       }
     }
 

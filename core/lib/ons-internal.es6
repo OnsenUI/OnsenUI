@@ -36,8 +36,8 @@ limitations under the License.
   ons._internal.normalizePageHTML = (html) => {
     html = ('' + html).trim();
 
-    if (!html.match(/^<(ons-page|ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
-      html = '<ons-page>' + html + '</ons-page>';
+    if (!html.match(/^<ons-page/)) {
+      html = '<ons-page _muted>' + html + '</ons-page>';
     }
 
     return html;
@@ -162,7 +162,7 @@ limitations under the License.
       return ons._internal.getTemplateHTMLAsync(page)
         .then(
           function(html) {
-            return normalizePageHTML(html);
+            return ons._internal.normalizePageHTML(html);
           },
           function(error) {
             if (pages.length === 0) {
@@ -172,20 +172,10 @@ limitations under the License.
             return getPage(pages.shift());
           }
         )
-        .then(html => normalizePageHTML(html));
+        .then(html => ons._internal.normalizePageHTML(html));
     };
 
     return getPage(pages.shift());
-
-    function normalizePageHTML(html) {
-      html = ('' + html).trim();
-
-      if (!html.match(/^<(ons-page|ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
-        html = '<ons-page>' + html + '</ons-page>';
-      }
-
-      return html;
-    }
   };
 
 })(window.ons = window.ons || {});

@@ -123,3 +123,34 @@ ons-pull-hook {
   text-align: center;
   z-index: 20002;
 }
+
+ons-splitter {
+  overflow: hidden;
+}
+
+ons-splitter, ons-splitter-mask, ons-splitter-content, ons-splitter-side {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  z-index: 0;
+}
+
+ons-splitter-mask {
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: none;
+  opacity: 0;
+}
+
+ons-splitter-content {
+  z-index: 1;
+}
+
+ons-splitter-side {
+  z-index: 1;
+}
+

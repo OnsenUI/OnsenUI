@@ -22,6 +22,7 @@
 // internal variables
 var-switch-background-color = $border-color
 var-switch-checked-background-color = $switch-highlight-color // background color active
+var-switch-material-background-color = alpha($switch-highlight-color, 0.5)
 var-switch-thumb-background-color = white
 var-switch-thumb-border-color = $border-color
 var-switch-thumb-border-color-active = $switch-highlight-color
@@ -120,3 +121,60 @@ switch__toggle()
 .switch__input:disabled + .switch__toggle
   disabled()
 
+/*! topdoc
+  name: Material-like Switch
+  use: Switch
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input switch--material__input">
+      <div class="switch__toggle switch--material__toggle"></div>
+    </label>
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input switch--material__input" checked>
+      <div class="switch__toggle switch--material__toggle"></div>
+    </label>
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input switch--material__input" disabled>
+      <div class="switch__toggle switch--material__toggle"></div>
+    </label>
+*/
+
+.switch--material
+  width 36px
+  height 20px
+  padding 0 10px
+
+.switch--material__toggle
+  background-color #bdbdbd
+  margin-top 5px
+  height 14px
+
+
+.switch--material__input
+  hide-input()
+
+.switch--material__input:checked + .switch--material__toggle:before
+  transform translateX(16px)
+
+// switch toggle circle
+.switch--material__toggle:before
+  background-color var-switch-thumb-border-color-active
+  left 0px
+  margin-top -5px
+  width 20px
+  height 20px
+  shadow-2()
+
+.switch--material__input:checked + .switch--material__toggle
+  background-color var-switch-material-background-color
+
+.switch--material__input:not(:checked) + .switch--material__toggle:before
+  background-color #f1f1f1
+  shadow-1()
+  transform translateX(0px)
+
+.switch--material__input:disabled + .switch--material__toggle
+  disabled()
