@@ -458,8 +458,11 @@ limitations under the License.
       if (typeof item === 'string') {
         page = item;
         index = this._lastIndexOfPage(page);
-      } else if (typeof item === 'number' && item < this._pages.length) {
+      } else if (typeof item === 'number') {
         index = this._normalizeIndex(item);
+        if (item >= this._pages.length) {
+          throw new Error('The provided index does not match an existing page.');
+        }
         page = this._pages[index].page;
       } else {
         throw new Error('First argument must be a page name or the index of an existing page. You supplied ' + item);
