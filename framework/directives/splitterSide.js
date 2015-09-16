@@ -4,7 +4,7 @@
  * @name ons-splitter-side
  * @category control
  * @description
- *  [en][/en]
+ *  [en]The "ons-splitter-side" element is used as a child element of "ons-splitter".[/en]
  *  [ja]ons-splitter-side要素は、ons-splitter要素の子要素として利用します。[/ja]
  * @example
  * <ons-splitter>
@@ -22,7 +22,7 @@
  * @ngdoc event
  * @name modechange
  * @description
- *   [en]Fired just after the view's mode change.[/en]
+ *   [en]Fired just after the component's mode changes.[/en]
  *   [ja]この要素のモードが変化した際に発火します。[/ja]
  * @param {Object} event
  *   [en]Event object.[/en]
@@ -31,7 +31,7 @@
  *   [en]Component object.[/en]
  *   [ja]コンポーネントのオブジェクト。[/ja]
  * @param {String} event.mode
- *   [en]Current mode name. "collapse" or "split".[/en]
+ *   [en]Returns the current mode. Can be either "collapse" or "split".[/en]
  *   [ja]現在のモードを返します。[/ja]
  */
 
@@ -45,7 +45,7 @@
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
  * @param {Function} event.cancel
- *   [en]Call to cancel opening sliding-menu.[/en]
+ *   [en]Call to cancel opening sliding menu.[/en]
  *   [ja]スライディングメニューが開くのをキャンセルします。[/ja]
  * @param {Object} event.side
  *   [en]Component object.[/en]
@@ -151,7 +151,7 @@
  *     Specify the collapse behavior. Valid values are "portrait", "landscape" or a media query.
  *     "portrait" or "landscape" means the view will collapse when device is in landscape or portrait orientation.
  *     If the value is a media query, the view will collapse when the media query is true.
- *     If the value is not defined, the view be always on collapse mode.
+ *     If the value is not defined, the view always be in "collapse" mode.
  *   [/en]
  *   [ja]
  *     左側のページを非表示にする条件を指定します。portrait, landscape、width #pxもしくはメディアクエリの指定が可能です。
@@ -166,7 +166,7 @@
  * @name swipe-target-width
  * @type {String}
  * @description
- *   [en]The width of swipeable area calculated from the left (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]
+ *   [en]The width of swipeable area calculated from the edge (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]
  *   [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]
  */
 
@@ -175,7 +175,7 @@
  * @name width
  * @type {String}
  * @description
- *   [en]Can specify both in px and %. eg. 90%, 200px[/en]
+ *   [en]Can be specified in either pixels or as a percentage, e.g. "90%" or "200px".[/en]
  *   [ja]この要素の横幅を指定します。pxと%での指定が可能です。eg. 90%, 200px[/ja]
  */
 
@@ -236,7 +236,7 @@
  *   [en]This function will be called after the menu has been opened.[/en]
  *   [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
- *   [en]Open ons-splitter-side menu on collapse mode.[/en]
+ *   [en]Open menu in collapse mode.[/en]
  *   [ja]collapseモードになっているons-splitterside要素を開きます。[/ja]
  */
 
@@ -250,7 +250,7 @@
  *   [en]This function will be called after the menu has been closed.[/en]
  *   [ja]メニューが閉じた後に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
- *   [en]Close ons-splitter-side menu on collapse mode.[/en]
+ *   [en]Close menu in collapse mode.[/en]
  *   [ja]collapseモードになっているons-splitter-side要素を閉じます。[/ja]
  */
 
@@ -258,7 +258,7 @@
  * @ngdoc method
  * @signature getCurrentMode()
  * @return {String}
- *   [en]Get current view's mode on the ons-splitter-side. Possible values are "collapse" or "split".[/en]
+ *   [en]Get current mode. Possible values are "collapse" or "split".[/en]
  *   [ja]このons-splitter-side要素の現在のモードを返します。"split"かもしくは"collapse"のどちらかです。[/ja]
  */
 

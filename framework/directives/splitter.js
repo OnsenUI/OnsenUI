@@ -4,10 +4,10 @@
  * @name ons-splitter
  * @category control
  * @description
- *  [en][/en]
+ *  [en]A component that enables responsive layout by implementing both a two-column layout and a sliding menu layout.[/en]
  *  [ja]sliding-menuとsplit-view両方の機能を持つレイアウトです。[/ja]
  * @guide CallingComponentAPIsfromJavaScript
- *   [en]Using navigator from JavaScript[/en]
+ *   [en]Using components from JavaScript[/en]
  *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @example
  * <ons-splitter>
