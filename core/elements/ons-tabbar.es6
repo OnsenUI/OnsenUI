@@ -46,8 +46,7 @@ limitations under the License.
         animators: OnsTabbarElement._animatorDict,
         baseClass: TabbarAnimator,
         baseClassName: 'TabbarAnimator',
-        defaultAnimation: this.getAttribute('animation'),
-        defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
+        defaultAnimation: this.getAttribute('animation')
       });
 
       this._compile();
@@ -200,6 +199,7 @@ limitations under the License.
      * @param {Number} options.previousTabIndex
      */
     _switchPage(element, options) {
+
       if (this.getActiveTabIndex() !== -1) {
         var oldPageElement = this._getContentElement().children.length > 1 ? this._getCurrentPageElement() : ons._internal.nullElement;
         var animator = this._animatorFactory.newAnimator(options);
@@ -236,6 +236,11 @@ limitations under the License.
     setActiveTab(index, options) {
 
       options = options || {};
+
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
 
       var previousTab = this._getActiveTabElement(),
         selectedTab = this._getTabElement(index),

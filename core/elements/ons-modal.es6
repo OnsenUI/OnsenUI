@@ -36,8 +36,7 @@ limitations under the License.
         animators: OnsModalElement._animatorDict,
         baseClass: ModalAnimator,
         baseClassName: 'ModalAnimator',
-        defaultAnimation: this.getAttribute('animation'),
-        defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
+        defaultAnimation: this.getAttribute('animation')
       });
 
       this._compile();
@@ -123,8 +122,11 @@ limitations under the License.
      * @param {Object} [options.animationOptions] animation options
      * @param {Function} [options.callback] callback after modal is shown
      */
-    show(options) {
-      options = options || {};
+    show(options = {}) {
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
 
       var callback = options.callback || function() {};
 
@@ -164,13 +166,16 @@ limitations under the License.
      * @param {Object} [options.animationOptions] animation options
      * @param {Function} [options.callback] callback after modal is hidden
      */
-    hide(options) {
-      options = options || {};
+    hide(options = {}) {
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
 
-      var callback = options.callback || function() {};
+      const callback = options.callback || function() {};
 
       this._doorLock.waitUnlock(() => {
-        var unlock = this._doorLock.lock(),
+        const unlock = this._doorLock.lock(),
           animator = this._animatorFactory.newAnimator(options);
 
         animator.hide(this, () => {

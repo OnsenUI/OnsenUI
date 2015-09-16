@@ -46,8 +46,7 @@ limitations under the License.
         animators: window.OnsNavigatorElement._transitionAnimatorDict,
         baseClass: NavigatorTransitionAnimator,
         baseClassName: 'NavigatorTransitionAnimator',
-        defaultAnimation: this.getAttribute('animation'),
-        defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
+        defaultAnimation: this.getAttribute('animation')
       });
     }
 
@@ -137,6 +136,11 @@ limitations under the License.
     }
 
     _popPage(options, unlock) {
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
+
       const leavePage = this._pages.pop();
 
       if (this._pages[this._pages.length - 1]) {
@@ -477,6 +481,7 @@ limitations under the License.
      * @param {Object} options
      */
     _createPageObject(page, element, options) {
+
       options.animator = this._animatorFactory.newAnimator(options);
 
       return new NavigatorPage({

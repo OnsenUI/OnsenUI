@@ -127,6 +127,11 @@ limitations under the License.
           var oldPageElement = this._currentPageElement;
           var oldPageScope = this._currentPageScope;
 
+          options.animationOptions = angular.extend(
+            options.animationOptions || {},
+            AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+          );
+
           this._currentPageElement = element;
           this._currentPageScope = scope;
 
