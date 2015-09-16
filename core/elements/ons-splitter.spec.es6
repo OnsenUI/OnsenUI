@@ -38,7 +38,6 @@ describe('ons-splitter', () => {
   describe('#closeRight()', () => {
     it('should close right ons-splitter-side', (done) => {
       expect(splitter.isRightOpened()).to.be.equal(false);
-      expect(splitter.closeRight()).to.be.equal(false);
 
       expect(splitter.openRight({callback: () => {
         expect(splitter.isRightOpened()).to.be.equal(true);
