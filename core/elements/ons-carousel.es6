@@ -19,6 +19,7 @@ limitations under the License.
   'use strict';
 
   const ModifierUtil = ons._internal.ModifierUtil;
+  const util = ons._util;
   const scheme = {'': 'carousel--*'};
 
   const VerticalModeTrait = {
@@ -411,15 +412,11 @@ limitations under the License.
         const lastActiveIndex = this._lastActiveIndex;
         this._lastActiveIndex = currentIndex;
 
-        const event = new CustomEvent('postchange', {
-          bubbles: true,
-          detail: {
-            carousel: this,
-            activeIndex: currentIndex,
-            lastActiveIndex: lastActiveIndex
-          }
+        util.triggerElementEvent(this, 'postchange', {
+          carousel: this,
+          activeIndex: currentIndex,
+          lastActiveIndex: lastActiveIndex
         });
-        this.dispatchEvent(event);
       }
     }
 
@@ -459,19 +456,15 @@ limitations under the License.
 
       if (this._isOverScroll(this._scroll)) {
         let waitForAction = false;
-        const overscrollEvent = new CustomEvent('overscroll', {
-          bubbles: true,
-          detail: {
-            carousel: this,
-            activeIndex: this.getActiveCarouselItemIndex(),
-            direction: this._getOverScrollDirection(),
-            waitToReturn: (promise) => {
-              waitForAction = true;
-              promise.then(() => this._scrollToKillOverScroll());
-            }
+        util.triggerElementEvent(this, 'overscroll', {
+          carousel: this,
+          activeIndex: this.getActiveCarouselItemIndex(),
+          direction: this._getOverScrollDirection(),
+          waitToReturn: (promise) => {
+            waitForAction = true;
+            promise.then(() => this._scrollToKillOverScroll());
           }
         });
-        this.dispatchEvent(overscrollEvent);
 
         if (!waitForAction) {
           this._scrollToKillOverScroll();
@@ -709,11 +702,7 @@ limitations under the License.
 
       this._saveLastState();
 
-      const event = new CustomEvent('refresh', {
-        bubbles: true,
-        detail: {carousel: this}
-      });
-      this.dispatchEvent(event);
+      util.triggerElementEvent(this, 'refresh', {carousel: this});
     }
 
     first() {

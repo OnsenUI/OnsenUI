@@ -27,7 +27,7 @@
  * @description
  *   [en]Fired just after the current carousel item has changed.[/en]
  *   [ja]現在表示しているカルーセルの要素が変わった時に発火します。[/ja]
- * @param {Object} event 
+ * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
  * @param {Object} event.carousel

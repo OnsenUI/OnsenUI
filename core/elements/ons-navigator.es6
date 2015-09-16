@@ -133,17 +133,18 @@ limitations under the License.
           this._popPage(options, unlock);
         }
 
-      }.bind(this));
+      });
     }
 
     _popPage(options, unlock) {
       const leavePage = this._pages.pop();
-
-      if (this._pages[this._pages.length - 1]) {
-        this._pages[this._pages.length - 1].element.style.display = 'block';
-      }
-
       const enterPage = this._pages[this._pages.length - 1];
+
+      leavePage.element._hide();
+      if (enterPage) {
+        enterPage.element.style.display = 'block';
+        enterPage.element._show();
+      }
 
       // for "postpop" event
       const eventDetail = {
@@ -158,12 +159,7 @@ limitations under the License.
         this._isPopping = false;
         unlock();
 
-        const event = new CustomEvent('postpop', {
-          bubbles: true,
-          detail: eventDetail
-        });
-        this.dispatchEvent(event);
-
+        const event = util.triggerElementEvent(this, 'postpop', eventDetail);
         event.leavePage = null;
 
         if (typeof options.onTransitionEnd === 'function') {
@@ -247,11 +243,23 @@ limitations under the License.
       return this._pages[this._pages.length - 1];
     }
 
-    _destroy() {
-      this._pages.forEach(function(page) {
-        page.destroy();
-      });
+    _show() {
+      if (this._pages[this._pages.length - 1]) {
+        this._pages[this._pages.length - 1].element._show();
+      }
+    }
 
+    _hide() {
+      if (this._pages[this._pages.length - 1]) {
+        this._pages[this._pages.length - 1].element._hide();
+      }
+    }
+
+    _destroy() {
+      for (let i = this._pages.length - 1; i >= 0; i--) {
+        this._pages[i].destroy();
+      }
+      this.remove();
     }
 
     get pages() {
@@ -305,8 +313,7 @@ limitations under the License.
           this._compilePageHook.freeze();
 
           if (!this.getAttribute('page')) {
-            const html = (this._initialHTML || '').match(/^\s*<ons-page/) ? this._initialHTML : '<ons-page>' + this._initialHTML + '</ons-page>';
-            const element = this._createPageElement(html);
+            const element = this._createPageElement(this._initialHTML || '');
 
             this._pushPageDOM('', element, {}, function() {});
           } else {
@@ -400,7 +407,7 @@ limitations under the License.
 
       this._pages.push(pageObject);
 
-      const done = function() {
+      const done = () => {
         if (this._pages[this._pages.length - 2]) {
           this._pages[this._pages.length - 2].element.style.display = 'none';
         }
@@ -408,18 +415,13 @@ limitations under the License.
         this._isPushing = false;
         unlock();
 
-        const event = new CustomEvent('postpush', {
-          bubbles: true,
-          detail: eventDetail
-        });
-        this.dispatchEvent(event);
-
+        util.triggerElementEvent(this, 'postpush', eventDetail);
 
         if (typeof options.onTransitionEnd === 'function') {
           options.onTransitionEnd();
         }
         element = null;
-      }.bind(this);
+      };
 
       this._isPushing = true;
 
@@ -431,9 +433,14 @@ limitations under the License.
               const enterPage = this._pages.slice(-1)[0];
 
               this.appendChild(element);
+              leavePage.element._hide();
+              enterPage.element._show();
+
               options.animator.push(enterPage, leavePage, done);
             } else {
               this.appendChild(element);
+              element._show();
+
               done();
             }
           }, 1000 / 60);
@@ -514,18 +521,14 @@ limitations under the License.
      */
     _emitPrePushEvent() {
       let isCanceled = false;
-      const event = new CustomEvent('prepush', {
-        bubbles: true,
-        detail: {
-          navigator: this,
-          currentPage: this._pages.length > 0 ? this.getCurrentPage() : undefined,
-          cancel: function() {
-            isCanceled = true;
-          }
+
+      util.triggerElementEvent(this, 'prepush', {
+        navigator: this,
+        currentPage: this._pages.length > 0 ? this.getCurrentPage() : undefined,
+        cancel: function() {
+          isCanceled = true;
         }
       });
-
-      this.dispatchEvent(event);
 
       return isCanceled;
     }
@@ -537,20 +540,16 @@ limitations under the License.
       let isCanceled = false;
 
       const leavePage = this.getCurrentPage();
-      const event = new CustomEvent('prepop', {
-        bubbles: true,
-        detail: {
-          navigator: this,
-          // TODO: currentPage will be deprecated
-          currentPage: leavePage,
-          leavePage: leavePage,
-          enterPage: this._pages[this._pages.length - 2],
-          cancel: function() {
-            isCanceled = true;
-          }
+      util.triggerElementEvent(this, 'prepop', {
+        navigator: this,
+        // TODO: currentPage will be deprecated
+        currentPage: leavePage,
+        leavePage: leavePage,
+        enterPage: this._pages[this._pages.length - 2],
+        cancel: function() {
+          isCanceled = true;
         }
       });
-      this.dispatchEvent(event);
 
       return isCanceled;
     }
@@ -572,7 +571,7 @@ limitations under the License.
     }
 
     _createPageElement(templateHTML) {
-      const pageElement = util.createElement(ons._internal.normalizePageHTML('' + templateHTML));
+      const pageElement = util.createElement(ons._internal.normalizePageHTML(templateHTML));
 
       if (pageElement.nodeName.toLowerCase() !== 'ons-page') {
         throw new Error('You must supply an "ons-page" element to "ons-navigator".');

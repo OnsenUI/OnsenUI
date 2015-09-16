@@ -225,7 +225,7 @@ limitations under the License.
             animators: SlidingMenuView._animatorDict,
             baseClass: SlidingMenuAnimator,
             baseClassName: 'SlidingMenuAnimator',
-            defaultAnimation: attrs.animation,
+            defaultAnimation: attrs.type,
             defaultAnimationOptions: $parse(attrs.animationOptions)()
           });
           this._animator = animationChooser.newAnimator();
@@ -243,6 +243,8 @@ limitations under the License.
         }.bind(this), 400);
 
         scope.$on('$destroy', this._destroy.bind(this));
+
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['init', 'show', 'hide', 'destroy']);
 
         if (!attrs.swipeable) {
           this.setSwipeable(true);
@@ -280,6 +282,8 @@ limitations under the License.
 
       _destroy: function() {
         this.emit('destroy');
+
+        this._clearDerivingEvents();
 
         this._deviceBackButtonHandler.destroy();
         window.removeEventListener('resize', this._boundOnWindowResize);
@@ -362,22 +366,21 @@ limitations under the License.
       _appendMainPage: function(pageUrl, templateHTML) {
         var pageScope = this._scope.$new();
         var pageContent = angular.element(templateHTML);
+        var link = $compile(pageContent);
+
         this._mainPage.append(pageContent);
 
-        $compile(pageContent)(pageScope);
-
         if (this._currentPageElement) {
-          (function(element, scope) {
-            setTimeout(function() {
-              element.remove();
-              scope.$destroy();
-            }, 40)
-          })(this._currentPageElement, this._currentPageScope);
+          this._currentPageElement.remove();
+          this._currentPageScope.$destroy();
         }
+
+        link(pageScope);
 
         this._currentPageElement = pageContent;
         this._currentPageScope = pageScope;
         this._currentPageUrl = pageUrl;
+        this._currentPageElement[0]._show();
       },
 
       /**
