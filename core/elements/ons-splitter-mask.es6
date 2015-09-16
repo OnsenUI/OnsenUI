@@ -45,7 +45,7 @@ limitations under the License.
     }
   }
 
-  if (!window.OnsSplitterSideElement) {
+  if (!window.OnsSplitterMaskElement) {
     window.OnsSplitterMaskElement = document.registerElement('ons-splitter-mask', {
       prototype: SplitterMaskElement.prototype
     });
