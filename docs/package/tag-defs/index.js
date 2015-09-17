@@ -13,6 +13,14 @@ module.exports = [
     }
   },
   {
+    name: 'extension',
+    multi: true,
+    docProperty: 'extensions',
+    transforms: function(doc, tag, value) {
+      return value;
+    }
+  },
+  {
     name: 'category',
     multi: true,
     docProperty: 'categories',
