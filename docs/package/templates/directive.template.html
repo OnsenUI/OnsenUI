@@ -147,6 +147,10 @@ docCategory: 'js'
             <span style="font-size: 12px">{% if lang == "en" %}Optional{% else %}Optional{% endif %}</span>
             {% endif %}
 
+            {% if attribute.initonly %}
+            <span style="font-size: 12px;">{% if lang == "en" %}Initonly{% else %}初期化時のみ有効{% endif %}</span>
+            {% endif %}
+
             <!-- extension -->
             {% if attribute.extensions.length > 0 %}
               {% for extension in attribute.extensions %}

@@ -21,6 +21,12 @@ module.exports = [
     }
   },
   {
+    name: 'initonly',
+    transforms: function(doc, tag, value) {
+      return true;
+    }
+  },
+  {
     name: 'category',
     multi: true,
     docProperty: 'categories',
