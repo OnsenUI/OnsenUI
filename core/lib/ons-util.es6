@@ -22,13 +22,15 @@ limitations under the License.
 
   /**
    * @param {Element} element
-   * @param {String} query dot class name or node name.
+   * @param {String/Function} query dot class name or node name or matcher function.
    * @return {HTMLElement/null}
    */
   util.findChild = (element, query) => {
-    const match = query.substr(0, 1) === '.' ?
-      (node) => node.classList.contains(query.substr(1)) :
-      (node) => node.nodeName.toLowerCase() === query;
+    const match = query instanceof Function
+      ? query
+      : query.substr(0, 1) === '.' ?
+        (node) => node.classList.contains(query.substr(1)) :
+        (node) => node.nodeName.toLowerCase() === query;
 
     for (let i = 0; i < element.children.length; i++) {
       const node = element.children[i];
@@ -62,6 +64,49 @@ limitations under the License.
   };
 
   /**
+   * @param {Element} element
+   * @return {boolean}
+   */
+  util.isAttached = (element) => {
+    while (document.documentElement !== element) {
+      if (!element) {
+        return false;
+      }
+      element = element.parentNode;
+    }
+    return true;
+  };
+
+  /**
+   * @param {Element} element
+   * @return {boolean}
+   */
+  util.hasAnyComponentAsParent = (element) => {
+    while (element && document.documentElement !== element) {
+      element = element.parentNode;
+      if (element && element.nodeName.toLowerCase().match(/(ons-navigator|ons-tabbar|ons-sliding-menu|ons-split-view)/)) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  /**
+   * @param {Element} element
+   * @param {String} action to propagate
+   */
+  util.propagateAction = (element, action) => {
+    for (let i = 0; i < element.childNodes.length; i++) {
+      let child = element.childNodes[i];
+      if (child[action]) {
+        child[action]();
+      } else {
+        ons._util.propagateAction(child, action);
+      }
+    }
+  };
+
+  /**
    * @param {String} html
    * @return {Element}
    */
@@ -74,6 +119,22 @@ limitations under the License.
     }
 
     return wrapper.children[0];
+  };
+
+  /**
+   * @param {String} html
+   * @return {HTMLFragment}
+   */
+  util.createFragment = (html) => {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = html;
+    const fragment = document.createDocumentFragment();
+
+    if (wrapper.firstChild) {
+      fragment.appendChild(wrapper.firstChild);
+    }
+
+    return fragment;
   };
 
   /**
@@ -116,6 +177,46 @@ limitations under the License.
       result.push(arrayLike[i]);
     }
     return result;
+  };
+
+  /**
+   * @param {String} jsonString
+   * @param {Object} [failSafe]
+   * @return {Object}
+   */
+  util.parseJSONObjectSafely = (jsonString, failSafe = {}) => {
+    try {
+      const result = JSON.parse('' + jsonString);
+      if (typeof result === 'object' && result !== null) {
+        return result;
+      }
+    } catch(e) {
+      return failSafe;
+    }
+    return failSafe;
+  };
+
+  /**
+   * @param {Element} element
+   * @param {String} eventName
+   * @param {Object} [detail]
+   * @return {CustomEvent}
+   */
+  util.triggerElementEvent = (target, eventName, detail = {}) => {
+
+    const event = new CustomEvent(eventName, {
+      bubbles: true,
+      cancelable: true,
+      detail: detail
+    });
+
+    Object.keys(detail).forEach(key => {
+      event[key] = detail[key];
+    });
+
+    target.dispatchEvent(event);
+
+    return event;
   };
 
 })(window.ons = window.ons || {});

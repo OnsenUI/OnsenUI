@@ -27,16 +27,16 @@
  * @description
  *   [en]Fired just after the current carousel item has changed.[/en]
  *   [ja]現在表示しているカルーセルの要素が変わった時に発火します。[/ja]
- * @param {Object} event 
+ * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
- * @param {Object} event.details.carousel
+ * @param {Object} event.carousel
  *   [en]Carousel object.[/en]
  *   [ja]イベントが発火したCarouselオブジェクトです。[/ja]
- * @param {Number} event.details.activeIndex
+ * @param {Number} event.activeIndex
  *   [en]Current active index.[/en]
  *   [ja]現在アクティブになっている要素のインデックス。[/ja]
- * @param {Number} event.details.lastActiveIndex
+ * @param {Number} event.lastActiveIndex
  *   [en]Previous active index.[/en]
  *   [ja]以前アクティブだった要素のインデックス。[/ja]
  */
