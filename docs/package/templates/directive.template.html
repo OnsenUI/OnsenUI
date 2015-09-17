@@ -19,6 +19,7 @@ docCategory: 'js'
 
   <section class="description">
     <p>{$ doc.description | lang $}</p>
+    {% if doc.deprecated != undefined %}<div class="deprecated-message">{$ '[en]Deprecated[/en][ja]非推奨[/ja]' | lang $}</div>{% endif %}
   </section>
 
   <ul class="reference-quick-navi">
@@ -138,6 +139,8 @@ docCategory: 'js'
             {% else %}
             <span style="font-size: 12px">{% if lang == "en" %}Optional{% else %}Optional{% endif %}</span>
             {% endif %}
+
+            {% if attribute.deprecated != undefined %}<div class="deprecated-message">{$ '[en]Deprecated[/en][ja]非推奨[/ja]' | lang $}</div>{% endif %}
           </td>
         </tr>
         {% endfor %}
@@ -200,7 +203,10 @@ docCategory: 'js'
         {% for method in doc.methods %}
         <tr>
           <td><a href="#method-{$ method.name $}">{$ method.signature | e $}</a></td>
-          <td>{$ method.description | lang $}</td>
+          <td>
+            {$ method.description | lang $}
+            {% if method.deprecated != undefined %}<div class="deprecated-message">{$ '[en]Deprecated[/en][ja]非推奨[/ja]' | lang $}</div>{% endif %}
+          </td>
         </tr>
         {% endfor %}
       </tbody>
@@ -232,7 +238,10 @@ docCategory: 'js'
         {% for event in doc.events %}
         <tr>
           <td><a href="#event-{$ event.name $}">{$ event.name | e $}</a></td>
-          <td>{$ event.description | lang $}</td>
+          <td>
+            {$ event.description | lang $}
+            {% if event.deprecated != undefined %}<div class="deprecated-message">{$ '[en]Deprecated[/en][ja]非推奨[/ja]' | lang $}</div>{% endif %}
+          </td>
         </tr>
         {% endfor %}
       </tbody>
@@ -253,6 +262,8 @@ docCategory: 'js'
     </h4>
 
     <p>{$ method.description | lang $}</p>
+
+    {% if method.deprecated != undefined %}<div class="deprecated-message">{$ '[en]Deprecated[/en][ja]非推奨[/ja]' | lang $}</div>{% endif %}
 
     {% if method.returns and method.returns.description %}
     <p>{% if lang == "en" %}Returns{% else %}返り値{% endif %}: {$ method.returns.description | lang $}</p>
@@ -305,6 +316,8 @@ docCategory: 'js'
     </h4>
 
     <p>{$ event.description | lang $}</p>
+
+    {% if event.deprecated != undefined %}<div class="deprecated-message">{$ '[en]Deprecated[/en][ja]非推奨[/ja]' | lang $}</div>{% endif %}
 
     <h5>{% if lang == "en" %}Parameters{% else %}パラメーター{% endif %}</h5>
 
