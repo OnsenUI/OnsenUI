@@ -502,7 +502,9 @@ gulp.task('webdriver-download', function() {
 ////////////////////////////////////////
 // test
 ////////////////////////////////////////
-gulp.task('test', ['core-test', 'e2e-test']);
+gulp.task('test', function(done) {
+  return runSequence('core-test', 'e2e-test', done);
+});
 
 ////////////////////////////////////////
 // e2e-test
