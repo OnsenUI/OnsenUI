@@ -309,7 +309,7 @@ button--active()
   button--disabled()
 
 /*! topdoc
-  name: Material-like Button
+  name: Material Button
   class: button--material
   modifiers:
     :active: Active state
@@ -320,7 +320,7 @@ button--active()
     <button class="button button--material" disabled>DISABLED</button>
 */
 
-.button--material
+button--material()
   button()
   shadow-1()
   min-height 36px
@@ -329,6 +329,9 @@ button--active()
   transition box-shadow 0.2s ease
   text-align center
   font-size 14px
+
+.button--material
+  button--material()
 
 .button--material:active
   shadow-3()
@@ -340,6 +343,40 @@ button--active()
 
 .button--material:disabled,
 .button--material[disabled]
+  background #eaeaea
+  color #a8a8a8
+  opacity 1
+  shadow-0()
+
+/*! topdoc
+  name: Material Flat Button
+  class: button--material--flat
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="button button--material--flat">BUTTON</button>
+    <button class="button button--material--flat" disabled>DISABLED</button>
+*/
+
+
+.button--material--flat
+  button--material()
+  shadow-0()
+  background-color transparent
+  color var-button-background-color
+
+.button--material--flat:active
+  shadow-0()
+  border none
+
+.button--material--flat:focus
+  shadow-0()
+  outline 0
+
+.button--material--flat:disabled,
+.button--material--flat[disabled]
   background #eaeaea
   color #a8a8a8
   opacity 1
