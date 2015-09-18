@@ -26,5 +26,6 @@ List of code contributors (in no particular order):
 * [Dominique Rahm](https://github.com/d3orn)
 * [Kon Yuichi](https://github.com/konpyu)
 * [zack](https://github.com/zack24q)
+* [Adrian Stanecki](https://github.com/astanecki)
 
 Please add yourself if you're not on this list but feel that you should be.

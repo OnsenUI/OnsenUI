@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 (function() {
-  'use strict;';
+  'use strict';
 
   var module = angular.module('onsen');
 
@@ -56,16 +56,19 @@ limitations under the License.
         this._element = element || angular.element(window.document.body);
         this._scope = scope || this._element.scope();
         this._attrs = attrs;
+        this._previousPageScope = null;
 
         this._element[0]._compilePageHook.add(this._compilePage.bind(this));
         this._element[0]._linkPageHook.add(this._linkPage.bind(this));
 
         this._boundOnPrepop = this._onPrepop.bind(this);
+        this._boundOnPostpop = this._onPostpop.bind(this);
         this._element.on('prepop', this._boundOnPrepop);
+        this._element.on('postpop', this._boundOnPostpop);
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
-        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['prepush', 'postpush', 'prepop', 'postpop'], function(detail) {
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['prepush', 'postpush', 'prepop', 'postpop', 'init', 'show', 'hide', 'destroy'], function(detail) {
           if (detail.navigator) {
             detail.navigator = this;
           }
@@ -76,6 +79,13 @@ limitations under the License.
       _onPrepop: function(event) {
         var pages = event.detail.navigator.pages;
         angular.element(pages[pages.length - 2].element).scope().$evalAsync();
+
+        this._previousPageScope = angular.element(pages[pages.length - 1].element).scope();
+      },
+
+      _onPostpop: function(event) {
+        this._previousPageScope.$destroy();
+        this._previoousPageScope = null;
       },
 
       _compilePage: function(next, pageElement) {
@@ -102,6 +112,7 @@ limitations under the License.
         this.emit('destroy');
         this._clearDerivingEvents();
         this._element.off('prepop', this._boundOnPrepop);
+        this._element.off('postpop', this._boundOnPostpop);
         this._element = this._scope = this._attrs = null;
       },
 

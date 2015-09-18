@@ -130,15 +130,12 @@ limitations under the License.
       let cancel = false;
       const callback = options.callback || function() {};
 
-      this.dispatchEvent(new CustomEvent('preshow', {
-        bubbles: true,
-        detail: {
-          alertDialog: this,
-          cancel: function() {
-            cancel = true;
-          }
+      util.triggerElementEvent(this, 'preshow', {
+        alertDialog: this,
+        cancel: function() {
+          cancel = true;
         }
-      }));
+      });
 
       if (!cancel) {
         this._doorLock.waitUnlock(() => {
@@ -152,10 +149,7 @@ limitations under the License.
           animator.show(this, () => {
             this._visible = true;
             unlock();
-            this.dispatchEvent(new CustomEvent('postshow', {
-              bubbles: true,
-              detail: {alertDialog: this}
-            }));
+            util.triggerElementEvent(this, 'postshow', {alertDialog: this});
             callback();
           });
         });
@@ -174,15 +168,12 @@ limitations under the License.
       let cancel = false;
       const callback = options.callback || function() {};
 
-      this.dispatchEvent(new CustomEvent('prehide', {
-        bubbles: true,
-        detail: {
-          alertDialog: this,
-          cancel: function() {
-            cancel = true;
-          }
+      util.triggerElementEvent(this, 'prehide', {
+        alertDialog: this,
+        cancel: function() {
+          cancel = true;
         }
-      }));
+      });
 
       if (!cancel) {
         this._doorLock.waitUnlock(() => {
@@ -194,10 +185,7 @@ limitations under the License.
             this._mask.style.display = 'none';
             this._visible = false;
             unlock();
-            this.dispatchEvent(new CustomEvent('posthide', {
-              bubbles: true,
-              detail: {alertDialog: this}
-            }));
+            util.triggerElementEvent(this, 'posthide', {alertDialog: this});
             callback();
           });
         });
@@ -242,7 +230,7 @@ limitations under the License.
       if (this.isCancelable()) {
         this.hide({
           callback: () => {
-            this.dispatchEvent(new CustomEvent('cancel', {bubbles: true}));
+            util.triggerElementEvent(this, 'cancel');
           }
         });
       }

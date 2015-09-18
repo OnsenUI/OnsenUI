@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v1.3.8-dev
+v2.0.0-dev
 ----
  * core: Added more customizable animations.
  * core: [BC Break] Changed interfaces for registering custom animators on `ons-navigator`, `ons-dialog`, `ons-alert-dialog`, `ons-dialog`, `ons-sliding-menu`, `ons-popover` and `ons-tabbar`.
@@ -32,9 +32,32 @@ v1.3.8-dev
  * ons-modal: Added `isShown()` method.
  * ons-navigator: Fixed `insertPage()` behaviour with high or low indexes.
  * ons-tabbar: Fixed callback in `setActiveTab()` method.
+ * ons-tabbar: persistent tabs only throw 'init' event once.
+ * core: every child element will be wrapped inside an ons-page.
+ * ons-page: added page lifecycle events API
+ * ons-splitter: Added `ons-splitter`, `ons-splitter-side`, `ons-splitter-content` and `ons-splitter-mask` custom elements.
  * ons-fab: Implemented 'fab' component.
  * core: Added page attribute expressions.
- * ons-carousel: Fixed [#844](https://github.com/OnsenUI/OnsenUI/issues/844).
+ * ons.notification: Added `defaultValue`, `placeholder` and `autofocus` options to prompt.
+ * ons-popover: Fixed [#880](https://github.com/OnsenUI/OnsenUI/issues/880).
+ * ons-sliding-menu: Fixed [#879](https://github.com/OnsenUI/OnsenUI/issues/879)
+
+v1.3.10
+----
+* ons-tabbar: Fixed [#891](https://github.com/OnsenUI/OnsenUI/issues/891).
+
+v1.3.9
+----
+* ons-carousel: Fixed [#844](https://github.com/OnsenUI/OnsenUI/issues/844).
+* ons-navigator: Fixed [#865](https://github.com/OnsenUI/OnsenUI/issues/865).
+* core: Fixed [#845](https://github.com/OnsenUI/OnsenUI/issues/845).
+* ons-lazy-repeat: Added debouncing to increase performance on iOS.
+* core: FastClick patched to support setting the system clock back.
+
+v1.3.8
+----
+* ons-lazy-repeat: Recalculate heights when number of items change in order to support dynamic lists with variable height items.
+* ons-lazy-repeat: Don't wait to render to make the list more responsive.
 
 v1.3.7
 ----
@@ -109,6 +132,7 @@ v1.3.0
  * ons-lazy-repeat: Improved behavior when items are removed.
  * ons-sliding-menu: Fixed [#577](https://github.com/OnsenUI/OnsenUI/issues/577).
  * core: Windows Universal (Windows Phone 8.1, Windows 8.1 and IE 11)  partial support.
+ * core: FastClick library updated to 1.0.6. This adds support for iOS 8.4+, earlier versions of Onsen UI will not work with iOS 8.4+.
 
 v1.2.2
 ----
