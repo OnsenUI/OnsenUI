@@ -49,5 +49,6 @@ limitations under the License.
 
   ons._internal = ons._internal || {};
   ons._internal.NavigatorTransitionAnimator = NavigatorTransitionAnimator;
+  ons._internal.NullNavigatorTransitionAnimator = NavigatorTransitionAnimator;
 
 })(window.ons = window.ons || {});
