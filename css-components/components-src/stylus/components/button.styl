@@ -329,6 +329,7 @@ button--material()
   transition box-shadow 0.2s ease
   text-align center
   font-size 14px
+  transform: translate3d(0, 0, 0);
 
 .button--material
   button--material()
@@ -367,17 +368,18 @@ button--material()
   background-color transparent
   color var-button-background-color
 
-.button--material--flat:active
+button--material--active()
   shadow-0()
   background-color transparent
   color var-button-background-color
+  opacity 1
   border none
 
+.button--material--flat:active
+  button--material--active()
+
 .button--material--flat:focus
-  shadow-0()
-  background-color transparent
-  color var-button-background-color
-  outline 0
+  button--material--active()
 
 .button--material--flat:disabled,
 .button--material--flat[disabled]
