@@ -24,7 +24,7 @@ limitations under the License.
   const SimpleSlideNavigatorTransitionAnimator = ons._internal.SimpleSlideNavigatorTransitionAnimator;
   const LiftNavigatorTransitionAnimator = ons._internal.LiftNavigatorTransitionAnimator;
   const FadeNavigatorTransitionAnimator = ons._internal.FadeNavigatorTransitionAnimator;
-  const NullNavigatorTransitionAnimator = ons._internal.NullNavigatorTransitionAnimator;
+  const NoneNavigatorTransitionAnimator = ons._internal.NoneNavigatorTransitionAnimator;
   const util = ons._util;
   const AsyncHook = ons._internal.AsyncHook;
   const NavigatorPage = ons._internal.NavigatorPage;
@@ -524,7 +524,7 @@ limitations under the License.
       'simpleslide': SimpleSlideNavigatorTransitionAnimator,
       'lift': LiftNavigatorTransitionAnimator,
       'fade': FadeNavigatorTransitionAnimator,
-      'none': NullNavigatorTransitionAnimator
+      'none': NoneNavigatorTransitionAnimator
     };
 
     /**
