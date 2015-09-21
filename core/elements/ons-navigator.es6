@@ -425,21 +425,18 @@ limitations under the License.
 
       this._compilePageHook.run(element => {
         this._linkPageHook.run(element => {
+          this.appendChild(element);
+
           if (this._pages.length > 1) {
             const leavePage = this._pages.slice(-2)[0];
             const enterPage = this._pages.slice(-1)[0];
 
-            this.appendChild(element);
-            setTimeout(() => {
-              leavePage.element._hide();
-              enterPage.element._show();
+            leavePage.element._hide();
+            enterPage.element._show();
 
-              options.animator.push(enterPage, leavePage, done);
-            }, 1000 / 60);
+            options.animator.push(enterPage, leavePage, done);
           } else {
-            this.appendChild(element);
             element._show();
-
             done();
           }
         }, element);
