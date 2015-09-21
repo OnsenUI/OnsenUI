@@ -118,7 +118,7 @@ limitations under the License.
             throw new Error('Refresh option cannot be used with pages directly inside the Navigator. Use ons-template instead.');
           }
 
-          ons._internal.getPageHTMLAsync(this._pages[index].page).then(templateHTML => {
+          ons._internal.tryGetPageHTMLSync(this._pages[index].page, (templateHTML) => {
             const element = this._createPageElement(templateHTML);
             const pageObject = this._createPageObject(this._pages[index].page, element, options);
 
@@ -216,7 +216,7 @@ limitations under the License.
       this._doorLock.waitUnlock(() => {
         const unlock = this._doorLock.lock();
 
-        ons._internal.getPageHTMLAsync(page).then(templateHTML => {
+        ons._internal.tryGetPageHTMLSync(page, (templateHTML) => {
           const element = this._createPageElement(templateHTML);
 
           const pageObject = this._createPageObject(page, element, options);
@@ -378,7 +378,7 @@ limitations under the License.
         unlock();
       };
 
-      ons._internal.getPageHTMLAsync(page).then(templateHTML => {
+      ons._internal.tryGetPageHTMLSync(page, (templateHTML) => {
         this._pushPageDOM(page, this._createPageElement(templateHTML), options, done);
       });
     }
@@ -425,23 +425,23 @@ limitations under the License.
 
       this._compilePageHook.run(element => {
         this._linkPageHook.run(element => {
-          setTimeout(() => {
-            if (this._pages.length > 1) {
-              const leavePage = this._pages.slice(-2)[0];
-              const enterPage = this._pages.slice(-1)[0];
+          if (this._pages.length > 1) {
+            const leavePage = this._pages.slice(-2)[0];
+            const enterPage = this._pages.slice(-1)[0];
 
-              this.appendChild(element);
+            this.appendChild(element);
+            setTimeout(() => {
               leavePage.element._hide();
               enterPage.element._show();
 
               options.animator.push(enterPage, leavePage, done);
-            } else {
-              this.appendChild(element);
-              element._show();
+            }, 1000 / 60);
+          } else {
+            this.appendChild(element);
+            element._show();
 
-              done();
-            }
-          }, 1000 / 60);
+            done();
+          }
         }, element);
       }, element);
     }
