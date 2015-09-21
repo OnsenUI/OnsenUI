@@ -426,6 +426,7 @@ limitations under the License.
       this._compilePageHook.run(element => {
         this._linkPageHook.run(element => {
           this.appendChild(element);
+          element._tryToFillStatusBar();
 
           if (this._pages.length > 1) {
             const leavePage = this._pages.slice(-2)[0];
