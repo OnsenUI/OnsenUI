@@ -44,6 +44,10 @@ limitations under the License.
       builded.classList.forEach(className => this.classList.add(className));
     }
 
+    get _iconName() {
+      return '' + this.getAttribute('icon');
+    }
+
     /**
      * Remove unneeded class value.
      */
@@ -51,11 +55,12 @@ limitations under the License.
       const classList = this.classList;
 
       Array.apply(null, this.classList).filter(klass => {
-        return klass === 'fa' || klass.indexOf('fa-') === 0 || klass.indexOf('ion-') === 0;
+        return klass === 'fa' || klass.indexOf('fa-') === 0 || klass.indexOf('ion-') === 0 || klass.indexOf('zmdi-') === 0;
       }).forEach(className => {
         classList.remove(className);
       });
 
+      classList.remove('zmdi');
       classList.remove('ons-icon--ion');
     }
 
@@ -64,13 +69,16 @@ limitations under the License.
       const style = {};
 
       // icon
-      const iconName = '' + this.getAttribute('icon');
+      const iconName = this._iconName;
       if (iconName.indexOf('ion-') === 0) {
         classList.push(iconName);
         classList.push('ons-icon--ion');
       } else if (iconName.indexOf('fa-') === 0) {
         classList.push(iconName);
         classList.push('fa');
+      } else if(iconName.indexOf('md-') === 0)  {
+        classList.push('zmdi');
+        classList.push('zmdi-' + iconName.split(/\-(.+)?/)[1]);
       } else {
         classList.push('fa');
         classList.push('fa-' + iconName);

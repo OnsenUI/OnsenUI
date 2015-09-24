@@ -414,14 +414,16 @@ describe('OnsNavigatorElement', () => {
 
   describe('#replaceToPage()', () => {
     it('replaces all the page stack with only a new page', (done) => {
-      nav.resetToPage('hoge', {
-        onTransitionEnd: () => {
-          expect(nav.pages.length).to.equal(1);
-          let content = nav.getCurrentPage().element._getContentElement();
-          expect(content.innerHTML).to.equal('hoge');
-          done();
-        }
-      });
+      nav.pushPage('fuga', {onTransitionEnd: () => {
+        nav.resetToPage('hoge', {
+          onTransitionEnd: () => {
+            expect(nav.pages.length).to.equal(1);
+            let content = nav.getCurrentPage().element._getContentElement();
+            expect(content.innerHTML).to.equal('hoge');
+            done();
+          }
+        });
+      }});
     });
   });
 

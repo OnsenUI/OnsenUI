@@ -55,8 +55,7 @@ limitations under the License.
         animators: OnsAlertDialogElement._animatorDict,
         baseClass: AlertDialogAnimator,
         baseClassName: 'AlertDialogAnimator',
-        defaultAnimation: this.getAttribute('animation'),
-        defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options'))
+        defaultAnimation: this.getAttribute('animation')
       });
 
       this._visible = false;
@@ -129,6 +128,11 @@ limitations under the License.
     show(options = {}) {
       let cancel = false;
       const callback = options.callback || function() {};
+
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
 
       util.triggerElementEvent(this, 'preshow', {
         alertDialog: this,
