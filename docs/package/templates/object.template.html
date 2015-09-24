@@ -18,10 +18,8 @@ docCategory: 'js'
 
   <h2>{$ doc.name $}</h2>
 
-  {% if doc.extensions.length > 0 %}
-    {% for extension in doc.extensions %}
-      <span>{$ extension | lang $}</span>
-    {% endfor %}
+  {% if doc.extensionOf %}
+  <span class="extension-name">{$ doc.extensionOf | lang $}</span>
   {% endif %}
 
   <section class="reference-description">
@@ -130,10 +128,8 @@ docCategory: 'js'
           <td>{$ method.description | lang $}
             {% if method.deprecated != undefined %}<div class="deprecated-message">{$ '[en]Deprecated[/en][ja]非推奨[/ja]' | lang $}</div>{% endif %}
 
-            {% if method.extensions.length > 0 %}
-              {% for extension in method.extensions %}
-                <span>{$ extension | lang $}</span>
-              {% endfor %}
+            {% if method.extensionOf %}
+            <span class="extension-name">{$ method.extensionOf | lang $}</span>
             {% endif %}
           </td>
         </tr>
@@ -170,11 +166,8 @@ docCategory: 'js'
           <td>{$ event.description | lang $}
             {% if event.deprecated != undefined %}<div class="deprecated-message">{$ '[en]Deprecated[/en][ja]非推奨[/ja]' | lang $}</div>{% endif %}
 
-            <!-- extension -->
-            {% if event.extensions.length > 0 %}
-              {% for extension in event.extensions %}
-                <span>{$ extension | lang $}</span>
-              {% endfor %}
+            {% if event.extensionOf %}
+            <span class="extension-name">{$ event.extensionOf | lang $}</span>
             {% endif %}
           </td>
         </tr>
@@ -198,11 +191,8 @@ docCategory: 'js'
 
     <p>{$ method.description | lang $}</p>
 
-    <!-- extension -->
-    {% if method.extensions.length > 0 %}
-      {% for extension in method.extensions %}
-        <span>{$ extension | lang $}</span>
-      {% endfor %}
+    {% if method.extensionOf %}
+    <span class="extension-name">{$ method.extensionOf | lang $}</span>
     {% endif %}
 
     {% if method.deprecated != undefined %}<div class="deprecated-message">{$ '[en]Deprecated[/en][ja]非推奨[/ja]' | lang $}</div>{% endif %}
@@ -260,11 +250,8 @@ docCategory: 'js'
 
     <p>{$ event.description | lang $}</p>
 
-    <!-- extension -->
-    {% if event.extensions.length > 0 %}
-      {% for extension in event.extensions %}
-        <span>{$ extension | lang $}</span>
-      {% endfor %}
+    {% if event.extensionOf %}
+    <span class="extension-name">{$ event.extensionOf | lang $}</span>
     {% endif %}
 
     {% if event.deprecated != undefined %}<div class="deprecated-message">{$ '[en]Deprecated[/en][ja]非推奨[/ja]' | lang $}</div>{% endif %}

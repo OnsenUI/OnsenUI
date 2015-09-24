@@ -13,11 +13,9 @@ module.exports = [
     }
   },
   {
-    name: 'extension',
-    multi: true,
-    docProperty: 'extensions',
+    name: 'extensionOf',
     transforms: function(doc, tag, value) {
-      return value;
+      return ('' + value).trim();
     }
   },
   {
