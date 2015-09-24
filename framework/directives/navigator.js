@@ -260,7 +260,7 @@
  * @signature bringPageTop(item, [options])
  * @param {String|Number} item
  *   [en]Page URL or index of an existing page in navigator's stack.[/en]
- *   [ja][/ja]
+ *   [ja]ページのURLかもしくはons-navigatorのページスタックのインデックス値を指定します。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
  *   [ja]オプションを指定するオブジェクト。[/ja]
@@ -275,7 +275,7 @@
  *   [ja]pushPage()による画面遷移が終了した時に呼び出される関数オブジェクトを指定します。[/ja]
  * @description
  *   [en]Brings the given page to the top of the page-stack if already exists or pushes it into the stack if doesn't.[/en]
- *   [ja][/ja]
+ *   [ja]指定したページをページスタックの一番上に移動します。もし指定したページが無かった場合新しくpushされます。[/ja]
  */
 
 /**
