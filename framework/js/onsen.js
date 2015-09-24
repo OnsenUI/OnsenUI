@@ -193,7 +193,7 @@ limitations under the License.
  *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {Object} [options.parentScope]
  *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
- *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。[/ja]
+ *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。このパラメータはAngularJSバインディングでのみ利用できます。[/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the alert dialog component object.[/en]
  *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
@@ -213,7 +213,7 @@ limitations under the License.
  *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {Object} [options.parentScope]
  *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
- *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。[/ja]
+ *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。このパラメータはAngularJSバインディングでのみ利用できます。[/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the dialog component object.[/en]
  *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
@@ -233,7 +233,7 @@ limitations under the License.
  *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {Object} [options.parentScope]
  *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
- *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。[/ja]
+ *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。このパラメータはAngularJSバインディングでのみ利用できます。[/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the popover component object.[/en]
  *   [ja]ポップオーバーのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
