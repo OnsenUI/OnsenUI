@@ -67,6 +67,10 @@ ons-toolbar ~ .page__content {
   top: 44px;
 }
 
+.navigation-bar--material ~ .page__content {
+  top: 56px;
+}
+
 .page__status-bar-fill ~ ons-toolbar {
   height: 64px;
 }
