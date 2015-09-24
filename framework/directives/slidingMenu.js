@@ -3,6 +3,7 @@
  * @id sliding_menu
  * @name ons-sliding-menu
  * @category navigation
+ * @extensionOf angular
  * @description
  *   [en]Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.[/en]
  *   [ja]スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。[/ja]

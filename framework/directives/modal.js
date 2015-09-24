@@ -29,6 +29,7 @@
  * @ngdoc attribute
  * @name var
  * @type {String}
+ * @extensionOf angular
  * @initonly
  * @description
  *   [en]Variable name to refer this modal.[/en]

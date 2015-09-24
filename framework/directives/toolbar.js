@@ -37,6 +37,7 @@
  * @ngdoc attribute
  * @name var
  * @initonly
+ * @extensionOf angular
  * @type {String}
  * @description
  *  [en]Variable name to refer this toolbar.[/en]

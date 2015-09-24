@@ -3,6 +3,7 @@
  * @id ons-keyboard-active
  * @name ons-keyboard-active
  * @category input
+ * @extensionOf angular
  * @description
  *   [en]
  *     Conditionally display content depending on if the software keyboard is visible or hidden.

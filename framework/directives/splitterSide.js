@@ -119,6 +119,7 @@
  * @ngdoc attribute
  * @name ons-destroy
  * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
@@ -129,6 +130,7 @@
  * @ngdoc attribute
  * @name ons-preopen
  * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preopen" event is fired.[/en]
@@ -139,6 +141,7 @@
  * @ngdoc attribute
  * @name ons-preclose
  * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preclose" event is fired.[/en]
@@ -148,6 +151,7 @@
 /**
  * @ngdoc attribute
  * @name ons-postopen
+ * @extensionOf angular
  * @initonly
  * @type {Expression}
  * @description
@@ -158,6 +162,7 @@
 /**
  * @ngdoc attribute
  * @name ons-postclose
+ * @extensionOf angular
  * @initonly
  * @type {Expression}
  * @description

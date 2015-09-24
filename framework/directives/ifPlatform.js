@@ -3,6 +3,7 @@
  * @id if-platform
  * @name ons-if-platform
  * @category util
+ * @extensionOf angular
  * @description
  *    [en]Conditionally display content depending on the platform / browser. Valid values are "ios", "android", "blackberry", "chrome", "safari", "firefox", and "opera".[/en]
  *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaのいずれかの値を空白区切りで複数指定できます。[/ja]
@@ -19,6 +20,7 @@
  * @name ons-if-platform
  * @type {String}
  * @initonly
+ * @extensionOf angular
  * @description
  *   [en]One or multiple space separated values: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".[/en]
  *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "wp"のいずれか空白区切りで複数指定できます。[/ja]

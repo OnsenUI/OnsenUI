@@ -137,6 +137,7 @@
  * @ngdoc attribute
  * @name var
  * @initonly
+ * @extensionOf angular
  * @type {String}
  * @description
  *  [en]Variable name to refer this navigator.[/en]
@@ -147,6 +148,7 @@
  * @ngdoc attribute
  * @name ons-prepush
  * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prepush" event is fired.[/en]
@@ -157,6 +159,7 @@
  * @ngdoc attribute
  * @name ons-prepop
  * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prepop" event is fired.[/en]
@@ -167,6 +170,7 @@
  * @ngdoc attribute
  * @name ons-postpush
  * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postpush" event is fired.[/en]
@@ -177,6 +181,7 @@
  * @ngdoc attribute
  * @name ons-postpop
  * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postpop" event is fired.[/en]
@@ -187,6 +192,7 @@
  * @ngdoc attribute
  * @name ons-init
  * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "init" event is fired.[/en]
@@ -197,6 +203,7 @@
  * @ngdoc attribute
  * @name ons-show
  * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "show" event is fired.[/en]
@@ -207,6 +214,7 @@
  * @ngdoc attribute
  * @name ons-hide
  * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "hide" event is fired.[/en]
@@ -217,6 +225,7 @@
  * @ngdoc attribute
  * @name ons-destroy
  * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "destroy" event is fired.[/en]
@@ -226,7 +235,6 @@
 /**
  * @ngdoc attribute
  * @name animation
- * @initonly
  * @type {String}
  * @default default
  * @description
@@ -237,7 +245,6 @@
 /**
  * @ngdoc attribute
  * @name animation-options
- * @initonly
  * @type {Expression}
  * @description
  *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]
@@ -389,6 +396,7 @@
 /**
  * @ngdoc method
  * @signature on(eventName, listener)
+ * @extensionOf angular
  * @description
  *   [en]Add an event listener.[/en]
  *   [ja]イベントリスナーを追加します。[/ja]
@@ -403,6 +411,7 @@
 /**
  * @ngdoc method
  * @signature once(eventName, listener)
+ * @extensionOf angular
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
  *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
@@ -417,6 +426,7 @@
 /**
  * @ngdoc method
  * @signature off(eventName, [listener])
+ * @extensionOf angular
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
  *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]

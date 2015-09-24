@@ -91,6 +91,7 @@
  * @name var
  * @initonly
  * @type {String}
+ * @extensionOf angular
  * @description
  *  [en]Variable name to refer this dialog.[/en]
  *  [ja]このダイアログを参照するための名前を指定します。[/ja]
@@ -154,6 +155,7 @@
  * @ngdoc attribute
  * @name ons-preshow
  * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
@@ -164,6 +166,7 @@
  * @ngdoc attribute
  * @name ons-prehide
  * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
@@ -173,6 +176,7 @@
 /**
  * @ngdoc attribute
  * @name ons-postshow
+ * @extensionOf angular
  * @initonly
  * @type {Expression}
  * @description
@@ -183,6 +187,7 @@
 /**
  * @ngdoc attribute
  * @name ons-posthide
+ * @extensionOf angular
  * @initonly
  * @type {Expression}
  * @description
@@ -193,6 +198,7 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @extensionOf angular
  * @initonly
  * @type {Expression}
  * @description
@@ -317,6 +323,7 @@
 /**
  * @ngdoc method
  * @signature on(eventName, listener)
+ * @extensionOf angular
  * @description
  *   [en]Add an event listener.[/en]
  *   [ja]イベントリスナーを追加します。[/ja]
@@ -331,6 +338,7 @@
 /**
  * @ngdoc method
  * @signature once(eventName, listener)
+ * @extensionOf angular
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
  *  [ja]一度だけ呼び出されるイベントリスナを追加します。[/ja]
@@ -345,6 +353,7 @@
 /**
  * @ngdoc method
  * @signature off(eventName, [listener])
+ * @extensionOf angular
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
  *  [ja]イベントリスナーを削除します。もしイベントリスナーが指定されなかった場合には、そのイベントに紐付いているイベントリスナーが全て削除されます。[/ja]

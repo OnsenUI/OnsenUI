@@ -21,6 +21,7 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @extensionOf angular
  * @initonly
  * @type {Expression}
  * @description
