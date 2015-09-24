@@ -193,6 +193,7 @@
  * @initonly
  * @type {Expression}
  * @extensionOf angular
+ * @description
  *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
  *  [ja]"postshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
