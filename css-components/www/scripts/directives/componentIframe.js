@@ -31,6 +31,7 @@ angular.module('app').directive('componentIframe', function() {
               '<style type="text/css">' + css + '</style>' +
               '<link rel="stylesheet" href="/patterns/lib/font_awesome/css/font-awesome.min.css">' +
               '<link rel="stylesheet" href="/patterns/lib/ionicons/css/ionicons.min.css">' +
+              '<link rel="stylesheet" href="/patterns/lib/material-design-iconic-font/css/material-design-iconic-font.min.css">' +
             '</head>' +
             '<body style="background-color: transparent; padding:0; margin: 0; overflow: hidden; height: 100%;">' +
             '<div style="position: absolute; right: 0px; left: 0px; top: 0px; bottom: 0px; display: flex; align-items: center; justify-content: center;">' +
