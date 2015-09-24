@@ -84,6 +84,7 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
  * @type {String}
  * @description
  *  [en]Variable name to refer this popover.[/en]
@@ -161,6 +162,7 @@
 /**
  * @ngdoc attribute
  * @name ons-preshow
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
@@ -170,6 +172,7 @@
 /**
  * @ngdoc attribute
  * @name ons-prehide
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
@@ -179,6 +182,7 @@
 /**
  * @ngdoc attribute
  * @name ons-postshow
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
@@ -188,6 +192,7 @@
 /**
  * @ngdoc attribute
  * @name ons-posthide
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
@@ -197,6 +202,7 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]

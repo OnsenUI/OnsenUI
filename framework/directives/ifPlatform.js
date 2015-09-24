@@ -18,6 +18,7 @@
  * @ngdoc attribute
  * @name ons-if-platform
  * @type {String}
+ * @initonly
  * @description
  *   [en]One or multiple space separated values: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".[/en]
  *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "wp"のいずれか空白区切りで複数指定できます。[/ja]

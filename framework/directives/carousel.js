@@ -98,6 +98,7 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
  * @type {String}
  * @description
  *   [en]Variable name to refer this carousel.[/en]
@@ -166,6 +167,7 @@
 /**
  * @ngdoc attribute
  * @name initial-index
+ * @initonly
  * @type {Number}
  * @description
  *   [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
@@ -183,6 +185,7 @@
 /**
  * @ngdoc attribute
  * @name ons-postchange
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
@@ -192,6 +195,7 @@
 /**
  * @ngdoc attribute
  * @name ons-refresh
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "refresh" event is fired.[/en]
@@ -201,6 +205,7 @@
 /**
  * @ngdoc attribute
  * @name ons-overscroll
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "overscroll" event is fired.[/en]
@@ -210,6 +215,7 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]

@@ -111,6 +111,7 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
  * @type {String}
  * @description
  *   [en]Variable name to refer this tab bar.[/en]
@@ -120,6 +121,7 @@
 /**
  * @ngdoc attribute
  * @name hide-tabs
+ * @initonly
  * @type {Boolean}
  * @default false
  * @description
@@ -149,6 +151,7 @@
 /**
  * @ngdoc attribute
  * @name position
+ * @initonly
  * @type {String}
  * @default bottom
  * @description
@@ -159,6 +162,7 @@
 /**
  * @ngdoc attribute
  * @name ons-reactive
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "reactive" event is fired.[/en]
@@ -168,6 +172,7 @@
 /**
  * @ngdoc attribute
  * @name ons-prechange
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prechange" event is fired.[/en]
@@ -177,6 +182,7 @@
 /**
  * @ngdoc attribute
  * @name ons-postchange
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
@@ -186,6 +192,7 @@
 /**
  * @ngdoc attribute
  * @name ons-init
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "init" event is fired.[/en]
@@ -195,6 +202,7 @@
 /**
  * @ngdoc attribute
  * @name ons-show
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "show" event is fired.[/en]
@@ -204,6 +212,7 @@
 /**
  * @ngdoc attribute
  * @name ons-hide
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "hide" event is fired.[/en]
@@ -213,6 +222,7 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "destroy" event is fired.[/en]

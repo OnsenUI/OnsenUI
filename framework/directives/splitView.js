@@ -137,6 +137,7 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
  * @type {String}
  * @description
  *   [en]Variable name to refer this split view.[/en]
@@ -145,6 +146,7 @@
 
 /**
  * @ngdoc attribute
+ * @initonly
  * @name main-page
  * @type {String}
  * @description
@@ -155,6 +157,7 @@
 /**
  * @ngdoc attribute
  * @name main-page-width
+ * @initonly
  * @type {Number}
  * @description
  *   [en]Main page width percentage. The secondary page width will be the remaining percentage.[/en]
@@ -164,6 +167,7 @@
 /**
  * @ngdoc attribute
  * @name secondary-page
+ * @initonly
  * @type {String}
  * @description
  *   [en]The url of the page on the left.[/en]
@@ -173,6 +177,7 @@
 /**
  * @ngdoc attribute
  * @name collapse
+ * @initonly
  * @type {String}
  * @description
  *   [en]
@@ -192,6 +197,7 @@
 /**
  * @ngdoc attribute
  * @name ons-update
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "update" event is fired.[/en]
@@ -201,6 +207,7 @@
 /**
  * @ngdoc attribute
  * @name ons-presplit
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "presplit" event is fired.[/en]
@@ -210,6 +217,7 @@
 /**
  * @ngdoc attribute
  * @name ons-precollapse
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "precollapse" event is fired.[/en]
@@ -219,6 +227,7 @@
 /**
  * @ngdoc attribute
  * @name ons-postsplit
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postsplit" event is fired.[/en]
@@ -228,6 +237,7 @@
 /**
  * @ngdoc attribute
  * @name ons-postcollapse
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postcollapse" event is fired.[/en]
@@ -237,6 +247,7 @@
 /**
  * @ngdoc attribute
  * @name ons-init
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "init" event is fired.[/en]
@@ -246,6 +257,7 @@
 /**
  * @ngdoc attribute
  * @name ons-show
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "show" event is fired.[/en]
@@ -255,6 +267,7 @@
 /**
  * @ngdoc attribute
  * @name ons-hide
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "hide" event is fired.[/en]
@@ -264,6 +277,7 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "destroy" event is fired.[/en]

@@ -17,6 +17,7 @@
 /**
  * @ngdoc attribute
  * @name ons-if-orientation
+ * @initonly
  * @type {String}
  * @description
  *   [en]Either "portrait" or "landscape".[/en]

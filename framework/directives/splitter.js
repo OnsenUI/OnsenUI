@@ -24,6 +24,7 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
  * @type {String}
  * @description
  *   [en]Variable name to refer this split view.[/en]
@@ -33,6 +34,7 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]

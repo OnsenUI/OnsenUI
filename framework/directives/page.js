@@ -82,6 +82,7 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
  * @type {String}
  * @description
  *   [en]Variable name to refer this page.[/en]
@@ -109,6 +110,7 @@
 /**
  * @ngdoc attribute
  * @name ng-device-backbutton
+ * @initonly
  * @type {Expression}
  * @description
  *   [en]Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.[/en]
@@ -117,6 +119,7 @@
 /**
  * @ngdoc attribute
  * @name ons-init
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "init" event is fired.[/en]
@@ -126,6 +129,7 @@
 /**
  * @ngdoc attribute
  * @name ons-show
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "show" event is fired.[/en]
@@ -135,6 +139,7 @@
 /**
  * @ngdoc attribute
  * @name ons-hide
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "hide" event is fired.[/en]
@@ -144,6 +149,7 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]

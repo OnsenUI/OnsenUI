@@ -126,6 +126,7 @@
 /**
  * @ngdoc attribute
  * @name page
+ * @initonly
  * @type {String}
  * @description
  *   [en]First page to show when navigator is initialized.[/en]
@@ -135,6 +136,7 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
  * @type {String}
  * @description
  *  [en]Variable name to refer this navigator.[/en]
@@ -144,6 +146,7 @@
 /**
  * @ngdoc attribute
  * @name ons-prepush
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prepush" event is fired.[/en]
@@ -153,6 +156,7 @@
 /**
  * @ngdoc attribute
  * @name ons-prepop
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prepop" event is fired.[/en]
@@ -162,6 +166,7 @@
 /**
  * @ngdoc attribute
  * @name ons-postpush
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postpush" event is fired.[/en]
@@ -171,6 +176,7 @@
 /**
  * @ngdoc attribute
  * @name ons-postpop
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postpop" event is fired.[/en]
@@ -180,6 +186,7 @@
 /**
  * @ngdoc attribute
  * @name ons-init
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "init" event is fired.[/en]
@@ -189,6 +196,7 @@
 /**
  * @ngdoc attribute
  * @name ons-show
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "show" event is fired.[/en]
@@ -198,6 +206,7 @@
 /**
  * @ngdoc attribute
  * @name ons-hide
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "hide" event is fired.[/en]
@@ -207,6 +216,7 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "destroy" event is fired.[/en]
@@ -216,6 +226,7 @@
 /**
  * @ngdoc attribute
  * @name animation
+ * @initonly
  * @type {String}
  * @default default
  * @description
@@ -226,6 +237,7 @@
 /**
  * @ngdoc attribute
  * @name animation-options
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Specify the animation's duration, timing and delay with an object literal. E.g. <code>{duration: 0.2, delay: 1, timing: 'ease-in'}</code>[/en]

@@ -21,6 +21,7 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
@@ -30,6 +31,7 @@
 /**
  * @ngdoc attribute
  * @name page
+ * @initonly
  * @type {String}
  * @description
  *   [en]The url of the menu page.[/en]

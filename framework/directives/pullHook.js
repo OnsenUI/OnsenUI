@@ -62,6 +62,7 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
  * @type {String}
  * @description
  *   [en]Variable name to refer this component.[/en]
@@ -79,6 +80,7 @@
 /**
  * @ngdoc attribute
  * @name ng-action
+ * @initonly
  * @type {Expression}
  * @description
  *   [en]Use to specify custom behavior when the page is pulled down. A <code>$done</code> function is available to tell the component that the action is completed.[/en]
@@ -123,6 +125,7 @@
 /**
  * @ngdoc attribute
  * @name ons-changestate
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "changestate" event is fired.[/en]

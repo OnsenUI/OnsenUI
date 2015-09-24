@@ -101,6 +101,7 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
  * @type {String}
  * @description
  *  [en]Variable name to refer this sliding menu.[/en]
@@ -110,6 +111,7 @@
 /**
  * @ngdoc attribute
  * @name menu-page
+ * @initonly
  * @type {String}
  * @description
  *   [en]The url of the menu page.[/en]
@@ -119,6 +121,7 @@
 /**
  * @ngdoc attribute
  * @name main-page
+ * @initonly
  * @type {String}
  * @description
  *   [en]The url of the main page.[/en]
@@ -128,6 +131,7 @@
 /**
  * @ngdoc attribute
  * @name swipeable
+ * @initonly
  * @type {Boolean}
  * @description
  *   [en]Whether to enable swipe interaction.[/en]
@@ -137,6 +141,7 @@
 /**
  * @ngdoc attribute
  * @name swipe-target-width
+ * @initonly
  * @type {String}
  * @description
  *   [en]The width of swipeable area calculated from the left (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]
@@ -146,6 +151,7 @@
 /**
  * @ngdoc attribute
  * @name max-slide-distance
+ * @initonly
  * @type {String}
  * @description
  *   [en]How far the menu page will slide open. Can specify both in px and %. eg. 90%, 200px[/en]
@@ -155,6 +161,7 @@
 /**
  * @ngdoc attribute
  * @name side
+ * @initonly
  * @type {String}
  * @description
  *   [en]Specify which side of the screen the menu page is located on. Possible values are "left" and "right".[/en]
@@ -164,6 +171,7 @@
 /**
  * @ngdoc attribute
  * @name type
+ * @initonly
  * @type {String}
  * @description
  *   [en]Sliding menu animator. Possible values are reveal (default), push and overlay.[/en]
@@ -173,6 +181,7 @@
 /**
  * @ngdoc attribute
  * @name ons-preopen
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preopen" event is fired.[/en]
@@ -182,6 +191,7 @@
 /**
  * @ngdoc attribute
  * @name ons-preclose
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preclose" event is fired.[/en]
@@ -191,6 +201,7 @@
 /**
  * @ngdoc attribute
  * @name ons-postopen
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postopen" event is fired.[/en]
@@ -200,6 +211,7 @@
 /**
  * @ngdoc attribute
  * @name ons-postclose
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postclose" event is fired.[/en]
@@ -209,6 +221,7 @@
 /**
  * @ngdoc attribute
  * @name ons-init
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "init" event is fired.[/en]
@@ -218,6 +231,7 @@
 /**
  * @ngdoc attribute
  * @name ons-show
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "show" event is fired.[/en]
@@ -227,6 +241,7 @@
 /**
  * @ngdoc attribute
  * @name ons-hide
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "hide" event is fired.[/en]
@@ -236,6 +251,7 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "destroy" event is fired.[/en]

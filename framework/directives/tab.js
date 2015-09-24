@@ -57,6 +57,7 @@
 /**
  * @ngdoc attribute
  * @name page
+ * @initonly
  * @type {String}
  * @description
  *   [en]The page that this <code>&lt;ons-tab&gt;</code> points to.[/en]
