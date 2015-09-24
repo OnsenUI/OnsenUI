@@ -200,14 +200,7 @@ limitations under the License.
         throw new Error('options must be an object. You supplied ' + options);
       }
 
-      const normalizeIndex = index => {
-        if (index < 0) {
-          index = Math.abs(this.pages.length + index) % this.pages.length;
-        }
-        return index;
-      };
-
-      index = normalizeIndex(index);
+      index = this._normalizeIndex(index);
 
       if (index >= this.pages.length) {
         return this.pushPage.apply(this, [].slice.call(arguments, 1));
@@ -235,6 +228,13 @@ limitations under the License.
           }, element);
         });
       });
+    }
+
+    _normalizeIndex(index) {
+      if (index < 0) {
+        index = Math.abs(this.pages.length + index) % this.pages.length;
+      }
+      return index;
     }
 
     /**
@@ -324,7 +324,7 @@ limitations under the License.
           if (!this.getAttribute('page')) {
             const element = this._createPageElement(this._initialHTML || '');
 
-            this._pushPageDOM('', element, {}, function() {});
+            this._pushPageDOM(this._createPageObject('', element, {}), function() {});
           } else {
             this.pushPage(this.getAttribute('page'), {animation: 'none'});
           }
@@ -379,22 +379,20 @@ limitations under the License.
       };
 
       ons._internal.getPageHTMLAsync(page).then(templateHTML => {
-        this._pushPageDOM(page, this._createPageElement(templateHTML), options, done);
+        const element = this._createPageElement(templateHTML);
+        this._pushPageDOM(this._createPageObject(page, element, options), done);
       });
     }
 
     /**
-     * @param {String} page Page name.
-     * @param {Object} element
-     * @param {Object} options
+     * @param {Object} pageObject
      * @param {Function} [unlock]
      */
-    _pushPageDOM(page, element, options, unlock) {
-
+   _pushPageDOM(pageObject, unlock) {
       unlock = unlock || function() {};
-      options = options || {};
 
-      const pageObject = this._createPageObject(page, element, options);
+      let element = pageObject.element;
+      let options = pageObject.options;
 
       // for "postpush" event
       const eventDetail = {
@@ -444,6 +442,82 @@ limitations under the License.
           }, 1000 / 60);
         }, element);
       }, element);
+    }
+
+    /**
+     * Brings the given pageUrl or index to the top of the page stack
+     * if already exists or pushes the page into the stack if doesn't.
+     * If options object is specified, apply the options.
+     *
+     * @param {String|Number} item Page name or valid index.
+     * @param {Object} options
+     */
+    bringPageTop(item, options) {
+      options = options || {};
+
+      if (options && typeof options != 'object') {
+        throw new Error('options must be an object. You supplied ' + options);
+      }
+
+      if (options.cancelIfRunning && this._isPushing) {
+        return;
+      }
+
+      if (this._emitPrePushEvent()) {
+        return;
+      }
+
+
+      let index, page;
+      if (typeof item === 'string') {
+        page = item;
+        index = this._lastIndexOfPage(page);
+      } else if (typeof item === 'number') {
+        index = this._normalizeIndex(item);
+        if (item >= this._pages.length) {
+          throw new Error('The provided index does not match an existing page.');
+        }
+        page = this._pages[index].page;
+      } else {
+        throw new Error('First argument must be a page name or the index of an existing page. You supplied ' + item);
+      }
+
+
+      if (index < 0) {
+        // Fallback pushPage
+        this._doorLock.waitUnlock(() => this._pushPage(page, options));
+      } else if (index < this._pages.length - 1) { // Skip when page is already the top
+        // Bring to top
+        this._doorLock.waitUnlock(() => {
+          const unlock = this._doorLock.lock();
+          const done = function() {
+            unlock();
+          };
+
+          let pageObject = this._pages.splice(index, 1)[0];
+          pageObject.element.style.display = 'block';
+          pageObject.element.setAttribute('_skipinit', '');
+          options.animator = this._animatorFactory.newAnimator(options);
+          pageObject.options = options;
+
+          this._pushPageDOM(pageObject, done);
+        });
+      }
+    }
+
+    /**
+     * @param {String} page
+     * @return {Number} Returns the last index at which the given page
+     * is found in the page-stack, or -1 if it is not present.
+     */
+    _lastIndexOfPage(page) {
+      let index;
+      for (index = this._pages.length - 1; index >= 0; index--) {
+        if (this._pages[index].page === page) {
+          break;
+        }
+      }
+      return index;
     }
 
     /**
