@@ -284,14 +284,16 @@ limitations under the License.
 
       const direction = event.gesture.interimDirection;
       const shouldOpen =
-        (this._element._isLeftSide() && direction === 'right') ||
-        (!this._element._isLeftSide() && direction === 'left');
+        (this._element._isLeftSide() && direction === 'right' && distance > width * this._element._getThresholdRatioIfShouldOpen()) ||
+        (!this._element._isLeftSide() && direction === 'left' && distance > width * this._element._getThresholdRatioIfShouldOpen());
 
       if (shouldOpen) {
         this.openMenu();
       } else {
         this.closeMenu();
       }
+
+      this._distance = null;
     }
 
     layout() {
@@ -580,6 +582,16 @@ limitations under the License.
         side: this,
         mode: mode
       });
+    }
+
+    _getThresholdRatioIfShouldOpen() {
+      if (this.hasAttribute('threhold-ratio-should-open')) {
+        const value = parseFloat(this.getAttribute('threhold-ratio-should-open'));
+        return Math.max(0.0, Math.min(1.0, value));
+      } else {
+        // default value
+        return 0.3;
+      }
     }
 
     _layout() {
