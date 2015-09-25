@@ -20,7 +20,7 @@ limitations under the License.
  * @name ons.GestureDetector
  * @category util
  * @description 
- *   [en][/en]
+ *   [en]Utility class for gesture detection.[/en]
  *   [ja]ジェスチャを検知するためのユーティリティクラスです。[/ja]
  */
 
