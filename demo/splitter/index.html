@@ -25,7 +25,7 @@
 <body>    
   
   <ons-splitter>
-    <ons-splitter-side side="left" width="200px">
+    <ons-splitter-side side="left" width="200px" collapse="landscape" swipeable>
       <ons-page>
         <ons-toolbar>
           <div class="center">hogehoge</div>
@@ -41,13 +41,17 @@
         </ons-toolbar>
 
         <p style="padding: 10px 20px;">
-          <ons-button onclick="toggle()">toggle right menu</ons-button>
+          <ons-button onclick="toggle('left')">toggle left menu</ons-button>
+        </p>
+
+        <p style="padding: 10px 20px;">
+          <ons-button onclick="toggle('right')">toggle right menu</ons-button>
         </p>
 
       </ons-page>
     </ons-splitter-content>
 
-    <ons-splitter-side side="right" width="300px" collapse swipeable>
+    <ons-splitter-side side="right" width="300px" collapse="landscape" swipeable threhold-ratio-should-open="0.4">
       <ons-page>
         <ons-toolbar>
           <div class="left">
@@ -67,12 +71,11 @@
       right.open();
     });
 
-    function toggle() {
-      var splitter = document.querySelector('ons-splitter');
+    function toggle(side) {
+      var side = document.querySelector('ons-splitter-side[side="' + side + '"]');
 
-      splitter.toggleRight();
+      side.toggle();
     }
-
   </script>
  
 </body>
