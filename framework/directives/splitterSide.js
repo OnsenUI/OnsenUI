@@ -117,6 +117,15 @@
 
 /**
  * @ngdoc attribute
+ * @name threhold-ratio-should-open
+ * @type {Number}
+ * @description
+ *  [en][/en]
+ *  [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
  * @name ons-destroy
  * @type {Expression}
  * @description
