@@ -36,7 +36,7 @@ limitations under the License.
       super(options);
 
       this.backgroundMask = ons._util.createElement(`
-        <div style="position: absolute; width: 100%; height: 100%;
+        <div style="position: absolute; width: 100%; height: 100%; z-index: 2;
           background-color: black; opacity: 0;"></div>
       `);
       this.blackMaskOpacity = 0.4;
@@ -48,8 +48,8 @@ limitations under the License.
      * @param {Function} callback
      */
     push(enterPage, leavePage, callback) {
-      util.removeElement(this.backgroundMask);
-      leavePage.element.parentNode.insertBefore(this.backgroundMask, leavePage.element.nextSibling);
+      this.backgroundMask.remove();
+      leavePage.element.parentElement.insertBefore(this.backgroundMask, leavePage.element.nextSibling);
 
       animit.runAll(
 
@@ -66,8 +66,8 @@ limitations under the License.
             timing: this.timing
           })
           .resetStyle()
-          .queue(function(done) {
-            mask.remove();
+          .queue(done => {
+            this.backgroundMask.remove();
             done();
           }),
 
@@ -118,7 +118,7 @@ limitations under the License.
      * @param {Function} done
      */
     pop(enterPage, leavePage, done) {
-      util.removeElement(this.backgroundMask);
+      this.backgroundMask.remove();
       enterPage.element.parentNode.insertBefore(this.backgroundMask, enterPage.element.nextSibling);
 
       animit.runAll(
@@ -136,8 +136,8 @@ limitations under the License.
             timing: this.timing
           })
           .resetStyle()
-          .queue(function(done) {
-            mask.remove();
+          .queue(done => {
+            this.backgroundMask.remove();
             done();
           }),
 

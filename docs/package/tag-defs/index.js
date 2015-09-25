@@ -13,6 +13,18 @@ module.exports = [
     }
   },
   {
+    name: 'extensionOf',
+    transforms: function(doc, tag, value) {
+      return ('' + value).trim();
+    }
+  },
+  {
+    name: 'initonly',
+    transforms: function(doc, tag, value) {
+      return true;
+    }
+  },
+  {
     name: 'category',
     multi: true,
     docProperty: 'categories',

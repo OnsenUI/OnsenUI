@@ -27,6 +27,13 @@ describe('OnsPageElement', () => {
       expect(element.parentNode).to.be.ok;
       return expect(initPromise).to.eventually.be.fulfilled;
     });
+
+    it('consumes _skipinit attribute if present', () => {
+      element.setAttribute('_skipinit', '');
+      expect(element.hasAttribute('_skipinit')).to.be.true;
+      document.body.appendChild(element);
+      expect(element.hasAttribute('_skipinit')).to.be.false;
+    });
   });
 
   describe('#detachedCallback', () => {

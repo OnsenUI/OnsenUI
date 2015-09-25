@@ -47,7 +47,21 @@ limitations under the License.
     }
   }
 
+  class NoneNavigatorTransitionAnimator extends NavigatorTransitionAnimator {
+    constructor(options) {
+      super(options);
+    }
+    push(enterPage, leavePage, callback) {
+      callback();
+    }
+
+    pop(enterPage, leavePage, callback) {
+      callback();
+    }
+  }
+
   ons._internal = ons._internal || {};
   ons._internal.NavigatorTransitionAnimator = NavigatorTransitionAnimator;
+  ons._internal.NoneNavigatorTransitionAnimator = NoneNavigatorTransitionAnimator;
 
 })(window.ons = window.ons || {});

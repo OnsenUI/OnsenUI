@@ -130,14 +130,6 @@ Run gulp task to develop Onsen UI itself with livereload.
 
 Access [http://0.0.0.0:8000/demo/index.html](http://0.0.0.0:8000/demo/index.html) and your code changes will be reloaded.
 
-## Current Roadmap
-
-Please see the following file for information about upcoming releases and what will be included.
-
-* [Onsen UI Roadmap](https://github.com/OnsenUI/OnsenUI/blob/master/ROADMAP.md)
-
-Please tell us if you have any suggestions for features that you would like to see included.
-
 ## Contributors
 
 Please see the full [list of contributors](https://github.com/OnsenUI/OnsenUI/blob/master/CONTRIBUTORS.md).

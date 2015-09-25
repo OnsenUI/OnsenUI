@@ -33,6 +33,7 @@ ons-tabbar {
   left: 0;
   bottom: 0;
   right: 0;
+  overflow: hidden;
 }
 
 ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
@@ -65,6 +66,10 @@ input, textarea {
 
 ons-toolbar ~ .page__content {
   top: 44px;
+}
+
+.navigation-bar--material ~ .page__content {
+  top: 56px;
 }
 
 .page__status-bar-fill ~ ons-toolbar {
