@@ -63,8 +63,7 @@ limitations under the License.
         animators: OnsDialogElement._animatorDict,
         baseClass: DialogAnimator,
         baseClassName: 'DialogAnimator',
-        defaultAnimation: this.getAttribute('animation'),
-        defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options'))
+        defaultAnimation: this.getAttribute('animation')
       });
     }
 
@@ -138,6 +137,11 @@ limitations under the License.
         }
       });
 
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
+
       if (!cancel) {
         this._doorLock.waitUnlock(() => {
           const unlock = this._doorLock.lock();
@@ -177,6 +181,11 @@ limitations under the License.
           cancel = true;
         }
       });
+
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
 
       if (!cancel) {
         this._doorLock.waitUnlock(() => {

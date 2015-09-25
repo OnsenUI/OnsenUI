@@ -433,8 +433,7 @@ limitations under the License.
         animators: window.OnsSplitterElement._animatorDict,
         baseClass: ons._internal.SplitterAnimator,
         baseClassName: 'SplitterAnimator',
-        defaultAnimation: this.getAttribute('animation'),
-        defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
+        defaultAnimation: this.getAttribute('animation')
       });
 
       this._collapseMode = new CollapseMode(this);
@@ -801,7 +800,7 @@ limitations under the License.
     _createAnimator() {
       return this._animatorFactory.newAnimator({
         animation: this.getAttribute('animation'),
-        animationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
+        animationOptions: AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
       });
     }
   }

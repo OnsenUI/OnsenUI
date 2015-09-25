@@ -276,6 +276,29 @@
 
 /**
  * @ngdoc method
+ * @signature bringPageTop(item, [options])
+ * @param {String|Number} item
+ *   [en]Page URL or index of an existing page in navigator's stack.[/en]
+ *   [ja]ページのURLかもしくはons-navigatorのページスタックのインデックス値を指定します。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+ * @param {Function} [options.onTransitionEnd]
+ *   [en]Function that is called when the transition has ended.[/en]
+ *   [ja]pushPage()による画面遷移が終了した時に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Brings the given page to the top of the page-stack if already exists or pushes it into the stack if doesn't.[/en]
+ *   [ja]指定したページをページスタックの一番上に移動します。もし指定したページが無かった場合新しくpushされます。[/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature insertPage(index, pageUrl, [options])
  * @param {Number} index
  *   [en]The index where it should be inserted.[/en]

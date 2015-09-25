@@ -303,6 +303,11 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       .pipe(gulp.dest('build/css/ionicons/'))
       .pipe(gulp.dest('app/lib/onsen/css/ionicons/')),
 
+    // material icons file copy
+    gulp.src('core/css/material-design-iconic-font/**/*')
+      .pipe(gulp.dest('build/css/material-design-iconic-font/'))
+      .pipe(gulp.dest('app/lib/onsen/css/material-design-iconic-font/')),
+
     // auto prepare
     gulp.src('cordova-app/www/index.html')
       .pipe(gulpIf(CORDOVA_APP, $.shell(['cd cordova-app; cordova prepare'])))
@@ -497,7 +502,9 @@ gulp.task('webdriver-download', function() {
 ////////////////////////////////////////
 // test
 ////////////////////////////////////////
-gulp.task('test', ['core-test', 'e2e-test']);
+gulp.task('test', function(done) {
+  return runSequence('core-test', 'e2e-test', done);
+});
 
 ////////////////////////////////////////
 // e2e-test

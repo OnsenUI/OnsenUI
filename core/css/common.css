@@ -17,6 +17,7 @@ limitations under the License.
 
 @import url("font_awesome/css/font-awesome.min.css");
 @import url("ionicons/css/ionicons.min.css");
+@import url("material-design-iconic-font/css/material-design-iconic-font.min.css");
 
 /* custom elements */
 ons-page, ons-navigator,
@@ -32,6 +33,7 @@ ons-tabbar {
   left: 0;
   bottom: 0;
   right: 0;
+  overflow: hidden;
 }
 
 ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
@@ -64,6 +66,10 @@ input, textarea {
 
 ons-toolbar ~ .page__content {
   top: 44px;
+}
+
+.navigation-bar--material ~ .page__content {
+  top: 56px;
 }
 
 .page__status-bar-fill ~ ons-toolbar {
