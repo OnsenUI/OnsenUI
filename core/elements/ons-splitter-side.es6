@@ -196,6 +196,10 @@ limitations under the License.
       return this._state !== CollapseMode.CLOSED_STATE;
     }
 
+    isClosed() {
+      return this._state === CollapseMode.CLOSED_STATE;
+    }
+
     handleGesture(event) {
       if (this._isLocked()) {
         return;
@@ -229,6 +233,8 @@ limitations under the License.
           this._ignoreDrag = true;
         }
       }
+
+      this._distance = this.isOpened() ? this._element._getWidthInPixel() : 0;
     }
 
     _onDrag(event) {
@@ -247,19 +253,23 @@ limitations under the License.
         startEvent.isOpened = this.isOpened();
       }
 
-      if (deltaDistance < 0 && !this.isOpened()) {
-        return;
-      }
-
-      if (deltaDistance > 0 && this.isOpened()) {
-        return;
-      }
-
       const width = this._element._getWidthInPixel();
+
+      if (deltaDistance < 0 && this._distance <= 0) {
+        return;
+      }
+
+      if (deltaDistance > 0 && this._distance >= width) {
+        return;
+      }
+
       const distance = startEvent.isOpened ? deltaDistance + width : deltaDistance;
+      const normalizedDistance = Math.max(0, Math.min(width, distance));
+
+      this._distance = normalizedDistance;
 
       this._state = CollapseMode.CHANGING_STATE;
-      this._animator.translate(Math.max(0, Math.min(width, distance)));
+      this._animator.translate(normalizedDistance);
     }
 
     _onDragEnd(event) {
@@ -285,6 +295,11 @@ limitations under the License.
     }
 
     layout() {
+
+      if (this._state === CollapseMode.CHANGING_STATE) {
+        return;
+      }
+
       if (this._state === CollapseMode.CLOSED_STATE) {
         if (this._animator.isActivated()) {
           this._animator.layoutOnClose();
@@ -293,8 +308,6 @@ limitations under the License.
         if (this._animator.isActivated()) {
           this._animator.layoutOnOpen();
         }
-      } else if (this._state === CollapseMode.CHANGING_STATE) {
-        // do nothing
       } else {
         throw new Error('Invalid state');
       }
