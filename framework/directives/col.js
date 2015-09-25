@@ -21,7 +21,7 @@
 
 /**
  * @ngdoc attribute
- * @name align
+ * @name vertical-align
  * @type {String}
  * @description
  *   [en]Vertical alignment of the column. Valid values are "top", "center", and "bottom".[/en]
