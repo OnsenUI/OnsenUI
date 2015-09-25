@@ -171,6 +171,10 @@ limitations under the License.
       return 'opened';
     }
 
+    static get CHANGING_STATE() {
+      return 'changing';
+    }
+
     get _animator() {
       return this._element._getAnimator();
     }
@@ -201,10 +205,10 @@ limitations under the License.
         return;
       }
 
-      if (event.type === 'dragleft' || event.type === 'dragright') {
-        this._onDrag(event);
-      } else if (event.type === 'dragstart') {
+      if (event.type === 'dragstart') {
         this._onDragStart(event);
+      } else if (event.type === 'dragleft' || event.type === 'dragright') {
+        this._onDrag(event);
       } else if (event.type === 'dragend') {
         this._onDragEnd(event);
       } else {
@@ -215,7 +219,9 @@ limitations under the License.
     _onDragStart(event) {
       this._ignoreDrag = false;
 
-      if (this._element._swipeTargetWidth > 0) {
+      if (!this.isOpened() && this._openedOtherSideMenu()) {
+        this._ignoreDrag = true;
+      } else if (this._element._swipeTargetWidth > 0) {
         const distance = this._element._isLeftSide()
           ? event.gesture.center.clientX
           : window.innerWidth - event.gesture.center.clientX;
@@ -252,6 +258,7 @@ limitations under the License.
       const width = this._element._getWidthInPixel();
       const distance = startEvent.isOpened ? deltaDistance + width : deltaDistance;
 
+      this._state = CollapseMode.CHANGING_STATE;
       this._animator.translate(Math.max(0, Math.min(width, distance)));
     }
 
@@ -286,6 +293,8 @@ limitations under the License.
         if (this._animator.isActivated()) {
           this._animator.layoutOnOpen();
         }
+      } else if (this._state === CollapseMode.CHANGING_STATE) {
+        // do nothing
       } else {
         throw new Error('Invalid state');
       }
@@ -347,8 +356,9 @@ limitations under the License.
         this.layout();
         done();
       } else {
-        this._state = CollapseMode.OPENED_STATE;
+        this._state = CollapseMode.CHANGING_STATE;
         this._animator.open(() => {
+          this._state = CollapseMode.OPENED_STATE;
           this.layout();
           done();
         });
@@ -383,8 +393,9 @@ limitations under the License.
         this.layout();
         done();
       } else {
-        this._state = CollapseMode.CLOSED_STATE;
+        this._state = CollapseMode.CHANGING_STATE;
         this._animator.close(() => {
+          this._state = CollapseMode.CLOSED_STATE;
           this.layout();
           done();
         });
