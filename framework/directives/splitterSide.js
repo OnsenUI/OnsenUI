@@ -100,6 +100,7 @@
 /**
  * @ngdoc attribute
  * @name animation
+ * @initonly
  * @type {String}
  * @description
  *  [en]Specify the animation. Use one of "overlay", and "default".[/en]
