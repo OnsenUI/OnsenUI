@@ -28,13 +28,13 @@ limitations under the License.
  * @ngdoc method
  * @signature constructor(element[, options])
  * @description
- *  [en][/en]
+ *  [en]Create a new GestureDetector instance.[/en]
  *  [ja]GestureDetectorのインスタンスを生成します。[/ja]
  * @param {Element} element
  *   [en]Name of the event.[/en]
  *   [ja]ジェスチャを検知するDOM要素を指定します。[/ja]
  * @param {Object} [options]
- *   [en][/en]
+ *   [en]Options object.[/en]
  *   [ja]オプションを指定します。[/ja]
  */
 
@@ -42,13 +42,13 @@ limitations under the License.
  * @ngdoc method
  * @signature on(gestures, handler)
  * @description
- *  [en][/en]
+ *  [en]Adds an event handler for a gesture. Available gestures are: drag, dragleft, dragright, dragup, dragdown, hold, release, swipe, swipeleft, swiperight, swipeup, swipedown, tap, doubletap, touch, transform, pinch, pinchin, pinchout and rotate. [/en]
  *  [ja]ジェスチャに対するイベントハンドラを追加します。指定できるジェスチャ名は、drag dragleft dragright dragup dragdown hold release swipe swipeleft swiperight swipeup swipedown tap doubletap touch transform pinch pinchin pinchout rotate です。[/ja]
  * @param {String} gestures
- *   [en][/en]
+ *   [en]A space separated list of gestures.[/en]
  *   [ja]検知するジェスチャ名を指定します。スペースで複数指定することができます。[/ja]
  * @param {Function} handler
- *   [en][/en]
+ *   [en]An event handling function.[/en]
  *   [ja]イベントハンドラとなる関数オブジェクトを指定します。[/ja]
  */
 
@@ -56,13 +56,13 @@ limitations under the License.
  * @ngdoc method
  * @signature off(gestures, handler)
  * @description
- *  [en][/en]
+ *  [en]Remove an event listener.[/en]
  *  [ja]イベントリスナーを削除します。[/ja]
  * @param {String} gestures
- *   [en][/en]
+ *   [en]A space separated list of gestures.[/en]
  *   [ja]ジェスチャ名を指定します。スペースで複数指定することができます。[/ja]
  * @param {Function} handler
- *   [en][/en]
+ *   [en]An event handling function.[/en]
  *   [ja]イベントハンドラとなる関数オブジェクトを指定します。[/ja]
  */
 
@@ -70,10 +70,10 @@ limitations under the License.
  * @ngdoc method
  * @signature enable(state)
  * @description
- *  [en][/en]
+ *  [en]Enable or disable gesture detection.[/en]
  *  [ja]ジェスチャ検知を有効化/無効化します。[/ja]
  * @param {Boolean} state
- *   [en][/en]
+ *   [en]Specify if it should be enabled or not.[/en]
  *   [ja]有効にするかどうかを指定します。[/ja]
  */
 
@@ -81,7 +81,7 @@ limitations under the License.
  * @ngdoc method
  * @signature dispose()
  * @description
- *  [en][/en]
+ *  [en]Remove and destroy all event handlers for this instance.[/en]
  *  [ja]このインスタンスでのジェスチャの検知や、イベントハンドラを全て解除して廃棄します。[/ja]
  */
 
