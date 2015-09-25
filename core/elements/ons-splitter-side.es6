@@ -288,9 +288,9 @@ limitations under the License.
         (!this._element._isLeftSide() && direction === 'left' && distance > width * this._element._getThresholdRatioIfShouldOpen());
 
       if (shouldOpen) {
-        this.openMenu();
+        this._openMenu();
       } else {
-        this.closeMenu();
+        this._closeMenu();
       }
 
       this._distance = null;
@@ -345,6 +345,20 @@ limitations under the License.
      * @return {Boolean}
      */
     openMenu(options = {}) {
+      if (this._state !== CollapseMode.CLOSED_STATE) {
+        return false;
+      }
+
+      return this._openMenu(options);
+    }
+
+    /**
+     * @param {Object} [options]
+     * @param {Function} [options.callback]
+     * @param {Boolean} [options.withoutAnimation]
+     * @return {Boolean}
+     */
+    _openMenu(options = {}) {
       if (this._isLocked()) {
         return false;
       }
@@ -384,8 +398,20 @@ limitations under the License.
 
     /**
      * @param {Object} [options]
+     * @return {Boolean}
      */
     closeMenu(options = {}) {
+      if (this._state !== CollapseMode.OPENED_STATE) {
+        return false;
+      }
+
+      return this._closeMenu(options);
+    }
+
+    /**
+     * @param {Object} [options]
+     */
+    _closeMenu(options = {}) {
       if (this._isLocked()) {
         return false;
       }
