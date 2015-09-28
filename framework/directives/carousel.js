@@ -305,6 +305,17 @@
 
 /**
  * @ngdoc method
+ * @signature getCarouselItemCount)
+ * @return {Number}
+ *   [en]The number of carousel items.[/en]
+ *   [ja]カルーセル要素の数です。[/ja]
+ * @description
+ *   [en]Returns the current number of carousel items..[/en]
+ *   [ja]現在のカルーセル要素を数を返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
  * @signature setAutoScrollEnabled(enabled)
  * @param {Boolean} enabled
  *   [en]If true auto scroll will be enabled.[/en]
