@@ -66,6 +66,10 @@ limitations under the License.
         return this._deviceBackButtonHandler;
       },
 
+      _getMaskColor: function() {
+        return this._element[0].getAttribute('mask-color') || 'rgba(0, 0, 0, 0.2)';
+      },
+
       /**
        * Show dialog.
        *
@@ -90,6 +94,8 @@ limitations under the License.
 
             this._element.css('display', 'block');
             this._mask.css('opacity', 1);
+
+            this._mask.css('backgroundColor', this._getMaskColor());
 
             if (options.animation) {
               animation = DialogView._animatorDict[options.animation];
