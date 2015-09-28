@@ -1,4 +1,4 @@
-/*! onsenui - v1.3.10 - 2015-09-10 */
+/*! onsenui - v1.3.11 - 2015-09-28 */
 // Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
 // JavaScript Dynamic Content shim for Windows Store apps
 (function () {
@@ -7460,6 +7460,10 @@ limitations under the License.
         return this._deviceBackButtonHandler;
       },
 
+      _getMaskColor: function() {
+        return this._element[0].getAttribute('mask-color') || 'rgba(0, 0, 0, 0.2)';
+      },
+
       /**
        * Show dialog.
        *
@@ -7484,6 +7488,8 @@ limitations under the License.
 
             this._element.css('display', 'block');
             this._mask.css('opacity', 1);
+
+            this._mask.css('backgroundColor', this._getMaskColor());
 
             if (options.animation) {
               animation = DialogView._animatorDict[options.animation];
