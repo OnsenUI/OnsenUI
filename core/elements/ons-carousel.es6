@@ -145,8 +145,8 @@ limitations under the License.
     _saveLastState() {
       this._lastState = {
         elementSize: this._getCarouselItemSize(),
-        carouselElementCount: this._getCarouselItemCount(),
-        width: this._getCarouselItemSize() * this._getCarouselItemCount()
+        carouselElementCount: this.getCarouselItemCount(),
+        width: this._getCarouselItemSize() * this.getCarouselItemCount()
       };
     }
 
@@ -174,7 +174,7 @@ limitations under the License.
       const index = parseInt(this.getAttribute('initial-index'), 10);
 
       if (typeof index === 'number' && !isNaN(index)) {
-        return Math.max(Math.min(index, this._getCarouselItemCount() - 1), 0);
+        return Math.max(Math.min(index, this.getCarouselItemCount() - 1), 0);
       } else {
         return 0;
       }
@@ -264,7 +264,7 @@ limitations under the License.
     setActiveCarouselItemIndex(index, options) {
       options = options || {};
 
-      index = Math.max(0, Math.min(index, this._getCarouselItemCount() - 1));
+      index = Math.max(0, Math.min(index, this.getCarouselItemCount() - 1));
       const scroll = this._getCarouselItemSize() * index;
       const max = this._calculateMaxScroll();
 
@@ -279,7 +279,7 @@ limitations under the License.
      */
     getActiveCarouselItemIndex() {
       const scroll = this._scroll;
-      const count = this._getCarouselItemCount();
+      const count = this.getCarouselItemCount();
       const size = this._getCarouselItemSize();
 
       if (scroll < 0) {
@@ -519,7 +519,7 @@ limitations under the License.
         let arr = [];
         const size = this._getCarouselItemSize();
 
-        for (let i = 0; i < this._getCarouselItemCount(); i++) {
+        for (let i = 0; i < this.getCarouselItemCount(); i++) {
           if (max >= i * size) {
             arr.push(i * size);
           }
@@ -604,7 +604,7 @@ limitations under the License.
     }
 
     _calculateMaxScroll() {
-      const max = this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
+      const max = this.getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
       return Math.ceil(max < 0 ? 0 : max); // Need to return an integer value.
     }
 
@@ -670,7 +670,7 @@ limitations under the License.
     /**
      * @return {Number}
      */
-    _getCarouselItemCount() {
+    getCarouselItemCount() {
       return this._getCarouselItemElements().length;
     }
 
@@ -711,7 +711,7 @@ limitations under the License.
 
     last() {
       this.setActiveCarouselItemIndex(
-        Math.max(this._getCarouselItemCount() - 1, 0)
+        Math.max(this.getCarouselItemCount() - 1, 0)
       );
     }
 
