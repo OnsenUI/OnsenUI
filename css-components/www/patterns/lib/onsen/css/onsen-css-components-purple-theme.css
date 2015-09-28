@@ -72,7 +72,6 @@ h6 {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin-top: -1px;
 }
 .page__background {
   background-color: #f3f3f3;
@@ -229,6 +228,89 @@ h6 {
   pointer-events: none;
 }
 /* topdoc
+  name: Material-like Switch
+  use: Switch
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input switch--material__input">
+      <div class="switch__toggle switch--material__toggle"></div>
+    </label>
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input switch--material__input" checked>
+      <div class="switch__toggle switch--material__toggle"></div>
+    </label>
+    <label class="switch switch--material">
+      <input type="checkbox" class="switch__input switch--material__input" disabled>
+      <div class="switch__toggle switch--material__toggle"></div>
+    </label>
+*/
+.switch--material {
+  width: 36px;
+  height: 20px;
+  padding: 0 10px;
+}
+.switch--material__toggle {
+  background-color: #bdbdbd;
+  margin-top: 5px;
+  height: 14px;
+}
+.switch--material__input {
+  position: absolute;
+  overflow: hidden;
+  right: 0px;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  padding: 0;
+  border: 0;
+  opacity: 0.001;
+  z-index: 1;
+  vertical-align: top;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.switch--material__input:checked + .switch--material__toggle:before {
+  -webkit-transform: translateX(16px);
+  -moz-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  -o-transform: translateX(16px);
+  transform: translateX(16px);
+}
+.switch--material__toggle:before {
+  background-color: #574bdb;
+  left: 0px;
+  margin-top: -5px;
+  width: 20px;
+  height: 20px;
+  -webkit-box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
+}
+.switch--material__input:checked + .switch--material__toggle {
+  background-color: rgba(87,75,219,0.5);
+}
+.switch--material__input:not(:checked) + .switch--material__toggle:before {
+  background-color: #f1f1f1;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  -webkit-transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  -ms-transform: translateX(0px);
+  -o-transform: translateX(0px);
+  transform: translateX(0px);
+}
+.switch--material__input:disabled + .switch--material__toggle {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+/* topdoc
   name: Range
   class: range
   modifiers:
@@ -353,6 +435,99 @@ h6 {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
+}
+/* topdoc
+  name: Material Range
+  use: Range
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <input type="range" class="range range--material">
+    <input type="range" class="range range--material" disabled>
+*/
+.range--material {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#ddd));
+  background-image: -webkit-linear-gradient(#ddd, #ddd);
+  background-image: -moz-linear-gradient(#ddd, #ddd);
+  background-image: -o-linear-gradient(#ddd, #ddd);
+  background-image: linear-gradient(#ddd, #ddd);
+  background-position: center;
+  -webkit-background-size: 100% 2px;
+  background-size: 100% 2px;
+  overflow: visible;
+}
+.range--material::-webkit-slider-thumb {
+  top: 1px;
+  border: 3px solid #ddd;
+  height: 12px;
+  width: 12px;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  border-color: #574bdb;
+  background-color: #574bdb;
+  margin-top: -1px;
+}
+.range--material::-moz-range-thumb {
+  top: 1px;
+  border: 3px solid #ddd;
+  height: 12px;
+  width: 12px;
+  border-radius: 100%;
+  border-color: #574bdb;
+  background-color: #574bdb;
+}
+.range--material:focus::-webkit-slider-thumb {
+  border-color: #574bdb;
+  background-color: #574bdb;
+}
+.range--material:focus::-moz-range-thumb {
+  border-color: #574bdb;
+  background-color: #574bdb;
+}
+.range--material::-moz-range-thumb:before {
+  display: none;
+}
+.range--material::-webkit-slider-thumb:before {
+  display: none;
+}
+.range--material::-moz-range-thumb:after {
+  content: '';
+  display: block;
+  border: 0px;
+  border-radius: 100%;
+  margin-top: -3px;
+  margin-left: -3px;
+  height: 12px;
+  width: 12px;
+  background-color: #574bdb;
+  opacity: 0.2;
+  -moz-transition: -moz-transform 0.1s linear;
+  transition: transform 0.1s linear;
+}
+.range--material::-webkit-slider-thumb:after {
+  content: '';
+  display: block;
+  border: 0px;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  margin-top: -3px;
+  margin-left: -3px;
+  height: 12px;
+  width: 12px;
+  background-color: #574bdb;
+  opacity: 0.2;
+  -webkit-transition: -webkit-transform 0.1s linear;
+  transition: transform 0.1s linear;
+}
+.range--material:active::-webkit-slider-thumb:after {
+  -webkit-transform: scale(2.5);
+  transform: scale(2.5);
+}
+.range--material:active::-moz-range-thumb:after {
+  -moz-transform: scale(2.5);
+  transform: scale(2.5);
 }
 /* topdoc
   name: Navigation Bar
@@ -754,6 +929,78 @@ h6 {
       </div>
     </div>
 */
+/* topdoc
+  name: Material Navigation Bar
+  class: navigation-bar--material
+  use: Toolbar Button, Navigation Bar
+  markup:
+    <div class="navigation-bar navigation-bar--material">
+      <div class="navigation-bar__left navigation-bar--material__left">
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-menu"></i>
+        </span>
+      </div>
+      <div class="navigation-bar__center navigation-bar--material__center">
+        Toolbar
+      </div>
+      <div class="navigation-bar__right navigation-bar--material__right">
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-search"></i>
+        </span>
+        <span class="toolbar-button toolbar-button--material">
+          <i class="zmdi zmdi-refresh"></i>
+        </span>
+      </div>
+    </div>
+*/
+.navigation-bar--material {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  height: 56px;
+  border-bottom: 0;
+  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+  box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+  padding: 0px 16px;
+}
+.navigation-bar--material__left {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  height: 56px;
+  width: auto;
+  line-height: 56px;
+}
+.navigation-bar--material__center {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  height: 56px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  padding-left: 34px;
+  line-height: 60px;
+}
+.navigation-bar--material__right {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  height: 56px;
+  width: auto;
+  line-height: 56px;
+}
 /* topdoc
   name: Button
   class: button
@@ -1264,6 +1511,195 @@ h6 {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
+}
+/* topdoc
+  name: Material Button
+  class: button--material
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="button button--material">BUTTON</button>
+    <button class="button button--material" disabled>DISABLED</button>
+*/
+.button--material {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: auto;
+  text-decoration: none;
+  padding: 4px 10px;
+  font-size: 17px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #8962ed;
+  border: 0px solid currentColor;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  min-height: 36px;
+  line-height: 36px;
+  padding: 0px 16px;
+  -webkit-transition: -webkit-box-shadow 0.2s ease;
+  -moz-transition: box-shadow 0.2s ease;
+  -o-transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+  text-align: center;
+  font-size: 14px;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.button--material:active {
+  -webkit-box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.4);
+  background-color: #8962ed;
+  opacity: 1;
+}
+.button--material:focus {
+  outline: 0;
+}
+.button--material:disabled,
+.button--material[disabled] {
+  background: #eaeaea;
+  color: #a8a8a8;
+  opacity: 1;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/* topdoc
+  name: Material Flat Button
+  class: button--material--flat
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="button button--material--flat">BUTTON</button>
+    <button class="button button--material--flat" disabled>DISABLED</button>
+*/
+.button--material--flat {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: auto;
+  text-decoration: none;
+  padding: 4px 10px;
+  font-size: 17px;
+  line-height: 32px;
+  letter-spacing: 0;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #8962ed;
+  border: 0px solid currentColor;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  min-height: 36px;
+  line-height: 36px;
+  padding: 0px 16px;
+  -webkit-transition: -webkit-box-shadow 0.2s ease;
+  -moz-transition: box-shadow 0.2s ease;
+  -o-transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+  text-align: center;
+  font-size: 14px;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+  color: #8962ed;
+}
+.button--material--flat:active {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+  color: #8962ed;
+  opacity: 1;
+  border: none;
+}
+.button--material--flat:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: transparent;
+  color: #8962ed;
+  opacity: 1;
+  border: none;
+}
+.button--material--flat:disabled,
+.button--material--flat[disabled] {
+  background: #eaeaea;
+  color: #a8a8a8;
+  opacity: 1;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 /* topdoc
   name: Button Bar
@@ -1948,6 +2384,13 @@ h6 {
   padding-left: 6px;
   padding-right: 6px;
 }
+.toolbar-button--material {
+  font-size: 21px;
+  padding: 0;
+}
+.toolbar-button--material:not(:last-child) {
+  margin-right: 10px;
+}
 /* topdoc
   name: Checkbox
   class: checkbox
@@ -1956,19 +2399,19 @@ h6 {
     :disabled: Disabled state
   markup:
     <label class="checkbox">
-      <input type="checkbox">
+      <input type="checkbox" class="checkbox__input">
       <div class="checkbox__checkmark"></div>
       OFF
     </label>
 
     <label class="checkbox">
-      <input type="checkbox" checked="checked">
+      <input type="checkbox" class="checkbox__input" checked="checked">
       <div class="checkbox__checkmark"></div>
       ON
     </label>
 
     <label class="checkbox">
-      <input type="checkbox" disabled>
+      <input type="checkbox" class="checkbox__input" disabled>
       <div class="checkbox__checkmark"></div>
       Disabled
     </label>
@@ -1990,7 +2433,7 @@ h6 {
   line-height: 24px;
   margin: 10px 0;
 }
-.checkbox > .checkbox__checkmark {
+.checkbox__checkmark {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2014,7 +2457,7 @@ h6 {
   height: 24px;
   pointer-events: none;
 }
-.checkbox > input[type="checkbox"] {
+.checkbox__input {
   position: absolute;
   overflow: hidden;
   right: 0px;
@@ -2035,17 +2478,17 @@ h6 {
   height: 0;
   width: 0;
 }
-.checkbox > input[type="checkbox"]:checked {
+.checkbox__input:checked {
   background: #8962ed;
 }
-.checkbox > input[type="checkbox"]:checked + .checkbox__checkmark:before {
+.checkbox__input:checked + .checkbox__checkmark:before {
   background: #8962ed;
   border: 1px solid #8962ed;
 }
-.checkbox > input[type="checkbox"]:checked + .checkbox__checkmark:after {
+.checkbox__input:checked + .checkbox__checkmark:after {
   opacity: 1;
 }
-.checkbox > .checkbox__checkmark:before {
+.checkbox__checkmark:before {
   content: '';
   position: absolute;
   -webkit-box-sizing: border-box;
@@ -2063,7 +2506,7 @@ h6 {
   box-shadow: none;
   left: 0;
 }
-.checkbox > .checkbox__checkmark {
+.checkbox__checkmark {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2087,7 +2530,7 @@ h6 {
   width: 24px;
   height: 24px;
 }
-.checkbox > .checkbox__checkmark:after {
+.checkbox__checkmark:after {
   content: '';
   position: absolute;
   top: 6px;
@@ -2108,16 +2551,16 @@ h6 {
   transform: rotate(-45deg);
   opacity: 0;
 }
-.checkbox > input[type="checkbox"]:focus + .checkbox__checkmark:before {
+.checkbox__input:focus + .checkbox__checkmark:before {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.checkbox > input[type="checkbox"]:disabled + .checkbox__checkmark {
+.checkbox__input:disabled + .checkbox__checkmark {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-.checkbox > input[type="checkbox"]:disabled:active + .checkbox__checkmark:before {
+.checkbox__input:disabled:active + .checkbox__checkmark:before {
   background: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -2127,24 +2570,24 @@ h6 {
   class: checkbox--noborder
   markup:
     <label class="checkbox--noborder">
-      <input type="checkbox">
-      <div class="checkbox__checkmark"></div>
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
       OFF
     </label>
 
     <label class="checkbox--noborder">
-      <input type="checkbox" checked="checked">
-      <div class="checkbox__checkmark"></div>
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input" checked="checked">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
       ON
     </label>
 
     <label class="checkbox--noborder">
-      <input type="checkbox" disabled checked="checked">
-      <div class="checkbox__checkmark"></div>
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input" disabled checked="checked">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
       Disabled
     </label>
  */
-.checkbox--noborder > input[type="checkbox"] {
+.checkbox--noborder__input {
   position: absolute;
   overflow: hidden;
   right: 0px;
@@ -2182,7 +2625,7 @@ h6 {
   position: relative;
   overflow: hidden;
 }
-.checkbox--noborder > .checkbox__checkmark {
+.checkbox--noborder__checkmark {
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -2199,7 +2642,7 @@ h6 {
   height: 24px;
   background: transparent;
 }
-.checkbox--noborder > input[type="checkbox"] {
+.checkbox--noborder__input {
   position: absolute;
   overflow: hidden;
   right: 0px;
@@ -2220,14 +2663,14 @@ h6 {
   height: 0;
   width: 0;
 }
-.checkbox--noborder > input[type="checkbox"]:checked + .checkbox__checkmark:before {
+.checkbox--noborder__input:checked + .checkbox--noborder__checkmark:before {
   background: transparent;
   border: none;
 }
-.checkbox--noborder > input[type="checkbox"]:checked + .checkbox__checkmark:after {
+.checkbox--noborder__input:checked + .checkbox--noborder__checkmark:after {
   opacity: 1;
 }
-.checkbox--noborder > .checkbox__checkmark:before {
+.checkbox--noborder__checkmark:before {
   content: '';
   position: absolute;
   width: 24px;
@@ -2238,7 +2681,7 @@ h6 {
   border-radius: 16px;
   left: 0;
 }
-.checkbox--noborder > .checkbox__checkmark {
+.checkbox--noborder__checkmark {
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -2256,7 +2699,7 @@ h6 {
   height: 24px;
   border: none;
 }
-.checkbox--noborder > .checkbox__checkmark:after {
+.checkbox--noborder__checkmark:after {
   content: '';
   position: absolute;
   top: 6px;
@@ -2277,21 +2720,99 @@ h6 {
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-.checkbox--noborder > input[type="checkbox"]:focus + .checkbox__checkmark:before {
+.checkbox--noborder__input:focus + .checkbox--noborder__checkmark:before {
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.checkbox--noborder > input[type="checkbox"]:disabled + .checkbox__checkmark {
+.checkbox--noborder__input:disabled + .checkbox--noborder__checkmark {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
 }
-.checkbox--noborder > input[type="checkbox"]:disabled:active + .checkbox--noborder__checkmark:before {
+.checkbox--noborder__input:disabled:active + .checkbox--noborder__checkmark:before {
   background: transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
+}
+/* topdoc
+  name: Material-like Checkbox
+  use: Checkbox
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input">
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      OFF
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked">
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      ON
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked" disabled>
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      ON
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" disabled>
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      Disabled
+    </label>
+*/
+.checkbox--material {
+  line-height: 18px;
+}
+.checkbox--material__checkmark {
+  width: 18px;
+  height: 18px;
+}
+.checkbox--material__checkmark:before {
+  border: 2px solid rgba(0,0,0,0.5);
+}
+.checkbox--material__input:checked + .checkbox--material__checkmark:before {
+  border: none;
+}
+.checkbox--material__input + .checkbox--material__checkmark:after {
+  -webkit-transition: -webkit-transform 0.3s ease;
+  -moz-transition: -moz-transform 0.3s ease;
+  -o-transition: -o-transform 0.3s ease;
+  transition: transform 0.3s ease;
+  width: 10px;
+  height: 5px;
+  top: 4px;
+  left: 3px;
+  -webkit-transform: scale(0) rotate(-45deg);
+  -moz-transform: scale(0) rotate(-45deg);
+  -ms-transform: scale(0) rotate(-45deg);
+  -o-transform: scale(0) rotate(-45deg);
+  transform: scale(0) rotate(-45deg);
+}
+.checkbox--material__input:checked + .checkbox--material__checkmark:after {
+  top: 4px;
+  left: 3px;
+  -webkit-transform: scale(1) rotate(-45deg);
+  -moz-transform: scale(1) rotate(-45deg);
+  -ms-transform: scale(1) rotate(-45deg);
+  -o-transform: scale(1) rotate(-45deg);
+  transform: scale(1) rotate(-45deg);
+}
+.checkbox--material__input:disabled:checked + .checkbox--material__checkmark:before {
+  background-color: #000;
+}
+.checkbox--material__input:disabled:checked:active + .checkbox--material__checkmark:before {
+  background-color: #000;
+}
+.checkbox--material__checkmark:before {
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  border-color: #212121;
+  width: 18px;
+  height: 18px;
 }
 /* topdoc
   name: Radio Button
@@ -2299,24 +2820,24 @@ h6 {
   modifiers:
   markup:
     <label class="radio-button">
-      <input type="radio" name="r" checked="checked">
+      <input type="radio" class="radio-button__input" name="r" checked="checked">
       <div class="radio-button__checkmark"></div>
       Label
     </label>
 
     <label class="radio-button">
-      <input type="radio" name="r">
+      <input type="radio" class="radio-button__input" name="r">
       <div class="radio-button__checkmark"></div>
       Label
     </label>
 
     <label class="radio-button">
-      <input type="radio" name="r">
+      <input type="radio" class="radio-button__input" name="r">
       <div class="radio-button__checkmark"></div>
       Label
     </label>
 */
-.radio-button > input[type="radio"] {
+.radio-button__input {
   position: absolute;
   overflow: hidden;
   right: 0px;
@@ -2337,15 +2858,15 @@ h6 {
   height: 0px;
   width: 0px;
 }
-.radio-button > input[type="radio"]:active,
-.radio-button > input[type="radio"]:focus {
+.radio-button__input:active,
+.radio-button__input:focus {
   outline: 0;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
-.radio-button > input[type="radio"]:checked + .radio-button__checkmark:after {
+.radio-button__input:checked + .radio-button__checkmark:after {
   opacity: 1;
 }
-.radio-button > input[type="radio"]:checked + .radio-button__checkmark:before {
+.radio-button__input:checked + .radio-button__checkmark:before {
   background: transparent;
   border: none;
 }
@@ -2409,7 +2930,7 @@ h6 {
   background: transparent;
   pointer-events: none;
 }
-.radio-button > input[type="radio"]:checked + .radio-button__checkmark {
+.radio-button__input:checked + .radio-button__checkmark {
   background: rgba(0,0,0,0);
 }
 .radio-button__checkmark:after {
@@ -2442,10 +2963,95 @@ h6 {
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-.radio-button > input[type="radio"]:disabled + .radio-button__checkmark {
+.radio-button__input:disabled + .radio-button__checkmark {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
+}
+/* topdoc
+  name: Material-like Radio Button
+  use: Radio Button
+  modifiers:
+  markup:
+    <label class="radio-button radio-button--material">
+      <input type="radio" class="radio-button__input radio-button--material__input" name="r" checked="checked">
+      <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+      Label
+    </label>
+    <label class="radio-button radio-button--material">
+      <input type="radio" class="radio-button__input radio-button--material__input" name="r">
+      <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+      Label
+    </label>
+    <label class="radio-button radio-button--material">
+      <input type="radio" class="radio-button__input radio-button--material__input" name="r">
+      <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+      Label
+    </label>
+    <label class="radio-button radio-button--material">
+      <input type="radio" class="radio-button__input radio-button--material__input" name="r" disabled>
+      <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+      Label
+    </label>
+*/
+.radio-button--material {
+  line-height: 20px;
+}
+.radio-button--material__checkmark {
+  width: 20px;
+  height: 20px;
+}
+.radio-button--material__checkmark:before {
+  background: transparent;
+  border: 2px solid #696969;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  -webkit-transition: border 0.2s ease;
+  -moz-transition: border 0.2s ease;
+  -o-transition: border 0.2s ease;
+  transition: border 0.2s ease;
+}
+.radio-button--material__checkmark:after {
+  -webkit-transition: background 0.2s ease, -webkit-transform 0.2s ease;
+  -moz-transition: background 0.2s ease, -moz-transform 0.2s ease;
+  -o-transition: background 0.2s ease, -o-transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
+  top: 5px;
+  left: 5px;
+  width: 10px;
+  height: 10px;
+  border: none;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+}
+.radio-button--material__input:checked + .radio-button__checkmark:before {
+  background: transparent;
+  border: 2px solid #8962ed;
+}
+.radio-button--material__input + .radio-button__checkmark:after {
+  background: #696969;
+  opacity: 1;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
+}
+.radio-button--material__input:checked + .radio-button__checkmark:after {
+  opacity: 1;
+  background: #8962ed;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
 }
 /* topdoc
   name: List
@@ -2813,14 +3419,14 @@ h6 {
     <ul class="list">
       <li class="list__item list__item--tappable">
         <label class="radio-button radio-button--list-item">
-          <input type="radio" name="b" checked="checked">
+          <input type="radio" class="radio-button__input" name="b" checked="checked">
           <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
           Radio Button
         </label>
       </li>
       <li class="list__item list__item--tappable">
         <label class="radio-button radio-button--list-item">
-          <input type="radio" name="b">
+          <input type="radio" class="radio-button__input" name="b">
           <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
           Radio Button
         </label>
@@ -2844,14 +3450,14 @@ h6 {
     <ul class="list">
       <li class="list__item list__item--tappable">
         <label class="checkbox checkbox--list-item">
-          <input type="checkbox">
+          <input type="checkbox" class="checkbox__input">
           <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
           Checkbox
         </label>
       </li>
       <li class="list__item list__item--tappable">
         <label class="checkbox checkbox--list-item">
-          <input type="checkbox" checked>
+          <input type="checkbox" class="checkbox__input" checked>
           <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>
           Checkbox
         </label>
@@ -2876,15 +3482,15 @@ h6 {
     <ul class="list">
       <li class="list__item list__item--tappable">
         <label class="checkbox checkbox--noborder checkbox--list-item">
-          <input type="checkbox">
-          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+          <input type="checkbox" class="checkbox__input checkbox--noborder__input">
+          <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark checkbox--list-item__checkmark"></div>
           Checkbox
         </label>
       </li>
       <li class="list__item list__item--tappable">
         <label class="checkbox checkbox--noborder checkbox--list-item">
-          <input type="checkbox" checked>
-          <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
+          <input type="checkbox" class="checkbox__input checkbox--noborder__input" checked>
+          <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark checkbox--list-item__checkmark"></div>
           Checkbox
         </label>
       </li>
@@ -3761,6 +4367,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-weight: 400;
   font-size: 17px;
   position: absolute;
+  display: block;
   width: 220px;
   min-height: 100px;
 }
@@ -4016,4 +4623,479 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   text-align: center;
   color: #fff;
   white-space: normal;
+}
+/* topdoc
+  name: Progress Bar
+  class: progres-bar
+  markup:
+    <div class="progress-bar progress-bar--indeterminate">
+      <div class="progress-bar__primary"></div>
+      <div class="progress-bar__secondary"></div>
+    </div>
+*/
+.progress-bar {
+  position: relative;
+  height: 4px;
+  display: block;
+  width: 100%;
+  background-color: #e0e0e0;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  margin: 0;
+  overflow: hidden;
+}
+.progress-bar--determinate > .progress-bar__primary,
+.progress-bar--determinate > .progress-bar__secondary {
+  position: absolute;
+  background-color: #8962ed;
+  top: 0;
+  bottom: 0;
+  -webkit-transition: width 0.3s linear;
+  -moz-transition: width 0.3s linear;
+  -o-transition: width 0.3s linear;
+  transition: width 0.3s linear;
+  z-index: 100;
+}
+.progress-bar--determinate > .progress-bar__secondary {
+  background-color: #574bdb;
+  z-index: 0;
+}
+.progress-bar--indeterminate:before {
+  content: '';
+  position: absolute;
+  background-color: #8962ed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  will-change: left, right;
+  -webkit-animation: progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  -moz-animation: progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  -o-animation: progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  animation: progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+}
+.progress-bar--indeterminate:after {
+  content: '';
+  position: absolute;
+  background-color: #8962ed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  will-change: left, right;
+  -webkit-animation: progress-bar__indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  -moz-animation: progress-bar__indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  -o-animation: progress-bar__indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  animation: progress-bar__indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  -webkit-animation-delay: 1.15s;
+  -moz-animation-delay: 1.15s;
+  -o-animation-delay: 1.15s;
+  animation-delay: 1.15s;
+}
+@-moz-keyframes progress-bar__indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+@-webkit-keyframes progress-bar__indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+@-o-keyframes progress-bar__indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+@keyframes progress-bar__indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+@-moz-keyframes progress-bar__indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+@-webkit-keyframes progress-bar__indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+@-o-keyframes progress-bar__indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+@keyframes progress-bar__indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+/* topdoc
+  name: Progress Circle
+  class: progres-circle
+  markup:
+    <svg class="progress-circular">
+      <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10"/>
+    </svg>
+*/
+.progress-circular {
+  -webkit-animation: progress__rotate 2s linear infinite;
+  -moz-animation: progress__rotate 2s linear infinite;
+  -o-animation: progress__rotate 2s linear infinite;
+  animation: progress__rotate 2s linear infinite;
+  height: 80px;
+  position: relative;
+  width: 80px;
+}
+.progress-circular__primary {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  -webkit-animation: progress__dash 1.5s ease-in-out infinite;
+  -moz-animation: progress__dash 1.5s ease-in-out infinite;
+  -o-animation: progress__dash 1.5s ease-in-out infinite;
+  animation: progress__dash 1.5s ease-in-out infinite;
+  stroke: #8962ed;
+  -webkit-transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.progress-circular--determinate {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  transform: rotate(270deg);
+  -webkit-animation: none;
+  -moz-animation: none;
+  -o-animation: none;
+  animation: none;
+}
+.progress-circular--determinate > .progress-circular__primary {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -o-animation: none;
+  animation: none;
+}
+.progress-circular--determinate > .progress-circular__secondary {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -o-animation: none;
+  animation: none;
+  stroke: #e0e0e0;
+}
+@-moz-keyframes progress__rotate {
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes progress__rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes progress__rotate {
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes progress__rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes progress__dash {
+  0% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: 0%;
+  }
+  50% {
+    stroke-dasharray: 201%, 50.322%;
+    stroke-dashoffset: -100%;
+  }
+  100% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: -251.32%;
+  }
+}
+@-webkit-keyframes progress__dash {
+  0% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: 0%;
+  }
+  50% {
+    stroke-dasharray: 201%, 50.322%;
+    stroke-dashoffset: -100%;
+  }
+  100% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: -251.32%;
+  }
+}
+@-o-keyframes progress__dash {
+  0% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: 0%;
+  }
+  50% {
+    stroke-dasharray: 201%, 50.322%;
+    stroke-dashoffset: -100%;
+  }
+  100% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: -251.32%;
+  }
+}
+@keyframes progress__dash {
+  0% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: 0%;
+  }
+  50% {
+    stroke-dasharray: 201%, 50.322%;
+    stroke-dashoffset: -100%;
+  }
+  100% {
+    stroke-dasharray: 10%, 241.32%;
+    stroke-dashoffset: -251.32%;
+  }
+}
+/* topdoc
+  name: Fab
+  class: fab
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="fab">+</button>
+    <button class="fab" disabled>+</button>
+*/
+.fab {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 56px;
+  height: 56px;
+  text-decoration: none;
+  font-size: 17px;
+  line-height: 56px;
+  letter-spacing: 0;
+  color: #fff;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #8962ed;
+  border: 0px solid currentColor;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.4);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.fab:active {
+  -webkit-box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.4);
+  background-color: #8962ed;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+.fab:focus {
+  outline: 0;
+}
+.fab__icon {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  display: block;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  padding: 0;
+  z-index: 100;
+  line-height: 56px;
+}
+.fab:disabled,
+.fab[disabled] {
+  background-color: rgba(0,0,0,0.5);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+.fab--top__right {
+  top: 20px;
+  bottom: auto;
+  right: 20px;
+  left: auto;
+  position: fixed;
+}
+.fab--bottom__right {
+  top: auto;
+  bottom: 20px;
+  right: 20px;
+  left: auto;
+  position: fixed;
+}
+.fab--top__left {
+  top: 20px;
+  bottom: auto;
+  right: auto;
+  left: 20px;
+  position: fixed;
+}
+.fab--bottom__left {
+  top: auto;
+  bottom: 20px;
+  right: auto;
+  left: 20px;
+  position: fixed;
+}
+.fab--top__center {
+  top: 20px;
+  bottom: auto;
+  margin-left: -28px;
+  left: 50%;
+  right: auto;
+  position: fixed;
+}
+.fab--bottom__center {
+  top: auto;
+  bottom: 20px;
+  margin-left: -28px;
+  left: 50%;
+  right: auto;
+  position: fixed;
+}
+/* topdoc
+  name: Fab Mini
+  use: Fab
+  modifiers:
+    :active: Active state
+    :disabled: Disabled state
+    :focus: Focused
+  markup:
+    <button class="fab fab--mini">+</button>
+    <button class="fab fab--mini" disabled>+</button>
+*/
+.fab--mini {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+}
+.fab--mini .fab__icon {
+  line-height: 40px;
+}
+.speed-dial__item {
+  position: absolute;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
+  transform: scale(0);
 }

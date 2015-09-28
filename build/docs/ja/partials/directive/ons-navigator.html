@@ -17,8 +17,11 @@ componentCategory: navigation
 
   <h2>ons-navigator</h2>
 
+  
+
   <section class="description">
     <p>ページスタックの管理とナビゲーション機能を提供するコンポーネント。画面上への出力はありません。</p>
+    
   </section>
 
   <ul class="reference-quick-navi">
@@ -69,7 +72,7 @@ componentCategory: navigation
     &lt;/ons-toolbar&gt;
 
     &lt;p style=&quot;text-align: center&quot;&gt;
-      &lt;ons-button modifier=&quot;light&quot; ng-click=&quot;app.navi.popPage(&#39;page.html&#39;);&quot;&gt;Pop&lt;/ons-button&gt;
+      &lt;ons-button modifier=&quot;light&quot; ng-click=&quot;app.navi.popPage();&quot;&gt;Pop&lt;/ons-button&gt;
     &lt;/p&gt;
   &lt;/ons-page&gt;
 &lt;/ons-template&gt;</code></pre>
@@ -160,6 +163,14 @@ componentCategory: navigation
             
             <span style="font-size: 12px">Optional</span>
             
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+
+            
           </td>
         </tr>
         
@@ -174,6 +185,16 @@ componentCategory: navigation
 
             
             <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
             
           </td>
         </tr>
@@ -190,6 +211,16 @@ componentCategory: navigation
             
             <span style="font-size: 12px">Optional</span>
             
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
           </td>
         </tr>
         
@@ -204,6 +235,16 @@ componentCategory: navigation
 
             
             <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
             
           </td>
         </tr>
@@ -220,6 +261,16 @@ componentCategory: navigation
             
             <span style="font-size: 12px">Optional</span>
             
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
           </td>
         </tr>
         
@@ -235,6 +286,91 @@ componentCategory: navigation
             
             <span style="font-size: 12px">Optional</span>
             
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-navigator-ons-init">ons-init</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            ページの"init"イベントが発火された時の挙動を独自に指定できます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-navigator-ons-show">ons-show</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            ページの"show"イベントが発火された時の挙動を独自に指定できます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-navigator-ons-hide">ons-hide</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            ページの"hide"イベントが発火された時の挙動を独自に指定できます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
           </td>
         </tr>
         
@@ -245,10 +381,20 @@ componentCategory: navigation
             
           </td>
           <td>
-            "destroy"イベントが発火された時の挙動を独自に指定できます。
+            ページの"destroy"イベントが発火された時の挙動を独自に指定できます。
 
             
             <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
             
           </td>
         </tr>
@@ -265,6 +411,12 @@ componentCategory: navigation
             
             <span style="font-size: 12px">Optional</span>
             
+
+            
+
+            
+
+            
           </td>
         </tr>
         
@@ -279,6 +431,12 @@ componentCategory: navigation
 
             
             <span style="font-size: 12px">Optional</span>
+            
+
+            
+
+            
+
             
           </td>
         </tr>
@@ -311,57 +469,140 @@ componentCategory: navigation
         
         <tr>
           <td><a href="#method-pushPage">pushPage(pageUrl, [options])</a></td>
-          <td>指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。</td>
+          <td>
+            指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-bringPageTop">bringPageTop(item, [options])</a></td>
+          <td>
+            指定したページをページスタックの一番上に移動します。もし指定したページが無かった場合新しくpushされます。
+
+            
+
+            
+          </td>
         </tr>
         
         <tr>
           <td><a href="#method-insertPage">insertPage(index, pageUrl, [options])</a></td>
-          <td>指定したpageUrlをページスタックのindexで指定した位置に追加します。</td>
+          <td>
+            指定したpageUrlをページスタックのindexで指定した位置に追加します。
+
+            
+
+            
+          </td>
         </tr>
         
         <tr>
           <td><a href="#method-popPage">popPage([options])</a></td>
-          <td>現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。</td>
+          <td>
+            現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。
+
+            
+
+            
+          </td>
         </tr>
         
         <tr>
           <td><a href="#method-replacePage">replacePage(pageUrl, [options])</a></td>
-          <td>現在表示中のページをを指定したページに置き換えます。</td>
+          <td>
+            現在表示中のページをを指定したページに置き換えます。
+
+            
+
+            
+          </td>
         </tr>
         
         <tr>
           <td><a href="#method-resetToPage">resetToPage(pageUrl, [options])</a></td>
-          <td>ページスタックをリセットし、指定したページを表示します。</td>
+          <td>
+            ページスタックをリセットし、指定したページを表示します。
+
+            
+
+            
+          </td>
         </tr>
         
         <tr>
           <td><a href="#method-getCurrentPage">getCurrentPage()</a></td>
-          <td>現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。</td>
+          <td>
+            現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。
+
+            
+
+            
+          </td>
         </tr>
         
         <tr>
           <td><a href="#method-getPages">getPages()</a></td>
-          <td>ナビゲーターの持つページスタックの一覧を取得します。</td>
+          <td>
+            ナビゲーターの持つページスタックの一覧を取得します。
+
+            
+
+            
+          </td>
         </tr>
         
         <tr>
           <td><a href="#method-getDeviceBackButtonHandler">getDeviceBackButtonHandler()</a></td>
-          <td>バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。</td>
+          <td>
+            バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。
+
+            
+
+            
+          </td>
         </tr>
         
         <tr>
           <td><a href="#method-on">on(eventName, listener)</a></td>
-          <td>イベントリスナーを追加します。</td>
+          <td>
+            イベントリスナーを追加します。
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
+          </td>
         </tr>
         
         <tr>
           <td><a href="#method-once">once(eventName, listener)</a></td>
-          <td>一度だけ呼び出されるイベントリスナーを追加します。</td>
+          <td>
+            一度だけ呼び出されるイベントリスナーを追加します。
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
+          </td>
         </tr>
         
         <tr>
           <td><a href="#method-off">off(eventName, [listener])</a></td>
-          <td>イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。</td>
+          <td>
+            イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
+          </td>
         </tr>
         
       </tbody>
@@ -390,22 +631,46 @@ componentCategory: navigation
         
         <tr>
           <td><a href="#event-prepush">prepush</a></td>
-          <td>pageがpushされる直前に発火されます。</td>
+          <td>
+            pageがpushされる直前に発火されます。
+
+            
+
+            
+          </td>
         </tr>
         
         <tr>
           <td><a href="#event-prepop">prepop</a></td>
-          <td>pageがpopされる直前に発火されます。</td>
+          <td>
+            pageがpopされる直前に発火されます。
+
+            
+
+            
+          </td>
         </tr>
         
         <tr>
           <td><a href="#event-postpush">postpush</a></td>
-          <td>pageがpushされてアニメーションが終了してから発火されます。</td>
+          <td>
+            pageがpushされてアニメーションが終了してから発火されます。
+
+            
+
+            
+          </td>
         </tr>
         
         <tr>
           <td><a href="#event-postpop">postpop</a></td>
-          <td>pageがpopされてアニメーションが終わった後に発火されます。</td>
+          <td>
+            pageがpopされてアニメーションが終わった後に発火されます。
+
+            
+
+            
+          </td>
         </tr>
         
       </tbody>
@@ -426,6 +691,10 @@ componentCategory: navigation
     </h4>
 
     <p>指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。</p>
+
+    
+
+    
 
     
 
@@ -482,6 +751,73 @@ componentCategory: navigation
   </section>
   
   <section class="method-detail">
+    <h4 id="method-bringPageTop">
+      bringPageTop(item, [options])
+
+      <a href="#method-bringPageTop" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>指定したページをページスタックの一番上に移動します。もし指定したページが無かった場合新しくpushされます。</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">item</span></td>
+          <td class="value-type">String|Number</td>
+          <td>ページのURLかもしくはons-navigatorのページスタックのインデックス値を指定します。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>オプションを指定するオブジェクト。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animation</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.animationOptions</span></td>
+          <td class="value-type">String</td>
+          <td>アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> </td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.onTransitionEnd</span></td>
+          <td class="value-type">Function</td>
+          <td>pushPage()による画面遷移が終了した時に呼び出される関数オブジェクトを指定します。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+  
+  <section class="method-detail">
     <h4 id="method-insertPage">
       insertPage(index, pageUrl, [options])
 
@@ -489,6 +825,10 @@ componentCategory: navigation
     </h4>
 
     <p>指定したpageUrlをページスタックのindexで指定した位置に追加します。</p>
+
+    
+
+    
 
     
 
@@ -546,6 +886,10 @@ componentCategory: navigation
     </h4>
 
     <p>現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。</p>
+
+    
+
+    
 
     
 
@@ -613,6 +957,10 @@ componentCategory: navigation
     
 
     
+
+    
+
+    
     <!-- method parameter -->
     <h5>パラメーター</h5>
 
@@ -676,6 +1024,10 @@ componentCategory: navigation
     
 
     
+
+    
+
+    
     <!-- method parameter -->
     <h5>パラメーター</h5>
 
@@ -731,6 +1083,10 @@ componentCategory: navigation
     <p>現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。</p>
 
     
+
+    
+
+    
     <p>返り値: 現在のpageオブジェクト。</p>
     
 
@@ -745,6 +1101,10 @@ componentCategory: navigation
     </h4>
 
     <p>ナビゲーターの持つページスタックの一覧を取得します。</p>
+
+    
+
+    
 
     
     <p>返り値: pageオブジェクトの配列。</p>
@@ -763,6 +1123,10 @@ componentCategory: navigation
     <p>バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。</p>
 
     
+
+    
+
+    
     <p>返り値: デバイスのバックボタンハンドラを返します。</p>
     
 
@@ -777,6 +1141,12 @@ componentCategory: navigation
     </h4>
 
     <p>イベントリスナーを追加します。</p>
+
+    
+    <span class="extension-name">angular</span>
+    
+
+    
 
     
 
@@ -824,6 +1194,12 @@ componentCategory: navigation
     <p>一度だけ呼び出されるイベントリスナーを追加します。</p>
 
     
+    <span class="extension-name">angular</span>
+    
+
+    
+
+    
 
     
     <!-- method parameter -->
@@ -867,6 +1243,12 @@ componentCategory: navigation
     </h4>
 
     <p>イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。</p>
+
+    
+    <span class="extension-name">angular</span>
+    
+
+    
 
     
 
@@ -920,6 +1302,10 @@ componentCategory: navigation
 
     <p>pageがpushされる直前に発火されます。</p>
 
+    
+
+    
+
     <h5>パラメーター</h5>
 
     <table>
@@ -970,6 +1356,10 @@ componentCategory: navigation
     </h4>
 
     <p>pageがpopされる直前に発火されます。</p>
+
+    
+
+    
 
     <h5>パラメーター</h5>
 
@@ -1022,6 +1412,10 @@ componentCategory: navigation
 
     <p>pageがpushされてアニメーションが終了してから発火されます。</p>
 
+    
+
+    
+
     <h5>パラメーター</h5>
 
     <table>
@@ -1072,6 +1466,10 @@ componentCategory: navigation
     </h4>
 
     <p>pageがpopされてアニメーションが終わった後に発火されます。</p>
+
+    
+
+    
 
     <h5>パラメーター</h5>
 
