@@ -2,6 +2,10 @@
 CHANGELOG
 ====
 
+v1.3.11
+----
+* ons-tabbar: Remove flickering when navigator is a child of tabbar.
+
 v1.3.10
 ----
 * ons-tabbar: Fixed [#891](https://github.com/OnsenUI/OnsenUI/issues/891).
