@@ -5,6 +5,7 @@ CHANGELOG
 v1.3.11
 ----
 * ons-tabbar: Remove flickering when navigator is a child of tabbar.
+* ons-dialog: Fixed broken `mask-color` attribute.
 
 v1.3.10
 ----
