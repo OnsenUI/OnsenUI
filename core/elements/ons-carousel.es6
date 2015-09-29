@@ -644,6 +644,10 @@ limitations under the License.
             duration: duration,
             timing: 'cubic-bezier(.1, .4, .1, 1)'
           })
+          .queue(function(done) {
+            done();
+            this._tryFirePostChangeEvent();
+          }.bind(this))
           .play();
         this._scroll = 0;
         return;
@@ -659,6 +663,10 @@ limitations under the License.
             duration: duration,
             timing: 'cubic-bezier(.1, .4, .1, 1)'
           })
+          .queue(function(done) {
+            done();
+            this._tryFirePostChangeEvent();
+          }.bind(this))
           .play();
         this._scroll = maxScroll;
         return;

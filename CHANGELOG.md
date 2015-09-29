@@ -43,6 +43,7 @@ v2.0.0-dev
  * ons-sliding-menu: Fixed [#879](https://github.com/OnsenUI/OnsenUI/issues/879)
  * ons-navigator: Added `bringPageTop()` method.
  * ons-carousel: Added `getCarouselItemCount()` method.
+ * ons-carousel: Fixed [#929](https://github.com/OnsenUI/OnsenUI/issues/929)
 
 v1.3.11
 ----
