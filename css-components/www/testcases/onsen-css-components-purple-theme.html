@@ -34,7 +34,9 @@
           <div id="pageNav">
             <ul>
               <li><a href="#switch">Switch</a></li>
+              <li><a href="#material-like-switch">Material-like Switch</a></li>
               <li><a href="#range">Range</a></li>
+              <li><a href="#material-range">Material Range</a></li>
               <li><a href="#navigation-bar">Navigation Bar</a></li>
               <li><a href="#navigation-bar-item">Navigation Bar Item</a></li>
               <li><a href="#navigation-bar-with-outline-button">Navigation Bar with Outline Button</a></li>
@@ -45,6 +47,7 @@
               <li><a href="#transparent-navigation-bar">Transparent Navigation Bar</a></li>
               <li><a href="#bottom-bar">Bottom Bar</a></li>
               <li><a href="#navigation-bar-with-segment">Navigation Bar with Segment</a></li>
+              <li><a href="#material-navigation-bar">Material Navigation Bar</a></li>
               <li><a href="#button">Button</a></li>
               <li><a href="#outline-button">Outline Button</a></li>
               <li><a href="#light-button">Light Button</a></li>
@@ -53,6 +56,8 @@
               <li><a href="#large-button">Large Button</a></li>
               <li><a href="#large-quiet-button">Large Quiet Button</a></li>
               <li><a href="#large-call-to-action-button">Large Call To Action Button</a></li>
+              <li><a href="#material-button">Material Button</a></li>
+              <li><a href="#material-flat-button">Material Flat Button</a></li>
               <li><a href="#button-bar">Button Bar</a></li>
               <li><a href="#segment">Segment</a></li>
               <li><a href="#icon-tab-bar">Icon Tab Bar</a></li>
@@ -64,7 +69,9 @@
               <li><a href="#toolbar-button">Toolbar Button</a></li>
               <li><a href="#checkbox">Checkbox</a></li>
               <li><a href="#no-border-checkbox">No border Checkbox</a></li>
+              <li><a href="#material-like-checkbox">Material-like Checkbox</a></li>
               <li><a href="#radio-button">Radio Button</a></li>
+              <li><a href="#material-like-radio-button">Material-like Radio Button</a></li>
               <li><a href="#list">List</a></li>
               <li><a href="#noborder-list">Noborder List</a></li>
               <li><a href="#category-list-header">Category List Header</a></li>
@@ -97,6 +104,10 @@
               <li><a href="#popoverright)">Popover(right)</a></li>
               <li><a href="#android-like-popover">Android-like Popover</a></li>
               <li><a href="#modal">Modal</a></li>
+              <li><a href="#progress-bar">Progress Bar</a></li>
+              <li><a href="#progress-circle">Progress Circle</a></li>
+              <li><a href="#fab">Fab</a></li>
+              <li><a href="#fab-mini">Fab Mini</a></li>
             </ul>
           </div>
         </div>
@@ -135,6 +146,23 @@
               </section>
             </footer>
           </article>
+          <article id="material-like-switch" class="component">
+            <header>
+              <h2>Material-like Switch</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><label class="switch switch--material">  <input type="checkbox" class="switch__input switch--material__input">  <div class="switch__toggle switch--material__toggle"></div></label><label class="switch switch--material">  <input type="checkbox" class="switch__input switch--material__input" checked>  <div class="switch__toggle switch--material__toggle"></div></label><label class="switch switch--material">  <input type="checkbox" class="switch__input switch--material__input" disabled>  <div class="switch__toggle switch--material__toggle"></div></label></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;label class=&quot;switch switch--material&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;switch__input switch--material__input&quot;&gt;  &lt;div class=&quot;switch__toggle switch--material__toggle&quot;&gt;&lt;/div&gt;&lt;/label&gt;&lt;label class=&quot;switch switch--material&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;switch__input switch--material__input&quot; checked&gt;  &lt;div class=&quot;switch__toggle switch--material__toggle&quot;&gt;&lt;/div&gt;&lt;/label&gt;&lt;label class=&quot;switch switch--material&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;switch__input switch--material__input&quot; disabled&gt;  &lt;div class=&quot;switch__toggle switch--material__toggle&quot;&gt;&lt;/div&gt;&lt;/label&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
           <article id="range" class="component">
             <header>
               <h2>Range</h2>
@@ -148,6 +176,23 @@
               <section class="code">
                 <div>
                   <pre class="html"><code data-language="html">&lt;input type=&quot;range&quot; class=&quot;range&quot;&gt;&lt;input type=&quot;range&quot; class=&quot;range&quot; disabled&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="material-range" class="component">
+            <header>
+              <h2>Material Range</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><input type="range" class="range range--material"><input type="range" class="range range--material" disabled></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;input type=&quot;range&quot; class=&quot;range range--material&quot;&gt;&lt;input type=&quot;range&quot; class=&quot;range range--material&quot; disabled&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -322,6 +367,23 @@
               </section>
             </footer>
           </article>
+          <article id="material-navigation-bar" class="component">
+            <header>
+              <h2>Material Navigation Bar</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="navigation-bar navigation-bar--material">  <div class="navigation-bar__left navigation-bar--material__left">    <span class="toolbar-button toolbar-button--material">      <i class="zmdi zmdi-menu"></i>    </span>  </div>  <div class="navigation-bar__center navigation-bar--material__center">    Toolbar  </div>  <div class="navigation-bar__right navigation-bar--material__right">    <span class="toolbar-button toolbar-button--material">      <i class="zmdi zmdi-search"></i>    </span>    <span class="toolbar-button toolbar-button--material">      <i class="zmdi zmdi-refresh"></i>    </span>  </div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;navigation-bar navigation-bar--material&quot;&gt;  &lt;div class=&quot;navigation-bar__left navigation-bar--material__left&quot;&gt;    &lt;span class=&quot;toolbar-button toolbar-button--material&quot;&gt;      &lt;i class=&quot;zmdi zmdi-menu&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__center navigation-bar--material__center&quot;&gt;    Toolbar  &lt;/div&gt;  &lt;div class=&quot;navigation-bar__right navigation-bar--material__right&quot;&gt;    &lt;span class=&quot;toolbar-button toolbar-button--material&quot;&gt;      &lt;i class=&quot;zmdi zmdi-search&quot;&gt;&lt;/i&gt;    &lt;/span&gt;    &lt;span class=&quot;toolbar-button toolbar-button--material&quot;&gt;      &lt;i class=&quot;zmdi zmdi-refresh&quot;&gt;&lt;/i&gt;    &lt;/span&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
           <article id="button" class="component">
             <header>
               <h2>Button</h2>
@@ -454,6 +516,40 @@
               <section class="code">
                 <div>
                   <pre class="html"><code data-language="html">&lt;button class=&quot;button--large--cta&quot; &gt;Button&lt;/button&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="material-button" class="component">
+            <header>
+              <h2>Material Button</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><button class="button button--material">BUTTON</button><button class="button button--material" disabled>DISABLED</button></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;button class=&quot;button button--material&quot;&gt;BUTTON&lt;/button&gt;&lt;button class=&quot;button button--material&quot; disabled&gt;DISABLED&lt;/button&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="material-flat-button" class="component">
+            <header>
+              <h2>Material Flat Button</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><button class="button button--material--flat">BUTTON</button><button class="button button--material--flat" disabled>DISABLED</button></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;button class=&quot;button button--material--flat&quot;&gt;BUTTON&lt;/button&gt;&lt;button class=&quot;button button--material--flat&quot; disabled&gt;DISABLED&lt;/button&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -617,13 +713,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><label class="checkbox">  <input type="checkbox">  <div class="checkbox__checkmark"></div>  OFF</label><label class="checkbox">  <input type="checkbox" checked="checked">  <div class="checkbox__checkmark"></div>  ON</label><label class="checkbox">  <input type="checkbox" disabled>  <div class="checkbox__checkmark"></div>  Disabled</label></div>
+                <div style="width: 100%; height: 100%; position:absolute"><label class="checkbox">  <input type="checkbox" class="checkbox__input">  <div class="checkbox__checkmark"></div>  OFF</label><label class="checkbox">  <input type="checkbox" class="checkbox__input" checked="checked">  <div class="checkbox__checkmark"></div>  ON</label><label class="checkbox">  <input type="checkbox" class="checkbox__input" disabled>  <div class="checkbox__checkmark"></div>  Disabled</label></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;label class=&quot;checkbox&quot;&gt;  &lt;input type=&quot;checkbox&quot;&gt;  &lt;div class=&quot;checkbox__checkmark&quot;&gt;&lt;/div&gt;  OFF&lt;/label&gt;&lt;label class=&quot;checkbox&quot;&gt;  &lt;input type=&quot;checkbox&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;checkbox__checkmark&quot;&gt;&lt;/div&gt;  ON&lt;/label&gt;&lt;label class=&quot;checkbox&quot;&gt;  &lt;input type=&quot;checkbox&quot; disabled&gt;  &lt;div class=&quot;checkbox__checkmark&quot;&gt;&lt;/div&gt;  Disabled&lt;/label&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;label class=&quot;checkbox&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;checkbox__input&quot;&gt;  &lt;div class=&quot;checkbox__checkmark&quot;&gt;&lt;/div&gt;  OFF&lt;/label&gt;&lt;label class=&quot;checkbox&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;checkbox__input&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;checkbox__checkmark&quot;&gt;&lt;/div&gt;  ON&lt;/label&gt;&lt;label class=&quot;checkbox&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;checkbox__input&quot; disabled&gt;  &lt;div class=&quot;checkbox__checkmark&quot;&gt;&lt;/div&gt;  Disabled&lt;/label&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -634,13 +730,30 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><label class="checkbox--noborder">  <input type="checkbox">  <div class="checkbox__checkmark"></div>  OFF</label><label class="checkbox--noborder">  <input type="checkbox" checked="checked">  <div class="checkbox__checkmark"></div>  ON</label><label class="checkbox--noborder">  <input type="checkbox" disabled checked="checked">  <div class="checkbox__checkmark"></div>  Disabled</label></div>
+                <div style="width: 100%; height: 100%; position:absolute"><label class="checkbox--noborder">  <input type="checkbox" class="checkbox__input checkbox--noborder__input">  <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>  OFF</label><label class="checkbox--noborder">  <input type="checkbox" class="checkbox__input checkbox--noborder__input" checked="checked">  <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>  ON</label><label class="checkbox--noborder">  <input type="checkbox" class="checkbox__input checkbox--noborder__input" disabled checked="checked">  <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>  Disabled</label></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;label class=&quot;checkbox--noborder&quot;&gt;  &lt;input type=&quot;checkbox&quot;&gt;  &lt;div class=&quot;checkbox__checkmark&quot;&gt;&lt;/div&gt;  OFF&lt;/label&gt;&lt;label class=&quot;checkbox--noborder&quot;&gt;  &lt;input type=&quot;checkbox&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;checkbox__checkmark&quot;&gt;&lt;/div&gt;  ON&lt;/label&gt;&lt;label class=&quot;checkbox--noborder&quot;&gt;  &lt;input type=&quot;checkbox&quot; disabled checked=&quot;checked&quot;&gt;  &lt;div class=&quot;checkbox__checkmark&quot;&gt;&lt;/div&gt;  Disabled&lt;/label&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;label class=&quot;checkbox--noborder&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;checkbox__input checkbox--noborder__input&quot;&gt;  &lt;div class=&quot;checkbox__checkmark checkbox--noborder__checkmark&quot;&gt;&lt;/div&gt;  OFF&lt;/label&gt;&lt;label class=&quot;checkbox--noborder&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;checkbox__input checkbox--noborder__input&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;checkbox__checkmark checkbox--noborder__checkmark&quot;&gt;&lt;/div&gt;  ON&lt;/label&gt;&lt;label class=&quot;checkbox--noborder&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;checkbox__input checkbox--noborder__input&quot; disabled checked=&quot;checked&quot;&gt;  &lt;div class=&quot;checkbox__checkmark checkbox--noborder__checkmark&quot;&gt;&lt;/div&gt;  Disabled&lt;/label&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="material-like-checkbox" class="component">
+            <header>
+              <h2>Material-like Checkbox</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><label class="checkbox checkbox--material">  <input type="checkbox" class="checkbox__input checkbox--material__input">  <div class="checkbox__checkmark checkbox--material__checkmark"></div>  OFF</label><label class="checkbox checkbox--material">  <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked">  <div class="checkbox__checkmark checkbox--material__checkmark"></div>  ON</label><label class="checkbox checkbox--material">  <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked" disabled>  <div class="checkbox__checkmark checkbox--material__checkmark"></div>  ON</label><label class="checkbox checkbox--material">  <input type="checkbox" class="checkbox__input checkbox--material__input" disabled>  <div class="checkbox__checkmark checkbox--material__checkmark"></div>  Disabled</label></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;label class=&quot;checkbox checkbox--material&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;checkbox__input checkbox--material__input&quot;&gt;  &lt;div class=&quot;checkbox__checkmark checkbox--material__checkmark&quot;&gt;&lt;/div&gt;  OFF&lt;/label&gt;&lt;label class=&quot;checkbox checkbox--material&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;checkbox__input checkbox--material__input&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;checkbox__checkmark checkbox--material__checkmark&quot;&gt;&lt;/div&gt;  ON&lt;/label&gt;&lt;label class=&quot;checkbox checkbox--material&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;checkbox__input checkbox--material__input&quot; checked=&quot;checked&quot; disabled&gt;  &lt;div class=&quot;checkbox__checkmark checkbox--material__checkmark&quot;&gt;&lt;/div&gt;  ON&lt;/label&gt;&lt;label class=&quot;checkbox checkbox--material&quot;&gt;  &lt;input type=&quot;checkbox&quot; class=&quot;checkbox__input checkbox--material__input&quot; disabled&gt;  &lt;div class=&quot;checkbox__checkmark checkbox--material__checkmark&quot;&gt;&lt;/div&gt;  Disabled&lt;/label&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -651,13 +764,30 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><label class="radio-button">  <input type="radio" name="r" checked="checked">  <div class="radio-button__checkmark"></div>  Label</label><label class="radio-button">  <input type="radio" name="r">  <div class="radio-button__checkmark"></div>  Label</label><label class="radio-button">  <input type="radio" name="r">  <div class="radio-button__checkmark"></div>  Label</label></div>
+                <div style="width: 100%; height: 100%; position:absolute"><label class="radio-button">  <input type="radio" class="radio-button__input" name="r" checked="checked">  <div class="radio-button__checkmark"></div>  Label</label><label class="radio-button">  <input type="radio" class="radio-button__input" name="r">  <div class="radio-button__checkmark"></div>  Label</label><label class="radio-button">  <input type="radio" class="radio-button__input" name="r">  <div class="radio-button__checkmark"></div>  Label</label></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;label class=&quot;radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;r&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;&lt;label class=&quot;radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;r&quot;&gt;  &lt;div class=&quot;radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;&lt;label class=&quot;radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; name=&quot;r&quot;&gt;  &lt;div class=&quot;radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;label class=&quot;radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; class=&quot;radio-button__input&quot; name=&quot;r&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;&lt;label class=&quot;radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; class=&quot;radio-button__input&quot; name=&quot;r&quot;&gt;  &lt;div class=&quot;radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;&lt;label class=&quot;radio-button&quot;&gt;  &lt;input type=&quot;radio&quot; class=&quot;radio-button__input&quot; name=&quot;r&quot;&gt;  &lt;div class=&quot;radio-button__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="material-like-radio-button" class="component">
+            <header>
+              <h2>Material-like Radio Button</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><label class="radio-button radio-button--material">  <input type="radio" class="radio-button__input radio-button--material__input" name="r" checked="checked">  <div class="radio-button__checkmark radio-button--material__checkmark"></div>  Label</label><label class="radio-button radio-button--material">  <input type="radio" class="radio-button__input radio-button--material__input" name="r">  <div class="radio-button__checkmark radio-button--material__checkmark"></div>  Label</label><label class="radio-button radio-button--material">  <input type="radio" class="radio-button__input radio-button--material__input" name="r">  <div class="radio-button__checkmark radio-button--material__checkmark"></div>  Label</label><label class="radio-button radio-button--material">  <input type="radio" class="radio-button__input radio-button--material__input" name="r" disabled>  <div class="radio-button__checkmark radio-button--material__checkmark"></div>  Label</label></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;label class=&quot;radio-button radio-button--material&quot;&gt;  &lt;input type=&quot;radio&quot; class=&quot;radio-button__input radio-button--material__input&quot; name=&quot;r&quot; checked=&quot;checked&quot;&gt;  &lt;div class=&quot;radio-button__checkmark radio-button--material__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;&lt;label class=&quot;radio-button radio-button--material&quot;&gt;  &lt;input type=&quot;radio&quot; class=&quot;radio-button__input radio-button--material__input&quot; name=&quot;r&quot;&gt;  &lt;div class=&quot;radio-button__checkmark radio-button--material__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;&lt;label class=&quot;radio-button radio-button--material&quot;&gt;  &lt;input type=&quot;radio&quot; class=&quot;radio-button__input radio-button--material__input&quot; name=&quot;r&quot;&gt;  &lt;div class=&quot;radio-button__checkmark radio-button--material__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;&lt;label class=&quot;radio-button radio-button--material&quot;&gt;  &lt;input type=&quot;radio&quot; class=&quot;radio-button__input radio-button--material__input&quot; name=&quot;r&quot; disabled&gt;  &lt;div class=&quot;radio-button__checkmark radio-button--material__checkmark&quot;&gt;&lt;/div&gt;  Label&lt;/label&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -804,13 +934,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--tappable">    <label class="radio-button radio-button--list-item">      <input type="radio" name="b" checked="checked">      <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>      Radio Button    </label>  </li>  <li class="list__item list__item--tappable">    <label class="radio-button radio-button--list-item">      <input type="radio" name="b">      <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>      Radio Button    </label>  </li></ul></div>
+                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--tappable">    <label class="radio-button radio-button--list-item">      <input type="radio" class="radio-button__input" name="b" checked="checked">      <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>      Radio Button    </label>  </li>  <li class="list__item list__item--tappable">    <label class="radio-button radio-button--list-item">      <input type="radio" class="radio-button__input" name="b">      <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>      Radio Button    </label>  </li></ul></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;radio-button radio-button--list-item&quot;&gt;      &lt;input type=&quot;radio&quot; name=&quot;b&quot; checked=&quot;checked&quot;&gt;      &lt;div class=&quot;radio-button__checkmark radio-button--list-item__checkmark&quot;&gt;&lt;/div&gt;      Radio Button    &lt;/label&gt;  &lt;/li&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;radio-button radio-button--list-item&quot;&gt;      &lt;input type=&quot;radio&quot; name=&quot;b&quot;&gt;      &lt;div class=&quot;radio-button__checkmark radio-button--list-item__checkmark&quot;&gt;&lt;/div&gt;      Radio Button    &lt;/label&gt;  &lt;/li&gt;&lt;/ul&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;radio-button radio-button--list-item&quot;&gt;      &lt;input type=&quot;radio&quot; class=&quot;radio-button__input&quot; name=&quot;b&quot; checked=&quot;checked&quot;&gt;      &lt;div class=&quot;radio-button__checkmark radio-button--list-item__checkmark&quot;&gt;&lt;/div&gt;      Radio Button    &lt;/label&gt;  &lt;/li&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;radio-button radio-button--list-item&quot;&gt;      &lt;input type=&quot;radio&quot; class=&quot;radio-button__input&quot; name=&quot;b&quot;&gt;      &lt;div class=&quot;radio-button__checkmark radio-button--list-item__checkmark&quot;&gt;&lt;/div&gt;      Radio Button    &lt;/label&gt;  &lt;/li&gt;&lt;/ul&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -821,13 +951,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--list-item">      <input type="checkbox">      <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li>  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--list-item">      <input type="checkbox" checked>      <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li></ul></div>
+                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--list-item">      <input type="checkbox" class="checkbox__input">      <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li>  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--list-item">      <input type="checkbox" class="checkbox__input" checked>      <div class="checkbox__checkmark checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li></ul></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;checkbox checkbox--list-item&quot;&gt;      &lt;input type=&quot;checkbox&quot;&gt;      &lt;div class=&quot;checkbox__checkmark checkbox--list-item__checkmark&quot;&gt;&lt;/div&gt;      Checkbox    &lt;/label&gt;  &lt;/li&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;checkbox checkbox--list-item&quot;&gt;      &lt;input type=&quot;checkbox&quot; checked&gt;      &lt;div class=&quot;checkbox__checkmark checkbox--list-item__checkmark&quot;&gt;&lt;/div&gt;      Checkbox    &lt;/label&gt;  &lt;/li&gt;&lt;/ul&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;checkbox checkbox--list-item&quot;&gt;      &lt;input type=&quot;checkbox&quot; class=&quot;checkbox__input&quot;&gt;      &lt;div class=&quot;checkbox__checkmark checkbox--list-item__checkmark&quot;&gt;&lt;/div&gt;      Checkbox    &lt;/label&gt;  &lt;/li&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;checkbox checkbox--list-item&quot;&gt;      &lt;input type=&quot;checkbox&quot; class=&quot;checkbox__input&quot; checked&gt;      &lt;div class=&quot;checkbox__checkmark checkbox--list-item__checkmark&quot;&gt;&lt;/div&gt;      Checkbox    &lt;/label&gt;  &lt;/li&gt;&lt;/ul&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -838,13 +968,13 @@
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
-                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--noborder checkbox--list-item">      <input type="checkbox">      <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li>  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--noborder checkbox--list-item">      <input type="checkbox" checked>      <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li></ul></div>
+                <div style="width: 100%; height: 100%; position:absolute"><ul class="list">  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--noborder checkbox--list-item">      <input type="checkbox" class="checkbox__input checkbox--noborder__input">      <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li>  <li class="list__item list__item--tappable">    <label class="checkbox checkbox--noborder checkbox--list-item">      <input type="checkbox" class="checkbox__input checkbox--noborder__input" checked>      <div class="checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark checkbox--list-item__checkmark"></div>      Checkbox    </label>  </li></ul></div>
               </div>
             </section>
             <footer class="showcode"><a href="#">Show code snippets</a>
               <section class="code">
                 <div>
-                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;checkbox checkbox--noborder checkbox--list-item&quot;&gt;      &lt;input type=&quot;checkbox&quot;&gt;      &lt;div class=&quot;checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark&quot;&gt;&lt;/div&gt;      Checkbox    &lt;/label&gt;  &lt;/li&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;checkbox checkbox--noborder checkbox--list-item&quot;&gt;      &lt;input type=&quot;checkbox&quot; checked&gt;      &lt;div class=&quot;checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark&quot;&gt;&lt;/div&gt;      Checkbox    &lt;/label&gt;  &lt;/li&gt;&lt;/ul&gt;</code></pre>
+                  <pre class="html"><code data-language="html">&lt;ul class=&quot;list&quot;&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;checkbox checkbox--noborder checkbox--list-item&quot;&gt;      &lt;input type=&quot;checkbox&quot; class=&quot;checkbox__input checkbox--noborder__input&quot;&gt;      &lt;div class=&quot;checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark checkbox--list-item__checkmark&quot;&gt;&lt;/div&gt;      Checkbox    &lt;/label&gt;  &lt;/li&gt;  &lt;li class=&quot;list__item list__item--tappable&quot;&gt;    &lt;label class=&quot;checkbox checkbox--noborder checkbox--list-item&quot;&gt;      &lt;input type=&quot;checkbox&quot; class=&quot;checkbox__input checkbox--noborder__input&quot; checked&gt;      &lt;div class=&quot;checkbox__checkmark checkbox--noborder checkbox--noborder__checkmark checkbox--list-item__checkmark&quot;&gt;&lt;/div&gt;      Checkbox    &lt;/label&gt;  &lt;/li&gt;&lt;/ul&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -1202,6 +1332,74 @@
               <section class="code">
                 <div>
                   <pre class="html"><code data-language="html">&lt;div class=&quot;modal&quot;&gt;  &lt;div class=&quot;modal__content&quot;&gt;    Message Text  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="progress-bar" class="component">
+            <header>
+              <h2>Progress Bar</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="progress-bar progress-bar--indeterminate">  <div class="progress-bar__primary"></div>  <div class="progress-bar__secondary"></div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;progress-bar progress-bar--indeterminate&quot;&gt;  &lt;div class=&quot;progress-bar__primary&quot;&gt;&lt;/div&gt;  &lt;div class=&quot;progress-bar__secondary&quot;&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="progress-circle" class="component">
+            <header>
+              <h2>Progress Circle</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><svg class="progress-circular">  <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10"/></svg></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;svg class=&quot;progress-circular&quot;&gt;  &lt;circle class=&quot;progress-circular__primary&quot; cx=&quot;50%&quot; cy=&quot;50%&quot; r=&quot;40%&quot; fill=&quot;none&quot; stroke-width=&quot;10%&quot; stroke-miterlimit=&quot;10&quot;/&gt;&lt;/svg&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="fab" class="component">
+            <header>
+              <h2>Fab</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><button class="fab">+</button><button class="fab" disabled>+</button></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;button class=&quot;fab&quot;&gt;+&lt;/button&gt;&lt;button class=&quot;fab&quot; disabled&gt;+&lt;/button&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="fab-mini" class="component">
+            <header>
+              <h2>Fab Mini</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><button class="fab fab--mini">+</button><button class="fab fab--mini" disabled>+</button></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;button class=&quot;fab fab--mini&quot;&gt;+&lt;/button&gt;&lt;button class=&quot;fab fab--mini&quot; disabled&gt;+&lt;/button&gt;</code></pre>
                 </div>
               </section>
             </footer>

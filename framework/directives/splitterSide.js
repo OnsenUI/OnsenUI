@@ -100,6 +100,7 @@
 /**
  * @ngdoc attribute
  * @name animation
+ * @initonly
  * @type {String}
  * @description
  *  [en]Specify the animation. Use one of "overlay", and "default".[/en]
@@ -127,6 +128,8 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
@@ -136,6 +139,8 @@
 /**
  * @ngdoc attribute
  * @name ons-preopen
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preopen" event is fired.[/en]
@@ -145,6 +150,8 @@
 /**
  * @ngdoc attribute
  * @name ons-preclose
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preclose" event is fired.[/en]
@@ -154,6 +161,8 @@
 /**
  * @ngdoc attribute
  * @name ons-postopen
+ * @extensionOf angular
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postopen" event is fired.[/en]
@@ -163,6 +172,8 @@
 /**
  * @ngdoc attribute
  * @name ons-postclose
+ * @extensionOf angular
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postclose" event is fired.[/en]
@@ -227,6 +238,7 @@
 /**
  * @ngdoc attribute
  * @name page
+ * @initonly
  * @type {String}
  * @description
  *   [en]The url of the menu page.[/en]

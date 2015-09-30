@@ -18,8 +18,12 @@ componentCategory: dialog
 
   <h2>ons.notification</h2>
 
+  
+
   <section class="reference-description">
     <p>いくつかの種類のアラートダイアログを作成するためのユーティリティメソッドを収めたオブジェクトです。</p>
+    
+
   </section>
 
   <ul class="reference-quick-navi">
@@ -112,7 +116,11 @@ componentCategory: dialog
     ユーザーへメッセージを見せるためのアラートダイアログを表示します。
     表示するメッセージは、テキストかもしくはHTMLを指定できます。
     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
-  </td>
+  
+            
+
+            
+          </td>
         </tr>
         
         <tr>
@@ -121,7 +129,11 @@ componentCategory: dialog
     ユーザに確認を促すダイアログを表示します。
     デオルとのボタンラベルは、"Cancel"と"OK"ですが、これはこのメソッドの引数でカスタマイズできます。
     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
-  </td>
+  
+            
+
+            
+          </td>
         </tr>
         
         <tr>
@@ -129,7 +141,11 @@ componentCategory: dialog
           <td>
     ユーザーに入力を促すダイアログを表示します。
     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
-  </td>
+  
+            
+
+            
+          </td>
         </tr>
         
       </tbody>
@@ -158,6 +174,10 @@ componentCategory: dialog
     表示するメッセージは、テキストかもしくはHTMLを指定できます。
     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
   </p>
+
+    
+
+    
 
     
 
@@ -244,6 +264,10 @@ componentCategory: dialog
     デオルとのボタンラベルは、"Cancel"と"OK"ですが、これはこのメソッドの引数でカスタマイズできます。
     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
   </p>
+
+    
+
+    
 
     
 
@@ -349,6 +373,10 @@ componentCategory: dialog
     
 
     
+
+    
+
+    
     <!-- method parameter -->
     <h5>パラメーター</h5>
 
@@ -413,6 +441,24 @@ componentCategory: dialog
         </tr>
         
         <tr>
+          <td><span class="parameter-name">options.placeholder</span></td>
+          <td class="value-type">String</td>
+          <td>テキスト欄のプレースホルダに表示するテキストを指定します。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.defaultValue</span></td>
+          <td class="value-type">String</td>
+          <td>テキスト欄のデフォルトの値を指定します。</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.autofocus</span></td>
+          <td class="value-type">Boolean</td>
+          <td>input要素に自動的にフォーカスするかどうかを指定します。デフォルトはtrueです。</td>
+        </tr>
+        
+        <tr>
           <td><span class="parameter-name">options.modifier</span></td>
           <td class="value-type">String</td>
           <td>ダイアログのmodifier属性の値を指定します。</td>
@@ -430,7 +476,7 @@ componentCategory: dialog
         <tr>
           <td><span class="parameter-name">options.submitOnEnter</span></td>
           <td class="value-type">Boolean</td>
-          <td></td>
+          <td>Enterが押された際にそのformをsubmitするかどうかを指定します。デフォルトはtrueです。</td>
         </tr>
         
       </tbody>

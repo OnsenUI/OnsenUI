@@ -31,6 +31,7 @@
 /**
  * @ngdoc attribute
  * @name inline
+ * @initonly
  * @description
  *   [en]Display the toolbar as an inline element.[/en]
  *   [ja]この属性があると、ツールバーを画面下部ではなくスクロール領域内にそのまま表示します。[/ja]
