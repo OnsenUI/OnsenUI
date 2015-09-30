@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>Material Input | Onsen UI</title>
+  <link rel="stylesheet" href="../styles/app.css"/>
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
+
+  <script src="../../build/js/ons-core.js"></script>
+
+  <style type="text/css">
+    .page__content {
+      padding-left: 10px;
+      font-family: 'Roboto', 'Noto', sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  
+  <ons-page>
+    <ons-toolbar modifier="material">
+      <div class="center">Material Input</div>
+    </ons-toolbar>
+
+    <h3>Normal input</h3>
+
+    <p>
+      <ons-material-input label="Username"></ons-material-input>
+      <ons-material-input type="password" label="Password"></ons-material-input>
+    </p>
+
+    <h3>Without floating label</h3>
+
+    <p>
+      <ons-material-input type="password" label="password" no-float></ons-material-input>
+    </p>
+
+    <h3>Other types</h3>
+    <p>
+      Number: 
+      <ons-material-input type="number" min="0" max="100"></ons-material-input>
+    </p>
+  </ons-page>
+
+</body>
+</html>
