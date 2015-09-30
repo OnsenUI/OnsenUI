@@ -24,7 +24,7 @@ limitations under the License.
   const SimpleSlideNavigatorTransitionAnimator = ons._internal.SimpleSlideNavigatorTransitionAnimator;
   const LiftNavigatorTransitionAnimator = ons._internal.LiftNavigatorTransitionAnimator;
   const FadeNavigatorTransitionAnimator = ons._internal.FadeNavigatorTransitionAnimator;
-  const NullNavigatorTransitionAnimator = ons._internal.NullNavigatorTransitionAnimator;
+  const NoneNavigatorTransitionAnimator = ons._internal.NoneNavigatorTransitionAnimator;
   const util = ons._util;
   const AsyncHook = ons._internal.AsyncHook;
   const NavigatorPage = ons._internal.NavigatorPage;
@@ -46,8 +46,7 @@ limitations under the License.
         animators: window.OnsNavigatorElement._transitionAnimatorDict,
         baseClass: NavigatorTransitionAnimator,
         baseClassName: 'NavigatorTransitionAnimator',
-        defaultAnimation: this.getAttribute('animation'),
-        defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options')) || {}
+        defaultAnimation: this.getAttribute('animation')
       });
     }
 
@@ -96,6 +95,11 @@ limitations under the License.
         return;
       }
 
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
+
       this._doorLock.waitUnlock(() => {
         if (this._pages.length <= 1) {
           throw new Error('ons-navigator\'s page stack is empty.');
@@ -133,17 +137,23 @@ limitations under the License.
           this._popPage(options, unlock);
         }
 
-      }.bind(this));
+      });
     }
 
     _popPage(options, unlock) {
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
+
       const leavePage = this._pages.pop();
-
-      if (this._pages[this._pages.length - 1]) {
-        this._pages[this._pages.length - 1].element.style.display = 'block';
-      }
-
       const enterPage = this._pages[this._pages.length - 1];
+
+      leavePage.element._hide();
+      if (enterPage) {
+        enterPage.element.style.display = 'block';
+        enterPage.element._show();
+      }
 
       // for "postpop" event
       const eventDetail = {
@@ -158,12 +168,7 @@ limitations under the License.
         this._isPopping = false;
         unlock();
 
-        const event = new CustomEvent('postpop', {
-          bubbles: true,
-          detail: eventDetail
-        });
-        this.dispatchEvent(event);
-
+        const event = util.triggerElementEvent(this, 'postpop', eventDetail);
         event.leavePage = null;
 
         if (typeof options.onTransitionEnd === 'function') {
@@ -195,14 +200,7 @@ limitations under the License.
         throw new Error('options must be an object. You supplied ' + options);
       }
 
-      const normalizeIndex = index => {
-        if (index < 0) {
-          index = Math.abs(this.pages.length + index) % this.pages.length;
-        }
-        return index;
-      };
-
-      index = normalizeIndex(index);
+      index = this._normalizeIndex(index);
 
       if (index >= this.pages.length) {
         return this.pushPage.apply(this, [].slice.call(arguments, 1));
@@ -232,6 +230,13 @@ limitations under the License.
       });
     }
 
+    _normalizeIndex(index) {
+      if (index < 0) {
+        index = Math.abs(this.pages.length + index) % this.pages.length;
+      }
+      return index;
+    }
+
     /**
      * Get current page's navigator item.
      *
@@ -247,11 +252,23 @@ limitations under the License.
       return this._pages[this._pages.length - 1];
     }
 
-    _destroy() {
-      this._pages.forEach(function(page) {
-        page.destroy();
-      });
+    _show() {
+      if (this._pages[this._pages.length - 1]) {
+        this._pages[this._pages.length - 1].element._show();
+      }
+    }
 
+    _hide() {
+      if (this._pages[this._pages.length - 1]) {
+        this._pages[this._pages.length - 1].element._hide();
+      }
+    }
+
+    _destroy() {
+      for (let i = this._pages.length - 1; i >= 0; i--) {
+        this._pages[i].destroy();
+      }
+      this.remove();
     }
 
     get pages() {
@@ -305,10 +322,9 @@ limitations under the License.
           this._compilePageHook.freeze();
 
           if (!this.getAttribute('page')) {
-            const html = (this._initialHTML || '').match(/^\s*<ons-page/) ? this._initialHTML : '<ons-page>' + this._initialHTML + '</ons-page>';
-            const element = this._createPageElement(html);
+            const element = this._createPageElement(this._initialHTML || '');
 
-            this._pushPageDOM('', element, {}, function() {});
+            this._pushPageDOM(this._createPageObject('', element, {}), function() {});
           } else {
             this.pushPage(this.getAttribute('page'), {animation: 'none'});
           }
@@ -336,6 +352,11 @@ limitations under the License.
     pushPage(page, options) {
       options = options || {};
 
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
+
       if (options.cancelIfRunning && this._isPushing) {
         return;
       }
@@ -358,22 +379,20 @@ limitations under the License.
       };
 
       ons._internal.getPageHTMLAsync(page).then(templateHTML => {
-        this._pushPageDOM(page, this._createPageElement(templateHTML), options, done);
+        const element = this._createPageElement(templateHTML);
+        this._pushPageDOM(this._createPageObject(page, element, options), done);
       });
     }
 
     /**
-     * @param {String} page Page name.
-     * @param {Object} element
-     * @param {Object} options
+     * @param {Object} pageObject
      * @param {Function} [unlock]
      */
-    _pushPageDOM(page, element, options, unlock) {
-
+   _pushPageDOM(pageObject, unlock) {
       unlock = unlock || function() {};
-      options = options || {};
 
-      const pageObject = this._createPageObject(page, element, options);
+      let element = pageObject.element;
+      let options = pageObject.options;
 
       // for "postpush" event
       const eventDetail = {
@@ -384,7 +403,7 @@ limitations under the License.
 
       this._pages.push(pageObject);
 
-      const done = function() {
+      const done = () => {
         if (this._pages[this._pages.length - 2]) {
           this._pages[this._pages.length - 2].element.style.display = 'none';
         }
@@ -392,18 +411,13 @@ limitations under the License.
         this._isPushing = false;
         unlock();
 
-        const event = new CustomEvent('postpush', {
-          bubbles: true,
-          detail: eventDetail
-        });
-        this.dispatchEvent(event);
-
+        util.triggerElementEvent(this, 'postpush', eventDetail);
 
         if (typeof options.onTransitionEnd === 'function') {
           options.onTransitionEnd();
         }
         element = null;
-      }.bind(this);
+      };
 
       this._isPushing = true;
 
@@ -415,9 +429,14 @@ limitations under the License.
               const enterPage = this._pages.slice(-1)[0];
 
               this.appendChild(element);
+              leavePage.element._hide();
+              enterPage.element._show();
+
               options.animator.push(enterPage, leavePage, done);
             } else {
               this.appendChild(element);
+              element._show();
+
               done();
             }
           }, 1000 / 60);
@@ -426,22 +445,94 @@ limitations under the License.
     }
 
     /**
+     * Brings the given pageUrl or index to the top of the page stack
+     * if already exists or pushes the page into the stack if doesn't.
+     * If options object is specified, apply the options.
+     *
+     * @param {String|Number} item Page name or valid index.
+     * @param {Object} options
+     */
+    bringPageTop(item, options) {
+      options = options || {};
+
+      if (options && typeof options != 'object') {
+        throw new Error('options must be an object. You supplied ' + options);
+      }
+
+      if (options.cancelIfRunning && this._isPushing) {
+        return;
+      }
+
+      if (this._emitPrePushEvent()) {
+        return;
+      }
+
+
+      let index, page;
+      if (typeof item === 'string') {
+        page = item;
+        index = this._lastIndexOfPage(page);
+      } else if (typeof item === 'number') {
+        index = this._normalizeIndex(item);
+        if (item >= this._pages.length) {
+          throw new Error('The provided index does not match an existing page.');
+        }
+        page = this._pages[index].page;
+      } else {
+        throw new Error('First argument must be a page name or the index of an existing page. You supplied ' + item);
+      }
+
+
+      if (index < 0) {
+        // Fallback pushPage
+        this._doorLock.waitUnlock(() => this._pushPage(page, options));
+      } else if (index < this._pages.length - 1) { // Skip when page is already the top
+        // Bring to top
+        this._doorLock.waitUnlock(() => {
+          const unlock = this._doorLock.lock();
+          const done = function() {
+            unlock();
+          };
+
+          let pageObject = this._pages.splice(index, 1)[0];
+          pageObject.element.style.display = 'block';
+          pageObject.element.setAttribute('_skipinit', '');
+          options.animator = this._animatorFactory.newAnimator(options);
+          pageObject.options = options;
+
+          this._pushPageDOM(pageObject, done);
+        });
+      }
+    }
+
+    /**
+     * @param {String} page
+     * @return {Number} Returns the last index at which the given page
+     * is found in the page-stack, or -1 if it is not present.
+     */
+    _lastIndexOfPage(page) {
+      let index;
+      for (index = this._pages.length - 1; index >= 0; index--) {
+        if (this._pages[index].page === page) {
+          break;
+        }
+      }
+      return index;
+    }
+
+    /**
      * @return {Boolean} Whether if event is canceled.
      */
     _emitPrePushEvent() {
       let isCanceled = false;
-      const event = new CustomEvent('prepush', {
-        bubbles: true,
-        detail: {
-          navigator: this,
-          currentPage: this._pages.length > 0 ? this.getCurrentPage() : undefined,
-          cancel: function() {
-            isCanceled = true;
-          }
+
+      util.triggerElementEvent(this, 'prepush', {
+        navigator: this,
+        currentPage: this._pages.length > 0 ? this.getCurrentPage() : undefined,
+        cancel: function() {
+          isCanceled = true;
         }
       });
-
-      this.dispatchEvent(event);
 
       return isCanceled;
     }
@@ -453,20 +544,16 @@ limitations under the License.
       let isCanceled = false;
 
       const leavePage = this.getCurrentPage();
-      const event = new CustomEvent('prepop', {
-        bubbles: true,
-        detail: {
-          navigator: this,
-          // TODO: currentPage will be deprecated
-          currentPage: leavePage,
-          leavePage: leavePage,
-          enterPage: this._pages[this._pages.length - 2],
-          cancel: function() {
-            isCanceled = true;
-          }
+      util.triggerElementEvent(this, 'prepop', {
+        navigator: this,
+        // TODO: currentPage will be deprecated
+        currentPage: leavePage,
+        leavePage: leavePage,
+        enterPage: this._pages[this._pages.length - 2],
+        cancel: function() {
+          isCanceled = true;
         }
       });
-      this.dispatchEvent(event);
 
       return isCanceled;
     }
@@ -477,6 +564,7 @@ limitations under the License.
      * @param {Object} options
      */
     _createPageObject(page, element, options) {
+
       options.animator = this._animatorFactory.newAnimator(options);
 
       return new NavigatorPage({
@@ -488,7 +576,7 @@ limitations under the License.
     }
 
     _createPageElement(templateHTML) {
-      const pageElement = util.createElement(ons._internal.normalizePageHTML('' + templateHTML));
+      const pageElement = util.createElement(ons._internal.normalizePageHTML(templateHTML));
 
       if (pageElement.nodeName.toLowerCase() !== 'ons-page') {
         throw new Error('You must supply an "ons-page" element to "ons-navigator".');
@@ -510,7 +598,7 @@ limitations under the License.
       'simpleslide': SimpleSlideNavigatorTransitionAnimator,
       'lift': LiftNavigatorTransitionAnimator,
       'fade': FadeNavigatorTransitionAnimator,
-      'none': NullNavigatorTransitionAnimator
+      'none': NoneNavigatorTransitionAnimator
     };
 
     /**

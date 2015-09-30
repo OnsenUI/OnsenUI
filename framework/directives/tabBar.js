@@ -111,6 +111,8 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
+ * @extensionOf angular
  * @type {String}
  * @description
  *   [en]Variable name to refer this tab bar.[/en]
@@ -120,6 +122,8 @@
 /**
  * @ngdoc attribute
  * @name hide-tabs
+ * @initonly
+ * @extensionOf angular
  * @type {Boolean}
  * @default false
  * @description
@@ -149,6 +153,7 @@
 /**
  * @ngdoc attribute
  * @name position
+ * @initonly
  * @type {String}
  * @default bottom
  * @description
@@ -159,6 +164,8 @@
 /**
  * @ngdoc attribute
  * @name ons-reactive
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "reactive" event is fired.[/en]
@@ -168,6 +175,8 @@
 /**
  * @ngdoc attribute
  * @name ons-prechange
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prechange" event is fired.[/en]
@@ -177,6 +186,8 @@
 /**
  * @ngdoc attribute
  * @name ons-postchange
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
@@ -185,11 +196,46 @@
 
 /**
  * @ngdoc attribute
- * @name ons-destroy
+ * @name ons-init
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
- *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
- *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ *  [en]Allows you to specify custom behavior when a page's "init" event is fired.[/en]
+ *  [ja]ページの"init"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-show
+ * @initonly
+ * @extensionOf angular
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when a page's "show" event is fired.[/en]
+ *  [ja]ページの"show"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-hide
+ * @initonly
+ * @extensionOf angular
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when a page's "hide" event is fired.[/en]
+ *  [ja]ページの"hide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @initonly
+ * @extensionOf angular
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when a page's "destroy" event is fired.[/en]
+ *  [ja]ページの"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -243,6 +289,7 @@
 /**
  * @ngdoc method
  * @signature on(eventName, listener)
+ * @extensionOf angular
  * @description
  *   [en]Add an event listener.[/en]
  *   [ja]イベントリスナーを追加します。[/ja]
@@ -257,6 +304,7 @@
 /**
  * @ngdoc method
  * @signature once(eventName, listener)
+ * @extensionOf angular
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
  *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
@@ -271,6 +319,7 @@
 /**
  * @ngdoc method
  * @signature off(eventName, [listener])
+ * @extensionOf angular
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
  *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
@@ -320,7 +369,7 @@
         var tabbarView = new TabbarView(scope, element, attrs);
         $onsen.addModifierMethodsForCustomElements(tabbarView, element);
 
-        $onsen.registerEventHandlers(tabbarView, 'reactive prechange postchange destroy');
+        $onsen.registerEventHandlers(tabbarView, 'reactive prechange postchange init show hide destroy');
 
         element.data('ons-tabbar', tabbarView);
         $onsen.declareVarAttribute(attrs, tabbarView);

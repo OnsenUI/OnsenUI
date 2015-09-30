@@ -32,8 +32,27 @@ v2.0.0-dev
  * ons-modal: Added `isShown()` method.
  * ons-navigator: Fixed `insertPage()` behaviour with high or low indexes.
  * ons-tabbar: Fixed callback in `setActiveTab()` method.
+ * ons-tabbar: persistent tabs only throw 'init' event once.
+ * core: every child element will be wrapped inside an ons-page.
+ * ons-page: added page lifecycle events API
+ * ons-splitter: Added `ons-splitter`, `ons-splitter-side`, `ons-splitter-content` and `ons-splitter-mask` custom elements.
  * ons-fab: Implemented 'fab' component.
  * core: Added page attribute expressions.
+ * ons.notification: Added `defaultValue`, `placeholder` and `autofocus` options to prompt.
+ * ons-popover: Fixed [#880](https://github.com/OnsenUI/OnsenUI/issues/880).
+ * ons-sliding-menu: Fixed [#879](https://github.com/OnsenUI/OnsenUI/issues/879)
+ * ons-navigator: Added `bringPageTop()` method.
+ * ons-carousel: Added `getCarouselItemCount()` method.
+ * ons-carousel: Fixed [#929](https://github.com/OnsenUI/OnsenUI/issues/929)
+
+v1.3.11
+----
+* ons-tabbar: Remove flickering when navigator is a child of tabbar.
+* ons-dialog: Fixed broken `mask-color` attribute.
+
+v1.3.10
+----
+* ons-tabbar: Fixed [#891](https://github.com/OnsenUI/OnsenUI/issues/891).
 
 v1.3.9
 ----

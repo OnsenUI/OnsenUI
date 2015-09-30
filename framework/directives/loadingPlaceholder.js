@@ -16,6 +16,7 @@
 /**
  * @ngdoc attribute
  * @name ons-loading-placeholder
+ * @initonly
  * @type {String}
  * @description
  *   [en]The url of the page to load.[/en]

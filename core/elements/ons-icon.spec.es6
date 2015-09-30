@@ -15,6 +15,14 @@ describe('OnsIconElement', () => {
     element.setAttribute('icon', 'i-dont-exist');
     expect(element.classList.contains('i-dont-exist')).not.to.be.true;
     expect(element.classList.contains('fa-twitter')).not.to.be.true;
+
+    element.setAttribute('icon', 'md-face');
+    expect(element.classList.contains('zmdi-face')).to.be.true;
+    expect(element.classList.contains('zmdi')).to.be.true;
+
+    element.setAttribute('icon', 'ion-navicon');
+    expect(element.classList.contains('zmdi-face')).not.to.be.true;
+    expect(element.classList.contains('zmdi')).not.to.be.true;
   });
 
   it('provides \'size\' attribute', () => {

@@ -27,6 +27,13 @@ describe('OnsPageElement', () => {
       expect(element.parentNode).to.be.ok;
       return expect(initPromise).to.eventually.be.fulfilled;
     });
+
+    it('consumes _skipinit attribute if present', () => {
+      element.setAttribute('_skipinit', '');
+      expect(element.hasAttribute('_skipinit')).to.be.true;
+      document.body.appendChild(element);
+      expect(element.hasAttribute('_skipinit')).to.be.false;
+    });
   });
 
   describe('#detachedCallback', () => {
@@ -162,6 +169,25 @@ describe('OnsPageElement', () => {
     it('triggers \'onModifierChanged()\' method', () => {
       var spy = chai.spy.on(ons._internal.ModifierUtil, 'onModifierChanged');
       element.attributeChangedCallback('modifier', 'fuga', 'piyo');
+      expect(spy).to.have.been.called.once;
+    });
+  });
+
+  describe('#_show()', () => {
+    it('fires \'show\' event', () => {
+      var spy = chai.spy();
+      document.addEventListener('show', spy);
+      document.body.appendChild(element);
+      expect(spy).to.have.been.called.once;
+    });
+  });
+
+  describe('#_hide()', () => {
+    it('fires \'hide\' event', () => {
+      var spy = chai.spy();
+      document.addEventListener('hide', spy);
+      document.body.appendChild(element);
+      element._hide();
       expect(spy).to.have.been.called.once;
     });
   });

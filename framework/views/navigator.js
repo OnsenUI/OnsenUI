@@ -68,7 +68,7 @@ limitations under the License.
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
-        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['prepush', 'postpush', 'prepop', 'postpop'], function(detail) {
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['prepush', 'postpush', 'prepop', 'postpop', 'init', 'show', 'hide', 'destroy'], function(detail) {
           if (detail.navigator) {
             detail.navigator = this;
           }
@@ -122,6 +122,10 @@ limitations under the License.
 
       pushPage: function(page, options) {
         return this._element[0].pushPage(page, options);
+      },
+
+      bringPageTop: function(item, options) {
+        return this._element[0].bringPageTop(item, options);
       },
 
       getDeviceBackButtonHandler: function() {

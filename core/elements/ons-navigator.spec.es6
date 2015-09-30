@@ -2,8 +2,8 @@ describe('OnsNavigatorElement', () => {
   let nav;
 
   beforeEach(() => {
-    let tpl1 = ons._util.createElement(`<ons-template id="hoge">hoge</ons-template>`),
-      tpl2 = ons._util.createElement(`<ons-template id="fuga">fuga</ons-template>`);
+    let tpl1 = ons._util.createElement(`<ons-template id="hoge"><ons-page>hoge</ons-page></ons-template>`),
+      tpl2 = ons._util.createElement(`<ons-template id="fuga"><ons-page>fuga</ons-page></ons-template>`);
     document.body.appendChild(tpl1);
     document.body.appendChild(tpl2);
     nav = new OnsNavigatorElement();
@@ -108,6 +108,121 @@ describe('OnsNavigatorElement', () => {
       nav.pushPage('hoge');
 
       return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it('emits \'hide\' event', (done) => {
+      let promise = new Promise((resolve) => {
+        nav.addEventListener('hide', (event) => { resolve(event); });
+      });
+
+      nav.pushPage('hoge', {
+        onTransitionEnd: () => nav.popPage({
+          onTransitionEnd: () => done()
+        })
+      });
+
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+  });
+
+  describe('#bringPageTop()', () => {
+    it('fallback to pushPage if the given page does not exist', () => {
+      let spy = chai.spy.on(nav, '_pushPage');
+      nav.bringPageTop('hoge');
+      expect(spy).to.have.been.called.once;
+    });
+
+    it('does nothing when the page is already on top', (done) => {
+      nav.bringPageTop('hoge', {
+        onTransitionEnd: () => {
+          let spy = chai.spy.on(nav._doorLock, 'waitUnlock');
+          nav.bringPageTop('hoge');
+          expect(spy).not.to.have.been.called();
+          done();
+        }
+      });
+    });
+
+    it('brings the given pageUrl to the top', (done) => {
+      nav.bringPageTop('hoge', {
+        onTransitionEnd: () => {
+          expect(nav.pages.length).to.equal(2);
+          expect(nav.getCurrentPage().name).to.equal('hoge');
+          nav.bringPageTop('fuga', {
+            onTransitionEnd: () => {
+              expect(nav.pages.length).to.equal(3);
+              expect(nav.getCurrentPage().name).to.equal('fuga');
+              nav.bringPageTop('hoge', {
+                onTransitionEnd: () => {
+                  expect(nav.pages.length).to.equal(3);
+                  expect(nav.getCurrentPage().name).to.equal('hoge');
+                  expect(nav.pages[nav.pages.length - 2].name).to.equal('fuga');
+                  done();
+                }
+              });
+            }
+          });
+        }
+      });
+    });
+
+    it('brings the given page index to the top', (done) => {
+      nav.bringPageTop('hoge', {
+        onTransitionEnd: () => {
+          expect(nav.pages.length).to.equal(2);
+          expect(nav.getCurrentPage().name).to.equal('hoge');
+          nav.bringPageTop('fuga', {
+            onTransitionEnd: () => {
+              expect(nav.pages.length).to.equal(3);
+              expect(nav.getCurrentPage().name).to.equal('fuga');
+              nav.bringPageTop(1, {
+                onTransitionEnd: () => {
+                  expect(nav.pages.length).to.equal(3);
+                  expect(nav.getCurrentPage().name).to.equal('hoge');
+                  expect(nav.pages[nav.pages.length - 2].name).to.equal('fuga');
+                  done();
+                }
+              });
+            }
+          });
+        }
+      });
+    });
+
+    it('only accepts string or number as first parameter', () => {
+      expect(() => nav.bringPageTop([])).to.throw(Error);
+    });
+
+    it('throws error if the given index is not valid', () => {
+      expect(() => nav.bringPageTop(20)).to.throw(Error);
+    });
+
+    it('only accepts object options', () => {
+      expect(() => nav.bringPageTop('hoge', 'string')).to.throw(Error);
+    });
+
+    it('is canceled if already performing another bringPageTop', () => {
+      let spy = chai.spy.on(nav, '_pushPage');
+      nav.bringPageTop('hoge', {});
+      nav.bringPageTop('fuga', {'cancelIfRunning': true});
+      expect(spy).to.have.been.called.once;
+    });
+
+    it('should be possible to cancel the \'prepush\' event', (done) => {
+      expect(nav.pages.length).to.equal(1);
+
+      nav.bringPageTop('hoge', {onTransitionEnd: () => {
+        expect(nav.pages.length).to.equal(2);
+
+        nav.addEventListener('prepush', (event) => {
+          event.detail.cancel();
+        });
+
+        nav.bringPageTop('fuga');
+        expect(nav.pages.length).to.equal(2);
+
+        done();
+      }});
     });
   });
 
@@ -260,6 +375,20 @@ describe('OnsNavigatorElement', () => {
 
       return expect(promise).to.eventually.be.fulfilled;
     });
+
+    it('emits \'show\' event', (done) => {
+      let promise = new Promise((resolve) => {
+        nav.addEventListener('show', (event) => { resolve(event); });
+      });
+
+      nav.pushPage('hoge', {
+        onTransitionEnd: () => nav.popPage({
+          onTransitionEnd: () => done()
+        })
+      });
+
+      return expect(promise).to.eventually.be.fulfilled;
+    });
   });
 
   describe('#replacePage()', () => {
@@ -285,14 +414,16 @@ describe('OnsNavigatorElement', () => {
 
   describe('#replaceToPage()', () => {
     it('replaces all the page stack with only a new page', (done) => {
-      nav.resetToPage('hoge', {
-        onTransitionEnd: () => {
-          expect(nav.pages.length).to.equal(1);
-          let content = nav.getCurrentPage().element._getContentElement();
-          expect(content.innerHTML).to.equal('hoge');
-          done();
-        }
-      });
+      nav.pushPage('fuga', {onTransitionEnd: () => {
+        nav.resetToPage('hoge', {
+          onTransitionEnd: () => {
+            expect(nav.pages.length).to.equal(1);
+            let content = nav.getCurrentPage().element._getContentElement();
+            expect(content.innerHTML).to.equal('hoge');
+            done();
+          }
+        });
+      }});
     });
   });
 
@@ -355,6 +486,48 @@ describe('OnsNavigatorElement', () => {
       var spy = chai.spy.on(event, 'callParentHandler');
       nav._onDeviceBackButton(event);
       expect(spy).to.have.been.called.once;
+    });
+  });
+
+  describe('propagate API', () => {
+
+    it('fires \'show\' event', () => {
+      let promise = new Promise((resolve) => {
+        nav.addEventListener('show', (event) => resolve());
+      });
+
+      nav.pushPage('hoge', {
+        onTransitionEnd: () => {
+          nav._hide();
+          nav._show();
+        }
+      });
+
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it('fires \'hide\' event', () => {
+      let promise = new Promise((resolve) => {
+        nav.addEventListener('hide', () => resolve());
+      });
+
+      nav.pushPage('hoge', {
+        onTransitionEnd: () => nav._hide()
+      });
+
+      return expect(promise).to.eventually.be.fulfilled;
+    });
+
+    it('fires \'destroy\' event', () => {
+      let promise = new Promise((resolve) => {
+        nav.addEventListener('destroy', () => resolve());
+      });
+
+      nav.pushPage('hoge', {
+        onTransitionEnd: () => nav._destroy()
+      });
+
+      return expect(promise).to.eventually.be.fulfilled;
     });
   });
 

@@ -81,8 +81,7 @@ limitations under the License.
         animators: window.OnsPopoverElement._animatorDict,
         baseClass: PopoverAnimator,
         baseClassName: 'PopoverAnimator',
-        defaultAnimation: this.getAttribute('animation') || 'fade',
-        defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options'))
+        defaultAnimation: this.getAttribute('animation') || 'fade'
       });
     }
 
@@ -275,17 +274,18 @@ limitations under the License.
         throw new Error(`Animator ${options.animation} is not registered.`);
       }
 
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
+
       let canceled = false;
-      const event = new CustomEvent('preshow', {
-        bubbles: true,
-        detail: {
-          popover: this,
-          cancel: function() {
-            canceled = true;
-          }
+      util.triggerElementEvent(this, 'preshow', {
+        popover: this,
+        cancel: function() {
+          canceled = true;
         }
       });
-      this.dispatchEvent(event);
 
       if (!canceled) {
         this._doorLock.waitUnlock(() => {
@@ -301,11 +301,7 @@ limitations under the License.
             this._visible = true;
             unlock();
 
-            const event = new CustomEvent('postshow', {
-              bubbles: true,
-              detail: {popover: this}
-            });
-            this.dispatchEvent(event);
+            util.triggerElementEvent(this, 'postshow', {popover: this});
           });
         });
       }
@@ -322,16 +318,12 @@ limitations under the License.
       options = options || {};
 
       let canceled = false;
-      const event = new CustomEvent('prehide', {
-        bubbles: true,
-        detail: {
-          popover: this,
-          cancel: function() {
-            canceled = true;
-          }
+      util.triggerElementEvent(this, 'prehide', {
+        popover: this,
+        cancel: function() {
+          canceled = true;
         }
       });
-      this.dispatchEvent(event);
 
       if (!canceled) {
         this._doorLock.waitUnlock(() => {
@@ -342,11 +334,7 @@ limitations under the License.
             this.style.display = 'none';
             this._visible = false;
             unlock();
-            const event = new CustomEvent('posthide', {
-              bubbles: true,
-              detail: {popover: this}
-            });
-            this.dispatchEvent(event);
+            util.triggerElementEvent(this, 'posthide', {popover: this});
           });
         });
       }

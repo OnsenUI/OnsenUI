@@ -47,13 +47,13 @@ limitations under the License.
      * @param {Function} callback
      */
     push(enterPage, leavePage, callback) {
-      util.removeElement(this.backgroundMask);
+      this.backgroundMask.remove();
       leavePage.element.parentNode.insertBefore(this.backgroundMask, leavePage.element);
 
-      const maskClear = animit(this.bakckgroundMask)
+      const maskClear = animit(this.backgroundMask)
         .wait(0.6)
-        .queue(function(done) {
-          mask.remove();
+        .queue(done => {
+          this.backgroundMask.remove();
           done();
         });
 
@@ -110,15 +110,15 @@ limitations under the License.
      * @param {Function} callback
      */
     pop(enterPage, leavePage, callback) {
-      util.removeElement(this.backgroundMask);
+      this.backgroundMask.remove();
       enterPage.element.parentNode.insertBefore(this.backgroundMask, enterPage.element);
 
       animit.runAll(
 
         animit(this.backgroundMask)
           .wait(0.4)
-          .queue(function(done) {
-            mask.remove();
+          .queue(done => {
+            this.backgroundMask.remove();
             done();
           }),
 

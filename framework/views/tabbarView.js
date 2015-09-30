@@ -44,12 +44,11 @@ limitations under the License.
           this._boundLinkPage = element[0]._linkPageHook.add(this._linkPage.bind(this));
         }.bind(this));
 
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['reactive', 'postchange', 'prechange', 'init', 'show', 'hide', 'destroy']);
         this._boundOnPrechange = this._onPrechange.bind(this);
         this._boundOnPostchange = this._onPostchange.bind(this);
         this._element.on('prechange', this._boundOnPrechange);
         this._element.on('postchange', this._boundOnPostchange);
-
-        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['reactive', 'postchange', 'prechange']);
       },
 
       _compilePage: function(next, pageElement) {
@@ -126,6 +125,11 @@ limitations under the License.
         if (this._currentPageElement) {
           var oldPageElement = this._currentPageElement;
           var oldPageScope = this._currentPageScope;
+
+          options.animationOptions = angular.extend(
+            options.animationOptions || {},
+            AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+          );
 
           this._currentPageElement = element;
           this._currentPageScope = scope;
