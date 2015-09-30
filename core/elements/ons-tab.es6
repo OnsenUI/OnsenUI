@@ -188,7 +188,7 @@ limitations under the License.
      * @param {Function} callback
      */
     _createPageElement(page, callback) {
-      ons._internal.getPageHTMLAsync(page).then(html => {
+      ons._internal.tryGetPageHTMLSync(page, (html) => {
         callback(util.createElement(html.trim()));
       });
     }

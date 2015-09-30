@@ -135,6 +135,9 @@ limitations under the License.
               reject(html);
             }
             else {
+              if (!ons._internal.templateStore.get(page)) {
+                ons._internal.templateStore.set(page, html);
+              }
               resolve(html);
             }
           };
@@ -173,6 +176,50 @@ limitations under the License.
           }
         )
         .then(html => ons._internal.normalizePageHTML(html));
+    };
+
+    return getPage(pages.shift());
+  };
+
+  /**
+   * Try to get template from cache and invoke a callback
+   * immrdiately. If not, it invokes `getTemplateHTMLAsync`
+   * and invoke callback when template already loaded.
+   * @param {String} page
+   */
+  ons._internal.tryGetTemplateHTMLSync = function(page, callback) {
+    const cache = ons._internal.templateStore.get(page);
+
+    if (cache) {
+      const html = typeof cache === 'string' ? cache : cache[1];
+      callback(html);
+    } else {
+      ons._internal.getTemplateHTMLAsync(page).then(
+        callback,
+        (err) => callback(null, err)
+      );
+    }
+  };
+
+  /**
+   * @param {String} page
+   */
+  ons._internal.tryGetPageHTMLSync = function(page, callback) {
+    let pages = ons.pageAttributeExpression.evaluate(page);
+
+    let getPage = (page) => {
+      if (typeof page !== 'string') {
+        return Promise.reject('Must specify a page.');
+      }
+
+      ons._internal.tryGetTemplateHTMLSync(page, (html, err) => {
+        if (html) {
+          callback(ons._internal.normalizePageHTML(html));
+        } else if(err) {
+          callback(null, err);
+          getPage(pages.shift());
+        }
+      });
     };
 
     return getPage(pages.shift());

@@ -368,13 +368,20 @@ limitations under the License.
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
-        this._mainPage.append(pageContent);
-
         if (this._currentPageElement) {
-          this._currentPageElement.remove();
-          this._currentPageScope.$destroy();
+          pageContent.css('visibility', 'hidden');
+          setTimeout((function(oldElem, oldScope) {
+            pageContent.css('visibility', 'visible');
+            oldElem.remove();
+            oldScope.$destroy();
+          }).bind(
+            null,
+            this._currentPageElement,
+            this._currentPageScope
+          ), 1000 / 60);
         }
 
+        this._mainPage.append(pageContent);
         link(pageScope);
 
         this._currentPageElement = pageContent;
