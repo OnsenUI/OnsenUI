@@ -15,7 +15,8 @@ limitations under the License.
   'use strict';
 
   const scheme = {
-    'input': 'text-input--*'
+    '.text-input--material': 'text-input--material--*',
+    '.text-input--material__label': 'text-input--material__label--*'
   };
 
   const ModifierUtil = ons._internal.ModifierUtil;
@@ -149,6 +150,8 @@ limitations under the License.
 
     set value(val) {
       this._input.value = val;
+      this._onInput();
+
       return this._input.val;
     }
   }
