@@ -212,9 +212,13 @@ limitations under the License.
       if (event.type === 'dragstart') {
         this._onDragStart(event);
       } else if (event.type === 'dragleft' || event.type === 'dragright') {
-        this._onDrag(event);
+        if (!this._ignoreDrag) {
+          this._onDrag(event);
+        }
       } else if (event.type === 'dragend') {
-        this._onDragEnd(event);
+        if (!this._ignoreDrag) {
+          this._onDragEnd(event);
+        }
       } else {
         throw new Error('Invalid state');
       }
@@ -233,15 +237,9 @@ limitations under the License.
           this._ignoreDrag = true;
         }
       }
-
-      this._distance = this.isOpened() ? this._element._getWidthInPixel() : 0;
     }
 
     _onDrag(event) {
-      if (this._ignoreDrag) {
-        return;
-      }
-
       event.gesture.preventDefault();
 
       const deltaX = event.gesture.deltaX;
@@ -251,37 +249,34 @@ limitations under the License.
 
       if (!('isOpened' in startEvent)) {
         startEvent.isOpened = this.isOpened();
+        startEvent.distance = startEvent.isOpened ? this._element._getWidthInPixel() : 0;
+        startEvent.width = this._element._getWidthInPixel();
       }
 
-      const width = this._element._getWidthInPixel();
+      const width = startEvent.width;
 
-      if (deltaDistance < 0 && this._distance <= 0) {
+      if (deltaDistance < 0 && startEvent.distance <= 0) {
         return;
       }
 
-      if (deltaDistance > 0 && this._distance >= width) {
+      if (deltaDistance > 0 && startEvent.distance >= width) {
         return;
       }
 
       const distance = startEvent.isOpened ? deltaDistance + width : deltaDistance;
       const normalizedDistance = Math.max(0, Math.min(width, distance));
 
-      this._distance = normalizedDistance;
+      startEvent.distance = normalizedDistance;
 
       this._state = CollapseMode.CHANGING_STATE;
       this._animator.translate(normalizedDistance);
     }
 
     _onDragEnd(event) {
-      if (this._ignoreDrag) {
-        return;
-      }
-
       const deltaX = event.gesture.deltaX;
       const deltaDistance = this._element._isLeftSide() ? deltaX : -deltaX;
-      const width = this._element._getWidthInPixel();
+      const width = event.gesture.startEvent.width;
       const distance = event.gesture.startEvent.isOpened ? deltaDistance + width : deltaDistance;
-
       const direction = event.gesture.interimDirection;
       const shouldOpen =
         (this._element._isLeftSide() && direction === 'right' && distance > width * this._element._getThresholdRatioIfShouldOpen()) ||
@@ -292,8 +287,6 @@ limitations under the License.
       } else {
         this._closeMenu();
       }
-
-      this._distance = null;
     }
 
     layout() {
