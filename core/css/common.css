@@ -187,3 +187,7 @@ ons-material-input > .text-input--material__label.active {
 ons-material-input[no-float] .text-input--material__label.active {
   display: none;
 }
+
+ons-material-input[disabled] {
+  opacity: 0.5;
+}
