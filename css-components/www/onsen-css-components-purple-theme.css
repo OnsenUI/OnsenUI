@@ -3826,6 +3826,114 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   border-bottom: 1px solid #ddd;
 }
 /* topdoc
+  name: Material-like Input
+  class: text-input--material
+  markup:
+    <input class="text-input--material" placeholder="Username" type="text" required>
+    <input class="text-input--material" placeholder="Password" type="password" required>
+*/
+.text-input--material {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  vertical-align: top;
+  outline: none;
+  line-height: 1;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#ddd));
+  background-image: -webkit-linear-gradient(#ddd, #ddd);
+  background-image: -moz-linear-gradient(#ddd, #ddd);
+  background-image: -o-linear-gradient(#ddd, #ddd);
+  background-image: linear-gradient(#ddd, #ddd);
+  -webkit-background-size: 100% 2px;
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  padding-bottom: 2px;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+.text-input--material__label {
+  color: #8962ed;
+}
+.text-input--material:focus {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#8962ed), to(#8962ed)), -webkit-gradient(linear, left top, left bottom, from(#ddd), to(#ddd));
+  background-image: -webkit-linear-gradient(#8962ed, #8962ed), -webkit-linear-gradient(#ddd, #ddd);
+  background-image: -moz-linear-gradient(#8962ed, #8962ed), -moz-linear-gradient(#ddd, #ddd);
+  background-image: -o-linear-gradient(#8962ed, #8962ed), -o-linear-gradient(#ddd, #ddd);
+  background-image: linear-gradient(#8962ed, #8962ed), linear-gradient(#ddd, #ddd);
+  -webkit-animation: material-input-animate 0.3s forwards;
+  -moz-animation: material-input-animate 0.3s forwards;
+  -o-animation: material-input-animate 0.3s forwards;
+  animation: material-input-animate 0.3s forwards;
+  -webkit-background-size: 0% 2px;
+  background-size: 0% 2px;
+}
+.text-input--material::-webkit-input-placeholder {
+  color: #ccc;
+}
+.text-input--material::-moz-placeholder {
+  color: #ccc;
+}
+.text-input--material::-ms-input-placeholder {
+  color: #ccc;
+}
+@-moz-keyframes material-input-animate {
+  0% {
+    background-size: 0% 2px, 100% 2px;
+  }
+  100% {
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+@-webkit-keyframes material-input-animate {
+  0% {
+    -webkit-background-size: 0% 2px, 100% 2px;
+    background-size: 0% 2px, 100% 2px;
+  }
+  100% {
+    -webkit-background-size: 100% 2px, 100% 2px;
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+@-o-keyframes material-input-animate {
+  0% {
+    background-size: 0% 2px, 100% 2px;
+  }
+  100% {
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+@keyframes material-input-animate {
+  0% {
+    -webkit-background-size: 0% 2px, 100% 2px;
+    background-size: 0% 2px, 100% 2px;
+  }
+  100% {
+    -webkit-background-size: 100% 2px, 100% 2px;
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+/* topdoc
   name: Textarea
   class: textarea
   modifiers:
