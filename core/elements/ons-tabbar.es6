@@ -305,7 +305,7 @@ limitations under the License.
 
         if (selectedTab.isPersistent()) {
           const link = (element, callback) => {
-            window.OnsNavigatorElement.rewritables.link(this, element, callback);
+            window.OnsTabbarElement.rewritables.link(this, element, callback);
           };
           selectedTab._loadPageElement(pageElement => {
             this._loadPersistentPageDOM(pageElement, params);
@@ -444,7 +444,7 @@ limitations under the License.
        * @param {Function} callback
        */
       ready(tabbarElement, callback) {
-        setImmediate(callback);
+        callback();
       },
 
       /**
