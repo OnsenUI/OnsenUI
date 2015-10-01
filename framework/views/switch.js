@@ -18,7 +18,7 @@ limitations under the License.
 (function(){
   'use strict';
 
-  angular.module('onsen').factory('SwitchView', function($parse) {
+  angular.module('onsen').factory('SwitchView', function($parse, $onsen) {
 
     var SwitchView = Class.extend({
 
