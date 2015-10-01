@@ -66,7 +66,7 @@
         <ons-material-input ng-model="name" ng-change="doSomething()" label="Name"></ons-material-input>
       </p>
       <p>
-        Hello there, {{ name }}!
+        Hello there, {{ name || 'Stranger' }}!
       </p>
     </div>
   </ons-page>
