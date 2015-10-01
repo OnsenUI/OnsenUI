@@ -593,7 +593,7 @@ limitations under the License.
      * @param {Function} Animator
      */
     window.OnsNavigatorElement.registerAnimator = function(name, Animator) {
-      if (!(Animater.prototype instanceof NavigatorTransitionAnimator)) {
+      if (!(Animator.prototype instanceof NavigatorTransitionAnimator)) {
         throw new Error('"Animator" param must inherit NavigatorTransitionAnimator');
       }
 
