@@ -175,7 +175,7 @@ ons-material-input > .text-input--material__label {
   pointer-events: none;
 }
 
-ons-material-input > .text-input--material__label.active {
+ons-material-input > .text-input--material__label--active {
   transform: translate3d(0, -75%, 0) scale(0.75);
   -webkit-transform: translate3d(0, -75%, 0) scale(0.75);
   transform-origin: left top;
@@ -184,7 +184,7 @@ ons-material-input > .text-input--material__label.active {
   -webkit-transition: transform 0.1s ease-in, color 0.1s ease-in;
 }
 
-ons-material-input[no-float] .text-input--material__label.active {
+ons-material-input[no-float] > .text-input--material__label--active {
   display: none;
 }
 

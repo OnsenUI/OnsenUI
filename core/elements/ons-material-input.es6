@@ -119,10 +119,10 @@ limitations under the License.
 
     _onInput(event) {
       if (this.value === '') {
-        this._label.classList.remove('active');
+        this._label.classList.remove('text-input--material__label--active');
       }
       else {
-        this._label.classList.add('active');
+        this._label.classList.add('text-input--material__label--active');
       }
 
       this._updateLabelColor();
