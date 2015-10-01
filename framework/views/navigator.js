@@ -58,9 +58,6 @@ limitations under the License.
         this._attrs = attrs;
         this._previousPageScope = null;
 
-        this._element[0]._compilePageHook.add(this._compilePage.bind(this));
-        this._element[0]._linkPageHook.add(this._linkPage.bind(this));
-
         this._boundOnPrepop = this._onPrepop.bind(this);
         this._boundOnPostpop = this._onPostpop.bind(this);
         this._element.on('prepop', this._boundOnPrepop);
@@ -88,23 +85,13 @@ limitations under the License.
         this._previoousPageScope = null;
       },
 
-      _compilePage: function(next, pageElement) {
-        this._linkPage.link = $compile(pageElement);
-
-        next(pageElement);
-      },
-
-      _linkPage: function(next, pageElement) {
-        if (!this._linkPage.link) {
-          throw new Error('Invalid state');
-        }
-
+      _compileAndLink: function(pageElement, callback) {
+        var link = $compile(pageElement);
         var pageScope = this._createPageScope();
-        this._linkPage.link(pageScope);
-        this._linkPage.link = null;
+        link(pageScope);
 
         pageScope.$evalAsync(function() {
-          next(pageElement);
+          callback(pageElement);
         });
       },
 
