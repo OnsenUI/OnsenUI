@@ -5,7 +5,7 @@
  * @category form
  * @description
  *  [en]Material Design input component.[/en]
- *  [ja][/ja]
+ *  [ja]Material Designのinputコンポ―ネントです。[/ja]
  * @guide UsingFormComponents
  *   [en]Using form components[/en]
  *   [ja]フォームを使う[/ja]
@@ -22,7 +22,7 @@
  * @type {String}
  * @description
  *   [en]Text for animated floating label.[/en]
- *   [ja][/ja]
+ *   [ja]アニメーションさせるフローティングラベルのテキストを指定します。[/ja]
  */
 
 /**
@@ -30,7 +30,7 @@
  * @name no-float
  * @description
  *  [en]If this attribute is present, the label will not be animated.[/en]
- *  [ja][/ja]
+ *  [ja]この属性が設定された時、ラベルはアニメーションしないようになります。[/ja]
  */
 
 /**
@@ -39,7 +39,7 @@
  * @extensionOf angular
  * @description
  *   [en]Bind the value to a model. Works just like for normal input elements.[/en]
- *   [ja][/ja]
+ *   [ja]この要素の値をモデルに紐付けます。通常のinput要素の様に動作します。[/ja]
  */
 
 /**
@@ -48,7 +48,7 @@
  * @extensionOf angular
  * @description
  *   [en]Executes an expression when the value changes. Works just like for normal input elements.[/en]
- *   [ja][/ja]
+ *   [ja]値が変わった時にこの属性で指定したexpressionが実行されます。通常のinput要素の様に動作します。[/ja]
  */
 
 (function(){
