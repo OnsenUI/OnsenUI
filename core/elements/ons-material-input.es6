@@ -88,13 +88,17 @@ limitations under the License.
       this._input.removeEventListener('focusout', this._boundOnFocusout);
     }
 
-    _updateLabel() {
-      if (this.hasAttribute('label')) {
-        this._label.innerText = this.getAttribute('label');
+    _setLabel(value) {
+      if (typeof this._label.textContent !== 'undefined') {
+        this._label.textContent = value;
       }
       else {
-        this._label.innerText = '';
+        this._label.innerText = value;
       }
+    }
+
+    _updateLabel() {
+      this._setLabel(this.hasAttribute('label') ? this.getAttribute('label') : '');
     }
 
     _updateBoundAttributes() {
