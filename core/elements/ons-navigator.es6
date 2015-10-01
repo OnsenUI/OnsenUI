@@ -606,7 +606,7 @@ limitations under the License.
        * @param {Function} callback
        */
       ready(navigatorElement, callback) {
-        setImmediate(callback);
+        callback();
       },
 
       /**
