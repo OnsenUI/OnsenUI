@@ -296,17 +296,7 @@
   'use strict';
 
   var lastReady = window.OnsSplitterSideElement.rewritables.ready;
-  window.OnsSplitterSideElement.rewritables.ready = function(element, callback) {
-    if (angular.element(element).data('ons-splitter-side')) {
-      lastReady(element, callback);
-    } else {
-      var listen = function() {
-        lastReady(element, callback);
-        element.removeEventListener('ons-splitter-side:init', listen, false);
-      };
-      element.addEventListener('ons-splitter-side:init', listen, false);
-    }
-  };
+  window.OnsSplitterSideElement.rewritables.ready = ons._waitDiretiveInit('ons-splitter-side', lastReady);
 
   var lastLink = window.OnsSplitterSideElement.rewritables.link;
   window.OnsSplitterSideElement.rewritables.link = function(element, target, callback) {

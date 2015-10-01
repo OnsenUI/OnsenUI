@@ -395,6 +395,25 @@ limitations under the License.
     };
 
     /**
+     * @param {String} elementName
+     * @param {Function} lastReady
+     * @return {Function}
+     */
+    ons._waitDiretiveInit = function(elementName, lastReady) {
+      return function(element, callback) {
+        if (angular.element(element).data(elementName)) {
+          lastReady(element, callback);
+        } else {
+          var listen = function() {
+            lastReady(element, callback);
+            element.removeEventListener(elementName + ':init', listen, false);
+          };
+          element.addEventListener(elementName + ':init', listen, false);
+        }
+      };
+    };
+
+    /**
      * @param {String} page
      * @param {Object} [options]
      * @param {Object} [options.parentScope]
