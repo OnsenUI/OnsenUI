@@ -338,10 +338,10 @@
   window.OnsTabbarElement.rewritables.ready = ons._waitDiretiveInit('ons-tabbar', lastReady);
 
   var lastLink = window.OnsTabbarElement.rewritables.link;
-  window.OnsTabbarElement.rewritables.link = function(tabbarElement, element, callback) {
+  window.OnsTabbarElement.rewritables.link = function(tabbarElement, target, callback) {
     var view = angular.element(tabbarElement).data('ons-tabbar');
-    view._compileAndLink(element, function(element) {
-      lastLink(tabbarElement, element, callback);
+    view._compileAndLink(target, function(target) {
+      lastLink(tabbarElement, target, callback);
     });
   };
 

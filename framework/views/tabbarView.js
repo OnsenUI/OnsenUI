@@ -39,7 +39,17 @@ limitations under the License.
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
-        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['reactive', 'postchange', 'prechange', 'init', 'show', 'hide', 'destroy']);
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], [
+          'reactive', 'postchange', 'prechange', 'init', 'show', 'hide', 'destroy'
+        ]);
+
+        this._clearDerivingMethods = $onsen.deriveMethods(this, element[0], [
+          'setActiveTab',
+          'setTabbarVisibility',
+          'getActiveTabIndex',
+          'loadPage'
+        ]);
+
         this._boundOnPrechange = this._onPrechange.bind(this);
         this._boundOnPostchange = this._onPostchange.bind(this);
         this._element.on('prechange', this._boundOnPrechange);
@@ -66,133 +76,14 @@ limitations under the License.
         }
       },
 
-      setActiveTab: function(index, options) {
-        return this._element[0].setActiveTab(index, options);
-      },
-
-      setTabbarVisibility: function(visible) {
-        this._element[0].setTabbarVisibility(visible);
-      },
-
-      getActiveTabIndex: function() {
-        return this._element[0].getActiveTabIndex();
-      },
-
-      loadPage: function(page, options) {
-        return this._element[0]._loadPage(page, options);
-      },
-
-      /**
-       * @param {String} page
-       * @param {Object} [options]
-       * @param {Object} [options.animation]
-       */
-      _loadPage: function(page, options) {
-
-        $onsen.getPageHTMLAsync(page).then(function(html) {
-          var pageElement = angular.element(html.trim());
-
-          this._loadPageDOM(pageElement, options);
-
-        }.bind(this), function() {
-          throw new Error('Page is not found: ' + page);
-        });
-      },
-
-      /**
-       * @param {jqLite} element
-       * @param {Object} scope
-       * @param {Object} options
-       * @param {String} [options.animation]
-       * @param {Object} [options.animationOptions]
-       */
-      _switchPage: function(element, scope, options) {
-        if (this._currentPageElement) {
-          var oldPageElement = this._currentPageElement;
-          var oldPageScope = this._currentPageScope;
-
-          options.animationOptions = angular.extend(
-            options.animationOptions || {},
-            AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
-          );
-
-          this._currentPageElement = element;
-          this._currentPageScope = scope;
-
-          this._animationChooser.newAnimator(options).apply(element, oldPageElement, options.selectedTabIndex, options.previousTabIndex, function() {
-            if (options._removeElement) {
-              oldPageScope.$destroy();
-            }
-            else {
-              oldPageElement.css('display', 'none');
-            }
-
-            if (options.callback instanceof Function) {
-              options.callback();
-            }
-          });
-
-        } else {
-          this._currentPageElement = element;
-          this._currentPageScope = scope;
-
-          if (options.callback instanceof Function) {
-            options.callback();
-          }
-        }
-      },
-
-      /**
-       * @param {jqLite} element
-       * @param {Object} options
-       * @param {Object} options.animation
-       */
-      _loadPageDOM: function(element, options) {
-        options = options || {};
-        var pageScope = this._scope.$new();
-        var link = $compile(element);
-
-        this._contentElement.append(element);
-        var pageContent = link(pageScope);
-
-        pageScope.$evalAsync();
-
-        this._switchPage(pageContent, pageScope, options);
-      },
-
-      /**
-       * @param {jqLite} element
-       * @param {Object} options
-       * @param {Object} options.animation
-       */
-      _loadPersistentPageDOM: function(element, options) {
-        options = options || {};
-
-        element.css('display', 'block');
-        this._switchPage(element, element.scope(), options);
-      },
-
-      /**
-       * @param {Object} options
-       * @param {String} [options.animation]
-       * @return {TabbarAnimator}
-       */
-      _getAnimatorOption: function(options) {
-        var animationAttr = this._element.attr('animation') || 'default';
-
-        return TabbarView._animatorDict[options.animation || animationAttr] || TabbarView._animatorDict['default'];
-      },
-
       _destroy: function() {
         this.emit('destroy');
-
-        element[0]._compilePageHook.remove(this._boundCompilePage);
-        element[0]._linkPageHook.remove(this._boundLinkPage);
 
         element.off(this._boundOnPrechange);
         element.off(this._boundOnPostchange);
 
         this._clearDerivingEvents();
+        this._clearDerivingMethods();
 
         this._element = this._scope = this._attrs = null;
       }
