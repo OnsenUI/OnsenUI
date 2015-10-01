@@ -39,11 +39,6 @@ limitations under the License.
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
-        setImmediate(function() {
-          this._boundCompilePage = element[0]._compilePageHook.add(this._compilePage.bind(this));
-          this._boundLinkPage = element[0]._linkPageHook.add(this._linkPage.bind(this));
-        }.bind(this));
-
         this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['reactive', 'postchange', 'prechange', 'init', 'show', 'hide', 'destroy']);
         this._boundOnPrechange = this._onPrechange.bind(this);
         this._boundOnPostchange = this._onPostchange.bind(this);
@@ -51,24 +46,14 @@ limitations under the License.
         this._element.on('postchange', this._boundOnPostchange);
       },
 
-      _compilePage: function(next, pageElement) {
-        this._linkPage.link = $compile(pageElement);
-
-        next(pageElement);
-      },
-
-      _linkPage: function(next, pageElement) {
-        if (!this._linkPage.link) {
-          throw new Error('Invalid state');
-        }
-
+      _compileAndLink: function(pageElement, callback) {
+        var link = $compile(pageElement);
         var pageScope = this._scope.$new();
-        this._linkPage.link(pageScope);
-        this._linkPage.link = null;
-        pageScope.$evalAsync(function() {
-          next(pageElement);
-        });
+        link(pageScope);
 
+        pageScope.$evalAsync(function() {
+          callback(pageElement);
+        });
       },
 
       _onPrechange: function(event) {

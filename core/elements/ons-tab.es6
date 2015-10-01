@@ -159,20 +159,16 @@ limitations under the License.
 
     /**
      * @param {Function} callback
-     * @param {Object} hooks
-     * @param {Object} hooks.compile
-     * @param {Object} hooks.link
+     * @param {Function} link
      */
-    _loadPageElement(callback, hooks) {
+    _loadPageElement(callback, link) {
       if (this.isPersistent()) {
         if (!this._pageElement) {
           this._createPageElement(this.getAttribute('page'), (element) => {
-            hooks.compile.run(element => {
-              hooks.link.run(element => {
-                this._pageElement = element;
-                callback(element);
-              }, element);
-            }, element);
+            link(element, element => {
+              this._pageElement = element;
+              callback(element);
+            });
           });
         } else {
           callback(this._pageElement);
@@ -218,7 +214,7 @@ limitations under the License.
         const tabbar = this._findTabbarElement();
         const tabIndex = this._findTabIndex();
 
-        window.OnsTabbarElement.ready(tabbar, () => {
+        window.OnsTabbarElement.rewritables.ready(tabbar, () => {
           tabbar.setActiveTab(tabIndex, {animation: 'none'});
         });
       }
