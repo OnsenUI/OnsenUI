@@ -3,6 +3,7 @@
  * @id sliding_menu
  * @name ons-sliding-menu
  * @category navigation
+ * @extensionOf angular
  * @description
  *   [en]Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.[/en]
  *   [ja]スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。[/ja]
@@ -101,6 +102,7 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
  * @type {String}
  * @description
  *  [en]Variable name to refer this sliding menu.[/en]
@@ -110,6 +112,7 @@
 /**
  * @ngdoc attribute
  * @name menu-page
+ * @initonly
  * @type {String}
  * @description
  *   [en]The url of the menu page.[/en]
@@ -119,6 +122,7 @@
 /**
  * @ngdoc attribute
  * @name main-page
+ * @initonly
  * @type {String}
  * @description
  *   [en]The url of the main page.[/en]
@@ -128,6 +132,7 @@
 /**
  * @ngdoc attribute
  * @name swipeable
+ * @initonly
  * @type {Boolean}
  * @description
  *   [en]Whether to enable swipe interaction.[/en]
@@ -137,6 +142,7 @@
 /**
  * @ngdoc attribute
  * @name swipe-target-width
+ * @initonly
  * @type {String}
  * @description
  *   [en]The width of swipeable area calculated from the left (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]
@@ -146,6 +152,7 @@
 /**
  * @ngdoc attribute
  * @name max-slide-distance
+ * @initonly
  * @type {String}
  * @description
  *   [en]How far the menu page will slide open. Can specify both in px and %. eg. 90%, 200px[/en]
@@ -155,6 +162,7 @@
 /**
  * @ngdoc attribute
  * @name side
+ * @initonly
  * @type {String}
  * @description
  *   [en]Specify which side of the screen the menu page is located on. Possible values are "left" and "right".[/en]
@@ -164,6 +172,7 @@
 /**
  * @ngdoc attribute
  * @name type
+ * @initonly
  * @type {String}
  * @description
  *   [en]Sliding menu animator. Possible values are reveal (default), push and overlay.[/en]
@@ -173,6 +182,7 @@
 /**
  * @ngdoc attribute
  * @name ons-preopen
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preopen" event is fired.[/en]
@@ -182,6 +192,7 @@
 /**
  * @ngdoc attribute
  * @name ons-preclose
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preclose" event is fired.[/en]
@@ -191,6 +202,7 @@
 /**
  * @ngdoc attribute
  * @name ons-postopen
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postopen" event is fired.[/en]
@@ -200,6 +212,7 @@
 /**
  * @ngdoc attribute
  * @name ons-postclose
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postclose" event is fired.[/en]
@@ -208,11 +221,42 @@
 
 /**
  * @ngdoc attribute
- * @name ons-destroy
+ * @name ons-init
+ * @initonly
  * @type {Expression}
  * @description
- *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
- *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ *  [en]Allows you to specify custom behavior when a page's "init" event is fired.[/en]
+ *  [ja]ページの"init"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-show
+ * @initonly
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when a page's "show" event is fired.[/en]
+ *  [ja]ページの"show"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-hide
+ * @initonly
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when a page's "hide" event is fired.[/en]
+ *  [ja]ページの"hide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @initonly
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when a page's "destroy" event is fired.[/en]
+ *  [ja]ページの"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -404,7 +448,7 @@
 
           var slidingMenu = new SlidingMenuView(scope, element, attrs);
 
-          $onsen.registerEventHandlers(slidingMenu, 'preopen preclose postopen postclose destroy');
+          $onsen.registerEventHandlers(slidingMenu, 'preopen preclose postopen postclose init show hide destroy');
 
           if (mainHtml && !attrs.mainPage) {
             slidingMenu._appendMainPage(null, mainHtml);

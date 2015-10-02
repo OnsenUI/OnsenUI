@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 (function() {
-  'use strict;';
+  'use strict';
 
   var module = angular.module('onsen');
 
@@ -31,6 +31,8 @@ limitations under the License.
         this._attrs = attrs;
 
         this._clearListener = scope.$on('$destroy', this._destroy.bind(this));
+
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['init', 'show', 'hide', 'destroy']);
 
         this._userDeviceBackButtonListener = angular.noop;
         if (this._attrs.ngDeviceBackbutton || this._attrs.onDeviceBackbutton) {
@@ -73,6 +75,8 @@ limitations under the License.
 
       _destroy: function() {
         this._element[0]._destroy();
+
+        this._clearDerivingEvents();
 
         this._element = null;
         this._nullElement = null;

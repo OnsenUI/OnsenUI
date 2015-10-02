@@ -101,7 +101,7 @@ limitations under the License.
      * @param {Function} callback
      */
     push(enterPage, leavePage, callback) {
-      util.removeElement(this.backgroundMask);
+      this.backgroundMask.remove();
       leavePage.element.parentNode.insertBefore(this.backgroundMask, leavePage.element.nextSibling);
 
       const enterPageDecomposition = this._decompose(enterPage);
@@ -126,7 +126,7 @@ limitations under the License.
         })
         .resetStyle()
         .queue((done) => {
-          util.removeElement(this.backgroundMask);
+          this.backgroundMask.remove();
           done();
         });
 
@@ -322,7 +322,7 @@ limitations under the License.
      * @param {Function} done
      */
     pop(enterPage, leavePage, done) {
-      util.removeElement(this.backgroundMask);
+      this.backgroundMask.remove();
       enterPage.element.parentNode.insertBefore(this.backgroundMask, enterPage.element.nextSibling);
 
       const enterPageDecomposition = this._decompose(enterPage);
@@ -347,7 +347,7 @@ limitations under the License.
         })
         .resetStyle()
         .queue((done) => {
-          util.removeElement(this.backgroundMask);
+          this.backgroundMask.remove();
           done();
         });
 
@@ -503,6 +503,9 @@ limitations under the License.
         );
       } else {
 
+        enterPage.element.style.zIndex = 'auto';
+        leavePage.element.style.zIndex = 'auto';
+
         animit.runAll(
 
           maskClear,
@@ -542,6 +545,8 @@ limitations under the License.
               timing: this.timing
             })
             .queue(function(finish) {
+              enterPage.element.style.zIndex = '';
+              leavePage.element.style.zIndex = '';
               done();
               finish();
             })

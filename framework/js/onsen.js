@@ -38,6 +38,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature bootstrap([moduleName, [dependencies]])
+ * @extensionOf angular
  * @description
  *   [ja]Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます。[/ja]
  *   [en]Initialize Onsen UI. Can be used to load Onsen UI without using the <code>ng-app</code> attribute from AngularJS.[/en]
@@ -87,6 +88,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature findParentComponentUntil(name, [dom])
+ * @extensionOf angular
  * @param {String} name
  *   [en]Name of component, i.e. 'ons-page'.[/en]
  *   [ja]コンポーネント名を指定します。例えばons-pageなどを指定します。[/ja]
@@ -104,6 +106,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature findComponent(selector, [dom])
+ * @extensionOf angular
  * @param {String} selector
  *   [en]CSS selector[/en]
  *   [ja]CSSセレクターを指定します。[/ja]
@@ -159,6 +162,7 @@ limitations under the License.
 /**
  * @ngdoc method
  * @signature compile(dom)
+ * @extensionOf angular
  * @param {HTMLElement} dom
  *   [en]Element to compile.[/en]
  *   [ja]コンパイルする要素を指定します。[/ja]
@@ -189,7 +193,7 @@ limitations under the License.
  *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {Object} [options.parentScope]
  *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
- *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。[/ja]
+ *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。このパラメータはAngularJSバインディングでのみ利用できます。[/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the alert dialog component object.[/en]
  *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
@@ -209,7 +213,7 @@ limitations under the License.
  *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {Object} [options.parentScope]
  *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
- *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。[/ja]
+ *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。このパラメータはAngularJSバインディングでのみ利用できます。[/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the dialog component object.[/en]
  *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
@@ -229,7 +233,7 @@ limitations under the License.
  *   [ja]オプションを指定するオブジェクト。[/ja]
  * @param {Object} [options.parentScope]
  *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
- *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。[/ja]
+ *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。このパラメータはAngularJSバインディングでのみ利用できます。[/ja]
  * @return {Promise}
  *   [en]Promise object that resolves to the popover component object.[/en]
  *   [ja]ポップオーバーのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
@@ -388,6 +392,25 @@ limitations under the License.
       }
 
       return this._onsenService;
+    };
+
+    /**
+     * @param {String} elementName
+     * @param {Function} lastReady
+     * @return {Function}
+     */
+    ons._waitDiretiveInit = function(elementName, lastReady) {
+      return function(element, callback) {
+        if (angular.element(element).data(elementName)) {
+          lastReady(element, callback);
+        } else {
+          var listen = function() {
+            lastReady(element, callback);
+            element.removeEventListener(elementName + ':init', listen, false);
+          };
+          element.addEventListener(elementName + ':init', listen, false);
+        }
+      };
     };
 
     /**

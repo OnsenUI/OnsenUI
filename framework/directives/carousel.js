@@ -27,7 +27,7 @@
  * @description
  *   [en]Fired just after the current carousel item has changed.[/en]
  *   [ja]現在表示しているカルーセルの要素が変わった時に発火します。[/ja]
- * @param {Object} event 
+ * @param {Object} event
  *   [en]Event object.[/en]
  *   [ja]イベントオブジェクトです。[/ja]
  * @param {Object} event.carousel
@@ -98,7 +98,9 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
  * @type {String}
+ * @extensionOf angular
  * @description
  *   [en]Variable name to refer this carousel.[/en]
  *   [ja]このカルーセルを参照するための変数名を指定します。[/ja]
@@ -166,6 +168,7 @@
 /**
  * @ngdoc attribute
  * @name initial-index
+ * @initonly
  * @type {Number}
  * @description
  *   [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
@@ -183,7 +186,9 @@
 /**
  * @ngdoc attribute
  * @name ons-postchange
+ * @initonly
  * @type {Expression}
+ * @extensionOf angular
  * @description
  *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
  *  [ja]"postchange"イベントが発火された時の挙動を独自に指定できます。[/ja]
@@ -192,7 +197,9 @@
 /**
  * @ngdoc attribute
  * @name ons-refresh
+ * @initonly
  * @type {Expression}
+ * @extensionOf angular
  * @description
  *  [en]Allows you to specify custom behavior when the "refresh" event is fired.[/en]
  *  [ja]"refresh"イベントが発火された時の挙動を独自に指定できます。[/ja]
@@ -201,7 +208,9 @@
 /**
  * @ngdoc attribute
  * @name ons-overscroll
+ * @initonly
  * @type {Expression}
+ * @extensionOf angular
  * @description
  *  [en]Allows you to specify custom behavior when the "overscroll" event is fired.[/en]
  *  [ja]"overscroll"イベントが発火された時の挙動を独自に指定できます。[/ja]
@@ -210,7 +219,9 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
  * @type {Expression}
+ * @extensionOf angular
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
  *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
@@ -290,6 +301,17 @@
  * @description
  *   [en]Returns the index of the currently visible ons-carousel-item.[/en]
  *   [ja]現在表示されているons-carousel-item要素のインデックスを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getCarouselItemCount)
+ * @return {Number}
+ *   [en]The number of carousel items.[/en]
+ *   [ja]カルーセル要素の数です。[/ja]
+ * @description
+ *   [en]Returns the current number of carousel items..[/en]
+ *   [ja]現在のカルーセル要素を数を返します。[/ja]
  */
 
 /**
@@ -391,6 +413,7 @@
 /**
  * @ngdoc method
  * @signature on(eventName, listener)
+ * @extensionOf angular
  * @description
  *   [en]Add an event listener.[/en]
  *   [ja]イベントリスナーを追加します。[/ja]
@@ -405,6 +428,7 @@
 /**
  * @ngdoc method
  * @signature once(eventName, listener)
+ * @extensionOf angular
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
  *  [ja]一度だけ呼び出されるイベントリスナを追加します。[/ja]
@@ -419,6 +443,7 @@
 /**
  * @ngdoc method
  * @signature off(eventName, [listener])
+ * @extensionOf angular
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
  *  [ja]イベントリスナーを削除します。もしイベントリスナーが指定されなかった場合には、そのイベントに紐付いているイベントリスナーが全て削除されます。[/ja]

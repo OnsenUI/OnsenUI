@@ -19,6 +19,7 @@ limitations under the License.
   'use strict';
 
   const ModifierUtil = ons._internal.ModifierUtil;
+  const util = ons._util;
   const scheme = {'': 'carousel--*'};
 
   const VerticalModeTrait = {
@@ -144,8 +145,8 @@ limitations under the License.
     _saveLastState() {
       this._lastState = {
         elementSize: this._getCarouselItemSize(),
-        carouselElementCount: this._getCarouselItemCount(),
-        width: this._getCarouselItemSize() * this._getCarouselItemCount()
+        carouselElementCount: this.getCarouselItemCount(),
+        width: this._getCarouselItemSize() * this.getCarouselItemCount()
       };
     }
 
@@ -173,7 +174,7 @@ limitations under the License.
       const index = parseInt(this.getAttribute('initial-index'), 10);
 
       if (typeof index === 'number' && !isNaN(index)) {
-        return Math.max(Math.min(index, this._getCarouselItemCount() - 1), 0);
+        return Math.max(Math.min(index, this.getCarouselItemCount() - 1), 0);
       } else {
         return 0;
       }
@@ -263,7 +264,7 @@ limitations under the License.
     setActiveCarouselItemIndex(index, options) {
       options = options || {};
 
-      index = Math.max(0, Math.min(index, this._getCarouselItemCount() - 1));
+      index = Math.max(0, Math.min(index, this.getCarouselItemCount() - 1));
       const scroll = this._getCarouselItemSize() * index;
       const max = this._calculateMaxScroll();
 
@@ -278,7 +279,7 @@ limitations under the License.
      */
     getActiveCarouselItemIndex() {
       const scroll = this._scroll;
-      const count = this._getCarouselItemCount();
+      const count = this.getCarouselItemCount();
       const size = this._getCarouselItemSize();
 
       if (scroll < 0) {
@@ -411,15 +412,11 @@ limitations under the License.
         const lastActiveIndex = this._lastActiveIndex;
         this._lastActiveIndex = currentIndex;
 
-        const event = new CustomEvent('postchange', {
-          bubbles: true,
-          detail: {
-            carousel: this,
-            activeIndex: currentIndex,
-            lastActiveIndex: lastActiveIndex
-          }
+        util.triggerElementEvent(this, 'postchange', {
+          carousel: this,
+          activeIndex: currentIndex,
+          lastActiveIndex: lastActiveIndex
         });
-        this.dispatchEvent(event);
       }
     }
 
@@ -459,19 +456,15 @@ limitations under the License.
 
       if (this._isOverScroll(this._scroll)) {
         let waitForAction = false;
-        const overscrollEvent = new CustomEvent('overscroll', {
-          bubbles: true,
-          detail: {
-            carousel: this,
-            activeIndex: this.getActiveCarouselItemIndex(),
-            direction: this._getOverScrollDirection(),
-            waitToReturn: (promise) => {
-              waitForAction = true;
-              promise.then(() => this._scrollToKillOverScroll());
-            }
+        util.triggerElementEvent(this, 'overscroll', {
+          carousel: this,
+          activeIndex: this.getActiveCarouselItemIndex(),
+          direction: this._getOverScrollDirection(),
+          waitToReturn: (promise) => {
+            waitForAction = true;
+            promise.then(() => this._scrollToKillOverScroll());
           }
         });
-        this.dispatchEvent(overscrollEvent);
 
         if (!waitForAction) {
           this._scrollToKillOverScroll();
@@ -526,7 +519,7 @@ limitations under the License.
         let arr = [];
         const size = this._getCarouselItemSize();
 
-        for (let i = 0; i < this._getCarouselItemCount(); i++) {
+        for (let i = 0; i < this.getCarouselItemCount(); i++) {
           if (max >= i * size) {
             arr.push(i * size);
           }
@@ -611,7 +604,7 @@ limitations under the License.
     }
 
     _calculateMaxScroll() {
-      const max = this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
+      const max = this.getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
       return Math.ceil(max < 0 ? 0 : max); // Need to return an integer value.
     }
 
@@ -651,6 +644,10 @@ limitations under the License.
             duration: duration,
             timing: 'cubic-bezier(.1, .4, .1, 1)'
           })
+          .queue(function(done) {
+            done();
+            this._tryFirePostChangeEvent();
+          }.bind(this))
           .play();
         this._scroll = 0;
         return;
@@ -666,6 +663,10 @@ limitations under the License.
             duration: duration,
             timing: 'cubic-bezier(.1, .4, .1, 1)'
           })
+          .queue(function(done) {
+            done();
+            this._tryFirePostChangeEvent();
+          }.bind(this))
           .play();
         this._scroll = maxScroll;
         return;
@@ -677,7 +678,7 @@ limitations under the License.
     /**
      * @return {Number}
      */
-    _getCarouselItemCount() {
+    getCarouselItemCount() {
       return this._getCarouselItemElements().length;
     }
 
@@ -709,11 +710,7 @@ limitations under the License.
 
       this._saveLastState();
 
-      const event = new CustomEvent('refresh', {
-        bubbles: true,
-        detail: {carousel: this}
-      });
-      this.dispatchEvent(event);
+      util.triggerElementEvent(this, 'refresh', {carousel: this});
     }
 
     first() {
@@ -722,7 +719,7 @@ limitations under the License.
 
     last() {
       this.setActiveCarouselItemIndex(
-        Math.max(this._getCarouselItemCount() - 1, 0)
+        Math.max(this.getCarouselItemCount() - 1, 0)
       );
     }
 

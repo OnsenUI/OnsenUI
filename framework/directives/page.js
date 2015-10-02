@@ -32,8 +32,58 @@
  */
 
 /**
+ * @ngdoc event
+ * @name init
+ * @description
+ *   [en]Fired right after the page is attached.[/en]
+ *   [ja]ページがアタッチされた後に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.page
+ *   [en]Page object.[/en]
+ *   [ja]ページのオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name show
+ * @description
+ *   [en]Fired right after the page is shown.[/en]
+ *   [ja]ページが表示された後に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.page
+ *   [en]Page object.[/en]
+ *   [ja]ページのオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name hide
+ * @description
+ *   [en]Fired right after the page is hidden.[/en]
+ *   [ja]ページが隠れた後に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.page
+ *   [en]Page object.[/en]
+ *   [ja]ページのオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name destroy
+ * @description
+ *   [en]Fired right before the page is destroyed.[/en]
+ *   [ja]ページが破棄される前に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.page
+ *   [en]Page object.[/en]
+ *   [ja]ページのオブジェクト。[/ja]
+ */
+
+/**
  * @ngdoc attribute
  * @name var
+ * @initonly
+ * @extensionOf angular
  * @type {String}
  * @description
  *   [en]Variable name to refer this page.[/en]
@@ -53,6 +103,7 @@
  * @ngdoc attribute
  * @name on-device-backbutton
  * @type {Expression}
+ * @extensionOf angular
  * @description
  *   [en]Allows you to specify custom behavior when the back button is pressed.[/en]
  *   [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
@@ -61,10 +112,55 @@
 /**
  * @ngdoc attribute
  * @name ng-device-backbutton
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *   [en]Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.[/en]
  *   [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
+ */
+/**
+ * @ngdoc attribute
+ * @name ons-init
+ * @initonly
+ * @extensionOf angular
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "init" event is fired.[/en]
+ *  [ja]"init"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-show
+ * @initonly
+ * @extensionOf angular
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "show" event is fired.[/en]
+ *  [ja]"show"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-hide
+ * @initonly
+ * @extensionOf angular
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "hide" event is fired.[/en]
+ *  [ja]"hide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @initonly
+ * @extensionOf angular
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
  */
 
 /**
@@ -137,6 +233,8 @@
             var page = new PageView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, page);
+            $onsen.registerEventHandlers(page, 'init show hide destroy');
+
             element.data('ons-page', page);
             $onsen.addModifierMethodsForCustomElements(page, element);
 

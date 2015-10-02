@@ -20,8 +20,8 @@ limitations under the License.
 
   const scheme = {
     '': 'switch--*',
-    'switch__input': 'switch--*__input',
-    'switch__toggle': 'switch--*__toggle'
+    '.switch__input': 'switch--*__input',
+    '.switch__toggle': 'switch--*__toggle'
   };
   const ModifierUtil = ons._internal.ModifierUtil;
   const templateSource = ons._util.createElement(`
@@ -72,6 +72,27 @@ limitations under the License.
       } else {
         this.removeAttribute('disabled');
       }
+    }
+
+    /**
+     * @return {Boolean}
+     */
+    isChecked() {
+      return this.checked;
+    }
+
+    /**
+     * @param {Boolean}
+     */
+    setChecked(isChecked) {
+      this.checked = !!isChecked;
+    }
+
+    /**
+     * @return {HTMLElement}
+     */
+    getCheckboxElement() {
+      return this._getCheckbox();
     }
 
     createdCallback() {

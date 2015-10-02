@@ -62,13 +62,14 @@ gulp.task('core', function() {
   return gulp.src([
     'core/vendor/winstore-jscompat.js',
     'core/vendor/*.js',
-    'core/lib/animit.es6',
+    'core/lib/animit.js',
     'core/lib/doorlock.es6',
     'core/lib/ons-gesture-detector.es6',
     'core/lib/device-back-button-dispatcher.es6',
     'core/lib/ons.es6',
     'core/lib/ons-util.es6',
     'core/lib/modal-animator.es6',
+    'core/lib/splitter-animator.es6',
     'core/lib/navigator-transition-animator.es6',
     'core/lib/popover-animator.es6',
     'core/lib/ons-platform.es6',
@@ -77,11 +78,13 @@ gulp.task('core', function() {
     'core/elements/*.{es6,js}',
     '!core/**/*.spec.{es6,js}',
   ])
+    .pipe($.cached('ons-core.js'))
     .pipe($.sourcemaps.init())
     .pipe($.plumber())
     .pipe(onlyES6 = $.filter('*.es6'))
     .pipe($.babel({modules: 'ignore'}))
     .pipe(onlyES6.restore())
+    .pipe($.remember('ons-core.js'))
     .pipe($.concat('ons-core.js'))            
     .pipe($.header('/*! ons-core.js for Onsen UI v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
     .pipe($.sourcemaps.write())
@@ -140,8 +143,9 @@ gulp.task('jshint-vanilla', function() {
     'framework/elements/*.js',
     'framework/views/*.js'
   ])
-    .pipe($.cached('js'))
+    .pipe($.cached('jshint-vanilla'))
     .pipe($.jshint())
+    .pipe($.remember('jshint-vanilla'))
     .pipe($.jshint.reporter('jshint-stylish'));
 });
 
@@ -159,8 +163,9 @@ gulp.task('eslint', function() {
     'framework/elements/*.es6',
     'framework/views/*.es6'
   ])
-    .pipe($.cached('es6'))
+    .pipe($.cached('eslint'))
     .pipe($.eslint({useEslintrc: true}))
+    .pipe($.remember('eslint'))
     .pipe($.eslint.format());
 });
 
@@ -214,10 +219,8 @@ gulp.task('prepare', ['html2js', 'core'], function() {
     // onsenui.js
     gulp.src([
       'build/js/ons-core.js',
-      'framework/lib/winstore-jscompat.js',
       'framework/lib/*.{es6,js}',
       'framework/directives/templates.js',
-      'framework/js/doorlock.es6',
       'framework/js/onsen.js',
       'framework/views/*.{es6,js}',
       'framework/directives/*.{es6,js}',
@@ -238,11 +241,9 @@ gulp.task('prepare', ['html2js', 'core'], function() {
     // onsenui_all.js
     gulp.src([
       'build/js/ons-core.js',
-      'framework/lib/winstore-jscompat.js',
       'framework/lib/angular/angular.js',
       'framework/lib/*.{es6,js}',
       'framework/directives/templates.js',
-      'framework/js/doorlock.es6',
       'framework/js/onsen.js',
       'framework/views/*.{es6,js}',
       'framework/directives/*.{es6,js}',
@@ -301,6 +302,11 @@ gulp.task('prepare', ['html2js', 'core'], function() {
     gulp.src('core/css/ionicons/**/*')
       .pipe(gulp.dest('build/css/ionicons/'))
       .pipe(gulp.dest('app/lib/onsen/css/ionicons/')),
+
+    // material icons file copy
+    gulp.src('core/css/material-design-iconic-font/**/*')
+      .pipe(gulp.dest('build/css/material-design-iconic-font/'))
+      .pipe(gulp.dest('app/lib/onsen/css/material-design-iconic-font/')),
 
     // auto prepare
     gulp.src('cordova-app/www/index.html')
@@ -386,6 +392,7 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
     'core/*/*.{js,es6}',
     '!core/*/*.spec.js',
     'framework/*/*',
+    'core/css/*.css',
     'css-components/components-src/dist/*.css'
   ];
 
@@ -394,8 +401,8 @@ gulp.task('serve', ['jshint', 'prepare', 'browser-sync'], function() {
   }
 
   gulp.watch(watched, {
-    debounceDelay: 2000
-  }, ['prepare', 'jshint']);
+    debounceDelay: 300
+  }, ['jshint', 'prepare']);
 
   // for livereload
   gulp.watch([
@@ -495,7 +502,9 @@ gulp.task('webdriver-download', function() {
 ////////////////////////////////////////
 // test
 ////////////////////////////////////////
-gulp.task('test', ['core-test', 'e2e-test']);
+gulp.task('test', function(done) {
+  return runSequence('core-test', 'e2e-test', done);
+});
 
 ////////////////////////////////////////
 // e2e-test

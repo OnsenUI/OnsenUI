@@ -36,6 +36,8 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
+ * @extensionOf angular
  * @type {String}
  * @description
  *  [en]Variable name to refer this toolbar.[/en]
@@ -45,6 +47,7 @@
 /**
  * @ngdoc attribute
  * @name inline
+ * @initonly
  * @description
  *   [en]Display the toolbar as an inline element.[/en]
  *   [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]
@@ -61,6 +64,7 @@
 /**
  * @ngdoc attribute
  * @name fixed-style
+ * @initonly
  * @description
  *   [en]
  *     By default the center element will be left-aligned on Android and center-aligned on iOS.

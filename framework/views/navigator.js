@@ -16,7 +16,7 @@ limitations under the License.
 */
 
 (function() {
-  'use strict;';
+  'use strict';
 
   var module = angular.module('onsen');
 
@@ -56,85 +56,71 @@ limitations under the License.
         this._element = element || angular.element(window.document.body);
         this._scope = scope || this._element.scope();
         this._attrs = attrs;
-
-        this._element[0]._compilePageHook.add(this._compilePage.bind(this));
-        this._element[0]._linkPageHook.add(this._linkPage.bind(this));
+        this._previousPageScope = null;
 
         this._boundOnPrepop = this._onPrepop.bind(this);
+        this._boundOnPostpop = this._onPostpop.bind(this);
         this._element.on('prepop', this._boundOnPrepop);
+        this._element.on('postpop', this._boundOnPostpop);
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
-        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], ['prepush', 'postpush', 'prepop', 'postpop'], function(detail) {
+        this._clearDerivingEvents = $onsen.deriveEvents(this, element[0], [
+          'prepush', 'postpush', 'prepop',
+          'postpop', 'init', 'show', 'hide', 'destroy'
+        ], function(detail) {
           if (detail.navigator) {
             detail.navigator = this;
           }
           return detail;
         }.bind(this));
+
+        this._clearDerivingMethods = $onsen.deriveMethods(this, element[0], [
+          'insertPage',
+          'pushPage',
+          'bringPageTop',
+          'getDeviceBackButtonHandler',
+          'popPage',
+          'replacePage',
+          'resetToPage',
+          'getCurrentPage',
+          'canPopPage'
+        ]);
       },
 
       _onPrepop: function(event) {
         var pages = event.detail.navigator.pages;
         angular.element(pages[pages.length - 2].element).scope().$evalAsync();
+
+        this._previousPageScope = angular.element(pages[pages.length - 1].element).scope();
       },
 
-      _compilePage: function(next, pageElement) {
-        this._linkPage.link = $compile(pageElement);
-
-        next(pageElement);
+      _onPostpop: function(event) {
+        this._previousPageScope.$destroy();
+        this._previoousPageScope = null;
       },
 
-      _linkPage: function(next, pageElement) {
-        if (!this._linkPage.link) {
-          throw new Error('Invalid state');
-        }
-
+      _compileAndLink: function(pageElement, callback) {
+        var link = $compile(pageElement);
         var pageScope = this._createPageScope();
-        this._linkPage.link(pageScope);
-        this._linkPage.link = null;
+        link(pageScope);
 
         pageScope.$evalAsync(function() {
-          next(pageElement);
+          callback(pageElement);
         });
       },
 
       _destroy: function() {
         this.emit('destroy');
         this._clearDerivingEvents();
+        this._clearDerivingMethods();
         this._element.off('prepop', this._boundOnPrepop);
+        this._element.off('postpop', this._boundOnPostpop);
         this._element = this._scope = this._attrs = null;
-      },
-
-      insertPage: function(index, page, options) {
-        return this._element[0].insertPage(index, page, options);
-      },
-
-      pushPage: function(page, options) {
-        return this._element[0].pushPage(page, options);
-      },
-
-      getDeviceBackButtonHandler: function() {
-        return this._element[0].getDeviceBackButtonHandler;
       },
 
       _createPageScope: function() {
          return this._scope.$new();
-      },
-
-      popPage: function(options) {
-        return this._element[0].popPage(options);
-      },
-
-      replacePage: function(page, options) {
-        return this._element[0].replacePage(page, options);
-      },
-
-      resetToPage: function(page, options) {
-        return this._element[0].resetToPage(page, options);
-      },
-
-      getCurrentPage: function() {
-        return this._element[0].getCurrentPage();
       },
 
       /**
@@ -144,13 +130,6 @@ limitations under the License.
        */
       getPages: function() {
         return this._element[0].pages;
-      },
-
-      /**
-       * @return {Boolean}
-       */
-      canPopPage: function() {
-        return this._element[0].canPopPage();
       }
     });
 
