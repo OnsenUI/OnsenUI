@@ -85,7 +85,7 @@ limitations under the License.
      * @param {Boolean}
      */
     setChecked(isChecked) {
-      return this.checked = !!isChecked;
+      this.checked = !!isChecked;
     }
 
     /**
