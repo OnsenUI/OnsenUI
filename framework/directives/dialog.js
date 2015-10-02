@@ -3,6 +3,9 @@
  * @id dialog
  * @name ons-dialog
  * @category dialog
+ * @modifier material
+ *   [en]Display a Material Design dialog.[/en]
+ *   [ja][/ja]
  * @description
  *  [en]Dialog that is displayed on top of current screen.[/en]
  *  [ja]現在のスクリーンにダイアログを表示します。[/ja]
