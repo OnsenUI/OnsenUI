@@ -28,6 +28,7 @@ limitations under the License.
      * @param {Object} params.element
      * @param {Object} params.options
      * @param {Object} params.navigator
+     * @param {String} params.initialContent
      */
     constructor(params) {
       this.page = params.page;
@@ -35,6 +36,7 @@ limitations under the License.
       this.element = params.element;
       this.options = params.options;
       this.navigator = params.navigator;
+      this.initialContent = params.initialContent;
 
       // Block events while page is being animated to stop scrolling, pressing buttons, etc.
       this._blockEvents = (event) => {

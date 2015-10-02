@@ -280,7 +280,9 @@ limitations under the License.
      * If options object is specified, apply the options.
      * the options object include all the attributes of this navigator.
      *
-     * @param {String} page
+     * If page is undefined, navigator will push initial page contents instead of.
+     *
+     * @param {String/undefined} page
      * @param {Object} [options]
      */
     resetToPage(page, options) {
@@ -299,6 +301,14 @@ limitations under the License.
         onTransitionEnd();
       };
 
+      if (page === undefined || page === '') {
+        if (this.hasAttribute('page')) {
+          page = this.getAttribute('page');
+        } else {
+          options.pageHTML = this._initialHTML;
+          page = '';
+        }
+      }
       this.pushPage(page, options);
     }
 
@@ -317,7 +327,6 @@ limitations under the License.
           } else {
             this.pushPage(this.getAttribute('page'), {animation: 'none'});
           }
-          this._initialHTML = false;
         }
       });
     }
@@ -337,6 +346,7 @@ limitations under the License.
      * @param {Object} [options.animationOptions]
      * @param {Function} [options.onTransitionEnd]
      * @param {Boolean} [options.cancelIfRunning]
+     * @param {String} [options.pageHTML]
      */
     pushPage(page, options) {
       options = options || {};
@@ -367,10 +377,16 @@ limitations under the License.
         unlock();
       };
 
-      ons._internal.getPageHTMLAsync(page).then(templateHTML => {
+      const run = templateHTML => {
         const element = this._createPageElement(templateHTML);
         this._pushPageDOM(this._createPageObject(page, element, options), done);
-      });
+      };
+
+      if (options.pageHTML) {
+        run(options.pageHTML);
+      } else {
+        ons._internal.getPageHTMLAsync(page).then(run);
+      }
     }
 
     /**
