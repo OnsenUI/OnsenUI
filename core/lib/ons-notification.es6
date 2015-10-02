@@ -35,10 +35,6 @@ limitations under the License.
     let footerElement = util.createElement('<div class="alert-dialog-footer"></div>');
     let inputElement;
 
-    if (modifier) {
-      dialogElement.setAttribute('modifier', modifier);
-    }
-
     dialogElement.setAttribute('animation', animation);
 
     if (messageIsHTML) {
@@ -52,6 +48,11 @@ limitations under the License.
 
     if (promptDialog) {
       inputElement = util.createElement('<input class="text-input" type="text"></input>');
+
+      if (modifier) {
+        inputElement.classList.add(`text-input--${modifier}`);
+      }
+
       inputElement.setAttribute('placeholder', placeholder);
       inputElement.value = defaultValue;
       inputElement.style.width = '100%';
@@ -145,6 +146,10 @@ limitations under the License.
     });
 
     titleElement = messageElement = footerElement = null;
+
+    if (modifier) {
+      dialogElement.setAttribute('modifier', modifier);
+    }
 
     return Promise.resolve(dialogElement);
   };
