@@ -22,13 +22,13 @@ limitations under the License.
   const ModifierUtil = ons._internal.ModifierUtil;
   const scheme = {
     '': 'alert-dialog--*',
-    '.alert-dialog-title': 'alert-dialog--*-title',
-    '.alert-dialog-content': 'alert-dialog--*-content',
-    '.alert-dialog-footer': 'alert-dialog--*-footer',
-    '.alert-dialog-button': 'alert-dialog--*-button',
-    '.alert-dialog-footer--one': 'alert-dialog--*-footer--one',
-    '.alert-dialog-button--one': 'alert-dialog--*-button--one',
-    '.alert-dialog-button--primal': 'alert-dialog--*-button--primal'
+    '.alert-dialog-title': 'alert-dialog-title--*',
+    '.alert-dialog-content': 'alert-dialog-content--*',
+    '.alert-dialog-footer': 'alert-dialog-footer--*',
+    '.alert-dialog-button': 'alert-dialog-button--*',
+    '.alert-dialog-footer--one': 'alert-dialog-footer--one--*',
+    '.alert-dialog-button--one': 'alert-dialog-button--one--*',
+    '.alert-dialog-button--primal': 'alert-dialog-button--primal--*'
   };
   const AnimatorFactory = ons._internal.AnimatorFactory;
   const AndroidAlertDialogAnimator = ons._internal.AndroidAlertDialogAnimator;

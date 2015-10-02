@@ -266,15 +266,15 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   height: 360px
   markup:
     <div class="alert-dialog alert-dialog--material">
-      <div class="alert-dialog-title alert-dialog--material-title">
+      <div class="alert-dialog-title alert-dialog-title--material">
         Dialog title
       </div>
-      <div class="alert-dialog-content alert-dialog--material-content">
+      <div class="alert-dialog-content alert-dialog-content--material">
         Some dialog content.
       </div>
-      <div class="alert-dialog-footer alert-dialog--material-footer">
-        <button class="alert-dialog-button alert-dialog--material-button">OK</button>
-        <button class="alert-dialog-button alert-dialog--material-button">CANCEL</button>
+      <div class="alert-dialog-footer alert-dialog-footer--material">
+        <button class="alert-dialog-button alert-dialog-button--material">OK</button>
+        <button class="alert-dialog-button alert-dialog-button--material">CANCEL</button>
       </div>
     </div>
 */
@@ -285,14 +285,14 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   font-family 'Roboto', 'Noto', sans-serif
   shadow-5()
 
-.alert-dialog--material-title
+.alert-dialog-title--material
   font-family 'Roboto', 'Noto', sans-serif
   text-align left
   font-size 20px
   font-weight 500
   padding 0 24px
 
-.alert-dialog--material-content
+.alert-dialog-content--material
   font-family 'Roboto', 'Noto', sans-serif
   text-align left
   font-size 14px
@@ -302,12 +302,12 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   margin 24px 0 10px 0
   min-height 0
 
-.alert-dialog--material-footer
+.alert-dialog-footer--material
   display inline-block
   padding 0px 8px 0px 24px
   box-sizing border-box
 
-.alert-dialog--material-button
+.alert-dialog-button--material
   font-family 'Roboto', 'Noto', sans-serif
   text-transform uppercase
   display inline-block
@@ -320,11 +320,11 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
   font-weight 400
   outline none
 
-.alert-dialog--material-button:active
+.alert-dialog-button--material:active
   background-color initial
 
-.alert-dialog--material-button--one
+.alert-dialog-button--one--material
   border 0
 
-.alert-dialog--material-button--primal
+.alert-dialog-button--primal--material
   font-weight 500
