@@ -48,7 +48,7 @@
  * @type {String}
  * @description
  *   [en]Prevent vertical scrolling when the user drags horizontally.[/en]
- *   [ja][/ja]
+ *   [ja]この属性があると、ユーザーがこの要素を横方向にドラッグしている時に、縦方向のスクロールが起きないようになります。[/ja]
  */
 
 (function() {

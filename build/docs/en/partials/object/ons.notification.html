@@ -18,8 +18,12 @@ componentCategory: dialog
 
   <h2>ons.notification</h2>
 
+  
+
   <section class="reference-description">
     <p>Utility methods to create different kinds of alert dialogs. There are three methods available: alert, confirm and prompt.</p>
+    
+
   </section>
 
   <ul class="reference-quick-navi">
@@ -112,7 +116,11 @@ componentCategory: dialog
     Display an alert dialog to show the user a message.
     The content of the message can be either simple text or HTML.
     Must specify either message or messageHTML.
-  </td>
+  
+            
+
+            
+          </td>
         </tr>
         
         <tr>
@@ -121,7 +129,11 @@ componentCategory: dialog
     Display a dialog to ask the user for confirmation.
     The default button labels are "Cancel" and "OK" but they can be customized.
     Must specify either message or messageHTML.
-  </td>
+  
+            
+
+            
+          </td>
         </tr>
         
         <tr>
@@ -129,7 +141,11 @@ componentCategory: dialog
           <td>
     Display a dialog with a prompt to ask the user a question. 
     Must specify either message or messageHTML.
-  </td>
+  
+            
+
+            
+          </td>
         </tr>
         
       </tbody>
@@ -158,6 +174,10 @@ componentCategory: dialog
     The content of the message can be either simple text or HTML.
     Must specify either message or messageHTML.
   </p>
+
+    
+
+    
 
     
 
@@ -244,6 +264,10 @@ componentCategory: dialog
     The default button labels are "Cancel" and "OK" but they can be customized.
     Must specify either message or messageHTML.
   </p>
+
+    
+
+    
 
     
 
@@ -348,6 +372,10 @@ componentCategory: dialog
     
 
     
+
+    
+
+    
     <!-- method parameter -->
     <h5>Parameters</h5>
 
@@ -409,6 +437,24 @@ componentCategory: dialog
           <td><span class="parameter-name">options.title</span></td>
           <td class="value-type">String</td>
           <td>Dialog title. Default is "Alert".</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.placeholder</span></td>
+          <td class="value-type">String</td>
+          <td>Placeholder for the text input.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.defaultValue</span></td>
+          <td class="value-type">String</td>
+          <td>Default value for the text input.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options.autofocus</span></td>
+          <td class="value-type">Boolean</td>
+          <td>Autofocus the input element. Default is true.</td>
         </tr>
         
         <tr>

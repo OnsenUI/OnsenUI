@@ -17,6 +17,7 @@
 /**
  * @ngdoc attribute
  * @name type
+ * @initonly
  * @type {String}
  * @description
  *   [en]The type of indicator. Can be one of either "bar" or "circular". Defaults to "bar".[/en]

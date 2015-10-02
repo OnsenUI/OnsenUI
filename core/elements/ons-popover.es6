@@ -81,8 +81,7 @@ limitations under the License.
         animators: window.OnsPopoverElement._animatorDict,
         baseClass: PopoverAnimator,
         baseClassName: 'PopoverAnimator',
-        defaultAnimation: this.getAttribute('animation') || 'fade',
-        defaultAnimationOptions: AnimatorFactory.parseJSONSafely(this.getAttribute('animation-options'))
+        defaultAnimation: this.getAttribute('animation') || 'fade'
       });
     }
 
@@ -274,6 +273,11 @@ limitations under the License.
         !(options.animation in window.OnsPopoverElement._animatorDict)) {
         throw new Error(`Animator ${options.animation} is not registered.`);
       }
+
+      options.animationOptions = util.extend(
+        options.animationOptions || {},
+        AnimatorFactory.parseAnimationOptionsString(this.getAttribute('animation-options'))
+      );
 
       let canceled = false;
       util.triggerElementEvent(this, 'preshow', {

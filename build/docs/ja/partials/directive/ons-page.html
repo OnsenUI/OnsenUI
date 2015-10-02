@@ -17,8 +17,11 @@ componentCategory: base
 
   <h2>ons-page</h2>
 
+  
+
   <section class="description">
     <p>ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。</p>
+    
   </section>
 
   <ul class="reference-quick-navi">
@@ -33,6 +36,8 @@ componentCategory: base
     
     <li><a href="#methods-summary">メソッド</a></li>
     
+    
+    <li><a href="#events-summary">イベント</a></li>
     
     
     <li><a href="#seealso">関連情報</a></li>
@@ -120,6 +125,16 @@ componentCategory: base
             
             <span style="font-size: 12px">Optional</span>
             
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
           </td>
         </tr>
         
@@ -134,6 +149,12 @@ componentCategory: base
 
             
             <span style="font-size: 12px">Optional</span>
+            
+
+            
+
+            
+
             
           </td>
         </tr>
@@ -150,6 +171,14 @@ componentCategory: base
             
             <span style="font-size: 12px">Optional</span>
             
+
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
           </td>
         </tr>
         
@@ -164,6 +193,116 @@ componentCategory: base
 
             
             <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-ons-init">ons-init</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            "init"イベントが発火された時の挙動を独自に指定できます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-ons-show">ons-show</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            "show"イベントが発火された時の挙動を独自に指定できます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-ons-hide">ons-hide</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            "hide"イベントが発火された時の挙動を独自に指定できます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-ons-destroy">ons-destroy</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            "destroy"イベントが発火された時の挙動を独自に指定できます。
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name">angular</span>
+            
+
             
           </td>
         </tr>
@@ -196,7 +335,13 @@ componentCategory: base
         
         <tr>
           <td><a href="#method-getDeviceBackButtonHandler">getDeviceBackButtonHandler()</a></td>
-          <td>バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。</td>
+          <td>
+            バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。
+
+            
+
+            
+          </td>
         </tr>
         
       </tbody>
@@ -206,6 +351,70 @@ componentCategory: base
   <!-- end methods summary -->
 
   <!-- events summary -->
+  
+  <section>
+    <h3 id="events-summary">
+      イベント概要
+      <a href="#events-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#event-init">init</a></td>
+          <td>
+            ページがアタッチされた後に発火します。
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#event-show">show</a></td>
+          <td>
+            ページが表示された後に発火します。
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#event-hide">hide</a></td>
+          <td>
+            ページが隠れた後に発火します。
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#event-destroy">destroy</a></td>
+          <td>
+            ページが破棄される前に発火します。
+
+            
+
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
   
   <!-- end events summary -->
 
@@ -223,6 +432,10 @@ componentCategory: base
     <p>バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。</p>
 
     
+
+    
+
+    
     <p>返り値: デバイスのバックボタンハンドラを返します。</p>
     
 
@@ -234,6 +447,182 @@ componentCategory: base
   <!-- end methods -->
 
   <!-- events -->
+  
+  <h3>イベント</h3>
+  
+  <section class="event-detail">
+    <h4 id="event-init">
+      init
+      <a href="#event-init" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>ページがアタッチされた後に発火します。</p>
+
+    
+
+    
+
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td>Event object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.page</span></td>
+          <td class="value-type">Object</td>
+          <td>ページのオブジェクト。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+  <section class="event-detail">
+    <h4 id="event-show">
+      show
+      <a href="#event-show" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>ページが表示された後に発火します。</p>
+
+    
+
+    
+
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td>Event object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.page</span></td>
+          <td class="value-type">Object</td>
+          <td>ページのオブジェクト。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+  <section class="event-detail">
+    <h4 id="event-hide">
+      hide
+      <a href="#event-hide" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>ページが隠れた後に発火します。</p>
+
+    
+
+    
+
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td>Event object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.page</span></td>
+          <td class="value-type">Object</td>
+          <td>ページのオブジェクト。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+  <section class="event-detail">
+    <h4 id="event-destroy">
+      destroy
+      <a href="#event-destroy" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>ページが破棄される前に発火します。</p>
+
+    
+
+    
+
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td>Event object.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.page</span></td>
+          <td class="value-type">Object</td>
+          <td>ページのオブジェクト。</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+
   
   <!-- end events -->
 

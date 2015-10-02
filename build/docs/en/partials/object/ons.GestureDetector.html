@@ -1,0 +1,367 @@
+---
+page: 'reference-detail'
+title: 'ons.GestureDetector'
+name: 'ons.GestureDetector'
+collection: 'objects'
+reference: true
+docCategory: 'js'
+componentCategory: util
+---
+
+<div id="ons.GestureDetector">
+
+  <div class="reference-github-links">
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/js/gestureDetector.js">View Source</a>
+
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/edit/master/framework/js/gestureDetector.js">Improve this doc</a>
+  </div>
+
+  <h2>ons.GestureDetector</h2>
+
+  
+
+  <section class="reference-description">
+    <p>Utility class for gesture detection.</p>
+    
+
+  </section>
+
+  <ul class="reference-quick-navi">
+    
+    
+    
+    <li><a href="#methods-summary">Methods</a></li>
+    
+    
+    
+    <li><a href="#discussion">Discussion</a></li>
+  </ul>
+
+  
+
+  
+
+  
+
+  
+
+  <!-- methods summary -->
+  
+  <section>
+    <h3 id="methods-summary">
+      Methods Summary
+      <a href="#methods-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Signature</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#method-constructor">constructor(element[, options])</a></td>
+          <td>Create a new GestureDetector instance.
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-on">on(gestures, handler)</a></td>
+          <td>Adds an event handler for a gesture. Available gestures are: drag, dragleft, dragright, dragup, dragdown, hold, release, swipe, swipeleft, swiperight, swipeup, swipedown, tap, doubletap, touch, transform, pinch, pinchin, pinchout and rotate. 
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-off">off(gestures, handler)</a></td>
+          <td>Remove an event listener.
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-enable">enable(state)</a></td>
+          <td>Enable or disable gesture detection.
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#method-dispose">dispose()</a></td>
+          <td>Remove and destroy all event handlers for this instance.
+            
+
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+  <!-- end methods summary -->
+
+  <!-- events summary -->
+  
+  <!-- end events summary -->
+
+  <!-- methods details -->
+  
+  <h3>Methods</h3>
+  
+  <section class="method-detail">
+    <h4 id="method-constructor">
+      constructor(element[, options])
+
+      <a href="#method-constructor" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Create a new GestureDetector instance.</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">element</span></td>
+          <td class="value-type">Element</td>
+          <td>Name of the event.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">options</span></td>
+          <td class="value-type">Object</td>
+          <td>Options object.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-on">
+      on(gestures, handler)
+
+      <a href="#method-on" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Adds an event handler for a gesture. Available gestures are: drag, dragleft, dragright, dragup, dragdown, hold, release, swipe, swipeleft, swiperight, swipeup, swipedown, tap, doubletap, touch, transform, pinch, pinchin, pinchout and rotate. </p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">gestures</span></td>
+          <td class="value-type">String</td>
+          <td>A space separated list of gestures.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">handler</span></td>
+          <td class="value-type">Function</td>
+          <td>An event handling function.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-off">
+      off(gestures, handler)
+
+      <a href="#method-off" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Remove an event listener.</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">gestures</span></td>
+          <td class="value-type">String</td>
+          <td>A space separated list of gestures.</td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">handler</span></td>
+          <td class="value-type">Function</td>
+          <td>An event handling function.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-enable">
+      enable(state)
+
+      <a href="#method-enable" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Enable or disable gesture detection.</p>
+
+    
+
+    
+
+    
+
+    
+    <!-- method parameter -->
+    <h5>Parameters</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">state</span></td>
+          <td class="value-type">Boolean</td>
+          <td>Specify if it should be enabled or not.</td>
+        </tr>
+        
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    
+  </section>
+
+  
+  <section class="method-detail">
+    <h4 id="method-dispose">
+      dispose()
+
+      <a href="#method-dispose" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p>Remove and destroy all event handlers for this instance.</p>
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+  
+
+  
+  <!-- end methods -->
+
+  <!-- events -->
+  
+  <!-- end events -->
+
+  <!-- disqus -->
+  <h3 id="discussion">
+    Discussion
+    <a href="#discussion" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+      var disqus_shortname = 'onsenui'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <!-- end disqus -->
+
+</div>
