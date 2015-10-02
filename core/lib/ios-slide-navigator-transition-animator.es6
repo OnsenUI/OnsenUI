@@ -503,6 +503,9 @@ limitations under the License.
         );
       } else {
 
+        enterPage.element.style.zIndex = 'auto';
+        leavePage.element.style.zIndex = 'auto';
+
         animit.runAll(
 
           maskClear,
@@ -542,6 +545,8 @@ limitations under the License.
               timing: this.timing
             })
             .queue(function(finish) {
+              enterPage.element.style.zIndex = '';
+              leavePage.element.style.zIndex = '';
               done();
               finish();
             })
