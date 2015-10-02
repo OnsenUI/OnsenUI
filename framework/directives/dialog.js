@@ -5,7 +5,7 @@
  * @category dialog
  * @modifier material
  *   [en]Display a Material Design dialog.[/en]
- *   [ja][/ja]
+ *   [ja]マテリアルデザインのダイアログを表示します。[/ja]
  * @description
  *  [en]Dialog that is displayed on top of current screen.[/en]
  *  [ja]現在のスクリーンにダイアログを表示します。[/ja]
