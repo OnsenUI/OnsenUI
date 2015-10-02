@@ -63,16 +63,18 @@ var-dialog-background-color = $dialog-background-color
   markup:
     <div class="dialog-mask dialog--material-mask"></div>
     <div class="dialog dialog--material">
-      <div class="page">
-        <p style="text-align:center;margin-top:40px;opacity:0.4;">Content</p>
-      </div>
+      <h2>Header</h2>
+
+      <p>The quick brown fox jumps over the lazy dog</p>
     </div>
 */
 
 .dialog--material
-  shadow-3()
-  border-radius 0px
+  shadow-5()
+  font-family: 'Roboto', 'Noto', sans-serif;
+  border-radius 2px
   text-align left
+  padding 0px 24px
 
-.dialog-mask
-  background-color transparent
+.dialog--material-mask
+  background-color rgba(0, 0, 0, 0.1)
