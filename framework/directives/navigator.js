@@ -366,9 +366,9 @@
 /**
  * @ngdoc method
  * @signature resetToPage(pageUrl, [options])
- * @param {String} pageUrl
+ * @param {String/undefined} pageUrl
  *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。undefinedや''を指定すると、ons-navigatorが最初に表示したページを指定したことになります。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
  *   [ja]オプションを指定するオブジェクト。[/ja]
