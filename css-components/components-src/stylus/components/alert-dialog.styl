@@ -281,26 +281,35 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
 
 .alert-dialog--material
   border-radius 2px
-  padding-top 16px
+  padding-top 22px
   font-family 'Roboto', 'Noto', sans-serif
   shadow-5()
 
 .alert-dialog--material-title
+  font-family 'Roboto', 'Noto', sans-serif
   text-align left
   font-size 20px
   font-weight 500
   padding 0 24px
 
 .alert-dialog--material-content
+  font-family 'Roboto', 'Noto', sans-serif
   text-align left
   font-size 14px
   font-weight 400
   line-height 20px
   padding 0 24px
-  margin 20px 0
+  margin 24px 0 10px 0
   min-height 0
 
+.alert-dialog--material-footer
+  display inline-block
+  padding 0px 8px 0px 24px
+  box-sizing border-box
+
 .alert-dialog--material-button
+  font-family 'Roboto', 'Noto', sans-serif
+  text-transform uppercase
   display inline-block
   width auto
   min-width 70px
@@ -314,5 +323,3 @@ retina-alert-dialog-button-border(color = var-alert-dialog-separator-color)
 .alert-dialog--material-button:active
   background-color initial
 
-.alert-dialog--material-button::-moz-focus-inner
-  border 0
