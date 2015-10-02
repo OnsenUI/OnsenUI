@@ -75,6 +75,27 @@
       });
     });
 
+    describe('page reset', function () {
+      it('should reset to page', function () {
+        var page1 = element(by.id('page1'));
+        var page2 = element(by.id('page2'));
+        var page3 = element(by.id('page3'));
+        var page4 = element(by.id('page4'));
+        var status = element(by.id('status'));
+
+        expect(status.getText()).toBe('init');
+
+        element(by.id('btn1')).click();
+        browser.wait(EC.visibilityOf(page2));
+        browser.wait(EC.invisibilityOf(page1));
+
+        element(by.id('btn6-reset')).click();
+        browser.wait(EC.stalenessOf(page2));
+
+        expect(page1.isPresent()).toBeTruthy();
+      });
+    });
+
     describe('backbutton handler', function () {
       it('should work on \'backbutton\' event', function() {
         var page1 = element(by.id('page1'));
