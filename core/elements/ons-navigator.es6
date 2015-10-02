@@ -26,7 +26,6 @@ limitations under the License.
   const FadeNavigatorTransitionAnimator = ons._internal.FadeNavigatorTransitionAnimator;
   const NoneNavigatorTransitionAnimator = ons._internal.NoneNavigatorTransitionAnimator;
   const util = ons._util;
-  const AsyncHook = ons._internal.AsyncHook;
   const NavigatorPage = ons._internal.NavigatorPage;
 
   class NavigatorElement extends ons._BaseElement {
@@ -39,8 +38,6 @@ limitations under the License.
 
       this._initialHTML = this.innerHTML;
       this.innerHTML = '';
-      this._compilePageHook = new AsyncHook();
-      this._linkPageHook = new AsyncHook();
 
       this._animatorFactory = new AnimatorFactory({
         animators: window.OnsNavigatorElement._transitionAnimatorDict,
@@ -122,15 +119,13 @@ limitations under the License.
             const element = this._createPageElement(templateHTML);
             const pageObject = this._createPageObject(this._pages[index].page, element, options);
 
-            this._compilePageHook.run((element) => {
-              this._linkPageHook.run((element) => {
-                this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
-                this._pages.splice(index, 0, pageObject);
+            window.OnsNavigatorElement.rewritables.link(this, element, element => {
+              this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
+              this._pages.splice(index, 0, pageObject);
 
-                this._pages[index + 1].destroy();
-                this._popPage(options, unlock);
-              }, element);
-            }, element);
+              this._pages[index + 1].destroy();
+              this._popPage(options, unlock);
+            });
           });
 
         } else {
@@ -211,21 +206,18 @@ limitations under the License.
 
         ons._internal.getPageHTMLAsync(page).then(templateHTML => {
           const element = this._createPageElement(templateHTML);
-
           const pageObject = this._createPageObject(page, element, options);
 
-          this._compilePageHook.run(element => {
-            this._linkPageHook.run(element => {
-              element.style.display = 'none';
-              this.insertBefore(element, this._pages[index].element);
-              this._pages.splice(index, 0, pageObject);
+          window.OnsNavigatorElement.rewritables.link(this, element, element => {
+            element.style.display = 'none';
+            this.insertBefore(element, this._pages[index].element);
+            this._pages.splice(index, 0, pageObject);
 
-              setTimeout(() => {
-                unlock();
-                element = null;
-              }, 1000 / 60);
-            }, element);
-          }, element);
+            setTimeout(() => {
+              unlock();
+              element = null;
+            }, 1000 / 60);
+          });
         });
       });
     }
@@ -316,11 +308,8 @@ limitations under the License.
     attachedCallback() {
       this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
 
-      window.OnsNavigatorElement.ready(this, () => {
+      window.OnsNavigatorElement.rewritables.ready(this, () => {
         if (this._pages.length === 0) {
-          this._linkPageHook.freeze();
-          this._compilePageHook.freeze();
-
           if (!this.getAttribute('page')) {
             const element = this._createPageElement(this._initialHTML || '');
 
@@ -421,27 +410,25 @@ limitations under the License.
 
       this._isPushing = true;
 
-      this._compilePageHook.run(element => {
-        this._linkPageHook.run(element => {
-          setTimeout(() => {
-            if (this._pages.length > 1) {
-              const leavePage = this._pages.slice(-2)[0];
-              const enterPage = this._pages.slice(-1)[0];
+      window.OnsNavigatorElement.rewritables.link(this, element, element => {
+        setTimeout(() => {
+          if (this._pages.length > 1) {
+            const leavePage = this._pages.slice(-2)[0];
+            const enterPage = this._pages.slice(-1)[0];
 
-              this.appendChild(element);
-              leavePage.element._hide();
-              enterPage.element._show();
+            this.appendChild(element);
+            leavePage.element._hide();
+            enterPage.element._show();
 
-              options.animator.push(enterPage, leavePage, done);
-            } else {
-              this.appendChild(element);
-              element._show();
+            options.animator.push(enterPage, leavePage, done);
+          } else {
+            this.appendChild(element);
+            element._show();
 
-              done();
-            }
-          }, 1000 / 60);
-        }, element);
-      }, element);
+            done();
+          }
+        }, 1000 / 60);
+      });
     }
 
     /**
@@ -613,8 +600,23 @@ limitations under the License.
       this._transitionAnimatorDict[name] = Animator;
     };
 
-    window.OnsNavigatorElement.ready = function(element, done) {
-      done();
+    window.OnsNavigatorElement.rewritables = {
+      /**
+       * @param {Element} navigatorSideElement
+       * @param {Function} callback
+       */
+      ready(navigatorElement, callback) {
+        callback();
+      },
+
+      /**
+       * @param {Element} navigatorElement
+       * @param {Element} target
+       * @param {Function} callback
+       */
+      link(navigatorElement, target, callback) {
+        callback(target);
+      }
     };
   }
 })();

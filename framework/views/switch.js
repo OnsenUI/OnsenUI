@@ -18,7 +18,7 @@ limitations under the License.
 (function(){
   'use strict';
 
-  angular.module('onsen').factory('SwitchView', function($parse) {
+  angular.module('onsen').factory('SwitchView', function($parse, $onsen) {
 
     var SwitchView = Class.extend({
 
@@ -36,6 +36,18 @@ limitations under the License.
           this.emit('change', {'switch': this, value: this._checkbox[0].checked, isInteractive: true});
         }.bind(this));
 
+        this._prepareNgModel(element, scope, attrs);
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
+
+        this._clearDerivingMethods = $onsen.deriveMethods(this, element[0], [
+          'isChecked',
+          'setChecked',
+          'getCheckboxElement'
+        ]);
+      },
+
+      _prepareNgModel: function(element, scope, attrs) {
         if (attrs.ngModel) {
           var set = $parse(attrs.ngModel).assign;
 
@@ -55,25 +67,10 @@ limitations under the License.
         }
       },
 
-      /**
-       * @return {Boolean}
-       */
-      isChecked: function() {
-        return this._element[0]._isChecked();
-      },
-
-      /**
-       * @param {Boolean}
-       */
-      setChecked: function(isChecked) {
-        return this._element[0]._setChecked(isChecked);
-      },
-
-      /**
-       * @return {HTMLElement}
-       */
-      getCheckboxElement: function() {
-        return this._checkbox[0];
+      _destroy: function() {
+        this.emit('destroy');
+        this._clearDerivingMethods();
+        this._element = this._checkbox = this._scope = null;
       }
     });
     MicroEvent.mixin(SwitchView);

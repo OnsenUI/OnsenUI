@@ -464,18 +464,15 @@
 (function() {
   'use strict';
 
-  var lastReady = window.OnsNavigatorElement.ready;
-  // wait for AngularJS binding initilization.
-  window.OnsNavigatorElement.ready = function(element, callback) {
-    if (angular.element(element).data('ons-navigator')) {
-      lastReady(element, callback);
-    } else {
-      var listen = function() {
-        lastReady(element, callback);
-        element.removeEventListener('ons-navigator:init', listen, false);
-      };
-      element.addEventListener('ons-navigator:init', listen, false);
-    }
+  var lastReady = window.OnsNavigatorElement.rewritables.ready;
+  window.OnsNavigatorElement.rewritables.ready = ons._waitDiretiveInit('ons-navigator', lastReady);
+
+  var lastLink = window.OnsNavigatorElement.rewritables.link;
+  window.OnsNavigatorElement.rewritables.link = function(navigatorElement, target, callback) {
+    var view = angular.element(navigatorElement).data('ons-navigator');
+    view._compileAndLink(target, function(target) {
+      lastLink(navigatorElement, target, callback);
+    });
   };
 
   angular.module('onsen').directive('onsNavigator', function(NavigatorView, $onsen) {

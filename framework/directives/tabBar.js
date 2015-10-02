@@ -334,21 +334,19 @@
 (function() {
   'use strict';
 
-  var lastReady = window.OnsTabbarElement.ready;
-  // wait for AngularJS binding initilization.
-  window.OnsTabbarElement.ready = function(element, callback) {
-    if (angular.element(element).data('ons-tabbar')) {
-      lastReady(element, callback);
-    } else {
-      var listen = function() {
-        lastReady(element, callback);
-        element.removeEventListener('ons-tabbar:init', listen, false);
-      };
-      element.addEventListener('ons-tabbar:init', listen, false);
-    }
+  var lastReady = window.OnsTabbarElement.rewritables.ready;
+  window.OnsTabbarElement.rewritables.ready = ons._waitDiretiveInit('ons-tabbar', lastReady);
+
+  var lastLink = window.OnsTabbarElement.rewritables.link;
+  window.OnsTabbarElement.rewritables.link = function(tabbarElement, target, callback) {
+    var view = angular.element(tabbarElement).data('ons-tabbar');
+    view._compileAndLink(target, function(target) {
+      lastLink(tabbarElement, target, callback);
+    });
   };
 
   angular.module('onsen').directive('onsTabbar', function($onsen, $compile, $parse, TabbarView) {
+
     return {
       restrict: 'E',
 
