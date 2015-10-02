@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Alert dialog | Onsen UI</title>  
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300italic,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
@@ -47,6 +48,10 @@
         ons.notification.alert({message: "Hello, world!"});
       };
 
+      $scope.alertMaterial = function() {
+        ons.notification.alert({message: 'Hello, world!', modifier: 'material'});
+      };
+
       $scope.confirm = function() {
         ons.notification.confirm({
           message: "Do you like ramen?", 
@@ -56,6 +61,21 @@
               ons.notification.alert({message: "Me too!"});
             } else {
               ons.notification.alert({message: "That's too bad..."});
+            }
+          }
+        });
+      };
+
+      $scope.confirmMaterial = function() {
+        ons.notification.confirm({
+          message: "Do you like ramen?",
+          modifier: 'material',
+          buttonLabels: ["Yes", "No"],
+          callback: function(i) {
+            if (i==0) {
+              ons.notification.alert({message: "Me too!", modifier: 'material'});
+            } else {
+              ons.notification.alert({message: "That's too bad...", modifier: 'material'});
             }
           }
         });
@@ -75,6 +95,28 @@
                 });
               }
             }
+          });
+        };
+
+        fn();
+      };
+
+      $scope.promptMaterial = function() {
+        var fn = function() {
+          ons.notification.prompt({
+            message: "What is the meaning of Life, the Universe and Everything?",
+            callback: function(answer) {
+              if (answer === "42") {
+                ons.notification.alert({message: "That's the correct answer!", modifier: 'material'});
+              } else {
+                ons.notification.alert({
+                  message: "Incorrect! Please try again!",
+                  callback: fn,
+                  modifier: 'material'
+                });
+              }
+            },
+            modifier: 'material'
           });
         };
 
@@ -104,8 +146,13 @@
     </ons-toolbar>
 
     <div style="text-align: center">
-      <br />
-      <ons-button ng-click="fromTemplate()">Create from template</ons-button>
+      <h2 style="font-family: 'Roboto', 'Noto', sans-serif;">Material Design</h2>
+      <ons-button modifier="material" ng-click="fromTemplate()">Create from template</ons-button>
+      <ons-button modifier="material" ng-click="alertMaterial()">Alert</ons-button>
+      <ons-button modifier="material" ng-click="confirmMaterial()">Confirm</ons-button>
+      <ons-button modifier="material" ng-click="promptMaterial()">Prompt</ons-button>
+
+      <h2>iOS</h2>
       <ons-button ng-click="fromTemplate2()">Create from template</ons-button>
       <ons-button ng-click="alert()">Alert</ons-button>
       <ons-button ng-click="confirm()">Confirm</ons-button>
@@ -121,8 +168,14 @@
         An error has occurred!
       </div>
       <div class="alert-dialog-footer alert-dialog--material-footer">
-        <button class="alert-dialog-button alert-dialog--material-button" ng-click="close()">Cancel</button>
-        <button class="alert-dialog-button alert-dialog--material-button" ng-click="close()">OK</button>
+        <button class="alert-dialog-button alert-dialog--material-button" ng-click="close()">
+          <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+          Cancel
+        </button>
+        <button class="alert-dialog-button alert-dialog--material-button" ng-click="close()">
+          <ons-ripple color="rgba(0, 0, 0, 0.1)"></ons-ripple>
+          Ok
+        </button>
       </div>
     </ons-alert-dialog>  
   </script>
