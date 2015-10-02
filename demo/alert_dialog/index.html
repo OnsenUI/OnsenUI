@@ -15,7 +15,7 @@
     var app = angular.module('myApp', ['onsen']);
 
     app.controller('MyCtrl', function($scope) {
-      ons.createAlertDialog('alert.html').then(function(alertDialog) {
+      ons.createAlertDialog('alertMaterial.html').then(function(alertDialog) {
         $scope.alertDialog = alertDialog;
       });
       
@@ -23,9 +23,23 @@
         $scope.alertDialog.show();
       };
 
+      ons.createAlertDialog('alert.html').then(function(alertDialog) {
+        $scope.alertDialog2 = alertDialog;
+      });
+      
+      $scope.fromTemplate2 = function() {
+        $scope.alertDialog2.show();
+      };
+
       $scope.close = function() {
         if($scope.alertDialog && $scope.alertDialog.isShown()) {
           $scope.alertDialog.hide(); 
+        }
+      };
+
+      $scope.close2 = function() {
+        if($scope.alertDialog2 && $scope.alertDialog2.isShown()) {
+          $scope.alertDialog2.hide(); 
         }
       };
 
@@ -92,12 +106,26 @@
     <div style="text-align: center">
       <br />
       <ons-button ng-click="fromTemplate()">Create from template</ons-button>
+      <ons-button ng-click="fromTemplate2()">Create from template</ons-button>
       <ons-button ng-click="alert()">Alert</ons-button>
       <ons-button ng-click="confirm()">Confirm</ons-button>
       <ons-button ng-click="prompt()">Prompt</ons-button>
       <ons-button ng-click="cancelable()">Cancelable</ons-button>
     </div>
   </ons-page>
+
+  <script type="text/ons-template" id="alertMaterial.html">
+    <ons-alert-dialog modifier="material">
+      <div class="alert-dialog-title alert-dialog--material-title">Warning!</div>
+      <div class="alert-dialog-content alert-dialog--material-content">
+        An error has occurred!
+      </div>
+      <div class="alert-dialog-footer alert-dialog--material-footer">
+        <button class="alert-dialog-button alert-dialog--material-button" ng-click="close()">Cancel</button>
+        <button class="alert-dialog-button alert-dialog--material-button" ng-click="close()">OK</button>
+      </div>
+    </ons-alert-dialog>  
+  </script>
 
   <script type="text/ons-template" id="alert.html">
     <ons-alert-dialog>
@@ -106,8 +134,8 @@
         An error has occurred!
       </div>
       <div class="alert-dialog-footer">
-        <button class="alert-dialog-button" ng-click="close()">Cancel</button>
-        <button class="alert-dialog-button" ng-click="close()">OK</button>
+        <button class="alert-dialog-button" ng-click="close2()">Cancel</button>
+        <button class="alert-dialog-button" ng-click="close2()">OK</button>
       </div>
     </ons-alert-dialog>  
   </script>
