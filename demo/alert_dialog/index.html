@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title>Alert dialog | Onsen UI</title>  
-  <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300italic,300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
@@ -19,7 +18,7 @@
       ons.createAlertDialog('alertMaterial.html').then(function(alertDialog) {
         $scope.alertDialog = alertDialog;
       });
-      
+
       $scope.fromTemplate = function() {
         $scope.alertDialog.show();
       };
@@ -27,7 +26,7 @@
       ons.createAlertDialog('alert.html').then(function(alertDialog) {
         $scope.alertDialog2 = alertDialog;
       });
-      
+
       $scope.fromTemplate2 = function() {
         $scope.alertDialog2.show();
       };
@@ -54,7 +53,7 @@
 
       $scope.confirm = function() {
         ons.notification.confirm({
-          message: "Do you like ramen?", 
+          message: "Do you like ramen?",
           buttonLabels: ["Yes", "No"],
           callback: function(i) {
             if (i==0) {
@@ -177,7 +176,7 @@
           Ok
         </button>
       </div>
-    </ons-alert-dialog>  
+    </ons-alert-dialog>
   </script>
 
   <script type="text/ons-template" id="alert.html">
@@ -190,7 +189,7 @@
         <button class="alert-dialog-button" ng-click="close2()">Cancel</button>
         <button class="alert-dialog-button" ng-click="close2()">OK</button>
       </div>
-    </ons-alert-dialog>  
+    </ons-alert-dialog>
   </script>
   
 </body>
