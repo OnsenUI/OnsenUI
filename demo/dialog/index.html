@@ -28,6 +28,15 @@
         $scope.dialog.show();
       };
 
+
+      ons.createDialog('dialogMaterial.html').then(function(dialog2) {
+        $scope.dialog2 = dialog2;
+      });
+
+      $scope.show2 = function() {
+        $scope.dialog2.show();
+      };
+
     });
 
   </script>
@@ -46,11 +55,31 @@
 
       <br />
       <ons-button ng-click="show()">Edit</ons-button>
+      <ons-button ng-click="show2()">Edit</ons-button>
     </div>
   </ons-page>
 
   <script type="text/ons-template" id="dialog.html">
     <ons-dialog style="height: 250px" animation="default" cancelable>
+      <ons-navigator animation="slide" var="app.navi">
+        <ons-page>
+          <ons-toolbar>
+          <div class="center">Name</div>
+          </ons-toolbar>
+          <br />
+          <div style="text-align: center">
+            <input id="name" class="text-input" ng-model="data.name">
+            <p>
+              <ons-button modifier="light" ng-click="app.navi.pushPage('page.html');">Next</ons-button>
+            </p>
+          </div>
+          </ons-page>
+      </ons-navigator>
+    </ons-dialog>  
+  </script>
+
+  <script type="text/ons-template" id="dialogMaterial.html">
+    <ons-dialog style="height: 250px" modifier="material" animation="default" cancelable>
       <ons-navigator animation="slide" var="app.navi">
         <ons-page>
           <ons-toolbar>
