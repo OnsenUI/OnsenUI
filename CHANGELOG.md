@@ -44,6 +44,7 @@ v2.0.0-dev
  * ons-navigator: Added `bringPageTop()` method.
  * ons-carousel: Added `getCarouselItemCount()` method.
  * ons-carousel: Fixed [#929](https://github.com/OnsenUI/OnsenUI/issues/929)
+ * ons-lazy-repeat: Add `reload()` method to delegate object to enable manual reloading.
 
 v1.3.11
 ----
