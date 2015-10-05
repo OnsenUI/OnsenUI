@@ -53,7 +53,6 @@ limitations under the License.
 
         if (typeof oldReload === 'function') {
           userDelegate.reload = function() {
-            console.log("HI");
             oldReload();
             provider._onChange();
           }.bind(this);
