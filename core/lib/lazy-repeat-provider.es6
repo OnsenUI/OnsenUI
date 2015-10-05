@@ -147,11 +147,6 @@ limitations under the License.
       }
 
       this._wrapperElement.style.height = this._calculateListHeight() + 'px';
-
-      // Fix layout bug
-      if (this._wrapperElement.style.marginTop === '') {
-        this._wrapperElement.style.marginTop = '-1px';
-      }
     }
 
     _calculateListHeight() {
