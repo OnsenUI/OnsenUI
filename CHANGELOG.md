@@ -45,6 +45,7 @@ v2.0.0-dev
  * ons-carousel: Added `getCarouselItemCount()` method.
  * ons-carousel: Fixed [#929](https://github.com/OnsenUI/OnsenUI/issues/929)
  * ons-lazy-repeat: Add `reload()` method to delegate object to enable manual reloading.
+ * ons-lazy-repeat: Fix layout of list when it's not placed on top of page.
 
 v1.3.11
 ----
