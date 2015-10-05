@@ -56,7 +56,7 @@ window.styler = (function() {
     var styles = window.getComputedStyle(document.documentElement, '');
     var prefix = (Array.prototype.slice
       .call(styles)
-      .join('') 
+      .join('')
       .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
     )[1];
 
