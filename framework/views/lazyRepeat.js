@@ -40,6 +40,10 @@ limitations under the License.
         this._provider = new ons._internal.LazyRepeatProvider(element[0].parentNode, element[0], internalDelegate);
         element.remove();
 
+        userDelegate.reload = function() {
+          this._provider._onChange();
+        }.bind(this);
+
         // Render when number of items change.
         this._scope.$watch(internalDelegate.countItems.bind(internalDelegate), this._provider._onChange.bind(this._provider));
 
