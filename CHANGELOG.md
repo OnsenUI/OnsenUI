@@ -44,6 +44,7 @@ v2.0.0-dev
  * ons-navigator: Added `bringPageTop()` method.
  * ons-carousel: Added `getCarouselItemCount()` method.
  * ons-carousel: Fixed [#929](https://github.com/OnsenUI/OnsenUI/issues/929)
+ * core: Add `ons-scope` Angular directive to allow not binding component to `$rootScope`.
 
 v1.3.11
 ----
