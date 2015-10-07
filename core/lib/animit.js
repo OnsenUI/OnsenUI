@@ -127,9 +127,11 @@ window.animit = (function(){
      * @param {Float} seconds
      */
     wait: function(seconds) {
-      this.transitionQueue.push(function(done) {
-        setTimeout(done, 1000 * seconds);
-      });
+      if (seconds !== 0 && seconds > 0.00001) {
+        this.transitionQueue.push(function(done) {
+          setTimeout(done, 1000 * seconds);
+        });
+      }
 
       return this;
     },
@@ -361,11 +363,7 @@ window.animit = (function(){
             elements[0].offsetHeight;
           }
 
-          if (window.requestAnimationFrame) {
-            requestAnimationFrame(callback);
-          } else {
-            setTimeout(callback, 1000 / 30);
-          }
+          setImmediate(callback);
         };
       }
 
@@ -374,12 +372,14 @@ window.animit = (function(){
 
         Object.keys(css).forEach(function(name) {
           var value = css[name];
-          name = util.normalizeStyleName(name);
-          var prefixed = Animit.prefix + util.capitalize(name);
 
           if (Animit.cssPropertyDict[name]) {
             result[name] = value;
-          } else if (Animit.cssPropertyDict[prefixed]) {
+            return;
+          }
+
+          var prefixed = Animit.prefix + util.capitalize(name);
+          if (Animit.cssPropertyDict[prefixed]) {
             result[prefixed] = value;
           } else {
             result[prefixed] = value;
@@ -394,17 +394,6 @@ window.animit = (function(){
   };
 
   var util = {
-    /**
-     * Normalize style property name.
-     */
-    normalizeStyleName: function(name) {
-      name = name.replace(/-[a-zA-Z]/g, function(all) {
-        return all.slice(1).toUpperCase();
-      });
-
-      return name.charAt(0).toLowerCase() + name.slice(1);
-    },
-
     // capitalize string
     capitalize : function(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
