@@ -477,6 +477,21 @@ limitations under the License.
             set(ons.componentBase, names, object);
           }
 
+          // Attach to ancestor with ons-scope attribute.
+          var element = object._element[0];
+
+          while (element.parentNode) {
+            if (element.hasAttribute('ons-scope')) {
+              set(angular.element(element).data('_scope'), names, object);
+              element = null;
+              return;
+            }
+
+            element = element.parentNode;
+          }
+          element = null;
+
+          // If no ons-scope element was found, attach to $rootScope.
           set($rootScope, names, object);
         }
       };
