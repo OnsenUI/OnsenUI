@@ -176,7 +176,7 @@ limitations under the License.
 
         // Fix position.
         let element = this._renderedItems[index].element;
-        element.style.top = top + 'px';
+        element.style.top = (this._wrapperElement.offsetTop + top) + 'px';
 
         return;
       }
