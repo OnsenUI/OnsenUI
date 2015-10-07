@@ -40,16 +40,6 @@ window.animit = (function(){
 
     this.transitionQueue = [];
     this.lastStyleAttributeDict = [];
-
-    var self = this;
-    this.elements.forEach(function(element, index) {
-      if (!element.hasAttribute('data-animit-orig-style')) {
-        self.lastStyleAttributeDict[index] = element.getAttribute('style');
-        element.setAttribute('data-animit-orig-style', self.lastStyleAttributeDict[index] || '');
-      } else {
-        self.lastStyleAttributeDict[index] = element.getAttribute('data-animit-orig-style');
-      }
-    });
   };
 
   Animit.prototype = {
@@ -60,9 +50,9 @@ window.animit = (function(){
     transitionQueue: undefined,
 
     /**
-     * @property {HTMLElement}
+     * @property {Array}
      */
-    element: undefined,
+    elements: undefined,
 
     /**
      * Start animation sequence with passed animations.
@@ -127,7 +117,7 @@ window.animit = (function(){
      * @param {Float} seconds
      */
     wait: function(seconds) {
-      if (seconds !== 0 && seconds > 0.00001) {
+      if (seconds > 0) {
         this.transitionQueue.push(function(done) {
           setTimeout(done, 1000 * seconds);
         });
@@ -136,15 +126,31 @@ window.animit = (function(){
       return this;
     },
 
+    saveStyle: function() {
+
+      this.transitionQueue.push(function(done) {
+        this.elements.forEach(function(element, index) {
+          var css = this.lastStyleAttributeDict[index] = {};
+
+          for (var i = 0; i < element.style.length; i++) {
+            css[element.style[i]] = element.style[element.style[i]];
+          }
+        }.bind(this));
+        done();
+      }.bind(this));
+
+      return this;
+    },
+
     /**
-     * Reset element's style.
+     * Restore element's style.
      *
      * @param {Object} [options]
      * @param {Float} [options.duration]
      * @param {String} [options.timing]
      * @param {String} [options.transition]
      */
-    resetStyle: function(options) {
+    restoreStyle: function(options) {
       options = options || {};
       var self = this;
 
@@ -154,7 +160,6 @@ window.animit = (function(){
 
       if (options.transition || (options.duration && options.duration > 0)) {
         var transitionValue = options.transition || ('all ' + options.duration + 's ' + (options.timing || 'linear'));
-        var transitionStyle = 'transition: ' + transitionValue + '; -' + Animit.prefix + '-transition: ' + transitionValue + ';';
 
         this.transitionQueue.push(function(done) {
           var elements = this.elements;
@@ -164,8 +169,17 @@ window.animit = (function(){
             element.style[Animit.prefix + 'Transition'] = transitionValue;
             element.style.transition = transitionValue;
 
-            var styleValue = (self.lastStyleAttributeDict[index] ? self.lastStyleAttributeDict[index] + '; ' : '') + transitionStyle;
-            element.setAttribute('style', styleValue);
+            var css = self.lastStyleAttributeDict[index];
+
+            for (var i = 0, len = element.style.length; i < len; i++) {
+              if (css[element.style[i]] === undefined) {
+                css[element.style[i]] = '';
+              }
+            }
+
+            Object.keys(css).forEach(function(key) {
+              element.style[key] = css[key];
+            });
           });
 
           // add "transitionend" event handler
@@ -198,7 +212,20 @@ window.animit = (function(){
           element.style.transition = 'none';
 
           if (self.lastStyleAttributeDict[index]) {
-            element.setAttribute('style', self.lastStyleAttributeDict[index]);
+            var css = self.lastStyleAttributeDict[index];
+
+            for (var i = 0, len = element.style.length; i < len; i++) {
+              if (typeof css[element.style[i]] !== 'string') {
+                // clear style
+                css[element.style[i]] = '';
+              }
+            }
+
+            Object.keys(css).forEach(function(key) {
+              element.style[key] = css[key];
+            });
+
+            self.lastStyleAttributeDict[index] = null;
           } else {
             element.setAttribute('style', '');
             element.removeAttribute('style');

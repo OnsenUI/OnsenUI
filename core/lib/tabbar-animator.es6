@@ -66,6 +66,7 @@ limitations under the License.
     apply(enterPage, leavePage, enterPageIndex, leavePageIndex, done) {
       animit.runAll(
         animit(enterPage)
+          .saveStyle()
           .queue({
             transform: 'translate3D(0, 0, 0)',
             opacity: 0
@@ -78,7 +79,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(callback) {
             done();
             callback();
@@ -121,6 +122,7 @@ limitations under the License.
 
       animit.runAll(
         animit(enterPage)
+          .saveStyle()
           .queue({
             transform: 'translate3D(' + (sgn ? '' : '-') + '100%, 0, 0)',
           })
@@ -131,7 +133,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(callback) {
             done();
             callback();

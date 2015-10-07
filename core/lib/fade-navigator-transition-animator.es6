@@ -46,6 +46,7 @@ limitations under the License.
       animit.runAll(
 
         animit([enterPage.element._getContentElement(), enterPage.element._getBackgroundElement()])
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3D(0, 0, 0)',
@@ -62,13 +63,14 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(done) {
             callback();
             done();
           }),
 
         animit(enterPage.element._getToolbarElement())
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3D(0, 0, 0)',
@@ -85,7 +87,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
       );
 
     }
