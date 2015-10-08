@@ -364,19 +364,18 @@ window.animit = (function(){
           var elements = this.elements;
 
           elements.forEach(function(element) {
-            element.style[util.vendorPrefix + 'Transition'] = 'none';
-            element.transition = 'none';
+            element.style[util.transitionPropertyName] = '';
 
             Object.keys(css).forEach(function(name) {
               element.style[name] = css[name];
             });
           });
 
-          if (elements.length) {
-            elements[0].offsetHeight;
+          if (elements.length > 0) {
+            util.forceLayoutAtOnce(elements, callback);
+          } else {
+            util.batchImmediate(callback);
           }
-
-          setImmediate(callback);
         };
       }
 
@@ -511,6 +510,61 @@ window.animit = (function(){
           .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
         )[1];
       return pre;
+    })(),
+
+    forceLayoutAtOnce: function(elements, callback) {
+      this.batchImmediate(function() {
+        elements.forEach(function(element) {
+          // force layout
+          element.offsetHeight;
+        });
+        util.batchImmediate(callback);
+      });
+    },
+
+    batchImmediate: (function() {
+      var callbacks = [];
+
+      return function(callback) {
+        if (callbacks.length === 0) {
+          setImmediate(function() {
+            var concreateCallbacks = callbacks.slice(0);
+            callbacks = [];
+            concreateCallbacks.forEach(function(callback) {
+              callback();
+            });
+          });
+        }
+
+        callbacks.push(callback);
+      };
+    })(),
+
+    batchAnimationFrame: (function() {
+      var callbacks = [];
+
+      var raf = window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function(callback) {
+          setTimeout(callback, 1000 / 60);
+        };
+
+      return function(callback) {
+        if (callbacks.length === 0) {
+          raf(function() {
+            var concreateCallbacks = callbacks.slice(0);
+            callbacks = [];
+            concreateCallbacks.forEach(function(callback) {
+              callback();
+            });
+          });
+        }
+
+        callbacks.push(callback);
+      };
     })()
   };
 
