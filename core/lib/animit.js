@@ -22,6 +22,8 @@ limitations under the License.
 window.animit = (function(){
   'use strict';
 
+  var TIMEOUT_RATIO = 1.4;
+
   /**
    * @param {HTMLElement} element
    */
@@ -179,7 +181,7 @@ window.animit = (function(){
             removeListeners();
             clearTransition();
             done();
-          }, options.duration * 1000 * 1.4);
+          }, options.duration * 1000 * TIMEOUT_RATIO);
 
           // transition and style settings
           elements.forEach(function(element, index) {
@@ -333,7 +335,7 @@ window.animit = (function(){
 
         return function(callback) {
           var elements = this.elements;
-          var timeout = self.options.duration * 1000 * 1.4;
+          var timeout = self.options.duration * 1000 * TIMEOUT_RATIO;
 
           var removeListeners = util.addOnTransitionEnd(elements[0], function() {
             clearTimeout(timeoutId);
