@@ -170,7 +170,7 @@ window.animit = (function(){
           var elements = this.elements;
 
           // add "transitionend" event handler
-          var removeListeners = util.addOnTransitionEnd(elements[0], function() {
+          var removeListeners = util.onceOnTransitionEnd(elements[0], function() {
             clearTimeout(timeoutId);
             clearTransition();
             done();
@@ -337,7 +337,7 @@ window.animit = (function(){
           var elements = this.elements;
           var timeout = self.options.duration * 1000 * TIMEOUT_RATIO;
 
-          var removeListeners = util.addOnTransitionEnd(elements[0], function() {
+          var removeListeners = util.onceOnTransitionEnd(elements[0], function() {
             clearTimeout(timeoutId);
             callback();
           });
@@ -432,7 +432,7 @@ window.animit = (function(){
     /**
      * Add an event handler on "transitionend" event.
      */
-    addOnTransitionEnd: function(element, callback) {
+    onceOnTransitionEnd: function(element, callback) {
       if (!element) {
         return function() {};
       }
