@@ -348,8 +348,7 @@ window.animit = (function(){
           }, timeout);
 
           elements.forEach(function(element) {
-            element.style[util.vendorPrefix + 'Transition'] = transitionValue;
-            element.style.transition = transitionValue;
+            element.style[util.transitionPropertyName] = transitionValue;
 
             Object.keys(css).forEach(function(name) {
               element.style[name] = css[name];
