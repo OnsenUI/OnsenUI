@@ -371,9 +371,11 @@ window.animit = (function(){
           });
 
           if (elements.length > 0) {
-            util.forceLayoutAtOnce(elements, callback);
+            util.forceLayoutAtOnce(elements, function() {
+              util.batchAnimationFrame(callback);
+            });
           } else {
-            util.batchImmediate(callback);
+            util.batchAnimationFrame(callback);
           }
         };
       }
@@ -517,7 +519,7 @@ window.animit = (function(){
           // force layout
           element.offsetHeight;
         });
-        util.batchImmediate(callback);
+        callback();
       });
     },
 
