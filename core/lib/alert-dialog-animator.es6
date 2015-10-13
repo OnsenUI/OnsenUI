@@ -74,6 +74,7 @@ limitations under the License.
           }),
 
         animit(dialog._dialog)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3d(-50%, -50%, 0) scale3d(0.9, 0.9, 1.0)',
@@ -90,7 +91,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(done) {
             callback();
             done();
@@ -120,6 +121,7 @@ limitations under the License.
           }),
 
         animit(dialog._dialog)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3d(-50%, -50%, 0) scale3d(1.0, 1.0, 1.0)',
@@ -136,7 +138,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(done) {
             callback();
             done();
@@ -176,6 +178,7 @@ limitations under the License.
           }),
 
         animit(dialog._dialog)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3d(-50%, -50%, 0) scale3d(1.3, 1.3, 1.0)',
@@ -192,7 +195,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(done) {
             callback();
             done();
@@ -222,6 +225,7 @@ limitations under the License.
           }),
 
         animit(dialog._dialog)
+          .saveStyle()
           .queue({
             css: {
               opacity: 1.0
@@ -236,7 +240,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(done) {
             callback();
             done();

@@ -54,6 +54,7 @@ limitations under the License.
       animit.runAll(
 
         animit(this.backgroundMask)
+          .saveStyle()
           .queue({
             opacity: 0,
             transform: 'translate3d(0, 0, 0)'
@@ -65,13 +66,14 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(done => {
             this.backgroundMask.remove();
             done();
           }),
 
         animit(enterPage.element)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3D(100%, 0, 0)',
@@ -86,9 +88,10 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle(),
+          .restoreStyle(),
 
         animit(leavePage.element)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3D(0, 0, 0)'
@@ -103,7 +106,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .wait(0.2)
           .queue(function(done) {
             callback();
@@ -124,6 +127,7 @@ limitations under the License.
       animit.runAll(
 
         animit(this.backgroundMask)
+          .saveStyle()
           .queue({
             opacity: this.blackMaskOpacity,
             transform: 'translate3d(0, 0, 0)'
@@ -135,13 +139,14 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(done => {
             this.backgroundMask.remove();
             done();
           }),
 
         animit(enterPage.element)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3D(-45%, 0px, 0px)',
@@ -158,7 +163,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle(),
+          .restoreStyle(),
 
         animit(leavePage.element)
           .queue({
