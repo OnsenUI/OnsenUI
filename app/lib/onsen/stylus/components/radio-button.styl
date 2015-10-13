@@ -118,7 +118,7 @@ radio-button--disabled()
   width var-radio-button-size
   height var-radio-button-size
   background var-radio-button-background
-  pointer-events: none
+  pointer-events none
 
 .radio-button__input:checked + .radio-button__checkmark
   background var-radio-button-background-active
@@ -143,7 +143,7 @@ radio-button--disabled()
 
 
 /*! topdoc
-  name: Material-like Radio Button
+  name: Material Radio Button
   use: Radio Button
   modifiers:
   markup:
@@ -171,6 +171,7 @@ radio-button--disabled()
 
 .radio-button--material
   line-height var-material-radio-button-size
+  material-font()
 
 .radio-button--material__checkmark
   width var-material-radio-button-size
@@ -178,7 +179,7 @@ radio-button--disabled()
 
 .radio-button--material__checkmark:before
   background transparent
-  border 2px solid #696969
+  border 2px solid #5a5a5a
   border-radius 50%
   width var-material-radio-button-size
   height var-material-radio-button-size

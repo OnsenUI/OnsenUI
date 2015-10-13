@@ -34,7 +34,7 @@
           <div id="pageNav">
             <ul>
               <li><a href="#switch">Switch</a></li>
-              <li><a href="#material-like-switch">Material-like Switch</a></li>
+              <li><a href="#material-switch">Material Switch</a></li>
               <li><a href="#range">Range</a></li>
               <li><a href="#material-range">Material Range</a></li>
               <li><a href="#navigation-bar">Navigation Bar</a></li>
@@ -69,9 +69,9 @@
               <li><a href="#toolbar-button">Toolbar Button</a></li>
               <li><a href="#checkbox">Checkbox</a></li>
               <li><a href="#no-border-checkbox">No border Checkbox</a></li>
-              <li><a href="#material-like-checkbox">Material-like Checkbox</a></li>
+              <li><a href="#material-checkbox">Material Checkbox</a></li>
               <li><a href="#radio-button">Radio Button</a></li>
-              <li><a href="#material-like-radio-button">Material-like Radio Button</a></li>
+              <li><a href="#material-radio-button">Material Radio Button</a></li>
               <li><a href="#list">List</a></li>
               <li><a href="#noborder-list">Noborder List</a></li>
               <li><a href="#category-list-header">Category List Header</a></li>
@@ -90,14 +90,17 @@
               <li><a href="#text-input">Text Input</a></li>
               <li><a href="#transparent-text-input">Transparent Text Input</a></li>
               <li><a href="#underbar-text-input">Underbar Text Input</a></li>
+              <li><a href="#material-input">Material Input</a></li>
               <li><a href="#textarea">Textarea</a></li>
               <li><a href="#textarea-transparent">Textarea Transparent</a></li>
               <li><a href="#dialog">Dialog</a></li>
+              <li><a href="#material-dialog">Material Dialog</a></li>
               <li><a href="#alert-dialog">Alert Dialog</a></li>
               <li><a href="#alert-dialog-without-title">Alert Dialog without Title</a></li>
               <li><a href="#alert-dialog-with-multiple-buttons">Alert Dialog with Multiple Buttons</a></li>
               <li><a href="#alert-dialog-with-multiple-buttons-2">Alert Dialog with Multiple Buttons 2</a></li>
               <li><a href="#android-like-alert-dialog">Android-like Alert Dialog</a></li>
+              <li><a href="#material-alert-dialog">Material Alert Dialog</a></li>
               <li><a href="#popover">Popover</a></li>
               <li><a href="#popoverdown)">Popover(down)</a></li>
               <li><a href="#popoverleft)">Popover(left)</a></li>
@@ -146,9 +149,9 @@
               </section>
             </footer>
           </article>
-          <article id="material-like-switch" class="component">
+          <article id="material-switch" class="component">
             <header>
-              <h2>Material-like Switch</h2>
+              <h2>Material Switch</h2>
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
@@ -741,9 +744,9 @@
               </section>
             </footer>
           </article>
-          <article id="material-like-checkbox" class="component">
+          <article id="material-checkbox" class="component">
             <header>
-              <h2>Material-like Checkbox</h2>
+              <h2>Material Checkbox</h2>
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
@@ -775,9 +778,9 @@
               </section>
             </footer>
           </article>
-          <article id="material-like-radio-button" class="component">
+          <article id="material-radio-button" class="component">
             <header>
-              <h2>Material-like Radio Button</h2>
+              <h2>Material Radio Button</h2>
             </header>
             <section class="component">
               <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
@@ -1098,6 +1101,23 @@
               </section>
             </footer>
           </article>
+          <article id="material-input" class="component">
+            <header>
+              <h2>Material Input</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><span>  <input class="text-input--material" placeholder="Username" type="text" required>  <input class="text-input--material" placeholder="Password" type="password" required></span></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;span&gt;  &lt;input class=&quot;text-input--material&quot; placeholder=&quot;Username&quot; type=&quot;text&quot; required&gt;  &lt;input class=&quot;text-input--material&quot; placeholder=&quot;Password&quot; type=&quot;password&quot; required&gt;&lt;/span&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
           <article id="textarea" class="component">
             <header>
               <h2>Textarea</h2>
@@ -1145,6 +1165,23 @@
               <section class="code">
                 <div>
                   <pre class="html"><code data-language="html">&lt;div class=&quot;dialog-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;dialog&quot;&gt;  &lt;div class=&quot;page&quot;&gt;    &lt;p style=&quot;text-align:center;margin-top:40px;opacity:0.4;&quot;&gt;Content&lt;/p&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="material-dialog" class="component">
+            <header>
+              <h2>Material Dialog</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 160px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="dialog-mask dialog--material-mask"></div><div class="dialog dialog--material">  <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;dialog-mask dialog--material-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;dialog dialog--material&quot;&gt;  &lt;p style=&quot;margin-left:24px;margin-right:24px&quot;&gt;The quick brown fox jumps over the lazy dog.&lt;/p&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>
@@ -1230,6 +1267,23 @@
               <section class="code">
                 <div>
                   <pre class="html"><code data-language="html">&lt;div class=&quot;alert-dialog-mask&quot;&gt;&lt;/div&gt;&lt;div class=&quot;alert-dialog alert-dialog--android&quot;&gt;  &lt;div class=&quot;alert-dialog-title alert-dialog-title--android&quot;&gt;    Alert  &lt;/div&gt;  &lt;div class=&quot;alert-dialog-content alert-dialog-content--android&quot;&gt;    Hello World!  &lt;/div&gt;  &lt;div class=&quot;alert-dialog-footer alert-dialog-footer--one&quot;&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--one&quot;&gt;Cancel&lt;/button&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--primal alert-dialog-button--one&quot;&gt;Ok&lt;/button&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
+                </div>
+              </section>
+            </footer>
+          </article>
+          <article id="material-alert-dialog" class="component">
+            <header>
+              <h2>Material Alert Dialog</h2>
+            </header>
+            <section class="component">
+              <div style="width: 320px; position: relative; min-height: 360px;" class="markup page__background">
+                <div style="width: 100%; height: 100%; position:absolute"><div class="alert-dialog alert-dialog--material">  <div class="alert-dialog-title alert-dialog-title--material">    Dialog title  </div>  <div class="alert-dialog-content alert-dialog-content--material">    Some dialog content.  </div>  <div class="alert-dialog-footer alert-dialog-footer--material">    <button class="alert-dialog-button alert-dialog-button--material">OK</button>    <button class="alert-dialog-button alert-dialog-button--material">CANCEL</button>  </div></div></div>
+              </div>
+            </section>
+            <footer class="showcode"><a href="#">Show code snippets</a>
+              <section class="code">
+                <div>
+                  <pre class="html"><code data-language="html">&lt;div class=&quot;alert-dialog alert-dialog--material&quot;&gt;  &lt;div class=&quot;alert-dialog-title alert-dialog-title--material&quot;&gt;    Dialog title  &lt;/div&gt;  &lt;div class=&quot;alert-dialog-content alert-dialog-content--material&quot;&gt;    Some dialog content.  &lt;/div&gt;  &lt;div class=&quot;alert-dialog-footer alert-dialog-footer--material&quot;&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--material&quot;&gt;OK&lt;/button&gt;    &lt;button class=&quot;alert-dialog-button alert-dialog-button--material&quot;&gt;CANCEL&lt;/button&gt;  &lt;/div&gt;&lt;/div&gt;</code></pre>
                 </div>
               </section>
             </footer>

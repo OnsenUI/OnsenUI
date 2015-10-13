@@ -134,6 +134,12 @@ list__item()
   background-color var-list-background-color
   retina-list-border()
 
+.list:first-child
+  border-top 0
+
+.list + .list
+  border-top 0
+
 .list__item
   list__item()
   padding var-list-item-padding

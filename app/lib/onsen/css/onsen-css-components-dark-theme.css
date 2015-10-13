@@ -228,7 +228,7 @@ h6 {
   pointer-events: none;
 }
 /* topdoc
-  name: Material-like Switch
+  name: Material Switch
   use: Switch
   modifiers:
     :focus: Focus state
@@ -991,7 +991,7 @@ h6 {
   text-overflow: ellipsis;
   text-align: left;
   padding-left: 34px;
-  line-height: 60px;
+  line-height: 56px;
 }
 .navigation-bar--material__right {
   font-family: 'Roboto', 'Noto', sans-serif;
@@ -1583,6 +1583,8 @@ h6 {
   -moz-transform: translate3d(0, 0, 0);
   -o-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
+  text-transform: uppercase;
+  font-family: 'Roboto', 'Noto', sans-serif;
 }
 .button--material:active {
   -webkit-box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.4);
@@ -1672,6 +1674,8 @@ h6 {
   -moz-transform: translate3d(0, 0, 0);
   -o-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
+  text-transform: uppercase;
+  font-family: 'Roboto', 'Noto', sans-serif;
   -webkit-box-shadow: none;
   box-shadow: none;
   background-color: transparent;
@@ -2737,7 +2741,7 @@ h6 {
   border: none;
 }
 /* topdoc
-  name: Material-like Checkbox
+  name: Material Checkbox
   use: Checkbox
   modifiers:
     :focus: Focus state
@@ -2766,6 +2770,7 @@ h6 {
 */
 .checkbox--material {
   line-height: 18px;
+  font-family: 'Roboto', 'Noto', sans-serif;
 }
 .checkbox--material__checkmark {
   width: 18px;
@@ -2810,7 +2815,7 @@ h6 {
 .checkbox--material__checkmark:before {
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  border-color: #212121;
+  border-color: #5a5a5a;
   width: 18px;
   height: 18px;
 }
@@ -2969,7 +2974,7 @@ h6 {
   pointer-events: none;
 }
 /* topdoc
-  name: Material-like Radio Button
+  name: Material Radio Button
   use: Radio Button
   modifiers:
   markup:
@@ -2996,6 +3001,7 @@ h6 {
 */
 .radio-button--material {
   line-height: 20px;
+  font-family: 'Roboto', 'Noto', sans-serif;
 }
 .radio-button--material__checkmark {
   width: 20px;
@@ -3003,7 +3009,7 @@ h6 {
 }
 .radio-button--material__checkmark:before {
   background: transparent;
-  border: 2px solid #696969;
+  border: 2px solid #5a5a5a;
   -webkit-border-radius: 50%;
   border-radius: 50%;
   width: 20px;
@@ -3146,6 +3152,12 @@ h6 {
     background-image: -o-linear-gradient(90deg, #424242, #424242 50%, transparent 50%), -o-linear-gradient(270deg, #424242, #424242 50%, transparent 50%);
     background-image: linear-gradient(0deg, #424242, #424242 50%, transparent 50%), linear-gradient(180deg, #424242, #424242 50%, transparent 50%);
   }
+}
+.list:first-child {
+  border-top: 0;
+}
+.list + .list {
+  border-top: 0;
 }
 .list__item {
   margin: 0;
@@ -3826,6 +3838,116 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   border-bottom: 1px solid #424242;
 }
 /* topdoc
+  name: Material Input
+  class: text-input--material
+  markup:
+    <span>
+      <input class="text-input--material" placeholder="Username" type="text" required>
+      <input class="text-input--material" placeholder="Password" type="password" required>
+    </span>
+*/
+.text-input--material {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  line-height: normal;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  vertical-align: top;
+  outline: none;
+  line-height: 1;
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 17px;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#424242), to(#424242));
+  background-image: -webkit-linear-gradient(#424242, #424242);
+  background-image: -moz-linear-gradient(#424242, #424242);
+  background-image: -o-linear-gradient(#424242, #424242);
+  background-image: linear-gradient(#424242, #424242);
+  -webkit-background-size: 100% 2px;
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  padding-bottom: 2px;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+}
+.text-input--material__label {
+  color: #3d74ff;
+}
+.text-input--material:focus {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3d74ff), to(#3d74ff)), -webkit-gradient(linear, left top, left bottom, from(#424242), to(#424242));
+  background-image: -webkit-linear-gradient(#3d74ff, #3d74ff), -webkit-linear-gradient(#424242, #424242);
+  background-image: -moz-linear-gradient(#3d74ff, #3d74ff), -moz-linear-gradient(#424242, #424242);
+  background-image: -o-linear-gradient(#3d74ff, #3d74ff), -o-linear-gradient(#424242, #424242);
+  background-image: linear-gradient(#3d74ff, #3d74ff), linear-gradient(#424242, #424242);
+  -webkit-animation: material-input-animate 0.3s forwards;
+  -moz-animation: material-input-animate 0.3s forwards;
+  -o-animation: material-input-animate 0.3s forwards;
+  animation: material-input-animate 0.3s forwards;
+  -webkit-background-size: 0% 2px;
+  background-size: 0% 2px;
+}
+.text-input--material::-webkit-input-placeholder {
+  color: #87888f;
+}
+.text-input--material::-moz-placeholder {
+  color: #87888f;
+}
+.text-input--material::-ms-input-placeholder {
+  color: #87888f;
+}
+@-moz-keyframes material-input-animate {
+  0% {
+    background-size: 0% 2px, 100% 2px;
+  }
+  100% {
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+@-webkit-keyframes material-input-animate {
+  0% {
+    -webkit-background-size: 0% 2px, 100% 2px;
+    background-size: 0% 2px, 100% 2px;
+  }
+  100% {
+    -webkit-background-size: 100% 2px, 100% 2px;
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+@-o-keyframes material-input-animate {
+  0% {
+    background-size: 0% 2px, 100% 2px;
+  }
+  100% {
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+@keyframes material-input-animate {
+  0% {
+    -webkit-background-size: 0% 2px, 100% 2px;
+    background-size: 0% 2px, 100% 2px;
+  }
+  100% {
+    -webkit-background-size: 100% 2px, 100% 2px;
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+/* topdoc
   name: Textarea
   class: textarea
   modifiers:
@@ -4004,7 +4126,24 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0,0,0,0.2);
+}
+/* topdoc
+  name: Material Dialog
+  use: Dialog
+  markup:
+    <div class="dialog-mask dialog--material-mask"></div>
+    <div class="dialog dialog--material">
+      <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
+    </div>
+*/
+.dialog--material {
+  -webkit-box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
+  box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  text-align: left;
 }
 /* topdoc
   name: Alert Dialog
@@ -4322,6 +4461,77 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 .alert-dialog-content--android {
   text-align: left;
   padding: 8px 12px;
+}
+/* topdoc
+  name: Material Alert Dialog
+  use: Alert Dialog
+  height: 360px
+  markup:
+    <div class="alert-dialog alert-dialog--material">
+      <div class="alert-dialog-title alert-dialog-title--material">
+        Dialog title
+      </div>
+      <div class="alert-dialog-content alert-dialog-content--material">
+        Some dialog content.
+      </div>
+      <div class="alert-dialog-footer alert-dialog-footer--material">
+        <button class="alert-dialog-button alert-dialog-button--material">OK</button>
+        <button class="alert-dialog-button alert-dialog-button--material">CANCEL</button>
+      </div>
+    </div>
+*/
+.alert-dialog--material {
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  padding-top: 22px;
+  -webkit-box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
+  box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
+}
+.alert-dialog-title--material {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 0 24px;
+}
+.alert-dialog-content--material {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 0 24px;
+  margin: 24px 0 10px 0;
+  min-height: 0;
+}
+.alert-dialog-footer--material {
+  display: inline-block;
+  padding: 0px 8px 0px 24px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.alert-dialog-button--material {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  text-transform: uppercase;
+  display: inline-block;
+  width: auto;
+  min-width: 70px;
+  float: right;
+  background: none;
+  border-top: none;
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+}
+.alert-dialog-button--material:active {
+  background-color: initial;
+}
+.alert-dialog-button--one--material {
+  border: 0;
+}
+.alert-dialog-button--primal--material {
+  font-weight: 500;
 }
 /* topdoc
   name: Popover
@@ -4975,6 +5185,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  font-family: 'Roboto', 'Noto', sans-serif;
   width: 56px;
   height: 56px;
   text-decoration: none;
