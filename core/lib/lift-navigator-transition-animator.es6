@@ -62,6 +62,7 @@ limitations under the License.
         maskClear,
 
         animit(enterPage.element)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3D(0, 100%, 0)',
@@ -77,7 +78,7 @@ limitations under the License.
             timing: this.timing
           })
           .wait(0.2)
-          .resetStyle()
+          .restoreStyle()
           .queue(function(done) {
             callback();
             done();
@@ -123,6 +124,7 @@ limitations under the License.
           }),
 
         animit(enterPage.element)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3D(0, -10%, 0)',
@@ -139,7 +141,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .wait(0.4)
           .queue(function(done) {
             callback();

@@ -113,6 +113,7 @@ limitations under the License.
       })();
 
       const maskClear = animit(this.backgroundMask)
+        .saveStyle()
         .queue({
           opacity: 0,
           transform: 'translate3d(0, 0, 0)'
@@ -124,7 +125,7 @@ limitations under the License.
           duration: this.duration,
           timing: this.timing
         })
-        .resetStyle()
+        .restoreStyle()
         .queue((done) => {
           this.backgroundMask.remove();
           done();
@@ -141,6 +142,7 @@ limitations under the License.
           maskClear,
 
           animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background])
+            .saveStyle()
             .queue({
               css: {
                 transform: 'translate3D(100%, 0px, 0px)',
@@ -155,9 +157,10 @@ limitations under the License.
               duration: this.duration,
               timing: this.timing
             })
-            .resetStyle(),
+            .restoreStyle(),
 
           animit(enterPageDecomposition.toolbar)
+            .saveStyle()
             .queue({
               css: {
                 background: 'none',
@@ -167,7 +170,7 @@ limitations under the License.
               duration: 0
             })
             .wait(this.delay + 0.3)
-            .resetStyle({
+            .restoreStyle({
               duration: 0.1,
               transition:
                 'background-color 0.1s linear, ' +
@@ -175,6 +178,7 @@ limitations under the License.
             }),
 
           animit(enterPageDecomposition.pageLabels)
+            .saveStyle()
             .queue({
               css: {
                 transform: 'translate3d(' + delta + 'px, 0, 0)',
@@ -191,9 +195,10 @@ limitations under the License.
               duration: this.duration,
               timing: this.timing
             })
-            .resetStyle(),
+            .restoreStyle(),
 
           animit(enterPageDecomposition.other)
+            .saveStyle()
             .queue({
               css: {opacity: 0},
               duration: 0
@@ -204,9 +209,10 @@ limitations under the License.
               duration: this.duration,
               timing: this.timing
             })
-            .resetStyle(),
+            .restoreStyle(),
 
           animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background])
+            .saveStyle()
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)',
@@ -221,7 +227,7 @@ limitations under the License.
               duration: this.duration,
               timing: this.timing
             })
-            .resetStyle()
+            .restoreStyle()
             .queue(function(done) {
               enterPage.element.style.zIndex = '';
               leavePage.element.style.zIndex = '';
@@ -230,6 +236,7 @@ limitations under the License.
             }),
 
           animit(leavePageDecomposition.pageLabels)
+            .saveStyle()
             .queue({
               css: {
                 transform: 'translate3d(0, 0, 0)',
@@ -246,9 +253,10 @@ limitations under the License.
               duration: this.duration,
               timing: this.timing
             })
-            .resetStyle(),
+            .restoreStyle(),
 
           animit(leavePageDecomposition.other)
+            .saveStyle()
             .queue({
               css: {opacity: 1},
               duration: 0
@@ -259,7 +267,7 @@ limitations under the License.
               duration: this.duration,
               timing: this.timing
             })
-            .resetStyle()
+            .restoreStyle()
 
         );
 
@@ -273,6 +281,7 @@ limitations under the License.
           maskClear,
 
           animit(enterPage.element)
+            .saveStyle()
             .queue({
               css: {
                 transform: 'translate3D(100%, 0px, 0px)',
@@ -287,9 +296,10 @@ limitations under the License.
               duration: this.duration,
               timing: this.timing
             })
-            .resetStyle(),
+            .restoreStyle(),
 
           animit(leavePage.element)
+            .saveStyle()
             .queue({
               css: {
                 transform: 'translate3D(0, 0, 0)'
@@ -304,7 +314,7 @@ limitations under the License.
               duration: this.duration,
               timing: this.timing
             })
-            .resetStyle()
+            .restoreStyle()
             .queue(function(done) {
               enterPage.element.style.zIndex = '';
               leavePage.element.style.zIndex = '';
@@ -334,6 +344,7 @@ limitations under the License.
       })();
 
       const maskClear = animit(this.backgroundMask)
+        .saveStyle()
         .queue({
           opacity: 0.1,
           transform: 'translate3d(0, 0, 0)'
@@ -345,7 +356,7 @@ limitations under the License.
           duration: this.duration,
           timing: this.timing
         })
-        .resetStyle()
+        .restoreStyle()
         .queue((done) => {
           this.backgroundMask.remove();
           done();
@@ -363,6 +374,7 @@ limitations under the License.
           maskClear,
 
           animit([enterPageDecomposition.content, enterPageDecomposition.bottomToolbar, enterPageDecomposition.background])
+            .saveStyle()
             .queue({
               css: {
                 transform: 'translate3D(-25%, 0px, 0px)',
@@ -379,9 +391,10 @@ limitations under the License.
               duration: this.duration,
               timing: this.timing
             })
-            .resetStyle(),
+            .restoreStyle(),
 
           animit(enterPageDecomposition.pageLabels)
+            .saveStyle()
             .queue({
               css: {
                 transform: 'translate3d(-' + delta + 'px, 0, 0)',
@@ -398,9 +411,10 @@ limitations under the License.
               duration: this.duration,
               timing: this.timing
             })
-            .resetStyle(),
+            .restoreStyle(),
 
           animit(enterPageDecomposition.toolbar)
+            .saveStyle()
             .queue({
               css: {
                 transform: 'translate3d(0, 0, 0)',
@@ -417,9 +431,10 @@ limitations under the License.
               duration: this.duration,
               timing: this.timing
             })
-            .resetStyle(),
+            .restoreStyle(),
 
           animit(enterPageDecomposition.other)
+            .saveStyle()
             .queue({
               css: {opacity: 0},
               duration: 0
@@ -430,7 +445,7 @@ limitations under the License.
               duration: this.duration,
               timing: this.timing
             })
-            .resetStyle(),
+            .restoreStyle(),
 
           animit([leavePageDecomposition.content, leavePageDecomposition.bottomToolbar, leavePageDecomposition.background])
             .queue({
@@ -511,6 +526,7 @@ limitations under the License.
           maskClear,
 
           animit(enterPage.element)
+            .saveStyle()
             .queue({
               css: {
                 transform: 'translate3D(-25%, 0px, 0px)',
@@ -527,7 +543,7 @@ limitations under the License.
               duration: this.duration,
               timing: this.timing
             })
-            .resetStyle(),
+            .restoreStyle(),
 
           animit(leavePage.element)
             .queue({
