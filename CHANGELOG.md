@@ -59,7 +59,6 @@ v2.0.0-alpha
  * ons-toolbar-button: Added "material" modifier.
  * ons-toolbar: Added "material" modifier.
 
-
 v1.3.11
 ----
 * ons-tabbar: Remove flickering when navigator is a child of tabbar.
