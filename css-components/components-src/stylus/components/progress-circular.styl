@@ -25,7 +25,7 @@ var-progress-bar-secondary-color = alpha($second-highlight-color, 1)
   stroke-dashoffset 0
   animation progress__dash 1.5s ease-in-out infinite
   stroke var-progress-bar-color
-  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition all 1s cubic-bezier(0.4, 0, 0.2, 1);
 
 .progress-circular--determinate
   transform rotate(270deg)
@@ -40,21 +40,21 @@ var-progress-bar-secondary-color = alpha($second-highlight-color, 1)
 
 @keyframes progress__rotate {
   100% {
-    transform: rotate(360deg);
+    transform rotate(360deg);
   }
 }
 
 @keyframes progress__dash {
   0% {
-    stroke-dasharray: 10%, 241.32%;
-    stroke-dashoffset: 0%;
+    stroke-dasharray 10%, 241.32%;
+    stroke-dashoffset 0%;
   }
   50% {
-    stroke-dasharray: 201%, 50.322%;
-    stroke-dashoffset: -100.0%;
+    stroke-dasharray 201%, 50.322%;
+    stroke-dashoffset -100.0%;
   }
   100% {
-    stroke-dasharray: 10%, 241.32%;
-    stroke-dashoffset: -251.32%;
+    stroke-dasharray 10%, 241.32%;
+    stroke-dashoffset -251.32%;
   }
 }
