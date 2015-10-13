@@ -47,6 +47,18 @@ v2.0.0-dev
  * core: Add `ons-scope` Angular directive to allow not binding component to `$rootScope`.
  * ons-lazy-repeat: Add `reload()` method to delegate object to enable manual reloading.
  * ons-lazy-repeat: Fix layout of list when it's not placed on top of page.
+ * ons-speed-dial: Implemented `<ons-speed-dial>` component.
+ * ons-alert-dialog: Added "material" modifier.
+ * ons-button: Added "material" modifier.
+ * ons-dialog: Added "material" modifier.
+ * ons-icon: Added "md-" prefix and support for material icon font.
+ * ons-material-input: Added material input component with floating label.
+ * ons-progress: Added Material progress bar and circular loader.
+ * ons-ripple: Added Material Design ripple effect component.
+ * ons-switch: Added "material" modifier.
+ * ons-toolbar-button: Added "material" modifier.
+ * ons-toolbar: Added "material" modifier.
+
 
 v1.3.11
 ----
