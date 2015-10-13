@@ -208,4 +208,28 @@ limitations under the License.
     return event;
   };
 
+  /**
+   * @param {Element} target
+   * @param {String} modifierName
+   * @return {Boolean}
+   */
+  util.hasModifier = (target, modifierName) => {
+    if (!target.hasAttribute('modifier')) {
+      return false;
+    }
+
+    const modifiers = target
+      .getAttribute('modifier')
+      .trim()
+      .split(/\s+/);
+
+    for (let i = 0; i < modifiers.length; i++) {
+      if (modifiers[i] === modifierName) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
 })(window.ons = window.ons || {});
