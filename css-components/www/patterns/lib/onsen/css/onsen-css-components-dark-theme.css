@@ -87,6 +87,24 @@ h6 {
 .content-padded {
   padding: 8px;
 }
+.page--material {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.page--material__content {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
+}
+.page--material__content h1,
+.page--material__content h2,
+.page--material__content h3,
+.page--material__content h4,
+.page--material__content h5 {
+  font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
+}
 /* topdoc
   name: Switch
   class: switch
@@ -975,6 +993,7 @@ h6 {
 }
 .navigation-bar--material__left {
   font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
   font-size: 20px;
   font-weight: 500;
   height: 56px;
@@ -983,6 +1002,7 @@ h6 {
 }
 .navigation-bar--material__center {
   font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
   font-size: 20px;
   font-weight: 500;
   height: 56px;
@@ -995,6 +1015,7 @@ h6 {
 }
 .navigation-bar--material__right {
   font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
   font-size: 20px;
   font-weight: 500;
   height: 56px;
@@ -1585,6 +1606,7 @@ h6 {
   transform: translate3d(0, 0, 0);
   text-transform: uppercase;
   font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 .button--material:active {
   -webkit-box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.4);
@@ -1676,6 +1698,7 @@ h6 {
   transform: translate3d(0, 0, 0);
   text-transform: uppercase;
   font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
   -webkit-box-shadow: none;
   box-shadow: none;
   background-color: transparent;
@@ -2771,6 +2794,7 @@ h6 {
 .checkbox--material {
   line-height: 18px;
   font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 .checkbox--material__checkmark {
   width: 18px;
@@ -3002,6 +3026,7 @@ h6 {
 .radio-button--material {
   line-height: 20px;
   font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 .radio-button--material__checkmark {
   width: 20px;
@@ -3868,6 +3893,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-weight: 400;
   font-size: 17px;
   font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#424242), to(#424242));
   background-image: -webkit-linear-gradient(#424242, #424242);
   background-image: -moz-linear-gradient(#424242, #424242);
@@ -4141,6 +4167,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
   box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.4);
   font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
   -webkit-border-radius: 2px;
   border-radius: 2px;
   text-align: left;
@@ -4489,6 +4516,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 }
 .alert-dialog-title--material {
   font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
   text-align: left;
   font-size: 20px;
   font-weight: 500;
@@ -4496,6 +4524,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 }
 .alert-dialog-content--material {
   font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
   text-align: left;
   font-size: 14px;
   font-weight: 400;
@@ -4513,6 +4542,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
 }
 .alert-dialog-button--material {
   font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
   text-transform: uppercase;
   display: inline-block;
   width: auto;
@@ -5186,6 +5216,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -ms-user-select: none;
   user-select: none;
   font-family: 'Roboto', 'Noto', sans-serif;
+  -webkit-font-smoothing: antialiased;
   width: 56px;
   height: 56px;
   text-decoration: none;
