@@ -2,7 +2,7 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Lazy Repeat | Onsen UI</title>  
+  <title>Lazy Repeat | Onsen UI</title>
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
@@ -36,8 +36,9 @@
     }
   </style>
 
-  <script src="../../build/js/angular/angular.js"></script>    
-  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
 
   <script>
     var app = angular.module('myApp', ['onsen']);
@@ -61,7 +62,7 @@
           return 71;
         },
         countItems : function() {
-          return 10000000;  
+          return 10000000;
         },
         destroyItemScope: function(index, scope) {
           console.log("Destroyed item #" + index);
@@ -74,7 +75,7 @@
 
 </head>
 
-<body ng-controller="MyCtrl"> 
+<body ng-controller="MyCtrl">
   <ons-page>
     <ons-toolbar>
       <div class="center">Lazy Repeat</div>
@@ -83,7 +84,7 @@
     <ons-list>
       <ons-list-item modifier="chevron" class="item" ons-lazy-repeat="MyDelegate">
         <ons-row>
-          <ons-col width="60px"> 
+          <ons-col width="60px">
             <img ng-src="http://lorempixel.com/40/40/?{{item.rand}}" class="item-thum"></img>
           </ons-col>
           <ons-col>
@@ -93,9 +94,9 @@
             </header>
             <p class="item-desc">{{item.desc}}</p>
           </ons-col>
-        </ons-row>                          
+        </ons-row>
       </ons-list-item>
     </ons-list>
-  
+
 </body>
 </html>

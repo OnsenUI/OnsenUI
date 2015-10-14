@@ -58,7 +58,7 @@ gulp.task('browser-sync', function() {
 gulp.task('core', function() {
   var onlyES6 = $.filter('*.es6');
 
-  // ons-core.js
+  // onsenui.js
   return gulp.src([
     'core/vendor/winstore-jscompat.js',
     'core/vendor/*.js',
@@ -78,15 +78,15 @@ gulp.task('core', function() {
     'core/elements/*.{es6,js}',
     '!core/**/*.spec.{es6,js}',
   ])
-    .pipe($.cached('ons-core.js'))
+    .pipe($.cached('onsenui.js'))
     .pipe($.sourcemaps.init())
     .pipe($.plumber())
     .pipe(onlyES6 = $.filter('*.es6'))
     .pipe($.babel({modules: 'ignore'}))
     .pipe(onlyES6.restore())
-    .pipe($.remember('ons-core.js'))
-    .pipe($.concat('ons-core.js'))            
-    .pipe($.header('/*! ons-core.js for Onsen UI v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+    .pipe($.remember('onsenui.js'))
+    .pipe($.concat('onsenui.js'))
+    .pipe($.header('/*! <%= pkg.name %> v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('build/js/'));
 });
@@ -191,7 +191,7 @@ gulp.task('clean', function() {
 ////////////////////////////////////////
 gulp.task('minify-js', function() {
   return merge(
-    gulp.src('build/js/{onsenui,onsenui_all,ons-core}.js')
+    gulp.src('build/js/{onsenui,angular-onsenui}.js')
       .pipe($.uglify({
         mangle: false,
         preserveComments: function(node, comment) {
@@ -216,9 +216,8 @@ gulp.task('prepare', ['html2js', 'core'], function() {
 
   return merge(
 
-    // onsenui.js
+    // angular-onsenui.js
     gulp.src([
-      'build/js/ons-core.js',
       'framework/lib/*.{es6,js}',
       'framework/directives/templates.js',
       'framework/js/onsen.js',
@@ -232,32 +231,10 @@ gulp.task('prepare', ['html2js', 'core'], function() {
       .pipe($.babel({modules: 'ignore'}))
       .pipe(onlyES6.restore())
       .pipe($.ngAnnotate({add: true, single_quotes: true}))
-      .pipe($.concat('onsenui.js'))            
-      .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
+      .pipe($.concat('angular-onsenui.js'))
+      .pipe($.header('/*! angular-onsenui.js for <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
       .pipe(gulp.dest('build/js/'))
       .pipe(gulpIf(CORDOVA_APP, gulp.dest('cordova-app/www/lib/onsen/js')))
-      .pipe(gulp.dest('app/lib/onsen/js')),
-
-    // onsenui_all.js
-    gulp.src([
-      'build/js/ons-core.js',
-      'framework/lib/angular/angular.js',
-      'framework/lib/*.{es6,js}',
-      'framework/directives/templates.js',
-      'framework/js/onsen.js',
-      'framework/views/*.{es6,js}',
-      'framework/directives/*.{es6,js}',
-      'framework/services/*.{es6,js}',
-      'framework/js/*.{es6,js}'
-    ])
-      .pipe($.plumber())
-      .pipe(onlyES6 = $.filter('*.es6'))
-      .pipe($.babel({modules: 'ignore'}))
-      .pipe(onlyES6.restore())
-      .pipe($.ngAnnotate({add: true, single_quotes: true}))
-      .pipe($.concat('onsenui_all.js'))
-      .pipe($.header('/*! <%= pkg.name %> - v<%= pkg.version %> - ' + dateformat(new Date(), 'yyyy-mm-dd') + ' */\n', {pkg: pkg}))
-      .pipe(gulp.dest('build/js/'))
       .pipe(gulp.dest('app/lib/onsen/js')),
 
     // onsen-css-components

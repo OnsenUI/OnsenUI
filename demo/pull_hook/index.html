@@ -2,13 +2,14 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Pull Hook | Onsen UI</title>  
+  <title>Pull Hook | Onsen UI</title>
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-  <script src="../../build/js/angular/angular.js"></script>    
-  <script src="../../build/js/onsenui.js"></script>    
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
 
   <script>
     angular.module('myApp', ['onsen'])
@@ -25,10 +26,10 @@
     });
 
   </script>
-  
+
 </head>
 
-<body>    
+<body>
   <ons-page ng-controller="DemoController">
     <ons-pull-hook ng-action="load($done)" var="loader">
       <span ng-switch="loader.getCurrentState()">
@@ -39,7 +40,7 @@
     </ons-pull-hook>
 
     <ons-toolbar>
-    <div class="center">Pull to refresh</div>
+      <div class="center">Pull to refresh</div>
     </ons-toolbar>
 
     <ons-list>
