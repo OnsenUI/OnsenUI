@@ -59,6 +59,7 @@ v2.0.0-alpha
  * ons-toolbar-button: Added "material" modifier.
  * ons-toolbar: Added "material" modifier.
  * ons-back-button: Change style when parent toolbar has modifier "material".
+ * ons-list: Added "material" modifier.
 
 v1.3.11
 ----
