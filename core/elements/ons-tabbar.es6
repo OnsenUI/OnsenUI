@@ -360,7 +360,7 @@ limitations under the License.
       var tabs = this._getTabbarElement().children;
 
       for (var i = 0; i < tabs.length; i++) {
-        if (tabs[i].nodeName.toLowerCase() === 'ons-tab' && tabs[i].isActive && tabs[i].isActive()) {
+        if (tabs[i] instanceof window.OnsTabElement && tabs[i].isActive && tabs[i].isActive()) {
           return i;
         }
       }
