@@ -7,20 +7,19 @@
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-  <script src="../../build/js/onsenui.js"></script>
   <script src="../../build/js/angular/angular.js"></script>
-  <script src="../../build/js/angular-onsenui.js"></script>
+  <script src="../../build/js/onsenui.js"></script>
   <script src="../app.js"></script>
-
 </head>
 
 <body>
-
-  <ons-navigator title="List">
+  <ons-page>
     <ons-toolbar>
       <div class="center">List</div>
     </ons-toolbar>
     <br>
+
+    <h2>iOS</h2>
 
     <ons-list>
       <ons-list-header>Normal List</ons-list-header>
@@ -38,7 +37,37 @@
       <ons-list-item modifier="chevron">Two</ons-list-item>
       <ons-list-item modifier="chevron">Three</ons-list-item>
     </ons-list>
-  </ons-navigator>
 
+    <h2>Material Design</h2>
+
+    <ons-list modifier="material">
+      <ons-list-header modifier="material">
+        Fruits
+      </ons-list-header>
+      <ons-list-item modifier="material">
+        Orange
+      </ons-list-item>
+      <ons-list-item modifier="material">
+        Apple
+      </ons-list-item>
+      <ons-list-item modifier="material">
+        Banana
+      </ons-list-item>
+      <ons-list-header modifier="material">
+        Vegetables
+      </ons-list-header>
+      <ons-list-item modifier="material">
+        Carrot
+      </ons-list-item>
+      <ons-list-item modifier="material">
+        Potato
+      </ons-list-item>
+      <ons-list-item modifier="material">
+        Tomato
+      </ons-list-item>
+
+    </ons-list>
+
+  </ons-page>
 </body>
 </html>
