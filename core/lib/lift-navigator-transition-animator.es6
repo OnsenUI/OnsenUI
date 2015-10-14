@@ -124,7 +124,6 @@ limitations under the License.
           }),
 
         animit(enterPage.element)
-          .saveStyle()
           .queue({
             css: {
               transform: 'translate3D(0, -10%, 0)',
@@ -141,7 +140,6 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .restoreStyle()
           .wait(0.4)
           .queue(function(done) {
             callback();
