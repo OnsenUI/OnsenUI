@@ -2,14 +2,15 @@
 <html lang="en" ng-app="myApp">
   <head>
     <meta charset="utf-8">
-    <title>Popover | Onsen UI</title>  
+    <title>Popover | Onsen UI</title>
     <link rel="stylesheet" href="../styles/app.css"/>
     <link rel="stylesheet" href="../../build/css/onsenui.css">
     <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-    <script src="../../build/js/angular/angular.js"></script>    
-    <script src="../../build/js/onsenui.js"></script>    
-    <script src="../app.js"></script>  
+    <script src="../../build/js/onsenui.js"></script>
+    <script src="../../build/js/angular/angular.js"></script>
+    <script src="../../build/js/angular-onsenui.js"></script>
+    <script src="../app.js"></script>
 
     <script>
       angular.module('myApp').controller('MyController', function($scope) {
@@ -27,7 +28,7 @@
 
   </head>
 
-  <body ng-controller="MyController">    
+  <body ng-controller="MyController">
     <ons-page>
       <div class="navigation-bar">
         <div class="navigation-bar__left">
@@ -37,7 +38,7 @@
         </div>
 
         <div class="navigation-bar__center">
-          Popover demo! 
+          Popover demo!
         </div>
 
         <div class="navigation-bar__right">
@@ -86,7 +87,7 @@
             <i class="tab-bar__icon ion-ios-pie"></i>
           </button>
         </label>
-      </div> 
+      </div>
     </ons-page>
 
     <script type="text/ons-template" id="popover.html">

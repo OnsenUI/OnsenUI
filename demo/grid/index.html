@@ -2,14 +2,15 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Grid Demo | Onsen UI</title>  
+  <title>Grid | Onsen UI</title>
   <link rel="stylesheet" href="../styles/app.css"/>
-  <link rel="stylesheet" href="../../build/css/onsenui.css">  
-  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">  
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-  <script src="../../build/js/angular/angular.js"></script>    
-  <script src="../../build/js/onsenui.js"></script>    
-  <script src="../app.js"></script>  
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
 
   <style type="text/css" media="screen">
     ons-col {
@@ -30,14 +31,13 @@
       font-size: 16px;
     }
   </style>
-  
+
 </head>
 
-<body>    
-
+<body>
   <ons-navigator>
     <ons-toolbar>
-      <div class="center">Grid</div> 
+      <div class="center">Grid</div>
     </ons-toolbar>
 
     <div style="padding: 10px">
@@ -51,17 +51,17 @@
       <p></p>
 
       <ons-row>
-        <ons-col>Col</ons-col> 
-        <ons-col>Col</ons-col> 
-        <ons-col>Col</ons-col> 
+        <ons-col>Col</ons-col>
+        <ons-col>Col</ons-col>
+        <ons-col>Col</ons-col>
       </ons-row>
 
       <p></p>
       <ons-row>
-        <ons-col>Col</ons-col> 
-        <ons-col>Col</ons-col> 
-        <ons-col>Col</ons-col> 
-        <ons-col>Col</ons-col> 
+        <ons-col>Col</ons-col>
+        <ons-col>Col</ons-col>
+        <ons-col>Col</ons-col>
+        <ons-col>Col</ons-col>
       </ons-row>
 
 
@@ -84,9 +84,9 @@
       <h3>Individual Sizing</h3>
 
       <ons-row>
-        <ons-col width="50%">Col width="50%"</ons-col> 
-        <ons-col>Col</ons-col> 
-        <ons-col>Col</ons-col> 
+        <ons-col width="50%">Col width="50%"</ons-col>
+        <ons-col>Col</ons-col>
+        <ons-col>Col</ons-col>
       </ons-row>
 
       <p></p>
@@ -147,7 +147,7 @@
           </div>
         </ons-col>
         <ons-col>
-          <div class="Demo">          
+          <div class="Demo">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua.
           </div>
@@ -159,7 +159,7 @@
         </ons-col>
       </ons-row>
 
-      
+
       <h3>Bottom-aligned Grid Cells</h3>
       <ons-row align="bottom">
         <ons-col>
@@ -205,7 +205,7 @@
         <ons-col>
           <div class="Demo">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.  
+              tempor incididunt ut labore et dolore magna aliqua.
           </div>
         </ons-col>
         <ons-col align="center">
@@ -220,8 +220,6 @@
         </ons-col>
       </ons-row>
     </div>
-        
   </ons-navigator>
- 
 </body>
 </html>

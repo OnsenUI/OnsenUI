@@ -2,40 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Text Input Demo</title>  
+  <title>Text Input Demo</title>
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-  <script src="../../build/js/angular/angular.js"></script> 
-  <script src="../../build/js/onsenui.js"></script>    
-  <script src="../app.js"></script>  
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
   <script>
     ons.bootstrap();
   </script>
-  
+
 </head>
 
-<body>    
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Text Input</div>
+    </ons-toolbar>
 
-  <ons-navigator>
-    <ons-page>
-      <ons-toolbar>
-        <div class="center">Text Input</div>
-      </ons-toolbar>
+    <section style="padding: 8px">
+      <p>
+      <input type="text" class="text-input" ng-model="text" placeholder="Type here" style="display: block; width: 100%"/>
+      </p>
 
-      <section style="padding: 8px">
-        <input type="text" class="text-input" ng-model="text" placeholder="Type here" style="display: block; width: 100%"/>
+      <p>
+      <input class="text-input--material" style="display: block; width: 100%" placeholder="Username" type="text" required>
+      </p>
 
-        <input class="text-input--material" style="display: block; width: 100%" placeholder="Username" type="text" required>
-        <input class="text-input--material" style="display: block; width: 100%" placeholder="Password" type="password" required>
+      <p>
+      <input class="text-input--material" style="display: block; width: 100%" placeholder="Password" type="password" required>
+      </p>
 
-        <br>
-        <br>
-        <ons-button modifier="large--cta" style="display: block; width: 100%; margin-top: 8px;">Submit</ons-button>
-      </section>
-    </ons-page>
-  </ons-navigator>
- 
+      <br>
+      <br>
+      <ons-button modifier="large--cta" style="display: block; width: 100%; margin-top: 8px;">Submit</ons-button>
+    </section>
+  </ons-page>
 </body>
 </html>

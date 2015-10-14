@@ -4,16 +4,17 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
-  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">  
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-  <script src="../../build/js/angular/angular.js"></script>    
-  <script src="../../build/js/onsenui.js"></script>    
-  <script src="../app.js"></script>  
-  
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
+
 </head>
 
-<body>    
-  
+<body>
+
   <ons-navigator title="List">
     <ons-toolbar>
       <div class="center">List Composition</div>
@@ -24,14 +25,14 @@
       <ons-list-header>Checkbox</ons-list-header>
       <ons-list-item modifier="tappable">
         <label class="checkbox checkbox--noborder checkbox--list-item">
-          <input type="checkbox" checked>
+          <input type="checkbox" class="checkbox__input" checked>
           <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
           Checkbox
         </label>
       </ons-list-item>
       <ons-list-item modifier="tappable">
         <label class="checkbox checkbox--noborder checkbox--list-item">
-          <input type="checkbox">
+          <input type="checkbox" class="checkbox__input">
           <div class="checkbox__checkmark checkbox--noborder checkbox--list-item__checkmark"></div>
           Checkbox
         </label>
@@ -46,14 +47,14 @@
       <ons-list-header>Radio Button</ons-list-header>
       <ons-list-item modifier="tappable">
         <label class="radio-button radio-button--list-item">
-          <input type="radio" name="b" checked="checked">
+          <input type="radio" class="radio-button__input" name="b" checked="checked">
           <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
           Radio Button
         </label>
       </ons-list-item>
       <ons-list-item modifier="tappable">
         <label class="radio-button radio-button--list-item">
-          <input type="radio" name="b">
+          <input type="radio" class="radio-button__input" name="b">
           <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
           Radio Button
         </label>

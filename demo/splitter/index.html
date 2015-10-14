@@ -2,14 +2,15 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>&lt;ons-splitter&gt; demo | Onsen UI</title>  
+  <title>&lt;ons-splitter&gt; demo | Onsen UI</title>
   <link rel="stylesheet" href="../styles/app.css"/>
   <link rel="stylesheet" href="../../build/css/onsenui.css">
   <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
 
-  <script src="../../build/js/angular/angular.js"></script>    
-  <script src="../../build/js/onsenui.js"></script>    
-  <script src="../app.js"></script>  
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
+  <script src="../app.js"></script>
 
   <style>
     ons-splitter-side[side="left"] {
@@ -22,8 +23,8 @@
   </style>
 </head>
 
-<body>    
-  
+<body>
+
   <ons-splitter>
     <ons-splitter-side side="left" width="200px" collapse swipeable>
       <ons-page>
@@ -55,7 +56,7 @@
       <ons-page>
         <ons-toolbar>
           <div class="left">
-            <ons-toolbar-button onclick="toggle('right')">Close</ons-toolbar-button> 
+            <ons-toolbar-button onclick="toggle('right')">Close</ons-toolbar-button>
           </div>
           <div class="center">ons-splitter-side</div>
         </ons-toolbar>
@@ -77,6 +78,6 @@
       side.toggle();
     }
   </script>
- 
+
 </body>
 </html>
