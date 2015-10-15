@@ -490,3 +490,62 @@ list__item()
   padding-right: 8px;
   float: right;
 }
+
+/*! topdoc
+  name: Material List
+  use: List
+  class: list--material
+  markup:
+    <ul class="list list--material">
+      <li class="list__item list__item--material">
+        Orange
+        <div style="opacity:0.7;font-size:14px;margin-top:4px;">Sweet fruit that grows on trees.</div>
+      </li>
+      <li class="list__item list__item--material">
+        Pear
+        <div style="opacity:0.7;font-size:14px;margin-top:4px;">Funny-shaped fruit.</div>
+      </li>
+      </li>
+    </ul>
+*/
+
+.list--material
+  material-font()
+  border 0
+
+.list__item--material
+  border 0
+  min-height initial
+  padding 14px 16px
+  line-height normal
+
+.list__item--material:first-child
+  border 0
+
+/*! topdoc
+  name: Material List with Header
+  use: Material List
+  class: list__header--material
+  markup:
+    <ul class="list list--material">
+      <li class="list__header list__header--material">
+        Fruits
+      </li>
+      <li class="list__item list__item--material">
+        Apple
+        <div style="opacity:0.7;font-size:14px;margin-top:4px;">Sweet fruit that grows on trees.</div>
+      </li>
+    </ul>
+*/
+
+.list__header--material
+  background none
+  font-size 14px
+  margin 0 0 2px 0
+  color #6c6c6c
+  font-weight 500
+  padding 12px 16px
+
+.list__header--material:not(:first-of-type)
+  border-top 1px solid #ECECEC
+  margin-top 16px
