@@ -31,7 +31,15 @@ limitations under the License.
           'show',
           'hide',
           'isShown',
-          'destroy'
+          'destroy',
+          'openRight',
+          'openLeft',
+          'closeRight',
+          'closeLeft',
+          'toggleRight',
+          'toggleLeft',
+          'rightIsOpened',
+          'leftIsOpened'
         ]);
 
         scope.$on('$destroy', this._destroy.bind(this));
