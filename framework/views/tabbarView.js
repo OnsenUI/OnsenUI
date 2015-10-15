@@ -36,6 +36,7 @@ limitations under the License.
         this._element = element;
         this._attrs = attrs;
         this._lastPageElement = null;
+        this._lastPageScope = null;
 
         this._scope.$on('$destroy', this._destroy.bind(this));
 
@@ -68,11 +69,12 @@ limitations under the License.
 
       _onPrechange: function(event) {
         this._lastPageElement = this._element[0]._getCurrentPageElement();
+        this._lastPageScope = angular.element(this._lastPageElement).scope();
       },
 
       _onPostchange: function(event) {
-        if (this._lastPageElement && !this._lastPageElement.parentNode) {
-          angular.element(this._lastPageElement).scope().$destroy();
+        if (this._lastPageElement && !this._lastPageElement.parentNode && this._lastPageScope) {
+          this._lastPageScope.$destroy();
         }
       },
 
