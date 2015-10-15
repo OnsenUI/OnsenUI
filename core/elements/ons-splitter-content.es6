@@ -49,7 +49,7 @@ limitations under the License.
           }
 
           this.appendChild(fragment);
-          util.arrayOf(fragment.children).forEach(child => {
+          util.arrayFrom(fragment.children).forEach(child => {
             if (child._show instanceof Function) {
               child._show();
             }
@@ -72,7 +72,7 @@ limitations under the License.
     }
 
     _show() {
-      util.arrayOf(this.children).forEach(child => {
+      util.arrayFrom(this.children).forEach(child => {
         if (child._show instanceof Function) {
           child._show();
         }
@@ -80,7 +80,7 @@ limitations under the License.
     }
 
     _hide() {
-      util.arrayOf(this.children).forEach(child => {
+      util.arrayFrom(this.children).forEach(child => {
         if (child._hide instanceof Function) {
           child._hide();
         }
@@ -88,7 +88,7 @@ limitations under the License.
     }
 
     _destroy() {
-      util.arrayOf(this.children).forEach(child => {
+      util.arrayFrom(this.children).forEach(child => {
         if (child._destroy instanceof Function) {
           child._destroy();
         }
