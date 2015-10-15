@@ -55,6 +55,7 @@ limitations under the License.
       this._boundOnInput = this._onInput.bind(this);
       this._boundOnFocusin = this._onFocusin.bind(this);
       this._boundOnFocusout = this._onFocusout.bind(this);
+      this._boundDelegateEvent = this._delegateEvent.bind(this);
     }
 
     _compile() {
@@ -80,12 +81,16 @@ limitations under the License.
       this._input.addEventListener('input', this._boundOnInput);
       this._input.addEventListener('focusin', this._boundOnFocusin);
       this._input.addEventListener('focusout', this._boundOnFocusout);
+      this._input.addEventListener('focus', this._boundDelegateEvent);
+      this._input.addEventListener('blur', this._boundDelegateEvent);
     }
 
     detachedCallback() {
       this._input.removeEventListener('input', this._boundOnInput);
       this._input.removeEventListener('focusin', this._boundOnFocusin);
       this._input.removeEventListener('focusout', this._boundOnFocusout);
+      this._input.addEventListener('focus', this._boundDelegateEvent);
+      this._input.addEventListener('blur', this._boundDelegateEvent);
     }
 
     _setLabel(value) {
@@ -119,6 +124,15 @@ limitations under the License.
       else {
         this._label.style.color = 'rgba(0, 0, 0, 0.5)';
       }
+    }
+
+    _delegateEvent(event) {
+      const e = new CustomEvent(event.type, {
+        bubbles: false,
+        cancelable: true
+      });
+
+      return this.dispatchEvent(e);
     }
 
     _onInput(event) {
