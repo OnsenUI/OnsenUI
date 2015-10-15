@@ -59,6 +59,10 @@ limitations under the License.
     }
 
     _compile() {
+      if (this._input) {
+        return;
+      }
+
       this.appendChild(document.createElement('input'));
       this._input.classList.add('text-input--material');
       this.appendChild(document.createElement('span'));
