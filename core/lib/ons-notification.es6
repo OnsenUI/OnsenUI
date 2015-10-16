@@ -34,6 +34,14 @@ limitations under the License.
     let messageElement = util.createElement('<div class="alert-dialog-content"></div>');
     let footerElement = util.createElement('<div class="alert-dialog-footer"></div>');
     let inputElement;
+    let deferred = Promise.defer();
+
+    let _callback = callback;
+
+    callback = (val) => {
+      deferred.resolve(val);
+      _callback(val);
+    };
 
     dialogElement.setAttribute('animation', animation);
 
@@ -65,6 +73,7 @@ limitations under the License.
           if (event.keyCode === 13) {
             dialogElement.hide({
               callback: function() {
+                deferred.resolve(inputElement.value);
                 callback(inputElement.value);
                 dialogElement.destroy();
                 dialogElement = null;
@@ -151,7 +160,7 @@ limitations under the License.
       dialogElement.setAttribute('modifier', modifier);
     }
 
-    return Promise.resolve(dialogElement);
+    return deferred.promise;
   };
 
   ons.notification._alertOriginal = function(options) {
