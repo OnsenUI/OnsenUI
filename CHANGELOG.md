@@ -61,6 +61,7 @@ v2.0.0-alpha.2
  * ons-back-button: Change style when parent toolbar has modifier "material".
  * ons-list: Added "material" modifier.
  * ons-page: Fixed [#950](https://github.com/OnsenUI/OnsenUI/issues/950)
+ * dependencies: Fixed [#936](https://github.com/OnsenUI/OnsenUI/issues/936).
 
 v1.3.11
 ----
