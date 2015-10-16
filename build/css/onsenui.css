@@ -1,4 +1,4 @@
-/*! onsenui - v2.0.0-alpha.2 - 2015-10-15 */
+/*! onsenui - v2.0.0-alpha.3 - 2015-10-16 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -61,29 +61,29 @@ input, textarea {
   background: transparent !important;
 }
 
-.page__status-bar-fill ~ .page__content {
+.page__status-bar-fill + .page__background + .page__content {
   padding-top: 20px;
 }
 
-ons-toolbar ~ .page__content {
+ons-toolbar + .page__background + .page__content {
   top: 44px;
 }
 
-.navigation-bar--material ~ .page__content {
+.navigation-bar--material + .page__background + .page__content {
   top: 56px;
 }
 
-.page__status-bar-fill ~ ons-toolbar {
+.page__status-bar-fill + ons-toolbar {
   height: 64px;
 }
 
-.page__status-bar-fill ~ ons-toolbar > .center,
-.page__status-bar-fill ~ ons-toolbar > .left,
-.page__status-bar-fill ~ ons-toolbar > .right {
+.page__status-bar-fill + ons-toolbar > .center,
+.page__status-bar-fill + ons-toolbar > .left,
+.page__status-bar-fill + ons-toolbar > .right {
   padding-top: 20px;
 }
 
-.page__status-bar-fill ~ ons-toolbar ~ .page__content {
+.page__status-bar-fill + ons-toolbar + .page__background + .page__content {
   top: 64px;
   padding-top: 0px;
 }
