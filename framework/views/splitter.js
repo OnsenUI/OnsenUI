@@ -28,10 +28,6 @@ limitations under the License.
 
         this._clearDerivingMethods = $onsen.deriveMethods(this, this._element[0], [
           'getDeviceBackButtonHandler',
-          'show',
-          'hide',
-          'isShown',
-          'destroy',
           'openRight',
           'openLeft',
           'closeRight',
