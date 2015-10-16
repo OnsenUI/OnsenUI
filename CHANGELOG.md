@@ -62,6 +62,7 @@ v2.0.0-alpha.3
  * ons-list: Added "material" modifier.
  * ons-page: Fixed [#950](https://github.com/OnsenUI/OnsenUI/issues/950)
  * dependencies: Fixed [#936](https://github.com/OnsenUI/OnsenUI/issues/936).
+ * core: `ons.notificaiton.*` methods return promise that resolves to same value as callback argument.
 
 v1.3.11
 ----
