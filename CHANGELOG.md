@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v2.0.0-alpha.2
+v2.0.0-alpha.3
 ----
  * core: Added more customizable animations.
  * core: [BC Break] Changed interfaces for registering custom animators on `ons-navigator`, `ons-dialog`, `ons-alert-dialog`, `ons-dialog`, `ons-sliding-menu`, `ons-popover` and `ons-tabbar`.
@@ -43,7 +43,7 @@ v2.0.0-alpha.2
  * ons-sliding-menu: Fixed [#879](https://github.com/OnsenUI/OnsenUI/issues/879)
  * ons-navigator: Added `bringPageTop()` method.
  * ons-carousel: Added `getCarouselItemCount()` method.
- * ons-carousel: Fixed [#929](https://github.com/OnsenUI/OnsenUI/issues/929)
+ * ons-carousel: Fixed [#929](https://github.com/OnsenUI/OnsenUI/issues/929).
  * core: Add `ons-scope` Angular directive to allow not binding component to `$rootScope`.
  * ons-lazy-repeat: Add `reload()` method to delegate object to enable manual reloading.
  * ons-lazy-repeat: Fix layout of list when it's not placed on top of page.
@@ -60,6 +60,7 @@ v2.0.0-alpha.2
  * ons-toolbar: Added "material" modifier.
  * ons-back-button: Change style when parent toolbar has modifier "material".
  * ons-list: Added "material" modifier.
+ * dependencies: Fixed [#936](https://github.com/OnsenUI/OnsenUI/issues/936).
  * ons-splitter: Fixed [#952](https://github.com/OnsenUI/OnsenUI/issues/952).
 
 v1.3.11
