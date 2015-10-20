@@ -24,9 +24,8 @@ limitations under the License.
   const SimpleSlideNavigatorTransitionAnimator = ons._internal.SimpleSlideNavigatorTransitionAnimator;
   const LiftNavigatorTransitionAnimator = ons._internal.LiftNavigatorTransitionAnimator;
   const FadeNavigatorTransitionAnimator = ons._internal.FadeNavigatorTransitionAnimator;
-  const NullNavigatorTransitionAnimator = ons._internal.NullNavigatorTransitionAnimator;
+  const NoneNavigatorTransitionAnimator = ons._internal.NoneNavigatorTransitionAnimator;
   const util = ons._util;
-  const AsyncHook = ons._internal.AsyncHook;
   const NavigatorPage = ons._internal.NavigatorPage;
 
   class NavigatorElement extends ons._BaseElement {
@@ -39,8 +38,6 @@ limitations under the License.
 
       this._initialHTML = this.innerHTML;
       this.innerHTML = '';
-      this._compilePageHook = new AsyncHook();
-      this._linkPageHook = new AsyncHook();
 
       this._animatorFactory = new AnimatorFactory({
         animators: window.OnsNavigatorElement._transitionAnimatorDict,
@@ -122,15 +119,13 @@ limitations under the License.
             const element = this._createPageElement(templateHTML);
             const pageObject = this._createPageObject(this._pages[index].page, element, options);
 
-            this._compilePageHook.run((element) => {
-              this._linkPageHook.run((element) => {
-                this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
-                this._pages.splice(index, 0, pageObject);
+            window.OnsNavigatorElement.rewritables.link(this, element, element => {
+              this.insertBefore(element, this._pages[index] ? this._pages[index].element : null);
+              this._pages.splice(index, 0, pageObject);
 
-                this._pages[index + 1].destroy();
-                this._popPage(options, unlock);
-              }, element);
-            }, element);
+              this._pages[index + 1].destroy();
+              this._popPage(options, unlock);
+            });
           });
 
         } else {
@@ -200,14 +195,7 @@ limitations under the License.
         throw new Error('options must be an object. You supplied ' + options);
       }
 
-      const normalizeIndex = index => {
-        if (index < 0) {
-          index = Math.abs(this.pages.length + index) % this.pages.length;
-        }
-        return index;
-      };
-
-      index = normalizeIndex(index);
+      index = this._normalizeIndex(index);
 
       if (index >= this.pages.length) {
         return this.pushPage.apply(this, [].slice.call(arguments, 1));
@@ -218,23 +206,27 @@ limitations under the License.
 
         ons._internal.getPageHTMLAsync(page).then(templateHTML => {
           const element = this._createPageElement(templateHTML);
-
           const pageObject = this._createPageObject(page, element, options);
 
-          this._compilePageHook.run(element => {
-            this._linkPageHook.run(element => {
-              element.style.display = 'none';
-              this.insertBefore(element, this._pages[index].element);
-              this._pages.splice(index, 0, pageObject);
+          window.OnsNavigatorElement.rewritables.link(this, element, element => {
+            element.style.display = 'none';
+            this.insertBefore(element, this._pages[index].element);
+            this._pages.splice(index, 0, pageObject);
 
-              setTimeout(() => {
-                unlock();
-                element = null;
-              }, 1000 / 60);
-            }, element);
-          }, element);
+            setTimeout(() => {
+              unlock();
+              element = null;
+            }, 1000 / 60);
+          });
         });
       });
+    }
+
+    _normalizeIndex(index) {
+      if (index < 0) {
+        index = Math.abs(this.pages.length + index) % this.pages.length;
+      }
+      return index;
     }
 
     /**
@@ -288,7 +280,9 @@ limitations under the License.
      * If options object is specified, apply the options.
      * the options object include all the attributes of this navigator.
      *
-     * @param {String} page
+     * If page is undefined, navigator will push initial page contents instead of.
+     *
+     * @param {String/undefined} page
      * @param {Object} [options]
      */
     resetToPage(page, options) {
@@ -307,6 +301,14 @@ limitations under the License.
         onTransitionEnd();
       };
 
+      if (page === undefined || page === '') {
+        if (this.hasAttribute('page')) {
+          page = this.getAttribute('page');
+        } else {
+          options.pageHTML = this._initialHTML;
+          page = '';
+        }
+      }
       this.pushPage(page, options);
     }
 
@@ -316,19 +318,15 @@ limitations under the License.
     attachedCallback() {
       this._deviceBackButtonHandler = ons._deviceBackButtonDispatcher.createHandler(this, this._boundOnDeviceBackButton);
 
-      window.OnsNavigatorElement.ready(this, () => {
+      window.OnsNavigatorElement.rewritables.ready(this, () => {
         if (this._pages.length === 0) {
-          this._linkPageHook.freeze();
-          this._compilePageHook.freeze();
-
           if (!this.getAttribute('page')) {
             const element = this._createPageElement(this._initialHTML || '');
 
-            this._pushPageDOM('', element, {}, function() {});
+            this._pushPageDOM(this._createPageObject('', element, {}), function() {});
           } else {
             this.pushPage(this.getAttribute('page'), {animation: 'none'});
           }
-          this._initialHTML = false;
         }
       });
     }
@@ -348,6 +346,7 @@ limitations under the License.
      * @param {Object} [options.animationOptions]
      * @param {Function} [options.onTransitionEnd]
      * @param {Boolean} [options.cancelIfRunning]
+     * @param {String} [options.pageHTML]
      */
     pushPage(page, options) {
       options = options || {};
@@ -378,23 +377,27 @@ limitations under the License.
         unlock();
       };
 
-      ons._internal.getPageHTMLAsync(page).then(templateHTML => {
-        this._pushPageDOM(page, this._createPageElement(templateHTML), options, done);
-      });
+      const run = templateHTML => {
+        const element = this._createPageElement(templateHTML);
+        this._pushPageDOM(this._createPageObject(page, element, options), done);
+      };
+
+      if (options.pageHTML) {
+        run(options.pageHTML);
+      } else {
+        ons._internal.getPageHTMLAsync(page).then(run);
+      }
     }
 
     /**
-     * @param {String} page Page name.
-     * @param {Object} element
-     * @param {Object} options
+     * @param {Object} pageObject
      * @param {Function} [unlock]
      */
-    _pushPageDOM(page, element, options, unlock) {
-
+   _pushPageDOM(pageObject, unlock) {
       unlock = unlock || function() {};
-      options = options || {};
 
-      const pageObject = this._createPageObject(page, element, options);
+      let element = pageObject.element;
+      let options = pageObject.options;
 
       // for "postpush" event
       const eventDetail = {
@@ -423,27 +426,101 @@ limitations under the License.
 
       this._isPushing = true;
 
-      this._compilePageHook.run(element => {
-        this._linkPageHook.run(element => {
-          setTimeout(() => {
-            if (this._pages.length > 1) {
-              const leavePage = this._pages.slice(-2)[0];
-              const enterPage = this._pages.slice(-1)[0];
+      window.OnsNavigatorElement.rewritables.link(this, element, element => {
+        setTimeout(() => {
+          if (this._pages.length > 1) {
+            const leavePage = this._pages.slice(-2)[0];
+            const enterPage = this._pages.slice(-1)[0];
 
-              this.appendChild(element);
-              leavePage.element._hide();
-              enterPage.element._show();
+            this.appendChild(element);
+            leavePage.element._hide();
+            enterPage.element._show();
 
-              options.animator.push(enterPage, leavePage, done);
-            } else {
-              this.appendChild(element);
-              element._show();
+            options.animator.push(enterPage, leavePage, done);
+          } else {
+            this.appendChild(element);
+            element._show();
 
-              done();
-            }
-          }, 1000 / 60);
-        }, element);
-      }, element);
+            done();
+          }
+        }, 1000 / 60);
+      });
+    }
+
+    /**
+     * Brings the given pageUrl or index to the top of the page stack
+     * if already exists or pushes the page into the stack if doesn't.
+     * If options object is specified, apply the options.
+     *
+     * @param {String|Number} item Page name or valid index.
+     * @param {Object} options
+     */
+    bringPageTop(item, options) {
+      options = options || {};
+
+      if (options && typeof options != 'object') {
+        throw new Error('options must be an object. You supplied ' + options);
+      }
+
+      if (options.cancelIfRunning && this._isPushing) {
+        return;
+      }
+
+      if (this._emitPrePushEvent()) {
+        return;
+      }
+
+
+      let index, page;
+      if (typeof item === 'string') {
+        page = item;
+        index = this._lastIndexOfPage(page);
+      } else if (typeof item === 'number') {
+        index = this._normalizeIndex(item);
+        if (item >= this._pages.length) {
+          throw new Error('The provided index does not match an existing page.');
+        }
+        page = this._pages[index].page;
+      } else {
+        throw new Error('First argument must be a page name or the index of an existing page. You supplied ' + item);
+      }
+
+
+      if (index < 0) {
+        // Fallback pushPage
+        this._doorLock.waitUnlock(() => this._pushPage(page, options));
+      } else if (index < this._pages.length - 1) { // Skip when page is already the top
+        // Bring to top
+        this._doorLock.waitUnlock(() => {
+          const unlock = this._doorLock.lock();
+          const done = function() {
+            unlock();
+          };
+
+          let pageObject = this._pages.splice(index, 1)[0];
+          pageObject.element.style.display = 'block';
+          pageObject.element.setAttribute('_skipinit', '');
+          options.animator = this._animatorFactory.newAnimator(options);
+          pageObject.options = options;
+
+          this._pushPageDOM(pageObject, done);
+        });
+      }
+    }
+
+    /**
+     * @param {String} page
+     * @return {Number} Returns the last index at which the given page
+     * is found in the page-stack, or -1 if it is not present.
+     */
+    _lastIndexOfPage(page) {
+      let index;
+      for (index = this._pages.length - 1; index >= 0; index--) {
+        if (this._pages[index].page === page) {
+          break;
+        }
+      }
+      return index;
     }
 
     /**
@@ -524,7 +601,7 @@ limitations under the License.
       'simpleslide': SimpleSlideNavigatorTransitionAnimator,
       'lift': LiftNavigatorTransitionAnimator,
       'fade': FadeNavigatorTransitionAnimator,
-      'none': NullNavigatorTransitionAnimator
+      'none': NoneNavigatorTransitionAnimator
     };
 
     /**
@@ -539,8 +616,23 @@ limitations under the License.
       this._transitionAnimatorDict[name] = Animator;
     };
 
-    window.OnsNavigatorElement.ready = function(element, done) {
-      done();
+    window.OnsNavigatorElement.rewritables = {
+      /**
+       * @param {Element} navigatorSideElement
+       * @param {Function} callback
+       */
+      ready(navigatorElement, callback) {
+        callback();
+      },
+
+      /**
+       * @param {Element} navigatorElement
+       * @param {Element} target
+       * @param {Function} callback
+       */
+      link(navigatorElement, target, callback) {
+        callback(target);
+      }
     };
   }
 })();

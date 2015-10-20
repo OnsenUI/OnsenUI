@@ -74,6 +74,27 @@ limitations under the License.
       }
     }
 
+    /**
+     * @return {Boolean}
+     */
+    isChecked() {
+      return this.checked;
+    }
+
+    /**
+     * @param {Boolean}
+     */
+    setChecked(isChecked) {
+      this.checked = !!isChecked;
+    }
+
+    /**
+     * @return {HTMLElement}
+     */
+    getCheckboxElement() {
+      return this._getCheckbox();
+    }
+
     createdCallback() {
       this._compile();
       ModifierUtil.initModifier(this, scheme);

@@ -102,6 +102,8 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
+ * @extensionOf angular
  * @type {String}
  * @description
  *  [en]Variable name to refer this alert dialog.[/en]
@@ -166,7 +168,9 @@
 /**
  * @ngdoc attribute
  * @name ons-preshow
+ * @initonly
  * @type {Expression}
+ * @extensionOf angular
  * @description
  *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
  *  [ja]"preshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
@@ -175,7 +179,9 @@
 /**
  * @ngdoc attribute
  * @name ons-prehide
+ * @initonly
  * @type {Expression}
+ * @extensionOf angular
  * @description
  *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
  *  [ja]"prehide"イベントが発火された時の挙動を独自に指定できます。[/ja]
@@ -184,7 +190,9 @@
 /**
  * @ngdoc attribute
  * @name ons-postshow
+ * @initonly
  * @type {Expression}
+ * @extensionOf angular
  * @description
  *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
  *  [ja]"postshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
@@ -193,7 +201,9 @@
 /**
  * @ngdoc attribute
  * @name ons-posthide
+ * @initonly
  * @type {Expression}
+ * @extensionOf angular
  * @description
  *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
  *  [ja]"posthide"イベントが発火された時の挙動を独自に指定できます。[/ja]
@@ -202,7 +212,9 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
  * @type {Expression}
+ * @extensionOf angular
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
  *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
@@ -314,6 +326,7 @@
 /**
  * @ngdoc method
  * @signature on(eventName, listener)
+ * @extensionOf angular
  * @description
  *   [en]Add an event listener.[/en]
  *   [ja]イベントリスナーを追加します。[/ja]
@@ -328,6 +341,7 @@
 /**
  * @ngdoc method
  * @signature once(eventName, listener)
+ * @extensionOf angular
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
  *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
@@ -342,6 +356,7 @@
 /**
  * @ngdoc method
  * @signature off(eventName, [listener])
+ * @extensionOf angular
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
  *  [ja]イベントリスナーを削除します。もしlistenerパラメータが指定されなかった場合、そのイベントのリスナーが全て削除されます。[/ja]

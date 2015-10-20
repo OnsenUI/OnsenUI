@@ -36,7 +36,7 @@ limitations under the License.
       super(options);
 
       this.backgroundMask = ons._util.createElement(`
-        <div style="position: absolute; width: 100%; height: 100%;
+        <div style="position: absolute; width: 100%; height: 100%; z-index: 2;
           background-color: black; opacity: 0;"></div>
       `);
       this.blackMaskOpacity = 0.4;
@@ -48,12 +48,13 @@ limitations under the License.
      * @param {Function} callback
      */
     push(enterPage, leavePage, callback) {
-      util.removeElement(this.backgroundMask);
-      leavePage.element.parentNode.insertBefore(this.backgroundMask, leavePage.element.nextSibling);
+      this.backgroundMask.remove();
+      leavePage.element.parentElement.insertBefore(this.backgroundMask, leavePage.element.nextSibling);
 
       animit.runAll(
 
         animit(this.backgroundMask)
+          .saveStyle()
           .queue({
             opacity: 0,
             transform: 'translate3d(0, 0, 0)'
@@ -65,13 +66,14 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
-          .queue(function(done) {
-            mask.remove();
+          .restoreStyle()
+          .queue(done => {
+            this.backgroundMask.remove();
             done();
           }),
 
         animit(enterPage.element)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3D(100%, 0, 0)',
@@ -86,9 +88,10 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle(),
+          .restoreStyle(),
 
         animit(leavePage.element)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3D(0, 0, 0)'
@@ -103,7 +106,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .wait(0.2)
           .queue(function(done) {
             callback();
@@ -118,12 +121,13 @@ limitations under the License.
      * @param {Function} done
      */
     pop(enterPage, leavePage, done) {
-      util.removeElement(this.backgroundMask);
+      this.backgroundMask.remove();
       enterPage.element.parentNode.insertBefore(this.backgroundMask, enterPage.element.nextSibling);
 
       animit.runAll(
 
         animit(this.backgroundMask)
+          .saveStyle()
           .queue({
             opacity: this.blackMaskOpacity,
             transform: 'translate3d(0, 0, 0)'
@@ -135,13 +139,14 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
-          .queue(function(done) {
-            mask.remove();
+          .restoreStyle()
+          .queue(done => {
+            this.backgroundMask.remove();
             done();
           }),
 
         animit(enterPage.element)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3D(-45%, 0px, 0px)',
@@ -158,7 +163,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle(),
+          .restoreStyle(),
 
         animit(leavePage.element)
           .queue({

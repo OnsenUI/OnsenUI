@@ -137,17 +137,6 @@ limitations under the License.
     return fragment;
   };
 
-  /**
-   * @param {Element} element
-   * @return {Element}
-   */
-  util.removeElement = (element) => {
-    if (element.parentNode) {
-      element.parentNode.removeChild(element);
-    }
-    return element;
-  };
-
   /*
    * @param {Object} dst Destination object.
    * @param {...Object} src Source object(s).
@@ -217,6 +206,30 @@ limitations under the License.
     target.dispatchEvent(event);
 
     return event;
+  };
+
+  /**
+   * @param {Element} target
+   * @param {String} modifierName
+   * @return {Boolean}
+   */
+  util.hasModifier = (target, modifierName) => {
+    if (!target.hasAttribute('modifier')) {
+      return false;
+    }
+
+    const modifiers = target
+      .getAttribute('modifier')
+      .trim()
+      .split(/\s+/);
+
+    for (let i = 0; i < modifiers.length; i++) {
+      if (modifiers[i] === modifierName) {
+        return true;
+      }
+    }
+
+    return false;
   };
 
 })(window.ons = window.ons || {});

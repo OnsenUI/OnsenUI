@@ -52,13 +52,6 @@ limitations under the License.
       this._compile();
       this._contentElement = ons._util.findChild(this, '.tab-bar__content');
       ModifierUtil.initModifier(this, scheme);
-
-      this._compilePageHook = new ons._internal.AsyncHook();
-      this._linkPageHook = new ons._internal.AsyncHook();
-      window.OnsTabbarElement.ready(this, () => {
-        this._linkPageHook.freeze();
-        this._compilePageHook.freeze();
-      });
     }
 
     _compile() {
@@ -154,12 +147,10 @@ limitations under the License.
     _loadPageDOMAsync(pageElement, options) {
       options = options || {};
 
-      this._compilePageHook.run(pageElement => {
-        this._linkPageHook.run(pageElement => {
-          this._contentElement.appendChild(pageElement);
-          this._switchPage(pageElement, options);
-        }, pageElement);
-      }, pageElement);
+      window.OnsTabbarElement.rewritables.link(this, pageElement, pageElement => {
+        this._contentElement.appendChild(pageElement);
+        this._switchPage(pageElement, options);
+      });
     }
 
     /**
@@ -313,9 +304,12 @@ limitations under the License.
         }
 
         if (selectedTab.isPersistent()) {
+          const link = (element, callback) => {
+            window.OnsTabbarElement.rewritables.link(this, element, callback);
+          };
           selectedTab._loadPageElement(pageElement => {
             this._loadPersistentPageDOM(pageElement, params);
-          }, {compile: this._compilePageHook, link: this._linkPageHook});
+          }, link);
         } else {
           this._loadPage(selectedTab.getAttribute('page'), params);
         }
@@ -366,7 +360,7 @@ limitations under the License.
       var tabs = this._getTabbarElement().children;
 
       for (var i = 0; i < tabs.length; i++) {
-        if (tabs[i].nodeName.toLowerCase() === 'ons-tab' && tabs[i].isActive && tabs[i].isActive()) {
+        if (tabs[i] instanceof window.OnsTabElement && tabs[i].isActive && tabs[i].isActive()) {
           return i;
         }
       }
@@ -444,8 +438,23 @@ limitations under the License.
       this._animatorDict[name] = Animator;
     };
 
-    window.OnsTabbarElement.ready = function(element, callback) {
-      setImmediate(callback);
+    window.OnsTabbarElement.rewritables = {
+      /**
+       * @param {Element} tabbarElement
+       * @param {Function} callback
+       */
+      ready(tabbarElement, callback) {
+        callback();
+      },
+
+      /**
+       * @param {Element} tabbarElement
+       * @param {Element} target
+       * @param {Function} callback
+       */
+      link(tabbarElement, target, callback) {
+        callback(target);
+      }
     };
   }
 })();

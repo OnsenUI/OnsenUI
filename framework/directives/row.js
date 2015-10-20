@@ -25,7 +25,7 @@
 
 /**
  * @ngdoc attribute
- * @name align
+ * @name vertical-align
  * @type {String}
  * @description
  *   [en]Short hand attribute for aligning vertically. Valid values are top, bottom, and center.[/en]

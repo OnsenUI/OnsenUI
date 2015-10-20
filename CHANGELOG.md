@@ -2,7 +2,7 @@
 CHANGELOG
 ====
 
-v2.0.0-dev
+v2.0.0-alpha.5
 ----
  * core: Added more customizable animations.
  * core: [BC Break] Changed interfaces for registering custom animators on `ons-navigator`, `ons-dialog`, `ons-alert-dialog`, `ons-dialog`, `ons-sliding-menu`, `ons-popover` and `ons-tabbar`.
@@ -41,6 +41,32 @@ v2.0.0-dev
  * ons.notification: Added `defaultValue`, `placeholder` and `autofocus` options to prompt.
  * ons-popover: Fixed [#880](https://github.com/OnsenUI/OnsenUI/issues/880).
  * ons-sliding-menu: Fixed [#879](https://github.com/OnsenUI/OnsenUI/issues/879)
+ * ons-navigator: Added `bringPageTop()` method.
+ * ons-carousel: Added `getCarouselItemCount()` method.
+ * ons-carousel: Fixed [#929](https://github.com/OnsenUI/OnsenUI/issues/929).
+ * core: Add `ons-scope` Angular directive to allow not binding component to `$rootScope`.
+ * ons-lazy-repeat: Add `reload()` method to delegate object to enable manual reloading.
+ * ons-lazy-repeat: Fix layout of list when it's not placed on top of page.
+ * ons-speed-dial: Implemented `<ons-speed-dial>` component.
+ * ons-alert-dialog: Added "material" modifier.
+ * ons-button: Added "material" modifier.
+ * ons-dialog: Added "material" modifier.
+ * ons-icon: Added "md-" prefix and support for material icon font.
+ * ons-material-input: Added material input component with floating label.
+ * ons-progress: Added Material progress bar and circular loader.
+ * ons-ripple: Added Material Design ripple effect component.
+ * ons-switch: Added "material" modifier.
+ * ons-toolbar-button: Added "material" modifier.
+ * ons-toolbar: Added "material" modifier.
+ * ons-back-button: Change style when parent toolbar has modifier "material".
+ * ons-list: Added "material" modifier.
+ * dependencies: Fixed [#936](https://github.com/OnsenUI/OnsenUI/issues/936).
+ * ons-splitter: Fixed [#952](https://github.com/OnsenUI/OnsenUI/issues/952).
+
+v1.3.11
+----
+* ons-tabbar: Remove flickering when navigator is a child of tabbar.
+* ons-dialog: Fixed broken `mask-color` attribute.
 
 v1.3.10
 ----

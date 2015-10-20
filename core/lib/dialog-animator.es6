@@ -74,6 +74,7 @@ limitations under the License.
           }),
 
         animit(dialog._dialog)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3d(-50%, -60%, 0)',
@@ -90,7 +91,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(done) {
             callback();
             done();
@@ -120,6 +121,7 @@ limitations under the License.
           }),
 
         animit(dialog._dialog)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3d(-50%, -50%, 0)',
@@ -136,7 +138,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(done) {
             callback();
             done();
@@ -177,6 +179,7 @@ limitations under the License.
           }),
 
         animit(dialog._dialog)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3d(-50%, 300%, 0)'
@@ -191,7 +194,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(done) {
             callback();
             done();
@@ -221,6 +224,7 @@ limitations under the License.
           }),
 
         animit(dialog._dialog)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3d(-50%, -50%, 0)'
@@ -235,7 +239,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(done) {
             callback();
             done();
@@ -276,6 +280,7 @@ limitations under the License.
           }),
 
         animit(dialog._dialog)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3D(-50%, -350%, 0)',
@@ -290,7 +295,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(done) {
             callback();
             done();
@@ -320,6 +325,7 @@ limitations under the License.
           }),
 
         animit(dialog._dialog)
+          .saveStyle()
           .queue({
             css: {
               transform: 'translate3D(-50%, -50%, 0)'
@@ -334,7 +340,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(done) {
             callback();
             done();

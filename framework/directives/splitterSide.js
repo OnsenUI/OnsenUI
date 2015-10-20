@@ -100,6 +100,7 @@
 /**
  * @ngdoc attribute
  * @name animation
+ * @initonly
  * @type {String}
  * @description
  *  [en]Specify the animation. Use one of "overlay", and "default".[/en]
@@ -117,7 +118,18 @@
 
 /**
  * @ngdoc attribute
+ * @name threhold-ratio-should-open
+ * @type {Number}
+ * @description
+ *  [en][/en]
+ *  [ja]どのくらいスワイプすればスライディングメニューを開くかどうかの割合を指定します。0から1の間の数値を指定します。スワイプの距離がここで指定した数値掛けるこの要素の幅よりも大きければ、スワイプが終わった時にこの要素を開きます。デフォルトは0.3です。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
@@ -127,6 +139,8 @@
 /**
  * @ngdoc attribute
  * @name ons-preopen
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preopen" event is fired.[/en]
@@ -136,6 +150,8 @@
 /**
  * @ngdoc attribute
  * @name ons-preclose
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "preclose" event is fired.[/en]
@@ -145,6 +161,8 @@
 /**
  * @ngdoc attribute
  * @name ons-postopen
+ * @extensionOf angular
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postopen" event is fired.[/en]
@@ -154,6 +172,8 @@
 /**
  * @ngdoc attribute
  * @name ons-postclose
+ * @extensionOf angular
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postclose" event is fired.[/en]
@@ -218,6 +238,7 @@
 /**
  * @ngdoc attribute
  * @name page
+ * @initonly
  * @type {String}
  * @description
  *   [en]The url of the menu page.[/en]
@@ -284,17 +305,7 @@
   'use strict';
 
   var lastReady = window.OnsSplitterSideElement.rewritables.ready;
-  window.OnsSplitterSideElement.rewritables.ready = function(element, callback) {
-    if (angular.element(element).data('ons-splitter-side')) {
-      lastReady(element, callback);
-    } else {
-      var listen = function() {
-        lastReady(element, callback);
-        element.removeEventListener('ons-splitter-side:init', listen, false);
-      };
-      element.addEventListener('ons-splitter-side:init', listen, false);
-    }
-  };
+  window.OnsSplitterSideElement.rewritables.ready = ons._waitDiretiveInit('ons-splitter-side', lastReady);
 
   var lastLink = window.OnsSplitterSideElement.rewritables.link;
   window.OnsSplitterSideElement.rewritables.link = function(element, target, callback) {

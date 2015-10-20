@@ -1,4 +1,4 @@
-/*! onsenui - v1.3.5-dev - 2015-07-27 */
+/*! onsenui - v2.0.0-alpha.5 - 2015-10-20 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -18,6 +18,7 @@ limitations under the License.
 
 @import url("font_awesome/css/font-awesome.min.css");
 @import url("ionicons/css/ionicons.min.css");
+@import url("material-design-iconic-font/css/material-design-iconic-font.min.css");
 
 /* custom elements */
 ons-page, ons-navigator,
@@ -33,6 +34,7 @@ ons-tabbar {
   left: 0;
   bottom: 0;
   right: 0;
+  overflow: hidden;
 }
 
 ons-page, ons-navigator, ons-tabbar, ons-sliding-menu, ons-split-view {
@@ -59,25 +61,29 @@ input, textarea {
   background: transparent !important;
 }
 
-.page__status-bar-fill ~ .page__content {
+.page__status-bar-fill + .page__background + .page__content {
   padding-top: 20px;
 }
 
-ons-toolbar ~ .page__content {
+ons-toolbar + .page__background + .page__content {
   top: 44px;
 }
 
-.page__status-bar-fill ~ ons-toolbar {
+.navigation-bar--material + .page__background + .page__content {
+  top: 56px;
+}
+
+.page__status-bar-fill + ons-toolbar {
   height: 64px;
 }
 
-.page__status-bar-fill ~ ons-toolbar > .center,
-.page__status-bar-fill ~ ons-toolbar > .left,
-.page__status-bar-fill ~ ons-toolbar > .right {
+.page__status-bar-fill + ons-toolbar > .center,
+.page__status-bar-fill + ons-toolbar > .left,
+.page__status-bar-fill + ons-toolbar > .right {
   padding-top: 20px;
 }
 
-.page__status-bar-fill ~ ons-toolbar ~ .page__content {
+.page__status-bar-fill + ons-toolbar + .page__background + .page__content {
   top: 64px;
   padding-top: 0px;
 }
@@ -123,6 +129,70 @@ ons-pull-hook {
   margin: auto;
   text-align: center;
   z-index: 20002;
+}
+
+ons-splitter {
+  overflow: hidden;
+}
+
+ons-splitter, ons-splitter-mask, ons-splitter-content, ons-splitter-side {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  z-index: 0;
+}
+
+ons-splitter-mask {
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: none;
+  opacity: 0;
+}
+
+ons-splitter-content {
+  z-index: 1;
+}
+
+ons-splitter-side {
+  z-index: 1;
+}
+
+ons-material-input {
+  display: inline-block;
+  position: relative;
+}
+
+ons-material-input > .text-input--material__label {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: 'Roboto', 'Noto', sans-serif;
+  pointer-events: none;
+}
+
+ons-material-input > .text-input--material__label--active {
+  transform: translate3d(0, -75%, 0) scale(0.75);
+  -webkit-transform: translate3d(0, -75%, 0) scale(0.75);
+  -ms-transform-origin: left top;
+      transform-origin: left top;
+  -webkit-transform-origin: left top;
+  transition: transform 0.1s ease-in, color 0.1s ease-in;
+  -webkit-transition: -webkit-transform 0.1s ease-in, color 0.1s ease-in;
+}
+
+ons-material-input[no-float] > .text-input--material__label--active {
+  display: none;
+}
+
+ons-material-input[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 /*
@@ -366,6 +436,214 @@ ons-icon[fixed-width="true"] {
   font-size: 5em;
 }
 
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+ */
+
+ons-progress {
+  display: block;
+}
+
+ons-progress[type="circular"] {
+  display: inline-block;
+  width: 42px;
+  height: 42px;
+}
+
+ons-progress > svg.progress-circular {
+  width: 100%;
+  height: 100%;
+}
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+ */
+
+.ripple {
+  display: block;
+  position: absolute;
+  border-radius: inherit;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+  
+.ripple__wave {
+  display: block;
+  position: absolute;
+  background: rgba(255,255,255,.3);
+  border-radius: 100%;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+      transform: scale(0);
+  pointer-events: none;
+}
+
+.ripple__wave--animate {
+  -webkit-animation: ripple 0.3s linear;
+  animation: ripple 0.3s linear;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+}
+  
+.ripple__wave--animate-center {
+  -webkit-animation: rippleCenter 0.1s linear;
+  animation: rippleCenter 0.1s linear;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+}
+  
+.ripple__wave--done {
+  -webkit-animation: rippleOut 0.2s linear;
+  animation: rippleOut 0.2s linear;
+}
+  
+.ripple__wave--done-center {
+  -webkit-animation: rippleOutCenter 0.2s linear;
+  animation: rippleOutCenter 0.2s linear;
+}
+
+@-webkit-keyframes rippleOut {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(2.5);
+    transform: scale(2.5);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2.5);
+    transform: scale(2.5);
+  }
+}
+
+@keyframes rippleOut { 
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(2.5);
+    transform: scale(2.5);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2.5);
+    transform: scale(2.5);
+  }
+}
+
+
+@-webkit-keyframes ripple {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(2.5);
+    transform: scale(2.5);
+  }
+}
+
+@keyframes ripple { 
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(2.5);
+    transform: scale(2.5);
+  }
+}
+
+
+@-webkit-keyframes rippleCenter {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    top: 0;
+    left: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    top: 0;
+    left: 0;
+  }
+}
+
+@keyframes rippleCenter { 
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    top: 0;
+    left: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    top: 0;
+    left: 0;
+  }
+}
+
+@-webkit-keyframes rippleOutCenter {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    top: 0;
+    left: 0;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    top: 0;
+    left: 0;
+  }
+}
+
+@keyframes rippleOutCenter { 
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    top: 0;
+    left: 0;
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    top: 0;
+    left: 0;
+  }
+}
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 

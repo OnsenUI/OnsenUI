@@ -21,6 +21,8 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @extensionOf angular
+ * @initonly
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
@@ -30,6 +32,7 @@
 /**
  * @ngdoc attribute
  * @name page
+ * @initonly
  * @type {String}
  * @description
  *   [en]The url of the menu page.[/en]
@@ -51,17 +54,7 @@
   'use strict';
 
   var lastReady = window.OnsSplitterContentElement.rewritables.ready;
-  window.OnsSplitterContentElement.rewritables.ready = function(element, callback) {
-    if (angular.element(element).data('ons-splitter-content')) {
-      lastReady(element, callback);
-    } else {
-      var listen = function() {
-        lastReady(element, callback);
-        element.removeEventListener('ons-splitter-content:init', listen, false);
-      };
-      element.addEventListener('ons-splitter-content:init', listen, false);
-    }
-  };
+  window.OnsSplitterContentElement.rewritables.ready = ons._waitDiretiveInit('ons-splitter-content', lastReady);
 
   var lastLink = window.OnsSplitterContentElement.rewritables.link;
   window.OnsSplitterContentElement.rewritables.link = function(element, target, callback) {

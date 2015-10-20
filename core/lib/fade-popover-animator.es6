@@ -47,6 +47,7 @@ limitations under the License.
           }),
 
         animit(pop)
+          .saveStyle()
           .queue({
             transform: 'scale3d(1.3, 1.3, 1.0)',
             opacity: 0
@@ -59,7 +60,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(done) {
             callback();
             done();
@@ -89,6 +90,7 @@ limitations under the License.
           }),
 
         animit(pop)
+          .saveStyle()
           .queue({
             opacity: 1.0
           })
@@ -99,7 +101,7 @@ limitations under the License.
             duration: this.duration,
             timing: this.timing
           })
-          .resetStyle()
+          .restoreStyle()
           .queue(function(done) {
             callback();
             done();

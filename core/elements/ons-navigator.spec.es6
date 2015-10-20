@@ -125,6 +125,107 @@ describe('OnsNavigatorElement', () => {
     });
   });
 
+  describe('#bringPageTop()', () => {
+    it('fallback to pushPage if the given page does not exist', () => {
+      let spy = chai.spy.on(nav, '_pushPage');
+      nav.bringPageTop('hoge');
+      expect(spy).to.have.been.called.once;
+    });
+
+    it('does nothing when the page is already on top', (done) => {
+      nav.bringPageTop('hoge', {
+        onTransitionEnd: () => {
+          let spy = chai.spy.on(nav._doorLock, 'waitUnlock');
+          nav.bringPageTop('hoge');
+          expect(spy).not.to.have.been.called();
+          done();
+        }
+      });
+    });
+
+    it('brings the given pageUrl to the top', (done) => {
+      nav.bringPageTop('hoge', {
+        onTransitionEnd: () => {
+          expect(nav.pages.length).to.equal(2);
+          expect(nav.getCurrentPage().name).to.equal('hoge');
+          nav.bringPageTop('fuga', {
+            onTransitionEnd: () => {
+              expect(nav.pages.length).to.equal(3);
+              expect(nav.getCurrentPage().name).to.equal('fuga');
+              nav.bringPageTop('hoge', {
+                onTransitionEnd: () => {
+                  expect(nav.pages.length).to.equal(3);
+                  expect(nav.getCurrentPage().name).to.equal('hoge');
+                  expect(nav.pages[nav.pages.length - 2].name).to.equal('fuga');
+                  done();
+                }
+              });
+            }
+          });
+        }
+      });
+    });
+
+    it('brings the given page index to the top', (done) => {
+      nav.bringPageTop('hoge', {
+        onTransitionEnd: () => {
+          expect(nav.pages.length).to.equal(2);
+          expect(nav.getCurrentPage().name).to.equal('hoge');
+          nav.bringPageTop('fuga', {
+            onTransitionEnd: () => {
+              expect(nav.pages.length).to.equal(3);
+              expect(nav.getCurrentPage().name).to.equal('fuga');
+              nav.bringPageTop(1, {
+                onTransitionEnd: () => {
+                  expect(nav.pages.length).to.equal(3);
+                  expect(nav.getCurrentPage().name).to.equal('hoge');
+                  expect(nav.pages[nav.pages.length - 2].name).to.equal('fuga');
+                  done();
+                }
+              });
+            }
+          });
+        }
+      });
+    });
+
+    it('only accepts string or number as first parameter', () => {
+      expect(() => nav.bringPageTop([])).to.throw(Error);
+    });
+
+    it('throws error if the given index is not valid', () => {
+      expect(() => nav.bringPageTop(20)).to.throw(Error);
+    });
+
+    it('only accepts object options', () => {
+      expect(() => nav.bringPageTop('hoge', 'string')).to.throw(Error);
+    });
+
+    it('is canceled if already performing another bringPageTop', () => {
+      let spy = chai.spy.on(nav, '_pushPage');
+      nav.bringPageTop('hoge', {});
+      nav.bringPageTop('fuga', {'cancelIfRunning': true});
+      expect(spy).to.have.been.called.once;
+    });
+
+    it('should be possible to cancel the \'prepush\' event', (done) => {
+      expect(nav.pages.length).to.equal(1);
+
+      nav.bringPageTop('hoge', {onTransitionEnd: () => {
+        expect(nav.pages.length).to.equal(2);
+
+        nav.addEventListener('prepush', (event) => {
+          event.detail.cancel();
+        });
+
+        nav.bringPageTop('fuga');
+        expect(nav.pages.length).to.equal(2);
+
+        done();
+      }});
+    });
+  });
+
   describe('#insertPage()', () => {
     it('inserts a new page on a given index', (done) => {
       nav.pushPage('hoge', {
@@ -313,14 +414,16 @@ describe('OnsNavigatorElement', () => {
 
   describe('#replaceToPage()', () => {
     it('replaces all the page stack with only a new page', (done) => {
-      nav.resetToPage('hoge', {
-        onTransitionEnd: () => {
-          expect(nav.pages.length).to.equal(1);
-          let content = nav.getCurrentPage().element._getContentElement();
-          expect(content.innerHTML).to.equal('hoge');
-          done();
-        }
-      });
+      nav.pushPage('fuga', {onTransitionEnd: () => {
+        nav.resetToPage('hoge', {
+          onTransitionEnd: () => {
+            expect(nav.pages.length).to.equal(1);
+            let content = nav.getCurrentPage().element._getContentElement();
+            expect(content.innerHTML).to.equal('hoge');
+            done();
+          }
+        });
+      }});
     });
   });
 

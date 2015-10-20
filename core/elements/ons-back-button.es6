@@ -20,7 +20,7 @@ limitations under the License.
 
   const util = ons._util;
   const ModifierUtil = ons._internal.ModifierUtil;
-  const templateElement = util.createElement(`
+  const iOSTemplateElement = util.createElement(`
     <span
       class="toolbar-button--quiet"
       style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">
@@ -43,6 +43,13 @@ limitations under the License.
         class="back-button__label"></span>
     </span>
   `);
+
+  const MaterialTemplateElement = util.createElement(`
+    <span class="toolbar-button toolbar-button--material">
+      <i class="zmdi zmdi-arrow-left"></i>
+    </span>
+  `);
+
   const scheme = {
     '.toolbar-button--quiet': 'toolbar-button--*'
   };
@@ -56,13 +63,20 @@ limitations under the License.
     }
 
     _compile() {
-      const template = templateElement.cloneNode(true);
+      const toolbar = ons._util.findParent(this, 'ons-toolbar');
+
+      let template;
+
+      if (toolbar && ons._util.hasModifier(toolbar, 'material')) {
+        template = MaterialTemplateElement.cloneNode(true);
+      }
+      else {
+        template = iOSTemplateElement.cloneNode(true);
+      }
+
       const inner = template.querySelector('.back-button__label');
       while (this.childNodes[0]) {
         inner.appendChild(this.childNodes[0]);
-      }
-      if (inner.innerHTML.trim() === '') {
-        inner.textContent = 'Back';
       }
       this.appendChild(template);
     }

@@ -2,16 +2,17 @@
 <html lang="en" ng-app="myApp">
 <head>
   <meta charset="utf-8">
-  <title>Demo Index | Onsen UI</title>  
+  <title>Demo Index | Onsen UI</title>
   <link rel="stylesheet" href="styles/app.css"/>
-  <link rel="stylesheet" href="../build/css/onsenui.css">  
-  <link rel="stylesheet" href="../build/css/onsen-css-components.css">  
+  <link rel="stylesheet" href="../build/css/onsenui.css">
+  <link rel="stylesheet" href="../build/css/onsen-css-components.css">
 
-  <script src="../build/js/angular/angular.js"></script>    
-  <script src="../build/js/onsenui.js"></script>    
-  <script src="app.js"></script>  
+  <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
+  <script src="app.js"></script>
   <script>
-  var module = angular.module('myApp', ['onsen.directives']); 
+  var module = angular.module('myApp', ['onsen.directives']);
   module.controller('DemoListController', function($scope, $window) {
     $scope.containerDemoList = [
       {href : 'alert_dialog/', name : 'Alert dialog'},
@@ -46,6 +47,7 @@
       {href : 'tabbar_text/', name : 'Tabbar (Label only)'},
       {href : 'tabbar_top/', name : 'Top Tabbar'},
       {href : 'tabbar_toolbar_top/', name : 'Toolbar and Top Tabbar'},
+      {href : 'material_toolbar/', name : 'Material Toolbar'},
       {href : 'scroller/', name : 'Scroller'}
     ];
     $scope.inlineDemoList = [
@@ -54,7 +56,7 @@
       {href : 'icon/', name : 'Icons'},
       {href : 'radio_button/', name : 'Radio Button'},
       {href : 'search_input/', name : 'Search Input'},
-      {href : 'switch', name : 'Switch'},
+      {href : 'switch/', name : 'Switch'},
       {href : 'text_input/', name : 'Text Input'},
       {href : 'textarea/', name : 'Text Area'}
     ];
@@ -62,12 +64,12 @@
       $window.location.href = demo.href;
     };
   });
-  </script>  
-  
+  </script>
+
 </head>
 
-<body ng-controller="DemoListController">    
-  
+<body ng-controller="DemoListController">
+
   <ons-navigator>
     <ons-page>
       <ons-toolbar>
@@ -89,6 +91,6 @@
       </ons-list>
     </ons-page>
   </ons-navigator>
- 
+
 </body>
 </html>

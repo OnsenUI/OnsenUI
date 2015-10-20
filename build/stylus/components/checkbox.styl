@@ -37,6 +37,8 @@ var-border--checkmark--noborder = 3px solid var-checkbox-border-color
 var-checkbox-border-radius = 16px
 var-checkmark-border-radius = 0px
 
+var-material-checkbox-size = 18px
+
 
 /*! topdoc
   name: Checkbox
@@ -46,19 +48,19 @@ var-checkmark-border-radius = 0px
     :disabled: Disabled state
   markup:
     <label class="checkbox">
-      <input type="checkbox">
+      <input type="checkbox" class="checkbox__input">
       <div class="checkbox__checkmark"></div>
       OFF
     </label>
 
     <label class="checkbox">
-      <input type="checkbox" checked="checked">
+      <input type="checkbox" class="checkbox__input" checked="checked">
       <div class="checkbox__checkmark"></div>
       ON
     </label>
 
     <label class="checkbox">
-      <input type="checkbox" disabled>
+      <input type="checkbox" class="checkbox__input" disabled>
       <div class="checkbox__checkmark"></div>
       Disabled
     </label>
@@ -91,27 +93,27 @@ checkbox--after()
   line-height var-checkbox-size
   margin 10px 0
 
-.checkbox > .checkbox__checkmark
+.checkbox__checkmark
   checkbox()
   height var-checkbox-size
   pointer-events none
 
-.checkbox > input[type="checkbox"]
+.checkbox__input
   hide-input()
   height 0
   width 0
 
-.checkbox > input[type="checkbox"]:checked
+.checkbox__input:checked
   background var-background-color-checked--checkbox
 
-.checkbox > input[type="checkbox"]:checked + .checkbox__checkmark:before
+.checkbox__input:checked + .checkbox__checkmark:before
   background var-background-color--before--checkbox
   border var-checkbox-border
 
-.checkbox > input[type="checkbox"]:checked + .checkbox__checkmark:after
+.checkbox__input:checked + .checkbox__checkmark:after
   opacity 1
 
-.checkbox > .checkbox__checkmark:before
+.checkbox__checkmark:before
   checkbox--before()
   reset-box-model()
   width var-checkbox-size
@@ -122,13 +124,13 @@ checkbox--after()
   box-shadow var-box-shadow
   left 0
 
-.checkbox > .checkbox__checkmark
+.checkbox__checkmark
   checkbox()
   width var-checkbox-size
   height var-checkbox-size
 
 // checkmark's line
-.checkbox > .checkbox__checkmark:after
+.checkbox__checkmark:after
   checkbox--after()
   top var-checkmark-top
   left var-checkmark-left
@@ -143,13 +145,13 @@ checkbox--after()
   transform rotate(-45deg)
   opacity 0
 
-.checkbox > input[type="checkbox"]:focus + .checkbox__checkmark:before
+.checkbox__input:focus + .checkbox__checkmark:before
   box-shadow var-box-shadow--cta
 
-.checkbox > input[type="checkbox"]:disabled + .checkbox__checkmark
+.checkbox__input:disabled + .checkbox__checkmark
   checkbox--disabled()
 
-.checkbox > input[type="checkbox"]:disabled:active + .checkbox__checkmark:before
+.checkbox__input:disabled:active + .checkbox__checkmark:before
   background transparent
   box-shadow var-box-shadow
 
@@ -158,25 +160,25 @@ checkbox--after()
   class: checkbox--noborder
   markup:
     <label class="checkbox--noborder">
-      <input type="checkbox">
-      <div class="checkbox__checkmark"></div>
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
       OFF
     </label>
 
     <label class="checkbox--noborder">
-      <input type="checkbox" checked="checked">
-      <div class="checkbox__checkmark"></div>
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input" checked="checked">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
       ON
     </label>
 
     <label class="checkbox--noborder">
-      <input type="checkbox" disabled checked="checked">
-      <div class="checkbox__checkmark"></div>
+      <input type="checkbox" class="checkbox__input checkbox--noborder__input" disabled checked="checked">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
       Disabled
     </label>
  */
 
-.checkbox--noborder > input[type="checkbox"]
+.checkbox--noborder__input
   hide-input()
 
 .checkbox--noborder
@@ -185,26 +187,26 @@ checkbox--after()
   margin 10px 0
   hide-input-parent()
 
-.checkbox--noborder > .checkbox__checkmark
+.checkbox--noborder__checkmark
   inline-block()
   reset-cursor()
   reset-box-model()
   height var-checkbox-size
   background transparent
 
-.checkbox--noborder > input[type="checkbox"]
+.checkbox--noborder__input
   hide-input()
   height 0
   width 0
 
-.checkbox--noborder > input[type="checkbox"]:checked + .checkbox__checkmark:before
+.checkbox--noborder__input:checked + .checkbox--noborder__checkmark:before
   background transparent
   border none
 
-.checkbox--noborder > input[type="checkbox"]:checked + .checkbox__checkmark:after
+.checkbox--noborder__input:checked + .checkbox--noborder__checkmark:after
   opacity 1
 
-.checkbox--noborder > .checkbox__checkmark:before
+.checkbox--noborder__checkmark:before
   content ''
   position absolute
   width var-checkbox-size
@@ -214,7 +216,7 @@ checkbox--after()
   border-radius var-checkbox-border-radius
   left 0
 
-.checkbox--noborder > .checkbox__checkmark
+.checkbox--noborder__checkmark
   inline-block()
   reset-cursor()
   reset-box-model()
@@ -222,7 +224,7 @@ checkbox--after()
   height var-checkbox-size
   border none
 
-.checkbox--noborder > .checkbox__checkmark:after
+.checkbox--noborder__checkmark:after
   content ''
   position absolute
   top var-checkmark-top
@@ -238,14 +240,82 @@ checkbox--after()
   border-radius var-checkmark-border-radius
   transform rotate(-45deg)
 
-.checkbox--noborder > input[type="checkbox"]:focus + .checkbox__checkmark:before
+.checkbox--noborder__input:focus + .checkbox--noborder__checkmark:before
   border none
   box-shadow var-box-shadow--cta
 
-.checkbox--noborder > input[type="checkbox"]:disabled + .checkbox__checkmark
+.checkbox--noborder__input:disabled + .checkbox--noborder__checkmark
   disabled()
 
-.checkbox--noborder > input[type="checkbox"]:disabled:active + .checkbox--noborder__checkmark:before
+.checkbox--noborder__input:disabled:active + .checkbox--noborder__checkmark:before
   background transparent
   box-shadow var-box-shadow
   border none
+
+/*! topdoc
+  name: Material Checkbox
+  use: Checkbox
+  modifiers:
+    :focus: Focus state
+    :disabled: Disabled state
+  markup:
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input">
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      OFF
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked">
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      ON
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked" disabled>
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      ON
+    </label>
+    <label class="checkbox checkbox--material">
+      <input type="checkbox" class="checkbox__input checkbox--material__input" disabled>
+      <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+      Disabled
+    </label>
+*/
+
+.checkbox--material
+  line-height var-material-checkbox-size
+  material-font()
+
+.checkbox--material__checkmark
+  width var-material-checkbox-size
+  height var-material-checkbox-size
+
+.checkbox--material__checkmark:before
+  border 2px solid rgba(0,0,0, 0.5)
+
+.checkbox--material__input:checked + .checkbox--material__checkmark:before
+  border none
+
+.checkbox--material__input + .checkbox--material__checkmark:after
+  transition transform 0.3s ease
+  width 10px
+  height 5px
+  top 4px
+  left 3px
+  transform scale(0) rotate(-45deg)
+
+.checkbox--material__input:checked + .checkbox--material__checkmark:after
+  top 4px
+  left 3px
+  transform scale(1) rotate(-45deg)
+
+.checkbox--material__input:disabled:checked + .checkbox--material__checkmark:before
+  background-color rgba(0,0,0,1)
+
+.checkbox--material__input:disabled:checked:active + .checkbox--material__checkmark:before
+  background-color rgba(0,0,0,1)
+
+.checkbox--material__checkmark:before
+  border-radius 2px
+  border-color #5a5a5a
+  width var-material-checkbox-size
+  height var-material-checkbox-size

@@ -1,0 +1,652 @@
+---
+page: 'reference-detail'
+title: 'ons-page'
+name: 'ons-page'
+collection: 'components'
+reference: true
+docCategory: 'js'
+componentCategory: base
+---
+<div class="reference-container" id="ons-page">
+
+  <div class="reference-github-links">
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/blob/master/framework/directives/page.js">View Source</a>
+
+    <a class="reference-github-link" href="https://github.com/OnsenUI/OnsenUI/edit/master/framework/directives/page.js">Improve this doc</a>
+  </div>
+
+  <h2>ons-page</h2>
+
+  
+
+  <section class="description">
+    <p></p>
+    
+  </section>
+
+  <ul class="reference-quick-navi">
+    
+    <li><a href="#usage"></a></li>
+    
+    
+    
+    <li><a href="#attributes"></a></li>
+    
+    
+    
+    <li><a href="#methods-summary"></a></li>
+    
+    
+    <li><a href="#events-summary"></a></li>
+    
+    
+    <li><a href="#seealso"></a></li>
+    
+    <li><a href="#discussion"></a></li>
+  </ul>
+
+  
+    <section>
+      <h3 id="usage">
+        
+        <a href="#usage" class="reference-loop-anchor">#</a>
+      </h3>
+      <pre><code class="xml">&lt;ons-page&gt;
+  &lt;ons-toolbar&gt;
+    &lt;div class=&quot;center&quot;&gt;Title&lt;/div&gt;
+  &lt;/ons-toolbar&gt;
+
+  ...
+&lt;/ons-page&gt;</code></pre>
+    </section>
+  
+
+  
+
+  <!-- codepen -->
+  
+
+  
+  <h3 id="seealso">
+    関連情報
+    <a href="#seealso" class="reference-loop-anchor">#</a>
+  </h3>
+  <ul class="seealso">
+    
+      
+        <li class="guide"><a href="/guide/overview.html#ManagingMultiplePages
+"></a></li>
+      
+        <li class="guide"><a href="/guide/overview.html#Pagelifecycle
+"></a></li>
+      
+        <li class="guide"><a href="/guide/overview.html#HandlingBackButton
+"></a></li>
+      
+        <li class="guide"><a href="/guide/overview.html#OverridingCSSstyles
+"></a></li>
+      
+        <li class="guide"><a href="/guide/overview.html#DefiningMultiplePagesinSingleHTML
+"></a></li>
+      
+    
+    
+  </ul>
+  
+
+  <!-- attributes -->
+  
+  <section>
+    <h3 id="attributes">
+      属性
+      <a href="#attributes" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型 / デフォルト値</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-var">var</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name"></span>
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-modifier">modifier</td>
+          <td>
+            <span class="value-type">String</span>
+            
+          </td>
+          <td>
+            
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-on-device-backbutton">on-device-backbutton</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+
+            
+            <span class="extension-name"></span>
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-ng-device-backbutton">ng-device-backbutton</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name"></span>
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-ons-init">ons-init</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name"></span>
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-ons-show">ons-show</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name"></span>
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-ons-hide">ons-hide</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name"></span>
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td class="attribute-name" id="ons-page-ons-destroy">ons-destroy</td>
+          <td>
+            <span class="value-type">Expression</span>
+            
+          </td>
+          <td>
+            
+
+            
+            <span style="font-size: 12px">Optional</span>
+            
+
+            
+            <span style="font-size: 12px;">初期化時のみ有効</span>
+            
+
+            
+            <span class="extension-name"></span>
+            
+
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+
+  <!-- modifiers -->
+  
+
+  <!-- methods summary -->
+  
+  <section>
+    <h3 id="methods-summary">
+      メソッド概要
+      <a href="#methods-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>シグネチャ</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#method-getDeviceBackButtonHandler">getDeviceBackButtonHandler()</a></td>
+          <td>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+  <!-- end methods summary -->
+
+  <!-- events summary -->
+  
+  <section>
+    <h3 id="events-summary">
+      イベント概要
+      <a href="#events-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><a href="#event-init">init</a></td>
+          <td>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#event-show">show</a></td>
+          <td>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#event-hide">hide</a></td>
+          <td>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+        <tr>
+          <td><a href="#event-destroy">destroy</a></td>
+          <td>
+            
+
+            
+
+            
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+  
+  <!-- end events summary -->
+
+  <!-- methods details -->
+  
+  <h3>メソッド</h3>
+  
+  <section class="method-detail">
+    <h4 id="method-getDeviceBackButtonHandler">
+      getDeviceBackButtonHandler()<span class="value-type">: Object</span>
+
+      <a href="#method-getDeviceBackButtonHandler" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p></p>
+
+    
+
+    
+
+    
+    <p>返り値: </p>
+    
+
+    
+  </section>
+  
+
+  
+  <!-- end methods -->
+
+  <!-- events -->
+  
+  <h3>イベント</h3>
+  
+  <section class="event-detail">
+    <h4 id="event-init">
+      init
+      <a href="#event-init" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p></p>
+
+    
+
+    
+
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td></td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.page</span></td>
+          <td class="value-type">Object</td>
+          <td></td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+  <section class="event-detail">
+    <h4 id="event-show">
+      show
+      <a href="#event-show" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p></p>
+
+    
+
+    
+
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td></td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.page</span></td>
+          <td class="value-type">Object</td>
+          <td></td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+  <section class="event-detail">
+    <h4 id="event-hide">
+      hide
+      <a href="#event-hide" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p></p>
+
+    
+
+    
+
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td></td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.page</span></td>
+          <td class="value-type">Object</td>
+          <td></td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+  <section class="event-detail">
+    <h4 id="event-destroy">
+      destroy
+      <a href="#event-destroy" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p></p>
+
+    
+
+    
+
+    <h5>パラメーター</h5>
+
+    <table>
+      <thead>
+        <tr>
+          
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><span class="parameter-name">event</span></td>
+          <td class="value-type">Object</td>
+          <td></td>
+        </tr>
+        
+        <tr>
+          <td><span class="parameter-name">event.page</span></td>
+          <td class="value-type">Object</td>
+          <td></td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </section>
+
+  
+
+  
+  <!-- end events -->
+
+  <!-- disqus -->
+  <h3 id="discussion">
+    議論
+    <a href="#discussion" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'onsenui'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <!-- end disqus -->
+
+</div>
+
+<script src="/vendor/highlight.min.js"></script>

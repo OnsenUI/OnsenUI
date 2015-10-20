@@ -126,6 +126,7 @@
 /**
  * @ngdoc attribute
  * @name page
+ * @initonly
  * @type {String}
  * @description
  *   [en]First page to show when navigator is initialized.[/en]
@@ -135,6 +136,8 @@
 /**
  * @ngdoc attribute
  * @name var
+ * @initonly
+ * @extensionOf angular
  * @type {String}
  * @description
  *  [en]Variable name to refer this navigator.[/en]
@@ -144,6 +147,8 @@
 /**
  * @ngdoc attribute
  * @name ons-prepush
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prepush" event is fired.[/en]
@@ -153,6 +158,8 @@
 /**
  * @ngdoc attribute
  * @name ons-prepop
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "prepop" event is fired.[/en]
@@ -162,6 +169,8 @@
 /**
  * @ngdoc attribute
  * @name ons-postpush
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postpush" event is fired.[/en]
@@ -171,6 +180,8 @@
 /**
  * @ngdoc attribute
  * @name ons-postpop
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when the "postpop" event is fired.[/en]
@@ -180,6 +191,8 @@
 /**
  * @ngdoc attribute
  * @name ons-init
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "init" event is fired.[/en]
@@ -189,6 +202,8 @@
 /**
  * @ngdoc attribute
  * @name ons-show
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "show" event is fired.[/en]
@@ -198,6 +213,8 @@
 /**
  * @ngdoc attribute
  * @name ons-hide
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "hide" event is fired.[/en]
@@ -207,6 +224,8 @@
 /**
  * @ngdoc attribute
  * @name ons-destroy
+ * @initonly
+ * @extensionOf angular
  * @type {Expression}
  * @description
  *  [en]Allows you to specify custom behavior when a page's "destroy" event is fired.[/en]
@@ -253,6 +272,29 @@
  * @description
  *   [en]Pushes the specified pageUrl into the page stack.[/en]
  *   [ja]指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature bringPageTop(item, [options])
+ * @param {String|Number} item
+ *   [en]Page URL or index of an existing page in navigator's stack.[/en]
+ *   [ja]ページのURLかもしくはons-navigatorのページスタックのインデックス値を指定します。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @param {String} [options.animationOptions]
+ *   [en]Specify the animation's duration, delay and timing. E.g.  <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code>[/en]
+ *   [ja]アニメーション時のduration, delay, timingを指定します。e.g. <code>{duration: 0.2, delay: 0.4, timing: 'ease-in'}</code> [/ja]
+ * @param {Function} [options.onTransitionEnd]
+ *   [en]Function that is called when the transition has ended.[/en]
+ *   [ja]pushPage()による画面遷移が終了した時に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Brings the given page to the top of the page-stack if already exists or pushes it into the stack if doesn't.[/en]
+ *   [ja]指定したページをページスタックの一番上に移動します。もし指定したページが無かった場合新しくpushされます。[/ja]
  */
 
 /**
@@ -324,9 +366,9 @@
 /**
  * @ngdoc method
  * @signature resetToPage(pageUrl, [options])
- * @param {String} pageUrl
- *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
- *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {String/undefined} pageUrl
+ *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>. If the value is undefined or '', the navigator will be reset to the page that was first displayed.[/en]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。undefinedや''を指定すると、ons-navigatorが最初に表示したページを指定したことになります。[/ja]
  * @param {Object} [options]
  *   [en]Parameter object.[/en]
  *   [ja]オプションを指定するオブジェクト。[/ja]
@@ -377,6 +419,7 @@
 /**
  * @ngdoc method
  * @signature on(eventName, listener)
+ * @extensionOf angular
  * @description
  *   [en]Add an event listener.[/en]
  *   [ja]イベントリスナーを追加します。[/ja]
@@ -391,6 +434,7 @@
 /**
  * @ngdoc method
  * @signature once(eventName, listener)
+ * @extensionOf angular
  * @description
  *  [en]Add an event listener that's only triggered once.[/en]
  *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
@@ -405,6 +449,7 @@
 /**
  * @ngdoc method
  * @signature off(eventName, [listener])
+ * @extensionOf angular
  * @description
  *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
  *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
@@ -419,18 +464,15 @@
 (function() {
   'use strict';
 
-  var lastReady = window.OnsNavigatorElement.ready;
-  // wait for AngularJS binding initilization.
-  window.OnsNavigatorElement.ready = function(element, callback) {
-    if (angular.element(element).data('ons-navigator')) {
-      lastReady(element, callback);
-    } else {
-      var listen = function() {
-        lastReady(element, callback);
-        element.removeEventListener('ons-navigator:init', listen, false);
-      };
-      element.addEventListener('ons-navigator:init', listen, false);
-    }
+  var lastReady = window.OnsNavigatorElement.rewritables.ready;
+  window.OnsNavigatorElement.rewritables.ready = ons._waitDiretiveInit('ons-navigator', lastReady);
+
+  var lastLink = window.OnsNavigatorElement.rewritables.link;
+  window.OnsNavigatorElement.rewritables.link = function(navigatorElement, target, callback) {
+    var view = angular.element(navigatorElement).data('ons-navigator');
+    view._compileAndLink(target, function(target) {
+      lastLink(navigatorElement, target, callback);
+    });
   };
 
   angular.module('onsen').directive('onsNavigator', function(NavigatorView, $onsen) {

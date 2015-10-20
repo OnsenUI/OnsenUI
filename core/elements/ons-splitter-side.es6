@@ -171,6 +171,10 @@ limitations under the License.
       return 'opened';
     }
 
+    static get CHANGING_STATE() {
+      return 'changing';
+    }
+
     get _animator() {
       return this._element._getAnimator();
     }
@@ -192,6 +196,10 @@ limitations under the License.
       return this._state !== CollapseMode.CLOSED_STATE;
     }
 
+    isClosed() {
+      return this._state === CollapseMode.CLOSED_STATE;
+    }
+
     handleGesture(event) {
       if (this._isLocked()) {
         return;
@@ -201,12 +209,16 @@ limitations under the License.
         return;
       }
 
-      if (event.type === 'dragleft' || event.type === 'dragright') {
-        this._onDrag(event);
-      } else if (event.type === 'dragstart') {
+      if (event.type === 'dragstart') {
         this._onDragStart(event);
+      } else if (event.type === 'dragleft' || event.type === 'dragright') {
+        if (!this._ignoreDrag) {
+          this._onDrag(event);
+        }
       } else if (event.type === 'dragend') {
-        this._onDragEnd(event);
+        if (!this._ignoreDrag) {
+          this._onDragEnd(event);
+        }
       } else {
         throw new Error('Invalid state');
       }
@@ -215,7 +227,9 @@ limitations under the License.
     _onDragStart(event) {
       this._ignoreDrag = false;
 
-      if (this._element._swipeTargetWidth > 0) {
+      if (!this.isOpened() && this._openedOtherSideMenu()) {
+        this._ignoreDrag = true;
+      } else if (this._element._swipeTargetWidth > 0) {
         const distance = this._element._isLeftSide()
           ? event.gesture.center.clientX
           : window.innerWidth - event.gesture.center.clientX;
@@ -226,10 +240,6 @@ limitations under the License.
     }
 
     _onDrag(event) {
-      if (this._ignoreDrag) {
-        return;
-      }
-
       event.gesture.preventDefault();
 
       const deltaX = event.gesture.deltaX;
@@ -239,45 +249,52 @@ limitations under the License.
 
       if (!('isOpened' in startEvent)) {
         startEvent.isOpened = this.isOpened();
+        startEvent.distance = startEvent.isOpened ? this._element._getWidthInPixel() : 0;
+        startEvent.width = this._element._getWidthInPixel();
       }
 
-      if (deltaDistance < 0 && !this.isOpened()) {
+      const width = startEvent.width;
+
+      if (deltaDistance < 0 && startEvent.distance <= 0) {
         return;
       }
 
-      if (deltaDistance > 0 && this.isOpened()) {
+      if (deltaDistance > 0 && startEvent.distance >= width) {
         return;
       }
 
-      const width = this._element._getWidthInPixel();
       const distance = startEvent.isOpened ? deltaDistance + width : deltaDistance;
+      const normalizedDistance = Math.max(0, Math.min(width, distance));
 
-      this._animator.translate(Math.max(0, Math.min(width, distance)));
+      startEvent.distance = normalizedDistance;
+
+      this._state = CollapseMode.CHANGING_STATE;
+      this._animator.translate(normalizedDistance);
     }
 
     _onDragEnd(event) {
-      if (this._ignoreDrag) {
-        return;
-      }
-
       const deltaX = event.gesture.deltaX;
       const deltaDistance = this._element._isLeftSide() ? deltaX : -deltaX;
-      const width = this._element._getWidthInPixel();
+      const width = event.gesture.startEvent.width;
       const distance = event.gesture.startEvent.isOpened ? deltaDistance + width : deltaDistance;
-
       const direction = event.gesture.interimDirection;
       const shouldOpen =
-        (this._element._isLeftSide() && direction === 'right') ||
-        (!this._element._isLeftSide() && direction === 'left');
+        (this._element._isLeftSide() && direction === 'right' && distance > width * this._element._getThresholdRatioIfShouldOpen()) ||
+        (!this._element._isLeftSide() && direction === 'left' && distance > width * this._element._getThresholdRatioIfShouldOpen());
 
       if (shouldOpen) {
-        this.openMenu();
+        this._openMenu();
       } else {
-        this.closeMenu();
+        this._closeMenu();
       }
     }
 
     layout() {
+
+      if (this._state === CollapseMode.CHANGING_STATE) {
+        return;
+      }
+
       if (this._state === CollapseMode.CLOSED_STATE) {
         if (this._animator.isActivated()) {
           this._animator.layoutOnClose();
@@ -321,6 +338,20 @@ limitations under the License.
      * @return {Boolean}
      */
     openMenu(options = {}) {
+      if (this._state !== CollapseMode.CLOSED_STATE) {
+        return false;
+      }
+
+      return this._openMenu(options);
+    }
+
+    /**
+     * @param {Object} [options]
+     * @param {Function} [options.callback]
+     * @param {Boolean} [options.withoutAnimation]
+     * @return {Boolean}
+     */
+    _openMenu(options = {}) {
       if (this._isLocked()) {
         return false;
       }
@@ -347,8 +378,9 @@ limitations under the License.
         this.layout();
         done();
       } else {
-        this._state = CollapseMode.OPENED_STATE;
+        this._state = CollapseMode.CHANGING_STATE;
         this._animator.open(() => {
+          this._state = CollapseMode.OPENED_STATE;
           this.layout();
           done();
         });
@@ -359,8 +391,20 @@ limitations under the License.
 
     /**
      * @param {Object} [options]
+     * @return {Boolean}
      */
     closeMenu(options = {}) {
+      if (this._state !== CollapseMode.OPENED_STATE) {
+        return false;
+      }
+
+      return this._closeMenu(options);
+    }
+
+    /**
+     * @param {Object} [options]
+     */
+    _closeMenu(options = {}) {
       if (this._isLocked()) {
         return false;
       }
@@ -383,8 +427,9 @@ limitations under the License.
         this.layout();
         done();
       } else {
-        this._state = CollapseMode.CLOSED_STATE;
+        this._state = CollapseMode.CHANGING_STATE;
         this._animator.close(() => {
+          this._state = CollapseMode.CLOSED_STATE;
           this.layout();
           done();
         });
@@ -558,6 +603,16 @@ limitations under the License.
       });
     }
 
+    _getThresholdRatioIfShouldOpen() {
+      if (this.hasAttribute('threhold-ratio-should-open')) {
+        const value = parseFloat(this.getAttribute('threhold-ratio-should-open'));
+        return Math.max(0.0, Math.min(1.0, value));
+      } else {
+        // default value
+        return 0.3;
+      }
+    }
+
     _layout() {
       this._getModeStrategy().layout();
     }
@@ -678,7 +733,7 @@ limitations under the License.
           }
 
           this.appendChild(fragment);
-          util.arrayOf(fragment.childNodes).forEach(node => {
+          util.arrayFrom(fragment.childNodes).forEach(node => {
             if (node._show instanceof Function) {
               node._show();
             }
@@ -773,7 +828,7 @@ limitations under the License.
     }
 
     _show() {
-      util.arrayOf(this.children).forEach(child => {
+      util.arrayFrom(this.children).forEach(child => {
         if (child._show instanceof Function) {
           child._show();
         }
@@ -781,7 +836,7 @@ limitations under the License.
     }
 
     _hide() {
-      util.arrayOf(this.children).forEach(child => {
+      util.arrayFrom(this.children).forEach(child => {
         if (child._hide instanceof Function) {
           child._hide();
         }
@@ -789,7 +844,7 @@ limitations under the License.
     }
 
     _destroy() {
-      util.arrayOf(this.children).forEach(child => {
+      util.arrayFrom(this.children).forEach(child => {
         if (child._destroy instanceof Function) {
           child._destroy();
         }

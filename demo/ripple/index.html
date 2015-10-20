@@ -2,28 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Ripple Demo | Onsen UI</title>  
+  <title>Ripple | Onsen UI</title>
   <link rel="stylesheet" href="../styles/app.css"/>
-  <link rel="stylesheet" href="../../build/css/onsenui.css">  
-  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">  
+  <link rel="stylesheet" href="../../build/css/onsenui.css">
+  <link rel="stylesheet" href="../../build/css/onsen-css-components.css">
   <link rel="stylesheet" href="../../build/css/font_awesome/css/font-awesome.min.css">
 
-  <script src="../../build/js/angular/angular.js"></script>    
   <script src="../../build/js/onsenui.js"></script>
+  <script src="../../build/js/angular/angular.js"></script>
+  <script src="../../build/js/angular-onsenui.js"></script>
   <script>
     ons.bootstrap();
   </script>
 </head>
 
 <body>
-  <ons-page>
-    <ons-toolbar>
+  <ons-page modifier="material">
+    <ons-toolbar modifier="material">
     <ons-ripple color="rgba(0, 0, 0, 0.3)"></ons-ripple>
       <div class="center">Ripple</div>
     </ons-toolbar>
 
     <ons-list>
-      <ons-list-header>Normal List</ons-list-header>
       <ons-list-item><ons-ripple color="rgba(0, 255, 0, 0.3)"></ons-ripple>One</ons-list-item>
       <ons-list-item><ons-ripple color="rgba(0, 0, 0, 0.3)"></ons-ripple>Two</ons-list-item>
       <ons-list-item><ons-ripple color="rgba(219, 63, 49, 0.3)"></ons-ripple>Three</ons-list-item>
