@@ -3595,11 +3595,21 @@ h6 {
   -webkit-font-smoothing: antialiased;
   border: 0;
 }
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list--material {
+    background: initial;
+  }
+}
 .list__item--material {
   border: 0;
   min-height: initial;
   padding: 14px 16px;
   line-height: normal;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .list__item--material:not(:last-child) {
+    background: initial;
+  }
 }
 .list__item--material:first-child {
   border: 0;
