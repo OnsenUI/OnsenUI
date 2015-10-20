@@ -485,8 +485,6 @@ window.animit = (function(){
     var a = 'A'.charCodeAt(0);
     var z = 'z'.charCodeAt(0);
 
-    var dict2 = {}
-
     for (var key in styles) {
       if (a <= key.charCodeAt(0) && z >= key.charCodeAt(0)) {
         if (key !== 'cssText' && key !== 'parentText' && key !== 'length') {
