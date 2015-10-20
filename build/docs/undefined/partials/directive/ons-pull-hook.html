@@ -69,7 +69,7 @@ componentCategory: control
 &lt;/script&gt;
 
 &lt;ons-page ng-controller=&quot;MyController&quot;&gt;
-  &lt;ons-pull-hook var=&quot;loaded&quot; ng-action=&quot;load($done)&quot;&gt;
+  &lt;ons-pull-hook var=&quot;loader&quot; ng-action=&quot;load($done)&quot;&gt;
     &lt;span ng-switch=&quot;loader.getCurrentState()&quot;&gt;
       &lt;span ng-switch-when=&quot;initial&quot;&gt;Pull down to refresh&lt;/span&gt;
       &lt;span ng-switch-when=&quot;preaction&quot;&gt;Release to refresh&lt;/span&gt;
