@@ -130,6 +130,15 @@ limitations under the License.
       }
     }
 
+    _updateLabelClass() {
+      if (this.value === '') {
+        this._label.classList.remove('text-input--material__label--active');
+      }
+      else {
+        this._label.classList.add('text-input--material__label--active');
+      }
+    }
+
     _delegateEvent(event) {
       const e = new CustomEvent(event.type, {
         bubbles: false,
@@ -140,17 +149,12 @@ limitations under the License.
     }
 
     _onInput(event) {
-      if (this.value === '') {
-        this._label.classList.remove('text-input--material__label--active');
-      }
-      else {
-        this._label.classList.add('text-input--material__label--active');
-      }
-
+      this._updateLabelClass();
       this._updateLabelColor();
     }
 
     _onFocusin(event) {
+      this._updateLabelClass();
       this._updateLabelColor();
     }
 
