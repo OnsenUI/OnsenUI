@@ -335,6 +335,15 @@ gulp.task('build', function(done) {
 // dist
 ////////////////////////////////////////
 
+gulp.task('soft-build', function(done) {
+  return runSequence(
+    'clean',
+    'prepare',
+    'minify-js',
+    done
+  );
+});
+
 function distFiles() {
   gulp.src([
     'build/**/*',
@@ -353,7 +362,7 @@ function distFiles() {
   .pipe(gulp.dest('OnsenUI-dist/'));
 }
 
-gulp.task('dist', ['build'], distFiles);
+gulp.task('dist', ['soft-build'], distFiles);
 
 gulp.task('dist-no-build', [], distFiles);
 
